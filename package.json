@@ -96,7 +96,9 @@
     "react-dom": "18.3.1",
     "react-native": "0.82.1",
     "react-native-builder-bob": "^0.21.3",
+    "react-native-reanimated": "^4.3.0",
     "react-native-safe-area-context": "5.5.2",
+    "react-native-worklets": "^0.8.1",
     "react-test-renderer": "19.1.1",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
@@ -105,7 +107,9 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-safe-area-context": "*"
+    "react-native-reanimated": ">=4.3.0",
+    "react-native-safe-area-context": "*",
+    "react-native-worklets": ">=0.8.1"
   },
   "husky": {
     "hooks": {
@@ -116,9 +120,10 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "<rootDir>/testSetup.js"
+      "<rootDir>/jest/testSetup.js"
     ],
     "setupFilesAfterEnv": [
+      "<rootDir>/jest/jestSetupAfterEnv.js",
       "@testing-library/jest-native/extend-expect"
     ],
     "cacheDirectory": "./cache/jest",

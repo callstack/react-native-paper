@@ -2,29 +2,54 @@
 title: Getting Started
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
 # Getting Started
 
 ## Installation
 
-- Open a Terminal in your project's folder and run:
+Open a Terminal in your project's folder and install the library:
 
 ```bash npm2yarn
 npm install react-native-paper
 ```
 
-- From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
+React Native Paper uses [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area, [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and [react-native-worklets](https://docs.swmansion.com/react-native-worklets/) for animations.
 
-```bash npm2yarn
-npm install react-native-safe-area-context
-```
-
-Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
+<Tabs groupId="expo-vs-cli">
+  <TabItem value="expo" label="Expo" default>
 
 ```bash
-npx pod-install
+npx expo install react-native-safe-area-context react-native-reanimated react-native-worklets
 ```
 
-- If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
+Minimum requirements:
+
+- `react-native-reanimated` **≥ 4.3.0**
+- `react-native-worklets` **≥ 0.8.1**
+- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+
+Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
+
+If you use Expo, you don't need to install vector icons - those are the part of the expo package. However, if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
+
+  </TabItem>
+  <TabItem value="community-cli" label="Community CLI">
+
+```bash npm2yarn
+npm install react-native-safe-area-context react-native-reanimated react-native-worklets
+```
+
+Minimum requirements:
+
+- `react-native-reanimated` **≥ 4.3.0**
+- `react-native-worklets` **≥ 0.8.1**
+- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+
+Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
+
+If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
 
 Specifically `MaterialDesignIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
 
@@ -36,11 +61,12 @@ npm install @react-native-vector-icons/material-design-icons
 The `react-native-vector-icons` library requires some additional setup steps for each platform. To ensure proper use of icon fonts, please follow their [installation guide](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#setup).
 :::
 
-If you use Expo, you don't need to install vector icons - those are the part of the expo package. However, if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
-
 :::info
 If you don't want to install vector icons, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.
-:::note
+:::
+
+  </TabItem>
+</Tabs>
 
 ### Bundle size optimization
 
