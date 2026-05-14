@@ -11,7 +11,6 @@
     "ios": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:ios"
   },
   "dependencies": {
-    "@expo/vector-icons": "^15.0.2",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-masked-view/masked-view": "0.3.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
