@@ -8,6 +8,7 @@ import {
 
 import { render, act } from '@testing-library/react-native';
 
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { LightTheme, DarkTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
@@ -16,9 +17,7 @@ import { useTheme } from '../theming';
 declare module 'react-native' {
   interface AccessibilityInfoStatic {
     removeEventListener(): void;
-    __internalListeners: Array<
-      (options: { reduceMotionEnabled: boolean }) => {}
-    >;
+    __internalListeners: Array<(enabled: boolean) => void>;
   }
 
   namespace Appearance {
@@ -38,6 +37,7 @@ declare module 'react-native' {
 
   interface ViewProps {
     theme?: object;
+    reduceMotion?: boolean;
   }
 }
 
@@ -82,6 +82,7 @@ const mockAccessibilityInfo = () => {
           removeEventListener: jest.fn((cb) => {
             listeners.push(cb);
           }),
+          isReduceMotionEnabled: jest.fn(() => Promise.resolve(false)),
           __internalListeners: listeners,
         },
       };
@@ -122,36 +123,94 @@ describe('PaperProvider', () => {
     );
   });
 
-  it('should set AccessibilityInfo listeners, if there is no theme', async () => {
+  it('subscribes to AccessibilityInfo and adapts theme.animation.scale when OS reduce-motion is enabled (auto mode)', async () => {
     mockAppearance();
     mockAccessibilityInfo();
 
-    const { rerender, getByTestId } = render(createProvider());
+    const { getByTestId } = render(createProvider());
 
     expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
-    act(() =>
-      AccessibilityInfo.__internalListeners[0]({
-        reduceMotionEnabled: true,
-      })
-    );
+    act(() => AccessibilityInfo.__internalListeners[0](true));
 
     expect(
       getByTestId('provider-child-view').props.theme.animation.scale
     ).toStrictEqual(0);
-
-    rerender(createProvider(ExtendedLightTheme));
-    expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
   });
 
-  it('should not set AccessibilityInfo listeners, if there is a theme', async () => {
+  it('exposes the resolved reduce-motion boolean via useReduceMotion to children', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(ExtendedDarkTheme));
+    mockAccessibilityInfo();
+
+    const Probe = () => {
+      const reduceMotion = useReduceMotion();
+      return <View testID="reduce-motion-probe" reduceMotion={reduceMotion} />;
+    };
+
+    const { getByTestId, rerender } = render(
+      <PaperProvider reduceMotion="on">
+        <Probe />
+      </PaperProvider>
+    );
+    expect(getByTestId('reduce-motion-probe').props.reduceMotion).toBe(true);
+
+    rerender(
+      <PaperProvider reduceMotion="off">
+        <Probe />
+      </PaperProvider>
+    );
+    expect(getByTestId('reduce-motion-probe').props.reduceMotion).toBe(false);
+  });
+
+  it('removes the AccessibilityInfo listener when reduceMotion switches from "auto" to "off"', async () => {
+    mockAppearance();
+    mockAccessibilityInfo();
+
+    const { rerender } = render(
+      <PaperProvider reduceMotion="auto">
+        <FakeChild />
+      </PaperProvider>
+    );
+
+    expect(AccessibilityInfo.addEventListener).toHaveBeenCalledTimes(1);
+    expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
+
+    rerender(
+      <PaperProvider reduceMotion="off">
+        <FakeChild />
+      </PaperProvider>
+    );
+
+    expect(AccessibilityInfo.removeEventListener).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not subscribe to AccessibilityInfo when reduceMotion is "off"', async () => {
+    mockAppearance();
+    mockAccessibilityInfo();
+    const { getByTestId } = render(
+      <PaperProvider theme={ExtendedDarkTheme} reduceMotion="off">
+        <FakeChild />
+      </PaperProvider>
+    );
 
     expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
-    expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
-    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedDarkTheme
+    expect(
+      getByTestId('provider-child-view').props.theme.animation.scale
+    ).toStrictEqual(1);
+  });
+
+  it('forces animation.scale to 0 when reduceMotion is "on" without subscribing', async () => {
+    mockAppearance();
+    mockAccessibilityInfo();
+    const { getByTestId } = render(
+      <PaperProvider reduceMotion="on">
+        <FakeChild />
+      </PaperProvider>
     );
+
+    expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
+    expect(
+      getByTestId('provider-child-view').props.theme.animation.scale
+    ).toStrictEqual(0);
   });
 
   it('should set Appearance listeners, if there is no theme', async () => {
