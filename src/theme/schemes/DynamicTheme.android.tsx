@@ -473,8 +473,12 @@ function buildDynamicColors(scheme: 'light' | 'dark'): Partial<ThemeColors> {
 
 export const isDynamicColorSupported = apiLevel >= 31;
 
-export const lightDynamicColors = buildDynamicColors('light');
-export const darkDynamicColors = buildDynamicColors('dark');
+const lightDynamicColors = isDynamicColorSupported
+  ? buildDynamicColors('light')
+  : undefined;
+const darkDynamicColors = isDynamicColorSupported
+  ? buildDynamicColors('dark')
+  : undefined;
 
 export const DynamicLightTheme: Theme = {
   ...LightTheme,

@@ -9,7 +9,7 @@ import {
 import { render, act } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { LightTheme, DarkTheme } from '../../theme/schemes';
+import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
@@ -213,17 +213,10 @@ describe('PaperProvider', () => {
     ).toStrictEqual(0);
   });
 
-  it('leaves theme.colors unchanged when dynamicColor is true on an unsupported platform', async () => {
-    mockAppearance();
-    const { getByTestId } = render(
-      <PaperProvider dynamicColor>
-        <FakeChild />
-      </PaperProvider>
-    );
-    // `isDynamicColorSupported` is false on the test platform → no color override.
-    expect(getByTestId('provider-child-view').props.theme.colors.primary).toBe(
-      LightTheme.colors.primary
-    );
+  it('DynamicLightTheme falls back to LightTheme on unsupported platforms', () => {
+    // On non-Android (and Android API <31), DynamicLightTheme is structurally
+    // identical to LightTheme, so consumers can import it unconditionally.
+    expect(DynamicLightTheme.colors).toStrictEqual(LightTheme.colors);
   });
 
   it('should set Appearance listeners, if there is no theme', async () => {

@@ -12,11 +12,6 @@ import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
-import {
-  isDynamicColorSupported,
-  lightDynamicColors,
-  darkDynamicColors,
-} from '../theme/schemes/DynamicTheme';
 import type { ThemeProp } from '../types';
 
 export type Props = {
@@ -25,11 +20,10 @@ export type Props = {
   settings?: Settings;
   direction?: Direction;
   reduceMotion?: ReduceMotionPreference;
-  dynamicColor?: boolean;
 };
 
 const PaperProvider = (props: Props) => {
-  const { reduceMotion = 'auto', dynamicColor = false } = props;
+  const { reduceMotion = 'auto' } = props;
 
   const colorScheme = useSystemColorScheme(!props.theme);
   const resolvedReduceMotion = useResolvedReduceMotion(reduceMotion);
@@ -37,21 +31,15 @@ const PaperProvider = (props: Props) => {
   const theme = React.useMemo(() => {
     const isDark = props.theme?.dark ?? colorScheme === 'dark';
     const base = defaultThemes[isDark ? 'dark' : 'light'];
-    const dynamicColors =
-      dynamicColor && isDynamicColorSupported
-        ? isDark
-          ? darkDynamicColors
-          : lightDynamicColors
-        : undefined;
     const scale = resolvedReduceMotion ? 0 : props.theme?.animation?.scale ?? 1;
 
     return {
       ...base,
       ...props.theme,
-      colors: { ...base.colors, ...props.theme?.colors, ...dynamicColors },
+      colors: { ...base.colors, ...props.theme?.colors },
       animation: { ...props.theme?.animation, scale },
     };
-  }, [colorScheme, props.theme, resolvedReduceMotion, dynamicColor]);
+  }, [colorScheme, props.theme, resolvedReduceMotion]);
 
   const { children, settings } = props;
 
