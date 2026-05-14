@@ -22,9 +22,10 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
     >
       <Image
         source={require('../../assets/back-chevron.png')}
-        tintColor={color}
-        resizeMode="contain"
-        style={{ width: iosIconSize, height: iosIconSize }}
+        style={[
+          styles.icon,
+          { tintColor: color, width: iosIconSize, height: iosIconSize },
+        ]}
         accessibilityIgnoresInvertColors
       />
     </View>
@@ -42,6 +43,9 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  icon: {
+    resizeMode: 'contain',
   },
 });
 

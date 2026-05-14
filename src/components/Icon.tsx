@@ -125,8 +125,6 @@ const Icon = ({
         {...rest}
         testID={testID}
         source={s}
-        tintColor={color}
-        resizeMode="contain"
         style={[
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
@@ -134,6 +132,8 @@ const Icon = ({
           {
             width: size,
             height: size,
+            tintColor: color,
+            resizeMode: `contain`,
           },
         ]}
         {...accessibilityProps}
