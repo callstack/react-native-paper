@@ -43,7 +43,8 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
    */
 
   const isRTL = direction === 'rtl';
-  const disabled = props.editable === false;
+  const isDisabled = !!props.disabled;
+  const isEditable = props.disabled ? false : props.editable;
   const isFloating = isFocused || !!props.value;
   const hasError = !!props.error;
   const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
@@ -95,7 +96,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   };
 
   const focusInput = () => {
-    if (disabled) return;
+    if (isDisabled) return;
     input.current?.focus();
   };
 
@@ -108,7 +109,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     theme,
     isFocused,
     isRTL,
-    disabled,
+    isDisabled,
     hasAccessory,
     hasError,
     hasSuffix,
@@ -136,6 +137,8 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
    */
 
   const data = {
+    isEditable,
+    isDisabled,
     hasPrefix,
     hasCounter,
     placeholderTextColor,

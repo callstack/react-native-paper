@@ -34,7 +34,7 @@ export type TextFieldSharedApi = {
   theme: InternalTheme;
   isFocused: boolean;
   isRTL: boolean;
-  disabled: boolean;
+  isDisabled: boolean;
   hasAccessory: boolean;
   hasError: boolean;
   hasSuffix: boolean;
@@ -56,7 +56,7 @@ export type SharedTextFieldStyleData = {
 
 export type FilledTextFieldHookData = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
-  disabled: boolean;
+  isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -70,7 +70,7 @@ export type FilledTextFieldHookData = SharedTextFieldStyleData & {
 
 export type OutlinedTextFieldHookData = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
-  disabled: boolean;
+  isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -83,7 +83,8 @@ export type OutlinedTextFieldHookData = SharedTextFieldStyleData & {
 
 export type TextFieldHookReturn = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
-  disabled: boolean;
+  isDisabled: boolean;
+  isEditable: boolean | undefined;
   hasPrefix: boolean;
   hasCounter: boolean;
   hasSuffix: boolean;
@@ -141,6 +142,11 @@ export type TextFieldProps = TextInputProps & {
    * side, showing `currentLength/maxLength`. Requires `maxLength` to be set.
    */
   counter?: boolean;
+  /**
+   * This is separate from `editable={false}`, which makes the text read-only while the
+   * input can still be focused and text selected.
+   */
+  disabled?: boolean;
   /**
    * A short text string displayed at the start of the input (e.g. `"$"`).
    */
@@ -221,12 +227,14 @@ function TextField(props: TextFieldProps) {
     prefix,
     suffix,
     counter,
+    disabled,
     ...textInputProps
   } = props;
 
   const {
     input,
-    disabled,
+    isDisabled,
+    isEditable,
     hasPrefix,
     hasSuffix,
     hasCounter,
@@ -292,7 +300,7 @@ function TextField(props: TextFieldProps) {
           ? renderLeadingAccessory({
               style: leadingAccessoryStyles,
               error: hasError,
-              disabled,
+              disabled: isDisabled,
               multiline: !!textInputProps.multiline,
             })
           : null}
@@ -306,7 +314,7 @@ function TextField(props: TextFieldProps) {
 
           <TextInput
             aria-label={label}
-            aria-disabled={disabled}
+            aria-disabled={isDisabled}
             aria-invalid={hasError}
             ref={input}
             onFocus={onFocusHandler}
@@ -315,6 +323,7 @@ function TextField(props: TextFieldProps) {
             cursorColor={cursorColor}
             placeholderTextColor={placeholderTextColor}
             {...textInputProps}
+            editable={isEditable}
             placeholder={placeholder}
             style={inputStyles}
           />
@@ -330,7 +339,7 @@ function TextField(props: TextFieldProps) {
           renderTrailingAccessory({
             style: trailingAccessoryStyles,
             error: hasError,
-            disabled,
+            disabled: isDisabled,
             multiline: !!textInputProps.multiline,
           })
         ) : hasError ? (

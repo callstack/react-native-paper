@@ -88,7 +88,7 @@ const TextFieldIcon = ({
     theme,
     color,
     hasError: error,
-    disabled,
+    isDisabled: disabled,
   });
 
   const onPressHandler = disabled ? undefined : onPress;

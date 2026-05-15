@@ -24,6 +24,7 @@ import ScreenWrapper from '../ScreenWrapper';
 type DemoControls = {
   error: boolean;
   disabled: boolean;
+  readOnly: boolean;
   leadingIcon: boolean;
   trailingIcon: boolean;
   counter: boolean;
@@ -52,6 +53,7 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
   const [controls, setControls] = React.useState<DemoControls>({
     error: false,
     disabled: false,
+    readOnly: false,
     leadingIcon: false,
     trailingIcon: false,
     counter: false,
@@ -97,6 +99,7 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
   const SWITCH_CONTROLS: { label: string; key: keyof DemoControls }[] = [
     { label: 'Error', key: 'error' },
     { label: 'Disabled', key: 'disabled' },
+    { label: 'Readonly', key: 'readOnly' },
     { label: 'Leading icon', key: 'leadingIcon' },
     { label: 'Trailing icon', key: 'trailingIcon' },
     { label: 'Counter', key: 'counter' },
@@ -122,7 +125,8 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
         placeholder={modifiers.placeholder || undefined}
         supportingText={modifiers.helperText || undefined}
         error={controls.error}
-        editable={!controls.disabled}
+        disabled={controls.disabled}
+        editable={!controls.readOnly}
         value={value}
         onChangeText={setValue}
         multiline={controls.multiline}

@@ -161,18 +161,18 @@ it('fires onPress on TextField.Icon end accessory', () => {
   expect(onClear).toHaveBeenCalledTimes(1);
 });
 
-it('disables TextField.Icon when the field is not editable', () => {
+it('disables TextField.Icon when the field is disabled', () => {
   const { getAllByTestId } = render(
     <TextField
       label="Search"
       value="x"
       onChangeText={() => {}}
-      editable={false}
+      disabled
       startAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="magnify" />
+        <TextField.Icon {...props} icon="magnify" onPress={() => {}} />
       )}
       endAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="close" />
+        <TextField.Icon {...props} icon="close" onPress={() => {}} />
       )}
     />
   );
@@ -180,6 +180,27 @@ it('disables TextField.Icon when the field is not editable', () => {
   const buttons = getAllByTestId('icon-button');
   expect(buttons[0].props.accessibilityState?.disabled).toBe(true);
   expect(buttons[1].props.accessibilityState?.disabled).toBe(true);
+});
+
+it('does not disable TextField.Icon when the field is read-only (editable false)', () => {
+  const { getAllByTestId } = render(
+    <TextField
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      startAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" onPress={() => {}} />
+      )}
+      endAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+
+  const buttons = getAllByTestId('icon-button');
+  expect(buttons[0].props.accessibilityState?.disabled).not.toBe(true);
+  expect(buttons[1].props.accessibilityState?.disabled).not.toBe(true);
 });
 
 it('renders supporting text below the field', () => {
@@ -236,7 +257,7 @@ it('uses polite aria-live on supporting text when there is no error', () => {
   expect(getByText('Optional').props['aria-live']).toBe('polite');
 });
 
-it('marks the input as aria-disabled when editable is false', () => {
+it('does not mark the input as aria-disabled when editable is false (read-only)', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
@@ -247,10 +268,24 @@ it('marks the input as aria-disabled when editable is false', () => {
     />
   );
 
+  expect(getByTestId('tf-input').props['aria-disabled']).not.toBe(true);
+});
+
+it('marks the input as aria-disabled when disabled is true', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      testID="tf-input"
+    />
+  );
+
   expect(getByTestId('tf-input').props['aria-disabled']).toBe(true);
 });
 
-it('marks the input as aria-invalid and aria-disabled when error and editable is false', () => {
+it('marks the input as aria-invalid but not aria-disabled when error and read-only', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
@@ -264,16 +299,66 @@ it('marks the input as aria-invalid and aria-disabled when error and editable is
 
   const input = getByTestId('tf-input');
   expect(input.props['aria-invalid']).toBe(true);
+  expect(input.props['aria-disabled']).not.toBe(true);
+});
+
+it('marks the input as aria-invalid and aria-disabled when error and disabled', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      error
+      disabled
+      testID="tf-input"
+    />
+  );
+
+  const input = getByTestId('tf-input');
+  expect(input.props['aria-invalid']).toBe(true);
   expect(input.props['aria-disabled']).toBe(true);
 });
 
-it('applies disabled opacity to the TextInput when editable is false (filled)', () => {
+it('does not apply disabled opacity to the TextInput when editable is false (filled)', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
       value="x"
       onChangeText={() => {}}
       editable={false}
+      testID="tf-input-ro"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-ro').props.style)
+  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('does not apply disabled opacity to the TextInput when editable is false (outlined)', () => {
+  const { getByTestId } = render(
+    <TextField
+      variant="outlined"
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      testID="tf-input-ro-out"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-ro-out').props.style)
+  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('applies disabled opacity to the TextInput when disabled is true (filled)', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      disabled
       testID="tf-input-dis"
     />
   );
@@ -283,14 +368,14 @@ it('applies disabled opacity to the TextInput when editable is false (filled)', 
   ).toMatchObject({ opacity: stateOpacity.disabled });
 });
 
-it('applies disabled opacity to the TextInput when editable is false (outlined)', () => {
+it('applies disabled opacity to the TextInput when disabled is true (outlined)', () => {
   const { getByTestId } = render(
     <TextField
       variant="outlined"
       label="Email"
       value="x"
       onChangeText={() => {}}
-      editable={false}
+      disabled
       testID="tf-input-dis-out"
     />
   );
@@ -323,6 +408,7 @@ it('does not pass TextField-only props through to TextInput', () => {
       value=""
       onChangeText={() => {}}
       error
+      disabled
       testID="tf-native"
     />
   );
@@ -338,6 +424,7 @@ it('does not pass TextField-only props through to TextInput', () => {
   expect(input.props.suffix).toBeUndefined();
   expect(input.props.counter).toBeUndefined();
   expect(input.props.error).toBeUndefined();
+  expect(input.props.disabled).toBeUndefined();
 });
 
 it('shows a character counter when counter is true and maxLength is set (filled)', () => {
@@ -466,6 +553,20 @@ it('does not focus the TextInput when disabled and the Pressable is pressed', ()
   const focusSpy = jest.spyOn(TextInput.prototype, 'focus');
 
   const { UNSAFE_getByProps } = render(
+    <TextField label="Email" value="" onChangeText={() => {}} disabled />
+  );
+
+  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
+  fireEvent.press(pressable);
+
+  expect(focusSpy).not.toHaveBeenCalled();
+  focusSpy.mockRestore();
+});
+
+it('focuses the TextInput when read-only and the Pressable is pressed', () => {
+  const focusSpy = jest.spyOn(TextInput.prototype, 'focus');
+
+  const { UNSAFE_getByProps } = render(
     <TextField
       label="Email"
       value=""
@@ -477,7 +578,7 @@ it('does not focus the TextInput when disabled and the Pressable is pressed', ()
   const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
   fireEvent.press(pressable);
 
-  expect(focusSpy).not.toHaveBeenCalled();
+  expect(focusSpy).toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
@@ -519,7 +620,7 @@ it('passes error, disabled, and multiline to accessories', () => {
       onChangeText={() => {}}
       multiline
       error
-      editable={false}
+      disabled
       startAccessory={StartAccessory}
       endAccessory={EndAccessory}
     />
@@ -553,7 +654,7 @@ it('passes error to accessories when the field is disabled', () => {
       value=""
       onChangeText={() => {}}
       error
-      editable={false}
+      disabled
       startAccessory={StartAccessory}
     />
   );

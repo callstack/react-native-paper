@@ -53,12 +53,12 @@ export const getLabelColor = ({
   theme,
   hasError,
   isFocused,
-  disabled,
+  isDisabled,
 }: {
   theme: InternalTheme;
   isFocused: boolean;
   hasError: boolean;
-  disabled: boolean;
+  isDisabled: boolean;
 }) => {
   const {
     colors: { error, primary, onSurface, onSurfaceVariant },
@@ -67,7 +67,7 @@ export const getLabelColor = ({
   if (hasError) {
     return error;
   }
-  if (disabled) {
+  if (isDisabled) {
     return onSurface;
   }
   if (isFocused) {
@@ -79,11 +79,11 @@ export const getLabelColor = ({
 export const getSupportingTextColor = ({
   theme,
   hasError,
-  disabled,
+  isDisabled,
 }: {
   theme: InternalTheme;
   hasError: boolean;
-  disabled: boolean;
+  isDisabled: boolean;
 }) => {
   const {
     colors: { error, onSurface, onSurfaceVariant },
@@ -92,7 +92,7 @@ export const getSupportingTextColor = ({
   if (hasError) {
     return error;
   }
-  if (disabled) {
+  if (isDisabled) {
     return onSurface;
   }
   return onSurfaceVariant;
@@ -107,12 +107,12 @@ export const getSupportingTextColor = ({
  */
 export const getFieldBackgroundColor = ({
   theme,
-  disabled,
+  isDisabled,
 }: {
   theme: InternalTheme;
-  disabled: boolean;
+  isDisabled: boolean;
 }): string | undefined => {
-  if (disabled) {
+  if (isDisabled) {
     return undefined;
   }
 
@@ -123,16 +123,16 @@ export const getIconColor = ({
   theme,
   color,
   hasError,
-  disabled,
+  isDisabled,
 }: {
   theme: InternalTheme;
   color?: string;
   hasError: boolean;
-  disabled: boolean;
+  isDisabled: boolean;
 }) => {
   if (color) return color;
   if (hasError) return theme.colors.error;
-  if (disabled) return theme.colors.onSurface;
+  if (isDisabled) return theme.colors.onSurface;
   return theme.colors.onSurfaceVariant;
 };
 
@@ -146,12 +146,12 @@ export const getOutlineColor = ({
   theme,
   hasError,
   isFocused,
-  disabled,
+  isDisabled,
 }: {
   theme: InternalTheme;
   isFocused: boolean;
   hasError: boolean;
-  disabled: boolean;
+  isDisabled: boolean;
 }) => {
   const {
     colors: { error, onSurface, primary, outline },
@@ -160,7 +160,7 @@ export const getOutlineColor = ({
   if (hasError) {
     return error;
   }
-  if (disabled) {
+  if (isDisabled) {
     return onSurface;
   }
   if (isFocused) {
@@ -183,19 +183,19 @@ export const getSharedTextFieldStyleData = (
 ): SharedTextFieldStyleData => {
   const {
     theme,
-    disabled,
+    isDisabled,
     hasError,
     isFocused,
     isRTL,
     animatedLabelTextStyle,
   } = api;
 
-  const labelColor = getLabelColor({ theme, hasError, isFocused, disabled });
+  const labelColor = getLabelColor({ theme, hasError, isFocused, isDisabled });
 
   const supportingTextColor = getSupportingTextColor({
     theme,
     hasError,
-    disabled,
+    isDisabled,
   });
   const {
     colors: { onSurfaceVariant },
@@ -207,7 +207,7 @@ export const getSharedTextFieldStyleData = (
     styles.input,
     { color: labelColor },
     animatedLabelTextStyle,
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const supportingTextStyles: StyleProp<TextStyle> = [
@@ -216,7 +216,7 @@ export const getSharedTextFieldStyleData = (
       color: supportingTextColor,
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const counterStyles: StyleProp<TextStyle> = [
@@ -225,7 +225,7 @@ export const getSharedTextFieldStyleData = (
       color: supportingTextColor,
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const prefixStyles: StyleProp<TextStyle> = [
@@ -235,7 +235,7 @@ export const getSharedTextFieldStyleData = (
       color: onSurfaceVariant,
       paddingEnd: PREFIX_END_PADDING,
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const suffixStyles: StyleProp<TextStyle> = [
@@ -245,17 +245,17 @@ export const getSharedTextFieldStyleData = (
       color: onSurfaceVariant,
       paddingStart: SUFFIX_START_PADDING,
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const leadingAccessoryStyles: StyleProp<ViewStyle> = [
     styles.leadingAccessory,
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const trailingAccessoryStyles: StyleProp<ViewStyle> = [
     styles.trailingAccessory,
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   return {
@@ -357,7 +357,7 @@ export const getFilledTextFieldData = (
     input,
     theme,
     hasSuffix,
-    disabled,
+    isDisabled,
     hasAccessory,
     hasError,
     animatedLabelWrapperStyle,
@@ -375,17 +375,17 @@ export const getFilledTextFieldData = (
     theme,
     hasError,
     isFocused: false,
-    disabled,
+    isDisabled,
   });
 
   const activeOutlineColor = getOutlineColor({
     theme,
     hasError,
     isFocused: true,
-    disabled,
+    isDisabled,
   });
 
-  const fieldBackgroundColor = getFieldBackgroundColor({ theme, disabled });
+  const fieldBackgroundColor = getFieldBackgroundColor({ theme, isDisabled });
 
   /**
    * Shared styles
@@ -411,7 +411,7 @@ export const getFilledTextFieldData = (
 
   const containerStyles: StyleProp<ViewStyle> = [
     filledStyles.container,
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const fieldStyles: StyleProp<ViewStyle> = [
@@ -427,7 +427,7 @@ export const getFilledTextFieldData = (
   /* Disabled tint (DISABLED_CONTAINER_OPACITY) is rendered as a childless overlay so its
      alpha can be applied via the `opacity` style without leaking onto the label
      and input. The View accepts `PlatformColor` directly. */
-  const disabledBackgroundStyles: StyleProp<ViewStyle> | undefined = disabled
+  const disabledBackgroundStyles: StyleProp<ViewStyle> | undefined = isDisabled
     ? [
         filledStyles.disabledBackground,
         {
@@ -442,7 +442,7 @@ export const getFilledTextFieldData = (
       height: INACTIVE_INDICATOR_SIZE,
       backgroundColor: outlineColor,
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const animatedActiveOutlineStyles: StyleProp<
@@ -453,7 +453,7 @@ export const getFilledTextFieldData = (
       height: ACTIVE_INDICATOR_SIZE,
       backgroundColor: activeOutlineColor,
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
     animatedActiveOutlineStyle,
   ];
 
@@ -473,13 +473,13 @@ export const getFilledTextFieldData = (
     Platform.OS === 'web' && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
     inputStyleOverride,
   ];
 
   return {
     input,
-    disabled,
+    isDisabled,
     hasError,
     hasSuffix,
     animatedLabelWrapperStyles,
@@ -503,7 +503,7 @@ export const getOutlinedTextFieldData = (
     input,
     theme,
     isFocused,
-    disabled,
+    isDisabled,
     hasAccessory,
     hasError,
     hasSuffix,
@@ -520,7 +520,7 @@ export const getOutlinedTextFieldData = (
 
   const outlineColor = getOutlineColor({
     theme,
-    disabled,
+    isDisabled,
     isFocused,
     hasError,
   });
@@ -537,7 +537,7 @@ export const getOutlinedTextFieldData = (
 
   const containerStyles: StyleProp<ViewStyle> = [
     outlinedStyles.container,
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
   ];
 
   const fieldStyles: StyleProp<ViewStyle> = [
@@ -557,7 +557,7 @@ export const getOutlinedTextFieldData = (
       borderWidth: isFocused ? 2 : 1,
       borderColor: outlineColor,
     },
-    disabled && { opacity: OUTLINED_DISABLED_OUTLINE_OPACITY },
+    isDisabled && { opacity: OUTLINED_DISABLED_OUTLINE_OPACITY },
   ];
 
   const animatedLabelWrapperStyles: StyleProp<
@@ -590,13 +590,13 @@ export const getOutlinedTextFieldData = (
     Platform.OS === 'web' && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],
     },
-    disabled && styles.disabled,
+    isDisabled && styles.disabled,
     inputStyleOverride,
   ];
 
   return {
     input,
-    disabled,
+    isDisabled,
     hasError,
     hasSuffix,
     animatedLabelWrapperStyles,
