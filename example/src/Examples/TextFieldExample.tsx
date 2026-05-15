@@ -21,10 +21,6 @@ import {
 import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
 type DemoControls = {
   error: boolean;
   disabled: boolean;
@@ -43,10 +39,6 @@ type DemoModifiers = {
   prefix: string;
   suffix: string;
 };
-
-// ---------------------------------------------------------------------------
-// TextFieldDemo
-// ---------------------------------------------------------------------------
 
 type TextFieldDemoProps = {
   variant: TextFieldVariant;
@@ -185,10 +177,6 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// TextFieldExample
-// ---------------------------------------------------------------------------
-
 const TextFieldExample = () => {
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>
@@ -203,10 +191,6 @@ const TextFieldExample = () => {
 };
 
 TextFieldExample.title = 'TextField';
-
-// ---------------------------------------------------------------------------
-// Styles
-// ---------------------------------------------------------------------------
 
 const styles = StyleSheet.create({
   container: {
