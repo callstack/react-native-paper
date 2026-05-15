@@ -33,6 +33,11 @@ function firstIndexOfTestIdInTree(tree: unknown, testID: string): number {
   return match ? match.index : -1;
 }
 
+/** Locates a Text node whose children are serialized as a one-element JSON string array. */
+function firstIndexOfTextChildArrayInTree(tree: unknown, text: string): number {
+  return JSON.stringify(tree).indexOf(JSON.stringify([text]));
+}
+
 it('renders filled TextField with label and value', () => {
   const tree = render(
     <TextField label="Email" value="a@b.co" onChangeText={() => {}} />
@@ -308,6 +313,8 @@ it('forwards TextInput props such as testID', () => {
   expect(getByTestId('email-input')).toBeTruthy();
 });
 
+/* TextField peels these before spreading onto TextInput (see TextField.tsx).
+ * Custom layout / sub-component styling props are intentionally not supported. */
 it('does not pass TextField-only props through to TextInput', () => {
   const { getByTestId } = render(
     <TextField
@@ -325,18 +332,11 @@ it('does not pass TextField-only props through to TextInput', () => {
   expect(input.props.theme).toBeUndefined();
   expect(input.props.StartAccessory).toBeUndefined();
   expect(input.props.EndAccessory).toBeUndefined();
-  expect(input.props.pressableStyle).toBeUndefined();
-  expect(input.props.fieldStyle).toBeUndefined();
-  expect(input.props.containerStyle).toBeUndefined();
-  expect(input.props.outlineStyle).toBeUndefined();
+  expect(input.props.label).toBeUndefined();
   expect(input.props.supportingText).toBeUndefined();
-  expect(input.props.supportingTextProps).toBeUndefined();
   expect(input.props.prefix).toBeUndefined();
-  expect(input.props.prefixProps).toBeUndefined();
   expect(input.props.suffix).toBeUndefined();
-  expect(input.props.suffixProps).toBeUndefined();
   expect(input.props.counter).toBeUndefined();
-  expect(input.props.counterProps).toBeUndefined();
   expect(input.props.error).toBeUndefined();
 });
 
@@ -563,51 +563,47 @@ it('passes error to accessories when the field is disabled', () => {
   expect(startAccessoryProps[0].disabled).toBe(true);
 });
 
-it('applies supportingTextProps to the supporting Text', () => {
-  const { getByTestId } = render(
+it('renders supporting text as a Text child', () => {
+  const { getByText } = render(
     <TextField
       label="Email"
       value=""
       onChangeText={() => {}}
       supportingText="Hint"
-      supportingTextProps={{ testID: 'supporting-text' }}
     />
   );
 
-  expect(getByTestId('supporting-text').props.children).toBe('Hint');
+  expect(getByText('Hint')).toBeTruthy();
 });
 
-it('applies counterProps to the counter Text', () => {
-  const { getByTestId } = render(
+it('renders the counter as a Text child', () => {
+  const { getByText } = render(
     <TextField
       label="Bio"
       value="hi"
       onChangeText={() => {}}
       counter
       maxLength={80}
-      counterProps={{ testID: 'counter-text' }}
     />
   );
 
-  expect(getByTestId('counter-text').props.children).toBe('2/80');
+  expect(getByText('2/80')).toBeTruthy();
 });
 
-it('does not apply supportingTextProps style to the counter Text', () => {
-  const { getByTestId } = render(
+it('renders supporting text and counter separately when both are shown', () => {
+  const { getByText } = render(
     <TextField
       label="Bio"
       value="x"
       onChangeText={() => {}}
+      supportingText="Help text"
       counter
       maxLength={10}
-      supportingTextProps={{ style: { fontSize: 9 } }}
-      counterProps={{ testID: 'counter-text' }}
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('counter-text').props.style).fontSize
-  ).not.toBe(9);
+  expect(getByText('Help text')).toBeTruthy();
+  expect(getByText('1/10')).toBeTruthy();
 });
 
 it('applies RTL text alignment and writing direction to the TextInput (filled)', () => {
@@ -656,19 +652,16 @@ it('applies RTL text alignment and writing direction to the TextInput (outlined)
 it('applies RTL writing direction to supporting text', () => {
   I18nManager.isRTL = true;
 
-  const { getByTestId } = render(
+  const { getByText } = render(
     <TextField
       label="Email"
       value=""
       onChangeText={() => {}}
       supportingText="Hint"
-      supportingTextProps={{ testID: 'supporting-text-rtl' }}
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('supporting-text-rtl').props.style)
-  ).toEqual(
+  expect(StyleSheet.flatten(getByText('Hint').props.style)).toEqual(
     expect.objectContaining({
       writingDirection: 'rtl',
     })
@@ -841,7 +834,7 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', () => {
-  const { getByTestId, queryByTestId, rerender } = render(
+  const { getByTestId, getByText, queryByText, rerender } = render(
     <TextField
       label="Amount"
       value="1"
@@ -849,13 +842,11 @@ it('shows prefix and suffix when the field is floating and hides them after valu
       prefix="$"
       suffix="/100"
       testID="tf-ps"
-      prefixProps={{ testID: 'tf-prefix' }}
-      suffixProps={{ testID: 'tf-suffix' }}
     />
   );
 
-  expect(getByTestId('tf-prefix')).toBeTruthy();
-  expect(getByTestId('tf-suffix')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
 
   rerender(
     <TextField
@@ -865,18 +856,16 @@ it('shows prefix and suffix when the field is floating and hides them after valu
       prefix="$"
       suffix="/100"
       testID="tf-ps"
-      prefixProps={{ testID: 'tf-prefix' }}
-      suffixProps={{ testID: 'tf-suffix' }}
     />
   );
 
-  expect(queryByTestId('tf-prefix')).toBeNull();
-  expect(queryByTestId('tf-suffix')).toBeNull();
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
   expect(getByTestId('tf-ps')).toBeTruthy();
 });
 
 it('renders prefix and suffix while focused even when value is empty', () => {
-  const { getByTestId, queryByTestId } = render(
+  const { getByTestId, getByText, queryByText } = render(
     <TextField
       label="Amount"
       value=""
@@ -884,18 +873,16 @@ it('renders prefix and suffix while focused even when value is empty', () => {
       prefix="$"
       suffix=" kg"
       testID="tf-ps-focus"
-      prefixProps={{ testID: 'tf-prefix-focus' }}
-      suffixProps={{ testID: 'tf-suffix-focus' }}
     />
   );
 
-  expect(queryByTestId('tf-prefix-focus')).toBeNull();
-  expect(queryByTestId('tf-suffix-focus')).toBeNull();
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText(' kg')).toBeNull();
 
   fireEvent(getByTestId('tf-ps-focus'), 'focus');
 
-  expect(getByTestId('tf-prefix-focus')).toBeTruthy();
-  expect(getByTestId('tf-suffix-focus')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
 });
 
 it('places prefix Text before the TextInput and suffix Text after it', () => {
@@ -907,17 +894,15 @@ it('places prefix Text before the TextInput and suffix Text after it', () => {
       prefix="$"
       suffix="/100"
       testID="tf-order"
-      prefixProps={{ testID: 'order-prefix' }}
-      suffixProps={{ testID: 'order-suffix' }}
     />
   );
 
   const tree = toJSON();
-  expect(firstIndexOfTestIdInTree(tree, 'order-prefix')).toBeLessThan(
+  expect(firstIndexOfTextChildArrayInTree(tree, '$')).toBeLessThan(
     firstIndexOfTestIdInTree(tree, 'tf-order')
   );
   expect(firstIndexOfTestIdInTree(tree, 'tf-order')).toBeLessThan(
-    firstIndexOfTestIdInTree(tree, 'order-suffix')
+    firstIndexOfTextChildArrayInTree(tree, '/100')
   );
 });
 
@@ -987,7 +972,7 @@ it('uses default horizontal alignment when suffix prop exists but suffix is not 
 });
 
 it('does not apply the TextInput style prop to prefix or suffix Text', () => {
-  const { getByTestId } = render(
+  const { getByTestId, getByText } = render(
     <TextField
       label="Label"
       value="1"
@@ -996,8 +981,6 @@ it('does not apply the TextInput style prop to prefix or suffix Text', () => {
       suffix="]"
       style={{ fontSize: 40, letterSpacing: 9 }}
       testID="tf-input-style"
-      prefixProps={{ testID: 'pfx-no-input-style' }}
-      suffixProps={{ testID: 'sfx-no-input-style' }}
     />
   );
 
@@ -1008,12 +991,8 @@ it('does not apply the TextInput style prop to prefix or suffix Text', () => {
     expect.objectContaining({ fontSize: 40, letterSpacing: 9 })
   );
 
-  const prefixFlat = StyleSheet.flatten(
-    getByTestId('pfx-no-input-style').props.style
-  );
-  const suffixFlat = StyleSheet.flatten(
-    getByTestId('sfx-no-input-style').props.style
-  );
+  const prefixFlat = StyleSheet.flatten(getByText('$').props.style);
+  const suffixFlat = StyleSheet.flatten(getByText(']').props.style);
 
   expect(prefixFlat.fontSize).not.toBe(40);
   expect(prefixFlat.letterSpacing).toBeUndefined();

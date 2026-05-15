@@ -180,19 +180,11 @@ export const getOutlineColor = ({
  * which is variant-specific (filled adds `MULTILINE_PADDING_TOP`).
  */
 export const getSharedTextFieldStyleData = (
-  api: TextFieldSharedApi,
-  props: TextFieldProps
+  api: TextFieldSharedApi
 ): SharedTextFieldStyleData => {
   const { isRTL } = I18nManager.getConstants();
 
   const { theme, disabled, hasError, isFocused, animatedLabelTextStyle } = api;
-  const {
-    labelProps,
-    supportingTextProps,
-    counterProps,
-    prefixProps,
-    suffixProps,
-  } = props;
 
   const labelColor = getLabelColor({ theme, hasError, isFocused, disabled });
 
@@ -212,7 +204,6 @@ export const getSharedTextFieldStyleData = (
     { color: labelColor },
     animatedLabelTextStyle,
     disabled && styles.disabled,
-    labelProps?.style,
   ];
 
   const supportingTextStyles: StyleProp<TextStyle> = [
@@ -222,7 +213,6 @@ export const getSharedTextFieldStyleData = (
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     disabled && styles.disabled,
-    supportingTextProps?.style,
   ];
 
   const counterStyles: StyleProp<TextStyle> = [
@@ -232,7 +222,6 @@ export const getSharedTextFieldStyleData = (
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     disabled && styles.disabled,
-    counterProps?.style,
   ];
 
   const prefixStyles: StyleProp<TextStyle> = [
@@ -243,7 +232,6 @@ export const getSharedTextFieldStyleData = (
       paddingEnd: PREFIX_END_PADDING,
     },
     disabled && styles.disabled,
-    prefixProps?.style,
   ];
 
   const suffixStyles: StyleProp<TextStyle> = [
@@ -254,7 +242,6 @@ export const getSharedTextFieldStyleData = (
       paddingStart: SUFFIX_START_PADDING,
     },
     disabled && styles.disabled,
-    suffixProps?.style,
   ];
 
   const leadingAccessoryStyles: StyleProp<ViewStyle> = [
@@ -357,13 +344,7 @@ export const getFilledTextFieldData = (
   api: TextFieldSharedApi,
   props: TextFieldProps
 ): FilledTextFieldHookData => {
-  const {
-    style: inputStyleOverride,
-    fieldStyle: fieldStyleOverride,
-    containerStyle: containerStyleOverride,
-    outlineStyle: outlineStyleOverride,
-    ...textInputProps
-  } = props;
+  const { style: inputStyleOverride, ...textInputProps } = props;
 
   const {
     input,
@@ -403,7 +384,7 @@ export const getFilledTextFieldData = (
    * Shared styles
    */
 
-  const shared = getSharedTextFieldStyleData(api, props);
+  const shared = getSharedTextFieldStyleData(api);
 
   /**
    * Variant-specific styles
@@ -424,7 +405,6 @@ export const getFilledTextFieldData = (
   const containerStyles: StyleProp<ViewStyle> = [
     filledStyles.container,
     disabled && styles.disabled,
-    containerStyleOverride,
   ];
 
   const fieldStyles: StyleProp<ViewStyle> = [
@@ -435,7 +415,6 @@ export const getFilledTextFieldData = (
       borderTopEndRadius: TEXT_FIELD_BORDER_RADIUS,
       overflow: 'hidden',
     },
-    fieldStyleOverride,
   ];
 
   /* Disabled tint (DISABLED_CONTAINER_OPACITY) is rendered as a childless overlay so its
@@ -457,7 +436,6 @@ export const getFilledTextFieldData = (
       backgroundColor: outlineColor,
     },
     disabled && styles.disabled,
-    outlineStyleOverride,
   ];
 
   const animatedActiveOutlineStyles: StyleProp<
@@ -469,7 +447,6 @@ export const getFilledTextFieldData = (
       backgroundColor: activeOutlineColor,
     },
     disabled && styles.disabled,
-    outlineStyleOverride,
     animatedActiveOutlineStyle,
   ];
 
@@ -513,13 +490,7 @@ export const getOutlinedTextFieldData = (
   api: TextFieldSharedApi,
   props: TextFieldProps
 ): OutlinedTextFieldHookData => {
-  const {
-    style: inputStyleOverride,
-    fieldStyle: fieldStyleOverride,
-    containerStyle: containerStyleOverride,
-    outlineStyle: outlineStyleOverride,
-    ...textInputProps
-  } = props;
+  const { style: inputStyleOverride, ...textInputProps } = props;
 
   const {
     input,
@@ -551,7 +522,7 @@ export const getOutlinedTextFieldData = (
    * Shared styles
    */
 
-  const shared = getSharedTextFieldStyleData(api, props);
+  const shared = getSharedTextFieldStyleData(api);
 
   /**
    * Variant-specific styles
@@ -560,7 +531,6 @@ export const getOutlinedTextFieldData = (
   const containerStyles: StyleProp<ViewStyle> = [
     outlinedStyles.container,
     disabled && styles.disabled,
-    containerStyleOverride,
   ];
 
   const fieldStyles: StyleProp<ViewStyle> = [
@@ -569,7 +539,6 @@ export const getOutlinedTextFieldData = (
       borderRadius: TEXT_FIELD_BORDER_RADIUS,
     },
     textInputProps.multiline && { alignItems: 'flex-start' },
-    fieldStyleOverride,
   ];
 
   /* The outline is a childless absolutely-positioned View, so applying
@@ -582,8 +551,6 @@ export const getOutlinedTextFieldData = (
       borderColor: outlineColor,
     },
     disabled && { opacity: OUTLINED_DISABLED_OUTLINE_OPACITY },
-    fieldStyleOverride,
-    outlineStyleOverride,
   ];
 
   const animatedLabelWrapperStyles: StyleProp<

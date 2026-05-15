@@ -47,7 +47,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           "borderTopStartRadius": 4,
           "overflow": "hidden",
         },
-        undefined,
       ]
     }
   >
@@ -66,7 +65,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "height": 1,
           },
           false,
-          undefined,
         ]
       }
     />
@@ -95,7 +93,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -121,7 +118,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -204,7 +200,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -222,7 +217,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -414,7 +408,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -432,7 +425,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },
@@ -695,7 +687,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           "borderTopStartRadius": 4,
           "overflow": "hidden",
         },
-        undefined,
       ]
     }
   >
@@ -714,7 +705,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "height": 1,
           },
           false,
-          undefined,
         ]
       }
     />
@@ -743,7 +733,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -769,7 +758,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -852,7 +840,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -870,7 +857,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -1062,7 +1048,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -1080,7 +1065,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },
@@ -1343,7 +1327,6 @@ exports[`renders filled TextField with label and value 1`] = `
           "borderTopStartRadius": 4,
           "overflow": "hidden",
         },
-        undefined,
       ]
     }
   >
@@ -1362,7 +1345,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "height": 1,
           },
           false,
-          undefined,
         ]
       }
     />
@@ -1391,7 +1373,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -1417,7 +1398,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "height": 2,
           },
           false,
-          undefined,
           {
             "transform": [
               {
@@ -1500,7 +1480,6 @@ exports[`renders filled TextField with label and value 1`] = `
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -1518,7 +1497,6 @@ exports[`renders filled TextField with label and value 1`] = `
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -1547,7 +1525,6 @@ exports[`renders filled TextField with label and value 1`] = `
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -1565,7 +1542,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },
@@ -1663,7 +1639,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
           "borderRadius": 4,
         },
         undefined,
-        undefined,
       ]
     }
   >
@@ -1684,8 +1659,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             "borderWidth": 1,
           },
           false,
-          undefined,
-          undefined,
         ]
       }
     />
@@ -1778,7 +1751,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -1796,7 +1768,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -1988,7 +1959,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -2006,7 +1976,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },
@@ -2267,7 +2236,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
           "borderRadius": 4,
         },
         undefined,
-        undefined,
       ]
     }
   >
@@ -2288,8 +2256,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             "borderWidth": 1,
           },
           false,
-          undefined,
-          undefined,
         ]
       }
     />
@@ -2382,7 +2348,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -2400,7 +2365,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -2592,7 +2556,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -2610,7 +2573,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },
@@ -2871,7 +2833,6 @@ exports[`renders outlined TextField with label and value 1`] = `
           "borderRadius": 4,
         },
         undefined,
-        undefined,
       ]
     }
   >
@@ -2892,8 +2853,6 @@ exports[`renders outlined TextField with label and value 1`] = `
             "borderWidth": 1,
           },
           false,
-          undefined,
-          undefined,
         ]
       }
     />
@@ -2986,7 +2945,6 @@ exports[`renders outlined TextField with label and value 1`] = `
               "transitionProperty": "fontSize",
             },
             false,
-            undefined,
           ]
         }
         style={
@@ -3004,7 +2962,6 @@ exports[`renders outlined TextField with label and value 1`] = `
               "fontSize": 12,
             },
             false,
-            undefined,
           ]
         }
       >
@@ -3033,7 +2990,6 @@ exports[`renders outlined TextField with label and value 1`] = `
               "paddingHorizontal": 16,
             },
             false,
-            undefined,
           ],
           {
             "opacity": 1,
@@ -3051,7 +3007,6 @@ exports[`renders outlined TextField with label and value 1`] = `
             "paddingHorizontal": 16,
           },
           false,
-          undefined,
           {
             "opacity": 1,
           },

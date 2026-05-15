@@ -8,7 +8,6 @@ import {
   Text,
   TextInput,
   TextInputProps,
-  TextProps,
   TextStyle,
   View,
   ViewStyle,
@@ -129,65 +128,22 @@ export type TextFieldProps = TextInputProps & {
    */
   label?: string;
   /**
-   * Pass any additional props directly to the label Text component.
-   */
-  labelProps?: TextProps;
-  /**
-   * Supporting text to display below the input (Material Design 3). When
-   * `error` is `true`, this text is styled as an error message.
+   * Supporting text to display below the input (Material Design 3).
    */
   supportingText?: string;
-  /**
-   * Pass any additional props directly to the supporting text `Text` component.
-   */
-  supportingTextProps?: TextProps;
   /**
    * When `true`, displays a character counter below the input on the trailing
    * side, showing `currentLength/maxLength`. Requires `maxLength` to be set.
    */
   counter?: boolean;
   /**
-   * Pass any additional props directly to the counter `Text` component.
-   */
-  counterProps?: TextProps;
-  /**
    * A short text string displayed at the start of the input (e.g. `"$"`).
    */
   prefix?: string;
   /**
-   * Pass any additional props directly to the prefix `Text` component.
-   */
-  prefixProps?: TextProps;
-  /**
    * A short text string displayed at the end of the input (e.g. `"/100"`).
    */
   suffix?: string;
-  /**
-   * Pass any additional props directly to the suffix `Text` component.
-   */
-  suffixProps?: TextProps;
-  /**
-   * Style overrides for the pressable root element.
-   */
-  pressableStyle?: StyleProp<ViewStyle>;
-  /**
-   * Style overrides for the field container (the bordered row that includes
-   * StartAccessory, input content, and EndAccessory).
-   */
-  fieldStyle?: StyleProp<ViewStyle>;
-  /**
-   * Style overrides for the input content wrapper (the area containing
-   * the label and TextInput, excluding accessories).
-   */
-  containerStyle?: StyleProp<ViewStyle>;
-  /**
-   * Style overrides for the indicator layer (the purely visual border or line
-   * that shows state, not the interactive input).
-   * - `filled` — applied to both the always-visible bottom edge and the
-   *   animated bar that expands on focus.
-   * - `outlined` — applied to the rounded border around the field for both states.
-   */
-  outlineStyle?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
   /**
    * An optional component to render on the start side of the input (leading in LTR).
@@ -253,22 +209,13 @@ function TextField(props: TextFieldProps) {
     error,
     label,
     supportingText,
-    supportingTextProps,
-    labelProps,
     variant,
-    pressableStyle: pressableStyleOverride,
-    fieldStyle,
-    containerStyle,
-    outlineStyle,
     theme,
     StartAccessory,
     EndAccessory,
     prefix,
-    prefixProps,
     suffix,
-    suffixProps,
     counter,
-    counterProps,
     ...textInputProps
   } = props;
 
@@ -307,12 +254,7 @@ function TextField(props: TextFieldProps) {
   } = useTextField(props);
 
   return (
-    <Pressable
-      style={pressableStyleOverride}
-      onPress={focusInput}
-      accessible={false}
-      role="none"
-    >
+    <Pressable onPress={focusInput} accessible={false} role="none">
       <View style={fieldStyles}>
         {/* Disabled tint overlay — filled variant only. A childless
           absolutely-positioned View whose translucent fill is applied via the
@@ -342,7 +284,7 @@ function TextField(props: TextFieldProps) {
             pointerEvents="none"
             style={animatedLabelWrapperStyles}
           >
-            <Animated.Text {...labelProps} style={animatedLabelTextStyles}>
+            <Animated.Text style={animatedLabelTextStyles}>
               {label}
             </Animated.Text>
           </Animated.View>
@@ -359,7 +301,7 @@ function TextField(props: TextFieldProps) {
 
         <Animated.View style={[containerStyles, animatedContainerStyle]}>
           {hasPrefix && (
-            <Text aria-hidden {...prefixProps} style={prefixStyles}>
+            <Text aria-hidden style={prefixStyles}>
               {prefix}
             </Text>
           )}
@@ -380,7 +322,7 @@ function TextField(props: TextFieldProps) {
           />
 
           {hasSuffix && (
-            <Text aria-hidden {...suffixProps} style={suffixStyles}>
+            <Text aria-hidden style={suffixStyles}>
               {suffix}
             </Text>
           )}
@@ -402,7 +344,6 @@ function TextField(props: TextFieldProps) {
         {!!supportingText && (
           <Text
             aria-live={hasError ? 'assertive' : 'polite'}
-            {...supportingTextProps}
             style={supportingTextStyles}
           >
             {supportingText}
@@ -410,7 +351,7 @@ function TextField(props: TextFieldProps) {
         )}
 
         {hasCounter && (
-          <Text aria-live="polite" {...counterProps} style={counterStyles}>
+          <Text aria-live="polite" style={counterStyles}>
             {counterText}
           </Text>
         )}
