@@ -7139,19 +7139,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-module-resolver@npm:^5.0.0":
-  version: 5.0.2
-  resolution: "babel-plugin-module-resolver@npm:5.0.2"
-  dependencies:
-    find-babel-config: "npm:^2.1.1"
-    glob: "npm:^9.3.3"
-    pkg-up: "npm:^3.1.0"
-    reselect: "npm:^4.1.7"
-    resolve: "npm:^1.22.8"
-  checksum: 10c0/ccbb9e673c4219f68937349267521becb72be292cf30bf70b861c3e709d24fbfa589da0bf6c100a0def799d38199299171cb6eac3fb00b1ea740373e2c1fe54c
-  languageName: node
-  linkType: hard
-
 "babel-plugin-polyfill-corejs2@npm:^0.4.14":
   version: 0.4.14
   resolution: "babel-plugin-polyfill-corejs2@npm:0.4.14"
@@ -10666,6 +10653,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"escape-string-regexp@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "escape-string-regexp@npm:5.0.0"
+  checksum: 10c0/6366f474c6f37a802800a435232395e04e9885919873e382b157ab7e8f0feb8fed71497f84a6f6a81a49aab41815522f5839112bd38026d203aea0c91622df95
+  languageName: node
+  linkType: hard
+
 "eslint-config-prettier@npm:^8.3.0":
   version: 8.10.2
   resolution: "eslint-config-prettier@npm:8.10.2"
@@ -11650,7 +11644,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.1.1, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0":
+"fast-glob@npm:^3.1.1, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -11935,15 +11929,6 @@ __metadata:
     statuses: "npm:~2.0.2"
     unpipe: "npm:~1.0.0"
   checksum: 10c0/435a4fd65e4e4e4c71bb5474980090b73c353a123dd415583f67836bdd6516e528cf07298e219a82b94631dee7830eae5eece38d3c178073cf7df4e8c182f413
-  languageName: node
-  linkType: hard
-
-"find-babel-config@npm:^2.1.1":
-  version: 2.1.2
-  resolution: "find-babel-config@npm:2.1.2"
-  dependencies:
-    json5: "npm:^2.2.3"
-  checksum: 10c0/c9151b23d636378eae11aa761b0af41d5f67d5479e3ebfca7b0ec7feef91723f14242d243342783b89e6c51fc5b4120086eacf5d8a1a335cf7bae4b0ac89f493
   languageName: node
   linkType: hard
 
@@ -12643,18 +12628,6 @@ __metadata:
     minimatch: "npm:^5.0.1"
     once: "npm:^1.3.0"
   checksum: 10c0/cb0b5cab17a59c57299376abe5646c7070f8acb89df5595b492dba3bfb43d301a46c01e5695f01154e6553168207cb60d4eaf07d3be4bc3eb9b0457c5c561d0f
-  languageName: node
-  linkType: hard
-
-"glob@npm:^9.3.3":
-  version: 9.3.5
-  resolution: "glob@npm:9.3.5"
-  dependencies:
-    fs.realpath: "npm:^1.0.0"
-    minimatch: "npm:^8.0.2"
-    minipass: "npm:^4.2.4"
-    path-scurry: "npm:^1.6.1"
-  checksum: 10c0/2f6c2b9ee019ee21dc258ae97a88719614591e4c979cb4580b1b9df6f0f778a3cb38b4bdaf18dfa584637ea10f89a3c5f2533a5e449cf8741514ad18b0951f2e
   languageName: node
   linkType: hard
 
@@ -16056,7 +16029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^10.0.1, lru-cache@npm:^10.2.0":
+"lru-cache@npm:^10.0.1":
   version: 10.4.3
   resolution: "lru-cache@npm:10.4.3"
   checksum: 10c0/ebd04fbca961e6c1d6c0af3799adcc966a1babe798f685bb84e6599266599cd95d94630b10262f5424539bc4640107e8a33aa28585374abf561d30d16f4b39fb
@@ -16945,15 +16918,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^8.0.2":
-  version: 8.0.4
-  resolution: "minimatch@npm:8.0.4"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 10c0/a0a394c356dd5b4cb7f821720841a82fa6f07c9c562c5b716909d1b6ec5e56a7e4c4b5029da26dd256b7d2b3a3f38cbf9ddd8680e887b9b5282b09c05501c1ca
-  languageName: node
-  linkType: hard
-
 "minimist-options@npm:4.1.0":
   version: 4.1.0
   resolution: "minimist-options@npm:4.1.0"
@@ -17042,14 +17006,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass@npm:^4.2.4":
-  version: 4.2.8
-  resolution: "minipass@npm:4.2.8"
-  checksum: 10c0/4ea76b030d97079f4429d6e8a8affd90baf1b6a1898977c8ccce4701c5a2ba2792e033abc6709373f25c2c4d4d95440d9d5e9464b46b7b76ca44d2ce26d939ce
-  languageName: node
-  linkType: hard
-
-"minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0, minipass@npm:^7.0.2, minipass@npm:^7.0.3, minipass@npm:^7.0.4, minipass@npm:^7.1.2":
+"minipass@npm:^7.0.2, minipass@npm:^7.0.3, minipass@npm:^7.0.4, minipass@npm:^7.1.2":
   version: 7.1.2
   resolution: "minipass@npm:7.1.2"
   checksum: 10c0/b0fd20bb9fb56e5fa9a8bfac539e8915ae07430a619e4b86ff71f5fc757ef3924b23b2c4230393af1eda647ed3d75739e4e0acb250a6b1eb277cf7f8fe449557
@@ -18257,16 +18214,6 @@ __metadata:
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 10c0/11ce261f9d294cc7a58d6a574b7f1b935842355ec66fba3c3fd79e0f036462eaf07d0aa95bb74ff432f9afef97ce1926c720988c6a7451d8a584930ae7de86e1
-  languageName: node
-  linkType: hard
-
-"path-scurry@npm:^1.6.1":
-  version: 1.11.1
-  resolution: "path-scurry@npm:1.11.1"
-  dependencies:
-    lru-cache: "npm:^10.2.0"
-    minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
-  checksum: 10c0/32a13711a2a505616ae1cc1b5076801e453e7aae6ac40ab55b388bb91b9d0547a52f5aaceff710ea400205f18691120d4431e520afbe4266b836fadede15872d
   languageName: node
   linkType: hard
 
@@ -19680,6 +19627,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-monorepo-config@npm:^0.3.4":
+  version: 0.3.4
+  resolution: "react-native-monorepo-config@npm:0.3.4"
+  dependencies:
+    escape-string-regexp: "npm:^5.0.0"
+    fast-glob: "npm:^3.3.3"
+  checksum: 10c0/c7bf7ae964b36cec2de667791c77b4011044343ba9640a9b6e4b34c51a487441180c5e2e48133218fbd401e910be43ecf1dc96a3e79d1679dd4e4c7c89b568a5
+  languageName: node
+  linkType: hard
+
 "react-native-paper-example@workspace:example":
   version: 0.0.0-use.local
   resolution: "react-native-paper-example@workspace:example"
@@ -19691,7 +19648,6 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.3.9"
     "@react-navigation/native": "npm:^7.1.6"
     "@react-navigation/stack": "npm:^7.2.10"
-    babel-plugin-module-resolver: "npm:^5.0.0"
     babel-preset-expo: "npm:~56.0.0"
     expo: "npm:~56.0.0-preview.11"
     expo-crypto: "npm:~56.0.3"
@@ -19705,6 +19661,7 @@ __metadata:
     react-dom: "npm:19.2.3"
     react-native: "npm:0.85.3"
     react-native-gesture-handler: "npm:~2.31.1"
+    react-native-monorepo-config: "npm:^0.3.4"
     react-native-reanimated: "npm:4.3.1"
     react-native-safe-area-context: "npm:~5.7.0"
     react-native-screens: "npm:4.25.0"
@@ -20638,13 +20595,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reselect@npm:^4.1.7":
-  version: 4.1.8
-  resolution: "reselect@npm:4.1.8"
-  checksum: 10c0/06a305a504affcbb67dd0561ddc8306b35796199c7e15b38934c80606938a021eadcf68cfd58e7bb5e17786601c37602a3362a4665c7bf0a96c1041ceee9d0b7
-  languageName: node
-  linkType: hard
-
 "resolve-alpn@npm:^1.0.0":
   version: 1.2.1
   resolution: "resolve-alpn@npm:1.2.1"
@@ -20728,7 +20678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.20.0, resolve@npm:^1.22.10, resolve@npm:^1.22.4, resolve@npm:^1.22.8, resolve@npm:^1.3.2":
+"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.20.0, resolve@npm:^1.22.10, resolve@npm:^1.22.4, resolve@npm:^1.3.2":
   version: 1.22.11
   resolution: "resolve@npm:1.22.11"
   dependencies:
@@ -20754,7 +20704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.1.6#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.10#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.4#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.8#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.1.6#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.10#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.4#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
   version: 1.22.11
   resolution: "resolve@patch:resolve@npm%3A1.22.11#optional!builtin<compat/resolve>::version=1.22.11&hash=c3c19d"
   dependencies:
