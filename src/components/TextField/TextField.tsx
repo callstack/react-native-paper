@@ -23,12 +23,12 @@ import type { InternalTheme, ThemeProp } from '../../types';
 
 export type TextFieldVariant = 'filled' | 'outlined';
 
-export interface TextFieldAccessoryProps {
+export type TextFieldAccessoryProps = {
   style: StyleProp<ViewStyle>;
   multiline: boolean;
   disabled: boolean;
   error: boolean;
-}
+};
 
 export type TextFieldSharedApi = {
   input: React.RefObject<TextInput | null>;
@@ -110,7 +110,7 @@ export type TextFieldHookReturn = SharedTextFieldStyleData & {
   focusInput: () => void;
 };
 
-export interface TextFieldProps extends TextInputProps {
+export type TextFieldProps = TextInputProps & {
   /**
    * Ref forwarded to the underlying TextInput.
    */
@@ -199,7 +199,7 @@ export interface TextFieldProps extends TextInputProps {
    * Can be a custom component or `TextField.Icon`.
    */
   EndAccessory?: ComponentType<TextFieldAccessoryProps>;
-}
+};
 
 /**
  * A text field lets users enter and edit text. It shows an optional floating label,
