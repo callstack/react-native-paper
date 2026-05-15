@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import Icon from '@react-native-vector-icons/material-design-icons';
 import { useFonts } from 'expo-font';
 import {
   configureFonts,
