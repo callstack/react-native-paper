@@ -2,26 +2,18 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
 
 import ExampleList, { examples } from './ExampleList';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function Root() {
-  const cardStyleInterpolator =
-    Platform.OS === 'android'
-      ? CardStyleInterpolators.forFadeFromBottomAndroid
-      : CardStyleInterpolators.forHorizontalIOS;
   return (
     <View style={styles.stackWrapper}>
       <Stack.Navigator
         screenOptions={() => ({
-          cardStyleInterpolator,
           header: ({ navigation, route, options, back }) => (
             <Appbar.Header elevated>
               {back ? (

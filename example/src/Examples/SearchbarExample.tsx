@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Avatar,
   List,
@@ -15,7 +15,7 @@ import {
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 const SearchExample = ({ navigation }: Props) => {
