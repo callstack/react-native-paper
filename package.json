@@ -2,11 +2,9 @@
   "name": "react-native-paper",
   "version": "5.15.1",
   "description": "Material design for React Native",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
-  "react-native": "src/index.tsx",
+  "main": "lib/module/index.js",
   "source": "src/index.tsx",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
     "lib",
@@ -96,7 +94,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.85.3",
-    "react-native-builder-bob": "^0.21.3",
+    "react-native-builder-bob": "^0.41.0",
     "react-native-reanimated": "4.3.1",
     "react-native-safe-area-context": "5.7.0",
     "react-native-worklets": "0.8.3",
@@ -159,7 +157,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
       "module",
       [
         "typescript",
