@@ -36,8 +36,8 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
 
 /**
  * A component to render a leading / trailing icon in the TextField
- * (inside `StartAccessory` or `EndAccessory`). Accepts icon-specific props as well as
- * `TextFieldAccessoryProps`, which TextField forwards automatically.
+ * (return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
+ * `TextFieldAccessoryProps`, which TextField passes into those render props.
  *
  * ## Usage
  * ```js
@@ -47,11 +47,11 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
  * const MyComponent = () => {
  *   const [text, setText] = React.useState('');
  *
- *   const SearchIcon = (props) => (
+ *   const searchAccessory = (props) => (
  *     <TextField.Icon {...props} icon="magnify" />
  *   );
  *
- *   const ClearIcon = (props) => (
+ *   const clearAccessory = (props) => (
  *     <TextField.Icon {...props} icon="close" onPress={() => setText('')} />
  *   );
  *
@@ -60,8 +60,8 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
  *       label="Search"
  *       value={text}
  *       onChangeText={setText}
- *       StartAccessory={SearchIcon}
- *       EndAccessory={ClearIcon}
+ *       startAccessory={searchAccessory}
+ *       endAccessory={clearAccessory}
  *     />
  *   );
  * };

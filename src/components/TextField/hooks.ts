@@ -46,7 +46,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   const disabled = props.editable === false;
   const isFloating = isFocused || !!props.value;
   const hasError = !!props.error;
-  const hasAccessory = isRTL ? !!props.EndAccessory : !!props.StartAccessory;
+  const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
   const hasPrefix = !!props.prefix && isFloating;
   const hasSuffix = !!props.suffix && isFloating;
   const hasCounter = !!(props.counter && props.maxLength);
@@ -121,8 +121,12 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
    * Components
    */
 
-  const LeadingAccessory = isRTL ? props.EndAccessory : props.StartAccessory;
-  const TrailingAccessory = isRTL ? props.StartAccessory : props.EndAccessory;
+  const renderLeadingAccessory = isRTL
+    ? props.endAccessory
+    : props.startAccessory;
+  const renderTrailingAccessory = isRTL
+    ? props.startAccessory
+    : props.endAccessory;
   // https://github.com/facebook/react-native/issues/31573
   const placeholder = isFocused ? props.placeholder : ' ';
   const counterText = `${props.value?.length ?? 0}/${props.maxLength}`;
@@ -141,8 +145,8 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     animatedContainerStyle,
     placeholder,
     counterText,
-    LeadingAccessory,
-    TrailingAccessory,
+    renderLeadingAccessory,
+    renderTrailingAccessory,
     onFocusHandler,
     onBlurHandler,
     focusInput,

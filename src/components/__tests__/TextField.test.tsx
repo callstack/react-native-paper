@@ -65,10 +65,10 @@ it('renders filled TextField with TextField.Icon accessories', () => {
       label="Search"
       value="q"
       onChangeText={() => {}}
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" color="#49454F" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="close" color="#49454F" />
       )}
     />
@@ -84,10 +84,10 @@ it('renders outlined TextField with TextField.Icon accessories', () => {
       label="Search"
       value="q"
       onChangeText={() => {}}
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" color="#49454F" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="close" color="#49454F" />
       )}
     />
@@ -103,10 +103,10 @@ it('renders filled TextField with TextField.Icon accessories when error is true'
       value="q"
       onChangeText={() => {}}
       error
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="close" onPress={() => {}} />
       )}
     />
@@ -123,10 +123,10 @@ it('renders outlined TextField with TextField.Icon accessories when error is tru
       value="q"
       onChangeText={() => {}}
       error
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="close" onPress={() => {}} />
       )}
     />
@@ -142,10 +142,10 @@ it('fires onPress on TextField.Icon end accessory', () => {
       label="Search"
       value="x"
       onChangeText={() => {}}
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon
           {...props}
           icon="close"
@@ -168,10 +168,10 @@ it('disables TextField.Icon when the field is not editable', () => {
       value="x"
       onChangeText={() => {}}
       editable={false}
-      StartAccessory={(props: TextFieldAccessoryProps) => (
+      startAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="magnify" />
       )}
-      EndAccessory={(props: TextFieldAccessoryProps) => (
+      endAccessory={(props: TextFieldAccessoryProps) => (
         <TextField.Icon {...props} icon="close" />
       )}
     />
@@ -330,8 +330,8 @@ it('does not pass TextField-only props through to TextInput', () => {
   const input = getByTestId('tf-native');
   expect(input.props.variant).toBeUndefined();
   expect(input.props.theme).toBeUndefined();
-  expect(input.props.StartAccessory).toBeUndefined();
-  expect(input.props.EndAccessory).toBeUndefined();
+  expect(input.props.startAccessory).toBeUndefined();
+  expect(input.props.endAccessory).toBeUndefined();
   expect(input.props.label).toBeUndefined();
   expect(input.props.supportingText).toBeUndefined();
   expect(input.props.prefix).toBeUndefined();
@@ -520,8 +520,8 @@ it('passes error, disabled, and multiline to accessories', () => {
       multiline
       error
       editable={false}
-      StartAccessory={StartAccessory}
-      EndAccessory={EndAccessory}
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
     />
   );
 
@@ -554,7 +554,7 @@ it('passes error to accessories when the field is disabled', () => {
       onChangeText={() => {}}
       error
       editable={false}
-      StartAccessory={StartAccessory}
+      startAccessory={StartAccessory}
     />
   );
 
@@ -684,8 +684,8 @@ it('places EndAccessory before StartAccessory in the tree when RTL', () => {
       label="Email"
       value=""
       onChangeText={() => {}}
-      StartAccessory={StartAccessory}
-      EndAccessory={EndAccessory}
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
       testID="tf-input-rtl-order"
     />
   );
@@ -712,8 +712,8 @@ it('places StartAccessory before EndAccessory in the tree when LTR', () => {
       label="Email"
       value=""
       onChangeText={() => {}}
-      StartAccessory={StartAccessory}
-      EndAccessory={EndAccessory}
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
       testID="tf-input-ltr-order"
     />
   );
@@ -805,7 +805,7 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
       label="Email"
       value=""
       onChangeText={() => {}}
-      StartAccessory={LoneStartAccessory}
+      startAccessory={LoneStartAccessory}
       testID="tf-lone-ltr"
     />
   );
@@ -817,7 +817,7 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
       label="Email"
       value=""
       onChangeText={() => {}}
-      StartAccessory={LoneStartAccessory}
+      startAccessory={LoneStartAccessory}
       testID="tf-lone-rtl"
     />
   );

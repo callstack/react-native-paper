@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import {
   BlurEvent,
   ColorValue,
@@ -103,8 +103,12 @@ export type TextFieldHookReturn = SharedTextFieldStyleData & {
   inputStyles: StyleProp<TextStyle>;
   placeholder: string | undefined;
   counterText: string;
-  LeadingAccessory: ComponentType<TextFieldAccessoryProps> | undefined;
-  TrailingAccessory: ComponentType<TextFieldAccessoryProps> | undefined;
+  renderLeadingAccessory:
+    | ((props: TextFieldAccessoryProps) => React.ReactNode)
+    | undefined;
+  renderTrailingAccessory:
+    | ((props: TextFieldAccessoryProps) => React.ReactNode)
+    | undefined;
   onFocusHandler: (e: FocusEvent) => void;
   onBlurHandler: (e: BlurEvent) => void;
   focusInput: () => void;
@@ -150,12 +154,12 @@ export type TextFieldProps = TextInputProps & {
    * An optional component to render on the start side of the input (leading in LTR).
    * Can be a custom component or `TextField.Icon`.
    */
-  StartAccessory?: ComponentType<TextFieldAccessoryProps>;
+  startAccessory?: (props: TextFieldAccessoryProps) => React.ReactNode;
   /**
    * An optional component to render on the end side of the input (trailing in LTR).
    * Can be a custom component or `TextField.Icon`.
    */
-  EndAccessory?: ComponentType<TextFieldAccessoryProps>;
+  endAccessory?: (props: TextFieldAccessoryProps) => React.ReactNode;
 };
 
 /**
@@ -171,11 +175,11 @@ export type TextFieldProps = TextInputProps & {
  * const MyComponent = () => {
  *   const [text, setText] = React.useState('');
  *
- *   const SearchIcon = (props) => (
- *     <TextField.Icon {...props} icon="magnify" />
+ *   const searchAccessory = (accessoryProps) => (
+ *     <TextField.Icon {...accessoryProps} icon="magnify" />
  *   );
  *
- *   const ClearAccessory = ({ style, disabled }) => (
+ *   const clearAccessory = ({ style, disabled }) => (
  *     <Pressable
  *       style={style}
  *       disabled={disabled}
@@ -192,8 +196,8 @@ export type TextFieldProps = TextInputProps & {
  *       label="Search"
  *       value={text}
  *       onChangeText={setText}
- *       StartAccessory={SearchIcon}
- *       EndAccessory={ClearAccessory}
+ *       startAccessory={searchAccessory}
+ *       endAccessory={clearAccessory}
  *     />
  *   );
  * };
@@ -212,8 +216,8 @@ function TextField(props: TextFieldProps) {
     supportingText,
     variant,
     theme,
-    StartAccessory,
-    EndAccessory,
+    startAccessory,
+    endAccessory,
     prefix,
     suffix,
     counter,
@@ -247,8 +251,8 @@ function TextField(props: TextFieldProps) {
     cursorColor,
     placeholder,
     counterText,
-    LeadingAccessory,
-    TrailingAccessory,
+    renderLeadingAccessory,
+    renderTrailingAccessory,
     focusInput,
     onFocusHandler,
     onBlurHandler,
@@ -284,14 +288,14 @@ function TextField(props: TextFieldProps) {
           </Animated.View>
         )}
 
-        {!!LeadingAccessory && (
-          <LeadingAccessory
-            style={leadingAccessoryStyles}
-            error={hasError}
-            disabled={disabled}
-            multiline={!!textInputProps.multiline}
-          />
-        )}
+        {renderLeadingAccessory
+          ? renderLeadingAccessory({
+              style: leadingAccessoryStyles,
+              error: hasError,
+              disabled,
+              multiline: !!textInputProps.multiline,
+            })
+          : null}
 
         <Animated.View style={[containerStyles, animatedContainerStyle]}>
           {hasPrefix && (
@@ -322,13 +326,13 @@ function TextField(props: TextFieldProps) {
           )}
         </Animated.View>
 
-        {TrailingAccessory ? (
-          <TrailingAccessory
-            style={trailingAccessoryStyles}
-            error={hasError}
-            disabled={disabled}
-            multiline={!!textInputProps.multiline}
-          />
+        {renderTrailingAccessory ? (
+          renderTrailingAccessory({
+            style: trailingAccessoryStyles,
+            error: hasError,
+            disabled,
+            multiline: !!textInputProps.multiline,
+          })
         ) : hasError ? (
           <TextFieldErrorIcon style={trailingAccessoryStyles} theme={theme} />
         ) : null}

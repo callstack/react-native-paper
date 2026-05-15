@@ -74,18 +74,12 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
   const setModifier = (key: keyof DemoModifiers, text: string) =>
     setModifiers((prev) => ({ ...prev, [key]: text }));
 
-  const LeadingIcon = React.useCallback(
-    (props: TextFieldAccessoryProps) => (
-      <TextField.Icon {...props} icon="magnify" />
-    ),
-    []
+  const leadingIcon = (props: TextFieldAccessoryProps) => (
+    <TextField.Icon {...props} icon="magnify" />
   );
 
-  const TrailingIcon = React.useCallback(
-    (props: TextFieldAccessoryProps) => (
-      <TextField.Icon {...props} icon="close" onPress={() => setValue('')} />
-    ),
-    []
+  const trailingIcon = (props: TextFieldAccessoryProps) => (
+    <TextField.Icon {...props} icon="close" onPress={() => setValue('')} />
   );
 
   const inputColor = theme.colors.onSurfaceVariant;
@@ -136,8 +130,8 @@ const TextFieldDemo = ({ variant }: TextFieldDemoProps) => {
         maxLength={controls.counter ? 100 : undefined}
         prefix={controls.showPrefix ? modifiers.prefix : undefined}
         suffix={controls.showSuffix ? modifiers.suffix : undefined}
-        StartAccessory={controls.leadingIcon ? LeadingIcon : undefined}
-        EndAccessory={controls.trailingIcon ? TrailingIcon : undefined}
+        startAccessory={controls.leadingIcon ? leadingIcon : undefined}
+        endAccessory={controls.trailingIcon ? trailingIcon : undefined}
       />
 
       <Divider style={styles.divider} />
