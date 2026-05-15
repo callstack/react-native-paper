@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Appbar,
   BottomNavigation,
@@ -22,7 +22,7 @@ import ScreenWrapper from '../ScreenWrapper';
 type Route = { route: { key: string } };
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';

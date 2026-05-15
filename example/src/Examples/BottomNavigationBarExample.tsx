@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 import Icon from '@react-native-vector-icons/material-design-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { CommonActions } from '@react-navigation/native';
+import {
+  CommonActions,
+  SFSymbol,
+  MaterialSymbol,
+} from '@react-navigation/native';
 import { Text, BottomNavigation } from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
@@ -30,10 +34,9 @@ export default function BottomNavigationBarExample() {
       screenOptions={{
         headerShown: false,
       }}
-      tabBar={({ navigation, state, descriptors, insets }) => (
+      tabBar={({ navigation, state, descriptors }) => (
         <BottomNavigation.Bar
           navigationState={state}
-          safeAreaInsets={insets}
           onTabPress={({ route, preventDefault }) => {
             const event = navigation.emit({
               type: 'tabPress',
@@ -50,13 +53,54 @@ export default function BottomNavigationBarExample() {
               });
             }
           }}
-          renderIcon={({ route, focused, color }) =>
-            descriptors[route.key].options.tabBarIcon?.({
-              focused,
-              color: typeof color === 'string' ? color : '',
-              size: 24,
-            }) || null
-          }
+          renderIcon={({ route, focused, color }) => {
+            const tabBarIcon = descriptors[route.key].options.tabBarIcon;
+
+            const size = 24;
+            const icon =
+              typeof tabBarIcon === 'function'
+                ? tabBarIcon({ focused, color, size })
+                : tabBarIcon;
+
+            if (icon == null) {
+              return null;
+            }
+
+            if (React.isValidElement(icon)) {
+              return icon;
+            }
+
+            if (typeof icon === 'object' && icon !== null && 'type' in icon) {
+              switch (icon.type) {
+                case 'sfSymbol':
+                  return (
+                    <SFSymbol name={icon.name} size={size} color={color} />
+                  );
+                case 'materialSymbol':
+                  return (
+                    <MaterialSymbol
+                      name={icon.name}
+                      size={size}
+                      color={color}
+                    />
+                  );
+                case 'image':
+                  return (
+                    <Image
+                      accessibilityIgnoresInvertColors
+                      source={icon.source}
+                      resizeMode="contain"
+                      fadeDuration={0}
+                      style={{ width: size, height: size, tintColor: color }}
+                    />
+                  );
+              }
+            }
+
+            throw new Error(
+              'Tab bar icon is not a valid React element, SFSymbol, MaterialSymbol, or Image.'
+            );
+          }}
           getLabelText={({ route }) => descriptors[route.key].route.name}
         />
       )}

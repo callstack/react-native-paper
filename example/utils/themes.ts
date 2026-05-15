@@ -1,12 +1,14 @@
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
+  Theme as ReactNavigationTheme,
 } from '@react-navigation/native';
 import {
   adaptNavigationTheme,
   DarkTheme,
   LightTheme,
   configureFonts,
+  Theme,
 } from 'react-native-paper';
 
 const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
@@ -41,9 +43,9 @@ export const CombinedDarkTheme = {
   },
 };
 
-type CombinedTheme = typeof CombinedDefaultTheme;
-
-export const createConfiguredFontTheme = (theme: CombinedTheme) => ({
+export const createConfiguredFontTheme = (
+  theme: Theme & ReactNavigationTheme
+) => ({
   ...theme,
   fonts: configureFonts({
     config: {
@@ -52,7 +54,9 @@ export const createConfiguredFontTheme = (theme: CombinedTheme) => ({
   }),
 });
 
-export const createConfiguredFontNavigationTheme = (theme: CombinedTheme) => ({
+export const createConfiguredFontNavigationTheme = (
+  theme: Theme & ReactNavigationTheme
+) => ({
   ...theme,
   fonts: {
     ...theme.fonts,

@@ -8,11 +8,11 @@ title: Integrate AppBar with React Navigation
 
  - `react-native-paper`
  - `react-navigation`
- 
+
 We assume that you have already installed the mentioned libraries above, otherwise please check out the guides below.
- 
+
  [React Native Paper - Getting Started](https://callstack.github.io/react-native-paper/docs/guides/getting-started)
- 
+
  [React Navigation - Getting Started](https://reactnavigation.org/docs/getting-started/)
 
 ## Stack Navigator
@@ -26,9 +26,9 @@ Let's create two screens. A main screen named `Home` and details screen named `D
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -276,6 +276,6 @@ Final result:
 
 <img src="/react-native-paper/screenshots/react-navigation-appBar4.gif" width="300" />
 
-That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great. 
+That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great.
 
 Grab the Expo [snack](https://snack.expo.dev/@react-native-paper/integrate-appbar-with-react-navigation) if you want to check the whole code!

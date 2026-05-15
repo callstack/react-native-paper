@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Divider, List, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -115,7 +115,7 @@ export const examples: Record<
 };
 
 type Props = {
-  navigation: StackNavigationProp<{ [key: string]: undefined }>;
+  navigation: NativeStackNavigationProp<{ [key: string]: undefined }>;
 };
 
 type Item = {

@@ -13,7 +13,7 @@ But how to make them work together?
 
 ### Material Design 3
 
-React Native Paper follows the Material Design 3 <i>(Material You)</i> color system, which differs from React Navigation’s default theme shape. 
+React Native Paper follows the Material Design 3 <i>(Material You)</i> color system, which differs from React Navigation’s default theme shape.
 
 However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called `adaptNavigationTheme` – it accepts navigation-compliant themes in both modes and returns their equivalents adjusted to Material Design 3.
 
@@ -47,7 +47,7 @@ For React Native Paper theme to work, we need to use `PaperProvider` also at the
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native';
 import {
   Card,
@@ -56,7 +56,7 @@ import {
   PaperProvider,
 } from 'react-native-paper';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const HomeScreen = ({ navigation }) => (
   <TouchableOpacity
