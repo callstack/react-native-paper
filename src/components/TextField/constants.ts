@@ -1,10 +1,8 @@
-import { I18nManager, PixelRatio, Platform } from 'react-native';
+import { I18nManager, PixelRatio } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
 import { motionDuration } from '../../theme/tokens/sys/motion';
 import { defaultShapes } from '../../theme/tokens/sys/shape';
-
-export const isWeb = Platform.OS === 'web';
 
 export const fontScale = PixelRatio.getFontScale();
 

@@ -1,4 +1,10 @@
-import { I18nManager, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import {
+  I18nManager,
+  Platform,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 import { AnimatedStyle } from 'react-native-reanimated';
 
@@ -23,7 +29,6 @@ import {
   PREFIX_END_PADDING,
   SUFFIX_START_PADDING,
   TEXT_FIELD_BORDER_RADIUS,
-  isWeb,
 } from './constants';
 import { filledStyles, outlinedStyles, styles } from './styles';
 import type {
@@ -463,7 +468,7 @@ export const getFilledTextFieldData = (
       height: 'auto',
       paddingTop: FILLED_MULTILINE_PADDING_TOP,
     },
-    isWeb && {
+    Platform.OS === 'web' && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],
     },
     disabled && styles.disabled,
@@ -580,7 +585,7 @@ export const getOutlinedTextFieldData = (
       textAlignVertical: 'top',
       paddingTop: OUTLINED_MULTILINE_PADDING_TOP,
     },
-    isWeb && {
+    Platform.OS === 'web' && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],
     },
     disabled && styles.disabled,
