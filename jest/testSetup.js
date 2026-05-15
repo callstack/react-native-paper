@@ -86,8 +86,6 @@ jest.mock('react-native', () => {
   RN.Animated.loop = loop;
   RN.Animated.parallel = parallel;
 
-  jest.spyOn(RN.PixelRatio, 'getFontScale').mockReturnValue(1);
-
   return RN;
 });
 

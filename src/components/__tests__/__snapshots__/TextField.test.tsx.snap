@@ -38,8 +38,8 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
@@ -152,7 +152,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "left": 52,
           },
           {
-            "top": 8,
+            "top": 16,
             "transitionDuration": 150,
             "transitionProperty": "top",
           },
@@ -168,7 +168,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "left": 52,
           },
           {
-            "top": 8,
+            "top": 16,
           },
         ]
       }
@@ -680,8 +680,8 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
@@ -794,7 +794,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "left": 52,
           },
           {
-            "top": 8,
+            "top": 16,
             "transitionDuration": 150,
             "transitionProperty": "top",
           },
@@ -810,7 +810,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "left": 52,
           },
           {
-            "top": 8,
+            "top": 16,
           },
         ]
       }
@@ -1322,8 +1322,8 @@ exports[`renders filled TextField with label and value 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
@@ -1436,7 +1436,7 @@ exports[`renders filled TextField with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": 8,
+            "top": 16,
             "transitionDuration": 150,
             "transitionProperty": "top",
           },
@@ -1452,7 +1452,7 @@ exports[`renders filled TextField with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": 8,
+            "top": 16,
           },
         ]
       }
@@ -1638,8 +1638,8 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
@@ -1693,7 +1693,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             "left": 48,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -36,
@@ -1719,7 +1719,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             "left": 48,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -36,
@@ -2236,8 +2236,8 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
@@ -2291,7 +2291,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             "left": 48,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -36,
@@ -2317,7 +2317,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             "left": 48,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -36,
@@ -2834,8 +2834,8 @@ exports[`renders outlined TextField with label and value 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 56,
-          "paddingVertical": 8,
+          "minHeight": 112,
+          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
@@ -2889,7 +2889,7 @@ exports[`renders outlined TextField with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -4,
@@ -2915,7 +2915,7 @@ exports[`renders outlined TextField with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": -6,
+            "top": -12,
             "transform": [
               {
                 "translateX": -4,
