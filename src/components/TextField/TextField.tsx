@@ -261,29 +261,22 @@ function TextField(props: TextFieldProps) {
           `opacity` style, so it never affects label/input rendering and works
           with PlatformColor on Android. */}
         {!!disabledBackgroundStyles && (
-          <View pointerEvents="none" style={disabledBackgroundStyles} />
+          <View style={disabledBackgroundStyles} />
         )}
 
         {/* Inactive indicator — always-visible 1px bottom border (filled) or
           full border (outlined); height and color reflect error/disabled state
           but do not change on focus */}
-        <View pointerEvents="none" style={outlineStyles} />
+        <View style={outlineStyles} />
 
         {/* Active indicator — filled variant only; 2px bar that expands from
           the center outward via scaleX (0 → 1) on focus and collapses on blur */}
         {!!animatedActiveOutlineStyles && (
-          <Animated.View
-            pointerEvents="none"
-            style={animatedActiveOutlineStyles}
-          />
+          <Animated.View style={animatedActiveOutlineStyles} />
         )}
 
         {!!label && (
-          <Animated.View
-            aria-hidden
-            pointerEvents="none"
-            style={animatedLabelWrapperStyles}
-          >
+          <Animated.View aria-hidden style={animatedLabelWrapperStyles}>
             <Animated.Text style={animatedLabelTextStyles}>
               {label}
             </Animated.Text>

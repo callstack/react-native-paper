@@ -81,6 +81,7 @@ export const filledStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    pointerEvents: 'none',
   },
   container: {
     flex: 1,
@@ -90,6 +91,7 @@ export const filledStyles = StyleSheet.create({
   },
   labelWrapper: {
     position: 'absolute',
+    pointerEvents: 'none',
   },
   disabledBackground: {
     position: 'absolute',
@@ -98,6 +100,7 @@ export const filledStyles = StyleSheet.create({
     right: 0,
     bottom: 0,
     opacity: FILLED_DISABLED_CONTAINER_OPACITY,
+    pointerEvents: 'none',
   },
 });
 
@@ -109,6 +112,7 @@ export const outlinedStyles = StyleSheet.create({
     top: 0,
     bottom: 0,
     borderRadius: TEXT_FIELD_BORDER_RADIUS,
+    pointerEvents: 'none',
   },
   container: {
     flex: 1,
@@ -119,5 +123,6 @@ export const outlinedStyles = StyleSheet.create({
   labelWrapper: {
     position: 'absolute',
     paddingHorizontal: OUTLINED_LABEL_PADDING_HORIZONTAL,
+    pointerEvents: 'none',
   },
 });

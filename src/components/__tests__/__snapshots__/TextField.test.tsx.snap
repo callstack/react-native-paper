@@ -51,12 +51,12 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -85,6 +85,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -104,12 +105,12 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -144,6 +145,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       jestInlineStyle={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -156,10 +158,10 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -691,12 +693,12 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -725,6 +727,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -744,12 +747,12 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -784,6 +787,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       jestInlineStyle={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -796,10 +800,10 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -1331,12 +1335,12 @@ exports[`renders filled TextField with label and value 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -1365,6 +1369,7 @@ exports[`renders filled TextField with label and value 1`] = `
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -1384,12 +1389,12 @@ exports[`renders filled TextField with label and value 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
           },
@@ -1424,6 +1429,7 @@ exports[`renders filled TextField with label and value 1`] = `
       jestInlineStyle={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -1436,10 +1442,10 @@ exports[`renders filled TextField with label and value 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -1643,13 +1649,13 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "borderRadius": 4,
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -1679,6 +1685,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -1700,11 +1707,11 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -2240,13 +2247,13 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "borderRadius": 4,
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -2276,6 +2283,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -2297,11 +2305,11 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -2837,13 +2845,13 @@ exports[`renders outlined TextField with label and value 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         [
           {
             "borderRadius": 4,
             "bottom": 0,
             "left": 0,
+            "pointerEvents": "none",
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -2873,6 +2881,7 @@ exports[`renders outlined TextField with label and value 1`] = `
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
@@ -2894,11 +2903,11 @@ exports[`renders outlined TextField with label and value 1`] = `
           },
         ]
       }
-      pointerEvents="none"
       style={
         [
           {
             "paddingHorizontal": 4,
+            "pointerEvents": "none",
             "position": "absolute",
           },
           {
