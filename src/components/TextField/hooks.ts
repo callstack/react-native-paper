@@ -1,5 +1,5 @@
 import { useImperativeHandle, useRef, useState } from 'react';
-import { BlurEvent, FocusEvent, I18nManager, TextInput } from 'react-native';
+import { BlurEvent, FocusEvent, TextInput } from 'react-native';
 
 import type {
   TextFieldHookReturn,
@@ -12,6 +12,7 @@ import {
   getOutlinedTextFieldData,
   getTextFieldAnimation,
 } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 
 export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
@@ -31,6 +32,8 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const theme = useInternalTheme(themeOverride);
 
+  const { direction } = useLocale();
+
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   useImperativeHandle(ref, () => input.current as TextInput);
@@ -39,7 +42,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
    * Constants
    */
 
-  const { isRTL } = I18nManager.getConstants();
+  const isRTL = direction === 'rtl';
   const disabled = props.editable === false;
   const isFloating = isFocused || !!props.value;
   const hasError = !!props.error;
@@ -73,6 +76,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     variant,
     isFloating,
     isFocused,
+    isRTL,
     hasAccessory,
   });
 
@@ -103,6 +107,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     input,
     theme,
     isFocused,
+    isRTL,
     disabled,
     hasAccessory,
     hasError,

@@ -33,6 +33,7 @@ export type TextFieldSharedApi = {
   input: React.RefObject<TextInput | null>;
   theme: InternalTheme;
   isFocused: boolean;
+  isRTL: boolean;
   disabled: boolean;
   hasAccessory: boolean;
   hasError: boolean;

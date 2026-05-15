@@ -1,10 +1,4 @@
-import {
-  I18nManager,
-  Platform,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { Platform, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { AnimatedStyle } from 'react-native-reanimated';
 
@@ -23,8 +17,8 @@ import {
   OUTLINED_ACTIVE_LABEL_TOP_POSITION,
   OUTLINED_DISABLED_OUTLINE_OPACITY,
   OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
-  OUTLINED_LABEL_TRANSLATE_X_WITHOUT_ACCESSORY,
-  OUTLINED_LABEL_TRANSLATE_X_WITH_ACCESSORY,
+  OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
+  OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY,
   OUTLINED_MULTILINE_PADDING_TOP,
   PREFIX_END_PADDING,
   SUFFIX_START_PADDING,
@@ -187,9 +181,14 @@ export const getOutlineColor = ({
 export const getSharedTextFieldStyleData = (
   api: TextFieldSharedApi
 ): SharedTextFieldStyleData => {
-  const { isRTL } = I18nManager.getConstants();
-
-  const { theme, disabled, hasError, isFocused, animatedLabelTextStyle } = api;
+  const {
+    theme,
+    disabled,
+    hasError,
+    isFocused,
+    isRTL,
+    animatedLabelTextStyle,
+  } = api;
 
   const labelColor = getLabelColor({ theme, hasError, isFocused, disabled });
 
@@ -275,11 +274,13 @@ export const getTextFieldAnimation = ({
   variant,
   isFloating,
   isFocused,
+  isRTL,
   hasAccessory,
 }: {
   variant: 'filled' | 'outlined';
   isFloating: boolean;
   isFocused: boolean;
+  isRTL: boolean;
   hasAccessory: boolean;
 }): {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -325,9 +326,10 @@ export const getTextFieldAnimation = ({
     };
   }
 
-  const translateXEnd = hasAccessory
-    ? OUTLINED_LABEL_TRANSLATE_X_WITH_ACCESSORY
-    : OUTLINED_LABEL_TRANSLATE_X_WITHOUT_ACCESSORY;
+  const distance = hasAccessory
+    ? OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY
+    : OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY;
+  const translateXEnd = (isRTL ? 1 : -1) * distance;
 
   return {
     animatedLabelWrapperStyle: {

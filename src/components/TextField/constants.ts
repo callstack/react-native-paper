@@ -1,4 +1,4 @@
-import { I18nManager, PixelRatio } from 'react-native';
+import { PixelRatio } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
 import { motionDuration } from '../../theme/tokens/sys/motion';
@@ -56,9 +56,6 @@ export const ANIMATION_DURATION_MS = motionDuration.short3;
 export const ACTIVE_INDICATOR_SIZE = 2;
 export const INACTIVE_INDICATOR_SIZE = 1;
 
-const isRTL = I18nManager.getConstants().isRTL;
-const layoutSupportMultiplier = isRTL ? -1 : 1;
-
 /**
  * Constants for the filled variant.
  */
@@ -100,11 +97,12 @@ export const OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY =
 export const OUTLINED_ACTIVE_LABEL_TOP_POSITION =
   (-BASELINE_TEXT_FIELD_PADDING_VERTICAL + LINE_HEIGHT_DELTA) * fontScale;
 
-export const OUTLINED_LABEL_TRANSLATE_X_WITH_ACCESSORY =
-  -layoutSupportMultiplier *
-  (ACCESSORY_SIZE +
-    TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL -
-    OUTLINED_LABEL_PADDING_HORIZONTAL);
+/** Positive distance; apply sign in animation using `isRTL` from `useLocale`. */
+export const OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY =
+  ACCESSORY_SIZE +
+  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL -
+  OUTLINED_LABEL_PADDING_HORIZONTAL;
 
-export const OUTLINED_LABEL_TRANSLATE_X_WITHOUT_ACCESSORY =
-  -layoutSupportMultiplier * OUTLINED_LABEL_PADDING_HORIZONTAL;
+/** Positive distance; apply sign in animation using `isRTL` from `useLocale`. */
+export const OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY =
+  OUTLINED_LABEL_PADDING_HORIZONTAL;
