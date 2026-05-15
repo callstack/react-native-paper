@@ -18,7 +18,7 @@ const ast = parser.parse(source, {
   ],
 });
 
-const index = packageJson.module;
+const index = packageJson.main;
 const relative = (value /* : string */) =>
   path.relative(root, path.resolve(path.dirname(index), value));
 

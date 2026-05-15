@@ -1,10 +1,8 @@
 import * as React from 'react';
 import type { Animated, StyleProp, View, ViewStyle } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { useInternalTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';

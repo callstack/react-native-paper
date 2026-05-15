@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
