@@ -227,33 +227,22 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginStart": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginStart": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -261,7 +250,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -270,12 +259,14 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -321,6 +312,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -469,33 +461,22 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginEnd": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginEnd": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -503,7 +484,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -512,12 +493,14 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -563,6 +546,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -868,33 +852,22 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginStart": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginStart": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -902,7 +875,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -911,12 +884,14 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -962,6 +937,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1110,33 +1086,22 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginEnd": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginEnd": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1144,7 +1109,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -1153,12 +1118,14 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -1204,6 +1171,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1780,33 +1748,22 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginStart": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginStart": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1814,7 +1771,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -1823,12 +1780,14 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -1874,6 +1833,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -2022,33 +1982,22 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginEnd": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginEnd": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2056,7 +2005,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -2065,12 +2014,14 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -2116,6 +2067,7 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -2377,33 +2329,22 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginStart": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginStart": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2411,7 +2352,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -2420,12 +2361,14 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -2471,6 +2414,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -2619,33 +2563,22 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
     </View>
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          [
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "height": 24,
-              "justifyContent": "center",
-              "marginEnd": 12,
-              "width": 24,
-            },
-            false,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
       }
     >
       <View
         collapsable={false}
         style={
           {
+            "alignSelf": "center",
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "height": 40,
+            "height": 24,
             "margin": 0,
+            "marginEnd": 12,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2653,7 +2586,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "width": 40,
+            "width": 24,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -2662,12 +2595,14 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
           collapsable={false}
           style={
             {
+              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
+              "justifyContent": "center",
               "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -2713,6 +2648,7 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
                 "top": 6,
               }
             }
+            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

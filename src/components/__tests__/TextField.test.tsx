@@ -69,10 +69,10 @@ it('renders filled TextField with TextField.Icon accessories', () => {
       value="q"
       onChangeText={() => {}}
       startAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="magnify" color="#49454F" />
+        <TextField.Icon {...props} icon="magnify" iconColor="#49454F" />
       )}
       endAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="close" color="#49454F" />
+        <TextField.Icon {...props} icon="close" iconColor="#49454F" />
       )}
     />
   ).toJSON();
@@ -88,10 +88,10 @@ it('renders outlined TextField with TextField.Icon accessories', () => {
       value="q"
       onChangeText={() => {}}
       startAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="magnify" color="#49454F" />
+        <TextField.Icon {...props} icon="magnify" iconColor="#49454F" />
       )}
       endAccessory={(props: TextFieldAccessoryProps) => (
-        <TextField.Icon {...props} icon="close" color="#49454F" />
+        <TextField.Icon {...props} icon="close" iconColor="#49454F" />
       )}
     />
   ).toJSON();
@@ -153,7 +153,7 @@ it('fires onPress on TextField.Icon end accessory', () => {
           {...props}
           icon="close"
           onPress={onClear}
-          accessibility={{ accessibilityLabel: 'Clear' }}
+          accessibilityLabel="Clear"
         />
       )}
     />

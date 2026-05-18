@@ -1,38 +1,17 @@
 import React from 'react';
-import { AccessibilityProps, GestureResponderEvent, View } from 'react-native';
+import { View } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import type { IconSource } from '../Icon';
 import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import type { TextFieldAccessoryProps } from './TextField';
 import { getIconColor } from './utils';
-import IconButton from '../IconButton/IconButton';
+import { useInternalTheme } from '../../core/theming';
+import IconButton, {
+  type Props as IconButtonProps,
+} from '../IconButton/IconButton';
 
-export interface TextFieldIconProps extends TextFieldAccessoryProps {
-  /**
-   * Icon to display.
-   */
-  icon: IconSource;
-  /**
-   * Color of the icon.
-   */
-  color?: string;
-  /**
-   * Size of the icon.
-   */
-  size?: number;
-  /**
-   * Accessibility props for the icon button.
-   */
-  accessibility?: AccessibilityProps;
-  theme?: ThemeProp;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: (event: GestureResponderEvent) => void;
-}
+export type TextFieldIconProps = TextFieldAccessoryProps &
+  Omit<IconButtonProps, 'style' | 'disabled'>;
 
 /**
  * A component to render a leading / trailing icon in the TextField
@@ -71,22 +50,22 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
  */
 const TextFieldIcon = ({
   icon,
-  color,
+  iconColor,
   size,
   style,
   error,
   disabled,
-  accessibility,
   theme: themeOverride,
   onPress,
+  ...rest
 }: TextFieldIconProps) => {
   const theme = useInternalTheme(themeOverride);
 
   const iconSize = size ?? ACCESSORY_SIZE;
 
-  const iconColor = getIconColor({
+  const color = getIconColor({
     theme,
-    color,
+    iconColor,
     hasError: error,
     isDisabled: disabled,
   });
@@ -94,14 +73,14 @@ const TextFieldIcon = ({
   const onPressHandler = disabled ? undefined : onPress;
 
   return (
-    <View style={[styles.iconWrapper, style]}>
+    <View style={styles.iconWrapper}>
       <IconButton
+        {...rest}
         icon={icon}
-        iconColor={iconColor}
+        iconColor={color}
         size={iconSize}
-        style={styles.icon}
+        style={[styles.icon, style]}
         onPress={onPressHandler}
-        {...accessibility}
       />
     </View>
   );

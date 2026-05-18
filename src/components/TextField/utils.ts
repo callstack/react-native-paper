@@ -121,16 +121,16 @@ export const getFieldBackgroundColor = ({
 
 export const getIconColor = ({
   theme,
-  color,
+  iconColor,
   hasError,
   isDisabled,
 }: {
   theme: InternalTheme;
-  color?: string;
+  iconColor?: string;
   hasError: boolean;
   isDisabled: boolean;
 }) => {
-  if (color) return color;
+  if (iconColor) return iconColor;
   if (hasError) return theme.colors.error;
   if (isDisabled) return theme.colors.onSurface;
   return theme.colors.onSurfaceVariant;
