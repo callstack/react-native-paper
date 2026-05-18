@@ -470,8 +470,9 @@ export const getFilledTextFieldData = (
       height: 'auto',
       paddingTop: FILLED_MULTILINE_PADDING_TOP,
     },
+    //@ts-expect-error - RN’s defs are narrower than CSS and RNW does not ship TS extensions that fix that
     Platform.OS === 'web' && {
-      outlineStyle: 'none' as TextStyle['outlineStyle'],
+      outlineStyle: 'none' as const,
     },
     isDisabled && styles.disabled,
     inputStyleOverride,
@@ -587,8 +588,9 @@ export const getOutlinedTextFieldData = (
       textAlignVertical: 'top',
       paddingTop: OUTLINED_MULTILINE_PADDING_TOP,
     },
+    //@ts-expect-error - RN’s defs are narrower than CSS and RNW does not ship TS extensions that fix that
     Platform.OS === 'web' && {
-      outlineStyle: 'none' as TextStyle['outlineStyle'],
+      outlineStyle: 'none' as const,
     },
     isDisabled && styles.disabled,
     inputStyleOverride,
