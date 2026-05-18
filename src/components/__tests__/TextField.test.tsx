@@ -4,7 +4,10 @@ import { I18nManager, StyleSheet, TextInput, View } from 'react-native';
 import { fireEvent, render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextField from '../TextField';
-import type { TextFieldAccessoryProps } from '../TextField/TextField';
+import type {
+  TextFieldAccessoryProps,
+  TextFieldRenderProps,
+} from '../TextField/TextField';
 
 const { stateOpacity } = tokens.md.ref;
 
@@ -216,20 +219,6 @@ it('renders supporting text below the field', () => {
   expect(getByText('Use a valid address')).toBeTruthy();
 });
 
-it('sets aria-invalid on the input when error is true', () => {
-  const { getByTestId } = render(
-    <TextField
-      label="Email"
-      value="bad"
-      onChangeText={() => {}}
-      error
-      testID="tf-input"
-    />
-  );
-
-  expect(getByTestId('tf-input').props['aria-invalid']).toBe(true);
-});
-
 it('uses assertive aria-live on supporting text when error is true', () => {
   const { getByText } = render(
     <TextField
@@ -285,38 +274,25 @@ it('marks the input as aria-disabled when disabled is true', () => {
   expect(getByTestId('tf-input').props['aria-disabled']).toBe(true);
 });
 
-it('marks the input as aria-invalid but not aria-disabled when error and read-only', () => {
+it('renders the input via render with merged props', () => {
+  const renderInput = jest.fn((props: TextFieldRenderProps) => (
+    <TextInput {...props} testID="custom-input" />
+  ));
+
   const { getByTestId } = render(
     <TextField
-      label="Email"
-      value="x"
+      label="Pin"
+      value="12"
       onChangeText={() => {}}
-      error
-      editable={false}
-      testID="tf-input"
+      render={renderInput}
     />
   );
 
-  const input = getByTestId('tf-input');
-  expect(input.props['aria-invalid']).toBe(true);
-  expect(input.props['aria-disabled']).not.toBe(true);
-});
-
-it('marks the input as aria-invalid and aria-disabled when error and disabled', () => {
-  const { getByTestId } = render(
-    <TextField
-      label="Email"
-      value="x"
-      onChangeText={() => {}}
-      error
-      disabled
-      testID="tf-input"
-    />
-  );
-
-  const input = getByTestId('tf-input');
-  expect(input.props['aria-invalid']).toBe(true);
-  expect(input.props['aria-disabled']).toBe(true);
+  expect(getByTestId('custom-input')).toBeTruthy();
+  expect(renderInput).toHaveBeenCalled();
+  const merged = renderInput.mock.calls[0]?.[0] as TextFieldRenderProps;
+  expect(merged['aria-label']).toBe('Pin');
+  expect(merged.value).toBe('12');
 });
 
 it('does not apply disabled opacity to the TextInput when editable is false (filled)', () => {

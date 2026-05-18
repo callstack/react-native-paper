@@ -133,8 +133,9 @@ export type { Props as TextInputProps } from './components/TextInput/TextInput';
 export type { Props as TextInputAffixProps } from './components/TextInput/Adornment/TextInputAffix';
 export type { Props as TextInputIconProps } from './components/TextInput/Adornment/TextInputIcon';
 export type {
-  TextFieldProps,
   TextFieldAccessoryProps,
+  TextFieldProps,
+  TextFieldRenderProps,
   TextFieldVariant,
 } from './components/TextField/TextField';
 export type { TextFieldIconProps } from './components/TextField/TextFieldIcon';

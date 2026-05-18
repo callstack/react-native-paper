@@ -11,8 +11,10 @@ const typeDefinitions = {
     'https://github.com/callstack/react-native-paper/blob/main/src/components/Icon.tsx#L16',
   ThemeProp:
     'https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties',
-  'ComponentType<TextFieldAccessoryProps>':
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextField/TextField.tsx#L26',
+  '(props: TextFieldAccessoryProps) => React.ReactNode':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextField/TextField.tsx#L25',
+  '(props: TextFieldRenderProps) => React.ReactNode':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextField/TextField.tsx#L118',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',

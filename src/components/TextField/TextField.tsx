@@ -115,6 +115,10 @@ export type TextFieldHookReturn = SharedTextFieldStyleData & {
   focusInput: () => void;
 };
 
+export type TextFieldRenderProps = React.ComponentPropsWithRef<
+  typeof TextInput
+>;
+
 export type TextFieldProps = TextInputProps & {
   /**
    * Ref forwarded to the underlying TextInput.
@@ -126,7 +130,8 @@ export type TextFieldProps = TextInputProps & {
    */
   variant?: TextFieldVariant;
   /**
-   * When `true`, the field uses error styling and validation semantics (`aria-invalid`).
+   * When `true`, the field uses error styling and replaces the trailing accessory
+   * with an error indicator when no `endAccessory` is provided.
    */
   error?: boolean;
   /**
@@ -166,7 +171,17 @@ export type TextFieldProps = TextInputProps & {
    * Can be a custom component or `TextField.Icon`.
    */
   endAccessory?: (props: TextFieldAccessoryProps) => React.ReactNode;
+  /**
+   * Callback to render a custom input component in place of the native `TextInput`.
+   * Receives all props that would be passed to `TextInput`, allowing integration
+   * with third-party inputs such as masked inputs.
+   */
+  render?: (props: TextFieldRenderProps) => React.ReactNode;
 };
+
+const DefaultRenderer = (props: TextFieldRenderProps) => (
+  <TextInput {...props} />
+);
 
 /**
  * A text field lets users enter and edit text. It shows an optional floating label,
@@ -222,12 +237,13 @@ function TextField(props: TextFieldProps) {
     supportingText,
     variant,
     theme,
-    startAccessory,
-    endAccessory,
     prefix,
     suffix,
     counter,
     disabled,
+    startAccessory,
+    endAccessory,
+    render = DefaultRenderer,
     ...textInputProps
   } = props;
 
@@ -312,21 +328,20 @@ function TextField(props: TextFieldProps) {
             </Text>
           )}
 
-          <TextInput
-            aria-label={label}
-            aria-disabled={isDisabled}
-            aria-invalid={hasError}
-            ref={input}
-            onFocus={onFocusHandler}
-            onBlur={onBlurHandler}
-            selectionColor={selectionColor}
-            cursorColor={cursorColor}
-            placeholderTextColor={placeholderTextColor}
-            {...textInputProps}
-            editable={isEditable}
-            placeholder={placeholder}
-            style={inputStyles}
-          />
+          {render({
+            'aria-label': label,
+            'aria-disabled': isDisabled,
+            ref: input,
+            selectionColor,
+            cursorColor,
+            placeholderTextColor,
+            onFocus: onFocusHandler,
+            onBlur: onBlurHandler,
+            ...textInputProps,
+            editable: isEditable,
+            placeholder,
+            style: inputStyles,
+          })}
 
           {hasSuffix && (
             <Text aria-hidden style={suffixStyles}>
