@@ -20,7 +20,7 @@ import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
 
-const { scrimAlpha } = tokens.md.ref;
+const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**

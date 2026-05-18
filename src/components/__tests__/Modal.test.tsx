@@ -13,7 +13,7 @@ import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
 
-const { scrimAlpha } = tokens.md.ref;
+const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),

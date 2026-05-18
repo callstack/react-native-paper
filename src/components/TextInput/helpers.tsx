@@ -19,7 +19,7 @@ import type { TextInputLabelProp } from './types';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 type PaddingProps = {
   height: number | null;

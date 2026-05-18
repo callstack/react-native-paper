@@ -7,7 +7,7 @@ import type { InternalTheme, Theme } from '../../types';
 
 const md3 = (theme: InternalTheme) => theme as Theme;
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;

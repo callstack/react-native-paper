@@ -2,6 +2,10 @@ import type { ColorValue } from 'react-native';
 
 import type { ElevationColors } from './elevation';
 
+export type ColorRole = {
+  [K in keyof ThemeColors]: ThemeColors[K] extends ColorValue ? K : never;
+}[keyof ThemeColors];
+
 export type ThemeColors = {
   primary: ColorValue;
   primaryContainer: ColorValue;

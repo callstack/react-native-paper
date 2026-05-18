@@ -5,7 +5,7 @@ import { tokens } from '../../theme/tokens';
 import type { InternalTheme, Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 export type ButtonMode =
   | 'text'
