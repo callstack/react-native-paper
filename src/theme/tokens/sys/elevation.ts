@@ -1,12 +1,34 @@
 // M3 elevation tokens and shadow builder per spec:
 // https://m3.material.io/styles/elevation/tokens
 
-import { Animated, Platform, type ColorValue } from 'react-native';
+import {
+  Animated,
+  Platform,
+  type ColorValue,
+  type ViewStyle,
+  type Animated as AnimatedNS,
+} from 'react-native';
 
 import color from 'color';
 
 import { isAnimatedValue } from '../../../utils/animations';
 import type { Elevation, ThemeElevation } from '../../types';
+
+type AnimatedNativeShadowStyle = {
+  shadowColor: ColorValue;
+  shadowOffset: {
+    width: AnimatedNS.Value;
+    height: AnimatedNS.AnimatedInterpolation<number>;
+  };
+  shadowOpacity: AnimatedNS.AnimatedInterpolation<number>;
+  shadowRadius: AnimatedNS.AnimatedInterpolation<number>;
+};
+
+type AnimatedBoxShadowStyle = {
+  boxShadow: AnimatedNS.AnimatedInterpolation<string | number>;
+};
+
+type AnimatedShadowStyle = AnimatedNativeShadowStyle | AnimatedBoxShadowStyle;
 
 export const defaultElevation: ThemeElevation = {
   level0: 0,
@@ -47,10 +69,23 @@ const getShadowColor = (shadowColor: ColorValue, shadowOpacity: number) => {
 const getBoxShadowValue = (elevation: number, shadowColor: string) =>
   `0px ${shadowLayers[0].height[elevation]}px ${shadowLayers[0].shadowRadius[elevation]}px ${shadowColor}`;
 
+// eslint-disable-next-line no-redeclare
+export function shadow(elevation: number, shadowColor: ColorValue): ViewStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: Animated.Value,
+  shadowColor: ColorValue
+): AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: number | Animated.Value,
+  shadowColor: ColorValue
+): ViewStyle | AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
 export function shadow(
   elevation: number | Animated.Value = 0,
   shadowColor: ColorValue
-) {
+): ViewStyle | AnimatedShadowStyle {
   if (Platform.OS === 'web') {
     const webShadowColor = getShadowColor(shadowColor, 0.3);
 

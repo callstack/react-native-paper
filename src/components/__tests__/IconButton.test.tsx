@@ -10,7 +10,7 @@ import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 const styles = StyleSheet.create({
   square: {

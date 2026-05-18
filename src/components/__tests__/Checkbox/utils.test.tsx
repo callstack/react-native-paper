@@ -1,7 +1,7 @@
 import { getTheme } from '../../../core/theming';
 import { tokens } from '../../../theme/tokens';
 import { getSelectionControlColor } from '../../Checkbox/utils';
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('getSelectionControlColor - checkbox color', () => {
   it('should return correct disabled color, for theme version 3', () => {

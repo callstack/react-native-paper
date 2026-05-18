@@ -16,7 +16,7 @@ import {
 } from '../TextInput/helpers';
 import TextInput, { Props } from '../TextInput/TextInput';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 const style = StyleSheet.create({
   inputStyle: {

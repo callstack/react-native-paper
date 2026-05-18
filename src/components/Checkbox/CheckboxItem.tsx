@@ -11,7 +11,7 @@ import {
 
 import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../theme/tokens';
+import { getStateLayer } from '../../theme/utils/state';
 import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -145,14 +145,10 @@ const CheckboxItem = ({
   const isLeading = position === 'leading';
   const checkbox = <Checkbox {...checkboxProps} />;
 
-  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: textColor,
-    opacity: disabled
-      ? tokens.md.ref.stateOpacity.disabled
-      : tokens.md.ref.stateOpacity.enabled,
+    ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
   } as TextStyle;
 

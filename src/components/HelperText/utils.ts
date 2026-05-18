@@ -1,7 +1,5 @@
-import { tokens } from '../../theme/tokens';
+import { getStateLayer } from '../../theme/utils/state';
 import type { InternalTheme } from '../../types';
-
-const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -11,18 +9,11 @@ type BaseProps = {
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
   if (type === 'error') {
-    return { color: theme.colors.error, opacity: stateOpacity.enabled };
+    return getStateLayer(theme, 'error', 'enabled');
   }
-
-  if (disabled) {
-    return {
-      color: theme.colors.onSurfaceVariant,
-      opacity: stateOpacity.disabled,
-    };
-  }
-
-  return {
-    color: theme.colors.onSurfaceVariant,
-    opacity: stateOpacity.enabled,
-  };
+  return getStateLayer(
+    theme,
+    'onSurfaceVariant',
+    disabled ? 'disabled' : 'enabled'
+  );
 }

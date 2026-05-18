@@ -10,7 +10,7 @@ import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 it('renders chip with onPress', () => {
   const tree = render(<Chip onPress={() => {}}>Example Chip</Chip>).toJSON();

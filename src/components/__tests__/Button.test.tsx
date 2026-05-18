@@ -10,7 +10,7 @@ import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 const styles = StyleSheet.create({
   flexing: {
