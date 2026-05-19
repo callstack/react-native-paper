@@ -28,6 +28,13 @@ export type Props = {
    */
   color?: string;
   /**
+   * Whether the checkbox is in an error state. When true, the outline
+   * (unchecked) and container (checked / indeterminate) use
+   * `theme.colors.error`. `disabled` and explicit `color`/`uncheckedColor`
+   * overrides take precedence.
+   */
+  error?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;

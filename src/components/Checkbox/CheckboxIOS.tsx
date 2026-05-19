@@ -30,6 +30,12 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   color?: ColorValue;
   /**
+   * Whether the checkbox is in an error state. When true, the checked /
+   * indeterminate icon uses `theme.colors.error`. `disabled` and explicit
+   * `color` overrides take precedence.
+   */
+  error?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -52,6 +58,7 @@ const CheckboxIOS = ({
   onPress,
   theme: themeOverrides,
   testID,
+  error,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -62,6 +69,7 @@ const CheckboxIOS = ({
     theme,
     disabled,
     customColor: rest.color,
+    error,
   });
 
   const icon = indeterminate ? 'minus' : 'check';

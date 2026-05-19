@@ -8,12 +8,18 @@ const { stateOpacity } = tokens.md.ref;
 const getAndroidCheckedColor = ({
   theme,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
   customColor?: ColorValue;
+  error?: boolean;
 }) => {
   if (customColor) {
     return customColor;
+  }
+
+  if (error) {
+    return theme.colors.error;
   }
 
   return theme.colors.primary;
@@ -22,12 +28,18 @@ const getAndroidCheckedColor = ({
 const getAndroidUncheckedColor = ({
   theme,
   customUncheckedColor,
+  error,
 }: {
   theme: InternalTheme;
   customUncheckedColor?: ColorValue;
+  error?: boolean;
 }) => {
   if (customUncheckedColor) {
     return customUncheckedColor;
+  }
+
+  if (error) {
+    return theme.colors.error;
   }
 
   return theme.colors.onSurfaceVariant;
@@ -62,17 +74,20 @@ export const getAndroidSelectionControlColor = ({
   checked,
   customColor,
   customUncheckedColor,
+  error,
 }: {
   theme: InternalTheme;
   checked: boolean;
   disabled?: boolean;
   customColor?: ColorValue;
   customUncheckedColor?: ColorValue;
+  error?: boolean;
 }) => {
-  const checkedColor = getAndroidCheckedColor({ theme, customColor });
+  const checkedColor = getAndroidCheckedColor({ theme, customColor, error });
   const uncheckedColor = getAndroidUncheckedColor({
     theme,
     customUncheckedColor,
+    error,
   });
   const selectionControlOpacity = disabled
     ? stateOpacity.disabled
@@ -94,10 +109,12 @@ const getIOSCheckedColor = ({
   theme,
   disabled,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
   customColor?: ColorValue;
   disabled?: boolean;
+  error?: boolean;
 }) => {
   if (disabled) {
     return theme.colors.primary;
@@ -107,6 +124,10 @@ const getIOSCheckedColor = ({
     return customColor;
   }
 
+  if (error) {
+    return theme.colors.error;
+  }
+
   return theme.colors.primary;
 };
 
@@ -114,12 +135,19 @@ export const getSelectionControlIOSColor = ({
   theme,
   disabled,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
   disabled?: boolean;
   customColor?: ColorValue;
+  error?: boolean;
 }) => {
-  const checkedColor = getIOSCheckedColor({ theme, disabled, customColor });
+  const checkedColor = getIOSCheckedColor({
+    theme,
+    disabled,
+    customColor,
+    error,
+  });
   const checkedColorOpacity = disabled
     ? stateOpacity.disabled
     : stateOpacity.enabled;
