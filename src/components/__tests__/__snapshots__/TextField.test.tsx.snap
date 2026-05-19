@@ -46,6 +46,7 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
           "overflow": "hidden",
+          "paddingBottom": 19,
         },
       ]
     }
@@ -676,6 +677,7 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
           "overflow": "hidden",
+          "paddingBottom": 19,
         },
       ]
     }
@@ -1306,6 +1308,7 @@ exports[`renders filled TextField with label and value 1`] = `
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
           "overflow": "hidden",
+          "paddingBottom": 19,
         },
       ]
     }

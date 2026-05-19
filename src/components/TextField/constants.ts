@@ -35,23 +35,12 @@ export const SUFFIX_START_PADDING = 2;
 
 export const ERROR_ICON_SIZE = 16;
 
-export const LINE_HEIGHT_DELTA = 2;
 export const INPUT_FONT_SIZE = tokens.md.sys.typescale.bodyLarge.fontSize;
 export const ACTIVE_LABEL_FONT_SIZE =
   tokens.md.sys.typescale.bodySmall.fontSize;
 export const INACTIVE_LABEL_FONT_SIZE = INPUT_FONT_SIZE;
 export const SUPPORTING_TEXT_FONT_SIZE =
   tokens.md.sys.typescale.bodySmall.fontSize;
-
-export const INACTIVE_LABEL_TOP_POSITION = Math.ceil(
-  ((BASELINE_TEXT_FIELD_HEIGHT -
-    2 * BASELINE_TEXT_FIELD_PADDING_VERTICAL -
-    INPUT_FONT_SIZE) /
-    2 +
-    BASELINE_TEXT_FIELD_PADDING_VERTICAL -
-    LINE_HEIGHT_DELTA) *
-    fontScale
-);
 
 export const SUPPORTING_TEXT_MARGIN_TOP = 4;
 
@@ -64,6 +53,8 @@ export const INACTIVE_INDICATOR_SIZE = 1;
  * Constants for the filled variant.
  */
 
+const FILLED_LINE_HEIGHT_DELTA = 3;
+
 export const FILLED_LABEL_START_OFFSET_WITH_ACCESSORY =
   ACCESSORY_SIZE +
   TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL +
@@ -71,14 +62,28 @@ export const FILLED_LABEL_START_OFFSET_WITH_ACCESSORY =
 
 export const FILLED_ACTIVE_LABEL_TOP_POSITION = TEXT_FIELD_PADDING_VERTICAL;
 
+export const FILLED_INACTIVE_LABEL_TOP_POSITION = Math.ceil(
+  ((BASELINE_TEXT_FIELD_HEIGHT -
+    2 * BASELINE_TEXT_FIELD_PADDING_VERTICAL -
+    INPUT_FONT_SIZE) /
+    2 +
+    BASELINE_TEXT_FIELD_PADDING_VERTICAL) *
+    fontScale
+);
+
 export const FILLED_MULTILINE_PADDING_TOP =
   Math.ceil(ACTIVE_LABEL_FONT_SIZE * fontScale) + TEXT_FIELD_PADDING_VERTICAL;
 
 export const FILLED_DISABLED_CONTAINER_OPACITY = 0.04;
 
+export const FILLED_PADDING_BOTTOM =
+  TEXT_FIELD_PADDING_VERTICAL + FILLED_LINE_HEIGHT_DELTA;
+
 /**
  * Constants for the outlined variant.
  */
+
+const OUTLINED_LINE_HEIGHT_DELTA = 2;
 
 export const OUTLINED_DISABLED_OUTLINE_OPACITY = 0.12;
 
@@ -87,7 +92,7 @@ export const OUTLINED_MULTILINE_PADDING_TOP = Math.ceil(
     2 * BASELINE_TEXT_FIELD_PADDING_VERTICAL -
     INPUT_FONT_SIZE) /
     2 -
-    LINE_HEIGHT_DELTA) *
+    OUTLINED_LINE_HEIGHT_DELTA) *
     fontScale
 );
 
@@ -100,7 +105,18 @@ export const OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY =
   OUTLINED_LABEL_PADDING_HORIZONTAL;
 
 export const OUTLINED_ACTIVE_LABEL_TOP_POSITION = Math.ceil(
-  (-BASELINE_TEXT_FIELD_PADDING_VERTICAL + LINE_HEIGHT_DELTA) * fontScale
+  (-BASELINE_TEXT_FIELD_PADDING_VERTICAL + OUTLINED_LINE_HEIGHT_DELTA) *
+    fontScale
+);
+
+export const OUTLINED_INACTIVE_LABEL_TOP_POSITION = Math.ceil(
+  ((BASELINE_TEXT_FIELD_HEIGHT -
+    2 * BASELINE_TEXT_FIELD_PADDING_VERTICAL -
+    INPUT_FONT_SIZE) /
+    2 +
+    BASELINE_TEXT_FIELD_PADDING_VERTICAL -
+    OUTLINED_LINE_HEIGHT_DELTA) *
+    fontScale
 );
 
 /** Positive distance; apply sign in animation using `isRTL` from `useLocale`. */

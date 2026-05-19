@@ -11,7 +11,8 @@ import {
   FILLED_MULTILINE_PADDING_TOP,
   INACTIVE_INDICATOR_SIZE,
   INACTIVE_LABEL_FONT_SIZE,
-  INACTIVE_LABEL_TOP_POSITION,
+  FILLED_INACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
   INPUT_FONT_SIZE,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   OUTLINED_ACTIVE_LABEL_TOP_POSITION,
@@ -23,6 +24,7 @@ import {
   PREFIX_END_PADDING,
   SUFFIX_START_PADDING,
   TEXT_FIELD_BORDER_RADIUS,
+  FILLED_PADDING_BOTTOM,
 } from './constants';
 import { filledStyles, outlinedStyles, styles } from './styles';
 import type {
@@ -295,7 +297,12 @@ export const getTextFieldAnimation = ({
       ? FILLED_ACTIVE_LABEL_TOP_POSITION
       : OUTLINED_ACTIVE_LABEL_TOP_POSITION;
 
-  const top = isFloating ? activeTop : INACTIVE_LABEL_TOP_POSITION;
+  const inactiveTop =
+    variant === 'filled'
+      ? FILLED_INACTIVE_LABEL_TOP_POSITION
+      : OUTLINED_INACTIVE_LABEL_TOP_POSITION;
+
+  const top = isFloating ? activeTop : inactiveTop;
   const fontSize = isFloating
     ? ACTIVE_LABEL_FONT_SIZE
     : INACTIVE_LABEL_FONT_SIZE;
@@ -419,6 +426,7 @@ export const getFilledTextFieldData = (
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
     {
+      paddingBottom: FILLED_PADDING_BOTTOM,
       backgroundColor: fieldBackgroundColor,
       borderTopStartRadius: TEXT_FIELD_BORDER_RADIUS,
       borderTopEndRadius: TEXT_FIELD_BORDER_RADIUS,
