@@ -18,7 +18,7 @@ import {
   getAppbarBorders,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
+import { shadow } from '../../theme/tokens/sys/elevation';
 import type { ThemeProp } from '../../types';
 
 export type Props = Omit<
@@ -141,7 +141,7 @@ const AppbarHeader = ({
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
-        shadow(elevation) as ViewStyle,
+        shadow(elevation, theme.colors.shadow) as ViewStyle,
       ]}
     >
       <Appbar

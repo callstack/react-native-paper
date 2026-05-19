@@ -9,8 +9,8 @@ import {
   Avatar,
   Button,
   FAB,
-  MD3DarkTheme as DarkTheme,
-  MD3LightTheme as DefaultTheme,
+  DarkTheme,
+  LightTheme,
   ProgressBar,
   PaperProvider,
   RadioButton,
@@ -167,7 +167,7 @@ const Shimmer = () => {
 const ThemedBannerExample = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
       <BannerExample />
     </PaperProvider>
   );

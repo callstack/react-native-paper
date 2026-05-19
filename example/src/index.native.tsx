@@ -10,8 +10,8 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
   PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme,
+  LightTheme,
   DynamicLightTheme,
   DynamicDarkTheme,
 } from 'react-native-paper';
@@ -60,7 +60,7 @@ export default function PaperExample() {
       return isDarkMode ? DynamicDarkTheme : DynamicLightTheme;
     }
 
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+    return isDarkMode ? DarkTheme : LightTheme;
   }, [isDarkMode, shouldUseDynamicTheme]);
 
   React.useEffect(() => {

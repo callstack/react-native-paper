@@ -1,92 +1,49 @@
 import * as React from 'react';
-import {
-  AccessibilityInfo,
-  Appearance,
-  ColorSchemeName,
-  NativeEventSubscription,
-} from 'react-native';
 
+import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemes, ThemeProvider } from './theming';
+import {
+  useResolvedReduceMotion,
+  type ReduceMotionPreference,
+} from './useResolvedReduceMotion';
+import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
+import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../types';
-import { addEventListener } from '../utils/addEventListener';
 
 export type Props = {
   children: React.ReactNode;
   theme?: ThemeProp;
   settings?: Settings;
+  direction?: Direction;
+  reduceMotion?: ReduceMotionPreference;
 };
 
 const PaperProvider = (props: Props) => {
-  const colorSchemeName =
-    (!props.theme && Appearance?.getColorScheme()) || 'light';
+  const { reduceMotion = 'auto' } = props;
 
-  const [reduceMotionEnabled, setReduceMotionEnabled] =
-    React.useState<boolean>(false);
-  const [colorScheme, setColorScheme] =
-    React.useState<ColorSchemeName>(colorSchemeName);
-
-  const handleAppearanceChange = (
-    preferences: Appearance.AppearancePreferences
-  ) => {
-    const { colorScheme } = preferences;
-    setColorScheme(colorScheme);
-  };
-
-  React.useEffect(() => {
-    let subscription: NativeEventSubscription | undefined;
-
-    if (!props.theme) {
-      subscription = addEventListener(
-        AccessibilityInfo,
-        'reduceMotionChanged',
-        setReduceMotionEnabled
-      );
-    }
-    return () => {
-      if (!props.theme) {
-        subscription?.remove();
-      }
-    };
-  }, [props.theme]);
-
-  React.useEffect(() => {
-    let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme) {
-      appearanceSubscription = Appearance?.addChangeListener(
-        handleAppearanceChange
-      ) as NativeEventSubscription | undefined;
-    }
-    return () => {
-      if (!props.theme) {
-        if (appearanceSubscription) {
-          appearanceSubscription.remove();
-        } else {
-          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
-          Appearance?.removeChangeListener(handleAppearanceChange);
-        }
-      }
-    };
-  }, [props.theme]);
+  const colorScheme = useSystemColorScheme(!props.theme);
+  const resolvedReduceMotion = useResolvedReduceMotion(reduceMotion);
 
   const theme = React.useMemo(() => {
-    const scheme = colorScheme === 'dark' ? 'dark' : 'light';
-    const defaultThemeBase = defaultThemes[scheme];
+    const isDark = props.theme?.dark ?? colorScheme === 'dark';
+    const base = defaultThemes[isDark ? 'dark' : 'light'];
+    const scale = resolvedReduceMotion ? 0 : props.theme?.animation?.scale ?? 1;
 
     return {
-      ...defaultThemeBase,
+      ...base,
       ...props.theme,
-      animation: {
-        ...props.theme?.animation,
-        scale: reduceMotionEnabled ? 0 : 1,
-      },
+      colors: { ...base.colors, ...props.theme?.colors },
+      animation: { ...props.theme?.animation, scale },
     };
-  }, [colorScheme, props.theme, reduceMotionEnabled]);
+  }, [colorScheme, props.theme, resolvedReduceMotion]);
 
   const { children, settings } = props;
+
+  const direction = props.direction ?? getDefaultDirection();
 
   const settingsValue = React.useMemo(
     () => ({
@@ -101,7 +58,11 @@ const PaperProvider = (props: Props) => {
     <SafeAreaProviderCompat>
       <PortalHost>
         <SettingsProvider value={settingsValue}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ReduceMotionContext.Provider value={resolvedReduceMotion}>
+            <LocaleProvider direction={direction}>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </LocaleProvider>
+          </ReduceMotionContext.Provider>
         </SettingsProvider>
       </PortalHost>
     </SafeAreaProviderCompat>

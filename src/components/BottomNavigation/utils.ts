@@ -1,31 +1,33 @@
-import type { InternalTheme, MD3Theme } from '../../types';
+import type { ColorValue } from 'react-native';
+
+import type { InternalTheme, Theme } from '../../types';
 
 export const getActiveTintColor = ({
   activeColor,
   theme,
 }: {
-  activeColor: string | undefined;
+  activeColor: ColorValue | undefined;
   theme: InternalTheme;
 }) => {
-  if (typeof activeColor === 'string') {
+  if (activeColor != null) {
     return activeColor;
   }
 
-  return (theme as MD3Theme).colors.onSecondaryContainer;
+  return (theme as Theme).colors.onSecondaryContainer;
 };
 
 export const getInactiveTintColor = ({
   inactiveColor,
   theme,
 }: {
-  inactiveColor: string | undefined;
+  inactiveColor: ColorValue | undefined;
   theme: InternalTheme;
 }) => {
-  if (typeof inactiveColor === 'string') {
+  if (inactiveColor != null) {
     return inactiveColor;
   }
 
-  return (theme as MD3Theme).colors.onSurfaceVariant;
+  return (theme as Theme).colors.onSurfaceVariant;
 };
 
 export const getLabelColor = ({
@@ -34,12 +36,12 @@ export const getLabelColor = ({
   focused,
   theme,
 }: {
-  tintColor: string;
+  tintColor: ColorValue;
   hasColor: boolean;
   focused: boolean;
   theme: InternalTheme;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (hasColor) {
     return tintColor;
   }

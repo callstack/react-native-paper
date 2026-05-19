@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -92,6 +86,7 @@ const PaginationControls = ({
   theme: themeOverrides,
 }: PaginationControlsProps) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
 
   const textColor = theme.colors.onSurface;
 
@@ -104,7 +99,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={direction}
             />
           )}
           iconColor={textColor}
@@ -120,7 +115,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={direction}
           />
         )}
         iconColor={textColor}
@@ -135,7 +130,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={direction}
           />
         )}
         iconColor={textColor}
@@ -151,7 +146,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={direction}
             />
           )}
           iconColor={textColor}

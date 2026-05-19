@@ -1,6 +1,6 @@
 import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import type { EllipsizeProp, InternalTheme, ThemeProp } from 'src/types';
+import type { EllipsizeProp, InternalTheme, ThemeProp } from '../../types';
 
 type Description =
   | React.ReactNode

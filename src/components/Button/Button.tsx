@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityRole,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -18,7 +19,7 @@ import {
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, MD3Theme, ThemeProp } from '../../types';
+import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
@@ -51,18 +52,13 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   compact?: boolean;
   /**
-   * @deprecated Deprecated in v5.x - use `buttonColor` or `textColor` instead.
-   * Custom text color for flat button, or background color for contained button.
-   */
-  color?: string;
-  /**
    * Custom button's background color.
    */
-  buttonColor?: string;
+  buttonColor?: ColorValue;
   /**
    * Custom button's text color.
    */
-  textColor?: string;
+  textColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -210,7 +206,7 @@ const Button = (
     },
     [mode]
   );
-  const { roundness, animation } = theme;
+  const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
 
@@ -271,7 +267,7 @@ const Button = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
-  const borderRadius = 5 * roundness;
+  const borderRadius = theme.shapes.corner.largeIncreased;
   const iconSize = 18;
 
   const {
@@ -305,7 +301,7 @@ const Button = (
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = (theme as MD3Theme).fonts.labelLarge;
+  const font = (theme as Theme).fonts.labelLarge;
 
   const textStyle = {
     color: textColor,

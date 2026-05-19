@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Palette } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   v3Divider: {
-    backgroundColor: MD3Colors.neutralVariant50,
+    backgroundColor: Palette.neutralVariant50,
   },
 });
 

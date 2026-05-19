@@ -13,8 +13,8 @@ import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import { tokens } from '../../theme/tokens';
+import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
@@ -86,7 +86,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof MD3TypescaleKey;
+  labelVariant?: TypescaleKey;
   /**
    * @optional
    */

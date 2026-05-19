@@ -16,8 +16,8 @@ import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type {
   $RemoveChildren,
-  MD3Theme,
-  MD3TypescaleKey,
+  Theme,
+  TypescaleKey,
   ThemeProp,
 } from '../../types';
 import Text, { TextRef } from '../Typography/Text';
@@ -107,7 +107,7 @@ const AppbarContent = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme as MD3Theme;
+  const { colors, fonts } = theme as Theme;
 
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
@@ -118,7 +118,7 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
-  const variant = modeTextVariant[mode] as MD3TypescaleKey;
+  const variant = modeTextVariant[mode] as TypescaleKey;
 
   const contentWrapperProps = {
     pointerEvents: 'box-none' as ViewProps['pointerEvents'],

@@ -8,17 +8,17 @@ import {
   Chip,
   IconButton,
   Text,
+  useTheme,
 } from 'react-native-paper';
 
 import { isWeb } from '../../utils';
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
 
 const CardExample = () => {
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
   const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);

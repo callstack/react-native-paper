@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { render } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
@@ -83,7 +84,7 @@ it('renders active chip if only onLongPress handler is passed', () => {
 
 it('renders chip with zero border radius', () => {
   const { getByTestId } = render(
-    <Chip testID="active-chip" theme={{ roundness: 0 }}>
+    <Chip testID="active-chip" theme={{ shapes: { corner: { small: 0 } } }}>
       Active chip
     </Chip>
   );

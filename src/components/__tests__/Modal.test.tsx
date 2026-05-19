@@ -6,10 +6,11 @@ import {
   Text,
 } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { render } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
 
 const { scrimAlpha } = tokens.md.ref;
@@ -58,7 +59,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.scrim,
+        backgroundColor: LightTheme.colors.scrim,
       });
     });
 

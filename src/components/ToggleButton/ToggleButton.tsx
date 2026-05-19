@@ -108,7 +108,7 @@ const ToggleButton = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const borderRadius = theme.roundness;
+    const borderRadius = theme.shapes.corner.extraSmall;
 
     return (
       <ToggleButtonGroupContext.Consumer>

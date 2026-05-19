@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleSheet,
   View,
@@ -28,11 +29,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */

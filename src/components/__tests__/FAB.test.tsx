@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
 
@@ -131,7 +132,12 @@ it('renders FAB with custom border radius', () => {
 
 it('renders FAB with zero border radius', () => {
   const { getByTestId } = render(
-    <FAB theme={{ roundness: 0 }} onPress={() => {}} icon="plus" testID="fab" />
+    <FAB
+      theme={{ shapes: { corner: { large: 0 } } }}
+      onPress={() => {}}
+      icon="plus"
+      testID="fab"
+    />
   );
 
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });

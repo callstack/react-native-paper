@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Appbar,
   FAB,
   List,
-  MD3Colors,
+  Palette,
   RadioButton,
   Snackbar,
   Switch,
   Text,
+  useTheme,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
@@ -32,13 +32,12 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
-  const [showExactTheme, setShowExactTheme] = React.useState(false);
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
-  const theme = useExampleTheme();
+  const theme = useTheme();
   const { bottom, left, right } = useSafeAreaInsets();
   const height = 80;
 
@@ -49,9 +48,6 @@ const AppbarExample = ({ navigation }: Props) => {
       header: () => (
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
-          theme={{
-            mode: showExactTheme ? 'exact' : 'adaptive',
-          }}
           mode={appbarMode}
           elevated={showElevated}
         >
@@ -80,7 +76,6 @@ const AppbarExample = ({ navigation }: Props) => {
     showSearchIcon,
     showMoreIcon,
     showCustomColor,
-    showExactTheme,
     appbarMode,
     showCalendarIcon,
     isCenterAlignedMode,
@@ -128,10 +123,6 @@ const AppbarExample = ({ navigation }: Props) => {
       <View style={styles.row}>
         <Text>Custom Color</Text>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
-      </View>
-      <View style={styles.row}>
-        <Text>Exact Dark Theme</Text>
-        <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
       </View>
       <View style={styles.row}>
         <Text>Elevated</Text>
@@ -186,7 +177,6 @@ const AppbarExample = ({ navigation }: Props) => {
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
-        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
@@ -231,6 +221,6 @@ const styles = StyleSheet.create({
     right: 16,
   },
   customColor: {
-    backgroundColor: MD3Colors.secondary80,
+    backgroundColor: Palette.secondary80,
   },
 });

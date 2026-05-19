@@ -1,20 +1,19 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { Palette } from './theme/tokens';
 
 export {
   useTheme,
   withTheme,
   ThemeProvider,
-  DefaultTheme,
   adaptNavigationTheme,
 } from './core/theming';
 
-export * from './styles/themes';
+export { useLocale, LocaleProvider } from './core/locale';
+
+export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
-export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
-export { default as configureFonts } from './styles/fonts';
+export { default as configureFonts } from './theme/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
 import * as Drawer from './components/Drawer/Drawer';
@@ -139,16 +138,5 @@ export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
-export type {
-  MaterialBottomTabNavigationEventMap,
-  MaterialBottomTabNavigationOptions,
-  MaterialBottomTabNavigationProp,
-  MaterialBottomTabScreenProps,
-} from './react-navigation';
 
-export type {
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  MD3TypescaleKey,
-} from './types';
+export { TypescaleKey, type Theme, type Elevation } from './types';

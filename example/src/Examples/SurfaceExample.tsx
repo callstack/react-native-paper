@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import {
-  MD3Elevation,
-  Surface,
-  Text,
-  MD3Colors,
-  List,
-} from 'react-native-paper';
+import { Elevation, Surface, Text, Palette, List } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -19,7 +13,7 @@ const SurfaceExample = () => {
       key={index}
       style={[styles.surface, styles.v3Surface]}
       mode={mode}
-      elevation={index as MD3Elevation}
+      elevation={index as Elevation}
     >
       <Text variant="bodyLarge">
         {`Elevation ${index === 1 ? '(default)' : ''} ${index}`}
@@ -92,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 20,
-    borderColor: MD3Colors.tertiary50,
+    borderColor: Palette.tertiary50,
     padding: 10,
     borderWidth: 1,
   },
@@ -105,7 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 100,
-    borderColor: MD3Colors.tertiary50,
+    borderColor: Palette.tertiary50,
     padding: 10,
     borderWidth: 1,
   },

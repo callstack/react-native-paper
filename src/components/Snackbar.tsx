@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -18,8 +17,9 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, MD3Theme, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -158,6 +158,7 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -235,7 +236,7 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors, roundness } = theme as MD3Theme;
+  const { colors } = theme as Theme;
 
   if (hidden) {
     return null;
@@ -295,7 +296,7 @@ const Snackbar = ({
           styles.container,
           {
             backgroundColor,
-            borderRadius: roundness,
+            borderRadius: (theme as Theme).shapes.corner.extraSmall,
             opacity: opacity,
             transform: [
               {
@@ -349,9 +350,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={direction}
                       />
                     );
                   })

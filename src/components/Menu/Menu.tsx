@@ -4,7 +4,6 @@ import {
   Dimensions,
   Easing,
   EmitterSubscription,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -22,9 +21,9 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, MD3Theme, ThemeProp } from '../../types';
-import { ElevationLevels } from '../../types';
+import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -72,7 +71,7 @@ export type Props = {
    * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
-  elevation?: MD3Elevation;
+  elevation?: Elevation;
   /**
    * Mode of the menu's content.
    * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
@@ -104,11 +103,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
-const DEFAULT_ELEVATION: MD3Elevation = 2;
-export const ELEVATION_LEVELS_MAP = Object.values(
-  ElevationLevels
-) as ElevationLevels[];
-
+const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (el: View | null | undefined) => {
@@ -196,7 +191,8 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors: md3Colors } = theme as MD3Theme;
+  const { direction } = useLocale();
+  const { colors: md3Colors } = theme as Theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
@@ -618,7 +614,7 @@ const Menu = ({
         }),
       },
     ],
-    borderRadius: theme.roundness,
+    borderRadius: theme.shapes.corner.extraSmall,
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
 
@@ -626,7 +622,7 @@ const Menu = ({
     top: isCoordinate(anchor)
       ? topTransformation
       : topTransformation + additionalVerticalValue,
-    ...(I18nManager.getConstants().isRTL
+    ...(direction === 'rtl'
       ? { right: leftTransformation }
       : { left: leftTransformation }),
   };
@@ -674,8 +670,7 @@ const Menu = ({
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
                   {
-                    backgroundColor:
-                      md3Colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+                    backgroundColor: md3Colors.elevation[`level${elevation}`],
                   },
                   contentStyle,
                 ]}

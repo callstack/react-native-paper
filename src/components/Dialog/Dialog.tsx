@@ -15,7 +15,7 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme, ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import Modal from '../Modal';
 import { DialogChildProps } from './utils';
 
@@ -105,8 +105,7 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const { roundness } = theme as MD3Theme;
-  const borderRadius = 7 * roundness;
+  const borderRadius = (theme as Theme).shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 

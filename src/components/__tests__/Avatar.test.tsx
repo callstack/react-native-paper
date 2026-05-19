@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
+import { red500 } from '../../theme/colors';
 import * as Avatar from '../Avatar/Avatar';
 
 const styles = StyleSheet.create({

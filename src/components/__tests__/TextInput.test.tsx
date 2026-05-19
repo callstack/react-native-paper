@@ -1,12 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
-import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
-import { tokens } from '../../styles/themes/v3/tokens';
+import PaperProvider from '../../core/PaperProvider';
+import { getTheme, ThemeProvider } from '../../core/theming';
+import { render } from '../../test-utils';
+import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import {
   getFlatInputColors,
   getOutlinedInputColors,
@@ -259,28 +262,27 @@ it('renders input placeholder initially with transparent placeholderTextColor', 
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
   Platform.OS = 'android';
-  I18nManager.isRTL = true;
 
   const { getByTestId } = render(
-    <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-    />
+    <PaperProvider direction="rtl">
+      <TextInput
+        label="Flat input"
+        mode="flat"
+        testID="text-input-flat"
+        left={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+        right={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+      />
+    </PaperProvider>
   );
 
   expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
     paddingLeft: 56,
     paddingRight: 16,
   });
-
-  I18nManager.isRTL = false;
 });
 
 it('correctly applies padding offset to input label on Android when LTR', () => {
@@ -368,9 +370,9 @@ it('calls onLayout on right-side affix adornment', () => {
 it("correctly applies theme background to label when input's background is transparent", () => {
   const backgroundColor = 'transparent';
   const theme = {
-    ...DefaultTheme,
+    ...LightTheme,
     colors: {
-      ...DefaultTheme.colors,
+      ...LightTheme.colors,
       background: 'pink',
     },
   };

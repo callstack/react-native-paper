@@ -1,10 +1,11 @@
 import React, { RefObject } from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 
 import PaperProvider from '../../core/PaperProvider';
+import { render } from '../../test-utils';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();

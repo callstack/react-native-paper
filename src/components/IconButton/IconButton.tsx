@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {
+  Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
-  ViewStyle,
   View,
-  Animated,
+  ViewStyle,
 } from 'react-native';
 
 import { getIconButtonColor } from './utils';
@@ -36,11 +37,11 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
   /**
    * Background color of the icon container.
    */
-  containerColor?: string;
+  containerColor?: ColorValue;
   /**
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
    */
@@ -92,12 +93,12 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { IconButton, MD3Colors } from 'react-native-paper';
+ * import { IconButton, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <IconButton
  *     icon="camera"
- *     iconColor={MD3Colors.error50}
+ *     iconColor={Palette.error50}
  *     size={20}
  *     onPress={() => console.log('Pressed')}
  *   />

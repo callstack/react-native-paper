@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -17,8 +18,8 @@ import useLatestCallback from 'use-latest-callback';
 
 import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $Omit, EllipsizeProp, MD3Theme, ThemeProp } from '../../types';
+import { white } from '../../theme/colors';
+import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -61,7 +62,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`.
    *       If you want specify custom color for the `icon`, render your own `Icon` component.
    */
-  selectedColor?: string;
+  selectedColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether to display overlay on selected chip
@@ -205,7 +206,6 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness } = theme;
   const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -244,7 +244,7 @@ const Chip = ({
   });
 
   const opacity = 0.38;
-  const defaultBorderRadius = roundness * 2;
+  const defaultBorderRadius = theme.shapes.corner.small;
   const iconSize = 18;
 
   const {
@@ -286,7 +286,7 @@ const Chip = ({
   };
   const labelTextStyle = {
     color: textColor,
-    ...(theme as MD3Theme).fonts.labelLarge,
+    ...(theme as Theme).fonts.labelLarge,
   };
   return (
     <Surface
@@ -367,7 +367,7 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                      ? (theme as MD3Theme).colors.primary
+                      ? (theme as Theme).colors.primary
                       : iconColor
                   }
                   size={18}

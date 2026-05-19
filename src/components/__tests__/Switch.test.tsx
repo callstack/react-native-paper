@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import {
   white,
   black,
@@ -13,7 +13,7 @@ import {
   grey800,
   pink500,
   grey700,
-} from '../../styles/themes/v2/colors';
+} from '../../theme/colors';
 import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 

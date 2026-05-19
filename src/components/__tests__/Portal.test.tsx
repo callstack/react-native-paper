@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Text } from 'react-native';
 
-import { render, waitFor } from '@testing-library/react-native';
+import { waitFor } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import Portal from '../Portal/Portal';
 
 jest.useRealTimers();

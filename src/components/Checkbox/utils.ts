@@ -1,4 +1,6 @@
-import { tokens } from '../../styles/themes/v3/tokens';
+import type { ColorValue } from 'react-native';
+
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;
@@ -8,7 +10,7 @@ const getAndroidCheckedColor = ({
   customColor,
 }: {
   theme: InternalTheme;
-  customColor?: string;
+  customColor?: ColorValue;
 }) => {
   if (customColor) {
     return customColor;
@@ -22,7 +24,7 @@ const getAndroidUncheckedColor = ({
   customUncheckedColor,
 }: {
   theme: InternalTheme;
-  customUncheckedColor?: string;
+  customUncheckedColor?: ColorValue;
 }) => {
   if (customUncheckedColor) {
     return customUncheckedColor;
@@ -40,8 +42,8 @@ const getAndroidControlColor = ({
 }: {
   theme: InternalTheme;
   checked: boolean;
-  checkedColor: string;
-  uncheckedColor: string;
+  checkedColor: ColorValue;
+  uncheckedColor: ColorValue;
   disabled?: boolean;
 }) => {
   if (disabled) {
@@ -64,8 +66,8 @@ export const getAndroidSelectionControlColor = ({
   theme: InternalTheme;
   checked: boolean;
   disabled?: boolean;
-  customColor?: string;
-  customUncheckedColor?: string;
+  customColor?: ColorValue;
+  customUncheckedColor?: ColorValue;
 }) => {
   const checkedColor = getAndroidCheckedColor({ theme, customColor });
   const uncheckedColor = getAndroidUncheckedColor({
@@ -94,7 +96,7 @@ const getIOSCheckedColor = ({
   customColor,
 }: {
   theme: InternalTheme;
-  customColor?: string;
+  customColor?: ColorValue;
   disabled?: boolean;
 }) => {
   if (disabled) {
@@ -115,7 +117,7 @@ export const getSelectionControlIOSColor = ({
 }: {
   theme: InternalTheme;
   disabled?: boolean;
-  customColor?: string;
+  customColor?: ColorValue;
 }) => {
   const checkedColor = getIOSCheckedColor({ theme, disabled, customColor });
   const checkedColorOpacity = disabled

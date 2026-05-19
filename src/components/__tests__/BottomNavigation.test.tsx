@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { render } from '../../test-utils';
+import { Palette } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {
@@ -16,7 +17,7 @@ import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
-    backgroundColor: MD3Colors.error60,
+    backgroundColor: Palette.error60,
   },
 });
 
@@ -241,7 +242,9 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();
@@ -260,7 +263,9 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();
@@ -376,7 +381,7 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: MD3Colors.error60 });
+  expect(wrapper).toHaveStyle({ backgroundColor: Palette.error60 });
 });
 
 it('renders a single tab', () => {
@@ -478,7 +483,7 @@ describe('getActiveTintColor', () => {
   it.each`
     activeColor  | expected
     ${'#FBF7DB'} | ${'#FBF7DB'}
-    ${undefined} | ${MD3Colors.secondary10}
+    ${undefined} | ${Palette.secondary10}
   `(
     'returns $expected when activeColor: $activeColor',
     ({ activeColor, expected }) => {
@@ -493,7 +498,7 @@ describe('getInactiveTintColor', () => {
   it.each`
     inactiveColor | expected
     ${'#853D4B'}  | ${'#853D4B'}
-    ${undefined}  | ${MD3Colors.neutralVariant30}
+    ${undefined}  | ${Palette.neutralVariant30}
   `(
     'returns $expected when inactiveColor: $inactiveColor',
     ({ inactiveColor, expected }) => {
@@ -512,8 +517,8 @@ describe('getLabelColor', () => {
     tintColor    | focused  | expected
     ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
     ${'#853D4B'} | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${MD3Colors.neutralVariant30}
+    ${undefined} | ${true}  | ${Palette.neutral10}
+    ${undefined} | ${false} | ${Palette.neutralVariant30}
   `(
     'returns $expected when tintColor: $tintColor, focused: $focused',
     ({ tintColor, focused, expected }) => {

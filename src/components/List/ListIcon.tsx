@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  ColorValue,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -13,7 +19,7 @@ export type Props = {
   /**
    * Color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -29,13 +35,13 @@ const ICON_SIZE = 24;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <>
- *     <List.Icon color={MD3Colors.tertiary70} icon="folder" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="equal" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="calendar" />
+ *     <List.Icon color={Palette.tertiary70} icon="folder" />
+ *     <List.Icon color={Palette.tertiary70} icon="equal" />
+ *     <List.Icon color={Palette.tertiary70} icon="calendar" />
  *   </>
  * );
  *

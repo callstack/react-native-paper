@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
+import { DarkTheme, LightTheme, Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -1155,80 +1155,80 @@ const darkCyanColors = {
 
 export const colorThemes = {
   paper: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
+    light: LightTheme,
+    dark: DarkTheme,
   },
   pink: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightPinkColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightPinkColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkPinkColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkPinkColors.colors },
     },
   },
   green: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightGreenColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightGreenColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkGreenColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkGreenColors.colors },
     },
   },
   blue: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightBlueColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightBlueColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkBlueColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkBlueColors.colors },
     },
   },
   orange: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightOrangeColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightOrangeColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkOrangeColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkOrangeColors.colors },
     },
   },
   red: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightRedColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightRedColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkRedColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkRedColors.colors },
     },
   },
   yellow: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightYellowColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightYellowColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkYellowColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkYellowColors.colors },
     },
   },
   cyan: {
     light: {
-      ...MD3LightTheme,
-      colors: { ...MD3LightTheme.colors, ...lightCyanColors.colors },
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightCyanColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      colors: { ...MD3DarkTheme.colors, ...darkCyanColors.colors },
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkCyanColors.colors },
     },
   },
-} as { [key: string]: { light: MD3Theme; dark: MD3Theme } };
+} as { [key: string]: { light: Theme; dark: Theme } };
 
 export const songsData = [
   {

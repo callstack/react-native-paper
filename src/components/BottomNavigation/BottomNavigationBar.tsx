@@ -19,7 +19,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme, ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -37,10 +37,6 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  /**
-   * @deprecated In v5.x works only with theme version 2.
-   */
-  color?: string;
   accessibilityLabel?: string;
   testID?: string;
   lazy?: boolean;
@@ -94,7 +90,6 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecatedProperty In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -122,7 +117,7 @@ export type Props<Route extends BaseRoute> = {
   renderIcon?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which React Element to be used as tab label.
@@ -130,7 +125,7 @@ export type Props<Route extends BaseRoute> = {
   renderLabel?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
@@ -333,7 +328,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -582,7 +577,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = (theme as MD3Theme).fonts.labelMedium;
+            const font = (theme as Theme).fonts.labelMedium;
 
             return renderTouchable({
               key: route.key,

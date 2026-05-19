@@ -1,4 +1,6 @@
-import { tokens } from '../../styles/themes/v3/tokens';
+import type { ColorValue } from 'react-native';
+
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;
@@ -18,7 +20,7 @@ const getBackgroundColor = ({
   disabled,
   selected,
   customContainerColor,
-}: BaseProps & { customContainerColor?: string }) => {
+}: BaseProps & { customContainerColor?: ColorValue }) => {
   if (disabled) {
     if (isMode('contained') || isMode('contained-tonal')) {
       return theme.colors.onSurface;
@@ -58,7 +60,7 @@ const getIconColor = ({
   disabled,
   selected,
   customIconColor,
-}: BaseProps & { customIconColor?: string }) => {
+}: BaseProps & { customIconColor?: ColorValue }) => {
   if (disabled) {
     return theme.colors.onSurface;
   }
@@ -106,8 +108,8 @@ export const getIconButtonColor = ({
   disabled?: boolean;
   selected?: boolean;
   mode?: IconButtonMode;
-  customIconColor?: string;
-  customContainerColor?: string;
+  customIconColor?: ColorValue;
+  customContainerColor?: ColorValue;
 }) => {
   const isMode = (modeToCompare: IconButtonMode) => {
     return mode === modeToCompare;

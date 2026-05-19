@@ -14,7 +14,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
-import { tokens } from '../styles/themes/v3/tokens';
+import { tokens } from '../theme/tokens';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
   },
   // eslint-disable-next-line react-native/no-color-literals

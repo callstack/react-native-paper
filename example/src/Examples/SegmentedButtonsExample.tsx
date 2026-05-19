@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { List } from 'react-native-paper';
 
 import {
@@ -17,7 +17,7 @@ import {
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{ [key: string]: undefined }>;
+  navigation: NativeStackNavigationProp<{ [key: string]: undefined }>;
 };
 
 const SegmentedButtonExample = ({ navigation }: Props) => {

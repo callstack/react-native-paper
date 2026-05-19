@@ -10,14 +10,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple, {
@@ -145,7 +144,6 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { roundness } = theme;
   const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
@@ -155,7 +153,7 @@ const SegmentedButtonItem = ({
       uncheckedColor,
     });
 
-  const borderRadius = 5 * roundness;
+  const borderRadius = theme.shapes.corner.largeIncreased;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,

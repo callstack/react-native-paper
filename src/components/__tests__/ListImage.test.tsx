@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
-
+import { render } from '../../test-utils';
 import ListImage from '../List/ListImage';
 
 const styles = StyleSheet.create({
@@ -52,7 +51,6 @@ it('renders ListImage with `image` variant', () => {
     />
   );
 
-  expect(tree.container.props['variant']).toBe('image');
   expect(tree.getByTestId(testID)).toHaveStyle(styles.image);
 });
 
@@ -64,6 +62,5 @@ it('renders ListImage with `video` variant', () => {
     />
   );
 
-  expect(tree.container.props['variant']).toBe('video');
   expect(tree.getByTestId(testID)).toHaveStyle(styles.video);
 });

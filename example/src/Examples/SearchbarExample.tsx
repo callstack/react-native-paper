@@ -2,20 +2,20 @@ import * as React from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
+  Avatar,
   List,
-  MD3Colors,
+  Palette,
   Searchbar,
   Snackbar,
-  Avatar,
+  useTheme,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 const SearchExample = ({ navigation }: Props) => {
@@ -34,7 +34,7 @@ const SearchExample = ({ navigation }: Props) => {
     clickableLoading: '',
   });
 
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   return (
     <>
@@ -57,7 +57,7 @@ const SearchExample = ({ navigation }: Props) => {
             value={searchQueries.traileringIcon}
             traileringIcon={'microphone'}
             traileringIconColor={
-              isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
+              isVisible ? Palette.error40 : colors.onSurfaceVariant
             }
             traileringIconAccessibilityLabel={'microphone button'}
             onTraileringIconPress={() => setIsVisible(true)}
@@ -76,7 +76,7 @@ const SearchExample = ({ navigation }: Props) => {
             value={searchQueries.traileringIconWithRightItem}
             traileringIcon={'microphone'}
             traileringIconColor={
-              isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
+              isVisible ? Palette.error40 : colors.onSurfaceVariant
             }
             traileringIconAccessibilityLabel={'microphone button'}
             onTraileringIconPress={() => setIsVisible(true)}

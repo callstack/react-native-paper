@@ -20,7 +20,7 @@ exports[`renders menu with content styles 1`] = `
           {
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -42,7 +42,7 @@ exports[`renders menu with content styles 1`] = `
               "borderWidth": 1,
               "flex": undefined,
               "minWidth": 64,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -267,7 +267,7 @@ exports[`renders menu with content styles 1`] = `
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "opacity": 0,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 2,
                 "width": 0,
@@ -297,7 +297,7 @@ exports[`renders menu with content styles 1`] = `
                 "borderTopRightRadius": 0,
                 "flex": undefined,
                 "paddingVertical": 8,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 1,
                   "width": 0,
@@ -408,7 +408,7 @@ exports[`renders menu with content styles 1`] = `
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
-                            "letterSpacing": 0.15,
+                            "letterSpacing": 0.5,
                             "lineHeight": 24,
                           },
                           [
@@ -417,7 +417,7 @@ exports[`renders menu with content styles 1`] = `
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
-                              "letterSpacing": 0.15,
+                              "letterSpacing": 0.5,
                               "lineHeight": 24,
                             },
                             undefined,
@@ -532,7 +532,7 @@ exports[`renders menu with content styles 1`] = `
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
-                            "letterSpacing": 0.15,
+                            "letterSpacing": 0.5,
                             "lineHeight": 24,
                           },
                           [
@@ -541,7 +541,7 @@ exports[`renders menu with content styles 1`] = `
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
-                              "letterSpacing": 0.15,
+                              "letterSpacing": 0.5,
                               "lineHeight": 24,
                             },
                             undefined,
@@ -583,7 +583,7 @@ exports[`renders not visible menu 1`] = `
         {
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -605,7 +605,7 @@ exports[`renders not visible menu 1`] = `
             "borderWidth": 1,
             "flex": undefined,
             "minWidth": 64,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -751,7 +751,7 @@ exports[`renders visible menu 1`] = `
           {
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -773,7 +773,7 @@ exports[`renders visible menu 1`] = `
               "borderWidth": 1,
               "flex": undefined,
               "minWidth": 64,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -996,7 +996,7 @@ exports[`renders visible menu 1`] = `
               "backgroundColor": "rgba(243, 237, 247, 1)",
               "borderRadius": 4,
               "opacity": 0,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 2,
                 "width": 0,
@@ -1024,7 +1024,7 @@ exports[`renders visible menu 1`] = `
                 "borderRadius": 4,
                 "flex": undefined,
                 "paddingVertical": 8,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 1,
                   "width": 0,
@@ -1135,7 +1135,7 @@ exports[`renders visible menu 1`] = `
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
-                            "letterSpacing": 0.15,
+                            "letterSpacing": 0.5,
                             "lineHeight": 24,
                           },
                           [
@@ -1144,7 +1144,7 @@ exports[`renders visible menu 1`] = `
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
-                              "letterSpacing": 0.15,
+                              "letterSpacing": 0.5,
                               "lineHeight": 24,
                             },
                             undefined,
@@ -1259,7 +1259,7 @@ exports[`renders visible menu 1`] = `
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
-                            "letterSpacing": 0.15,
+                            "letterSpacing": 0.5,
                             "lineHeight": 24,
                           },
                           [
@@ -1268,7 +1268,7 @@ exports[`renders visible menu 1`] = `
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
-                              "letterSpacing": 0.15,
+                              "letterSpacing": 0.5,
                               "lineHeight": 24,
                             },
                             undefined,

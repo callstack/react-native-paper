@@ -1,17 +1,12 @@
 import { MutableRefObject } from 'react';
-import {
-  Animated,
-  ColorValue,
-  I18nManager,
-  Platform,
-  ViewStyle,
-} from 'react-native';
+import { Animated, ColorValue, Platform, ViewStyle } from 'react-native';
 
 import type { InternalTheme } from '../../types';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
   isIconStatic: boolean;
+  isRTL: boolean;
   distance: number;
   animFAB: Animated.Value;
 };
@@ -32,11 +27,10 @@ type BaseProps = {
 export const getCombinedStyles = ({
   isAnimatedFromRight,
   isIconStatic,
+  isRTL,
   distance,
   animFAB,
 }: GetCombinedStylesProps): CombinedStyles => {
-  const { isRTL } = I18nManager;
-
   const defaultPositionStyles = { left: -distance, right: undefined };
 
   const combinedStyles: CombinedStyles = {
@@ -191,7 +185,7 @@ const getForegroundColor = ({
   theme,
   isVariant,
   customColor,
-}: BaseProps & { customColor?: string }) => {
+}: BaseProps & { customColor?: ColorValue }) => {
   if (typeof customColor !== 'undefined') {
     return customColor;
   }
@@ -223,7 +217,7 @@ export const getFABColors = ({
 }: {
   theme: InternalTheme;
   variant: string;
-  customColor?: string;
+  customColor?: ColorValue;
   customBackgroundColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
@@ -261,7 +255,7 @@ export const getFABGroupColors = ({
   customBackdropColor,
 }: {
   theme: InternalTheme;
-  customBackdropColor?: string;
+  customBackdropColor?: ColorValue;
 }) => {
   return {
     labelColor: getLabelColor({ theme }),
@@ -284,10 +278,10 @@ const v3LargeSize = {
   width: 96,
 };
 
-const getCustomFabSize = (customSize: number, roundness: number) => ({
+const getCustomFabSize = (customSize: number) => ({
   height: customSize,
   width: customSize,
-  borderRadius: roundness === 0 ? 0 : customSize / roundness,
+  borderRadius: customSize / 4,
 });
 
 export const getFabStyle = ({
@@ -299,17 +293,15 @@ export const getFabStyle = ({
   size: 'small' | 'medium' | 'large';
   theme: InternalTheme;
 }) => {
-  const { roundness } = theme;
-
-  if (customSize) return getCustomFabSize(customSize, roundness);
+  if (customSize) return getCustomFabSize(customSize);
 
   switch (size) {
     case 'small':
-      return { ...v3SmallSize, borderRadius: 3 * roundness };
+      return { ...v3SmallSize, borderRadius: theme.shapes.corner.medium };
     case 'medium':
-      return { ...v3MediumSize, borderRadius: 4 * roundness };
+      return { ...v3MediumSize, borderRadius: theme.shapes.corner.large };
     case 'large':
-      return { ...v3LargeSize, borderRadius: 7 * roundness };
+      return { ...v3LargeSize, borderRadius: theme.shapes.corner.extraLarge };
   }
 };
 

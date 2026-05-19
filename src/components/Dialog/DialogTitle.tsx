@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme, ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof Text> & {
@@ -52,7 +52,7 @@ const DialogTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme as MD3Theme;
+  const { colors, fonts } = theme as Theme;
 
   const headerTextStyle = {
     color: colors.onSurface,

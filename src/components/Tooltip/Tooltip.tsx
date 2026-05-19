@@ -9,10 +9,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
@@ -209,7 +208,7 @@ const Tooltip = ({
                   measurement as Measurement,
                   children as React.ReactElement<TooltipChildProps>
                 ),
-                borderRadius: theme.roundness,
+                borderRadius: theme.shapes.corner.extraSmall,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}

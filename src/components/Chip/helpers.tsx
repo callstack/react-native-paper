@@ -2,10 +2,10 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { InternalTheme, MD3Theme } from '../../types';
+import { tokens } from '../../theme/tokens';
+import type { InternalTheme, Theme } from '../../types';
 
-const md3 = (theme: InternalTheme) => theme as MD3Theme;
+const md3 = (theme: InternalTheme) => theme as Theme;
 
 const { stateOpacity } = tokens.md.ref;
 
@@ -24,7 +24,7 @@ const getBorderColor = ({
   isOutlined,
   disabled,
   selectedColor,
-}: BaseProps & { backgroundColor: string; selectedColor?: string }) => {
+}: BaseProps & { backgroundColor: ColorValue; selectedColor?: ColorValue }) => {
   const isSelectedColor = selectedColor !== undefined;
   const { colors } = md3(theme);
 
@@ -38,7 +38,11 @@ const getBorderColor = ({
   }
 
   if (isSelectedColor) {
-    return color(selectedColor).alpha(0.29).rgb().string();
+    if (typeof selectedColor === 'string') {
+      return color(selectedColor).alpha(0.29).rgb().string();
+    }
+    // PlatformColor / OpaqueColorValue: skip the alpha pass and render opaque.
+    return selectedColor;
   }
 
   return colors.outlineVariant;
@@ -50,7 +54,7 @@ const getTextColor = ({
   disabled,
   selectedColor,
 }: BaseProps & {
-  selectedColor?: string;
+  selectedColor?: ColorValue;
 }) => {
   const isSelectedColor = selectedColor !== undefined;
   const { colors } = md3(theme);
@@ -126,7 +130,7 @@ const getIconColor = ({
   disabled,
   selectedColor,
 }: BaseProps & {
-  selectedColor?: string;
+  selectedColor?: ColorValue;
 }) => {
   const isSelectedColor = selectedColor !== undefined;
   const { colors } = md3(theme);
@@ -154,7 +158,7 @@ export const getChipColors = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
-  selectedColor?: string;
+  selectedColor?: ColorValue;
 }) => {
   const baseChipColorProps = { theme, isOutlined, disabled };
 

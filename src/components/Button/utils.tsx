@@ -1,8 +1,8 @@
-import type { ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { InternalTheme, MD3Theme } from '../../types';
+import { black, white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
+import type { InternalTheme, Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
 const { stateOpacity } = tokens.md.ref;
@@ -25,7 +25,7 @@ const isDark = ({
   backgroundColor,
 }: {
   dark?: boolean;
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 }) => {
   if (typeof dark === 'boolean') {
     return dark;
@@ -44,9 +44,9 @@ const getButtonBackgroundColor = ({
   disabled,
   customButtonColor,
 }: BaseProps & {
-  customButtonColor?: string;
+  customButtonColor?: ColorValue;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (customButtonColor && !disabled) {
     return customButtonColor;
   }
@@ -81,11 +81,11 @@ const getButtonTextColor = ({
   backgroundColor,
   dark,
 }: BaseProps & {
-  customTextColor?: string;
-  backgroundColor: string;
+  customTextColor?: ColorValue;
+  backgroundColor: ColorValue;
   dark?: boolean;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (customTextColor && !disabled) {
     return customTextColor;
   }
@@ -145,8 +145,8 @@ export const getButtonColors = ({
 }: {
   theme: InternalTheme;
   mode: ButtonMode;
-  customButtonColor?: string;
-  customTextColor?: string;
+  customButtonColor?: ColorValue;
+  customTextColor?: ColorValue;
   disabled?: boolean;
   dark?: boolean;
 }) => {
