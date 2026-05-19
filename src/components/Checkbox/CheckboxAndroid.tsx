@@ -35,6 +35,13 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   color?: ColorValue;
   /**
+   * Whether the checkbox is in an error state. When true, the outline
+   * (unchecked) and container (checked / indeterminate) use
+   * `theme.colors.error`. `disabled` and explicit `color`/`uncheckedColor`
+   * overrides take precedence.
+   */
+  error?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -60,6 +67,7 @@ const CheckboxAndroid = ({
   disabled,
   onPress,
   testID,
+  error,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -107,6 +115,7 @@ const CheckboxAndroid = ({
       checked,
       customColor: rest.color,
       customUncheckedColor: rest.uncheckedColor,
+      error,
     });
 
   const borderWidth = scaleAnim.interpolate({
