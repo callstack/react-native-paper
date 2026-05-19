@@ -31,6 +31,8 @@ import type {
   TextFieldProps,
   TextFieldSharedApi,
   SharedTextFieldStyleData,
+  GetAccessibilityDataProps,
+  GetAccessibilityDataReturn,
 } from './TextField';
 import type { InternalTheme } from '../../types';
 
@@ -608,5 +610,82 @@ export const getOutlinedTextFieldData = (
     outlineStyles,
     inputStyles,
     ...shared,
+  };
+};
+
+export const getAccessibilityData = ({
+  data,
+  hasError,
+  hasCounter,
+  isDisabled,
+}: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
+  const { label, supportingText, ...props } = data;
+
+  let textLength = 0;
+
+  if (props.value) {
+    textLength = props.value.length;
+  } else if (props.defaultValue) {
+    textLength = props.defaultValue.length;
+  }
+
+  const maxLength = props.maxLength;
+  const shouldEvaluateCounter = !!maxLength && hasCounter;
+  const isEmptyString = textLength === 0;
+  const isCounterExceeded = shouldEvaluateCounter && textLength > maxLength;
+  const isCounterReached = shouldEvaluateCounter && textLength === maxLength;
+  const isInvalid = hasError || isCounterExceeded;
+  const isSupportingTextHidden = !!(supportingText && !hasError);
+
+  const chunks: string[] = [];
+
+  if (label) {
+    chunks.push(label);
+  }
+
+  if (isSupportingTextHidden) {
+    chunks.push(supportingText);
+  }
+
+  if (isEmptyString && props.placeholder && !hasError) {
+    chunks.push(props.placeholder);
+  }
+
+  const ariaLabel = chunks.length > 0 ? chunks.join(', ') : label;
+
+  let hint: string | undefined;
+
+  if (isCounterExceeded && !(hasError && supportingText)) {
+    hint = `Character limit exceeded ${textLength} of ${maxLength}`;
+  }
+
+  const counterAccessibilityLabel = shouldEvaluateCounter
+    ? isCounterExceeded
+      ? `Character limit exceeded ${textLength} of ${maxLength}`
+      : `Characters entered ${textLength} of ${maxLength}`
+    : undefined;
+
+  const accessibilityState = {
+    disabled: isDisabled,
+    invalid: isInvalid,
+    ...props.accessibilityState,
+  } as const;
+
+  return {
+    input: {
+      'aria-label': ariaLabel,
+      'aria-valuemax': isCounterReached ? maxLength : undefined,
+      'aria-valuenow': isCounterReached ? textLength : undefined,
+      accessibilityHint: hint,
+      accessibilityState,
+    },
+    supportingText: {
+      'aria-hidden': isSupportingTextHidden,
+      'aria-live': hasError && supportingText ? 'polite' : undefined,
+    },
+    counter: {
+      'aria-label': counterAccessibilityLabel,
+      'aria-live': 'polite',
+    },
   };
 };

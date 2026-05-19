@@ -219,31 +219,64 @@ it('renders supporting text below the field', () => {
   expect(getByText('Use a valid address')).toBeTruthy();
 });
 
-it('uses assertive aria-live on supporting text when error is true', () => {
-  const { getByText } = render(
+it('uses polite aria-live on error supporting text', () => {
+  const { getByText, getByTestId } = render(
     <TextField
       label="Email"
       value=""
       onChangeText={() => {}}
       supportingText="Invalid"
       error
+      testID="tf-input"
     />
   );
 
-  expect(getByText('Invalid').props['aria-live']).toBe('assertive');
+  expect(getByText('Invalid').props['aria-live']).toBe('polite');
+  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
 });
 
-it('uses polite aria-live on supporting text when there is no error', () => {
-  const { getByText } = render(
+it('marks the input invalid when error is true without supporting text', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      error
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+  expect(getByTestId('tf-input').props.accessibilityHint).toBeUndefined();
+});
+
+it('hides helper supporting text from the accessibility tree and omits aria-live', () => {
+  const { getByText, getByTestId } = render(
     <TextField
       label="Email"
       value=""
       onChangeText={() => {}}
       supportingText="Optional"
+      testID="tf-input"
     />
   );
 
-  expect(getByText('Optional').props['aria-live']).toBe('polite');
+  expect(getByText('Optional').props['aria-hidden']).toBe(true);
+  expect(getByText('Optional').props['aria-live']).toBeUndefined();
+  expect(getByTestId('tf-input').props['aria-label']).toBe('Email, Optional');
+});
+
+it('includes supporting text in aria-label when label is omitted', () => {
+  const { getByTestId } = render(
+    <TextField
+      value=""
+      onChangeText={() => {}}
+      supportingText="Helper only"
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props['aria-label']).toBe('Helper only');
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', () => {
@@ -257,10 +290,12 @@ it('does not mark the input as aria-disabled when editable is false (read-only)'
     />
   );
 
-  expect(getByTestId('tf-input').props['aria-disabled']).not.toBe(true);
+  expect(getByTestId('tf-input').props.accessibilityState?.disabled).not.toBe(
+    true
+  );
 });
 
-it('marks the input as aria-disabled when disabled is true', () => {
+it('marks the input as disabled in accessibilityState when disabled is true', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
@@ -271,7 +306,7 @@ it('marks the input as aria-disabled when disabled is true', () => {
     />
   );
 
-  expect(getByTestId('tf-input').props['aria-disabled']).toBe(true);
+  expect(getByTestId('tf-input').props.accessibilityState?.disabled).toBe(true);
 });
 
 it('renders the input via render with merged props', () => {

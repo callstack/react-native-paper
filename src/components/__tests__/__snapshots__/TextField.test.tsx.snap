@@ -426,7 +426,12 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": false,
+          }
+        }
         aria-label="Search"
         cursorColor="rgba(103, 80, 164, 1)"
         onBlur={[Function]}
@@ -1051,7 +1056,12 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": true,
+          }
+        }
         aria-label="Search"
         cursorColor="rgba(179, 38, 30, 1)"
         onBlur={[Function]}
@@ -1521,7 +1531,12 @@ exports[`renders filled TextField with label and value 1`] = `
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": false,
+          }
+        }
         aria-label="Email"
         cursorColor="rgba(103, 80, 164, 1)"
         onBlur={[Function]}
@@ -1947,7 +1962,12 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": false,
+          }
+        }
         aria-label="Search"
         cursorColor="rgba(103, 80, 164, 1)"
         onBlur={[Function]}
@@ -2528,7 +2548,12 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": true,
+          }
+        }
         aria-label="Search"
         cursorColor="rgba(179, 38, 30, 1)"
         onBlur={[Function]}
@@ -2954,7 +2979,12 @@ exports[`renders outlined TextField with label and value 1`] = `
       }
     >
       <TextInput
-        aria-disabled={false}
+        accessibilityState={
+          {
+            "disabled": false,
+            "invalid": false,
+          }
+        }
         aria-label="Password"
         cursorColor="rgba(103, 80, 164, 1)"
         onBlur={[Function]}

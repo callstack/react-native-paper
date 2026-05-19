@@ -8,6 +8,7 @@ import type {
 } from './TextField';
 import {
   getAccentColors,
+  getAccessibilityData,
   getFilledTextFieldData,
   getOutlinedTextFieldData,
   getTextFieldAnimation,
@@ -133,6 +134,17 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   const counterText = `${props.value?.length ?? 0}/${props.maxLength}`;
 
   /**
+   * Accessibility
+   */
+
+  const accessibilityProps = getAccessibilityData({
+    hasError,
+    hasCounter,
+    isDisabled,
+    data: props,
+  });
+
+  /**
    * Styles
    */
 
@@ -148,6 +160,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     animatedContainerStyle,
     placeholder,
     counterText,
+    accessibilityProps,
     renderLeadingAccessory,
     renderTrailingAccessory,
     onFocusHandler,

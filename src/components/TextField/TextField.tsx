@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AccessibilityProps,
   BlurEvent,
   ColorValue,
   FocusEvent,
@@ -19,6 +20,19 @@ import { useTextField } from './hooks';
 import { styles } from './styles';
 import TextFieldErrorIcon from './TextFieldErrorIcon';
 import type { InternalTheme, ThemeProp } from '../../types';
+
+export type GetAccessibilityDataReturn = {
+  input: AccessibilityProps;
+  supportingText: AccessibilityProps;
+  counter: AccessibilityProps;
+};
+
+export type GetAccessibilityDataProps = {
+  data: TextFieldProps;
+  hasError: boolean;
+  hasCounter: boolean;
+  isDisabled: boolean;
+};
 
 export type TextFieldVariant = 'filled' | 'outlined';
 
@@ -104,6 +118,7 @@ export type TextFieldHookReturn = SharedTextFieldStyleData & {
   inputStyles: StyleProp<TextStyle>;
   placeholder: string | undefined;
   counterText: string;
+  accessibilityProps: GetAccessibilityDataReturn;
   renderLeadingAccessory:
     | ((props: TextFieldAccessoryProps) => React.ReactNode)
     | undefined;
@@ -205,8 +220,8 @@ const DefaultRenderer = (props: TextFieldRenderProps) => (
  *       style={style}
  *       disabled={disabled}
  *       onPress={() => setText('')}
- *       accessibilityRole="button"
- *       accessibilityLabel="Clear text"
+ *       role="button"
+ *       aria-label="Clear text"
  *     >
  *       <Icon source="close" size={24} />
  *     </Pressable>
@@ -275,6 +290,7 @@ function TextField(props: TextFieldProps) {
     cursorColor,
     placeholder,
     counterText,
+    accessibilityProps,
     renderLeadingAccessory,
     renderTrailingAccessory,
     focusInput,
@@ -322,19 +338,14 @@ function TextField(props: TextFieldProps) {
           : null}
 
         <Animated.View style={[containerStyles, animatedContainerStyle]}>
-          {hasPrefix && (
-            <Text aria-hidden style={prefixStyles}>
-              {prefix}
-            </Text>
-          )}
+          {hasPrefix && <Text style={prefixStyles}>{prefix}</Text>}
 
           {render({
-            'aria-label': label,
-            'aria-disabled': isDisabled,
             ref: input,
             selectionColor,
             cursorColor,
             placeholderTextColor,
+            ...accessibilityProps.input,
             onFocus: onFocusHandler,
             onBlur: onBlurHandler,
             ...textInputProps,
@@ -343,11 +354,7 @@ function TextField(props: TextFieldProps) {
             style: inputStyles,
           })}
 
-          {hasSuffix && (
-            <Text aria-hidden style={suffixStyles}>
-              {suffix}
-            </Text>
-          )}
+          {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}
         </Animated.View>
 
         {renderTrailingAccessory ? (
@@ -365,7 +372,7 @@ function TextField(props: TextFieldProps) {
       <View style={styles.addendum}>
         {!!supportingText && (
           <Text
-            aria-live={hasError ? 'assertive' : 'polite'}
+            {...accessibilityProps.supportingText}
             style={supportingTextStyles}
           >
             {supportingText}
@@ -373,7 +380,7 @@ function TextField(props: TextFieldProps) {
         )}
 
         {hasCounter && (
-          <Text aria-live="polite" style={counterStyles}>
+          <Text {...accessibilityProps.counter} style={counterStyles}>
             {counterText}
           </Text>
         )}

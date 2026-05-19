@@ -18,7 +18,7 @@ const TextFieldErrorIcon = ({
   const theme = useInternalTheme(themeOverride);
 
   return (
-    <View style={wrapperStyle}>
+    <View style={wrapperStyle} aria-hidden>
       <Icon
         source="alert-circle"
         size={ACCESSORY_SIZE}
