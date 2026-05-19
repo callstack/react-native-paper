@@ -1,70 +1,1259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders disabled switch 1`] = `
-<RCTSwitch
-  accessibilityRole="switch"
-  disabled={true}
-  onChange={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onTintColor="rgba(103, 80, 164, 1)"
+exports[`Switch render renders disabled off 1`] = `
+<View
   style={
-    {
-      "alignSelf": "flex-start",
-    }
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
   }
-  tintColor="rgba(103, 80, 164, 1)"
-  value={true}
-/>
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": false,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "borderRadius": 9999,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "pointerEvents": "none",
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(29, 27, 32, 1)",
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(29, 27, 32, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": -4,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 16,
+          "top": 12,
+          "transform": [
+            {
+              "translateX": 8,
+            },
+          ],
+          "width": 16,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 0.38,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
 `;
 
-exports[`renders off switch 1`] = `
-<RCTSwitch
-  accessibilityRole="switch"
-  onChange={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onTintColor="rgba(103, 80, 164, 1)"
+exports[`Switch render renders disabled on 1`] = `
+<View
   style={
-    {
-      "alignSelf": "flex-start",
-    }
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
   }
-  tintColor="rgba(103, 80, 164, 1)"
-  value={false}
-/>
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": true,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": 16,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 24,
+          "top": 8,
+          "transform": [
+            {
+              "translateX": 24,
+            },
+          ],
+          "width": 24,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
 `;
 
-exports[`renders on switch 1`] = `
-<RCTSwitch
-  accessibilityRole="switch"
-  onChange={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onTintColor="rgba(103, 80, 164, 1)"
+exports[`Switch render renders off 1`] = `
+<View
   style={
-    {
-      "alignSelf": "flex-start",
-    }
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
   }
-  tintColor="rgba(103, 80, 164, 1)"
-  value={true}
-/>
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": false,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "borderRadius": 9999,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "pointerEvents": "none",
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(121, 116, 126, 1)",
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(29, 27, 32, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": -4,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 16,
+          "top": 12,
+          "transform": [
+            {
+              "translateX": 8,
+            },
+          ],
+          "width": 16,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+          {
+            "backgroundColor": "rgba(121, 116, 126, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
 `;
 
-exports[`renders switch with color 1`] = `
-<RCTSwitch
-  accessibilityRole="switch"
-  onChange={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  onTintColor="#e91e63"
+exports[`Switch render renders on 1`] = `
+<View
   style={
-    {
-      "alignSelf": "flex-start",
-    }
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
   }
-  tintColor="#e91e63"
-  value={true}
-/>
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": true,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": 16,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 24,
+          "top": 8,
+          "transform": [
+            {
+              "translateX": 24,
+            },
+          ],
+          "width": 24,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+          {
+            "backgroundColor": "rgba(255, 255, 255, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Switch render renders with checked icon 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": true,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": 16,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 24,
+          "top": 8,
+          "transform": [
+            {
+              "translateX": 24,
+            },
+          ],
+          "width": 24,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+          {
+            "backgroundColor": "rgba(255, 255, 255, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "height": 16,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 12,
+          "width": 16,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "transform": [
+            {
+              "translateX": 28,
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(103, 80, 164, 1)",
+              "fontSize": 16,
+            },
+            [
+              {
+                "lineHeight": 16,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        check
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Switch render renders with per-state icons 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": 52,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityRole="switch"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": true,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 52,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 32,
+            "overflow": "visible",
+            "width": 52,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 9999,
+          "height": 40,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": 40,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": 16,
+            },
+          ],
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "left": 0,
+        },
+        {
+          "height": 24,
+          "top": 8,
+          "transform": [
+            {
+              "translateX": 24,
+            },
+          ],
+          "width": 24,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+          {
+            "backgroundColor": "rgba(255, 255, 255, 1)",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "height": 16,
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 12,
+          "width": 16,
+        },
+        {
+          "left": 0,
+        },
+        {
+          "transform": [
+            {
+              "translateX": 28,
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(103, 80, 164, 1)",
+              "fontSize": 16,
+            },
+            [
+              {
+                "lineHeight": 16,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        check
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+        {
+          "borderColor": "rgba(98, 91, 113, 1)",
+          "borderRadius": 9999,
+          "borderWidth": 3,
+          "bottom": -1,
+          "left": -5,
+          "right": -5,
+          "top": -1,
+        },
+        {
+          "opacity": 0,
+        },
+      ]
+    }
+  />
+</View>
 `;
