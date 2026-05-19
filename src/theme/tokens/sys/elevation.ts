@@ -1,10 +1,25 @@
 // M3 elevation tokens and shadow builder per spec:
 // https://m3.material.io/styles/elevation/tokens
 
-import { Animated, type ColorValue } from 'react-native';
+import {
+  Animated,
+  type ColorValue,
+  type ViewStyle,
+  type Animated as AnimatedNS,
+} from 'react-native';
 
 import { isAnimatedValue } from '../../../utils/animations';
 import type { Elevation, ThemeElevation } from '../../types';
+
+type AnimatedShadowStyle = {
+  shadowColor: ColorValue;
+  shadowOffset: {
+    width: AnimatedNS.Value;
+    height: AnimatedNS.AnimatedInterpolation<number>;
+  };
+  shadowOpacity: AnimatedNS.AnimatedInterpolation<number>;
+  shadowRadius: AnimatedNS.AnimatedInterpolation<number>;
+};
 
 export const defaultElevation: ThemeElevation = {
   level0: 0,
@@ -32,10 +47,23 @@ export const shadowLayers = [
   },
 ];
 
+// eslint-disable-next-line no-redeclare
+export function shadow(elevation: number, shadowColor: ColorValue): ViewStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: Animated.Value,
+  shadowColor: ColorValue
+): AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: number | Animated.Value,
+  shadowColor: ColorValue
+): ViewStyle | AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
 export function shadow(
   elevation: number | Animated.Value = 0,
   shadowColor: ColorValue
-) {
+): ViewStyle | AnimatedShadowStyle {
   if (isAnimatedValue(elevation)) {
     return {
       shadowColor,
