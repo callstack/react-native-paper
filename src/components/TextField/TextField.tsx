@@ -19,7 +19,28 @@ import Animated, { AnimatedStyle } from 'react-native-reanimated';
 import { useTextField } from './hooks';
 import { styles } from './styles';
 import TextFieldErrorIcon from './TextFieldErrorIcon';
+import { getTextFieldAnimation } from './utils';
 import type { InternalTheme, ThemeProp } from '../../types';
+
+export type TextFieldFlags = {
+  isRTL: boolean;
+  isDisabled: boolean;
+  isEditable: boolean | undefined;
+  hasError: boolean;
+  hasCounter: boolean;
+  hasAccessory: boolean;
+  isFloating: boolean;
+  hasPrefix: boolean;
+  hasSuffix: boolean;
+};
+
+export type TextFieldColors = {
+  selectionColor: ColorValue;
+  cursorColor: ColorValue;
+  placeholderTextColor: ColorValue;
+};
+
+export type TextFieldAnimationState = ReturnType<typeof getTextFieldAnimation>;
 
 export type GetAccessibilityDataReturn = {
   input: AccessibilityProps;
@@ -94,6 +115,15 @@ export type OutlinedTextFieldHookData = SharedTextFieldStyleData & {
   outlineStyles: StyleProp<ViewStyle>;
   inputStyles: StyleProp<TextStyle>;
 };
+
+export type TextFieldLayoutData =
+  | FilledTextFieldHookData
+  | OutlinedTextFieldHookData;
+
+export type TextFieldLayoutState = Omit<
+  TextFieldLayoutData,
+  'input' | 'isDisabled' | 'hasError' | 'hasSuffix'
+>;
 
 export type TextFieldHookReturn = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
