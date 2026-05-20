@@ -24,6 +24,19 @@ npx expo start --web
 
 No additional bundler configuration is required. See the [Expo Web docs](https://docs.expo.dev/workflow/web/) for details on how Expo configures React Native for Web under the hood.
 
+## Without Expo
+
+If you're not using Expo, follow the [React Native for Web setup guide](https://necolas.github.io/react-native-web/docs/setup/) to configure your bundler. The setup covers aliasing `react-native` to `react-native-web` in webpack, Babel, and Jest.
+
+You will also need to manually load the Material Design icon font used by Paper. Add the following to your HTML shell or inject it at the root of your app:
+
+```css
+@font-face {
+  font-family: 'MaterialDesignIcons';
+  src: url('~@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf') format('truetype');
+}
+```
+
 ## Load the Roboto font (optional)
 
-The default Paper theme uses the Roboto typeface. Add it to your web page via Google Fonts — follow the instructions on the [Roboto specimen page](https://fonts.google.com/specimen/Roboto).
+The default Paper theme uses the Roboto typeface. With Expo, use the [`@expo-google-fonts/roboto`](https://github.com/expo/google-fonts/tree/master/font-packages/roboto) package. For other setups, follow the instructions on the [Roboto specimen page](https://fonts.google.com/specimen/Roboto).
