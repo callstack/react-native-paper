@@ -635,8 +635,6 @@ export const getAccessibilityData = ({
 
   if (props.value) {
     textLength = props.value.length;
-  } else if (props.defaultValue) {
-    textLength = props.defaultValue.length;
   }
 
   const maxLength = props.maxLength;

@@ -127,6 +127,7 @@ export type TextFieldLayoutState = Omit<
 
 export type TextFieldHookReturn = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
+  value: string | undefined;
   isDisabled: boolean;
   isEditable: boolean | undefined;
   hasPrefix: boolean;
@@ -155,8 +156,9 @@ export type TextFieldHookReturn = SharedTextFieldStyleData & {
   renderTrailingAccessory:
     | ((props: TextFieldAccessoryProps) => React.ReactNode)
     | undefined;
-  onFocusHandler: (e: FocusEvent) => void;
-  onBlurHandler: (e: BlurEvent) => void;
+  onChangeText: (text: string) => void;
+  onFocus: (e: FocusEvent) => void;
+  onBlur: (e: BlurEvent) => void;
   focusInput: () => void;
 };
 
@@ -276,6 +278,7 @@ const DefaultRenderer = (props: TextFieldRenderProps) => (
 function TextField(props: TextFieldProps) {
   /* eslint-disable @typescript-eslint/no-unused-vars -- peel TextField-only props before TextInput spread */
   const {
+    defaultValue: _defaultValue,
     ref,
     error,
     label,
@@ -294,6 +297,7 @@ function TextField(props: TextFieldProps) {
 
   const {
     input,
+    value,
     isDisabled,
     isEditable,
     hasPrefix,
@@ -324,8 +328,9 @@ function TextField(props: TextFieldProps) {
     renderLeadingAccessory,
     renderTrailingAccessory,
     focusInput,
-    onFocusHandler,
-    onBlurHandler,
+    onChangeText,
+    onFocus,
+    onBlur,
   } = useTextField(props);
 
   return (
@@ -376,12 +381,14 @@ function TextField(props: TextFieldProps) {
             cursorColor,
             placeholderTextColor,
             ...accessibilityProps.input,
-            onFocus: onFocusHandler,
-            onBlur: onBlurHandler,
             ...textInputProps,
+            value,
             editable: isEditable,
             placeholder,
             style: inputStyles,
+            onChangeText,
+            onFocus,
+            onBlur,
           })}
 
           {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}

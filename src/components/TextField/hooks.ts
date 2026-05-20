@@ -37,6 +37,28 @@ const useTextFieldRef = (ref: TextFieldProps['ref']) => {
   return input;
 };
 
+const useTextFieldValue = (
+  props: Pick<TextFieldProps, 'value' | 'defaultValue' | 'onChangeText'>
+) => {
+  const isControlled = props.value !== undefined;
+
+  const [uncontrolledValue, setUncontrolledValue] = useState(
+    isControlled ? props.value : props.defaultValue
+  );
+
+  const value = isControlled ? props.value : uncontrolledValue;
+
+  const onChangeText = (text: string) => {
+    if (!isControlled) {
+      setUncontrolledValue(text);
+    }
+
+    props.onChangeText?.(text);
+  };
+
+  return { value, onChangeText };
+};
+
 const useTextFieldFocus = (
   props: Pick<TextFieldProps, 'onFocus' | 'onBlur'>,
   input: RefObject<TextInput | null>,
@@ -44,12 +66,12 @@ const useTextFieldFocus = (
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const onFocusHandler = (e: FocusEvent) => {
+  const onFocus = (e: FocusEvent) => {
     props.onFocus?.(e);
     setIsFocused(true);
   };
 
-  const onBlurHandler = (e: BlurEvent) => {
+  const onBlur = (e: BlurEvent) => {
     props.onBlur?.(e);
     setIsFocused(false);
   };
@@ -61,19 +83,20 @@ const useTextFieldFocus = (
 
   return {
     isFocused,
-    onFocusHandler,
-    onBlurHandler,
+    onFocus,
+    onBlur,
     focusInput,
   };
 };
 
 const useTextFieldFlags = (
   props: TextFieldProps,
-  isFocused: boolean
+  isFocused: boolean,
+  value: TextFieldProps['value']
 ): TextFieldFlags => {
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
-  const isFloating = isFocused || !!props.value;
+  const isFloating = isFocused || !!value;
 
   return {
     isRTL,
@@ -215,12 +238,12 @@ const useTextFieldLayout = ({
 
 const useTextFieldAccessibility = (
   props: TextFieldProps,
+  value: TextFieldProps['value'],
   flags: Pick<TextFieldFlags, 'hasError' | 'hasCounter' | 'isDisabled'>
 ): GetAccessibilityDataReturn => {
   const { hasError, hasCounter, isDisabled } = flags;
 
-  const { value, defaultValue, label, supportingText, placeholder, maxLength } =
-    props;
+  const { label, supportingText, placeholder, maxLength } = props;
 
   return useMemo(
     () =>
@@ -228,13 +251,12 @@ const useTextFieldAccessibility = (
         hasError,
         hasCounter,
         isDisabled,
-        data: props,
+        data: { ...props, value },
       }),
     // `props` is omitted — fields read by `getAccessibilityData` are listed explicitly.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment
     [
       value,
-      defaultValue,
       label,
       supportingText,
       placeholder,
@@ -258,10 +280,15 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const theme = useInternalTheme(themeOverride);
 
-  const { isFocused, onFocusHandler, onBlurHandler, focusInput } =
-    useTextFieldFocus(props, input, !!props.disabled);
+  const { value, onChangeText } = useTextFieldValue(props);
 
-  const flags = useTextFieldFlags(props, isFocused);
+  const { isFocused, onFocus, onBlur, focusInput } = useTextFieldFocus(
+    props,
+    input,
+    !!props.disabled
+  );
+
+  const flags = useTextFieldFlags(props, isFocused, value);
 
   const { selectionColor, cursorColor, placeholderTextColor } =
     useTextFieldColors(theme, flags.hasError, props.placeholderTextColor);
@@ -284,9 +311,9 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     animation,
   });
 
-  const accessibilityProps = useTextFieldAccessibility(props, flags);
+  const accessibilityProps = useTextFieldAccessibility(props, value, flags);
 
-  const counterText = useTextFieldCounter(props.value, props.maxLength);
+  const counterText = useTextFieldCounter(value, props.maxLength);
 
   const renderLeadingAccessory = flags.isRTL
     ? props.endAccessory
@@ -300,6 +327,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   return {
     input,
+    value,
     isDisabled: flags.isDisabled,
     isEditable: flags.isEditable,
     hasPrefix: flags.hasPrefix,
@@ -317,8 +345,9 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     ...layout,
     renderLeadingAccessory,
     renderTrailingAccessory,
-    onFocusHandler,
-    onBlurHandler,
+    onChangeText,
+    onFocus,
+    onBlur,
     focusInput,
   };
 };
