@@ -230,7 +230,8 @@ export type Props = $Omit<
 // level 2 while pressed.
 const initialElevation = 1;
 const activeElevation = 2;
-const iconSize = 18;
+// MD3 leading/trailing icon size for the legacy (no-`size`) button.
+const iconSize = 20;
 
 const Button = (
   {
@@ -625,7 +626,7 @@ const styles = StyleSheet.create({
   },
   legacyLabel: {
     marginVertical: 10,
-    marginHorizontal: 24,
+    marginHorizontal: 16,
   },
   legacyLabelText: {
     marginHorizontal: 12,

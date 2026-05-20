@@ -884,11 +884,11 @@ exports[`renders button with icon 1`] = `
               [
                 {
                   "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
+                  "fontSize": 20,
                 },
                 [
                   {
-                    "lineHeight": 18,
+                    "lineHeight": 20,
                     "transform": [
                       {
                         "scaleX": 1,
@@ -1080,11 +1080,11 @@ exports[`renders button with icon in reverse order 1`] = `
               [
                 {
                   "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
+                  "fontSize": 20,
                 },
                 [
                   {
-                    "lineHeight": 18,
+                    "lineHeight": 20,
                     "transform": [
                       {
                         "scaleX": 1,
@@ -1281,7 +1281,7 @@ exports[`renders contained contained with mode 1`] = `
                     "textAlign": "center",
                   },
                   {
-                    "marginHorizontal": 24,
+                    "marginHorizontal": 16,
                     "marginVertical": 10,
                   },
                   undefined,
@@ -1586,9 +1586,9 @@ exports[`renders loading button 1`] = `
             collapsable={false}
             style={
               {
-                "height": 18,
+                "height": 20,
                 "opacity": 1,
-                "width": 18,
+                "width": 20,
               }
             }
           >
@@ -1610,13 +1610,13 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   {
-                    "height": 18,
+                    "height": 20,
                     "transform": [
                       {
                         "rotate": "45deg",
                       },
                     ],
-                    "width": 18,
+                    "width": 20,
                   }
                 }
               >
@@ -1624,9 +1624,9 @@ exports[`renders loading button 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "height": 9,
+                      "height": 10,
                       "overflow": "hidden",
-                      "width": 18,
+                      "width": 20,
                     }
                   }
                 >
@@ -1634,7 +1634,7 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       {
-                        "height": 18,
+                        "height": 20,
                         "transform": [
                           {
                             "translateY": 0,
@@ -1643,7 +1643,7 @@ exports[`renders loading button 1`] = `
                             "rotate": "-165deg",
                           },
                         ],
-                        "width": 18,
+                        "width": 20,
                       }
                     }
                   >
@@ -1651,9 +1651,9 @@ exports[`renders loading button 1`] = `
                       collapsable={false}
                       style={
                         {
-                          "height": 9,
+                          "height": 10,
                           "overflow": "hidden",
-                          "width": 18,
+                          "width": 20,
                         }
                       }
                     >
@@ -1662,10 +1662,10 @@ exports[`renders loading button 1`] = `
                         style={
                           {
                             "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
+                            "borderRadius": 10,
+                            "borderWidth": 2,
+                            "height": 20,
+                            "width": 20,
                           }
                         }
                       />
@@ -1692,13 +1692,13 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   {
-                    "height": 18,
+                    "height": 20,
                     "transform": [
                       {
                         "rotate": "45deg",
                       },
                     ],
-                    "width": 18,
+                    "width": 20,
                   }
                 }
               >
@@ -1706,10 +1706,10 @@ exports[`renders loading button 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "height": 9,
+                      "height": 10,
                       "overflow": "hidden",
-                      "top": 9,
-                      "width": 18,
+                      "top": 10,
+                      "width": 20,
                     }
                   }
                 >
@@ -1717,16 +1717,16 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       {
-                        "height": 18,
+                        "height": 20,
                         "transform": [
                           {
-                            "translateY": -9,
+                            "translateY": -10,
                           },
                           {
                             "rotate": "345deg",
                           },
                         ],
-                        "width": 18,
+                        "width": 20,
                       }
                     }
                   >
@@ -1734,9 +1734,9 @@ exports[`renders loading button 1`] = `
                       collapsable={false}
                       style={
                         {
-                          "height": 9,
+                          "height": 10,
                           "overflow": "hidden",
-                          "width": 18,
+                          "width": 20,
                         }
                       }
                     >
@@ -1745,10 +1745,10 @@ exports[`renders loading button 1`] = `
                         style={
                           {
                             "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
+                            "borderRadius": 10,
+                            "borderWidth": 2,
+                            "height": 20,
+                            "width": 20,
                           }
                         }
                       />
@@ -1939,7 +1939,7 @@ exports[`renders outlined button with mode 1`] = `
                     "textAlign": "center",
                   },
                   {
-                    "marginHorizontal": 24,
+                    "marginHorizontal": 16,
                     "marginVertical": 10,
                   },
                   undefined,

@@ -1800,7 +1800,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               <View
                 style={
                   {
-                    "marginLeft": -16,
+                    "marginLeft": -8,
                     "marginRight": 16,
                   }
                 }
@@ -1815,11 +1815,11 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     [
                       {
                         "color": "rgba(73, 69, 79, 1)",
-                        "fontSize": 18,
+                        "fontSize": 20,
                       },
                       [
                         {
-                          "lineHeight": 18,
+                          "lineHeight": 20,
                           "transform": [
                             {
                               "scaleX": 1,
@@ -1863,7 +1863,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                           "textAlign": "center",
                         },
                         {
-                          "marginHorizontal": 24,
+                          "marginHorizontal": 16,
                           "marginVertical": 10,
                         },
                         undefined,

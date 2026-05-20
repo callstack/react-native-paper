@@ -137,7 +137,7 @@ export const getButtonIconStyle = ({
     }
     return isTextMode
       ? { marginLeft: -8, marginRight: 12 }
-      : { marginLeft: -16, marginRight: 16 };
+      : { marginLeft: -8, marginRight: 16 };
   }
 
   if (compact) {
@@ -145,7 +145,7 @@ export const getButtonIconStyle = ({
   }
   return isTextMode
     ? { marginLeft: 12, marginRight: -8 }
-    : { marginLeft: 16, marginRight: -16 };
+    : { marginLeft: 16, marginRight: -8 };
 };
 
 type BaseProps = {

@@ -139,7 +139,7 @@ exports[`renders menu with content styles 1`] = `
                           "textAlign": "center",
                         },
                         {
-                          "marginHorizontal": 24,
+                          "marginHorizontal": 16,
                           "marginVertical": 10,
                         },
                         undefined,
@@ -703,7 +703,7 @@ exports[`renders not visible menu 1`] = `
                         "textAlign": "center",
                       },
                       {
-                        "marginHorizontal": 24,
+                        "marginHorizontal": 16,
                         "marginVertical": 10,
                       },
                       undefined,
@@ -872,7 +872,7 @@ exports[`renders visible menu 1`] = `
                           "textAlign": "center",
                         },
                         {
-                          "marginHorizontal": 24,
+                          "marginHorizontal": 16,
                           "marginVertical": 10,
                         },
                         undefined,
