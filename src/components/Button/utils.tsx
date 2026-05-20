@@ -15,12 +15,7 @@ import { splitStyles } from '../../utils/splitStyles';
 
 const { stateOpacity } = tokens.md.ref;
 
-export type ButtonMode =
-  | 'text'
-  | 'outlined'
-  | 'contained'
-  | 'elevated'
-  | 'contained-tonal';
+export type ButtonMode = 'text' | 'outlined' | 'filled' | 'elevated' | 'tonal';
 
 export type ButtonIconPosition = 'leading' | 'trailing';
 
@@ -176,7 +171,7 @@ const getButtonBackgroundColor = ({
   }
 
   // Selected toggle (only outlined/text adopt a filled "tonal-selected" look;
-  // contained / contained-tonal / elevated already render filled).
+  // filled / tonal / elevated already render filled).
   if (selected && (isMode('outlined') || isMode('text'))) {
     return colors.secondaryContainer;
   }
@@ -185,11 +180,11 @@ const getButtonBackgroundColor = ({
     return colors.surfaceContainerLow;
   }
 
-  if (isMode('contained')) {
+  if (isMode('filled')) {
     return colors.primary;
   }
 
-  if (isMode('contained-tonal')) {
+  if (isMode('tonal')) {
     return colors.secondaryContainer;
   }
 
@@ -218,17 +213,13 @@ const getButtonLabelColor = ({
     return theme.colors.onSurface;
   }
 
-  // Selected toggle for outlined/text mirrors the contained-tonal label color.
+  // Selected toggle for outlined/text mirrors the tonal label color.
   if (selected && (isMode('outlined') || isMode('text'))) {
     return colors.onSecondaryContainer;
   }
 
   if (typeof dark === 'boolean') {
-    if (
-      isMode('contained') ||
-      isMode('contained-tonal') ||
-      isMode('elevated')
-    ) {
+    if (isMode('filled') || isMode('tonal') || isMode('elevated')) {
       return isDark({ dark, backgroundColor }) ? white : black;
     }
   }
@@ -243,11 +234,11 @@ const getButtonLabelColor = ({
     return colors.primary;
   }
 
-  if (isMode('contained')) {
+  if (isMode('filled')) {
     return colors.onPrimary;
   }
 
-  if (isMode('contained-tonal')) {
+  if (isMode('tonal')) {
     return colors.onSecondaryContainer;
   }
 

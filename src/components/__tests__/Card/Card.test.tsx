@@ -132,13 +132,13 @@ describe('CardActions', () => {
     const { getByTestId } = render(
       <Card>
         <Card.Actions testID="card-actions">
-          <Button mode="contained" label="Agree" />
+          <Button mode="filled" label="Agree" />
         </Card.Actions>
       </Card>
     );
 
     expect(getByTestId('card-actions').props.children[0].props.mode).toBe(
-      'contained'
+      'filled'
     );
   });
 
@@ -148,7 +148,7 @@ describe('CardActions', () => {
         <Card.Actions>
           <Button
             testID="card-actions-button"
-            mode="contained"
+            mode="filled"
             style={styles.customBorderRadius}
             label="Agree"
           />

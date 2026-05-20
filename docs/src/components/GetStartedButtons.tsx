@@ -37,7 +37,7 @@ const GetStartedButton = () => {
     <View style={styles.container}>
       <Link to="/docs/guides/getting-started" style={noTextDecoration}>
         <Button
-          mode="contained"
+          mode="filled"
           style={styles.button}
           onPress={noop}
           label="Get started"

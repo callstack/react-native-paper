@@ -58,41 +58,41 @@ const ButtonExample = () => {
       <List.Section title="Contained-tonal button (tonal)">
         <View style={styles.row}>
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             onPress={() => {}}
             style={styles.button}
             label="Default"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             buttonColor={color}
             onPress={() => {}}
             style={styles.button}
             label="Custom"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             disabled
             onPress={() => {}}
             style={styles.button}
             label="Disabled"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             icon="camera"
             onPress={() => {}}
             style={styles.button}
             label="Icon"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             loading
             onPress={() => {}}
             style={styles.button}
             label="Loading"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             icon="camera"
             onPress={() => {}}
             style={styles.button}
@@ -150,41 +150,41 @@ const ButtonExample = () => {
       <List.Section title="Contained button (filled)">
         <View style={styles.row}>
           <Button
-            mode="contained"
+            mode="filled"
             onPress={() => {}}
             style={styles.button}
             label="Default"
           />
           <Button
-            mode="contained"
+            mode="filled"
             buttonColor={color}
             onPress={() => {}}
             style={styles.button}
             label="Custom"
           />
           <Button
-            mode="contained"
+            mode="filled"
             disabled
             onPress={() => {}}
             style={styles.button}
             label="Disabled"
           />
           <Button
-            mode="contained"
+            mode="filled"
             icon="camera"
             onPress={() => {}}
             style={styles.button}
             label="Icon"
           />
           <Button
-            mode="contained"
+            mode="filled"
             loading
             onPress={() => {}}
             style={styles.button}
             label="Loading"
           />
           <Button
-            mode="contained"
+            mode="filled"
             icon="camera"
             onPress={() => {}}
             style={styles.button}
@@ -292,13 +292,13 @@ const ButtonExample = () => {
             label="Custom radius"
           />
           <Button
-            mode="contained"
+            mode="filled"
             onPress={() => {}}
             style={styles.noRadius}
             label="Without radius"
           />
           <Button
-            mode="contained-tonal"
+            mode="tonal"
             onPress={() => {}}
             style={{ borderRadius: styles.customRadiusAndPadding.borderRadius }}
             contentStyle={styles.customRadiusAndPadding}
@@ -308,7 +308,7 @@ const ButtonExample = () => {
 
         <View style={styles.row}>
           <Button
-            mode="contained"
+            mode="filled"
             onPress={() => {}}
             style={styles.flexGrow1Button}
             label="flex-grow: 1"
@@ -316,7 +316,7 @@ const ButtonExample = () => {
         </View>
         <View style={styles.row}>
           <Button
-            mode="contained"
+            mode="filled"
             onPress={() => {}}
             style={styles.width100PercentButton}
             label="width: 100%"
@@ -325,27 +325,21 @@ const ButtonExample = () => {
       </List.Section>
       <List.Section title="Compact">
         <View style={styles.row}>
-          {(
-            [
-              'text',
-              'outlined',
-              'contained',
-              'elevated',
-              'contained-tonal',
-            ] as const
-          ).map((mode) => {
-            return (
-              <Button
-                key={mode}
-                mode={mode}
-                compact
-                onPress={() => {}}
-                style={styles.button}
-                icon="camera"
-                label={`Compact ${mode}`}
-              />
-            );
-          })}
+          {(['text', 'outlined', 'filled', 'elevated', 'tonal'] as const).map(
+            (mode) => {
+              return (
+                <Button
+                  key={mode}
+                  mode={mode}
+                  compact
+                  onPress={() => {}}
+                  style={styles.button}
+                  icon="camera"
+                  label={`Compact ${mode}`}
+                />
+              );
+            }
+          )}
         </View>
       </List.Section>
       <List.Section title="Size (expressive)">
@@ -355,7 +349,7 @@ const ButtonExample = () => {
           ).map((size) => (
             <Button
               key={size}
-              mode="contained"
+              mode="filled"
               size={size}
               icon="star"
               onPress={() => {}}
@@ -399,7 +393,7 @@ const ButtonExample = () => {
       </List.Section>
       <List.Section title="Toggle (expressive)">
         <View style={styles.row}>
-          {(['outlined', 'text', 'contained-tonal'] as const).map((mode) => {
+          {(['outlined', 'text', 'tonal'] as const).map((mode) => {
             const key = `toggle-${mode}`;
             const selected = !!selectedToggles[key];
             return (

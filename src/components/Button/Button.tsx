@@ -44,17 +44,15 @@ export type Props = $Omit<
 > & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
-   * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
+   * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis.
+   * - `tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.
+   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
-   * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
-   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3
-   * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3
+   * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
    */
-  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+  mode?: 'text' | 'outlined' | 'filled' | 'elevated' | 'tonal';
   /**
-   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:
-   *  * `contained` mode for theme version 2
-   *  * `contained`, `contained-tonal` and `elevated` modes for theme version 3.
+   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for the `filled`, `tonal` and `elevated` modes.
    */
   dark?: boolean;
   /**
@@ -84,7 +82,7 @@ export type Props = $Omit<
    *
    * - The `shape` is flipped: `'round'` becomes `'square'` and vice versa.
    * - For `outlined` and `text` modes, the button adopts a filled
-   *   `secondaryContainer` appearance (matches `contained-tonal`).
+   *   `secondaryContainer` appearance (matches `tonal`).
    * - `accessibilityState.selected` is set so screen readers announce the
    *   toggle state.
    *
@@ -216,7 +214,7 @@ export type Props = $Omit<
  * const MyComponent = () => (
  *   <Button
  *     icon="camera"
- *     mode="contained"
+ *     mode="filled"
  *     onPress={() => console.log('Pressed')}
  *     label="Press me"
  *   />
