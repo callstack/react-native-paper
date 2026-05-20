@@ -30,13 +30,11 @@ import { filledStyles, outlinedStyles, styles } from './styles';
 import type {
   FilledTextFieldHookData,
   OutlinedTextFieldHookData,
-  TextFieldLayoutData,
   TextFieldProps,
   TextFieldSharedApi,
   SharedTextFieldStyleData,
   GetAccessibilityDataProps,
   GetAccessibilityDataReturn,
-  TextFieldLayoutState,
 } from './TextField';
 import type { InternalTheme } from '../../types';
 
@@ -696,17 +694,4 @@ export const getAccessibilityData = ({
       'aria-live': 'polite',
     },
   };
-};
-
-export const getLayoutState = (
-  layout: TextFieldLayoutData
-): TextFieldLayoutState => {
-  const { input, isDisabled, hasError, hasSuffix, ...layoutState } = layout;
-
-  void input;
-  void isDisabled;
-  void hasError;
-  void hasSuffix;
-
-  return layoutState;
 };

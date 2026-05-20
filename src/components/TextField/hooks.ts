@@ -8,9 +8,7 @@ import {
 import { BlurEvent, FocusEvent, TextInput } from 'react-native';
 
 import type {
-  GetAccessibilityDataReturn,
   TextFieldAnimationState,
-  TextFieldColors,
   TextFieldFlags,
   TextFieldHookReturn,
   TextFieldLayoutState,
@@ -21,21 +19,12 @@ import {
   getAccentColors,
   getAccessibilityData,
   getFilledTextFieldData,
-  getLayoutState,
   getOutlinedTextFieldData,
   getTextFieldAnimation,
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
-
-const useTextFieldRef = (ref: TextFieldProps['ref']) => {
-  const input = useRef<TextInput>(null);
-
-  useImperativeHandle(ref, () => input.current as TextInput);
-
-  return input;
-};
 
 const useTextFieldValue = (
   props: Pick<TextFieldProps, 'value' | 'defaultValue' | 'onChangeText'>
@@ -95,6 +84,7 @@ const useTextFieldFlags = (
   value: TextFieldProps['value']
 ): TextFieldFlags => {
   const { direction } = useLocale();
+
   const isRTL = direction === 'rtl';
   const isFloating = isFocused || !!value;
 
@@ -110,45 +100,6 @@ const useTextFieldFlags = (
     hasSuffix: !!props.suffix && isFloating,
   };
 };
-
-const useTextFieldColors = (
-  theme: InternalTheme,
-  hasError: boolean,
-  placeholderTextColor: TextFieldProps['placeholderTextColor']
-): TextFieldColors =>
-  useMemo(
-    () => ({
-      ...getAccentColors({ theme, hasError }),
-      placeholderTextColor:
-        placeholderTextColor ?? theme.colors.onSurfaceVariant,
-    }),
-    [theme, hasError, placeholderTextColor]
-  );
-
-const useTextFieldAnimation = ({
-  variant,
-  isFloating,
-  isFocused,
-  isRTL,
-  hasAccessory,
-}: {
-  variant: TextFieldVariant;
-  isFloating: boolean;
-  isFocused: boolean;
-  isRTL: boolean;
-  hasAccessory: boolean;
-}): TextFieldAnimationState =>
-  useMemo(
-    () =>
-      getTextFieldAnimation({
-        variant,
-        isFloating,
-        isFocused,
-        isRTL,
-        hasAccessory,
-      }),
-    [variant, isFloating, isFocused, isRTL, hasAccessory]
-  );
 
 const useTextFieldLayout = ({
   variant,
@@ -179,42 +130,54 @@ const useTextFieldLayout = ({
   } = animation;
 
   return useMemo(
-    () =>
-      getLayoutState(
-        variant === 'filled'
-          ? getFilledTextFieldData(
-              {
-                input,
-                theme,
-                isFocused,
-                isRTL,
-                isDisabled,
-                hasAccessory,
-                hasError,
-                hasSuffix,
-                animatedLabelWrapperStyle,
-                animatedLabelTextStyle,
-                animatedActiveOutlineStyle,
-              },
-              props
-            )
-          : getOutlinedTextFieldData(
-              {
-                input,
-                theme,
-                isFocused,
-                isRTL,
-                isDisabled,
-                hasAccessory,
-                hasError,
-                hasSuffix,
-                animatedLabelWrapperStyle,
-                animatedLabelTextStyle,
-                animatedActiveOutlineStyle,
-              },
-              props
-            )
-      ),
+    () => {
+      const {
+        input: _input,
+        isDisabled: _isDisabled,
+        hasError: _hasError,
+        hasSuffix: _hasSuffix,
+        ...layout
+      } = variant === 'filled'
+        ? getFilledTextFieldData(
+            {
+              input,
+              theme,
+              isFocused,
+              isRTL,
+              isDisabled,
+              hasAccessory,
+              hasError,
+              hasSuffix,
+              animatedLabelWrapperStyle,
+              animatedLabelTextStyle,
+              animatedActiveOutlineStyle,
+            },
+            props
+          )
+        : getOutlinedTextFieldData(
+            {
+              input,
+              theme,
+              isFocused,
+              isRTL,
+              isDisabled,
+              hasAccessory,
+              hasError,
+              hasSuffix,
+              animatedLabelWrapperStyle,
+              animatedLabelTextStyle,
+              animatedActiveOutlineStyle,
+            },
+            props
+          );
+
+      void _input;
+      void _isDisabled;
+      void _hasError;
+      void _hasSuffix;
+
+      return layout;
+    },
     /**
      * `input` is a stable ref. `props` is omitted — only `multiline` affects layout.
      * `style` is omitted — assumed stable; dynamic `style` changes won't invalidate layout.
@@ -236,47 +199,10 @@ const useTextFieldLayout = ({
   );
 };
 
-const useTextFieldAccessibility = (
-  props: TextFieldProps,
-  value: TextFieldProps['value'],
-  flags: Pick<TextFieldFlags, 'hasError' | 'hasCounter' | 'isDisabled'>
-): GetAccessibilityDataReturn => {
-  const { hasError, hasCounter, isDisabled } = flags;
-
-  const { label, supportingText, placeholder, maxLength } = props;
-
-  return useMemo(
-    () =>
-      getAccessibilityData({
-        hasError,
-        hasCounter,
-        isDisabled,
-        data: { ...props, value },
-      }),
-    // `props` is omitted — fields read by `getAccessibilityData` are listed explicitly.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment
-    [
-      value,
-      label,
-      supportingText,
-      placeholder,
-      maxLength,
-      hasError,
-      hasCounter,
-      isDisabled,
-    ]
-  );
-};
-
-const useTextFieldCounter = (
-  value: TextFieldProps['value'],
-  maxLength: TextFieldProps['maxLength']
-) => useMemo(() => `${value?.length ?? 0}/${maxLength}`, [value, maxLength]);
-
 export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
-  const input = useTextFieldRef(ref);
+  const input = useRef<TextInput>(null);
 
   const theme = useInternalTheme(themeOverride);
 
@@ -290,10 +216,17 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const flags = useTextFieldFlags(props, isFocused, value);
 
-  const { selectionColor, cursorColor, placeholderTextColor } =
-    useTextFieldColors(theme, flags.hasError, props.placeholderTextColor);
+  useImperativeHandle(ref, () => input.current as TextInput);
 
-  const animation = useTextFieldAnimation({
+  const { selectionColor, cursorColor } = getAccentColors({
+    theme,
+    hasError: flags.hasError,
+  });
+
+  const placeholderTextColor =
+    props.placeholderTextColor ?? theme.colors.onSurfaceVariant;
+
+  const animation = getTextFieldAnimation({
     variant,
     isFloating: flags.isFloating,
     isFocused,
@@ -311,9 +244,14 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     animation,
   });
 
-  const accessibilityProps = useTextFieldAccessibility(props, value, flags);
+  const accessibilityProps = getAccessibilityData({
+    hasError: flags.hasError,
+    hasCounter: flags.hasCounter,
+    isDisabled: flags.isDisabled,
+    data: { ...props, value },
+  });
 
-  const counterText = useTextFieldCounter(value, props.maxLength);
+  const counterText = `${value?.length ?? 0}/${props.maxLength}`;
 
   const renderLeadingAccessory = flags.isRTL
     ? props.endAccessory
