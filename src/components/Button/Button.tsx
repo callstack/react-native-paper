@@ -24,6 +24,7 @@ import {
   getButtonSizeStyle,
   getButtonTouchableRippleStyle,
 } from './utils';
+import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -272,6 +273,7 @@ const Button = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
   const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
@@ -298,7 +300,12 @@ const Button = (
     );
   }
 
-  const isTrailingIcon = iconPosition === 'trailing' || usesReverseContentStyle;
+  const requestedTrailingIcon =
+    iconPosition === 'trailing' || usesReverseContentStyle;
+  const shouldFlipForRTL = direction !== getDefaultDirection();
+  const isTrailingIcon = shouldFlipForRTL
+    ? !requestedTrailingIcon
+    : requestedTrailingIcon;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,

@@ -4,6 +4,7 @@ import { Animated, PlatformColor, StyleSheet } from 'react-native';
 import { act, fireEvent } from '@testing-library/react-native';
 import color from 'color';
 
+import { LocaleProvider } from '../../core/locale';
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
@@ -80,6 +81,28 @@ it('renders button with icon in reverse order', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('swaps the icon to the trailing edge under RTL', () => {
+  const { getByTestId: getByTestIdLTR } = render(
+    <Button icon="camera" iconPosition="leading" label="Icon" />
+  );
+  const { getByTestId: getByTestIdRTL } = render(
+    <LocaleProvider direction="rtl">
+      <Button icon="camera" iconPosition="leading" label="Icon" />
+    </LocaleProvider>
+  );
+
+  const ltrIconStyle = StyleSheet.flatten(
+    getByTestIdLTR('button-icon-container').props.style
+  );
+  const rtlIconStyle = StyleSheet.flatten(
+    getByTestIdRTL('button-icon-container').props.style
+  );
+
+  // The physical margins swap so a "leading" icon sits on the right in RTL.
+  expect(rtlIconStyle.marginLeft).toBe(ltrIconStyle.marginRight);
+  expect(rtlIconStyle.marginRight).toBe(ltrIconStyle.marginLeft);
 });
 
 it('renders loading button', () => {
