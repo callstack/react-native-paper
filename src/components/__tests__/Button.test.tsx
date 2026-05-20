@@ -1121,3 +1121,101 @@ it('animated value changes correctly', () => {
     transform: [{ scale: 1.5 }],
   });
 });
+
+describe('shape morph animation', () => {
+  const lastSpringToValue = (spy: jest.SpyInstance) =>
+    spy.mock.calls.map((call) => call[1]?.toValue);
+
+  it('springs the corner radius to corner.small on press in', () => {
+    const spy = jest.spyOn(Animated, 'spring');
+    const { getByTestId } = render(
+      <Button shape="round" size="small" onPress={() => {}} testID="button" />
+    );
+    spy.mockClear();
+    fireEvent(getByTestId('button'), 'onPressIn');
+    expect(lastSpringToValue(spy)).toContain(getTheme().shapes.corner.small);
+    spy.mockRestore();
+  });
+
+  it('springs the corner radius back to the resting pill radius on press out', () => {
+    const spy = jest.spyOn(Animated, 'spring');
+    const { getByTestId } = render(
+      <Button shape="round" size="small" onPress={() => {}} testID="button" />
+    );
+    spy.mockClear();
+    fireEvent(getByTestId('button'), 'onPressOut');
+    // small round resting radius = minHeight (40) / 2 = 20
+    expect(lastSpringToValue(spy)).toContain(20);
+    spy.mockRestore();
+  });
+
+  it('animates between round and square radii when toggled (no spring on mount)', () => {
+    const spy = jest.spyOn(Animated, 'spring');
+    const { rerender } = render(
+      <Button shape="square" size="large" onPress={() => {}} testID="button" />
+    );
+    // Mount snaps to the resting radius — no spring.
+    expect(spy).not.toHaveBeenCalled();
+    rerender(
+      <Button
+        shape="square"
+        size="large"
+        selected
+        onPress={() => {}}
+        testID="button"
+      />
+    );
+    // selected flips square -> round; large round resting radius = 96 / 2 = 48
+    expect(lastSpringToValue(spy)).toContain(48);
+    spy.mockRestore();
+  });
+
+  it('does not morph legacy or size-only buttons', () => {
+    const spy = jest.spyOn(Animated, 'spring');
+    const { getByTestId, rerender } = render(
+      <Button onPress={() => {}} testID="button" label="Legacy" />
+    );
+    spy.mockClear();
+    fireEvent(getByTestId('button'), 'onPressIn');
+    expect(spy).not.toHaveBeenCalled();
+
+    rerender(
+      <Button size="small" onPress={() => {}} testID="button" label="Sized" />
+    );
+    spy.mockClear();
+    fireEvent(getByTestId('button'), 'onPressIn');
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it('does not morph when the user pins a radius via style', () => {
+    const spy = jest.spyOn(Animated, 'spring');
+    const { getByTestId } = render(
+      <Button
+        shape="round"
+        size="small"
+        style={styles.overrideRadius}
+        onPress={() => {}}
+        testID="button"
+      />
+    );
+    spy.mockClear();
+    fireEvent(getByTestId('button'), 'onPressIn');
+    expect(spy).not.toHaveBeenCalled();
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 4 });
+    spy.mockRestore();
+  });
+
+  it('applies the pressed corner radius to the surface', () => {
+    const { getByTestId } = render(
+      <Button shape="round" size="small" onPress={() => {}} testID="button" />
+    );
+    fireEvent(getByTestId('button'), 'onPressIn');
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    expect(getByTestId('button-container')).toHaveStyle({
+      borderRadius: getTheme().shapes.corner.small,
+    });
+  });
+});

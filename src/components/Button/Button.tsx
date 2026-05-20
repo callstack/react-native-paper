@@ -26,6 +26,7 @@ import {
 } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -332,38 +333,6 @@ const Button = (
     });
   }, [isElevationEntitled, elevation]);
 
-  const handlePressIn = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onPressIn?.(e);
-      if (mode === 'elevated') {
-        const { scale } = animation;
-        Animated.timing(elevation, {
-          toValue: activeElevation,
-          duration: 200 * scale,
-          useNativeDriver:
-            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-        }).start();
-      }
-    },
-    [onPressIn, mode, animation, elevation, isWeb]
-  );
-
-  const handlePressOut = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onPressOut?.(e);
-      if (mode === 'elevated') {
-        const { scale } = animation;
-        Animated.timing(elevation, {
-          toValue: initialElevation,
-          duration: 150 * scale,
-          useNativeDriver:
-            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-        }).start();
-      }
-    },
-    [onPressOut, mode, animation, elevation, isWeb]
-  );
-
   const borderRadiusStyles = React.useMemo(() => {
     const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const [, radiusStyles] = splitStyles(
@@ -382,9 +351,124 @@ const Button = (
         : 'round'
       : shape
     : undefined;
-  const borderRadius = effectiveShape
+  const staticRadius = effectiveShape
     ? getButtonShapeRadius({ size, shape: effectiveShape, theme })
     : theme.shapes.corner.largeIncreased;
+
+  const sizeStyle = React.useMemo(
+    () => (size ? getButtonSizeStyle(size) : undefined),
+    [size]
+  );
+
+  // Shape morph: animate the corner on press (→ corner.small) and on the
+  // `selected`/shape toggle. Shaped buttons only; skip a user-pinned radius.
+  const hasPinnedRadius = Object.keys(borderRadiusStyles).length > 0;
+  const animateShape = shape != null && !hasPinnedRadius;
+  // Use the real pill radius (minHeight/2) for `round` so the spring stays
+  // bounded instead of animating from the full-pill sentinel.
+  const restingRadius =
+    effectiveShape === 'round' && sizeStyle
+      ? sizeStyle.minHeight / 2
+      : staticRadius;
+  const pressedRadius = theme.shapes.corner.small;
+  const { current: animatedRadius } = React.useRef<Animated.Value>(
+    new Animated.Value(restingRadius)
+  );
+  const restingRadiusRef = React.useRef(restingRadius);
+  const isRadiusMountedRef = React.useRef(false);
+
+  const springRadiusTo = React.useCallback(
+    (toValue: number) => {
+      Animated.spring(animatedRadius, {
+        toValue,
+        ...toRawSpring(theme.motion.spring.fast.spatial),
+        useNativeDriver: false,
+      }).start();
+    },
+    [animatedRadius, theme]
+  );
+
+  const handlePressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressIn?.(e);
+      if (animateShape) {
+        springRadiusTo(pressedRadius);
+      }
+      if (mode === 'elevated') {
+        const { scale } = animation;
+        Animated.timing(elevation, {
+          toValue: activeElevation,
+          duration: 200 * scale,
+          useNativeDriver:
+            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        }).start();
+      }
+    },
+    [
+      onPressIn,
+      animateShape,
+      springRadiusTo,
+      pressedRadius,
+      mode,
+      animation,
+      elevation,
+      isWeb,
+    ]
+  );
+
+  const handlePressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressOut?.(e);
+      if (animateShape) {
+        springRadiusTo(restingRadiusRef.current);
+      }
+      if (mode === 'elevated') {
+        const { scale } = animation;
+        Animated.timing(elevation, {
+          toValue: initialElevation,
+          duration: 150 * scale,
+          useNativeDriver:
+            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        }).start();
+      }
+    },
+    [
+      onPressOut,
+      animateShape,
+      springRadiusTo,
+      mode,
+      animation,
+      elevation,
+      isWeb,
+    ]
+  );
+
+  // Snap on mount; animate when a toggle/shape change moves the resting radius.
+  React.useEffect(() => {
+    restingRadiusRef.current = restingRadius;
+    if (!isRadiusMountedRef.current) {
+      isRadiusMountedRef.current = true;
+      return;
+    }
+    if (animateShape) {
+      springRadiusTo(restingRadius);
+    } else {
+      animatedRadius.setValue(restingRadius);
+    }
+  }, [restingRadius, animateShape, animatedRadius, springRadiusTo]);
+
+  // Clamp so a spring overshoot can never render a negative radius.
+  const surfaceRadius = React.useMemo(
+    () =>
+      animateShape
+        ? animatedRadius.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp',
+          })
+        : staticRadius,
+    [animateShape, animatedRadius, staticRadius]
+  );
 
   const {
     backgroundColor,
@@ -415,9 +499,9 @@ const Button = (
   const touchableStyle = React.useMemo(
     () => ({
       ...borderRadiusStyles,
-      borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
+      borderRadius: borderRadiusStyles.borderRadius ?? staticRadius,
     }),
-    [borderRadiusStyles, borderRadius]
+    [borderRadiusStyles, staticRadius]
   );
 
   const buttonStyle = React.useMemo(
@@ -426,6 +510,7 @@ const Button = (
       borderColor,
       borderWidth,
       ...touchableStyle,
+      borderRadius: surfaceRadius, // animated; ripple clip + overlay stay static
     }),
     [
       backgroundOpacity,
@@ -433,22 +518,22 @@ const Button = (
       borderColor,
       borderWidth,
       touchableStyle,
+      surfaceRadius,
     ]
   );
 
   const touchableRippleStyle = React.useMemo(
-    () => getButtonTouchableRippleStyle(touchableStyle, borderWidth),
-    [touchableStyle, borderWidth]
+    () =>
+      // Web can't animate the inner radius — use a rect clipped by the Surface.
+      isWeb && animateShape
+        ? { borderRadius: 0 }
+        : getButtonTouchableRippleStyle(touchableStyle, borderWidth),
+    [isWeb, animateShape, touchableStyle, borderWidth]
   );
 
   const { color: labelStyleColor, fontSize: labelStyleSize } = React.useMemo(
     () => StyleSheet.flatten(labelStyle) || {},
     [labelStyle]
-  );
-
-  const sizeStyle = React.useMemo(
-    () => (size ? getButtonSizeStyle(size) : undefined),
-    [size]
   );
 
   // Extra-small/small buttons are shorter than the 48dp minimum accessible
@@ -505,6 +590,8 @@ const Button = (
           styles.button,
           compact && styles.compact,
           buttonStyle,
+          // Clip the rect ripple to the morphing radius (web; box-shadow safe).
+          isWeb && animateShape && styles.clip,
           style,
         ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
@@ -622,6 +709,9 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 64,
     borderStyle: 'solid',
+  },
+  clip: {
+    overflow: 'hidden',
   },
   compact: {
     minWidth: 'auto',
