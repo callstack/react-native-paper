@@ -252,7 +252,13 @@ const getButtonLabelColor = ({
     }
   }
 
-  if (isMode('outlined') || isMode('text') || isMode('elevated')) {
+  // Outlined uses the neutral on-surface-variant label per MD3 spec; text and
+  // elevated keep the primary accent.
+  if (isMode('outlined')) {
+    return colors.onSurfaceVariant;
+  }
+
+  if (isMode('text') || isMode('elevated')) {
     return colors.primary;
   }
 
@@ -274,7 +280,7 @@ const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
     return 'transparent';
   }
   if (isMode('outlined')) {
-    return theme.colors.outlineVariant;
+    return theme.colors.outline;
   }
 
   return 'transparent';

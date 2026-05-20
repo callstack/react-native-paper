@@ -662,7 +662,7 @@ describe('getButtonColors - text color', () => {
     })
   );
 
-  (['outlined', 'text', 'elevated'] as const).forEach((mode) =>
+  (['text', 'elevated'] as const).forEach((mode) =>
     it(`should return correct theme text color, for theme version 3, ${mode} mode`, () => {
       expect(
         getButtonColors({
@@ -675,7 +675,7 @@ describe('getButtonColors - text color', () => {
     })
   );
 
-  (['outlined', 'text', 'elevated'] as const).forEach((mode) =>
+  (['text', 'elevated'] as const).forEach((mode) =>
     it(`should return correct theme text color, for theme version 3, dark theme, ${mode} mode`, () => {
       expect(
         getButtonColors({
@@ -687,6 +687,28 @@ describe('getButtonColors - text color', () => {
       });
     })
   );
+
+  it('should return onSurfaceVariant label color, for theme version 3, outlined mode', () => {
+    expect(
+      getButtonColors({
+        theme: getTheme(),
+        mode: 'outlined',
+      })
+    ).toMatchObject({
+      labelColor: getTheme().colors.onSurfaceVariant,
+    });
+  });
+
+  it('should return onSurfaceVariant label color, for theme version 3, dark theme, outlined mode', () => {
+    expect(
+      getButtonColors({
+        theme: getTheme(true),
+        mode: 'outlined',
+      })
+    ).toMatchObject({
+      labelColor: getTheme(true).colors.onSurfaceVariant,
+    });
+  });
 
   it('should return correct theme text color, for theme version 3, contained mode', () => {
     expect(
@@ -742,7 +764,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: getTheme().colors.outline,
     });
   });
 
@@ -754,7 +776,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: getTheme(true).colors.outline,
     });
   });
 
@@ -765,7 +787,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: getTheme().colors.outline,
     });
   });
 
@@ -776,7 +798,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: getTheme(true).colors.outline,
     });
   });
 

@@ -1836,7 +1836,7 @@ exports[`renders outlined button with mode 1`] = `
     style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 20,
         "borderStyle": "solid",
         "borderWidth": 1,
@@ -1945,7 +1945,7 @@ exports[`renders outlined button with mode 1`] = `
                   undefined,
                   false,
                   {
-                    "color": "rgba(103, 80, 164, 1)",
+                    "color": "rgba(73, 69, 79, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
