@@ -230,6 +230,9 @@ const initialElevation = 1;
 const activeElevation = 2;
 // MD3 leading/trailing icon size for the legacy (no-`size`) button.
 const iconSize = 20;
+// Minimum accessible touch target (dp). Extra-small/small buttons are shorter
+// than this and get expanded via hitSlop.
+const MIN_TOUCH_TARGET = 48;
 
 const Button = (
   {
@@ -448,6 +451,30 @@ const Button = (
     [size]
   );
 
+  // Extra-small/small buttons are shorter than the 48dp minimum accessible
+  // touch target, so expand the press area with hitSlop without changing the
+  // visual size. A user-supplied `hitSlop` wins on the axes it sets.
+  const hitSlopWithMinTarget = React.useMemo(() => {
+    const verticalSlop = sizeStyle
+      ? Math.max(0, (MIN_TOUCH_TARGET - sizeStyle.minHeight) / 2)
+      : 0;
+    if (verticalSlop === 0) {
+      return hitSlop;
+    }
+    if (hitSlop == null) {
+      return { top: verticalSlop, bottom: verticalSlop };
+    }
+    // A numeric hitSlop is an explicit uniform override — respect it as-is.
+    if (typeof hitSlop === 'number') {
+      return hitSlop;
+    }
+    return {
+      ...hitSlop,
+      top: hitSlop.top ?? verticalSlop,
+      bottom: hitSlop.bottom ?? verticalSlop,
+    };
+  }, [hitSlop, sizeStyle]);
+
   const labelTypeStyle = React.useMemo(
     () => ({
       color: labelColor,
@@ -511,7 +538,7 @@ const Button = (
         accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled, selected }}
         accessible={accessible}
-        hitSlop={hitSlop}
+        hitSlop={hitSlopWithMinTarget}
         disabled={disabled}
         style={touchableRippleStyle}
         testID={testID}

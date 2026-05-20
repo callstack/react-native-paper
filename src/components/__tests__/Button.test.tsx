@@ -923,6 +923,52 @@ describe('size prop', () => {
   );
 });
 
+describe('accessible touch target', () => {
+  it('expands extra-small buttons to the 48dp minimum target', () => {
+    const { getByTestId } = render(
+      <Button size="extra-small" testID="button" label="X" />
+    );
+    // (48 - 32) / 2 = 8
+    expect(getByTestId('button').props.hitSlop).toMatchObject({
+      top: 8,
+      bottom: 8,
+    });
+  });
+
+  it('expands small buttons to the 48dp minimum target', () => {
+    const { getByTestId } = render(
+      <Button size="small" testID="button" label="X" />
+    );
+    // (48 - 40) / 2 = 4
+    expect(getByTestId('button').props.hitSlop).toMatchObject({
+      top: 4,
+      bottom: 4,
+    });
+  });
+
+  it('does not add hitSlop for buttons already at least 48dp tall', () => {
+    const { getByTestId } = render(
+      <Button size="medium" testID="button" label="X" />
+    );
+    expect(getByTestId('button').props.hitSlop).toBeUndefined();
+  });
+
+  it('keeps a user-supplied hitSlop axis while filling the rest', () => {
+    const { getByTestId } = render(
+      <Button
+        size="extra-small"
+        testID="button"
+        label="X"
+        hitSlop={{ top: 20 }}
+      />
+    );
+    expect(getByTestId('button').props.hitSlop).toMatchObject({
+      top: 20,
+      bottom: 8,
+    });
+  });
+});
+
 describe('getButtonShapeRadius', () => {
   it.each([
     ['extra-small', 9999, 12],
