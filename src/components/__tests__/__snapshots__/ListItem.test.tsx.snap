@@ -121,7 +121,7 @@ exports[`renders list item with custom description 1`] = `
             collapsable={false}
             style={
               {
-                "backgroundColor": "rgba(232, 222, 248, 1)",
+                "backgroundColor": "transparent",
                 "borderRadius": 8,
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
@@ -138,7 +138,7 @@ exports[`renders list item with custom description 1`] = `
               collapsable={false}
               style={
                 {
-                  "backgroundColor": "rgba(232, 222, 248, 1)",
+                  "backgroundColor": "transparent",
                   "borderColor": "transparent",
                   "borderRadius": 8,
                   "borderStyle": "solid",

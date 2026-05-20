@@ -82,7 +82,7 @@ const getDefaultBackgroundColor = ({
     return colors.surface;
   }
 
-  return colors.secondaryContainer;
+  return 'transparent';
 };
 
 const getBackgroundColor = ({
@@ -93,11 +93,11 @@ const getBackgroundColor = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
 }) => {
-  const { colors } = md3(theme);
-  if (typeof customBackgroundColor === 'string') {
+  if (customBackgroundColor !== undefined) {
     return customBackgroundColor;
   }
 
+  const { colors } = md3(theme);
   if (disabled) {
     if (isOutlined) {
       return 'transparent';
@@ -116,12 +116,23 @@ const getSelectedBackgroundColor = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
 }) => {
-  return getBackgroundColor({
-    theme,
-    disabled,
-    isOutlined,
-    customBackgroundColor,
-  });
+  if (customBackgroundColor !== undefined) {
+    return customBackgroundColor;
+  }
+
+  const { colors } = md3(theme);
+  if (disabled) {
+    if (isOutlined) {
+      return 'transparent';
+    }
+    return colors.surfaceContainerLow;
+  }
+
+  if (isOutlined) {
+    return colors.surface;
+  }
+
+  return colors.secondaryContainer;
 };
 
 const getIconColor = ({

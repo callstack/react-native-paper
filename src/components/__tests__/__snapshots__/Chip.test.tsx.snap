@@ -5,7 +5,7 @@ exports[`renders chip with close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "backgroundColor": "transparent",
       "borderRadius": 8,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
@@ -22,7 +22,7 @@ exports[`renders chip with close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "backgroundColor": "transparent",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
@@ -303,7 +303,7 @@ exports[`renders chip with custom close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "backgroundColor": "transparent",
       "borderRadius": 8,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
@@ -320,7 +320,7 @@ exports[`renders chip with custom close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "backgroundColor": "transparent",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
@@ -601,7 +601,7 @@ exports[`renders chip with icon 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "backgroundColor": "transparent",
       "borderRadius": 8,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
@@ -618,7 +618,7 @@ exports[`renders chip with icon 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "backgroundColor": "transparent",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
@@ -806,7 +806,7 @@ exports[`renders chip with onPress 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "backgroundColor": "transparent",
       "borderRadius": 8,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
@@ -823,7 +823,7 @@ exports[`renders chip with onPress 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "backgroundColor": "transparent",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",

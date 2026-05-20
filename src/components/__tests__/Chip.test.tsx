@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated } from 'react-native';
+import { Animated, PlatformColor } from 'react-native';
 
 import { act } from '@testing-library/react-native';
 import color from 'color';
@@ -217,6 +217,20 @@ describe('getChipColor - selected background color', () => {
     });
   });
 
+  it('should return non-string custom color (e.g. PlatformColor / OpaqueColorValue), flat mode', () => {
+    const opaque = PlatformColor('systemBlue');
+    expect(
+      getChipColors({
+        theme: getTheme(),
+        customBackgroundColor: opaque,
+        isOutlined: false,
+      })
+    ).toMatchObject({
+      backgroundColor: opaque,
+      selectedBackgroundColor: opaque,
+    });
+  });
+
   it('should return theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
@@ -225,6 +239,41 @@ describe('getChipColor - selected background color', () => {
       })
     ).toMatchObject({
       selectedBackgroundColor: getTheme().colors.secondaryContainer,
+    });
+  });
+
+  it('should return surface color, for theme version 3, outlined mode', () => {
+    expect(
+      getChipColors({
+        theme: getTheme(),
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: getTheme().colors.surface,
+    });
+  });
+
+  it('should return disabled fill, for theme version 3, flat mode + disabled', () => {
+    expect(
+      getChipColors({
+        theme: getTheme(),
+        isOutlined: false,
+        disabled: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: getTheme().colors.surfaceContainerLow,
+    });
+  });
+
+  it('should return transparent for theme version 3, outlined mode + disabled', () => {
+    expect(
+      getChipColors({
+        theme: getTheme(),
+        isOutlined: true,
+        disabled: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: 'transparent',
     });
   });
 });
@@ -260,8 +309,16 @@ describe('getChipColor - background color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
+      backgroundColor: 'transparent',
     });
+  });
+
+  it('should differ from selectedBackgroundColor for theme version 3, flat mode', () => {
+    const { backgroundColor, selectedBackgroundColor } = getChipColors({
+      theme: getTheme(),
+      isOutlined: false,
+    });
+    expect(backgroundColor).not.toBe(selectedBackgroundColor);
   });
 });
 
