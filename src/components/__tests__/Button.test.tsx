@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   },
 });
 
-it('renders text button by default', () => {
-  const tree = render(<Button label="Text Button" />).toJSON();
+it('renders filled button by default', () => {
+  const tree = render(<Button label="Filled Button" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

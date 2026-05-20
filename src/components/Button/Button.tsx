@@ -43,8 +43,8 @@ export type Props = $Omit<
   'mode' | 'children'
 > & {
   /**
-   * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
-   * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis.
+   * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
+   * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)
    * - `tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.
    * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
@@ -235,7 +235,7 @@ const Button = (
   {
     disabled,
     compact,
-    mode = 'text',
+    mode = 'filled',
     size,
     shape,
     selected,
