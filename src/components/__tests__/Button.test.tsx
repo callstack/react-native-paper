@@ -607,44 +607,44 @@ describe('getButtonColors - background color', () => {
 });
 
 describe('getButtonColors - text color', () => {
-  const customTextColor = '#313131';
+  const customLabelColor = '#313131';
 
   it('should return custom text color no matter what is the theme version, when not disabled', () => {
     expect(
       getButtonColors({
-        customTextColor,
+        customLabelColor,
         theme: getTheme(),
         disabled: false,
         mode: 'text',
       })
-    ).toMatchObject({ textColor: customTextColor });
+    ).toMatchObject({ labelColor: customLabelColor });
   });
 
   it('should return correct disabled text color, for theme version 3, no matter what the mode is', () => {
     expect(
       getButtonColors({
-        customTextColor,
+        customLabelColor,
         theme: getTheme(),
         disabled: true,
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurface,
-      textOpacity: stateOpacity.disabled,
+      labelColor: getTheme().colors.onSurface,
+      labelOpacity: stateOpacity.disabled,
     });
   });
 
   it('should return correct disabled text color, for theme version 3, dark theme, no matter what the mode is', () => {
     expect(
       getButtonColors({
-        customTextColor,
+        customLabelColor,
         theme: getTheme(true),
         disabled: true,
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSurface,
-      textOpacity: stateOpacity.disabled,
+      labelColor: getTheme(true).colors.onSurface,
+      labelOpacity: stateOpacity.disabled,
     });
   });
 
@@ -657,7 +657,7 @@ describe('getButtonColors - text color', () => {
           dark: true,
         })
       ).toMatchObject({
-        textColor: white,
+        labelColor: white,
       });
     })
   );
@@ -670,7 +670,7 @@ describe('getButtonColors - text color', () => {
           mode,
         })
       ).toMatchObject({
-        textColor: getTheme().colors.primary,
+        labelColor: getTheme().colors.primary,
       });
     })
   );
@@ -683,7 +683,7 @@ describe('getButtonColors - text color', () => {
           mode,
         })
       ).toMatchObject({
-        textColor: getTheme(true).colors.primary,
+        labelColor: getTheme(true).colors.primary,
       });
     })
   );
@@ -695,7 +695,7 @@ describe('getButtonColors - text color', () => {
         mode: 'contained',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onPrimary,
+      labelColor: getTheme().colors.onPrimary,
     });
   });
 
@@ -706,7 +706,7 @@ describe('getButtonColors - text color', () => {
         mode: 'contained',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onPrimary,
+      labelColor: getTheme(true).colors.onPrimary,
     });
   });
 
@@ -717,7 +717,7 @@ describe('getButtonColors - text color', () => {
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSecondaryContainer,
+      labelColor: getTheme().colors.onSecondaryContainer,
     });
   });
 
@@ -728,7 +728,7 @@ describe('getButtonColors - text color', () => {
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSecondaryContainer,
+      labelColor: getTheme(true).colors.onSecondaryContainer,
     });
   });
 });
@@ -839,19 +839,19 @@ describe('getButtonColors - border width', () => {
 describe('getButtonRippleColor', () => {
   it('returns the custom ripple color when one is provided', () => {
     expect(
-      getButtonRippleColor({ textColor: '#123456', customRippleColor: 'red' })
+      getButtonRippleColor({ labelColor: '#123456', customRippleColor: 'red' })
     ).toBe('red');
   });
 
   it('defaults to the label color at the pressed-state opacity', () => {
-    expect(getButtonRippleColor({ textColor: '#123456' })).toBe(
+    expect(getButtonRippleColor({ labelColor: '#123456' })).toBe(
       color('#123456').alpha(stateOpacity.pressed).rgb().string()
     );
   });
 
   it('returns undefined when the label color is not a plain string', () => {
     expect(
-      getButtonRippleColor({ textColor: PlatformColor('?attr/colorPrimary') })
+      getButtonRippleColor({ labelColor: PlatformColor('?attr/colorPrimary') })
     ).toBeUndefined();
   });
 });
@@ -995,7 +995,7 @@ describe('selected prop', () => {
       })
     ).toMatchObject({
       backgroundColor: getTheme().colors.secondaryContainer,
-      textColor: getTheme().colors.onSecondaryContainer,
+      labelColor: getTheme().colors.onSecondaryContainer,
       borderColor: 'transparent',
       borderWidth: 0,
     });
@@ -1010,7 +1010,7 @@ describe('selected prop', () => {
       })
     ).toMatchObject({
       backgroundColor: getTheme().colors.secondaryContainer,
-      textColor: getTheme().colors.onSecondaryContainer,
+      labelColor: getTheme().colors.onSecondaryContainer,
     });
   });
 
@@ -1023,7 +1023,7 @@ describe('selected prop', () => {
       })
     ).toMatchObject({
       backgroundColor: getTheme().colors.primary,
-      textColor: getTheme().colors.onPrimary,
+      labelColor: getTheme().colors.onPrimary,
     });
   });
 });

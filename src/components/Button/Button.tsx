@@ -245,7 +245,7 @@ const Button = (
     icon,
     iconPosition,
     buttonColor: customButtonColor,
-    textColor: customTextColor,
+    textColor: customLabelColor,
     label,
     children,
     accessibilityLabel,
@@ -387,27 +387,27 @@ const Button = (
   const {
     backgroundColor,
     borderColor,
-    textColor,
-    textOpacity,
+    labelColor,
+    labelOpacity,
     borderWidth,
     backgroundOpacity,
   } = React.useMemo(
     () =>
       getButtonColors({
         customButtonColor,
-        customTextColor,
+        customLabelColor,
         theme,
         mode,
         disabled,
         dark,
         selected,
       }),
-    [customButtonColor, customTextColor, theme, mode, disabled, dark, selected]
+    [customButtonColor, customLabelColor, theme, mode, disabled, dark, selected]
   );
 
   const rippleColor = React.useMemo(
-    () => getButtonRippleColor({ textColor, customRippleColor }),
-    [textColor, customRippleColor]
+    () => getButtonRippleColor({ labelColor, customRippleColor }),
+    [labelColor, customRippleColor]
   );
 
   const touchableStyle = React.useMemo(
@@ -439,7 +439,7 @@ const Button = (
     [touchableStyle, borderWidth]
   );
 
-  const { color: customLabelColor, fontSize: customLabelSize } = React.useMemo(
+  const { color: labelStyleColor, fontSize: labelStyleSize } = React.useMemo(
     () => StyleSheet.flatten(labelStyle) || {},
     [labelStyle]
   );
@@ -449,12 +449,12 @@ const Button = (
     [size]
   );
 
-  const textStyle = React.useMemo(
+  const labelTypeStyle = React.useMemo(
     () => ({
-      color: textColor,
+      color: labelColor,
       ...(theme as Theme).fonts[sizeStyle?.labelVariant ?? 'labelLarge'],
     }),
-    [textColor, theme, sizeStyle]
+    [labelColor, theme, sizeStyle]
   );
 
   const iconStyle = React.useMemo(
@@ -532,7 +532,7 @@ const Button = (
                   },
                 ]
               : []),
-            { opacity: textOpacity },
+            { opacity: labelOpacity },
             contentStyle,
           ]}
         >
@@ -543,22 +543,22 @@ const Button = (
             >
               <Icon
                 source={icon}
-                size={sizeStyle?.iconSize ?? customLabelSize ?? iconSize}
+                size={sizeStyle?.iconSize ?? labelStyleSize ?? iconSize}
                 color={
-                  typeof customLabelColor === 'string'
-                    ? customLabelColor
-                    : textColor
+                  typeof labelStyleColor === 'string'
+                    ? labelStyleColor
+                    : labelColor
                 }
               />
             </View>
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={sizeStyle?.iconSize ?? customLabelSize ?? iconSize}
+              size={sizeStyle?.iconSize ?? labelStyleSize ?? iconSize}
               color={
-                typeof customLabelColor === 'string'
-                  ? customLabelColor
-                  : textColor
+                typeof labelStyleColor === 'string'
+                  ? labelStyleColor
+                  : labelColor
               }
               style={iconStyle ?? undefined}
             />
@@ -574,12 +574,12 @@ const Button = (
                 ? styles.sizedLabel
                 : isMode('text')
                 ? icon || loading
-                  ? styles.md3LabelTextAddons
-                  : styles.md3LabelText
-                : styles.md3Label,
+                  ? styles.legacyLabelTextAddons
+                  : styles.legacyLabelText
+                : styles.legacyLabel,
               !sizeStyle && compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
-              textStyle,
+              labelTypeStyle,
               labelStyle,
             ]}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -623,14 +623,14 @@ const styles = StyleSheet.create({
   uppercaseLabel: {
     textTransform: 'uppercase',
   },
-  md3Label: {
+  legacyLabel: {
     marginVertical: 10,
     marginHorizontal: 24,
   },
-  md3LabelText: {
+  legacyLabelText: {
     marginHorizontal: 12,
   },
-  md3LabelTextAddons: {
+  legacyLabelTextAddons: {
     marginHorizontal: 16,
   },
 });

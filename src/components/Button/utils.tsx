@@ -215,22 +215,22 @@ const getButtonBackgroundColor = ({
   return 'transparent';
 };
 
-const getButtonTextColor = ({
+const getButtonLabelColor = ({
   isMode,
   theme,
   disabled,
-  customTextColor,
+  customLabelColor,
   backgroundColor,
   dark,
   selected,
 }: BaseProps & {
-  customTextColor?: ColorValue;
+  customLabelColor?: ColorValue;
   backgroundColor: ColorValue;
   dark?: boolean;
 }) => {
   const { colors } = theme as Theme;
-  if (customTextColor && !disabled) {
-    return customTextColor;
+  if (customLabelColor && !disabled) {
+    return customLabelColor;
   }
 
   if (disabled) {
@@ -298,7 +298,7 @@ export const getButtonColors = ({
   theme,
   mode,
   customButtonColor,
-  customTextColor,
+  customLabelColor,
   disabled,
   dark,
   selected,
@@ -306,7 +306,7 @@ export const getButtonColors = ({
   theme: InternalTheme;
   mode: ButtonMode;
   customButtonColor?: ColorValue;
-  customTextColor?: ColorValue;
+  customLabelColor?: ColorValue;
   disabled?: boolean;
   dark?: boolean;
   selected?: boolean;
@@ -323,11 +323,11 @@ export const getButtonColors = ({
     selected,
   });
 
-  const textColor = getButtonTextColor({
+  const labelColor = getButtonLabelColor({
     isMode,
     theme,
     disabled,
-    customTextColor,
+    customLabelColor,
     backgroundColor,
     dark,
     selected,
@@ -337,7 +337,7 @@ export const getButtonColors = ({
 
   const borderWidth = getButtonBorderWidth({ isMode, selected });
 
-  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+  const labelOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 
   const backgroundOpacity =
     disabled && !isMode('outlined') && !isMode('text')
@@ -347,8 +347,8 @@ export const getButtonColors = ({
   return {
     backgroundColor,
     borderColor,
-    textColor,
-    textOpacity,
+    labelColor,
+    labelOpacity,
     borderWidth,
     backgroundOpacity,
   };
@@ -364,21 +364,21 @@ export const getButtonColors = ({
  * its own default state-layer color.
  */
 export const getButtonRippleColor = ({
-  textColor,
+  labelColor,
   customRippleColor,
 }: {
-  textColor: ColorValue;
+  labelColor: ColorValue;
   customRippleColor?: ColorValue;
 }): ColorValue | undefined => {
   if (customRippleColor) {
     return customRippleColor;
   }
 
-  if (typeof textColor !== 'string') {
+  if (typeof labelColor !== 'string') {
     return undefined;
   }
 
-  return color(textColor).alpha(stateOpacity.pressed).rgb().string();
+  return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
 };
 
 type ViewStyleBorderRadiusStyles = Partial<
