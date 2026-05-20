@@ -19,6 +19,7 @@ import Animated, { AnimatedStyle } from 'react-native-reanimated';
 import { useTextField } from './hooks';
 import { styles } from './styles';
 import TextFieldErrorIcon from './TextFieldErrorIcon';
+import type { TextFieldAccessoryProps } from './TextFieldIcon';
 import { getTextFieldAnimation } from './utils';
 import type { InternalTheme, ThemeProp } from '../../types';
 
@@ -56,13 +57,6 @@ export type GetAccessibilityDataProps = {
 };
 
 export type TextFieldVariant = 'filled' | 'outlined';
-
-export type TextFieldAccessoryProps = {
-  style: StyleProp<ViewStyle>;
-  multiline: boolean;
-  disabled: boolean;
-  error: boolean;
-};
 
 export type TextFieldSharedApi = {
   input: React.RefObject<TextInput | null>;

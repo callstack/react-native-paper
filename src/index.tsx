@@ -133,12 +133,14 @@ export type { Props as TextInputProps } from './components/TextInput/TextInput';
 export type { Props as TextInputAffixProps } from './components/TextInput/Adornment/TextInputAffix';
 export type { Props as TextInputIconProps } from './components/TextInput/Adornment/TextInputIcon';
 export type {
-  TextFieldAccessoryProps,
   TextFieldProps,
   TextFieldRenderProps,
   TextFieldVariant,
 } from './components/TextField/TextField';
-export type { TextFieldIconProps } from './components/TextField/TextFieldIcon';
+export type {
+  TextFieldAccessoryProps,
+  TextFieldIconProps,
+} from './components/TextField/TextFieldIcon';
 export type { Props as ToggleButtonProps } from './components/ToggleButton/ToggleButton';
 export type { Props as ToggleButtonGroupProps } from './components/ToggleButton/ToggleButtonGroup';
 export type { Props as ToggleButtonRowProps } from './components/ToggleButton/ToggleButtonRow';

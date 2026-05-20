@@ -4,10 +4,8 @@ import { I18nManager, StyleSheet, TextInput, View } from 'react-native';
 import { fireEvent, render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextField from '../TextField';
-import type {
-  TextFieldAccessoryProps,
-  TextFieldRenderProps,
-} from '../TextField/TextField';
+import type { TextFieldRenderProps } from '../TextField/TextField';
+import type { TextFieldAccessoryProps } from '../TextField/TextFieldIcon';
 
 const { stateOpacity } = tokens.md.ref;
 

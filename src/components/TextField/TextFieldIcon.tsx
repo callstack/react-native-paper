@@ -1,17 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
-import type { TextFieldAccessoryProps } from './TextField';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import IconButton, {
-  type Props as IconButtonProps,
-} from '../IconButton/IconButton';
+import type { $Omit } from '../../types';
+import IconButton from '../IconButton/IconButton';
+
+export type TextFieldAccessoryProps = {
+  style: StyleProp<ViewStyle>;
+  multiline: boolean;
+  disabled: boolean;
+  error: boolean;
+};
 
 export type TextFieldIconProps = TextFieldAccessoryProps &
-  Omit<IconButtonProps, 'style' | 'disabled'>;
+  $Omit<React.ComponentProps<typeof IconButton>, keyof TextFieldAccessoryProps>;
 
 /**
  * A component to render a leading / trailing icon in the TextField
@@ -47,6 +52,8 @@ export type TextFieldIconProps = TextFieldAccessoryProps &
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends IconButton props https://callstack.github.io/react-native-paper/docs/components/IconButton
  */
 const TextFieldIcon = ({
   icon,
