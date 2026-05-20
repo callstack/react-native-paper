@@ -2,6 +2,11 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import color from 'color';
 
+import {
+  buttonSizeTokens,
+  legacyContainerShape,
+  type ButtonCornerKey,
+} from './tokens';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import { cornerFull } from '../../theme/tokens/sys/shape';
@@ -41,79 +46,55 @@ export type ButtonSizeStyle = {
 };
 
 /**
- * Per-size metrics for the Material Design 3 (expressive) button sizes.
- * Used when the `size` prop is explicitly set; if `size` is omitted, the
- * Button keeps its legacy visuals.
+ * Per-size metrics for the Material Design 3 (expressive) button sizes, read
+ * from the component tokens. Used when the `size` prop is explicitly set; if
+ * `size` is omitted, the Button keeps its legacy visuals.
  */
-const BUTTON_SIZE_STYLES: Record<ButtonSize, ButtonSizeStyle> = {
-  'extra-small': {
-    minHeight: 32,
-    paddingHorizontal: 12,
-    iconSize: 16,
-    iconGap: 4,
-    labelVariant: 'labelLarge',
-  },
-  small: {
-    minHeight: 40,
-    paddingHorizontal: 16,
-    iconSize: 20,
-    iconGap: 8,
-    labelVariant: 'labelLarge',
-  },
-  medium: {
-    minHeight: 56,
-    paddingHorizontal: 24,
-    iconSize: 24,
-    iconGap: 8,
-    labelVariant: 'titleMedium',
-  },
-  large: {
-    minHeight: 96,
-    paddingHorizontal: 48,
-    iconSize: 32,
-    iconGap: 12,
-    labelVariant: 'headlineSmall',
-  },
-  'extra-large': {
-    minHeight: 136,
-    paddingHorizontal: 64,
-    iconSize: 40,
-    iconGap: 16,
-    labelVariant: 'headlineLarge',
-  },
+export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
+  const t = buttonSizeTokens[size];
+  return {
+    minHeight: t.containerHeight,
+    paddingHorizontal: t.leadingSpace,
+    iconSize: t.iconSize,
+    iconGap: t.iconLabelSpace,
+    labelVariant: t.labelVariant,
+  };
 };
-
-export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle =>
-  BUTTON_SIZE_STYLES[size];
 
 export type ButtonShape = 'round' | 'square';
 
 /**
- * Per-size corner radii for the Material Design 3 expressive shape variants.
- * `round` is always the full-pill radius; `square` uses a per-size smaller
- * corner. Used only when the `shape` prop is set on `Button`.
+ * Resolves a shape key against the theme: `'full'` is the full-pill radius;
+ * every other key maps to `theme.shapes.corner[key]`.
  */
-const BUTTON_SHAPE_RADIUS: Record<ButtonSize, Record<ButtonShape, number>> = {
-  'extra-small': { round: cornerFull, square: 12 },
-  small: { round: cornerFull, square: 12 },
-  medium: { round: cornerFull, square: 16 },
-  large: { round: cornerFull, square: 28 },
-  'extra-large': { round: cornerFull, square: 28 },
-};
+export const resolveButtonCorner = (
+  theme: InternalTheme,
+  key: ButtonCornerKey
+): number =>
+  key === 'full' ? cornerFull : (theme as Theme).shapes.corner[key];
 
-const DEFAULT_SHAPE_RADIUS: Record<ButtonShape, number> = {
-  round: cornerFull,
-  square: 12,
-};
-
+/**
+ * Corner radius for the requested shape, read from the component tokens and
+ * resolved against the theme shape tokens. `round` is the full-pill radius;
+ * `square` uses a per-size smaller corner. When `size` is omitted the legacy
+ * shape mapping is used.
+ */
 export const getButtonShapeRadius = ({
   size,
   shape,
+  theme,
 }: {
   size?: ButtonSize;
   shape: ButtonShape;
-}): number =>
-  size ? BUTTON_SHAPE_RADIUS[size][shape] : DEFAULT_SHAPE_RADIUS[shape];
+  theme: InternalTheme;
+}): number => {
+  const key = size
+    ? shape === 'round'
+      ? buttonSizeTokens[size].containerShapeRound
+      : buttonSizeTokens[size].containerShapeSquare
+    : legacyContainerShape[shape];
+  return resolveButtonCorner(theme, key);
+};
 
 /**
  * Returns the margins applied to the button's icon (or loading indicator)

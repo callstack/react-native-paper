@@ -382,7 +382,7 @@ const Button = (
       : shape
     : undefined;
   const borderRadius = effectiveShape
-    ? getButtonShapeRadius({ size, shape: effectiveShape })
+    ? getButtonShapeRadius({ size, shape: effectiveShape, theme })
     : theme.shapes.corner.largeIncreased;
 
   const {

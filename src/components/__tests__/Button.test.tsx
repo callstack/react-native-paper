@@ -880,7 +880,7 @@ describe('getButtonRippleColor', () => {
 
 describe('getButtonSizeStyle', () => {
   it.each([
-    ['extra-small', 32, 12, 16, 4, 'labelLarge'],
+    ['extra-small', 32, 12, 20, 4, 'labelLarge'],
     ['small', 40, 16, 20, 8, 'labelLarge'],
     ['medium', 56, 24, 24, 8, 'titleMedium'],
     ['large', 96, 48, 32, 12, 'headlineSmall'],
@@ -936,13 +936,15 @@ describe('getButtonShapeRadius', () => {
     ['large', 9999, 28],
     ['extra-large', 9999, 28],
   ] as const)('returns expected radii for size=%s', (size, round, square) => {
-    expect(getButtonShapeRadius({ size, shape: 'round' })).toBe(round);
-    expect(getButtonShapeRadius({ size, shape: 'square' })).toBe(square);
+    const theme = getTheme();
+    expect(getButtonShapeRadius({ size, shape: 'round', theme })).toBe(round);
+    expect(getButtonShapeRadius({ size, shape: 'square', theme })).toBe(square);
   });
 
   it('falls back to default radii when size is omitted', () => {
-    expect(getButtonShapeRadius({ shape: 'round' })).toBe(9999);
-    expect(getButtonShapeRadius({ shape: 'square' })).toBe(12);
+    const theme = getTheme();
+    expect(getButtonShapeRadius({ shape: 'round', theme })).toBe(9999);
+    expect(getButtonShapeRadius({ shape: 'square', theme })).toBe(12);
   });
 });
 
