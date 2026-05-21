@@ -49,6 +49,7 @@ const BannerExample = () => {
             <View key={uri} style={styles.item}>
               <Image
                 source={{ uri }}
+                resizeMode="cover"
                 style={styles.photo}
                 accessibilityIgnoresInvertColors
               />
@@ -131,7 +132,6 @@ const styles = StyleSheet.create({
   },
   photo: {
     flex: 1,
-    resizeMode: 'cover',
   },
   fab: {
     alignSelf: 'center',

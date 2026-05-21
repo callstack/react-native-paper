@@ -17,6 +17,33 @@ describe('Surface', () => {
     expect(getByTestId(testID).props.pointerEvents).toBe('box-none');
   });
 
+  it('renders web shadows with boxShadow instead of shadow props', () => {
+    const originalPlatform = Platform.OS;
+    Platform.OS = 'web';
+
+    try {
+      const { getByTestId } = render(
+        <Surface elevation={5} testID="surface-test">
+          {null}
+        </Surface>
+      );
+
+      const styles = StyleSheet.flatten(
+        getByTestId('surface-test').props.style
+      );
+
+      expect(styles).toMatchObject({
+        boxShadow: '0px 8px 12px rgba(0, 0, 0, 0.3)',
+      });
+      expect(styles).not.toHaveProperty('shadowColor');
+      expect(styles).not.toHaveProperty('shadowOpacity');
+      expect(styles).not.toHaveProperty('shadowOffset');
+      expect(styles).not.toHaveProperty('shadowRadius');
+    } finally {
+      Platform.OS = originalPlatform;
+    }
+  });
+
   describe('on iOS', () => {
     Platform.OS = 'ios';
     const styles = StyleSheet.create({

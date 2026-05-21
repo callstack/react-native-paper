@@ -90,8 +90,9 @@ export default function BottomNavigationBarExample() {
                       accessibilityIgnoresInvertColors
                       source={icon.source}
                       resizeMode="contain"
+                      tintColor={color}
                       fadeDuration={0}
-                      style={{ width: size, height: size, tintColor: color }}
+                      style={{ width: size, height: size }}
                     />
                   );
               }

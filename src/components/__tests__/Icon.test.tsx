@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import { render } from '../../test-utils';
 import Icon from '../Icon';
@@ -16,6 +16,26 @@ describe('Icon Component', () => {
 
     expect(imageIcon).toBeOnTheScreen();
     expect(imageIcon).toHaveStyle({ width: ICON_SIZE, height: ICON_SIZE });
+  });
+
+  it('passes image-specific props without using deprecated style keys', () => {
+    const tintColor = 'tomato';
+    const source = { uri: 'https://picsum.photos/700' };
+    const { getByTestId } = render(
+      <Icon
+        source={source}
+        size={ICON_SIZE}
+        color={tintColor}
+        testID="image-icon"
+      />
+    );
+    const imageIcon = getByTestId('image-icon');
+    const styles = StyleSheet.flatten(imageIcon.props.style);
+
+    expect(imageIcon.props.resizeMode).toBe('contain');
+    expect(imageIcon.props.tintColor).toBe(tintColor);
+    expect(styles).not.toHaveProperty('resizeMode');
+    expect(styles).not.toHaveProperty('tintColor');
   });
 
   it('renders correctly with string source', () => {

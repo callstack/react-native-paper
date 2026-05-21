@@ -625,23 +625,19 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 >
                   <Image
                     accessibilityIgnoresInvertColors={true}
+                    resizeMode="contain"
                     source={
                       {
                         "testUri": "../../../src/assets/back-chevron.png",
                       }
                     }
                     style={
-                      [
-                        {
-                          "resizeMode": "contain",
-                        },
-                        {
-                          "height": 21,
-                          "tintColor": "rgba(29, 27, 32, 1)",
-                          "width": 21,
-                        },
-                      ]
+                      {
+                        "height": 21,
+                        "width": 21,
+                      }
                     }
+                    tintColor="rgba(29, 27, 32, 1)"
                   />
                 </View>
               </View>
