@@ -5,9 +5,9 @@ exports[`activity indicator snapshot test 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(236, 230, 240, 1)",
       "borderRadius": 28,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -23,11 +23,11 @@ exports[`activity indicator snapshot test 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(236, 230, 240, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -46,7 +46,7 @@ exports[`activity indicator snapshot test 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -63,13 +63,13 @@ exports[`activity indicator snapshot test 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -140,35 +140,43 @@ exports[`activity indicator snapshot test 1`] = `
           }
           testID="search-bar-icon"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            magnify
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              magnify
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -176,7 +184,7 @@ exports[`activity indicator snapshot test 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder=""
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
@@ -187,15 +195,15 @@ exports[`activity indicator snapshot test 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
@@ -242,17 +250,15 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            [
-              {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
           }
         >
           <View
@@ -272,14 +278,11 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "width": 24,
-                  },
-                  null,
-                ]
+                {
+                  "height": 12,
+                  "overflow": "hidden",
+                  "width": 24,
+                }
               }
             >
               <View
@@ -329,17 +332,15 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            [
-              {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
           }
         >
           <View
@@ -359,16 +360,12 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "width": 24,
-                  },
-                  {
-                    "top": 12,
-                  },
-                ]
+                {
+                  "height": 12,
+                  "overflow": "hidden",
+                  "top": 12,
+                  "width": 24,
+                }
               }
             >
               <View
@@ -426,9 +423,9 @@ exports[`renders with placeholder 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(236, 230, 240, 1)",
       "borderRadius": 28,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -444,11 +441,11 @@ exports[`renders with placeholder 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(236, 230, 240, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -467,7 +464,7 @@ exports[`renders with placeholder 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -484,13 +481,13 @@ exports[`renders with placeholder 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -561,35 +558,43 @@ exports[`renders with placeholder 1`] = `
           }
           testID="search-bar-icon"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            magnify
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              magnify
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -597,7 +602,7 @@ exports[`renders with placeholder 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
@@ -608,15 +613,15 @@ exports[`renders with placeholder 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
@@ -651,7 +656,7 @@ exports[`renders with placeholder 1`] = `
             "borderRadius": 20,
             "height": 40,
             "margin": 6,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -668,13 +673,13 @@ exports[`renders with placeholder 1`] = `
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
               "overflow": "hidden",
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -745,35 +750,43 @@ exports[`renders with placeholder 1`] = `
             }
             testID="search-bar-clear-icon"
           >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
+            <View
               style={
-                [
-                  {
-                    "color": "rgba(255, 255, 255, 0)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
+                {
+                  "opacity": 1,
+                }
               }
             >
-              close
-            </Text>
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(255, 255, 255, 0)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                close
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -787,9 +800,9 @@ exports[`renders with text 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(236, 230, 240, 1)",
       "borderRadius": 28,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -805,11 +818,11 @@ exports[`renders with text 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(236, 230, 240, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -828,7 +841,7 @@ exports[`renders with text 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -845,13 +858,13 @@ exports[`renders with text 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -922,35 +935,43 @@ exports[`renders with text 1`] = `
           }
           testID="search-bar-icon"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            magnify
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              magnify
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -958,7 +979,7 @@ exports[`renders with text 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
@@ -969,15 +990,15 @@ exports[`renders with text 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
@@ -1008,7 +1029,7 @@ exports[`renders with text 1`] = `
             "borderRadius": 20,
             "height": 40,
             "margin": 6,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1025,13 +1046,13 @@ exports[`renders with text 1`] = `
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
               "flex": 1,
               "overflow": "hidden",
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -1102,35 +1123,43 @@ exports[`renders with text 1`] = `
             }
             testID="search-bar-clear-icon"
           >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
+            <View
               style={
-                [
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
+                {
+                  "opacity": 1,
+                }
               }
             >
-              close
-            </Text>
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                close
+              </Text>
+            </View>
           </View>
         </View>
       </View>

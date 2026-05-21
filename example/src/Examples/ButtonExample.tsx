@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Button, List, Text } from 'react-native-paper';
+import { Button, List, Text, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const theme = useExampleTheme();
+  const theme = useTheme();
 
-  const color = theme.isV3 ? theme.colors.inversePrimary : theme.colors.accent;
+  const color = theme.colors.inversePrimary;
 
   return (
     <ScreenWrapper>
-      <List.Section title={`Text button ${theme.isV3 ? '(text)' : ''}`}>
+      <List.Section title="Text button (text)">
         <View style={styles.row}>
           <Button onPress={() => {}} style={styles.button}>
             Default
@@ -40,61 +39,59 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
-      {theme.isV3 && (
-        <List.Section title="Contained-tonal button (tonal)">
-          <View style={styles.row}>
-            <Button
-              mode="contained-tonal"
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Default
-            </Button>
-            <Button
-              mode="contained-tonal"
-              buttonColor={color}
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Custom
-            </Button>
-            <Button
-              mode="contained-tonal"
-              disabled
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Disabled
-            </Button>
-            <Button
-              mode="contained-tonal"
-              icon="camera"
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Icon
-            </Button>
-            <Button
-              mode="contained-tonal"
-              loading
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Loading
-            </Button>
-            <Button
-              mode="contained-tonal"
-              icon="camera"
-              onPress={() => {}}
-              style={styles.button}
-              contentStyle={styles.flexReverse}
-            >
-              Icon right
-            </Button>
-          </View>
-        </List.Section>
-      )}
-      <List.Section title={`Outlined button ${theme.isV3 ? '(outlined)' : ''}`}>
+      <List.Section title="Contained-tonal button (tonal)">
+        <View style={styles.row}>
+          <Button
+            mode="contained-tonal"
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Default
+          </Button>
+          <Button
+            mode="contained-tonal"
+            buttonColor={color}
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Custom
+          </Button>
+          <Button
+            mode="contained-tonal"
+            disabled
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Disabled
+          </Button>
+          <Button
+            mode="contained-tonal"
+            icon="camera"
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Icon
+          </Button>
+          <Button
+            mode="contained-tonal"
+            loading
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Loading
+          </Button>
+          <Button
+            mode="contained-tonal"
+            icon="camera"
+            onPress={() => {}}
+            style={styles.button}
+            contentStyle={styles.flexReverse}
+          >
+            Icon right
+          </Button>
+        </View>
+      </List.Section>
+      <List.Section title="Outlined button (outlined)">
         <View style={styles.row}>
           <Button mode="outlined" onPress={() => {}} style={styles.button}>
             Default
@@ -142,7 +139,7 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
-      <List.Section title={`Contained button ${theme.isV3 ? '(filled)' : ''}`}>
+      <List.Section title="Contained button (filled)">
         <View style={styles.row}>
           <Button mode="contained" onPress={() => {}} style={styles.button}>
             Default
@@ -190,56 +187,54 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
-      {theme.isV3 && (
-        <List.Section title={'Elevated button (elevated)'}>
-          <View style={styles.row}>
-            <Button mode="elevated" onPress={() => {}} style={styles.button}>
-              Default
-            </Button>
-            <Button
-              mode="elevated"
-              buttonColor={color}
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Custom
-            </Button>
-            <Button
-              mode="elevated"
-              disabled
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Disabled
-            </Button>
-            <Button
-              mode="elevated"
-              icon="camera"
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Icon
-            </Button>
-            <Button
-              mode="elevated"
-              loading
-              onPress={() => {}}
-              style={styles.button}
-            >
-              Loading
-            </Button>
-            <Button
-              mode="elevated"
-              icon="camera"
-              onPress={() => {}}
-              style={styles.button}
-              contentStyle={styles.flexReverse}
-            >
-              Icon right
-            </Button>
-          </View>
-        </List.Section>
-      )}
+      <List.Section title="Elevated button (elevated)">
+        <View style={styles.row}>
+          <Button mode="elevated" onPress={() => {}} style={styles.button}>
+            Default
+          </Button>
+          <Button
+            mode="elevated"
+            buttonColor={color}
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Custom
+          </Button>
+          <Button
+            mode="elevated"
+            disabled
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Disabled
+          </Button>
+          <Button
+            mode="elevated"
+            icon="camera"
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Icon
+          </Button>
+          <Button
+            mode="elevated"
+            loading
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Loading
+          </Button>
+          <Button
+            mode="elevated"
+            icon="camera"
+            onPress={() => {}}
+            style={styles.button}
+            contentStyle={styles.flexReverse}
+          >
+            Icon right
+          </Button>
+        </View>
+      </List.Section>
       <List.Section title="Custom">
         <View style={styles.row}>
           <Button
@@ -279,7 +274,7 @@ const ButtonExample = () => {
             mode="outlined"
             onPress={() => {}}
             style={styles.button}
-            labelStyle={[styles.fontStyles, theme.isV3 && styles.md3FontStyles]}
+            labelStyle={[styles.fontStyles, styles.md3FontStyles]}
           >
             Custom Font
           </Button>

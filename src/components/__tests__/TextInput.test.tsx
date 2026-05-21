@@ -1,17 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
+import { fireEvent } from '@testing-library/react-native';
 
-import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
+import PaperProvider from '../../core/PaperProvider';
+import { getTheme, ThemeProvider } from '../../core/theming';
+import { render } from '../../test-utils';
+import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import {
   getFlatInputColors,
   getOutlinedInputColors,
 } from '../TextInput/helpers';
 import TextInput, { Props } from '../TextInput/TextInput';
+
+const { stateOpacity } = tokens.md.ref;
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -257,28 +262,27 @@ it('renders input placeholder initially with transparent placeholderTextColor', 
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
   Platform.OS = 'android';
-  I18nManager.isRTL = true;
 
   const { getByTestId } = render(
-    <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-    />
+    <PaperProvider direction="rtl">
+      <TextInput
+        label="Flat input"
+        mode="flat"
+        testID="text-input-flat"
+        left={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+        right={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+      />
+    </PaperProvider>
   );
 
   expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
     paddingLeft: 56,
     paddingRight: 16,
   });
-
-  I18nManager.isRTL = false;
 });
 
 it('correctly applies padding offset to input label on Android when LTR', () => {
@@ -366,9 +370,9 @@ it('calls onLayout on right-side affix adornment', () => {
 it("correctly applies theme background to label when input's background is transparent", () => {
   const backgroundColor = 'transparent';
   const theme = {
-    ...DefaultTheme,
+    ...LightTheme,
     colors: {
-      ...DefaultTheme.colors,
+      ...LightTheme.colors,
       background: 'pink',
     },
   };
@@ -547,18 +551,7 @@ describe('getFlatInputColor - underline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      underlineColorCustom: 'transparent',
+      underlineColorCustom: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -569,16 +562,6 @@ describe('getFlatInputColor - underline color', () => {
       })
     ).toMatchObject({
       underlineColorCustom: getTheme().colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      underlineColorCustom: getTheme(false, false).colors.disabled,
     });
   });
 
@@ -595,7 +578,7 @@ describe('getFlatInputColor - underline color', () => {
     expect(
       getFlatInputColors({
         underlineColor: 'beige',
-        theme: getTheme(false, false),
+        theme: getTheme(),
       })
     ).toMatchObject({
       underlineColorCustom: 'beige',
@@ -617,7 +600,7 @@ describe('getFlatInputColor - input text color', () => {
     expect(
       getOutlinedInputColors({
         textColor: 'beige',
-        theme: getTheme(false, false),
+        theme: getTheme(),
       })
     ).toMatchObject({
       inputTextColor: 'beige',
@@ -631,21 +614,8 @@ describe('getFlatInputColor - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      inputTextColor: color(getTheme(false, false).colors?.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -658,58 +628,28 @@ describe('getFlatInputColor - input text color', () => {
       inputTextColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme(false, false).colors.text,
-    });
-  });
 });
 
 describe('getFlatInputColor - placeholder color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
+  it('should return correct disabled color', () => {
     expect(
       getFlatInputColors({
         disabled: true,
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme(false, false).colors.disabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3', () => {
+  it('should return correct theme color', () => {
     expect(
       getFlatInputColors({
         theme: getTheme(),
       })
     ).toMatchObject({
       placeholderColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme(false, false).colors.placeholder,
     });
   });
 });
@@ -722,10 +662,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme().colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
+      backgroundColor: getTheme().colors.surfaceContainerHighest,
     });
     expect(
       getFlatInputColors({
@@ -733,21 +670,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(true),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme(true).colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return undefined when disabled, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      backgroundColor: undefined,
+      backgroundColor: getTheme(true).colors.surfaceContainerHighest,
     });
   });
 
@@ -758,32 +681,6 @@ describe('getFlatInputColor - background color', () => {
       })
     ).toMatchObject({
       backgroundColor: getTheme().colors.surfaceVariant,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2, light mode', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      backgroundColor: color(getTheme(false, false).colors?.background)
-        .darken(0.06)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return correct theme color, for theme version 2, dark mode', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(true, false),
-      })
-    ).toMatchObject({
-      backgroundColor: color(getTheme(true, false).colors?.background)
-        .lighten(0.24)
-        .rgb()
-        .string(),
     });
   });
 });
@@ -802,10 +699,10 @@ describe('getFlatInputColor - error color', () => {
     expect(
       getFlatInputColors({
         error: true,
-        theme: getTheme(false, true),
+        theme: getTheme(),
       })
     ).toMatchObject({
-      errorColor: getTheme(false, true).colors.error,
+      errorColor: getTheme().colors.error,
     });
   });
 });
@@ -818,21 +715,8 @@ describe('getFlatInputColor - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return disabled color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      activeColor: color(getTheme(false, false).colors?.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -849,10 +733,10 @@ describe('getFlatInputColor - active color', () => {
     expect(
       getFlatInputColors({
         error: true,
-        theme: getTheme(false, true),
+        theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme(false, true).colors.error,
+      activeColor: getTheme().colors.error,
     });
   });
 
@@ -869,7 +753,7 @@ describe('getFlatInputColor - active color', () => {
     expect(
       getFlatInputColors({
         activeUnderlineColor: 'beige',
-        theme: getTheme(false, false),
+        theme: getTheme(),
       })
     ).toMatchObject({
       activeColor: 'beige',
@@ -885,16 +769,6 @@ describe('getFlatInputColor - active color', () => {
       activeColor: getTheme().colors.primary,
     });
   });
-
-  it('should return theme active color, for theme version 2', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(false, true),
-      })
-    ).toMatchObject({
-      activeColor: getTheme(false, true).colors.primary,
-    });
-  });
 });
 
 describe('getOutlinedInputColors - outline color', () => {
@@ -905,7 +779,7 @@ describe('getOutlinedInputColors - outline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      outlineColor: getTheme().colors.surfaceDisabled,
+      outlineColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -914,29 +788,6 @@ describe('getOutlinedInputColors - outline color', () => {
       getOutlinedInputColors({
         disabled: true,
         theme: getTheme(true),
-      })
-    ).toMatchObject({
-      outlineColor: 'transparent',
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      outlineColor: getTheme(false, false).colors.disabled,
-    });
-  });
-
-  it('should return custom color as disabled, when it is transparent, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        customOutlineColor: 'transparent',
-        theme: getTheme(false, false),
       })
     ).toMatchObject({
       outlineColor: 'transparent',
@@ -956,7 +807,7 @@ describe('getOutlinedInputColors - outline color', () => {
     expect(
       getOutlinedInputColors({
         customOutlineColor: 'beige',
-        theme: getTheme(false, false),
+        theme: getTheme(),
       })
     ).toMatchObject({
       outlineColor: 'beige',
@@ -972,16 +823,6 @@ describe('getOutlinedInputColors - outline color', () => {
       outlineColor: getTheme().colors.outline,
     });
   });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      outlineColor: getTheme(false, false).colors.placeholder,
-    });
-  });
 });
 
 describe('getOutlinedInputColors - input text color', () => {
@@ -992,21 +833,8 @@ describe('getOutlinedInputColors - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      inputTextColor: color(getTheme(false, false).colors?.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -1019,16 +847,6 @@ describe('getOutlinedInputColors - input text color', () => {
       inputTextColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme(false, false).colors.text,
-    });
-  });
 });
 
 describe('getOutlinedInputColors - placeholder color', () => {
@@ -1039,18 +857,8 @@ describe('getOutlinedInputColors - placeholder color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme(false, false).colors.disabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -1061,16 +869,6 @@ describe('getOutlinedInputColors - placeholder color', () => {
       })
     ).toMatchObject({
       placeholderColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme(false, false).colors.placeholder,
     });
   });
 });
@@ -1089,10 +887,10 @@ describe('getOutlinedInputColors - error color', () => {
     expect(
       getOutlinedInputColors({
         error: true,
-        theme: getTheme(false, true),
+        theme: getTheme(),
       })
     ).toMatchObject({
-      errorColor: getTheme(false, true).colors.error,
+      errorColor: getTheme().colors.error,
     });
   });
 });
@@ -1105,21 +903,8 @@ describe('getOutlinedInputColors - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return disabled color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      activeColor: color(getTheme(false, false).colors?.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -1136,10 +921,10 @@ describe('getOutlinedInputColors - active color', () => {
     expect(
       getOutlinedInputColors({
         error: true,
-        theme: getTheme(false, true),
+        theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme(false, true).colors.error,
+      activeColor: getTheme().colors.error,
     });
   });
 
@@ -1156,7 +941,7 @@ describe('getOutlinedInputColors - active color', () => {
     expect(
       getOutlinedInputColors({
         activeOutlineColor: 'beige',
-        theme: getTheme(false, false),
+        theme: getTheme(),
       })
     ).toMatchObject({
       activeColor: 'beige',
@@ -1170,16 +955,6 @@ describe('getOutlinedInputColors - active color', () => {
       })
     ).toMatchObject({
       activeColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return theme active color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(false, true),
-      })
-    ).toMatchObject({
-      activeColor: getTheme(false, true).colors.primary,
     });
   });
 });

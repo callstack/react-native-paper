@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View, Image } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Appbar,
   Avatar,
@@ -19,7 +19,7 @@ import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';

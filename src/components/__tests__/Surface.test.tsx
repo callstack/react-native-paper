@@ -2,9 +2,8 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Platform } from 'react-native';
 
-import { render } from '@testing-library/react-native';
-
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import Surface from '../Surface';
 
 describe('Surface', () => {
@@ -65,7 +64,7 @@ describe('Surface', () => {
         shadowRadius: 12,
       });
       expect(getByTestId('surface-test')).toHaveStyle({
-        backgroundColor: getTheme().colors.elevation.level5,
+        backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });
 
@@ -256,7 +255,7 @@ describe('Surface', () => {
 
       expect(getByTestId(testID)).not.toHaveStyle({ elevation: 5 });
       expect(getByTestId(testID)).toHaveStyle({
-        backgroundColor: getTheme().colors.elevation.level5,
+        backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });
   });

@@ -130,7 +130,7 @@ const TextInputAffix = ({
   accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { AFFIX_OFFSET } = getConstants(theme.isV3);
+  const { AFFIX_OFFSET } = getConstants();
 
   const {
     textStyle,
@@ -152,12 +152,19 @@ const TextInputAffix = ({
     [side]: offset,
   } as ViewStyle;
 
-  const textColor = getTextColor({ theme, disabled });
+  const { color: textColor, opacity: textOpacity } = getTextColor({
+    theme,
+    disabled,
+  });
 
   const content = (
     <Text
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-      style={[{ color: textColor }, textStyle, labelStyle]}
+      style={[
+        { color: textColor, opacity: textOpacity },
+        textStyle,
+        labelStyle,
+      ]}
       onLayout={onTextLayout}
       testID={`${testID}-text`}
     >

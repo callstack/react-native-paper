@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -11,9 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
-
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
@@ -21,6 +17,7 @@ import {
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import CrossFadeIcon from '../CrossFadeIcon';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple, {
@@ -51,10 +48,6 @@ export type Props = {
    * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -129,7 +122,6 @@ const SegmentedButtonItem = ({
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
-  rippleColor: customRippleColor,
   background,
   icon,
   testID,
@@ -163,8 +155,7 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { roundness, isV3 } = theme;
-  const { borderColor, textColor, borderWidth, backgroundColor } =
+  const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
       theme,
@@ -173,18 +164,15 @@ const SegmentedButtonItem = ({
       uncheckedColor,
     });
 
-  const borderRadius = (isV3 ? 5 : 1) * roundness;
+  const borderRadius = theme.shapes.corner.largeIncreased;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
   });
-  const rippleColor =
-    customRippleColor || color(textColor).alpha(0.12).rgb().string();
-
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
-  const iconSize = isV3 ? 18 : 16;
+  const iconSize = 18;
   const iconStyle = {
     marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
     ...(label && {
@@ -212,12 +200,7 @@ const SegmentedButtonItem = ({
     ...segmentBorderRadius,
   };
   const labelTextStyle: TextStyle = {
-    ...(!isV3
-      ? {
-          textTransform: 'uppercase',
-          fontWeight: '500',
-        }
-      : theme.fonts.labelLarge),
+    ...theme.fonts.labelLarge,
     color: textColor,
   };
   const IconComponent = animated ? CrossFadeIcon : Icon;
@@ -231,14 +214,15 @@ const SegmentedButtonItem = ({
         accessibilityState={{ disabled, checked }}
         accessibilityRole="button"
         disabled={disabled}
-        rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
         background={background}
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.content, { paddingVertical }]}>
+        <View
+          style={[styles.content, { paddingVertical, opacity: textOpacity }]}
+        >
           {showCheckedIcon ? (
             <Animated.View
               testID={`${testID}-check-icon`}

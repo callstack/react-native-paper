@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   View,
@@ -19,7 +20,7 @@ export type Props = $Omit<
   /**
    *  Custom color for back icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Optional icon size.
    */
@@ -49,9 +50,9 @@ export type Props = $Omit<
  * import { Appbar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *     <Appbar.Header>
- *       <Appbar.BackAction onPress={() => {}} />
- *     </Appbar.Header>
+ *   <Appbar.Header>
+ *     <Appbar.BackAction onPress={() => {}} />
+ *   </Appbar.Header>
  * );
  *
  * export default MyComponent;

@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -14,16 +13,16 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import { cornerNone } from '../theme/tokens/sys/shape';
+import type { Theme, ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
@@ -55,11 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Custom color for icon, default will be derived from theme
    */
-  iconColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
+  iconColor?: ColorValue;
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -75,7 +70,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   searchAccessibilityLabel?: string;
   /**
    * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
-   * In v5.x with theme version 3, `clearIcon` is visible only `right` prop is not defined.
+   * In v5.x with theme version 3, `clearIcon` is visible only if `right` prop is not defined.
    */
   clearIcon?: IconSource;
   /**
@@ -92,14 +87,8 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * @supported Available in v5.x with theme version 3
    * Custom color for the right trailering icon, default will be derived from theme
    */
-  traileringIconColor?: string;
+  traileringIconColor?: ColorValue;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Color of the trailering icon ripple effect.
-   */
-  traileringRippleColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
    * Callback to execute on the right trailering icon button press.
    */
   onTraileringIconPress?: (e: GestureResponderEvent) => void;
@@ -113,7 +102,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Works only when `mode` is set to "bar".
    */
   right?: (props: {
-    color: string;
+    color: ColorValue;
     style: Style;
     testID: string;
   }) => React.ReactNode;
@@ -181,7 +170,6 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     {
       icon,
       iconColor: customIconColor,
-      rippleColor: customRippleColor,
       onIconPress,
       searchAccessibilityLabel = 'search',
       clearIcon,
@@ -190,7 +178,6 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       traileringIcon,
       traileringIconColor,
       traileringIconAccessibilityLabel,
-      traileringRippleColor: customTraileringRippleColor,
       onTraileringIconPress,
       right,
       mode = 'bar',
@@ -208,6 +195,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const { direction } = useLocale();
+    const { colors, fonts } = theme as Theme;
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => ({
@@ -227,34 +216,22 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { roundness, dark, isV3, fonts } = theme;
+    const { dark } = theme;
 
-    const placeholderTextColor = isV3
-      ? theme.colors.onSurface
-      : theme.colors?.placeholder;
-    const textColor = isV3 ? theme.colors.onSurfaceVariant : theme.colors.text;
-    const md2IconColor = dark
-      ? textColor
-      : color(textColor).alpha(0.54).rgb().string();
-    const iconColor =
-      customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
-    const rippleColor =
-      customRippleColor || color(textColor).alpha(0.32).rgb().string();
-    const traileringRippleColor =
-      customTraileringRippleColor ||
-      color(textColor).alpha(0.32).rgb().string();
+    const placeholderTextColor = theme.colors.onSurface;
+    const textColor = theme.colors.onSurfaceVariant;
+    const iconColor = customIconColor || theme.colors.onSurfaceVariant;
 
-    const font = isV3
-      ? {
-          ...fonts.bodyLarge,
-          lineHeight: Platform.select({
-            ios: 0,
-            default: fonts.bodyLarge.lineHeight,
-          }),
-        }
-      : theme.fonts.regular;
+    const font = {
+      ...fonts.bodyLarge,
+      lineHeight: Platform.select({
+        ios: 0,
+        default: fonts.bodyLarge.lineHeight,
+      }),
+    };
 
-    const isBarMode = isV3 && mode === 'bar';
+    const isBarMode = mode === 'bar';
+    const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
     const shouldRenderTraileringIcon =
       isBarMode &&
       traileringIcon &&
@@ -264,24 +241,24 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     return (
       <Surface
         style={[
-          { borderRadius: roundness },
-          !isV3 && styles.elevation,
-          isV3 && {
-            backgroundColor: theme.colors.elevation.level3,
-            borderRadius: roundness * (isBarMode ? 7 : 0),
+          { borderRadius: theme.shapes.corner.extraSmall },
+          {
+            backgroundColor: theme.colors.surfaceContainerHigh,
+            borderRadius: isBarMode
+              ? theme.shapes.corner.extraLarge
+              : cornerNone,
           },
           styles.container,
           style,
         ]}
         testID={`${testID}-container`}
-        {...(theme.isV3 && { elevation })}
+        elevation={elevation}
         container
         theme={theme}
       >
         <IconButton
           accessibilityRole="button"
           borderless
-          rippleColor={rippleColor}
           onPress={onIconPress}
           iconColor={iconColor}
           icon={
@@ -291,7 +268,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={direction}
               />
             ))
           }
@@ -306,13 +283,14 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               color: textColor,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
+              textAlign: inputTextAlign,
             },
-            isV3 && (isBarMode ? styles.barModeInput : styles.viewModeInput),
+            isBarMode ? styles.barModeInput : styles.viewModeInput,
             inputStyle,
           ]}
           placeholder={placeholder || ''}
           placeholderTextColor={placeholderTextColor}
-          selectionColor={theme.colors?.primary}
+          selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -325,7 +303,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         {loading ? (
           <ActivityIndicator
             testID="activity-indicator"
-            style={isV3 ? styles.v3Loader : styles.loader}
+            style={styles.v3Loader}
           />
         ) : (
           // Clear icon should be always rendered within Searchbar – it's transparent,
@@ -336,24 +314,23 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             pointerEvents={value ? 'auto' : 'none'}
             testID={`${testID}-icon-wrapper`}
             style={[
-              isV3 && !value && styles.v3ClearIcon,
-              isV3 && right !== undefined && styles.v3ClearIconHidden,
+              !value && styles.v3ClearIcon,
+              right !== undefined && styles.v3ClearIconHidden,
             ]}
           >
             <IconButton
               borderless
               accessibilityLabel={clearAccessibilityLabel}
               iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-              rippleColor={rippleColor}
               onPress={handleClearPress}
               icon={
                 clearIcon ||
                 (({ size, color }) => (
                   <MaterialCommunityIcon
-                    name={isV3 ? 'close' : 'close-circle-outline'}
+                    name="close"
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={direction}
                   />
                 ))
               }
@@ -368,8 +345,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             accessibilityRole="button"
             borderless
             onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
-            rippleColor={traileringRippleColor}
+            iconColor={traileringIconColor || colors.onSurfaceVariant}
             icon={traileringIcon}
             accessibilityLabel={traileringIconAccessibilityLabel}
             testID={`${testID}-trailering-icon`}
@@ -377,13 +353,13 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         ) : null}
         {isBarMode &&
           right?.({ color: textColor, style: styles.rightStyle, testID })}
-        {isV3 && !isBarMode && showDivider && (
+        {!isBarMode && showDivider && (
           <Divider
             bold
             style={[
               styles.divider,
               {
-                backgroundColor: theme.colors.outline,
+                backgroundColor: colors.outline,
               },
             ]}
             testID={`${testID}-divider`}
@@ -404,7 +380,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {
@@ -414,12 +389,6 @@ const styles = StyleSheet.create({
   viewModeInput: {
     paddingLeft: 0,
     minHeight: 72,
-  },
-  elevation: {
-    elevation: 4,
-  },
-  loader: {
-    margin: 10,
   },
   v3Loader: {
     marginHorizontal: 16,

@@ -7,11 +7,8 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
-
 import { useInternalTheme } from '../../core/theming';
-import { black } from '../../styles/themes/v2/colors';
+import type { Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -20,11 +17,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */
-  color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
+  color?: ColorValue;
   /**
    * Name of the icon to show.
    */
@@ -71,11 +64,11 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
  *
  * const MyComponent = () => (
- *     <Appbar.Header>
- *        <Appbar.Content title="Title" subtitle={'Subtitle'} />
- *         <Appbar.Action icon="magnify" onPress={() => {}} />
- *         <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
- *     </Appbar.Header>
+ *   <Appbar.Header>
+ *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *       <Appbar.Action icon="magnify" onPress={() => {}} />
+ *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+ *   </Appbar.Header>
  * );
  *
  * export default MyComponent;
@@ -92,20 +85,18 @@ const AppbarAction = forwardRef<View, Props>(
       accessibilityLabel,
       isLeading,
       theme: themeOverrides,
-      rippleColor,
       ...rest
     }: Props,
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const { colors } = theme as Theme;
 
     const actionIconColor = iconColor
       ? iconColor
-      : theme.isV3
-      ? isLeading
-        ? theme.colors.onSurface
-        : theme.colors.onSurfaceVariant
-      : color(black).alpha(0.54).rgb().string();
+      : isLeading
+      ? colors.onSurface
+      : colors.onSurfaceVariant;
 
     return (
       <IconButton
@@ -117,7 +108,6 @@ const AppbarAction = forwardRef<View, Props>(
         accessibilityLabel={accessibilityLabel}
         animated
         ref={ref}
-        rippleColor={rippleColor}
         {...rest}
       />
     );

@@ -1,13 +1,6 @@
-import {
-  FlexAlignType,
-  ColorValue,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import color from 'color';
-import type { EllipsizeProp, InternalTheme, ThemeProp } from 'src/types';
+import type { EllipsizeProp, InternalTheme, ThemeProp } from '../../types';
 
 type Description =
   | React.ReactNode
@@ -29,17 +22,24 @@ export type Style = {
   marginLeft?: number;
   marginRight?: number;
   marginVertical?: number;
-  alignSelf?: FlexAlignType;
+  alignSelf?: 'flex-start' | 'center';
+};
+
+const stylesV3Left = {
+  marginRight: 0,
+  marginLeft: 16,
+};
+
+const stylesV3Right = {
+  marginLeft: 16,
 };
 
 export const getLeftStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
+  description: Description
 ) => {
-  const stylesV3 = {
-    marginRight: 0,
-    marginLeft: 16,
+  const stylesV3: Style = {
+    ...stylesV3Left,
     alignSelf: alignToTop ? 'flex-start' : 'center',
   };
 
@@ -47,12 +47,8 @@ export const getLeftStyles = (
     return {
       ...styles.iconMarginLeft,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginLeft;
   }
 
   return {
@@ -63,11 +59,10 @@ export const getLeftStyles = (
 
 export const getRightStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
+  description: Description
 ) => {
-  const stylesV3 = {
-    marginLeft: 16,
+  const stylesV3: Style = {
+    ...stylesV3Right,
     alignSelf: alignToTop ? 'flex-start' : 'center',
   };
 
@@ -75,12 +70,8 @@ export const getRightStyles = (
     return {
       ...styles.iconMarginRight,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginRight;
   }
 
   return {
@@ -98,29 +89,18 @@ const styles = StyleSheet.create({
 export const getAccordionColors = ({
   theme,
   isExpanded,
-  customRippleColor,
 }: {
   theme: InternalTheme;
   isExpanded?: boolean;
-  customRippleColor?: ColorValue;
 }) => {
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const titleColor = theme.colors.onSurface;
 
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
+  const descriptionColor = theme.colors.onSurfaceVariant;
 
   const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
 
-  const rippleColor =
-    customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
-
   return {
-    titleColor,
     descriptionColor,
     titleTextColor,
-    rippleColor,
   };
 };

@@ -1,6 +1,9 @@
-import color from 'color';
+import type { ColorValue } from 'react-native';
 
+import { tokens } from '../../../theme/tokens';
 import type { InternalTheme } from '../../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -8,16 +11,10 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled }: BaseProps) {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.onSurfaceVariant;
-  }
-  return color(theme.colors?.text)
-    .alpha(theme.dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
+  return {
+    color: theme.colors.onSurfaceVariant,
+    opacity: disabled ? stateOpacity.disabled : stateOpacity.enabled,
+  };
 }
 
 export function getIconColor({
@@ -27,22 +24,17 @@ export function getIconColor({
   customColor,
 }: BaseProps & {
   isTextInputFocused: boolean;
-  customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
+  customColor?:
+    | ColorValue
+    | ((isTextInputFocused: boolean) => ColorValue | undefined);
 }) {
-  if (typeof customColor === 'function') {
-    return customColor(isTextInputFocused);
-  }
-  if (customColor) {
-    return customColor;
-  }
+  const color =
+    typeof customColor === 'function'
+      ? customColor(isTextInputFocused)
+      : customColor ?? theme.colors.onSurfaceVariant;
 
-  if (!theme.isV3) {
-    return theme.colors.text;
-  }
+  const opacity =
+    disabled && !customColor ? stateOpacity.disabled : stateOpacity.enabled;
 
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
-  }
-
-  return theme.colors.onSurfaceVariant;
+  return { color, opacity };
 }

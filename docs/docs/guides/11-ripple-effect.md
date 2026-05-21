@@ -14,7 +14,7 @@ The ripple effect on the iOS platform is replaced by a highlight effect.
 
 The `rippleColor` prop is available for every pressable component which allows you to set the color of the ripple effect. For the instance, to make the `Button` component's ripple effect transparent, simply pass the desired color value to the prop:
 
-```
+```typescript
 <Button
   rippleColor="#FF000020"
   icon="camera"
@@ -28,7 +28,7 @@ The `rippleColor` prop is available for every pressable component which allows y
 
 To disable the ripple effect in **all** of Paper's components set `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider`.
 
-```
+```typescript
 import { Provider as PaperProvider } from 'react-native-paper';
 // ...
 

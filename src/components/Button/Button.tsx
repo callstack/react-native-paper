@@ -13,15 +13,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import {
   ButtonMode,
   getButtonColors,
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
+import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
@@ -54,22 +52,13 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   compact?: boolean;
   /**
-   * @deprecated Deprecated in v5.x - use `buttonColor` or `textColor` instead.
-   * Custom text color for flat button, or background color for contained button.
-   */
-  color?: string;
-  /**
    * Custom button's background color.
    */
-  buttonColor?: string;
+  buttonColor?: ColorValue;
   /**
    * Custom button's text color.
    */
-  textColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
+  textColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -190,7 +179,6 @@ const Button = (
     icon,
     buttonColor: customButtonColor,
     textColor: customTextColor,
-    rippleColor: customRippleColor,
     children,
     accessibilityLabel,
     accessibilityHint,
@@ -223,8 +211,8 @@ const Button = (
     },
     [mode]
   );
-  const { roundness, isV3, animation } = theme;
-  const uppercase = uppercaseProp ?? !theme.isV3;
+  const { animation } = theme;
+  const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -234,10 +222,9 @@ const Button = (
     onLongPress,
   });
 
-  const isElevationEntitled =
-    !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
-  const initialElevation = isV3 ? 1 : 2;
-  const activeElevation = isV3 ? 2 : 8;
+  const isElevationEntitled = !disabled && isMode('elevated');
+  const initialElevation = 1;
+  const activeElevation = 2;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isElevationEntitled ? initialElevation : 0)
@@ -255,7 +242,7 @@ const Button = (
 
   const handlePressIn = (e: GestureResponderEvent) => {
     onPressIn?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isMode('elevated')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
@@ -268,7 +255,7 @@ const Button = (
 
   const handlePressOut = (e: GestureResponderEvent) => {
     onPressOut?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isMode('elevated')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,
@@ -285,8 +272,8 @@ const Button = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
-  const borderRadius = (isV3 ? 5 : 1) * roundness;
-  const iconSize = isV3 ? 18 : 16;
+  const borderRadius = theme.shapes.corner.largeIncreased;
+  const iconSize = 18;
   const NumberOfLines = numberOfLines ? numberOfLines : 1;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
@@ -298,9 +285,24 @@ const Button = (
       disabled,
       dark,
     });
+  const borderRadius = theme.shapes.corner.largeIncreased;
+  const iconSize = 18;
 
-  const rippleColor =
-    customRippleColor || color(textColor).alpha(0.12).rgb().string();
+  const {
+    backgroundColor,
+    borderColor,
+    textColor,
+    textOpacity,
+    borderWidth,
+    backgroundOpacity,
+  } = getButtonColors({
+    customButtonColor,
+    customTextColor,
+    theme,
+    mode,
+    disabled,
+    dark,
+  });
 
   const touchableStyle = {
     ...borderRadiusStyles,
@@ -308,7 +310,7 @@ const Button = (
   };
 
   const buttonStyle = {
-    backgroundColor,
+    backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
     borderColor,
     borderWidth,
     ...touchableStyle,
@@ -317,7 +319,7 @@ const Button = (
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const font = (theme as Theme).fonts.labelLarge;
 
   const textStyle = {
     color: textColor,
@@ -328,16 +330,14 @@ const Button = (
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
-          isV3 &&
-            isMode('text') &&
+          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          isMode('text') &&
             styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
         ]
       : [
           styles.icon,
-          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isV3 &&
-            isMode('text') &&
+          styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isMode('text') &&
             styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
@@ -352,12 +352,24 @@ const Button = (
           compact && styles.compact,
           buttonStyle,
           style,
-          !isV3 && !disabled && { elevation },
         ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
-      {...(isV3 && { elevation: elevation })}
+      elevation={elevation}
       container
     >
+      {backgroundOpacity < 1 && (
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor,
+              opacity: backgroundOpacity,
+              borderRadius: touchableStyle.borderRadius,
+            },
+          ]}
+        />
+      )}
       <TouchableRipple
         borderless
         background={background}
@@ -373,13 +385,12 @@ const Button = (
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        rippleColor={rippleColor}
         style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
         ref={touchableRef}
       >
-        <View style={[styles.content, contentStyle]}>
+        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
             <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon
@@ -411,13 +422,11 @@ const Button = (
             testID={`${testID}-text`}
             style={[
               styles.label,
-              !isV3 && styles.md2Label,
-              isV3 &&
-                (isMode('text')
-                  ? icon || loading
-                    ? styles.md3LabelTextAddons
-                    : styles.md3LabelText
-                  : styles.md3Label),
+              isMode('text')
+                ? icon || loading
+                  ? styles.md3LabelTextAddons
+                  : styles.md3LabelText
+                : styles.md3Label,
               compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
@@ -492,9 +501,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 9,
     marginHorizontal: 16,
-  },
-  md2Label: {
-    letterSpacing: 1,
   },
   compactLabel: {
     marginHorizontal: 8,

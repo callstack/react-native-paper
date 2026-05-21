@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -9,8 +10,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-
-import color from 'color';
 
 import { Style, getLeftStyles, getRightStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -24,7 +23,7 @@ type Title =
   | ((props: {
       selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
-      color: string;
+      color: ColorValue;
       fontSize: number;
     }) => React.ReactNode);
 
@@ -33,7 +32,7 @@ type Description =
   | ((props: {
       selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
-      color: string;
+      color: ColorValue;
       fontSize: number;
     }) => React.ReactNode);
 
@@ -49,11 +48,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string; style: Style }) => React.ReactNode;
+  left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { color: string; style?: Style }) => React.ReactNode;
+  right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
@@ -169,15 +168,12 @@ const ListItem = (
   const onDescriptionTextLayout = (
     event: NativeSyntheticEvent<TextLayoutEventData>
   ) => {
-    if (!theme.isV3) {
-      return;
-    }
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };
 
   const renderDescription = (
-    descriptionColor: string,
+    descriptionColor: ColorValue,
     description?: Description | null
   ) => {
     return typeof description === 'function' ? (
@@ -206,9 +202,7 @@ const ListItem = (
   };
 
   const renderTitle = () => {
-    const titleColor = theme.isV3
-      ? theme.colors.onSurface
-      : color(theme.colors.text).alpha(0.87).rgb().string();
+    const titleColor = theme.colors.onSurface;
 
     return typeof title === 'function' ? (
       title({
@@ -230,32 +224,26 @@ const ListItem = (
     );
   };
 
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
+  const descriptionColor = theme.colors.onSurfaceVariant;
 
   return (
     <TouchableRipple
       {...rest}
       ref={ref}
-      style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
+      style={[styles.container, style]}
       onPress={onPress}
       theme={theme}
       testID={testID}
     >
-      <View style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}>
+      <View style={[styles.row, containerStyle]}>
         {left
           ? left({
               color: descriptionColor,
-              style: getLeftStyles(alignToTop, description, theme.isV3),
+              style: getLeftStyles(alignToTop, description),
             })
           : null}
         <View
-          style={[
-            theme.isV3 ? styles.itemV3 : styles.item,
-            styles.content,
-            contentStyle,
-          ]}
+          style={[styles.item, styles.content, contentStyle]}
           testID={`${testID}-content`}
         >
           {renderTitle()}
@@ -267,7 +255,7 @@ const ListItem = (
         {right
           ? right({
               color: descriptionColor,
-              style: getRightStyles(alignToTop, description, theme.isV3),
+              style: getRightStyles(alignToTop, description),
             })
           : null}
       </View>
@@ -280,17 +268,10 @@ const Component = forwardRef(ListItem);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-  },
-  containerV3: {
     paddingVertical: 8,
     paddingRight: 24,
   },
   row: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  rowV3: {
     width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
@@ -302,10 +283,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   item: {
-    marginVertical: 6,
-    paddingLeft: 8,
-  },
-  itemV3: {
     paddingLeft: 16,
   },
   content: {

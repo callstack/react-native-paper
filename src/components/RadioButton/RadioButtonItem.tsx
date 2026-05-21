@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -16,7 +15,8 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import { tokens } from '../../theme/tokens';
+import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
@@ -61,10 +61,6 @@ export type Props = {
    */
   color?: string;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * Status of radio button.
    */
   status?: 'checked' | 'unchecked';
@@ -92,7 +88,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof MD3TypescaleKey;
+  labelVariant?: TypescaleKey;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -152,7 +148,6 @@ const RadioButtonItem = ({
   disabled,
   color,
   uncheckedColor,
-  rippleColor,
   status,
   theme: themeOverrides,
   background,
@@ -184,14 +179,14 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledTextColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
+  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
+    color: textColor,
+    opacity: disabled
+      ? tokens.md.ref.stateOpacity.disabled
+      : tokens.md.ref.stateOpacity.enabled,
     textAlign,
   } as TextStyle;
 
@@ -225,19 +220,13 @@ const RadioButtonItem = ({
             disabled={disabled}
             background={background}
             theme={theme}
-            rippleColor={rippleColor}
             hitSlop={hitSlop}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
               <Text
                 variant={labelVariant}
-                style={[
-                  styles.label,
-                  !theme.isV3 && styles.font,
-                  computedStyle,
-                  labelStyle,
-                ]}
+                style={[styles.label, computedStyle, labelStyle]}
                 maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
@@ -269,8 +258,5 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
-  },
-  font: {
-    fontSize: 16,
   },
 });

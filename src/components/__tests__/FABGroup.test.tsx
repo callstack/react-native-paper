@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
+import { act, fireEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 
@@ -26,20 +26,30 @@ describe('getFABGroupColors - backdrop color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backdropColor: color(getTheme().colors.background)
-        .alpha(0.95)
-        .rgb()
-        .string(),
+      backdropColor: getTheme().colors.background,
+    });
+  });
+});
+
+describe('getFABGroupColors - backdrop opacity', () => {
+  it('should return scrimAlpha when no custom backdrop color', () => {
+    expect(
+      getFABGroupColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      backdropOpacity: 0.95,
     });
   });
 
-  it('should return correct backdrop color, for theme version 2', () => {
+  it('should return 1 when custom backdrop color is provided', () => {
     expect(
       getFABGroupColors({
-        theme: getTheme(false, false),
+        theme: getTheme(),
+        customBackdropColor: 'transparent',
       })
     ).toMatchObject({
-      backdropColor: getTheme(false, false).colors.backdrop,
+      backdropOpacity: 1,
     });
   });
 });
@@ -54,29 +64,6 @@ describe('getFABGroupColors - label color', () => {
       labelColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(true, false),
-      })
-    ).toMatchObject({
-      labelColor: getTheme(true, false).colors.text,
-    });
-  });
-
-  it('should return correct theme color, light mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      labelColor: color(getTheme(false, false).colors.text)
-        .fade(0.54)
-        .rgb()
-        .string(),
-    });
-  });
 });
 
 describe('getFABGroupColors - stacked FAB background color', () => {
@@ -86,17 +73,7 @@ describe('getFABGroupColors - stacked FAB background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      stackedFABBackgroundColor: getTheme().colors.elevation.level3,
-    });
-  });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      stackedFABBackgroundColor: getTheme(false, false).colors.surface,
+      stackedFABBackgroundColor: getTheme().colors.surfaceContainerHigh,
     });
   });
 });
@@ -178,37 +155,6 @@ it('correctly adds label prop', () => {
   );
 
   expect(getByText('Label test')).toBeTruthy();
-});
-
-it('correct renders custom ripple color passed to FAB.Group and its item', () => {
-  const { getByTestId } = render(
-    <FAB.Group
-      visible
-      open
-      label="Label test"
-      testID="fab-group"
-      rippleColor={'orange'}
-      icon="plus"
-      onStateChange={() => {}}
-      actions={[
-        {
-          label: 'testing',
-          onPress() {},
-          icon: '',
-          rippleColor: 'yellow',
-          testID: 'fab-group-item',
-        },
-      ]}
-    />
-  );
-
-  expect(
-    getByTestId('fab-group-container').props.children.props.rippleColor
-  ).toBe('orange');
-
-  expect(
-    getByTestId('fab-group-item-container').props.children.props.rippleColor
-  ).toBe('yellow');
 });
 
 it('animated value changes correctly', () => {

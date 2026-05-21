@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -18,7 +17,7 @@ import {
   MIN_WIDTH,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -83,10 +82,6 @@ export type Props = {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -142,7 +137,6 @@ const MenuItem = ({
   containerStyle,
   contentStyle,
   titleStyle,
-  rippleColor: customRippleColor,
   testID = 'menu-item',
   accessibilityLabel,
   accessibilityState,
@@ -151,21 +145,17 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor, rippleColor } = getMenuItemColor({
+  const { titleColor, iconColor, contentOpacity } = getMenuItemColor({
     theme,
     disabled,
-    customRippleColor,
   });
-  const { isV3 } = theme;
+  const containerPadding = 12;
 
-  const containerPadding = isV3 ? 12 : 8;
+  const iconWidth = 24;
 
-  const iconWidth = isV3 ? 24 : 40;
-
-  const minWidth = MIN_WIDTH - (isV3 ? 12 : 16);
+  const minWidth = MIN_WIDTH - 12;
 
   const maxWidth = getContentMaxWidth({
-    isV3,
     iconWidth,
     leadingIcon,
     trailingIcon,
@@ -173,7 +163,7 @@ const MenuItem = ({
 
   const titleTextStyle = {
     color: titleColor,
-    ...(isV3 ? theme.fonts.bodyLarge : {}),
+    ...(theme as Theme).fonts.bodyLarge,
   };
 
   const newAccessibilityState = { ...accessibilityState, disabled };
@@ -193,27 +183,19 @@ const MenuItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
-      rippleColor={rippleColor}
       hitSlop={hitSlop}
     >
-      <View style={[styles.row, containerStyle]}>
+      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
         {leadingIcon ? (
-          <View
-            style={[!isV3 && styles.item, { width: iconWidth }]}
-            pointerEvents="box-none"
-          >
+          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
             <Icon source={leadingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
         <View
           style={[
-            !isV3 && styles.item,
             styles.content,
             { minWidth, maxWidth },
-            isV3 &&
-              (leadingIcon
-                ? styles.md3LeadingIcon
-                : styles.md3WithoutLeadingIcon),
+            leadingIcon ? styles.md3LeadingIcon : styles.md3WithoutLeadingIcon,
             contentStyle,
           ]}
           pointerEvents="none"
@@ -223,17 +205,14 @@ const MenuItem = ({
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-title`}
-            style={[!isV3 && styles.title, titleTextStyle, titleStyle]}
+            style={[titleTextStyle, titleStyle]}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >
             {title}
           </Text>
         </View>
-        {isV3 && trailingIcon ? (
-          <View
-            style={[!isV3 && styles.item, { width: iconWidth }]}
-            pointerEvents="box-none"
-          >
+        {trailingIcon ? (
+          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
             <Icon source={trailingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
@@ -256,12 +235,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  title: {
-    fontSize: 16,
-  },
-  item: {
-    marginHorizontal: 8,
   },
   content: {
     justifyContent: 'center',

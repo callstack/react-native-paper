@@ -16,28 +16,21 @@ exports[`call onPress when affix adornment pressed 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -72,6 +65,9 @@ exports[`call onPress when affix adornment pressed 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -116,7 +112,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 73,
                 "opacity": 0,
@@ -154,7 +150,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 73,
                 "opacity": 0,
@@ -207,13 +203,14 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -286,12 +283,13 @@ exports[`call onPress when affix adornment pressed 1`] = `
           [
             {
               "color": "rgba(73, 69, 79, 1)",
+              "opacity": 1,
             },
             {
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
-              "letterSpacing": 0.15,
+              "letterSpacing": 0.5,
               "lineHeight": undefined,
             },
             undefined,
@@ -322,28 +320,21 @@ exports[`correctly applies a component as the text label 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -378,6 +369,9 @@ exports[`correctly applies a component as the text label 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -422,7 +416,7 @@ exports[`correctly applies a component as the text label 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -468,7 +462,7 @@ exports[`correctly applies a component as the text label 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -529,13 +523,14 @@ exports[`correctly applies a component as the text label 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -572,28 +567,21 @@ exports[`correctly applies cursorColor prop 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -628,6 +616,9 @@ exports[`correctly applies cursorColor prop 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -672,7 +663,7 @@ exports[`correctly applies cursorColor prop 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -710,7 +701,7 @@ exports[`correctly applies cursorColor prop 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -763,13 +754,14 @@ exports[`correctly applies cursorColor prop 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -806,28 +798,21 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -862,6 +847,9 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -906,7 +894,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -944,7 +932,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -997,13 +985,14 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -1041,7 +1030,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         },
         false,
         {
-          "backgroundColor": "rgba(255, 251, 254, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
           "borderWidth": 1,
@@ -1082,6 +1071,9 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           {
             "zIndex": 3,
           },
+          {
+            "opacity": 1,
+          },
         ]
       }
     >
@@ -1118,14 +1110,14 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             numberOfLines={1}
             style={
               {
-                "backgroundColor": "rgba(255, 251, 254, 1)",
+                "backgroundColor": "rgba(254, 247, 255, 1)",
                 "color": "transparent",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "height": 0,
                 "left": 8,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "opacity": 1,
                 "paddingHorizontal": 0,
@@ -1165,7 +1157,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1202,7 +1194,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1257,13 +1249,14 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingHorizontal": 16,
             "textAlign": "left",
             "textAlignVertical": "top",
@@ -1299,28 +1292,21 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1355,6 +1341,9 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -1399,7 +1388,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1437,7 +1426,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1490,13 +1479,14 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -1535,28 +1525,21 @@ exports[`correctly applies textAlign center 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1591,6 +1574,9 @@ exports[`correctly applies textAlign center 1`] = `
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -1635,7 +1621,7 @@ exports[`correctly applies textAlign center 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1673,7 +1659,7 @@ exports[`correctly applies textAlign center 1`] = `
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1726,13 +1712,14 @@ exports[`correctly applies textAlign center 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "center",
@@ -1769,28 +1756,21 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1825,6 +1805,9 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -1869,7 +1852,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1907,7 +1890,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -1960,13 +1943,14 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 16,
             "paddingRight": 56,
             "textAlign": "left",
@@ -2008,12 +1992,13 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         [
           {
             "color": "rgba(73, 69, 79, 1)",
+            "opacity": 1,
           },
           {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
           },
           {
@@ -2037,6 +2022,9 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "width": 24,
         },
         {
+          "opacity": 1,
+        },
+        {
           "right": 16,
           "top": 16,
         },
@@ -2051,7 +2039,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2068,13 +2056,13 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2144,35 +2132,43 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           }
           testID="right-icon-adornment"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            heart
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              heart
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2196,28 +2192,21 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -2252,6 +2241,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           {
             "zIndex": 3,
+          },
+          {
+            "opacity": 1,
           },
         ]
       }
@@ -2296,7 +2288,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -2334,7 +2326,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 "fontSize": 16,
                 "fontWeight": undefined,
                 "left": 0,
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": undefined,
                 "maxWidth": 97.33333333333333,
                 "opacity": 0,
@@ -2387,13 +2379,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
             "minWidth": 65,
+            "opacity": 1,
             "paddingLeft": 56,
             "paddingRight": 56,
             "textAlign": "left",
@@ -2425,6 +2418,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "width": 24,
         },
         {
+          "opacity": 1,
+        },
+        {
           "left": 16,
           "top": 16,
         },
@@ -2439,7 +2435,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2456,13 +2452,13 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2532,35 +2528,43 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           }
           testID="left-icon-adornment"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            heart
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              heart
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2586,12 +2590,13 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         [
           {
             "color": "rgba(73, 69, 79, 1)",
+            "opacity": 1,
           },
           {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": undefined,
           },
           {

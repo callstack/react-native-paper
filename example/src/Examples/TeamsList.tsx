@@ -2,13 +2,13 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import type { ParamListBase } from '@react-navigation/native';
-import type { StackScreenProps } from '@react-navigation/stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataTable } from 'react-native-paper';
 
 import { teamsList } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Props = StackScreenProps<ParamListBase>;
+type Props = NativeStackScreenProps<ParamListBase>;
 
 const TeamsList = ({ navigation }: Props) => {
   return (

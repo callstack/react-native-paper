@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type {
   AccessibilityState,
-  ColorValue,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   TextLayoutEventData,
@@ -10,7 +9,6 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   ScrollView,
   StyleProp,
@@ -20,9 +18,8 @@ import {
   Text,
 } from 'react-native';
 
-import color from 'color';
-
 import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -67,14 +64,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
   /**
    * Whether `FAB` is currently visible.
    */
@@ -129,7 +118,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 };
 
 const SIZE = 56;
-const SCALE = 0.9;
 
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
@@ -214,8 +202,6 @@ const AnimatedFAB = ({
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
-  rippleColor: customRippleColor,
-  disabled,
   onPress,
   onLongPress,
   delayLongPress,
@@ -233,12 +219,13 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp ?? !theme.isV3;
+  const { direction } = useLocale();
+  const uppercase: boolean = uppercaseProp ?? false;
   const isIOS = Platform.OS === 'ios';
   const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
-  const { isRTL } = I18nManager;
+  const isRTL = direction === 'rtl';
   const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
@@ -246,7 +233,7 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { isV3, animation } = theme;
+  const { animation } = theme;
   const { scale } = animation;
 
   const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
@@ -257,7 +244,7 @@ const AnimatedFAB = ({
     labelSize?.height ?? 0
   );
 
-  const borderRadius = SIZE / (isV3 ? 3.5 : 2);
+  const borderRadius = SIZE / 3.5;
 
   React.useEffect(() => {
     if (!isWeb) {
@@ -309,13 +296,9 @@ const AnimatedFAB = ({
   const { backgroundColor, foregroundColor } = getFABColors({
     theme,
     variant,
-    disabled,
     customColor,
     customBackgroundColor,
   });
-
-  const rippleColor =
-    customRippleColor || color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 
@@ -360,27 +343,24 @@ const AnimatedFAB = ({
   const combinedStyles = getCombinedStyles({
     isAnimatedFromRight,
     isIconStatic,
+    isRTL,
     distance,
     animFAB,
   });
 
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const font = theme.fonts.labelLarge;
 
   const textStyle = {
     color: foregroundColor,
     ...font,
   };
 
-  const md2Elevation = disabled || !isIOS ? 0 : 6;
-  const md3Elevation = disabled || !isIOS ? 0 : 3;
+  const md3Elevation = !isIOS ? 0 : 3;
 
-  const shadowStyle = isV3 ? styles.v3Shadow : styles.shadow;
-  const baseStyle = [
-    StyleSheet.absoluteFill,
-    disabled ? styles.disabled : shadowStyle,
-  ];
+  const shadowStyle = styles.shadow;
+  const baseStyle = [StyleSheet.absoluteFill, shadowStyle];
 
-  const newAccessibilityState = { ...accessibilityState, disabled };
+  const newAccessibilityState = { ...accessibilityState };
 
   return (
     <Surface
@@ -396,32 +376,14 @@ const AnimatedFAB = ({
           ],
           borderRadius,
         },
-        !isV3 && {
-          elevation: md2Elevation,
-        },
         styles.container,
         restStyle,
       ]}
-      {...(isV3 && { elevation: md3Elevation })}
+      elevation={md3Elevation}
       theme={theme}
       container
     >
-      <Animated.View
-        style={[
-          !isV3 && {
-            transform: [
-              {
-                scaleY: animFAB.interpolate({
-                  inputRange: propForDirection([distance, 0]),
-                  outputRange: propForDirection([SCALE, 1]),
-                }),
-              },
-            ],
-          },
-          styles.standard,
-          { borderRadius },
-        ]}
-      >
+      <Animated.View style={[styles.standard, { borderRadius }]}>
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
           <Animated.View
             pointerEvents="none"
@@ -482,8 +444,6 @@ const AnimatedFAB = ({
               onPress={onPress}
               onLongPress={onLongPress}
               delayLongPress={delayLongPress}
-              rippleColor={rippleColor}
-              disabled={disabled}
               accessibilityLabel={accessibilityLabel}
               accessibilityRole="button"
               accessibilityState={newAccessibilityState}
@@ -523,7 +483,7 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
+                ? textWidth - SIZE + borderRadius
                 : borderRadius,
             },
             {
@@ -585,9 +545,6 @@ const styles = StyleSheet.create({
   standard: {
     height: SIZE,
   },
-  disabled: {
-    elevation: 0,
-  },
   // eslint-disable-next-line react-native/no-color-literals
   container: {
     position: 'absolute',
@@ -601,9 +558,6 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   shadow: {
-    elevation: 6,
-  },
-  v3Shadow: {
     elevation: 3,
   },
   iconWrapper: {

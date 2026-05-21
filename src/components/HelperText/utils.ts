@@ -1,6 +1,7 @@
-import color from 'color';
-
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -9,22 +10,19 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
-  const { colors, dark } = theme;
-
   if (type === 'error') {
-    return colors?.error;
+    return { color: theme.colors.error, opacity: stateOpacity.enabled };
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    } else {
-      return theme.colors.onSurfaceVariant;
-    }
+  if (disabled) {
+    return {
+      color: theme.colors.onSurfaceVariant,
+      opacity: stateOpacity.disabled,
+    };
   }
 
-  return color(theme?.colors?.text)
-    .alpha(dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
+  return {
+    color: theme.colors.onSurfaceVariant,
+    opacity: stateOpacity.enabled,
+  };
 }

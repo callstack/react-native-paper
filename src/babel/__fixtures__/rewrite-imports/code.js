@@ -5,11 +5,10 @@ import {
   Button,
   FAB,
   Appbar,
-  MD2Colors,
-  MD3Colors,
+  Palette,
   NonExistent,
   NonExistentSecond as Stuff,
   ThemeProvider,
   withTheme,
-  DefaultTheme,
+  LightTheme,
 } from 'react-native-paper';

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { render } from '@testing-library/react-native';
-
+import { render } from '../../test-utils';
 import Checkbox from '../Checkbox';
 import DataTable from '../DataTable/DataTable';
 

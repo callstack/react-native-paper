@@ -1,27 +1,24 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { Palette } from './theme/tokens';
 
 export {
   useTheme,
   withTheme,
   ThemeProvider,
-  DefaultTheme,
   adaptNavigationTheme,
 } from './core/theming';
 
-export * from './styles/themes';
+export { useLocale, LocaleProvider } from './core/locale';
+
+export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
-export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
-export { default as configureFonts } from './styles/fonts';
+export { default as configureFonts } from './theme/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
 import * as Drawer from './components/Drawer/Drawer';
 import * as List from './components/List/List';
-import * as MD2Colors from './styles/themes/v2/colors';
 
-export { MD2Colors };
 export { Avatar, List, Drawer };
 
 export * from './components/FAB/AnimatedFAB';
@@ -58,13 +55,6 @@ export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 
-export {
-  Caption,
-  Headline,
-  Paragraph,
-  Subheading,
-  Title,
-} from './components/Typography/v2';
 export { default as Text, customText } from './components/Typography/Text';
 
 // Types
@@ -144,26 +134,9 @@ export type { Props as ToggleButtonProps } from './components/ToggleButton/Toggl
 export type { Props as ToggleButtonGroupProps } from './components/ToggleButton/ToggleButtonGroup';
 export type { Props as ToggleButtonRowProps } from './components/ToggleButton/ToggleButtonRow';
 export type { Props as TouchableRippleProps } from './components/TouchableRipple/TouchableRipple';
-export type { Props as CaptionProps } from './components/Typography/v2/Caption';
-export type { Props as HeadlineProps } from './components/Typography/v2/Headline';
-export type { Props as ParagraphProps } from './components/Typography/v2/Paragraph';
-export type { Props as SubheadingProps } from './components/Typography/v2/Subheading';
-export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
-export type {
-  MaterialBottomTabNavigationEventMap,
-  MaterialBottomTabNavigationOptions,
-  MaterialBottomTabNavigationProp,
-  MaterialBottomTabScreenProps,
-} from './react-navigation';
 
-export type {
-  MD2Theme,
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  MD3TypescaleKey,
-} from './types';
+export { TypescaleKey, type Theme, type Elevation } from './types';

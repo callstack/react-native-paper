@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Appbar,
   BottomNavigation,
@@ -47,7 +47,7 @@ type Route = {
 };
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
   route: Route;
 };
 
@@ -213,7 +213,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
 
   const theme = colorThemes[sourceColor || 'paper'];
 
-  const systemColorScheme = useColorScheme() || 'light';
+  const systemColorScheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const colorScheme = darkMode ? 'dark' : systemColorScheme;
 
   return (

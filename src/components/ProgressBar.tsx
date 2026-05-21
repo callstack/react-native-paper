@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   LayoutChangeEvent,
   Platform,
   StyleProp,
@@ -10,8 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import setColor from 'color';
-
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -55,7 +53,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 const INDETERMINATE_DURATION = 2000;
 const INDETERMINATE_MAX_WIDTH = 0.6;
-const { isRTL } = I18nManager;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -63,10 +60,10 @@ const { isRTL } = I18nManager;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar, MD3Colors } from 'react-native-paper';
+ * import { ProgressBar, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ProgressBar progress={0.5} color={MD3Colors.error50} />
+ *   <ProgressBar progress={0.5} color={Palette.error50} />
  * );
  *
  * export default MyComponent;
@@ -86,6 +83,8 @@ const ProgressBar = ({
 }: Props) => {
   const isWeb = Platform.OS === 'web';
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -191,9 +190,7 @@ const ProgressBar = ({
   };
 
   const tintColor = color || theme.colors?.primary;
-  const trackTintColor = theme.isV3
-    ? theme.colors.surfaceVariant
-    : setColor(tintColor).alpha(0.38).rgb().string();
+  const trackTintColor = theme.colors.surfaceVariant;
 
   return (
     <View

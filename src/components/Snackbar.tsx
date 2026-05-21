@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
-  ColorValue,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -19,8 +17,9 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -41,12 +40,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   icon?: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
    * Function to execute on icon button press. The icon button appears only when this prop is specified.
    */
   onIconPress?: () => void;
@@ -161,11 +154,11 @@ const Snackbar = ({
   contentStyle,
   theme: themeOverrides,
   maxFontSizeMultiplier,
-  rippleColor,
   testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -243,7 +236,7 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors, roundness, isV3 } = theme;
+  const { colors } = theme as Theme;
 
   if (hidden) {
     return null;
@@ -253,15 +246,14 @@ const Snackbar = ({
     style: actionStyle,
     label: actionLabel,
     onPress: onPressAction,
-    rippleColor: actionRippleColor,
     ...actionProps
   } = action || {};
 
-  const buttonTextColor = isV3 ? colors.inversePrimary : colors.accent;
-  const textColor = isV3 ? colors.inverseOnSurface : colors?.surface;
-  const backgroundColor = isV3 ? colors.inverseSurface : colors?.onSurface;
+  const buttonTextColor = colors.inversePrimary;
+  const textColor = colors.inverseOnSurface;
+  const backgroundColor = colors.inverseSurface;
 
-  const isIconButton = isV3 && onIconPress;
+  const isIconButton = Boolean(onIconPress);
 
   const marginLeft = action ? -12 : -16;
 
@@ -301,11 +293,10 @@ const Snackbar = ({
         accessibilityLiveRegion="polite"
         theme={theme}
         style={[
-          !isV3 && styles.elevation,
           styles.container,
           {
             backgroundColor,
-            borderRadius: roundness,
+            borderRadius: (theme as Theme).shapes.corner.extraSmall,
             opacity: opacity,
             transform: [
               {
@@ -322,7 +313,7 @@ const Snackbar = ({
         ]}
         testID={testID}
         container
-        {...(isV3 && { elevation })}
+        elevation={elevation}
         {...rest}
       >
         {renderChildrenWithWrapper()}
@@ -336,10 +327,9 @@ const Snackbar = ({
                 }}
                 style={[styles.button, actionStyle]}
                 textColor={buttonTextColor}
-                compact={!isV3}
+                compact={false}
                 mode="text"
                 theme={theme}
-                rippleColor={actionRippleColor}
                 {...actionProps}
               >
                 {actionLabel}
@@ -350,8 +340,7 @@ const Snackbar = ({
                 accessibilityRole="button"
                 borderless
                 onPress={onIconPress}
-                iconColor={theme.colors.inverseOnSurface}
-                rippleColor={rippleColor}
+                iconColor={colors.inverseOnSurface}
                 theme={theme}
                 icon={
                   icon ||
@@ -361,9 +350,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={direction}
                       />
                     );
                   })
@@ -422,9 +409,6 @@ const styles = StyleSheet.create({
   button: {
     marginRight: 8,
     marginLeft: 4,
-  },
-  elevation: {
-    elevation: 6,
   },
   icon: {
     width: 40,

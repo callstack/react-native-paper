@@ -211,6 +211,7 @@ const config = {
               TextInputIcon:
                 'src/components/TextInput/Adornment/TextInputIcon.tsx',
               Text: 'src/components/Typography/Text.tsx',
+              showcase: 'docs/src/components/Showcase.tsx',
             };
 
             const customUrlComponent =

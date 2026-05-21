@@ -7,19 +7,18 @@ import {
   View,
 } from 'react-native';
 
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+import Icon from '@react-native-vector-icons/material-design-icons';
 import { useFonts } from 'expo-font';
 import {
-  configureFonts,
   HelperText,
   List,
-  MD2Colors,
-  MD3Colors,
+  Palette,
   TextInput,
+  configureFonts,
+  useTheme,
 } from 'react-native-paper';
 
 import { inputReducer, State } from '../../utils';
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;
@@ -125,7 +124,7 @@ const TextInputExample = () => {
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
-  const theme = useExampleTheme();
+  const theme = useTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({
@@ -138,11 +137,7 @@ const TextInputExample = () => {
 
     const newColors = {
       ...state.iconsColor,
-      [name]: !color
-        ? theme.isV3
-          ? theme.colors.primary
-          : theme.colors?.accent
-        : undefined,
+      [name]: !color ? theme.colors.primary : undefined,
     };
 
     dispatch({
@@ -572,9 +567,7 @@ const TextInputExample = () => {
                   <Text>
                     <Text
                       style={{
-                        color: theme.isV3
-                          ? MD3Colors.error50
-                          : MD2Colors.red500,
+                        color: Palette.error50,
                       }}
                     >
                       *
@@ -604,12 +597,8 @@ const TextInputExample = () => {
               onChangeText={(flatUnderlineColors) =>
                 inputActionHandler('flatUnderlineColors', flatUnderlineColors)
               }
-              underlineColor={
-                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
-              }
-              activeUnderlineColor={
-                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-              }
+              underlineColor={Palette.primary70}
+              activeUnderlineColor={Palette.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -620,12 +609,8 @@ const TextInputExample = () => {
               onChangeText={(outlinedColors) =>
                 inputActionHandler('outlinedColors', outlinedColors)
               }
-              outlineColor={
-                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
-              }
-              activeOutlineColor={
-                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-              }
+              outlineColor={Palette.primary70}
+              activeOutlineColor={Palette.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -687,7 +672,7 @@ const TextInputExample = () => {
               <TextInput
                 mode="outlined"
                 theme={{
-                  roundness: 25,
+                  shapes: { corner: { extraSmall: 25 } },
                 }}
                 label="Outlined text input with custom roundness"
               />
@@ -696,7 +681,7 @@ const TextInputExample = () => {
               <TextInput
                 mode="outlined"
                 label="Outlined text input without roundness"
-                theme={{ roundness: 0 }}
+                theme={{ shapes: { corner: { extraSmall: 0 } } }}
               />
             </View>
             <View style={styles.inputContainerStyle}>
@@ -728,7 +713,7 @@ const TextInputExample = () => {
                 placeholder="Custom colors"
               />
             </View>
-            {fontsLoaded && theme.isV3 ? (
+            {fontsLoaded ? (
               <View style={styles.inputContainerStyle}>
                 <TextInput
                   mode="outlined"
@@ -898,7 +883,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   inputLabelText: {
-    color: MD3Colors.tertiary70,
+    color: Palette.tertiary70,
   },
   left: {
     width: '30%',

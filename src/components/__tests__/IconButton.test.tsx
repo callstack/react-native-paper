@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
-import color from 'color';
+import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { pink500 } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
+import { pink500 } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 const styles = StyleSheet.create({
   square: {
@@ -97,7 +100,8 @@ describe('getIconButtonColor - icon color', () => {
         disabled: true,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceDisabled,
+      iconColor: getTheme().colors.onSurface,
+      iconOpacity: stateOpacity.disabled,
     });
   });
 
@@ -190,16 +194,6 @@ describe('getIconButtonColor - icon color', () => {
       iconColor: getTheme().colors.primary,
     });
   });
-
-  it('should return theme icon color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      iconColor: getTheme(false, false).colors.text,
-    });
-  });
 });
 
 describe('getIconButtonColor - background color', () => {
@@ -222,7 +216,10 @@ describe('getIconButtonColor - background color', () => {
           mode,
           disabled: true,
         })
-      ).toMatchObject({ backgroundColor: getTheme().colors.surfaceDisabled });
+      ).toMatchObject({
+        backgroundColor: getTheme().colors.onSurface,
+        backgroundOpacity: stateOpacity.disabled,
+      });
     })
   );
 
@@ -303,7 +300,7 @@ describe('getIconButtonColor - border color', () => {
         disabled: true,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -313,45 +310,7 @@ describe('getIconButtonColor - border color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
-    });
-  });
-
-  it('should return undefined, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      borderColor: undefined,
-    });
-  });
-});
-
-describe('getIconButtonColor - ripple color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.32)
-        .rgb()
-        .string(),
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 });

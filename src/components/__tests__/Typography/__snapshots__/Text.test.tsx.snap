@@ -9,7 +9,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -17,7 +17,7 @@ exports[`renders every variant of Text with children as content 1`] = `
             "fontFamily": "System",
             "fontSize": 57,
             "fontWeight": "400",
-            "letterSpacing": 0,
+            "letterSpacing": -0.25,
             "lineHeight": 64,
           },
           undefined,
@@ -34,7 +34,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -59,7 +59,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -84,7 +84,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -109,7 +109,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -134,7 +134,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -159,7 +159,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -184,7 +184,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -209,7 +209,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -234,7 +234,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -242,7 +242,7 @@ exports[`renders every variant of Text with children as content 1`] = `
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 24,
           },
           undefined,
@@ -259,7 +259,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -284,7 +284,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -309,7 +309,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -334,7 +334,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -359,7 +359,7 @@ exports[`renders every variant of Text with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "writingDirection": "ltr",
         },
         [
@@ -386,7 +386,7 @@ exports[`renders v3 Text component with custom variant correctly 1`] = `
     "textAlign": "left",
   },
   {
-    "color": "rgba(28, 27, 31, 1)",
+    "color": "rgba(29, 27, 32, 1)",
     "writingDirection": "ltr",
   },
   [

@@ -1,70 +1,53 @@
-import color from 'color';
-import type { InternalTheme } from 'src/types';
+import type { ColorValue } from 'react-native';
 
-import type { black, white } from '../../styles/themes/v2/colors';
-
-type BaseProps = {
-  defaultColor: typeof black | typeof white;
-  theme: InternalTheme;
-};
+import type { InternalTheme, Theme } from '../../types';
 
 export const getActiveTintColor = ({
   activeColor,
-  defaultColor,
   theme,
-}: BaseProps & {
-  activeColor: string | undefined;
+}: {
+  activeColor: ColorValue | undefined;
+  theme: InternalTheme;
 }) => {
-  if (typeof activeColor === 'string') {
+  if (activeColor != null) {
     return activeColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.onSecondaryContainer;
-  }
-
-  return defaultColor;
+  return (theme as Theme).colors.onSecondaryContainer;
 };
 
 export const getInactiveTintColor = ({
   inactiveColor,
-  defaultColor,
   theme,
-}: BaseProps & {
-  inactiveColor: string | undefined;
+}: {
+  inactiveColor: ColorValue | undefined;
+  theme: InternalTheme;
 }) => {
-  if (typeof inactiveColor === 'string') {
+  if (inactiveColor != null) {
     return inactiveColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.onSurfaceVariant;
-  }
-
-  return color(defaultColor).alpha(0.5).rgb().string();
+  return (theme as Theme).colors.onSurfaceVariant;
 };
 
 export const getLabelColor = ({
   tintColor,
   hasColor,
   focused,
-  defaultColor,
   theme,
-}: BaseProps & {
-  tintColor: string;
+}: {
+  tintColor: ColorValue;
   hasColor: boolean;
   focused: boolean;
+  theme: InternalTheme;
 }) => {
+  const { colors } = theme as Theme;
   if (hasColor) {
     return tintColor;
   }
 
-  if (theme.isV3) {
-    if (focused) {
-      return theme.colors.onSurface;
-    }
-    return theme.colors.onSurfaceVariant;
+  if (focused) {
+    return colors.onSurface;
   }
-
-  return defaultColor;
+  return colors.onSurfaceVariant;
 };

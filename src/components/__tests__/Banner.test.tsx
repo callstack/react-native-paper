@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, Image } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', () => {
@@ -91,7 +92,7 @@ it('render visible banner, with custom theme', () => {
       visible
       theme={{
         colors: {
-          text: '#00f',
+          onSurface: '#00f',
           surface: '#ccc',
           primary: '#043',
         },

@@ -9,8 +9,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
@@ -52,15 +50,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
-  right?: (props: { color: string }) => React.ReactNode;
+  right?: (props: { color: ColorValue }) => React.ReactNode;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -81,11 +75,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Drawer } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *    <Drawer.Item
- *      style={{ backgroundColor: '#64ffda' }}
- *      icon="star"
- *      label="First Item"
- *    />
+ *   <Drawer.Item
+ *     style={{ backgroundColor: '#64ffda' }}
+ *     icon="star"
+ *     label="First Item"
+ *   />
  * );
  *
  * export default MyComponent;
@@ -97,7 +91,6 @@ const DrawerItem = ({
   active,
   disabled,
   theme: themeOverrides,
-  rippleColor: customRippleColor,
   style,
   onPress,
   background,
@@ -108,27 +101,15 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness, isV3 } = theme;
 
-  const backgroundColor = active
-    ? isV3
-      ? theme.colors.secondaryContainer
-      : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : undefined;
+  const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
   const contentColor = active
-    ? isV3
-      ? theme.colors.onSecondaryContainer
-      : theme.colors.primary
-    : isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.68).rgb().string();
+    ? theme.colors.onSecondaryContainer
+    : theme.colors.onSurfaceVariant;
 
-  const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
-  const borderRadius = (isV3 ? 7 : 1) * roundness;
-  const rippleColor = isV3
-    ? color(contentColor).alpha(0.12).rgb().string()
-    : undefined;
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const labelMargin = icon ? 12 : 0;
+  const borderRadius = theme.shapes.corner.extraLarge;
+  const font = theme.fonts.labelLarge;
 
   return (
     <View {...rest}>
@@ -139,18 +120,17 @@ const DrawerItem = ({
         onPress={onPress}
         style={[
           styles.container,
+          styles.v3Container,
           { backgroundColor, borderRadius },
-          isV3 && styles.v3Container,
           style,
         ]}
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
-        rippleColor={customRippleColor || rippleColor}
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
+        <View style={[styles.wrapper, styles.v3Wrapper]}>
           <View style={styles.content}>
             {icon ? (
               <Icon source={icon} size={24} color={contentColor} />

@@ -2,11 +2,10 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
-import Title from '../Typography/v2/Title';
 
-export type Props = React.ComponentPropsWithRef<typeof Title> & {
+export type Props = React.ComponentPropsWithRef<typeof Text> & {
   /**
    * Title text for the `DialogTitle`.
    */
@@ -53,24 +52,22 @@ const DialogTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3, colors, fonts } = theme;
-
-  const TextComponent = isV3 ? Text : Title;
+  const { colors, fonts } = theme as Theme;
 
   const headerTextStyle = {
-    color: isV3 ? colors.onSurface : colors?.text,
-    ...(isV3 ? fonts.headlineSmall : {}),
+    color: colors.onSurface,
+    ...fonts.headlineSmall,
   };
 
   return (
-    <TextComponent
+    <Text
       variant="headlineSmall"
       accessibilityRole="header"
-      style={[styles.text, isV3 && styles.v3Text, headerTextStyle, style]}
+      style={[styles.text, styles.v3Text, headerTextStyle, style]}
       {...rest}
     >
       {children}
-    </TextComponent>
+    </Text>
   );
 };
 

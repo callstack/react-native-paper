@@ -8,7 +8,7 @@ exports[`renders FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -32,7 +32,7 @@ exports[`renders FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -121,23 +121,19 @@ exports[`renders FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -186,7 +182,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -210,7 +206,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -299,23 +295,19 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -364,7 +356,7 @@ exports[`renders default FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -388,7 +380,7 @@ exports[`renders default FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -477,23 +469,19 @@ exports[`renders default FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -534,184 +522,6 @@ exports[`renders default FAB 1`] = `
 </View>
 `;
 
-exports[`renders disabled FAB 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "rgba(28, 27, 31, 0.12)",
-      "borderRadius": 16,
-      "opacity": 1,
-      "shadowColor": "#000",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "transform": [
-        {
-          "scale": 1,
-        },
-      ],
-    }
-  }
-  testID="fab-container-outer-layer"
->
-  <View
-    collapsable={false}
-    pointerEvents="auto"
-    style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 0.12)",
-        "borderRadius": 16,
-        "flex": undefined,
-        "shadowColor": "#000",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="fab-container"
-  >
-    <View
-      accessibilityRole="button"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 16,
-          },
-        ]
-      }
-      testID="fab"
-    >
-      <View
-        pointerEvents="none"
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 16,
-              "height": 56,
-              "width": 56,
-            },
-          ]
-        }
-        testID="fab-content"
-      >
-        <View
-          style={
-            [
-              {
-                "alignItems": "center",
-                "justifyContent": "center",
-              },
-              {
-                "height": 24,
-                "width": 24,
-              },
-            ]
-          }
-        >
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
-            }
-            testID="cross-fade-icon-current"
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "rgba(28, 27, 31, 0.38)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              plus
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
 exports[`renders extended FAB 1`] = `
 <View
   collapsable={false}
@@ -720,7 +530,7 @@ exports[`renders extended FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -744,7 +554,7 @@ exports[`renders extended FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -834,23 +644,19 @@ exports[`renders extended FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -893,7 +699,7 @@ exports[`renders extended FAB 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -939,7 +745,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -963,7 +769,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1052,23 +858,19 @@ exports[`renders extended FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -1111,7 +913,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1157,7 +959,7 @@ exports[`renders large FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 28,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1181,7 +983,7 @@ exports[`renders large FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 28,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1270,23 +1072,19 @@ exports[`renders large FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -1335,7 +1133,7 @@ exports[`renders loading FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1359,7 +1157,7 @@ exports[`renders loading FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1462,17 +1260,15 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1492,14 +1288,11 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      null,
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "width": 18,
+                    }
                   }
                 >
                   <View
@@ -1549,17 +1342,15 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1579,16 +1370,12 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      {
-                        "top": 9,
-                      },
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "top": 9,
+                      "width": 18,
+                    }
                   }
                 >
                   <View
@@ -1651,7 +1438,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1675,7 +1462,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1778,17 +1565,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1808,14 +1593,11 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 25,
-                        "overflow": "hidden",
-                        "width": 50,
-                      },
-                      null,
-                    ]
+                    {
+                      "height": 25,
+                      "overflow": "hidden",
+                      "width": 50,
+                    }
                   }
                 >
                   <View
@@ -1865,17 +1647,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1895,16 +1675,12 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 25,
-                        "overflow": "hidden",
-                        "width": 50,
-                      },
-                      {
-                        "top": 25,
-                      },
-                    ]
+                    {
+                      "height": 25,
+                      "overflow": "hidden",
+                      "top": 25,
+                      "width": 50,
+                    }
                   }
                 >
                   <View
@@ -1967,7 +1743,7 @@ exports[`renders not visible FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1991,7 +1767,7 @@ exports[`renders not visible FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -2080,23 +1856,19 @@ exports[`renders not visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -2145,7 +1917,7 @@ exports[`renders small FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 12,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -2169,7 +1941,7 @@ exports[`renders small FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 12,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -2258,23 +2030,19 @@ exports[`renders small FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -2323,7 +2091,7 @@ exports[`renders visible FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 0,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -2347,7 +2115,7 @@ exports[`renders visible FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -2436,23 +2204,19 @@ exports[`renders visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >

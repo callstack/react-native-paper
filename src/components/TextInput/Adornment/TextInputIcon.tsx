@@ -36,11 +36,9 @@ export type Props = $Omit<
   /**
    * Color of the icon or a function receiving a boolean indicating whether the TextInput is focused and returning the color.
    */
-  color?: ((isTextInputFocused: boolean) => string | undefined) | string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
+  color?:
+    | ColorValue
+    | ((isTextInputFocused: boolean) => ColorValue | undefined);
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -69,7 +67,6 @@ const IconAdornment: React.FunctionComponent<
     icon: React.ReactNode;
     topPosition: number;
     side: 'left' | 'right';
-    theme?: ThemeProp;
     disabled?: boolean;
   } & Omit<StyleContextType, 'style'>
 > = ({
@@ -79,11 +76,9 @@ const IconAdornment: React.FunctionComponent<
   isTextInputFocused,
   forceFocus,
   testID,
-  theme: themeOverrides,
   disabled,
 }) => {
-  const { isV3 } = useInternalTheme(themeOverrides);
-  const { ICON_OFFSET } = getConstants(isV3);
+  const { ICON_OFFSET } = getConstants();
 
   const style = {
     top: topPosition,
@@ -132,7 +127,6 @@ const TextInputIcon = ({
   forceTextInputFocus = true,
   color: customColor,
   theme: themeOverrides,
-  rippleColor,
   ...rest
 }: Props) => {
   const { style, isTextInputFocused, forceFocus, testID, disabled } =
@@ -151,7 +145,7 @@ const TextInputIcon = ({
 
   const theme = useInternalTheme(themeOverrides);
 
-  const iconColor = getIconColor({
+  const { color: iconColor, opacity: iconOpacity } = getIconColor({
     theme,
     disabled,
     isTextInputFocused,
@@ -159,7 +153,7 @@ const TextInputIcon = ({
   });
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, { opacity: iconOpacity }, style]}>
       <IconButton
         icon={icon}
         style={styles.iconButton}
@@ -168,7 +162,6 @@ const TextInputIcon = ({
         iconColor={iconColor}
         testID={testID}
         theme={themeOverrides}
-        rippleColor={rippleColor}
         {...rest}
       />
     </View>

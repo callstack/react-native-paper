@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, type ColorValue } from 'react-native';
 
 import setColor from 'color';
 
@@ -9,7 +9,7 @@ import {
   grey700,
   white,
   black,
-} from '../../styles/themes/v2/colors';
+} from '../../theme/colors';
 import type { InternalTheme } from '../../types';
 
 type BaseProps = {
@@ -23,17 +23,13 @@ const getCheckedColor = ({
   color,
 }: {
   theme: InternalTheme;
-  color?: string;
+  color?: ColorValue;
 }) => {
   if (color) {
     return color;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getThumbTintColor = ({
@@ -41,7 +37,7 @@ const getThumbTintColor = ({
   disabled,
   value,
   checkedColor,
-}: BaseProps & { checkedColor: string }) => {
+}: BaseProps & { checkedColor: ColorValue }) => {
   const isIOS = Platform.OS === 'ios';
 
   if (isIOS) {
@@ -70,7 +66,7 @@ const getOnTintColor = ({
   disabled,
   value,
   checkedColor,
-}: BaseProps & { checkedColor: string }) => {
+}: BaseProps & { checkedColor: ColorValue }) => {
   const isIOS = Platform.OS === 'ios';
 
   if (isIOS) {
@@ -79,16 +75,13 @@ const getOnTintColor = ({
 
   if (disabled) {
     if (theme.dark) {
-      if (theme.isV3) {
-        return setColor(white).alpha(0.06).rgb().string();
-      }
-      return setColor(white).alpha(0.1).rgb().string();
+      return setColor(white).alpha(0.06).rgb().string();
     }
     return setColor(black).alpha(0.12).rgb().string();
   }
 
   if (value) {
-    return setColor(checkedColor).alpha(0.5).rgb().string();
+    return theme.colors.surfaceContainerHighest;
   }
 
   if (theme.dark) {
@@ -102,7 +95,7 @@ export const getSwitchColor = ({
   disabled,
   value,
   color,
-}: BaseProps & { color?: string }) => {
+}: BaseProps & { color?: ColorValue }) => {
   const checkedColor = getCheckedColor({ theme, color });
 
   return {

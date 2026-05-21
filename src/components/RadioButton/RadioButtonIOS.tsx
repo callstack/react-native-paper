@@ -68,7 +68,7 @@ const RadioButtonIOS = ({
             value,
           }) === 'checked';
 
-        const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+        const { checkedColor } = getSelectionControlIOSColor({
           theme,
           disabled,
           customColor: rest.color,
@@ -79,7 +79,6 @@ const RadioButtonIOS = ({
           <TouchableRipple
             {...rest}
             borderless
-            rippleColor={rippleColor}
             onPress={
               disabled
                 ? undefined

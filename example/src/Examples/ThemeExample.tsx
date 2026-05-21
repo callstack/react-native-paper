@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { List, PaperProvider, Banner } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{ [key: string]: undefined }>;
+  navigation: NativeStackNavigationProp<{ [key: string]: undefined }>;
 };
 
 const ThemeExample = ({ navigation }: Props) => {

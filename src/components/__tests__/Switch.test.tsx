@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import {
   white,
   black,
@@ -13,7 +13,7 @@ import {
   grey800,
   pink500,
   grey700,
-} from '../../styles/themes/v2/colors';
+} from '../../theme/colors';
 import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 
@@ -60,16 +60,6 @@ describe('getSwitchColor - checked color', () => {
       })
     ).toMatchObject({
       checkedColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getSwitchColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      checkedColor: getTheme(false, false).colors.accent,
     });
   });
 });
@@ -163,24 +153,12 @@ describe('getSwitchColor - on tint color', () => {
     });
   });
 
-  it('should return checked color for iOS platform, for theme version 2', () => {
-    Platform.OS = 'ios';
-
-    expect(
-      getSwitchColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      onTintColor: getTheme(false, false).colors.accent,
-    });
-  });
-
   it('should return custom color for iOS platform', () => {
     Platform.OS = 'ios';
 
     expect(
       getSwitchColor({
-        theme: getTheme(false, false),
+        theme: getTheme(),
         color: 'purple',
       })
     ).toMatchObject({
@@ -198,17 +176,6 @@ describe('getSwitchColor - on tint color', () => {
       })
     ).toMatchObject({
       onTintColor: color(white).alpha(0.06).rgb().string(),
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getSwitchColor({
-        theme: getTheme(true, false),
-        disabled: true,
-      })
-    ).toMatchObject({
-      onTintColor: color(white).alpha(0.1).rgb().string(),
     });
   });
 
@@ -231,7 +198,7 @@ describe('getSwitchColor - on tint color', () => {
         color: 'purple',
       })
     ).toMatchObject({
-      onTintColor: color('purple').alpha(0.5).rgb().string(),
+      checkedColor: 'purple',
     });
   });
 

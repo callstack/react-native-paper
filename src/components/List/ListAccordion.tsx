@@ -2,21 +2,21 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   NativeSyntheticEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
-  TextStyle,
   TextLayoutEventData,
+  TextStyle,
   View,
   ViewProps,
   ViewStyle,
-  PressableAndroidRippleConfig,
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -37,7 +37,7 @@ export type Props = {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string; style: Style }) => React.ReactNode;
+  left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
@@ -93,10 +93,6 @@ export type Props = {
    * Style that is passed to Description element.
    */
   descriptionStyle?: StyleProp<TextStyle>;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Truncate Title text such that the total number of lines does not
    * exceed this number.
@@ -186,7 +182,6 @@ const ListAccordion = ({
   descriptionStyle,
   titleNumberOfLines = 1,
   descriptionNumberOfLines = 2,
-  rippleColor: customRippleColor,
   style,
   containerStyle,
   contentStyle,
@@ -204,6 +199,7 @@ const ListAccordion = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
@@ -212,9 +208,6 @@ const ListAccordion = ({
   const onDescriptionTextLayout = (
     event: NativeSyntheticEvent<TextLayoutEventData>
   ) => {
-    if (!theme.isV3) {
-      return;
-    }
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };
@@ -241,12 +234,10 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { titleColor, descriptionColor, titleTextColor, rippleColor } =
-    getAccordionColors({
-      theme,
-      isExpanded,
-      customRippleColor,
-    });
+  const { descriptionColor, titleTextColor } = getAccordionColors({
+    theme,
+    isExpanded,
+  });
 
   const handlePress =
     groupContext && id !== undefined
@@ -256,11 +247,10 @@ const ListAccordion = ({
     <View>
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
-          style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
+          style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          rippleColor={rippleColor}
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
@@ -271,22 +261,16 @@ const ListAccordion = ({
           hitSlop={hitSlop}
         >
           <View
-            style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}
+            style={[styles.row, containerStyle]}
             pointerEvents={pointerEvents}
           >
             {left
               ? left({
                   color: isExpanded ? theme.colors?.primary : descriptionColor,
-                  style: getLeftStyles(alignToTop, description, theme.isV3),
+                  style: getLeftStyles(alignToTop, description),
                 })
               : null}
-            <View
-              style={[
-                theme.isV3 ? styles.itemV3 : styles.item,
-                styles.content,
-                contentStyle,
-              ]}
-            >
+            <View style={[styles.contentItem, styles.content, contentStyle]}>
               <Text
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
@@ -320,7 +304,10 @@ const ListAccordion = ({
               ) : null}
             </View>
             <View
-              style={[styles.item, description ? styles.multiline : undefined]}
+              style={[
+                styles.trailingItem,
+                description ? styles.multiline : undefined,
+              ]}
             >
               {right ? (
                 right({
@@ -329,9 +316,9 @@ const ListAccordion = ({
               ) : (
                 <MaterialCommunityIcon
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={theme.isV3 ? descriptionColor : titleColor}
+                  color={descriptionColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={direction}
                 />
               )}
             </View>
@@ -348,10 +335,7 @@ const ListAccordion = ({
               !child.props.right
             ) {
               return React.cloneElement(child, {
-                style: [
-                  theme.isV3 ? styles.childV3 : styles.child,
-                  child.props.style,
-                ],
+                style: [styles.child, child.props.style],
                 theme,
               });
             }
@@ -367,17 +351,10 @@ ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-  },
-  containerV3: {
     paddingVertical: 8,
     paddingRight: 24,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  rowV3: {
     flexDirection: 'row',
     marginVertical: 6,
   },
@@ -392,17 +369,14 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  item: {
+  contentItem: {
+    paddingLeft: 16,
+  },
+  trailingItem: {
     marginVertical: 6,
     paddingLeft: 8,
   },
-  itemV3: {
-    paddingLeft: 16,
-  },
   child: {
-    paddingLeft: 64,
-  },
-  childV3: {
     paddingLeft: 40,
   },
   content: {

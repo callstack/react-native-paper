@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleSheet,
   View,
@@ -28,11 +29,18 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
+  /**
+   * Whether the checkbox is in an error state. When true, the outline
+   * (unchecked) and container (checked / indeterminate) use
+   * `theme.colors.error`. `disabled` and explicit `color`/`uncheckedColor`
+   * overrides take precedence.
+   */
+  error?: boolean;
   /**
    * @optional
    */
@@ -59,6 +67,7 @@ const CheckboxAndroid = ({
   disabled,
   onPress,
   testID,
+  error,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -99,13 +108,14 @@ const CheckboxAndroid = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { rippleColor, selectionControlColor } =
+  const { selectionControlColor, selectionControlOpacity } =
     getAndroidSelectionControlColor({
       theme,
       disabled,
       checked,
       customColor: rest.color,
       customUncheckedColor: rest.uncheckedColor,
+      error,
     });
 
   const borderWidth = scaleAnim.interpolate({
@@ -123,7 +133,6 @@ const CheckboxAndroid = ({
     <TouchableRipple
       {...rest}
       borderless
-      rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="checkbox"
@@ -133,7 +142,12 @@ const CheckboxAndroid = ({
       testID={testID}
       theme={theme}
     >
-      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      <Animated.View
+        style={{
+          transform: [{ scale: scaleAnim }],
+          opacity: selectionControlOpacity,
+        }}
+      >
         <MaterialCommunityIcon
           allowFontScaling={false}
           name={icon}

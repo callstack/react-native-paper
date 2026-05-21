@@ -1,14 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  Text,
-} from 'react-native';
+import { ReactNode } from 'react';
+import { Animated, StyleProp, StyleSheet, TextStyle, Text } from 'react-native';
 
 import type { VariantProp } from './types';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -47,9 +42,9 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
     ref
   ) {
     const theme = useInternalTheme(themeOverrides);
-    const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+    const { direction: writingDirection } = useLocale();
 
-    if (theme.isV3 && variant) {
+    if (variant) {
       const font = theme.fonts[variant];
       if (typeof font !== 'object') {
         throw new Error(
@@ -72,10 +67,10 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
         />
       );
     } else {
-      const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
+      const font = theme.fonts.bodyMedium;
       const textStyle = {
         ...font,
-        color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+        color: theme.colors.onSurface,
       };
       return (
         <Animated.Text
@@ -102,6 +97,6 @@ const styles = StyleSheet.create({
 });
 
 export const customAnimatedText = <T,>() =>
-  AnimatedText as (props: Props<T>) => JSX.Element;
+  AnimatedText as (props: Props<T>) => ReactNode;
 
 export default AnimatedText;

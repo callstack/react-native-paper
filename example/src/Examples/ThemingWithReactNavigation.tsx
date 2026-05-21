@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from '@react-native-vector-icons/material-design-icons';
+import {
+  createBottomTabNavigator,
+  type BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
 import { PlatformPressable } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native-paper';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
@@ -43,18 +46,42 @@ const HomeTab = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="home" size={size} color={color} />;
-          },
+          tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>(
+            {
+              android: {
+                type: 'materialSymbol',
+                name: 'home',
+              },
+              ios: {
+                type: 'sfSymbol',
+                name: 'house',
+              },
+              default: ({ color, size }) => {
+                return <Icon name="home" size={size} color={color} />;
+              },
+            }
+          ),
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="cog" size={size} color={color} />;
-          },
+          tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>(
+            {
+              android: {
+                type: 'materialSymbol',
+                name: 'settings',
+              },
+              ios: {
+                type: 'sfSymbol',
+                name: 'gear',
+              },
+              default: ({ color, size }) => {
+                return <Icon name="cog" size={size} color={color} />;
+              },
+            }
+          ),
         }}
       />
     </Tab.Navigator>

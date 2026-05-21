@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
+import { act, fireEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { red300 } from '../../styles/themes/v2/colors';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { render } from '../../test-utils';
+import { Palette } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {
@@ -18,7 +17,7 @@ import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
-    backgroundColor: red300,
+    backgroundColor: Palette.error60,
   },
 });
 
@@ -243,7 +242,9 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();
@@ -262,7 +263,9 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();
@@ -378,7 +381,7 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: red300 });
+  expect(wrapper).toHaveStyle({ backgroundColor: Palette.error60 });
 });
 
 it('renders a single tab', () => {
@@ -446,7 +449,7 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
   });
 });
 
-it('displays ripple animation view if shifting is truthy', () => {
+it('renders bar content when shifting is enabled', () => {
   const { getByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -454,15 +457,14 @@ it('displays ripple animation view if shifting is truthy', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
-      theme={{ isV3: false }}
       shifting
     />
   );
 
-  expect(getByTestId('bottom-navigation-bar-content-ripple')).toBeDefined();
+  expect(getByTestId('bottom-navigation-bar-content')).toBeDefined();
 });
 
-it('does not display ripple animation view if shifting is falsy', () => {
+it('does not render legacy ripple overlay when shifting is disabled', () => {
   const { queryByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -479,61 +481,55 @@ it('does not display ripple animation view if shifting is falsy', () => {
 
 describe('getActiveTintColor', () => {
   it.each`
-    activeColor  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary10}
-    ${undefined} | ${'#fff'}    | ${false} | ${'#fff'}
+    activeColor  | expected
+    ${'#FBF7DB'} | ${'#FBF7DB'}
+    ${undefined} | ${Palette.secondary10}
   `(
-    'returns $expected when activeColor: $activeColor and useV3: $useV3',
-    ({ activeColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
-      const color = getActiveTintColor({ activeColor, defaultColor, theme });
-      expect(color).toBe(expected);
+    'returns $expected when activeColor: $activeColor',
+    ({ activeColor, expected }) => {
+      const theme = getTheme(false);
+      const result = getActiveTintColor({ activeColor, theme });
+      expect(result).toBe(expected);
     }
   );
 });
 
 describe('getInactiveTintColor', () => {
   it.each`
-    inactiveColor | defaultColor | useV3    | expected
-    ${'#853D4B'}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined}  | ${'#fff'}    | ${false} | ${color('#fff').alpha(0.5).rgb().string()}
+    inactiveColor | expected
+    ${'#853D4B'}  | ${'#853D4B'}
+    ${undefined}  | ${Palette.neutralVariant30}
   `(
-    'returns $expected when inactiveColor: $inactiveColor and useV3: $useV3',
-    ({ inactiveColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
-      const color = getInactiveTintColor({
+    'returns $expected when inactiveColor: $inactiveColor',
+    ({ inactiveColor, expected }) => {
+      const theme = getTheme(false);
+      const result = getInactiveTintColor({
         inactiveColor,
-        defaultColor,
         theme,
       });
-      expect(color).toBe(expected);
+      expect(result).toBe(expected);
     }
   );
 });
 
 describe('getLabelColor', () => {
   it.each`
-    tintColor    | focused  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined} | ${false} | ${'#fff'}    | ${false} | ${'#fff'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${false} | ${'#fff'}
+    tintColor    | focused  | expected
+    ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
+    ${'#853D4B'} | ${true}  | ${'#853D4B'}
+    ${undefined} | ${true}  | ${Palette.neutral10}
+    ${undefined} | ${false} | ${Palette.neutralVariant30}
   `(
-    'returns $expected when tintColor: $tintColor, focused: $focused useV3: $useV3',
-    ({ tintColor, focused, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
-      const color = getLabelColor({
-        tintColor,
+    'returns $expected when tintColor: $tintColor, focused: $focused',
+    ({ tintColor, focused, expected }) => {
+      const theme = getTheme(false);
+      const result = getLabelColor({
+        tintColor: tintColor ?? '',
         hasColor: Boolean(tintColor),
         focused,
-        defaultColor,
         theme,
       });
-      expect(color).toBe(expected);
+      expect(result).toBe(expected);
     }
   );
 });

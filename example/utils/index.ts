@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 
-import ExpoMaterial3ThemeModule from '@pchmn/expo-material3-theme/build/ExpoMaterial3ThemeModule';
-import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
+import { DarkTheme, LightTheme, Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -1156,80 +1155,80 @@ const darkCyanColors = {
 
 export const colorThemes = {
   paper: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
+    light: LightTheme,
+    dark: DarkTheme,
   },
   pink: {
     light: {
-      ...MD3LightTheme,
-      ...lightPinkColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightPinkColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkPinkColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkPinkColors.colors },
     },
   },
   green: {
     light: {
-      ...MD3LightTheme,
-      ...lightGreenColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightGreenColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkGreenColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkGreenColors.colors },
     },
   },
   blue: {
     light: {
-      ...MD3LightTheme,
-      ...lightBlueColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightBlueColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkBlueColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkBlueColors.colors },
     },
   },
   orange: {
     light: {
-      ...MD3LightTheme,
-      ...lightOrangeColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightOrangeColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkOrangeColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkOrangeColors.colors },
     },
   },
   red: {
     light: {
-      ...MD3LightTheme,
-      ...lightRedColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightRedColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkRedColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkRedColors.colors },
     },
   },
   yellow: {
     light: {
-      ...MD3LightTheme,
-      ...lightYellowColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightYellowColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkYellowColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkYellowColors.colors },
     },
   },
   cyan: {
     light: {
-      ...MD3LightTheme,
-      ...lightCyanColors,
+      ...LightTheme,
+      colors: { ...LightTheme.colors, ...lightCyanColors.colors },
     },
     dark: {
-      ...MD3DarkTheme,
-      ...darkCyanColors,
+      ...DarkTheme,
+      colors: { ...DarkTheme.colors, ...darkCyanColors.colors },
     },
   },
-} as { [key: string]: { light: MD3Theme; dark: MD3Theme } };
+} as { [key: string]: { light: Theme; dark: Theme } };
 
 export const songsData = [
   {
@@ -1420,7 +1419,5 @@ export const restaurantsData = [
   },
 ];
 
-export const deviceColorsSupported =
-  Boolean(ExpoMaterial3ThemeModule) &&
-  Platform.OS === 'android' &&
-  Platform.Version >= 31;
+export const dynamicThemeSupported =
+  Platform.OS === 'android' && (Platform.Version as number) >= 31;

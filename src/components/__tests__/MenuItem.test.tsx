@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { render } from '@testing-library/react-native';
-import color from 'color';
-
 import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 describe('Menu Item', () => {
   it('renders menu item', () => {
@@ -72,28 +72,9 @@ describe('getMenuItemColor - title color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ titleColor: getTheme().colors.onSurfaceDisabled });
-  });
-
-  it('should return disabled color if disabled, for theme version 2, light theme', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(false, false),
-        disabled: true,
-      })
     ).toMatchObject({
-      titleColor: color(black).alpha(0.32).rgb().string(),
-    });
-  });
-
-  it('should return disabled color if disabled, for theme version 2, dark theme', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(true, false),
-        disabled: true,
-      })
-    ).toMatchObject({
-      titleColor: color(white).alpha(0.32).rgb().string(),
+      titleColor: getTheme().colors.onSurface,
+      contentOpacity: stateOpacity.disabled,
     });
   });
 
@@ -106,19 +87,6 @@ describe('getMenuItemColor - title color', () => {
       titleColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      titleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
-    });
-  });
 });
 
 describe('getMenuItemColor - icon color', () => {
@@ -128,28 +96,9 @@ describe('getMenuItemColor - icon color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ iconColor: getTheme().colors.onSurfaceDisabled });
-  });
-
-  it('should return disabled color if disabled, for theme version 2, light theme', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(false, false),
-        disabled: true,
-      })
     ).toMatchObject({
-      iconColor: color(black).alpha(0.32).rgb().string(),
-    });
-  });
-
-  it('should return disabled color if disabled, for theme version 2, dark theme', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(true, false),
-        disabled: true,
-      })
-    ).toMatchObject({
-      iconColor: color(white).alpha(0.32).rgb().string(),
+      iconColor: getTheme().colors.onSurfaceVariant,
+      contentOpacity: stateOpacity.disabled,
     });
   });
 
@@ -160,44 +109,6 @@ describe('getMenuItemColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      iconColor: color(getTheme(false, false).colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
-    });
-  });
-});
-
-describe('getMenuItemColor - ripple color', () => {
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return undefined, for theme version 2', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      rippleColor: undefined,
     });
   });
 });

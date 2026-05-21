@@ -44,15 +44,15 @@ exports[`renders DrawerItem with icon 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": undefined,
-            "borderRadius": 28,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
             "marginLeft": 12,
             "marginRight": 12,
             "marginVertical": 0,
+          },
+          {
+            "backgroundColor": undefined,
+            "borderRadius": 28,
           },
           undefined,
         ],
@@ -122,7 +122,7 @@ exports[`renders DrawerItem with icon 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -203,15 +203,15 @@ exports[`renders active DrawerItem 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": "rgba(232, 222, 248, 1)",
-            "borderRadius": 28,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
             "marginLeft": 12,
             "marginRight": 12,
             "marginVertical": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "borderRadius": 28,
           },
           undefined,
         ],
@@ -281,7 +281,7 @@ exports[`renders active DrawerItem 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -362,15 +362,15 @@ exports[`renders basic DrawerItem 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": undefined,
-            "borderRadius": 28,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
             "marginLeft": 12,
             "marginRight": 12,
             "marginVertical": 0,
+          },
+          {
+            "backgroundColor": undefined,
+            "borderRadius": 28,
           },
           undefined,
         ],
@@ -411,7 +411,7 @@ exports[`renders basic DrawerItem 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [

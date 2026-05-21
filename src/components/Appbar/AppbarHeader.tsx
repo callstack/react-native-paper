@@ -13,13 +13,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
 import {
-  DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   getAppbarBorders,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
+import { shadow } from '../../theme/tokens/sys/elevation';
 import type { ThemeProp } from '../../types';
 
 export type Props = Omit<
@@ -104,14 +103,13 @@ const AppbarHeader = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
 
   const flattenedStyle = StyleSheet.flatten(style);
   const {
-    height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
-    elevation = isV3 ? (elevated ? 2 : 0) : 4,
+    height = modeAppbarHeight[mode],
+    elevation = elevated ? 2 : 0,
     backgroundColor: customBackground,
-    zIndex = isV3 && elevated ? 1 : 0,
+    zIndex = elevated ? 1 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     height?: number;
@@ -143,17 +141,15 @@ const AppbarHeader = ({
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
-        shadow(elevation) as ViewStyle,
+        shadow(elevation, theme.colors.shadow) as ViewStyle,
       ]}
     >
       <Appbar
         testID={testID}
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
-        {...(isV3 && {
-          mode,
-        })}
         {...rest}
+        mode={mode}
         theme={theme}
       />
     </View>

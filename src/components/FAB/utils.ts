@@ -1,21 +1,12 @@
 import { MutableRefObject } from 'react';
-import {
-  Animated,
-  ColorValue,
-  I18nManager,
-  Platform,
-  ViewStyle,
-} from 'react-native';
+import { Animated, ColorValue, Platform, ViewStyle } from 'react-native';
 
-import color from 'color';
-
-import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
   isIconStatic: boolean;
+  isRTL: boolean;
   distance: number;
   animFAB: Animated.Value;
 };
@@ -31,17 +22,15 @@ type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 type BaseProps = {
   isVariant: (variant: Variant) => boolean;
   theme: InternalTheme;
-  disabled?: boolean;
 };
 
 export const getCombinedStyles = ({
   isAnimatedFromRight,
   isIconStatic,
+  isRTL,
   distance,
   animFAB,
 }: GetCombinedStylesProps): CombinedStyles => {
-  const { isRTL } = I18nManager;
-
   const defaultPositionStyles = { left: -distance, right: undefined };
 
   const combinedStyles: CombinedStyles = {
@@ -167,117 +156,75 @@ export const getCombinedStyles = ({
 const getBackgroundColor = ({
   theme,
   isVariant,
-  disabled,
   customBackgroundColor,
 }: BaseProps & { customBackgroundColor?: ColorValue }) => {
-  if (customBackgroundColor && !disabled) {
+  if (customBackgroundColor) {
     return customBackgroundColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.surfaceDisabled;
-    }
-
-    if (isVariant('primary')) {
-      return theme.colors.primaryContainer;
-    }
-
-    if (isVariant('secondary')) {
-      return theme.colors.secondaryContainer;
-    }
-
-    if (isVariant('tertiary')) {
-      return theme.colors.tertiaryContainer;
-    }
-
-    if (isVariant('surface')) {
-      return theme.colors.elevation.level3;
-    }
+  if (isVariant('primary')) {
+    return theme.colors.primaryContainer;
   }
 
-  if (disabled) {
-    if (theme.dark) {
-      return color(white).alpha(0.12).rgb().string();
-    }
-    return color(black).alpha(0.12).rgb().string();
+  if (isVariant('secondary')) {
+    return theme.colors.secondaryContainer;
   }
 
-  //@ts-ignore
-  return theme.colors?.accent;
+  if (isVariant('tertiary')) {
+    return theme.colors.tertiaryContainer;
+  }
+
+  if (isVariant('surface')) {
+    return theme.colors.surfaceContainerHigh;
+  }
+
+  return theme.colors.primaryContainer;
 };
 
 const getForegroundColor = ({
   theme,
   isVariant,
-  disabled,
-  backgroundColor,
   customColor,
-}: BaseProps & { backgroundColor: string; customColor?: string }) => {
-  if (typeof customColor !== 'undefined' && !disabled) {
+}: BaseProps & { customColor?: ColorValue }) => {
+  if (typeof customColor !== 'undefined') {
     return customColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    if (isVariant('primary')) {
-      return theme.colors.onPrimaryContainer;
-    }
-
-    if (isVariant('secondary')) {
-      return theme.colors.onSecondaryContainer;
-    }
-
-    if (isVariant('tertiary')) {
-      return theme.colors.onTertiaryContainer;
-    }
-
-    if (isVariant('surface')) {
-      return theme.colors.primary;
-    }
+  if (isVariant('primary')) {
+    return theme.colors.onPrimaryContainer;
   }
 
-  if (disabled) {
-    if (theme.dark) {
-      return color(white).alpha(0.32).rgb().string();
-    }
-    return color(black).alpha(0.32).rgb().string();
+  if (isVariant('secondary')) {
+    return theme.colors.onSecondaryContainer;
   }
 
-  if (backgroundColor) {
-    return getContrastingColor(
-      backgroundColor || white,
-      white,
-      'rgba(0, 0, 0, .54)'
-    );
+  if (isVariant('tertiary')) {
+    return theme.colors.onTertiaryContainer;
   }
 
-  return getContrastingColor(white, white, 'rgba(0, 0, 0, .54)');
+  if (isVariant('surface')) {
+    return theme.colors.primary;
+  }
+
+  return theme.colors.onPrimaryContainer;
 };
 
 export const getFABColors = ({
   theme,
   variant,
-  disabled,
   customColor,
   customBackgroundColor,
-  customRippleColor,
 }: {
   theme: InternalTheme;
   variant: string;
-  disabled?: boolean;
-  customColor?: string;
+  customColor?: ColorValue;
   customBackgroundColor?: ColorValue;
-  customRippleColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
     return variant === variantToCompare;
   };
 
-  const baseFABColorProps = { theme, isVariant, disabled };
+  const baseFABColorProps = { theme, isVariant };
 
   const backgroundColor = getBackgroundColor({
     ...baseFABColorProps,
@@ -287,50 +234,20 @@ export const getFABColors = ({
   const foregroundColor = getForegroundColor({
     ...baseFABColorProps,
     customColor,
-    backgroundColor,
   });
 
   return {
     backgroundColor,
     foregroundColor,
-    rippleColor:
-      customRippleColor || color(foregroundColor).alpha(0.12).rgb().string(),
   };
 };
 
 const getLabelColor = ({ theme }: { theme: InternalTheme }) => {
-  if (theme.isV3) {
-    return theme.colors.onSurface;
-  }
-
-  if (theme.dark) {
-    return theme.colors.text;
-  }
-
-  return color(theme.colors.text).fade(0.54).rgb().string();
-};
-
-const getBackdropColor = ({
-  theme,
-  customBackdropColor,
-}: {
-  theme: InternalTheme;
-  customBackdropColor?: string;
-}) => {
-  if (customBackdropColor) {
-    return customBackdropColor;
-  }
-  if (theme.isV3) {
-    return color(theme.colors.background).alpha(0.95).rgb().string();
-  }
-  return theme.colors?.backdrop;
+  return theme.colors.onSurface;
 };
 
 const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {
-  if (theme.isV3) {
-    return theme.colors.elevation.level3;
-  }
-  return theme.colors.surface;
+  return theme.colors.surfaceContainerHigh;
 };
 
 export const getFABGroupColors = ({
@@ -338,25 +255,16 @@ export const getFABGroupColors = ({
   customBackdropColor,
 }: {
   theme: InternalTheme;
-  customBackdropColor?: string;
+  customBackdropColor?: ColorValue;
 }) => {
   return {
     labelColor: getLabelColor({ theme }),
-    backdropColor: getBackdropColor({ theme, customBackdropColor }),
+    backdropColor: customBackdropColor ?? theme.colors.background,
+    backdropOpacity: customBackdropColor ? 1 : 0.95,
     stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
   };
 };
 
-const standardSize = {
-  height: 56,
-  width: 56,
-  borderRadius: 28,
-};
-const smallSize = {
-  height: 40,
-  width: 40,
-  borderRadius: 28,
-};
 const v3SmallSize = {
   height: 40,
   width: 40,
@@ -370,10 +278,10 @@ const v3LargeSize = {
   width: 96,
 };
 
-const getCustomFabSize = (customSize: number, roundness: number) => ({
+const getCustomFabSize = (customSize: number) => ({
   height: customSize,
   width: customSize,
-  borderRadius: roundness === 0 ? 0 : customSize / roundness,
+  borderRadius: customSize / 4,
 });
 
 export const getFabStyle = ({
@@ -385,30 +293,16 @@ export const getFabStyle = ({
   size: 'small' | 'medium' | 'large';
   theme: InternalTheme;
 }) => {
-  const { isV3, roundness } = theme;
+  if (customSize) return getCustomFabSize(customSize);
 
-  if (customSize) return getCustomFabSize(customSize, roundness);
-
-  if (isV3) {
-    switch (size) {
-      case 'small':
-        return { ...v3SmallSize, borderRadius: 3 * roundness };
-      case 'medium':
-        return { ...v3MediumSize, borderRadius: 4 * roundness };
-      case 'large':
-        return { ...v3LargeSize, borderRadius: 7 * roundness };
-    }
+  switch (size) {
+    case 'small':
+      return { ...v3SmallSize, borderRadius: theme.shapes.corner.medium };
+    case 'medium':
+      return { ...v3MediumSize, borderRadius: theme.shapes.corner.large };
+    case 'large':
+      return { ...v3LargeSize, borderRadius: theme.shapes.corner.extraLarge };
   }
-
-  if (size === 'small') {
-    return smallSize;
-  }
-  return standardSize;
-};
-
-const extended = {
-  height: 48,
-  paddingHorizontal: 16,
 };
 
 const v3Extended = {
@@ -424,16 +318,14 @@ const getExtendedFabDimensions = (customSize: number) => ({
 
 export const getExtendedFabStyle = ({
   customSize,
-  theme,
+  theme: _theme,
 }: {
   customSize?: number;
   theme: InternalTheme;
 }) => {
   if (customSize) return getExtendedFabDimensions(customSize);
 
-  const { isV3 } = theme;
-
-  return isV3 ? v3Extended : extended;
+  return v3Extended;
 };
 
 let cachedContext: CanvasRenderingContext2D | null = null;

@@ -1,64 +1,48 @@
-import color from 'color';
+import type { ColorValue } from 'react-native';
 
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 const getAndroidCheckedColor = ({
   theme,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
-  customColor?: string;
+  customColor?: ColorValue;
+  error?: boolean;
 }) => {
   if (customColor) {
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
+  if (error) {
+    return theme.colors.error;
   }
 
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getAndroidUncheckedColor = ({
   theme,
   customUncheckedColor,
+  error,
 }: {
   theme: InternalTheme;
-  customUncheckedColor?: string;
+  customUncheckedColor?: ColorValue;
+  error?: boolean;
 }) => {
   if (customUncheckedColor) {
     return customUncheckedColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.onSurfaceVariant;
+  if (error) {
+    return theme.colors.error;
   }
 
-  if (theme.dark) {
-    return color(theme.colors.text).alpha(0.7).rgb().string();
-  }
-
-  return color(theme.colors.text).alpha(0.54).rgb().string();
-};
-
-const getAndroidRippleColor = ({
-  theme,
-  checkedColor,
-  disabled,
-}: {
-  theme: InternalTheme;
-  checkedColor: string;
-  disabled?: boolean;
-}) => {
-  if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
-  }
-
-  return color(checkedColor).fade(0.32).rgb().string();
+  return theme.colors.onSurfaceVariant;
 };
 
 const getAndroidControlColor = ({
@@ -70,15 +54,12 @@ const getAndroidControlColor = ({
 }: {
   theme: InternalTheme;
   checked: boolean;
-  checkedColor: string;
-  uncheckedColor: string;
+  checkedColor: ColorValue;
+  uncheckedColor: ColorValue;
   disabled?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return theme.colors.onSurface;
   }
 
   if (checked) {
@@ -93,20 +74,26 @@ export const getAndroidSelectionControlColor = ({
   checked,
   customColor,
   customUncheckedColor,
+  error,
 }: {
   theme: InternalTheme;
   checked: boolean;
   disabled?: boolean;
-  customColor?: string;
-  customUncheckedColor?: string;
+  customColor?: ColorValue;
+  customUncheckedColor?: ColorValue;
+  error?: boolean;
 }) => {
-  const checkedColor = getAndroidCheckedColor({ theme, customColor });
+  const checkedColor = getAndroidCheckedColor({ theme, customColor, error });
   const uncheckedColor = getAndroidUncheckedColor({
     theme,
     customUncheckedColor,
+    error,
   });
+  const selectionControlOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
-    rippleColor: getAndroidRippleColor({ theme, checkedColor, disabled }),
     selectionControlColor: getAndroidControlColor({
       theme,
       disabled,
@@ -114,6 +101,7 @@ export const getAndroidSelectionControlColor = ({
       checkedColor,
       uncheckedColor,
     }),
+    selectionControlOpacity,
   };
 };
 
@@ -121,63 +109,51 @@ const getIOSCheckedColor = ({
   theme,
   disabled,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
-  customColor?: string;
+  customColor?: ColorValue;
   disabled?: boolean;
+  error?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return theme.colors.primary;
   }
 
   if (customColor) {
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
+  if (error) {
+    return theme.colors.error;
   }
 
-  return theme.colors.accent;
-};
-
-const getIOSRippleColor = ({
-  theme,
-  checkedColor,
-  disabled,
-}: {
-  theme: InternalTheme;
-  checkedColor: string;
-  disabled?: boolean;
-}) => {
-  if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
-  }
-  return color(checkedColor).fade(0.32).rgb().string();
+  return theme.colors.primary;
 };
 
 export const getSelectionControlIOSColor = ({
   theme,
   disabled,
   customColor,
+  error,
 }: {
   theme: InternalTheme;
   disabled?: boolean;
-  customColor?: string;
+  customColor?: ColorValue;
+  error?: boolean;
 }) => {
-  const checkedColor = getIOSCheckedColor({ theme, disabled, customColor });
+  const checkedColor = getIOSCheckedColor({
+    theme,
+    disabled,
+    customColor,
+    error,
+  });
+  const checkedColorOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     checkedColor,
-    rippleColor: getIOSRippleColor({
-      theme,
-      checkedColor,
-      disabled,
-    }),
+    checkedColorOpacity,
   };
 };

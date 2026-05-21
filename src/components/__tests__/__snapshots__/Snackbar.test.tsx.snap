@@ -24,11 +24,11 @@ exports[`renders snackbar with Text as a child 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 2,
           "width": 0,
@@ -50,13 +50,13 @@ exports[`renders snackbar with Text as a child 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "minHeight": 48,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 1,
             "width": 0,
@@ -112,11 +112,11 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 2,
           "width": 0,
@@ -138,13 +138,13 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "minHeight": 48,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 1,
             "width": 0,
@@ -226,11 +226,11 @@ exports[`renders snackbar with action button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 2,
           "width": 0,
@@ -252,13 +252,13 @@ exports[`renders snackbar with action button 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "minHeight": 48,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 1,
             "width": 0,
@@ -276,7 +276,7 @@ exports[`renders snackbar with action button 1`] = `
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -294,7 +294,7 @@ exports[`renders snackbar with action button 1`] = `
                   "marginVertical": 14,
                 },
                 {
-                  "color": "rgba(244, 239, 244, 1)",
+                  "color": "rgba(245, 239, 247, 1)",
                 },
               ],
             ],
@@ -326,7 +326,7 @@ exports[`renders snackbar with action button 1`] = `
               "borderRadius": 20,
               "marginLeft": 4,
               "marginRight": 8,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -348,7 +348,7 @@ exports[`renders snackbar with action button 1`] = `
                 "borderWidth": 0,
                 "flex": undefined,
                 "minWidth": 64,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -410,6 +410,9 @@ exports[`renders snackbar with action button 1`] = `
                       "flexDirection": "row",
                       "justifyContent": "center",
                     },
+                    {
+                      "opacity": 1,
+                    },
                     undefined,
                   ]
                 }
@@ -423,7 +426,7 @@ exports[`renders snackbar with action button 1`] = `
                         "textAlign": "left",
                       },
                       {
-                        "color": "rgba(28, 27, 31, 1)",
+                        "color": "rgba(29, 27, 32, 1)",
                         "writingDirection": "ltr",
                       },
                       [
@@ -440,7 +443,6 @@ exports[`renders snackbar with action button 1`] = `
                             "marginVertical": 9,
                             "textAlign": "center",
                           },
-                          false,
                           {
                             "marginHorizontal": 12,
                           },
@@ -495,11 +497,11 @@ exports[`renders snackbar with content 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 2,
           "width": 0,
@@ -521,13 +523,13 @@ exports[`renders snackbar with content 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "minHeight": 48,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 1,
             "width": 0,
@@ -545,7 +547,7 @@ exports[`renders snackbar with content 1`] = `
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -563,7 +565,7 @@ exports[`renders snackbar with content 1`] = `
                   "marginVertical": 14,
                 },
                 {
-                  "color": "rgba(244, 239, 244, 1)",
+                  "color": "rgba(245, 239, 247, 1)",
                 },
               ],
             ],

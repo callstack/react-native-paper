@@ -70,23 +70,9 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   animated?: boolean;
   /**
-   *  @deprecated Deprecated in v.5x - use prop size="small".
-   *
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
-   */
-  small?: boolean;
-  /**
    * Custom color for the icon and label of the `FAB`.
    */
-  color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
+  color?: ColorValue;
   /**
    * Whether `FAB` is currently visible.
    */
@@ -189,8 +175,6 @@ const FAB = forwardRef<View, Props>(
       accessibilityState,
       animated = true,
       color: customColor,
-      rippleColor: customRippleColor,
-      disabled,
       onPress,
       onLongPress,
       delayLongPress,
@@ -210,11 +194,11 @@ const FAB = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp ?? !theme.isV3;
+    const uppercase = uppercaseProp ?? false;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
-    const { isV3, animation } = theme;
+    const { animation } = theme;
     const { scale } = animation;
 
     React.useEffect(() => {
@@ -242,20 +226,18 @@ const FAB = forwardRef<View, Props>(
       backgroundColor: customBackgroundColor,
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const { backgroundColor, foregroundColor, rippleColor } = getFABColors({
+    const { backgroundColor, foregroundColor } = getFABColors({
       theme,
       variant,
-      disabled,
       customColor,
       customBackgroundColor,
-      customRippleColor,
     });
 
     const isLargeSize = size === 'large';
     const isFlatMode = mode === 'flat';
     const iconSize = isLargeSize ? 36 : 24;
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
-    const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+    const font = theme.fonts.labelLarge;
 
     const extendedStyle = getExtendedFabStyle({ customSize, theme });
     const textStyle = {
@@ -263,9 +245,7 @@ const FAB = forwardRef<View, Props>(
       ...font,
     };
 
-    const md3Elevation = isFlatMode || disabled ? 0 : 3;
-
-    const newAccessibilityState = { ...accessibilityState, disabled };
+    const md3Elevation = isFlatMode ? 0 : 3;
 
     return (
       <Surface
@@ -282,13 +262,11 @@ const FAB = forwardRef<View, Props>(
               },
             ],
           },
-          !isV3 && styles.elevated,
-          !isV3 && disabled && styles.disabled,
           style,
         ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
-        {...(isV3 && { elevation: md3Elevation })}
+        elevation={md3Elevation}
         container
       >
         <TouchableRipple
@@ -297,11 +275,9 @@ const FAB = forwardRef<View, Props>(
           onPress={onPress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          rippleColor={rippleColor}
-          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
-          accessibilityState={newAccessibilityState}
+          accessibilityState={accessibilityState}
           testID={testID}
           style={{ borderRadius }}
           {...rest}
@@ -347,9 +323,6 @@ const FAB = forwardRef<View, Props>(
 );
 
 const styles = StyleSheet.create({
-  elevated: {
-    elevation: 6,
-  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -360,9 +333,6 @@ const styles = StyleSheet.create({
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
-  },
-  disabled: {
-    elevation: 0,
   },
 });
 

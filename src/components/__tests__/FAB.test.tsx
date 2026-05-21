@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
+import { fireEvent } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
 
@@ -94,12 +92,6 @@ it('renders loading FAB with custom size prop', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled FAB', () => {
-  const tree = render(<FAB onPress={() => {}} icon="plus" disabled />).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders custom color for the icon and label of the FAB', () => {
   const tree = render(
     <FAB onPress={() => {}} icon="plus" color="#AA0114" />
@@ -140,7 +132,12 @@ it('renders FAB with custom border radius', () => {
 
 it('renders FAB with zero border radius', () => {
   const { getByTestId } = render(
-    <FAB theme={{ roundness: 0 }} onPress={() => {}} icon="plus" testID="fab" />
+    <FAB
+      theme={{ shapes: { corner: { large: 0 } } }}
+      onPress={() => {}}
+      icon="plus"
+      testID="fab"
+    />
   );
 
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
@@ -199,43 +196,7 @@ describe('getFABColors - background color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, light mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false, false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: color(black).alpha(0.12).rgb().string(),
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(true, false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: color(white).alpha(0.12).rgb().string(),
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, primary variant', () => {
+  it('should return correct theme color, primary variant', () => {
     expect(
       getFABColors({
         theme: getTheme(),
@@ -275,18 +236,7 @@ describe('getFABColors - background color', () => {
         variant: 'surface',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.elevation.level3,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false, false),
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme(false, false).colors.accent,
+      backgroundColor: getTheme().colors.surfaceContainerHigh,
     });
   });
 });
@@ -304,43 +254,7 @@ describe('getFABColors - foreground color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-        disabled: true,
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, light mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false, false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: color(black).alpha(0.32).rgb().string(),
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(true, false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: color(white).alpha(0.32).rgb().string(),
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, primary variant', () => {
+  it('should return correct theme color, primary variant', () => {
     expect(
       getFABColors({
         theme: getTheme(),
@@ -381,21 +295,6 @@ describe('getFABColors - foreground color', () => {
       })
     ).toMatchObject({
       foregroundColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false, false),
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: getContrastingColor(
-        getTheme(false, false).colors.accent,
-        white,
-        'rgba(0, 0, 0, .54)'
-      ),
     });
   });
 });

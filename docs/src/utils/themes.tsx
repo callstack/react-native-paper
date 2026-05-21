@@ -1,7 +1,7 @@
 import {
   argbFromHex,
   themeFromSourceColor,
-  //@ts-ignore
+  // eslint-disable-next-line import/no-unresolved
 } from '@material/material-color-utilities';
 import camelCase from 'camelcase';
 import Color from 'color';

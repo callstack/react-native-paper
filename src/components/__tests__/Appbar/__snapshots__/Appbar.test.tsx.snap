@@ -5,9 +5,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 254, 1)",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -23,7 +23,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
@@ -31,7 +31,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "paddingLeft": undefined,
         "paddingRight": undefined,
         "paddingTop": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -46,9 +46,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       collapsable={false}
       style={
         {
-          "backgroundColor": "rgb(238, 232, 244)",
+          "backgroundColor": "rgba(236, 230, 240, 1)",
           "borderRadius": 28,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -64,11 +64,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(238, 232, 244)",
+            "backgroundColor": "rgba(236, 230, 240, 1)",
             "borderRadius": 28,
             "flex": undefined,
             "flexDirection": "row",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -87,7 +87,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               "borderRadius": 20,
               "height": 40,
               "margin": 6,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -104,13 +104,13 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             style={
               {
                 "backgroundColor": "transparent",
-                "borderColor": "rgba(121, 116, 126, 1)",
+                "borderColor": "rgba(202, 196, 208, 1)",
                 "borderRadius": 20,
                 "borderWidth": 0,
                 "elevation": 0,
                 "flex": 1,
                 "overflow": "hidden",
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -181,35 +181,43 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               }
               testID="search-bar-icon"
             >
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+              <View
                 style={
-                  [
-                    {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    [
-                      {
-                        "lineHeight": 24,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
+                  {
+                    "opacity": 1,
+                  }
                 }
               >
-                magnify
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  magnify
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -217,7 +225,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           accessibilityRole="search"
           keyboardAppearance="light"
           placeholder="Search"
-          placeholderTextColor="rgba(28, 27, 31, 1)"
+          placeholderTextColor="rgba(29, 27, 32, 1)"
           returnKeyType="search"
           selectionColor="rgba(103, 80, 164, 1)"
           style={
@@ -228,15 +236,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "fontSize": 18,
                 "minWidth": 0,
                 "paddingLeft": 8,
-                "textAlign": "left",
               },
               {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
-                "letterSpacing": 0.15,
+                "letterSpacing": 0.5,
                 "lineHeight": 0,
+                "textAlign": "left",
               },
               {
                 "minHeight": 56,
@@ -271,7 +279,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "borderRadius": 20,
                 "height": 40,
                 "margin": 6,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -288,13 +296,13 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderColor": "rgba(202, 196, 208, 1)",
                   "borderRadius": 20,
                   "borderWidth": 0,
                   "elevation": 0,
                   "flex": 1,
                   "overflow": "hidden",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -365,35 +373,43 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 }
                 testID="search-bar-clear-icon"
               >
-                <Text
-                  accessibilityElementsHidden={true}
-                  importantForAccessibility="no-hide-descendants"
-                  pointerEvents="none"
-                  selectable={false}
+                <View
                   style={
-                    [
-                      {
-                        "color": "rgba(255, 255, 255, 0)",
-                        "fontSize": 24,
-                      },
-                      [
-                        {
-                          "lineHeight": 24,
-                          "transform": [
-                            {
-                              "scaleX": 1,
-                            },
-                          ],
-                        },
-                        {
-                          "backgroundColor": "transparent",
-                        },
-                      ],
-                    ]
+                    {
+                      "opacity": 1,
+                    }
                   }
                 >
-                  close
-                </Text>
+                  <Text
+                    accessibilityElementsHidden={true}
+                    importantForAccessibility="no-hide-descendants"
+                    pointerEvents="none"
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "color": "rgba(255, 255, 255, 0)",
+                          "fontSize": 24,
+                        },
+                        [
+                          {
+                            "lineHeight": 24,
+                            "transform": [
+                              {
+                                "scaleX": 1,
+                              },
+                            ],
+                          },
+                          {
+                            "backgroundColor": "transparent",
+                          },
+                        ],
+                      ]
+                    }
+                  >
+                    close
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -409,9 +425,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 254, 1)",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -427,7 +443,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
@@ -435,7 +451,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "paddingLeft": undefined,
         "paddingRight": undefined,
         "paddingTop": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -454,7 +470,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -471,13 +487,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -550,80 +566,84 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         >
           <View
             style={
-              [
-                {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
             <View
-              collapsable={false}
               style={
                 [
                   {
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                  },
+                  {
+                    "height": 24,
+                    "width": 24,
+                  },
+                ]
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
                     "bottom": 0,
                     "left": 0,
+                    "opacity": 1,
                     "position": "absolute",
                     "right": 0,
                     "top": 0,
-                  },
-                  {
-                    "opacity": 1,
                     "transform": [
                       {
                         "rotate": "0deg",
                       },
                     ],
-                  },
-                ]
-              }
-              testID="cross-fade-icon-current"
-            >
-              <View
-                style={
-                  [
-                    {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    {
-                      "height": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                      "width": 24,
-                    },
-                  ]
-                }
-              >
-                <Image
-                  accessibilityIgnoresInvertColors={true}
-                  source={
-                    {
-                      "testUri": "../../../src/assets/back-chevron.png",
-                    }
                   }
+                }
+                testID="cross-fade-icon-current"
+              >
+                <View
                   style={
                     [
                       {
-                        "resizeMode": "contain",
+                        "alignItems": "center",
+                        "justifyContent": "center",
                       },
                       {
-                        "height": 21,
-                        "tintColor": "rgba(28, 27, 31, 1)",
-                        "width": 21,
+                        "height": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                        "width": 24,
                       },
                     ]
                   }
-                />
+                >
+                  <Image
+                    accessibilityIgnoresInvertColors={true}
+                    source={
+                      {
+                        "testUri": "../../../src/assets/back-chevron.png",
+                      }
+                    }
+                    style={
+                      [
+                        {
+                          "resizeMode": "contain",
+                        },
+                        {
+                          "height": 21,
+                          "tintColor": "rgba(29, 27, 32, 1)",
+                          "width": 21,
+                        },
+                      ]
+                    }
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -663,7 +683,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -676,14 +696,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               },
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontSize": 22,
                   "fontWeight": "400",
                   "letterSpacing": 0,
                   "lineHeight": 28,
                 },
-                false,
                 undefined,
               ],
             ],
@@ -702,7 +721,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -719,13 +738,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -797,70 +816,74 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         >
           <View
             style={
-              [
-                {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
             <View
-              collapsable={false}
               style={
                 [
                   {
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                  },
+                  {
+                    "height": 24,
+                    "width": 24,
+                  },
+                ]
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
                     "bottom": 0,
                     "left": 0,
+                    "opacity": 1,
                     "position": "absolute",
                     "right": 0,
                     "top": 0,
-                  },
-                  {
-                    "opacity": 1,
                     "transform": [
                       {
                         "rotate": "0deg",
                       },
                     ],
-                  },
-                ]
-              }
-              testID="cross-fade-icon-current"
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
-                  [
-                    {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
+                  }
+                }
+                testID="cross-fade-icon-current"
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
                     [
                       {
-                        "lineHeight": 24,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
                       },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
-                }
-              >
-                menu
-              </Text>
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  menu
+                </Text>
+              </View>
             </View>
           </View>
         </View>

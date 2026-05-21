@@ -14,10 +14,13 @@ import useLatestCallback from 'use-latest-callback';
 
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
+import { tokens } from '../theme/tokens';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
+
+const { scrimAlpha } = tokens.md.ref;
 
 export type Props = {
   /**
@@ -81,7 +84,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *
  *   const showModal = () => setVisible(true);
  *   const hideModal = () => setVisible(false);
- *   const containerStyle = {backgroundColor: 'white', padding: 20};
+ *   const containerStyle = { backgroundColor: 'white', padding: 20 };
  *
  *   return (
  *     <PaperProvider>
@@ -90,7 +93,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
  *         </Modal>
  *       </Portal>
- *       <Button style={{marginTop: 30}} onPress={showModal}>
+ *       <Button style={{ marginTop: 30 }} onPress={showModal}>
  *         Show
  *       </Button>
  *     </PaperProvider>
@@ -201,8 +204,11 @@ function Modal({
         style={[
           styles.backdrop,
           {
-            backgroundColor: theme.colors?.backdrop,
-            opacity,
+            backgroundColor: theme.colors.scrim,
+            opacity: opacity.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, scrimAlpha],
+            }),
           },
         ]}
         testID={`${testID}-backdrop`}
@@ -236,7 +242,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
   },
   // eslint-disable-next-line react-native/no-color-literals

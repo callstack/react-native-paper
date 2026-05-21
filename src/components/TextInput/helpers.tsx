@@ -1,21 +1,10 @@
-import { Platform } from 'react-native';
-
-import color from 'color';
+import type { ColorValue } from 'react-native';
 
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
   MIN_WIDTH,
   ADORNMENT_SIZE,
-  MD2_ADORNMENT_OFFSET,
-  MD2_AFFIX_OFFSET,
-  MD2_FLAT_INPUT_OFFSET,
-  MD2_ICON_OFFSET,
-  MD2_INPUT_PADDING_HORIZONTAL,
-  MD2_LABEL_PADDING_HORIZONTAL,
-  MD2_LABEL_PADDING_TOP,
-  MD2_MIN_HEIGHT,
-  MD2_OUTLINED_INPUT_OFFSET,
   MD3_ADORNMENT_OFFSET,
   MD3_AFFIX_OFFSET,
   MD3_FLAT_INPUT_OFFSET,
@@ -27,7 +16,10 @@ import {
   MD3_OUTLINED_INPUT_OFFSET,
 } from './constants';
 import type { TextInputLabelProp } from './types';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type PaddingProps = {
   height: number | null;
@@ -278,13 +270,11 @@ export function calculateOutlinedIconAndAffixTopPosition({
 
 export const calculateFlatInputHorizontalPadding = ({
   adornmentConfig,
-  isV3,
 }: {
   adornmentConfig: AdornmentConfig[];
-  isV3?: boolean;
 }) => {
   const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
-    getConstants(isV3);
+    getConstants();
 
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
@@ -314,38 +304,24 @@ type Mode = 'flat' | 'outlined';
 const getInputTextColor = ({
   theme,
   textColor,
-  disabled,
-}: BaseProps & { textColor?: string }) => {
+}: BaseProps & { textColor?: ColorValue }) => {
   if (textColor) {
     return textColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurface;
-  }
-
-  if (disabled) {
-    return color(theme.colors.text).alpha(0.54).rgb().string();
-  }
-
-  return theme.colors.text;
+  return theme.colors.onSurface;
 };
 
 const getActiveColor = ({
   theme,
-  disabled,
   error,
   activeUnderlineColor,
   activeOutlineColor,
   mode,
 }: BaseProps & {
   error?: boolean;
-  activeUnderlineColor?: string;
-  activeOutlineColor?: string;
+  activeUnderlineColor?: ColorValue;
+  activeOutlineColor?: ColorValue;
   mode?: Mode;
 }) => {
   const isFlat = mode === 'flat';
@@ -359,122 +335,63 @@ const getActiveColor = ({
     return modeColor;
   }
 
-  if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return color(theme.colors.text).alpha(0.54).rgb().string();
-  }
-
   return theme.colors.primary;
 };
 
-const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (disabled) {
-    return theme.colors.disabled;
-  }
-
-  return theme.colors.placeholder;
+const getPlaceholderColor = ({ theme }: BaseProps) => {
+  return theme.colors.onSurfaceVariant;
 };
 
 const getSelectionColor = ({
   activeColor,
   customSelectionColor,
 }: {
-  activeColor: string;
-  customSelectionColor?: string;
+  activeColor: ColorValue;
+  customSelectionColor?: ColorValue;
 }) => {
   if (typeof customSelectionColor !== 'undefined') {
     return customSelectionColor;
   }
-
-  if (Platform.OS === 'android') {
-    return color(activeColor).alpha(0.54).rgb().string();
-  }
-
   return activeColor;
 };
 
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return color(theme.colors.onSurface).alpha(0.04).rgb().string();
-    } else {
-      return theme.colors.surfaceVariant;
-    }
-  }
-
   if (disabled) {
-    return undefined;
+    return theme.colors.surfaceContainerHighest;
   }
 
-  return theme.dark
-    ? color(theme.colors?.background).lighten(0.24).rgb().string()
-    : color(theme.colors?.background).darken(0.06).rgb().string();
+  return theme.colors.surfaceVariant;
 };
 
 const getFlatUnderlineColor = ({
   theme,
   disabled,
   underlineColor,
-}: BaseProps & { underlineColor?: string }) => {
+}: BaseProps & { underlineColor?: ColorValue }) => {
   if (!disabled && underlineColor) {
     return underlineColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (disabled) {
-    return 'transparent';
-  }
-
-  return theme.colors.disabled;
+  return theme.colors.onSurfaceVariant;
 };
 
 const getOutlinedOutlineInputColor = ({
   theme,
   disabled,
   customOutlineColor,
-}: BaseProps & { customOutlineColor?: string }) => {
-  const isTransparent = color(customOutlineColor).alpha() === 0;
-
+}: BaseProps & { customOutlineColor?: ColorValue }) => {
   if (!disabled && customOutlineColor) {
     return customOutlineColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      if (theme.dark) {
-        return 'transparent';
-      }
-      return theme.colors.surfaceDisabled;
-    }
-
-    return theme.colors.outline;
-  }
-
   if (disabled) {
-    if (isTransparent) {
-      return customOutlineColor;
+    if (theme.dark) {
+      return 'transparent';
     }
-    return theme.colors.disabled;
+    return theme.colors.outlineVariant;
   }
-  return theme.colors.placeholder;
+
+  return theme.colors.outline;
 };
 
 export const getFlatInputColors = ({
@@ -486,10 +403,10 @@ export const getFlatInputColors = ({
   error,
   theme,
 }: {
-  underlineColor?: string;
-  activeUnderlineColor?: string;
-  customSelectionColor?: string;
-  textColor?: string;
+  underlineColor?: ColorValue;
+  activeUnderlineColor?: ColorValue;
+  customSelectionColor?: ColorValue;
+  textColor?: ColorValue;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
@@ -502,12 +419,17 @@ export const getFlatInputColors = ({
     mode: 'flat',
   });
 
+  const disabledOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     inputTextColor: getInputTextColor({
       ...baseFlatColorProps,
       textColor,
     }),
     activeColor,
+    disabledOpacity,
     underlineColorCustom: getFlatUnderlineColor({
       ...baseFlatColorProps,
       underlineColor,
@@ -528,10 +450,10 @@ export const getOutlinedInputColors = ({
   error,
   theme,
 }: {
-  activeOutlineColor?: string;
-  customOutlineColor?: string;
-  customSelectionColor?: string;
-  textColor?: string;
+  activeOutlineColor?: ColorValue;
+  customOutlineColor?: ColorValue;
+  customSelectionColor?: ColorValue;
+  textColor?: ColorValue;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
@@ -544,12 +466,17 @@ export const getOutlinedInputColors = ({
     mode: 'outlined',
   });
 
+  const disabledOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     inputTextColor: getInputTextColor({
       ...baseOutlinedColorProps,
       textColor,
     }),
     activeColor,
+    disabledOpacity,
     outlineColor: getOutlinedOutlineInputColor({
       ...baseOutlinedColorProps,
       customOutlineColor,
@@ -560,53 +487,17 @@ export const getOutlinedInputColors = ({
   };
 };
 
-export const getConstants = (isV3?: boolean) => {
-  // Text input affix
-  let AFFIX_OFFSET;
-  // Text input icon
-  let ICON_OFFSET;
-  //Text input flat
-  let LABEL_PADDING_TOP;
-  let LABEL_PADDING_HORIZONTAL;
-  let FLAT_INPUT_OFFSET;
-  let MIN_HEIGHT;
-  // Text input outlined;
-  let INPUT_PADDING_HORIZONTAL;
-  let ADORNMENT_OFFSET;
-  let OUTLINED_INPUT_OFFSET;
-
-  if (isV3) {
-    AFFIX_OFFSET = MD3_AFFIX_OFFSET;
-    ICON_OFFSET = MD3_ICON_OFFSET;
-    LABEL_PADDING_TOP = MD3_LABEL_PADDING_TOP;
-    LABEL_PADDING_HORIZONTAL = MD3_LABEL_PADDING_HORIZONTAL;
-    FLAT_INPUT_OFFSET = MD3_FLAT_INPUT_OFFSET;
-    MIN_HEIGHT = MD3_MIN_HEIGHT;
-    INPUT_PADDING_HORIZONTAL = MD3_INPUT_PADDING_HORIZONTAL;
-    ADORNMENT_OFFSET = MD3_ADORNMENT_OFFSET;
-    OUTLINED_INPUT_OFFSET = MD3_OUTLINED_INPUT_OFFSET;
-  } else {
-    AFFIX_OFFSET = MD2_AFFIX_OFFSET;
-    ICON_OFFSET = MD2_ICON_OFFSET;
-    LABEL_PADDING_TOP = MD2_LABEL_PADDING_TOP;
-    LABEL_PADDING_HORIZONTAL = MD2_LABEL_PADDING_HORIZONTAL;
-    FLAT_INPUT_OFFSET = MD2_FLAT_INPUT_OFFSET;
-    MIN_HEIGHT = MD2_MIN_HEIGHT;
-    INPUT_PADDING_HORIZONTAL = MD2_INPUT_PADDING_HORIZONTAL;
-    ADORNMENT_OFFSET = MD2_ADORNMENT_OFFSET;
-    OUTLINED_INPUT_OFFSET = MD2_OUTLINED_INPUT_OFFSET;
-  }
-
+export const getConstants = () => {
   return {
-    AFFIX_OFFSET,
-    ICON_OFFSET,
-    LABEL_PADDING_TOP,
-    LABEL_PADDING_HORIZONTAL,
-    FLAT_INPUT_OFFSET,
-    MIN_HEIGHT,
-    INPUT_PADDING_HORIZONTAL,
-    ADORNMENT_OFFSET,
-    OUTLINED_INPUT_OFFSET,
+    AFFIX_OFFSET: MD3_AFFIX_OFFSET,
+    ICON_OFFSET: MD3_ICON_OFFSET,
+    LABEL_PADDING_TOP: MD3_LABEL_PADDING_TOP,
+    LABEL_PADDING_HORIZONTAL: MD3_LABEL_PADDING_HORIZONTAL,
+    FLAT_INPUT_OFFSET: MD3_FLAT_INPUT_OFFSET,
+    MIN_HEIGHT: MD3_MIN_HEIGHT,
+    INPUT_PADDING_HORIZONTAL: MD3_INPUT_PADDING_HORIZONTAL,
+    ADORNMENT_OFFSET: MD3_ADORNMENT_OFFSET,
+    OUTLINED_INPUT_OFFSET: MD3_OUTLINED_INPUT_OFFSET,
     MIN_WIDTH,
   };
 };

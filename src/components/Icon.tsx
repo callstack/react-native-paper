@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {
-  I18nManager,
   Image,
   ImageSourcePropType,
   Platform,
+  type ColorValue,
 } from 'react-native';
 
 import { accessibilityProps } from './MaterialCommunityIcon';
+import { useLocale } from '../core/locale';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
@@ -16,7 +17,7 @@ type IconSourceBase = string | ImageSourcePropType;
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps & { color: string }) => React.ReactNode);
+  | ((props: IconProps & { color: ColorValue }) => React.ReactNode);
 
 type IconProps = {
   /**
@@ -69,7 +70,7 @@ export type Props = IconProps & {
   /**
    * Color of the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * TestID used for testing purposes
    */
@@ -86,12 +87,12 @@ export type Props = IconProps & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Icon, MD3Colors } from 'react-native-paper';
+ * import { Icon, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Icon
  *     source="camera"
- *     color={MD3Colors.error50}
+ *     color={Palette.error50}
  *     size={20}
  *   />
  * );
@@ -109,12 +110,11 @@ const Icon = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction: layoutDirection } = useLocale();
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
-        ? I18nManager.getConstants().isRTL
-          ? 'rtl'
-          : 'ltr'
+        ? layoutDirection
         : source.direction
       : null;
 
@@ -122,8 +122,7 @@ const Icon = ({
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;
-  const iconColor =
-    color || (theme.isV3 ? theme.colors.onSurface : theme.colors.text);
+  const iconColor = color || theme.colors.onSurface;
 
   if (isImageSource(s)) {
     return (

@@ -9,7 +9,7 @@ import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
@@ -131,6 +131,7 @@ const Banner = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { colors } = theme as Theme;
   const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -192,10 +193,10 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[!theme.isV3 && styles.elevation, { opacity }, style]}
+      style={[{ opacity }, style]}
       theme={theme}
       container
-      {...(theme.isV3 && { elevation })}
+      elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -222,12 +223,11 @@ const Banner = ({
               </View>
             ) : null}
             <Text
+              variant="bodyMedium"
               style={[
                 styles.message,
                 {
-                  color: theme.isV3
-                    ? theme.colors.onSurface
-                    : theme.colors.text,
+                  color: colors.onSurface,
                 },
               ]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
@@ -244,7 +244,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                textColor={theme.colors?.primary}
+                textColor={colors.primary}
                 theme={theme}
                 {...others}
               >
@@ -291,9 +291,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
-  },
-  elevation: {
-    elevation: 1,
   },
   transparent: {
     opacity: 0,

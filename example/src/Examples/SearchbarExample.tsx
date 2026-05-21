@@ -2,20 +2,20 @@ import * as React from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
+  Avatar,
   List,
-  MD3Colors,
+  Palette,
   Searchbar,
   Snackbar,
-  Avatar,
+  useTheme,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
-  navigation: StackNavigationProp<{}>;
+  navigation: NativeStackNavigationProp<{}>;
 };
 
 const SearchExample = ({ navigation }: Props) => {
@@ -34,12 +34,12 @@ const SearchExample = ({ navigation }: Props) => {
     clickableLoading: '',
   });
 
-  const { isV3, colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   return (
     <>
       <ScreenWrapper>
-        {!isV3 && (
+        <List.Section title="Bar mode">
           <Searchbar
             placeholder="Search"
             onChangeText={(query) =>
@@ -47,136 +47,122 @@ const SearchExample = ({ navigation }: Props) => {
             }
             value={searchQueries.searchBarMode}
             style={styles.searchbar}
+            mode="bar"
           />
-        )}
-        {isV3 && (
-          <List.Section title="Bar mode">
-            <Searchbar
-              placeholder="Search"
-              onChangeText={(query) =>
-                setSearchQuery({ ...searchQueries, searchBarMode: query })
-              }
-              value={searchQueries.searchBarMode}
-              style={styles.searchbar}
-              mode="bar"
-            />
-            <Searchbar
-              placeholder="Trailering icon"
-              onChangeText={(query) =>
-                setSearchQuery({ ...searchQueries, traileringIcon: query })
-              }
-              value={searchQueries.traileringIcon}
-              traileringIcon={'microphone'}
-              traileringIconColor={
-                isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
-              }
-              traileringIconAccessibilityLabel={'microphone button'}
-              onTraileringIconPress={() => setIsVisible(true)}
-              style={styles.searchbar}
-              mode="bar"
-            />
-            <Searchbar
-              mode="bar"
-              placeholder="Trailering icon with right item"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  traileringIconWithRightItem: query,
-                })
-              }
-              value={searchQueries.traileringIconWithRightItem}
-              traileringIcon={'microphone'}
-              traileringIconColor={
-                isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
-              }
-              traileringIconAccessibilityLabel={'microphone button'}
-              onTraileringIconPress={() => setIsVisible(true)}
-              right={(props) => (
-                <Avatar.Image
-                  {...props}
-                  size={30}
-                  source={require('../../assets/images/avatar.png')}
-                />
-              )}
-              style={styles.searchbar}
-            />
-            <Searchbar
-              mode="bar"
-              placeholder="Right item"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  rightItem: query,
-                })
-              }
-              value={searchQueries.rightItem}
-              right={(props) => (
-                <Avatar.Image
-                  {...props}
-                  size={30}
-                  source={require('../../assets/images/avatar.png')}
-                />
-              )}
-              style={styles.searchbar}
-            />
-            <Searchbar
-              placeholder="Loading"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  loadingBarMode: query,
-                })
-              }
-              value={searchQueries.loadingBarMode}
-              style={styles.searchbar}
-              mode="bar"
-              loading
-              traileringIcon={'microphone'}
-            />
-          </List.Section>
-        )}
-        {isV3 && (
-          <List.Section title="View mode">
-            <Searchbar
-              placeholder="Search"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  searchViewMode: query,
-                })
-              }
-              value={searchQueries.searchViewMode}
-              style={styles.searchbar}
-              mode="view"
-            />
-            <Searchbar
-              placeholder="Search without bottom line"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  searchWithoutBottomLine: query,
-                })
-              }
-              value={searchQueries.searchWithoutBottomLine}
-              style={styles.searchbar}
-              mode="view"
-              showDivider={false}
-            />
-            <Searchbar
-              placeholder="Loading"
-              onChangeText={(query) =>
-                setSearchQuery({
-                  ...searchQueries,
-                  loadingViewMode: query,
-                })
-              }
-              value={searchQueries.loadingViewMode}
-              style={styles.searchbar}
-              mode="view"
-              loading
-            />
-          </List.Section>
-        )}
+          <Searchbar
+            placeholder="Trailering icon"
+            onChangeText={(query) =>
+              setSearchQuery({ ...searchQueries, traileringIcon: query })
+            }
+            value={searchQueries.traileringIcon}
+            traileringIcon={'microphone'}
+            traileringIconColor={
+              isVisible ? Palette.error40 : colors.onSurfaceVariant
+            }
+            traileringIconAccessibilityLabel={'microphone button'}
+            onTraileringIconPress={() => setIsVisible(true)}
+            style={styles.searchbar}
+            mode="bar"
+          />
+          <Searchbar
+            mode="bar"
+            placeholder="Trailering icon with right item"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                traileringIconWithRightItem: query,
+              })
+            }
+            value={searchQueries.traileringIconWithRightItem}
+            traileringIcon={'microphone'}
+            traileringIconColor={
+              isVisible ? Palette.error40 : colors.onSurfaceVariant
+            }
+            traileringIconAccessibilityLabel={'microphone button'}
+            onTraileringIconPress={() => setIsVisible(true)}
+            right={(props) => (
+              <Avatar.Image
+                {...props}
+                size={30}
+                source={require('../../assets/images/avatar.png')}
+              />
+            )}
+            style={styles.searchbar}
+          />
+          <Searchbar
+            mode="bar"
+            placeholder="Right item"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                rightItem: query,
+              })
+            }
+            value={searchQueries.rightItem}
+            right={(props) => (
+              <Avatar.Image
+                {...props}
+                size={30}
+                source={require('../../assets/images/avatar.png')}
+              />
+            )}
+            style={styles.searchbar}
+          />
+          <Searchbar
+            placeholder="Loading"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                loadingBarMode: query,
+              })
+            }
+            value={searchQueries.loadingBarMode}
+            style={styles.searchbar}
+            mode="bar"
+            loading
+            traileringIcon={'microphone'}
+          />
+        </List.Section>
+        <List.Section title="View mode">
+          <Searchbar
+            placeholder="Search"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                searchViewMode: query,
+              })
+            }
+            value={searchQueries.searchViewMode}
+            style={styles.searchbar}
+            mode="view"
+          />
+          <Searchbar
+            placeholder="Search without bottom line"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                searchWithoutBottomLine: query,
+              })
+            }
+            value={searchQueries.searchWithoutBottomLine}
+            style={styles.searchbar}
+            mode="view"
+            showDivider={false}
+          />
+          <Searchbar
+            placeholder="Loading"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                loadingViewMode: query,
+              })
+            }
+            value={searchQueries.loadingViewMode}
+            style={styles.searchbar}
+            mode="view"
+            loading
+          />
+        </List.Section>
         <List.Section title="Clickable icon">
           <Searchbar
             placeholder="Search"

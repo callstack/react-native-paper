@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   PixelRatio,
   Pressable,
   StyleProp,
@@ -11,8 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -63,17 +61,17 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
  * import { DataTable } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *       <DataTable>
- *         <DataTable.Header>
- *           <DataTable.Title
- *             sortDirection='descending'
- *           >
- *             Dessert
- *           </DataTable.Title>
- *           <DataTable.Title numeric>Calories</DataTable.Title>
- *           <DataTable.Title numeric>Fat (g)</DataTable.Title>
- *         </DataTable.Header>
- *       </DataTable>
+ *   <DataTable>
+ *     <DataTable.Header>
+ *       <DataTable.Title
+ *         sortDirection='descending'
+ *       >
+ *         Dessert
+ *       </DataTable.Title>
+ *       <DataTable.Title numeric>Calories</DataTable.Title>
+ *       <DataTable.Title numeric>Fat (g)</DataTable.Title>
+ *     </DataTable.Header>
+ *   </DataTable>
  * );
  *
  * export default MyComponent;
@@ -93,6 +91,7 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
@@ -105,9 +104,9 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+  const textColor = theme.colors.onSurface;
 
-  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
+  const alphaTextColor = theme.colors.onSurfaceVariant;
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
@@ -120,7 +119,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+        direction={direction}
       />
     </Animated.View>
   ) : null;
@@ -142,7 +141,7 @@ const DataTableTitle = ({
           // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
           numberOfLines > 1
             ? numeric
-              ? I18nManager.getConstants().isRTL
+              ? direction === 'rtl'
                 ? styles.leftText
                 : styles.rightText
               : styles.centerText

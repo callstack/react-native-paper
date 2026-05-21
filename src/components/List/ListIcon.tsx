@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  ColorValue,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -13,7 +19,7 @@ export type Props = {
   /**
    * Color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -29,13 +35,13 @@ const ICON_SIZE = 24;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <>
- *     <List.Icon color={MD3Colors.tertiary70} icon="folder" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="equal" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="calendar" />
+ *     <List.Icon color={Palette.tertiary70} icon="folder" />
+ *     <List.Icon color={Palette.tertiary70} icon="equal" />
+ *     <List.Icon color={Palette.tertiary70} icon="calendar" />
  *   </>
  * );
  *
@@ -51,10 +57,7 @@ const ListIcon = ({
   const theme = useInternalTheme(themeOverrides);
 
   return (
-    <View
-      style={[theme.isV3 ? styles.itemV3 : styles.item, style]}
-      pointerEvents="box-none"
-    >
+    <View style={[styles.item, style]} pointerEvents="box-none">
       <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
     </View>
   );
@@ -62,13 +65,6 @@ const ListIcon = ({
 
 const styles = StyleSheet.create({
   item: {
-    margin: 8,
-    height: 40,
-    width: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  itemV3: {
     alignItems: 'center',
     justifyContent: 'center',
   },

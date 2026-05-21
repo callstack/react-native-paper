@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { I18nManager } from 'react-native';
 
-import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
@@ -11,17 +10,17 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
   PaperProvider,
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme,
+  LightTheme,
+  DynamicLightTheme,
+  DynamicDarkTheme,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
-import App from './RootNavigator';
-import { deviceColorsSupported } from '../utils';
 import { PreferencesContext } from './PreferencesContext';
+import App from './RootNavigator';
+import { dynamicThemeSupported } from '../utils';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,
@@ -46,10 +45,9 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [shouldUseDeviceColors, setShouldUseDeviceColors] =
+  const [shouldUseDynamicTheme, setShouldUseDynamicTheme] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
@@ -57,20 +55,13 @@ export default function PaperExample() {
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
-  const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
-    if (themeVersion === 2) {
-      return isDarkMode ? MD2DarkTheme : MD2LightTheme;
+    if (dynamicThemeSupported && shouldUseDynamicTheme) {
+      return isDarkMode ? DynamicDarkTheme : DynamicLightTheme;
     }
 
-    if (!deviceColorsSupported || !shouldUseDeviceColors) {
-      return isDarkMode ? MD3DarkTheme : MD3LightTheme;
-    }
-
-    return isDarkMode
-      ? { ...MD3DarkTheme, colors: mdTheme.dark }
-      : { ...MD3LightTheme, colors: mdTheme.light };
-  }, [isDarkMode, mdTheme, shouldUseDeviceColors, themeVersion]);
+    return isDarkMode ? DarkTheme : LightTheme;
+  }, [isDarkMode, shouldUseDynamicTheme]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -137,32 +128,26 @@ export default function PaperExample() {
 
   const preferences = React.useMemo(
     () => ({
-      toggleShouldUseDeviceColors: () =>
-        setShouldUseDeviceColors((oldValue) => !oldValue),
+      toggleShouldUseDynamicTheme: () =>
+        setShouldUseDynamicTheme((oldValue) => !oldValue),
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
       toggleRtl: () => setRtl((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
-      toggleThemeVersion: () => {
-        setCustomFont(false);
-        setCollapsed(false);
-        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
-        setRippleEffectEnabled(true);
-      },
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,
       rtl,
       theme,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme: shouldUseDynamicTheme,
     }),
     [
       rtl,
       theme,
       collapsed,
       customFontLoaded,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme,
       rippleEffectEnabled,
     ]
   );
@@ -213,7 +198,7 @@ export default function PaperExample() {
               );
             }}
           </SafeAreaInsetsContext.Consumer>
-          <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+          <StatusBar style={theme.dark ? 'light' : 'dark'} />
         </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>

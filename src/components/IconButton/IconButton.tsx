@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
+  Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
-  ViewStyle,
   View,
-  Animated,
-  ColorValue,
+  ViewStyle,
 } from 'react-native';
 
 import { getIconButtonColor } from './utils';
@@ -37,17 +37,12 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
   /**
    * Background color of the icon container.
    */
-  containerColor?: string;
+  containerColor?: ColorValue;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
    */
   selected?: boolean;
@@ -98,12 +93,12 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { IconButton, MD3Colors } from 'react-native-paper';
+ * import { IconButton, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <IconButton
  *     icon="camera"
- *     iconColor={MD3Colors.error50}
+ *     iconColor={Palette.error50}
  *     size={20}
  *     onPress={() => console.log('Pressed')}
  *   />
@@ -120,7 +115,6 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
-      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -138,25 +132,28 @@ const IconButton = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const { isV3 } = theme;
 
     const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const { iconColor, rippleColor, backgroundColor, borderColor } =
-      getIconButtonColor({
-        theme,
-        disabled,
-        selected,
-        mode,
-        customIconColor,
-        customContainerColor,
-        customRippleColor,
-      });
+    const {
+      iconColor,
+      iconOpacity,
+      backgroundColor,
+      borderColor,
+      backgroundOpacity,
+    } = getIconButtonColor({
+      theme,
+      disabled,
+      selected,
+      mode,
+      customIconColor,
+      customContainerColor,
+    });
 
-    const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+    const buttonSize = size + 2 * PADDING;
 
     const {
-      borderWidth = isV3 && mode === 'outlined' && !selected ? 1 : 0,
+      borderWidth = mode === 'outlined' && !selected ? 1 : 0,
       borderRadius = buttonSize / 2,
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
@@ -172,23 +169,31 @@ const IconButton = forwardRef<View, Props>(
         testID={`${testID}-container`}
         style={[
           {
-            backgroundColor,
+            backgroundColor:
+              backgroundOpacity < 1 ? undefined : backgroundColor,
             width: buttonSize,
             height: buttonSize,
           },
           styles.container,
           borderStyles,
-          !isV3 && disabled && styles.disabled,
           style,
         ]}
         container
-        {...(isV3 && { elevation: 0 })}
+        elevation={0}
       >
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
         <TouchableRipple
           borderless
           centered
           onPress={onPress}
-          rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
           style={[styles.touchable, contentStyle]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -205,11 +210,13 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          {loading ? (
-            <ActivityIndicator size={size} color={iconColor} />
-          ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
-          )}
+          <View style={{ opacity: iconOpacity }}>
+            {loading ? (
+              <ActivityIndicator size={size} color={iconColor} />
+            ) : (
+              <IconComponent color={iconColor} source={icon} size={size} />
+            )}
+          </View>
         </TouchableRipple>
       </Surface>
     );
@@ -226,9 +233,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  disabled: {
-    opacity: 0.32,
   },
 });
 

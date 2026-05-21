@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -14,7 +13,8 @@ import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import { tokens } from '../../theme/tokens';
+import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
@@ -59,10 +59,6 @@ export type Props = {
    */
   color?: string;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
@@ -90,7 +86,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof MD3TypescaleKey;
+  labelVariant?: TypescaleKey;
   /**
    * @optional
    */
@@ -148,7 +144,6 @@ const CheckboxItem = ({
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
-  rippleColor,
   background,
   hitSlop,
   ...props
@@ -166,14 +161,14 @@ const CheckboxItem = ({
     checkbox = <Checkbox {...checkboxProps} />;
   }
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledTextColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
+  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
+    color: textColor,
+    opacity: disabled
+      ? tokens.md.ref.stateOpacity.disabled
+      : tokens.md.ref.stateOpacity.enabled,
     textAlign,
   } as TextStyle;
 
@@ -189,7 +184,6 @@ const CheckboxItem = ({
       onLongPress={onLongPress}
       testID={testID}
       disabled={disabled}
-      rippleColor={rippleColor}
       theme={theme}
       background={background}
       hitSlop={hitSlop}
@@ -204,12 +198,7 @@ const CheckboxItem = ({
           variant={labelVariant}
           testID={`${testID}-text`}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-          style={[
-            styles.label,
-            !theme.isV3 && styles.font,
-            computedStyle,
-            labelStyle,
-          ]}
+          style={[styles.label, computedStyle, labelStyle]}
         >
           {label}
         </Text>
@@ -237,8 +226,5 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
-  },
-  font: {
-    fontSize: 16,
   },
 });

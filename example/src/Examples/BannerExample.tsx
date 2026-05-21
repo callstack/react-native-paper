@@ -8,9 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Banner, FAB, Palette, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -20,7 +19,7 @@ const PHOTOS = Array.from({ length: 24 }).map(
 const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
-  const defaultTheme = useExampleTheme();
+  const defaultTheme = useTheme();
 
   const [height, setHeight] = React.useState(0);
 
@@ -29,25 +28,18 @@ const BannerExample = () => {
     setHeight(layoutHeight);
   };
 
-  const customTheme = !defaultTheme.isV3
-    ? {
-        ...defaultTheme,
-        colors: {
-          text: MD2Colors.white,
-          surface: MD2Colors.blue200,
-          primary: MD2Colors.purple900,
-        },
-      }
-    : {
-        ...defaultTheme,
-        colors: {
-          onSurface: MD3Colors.tertiary100,
-          elevation: {
-            level1: MD3Colors.tertiary50,
-          },
-          primary: MD3Colors.tertiary10,
-        },
-      };
+  const customTheme = {
+    ...defaultTheme,
+    colors: {
+      ...defaultTheme.colors,
+      onSurface: Palette.tertiary100,
+      elevation: {
+        ...defaultTheme.colors.elevation,
+        level1: Palette.tertiary50,
+      },
+      primary: Palette.tertiary10,
+    },
+  };
 
   return (
     <>

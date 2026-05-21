@@ -39,7 +39,8 @@ export const ToggleButtonGroupContext =
  *   return (
  *     <ToggleButton.Group
  *       onValueChange={value => setValue(value)}
- *       value={value}>
+ *       value={value}
+ *     >
  *       <ToggleButton icon="format-align-left" value="left" />
  *       <ToggleButton icon="format-align-right" value="right" />
  *     </ToggleButton.Group>

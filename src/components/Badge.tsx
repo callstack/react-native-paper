@@ -8,9 +8,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
 import type { ThemeProp } from '../types';
-import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 
@@ -85,20 +83,14 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const {
-    backgroundColor = theme.isV3
-      ? theme.colors.error
-      : theme.colors?.notification,
-    ...restStyle
-  } = (StyleSheet.flatten(style) || {}) as TextStyle;
+  const { backgroundColor = theme.colors.error, ...restStyle } =
+    (StyleSheet.flatten(style) || {}) as TextStyle;
 
-  const textColor = theme.isV3
-    ? theme.colors.onError
-    : getContrastingColor(backgroundColor, white, black);
+  const textColor = theme.colors.onError;
 
   const borderRadius = size / 2;
 
-  const paddingHorizontal = theme.isV3 ? 3 : 4;
+  const paddingHorizontal = 3;
 
   return (
     <Animated.Text
@@ -109,7 +101,6 @@ const Badge = ({
           backgroundColor,
           color: textColor,
           fontSize: size * 0.5,
-          ...(!theme.isV3 && theme.fonts.regular),
           lineHeight: size / fontScale,
           height: size,
           minWidth: size,

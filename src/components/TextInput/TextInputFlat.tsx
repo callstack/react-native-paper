@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  I18nManager,
   Platform,
   StyleSheet,
   TextInput as NativeTextInput,
@@ -41,6 +40,7 @@ import {
 } from './helpers';
 import InputLabel from './Label/InputLabel';
 import type { ChildTextInputProps, RenderProps } from './types';
+import { useLocale } from '../../core/locale';
 
 const TextInputFlat = ({
   disabled = false,
@@ -78,12 +78,15 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, isV3, roundness } = theme;
-  const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
+  const { colors } = theme;
+  const roundness = theme.shapes.corner.extraSmall;
+  const font = theme.fonts.bodyLarge;
   const hasActiveOutline = parentState.focused || error;
 
   const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT, MIN_WIDTH } =
-    getConstants(isV3);
+    getConstants();
 
   const {
     fontSize: fontSizeStyle,
@@ -108,7 +111,6 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
-    isV3,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -134,12 +136,12 @@ const TextInputFlat = ({
       paddingHorizontal,
       inputOffset: FLAT_INPUT_OFFSET,
       mode: InputMode.Flat,
-      isV3,
     });
 
   const {
     inputTextColor,
     activeColor,
+    disabledOpacity,
     underlineColorCustom,
     placeholderColor,
     errorColor,
@@ -157,8 +159,8 @@ const TextInputFlat = ({
 
   const containerStyle = {
     backgroundColor,
-    borderTopLeftRadius: theme.roundness,
-    borderTopRightRadius: theme.roundness,
+    borderTopLeftRadius: roundness,
+    borderTopRightRadius: roundness,
   };
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -170,11 +172,8 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
-      (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) *
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      paddingLeft;
+    (isRTL ? 1 : -1) * (labelHalfWidth - (labelScale * labelWidth) / 2) +
+    (1 - labelScale) * (isRTL ? -1 : 1) * paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -278,19 +277,16 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingLeft: isAndroid
-      ? I18nManager.isRTL
-        ? paddingRight
-        : paddingLeft
-      : paddingLeft,
+    paddingLeft: isAndroid ? (isRTL ? paddingRight : paddingLeft) : paddingLeft,
     paddingRight: isAndroid
-      ? I18nManager.isRTL
+      ? isRTL
         ? paddingLeft
         : paddingRight
       : paddingRight,
     hasActiveOutline,
     activeColor,
     placeholderColor,
+    disabledOpacity,
     errorColor,
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
@@ -304,7 +300,6 @@ const TextInputFlat = ({
           ? 1
           : 0
         : 1,
-    isV3,
   };
 
   const affixTopPosition = {
@@ -350,6 +345,7 @@ const TextInputFlat = ({
         colors={colors}
         activeColor={activeColor}
         theme={theme}
+        disabledOpacity={disabledOpacity}
       />
       <View
         onLayout={onInputLayout}
@@ -417,12 +413,9 @@ const TextInputFlat = ({
               lineHeight,
               fontWeight,
               color: inputTextColor,
+              opacity: disabledOpacity,
               textAlignVertical: multiline ? 'top' : 'center',
-              textAlign: textAlign
-                ? textAlign
-                : I18nManager.getConstants().isRTL
-                ? 'right'
-                : 'left',
+              textAlign: textAlign ? textAlign : isRTL ? 'right' : 'left',
               minWidth: Math.min(
                 parentState.labelTextLayout.width + 2 * FLAT_INPUT_OFFSET,
                 MIN_WIDTH

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import {
+  ColorValue,
+  GestureResponderEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -23,7 +28,13 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
+  /**
+   * Whether the checkbox is in an error state. When true, the checked /
+   * indeterminate icon uses `theme.colors.error`. `disabled` and explicit
+   * `color` overrides take precedence.
+   */
+  error?: boolean;
   /**
    * @optional
    */
@@ -47,16 +58,18 @@ const CheckboxIOS = ({
   onPress,
   theme: themeOverrides,
   testID,
+  error,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+  const { checkedColor } = getSelectionControlIOSColor({
     theme,
     disabled,
     customColor: rest.color,
+    error,
   });
 
   const icon = indeterminate ? 'minus' : 'check';
@@ -66,7 +79,6 @@ const CheckboxIOS = ({
     <TouchableRipple
       {...rest}
       borderless
-      rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="checkbox"

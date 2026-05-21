@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 
-import { act, render, screen, waitFor } from '@testing-library/react-native';
+import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { MD3Elevation } from '../../types';
+import { render } from '../../test-utils';
+import { Elevation } from '../../types';
 import Button from '../Button/Button';
-import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
+import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
 const styles = StyleSheet.create({
@@ -68,9 +69,9 @@ it('renders menu with content styles', () => {
   expect(tree).toMatchSnapshot();
 });
 
-([0, 1, 2, 3, 4, 5] as MD3Elevation[]).forEach((elevation) =>
+([0, 1, 2, 3, 4, 5] as Elevation[]).forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, () => {
-    const theme = getTheme(false, true);
+    const theme = getTheme();
 
     const { getByTestId } = render(
       <Portal.Host>
@@ -87,12 +88,22 @@ it('renders menu with content styles', () => {
     );
 
     expect(getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+      backgroundColor: theme.colors.elevation[`level${elevation}`],
     });
   })
 );
 
 it('uses the default anchorPosition of top', async () => {
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
   function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
@@ -115,15 +126,15 @@ it('uses the default anchorPosition of top', async () => {
 
   render(makeMenu(false));
 
-  jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
-
   // You must update instead of creating directly and using it because
   // componentDidUpdate isn't called by default in jest. Forcing the update
   // than triggers measureInWindow, which is how Menu decides where to show
   // itself.
-  screen.update(makeMenu(true));
+  await act(async () => {
+    screen.update(makeMenu(true));
+    // Menu waits a tick for Portal refs to be up-to-date.
+    await Promise.resolve();
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
@@ -133,9 +144,22 @@ it('uses the default anchorPosition of top', async () => {
       top: 100,
     });
   });
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
 });
 
 it('respects anchorPosition bottom', async () => {
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
   function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
@@ -159,11 +183,11 @@ it('respects anchorPosition bottom', async () => {
 
   render(makeMenu(false));
 
-  jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
-
-  screen.update(makeMenu(true));
+  await act(async () => {
+    screen.update(makeMenu(true));
+    // Menu waits a tick for Portal refs to be up-to-date.
+    await Promise.resolve();
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
@@ -173,6 +197,9 @@ it('respects anchorPosition bottom', async () => {
       top: 132,
     });
   });
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
 });
 
 it('animated value changes correctly', () => {

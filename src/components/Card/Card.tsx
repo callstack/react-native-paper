@@ -172,65 +172,24 @@ const Card = (
     onPressOut,
   });
 
-  // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
-  // Dark adaptive animated value, used in case of toggling the theme,
-  // it prevents animating the background with native drivers inside Surface
-  const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
-    new Animated.Value(cardElevation)
-  );
-  const { animation, dark, mode, roundness, isV3 } = theme;
+  const { animation } = theme;
 
-  const prevDarkRef = React.useRef<boolean>(dark);
-  React.useEffect(() => {
-    prevDarkRef.current = dark;
-  });
-
-  const prevDark = prevDarkRef.current;
-  const isAdaptiveMode = mode === 'adaptive';
   const animationDuration = 150 * animation.scale;
 
-  React.useEffect(() => {
-    /**
-     * Resets animations values if updating to dark adaptive mode,
-     * otherwise, any card that is in the middle of animation while
-     * toggling the theme will stay at that animated value until
-     * the next press-in
-     */
-    if (dark && isAdaptiveMode && !prevDark) {
-      elevation.setValue(cardElevation);
-      elevationDarkAdaptive.setValue(cardElevation);
-    }
-  }, [
-    prevDark,
-    dark,
-    isAdaptiveMode,
-    cardElevation,
-    elevation,
-    elevationDarkAdaptive,
-  ]);
-
   const runElevationAnimation = (pressType: HandlePressType) => {
-    if (isV3 && isMode('contained')) {
+    if (isMode('contained')) {
       return;
     }
 
     const isPressTypeIn = pressType === 'in';
-    if (dark && isAdaptiveMode) {
-      Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
-        duration: animationDuration,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(elevation, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
-        duration: animationDuration,
-        useNativeDriver: false,
-      }).start();
-    }
+    Animated.timing(elevation, {
+      toValue: isPressTypeIn ? 2 : cardElevation,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
   };
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
@@ -249,8 +208,6 @@ const Card = (
       ? (child.type as any).displayName
       : null
   );
-  const computedElevation =
-    dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
 
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
@@ -267,7 +224,7 @@ const Card = (
   );
 
   const borderRadiusCombinedStyles = {
-    borderRadius: (isV3 ? 3 : 1) * roundness,
+    borderRadius: theme.shapes.corner.medium,
     ...borderRadiusStyles,
   };
 
@@ -290,20 +247,12 @@ const Card = (
     <Surface
       ref={ref}
       style={[
-        isV3 && !isMode('elevated') && { backgroundColor },
-        !isV3 &&
-          (isMode('outlined')
-            ? styles.resetElevation
-            : {
-                elevation: computedElevation as unknown as number,
-              }),
+        !isMode('elevated') && { backgroundColor },
         borderRadiusCombinedStyles,
         style,
       ]}
       theme={theme}
-      {...(isV3 && {
-        elevation: isMode('elevated') ? computedElevation : 0,
-      })}
+      elevation={isMode('elevated') ? elevation : 0}
       testID={`${testID}-container`}
       container
       {...rest}
@@ -366,9 +315,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 2,
-  },
-  resetElevation: {
-    elevation: 0,
   },
 });
 

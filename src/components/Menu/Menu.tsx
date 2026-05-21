@@ -4,7 +4,6 @@ import {
   Dimensions,
   Easing,
   EmitterSubscription,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -22,9 +21,9 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
-import { ElevationLevels } from '../../types';
+import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -72,7 +71,7 @@ export type Props = {
    * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
-  elevation?: MD3Elevation;
+  elevation?: Elevation;
   /**
    * Mode of the menu's content.
    * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
@@ -104,11 +103,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
-const DEFAULT_ELEVATION: MD3Elevation = 2;
-export const ELEVATION_LEVELS_MAP = Object.values(
-  ElevationLevels
-) as ElevationLevels[];
-
+const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (el: View | null | undefined) => {
@@ -196,6 +191,8 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const { colors: md3Colors } = theme as Theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
@@ -345,25 +342,25 @@ const Menu = ({
     });
 
     attachListeners();
-    const { animation } = theme;
-    Animated.parallel([
-      Animated.timing(scaleAnimationRef.current, {
-        toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-        duration: ANIMATION_DURATION * animation.scale,
-        easing: EASING,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacityAnimationRef.current, {
-        toValue: 1,
-        duration: ANIMATION_DURATION * animation.scale,
-        easing: EASING,
-        useNativeDriver: true,
-      }),
-    ]).start(({ finished }) => {
-      if (finished) {
+    requestAnimationFrame(() => {
+      const { animation } = theme;
+      Animated.parallel([
+        Animated.timing(scaleAnimationRef.current, {
+          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
+          duration: ANIMATION_DURATION * animation.scale,
+          easing: EASING,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnimationRef.current, {
+          toValue: 1,
+          duration: ANIMATION_DURATION * animation.scale,
+          easing: EASING,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
         focusFirstDOMNode(menuRef.current);
         prevRendered.current = true;
-      }
+      });
     });
   }, [anchor, attachListeners, measureAnchorLayout, theme]);
 
@@ -377,13 +374,11 @@ const Menu = ({
       duration: ANIMATION_DURATION * animation.scale,
       easing: EASING,
       useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        setMenuLayout({ width: 0, height: 0 });
-        setRendered(false);
-        prevRendered.current = false;
-        focusFirstDOMNode(anchorRef.current);
-      }
+    }).start(() => {
+      setMenuLayout({ width: 0, height: 0 });
+      setRendered(false);
+      prevRendered.current = false;
+      focusFirstDOMNode(anchorRef.current);
     });
   }, [removeListeners, theme]);
 
@@ -397,7 +392,7 @@ const Menu = ({
           return;
         }
 
-        if (!display && prevRendered.current) {
+        if (!display) {
           hide();
         }
 
@@ -432,15 +427,23 @@ const Menu = ({
     if (prevVisible.current !== visible) {
       prevVisible.current = visible;
 
-      if (visible !== rendered) {
-        setRendered(visible);
+      if (visible) {
+        if (!rendered) {
+          // Mount the Portal before attempting to show.
+          setRendered(true);
+        }
+      } else {
+        // Keep the Portal mounted so the hide animation can finish.
+        updateVisibility(false);
       }
     }
-  }, [visible, rendered]);
+  }, [visible, rendered, updateVisibility]);
 
   React.useEffect(() => {
-    updateVisibility(rendered);
-  }, [rendered, updateVisibility]);
+    if (rendered && visible) {
+      updateVisibility(true);
+    }
+  }, [rendered, visible, updateVisibility]);
 
   // I don't know why but on Android measure function is wrong by 24
   const additionalVerticalValue = Platform.select({
@@ -611,8 +614,7 @@ const Menu = ({
         }),
       },
     ],
-    borderRadius: theme.roundness,
-    ...(!theme.isV3 && { elevation: 8 }),
+    borderRadius: theme.shapes.corner.extraSmall,
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
 
@@ -620,7 +622,7 @@ const Menu = ({
     top: isCoordinate(anchor)
       ? topTransformation
       : topTransformation + additionalVerticalValue,
-    ...(I18nManager.getConstants().isRTL
+    ...(direction === 'rtl'
       ? { right: leftTransformation }
       : { left: leftTransformation }),
   };
@@ -641,6 +643,7 @@ const Menu = ({
             accessibilityLabel={overlayAccessibilityLabel}
             accessibilityRole="button"
             onPress={onDismiss}
+            pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
           />
           <View
@@ -666,13 +669,12 @@ const Menu = ({
                 style={[
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
-                  theme.isV3 && {
-                    backgroundColor:
-                      theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+                  {
+                    backgroundColor: md3Colors.elevation[`level${elevation}`],
                   },
                   contentStyle,
                 ]}
-                {...(theme.isV3 && { elevation })}
+                elevation={elevation}
                 testID={`${testID}-surface`}
                 theme={theme}
                 container
@@ -709,7 +711,7 @@ const styles = StyleSheet.create({
         cursor: 'auto',
       },
     }),
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     width: '100%',
   },
 });

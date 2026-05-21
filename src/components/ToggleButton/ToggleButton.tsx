@@ -6,15 +6,11 @@ import {
   ViewStyle,
   View,
   Animated,
-  ColorValue,
 } from 'react-native';
-
-import color from 'color';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
@@ -33,10 +29,6 @@ export type Props = {
    * Custom text color for button.
    */
   iconColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -111,13 +103,12 @@ const ToggleButton = forwardRef<View, Props>(
       value,
       status,
       onPress,
-      rippleColor,
       ...rest
     }: Props,
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const borderRadius = theme.roundness;
+    const borderRadius = theme.shapes.corner.extraSmall;
 
     return (
       <ToggleButtonGroupContext.Consumer>
@@ -128,12 +119,7 @@ const ToggleButton = forwardRef<View, Props>(
             (context && context.value === value) || status === 'checked';
 
           const backgroundColor = getToggleButtonColor({ theme, checked });
-          const borderColor = theme.isV3
-            ? theme.colors.outline
-            : color(theme.dark ? white : black)
-                .alpha(0.29)
-                .rgb()
-                .string();
+          const borderColor = theme.colors.outline;
 
           return (
             <IconButton
@@ -163,7 +149,6 @@ const ToggleButton = forwardRef<View, Props>(
               ]}
               ref={ref}
               theme={theme}
-              rippleColor={rippleColor}
               {...rest}
             />
           );

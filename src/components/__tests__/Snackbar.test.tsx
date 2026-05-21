@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
-import { red200, white } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
+import { red200, white } from '../../theme/colors';
 import Snackbar from '../Snackbar';
 
 const styles = StyleSheet.create({
@@ -80,23 +81,6 @@ it('renders snackbar with View & Text as a child', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
-});
-
-it('renders with custom ripple color', () => {
-  const { getByTestId } = render(
-    <Snackbar
-      visible
-      onDismiss={() => {}}
-      onIconPress={() => {}}
-      rippleColor="purple"
-      testID="snackbar"
-    >
-      Snackbar content
-    </Snackbar>
-  );
-
-  const iconContainer = getByTestId('snackbar-icon-container').props.children;
-  expect(iconContainer.props.rippleColor).toBe('purple');
 });
 
 it('animated value changes correctly', () => {
