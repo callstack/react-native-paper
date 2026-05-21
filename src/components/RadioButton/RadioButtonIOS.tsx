@@ -3,9 +3,9 @@ import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
+import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getSelectionControlIOSColor } from '../Checkbox/utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 

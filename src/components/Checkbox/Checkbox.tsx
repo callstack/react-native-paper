@@ -1,12 +1,19 @@
 import * as React from 'react';
-import { GestureResponderEvent, Platform } from 'react-native';
+import {
+  Animated,
+  ColorValue,
+  GestureResponderEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
+import { getSelectionControlColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { $RemoveChildren, ThemeProp } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
-export type Props = {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
@@ -22,11 +29,11 @@ export type Props = {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether the checkbox is in an error state. When true, the outline
    * (unchecked) and container (checked / indeterminate) use
@@ -43,6 +50,8 @@ export type Props = {
    */
   testID?: string;
 };
+
+const ANIMATION_DURATION = 100;
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
@@ -68,14 +77,130 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Checkbox = ({ theme: themeOverrides, ...props }: Props) => {
+const Checkbox = ({
+  status,
+  theme: themeOverrides,
+  disabled,
+  onPress,
+  testID,
+  error,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  return Platform.OS === 'ios' ? (
-    <CheckboxIOS {...props} theme={theme} />
-  ) : (
-    <CheckboxAndroid {...props} theme={theme} />
+  const { current: scaleAnim } = React.useRef<Animated.Value>(
+    new Animated.Value(1)
+  );
+  const isFirstRendering = React.useRef<boolean>(true);
+
+  const {
+    animation: { scale },
+  } = theme;
+
+  React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
+    const checked = status === 'checked';
+
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 0.85,
+        duration: checked ? ANIMATION_DURATION * scale : 0,
+        useNativeDriver: false,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: checked
+          ? ANIMATION_DURATION * scale
+          : ANIMATION_DURATION * scale * 1.75,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }, [status, scaleAnim, scale]);
+
+  const checked = status === 'checked';
+  const indeterminate = status === 'indeterminate';
+
+  const { selectionControlColor, selectionControlOpacity } =
+    getSelectionControlColor({
+      theme,
+      disabled,
+      checked,
+      customColor: rest.color,
+      customUncheckedColor: rest.uncheckedColor,
+      error,
+    });
+
+  const borderWidth = scaleAnim.interpolate({
+    inputRange: [0.8, 1],
+    outputRange: [7, 0],
+  });
+
+  const icon = indeterminate
+    ? 'minus-box'
+    : checked
+    ? 'checkbox-marked'
+    : 'checkbox-blank-outline';
+
+  return (
+    <TouchableRipple
+      {...rest}
+      borderless
+      onPress={onPress}
+      disabled={disabled}
+      accessibilityRole="checkbox"
+      accessibilityState={{ disabled, checked }}
+      accessibilityLiveRegion="polite"
+      style={styles.container}
+      testID={testID}
+      theme={theme}
+    >
+      <Animated.View
+        style={{
+          transform: [{ scale: scaleAnim }],
+          opacity: selectionControlOpacity,
+        }}
+      >
+        <MaterialCommunityIcon
+          allowFontScaling={false}
+          name={icon}
+          size={24}
+          color={selectionControlColor}
+          direction="ltr"
+        />
+        <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
+          <Animated.View
+            style={[
+              styles.fill,
+              { borderColor: selectionControlColor },
+              { borderWidth },
+            ]}
+          />
+        </View>
+      </Animated.View>
+    </TouchableRipple>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 18,
+    width: 36,
+    height: 36,
+    padding: 6,
+  },
+  fillContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fill: {
+    height: 14,
+    width: 14,
+  },
+});
 
 export default Checkbox;
 

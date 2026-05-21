@@ -5,7 +5,7 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getAndroidSelectionControlColor } from '../Checkbox/utils';
+import { getSelectionControlColor } from '../Checkbox/utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -110,7 +110,7 @@ const RadioButtonAndroid = ({
             value,
           }) === 'checked';
 
-        const { selectionControlColor } = getAndroidSelectionControlColor({
+        const { selectionControlColor } = getSelectionControlColor({
           theme,
           disabled,
           checked,
