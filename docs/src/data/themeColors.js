@@ -47,20 +47,20 @@ const themeColors = {
   },
   Button: {
     active: {
+      filled: {
+        backgroundColor: 'theme.colors.primary',
+        textColor: 'theme.colors.onPrimary',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+      },
       elevated: {
         backgroundColor: 'theme.colors.elevation.level1',
         textColor: 'theme.colors.primary',
       },
-      contained: {
-        backgroundColor: 'theme.colors.primary',
-        textColor: 'theme.colors.onPrimary',
-      },
-      'contained-tonal': {
-        backgroundColor: 'theme.colors.secondaryContainer',
-        textColor: 'theme.colors.onSecondaryContainer',
-      },
       outlined: {
-        textColor: 'theme.colors.primary',
+        textColor: 'theme.colors.onSurfaceVariant',
         borderColor: 'theme.colors.outline',
       },
       text: {
@@ -68,15 +68,15 @@ const themeColors = {
       },
     },
     disabled: {
+      filled: {
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
+      },
       elevated: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        textColor: 'theme.colors.onSurfaceDisabled',
-      },
-      contained: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        textColor: 'theme.colors.onSurfaceDisabled',
-      },
-      'contained-tonal': {
         backgroundColor: 'theme.colors.surfaceDisabled',
         textColor: 'theme.colors.onSurfaceDisabled',
       },
