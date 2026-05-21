@@ -5,7 +5,7 @@ import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;
 
-const getAndroidCheckedColor = ({
+const getCheckedColor = ({
   theme,
   customColor,
   error,
@@ -25,7 +25,7 @@ const getAndroidCheckedColor = ({
   return theme.colors.primary;
 };
 
-const getAndroidUncheckedColor = ({
+const getUncheckedColor = ({
   theme,
   customUncheckedColor,
   error,
@@ -45,7 +45,7 @@ const getAndroidUncheckedColor = ({
   return theme.colors.onSurfaceVariant;
 };
 
-const getAndroidControlColor = ({
+const getControlColor = ({
   theme,
   checked,
   disabled,
@@ -68,7 +68,7 @@ const getAndroidControlColor = ({
   return uncheckedColor;
 };
 
-export const getAndroidSelectionControlColor = ({
+export const getSelectionControlColor = ({
   theme,
   disabled,
   checked,
@@ -83,8 +83,8 @@ export const getAndroidSelectionControlColor = ({
   customUncheckedColor?: ColorValue;
   error?: boolean;
 }) => {
-  const checkedColor = getAndroidCheckedColor({ theme, customColor, error });
-  const uncheckedColor = getAndroidUncheckedColor({
+  const checkedColor = getCheckedColor({ theme, customColor, error });
+  const uncheckedColor = getUncheckedColor({
     theme,
     customUncheckedColor,
     error,
@@ -94,7 +94,7 @@ export const getAndroidSelectionControlColor = ({
     : stateOpacity.enabled;
 
   return {
-    selectionControlColor: getAndroidControlColor({
+    selectionControlColor: getControlColor({
       theme,
       disabled,
       checked,
@@ -102,58 +102,5 @@ export const getAndroidSelectionControlColor = ({
       uncheckedColor,
     }),
     selectionControlOpacity,
-  };
-};
-
-const getIOSCheckedColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  customColor?: ColorValue;
-  disabled?: boolean;
-  error?: boolean;
-}) => {
-  if (disabled) {
-    return theme.colors.primary;
-  }
-
-  if (customColor) {
-    return customColor;
-  }
-
-  if (error) {
-    return theme.colors.error;
-  }
-
-  return theme.colors.primary;
-};
-
-export const getSelectionControlIOSColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  disabled?: boolean;
-  customColor?: ColorValue;
-  error?: boolean;
-}) => {
-  const checkedColor = getIOSCheckedColor({
-    theme,
-    disabled,
-    customColor,
-    error,
-  });
-  const checkedColorOpacity = disabled
-    ? stateOpacity.disabled
-    : stateOpacity.enabled;
-
-  return {
-    checkedColor,
-    checkedColorOpacity,
   };
 };

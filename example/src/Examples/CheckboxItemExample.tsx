@@ -7,8 +7,6 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
-  const [checkedAndroid, setCheckedAndroid] = React.useState<boolean>(true);
-  const [checkedIOS, setCheckedIOS] = React.useState<boolean>(true);
   const [checkedLeadingControl, setCheckedLeadingControl] =
     React.useState<boolean>(true);
   const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
@@ -17,27 +15,14 @@ const CheckboxExample = () => {
   return (
     <ScreenWrapper style={styles.container}>
       <Checkbox.Item
-        label="Default (will look like whatever system this is running on)"
+        label="Default"
         status={checkedDefault ? 'checked' : 'unchecked'}
         onPress={() => setCheckedDefault(!checkedDefault)}
-      />
-      <Checkbox.Item
-        label="Material Design"
-        mode="android"
-        status={checkedAndroid ? 'checked' : 'unchecked'}
-        onPress={() => setCheckedAndroid(!checkedAndroid)}
-      />
-      <Checkbox.Item
-        label="iOS"
-        mode="ios"
-        status={checkedIOS ? 'checked' : 'unchecked'}
-        onPress={() => setCheckedIOS(!checkedIOS)}
       />
       <Checkbox.Item
         label="Default with leading control"
         status={checkedLeadingControl ? 'checked' : 'unchecked'}
         onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
-        mode="ios"
         position="leading"
       />
       <Checkbox.Item

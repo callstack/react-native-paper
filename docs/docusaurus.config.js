@@ -92,8 +92,6 @@ const config = {
           },
           Checkbox: {
             Checkbox: 'Checkbox/Checkbox',
-            CheckboxAndroid: 'Checkbox/CheckboxAndroid',
-            CheckboxIOS: 'Checkbox/CheckboxIOS',
             CheckboxItem: 'Checkbox/CheckboxItem',
           },
           Chip: {

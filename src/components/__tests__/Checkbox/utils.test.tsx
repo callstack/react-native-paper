@@ -1,15 +1,12 @@
 import { getTheme } from '../../../core/theming';
 import { tokens } from '../../../theme/tokens';
-import {
-  getAndroidSelectionControlColor,
-  getSelectionControlIOSColor,
-} from '../../Checkbox/utils';
+import { getSelectionControlColor } from '../../Checkbox/utils';
 const { stateOpacity } = tokens.md.ref;
 
-describe('getAndroidSelectionControlColor - checkbox color', () => {
+describe('getSelectionControlColor - checkbox color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         disabled: true,
         checked: false,
@@ -22,7 +19,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return custom color, checked', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: true,
         customColor: 'purple',
@@ -34,7 +31,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return theme color, for theme version 3, checked', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: true,
       })
@@ -45,7 +42,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return custom color, unchecked', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: false,
         customUncheckedColor: 'purple',
@@ -57,7 +54,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return theme color, for theme version 3, unchecked', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: false,
       })
@@ -68,7 +65,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return theme color, unchecked, dark mode', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(true),
         checked: false,
       })
@@ -79,7 +76,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return theme color, unchecked, light mode', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(false),
         checked: false,
       })
@@ -90,7 +87,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return error color, checked, when error is true', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: true,
         error: true,
@@ -102,7 +99,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return error color, unchecked, when error is true', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: false,
         error: true,
@@ -114,7 +111,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return error color, checked, dark mode, when error is true', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(true),
         checked: true,
         error: true,
@@ -126,7 +123,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return disabled color when both disabled and error are true (disabled wins)', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         disabled: true,
         checked: true,
@@ -140,7 +137,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return custom color when both customColor and error are true, checked (customColor wins)', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: true,
         customColor: 'purple',
@@ -153,7 +150,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
 
   it('should return custom unchecked color when both customUncheckedColor and error are true, unchecked (customUncheckedColor wins)', () => {
     expect(
-      getAndroidSelectionControlColor({
+      getSelectionControlColor({
         theme: getTheme(),
         checked: false,
         customUncheckedColor: 'purple',
@@ -161,88 +158,6 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
       })
     ).toMatchObject({
       selectionControlColor: 'purple',
-    });
-  });
-});
-
-describe('getSelectionControlIOSColor - checked color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        disabled: true,
-      })
-    ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
-      checkedColorOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return custom color, checked', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        customColor: 'purple',
-      })
-    ).toMatchObject({
-      checkedColor: 'purple',
-    });
-  });
-
-  it('should return theme color, for theme version 3, checked', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return error color when error is true', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        error: true,
-      })
-    ).toMatchObject({
-      checkedColor: getTheme().colors.error,
-    });
-  });
-
-  it('should return error color, dark mode, when error is true', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(true),
-        error: true,
-      })
-    ).toMatchObject({
-      checkedColor: getTheme(true).colors.error,
-    });
-  });
-
-  it('should return disabled color when both disabled and error are true (disabled wins)', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        disabled: true,
-        error: true,
-      })
-    ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
-      checkedColorOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return custom color when both customColor and error are true (customColor wins)', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        customColor: 'purple',
-        error: true,
-      })
-    ).toMatchObject({
-      checkedColor: 'purple',
     });
   });
 });

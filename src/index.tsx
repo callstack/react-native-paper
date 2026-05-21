@@ -81,8 +81,6 @@ export type { Props as CardContentProps } from './components/Card/CardContent';
 export type { Props as CardCoverProps } from './components/Card/CardCover';
 export type { Props as CardTitleProps } from './components/Card/CardTitle';
 export type { Props as CheckboxProps } from './components/Checkbox/Checkbox';
-export type { Props as CheckboxAndroidProps } from './components/Checkbox/CheckboxAndroid';
-export type { Props as CheckboxIOSProps } from './components/Checkbox/CheckboxIOS';
 export type { Props as CheckboxItemProps } from './components/Checkbox/CheckboxItem';
 export type { Props as ChipProps } from './components/Chip/Chip';
 export type { Props as DataTableProps } from './components/DataTable/DataTable';
