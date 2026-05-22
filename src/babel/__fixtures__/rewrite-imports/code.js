@@ -3,7 +3,7 @@ import {
   PaperProvider,
   BottomNavigation,
   Button,
-  FAB,
+  FloatingActionButton,
   Appbar,
   Palette,
   NonExistent,

@@ -7,7 +7,7 @@ import {
   Avatar,
   Banner,
   Chip,
-  FAB,
+  FloatingActionButton,
   IconButton,
   List,
   ToggleButton,
@@ -149,7 +149,7 @@ const TooltipExample = () => {
       </ScreenWrapper>
       <View style={styles.fabContainer}>
         <Tooltip title="Press Me">
-          <FAB size="medium" icon="plus" onPress={() => {}} />
+          <FloatingActionButton icon="plus" onPress={() => {}} />
         </Tooltip>
       </View>
     </>

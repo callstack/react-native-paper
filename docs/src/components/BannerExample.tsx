@@ -8,7 +8,7 @@ import { useColorMode } from '@docusaurus/theme-common';
 import {
   Avatar,
   Button,
-  FAB,
+  FloatingActionButton,
   DarkTheme,
   LightTheme,
   ProgressBar,
@@ -83,9 +83,9 @@ const BannerExample = () => {
           <Button icon="camera" mode="contained" onPress={() => {}}>
             Press me
           </Button>
-          <FAB icon="plus" size="small" onPress={() => {}} />
-          <FAB icon="plus" size="medium" onPress={() => {}} />
-          <FAB icon="plus" size="large" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="default" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="medium" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="large" onPress={() => {}} />
           <Avatar.Text label="MD" />
           <Avatar.Icon icon="folder" />
         </Stack>
