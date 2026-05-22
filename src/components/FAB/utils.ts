@@ -1,347 +1,86 @@
-import { MutableRefObject } from 'react';
-import { Animated, ColorValue, Platform, ViewStyle } from 'react-native';
+import { RefObject } from 'react';
+import { ColorValue, Platform } from 'react-native';
 
+import {
+  FloatingActionButtonSize,
+  FloatingActionButtonTokens,
+  FloatingActionButtonVariant,
+} from './tokens';
+import type { TypescaleKey } from '../../theme/types';
+import { resolveCornerRadius, ShapeToken } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 
-type GetCombinedStylesProps = {
-  isAnimatedFromRight: boolean;
-  isIconStatic: boolean;
-  isRTL: boolean;
-  distance: number;
-  animFAB: Animated.Value;
+export type ResolvedColors = {
+  container: ColorValue;
+  content: ColorValue;
 };
 
-type CombinedStyles = {
-  innerWrapper: Animated.WithAnimatedValue<ViewStyle>;
-  iconWrapper: Animated.WithAnimatedValue<ViewStyle>;
-  absoluteFill: Animated.WithAnimatedValue<ViewStyle>;
-};
-
-type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
-
-type BaseProps = {
-  isVariant: (variant: Variant) => boolean;
-  theme: InternalTheme;
-};
-
-export const getCombinedStyles = ({
-  isAnimatedFromRight,
-  isIconStatic,
-  isRTL,
-  distance,
-  animFAB,
-}: GetCombinedStylesProps): CombinedStyles => {
-  const defaultPositionStyles = { left: -distance, right: undefined };
-
-  const combinedStyles: CombinedStyles = {
-    innerWrapper: {
-      ...defaultPositionStyles,
-    },
-    iconWrapper: {
-      ...defaultPositionStyles,
-    },
-    absoluteFill: {},
-  };
-
-  const animatedFromRight = isAnimatedFromRight && !isRTL;
-  const animatedFromRightRTL = isAnimatedFromRight && isRTL;
-  const animatedFromLeft = !isAnimatedFromRight && !isRTL;
-  const animatedFromLeftRTL = !isAnimatedFromRight && isRTL;
-
-  if (animatedFromRight) {
-    combinedStyles.innerWrapper.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [distance, 0],
-          outputRange: [distance, 0],
-        }),
-      },
-    ];
-    combinedStyles.iconWrapper.transform = [
-      {
-        translateX: isIconStatic ? 0 : animFAB,
-      },
-    ];
-    combinedStyles.absoluteFill.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [distance, 0],
-          outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
-        }),
-      },
-    ];
-  } else if (animatedFromRightRTL) {
-    combinedStyles.iconWrapper.transform = [
-      {
-        translateX: isIconStatic
-          ? 0
-          : animFAB.interpolate({
-              inputRange: [distance, 0],
-              outputRange: [-distance, 0],
-            }),
-      },
-    ];
-    combinedStyles.innerWrapper.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [distance, 0],
-          outputRange: [-distance, 0],
-        }),
-      },
-    ];
-    combinedStyles.absoluteFill.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [distance, 0],
-          outputRange: [0, distance],
-        }),
-      },
-    ];
-  } else if (animatedFromLeft) {
-    combinedStyles.iconWrapper.transform = [
-      {
-        translateX: isIconStatic
-          ? distance
-          : animFAB.interpolate({
-              inputRange: [0, distance],
-              outputRange: [distance, distance * 2],
-            }),
-      },
-    ];
-    combinedStyles.innerWrapper.transform = [
-      {
-        translateX: animFAB,
-      },
-    ];
-    combinedStyles.absoluteFill.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [0, distance],
-          outputRange: [0, Math.abs(distance) / 2],
-        }),
-      },
-    ];
-  } else if (animatedFromLeftRTL) {
-    combinedStyles.iconWrapper.transform = [
-      {
-        translateX: isIconStatic
-          ? animFAB.interpolate({
-              inputRange: [0, distance],
-              outputRange: [-distance, -distance * 2],
-            })
-          : -distance,
-      },
-    ];
-    combinedStyles.innerWrapper.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [0, distance],
-          outputRange: [0, -distance],
-        }),
-      },
-    ];
-    combinedStyles.absoluteFill.transform = [
-      {
-        translateX: animFAB.interpolate({
-          inputRange: [0, distance],
-          outputRange: [0, -distance],
-        }),
-      },
-    ];
-  }
-
-  return combinedStyles;
-};
-
-const getBackgroundColor = ({
+/**
+ * Resolve container + content colors. Explicit overrides win; when only
+ * `containerColor` is set, the content color is derived via
+ * `contentColorFor`.
+ */
+export const resolveColors = ({
   theme,
-  isVariant,
-  customBackgroundColor,
-}: BaseProps & { customBackgroundColor?: ColorValue }) => {
-  if (customBackgroundColor) {
-    return customBackgroundColor;
-  }
-
-  if (isVariant('primary')) {
-    return theme.colors.primaryContainer;
-  }
-
-  if (isVariant('secondary')) {
-    return theme.colors.secondaryContainer;
-  }
-
-  if (isVariant('tertiary')) {
-    return theme.colors.tertiaryContainer;
-  }
-
-  if (isVariant('surface')) {
-    return theme.colors.surfaceContainerHigh;
-  }
-
-  return theme.colors.primaryContainer;
-};
-
-const getForegroundColor = ({
-  theme,
-  isVariant,
-  customColor,
-}: BaseProps & { customColor?: ColorValue }) => {
-  if (typeof customColor !== 'undefined') {
-    return customColor;
-  }
-
-  if (isVariant('primary')) {
-    return theme.colors.onPrimaryContainer;
-  }
-
-  if (isVariant('secondary')) {
-    return theme.colors.onSecondaryContainer;
-  }
-
-  if (isVariant('tertiary')) {
-    return theme.colors.onTertiaryContainer;
-  }
-
-  if (isVariant('surface')) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.onPrimaryContainer;
-};
-
-export const getFABColors = ({
-  theme,
-  variant,
-  customColor,
-  customBackgroundColor,
+  variant = 'tonalPrimary',
 }: {
   theme: InternalTheme;
-  variant: string;
-  customColor?: ColorValue;
-  customBackgroundColor?: ColorValue;
-}) => {
-  const isVariant = (variantToCompare: Variant) => {
-    return variant === variantToCompare;
-  };
+  variant?: FloatingActionButtonVariant;
+  containerColor?: ColorValue;
+  contentColor?: ColorValue;
+}): ResolvedColors => {
+  const roles = FloatingActionButtonTokens.variants[variant];
+  const container = theme.colors[roles.container];
+  const content = theme.colors[roles.content];
+  return { container, content };
+};
 
-  const baseFABColorProps = { theme, isVariant };
+export type Dimensions = {
+  height: number;
+  width: number;
+  borderRadius: number;
+  iconSize: number;
+  leading: number;
+  trailing: number;
+  iconLabelGap: number;
+  labelTypescale: TypescaleKey;
+};
 
-  const backgroundColor = getBackgroundColor({
-    ...baseFABColorProps,
-    customBackgroundColor,
-  });
-
-  const foregroundColor = getForegroundColor({
-    ...baseFABColorProps,
-    customColor,
-  });
-
+/**
+ * Resolve geometry for a FAB at a given size, with optional shape, icon
+ * size, and leading/trailing overrides for FAB Menu items and the close
+ * button.
+ */
+export const getDimensions = ({
+  theme,
+  size = 'default',
+  shape,
+  iconSize,
+  leading,
+  trailing,
+}: {
+  theme: InternalTheme;
+  size?: FloatingActionButtonSize;
+  shape?: ShapeToken;
+  iconSize?: number;
+  leading?: number;
+  trailing?: number;
+}): Dimensions => {
+  const spec = FloatingActionButtonTokens.sizes[size];
+  const shapeToken: ShapeToken = shape ?? spec.shape;
   return {
-    backgroundColor,
-    foregroundColor,
+    height: spec.container,
+    width: spec.container,
+    borderRadius: resolveCornerRadius(theme, shapeToken),
+    iconSize: iconSize ?? spec.icon,
+    leading: leading ?? spec.leading,
+    trailing: trailing ?? spec.trailing,
+    iconLabelGap: spec.iconLabelGap,
+    labelTypescale: spec.labelTypescale,
   };
 };
 
-const getLabelColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.onSurface;
-};
-
-const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.surfaceContainerHigh;
-};
-
-export const getFABGroupColors = ({
-  theme,
-  customBackdropColor,
-}: {
-  theme: InternalTheme;
-  customBackdropColor?: ColorValue;
-}) => {
-  return {
-    labelColor: getLabelColor({ theme }),
-    backdropColor: customBackdropColor ?? theme.colors.background,
-    backdropOpacity: customBackdropColor ? 1 : 0.95,
-    stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
-  };
-};
-
-const v3SmallSize = {
-  height: 40,
-  width: 40,
-};
-const v3MediumSize = {
-  height: 56,
-  width: 56,
-};
-const v3LargeSize = {
-  height: 96,
-  width: 96,
-};
-
-const getCustomFabSize = (customSize: number) => ({
-  height: customSize,
-  width: customSize,
-  borderRadius: customSize / 4,
-});
-
-export const getFabStyle = ({
-  size,
-  theme,
-  customSize,
-}: {
-  customSize?: number;
-  size: 'small' | 'medium' | 'large';
-  theme: InternalTheme;
-}) => {
-  if (customSize) return getCustomFabSize(customSize);
-
-  switch (size) {
-    case 'small':
-      return { ...v3SmallSize, borderRadius: theme.shapes.corner.medium };
-    case 'medium':
-      return { ...v3MediumSize, borderRadius: theme.shapes.corner.large };
-    case 'large':
-      return { ...v3LargeSize, borderRadius: theme.shapes.corner.extraLarge };
-  }
-};
-
-const v3Extended = {
-  height: 56,
-  borderRadius: 16,
-  paddingHorizontal: 16,
-};
-
-const getExtendedFabDimensions = (customSize: number) => ({
-  height: customSize,
-  paddingHorizontal: 16,
-});
-
-export const getExtendedFabStyle = ({
-  customSize,
-  theme: _theme,
-}: {
-  customSize?: number;
-  theme: InternalTheme;
-}) => {
-  if (customSize) return getExtendedFabDimensions(customSize);
-
-  return v3Extended;
-};
-
-let cachedContext: CanvasRenderingContext2D | null = null;
-
-const getCanvasContext = () => {
-  if (cachedContext) {
-    return cachedContext;
-  }
-
-  const canvas = document.createElement('canvas');
-  cachedContext = canvas.getContext('2d');
-
-  return cachedContext;
-};
-
-export const getLabelSizeWeb = (ref: MutableRefObject<HTMLElement | null>) => {
+export const getLabelSizeWeb = (ref: RefObject<HTMLElement | null>) => {
   if (Platform.OS !== 'web' || ref.current === null) {
     return null;
   }
@@ -363,4 +102,17 @@ export const getLabelSizeWeb = (ref: MutableRefObject<HTMLElement | null>) => {
       (metrics.fontBoundingBoxAscent ?? 0) +
       (metrics.fontBoundingBoxDescent ?? 0),
   };
+};
+
+let cachedContext: CanvasRenderingContext2D | null = null;
+
+const getCanvasContext = () => {
+  if (cachedContext) {
+    return cachedContext;
+  }
+
+  const canvas = document.createElement('canvas');
+  cachedContext = canvas.getContext('2d');
+
+  return cachedContext;
 };
