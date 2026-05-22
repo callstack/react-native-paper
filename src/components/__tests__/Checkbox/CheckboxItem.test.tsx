@@ -42,13 +42,16 @@ it('should have `accessibilityState={ checked: false }` when `status="unchecked"
   expect(elements).toHaveLength(2);
 });
 
-it('should have `accessibilityState={ checked: false }` when `status="indeterminate"', () => {
+it('should have `accessibilityState={ checked: "mixed" }` when `status="indeterminate"`', () => {
   const { getAllByA11yState } = render(
     <Checkbox.Item status="indeterminate" label="Indeterminate Button" />
   );
 
-  const elements = getAllByA11yState({ checked: false });
-  expect(elements).toHaveLength(2);
+  // The inner Checkbox exposes `checked: "mixed"` (per W3C ARIA spec for
+  // tri-state controls), while the outer row Pressable exposes
+  // `checked: false`.
+  expect(getAllByA11yState({ checked: 'mixed' })).toHaveLength(1);
+  expect(getAllByA11yState({ checked: false })).toHaveLength(1);
 });
 
 it('disables the row when the prop disabled is true', () => {
