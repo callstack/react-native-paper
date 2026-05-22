@@ -1,168 +1,240 @@
 import * as React from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
-import { FAB, Portal, Text } from 'react-native-paper';
+import {
+  Chip,
+  Divider,
+  FAB,
+  FABSize,
+  FABVariant,
+  List,
+  Switch,
+  Text,
+  useTheme,
+} from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { isWeb } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+type FabType = 'icon' | 'extended' | 'extendedTransforming' | 'menu';
+type FabPosition = 'start' | 'center' | 'end';
+type FabColor = FABVariant | 'custom';
 
-type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
-type FABSize = 'small' | 'medium' | 'large';
-type FABMode = 'flat' | 'elevated';
+// Pixels of scroll change required to flip the transforming FAB. Avoids
+// flicker from sub-pixel scroll jitter at the top of the list.
+const SCROLL_DELTA_THRESHOLD = 4;
+
+const CUSTOM_CONTAINER_COLOR = '#E91E63';
+
+const justifyContentByPosition = {
+  start: 'flex-start',
+  center: 'center',
+  end: 'flex-end',
+} as const satisfies Record<FabPosition, 'flex-start' | 'center' | 'flex-end'>;
+
+const variants: FabColor[] = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'tonalPrimary',
+  'tonalSecondary',
+  'tonalTertiary',
+  'custom',
+];
+
+const sizes: FABSize[] = ['default', 'medium', 'large'];
+
+const types: FabType[] = ['icon', 'extended', 'extendedTransforming', 'menu'];
+
+const positions: FabPosition[] = ['start', 'center', 'end'];
+
+const rows = Array.from({ length: 40 }, (_, i) => ({
+  id: String(i + 1),
+  text: `Item ${i + 1}`,
+}));
+
+type ChipRowProps<T extends string> = {
+  label: string;
+  options: readonly T[];
+  value: T;
+  onChange: (value: T) => void;
+};
+
+const ChipRow = <T extends string>({
+  label,
+  options,
+  value,
+  onChange,
+}: ChipRowProps<T>) => (
+  <View style={styles.chipRow}>
+    <Text variant="labelLarge" style={styles.chipRowLabel}>
+      {label}
+    </Text>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.chipRowContent}
+    >
+      {options.map((option) => (
+        <Chip
+          key={option}
+          selected={option === value}
+          showSelectedOverlay
+          onPress={() => onChange(option)}
+        >
+          {option}
+        </Chip>
+      ))}
+    </ScrollView>
+  </View>
+);
 
 const FABExample = () => {
-  const [visible, setVisible] = React.useState<boolean>(true);
-  const [toggleStackOnLongPress, setToggleStackOnLongPress] =
-    React.useState<boolean>(false);
-  const [open, setOpen] = React.useState<boolean>(false);
+  const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
-  const variants = ['primary', 'secondary', 'tertiary', 'surface'];
-  const sizes = ['small', 'medium', 'large'];
-  const modes = ['flat', 'elevated'];
+  const [variant, setVariant] = React.useState<FabColor>('tonalPrimary');
+  const activeVariant = variant === 'custom' ? undefined : variant;
+  const activeContainerColor =
+    variant === 'custom' ? CUSTOM_CONTAINER_COLOR : undefined;
+  const [size, setSize] = React.useState<FABSize>('medium');
+  const [type, setType] = React.useState<FabType>('icon');
+  const [position, setPosition] = React.useState<FabPosition>('end');
+  const [showFab, setShowFab] = React.useState<boolean>(true);
+  const [transformingExpanded, setTransformingExpanded] = React.useState(true);
+  const [menuExpanded, setMenuExpanded] = React.useState(false);
+  const lastScrollY = React.useRef(0);
+
+  const fabPadding = 16;
+
+  const renderItem = React.useCallback(
+    ({ item }: { item: (typeof rows)[number] }) => (
+      <View style={styles.listItem}>
+        <Text variant="bodyLarge">{item.text}</Text>
+      </View>
+    ),
+    []
+  );
+
+  const onScroll = React.useCallback(
+    ({ nativeEvent }: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const y = nativeEvent.contentOffset.y;
+      const delta = y - lastScrollY.current;
+      if (Math.abs(delta) < SCROLL_DELTA_THRESHOLD) {
+        return;
+      }
+      lastScrollY.current = y;
+      if (y <= 0) {
+        setTransformingExpanded(true);
+      } else if (delta > 0) {
+        setTransformingExpanded(false);
+      } else {
+        setTransformingExpanded(true);
+      }
+    },
+    []
+  );
 
   return (
-    <ScreenWrapper style={styles.container}>
-      <View style={styles.column}>
-        <FAB
-          icon={visible ? 'eye-off' : 'eye'}
-          size="small"
-          style={styles.fab}
-          onPress={() => setVisible(!visible)}
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.controls}>
+        <ChipRow
+          label="Color"
+          options={variants}
+          value={variant}
+          onChange={setVariant}
         />
+        <ChipRow label="Size" options={sizes} value={size} onChange={setSize} />
+        <ChipRow label="Type" options={types} value={type} onChange={setType} />
+        <ChipRow
+          label="Position"
+          options={positions}
+          value={position}
+          onChange={setPosition}
+        />
+        <List.Item
+          title="Show FAB"
+          right={() => (
+            <View pointerEvents="none">
+              <Switch value={showFab} />
+            </View>
+          )}
+          onPress={() => setShowFab((v) => !v)}
+        />
+        <Divider bold style={{ backgroundColor: colors.outline }} />
       </View>
-      <View style={styles.row}>
-        {variants.map((variant) => (
-          <View style={styles.fabVariant} key={variant}>
-            <FAB
-              icon="pencil"
-              style={styles.fab}
-              onPress={() => {}}
-              visible={visible}
-              variant={variant as FABVariant}
-            />
-            {visible && <Text variant="bodyMedium">{variant}</Text>}
-          </View>
-        ))}
-      </View>
-      <View style={styles.row}>
-        {sizes.map((size) => (
-          <View style={styles.fabVariant} key={size}>
-            <FAB
-              icon="pencil"
-              style={styles.fab}
-              onPress={() => {}}
-              visible={visible}
-              size={size as FABSize}
-            />
-            {visible && <Text variant="bodyMedium">{size}</Text>}
-          </View>
-        ))}
-      </View>
-      <View style={styles.row}>
-        {modes.map((mode) => (
-          <View style={styles.fabVariant} key={mode}>
-            <FAB
-              icon="pencil"
-              style={styles.fab}
-              onPress={() => {}}
-              visible={visible}
-              mode={mode as FABMode}
-            />
-            {visible && <Text variant="bodyMedium">{mode}</Text>}
-          </View>
-        ))}
-      </View>
-      <View style={styles.column}>
-        <FAB
-          icon="map"
-          style={styles.fab}
-          customSize={64}
-          onPress={() => {}}
-          visible={visible}
-        />
-        <FAB
-          icon="map"
-          label="Extended FAB with custom size"
-          style={styles.fab}
-          customSize={64}
-          onPress={() => {}}
-          visible={visible}
-        />
-        <FAB
-          icon="check"
-          label="Extended FAB"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-        />
-        <FAB
-          icon="format-letter-case"
-          label="Mixed case"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-          uppercase
-        />
-        <FAB
-          icon="cancel"
-          label="Loading FAB"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-          loading
-        />
-        <Portal>
-          <FAB.Group
-            open={open}
-            icon={open ? 'calendar-today' : 'plus'}
-            accessibilityLabel="Calendar FAB"
-            toggleStackOnLongPress={toggleStackOnLongPress}
-            actions={[
-              { icon: 'plus', onPress: () => {} },
-              { icon: 'star', label: 'Star', onPress: () => {} },
-              { icon: 'email', label: 'Email', onPress: () => {} },
-              {
-                icon: 'bell',
-                label: 'Remind',
-                onPress: () => {},
-                size: 'small',
-              },
-              {
-                icon: toggleStackOnLongPress
-                  ? 'gesture-tap'
-                  : 'gesture-tap-hold',
-                label: toggleStackOnLongPress
-                  ? 'Toggle on Press'
-                  : 'Toggle on Long Press',
-                onPress: () => {
-                  setToggleStackOnLongPress(!toggleStackOnLongPress);
-                },
-              },
-            ]}
-            enableLongPressWhenStackOpened
-            onStateChange={({ open }: { open: boolean }) => setOpen(open)}
-            onPress={() => {
-              if (toggleStackOnLongPress) {
-                isWeb ? alert('Fab is Pressed') : Alert.alert('Fab is Pressed');
-                // do something on press when the speed dial is closed
-              } else if (open) {
-                isWeb ? alert('Fab is Pressed') : Alert.alert('Fab is Pressed');
-                // do something if the speed dial is open
-              }
-            }}
-            onLongPress={() => {
-              if (!toggleStackOnLongPress || open) {
-                isWeb
-                  ? alert('Fab is Long Pressed')
-                  : Alert.alert('Fab is Long Pressed');
-                // do something if the speed dial is open
-              }
-            }}
-            visible={visible}
+      <FlatList
+        data={rows}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={[
+          styles.listContent,
+          { paddingBottom: insets.bottom + fabPadding + 96 },
+        ]}
+        onScroll={type === 'extendedTransforming' ? onScroll : undefined}
+        scrollEventThrottle={16}
+      />
+      <View
+        pointerEvents="box-none"
+        style={[
+          styles.fabContainer,
+          {
+            bottom: insets.bottom + fabPadding,
+            left: insets.left + fabPadding,
+            right: insets.right + fabPadding,
+            justifyContent: justifyContentByPosition[position],
+          },
+        ]}
+      >
+        {type === 'icon' && (
+          <FAB
+            icon="pencil"
+            variant={activeVariant}
+            containerColor={activeContainerColor}
+            size={size}
+            visible={showFab}
+            onPress={() => {}}
           />
-        </Portal>
+        )}
+        {(type === 'extended' || type === 'extendedTransforming') && (
+          <FAB.Extended
+            icon="pencil"
+            label="Compose"
+            variant={activeVariant}
+            containerColor={activeContainerColor}
+            size={size}
+            expanded={type === 'extended' ? true : transformingExpanded}
+            visible={showFab}
+            onPress={() => {}}
+          />
+        )}
       </View>
-    </ScreenWrapper>
+      {type === 'menu' ? (
+        <FAB.Menu
+          expanded={menuExpanded}
+          onDismiss={() => setMenuExpanded(false)}
+          alignment={position}
+          trigger={{
+            icon: 'pencil',
+            variant: activeVariant,
+            containerColor: activeContainerColor,
+            size,
+            visible: showFab,
+            onPress: () => setMenuExpanded(true),
+          }}
+          items={[
+            { icon: 'email', label: 'Send', onPress: () => {} },
+            { icon: 'bell', label: 'Remind me', onPress: () => {} },
+            { icon: 'star', label: 'Favorite', onPress: () => {} },
+          ]}
+        />
+      ) : null}
+    </View>
   );
 };
 
@@ -170,26 +242,32 @@ FABExample.title = 'Floating Action Button';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 4,
-  },
-  row: {
-    marginBottom: 8,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  column: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  fab: {
-    margin: 8,
-  },
-  fabVariant: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  },
+  controls: {
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  chipRow: {
+    paddingVertical: 4,
+  },
+  chipRowLabel: {
+    paddingHorizontal: 16,
+    paddingBottom: 6,
+  },
+  chipRowContent: {
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  listContent: {
+    paddingHorizontal: 16,
+  },
+  listItem: {
+    paddingVertical: 12,
+  },
+  fabContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
   },
 });
 

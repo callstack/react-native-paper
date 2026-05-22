@@ -57,12 +57,7 @@ const BannerExample = () => {
           ))}
         </View>
       </ScreenWrapper>
-      <FAB
-        icon="eye"
-        label={visible ? 'Hide banner' : 'Show banner'}
-        style={styles.fab}
-        onPress={() => setVisible(!visible)}
-      />
+      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
       <Banner
         onLayout={handleLayout}
         actions={[

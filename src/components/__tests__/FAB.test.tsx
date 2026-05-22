@@ -1,355 +1,95 @@
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
-import { act } from 'react-test-renderer';
 
-import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import FAB from '../FAB';
-import { getFABColors } from '../FAB/utils';
 
-const styles = StyleSheet.create({
-  borderRadius: {
-    borderRadius: 0,
-  },
-  small: {
-    height: 40,
-    width: 40,
-    borderRadius: 12,
-  },
-  medium: {
-    height: 56,
-    width: 56,
-    borderRadius: 16,
-  },
-  large: {
-    height: 96,
-    width: 96,
-    borderRadius: 28,
-  },
-});
-
-it('renders default FAB', () => {
-  const tree = render(<FAB onPress={() => {}} icon="plus" />).toJSON();
-
+it('renders FAB with default props', () => {
+  const tree = render(<FAB icon="plus" />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders small FAB', () => {
+it('renders FAB with primary variant', () => {
+  const tree = render(<FAB icon="plus" variant="primary" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with secondary variant', () => {
+  const tree = render(<FAB icon="plus" variant="secondary" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with tertiary variant', () => {
+  const tree = render(<FAB icon="plus" variant="tertiary" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with tonalSecondary variant', () => {
+  const tree = render(<FAB icon="plus" variant="tonalSecondary" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with tonalTertiary variant', () => {
+  const tree = render(<FAB icon="plus" variant="tonalTertiary" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB medium size', () => {
+  const tree = render(<FAB icon="plus" size="medium" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB large size', () => {
+  const tree = render(<FAB icon="plus" size="large" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with containerColor override', () => {
+  const tree = render(<FAB icon="plus" containerColor="#ff5722" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with containerColor and contentColor overrides', () => {
   const tree = render(
-    <FAB size="small" onPress={() => {}} icon="plus" />
+    <FAB icon="plus" containerColor="#ff5722" contentColor="#ffffff" />
   ).toJSON();
-
   expect(tree).toMatchSnapshot();
 });
 
-it('renders large FAB', () => {
+it('renders FAB with accessibilityLabel', () => {
   const tree = render(
-    <FAB size="large" onPress={() => {}} icon="plus" />
+    <FAB icon="plus" accessibilityLabel="Add item" />
   ).toJSON();
-
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with custom size prop', () => {
-  const tree = render(
-    <FAB customSize={100} onPress={() => {}} icon="plus" />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders extended FAB', () => {
-  const tree = render(
-    <FAB onPress={() => {}} icon="plus" label="Add items" />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders extended FAB with custom size prop', () => {
-  const tree = render(
-    <FAB customSize={100} onPress={() => {}} icon="plus" label="Add items" />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders loading FAB', () => {
-  const tree = render(
-    <FAB onPress={() => {}} icon="plus" loading={true} />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders loading FAB with custom size prop', () => {
-  const tree = render(
-    <FAB customSize={100} onPress={() => {}} icon="plus" loading={true} />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders custom color for the icon and label of the FAB', () => {
-  const tree = render(
-    <FAB onPress={() => {}} icon="plus" color="#AA0114" />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders not visible FAB', () => {
-  const { update, toJSON } = render(<FAB onPress={() => {}} icon="plus" />);
-  update(<FAB onPress={() => {}} icon="plus" visible={false} />);
-
+it('renders FAB transitioning to not visible', () => {
+  const { update, toJSON } = render(<FAB icon="plus" />);
+  update(<FAB icon="plus" visible={false} />);
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('renders visible FAB', () => {
-  const { update, toJSON } = render(
-    <FAB onPress={() => {}} icon="plus" visible={false} />
-  );
-
-  update(<FAB onPress={() => {}} icon="plus" visible={true} />);
-
+it('renders FAB transitioning to visible', () => {
+  const { update, toJSON } = render(<FAB icon="plus" visible={false} />);
+  update(<FAB icon="plus" visible />);
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('renders FAB with custom border radius', () => {
+it('calls onPress when FAB is pressed', () => {
+  const onPress = jest.fn();
   const { getByTestId } = render(
-    <FAB
-      onPress={() => {}}
-      icon="plus"
-      testID="fab"
-      style={styles.borderRadius}
-    />
+    <FAB icon="plus" onPress={onPress} testID="fab" />
   );
-
-  expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
+  fireEvent.press(getByTestId('fab'));
+  expect(onPress).toHaveBeenCalledTimes(1);
 });
 
-it('renders FAB with zero border radius', () => {
+it('forwards event object to onPress', () => {
+  const onPress = jest.fn();
   const { getByTestId } = render(
-    <FAB
-      theme={{ shapes: { corner: { large: 0 } } }}
-      onPress={() => {}}
-      icon="plus"
-      testID="fab"
-    />
+    <FAB icon="plus" onPress={onPress} testID="fab" />
   );
-
-  expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
-});
-
-it('renders FAB without uppercase styling by default', () => {
-  const { getByTestId } = render(
-    <FAB onPress={() => {}} label="Add items" testID="fab" />
-  );
-
-  expect(getByTestId('fab-text')).not.toHaveStyle({
-    textTransform: 'uppercase',
-  });
-});
-
-it('renders FAB without uppercase styling if uppercase prop is falsy', () => {
-  const { getByTestId } = render(
-    <FAB onPress={() => {}} label="Add items" testID="fab" uppercase={false} />
-  );
-
-  expect(getByTestId('fab-text')).not.toHaveStyle({
-    textTransform: 'uppercase',
-  });
-});
-
-it('renders FAB with uppercase styling if uppercase prop is truthy', () => {
-  const { getByTestId } = render(
-    <FAB onPress={() => {}} label="Add items" testID="fab" uppercase />
-  );
-
-  expect(getByTestId('fab-text')).toHaveStyle({
-    textTransform: 'uppercase',
-  });
-});
-
-(['small', 'medium', 'large'] as const).forEach((size) => {
-  it(`renders ${size} FAB with correct size and border radius`, () => {
-    const { getByTestId } = render(
-      <FAB onPress={() => {}} size={size} icon="plus" testID={`${size}-fab`} />
-    );
-
-    expect(getByTestId(`${size}-fab-content`)).toHaveStyle(styles[size]);
-  });
-});
-
-describe('getFABColors - background color', () => {
-  it('should return color from styles', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-        customBackgroundColor: 'purple',
-      })
-    ).toMatchObject({
-      backgroundColor: 'purple',
-    });
-  });
-
-  it('should return correct theme color, primary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.primaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, secondary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'secondary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, tertiary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'tertiary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.tertiaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, surface variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'surface',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceContainerHigh,
-    });
-  });
-});
-
-describe('getFABColors - foreground color', () => {
-  it('should return custom color', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-        customColor: 'purple',
-      })
-    ).toMatchObject({
-      foregroundColor: 'purple',
-    });
-  });
-
-  it('should return correct theme color, primary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onPrimaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, secondary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'secondary',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onSecondaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, tertiary variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'tertiary',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onTertiaryContainer,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, surface variant', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'surface',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.primary,
-    });
-  });
-});
-
-it('animated value changes correctly', () => {
-  const value = new Animated.Value(1);
-  const { getByTestId } = render(
-    <FAB
-      size="small"
-      onPress={() => {}}
-      icon="plus"
-      testID="fab"
-      style={[{ transform: [{ scale: value }] }]}
-    />
-  );
-  expect(getByTestId('fab-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(getByTestId('fab-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
-});
-
-describe('FAB events', () => {
-  it('onPress passes event', () => {
-    const onPress = jest.fn();
-    const { getByText } = render(<FAB onPress={onPress} label="Add items" />);
-
-    act(() => {
-      fireEvent(getByText('Add items'), 'onPress', { key: 'value' });
-    });
-
-    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
-  });
-
-  it('onLongPress passes event', () => {
-    const onLongPress = jest.fn();
-    const { getByText } = render(
-      <FAB onLongPress={onLongPress} label="Add items" />
-    );
-
-    act(() => {
-      fireEvent(getByText('Add items'), 'onLongPress', { key: 'value' });
-    });
-
-    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
-  });
+  fireEvent(getByTestId('fab'), 'onPress', { key: 'value' });
+  expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });

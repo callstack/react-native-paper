@@ -83,8 +83,6 @@ const AppbarExample = () => {
   const renderFAB = () => {
     return (
       <FAB
-        mode="flat"
-        size="medium"
         icon="plus"
         onPress={() => {}}
         style={[styles.fab, { top: (height - MEDIUM_FAB_HEIGHT) / 2 }]}

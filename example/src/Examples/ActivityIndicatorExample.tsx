@@ -12,7 +12,6 @@ const ActivityIndicatorExample = () => {
     <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
         <FAB
-          size="small"
           icon={animating ? 'pause' : 'play'}
           onPress={() => setAnimating(!animating)}
         />

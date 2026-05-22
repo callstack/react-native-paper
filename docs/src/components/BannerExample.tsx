@@ -83,7 +83,7 @@ const BannerExample = () => {
           <Button icon="camera" mode="contained" onPress={() => {}}>
             Press me
           </Button>
-          <FAB icon="plus" size="small" onPress={() => {}} />
+          <FAB icon="plus" size="default" onPress={() => {}} />
           <FAB icon="plus" size="medium" onPress={() => {}} />
           <FAB icon="plus" size="large" onPress={() => {}} />
           <Avatar.Text label="MD" />

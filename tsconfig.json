@@ -31,7 +31,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest", "node"]
+    "types": ["jest", "node", "@testing-library/jest-native"]
   },
   "exclude": [
     "lib/**/*"

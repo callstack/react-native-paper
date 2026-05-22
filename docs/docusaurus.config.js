@@ -123,8 +123,8 @@ const config = {
           },
           FAB: {
             FAB: 'FAB/FAB',
-            AnimatedFAB: 'FAB/AnimatedFAB',
-            FABGroup: 'FAB/FABGroup',
+            FABExtended: 'FAB/Extended',
+            FABMenu: 'FAB/Menu',
           },
           IconButton: {
             IconButton: 'IconButton/IconButton',

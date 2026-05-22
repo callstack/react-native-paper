@@ -149,7 +149,7 @@ const TooltipExample = () => {
       </ScreenWrapper>
       <View style={styles.fabContainer}>
         <Tooltip title="Press Me">
-          <FAB size="medium" icon="plus" onPress={() => {}} />
+          <FAB icon="plus" onPress={() => {}} />
         </Tooltip>
       </View>
     </>

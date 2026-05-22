@@ -1,143 +1,81 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  Animated,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 
-import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
+import Shell from './Shell';
+import { Size, Variant } from './tokens';
+import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
-import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import type { IconSource } from '../Icon';
 
-type FABSize = 'small' | 'medium' | 'large';
-
-type FABMode = 'flat' | 'elevated';
-
-type IconOrLabel =
-  | {
-      icon: IconSource;
-      label?: string;
-    }
-  | {
-      icon?: IconSource;
-      label: string;
-    };
-
-export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
-  // For `icon` and `label` props their types are duplicated due to the generation of documentation.
-  // Appropriate type for them is `IconOrLabel` contains the both union and intersection types.
+export type Props = {
   /**
-   * Icon to display for the `FAB`. It's optional only if `label` is defined.
+   * Icon to display inside the FAB.
    */
-  icon?: IconSource;
+  icon: IconSource;
   /**
-   * Optional label for extended `FAB`. It's optional only if `icon` is defined.
+   * Role-color preset. Defaults to `tonalPrimary`.
    */
-  label?: string;
+  variant?: Variant;
   /**
-   * Make the label text uppercased.
+   * Override the container (background) color.
    */
-  uppercase?: boolean;
+  containerColor?: ColorValue;
   /**
-   * Type of background drawabale to display the feedback (Android).
-   * https://reactnative.dev/docs/pressable#rippleconfig
+   * Override the content (icon) color.
    */
-  background?: PressableAndroidRippleConfig;
+  contentColor?: ColorValue;
   /**
-   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
-   * Uses `label` by default if specified.
+   * Spec size. Defaults to `default`.
    */
-  accessibilityLabel?: string;
+  size?: Size;
   /**
-   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
-   */
-  accessibilityState?: AccessibilityState;
-  /**
-   * Whether an icon change is animated.
-   */
-  animated?: boolean;
-  /**
-   * Custom color for the icon and label of the `FAB`.
-   */
-  color?: ColorValue;
-  /**
-   * Whether `FAB` is currently visible.
+   * Whether the FAB is currently visible. Toggling animates the spec'd enter
+   * and exit (scale + alpha) on the FAB itself.
    */
   visible?: boolean;
-  /**
-   * Whether to show a loading indicator.
-   */
-  loading?: boolean;
   /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Function to execute on long press.
+   * Accessibility label. Falls back to nothing if unset.
    */
-  onLongPress?: (e: GestureResponderEvent) => void;
+  accessibilityLabel?: string;
   /**
-   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   * Accessibility state forwarded to the underlying button.
    */
-  delayLongPress?: number;
+  accessibilityState?: AccessibilityState;
   /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Size of the `FAB`.
-   * - `small` - FAB with small height (40).
-   * - `medium` - FAB with default medium height (56).
-   * - `large` - FAB with large height (96).
+   * Type of background drawable to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
    */
-  size?: FABSize;
+  background?: PressableAndroidRippleConfig;
   /**
-   * Custom size for the `FAB`. This prop takes precedence over size prop
+   * Style for positioning the FAB. The visual treatment (size, shape, color)
+   * is driven by `variant` and `size`.
    */
-  customSize?: number;
+  style?: StyleProp<ViewStyle>;
   /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Mode of the `FAB`. You can change the mode to adjust the the shadow:
-   * - `flat` - button without a shadow.
-   * - `elevated` - button with a shadow.
+   * TestID used for testing purposes.
    */
-  mode?: FABMode;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Color mappings variant for combinations of container and icon colors.
-   */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  /**
-   * Specifies the largest possible scale a label font can reach.
-   */
-  labelMaxFontSizeMultiplier?: number;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  testID?: string;
   /**
    * @optional
    */
   theme?: ThemeProp;
-  /**
-   * TestID used for testing purposes
-   */
-  testID?: string;
   ref?: React.RefObject<View>;
-} & IconOrLabel;
+};
 
 /**
- * A floating action button represents the primary action on a screen. It appears in front of all screen content.
+ * A floating action button represents the primary action on a screen.
  *
  * ## Usage
  * ```js
@@ -160,7 +98,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
  *     right: 0,
  *     bottom: 0,
  *   },
- * })
+ * });
  *
  * export default MyComponent;
  * ```
@@ -169,172 +107,39 @@ const FAB = forwardRef<View, Props>(
   (
     {
       icon,
-      label,
-      background,
-      accessibilityLabel = label,
-      accessibilityState,
-      animated = true,
-      color: customColor,
-      onPress,
-      onLongPress,
-      delayLongPress,
-      theme: themeOverrides,
-      style,
+      variant = 'tonalPrimary',
+      size = 'default',
       visible = true,
-      uppercase: uppercaseProp,
-      loading,
-      testID = 'fab',
-      size = 'medium',
-      customSize,
-      mode = 'elevated',
-      variant = 'primary',
-      labelMaxFontSizeMultiplier,
-      ...rest
-    }: Props,
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp ?? false;
-    const { current: visibility } = React.useRef<Animated.Value>(
-      new Animated.Value(visible ? 1 : 0)
-    );
-    const { animation } = theme;
-    const { scale } = animation;
-
-    React.useEffect(() => {
-      if (visible) {
-        Animated.timing(visibility, {
-          toValue: 1,
-          duration: 200 * scale,
-          useNativeDriver: true,
-        }).start();
-      } else {
-        Animated.timing(visibility, {
-          toValue: 0,
-          duration: 150 * scale,
-          useNativeDriver: true,
-        }).start();
-      }
-    }, [visible, scale, visibility]);
-
-    const IconComponent = animated ? CrossFadeIcon : Icon;
-
-    const fabStyle = getFabStyle({ customSize, size, theme });
-
-    const {
-      borderRadius = fabStyle.borderRadius,
-      backgroundColor: customBackgroundColor,
-    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-    const { backgroundColor, foregroundColor } = getFABColors({
+      onPress,
+      containerColor,
+      contentColor,
+      accessibilityLabel,
+      accessibilityState,
+      background,
+      style,
+      testID = 'floating-action-button',
       theme,
-      variant,
-      customColor,
-      customBackgroundColor,
-    });
-
-    const isLargeSize = size === 'large';
-    const isFlatMode = mode === 'flat';
-    const iconSize = isLargeSize ? 36 : 24;
-    const loadingIndicatorSize = isLargeSize ? 24 : 18;
-    const font = theme.fonts.labelLarge;
-
-    const extendedStyle = getExtendedFabStyle({ customSize, theme });
-    const textStyle = {
-      color: foregroundColor,
-      ...font,
-    };
-
-    const md3Elevation = isFlatMode ? 0 : 3;
-
-    return (
-      <Surface
-        ref={ref}
-        {...rest}
-        style={[
-          {
-            borderRadius,
-            backgroundColor,
-            opacity: visibility,
-            transform: [
-              {
-                scale: visibility,
-              },
-            ],
-          },
-          style,
-        ]}
-        pointerEvents={visible ? 'auto' : 'none'}
-        testID={`${testID}-container`}
-        elevation={md3Elevation}
-        container
-      >
-        <TouchableRipple
-          borderless
-          background={background}
-          onPress={onPress}
-          onLongPress={onLongPress}
-          delayLongPress={delayLongPress}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={accessibilityState}
-          testID={testID}
-          style={{ borderRadius }}
-          {...rest}
-        >
-          <View
-            style={[styles.content, label ? extendedStyle : fabStyle]}
-            testID={`${testID}-content`}
-            pointerEvents="none"
-          >
-            {icon && loading !== true ? (
-              <IconComponent
-                source={icon}
-                size={customSize ? customSize / 2 : iconSize}
-                color={foregroundColor}
-              />
-            ) : null}
-            {loading ? (
-              <ActivityIndicator
-                size={customSize ? customSize / 2 : loadingIndicatorSize}
-                color={foregroundColor}
-              />
-            ) : null}
-            {label ? (
-              <Text
-                variant="labelLarge"
-                selectable={false}
-                testID={`${testID}-text`}
-                style={[
-                  styles.label,
-                  uppercase && styles.uppercaseLabel,
-                  textStyle,
-                ]}
-                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-              >
-                {label}
-              </Text>
-            ) : null}
-          </View>
-        </TouchableRipple>
-      </Surface>
-    );
-  }
+    },
+    ref
+  ) => (
+    <Shell
+      ref={ref}
+      icon={icon}
+      variant={variant}
+      size={size}
+      visible={visible}
+      onPress={onPress}
+      containerColor={containerColor}
+      contentColor={contentColor}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityState={accessibilityState}
+      background={background}
+      style={style}
+      testID={testID}
+      theme={theme}
+    />
+  )
 );
-
-const styles = StyleSheet.create({
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  label: {
-    marginHorizontal: 8,
-  },
-  uppercaseLabel: {
-    textTransform: 'uppercase',
-  },
-});
 
 export default FAB;
 
