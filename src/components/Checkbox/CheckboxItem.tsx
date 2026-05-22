@@ -143,7 +143,10 @@ const CheckboxItem = ({
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
-  const checkbox = <Checkbox {...checkboxProps} />;
+  // The outer TouchableRipple below is the interactable element + a11y
+  // checkbox; the inner Checkbox is purely visual, so we exclude it from
+  // the accessibility tree to avoid duplicate `checked` states.
+  const checkbox = <Checkbox {...checkboxProps} accessible={false} />;
 
   const textAlign = isLeading ? 'right' : 'left';
 
@@ -157,7 +160,7 @@ const CheckboxItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="checkbox"
       accessibilityState={{
-        checked: status === 'checked',
+        checked: status === 'indeterminate' ? 'mixed' : status === 'checked',
         disabled,
       }}
       onPress={onPress}

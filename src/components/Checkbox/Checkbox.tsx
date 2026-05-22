@@ -1,16 +1,30 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  StyleSheet,
-  View,
+  NativeSyntheticEvent,
+  StyleProp,
+  TargetedEvent,
+  ViewStyle,
 } from 'react-native';
 
-import { getSelectionControlColor } from './utils';
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
+import { CheckboxTokens } from './tokens';
+import { getSelectionVisualState } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { tokens } from '../../theme/tokens';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -36,9 +50,9 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   color?: ColorValue;
   /**
    * Whether the checkbox is in an error state. When true, the outline
-   * (unchecked) and container (checked / indeterminate) use
-   * `theme.colors.error`. `disabled` and explicit `color`/`uncheckedColor`
-   * overrides take precedence.
+   * (unchecked) and container (selected) use `theme.colors.error`.
+   * `disabled` and explicit `color`/`uncheckedColor` overrides take
+   * precedence.
    */
   error?: boolean;
   /**
@@ -49,9 +63,28 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Custom style to override the default tap target. Passed through to
+   * the underlying `TouchableRipple`.
+   */
+  style?: StyleProp<ViewStyle>;
 };
 
-const ANIMATION_DURATION = 100;
+// Spec dimensions (https://m3.material.io/components/checkbox/specs).
+const {
+  containerSize: CONTAINER_SIZE,
+  containerRadius: CONTAINER_RADIUS,
+  outlineWidth: OUTLINE_WIDTH,
+  stateLayerSize: STATE_LAYER_SIZE,
+} = CheckboxTokens;
+
+const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
+// Focus indicator is a circular ring at the 40dp state-layer boundary.
+// We don't apply `focusIndicator.outerOffset` here because the surrounding
+// `TouchableRipple borderless` clips overflow to the tap-target shape,
+// so a ring drawn outside the 40dp circle would be cropped.
+const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
+const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
@@ -84,121 +117,343 @@ const Checkbox = ({
   onPress,
   testID,
   error,
+  color,
+  uncheckedColor,
+  style,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { current: scaleAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
-  );
-  const isFirstRendering = React.useRef<boolean>(true);
+  const reduceMotion = useReduceMotion();
+  const { direction } = useLocale();
+  // Web (react-native-web) doesn't auto-mirror layout, so flip the mask
+  // anchor manually for RTL. Native handles it via `I18nManager`.
+  const flipMaskForWebRTL = Platform.OS === 'web' && direction === 'rtl';
+  const [focused, setFocused] = React.useState(false);
 
-  const {
-    animation: { scale },
-  } = theme;
+  const selected = status === 'checked' || status === 'indeterminate';
+
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const fillTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short2,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.short2,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
+  );
+  const checkTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short3,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.short3,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
+  );
+
+  // 0 = unselected (outline only), 1 = selected (filled + drawn icon).
+  const fillProgress = useSharedValue(selected ? 1 : 0);
+  const checkProgress = useSharedValue(selected ? 1 : 0);
+  const firstRender = React.useRef(true);
 
   React.useEffect(() => {
-    // Do not run animation on very first rendering
-    if (isFirstRendering.current) {
-      isFirstRendering.current = false;
+    if (firstRender.current) {
+      firstRender.current = false;
       return;
     }
+    const target = selected ? 1 : 0;
+    fillProgress.value = withTiming(target, fillTimingConfig);
+    checkProgress.value = withTiming(target, checkTimingConfig);
+  }, [
+    selected,
+    fillProgress,
+    checkProgress,
+    fillTimingConfig,
+    checkTimingConfig,
+  ]);
 
-    const checked = status === 'checked';
-
-    Animated.sequence([
-      Animated.timing(scaleAnim, {
-        toValue: 0.85,
-        duration: checked ? ANIMATION_DURATION * scale : 0,
-        useNativeDriver: false,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: checked
-          ? ANIMATION_DURATION * scale
-          : ANIMATION_DURATION * scale * 1.75,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  }, [status, scaleAnim, scale]);
-
-  const checked = status === 'checked';
-  const indeterminate = status === 'indeterminate';
-
-  const { selectionControlColor, selectionControlOpacity } =
-    getSelectionControlColor({
-      theme,
-      disabled,
-      checked,
-      customColor: rest.color,
-      customUncheckedColor: rest.uncheckedColor,
-      error,
-    });
-
-  const borderWidth = scaleAnim.interpolate({
-    inputRange: [0.8, 1],
-    outputRange: [7, 0],
+  // Visual state (colors + opacity) for the static layers. `hovered` /
+  // `pressed` aren't tracked here — `TouchableRipple` owns the press ripple
+  // and hover overlay.
+  const visual = getSelectionVisualState({
+    theme,
+    selected,
+    disabled,
+    error,
+    customColor: color,
+    customUncheckedColor: uncheckedColor,
   });
 
-  const icon = indeterminate
-    ? 'minus-box'
-    : checked
-    ? 'checkbox-marked'
-    : 'checkbox-blank-outline';
+  // Outline fades out as fill fades in (and vice versa).
+  const outlineAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: 1 - fillProgress.value,
+  }));
+
+  const fillAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: fillProgress.value,
+  }));
+
+  const maskAnimatedStyle = useAnimatedStyle(() => ({
+    width: checkProgress.value * CONTAINER_SIZE,
+    opacity: checkProgress.value,
+  }));
+
+  // Remember the last drawn glyph so the reveal-mask can finish collapsing
+  // when `selected` flips back to false. Computed via the "derive state
+  // during render" pattern (https://react.dev/reference/react/useState#storing-information-from-previous-renders)
+  // so we don't mutate a ref during render.
+  const [lastGlyph, setLastGlyph] = React.useState<'check' | 'indeterminate'>(
+    status === 'indeterminate' ? 'indeterminate' : 'check'
+  );
+  const nextGlyph: 'check' | 'indeterminate' =
+    status === 'checked'
+      ? 'check'
+      : status === 'indeterminate'
+      ? 'indeterminate'
+      : lastGlyph;
+  if (nextGlyph !== lastGlyph) {
+    setLastGlyph(nextGlyph);
+  }
+  const showIndeterminate = nextGlyph === 'indeterminate';
+
+  const handleFocus = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (disabled) return;
+      if (!isKeyboardFocusEvent(e)) return;
+      setFocused(true);
+    },
+    [disabled]
+  );
+
+  const handleBlur = React.useCallback(() => {
+    setFocused(false);
+  }, []);
+
+  // When `accessible={false}` is passed (typically by `CheckboxItem`, which
+  // owns the a11y tree for the wrapped row), suppress our own a11y role
+  // and state so the same logical control doesn't expose two `checked`
+  // states to assistive tech.
+  const accessibilityProps =
+    rest.accessible === false
+      ? {}
+      : {
+          accessibilityRole: 'checkbox' as const,
+          accessibilityState: {
+            disabled: !!disabled,
+            checked: (status === 'indeterminate'
+              ? 'mixed'
+              : status === 'checked') as boolean | 'mixed',
+          },
+          accessibilityLiveRegion: 'polite' as const,
+        };
 
   return (
     <TouchableRipple
       {...rest}
       borderless
+      centered
       onPress={onPress}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       disabled={disabled}
-      accessibilityRole="checkbox"
-      accessibilityState={{ disabled, checked }}
-      accessibilityLiveRegion="polite"
-      style={styles.container}
+      {...accessibilityProps}
       testID={testID}
-      theme={theme}
+      style={[
+        styles.tapTarget,
+        Platform.OS === 'web' ? webNoOutline : undefined,
+        style,
+      ]}
     >
-      <Animated.View
-        style={{
-          transform: [{ scale: scaleAnim }],
-          opacity: selectionControlOpacity,
-        }}
-      >
-        <MaterialCommunityIcon
-          allowFontScaling={false}
-          name={icon}
-          size={24}
-          color={selectionControlColor}
-          direction="ltr"
-        />
-        <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
+      <View pointerEvents="none" style={styles.tapTargetInner}>
+        {focused && !disabled ? (
+          <View
+            pointerEvents="none"
+            style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
+          />
+        ) : null}
+        <View style={[styles.container, { opacity: visual.containerOpacity }]}>
           <Animated.View
+            pointerEvents="none"
             style={[
-              styles.fill,
-              { borderColor: selectionControlColor },
-              { borderWidth },
+              styles.outline,
+              { borderColor: visual.outlineColor },
+              outlineAnimatedStyle,
             ]}
           />
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              styles.fill,
+              { backgroundColor: visual.containerColor },
+              fillAnimatedStyle,
+            ]}
+          />
+          {showIndeterminate ? (
+            <Animated.View
+              style={[
+                flipMaskForWebRTL
+                  ? styles.checkmarkMaskWebRTL
+                  : styles.checkmarkMask,
+                maskAnimatedStyle,
+              ]}
+            >
+              <View style={styles.checkmarkContent}>
+                <View
+                  style={[styles.dash, { backgroundColor: visual.iconColor }]}
+                />
+              </View>
+            </Animated.View>
+          ) : (
+            <Checkmark
+              color={visual.iconColor}
+              maskAnimatedStyle={maskAnimatedStyle}
+              flipMaskForWebRTL={flipMaskForWebRTL}
+              isRTL={direction === 'rtl'}
+              autoSwapsBorders={Platform.OS !== 'web'}
+            />
+          )}
         </View>
-      </Animated.View>
+      </View>
     </TouchableRipple>
   );
 };
 
+/**
+ * Reveal-mask checkmark: an L-shape (borderLeftWidth + borderBottomWidth
+ * rotated -45deg) inside a directional-anchored View whose width animates
+ * 0 → CONTAINER_SIZE so the stroke "draws in" along the writing direction.
+ */
+const Checkmark = ({
+  color,
+  maskAnimatedStyle,
+  flipMaskForWebRTL,
+  isRTL,
+  autoSwapsBorders,
+}: {
+  color: ColorValue;
+  maskAnimatedStyle: ReturnType<typeof useAnimatedStyle>;
+  flipMaskForWebRTL: boolean;
+  isRTL: boolean;
+  // True on platforms whose layout engine auto-swaps `borderLeftWidth`
+  // ↔ `borderRightWidth` in RTL (Android, iOS); false on web (RNW).
+  autoSwapsBorders: boolean;
+}) => {
+  return (
+    <Animated.View
+      style={[
+        flipMaskForWebRTL ? styles.checkmarkMaskWebRTL : styles.checkmarkMask,
+        maskAnimatedStyle,
+      ]}
+    >
+      <View style={styles.checkmarkContent}>
+        <View
+          style={[
+            styles.checkmarkGlyph,
+            { borderColor: color },
+            // On platforms that auto-swap borders in RTL, pre-swap them
+            // here so the swap brings them back to the LTR orientation.
+            isRTL && autoSwapsBorders ? styles.checkmarkGlyphRTL : null,
+          ]}
+        />
+      </View>
+    </Animated.View>
+  );
+};
+
+// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 18,
-    width: 36,
-    height: 36,
-    padding: 6,
-  },
-  fillContainer: {
+  tapTarget: {
+    width: STATE_LAYER_SIZE,
+    height: STATE_LAYER_SIZE,
+    borderRadius: STATE_LAYER_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  tapTargetInner: {
+    width: STATE_LAYER_SIZE,
+    height: STATE_LAYER_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  focusRing: {
+    position: 'absolute',
+    width: FOCUS_RING_SIZE,
+    height: FOCUS_RING_SIZE,
+    borderRadius: FOCUS_RING_RADIUS,
+    borderWidth: FOCUS_THICKNESS,
+  },
+  container: {
+    width: CONTAINER_SIZE,
+    height: CONTAINER_SIZE,
+    borderRadius: CONTAINER_RADIUS,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
   fill: {
-    height: 14,
-    width: 14,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: CONTAINER_RADIUS,
+  },
+  outline: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: OUTLINE_WIDTH,
+    borderRadius: CONTAINER_RADIUS,
+  },
+  dash: {
+    width: 10,
+    height: 2,
+    borderRadius: 1,
+  },
+  checkmarkMask: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    height: CONTAINER_SIZE,
+    overflow: 'hidden',
+  },
+  checkmarkMaskWebRTL: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    height: CONTAINER_SIZE,
+    overflow: 'hidden',
+  },
+  checkmarkContent: {
+    width: CONTAINER_SIZE,
+    height: CONTAINER_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkmarkGlyph: {
+    width: 11,
+    height: 6,
+    borderLeftWidth: 2,
+    borderBottomWidth: 2,
+    transform: [{ rotate: '-45deg' }, { translateY: -1 }, { translateX: 1 }],
+  },
+  checkmarkGlyphRTL: {
+    borderLeftWidth: 0,
+    borderRightWidth: 2,
   },
 });
 
