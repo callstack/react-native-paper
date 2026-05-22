@@ -18,7 +18,7 @@ import {
   Chip,
   Divider,
   IconButton,
-  FAB,
+  FloatingActionButton,
   PaperProvider,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -116,7 +116,12 @@ const News = () => {
           </Card>
         </View>
       </ScreenWrapper>
-      <FAB icon="magnify" onPress={() => {}} visible style={styles.fab} />
+      <FloatingActionButton
+        icon="magnify"
+        onPress={() => {}}
+        visible
+        style={styles.fab}
+      />
     </>
   );
 };

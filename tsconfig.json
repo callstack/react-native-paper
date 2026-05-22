@@ -28,8 +28,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["node"],
-    "verbatimModuleSyntax": true
+    "types": ["jest", "node", "@testing-library/jest-native"]
   },
   "files": [],
   "references": [

@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import type {
-  ColorValue,
+import {
+  AccessibilityState,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native';
 
-import Shell from './Shell';
-import type { Size, Variant } from './tokens';
+import FabShell from './FabShell';
+import {
+  FloatingActionButtonSize,
+  FloatingActionButtonVariant,
+} from './tokens';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 
 export type Props = {
@@ -21,19 +25,11 @@ export type Props = {
   /**
    * Role-color preset. Defaults to `tonalPrimary`.
    */
-  variant?: Variant;
-  /**
-   * Override the container (background) color.
-   */
-  containerColor?: ColorValue;
-  /**
-   * Override the content (icon) color.
-   */
-  contentColor?: ColorValue;
+  variant?: FloatingActionButtonVariant;
   /**
    * Spec size. Defaults to `default`.
    */
-  size?: Size;
+  size?: FloatingActionButtonSize;
   /**
    * Whether the FAB is currently visible. Toggling animates the spec'd enter
    * and exit (scale + alpha) on the FAB itself.
@@ -46,24 +42,11 @@ export type Props = {
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
-  'aria-label'?: string;
+  accessibilityLabel?: string;
   /**
-   * Indicates whether the element is checked. Accepts `true`, `false`,
-   * or `'mixed'` for an indeterminate state.
+   * Accessibility state forwarded to the underlying button.
    */
-  'aria-checked'?: boolean | 'mixed';
-  /**
-   * Indicates whether the element is selected.
-   */
-  'aria-selected'?: boolean;
-  /**
-   * Indicates whether the element is currently busy (e.g. loading).
-   */
-  'aria-busy'?: boolean;
-  /**
-   * Indicates whether the element's controlled content is expanded.
-   */
-  'aria-expanded'?: boolean;
+  accessibilityState?: AccessibilityState;
   /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -82,7 +65,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.RefObject<View>;
 };
 
 /**
@@ -92,10 +75,10 @@ export type Props = {
  * ```js
  * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
- * import { FAB } from 'react-native-paper';
+ * import { FloatingActionButton } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <FAB
+ *   <FloatingActionButton
  *     icon="plus"
  *     style={styles.fab}
  *     onPress={() => console.log('Pressed')}
@@ -114,47 +97,41 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const FAB = ({
-  icon,
-  variant = 'tonalPrimary',
-  size = 'default',
-  visible = true,
-  onPress,
-  containerColor,
-  contentColor,
-  'aria-label': ariaLabel,
-  'aria-checked': ariaChecked,
-  'aria-selected': ariaSelected,
-  'aria-busy': ariaBusy,
-  'aria-expanded': ariaExpanded,
-  background,
-  style,
-  testID = 'floating-action-button',
-  theme,
-  ref,
-}: Props) => (
-  <Shell
-    ref={ref}
-    icon={icon}
-    variant={variant}
-    size={size}
-    visible={visible}
-    onPress={onPress}
-    containerColor={containerColor}
-    contentColor={contentColor}
-    aria-label={ariaLabel}
-    aria-checked={ariaChecked}
-    aria-selected={ariaSelected}
-    aria-busy={ariaBusy}
-    aria-expanded={ariaExpanded}
-    background={background}
-    style={style}
-    testID={testID}
-    theme={theme}
-  />
+const FloatingActionButton = forwardRef<View, Props>(
+  (
+    {
+      icon,
+      variant = 'tonalPrimary',
+      size = 'default',
+      visible = true,
+      onPress,
+      accessibilityLabel,
+      accessibilityState,
+      background,
+      style,
+      testID = 'floating-action-button',
+      theme,
+    },
+    ref
+  ) => (
+    <FabShell
+      ref={ref}
+      icon={icon}
+      variant={variant}
+      size={size}
+      visible={visible}
+      onPress={onPress}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityState={accessibilityState}
+      background={background}
+      style={style}
+      testID={testID}
+      theme={theme}
+    />
+  )
 );
 
-export default FAB;
+export default FloatingActionButton;
 
 // @component-docs ignore-next-line
-export { FAB };
+export { FloatingActionButton };

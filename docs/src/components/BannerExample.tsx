@@ -6,6 +6,7 @@ import { BrowserOnly } from '@rspress/core/runtime';
 import {
   Avatar,
   Button,
+  FloatingActionButton,
   DarkTheme,
   FAB,
   LightTheme,
@@ -103,9 +104,9 @@ const BannerExample = () => {
           <Button icon="camera" mode="contained" onPress={() => {}}>
             Press me
           </Button>
-          <FAB icon="plus" size="default" onPress={() => {}} />
-          <FAB icon="plus" size="medium" onPress={() => {}} />
-          <FAB icon="plus" size="large" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="default" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="medium" onPress={() => {}} />
+          <FloatingActionButton icon="plus" size="large" onPress={() => {}} />
           <Avatar.Text label="MD" />
           <Avatar.Icon icon="folder" />
         </Stack>

@@ -1,6 +1,3 @@
-import type { ViewStyle } from 'react-native';
-
-import { tokens } from '../../theme/tokens';
 import type {
   ColorRole,
   Elevation,
@@ -8,7 +5,7 @@ import type {
   TypescaleKey,
 } from '../../theme/types';
 
-export type Variant =
+export type FloatingActionButtonVariant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -16,7 +13,7 @@ export type Variant =
   | 'tonalSecondary'
   | 'tonalTertiary';
 
-export type Size = 'default' | 'medium' | 'large';
+export type FloatingActionButtonSize = 'default' | 'medium' | 'large';
 
 type SizeSpec = {
   container: number;
@@ -58,7 +55,7 @@ const sizes = {
     iconLabelGap: 16,
     labelTypescale: 'headlineSmall',
   },
-} as const satisfies Record<Size, SizeSpec>;
+} as const satisfies Record<FloatingActionButtonSize, SizeSpec>;
 
 const stateElevation = {
   enabled: 3,
@@ -84,11 +81,11 @@ const variants = {
     content: 'onTertiaryContainer',
   },
 } as const satisfies Record<
-  Variant,
+  FloatingActionButtonVariant,
   { container: ColorRole; content: ColorRole }
 >;
 
-export const Tokens = {
+export const FloatingActionButtonTokens = {
   sizes,
   stateElevation,
   variants,
@@ -114,15 +111,8 @@ const spacing = {
   closeToLastItem: 8,
 } as const;
 
-export const MenuTokens = {
+export const FloatingActionButtonMenuTokens = {
   closeButton,
   listItem,
   spacing,
 };
-
-const focusIndicator = tokens.md.sys.state.focusIndicator;
-export const FOCUS_RING_THICKNESS = focusIndicator.thickness;
-export const FOCUS_RING_OUTER_OFFSET = focusIndicator.outerOffset;
-export const FOCUS_RING_INSET = FOCUS_RING_OUTER_OFFSET + FOCUS_RING_THICKNESS;
-
-export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;

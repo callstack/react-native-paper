@@ -1,11 +1,13 @@
-import type { ColorValue } from 'react-native';
+import { RefObject } from 'react';
+import { ColorValue, Platform } from 'react-native';
 
-import { Tokens } from './tokens';
-import type { Size, Variant } from './tokens';
+import {
+  FloatingActionButtonSize,
+  FloatingActionButtonTokens,
+  FloatingActionButtonVariant,
+} from './tokens';
 import type { TypescaleKey } from '../../theme/types';
-import { contentColorFor } from '../../theme/utils/color';
-import { resolveCornerRadius } from '../../theme/utils/shape';
-import type { ShapeToken } from '../../theme/utils/shape';
+import { resolveCornerRadius, ShapeToken } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 
 export type ResolvedColors = {
@@ -21,21 +23,15 @@ export type ResolvedColors = {
 export const resolveColors = ({
   theme,
   variant = 'tonalPrimary',
-  containerColor,
-  contentColor,
 }: {
   theme: InternalTheme;
-  variant?: Variant;
+  variant?: FloatingActionButtonVariant;
   containerColor?: ColorValue;
   contentColor?: ColorValue;
 }): ResolvedColors => {
-  const roles = Tokens.variants[variant];
-  const container = containerColor ?? theme.colors[roles.container];
-  const content =
-    contentColor ??
-    (containerColor != null
-      ? contentColorFor(theme, container)
-      : theme.colors[roles.content]);
+  const roles = FloatingActionButtonTokens.variants[variant];
+  const container = theme.colors[roles.container];
+  const content = theme.colors[roles.content];
   return { container, content };
 };
 
@@ -64,13 +60,13 @@ export const getDimensions = ({
   trailing,
 }: {
   theme: InternalTheme;
-  size?: Size;
+  size?: FloatingActionButtonSize;
   shape?: ShapeToken;
   iconSize?: number;
   leading?: number;
   trailing?: number;
 }): Dimensions => {
-  const spec = Tokens.sizes[size];
+  const spec = FloatingActionButtonTokens.sizes[size];
   const shapeToken: ShapeToken = shape ?? spec.shape;
   return {
     height: spec.container,
@@ -82,4 +78,41 @@ export const getDimensions = ({
     iconLabelGap: spec.iconLabelGap,
     labelTypescale: spec.labelTypescale,
   };
+};
+
+export const getLabelSizeWeb = (ref: RefObject<HTMLElement | null>) => {
+  if (Platform.OS !== 'web' || ref.current === null) {
+    return null;
+  }
+
+  const canvasContext = getCanvasContext();
+
+  if (!canvasContext) {
+    return null;
+  }
+
+  const elementStyles = window.getComputedStyle(ref.current);
+  canvasContext.font = elementStyles.font;
+
+  const metrics = canvasContext.measureText(ref.current.innerText);
+
+  return {
+    width: metrics.width,
+    height:
+      (metrics.fontBoundingBoxAscent ?? 0) +
+      (metrics.fontBoundingBoxDescent ?? 0),
+  };
+};
+
+let cachedContext: CanvasRenderingContext2D | null = null;
+
+const getCanvasContext = () => {
+  if (cachedContext) {
+    return cachedContext;
+  }
+
+  const canvas = document.createElement('canvas');
+  cachedContext = canvas.getContext('2d');
+
+  return cachedContext;
 };

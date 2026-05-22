@@ -1,28 +1,34 @@
 import * as React from 'react';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import {
   Chip,
   Divider,
-  FAB,
+  ExtendedFloatingActionButton,
+  FloatingActionButton,
+  FloatingActionButtonMenu,
+  FloatingActionButtonSize,
+  FloatingActionButtonVariant,
   List,
   Switch,
   Text,
   useTheme,
 } from 'react-native-paper';
-import type { FABSize, FABVariant } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type FabType = 'icon' | 'extended' | 'extendedTransforming' | 'menu';
 type FabPosition = 'start' | 'center' | 'end';
-type FabColor = FABVariant | 'custom';
 
 // Pixels of scroll change required to flip the transforming FAB. Avoids
 // flicker from sub-pixel scroll jitter at the top of the list.
 const SCROLL_DELTA_THRESHOLD = 4;
-
-const CUSTOM_CONTAINER_COLOR = '#E91E63';
 
 const justifyContentByPosition = {
   start: 'flex-start',
@@ -30,17 +36,16 @@ const justifyContentByPosition = {
   end: 'flex-end',
 } as const satisfies Record<FabPosition, 'flex-start' | 'center' | 'flex-end'>;
 
-const variants: FabColor[] = [
+const variants: FloatingActionButtonVariant[] = [
   'primary',
   'secondary',
   'tertiary',
   'tonalPrimary',
   'tonalSecondary',
   'tonalTertiary',
-  'custom',
 ];
 
-const sizes: FABSize[] = ['default', 'medium', 'large'];
+const sizes: FloatingActionButtonSize[] = ['default', 'medium', 'large'];
 
 const types: FabType[] = ['icon', 'extended', 'extendedTransforming', 'menu'];
 
@@ -91,11 +96,9 @@ const FABExample = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
-  const [variant, setVariant] = React.useState<FabColor>('tonalPrimary');
-  const activeVariant = variant === 'custom' ? undefined : variant;
-  const activeContainerColor =
-    variant === 'custom' ? CUSTOM_CONTAINER_COLOR : undefined;
-  const [size, setSize] = React.useState<FABSize>('medium');
+  const [variant, setVariant] =
+    React.useState<FloatingActionButtonVariant>('tonalPrimary');
+  const [size, setSize] = React.useState<FloatingActionButtonSize>('medium');
   const [type, setType] = React.useState<FabType>('icon');
   const [position, setPosition] = React.useState<FabPosition>('end');
   const [showFab, setShowFab] = React.useState<boolean>(true);
@@ -185,21 +188,19 @@ const FABExample = () => {
         ]}
       >
         {type === 'icon' && (
-          <FAB
+          <FloatingActionButton
             icon="pencil"
-            variant={activeVariant}
-            containerColor={activeContainerColor}
+            variant={variant}
             size={size}
             visible={showFab}
             onPress={() => {}}
           />
         )}
         {(type === 'extended' || type === 'extendedTransforming') && (
-          <FAB.Extended
+          <ExtendedFloatingActionButton
             icon="pencil"
             label="Compose"
-            variant={activeVariant}
-            containerColor={activeContainerColor}
+            variant={variant}
             size={size}
             expanded={type === 'extended' ? true : transformingExpanded}
             visible={showFab}
@@ -208,24 +209,36 @@ const FABExample = () => {
         )}
       </View>
       {type === 'menu' ? (
-        <FAB.Menu
+        <FloatingActionButtonMenu
           expanded={menuExpanded}
           onDismiss={() => setMenuExpanded(false)}
-          alignment={position}
-          trigger={{
-            icon: 'pencil',
-            variant: activeVariant,
-            containerColor: activeContainerColor,
-            size,
-            visible: showFab,
-            onPress: () => setMenuExpanded(true),
-          }}
-          items={[
-            { icon: 'email', label: 'Send', onPress: () => {} },
-            { icon: 'bell', label: 'Remind me', onPress: () => {} },
-            { icon: 'star', label: 'Favorite', onPress: () => {} },
-          ]}
-        />
+          horizontalAlignment={position}
+          button={
+            <FloatingActionButton
+              icon="pencil"
+              variant={variant}
+              size={size}
+              visible={showFab}
+              onPress={() => setMenuExpanded(true)}
+            />
+          }
+        >
+          <FloatingActionButtonMenu.Item
+            icon="email"
+            label="Send"
+            onPress={() => {}}
+          />
+          <FloatingActionButtonMenu.Item
+            icon="bell"
+            label="Remind me"
+            onPress={() => {}}
+          />
+          <FloatingActionButtonMenu.Item
+            icon="star"
+            label="Favorite"
+            onPress={() => {}}
+          />
+        </FloatingActionButtonMenu>
       ) : null}
     </View>
   );
