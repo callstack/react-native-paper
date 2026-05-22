@@ -1,106 +1,121 @@
 import type { ColorValue } from 'react-native';
 
+import { CheckboxTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
+// MD3 Checkbox spec: https://m3.material.io/components/checkbox/specs
+
 const stateOpacity = tokens.md.sys.state.opacity;
 
-const getCheckedColor = ({
-  theme,
-  customColor,
-  error,
-}: {
+type SelectionState = {
   theme: InternalTheme;
-  customColor?: ColorValue;
+  selected: boolean;
+  disabled?: boolean;
   error?: boolean;
-}) => {
+  customColor?: ColorValue;
+  customUncheckedColor?: ColorValue;
+};
+
+type SelectionVisualState = {
+  containerColor: ColorValue;
+  outlineColor: ColorValue;
+  containerOpacity: number;
+  iconColor: ColorValue;
+};
+
+const getContainerColor = ({
+  theme,
+  disabled,
+  error,
+  customColor,
+}: SelectionState): ColorValue => {
+  if (disabled) {
+    return theme.colors[CheckboxTokens.disabledContainerColor];
+  }
   if (customColor) {
     return customColor;
   }
-
   if (error) {
-    return theme.colors.error;
+    return theme.colors[CheckboxTokens.errorContainerColor];
   }
-
-  return theme.colors.primary;
+  return theme.colors[CheckboxTokens.containerColor];
 };
 
-const getUncheckedColor = ({
+const getOutlineColor = ({
   theme,
-  customUncheckedColor,
+  disabled,
   error,
-}: {
-  theme: InternalTheme;
-  customUncheckedColor?: ColorValue;
-  error?: boolean;
-}) => {
+  customUncheckedColor,
+}: SelectionState): ColorValue => {
+  if (disabled) {
+    return theme.colors[CheckboxTokens.disabledOutlineColor];
+  }
   if (customUncheckedColor) {
     return customUncheckedColor;
   }
-
   if (error) {
-    return theme.colors.error;
+    return theme.colors[CheckboxTokens.errorOutlineColor];
   }
-
-  return theme.colors.onSurfaceVariant;
+  return theme.colors[CheckboxTokens.outlineColor];
 };
 
-const getControlColor = ({
+const getIconColor = ({
   theme,
-  checked,
+  selected,
   disabled,
-  checkedColor,
-  uncheckedColor,
-}: {
-  theme: InternalTheme;
-  checked: boolean;
-  checkedColor: ColorValue;
-  uncheckedColor: ColorValue;
-  disabled?: boolean;
-}) => {
+  error,
+}: SelectionState): ColorValue => {
+  if (!selected) {
+    return 'transparent';
+  }
   if (disabled) {
-    return theme.colors.onSurface;
+    return theme.colors[CheckboxTokens.disabledIconColor];
   }
-
-  if (checked) {
-    return checkedColor;
+  if (error) {
+    return theme.colors[CheckboxTokens.errorIconColor];
   }
-  return uncheckedColor;
+  return theme.colors[CheckboxTokens.iconColor];
 };
 
-export const getSelectionControlColor = ({
+/**
+ * Resolve the static (non-interactive) colors + opacity for the Checkbox
+ * renderer. Hover / pressed / focused visuals are owned by `TouchableRipple`
+ * and the focus-ring outline, so they don't appear here.
+ */
+export const getSelectionVisualState = ({
   theme,
+  selected,
   disabled,
-  checked,
+  error,
   customColor,
   customUncheckedColor,
-  error,
-}: {
-  theme: InternalTheme;
-  checked: boolean;
-  disabled?: boolean;
-  customColor?: ColorValue;
-  customUncheckedColor?: ColorValue;
-  error?: boolean;
-}) => {
-  const checkedColor = getCheckedColor({ theme, customColor, error });
-  const uncheckedColor = getUncheckedColor({
-    theme,
-    customUncheckedColor,
-    error,
-  });
-  const selectionControlOpacity = disabled
-    ? stateOpacity.disabled
-    : stateOpacity.enabled;
-
+}: SelectionState): SelectionVisualState => {
   return {
-    selectionControlColor: getControlColor({
+    containerColor: getContainerColor({
       theme,
+      selected,
       disabled,
-      checked,
-      checkedColor,
-      uncheckedColor,
+      error,
+      customColor,
+      customUncheckedColor,
     }),
-    selectionControlOpacity,
+    outlineColor: getOutlineColor({
+      theme,
+      selected,
+      disabled,
+      error,
+      customColor,
+      customUncheckedColor,
+    }),
+    containerOpacity: disabled ? stateOpacity.disabled : stateOpacity.enabled,
+    iconColor: getIconColor({
+      theme,
+      selected,
+      disabled,
+      error,
+      customColor,
+      customUncheckedColor,
+    }),
   };
 };
