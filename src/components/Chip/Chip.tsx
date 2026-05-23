@@ -259,13 +259,17 @@ const Chip = ({
     contentOpacity,
     selectedBackgroundColor,
     backgroundColor,
-  } = getChipColors({
-    isOutlined,
-    theme,
-    selectedColor,
-    customBackgroundColor,
-    disabled,
-  });
+  } = React.useMemo(
+    () =>
+      getChipColors({
+        isOutlined,
+        theme,
+        selectedColor,
+        customBackgroundColor,
+        disabled,
+      }),
+    [customBackgroundColor, disabled, isOutlined, selectedColor, theme]
+  );
 
   const accessibilityState: AccessibilityState = {
     selected,
