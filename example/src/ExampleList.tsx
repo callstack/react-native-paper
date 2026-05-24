@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
 
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { Divider, List, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -49,101 +49,75 @@ import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
-export const mainExamples: Record<
-  string,
-  React.ComponentType<any> & { title: string }
-> = {
-  animatedFab: AnimatedFABExample,
-  activityIndicator: ActivityIndicatorExample,
-  appbar: AppbarExample,
-  avatar: AvatarExample,
-  badge: BadgeExample,
-  banner: BannerExample,
-  bottomNavigationBarExample: BottomNavigationBarExample,
-  bottomNavigation: BottomNavigationExample,
-  button: ButtonExample,
-  card: CardExample,
-  checkbox: CheckboxExample,
-  checkboxItem: CheckboxItemExample,
-  chip: ChipExample,
-  dataTable: DataTableExample,
-  dialog: DialogExample,
-  divider: DividerExample,
-  fab: FABExample,
-  iconButton: IconButtonExample,
-  icon: IconExample,
-  listAccordion: ListAccordionExample,
-  listAccordionGroup: ListAccordionExampleGroup,
-  listSection: ListSectionExample,
-  listItem: ListItemExample,
-  menu: MenuExample,
-  progressbar: ProgressBarExample,
-  radio: RadioButtonExample,
-  radioGroup: RadioButtonGroupExample,
-  radioItem: RadioButtonItemExample,
-  searchbar: SearchbarExample,
-  segmentedButton: SegmentedButtonExample,
-  snackbar: SnackbarExample,
-  surface: SurfaceExample,
-  switch: SwitchExample,
-  text: TextExample,
-  textInput: TextInputExample,
-  toggleButton: ToggleButtonExample,
-  tooltipExample: TooltipExample,
-  touchableRipple: TouchableRippleExample,
-  theme: ThemeExample,
-  themingWithReactNavigation: ThemingWithReactNavigation,
+
+export const mainExamples = {
+  AnimatedFAB: AnimatedFABExample,
+  ActivityIndicator: ActivityIndicatorExample,
+  Appbar: AppbarExample,
+  Avatar: AvatarExample,
+  Badge: BadgeExample,
+  Banner: BannerExample,
+  BottomNavigationBarExample,
+  BottomNavigation: BottomNavigationExample,
+  Button: ButtonExample,
+  Card: CardExample,
+  Checkbox: CheckboxExample,
+  CheckboxItem: CheckboxItemExample,
+  Chip: ChipExample,
+  DataTable: DataTableExample,
+  Dialog: DialogExample,
+  Divider: DividerExample,
+  FAB: FABExample,
+  IconButton: IconButtonExample,
+  Icon: IconExample,
+  ListAccordion: ListAccordionExample,
+  ListAccordionGroup: ListAccordionExampleGroup,
+  ListSection: ListSectionExample,
+  ListItem: ListItemExample,
+  Menu: MenuExample,
+  Progressbar: ProgressBarExample,
+  Radio: RadioButtonExample,
+  RadioGroup: RadioButtonGroupExample,
+  RadioItem: RadioButtonItemExample,
+  Searchbar: SearchbarExample,
+  SegmentedButton: SegmentedButtonExample,
+  Snackbar: SnackbarExample,
+  Surface: SurfaceExample,
+  Switch: SwitchExample,
+  Text: TextExample,
+  TextInput: TextInputExample,
+  ToggleButton: ToggleButtonExample,
+  TooltipExample,
+  TouchableRipple: TouchableRippleExample,
+  Theme: ThemeExample,
+  ThemingWithReactNavigation,
 };
 
-export const nestedExamples: Record<
-  string,
-  React.ComponentType<any> & { title: string }
-> = {
-  themingWithReactNavigation: ThemingWithReactNavigation,
-  teamDetails: TeamDetails,
-  teamsList: TeamsList,
-  segmentedButtonRealCase: SegmentedButtonRealCase,
-  segmentedButtonMultiselectRealCase: SegmentedButtonMultiselectRealCase,
+export const nestedExamples = {
+  ThemingWithReactNavigation,
+  TeamDetails,
+  TeamsList,
+  SegmentedButtonRealCase,
+  SegmentedButtonMultiselectRealCase,
 };
 
-export const examples: Record<
-  string,
-  React.ComponentType<any> & { title: string }
-> = {
+export const examples = {
   ...mainExamples,
   ...nestedExamples,
 };
 
-type Props = {
-  navigation: NativeStackNavigationProp<{ [key: string]: undefined }>;
-};
+type MainExampleId = keyof typeof mainExamples;
 
-type Item = {
-  id: string;
-  data: (typeof mainExamples)[string];
-};
+const data = (Object.keys(mainExamples) as MainExampleId[]).map((id) => ({
+  id,
+  data: mainExamples[id],
+}));
 
-const data = Object.keys(mainExamples).map(
-  (id): Item => ({ id, data: mainExamples[id] })
-);
-
-export default function ExampleList({ navigation }: Props) {
-  const keyExtractor = (item: { id: string }) => item.id;
+export default function ExampleList() {
+  const navigation = useNavigation('ExampleList');
 
   const { colors } = useTheme();
   const safeArea = useSafeAreaInsets();
-
-  const renderItem = ({ item }: { item: Item }) => {
-    const { data, id } = item;
-
-    return (
-      <List.Item
-        unstable_pressDelay={65}
-        title={data.title}
-        onPress={() => navigation.navigate(id)}
-      />
-    );
-  };
 
   return (
     <FlatList
@@ -158,8 +132,18 @@ export default function ExampleList({ navigation }: Props) {
       }}
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={Divider}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
+      renderItem={({ item }) => (
+        <List.Item
+          unstable_pressDelay={65}
+          title={item.data.title}
+          onPress={() => {
+            // @ts-expect-error TypeScript can't call overloaded functions with union arguments.
+            // https://github.com/microsoft/TypeScript/issues/40803
+            navigation.navigate(id);
+          }}
+        />
+      )}
+      keyExtractor={({ id }) => id}
       data={data}
     />
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
   FAB,
@@ -17,16 +17,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type Props = {
-  navigation: NativeStackNavigationProp<{}>;
-};
-
 type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
 
-const AppbarExample = ({ navigation }: Props) => {
+const AppbarExample = () => {
+  const navigation = useNavigation('Appbar');
+
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
   const [showSubtitle, setShowSubtitle] = React.useState(true);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);

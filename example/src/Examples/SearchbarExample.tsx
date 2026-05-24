@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   Avatar,
   List,
@@ -14,11 +13,9 @@ import {
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type Props = {
-  navigation: NativeStackNavigationProp<{}>;
-};
+const SearchExample = () => {
+  const navigation = useNavigation('Searchbar');
 
-const SearchExample = ({ navigation }: Props) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [searchQueries, setSearchQuery] = React.useState({
     searchBarMode: '',
@@ -194,7 +191,7 @@ const SearchExample = ({ navigation }: Props) => {
             value={searchQueries.clickableDrawer}
             onIconPress={() => {
               Keyboard.dismiss();
-              (navigation as any as DrawerNavigationProp<{}>).openDrawer();
+              navigation.openDrawer();
             }}
             icon="menu"
             style={styles.searchbar}

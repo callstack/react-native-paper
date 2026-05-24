@@ -2,8 +2,14 @@ import * as React from 'react';
 import { I18nManager } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { InitialState, NavigationContainer } from '@react-navigation/native';
+import {
+  createDrawerNavigator,
+  createDrawerScreen,
+} from '@react-navigation/drawer';
+import {
+  createStaticNavigation,
+  type InitialState,
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
@@ -31,7 +37,40 @@ import {
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
-const Drawer = createDrawerNavigator<{ Home: undefined }>();
+const Drawer = createDrawerNavigator({
+  screens: {
+    Home: createDrawerScreen({
+      screen: App,
+      options: {
+        headerShown: false,
+      },
+    }),
+  },
+}).with(({ Navigator }) => {
+  const preferences = React.useContext(PreferencesContext);
+  const insets = React.useContext(SafeAreaInsetsContext);
+  const { left, right } = insets || { left: 0, right: 0 };
+  const collapsedDrawerWidth = 100 + Math.max(left, right);
+
+  return (
+    <Navigator
+      screenOptions={{
+        drawerStyle: preferences?.collapsed && {
+          width: collapsedDrawerWidth,
+        },
+      }}
+      drawerContent={() => <DrawerItems />}
+    />
+  );
+});
+
+const Navigation = createStaticNavigation(Drawer);
+
+type RootDrawerType = typeof Drawer;
+
+declare module '@react-navigation/core' {
+  interface RootNavigator extends RootDrawerType {}
+}
 
 export default function PaperExample() {
   useKeepAwake();
@@ -167,39 +206,18 @@ export default function PaperExample() {
       theme={customFontLoaded ? configuredFontTheme : theme}
     >
       <PreferencesContext.Provider value={preferences}>
-        <NavigationContainer
-          theme={
-            customFontLoaded ? configuredFontNavigationTheme : combinedTheme
-          }
-          initialState={initialState}
-          onStateChange={(state) =>
-            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-          }
-        >
-          <SafeAreaInsetsContext.Consumer>
-            {(insets) => {
-              const { left, right } = insets || { left: 0, right: 0 };
-              const collapsedDrawerWidth = 100 + Math.max(left, right);
-              return (
-                <Drawer.Navigator
-                  screenOptions={{
-                    drawerStyle: collapsed && {
-                      width: collapsedDrawerWidth,
-                    },
-                  }}
-                  drawerContent={() => <DrawerItems />}
-                >
-                  <Drawer.Screen
-                    name="Home"
-                    component={App}
-                    options={{ headerShown: false }}
-                  />
-                </Drawer.Navigator>
-              );
-            }}
-          </SafeAreaInsetsContext.Consumer>
+        <>
+          <Navigation
+            theme={
+              customFontLoaded ? configuredFontNavigationTheme : combinedTheme
+            }
+            initialState={initialState}
+            onStateChange={(state) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }
+          />
           <StatusBar style={theme.dark ? 'light' : 'dark'} />
-        </NavigationContainer>
+        </>
       </PreferencesContext.Provider>
     </PaperProvider>
   );
