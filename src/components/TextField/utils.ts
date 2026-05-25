@@ -626,20 +626,15 @@ export const getAccessibilityData = ({
   hasError,
   hasCounter,
   isDisabled,
+  inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
   const { label, supportingText, ...props } = data;
 
-  let textLength = 0;
-
-  if (props.value) {
-    textLength = props.value.length;
-  }
-
   const maxLength = props.maxLength;
   const shouldEvaluateCounter = !!maxLength && hasCounter;
-  const isEmptyString = textLength === 0;
-  const isCounterExceeded = shouldEvaluateCounter && textLength > maxLength;
-  const isCounterReached = shouldEvaluateCounter && textLength === maxLength;
+  const isEmptyString = inputLength === 0;
+  const isCounterExceeded = shouldEvaluateCounter && inputLength > maxLength;
+  const isCounterReached = shouldEvaluateCounter && inputLength === maxLength;
   const isInvalid = hasError || isCounterExceeded;
   const isSupportingTextHidden = !!(supportingText && !hasError);
 
@@ -662,13 +657,13 @@ export const getAccessibilityData = ({
   let hint: string | undefined;
 
   if (isCounterExceeded && !(hasError && supportingText)) {
-    hint = `Character limit exceeded ${textLength} of ${maxLength}`;
+    hint = `Character limit exceeded ${inputLength} of ${maxLength}`;
   }
 
   const counterAccessibilityLabel = shouldEvaluateCounter
     ? isCounterExceeded
-      ? `Character limit exceeded ${textLength} of ${maxLength}`
-      : `Characters entered ${textLength} of ${maxLength}`
+      ? `Character limit exceeded ${inputLength} of ${maxLength}`
+      : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
   const accessibilityState = {
@@ -681,7 +676,7 @@ export const getAccessibilityData = ({
     input: {
       'aria-label': ariaLabel,
       'aria-valuemax': isCounterReached ? maxLength : undefined,
-      'aria-valuenow': isCounterReached ? textLength : undefined,
+      'aria-valuenow': isCounterReached ? inputLength : undefined,
       accessibilityHint: hint,
       accessibilityState,
     },

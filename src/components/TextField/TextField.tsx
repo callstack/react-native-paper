@@ -51,6 +51,7 @@ export type GetAccessibilityDataReturn = {
 
 export type GetAccessibilityDataProps = {
   data: TextFieldProps;
+  inputLength: number;
   hasError: boolean;
   hasCounter: boolean;
   isDisabled: boolean;
@@ -121,7 +122,6 @@ export type TextFieldLayoutState = Omit<
 
 export type TextFieldHookReturn = SharedTextFieldStyleData & {
   input: React.RefObject<TextInput | null>;
-  value: string | undefined;
   isDisabled: boolean;
   isEditable: boolean | undefined;
   hasPrefix: boolean;
@@ -272,7 +272,6 @@ const DefaultRenderer = (props: TextFieldRenderProps) => (
 function TextField(props: TextFieldProps) {
   /* eslint-disable @typescript-eslint/no-unused-vars -- peel TextField-only props before TextInput spread */
   const {
-    defaultValue: _defaultValue,
     ref,
     error,
     label,
@@ -291,7 +290,6 @@ function TextField(props: TextFieldProps) {
 
   const {
     input,
-    value,
     isDisabled,
     isEditable,
     hasPrefix,
@@ -376,7 +374,6 @@ function TextField(props: TextFieldProps) {
             placeholderTextColor,
             ...accessibilityProps.input,
             ...textInputProps,
-            value,
             editable: isEditable,
             placeholder,
             style: inputStyles,

@@ -1109,3 +1109,39 @@ it('does not apply the TextInput style prop to prefix or suffix Text', () => {
   expect(suffixFlat.fontSize).not.toBe(40);
   expect(suffixFlat.letterSpacing).toBeUndefined();
 });
+
+it('passes defaultValue to the native input when uncontrolled without counter', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Email"
+      defaultValue="hello"
+      onChangeText={() => {}}
+      testID="tf-uncontrolled"
+    />
+  );
+
+  const input = getByTestId('tf-uncontrolled');
+  expect(input.props.defaultValue).toBe('hello');
+  expect(input.props.value).toBeUndefined();
+});
+
+it('updates the character counter for an uncontrolled field with counter enabled', () => {
+  const onChangeText = jest.fn();
+  const { getByTestId, getByText } = render(
+    <TextField
+      label="Bio"
+      defaultValue="a"
+      onChangeText={onChangeText}
+      counter
+      maxLength={10}
+      testID="tf-uncontrolled-counter"
+    />
+  );
+
+  expect(getByText('1/10')).toBeTruthy();
+
+  fireEvent.changeText(getByTestId('tf-uncontrolled-counter'), 'abcd');
+
+  expect(onChangeText).toHaveBeenCalledWith('abcd');
+  expect(getByText('4/10')).toBeTruthy();
+});

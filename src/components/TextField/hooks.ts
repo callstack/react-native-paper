@@ -26,26 +26,49 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 
-const useTextFieldValue = (
-  props: Pick<TextFieldProps, 'value' | 'defaultValue' | 'onChangeText'>
+const useTextFieldInput = (
+  props: Pick<
+    TextFieldProps,
+    'value' | 'defaultValue' | 'onChangeText' | 'counter' | 'maxLength'
+  >
 ) => {
   const isControlled = props.value !== undefined;
+  const hasCounter = !!(props.counter && props.maxLength);
 
-  const [uncontrolledValue, setUncontrolledValue] = useState(
-    isControlled ? props.value : props.defaultValue
-  );
+  const initialText = isControlled ? props.value : props.defaultValue;
 
-  const value = isControlled ? props.value : uncontrolledValue;
+  const [hasValue, setHasValue] = useState(!!initialText);
+  const [charCount, setCharCount] = useState(initialText?.length ?? 0);
+
+  const inputLength = isControlled
+    ? props.value?.length ?? 0
+    : hasCounter
+    ? charCount
+    : hasValue
+    ? 1
+    : 0;
 
   const onChangeText = (text: string) => {
     if (!isControlled) {
-      setUncontrolledValue(text);
+      const next = text.length > 0;
+
+      if (hasCounter) {
+        setCharCount(text.length);
+      }
+
+      if (next !== hasValue) {
+        setHasValue(next);
+      }
     }
 
     props.onChangeText?.(text);
   };
 
-  return { value, onChangeText };
+  return {
+    hasValue: isControlled ? !!props.value : hasValue,
+    inputLength,
+    onChangeText,
+  };
 };
 
 const useTextFieldFocus = (
@@ -81,12 +104,12 @@ const useTextFieldFocus = (
 const useTextFieldFlags = (
   props: TextFieldProps,
   isFocused: boolean,
-  value: TextFieldProps['value']
+  hasValue: boolean
 ): TextFieldFlags => {
   const { direction } = useLocale();
 
   const isRTL = direction === 'rtl';
-  const isFloating = isFocused || !!value;
+  const isFloating = isFocused || hasValue;
 
   return {
     isRTL,
@@ -206,7 +229,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const theme = useInternalTheme(themeOverride);
 
-  const { value, onChangeText } = useTextFieldValue(props);
+  const { hasValue, inputLength, onChangeText } = useTextFieldInput(props);
 
   const { isFocused, onFocus, onBlur, focusInput } = useTextFieldFocus(
     props,
@@ -214,7 +237,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     !!props.disabled
   );
 
-  const flags = useTextFieldFlags(props, isFocused, value);
+  const flags = useTextFieldFlags(props, isFocused, hasValue);
 
   useImperativeHandle(ref, () => input.current as TextInput);
 
@@ -248,10 +271,11 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     hasError: flags.hasError,
     hasCounter: flags.hasCounter,
     isDisabled: flags.isDisabled,
-    data: { ...props, value },
+    data: props,
+    inputLength,
   });
 
-  const counterText = `${value?.length ?? 0}/${props.maxLength}`;
+  const counterText = `${inputLength}/${props.maxLength}`;
 
   const renderLeadingAccessory = flags.isRTL
     ? props.endAccessory
@@ -265,7 +289,6 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   return {
     input,
-    value,
     isDisabled: flags.isDisabled,
     isEditable: flags.isEditable,
     hasPrefix: flags.hasPrefix,
