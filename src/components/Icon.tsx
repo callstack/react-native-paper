@@ -130,7 +130,6 @@ const Icon = ({
         {...rest}
         testID={testID}
         source={s}
-        tintColor={color}
         resizeMode="contain"
         style={[
           {
@@ -139,6 +138,7 @@ const Icon = ({
           {
             width: size,
             height: size,
+            tintColor: color,
           },
         ]}
         {...accessibilityProps}

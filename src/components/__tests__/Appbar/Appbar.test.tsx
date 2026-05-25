@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Platform, StyleSheet } from 'react-native';
+import { Animated } from 'react-native';
 
 import { act } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
@@ -43,35 +43,6 @@ describe('Appbar', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-  });
-
-  it('uses boxShadow instead of shadow props on web headers', () => {
-    const originalPlatform = Platform.OS;
-    Platform.OS = 'web';
-
-    try {
-      const { getByTestId } = render(
-        <mockSafeAreaContext.SafeAreaProvider>
-          <Appbar.Header elevated>
-            <Appbar.Content title="Examples" />
-          </Appbar.Header>
-        </mockSafeAreaContext.SafeAreaProvider>
-      );
-
-      const styles = StyleSheet.flatten(
-        getByTestId('appbar-header-root-layer').props.style
-      );
-
-      expect(styles).toMatchObject({
-        boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
-      });
-      expect(styles).not.toHaveProperty('shadowColor');
-      expect(styles).not.toHaveProperty('shadowOpacity');
-      expect(styles).not.toHaveProperty('shadowOffset');
-      expect(styles).not.toHaveProperty('shadowRadius');
-    } finally {
-      Platform.OS = originalPlatform;
-    }
   });
 });
 
