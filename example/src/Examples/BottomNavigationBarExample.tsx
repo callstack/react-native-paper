@@ -29,101 +29,98 @@ function SettingsScreen() {
   );
 }
 
-const BottomNavigationBarExample = Object.assign(
-  createBottomTabNavigator({
-    screenOptions: {
-      headerShown: false,
-    },
-    tabBar: ({ navigation, state, descriptors }) => (
-      <BottomNavigation.Bar
-        navigationState={state}
-        onTabPress={({ route, preventDefault }) => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
+const BottomNavigationBarExample = createBottomTabNavigator({
+  screenOptions: {
+    headerShown: false,
+  },
+  tabBar: ({ navigation, state, descriptors }) => (
+    <BottomNavigation.Bar
+      navigationState={state}
+      onTabPress={({ route, preventDefault }) => {
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: route.key,
+          canPreventDefault: true,
+        });
+
+        if (event.defaultPrevented) {
+          preventDefault();
+        } else {
+          // Custom tab bars must target the tab navigator state.
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
           });
+        }
+      }}
+      renderIcon={({ route, focused, color }) => {
+        const tabBarIcon = descriptors[route.key].options.tabBarIcon;
 
-          if (event.defaultPrevented) {
-            preventDefault();
-          } else {
-            // Custom tab bars must target the tab navigator state.
-            navigation.dispatch({
-              ...CommonActions.navigate(route.name, route.params),
-              target: state.key,
-            });
+        const size = 24;
+        const icon =
+          typeof tabBarIcon === 'function'
+            ? tabBarIcon({ focused, color, size })
+            : tabBarIcon;
+
+        if (icon == null) {
+          return null;
+        }
+
+        if (React.isValidElement(icon)) {
+          return icon;
+        }
+
+        if (typeof icon === 'object' && icon !== null && 'type' in icon) {
+          switch (icon.type) {
+            case 'sfSymbol':
+              return <SFSymbol name={icon.name} size={size} color={color} />;
+            case 'materialSymbol':
+              return (
+                <MaterialSymbol name={icon.name} size={size} color={color} />
+              );
+            case 'image':
+              return (
+                <Image
+                  accessibilityIgnoresInvertColors
+                  source={icon.source}
+                  resizeMode="contain"
+                  fadeDuration={0}
+                  style={{ width: size, height: size, tintColor: color }}
+                />
+              );
           }
-        }}
-        renderIcon={({ route, focused, color }) => {
-          const tabBarIcon = descriptors[route.key].options.tabBarIcon;
+        }
 
-          const size = 24;
-          const icon =
-            typeof tabBarIcon === 'function'
-              ? tabBarIcon({ focused, color, size })
-              : tabBarIcon;
-
-          if (icon == null) {
-            return null;
-          }
-
-          if (React.isValidElement(icon)) {
-            return icon;
-          }
-
-          if (typeof icon === 'object' && icon !== null && 'type' in icon) {
-            switch (icon.type) {
-              case 'sfSymbol':
-                return <SFSymbol name={icon.name} size={size} color={color} />;
-              case 'materialSymbol':
-                return (
-                  <MaterialSymbol name={icon.name} size={size} color={color} />
-                );
-              case 'image':
-                return (
-                  <Image
-                    accessibilityIgnoresInvertColors
-                    source={icon.source}
-                    resizeMode="contain"
-                    fadeDuration={0}
-                    style={{ width: size, height: size, tintColor: color }}
-                  />
-                );
-            }
-          }
-
-          throw new Error(
-            'Tab bar icon is not a valid React element, SFSymbol, MaterialSymbol, or Image.'
-          );
-        }}
-        getLabelText={({ route }) => descriptors[route.key].route.name}
-      />
-    ),
-    screens: {
-      Home: createBottomTabScreen({
-        screen: HomeScreen,
-        options: {
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="home" size={size} color={color} />;
-          },
+        throw new Error(
+          'Tab bar icon is not a valid React element, SFSymbol, MaterialSymbol, or Image.'
+        );
+      }}
+      getLabelText={({ route }) => descriptors[route.key].route.name}
+    />
+  ),
+  screens: {
+    Home: createBottomTabScreen({
+      screen: HomeScreen,
+      options: {
+        tabBarIcon: ({ color, size }) => {
+          return <Icon name="home" size={size} color={color} />;
         },
-      }),
-      Settings: createBottomTabScreen({
-        screen: SettingsScreen,
-        options: {
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="cog" size={size} color={color} />;
-          },
+      },
+    }),
+    Settings: createBottomTabScreen({
+      screen: SettingsScreen,
+      options: {
+        tabBarIcon: ({ color, size }) => {
+          return <Icon name="cog" size={size} color={color} />;
         },
-      }),
-    },
-  }),
-  {
-    title: 'Bottom Navigation Bar',
-  }
-);
+      },
+    }),
+  },
+});
 
-export default BottomNavigationBarExample;
+export default Object.assign(BottomNavigationBarExample, {
+  title: 'Bottom Navigation Bar',
+});
 
 const styles = StyleSheet.create({
   container: {

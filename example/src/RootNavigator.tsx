@@ -49,6 +49,7 @@ const Root = createNativeStackNavigator({
       options: {
         title: 'Examples',
       },
+      linking: '',
     }),
     ...fromEntries(
       (

@@ -35,7 +35,7 @@ const HomeTab = createBottomTabNavigator({
     ),
   },
   screens: {
-    Home: createBottomTabScreen({
+    ThemingHome: createBottomTabScreen({
       screen: HomeScreen,
       options: {
         tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>({
@@ -53,7 +53,7 @@ const HomeTab = createBottomTabNavigator({
         }),
       },
     }),
-    Settings: createBottomTabScreen({
+    ThemingSettings: createBottomTabScreen({
       screen: SettingsScreen,
       options: {
         tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>({

@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: cimg/node:20.19.0
+      - image: cimg/node:22.15.0
     working_directory: ~/react-native-paper
 
 commands:
@@ -20,30 +20,17 @@ jobs:
       - attach_project
       - restore_cache:
           keys:
-            - dependencies-{{ checksum "package.json" }}
+            - dependencies-{{ checksum "yarn.lock" }}
             - dependencies-
-      - restore_cache:
-          keys:
-            - dependencies-example-{{ checksum "example/package.json" }}
-            - dependencies-example-
       - run:
           name: Install dependencies
           command: |
-            sudo corepack enable
-            yarn --cwd example --immutable
-            yarn --cwd docs --immutable
             yarn --immutable
       - save_cache:
-          key: dependencies-{{ checksum "package.json" }}
+          key: dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - save_cache:
-          key: dependencies-docs-{{ checksum "docs/package.json" }}
-          paths:
             - docs/node_modules
-      - save_cache:
-          key: dependencies-example-{{ checksum "example/package.json" }}
-          paths:
             - example/node_modules
       - persist_to_workspace:
           root: .

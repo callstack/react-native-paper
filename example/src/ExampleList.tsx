@@ -139,7 +139,7 @@ export default function ExampleList() {
           onPress={() => {
             // @ts-expect-error TypeScript can't call overloaded functions with union arguments.
             // https://github.com/microsoft/TypeScript/issues/40803
-            navigation.navigate(id);
+            navigation.navigate(item.id);
           }}
         />
       )}
