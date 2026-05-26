@@ -8,6 +8,7 @@ import {
   GestureResponderEvent,
   View,
   ColorValue,
+  MouseEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -21,6 +22,8 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
+
+export type MouseEventType = React.MouseEvent | MouseEvent;
 
 export type Props = PressableProps & {
   borderless?: boolean;
