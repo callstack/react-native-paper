@@ -47,6 +47,11 @@ export type Props = PressableProps & {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
+   * Debounce time in milliseconds to prevent rapid successive presses.
+   * When set, subsequent onPress calls within this time window will be ignored.
+   */
+  debounce?: number;
+  /**
    * Function to execute immediately when a touch is engaged, before `onPressOut` and `onPress`.
    */
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -93,6 +98,7 @@ export type Props = PressableProps & {
  *   <TouchableRipple
  *     onPress={() => console.log('Pressed')}
  *     rippleColor="rgba(0, 0, 0, .32)"
+ *     debounce={300} // Prevent double-clicks within 300ms
  *   >
  *     <Text>Press anywhere</Text>
  *   </TouchableRipple>
@@ -113,6 +119,7 @@ const TouchableRipple = (
     underlayColor: _underlayColor,
     children,
     theme: themeOverrides,
+    debounce,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -126,6 +133,24 @@ const TouchableRipple = (
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+  const lastPressTime = React.useRef<number>(0);
+
+  const debouncedOnPress = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (!onPress) return;
+
+      if (debounce && debounce > 0) {
+        const now = Date.now();
+        if (now - lastPressTime.current < debounce) {
+          return; // Ignore this press as it's within the debounce window
+        }
+        lastPressTime.current = now;
+      }
+
+      onPress(e);
+    },
+    [onPress, debounce]
+  );
 
   const handlePressIn = React.useCallback(
     (e: any) => {
@@ -273,10 +298,11 @@ const TouchableRipple = (
     <Pressable
       {...rest}
       ref={ref}
+      onPress={debouncedOnPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
-      style={(state) => [
+      style={(state: PressableStateCallbackType) => [
         styles.touchable,
         borderless && styles.borderless,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
@@ -286,7 +312,7 @@ const TouchableRipple = (
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {(state) =>
+      {(state: PressableStateCallbackType) =>
         React.Children.only(
           typeof children === 'function' ? children(state) : children
         )
