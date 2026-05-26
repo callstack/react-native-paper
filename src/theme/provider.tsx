@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
@@ -17,9 +18,50 @@ export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
   return useThemeBase<T>(overrides);
 }
 
+// Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
+// and treat sentinels as leaves. Three shapes:
+//   `semantic`        — iOS PlatformColor
+//   `dynamic`         — DynamicColorIOS
+//   `resource_paths`  — Android PlatformColor
+export const isPlatformColorSentinel = (v: unknown): boolean =>
+  !!v &&
+  typeof v === 'object' &&
+  ('resource_paths' in v || 'semantic' in v || 'dynamic' in v);
+
+export const safeMerge = <T,>(base: T, overrides: unknown): T => {
+  if (
+    !base ||
+    !overrides ||
+    typeof base !== 'object' ||
+    typeof overrides !== 'object' ||
+    Array.isArray(base) ||
+    Array.isArray(overrides) ||
+    isPlatformColorSentinel(base) ||
+    isPlatformColorSentinel(overrides)
+  ) {
+    // leaf: override wins, fall back to base
+    return (overrides ?? base) as T;
+  }
+  const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const key of Object.keys(overrides as Record<string, unknown>)) {
+    out[key] = safeMerge(
+      (base as Record<string, unknown>)[key],
+      (overrides as Record<string, unknown>)[key]
+    );
+  }
+  return out as T;
+};
+
+/** Memoize `themeOverrides` at the call site; inline object literals defeat the memo. */
 export const useInternalTheme = (
   themeOverrides: $DeepPartial<Theme> | undefined
-) => useThemeBase<Theme>(themeOverrides);
+): Theme => {
+  const theme = useThemeBase<Theme>();
+  return React.useMemo(
+    () => (themeOverrides ? safeMerge(theme, themeOverrides) : theme),
+    [theme, themeOverrides]
+  );
+};
 
 export const withInternalTheme = <Props extends { theme: Theme }, C>(
   WrappedComponent: ComponentType<Props & { theme: Theme }> & C
