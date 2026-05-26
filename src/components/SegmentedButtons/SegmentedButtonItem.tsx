@@ -20,6 +20,7 @@ import {
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import CrossFadeIcon from '../CrossFadeIcon';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple, {
@@ -36,6 +37,10 @@ export type Props = {
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
+  /**
+   * Whether an icon change is animated.
+   */
+  animated?: boolean;
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for unchecked Text and Icon.
@@ -76,6 +81,10 @@ export type Props = {
    */
   label?: string;
   /**
+   * Label text number of lines of the button.
+   */
+  numberOfLines?: number;
+  /**
    * Button segment.
    */
   segment?: 'first' | 'last';
@@ -112,6 +121,7 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   checked,
+  animated = false,
   accessibilityLabel,
   disabled,
   style,
@@ -124,6 +134,7 @@ const SegmentedButtonItem = ({
   icon,
   testID,
   label,
+  numberOfLines,
   onPress,
   segment,
   density = 'regular',
@@ -209,7 +220,8 @@ const SegmentedButtonItem = ({
       : theme.fonts.labelLarge),
     color: textColor,
   };
-
+  const IconComponent = animated ? CrossFadeIcon : Icon;
+  const NumberOfLines = numberOfLines ? numberOfLines : 1;
   return (
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
@@ -237,14 +249,18 @@ const SegmentedButtonItem = ({
           ) : null}
           {showIcon ? (
             <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon source={icon} size={iconSize} color={textColor} />
+              <IconComponent
+                color={textColor}
+                source={icon ? icon : 'progress-question'}
+                size={iconSize}
+              />
             </Animated.View>
           ) : null}
           <Text
             variant="labelLarge"
             style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={NumberOfLines}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             testID={`${testID}-label`}
           >
