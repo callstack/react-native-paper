@@ -466,10 +466,10 @@ const styles = StyleSheet.create({
   },
   patchContainer: {
     height: 24,
-    zIndex: 2,
+    zIndex: 0,
   },
   densePatchContainer: {
     height: 22,
-    zIndex: 2,
+    zIndex: 0,
   },
 });
