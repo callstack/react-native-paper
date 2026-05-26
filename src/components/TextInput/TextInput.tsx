@@ -482,6 +482,21 @@ const TextInput = forwardRef<TextInputHandles, Props>(
 
     const scaledLabel = !!(value || focused);
 
+    const defaultLineHeight = 24;
+
+    const lineHeight =
+      // MD3 fonts use `bodyLarge`
+      (theme.fonts as any)?.bodyLarge?.lineHeight ??
+      // MD2 fonts use `regular` (no lineHeight, so rely on size * 1.3)
+      ((theme.fonts as any)?.regular?.lineHeight ||
+        (theme.fonts as any)?.regular?.fontSize * 1.3) ??
+      defaultLineHeight;
+
+    const autoHeight =
+      multiline && rest.numberOfLines
+        ? rest.numberOfLines * lineHeight + 8 // + padding
+        : undefined;
+
     if (mode === 'outlined') {
       return (
         <TextInputOutlined
@@ -519,7 +534,10 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
-          contentStyle={contentStyle}
+          contentStyle={[
+            contentStyle,
+            autoHeight ? { minHeight: autoHeight } : undefined,
+          ].filter(Boolean)}
           scaledLabel={scaledLabel}
         />
       );
@@ -561,7 +579,10 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        contentStyle={contentStyle}
+        contentStyle={[
+          contentStyle,
+          autoHeight ? { minHeight: autoHeight } : undefined,
+        ].filter(Boolean)}
         scaledLabel={scaledLabel}
       />
     );
