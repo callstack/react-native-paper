@@ -12,6 +12,7 @@ import {
 import color from 'color';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
+import type { ToggleButtonContextType } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -20,7 +21,7 @@ import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
-export type Props = {
+export type Props<Value = string> = {
   /**
    * Icon to display for the `ToggleButton`.
    */
@@ -48,11 +49,11 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value?: GestureResponderEvent | string) => void;
+  onPress?: (value?: GestureResponderEvent | Value) => void;
   /**
    * Value of button.
    */
-  value?: string;
+  value?: Value;
   /**
    * Status of button.
    */
@@ -68,6 +69,12 @@ export type Props = {
    */
   testID?: string;
 };
+
+// React.forwardRef doesn't preserve generic type parameters, causing type inference issues
+// Define a generic function type to maintain proper TypeScript typing for <Value>
+type ToggleButtonComponent = <Value = string>(
+  props: Props<Value> & { ref?: React.Ref<View> }
+) => React.ReactElement;
 
 /**
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
@@ -99,8 +106,9 @@ export type Props = {
  *
  * ```
  */
-const ToggleButton = forwardRef<View, Props>(
-  (
+
+const ToggleButton = forwardRef(
+  <Value = string,>(
     {
       icon,
       size,
@@ -113,18 +121,16 @@ const ToggleButton = forwardRef<View, Props>(
       onPress,
       rippleColor,
       ...rest
-    }: Props,
-    ref
+    }: Props<Value>,
+    ref: React.ForwardedRef<View>
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const borderRadius = theme.roundness;
 
     return (
       <ToggleButtonGroupContext.Consumer>
-        {(
-          context: { value: string | null; onValueChange: Function } | null
-        ) => {
-          const checked: boolean | null =
+        {(context: ToggleButtonContextType<Value> | null) => {
+          const checked: boolean =
             (context && context.value === value) || status === 'checked';
 
           const backgroundColor = getToggleButtonColor({ theme, checked });
@@ -139,13 +145,13 @@ const ToggleButton = forwardRef<View, Props>(
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={(e?: GestureResponderEvent | string) => {
+              onPress={(e?: GestureResponderEvent) => {
                 if (onPress) {
                   onPress(e);
                 }
 
                 if (context) {
-                  context.onValueChange(!checked ? value : null);
+                  context.onValueChange(!checked ? value ?? null : null);
                 }
               }}
               size={size}
@@ -171,7 +177,7 @@ const ToggleButton = forwardRef<View, Props>(
       </ToggleButtonGroupContext.Consumer>
     );
   }
-);
+) as ToggleButtonComponent;
 
 const styles = StyleSheet.create({
   content: {
