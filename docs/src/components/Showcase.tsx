@@ -82,6 +82,12 @@ const data: Data[] = [
     ios: 'https://apps.apple.com/us/app/race-calendar/id1481539104',
   },
   {
+    color: '#2D2A5C',
+    name: 'rou',
+    image: '/react-native-paper/showcase/rou.jpg',
+    android: 'https://play.google.com/store/apps/details?id=com.rou',
+  },
+  {
     color: '#4439A1',
     name: 'Unicore',
     image: '/react-native-paper/showcase/unicore.png',
