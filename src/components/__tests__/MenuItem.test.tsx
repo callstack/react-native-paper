@@ -6,7 +6,7 @@ import { tokens } from '../../theme/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('Menu Item', () => {
   it('renders menu item', () => {

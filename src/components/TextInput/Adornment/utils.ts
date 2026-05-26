@@ -1,9 +1,10 @@
 import type { ColorValue } from 'react-native';
 
 import { tokens } from '../../../theme/tokens';
+import { getStateLayer } from '../../../theme/utils/state';
 import type { InternalTheme } from '../../../types';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -11,10 +12,11 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled }: BaseProps) {
-  return {
-    color: theme.colors.onSurfaceVariant,
-    opacity: disabled ? stateOpacity.disabled : stateOpacity.enabled,
-  };
+  return getStateLayer(
+    theme,
+    'onSurfaceVariant',
+    disabled ? 'disabled' : 'enabled'
+  );
 }
 
 export function getIconColor({
