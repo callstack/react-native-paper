@@ -29,6 +29,7 @@ import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
+import ModalExample from './Examples/ModalExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -79,6 +80,7 @@ export const mainExamples: Record<
   listSection: ListSectionExample,
   listItem: ListItemExample,
   menu: MenuExample,
+  modalExample: ModalExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
