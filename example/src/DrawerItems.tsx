@@ -1,15 +1,8 @@
 import * as React from 'react';
-import {
-  ColorValue,
-  I18nManager,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { ColorValue, Platform, StyleSheet, View } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Button,
@@ -124,16 +117,12 @@ function DrawerItems() {
   } = preferences;
 
   const _handleToggleRTL = () => {
-    if (expoGoExecution) {
+    if (!isWeb && expoGoExecution) {
       setShowRTLDialog(true);
       return;
     }
 
     toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
-      Updates.reloadAsync();
-    }
   };
 
   const _handleDismissRTLDialog = () => {
@@ -206,16 +195,14 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            {!isWeb && (
-              <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, styles.v3Preference]}>
-                  <Text variant="labelLarge">RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={isRTL} />
-                  </View>
+            <TouchableRipple onPress={_handleToggleRTL}>
+              <View style={[styles.preference, styles.v3Preference]}>
+                <Text variant="labelLarge">RTL</Text>
+                <View pointerEvents="none">
+                  <Switch value={isRTL} />
                 </View>
-              </TouchableRipple>
-            )}
+              </View>
+            </TouchableRipple>
 
             <TouchableRipple onPress={toggleCollapsed}>
               <View style={[styles.preference, styles.v3Preference]}>

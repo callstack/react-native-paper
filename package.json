@@ -61,7 +61,7 @@
     "@react-native-vector-icons/material-design-icons": "^12.0.0",
     "@react-native/babel-preset": "^0.85.3",
     "@react-native/jest-preset": "^0.85.3",
-    "@react-navigation/native": "^8.0.0-alpha.25",
+    "@react-navigation/native": "^8.0.0-alpha.28",
     "@release-it/conventional-changelog": "^1.1.0",
     "@testing-library/jest-native": "^5.4.1",
     "@testing-library/react-native": "11.5.0",
