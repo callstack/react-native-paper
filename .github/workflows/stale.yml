@@ -5,7 +5,6 @@ on:
     - cron: '30 1 * * *'
 
 permissions:
-  contents: read
   issues: write
   pull-requests: write
 
@@ -13,7 +12,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639 # v9
+      - uses: actions/stale@eb5cf3af3ac0a1aa4c9c45633dd1ae542a27a899 # v10.3.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 30
