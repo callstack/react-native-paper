@@ -44,6 +44,7 @@ export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
+export { default as OTPInput } from './components/OTPInput/OTPInput';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
