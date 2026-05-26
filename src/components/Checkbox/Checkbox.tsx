@@ -5,6 +5,7 @@ import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import type { IconSource } from '../Icon';
 
 export type Props = {
   /**
@@ -35,6 +36,10 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * custom icon.
+   */
+  icon?: IconSource;
 };
 
 /**
