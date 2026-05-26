@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
 import {
   Animated,
   I18nManager,
@@ -103,6 +102,6 @@ const styles = StyleSheet.create({
 });
 
 export const customAnimatedText = <T,>() =>
-  AnimatedText as (props: Props<T>) => ReactNode;
+  AnimatedText as (props: Props<T>) => React.ReactElement | null;
 
 export default AnimatedText;
