@@ -257,7 +257,7 @@ const FAB = forwardRef<View, Props>(
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
     const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
-    const extendedStyle = getExtendedFabStyle({ customSize, theme });
+    const extendedStyle = getExtendedFabStyle({ customSize, size, theme });
     const textStyle = {
       color: foregroundColor,
       ...font,
