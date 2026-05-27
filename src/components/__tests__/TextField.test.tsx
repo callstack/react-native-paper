@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { I18nManager, StyleSheet, TextInput, View } from 'react-native';
 
-import { fireEvent, render } from '../../test-utils';
+import { act, fireEvent, render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextField from '../TextField';
-import type { TextFieldRenderProps } from '../TextField/TextField';
+import type {
+  TextFieldRenderProps,
+  TextFieldHandles,
+} from '../TextField/TextField';
 import type { TextFieldAccessoryProps } from '../TextField/TextFieldIcon';
 
 const { stateOpacity } = tokens.md.ref;
@@ -592,7 +595,7 @@ it('focuses the TextInput when read-only and the Pressable is pressed', () => {
 });
 
 it('exposes the TextInput instance via ref prop', () => {
-  const ref = React.createRef<TextInput>();
+  const ref = React.createRef<TextFieldHandles>();
 
   render(
     <TextField
@@ -606,6 +609,11 @@ it('exposes the TextInput instance via ref prop', () => {
 
   expect(ref.current).toBeTruthy();
   expect(typeof ref.current?.focus).toBe('function');
+  expect(typeof ref.current?.clear).toBe('function');
+  expect(typeof ref.current?.blur).toBe('function');
+  expect(typeof ref.current?.isFocused).toBe('function');
+  expect(typeof ref.current?.setNativeProps).toBe('function');
+  expect(typeof ref.current?.setSelection).toBe('function');
 });
 
 it('passes error, disabled, and multiline to accessories', () => {
@@ -1144,4 +1152,118 @@ it('updates the character counter for an uncontrolled field with counter enabled
 
   expect(onChangeText).toHaveBeenCalledWith('abcd');
   expect(getByText('4/10')).toBeTruthy();
+});
+
+it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', () => {
+  const ref = React.createRef<TextFieldHandles>();
+  const { getByText, queryByText } = render(
+    <TextField
+      ref={ref}
+      label="Amount"
+      defaultValue="100"
+      prefix="$"
+      suffix="/100"
+      counter
+      maxLength={200}
+    />
+  );
+
+  expect(getByText('3/200')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
+
+  act(() => {
+    ref.current?.clear();
+  });
+
+  expect(getByText('0/200')).toBeTruthy();
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
+});
+
+it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', () => {
+  const ref = React.createRef<TextFieldHandles>();
+  const { getByTestId, getByText } = render(
+    <TextField
+      ref={ref}
+      label="Amount"
+      defaultValue="50"
+      prefix="$"
+      suffix=" kg"
+      counter
+      maxLength={100}
+      testID="tf-clear-focused"
+    />
+  );
+
+  expect(getByText('2/100')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
+
+  fireEvent(getByTestId('tf-clear-focused'), 'focus');
+
+  act(() => {
+    ref.current?.clear();
+  });
+
+  expect(getByText('0/100')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
+});
+
+it('notifies the parent via onChangeText when clear() is called on a controlled field', () => {
+  const ref = React.createRef<TextFieldHandles>();
+  const onChangeText = jest.fn();
+  const { getByTestId } = render(
+    <TextField
+      ref={ref}
+      label="Email"
+      value="test@example.com"
+      onChangeText={onChangeText}
+      testID="tf-controlled"
+    />
+  );
+
+  const input = getByTestId('tf-controlled');
+  expect(input.props.value).toBe('test@example.com');
+
+  act(() => {
+    ref.current?.clear();
+  });
+
+  expect(onChangeText).toHaveBeenCalledWith('');
+  expect(onChangeText).toHaveBeenCalledTimes(1);
+});
+
+it('hides prefix/suffix when blurring after clear() was called while focused', () => {
+  const ref = React.createRef<TextFieldHandles>();
+  const { getByTestId, getByText, queryByText } = render(
+    <TextField
+      ref={ref}
+      label="Amount"
+      defaultValue="100"
+      prefix="$"
+      suffix="/100"
+      testID="tf-clear-then-blur"
+    />
+  );
+
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
+
+  fireEvent(getByTestId('tf-clear-then-blur'), 'focus');
+
+  act(() => {
+    ref.current?.clear();
+  });
+
+  // While focused, prefix/suffix stay visible
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
+
+  fireEvent(getByTestId('tf-clear-then-blur'), 'blur');
+
+  // After blur with no text, prefix/suffix should be hidden
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
 });

@@ -7,9 +7,22 @@ import {
 } from 'react';
 import { BlurEvent, FocusEvent, TextInput } from 'react-native';
 
+import {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
+import {
+  ACTIVE_LABEL_FONT_SIZE,
+  INACTIVE_LABEL_FONT_SIZE,
+  TIMING_CONFIG,
+} from './constants';
 import type {
   TextFieldAnimationState,
   TextFieldFlags,
+  TextFieldAnimationHandlers,
   TextFieldHookReturn,
   TextFieldLayoutState,
   TextFieldProps,
@@ -20,11 +33,93 @@ import {
   getAccessibilityData,
   getFilledTextFieldData,
   getOutlinedTextFieldData,
-  getTextFieldAnimation,
+  getTextFieldAnimationLayout,
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+
+const useTextFieldAnimation = ({
+  variant,
+  isRTL,
+  hasAccessory,
+  value,
+  defaultValue,
+}: {
+  variant: TextFieldVariant;
+  isRTL: boolean;
+  hasAccessory: boolean;
+  value: string | undefined;
+  defaultValue: string | undefined;
+}): TextFieldAnimationState & TextFieldAnimationHandlers => {
+  const initialText = value ?? defaultValue ?? '';
+
+  const focusSV = useSharedValue(0);
+  const floatSV = useSharedValue(initialText.length > 0 ? 1 : 0);
+
+  const { activeTop, inactiveTop, translateXEnd } = getTextFieldAnimationLayout(
+    {
+      variant,
+      hasAccessory,
+      isRTL,
+    }
+  );
+
+  const runFocusAnimation = (hasText: boolean) => {
+    focusSV.value = withTiming(1, TIMING_CONFIG);
+
+    if (!hasText) {
+      floatSV.value = withTiming(1, TIMING_CONFIG);
+    }
+  };
+
+  const runBlurAnimation = (hasText: boolean) => {
+    focusSV.value = withTiming(0, TIMING_CONFIG);
+
+    floatSV.value = withTiming(hasText ? 1 : 0, TIMING_CONFIG);
+  };
+
+  const animatedLabelWrapperStyle = useAnimatedStyle(() => {
+    const top = interpolate(floatSV.value, [0, 1], [inactiveTop, activeTop]);
+
+    if (variant === 'filled') {
+      return { top };
+    }
+
+    return {
+      top,
+      transform: [
+        { translateX: interpolate(floatSV.value, [0, 1], [0, translateXEnd]) },
+      ],
+    };
+  });
+
+  const animatedLabelTextStyle = useAnimatedStyle(() => ({
+    fontSize: interpolate(
+      floatSV.value,
+      [0, 1],
+      [INACTIVE_LABEL_FONT_SIZE, ACTIVE_LABEL_FONT_SIZE]
+    ),
+  }));
+
+  const animatedContainerStyle = useAnimatedStyle(() => ({
+    opacity: floatSV.value,
+  }));
+
+  const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
+    transform: [{ scaleX: focusSV.value }],
+  }));
+
+  return {
+    animatedLabelWrapperStyle,
+    animatedLabelTextStyle,
+    animatedContainerStyle,
+    animatedActiveOutlineStyle:
+      variant === 'filled' ? animatedActiveOutlineStyle : undefined,
+    runFocusAnimation,
+    runBlurAnimation,
+  };
+};
 
 const useTextFieldInput = (
   props: Pick<
@@ -37,6 +132,8 @@ const useTextFieldInput = (
 
   const initialText = isControlled ? props.value : props.defaultValue;
 
+  const ref = useRef(initialText ?? '');
+
   const [hasValue, setHasValue] = useState(!!initialText);
   const [charCount, setCharCount] = useState(initialText?.length ?? 0);
 
@@ -48,7 +145,17 @@ const useTextFieldInput = (
     ? 1
     : 0;
 
+  const getHasText = () => {
+    if (isControlled) {
+      return !!props.value;
+    }
+
+    return ref.current.length > 0;
+  };
+
   const onChangeText = (text: string) => {
+    ref.current = text;
+
     if (!isControlled) {
       const next = text.length > 0;
 
@@ -67,6 +174,7 @@ const useTextFieldInput = (
   return {
     hasValue: isControlled ? !!props.value : hasValue,
     inputLength,
+    getHasText,
     onChangeText,
   };
 };
@@ -74,22 +182,31 @@ const useTextFieldInput = (
 const useTextFieldFocus = (
   props: Pick<TextFieldProps, 'onFocus' | 'onBlur'>,
   input: RefObject<TextInput | null>,
-  isDisabled: boolean
+  isDisabled: boolean,
+  { runFocusAnimation, runBlurAnimation }: TextFieldAnimationHandlers,
+  getHasText: () => boolean
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const onFocus = (e: FocusEvent) => {
     props.onFocus?.(e);
+
     setIsFocused(true);
+
+    runFocusAnimation(getHasText());
   };
 
   const onBlur = (e: BlurEvent) => {
     props.onBlur?.(e);
+
     setIsFocused(false);
+
+    runBlurAnimation(getHasText());
   };
 
   const focusInput = () => {
     if (isDisabled) return;
+
     input.current?.focus();
   };
 
@@ -104,11 +221,10 @@ const useTextFieldFocus = (
 const useTextFieldFlags = (
   props: TextFieldProps,
   isFocused: boolean,
-  hasValue: boolean
+  hasValue: boolean,
+  isRTL: boolean,
+  hasAccessory: boolean
 ): TextFieldFlags => {
-  const { direction } = useLocale();
-
-  const isRTL = direction === 'rtl';
   const isFloating = isFocused || hasValue;
 
   return {
@@ -118,7 +234,7 @@ const useTextFieldFlags = (
     isEditable: props.disabled ? false : props.editable,
     hasError: !!props.error,
     hasCounter: !!(props.counter && props.maxLength),
-    hasAccessory: isRTL ? !!props.endAccessory : !!props.startAccessory,
+    hasAccessory,
     hasPrefix: !!props.prefix && isFloating,
     hasSuffix: !!props.suffix && isFloating,
   };
@@ -141,8 +257,7 @@ const useTextFieldLayout = ({
   isFocused: boolean;
   animation: TextFieldAnimationState;
 }): TextFieldLayoutState => {
-  const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix, isFloating } =
-    flags;
+  const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix } = flags;
 
   const { multiline } = props;
 
@@ -204,14 +319,14 @@ const useTextFieldLayout = ({
     /**
      * `input` is a stable ref. `props` is omitted — only `multiline` affects layout.
      * `style` is omitted — assumed stable; dynamic `style` changes won't invalidate layout.
-     * `isFloating` + `isFocused` cover all animation inputs (replacing individual style objects).
+     * Animated styles are stable `useAnimatedStyle` objects and are omitted from deps.
+     * `isFocused` drives static focus styles (label color, outline border).
      */
     // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment
     [
       variant,
       theme,
       isFocused,
-      isFloating,
       isRTL,
       isDisabled,
       hasAccessory,
@@ -229,17 +344,55 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const theme = useInternalTheme(themeOverride);
 
-  const { hasValue, inputLength, onChangeText } = useTextFieldInput(props);
+  const { direction } = useLocale();
+
+  const isRTL = direction === 'rtl';
+  const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
+
+  const { hasValue, inputLength, getHasText, onChangeText } =
+    useTextFieldInput(props);
+
+  const animation = useTextFieldAnimation({
+    variant,
+    isRTL,
+    hasAccessory,
+    value: props.value,
+    defaultValue: props.defaultValue,
+  });
 
   const { isFocused, onFocus, onBlur, focusInput } = useTextFieldFocus(
     props,
     input,
-    !!props.disabled
+    !!props.disabled,
+    animation,
+    getHasText
   );
 
-  const flags = useTextFieldFlags(props, isFocused, hasValue);
+  const flags = useTextFieldFlags(
+    props,
+    isFocused,
+    hasValue,
+    isRTL,
+    hasAccessory
+  );
 
-  useImperativeHandle(ref, () => input.current as TextInput);
+  useImperativeHandle(ref, () => ({
+    focus: () => input.current?.focus(),
+    clear: () => {
+      input.current?.clear();
+
+      onChangeText('');
+
+      if (!input.current?.isFocused()) {
+        animation.runBlurAnimation(false);
+      }
+    },
+    blur: () => input.current?.blur(),
+    isFocused: () => input.current?.isFocused() || false,
+    setNativeProps: (args: Object) => input.current?.setNativeProps(args),
+    setSelection: (start: number, end: number) =>
+      input.current?.setSelection(start, end),
+  }));
 
   const { selectionColor, cursorColor } = getAccentColors({
     theme,
@@ -248,14 +401,6 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
 
   const placeholderTextColor =
     props.placeholderTextColor ?? theme.colors.onSurfaceVariant;
-
-  const animation = getTextFieldAnimation({
-    variant,
-    isFloating: flags.isFloating,
-    isFocused,
-    isRTL: flags.isRTL,
-    hasAccessory: flags.hasAccessory,
-  });
 
   const layout = useTextFieldLayout({
     variant,

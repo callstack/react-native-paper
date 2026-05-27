@@ -1,7 +1,9 @@
 import { PixelRatio } from 'react-native';
 
+import { Easing } from 'react-native-reanimated';
+
 import { tokens } from '../../theme/tokens';
-import { motionDuration } from '../../theme/tokens/sys/motion';
+import { motionDuration, motionEasing } from '../../theme/tokens/sys/motion';
 import { defaultShapes } from '../../theme/tokens/sys/shape';
 
 export const fontScale = PixelRatio.getFontScale();
@@ -48,6 +50,11 @@ export const ANIMATION_DURATION_MS = motionDuration.short3;
 
 export const ACTIVE_INDICATOR_SIZE = 2;
 export const INACTIVE_INDICATOR_SIZE = 1;
+
+export const TIMING_CONFIG = {
+  duration: ANIMATION_DURATION_MS,
+  easing: Easing.bezier(...motionEasing.standard),
+} as const;
 
 /**
  * Constants for the filled variant.

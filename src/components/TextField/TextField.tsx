@@ -20,8 +20,19 @@ import { useTextField } from './hooks';
 import { styles } from './styles';
 import TextFieldErrorIcon from './TextFieldErrorIcon';
 import type { TextFieldAccessoryProps } from './TextFieldIcon';
-import { getTextFieldAnimation } from './utils';
 import type { InternalTheme, ThemeProp } from '../../types';
+
+export type TextFieldAnimationState = {
+  animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
+  animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+};
+
+export type TextFieldAnimationHandlers = {
+  runFocusAnimation: (hasText: boolean) => void;
+  runBlurAnimation: (hasText: boolean) => void;
+};
 
 export type TextFieldFlags = {
   isRTL: boolean;
@@ -40,8 +51,6 @@ export type TextFieldColors = {
   cursorColor: ColorValue;
   placeholderTextColor: ColorValue;
 };
-
-export type TextFieldAnimationState = ReturnType<typeof getTextFieldAnimation>;
 
 export type GetAccessibilityDataReturn = {
   input: AccessibilityProps;
@@ -160,11 +169,17 @@ export type TextFieldRenderProps = React.ComponentPropsWithRef<
   typeof TextInput
 >;
 
+export type TextFieldHandles = Pick<
+  TextInput,
+  'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps' | 'setSelection'
+>;
+
 export type TextFieldProps = TextInputProps & {
   /**
-   * Ref forwarded to the underlying TextInput.
+   * Imperative handle exposing a subset of TextInput methods
+   * with side-effect handling (e.g. `clear()` syncs internal state and animations).
    */
-  ref?: React.Ref<TextInput>;
+  ref?: React.Ref<TextFieldHandles>;
   /**
    * - `filled` text fields are often used in dialogs and short forms where their style draws more attention.
    * - `outlined` text fields are often used in long forms where their reduced emphasis helps simplify the layout.

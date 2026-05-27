@@ -4,19 +4,16 @@ import { AnimatedStyle } from 'react-native-reanimated';
 
 import {
   ACTIVE_INDICATOR_SIZE,
-  ACTIVE_LABEL_FONT_SIZE,
-  ANIMATION_DURATION_MS,
   FILLED_ACTIVE_LABEL_TOP_POSITION,
+  FILLED_INACTIVE_LABEL_TOP_POSITION,
   FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
   FILLED_MULTILINE_PADDING_TOP,
   INACTIVE_INDICATOR_SIZE,
-  INACTIVE_LABEL_FONT_SIZE,
-  FILLED_INACTIVE_LABEL_TOP_POSITION,
-  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
   INPUT_FONT_SIZE,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   OUTLINED_ACTIVE_LABEL_TOP_POSITION,
   OUTLINED_DISABLED_OUTLINE_OPACITY,
+  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
   OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
   OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
   OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY,
@@ -32,11 +29,40 @@ import type {
   OutlinedTextFieldHookData,
   TextFieldProps,
   TextFieldSharedApi,
+  TextFieldVariant,
   SharedTextFieldStyleData,
   GetAccessibilityDataProps,
   GetAccessibilityDataReturn,
 } from './TextField';
 import type { InternalTheme } from '../../types';
+
+export const getTextFieldAnimationLayout = ({
+  variant,
+  hasAccessory,
+  isRTL,
+}: {
+  variant: TextFieldVariant;
+  hasAccessory: boolean;
+  isRTL: boolean;
+}) => {
+  const activeTop =
+    variant === 'filled'
+      ? FILLED_ACTIVE_LABEL_TOP_POSITION
+      : OUTLINED_ACTIVE_LABEL_TOP_POSITION;
+
+  const inactiveTop =
+    variant === 'filled'
+      ? FILLED_INACTIVE_LABEL_TOP_POSITION
+      : OUTLINED_INACTIVE_LABEL_TOP_POSITION;
+
+  const distance = hasAccessory
+    ? OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY
+    : OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY;
+
+  const translateXEnd = (isRTL ? 1 : -1) * distance;
+
+  return { activeTop, inactiveTop, translateXEnd };
+};
 
 export const getAccentColors = ({
   theme,
@@ -271,88 +297,6 @@ export const getSharedTextFieldStyleData = (
     suffixStyles,
     leadingAccessoryStyles,
     trailingAccessoryStyles,
-  };
-};
-
-export const getTextFieldAnimation = ({
-  variant,
-  isFloating,
-  isFocused,
-  isRTL,
-  hasAccessory,
-}: {
-  variant: 'filled' | 'outlined';
-  isFloating: boolean;
-  isFocused: boolean;
-  isRTL: boolean;
-  hasAccessory: boolean;
-}): {
-  animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
-  animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
-  animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
-  animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
-} => {
-  const activeTop =
-    variant === 'filled'
-      ? FILLED_ACTIVE_LABEL_TOP_POSITION
-      : OUTLINED_ACTIVE_LABEL_TOP_POSITION;
-
-  const inactiveTop =
-    variant === 'filled'
-      ? FILLED_INACTIVE_LABEL_TOP_POSITION
-      : OUTLINED_INACTIVE_LABEL_TOP_POSITION;
-
-  const top = isFloating ? activeTop : inactiveTop;
-  const fontSize = isFloating
-    ? ACTIVE_LABEL_FONT_SIZE
-    : INACTIVE_LABEL_FONT_SIZE;
-
-  const animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>> =
-    {
-      opacity: isFloating ? 1 : 0,
-      transitionProperty: 'opacity',
-      transitionDuration: ANIMATION_DURATION_MS,
-    };
-
-  if (variant === 'filled') {
-    return {
-      animatedLabelWrapperStyle: {
-        top,
-        transitionProperty: 'top',
-        transitionDuration: ANIMATION_DURATION_MS,
-      },
-      animatedLabelTextStyle: {
-        fontSize,
-        transitionProperty: 'fontSize',
-        transitionDuration: ANIMATION_DURATION_MS,
-      },
-      animatedActiveOutlineStyle: {
-        transform: [{ scaleX: isFocused ? 1 : 0 }],
-        transitionProperty: 'transform',
-        transitionDuration: ANIMATION_DURATION_MS,
-      },
-      animatedContainerStyle,
-    };
-  }
-
-  const distance = hasAccessory
-    ? OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY
-    : OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY;
-  const translateXEnd = (isRTL ? 1 : -1) * distance;
-
-  return {
-    animatedLabelWrapperStyle: {
-      top,
-      transform: [{ translateX: isFloating ? translateXEnd : 0 }],
-      transitionProperty: ['top', 'transform'],
-      transitionDuration: ANIMATION_DURATION_MS,
-    },
-    animatedLabelTextStyle: {
-      fontSize,
-      transitionProperty: 'fontSize',
-      transitionDuration: ANIMATION_DURATION_MS,
-    },
-    animatedContainerStyle,
   };
 };
 

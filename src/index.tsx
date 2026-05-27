@@ -136,6 +136,7 @@ export type {
   TextFieldProps,
   TextFieldRenderProps,
   TextFieldVariant,
+  TextFieldHandles,
 } from './components/TextField/TextField';
 export type {
   TextFieldAccessoryProps,

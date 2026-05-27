@@ -78,7 +78,13 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "transform": [
+              {
+                "scaleX": 0,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -95,15 +101,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             "height": 2,
           },
           false,
-          {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": "transform",
-          },
         ]
       }
       style={
@@ -140,7 +137,9 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": 16,
+          },
         }
       }
       jestInlineStyle={
@@ -151,11 +150,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
           },
           {
             "left": 52,
-          },
-          {
-            "top": 16,
-            "transitionDuration": 150,
-            "transitionProperty": "top",
           },
         ]
       }
@@ -183,7 +177,9 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -196,11 +192,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             },
             {
               "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -390,7 +381,9 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -404,11 +397,6 @@ exports[`renders filled TextField with TextField.Icon accessories 1`] = `
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
@@ -709,7 +697,13 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "transform": [
+              {
+                "scaleX": 0,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -726,15 +720,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             "height": 2,
           },
           false,
-          {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": "transform",
-          },
         ]
       }
       style={
@@ -771,7 +756,9 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": 16,
+          },
         }
       }
       jestInlineStyle={
@@ -782,11 +769,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
           },
           {
             "left": 52,
-          },
-          {
-            "top": 16,
-            "transitionDuration": 150,
-            "transitionProperty": "top",
           },
         ]
       }
@@ -814,7 +796,9 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -827,11 +811,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             },
             {
               "color": "rgba(179, 38, 30, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -1021,7 +1000,9 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -1035,11 +1016,6 @@ exports[`renders filled TextField with TextField.Icon accessories when error is 
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
@@ -1340,7 +1316,13 @@ exports[`renders filled TextField with label and value 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "transform": [
+              {
+                "scaleX": 0,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -1357,15 +1339,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "height": 2,
           },
           false,
-          {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": "transform",
-          },
         ]
       }
       style={
@@ -1402,7 +1375,9 @@ exports[`renders filled TextField with label and value 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": 16,
+          },
         }
       }
       jestInlineStyle={
@@ -1413,11 +1388,6 @@ exports[`renders filled TextField with label and value 1`] = `
           },
           {
             "left": 16,
-          },
-          {
-            "top": 16,
-            "transitionDuration": 150,
-            "transitionProperty": "top",
           },
         ]
       }
@@ -1445,7 +1415,9 @@ exports[`renders filled TextField with label and value 1`] = `
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -1458,11 +1430,6 @@ exports[`renders filled TextField with label and value 1`] = `
             },
             {
               "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -1497,7 +1464,9 @@ exports[`renders filled TextField with label and value 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -1511,11 +1480,6 @@ exports[`renders filled TextField with label and value 1`] = `
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
@@ -1661,7 +1625,14 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": -12,
+            "transform": [
+              {
+                "translateX": -36,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -1674,19 +1645,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
             "left": 48,
-          },
-          {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -36,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": [
-              "top",
-              "transform",
-            ],
           },
         ]
       }
@@ -1721,7 +1679,9 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -1734,11 +1694,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             },
             {
               "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -1928,7 +1883,9 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -1942,11 +1899,6 @@ exports[`renders outlined TextField with TextField.Icon accessories 1`] = `
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
@@ -2247,7 +2199,14 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": -12,
+            "transform": [
+              {
+                "translateX": -36,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -2260,19 +2219,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
             "left": 48,
-          },
-          {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -36,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": [
-              "top",
-              "transform",
-            ],
           },
         ]
       }
@@ -2307,7 +2253,9 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -2320,11 +2268,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             },
             {
               "color": "rgba(179, 38, 30, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -2514,7 +2457,9 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -2528,11 +2473,6 @@ exports[`renders outlined TextField with TextField.Icon accessories when error i
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
@@ -2833,7 +2773,14 @@ exports[`renders outlined TextField with label and value 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "top": -12,
+            "transform": [
+              {
+                "translateX": -4,
+              },
+            ],
+          },
         }
       }
       jestInlineStyle={
@@ -2846,19 +2793,6 @@ exports[`renders outlined TextField with label and value 1`] = `
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
             "left": 16,
-          },
-          {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -4,
-              },
-            ],
-            "transitionDuration": 150,
-            "transitionProperty": [
-              "top",
-              "transform",
-            ],
           },
         ]
       }
@@ -2893,7 +2827,9 @@ exports[`renders outlined TextField with label and value 1`] = `
         }
         jestAnimatedStyle={
           {
-            "value": {},
+            "value": {
+              "fontSize": 12,
+            },
           }
         }
         jestInlineStyle={
@@ -2906,11 +2842,6 @@ exports[`renders outlined TextField with label and value 1`] = `
             },
             {
               "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-              "transitionDuration": 150,
-              "transitionProperty": "fontSize",
             },
             false,
           ]
@@ -2945,7 +2876,9 @@ exports[`renders outlined TextField with label and value 1`] = `
       }
       jestAnimatedStyle={
         {
-          "value": {},
+          "value": {
+            "opacity": 1,
+          },
         }
       }
       jestInlineStyle={
@@ -2959,11 +2892,6 @@ exports[`renders outlined TextField with label and value 1`] = `
             },
             false,
           ],
-          {
-            "opacity": 1,
-            "transitionDuration": 150,
-            "transitionProperty": "opacity",
-          },
         ]
       }
       style={
