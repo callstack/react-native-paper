@@ -126,7 +126,6 @@ const config = {
             AnimatedFAB: 'FAB/AnimatedFAB',
             FABGroup: 'FAB/FABGroup',
           },
-          HelperText: { HelperText: 'HelperText/HelperText' },
           IconButton: {
             IconButton: 'IconButton/IconButton',
           },
@@ -167,12 +166,7 @@ const config = {
           },
           TextInput: {
             TextInput: 'TextInput/TextInput',
-            TextInputAffix: 'TextInput/Adornment/TextInputAffix',
-            TextInputIcon: 'TextInput/Adornment/TextInputIcon',
-          },
-          TextField: {
-            TextField: 'TextField/TextField',
-            TextFieldIcon: 'TextField/TextFieldIcon',
+            TextInputIcon: 'TextInput/TextInputIcon',
           },
           ToggleButton: {
             ToggleButton: 'ToggleButton/ToggleButton',
@@ -210,11 +204,8 @@ const config = {
             }
 
             const customUrls = {
-              TextInputAffix:
-                'src/components/TextInput/Adornment/TextInputAffix.tsx',
-              TextInputIcon:
-                'src/components/TextInput/Adornment/TextInputIcon.tsx',
-              TextField: 'src/components/TextField/TextField.tsx',
+              TextInput: 'src/components/TextInput/TextInput.tsx',
+              TextInputIcon: 'src/components/TextInput/TextInputIcon.tsx',
 
               Text: 'src/components/Typography/Text.tsx',
               showcase: 'docs/src/components/Showcase.tsx',
@@ -334,14 +325,7 @@ const config = {
           'https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning',
       },
     },
-    knownIssues: {
-      TextInput: {
-        'Outline overlaps label':
-          'https://github.com/callstack/react-native-paper/issues/3759#issuecomment-1601235262',
-        'Long text wraps to a second line':
-          'https://github.com/callstack/react-native-paper/issues/2581#issuecomment-790251987',
-      },
-    },
+    knownIssues: {},
     themeColors,
     screenshots,
     extendedExamples,

@@ -20,28 +20,28 @@ import {
   OUTLINED_MULTILINE_PADDING_TOP,
   PREFIX_END_PADDING,
   SUFFIX_START_PADDING,
-  TEXT_FIELD_BORDER_RADIUS,
+  TEXT_INPUT_BORDER_RADIUS,
   FILLED_PADDING_BOTTOM,
 } from './constants';
 import { filledStyles, outlinedStyles, styles } from './styles';
 import type {
-  FilledTextFieldHookData,
-  OutlinedTextFieldHookData,
-  TextFieldProps,
-  TextFieldSharedApi,
-  TextFieldVariant,
-  SharedTextFieldStyleData,
+  FilledTextInputHookData,
+  OutlinedTextInputHookData,
+  TextInputProps,
+  TextInputSharedApi,
+  TextInputVariant,
+  SharedTextInputStyleData,
   GetAccessibilityDataProps,
   GetAccessibilityDataReturn,
-} from './TextField';
+} from './TextInput';
 import type { InternalTheme } from '../../types';
 
-export const getTextFieldAnimationLayout = ({
+export const getTextInputAnimationLayout = ({
   variant,
   hasAccessory,
   isRTL,
 }: {
-  variant: TextFieldVariant;
+  variant: TextInputVariant;
   hasAccessory: boolean;
   isRTL: boolean;
 }) => {
@@ -208,9 +208,9 @@ export const getOutlineColor = ({
  * Returns `isRTL` as well so callers can use it when building `inputStyles`,
  * which is variant-specific (filled adds `MULTILINE_PADDING_TOP`).
  */
-export const getSharedTextFieldStyleData = (
-  api: TextFieldSharedApi
-): SharedTextFieldStyleData => {
+export const getSharedTextInputStyleData = (
+  api: TextInputSharedApi
+): SharedTextInputStyleData => {
   const {
     theme,
     isDisabled,
@@ -300,10 +300,10 @@ export const getSharedTextFieldStyleData = (
   };
 };
 
-export const getFilledTextFieldData = (
-  api: TextFieldSharedApi,
-  props: TextFieldProps
-): FilledTextFieldHookData => {
+export const getFilledTextInputData = (
+  api: TextInputSharedApi,
+  props: TextInputProps
+): FilledTextInputHookData => {
   const { style: inputStyleOverride, ...textInputProps } = props;
 
   const {
@@ -344,7 +344,7 @@ export const getFilledTextFieldData = (
    * Shared styles
    */
 
-  const shared = getSharedTextFieldStyleData(api);
+  const shared = getSharedTextInputStyleData(api);
 
   /**
    * Variant-specific styles
@@ -372,8 +372,8 @@ export const getFilledTextFieldData = (
     {
       paddingBottom: FILLED_PADDING_BOTTOM,
       backgroundColor: fieldBackgroundColor,
-      borderTopStartRadius: TEXT_FIELD_BORDER_RADIUS,
-      borderTopEndRadius: TEXT_FIELD_BORDER_RADIUS,
+      borderTopStartRadius: TEXT_INPUT_BORDER_RADIUS,
+      borderTopEndRadius: TEXT_INPUT_BORDER_RADIUS,
       overflow: 'hidden',
     },
   ];
@@ -448,10 +448,10 @@ export const getFilledTextFieldData = (
   };
 };
 
-export const getOutlinedTextFieldData = (
-  api: TextFieldSharedApi,
-  props: TextFieldProps
-): OutlinedTextFieldHookData => {
+export const getOutlinedTextInputData = (
+  api: TextInputSharedApi,
+  props: TextInputProps
+): OutlinedTextInputHookData => {
   const { style: inputStyleOverride, ...textInputProps } = props;
 
   const {
@@ -484,7 +484,7 @@ export const getOutlinedTextFieldData = (
    * Shared styles
    */
 
-  const shared = getSharedTextFieldStyleData(api);
+  const shared = getSharedTextInputStyleData(api);
 
   /**
    * Variant-specific styles
@@ -498,7 +498,7 @@ export const getOutlinedTextFieldData = (
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
     {
-      borderRadius: TEXT_FIELD_BORDER_RADIUS,
+      borderRadius: TEXT_INPUT_BORDER_RADIUS,
     },
     textInputProps.multiline && { alignItems: 'flex-start' },
   ];

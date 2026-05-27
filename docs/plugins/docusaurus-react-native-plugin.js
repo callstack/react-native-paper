@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = function () {
   return {
@@ -17,6 +18,14 @@ module.exports = function () {
           },
           extensions: ['.web.js'],
         },
+        plugins: [
+          new webpack.ProvidePlugin({
+            process: 'process/browser.js',
+          }),
+          new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+          }),
+        ],
       };
     },
   };

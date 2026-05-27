@@ -6,15 +6,15 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon from '../Icon';
 
-interface TextFieldErrorIconProps {
+interface TextInputErrorIconProps {
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 }
 
-const TextFieldErrorIcon = ({
+const TextInputErrorIcon = ({
   style: wrapperStyle,
   theme: themeOverride,
-}: TextFieldErrorIconProps) => {
+}: TextInputErrorIconProps) => {
   const theme = useInternalTheme(themeOverride);
 
   return (
@@ -28,4 +28,4 @@ const TextFieldErrorIcon = ({
   );
 };
 
-export default TextFieldErrorIcon;
+export default TextInputErrorIcon;

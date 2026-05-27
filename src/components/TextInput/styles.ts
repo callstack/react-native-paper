@@ -6,11 +6,11 @@ import {
   OUTLINED_LABEL_PADDING_HORIZONTAL,
   SUPPORTING_TEXT_FONT_SIZE,
   SUPPORTING_TEXT_MARGIN_TOP,
-  TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL,
-  TEXT_FIELD_BORDER_RADIUS,
-  TEXT_FIELD_HEIGHT,
-  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-  TEXT_FIELD_PADDING_VERTICAL,
+  TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
+  TEXT_INPUT_BORDER_RADIUS,
+  TEXT_INPUT_HEIGHT,
+  TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
+  TEXT_INPUT_PADDING_VERTICAL,
 } from './constants';
 import { tokens } from '../../theme/tokens';
 
@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
   },
   field: {
     flexDirection: 'row',
-    minHeight: TEXT_FIELD_HEIGHT,
-    paddingVertical: TEXT_FIELD_PADDING_VERTICAL,
+    minHeight: TEXT_INPUT_HEIGHT,
+    paddingVertical: TEXT_INPUT_PADDING_VERTICAL,
   },
   addendum: {
     flexDirection: 'row',
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   supportingText: {
     flex: 1,
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,
-    paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
+    paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
     fontSize: SUPPORTING_TEXT_FONT_SIZE,
     fontWeight: bodySmall.fontWeight,
     textAlign: 'left',
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   counter: {
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,
     marginStart: 'auto',
-    paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
+    paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
     fontSize: SUPPORTING_TEXT_FONT_SIZE,
     fontWeight: bodySmall.fontWeight,
     textAlign: 'right',
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginEnd: TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL,
+    marginEnd: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   },
   leadingAccessory: {
     width: ACCESSORY_SIZE,
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginStart: TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL,
+    marginStart: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   },
   disabled: {
     opacity: tokens.md.ref.stateOpacity.disabled,
@@ -87,7 +87,7 @@ export const filledStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
+    paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
   },
   labelWrapper: {
     position: 'absolute',
@@ -111,14 +111,14 @@ export const outlinedStyles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    borderRadius: TEXT_FIELD_BORDER_RADIUS,
+    borderRadius: TEXT_INPUT_BORDER_RADIUS,
     pointerEvents: 'none',
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
+    paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
   },
   labelWrapper: {
     position: 'absolute',

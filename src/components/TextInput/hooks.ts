@@ -5,7 +5,11 @@ import {
   useState,
   type RefObject,
 } from 'react';
-import { BlurEvent, FocusEvent, TextInput } from 'react-native';
+import {
+  BlurEvent,
+  FocusEvent,
+  TextInput as NativeTextInput,
+} from 'react-native';
 
 import {
   interpolate,
@@ -20,44 +24,44 @@ import {
   TIMING_CONFIG,
 } from './constants';
 import type {
-  TextFieldAnimationState,
-  TextFieldFlags,
-  TextFieldAnimationHandlers,
-  TextFieldHookReturn,
-  TextFieldLayoutState,
-  TextFieldProps,
-  TextFieldVariant,
-} from './TextField';
+  TextInputAnimationState,
+  TextInputFlags,
+  TextInputAnimationHandlers,
+  TextInputHookReturn,
+  TextInputLayoutState,
+  TextInputProps,
+  TextInputVariant,
+} from './TextInput';
 import {
   getAccentColors,
   getAccessibilityData,
-  getFilledTextFieldData,
-  getOutlinedTextFieldData,
-  getTextFieldAnimationLayout,
+  getFilledTextInputData,
+  getOutlinedTextInputData,
+  getTextInputAnimationLayout,
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 
-const useTextFieldAnimation = ({
+const useTextInputAnimation = ({
   variant,
   isRTL,
   hasAccessory,
   value,
   defaultValue,
 }: {
-  variant: TextFieldVariant;
+  variant: TextInputVariant;
   isRTL: boolean;
   hasAccessory: boolean;
   value: string | undefined;
   defaultValue: string | undefined;
-}): TextFieldAnimationState & TextFieldAnimationHandlers => {
+}): TextInputAnimationState & TextInputAnimationHandlers => {
   const initialText = value ?? defaultValue ?? '';
 
   const focusSV = useSharedValue(0);
   const floatSV = useSharedValue(initialText.length > 0 ? 1 : 0);
 
-  const { activeTop, inactiveTop, translateXEnd } = getTextFieldAnimationLayout(
+  const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
     {
       variant,
       hasAccessory,
@@ -121,9 +125,9 @@ const useTextFieldAnimation = ({
   };
 };
 
-const useTextFieldInput = (
+const useTextInputInput = (
   props: Pick<
-    TextFieldProps,
+    TextInputProps,
     'value' | 'defaultValue' | 'onChangeText' | 'counter' | 'maxLength'
   >
 ) => {
@@ -179,11 +183,11 @@ const useTextFieldInput = (
   };
 };
 
-const useTextFieldFocus = (
-  props: Pick<TextFieldProps, 'onFocus' | 'onBlur'>,
-  input: RefObject<TextInput | null>,
+const useTextInputFocus = (
+  props: Pick<TextInputProps, 'onFocus' | 'onBlur'>,
+  input: RefObject<NativeTextInput | null>,
   isDisabled: boolean,
-  { runFocusAnimation, runBlurAnimation }: TextFieldAnimationHandlers,
+  { runFocusAnimation, runBlurAnimation }: TextInputAnimationHandlers,
   getHasText: () => boolean
 ) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -218,13 +222,13 @@ const useTextFieldFocus = (
   };
 };
 
-const useTextFieldFlags = (
-  props: TextFieldProps,
+const useTextInputFlags = (
+  props: TextInputProps,
   isFocused: boolean,
   hasValue: boolean,
   isRTL: boolean,
   hasAccessory: boolean
-): TextFieldFlags => {
+): TextInputFlags => {
   const isFloating = isFocused || hasValue;
 
   return {
@@ -240,7 +244,7 @@ const useTextFieldFlags = (
   };
 };
 
-const useTextFieldLayout = ({
+const useTextInputLayout = ({
   variant,
   props,
   input,
@@ -249,14 +253,14 @@ const useTextFieldLayout = ({
   isFocused,
   animation,
 }: {
-  variant: TextFieldVariant;
-  props: TextFieldProps;
-  input: RefObject<TextInput | null>;
+  variant: TextInputVariant;
+  props: TextInputProps;
+  input: RefObject<NativeTextInput | null>;
   theme: InternalTheme;
-  flags: TextFieldFlags;
+  flags: TextInputFlags;
   isFocused: boolean;
-  animation: TextFieldAnimationState;
-}): TextFieldLayoutState => {
+  animation: TextInputAnimationState;
+}): TextInputLayoutState => {
   const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix } = flags;
 
   const { multiline } = props;
@@ -276,7 +280,7 @@ const useTextFieldLayout = ({
         hasSuffix: _hasSuffix,
         ...layout
       } = variant === 'filled'
-        ? getFilledTextFieldData(
+        ? getFilledTextInputData(
             {
               input,
               theme,
@@ -292,7 +296,7 @@ const useTextFieldLayout = ({
             },
             props
           )
-        : getOutlinedTextFieldData(
+        : getOutlinedTextInputData(
             {
               input,
               theme,
@@ -337,10 +341,10 @@ const useTextFieldLayout = ({
   );
 };
 
-export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
+export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
-  const input = useRef<TextInput>(null);
+  const input = useRef<NativeTextInput>(null);
 
   const theme = useInternalTheme(themeOverride);
 
@@ -350,9 +354,9 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
 
   const { hasValue, inputLength, getHasText, onChangeText } =
-    useTextFieldInput(props);
+    useTextInputInput(props);
 
-  const animation = useTextFieldAnimation({
+  const animation = useTextInputAnimation({
     variant,
     isRTL,
     hasAccessory,
@@ -360,7 +364,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     defaultValue: props.defaultValue,
   });
 
-  const { isFocused, onFocus, onBlur, focusInput } = useTextFieldFocus(
+  const { isFocused, onFocus, onBlur, focusInput } = useTextInputFocus(
     props,
     input,
     !!props.disabled,
@@ -368,7 +372,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
     getHasText
   );
 
-  const flags = useTextFieldFlags(
+  const flags = useTextInputFlags(
     props,
     isFocused,
     hasValue,
@@ -402,7 +406,7 @@ export const useTextField = (props: TextFieldProps): TextFieldHookReturn => {
   const placeholderTextColor =
     props.placeholderTextColor ?? theme.colors.onSurfaceVariant;
 
-  const layout = useTextFieldLayout({
+  const layout = useTextInputLayout({
     variant,
     props,
     input,

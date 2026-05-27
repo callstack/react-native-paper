@@ -8,39 +8,39 @@ import { useInternalTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
 import IconButton from '../IconButton/IconButton';
 
-export type TextFieldAccessoryProps = {
+export type TextInputAccessoryProps = {
   style: StyleProp<ViewStyle>;
   multiline: boolean;
   disabled: boolean;
   error: boolean;
 };
 
-export type TextFieldIconProps = TextFieldAccessoryProps &
-  $Omit<React.ComponentProps<typeof IconButton>, keyof TextFieldAccessoryProps>;
+export type TextInputIconProps = TextInputAccessoryProps &
+  $Omit<React.ComponentProps<typeof IconButton>, keyof TextInputAccessoryProps>;
 
 /**
- * A component to render a leading / trailing icon in the TextField
+ * A component to render a leading / trailing icon in the TextInput
  * (return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
- * `TextFieldAccessoryProps`, which TextField passes into those render props.
+ * `TextInputAccessoryProps`, which TextInput passes into those render props.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { TextField } from 'react-native-paper';
+ * import { TextInput } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [text, setText] = React.useState('');
  *
  *   const searchAccessory = (props) => (
- *     <TextField.Icon {...props} icon="magnify" />
+ *     <TextInput.Icon {...props} icon="magnify" />
  *   );
  *
  *   const clearAccessory = (props) => (
- *     <TextField.Icon {...props} icon="close" onPress={() => setText('')} />
+ *     <TextInput.Icon {...props} icon="close" onPress={() => setText('')} />
  *   );
  *
  *   return (
- *     <TextField
+ *     <TextInput
  *       label="Search"
  *       value={text}
  *       onChangeText={setText}
@@ -55,7 +55,7 @@ export type TextFieldIconProps = TextFieldAccessoryProps &
  *
  * @extends IconButton props https://callstack.github.io/react-native-paper/docs/components/IconButton
  */
-const TextFieldIcon = ({
+const TextInputIcon = ({
   icon,
   iconColor,
   size,
@@ -65,7 +65,7 @@ const TextFieldIcon = ({
   theme: themeOverride,
   onPress,
   ...rest
-}: TextFieldIconProps) => {
+}: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
 
   const iconSize = size ?? ACCESSORY_SIZE;
@@ -93,6 +93,6 @@ const TextFieldIcon = ({
   );
 };
 
-TextFieldIcon.displayName = 'TextField.Icon';
+TextInputIcon.displayName = 'TextInput.Icon';
 
-export default TextFieldIcon;
+export default TextInputIcon;

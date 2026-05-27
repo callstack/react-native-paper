@@ -113,7 +113,7 @@ const BannerExample = () => {
           />
           <TextInput
             label="Email"
-            mode="outlined"
+            variant="outlined"
             value={text}
             onChangeText={(text) => setText(text)}
           />
