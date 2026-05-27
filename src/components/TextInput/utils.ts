@@ -1,4 +1,10 @@
-import { Platform, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import {
+  ColorValue,
+  Platform,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 import { AnimatedStyle } from 'react-native-reanimated';
 
@@ -141,7 +147,7 @@ export const getFieldBackgroundColor = ({
 }: {
   theme: InternalTheme;
   isDisabled: boolean;
-}): string | undefined => {
+}): ColorValue | undefined => {
   if (isDisabled) {
     return undefined;
   }
@@ -156,10 +162,10 @@ export const getIconColor = ({
   isDisabled,
 }: {
   theme: InternalTheme;
-  iconColor?: string;
+  iconColor?: ColorValue;
   hasError: boolean;
   isDisabled: boolean;
-}) => {
+}): ColorValue => {
   if (iconColor) return iconColor;
   if (hasError) return theme.colors.error;
   if (isDisabled) return theme.colors.onSurface;

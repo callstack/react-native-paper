@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   Appbar,
   BottomNavigation,
@@ -36,20 +36,6 @@ type RoutesState = Array<{
   getAccessibilityLabel?: string;
   getTestID?: string;
 }>;
-
-type Route = {
-  route: { key: string };
-  params: {
-    sourceColor: string;
-    headerTitle: string;
-    darkMode: boolean;
-  };
-};
-
-type Props = {
-  navigation: StackNavigationProp<{}>;
-  route: Route;
-};
 
 type Item = {
   host: string;
@@ -177,12 +163,14 @@ const Results = () => {
   );
 };
 
-const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
+const ThemeBasedOnSourceColor = () => {
+  const navigation = useNavigation('TeamDetails');
+  const route = useRoute('TeamDetails');
+
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
 
-  const { params } = route;
-  const { sourceColor, headerTitle, darkMode } = params;
+  const { sourceColor, headerTitle, darkMode } = route.params ?? {};
 
   const [routes] = React.useState<RoutesState>([
     {
@@ -213,7 +201,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
 
   const theme = colorThemes[sourceColor || 'paper'];
 
-  const systemColorScheme = useColorScheme() || 'light';
+  const systemColorScheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const colorScheme = darkMode ? 'dark' : systemColorScheme;
 
   return (

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -69,15 +70,9 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   animated?: boolean;
   /**
-   *  @deprecated Deprecated in v.5x - use prop size="small".
-   *
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
-   */
-  small?: boolean;
-  /**
    * Custom color for the icon and label of the `FAB`.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether `FAB` is currently visible.
    */

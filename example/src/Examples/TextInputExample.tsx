@@ -14,11 +14,11 @@ import {
   Text,
   TextInput,
   TouchableRipple,
+  useTheme,
   type TextInputAccessoryProps,
   type TextInputVariant,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type DemoControls = {
@@ -46,7 +46,7 @@ type TextInputDemoProps = {
 };
 
 const TextInputDemo = ({ variant }: TextInputDemoProps) => {
-  const theme = useExampleTheme();
+  const theme = useTheme();
 
   const [value, setValue] = React.useState('');
 

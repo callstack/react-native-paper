@@ -15,7 +15,7 @@ import type {
 } from '../TextInput/TextInput';
 import type { TextInputAccessoryProps } from '../TextInput/TextInputIcon';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 const defaultI18nIsRTL = I18nManager.isRTL;
 

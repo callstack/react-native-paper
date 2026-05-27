@@ -242,7 +242,9 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();
@@ -261,7 +263,9 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
-        <text color={color}>{route.title}</text>
+        <text color={typeof color === 'string' ? color : undefined}>
+          {route.title}
+        </text>
       )}
     />
   ).toJSON();

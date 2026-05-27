@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-
-import type { ThemeProp } from 'src/types';
+import { ColorValue, StyleSheet, View } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import type { Theme } from '../../types';
 import Icon, { IconSource } from '../Icon';
 
@@ -11,7 +10,7 @@ export type Props = {
   /**
    *  Custom color for action icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Name of the icon to show.
    */

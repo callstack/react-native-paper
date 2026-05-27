@@ -1,4 +1,9 @@
-import type { GestureResponderEvent } from 'react-native';
+import type { ColorValue, GestureResponderEvent } from 'react-native';
+
+import { tokens } from '../../theme/tokens';
+import type { InternalTheme } from '../../types';
+
+const stateOpacity = tokens.md.sys.state.opacity;
 
 export const handlePress = ({
   onPress,
@@ -34,4 +39,57 @@ export const isChecked = ({
   } else {
     return status;
   }
+};
+
+const getIOSCheckedColor = ({
+  theme,
+  disabled,
+  customColor,
+  error,
+}: {
+  theme: InternalTheme;
+  customColor?: ColorValue;
+  disabled?: boolean;
+  error?: boolean;
+}) => {
+  if (disabled) {
+    return theme.colors.primary;
+  }
+
+  if (customColor) {
+    return customColor;
+  }
+
+  if (error) {
+    return theme.colors.error;
+  }
+
+  return theme.colors.primary;
+};
+
+export const getSelectionControlIOSColor = ({
+  theme,
+  disabled,
+  customColor,
+  error,
+}: {
+  theme: InternalTheme;
+  disabled?: boolean;
+  customColor?: ColorValue;
+  error?: boolean;
+}) => {
+  const checkedColor = getIOSCheckedColor({
+    theme,
+    disabled,
+    customColor,
+    error,
+  });
+  const checkedColorOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
+  return {
+    checkedColor,
+    checkedColorOpacity,
+  };
 };

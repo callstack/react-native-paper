@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     marginStart: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   },
   disabled: {
-    opacity: tokens.md.ref.stateOpacity.disabled,
+    opacity: tokens.md.sys.state.opacity.disabled,
   },
   iconWrapper: {
     justifyContent: 'center',

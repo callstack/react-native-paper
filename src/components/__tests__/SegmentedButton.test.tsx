@@ -9,7 +9,7 @@ import {
   getSegmentedButtonColors,
 } from '../SegmentedButtons/utils';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 it('renders segmented button', () => {
   const tree = render(

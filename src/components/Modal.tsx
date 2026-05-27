@@ -20,7 +20,7 @@ import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
 
-const { scrimAlpha } = tokens.md.ref;
+const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
   },
   // eslint-disable-next-line react-native/no-color-literals

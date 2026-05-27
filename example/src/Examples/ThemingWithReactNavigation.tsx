@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 
-import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from '@react-native-vector-icons/material-design-icons';
+import {
+  createBottomTabNavigator,
+  createBottomTabScreen,
+  type BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
 import { PlatformPressable } from '@react-navigation/elements';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native-paper';
-
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
   return (
@@ -26,48 +27,63 @@ function SettingsScreen() {
   );
 }
 
-const HomeTab = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarButton: (props) => (
-          <PlatformPressable
-            {...props}
-            android_ripple={{ color: 'transparent' }}
-          />
-        ),
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => {
+const HomeTab = createBottomTabNavigator({
+  screenOptions: {
+    headerShown: false,
+    tabBarButton: (props) => (
+      <PlatformPressable {...props} android_ripple={{ color: 'transparent' }} />
+    ),
+  },
+  screens: {
+    ThemingHome: createBottomTabScreen({
+      screen: HomeScreen,
+      options: {
+        tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>({
+          android: {
+            type: 'materialSymbol',
+            name: 'home',
+          },
+          ios: {
+            type: 'sfSymbol',
+            name: 'house',
+          },
+          default: ({ color, size }) => {
             return <Icon name="home" size={size} color={color} />;
           },
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => {
+        }),
+      },
+    }),
+    ThemingSettings: createBottomTabScreen({
+      screen: SettingsScreen,
+      options: {
+        tabBarIcon: Platform.select<BottomTabNavigationOptions['tabBarIcon']>({
+          android: {
+            type: 'materialSymbol',
+            name: 'settings',
+          },
+          ios: {
+            type: 'sfSymbol',
+            name: 'gear',
+          },
+          default: ({ color, size }) => {
             return <Icon name="cog" size={size} color={color} />;
           },
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
+        }),
+      },
+    }),
+  },
+});
 
-function ThemingWithReactNavigation() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="React Navigation" component={HomeTab} />
-    </Stack.Navigator>
-  );
-}
+const ThemingWithReactNavigation = Object.assign(
+  createNativeStackNavigator({
+    screens: {
+      'React Navigation': HomeTab,
+    },
+  }),
+  {
+    title: 'Theming With React Navigation',
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -76,7 +92,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-ThemingWithReactNavigation.title = 'Theming With React Navigation';
 
 export default ThemingWithReactNavigation;

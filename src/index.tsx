@@ -4,7 +4,6 @@ export {
   useTheme,
   withTheme,
   ThemeProvider,
-  DefaultTheme,
   adaptNavigationTheme,
 } from './core/theming';
 
@@ -81,8 +80,6 @@ export type { Props as CardContentProps } from './components/Card/CardContent';
 export type { Props as CardCoverProps } from './components/Card/CardCover';
 export type { Props as CardTitleProps } from './components/Card/CardTitle';
 export type { Props as CheckboxProps } from './components/Checkbox/Checkbox';
-export type { Props as CheckboxAndroidProps } from './components/Checkbox/CheckboxAndroid';
-export type { Props as CheckboxIOSProps } from './components/Checkbox/CheckboxIOS';
 export type { Props as CheckboxItemProps } from './components/Checkbox/CheckboxItem';
 export type { Props as ChipProps } from './components/Chip/Chip';
 export type { Props as DataTableProps } from './components/DataTable/DataTable';
@@ -144,25 +141,5 @@ export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
-export type {
-  MaterialBottomTabNavigationEventMap,
-  MaterialBottomTabNavigationOptions,
-  MaterialBottomTabNavigationProp,
-  MaterialBottomTabScreenProps,
-} from './react-navigation';
 
-export {
-  TypescaleKey,
-  type Theme,
-  type ThemeBase,
-  type Elevation,
-} from './types';
-
-export {
-  MD3LightTheme,
-  MD3DarkTheme,
-  MD3Colors,
-  MD3TypescaleKey,
-  type MD3Theme,
-  type MD3Elevation,
-} from './deprecated';
+export { TypescaleKey, type Theme, type Elevation } from './types';

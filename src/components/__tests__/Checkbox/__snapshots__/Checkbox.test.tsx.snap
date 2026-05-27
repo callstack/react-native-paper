@@ -40,16 +40,24 @@ exports[`renders Checkbox with custom testID 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
   testID="custom:testID"
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -81,8 +89,37 @@ exports[`renders Checkbox with custom testID 1`] = `
         ]
       }
     >
-      check
+      checkbox-marked
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "rgba(103, 80, 164, 1)",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -128,15 +165,23 @@ exports[`renders checked Checkbox with color 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -168,8 +213,37 @@ exports[`renders checked Checkbox with color 1`] = `
         ]
       }
     >
-      check
+      checkbox-marked
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "red",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -214,15 +288,23 @@ exports[`renders checked Checkbox with onPress 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -254,8 +336,37 @@ exports[`renders checked Checkbox with onPress 1`] = `
         ]
       }
     >
-      check
+      checkbox-marked
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "rgba(103, 80, 164, 1)",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -300,15 +411,23 @@ exports[`renders indeterminate Checkbox 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -321,7 +440,7 @@ exports[`renders indeterminate Checkbox 1`] = `
       style={
         [
           {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 24,
           },
           [
@@ -340,8 +459,37 @@ exports[`renders indeterminate Checkbox 1`] = `
         ]
       }
     >
-      minus
+      minus-box
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "rgba(73, 69, 79, 1)",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -387,15 +535,23 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -408,7 +564,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       style={
         [
           {
-            "color": "red",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 24,
           },
           [
@@ -427,8 +583,37 @@ exports[`renders indeterminate Checkbox with color 1`] = `
         ]
       }
     >
-      minus
+      minus-box
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "rgba(73, 69, 79, 1)",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -474,15 +659,23 @@ exports[`renders unchecked Checkbox with color 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
         "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -514,8 +707,37 @@ exports[`renders unchecked Checkbox with color 1`] = `
         ]
       }
     >
-      check
+      checkbox-marked
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "red",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -560,15 +782,23 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       },
       {
         "borderRadius": 18,
+        "height": 36,
         "padding": 6,
+        "width": 36,
       },
     ]
   }
 >
   <View
+    collapsable={false}
     style={
       {
-        "opacity": 0,
+        "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
@@ -581,7 +811,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       style={
         [
           {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 24,
           },
           [
@@ -600,8 +830,37 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
         ]
       }
     >
-      check
+      checkbox-blank-outline
     </Text>
+    <View
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "borderColor": "rgba(73, 69, 79, 1)",
+            "borderWidth": 0,
+            "height": 14,
+            "width": 14,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;

@@ -10,10 +10,8 @@ import {
 } from 'react-native';
 
 import Checkbox from './Checkbox';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../theme/tokens';
+import { getStateLayer } from '../../theme/utils/state';
 import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -100,11 +98,6 @@ export type Props = {
    */
   position?: 'leading' | 'trailing';
   /**
-   * Whether `<Checkbox.Android />` or `<Checkbox.IOS />` should be used.
-   * Left undefined `<Checkbox />` will be used.
-   */
-  mode?: 'android' | 'ios';
-  /**
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
@@ -138,7 +131,6 @@ const CheckboxItem = ({
   labelStyle,
   theme: themeOverrides,
   testID,
-  mode,
   position = 'trailing',
   accessibilityLabel = label,
   disabled,
@@ -151,24 +143,12 @@ const CheckboxItem = ({
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
-  let checkbox;
+  const checkbox = <Checkbox {...checkboxProps} />;
 
-  if (mode === 'android') {
-    checkbox = <CheckboxAndroid {...checkboxProps} />;
-  } else if (mode === 'ios') {
-    checkbox = <CheckboxIOS {...checkboxProps} />;
-  } else {
-    checkbox = <Checkbox {...checkboxProps} />;
-  }
-
-  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: textColor,
-    opacity: disabled
-      ? tokens.md.ref.stateOpacity.disabled
-      : tokens.md.ref.stateOpacity.enabled,
+    ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
   } as TextStyle;
 

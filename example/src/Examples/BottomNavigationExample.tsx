@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
   BottomNavigation,
@@ -20,10 +20,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Route = { route: { key: string } };
-
-type Props = {
-  navigation: StackNavigationProp<{}>;
-};
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
@@ -38,6 +34,7 @@ const PhotoGallery = ({ route }: Route) => {
         <View key={uri} style={styles.item}>
           <Image
             source={{ uri }}
+            resizeMode="cover"
             style={styles.photo}
             accessibilityIgnoresInvertColors
           />
@@ -47,7 +44,9 @@ const PhotoGallery = ({ route }: Route) => {
   );
 };
 
-const BottomNavigationExample = ({ navigation }: Props) => {
+const BottomNavigationExample = () => {
+  const navigation = useNavigation('BottomNavigation');
+
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [menuVisible, setMenuVisible] = React.useState(false);
@@ -185,7 +184,6 @@ const styles = StyleSheet.create({
   }),
   photo: {
     flex: 1,
-    resizeMode: 'cover',
   },
   screen: {
     flex: 1,

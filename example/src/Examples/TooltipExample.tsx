@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View, Image } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
   Avatar,
@@ -17,10 +17,6 @@ import {
 
 import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
-
-type Props = {
-  navigation: StackNavigationProp<{}>;
-};
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
@@ -41,7 +37,9 @@ const formOfTransport = [
   },
 ];
 
-const TooltipExample = ({ navigation }: Props) => {
+const TooltipExample = () => {
+  const navigation = useNavigation('TooltipExample');
+
   const [textAlign, setTextAlign] = React.useState('bold');
   React.useLayoutEffect(() => {
     navigation.setOptions({

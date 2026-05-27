@@ -3,6 +3,6 @@ export * from './elevation';
 export * from './motion';
 export * from './navigation';
 export * from './shape';
+export * from './state';
 export * from './theme';
 export * from './typography';
-export * from './utils';

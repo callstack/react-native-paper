@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
       "react-native-paper": [
         "./src/index"

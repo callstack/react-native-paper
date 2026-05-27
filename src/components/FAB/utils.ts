@@ -185,7 +185,7 @@ const getForegroundColor = ({
   theme,
   isVariant,
   customColor,
-}: BaseProps & { customColor?: string }) => {
+}: BaseProps & { customColor?: ColorValue }) => {
   if (typeof customColor !== 'undefined') {
     return customColor;
   }
@@ -217,7 +217,7 @@ export const getFABColors = ({
 }: {
   theme: InternalTheme;
   variant: string;
-  customColor?: string;
+  customColor?: ColorValue;
   customBackgroundColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
@@ -255,7 +255,7 @@ export const getFABGroupColors = ({
   customBackdropColor,
 }: {
   theme: InternalTheme;
-  customBackdropColor?: string;
+  customBackdropColor?: ColorValue;
 }) => {
   return {
     labelColor: getLabelColor({ theme }),

@@ -1,23 +1,22 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View, Platform } from 'react-native';
+import { ColorValue, Platform, StyleSheet, View } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Button,
   Dialog,
   Drawer,
-  MD3Colors,
+  Palette,
+  Portal,
   Switch,
   Text,
   TouchableRipple,
-  Portal,
+  useTheme,
 } from 'react-native-paper';
 
 import { dynamicThemeSupported, isWeb } from '../utils';
-import { useExampleTheme } from './hooks/useExampleTheme';
 import { PreferencesContext } from './PreferencesContext';
 
 const DrawerItemsData = [
@@ -31,7 +30,7 @@ const DrawerItemsData = [
     label: 'Starred',
     icon: 'star',
     key: 1,
-    right: ({ color }: { color: string }) => (
+    right: ({ color }: { color: ColorValue }) => (
       <Badge
         visible
         size={8}
@@ -95,7 +94,7 @@ function DrawerItems() {
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
   const isIOS = Platform.OS === 'ios';
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
@@ -118,16 +117,12 @@ function DrawerItems() {
   } = preferences;
 
   const _handleToggleRTL = () => {
-    if (expoGoExecution) {
+    if (!isWeb && expoGoExecution) {
       setShowRTLDialog(true);
       return;
     }
 
     toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
-      Updates.reloadAsync();
-    }
   };
 
   const _handleDismissRTLDialog = () => {
@@ -136,8 +131,8 @@ function DrawerItems() {
 
   const coloredLabelTheme = {
     colors: {
-      secondaryContainer: MD3Colors.tertiary80,
-      onSecondaryContainer: MD3Colors.tertiary20,
+      secondaryContainer: Palette.tertiary80,
+      onSecondaryContainer: Palette.tertiary20,
     },
   };
 
@@ -183,7 +178,7 @@ function DrawerItems() {
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
               <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
-                <View style={(styles.preference, styles.v3Preference)}>
+                <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
                     <Switch value={shouldUseDynamicTheme} />
@@ -200,16 +195,14 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            {!isWeb && (
-              <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, styles.v3Preference]}>
-                  <Text variant="labelLarge">RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={isRTL} />
-                  </View>
+            <TouchableRipple onPress={_handleToggleRTL}>
+              <View style={[styles.preference, styles.v3Preference]}>
+                <Text variant="labelLarge">RTL</Text>
+                <View pointerEvents="none">
+                  <Switch value={isRTL} />
                 </View>
-              </TouchableRipple>
-            )}
+              </View>
+            </TouchableRipple>
 
             <TouchableRipple onPress={toggleCollapsed}>
               <View style={[styles.preference, styles.v3Preference]}>

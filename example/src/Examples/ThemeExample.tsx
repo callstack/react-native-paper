@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import { List, PaperProvider, Banner } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type Props = {
-  navigation: StackNavigationProp<{ [key: string]: undefined }>;
-};
+const ThemeExample = () => {
+  const navigation = useNavigation('Theme');
 
-const ThemeExample = ({ navigation }: Props) => {
   return (
     <PaperProvider>
       <ScreenWrapper contentContainerStyle={styles.container}>
@@ -23,7 +21,7 @@ const ThemeExample = ({ navigation }: Props) => {
           <List.Item
             title="Themed Sport App"
             description="Go to the example"
-            onPress={() => navigation.navigate('teamsList')}
+            onPress={() => navigation.navigate('TeamsList')}
             right={(props) => <List.Icon {...props} icon="arrow-right" />}
           />
         </List.Section>

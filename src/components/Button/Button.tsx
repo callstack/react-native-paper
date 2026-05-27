@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityRole,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -51,18 +52,13 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   compact?: boolean;
   /**
-   * @deprecated Deprecated in v5.x - use `buttonColor` or `textColor` instead.
-   * Custom text color for flat button, or background color for contained button.
-   */
-  color?: string;
-  /**
    * Custom button's background color.
    */
-  buttonColor?: string;
+  buttonColor?: ColorValue;
   /**
    * Custom button's text color.
    */
-  textColor?: string;
+  textColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */

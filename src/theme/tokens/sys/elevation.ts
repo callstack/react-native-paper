@@ -1,10 +1,34 @@
 // M3 elevation tokens and shadow builder per spec:
 // https://m3.material.io/styles/elevation/tokens
 
-import { Animated } from 'react-native';
+import {
+  Animated,
+  Platform,
+  type ColorValue,
+  type ViewStyle,
+  type Animated as AnimatedNS,
+} from 'react-native';
+
+import color from 'color';
 
 import { isAnimatedValue } from '../../../utils/animations';
 import type { Elevation, ThemeElevation } from '../../types';
+
+type AnimatedNativeShadowStyle = {
+  shadowColor: ColorValue;
+  shadowOffset: {
+    width: AnimatedNS.Value;
+    height: AnimatedNS.AnimatedInterpolation<number>;
+  };
+  shadowOpacity: AnimatedNS.AnimatedInterpolation<number>;
+  shadowRadius: AnimatedNS.AnimatedInterpolation<number>;
+};
+
+type AnimatedBoxShadowStyle = {
+  boxShadow: AnimatedNS.AnimatedInterpolation<string | number>;
+};
+
+type AnimatedShadowStyle = AnimatedNativeShadowStyle | AnimatedBoxShadowStyle;
 
 export const defaultElevation: ThemeElevation = {
   level0: 0,
@@ -32,10 +56,55 @@ export const shadowLayers = [
   },
 ];
 
+const getShadowColor = (shadowColor: ColorValue, shadowOpacity: number) => {
+  if (typeof shadowColor !== 'string') {
+    throw new Error(
+      `Expected a string shadow color on Web, but received a ${typeof shadowColor}.`
+    );
+  }
+
+  return color(shadowColor).alpha(shadowOpacity).rgb().string();
+};
+
+const getBoxShadowValue = (elevation: number, shadowColor: string) =>
+  `0px ${shadowLayers[0].height[elevation]}px ${shadowLayers[0].shadowRadius[elevation]}px ${shadowColor}`;
+
+// eslint-disable-next-line no-redeclare
+export function shadow(elevation: number, shadowColor: ColorValue): ViewStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: Animated.Value,
+  shadowColor: ColorValue
+): AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
+export function shadow(
+  elevation: number | Animated.Value,
+  shadowColor: ColorValue
+): ViewStyle | AnimatedShadowStyle;
+// eslint-disable-next-line no-redeclare
 export function shadow(
   elevation: number | Animated.Value = 0,
-  shadowColor: string
-) {
+  shadowColor: ColorValue
+): ViewStyle | AnimatedShadowStyle {
+  if (Platform.OS === 'web') {
+    const webShadowColor = getShadowColor(shadowColor, 0.3);
+
+    if (isAnimatedValue(elevation)) {
+      return {
+        boxShadow: elevation.interpolate({
+          inputRange: elevationInputRange,
+          outputRange: elevationInputRange.map((value) =>
+            getBoxShadowValue(value, webShadowColor)
+          ),
+        }),
+      };
+    }
+
+    return {
+      boxShadow: getBoxShadowValue(elevation, webShadowColor),
+    };
+  }
+
   if (isAnimatedValue(elevation)) {
     return {
       shadowColor,
