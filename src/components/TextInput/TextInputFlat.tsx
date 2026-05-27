@@ -88,12 +88,13 @@ const TextInputFlat = ({
   const {
     fontSize: fontSizeStyle,
     lineHeight: lineHeightStyle,
-    fontWeight,
+    fontWeight: fontWeightStyle,
     height,
     paddingHorizontal,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
+  const fontWeight = fontWeightStyle ?? font.fontWeight;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
   const lineHeight =
     lineHeightStyle || (Platform.OS === 'web' ? fontSize * 1.2 : undefined);
