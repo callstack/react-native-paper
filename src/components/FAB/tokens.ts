@@ -1,3 +1,6 @@
+import type { ViewStyle } from 'react-native';
+
+import { tokens } from '../../theme/tokens';
 import type {
   ColorRole,
   Elevation,
@@ -116,3 +119,10 @@ export const FloatingActionButtonMenuTokens = {
   listItem,
   spacing,
 };
+
+const focusIndicator = tokens.md.sys.state.focusIndicator;
+export const FOCUS_RING_THICKNESS = focusIndicator.thickness;
+export const FOCUS_RING_OUTER_OFFSET = focusIndicator.outerOffset;
+export const FOCUS_RING_INSET = FOCUS_RING_OUTER_OFFSET + FOCUS_RING_THICKNESS;
+
+export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
