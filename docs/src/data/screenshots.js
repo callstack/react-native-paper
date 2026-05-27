@@ -146,8 +146,8 @@ const screenshots = {
   },
   Text: 'screenshots/typography.png',
   TextInput: {
-    filled: 'screenshots/text-field-filled.png',
-    outlined: 'screenshots/text-field-outlined.png',
+    filled: 'screenshots/text-input-filled.png',
+    outlined: 'screenshots/text-input-outlined.png',
   },
   ToggleButton: 'screenshots/toggle-button.png',
   'ToggleButton.Group': 'screenshots/toggle-button-group.gif',

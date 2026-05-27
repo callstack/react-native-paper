@@ -15,6 +15,8 @@ const typeDefinitions = {
     'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInputIcon.tsx#L11',
   '(props: TextInputRenderProps) => React.ReactNode':
     'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L168',
+  'React.Ref<TextInputHandles>':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L172',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',

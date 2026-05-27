@@ -176,7 +176,7 @@ export type TextInputHandles = Pick<
 
 export type TextInputProps = NativeTextInputProps & {
   /**
-   * Imperative handle exposing a subset of NativeTextInput methods
+   * Imperative handle exposing a subset of native `TextInput` methods
    * with side-effect handling (e.g. `clear()` syncs internal state and animations).
    */
   ref?: React.Ref<TextInputHandles>;
@@ -185,9 +185,6 @@ export type TextInputProps = NativeTextInputProps & {
    *
    * - `filled` — filled background with an animated underline; higher visual emphasis.
    * - `outlined` — stroke outline only; lower visual emphasis.
-   *
-   * `filled` is a good fit for dialogs and short forms. `outlined` is common in long
-   * forms where a lighter visual weight keeps the layout easier to scan.
    */
   variant?: TextInputVariant;
   /**
@@ -233,8 +230,8 @@ export type TextInputProps = NativeTextInputProps & {
    */
   endAccessory?: (props: TextInputAccessoryProps) => React.ReactNode;
   /**
-   * Callback to render a custom input component in place of the native `NativeTextInput`.
-   * Receives all props that would be passed to `NativeTextInput`, allowing integration
+   * Callback to render a custom input component in place of the native `TextInput`.
+   * Receives all props that would be passed to `TextInput`, allowing integration
    * with third-party inputs such as masked inputs.
    */
   render?: (props: TextInputRenderProps) => React.ReactNode;
