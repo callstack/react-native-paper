@@ -181,8 +181,13 @@ export type TextFieldProps = TextInputProps & {
    */
   ref?: React.Ref<TextFieldHandles>;
   /**
-   * - `filled` text fields are often used in dialogs and short forms where their style draws more attention.
-   * - `outlined` text fields are often used in long forms where their reduced emphasis helps simplify the layout.
+   * Determines the visual style of the text field.
+   *
+   * - `filled` — filled background with an animated underline; higher visual emphasis.
+   * - `outlined` — stroke outline only; lower visual emphasis.
+   *
+   * `filled` is a good fit for dialogs and short forms. `outlined` is common in long
+   * forms where a lighter visual weight keeps the layout easier to scan.
    */
   variant?: TextFieldVariant;
   /**
@@ -235,7 +240,7 @@ export type TextFieldProps = TextInputProps & {
   render?: (props: TextFieldRenderProps) => React.ReactNode;
 };
 
-const DefaultRenderer = (props: TextFieldRenderProps) => (
+const defaultRenderer = (props: TextFieldRenderProps) => (
   <TextInput {...props} />
 );
 
@@ -299,7 +304,7 @@ function TextField(props: TextFieldProps) {
     disabled,
     startAccessory,
     endAccessory,
-    render = DefaultRenderer,
+    render = defaultRenderer,
     ...textInputProps
   } = props;
 
