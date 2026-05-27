@@ -4,15 +4,19 @@ title: Migration from Paper 5.x to 6.x
 
 TBC
 
-## Component and types
+## Components
+
+### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
+
+#### Types
 
 ```tsx
 import { TextInput, type TextInputProps } from 'react-native-paper';
 ```
 
-## Visual / variant
+#### Variant
 
 - **`mode="flat"`** → **`variant="filled"`**
 - **`mode="outlined"`** → **`variant="outlined"`**
@@ -27,10 +31,9 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 <TextInput variant="outlined" label="Outlined" />
 ```
 
-## Icons and adornments
+#### Adornments
 
 - **`left` / `right`** → **`startAccessory` / `endAccessory`**
-- **`TextInput.Icon`** → **`TextInput.Icon`**
 - **`TextInput.Affix`** → **`prefix` / `suffix`**, or **`TextInput.Icon`**, or **`startAccessory` / `endAccessory`**
 
 ```tsx
@@ -51,10 +54,9 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
-## Label, helper, error, disabled
+#### Label and supporting text
 
 - **`label: React.Element | string`** → **`string`**
-- **`error` / `disabled`** → **`error`** and **`disabled`**
 - **`HelperText`** was removed; use **`supportingText`**.
 
 ```tsx
@@ -79,13 +81,12 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
-## Styling / behavior removed
+#### Removed props
 
 No direct `TextInput` equivalents for:
 
 - **`dense`**, **`contentStyle`**, **`underlineStyle`**
 - **`underlineColor`**, **`activeUnderlineColor`**, **`outlineColor`**, **`activeOutlineColor`**, **`textColor`**
-- **`render`**
 
 Use **`style`** on the inner input and the **`theme`** for colors.
 
