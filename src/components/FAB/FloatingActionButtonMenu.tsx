@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
+  Platform,
   StyleSheet,
   View,
 } from 'react-native';
@@ -23,7 +24,11 @@ import {
   FloatingActionButtonSize,
   FloatingActionButtonTokens,
   FloatingActionButtonVariant,
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
 } from './tokens';
+import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -242,33 +247,56 @@ const MenuItem = ({
   const { height, iconSize, leading, trailing, iconLabelGap, shape } =
     FloatingActionButtonMenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
+
+  const { focusedSV, onFocus, onBlur } = useFocusRing();
+  const focusRingStyle = useAnimatedStyle(() => ({
+    opacity: focusedSV.value ? 1 : 0,
+  }));
+
   return (
-    <View
-      style={[
-        styles.menuItem,
-        { height, borderRadius, backgroundColor: colors.container },
-      ]}
-    >
-      <TouchableRipple
-        borderless
-        onPress={onPress}
-        accessibilityRole="button"
-        accessibilityLabel={accessibilityLabel ?? label}
-        style={{ borderRadius }}
-        testID={testID}
+    <View style={styles.menuItemWrapper}>
+      <View
+        style={[
+          styles.menuItem,
+          { height, borderRadius, backgroundColor: colors.container },
+        ]}
       >
-        <FabContent
-          icon={icon}
-          label={label}
-          contentColor={colors.content}
-          height={height}
-          iconSize={iconSize}
-          leading={leading}
-          trailing={trailing}
-          iconLabelGap={iconLabelGap}
+        <TouchableRipple
+          borderless
+          onPress={onPress}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          accessibilityRole="button"
+          accessibilityLabel={accessibilityLabel ?? label}
+          style={[
+            { borderRadius },
+            Platform.OS === 'web' ? webNoOutline : null,
+          ]}
           testID={testID}
-        />
-      </TouchableRipple>
+        >
+          <FabContent
+            icon={icon}
+            label={label}
+            contentColor={colors.content}
+            height={height}
+            iconSize={iconSize}
+            leading={leading}
+            trailing={trailing}
+            iconLabelGap={iconLabelGap}
+            testID={testID}
+          />
+        </TouchableRipple>
+      </View>
+      <Animated.View
+        style={[
+          styles.menuItemFocusRing,
+          {
+            borderColor: theme.colors.secondary,
+            borderRadius: borderRadius + FOCUS_RING_INSET,
+          },
+          focusRingStyle,
+        ]}
+      />
     </View>
   );
 };
@@ -690,8 +718,20 @@ const styles = StyleSheet.create({
   itemsEnd: {
     right: 0,
   },
+  menuItemWrapper: {
+    position: 'relative',
+  },
   menuItem: {
     overflow: 'hidden',
+  },
+  menuItemFocusRing: {
+    position: 'absolute',
+    top: -FOCUS_RING_INSET,
+    left: -FOCUS_RING_INSET,
+    right: -FOCUS_RING_INSET,
+    bottom: -FOCUS_RING_INSET,
+    borderWidth: FOCUS_RING_THICKNESS,
+    pointerEvents: 'none',
   },
   triggerSlot: {
     justifyContent: 'flex-start',

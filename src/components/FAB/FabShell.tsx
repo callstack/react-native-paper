@@ -3,6 +3,7 @@ import {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
+  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
@@ -24,8 +25,12 @@ import {
   FloatingActionButtonSize,
   FloatingActionButtonTokens,
   FloatingActionButtonVariant,
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
 } from './tokens';
 import { useFabVisibility } from './useFabVisibility';
+import { useFocusRing } from './useFocusRing';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ShapeToken } from '../../theme/utils/shape';
@@ -286,6 +291,15 @@ const FabShell = forwardRef<View, FabShellProps>(
       [borderRadius, containerBg]
     );
 
+    const { focusedSV, onFocus, onBlur } = useFocusRing();
+    const focusRingStyle = useAnimatedStyle(
+      () => ({
+        opacity: focusedSV.value ? 1 : 0,
+        borderRadius: borderRadius.value + FOCUS_RING_INSET,
+      }),
+      [borderRadius]
+    );
+
     return (
       <Reanimated.View
         ref={ref}
@@ -304,11 +318,16 @@ const FabShell = forwardRef<View, FabShellProps>(
             borderless
             background={background}
             onPress={onPress}
+            onFocus={onFocus}
+            onBlur={onBlur}
             accessibilityLabel={accessibilityLabel}
             accessibilityRole="button"
             accessibilityState={accessibilityState}
             testID={testID}
-            style={children ? styles.fill : null}
+            style={[
+              children ? styles.fill : null,
+              Platform.OS === 'web' ? webNoOutline : null,
+            ]}
           >
             {children ?? (
               <FabContent
@@ -333,6 +352,13 @@ const FabShell = forwardRef<View, FabShellProps>(
             )}
           </TouchableRipple>
         </Reanimated.View>
+        <Reanimated.View
+          style={[
+            styles.focusRing,
+            { borderColor: theme.colors.secondary },
+            focusRingStyle,
+          ]}
+        />
       </Reanimated.View>
     );
   }
@@ -354,6 +380,15 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   pointerEventsNone: {
+    pointerEvents: 'none',
+  },
+  focusRing: {
+    position: 'absolute',
+    top: -FOCUS_RING_INSET,
+    left: -FOCUS_RING_INSET,
+    right: -FOCUS_RING_INSET,
+    bottom: -FOCUS_RING_INSET,
+    borderWidth: FOCUS_RING_THICKNESS,
     pointerEvents: 'none',
   },
 });
