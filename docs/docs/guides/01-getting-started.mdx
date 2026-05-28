@@ -49,16 +49,16 @@ Minimum requirements:
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
-If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
+If you're on a vanilla React Native project, you also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons).
 
-Specifically `MaterialDesignIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
+Specifically, the `MaterialDesignIcons` icon pack needs to be included in the project because some components use those icons internally, such as `AppBar.BackAction` on Android.
 
 ```bash npm2yarn
 npm install @react-native-vector-icons/material-design-icons
 ```
 
 :::note
-The `react-native-vector-icons` library requires some additional setup steps for each platform. To ensure proper use of icon fonts, please follow their [installation guide](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#setup).
+`@react-native-vector-icons/material-design-icons` may require some additional setup steps depending on platform. To ensure the icon font is configured correctly, please follow the upstream [installation guide](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#setup).
 :::
 
 :::info

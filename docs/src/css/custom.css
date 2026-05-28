@@ -128,8 +128,10 @@ html[data-theme='light'] .gallery-dark {
   height: 124px;
   align-items: center;
   text-align: center;
+}
 
-  @media (max-width: 680px) {
+@media (max-width: 680px) {
+  .icons-list-icon-container {
     width: 96px;
   }
 }
@@ -153,10 +155,10 @@ html[data-theme='light'] .gallery-dark {
   flex-wrap: wrap;
   justify-content: center;
   margin: 24px 0;
+}
 
-  &:last-child {
-    justify-content: flex-start;
-  }
+.icons-list-results:last-child {
+  justify-content: flex-start;
 }
 
 .icons-list-searchbar {
@@ -171,15 +173,15 @@ html[data-theme='light'] .gallery-dark {
   border-radius: 3px;
   transition: background-color 0.3s;
   outline: 0;
+}
 
-  &:focus,
-  &:hover {
-    background-color: #e7e7e7;
-  }
+.icons-list-searchbar:focus,
+.icons-list-searchbar:hover {
+  background-color: #e7e7e7;
+}
 
-  *:focus-visible {
-    outline: auto;
-  }
+.icons-list-searchbar:focus-visible {
+  outline: auto;
 }
 
 @font-face {
