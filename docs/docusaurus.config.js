@@ -37,8 +37,6 @@ const config = {
   tagline: 'Material Design for React Native',
   url,
   baseUrl,
-  onBrokenLinks: 'log',
-  onBrokenMarkdownLinks: 'log',
   favicon: 'images/favicon.ico',
 
   // GitHub pages deployment config.
@@ -53,6 +51,10 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  onBrokenLinks: 'throw',
+  onDuplicateRoutes: 'throw',
+  onBrokenMarkdownLinks: 'throw',
 
   plugins: [
     [
