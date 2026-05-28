@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentProps } from 'react';
 import {
   ColorValue,
   Platform,
@@ -12,7 +11,7 @@ import {
 import { black } from '../theme/colors';
 
 export type IconProps = {
-  name: ComponentProps<typeof MaterialCommunityIcons>['name'];
+  name: string;
   color?: ColorValue;
   size: number;
   direction: 'rtl' | 'ltr';
@@ -41,31 +40,22 @@ export const accessibilityProps: AccessibilityProps =
         importantForAccessibility: 'no-hide-descendants',
       };
 
-/**
- * Loads the appropriate icon module based on available dependencies
- */
 const loadIconModule = () => {
   try {
     return require('@react-native-vector-icons/material-design-icons').default;
   } catch (e) {
-    try {
-      return require('@expo/vector-icons/MaterialCommunityIcons').default;
-    } catch (e) {
-      try {
-        return require('react-native-vector-icons/MaterialCommunityIcons')
-          .default;
-      } catch (e) {
-        return null;
-      }
-    }
+    return null;
   }
 };
 
 type IconModuleType = React.ComponentType<
-  React.ComponentProps<
-    | typeof import('@react-native-vector-icons/material-design-icons').default
-    | typeof import('react-native-vector-icons/MaterialCommunityIcons').default
+  Omit<
+    React.ComponentProps<
+      typeof import('@react-native-vector-icons/material-design-icons').default
+    >,
+    'name'
   > & {
+    name: string;
     color: ColorValue;
     pointerEvents?: ViewProps['pointerEvents'];
   }
@@ -73,16 +63,10 @@ type IconModuleType = React.ComponentType<
 
 const IconModule = loadIconModule();
 
-/**
- * Fallback component displayed when no icon library is available
- */
 const FallbackIcon = ({ name, color, size, ...rest }: IconProps) => {
   console.warn(
-    `Tried to use the icon '${name}' in a component from 'react-native-paper', but none of the required icon libraries are installed.`,
-    `To fix this, please install one of the following:\n` +
-      `- @expo/vector-icons\n` +
-      `- @react-native-vector-icons/material-design-icons\n` +
-      `- react-native-vector-icons\n\n` +
+    `Tried to use the icon '${name}' in a component from 'react-native-paper', but the required icon library is not installed.`,
+    `To fix this, please install '@react-native-vector-icons/material-design-icons'.\n\n` +
       `You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
   );
 
