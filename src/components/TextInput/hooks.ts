@@ -1,10 +1,4 @@
-import {
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-  type RefObject,
-} from 'react';
+import { useImperativeHandle, useRef, useState, type RefObject } from 'react';
 import {
   BlurEvent,
   FocusEvent,
@@ -263,82 +257,58 @@ const useTextInputLayout = ({
 }): TextInputLayoutState => {
   const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix } = flags;
 
-  const { multiline } = props;
-
   const {
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
     animatedActiveOutlineStyle,
   } = animation;
 
-  return useMemo(
-    () => {
-      const {
-        input: _input,
-        isDisabled: _isDisabled,
-        hasError: _hasError,
-        hasSuffix: _hasSuffix,
-        ...layout
-      } = variant === 'filled'
-        ? getFilledTextInputData(
-            {
-              input,
-              theme,
-              isFocused,
-              isRTL,
-              isDisabled,
-              hasAccessory,
-              hasError,
-              hasSuffix,
-              animatedLabelWrapperStyle,
-              animatedLabelTextStyle,
-              animatedActiveOutlineStyle,
-            },
-            props
-          )
-        : getOutlinedTextInputData(
-            {
-              input,
-              theme,
-              isFocused,
-              isRTL,
-              isDisabled,
-              hasAccessory,
-              hasError,
-              hasSuffix,
-              animatedLabelWrapperStyle,
-              animatedLabelTextStyle,
-              animatedActiveOutlineStyle,
-            },
-            props
-          );
+  const {
+    input: _input,
+    isDisabled: _isDisabled,
+    hasError: _hasError,
+    hasSuffix: _hasSuffix,
+    ...layout
+  } = variant === 'filled'
+    ? getFilledTextInputData(
+        {
+          input,
+          theme,
+          isFocused,
+          isRTL,
+          isDisabled,
+          hasAccessory,
+          hasError,
+          hasSuffix,
+          animatedLabelWrapperStyle,
+          animatedLabelTextStyle,
+          animatedActiveOutlineStyle,
+        },
+        props
+      )
+    : getOutlinedTextInputData(
+        {
+          input,
+          theme,
+          isFocused,
+          isRTL,
+          isDisabled,
+          hasAccessory,
+          hasError,
+          hasSuffix,
+          animatedLabelWrapperStyle,
+          animatedLabelTextStyle,
+          animatedActiveOutlineStyle,
+        },
+        props
+      );
 
-      void _input;
-      void _isDisabled;
-      void _hasError;
-      void _hasSuffix;
+  void _input;
+  void _isDisabled;
+  void _hasError;
+  void _hasSuffix;
 
-      return layout;
-    },
-    /**
-     * `input` is a stable ref. `props` is omitted — only `multiline` affects layout.
-     * `style` is omitted — assumed stable; dynamic `style` changes won't invalidate layout.
-     * Animated styles are stable `useAnimatedStyle` objects and are omitted from deps.
-     * `isFocused` drives static focus styles (label color, outline border).
-     */
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment
-    [
-      variant,
-      theme,
-      isFocused,
-      isRTL,
-      isDisabled,
-      hasAccessory,
-      hasError,
-      hasSuffix,
-      multiline,
-    ]
-  );
+  return layout;
 };
 
 export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
