@@ -862,6 +862,19 @@ it('does not expose the placeholder string when the TextInput is not focused', (
   expect(getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
+it('shows placeholder when unfocused and no label is given', () => {
+  const { getByTestId } = render(
+    <TextInput
+      value=""
+      onChangeText={() => {}}
+      placeholder="Search"
+      testID="tf-input-no-label"
+    />
+  );
+
+  expect(getByTestId('tf-input-no-label').props.placeholder).toBe('Search');
+});
+
 it('shows placeholder when the TextInput is focused', () => {
   const { getByTestId } = render(
     <TextInput

@@ -436,7 +436,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     : props.endAccessory;
 
   // https://github.com/facebook/react-native/issues/31573
-  const placeholder = isFocused ? props.placeholder : ' ';
+  const placeholder =
+    isFocused || !props.label || hasValue ? props.placeholder : ' ';
 
   return {
     input,
