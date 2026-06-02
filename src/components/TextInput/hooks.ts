@@ -383,7 +383,11 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   }, [props.value]);
 
   useImperativeHandle(ref, () => ({
-    focus: () => input.current?.focus(),
+    focus: () => {
+      if (flags.isDisabled) return;
+
+      input.current?.focus();
+    },
     clear: () => {
       input.current?.clear();
 
