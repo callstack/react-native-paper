@@ -32,6 +32,7 @@ export type TextInputAnimationState = {
 export type TextInputAnimationHandlers = {
   runFocusAnimation: (hasText: boolean) => void;
   runBlurAnimation: (hasText: boolean) => void;
+  syncFloatToValue: (hasText: boolean) => void;
 };
 
 export type TextInputFlags = {

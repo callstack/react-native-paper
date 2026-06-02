@@ -1,4 +1,10 @@
-import { useImperativeHandle, useRef, useState, type RefObject } from 'react';
+import {
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+  type RefObject,
+} from 'react';
 import {
   BlurEvent,
   FocusEvent,
@@ -77,6 +83,10 @@ const useTextInputAnimation = ({
     floatSV.value = withTiming(hasText ? 1 : 0, TIMING_CONFIG);
   };
 
+  const syncFloatToValue = (hasText: boolean) => {
+    floatSV.value = withTiming(hasText ? 1 : 0, TIMING_CONFIG);
+  };
+
   const animatedLabelWrapperStyle = useAnimatedStyle(() => {
     const top = interpolate(floatSV.value, [0, 1], [inactiveTop, activeTop]);
 
@@ -116,6 +126,7 @@ const useTextInputAnimation = ({
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
     runFocusAnimation,
     runBlurAnimation,
+    syncFloatToValue,
   };
 };
 
@@ -315,11 +326,13 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
   const input = useRef<NativeTextInput>(null);
+  const init = useRef(false);
 
   const theme = useInternalTheme(themeOverride);
 
   const { direction } = useLocale();
 
+  const isControlled = props.value !== undefined;
   const isRTL = direction === 'rtl';
   const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
 
@@ -349,6 +362,25 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     isRTL,
     hasAccessory
   );
+
+  /**
+   * Edge case: a controlled `value` can change programmatically.
+   * Reconcile the float animation with the new text here.
+   * While focused the label is always floated, so we skip to avoid fighting the
+   * focus animation, and depend only on `value` to avoid re-running on
+   * focus/blur transitions (those are already handled by their own handlers)
+   */
+  useEffect(() => {
+    if (!init.current) {
+      init.current = true;
+      return;
+    }
+
+    if (isControlled && !isFocused) {
+      animation.syncFloatToValue(!!props.value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- [props.value] is the only dep that should act as a trigger
+  }, [props.value]);
 
   useImperativeHandle(ref, () => ({
     focus: () => input.current?.focus(),
