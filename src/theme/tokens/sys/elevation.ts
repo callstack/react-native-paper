@@ -43,6 +43,11 @@ export const elevationInputRange: Elevation[] = Object.values(defaultElevation);
 
 export const androidElevationLevels = [0, 1, 3, 6, 8, 12];
 
+export const SHADOW_OPACITY = 0.3;
+// iOS shadowRadius is a Gaussian sigma; CSS blur-radius = 2*sigma.
+// Dividing by this factor normalizes the spread to match Web.
+export const IOS_SHADOW_RADIUS_FACTOR = 0.5;
+
 export const shadowLayers = [
   {
     shadowOpacity: 0.15,
@@ -50,7 +55,7 @@ export const shadowLayers = [
     shadowRadius: [0, 3, 6, 8, 10, 12],
   },
   {
-    shadowOpacity: 0.3,
+    shadowOpacity: SHADOW_OPACITY,
     height: [0, 1, 1, 1, 2, 4],
     shadowRadius: [0, 2, 2, 3, 3, 4],
   },
@@ -87,7 +92,7 @@ export function shadow(
   shadowColor: ColorValue
 ): ViewStyle | AnimatedShadowStyle {
   if (Platform.OS === 'web') {
-    const webShadowColor = getShadowColor(shadowColor, 0.3);
+    const webShadowColor = getShadowColor(shadowColor, SHADOW_OPACITY);
 
     if (isAnimatedValue(elevation)) {
       return {
@@ -117,23 +122,26 @@ export function shadow(
       },
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 0.3],
+        outputRange: [0, SHADOW_OPACITY],
         extrapolate: 'clamp',
       }),
       shadowRadius: elevation.interpolate({
         inputRange: elevationInputRange,
-        outputRange: shadowLayers[0].shadowRadius,
+        outputRange: shadowLayers[0].shadowRadius.map(
+          (r) => r * IOS_SHADOW_RADIUS_FACTOR
+        ),
       }),
     };
   }
 
   return {
     shadowColor,
-    shadowOpacity: elevation ? 0.3 : 0,
+    shadowOpacity: elevation ? SHADOW_OPACITY : 0,
     shadowOffset: {
       width: 0,
       height: shadowLayers[0].height[elevation],
     },
-    shadowRadius: shadowLayers[0].shadowRadius[elevation],
+    shadowRadius:
+      shadowLayers[0].shadowRadius[elevation] * IOS_SHADOW_RADIUS_FACTOR,
   };
 }

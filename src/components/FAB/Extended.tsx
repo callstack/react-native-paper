@@ -1,34 +1,34 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  Text as NativeText,
-  TextLayoutEvent,
+  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 
-import {
+import Reanimated, {
+  measure,
+  useAnimatedRef,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import { scheduleOnUI } from 'react-native-worklets';
 
-import FabShell from './FabShell';
-import {
-  FloatingActionButtonSize,
-  FloatingActionButtonVariant,
-} from './tokens';
-import { getDimensions, getLabelSizeWeb } from './utils';
+import Shell from './Shell';
+import { Size, Variant } from './tokens';
+import { getDimensions } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
+import AnimatedText from '../Typography/AnimatedText';
 
 export type Props = {
   /**
@@ -42,11 +42,20 @@ export type Props = {
   /**
    * Role-color preset. Defaults to `tonalPrimary`.
    */
-  variant?: FloatingActionButtonVariant;
+  variant?: Variant;
+  /**
+   * Override the container (background) color. When set without `contentColor`,
+   * the icon and label colors are derived automatically via `contentColorFor`.
+   */
+  containerColor?: ColorValue;
+  /**
+   * Override the content (icon + label) color.
+   */
+  contentColor?: ColorValue;
   /**
    * Spec size. Defaults to `default`.
    */
-  size?: FloatingActionButtonSize;
+  size?: Size;
   /**
    * Whether the FAB is expanded (icon + label) or collapsed (icon only). The
    * width and label opacity animate per the MD3 Expressive spec on change.
@@ -103,13 +112,13 @@ export type Props = {
  * ```js
  * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
- * import { ExtendedFloatingActionButton } from 'react-native-paper';
+ * import { FAB } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [expanded, setExpanded] = React.useState(true);
  *
  *   return (
- *     <ExtendedFloatingActionButton
+ *     <FAB.Extended
  *       icon="plus"
  *       label="New message"
  *       expanded={expanded}
@@ -131,12 +140,14 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const ExtendedFloatingActionButton = forwardRef<View, Props>(
+const Extended = forwardRef<View, Props>(
   (
     {
       icon,
       label,
       variant = 'tonalPrimary',
+      containerColor,
+      contentColor,
       size = 'default',
       expanded,
       visible = true,
@@ -153,59 +164,37 @@ const ExtendedFloatingActionButton = forwardRef<View, Props>(
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const reduceMotion = useReduceMotion();
-    const isWeb = Platform.OS === 'web';
 
-    const dimensions = React.useMemo(
-      () => getDimensions({ theme, size }),
-      [theme, size]
-    );
+    const dimensions = getDimensions({ theme, size });
 
-    const labelRef = React.useRef<NativeText & HTMLElement>(null);
-    const initialLabelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
-    const [labelWidth, setLabelWidth] = React.useState<number>(
-      initialLabelSize?.width ?? 0
-    );
+    const offscreenLabelRef = useAnimatedRef<Reanimated.View>();
 
-    const collapsedWidth = dimensions.width;
-    const expandedWidth =
-      dimensions.leading +
-      dimensions.iconSize +
-      dimensions.iconLabelGap +
-      labelWidth +
-      dimensions.trailing;
-
-    const widthValue = useSharedValue(
-      expanded ? expandedWidth : collapsedWidth
-    );
+    const widthValue = useSharedValue(dimensions.width);
     const labelOpacity = useSharedValue(expanded ? 1 : 0);
 
     React.useEffect(() => {
-      if (!isWeb) {
-        return;
-      }
-      const updateLabelSize = () => {
-        if (labelRef.current) {
-          const measured = getLabelSizeWeb(labelRef);
-          if (measured) {
-            setLabelWidth(measured.width);
-          }
-        }
-      };
-      updateLabelSize();
-      window.addEventListener('resize', updateLabelSize);
-      return () => {
-        window.removeEventListener('resize', updateLabelSize);
-      };
-    }, [isWeb, label]);
-
-    React.useEffect(() => {
-      const targetWidth = expanded ? expandedWidth : collapsedWidth;
+      const {
+        width: collapsedWidth,
+        leading,
+        iconSize,
+        iconLabelGap,
+        trailing,
+      } = dimensions;
       const targetOpacity = expanded ? 1 : 0;
+
       if (reduceMotion) {
-        widthValue.value = targetWidth;
-        labelOpacity.value = targetOpacity;
+        scheduleOnUI(() => {
+          'worklet';
+          const m = measure(offscreenLabelRef);
+          const lw = m?.width ?? 0;
+          widthValue.value = expanded
+            ? leading + iconSize + iconLabelGap + lw + trailing
+            : collapsedWidth;
+          labelOpacity.value = targetOpacity;
+        });
         return;
       }
+
       const widthSpring = toRawSpring(
         expanded
           ? theme.motion.spring.fast.spatial
@@ -216,58 +205,84 @@ const ExtendedFloatingActionButton = forwardRef<View, Props>(
           ? theme.motion.spring.default.effects
           : theme.motion.spring.fast.effects
       );
-      widthValue.value = withSpring(targetWidth, widthSpring);
-      labelOpacity.value = withSpring(targetOpacity, opacitySpring);
+
+      scheduleOnUI(() => {
+        'worklet';
+        const m = measure(offscreenLabelRef);
+        const lw = m?.width ?? 0;
+        const expandedWidth = leading + iconSize + iconLabelGap + lw + trailing;
+        widthValue.value = withSpring(
+          expanded ? expandedWidth : collapsedWidth,
+          widthSpring
+        );
+        labelOpacity.value = withSpring(targetOpacity, opacitySpring);
+      });
     }, [
       expanded,
-      expandedWidth,
-      collapsedWidth,
+      label,
+      dimensions,
       theme,
       reduceMotion,
       widthValue,
       labelOpacity,
+      offscreenLabelRef,
     ]);
 
     const labelAnimatedStyle = useAnimatedStyle(() => ({
       opacity: labelOpacity.value,
     }));
 
-    const onTextLayout = ({ nativeEvent }: TextLayoutEvent) => {
-      const measured = Math.ceil(nativeEvent.lines[0]?.width ?? 0);
-      if (measured !== labelWidth) {
-        setLabelWidth(measured);
-      }
-    };
-
     return (
-      <FabShell
-        ref={ref}
-        icon={icon}
-        label={label}
-        variant={variant}
-        size={size}
-        visible={visible}
-        onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityState={accessibilityState}
-        background={background}
-        widthShared={widthValue}
-        labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-        labelAnimatedStyle={labelAnimatedStyle}
-        labelRef={isWeb ? labelRef : undefined}
-        onLabelTextLayout={Platform.OS === 'ios' ? onTextLayout : undefined}
-        offscreenLabelMeasure={
-          Platform.OS === 'android' ? onTextLayout : undefined
-        }
-        style={style}
-        testID={testID}
-        theme={themeOverrides}
-      />
+      <>
+        <Shell
+          ref={ref}
+          icon={icon}
+          label={label}
+          variant={variant}
+          containerColor={containerColor}
+          contentColor={contentColor}
+          size={size}
+          visible={visible}
+          onPress={onPress}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityState={accessibilityState}
+          background={background}
+          widthShared={widthValue}
+          labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+          labelAnimatedStyle={labelAnimatedStyle}
+          style={style}
+          testID={testID}
+          theme={themeOverrides}
+        />
+        <Reanimated.View
+          ref={offscreenLabelRef}
+          style={styles.offscreenMeasure}
+          importantForAccessibility="no-hide-descendants"
+          accessibilityElementsHidden
+        >
+          <AnimatedText
+            variant={dimensions.labelTypescale}
+            numberOfLines={1}
+            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+          >
+            {label}
+          </AnimatedText>
+        </Reanimated.View>
+      </>
     );
   }
 );
 
-export default ExtendedFloatingActionButton;
+const styles = StyleSheet.create({
+  offscreenMeasure: {
+    position: 'absolute',
+    alignSelf: 'flex-start',
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+});
+
+export default Extended;
 
 // @component-docs ignore-next-line
-export { ExtendedFloatingActionButton };
+export { Extended };

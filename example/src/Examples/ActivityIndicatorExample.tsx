@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  ActivityIndicator,
-  FloatingActionButton,
-  List,
-  Palette,
-} from 'react-native-paper';
+import { ActivityIndicator, FAB, List, Palette } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -16,7 +11,7 @@ const ActivityIndicatorExample = () => {
   return (
     <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
-        <FloatingActionButton
+        <FAB
           icon={animating ? 'pause' : 'play'}
           onPress={() => setAnimating(!animating)}
         />
