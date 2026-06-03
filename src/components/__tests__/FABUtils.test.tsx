@@ -1,5 +1,3 @@
-import { describe, expect, it } from '@jest/globals';
-
 import { getTheme } from '../../core/theming';
 import { getDimensions, resolveColors } from '../FAB/utils';
 

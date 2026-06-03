@@ -1,64 +1,55 @@
-import { expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import * as React from 'react';
 
-import { render, screen } from '../../test-utils';
+import { fireEvent } from '@testing-library/react-native';
+
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 
-it('renders extended FAB expanded', async () => {
-  const tree = (
-    await render(<FAB.Extended icon="plus" label="New message" expanded />)
+it('renders extended FAB expanded', () => {
+  const tree = render(
+    <FAB.Extended icon="plus" label="New message" expanded />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB collapsed', async () => {
-  const tree = (
-    await render(
-      <FAB.Extended icon="plus" label="New message" expanded={false} />
-    )
+it('renders extended FAB collapsed', () => {
+  const tree = render(
+    <FAB.Extended icon="plus" label="New message" expanded={false} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB not visible', async () => {
-  const tree = (
-    await render(
-      <FAB.Extended icon="plus" label="New message" expanded visible={false} />
-    )
+it('renders extended FAB not visible', () => {
+  const tree = render(
+    <FAB.Extended icon="plus" label="New message" expanded visible={false} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB medium size', async () => {
-  const tree = (
-    await render(
-      <FAB.Extended icon="plus" label="New message" expanded size="medium" />
-    )
+it('renders extended FAB medium size', () => {
+  const tree = render(
+    <FAB.Extended icon="plus" label="New message" expanded size="medium" />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB large size', async () => {
-  const tree = (
-    await render(
-      <FAB.Extended icon="plus" label="New message" expanded size="large" />
-    )
+it('renders extended FAB large size', () => {
+  const tree = render(
+    <FAB.Extended icon="plus" label="New message" expanded size="large" />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB transitioning to collapsed', async () => {
-  const { rerender, toJSON } = await render(
+it('renders extended FAB transitioning to collapsed', () => {
+  const { update, toJSON } = render(
     <FAB.Extended icon="plus" label="New message" expanded />
   );
-  await rerender(
-    <FAB.Extended icon="plus" label="New message" expanded={false} />
-  );
+  update(<FAB.Extended icon="plus" label="New message" expanded={false} />);
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('uses label as default aria-label', async () => {
-  await render(
+it('uses label as default accessibilityLabel', () => {
+  const { getByTestId } = render(
     <FAB.Extended
       icon="plus"
       label="New message"
@@ -66,28 +57,29 @@ it('uses label as default aria-label', async () => {
       testID="extended-fab"
     />
   );
-
-  expect(screen.getByLabelText('New message')).toBeOnTheScreen();
+  expect(getByTestId('extended-fab').props.accessibilityLabel).toBe(
+    'New message'
+  );
 });
 
-it('respects explicit aria-label', async () => {
-  await render(
+it('respects explicit accessibilityLabel', () => {
+  const { getByTestId } = render(
     <FAB.Extended
       icon="plus"
       label="New message"
       expanded
-      aria-label="Create new message"
+      accessibilityLabel="Create new message"
       testID="extended-fab"
     />
   );
-
-  expect(screen.getByLabelText('Create new message')).toBeOnTheScreen();
+  expect(getByTestId('extended-fab').props.accessibilityLabel).toBe(
+    'Create new message'
+  );
 });
 
-it('calls onPress when pressed', async () => {
-  const user = userEvent.setup();
+it('calls onPress when pressed', () => {
   const onPress = jest.fn();
-  await render(
+  const { getByTestId } = render(
     <FAB.Extended
       icon="plus"
       label="New message"
@@ -96,13 +88,13 @@ it('calls onPress when pressed', async () => {
       testID="extended-fab"
     />
   );
-  await user.press(screen.getByRole('button', { name: 'New message' }));
+  fireEvent.press(getByTestId('extended-fab'));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
-it('forwards event object to onPress', async () => {
+it('forwards event object to onPress', () => {
   const onPress = jest.fn();
-  await render(
+  const { getByTestId } = render(
     <FAB.Extended
       icon="plus"
       label="New message"
@@ -111,12 +103,6 @@ it('forwards event object to onPress', async () => {
       testID="extended-fab"
     />
   );
-  await fireEvent(
-    screen.getByRole('button', { name: 'New message' }),
-    'onPress',
-    {
-      key: 'value',
-    }
-  );
+  fireEvent(getByTestId('extended-fab'), 'onPress', { key: 'value' });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });

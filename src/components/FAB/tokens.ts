@@ -8,7 +8,7 @@ import type {
   TypescaleKey,
 } from '../../theme/types';
 
-export type FloatingActionButtonVariant =
+export type Variant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -16,7 +16,7 @@ export type FloatingActionButtonVariant =
   | 'tonalSecondary'
   | 'tonalTertiary';
 
-export type FloatingActionButtonSize = 'default' | 'medium' | 'large';
+export type Size = 'default' | 'medium' | 'large';
 
 type SizeSpec = {
   container: number;
@@ -58,7 +58,7 @@ const sizes = {
     iconLabelGap: 16,
     labelTypescale: 'headlineSmall',
   },
-} as const satisfies Record<FloatingActionButtonSize, SizeSpec>;
+} as const satisfies Record<Size, SizeSpec>;
 
 const stateElevation = {
   enabled: 3,
@@ -84,11 +84,11 @@ const variants = {
     content: 'onTertiaryContainer',
   },
 } as const satisfies Record<
-  FloatingActionButtonVariant,
+  Variant,
   { container: ColorRole; content: ColorRole }
 >;
 
-export const FloatingActionButtonTokens = {
+export const Tokens = {
   sizes,
   stateElevation,
   variants,
@@ -114,7 +114,7 @@ const spacing = {
   closeToLastItem: 8,
 } as const;
 
-export const FloatingActionButtonMenuTokens = {
+export const MenuTokens = {
   closeButton,
   listItem,
   spacing,

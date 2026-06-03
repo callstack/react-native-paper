@@ -32,9 +32,7 @@ export { default as Chip } from './components/Chip/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
-export { default as FloatingActionButton } from './components/FAB/FloatingActionButton';
-export { default as ExtendedFloatingActionButton } from './components/FAB/ExtendedFloatingActionButton';
-export { default as FloatingActionButtonMenu } from './components/FAB/FloatingActionButtonMenu';
+export { default as FAB } from './components/FAB';
 export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
@@ -96,15 +94,16 @@ export type { Props as DividerProps } from './components/Divider';
 export type { Props as DrawerCollapsedItemProps } from './components/Drawer/DrawerCollapsedItem';
 export type { Props as DrawerItemProps } from './components/Drawer/DrawerItem';
 export type { Props as DrawerSectionProps } from './components/Drawer/DrawerSection';
-export type { Props as FloatingActionButtonProps } from './components/FAB/FloatingActionButton';
-export type { Props as ExtendedFloatingActionButtonProps } from './components/FAB/ExtendedFloatingActionButton';
+export type { Props as FABProps } from './components/FAB/FAB';
+export type { Props as FABExtendedProps } from './components/FAB/Extended';
 export type {
-  FloatingActionButtonMenuProps,
-  FloatingActionButtonMenuItemProps,
-} from './components/FAB/FloatingActionButtonMenu';
+  MenuProps as FABMenuProps,
+  MenuItemProps as FABMenuItemProps,
+  MenuTriggerProps as FABMenuTriggerProps,
+} from './components/FAB/Menu';
 export type {
-  FloatingActionButtonVariant,
-  FloatingActionButtonSize,
+  Variant as FABVariant,
+  Size as FABSize,
 } from './components/FAB/tokens';
 export type { Props as IconButtonProps } from './components/IconButton/IconButton';
 export type { Props as ListAccordionProps } from './components/List/ListAccordion';

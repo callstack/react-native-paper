@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -8,11 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import FabShell from './FabShell';
-import {
-  FloatingActionButtonSize,
-  FloatingActionButtonVariant,
-} from './tokens';
+import Shell from './Shell';
+import { Size, Variant } from './tokens';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
@@ -25,11 +23,19 @@ export type Props = {
   /**
    * Role-color preset. Defaults to `tonalPrimary`.
    */
-  variant?: FloatingActionButtonVariant;
+  variant?: Variant;
+  /**
+   * Override the container (background) color.
+   */
+  containerColor?: ColorValue;
+  /**
+   * Override the content (icon) color.
+   */
+  contentColor?: ColorValue;
   /**
    * Spec size. Defaults to `default`.
    */
-  size?: FloatingActionButtonSize;
+  size?: Size;
   /**
    * Whether the FAB is currently visible. Toggling animates the spec'd enter
    * and exit (scale + alpha) on the FAB itself.
@@ -75,10 +81,10 @@ export type Props = {
  * ```js
  * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
- * import { FloatingActionButton } from 'react-native-paper';
+ * import { FAB } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <FloatingActionButton
+ *   <FAB
  *     icon="plus"
  *     style={styles.fab}
  *     onPress={() => console.log('Pressed')}
@@ -97,7 +103,7 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const FloatingActionButton = forwardRef<View, Props>(
+const FAB = forwardRef<View, Props>(
   (
     {
       icon,
@@ -105,6 +111,8 @@ const FloatingActionButton = forwardRef<View, Props>(
       size = 'default',
       visible = true,
       onPress,
+      containerColor,
+      contentColor,
       accessibilityLabel,
       accessibilityState,
       background,
@@ -114,13 +122,15 @@ const FloatingActionButton = forwardRef<View, Props>(
     },
     ref
   ) => (
-    <FabShell
+    <Shell
       ref={ref}
       icon={icon}
       variant={variant}
       size={size}
       visible={visible}
       onPress={onPress}
+      containerColor={containerColor}
+      contentColor={contentColor}
       accessibilityLabel={accessibilityLabel}
       accessibilityState={accessibilityState}
       background={background}
@@ -131,7 +141,7 @@ const FloatingActionButton = forwardRef<View, Props>(
   )
 );
 
-export default FloatingActionButton;
+export default FAB;
 
 // @component-docs ignore-next-line
-export { FloatingActionButton };
+export { FAB };

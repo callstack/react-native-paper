@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import type { ColorValue, GestureResponderEvent } from 'react-native';
+import {
+  ColorValue,
+  GestureResponderEvent,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import Animated, {
   interpolate,
@@ -16,12 +21,13 @@ import Content from './Content';
 import Shell from './Shell';
 import {
   MenuTokens,
+  Size,
   Tokens,
+  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
-import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
@@ -30,8 +36,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme, ThemeProp } from '../../types';
-import Icon from '../Icon';
-import type { IconSource } from '../Icon';
+import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type MenuItemProps = {
@@ -51,7 +56,7 @@ export type MenuItemProps = {
   /**
    * Accessibility label. Falls back to `label`.
    */
-  'aria-label'?: string;
+  accessibilityLabel?: string;
   testID?: string;
 };
 
@@ -67,10 +72,7 @@ export type MenuTriggerProps = {
   contentColor?: ColorValue;
   visible?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label for the trigger FAB.
-   */
-  'aria-label'?: string;
+  accessibilityLabel?: string;
   testID?: string;
 };
 
@@ -209,7 +211,7 @@ const AnimatedItem = ({
         expanded ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       importantForAccessibility={expanded ? 'yes' : 'no-hide-descendants'}
-      aria-hidden={!expanded}
+      accessibilityElementsHidden={!expanded}
     >
       {children}
     </Animated.View>
@@ -222,10 +224,7 @@ type ItemProps = {
   variant: Variant;
   theme: InternalTheme;
   onPress: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label. Falls back to `label`.
-   */
-  'aria-label'?: string;
+  accessibilityLabel?: string;
   testID?: string;
 };
 
@@ -241,7 +240,7 @@ const MenuItem = ({
   variant,
   theme,
   onPress,
-  'aria-label': ariaLabel,
+  accessibilityLabel,
   testID,
 }: ItemProps) => {
   const colors = resolveColors({ theme, variant });
@@ -267,8 +266,8 @@ const MenuItem = ({
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}
-          role="button"
-          aria-label={ariaLabel ?? label}
+          accessibilityRole="button"
+          accessibilityLabel={accessibilityLabel ?? label}
           style={[
             { borderRadius },
             Platform.OS === 'web' ? webNoOutline : null,
@@ -315,10 +314,7 @@ type MorphingTriggerProps = {
   visible: boolean;
   alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label for the trigger button.
-   */
-  'aria-label'?: string;
+  accessibilityLabel?: string;
   theme: InternalTheme;
   testID?: string;
 };
@@ -335,7 +331,7 @@ const MorphingTrigger = ({
   visible,
   alignment,
   onPress,
-  'aria-label': ariaLabel,
+  accessibilityLabel,
   theme,
   testID,
 }: MorphingTriggerProps) => {
@@ -432,8 +428,8 @@ const MorphingTrigger = ({
     alignment === 'start'
       ? 'flex-start'
       : alignment === 'center'
-        ? 'center'
-        : 'flex-end';
+      ? 'center'
+      : 'flex-end';
 
   return (
     <View
@@ -455,7 +451,7 @@ const MorphingTrigger = ({
         contentColor={triggerContentColor}
         visible={visible}
         onPress={onPress}
-        aria-label={ariaLabel}
+        accessibilityLabel={accessibilityLabel}
         widthShared={widthShared}
         heightShared={heightShared}
         borderRadiusShared={borderRadiusShared}
@@ -565,18 +561,18 @@ const Menu = ({
     alignment === 'start'
       ? 'flex-start'
       : alignment === 'center'
-        ? 'center'
-        : 'flex-end';
+      ? 'center'
+      : 'flex-end';
   const itemTransformOrigin: 'left' | 'center' | 'right' =
     alignment === 'start'
       ? isRTL
         ? 'right'
         : 'left'
       : alignment === 'center'
-        ? 'center'
-        : isRTL
-          ? 'left'
-          : 'right';
+      ? 'center'
+      : isRTL
+      ? 'left'
+      : 'right';
 
   const triggerSlotSize = Tokens.sizes[size].container;
 
@@ -600,8 +596,8 @@ const Menu = ({
             alignment === 'start'
               ? styles.itemsStart
               : alignment === 'center'
-                ? styles.itemsCenter
-                : styles.itemsEnd,
+              ? styles.itemsCenter
+              : styles.itemsEnd,
             {
               bottom: triggerSlotSize + MenuTokens.spacing.closeToLastItem,
               alignItems: flexAlign,
@@ -625,7 +621,7 @@ const Menu = ({
                   label={item.label}
                   variant={itemsVariant}
                   theme={theme}
-                  aria-label={item['aria-label'] ?? item.label}
+                  accessibilityLabel={item.accessibilityLabel ?? item.label}
                   onPress={handleItemPress(item)}
                   testID={item.testID}
                 />
@@ -645,7 +641,7 @@ const Menu = ({
           visible={triggerVisible}
           alignment={alignment}
           onPress={effectiveExpanded ? onDismiss : openOnPress}
-          aria-label={trigger['aria-label']}
+          accessibilityLabel={trigger.accessibilityLabel}
           theme={theme}
           testID={trigger.testID}
         />
