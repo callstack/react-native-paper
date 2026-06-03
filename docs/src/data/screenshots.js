@@ -79,7 +79,6 @@ const screenshots = {
   },
   AnimatedFAB: 'screenshots/animated-fab.gif',
   'FAB.Group': 'screenshots/fab-group.gif',
-  HelperText: 'screenshots/helper-text.gif',
   Icon: 'screenshots/icon.png',
   IconButton: {
     default: 'screenshots/icon-button-1.png',
@@ -147,13 +146,9 @@ const screenshots = {
   },
   Text: 'screenshots/typography.png',
   TextInput: {
-    'flat (focused)': 'screenshots/textinput-flat.focused.png',
-    'flat (disabled)': 'screenshots/textinput-flat.disabled.png',
-    'outlined (focused)': 'screenshots/textinput-outlined.focused.png',
-    'outlined (disabled)': 'screenshots/textinput-outlined.disabled.png',
+    filled: 'screenshots/text-input-filled.png',
+    outlined: 'screenshots/text-input-outlined.png',
   },
-  'TextInput.Affix': 'screenshots/textinput-outline.affix.png',
-  'TextInput.Icon': 'screenshots/textinput-flat.icon.png',
   ToggleButton: 'screenshots/toggle-button.png',
   'ToggleButton.Group': 'screenshots/toggle-button-group.gif',
   'ToggleButton.Row': 'screenshots/toggle-button-row.gif',

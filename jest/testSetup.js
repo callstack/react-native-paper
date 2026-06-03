@@ -18,17 +18,14 @@ jest.mock('@react-native-vector-icons/material-design-icons', () => {
 
   const MockIcon = ({ name, color, size, style, ...props }) => {
     return (
-      <Text 
-        style={[{ color, fontSize: size }, style]} 
-        {...props}
-      >
+      <Text style={[{ color, fontSize: size }, style]} {...props}>
         {name || '□'}
       </Text>
     );
   };
 
   MockIcon.displayName = 'MockedMaterialDesignIcon';
-  
+
   return {
     __esModule: true,
     default: MockIcon,

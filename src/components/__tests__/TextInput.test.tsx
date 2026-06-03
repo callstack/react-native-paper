@@ -1,990 +1,1287 @@
-/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-import { fireEvent } from '@testing-library/react-native';
-
-import PaperProvider from '../../core/PaperProvider';
-import { getTheme, ThemeProvider } from '../../core/theming';
-import { render } from '../../test-utils';
-import { red500 } from '../../theme/colors';
-import { LightTheme } from '../../theme/schemes';
-import { tokens } from '../../theme/tokens';
 import {
-  getFlatInputColors,
-  getOutlinedInputColors,
-} from '../TextInput/helpers';
-import TextInput, { Props } from '../TextInput/TextInput';
+  I18nManager,
+  StyleSheet,
+  TextInput as NativeTextInput,
+  View,
+} from 'react-native';
+
+import { act, fireEvent, render } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
+import TextInput from '../TextInput';
+import type {
+  TextInputRenderProps,
+  TextInputHandles,
+} from '../TextInput/TextInput';
+import type { TextInputAccessoryProps } from '../TextInput/TextInputIcon';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-const style = StyleSheet.create({
-  inputStyle: {
-    color: red500,
-  },
-  centered: {
-    textAlign: 'center',
-  },
-  height: {
-    height: 100,
-  },
-  lineHeight: {
-    lineHeight: 22,
-  },
-  contentStyle: {
-    paddingLeft: 20,
-  },
+const defaultI18nIsRTL = I18nManager.isRTL;
+
+const getConstantsOriginal = I18nManager.getConstants.bind(I18nManager);
+
+beforeAll(() => {
+  jest.spyOn(I18nManager, 'getConstants').mockImplementation(() => ({
+    ...getConstantsOriginal(),
+    isRTL: I18nManager.isRTL,
+  }));
 });
 
-// Revert changes to Platform.OS automatically
-const defaultPlatform = Platform.OS;
-beforeEach(() => {
-  Platform.OS = defaultPlatform;
+afterAll(() => {
+  jest.restoreAllMocks();
 });
 
-const affixTextValue = '/100';
-it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
-  const { getByText, getByTestId, toJSON } = render(
+afterEach(() => {
+  I18nManager.isRTL = defaultI18nIsRTL;
+});
+
+function firstIndexOfTestIdInTree(tree: unknown, testID: string): number {
+  const serialized = JSON.stringify(tree);
+  const match = new RegExp(`"testID":\\s*"${testID}"`).exec(serialized);
+  return match ? match.index : -1;
+}
+
+/** Locates a Text node whose children are serialized as a one-element JSON string array. */
+function firstIndexOfTextChildArrayInTree(tree: unknown, text: string): number {
+  return JSON.stringify(tree).indexOf(JSON.stringify([text]));
+}
+
+it('renders filled TextInput with label and value', () => {
+  const tree = render(
+    <TextInput label="Email" value="a@b.co" onChangeText={() => {}} />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders outlined TextInput with label and value', () => {
+  const tree = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      left={
-        <TextInput.Icon
-          icon="heart"
-          onPress={() => {
-            console.log('!@# press left');
-          }}
-        />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
+      variant="outlined"
+      label="Password"
+      value="secret"
+      onChangeText={() => {}}
     />
-  );
-  expect(getByText(affixTextValue)).toBeTruthy();
-  expect(getByTestId('left-icon-adornment')).toBeTruthy();
-  expect(getByTestId('right-affix-adornment')).toBeTruthy();
-  expect(toJSON()).toMatchSnapshot();
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
-it('correctly renders left-side affix adornment, and right-side icon adornment', () => {
-  const { getByText, getByTestId, toJSON } = render(
+it('renders filled TextInput with TextInput.Icon accessories', () => {
+  const tree = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Icon
-          icon="heart"
-          onPress={() => {
-            console.log('!@# press left');
-          }}
-        />
-      }
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
+      )}
     />
-  );
-  expect(getByText(affixTextValue)).toBeTruthy();
-  expect(getByTestId('right-icon-adornment')).toBeTruthy();
-  expect(getByTestId('left-affix-adornment')).toBeTruthy();
-  expect(toJSON()).toMatchSnapshot();
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
-it('correctly applies default textAlign based on default RTL', () => {
-  const { toJSON } = render(
+it('renders outlined TextInput with TextInput.Icon accessories', () => {
+  const tree = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
+      variant="outlined"
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
+      )}
     />
-  );
+  ).toJSON();
 
-  expect(toJSON()).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });
 
-it('correctly applies textAlign center', () => {
-  const { toJSON } = render(
+it('renders filled TextInput with TextInput.Icon accessories when error is true', () => {
+  const tree = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      style={style.centered}
-    />
-  );
-
-  expect(toJSON()).toMatchSnapshot();
-});
-
-it('correctly applies cursorColor prop', () => {
-  const { toJSON } = render(
-    <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      cursorColor={red500 as string}
-    />
-  );
-
-  expect(toJSON()).toMatchSnapshot();
-});
-
-it('correctly applies height to multiline Outline TextInput', () => {
-  const { toJSON } = render(
-    <TextInput
-      mode="outlined"
-      label="Outline Input"
-      placeholder="Type Something"
-      value={'Some test value'}
-      style={style.height}
-      multiline
-    />
-  );
-
-  expect(toJSON()).toMatchSnapshot();
-});
-
-it('correctly applies error state Outline TextInput', () => {
-  const { getByTestId } = render(
-    <TextInput
-      mode="outlined"
-      label="Outline Input with error"
-      placeholder="Type Something"
-      value={'Some test value'}
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
       error
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
     />
-  );
+  ).toJSON();
 
-  const outline = getByTestId('text-input-outline');
-  expect(outline).toHaveStyle({ borderWidth: 2 });
+  expect(tree).toMatchSnapshot();
 });
 
-it('correctly applies focused state Outline TextInput', () => {
-  const { getByTestId } = render(
+it('renders outlined TextInput with TextInput.Icon accessories when error is true', () => {
+  const tree = render(
     <TextInput
-      mode="outlined"
-      label="Outline Input with error"
-      placeholder="Type Something"
-      value={'Some test value'}
+      variant="outlined"
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
       error
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('fires onPress on TextInput.Icon end accessory', () => {
+  const onClear = jest.fn();
+  const { getAllByTestId } = render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={onClear}
+          accessibilityLabel="Clear"
+        />
+      )}
     />
   );
 
-  const outline = getByTestId('text-input-outline');
-  expect(outline).toHaveStyle({ borderWidth: 2 });
+  fireEvent.press(getAllByTestId('icon-button')[1]);
 
-  fireEvent(getByTestId('text-input-outlined'), 'focus');
-
-  expect(outline).toHaveStyle({ borderWidth: 2 });
+  expect(onClear).toHaveBeenCalledTimes(1);
 });
 
-it('contains patch spacing for flat input when ios, multiline and disabled', () => {
-  Platform.OS = 'ios';
+it('disables TextInput.Icon when the field is disabled', () => {
+  const { getAllByTestId } = render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+
+  const buttons = getAllByTestId('icon-button');
+  expect(buttons[0].props.accessibilityState?.disabled).toBe(true);
+  expect(buttons[1].props.accessibilityState?.disabled).toBe(true);
+});
+
+it('does not disable TextInput.Icon when the field is read-only (editable false)', () => {
+  const { getAllByTestId } = render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+
+  const buttons = getAllByTestId('icon-button');
+  expect(buttons[0].props.accessibilityState?.disabled).not.toBe(true);
+  expect(buttons[1].props.accessibilityState?.disabled).not.toBe(true);
+});
+
+it('renders supporting text below the field', () => {
+  const { getByText } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      supportingText="Use a valid address"
+    />
+  );
+
+  expect(getByText('Use a valid address')).toBeTruthy();
+});
+
+it('uses polite aria-live on error supporting text', () => {
+  const { getByText, getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      supportingText="Invalid"
+      error
+      testID="tf-input"
+    />
+  );
+
+  expect(getByText('Invalid').props['aria-live']).toBe('polite');
+  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+});
+
+it('marks the input invalid when error is true without supporting text', () => {
   const { getByTestId } = render(
     <TextInput
-      label="Flat input"
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      error
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+  expect(getByTestId('tf-input').props.accessibilityHint).toBeUndefined();
+});
+
+it('hides helper supporting text from the accessibility tree and omits aria-live', () => {
+  const { getByText, getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      supportingText="Optional"
+      testID="tf-input"
+    />
+  );
+
+  expect(getByText('Optional').props['aria-hidden']).toBe(true);
+  expect(getByText('Optional').props['aria-live']).toBeUndefined();
+  expect(getByTestId('tf-input').props['aria-label']).toBe('Email, Optional');
+});
+
+it('includes supporting text in aria-label when label is omitted', () => {
+  const { getByTestId } = render(
+    <TextInput
+      value=""
+      onChangeText={() => {}}
+      supportingText="Helper only"
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props['aria-label']).toBe('Helper only');
+});
+
+it('does not mark the input as aria-disabled when editable is false (read-only)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props.accessibilityState?.disabled).not.toBe(
+    true
+  );
+});
+
+it('marks the input as disabled in accessibilityState when disabled is true', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input').props.accessibilityState?.disabled).toBe(true);
+});
+
+it('renders the input via render with merged props', () => {
+  const renderInput = jest.fn((props: TextInputRenderProps) => (
+    <NativeTextInput {...props} testID="custom-input" />
+  ));
+
+  const { getByTestId } = render(
+    <TextInput
+      label="Pin"
+      value="12"
+      onChangeText={() => {}}
+      render={renderInput}
+    />
+  );
+
+  expect(getByTestId('custom-input')).toBeTruthy();
+  expect(renderInput).toHaveBeenCalled();
+  const merged = renderInput.mock.calls[0]?.[0] as TextInputRenderProps;
+  expect(merged['aria-label']).toBe('Pin');
+  expect(merged.value).toBe('12');
+});
+
+it('does not apply disabled opacity to the TextInput when editable is false (filled)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      testID="tf-input-ro"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-ro').props.style)
+  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('does not apply disabled opacity to the TextInput when editable is false (outlined)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      testID="tf-input-ro-out"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-ro-out').props.style)
+  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('applies disabled opacity to the TextInput when disabled is true (filled)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      testID="tf-input-dis"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-dis').props.style)
+  ).toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('applies disabled opacity to the TextInput when disabled is true (outlined)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      testID="tf-input-dis-out"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-dis-out').props.style)
+  ).toMatchObject({ opacity: stateOpacity.disabled });
+});
+
+it('forwards TextInput props such as testID', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="email-input"
+    />
+  );
+
+  expect(getByTestId('email-input')).toBeTruthy();
+});
+
+/* TextInput peels these before spreading onto TextInput (see TextInput.tsx).
+ * Custom layout / sub-component styling props are intentionally not supported. */
+it('does not pass TextInput-only props through to TextInput', () => {
+  const { getByTestId } = render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      error
+      disabled
+      testID="tf-native"
+    />
+  );
+
+  const input = getByTestId('tf-native');
+  expect(input.props.variant).toBeUndefined();
+  expect(input.props.theme).toBeUndefined();
+  expect(input.props.startAccessory).toBeUndefined();
+  expect(input.props.endAccessory).toBeUndefined();
+  expect(input.props.label).toBeUndefined();
+  expect(input.props.supportingText).toBeUndefined();
+  expect(input.props.prefix).toBeUndefined();
+  expect(input.props.suffix).toBeUndefined();
+  expect(input.props.counter).toBeUndefined();
+  expect(input.props.error).toBeUndefined();
+  expect(input.props.disabled).toBeUndefined();
+});
+
+it('shows a character counter when counter is true and maxLength is set (filled)', () => {
+  const { getByText, queryByText } = render(
+    <TextInput
+      label="Bio"
+      value="hello"
+      onChangeText={() => {}}
+      counter
+      maxLength={100}
+    />
+  );
+
+  expect(getByText('5/100')).toBeTruthy();
+  expect(queryByText('0/100')).toBeNull();
+});
+
+it('shows a character counter when counter is true and maxLength is set (outlined)', () => {
+  const { getByText } = render(
+    <TextInput
+      variant="outlined"
+      label="Bio"
+      value=""
+      onChangeText={() => {}}
+      counter
+      maxLength={50}
+    />
+  );
+
+  expect(getByText('0/50')).toBeTruthy();
+});
+
+it('updates the character counter when the value changes', () => {
+  const { getByText, rerender } = render(
+    <TextInput
+      label="Bio"
+      value="a"
+      onChangeText={() => {}}
+      counter
+      maxLength={10}
+    />
+  );
+
+  expect(getByText('1/10')).toBeTruthy();
+
+  rerender(
+    <TextInput
+      label="Bio"
+      value="abcd"
+      onChangeText={() => {}}
+      counter
+      maxLength={10}
+    />
+  );
+
+  expect(getByText('4/10')).toBeTruthy();
+});
+
+it('does not show a character counter when counter is false', () => {
+  const { queryByText } = render(
+    <TextInput
+      label="Bio"
+      value="hello"
+      onChangeText={() => {}}
+      maxLength={100}
+    />
+  );
+
+  expect(queryByText('5/100')).toBeNull();
+});
+
+it('does not show a character counter when maxLength is missing', () => {
+  const { queryByText } = render(
+    <TextInput label="Bio" value="hello" onChangeText={() => {}} counter />
+  );
+
+  expect(queryByText('5/100')).toBeNull();
+  expect(queryByText(/\//)).toBeNull();
+});
+
+it('invokes onFocus and onBlur on the TextInput', () => {
+  const onFocus = jest.fn();
+  const onBlur = jest.fn();
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      testID="tf-input"
+    />
+  );
+
+  const input = getByTestId('tf-input');
+  fireEvent(input, 'focus');
+  fireEvent(input, 'blur');
+
+  expect(onFocus).toHaveBeenCalledTimes(1);
+  expect(onBlur).toHaveBeenCalledTimes(1);
+});
+
+it('focuses the TextInput when the outer Pressable is pressed', () => {
+  const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
+
+  const { UNSAFE_getByProps, getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  expect(getByTestId('tf-input')).toBeTruthy();
+
+  /* Pressable is not exposed as a distinct type in the test renderer; match its props. */
+  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
+  fireEvent.press(pressable);
+
+  expect(focusSpy).toHaveBeenCalled();
+  focusSpy.mockRestore();
+});
+
+it('does not focus the TextInput when disabled and the Pressable is pressed', () => {
+  const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
+
+  const { UNSAFE_getByProps } = render(
+    <TextInput label="Email" value="" onChangeText={() => {}} disabled />
+  );
+
+  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
+  fireEvent.press(pressable);
+
+  expect(focusSpy).not.toHaveBeenCalled();
+  focusSpy.mockRestore();
+});
+
+it('focuses the TextInput when read-only and the Pressable is pressed', () => {
+  const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
+
+  const { UNSAFE_getByProps } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      editable={false}
+    />
+  );
+
+  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
+  fireEvent.press(pressable);
+
+  expect(focusSpy).toHaveBeenCalled();
+  focusSpy.mockRestore();
+});
+
+it('exposes the TextInput instance via ref prop', () => {
+  const ref = React.createRef<TextInputHandles>();
+
+  render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  expect(ref.current).toBeTruthy();
+  expect(typeof ref.current?.focus).toBe('function');
+  expect(typeof ref.current?.clear).toBe('function');
+  expect(typeof ref.current?.blur).toBe('function');
+  expect(typeof ref.current?.isFocused).toBe('function');
+  expect(typeof ref.current?.setNativeProps).toBe('function');
+  expect(typeof ref.current?.setSelection).toBe('function');
+});
+
+it('passes error, disabled, and multiline to accessories', () => {
+  const startAccessoryProps: TextInputAccessoryProps[] = [];
+  const endAccessoryProps: TextInputAccessoryProps[] = [];
+
+  function StartAccessory(props: TextInputAccessoryProps) {
+    startAccessoryProps.push(props);
+    return <View testID="start-accessory" />;
+  }
+
+  function EndAccessory(props: TextInputAccessoryProps) {
+    endAccessoryProps.push(props);
+    return <View testID="end-accessory" />;
+  }
+
+  const { getByTestId } = render(
+    <TextInput
+      label="Search"
+      value=""
+      onChangeText={() => {}}
       multiline
-      placeholder="Type something"
-      value={'Some test value'}
+      error
+      disabled
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
     />
   );
-  expect(getByTestId('patch-container')).toBeTruthy();
+
+  expect(getByTestId('start-accessory')).toBeTruthy();
+  expect(getByTestId('end-accessory')).toBeTruthy();
+  expect(startAccessoryProps[0]).toMatchObject({
+    error: true,
+    disabled: true,
+    multiline: true,
+  });
+  expect(endAccessoryProps[0]).toMatchObject({
+    error: true,
+    disabled: true,
+    multiline: true,
+  });
 });
 
-it('correctly applies a component as the text label', () => {
+it('passes error to accessories when the field is disabled', () => {
+  const startAccessoryProps: TextInputAccessoryProps[] = [];
+
+  function StartAccessory(props: TextInputAccessoryProps) {
+    startAccessoryProps.push(props);
+    return <View testID="start-acc-error-disabled" />;
+  }
+
+  const { getByTestId } = render(
+    <TextInput
+      label="Search"
+      value=""
+      onChangeText={() => {}}
+      error
+      disabled
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(getByTestId('start-acc-error-disabled')).toBeTruthy();
+  expect(startAccessoryProps[0].error).toBe(true);
+  expect(startAccessoryProps[0].disabled).toBe(true);
+});
+
+it('renders supporting text as a Text child', () => {
+  const { getByText } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      supportingText="Hint"
+    />
+  );
+
+  expect(getByText('Hint')).toBeTruthy();
+});
+
+it('renders the counter as a Text child', () => {
+  const { getByText } = render(
+    <TextInput
+      label="Bio"
+      value="hi"
+      onChangeText={() => {}}
+      counter
+      maxLength={80}
+    />
+  );
+
+  expect(getByText('2/80')).toBeTruthy();
+});
+
+it('renders supporting text and counter separately when both are shown', () => {
+  const { getByText } = render(
+    <TextInput
+      label="Bio"
+      value="x"
+      onChangeText={() => {}}
+      supportingText="Help text"
+      counter
+      maxLength={10}
+    />
+  );
+
+  expect(getByText('Help text')).toBeTruthy();
+  expect(getByText('1/10')).toBeTruthy();
+});
+
+it('applies RTL text alignment and writing direction to the TextInput (filled)', () => {
+  I18nManager.isRTL = true;
+
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      testID="tf-input-rtl"
+    />
+  );
+
+  expect(StyleSheet.flatten(getByTestId('tf-input-rtl').props.style)).toEqual(
+    expect.objectContaining({
+      textAlign: 'right',
+      writingDirection: 'rtl',
+    })
+  );
+});
+
+it('applies RTL text alignment and writing direction to the TextInput (outlined)', () => {
+  I18nManager.isRTL = true;
+
+  const { getByTestId } = render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="x"
+      onChangeText={() => {}}
+      testID="tf-input-rtl-outlined"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-input-rtl-outlined').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'right',
+      writingDirection: 'rtl',
+    })
+  );
+});
+
+it('applies RTL writing direction to supporting text', () => {
+  I18nManager.isRTL = true;
+
+  const { getByText } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      supportingText="Hint"
+    />
+  );
+
+  expect(StyleSheet.flatten(getByText('Hint').props.style)).toEqual(
+    expect.objectContaining({
+      writingDirection: 'rtl',
+    })
+  );
+});
+
+it('places EndAccessory before StartAccessory in the tree when RTL', () => {
+  I18nManager.isRTL = true;
+
+  function StartAccessory() {
+    return <View testID="rtl-acc-from-start-prop" />;
+  }
+
+  function EndAccessory() {
+    return <View testID="rtl-acc-from-end-prop" />;
+  }
+
   const { toJSON } = render(
     <TextInput
-      label={<Text style={style.inputStyle}>Flat input</Text>}
-      placeholder="Type something"
-      value={'Some test value'}
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
+      testID="tf-input-rtl-order"
     />
   );
 
-  expect(toJSON()).toMatchSnapshot();
+  const tree = toJSON();
+  expect(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop')).toBeLessThan(
+    firstIndexOfTestIdInTree(tree, 'rtl-acc-from-start-prop')
+  );
 });
 
-it('correctly applies paddingLeft from contentStyleProp', () => {
+it('places StartAccessory before EndAccessory in the tree when LTR', () => {
+  I18nManager.isRTL = false;
+
+  function StartAccessory() {
+    return <View testID="ltr-acc-from-start-prop" />;
+  }
+
+  function EndAccessory() {
+    return <View testID="ltr-acc-from-end-prop" />;
+  }
+
   const { toJSON } = render(
     <TextInput
-      label="With padding"
-      placeholder="Type something"
-      value={'Some test value'}
-      contentStyle={style.contentStyle}
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+      endAccessory={EndAccessory}
+      testID="tf-input-ltr-order"
     />
   );
 
-  expect(toJSON()).toMatchSnapshot();
+  const tree = toJSON();
+  expect(
+    firstIndexOfTestIdInTree(tree, 'ltr-acc-from-start-prop')
+  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'ltr-acc-from-end-prop'));
 });
 
-it('renders label with correct color when active', () => {
+it('does not expose the placeholder string when the TextInput is not focused', () => {
   const { getByTestId } = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      testID={'text-input-flat'}
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+      testID="tf-input"
     />
   );
 
-  fireEvent(getByTestId('text-input-flat'), 'focus');
-
-  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
-    color: getTheme().colors.primary,
-  });
+  /* Sentinel space avoids iOS multiline UITextView not updating placeholder from nil (react-native#31573). */
+  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('renders label with correct color when inactive', () => {
+it('shows placeholder when unfocused and no label is given', () => {
   const { getByTestId } = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      testID={'text-input'}
+      value=""
+      onChangeText={() => {}}
+      placeholder="Search"
+      testID="tf-input-no-label"
     />
   );
 
-  expect(getByTestId('text-input-label-inactive')).toHaveStyle({
-    color: getTheme().colors.onSurfaceVariant,
-  });
+  expect(getByTestId('tf-input-no-label').props.placeholder).toBe('Search');
 });
 
-it('renders input placeholder initially with transparent placeholderTextColor', () => {
+it('shows placeholder when the TextInput is focused', () => {
   const { getByTestId } = render(
-    <TextInput multiline label="Multiline input" testID={'text-input'} />
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+      testID="tf-input"
+    />
   );
 
-  expect(getByTestId('text-input').props.placeholderTextColor).toBe(
-    'transparent'
+  fireEvent(getByTestId('tf-input'), 'focus');
+
+  expect(getByTestId('tf-input').props.placeholder).toBe(
+    'e.g. user@example.com'
   );
 });
 
-it('correctly applies padding offset to input label on Android when RTL', () => {
-  Platform.OS = 'android';
-
+it('shows placeholder on multiline TextInput when focused', () => {
   const { getByTestId } = render(
-    <PaperProvider direction="rtl">
-      <TextInput
-        label="Flat input"
-        mode="flat"
-        testID="text-input-flat"
-        left={
-          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-        }
-        right={
-          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-        }
-      />
-    </PaperProvider>
+    <TextInput
+      label="Notes"
+      value=""
+      onChangeText={() => {}}
+      placeholder="Add a note…"
+      multiline
+      testID="tf-multiline"
+    />
   );
 
-  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
-    paddingLeft: 56,
-    paddingRight: 16,
-  });
+  expect(getByTestId('tf-multiline').props.placeholder).toBe(' ');
+
+  fireEvent(getByTestId('tf-multiline'), 'focus');
+
+  expect(getByTestId('tf-multiline').props.placeholder).toBe('Add a note…');
 });
 
-it('correctly applies padding offset to input label on Android when LTR', () => {
-  Platform.OS = 'android';
+it('does not expose the placeholder string again after the TextInput loses focus', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+      testID="tf-input"
+    />
+  );
+
+  fireEvent(getByTestId('tf-input'), 'focus');
+  fireEvent(getByTestId('tf-input'), 'blur');
+
+  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
+});
+
+it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', () => {
+  function LoneStartAccessory() {
+    return <View testID="lone-start-acc" />;
+  }
+
+  I18nManager.isRTL = false;
+
+  const { toJSON: toJsonLtr } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={LoneStartAccessory}
+      testID="tf-lone-ltr"
+    />
+  );
+
+  I18nManager.isRTL = true;
+
+  const { toJSON: toJsonRtl } = render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={LoneStartAccessory}
+      testID="tf-lone-rtl"
+    />
+  );
+
+  const ltrTree = toJsonLtr();
+  expect(firstIndexOfTestIdInTree(ltrTree, 'lone-start-acc')).toBeLessThan(
+    firstIndexOfTestIdInTree(ltrTree, 'tf-lone-ltr')
+  );
+
+  const rtlTree = toJsonRtl();
+  expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
+    firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
+  );
+});
+
+it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', () => {
+  const { getByTestId, getByText, queryByText, rerender } = render(
+    <TextInput
+      label="Amount"
+      value="1"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-ps"
+    />
+  );
+
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
+
+  rerender(
+    <TextInput
+      label="Amount"
+      value=""
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-ps"
+    />
+  );
+
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
+  expect(getByTestId('tf-ps')).toBeTruthy();
+});
+
+it('renders prefix and suffix while focused even when value is empty', () => {
+  const { getByTestId, getByText, queryByText } = render(
+    <TextInput
+      label="Amount"
+      value=""
+      onChangeText={() => {}}
+      prefix="$"
+      suffix=" kg"
+      testID="tf-ps-focus"
+    />
+  );
+
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText(' kg')).toBeNull();
+
+  fireEvent(getByTestId('tf-ps-focus'), 'focus');
+
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
+});
+
+it('places prefix Text before the TextInput and suffix Text after it', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="Label"
+      value="x"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-order"
+    />
+  );
+
+  const tree = toJSON();
+  expect(firstIndexOfTextChildArrayInTree(tree, '$')).toBeLessThan(
+    firstIndexOfTestIdInTree(tree, 'tf-order')
+  );
+  expect(firstIndexOfTestIdInTree(tree, 'tf-order')).toBeLessThan(
+    firstIndexOfTextChildArrayInTree(tree, '/100')
+  );
+});
+
+it('aligns input text toward the suffix when suffix is active (LTR)', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Label"
+      value="5"
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-suffix-align-ltr"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-suffix-align-ltr').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'right',
+      writingDirection: 'ltr',
+    })
+  );
+});
+
+it('aligns input text toward the suffix when suffix is active (RTL)', () => {
+  I18nManager.isRTL = true;
 
   const { getByTestId } = render(
     <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
+      label="Label"
+      value="5"
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-suffix-align-rtl"
     />
   );
 
-  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
-    paddingLeft: 16,
-    paddingRight: 56,
-  });
+  expect(
+    StyleSheet.flatten(getByTestId('tf-suffix-align-rtl').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'left',
+      writingDirection: 'rtl',
+    })
+  );
 });
 
-it('calls onLayout on right-side affix adornment', () => {
-  const onLayoutMock = jest.fn();
-  const nativeEventMock = {
-    nativeEvent: { layout: { height: 100 } },
-  };
-
+it('uses default horizontal alignment when suffix prop exists but suffix is not shown yet (LTR)', () => {
   const { getByTestId } = render(
     <TextInput
-      label="Flat input"
-      placeholder="Type something"
-      value={'Some test value'}
-      right={<TextInput.Affix text={affixTextValue} onLayout={onLayoutMock} />}
+      label="Label"
+      value=""
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-no-suffix-yet"
     />
   );
-  fireEvent(
-    getByTestId('right-affix-adornment-text'),
-    'onLayout',
-    nativeEventMock
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-no-suffix-yet').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'left',
+      writingDirection: 'ltr',
+    })
   );
-  expect(onLayoutMock).toHaveBeenCalledWith(nativeEventMock);
 });
 
-(['outlined', 'flat'] as const).forEach((mode) =>
-  it(`renders ${mode} input with correct line height`, () => {
-    const input = render(
-      <TextInput
-        mode={mode}
-        multiline
-        label="Flat input"
-        testID={`text-input-${mode}`}
-        style={style.lineHeight}
-      />
-    );
-
-    expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
-      lineHeight: 22,
-    });
-  })
-);
-
-(['outlined', 'flat'] as const).forEach((mode) =>
-  it(`renders ${mode} input with passed textColor`, () => {
-    const input = render(
-      <TextInput
-        mode={mode}
-        multiline
-        label="Flat input"
-        testID={`text-input-${mode}`}
-        style={style.lineHeight}
-        textColor={'purple'}
-      />
-    );
-
-    expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
-      color: 'purple',
-    });
-  })
-);
-
-it("correctly applies theme background to label when input's background is transparent", () => {
-  const backgroundColor = 'transparent';
-  const theme = {
-    ...LightTheme,
-    colors: {
-      ...LightTheme.colors,
-      background: 'pink',
-    },
-  };
-
-  const { getByTestId } = render(
-    <ThemeProvider theme={theme}>
-      <TextInput
-        mode="outlined"
-        label="Transparent input"
-        value={'Some test value'}
-        style={{ backgroundColor }}
-        testID={'transparent-example'}
-      />
-    </ThemeProvider>
-  );
-
-  expect(getByTestId('transparent-example-label-background')).toHaveStyle({
-    backgroundColor: 'pink',
-  });
-});
-
-it('always applies line height for web, even if not specified', () => {
-  Platform.OS = 'web';
-  const { getByTestId } = render(
-    <View>
-      <TextInput
-        mode="outlined"
-        label="Default font outlined"
-        value="Some test value"
-        testID="default-font"
-      />
-      <TextInput
-        mode="flat"
-        label="Default font outlined - flat"
-        value="Some test value"
-        testID="default-font-flat"
-      />
-      <TextInput
-        mode="outlined"
-        label="Large font outlined"
-        value="Some test value"
-        testID="large-font"
-        style={{
-          fontSize: 30,
-        }}
-      />
-      <TextInput
-        mode="outlined"
-        label="Large font outlined - flat"
-        value="Some test value"
-        testID="large-font-flat"
-        style={{
-          fontSize: 30,
-        }}
-      />
-      <TextInput
-        mode="outlined"
-        label="Custom line height outlined"
-        value="Some test value"
-        testID="custom-line-height"
-        style={{
-          fontSize: 40,
-          lineHeight: 29,
-        }}
-      />
-      <TextInput
-        mode="outlined"
-        label="Custom line height outlined - flat"
-        value="Some test value"
-        testID="custom-line-height-flat"
-        style={{
-          fontSize: 40,
-          lineHeight: 29,
-        }}
-      />
-    </View>
-  );
-
-  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: 16 * 1.2 });
-  expect(getByTestId('default-font-flat')).toHaveStyle({
-    lineHeight: 16 * 1.2,
-  });
-
-  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: 30 * 1.2 });
-  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: 30 * 1.2 });
-
-  expect(getByTestId('custom-line-height')).toHaveStyle({
-    lineHeight: 29,
-  });
-  expect(getByTestId('custom-line-height-flat')).toHaveStyle({
-    lineHeight: 29,
-  });
-});
-
-it('call onPress when affix adornment pressed', () => {
-  const affixOnPress = jest.fn();
-  const affixTextValue = '+39';
-  const { getByText, toJSON } = render(
+it('does not apply the TextInput style prop to prefix or suffix Text', () => {
+  const { getByTestId, getByText } = render(
     <TextInput
-      label="Flat input"
-      placeholder="Enter your phone number"
-      value={''}
-      left={<TextInput.Affix text="+39" onPress={affixOnPress} />}
+      label="Label"
+      value="1"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="]"
+      style={{ fontSize: 40, letterSpacing: 9 }}
+      testID="tf-input-style"
     />
   );
 
-  fireEvent.press(getByText(affixTextValue));
+  const inputFlat = StyleSheet.flatten(
+    getByTestId('tf-input-style').props.style
+  );
+  expect(inputFlat).toEqual(
+    expect.objectContaining({ fontSize: 40, letterSpacing: 9 })
+  );
 
-  expect(getByText(affixTextValue)).toBeTruthy();
-  expect(toJSON()).toMatchSnapshot();
-  expect(affixOnPress).toHaveBeenCalledTimes(1);
+  const prefixFlat = StyleSheet.flatten(getByText('$').props.style);
+  const suffixFlat = StyleSheet.flatten(getByText(']').props.style);
+
+  expect(prefixFlat.fontSize).not.toBe(40);
+  expect(prefixFlat.letterSpacing).toBeUndefined();
+  expect(suffixFlat.fontSize).not.toBe(40);
+  expect(suffixFlat.letterSpacing).toBeUndefined();
 });
 
-describe('maxFontSizeMultiplier', () => {
-  const createInput = (
-    type: Exclude<Props['mode'], undefined>,
-    maxFontSizeMultiplier?: Props['maxFontSizeMultiplier']
-  ) => {
-    return (
-      <TextInput mode={type} maxFontSizeMultiplier={maxFontSizeMultiplier} />
-    );
-  };
+it('passes defaultValue to the native input when uncontrolled without counter', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Email"
+      defaultValue="hello"
+      onChangeText={() => {}}
+      testID="tf-uncontrolled"
+    />
+  );
 
-  it('should have default value in flat input', () => {
-    const { getByTestId } = render(createInput('flat'));
-
-    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(
-      1.5
-    );
-  });
-
-  it('should have default value in outlined input', () => {
-    const { getByTestId } = render(createInput('outlined'));
-
-    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
-      1.5
-    );
-  });
-
-  it('should have correct passed value in flat input', () => {
-    const { getByTestId } = render(createInput('flat', 2));
-
-    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(2);
-  });
-
-  it('should have correct passed value in outlined input', () => {
-    const { getByTestId } = render(createInput('outlined', 2));
-
-    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
-      2
-    );
-  });
-
-  it('should have passed null value in flat input', () => {
-    const { getByTestId } = render(createInput('flat', null));
-
-    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(
-      null
-    );
-  });
-
-  it('should have passed null value in outlined input', () => {
-    const { getByTestId } = render(createInput('outlined', null));
-
-    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
-      null
-    );
-  });
+  const input = getByTestId('tf-uncontrolled');
+  expect(input.props.defaultValue).toBe('hello');
+  expect(input.props.value).toBeUndefined();
 });
 
-describe('getFlatInputColor - underline color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurfaceVariant,
-    });
-  });
+it('updates the character counter for an uncontrolled field with counter enabled', () => {
+  const onChangeText = jest.fn();
+  const { getByTestId, getByText } = render(
+    <TextInput
+      label="Bio"
+      defaultValue="a"
+      onChangeText={onChangeText}
+      counter
+      maxLength={10}
+      testID="tf-uncontrolled-counter"
+    />
+  );
 
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurfaceVariant,
-    });
-  });
+  expect(getByText('1/10')).toBeTruthy();
 
-  it('should return custom color, no matter what the theme is', () => {
-    expect(
-      getFlatInputColors({
-        underlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      underlineColorCustom: 'beige',
-    });
+  fireEvent.changeText(getByTestId('tf-uncontrolled-counter'), 'abcd');
 
-    expect(
-      getFlatInputColors({
-        underlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      underlineColorCustom: 'beige',
-    });
-  });
+  expect(onChangeText).toHaveBeenCalledWith('abcd');
+  expect(getByText('4/10')).toBeTruthy();
 });
 
-describe('getFlatInputColor - input text color', () => {
-  it('should return custom color, if not disabled, no matter what the theme is', () => {
-    expect(
-      getOutlinedInputColors({
-        textColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: 'beige',
-    });
+it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', () => {
+  const ref = React.createRef<TextInputHandles>();
+  const { getByText, queryByText } = render(
+    <TextInput
+      ref={ref}
+      label="Amount"
+      defaultValue="100"
+      prefix="$"
+      suffix="/100"
+      counter
+      maxLength={200}
+    />
+  );
 
-    expect(
-      getOutlinedInputColors({
-        textColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: 'beige',
-    });
+  expect(getByText('3/200')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
+
+  act(() => {
+    ref.current?.clear();
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurface,
-      disabledOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurface,
-    });
-  });
+  expect(getByText('0/200')).toBeTruthy();
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
 });
 
-describe('getFlatInputColor - placeholder color', () => {
-  it('should return correct disabled color', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceVariant,
-      disabledOpacity: stateOpacity.disabled,
-    });
+it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', () => {
+  const ref = React.createRef<TextInputHandles>();
+  const { getByTestId, getByText } = render(
+    <TextInput
+      ref={ref}
+      label="Amount"
+      defaultValue="50"
+      prefix="$"
+      suffix=" kg"
+      counter
+      maxLength={100}
+      testID="tf-clear-focused"
+    />
+  );
+
+  expect(getByText('2/100')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
+
+  fireEvent(getByTestId('tf-clear-focused'), 'focus');
+
+  act(() => {
+    ref.current?.clear();
   });
 
-  it('should return correct theme color', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
+  expect(getByText('0/100')).toBeTruthy();
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText(' kg')).toBeTruthy();
 });
 
-describe('getFlatInputColor - background color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceContainerHighest,
-    });
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(true),
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme(true).colors.surfaceContainerHighest,
-    });
+it('notifies the parent via onChangeText when clear() is called on a controlled field', () => {
+  const ref = React.createRef<TextInputHandles>();
+  const onChangeText = jest.fn();
+  const { getByTestId } = render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      value="test@example.com"
+      onChangeText={onChangeText}
+      testID="tf-controlled"
+    />
+  );
+
+  const input = getByTestId('tf-controlled');
+  expect(input.props.value).toBe('test@example.com');
+
+  act(() => {
+    ref.current?.clear();
   });
 
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceVariant,
-    });
-  });
+  expect(onChangeText).toHaveBeenCalledWith('');
+  expect(onChangeText).toHaveBeenCalledTimes(1);
 });
 
-describe('getFlatInputColor - error color', () => {
-  it('should return correct error color, no matter what the theme is', () => {
-    expect(
-      getFlatInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      errorColor: getTheme().colors.error,
-    });
+it('hides prefix/suffix when blurring after clear() was called while focused', () => {
+  const ref = React.createRef<TextInputHandles>();
+  const { getByTestId, getByText, queryByText } = render(
+    <TextInput
+      ref={ref}
+      label="Amount"
+      defaultValue="100"
+      prefix="$"
+      suffix="/100"
+      testID="tf-clear-then-blur"
+    />
+  );
 
-    expect(
-      getFlatInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      errorColor: getTheme().colors.error,
-    });
-  });
-});
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
 
-describe('getFlatInputColor - active color', () => {
-  it('should return disabled color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.primary,
-      disabledOpacity: stateOpacity.disabled,
-    });
+  fireEvent(getByTestId('tf-clear-then-blur'), 'focus');
+
+  act(() => {
+    ref.current?.clear();
   });
 
-  it('should return correct active color, if error, no matter what the theme is', () => {
-    expect(
-      getFlatInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.error,
-    });
+  // While focused, prefix/suffix stay visible
+  expect(getByText('$')).toBeTruthy();
+  expect(getByText('/100')).toBeTruthy();
 
-    expect(
-      getFlatInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.error,
-    });
-  });
+  fireEvent(getByTestId('tf-clear-then-blur'), 'blur');
 
-  it('should return custom active color, no matter what the theme is', () => {
-    expect(
-      getFlatInputColors({
-        activeUnderlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: 'beige',
-    });
-
-    expect(
-      getFlatInputColors({
-        activeUnderlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: 'beige',
-    });
-  });
-
-  it('should return theme active color, for theme version 3', () => {
-    expect(
-      getFlatInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.primary,
-    });
-  });
-});
-
-describe('getOutlinedInputColors - outline color', () => {
-  it('should return correct disabled color, for theme version 3, light theme', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      outlineColor: getTheme().colors.outlineVariant,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 3, dark theme', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(true),
-      })
-    ).toMatchObject({
-      outlineColor: 'transparent',
-    });
-  });
-
-  it('should return custom color, if not disabled, no matter what the theme is', () => {
-    expect(
-      getOutlinedInputColors({
-        customOutlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      outlineColor: 'beige',
-    });
-
-    expect(
-      getOutlinedInputColors({
-        customOutlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      outlineColor: 'beige',
-    });
-  });
-
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      outlineColor: getTheme().colors.outline,
-    });
-  });
-});
-
-describe('getOutlinedInputColors - input text color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurface,
-      disabledOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurface,
-    });
-  });
-});
-
-describe('getOutlinedInputColors - placeholder color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceVariant,
-      disabledOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-});
-
-describe('getOutlinedInputColors - error color', () => {
-  it('should return correct error color, no matter what the theme is', () => {
-    expect(
-      getOutlinedInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      errorColor: getTheme().colors.error,
-    });
-
-    expect(
-      getOutlinedInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      errorColor: getTheme().colors.error,
-    });
-  });
-});
-
-describe('getOutlinedInputColors - active color', () => {
-  it('should return disabled color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        disabled: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.primary,
-      disabledOpacity: stateOpacity.disabled,
-    });
-  });
-
-  it('should return correct active color, if error, no matter what the theme is', () => {
-    expect(
-      getOutlinedInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.error,
-    });
-
-    expect(
-      getOutlinedInputColors({
-        error: true,
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.error,
-    });
-  });
-
-  it('should return custom active color, no matter what the theme is', () => {
-    expect(
-      getOutlinedInputColors({
-        activeOutlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: 'beige',
-    });
-
-    expect(
-      getOutlinedInputColors({
-        activeOutlineColor: 'beige',
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: 'beige',
-    });
-  });
-
-  it('should return theme active color, for theme version 3', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      activeColor: getTheme().colors.primary,
-    });
-  });
-});
-
-describe('outlineStyle - underlineStyle', () => {
-  it('correctly applies outline style', () => {
-    const { getByTestId } = render(
-      <TextInput
-        mode="outlined"
-        outlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-      />
-    );
-
-    expect(getByTestId('text-input-outline')).toHaveStyle({
-      borderRadius: 16,
-      borderWidth: 6,
-    });
-  });
-
-  it('correctly applies underline style', () => {
-    const { getByTestId } = render(
-      <TextInput
-        mode="flat"
-        underlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-      />
-    );
-
-    expect(getByTestId('text-input-underline')).toHaveStyle({
-      borderRadius: 16,
-      borderWidth: 6,
-    });
-  });
+  // After blur with no text, prefix/suffix should be hidden
+  expect(queryByText('$')).toBeNull();
+  expect(queryByText('/100')).toBeNull();
 });

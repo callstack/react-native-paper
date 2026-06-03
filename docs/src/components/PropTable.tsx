@@ -11,17 +11,29 @@ const typeDefinitions = {
     'https://github.com/callstack/react-native-paper/blob/main/src/components/Icon.tsx#L16',
   ThemeProp:
     'https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties',
+  '(props: TextInputAccessoryProps) => React.ReactNode':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInputIcon.tsx#L11',
+  '(props: TextInputRenderProps) => React.ReactNode':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L168',
+  'React.Ref<TextInputHandles>':
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L172',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
   'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
+  TextProps: 'https://reactnative.dev/docs/text#props',
+  AccessibilityProps:
+    'https://reactnative.dev/docs/accessibility#accessibilityprops',
 };
 
 const renderBadge = (annotation: string) => {
   const [annotType, ...annotLabel] = annotation.split(' ');
 
   // eslint-disable-next-line prettier/prettier
-  return `<span class="badge badge-${annotType.replace('@', '')} ">${annotLabel.join(' ')}</span>`;
+  return `<span class="badge badge-${annotType.replace(
+    '@',
+    ''
+  )} ">${annotLabel.join(' ')}</span>`;
 };
 
 export default function PropTable({
@@ -56,7 +68,9 @@ export default function PropTable({
           if (line.includes('@')) {
             const annotIndex = line.indexOf('@');
             // eslint-disable-next-line prettier/prettier
-              return `${line.substr(0, annotIndex)} ${renderBadge(line.substr(annotIndex))}`;
+            return `${line.substr(0, annotIndex)} ${renderBadge(
+              line.substr(annotIndex)
+            )}`;
           } else {
             return line;
           }

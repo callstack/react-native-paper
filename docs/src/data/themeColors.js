@@ -190,17 +190,6 @@ const themeColors = {
       'textColor/iconColor': 'theme.colors.primary',
     },
   },
-  HelperText: {
-    disabled: {
-      textColor: 'theme.colors.onSurfaceDisabled',
-    },
-    default: {
-      textColor: 'theme.colors.onSurfaceVariant',
-    },
-    error: {
-      textColor: 'theme.colors.error',
-    },
-  },
   IconButton: {
     selected: {
       default: {
