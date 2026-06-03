@@ -70,39 +70,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       }
     />
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": 0,
-          },
-          {
-            "backgroundColor": "rgba(103, 80, 164, 1)",
-            "height": 2,
-          },
-          false,
-        ]
-      }
       style={
         [
           {
@@ -129,30 +96,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": 16,
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "left": 52,
-          },
-        ]
-      }
       style={
         [
           {
@@ -163,39 +106,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "left": 52,
           },
           {
-            "top": 16,
+            "top": undefined,
           },
         ]
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -208,7 +124,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "color": "rgba(73, 69, 79, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -373,20 +289,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -397,17 +300,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
@@ -688,39 +580,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       }
     />
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": 0,
-          },
-          {
-            "backgroundColor": "rgba(179, 38, 30, 1)",
-            "height": 2,
-          },
-          false,
-        ]
-      }
       style={
         [
           {
@@ -747,30 +606,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": 16,
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "left": 52,
-          },
-        ]
-      }
       style={
         [
           {
@@ -781,39 +616,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "left": 52,
           },
           {
-            "top": 16,
+            "top": undefined,
           },
         ]
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(179, 38, 30, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -826,7 +634,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "color": "rgba(179, 38, 30, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -991,20 +799,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </View>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -1015,17 +810,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
@@ -1306,39 +1090,6 @@ exports[`renders filled TextInput with label and value 1`] = `
       }
     />
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "transform": [
-              {
-                "scaleX": 0,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": 0,
-          },
-          {
-            "backgroundColor": "rgba(103, 80, 164, 1)",
-            "height": 2,
-          },
-          false,
-        ]
-      }
       style={
         [
           {
@@ -1365,30 +1116,6 @@ exports[`renders filled TextInput with label and value 1`] = `
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": 16,
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "left": 16,
-          },
-        ]
-      }
       style={
         [
           {
@@ -1399,39 +1126,12 @@ exports[`renders filled TextInput with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": 16,
+            "top": undefined,
           },
         ]
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -1444,7 +1144,7 @@ exports[`renders filled TextInput with label and value 1`] = `
               "color": "rgba(73, 69, 79, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -1454,20 +1154,7 @@ exports[`renders filled TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -1478,17 +1165,6 @@ exports[`renders filled TextInput with label and value 1`] = `
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
@@ -1614,37 +1290,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -36,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "paddingHorizontal": 4,
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
-          },
-        ]
-      }
       style={
         [
           {
@@ -1657,10 +1302,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             "left": 48,
           },
           {
-            "top": -12,
+            "top": undefined,
             "transform": [
               {
-                "translateX": -36,
+                "translateX": undefined,
               },
             ],
           },
@@ -1668,33 +1313,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -1707,7 +1325,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "color": "rgba(73, 69, 79, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -1872,20 +1490,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -1896,17 +1501,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
@@ -2187,37 +1781,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -36,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "paddingHorizontal": 4,
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
-          },
-        ]
-      }
       style={
         [
           {
@@ -2230,10 +1793,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             "left": 48,
           },
           {
-            "top": -12,
+            "top": undefined,
             "transform": [
               {
-                "translateX": -36,
+                "translateX": undefined,
               },
             ],
           },
@@ -2241,33 +1804,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(179, 38, 30, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -2280,7 +1816,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "color": "rgba(179, 38, 30, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -2445,20 +1981,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </View>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -2469,17 +1992,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
@@ -2760,37 +2272,6 @@ exports[`renders outlined TextInput with label and value 1`] = `
     />
     <View
       aria-hidden={true}
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "top": -12,
-            "transform": [
-              {
-                "translateX": -4,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "paddingHorizontal": 4,
-            "pointerEvents": "none",
-            "position": "absolute",
-          },
-          {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 16,
-          },
-        ]
-      }
       style={
         [
           {
@@ -2803,10 +2284,10 @@ exports[`renders outlined TextInput with label and value 1`] = `
             "left": 16,
           },
           {
-            "top": -12,
+            "top": undefined,
             "transform": [
               {
-                "translateX": -4,
+                "translateX": undefined,
               },
             ],
           },
@@ -2814,33 +2295,6 @@ exports[`renders outlined TextInput with label and value 1`] = `
       }
     >
       <Text
-        collapsable={false}
-        jestAnimatedProps={
-          {
-            "value": {},
-          }
-        }
-        jestAnimatedStyle={
-          {
-            "value": {
-              "fontSize": 12,
-            },
-          }
-        }
-        jestInlineStyle={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            false,
-          ]
-        }
         style={
           [
             {
@@ -2853,7 +2307,7 @@ exports[`renders outlined TextInput with label and value 1`] = `
               "color": "rgba(73, 69, 79, 1)",
             },
             {
-              "fontSize": 12,
+              "fontSize": undefined,
             },
             false,
           ]
@@ -2863,20 +2317,7 @@ exports[`renders outlined TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 1,
-          },
-        }
-      }
-      jestInlineStyle={
+      style={
         [
           [
             {
@@ -2887,17 +2328,6 @@ exports[`renders outlined TextInput with label and value 1`] = `
             },
             false,
           ],
-        ]
-      }
-      style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
           {
             "opacity": 1,
           },
