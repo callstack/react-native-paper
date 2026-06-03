@@ -6,7 +6,7 @@ title: Using on the Web
 
 React Native Paper supports web via [React Native for Web](https://necolas.github.io/react-native-web/), which lets you run React Native components in a browser using React DOM.
 
-Before continuing, make sure you have React Native Paper installed and configured by following the [Getting Started guide](getting-started.md).
+Before continuing, make sure you have React Native Paper installed and configured by following the [Getting Started guide](01-getting-started.mdx).
 
 ## Setting up web support with Expo
 
