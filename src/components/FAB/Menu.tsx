@@ -17,13 +17,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import FabContent from './FabContent';
-import FabShell from './FabShell';
+import Content from './Content';
+import Shell from './Shell';
 import {
-  FloatingActionButtonMenuTokens,
-  FloatingActionButtonSize,
-  FloatingActionButtonTokens,
-  FloatingActionButtonVariant,
+  MenuTokens,
+  Size,
+  Tokens,
+  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
@@ -39,7 +39,7 @@ import type { InternalTheme, ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
-export type FloatingActionButtonMenuItemProps = {
+export type MenuItemProps = {
   /**
    * Optional icon for the item.
    */
@@ -60,12 +60,30 @@ export type FloatingActionButtonMenuItemProps = {
   testID?: string;
 };
 
-const FloatingActionButtonMenuItem = (
-  _props: FloatingActionButtonMenuItemProps
-): React.ReactElement | null => null;
-FloatingActionButtonMenuItem.displayName = 'FloatingActionButtonMenu.Item';
+export type MenuTriggerProps = {
+  /**
+   * Icon displayed in the trigger FAB (and cross-faded to `closeIcon` when
+   * the menu is open).
+   */
+  icon: IconSource;
+  variant?: Variant;
+  size?: Size;
+  containerColor?: ColorValue;
+  contentColor?: ColorValue;
+  visible?: boolean;
+  onPress?: (e: GestureResponderEvent) => void;
+  accessibilityLabel?: string;
+  testID?: string;
+};
 
-export type FloatingActionButtonMenuProps = {
+type TwoToSix<T> =
+  | [T, T]
+  | [T, T, T]
+  | [T, T, T, T]
+  | [T, T, T, T, T]
+  | [T, T, T, T, T, T];
+
+export type MenuProps = {
   /**
    * Whether the menu is open.
    */
@@ -73,27 +91,25 @@ export type FloatingActionButtonMenuProps = {
   /**
    * Called when the user taps the close button or taps an item.
    */
-  onDismiss?: () => void;
+  onDismiss: () => void;
   /**
-   * Trigger FAB. Pass a `<FloatingActionButton .../>`. The menu reads its
-   * `variant`, `size`, `icon`, and `onPress` and renders a single morphing
-   * FAB that animates between the trigger and the spec'd close button.
+   * Trigger FAB configuration. The menu renders a morphing FAB that
+   * animates between the trigger appearance and the spec'd close button.
    */
-  button: React.ReactElement;
+  trigger: MenuTriggerProps;
   /**
    * Horizontal side the menu sits on. Default `'end'`.
    */
-  horizontalAlignment?: 'start' | 'center' | 'end';
+  alignment?: 'start' | 'center' | 'end';
   /**
    * Icon used by the close button when the menu is expanded. Default
    * `'close'`.
    */
   closeIcon?: IconSource;
   /**
-   * Menu items as `<FloatingActionButtonMenu.Item />`. Spec calls for 2 to 6
-   * items; a dev-mode warning fires outside that range.
+   * Menu items. Spec calls for 2 to 6 items.
    */
-  children: React.ReactNode;
+  items: TwoToSix<MenuItemProps>;
   testID?: string;
   /**
    * @optional
@@ -107,9 +123,7 @@ export type FloatingActionButtonMenuProps = {
  * The close button is always the saturated role color; items are always the
  * tonal (container) role color.
  */
-const getCloseVariant = (
-  triggerVariant: FloatingActionButtonVariant
-): FloatingActionButtonVariant => {
+const getCloseVariant = (triggerVariant: Variant): Variant => {
   if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
     return 'primary';
   }
@@ -119,9 +133,7 @@ const getCloseVariant = (
   return 'tertiary';
 };
 
-const getItemsVariant = (
-  triggerVariant: FloatingActionButtonVariant
-): FloatingActionButtonVariant => {
+const getItemsVariant = (triggerVariant: Variant): Variant => {
   if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
     return 'tonalPrimary';
   }
@@ -129,18 +141,6 @@ const getItemsVariant = (
     return 'tonalSecondary';
   }
   return 'tonalTertiary';
-};
-
-type ButtonExtractableProps = {
-  variant?: FloatingActionButtonVariant;
-  size?: FloatingActionButtonSize;
-  icon?: IconSource;
-  containerColor?: ColorValue;
-  contentColor?: ColorValue;
-  visible?: boolean;
-  onPress?: (e: GestureResponderEvent) => void;
-  accessibilityLabel?: string;
-  testID?: string;
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -218,10 +218,10 @@ const AnimatedItem = ({
   );
 };
 
-type MenuItemProps = {
+type ItemProps = {
   icon?: IconSource;
   label: string;
-  variant: FloatingActionButtonVariant;
+  variant: Variant;
   theme: InternalTheme;
   onPress: (e: GestureResponderEvent) => void;
   accessibilityLabel?: string;
@@ -242,10 +242,10 @@ const MenuItem = ({
   onPress,
   accessibilityLabel,
   testID,
-}: MenuItemProps) => {
+}: ItemProps) => {
   const colors = resolveColors({ theme, variant });
   const { height, iconSize, leading, trailing, iconLabelGap, shape } =
-    FloatingActionButtonMenuTokens.listItem;
+    MenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
 
   const { focusedSV, onFocus, onBlur } = useFocusRing();
@@ -274,7 +274,7 @@ const MenuItem = ({
           ]}
           testID={testID}
         >
-          <FabContent
+          <Content
             icon={icon}
             label={label}
             contentColor={colors.content}
@@ -302,17 +302,17 @@ const MenuItem = ({
 };
 
 type MorphingTriggerProps = {
-  triggerVariant: FloatingActionButtonVariant;
-  closeVariant: FloatingActionButtonVariant;
+  triggerVariant: Variant;
+  closeVariant: Variant;
   triggerContainerColor?: ColorValue;
   triggerContentColor?: ColorValue;
-  size: FloatingActionButtonSize;
+  size: Size;
   openIcon: IconSource;
   closeIcon: IconSource;
   expanded: boolean;
   /** Whether the trigger FAB is visible; drives the scale/alpha enter/exit. */
   visible: boolean;
-  horizontalAlignment: 'start' | 'center' | 'end';
+  alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
   accessibilityLabel?: string;
   theme: InternalTheme;
@@ -329,7 +329,7 @@ const MorphingTrigger = ({
   closeIcon,
   expanded,
   visible,
-  horizontalAlignment,
+  alignment,
   onPress,
   accessibilityLabel,
   theme,
@@ -337,13 +337,13 @@ const MorphingTrigger = ({
 }: MorphingTriggerProps) => {
   const reduceMotion = useReduceMotion();
 
-  const closedSpec = FloatingActionButtonTokens.sizes[size];
+  const closedSpec = Tokens.sizes[size];
   const closedContainer = closedSpec.container;
   const closedIconSize = closedSpec.icon;
   const closedBorderRadius = resolveCornerRadius(theme, closedSpec.shape);
 
-  const openContainer = FloatingActionButtonMenuTokens.closeButton.container;
-  const openIconSize = FloatingActionButtonMenuTokens.closeButton.iconSize;
+  const openContainer = MenuTokens.closeButton.container;
+  const openIconSize = MenuTokens.closeButton.iconSize;
   // Use container/2 (instead of the cornerFull sentinel) as the open radius,
   // so the interpolation produces a smooth round-corner morph rather than
   // jumping past the visual "circle" threshold almost immediately.
@@ -375,9 +375,9 @@ const MorphingTrigger = ({
     );
   }, [expanded, theme, reduceMotion, progress]);
 
-  // Derived shared values for the morph shape. Passing them to FabShell as
+  // Derived shared values for the morph shape. Passing them to Shell as
   // individual shared values (rather than packing them into an animated
-  // style) means FabShell can put each into a single `useAnimatedStyle` with
+  // style) means Shell can put each into a single `useAnimatedStyle` with
   // no inter-style merge surprises. Explicit deps so toggling `size` while
   // the menu is open re-derives immediately — e.g. closed-state values
   // change to match the new size's resting shape, and the close-state values
@@ -406,14 +406,28 @@ const MorphingTrigger = ({
   const closePlaneStyle = useAnimatedStyle(() => ({
     opacity: progress.value,
   }));
+  const openIconAnimStyle = useAnimatedStyle(() => {
+    const offset = (widthShared.value - closedIconSize) / 2;
+    return {
+      opacity: 1 - progress.value,
+      transform: [{ translateX: offset }, { translateY: offset }],
+    };
+  });
+  const closeIconAnimStyle = useAnimatedStyle(() => {
+    const offset = (widthShared.value - openIconSize) / 2;
+    return {
+      opacity: progress.value,
+      transform: [{ translateX: offset }, { translateY: offset }],
+    };
+  });
 
   // Outer slot is fixed at the trigger's resting size; the FAB itself
   // shrinks toward the top-{start|center|end} corner of that slot when
   // expanded (only meaningful for medium / large sizes).
   const slotAlign: 'flex-start' | 'center' | 'flex-end' =
-    horizontalAlignment === 'start'
+    alignment === 'start'
       ? 'flex-start'
-      : horizontalAlignment === 'center'
+      : alignment === 'center'
       ? 'center'
       : 'flex-end';
 
@@ -430,7 +444,7 @@ const MorphingTrigger = ({
       ]}
       testID={testID}
     >
-      <FabShell
+      <Shell
         size={size}
         variant={triggerVariant}
         containerColor={triggerContainerColor}
@@ -465,15 +479,15 @@ const MorphingTrigger = ({
         }
         theme={theme}
       >
-        <View style={styles.iconStackContainer}>
-          <Animated.View style={[styles.iconStack, openPlaneStyle]}>
+        <View style={styles.iconOrigin}>
+          <Animated.View style={[styles.iconAbsolute, openIconAnimStyle]}>
             <Icon
               source={openIcon}
               size={closedIconSize}
               color={triggerColors.content}
             />
           </Animated.View>
-          <Animated.View style={[styles.iconStack, closePlaneStyle]}>
+          <Animated.View style={[styles.iconAbsolute, closeIconAnimStyle]}>
             <Icon
               source={closeIcon}
               size={openIconSize}
@@ -481,7 +495,7 @@ const MorphingTrigger = ({
             />
           </Animated.View>
         </View>
-      </FabShell>
+      </Shell>
     </View>
   );
 };
@@ -500,111 +514,67 @@ const MorphingTrigger = ({
  * const [open, setOpen] = React.useState(false);
  *
  * <Portal>
- *   <FloatingActionButtonMenu
+ *   <FAB.Menu
  *     expanded={open}
  *     onDismiss={() => setOpen(false)}
- *     button={
- *       <FloatingActionButton
- *         icon="plus"
- *         variant="primary"
- *         onPress={() => setOpen(true)}
- *       />
- *     }
- *   >
- *     <FloatingActionButtonMenu.Item
- *       icon="email"
- *       label="Send"
- *       onPress={() => {}}
- *     />
- *     <FloatingActionButtonMenu.Item
- *       icon="bell"
- *       label="Remind"
- *       onPress={() => {}}
- *     />
- *   </FloatingActionButtonMenu>
+ *     trigger={{ icon: 'plus', variant: 'primary', onPress: () => setOpen(true) }}
+ *     items={[
+ *       { icon: 'email', label: 'Send', onPress: () => {} },
+ *       { icon: 'bell', label: 'Remind', onPress: () => {} },
+ *     ]}
+ *   />
  * </Portal>
  * ```
  */
-const FloatingActionButtonMenu = ({
+const Menu = ({
   expanded,
   onDismiss,
-  button,
-  horizontalAlignment = 'end',
+  trigger,
+  alignment = 'end',
   closeIcon = 'close',
-  children,
+  items,
   testID = 'floating-action-button-menu',
   theme: themeOverrides,
-}: FloatingActionButtonMenuProps) => {
+}: MenuProps) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const items = React.Children.toArray(children)
-    .filter(
-      (child): child is React.ReactElement<FloatingActionButtonMenuItemProps> =>
-        React.isValidElement(child) &&
-        child.type === FloatingActionButtonMenuItem
-    )
-    .map((child) => child.props);
-
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    (items.length < 2 || items.length > 6)
-  ) {
-    console.warn(
-      `FloatingActionButtonMenu expects 2 to 6 items; received ${items.length}.`
-    );
-  }
-
-  const buttonProps: ButtonExtractableProps = React.isValidElement(button)
-    ? (button.props as ButtonExtractableProps)
-    : {};
-  const triggerVariant: FloatingActionButtonVariant =
-    buttonProps.variant ?? 'tonalPrimary';
-  const size: FloatingActionButtonSize = buttonProps.size ?? 'default';
-  const openIcon: IconSource = buttonProps.icon ?? 'plus';
-  const openOnPress = buttonProps.onPress;
-  const triggerVisible = buttonProps.visible ?? true;
+  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const size: Size = trigger.size ?? 'default';
+  const openIcon: IconSource = trigger.icon;
+  const openOnPress = trigger.onPress;
+  const triggerVisible = trigger.visible ?? true;
   const closeVariant = getCloseVariant(triggerVariant);
   const itemsVariant = getItemsVariant(triggerVariant);
 
-  // When the trigger isn't visible, items don't either; they share the
-  // FAB's enter/exit.
   const effectiveExpanded = triggerVisible && expanded;
 
   const handleItemPress =
-    (item: FloatingActionButtonMenuItemProps) => (e: GestureResponderEvent) => {
+    (item: MenuItemProps) => (e: GestureResponderEvent) => {
       item.onPress(e);
-      onDismiss?.();
+      onDismiss();
     };
 
-  const alignment: 'flex-start' | 'center' | 'flex-end' =
-    horizontalAlignment === 'start'
+  const flexAlign: 'flex-start' | 'center' | 'flex-end' =
+    alignment === 'start'
       ? 'flex-start'
-      : horizontalAlignment === 'center'
+      : alignment === 'center'
       ? 'center'
       : 'flex-end';
-  // Per-item motion is purely horizontal (matches Compose's width animation);
-  // the bottom-up feel comes from the stagger order, not the scale anchor.
-  // RN auto-mirrors `left`/`right` position styles in RTL, so the items
-  // container visually moves to the opposite edge — but `transformOrigin` is
-  // a transform property and is NOT auto-flipped. Invert the mapping in RTL
-  // so each item still scales out from the screen-edge side rather than the
-  // screen-center side.
   const itemTransformOrigin: 'left' | 'center' | 'right' =
-    horizontalAlignment === 'start'
+    alignment === 'start'
       ? isRTL
         ? 'right'
         : 'left'
-      : horizontalAlignment === 'center'
+      : alignment === 'center'
       ? 'center'
       : isRTL
       ? 'left'
       : 'right';
-  // The trigger's slot is fixed at the original FAB's size. The close button
-  // (always 56 dp) anchors to the top of this slot when expanded.
-  const triggerSlotSize = FloatingActionButtonTokens.sizes[size].container;
+
+  const triggerSlotSize = Tokens.sizes[size].container;
 
   return (
     <View
@@ -619,24 +589,18 @@ const FloatingActionButtonMenu = ({
       ]}
       testID={testID}
     >
-      <View style={[styles.stack, { alignItems: alignment }]}>
-        {/* Absolutely positioned above the trigger so item layout (and the
-            scaleX bounce on each item) never affects the trigger's position
-            — no vertical spring. The items container sits closeToLastItem
-            above the original FAB slot. */}
+      <View style={[styles.stack, { alignItems: flexAlign }]}>
         <View
           style={[
             styles.items,
-            horizontalAlignment === 'start'
+            alignment === 'start'
               ? styles.itemsStart
-              : horizontalAlignment === 'center'
+              : alignment === 'center'
               ? styles.itemsCenter
               : styles.itemsEnd,
             {
-              bottom:
-                triggerSlotSize +
-                FloatingActionButtonMenuTokens.spacing.closeToLastItem,
-              alignItems: alignment,
+              bottom: triggerSlotSize + MenuTokens.spacing.closeToLastItem,
+              alignItems: flexAlign,
             },
           ]}
         >
@@ -650,11 +614,7 @@ const FloatingActionButtonMenu = ({
                 itemCount={items.length}
                 theme={theme}
                 transformOrigin={itemTransformOrigin}
-                marginBottom={
-                  isLast
-                    ? 0
-                    : FloatingActionButtonMenuTokens.spacing.betweenItems
-                }
+                marginBottom={isLast ? 0 : MenuTokens.spacing.betweenItems}
               >
                 <MenuItem
                   icon={item.icon}
@@ -672,26 +632,25 @@ const FloatingActionButtonMenu = ({
         <MorphingTrigger
           triggerVariant={triggerVariant}
           closeVariant={closeVariant}
-          triggerContainerColor={buttonProps.containerColor}
-          triggerContentColor={buttonProps.contentColor}
+          triggerContainerColor={trigger.containerColor}
+          triggerContentColor={trigger.contentColor}
           size={size}
           openIcon={openIcon}
           closeIcon={closeIcon}
           expanded={effectiveExpanded}
           visible={triggerVisible}
-          horizontalAlignment={horizontalAlignment}
+          alignment={alignment}
           onPress={effectiveExpanded ? onDismiss : openOnPress}
-          accessibilityLabel={buttonProps.accessibilityLabel}
+          accessibilityLabel={trigger.accessibilityLabel}
           theme={theme}
-          testID={buttonProps.testID}
+          testID={trigger.testID}
         />
       </View>
     </View>
   );
 };
 
-FloatingActionButtonMenu.Item = FloatingActionButtonMenuItem;
-FloatingActionButtonMenu.displayName = 'FloatingActionButtonMenu';
+Menu.displayName = 'Menu';
 
 const styles = StyleSheet.create({
   container: {
@@ -740,14 +699,16 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFill,
     pointerEvents: 'none',
   },
-  iconStackContainer: {
-    flex: 1,
+  iconOrigin: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     pointerEvents: 'none',
   },
-  iconStack: {
-    ...StyleSheet.absoluteFill,
-    alignItems: 'center',
-    justifyContent: 'center',
+  iconAbsolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     pointerEvents: 'none',
   },
   pointerEventsAuto: {
@@ -761,7 +722,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FloatingActionButtonMenu;
+export default Menu;
 
 // @component-docs ignore-next-line
-export { FloatingActionButtonMenu };
+export { Menu };

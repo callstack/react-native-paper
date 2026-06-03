@@ -11,13 +11,16 @@ import {
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import {
+  IOS_SHADOW_RADIUS_FACTOR,
+  SHADOW_OPACITY,
   androidElevationLevels,
+  shadow,
   shadowLayers,
 } from '../../theme/tokens/sys/elevation';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, InternalTheme } from '../../types';
 
-type UseFabVisibilityArgs = {
+type UseVisibilityArgs = {
   visible: boolean;
   theme: InternalTheme;
   initialScale?: number;
@@ -28,29 +31,29 @@ type UseFabVisibilityArgs = {
   elevation?: Elevation;
 };
 
-type UseFabVisibilityResult = {
+type UseVisibilityResult = {
   scale: SharedValue<number>;
   alpha: SharedValue<number>;
   transformOrigin: ViewStyle['transformOrigin'];
   shadowStyle: AnimatedStyle<ViewStyle>;
 };
 
-const isAndroid = Platform.OS === 'android';
-
 /**
  * Animates a FAB in and out: scale + alpha together.
  * Reduce-motion: snap to the final value, no animation.
  *
  * Returns `shadowStyle` too. Put it on the same view as the transform so the
- * shadow stays in sync (Android uses `elevation`, iOS/web uses `shadow*`).
+ * shadow stays in sync (Android uses `elevation`, iOS uses `shadow*`, Web uses
+ * `boxShadow` -- the outer container's `opacity: alpha.value` handles the
+ * visibility fade on Web so the shadow string can be static).
  */
-export function useFabVisibility({
+export function useVisibility({
   visible,
   theme,
   initialScale = 0,
   transformOrigin = 'center',
   elevation = 0,
-}: UseFabVisibilityArgs): UseFabVisibilityResult {
+}: UseVisibilityArgs): UseVisibilityResult {
   const reduceMotion = useReduceMotion();
   const scale = useSharedValue(visible ? 1 : initialScale);
   const alpha = useSharedValue(visible ? 1 : 0);
@@ -74,20 +77,25 @@ export function useFabVisibility({
   }, [visible, theme, reduceMotion, scale, alpha, initialScale]);
 
   const restingElevationDp = androidElevationLevels[elevation];
-  const restingShadowOpacity = elevation ? shadowLayers[0].shadowOpacity : 0;
   const shadowOffsetHeight = shadowLayers[0].height[elevation];
   const shadowRadius = shadowLayers[0].shadowRadius[elevation];
   const shadowColor = theme.colors.shadow;
 
+  const webShadow =
+    Platform.OS === 'web' ? shadow(elevation, shadowColor) : null;
+
   const shadowStyle = useAnimatedStyle(() => {
-    if (isAndroid) {
+    if (Platform.OS === 'android') {
       return { elevation: alpha.value * restingElevationDp };
+    }
+    if (Platform.OS === 'web') {
+      return webShadow ?? {};
     }
     return {
       shadowColor,
-      shadowOpacity: alpha.value * restingShadowOpacity,
+      shadowOpacity: alpha.value * (elevation ? SHADOW_OPACITY : 0),
       shadowOffset: { width: 0, height: shadowOffsetHeight },
-      shadowRadius,
+      shadowRadius: shadowRadius * IOS_SHADOW_RADIUS_FACTOR,
     };
   });
 

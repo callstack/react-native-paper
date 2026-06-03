@@ -8,12 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Banner,
-  FloatingActionButton,
-  Palette,
-  useTheme,
-} from 'react-native-paper';
+import { Banner, FAB, Palette, useTheme } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -62,11 +57,7 @@ const BannerExample = () => {
           ))}
         </View>
       </ScreenWrapper>
-      <FloatingActionButton
-        icon="eye"
-        style={styles.fab}
-        onPress={() => setVisible(!visible)}
-      />
+      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
       <Banner
         onLayout={handleLayout}
         actions={[

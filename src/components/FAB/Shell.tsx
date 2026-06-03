@@ -7,8 +7,6 @@ import {
   PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
-  Text as NativeText,
-  TextLayoutEvent,
   View,
   ViewStyle,
 } from 'react-native';
@@ -20,17 +18,17 @@ import Reanimated, {
   type SharedValue,
 } from 'react-native-reanimated';
 
-import FabContent from './FabContent';
+import Content from './Content';
 import {
-  FloatingActionButtonSize,
-  FloatingActionButtonTokens,
-  FloatingActionButtonVariant,
+  Size,
+  Tokens,
+  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
-import { useFabVisibility } from './useFabVisibility';
 import { useFocusRing } from './useFocusRing';
+import { useVisibility } from './useVisibility';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ShapeToken } from '../../theme/utils/shape';
@@ -39,7 +37,7 @@ import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
-export type FabShellProps = {
+export type ShellProps = {
   /**
    * Icon rendered inside the FAB when no custom `children` are provided.
    */
@@ -52,11 +50,11 @@ export type FabShellProps = {
   /**
    * Role-color preset. Defaults to `tonalPrimary`.
    */
-  variant?: FloatingActionButtonVariant;
+  variant?: Variant;
   /**
    * Spec size. Defaults to `default`.
    */
-  size?: FloatingActionButtonSize;
+  size?: Size;
   /**
    * Container color override. Wins over `variant`.
    */
@@ -113,22 +111,6 @@ export type FabShellProps = {
    */
   labelAnimatedStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
-   * Ref to the visible label node. Used by the Extended FAB to measure
-   * label width on the web.
-   */
-  labelRef?: React.RefObject<(NativeText & HTMLElement) | null>;
-  /**
-   * `onTextLayout` for the visible label. Used on iOS, which reports the
-   * full (unclipped) label width via this callback.
-   */
-  onLabelTextLayout?: (e: TextLayoutEvent) => void;
-  /**
-   * `onTextLayout` for an off-screen full-width copy of the label. Used on
-   * Android, where the visible label's `onTextLayout` reports only the
-   * visible glyph run.
-   */
-  offscreenLabelMeasure?: (e: TextLayoutEvent) => void;
-  /**
    * Type of background drawable to display the feedback (Android).
    */
   background?: PressableAndroidRippleConfig;
@@ -161,7 +143,7 @@ export type FabShellProps = {
    */
   overlay?: React.ReactNode;
   /**
-   * Replaces the default icon + label content. Pass your own `<FabContent />`
+   * Replaces the default icon + label content. Pass your own `<Content />`
    * when you need custom typescale, label animation, or measurement.
    */
   children?: React.ReactNode;
@@ -190,7 +172,7 @@ export type FabShellProps = {
  *
  * Not exported from the package.
  */
-const FabShell = forwardRef<View, FabShellProps>(
+const Shell = forwardRef<View, ShellProps>(
   (
     {
       icon,
@@ -203,16 +185,13 @@ const FabShell = forwardRef<View, FabShellProps>(
       iconSize,
       leading,
       trailing,
-      elevation = FloatingActionButtonTokens.stateElevation.enabled,
+      elevation = Tokens.stateElevation.enabled,
       visible = true,
       onPress,
       accessibilityLabel = label,
       accessibilityState,
       labelMaxFontSizeMultiplier,
       labelAnimatedStyle,
-      labelRef,
-      onLabelTextLayout,
-      offscreenLabelMeasure,
       background,
       widthShared,
       heightShared,
@@ -238,7 +217,7 @@ const FabShell = forwardRef<View, FabShellProps>(
       [theme, variant, containerColor, contentColor]
     );
 
-    const { scale, alpha, shadowStyle } = useFabVisibility({
+    const { scale, alpha, shadowStyle } = useVisibility({
       visible,
       theme,
       elevation,
@@ -330,7 +309,7 @@ const FabShell = forwardRef<View, FabShellProps>(
             ]}
           >
             {children ?? (
-              <FabContent
+              <Content
                 icon={icon}
                 label={label}
                 contentColor={colors.content}
@@ -342,9 +321,6 @@ const FabShell = forwardRef<View, FabShellProps>(
                 labelTypescale={dimensions.labelTypescale}
                 labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
                 labelAnimatedStyle={labelAnimatedStyle}
-                labelRef={labelRef}
-                onLabelTextLayout={onLabelTextLayout}
-                offscreenLabelMeasure={offscreenLabelMeasure}
                 labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
                 labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
                 testID={testID}
@@ -393,4 +369,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FabShell;
+export default Shell;

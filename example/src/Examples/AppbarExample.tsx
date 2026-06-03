@@ -4,7 +4,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
-  FloatingActionButton,
+  FAB,
   List,
   Palette,
   RadioButton,
@@ -23,7 +23,6 @@ const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
 
 const AppbarExample = () => {
-  // @ts-ignore
   const navigation = useNavigation('Appbar');
 
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
@@ -83,7 +82,7 @@ const AppbarExample = () => {
 
   const renderFAB = () => {
     return (
-      <FloatingActionButton
+      <FAB
         icon="plus"
         onPress={() => {}}
         style={[styles.fab, { top: (height - MEDIUM_FAB_HEIGHT) / 2 }]}

@@ -122,9 +122,9 @@ const config = {
             DrawerSection: 'Drawer/DrawerSection',
           },
           FAB: {
-            FloatingActionButton: 'FAB/FloatingActionButton',
-            ExtendedFloatingActionButton: 'FAB/ExtendedFloatingActionButton',
-            FloatingActionButtonMenu: 'FAB/FloatingActionButtonMenu',
+            FAB: 'FAB/FAB',
+            FABExtended: 'FAB/Extended',
+            FABMenu: 'FAB/Menu',
           },
           IconButton: {
             IconButton: 'IconButton/IconButton',

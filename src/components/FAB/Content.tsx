@@ -1,11 +1,8 @@
 import * as React from 'react';
 import {
   ColorValue,
-  ScrollView,
   StyleProp,
   StyleSheet,
-  Text as NativeText,
-  TextLayoutEvent,
   View,
   ViewStyle,
 } from 'react-native';
@@ -16,7 +13,7 @@ import type { TypescaleKey } from '../../theme/types';
 import Icon, { IconSource } from '../Icon';
 import AnimatedText from '../Typography/AnimatedText';
 
-export type FabContentProps = {
+export type ContentProps = {
   icon?: IconSource;
   label?: string;
   contentColor: ColorValue;
@@ -32,25 +29,8 @@ export type FabContentProps = {
    * to fade the label in and out as the FAB expands and collapses.
    */
   labelAnimatedStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
-  /**
-   * Ref to the visible label node. Used by the Extended FAB to measure label
-   * width on the web.
-   */
-  labelRef?: React.RefObject<(NativeText & HTMLElement) | null>;
-  /**
-   * `onTextLayout` for the visible label. Used by iOS, which reports the full
-   * (unclipped) label width via this callback. Pass `undefined` on platforms
-   * where the visible label is clipped and reports a useless width.
-   */
-  onLabelTextLayout?: (e: TextLayoutEvent) => void;
   labelNumberOfLines?: number;
   labelEllipsisMode?: 'clip' | 'tail' | 'head' | 'middle';
-  /**
-   * When set, an off-screen copy of the label is rendered with this callback
-   * attached. Used by the Extended FAB on Android, where the visible label's
-   * `onTextLayout` reports only the visible glyph run.
-   */
-  offscreenLabelMeasure?: (e: TextLayoutEvent) => void;
   testID?: string;
 };
 
@@ -60,7 +40,7 @@ export type FabContentProps = {
  *
  * No animation, no ripple, no shadow, no container shape. Just the content.
  */
-const FabContent = ({
+const Content = ({
   icon,
   label,
   contentColor,
@@ -72,13 +52,10 @@ const FabContent = ({
   labelTypescale = 'labelLarge',
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
-  labelRef,
-  onLabelTextLayout,
   labelNumberOfLines,
   labelEllipsisMode,
-  offscreenLabelMeasure,
   testID,
-}: FabContentProps) => {
+}: ContentProps) => {
   const hasLabel = label !== undefined && label !== '';
   const colorStyle = { color: contentColor };
 
@@ -107,12 +84,10 @@ const FabContent = ({
             ]}
           >
             <AnimatedText
-              ref={labelRef}
               variant={labelTypescale}
               selectable={false}
               numberOfLines={labelNumberOfLines}
               ellipsizeMode={labelEllipsisMode}
-              onTextLayout={onLabelTextLayout}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               style={colorStyle}
               testID={testID ? `${testID}-text` : undefined}
@@ -122,19 +97,6 @@ const FabContent = ({
           </Reanimated.View>
         ) : null}
       </View>
-      {hasLabel && offscreenLabelMeasure ? (
-        <ScrollView style={styles.offscreen}>
-          <AnimatedText
-            variant={labelTypescale}
-            numberOfLines={1}
-            onTextLayout={offscreenLabelMeasure}
-            ellipsizeMode="tail"
-            style={colorStyle}
-          >
-            {label}
-          </AnimatedText>
-        </ScrollView>
-      ) : null}
     </>
   );
 };
@@ -151,10 +113,6 @@ const styles = StyleSheet.create({
   labelNoPointerEvents: {
     pointerEvents: 'none',
   },
-  offscreen: {
-    height: 0,
-    position: 'absolute',
-  },
 });
 
-export default FabContent;
+export default Content;
