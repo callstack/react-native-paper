@@ -58,6 +58,70 @@ module.exports = function rewire(babel, options) {
 
         path.requeue();
       },
+      ExportNamedDeclaration(path) {
+        if (
+          !path.node.source ||
+          path.node.source.value !== name ||
+          path.node[SKIP]
+        ) {
+          return;
+        }
+
+        path.node.source.value = `${name}/${index}`;
+        path.replaceWithMultiple(
+          path.node.specifiers.reduce((declarations, specifier) => {
+            const mapping = mappings[specifier.local.name];
+
+            if (mapping) {
+              const alias = `${name}/${mapping.path}`;
+              let s;
+
+              switch (mapping.name) {
+                case 'default':
+                  s = t.exportSpecifier(
+                    t.identifier('default'),
+                    t.identifier(specifier.exported.name)
+                  );
+                  break;
+                case '*':
+                  s = t.exportNamespaceSpecifier(
+                    t.identifier(specifier.exported.name)
+                  );
+                  break;
+                default:
+                  s = t.exportSpecifier(
+                    t.identifier(mapping.name),
+                    t.identifier(specifier.exported.name)
+                  );
+              }
+
+              declarations.push(
+                t.exportNamedDeclaration(null, [s], t.stringLiteral(alias))
+              );
+            } else {
+              const previous = declarations.find(
+                (d) => d.source.value === path.node.source.value
+              );
+
+              if (previous) {
+                previous.specifiers.push(specifier);
+              } else {
+                const node = t.exportNamedDeclaration(
+                  null,
+                  [specifier],
+                  path.node.source
+                );
+                node[SKIP] = true;
+                declarations.push(node);
+              }
+            }
+
+            return declarations;
+          }, [])
+        );
+
+        path.requeue();
+      },
     },
   };
 };
