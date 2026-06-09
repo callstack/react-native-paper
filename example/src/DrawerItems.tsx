@@ -257,7 +257,7 @@ function DrawerItems() {
               <Text variant="labelMedium">example</Text> directory.
             </Text>
             <Dialog.Actions>
-              <Button onPress={_handleDismissRTLDialog}>Ok</Button>
+              <Button onPress={_handleDismissRTLDialog} label="Ok" />
             </Dialog.Actions>
           </Dialog.Content>
         </Dialog>

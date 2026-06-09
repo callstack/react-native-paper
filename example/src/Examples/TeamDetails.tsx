@@ -93,8 +93,8 @@ const News = () => {
               </Text>
             </Card.Content>
             <Card.Actions>
-              <Button onPress={() => {}}>Share</Button>
-              <Button onPress={() => {}}>Read more</Button>
+              <Button onPress={() => {}} label="Share" />
+              <Button onPress={() => {}} label="Read more" />
             </Card.Actions>
           </Card>
           <Card style={styles.card} mode="contained">
@@ -110,8 +110,8 @@ const News = () => {
               </Text>
             </Card.Content>
             <Card.Actions>
-              <Button onPress={() => {}}>Share</Button>
-              <Button onPress={() => {}}>Read more</Button>
+              <Button onPress={() => {}} label="Share" />
+              <Button onPress={() => {}} label="Read more" />
             </Card.Actions>
           </Card>
         </View>

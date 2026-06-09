@@ -86,9 +86,11 @@ function HomeScreen({ navigation }) {
   return (
     <View style={style.container}>
       <Text>Home Screen</Text>
-      <Button mode="contained" onPress={() => navigation.navigate('Details')}>
-        Go to details
-      </Button>
+      <Button
+        mode="filled"
+        onPress={() => navigation.navigate('Details')}
+        label="Go to details"
+      />
     </View>
   );
 }

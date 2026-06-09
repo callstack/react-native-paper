@@ -93,9 +93,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
  *         </Modal>
  *       </Portal>
- *       <Button style={{ marginTop: 30 }} onPress={showModal}>
- *         Show
- *       </Button>
+ *       <Button style={{ marginTop: 30 }} onPress={showModal} label="Show" />
  *     </PaperProvider>
  *   );
  * };

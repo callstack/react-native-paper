@@ -90,9 +90,8 @@ const SnackbarExample = () => {
             onPress={() =>
               setOptions({ ...options, showSnackbar: !showSnackbar })
             }
-          >
-            {showSnackbar ? 'Hide' : 'Show'}
-          </Button>
+            label={showSnackbar ? 'Hide' : 'Show'}
+          />
         </View>
       </ScreenWrapper>
       <Snackbar

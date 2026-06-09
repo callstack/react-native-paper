@@ -1718,7 +1718,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -1788,27 +1788,21 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "justifyContent": "center",
                   },
                   {
-                    "opacity": 1,
-                  },
-                  {
                     "flexDirection": "row-reverse",
                   },
+                  {
+                    "opacity": 1,
+                  },
+                  undefined,
                 ]
               }
             >
               <View
                 style={
-                  [
-                    {
-                      "marginLeft": -4,
-                      "marginRight": 12,
-                    },
-                    {
-                      "marginLeft": -16,
-                      "marginRight": 16,
-                    },
-                    false,
-                  ]
+                  {
+                    "marginLeft": -8,
+                    "marginRight": 16,
+                  }
                 }
                 testID="button-icon-container"
               >
@@ -1820,12 +1814,12 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   style={
                     [
                       {
-                        "color": "rgba(103, 80, 164, 1)",
-                        "fontSize": 18,
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 20,
                       },
                       [
                         {
-                          "lineHeight": 18,
+                          "lineHeight": 20,
                           "transform": [
                             {
                               "scaleX": 1,
@@ -1869,13 +1863,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                           "textAlign": "center",
                         },
                         {
-                          "marginHorizontal": 24,
+                          "marginHorizontal": 16,
                           "marginVertical": 10,
                         },
                         undefined,
                         false,
                         {
-                          "color": "rgba(103, 80, 164, 1)",
+                          "color": "rgba(73, 69, 79, 1)",
                           "fontFamily": "System",
                           "fontSize": 14,
                           "fontWeight": "500",

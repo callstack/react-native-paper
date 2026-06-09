@@ -75,8 +75,8 @@ const CardExample = () => {
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover source={require('../../assets/images/forest.jpg')} />
           <Card.Actions>
-            <Button onPress={() => {}}>Share</Button>
-            <Button onPress={() => {}}>Explore</Button>
+            <Button onPress={() => {}} label="Share" />
+            <Button onPress={() => {}} label="Explore" />
           </Card.Actions>
         </Card>
         <Card style={styles.card} mode={selectedMode}>
@@ -104,12 +104,8 @@ const CardExample = () => {
           />
           <Card.Title title="Custom Button styles" />
           <Card.Actions>
-            <Button style={styles.button} onPress={() => {}}>
-              Share
-            </Button>
-            <Button style={styles.button} onPress={() => {}}>
-              Explore
-            </Button>
+            <Button style={styles.button} onPress={() => {}} label="Share" />
+            <Button style={styles.button} onPress={() => {}} label="Explore" />
           </Card.Actions>
         </Card>
         <Card

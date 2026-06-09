@@ -25,8 +25,8 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button label="Cancel" />
+ *       <Button label="Ok" />
  *     </Card.Actions>
  *   </Card>
  * );
@@ -48,8 +48,7 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
         }
 
         const compact = child.props.compact;
-        const mode =
-          child.props.mode ?? (index === 0 ? 'outlined' : 'contained');
+        const mode = child.props.mode ?? (index === 0 ? 'outlined' : 'filled');
         const childStyle = [styles.button, child.props.style];
 
         return React.cloneElement(child, {

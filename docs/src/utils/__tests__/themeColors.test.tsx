@@ -2,20 +2,20 @@ import { getMaxNestedLevel, getUniqueNestedKeys } from '../themeColors';
 
 const Button = {
   active: {
+    filled: {
+      backgroundColor: 'theme.colors.primary',
+      color: 'theme.colors.onPrimary',
+    },
+    tonal: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      color: 'theme.colors.onSecondaryContainer',
+    },
     elevated: {
       backgroundColor: 'theme.colors.elevation.level1',
       color: 'theme.colors.primary',
     },
-    contained: {
-      backgroundColor: 'theme.colors.primary',
-      color: 'theme.colors.onPrimary',
-    },
-    'contained-tonal': {
-      backgroundColor: 'theme.colors.secondaryContainer',
-      color: 'theme.colors.onSecondaryContainer',
-    },
     outlined: {
-      color: 'theme.colors.primary',
+      color: 'theme.colors.onSurfaceVariant',
       borderColor: 'theme.colors.outline',
     },
     text: {
@@ -23,15 +23,15 @@ const Button = {
     },
   },
   disabled: {
+    filled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      color: 'theme.colors.onSurfaceDisabled',
+    },
+    tonal: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      color: 'theme.colors.onSurfaceDisabled',
+    },
     elevated: {
-      backgroundColor: 'theme.colors.surfaceDisabled',
-      color: 'theme.colors.onSurfaceDisabled',
-    },
-    contained: {
-      backgroundColor: 'theme.colors.surfaceDisabled',
-      color: 'theme.colors.onSurfaceDisabled',
-    },
-    'contained-tonal': {
       backgroundColor: 'theme.colors.surfaceDisabled',
       color: 'theme.colors.onSurfaceDisabled',
     },

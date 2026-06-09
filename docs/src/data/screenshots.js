@@ -22,11 +22,11 @@ const screenshots = {
   BottomNavigation: 'screenshots/bottom-navigation.gif',
   'BottomNavigation.Bar': 'screenshots/bottom-navigation-tabs.jpg',
   Button: {
-    text: 'screenshots/button-1.png',
-    outlined: 'screenshots/button-2.png',
-    contained: 'screenshots/button-3.png',
+    filled: 'screenshots/button-3.png',
+    tonal: 'screenshots/button-5.png',
     elevated: 'screenshots/button-4.png',
-    'contained-tonal': 'screenshots/button-5.png',
+    outlined: 'screenshots/button-2.png',
+    text: 'screenshots/button-1.png',
   },
   Card: {
     elevated: 'screenshots/card-1.png',

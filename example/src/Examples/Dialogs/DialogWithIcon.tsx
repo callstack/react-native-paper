@@ -24,10 +24,12 @@ const DialogWithIcon = ({
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={close} textColor={Palette.error50}>
-            Disagree
-          </Button>
-          <Button onPress={close}>Agree</Button>
+          <Button
+            onPress={close}
+            textColor={Palette.error50}
+            label="Disagree"
+          />
+          <Button onPress={close} label="Agree" />
         </Dialog.Actions>
       </Dialog>
     </Portal>
