@@ -9,9 +9,18 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
 import { Tokens } from './tokens';
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
@@ -75,7 +84,11 @@ const Tooltip = ({
   const isWeb = Platform.OS === 'web';
 
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+  // `visible` is the show/hide intent; `rendered` keeps the tooltip mounted
+  // through the exit fade so it can animate out before unmounting.
   const [visible, setVisible] = React.useState(false);
+  const [rendered, setRendered] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
     children: {},
@@ -87,6 +100,36 @@ const Tooltip = ({
 
   const childrenWrapperRef = React.useRef<View>(null);
   const touched = React.useRef(false);
+
+  const opacity = useSharedValue(0);
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const enterConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration[Tokens.motion.enter.duration],
+      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.enter.easing]),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion, reanimatedReduceMotion]
+  );
+  const exitConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration[Tokens.motion.exit.duration],
+      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.exit.easing]),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion, reanimatedReduceMotion]
+  );
+  // The visual fade-out is handled by Reanimated; the actual unmount is
+  // deferred by this same duration so the fade can play. Reduce-motion skips
+  // the wait entirely.
+  const exitDurationMs = reduceMotion
+    ? 0
+    : theme.motion.duration[Tokens.motion.exit.duration];
+
+  const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
   const isValidChild = React.useMemo(
     () => React.isValidElement<TooltipChildProps>(children),
@@ -106,6 +149,43 @@ const Tooltip = ({
       }
     };
   }, []);
+
+  // Mount as soon as the tooltip is requested.
+  React.useEffect(() => {
+    if (visible) {
+      setRendered(true);
+    }
+  }, [visible]);
+
+  // Drive the fade and defer unmount until the exit animation has played.
+  React.useEffect(() => {
+    if (!rendered) {
+      return;
+    }
+
+    if (visible) {
+      // Hold at 0 until measured so the tooltip never flashes at the wrong
+      // position, then fade in.
+      opacity.value = measurement.measured ? withTiming(1, enterConfig) : 0;
+      return;
+    }
+
+    opacity.value = withTiming(0, exitConfig);
+    const id = setTimeout(() => {
+      setRendered(false);
+      setMeasurement({ children: {}, tooltip: {}, measured: false });
+    }, exitDurationMs) as unknown as NodeJS.Timeout;
+
+    return () => clearTimeout(id);
+  }, [
+    visible,
+    rendered,
+    measurement.measured,
+    opacity,
+    enterConfig,
+    exitConfig,
+    exitDurationMs,
+  ]);
 
   React.useEffect(() => {
     const subscription = addEventListener(Dimensions, 'change', () =>
@@ -142,7 +222,6 @@ const Tooltip = ({
 
     let id = setTimeout(() => {
       setVisible(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
@@ -197,9 +276,9 @@ const Tooltip = ({
 
   return (
     <>
-      {visible && (
+      {rendered && (
         <Portal>
-          <View
+          <Animated.View
             onLayout={handleOnLayout}
             style={[
               styles.tooltip,
@@ -210,8 +289,8 @@ const Tooltip = ({
                   children as React.ReactElement<TooltipChildProps>
                 ),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
-                ...(measurement.measured ? styles.visible : styles.hidden),
               },
+              animatedStyle,
             ]}
             testID="tooltip-container"
           >
@@ -225,7 +304,7 @@ const Tooltip = ({
             >
               {title}
             </Text>
-          </View>
+          </Animated.View>
         </Portal>
       )}
       <Pressable
@@ -251,12 +330,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Tokens.plain.paddingHorizontal,
     height: Tokens.plain.height,
     maxHeight: Tokens.plain.height,
-  },
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
   },
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
