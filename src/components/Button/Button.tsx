@@ -129,6 +129,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
+   * Label text number Of Lines of the button.
+   */
+  numberOfLines?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -185,6 +189,7 @@ const Button = (
     onPressOut,
     onLongPress,
     delayLongPress,
+    numberOfLines,
     style,
     theme: themeOverrides,
     uppercase: uppercaseProp,
@@ -267,6 +272,19 @@ const Button = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
+  const borderRadius = theme.shapes.corner.largeIncreased;
+  const iconSize = 18;
+  const NumberOfLines = numberOfLines ? numberOfLines : 1;
+
+  const { backgroundColor, borderColor, textColor, borderWidth } =
+    getButtonColors({
+      customButtonColor,
+      customTextColor,
+      theme,
+      mode,
+      disabled,
+      dark,
+    });
   const borderRadius = theme.shapes.corner.largeIncreased;
   const iconSize = 18;
 
@@ -400,7 +418,7 @@ const Button = (
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={NumberOfLines}
             testID={`${testID}-text`}
             style={[
               styles.label,
