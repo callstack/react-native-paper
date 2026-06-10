@@ -58,6 +58,8 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
+ * For tooltips with a title, supporting text and action buttons, see `Tooltip.Rich`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

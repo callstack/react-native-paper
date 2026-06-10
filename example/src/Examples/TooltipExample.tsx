@@ -6,6 +6,7 @@ import {
   Appbar,
   Avatar,
   Banner,
+  Button,
   Chip,
   FAB,
   IconButton,
@@ -145,6 +146,29 @@ const TooltipExample = () => {
               />
             </Card>
           </Tooltip>
+        </List.Section>
+        <List.Section title="Rich tooltips">
+          <View style={styles.iconButtonContainer}>
+            <Tooltip.Rich
+              title="Add to library"
+              content="Save this item to read it later from any of your devices."
+              actions={
+                <>
+                  <Button compact onPress={() => {}}>
+                    Learn more
+                  </Button>
+                  <Button compact mode="contained" onPress={() => {}}>
+                    Add
+                  </Button>
+                </>
+              }
+            >
+              <IconButton icon="plus" size={24} onPress={() => {}} />
+            </Tooltip.Rich>
+            <Tooltip.Rich content="A rich tooltip with body text only — no title or actions.">
+              <IconButton icon="information" size={24} onPress={() => {}} />
+            </Tooltip.Rich>
+          </View>
         </List.Section>
       </ScreenWrapper>
       <View style={styles.fabContainer}>

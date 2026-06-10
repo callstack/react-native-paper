@@ -175,6 +175,7 @@ const config = {
           },
           Tooltip: {
             Tooltip: 'Tooltip/Tooltip',
+            TooltipRich: 'Tooltip/RichTooltip',
           },
           TouchableRipple: {
             TouchableRipple: 'TouchableRipple/TouchableRipple',
