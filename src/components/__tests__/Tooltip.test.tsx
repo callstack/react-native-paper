@@ -1,10 +1,11 @@
 import React, { RefObject } from 'react';
-import { Dimensions, Text, View, Platform } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Platform } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 
 import PaperProvider from '../../core/PaperProvider';
+import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import Tooltip from '../Tooltip/Tooltip';
 
@@ -142,6 +143,31 @@ describe('Tooltip', () => {
         runTimers();
 
         expect(queryByText('some tooltip text')).toBeNull();
+      });
+    });
+
+    describe('MD3 styling', () => {
+      it('renders an inverseSurface container with inverseOnSurface text', async () => {
+        const {
+          wrapper: { getByText, getByTestId, findByText },
+        } = setup();
+
+        fireEvent(getTrigger(getByText), 'longPress');
+
+        await findByText('some tooltip text');
+
+        expect(getByTestId('tooltip-container').props.style).toMatchObject([
+          {},
+          { backgroundColor: getTheme().colors.inverseSurface },
+        ]);
+
+        // bodySmall (12sp) text in the inverseOnSurface role.
+        expect(
+          StyleSheet.flatten(getByText('some tooltip text').props.style)
+        ).toMatchObject({
+          color: getTheme().colors.inverseOnSurface,
+          fontSize: 12,
+        });
       });
     });
 

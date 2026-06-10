@@ -9,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { Tokens } from './tokens';
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -203,12 +204,12 @@ const Tooltip = ({
             style={[
               styles.tooltip,
               {
-                backgroundColor: theme.colors.onSurface,
+                backgroundColor: theme.colors[Tokens.plain.container],
                 ...getTooltipPosition(
                   measurement as Measurement,
                   children as React.ReactElement<TooltipChildProps>
                 ),
-                borderRadius: theme.shapes.corner.extraSmall,
+                borderRadius: theme.shapes.corner[Tokens.plain.shape],
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}
@@ -218,8 +219,8 @@ const Tooltip = ({
               accessibilityLiveRegion="polite"
               numberOfLines={1}
               selectable={false}
-              variant="labelLarge"
-              style={{ color: theme.colors.surface }}
+              variant={Tokens.plain.typescale}
+              style={{ color: theme.colors[Tokens.plain.content] }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
@@ -247,9 +248,9 @@ const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    height: 32,
-    maxHeight: 32,
+    paddingHorizontal: Tokens.plain.paddingHorizontal,
+    height: Tokens.plain.height,
+    maxHeight: Tokens.plain.height,
   },
   visible: {
     opacity: 1,
