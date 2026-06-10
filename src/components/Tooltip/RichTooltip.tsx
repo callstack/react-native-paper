@@ -2,25 +2,18 @@ import * as React from 'react';
 import {
   Dimensions,
   View,
-  LayoutChangeEvent,
   StyleSheet,
   Platform,
   Pressable,
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
+import { useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
@@ -109,48 +102,14 @@ const RichTooltip = ({
   const isWeb = Platform.OS === 'web';
 
   const theme = useInternalTheme(themeOverrides);
-  const reduceMotion = useReduceMotion();
-  // `visible` is the show/hide intent; `rendered` keeps the tooltip mounted
-  // through the exit fade so it can animate out before unmounting.
+  // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
+  // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
-  const [rendered, setRendered] = React.useState(false);
+  const { rendered, measurement, animatedStyle, onLayout, childrenWrapperRef } =
+    useTooltipFade(theme, visible);
 
-  const [measurement, setMeasurement] = React.useState({
-    children: {},
-    tooltip: {},
-    measured: false,
-  });
   const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-
-  const childrenWrapperRef = React.useRef<View>(null);
-
-  const opacity = useSharedValue(0);
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
-
-  const enterConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration[Tokens.motion.enter.duration],
-      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.enter.easing]),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion, reanimatedReduceMotion]
-  );
-  const exitConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration[Tokens.motion.exit.duration],
-      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.exit.easing]),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion, reanimatedReduceMotion]
-  );
-  const exitDurationMs = reduceMotion
-    ? 0
-    : theme.motion.duration[Tokens.motion.exit.duration];
-
-  const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
   const isValidChild = React.useMemo(
     () => React.isValidElement<TooltipChildProps>(children),
@@ -173,41 +132,6 @@ const RichTooltip = ({
       clearHideTimers();
     };
   }, [clearShowTimers, clearHideTimers]);
-
-  // Mount as soon as the tooltip is requested.
-  React.useEffect(() => {
-    if (visible) {
-      setRendered(true);
-    }
-  }, [visible]);
-
-  // Drive the fade and defer unmount until the exit animation has played.
-  React.useEffect(() => {
-    if (!rendered) {
-      return;
-    }
-
-    if (visible) {
-      opacity.value = measurement.measured ? withTiming(1, enterConfig) : 0;
-      return;
-    }
-
-    opacity.value = withTiming(0, exitConfig);
-    const id = setTimeout(() => {
-      setRendered(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, exitDurationMs) as unknown as NodeJS.Timeout;
-
-    return () => clearTimeout(id);
-  }, [
-    visible,
-    rendered,
-    measurement.measured,
-    opacity,
-    enterConfig,
-    exitConfig,
-    exitDurationMs,
-  ]);
 
   React.useEffect(() => {
     const subscription = addEventListener(Dimensions, 'change', () =>
@@ -268,18 +192,6 @@ const RichTooltip = ({
     }
   }, [scheduleHide, isValidChild, children.props]);
 
-  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current?.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
-      }
-    );
-  };
-
   const mobilePressProps = {
     onPress: handlePress,
   };
@@ -307,7 +219,7 @@ const RichTooltip = ({
             testID="tooltip-rich-backdrop"
           />
           <Animated.View
-            onLayout={handleOnLayout}
+            onLayout={onLayout}
             style={[
               styles.container,
               getTooltipPosition(
