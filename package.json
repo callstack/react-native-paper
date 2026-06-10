@@ -96,6 +96,7 @@
     "react-native-builder-bob": "^0.41.0",
     "react-native-reanimated": "4.3.1",
     "react-native-safe-area-context": "5.7.0",
+    "react-native-svg": "15.15.4",
     "react-native-worklets": "0.8.3",
     "react-test-renderer": "19.2.3",
     "release-it": "^13.4.0",
@@ -107,6 +108,7 @@
     "react-native": "*",
     "react-native-reanimated": ">=4.3.0",
     "react-native-safe-area-context": "*",
+    "react-native-svg": ">=15.0.0",
     "react-native-worklets": ">=0.8.1"
   },
   "husky": {
@@ -136,7 +138,7 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|@react-navigation|react-native-reanimated|react-native-worklets|react-native-safe-area-context|nanoid|query-string|decode-uri-component|filter-obj|split-on-first|escape-string-regexp)/)"
+      "node_modules/(?!(@react-native|react-native|@react-navigation|react-native-reanimated|react-native-worklets|react-native-safe-area-context|react-native-svg|nanoid|query-string|decode-uri-component|filter-obj|split-on-first|escape-string-regexp)/)"
     ]
   },
   "greenkeeper": {

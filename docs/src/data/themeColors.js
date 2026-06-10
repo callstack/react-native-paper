@@ -264,10 +264,10 @@ const themeColors = {
       backgroundColor: 'theme.colors.backdrop',
     },
   },
-  ProgressBar: {
+  LinearProgressIndicator: {
     '-': {
-      tintColor: 'theme.colors.primary',
-      trackTintColor: 'theme.colors.surfaceVariant',
+      color: 'theme.colors.primary',
+      trackColor: 'theme.colors.secondaryContainer',
     },
   },
   Searchbar: {

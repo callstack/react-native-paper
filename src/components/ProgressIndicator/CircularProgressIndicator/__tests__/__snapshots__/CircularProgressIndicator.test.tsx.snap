@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders determinate progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": 100,
+      "min": 0,
+      "now": 30,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "height": 40,
+        "width": 40,
+      },
+      undefined,
+    ]
+  }
+  testID="circular-progress-indicator"
+>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "transform": [
+            {
+              "rotate": "43.464790894703256deg",
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <View
+      height={40}
+      width={40}
+    >
+      <View
+        animatedProps={
+          {
+            "strokeDashoffset": 49.929200658769766,
+            "strokeOpacity": 1,
+          }
+        }
+        cx={20}
+        cy={20}
+        fill="none"
+        r={18}
+        stroke="rgba(232, 222, 248, 1)"
+        strokeDasharray={
+          [
+            113.09733552923255,
+            113.09733552923255,
+          ]
+        }
+        strokeLinecap="round"
+        strokeWidth={4}
+        testID="circular-progress-indicator-track"
+      />
+    </View>
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "transform": [
+            {
+              "rotate": "-90deg",
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <View
+      height={40}
+      width={40}
+    >
+      <View
+        animatedProps={
+          {
+            "strokeDashoffset": 79.16813487046278,
+          }
+        }
+        cx={20}
+        cy={20}
+        fill="none"
+        r={18}
+        stroke="rgba(103, 80, 164, 1)"
+        strokeDasharray={
+          [
+            113.09733552923255,
+            113.09733552923255,
+          ]
+        }
+        strokeLinecap="round"
+        strokeWidth={4}
+        testID="circular-progress-indicator-active"
+      />
+    </View>
+  </View>
+</View>
+`;

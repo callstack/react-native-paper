@@ -105,7 +105,7 @@ const screenshots = {
   },
   'Menu.Item': 'screenshots/menu-item.png',
   Modal: 'screenshots/modal.gif',
-  ProgressBar: 'screenshots/progress-bar.png',
+  LinearProgressIndicator: 'screenshots/progress-bar.png',
   RadioButton: {
     'Android (enabled)': 'screenshots/radio-enabled.android.png',
     'Android (disabled)': 'screenshots/radio-disabled.android.png',

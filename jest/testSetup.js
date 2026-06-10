@@ -12,6 +12,34 @@ jest.mock('react-native-reanimated', () =>
   require('react-native-reanimated/mock')
 );
 
+jest.mock('react-native-svg', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+
+  const makeComponent = (name) => {
+    const Component = ({ children, ...props }) =>
+      React.createElement(View, props, children);
+    Component.displayName = name;
+    return Component;
+  };
+
+  const Svg = makeComponent('Svg');
+
+  return {
+    __esModule: true,
+    default: Svg,
+    Svg,
+    Circle: makeComponent('Circle'),
+    Path: makeComponent('Path'),
+    G: makeComponent('G'),
+    Line: makeComponent('Line'),
+    Rect: makeComponent('Rect'),
+    Defs: makeComponent('Defs'),
+    LinearGradient: makeComponent('LinearGradient'),
+    Stop: makeComponent('Stop'),
+  };
+});
+
 jest.mock('@react-native-vector-icons/material-design-icons', () => {
   const React = require('react');
   const { Text } = require('react-native');

@@ -147,7 +147,8 @@ const config = {
             Portal: 'Portal/Portal',
             PortalHost: 'Portal/PortalHost',
           },
-          ProgressBar: 'ProgressBar',
+          LinearProgressIndicator:
+            'ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator',
           RadioButton: {
             RadioButton: 'RadioButton/RadioButton',
             RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',
