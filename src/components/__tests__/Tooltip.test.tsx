@@ -7,6 +7,7 @@ import type { ReactTestInstance } from 'react-test-renderer';
 import PaperProvider from '../../core/PaperProvider';
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
+import TooltipCompound from '../Tooltip';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
@@ -517,6 +518,175 @@ describe('Tooltip', () => {
           ]);
         });
       });
+    });
+  });
+});
+
+describe('Tooltip.Rich', () => {
+  const getTrigger = (getByText: (text: string) => ReactTestInstance) =>
+    getByText('dummy component').parent as ReactTestInstance;
+
+  const runTimers = (ms?: number) => {
+    act(() => {
+      if (ms === undefined) {
+        jest.runOnlyPendingTimers();
+      } else {
+        jest.advanceTimersByTime(ms);
+      }
+    });
+  };
+
+  const setup = (
+    propOverrides?: Partial<React.ComponentProps<typeof TooltipCompound.Rich>>
+  ) => {
+    jest
+      .spyOn(View.prototype, 'measure')
+      .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+
+    const wrapper = render(
+      <PaperProvider>
+        <TooltipCompound.Rich content="Body text" {...propOverrides}>
+          <DummyComponent />
+        </TooltipCompound.Rich>
+      </PaperProvider>
+    );
+
+    return { wrapper };
+  };
+
+  it('is exposed as a compound component on Tooltip', () => {
+    expect(TooltipCompound.Rich).toBeDefined();
+  });
+
+  describe('Mobile', () => {
+    beforeAll(() => {
+      Platform.OS = 'android';
+    });
+    afterEach(() => jest.clearAllMocks());
+
+    it('toggles title, content and actions when the trigger is pressed', () => {
+      const {
+        wrapper: { getByText, getByTestId, queryByText },
+      } = setup({ title: 'Heading', actions: <Text>Learn more</Text> });
+
+      expect(queryByText('Body text')).toBeNull();
+
+      fireEvent.press(getTrigger(getByText));
+
+      expect(getByText('Heading')).toBeTruthy();
+      expect(getByText('Body text')).toBeTruthy();
+      expect(getByText('Learn more')).toBeTruthy();
+      expect(getByTestId('tooltip-rich-container')).toBeTruthy();
+
+      // Pressing again toggles it back off.
+      fireEvent.press(getTrigger(getByText));
+      runTimers(); // exit fade → unmount
+
+      expect(queryByText('Body text')).toBeNull();
+    });
+
+    it('renders a custom element as content', () => {
+      const {
+        wrapper: { getByText },
+      } = setup({ content: <Text>Custom node</Text> });
+
+      fireEvent.press(getTrigger(getByText));
+
+      expect(getByText('Custom node')).toBeTruthy();
+    });
+
+    it('uses the surfaceContainer container with MD3 title/content roles', () => {
+      const {
+        wrapper: { getByText, getByTestId },
+      } = setup({ title: 'Heading' });
+
+      fireEvent.press(getTrigger(getByText));
+
+      expect(
+        StyleSheet.flatten(getByText('Heading').props.style)
+      ).toMatchObject({
+        color: getTheme().colors.onSurface,
+      });
+      expect(
+        StyleSheet.flatten(getByText('Body text').props.style)
+      ).toMatchObject({
+        color: getTheme().colors.onSurfaceVariant,
+      });
+
+      // Surface (container) uses the surfaceContainer color.
+      expect(
+        StyleSheet.flatten(
+          getByTestId('tooltip-rich-surface-container').props.style
+        )
+      ).toMatchObject({
+        backgroundColor: getTheme().colors.surfaceContainer,
+      });
+    });
+
+    it('dismisses when the backdrop is pressed', () => {
+      const {
+        wrapper: { getByText, getByTestId, queryByText },
+      } = setup();
+
+      fireEvent.press(getTrigger(getByText));
+      expect(getByText('Body text')).toBeTruthy();
+
+      fireEvent.press(getByTestId('tooltip-rich-backdrop'));
+      runTimers(); // exit fade → unmount
+
+      expect(queryByText('Body text')).toBeNull();
+    });
+
+    it('dismisses when an action is selected', () => {
+      const {
+        wrapper: { getByText, getByTestId, queryByText },
+      } = setup({ actions: <Text>Learn more</Text> });
+
+      fireEvent.press(getTrigger(getByText));
+      expect(getByText('Body text')).toBeTruthy();
+
+      fireEvent(getByTestId('tooltip-rich-actions'), 'touchEnd');
+      runTimers(); // exit fade → unmount
+
+      expect(queryByText('Body text')).toBeNull();
+    });
+  });
+
+  describe('Web', () => {
+    beforeAll(() => {
+      Platform.OS = 'web';
+    });
+    afterEach(() => jest.clearAllMocks());
+
+    it('opens on hover after the enter delay', () => {
+      const {
+        wrapper: { getByText, queryByText },
+      } = setup({ enterTouchDelay: 100 });
+
+      fireEvent(getTrigger(getByText), 'hoverIn');
+      expect(queryByText('Body text')).toBeNull(); // still within the delay
+
+      runTimers(100);
+
+      expect(getByText('Body text')).toBeTruthy();
+    });
+
+    it('keeps the tooltip open while the pointer moves into it (gap bridge)', () => {
+      const {
+        wrapper: { getByText, getByTestId },
+      } = setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
+
+      fireEvent(getTrigger(getByText), 'hoverIn');
+      runTimers(0);
+      expect(getByText('Body text')).toBeTruthy();
+
+      // Leaving the trigger schedules a hide...
+      fireEvent(getTrigger(getByText), 'hoverOut');
+      // ...but entering the tooltip cancels it.
+      fireEvent(getByTestId('tooltip-rich-surface'), 'hoverIn');
+      runTimers(500);
+
+      expect(getByText('Body text')).toBeTruthy();
     });
   });
 });
