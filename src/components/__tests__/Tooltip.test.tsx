@@ -169,7 +169,9 @@ describe('Tooltip', () => {
 
         await findByText('some tooltip text');
 
-        await runTimers();
+        fireEvent(getTrigger(getByText), 'pressOut');
+        runTimers(); // leaveTouchDelay → starts the fade-out
+        runTimers(); // exit fade duration → unmounts
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
@@ -188,6 +190,7 @@ describe('Tooltip', () => {
         expect(getByTestId('tooltip-container').props.style).toMatchObject([
           {},
           { backgroundColor: getTheme().colors.inverseSurface },
+          {},
         ]);
 
         // bodySmall (12sp) text in the inverseOnSurface role.
@@ -197,6 +200,27 @@ describe('Tooltip', () => {
           color: getTheme().colors.inverseOnSurface,
           fontSize: 12,
         });
+      });
+    });
+
+    describe('fade animation', () => {
+      it('stays mounted through the exit fade before unmounting', async () => {
+        const {
+          wrapper: { queryByText, getByText, findByText },
+        } = setup({ leaveTouchDelay: 0 });
+
+        fireEvent(getTrigger(getByText), 'longPress');
+
+        await findByText('some tooltip text');
+
+        fireEvent(getTrigger(getByText), 'pressOut');
+        runTimers(); // leaveTouchDelay elapses → exit fade starts
+
+        // Still mounted while fading out so the animation can play.
+        expect(queryByText('some tooltip text')).not.toBeNull();
+
+        runTimers(); // exit fade duration elapses → unmounts
+        expect(queryByText('some tooltip text')).toBeNull();
       });
     });
 
@@ -229,10 +253,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-            top: 250, // pageY (200) + height (50)
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+              top: 250, // pageY (200) + height (50)
+            },
+            {},
+          ]);
         });
       });
 
@@ -250,10 +278,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 0, // Tooltip renders starting from children's x coord
-            top: 250,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 0, // Tooltip renders starting from children's x coord
+              top: 250,
+            },
+            {},
+          ]);
         });
       });
 
@@ -271,10 +303,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-            top: 250,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
+              top: 250,
+            },
+            {},
+          ]);
         });
       });
 
@@ -292,10 +328,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 210,
-            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 210,
+              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+            },
+            {},
+          ]);
         });
       });
     });
@@ -388,8 +428,9 @@ describe('Tooltip', () => {
 
         await findByText('some tooltip text');
 
-        await fireEvent(getTrigger(getByText), 'hoverOut');
-        await runTimers();
+        fireEvent(getTrigger(getByText), 'hoverOut');
+        runTimers(); // leaveTouchDelay → starts the fade-out
+        runTimers(); // exit fade duration → unmounts
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
@@ -425,10 +466,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-            top: 250, // pageY (200) + height (50)
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+              top: 250, // pageY (200) + height (50)
+            },
+            {},
+          ]);
         });
       });
 
@@ -447,10 +492,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 0, // Tooltip renders starting from children's x coord
-            top: 250,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 0, // Tooltip renders starting from children's x coord
+              top: 250,
+            },
+            {},
+          ]);
         });
       });
 
@@ -469,10 +518,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-            top: 250,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
+              top: 250,
+            },
+            {},
+          ]);
         });
       });
 
@@ -491,10 +544,14 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
-            left: 210,
-            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-          });
+          expect(getByTestId('tooltip-container').props.style).toMatchObject([
+            {},
+            {
+              left: 210,
+              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+            },
+            {},
+          ]);
         });
       });
     });
