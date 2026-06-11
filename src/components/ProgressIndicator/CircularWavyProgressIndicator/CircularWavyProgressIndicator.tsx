@@ -246,6 +246,11 @@ const CircularWavyProgressIndicator = ({
       activeStart = -90;
       activeSweep = p * 360;
     }
+    if (activeSweep <= 0) {
+      return {
+        d: buildArcWavePath(center, center, radius, -90, 360, 0, waveCount, 0),
+      };
+    }
     const trackSweep = 360 - activeSweep - 4 * capAngle - 2 * gapAngle;
     if (trackSweep <= 0) return { d: NO_DRAW_PATH };
     const trackStart = activeStart + activeSweep + 2 * capAngle + gapAngle;

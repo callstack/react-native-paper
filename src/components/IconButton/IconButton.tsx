@@ -13,9 +13,9 @@ import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
+import CircularProgressIndicator from '../ProgressIndicator/CircularProgressIndicator';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -212,7 +212,12 @@ const IconButton = forwardRef<View, Props>(
         >
           <View style={{ opacity: iconOpacity }}>
             {loading ? (
-              <ActivityIndicator size={size} color={iconColor} />
+              <CircularProgressIndicator
+                indeterminate
+                size={size}
+                thickness={size / 10}
+                color={iconColor}
+              />
             ) : (
               <IconComponent color={iconColor} source={icon} size={size} />
             )}

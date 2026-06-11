@@ -153,7 +153,8 @@ const CircularProgressIndicator = ({
       1,
       Math.max(0, typeof progress === 'number' ? progress : progress.value)
     );
-    const trackLenAngle = 360 - p * 360 - 4 * capAngle - 2 * gapAngle;
+    const trackLenAngle =
+      p <= 0 ? 360 : 360 - p * 360 - 4 * capAngle - 2 * gapAngle;
     const trackLen = Math.max(0, (trackLenAngle / 360) * circumference);
     return {
       strokeDashoffset: circumference - trackLen,

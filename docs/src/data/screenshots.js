@@ -1,5 +1,4 @@
 const screenshots = {
-  ActivityIndicator: 'screenshots/activity-indicator.gif',
   Appbar: 'screenshots/appbar.png',
   'Appbar.Action': 'screenshots/appbar-action-android.png',
   'Appbar.BackAction': 'screenshots/appbar-backaction-android.png',

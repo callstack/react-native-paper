@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`activity indicator snapshot test 1`] = `
+exports[`loading indicator snapshot test 1`] = `
 <View
   collapsable={false}
   style={
@@ -223,194 +223,67 @@ exports[`activity indicator snapshot test 1`] = `
           "busy": true,
         }
       }
+      accessibilityValue={{}}
       accessible={true}
       style={
         [
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "height": 40,
+            "width": 40,
           },
           {
             "marginHorizontal": 16,
           },
         ]
       }
-      testID="activity-indicator"
+      testID="loading-indicator"
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "height": 24,
-            "opacity": 1,
-            "width": 24,
-          }
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "transform": [
+                {
+                  "rotate": "0deg",
+                },
+              ],
+            },
+          ]
         }
       >
         <View
-          collapsable={false}
-          style={
-            {
-              "alignItems": "center",
-              "bottom": 0,
-              "justifyContent": "center",
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
+          height={40}
+          width={40}
         >
           <View
-            collapsable={false}
-            style={
+            animatedProps={
               {
-                "height": 24,
-                "transform": [
-                  {
-                    "rotate": "45deg",
-                  },
-                ],
-                "width": 24,
+                "strokeDashoffset": 101.7876019763093,
               }
             }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "height": 12,
-                  "overflow": "hidden",
-                  "width": 24,
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                style={
-                  {
-                    "height": 24,
-                    "transform": [
-                      {
-                        "translateY": 0,
-                      },
-                      {
-                        "rotate": "-165deg",
-                      },
-                    ],
-                    "width": 24,
-                  }
-                }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    {
-                      "height": 12,
-                      "overflow": "hidden",
-                      "width": 24,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      {
-                        "borderColor": "rgba(103, 80, 164, 1)",
-                        "borderRadius": 12,
-                        "borderWidth": 2.4,
-                        "height": 24,
-                        "width": 24,
-                      }
-                    }
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View
-          collapsable={false}
-          style={
-            {
-              "alignItems": "center",
-              "bottom": 0,
-              "justifyContent": "center",
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
+            cx={20}
+            cy={20}
+            fill="none"
+            r={18}
+            stroke="rgba(103, 80, 164, 1)"
+            strokeDasharray={
+              [
+                113.09733552923255,
+                113.09733552923255,
+              ]
             }
-          }
-        >
-          <View
-            collapsable={false}
-            style={
-              {
-                "height": 24,
-                "transform": [
-                  {
-                    "rotate": "45deg",
-                  },
-                ],
-                "width": 24,
-              }
-            }
-          >
-            <View
-              collapsable={false}
-              style={
-                {
-                  "height": 12,
-                  "overflow": "hidden",
-                  "top": 12,
-                  "width": 24,
-                }
-              }
-            >
-              <View
-                collapsable={false}
-                style={
-                  {
-                    "height": 24,
-                    "transform": [
-                      {
-                        "translateY": -12,
-                      },
-                      {
-                        "rotate": "345deg",
-                      },
-                    ],
-                    "width": 24,
-                  }
-                }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    {
-                      "height": 12,
-                      "overflow": "hidden",
-                      "width": 24,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      {
-                        "borderColor": "rgba(103, 80, 164, 1)",
-                        "borderRadius": 12,
-                        "borderWidth": 2.4,
-                        "height": 24,
-                        "width": 24,
-                      }
-                    }
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
+            strokeLinecap="round"
+            strokeWidth={4}
+            testID="loading-indicator-active"
+          />
         </View>
       </View>
     </View>

@@ -1,9 +1,4 @@
 const themeColors = {
-  ActivityIndicator: {
-    '-': {
-      borderColor: 'theme.colors.primary',
-    },
-  },
   Appbar: {
     default: {
       backgroundColor: 'theme.colors.surface',

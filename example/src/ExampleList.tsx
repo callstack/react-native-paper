@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Divider, List, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
@@ -50,7 +49,6 @@ import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 export const mainExamples = {
-  ActivityIndicator: ActivityIndicatorExample,
   Appbar: AppbarExample,
   Avatar: AvatarExample,
   Badge: BadgeExample,

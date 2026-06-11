@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Dialog, Palette, Portal } from 'react-native-paper';
+import {
+  CircularProgressIndicator,
+  Dialog,
+  Palette,
+  Portal,
+} from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
-
-const isIOS = Platform.OS === 'ios';
 
 const DialogWithLoadingIndicator = ({
   visible,
@@ -20,9 +23,9 @@ const DialogWithLoadingIndicator = ({
         <Dialog.Title>Progress Dialog</Dialog.Title>
         <Dialog.Content>
           <View style={styles.flexing}>
-            <ActivityIndicator
+            <CircularProgressIndicator
+              indeterminate
               color={Palette.tertiary30}
-              size={isIOS ? 'large' : 48}
               style={styles.marginRight}
             />
             <TextComponent>Loading.....</TextComponent>

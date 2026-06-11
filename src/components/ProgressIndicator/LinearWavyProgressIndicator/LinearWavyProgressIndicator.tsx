@@ -309,6 +309,7 @@ const LinearWavyProgressIndicator = ({
       1,
       Math.max(0, typeof progress === 'number' ? progress : progress.value)
     );
+    if (p <= 0) return { d: buildStraightPath(min, max, centerY) };
     const head = capWidth + p * (width - 2 * capWidth);
     const trackStart = head + gap + 2 * capWidth;
     return { d: buildStraightPath(clip(trackStart), max, centerY) };

@@ -22,7 +22,6 @@ import * as List from './components/List/List';
 export { Avatar, List, Drawer };
 
 export { default as Badge } from './components/Badge';
-export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
 export { default as Button } from './components/Button/Button';
@@ -57,7 +56,6 @@ export { default as Tooltip } from './components/Tooltip/Tooltip';
 export { default as Text, customText } from './components/Typography/Text';
 
 // Types
-export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
 export type { Props as AppbarProps } from './components/Appbar/Appbar';
 export type { Props as AppbarActionProps } from './components/Appbar/AppbarAction';
 export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';

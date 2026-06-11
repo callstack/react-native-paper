@@ -63,7 +63,6 @@ const config = {
         docsRootDir: path.join(__dirname, 'docs', 'components'),
         libsRootDir: path.join(__dirname, '..', 'src', 'components'),
         pages: {
-          ActivityIndicator: 'ActivityIndicator',
           Appbar: {
             Appbar: 'Appbar/Appbar',
             AppbarAction: 'Appbar/AppbarAction',
@@ -256,7 +255,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'components/ActivityIndicator',
+            docId: 'components/Appbar/Appbar',
             position: 'left',
             label: 'Components',
           },

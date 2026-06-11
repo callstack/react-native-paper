@@ -23,8 +23,8 @@ import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
-import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
+import CircularProgressIndicator from '../ProgressIndicator/CircularProgressIndicator';
 import Surface from '../Surface';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -387,8 +387,10 @@ const Button = (
             </View>
           ) : null}
           {loading ? (
-            <ActivityIndicator
+            <CircularProgressIndicator
+              indeterminate
               size={customLabelSize ?? iconSize}
+              thickness={(customLabelSize ?? iconSize) / 10}
               color={
                 typeof customLabelColor === 'string'
                   ? customLabelColor

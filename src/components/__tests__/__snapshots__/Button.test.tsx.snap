@@ -1576,12 +1576,13 @@ exports[`renders loading button 1`] = `
               "busy": true,
             }
           }
+          accessibilityValue={{}}
           accessible={true}
           style={
             [
               {
-                "alignItems": "center",
-                "justifyContent": "center",
+                "height": 18,
+                "width": 18,
               },
               [
                 {
@@ -1599,181 +1600,54 @@ exports[`renders loading button 1`] = `
               ],
             ]
           }
+          testID="circular-progress-indicator"
         >
           <View
-            collapsable={false}
+            pointerEvents="none"
             style={
-              {
-                "height": 18,
-                "opacity": 1,
-                "width": 18,
-              }
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
+                },
+              ]
             }
           >
             <View
-              collapsable={false}
-              style={
-                {
-                  "alignItems": "center",
-                  "bottom": 0,
-                  "justifyContent": "center",
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
+              height={18}
+              width={18}
             >
               <View
-                collapsable={false}
-                style={
+                animatedProps={
                   {
-                    "height": 18,
-                    "transform": [
-                      {
-                        "rotate": "45deg",
-                      },
-                    ],
-                    "width": 18,
+                    "strokeDashoffset": 45.804420889339184,
                   }
                 }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    {
-                      "height": 9,
-                      "overflow": "hidden",
-                      "width": 18,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      {
-                        "height": 18,
-                        "transform": [
-                          {
-                            "translateY": 0,
-                          },
-                          {
-                            "rotate": "-165deg",
-                          },
-                        ],
-                        "width": 18,
-                      }
-                    }
-                  >
-                    <View
-                      collapsable={false}
-                      style={
-                        {
-                          "height": 9,
-                          "overflow": "hidden",
-                          "width": 18,
-                        }
-                      }
-                    >
-                      <View
-                        collapsable={false}
-                        style={
-                          {
-                            "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
-                          }
-                        }
-                      />
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View
-              collapsable={false}
-              style={
-                {
-                  "alignItems": "center",
-                  "bottom": 0,
-                  "justifyContent": "center",
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
+                cx={9}
+                cy={9}
+                fill="none"
+                r={8.1}
+                stroke="rgba(103, 80, 164, 1)"
+                strokeDasharray={
+                  [
+                    50.893800988154645,
+                    50.893800988154645,
+                  ]
                 }
-              }
-            >
-              <View
-                collapsable={false}
-                style={
-                  {
-                    "height": 18,
-                    "transform": [
-                      {
-                        "rotate": "45deg",
-                      },
-                    ],
-                    "width": 18,
-                  }
-                }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    {
-                      "height": 9,
-                      "overflow": "hidden",
-                      "top": 9,
-                      "width": 18,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      {
-                        "height": 18,
-                        "transform": [
-                          {
-                            "translateY": -9,
-                          },
-                          {
-                            "rotate": "345deg",
-                          },
-                        ],
-                        "width": 18,
-                      }
-                    }
-                  >
-                    <View
-                      collapsable={false}
-                      style={
-                        {
-                          "height": 9,
-                          "overflow": "hidden",
-                          "width": 18,
-                        }
-                      }
-                    >
-                      <View
-                        collapsable={false}
-                        style={
-                          {
-                            "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
-                          }
-                        }
-                      />
-                    </View>
-                  </View>
-                </View>
-              </View>
+                strokeLinecap="round"
+                strokeWidth={1.8}
+                testID="circular-progress-indicator-active"
+              />
             </View>
           </View>
         </View>

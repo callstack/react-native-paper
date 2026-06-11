@@ -13,11 +13,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
+import CircularProgressIndicator from './ProgressIndicator/CircularProgressIndicator';
 import Surface from './Surface';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
@@ -301,8 +301,9 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           {...rest}
         />
         {loading ? (
-          <ActivityIndicator
-            testID="activity-indicator"
+          <CircularProgressIndicator
+            indeterminate
+            testID="loading-indicator"
             style={styles.v3Loader}
           />
         ) : (
