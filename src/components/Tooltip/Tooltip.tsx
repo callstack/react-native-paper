@@ -1,14 +1,16 @@
 import * as React from 'react';
 import {
   Dimensions,
-  View,
-  LayoutChangeEvent,
   StyleSheet,
   Platform,
   Pressable,
   ViewStyle,
 } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
+import { useTooltipFade } from './hooks';
+import { Tokens } from './tokens';
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -48,6 +50,8 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
+ * For tooltips with a title, supporting text and action buttons, see `Tooltip.Rich`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -74,17 +78,15 @@ const Tooltip = ({
   const isWeb = Platform.OS === 'web';
 
   const theme = useInternalTheme(themeOverrides);
+  // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
+  // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
+  const { rendered, measurement, animatedStyle, onLayout, childrenWrapperRef } =
+    useTooltipFade(theme, visible);
 
-  const [measurement, setMeasurement] = React.useState({
-    children: {},
-    tooltip: {},
-    measured: false,
-  });
   const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
 
-  const childrenWrapperRef = React.useRef<View>(null);
   const touched = React.useRef(false);
 
   const isValidChild = React.useMemo(
@@ -141,7 +143,6 @@ const Tooltip = ({
 
     let id = setTimeout(() => {
       setVisible(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
@@ -170,18 +171,6 @@ const Tooltip = ({
     }
   }, [children.props, handleTouchEnd, isValidChild]);
 
-  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current?.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
-      }
-    );
-  };
-
   const mobilePressProps = {
     onPress: handlePress,
     onLongPress: () => handleTouchStart(),
@@ -196,21 +185,21 @@ const Tooltip = ({
 
   return (
     <>
-      {visible && (
+      {rendered && (
         <Portal>
-          <View
-            onLayout={handleOnLayout}
+          <Animated.View
+            onLayout={onLayout}
             style={[
               styles.tooltip,
               {
-                backgroundColor: theme.colors.onSurface,
+                backgroundColor: theme.colors[Tokens.plain.container],
                 ...getTooltipPosition(
                   measurement as Measurement,
                   children as React.ReactElement<TooltipChildProps>
                 ),
-                borderRadius: theme.shapes.corner.extraSmall,
-                ...(measurement.measured ? styles.visible : styles.hidden),
+                borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
+              animatedStyle,
             ]}
             testID="tooltip-container"
           >
@@ -218,13 +207,13 @@ const Tooltip = ({
               accessibilityLiveRegion="polite"
               numberOfLines={1}
               selectable={false}
-              variant="labelLarge"
-              style={{ color: theme.colors.surface }}
+              variant={Tokens.plain.typescale}
+              style={{ color: theme.colors[Tokens.plain.content] }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>
-          </View>
+          </Animated.View>
         </Portal>
       )}
       <Pressable
@@ -247,15 +236,9 @@ const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    height: 32,
-    maxHeight: 32,
-  },
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
+    paddingHorizontal: Tokens.plain.paddingHorizontal,
+    height: Tokens.plain.height,
+    maxHeight: Tokens.plain.height,
   },
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
