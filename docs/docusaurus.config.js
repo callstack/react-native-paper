@@ -147,6 +147,10 @@ const config = {
             Portal: 'Portal/Portal',
             PortalHost: 'Portal/PortalHost',
           },
+          CircularProgressIndicator:
+            'ProgressIndicator/CircularProgressIndicator/CircularProgressIndicator',
+          CircularWavyProgressIndicator:
+            'ProgressIndicator/CircularWavyProgressIndicator/CircularWavyProgressIndicator',
           LinearProgressIndicator:
             'ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator',
           LinearWavyProgressIndicator:

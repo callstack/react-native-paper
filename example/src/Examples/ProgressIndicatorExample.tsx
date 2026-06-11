@@ -5,6 +5,7 @@ import {
   Button,
   Chip,
   CircularProgressIndicator,
+  CircularWavyProgressIndicator,
   LinearProgressIndicator,
   LinearWavyProgressIndicator,
   Text,
@@ -157,6 +158,26 @@ const ProgressIndicatorExample = () => {
             color={colors.tertiary}
             trackColor={colors.tertiaryContainer}
             accessibilityLabel="Circular progress indicator with custom colors"
+          />
+        </View>
+      </View>
+
+      <View style={styles.row}>
+        <Text variant="bodyMedium">Circular wavy</Text>
+        <View style={styles.circularRow}>
+          <CircularWavyProgressIndicator
+            progress={progress}
+            indeterminate={indeterminate}
+            thickness={thicknessValue}
+            accessibilityLabel="Circular wavy progress indicator example"
+          />
+          <CircularWavyProgressIndicator
+            progress={progress}
+            indeterminate={indeterminate}
+            thickness={thicknessValue}
+            color={colors.tertiary}
+            trackColor={colors.tertiaryContainer}
+            accessibilityLabel="Circular wavy progress indicator with custom colors"
           />
         </View>
       </View>

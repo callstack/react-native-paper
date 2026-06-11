@@ -9,13 +9,15 @@ const round = (value: number) => {
   return Math.round(value * 100) / 100;
 };
 
+export const NO_DRAW_PATH = 'M0,0';
+
 /**
  * Straight horizontal segment from `x0` to `x1` at height `y`. Used for the track and as the
  * flat fallback when the wave amplitude is 0.
  */
 export function buildStraightPath(x0: number, x1: number, y: number): string {
   'worklet';
-  if (x1 <= x0) return '';
+  if (x1 <= x0) return NO_DRAW_PATH;
   return `M${round(x0)},${round(y)}L${round(x1)},${round(y)}`;
 }
 
@@ -42,7 +44,7 @@ export function buildLinearWavePath(
   waveShift: number
 ): string {
   'worklet';
-  if (headX <= tailX) return '';
+  if (headX <= tailX) return NO_DRAW_PATH;
   if (amplitude <= 0) return buildStraightPath(tailX, headX, centerY);
 
   const halfWave = wavelength / 2;
@@ -88,5 +90,65 @@ export function buildLinearWavePath(
     x0 = x2;
   }
 
+  return d;
+}
+
+const SAMPLES_PER_WAVE = 16;
+
+/**
+ * Wavy arc centered on `(cx, cy)`, running clockwise from `startAngleDeg` for `sweepDeg` degrees.
+ * The wave is a closed polar sinusoid `r = radius + amplitude * sin(waveCount * theta + phase)`,
+ * sampled as a polyline. `waveCount` must be an integer so the pattern joins seamlessly around the
+ * full circle. Motion comes from advancing `phase`.
+ *
+ * `amplitude <= 0` returns a plain arc (track / wave switched off / reduce motion).
+ */
+export function buildArcWavePath(
+  cx: number,
+  cy: number,
+  radius: number,
+  startAngleDeg: number,
+  sweepDeg: number,
+  amplitude: number,
+  waveCount: number,
+  phase: number
+): string {
+  'worklet';
+  if (sweepDeg <= 0) return NO_DRAW_PATH;
+  // Stop just short of a full turn: a 360deg arc would close on itself (the open path's round caps
+  // would snap to a seamless join, and a single SVG arc with coincident endpoints draws nothing).
+  // The round caps cover the hairline gap, so the ring still reads as complete, with no jump.
+  const sweep = Math.min(sweepDeg, 359.5);
+
+  const toRad = Math.PI / 180;
+  const startRad = startAngleDeg * toRad;
+  const sweepRad = sweep * toRad;
+
+  if (amplitude <= 0) {
+    const x0 = cx + radius * Math.cos(startRad);
+    const y0 = cy + radius * Math.sin(startRad);
+    const r = round(radius);
+    const endRad = startRad + sweepRad;
+    const x1 = cx + radius * Math.cos(endRad);
+    const y1 = cy + radius * Math.sin(endRad);
+    const largeArc = sweep > 180 ? 1 : 0;
+    return `M${round(x0)},${round(y0)}A${r},${r} 0 ${largeArc} 1 ${round(
+      x1
+    )},${round(y1)}`;
+  }
+
+  const steps = Math.max(
+    2,
+    Math.ceil((sweepRad / (2 * Math.PI)) * waveCount * SAMPLES_PER_WAVE)
+  );
+  const step = sweepRad / steps;
+  let d = '';
+  for (let i = 0; i <= steps; i++) {
+    const theta = startRad + i * step;
+    const r = radius + amplitude * Math.sin(waveCount * theta + phase);
+    const x = cx + r * Math.cos(theta);
+    const y = cy + r * Math.sin(theta);
+    d += `${i === 0 ? 'M' : 'L'}${round(x)},${round(y)}`;
+  }
   return d;
 }
