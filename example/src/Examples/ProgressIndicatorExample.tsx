@@ -6,6 +6,7 @@ import {
   Chip,
   CircularProgressIndicator,
   LinearProgressIndicator,
+  LinearWavyProgressIndicator,
   Text,
   useTheme,
 } from 'react-native-paper';
@@ -115,6 +116,16 @@ const ProgressIndicatorExample = () => {
           indeterminate={indeterminate}
           thickness={thicknessValue}
           accessibilityLabel="Linear progress indicator example"
+        />
+      </View>
+
+      <View style={styles.row}>
+        <Text variant="bodyMedium">Linear wavy</Text>
+        <LinearWavyProgressIndicator
+          progress={progress}
+          indeterminate={indeterminate}
+          thickness={thicknessValue}
+          accessibilityLabel="Linear wavy progress indicator example"
         />
       </View>
 

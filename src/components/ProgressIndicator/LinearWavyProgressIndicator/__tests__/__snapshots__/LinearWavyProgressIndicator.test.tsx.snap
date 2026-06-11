@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders determinate progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": 100,
+      "min": 0,
+      "now": 30,
+    }
+  }
+  accessible={true}
+  onLayout={[Function]}
+  style={
+    [
+      {
+        "justifyContent": "center",
+        "overflow": "visible",
+        "width": "100%",
+      },
+      {
+        "height": 10,
+      },
+      undefined,
+    ]
+  }
+  testID="linear-wavy-progress-indicator"
+>
+  <View
+    height={10}
+    width={100}
+  >
+    <View>
+      <View
+        animatedProps={
+          {
+            "d": "M38.8,5L98,5",
+          }
+        }
+        fill="none"
+        stroke="rgba(232, 222, 248, 1)"
+        strokeLinecap="round"
+        strokeWidth={4}
+        testID="linear-wavy-progress-indicator-track"
+      />
+      <View
+        animatedProps={
+          {
+            "d": "M2,5L30.8,5",
+          }
+        }
+        fill="none"
+        stroke="rgba(103, 80, 164, 1)"
+        strokeLinecap="round"
+        strokeWidth={4}
+        testID="linear-wavy-progress-indicator-active"
+      />
+      <View
+        animatedProps={
+          {
+            "r": 2,
+          }
+        }
+        cx={98}
+        cy={5}
+        fill="rgba(103, 80, 164, 1)"
+        testID="linear-wavy-progress-indicator-stop"
+      />
+    </View>
+  </View>
+</View>
+`;

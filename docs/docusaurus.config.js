@@ -149,6 +149,8 @@ const config = {
           },
           LinearProgressIndicator:
             'ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator',
+          LinearWavyProgressIndicator:
+            'ProgressIndicator/LinearWavyProgressIndicator/LinearWavyProgressIndicator',
           RadioButton: {
             RadioButton: 'RadioButton/RadioButton',
             RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',

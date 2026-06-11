@@ -37,6 +37,7 @@ export { default as FAB } from './components/FAB';
 export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as LinearProgressIndicator } from './components/ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator';
+export { default as LinearWavyProgressIndicator } from './components/ProgressIndicator/LinearWavyProgressIndicator/LinearWavyProgressIndicator';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';
@@ -109,6 +110,7 @@ export type {
 } from './components/FAB/tokens';
 export type { Props as IconButtonProps } from './components/IconButton/IconButton';
 export type { Props as LinearProgressIndicatorProps } from './components/ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator';
+export type { Props as LinearWavyProgressIndicatorProps } from './components/ProgressIndicator/LinearWavyProgressIndicator/LinearWavyProgressIndicator';
 export type { Props as ListAccordionProps } from './components/List/ListAccordion';
 export type { Props as ListAccordionGroupProps } from './components/List/ListAccordionGroup';
 export type { Props as ListIconProps } from './components/List/ListIcon';
