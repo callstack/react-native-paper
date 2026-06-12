@@ -1,6 +1,3 @@
-import color from 'color';
-
-import { state } from './state';
 import type { ElevationColors, ThemeColors } from '../../types';
 import { palette as defaultPalette } from '../ref/palette';
 
@@ -8,7 +5,7 @@ type Palette = typeof defaultPalette;
 type PaletteKey = keyof Palette;
 
 /** Roles that map 1:1 to a palette key. Excludes the computed fields. */
-type MappedRoles = Omit<ThemeColors, 'stateLayerPressed' | 'elevation'>;
+type MappedRoles = Omit<ThemeColors, 'elevation'>;
 
 type Contrast = 'standard'; // extend with 'medium' | 'high' when those ship
 
@@ -163,10 +160,6 @@ export function buildScheme(
 
   return {
     ...mapped,
-    stateLayerPressed: color(palette[tones.onSurface])
-      .alpha(state.opacity.pressed)
-      .rgb()
-      .string(),
     elevation: {
       level0: 'transparent',
       level1: palette[elevTones.level1],
