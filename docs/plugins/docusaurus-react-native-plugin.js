@@ -16,6 +16,15 @@ module.exports = function () {
           },
           extensions: ['.web.js'],
         },
+        module: {
+          rules: [
+            {
+              test: /\.m?js$/,
+              include: [/react-native-reanimated/, /react-native-worklets/],
+              resolve: { fullySpecified: false },
+            },
+          ],
+        },
         plugins: [
           new webpack.ProvidePlugin({
             process: 'process/browser.js',
