@@ -7,7 +7,7 @@ const getUnderlayColor = ({
   underlayColor,
 }: {
   calculatedRippleColor: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }) => {
   if (underlayColor != null) {
     return underlayColor;
@@ -27,7 +27,7 @@ const getRippleColor = ({
     return rippleColor;
   }
 
-  return theme.colors.stateLayerPressed;
+  return theme.colors.onSurface;
 };
 
 export const getTouchableRippleColors = ({
@@ -37,7 +37,7 @@ export const getTouchableRippleColors = ({
 }: {
   theme: InternalTheme;
   rippleColor?: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }) => {
   const calculatedRippleColor = getRippleColor({ theme, rippleColor });
   return {

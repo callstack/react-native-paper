@@ -296,6 +296,7 @@ const Shell = forwardRef<View, ShellProps>(
           <TouchableRipple
             borderless
             background={background}
+            rippleColor={colors.stateLayer}
             onPress={onPress}
             onFocus={onFocus}
             onBlur={onBlur}
