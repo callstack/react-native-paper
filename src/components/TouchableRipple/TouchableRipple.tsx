@@ -1,82 +1,19 @@
 import * as React from 'react';
-import {
-  ColorValue,
-  GestureResponderEvent,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import color from 'color';
 
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
+import type { TouchableRippleCommonProps } from './types';
 import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { state } from '../../theme/tokens/sys/state';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
-export type Props = PressableProps & {
-  /**
-   * Whether to render the ripple outside the view bounds.
-   */
-  borderless?: boolean;
-  /**
-   * Type of background drawabale to display the feedback (Android).
-   * https://reactnative.dev/docs/pressable#rippleconfig
-   */
-  background?: Object;
-  /**
-   * Whether to start the ripple at the center (Web).
-   */
-  centered?: boolean;
-  /**
-   * Whether to prevent interaction with the touchable.
-   */
-  disabled?: boolean;
-  /**
-   * Function to execute on press. If not set, will cause the touchable to be disabled.
-   */
-  onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute immediately when a touch is engaged, before `onPressOut` and `onPress`.
-   */
-  onPressIn?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute when a touch is released.
-   */
-  onPressOut?: (e: GestureResponderEvent) => void;
-  /**
-   * Color of the ripple effect (Android >= 5.0 and Web).
-   */
-  rippleColor?: ColorValue;
-  /**
-   * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
-   */
-  underlayColor?: string;
-  /**
-   * Content of the `TouchableRipple`.
-   */
-  children:
-    | ((state: PressableStateCallbackType) => React.ReactNode)
-    | React.ReactNode;
-  style?:
-    | StyleProp<ViewStyle>
-    | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
-    | undefined;
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-};
+export type Props = PressableProps & TouchableRippleCommonProps;
 
 /**
  * A wrapper for views that should respond to touches.
@@ -122,12 +59,24 @@ const TouchableRipple = (
     theme,
     rippleColor,
   });
-  // Web-only style. PlatformColor doesn't exist on web, so the calculated
-  // ripple color is effectively always a string here.
-  const hoverColor =
-    typeof calculatedRippleColor === 'string'
-      ? color(calculatedRippleColor).fade(0.5).rgb().string()
-      : calculatedRippleColor;
+  // Web-only styles. PlatformColor doesn't exist on web, so the calculated
+  // ripple color is effectively always a string here, and alpha can be baked
+  // into it. We multiply into the color's own alpha (matching Android's
+  // android_ripple.alpha), so an opaque color settles at the pressed opacity
+  // and a transparent color stays invisible. Hover uses the lighter hover
+  // state-layer opacity.
+  const multiplyAlpha = (factor: number) => {
+    if (typeof calculatedRippleColor !== 'string') {
+      return calculatedRippleColor;
+    }
+    const base = color(calculatedRippleColor);
+    return base
+      .alpha(base.alpha() * factor)
+      .rgb()
+      .string();
+  };
+  const rippleStateLayer = multiplyAlpha(state.opacity.pressed);
+  const hoverColor = multiplyAlpha(state.opacity.hovered);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
@@ -190,7 +139,7 @@ const TouchableRipple = (
         Object.assign(ripple.style, {
           position: 'absolute',
           pointerEvents: 'none',
-          backgroundColor: calculatedRippleColor,
+          backgroundColor: rippleStateLayer,
           borderRadius: '50%',
 
           /* Transition configuration */
@@ -227,7 +176,7 @@ const TouchableRipple = (
         });
       }
     },
-    [onPressIn, rest, rippleEffectEnabled, calculatedRippleColor]
+    [onPressIn, rest, rippleEffectEnabled, rippleStateLayer]
   );
 
   const handlePressOut = React.useCallback(

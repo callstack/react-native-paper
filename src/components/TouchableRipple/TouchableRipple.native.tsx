@@ -1,42 +1,24 @@
 import * as React from 'react';
-import {
-  PressableAndroidRippleConfig,
-  StyleProp,
-  Platform,
-  ViewStyle,
-  StyleSheet,
-  GestureResponderEvent,
-  View,
-  ColorValue,
-} from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
+import type { TouchableRippleCommonProps } from './types';
 import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { state } from '../../theme/tokens/sys/state';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-export type Props = PressableProps & {
-  borderless?: boolean;
-  background?: PressableAndroidRippleConfig;
-  centered?: boolean;
-  disabled?: boolean;
-  onPress?: (e: GestureResponderEvent) => void | null;
-  onLongPress?: (e: GestureResponderEvent) => void;
-  onPressIn?: (e: GestureResponderEvent) => void;
-  onPressOut?: (e: GestureResponderEvent) => void;
-  rippleColor?: ColorValue;
-  underlayColor?: string;
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
-  theme?: ThemeProp;
-};
+export type Props = Omit<PressableProps, 'children' | 'style'> &
+  TouchableRippleCommonProps & {
+    children: React.ReactNode;
+    style?: StyleProp<ViewStyle>;
+  };
 
 const TouchableRipple = (
   {
@@ -83,11 +65,14 @@ const TouchableRipple = (
 
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
-      ? background ?? {
-          color: calculatedRippleColor,
-          borderless,
-          foreground: useForeground,
-        }
+      ? background
+        ? { alpha: state.opacity.pressed, ...background }
+        : {
+            color: calculatedRippleColor,
+            borderless,
+            foreground: useForeground,
+            alpha: state.opacity.pressed,
+          }
       : undefined;
 
     return (
@@ -117,7 +102,10 @@ const TouchableRipple = (
               testID="touchable-ripple-underlay"
               style={[
                 styles.underlay,
-                { backgroundColor: calculatedUnderlayColor },
+                {
+                  backgroundColor: calculatedUnderlayColor,
+                  opacity: state.opacity.pressed,
+                },
               ]}
             />
           )}
