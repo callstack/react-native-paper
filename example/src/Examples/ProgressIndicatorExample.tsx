@@ -185,8 +185,8 @@ const ProgressIndicatorExample = () => {
               progress={progress}
               indeterminate={indeterminate}
               thickness={thickness}
-              color={colors.tertiary}
-              trackColor={colors.tertiaryContainer}
+              color={colors.error}
+              trackColor={colors.errorContainer}
               accessibilityLabel="Linear progress indicator with custom colors"
             />
           </View>
@@ -207,8 +207,8 @@ const ProgressIndicatorExample = () => {
               indeterminate={indeterminate}
               size={circularSize}
               thickness={thickness}
-              color={colors.tertiary}
-              trackColor={colors.tertiaryContainer}
+              color={colors.error}
+              trackColor={colors.errorContainer}
               accessibilityLabel="Circular progress indicator with custom colors"
             />
           </View>
@@ -227,6 +227,7 @@ const ProgressIndicatorExample = () => {
       >
         <FAB
           icon={running ? 'pause' : 'play'}
+          variant={running ? 'tonalTertiary' : 'tonalPrimary'}
           size="large"
           visible={determinate}
           onPress={handleFabPress}
