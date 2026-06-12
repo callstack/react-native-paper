@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Divider, List, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
@@ -28,7 +27,7 @@ import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
-import ProgressBarExample from './Examples/ProgressBarExample';
+import ProgressIndicatorExample from './Examples/ProgressIndicatorExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
@@ -50,7 +49,6 @@ import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 export const mainExamples = {
-  ActivityIndicator: ActivityIndicatorExample,
   Appbar: AppbarExample,
   Avatar: AvatarExample,
   Badge: BadgeExample,
@@ -73,7 +71,7 @@ export const mainExamples = {
   ListSection: ListSectionExample,
   ListItem: ListItemExample,
   Menu: MenuExample,
-  Progressbar: ProgressBarExample,
+  ProgressIndicator: ProgressIndicatorExample,
   Radio: RadioButtonExample,
   RadioGroup: RadioButtonGroupExample,
   RadioItem: RadioButtonItemExample,

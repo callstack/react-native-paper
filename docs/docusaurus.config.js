@@ -63,7 +63,6 @@ const config = {
         docsRootDir: path.join(__dirname, 'docs', 'components'),
         libsRootDir: path.join(__dirname, '..', 'src', 'components'),
         pages: {
-          ActivityIndicator: 'ActivityIndicator',
           Appbar: {
             Appbar: 'Appbar/Appbar',
             AppbarAction: 'Appbar/AppbarAction',
@@ -147,7 +146,14 @@ const config = {
             Portal: 'Portal/Portal',
             PortalHost: 'Portal/PortalHost',
           },
-          ProgressBar: 'ProgressBar',
+          CircularProgressIndicator:
+            'ProgressIndicator/CircularProgressIndicator/CircularProgressIndicator',
+          CircularWavyProgressIndicator:
+            'ProgressIndicator/CircularWavyProgressIndicator/CircularWavyProgressIndicator',
+          LinearProgressIndicator:
+            'ProgressIndicator/LinearProgressIndicator/LinearProgressIndicator',
+          LinearWavyProgressIndicator:
+            'ProgressIndicator/LinearWavyProgressIndicator/LinearWavyProgressIndicator',
           RadioButton: {
             RadioButton: 'RadioButton/RadioButton',
             RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',
@@ -249,7 +255,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'components/ActivityIndicator',
+            docId: 'components/Appbar/Appbar',
             position: 'left',
             label: 'Components',
           },

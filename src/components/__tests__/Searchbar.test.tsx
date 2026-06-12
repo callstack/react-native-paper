@@ -21,22 +21,22 @@ it('renders with text', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('activity indicator snapshot test', () => {
+it('loading indicator snapshot test', () => {
   const tree = render(<Searchbar loading={true} value="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders with ActivityIndicator', () => {
+it('renders the loading indicator', () => {
   const tree = render(<Searchbar loading={true} value="" />);
 
-  expect(tree.getByTestId('activity-indicator')).toBeTruthy();
+  expect(tree.getByTestId('loading-indicator')).toBeTruthy();
 });
 
-it('renders without ActivityIndicator', () => {
+it('renders without the loading indicator', () => {
   const { getByTestId } = render(<Searchbar loading={false} value="" />);
 
-  expect(() => getByTestId('activity-indicator')).toThrow();
+  expect(() => getByTestId('loading-indicator')).toThrow();
 });
 
 it('renders clear icon with custom color', () => {

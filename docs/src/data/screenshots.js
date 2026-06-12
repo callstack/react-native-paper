@@ -1,5 +1,4 @@
 const screenshots = {
-  ActivityIndicator: 'screenshots/activity-indicator.gif',
   Appbar: 'screenshots/appbar.png',
   'Appbar.Action': 'screenshots/appbar-action-android.png',
   'Appbar.BackAction': 'screenshots/appbar-backaction-android.png',
@@ -105,7 +104,7 @@ const screenshots = {
   },
   'Menu.Item': 'screenshots/menu-item.png',
   Modal: 'screenshots/modal.gif',
-  ProgressBar: 'screenshots/progress-bar.png',
+  LinearProgressIndicator: 'screenshots/progress-bar.png',
   RadioButton: {
     'Android (enabled)': 'screenshots/radio-enabled.android.png',
     'Android (disabled)': 'screenshots/radio-disabled.android.png',

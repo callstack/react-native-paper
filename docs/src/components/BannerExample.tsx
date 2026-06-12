@@ -11,7 +11,7 @@ import {
   FAB,
   DarkTheme,
   LightTheme,
-  ProgressBar,
+  LinearProgressIndicator,
   PaperProvider,
   RadioButton,
   Switch,
@@ -89,7 +89,7 @@ const BannerExample = () => {
           <Avatar.Text label="MD" />
           <Avatar.Icon icon="folder" />
         </Stack>
-        <ProgressBar indeterminate />
+        <LinearProgressIndicator indeterminate />
         <Stack spacing={8}>
           <Text variant="displayLarge">Display Large</Text>
           <Text variant="displayMedium">Display Medium</Text>

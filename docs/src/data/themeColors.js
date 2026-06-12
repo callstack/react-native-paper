@@ -1,9 +1,4 @@
 const themeColors = {
-  ActivityIndicator: {
-    '-': {
-      borderColor: 'theme.colors.primary',
-    },
-  },
   Appbar: {
     default: {
       backgroundColor: 'theme.colors.surface',
@@ -264,10 +259,10 @@ const themeColors = {
       backgroundColor: 'theme.colors.backdrop',
     },
   },
-  ProgressBar: {
+  LinearProgressIndicator: {
     '-': {
-      tintColor: 'theme.colors.primary',
-      trackTintColor: 'theme.colors.surfaceVariant',
+      color: 'theme.colors.primary',
+      trackColor: 'theme.colors.secondaryContainer',
     },
   },
   Searchbar: {
