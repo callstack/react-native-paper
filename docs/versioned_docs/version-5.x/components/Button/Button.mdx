@@ -1,0 +1,281 @@
+---
+title: Button
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A button is component that the user can press to trigger an action.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"text":"screenshots/button-1.png","outlined":"screenshots/button-2.png","contained":"screenshots/button-3.png","elevated":"screenshots/button-4.png","contained-tonal":"screenshots/button-5.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Button } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+    Press me
+  </Button>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### mode  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="mode" />
+  
+<div>
+
+### dark  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="dark" />
+  
+<div>
+
+### compact  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="compact" />
+  
+<div>
+
+### color  <span class="badge badge-deprecated "><span class="badge-text">Deprecated in v5.x - use `buttonColor` or `textColor` instead.</span></span>
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="color" />
+  
+<div>
+
+### buttonColor  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="buttonColor" />
+  
+<div>
+
+### textColor  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="textColor" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="rippleColor" />
+  
+<div>
+
+### loading  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="loading" />
+  
+<div>
+
+### icon  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="icon" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="disabled" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="children" />
+  
+<div>
+
+### uppercase  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="uppercase" />
+  
+<div>
+
+### background  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="background" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="accessibilityLabel" />
+  
+<div>
+
+### accessibilityHint  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="accessibilityHint" />
+  
+<div>
+
+### accessibilityRole  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="accessibilityRole" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="onPress" />
+  
+<div>
+
+### onPressIn  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="onPressIn" />
+  
+<div>
+
+### onPressOut  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="onPressOut" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="onLongPress" />
+  
+<div>
+
+### delayLongPress  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="delayLongPress" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="contentStyle" />
+  
+<div>
+
+### maxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="maxFontSizeMultiplier" />
+  
+<div>
+
+### hitSlop  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="hitSlop" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="style" />
+  
+<div>
+
+### labelStyle  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="labelStyle" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="theme" />
+  
+<div>
+
+### touchableRef  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="touchableRef" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Button/Button" prop="testID" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"active":{"elevated":{"backgroundColor":"theme.colors.elevation.level1","textColor":"theme.colors.primary"},"contained":{"backgroundColor":"theme.colors.primary","textColor":"theme.colors.onPrimary"},"contained-tonal":{"backgroundColor":"theme.colors.secondaryContainer","textColor":"theme.colors.onSecondaryContainer"},"outlined":{"textColor":"theme.colors.primary","borderColor":"theme.colors.outline"},"text":{"textColor":"theme.colors.primary"}},"disabled":{"elevated":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"contained":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"contained-tonal":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"outlined":{"textColor":"theme.colors.onSurfaceDisabled","borderColor":"theme.colors.surfaceDisabled"},"text":{"textColor":"theme.colors.onSurfaceDisabled"}}}} componentName="Button" />
+  
+
+<span />

@@ -1,0 +1,122 @@
+---
+title: Menu
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Floating action button menu. Wraps a trigger FAB; when `expanded` is true,
+items appear stacked above and the trigger morphs into the spec'd close
+button (`shape: 'full'`, 56 dp, saturated role color).
+
+No visual backdrop and no outside-tap dismiss — that matches the MD3 spec
+and lets the user keep interacting with the content underneath. Dismiss
+via the close button or by tapping an item.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","without icons":"screenshots/menu-2.png"}} baseUrl="/"/>
+  
+
+## Usage
+```tsx
+const [open, setOpen] = React.useState(false);
+
+<Portal>
+  <FAB.Menu
+    expanded={open}
+    onDismiss={() => setOpen(false)}
+    trigger={{ icon: 'plus', variant: 'primary', onPress: () => setOpen(true) }}
+    items={[
+      { icon: 'email', label: 'Send', onPress: () => {} },
+      { icon: 'bell', label: 'Remind', onPress: () => {} },
+    ]}
+  />
+</Portal>
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### expanded (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="expanded" />
+  
+<div>
+
+### onDismiss (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="onDismiss" />
+  
+<div>
+
+### trigger (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="trigger" />
+  
+<div>
+
+### alignment  
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="alignment" />
+  
+<div>
+
+### closeIcon  
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="closeIcon" />
+  
+<div>
+
+### items (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="items" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="testID" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="FAB/Menu" prop="theme" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Menu" />
+  
+
+<span />

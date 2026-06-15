@@ -1,6 +1,9 @@
+import { useActiveDocContext } from '@docusaurus/plugin-content-docs/client';
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import { usePluginData } from '@docusaurus/useGlobalData';
+
+import componentDocs5x from '../src/data/componentDocs5x.json';
 
 const pluginName = 'component-docs-plugin';
 
@@ -27,19 +30,29 @@ export interface Data {
 
 export interface Prop {
   required: boolean;
-  tsType: {
+  tsType?: {
     name: string;
     raw?: string;
-  };
+  } | null;
   description: string;
-  defaultValue: {
+  defaultValue?: {
     value: string;
-  };
+  } | null;
 }
 
+const versionedDocs: { [versionName: string]: ComponentDocsPluginData } = {
+  '5.x': componentDocs5x,
+};
+
 function useDoc(withPath: string) {
+  const activeDocContext = useActiveDocContext(undefined);
   const pluginData = usePluginData(pluginName) as ComponentDocsPluginData;
-  return pluginData?.docs?.[withPath];
+  const versionName = activeDocContext.activeVersion?.name;
+  const versionedDoc = versionName
+    ? versionedDocs[versionName]?.docs?.[withPath]
+    : undefined;
+
+  return versionedDoc ?? pluginData?.docs?.[withPath];
 }
 
 export default useDoc;

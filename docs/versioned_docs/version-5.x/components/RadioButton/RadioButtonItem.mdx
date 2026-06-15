@@ -1,0 +1,210 @@
+---
+title: RadioButton.Item
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/radio-item.ios.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { RadioButton } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState('first');
+
+  return (
+    <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+      <RadioButton.Item label="First item" value="first" />
+      <RadioButton.Item label="Second item" value="second" />
+    </RadioButton.Group>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### value (required) 
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="value" />
+  
+<div>
+
+### label (required) 
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="label" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="disabled" />
+  
+<div>
+
+### background  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="background" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onPress" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onLongPress" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="accessibilityLabel" />
+  
+<div>
+
+### uncheckedColor  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="uncheckedColor" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="color" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="rippleColor" />
+  
+<div>
+
+### status  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="status" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="style" />
+  
+<div>
+
+### labelStyle  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelStyle" />
+  
+<div>
+
+### labelVariant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelVariant" />
+  
+<div>
+
+### labelMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelMaxFontSizeMultiplier" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="theme" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="testID" />
+  
+<div>
+
+### mode  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="mode" />
+  
+<div>
+
+### position  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="position" />
+  
+<div>
+
+### hitSlop  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="hitSlop" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

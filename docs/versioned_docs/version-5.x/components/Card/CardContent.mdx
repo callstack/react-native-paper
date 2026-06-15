@@ -1,0 +1,64 @@
+---
+title: Card.Content
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to show content inside a Card.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/card-content-example.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Card, Text } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Card>
+    <Card.Content>
+      <Text variant="titleLarge">Card title</Text>
+      <Text variant="bodyMedium">Card content</Text>
+    </Card.Content>
+  </Card>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Card/CardContent" prop="children" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Card/CardContent" prop="style" />
+  
+  
+
+<span />
+
+<span />
+
+<span />
