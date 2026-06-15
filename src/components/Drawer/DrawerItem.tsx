@@ -5,6 +5,7 @@ import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
@@ -16,7 +17,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * The label text of the item.
    */

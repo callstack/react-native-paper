@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import DataTableCell from './DataTableCell';
 import DataTableHeader, {
@@ -18,7 +18,7 @@ import DataTableTitle, {
   DataTableTitle as _DataTableTitle,
 } from './DataTableTitle';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Content of the `DataTable`.
    */

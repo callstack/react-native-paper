@@ -1,14 +1,14 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
-import type { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextProps, TextStyle } from 'react-native';
 
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
-type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
+type Props<T> = Animated.AnimatedProps<TextProps> & {
   /**
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import ListSubheader from './ListSubheader';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Title text for the section.
    */

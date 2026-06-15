@@ -24,7 +24,7 @@ interface Style {
   marginRight: number;
 }
 
-export type Props = React.ComponentPropsWithoutRef<typeof TextInput> & {
+export type Props = TextInputProps & {
   /**
    * Hint text shown when the input is empty.
    */

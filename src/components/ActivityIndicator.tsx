@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Whether to show the indicator or hide it.
    */

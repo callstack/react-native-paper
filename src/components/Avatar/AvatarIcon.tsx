@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
@@ -11,7 +10,7 @@ import type { IconSource } from '../Icon';
 
 const defaultSize = 64;
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Icon to display for the `Avatar`.
    */

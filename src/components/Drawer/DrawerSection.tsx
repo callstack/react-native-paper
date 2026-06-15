@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { Palette } from '../../theme/tokens';
@@ -8,7 +8,7 @@ import type { ThemeProp } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Title to show as the header for the section.
    */

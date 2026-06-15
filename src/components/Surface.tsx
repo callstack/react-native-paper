@@ -4,6 +4,7 @@ import type {
   ColorValue,
   ShadowStyleIOS,
   StyleProp,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
@@ -20,7 +21,7 @@ import { splitStyles } from '../utils/splitStyles';
 
 type SurfaceElevation = Elevation | Animated.Value;
 
-export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Content of the `Surface`.
    */

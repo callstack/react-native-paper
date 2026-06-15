@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import {
   afterAll,
@@ -28,7 +29,7 @@ jest.mock('../../utils/addEventListener', () => ({
 const DummyComponent = ({
   ref,
   ...props
-}: React.ComponentPropsWithoutRef<typeof View> & {
+}: ViewProps & {
   ref?: React.RefObject<View | null>;
 }) => (
   <View {...props} ref={ref}>

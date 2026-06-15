@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
 import type {
   GestureResponderEvent,
+  PressableProps,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -13,7 +14,7 @@ import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
+export type Props = PressableProps & {
   /**
    * Text content of the `DataTableTitle`.
    */

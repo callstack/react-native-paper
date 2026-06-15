@@ -5,6 +5,7 @@ import type {
   NativeSyntheticEvent,
   StyleProp,
   TextLayoutEventData,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
@@ -15,7 +16,7 @@ import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithoutRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * The label text of the item.
    */
