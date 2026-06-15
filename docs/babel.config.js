@@ -1,4 +1,7 @@
 module.exports = {
   presets: ['@docusaurus/core/lib/babel/preset'],
-  plugins: ['react-native-reanimated/plugin'],
+  plugins: [
+    ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
+    'react-native-reanimated/plugin',
+  ],
 };
