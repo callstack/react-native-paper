@@ -320,6 +320,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TouchableRipple as typeof TouchableRipple & {
-  supported: boolean;
-};
+export default TouchableRipple;

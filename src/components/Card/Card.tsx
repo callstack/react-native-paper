@@ -15,13 +15,6 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
 
-type CardComposition = {
-  Content: typeof CardContent;
-  Actions: typeof CardActions;
-  Cover: typeof CardCover;
-  Title: typeof CardTitle;
-};
-
 type OutlinedCardProps = {
   mode: 'outlined';
   elevation?: never;
@@ -283,16 +276,14 @@ const Card = ({
 
 Card.displayName = 'Card';
 
-const CardComponent = Card as typeof Card & CardComposition;
-
 // @component ./CardContent.tsx
-CardComponent.Content = CardContent;
+Card.Content = CardContent;
 // @component ./CardActions.tsx
-CardComponent.Actions = CardActions;
+Card.Actions = CardActions;
 // @component ./CardCover.tsx
-CardComponent.Cover = CardCover;
+Card.Cover = CardCover;
 // @component ./CardTitle.tsx
-CardComponent.Title = CardTitle;
+Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -307,4 +298,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardComponent;
+export default Card;
