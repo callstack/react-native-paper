@@ -307,6 +307,32 @@ export const themeColors = {
       iconColor: 'theme.colors.inverseOnSurface',
     },
   },
+  SplitButton: {
+    active: {
+      filled: {
+        backgroundColor: 'theme.colors.primary',
+        textColor: 'theme.colors.onPrimary',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+      },
+      elevated: {
+        backgroundColor: 'theme.colors.surfaceContainerLow',
+        textColor: 'theme.colors.primary',
+      },
+      outlined: {
+        textColor: 'theme.colors.onSurfaceVariant',
+        borderColor: 'theme.colors.outline',
+      },
+    },
+    disabled: {
+      '-': {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+    },
+  },
   Surface: {
     flat: {
       backgroundColor: 'theme.colors.elevation[elevation]',
