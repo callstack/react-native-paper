@@ -1,4 +1,4 @@
-import { ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';

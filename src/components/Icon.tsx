@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {
-  Image,
-  ImageSourcePropType,
-  Platform,
-  type ColorValue,
-} from 'react-native';
+import { Image, Platform } from 'react-native';
+import type { ColorValue } from 'react-native';
+import type { ImageSourcePropType } from 'react-native';
 
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { useLocale } from '../core/locale';

@@ -5,6 +5,16 @@ import {
   TextInput as NativeTextInput,
   View,
 } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 
 import { act, fireEvent, render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
@@ -145,7 +155,7 @@ it('renders outlined TextInput with TextInput.Icon accessories when error is tru
 });
 
 it('fires onPress on TextInput.Icon end accessory', () => {
-  const onClear = jest.fn();
+  const onClear = jest.fn<(event: GestureResponderEvent) => void>();
   const { getAllByTestId } = render(
     <TextInput
       label="Search"

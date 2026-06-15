@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  GestureResponderEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import {

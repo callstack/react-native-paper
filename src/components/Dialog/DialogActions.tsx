@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { DialogActionChildProps } from './utils';
+import type { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Content of the `DialogActions`.
    */

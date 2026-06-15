@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { expect, it } from '@jest/globals';
 
 import { render } from '../../test-utils';
 import DrawerItem from '../Drawer/DrawerItem';

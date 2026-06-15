@@ -1,8 +1,8 @@
-import React from 'react';
 import { Animated } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
 import { render } from '../../../test-utils';
@@ -148,22 +148,22 @@ describe('renderAppbarContent', () => {
 
   it('Is recognized as a header when no onPress callback has been pressed', () => {
     const { getByRole } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
     expect(getByRole('header')).toBeTruthy();
   });
   it('is recognized as a button when onPress callback has been passed', () => {
     const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" onPress={() => {}} />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
     expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
@@ -178,11 +178,11 @@ describe('renderAppbarContent', () => {
   });
   it('is recognized as a disabled button when onPress and disabled is passed', () => {
     const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" onPress={() => {}} disabled />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
     expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
@@ -393,14 +393,14 @@ describe('animated value changes correctly', () => {
   it('header animated value changes correctly', () => {
     const value = new Animated.Value(1);
     const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+      <SafeAreaProvider>
         <Appbar.Header
           style={[{ transform: [{ scale: value }] }]}
           testID="appbar-header"
         >
           {null}
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
     expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
@@ -425,11 +425,11 @@ describe('animated value changes correctly', () => {
     const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
 
     const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+      <SafeAreaProvider>
         <Appbar.Header style={style} testID="appbar-header">
           {null}
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
     expect(getByTestId('appbar-header-root-layer')).toHaveStyle(style);
   });

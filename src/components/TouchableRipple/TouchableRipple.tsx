@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  Platform,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -14,10 +12,10 @@ import color from 'color';
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
-import { Settings, SettingsContext } from '../../core/settings';
+import { SettingsContext } from '../../core/settings';
+import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 export type Props = PressableProps & {
@@ -72,6 +70,7 @@ export type Props = PressableProps & {
     | StyleProp<ViewStyle>
     | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
+  ref?: React.Ref<View>;
   /**
    * @optional
    */
@@ -103,20 +102,18 @@ export type Props = PressableProps & {
  *
  * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
-const TouchableRipple = (
-  {
-    style,
-    background: _background,
-    borderless = false,
-    disabled: disabledProp,
-    rippleColor,
-    underlayColor: _underlayColor,
-    children,
-    theme: themeOverrides,
-    ...rest
-  }: Props,
-  ref: React.ForwardedRef<View>
-) => {
+const TouchableRipple = ({
+  style,
+  background: _background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor: _underlayColor,
+  children,
+  theme: themeOverrides,
+  ref,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { calculatedRippleColor } = getTouchableRippleColors({
     theme,
@@ -323,6 +320,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const Component = forwardRef(TouchableRipple);
-
-export default Component as typeof Component & { supported: boolean };
+export default TouchableRipple;

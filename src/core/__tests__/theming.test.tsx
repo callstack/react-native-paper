@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { adaptNavigationTheme } from '../theming';
 

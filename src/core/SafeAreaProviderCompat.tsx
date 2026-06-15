@@ -2,14 +2,8 @@
  * Ported from @react-navigation https://github.com/react-navigation/react-navigation/blob/main/packages/elements/src/SafeAreaProviderCompat.tsx
  */
 import * as React from 'react';
-import {
-  Dimensions,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import {
   initialWindowMetrics,

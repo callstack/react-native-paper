@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Animated } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 import color from 'color';
 

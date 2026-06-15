@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  StyleProp,
-  StyleSheet,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Easing, StyleSheet, Pressable, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';

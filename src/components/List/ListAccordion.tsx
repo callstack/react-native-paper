@@ -1,14 +1,13 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextLayoutEventData,
   TextStyle,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -20,9 +19,8 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {

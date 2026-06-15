@@ -1,11 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  useWindowDimensions,
-} from 'react-native';
+import { Animated, StyleSheet, useWindowDimensions } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';

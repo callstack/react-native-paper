@@ -1,15 +1,15 @@
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-  Theme as ReactNavigationTheme,
 } from '@react-navigation/native';
+import type { Theme as ReactNavigationTheme } from '@react-navigation/native';
 import {
   adaptNavigationTheme,
   DarkTheme,
   LightTheme,
   configureFonts,
-  Theme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper';
 
 const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
   adaptNavigationTheme({

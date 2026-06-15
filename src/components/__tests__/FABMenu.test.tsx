@@ -1,15 +1,14 @@
-import * as React from 'react';
-
+import { expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
 import FAB from '../FAB';
 
 const makeItems = (
-  onItemPress = jest.fn()
+  onItemPress = jest.fn<(event?: unknown) => void>()
 ): [
-  { label: string; onPress: jest.Mock; testID: string },
-  { label: string; onPress: jest.Mock; testID: string }
+  { label: string; onPress: typeof onItemPress; testID: string },
+  { label: string; onPress: typeof onItemPress; testID: string }
 ] => [
   { label: 'Send email', onPress: onItemPress, testID: 'item-0' },
   { label: 'Set reminder', onPress: onItemPress, testID: 'item-1' },

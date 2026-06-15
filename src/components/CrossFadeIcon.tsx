@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Animated, ColorValue, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
+import type { ColorValue } from 'react-native';
 
-import Icon, { IconSource, isEqualIcon, isValidIcon } from './Icon';
+import Icon, { isEqualIcon, isValidIcon } from './Icon';
+import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 

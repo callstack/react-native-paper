@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ColorValue, Image, Platform, StyleSheet, View } from 'react-native';
+import { Image, Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { useLocale } from '../../core/locale';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';

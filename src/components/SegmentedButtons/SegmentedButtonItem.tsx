@@ -1,12 +1,10 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -19,9 +17,8 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {

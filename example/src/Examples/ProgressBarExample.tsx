@@ -5,10 +5,10 @@ import {
   Button,
   Palette,
   ProgressBar,
-  ProgressBarProps,
   Text,
   useTheme,
 } from 'react-native-paper';
+import type { ProgressBarProps } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 

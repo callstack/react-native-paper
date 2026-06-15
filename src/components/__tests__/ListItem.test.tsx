@@ -1,7 +1,8 @@
-import * as React from 'react';
+import type { GestureResponderEvent } from 'react-native';
 import { Platform, StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 
+import { expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
@@ -133,7 +134,7 @@ it('renders with a description with typeof number', () => {
 
 it('calling onPress on ListItem right component', () => {
   Platform.OS = 'web';
-  const onPress = jest.fn();
+  const onPress = jest.fn<(event: GestureResponderEvent) => void>();
 
   const { getByTestId } = render(
     <ListItem

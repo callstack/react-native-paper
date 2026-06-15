@@ -1,12 +1,12 @@
-import React from 'react';
 import {
   Text,
   StyleSheet,
   Platform,
   BackHandler as RNBackHandler,
-  BackHandlerStatic as RNBackHandlerStatic,
 } from 'react-native';
+import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';

@@ -1,13 +1,10 @@
 import * as React from 'react';
-import {
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
+import type {
   AccessibilityRole,
   GestureResponderEvent,
-  Platform,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  Pressable,
-  View,
   ViewStyle,
   ViewProps,
 } from 'react-native';
@@ -20,7 +17,8 @@ import type {
   TypescaleKey,
   ThemeProp,
 } from '../../types';
-import Text, { TextRef } from '../Typography/Text';
+import Text from '../Typography/Text';
+import type { TextRef } from '../Typography/Text';
 
 type TitleString = {
   title: string;

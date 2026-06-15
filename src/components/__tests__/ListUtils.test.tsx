@@ -1,5 +1,6 @@
-import React from 'react';
 import { StyleSheet } from 'react-native';
+
+import { expect, it } from '@jest/globals';
 
 import { getLeftStyles, getRightStyles } from '../List/utils';
 import Text from '../Typography/Text';

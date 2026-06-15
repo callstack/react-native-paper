@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';

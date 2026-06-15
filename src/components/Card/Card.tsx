@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  GestureResponderEvent,
-  StyleProp,
-  StyleSheet,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleSheet, Pressable, View } from 'react-native';
+import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
@@ -18,17 +11,9 @@ import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
-
-type CardComposition = {
-  Content: typeof CardContent;
-  Actions: typeof CardActions;
-  Cover: typeof CardCover;
-  Title: typeof CardTitle;
-};
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -137,26 +122,24 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * ```
  */
 
-const Card = (
-  {
-    elevation: cardElevation = 1,
-    delayLongPress,
-    onPress,
-    onLongPress,
-    onPressOut,
-    onPressIn,
-    mode: cardMode = 'elevated',
-    children,
-    style,
-    contentStyle,
-    theme: themeOverrides,
-    testID = 'card',
-    accessible,
-    disabled,
-    ...rest
-  }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props,
-  ref: React.ForwardedRef<View>
-) => {
+const Card = ({
+  elevation: cardElevation = 1,
+  delayLongPress,
+  onPress,
+  onLongPress,
+  onPressOut,
+  onPressIn,
+  mode: cardMode = 'elevated',
+  children,
+  style,
+  contentStyle,
+  theme: themeOverrides,
+  testID = 'card',
+  accessible,
+  disabled,
+  ref,
+  ...rest
+}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
@@ -292,18 +275,15 @@ const Card = (
 };
 
 Card.displayName = 'Card';
-const Component = forwardRef(Card);
-
-const CardComponent = Component as typeof Component & CardComposition;
 
 // @component ./CardContent.tsx
-CardComponent.Content = CardContent;
+Card.Content = CardContent;
 // @component ./CardActions.tsx
-CardComponent.Actions = CardActions;
+Card.Actions = CardActions;
 // @component ./CardCover.tsx
-CardComponent.Cover = CardCover;
+Card.Cover = CardCover;
 // @component ./CardTitle.tsx
-CardComponent.Title = CardTitle;
+Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -318,4 +298,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardComponent;
+export default Card;

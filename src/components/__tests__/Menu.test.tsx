@@ -1,11 +1,11 @@
-import * as React from 'react';
 import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 
+import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
-import { Elevation } from '../../types';
+import type { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';

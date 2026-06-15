@@ -1,6 +1,7 @@
-import React from 'react';
 import { Platform, Text } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
@@ -18,7 +19,7 @@ describe('TouchableRipple', () => {
   });
 
   it('calls onPress when pressed', () => {
-    const onPress = jest.fn();
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
     const { getByText } = render(
       <TouchableRipple onPress={onPress}>
         <Text>Button</Text>
@@ -31,7 +32,7 @@ describe('TouchableRipple', () => {
   });
 
   it('disables the button when disabled prop is true', () => {
-    const onPress = jest.fn();
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
     const { getByText } = render(
       <TouchableRipple disabled onPress={onPress}>
         <Text>Button</Text>

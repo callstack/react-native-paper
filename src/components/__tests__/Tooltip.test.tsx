@@ -1,6 +1,16 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
+import type { ViewProps } from 'react-native';
 
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 
@@ -16,11 +26,16 @@ jest.mock('../../utils/addEventListener', () => ({
   }),
 }));
 
-const DummyComponent = React.forwardRef<View>((props, ref) => (
-  <View {...props} ref={ref as RefObject<View>}>
+const DummyComponent = ({
+  ref,
+  ...props
+}: ViewProps & {
+  ref?: React.RefObject<View | null>;
+}) => (
+  <View {...props} ref={ref}>
     <Text>dummy component</Text>
   </View>
-));
+);
 
 describe('Tooltip', () => {
   const getTrigger = (getByText: (text: string) => ReactTestInstance) =>
@@ -77,8 +92,12 @@ describe('Tooltip', () => {
       jest.clearAllMocks();
     });
     describe('Unmount', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('removes hideTooltipTimer when the component unmounts', async () => {
         const {
@@ -108,8 +127,12 @@ describe('Tooltip', () => {
     });
 
     describe('longPress', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('clears the hide timer when the user start pressing the component again', () => {
         jest.spyOn(global, 'clearTimeout');
@@ -263,8 +286,12 @@ describe('Tooltip', () => {
       Platform.OS = 'web';
     });
     describe('Unmount', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('removes showTooltipTimer when the component unmounts', async () => {
         const {
@@ -307,8 +334,12 @@ describe('Tooltip', () => {
     });
 
     describe('hoverIn', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('clears the hide timer when the user start hovering the component again', () => {
         jest.spyOn(global, 'clearTimeout');

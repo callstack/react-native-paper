@@ -1,5 +1,3 @@
-import React from 'react';
-
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import useDoc from '@site/component-docs-plugin/useDocs';

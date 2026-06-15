@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Keyboard, NativeEventSubscription, Platform } from 'react-native';
+import { Keyboard, Platform } from 'react-native';
+import type { NativeEventSubscription } from 'react-native';
 
 type Props = {
   onShow: () => void;

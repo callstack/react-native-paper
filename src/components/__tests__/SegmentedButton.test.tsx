@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
@@ -55,20 +55,75 @@ it('renders checked segmented button with selected check', async () => {
 });
 
 describe('getSegmentedButtonColors', () => {
-  it.each`
-    theme         | disabled | checked  | checkedColor | uncheckedColor | expected
-    ${getTheme()} | ${false} | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSecondaryContainer}
-    ${getTheme()} | ${false} | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${false} | ${true}  | ${'a125f5'}  | ${undefined}   | ${'a125f5'}
-    ${getTheme()} | ${false} | ${false} | ${undefined} | ${'000'}       | ${'000'}
-    ${getTheme()} | ${false} | ${false} | ${'a125f5'}  | ${'000'}       | ${'000'}
-    ${getTheme()} | ${false} | ${false} | ${'a125f5'}  | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${false} | ${true}  | ${undefined} | ${'000'}       | ${getTheme().colors.onSecondaryContainer}
-  `(
+  const theme = getTheme();
+
+  it.each([
+    {
+      disabled: false,
+      checked: true,
+      checkedColor: undefined,
+      uncheckedColor: undefined,
+      expected: theme.colors.onSecondaryContainer,
+    },
+    {
+      disabled: false,
+      checked: false,
+      checkedColor: undefined,
+      uncheckedColor: undefined,
+      expected: theme.colors.onSurface,
+    },
+    {
+      disabled: true,
+      checked: true,
+      checkedColor: undefined,
+      uncheckedColor: undefined,
+      expected: theme.colors.onSurface,
+    },
+    {
+      disabled: true,
+      checked: false,
+      checkedColor: undefined,
+      uncheckedColor: undefined,
+      expected: theme.colors.onSurface,
+    },
+    {
+      disabled: false,
+      checked: true,
+      checkedColor: 'a125f5',
+      uncheckedColor: undefined,
+      expected: 'a125f5',
+    },
+    {
+      disabled: false,
+      checked: false,
+      checkedColor: undefined,
+      uncheckedColor: '000',
+      expected: '000',
+    },
+    {
+      disabled: false,
+      checked: false,
+      checkedColor: 'a125f5',
+      uncheckedColor: '000',
+      expected: '000',
+    },
+    {
+      disabled: false,
+      checked: false,
+      checkedColor: 'a125f5',
+      uncheckedColor: undefined,
+      expected: theme.colors.onSurface,
+    },
+    {
+      disabled: false,
+      checked: true,
+      checkedColor: undefined,
+      uncheckedColor: '000',
+      expected: theme.colors.onSecondaryContainer,
+    },
+  ])(
     'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor',
-    ({ theme, disabled, checked, checkedColor, uncheckedColor, expected }) => {
+    ({ disabled, checked, checkedColor, uncheckedColor, expected }) => {
       expect(
         getSegmentedButtonColors({
           theme,
@@ -347,7 +402,7 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
   it('should have two button selected', () => {
     const onValueChange = jest.fn();
     const { getAllByA11yState } = render(
-      <SegmentedButtons
+      <SegmentedButtons<string>
         multiSelect
         value={['walk', 'transit']}
         buttons={[
@@ -367,7 +422,7 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
     const onValueChange = jest.fn();
 
     const { getByTestId } = render(
-      <SegmentedButtons
+      <SegmentedButtons<string>
         multiSelect
         value={['walk', 'transit']}
         buttons={[

@@ -16,6 +16,8 @@
     "no-nested-ternary": "off",
     "no-undef": "off",
     "global-require": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
 
     "import/no-extraneous-dependencies": "off",
     "import/first": "off",

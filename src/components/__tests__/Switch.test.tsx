@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render } from '../../test-utils';
 import Switch from '../Switch/Switch';

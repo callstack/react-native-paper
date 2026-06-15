@@ -3,19 +3,21 @@ import {
   Animated,
   Dimensions,
   Easing,
-  EmitterSubscription,
   Keyboard,
-  KeyboardEvent as RNKeyboardEvent,
-  LayoutRectangle,
-  NativeEventSubscription,
   Platform,
   ScrollView,
-  ScrollViewProps,
-  StyleProp,
   StyleSheet,
   View,
-  ViewStyle,
   Pressable,
+} from 'react-native';
+import type { KeyboardEvent as RNKeyboardEvent } from 'react-native';
+import type {
+  EmitterSubscription,
+  LayoutRectangle,
+  NativeEventSubscription,
+  ScrollViewProps,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

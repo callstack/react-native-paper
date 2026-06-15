@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
+import type { RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';

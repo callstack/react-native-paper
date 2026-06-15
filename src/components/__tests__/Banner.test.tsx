@@ -1,6 +1,14 @@
-import * as React from 'react';
 import { Animated, Image } from 'react-native';
 
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';

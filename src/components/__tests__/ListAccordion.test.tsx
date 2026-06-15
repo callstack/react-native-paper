@@ -1,5 +1,6 @@
-import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';

@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
+import { expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';

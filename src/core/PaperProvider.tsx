@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
-import { Provider as SettingsProvider, Settings } from './settings';
+import { Provider as SettingsProvider } from './settings';
+import type { Settings } from './settings';
 import { defaultThemes, ThemeProvider } from './theming';
 import {
   useResolvedReduceMotion,

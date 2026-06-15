@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import { Button, List, Text, useTheme } from 'react-native-paper';

@@ -1,11 +1,7 @@
-import * as React from 'react';
-import {
-  Animated,
-  BackHandler as RNBackHandler,
-  BackHandlerStatic as RNBackHandlerStatic,
-  Text,
-} from 'react-native';
+import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
+import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
+import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';

@@ -1,20 +1,23 @@
 import React from 'react';
 import {
+  Pressable,
+  Text,
+  TextInput as NativeTextInput,
+  View,
+} from 'react-native';
+import type { TextInputProps as NativeTextInputProps } from 'react-native';
+import type {
   AccessibilityProps,
   BlurEvent,
   ColorValue,
   FocusEvent,
-  Pressable,
   StyleProp,
-  Text,
-  TextInput as NativeTextInput,
-  TextInputProps as NativeTextInputProps,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
-import Animated, { AnimatedStyle } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { useTextInput } from './hooks';
 import { styles } from './styles';
@@ -166,9 +169,11 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   focusInput: () => void;
 };
 
-export type TextInputRenderProps = React.ComponentPropsWithRef<
+export type TextInputRenderProps = React.ComponentPropsWithoutRef<
   typeof NativeTextInput
->;
+> & {
+  ref?: React.RefObject<NativeTextInput | null>;
+};
 
 export type TextInputHandles = Pick<
   NativeTextInput,

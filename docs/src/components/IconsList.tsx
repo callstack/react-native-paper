@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const latestIcons: { [key in string]: number } = {
   ...require('../../node_modules/@react-native-vector-icons/material-design-icons/glyphmaps/MaterialDesignIcons.json'),

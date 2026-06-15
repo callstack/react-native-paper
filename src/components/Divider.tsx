@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';

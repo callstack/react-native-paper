@@ -1,20 +1,19 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
-  StyleSheet,
   TextLayoutEventData,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
-import { Style, getLeftStyles, getRightStyles } from './utils';
+import { getLeftStyles, getRightStyles } from './utils';
+import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
@@ -65,6 +64,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
+  ref?: React.Ref<View>;
   /**
    * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
    */
@@ -138,30 +138,28 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-const ListItem = (
-  {
-    left,
-    right,
-    title,
-    description,
-    onPress,
-    theme: themeOverrides,
-    style,
-    containerStyle,
-    contentStyle,
-    titleStyle,
-    titleNumberOfLines = 1,
-    descriptionNumberOfLines = 2,
-    titleEllipsizeMode,
-    descriptionEllipsizeMode,
-    descriptionStyle,
-    descriptionMaxFontSizeMultiplier,
-    titleMaxFontSizeMultiplier,
-    testID,
-    ...rest
-  }: Props,
-  ref: React.ForwardedRef<View>
-) => {
+const ListItem = ({
+  left,
+  right,
+  title,
+  description,
+  onPress,
+  theme: themeOverrides,
+  style,
+  containerStyle,
+  contentStyle,
+  titleStyle,
+  titleNumberOfLines = 1,
+  descriptionNumberOfLines = 2,
+  titleEllipsizeMode,
+  descriptionEllipsizeMode,
+  descriptionStyle,
+  descriptionMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier,
+  testID,
+  ref,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [alignToTop, setAlignToTop] = React.useState(false);
 
@@ -264,7 +262,6 @@ const ListItem = (
 };
 
 ListItem.displayName = 'List.Item';
-const Component = forwardRef(ListItem);
 
 const styles = StyleSheet.create({
   container: {
@@ -292,4 +289,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Component;
+export default ListItem;

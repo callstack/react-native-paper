@@ -1,4 +1,5 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState } from 'react';
+import type { ReactNode } from 'react';
 
 import Color from 'color';
 //@ts-ignore

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet } from 'react-native';
 
+import { afterEach, expect, it } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
-import ProgressBar, { Props } from '../ProgressBar';
+import ProgressBar from '../ProgressBar';
+import type { Props } from '../ProgressBar';
 
 const layoutEvent = {
   nativeEvent: {

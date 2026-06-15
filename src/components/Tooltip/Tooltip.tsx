@@ -2,14 +2,14 @@ import * as React from 'react';
 import {
   Dimensions,
   View,
-  LayoutChangeEvent,
   StyleSheet,
   Platform,
   Pressable,
-  ViewStyle,
 } from 'react-native';
+import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 
-import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
+import { getTooltipPosition } from './utils';
+import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';

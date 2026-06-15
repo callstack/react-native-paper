@@ -8,19 +8,21 @@ import ScreenWrapper from '../ScreenWrapper';
 type StatusState = 'checked' | 'unchecked';
 type Fruits = 'watermelon' | 'strawberries';
 
-enum FontsEnum {
-  NoFormat = 'no-format',
-  Italic = 'italic',
-  Bold = 'bold',
-  Underline = 'underlined',
-  ColorText = 'format-color',
-}
+const fonts = {
+  noFormat: 'no-format',
+  italic: 'italic',
+  bold: 'bold',
+  underline: 'underlined',
+  colorText: 'format-color',
+} as const;
+
+type Font = (typeof fonts)[keyof typeof fonts];
 
 const ToggleButtonExample = () => {
   const [first, setFirst] = React.useState('bold');
   const [fruit, setFruit] = React.useState<Fruits>('watermelon');
   const [status, setStatus] = React.useState<StatusState>('checked');
-  const [font, setFont] = React.useState<FontsEnum>(FontsEnum.NoFormat);
+  const [font, setFont] = React.useState<Font>(fonts.noFormat);
 
   const handleFruit = (value: Fruits) => setFruit(value);
 
@@ -53,17 +55,10 @@ const ToggleButtonExample = () => {
       <List.Section title="Group & enums">
         <View style={styles.padding}>
           <ToggleButton.Group value={font} onValueChange={setFont}>
-            <ToggleButton
-              disabled
-              icon="format-italic"
-              value={FontsEnum.Italic}
-            />
-            <ToggleButton icon="format-bold" value={FontsEnum.Bold} />
-            <ToggleButton icon="format-underline" value={FontsEnum.Underline} />
-            <ToggleButton
-              icon="format-color-text"
-              value={FontsEnum.ColorText}
-            />
+            <ToggleButton disabled icon="format-italic" value={fonts.italic} />
+            <ToggleButton icon="format-bold" value={fonts.bold} />
+            <ToggleButton icon="format-underline" value={fonts.underline} />
+            <ToggleButton icon="format-color-text" value={fonts.colorText} />
           </ToggleButton.Group>
         </View>
       </List.Section>

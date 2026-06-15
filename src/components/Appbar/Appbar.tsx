@@ -1,30 +1,20 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-  ColorValue,
-} from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import AppbarContent from './AppbarContent';
 import {
-  AppbarModes,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
   filterAppbarActions,
-  AppbarChildProps,
 } from './utils';
+import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
 import Surface from '../Surface';
 
-export type Props = Omit<
-  Partial<React.ComponentPropsWithRef<typeof View>>,
-  'style'
-> & {
+export type Props = Omit<Partial<ViewProps>, 'style'> & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */

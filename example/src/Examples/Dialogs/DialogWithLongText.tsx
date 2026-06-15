@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 
 import { Button, Portal, Dialog } from 'react-native-paper';

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Appearance, ColorSchemeName } from 'react-native';
+import { Appearance } from 'react-native';
+import type { ColorSchemeName } from 'react-native';
 
 /**
  * Subscribes to the OS color-scheme setting via `Appearance.addChangeListener`

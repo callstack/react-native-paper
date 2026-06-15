@@ -1,34 +1,27 @@
 import * as React from 'react';
-import {
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type {
   AccessibilityRole,
-  Animated,
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
-import {
-  ButtonMode,
-  getButtonColors,
-  getButtonTouchableRippleStyle,
-} from './utils';
+import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
+import type { ButtonMode } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, Theme, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -142,6 +135,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Reference for the touchable
    */
   touchableRef?: React.RefObject<View>;
+  ref?: React.Ref<View>;
   /**
    * testID to be used on tests.
    */
@@ -165,40 +159,38 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const Button = (
-  {
-    disabled,
-    compact,
-    mode = 'text',
-    dark,
-    loading,
-    icon,
-    buttonColor: customButtonColor,
-    textColor: customTextColor,
-    children,
-    accessibilityLabel,
-    accessibilityHint,
-    accessibilityRole = 'button',
-    hitSlop,
-    onPress,
-    onPressIn,
-    onPressOut,
-    onLongPress,
-    delayLongPress,
-    style,
-    theme: themeOverrides,
-    uppercase: uppercaseProp,
-    contentStyle,
-    labelStyle,
-    testID = 'button',
-    accessible,
-    background,
-    maxFontSizeMultiplier,
-    touchableRef,
-    ...rest
-  }: Props,
-  ref: React.ForwardedRef<View>
-) => {
+const Button = ({
+  disabled,
+  compact,
+  mode = 'text',
+  dark,
+  loading,
+  icon,
+  buttonColor: customButtonColor,
+  textColor: customTextColor,
+  children,
+  accessibilityLabel,
+  accessibilityHint,
+  accessibilityRole = 'button',
+  hitSlop,
+  onPress,
+  onPressIn,
+  onPressOut,
+  onLongPress,
+  delayLongPress,
+  style,
+  theme: themeOverrides,
+  uppercase: uppercaseProp,
+  contentStyle,
+  labelStyle,
+  testID = 'button',
+  accessible,
+  background,
+  maxFontSizeMultiplier,
+  touchableRef,
+  ref,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
@@ -502,4 +494,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default forwardRef(Button);
+export default Button;

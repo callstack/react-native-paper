@@ -1,18 +1,17 @@
 import * as React from 'react';
-import {
+import { View } from 'react-native';
+import type {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import Shell from './Shell';
-import { Size, Variant } from './tokens';
+import type { Size, Variant } from './tokens';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 
 export type Props = {
@@ -71,7 +70,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -103,42 +102,38 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const FAB = forwardRef<View, Props>(
-  (
-    {
-      icon,
-      variant = 'tonalPrimary',
-      size = 'default',
-      visible = true,
-      onPress,
-      containerColor,
-      contentColor,
-      accessibilityLabel,
-      accessibilityState,
-      background,
-      style,
-      testID = 'floating-action-button',
-      theme,
-    },
-    ref
-  ) => (
-    <Shell
-      ref={ref}
-      icon={icon}
-      variant={variant}
-      size={size}
-      visible={visible}
-      onPress={onPress}
-      containerColor={containerColor}
-      contentColor={contentColor}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityState={accessibilityState}
-      background={background}
-      style={style}
-      testID={testID}
-      theme={theme}
-    />
-  )
+const FAB = ({
+  icon,
+  variant = 'tonalPrimary',
+  size = 'default',
+  visible = true,
+  onPress,
+  containerColor,
+  contentColor,
+  accessibilityLabel,
+  accessibilityState,
+  background,
+  style,
+  testID = 'floating-action-button',
+  theme,
+  ref,
+}: Props) => (
+  <Shell
+    ref={ref}
+    icon={icon}
+    variant={variant}
+    size={size}
+    visible={visible}
+    onPress={onPress}
+    containerColor={containerColor}
+    contentColor={contentColor}
+    accessibilityLabel={accessibilityLabel}
+    accessibilityState={accessibilityState}
+    background={background}
+    style={style}
+    testID={testID}
+    theme={theme}
+  />
 );
 
 export default FAB;

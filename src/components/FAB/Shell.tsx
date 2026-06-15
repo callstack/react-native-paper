@@ -1,39 +1,35 @@
 import * as React from 'react';
-import {
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import Reanimated, {
-  AnimatedStyle,
   useAnimatedStyle,
   useSharedValue,
-  type SharedValue,
 } from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
 import {
-  Size,
   Tokens,
-  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
+import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { useVisibility } from './useVisibility';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ShapeToken } from '../../theme/utils/shape';
 import type { Elevation, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -160,7 +156,7 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -172,173 +168,167 @@ export type ShellProps = {
  *
  * Not exported from the package.
  */
-const Shell = forwardRef<View, ShellProps>(
-  (
-    {
-      icon,
-      label,
-      variant = 'tonalPrimary',
-      size = 'default',
-      containerColor,
-      contentColor,
-      shape,
-      iconSize,
-      leading,
-      trailing,
-      elevation = Tokens.stateElevation.enabled,
-      visible = true,
-      onPress,
-      accessibilityLabel = label,
-      accessibilityState,
-      labelMaxFontSizeMultiplier,
-      labelAnimatedStyle,
-      background,
-      widthShared,
-      heightShared,
-      borderRadiusShared,
-      transparentBackground = false,
-      overlay,
-      children,
-      style,
-      testID = 'fab-shell',
-      theme: themeOverrides,
-    },
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
+const Shell = ({
+  icon,
+  label,
+  variant = 'tonalPrimary',
+  size = 'default',
+  containerColor,
+  contentColor,
+  shape,
+  iconSize,
+  leading,
+  trailing,
+  elevation = Tokens.stateElevation.enabled,
+  visible = true,
+  onPress,
+  accessibilityLabel = label,
+  accessibilityState,
+  labelMaxFontSizeMultiplier,
+  labelAnimatedStyle,
+  background,
+  widthShared,
+  heightShared,
+  borderRadiusShared,
+  transparentBackground = false,
+  overlay,
+  children,
+  style,
+  testID = 'fab-shell',
+  theme: themeOverrides,
+  ref,
+}: ShellProps) => {
+  const theme = useInternalTheme(themeOverrides);
 
-    const dimensions = React.useMemo(
-      () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
-      [theme, size, shape, iconSize, leading, trailing]
-    );
+  const dimensions = React.useMemo(
+    () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
+    [theme, size, shape, iconSize, leading, trailing]
+  );
 
-    const colors = React.useMemo(
-      () => resolveColors({ theme, variant, containerColor, contentColor }),
-      [theme, variant, containerColor, contentColor]
-    );
+  const colors = React.useMemo(
+    () => resolveColors({ theme, variant, containerColor, contentColor }),
+    [theme, variant, containerColor, contentColor]
+  );
 
-    const { scale, alpha, shadowStyle } = useVisibility({
-      visible,
-      theme,
-      elevation,
-    });
+  const { scale, alpha, shadowStyle } = useVisibility({
+    visible,
+    theme,
+    elevation,
+  });
 
-    // Fallback shared values track the static size-driven dimensions. Consumers
-    // that don't supply their own animated shared values get these. Keeping
-    // everything as a shared value means there's exactly one animated style
-    // per view — no static-vs-animated merge surprises.
-    const fallbackWidth = useSharedValue(dimensions.width);
-    const fallbackHeight = useSharedValue(dimensions.height);
-    const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
-    React.useEffect(() => {
-      fallbackWidth.value = dimensions.width;
-      fallbackHeight.value = dimensions.height;
-      fallbackBorderRadius.value = dimensions.borderRadius;
-    }, [
-      dimensions.width,
-      dimensions.height,
-      dimensions.borderRadius,
-      fallbackWidth,
-      fallbackHeight,
-      fallbackBorderRadius,
-    ]);
+  // Fallback shared values track the static size-driven dimensions. Consumers
+  // that don't supply their own animated shared values get these. Keeping
+  // everything as a shared value means there's exactly one animated style
+  // per view — no static-vs-animated merge surprises.
+  const fallbackWidth = useSharedValue(dimensions.width);
+  const fallbackHeight = useSharedValue(dimensions.height);
+  const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
+  React.useEffect(() => {
+    fallbackWidth.value = dimensions.width;
+    fallbackHeight.value = dimensions.height;
+    fallbackBorderRadius.value = dimensions.borderRadius;
+  }, [
+    dimensions.width,
+    dimensions.height,
+    dimensions.borderRadius,
+    fallbackWidth,
+    fallbackHeight,
+    fallbackBorderRadius,
+  ]);
 
-    const width = widthShared ?? fallbackWidth;
-    const height = heightShared ?? fallbackHeight;
-    const borderRadius = borderRadiusShared ?? fallbackBorderRadius;
-    const containerBg = transparentBackground
-      ? 'transparent'
-      : colors.container;
+  const width = widthShared ?? fallbackWidth;
+  const height = heightShared ?? fallbackHeight;
+  const borderRadius = borderRadiusShared ?? fallbackBorderRadius;
+  const containerBg = transparentBackground ? 'transparent' : colors.container;
 
-    const outerStyle = useAnimatedStyle(
-      () => ({
-        transform: [{ scale: scale.value }],
-        opacity: alpha.value,
-        width: width.value,
-        height: height.value,
-        borderRadius: borderRadius.value,
-        backgroundColor: containerBg,
-      }),
-      [width, height, borderRadius, containerBg]
-    );
+  const outerStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ scale: scale.value }],
+      opacity: alpha.value,
+      width: width.value,
+      height: height.value,
+      borderRadius: borderRadius.value,
+      backgroundColor: containerBg,
+    }),
+    [width, height, borderRadius, containerBg]
+  );
 
-    const clipStyle = useAnimatedStyle(
-      () => ({
-        borderRadius: borderRadius.value,
-        backgroundColor: containerBg,
-      }),
-      [borderRadius, containerBg]
-    );
+  const clipStyle = useAnimatedStyle(
+    () => ({
+      borderRadius: borderRadius.value,
+      backgroundColor: containerBg,
+    }),
+    [borderRadius, containerBg]
+  );
 
-    const { focusedSV, onFocus, onBlur } = useFocusRing();
-    const focusRingStyle = useAnimatedStyle(
-      () => ({
-        opacity: focusedSV.value ? 1 : 0,
-        borderRadius: borderRadius.value + FOCUS_RING_INSET,
-      }),
-      [borderRadius]
-    );
+  const { focusedSV, onFocus, onBlur } = useFocusRing();
+  const focusRingStyle = useAnimatedStyle(
+    () => ({
+      opacity: focusedSV.value ? 1 : 0,
+      borderRadius: borderRadius.value + FOCUS_RING_INSET,
+    }),
+    [borderRadius]
+  );
 
-    return (
-      <Reanimated.View
-        ref={ref}
-        style={[
-          style,
-          styles.container,
-          outerStyle,
-          shadowStyle,
-          visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
-        ]}
-        testID={`${testID}-container`}
-      >
-        <Reanimated.View style={[styles.clip, clipStyle]}>
-          {overlay}
-          <TouchableRipple
-            borderless
-            background={background}
-            onPress={onPress}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityRole="button"
-            accessibilityState={accessibilityState}
-            testID={testID}
-            style={[
-              children ? styles.fill : null,
-              Platform.OS === 'web' ? webNoOutline : null,
-            ]}
-          >
-            {children ?? (
-              <Content
-                icon={icon}
-                label={label}
-                contentColor={colors.content}
-                height={dimensions.height}
-                iconSize={dimensions.iconSize}
-                leading={dimensions.leading}
-                trailing={dimensions.trailing}
-                iconLabelGap={dimensions.iconLabelGap}
-                labelTypescale={dimensions.labelTypescale}
-                labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                labelAnimatedStyle={labelAnimatedStyle}
-                labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
-                labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-                testID={testID}
-              />
-            )}
-          </TouchableRipple>
-        </Reanimated.View>
-        <Reanimated.View
+  return (
+    <Reanimated.View
+      ref={ref}
+      style={[
+        style,
+        styles.container,
+        outerStyle,
+        shadowStyle,
+        visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
+      ]}
+      testID={`${testID}-container`}
+    >
+      <Reanimated.View style={[styles.clip, clipStyle]}>
+        {overlay}
+        <TouchableRipple
+          borderless
+          background={background}
+          onPress={onPress}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityRole="button"
+          accessibilityState={accessibilityState}
+          testID={testID}
           style={[
-            styles.focusRing,
-            { borderColor: theme.colors.secondary },
-            focusRingStyle,
+            children ? styles.fill : null,
+            Platform.OS === 'web' ? webNoOutline : null,
           ]}
-        />
+        >
+          {children ?? (
+            <Content
+              icon={icon}
+              label={label}
+              contentColor={colors.content}
+              height={dimensions.height}
+              iconSize={dimensions.iconSize}
+              leading={dimensions.leading}
+              trailing={dimensions.trailing}
+              iconLabelGap={dimensions.iconLabelGap}
+              labelTypescale={dimensions.labelTypescale}
+              labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+              labelAnimatedStyle={labelAnimatedStyle}
+              labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
+              labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
+              testID={testID}
+            />
+          )}
+        </TouchableRipple>
       </Reanimated.View>
-    );
-  }
-);
+      <Reanimated.View
+        style={[
+          styles.focusRing,
+          { borderColor: theme.colors.secondary },
+          focusRingStyle,
+        ]}
+      />
+    </Reanimated.View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,5 @@
-import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import type { EllipsizeProp, InternalTheme, ThemeProp } from '../../types';
 

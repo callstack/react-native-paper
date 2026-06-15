@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { expect, it, jest } from '@jest/globals';
 
 import PaperProvider from '../../../core/PaperProvider';
 import { render } from '../../../test-utils';

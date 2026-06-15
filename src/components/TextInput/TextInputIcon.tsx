@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';

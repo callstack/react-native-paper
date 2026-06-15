@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isPlatformColorSentinel, safeMerge } from '../provider';
 
 describe('isPlatformColorSentinel', () => {

@@ -1,12 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   EasingFunction,
-  Platform,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -18,7 +15,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type BaseRoute = {
   key: string;

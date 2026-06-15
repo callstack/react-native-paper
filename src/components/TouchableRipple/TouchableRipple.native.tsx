@@ -1,22 +1,20 @@
 import * as React from 'react';
-import {
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
   PressableAndroidRippleConfig,
   StyleProp,
-  Platform,
   ViewStyle,
-  StyleSheet,
   GestureResponderEvent,
-  View,
   ColorValue,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
-import { Settings, SettingsContext } from '../../core/settings';
+import { SettingsContext } from '../../core/settings';
+import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -35,23 +33,22 @@ export type Props = PressableProps & {
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  ref?: React.Ref<View>;
   theme?: ThemeProp;
 };
 
-const TouchableRipple = (
-  {
-    style,
-    background,
-    borderless = false,
-    disabled: disabledProp,
-    rippleColor,
-    underlayColor,
-    children,
-    theme: themeOverrides,
-    ...rest
-  }: Props,
-  ref: React.ForwardedRef<View>
-) => {
+const TouchableRipple = ({
+  style,
+  background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor,
+  children,
+  theme: themeOverrides,
+  ref,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
@@ -141,6 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const Component = forwardRef(TouchableRipple);
-
-export default Component as typeof Component & { supported: boolean };
+export default TouchableRipple;

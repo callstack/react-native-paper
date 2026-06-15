@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
+import type { RadioButtonContextType } from './RadioButtonGroup';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';

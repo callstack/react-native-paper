@@ -1,13 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import type {
   ColorValue,
   EasingFunction,
-  Platform,
   StyleProp,
-  StyleSheet,
-  Pressable,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -25,10 +21,11 @@ import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 type BaseRoute = {
