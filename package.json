@@ -40,7 +40,7 @@
     "lint-no-fix": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
     "prepack": "bob build && node ./scripts/generate-mappings.js",
-    "release": "release-it",
+    "release": "release-it --only-version",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
   },
