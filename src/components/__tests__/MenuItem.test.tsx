@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';

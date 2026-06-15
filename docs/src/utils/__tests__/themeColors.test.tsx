@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { getMaxNestedLevel, getUniqueNestedKeys } from '../themeColors';
 
 const Button = {

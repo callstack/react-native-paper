@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';

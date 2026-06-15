@@ -35,7 +35,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest", "node", "@testing-library/jest-native"],
+    "types": ["node"],
     "verbatimModuleSyntax": true
   },
   "exclude": [

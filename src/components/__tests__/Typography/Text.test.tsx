@@ -1,3 +1,5 @@
+import { expect, it, jest } from '@jest/globals';
+
 import PaperProvider from '../../../core/PaperProvider';
 import { render } from '../../../test-utils';
 import configureFonts from '../../../theme/fonts';

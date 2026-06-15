@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { expect, it } from '@jest/globals';
+
 import { render } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import ListIcon from '../List/ListIcon';

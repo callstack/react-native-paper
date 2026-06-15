@@ -1,5 +1,6 @@
 import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 
+import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';

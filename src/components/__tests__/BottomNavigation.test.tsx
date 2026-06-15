@@ -1,5 +1,6 @@
 import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
@@ -512,13 +513,16 @@ describe('getInactiveTintColor', () => {
 });
 
 describe('getLabelColor', () => {
-  it.each`
-    tintColor    | focused  | expected
-    ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
-    ${'#853D4B'} | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${Palette.neutral10}
-    ${undefined} | ${false} | ${Palette.neutralVariant30}
-  `(
+  it.each([
+    { tintColor: '#FBF7DB', focused: true, expected: '#FBF7DB' },
+    { tintColor: '#853D4B', focused: true, expected: '#853D4B' },
+    { tintColor: undefined, focused: true, expected: Palette.neutral10 },
+    {
+      tintColor: undefined,
+      focused: false,
+      expected: Palette.neutralVariant30,
+    },
+  ])(
     'returns $expected when tintColor: $tintColor, focused: $focused',
     ({ tintColor, focused, expected }) => {
       const theme = getTheme(false);

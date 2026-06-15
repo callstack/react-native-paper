@@ -1,3 +1,4 @@
+import { expect, it, jest } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../../test-utils';

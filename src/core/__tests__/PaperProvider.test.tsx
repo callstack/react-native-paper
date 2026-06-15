@@ -1,6 +1,13 @@
 import { Appearance, AccessibilityInfo, Platform, View } from 'react-native';
 import type { ColorSchemeName } from 'react-native';
 
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest as mockJest,
+} from '@jest/globals';
 import { render, act } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -37,20 +44,28 @@ declare module 'react-native' {
 }
 
 const mockAppearance = () => {
-  jest.mock('react-native/Libraries/Utilities/Appearance', () => {
-    const realApp = jest.requireActual(
-      'react-native/Libraries/Utilities/Appearance'
-    );
-    const listeners: Function[] = [];
+  mockJest.mock('react-native/Libraries/Utilities/Appearance', () => {
+    const realApp = mockJest.requireActual<
+      typeof import('react-native/Libraries/Utilities/Appearance')
+    >('react-native/Libraries/Utilities/Appearance');
+
+    const listeners: Array<
+      (options: { colorScheme: ColorSchemeName }) => void
+    > = [];
+
     return {
       ...realApp,
-      addChangeListener: jest.fn((cb) => {
-        listeners.push(cb);
-      }),
-      removeChangeListener: jest.fn((cb) => {
-        listeners.push(cb);
-      }),
-      getColorScheme: jest.fn(() => {
+      addChangeListener: mockJest.fn(
+        (cb: (options: { colorScheme: ColorSchemeName }) => void) => {
+          listeners.push(cb);
+        }
+      ),
+      removeChangeListener: mockJest.fn(
+        (cb: (options: { colorScheme: ColorSchemeName }) => void) => {
+          listeners.push(cb);
+        }
+      ),
+      getColorScheme: mockJest.fn(() => {
         return 'light';
       }),
       __internalListeners: listeners,
@@ -59,25 +74,29 @@ const mockAppearance = () => {
 };
 
 const mockAccessibilityInfo = () => {
-  jest.mock(
+  mockJest.mock(
     'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo',
     () => {
-      const realApp = jest.requireActual(
+      const realApp = mockJest.requireActual<{
+        default: typeof AccessibilityInfo;
+      }>(
         'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo'
       );
 
-      const listeners: Function[] = [];
+      const listeners: Array<(enabled: boolean) => void> = [];
       return {
         __esModule: true,
         default: {
           realApp,
-          addEventListener: jest.fn((_event, cb) => {
+          addEventListener: mockJest.fn(
+            (_event, cb: (enabled: boolean) => void) => {
+              listeners.push(cb);
+            }
+          ),
+          removeEventListener: mockJest.fn((cb: (enabled: boolean) => void) => {
             listeners.push(cb);
           }),
-          removeEventListener: jest.fn((cb) => {
-            listeners.push(cb);
-          }),
-          isReduceMotionEnabled: jest.fn(() => Promise.resolve(false)),
+          isReduceMotionEnabled: mockJest.fn(() => Promise.resolve(false)),
           __internalListeners: listeners,
         },
       };
@@ -105,7 +124,7 @@ const defaultPlatform = Platform.OS;
 
 describe('PaperProvider', () => {
   beforeEach(() => {
-    jest.resetModules();
+    mockJest.resetModules();
     Platform.OS = defaultPlatform;
   });
 
@@ -239,7 +258,7 @@ describe('PaperProvider', () => {
   });
 
   it('uses default theme, if Appearance module is not defined', async () => {
-    jest.mock('react-native/Libraries/Utilities/Appearance', () => {
+    mockJest.mock('react-native/Libraries/Utilities/Appearance', () => {
       return null;
     });
     const { getByTestId } = render(createProvider());
@@ -249,15 +268,26 @@ describe('PaperProvider', () => {
     );
   });
 
-  it.each`
-    label              | theme                 | colorScheme
-    ${'default theme'} | ${ExtendedLightTheme} | ${'light'}
-    ${'dark theme'}    | ${ExtendedDarkTheme}  | ${'dark'}
-  `(
+  it.each([
+    {
+      label: 'default theme',
+      theme: ExtendedLightTheme,
+      colorScheme: 'light',
+    },
+    {
+      label: 'dark theme',
+      theme: ExtendedDarkTheme,
+      colorScheme: 'dark',
+    },
+  ] satisfies Array<{
+    label: string;
+    theme: ThemeProp;
+    colorScheme: ColorSchemeName;
+  }>)(
     'provides $label for $colorScheme color scheme',
     async ({ theme, colorScheme }) => {
       mockAppearance();
-      (Appearance.getColorScheme as jest.Mock).mockReturnValue(colorScheme);
+      mockJest.mocked(Appearance.getColorScheme).mockReturnValue(colorScheme);
       const { getByTestId } = render(createProvider());
       expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
         theme

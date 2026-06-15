@@ -1,5 +1,6 @@
 import { Animated } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 

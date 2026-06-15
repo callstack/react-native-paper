@@ -1,3 +1,5 @@
+import { expect, it } from '@jest/globals';
+
 import { render } from '../../test-utils';
 import ActivityIndicator from '../ActivityIndicator';
 

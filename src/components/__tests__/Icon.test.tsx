@@ -1,5 +1,7 @@
 import { Image } from 'react-native';
 
+import { describe, expect, it } from '@jest/globals';
+
 import { render } from '../../test-utils';
 import Icon from '../Icon';
 

@@ -1,3 +1,11 @@
+import {
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest as mockJest,
+} from '@jest/globals';
+
 import { render } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
@@ -5,14 +13,17 @@ import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 describe('RadioButton', () => {
   describe('on default platform', () => {
     beforeAll(() => {
-      jest.mock('react-native', () => {
-        const RN = jest.requireActual('react-native');
+      mockJest.mock('react-native', () => {
+        const RN =
+          mockJest.requireActual<typeof import('react-native')>('react-native');
 
-        RN.Platform = () => ({
-          select: (objs: { default: object }) => objs.default,
-        });
-
-        return RN;
+        return {
+          ...RN,
+          Platform: {
+            ...RN.Platform,
+            select: (objs: { default: object }) => objs.default,
+          },
+        };
       });
     });
 
@@ -25,14 +36,17 @@ describe('RadioButton', () => {
 
   describe('on ios platform', () => {
     beforeAll(() => {
-      jest.mock('react-native', () => {
-        const RN = jest.requireActual('react-native');
+      mockJest.mock('react-native', () => {
+        const RN =
+          mockJest.requireActual<typeof import('react-native')>('react-native');
 
-        RN.Platform = () => ({
-          select: (objs: { ios: object }) => objs.ios,
-        });
-
-        return RN;
+        return {
+          ...RN,
+          Platform: {
+            ...RN.Platform,
+            select: (objs: { ios: object }) => objs.ios,
+          },
+        };
       });
     });
 
