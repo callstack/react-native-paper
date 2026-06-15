@@ -1,0 +1,100 @@
+---
+title: TextInput.Affix
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to render a leading / trailing text in the TextInput
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/textinput-outline.affix.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+  return (
+    <TextInput
+      mode="outlined"
+      label="Outlined input"
+      placeholder="Type something"
+      right={<TextInput.Affix text="/100" />}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### text (required) 
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="text" />
+  
+<div>
+
+### onLayout  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="onLayout" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="onPress" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="accessibilityLabel" />
+  
+<div>
+
+### textStyle  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="textStyle" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputAffix" prop="theme" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

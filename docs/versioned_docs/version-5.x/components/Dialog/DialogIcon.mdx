@@ -1,0 +1,101 @@
+---
+title: Dialog.Icon
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+@supported Available in v5.x with theme version 3
+A component to show an icon in a Dialog.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/dialog-icon.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { Dialog, Portal, Text } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const hideDialog = () => setVisible(false);
+
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Icon icon="alert" />
+        <Dialog.Title style={styles.title}>This is a title</Dialog.Title>
+        <Dialog.Content>
+          <Text variant="bodyMedium">This is simple dialog</Text>
+        </Dialog.Content>
+      </Dialog>
+    </Portal>
+  );
+};
+
+const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center',
+  },
+})
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="color" />
+  
+<div>
+
+### icon (required) 
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="icon" />
+  
+<div>
+
+### size  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="size" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="theme" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"iconColor":"theme.colors.secondary"}}} componentName="Dialog.Icon" />
+  
+
+<span />

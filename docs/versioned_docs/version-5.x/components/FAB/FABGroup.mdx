@@ -1,0 +1,244 @@
+---
+title: FAB.Group
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to display a stack of FABs with related actions in a speed dial.
+To render the group above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/fab-group.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { FAB, Portal, PaperProvider } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }) => setState({ open });
+
+  const { open } = state;
+
+  return (
+    <PaperProvider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          visible
+          icon={open ? 'calendar-today' : 'plus'}
+          actions={[
+            { icon: 'plus', onPress: () => console.log('Pressed add') },
+            {
+              icon: 'star',
+              label: 'Star',
+              onPress: () => console.log('Pressed star'),
+            },
+            {
+              icon: 'email',
+              label: 'Email',
+              onPress: () => console.log('Pressed email'),
+            },
+            {
+              icon: 'bell',
+              label: 'Remind',
+              onPress: () => console.log('Pressed notifications'),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </PaperProvider>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### actions (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="actions" />
+  
+<div>
+
+### icon (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="icon" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="accessibilityLabel" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="color" />
+  
+<div>
+
+### backdropColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="backdropColor" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="rippleColor" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onPress" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onLongPress" />
+  
+<div>
+
+### toggleStackOnLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="toggleStackOnLongPress" />
+  
+<div>
+
+### delayLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="delayLongPress" />
+  
+<div>
+
+### enableLongPressWhenStackOpened  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="enableLongPressWhenStackOpened" />
+  
+<div>
+
+### open (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="open" />
+  
+<div>
+
+### onStateChange (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onStateChange" />
+  
+<div>
+
+### visible (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="visible" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="style" />
+  
+<div>
+
+### fabStyle  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="fabStyle" />
+  
+<div>
+
+### variant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="variant" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="theme" />
+  
+<div>
+
+### label  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="label" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="testID" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

@@ -1,0 +1,95 @@
+---
+title: TextInput.Icon
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to render a leading / trailing icon in the TextInput
+(return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
+`TextInputAccessoryProps`, which TextInput passes into those render props.
+
+
+
+<span />
+
+## Usage
+```js
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+  const searchAccessory = (props) => (
+    <TextInput.Icon {...props} icon="magnify" />
+  );
+
+  const clearAccessory = (props) => (
+    <TextInput.Icon {...props} icon="close" onPress={() => setText('')} />
+  );
+
+  return (
+    <TextInput
+      label="Search"
+      value={text}
+      onChangeText={setText}
+      startAccessory={searchAccessory}
+      endAccessory={clearAccessory}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+
+
+  ## Props
+  ### IconButton props
+  <ExtendsLink name="IconButton props" link="https://callstack.github.io/react-native-paper/docs/components/IconButton" />
+
+  
+<div>
+
+### style (required) 
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInputIcon" prop="style" />
+  
+<div>
+
+### multiline (required) 
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInputIcon" prop="multiline" />
+  
+<div>
+
+### disabled (required) 
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInputIcon" prop="disabled" />
+  
+<div>
+
+### error (required) 
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInputIcon" prop="error" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

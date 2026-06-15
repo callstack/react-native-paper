@@ -1,0 +1,96 @@
+---
+title: Badge
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Badges are small status descriptors for UI elements.
+A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"with text":"screenshots/badge-1.png","without text":"screenshots/badge-2.png","dot":"screenshots/badge-3.png"}} baseUrl="/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Badge } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Badge>3</Badge>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### visible  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="visible" />
+  
+<div>
+
+### children  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="children" />
+  
+<div>
+
+### size  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="size" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="style" />
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="ref" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Badge" prop="theme" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.error","textColor":"theme.colors.onError"}}} componentName="Badge" />
+  
+
+<span />

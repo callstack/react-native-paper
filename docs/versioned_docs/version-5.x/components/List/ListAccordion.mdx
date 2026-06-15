@@ -1,0 +1,273 @@
+---
+title: List.Accordion
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component used to display an expandable list item.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"with left icon":"screenshots/list-accordion-1.png","with description":"screenshots/list-accordion-2.png","items with icon":"screenshots/list-accordion-3.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { List } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [expanded, setExpanded] = React.useState(true);
+
+  const handlePress = () => setExpanded(!expanded);
+
+  return (
+    <List.Section title="Accordions">
+      <List.Accordion
+        title="Uncontrolled Accordion"
+        left={props => <List.Icon {...props} icon="folder" />}>
+        <List.Item title="First item" />
+        <List.Item title="Second item" />
+      </List.Accordion>
+
+      <List.Accordion
+        title="Controlled Accordion"
+        left={props => <List.Icon {...props} icon="folder" />}
+        expanded={expanded}
+        onPress={handlePress}>
+        <List.Item title="First item" />
+        <List.Item title="Second item" />
+      </List.Accordion>
+    </List.Section>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### title (required) 
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="title" />
+  
+<div>
+
+### description  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="description" />
+  
+<div>
+
+### left  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="left" />
+  
+<div>
+
+### right  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="right" />
+  
+<div>
+
+### expanded  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="expanded" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="onPress" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="onLongPress" />
+  
+<div>
+
+### delayLongPress  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="delayLongPress" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="children" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="theme" />
+  
+<div>
+
+### background  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="background" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="style" />
+  
+<div>
+
+### containerStyle  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="containerStyle" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="contentStyle" />
+  
+<div>
+
+### titleStyle  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="titleStyle" />
+  
+<div>
+
+### descriptionStyle  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="descriptionStyle" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="rippleColor" />
+  
+<div>
+
+### titleNumberOfLines  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="titleNumberOfLines" />
+  
+<div>
+
+### descriptionNumberOfLines  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="descriptionNumberOfLines" />
+  
+<div>
+
+### titleMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="titleMaxFontSizeMultiplier" />
+  
+<div>
+
+### descriptionMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="descriptionMaxFontSizeMultiplier" />
+  
+<div>
+
+### id  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="id" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="testID" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="accessibilityLabel" />
+  
+<div>
+
+### pointerEvents  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="pointerEvents" />
+  
+<div>
+
+### hitSlop  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordion" prop="hitSlop" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

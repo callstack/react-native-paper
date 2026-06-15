@@ -1,0 +1,109 @@
+---
+title: DataTable.Cell
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to show a single cell inside of a table.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/data-table-row-cell.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { DataTable } from 'react-native-paper';
+
+const MyComponent = () => (
+  <DataTable.Row>
+    <DataTable.Cell numeric>1</DataTable.Cell>
+    <DataTable.Cell numeric>2</DataTable.Cell>
+    <DataTable.Cell numeric>3</DataTable.Cell>
+    <DataTable.Cell numeric>4</DataTable.Cell>
+  </DataTable.Row>
+);
+
+export default MyComponent;
+```
+
+If you want to support multiline text, please use View instead, as multiline text doesn't comply with
+MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
+
+
+
+
+  ## Props
+  ### TouchableRipple props
+  <ExtendsLink name="TouchableRipple props" link="https://callstack.github.io/react-native-paper/docs/components/TouchableRipple" />
+
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="children" />
+  
+<div>
+
+### numeric  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="numeric" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="onPress" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="style" />
+  
+<div>
+
+### textStyle  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="textStyle" />
+  
+<div>
+
+### maxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="maxFontSizeMultiplier" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="DataTable/DataTableCell" prop="testID" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

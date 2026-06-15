@@ -60,7 +60,12 @@ const config = {
     [
       './component-docs-plugin',
       {
-        docsRootDir: path.join(__dirname, 'docs', 'components'),
+        docsRootDir: path.join(
+          __dirname,
+          'versioned_docs',
+          'version-6.x',
+          'components'
+        ),
         libsRootDir: path.join(__dirname, '..', 'src', 'components'),
         pages: {
           ActivityIndicator: 'ActivityIndicator',
@@ -195,12 +200,24 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          includeCurrentVersion: false,
+          lastVersion: '5.x',
+          versions: {
+            '6.x': {
+              label: '6.x',
+              banner: 'unreleased',
+            },
+            '5.x': {
+              label: '5.x',
+              banner: 'none',
+            },
+          },
           editUrl: (params) => {
             const urlToMain =
               'https://github.com/callstack/react-native-paper/tree/main';
 
             if (params.docPath.includes('guides')) {
-              return `${urlToMain}/docs/docs/${params.docPath}`;
+              return `${urlToMain}/docs/${params.versionDocsDirPath}/${params.docPath}`;
             }
 
             const customUrls = {
@@ -260,24 +277,23 @@ const config = {
             label: 'Showcase',
           },
           {
-            type: 'dropdown',
-            label: 'v5.x',
+            type: 'docsVersionDropdown',
             position: 'right',
-            items: [
+            dropdownItemsAfter: [
               {
-                label: 'v4.x',
+                label: '4.x',
                 href: `${publicUrl}4.0/`,
               },
               {
-                label: 'v3.x',
+                label: '3.x',
                 href: `${publicUrl}3.0/`,
               },
               {
-                label: 'v2.x',
+                label: '2.x',
                 href: `${publicUrl}2.0/`,
               },
               {
-                label: 'v1.x',
+                label: '1.x',
                 href: `${publicUrl}1.0/`,
               },
             ],

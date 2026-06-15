@@ -1,0 +1,96 @@
+---
+title: ActivityIndicator
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Activity indicator is used to present progress of some activity in the app.
+It can be used as a drop-in replacement for the ActivityIndicator shipped with React Native.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/activity-indicator.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+
+const MyComponent = () => (
+  <ActivityIndicator animating={true} color={MD2Colors.red800} />
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### animating  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="animating" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="color" />
+  
+<div>
+
+### size  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="size" />
+  
+<div>
+
+### hidesWhenStopped  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="hidesWhenStopped" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="style" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="ActivityIndicator" prop="theme" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"borderColor":"theme.colors.primary"}}} componentName="ActivityIndicator" />
+  
+
+<span />

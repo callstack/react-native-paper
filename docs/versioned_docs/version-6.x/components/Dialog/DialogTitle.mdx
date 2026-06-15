@@ -1,0 +1,80 @@
+---
+title: Dialog.Title
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to show a title in a Dialog.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/dialog-title.png"} baseUrl="/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Dialog, Portal, Text } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const hideDialog = () => setVisible(false);
+
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Title>This is a title</Dialog.Title>
+        <Dialog.Content>
+          <Text variant="bodyMedium">This is simple dialog</Text>
+        </Dialog.Content>
+      </Dialog>
+    </Portal>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogTitle" prop="children" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogTitle" prop="style" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogTitle" prop="theme" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

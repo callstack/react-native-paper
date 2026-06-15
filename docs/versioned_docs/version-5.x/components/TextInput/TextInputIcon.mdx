@@ -1,0 +1,107 @@
+---
+title: TextInput.Icon
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to render a leading / trailing icon in the TextInput
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/textinput-flat.icon.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+  return (
+    <TextInput
+      label="Password"
+      secureTextEntry
+      right={<TextInput.Icon icon="eye" />}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### icon (required) <span class="badge badge-renamed "><span class="badge-text">Renamed from 'name' to 'icon` in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="icon" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="onPress" />
+  
+<div>
+
+### forceTextInputFocus  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="forceTextInputFocus" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="color" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="rippleColor" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="style" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="theme" />
+  
+  
+
+<span />
+
+<span />
+
+<span />
