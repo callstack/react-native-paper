@@ -11,7 +11,6 @@ import type {
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
-import { forwardRef } from '../../utils/forwardRef';
 
 export type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
@@ -38,7 +37,7 @@ export type Props = $Omit<
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -58,16 +57,18 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-const AppbarBackAction = forwardRef<View, Props>(
-  ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
-    <AppbarAction
-      accessibilityLabel={accessibilityLabel}
-      {...rest}
-      icon={AppbarBackIcon}
-      isLeading
-      ref={ref}
-    />
-  )
+const AppbarBackAction = ({
+  accessibilityLabel = 'Back',
+  ref,
+  ...rest
+}: Props) => (
+  <AppbarAction
+    accessibilityLabel={accessibilityLabel}
+    {...rest}
+    icon={AppbarBackIcon}
+    isLeading
+    ref={ref}
+  />
 );
 
 AppbarBackAction.displayName = 'Appbar.BackAction';

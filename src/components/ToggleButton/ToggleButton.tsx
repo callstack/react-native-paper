@@ -1,18 +1,11 @@
 import * as React from 'react';
-import {
-  GestureResponderEvent,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-  View,
-  Animated,
-} from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
+import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
@@ -54,7 +47,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
   /**
    * testID to be used on tests.
    */
@@ -91,72 +84,66 @@ export type Props = {
  *
  * ```
  */
-const ToggleButton = forwardRef<View, Props>(
-  (
-    {
-      icon,
-      size,
-      theme: themeOverrides,
-      accessibilityLabel,
-      disabled,
-      style,
-      value,
-      status,
-      onPress,
-      ...rest
-    }: Props,
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const borderRadius = theme.shapes.corner.extraSmall;
+const ToggleButton = ({
+  icon,
+  size,
+  theme: themeOverrides,
+  accessibilityLabel,
+  disabled,
+  style,
+  value,
+  status,
+  onPress,
+  ref,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const borderRadius = theme.shapes.corner.extraSmall;
 
-    return (
-      <ToggleButtonGroupContext.Consumer>
-        {(
-          context: { value: string | null; onValueChange: Function } | null
-        ) => {
-          const checked: boolean | null =
-            (context && context.value === value) || status === 'checked';
+  return (
+    <ToggleButtonGroupContext.Consumer>
+      {(context: { value: string | null; onValueChange: Function } | null) => {
+        const checked: boolean | null =
+          (context && context.value === value) || status === 'checked';
 
-          const backgroundColor = getToggleButtonColor({ theme, checked });
-          const borderColor = theme.colors.outline;
+        const backgroundColor = getToggleButtonColor({ theme, checked });
+        const borderColor = theme.colors.outline;
 
-          return (
-            <IconButton
-              borderless={false}
-              icon={icon}
-              onPress={(e?: GestureResponderEvent | string) => {
-                if (onPress) {
-                  onPress(e);
-                }
+        return (
+          <IconButton
+            borderless={false}
+            icon={icon}
+            onPress={(e?: GestureResponderEvent | string) => {
+              if (onPress) {
+                onPress(e);
+              }
 
-                if (context) {
-                  context.onValueChange(!checked ? value : null);
-                }
-              }}
-              size={size}
-              accessibilityLabel={accessibilityLabel}
-              accessibilityState={{ disabled, selected: checked }}
-              disabled={disabled}
-              style={[
-                styles.content,
-                {
-                  backgroundColor,
-                  borderRadius,
-                  borderColor,
-                },
-                style,
-              ]}
-              ref={ref}
-              theme={theme}
-              {...rest}
-            />
-          );
-        }}
-      </ToggleButtonGroupContext.Consumer>
-    );
-  }
-);
+              if (context) {
+                context.onValueChange(!checked ? value : null);
+              }
+            }}
+            size={size}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityState={{ disabled, selected: checked }}
+            disabled={disabled}
+            style={[
+              styles.content,
+              {
+                backgroundColor,
+                borderRadius,
+                borderColor,
+              },
+              style,
+            ]}
+            ref={ref}
+            theme={theme}
+            {...rest}
+          />
+        );
+      }}
+    </ToggleButtonGroupContext.Consumer>
+  );
+};
 
 const styles = StyleSheet.create({
   content: {

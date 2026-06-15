@@ -1,17 +1,12 @@
 import * as React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { TypescaleKey, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithoutRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */

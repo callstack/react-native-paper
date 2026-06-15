@@ -38,8 +38,8 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "babel-preset-expo": "~56.0.0",
-    "react-native-builder-bob": "^0.41.0",
-    "react-native-monorepo-config": "^0.3.4"
+    "react-native-builder-bob": "^0.42.1",
+    "react-native-monorepo-config": "^0.4.0"
   },
   "engines": {
     "node": ">=20"

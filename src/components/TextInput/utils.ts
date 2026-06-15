@@ -1,12 +1,7 @@
-import {
-  ColorValue,
-  Platform,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { Platform } from 'react-native';
+import type { ColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-import { AnimatedStyle } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import {
   ACTIVE_INDICATOR_SIZE,

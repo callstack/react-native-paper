@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import type { ReactNode } from 'react';
 
 //@ts-ignore
 import TabItem from '@theme/TabItem';

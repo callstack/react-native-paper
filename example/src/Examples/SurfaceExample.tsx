@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { Elevation, Surface, Text, Palette, List } from 'react-native-paper';
+import { Surface, Text, Palette, List } from 'react-native-paper';
+import type { Elevation } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 

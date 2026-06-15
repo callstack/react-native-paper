@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Text } from 'react-native';
 
 import { waitFor } from '@testing-library/react-native';

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
-import { Animated, StyleProp, StyleSheet, TextStyle, Text } from 'react-native';
+import type { ReactNode } from 'react';
+import { Animated, StyleSheet, Text } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -25,6 +25,7 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
    */
   variant?: VariantProp<T>;
   style?: StyleProp<TextStyle>;
+  ref?: React.Ref<Text & HTMLElement>;
   /**
    * @optional
    */
@@ -36,59 +37,60 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
-  function AnimatedText(
-    { style, theme: themeOverrides, variant, ...rest },
-    ref
-  ) {
-    const theme = useInternalTheme(themeOverrides);
-    const { direction: writingDirection } = useLocale();
+function AnimatedText({
+  style,
+  theme: themeOverrides,
+  variant,
+  ref,
+  ...rest
+}: Props<never>) {
+  const theme = useInternalTheme(themeOverrides);
+  const { direction: writingDirection } = useLocale();
 
-    if (variant) {
-      const font = theme.fonts[variant];
-      if (typeof font !== 'object') {
-        throw new Error(
-          `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-            theme.fonts
-          ).join(', ')}.`
-        );
-      }
-
-      return (
-        <Animated.Text
-          ref={ref}
-          {...rest}
-          style={[
-            font,
-            styles.text,
-            { writingDirection, color: theme.colors.onSurface },
-            style,
-          ]}
-        />
-      );
-    } else {
-      const font = theme.fonts.bodyMedium;
-      const textStyle = {
-        ...font,
-        color: theme.colors.onSurface,
-      };
-      return (
-        <Animated.Text
-          ref={ref}
-          {...rest}
-          style={[
-            styles.text,
-            textStyle,
-            {
-              writingDirection,
-            },
-            style,
-          ]}
-        />
+  if (variant) {
+    const font = theme.fonts[variant];
+    if (typeof font !== 'object') {
+      throw new Error(
+        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+          theme.fonts
+        ).join(', ')}.`
       );
     }
+
+    return (
+      <Animated.Text
+        ref={ref}
+        {...rest}
+        style={[
+          font,
+          styles.text,
+          { writingDirection, color: theme.colors.onSurface },
+          style,
+        ]}
+      />
+    );
+  } else {
+    const font = theme.fonts.bodyMedium;
+    const textStyle = {
+      ...font,
+      color: theme.colors.onSurface,
+    };
+    return (
+      <Animated.Text
+        ref={ref}
+        {...rest}
+        style={[
+          styles.text,
+          textStyle,
+          {
+            writingDirection,
+          },
+          style,
+        ]}
+      />
+    );
   }
-);
+}
 
 const styles = StyleSheet.create({
   text: {

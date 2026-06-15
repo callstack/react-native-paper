@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import PortalConsumer from './PortalConsumer';
-import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
+import PortalHost, { PortalContext } from './PortalHost';
+import type { PortalMethods } from './PortalHost';
 import { LocaleContext, LocaleProvider } from '../../core/locale';
 import {
   Consumer as SettingsConsumer,

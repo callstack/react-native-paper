@@ -1,22 +1,19 @@
 import * as React from 'react';
-import {
+import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import type {
   AccessibilityState,
-  Animated,
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  Pressable,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
-import { ChipAvatarProps, getChipColors } from './helpers';
+import { getChipColors } from './helpers';
+import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
 import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
@@ -25,9 +22,8 @@ import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {

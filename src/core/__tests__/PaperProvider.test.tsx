@@ -1,11 +1,5 @@
-import * as React from 'react';
-import {
-  Appearance,
-  AccessibilityInfo,
-  Platform,
-  View,
-  ColorSchemeName,
-} from 'react-native';
+import { Appearance, AccessibilityInfo, Platform, View } from 'react-native';
+import type { ColorSchemeName } from 'react-native';
 
 import { render, act } from '@testing-library/react-native';
 

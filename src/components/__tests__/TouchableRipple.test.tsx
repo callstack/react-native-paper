@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform, Text } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';

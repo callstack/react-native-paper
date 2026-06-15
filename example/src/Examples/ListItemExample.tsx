@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { List, Divider, Checkbox, Avatar, Switch } from 'react-native-paper';

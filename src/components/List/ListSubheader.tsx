@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';

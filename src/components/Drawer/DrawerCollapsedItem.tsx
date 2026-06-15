@@ -1,24 +1,21 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, Pressable, StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
-  Platform,
-  Pressable,
   StyleProp,
-  StyleSheet,
   TextLayoutEventData,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithoutRef<typeof View> & {
   /**
    * The label text of the item.
    */

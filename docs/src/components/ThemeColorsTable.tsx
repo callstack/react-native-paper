@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 //@ts-ignore
 import Admonition from '@theme/Admonition';
@@ -7,11 +7,8 @@ import TabItem from '@theme/TabItem';
 //@ts-ignore
 import Tabs from '@theme/Tabs';
 
-import {
-  DataObject,
-  getMaxNestedLevel,
-  getUniqueNestedKeys,
-} from '../utils/themeColors';
+import { getMaxNestedLevel, getUniqueNestedKeys } from '../utils/themeColors';
+import type { DataObject } from '../utils/themeColors';
 
 const getTableHeader = (keys: string[]): ReactNode[] => {
   return keys.map((key) => <th key={key}>{key}</th>);

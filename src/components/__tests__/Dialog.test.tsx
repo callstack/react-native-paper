@@ -1,11 +1,10 @@
-import React from 'react';
 import {
   Text,
   StyleSheet,
   Platform,
   BackHandler as RNBackHandler,
-  BackHandlerStatic as RNBackHandlerStatic,
 } from 'react-native';
+import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
 

@@ -5,11 +5,8 @@ import {
   useState,
   type RefObject,
 } from 'react';
-import {
-  BlurEvent,
-  FocusEvent,
-  TextInput as NativeTextInput,
-} from 'react-native';
+import { TextInput as NativeTextInput } from 'react-native';
+import type { BlurEvent, FocusEvent } from 'react-native';
 
 import {
   interpolate,

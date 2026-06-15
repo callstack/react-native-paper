@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { FlatList } from 'react-native';
 
 import { Divider, List, useTheme } from 'react-native-paper';

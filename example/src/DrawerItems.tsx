@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ColorValue, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';

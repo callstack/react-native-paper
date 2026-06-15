@@ -1,10 +1,5 @@
-import {
-  Dimensions,
-  LayoutRectangle,
-  StyleProp,
-  ViewStyle,
-  StyleSheet,
-} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
 
 type ChildrenMeasurement = {
   width: number;

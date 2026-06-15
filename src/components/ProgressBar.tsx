@@ -1,19 +1,12 @@
 import * as React from 'react';
-import {
-  Animated,
-  LayoutChangeEvent,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithoutRef<typeof View> & {
   /**
    * Animated value (between 0 and 1). This tells the progress bar to rely on this value to animate it.
    * Note: It should not be used in parallel with the `progress` prop.

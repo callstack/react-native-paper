@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { List } from 'react-native-paper';
 

@@ -1,11 +1,8 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
+import type {
   GestureResponderEvent,
-  PixelRatio,
-  Pressable,
   StyleProp,
-  StyleSheet,
   TextStyle,
   ViewStyle,
 } from 'react-native';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 //@ts-ignore
 import CodeBlock from '@theme/CodeBlock';
 //@ts-ignore

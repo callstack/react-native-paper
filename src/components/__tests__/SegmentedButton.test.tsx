@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';

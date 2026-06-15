@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -20,13 +19,12 @@ import Reanimated, {
 import { scheduleOnUI } from 'react-native-worklets';
 
 import Shell from './Shell';
-import { Size, Variant } from './tokens';
+import type { Size, Variant } from './tokens';
 import { getDimensions } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import AnimatedText from '../Typography/AnimatedText';
 
@@ -100,7 +98,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -140,138 +138,134 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Extended = forwardRef<View, Props>(
-  (
-    {
-      icon,
-      label,
-      variant = 'tonalPrimary',
-      containerColor,
-      contentColor,
-      size = 'default',
-      expanded,
-      visible = true,
-      onPress,
-      accessibilityLabel = label,
-      accessibilityState,
-      labelMaxFontSizeMultiplier,
-      background,
-      style,
-      testID = 'extended-floating-action-button',
-      theme: themeOverrides,
-    },
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const reduceMotion = useReduceMotion();
+const Extended = ({
+  icon,
+  label,
+  variant = 'tonalPrimary',
+  containerColor,
+  contentColor,
+  size = 'default',
+  expanded,
+  visible = true,
+  onPress,
+  accessibilityLabel = label,
+  accessibilityState,
+  labelMaxFontSizeMultiplier,
+  background,
+  style,
+  testID = 'extended-floating-action-button',
+  theme: themeOverrides,
+  ref,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
 
-    const dimensions = getDimensions({ theme, size });
+  const dimensions = getDimensions({ theme, size });
 
-    const offscreenLabelRef = useAnimatedRef<Reanimated.View>();
+  const offscreenLabelRef = useAnimatedRef<Reanimated.View>();
 
-    const widthValue = useSharedValue(dimensions.width);
-    const labelOpacity = useSharedValue(expanded ? 1 : 0);
+  const widthValue = useSharedValue(dimensions.width);
+  const labelOpacity = useSharedValue(expanded ? 1 : 0);
 
-    React.useEffect(() => {
-      const {
-        width: collapsedWidth,
-        leading,
-        iconSize,
-        iconLabelGap,
-        trailing,
-      } = dimensions;
-      const targetOpacity = expanded ? 1 : 0;
+  React.useEffect(() => {
+    const {
+      width: collapsedWidth,
+      leading,
+      iconSize,
+      iconLabelGap,
+      trailing,
+    } = dimensions;
+    const targetOpacity = expanded ? 1 : 0;
 
-      if (reduceMotion) {
-        scheduleOnUI(() => {
-          'worklet';
-          const m = measure(offscreenLabelRef);
-          const lw = m?.width ?? 0;
-          widthValue.value = expanded
-            ? leading + iconSize + iconLabelGap + lw + trailing
-            : collapsedWidth;
-          labelOpacity.value = targetOpacity;
-        });
-        return;
-      }
-
-      const widthSpring = toRawSpring(
-        expanded
-          ? theme.motion.spring.fast.spatial
-          : theme.motion.spring.default.spatial
-      );
-      const opacitySpring = toRawSpring(
-        expanded
-          ? theme.motion.spring.default.effects
-          : theme.motion.spring.fast.effects
-      );
-
+    if (reduceMotion) {
       scheduleOnUI(() => {
         'worklet';
         const m = measure(offscreenLabelRef);
         const lw = m?.width ?? 0;
-        const expandedWidth = leading + iconSize + iconLabelGap + lw + trailing;
-        widthValue.value = withSpring(
-          expanded ? expandedWidth : collapsedWidth,
-          widthSpring
-        );
-        labelOpacity.value = withSpring(targetOpacity, opacitySpring);
+        widthValue.value = expanded
+          ? leading + iconSize + iconLabelGap + lw + trailing
+          : collapsedWidth;
+        labelOpacity.value = targetOpacity;
       });
-    }, [
-      expanded,
-      label,
-      dimensions,
-      theme,
-      reduceMotion,
-      widthValue,
-      labelOpacity,
-      offscreenLabelRef,
-    ]);
+      return;
+    }
 
-    const labelAnimatedStyle = useAnimatedStyle(() => ({
-      opacity: labelOpacity.value,
-    }));
-
-    return (
-      <>
-        <Shell
-          ref={ref}
-          icon={icon}
-          label={label}
-          variant={variant}
-          containerColor={containerColor}
-          contentColor={contentColor}
-          size={size}
-          visible={visible}
-          onPress={onPress}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityState={accessibilityState}
-          background={background}
-          widthShared={widthValue}
-          labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-          labelAnimatedStyle={labelAnimatedStyle}
-          style={style}
-          testID={testID}
-          theme={themeOverrides}
-        />
-        <Reanimated.View
-          ref={offscreenLabelRef}
-          style={styles.offscreenMeasure}
-          importantForAccessibility="no-hide-descendants"
-          accessibilityElementsHidden
-        >
-          <AnimatedText
-            variant={dimensions.labelTypescale}
-            numberOfLines={1}
-            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-          >
-            {label}
-          </AnimatedText>
-        </Reanimated.View>
-      </>
+    const widthSpring = toRawSpring(
+      expanded
+        ? theme.motion.spring.fast.spatial
+        : theme.motion.spring.default.spatial
     );
-  }
-);
+    const opacitySpring = toRawSpring(
+      expanded
+        ? theme.motion.spring.default.effects
+        : theme.motion.spring.fast.effects
+    );
+
+    scheduleOnUI(() => {
+      'worklet';
+      const m = measure(offscreenLabelRef);
+      const lw = m?.width ?? 0;
+      const expandedWidth = leading + iconSize + iconLabelGap + lw + trailing;
+      widthValue.value = withSpring(
+        expanded ? expandedWidth : collapsedWidth,
+        widthSpring
+      );
+      labelOpacity.value = withSpring(targetOpacity, opacitySpring);
+    });
+  }, [
+    expanded,
+    label,
+    dimensions,
+    theme,
+    reduceMotion,
+    widthValue,
+    labelOpacity,
+    offscreenLabelRef,
+  ]);
+
+  const labelAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: labelOpacity.value,
+  }));
+
+  return (
+    <>
+      <Shell
+        ref={ref}
+        icon={icon}
+        label={label}
+        variant={variant}
+        containerColor={containerColor}
+        contentColor={contentColor}
+        size={size}
+        visible={visible}
+        onPress={onPress}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityState={accessibilityState}
+        background={background}
+        widthShared={widthValue}
+        labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        labelAnimatedStyle={labelAnimatedStyle}
+        style={style}
+        testID={testID}
+        theme={themeOverrides}
+      />
+      <Reanimated.View
+        ref={offscreenLabelRef}
+        style={styles.offscreenMeasure}
+        importantForAccessibility="no-hide-descendants"
+        accessibilityElementsHidden
+      >
+        <AnimatedText
+          variant={dimensions.labelTypescale}
+          numberOfLines={1}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        >
+          {label}
+        </AnimatedText>
+      </Reanimated.View>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   offscreenMeasure: {

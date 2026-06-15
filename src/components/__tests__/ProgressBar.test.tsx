@@ -4,7 +4,8 @@ import { Animated, Platform, StyleSheet } from 'react-native';
 import { act } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
-import ProgressBar, { Props } from '../ProgressBar';
+import ProgressBar from '../ProgressBar';
+import type { Props } from '../ProgressBar';
 
 const layoutEvent = {
   nativeEvent: {

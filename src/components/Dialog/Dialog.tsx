@@ -1,11 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -17,7 +12,7 @@ import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
 import type { Theme, ThemeProp } from '../../types';
 import Modal from '../Modal';
-import { DialogChildProps } from './utils';
+import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**

@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  ColorValue,
-  Platform,
-  Role,
-  StyleSheet,
-  Text,
-  ViewProps,
-} from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
+import type { ColorValue, Role, ViewProps } from 'react-native';
 
 import { black } from '../theme/colors';
 

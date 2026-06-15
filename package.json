@@ -3,7 +3,7 @@
   "version": "5.15.1",
   "description": "Material design for React Native",
   "main": "lib/module/index.js",
-  "source": "src/index.tsx",
+  "react-native-paper-source": "src/index.tsx",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
@@ -93,7 +93,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.85.3",
-    "react-native-builder-bob": "^0.41.0",
+    "react-native-builder-bob": "^0.42.1",
     "react-native-reanimated": "4.3.1",
     "react-native-safe-area-context": "5.7.0",
     "react-native-worklets": "0.8.3",

@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 
-import { DarkTheme, LightTheme, Theme } from 'react-native-paper';
+import { DarkTheme, LightTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { render } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import Badge from '../Badge';

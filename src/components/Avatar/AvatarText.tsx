@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  useWindowDimensions,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
@@ -16,7 +10,7 @@ import Text from '../Typography/Text';
 
 const defaultSize = 64;
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithoutRef<typeof View> & {
   /**
    * Initials to show as the text in the `Avatar`.
    */

@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
-import Icon, { IconSource } from './Icon';
+import Icon from './Icon';
+import type { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';

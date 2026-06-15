@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -7,7 +8,7 @@ import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
-export type Props = React.ComponentPropsWithRef<typeof Image> & {
+export type Props = React.ComponentPropsWithoutRef<typeof Image> & {
   /**
    * @internal
    */

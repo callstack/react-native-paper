@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { render } from '../../test-utils';

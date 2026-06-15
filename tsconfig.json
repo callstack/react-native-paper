@@ -9,18 +9,21 @@
         "./src/react-navigation"
       ]
     },
+    "noEmit": true,
+    "customConditions": ["react-native-paper-source"],
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "erasableSyntaxOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": [
       "esnext",
       "dom"
     ],
     "moduleSuffixes": [".ios", ".native", ".android", ""],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
@@ -28,10 +31,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
+    "resolvePackageJsonImports": false,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest", "node", "@testing-library/jest-native"]
+    "types": ["jest", "node", "@testing-library/jest-native"],
+    "verbatimModuleSyntax": true
   },
   "exclude": [
     "lib/**/*"

@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render } from '../../../test-utils';

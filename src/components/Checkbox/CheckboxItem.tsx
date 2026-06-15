@@ -1,11 +1,9 @@
-import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -13,9 +11,8 @@ import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
 import { getStateLayer } from '../../theme/utils/state';
 import type { ThemeProp, TypescaleKey } from '../../types';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {

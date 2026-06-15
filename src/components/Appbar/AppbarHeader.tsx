@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  ColorValue,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

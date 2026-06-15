@@ -1,16 +1,12 @@
-import * as React from 'react';
-import {
-  ColorValue,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
-import Reanimated, { AnimatedStyle } from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import type { TypescaleKey } from '../../theme/types';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import AnimatedText from '../Typography/AnimatedText';
 
 export type ContentProps = {

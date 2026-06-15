@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import {

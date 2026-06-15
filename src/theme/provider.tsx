@@ -1,7 +1,8 @@
 import * as React from 'react';
 import type { ComponentType } from 'react';
 
-import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
+import { createTheming } from '@callstack/react-theme-provider';
+import type { $DeepPartial } from '@callstack/react-theme-provider';
 
 import { DarkTheme, LightTheme } from './schemes';
 import type { Theme, NavigationTheme } from './types';

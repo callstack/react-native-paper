@@ -1,4 +1,3 @@
-import React from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 
 import { act } from '@testing-library/react-native';

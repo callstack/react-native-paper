@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  Image,
-  LayoutChangeEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import { Banner, FAB, Palette, useTheme } from 'react-native-paper';
 

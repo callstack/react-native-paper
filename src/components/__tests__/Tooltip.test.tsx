@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
@@ -16,11 +16,16 @@ jest.mock('../../utils/addEventListener', () => ({
   }),
 }));
 
-const DummyComponent = React.forwardRef<View>((props, ref) => (
-  <View {...props} ref={ref as RefObject<View>}>
+const DummyComponent = ({
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof View> & {
+  ref?: React.RefObject<View | null>;
+}) => (
+  <View {...props} ref={ref}>
     <Text>dummy component</Text>
   </View>
-));
+);
 
 describe('Tooltip', () => {
   const getTrigger = (getByText: (text: string) => ReactTestInstance) =>

@@ -1,10 +1,5 @@
-import * as React from 'react';
-import {
-  Animated,
-  BackHandler as RNBackHandler,
-  BackHandlerStatic as RNBackHandlerStatic,
-  Text,
-} from 'react-native';
+import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
+import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
 

@@ -1,11 +1,6 @@
 import * as React from 'react';
-import {
-  ColorValue,
-  GestureResponderEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
   interpolate,
@@ -21,13 +16,12 @@ import Content from './Content';
 import Shell from './Shell';
 import {
   MenuTokens,
-  Size,
   Tokens,
-  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
+import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
@@ -36,7 +30,8 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme, ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type MenuItemProps = {

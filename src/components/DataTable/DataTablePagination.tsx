@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -10,7 +11,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> &
+export type Props = React.ComponentPropsWithoutRef<typeof View> &
   PaginationControlsProps &
   PaginationDropdownProps & {
     /**

@@ -9,12 +9,8 @@ import {
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import {
-  Appbar,
-  BottomNavigation,
-  BottomNavigationRoute,
-  Menu,
-} from 'react-native-paper';
+import { Appbar, BottomNavigation, Menu } from 'react-native-paper';
+import type { BottomNavigationRoute } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';

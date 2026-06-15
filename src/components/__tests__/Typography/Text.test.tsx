@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import PaperProvider from '../../../core/PaperProvider';
 import { render } from '../../../test-utils';
 import configureFonts from '../../../theme/fonts';

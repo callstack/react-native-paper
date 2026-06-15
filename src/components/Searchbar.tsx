@@ -1,15 +1,11 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, StyleSheet, TextInput, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  Platform,
   StyleProp,
-  StyleSheet,
-  TextInput,
   TextInputProps,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -23,13 +19,12 @@ import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import { cornerNone } from '../theme/tokens/sys/shape';
 import type { Theme, ThemeProp } from '../types';
-import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
   marginRight: number;
 }
 
-export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
+export type Props = React.ComponentPropsWithoutRef<typeof TextInput> & {
   /**
    * Hint text shown when the input is empty.
    */
@@ -134,6 +129,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * @optional
    */
   theme?: ThemeProp;
+  ref?: React.Ref<TextInputHandles>;
 };
 
 type TextInputHandles = Pick<
@@ -165,210 +161,201 @@ type TextInputHandles = Pick<
 
  * ```
  */
-const Searchbar = forwardRef<TextInputHandles, Props>(
-  (
-    {
-      icon,
-      iconColor: customIconColor,
-      onIconPress,
-      searchAccessibilityLabel = 'search',
-      clearIcon,
-      clearAccessibilityLabel = 'clear',
-      onClearIconPress,
-      traileringIcon,
-      traileringIconColor,
-      traileringIconAccessibilityLabel,
-      onTraileringIconPress,
-      right,
-      mode = 'bar',
-      showDivider = true,
-      inputStyle,
-      placeholder,
-      elevation = 0,
-      style,
-      theme: themeOverrides,
-      value,
-      loading = false,
-      testID = 'search-bar',
-      ...rest
-    }: Props,
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const { direction } = useLocale();
-    const { colors, fonts } = theme as Theme;
-    const root = React.useRef<TextInput>(null);
+const Searchbar = ({
+  icon,
+  iconColor: customIconColor,
+  onIconPress,
+  searchAccessibilityLabel = 'search',
+  clearIcon,
+  clearAccessibilityLabel = 'clear',
+  onClearIconPress,
+  traileringIcon,
+  traileringIconColor,
+  traileringIconAccessibilityLabel,
+  onTraileringIconPress,
+  right,
+  mode = 'bar',
+  showDivider = true,
+  inputStyle,
+  placeholder,
+  elevation = 0,
+  style,
+  theme: themeOverrides,
+  value,
+  loading = false,
+  testID = 'search-bar',
+  ref,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const { colors, fonts } = theme as Theme;
+  const root = React.useRef<TextInput>(null);
 
-    React.useImperativeHandle(ref, () => ({
-      focus: () => root.current?.focus(),
-      clear: () => root.current?.clear(),
-      setNativeProps: (args: TextInputProps) =>
-        root.current?.setNativeProps(args),
-      isFocused: () => root.current?.isFocused() || false,
-      blur: () => root.current?.blur(),
-      setSelection: (start: number, end: number) =>
-        root.current?.setSelection(start, end),
-    }));
+  React.useImperativeHandle(ref, () => ({
+    focus: () => root.current?.focus(),
+    clear: () => root.current?.clear(),
+    setNativeProps: (args: TextInputProps) =>
+      root.current?.setNativeProps(args),
+    isFocused: () => root.current?.isFocused() || false,
+    blur: () => root.current?.blur(),
+    setSelection: (start: number, end: number) =>
+      root.current?.setSelection(start, end),
+  }));
 
-    const handleClearPress = (e: any) => {
-      root.current?.clear();
-      rest.onChangeText?.('');
-      onClearIconPress?.(e);
-    };
+  const handleClearPress = (e: any) => {
+    root.current?.clear();
+    rest.onChangeText?.('');
+    onClearIconPress?.(e);
+  };
 
-    const { dark } = theme;
+  const { dark } = theme;
 
-    const placeholderTextColor = theme.colors.onSurface;
-    const textColor = theme.colors.onSurfaceVariant;
-    const iconColor = customIconColor || theme.colors.onSurfaceVariant;
+  const placeholderTextColor = theme.colors.onSurface;
+  const textColor = theme.colors.onSurfaceVariant;
+  const iconColor = customIconColor || theme.colors.onSurfaceVariant;
 
-    const font = {
-      ...fonts.bodyLarge,
-      lineHeight: Platform.select({
-        ios: 0,
-        default: fonts.bodyLarge.lineHeight,
-      }),
-    };
+  const font = {
+    ...fonts.bodyLarge,
+    lineHeight: Platform.select({
+      ios: 0,
+      default: fonts.bodyLarge.lineHeight,
+    }),
+  };
 
-    const isBarMode = mode === 'bar';
-    const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
-    const shouldRenderTraileringIcon =
-      isBarMode &&
-      traileringIcon &&
-      !loading &&
-      (!value || right !== undefined);
+  const isBarMode = mode === 'bar';
+  const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
+  const shouldRenderTraileringIcon =
+    isBarMode && traileringIcon && !loading && (!value || right !== undefined);
 
-    return (
-      <Surface
-        style={[
-          { borderRadius: theme.shapes.corner.extraSmall },
-          {
-            backgroundColor: theme.colors.surfaceContainerHigh,
-            borderRadius: isBarMode
-              ? theme.shapes.corner.extraLarge
-              : cornerNone,
-          },
-          styles.container,
-          style,
-        ]}
-        testID={`${testID}-container`}
-        elevation={elevation}
-        container
+  return (
+    <Surface
+      style={[
+        { borderRadius: theme.shapes.corner.extraSmall },
+        {
+          backgroundColor: theme.colors.surfaceContainerHigh,
+          borderRadius: isBarMode ? theme.shapes.corner.extraLarge : cornerNone,
+        },
+        styles.container,
+        style,
+      ]}
+      testID={`${testID}-container`}
+      elevation={elevation}
+      container
+      theme={theme}
+    >
+      <IconButton
+        accessibilityRole="button"
+        borderless
+        onPress={onIconPress}
+        iconColor={iconColor}
+        icon={
+          icon ||
+          (({ size, color }) => (
+            <MaterialCommunityIcon
+              name="magnify"
+              color={color}
+              size={size}
+              direction={direction}
+            />
+          ))
+        }
         theme={theme}
-      >
+        accessibilityLabel={searchAccessibilityLabel}
+        testID={`${testID}-icon`}
+      />
+      <TextInput
+        style={[
+          styles.input,
+          {
+            color: textColor,
+            ...font,
+            ...Platform.select({ web: { outline: 'none' } }),
+            textAlign: inputTextAlign,
+          },
+          isBarMode ? styles.barModeInput : styles.viewModeInput,
+          inputStyle,
+        ]}
+        placeholder={placeholder || ''}
+        placeholderTextColor={placeholderTextColor}
+        selectionColor={colors.primary}
+        underlineColorAndroid="transparent"
+        returnKeyType="search"
+        keyboardAppearance={dark ? 'dark' : 'light'}
+        accessibilityRole="search"
+        ref={root}
+        value={value}
+        testID={testID}
+        {...rest}
+      />
+      {loading ? (
+        <ActivityIndicator
+          testID="activity-indicator"
+          style={styles.v3Loader}
+        />
+      ) : (
+        // Clear icon should be always rendered within Searchbar – it's transparent,
+        // without touch events, when there is no value. It's done to avoid issues
+        // with the abruptly stopping ripple effect and changing bar width on web,
+        // when clearing the value.
+        <View
+          pointerEvents={value ? 'auto' : 'none'}
+          testID={`${testID}-icon-wrapper`}
+          style={[
+            !value && styles.v3ClearIcon,
+            right !== undefined && styles.v3ClearIconHidden,
+          ]}
+        >
+          <IconButton
+            borderless
+            accessibilityLabel={clearAccessibilityLabel}
+            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            onPress={handleClearPress}
+            icon={
+              clearIcon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={direction}
+                />
+              ))
+            }
+            testID={`${testID}-clear-icon`}
+            accessibilityRole="button"
+            theme={theme}
+          />
+        </View>
+      )}
+      {shouldRenderTraileringIcon ? (
         <IconButton
           accessibilityRole="button"
           borderless
-          onPress={onIconPress}
-          iconColor={iconColor}
-          icon={
-            icon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="magnify"
-                color={color}
-                size={size}
-                direction={direction}
-              />
-            ))
-          }
-          theme={theme}
-          accessibilityLabel={searchAccessibilityLabel}
-          testID={`${testID}-icon`}
+          onPress={onTraileringIconPress}
+          iconColor={traileringIconColor || colors.onSurfaceVariant}
+          icon={traileringIcon}
+          accessibilityLabel={traileringIconAccessibilityLabel}
+          testID={`${testID}-trailering-icon`}
         />
-        <TextInput
+      ) : null}
+      {isBarMode &&
+        right?.({ color: textColor, style: styles.rightStyle, testID })}
+      {!isBarMode && showDivider && (
+        <Divider
+          bold
           style={[
-            styles.input,
+            styles.divider,
             {
-              color: textColor,
-              ...font,
-              ...Platform.select({ web: { outline: 'none' } }),
-              textAlign: inputTextAlign,
+              backgroundColor: colors.outline,
             },
-            isBarMode ? styles.barModeInput : styles.viewModeInput,
-            inputStyle,
           ]}
-          placeholder={placeholder || ''}
-          placeholderTextColor={placeholderTextColor}
-          selectionColor={colors.primary}
-          underlineColorAndroid="transparent"
-          returnKeyType="search"
-          keyboardAppearance={dark ? 'dark' : 'light'}
-          accessibilityRole="search"
-          ref={root}
-          value={value}
-          testID={testID}
-          {...rest}
+          testID={`${testID}-divider`}
         />
-        {loading ? (
-          <ActivityIndicator
-            testID="activity-indicator"
-            style={styles.v3Loader}
-          />
-        ) : (
-          // Clear icon should be always rendered within Searchbar – it's transparent,
-          // without touch events, when there is no value. It's done to avoid issues
-          // with the abruptly stopping ripple effect and changing bar width on web,
-          // when clearing the value.
-          <View
-            pointerEvents={value ? 'auto' : 'none'}
-            testID={`${testID}-icon-wrapper`}
-            style={[
-              !value && styles.v3ClearIcon,
-              right !== undefined && styles.v3ClearIconHidden,
-            ]}
-          >
-            <IconButton
-              borderless
-              accessibilityLabel={clearAccessibilityLabel}
-              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-              onPress={handleClearPress}
-              icon={
-                clearIcon ||
-                (({ size, color }) => (
-                  <MaterialCommunityIcon
-                    name="close"
-                    color={color}
-                    size={size}
-                    direction={direction}
-                  />
-                ))
-              }
-              testID={`${testID}-clear-icon`}
-              accessibilityRole="button"
-              theme={theme}
-            />
-          </View>
-        )}
-        {shouldRenderTraileringIcon ? (
-          <IconButton
-            accessibilityRole="button"
-            borderless
-            onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || colors.onSurfaceVariant}
-            icon={traileringIcon}
-            accessibilityLabel={traileringIconAccessibilityLabel}
-            testID={`${testID}-trailering-icon`}
-          />
-        ) : null}
-        {isBarMode &&
-          right?.({ color: textColor, style: styles.rightStyle, testID })}
-        {!isBarMode && showDivider && (
-          <Divider
-            bold
-            style={[
-              styles.divider,
-              {
-                backgroundColor: colors.outline,
-              },
-            ]}
-            testID={`${testID}-divider`}
-          />
-        )}
-      </Surface>
-    );
-  }
-);
+      )}
+    </Surface>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

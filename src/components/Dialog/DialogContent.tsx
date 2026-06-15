@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import type { ViewStyle, StyleProp } from 'react-native';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithoutRef<typeof View> & {
   /**
    * Content of the `DialogContent`.
    */
