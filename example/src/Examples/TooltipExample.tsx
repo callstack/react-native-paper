@@ -120,6 +120,7 @@ const TooltipExample = () => {
           <View style={styles.chipContainer}>
             <Tooltip title="Copied">
               <Chip
+                label="John Doe"
                 mode="outlined"
                 avatar={
                   <Image
@@ -127,9 +128,7 @@ const TooltipExample = () => {
                     accessibilityIgnoresInvertColors
                   />
                 }
-              >
-                John Doe
-              </Chip>
+              />
             </Tooltip>
           </View>
         </List.Section>

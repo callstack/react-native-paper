@@ -121,8 +121,10 @@ exports[`renders list item with custom description 1`] = `
             collapsable={false}
             style={
               {
-                "backgroundColor": "rgba(232, 222, 248, 1)",
+                "alignSelf": "flex-start",
+                "backgroundColor": "rgba(247, 242, 250, 1)",
                 "borderRadius": 8,
+                "height": 32,
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
@@ -138,13 +140,14 @@ exports[`renders list item with custom description 1`] = `
               collapsable={false}
               style={
                 {
-                  "backgroundColor": "rgba(232, 222, 248, 1)",
+                  "alignItems": "center",
+                  "backgroundColor": "rgba(247, 242, 250, 1)",
                   "borderColor": "transparent",
                   "borderRadius": 8,
                   "borderStyle": "solid",
                   "borderWidth": 1,
-                  "flex": undefined,
-                  "flexDirection": "column",
+                  "flex": 1,
+                  "flexDirection": "row",
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -157,6 +160,7 @@ exports[`renders list item with custom description 1`] = `
               testID="chip-container"
             >
               <View
+                accessibilityLabel="DOCS.pdf"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -177,6 +181,12 @@ exports[`renders list item with custom description 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 8,
+                    "top": 8,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -194,10 +204,12 @@ exports[`renders list item with custom description 1`] = `
                     },
                     [
                       {
-                        "borderRadius": 8,
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                        "height": "100%",
                       },
                       {
-                        "width": "100%",
+                        "borderRadius": 8,
                       },
                     ],
                   ]
@@ -210,34 +222,27 @@ exports[`renders list item with custom description 1`] = `
                       {
                         "alignItems": "center",
                         "flexDirection": "row",
-                        "paddingLeft": 4,
+                        "height": "100%",
+                        "overflow": "hidden",
                         "position": "relative",
                       },
                       {
-                        "paddingLeft": 0,
-                      },
-                      {
                         "opacity": 1,
-                      },
-                      {
-                        "paddingRight": 0,
+                        "paddingLeft": 8,
+                        "paddingRight": 16,
                       },
                     ]
                   }
                 >
                   <View
                     style={
-                      [
-                        {
-                          "alignSelf": "center",
-                          "padding": 4,
-                        },
-                        {
-                          "paddingLeft": 8,
-                          "paddingRight": 0,
-                        },
-                        null,
-                      ]
+                      {
+                        "alignItems": "center",
+                        "height": 18,
+                        "justifyContent": "center",
+                        "marginRight": 8,
+                        "width": 18,
+                      }
                     }
                   >
                     <Text
@@ -292,20 +297,11 @@ exports[`renders list item with custom description 1`] = `
                           },
                           [
                             {
-                              "marginVertical": 6,
+                              "includeFontPadding": false,
                               "textAlignVertical": "center",
                             },
                             {
-                              "color": "rgba(29, 25, 43, 1)",
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            {
-                              "marginLeft": 8,
-                              "marginRight": 16,
+                              "color": "rgba(73, 69, 79, 1)",
                             },
                             undefined,
                           ],

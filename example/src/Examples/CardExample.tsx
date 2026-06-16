@@ -31,13 +31,12 @@ const CardExample = () => {
         {modes.map((mode) => (
           <Chip
             key={mode}
+            label={mode}
             selected={selectedMode === mode}
             mode="outlined"
             onPress={() => setSelectedMode(mode)}
             style={styles.chip}
-          >
-            {mode}
-          </Chip>
+          />
         ))}
       </View>
       <ScrollView

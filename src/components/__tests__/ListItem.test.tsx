@@ -116,9 +116,7 @@ it('renders list item with custom description', async () => {
               Design library that has you covered in all major use-cases.
             </Text>
             <View>
-              <Chip icon="file-pdf-box" onPress={() => {}}>
-                DOCS.pdf
-              </Chip>
+              <Chip label="DOCS.pdf" icon="file-pdf-box" onPress={() => {}} />
             </View>
           </View>
         )}
@@ -149,17 +147,18 @@ it('renders with a description with typeof number', async () => {
 it('calling onPress on ListItem right component', async () => {
   Platform.OS = 'web';
   const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+  const user = userEvent.setup();
 
   await render(
     <ListItem
       title="First Item"
-      description="Item description"
       testID={testID}
+      description="Item description"
       right={() => <IconButton icon="pencil" onPress={onPress} />}
     />
   );
 
-  await userEvent.press(screen.getByTestId('icon-button'));
+  await user.press(screen.getByTestId('icon-button'));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 

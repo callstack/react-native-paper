@@ -5,8 +5,10 @@ exports[`renders chip with close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -22,13 +24,14 @@ exports[`renders chip with close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "alignItems": "center",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -41,6 +44,7 @@ exports[`renders chip with close button 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -61,6 +65,12 @@ exports[`renders chip with close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -78,10 +88,12 @@ exports[`renders chip with close button 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -94,34 +106,27 @@ exports[`renders chip with close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 1,
-            },
-            {
-              "paddingRight": 34,
+              "paddingLeft": 8,
+              "paddingRight": 8,
             },
           ]
         }
       >
         <View
           style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "marginRight": 8,
+              "width": 18,
+            }
           }
         >
           <Text
@@ -176,20 +181,11 @@ exports[`renders chip with close button 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 0,
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   undefined,
                 ],
@@ -202,97 +198,86 @@ exports[`renders chip with close button 1`] = `
       </View>
     </View>
     <View
-      style={
+      accessibilityLabel="Close"
+      accessibilityState={
         {
-          "alignItems": "center",
-          "height": "100%",
-          "justifyContent": "center",
-          "position": "absolute",
-          "right": 0,
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": "100%",
+            "justifyContent": "center",
+            "width": 32,
+          },
+          null,
+          null,
+        ]
+      }
+      testID="chip-close"
     >
-      <View
-        accessibilityLabel="Close"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
-      >
-        <View
-          style={
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
             [
               {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "marginRight": 4,
-              },
-              {
-                "marginRight": 8,
-                "padding": 0,
-              },
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
-                },
-                [
+                "lineHeight": 18,
+                "transform": [
                   {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
+                    "scaleX": 1,
                   },
                 ],
-              ]
-            }
-          >
-            close
-          </Text>
-        </View>
-      </View>
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        close
+      </Text>
     </View>
   </View>
 </View>
@@ -303,8 +288,10 @@ exports[`renders chip with custom close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -320,13 +307,14 @@ exports[`renders chip with custom close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "alignItems": "center",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -339,6 +327,7 @@ exports[`renders chip with custom close button 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -359,6 +348,12 @@ exports[`renders chip with custom close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -376,10 +371,12 @@ exports[`renders chip with custom close button 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -392,34 +389,27 @@ exports[`renders chip with custom close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 1,
-            },
-            {
-              "paddingRight": 34,
+              "paddingLeft": 8,
+              "paddingRight": 8,
             },
           ]
         }
       >
         <View
           style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "marginRight": 8,
+              "width": 18,
+            }
           }
         >
           <Text
@@ -474,20 +464,11 @@ exports[`renders chip with custom close button 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 0,
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   undefined,
                 ],
@@ -500,97 +481,86 @@ exports[`renders chip with custom close button 1`] = `
       </View>
     </View>
     <View
-      style={
+      accessibilityLabel="Close"
+      accessibilityState={
         {
-          "alignItems": "center",
-          "height": "100%",
-          "justifyContent": "center",
-          "position": "absolute",
-          "right": 0,
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": "100%",
+            "justifyContent": "center",
+            "width": 32,
+          },
+          null,
+          null,
+        ]
+      }
+      testID="chip-close"
     >
-      <View
-        accessibilityLabel="Close"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
-      >
-        <View
-          style={
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
             [
               {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "marginRight": 4,
-              },
-              {
-                "marginRight": 8,
-                "padding": 0,
-              },
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
-                },
-                [
+                "lineHeight": 18,
+                "transform": [
                   {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
+                    "scaleX": 1,
                   },
                 ],
-              ]
-            }
-          >
-            arrow-down
-          </Text>
-        </View>
-      </View>
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        arrow-down
+      </Text>
     </View>
   </View>
 </View>
@@ -601,8 +571,10 @@ exports[`renders chip with icon 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -618,13 +590,14 @@ exports[`renders chip with icon 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "alignItems": "center",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -637,6 +610,7 @@ exports[`renders chip with icon 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -657,6 +631,12 @@ exports[`renders chip with icon 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -674,10 +654,12 @@ exports[`renders chip with icon 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -690,34 +672,27 @@ exports[`renders chip with icon 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
+              "paddingLeft": 8,
+              "paddingRight": 16,
             },
           ]
         }
       >
         <View
           style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "marginRight": 8,
+              "width": 18,
+            }
           }
         >
           <Text
@@ -772,20 +747,11 @@ exports[`renders chip with icon 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 16,
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   undefined,
                 ],
@@ -806,8 +772,10 @@ exports[`renders chip with onPress 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -823,13 +791,14 @@ exports[`renders chip with onPress 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "alignItems": "center",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -842,6 +811,7 @@ exports[`renders chip with onPress 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -862,6 +832,12 @@ exports[`renders chip with onPress 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -879,10 +855,12 @@ exports[`renders chip with onPress 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -895,17 +873,14 @@ exports[`renders chip with onPress 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
+              "paddingLeft": 16,
+              "paddingRight": 16,
             },
           ]
         }
@@ -932,20 +907,11 @@ exports[`renders chip with onPress 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 16,
-                    "marginRight": 16,
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   undefined,
                 ],
@@ -966,8 +932,10 @@ exports[`renders outlined disabled chip 1`] = `
   collapsable={false}
   style={
     {
+      "alignSelf": "flex-start",
       "backgroundColor": "transparent",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -983,13 +951,14 @@ exports[`renders outlined disabled chip 1`] = `
     collapsable={false}
     style={
       {
+        "alignItems": "center",
         "backgroundColor": "transparent",
-        "borderColor": "rgba(243, 237, 247, 1)",
+        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1002,6 +971,7 @@ exports[`renders outlined disabled chip 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -1022,6 +992,12 @@ exports[`renders outlined disabled chip 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1039,10 +1015,12 @@ exports[`renders outlined disabled chip 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -1055,17 +1033,14 @@ exports[`renders outlined disabled chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 0.38,
-            },
-            {
-              "paddingRight": 0,
+              "paddingLeft": 16,
+              "paddingRight": 16,
             },
           ]
         }
@@ -1092,20 +1067,11 @@ exports[`renders outlined disabled chip 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
                     "color": "rgba(29, 27, 32, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 16,
-                    "marginRight": 16,
                   },
                   undefined,
                 ],
@@ -1126,8 +1092,10 @@ exports[`renders selected chip 1`] = `
   collapsable={false}
   style={
     {
+      "alignSelf": "flex-start",
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -1143,13 +1111,14 @@ exports[`renders selected chip 1`] = `
     collapsable={false}
     style={
       {
+        "alignItems": "center",
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1162,6 +1131,7 @@ exports[`renders selected chip 1`] = `
     testID="chip-container"
   >
     <View
+      accessibilityLabel="Example Chip"
       accessibilityState={
         {
           "busy": undefined,
@@ -1182,6 +1152,12 @@ exports[`renders selected chip 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1199,10 +1175,12 @@ exports[`renders selected chip 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "borderRadius": 8,
             },
           ],
         ]
@@ -1215,34 +1193,27 @@ exports[`renders selected chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "height": "100%",
+              "overflow": "hidden",
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
-            },
-            {
               "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
+              "paddingLeft": 8,
+              "paddingRight": 16,
             },
           ]
         }
       >
         <View
           style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "marginRight": 8,
+              "width": 18,
+            }
           }
         >
           <Text
@@ -1297,20 +1268,11 @@ exports[`renders selected chip 1`] = `
                 },
                 [
                   {
-                    "marginVertical": 6,
+                    "includeFontPadding": false,
                     "textAlignVertical": "center",
                   },
                   {
                     "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 16,
                   },
                   undefined,
                 ],

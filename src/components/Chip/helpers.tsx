@@ -1,13 +1,21 @@
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
-import color from 'color';
-
-import { tokens } from '../../theme/tokens';
-import type { InternalTheme, Theme } from '../../types';
-
-const md3 = (theme: InternalTheme) => theme as Theme;
-
-const stateOpacity = tokens.md.sys.state.opacity;
+import {
+  CHIP_DISABLED_COLOR,
+  CHIP_DISABLED_CONTENT_OPACITY,
+  CHIP_ELEVATED_CONTAINER_COLOR,
+  CHIP_FLAT_CONTAINER_COLOR,
+  CHIP_LABEL_COLOR,
+  CHIP_LEADING_ICON_COLOR,
+  CHIP_OUTLINE_COLOR,
+  CHIP_OUTLINED_CONTAINER_COLOR,
+  CHIP_SELECTED_CONTAINER_COLOR,
+  CHIP_SELECTED_ICON_COLOR,
+  CHIP_SELECTED_LABEL_COLOR,
+  CHIP_SELECTED_TRAILING_ICON_COLOR,
+  CHIP_TRAILING_ICON_COLOR,
+} from './tokens';
+import type { InternalTheme } from '../../types';
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;
@@ -16,182 +24,186 @@ export type ChipAvatarProps = {
 type BaseProps = {
   theme: InternalTheme;
   isOutlined: boolean;
+  selected?: boolean;
   disabled?: boolean;
+  elevated?: boolean;
+};
+
+const getContainerColor = ({
+  theme,
+  isOutlined,
+  selected,
+  disabled,
+  elevated,
+  customBackgroundColor,
+}: BaseProps & {
+  customBackgroundColor?: ColorValue;
+}) => {
+  if (disabled) {
+    return isOutlined ? 'transparent' : theme.colors.stateLayerPressed;
+  }
+
+  if (customBackgroundColor !== undefined) {
+    return customBackgroundColor;
+  }
+
+  if (selected) {
+    return theme.colors[CHIP_SELECTED_CONTAINER_COLOR];
+  }
+
+  if (isOutlined) {
+    return theme.colors[CHIP_OUTLINED_CONTAINER_COLOR];
+  }
+
+  return elevated
+    ? theme.colors[CHIP_ELEVATED_CONTAINER_COLOR]
+    : theme.colors[CHIP_FLAT_CONTAINER_COLOR];
 };
 
 const getBorderColor = ({
   theme,
   isOutlined,
+  selected,
   disabled,
   selectedColor,
-}: BaseProps & { backgroundColor: ColorValue; selectedColor?: ColorValue }) => {
-  const isSelectedColor = selectedColor !== undefined;
-  const { colors } = md3(theme);
-
-  if (!isOutlined) {
-    // If the Chip mode is "flat", set border color to transparent
+}: BaseProps & {
+  selectedColor?: ColorValue;
+}) => {
+  if (!isOutlined || selected) {
     return 'transparent';
   }
 
   if (disabled) {
-    return colors.surfaceContainer;
+    return theme.colors.outlineVariant;
   }
 
-  if (isSelectedColor) {
-    if (typeof selectedColor === 'string') {
-      return color(selectedColor).alpha(0.29).rgb().string();
-    }
-    // PlatformColor / OpaqueColorValue: skip the alpha pass and render opaque.
+  if (selectedColor !== undefined) {
     return selectedColor;
   }
 
-  return colors.outlineVariant;
+  return theme.colors[CHIP_OUTLINE_COLOR];
 };
 
-const getTextColor = ({
+const getLabelColor = ({
   theme,
-  isOutlined,
+  selected,
   disabled,
   selectedColor,
 }: BaseProps & {
   selectedColor?: ColorValue;
 }) => {
-  const isSelectedColor = selectedColor !== undefined;
-  const { colors } = md3(theme);
   if (disabled) {
-    return colors.onSurface;
+    return theme.colors[CHIP_DISABLED_COLOR];
   }
 
-  if (isSelectedColor) {
+  if (selectedColor !== undefined) {
     return selectedColor;
   }
 
-  if (isOutlined) {
-    return colors.onSurfaceVariant;
+  if (selected) {
+    return theme.colors[CHIP_SELECTED_LABEL_COLOR];
   }
 
-  return colors.onSecondaryContainer;
+  return theme.colors[CHIP_LABEL_COLOR];
 };
 
-const getDefaultBackgroundColor = ({
+const getLeadingIconColor = ({
   theme,
-  isOutlined,
-}: Omit<BaseProps, 'disabled' | 'selectedColor'>) => {
-  const { colors } = md3(theme);
-  if (isOutlined) {
-    return colors.surface;
-  }
-
-  return colors.secondaryContainer;
-};
-
-const getBackgroundColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  customBackgroundColor,
-}: BaseProps & {
-  customBackgroundColor?: ColorValue;
-}) => {
-  const { colors } = md3(theme);
-  if (typeof customBackgroundColor === 'string') {
-    return customBackgroundColor;
-  }
-
-  if (disabled) {
-    if (isOutlined) {
-      return 'transparent';
-    }
-    return colors.surfaceContainerLow;
-  }
-
-  return getDefaultBackgroundColor({ theme, isOutlined });
-};
-
-const getSelectedBackgroundColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  customBackgroundColor,
-}: BaseProps & {
-  customBackgroundColor?: ColorValue;
-}) => {
-  return getBackgroundColor({
-    theme,
-    disabled,
-    isOutlined,
-    customBackgroundColor,
-  });
-};
-
-const getIconColor = ({
-  theme,
-  isOutlined,
+  selected,
   disabled,
   selectedColor,
 }: BaseProps & {
   selectedColor?: ColorValue;
 }) => {
-  const isSelectedColor = selectedColor !== undefined;
-  const { colors } = md3(theme);
   if (disabled) {
-    return colors.onSurface;
+    return theme.colors[CHIP_DISABLED_COLOR];
   }
 
-  if (isSelectedColor) {
+  if (selectedColor !== undefined) {
     return selectedColor;
   }
 
-  if (isOutlined) {
-    return colors.onSurfaceVariant;
+  if (selected) {
+    return theme.colors[CHIP_SELECTED_ICON_COLOR];
   }
 
-  return colors.onSecondaryContainer;
+  return theme.colors[CHIP_LEADING_ICON_COLOR];
+};
+
+const getTrailingIconColor = ({
+  theme,
+  selected,
+  disabled,
+  selectedColor,
+}: BaseProps & {
+  selectedColor?: ColorValue;
+}) => {
+  if (disabled) {
+    return theme.colors[CHIP_DISABLED_COLOR];
+  }
+
+  if (selectedColor !== undefined) {
+    return selectedColor;
+  }
+
+  if (selected) {
+    return theme.colors[CHIP_SELECTED_TRAILING_ICON_COLOR];
+  }
+
+  return theme.colors[CHIP_TRAILING_ICON_COLOR];
 };
 
 export const getChipColors = ({
   isOutlined,
   theme,
+  selected,
   selectedColor,
   customBackgroundColor,
   disabled,
+  elevated,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
   selectedColor?: ColorValue;
 }) => {
-  const baseChipColorProps = { theme, isOutlined, disabled };
+  const baseChipColorProps = {
+    theme,
+    isOutlined,
+    selected,
+    disabled,
+    elevated,
+  };
 
-  const backgroundColor = getBackgroundColor({
-    ...baseChipColorProps,
-    customBackgroundColor,
-  });
-
-  const selectedBackgroundColor = getSelectedBackgroundColor({
-    ...baseChipColorProps,
-    customBackgroundColor,
-  });
-
-  const contentOpacity = disabled
-    ? stateOpacity.disabled
-    : stateOpacity.enabled;
+  const contentOpacity = disabled ? CHIP_DISABLED_CONTENT_OPACITY : 1;
 
   return {
     borderColor: getBorderColor({
       ...baseChipColorProps,
       selectedColor,
-      backgroundColor,
     }),
-    textColor: getTextColor({
+    textColor: getLabelColor({
       ...baseChipColorProps,
       selectedColor,
     }),
-    iconColor: getIconColor({
+    iconColor: getLeadingIconColor({
+      ...baseChipColorProps,
+      selectedColor,
+    }),
+    closeIconColor: getTrailingIconColor({
       ...baseChipColorProps,
       selectedColor,
     }),
     contentOpacity,
-    backgroundColor,
-    selectedBackgroundColor,
+    backgroundColor: getContainerColor({
+      ...baseChipColorProps,
+      customBackgroundColor,
+    }),
+    selectedBackgroundColor: getContainerColor({
+      ...baseChipColorProps,
+      selected: true,
+      customBackgroundColor,
+    }),
+    rippleColor: theme.colors.stateLayerPressed,
+    avatarOverlayColor: theme.colors.stateLayerPressed,
   };
 };

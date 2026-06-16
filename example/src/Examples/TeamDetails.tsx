@@ -58,25 +58,15 @@ const News = () => {
           contentContainerStyle={styles.chipsContent}
         >
           <Chip
+            label="Latest"
             selected
             onPress={() => {}}
             style={styles.chip}
-            showSelectedOverlay
-          >
-            Latest
-          </Chip>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Popular
-          </Chip>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Interviews
-          </Chip>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Transfers
-          </Chip>
-          <Chip onPress={() => {}} style={styles.chip}>
-            League
-          </Chip>
+          />
+          <Chip label="Popular" onPress={() => {}} style={styles.chip} />
+          <Chip label="Interviews" onPress={() => {}} style={styles.chip} />
+          <Chip label="Transfers" onPress={() => {}} style={styles.chip} />
+          <Chip label="League" onPress={() => {}} style={styles.chip} />
         </ScrollView>
         <View style={styles.cardContainer}>
           <Card style={styles.card} mode="contained">
