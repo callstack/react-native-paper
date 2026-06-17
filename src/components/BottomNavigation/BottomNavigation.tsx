@@ -523,7 +523,7 @@ const BottomNavigation = <Route extends BaseRoute>({
             <BottomNavigationRouteScreen
               key={route.key}
               pointerEvents={focused ? 'auto' : 'none'}
-              accessibilityElementsHidden={!focused}
+              aria-hidden={!focused}
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }

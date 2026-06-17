@@ -26,7 +26,7 @@ exports[`allows customizing Route's type via generics 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -120,7 +120,7 @@ exports[`allows customizing Route's type via generics 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -136,7 +136,6 @@ exports[`allows customizing Route's type via generics 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -166,6 +165,7 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -407,7 +407,6 @@ exports[`allows customizing Route's type via generics 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -437,6 +436,7 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -693,7 +693,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -787,7 +787,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -803,7 +803,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -833,6 +832,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1014,7 +1014,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1044,6 +1043,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1208,7 +1208,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1238,6 +1237,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1434,7 +1434,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -1528,7 +1528,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -1544,7 +1544,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1574,6 +1573,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1755,7 +1755,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1785,6 +1784,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1949,7 +1949,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1979,6 +1978,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -2175,7 +2175,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -2219,7 +2219,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2263,7 +2263,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2307,7 +2307,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2401,7 +2401,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -2417,7 +2417,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -2447,6 +2446,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -2748,7 +2748,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -2778,6 +2777,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3062,7 +3062,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3092,6 +3091,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3376,7 +3376,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3406,6 +3405,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3690,7 +3690,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3720,6 +3719,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4036,7 +4036,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -4130,7 +4130,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -4146,7 +4146,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4176,6 +4175,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4426,7 +4426,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4456,6 +4455,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4689,7 +4689,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4719,6 +4718,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4952,7 +4952,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4982,6 +4981,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5215,7 +5215,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5245,6 +5244,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5510,7 +5510,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -5604,7 +5604,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -5620,7 +5620,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5650,6 +5649,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5818,7 +5818,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5848,6 +5847,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5999,7 +5999,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6029,6 +6028,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6212,7 +6212,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -6306,7 +6306,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -6322,7 +6322,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6352,6 +6351,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6506,7 +6506,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6536,6 +6535,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6673,7 +6673,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6703,6 +6702,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6840,7 +6840,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6870,6 +6869,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7007,7 +7007,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7037,6 +7036,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7206,7 +7206,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -7300,7 +7300,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -7316,7 +7316,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7346,6 +7345,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7647,7 +7647,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7677,6 +7676,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7961,7 +7961,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7991,6 +7990,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8307,7 +8307,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -8401,7 +8401,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -8417,7 +8417,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8447,6 +8446,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8697,7 +8697,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8727,6 +8726,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8960,7 +8960,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8990,6 +8989,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -9255,7 +9255,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -9349,7 +9349,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -9365,7 +9365,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -9395,6 +9394,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -9696,7 +9696,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -9726,6 +9725,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10010,7 +10010,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10040,6 +10039,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10356,7 +10356,7 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -10450,7 +10450,7 @@ exports[`renders shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -10466,7 +10466,6 @@ exports[`renders shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10496,6 +10495,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10746,7 +10746,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10776,6 +10775,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11009,7 +11009,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11039,6 +11038,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11272,7 +11272,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11302,6 +11301,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11535,7 +11535,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11565,6 +11564,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {

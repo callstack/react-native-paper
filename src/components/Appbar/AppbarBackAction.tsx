@@ -31,7 +31,7 @@ export type Props = $Omit<
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -58,12 +58,12 @@ export type Props = $Omit<
  * ```
  */
 const AppbarBackAction = ({
-  accessibilityLabel = 'Back',
+  'aria-label': ariaLabel = 'Back',
   ref,
   ...rest
 }: Props) => (
   <AppbarAction
-    accessibilityLabel={accessibilityLabel}
+    aria-label={ariaLabel}
     {...rest}
     icon={AppbarBackIcon}
     isLeading

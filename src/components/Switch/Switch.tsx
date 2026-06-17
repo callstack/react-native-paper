@@ -57,7 +57,10 @@ export type Props = {
   style?: StyleProp<ViewStyle>;
   testID?: string;
   theme?: ThemeProp;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the switch. This is read by the screen reader when the user focuses the switch.
+   */
+  'aria-label'?: string;
 };
 
 const {
@@ -132,7 +135,7 @@ const Switch = ({
   style,
   testID,
   theme: themeOverrides,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
@@ -367,9 +370,10 @@ const Switch = ({
           focusedSV.value = 0;
         }}
         android_ripple={{ color: 'transparent' }}
-        accessibilityRole="switch"
-        accessibilityState={{ disabled: isDisabled, checked }}
-        accessibilityLabel={accessibilityLabel}
+        role="switch"
+        aria-disabled={isDisabled}
+        aria-checked={checked}
+        aria-label={ariaLabel}
         testID={testID}
         style={[
           styles.touchable,

@@ -195,13 +195,11 @@ const ProgressBar = ({
       onLayout={onLayout}
       {...rest}
       accessible
-      accessibilityRole="progressbar"
-      accessibilityState={{ busy: visible }}
-      accessibilityValue={
-        indeterminate
-          ? {}
-          : { min: 0, max: 100, now: Math.round(progress * 100) }
-      }
+      role="progressbar"
+      aria-busy={visible}
+      aria-valuemin={indeterminate ? undefined : 0}
+      aria-valuemax={indeterminate ? undefined : 100}
+      aria-valuenow={indeterminate ? undefined : Math.round(progress * 100)}
       style={isWeb && styles.webContainer}
       testID={testID}
     >

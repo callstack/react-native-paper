@@ -642,8 +642,8 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            accessibilityLabel={overlayAccessibilityLabel}
-            accessibilityRole="button"
+            aria-label={overlayAccessibilityLabel}
+            role="button"
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
@@ -653,7 +653,7 @@ const Menu = ({
               menuRef.current = ref;
             }}
             collapsable={false}
-            accessibilityViewIsModal={visible}
+            aria-modal={visible}
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}

@@ -122,9 +122,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             testID="search-bar-icon-container"
           >
             <View
-              accessibilityComponentType="button"
               accessibilityLabel="search"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -134,7 +132,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "selected": undefined,
                 }
               }
-              accessibilityTraits="button"
               accessibilityValue={
                 {
                   "max": undefined,
@@ -164,6 +161,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -222,11 +220,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           </View>
         </View>
         <TextInput
-          accessibilityRole="search"
           keyboardAppearance="light"
           placeholder="Search"
           placeholderTextColor="rgba(29, 27, 32, 1)"
           returnKeyType="search"
+          role="searchbox"
           selectionColor="rgba(103, 80, 164, 1)"
           style={
             [
@@ -314,9 +312,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               testID="search-bar-clear-icon-container"
             >
               <View
-                accessibilityComponentType="button"
                 accessibilityLabel="clear"
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -326,7 +322,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "selected": undefined,
                   }
                 }
-                accessibilityTraits="button"
                 accessibilityValue={
                   {
                     "max": undefined,
@@ -356,6 +351,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {
@@ -505,9 +501,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="Back"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -517,7 +511,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -547,6 +540,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -669,10 +663,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       testID="appbar-content"
     >
       <Text
-        accessibilityRole="header"
-        accessibilityTraits="header"
         accessible={true}
         numberOfLines={1}
+        role="heading"
         style={
           [
             {
@@ -752,8 +745,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -763,7 +754,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -793,6 +783,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {

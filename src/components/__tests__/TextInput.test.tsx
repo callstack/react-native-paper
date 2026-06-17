@@ -248,7 +248,7 @@ it('uses polite aria-live on error supporting text', () => {
   );
 
   expect(getByText('Invalid').props['aria-live']).toBe('polite');
-  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+  expect(getByTestId('tf-input').props['aria-invalid']).toBe(true);
 });
 
 it('marks the input invalid when error is true without supporting text', () => {
@@ -262,7 +262,7 @@ it('marks the input invalid when error is true without supporting text', () => {
     />
   );
 
-  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+  expect(getByTestId('tf-input').props['aria-invalid']).toBe(true);
   expect(getByTestId('tf-input').props.accessibilityHint).toBeUndefined();
 });
 
@@ -322,7 +322,7 @@ it('marks the input as disabled in accessibilityState when disabled is true', ()
     />
   );
 
-  expect(getByTestId('tf-input').props.accessibilityState?.disabled).toBe(true);
+  expect(getByTestId('tf-input').props['aria-disabled']).toBe(true);
 });
 
 it('renders the input via render with merged props', () => {

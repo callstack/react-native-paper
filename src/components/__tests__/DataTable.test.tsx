@@ -131,7 +131,7 @@ describe('DataTable.Pagination', () => {
   });
 
   it('renders data table pagination with options select', () => {
-    const { getByLabelText, toJSON } = render(
+    const { getByTestId, toJSON } = render(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
@@ -145,8 +145,8 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(getByLabelText('Options Select')).toBeTruthy();
-    expect(getByLabelText('selectPageDropdownLabel')).toBeTruthy();
+    expect(getByTestId('options-select')).toBeTruthy();
+    expect(getByTestId('select-page-dropdown-label')).toBeTruthy();
 
     expect(toJSON()).toMatchSnapshot();
   });

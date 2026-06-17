@@ -61,13 +61,13 @@ it('uses label as default accessibilityLabel', () => {
   );
 });
 
-it('respects explicit accessibilityLabel', () => {
+it('respects explicit aria-label', () => {
   const { getByTestId } = render(
     <FAB.Extended
       icon="plus"
       label="New message"
       expanded
-      accessibilityLabel="Create new message"
+      aria-label="Create new message"
       testID="extended-fab"
     />
   );

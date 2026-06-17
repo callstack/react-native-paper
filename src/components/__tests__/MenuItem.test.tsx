@@ -50,13 +50,9 @@ describe('Menu Item', () => {
     );
   });
 
-  it('accepts different values for accessibilityState', () => {
+  it('accepts aria-checked prop', () => {
     const { getByTestId } = render(
-      <Menu.Item
-        accessibilityState={{ checked: true }}
-        title="Option 1"
-        testID="touchable"
-      />
+      <Menu.Item aria-checked={true} title="Option 1" testID="touchable" />
     );
 
     expect(getByTestId('touchable').props.accessibilityState).toMatchObject({

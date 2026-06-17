@@ -56,10 +56,8 @@ it('renders FAB with containerColor and contentColor overrides', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with accessibilityLabel', () => {
-  const tree = render(
-    <FAB icon="plus" accessibilityLabel="Add item" />
-  ).toJSON();
+it('renders FAB with aria-label', () => {
+  const tree = render(<FAB icon="plus" aria-label="Add item" />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 

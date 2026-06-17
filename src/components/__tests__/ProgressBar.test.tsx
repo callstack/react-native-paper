@@ -22,12 +22,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const a11yRole = 'progressbar';
 const triggerLayout = async (
   tree: ReturnType<typeof render>
 ): Promise<void> => {
   await act(async () => {
-    tree.getByRole(a11yRole).props.onLayout(layoutEvent);
+    tree.getByTestId('progress-bar').props.onLayout(layoutEvent);
   });
 };
 
@@ -49,7 +48,7 @@ it('renders progress bar with animated value', async () => {
 
   tree.update(<AnimatedProgressBar animatedValue={0.4} />);
 
-  expect(tree.getByRole(a11yRole)).toBeTruthy();
+  expect(tree.getByTestId('progress-bar')).toBeTruthy();
 });
 
 it('renders progress bar with specific progress', async () => {
@@ -84,7 +83,7 @@ it('renders progress bar with full height on web', () => {
   Platform.OS = 'web';
   const tree = render(<ProgressBar progress={0.2} />);
 
-  expect(tree.getByRole(a11yRole)).toHaveStyle({
+  expect(tree.getByTestId('progress-bar')).toHaveStyle({
     width: '100%',
     height: '100%',
   });

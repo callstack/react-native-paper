@@ -3,7 +3,6 @@
 exports[`renders Checkbox with custom testID 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -34,6 +33,7 @@ exports[`renders Checkbox with custom testID 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -189,7 +189,6 @@ exports[`renders Checkbox with custom testID 1`] = `
 exports[`renders checked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -220,6 +219,7 @@ exports[`renders checked Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -374,7 +374,6 @@ exports[`renders checked Checkbox with color 1`] = `
 exports[`renders checked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -405,6 +404,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -559,7 +559,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
 exports[`renders indeterminate Checkbox 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -590,6 +589,7 @@ exports[`renders indeterminate Checkbox 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -731,7 +731,6 @@ exports[`renders indeterminate Checkbox 1`] = `
 exports[`renders indeterminate Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -762,6 +761,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -903,7 +903,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -934,6 +933,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
@@ -1088,7 +1088,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -1119,6 +1118,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {

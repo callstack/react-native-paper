@@ -40,28 +40,33 @@ describe('Switch render', () => {
 describe('Switch interaction', () => {
   it('toggles to true when off and pressed', () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
-      <Switch value={false} onValueChange={onValueChange} />
+    const { getByTestId } = render(
+      <Switch value={false} onValueChange={onValueChange} testID="switch" />
     );
-    fireEvent.press(getByRole('switch'));
+    fireEvent.press(getByTestId('switch'));
     expect(onValueChange).toHaveBeenCalledWith(true);
   });
 
   it('toggles to false when on and pressed', () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
-      <Switch value onValueChange={onValueChange} />
+    const { getByTestId } = render(
+      <Switch value onValueChange={onValueChange} testID="switch" />
     );
-    fireEvent.press(getByRole('switch'));
+    fireEvent.press(getByTestId('switch'));
     expect(onValueChange).toHaveBeenCalledWith(false);
   });
 
   it('does not fire onValueChange when disabled', () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
-      <Switch value={false} disabled onValueChange={onValueChange} />
+    const { getByTestId } = render(
+      <Switch
+        value={false}
+        disabled
+        onValueChange={onValueChange}
+        testID="switch"
+      />
     );
-    fireEvent.press(getByRole('switch'));
+    fireEvent.press(getByTestId('switch'));
     expect(onValueChange).not.toHaveBeenCalled();
   });
 });

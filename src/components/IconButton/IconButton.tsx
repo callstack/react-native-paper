@@ -59,7 +59,7 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width or to set a custom padding`.
@@ -112,7 +112,7 @@ const IconButton = ({
   iconColor: customIconColor,
   containerColor: customContainerColor,
   size = 24,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   disabled,
   onPress,
   selected = false,
@@ -188,13 +188,10 @@ const IconButton = ({
         borderless
         centered
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={ariaLabel}
         style={[styles.touchable, contentStyle]}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
+        role="button"
+        aria-disabled={disabled}
         disabled={disabled}
         hitSlop={
           TouchableRipple.supported

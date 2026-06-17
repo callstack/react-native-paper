@@ -44,7 +44,7 @@ export type Props = {
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Custom color for unchecked checkbox.
    */
@@ -129,7 +129,7 @@ const CheckboxItem = ({
   theme: themeOverrides,
   testID,
   position = 'trailing',
-  accessibilityLabel = label,
+  'aria-label': ariaLabel = label,
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
@@ -154,12 +154,10 @@ const CheckboxItem = ({
 
   return (
     <TouchableRipple
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="checkbox"
-      accessibilityState={{
-        checked: status === 'indeterminate' ? 'mixed' : status === 'checked',
-        disabled,
-      }}
+      aria-label={ariaLabel}
+      role="checkbox"
+      aria-checked={status === 'indeterminate' ? 'mixed' : status === 'checked'}
+      aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
       testID={testID}

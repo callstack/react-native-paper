@@ -34,7 +34,10 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the tab. This is read by the screen reader when the user focuses the tab.
+   */
+  'aria-label'?: string;
   testID?: string;
   lazy?: boolean;
 };
@@ -305,8 +308,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
+  getAccessibilityLabel = ({ route }: { route: Route }) => route['aria-label'],
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -507,7 +509,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               maxWidth: maxTabBarWidth,
             },
           ]}
-          accessibilityRole={'tablist'}
+          role={'tablist'}
           testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
@@ -585,9 +587,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
-              accessibilityLabel: getAccessibilityLabel({ route }),
-              accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
-              accessibilityState: { selected: focused },
+              'aria-label': getAccessibilityLabel({ route }),
+              role: Platform.OS === 'ios' ? 'button' : 'tab',
+              'aria-selected': focused,
               style: [styles.item, styles.v3Item],
               children: (
                 <View

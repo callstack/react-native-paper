@@ -52,7 +52,7 @@ export type Props = {
   /**
    * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -102,7 +102,7 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   checked,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   disabled,
   style,
   labelStyle,
@@ -195,9 +195,10 @@ const SegmentedButtonItem = ({
       <TouchableRipple
         borderless
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityState={{ disabled, checked }}
-        accessibilityRole="button"
+        aria-label={ariaLabel}
+        aria-disabled={disabled}
+        aria-checked={checked}
+        role="button"
         disabled={disabled}
         testID={testID}
         style={rippleStyle}
