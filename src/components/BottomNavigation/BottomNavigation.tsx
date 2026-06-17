@@ -612,6 +612,11 @@ BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
   );
 };
 
+/**
+ * @deprecated Use the top-level `NavigationBar` export instead.
+ * `BottomNavigation.Bar` is the M3 "original" navigation bar, superseded by the
+ * flexible `NavigationBar`. Kept as an alias for backwards compatibility.
+ */
 // @component ./BottomNavigationBar.tsx
 BottomNavigation.Bar = BottomNavigationBar;
 
