@@ -14,6 +14,7 @@ import {
   getLabelColor,
 } from '../BottomNavigation/utils';
 import Icon from '../Icon';
+import NavigationBar from '../NavigationBar/NavigationBar';
 
 const styles = StyleSheet.create({
   backgroundColor: {
@@ -480,6 +481,43 @@ it('does not render legacy ripple overlay when shifting is disabled', () => {
   );
 
   expect(queryByTestId('bottom-navigation-bar-content-ripple')).toBeNull();
+});
+
+it('renders MD3 state layers on hover, focus and press', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Route: 0', focusedIcon: 'magnify', testID: 'tab-a' },
+      { key: 'b', title: 'Route: 1', focusedIcon: 'camera', testID: 'tab-b' },
+    ],
+  };
+
+  const { getByTestId } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  const layerOpacity = () =>
+    StyleSheet.flatten(getByTestId('tab-b-state-layer').props.style).opacity;
+
+  // Idle: no visible state layer.
+  expect(layerOpacity()).toBeUndefined();
+
+  // Hovered: 8% state layer.
+  fireEvent(getByTestId('tab-b'), 'hoverIn');
+  expect(layerOpacity()).toBe(0.08);
+  fireEvent(getByTestId('tab-b'), 'hoverOut');
+  expect(layerOpacity()).toBeUndefined();
+
+  // Focused: 10% state layer.
+  fireEvent(getByTestId('tab-b'), 'focus');
+  expect(layerOpacity()).toBe(0.1);
+  fireEvent(getByTestId('tab-b'), 'blur');
+
+  // Pressed: 10% state layer.
+  fireEvent(getByTestId('tab-b'), 'pressIn');
+  expect(layerOpacity()).toBe(0.1);
+  fireEvent(getByTestId('tab-b'), 'pressOut');
+  expect(layerOpacity()).toBeUndefined();
 });
 
 describe('getActiveTintColor', () => {
