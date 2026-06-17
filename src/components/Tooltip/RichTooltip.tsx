@@ -223,6 +223,8 @@ const RichTooltip = ({
         <Portal>
           <Pressable
             accessibilityRole="button"
+            accessibilityLabel="Close"
+            accessibilityHint="Dismisses the tooltip"
             onPress={hide}
             pointerEvents={visible ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
