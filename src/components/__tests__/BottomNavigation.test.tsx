@@ -483,6 +483,25 @@ it('does not render legacy ripple overlay when shifting is disabled', () => {
   expect(queryByTestId('bottom-navigation-bar-content-ripple')).toBeNull();
 });
 
+it('renders tab labels when labeled', () => {
+  const { getAllByText } = render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'a', title: 'Alpha', focusedIcon: 'magnify' },
+          { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+        ],
+      }}
+      onTabPress={jest.fn()}
+    />
+  );
+
+  // Each tab renders an active and inactive label layer, so both match.
+  expect(getAllByText('Alpha').length).toBeGreaterThan(0);
+  expect(getAllByText('Beta').length).toBeGreaterThan(0);
+});
+
 it('renders the horizontal (flexible) variant', () => {
   const tree = render(
     <NavigationBar
