@@ -130,7 +130,7 @@ export type Props<Route extends BaseRoute> = {
    * }
    * ```
    *
-   * `BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback.
+   * `NavigationBar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback.
    */
   navigationState: NavigationState<Route>;
   /**
@@ -595,16 +595,24 @@ const NavigationBarItem = <Route extends BaseRoute>({
 };
 
 /**
- * A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
+ * The Material Design 3 flexible navigation bar. It can easily be integrated
+ * with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
+ *
+ * The flexible navigation bar replaces the original (now deprecated) navigation
+ * bar exposed as `BottomNavigation.Bar`. Set the `variant` prop to `'horizontal'`
+ * to lay items out horizontally (icon beside label) in medium-width windows.
+ *
+ * Migrating from `BottomNavigation.Bar`: it is deprecated in favor of
+ * `NavigationBar`. The Material Design 2 `shifting` prop has been removed (it
+ * has no MD3 equivalent), tab interactions now show MD3 state layers instead of
+ * suppressing feedback, and the bar height follows the 64dp spec.
  *
  * ## Usage
  * ### without React Navigation
  * ```js
- * import React from 'react';
- * import { useState } from 'react';
+ * import * as React from 'react';
  * import { View } from 'react-native';
- * import { BottomNavigation, Text, Provider } from 'react-native-paper';
- * import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
+ * import { NavigationBar, Text, Provider } from 'react-native-paper';
  *
  * function HomeScreen() {
  *   return (
@@ -623,13 +631,13 @@ const NavigationBarItem = <Route extends BaseRoute>({
  * }
  *
  * export default function MyComponent() {
- *   const [index, setIndex] = useState(0);
+ *   const [index, setIndex] = React.useState(0);
  *
  *   const routes = [
- *     { key: 'home', title: 'Home', icon: 'home' },
- *     { key: 'settings', title: 'Settings', icon: 'cog' },
+ *     { key: 'home', title: 'Home', focusedIcon: 'home' },
+ *     { key: 'settings', title: 'Settings', focusedIcon: 'cog' },
  *   ];
-
+ *
  *   const renderScene = ({ route }) => {
  *     switch (route.key) {
  *       case 'home':
@@ -644,7 +652,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
  *   return (
  *     <Provider>
  *       {renderScene({ route: routes[index] })}
- *       <BottomNavigation.Bar
+ *       <NavigationBar
  *         navigationState={{ index, routes }}
  *         onTabPress={({ route }) => {
  *           const newIndex = routes.findIndex((r) => r.key === route.key);
@@ -652,9 +660,6 @@ const NavigationBarItem = <Route extends BaseRoute>({
  *             setIndex(newIndex);
  *           }
  *         }}
- *         renderIcon={({ route, color }) => (
- *           <Icon name={route.icon} size={24} color={color} />
- *         )}
  *         getLabelText={({ route }) => route.title}
  *       />
  *     </Provider>
