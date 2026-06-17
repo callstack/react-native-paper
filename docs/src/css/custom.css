@@ -670,8 +670,9 @@ html:not(.dark) .paper-version-selector-menu {
 
 .paper-home-showcase {
   margin: 56px auto 0;
-  width: min(1180px, calc(100% - 48px));
-  padding: 0 0 56px;
+  box-sizing: border-box;
+  width: min(72rem, calc(100% - 16px));
+  padding: 0 40px 56px;
 }
 
 .paper-home-showcase__intro {
@@ -1171,8 +1172,8 @@ html:not(.dark) .paper-version-selector-menu {
 
 @media (max-width: 996px) {
   .paper-home-showcase {
-    width: min(100%, calc(100% - 32px));
-    padding-bottom: 40px;
+    width: min(100%, calc(100% - 16px));
+    padding: 0 16px 40px;
     margin-top: 44px;
   }
 
