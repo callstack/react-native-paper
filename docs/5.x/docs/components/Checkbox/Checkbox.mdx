@@ -1,0 +1,108 @@
+---
+title: Checkbox
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Checkboxes allow the selection of multiple options from a set.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"Android (enabled)":"screenshots/checkbox-enabled.android.png","Android (disabled)":"screenshots/checkbox-disabled.android.png","iOS (enabled)":"screenshots/checkbox-enabled.ios.png","iOS (disabled)":"screenshots/checkbox-disabled.ios.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Checkbox } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [checked, setChecked] = React.useState(false);
+
+  return (
+    <Checkbox
+      status={checked ? 'checked' : 'unchecked'}
+      onPress={() => {
+        setChecked(!checked);
+      }}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### status (required) 
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="status" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="disabled" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="onPress" version="5.x" />
+  
+<div>
+
+### uncheckedColor  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="uncheckedColor" version="5.x" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="color" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

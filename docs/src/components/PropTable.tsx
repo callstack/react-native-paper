@@ -37,11 +37,13 @@ const renderBadge = (annotation: string) => {
 export default function PropTable({
   componentLink,
   prop,
+  version = '5.x',
 }: {
   componentLink: string;
   prop: string;
+  version?: string;
 }) {
-  const doc = useDoc(componentLink);
+  const doc = useDoc(componentLink, version);
 
   if (!doc?.data?.props) {
     return null;

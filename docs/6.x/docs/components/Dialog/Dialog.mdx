@@ -1,0 +1,136 @@
+---
+title: Dialog
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
+To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal/Portal) component.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/dialog-1.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+
+  const hideDialog = () => setVisible(false);
+
+  return (
+    <PaperProvider>
+      <View>
+        <Button onPress={showDialog}>Show Dialog</Button>
+        <Portal>
+          <Dialog visible={visible} onDismiss={hideDialog}>
+            <Dialog.Title>Alert</Dialog.Title>
+            <Dialog.Content>
+              <Text variant="bodyMedium">This is simple dialog</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={hideDialog}>Done</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      </View>
+    </PaperProvider>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### dismissable  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="dismissable" version="6.x" />
+  
+<div>
+
+### dismissableBackButton  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="dismissableBackButton" version="6.x" />
+  
+<div>
+
+### onDismiss  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="onDismiss" version="6.x" />
+  
+<div>
+
+### visible  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="visible" version="6.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="children" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="style" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="theme" version="6.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Dialog/Dialog" prop="testID" version="6.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level3"}}} componentName="Dialog" />
+  
+
+<span />

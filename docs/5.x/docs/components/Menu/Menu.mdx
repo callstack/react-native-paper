@@ -1,0 +1,190 @@
+---
+title: Menu
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","without icons":"screenshots/menu-2.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
+  return (
+    <PaperProvider>
+      <View
+        style={{
+          paddingTop: 50,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={<Button onPress={openMenu}>Show menu</Button>}>
+          <Menu.Item onPress={() => {}} title="Item 1" />
+          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Divider />
+          <Menu.Item onPress={() => {}} title="Item 3" />
+        </Menu>
+      </View>
+    </PaperProvider>
+  );
+};
+
+export default MyComponent;
+```
+
+### Note
+When using `Menu` within a React Native's `Modal` component, you need to wrap all
+`Modal` contents within a `PaperProvider` in order for the menu to show. This
+wrapping is not necessary if you use Paper's `Modal` instead.
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### visible (required) 
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="visible" version="5.x" />
+  
+<div>
+
+### anchor (required) 
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="anchor" version="5.x" />
+  
+<div>
+
+### anchorPosition  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="anchorPosition" version="5.x" />
+  
+<div>
+
+### statusBarHeight  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="statusBarHeight" version="5.x" />
+  
+<div>
+
+### onDismiss  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="onDismiss" version="5.x" />
+  
+<div>
+
+### overlayAccessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="overlayAccessibilityLabel" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="children" version="5.x" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="contentStyle" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="style" version="5.x" />
+  
+<div>
+
+### elevation  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="elevation" version="5.x" />
+  
+<div>
+
+### mode  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="mode" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="theme" version="5.x" />
+  
+<div>
+
+### keyboardShouldPersistTaps  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="keyboardShouldPersistTaps" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Menu/Menu" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Menu" />
+  
+
+<span />

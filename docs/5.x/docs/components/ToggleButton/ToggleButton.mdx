@@ -1,0 +1,162 @@
+---
+title: ToggleButton
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
+a group should share a common container.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/toggle-button.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { ToggleButton } from 'react-native-paper';
+
+const ToggleButtonExample = () => {
+  const [status, setStatus] = React.useState('checked');
+
+  const onButtonToggle = value => {
+    setStatus(status === 'checked' ? 'unchecked' : 'checked');
+  };
+
+  return (
+    <ToggleButton
+      icon="bluetooth"
+      value="bluetooth"
+      status={status}
+      onPress={onButtonToggle}
+    />
+  );
+};
+
+export default ToggleButtonExample;
+
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### icon (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="icon" version="5.x" />
+  
+<div>
+
+### size  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="size" version="5.x" />
+  
+<div>
+
+### iconColor  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="iconColor" version="5.x" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="rippleColor" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="disabled" version="5.x" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="accessibilityLabel" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="onPress" version="5.x" />
+  
+<div>
+
+### value  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="value" version="5.x" />
+  
+<div>
+
+### status  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="status" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="theme" version="5.x" />
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="ref" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

@@ -1,0 +1,244 @@
+---
+title: FAB.Group
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to display a stack of FABs with related actions in a speed dial.
+To render the group above other components, you'll need to wrap it with the [`Portal`](../Portal/Portal) component.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/fab-group.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { FAB, Portal, PaperProvider } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }) => setState({ open });
+
+  const { open } = state;
+
+  return (
+    <PaperProvider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          visible
+          icon={open ? 'calendar-today' : 'plus'}
+          actions={[
+            { icon: 'plus', onPress: () => console.log('Pressed add') },
+            {
+              icon: 'star',
+              label: 'Star',
+              onPress: () => console.log('Pressed star'),
+            },
+            {
+              icon: 'email',
+              label: 'Email',
+              onPress: () => console.log('Pressed email'),
+            },
+            {
+              icon: 'bell',
+              label: 'Remind',
+              onPress: () => console.log('Pressed notifications'),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </PaperProvider>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### actions (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="actions" version="5.x" />
+  
+<div>
+
+### icon (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="icon" version="5.x" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="accessibilityLabel" version="5.x" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="color" version="5.x" />
+  
+<div>
+
+### backdropColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="backdropColor" version="5.x" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="rippleColor" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onPress" version="5.x" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onLongPress" version="5.x" />
+  
+<div>
+
+### toggleStackOnLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="toggleStackOnLongPress" version="5.x" />
+  
+<div>
+
+### delayLongPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="delayLongPress" version="5.x" />
+  
+<div>
+
+### enableLongPressWhenStackOpened  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="enableLongPressWhenStackOpened" version="5.x" />
+  
+<div>
+
+### open (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="open" version="5.x" />
+  
+<div>
+
+### onStateChange (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="onStateChange" version="5.x" />
+  
+<div>
+
+### visible (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="visible" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="style" version="5.x" />
+  
+<div>
+
+### fabStyle  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="fabStyle" version="5.x" />
+  
+<div>
+
+### variant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="variant" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="theme" version="5.x" />
+  
+<div>
+
+### label  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="label" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="FAB/FABGroup" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

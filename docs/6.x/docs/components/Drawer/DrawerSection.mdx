@@ -1,0 +1,110 @@
+---
+title: Drawer.Section
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to group content inside a navigation drawer.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/drawer-section.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Drawer } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [active, setActive] = React.useState('');
+
+  return (
+    <Drawer.Section title="Some title">
+      <Drawer.Item
+        label="First Item"
+        active={active === 'first'}
+        onPress={() => setActive('first')}
+      />
+      <Drawer.Item
+        label="Second Item"
+        active={active === 'second'}
+        onPress={() => setActive('second')}
+      />
+    </Drawer.Section>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### title  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="title" version="6.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="children" version="6.x" />
+  
+<div>
+
+### showDivider  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="showDivider" version="6.x" />
+  
+<div>
+
+### titleMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="titleMaxFontSizeMultiplier" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="style" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerSection" prop="theme" version="6.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"titleColor":"theme.colors.onSurfaceVariant"}}} componentName="Drawer.Section" />
+  
+
+<span />

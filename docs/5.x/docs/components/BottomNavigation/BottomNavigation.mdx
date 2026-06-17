@@ -1,0 +1,316 @@
+---
+title: BottomNavigation
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
+It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
+
+By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/bottom-navigation.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { BottomNavigation, Text } from 'react-native-paper';
+
+const MusicRoute = () => <Text>Music</Text>;
+
+const AlbumsRoute = () => <Text>Albums</Text>;
+
+const RecentsRoute = () => <Text>Recents</Text>;
+
+const NotificationsRoute = () => <Text>Notifications</Text>;
+
+const MyComponent = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},
+    { key: 'albums', title: 'Albums', focusedIcon: 'album' },
+    { key: 'recents', title: 'Recents', focusedIcon: 'history' },
+    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    music: MusicRoute,
+    albums: AlbumsRoute,
+    recents: RecentsRoute,
+    notifications: NotificationsRoute,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### shifting  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="shifting" version="5.x" />
+  
+<div>
+
+### labeled  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="labeled" version="5.x" />
+  
+<div>
+
+### compact  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="compact" version="5.x" />
+  
+<div>
+
+### navigationState (required) 
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="navigationState" version="5.x" />
+  
+<div>
+
+### onIndexChange (required) 
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onIndexChange" version="5.x" />
+  
+<div>
+
+### renderScene (required) 
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderScene" version="5.x" />
+  
+<div>
+
+### renderIcon  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderIcon" version="5.x" />
+  
+<div>
+
+### renderLabel  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderLabel" version="5.x" />
+  
+<div>
+
+### renderTouchable  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderTouchable" version="5.x" />
+  
+<div>
+
+### getAccessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getAccessibilityLabel" version="5.x" />
+  
+<div>
+
+### getBadge  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getBadge" version="5.x" />
+  
+<div>
+
+### getColor  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getColor" version="5.x" />
+  
+<div>
+
+### getLabelText  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getLabelText" version="5.x" />
+  
+<div>
+
+### getLazy  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getLazy" version="5.x" />
+  
+<div>
+
+### getTestID  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getTestID" version="5.x" />
+  
+<div>
+
+### onTabPress  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onTabPress" version="5.x" />
+  
+<div>
+
+### onTabLongPress  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onTabLongPress" version="5.x" />
+  
+<div>
+
+### activeColor  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="activeColor" version="5.x" />
+  
+<div>
+
+### inactiveColor  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="inactiveColor" version="5.x" />
+  
+<div>
+
+### sceneAnimationEnabled  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationEnabled" version="5.x" />
+  
+<div>
+
+### sceneAnimationType  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationType" version="5.x" />
+  
+<div>
+
+### sceneAnimationEasing  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationEasing" version="5.x" />
+  
+<div>
+
+### keyboardHidesNavigationBar  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="keyboardHidesNavigationBar" version="5.x" />
+  
+<div>
+
+### safeAreaInsets  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="safeAreaInsets" version="5.x" />
+  
+<div>
+
+### barStyle  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="barStyle" version="5.x" />
+  
+<div>
+
+### labelMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="labelMaxFontSizeMultiplier" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="style" version="5.x" />
+  
+<div>
+
+### activeIndicatorStyle  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="activeIndicatorStyle" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

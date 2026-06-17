@@ -1,6 +1,4 @@
-const config = require('../docusaurus.config');
-
-const { baseUrl, customFields } = config;
+const { baseUrl, customFields } = require('../component-docs.config');
 
 function renderBadge(annotation) {
   const [annotType, ...annotLabel] = annotation.split(' ');
@@ -86,7 +84,7 @@ function generateScreenshots(componentName, screenshotData) {
   `;
 }
 
-function generatePropsTable(data, link, extendsAttributes) {
+function generatePropsTable(data, link, extendsAttributes, version) {
   const ANNOTATION_OPTIONAL = '@optional';
   const ANNOTATION_INTERNAL = '@internal';
 
@@ -121,7 +119,7 @@ function generatePropsTable(data, link, extendsAttributes) {
 
 </div>
   
-  <PropTable componentLink="${link}" prop="${prop}" />
+  <PropTable componentLink="${link}" prop="${prop}" version="${version}" />
   `;
     })
     .join('');
@@ -182,13 +180,16 @@ function generateExtendedExamples(usage, extendedExamplesData) {
   `;
 }
 
-function generatePageMDX(doc, link) {
+function generatePageMDX(doc, link, options = {}) {
   const summaryRegex = /([\s\S]*?)## Usage/;
+  const version = options.version ?? '6.x';
 
   const description = doc.description
     .replace(/<\/br>/g, '')
     .replace(/style="[a-zA-Z0-9:;.\s()\-,]*"/gi, '')
     .replace(/src="screenshots/g, `src="${baseUrl}screenshots`)
+    .replace(/\(\.\/Portal\)/g, '(./Portal/Portal)')
+    .replace(/\(\.\.\/Portal\)/g, '(../Portal/Portal)')
     .replace(/@extends.+$/, '');
 
   const summary = summaryRegex.exec(description)
@@ -221,7 +222,7 @@ ${generateScreenshots(doc.title, screenshotData)}
 
 ${generateExtendedExamples(usage, extendedExamplesData)}
 
-${generatePropsTable(doc.data.props, link, extendsAttributes)}
+${generatePropsTable(doc.data.props, link, extendsAttributes, version)}
 
 ${generateMoreExamples(doc.title)}
 

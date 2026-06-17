@@ -1,0 +1,174 @@
+---
+title: Appbar
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to display action items in a bar. It can be placed at the top or bottom.
+The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
+The bottom bar usually provides access to a drawer and up to four actions.
+
+By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/appbar.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+### Top bar
+```js
+import * as React from 'react';
+import { Appbar } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Appbar.Header>
+    <Appbar.BackAction onPress={() => {}} />
+    <Appbar.Content title="Title" />
+    <Appbar.Action icon="calendar" onPress={() => {}} />
+    <Appbar.Action icon="magnify" onPress={() => {}} />
+  </Appbar.Header>
+);
+
+export default MyComponent;
+```
+
+### Bottom bar
+```js
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { Appbar, FAB, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const BOTTOM_APPBAR_HEIGHT = 80;
+const MEDIUM_FAB_HEIGHT = 56;
+
+const MyComponent = () => {
+  const { bottom } = useSafeAreaInsets();
+  const theme = useTheme();
+
+  return (
+    <Appbar
+      style={[
+        styles.bottom,
+        {
+          height: BOTTOM_APPBAR_HEIGHT + bottom,
+          backgroundColor: theme.colors.surfaceContainer,
+        },
+      ]}
+      safeAreaInsets={{ bottom }}
+    >
+      <Appbar.Action icon="archive" onPress={() => {}} />
+      <Appbar.Action icon="email" onPress={() => {}} />
+      <Appbar.Action icon="label" onPress={() => {}} />
+      <Appbar.Action icon="delete" onPress={() => {}} />
+      <FAB
+        mode="flat"
+        size="medium"
+        icon="plus"
+        onPress={() => {}}
+        style={[
+          styles.fab,
+          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+        ]}
+      />
+    </Appbar>
+  );
+};
+
+const styles = StyleSheet.create({
+  bottom: {
+    backgroundColor: 'aquamarine',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+  },
+});
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### dark  
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="dark" version="6.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="children" version="6.x" />
+  
+<div>
+
+### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="mode" version="6.x" />
+  
+<div>
+
+### elevated  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="elevated" version="6.x" />
+  
+<div>
+
+### safeAreaInsets  
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="safeAreaInsets" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="theme" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Appbar/Appbar" prop="style" version="6.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"default":{"backgroundColor":"theme.colors.surface"},"elevated":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Appbar" />
+  
+
+<span />

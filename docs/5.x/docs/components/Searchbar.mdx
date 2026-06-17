@@ -1,0 +1,256 @@
+---
+title: Searchbar
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Searchbar is a simple input box where users can type search queries.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"bar":"screenshots/searchbar.png","view":"screenshots/searchbar-view.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Searchbar } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  return (
+    <Searchbar
+      placeholder="Search"
+      onChangeText={setSearchQuery}
+      value={searchQuery}
+    />
+  );
+};
+
+export default MyComponent;
+
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### placeholder  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="placeholder" version="5.x" />
+  
+<div>
+
+### value (required) 
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="value" version="5.x" />
+  
+<div>
+
+### onChangeText  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="onChangeText" version="5.x" />
+  
+<div>
+
+### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="mode" version="5.x" />
+  
+<div>
+
+### icon  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="icon" version="5.x" />
+  
+<div>
+
+### iconColor  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="iconColor" version="5.x" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="rippleColor" version="5.x" />
+  
+<div>
+
+### onIconPress  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="onIconPress" version="5.x" />
+  
+<div>
+
+### onClearIconPress  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="onClearIconPress" version="5.x" />
+  
+<div>
+
+### searchAccessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="searchAccessibilityLabel" version="5.x" />
+  
+<div>
+
+### clearIcon  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="clearIcon" version="5.x" />
+  
+<div>
+
+### clearAccessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="clearAccessibilityLabel" version="5.x" />
+  
+<div>
+
+### traileringIcon  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="traileringIcon" version="5.x" />
+  
+<div>
+
+### traileringIconColor  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="traileringIconColor" version="5.x" />
+  
+<div>
+
+### traileringRippleColor  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="traileringRippleColor" version="5.x" />
+  
+<div>
+
+### onTraileringIconPress  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="onTraileringIconPress" version="5.x" />
+  
+<div>
+
+### traileringIconAccessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="traileringIconAccessibilityLabel" version="5.x" />
+  
+<div>
+
+### right  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="right" version="5.x" />
+  
+<div>
+
+### showDivider  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="showDivider" version="5.x" />
+  
+<div>
+
+### elevation  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="elevation" version="5.x" />
+  
+<div>
+
+### inputStyle  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="inputStyle" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="style" version="5.x" />
+  
+<div>
+
+### loading  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="loading" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="testID" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Searchbar" prop="theme" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level3","placeholderTextColor":"theme.colors.onSurface","textColor":"theme.colors.onSurfaceVariant","selectionColor":"theme.colors.primary","iconColor":"theme.colors.onSurfaceVariant","trailingIconColor":"theme.colors.onSurfaceVariant","dividerColor":"theme.colors.outline"}}} componentName="Searchbar" />
+  
+
+<span />

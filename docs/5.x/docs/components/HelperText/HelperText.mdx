@@ -1,0 +1,127 @@
+---
+title: HelperText
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Helper text is used in conjuction with input elements to provide additional hints for the user.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/helper-text.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { HelperText, TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+   const onChangeText = text => setText(text);
+
+  const hasErrors = () => {
+    return !text.includes('@');
+  };
+
+ return (
+    <View>
+      <TextInput label="Email" value={text} onChangeText={onChangeText} />
+      <HelperText type="error" visible={hasErrors()}>
+        Email address is invalid!
+      </HelperText>
+    </View>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### type  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="type" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="children" version="5.x" />
+  
+<div>
+
+### visible  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="visible" version="5.x" />
+  
+<div>
+
+### padding  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="padding" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="disabled" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="HelperText/HelperText" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"disabled":{"textColor":"theme.colors.onSurfaceDisabled"},"default":{"textColor":"theme.colors.onSurfaceVariant"},"error":{"textColor":"theme.colors.error"}}} componentName="HelperText" />
+  
+
+<span />

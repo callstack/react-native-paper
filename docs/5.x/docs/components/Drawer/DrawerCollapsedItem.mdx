@@ -1,0 +1,149 @@
+---
+title: Drawer.CollapsedItem
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Note: Available in v5.x with theme version 3
+
+Collapsed component used to show an action item with an icon and optionally label in a navigation drawer.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/drawer-collapsed.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Drawer } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Drawer.CollapsedItem
+    focusedIcon="inbox"
+    unfocusedIcon="inbox-outline"
+    label="Inbox"
+  />
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### label  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="label" version="5.x" />
+  
+<div>
+
+### badge  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="badge" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="disabled" version="5.x" />
+  
+<div>
+
+### focusedIcon  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'icon' to 'focusedIcon' in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="focusedIcon" version="5.x" />
+  
+<div>
+
+### unfocusedIcon  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'icon' to 'focusedIcon' in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="unfocusedIcon" version="5.x" />
+  
+<div>
+
+### active  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="active" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="onPress" version="5.x" />
+  
+<div>
+
+### labelMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="labelMaxFontSizeMultiplier" version="5.x" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="accessibilityLabel" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Drawer/DrawerCollapsedItem" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"active":{"backgroundColor":"theme.colors.secondaryContainer","textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSecondaryContainer"},"inactive":{"textColor":"theme.colors.onSurfaceVariant","iconColor":"theme.colors.onSurfaceVariant"}}} componentName="Drawer.CollapsedItem" />
+  
+
+<span />

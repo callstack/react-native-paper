@@ -1,109 +1,57 @@
-import { StyleSheet, View } from 'react-native';
+import { useColorMode } from '../rspress-compat/theme-common';
 
-//@ts-ignore
-import BrowserOnly from '@docusaurus/BrowserOnly';
-//@ts-ignore
-import Link from '@docusaurus/Link';
-//@ts-ignore
-import { useColorMode } from '@docusaurus/theme-common';
-import {
-  Button,
-  DarkTheme,
-  LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingBottom: 16,
-  },
-  button: {
-    marginRight: 16,
-  },
-});
-
-const noTextDecoration = {
+const baseButtonStyle = {
+  alignItems: 'center',
+  borderRadius: '999px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  display: 'inline-flex',
+  fontSize: '0.95rem',
+  fontWeight: 600,
+  justifyContent: 'center',
+  minHeight: '2.75rem',
+  padding: '0 1.25rem',
   textDecoration: 'none',
+  transition: 'transform 120ms ease, background-color 120ms ease',
 };
 
-// Needed for ripple effect when pressing `Button`, however navigation is handled by `Link`
-const noop = () => {};
-
-const GetStartedButton = () => {
-  return (
-    <View style={styles.container}>
-      <Link to="/docs/guides/getting-started" style={noTextDecoration}>
-        <Button mode="contained" style={styles.button} onPress={noop}>
-          Get started
-        </Button>
-      </Link>
-      <Button
-        mode="outlined"
-        onPress={() =>
-          window.open(
-            'https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5'
-          )
-        }
-      >
-        Try on Snack
-      </Button>
-    </View>
-  );
-};
-
-const Shimmer = () => {
-  /* Docusaurus won't call StyleSheet.create() server-side */
-  /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals */
+export default function GetStartedButtons() {
+  const isDarkTheme = useColorMode().colorMode === 'dark';
 
   return (
-    <View
+    <div
       style={{
         display: 'flex',
-        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: '1rem',
         justifyContent: 'center',
-        paddingBottom: 18,
+        paddingBottom: '1rem',
       }}
     >
-      <View
+      <a
+        href="/docs/guides/getting-started"
         style={{
-          width: 121,
-          marginRight: 16,
-          borderWidth: 1,
-          borderColor: 'rgba(125, 82, 96, 0.4)',
-          borderStyle: 'solid',
-          borderRadius: 40,
-          height: 40,
+          ...baseButtonStyle,
+          backgroundColor: isDarkTheme ? '#d0bcff' : '#6750a4',
+          borderColor: isDarkTheme ? '#d0bcff' : '#6750a4',
+          color: isDarkTheme ? '#1d192b' : '#ffffff',
         }}
-      />
-      <View
+      >
+        Get started
+      </a>
+      <a
+        href="https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5"
+        target="_blank"
+        rel="noreferrer"
         style={{
-          width: 132,
-          borderWidth: 1,
-          borderColor: 'rgba(125, 82, 96, 0.4)',
-          borderStyle: 'solid',
-          borderRadius: 40,
-          height: 40,
+          ...baseButtonStyle,
+          backgroundColor: 'transparent',
+          borderColor: isDarkTheme ? '#938f99' : '#79747e',
+          color: isDarkTheme ? '#e6e1e5' : '#49454f',
         }}
-      />
-    </View>
-  );
-};
-
-const ThemedGetStarted = () => {
-  const isDarkTheme = useColorMode().colorMode === 'dark';
-  return (
-    <PaperProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
-      <GetStartedButton />
-    </PaperProvider>
-  );
-};
-
-export default function ClientSideGetStarted() {
-  return (
-    <BrowserOnly fallback={<Shimmer />}>
-      {() => <ThemedGetStarted />}
-    </BrowserOnly>
+      >
+        Try on Snack
+      </a>
+    </div>
   );
 }

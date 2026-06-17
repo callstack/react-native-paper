@@ -1,0 +1,107 @@
+---
+title: TextInput.Icon
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to render a leading / trailing icon in the TextInput
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/textinput-flat.icon.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+  return (
+    <TextInput
+      label="Password"
+      secureTextEntry
+      right={<TextInput.Icon icon="eye" />}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### icon (required) <span class="badge badge-renamed "><span class="badge-text">Renamed from 'name' to 'icon` in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="icon" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="onPress" version="5.x" />
+  
+<div>
+
+### forceTextInputFocus  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="forceTextInputFocus" version="5.x" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="color" version="5.x" />
+  
+<div>
+
+### rippleColor  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="rippleColor" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="TextInput/Adornment/TextInputIcon" prop="theme" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

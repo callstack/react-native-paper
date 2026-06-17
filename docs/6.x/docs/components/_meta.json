@@ -1,0 +1,173 @@
+[
+  "ActivityIndicator",
+  {
+    "type": "dir",
+    "name": "Appbar",
+    "label": "Appbar",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Avatar",
+    "label": "Avatar",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Badge",
+  "Banner",
+  {
+    "type": "dir",
+    "name": "BottomNavigation",
+    "label": "BottomNavigation",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Button",
+    "label": "Button",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Card",
+    "label": "Card",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Checkbox",
+    "label": "Checkbox",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Chip",
+    "label": "Chip",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "DataTable",
+    "label": "DataTable",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Dialog",
+    "label": "Dialog",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Divider",
+  {
+    "type": "dir",
+    "name": "Drawer",
+    "label": "Drawer",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "FAB",
+    "label": "FAB",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "IconButton",
+    "label": "IconButton",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Icon",
+  {
+    "type": "dir",
+    "name": "List",
+    "label": "List",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Menu",
+    "label": "Menu",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Modal",
+  {
+    "type": "dir",
+    "name": "Portal",
+    "label": "Portal",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "ProgressBar",
+  {
+    "type": "dir",
+    "name": "RadioButton",
+    "label": "RadioButton",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Searchbar",
+  {
+    "type": "dir",
+    "name": "SegmentedButtons",
+    "label": "SegmentedButtons",
+    "collapsible": true,
+    "collapsed": false
+  },
+  "Snackbar",
+  "Surface",
+  {
+    "type": "dir",
+    "name": "Switch",
+    "label": "Switch",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "TextInput",
+    "label": "TextInput",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "ToggleButton",
+    "label": "ToggleButton",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Tooltip",
+    "label": "Tooltip",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "TouchableRipple",
+    "label": "TouchableRipple",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
+    "name": "Text",
+    "label": "Text",
+    "collapsible": true,
+    "collapsed": false
+  }
+]

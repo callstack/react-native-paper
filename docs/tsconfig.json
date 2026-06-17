@@ -1,8 +1,21 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "react-native-paper": ["./src"]
+      "@site/*": ["./*"],
+      "@theme/*": ["./src/rspress-compat/*"],
+      "@docusaurus/*": ["./src/rspress-compat/*"],
+      "react-native-paper": ["../src", "./src"]
     }
-  }
+  },
+  "include": [
+    "rspress.config.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "5.x/**/*.mdx",
+    "6.x/**/*.mdx",
+    "component-docs-plugin/**/*.ts",
+    "component-docs-plugin/**/*.tsx"
+  ]
 }

@@ -1,0 +1,83 @@
+---
+title: ToggleButton.Row
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Toggle button row renders a group of toggle buttons in a row.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/toggle-button-row.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { ToggleButton } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState('left');
+
+  return (
+    <ToggleButton.Row onValueChange={value => setValue(value)} value={value}>
+      <ToggleButton icon="format-align-left" value="left" />
+      <ToggleButton icon="format-align-right" value="right" />
+    </ToggleButton.Row>
+  );
+};
+
+export default MyComponent;
+
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### onValueChange (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="onValueChange" version="5.x" />
+  
+<div>
+
+### value (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="value" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="children" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="style" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

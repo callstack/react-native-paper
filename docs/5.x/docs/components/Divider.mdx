@@ -1,0 +1,93 @@
+---
+title: Divider
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A divider is a thin, lightweight separator that groups content in lists and page layouts.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/divider.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { Divider, Text } from 'react-native-paper';
+
+const MyComponent = () => (
+  <View>
+    <Text>Lemon</Text>
+    <Divider />
+    <Text>Mango</Text>
+    <Divider />
+  </View>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### leftInset  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'inset' to 'leftInset` in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="Divider" prop="leftInset" version="5.x" />
+  
+<div>
+
+### horizontalInset  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Divider" prop="horizontalInset" version="5.x" />
+  
+<div>
+
+### bold  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Divider" prop="bold" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Divider" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Divider" prop="theme" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"dividerColor":"theme.colors.outlineVariant"}}} componentName="Divider" />
+  
+
+<span />

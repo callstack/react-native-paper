@@ -1,0 +1,190 @@
+---
+title: Menu.Item
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to show a single list item inside a Menu.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/menu-item.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { Menu } from 'react-native-paper';
+
+const MyComponent = () => (
+  <View style={{ flex: 1 }}>
+    <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+    <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+    <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
+    <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
+    <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" />
+  </View>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### title (required) 
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="title" version="6.x" />
+  
+<div>
+
+### leadingIcon  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'icon' to 'leadingIcon' in v5.x</span></span>
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="leadingIcon" version="6.x" />
+  
+<div>
+
+### trailingIcon  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="trailingIcon" version="6.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="disabled" version="6.x" />
+  
+<div>
+
+### dense  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="dense" version="6.x" />
+  
+<div>
+
+### background  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="background" version="6.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="onPress" version="6.x" />
+  
+<div>
+
+### titleMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="titleMaxFontSizeMultiplier" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="style" version="6.x" />
+  
+<div>
+
+### containerStyle  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="containerStyle" version="6.x" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="contentStyle" version="6.x" />
+  
+<div>
+
+### titleStyle  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="titleStyle" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="theme" version="6.x" />
+  
+<div>
+
+### hitSlop  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="hitSlop" version="6.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="testID" version="6.x" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="accessibilityLabel" version="6.x" />
+  
+<div>
+
+### accessibilityState  
+
+</div>
+  
+  <PropTable componentLink="Menu/MenuItem" prop="accessibilityState" version="6.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"default":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant"},"disabled":{"textColor":"theme.colors.onSurfaceDisabled","iconColor":"theme.colors.onSurfaceDisabled"}}} componentName="Menu.Item" />
+  
+
+<span />

@@ -1,0 +1,123 @@
+---
+title: RadioButton
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Radio buttons allow the selection a single option from a set.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"Android (enabled)":"screenshots/radio-enabled.android.png","Android (disabled)":"screenshots/radio-disabled.android.png","iOS (enabled)":"screenshots/radio-enabled.ios.png","iOS (disabled)":"screenshots/radio-disabled.ios.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { RadioButton } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [checked, setChecked] = React.useState('first');
+
+  return (
+    <View>
+      <RadioButton
+        value="first"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')}
+      />
+      <RadioButton
+        value="second"
+        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('second')}
+      />
+    </View>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### value (required) 
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="value" version="5.x" />
+  
+<div>
+
+### status  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="status" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="disabled" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="onPress" version="5.x" />
+  
+<div>
+
+### uncheckedColor  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="uncheckedColor" version="5.x" />
+  
+<div>
+
+### color  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="color" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="RadioButton/RadioButton" prop="testID" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

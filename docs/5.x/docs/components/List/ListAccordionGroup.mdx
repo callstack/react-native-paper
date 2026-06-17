@@ -1,0 +1,85 @@
+---
+title: List.AccordionGroup
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+List.AccordionGroup allows to control a group of List Accordions. `id` prop for List.Accordion is required in order for group to work.
+List.AccordionGroup can be a controlled or uncontrolled component. The example shows the uncontrolled version.
+At most one Accordion can be expanded at a given time.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/list-accordion-group.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { List } from 'react-native-paper';
+
+const MyComponent = () => (
+  <List.AccordionGroup>
+    <List.Accordion title="Accordion 1" id="1">
+      <List.Item title="Item 1" />
+    </List.Accordion>
+    <List.Accordion title="Accordion 2" id="2">
+      <List.Item title="Item 2" />
+    </List.Accordion>
+    <View>
+      <Text>
+        List.Accordion can be wrapped because implementation uses React.Context.
+      </Text>
+      <List.Accordion title="Accordion 3" id="3">
+        <List.Item title="Item 3" />
+      </List.Accordion>
+    </View>
+  </List.AccordionGroup>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### onAccordionPress  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordionGroup" prop="onAccordionPress" version="5.x" />
+  
+<div>
+
+### expandedId  
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordionGroup" prop="expandedId" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="List/ListAccordionGroup" prop="children" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

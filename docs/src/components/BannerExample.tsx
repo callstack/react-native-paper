@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-//@ts-ignore
-import BrowserOnly from '@docusaurus/BrowserOnly';
-//@ts-ignore
-import { useColorMode } from '@docusaurus/theme-common';
+import BrowserOnly from '../rspress-compat/BrowserOnly';
+import { useColorMode } from '../rspress-compat/theme-common';
 import {
   Avatar,
   Button,
-  FAB,
   DarkTheme,
+  FAB,
   LightTheme,
   ProgressBar,
-  PaperProvider,
+  Provider,
   RadioButton,
   Switch,
   Text,
@@ -109,13 +107,13 @@ const BannerExample = () => {
           <TextInput
             label="Email"
             value={text}
-            onChangeText={(text) => setText(text)}
+            onChangeText={(value) => setText(value)}
           />
           <TextInput
             label="Email"
             variant="outlined"
             value={text}
-            onChangeText={(text) => setText(text)}
+            onChangeText={(value) => setText(value)}
           />
         </Stack>
 
@@ -142,9 +140,6 @@ const BannerExample = () => {
 };
 
 const Shimmer = () => {
-  /* Docusaurus won't call StyleSheet.create() server-side */
-  /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals */
-
   return (
     <View
       style={{
@@ -166,10 +161,11 @@ const Shimmer = () => {
 
 const ThemedBannerExample = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
+
   return (
-    <PaperProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
+    <Provider theme={isDarkTheme ? DarkTheme : LightTheme}>
       <BannerExample />
-    </PaperProvider>
+    </Provider>
   );
 };
 

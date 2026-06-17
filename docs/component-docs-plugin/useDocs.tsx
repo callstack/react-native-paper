@@ -1,11 +1,5 @@
-import { useActiveDocContext } from '@docusaurus/plugin-content-docs/client';
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-import { usePluginData } from '@docusaurus/useGlobalData';
-
 import componentDocs5x from '../src/data/componentDocs5x.json';
-
-const pluginName = 'component-docs-plugin';
+import componentDocs6x from '../src/data/componentDocs6x.json';
 
 export interface ComponentDocsPluginData {
   docs: { [key in string]: PageDoc };
@@ -42,17 +36,11 @@ export interface Prop {
 
 const versionedDocs: { [versionName: string]: ComponentDocsPluginData } = {
   '5.x': componentDocs5x,
+  '6.x': componentDocs6x,
 };
 
-function useDoc(withPath: string) {
-  const activeDocContext = useActiveDocContext(undefined);
-  const pluginData = usePluginData(pluginName) as ComponentDocsPluginData;
-  const versionName = activeDocContext.activeVersion?.name;
-  const versionedDoc = versionName
-    ? versionedDocs[versionName]?.docs?.[withPath]
-    : undefined;
-
-  return versionedDoc ?? pluginData?.docs?.[withPath];
+function useDoc(withPath: string, versionName = '5.x') {
+  return versionedDocs[versionName]?.docs?.[withPath];
 }
 
 export default useDoc;

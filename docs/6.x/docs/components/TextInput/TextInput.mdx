@@ -1,0 +1,177 @@
+---
+title: TextInput
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A text input lets users enter and edit text. It shows an optional floating label,
+supports `filled` and `outlined` variants, optional supporting text (including
+error state), and start/end accessories.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"filled":"screenshots/text-input-filled.png","outlined":"screenshots/text-input-outlined.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState('');
+
+  const searchAccessory = (accessoryProps) => (
+    <TextInput.Icon {...accessoryProps} icon="magnify" />
+  );
+
+  const clearAccessory = ({ style, disabled }) => (
+    <Pressable
+      style={style}
+      disabled={disabled}
+      onPress={() => setText('')}
+      role="button"
+      aria-label="Clear text"
+    >
+      <Icon source="close" size={24} />
+    </Pressable>
+  );
+
+  return (
+    <TextInput
+      label="Search"
+      value={text}
+      onChangeText={setText}
+      startAccessory={searchAccessory}
+      endAccessory={clearAccessory}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+
+
+  ## Props
+  ### TextInput props
+  <ExtendsLink name="TextInput props" link="https://reactnative.dev/docs/textinput#props" />
+
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="ref" version="6.x" />
+  
+<div>
+
+### variant  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="variant" version="6.x" />
+  
+<div>
+
+### error  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="error" version="6.x" />
+  
+<div>
+
+### label  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="label" version="6.x" />
+  
+<div>
+
+### supportingText  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="supportingText" version="6.x" />
+  
+<div>
+
+### counter  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="counter" version="6.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="disabled" version="6.x" />
+  
+<div>
+
+### prefix  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="prefix" version="6.x" />
+  
+<div>
+
+### suffix  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="suffix" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="theme" version="6.x" />
+  
+<div>
+
+### startAccessory  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="startAccessory" version="6.x" />
+  
+<div>
+
+### endAccessory  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="endAccessory" version="6.x" />
+  
+<div>
+
+### render  
+
+</div>
+  
+  <PropTable componentLink="TextInput/TextInput" prop="render" version="6.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

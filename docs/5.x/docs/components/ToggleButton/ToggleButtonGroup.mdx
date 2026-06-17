@@ -1,0 +1,78 @@
+---
+title: ToggleButton.Group
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Toggle group allows to control a group of toggle buttons.
+It doesn't change the appearance of the toggle buttons. If you want to group them in a row, check out [ToggleButton.Row](ToggleButtonRow).
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/toggle-button-group.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { ToggleButton } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState('left');
+
+  return (
+    <ToggleButton.Group
+      onValueChange={value => setValue(value)}
+      value={value}
+    >
+      <ToggleButton icon="format-align-left" value="left" />
+      <ToggleButton icon="format-align-right" value="right" />
+    </ToggleButton.Group>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### onValueChange (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonGroup" prop="onValueChange" version="5.x" />
+  
+<div>
+
+### value (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonGroup" prop="value" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="ToggleButton/ToggleButtonGroup" prop="children" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

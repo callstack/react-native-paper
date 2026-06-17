@@ -1,0 +1,172 @@
+---
+title: Card
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A card is a sheet of material that serves as an entry point to more detailed information.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"elevated":"screenshots/card-1.png","outlined":"screenshots/card-2.png","contained":"screenshots/card-3.png"}} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Avatar, Button, Card, Text } from 'react-native-paper';
+
+const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+
+const MyComponent = () => (
+  <Card>
+    <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
+    <Card.Content>
+      <Text variant="titleLarge">Card title</Text>
+      <Text variant="bodyMedium">Card content</Text>
+    </Card.Content>
+    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+    <Card.Actions>
+      <Button>Cancel</Button>
+      <Button>Ok</Button>
+    </Card.Actions>
+  </Card>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### mode  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="mode" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="children" version="5.x" />
+  
+<div>
+
+### onLongPress  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="onLongPress" version="5.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="onPress" version="5.x" />
+  
+<div>
+
+### onPressIn  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="onPressIn" version="5.x" />
+  
+<div>
+
+### onPressOut  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="onPressOut" version="5.x" />
+  
+<div>
+
+### delayLongPress  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="delayLongPress" version="5.x" />
+  
+<div>
+
+### disabled  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="disabled" version="5.x" />
+  
+<div>
+
+### elevation  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="elevation" version="5.x" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="contentStyle" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="theme" version="5.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="testID" version="5.x" />
+  
+<div>
+
+### accessible  
+
+</div>
+  
+  <PropTable componentLink="Card/Card" prop="accessible" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"contained":{"backgroundColor":"theme.colors.surfaceVariant"},"elevated":{"backgroundColor":"theme.colors.elevation.level1"},"outlined":{"backgroundColor":"theme.colors.surface","borderColor":"theme.colors.outline"}}} componentName="Card" />
+  
+
+<span />

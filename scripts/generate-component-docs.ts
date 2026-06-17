@@ -117,26 +117,48 @@ const main = async () => {
       fs.symlinkSync(nodeModulesPath, archivedNodeModulesPath, 'dir');
     }
 
-    const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-    const config = require(configPath);
-
-    if (!isRecord(config) || !Array.isArray(config.plugins)) {
-      throw new Error(`Unable to read plugins from ${configPath}`);
-    }
-
-    const pluginConfig = config.plugins.find(
-      (plugin: unknown): plugin is PluginConfig =>
-        Array.isArray(plugin) &&
-        plugin[0] === './component-docs-plugin' &&
-        isRecord(plugin[1]) &&
-        typeof plugin[1].docsRootDir === 'string' &&
-        typeof plugin[1].libsRootDir === 'string'
+    const sharedConfigPath = path.join(
+      sourceDir,
+      'docs',
+      'component-docs.config.js'
     );
 
+    let pluginConfig: PluginConfig | undefined;
+
+    if (fs.existsSync(sharedConfigPath)) {
+      const sharedConfig = require(sharedConfigPath);
+
+      if (
+        isRecord(sharedConfig) &&
+        typeof sharedConfig.docsRootDir === 'string' &&
+        typeof sharedConfig.libsRootDir === 'string'
+      ) {
+        pluginConfig = ['./component-docs-plugin', sharedConfig as PluginOptions];
+      }
+    }
+
     if (!pluginConfig) {
-      throw new Error(
-        `Unable to find component docs plugin config in ${configPath}`
+      const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
+      const config = require(configPath);
+
+      if (!isRecord(config) || !Array.isArray(config.plugins)) {
+        throw new Error(`Unable to read plugins from ${configPath}`);
+      }
+
+      pluginConfig = config.plugins.find(
+        (plugin: unknown): plugin is PluginConfig =>
+          Array.isArray(plugin) &&
+          plugin[0] === './component-docs-plugin' &&
+          isRecord(plugin[1]) &&
+          typeof plugin[1].docsRootDir === 'string' &&
+          typeof plugin[1].libsRootDir === 'string'
       );
+
+      if (!pluginConfig) {
+        throw new Error(
+          `Unable to find component docs plugin config in ${configPath}`
+        );
+      }
     }
 
     const pluginFactory: PluginFactory = require(path.join(

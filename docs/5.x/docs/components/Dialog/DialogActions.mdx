@@ -1,0 +1,80 @@
+---
+title: Dialog.Actions
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+A component to show a list of actions in a Dialog.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/dialog-actions.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Button, Dialog, Portal } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const hideDialog = () => setVisible(false);
+
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Actions>
+          <Button onPress={() => console.log('Cancel')}>Cancel</Button>
+          <Button onPress={() => console.log('Ok')}>Ok</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogActions" prop="children" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogActions" prop="style" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogActions" prop="theme" version="5.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

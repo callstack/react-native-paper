@@ -1,0 +1,199 @@
+---
+title: Extended
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+An extended floating action button represents the primary action on a screen
+and shows a label next to the icon. Animates between expanded (icon + label)
+and collapsed (icon only) states.
+
+
+
+<span />
+
+## Usage
+```js
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { FAB } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [expanded, setExpanded] = React.useState(true);
+
+  return (
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded={expanded}
+      onPress={() => setExpanded((v) => !v)}
+      style={styles.fab}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    left: 0,
+    bottom: 0,
+  },
+});
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### icon (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="icon" version="6.x" />
+  
+<div>
+
+### label (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="label" version="6.x" />
+  
+<div>
+
+### variant  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="variant" version="6.x" />
+  
+<div>
+
+### containerColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="containerColor" version="6.x" />
+  
+<div>
+
+### contentColor  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="contentColor" version="6.x" />
+  
+<div>
+
+### size  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="size" version="6.x" />
+  
+<div>
+
+### expanded (required) 
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="expanded" version="6.x" />
+  
+<div>
+
+### visible  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="visible" version="6.x" />
+  
+<div>
+
+### onPress  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="onPress" version="6.x" />
+  
+<div>
+
+### accessibilityLabel  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="accessibilityLabel" version="6.x" />
+  
+<div>
+
+### accessibilityState  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="accessibilityState" version="6.x" />
+  
+<div>
+
+### labelMaxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="labelMaxFontSizeMultiplier" version="6.x" />
+  
+<div>
+
+### background  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="background" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="style" version="6.x" />
+  
+<div>
+
+### testID  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="testID" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="theme" version="6.x" />
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="FAB/Extended" prop="ref" version="6.x" />
+  
+  
+
+<span />
+
+<span />
+
+<span />

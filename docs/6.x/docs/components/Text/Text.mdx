@@ -1,0 +1,109 @@
+---
+title: Text
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Typography component showing styles complied with passed `variant` prop and supported by the type system.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/typography.png"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Text } from 'react-native-paper';
+
+const MyComponent = () => (
+  <>
+    <Text variant="displayLarge">Display Large</Text>
+    <Text variant="displayMedium">Display Medium</Text>
+    <Text variant="displaySmall">Display small</Text>
+
+    <Text variant="headlineLarge">Headline Large</Text>
+    <Text variant="headlineMedium">Headline Medium</Text>
+    <Text variant="headlineSmall">Headline Small</Text>
+
+    <Text variant="titleLarge">Title Large</Text>
+    <Text variant="titleMedium">Title Medium</Text>
+    <Text variant="titleSmall">Title Small</Text>
+
+    <Text variant="bodyLarge">Body Large</Text>
+    <Text variant="bodyMedium">Body Medium</Text>
+    <Text variant="bodySmall">Body Small</Text>
+
+    <Text variant="labelLarge">Label Large</Text>
+    <Text variant="labelMedium">Label Medium</Text>
+    <Text variant="labelSmall">Label Small</Text>
+ </>
+);
+
+export default MyComponent;
+```
+
+
+
+
+  ## Props
+  ### Text props
+  <ExtendsLink name="Text props" link="https://reactnative.dev/docs/text#props" />
+
+  
+<div>
+
+### variant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Typography/Text" prop="variant" version="6.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Typography/Text" prop="children" version="6.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Typography/Text" prop="theme" version="6.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Typography/Text" prop="style" version="6.x" />
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="Typography/Text" prop="ref" version="6.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"textColor":"theme.colors.onSurface"}}} componentName="Text" />
+  
+
+<span />

@@ -1,0 +1,172 @@
+---
+title: Banner
+---
+
+import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+
+Banner displays a prominent message and related actions.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/banner.gif"} baseUrl="/react-native-paper/"/>
+  
+
+## Usage
+```js
+import * as React from 'react';
+import { Image } from 'react-native';
+import { Banner } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(true);
+
+  return (
+    <Banner
+      visible={visible}
+      actions={[
+        {
+          label: 'Fix it',
+          onPress: () => setVisible(false),
+        },
+        {
+          label: 'Learn more',
+          onPress: () => setVisible(false),
+        },
+      ]}
+      icon={({size}) => (
+        <Image
+          source={{
+            uri: 'https://avatars3.githubusercontent.com/u/17571969?s=400&v=4',
+          }}
+          style={{
+            width: size,
+            height: size,
+          }}
+        />
+      )}>
+      There was a problem processing a transaction on your credit card.
+    </Banner>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+  
+
+  
+<div>
+
+### visible (required) 
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="visible" version="5.x" />
+  
+<div>
+
+### children (required) 
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="children" version="5.x" />
+  
+<div>
+
+### icon  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="icon" version="5.x" />
+  
+<div>
+
+### actions  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="actions" version="5.x" />
+  
+<div>
+
+### contentStyle  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="contentStyle" version="5.x" />
+  
+<div>
+
+### elevation  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="elevation" version="5.x" />
+  
+<div>
+
+### maxFontSizeMultiplier  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="maxFontSizeMultiplier" version="5.x" />
+  
+<div>
+
+### style  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="style" version="5.x" />
+  
+<div>
+
+### ref  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="ref" version="5.x" />
+  
+<div>
+
+### theme  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="theme" version="5.x" />
+  
+<div>
+
+### onShowAnimationFinished  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="onShowAnimationFinished" version="5.x" />
+  
+<div>
+
+### onHideAnimationFinished  
+
+</div>
+  
+  <PropTable componentLink="Banner" prop="onHideAnimationFinished" version="5.x" />
+  
+  
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"textColor":"theme.colors.onSurface","action textColor":"theme.colors.primary"}}} componentName="Banner" />
+  
+
+<span />
