@@ -47,7 +47,8 @@ export const getLabelColor = ({
   }
 
   if (focused) {
-    return colors.onSurface;
+    // M3 active label color is `secondary` (changed from `onSurface`).
+    return colors.secondary;
   }
   return colors.onSurfaceVariant;
 };

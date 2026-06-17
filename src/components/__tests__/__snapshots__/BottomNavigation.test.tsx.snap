@@ -184,8 +184,9 @@ exports[`allows customizing Route's type via generics 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -337,11 +338,10 @@ exports[`allows customizing Route's type via generics 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -393,11 +393,10 @@ exports[`allows customizing Route's type via generics 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -462,8 +461,9 @@ exports[`allows customizing Route's type via generics 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -598,7 +598,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -654,7 +653,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -868,7 +866,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -1086,7 +1084,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -1287,7 +1285,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -1632,7 +1630,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -1850,7 +1848,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -2051,7 +2049,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "height": 80,
+                  "height": 64,
                   "justifyContent": "center",
                 }
               }
@@ -2533,8 +2531,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -2746,11 +2745,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -2802,11 +2800,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -2871,8 +2868,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -3067,7 +3065,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3123,7 +3120,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3192,8 +3188,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -3388,7 +3385,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3444,7 +3440,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3513,8 +3508,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -3709,7 +3705,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3765,7 +3760,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -3834,8 +3828,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -4030,7 +4025,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -4086,7 +4080,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -4299,8 +4292,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -4517,11 +4511,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -4586,8 +4579,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -4787,7 +4781,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -4856,8 +4849,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -5057,7 +5051,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -5126,8 +5119,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -5327,7 +5321,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -5396,8 +5389,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -5597,7 +5591,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -5810,8 +5803,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -5940,12 +5934,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <Text
-                    style={
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                      }
-                    }
+                  <text
+                    color="rgba(98, 91, 113, 1)"
                   >
                     Route: 0
                   </Text>
@@ -5963,12 +5953,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <Text
-                    style={
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                      }
-                    }
+                  <text
+                    color="rgba(98, 91, 113, 1)"
                   >
                     Route: 0
                   </Text>
@@ -6023,8 +6009,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -6219,8 +6206,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -6559,8 +6547,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -6694,12 +6683,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <Text
-                    style={
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                      }
-                    }
+                  <text
+                    color="rgba(98, 91, 113, 1)"
                   >
                     Route: 0
                   </Text>
@@ -6754,8 +6739,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -6932,8 +6918,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -7110,8 +7097,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -7288,8 +7276,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -7610,8 +7599,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -7823,7 +7813,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -7879,7 +7868,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -7948,8 +7936,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -8144,7 +8133,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -8200,7 +8188,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -8269,8 +8256,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -8465,7 +8453,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -8521,7 +8508,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -8734,8 +8720,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -8952,7 +8939,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -9021,8 +9007,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -9222,7 +9209,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -9291,8 +9277,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -9492,7 +9479,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -9705,8 +9691,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -9918,11 +9905,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -9974,11 +9960,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -10043,8 +10028,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -10239,7 +10225,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -10295,7 +10280,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -10364,8 +10348,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -10560,7 +10545,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -10616,7 +10600,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -10829,8 +10812,9 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -11047,11 +11031,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
-                              "color": "rgba(29, 27, 32, 1)",
+                              "color": "rgba(98, 91, 113, 1)",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -11116,8 +11099,9 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -11317,7 +11301,6 @@ exports[`renders shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -11386,8 +11369,9 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -11587,7 +11571,6 @@ exports[`renders shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -11656,8 +11639,9 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -11857,7 +11841,6 @@ exports[`renders shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {
@@ -11926,8 +11909,9 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "paddingBottom": 16,
-                  "paddingTop": 12,
+                  "alignItems": "center",
+                  "height": 64,
+                  "justifyContent": "center",
                 }
               }
             >
@@ -12127,7 +12111,6 @@ exports[`renders shifting bottom navigation 1`] = `
                             {
                               "backgroundColor": "transparent",
                               "fontSize": 12,
-                              "height": 56,
                               "textAlign": "center",
                             },
                             {

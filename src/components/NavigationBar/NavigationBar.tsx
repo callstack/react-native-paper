@@ -9,6 +9,16 @@ import type {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import {
+  BAR_HEIGHT,
+  ICON_LABEL_GAP,
+  INDICATOR_BORDER_RADIUS,
+  INDICATOR_HEIGHT,
+  INDICATOR_WIDTH,
+  MAX_TAB_WIDTH,
+  MIN_TAB_WIDTH,
+  NO_LABEL_BAR_HEIGHT,
+} from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { Theme, ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
@@ -196,11 +206,6 @@ export type Props<Route extends BaseRoute> = {
    */
   testID?: string;
 };
-
-const MIN_TAB_WIDTH = 96;
-const MAX_TAB_WIDTH = 168;
-const BAR_HEIGHT = 56;
-const OUTLINE_WIDTH = 64;
 
 const Touchable = <Route extends BaseRoute>({
   route: _0,
@@ -807,9 +812,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   v3IconContainer: {
-    height: 32,
-    width: 32,
-    marginBottom: 4,
+    height: INDICATOR_HEIGHT,
+    width: INDICATOR_HEIGHT,
+    marginBottom: ICON_LABEL_GAP,
     marginTop: 0,
     justifyContent: 'center',
   },
@@ -830,7 +835,6 @@ const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   label: {
     fontSize: 12,
-    height: BAR_HEIGHT,
     textAlign: 'center',
     backgroundColor: 'transparent',
     ...(Platform.OS === 'web'
@@ -845,18 +849,19 @@ const styles = StyleSheet.create({
     left: 0,
   },
   v3TouchableContainer: {
-    paddingTop: 12,
-    paddingBottom: 16,
+    height: BAR_HEIGHT,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   v3NoLabelContainer: {
-    height: 80,
+    height: NO_LABEL_BAR_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
   },
   outline: {
-    width: OUTLINE_WIDTH,
-    height: OUTLINE_WIDTH / 2,
-    borderRadius: OUTLINE_WIDTH / 4,
+    width: INDICATOR_WIDTH,
+    height: INDICATOR_HEIGHT,
+    borderRadius: INDICATOR_BORDER_RADIUS,
     alignSelf: 'center',
   },
 });
