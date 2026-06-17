@@ -1,0 +1,17 @@
+{
+  "next": {
+    "/docs/components/Checkbox/CheckboxAndroid": "/6.x/docs/components/Checkbox/Checkbox",
+    "/docs/components/Checkbox/CheckboxIOS": "/6.x/docs/components/Checkbox/Checkbox",
+    "/docs/components/FAB/AnimatedFAB": "/6.x/docs/components/FAB/FAB",
+    "/docs/components/FAB/FABGroup": "/6.x/docs/components/FAB/FAB",
+    "/docs/components/HelperText/HelperText": "/6.x/",
+    "/docs/components/TextInput/TextInputAffix": "/6.x/docs/components/TextInput/TextInput",
+    "/docs/guides/migration-guide-to-5.0": "/6.x/docs/guides/migration"
+  },
+  "stable": {
+    "/6.x/docs/components/FAB/FABExtended": "/docs/components/FAB/FAB",
+    "/6.x/docs/components/FAB/FABMenu": "/docs/components/FAB/FAB",
+    "/6.x/docs/guides/migration": "/docs/guides/migration-guide-to-5.0",
+    "/6.x/docs/guides/rtl": "/"
+  }
+}

@@ -231,7 +231,11 @@ ${generateThemeColors(doc.title, themeColorsData)}
 ${generateKnownIssues(doc.title)}
 `;
 
-  return mdx.slice(1);
+  return mdx
+    .slice(1)
+    .split('\n')
+    .map((line) => line.trimEnd())
+    .join('\n');
 }
 
 module.exports = generatePageMDX;

@@ -6,6 +6,8 @@ import {
   withBase,
 } from '@rspress/core/dist/runtime/index.js';
 
+import { getNextRoute, getStableRoute } from '../utils/versionRoutes';
+
 const legacyVersions = [
   { label: '4.x', href: '/4.0/' },
   { label: '3.x', href: '/3.0/' },
@@ -112,14 +114,8 @@ export default function PaperVersionSelector() {
 
   const links = useMemo(() => {
     const routePath = page.routePath ?? '/';
-    const stableRoute = routePath.startsWith('/6.x/')
-      ? routePath.replace(/^\/6\.x/, '')
-      : routePath;
-    const nextRoute = routePath.startsWith('/6.x/')
-      ? routePath
-      : routePath === '/'
-      ? '/6.x/'
-      : `/6.x${routePath}`;
+    const stableRoute = getStableRoute(routePath);
+    const nextRoute = getNextRoute(routePath);
 
     const primaryLink =
       version === '6.x'

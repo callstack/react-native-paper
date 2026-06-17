@@ -8,7 +8,11 @@ const parseComponentDocs =
 const generatePageMDX = require('../component-docs-plugin/generatePageMDX');
 const componentDocsConfig = require('../component-docs.config');
 
-const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const rootDir = path.resolve(
+  path.dirname(new URL(import.meta.url).pathname),
+  '..'
+);
+const repoRootDir = path.resolve(rootDir, '..');
 const outputDir = componentDocsConfig.docsRootDir;
 const metadataPath = path.join(rootDir, 'src', 'data', 'componentDocs6x.json');
 
@@ -151,7 +155,7 @@ const main = () => {
     metadataPath,
     `${JSON.stringify(
       {
-        docs: normalizeDocs(docs, fs.realpathSync(rootDir)),
+        docs: normalizeDocs(docs, fs.realpathSync(repoRootDir)),
       },
       null,
       2

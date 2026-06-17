@@ -1,6 +1,7 @@
 import { usePage, useVersion } from '@rspress/core/dist/runtime/index.js';
 
 import PrereleaseNotice from './PrereleaseNotice';
+import { getStableRoute, hasSameStableRoute } from '../utils/versionRoutes';
 
 const DOCS_PREFIX = '/6.x/docs/';
 
@@ -13,8 +14,11 @@ export default function VersionedPrereleaseNotice() {
     return null;
   }
 
-  const stableHref = routePath.replace(/^\/6\.x/, '');
-  const stableLabel = page.title ? `${page.title} (5.x)` : 'This page (5.x)';
+  const stableHref = getStableRoute(routePath);
+  const stableLabel =
+    hasSameStableRoute(routePath) && page.title
+      ? `${page.title} (5.x)`
+      : 'Latest stable docs (5.x)';
 
   return (
     <PrereleaseNotice

@@ -3,10 +3,14 @@
 
 # Production
 /build
+/test-results
+/visual/output
 
 # Generated files
 .docusaurus
 .cache-loader
+/public/llms.txt
+/public/react-native-paper
 
 # Misc
 .DS_Store

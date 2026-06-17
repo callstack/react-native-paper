@@ -1,27 +1,35 @@
 const childProcess = require('child_process');
 const fs = require('fs');
+const Module = require('module');
 const os = require('os');
 const path = require('path');
 
-type PluginOptions = {
-  docsRootDir: string;
-  libsRootDir: string;
-  pages: unknown;
+const isRecord = (value) => typeof value === 'object' && value !== null;
+const legacyDocusaurusShims = new Set([
+  '@docusaurus/remark-plugin-npm2yarn',
+  'prism-react-renderer/themes/dracula',
+  'prism-react-renderer/themes/github',
+]);
+
+const loadLegacyDocusaurusConfig = (configPath) => {
+  const originalLoad = Module._load;
+
+  Module._load = function loadWithLegacyDocsShims(request, parent, isMain) {
+    if (legacyDocusaurusShims.has(request)) {
+      return {};
+    }
+
+    return originalLoad.call(this, request, parent, isMain);
+  };
+
+  try {
+    return require(configPath);
+  } finally {
+    Module._load = originalLoad;
+  }
 };
 
-type PluginConfig = [string, PluginOptions];
-
-type PluginFactory = (
-  context: unknown,
-  options: PluginOptions
-) => Promise<{
-  loadContent: () => Promise<unknown>;
-}>;
-
-const isRecord = (value: unknown): value is { [key: string]: unknown } =>
-  typeof value === 'object' && value !== null;
-
-const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
+const normalizeDocs = (value, sourceDir) => {
   if (Array.isArray(value)) {
     return value.map((item) => normalizeDocs(item, sourceDir));
   }
@@ -68,7 +76,7 @@ const main = async () => {
 
   if (!branchName) {
     console.error(
-      'Usage: node scripts/generate-component-docs.ts <branch> [output]'
+      'Usage: node scripts/generate-component-docs.js <branch> [output]'
     );
     process.exitCode = 1;
     return;
@@ -123,7 +131,7 @@ const main = async () => {
       'component-docs.config.js'
     );
 
-    let pluginConfig: PluginConfig | undefined;
+    let pluginConfig;
 
     if (fs.existsSync(sharedConfigPath)) {
       const sharedConfig = require(sharedConfigPath);
@@ -133,23 +141,20 @@ const main = async () => {
         typeof sharedConfig.docsRootDir === 'string' &&
         typeof sharedConfig.libsRootDir === 'string'
       ) {
-        pluginConfig = [
-          './component-docs-plugin',
-          sharedConfig as PluginOptions,
-        ];
+        pluginConfig = ['./component-docs-plugin', sharedConfig];
       }
     }
 
     if (!pluginConfig) {
       const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-      const config = require(configPath);
+      const config = loadLegacyDocusaurusConfig(configPath);
 
       if (!isRecord(config) || !Array.isArray(config.plugins)) {
         throw new Error(`Unable to read plugins from ${configPath}`);
       }
 
       pluginConfig = config.plugins.find(
-        (plugin: unknown): plugin is PluginConfig =>
+        (plugin) =>
           Array.isArray(plugin) &&
           plugin[0] === './component-docs-plugin' &&
           isRecord(plugin[1]) &&
@@ -164,7 +169,7 @@ const main = async () => {
       }
     }
 
-    const pluginFactory: PluginFactory = require(path.join(
+    const pluginFactory = require(path.join(
       sourceDir,
       'docs',
       'component-docs-plugin'

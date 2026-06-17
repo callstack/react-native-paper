@@ -89,7 +89,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/ActivityIndicator.tsx"
+        "src/components/ActivityIndicator.tsx"
       ]
     },
     "Appbar/Appbar": {
@@ -226,7 +226,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Appbar/Appbar.tsx"
+        "src/components/Appbar/Appbar.tsx"
       ]
     },
     "Appbar/AppbarAction": {
@@ -344,7 +344,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Appbar/AppbarAction.tsx"
+        "src/components/Appbar/AppbarAction.tsx"
       ],
       "group": "Appbar"
     },
@@ -449,7 +449,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Appbar/AppbarBackAction.tsx"
+        "src/components/Appbar/AppbarBackAction.tsx"
       ],
       "group": "Appbar"
     },
@@ -606,7 +606,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Appbar/AppbarContent.tsx"
+        "src/components/Appbar/AppbarContent.tsx"
       ],
       "group": "Appbar"
     },
@@ -722,7 +722,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Appbar/AppbarHeader.tsx"
+        "src/components/Appbar/AppbarHeader.tsx"
       ],
       "group": "Appbar"
     },
@@ -786,7 +786,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Avatar/AvatarIcon.tsx"
+        "src/components/Avatar/AvatarIcon.tsx"
       ],
       "group": "Avatar"
     },
@@ -900,7 +900,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Avatar/AvatarImage.tsx"
+        "src/components/Avatar/AvatarImage.tsx"
       ],
       "group": "Avatar"
     },
@@ -984,7 +984,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Avatar/AvatarText.tsx"
+        "src/components/Avatar/AvatarText.tsx"
       ],
       "group": "Avatar"
     },
@@ -1072,7 +1072,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Badge.tsx"
+        "src/components/Badge.tsx"
       ]
     },
     "Banner": {
@@ -1279,7 +1279,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Banner.tsx"
+        "src/components/Banner.tsx"
       ]
     },
     "BottomNavigation/BottomNavigation": {
@@ -2247,7 +2247,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/BottomNavigation/BottomNavigation.tsx"
+        "src/components/BottomNavigation/BottomNavigation.tsx"
       ]
     },
     "BottomNavigation/BottomNavigationBar": {
@@ -2977,7 +2977,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/BottomNavigation/BottomNavigationBar.tsx"
+        "src/components/BottomNavigation/BottomNavigationBar.tsx"
       ],
       "group": "BottomNavigation"
     },
@@ -3325,7 +3325,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Button/Button.tsx"
+        "src/components/Button/Button.tsx"
       ]
     },
     "Card/Card": {
@@ -3570,7 +3570,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Card/Card.tsx"
+        "src/components/Card/Card.tsx"
       ]
     },
     "Card/CardActions": {
@@ -3616,7 +3616,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Card/CardActions.tsx"
+        "src/components/Card/CardActions.tsx"
       ],
       "group": "Card"
     },
@@ -3683,7 +3683,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Card/CardContent.tsx"
+        "src/components/Card/CardContent.tsx"
       ],
       "group": "Card"
     },
@@ -3736,7 +3736,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Card/CardCover.tsx"
+        "src/components/Card/CardCover.tsx"
       ],
       "group": "Card"
     },
@@ -3987,7 +3987,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Card/CardTitle.tsx"
+        "src/components/Card/CardTitle.tsx"
       ],
       "group": "Card"
     },
@@ -4105,7 +4105,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Checkbox/Checkbox.tsx"
+        "src/components/Checkbox/Checkbox.tsx"
       ]
     },
     "Checkbox/CheckboxItem": {
@@ -4327,7 +4327,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Checkbox/CheckboxItem.tsx"
+        "src/components/Checkbox/CheckboxItem.tsx"
       ],
       "group": "Checkbox"
     },
@@ -4671,7 +4671,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Chip/Chip.tsx"
+        "src/components/Chip/Chip.tsx"
       ]
     },
     "DataTable/DataTable": {
@@ -4710,7 +4710,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTable.tsx"
+        "src/components/DataTable/DataTable.tsx"
       ]
     },
     "DataTable/DataTableCell": {
@@ -4805,7 +4805,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTableCell.tsx"
+        "src/components/DataTable/DataTableCell.tsx"
       ],
       "group": "DataTable"
     },
@@ -4852,7 +4852,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTableHeader.tsx"
+        "src/components/DataTable/DataTableHeader.tsx"
       ],
       "group": "DataTable"
     },
@@ -5010,7 +5010,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTablePagination.tsx"
+        "src/components/DataTable/DataTablePagination.tsx"
       ],
       "group": "DataTable"
     },
@@ -5087,7 +5087,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTableRow.tsx"
+        "src/components/DataTable/DataTableRow.tsx"
       ],
       "group": "DataTable"
     },
@@ -5212,7 +5212,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/DataTable/DataTableTitle.tsx"
+        "src/components/DataTable/DataTableTitle.tsx"
       ],
       "group": "DataTable"
     },
@@ -5320,7 +5320,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/Dialog.tsx"
+        "src/components/Dialog/Dialog.tsx"
       ]
     },
     "Dialog/DialogActions": {
@@ -5366,7 +5366,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/DialogActions.tsx"
+        "src/components/Dialog/DialogActions.tsx"
       ],
       "group": "Dialog"
     },
@@ -5406,7 +5406,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/DialogContent.tsx"
+        "src/components/Dialog/DialogContent.tsx"
       ],
       "group": "Dialog"
     },
@@ -5457,7 +5457,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/DialogIcon.tsx"
+        "src/components/Dialog/DialogIcon.tsx"
       ],
       "group": "Dialog"
     },
@@ -5504,7 +5504,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/DialogScrollArea.tsx"
+        "src/components/Dialog/DialogScrollArea.tsx"
       ],
       "group": "Dialog"
     },
@@ -5551,7 +5551,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Dialog/DialogTitle.tsx"
+        "src/components/Dialog/DialogTitle.tsx"
       ],
       "group": "Dialog"
     },
@@ -5619,7 +5619,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Divider.tsx"
+        "src/components/Divider.tsx"
       ]
     },
     "Drawer/DrawerCollapsedItem": {
@@ -5762,7 +5762,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Drawer/DrawerCollapsedItem.tsx"
+        "src/components/Drawer/DrawerCollapsedItem.tsx"
       ],
       "group": "Drawer"
     },
@@ -5916,7 +5916,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Drawer/DrawerItem.tsx"
+        "src/components/Drawer/DrawerItem.tsx"
       ],
       "group": "Drawer"
     },
@@ -5988,7 +5988,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Drawer/DrawerSection.tsx"
+        "src/components/Drawer/DrawerSection.tsx"
       ],
       "group": "Drawer"
     },
@@ -6148,7 +6148,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/FAB/FAB.tsx"
+        "src/components/FAB/FAB.tsx"
       ]
     },
     "FAB/Extended": {
@@ -6332,7 +6332,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/FAB/Extended.tsx"
+        "src/components/FAB/Extended.tsx"
       ]
     },
     "FAB/Menu": {
@@ -7738,7 +7738,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/FAB/Menu.tsx"
+        "src/components/FAB/Menu.tsx"
       ]
     },
     "IconButton/IconButton": {
@@ -7942,7 +7942,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/IconButton/IconButton.tsx"
+        "src/components/IconButton/IconButton.tsx"
       ]
     },
     "Icon": {
@@ -8002,7 +8002,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Icon.tsx"
+        "src/components/Icon.tsx"
       ]
     },
     "List/ListAccordion": {
@@ -8346,7 +8346,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListAccordion.tsx"
+        "src/components/List/ListAccordion.tsx"
       ],
       "group": "List"
     },
@@ -8420,7 +8420,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListAccordionGroup.tsx"
+        "src/components/List/ListAccordionGroup.tsx"
       ],
       "group": "List"
     },
@@ -8473,7 +8473,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListIcon.tsx"
+        "src/components/List/ListIcon.tsx"
       ],
       "group": "List"
     },
@@ -8776,7 +8776,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListItem.tsx"
+        "src/components/List/ListItem.tsx"
       ],
       "group": "List"
     },
@@ -8843,7 +8843,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListSection.tsx"
+        "src/components/List/ListSection.tsx"
       ],
       "group": "List"
     },
@@ -8889,7 +8889,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/List/ListSubheader.tsx"
+        "src/components/List/ListSubheader.tsx"
       ],
       "group": "List"
     },
@@ -9102,7 +9102,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Menu/Menu.tsx"
+        "src/components/Menu/Menu.tsx"
       ]
     },
     "Menu/MenuItem": {
@@ -9288,7 +9288,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Menu/MenuItem.tsx"
+        "src/components/Menu/MenuItem.tsx"
       ],
       "group": "Menu"
     },
@@ -9428,7 +9428,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Modal.tsx"
+        "src/components/Modal.tsx"
       ]
     },
     "Portal/Portal": {
@@ -9471,7 +9471,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Portal/Portal.tsx"
+        "src/components/Portal/Portal.tsx"
       ]
     },
     "Portal/PortalHost": {
@@ -9497,7 +9497,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Portal/PortalHost.tsx"
+        "src/components/Portal/PortalHost.tsx"
       ],
       "group": "Portal"
     },
@@ -9609,7 +9609,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/ProgressBar.tsx"
+        "src/components/ProgressBar.tsx"
       ]
     },
     "RadioButton/RadioButton": {
@@ -9709,7 +9709,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/RadioButton/RadioButton.tsx"
+        "src/components/RadioButton/RadioButton.tsx"
       ]
     },
     "RadioButton/RadioButtonAndroid": {
@@ -9809,7 +9809,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/RadioButton/RadioButtonAndroid.tsx"
+        "src/components/RadioButton/RadioButtonAndroid.tsx"
       ],
       "group": "RadioButton"
     },
@@ -9865,7 +9865,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/RadioButton/RadioButtonGroup.tsx"
+        "src/components/RadioButton/RadioButtonGroup.tsx"
       ],
       "group": "RadioButton"
     },
@@ -9959,7 +9959,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/RadioButton/RadioButtonIOS.tsx"
+        "src/components/RadioButton/RadioButtonIOS.tsx"
       ],
       "group": "RadioButton"
     },
@@ -10199,7 +10199,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/RadioButton/RadioButtonItem.tsx"
+        "src/components/RadioButton/RadioButtonItem.tsx"
       ],
       "group": "RadioButton"
     },
@@ -10618,7 +10618,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Searchbar.tsx"
+        "src/components/Searchbar.tsx"
       ]
     },
     "SegmentedButtons/SegmentedButtons": {
@@ -10812,7 +10812,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/SegmentedButtons/SegmentedButtons.tsx"
+        "src/components/SegmentedButtons/SegmentedButtons.tsx"
       ]
     },
     "Snackbar": {
@@ -11059,7 +11059,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Snackbar.tsx"
+        "src/components/Snackbar.tsx"
       ]
     },
     "Surface": {
@@ -11184,7 +11184,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Surface.tsx"
+        "src/components/Surface.tsx"
       ]
     },
     "Switch/Switch": {
@@ -11286,7 +11286,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Switch/Switch.tsx"
+        "src/components/Switch/Switch.tsx"
       ]
     },
     "TextInput/TextInput": {
@@ -11539,7 +11539,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/TextInput/TextInput.tsx"
+        "src/components/TextInput/TextInput.tsx"
       ]
     },
     "TextInput/TextInputIcon": {
@@ -11591,7 +11591,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/TextInput/TextInputIcon.tsx"
+        "src/components/TextInput/TextInputIcon.tsx"
       ],
       "group": "TextInput"
     },
@@ -11747,7 +11747,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/ToggleButton/ToggleButton.tsx"
+        "src/components/ToggleButton/ToggleButton.tsx"
       ]
     },
     "ToggleButton/ToggleButtonGroup": {
@@ -11811,7 +11811,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/ToggleButton/ToggleButtonGroup.tsx"
+        "src/components/ToggleButton/ToggleButtonGroup.tsx"
       ],
       "group": "ToggleButton"
     },
@@ -11880,7 +11880,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/ToggleButton/ToggleButtonRow.tsx"
+        "src/components/ToggleButton/ToggleButtonRow.tsx"
       ],
       "group": "ToggleButton"
     },
@@ -11950,7 +11950,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Tooltip/Tooltip.tsx"
+        "src/components/Tooltip/Tooltip.tsx"
       ]
     },
     "TouchableRipple/TouchableRipple": {
@@ -12164,7 +12164,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/TouchableRipple/TouchableRipple.tsx"
+        "src/components/TouchableRipple/TouchableRipple.tsx"
       ]
     },
     "Typography/Text": {
@@ -12249,7 +12249,7 @@
       },
       "type": "component",
       "dependencies": [
-        "/private/tmp/react-native-paper-rspress-ck-theme/src/components/Typography/Text.tsx"
+        "src/components/Typography/Text.tsx"
       ]
     }
   }
