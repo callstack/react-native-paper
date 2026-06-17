@@ -307,13 +307,13 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const activeOpacity = focused ? 1 : 0;
   const inactiveOpacity = focused ? 0 : 1;
 
-  // Scale horizontally the active-indicator pill.
-  const outlineScale = focused
-    ? active.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0.5, 1],
-      })
-    : 0;
+  // Scale horizontally the active-indicator pill. The indicator is always
+  // mounted and its visibility is driven by `active` opacity, so it cross-fades
+  // between tabs instead of remounting (which breaks native-driven animations).
+  const outlineScale = active.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0.5, 1],
+  });
 
   const badge = getBadge({ route });
 
@@ -366,18 +366,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
       style={labeled ? styles.v3TouchableContainer : styles.v3NoLabelContainer}
     >
       <Animated.View style={[styles.iconContainer, styles.v3IconContainer]}>
-        {focused && (
-          <Animated.View
-            style={[
-              styles.outline,
-              {
-                transform: [{ scaleX: outlineScale }],
-                backgroundColor: colors.secondaryContainer,
-              },
-              activeIndicatorStyle,
-            ]}
-          />
-        )}
+        <Animated.View
+          style={[
+            styles.outline,
+            {
+              opacity: active,
+              transform: [{ scaleX: outlineScale }],
+              backgroundColor: colors.secondaryContainer,
+            },
+            activeIndicatorStyle,
+          ]}
+        />
         <View pointerEvents="none" style={styles.stateLayerWrapper}>
           <View
             testID={itemTestID ? `${itemTestID}-state-layer` : undefined}
@@ -483,27 +482,25 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const horizontalContent = (
     <View pointerEvents="none" style={styles.horizontalContainer}>
       <View style={styles.horizontalItem}>
-        {focused && (
-          <Animated.View
-            style={[
-              StyleSheet.absoluteFill,
-              styles.horizontalIndicator,
-              {
-                backgroundColor: colors.secondaryContainer,
-                opacity: active,
-                transform: [
-                  {
-                    scale: active.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.8, 1],
-                    }),
-                  },
-                ],
-              },
-              activeIndicatorStyle,
-            ]}
-          />
-        )}
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFill,
+            styles.horizontalIndicator,
+            {
+              backgroundColor: colors.secondaryContainer,
+              opacity: active,
+              transform: [
+                {
+                  scale: active.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.8, 1],
+                  }),
+                },
+              ],
+            },
+            activeIndicatorStyle,
+          ]}
+        />
         <View
           testID={itemTestID ? `${itemTestID}-state-layer` : undefined}
           style={[
@@ -1006,7 +1003,6 @@ const styles = StyleSheet.create({
   v3TouchableContainer: {
     height: BAR_HEIGHT,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   v3NoLabelContainer: {
     height: NO_LABEL_BAR_HEIGHT,

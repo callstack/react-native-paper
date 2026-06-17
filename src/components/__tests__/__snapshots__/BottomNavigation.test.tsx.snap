@@ -184,7 +184,6 @@ exports[`allows customizing Route's type via generics 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -212,6 +211,7 @@ exports[`allows customizing Route's type via generics 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -488,7 +488,6 @@ exports[`allows customizing Route's type via generics 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -508,6 +507,24 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -947,6 +964,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -1185,6 +1203,24 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
+                <View
                   pointerEvents="none"
                   style={
                     {
@@ -1412,6 +1448,24 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -1792,6 +1846,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -2030,6 +2085,24 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
+                <View
                   pointerEvents="none"
                   style={
                     {
@@ -2257,6 +2330,24 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -2747,7 +2838,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -2775,6 +2865,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -3111,7 +3202,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -3131,6 +3221,24 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -3458,7 +3566,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -3478,6 +3585,24 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -3805,7 +3930,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -3825,6 +3949,24 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -4152,7 +4294,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -4172,6 +4313,24 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -4643,7 +4802,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -4671,6 +4829,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -5007,7 +5166,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -5027,6 +5185,24 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -5354,7 +5530,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -5374,6 +5549,24 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -5701,7 +5894,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -5721,6 +5913,24 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -6048,7 +6258,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -6068,6 +6277,24 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -6539,7 +6766,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -6567,6 +6793,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -6772,7 +6999,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -6792,6 +7018,24 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -6996,7 +7240,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -7016,6 +7259,24 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -7364,7 +7625,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -7392,6 +7652,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -7597,7 +7858,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -7617,6 +7877,24 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -7817,7 +8095,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -7837,6 +8114,24 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -8037,7 +8332,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -8057,6 +8351,24 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -8257,7 +8569,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -8277,6 +8588,24 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -8621,7 +8950,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -8649,6 +8977,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -8985,7 +9314,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -9005,6 +9333,24 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -9332,7 +9678,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -9352,6 +9697,24 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -9823,7 +10186,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -9851,6 +10213,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -10187,7 +10550,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -10207,6 +10569,24 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -10534,7 +10914,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -10554,6 +10933,24 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -11025,7 +11422,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -11053,6 +11449,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -11389,7 +11786,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -11409,6 +11805,24 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -11736,7 +12150,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -11756,6 +12169,24 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -12227,7 +12658,6 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -12255,6 +12685,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "backgroundColor": "rgba(232, 222, 248, 1)",
                       "borderRadius": 16,
                       "height": 32,
+                      "opacity": 1,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -12591,7 +13022,6 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -12611,6 +13041,24 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -12938,7 +13386,6 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -12958,6 +13405,24 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -13285,7 +13750,6 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -13305,6 +13769,24 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -13632,7 +14114,6 @@ exports[`renders shifting bottom navigation 1`] = `
               pointerEvents="none"
               style={
                 {
-                  "alignItems": "center",
                   "height": 64,
                   "justifyContent": "center",
                 }
@@ -13652,6 +14133,24 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 16,
+                      "height": 32,
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                      "width": 64,
+                    }
+                  }
+                />
                 <View
                   pointerEvents="none"
                   style={
@@ -14281,6 +14780,26 @@ exports[`renders the horizontal (flexible) variant 1`] = `
               }
             >
               <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "borderRadius": 16,
+                    "bottom": 0,
+                    "left": 0,
+                    "opacity": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                    "transform": [
+                      {
+                        "scale": 0.8,
+                      },
+                    ],
+                  }
+                }
+              />
+              <View
                 style={
                   [
                     {
@@ -14471,6 +14990,26 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                 }
               }
             >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "borderRadius": 16,
+                    "bottom": 0,
+                    "left": 0,
+                    "opacity": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                    "transform": [
+                      {
+                        "scale": 0.8,
+                      },
+                    ],
+                  }
+                }
+              />
               <View
                 style={
                   [
