@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { Tab } from '@rspress/core/theme';
+
+import { Tab } from '@rspress/core/dist/theme/index.js';
 
 type TabItemProps = {
   children: ReactNode;

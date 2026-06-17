@@ -1,4 +1,5 @@
-import { usePage, useVersion } from '@rspress/core/runtime';
+import { usePage, useVersion } from '@rspress/core/dist/runtime/index.js';
+
 import PrereleaseNotice from './PrereleaseNotice';
 
 const DOCS_PREFIX = '/6.x/docs/';

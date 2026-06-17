@@ -133,7 +133,10 @@ const main = async () => {
         typeof sharedConfig.docsRootDir === 'string' &&
         typeof sharedConfig.libsRootDir === 'string'
       ) {
-        pluginConfig = ['./component-docs-plugin', sharedConfig as PluginOptions];
+        pluginConfig = [
+          './component-docs-plugin',
+          sharedConfig as PluginOptions,
+        ];
       }
     }
 

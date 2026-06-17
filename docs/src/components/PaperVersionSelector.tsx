@@ -1,5 +1,10 @@
 import { useEffect, useMemo } from 'react';
-import { usePage, useVersion, withBase } from '@rspress/core/runtime';
+
+import {
+  usePage,
+  useVersion,
+  withBase,
+} from '@rspress/core/dist/runtime/index.js';
 
 const legacyVersions = [
   { label: '4.x', href: '/4.0/' },
@@ -35,7 +40,9 @@ const readMenuSignature = (menu: HTMLUListElement) =>
       const anchor = child.querySelector('a');
       const active = child.classList.contains('rp-hover-group__item--active');
 
-      return `${anchor?.textContent ?? ''}:${anchor?.getAttribute('href') ?? ''}:${active}`;
+      return `${anchor?.textContent ?? ''}:${
+        anchor?.getAttribute('href') ?? ''
+      }:${active}`;
     })
     .join('|');
 
@@ -111,8 +118,8 @@ export default function PaperVersionSelector() {
     const nextRoute = routePath.startsWith('/6.x/')
       ? routePath
       : routePath === '/'
-        ? '/6.x/'
-        : `/6.x${routePath}`;
+      ? '/6.x/'
+      : `/6.x${routePath}`;
 
     const primaryLink =
       version === '6.x'
@@ -152,10 +159,15 @@ export default function PaperVersionSelector() {
           continue;
         }
 
-        const label = item.querySelector(':scope > .rp-nav-menu__item__container');
+        const label = item.querySelector(
+          ':scope > .rp-nav-menu__item__container'
+        );
         const menu = item.querySelector(':scope > .rp-hover-group');
 
-        if (!(label instanceof HTMLElement) || !(menu instanceof HTMLUListElement)) {
+        if (
+          !(label instanceof HTMLElement) ||
+          !(menu instanceof HTMLUListElement)
+        ) {
           continue;
         }
 

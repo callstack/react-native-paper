@@ -39,12 +39,12 @@ export const ReduceMotion = {
   Never: 'never',
 } as const;
 
-export const useSharedValue = <T,>(initialValue: T): SharedValue<T> => {
+export const useSharedValue = <T>(initialValue: T): SharedValue<T> => {
   const ref = React.useRef<SharedValue<T>>({ value: initialValue });
   return ref.current;
 };
 
-export const useDerivedValue = <T,>(updater: () => T): SharedValue<T> => {
+export const useDerivedValue = <T>(updater: () => T): SharedValue<T> => {
   const shared = useSharedValue(updater());
   shared.value = updater();
   return shared;
@@ -53,7 +53,7 @@ export const useDerivedValue = <T,>(updater: () => T): SharedValue<T> => {
 export const useAnimatedStyle = <T extends object>(updater: () => T): T =>
   updater();
 
-export const useAnimatedReaction = <T,>(
+export const useAnimatedReaction = <T>(
   prepare: () => T,
   reactToValue: (current: T, previous: T | null) => void
 ) => {
@@ -66,7 +66,7 @@ export const useAnimatedReaction = <T,>(
   }, [current, reactToValue]);
 };
 
-export const useAnimatedRef = <T,>() => React.useRef<T | null>(null);
+export const useAnimatedRef = <T>() => React.useRef<T | null>(null);
 
 export const measure = () => ({
   x: 0,
@@ -77,10 +77,10 @@ export const measure = () => ({
   pageY: 0,
 });
 
-export const withTiming = <T,>(value: T) => value;
-export const withSpring = <T,>(value: T) => value;
-export const withDelay = <T,>(_delay: number, value: T) => value;
-export const withSequence = <T,>(...values: T[]) => values[values.length - 1];
+export const withTiming = <T>(value: T) => value;
+export const withSpring = <T>(value: T) => value;
+export const withDelay = <T>(_delay: number, value: T) => value;
+export const withSequence = <T>(...values: T[]) => values[values.length - 1];
 
 export const interpolate = (
   value: number,

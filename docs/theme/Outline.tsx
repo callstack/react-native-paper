@@ -1,11 +1,11 @@
-import { useI18n } from '@rspress/core/runtime';
+import { useI18n } from '@rspress/core/dist/runtime/index.js';
 import {
   EditLink,
   ReadPercent,
   Toc,
   useDynamicToc,
   useEditLink,
-} from '@rspress/core/theme-original';
+} from '@rspress/core/dist/theme/index.js';
 
 export default function Outline() {
   const t = useI18n();

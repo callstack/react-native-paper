@@ -1,4 +1,4 @@
-import { useDark } from '@rspress/core/runtime';
+import { useDark } from '@rspress/core/dist/runtime/index.js';
 
 export const useColorMode = () => {
   const isDark = useDark();

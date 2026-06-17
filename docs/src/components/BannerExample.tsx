@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import BrowserOnly from '../rspress-compat/BrowserOnly';
-import { useColorMode } from '../rspress-compat/theme-common';
 import {
   Avatar,
   Button,
@@ -17,6 +15,9 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
+
+import BrowserOnly from '../rspress-compat/BrowserOnly';
+import { useColorMode } from '../rspress-compat/theme-common';
 
 const styles = StyleSheet.create({
   container: {

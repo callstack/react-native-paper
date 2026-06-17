@@ -1,6 +1,6 @@
-import path from 'path';
-import { defineConfig } from '@rspress/core';
 import { withCallstackPreset } from '@callstack/rspress-preset';
+import { defineConfig } from '@rspress/core';
+import path from 'path';
 
 const base = process.env.RSPRESS_BASE_URL ?? '/react-native-paper/';
 const repoUrl = 'https://github.com/callstack/react-native-paper';
@@ -82,7 +82,9 @@ export default withCallstackPreset(
             tag: 'script',
             children: `window.process = window.process || { env: {} };
 window.process.env = window.process.env || {};
-window.process.env.NODE_ENV = window.process.env.NODE_ENV || '${process.env.NODE_ENV ?? 'development'}';
+window.process.env.NODE_ENV = window.process.env.NODE_ENV || '${
+              process.env.NODE_ENV ?? 'development'
+            }';
 globalThis.process = window.process;`,
           },
         ],
@@ -96,10 +98,7 @@ globalThis.process = window.process;`,
           '@theme/Tabs': path.join(compatDir, 'Tabs.tsx'),
           '@docusaurus/BrowserOnly': path.join(compatDir, 'BrowserOnly.tsx'),
           '@docusaurus/Link': path.join(compatDir, 'Link.tsx'),
-          '@docusaurus/theme-common': path.join(
-            compatDir,
-            'theme-common.ts'
-          ),
+          '@docusaurus/theme-common': path.join(compatDir, 'theme-common.ts'),
           '@react-native-vector-icons/get-image': path.join(
             compatDir,
             'empty-module.ts'

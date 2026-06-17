@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
-import { useSite } from '@rspress/core/runtime';
+
+import { useSite } from '@rspress/core/dist/runtime/index.js';
 
 type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children?: ReactNode;
