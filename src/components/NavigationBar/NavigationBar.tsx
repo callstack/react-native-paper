@@ -70,14 +70,6 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
 
 export type Props<Route extends BaseRoute> = {
   /**
-   * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
-   *
-   * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
-   * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
-   * Note that you need at least 2 tabs be able to run this animation.
-   */
-  shifting?: boolean;
-  /**
    * Whether to show labels in tabs. When `false`, only icons will be displayed.
    */
   labeled?: boolean;
@@ -322,7 +314,6 @@ const NavigationBar = <Route extends BaseRoute>({
   animationEasing,
   onTabPress,
   onTabLongPress,
-  shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
@@ -334,14 +325,6 @@ const NavigationBar = <Route extends BaseRoute>({
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
-  let shifting = shiftingProp ?? false;
-
-  if (shifting && navigationState.routes.length < 2) {
-    shifting = false;
-    console.warn(
-      'BottomNavigation.Bar needs at least 2 tabs to run shifting animation'
-    );
-  }
 
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
@@ -519,31 +502,11 @@ const NavigationBar = <Route extends BaseRoute>({
             const focused = navigationState.index === index;
             const active = tabsAnims[index];
 
-            // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-            const translateY = labeled
-              ? shifting
-                ? active.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [7, 0],
-                  })
-                : 0
-              : 7;
-
-            // We render the active icon and label on top of inactive ones and cross-fade them on change.
-            // This trick gives the illusion that we are animating between active and inactive colors.
-            // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-            const activeOpacity = active;
-            const inactiveOpacity = active.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            });
-
-            const v3ActiveOpacity = focused ? 1 : 0;
-            const v3InactiveOpacity = shifting
-              ? inactiveOpacity
-              : focused
-              ? 0
-              : 1;
+            // We render the active icon and label on top of the inactive ones
+            // and toggle their opacity on change, so the active/inactive colors
+            // swap without animating color (which the native driver can't do).
+            const activeOpacity = focused ? 1 : 0;
+            const inactiveOpacity = focused ? 0 : 1;
 
             // Scale horizontally the outline pill
             const outlineScale = focused
@@ -577,8 +540,6 @@ const NavigationBar = <Route extends BaseRoute>({
                   : 0,
             };
 
-            const isLegacyOrV3Shifting = shifting && labeled;
-
             const font = (theme as Theme).fonts.labelMedium;
 
             return renderTouchable({
@@ -604,13 +565,7 @@ const NavigationBar = <Route extends BaseRoute>({
                   }
                 >
                   <Animated.View
-                    style={[
-                      styles.iconContainer,
-                      styles.v3IconContainer,
-                      isLegacyOrV3Shifting && {
-                        transform: [{ translateY }],
-                      },
-                    ]}
+                    style={[styles.iconContainer, styles.v3IconContainer]}
                   >
                     {focused && (
                       <Animated.View
@@ -633,9 +588,7 @@ const NavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         styles.v3IconWrapper,
                         {
-                          opacity: isLegacyOrV3Shifting
-                            ? activeOpacity
-                            : v3ActiveOpacity,
+                          opacity: activeOpacity,
                         },
                       ]}
                     >
@@ -658,9 +611,7 @@ const NavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         styles.v3IconWrapper,
                         {
-                          opacity: isLegacyOrV3Shifting
-                            ? inactiveOpacity
-                            : v3InactiveOpacity,
+                          opacity: inactiveOpacity,
                         },
                       ]}
                     >
@@ -698,9 +649,7 @@ const NavigationBar = <Route extends BaseRoute>({
                         style={[
                           styles.labelWrapper,
                           {
-                            opacity: isLegacyOrV3Shifting
-                              ? activeOpacity
-                              : v3ActiveOpacity,
+                            opacity: activeOpacity,
                           },
                         ]}
                       >
@@ -726,41 +675,37 @@ const NavigationBar = <Route extends BaseRoute>({
                           </Text>
                         )}
                       </Animated.View>
-                      {shifting ? null : (
-                        <Animated.View
-                          style={[
-                            styles.labelWrapper,
-                            {
-                              opacity: isLegacyOrV3Shifting
-                                ? inactiveOpacity
-                                : v3InactiveOpacity,
-                            },
-                          ]}
-                        >
-                          {renderLabel ? (
-                            renderLabel({
-                              route,
-                              focused: false,
-                              color: inactiveLabelColor,
-                            })
-                          ) : (
-                            <Text
-                              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                              variant="labelMedium"
-                              selectable={false}
-                              style={[
-                                styles.label,
-                                {
-                                  color: inactiveLabelColor,
-                                  ...font,
-                                },
-                              ]}
-                            >
-                              {getLabelText({ route })}
-                            </Text>
-                          )}
-                        </Animated.View>
-                      )}
+                      <Animated.View
+                        style={[
+                          styles.labelWrapper,
+                          {
+                            opacity: inactiveOpacity,
+                          },
+                        ]}
+                      >
+                        {renderLabel ? (
+                          renderLabel({
+                            route,
+                            focused: false,
+                            color: inactiveLabelColor,
+                          })
+                        ) : (
+                          <Text
+                            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                            variant="labelMedium"
+                            selectable={false}
+                            style={[
+                              styles.label,
+                              {
+                                color: inactiveLabelColor,
+                                ...font,
+                              },
+                            ]}
+                          >
+                            {getLabelText({ route })}
+                          </Text>
+                        )}
+                      </Animated.View>
                     </Animated.View>
                   ) : null}
                 </View>

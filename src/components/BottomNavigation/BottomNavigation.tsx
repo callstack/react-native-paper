@@ -49,11 +49,10 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
 
 export type Props<Route extends BaseRoute> = {
   /**
-   * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
-   *
-   * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
-   * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
-   * Note that you need at least 2 tabs be able to run this animation.
+   * @deprecated The `shifting` style is a Material Design 2 pattern that is not
+   * part of Material Design 3 and no longer has any effect. It will be removed
+   * in a future version. To animate scene transitions, use `sceneAnimationType`
+   * and `sceneAnimationEnabled` instead.
    */
   shifting?: boolean;
   /**
@@ -330,7 +329,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   onTabPress,
   onTabLongPress,
   onIndexChange,
-  shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
@@ -341,14 +339,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
-  let shifting = shiftingProp ?? false;
-
-  if (shifting && navigationState.routes.length < 2) {
-    shifting = false;
-    console.warn(
-      'BottomNavigation needs at least 2 tabs to run shifting animation'
-    );
-  }
 
   const focusedKey = navigationState.routes[navigationState.index].key;
 
@@ -574,7 +564,6 @@ const BottomNavigation = <Route extends BaseRoute>({
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}
         onTabLongPress={onTabLongPress}
-        shifting={shifting}
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}

@@ -4201,11 +4201,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 0,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -4415,6 +4410,61 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     Route: 0
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(98, 91, 113, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 0
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -4481,11 +4531,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -4678,6 +4723,61 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     Route: 1
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 1
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -4744,11 +4844,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -4941,6 +5036,61 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     Route: 2
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 2
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -5007,11 +5157,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -5204,6 +5349,61 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     Route: 3
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 3
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -5270,11 +5470,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -5428,6 +5623,61 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     maxFontSizeMultiplier={1}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 4
+                  </Text>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
                     style={
                       [
                         {
@@ -6380,11 +6630,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 0,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -6499,6 +6744,25 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Route: 0
                   </text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <text
+                    color="rgba(98, 91, 113, 1)"
+                  >
+                    Route: 0
+                  </text>
+                </View>
               </View>
             </View>
           </View>
@@ -6565,11 +6829,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -6667,6 +6926,25 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Route: 1
                   </text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <text
+                    color="rgba(73, 69, 79, 1)"
+                  >
+                    Route: 1
+                  </text>
+                </View>
               </View>
             </View>
           </View>
@@ -6733,11 +7011,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -6835,6 +7108,25 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Route: 2
                   </text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <text
+                    color="rgba(73, 69, 79, 1)"
+                  >
+                    Route: 2
+                  </text>
+                </View>
               </View>
             </View>
           </View>
@@ -6901,11 +7193,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -7003,6 +7290,25 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Route: 3
                   </text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <text
+                    color="rgba(73, 69, 79, 1)"
+                  >
+                    Route: 3
+                  </text>
+                </View>
               </View>
             </View>
           </View>
@@ -7069,11 +7375,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -7159,6 +7460,25 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "bottom": 0,
                       "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <text
+                    color="rgba(73, 69, 79, 1)"
+                  >
+                    Route: 4
+                  </text>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -8477,11 +8797,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 0,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -8691,6 +9006,61 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Route: 0
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "#853D4B",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 0
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -8757,11 +9127,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -8954,6 +9319,61 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Route: 1
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "#853D4B",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 1
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -9020,11 +9440,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -9203,6 +9618,61 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             },
                             {
                               "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 2
+                  </Text>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "#853D4B",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -10523,11 +10993,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 0,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -10737,6 +11202,61 @@ exports[`renders shifting bottom navigation 1`] = `
                     Route: 0
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(98, 91, 113, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 0
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -10803,11 +11323,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -11000,6 +11515,61 @@ exports[`renders shifting bottom navigation 1`] = `
                     Route: 1
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 1
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -11066,11 +11636,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -11263,6 +11828,61 @@ exports[`renders shifting bottom navigation 1`] = `
                     Route: 2
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 2
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -11329,11 +11949,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -11526,6 +12141,61 @@ exports[`renders shifting bottom navigation 1`] = `
                     Route: 3
                   </Text>
                 </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 3
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -11592,11 +12262,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     "marginBottom": 4,
                     "marginHorizontal": 12,
                     "marginTop": 0,
-                    "transform": [
-                      {
-                        "translateY": 7,
-                      },
-                    ],
                     "width": 32,
                   }
                 }
@@ -11750,6 +12415,61 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     maxFontSizeMultiplier={1}
+                    style={
+                      [
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        [
+                          {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          [
+                            {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "textAlign": "center",
+                            },
+                            {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ],
+                      ]
+                    }
+                  >
+                    Route: 4
+                  </Text>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <Text
+                    maxFontSizeMultiplier={1}
+                    selectable={false}
                     style={
                       [
                         {
