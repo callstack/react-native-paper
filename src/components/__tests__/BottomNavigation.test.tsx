@@ -516,7 +516,7 @@ describe('getLabelColor', () => {
   it.each([
     { tintColor: '#FBF7DB', focused: true, expected: '#FBF7DB' },
     { tintColor: '#853D4B', focused: true, expected: '#853D4B' },
-    { tintColor: undefined, focused: true, expected: Palette.neutral10 },
+    { tintColor: undefined, focused: true, expected: Palette.secondary40 },
     {
       tintColor: undefined,
       focused: false,
