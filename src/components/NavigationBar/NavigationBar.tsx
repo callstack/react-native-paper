@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Platform,
+  StyleSheet,
+  Pressable,
+  View,
+} from 'react-native';
 import type {
   ColorValue,
   EasingFunction,
@@ -21,6 +28,7 @@ import {
   NO_LABEL_BAR_HEIGHT,
 } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { getStateLayer } from '../../theme/utils/state';
 import type { Theme, ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
@@ -577,7 +585,7 @@ const NavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors, motion } = theme as Theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -611,38 +619,57 @@ const NavigationBar = <Route extends BaseRoute>({
     setKeyboardVisible(true);
     Animated.timing(visibleAnim, {
       toValue: 0,
-      duration: 150 * scale,
+      // The bar slides out, so accelerate (exit).
+      duration: motion.duration.short3 * scale,
+      easing: Easing.bezier(...motion.easing.standardAccelerate),
       useNativeDriver: true,
     }).start();
-  }, [scale, visibleAnim]);
+  }, [motion, scale, visibleAnim]);
 
   const handleKeyboardHide = React.useCallback(() => {
     Animated.timing(visibleAnim, {
       toValue: 1,
-      duration: 100 * scale,
+      // The bar slides back in, so decelerate (enter).
+      duration: motion.duration.short2 * scale,
+      easing: Easing.bezier(...motion.easing.standardDecelerate),
       useNativeDriver: true,
     }).start(() => {
       setKeyboardVisible(false);
     });
-  }, [scale, visibleAnim]);
+  }, [motion, scale, visibleAnim]);
 
   const animateToIndex = React.useCallback(
     (index: number) => {
+      // When animations are disabled (e.g. reduce motion), jump to the value.
+      if (scale === 0) {
+        tabsAnims.forEach((tab, i) => tab.setValue(i === index ? 1 : 0));
+        return;
+      }
+
       Animated.parallel(
-        navigationState.routes.map((_, i) =>
-          Animated.timing(tabsAnims[i], {
-            toValue: i === index ? 1 : 0,
-            duration: 150 * scale,
-            useNativeDriver: true,
-            easing: animationEasing,
-          })
-        )
+        navigationState.routes.map((_, i) => {
+          const toValue = i === index ? 1 : 0;
+          // Spring the active indicator for the M3-Expressive selection motion.
+          // A custom `animationEasing` opts back into timed (eased) movement.
+          return animationEasing
+            ? Animated.timing(tabsAnims[i], {
+                toValue,
+                duration: motion.duration.short4 * scale,
+                easing: animationEasing,
+                useNativeDriver: true,
+              })
+            : Animated.spring(tabsAnims[i], {
+                toValue,
+                ...toRawSpring(motion.spring.fast.spatial),
+                useNativeDriver: true,
+              });
+        })
       ).start(() => {
         // Workaround a bug in native animations where this is reset after first animation
         tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
       });
     },
-    [scale, navigationState.routes, tabsAnims, animationEasing]
+    [scale, navigationState.routes, tabsAnims, animationEasing, motion]
   );
 
   React.useEffect(() => {
