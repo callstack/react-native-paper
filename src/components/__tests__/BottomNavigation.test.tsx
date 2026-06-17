@@ -483,6 +483,33 @@ it('does not render legacy ripple overlay when shifting is disabled', () => {
   expect(queryByTestId('bottom-navigation-bar-content-ripple')).toBeNull();
 });
 
+it('renders the horizontal (flexible) variant', () => {
+  const tree = render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('falls back to icon-only when horizontal is combined with labeled=false', () => {
+  const { queryByText } = render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+      labeled={false}
+    />
+  );
+
+  // `horizontal` is a no-op without labels, so no label text is rendered.
+  expect(queryByText('Route: 0')).toBeNull();
+  expect(queryByText('Route: 1')).toBeNull();
+});
+
 it('renders MD3 state layers on hover, focus and press', () => {
   const navigationState = {
     index: 0,
