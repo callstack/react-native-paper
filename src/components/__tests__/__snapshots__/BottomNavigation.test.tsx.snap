@@ -222,6 +222,33 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -481,6 +508,33 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -903,6 +957,33 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -1104,6 +1185,33 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -1304,6 +1412,33 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -1667,6 +1802,33 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -1868,6 +2030,33 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -2068,6 +2257,33 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -2569,6 +2785,33 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -2888,6 +3131,33 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -3209,6 +3479,33 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -3529,6 +3826,33 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -3848,6 +4172,33 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -4330,6 +4681,33 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -4649,6 +5027,33 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -4970,6 +5375,33 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -5290,6 +5722,33 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -5609,6 +6068,33 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -6091,6 +6577,33 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -6279,6 +6792,33 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -6476,6 +7016,33 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -6835,6 +7402,33 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -7023,6 +7617,33 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -7217,6 +7838,33 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -7410,6 +8058,33 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -7602,6 +8277,33 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -7957,6 +8659,33 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -8277,6 +9006,33 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -8596,6 +9352,33 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -9078,6 +9861,33 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -9398,6 +10208,33 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -9717,6 +10554,33 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -10199,6 +11063,33 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -10519,6 +11410,33 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -10838,6 +11756,33 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -11320,6 +12265,33 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 />
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -11639,6 +12611,33 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
@@ -11960,6 +12959,33 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -12280,6 +13306,33 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
+                <View
                   collapsable={false}
                   style={
                     {
@@ -12599,6 +13652,33 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 }
               >
+                <View
+                  pointerEvents="none"
+                  style={
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 16,
+                          "height": 32,
+                          "width": 64,
+                        },
+                        null,
+                      ]
+                    }
+                  />
+                </View>
                 <View
                   collapsable={false}
                   style={
