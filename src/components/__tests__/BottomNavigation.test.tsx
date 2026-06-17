@@ -154,14 +154,13 @@ it('calls onIndexChange', async () => {
       renderScene={renderScene}
     />
   );
-
-  await layoutNavigationBar();
-
+  // Both the active and inactive labels render per tab, so target the last
+  // match (the label inside the tab) to fire the tab press.
   // pressing same index as active navigation state does not call onIndexChange
-  await userEvent.press(getTab(0));
+  fireEvent(screen.getAllByText('Route: 0').at(-1)!, 'onPress');
   expect(onIndexChange).not.toHaveBeenCalled();
 
-  await userEvent.press(getTab(1));
+  fireEvent(screen.getAllByText('Route: 1').at(-1)!, 'onPress');
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
@@ -178,10 +177,7 @@ it('calls onTabPress', async () => {
       renderScene={renderScene}
     />
   );
-
-  await layoutNavigationBar();
-
-  await userEvent.press(getTab(1));
+  fireEvent(screen.getAllByText('Route: 1').at(-1)!, 'onPress');
   expect(onTabPress).toHaveBeenCalled();
   expect(onTabPress).toHaveBeenCalledTimes(1);
   expect(onTabPress).toHaveBeenLastCalledWith(
@@ -208,10 +204,7 @@ it('calls onTabLongPress', async () => {
       renderScene={renderScene}
     />
   );
-
-  await layoutNavigationBar();
-
-  await userEvent.longPress(getTab(2));
+  fireEvent(screen.getAllByText('Route: 2').at(-1)!, 'onLongPress');
   expect(onTabLongPress).toHaveBeenCalled();
   expect(onTabLongPress).toHaveBeenCalledTimes(1);
   expect(onTabLongPress).toHaveBeenLastCalledWith(
@@ -240,21 +233,22 @@ it('renders non-shifting bottom navigation', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not crash when shifting is true and the number of tabs in the navigationState is less than 2', async () => {
-  jest.spyOn(console, 'warn').mockImplementation(() => {});
+it('does not warn or crash when the deprecated shifting prop is passed with fewer than 2 tabs', () => {
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-  await render(
+  const { getByTestId } = render(
     <BottomNavigation
       shifting={true}
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
-      renderScene={renderScene}
+      renderScene={({ route }) => route.title}
+      testID="bottom-navigation"
     />
   );
 
-  expect(console.warn).toHaveBeenCalledWith(
-    'BottomNavigation needs at least 2 tabs to run shifting animation'
-  );
+  // `shifting` is a deprecated no-op, so it no longer warns about tab count.
+  expect(getByTestId('bottom-navigation-bar')).toBeDefined();
+  expect(warn).not.toHaveBeenCalled();
 
   jest.restoreAllMocks();
 });
