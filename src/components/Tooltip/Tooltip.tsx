@@ -195,7 +195,8 @@ const Tooltip = ({
                 backgroundColor: theme.colors[Tokens.plain.container],
                 ...getTooltipPosition(
                   measurement as Measurement,
-                  children as React.ReactElement<TooltipChildProps>
+                  (children as React.ReactElement<TooltipChildProps>).props
+                    .style
                 ),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },

@@ -583,7 +583,7 @@ describe('Tooltip.Rich', () => {
     const wrapper = render(
       <PaperProvider>
         <TooltipCompound.Rich content="Body text" {...propOverrides}>
-          <DummyComponent />
+          {(props) => <DummyComponent {...props} />}
         </TooltipCompound.Rich>
       </PaperProvider>
     );
@@ -604,7 +604,7 @@ describe('Tooltip.Rich', () => {
     it('toggles title, content and actions when the trigger is pressed', () => {
       const {
         wrapper: { getByText, getByTestId, queryByText },
-      } = setup({ title: 'Heading', actions: <Text>Learn more</Text> });
+      } = setup({ title: 'Heading', actions: () => <Text>Learn more</Text> });
 
       expect(queryByText('Body text')).toBeNull();
 
@@ -674,15 +674,17 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
-    it('dismisses when an action is selected', () => {
+    it('dismisses when an action calls dismiss', () => {
       const {
-        wrapper: { getByText, getByTestId, queryByText },
-      } = setup({ actions: <Text>Learn more</Text> });
+        wrapper: { getByText, queryByText },
+      } = setup({
+        actions: ({ dismiss }) => <Text onPress={dismiss}>Learn more</Text>,
+      });
 
       fireEvent.press(getTrigger(getByText));
       expect(getByText('Body text')).toBeTruthy();
 
-      fireEvent(getByTestId('tooltip-rich-actions'), 'touchEnd');
+      fireEvent.press(getByText('Learn more'));
       runTimers(); // exit fade → unmount
 
       expect(queryByText('Body text')).toBeNull();
@@ -706,6 +708,21 @@ describe('Tooltip.Rich', () => {
       runTimers(100);
 
       expect(getByText('Body text')).toBeTruthy();
+    });
+
+    it('opens on keyboard focus and hides on blur', () => {
+      const {
+        wrapper: { getByText, queryByText },
+      } = setup({ leaveTouchDelay: 500 });
+
+      fireEvent(getTrigger(getByText), 'focus');
+      expect(getByText('Body text')).toBeTruthy();
+
+      fireEvent(getTrigger(getByText), 'blur');
+      runTimers(500); // leave delay → hide intent
+      runTimers(); // exit fade → unmount
+
+      expect(queryByText('Body text')).toBeNull();
     });
 
     it('keeps the tooltip open while the pointer moves into it (gap bridge)', () => {

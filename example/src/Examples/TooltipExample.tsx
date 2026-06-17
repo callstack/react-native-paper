@@ -152,21 +152,23 @@ const TooltipExample = () => {
             <Tooltip.Rich
               title="Add to library"
               content="Save this item to read it later from any of your devices."
-              actions={
+              actions={({ dismiss }) => (
                 <>
-                  <Button compact onPress={() => {}}>
+                  <Button compact onPress={dismiss}>
                     Learn more
                   </Button>
-                  <Button compact mode="contained" onPress={() => {}}>
+                  <Button compact mode="contained" onPress={dismiss}>
                     Add
                   </Button>
                 </>
-              }
+              )}
             >
-              <IconButton icon="plus" size={24} onPress={() => {}} />
+              {(props) => <IconButton {...props} icon="plus" size={24} />}
             </Tooltip.Rich>
             <Tooltip.Rich content="A rich tooltip with body text only — no title or actions.">
-              <IconButton icon="information" size={24} onPress={() => {}} />
+              {(props) => (
+                <IconButton {...props} icon="information" size={24} />
+              )}
             </Tooltip.Rich>
           </View>
         </List.Section>

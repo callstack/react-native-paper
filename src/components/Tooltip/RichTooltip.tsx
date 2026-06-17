@@ -12,7 +12,8 @@ import Animated from 'react-native-reanimated';
 
 import { useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
-import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
+import { getTooltipPosition } from './utils';
+import type { Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -20,11 +21,30 @@ import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
 
+/**
+ * Props passed to the `children` render function. Spread them onto the trigger
+ * element (and merge with your own handlers when you have them).
+ */
+export type TooltipRichTriggerProps = {
+  onPress?: () => void;
+  onHoverIn?: () => void;
+  onHoverOut?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+};
+
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Render function returning the trigger element. The provided props wire the
+   * tooltip's show/hide behavior and must be spread onto the returned element:
+   *
+   * ```js
+   * <Tooltip.Rich content="...">
+   *   {(props) => <IconButton {...props} icon="plus" />}
+   * </Tooltip.Rich>
+   * ```
    */
-  children: React.ReactElement;
+  children: (props: TooltipRichTriggerProps) => React.ReactElement;
   /**
    * Optional subhead shown above the content.
    */
@@ -35,10 +55,16 @@ export type Props = {
    */
   content: string | React.ReactElement;
   /**
-   * Action buttons (and/or links) rendered in a row below the content.
-   * Pressing one dismisses the tooltip.
+   * Render function for the action buttons (and/or links) shown in a row below
+   * the content. Call `dismiss` from an action to hide the tooltip:
+   *
+   * ```js
+   * actions={({ dismiss }) => (
+   *   <Button onPress={() => { doThing(); dismiss(); }}>Learn more</Button>
+   * )}
+   * ```
    */
-  actions?: React.ReactNode;
+  actions?: (props: { dismiss: () => void }) => React.ReactNode;
   /**
    * The number of milliseconds a user must hover the element before showing
    * the tooltip (web only).
@@ -67,7 +93,7 @@ export type Props = {
  * Rich tooltips display informative text along with an optional subhead and
  * action buttons. Unlike plain tooltips they are persistent and interactive:
  * tap the element to toggle the tooltip, then tap outside or an action to
- * dismiss it.
+ * dismiss it. On web they open on hover and on keyboard focus.
  *
  * ## Usage
  * ```js
@@ -78,9 +104,13 @@ export type Props = {
  *   <Tooltip.Rich
  *     title="Add to library"
  *     content="Save this item to read it later."
- *     actions={<Button compact>Learn more</Button>}
+ *     actions={({ dismiss }) => (
+ *       <Button compact onPress={dismiss}>
+ *         Learn more
+ *       </Button>
+ *     )}
  *   >
- *     <IconButton icon="plus" onPress={() => {}} />
+ *     {(props) => <IconButton {...props} icon="plus" />}
  *   </Tooltip.Rich>
  * );
  *
@@ -97,7 +127,6 @@ const RichTooltip = ({
   titleMaxFontSizeMultiplier,
   contentMaxFontSizeMultiplier,
   theme: themeOverrides,
-  ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
 
@@ -110,11 +139,6 @@ const RichTooltip = ({
 
   const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-
-  const isValidChild = React.useMemo(
-    () => React.isValidElement<TooltipChildProps>(children),
-    [children]
-  );
 
   const clearShowTimers = React.useCallback(() => {
     showTooltipTimer.current.forEach((t) => clearTimeout(t));
@@ -160,19 +184,14 @@ const RichTooltip = ({
     hideTooltipTimer.current.push(id);
   }, [clearShowTimers, leaveTouchDelay]);
 
-  // Mobile: a tap toggles the tooltip and still forwards the child's onPress.
+  // Mobile: a tap toggles the tooltip.
   const handlePress = React.useCallback(() => {
-    if (visible) {
-      hide();
-    } else {
-      show();
-    }
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onPress?.();
-    }
-  }, [visible, hide, show, isValidChild, children.props]);
+    setVisible((v) => !v);
+    clearShowTimers();
+    clearHideTimers();
+  }, [clearShowTimers, clearHideTimers]);
 
-  // Web: open on hover, with a short enter delay.
+  // Web: open on hover (with a short enter delay) and on keyboard focus.
   const handleHoverIn = React.useCallback(() => {
     clearHideTimers();
     const id = setTimeout(
@@ -180,26 +199,17 @@ const RichTooltip = ({
       enterTouchDelay
     ) as unknown as NodeJS.Timeout;
     showTooltipTimer.current.push(id);
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverIn?.();
-    }
-  }, [clearHideTimers, enterTouchDelay, isValidChild, children.props]);
+  }, [clearHideTimers, enterTouchDelay]);
 
-  const handleHoverOut = React.useCallback(() => {
-    scheduleHide();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverOut?.();
-    }
-  }, [scheduleHide, isValidChild, children.props]);
-
-  const mobilePressProps = {
-    onPress: handlePress,
-  };
-
-  const webPressProps = {
-    onHoverIn: handleHoverIn,
-    onHoverOut: handleHoverOut,
-  };
+  // Trigger props handed to the consumer's render function.
+  const triggerProps: TooltipRichTriggerProps = isWeb
+    ? {
+        onHoverIn: handleHoverIn,
+        onHoverOut: scheduleHide,
+        onFocus: show,
+        onBlur: scheduleHide,
+      }
+    : { onPress: handlePress };
 
   // Web only: keep the tooltip open while the pointer travels from the trigger
   // into the tooltip (and re-schedule the hide once it leaves the tooltip).
@@ -222,10 +232,7 @@ const RichTooltip = ({
             onLayout={onLayout}
             style={[
               styles.container,
-              getTooltipPosition(
-                measurement as Measurement,
-                children as React.ReactElement<TooltipChildProps>
-              ),
+              getTooltipPosition(measurement as Measurement),
               animatedStyle,
             ]}
             testID="tooltip-rich-container"
@@ -267,14 +274,8 @@ const RichTooltip = ({
                   content
                 )}
                 {actions ? (
-                  // `onTouchEnd` bubbles from the pressed action up to this
-                  // wrapper, so selecting any action dismisses the tooltip.
-                  <View
-                    style={styles.actions}
-                    onTouchEnd={hide}
-                    testID="tooltip-rich-actions"
-                  >
-                    {actions}
+                  <View style={styles.actions} testID="tooltip-rich-actions">
+                    {actions({ dismiss: hide })}
                   </View>
                 ) : null}
               </Surface>
@@ -282,16 +283,9 @@ const RichTooltip = ({
           </Animated.View>
         </Portal>
       )}
-      <Pressable
-        ref={childrenWrapperRef}
-        style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
-      >
-        {React.cloneElement(children, {
-          ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
-        })}
-      </Pressable>
+      <View ref={childrenWrapperRef} style={styles.pressContainer}>
+        {children(triggerProps)}
+      </View>
     </>
   );
 };
@@ -313,6 +307,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   pressContainer: {
+    alignSelf: 'flex-start',
     ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,
 });
