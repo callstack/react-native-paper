@@ -34,10 +34,9 @@ const createState = (index: number, length: number) => ({
   })),
 });
 
-it('renders shifting bottom navigation', () => {
+it('renders bottom navigation', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -50,7 +49,6 @@ it('renders shifting bottom navigation', () => {
 it('renders bottom navigation with scene animation', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       sceneAnimationEnabled
       sceneAnimationType="shifting"
       sceneAnimationEasing={Easing.ease}
@@ -69,7 +67,6 @@ it.skip('sceneAnimationEnabled matches animation requirements', async () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       sceneAnimationEnabled
       sceneAnimationType="shifting"
       sceneAnimationEasing={ease}
@@ -132,7 +129,6 @@ it('calls onIndexChange', () => {
   const onIndexChange = jest.fn();
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={onIndexChange}
       renderScene={({ route }) => route.title}
@@ -154,7 +150,6 @@ it('calls onTabPress', () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       onTabPress={onTabPress}
       onIndexChange={onIndexChange}
       navigationState={createState(0, 5)}
@@ -181,7 +176,6 @@ it('calls onTabLongPress', () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       onIndexChange={onIndexChange}
       onTabLongPress={onTabLongPress}
       navigationState={createState(0, 5)}
@@ -202,10 +196,9 @@ it('calls onTabLongPress', () => {
   );
 });
 
-it('renders non-shifting bottom navigation', () => {
+it('renders bottom navigation with three tabs', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -235,10 +228,9 @@ it('does not warn or crash when the deprecated shifting prop is passed with fewe
   jest.restoreAllMocks();
 });
 
-it('renders custom icon and label in shifting bottom navigation', () => {
+it('renders custom icon and label', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -256,31 +248,9 @@ it('renders custom icon and label in shifting bottom navigation', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders custom icon and label in non-shifting bottom navigation', () => {
+it('renders with custom active and inactive colors', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      renderIcon={({ route, color }) => (
-        <Icon color={color} source={route.unfocusedIcon} size={24} />
-      )}
-      renderLabel={({ route, color }) => (
-        <text color={typeof color === 'string' ? color : undefined}>
-          {route.title}
-        </text>
-      )}
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -292,39 +262,9 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
   expect(tree).toMatchSnapshot();
 });
 
-it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
+it('hides labels when labeled is false', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      activeColor="#FBF7DB"
-      inactiveColor="#853D4B"
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('hides labels in shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting
-      labeled={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('hides labels in non-shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting={false}
       labeled={false}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
@@ -357,7 +297,6 @@ it('should have labelMaxFontSizeMultiplier passed to label', () => {
   const labelMaxFontSizeMultiplier = 2;
   const { getAllByText } = render(
     <BottomNavigation
-      shifting={false}
       labeled={true}
       labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
       navigationState={createState(0, 3)}
@@ -374,7 +313,6 @@ it('should have labelMaxFontSizeMultiplier passed to label', () => {
 it('renders custom background color passed to barStyle property', () => {
   const { getByTestId } = render(
     <BottomNavigation
-      shifting={false}
       labeled={true}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
@@ -391,7 +329,6 @@ it('renders custom background color passed to barStyle property', () => {
 it('renders a single tab', () => {
   const { queryByTestId } = render(
     <BottomNavigation
-      shifting={false}
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -424,7 +361,6 @@ it('applies maxTabBarWidth styling if compact prop is truthy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      shifting={false}
       testID="bottom-navigation"
       compact
     />
@@ -442,7 +378,6 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      shifting={false}
       testID="bottom-navigation"
       compact={false}
     />
@@ -453,7 +388,7 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
   });
 });
 
-it('renders bar content when shifting is enabled', () => {
+it('renders bar content', () => {
   const { getByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -461,14 +396,13 @@ it('renders bar content when shifting is enabled', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
-      shifting
     />
   );
 
   expect(getByTestId('bottom-navigation-bar-content')).toBeDefined();
 });
 
-it('does not render legacy ripple overlay when shifting is disabled', () => {
+it('does not render the legacy ripple overlay', () => {
   const { queryByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -476,7 +410,6 @@ it('does not render legacy ripple overlay when shifting is disabled', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
-      shifting={false}
     />
   );
 
