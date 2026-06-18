@@ -29,6 +29,11 @@ import {
   MIN_TAB_WIDTH,
   NO_LABEL_BAR_HEIGHT,
 } from './tokens';
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { getStateLayer } from '../../theme/utils/state';
@@ -38,11 +43,6 @@ import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
-import {
-  getActiveTintColor,
-  getInactiveTintColor,
-  getLabelColor,
-} from '../BottomNavigation/utils';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -411,7 +411,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
             {
               opacity: active,
               transform: [{ scaleX: outlineScale }],
-              backgroundColor: colors.secondaryContainer,
+              backgroundColor: colors[colorRoles.activeIndicator],
             },
             activeIndicatorStyle,
           ]}
@@ -442,7 +442,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
             {
-              backgroundColor: colors.secondaryContainer,
+              backgroundColor: colors[colorRoles.activeIndicator],
               opacity: active,
               transform: [
                 {

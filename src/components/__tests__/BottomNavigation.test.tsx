@@ -8,13 +8,13 @@ import { render, screen } from '../../test-utils';
 import { Palette } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
+import Icon from '../Icon';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import {
   getActiveTintColor,
   getInactiveTintColor,
   getLabelColor,
-} from '../BottomNavigation/utils';
-import Icon from '../Icon';
-import NavigationBar from '../NavigationBar/NavigationBar';
+} from '../NavigationBar/utils';
 
 const styles = StyleSheet.create({
   backgroundColor: {
@@ -151,8 +151,8 @@ it('calls onIndexChange', async () => {
       renderScene={renderScene}
     />
   );
-  // Both the active and inactive labels render per tab, so target the last
-  // match (the label inside the tab) to fire the tab press.
+  // The active scene also renders the route title, so target the last match
+  // (the tab label) to fire the tab press.
   // pressing same index as active navigation state does not call onIndexChange
   fireEvent(screen.getAllByText('Route: 0').at(-1)!, 'onPress');
   expect(onIndexChange).not.toHaveBeenCalled();
