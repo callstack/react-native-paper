@@ -9,8 +9,7 @@
     "preview": "rspress preview",
     "typecheck": "tsc --noEmit",
     "generate": "node scripts/generate-rspress-content.mjs && node scripts/generate-current-component-docs.mjs",
-    "test:generate": "node --test tests/**/*.test.mjs",
-    "visual:local": "playwright test -c visual/playwright.config.ts"
+    "test:generate": "node --test tests/**/*.test.mjs"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.9",
@@ -37,7 +36,6 @@
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^19.2.3",
     "component-docs": "^0.24.0",
-    "playwright": "^1.57.0",
     "typescript": "5.8.3"
   },
   "browserslist": {
