@@ -260,7 +260,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
 
 /**
  * BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
- * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
+ * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`NavigationBar`](../NavigationBar).
  *
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.

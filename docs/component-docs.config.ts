@@ -40,7 +40,6 @@ const pages = {
   Banner: 'Banner',
   BottomNavigation: {
     BottomNavigation: 'BottomNavigation/BottomNavigation',
-    BottomNavigationBar: 'BottomNavigation/BottomNavigationBar',
   },
   Button: {
     Button: 'Button/Button',
@@ -103,6 +102,9 @@ const pages = {
     MenuItem: 'Menu/MenuItem',
   },
   Modal: 'Modal',
+  NavigationBar: {
+    NavigationBar: 'NavigationBar/NavigationBar',
+  },
   Portal: {
     Portal: 'Portal/Portal',
     PortalHost: 'Portal/PortalHost',

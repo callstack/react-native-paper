@@ -105,6 +105,13 @@
   "Modal",
   {
     "type": "dir",
+    "name": "NavigationBar",
+    "label": "NavigationBar",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
     "name": "Portal",
     "label": "Portal",
     "collapsible": true,
