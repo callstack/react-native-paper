@@ -9,12 +9,12 @@ import type {
 
 import useLatestCallback from 'use-latest-callback';
 
-import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type BaseRoute = {
@@ -48,13 +48,6 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
 };
 
 export type Props<Route extends BaseRoute> = {
-  /**
-   * @deprecated The `shifting` style is a Material Design 2 pattern that is not
-   * part of Material Design 3 and no longer has any effect. It will be removed
-   * in a future version. To animate scene transitions, use `sceneAnimationType`
-   * and `sceneAnimationEnabled` instead.
-   */
-  shifting?: boolean;
   /**
    * Whether to show labels in tabs. When `false`, only icons will be displayed.
    */
@@ -199,8 +192,8 @@ export type Props<Route extends BaseRoute> = {
    */
   inactiveColor?: string;
   /**
-   * Whether animation is enabled for scenes transitions in `shifting` mode.
-   * By default, the scenes cross-fade during tab change when `shifting` is enabled.
+   * Whether animation is enabled for scene transitions.
+   * By default, the scenes cross-fade during tab change.
    * Specify `sceneAnimationEnabled` as `false` to disable the animation.
    */
   sceneAnimationEnabled?: boolean;
@@ -546,7 +539,7 @@ const BottomNavigation = <Route extends BaseRoute>({
           );
         })}
       </View>
-      <BottomNavigationBar
+      <NavigationBar
         navigationState={navigationState}
         renderIcon={renderIcon}
         renderLabel={renderLabel}
@@ -600,14 +593,6 @@ BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
     />
   );
 };
-
-/**
- * @deprecated Use the top-level `NavigationBar` export instead.
- * `BottomNavigation.Bar` is the M3 "original" navigation bar, superseded by the
- * flexible `NavigationBar`. Kept as an alias for backwards compatibility.
- */
-// @component ./BottomNavigationBar.tsx
-BottomNavigation.Bar = BottomNavigationBar;
 
 export default BottomNavigation;
 

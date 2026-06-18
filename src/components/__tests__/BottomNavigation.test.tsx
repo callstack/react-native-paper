@@ -208,26 +208,6 @@ it('renders bottom navigation with three tabs', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not warn or crash when the deprecated shifting prop is passed with fewer than 2 tabs', () => {
-  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-  const { getByTestId } = render(
-    <BottomNavigation
-      shifting={true}
-      navigationState={createState(0, 1)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      testID="bottom-navigation"
-    />
-  );
-
-  // `shifting` is a deprecated no-op, so it no longer warns about tab count.
-  expect(getByTestId('bottom-navigation-bar')).toBeDefined();
-  expect(warn).not.toHaveBeenCalled();
-
-  jest.restoreAllMocks();
-});
-
 it('renders custom icon and label', () => {
   const tree = render(
     <BottomNavigation
@@ -430,7 +410,7 @@ it('renders tab labels when labeled', () => {
     />
   );
 
-  // Each tab renders an active and inactive label layer, so both match.
+  // Each tab renders a single label (no cross-fade layers).
   expect(getAllByText('Alpha').length).toBeGreaterThan(0);
   expect(getAllByText('Beta').length).toBeGreaterThan(0);
 });
