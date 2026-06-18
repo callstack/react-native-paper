@@ -499,6 +499,63 @@ it('renders MD3 state layers on hover, focus and press', () => {
   expect(layerOpacity()).toBeUndefined();
 });
 
+it('colors the focused tab label with secondary and others with onSurfaceVariant', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify' },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+    ],
+  };
+
+  const { getAllByText } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  const colorsOf = (text: string) =>
+    getAllByText(text).map(
+      (node) => StyleSheet.flatten(node.props.style).color
+    );
+
+  expect(colorsOf('Alpha')).toContain(getTheme().colors.secondary);
+  expect(colorsOf('Beta')).toContain(getTheme().colors.onSurfaceVariant);
+});
+
+it('renders the active indicator with the secondaryContainer color', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify', testID: 'tab-a' },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera', testID: 'tab-b' },
+    ],
+  };
+
+  const { getByTestId } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tab-a-active-indicator').props.style)
+      .backgroundColor
+  ).toBe(getTheme().colors.secondaryContainer);
+});
+
+it('renders a badge for routes that define one', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify', badge: 3 },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+    ],
+  };
+
+  const { getByText } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  expect(getByText('3')).toBeTruthy();
+});
+
 describe('getActiveTintColor', () => {
   it.each`
     activeColor  | expected
