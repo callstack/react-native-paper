@@ -366,7 +366,7 @@ const Menu = ({
     });
   }, [anchor, attachListeners, measureAnchorLayout, theme]);
 
-  const hide = React.useCallback(() => {
+  const hide = React.useCallback((focus = true) => {
     removeListeners();
 
     const { animation } = theme;
@@ -380,7 +380,7 @@ const Menu = ({
       setMenuLayout({ width: 0, height: 0 });
       setRendered(false);
       prevRendered.current = false;
-      focusFirstDOMNode(anchorRef.current);
+      if (focus) { focusFirstDOMNode(anchorRef.current) };
     });
   }, [removeListeners, theme]);
 
@@ -395,7 +395,7 @@ const Menu = ({
         }
 
         if (!display) {
-          hide();
+          hide(prevRendered.current);
         }
 
         return;
