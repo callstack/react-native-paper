@@ -554,7 +554,6 @@ const BottomNavigation = <Route extends BaseRoute>({
         style={barStyle}
         activeIndicatorStyle={activeIndicatorStyle}
         labeled={labeled}
-        animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}
         onTabLongPress={onTabLongPress}
         safeAreaInsets={safeAreaInsets}

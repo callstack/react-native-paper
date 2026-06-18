@@ -1,20 +1,22 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  Platform,
-  StyleSheet,
-  Pressable,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
+  Animated as RNAnimated,
   ColorValue,
-  EasingFunction,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -35,11 +37,10 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { getStateLayer } from '../../theme/utils/state';
 import type { Theme, ThemeProp } from '../../types';
-import useAnimatedValue from '../../utils/useAnimatedValue';
-import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
@@ -190,10 +191,6 @@ export type Props<Route extends BaseRoute> = {
    */
   inactiveColor?: string;
   /**
-   * The scene animation Easing.
-   */
-  animationEasing?: EasingFunction | undefined;
-  /**
    * Whether the bottom navigation bar is hidden when keyboard is shown.
    * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
    */
@@ -212,7 +209,7 @@ export type Props<Route extends BaseRoute> = {
    * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: RNAnimated.WithAnimatedValue<StyleProp<ViewStyle>>;
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -253,7 +250,6 @@ const Touchable = <Route extends BaseRoute>({
 type ItemProps<Route extends BaseRoute> = {
   route: Route;
   focused: boolean;
-  active: Animated.Value;
   labeled: boolean;
   variant: 'stacked' | 'horizontal';
   activeTintColor: ColorValue;
@@ -277,7 +273,6 @@ type ItemProps<Route extends BaseRoute> = {
 const NavigationBarItem = <Route extends BaseRoute>({
   route,
   focused,
-  active,
   labeled,
   variant,
   activeTintColor,
@@ -303,13 +298,39 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const [keyboardFocused, setKeyboardFocused] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
 
-  // The active indicator is always mounted and cross-fades via `active` opacity
-  // (remounting it on focus change breaks native-driven animations). In the
-  // stacked layout it also scales horizontally from 0.5 → 1 on selection.
-  const outlineScale = active.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.5, 1],
-  });
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  // Selection progress for the active indicator: 1 when focused, 0 otherwise.
+  // Each item springs its own progress from its `focused` prop, so there's no
+  // shared animation array to keep in sync.
+  const progress = useSharedValue(focused ? 1 : 0);
+  const isFirstRender = React.useRef(true);
+
+  React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    progress.value = withSpring(focused ? 1 : 0, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: reanimatedReduceMotion,
+    });
+  }, [focused, progress, theme.motion, reanimatedReduceMotion]);
+
+  // The active indicator is always mounted and cross-fades via opacity (the
+  // stacked layout also scales it horizontally 0.5 → 1, the horizontal layout
+  // scales it 0.8 → 1).
+  const stackedIndicatorAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: progress.value,
+    transform: [{ scaleX: 0.5 + progress.value * 0.5 }],
+  }));
+  const horizontalIndicatorAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: progress.value,
+    transform: [{ scale: 0.8 + progress.value * 0.2 }],
+  }));
 
   const iconColor = focused ? activeTintColor : inactiveTintColor;
   const labelColor = getLabelColor({
@@ -408,11 +429,8 @@ const NavigationBarItem = <Route extends BaseRoute>({
           testID={indicatorTestID}
           style={[
             styles.stackedIndicator,
-            {
-              opacity: active,
-              transform: [{ scaleX: outlineScale }],
-              backgroundColor: colors[colorRoles.activeIndicator],
-            },
+            { backgroundColor: colors[colorRoles.activeIndicator] },
+            stackedIndicatorAnimatedStyle,
             activeIndicatorStyle,
           ]}
         />
@@ -441,18 +459,8 @@ const NavigationBarItem = <Route extends BaseRoute>({
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
-            {
-              backgroundColor: colors[colorRoles.activeIndicator],
-              opacity: active,
-              transform: [
-                {
-                  scale: active.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.8, 1],
-                  }),
-                },
-              ],
-            },
+            { backgroundColor: colors[colorRoles.activeIndicator] },
+            horizontalIndicatorAnimatedStyle,
             activeIndicatorStyle,
           ]}
         />
@@ -500,14 +508,8 @@ const NavigationBarItem = <Route extends BaseRoute>({
  * The Material Design 3 flexible navigation bar. It can easily be integrated
  * with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
  *
- * The flexible navigation bar replaces the original (now deprecated) navigation
- * bar exposed as `BottomNavigation.Bar`. Set the `variant` prop to `'horizontal'`
- * to lay items out horizontally (icon beside label) in medium-width windows.
- *
- * Migrating from `BottomNavigation.Bar`: it is deprecated in favor of
- * `NavigationBar`. The Material Design 2 `shifting` prop has been removed (it
- * has no MD3 equivalent), tab interactions now show MD3 state layers instead of
- * suppressing feedback, and the bar height follows the 64dp spec.
+ * Set the `variant` prop to `'horizontal'` to lay items out horizontally
+ * (icon beside label) in medium-width windows.
  *
  * ## Usage
  * ### without React Navigation
@@ -588,7 +590,6 @@ const NavigationBar = <Route extends BaseRoute>({
   activeIndicatorStyle,
   labeled = true,
   variant = 'stacked',
-  animationEasing,
   onTabPress,
   onTabLongPress,
   safeAreaInsets,
@@ -600,23 +601,17 @@ const NavigationBar = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { colors, motion } = theme as Theme;
   const { bottom, left, right } = useSafeAreaInsets();
-  const { scale } = theme.animation;
   const compact = compactProp ?? false;
+
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
 
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
-  const visibleAnim = useAnimatedValue(1);
-
-  /**
-   * Active state of individual tab items, active state is 1 and inactive state is 0.
-   */
-  const tabsAnims = useAnimatedValueArray(
-    navigationState.routes.map(
-      // focused === 1, unfocused === 0
-      (_, i) => (i === navigationState.index ? 1 : 0)
-    )
-  );
+  const visible = useSharedValue(1);
 
   /**
    * Layout of the navigation bar.
@@ -630,76 +625,40 @@ const NavigationBar = <Route extends BaseRoute>({
 
   const handleKeyboardShow = React.useCallback(() => {
     setKeyboardVisible(true);
-    Animated.timing(visibleAnim, {
-      toValue: 0,
+    visible.value = withTiming(0, {
       // The bar slides out, so accelerate (exit).
-      duration: motion.duration.short3 * scale,
+      duration: motion.duration.short3,
       easing: Easing.bezier(...motion.easing.standardAccelerate),
-      useNativeDriver: true,
-    }).start();
-  }, [motion, scale, visibleAnim]);
+      reduceMotion: reanimatedReduceMotion,
+    });
+  }, [motion, reanimatedReduceMotion, visible]);
 
   const handleKeyboardHide = React.useCallback(() => {
-    Animated.timing(visibleAnim, {
-      toValue: 1,
-      // The bar slides back in, so decelerate (enter).
-      duration: motion.duration.short2 * scale,
-      easing: Easing.bezier(...motion.easing.standardDecelerate),
-      useNativeDriver: true,
-    }).start(() => {
-      setKeyboardVisible(false);
-    });
-  }, [motion, scale, visibleAnim]);
-
-  const animateToIndex = React.useCallback(
-    (index: number) => {
-      // When animations are disabled (e.g. reduce motion), jump to the value.
-      if (scale === 0) {
-        tabsAnims.forEach((tab, i) => tab.setValue(i === index ? 1 : 0));
-        return;
+    visible.value = withTiming(
+      1,
+      {
+        // The bar slides back in, so decelerate (enter).
+        duration: motion.duration.short2,
+        easing: Easing.bezier(...motion.easing.standardDecelerate),
+        reduceMotion: reanimatedReduceMotion,
+      },
+      (finished) => {
+        if (finished) {
+          runOnJS(setKeyboardVisible)(false);
+        }
       }
+    );
+  }, [motion, reanimatedReduceMotion, visible]);
 
-      Animated.parallel(
-        navigationState.routes.map((_, i) => {
-          const toValue = i === index ? 1 : 0;
-          // Spring the active indicator for the M3-Expressive selection motion.
-          // A custom `animationEasing` opts back into timed (eased) movement.
-          return animationEasing
-            ? Animated.timing(tabsAnims[i], {
-                toValue,
-                duration: motion.duration.short4 * scale,
-                easing: animationEasing,
-                useNativeDriver: true,
-              })
-            : Animated.spring(tabsAnims[i], {
-                toValue,
-                ...toRawSpring(motion.spring.fast.spatial),
-                useNativeDriver: true,
-              });
-        })
-      ).start(() => {
-        // Workaround a bug in native animations where this is reset after first animation
-        tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
-      });
-    },
-    [scale, navigationState.routes, tabsAnims, animationEasing, motion]
-  );
-
-  React.useEffect(() => {
-    // Workaround for native animated bug in react-native@^0.57
-    // Context: https://github.com/callstack/react-native-paper/pull/637
-    animateToIndex(navigationState.index);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Slide the bar down by its own height when the keyboard hides it.
+  const barAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: (1 - visible.value) * layout.height }],
+  }));
 
   useIsKeyboardShown({
     onShow: handleKeyboardShow,
     onHide: handleKeyboardHide,
   });
-
-  React.useEffect(() => {
-    animateToIndex(navigationState.index);
-  }, [navigationState.index, animateToIndex]);
 
   const eventForIndex = (index: number) => {
     const event = {
@@ -743,28 +702,13 @@ const NavigationBar = <Route extends BaseRoute>({
   };
 
   return (
-    <Surface
-      elevation={0}
-      testID={testID}
+    <Animated.View
       style={[
         styles.bar,
-        keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
-          ? {
-              // When the keyboard is shown, slide down the navigation bar
-              transform: [
-                {
-                  translateY: visibleAnim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [layout.height, 0],
-                  }),
-                },
-              ],
-              // Absolutely position the navigation bar so that the content is below it
-              // This is needed to avoid gap at bottom when the navigation bar is hidden
-              position: keyboardVisible ? 'absolute' : undefined,
-            }
-          : null,
-        style,
+        // When the keyboard hides the bar, slide it down by its own height and
+        // absolutely position it so the content can sit below.
+        keyboardHidesNavigationBar ? barAnimatedStyle : null,
+        keyboardHidesNavigationBar && keyboardVisible ? styles.absolute : null,
       ]}
       pointerEvents={
         layout.measured
@@ -774,59 +718,59 @@ const NavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
-      container
     >
-      <Animated.View
-        style={[styles.barContent, { backgroundColor }]}
-        testID={`${testID}-content`}
-      >
+      <Surface elevation={0} testID={testID} style={style} container>
         <View
-          style={[
-            styles.items,
-            {
-              marginBottom: insets.bottom,
-              marginHorizontal: Math.max(insets.left, insets.right),
-            },
-            compact && {
-              maxWidth: maxTabBarWidth,
-            },
-          ]}
-          accessibilityRole={'tablist'}
-          testID={`${testID}-content-wrapper`}
+          style={[styles.barContent, { backgroundColor }]}
+          testID={`${testID}-content`}
         >
-          {routes.map((route, index) => {
-            const focused = navigationState.index === index;
+          <View
+            style={[
+              styles.items,
+              {
+                marginBottom: insets.bottom,
+                marginHorizontal: Math.max(insets.left, insets.right),
+              },
+              compact && {
+                maxWidth: maxTabBarWidth,
+              },
+            ]}
+            accessibilityRole={'tablist'}
+            testID={`${testID}-content-wrapper`}
+          >
+            {routes.map((route, index) => {
+              const focused = navigationState.index === index;
 
-            return (
-              <NavigationBarItem
-                key={route.key}
-                route={route}
-                focused={focused}
-                active={tabsAnims[index]}
-                labeled={labeled}
-                variant={variant}
-                activeTintColor={activeTintColor}
-                inactiveTintColor={inactiveTintColor}
-                activeColor={activeColor}
-                inactiveColor={inactiveColor}
-                renderIcon={renderIcon}
-                renderLabel={renderLabel}
-                renderTouchable={renderTouchable}
-                getLabelText={getLabelText}
-                getBadge={getBadge}
-                getTestID={getTestID}
-                getAccessibilityLabel={getAccessibilityLabel}
-                onPress={() => onTabPress(eventForIndex(index))}
-                onLongPress={() => onTabLongPress?.(eventForIndex(index))}
-                activeIndicatorStyle={activeIndicatorStyle}
-                labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                theme={theme as Theme}
-              />
-            );
-          })}
+              return (
+                <NavigationBarItem
+                  key={route.key}
+                  route={route}
+                  focused={focused}
+                  labeled={labeled}
+                  variant={variant}
+                  activeTintColor={activeTintColor}
+                  inactiveTintColor={inactiveTintColor}
+                  activeColor={activeColor}
+                  inactiveColor={inactiveColor}
+                  renderIcon={renderIcon}
+                  renderLabel={renderLabel}
+                  renderTouchable={renderTouchable}
+                  getLabelText={getLabelText}
+                  getBadge={getBadge}
+                  getTestID={getTestID}
+                  getAccessibilityLabel={getAccessibilityLabel}
+                  onPress={() => onTabPress(eventForIndex(index))}
+                  onLongPress={() => onTabLongPress?.(eventForIndex(index))}
+                  activeIndicatorStyle={activeIndicatorStyle}
+                  labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                  theme={theme as Theme}
+                />
+              );
+            })}
+          </View>
         </View>
-      </Animated.View>
-    </Surface>
+      </Surface>
+    </Animated.View>
   );
 };
 
@@ -839,6 +783,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  absolute: {
+    position: 'absolute',
   },
   barContent: {
     alignItems: 'center',
