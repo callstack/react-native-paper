@@ -11,6 +11,7 @@ import type {
   ColorValue,
   EasingFunction,
   StyleProp,
+  TextStyle,
   ViewStyle,
 } from 'react-native';
 
@@ -20,6 +21,7 @@ import {
   BAR_HEIGHT,
   colorRoles,
   ICON_LABEL_GAP,
+  ICON_SIZE,
   INDICATOR_BORDER_RADIUS,
   INDICATOR_HEIGHT,
   INDICATOR_WIDTH,
@@ -301,36 +303,23 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const [keyboardFocused, setKeyboardFocused] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
 
-  // We render the active icon and label on top of the inactive ones and toggle
-  // their opacity on change, so the active/inactive colors swap without
-  // animating color (which the native driver can't do).
-  const activeOpacity = focused ? 1 : 0;
-  const inactiveOpacity = focused ? 0 : 1;
-
-  // Scale horizontally the active-indicator pill. The indicator is always
-  // mounted and its visibility is driven by `active` opacity, so it cross-fades
-  // between tabs instead of remounting (which breaks native-driven animations).
+  // The active indicator is always mounted and cross-fades via `active` opacity
+  // (remounting it on focus change breaks native-driven animations). In the
+  // stacked layout it also scales horizontally from 0.5 → 1 on selection.
   const outlineScale = active.interpolate({
     inputRange: [0, 1],
     outputRange: [0.5, 1],
   });
 
+  const iconColor = focused ? activeTintColor : inactiveTintColor;
+  const labelColor = getLabelColor({
+    tintColor: iconColor,
+    hasColor: Boolean(focused ? activeColor : inactiveColor),
+    focused,
+    theme,
+  });
+
   const badge = getBadge({ route });
-
-  const activeLabelColor = getLabelColor({
-    tintColor: activeTintColor,
-    hasColor: Boolean(activeColor),
-    focused,
-    theme,
-  });
-
-  const inactiveLabelColor = getLabelColor({
-    tintColor: inactiveTintColor,
-    hasColor: Boolean(inactiveColor),
-    focused,
-    theme,
-  });
-
   const badgeStyle = {
     top: typeof badge === 'boolean' ? 4 : 2,
     right:
@@ -341,9 +330,8 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   const font = theme.fonts.labelMedium;
 
-  // MD3 state layer: visible on hover (8%) and focus/press (10%), shaped like
-  // the active-indicator pill. Active items use the on-secondary-container
-  // role, inactive items the on-surface-variant role.
+  // MD3 state layer: visible on hover (8%) and focus/press (10%). Active items
+  // use the on-secondary-container role, inactive the on-surface-variant role.
   const stateLayerRole = focused
     ? colorRoles.activeIcon
     : colorRoles.inactiveIcon;
@@ -354,22 +342,72 @@ const NavigationBarItem = <Route extends BaseRoute>({
     : hovered
     ? getStateLayer(theme, stateLayerRole, 'hovered')
     : null;
+  const stateLayerColor = stateLayer
+    ? { backgroundColor: stateLayer.color, opacity: stateLayer.opacity }
+    : null;
 
   const itemTestID = getTestID({ route });
+  const indicatorTestID = itemTestID
+    ? `${itemTestID}-active-indicator`
+    : undefined;
+  const stateLayerTestID = itemTestID ? `${itemTestID}-state-layer` : undefined;
+
   // The horizontal arrangement places the label beside the icon and only
   // applies when labels are shown; otherwise it falls back to stacked icon-only.
   const horizontal = variant === 'horizontal' && labeled;
 
+  // Item pieces shared across both layouts. The active/inactive distinction is
+  // a plain color swap (no cross-fade), so a single icon and label suffice.
+  const icon = renderIcon ? (
+    renderIcon({ route, focused, color: iconColor })
+  ) : (
+    <Icon
+      source={
+        (focused
+          ? route.focusedIcon
+          : route.unfocusedIcon ?? route.focusedIcon) as IconSource
+      }
+      color={iconColor}
+      size={ICON_SIZE}
+    />
+  );
+
+  const tabBadge = (
+    <View style={[styles.badgeContainer, badgeStyle]}>
+      {typeof badge === 'boolean' ? (
+        <Badge visible={badge} size={6} />
+      ) : (
+        <Badge visible={badge != null} size={16}>
+          {badge}
+        </Badge>
+      )}
+    </View>
+  );
+
+  const renderTabLabel = (labelStyle: StyleProp<TextStyle>) =>
+    renderLabel ? (
+      renderLabel({ route, focused, color: labelColor })
+    ) : (
+      <Text
+        maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        variant="labelMedium"
+        selectable={false}
+        style={[labelStyle, { color: labelColor, ...font }]}
+      >
+        {getLabelText({ route })}
+      </Text>
+    );
+
   const stackedContent = (
     <View
       pointerEvents="none"
-      style={labeled ? styles.v3TouchableContainer : styles.v3NoLabelContainer}
+      style={labeled ? styles.stackedContainer : styles.noLabelContainer}
     >
-      <Animated.View style={[styles.iconContainer, styles.v3IconContainer]}>
+      <View style={styles.iconContainer}>
         <Animated.View
-          testID={itemTestID ? `${itemTestID}-active-indicator` : undefined}
+          testID={indicatorTestID}
           style={[
-            styles.outline,
+            styles.stackedIndicator,
             {
               opacity: active,
               transform: [{ scaleX: outlineScale }],
@@ -380,102 +418,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
         />
         <View pointerEvents="none" style={styles.stateLayerWrapper}>
           <View
-            testID={itemTestID ? `${itemTestID}-state-layer` : undefined}
-            style={[
-              styles.stateLayer,
-              stateLayer && {
-                backgroundColor: stateLayer.color,
-                opacity: stateLayer.opacity,
-              },
-            ]}
+            testID={stateLayerTestID}
+            style={[styles.stateLayer, stateLayerColor]}
           />
         </View>
-        <Animated.View
-          style={[
-            styles.iconWrapper,
-            styles.v3IconWrapper,
-            { opacity: activeOpacity },
-          ]}
-        >
-          {renderIcon ? (
-            renderIcon({ route, focused: true, color: activeTintColor })
-          ) : (
-            <Icon
-              source={route.focusedIcon as IconSource}
-              color={activeTintColor}
-              size={24}
-            />
-          )}
-        </Animated.View>
-        <Animated.View
-          style={[
-            styles.iconWrapper,
-            styles.v3IconWrapper,
-            { opacity: inactiveOpacity },
-          ]}
-        >
-          {renderIcon ? (
-            renderIcon({ route, focused: false, color: inactiveTintColor })
-          ) : (
-            <Icon
-              source={
-                route.unfocusedIcon !== undefined
-                  ? route.unfocusedIcon
-                  : (route.focusedIcon as IconSource)
-              }
-              color={inactiveTintColor}
-              size={24}
-            />
-          )}
-        </Animated.View>
-        <View style={[styles.badgeContainer, badgeStyle]}>
-          {typeof badge === 'boolean' ? (
-            <Badge visible={badge} size={6} />
-          ) : (
-            <Badge visible={badge != null} size={16}>
-              {badge}
-            </Badge>
-          )}
-        </View>
-      </Animated.View>
+        <View style={styles.iconWrapper}>{icon}</View>
+        {tabBadge}
+      </View>
       {labeled ? (
-        <Animated.View style={[styles.labelContainer]}>
-          <Animated.View
-            style={[styles.labelWrapper, { opacity: activeOpacity }]}
-          >
-            {renderLabel ? (
-              renderLabel({ route, focused: true, color: activeLabelColor })
-            ) : (
-              <Text
-                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                variant="labelMedium"
-                style={[styles.label, { color: activeLabelColor, ...font }]}
-              >
-                {getLabelText({ route })}
-              </Text>
-            )}
-          </Animated.View>
-          <Animated.View
-            style={[styles.labelWrapper, { opacity: inactiveOpacity }]}
-          >
-            {renderLabel ? (
-              renderLabel({
-                route,
-                focused: false,
-                color: inactiveLabelColor,
-              })
-            ) : (
-              <Text
-                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                variant="labelMedium"
-                selectable={false}
-                style={[styles.label, { color: inactiveLabelColor, ...font }]}
-              >
-                {getLabelText({ route })}
-              </Text>
-            )}
-          </Animated.View>
-        </Animated.View>
+        <View style={styles.labelContainer}>
+          {renderTabLabel(styles.label)}
+        </View>
       ) : null}
     </View>
   );
@@ -484,7 +437,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
     <View pointerEvents="none" style={styles.horizontalContainer}>
       <View style={styles.horizontalItem}>
         <Animated.View
-          testID={itemTestID ? `${itemTestID}-active-indicator` : undefined}
+          testID={indicatorTestID}
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
@@ -504,68 +457,18 @@ const NavigationBarItem = <Route extends BaseRoute>({
           ]}
         />
         <View
-          testID={itemTestID ? `${itemTestID}-state-layer` : undefined}
+          testID={stateLayerTestID}
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
-            stateLayer && {
-              backgroundColor: stateLayer.color,
-              opacity: stateLayer.opacity,
-            },
+            stateLayerColor,
           ]}
         />
         <View>
-          {renderIcon ? (
-            renderIcon({
-              route,
-              focused,
-              color: focused ? activeTintColor : inactiveTintColor,
-            })
-          ) : (
-            <Icon
-              source={
-                focused
-                  ? (route.focusedIcon as IconSource)
-                  : route.unfocusedIcon !== undefined
-                  ? route.unfocusedIcon
-                  : (route.focusedIcon as IconSource)
-              }
-              color={focused ? activeTintColor : inactiveTintColor}
-              size={24}
-            />
-          )}
-          <View style={[styles.badgeContainer, badgeStyle]}>
-            {typeof badge === 'boolean' ? (
-              <Badge visible={badge} size={6} />
-            ) : (
-              <Badge visible={badge != null} size={16}>
-                {badge}
-              </Badge>
-            )}
-          </View>
+          {icon}
+          {tabBadge}
         </View>
-        {renderLabel ? (
-          renderLabel({
-            route,
-            focused,
-            color: focused ? activeLabelColor : inactiveLabelColor,
-          })
-        ) : (
-          <Text
-            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            variant="labelMedium"
-            selectable={false}
-            style={[
-              styles.horizontalLabel,
-              {
-                color: focused ? activeLabelColor : inactiveLabelColor,
-                ...font,
-              },
-            ]}
-          >
-            {getLabelText({ route })}
-          </Text>
-        )}
+        {renderTabLabel(styles.horizontalLabel)}
       </View>
     </View>
   );
@@ -588,7 +491,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
     accessibilityLabel: getAccessibilityLabel({ route }),
     accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
     accessibilityState: { selected: focused },
-    style: [styles.item, styles.v3Item],
+    style: styles.item,
     children: horizontal ? horizontalContent : stackedContent,
   });
 };
@@ -951,40 +854,25 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    // Top padding is 6 and bottom padding is 10
-    // The extra 4dp bottom padding is offset by label's height
-    paddingVertical: 6,
-  },
-  v3Item: {
     paddingVertical: 0,
   },
   iconContainer: {
-    height: 24,
-    width: 24,
-    marginTop: 2,
-    marginHorizontal: 12,
-    alignSelf: 'center',
-  },
-  v3IconContainer: {
     height: INDICATOR_HEIGHT,
     width: INDICATOR_HEIGHT,
-    marginBottom: ICON_LABEL_GAP,
     marginTop: 0,
+    marginBottom: ICON_LABEL_GAP,
+    marginHorizontal: 12,
+    alignSelf: 'center',
     justifyContent: 'center',
   },
   iconWrapper: {
     ...StyleSheet.absoluteFill,
-    alignItems: 'center',
-  },
-  v3IconWrapper: {
     top: 4,
+    alignItems: 'center',
   },
   labelContainer: {
     height: 16,
     paddingBottom: 2,
-  },
-  labelWrapper: {
-    ...StyleSheet.absoluteFill,
   },
   // eslint-disable-next-line react-native/no-color-literals
   label: {
@@ -1002,16 +890,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  v3TouchableContainer: {
+  stackedContainer: {
     height: BAR_HEIGHT,
     justifyContent: 'center',
   },
-  v3NoLabelContainer: {
+  noLabelContainer: {
     height: NO_LABEL_BAR_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  outline: {
+  stackedIndicator: {
     width: INDICATOR_WIDTH,
     height: INDICATOR_HEIGHT,
     borderRadius: INDICATOR_BORDER_RADIUS,
