@@ -11,7 +11,7 @@ import {
   SFSymbol,
   MaterialSymbol,
 } from '@react-navigation/native';
-import { Text, BottomNavigation } from 'react-native-paper';
+import { Text, NavigationBar } from 'react-native-paper';
 
 function HomeScreen() {
   return (
@@ -34,7 +34,7 @@ const BottomNavigationBarExample = createBottomTabNavigator({
     headerShown: false,
   },
   tabBar: ({ navigation, state, descriptors }) => (
-    <BottomNavigation.Bar
+    <NavigationBar
       navigationState={state}
       onTabPress={({ route, preventDefault }) => {
         const event = navigation.emit({
@@ -119,7 +119,7 @@ const BottomNavigationBarExample = createBottomTabNavigator({
 });
 
 export default Object.assign(BottomNavigationBarExample, {
-  title: 'Bottom Navigation Bar',
+  title: 'Navigation Bar (React Navigation)',
 });
 
 const styles = StyleSheet.create({
