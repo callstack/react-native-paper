@@ -12,8 +12,9 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { ListChildProps, Style } from './utils';
+import type { Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -324,23 +325,11 @@ const ListAccordion = ({
         </TouchableRipple>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
-            if (
-              left &&
-              React.isValidElement<ListChildProps>(child) &&
-              !child.props.left &&
-              !child.props.right
-            ) {
-              return React.cloneElement(child, {
-                style: [styles.child, child.props.style],
-                theme,
-              });
-            }
-
-            return child;
-          })
-        : null}
+      {isExpanded ? (
+        <ListAccordionContext.Provider value={{ leftIndent: !!left }}>
+          {children}
+        </ListAccordionContext.Provider>
+      ) : null}
     </View>
   );
 };
@@ -373,9 +362,6 @@ const styles = StyleSheet.create({
   trailingItem: {
     marginVertical: 6,
     paddingLeft: 8,
-  },
-  child: {
-    paddingLeft: 40,
   },
   content: {
     flex: 1,
