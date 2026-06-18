@@ -367,6 +367,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
     >
       <Animated.View style={[styles.iconContainer, styles.v3IconContainer]}>
         <Animated.View
+          testID={itemTestID ? `${itemTestID}-active-indicator` : undefined}
           style={[
             styles.outline,
             {
@@ -483,6 +484,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
     <View pointerEvents="none" style={styles.horizontalContainer}>
       <View style={styles.horizontalItem}>
         <Animated.View
+          testID={itemTestID ? `${itemTestID}-active-indicator` : undefined}
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
