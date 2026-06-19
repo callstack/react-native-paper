@@ -1,5 +1,6 @@
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
+import { RadioButtonTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
@@ -60,15 +61,15 @@ export const getSelectionControlColor = ({
   const checkedColor = customColor
     ? customColor
     : error
-      ? theme.colors.error
-      : theme.colors.primary;
+    ? theme.colors[RadioButtonTokens.errorColor]
+    : theme.colors[RadioButtonTokens.checkedColor];
   const uncheckedColor = customUncheckedColor
     ? customUncheckedColor
     : error
-      ? theme.colors.error
-      : theme.colors.onSurfaceVariant;
+    ? theme.colors[RadioButtonTokens.errorColor]
+    : theme.colors[RadioButtonTokens.uncheckedColor];
   const color = disabled
-    ? theme.colors.onSurface
+    ? theme.colors[RadioButtonTokens.disabledColor]
     : checked
       ? checkedColor
       : uncheckedColor;

@@ -46,16 +46,19 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   testID="custom:testID"
 >
   <View
-    collapsable={false}
     style={
-      {
-        "borderColor": "rgba(73, 69, 79, 1)",
-        "borderRadius": 10,
-        "borderWidth": 2,
-        "height": 20,
-        "margin": 8,
-        "width": 20,
-      }
+      [
+        {
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "margin": 8,
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(73, 69, 79, 1)",
+        },
+      ]
     }
   />
 </View>
@@ -106,16 +109,19 @@ exports[`RadioButton renders properly 1`] = `
   }
 >
   <View
-    collapsable={false}
     style={
-      {
-        "borderColor": "rgba(73, 69, 79, 1)",
-        "borderRadius": 10,
-        "borderWidth": 2,
-        "height": 20,
-        "margin": 8,
-        "width": 20,
-      }
+      [
+        {
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "margin": 8,
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(73, 69, 79, 1)",
+        },
+      ]
     }
   />
 </View>
@@ -166,16 +172,19 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   }
 >
   <View
-    collapsable={false}
     style={
-      {
-        "borderColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 10,
-        "borderWidth": 2,
-        "height": 20,
-        "margin": 8,
-        "width": 20,
-      }
+      [
+        {
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "margin": 8,
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(103, 80, 164, 1)",
+        },
+      ]
     }
   >
     <View

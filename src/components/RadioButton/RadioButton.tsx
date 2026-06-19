@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonTokens } from './tokens';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
@@ -34,6 +35,12 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   color?: string;
   /**
+   * Whether the radio button is in an error state. When true, the ring
+   * (unchecked) and dot (selected) use `theme.colors.error`. `disabled`
+   * and explicit `color`/`uncheckedColor` overrides take precedence.
+   */
+  error?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -43,7 +50,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   testID?: string;
 };
 
-const BORDER_WIDTH = 2;
+const { ringSize, dotSize, outlineWidth: OUTLINE_WIDTH } = RadioButtonTokens;
 
 /**
  * Radio buttons allow the selection a single option from a set.
@@ -85,13 +92,13 @@ const RadioButton = ({
   value,
   status,
   testID,
+  error,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { current: borderAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(BORDER_WIDTH)
-  );
-
+  // Single selection animation path: the dot scales in (with a slight
+  // overshoot) when the radio becomes checked. The ring outline stays a
+  // constant width.
   const { current: radioAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
@@ -115,16 +122,8 @@ const RadioButton = ({
         duration: 150 * scale,
         useNativeDriver: true,
       }).start();
-    } else {
-      borderAnim.setValue(10);
-
-      Animated.timing(borderAnim, {
-        toValue: BORDER_WIDTH,
-        duration: 150 * scale,
-        useNativeDriver: false,
-      }).start();
     }
-  }, [status, borderAnim, radioAnim, scale]);
+  }, [status, radioAnim, scale]);
 
   return (
     <RadioButtonContext.Consumer>
@@ -140,6 +139,7 @@ const RadioButton = ({
           theme,
           disabled,
           checked,
+          error,
           customColor: rest.color,
           customUncheckedColor: rest.uncheckedColor,
         });
@@ -167,12 +167,11 @@ const RadioButton = ({
             testID={testID}
             theme={theme}
           >
-            <Animated.View
+            <View
               style={[
                 styles.radio,
                 {
                   borderColor: selectionControlColor,
-                  borderWidth: borderAnim,
                 },
               ]}
             >
@@ -189,7 +188,7 @@ const RadioButton = ({
                   />
                 </View>
               ) : null}
-            </Animated.View>
+            </View>
           </TouchableRipple>
         );
       }}
@@ -208,15 +207,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   radio: {
-    height: 20,
-    width: 20,
-    borderRadius: 10,
+    height: ringSize,
+    width: ringSize,
+    borderRadius: ringSize / 2,
+    borderWidth: OUTLINE_WIDTH,
     margin: 8,
   },
   dot: {
-    height: 10,
-    width: 10,
-    borderRadius: 5,
+    height: dotSize,
+    width: dotSize,
+    borderRadius: dotSize / 2,
   },
 });
 

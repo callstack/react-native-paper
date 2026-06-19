@@ -99,16 +99,19 @@ exports[`can render leading radio button control 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderRadius": 10,
-            "borderWidth": 2,
-            "height": 20,
-            "margin": 8,
-            "width": 20,
-          }
+          [
+            {
+              "borderRadius": 10,
+              "borderWidth": 2,
+              "height": 20,
+              "margin": 8,
+              "width": 20,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+          ]
         }
       />
     </View>
@@ -287,16 +290,19 @@ exports[`renders unchecked 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderRadius": 10,
-            "borderWidth": 2,
-            "height": 20,
-            "margin": 8,
-            "width": 20,
-          }
+          [
+            {
+              "borderRadius": 10,
+              "borderWidth": 2,
+              "height": 20,
+              "margin": 8,
+              "width": 20,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+          ]
         }
       />
     </View>
