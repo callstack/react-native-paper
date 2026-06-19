@@ -141,6 +141,18 @@ const RadioButton = ({
     customUncheckedColor: rest.uncheckedColor,
   });
 
+  // When `accessible={false}` is passed (typically by `RadioButton.Item`,
+  // which owns the a11y tree for the wrapped row), suppress our own role and
+  // state so the same logical control doesn't expose two `checked` states to
+  // assistive tech.
+  const accessibilityProps =
+    rest.accessible === false
+      ? {}
+      : {
+          accessibilityRole: 'radio' as const,
+          accessibilityState: { disabled: !!disabled, checked },
+        };
+
   return (
     <TouchableRipple
       {...rest}
@@ -157,9 +169,7 @@ const RadioButton = ({
               });
             }
       }
-      accessibilityRole="radio"
-      accessibilityState={{ disabled, checked }}
-      accessibilityLiveRegion="polite"
+      {...accessibilityProps}
       style={styles.container}
       testID={testID}
       theme={theme}

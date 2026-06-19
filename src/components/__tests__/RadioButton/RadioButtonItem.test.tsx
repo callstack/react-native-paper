@@ -31,6 +31,15 @@ it('can render leading radio button control', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('exposes a single radio a11y node per item', () => {
+  const { queryAllByRole } = render(
+    <RadioButton.Item label="Item" value="first" status="checked" />
+  );
+
+  // The inner control is `accessible={false}`, so only the row is a radio.
+  expect(queryAllByRole('radio')).toHaveLength(1);
+});
+
 it('should execute onLongPress', async () => {
   const onLongPress = jest.fn();
 

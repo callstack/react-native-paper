@@ -61,6 +61,11 @@ export type Props = {
    */
   status?: 'checked' | 'unchecked';
   /**
+   * Whether the radio button is in an error state. When true, the control
+   * uses `theme.colors.error`.
+   */
+  error?: boolean;
+  /**
    * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
@@ -140,13 +145,14 @@ const RadioButtonItem = ({
   color,
   uncheckedColor,
   status,
+  error,
   theme: themeOverrides,
   background,
   'aria-label': ariaLabel = label,
   testID,
   position = 'trailing',
   labelVariant = 'bodyLarge',
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -158,9 +164,13 @@ const RadioButtonItem = ({
     color,
     theme,
     uncheckedColor,
+    error,
   };
   const isLeading = position === 'leading';
-  const radioButton = <RadioButton {...radioButtonProps} />;
+  // The outer TouchableRipple is the interactable element + a11y radio; the
+  // inner control is purely visual, so exclude it from the a11y tree to
+  // avoid duplicate `checked` states.
+  const radioButton = <RadioButton {...radioButtonProps} accessible={false} />;
 
   const textAlign = isLeading ? 'right' : 'left';
 
@@ -199,10 +209,15 @@ const RadioButtonItem = ({
       theme={theme}
       hitSlop={hitSlop}
     >
-      <View style={[styles.container, style]} pointerEvents="none">
+      <View
+        style={[styles.container, style]}
+        pointerEvents="none"
+        importantForAccessibility="no-hide-descendants"
+      >
         {isLeading && radioButton}
         <Text
           variant={labelVariant}
+          testID={`${testID}-text`}
           style={[styles.label, computedStyle, labelStyle]}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         >

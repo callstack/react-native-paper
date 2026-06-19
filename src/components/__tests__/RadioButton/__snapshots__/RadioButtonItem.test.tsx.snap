@@ -41,6 +41,7 @@ exports[`can render leading radio button control 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -56,11 +57,10 @@ exports[`can render leading radio button control 1`] = `
     }
   >
     <View
-      accessibilityLiveRegion="polite"
       accessibilityState={
         {
           "busy": undefined,
-          "checked": false,
+          "checked": undefined,
           "disabled": false,
           "expanded": undefined,
           "selected": undefined,
@@ -74,7 +74,7 @@ exports[`can render leading radio button control 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
       collapsable={false}
       focusable={true}
       onBlur={[Function]}
@@ -116,6 +116,7 @@ exports[`can render leading radio button control 1`] = `
       />
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -148,6 +149,7 @@ exports[`can render leading radio button control 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -196,6 +198,7 @@ exports[`renders unchecked 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -211,6 +214,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -243,15 +247,15 @@ exports[`renders unchecked 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Unchecked Button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
       accessibilityState={
         {
           "busy": undefined,
-          "checked": false,
+          "checked": undefined,
           "disabled": false,
           "expanded": undefined,
           "selected": undefined,
@@ -265,7 +269,7 @@ exports[`renders unchecked 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
       collapsable={false}
       focusable={true}
       onBlur={[Function]}

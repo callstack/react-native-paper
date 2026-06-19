@@ -5,7 +5,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
   role="radiogroup"
 >
   <View
-    accessibilityLiveRegion="polite"
+    accessibilityRole="radio"
     accessibilityState={
       {
         "busy": undefined,
