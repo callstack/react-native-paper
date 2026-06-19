@@ -47,21 +47,31 @@ const RadioButtonExample = () => {
         onPress={() => setChecked('normal-item')}
       />
       <View style={styles.row}>
-        <Text>Error</Text>
+        <Text>Error (Checked)</Text>
         <RadioButton value="error" status="checked" error />
       </View>
+      <View style={styles.row}>
+        <Text>Error (Unchecked)</Text>
+        <RadioButton value="error-unchecked" status="unchecked" error />
+      </View>
       <RadioButton.Item
-        label="Error - Item"
+        label="Error - Item (Checked)"
         value="error-item"
         status="checked"
         error
       />
+      <RadioButton.Item
+        label="Error - Item (Unchecked)"
+        value="error-item-unchecked"
+        status="unchecked"
+        error
+      />
       <View style={styles.row}>
-        <Text>Checked (Disabled)</Text>
+        <Text style={styles.disabledLabel}>Checked (Disabled)</Text>
         <RadioButton value="first" status="checked" disabled />
       </View>
       <View style={styles.row}>
-        <Text>Unchecked (Disabled)</Text>
+        <Text style={styles.disabledLabel}>Unchecked (Disabled)</Text>
         <RadioButton value="second" status="unchecked" disabled />
       </View>
       <RadioButton.Item
@@ -92,6 +102,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  // Standalone RadioButton has no label of its own; dim the demo label to
+  // match the disabled control (RadioButton.Item dims its label for you).
+  disabledLabel: {
+    opacity: 0.38,
   },
 });
 
