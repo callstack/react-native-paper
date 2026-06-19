@@ -27,6 +27,13 @@ import type { TextInputAccessoryProps } from '../TextInput/TextInputIcon';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
+const styles = StyleSheet.create({
+  textInputStyle: {
+    fontSize: 40,
+    letterSpacing: 9,
+  },
+});
+
 const defaultI18nIsRTL = I18nManager.isRTL;
 
 const getConstantsOriginal = I18nManager.getConstants.bind(I18nManager);
@@ -1125,7 +1132,7 @@ it('does not apply the TextInput style prop to prefix or suffix Text', () => {
       onChangeText={() => {}}
       prefix="$"
       suffix="]"
-      style={{ fontSize: 40, letterSpacing: 9 }}
+      style={styles.textInputStyle}
       testID="tf-input-style"
     />
   );
