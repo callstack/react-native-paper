@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
-import type { RadioButtonContextType } from './RadioButtonGroup';
 import { RadioButtonTokens } from './tokens';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -96,6 +95,7 @@ const RadioButton = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const context = React.useContext(RadioButtonContext);
   // Single selection animation path: the dot scales in (with a slight
   // overshoot) when the radio becomes checked. The ring outline stays a
   // constant width.
@@ -125,74 +125,68 @@ const RadioButton = ({
     }
   }, [status, radioAnim, scale]);
 
+  const checked =
+    isChecked({
+      contextValue: context?.value,
+      status,
+      value,
+    }) === 'checked';
+
+  const { selectionControlColor } = getSelectionControlColor({
+    theme,
+    disabled,
+    checked,
+    error,
+    customColor: rest.color,
+    customUncheckedColor: rest.uncheckedColor,
+  });
+
   return (
-    <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
-        const checked =
-          isChecked({
-            contextValue: context?.value,
-            status,
-            value,
-          }) === 'checked';
-
-        const { selectionControlColor } = getSelectionControlColor({
-          theme,
-          disabled,
-          checked,
-          error,
-          customColor: rest.color,
-          customUncheckedColor: rest.uncheckedColor,
-        });
-
-        return (
-          <TouchableRipple
-            {...rest}
-            borderless
-            onPress={
-              disabled
-                ? undefined
-                : (event) => {
-                    handlePress({
-                      onPress,
-                      onValueChange: context?.onValueChange,
-                      value,
-                      event,
-                    });
-                  }
+    <TouchableRipple
+      {...rest}
+      borderless
+      onPress={
+        disabled
+          ? undefined
+          : (event) => {
+              handlePress({
+                onPress,
+                onValueChange: context?.onValueChange,
+                value,
+                event,
+              });
             }
-            accessibilityRole="radio"
-            accessibilityState={{ disabled, checked }}
-            accessibilityLiveRegion="polite"
-            style={styles.container}
-            testID={testID}
-            theme={theme}
-          >
-            <View
+      }
+      accessibilityRole="radio"
+      accessibilityState={{ disabled, checked }}
+      accessibilityLiveRegion="polite"
+      style={styles.container}
+      testID={testID}
+      theme={theme}
+    >
+      <View
+        style={[
+          styles.radio,
+          {
+            borderColor: selectionControlColor,
+          },
+        ]}
+      >
+        {checked ? (
+          <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
+            <Animated.View
               style={[
-                styles.radio,
+                styles.dot,
                 {
-                  borderColor: selectionControlColor,
+                  backgroundColor: selectionControlColor,
+                  transform: [{ scale: radioAnim }],
                 },
               ]}
-            >
-              {checked ? (
-                <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
-                  <Animated.View
-                    style={[
-                      styles.dot,
-                      {
-                        backgroundColor: selectionControlColor,
-                        transform: [{ scale: radioAnim }],
-                      },
-                    ]}
-                  />
-                </View>
-              ) : null}
-            </View>
-          </TouchableRipple>
-        );
-      }}
-    </RadioButtonContext.Consumer>
+            />
+          </View>
+        ) : null}
+      </View>
+    </TouchableRipple>
   );
 };
 
