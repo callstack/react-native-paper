@@ -89,6 +89,11 @@ it('renders progress bar with full height on web', () => {
   });
 });
 
+it('has progressbar role', () => {
+  const tree = render(<ProgressBar progress={0.5} />);
+  expect(tree.getByTestId('progress-bar').props.role).toBe('progressbar');
+});
+
 it('renders progress bar with custom style of filled part', async () => {
   const tree = render(
     <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />
