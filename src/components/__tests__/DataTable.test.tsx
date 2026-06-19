@@ -117,7 +117,7 @@ describe('DataTable.Pagination', () => {
   });
 
   it('renders data table pagination without options select', () => {
-    const { queryByLabelText } = render(
+    const { queryByTestId } = render(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
@@ -127,7 +127,7 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(queryByLabelText('Options Select')).toBeFalsy();
+    expect(queryByTestId('options-select')).toBeFalsy();
   });
 
   it('renders data table pagination with options select', () => {
@@ -145,8 +145,12 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(getByTestId('options-select')).toBeTruthy();
-    expect(getByTestId('select-page-dropdown-label')).toBeTruthy();
+    expect(getByTestId('options-select').props['aria-label']).toBe(
+      'Options Select'
+    );
+    expect(getByTestId('select-page-dropdown-label').props['aria-label']).toBe(
+      'selectPageDropdownLabel'
+    );
 
     expect(toJSON()).toMatchSnapshot();
   });
