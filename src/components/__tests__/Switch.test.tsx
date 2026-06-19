@@ -37,6 +37,13 @@ describe('Switch render', () => {
   });
 });
 
+describe('Switch accessibility', () => {
+  it('has switch role', () => {
+    const { getByTestId } = render(<Switch value={false} testID="switch" />);
+    expect(getByTestId('switch').props.role).toBe('switch');
+  });
+});
+
 describe('Switch interaction', () => {
   it('toggles to true when off and pressed', () => {
     const onValueChange = jest.fn();
