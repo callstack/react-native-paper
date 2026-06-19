@@ -82,19 +82,24 @@ exports[`RadioButtonGroup renders properly 1`] = `
         }
       >
         <View
-          collapsable={false}
           style={
-            {
-              "backgroundColor": "rgba(103, 80, 164, 1)",
-              "borderRadius": 5,
-              "height": 10,
-              "transform": [
-                {
-                  "scale": 1,
-                },
-              ],
-              "width": 10,
-            }
+            [
+              {
+                "borderRadius": 5,
+                "height": 10,
+                "width": 10,
+              },
+              {
+                "backgroundColor": "rgba(103, 80, 164, 1)",
+              },
+              {
+                "transform": [
+                  {
+                    "scale": 1,
+                  },
+                ],
+              },
+            ]
           }
         />
       </View>

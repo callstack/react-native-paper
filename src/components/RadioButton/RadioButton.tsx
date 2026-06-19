@@ -1,10 +1,19 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import { RadioButtonTokens } from './tokens';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -104,17 +113,30 @@ const RadioButton = ({
       value,
     }) === 'checked';
 
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
   // Single selection animation path: the dot scales in (with a slight
   // overshoot) when the radio becomes checked. The ring outline stays a
   // constant width. Keyed on `checked` (not `status`) so radios driven by a
   // `RadioButton.Group` animate too.
-  const { current: radioAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
-  );
-
+  const dotScale = useSharedValue(1);
   const isFirstRendering = React.useRef<boolean>(true);
 
-  const { scale } = theme.animation;
+  const dotTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short3,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.short3,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
+  );
 
   React.useEffect(() => {
     // Do not run animation on very first rendering
@@ -124,15 +146,15 @@ const RadioButton = ({
     }
 
     if (checked) {
-      radioAnim.setValue(1.2);
-
-      Animated.timing(radioAnim, {
-        toValue: 1,
-        duration: 150 * scale,
-        useNativeDriver: true,
-      }).start();
+      // Jump to the overshoot value, then settle back to 1.
+      dotScale.value = 1.2;
+      dotScale.value = withTiming(1, dotTimingConfig);
     }
-  }, [checked, radioAnim, scale]);
+  }, [checked, dotScale, dotTimingConfig]);
+
+  const dotAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: dotScale.value }],
+  }));
 
   const { selectionControlColor, selectionControlOpacity } =
     getSelectionControlColor({
@@ -188,10 +210,8 @@ const RadioButton = ({
             <Animated.View
               style={[
                 styles.dot,
-                {
-                  backgroundColor: selectionControlColor,
-                  transform: [{ scale: radioAnim }],
-                },
+                { backgroundColor: selectionControlColor },
+                dotAnimatedStyle,
               ]}
             />
           </View>
