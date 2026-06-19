@@ -742,5 +742,29 @@ describe('Tooltip.Rich', () => {
 
       expect(getByText('Body text')).toBeTruthy();
     });
+
+    it('opens on hover even when the trigger ignores the hover props', () => {
+      // Some triggers (e.g. `IconButton`) don't forward `onHoverIn` on web,
+      // so the wrapper must carry the handlers itself. Here the trigger
+      // deliberately drops the provided props.
+      jest
+        .spyOn(View.prototype, 'measure')
+        .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+
+      const { getByTestId, getByText, queryByText } = render(
+        <PaperProvider>
+          <TooltipCompound.Rich content="Body text" enterTouchDelay={100}>
+            {() => <DummyComponent />}
+          </TooltipCompound.Rich>
+        </PaperProvider>
+      );
+
+      fireEvent(getByTestId('tooltip-rich-trigger'), 'hoverIn');
+      expect(queryByText('Body text')).toBeNull(); // within the enter delay
+
+      runTimers(100);
+
+      expect(getByText('Body text')).toBeTruthy();
+    });
   });
 });

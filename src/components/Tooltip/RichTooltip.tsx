@@ -285,9 +285,18 @@ const RichTooltip = ({
           </Animated.View>
         </Portal>
       )}
-      <View ref={childrenWrapperRef} style={styles.pressContainer}>
+      <Pressable
+        ref={childrenWrapperRef}
+        style={styles.pressContainer}
+        testID="tooltip-rich-trigger"
+        // On web the wrapper carries the hover/focus handlers because the
+        // trigger element (e.g. `IconButton`) doesn't reliably forward them.
+        // On mobile the press handler stays on the trigger itself (via
+        // `triggerProps` below) so the wrapper doesn't double-fire the toggle.
+        {...(isWeb ? triggerProps : null)}
+      >
         {children(triggerProps)}
-      </View>
+      </Pressable>
     </>
   );
 };
