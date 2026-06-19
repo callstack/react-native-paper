@@ -110,6 +110,7 @@ exports[`can render leading radio button control 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
+              "opacity": 1,
             },
           ]
         }
@@ -305,6 +306,7 @@ exports[`renders unchecked 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
+              "opacity": 1,
             },
           ]
         }

@@ -96,9 +96,18 @@ const RadioButton = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const context = React.useContext(RadioButtonContext);
+
+  const checked =
+    isChecked({
+      contextValue: context?.value,
+      status,
+      value,
+    }) === 'checked';
+
   // Single selection animation path: the dot scales in (with a slight
   // overshoot) when the radio becomes checked. The ring outline stays a
-  // constant width.
+  // constant width. Keyed on `checked` (not `status`) so radios driven by a
+  // `RadioButton.Group` animate too.
   const { current: radioAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
@@ -114,7 +123,7 @@ const RadioButton = ({
       return;
     }
 
-    if (status === 'checked') {
+    if (checked) {
       radioAnim.setValue(1.2);
 
       Animated.timing(radioAnim, {
@@ -123,23 +132,17 @@ const RadioButton = ({
         useNativeDriver: true,
       }).start();
     }
-  }, [status, radioAnim, scale]);
+  }, [checked, radioAnim, scale]);
 
-  const checked =
-    isChecked({
-      contextValue: context?.value,
-      status,
-      value,
-    }) === 'checked';
-
-  const { selectionControlColor } = getSelectionControlColor({
-    theme,
-    disabled,
-    checked,
-    error,
-    customColor: rest.color,
-    customUncheckedColor: rest.uncheckedColor,
-  });
+  const { selectionControlColor, selectionControlOpacity } =
+    getSelectionControlColor({
+      theme,
+      disabled,
+      checked,
+      error,
+      customColor: rest.color,
+      customUncheckedColor: rest.uncheckedColor,
+    });
 
   // When `accessible={false}` is passed (typically by `RadioButton.Item`,
   // which owns the a11y tree for the wrapped row), suppress our own role and
@@ -157,18 +160,15 @@ const RadioButton = ({
     <TouchableRipple
       {...rest}
       borderless
-      onPress={
-        disabled
-          ? undefined
-          : (event) => {
-              handlePress({
-                onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              });
-            }
-      }
+      onPress={(event) => {
+        handlePress({
+          onPress,
+          onValueChange: context?.onValueChange,
+          value,
+          event,
+        });
+      }}
+      disabled={disabled}
       {...accessibilityProps}
       style={styles.container}
       testID={testID}
@@ -179,6 +179,7 @@ const RadioButton = ({
           styles.radio,
           {
             borderColor: selectionControlColor,
+            opacity: selectionControlOpacity,
           },
         ]}
       >

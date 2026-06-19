@@ -57,6 +57,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
         },
         {
           "borderColor": "rgba(73, 69, 79, 1)",
+          "opacity": 1,
         },
       ]
     }
@@ -120,6 +121,7 @@ exports[`RadioButton renders properly 1`] = `
         },
         {
           "borderColor": "rgba(73, 69, 79, 1)",
+          "opacity": 1,
         },
       ]
     }
@@ -183,6 +185,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
         },
         {
           "borderColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
         },
       ]
     }
