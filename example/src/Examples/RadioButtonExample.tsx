@@ -47,6 +47,16 @@ const RadioButtonExample = () => {
         onPress={() => setChecked('normal-item')}
       />
       <View style={styles.row}>
+        <Text>Error</Text>
+        <RadioButton value="error" status="checked" error />
+      </View>
+      <RadioButton.Item
+        label="Error - Item"
+        value="error-item"
+        status="checked"
+        error
+      />
+      <View style={styles.row}>
         <Text>Checked (Disabled)</Text>
         <RadioButton value="first" status="checked" disabled />
       </View>
