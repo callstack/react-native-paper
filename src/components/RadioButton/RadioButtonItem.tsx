@@ -8,10 +8,8 @@ import type {
 } from 'react-native';
 
 import RadioButton from './RadioButton';
-import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
-import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { getStateLayer } from '../../theme/utils/state';
@@ -100,11 +98,6 @@ export type Props = {
    */
   testID?: string;
   /**
-   * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
-   * Left undefined `<RadioButton />` will be used.
-   */
-  mode?: 'android' | 'ios';
-  /**
    * Radio button control position.
    */
   position?: 'leading' | 'trailing';
@@ -151,7 +144,6 @@ const RadioButtonItem = ({
   background,
   'aria-label': ariaLabel = label,
   testID,
-  mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier,
@@ -167,15 +159,7 @@ const RadioButtonItem = ({
     uncheckedColor,
   };
   const isLeading = position === 'leading';
-  let radioButton: any;
-
-  if (mode === 'android') {
-    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
-  } else if (mode === 'ios') {
-    radioButton = <RadioButtonIOS {...radioButtonProps} />;
-  } else {
-    radioButton = <RadioButton {...radioButtonProps} />;
-  }
+  const radioButton = <RadioButton {...radioButtonProps} />;
 
   const textAlign = isLeading ? 'right' : 'left';
 

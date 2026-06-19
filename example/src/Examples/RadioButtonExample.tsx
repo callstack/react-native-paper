@@ -10,7 +10,7 @@ import {
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
+type State = 'normal' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
@@ -19,22 +19,11 @@ const RadioButtonExample = () => {
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setChecked('normal')}>
         <View style={styles.row}>
-          <Text>Normal - Material Design</Text>
+          <Text>Normal</Text>
           <View pointerEvents="none">
-            <RadioButton.Android
+            <RadioButton
               value="normal"
               status={checked === 'normal' ? 'checked' : 'unchecked'}
-            />
-          </View>
-        </View>
-      </TouchableRipple>
-      <TouchableRipple onPress={() => setChecked('normal-ios')}>
-        <View style={styles.row}>
-          <Text>Normal 2 - IOS</Text>
-          <View pointerEvents="none">
-            <RadioButton.IOS
-              value="normal-ios"
-              status={checked === 'normal-ios' ? 'checked' : 'unchecked'}
             />
           </View>
         </View>
