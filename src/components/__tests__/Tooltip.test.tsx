@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type { GestureResponderEvent, ViewProps } from 'react-native';
 
 import {
   afterAll,
@@ -31,6 +31,7 @@ const DummyComponent = ({
   ...props
 }: ViewProps & {
   ref?: React.RefObject<View | null>;
+  onPress?: (e: GestureResponderEvent) => void;
 }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -123,6 +124,31 @@ describe('Tooltip', () => {
         unmount();
 
         expect(mockedRemoveEventListener).toHaveBeenCalled();
+      });
+    });
+
+    describe('press', () => {
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+      it('propagates the press event object to the child onPress', () => {
+        const onPress = jest.fn();
+
+        const {
+          wrapper: { getByText },
+        } = setup({
+          children: <DummyComponent onPress={onPress} />,
+        });
+
+        const event = { nativeEvent: { locationX: 1, locationY: 2 } };
+
+        fireEvent(getTrigger(getByText), 'press', event);
+
+        expect(onPress).toHaveBeenCalledTimes(1);
+        expect(onPress).toHaveBeenCalledWith(
+          expect.objectContaining({ nativeEvent: event.nativeEvent })
+        );
       });
     });
 
