@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type { GestureResponderEvent, ViewProps } from 'react-native';
 
 import {
   afterAll,
@@ -28,9 +28,12 @@ jest.mock('../../utils/addEventListener', () => ({
 
 const DummyComponent = ({
   ref,
+  // `onPress` is consumed by Tooltip via `children.props`, not by the inner View
+  onPress: _onPress,
   ...props
 }: ViewProps & {
   ref?: React.RefObject<View | null>;
+  onPress?: (e: GestureResponderEvent) => void;
 }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -147,6 +150,29 @@ describe('Tooltip', () => {
         fireEvent(trigger, 'longPress');
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('onPress', () => {
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+      it('forwards the press event object to the child onPress', () => {
+        const onPress = jest.fn();
+        const {
+          wrapper: { getByText },
+        } = setup({
+          children: <DummyComponent onPress={onPress} />,
+        });
+
+        const nativeEvent = { nativeEvent: { locationX: 1, locationY: 2 } };
+        fireEvent(getTrigger(getByText), 'press', nativeEvent);
+
+        expect(onPress).toHaveBeenCalledTimes(1);
+        expect(onPress).toHaveBeenCalledWith(
+          expect.objectContaining(nativeEvent)
+        );
       });
     });
 
