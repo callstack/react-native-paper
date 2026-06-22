@@ -7,7 +7,6 @@
 /visual/output
 
 # Generated files
-.docusaurus
 .cache-loader
 /public/llms.txt
 /public/react-native-paper
