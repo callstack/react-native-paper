@@ -9,6 +9,17 @@ const read = (relativePath) =>
   fs.readFileSync(path.join(docsRoot, relativePath), 'utf8');
 const routeFallbacks = JSON.parse(read('src/data/versionRouteFallbacks.json'));
 
+const readGeneratedTsModule = (relativePath) => {
+  const source = read(relativePath);
+  const match = source.match(
+    /const\s+\w+\s*=\s*([\s\S]*?);\s*export default \w+;\s*$/
+  );
+
+  assert.ok(match, `Unable to parse generated module: ${relativePath}`);
+
+  return JSON.parse(match[1]);
+};
+
 test('guide routes keep stripped public paths', () => {
   assert.ok(
     fs.existsSync(path.join(docsRoot, '5.x/docs/guides/getting-started.md'))
@@ -63,16 +74,16 @@ test('theme layout does not append a second right-side version selector', () => 
 });
 
 test('component prop metadata exists for both 5.x and 6.x', () => {
-  const componentDocs5x = JSON.parse(read('src/data/componentDocs5x.json'));
-  const componentDocs6x = JSON.parse(read('src/data/componentDocs6x.json'));
+  const componentDocs5x = readGeneratedTsModule('src/data/componentDocs5x.ts');
+  const componentDocs6x = readGeneratedTsModule('src/data/componentDocs6x.ts');
 
   assert.ok(componentDocs5x.docs.ActivityIndicator);
   assert.ok(componentDocs6x.docs.ActivityIndicator);
 });
 
 test('component prop metadata does not contain local absolute paths', () => {
-  const componentDocs5x = JSON.parse(read('src/data/componentDocs5x.json'));
-  const componentDocs6x = JSON.parse(read('src/data/componentDocs6x.json'));
+  const componentDocs5x = readGeneratedTsModule('src/data/componentDocs5x.ts');
+  const componentDocs6x = readGeneratedTsModule('src/data/componentDocs6x.ts');
 
   for (const [version, data] of [
     ['5.x', componentDocs5x],
@@ -87,6 +98,30 @@ test('component prop metadata does not contain local absolute paths', () => {
         );
       }
     }
+  }
+});
+
+test('component prop metadata is stored as generated ts modules', () => {
+  for (const relativePath of [
+    'src/data/componentDocs5x.ts',
+    'src/data/componentDocs6x.ts',
+  ]) {
+    assert.equal(
+      fs.existsSync(path.join(docsRoot, relativePath)),
+      true,
+      `${relativePath} should exist`
+    );
+  }
+
+  for (const relativePath of [
+    'src/data/componentDocs5x.json',
+    'src/data/componentDocs6x.json',
+  ]) {
+    assert.equal(
+      fs.existsSync(path.join(docsRoot, relativePath)),
+      false,
+      `${relativePath} should not exist`
+    );
   }
 });
 

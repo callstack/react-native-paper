@@ -14,7 +14,7 @@ const rootDir = path.resolve(
 );
 const repoRootDir = path.resolve(rootDir, '..');
 const outputDir = componentDocsConfig.docsRootDir;
-const metadataPath = path.join(rootDir, 'src', 'data', 'componentDocs6x.json');
+const metadataPath = path.join(rootDir, 'src', 'data', 'componentDocs6x.ts');
 
 const isRecord = (value) => typeof value === 'object' && value !== null;
 
@@ -66,6 +66,14 @@ const ensureDir = (dirPath) => {
 const writeJson = (filePath, value) => {
   ensureDir(path.dirname(filePath));
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+};
+
+const writeGeneratedModule = (filePath, value, variableName) => {
+  ensureDir(path.dirname(filePath));
+  fs.writeFileSync(
+    filePath,
+    `const ${variableName} = ${JSON.stringify(value, null, 2)};\n\nexport default ${variableName};\n`
+  );
 };
 
 const writeDocPage = (targetPath, sourcePath, docs) => {
@@ -151,15 +159,12 @@ const main = () => {
   }
 
   ensureDir(path.dirname(metadataPath));
-  fs.writeFileSync(
+  writeGeneratedModule(
     metadataPath,
-    `${JSON.stringify(
-      {
-        docs: normalizeDocs(docs, fs.realpathSync(repoRootDir)),
-      },
-      null,
-      2
-      )}\n`
+    {
+      docs: normalizeDocs(docs, fs.realpathSync(repoRootDir)),
+    },
+    'componentDocs6x'
   );
 
   writeMetaFiles();

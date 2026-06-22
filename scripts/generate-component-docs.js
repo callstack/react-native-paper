@@ -70,8 +70,16 @@ const normalizeDocs = (value, sourceDir) => {
   );
 };
 
+const writeGeneratedModule = (destination, value, variableName) => {
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(
+    destination,
+    `const ${variableName} = ${JSON.stringify(value, null, 2)};\n\nexport default ${variableName};\n`
+  );
+};
+
 const main = async () => {
-  const [branchName, outputPath = 'docs/src/data/componentDocs5x.json'] =
+  const [branchName, outputPath = 'docs/src/data/componentDocs5x.ts'] =
     process.argv.slice(2);
 
   if (!branchName) {
@@ -178,14 +186,10 @@ const main = async () => {
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
 
-    fs.mkdirSync(path.dirname(destination), { recursive: true });
-    fs.writeFileSync(
+    writeGeneratedModule(
       destination,
-      `${JSON.stringify(
-        { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) },
-        null,
-        2
-      )}\n`
+      { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) },
+      'componentDocs5x'
     );
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));

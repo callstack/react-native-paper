@@ -1,4 +1,4 @@
-{
+const componentDocs5x = {
   "docs": {
     "ActivityIndicator": {
       "filepath": "ActivityIndicator.tsx",
@@ -12182,4 +12182,6 @@
       ]
     }
   }
-}
+};
+
+export default componentDocs5x;
