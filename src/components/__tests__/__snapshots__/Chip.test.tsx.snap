@@ -45,7 +45,7 @@ exports[`renders chip with close button 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": true,
+          "disabled": false,
           "expanded": undefined,
           "selected": false,
         }
@@ -343,7 +343,7 @@ exports[`renders chip with custom close button 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": true,
+          "disabled": false,
           "expanded": undefined,
           "selected": false,
         }
@@ -641,7 +641,7 @@ exports[`renders chip with icon 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": true,
+          "disabled": false,
           "expanded": undefined,
           "selected": false,
         }
@@ -1166,7 +1166,7 @@ exports[`renders selected chip 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": true,
+          "disabled": false,
           "expanded": undefined,
           "selected": true,
         }

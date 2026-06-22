@@ -213,6 +213,8 @@ const Chip = ({
     onPressIn,
     onPressOut,
   });
+  const touchableOnPress =
+    !disabled && !hasPassedTouchHandler ? () => {} : onPress;
 
   const isOutlined = mode === 'outlined';
 
@@ -300,7 +302,7 @@ const Chip = ({
         borderless
         background={background}
         style={[{ borderRadius }, styles.touchable]}
-        onPress={onPress}
+        onPress={touchableOnPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
