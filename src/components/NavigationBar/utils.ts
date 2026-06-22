@@ -1,5 +1,6 @@
 import type { ColorValue } from 'react-native';
 
+import { colorRoles } from './tokens';
 import type { InternalTheme, Theme } from '../../types';
 
 export const getActiveTintColor = ({
@@ -13,7 +14,7 @@ export const getActiveTintColor = ({
     return activeColor;
   }
 
-  return (theme as Theme).colors.onSecondaryContainer;
+  return (theme as Theme).colors[colorRoles.activeIcon];
 };
 
 export const getInactiveTintColor = ({
@@ -27,7 +28,7 @@ export const getInactiveTintColor = ({
     return inactiveColor;
   }
 
-  return (theme as Theme).colors.onSurfaceVariant;
+  return (theme as Theme).colors[colorRoles.inactiveIcon];
 };
 
 export const getLabelColor = ({
@@ -46,8 +47,5 @@ export const getLabelColor = ({
     return tintColor;
   }
 
-  if (focused) {
-    return colors.onSurface;
-  }
-  return colors.onSurfaceVariant;
+  return colors[focused ? colorRoles.activeLabel : colorRoles.inactiveLabel];
 };

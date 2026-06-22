@@ -27,6 +27,7 @@ import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
+import NavigationBarExample from './Examples/NavigationBarExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -72,6 +73,7 @@ export const mainExamples = {
   ListSection: ListSectionExample,
   ListItem: ListItemExample,
   Menu: MenuExample,
+  NavigationBar: NavigationBarExample,
   Progressbar: ProgressBarExample,
   Radio: RadioButtonExample,
   RadioGroup: RadioButtonGroupExample,

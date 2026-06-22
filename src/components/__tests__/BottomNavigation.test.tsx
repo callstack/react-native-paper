@@ -8,12 +8,13 @@ import { render } from '../../test-utils';
 import { Palette } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
+import Icon from '../Icon';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import {
   getActiveTintColor,
   getInactiveTintColor,
   getLabelColor,
-} from '../BottomNavigation/utils';
-import Icon from '../Icon';
+} from '../NavigationBar/utils';
 
 const styles = StyleSheet.create({
   backgroundColor: {
@@ -33,10 +34,9 @@ const createState = (index: number, length: number) => ({
   })),
 });
 
-it('renders shifting bottom navigation', () => {
+it('renders bottom navigation', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -49,7 +49,6 @@ it('renders shifting bottom navigation', () => {
 it('renders bottom navigation with scene animation', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       sceneAnimationEnabled
       sceneAnimationType="shifting"
       sceneAnimationEasing={Easing.ease}
@@ -68,7 +67,6 @@ it.skip('sceneAnimationEnabled matches animation requirements', async () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       sceneAnimationEnabled
       sceneAnimationType="shifting"
       sceneAnimationEasing={ease}
@@ -131,17 +129,18 @@ it('calls onIndexChange', () => {
   const onIndexChange = jest.fn();
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={onIndexChange}
       renderScene={({ route }) => route.title}
     />
   );
+  // The active scene also renders the route title, so target the last match
+  // (the tab label) to fire the tab press.
   // pressing same index as active navigation state does not call onIndexChange
-  fireEvent(tree.getByText('Route: 0'), 'onPress');
+  fireEvent(tree.getAllByText('Route: 0').at(-1)!, 'onPress');
   expect(onIndexChange).not.toHaveBeenCalled();
 
-  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  fireEvent(tree.getAllByText('Route: 1').at(-1)!, 'onPress');
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
@@ -151,14 +150,13 @@ it('calls onTabPress', () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       onTabPress={onTabPress}
       onIndexChange={onIndexChange}
       navigationState={createState(0, 5)}
       renderScene={({ route }) => route.title}
     />
   );
-  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  fireEvent(tree.getAllByText('Route: 1').at(-1)!, 'onPress');
   expect(onTabPress).toHaveBeenCalled();
   expect(onTabPress).toHaveBeenCalledTimes(1);
   expect(onTabPress).toHaveBeenLastCalledWith(
@@ -178,14 +176,13 @@ it('calls onTabLongPress', () => {
 
   const tree = render(
     <BottomNavigation
-      shifting
       onIndexChange={onIndexChange}
       onTabLongPress={onTabLongPress}
       navigationState={createState(0, 5)}
       renderScene={({ route }) => route.title}
     />
   );
-  fireEvent(tree.getByText('Route: 2'), 'onLongPress');
+  fireEvent(tree.getAllByText('Route: 2').at(-1)!, 'onLongPress');
   expect(onTabLongPress).toHaveBeenCalled();
   expect(onTabLongPress).toHaveBeenCalledTimes(1);
   expect(onTabLongPress).toHaveBeenLastCalledWith(
@@ -199,10 +196,9 @@ it('calls onTabLongPress', () => {
   );
 });
 
-it('renders non-shifting bottom navigation', () => {
+it('renders bottom navigation with three tabs', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -212,29 +208,9 @@ it('renders non-shifting bottom navigation', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not crash when shifting is true and the number of tabs in the navigationState is less than 2', () => {
-  jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-  render(
-    <BottomNavigation
-      shifting={true}
-      navigationState={createState(0, 1)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-    />
-  );
-
-  expect(console.warn).toHaveBeenCalledWith(
-    'BottomNavigation needs at least 2 tabs to run shifting animation'
-  );
-
-  jest.restoreAllMocks();
-});
-
-it('renders custom icon and label in shifting bottom navigation', () => {
+it('renders custom icon and label', () => {
   const tree = render(
     <BottomNavigation
-      shifting
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -252,31 +228,9 @@ it('renders custom icon and label in shifting bottom navigation', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders custom icon and label in non-shifting bottom navigation', () => {
+it('renders with custom active and inactive colors', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      renderIcon={({ route, color }) => (
-        <Icon color={color} source={route.unfocusedIcon} size={24} />
-      )}
-      renderLabel={({ route, color }) => (
-        <text color={typeof color === 'string' ? color : undefined}>
-          {route.title}
-        </text>
-      )}
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -288,39 +242,9 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
   expect(tree).toMatchSnapshot();
 });
 
-it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
+it('hides labels when labeled is false', () => {
   const tree = render(
     <BottomNavigation
-      shifting={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      activeColor="#FBF7DB"
-      inactiveColor="#853D4B"
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('hides labels in shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting
-      labeled={false}
-      navigationState={createState(0, 3)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-    />
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('hides labels in non-shifting bottom navigation', () => {
-  const tree = render(
-    <BottomNavigation
-      shifting={false}
       labeled={false}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
@@ -353,7 +277,6 @@ it('should have labelMaxFontSizeMultiplier passed to label', () => {
   const labelMaxFontSizeMultiplier = 2;
   const { getAllByText } = render(
     <BottomNavigation
-      shifting={false}
       labeled={true}
       labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
       navigationState={createState(0, 3)}
@@ -370,7 +293,6 @@ it('should have labelMaxFontSizeMultiplier passed to label', () => {
 it('renders custom background color passed to barStyle property', () => {
   const { getByTestId } = render(
     <BottomNavigation
-      shifting={false}
       labeled={true}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
@@ -387,7 +309,6 @@ it('renders custom background color passed to barStyle property', () => {
 it('renders a single tab', () => {
   const { queryByTestId } = render(
     <BottomNavigation
-      shifting={false}
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
@@ -420,7 +341,6 @@ it('applies maxTabBarWidth styling if compact prop is truthy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      shifting={false}
       testID="bottom-navigation"
       compact
     />
@@ -438,7 +358,6 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      shifting={false}
       testID="bottom-navigation"
       compact={false}
     />
@@ -449,7 +368,7 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
   });
 });
 
-it('renders bar content when shifting is enabled', () => {
+it('renders bar content', () => {
   const { getByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -457,14 +376,13 @@ it('renders bar content when shifting is enabled', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
-      shifting
     />
   );
 
   expect(getByTestId('bottom-navigation-bar-content')).toBeDefined();
 });
 
-it('does not render legacy ripple overlay when shifting is disabled', () => {
+it('does not render the legacy ripple overlay', () => {
   const { queryByTestId } = render(
     <BottomNavigation
       navigationState={createState(0, 5)}
@@ -472,11 +390,150 @@ it('does not render legacy ripple overlay when shifting is disabled', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
-      shifting={false}
     />
   );
 
   expect(queryByTestId('bottom-navigation-bar-content-ripple')).toBeNull();
+});
+
+it('renders tab labels when labeled', () => {
+  const { getAllByText } = render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'a', title: 'Alpha', focusedIcon: 'magnify' },
+          { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+        ],
+      }}
+      onTabPress={jest.fn()}
+    />
+  );
+
+  // Each tab renders a single label (no cross-fade layers).
+  expect(getAllByText('Alpha').length).toBeGreaterThan(0);
+  expect(getAllByText('Beta').length).toBeGreaterThan(0);
+});
+
+it('renders the horizontal (flexible) variant', () => {
+  const tree = render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('falls back to icon-only when horizontal is combined with labeled=false', () => {
+  const { queryByText } = render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+      labeled={false}
+    />
+  );
+
+  // `horizontal` is a no-op without labels, so no label text is rendered.
+  expect(queryByText('Route: 0')).toBeNull();
+  expect(queryByText('Route: 1')).toBeNull();
+});
+
+it('renders MD3 state layers on hover, focus and press', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Route: 0', focusedIcon: 'magnify', testID: 'tab-a' },
+      { key: 'b', title: 'Route: 1', focusedIcon: 'camera', testID: 'tab-b' },
+    ],
+  };
+
+  const { getByTestId } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  const layerOpacity = () =>
+    StyleSheet.flatten(getByTestId('tab-b-state-layer').props.style).opacity;
+
+  // Idle: no visible state layer.
+  expect(layerOpacity()).toBeUndefined();
+
+  // Hovered: 8% state layer.
+  fireEvent(getByTestId('tab-b'), 'hoverIn');
+  expect(layerOpacity()).toBe(0.08);
+  fireEvent(getByTestId('tab-b'), 'hoverOut');
+  expect(layerOpacity()).toBeUndefined();
+
+  // Focused: 10% state layer.
+  fireEvent(getByTestId('tab-b'), 'focus');
+  expect(layerOpacity()).toBe(0.1);
+  fireEvent(getByTestId('tab-b'), 'blur');
+
+  // Pressed: 10% state layer.
+  fireEvent(getByTestId('tab-b'), 'pressIn');
+  expect(layerOpacity()).toBe(0.1);
+  fireEvent(getByTestId('tab-b'), 'pressOut');
+  expect(layerOpacity()).toBeUndefined();
+});
+
+it('colors the focused tab label with secondary and others with onSurfaceVariant', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify' },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+    ],
+  };
+
+  const { getAllByText } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  const colorsOf = (text: string) =>
+    getAllByText(text).map(
+      (node) => StyleSheet.flatten(node.props.style).color
+    );
+
+  expect(colorsOf('Alpha')).toContain(getTheme().colors.secondary);
+  expect(colorsOf('Beta')).toContain(getTheme().colors.onSurfaceVariant);
+});
+
+it('renders the active indicator with the secondaryContainer color', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify', testID: 'tab-a' },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera', testID: 'tab-b' },
+    ],
+  };
+
+  const { getByTestId } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tab-a-active-indicator').props.style)
+      .backgroundColor
+  ).toBe(getTheme().colors.secondaryContainer);
+});
+
+it('renders a badge for routes that define one', () => {
+  const navigationState = {
+    index: 0,
+    routes: [
+      { key: 'a', title: 'Alpha', focusedIcon: 'magnify', badge: 3 },
+      { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+    ],
+  };
+
+  const { getByText } = render(
+    <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
+  );
+
+  expect(getByText('3')).toBeTruthy();
 });
 
 describe('getActiveTintColor', () => {
@@ -516,7 +573,7 @@ describe('getLabelColor', () => {
   it.each([
     { tintColor: '#FBF7DB', focused: true, expected: '#FBF7DB' },
     { tintColor: '#853D4B', focused: true, expected: '#853D4B' },
-    { tintColor: undefined, focused: true, expected: Palette.neutral10 },
+    { tintColor: undefined, focused: true, expected: Palette.secondary40 },
     {
       tintColor: undefined,
       focused: false,

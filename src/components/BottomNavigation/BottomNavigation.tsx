@@ -9,12 +9,12 @@ import type {
 
 import useLatestCallback from 'use-latest-callback';
 
-import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type BaseRoute = {
@@ -48,14 +48,6 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
 };
 
 export type Props<Route extends BaseRoute> = {
-  /**
-   * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
-   *
-   * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
-   * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
-   * Note that you need at least 2 tabs be able to run this animation.
-   */
-  shifting?: boolean;
   /**
    * Whether to show labels in tabs. When `false`, only icons will be displayed.
    */
@@ -200,8 +192,8 @@ export type Props<Route extends BaseRoute> = {
    */
   inactiveColor?: string;
   /**
-   * Whether animation is enabled for scenes transitions in `shifting` mode.
-   * By default, the scenes cross-fade during tab change when `shifting` is enabled.
+   * Whether animation is enabled for scene transitions.
+   * By default, the scenes cross-fade during tab change.
    * Specify `sceneAnimationEnabled` as `false` to disable the animation.
    */
   sceneAnimationEnabled?: boolean;
@@ -261,7 +253,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
 
 /**
  * BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
- * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
+ * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`NavigationBar`](../NavigationBar).
  *
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
@@ -330,7 +322,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   onTabPress,
   onTabLongPress,
   onIndexChange,
-  shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
@@ -341,14 +332,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
-  let shifting = shiftingProp ?? false;
-
-  if (shifting && navigationState.routes.length < 2) {
-    shifting = false;
-    console.warn(
-      'BottomNavigation needs at least 2 tabs to run shifting animation'
-    );
-  }
 
   const focusedKey = navigationState.routes[navigationState.index].key;
 
@@ -556,7 +539,7 @@ const BottomNavigation = <Route extends BaseRoute>({
           );
         })}
       </View>
-      <BottomNavigationBar
+      <NavigationBar
         navigationState={navigationState}
         renderIcon={renderIcon}
         renderLabel={renderLabel}
@@ -571,10 +554,8 @@ const BottomNavigation = <Route extends BaseRoute>({
         style={barStyle}
         activeIndicatorStyle={activeIndicatorStyle}
         labeled={labeled}
-        animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}
         onTabLongPress={onTabLongPress}
-        shifting={shifting}
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}
@@ -611,9 +592,6 @@ BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
     />
   );
 };
-
-// @component ./BottomNavigationBar.tsx
-BottomNavigation.Bar = BottomNavigationBar;
 
 export default BottomNavigation;
 
