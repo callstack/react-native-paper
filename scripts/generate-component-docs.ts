@@ -1,13 +1,16 @@
-const childProcess =
-  require('node:child_process') as typeof import('node:child_process');
-const fs = require('node:fs') as typeof import('node:fs');
-const Module = require('node:module') as typeof import('node:module') & {
+const childProcess = require('child_process') as typeof import('child_process');
+const fs = require('fs') as typeof import('fs');
+const Module = require('module') as typeof import('module') & {
   _load: (request: string, parent: unknown, isMain: boolean) => unknown;
 };
-const os = require('node:os') as typeof import('node:os');
-const path = require('node:path') as typeof import('node:path');
+const os = require('os') as typeof import('os');
+const path = require('path') as typeof import('path');
 
 type UnknownRecord = Record<string, unknown>;
+type ComponentDocsConfig = {
+  docsRootDir: string;
+  libsRootDir: string;
+};
 
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null;
@@ -20,7 +23,11 @@ const legacyDocusaurusShims = new Set([
 const loadLegacyDocusaurusConfig = (configPath: string): unknown => {
   const originalLoad = Module._load;
 
-  Module._load = function loadWithLegacyDocsShims(request, parent, isMain) {
+  Module._load = function loadWithLegacyDocsShims(
+    request: string,
+    parent: unknown,
+    isMain: boolean
+  ) {
     if (legacyDocusaurusShims.has(request)) {
       return {};
     }
@@ -142,9 +149,7 @@ const main = async () => {
       'component-docs.config.js'
     );
 
-    let pluginConfig:
-      | [string, { docsRootDir: string; libsRootDir: string }]
-      | undefined;
+    let pluginConfig: [string, ComponentDocsConfig] | undefined;
 
     if (fs.existsSync(sharedConfigPath)) {
       const sharedConfig = require(sharedConfigPath) as UnknownRecord;
@@ -154,7 +159,13 @@ const main = async () => {
         typeof sharedConfig.docsRootDir === 'string' &&
         typeof sharedConfig.libsRootDir === 'string'
       ) {
-        pluginConfig = ['./component-docs-plugin', sharedConfig];
+        pluginConfig = [
+          './component-docs-plugin',
+          {
+            docsRootDir: sharedConfig.docsRootDir,
+            libsRootDir: sharedConfig.libsRootDir,
+          },
+        ];
       }
     }
 
@@ -188,7 +199,7 @@ const main = async () => {
       'component-docs-plugin'
     )) as (
       context: unknown,
-      options: { docsRootDir: string; libsRootDir: string }
+      options: ComponentDocsConfig
     ) => Promise<{ loadContent: () => Promise<unknown> }>;
     const plugin = await pluginFactory({}, pluginConfig[1]);
     const docs = await plugin.loadContent();
@@ -201,7 +212,7 @@ const main = async () => {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;
   } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
+    fs.rmdirSync(tempDir, { recursive: true });
   }
 };
 
