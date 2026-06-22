@@ -69,7 +69,6 @@ export default withCallstackPreset(
         'tests/**',
         'visual/**',
         'component-docs-plugin/**',
-        'versioned_docs/**',
         'README.md',
       ],
     },

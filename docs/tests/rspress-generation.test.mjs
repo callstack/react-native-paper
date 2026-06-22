@@ -56,6 +56,12 @@ test('current docs tree stays free of legacy docusaurus scaffold files', () => {
     false,
     'versioned_sidebars should not exist in the rspress docs tree'
   );
+
+  assert.equal(
+    fs.existsSync(path.join(docsRoot, 'versioned_docs')),
+    false,
+    'versioned_docs should not exist in the rspress docs tree'
+  );
 });
 
 test('theme layout does not append a second right-side version selector', () => {
@@ -164,12 +170,8 @@ test('version selector exposes current and legacy versions', () => {
     assert.match(selectorSource, new RegExp(label.replace('.', '\\.')));
   }
 
-  assert.match(selectorSource, /window\.location\.assign\(link\.href\)/);
-  assert.match(selectorSource, /anchor\.target = '_blank'/);
-  assert.match(
-    selectorSource,
-    /window\.open\(link\.href, '_blank', 'noopener,noreferrer'\)/
-  );
+  assert.match(selectorSource, /target=\{link\.external \? '_blank' : undefined\}/);
+  assert.match(selectorSource, /rel=\{link\.external \? 'noopener noreferrer' : undefined\}/);
   assert.match(selectorSource, /getStableRoute/);
   assert.match(selectorSource, /getNextRoute/);
 });

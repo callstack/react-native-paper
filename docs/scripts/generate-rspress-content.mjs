@@ -6,7 +6,6 @@ const require = createRequire(import.meta.url);
 const componentDocsConfig = require('../component-docs.config');
 
 const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const versionedDocsDir = path.join(rootDir, 'versioned_docs');
 const sourcePagesDir = path.join(rootDir, 'src', 'pages');
 const staticDir = path.join(rootDir, 'static');
 const publicDir = path.join(rootDir, 'public');
@@ -85,6 +84,8 @@ const copyFile = (sourcePath, targetPath, transform) => {
   fs.writeFileSync(targetPath, transform(source));
 };
 
+const getVersionDocsDir = (version) => path.join(rootDir, version, 'docs');
+
 const createNav = (version) => {
   const activePrefix =
     version === '6.x' ? '^/(?:6\\.x/)?docs' : '^/docs';
@@ -148,12 +149,7 @@ const getComponentChildOrder = (version, dirName) => {
     return Object.keys(configEntry);
   }
 
-  const dirPath = path.join(
-    versionedDocsDir,
-    `version-${version}`,
-    'components',
-    dirName
-  );
+  const dirPath = path.join(getVersionDocsDir(version), 'components', dirName);
 
   return fs
     .readdirSync(dirPath, { withFileTypes: true })
@@ -162,71 +158,25 @@ const getComponentChildOrder = (version, dirName) => {
 };
 
 const createGuidesMeta = (version) => {
-  const guidesDir = path.join(versionedDocsDir, `version-${version}`, 'guides');
+  const guidesDir = path.join(getVersionDocsDir(version), 'guides');
+  const metaPath = path.join(guidesDir, '_meta.json');
+  const existingOrder = fs.existsSync(metaPath)
+    ? JSON.parse(fs.readFileSync(metaPath, 'utf8'))
+    : [];
 
-  return fs
+  const currentEntries = fs
     .readdirSync(guidesDir, { withFileTypes: true })
     .filter((entry) => entry.isFile() && /\.(md|mdx)$/.test(entry.name))
-    .sort((left, right) => left.name.localeCompare(right.name, undefined, { numeric: true }))
     .map((entry) => stripNumericPrefix(entry.name));
+
+  const knownEntries = existingOrder.filter((entry) => currentEntries.includes(entry));
+  const newEntries = currentEntries.filter((entry) => !existingOrder.includes(entry));
+
+  return [...knownEntries, ...newEntries];
 };
 
 const createComponentMeta = (version) => {
   return getVersionComponentOrder(version);
-};
-
-const copyGuides = (version, targetVersionDir) => {
-  const guidesDir = path.join(versionedDocsDir, `version-${version}`, 'guides');
-  const targetGuidesDir = path.join(targetVersionDir, 'docs', 'guides');
-
-  for (const entry of fs.readdirSync(guidesDir, { withFileTypes: true })) {
-    if (!entry.isFile() || !/\.(md|mdx)$/.test(entry.name)) {
-      continue;
-    }
-
-    const sourcePath = path.join(guidesDir, entry.name);
-    const cleanName = `${stripNumericPrefix(entry.name)}${path.extname(entry.name)}`;
-    copyFile(sourcePath, path.join(targetGuidesDir, cleanName), (content) =>
-      transformSharedContent(content, version)
-    );
-  }
-};
-
-const copyComponentDocs = (version, targetVersionDir) => {
-  const componentsDir = path.join(
-    versionedDocsDir,
-    `version-${version}`,
-    'components'
-  );
-  const targetComponentsDir = path.join(targetVersionDir, 'docs', 'components');
-
-  const walk = (sourceDir, outputDir) => {
-    ensureDir(outputDir);
-
-    for (const entry of fs.readdirSync(sourceDir, { withFileTypes: true })) {
-      if (entry.name === '_category_.json') {
-        continue;
-      }
-
-      const sourcePath = path.join(sourceDir, entry.name);
-      const targetPath = path.join(outputDir, entry.name);
-
-      if (entry.isDirectory()) {
-        walk(sourcePath, targetPath);
-        continue;
-      }
-
-      if (!/\.(md|mdx)$/.test(entry.name)) {
-        continue;
-      }
-
-      copyFile(sourcePath, targetPath, (content) =>
-        transformSharedContent(content, version)
-      );
-    }
-  };
-
-  walk(componentsDir, targetComponentsDir);
 };
 
 const writeMetaFiles = (version, targetVersionDir) => {
@@ -277,14 +227,6 @@ const writeIndexPage = (targetVersionDir) => {
   );
 };
 
-const writeShowcasePage = (version, targetVersionDir) => {
-  copyFile(
-    path.join(versionedDocsDir, `version-${version}`, 'showcase.mdx'),
-    path.join(targetVersionDir, 'docs', 'showcase.mdx'),
-    (content) => transformSharedContent(content, version)
-  );
-};
-
 const copyStaticAssets = () => {
   fs.cpSync(staticDir, publicDir, { recursive: true, force: true });
   fs.cpSync(staticDir, path.join(publicDir, 'react-native-paper'), {
@@ -295,14 +237,10 @@ const copyStaticAssets = () => {
 
 const prepareVersionDir = (version) => {
   const targetVersionDir = path.join(rootDir, version);
-  fs.rmSync(targetVersionDir, { recursive: true, force: true });
   ensureDir(targetVersionDir);
 
   writeJson(path.join(targetVersionDir, '_nav.json'), createNav(version));
   writeIndexPage(targetVersionDir);
-  writeShowcasePage(version, targetVersionDir);
-  copyGuides(version, targetVersionDir);
-  copyComponentDocs(version, targetVersionDir);
   writeMetaFiles(version, targetVersionDir);
 };
 
