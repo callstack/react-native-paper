@@ -144,8 +144,8 @@ const AppbarContent = ({
             onPress
               ? 'none'
               : Platform.OS === 'web'
-              ? ('heading' as 'header')
-              : 'header'
+                ? ('heading' as 'header')
+                : 'header'
           }
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="header"

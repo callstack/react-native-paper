@@ -60,8 +60,8 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
                 i === 0
                   ? styles.first
                   : i === count - 1
-                  ? styles.last
-                  : styles.middle,
+                    ? styles.last
+                    : styles.middle,
                 // @ts-expect-error: We're sure that child is a React Element
                 child.props.style,
               ],

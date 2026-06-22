@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  StyleSheet,
-  TextInput as NativeTextInput,
-  View,
-} from 'react-native';
+import { I18nManager, TextInput as NativeTextInput, View } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import {
@@ -15,8 +10,9 @@ import {
   it,
   jest,
 } from '@jest/globals';
+import type { TestInstance } from 'test-renderer';
 
-import { act, fireEvent, render } from '../../test-utils';
+import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
 import type {
@@ -28,6 +24,24 @@ import type { TextInputAccessoryProps } from '../TextInput/TextInputIcon';
 const stateOpacity = tokens.md.sys.state.opacity;
 
 const defaultI18nIsRTL = I18nManager.isRTL;
+const includeHiddenElements = { includeHiddenElements: true };
+
+const getOuterTextInputPressable = (root: TestInstance | null) => {
+  const [pressable] =
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace non-accessible outer Pressable lookup with a public behavior assertion.
+    root?.queryAll(
+      (instance) =>
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        instance.props.role === 'none' && instance.props.accessible === false,
+      { includeSelf: true }
+    ) ?? [];
+
+  if (!pressable) {
+    throw new Error('Expected outer TextInput Pressable');
+  }
+
+  return pressable;
+};
 
 const getConstantsOriginal = I18nManager.getConstants.bind(I18nManager);
 
@@ -57,106 +71,118 @@ function firstIndexOfTextChildArrayInTree(tree: unknown, text: string): number {
   return JSON.stringify(tree).indexOf(JSON.stringify([text]));
 }
 
-it('renders filled TextInput with label and value', () => {
-  const tree = render(
-    <TextInput label="Email" value="a@b.co" onChangeText={() => {}} />
+it('renders filled TextInput with label and value', async () => {
+  const tree = (
+    await render(
+      <TextInput label="Email" value="a@b.co" onChangeText={() => {}} />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders outlined TextInput with label and value', () => {
-  const tree = render(
-    <TextInput
-      variant="outlined"
-      label="Password"
-      value="secret"
-      onChangeText={() => {}}
-    />
+it('renders outlined TextInput with label and value', async () => {
+  const tree = (
+    await render(
+      <TextInput
+        variant="outlined"
+        label="Password"
+        value="secret"
+        onChangeText={() => {}}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders filled TextInput with TextInput.Icon accessories', () => {
-  const tree = render(
-    <TextInput
-      label="Search"
-      value="q"
-      onChangeText={() => {}}
-      startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
-      )}
-      endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
-      )}
-    />
+it('renders filled TextInput with TextInput.Icon accessories', async () => {
+  const tree = (
+    await render(
+      <TextInput
+        label="Search"
+        value="q"
+        onChangeText={() => {}}
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
+        )}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders outlined TextInput with TextInput.Icon accessories', () => {
-  const tree = render(
-    <TextInput
-      variant="outlined"
-      label="Search"
-      value="q"
-      onChangeText={() => {}}
-      startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
-      )}
-      endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
-      )}
-    />
+it('renders outlined TextInput with TextInput.Icon accessories', async () => {
+  const tree = (
+    await render(
+      <TextInput
+        variant="outlined"
+        label="Search"
+        value="q"
+        onChangeText={() => {}}
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" iconColor="#49454F" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" iconColor="#49454F" />
+        )}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders filled TextInput with TextInput.Icon accessories when error is true', () => {
-  const tree = render(
-    <TextInput
-      label="Search"
-      value="q"
-      onChangeText={() => {}}
-      error
-      startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" />
-      )}
-      endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
-      )}
-    />
+it('renders filled TextInput with TextInput.Icon accessories when error is true', async () => {
+  const tree = (
+    await render(
+      <TextInput
+        label="Search"
+        value="q"
+        onChangeText={() => {}}
+        error
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        )}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders outlined TextInput with TextInput.Icon accessories when error is true', () => {
-  const tree = render(
-    <TextInput
-      variant="outlined"
-      label="Search"
-      value="q"
-      onChangeText={() => {}}
-      error
-      startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" />
-      )}
-      endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
-      )}
-    />
+it('renders outlined TextInput with TextInput.Icon accessories when error is true', async () => {
+  const tree = (
+    await render(
+      <TextInput
+        variant="outlined"
+        label="Search"
+        value="q"
+        onChangeText={() => {}}
+        error
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        )}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('fires onPress on TextInput.Icon end accessory', () => {
+it('fires onPress on TextInput.Icon end accessory', async () => {
   const onClear = jest.fn<(event: GestureResponderEvent) => void>();
-  const { getAllByTestId } = render(
+  await render(
     <TextInput
       label="Search"
       value="x"
@@ -175,13 +201,13 @@ it('fires onPress on TextInput.Icon end accessory', () => {
     />
   );
 
-  fireEvent.press(getAllByTestId('icon-button')[1]);
+  await userEvent.press(screen.getAllByTestId('icon-button')[1]);
 
   expect(onClear).toHaveBeenCalledTimes(1);
 });
 
-it('disables TextInput.Icon when the field is disabled', () => {
-  const { getAllByTestId } = render(
+it('disables TextInput.Icon when the field is disabled', async () => {
+  await render(
     <TextInput
       label="Search"
       value="x"
@@ -196,13 +222,15 @@ it('disables TextInput.Icon when the field is disabled', () => {
     />
   );
 
-  const buttons = getAllByTestId('icon-button');
+  const buttons = screen.getAllByTestId('icon-button');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(buttons[0].props.accessibilityState?.disabled).toBe(true);
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(buttons[1].props.accessibilityState?.disabled).toBe(true);
 });
 
-it('does not disable TextInput.Icon when the field is read-only (editable false)', () => {
-  const { getAllByTestId } = render(
+it('does not disable TextInput.Icon when the field is read-only (editable false)', async () => {
+  await render(
     <TextInput
       label="Search"
       value="x"
@@ -217,13 +245,15 @@ it('does not disable TextInput.Icon when the field is read-only (editable false)
     />
   );
 
-  const buttons = getAllByTestId('icon-button');
+  const buttons = screen.getAllByTestId('icon-button');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(buttons[0].props.accessibilityState?.disabled).not.toBe(true);
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(buttons[1].props.accessibilityState?.disabled).not.toBe(true);
 });
 
-it('renders supporting text below the field', () => {
-  const { getByText } = render(
+it('renders supporting text below the field', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -232,11 +262,13 @@ it('renders supporting text below the field', () => {
     />
   );
 
-  expect(getByText('Use a valid address')).toBeTruthy();
+  expect(
+    screen.getByText('Use a valid address', includeHiddenElements)
+  ).toBeOnTheScreen();
 });
 
-it('uses polite aria-live on error supporting text', () => {
-  const { getByText, getByTestId } = render(
+it('uses polite aria-live on error supporting text', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -247,12 +279,16 @@ it('uses polite aria-live on error supporting text', () => {
     />
   );
 
-  expect(getByText('Invalid').props['aria-live']).toBe('polite');
-  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByText('Invalid').props['aria-live']).toBe('polite');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.accessibilityState?.invalid).toBe(
+    true
+  );
 });
 
-it('marks the input invalid when error is true without supporting text', () => {
-  const { getByTestId } = render(
+it('marks the input invalid when error is true without supporting text', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -262,12 +298,18 @@ it('marks the input invalid when error is true without supporting text', () => {
     />
   );
 
-  expect(getByTestId('tf-input').props.accessibilityState?.invalid).toBe(true);
-  expect(getByTestId('tf-input').props.accessibilityHint).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.accessibilityState?.invalid).toBe(
+    true
+  );
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('tf-input').props.accessibilityHint
+  ).toBeUndefined();
 });
 
-it('hides helper supporting text from the accessibility tree and omits aria-live', () => {
-  const { getByText, getByTestId } = render(
+it('hides helper supporting text from the accessibility tree and omits aria-live', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -277,13 +319,22 @@ it('hides helper supporting text from the accessibility tree and omits aria-live
     />
   );
 
-  expect(getByText('Optional').props['aria-hidden']).toBe(true);
-  expect(getByText('Optional').props['aria-live']).toBeUndefined();
-  expect(getByTestId('tf-input').props['aria-label']).toBe('Email, Optional');
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByText('Optional', includeHiddenElements).props['aria-hidden']
+  ).toBe(true);
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByText('Optional', includeHiddenElements).props['aria-live']
+  ).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props['aria-label']).toBe(
+    'Email, Optional'
+  );
 });
 
-it('includes supporting text in aria-label when label is omitted', () => {
-  const { getByTestId } = render(
+it('includes supporting text in aria-label when label is omitted', async () => {
+  await render(
     <TextInput
       value=""
       onChangeText={() => {}}
@@ -292,11 +343,14 @@ it('includes supporting text in aria-label when label is omitted', () => {
     />
   );
 
-  expect(getByTestId('tf-input').props['aria-label']).toBe('Helper only');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props['aria-label']).toBe(
+    'Helper only'
+  );
 });
 
-it('does not mark the input as aria-disabled when editable is false (read-only)', () => {
-  const { getByTestId } = render(
+it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {
+  await render(
     <TextInput
       label="Email"
       value="x"
@@ -306,13 +360,14 @@ it('does not mark the input as aria-disabled when editable is false (read-only)'
     />
   );
 
-  expect(getByTestId('tf-input').props.accessibilityState?.disabled).not.toBe(
-    true
-  );
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('tf-input').props.accessibilityState?.disabled
+  ).not.toBe(true);
 });
 
-it('marks the input as disabled in accessibilityState when disabled is true', () => {
-  const { getByTestId } = render(
+it('marks the input as disabled in accessibilityState when disabled is true', async () => {
+  await render(
     <TextInput
       label="Email"
       value="x"
@@ -322,15 +377,18 @@ it('marks the input as disabled in accessibilityState when disabled is true', ()
     />
   );
 
-  expect(getByTestId('tf-input').props.accessibilityState?.disabled).toBe(true);
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('tf-input').props.accessibilityState?.disabled
+  ).toBe(true);
 });
 
-it('renders the input via render with merged props', () => {
+it('renders the input via render with merged props', async () => {
   const renderInput = jest.fn((props: TextInputRenderProps) => (
     <NativeTextInput {...props} testID="custom-input" />
   ));
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Pin"
       value="12"
@@ -339,15 +397,15 @@ it('renders the input via render with merged props', () => {
     />
   );
 
-  expect(getByTestId('custom-input')).toBeTruthy();
+  expect(screen.getByTestId('custom-input')).toBeOnTheScreen();
   expect(renderInput).toHaveBeenCalled();
   const merged = renderInput.mock.calls[0]?.[0] as TextInputRenderProps;
   expect(merged['aria-label']).toBe('Pin');
   expect(merged.value).toBe('12');
 });
 
-it('does not apply disabled opacity to the TextInput when editable is false (filled)', () => {
-  const { getByTestId } = render(
+it('does not apply disabled opacity to the TextInput when editable is false (filled)', async () => {
+  await render(
     <TextInput
       label="Email"
       value="x"
@@ -357,13 +415,13 @@ it('does not apply disabled opacity to the TextInput when editable is false (fil
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-input-ro').props.style)
-  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+  expect(screen.getByTestId('tf-input-ro')).not.toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
-it('does not apply disabled opacity to the TextInput when editable is false (outlined)', () => {
-  const { getByTestId } = render(
+it('does not apply disabled opacity to the TextInput when editable is false (outlined)', async () => {
+  await render(
     <TextInput
       variant="outlined"
       label="Email"
@@ -374,13 +432,13 @@ it('does not apply disabled opacity to the TextInput when editable is false (out
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-input-ro-out').props.style)
-  ).not.toMatchObject({ opacity: stateOpacity.disabled });
+  expect(screen.getByTestId('tf-input-ro-out')).not.toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
-it('applies disabled opacity to the TextInput when disabled is true (filled)', () => {
-  const { getByTestId } = render(
+it('applies disabled opacity to the TextInput when disabled is true (filled)', async () => {
+  await render(
     <TextInput
       label="Email"
       value="x"
@@ -390,13 +448,13 @@ it('applies disabled opacity to the TextInput when disabled is true (filled)', (
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-input-dis').props.style)
-  ).toMatchObject({ opacity: stateOpacity.disabled });
+  expect(screen.getByTestId('tf-input-dis')).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
-it('applies disabled opacity to the TextInput when disabled is true (outlined)', () => {
-  const { getByTestId } = render(
+it('applies disabled opacity to the TextInput when disabled is true (outlined)', async () => {
+  await render(
     <TextInput
       variant="outlined"
       label="Email"
@@ -407,13 +465,13 @@ it('applies disabled opacity to the TextInput when disabled is true (outlined)',
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-input-dis-out').props.style)
-  ).toMatchObject({ opacity: stateOpacity.disabled });
+  expect(screen.getByTestId('tf-input-dis-out')).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
-it('forwards TextInput props such as testID', () => {
-  const { getByTestId } = render(
+it('forwards TextInput props such as testID', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -422,13 +480,13 @@ it('forwards TextInput props such as testID', () => {
     />
   );
 
-  expect(getByTestId('email-input')).toBeTruthy();
+  expect(screen.getByTestId('email-input')).toBeOnTheScreen();
 });
 
 /* TextInput peels these before spreading onto TextInput (see TextInput.tsx).
  * Custom layout / sub-component styling props are intentionally not supported. */
-it('does not pass TextInput-only props through to TextInput', () => {
-  const { getByTestId } = render(
+it('does not pass TextInput-only props through to TextInput', async () => {
+  await render(
     <TextInput
       variant="outlined"
       label="Email"
@@ -440,22 +498,33 @@ it('does not pass TextInput-only props through to TextInput', () => {
     />
   );
 
-  const input = getByTestId('tf-native');
+  const input = screen.getByTestId('tf-native');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.variant).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.theme).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.startAccessory).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.endAccessory).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.label).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.supportingText).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.prefix).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.suffix).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.counter).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.error).toBeUndefined();
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.disabled).toBeUndefined();
 });
 
-it('shows a character counter when counter is true and maxLength is set (filled)', () => {
-  const { getByText, queryByText } = render(
+it('shows a character counter when counter is true and maxLength is set (filled)', async () => {
+  await render(
     <TextInput
       label="Bio"
       value="hello"
@@ -465,12 +534,12 @@ it('shows a character counter when counter is true and maxLength is set (filled)
     />
   );
 
-  expect(getByText('5/100')).toBeTruthy();
-  expect(queryByText('0/100')).toBeNull();
+  expect(screen.getByText('5/100')).toBeOnTheScreen();
+  expect(screen.queryByText('0/100')).not.toBeOnTheScreen();
 });
 
-it('shows a character counter when counter is true and maxLength is set (outlined)', () => {
-  const { getByText } = render(
+it('shows a character counter when counter is true and maxLength is set (outlined)', async () => {
+  await render(
     <TextInput
       variant="outlined"
       label="Bio"
@@ -481,11 +550,11 @@ it('shows a character counter when counter is true and maxLength is set (outline
     />
   );
 
-  expect(getByText('0/50')).toBeTruthy();
+  expect(screen.getByText('0/50')).toBeOnTheScreen();
 });
 
-it('updates the character counter when the value changes', () => {
-  const { getByText, rerender } = render(
+it('updates the character counter when the value changes', async () => {
+  const { rerender } = await render(
     <TextInput
       label="Bio"
       value="a"
@@ -495,9 +564,9 @@ it('updates the character counter when the value changes', () => {
     />
   );
 
-  expect(getByText('1/10')).toBeTruthy();
+  expect(screen.getByText('1/10')).toBeOnTheScreen();
 
-  rerender(
+  await rerender(
     <TextInput
       label="Bio"
       value="abcd"
@@ -507,11 +576,11 @@ it('updates the character counter when the value changes', () => {
     />
   );
 
-  expect(getByText('4/10')).toBeTruthy();
+  expect(screen.getByText('4/10')).toBeOnTheScreen();
 });
 
-it('does not show a character counter when counter is false', () => {
-  const { queryByText } = render(
+it('does not show a character counter when counter is false', async () => {
+  await render(
     <TextInput
       label="Bio"
       value="hello"
@@ -520,22 +589,22 @@ it('does not show a character counter when counter is false', () => {
     />
   );
 
-  expect(queryByText('5/100')).toBeNull();
+  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
 });
 
-it('does not show a character counter when maxLength is missing', () => {
-  const { queryByText } = render(
+it('does not show a character counter when maxLength is missing', async () => {
+  await render(
     <TextInput label="Bio" value="hello" onChangeText={() => {}} counter />
   );
 
-  expect(queryByText('5/100')).toBeNull();
-  expect(queryByText(/\//)).toBeNull();
+  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText(/\//)).not.toBeOnTheScreen();
 });
 
-it('invokes onFocus and onBlur on the TextInput', () => {
+it('invokes onFocus and onBlur on the TextInput', async () => {
   const onFocus = jest.fn();
   const onBlur = jest.fn();
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -546,18 +615,18 @@ it('invokes onFocus and onBlur on the TextInput', () => {
     />
   );
 
-  const input = getByTestId('tf-input');
-  fireEvent(input, 'focus');
-  fireEvent(input, 'blur');
+  const input = screen.getByTestId('tf-input');
+  await fireEvent(input, 'focus');
+  await fireEvent(input, 'blur');
 
   expect(onFocus).toHaveBeenCalledTimes(1);
   expect(onBlur).toHaveBeenCalledTimes(1);
 });
 
-it('focuses the TextInput when the outer Pressable is pressed', () => {
+it('focuses the TextInput when the outer Pressable is pressed', async () => {
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
-  const { UNSAFE_getByProps, getByTestId } = render(
+  const { root } = await render(
     <TextInput
       label="Email"
       value=""
@@ -566,34 +635,31 @@ it('focuses the TextInput when the outer Pressable is pressed', () => {
     />
   );
 
-  expect(getByTestId('tf-input')).toBeTruthy();
+  expect(screen.getByTestId('tf-input')).toBeOnTheScreen();
 
-  /* Pressable is not exposed as a distinct type in the test renderer; match its props. */
-  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
-  fireEvent.press(pressable);
+  await userEvent.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
-it('does not focus the TextInput when disabled and the Pressable is pressed', () => {
+it('does not focus the TextInput when disabled and the Pressable is pressed', async () => {
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
-  const { UNSAFE_getByProps } = render(
+  const { root } = await render(
     <TextInput label="Email" value="" onChangeText={() => {}} disabled />
   );
 
-  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
-  fireEvent.press(pressable);
+  await userEvent.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).not.toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
-it('focuses the TextInput when read-only and the Pressable is pressed', () => {
+it('focuses the TextInput when read-only and the Pressable is pressed', async () => {
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
-  const { UNSAFE_getByProps } = render(
+  const { root } = await render(
     <TextInput
       label="Email"
       value=""
@@ -602,17 +668,16 @@ it('focuses the TextInput when read-only and the Pressable is pressed', () => {
     />
   );
 
-  const pressable = UNSAFE_getByProps({ role: 'none', accessible: false });
-  fireEvent.press(pressable);
+  await userEvent.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
-it('exposes the TextInput instance via ref prop', () => {
+it('exposes the TextInput instance via ref prop', async () => {
   const ref = React.createRef<TextInputHandles>();
 
-  render(
+  await render(
     <TextInput
       ref={ref}
       label="Email"
@@ -631,7 +696,7 @@ it('exposes the TextInput instance via ref prop', () => {
   expect(typeof ref.current?.setSelection).toBe('function');
 });
 
-it('passes error, disabled, and multiline to accessories', () => {
+it('passes error, disabled, and multiline to accessories', async () => {
   const startAccessoryProps: TextInputAccessoryProps[] = [];
   const endAccessoryProps: TextInputAccessoryProps[] = [];
 
@@ -645,7 +710,7 @@ it('passes error, disabled, and multiline to accessories', () => {
     return <View testID="end-accessory" />;
   }
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Search"
       value=""
@@ -658,8 +723,8 @@ it('passes error, disabled, and multiline to accessories', () => {
     />
   );
 
-  expect(getByTestId('start-accessory')).toBeTruthy();
-  expect(getByTestId('end-accessory')).toBeTruthy();
+  expect(screen.getByTestId('start-accessory')).toBeOnTheScreen();
+  expect(screen.getByTestId('end-accessory')).toBeOnTheScreen();
   expect(startAccessoryProps[0]).toMatchObject({
     error: true,
     disabled: true,
@@ -672,7 +737,7 @@ it('passes error, disabled, and multiline to accessories', () => {
   });
 });
 
-it('passes error to accessories when the field is disabled', () => {
+it('passes error to accessories when the field is disabled', async () => {
   const startAccessoryProps: TextInputAccessoryProps[] = [];
 
   function StartAccessory(props: TextInputAccessoryProps) {
@@ -680,7 +745,7 @@ it('passes error to accessories when the field is disabled', () => {
     return <View testID="start-acc-error-disabled" />;
   }
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Search"
       value=""
@@ -691,13 +756,13 @@ it('passes error to accessories when the field is disabled', () => {
     />
   );
 
-  expect(getByTestId('start-acc-error-disabled')).toBeTruthy();
+  expect(screen.getByTestId('start-acc-error-disabled')).toBeOnTheScreen();
   expect(startAccessoryProps[0].error).toBe(true);
   expect(startAccessoryProps[0].disabled).toBe(true);
 });
 
-it('renders supporting text as a Text child', () => {
-  const { getByText } = render(
+it('renders supporting text as a Text child', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -706,11 +771,11 @@ it('renders supporting text as a Text child', () => {
     />
   );
 
-  expect(getByText('Hint')).toBeTruthy();
+  expect(screen.getByText('Hint', includeHiddenElements)).toBeOnTheScreen();
 });
 
-it('renders the counter as a Text child', () => {
-  const { getByText } = render(
+it('renders the counter as a Text child', async () => {
+  await render(
     <TextInput
       label="Bio"
       value="hi"
@@ -720,11 +785,11 @@ it('renders the counter as a Text child', () => {
     />
   );
 
-  expect(getByText('2/80')).toBeTruthy();
+  expect(screen.getByText('2/80')).toBeOnTheScreen();
 });
 
-it('renders supporting text and counter separately when both are shown', () => {
-  const { getByText } = render(
+it('renders supporting text and counter separately when both are shown', async () => {
+  await render(
     <TextInput
       label="Bio"
       value="x"
@@ -735,14 +800,16 @@ it('renders supporting text and counter separately when both are shown', () => {
     />
   );
 
-  expect(getByText('Help text')).toBeTruthy();
-  expect(getByText('1/10')).toBeTruthy();
+  expect(
+    screen.getByText('Help text', includeHiddenElements)
+  ).toBeOnTheScreen();
+  expect(screen.getByText('1/10')).toBeOnTheScreen();
 });
 
-it('applies RTL text alignment and writing direction to the TextInput (filled)', () => {
+it('applies RTL text alignment and writing direction to the TextInput (filled)', async () => {
   I18nManager.isRTL = true;
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Email"
       value="x"
@@ -751,18 +818,16 @@ it('applies RTL text alignment and writing direction to the TextInput (filled)',
     />
   );
 
-  expect(StyleSheet.flatten(getByTestId('tf-input-rtl').props.style)).toEqual(
-    expect.objectContaining({
-      textAlign: 'right',
-      writingDirection: 'rtl',
-    })
-  );
+  expect(screen.getByTestId('tf-input-rtl')).toHaveStyle({
+    textAlign: 'right',
+    writingDirection: 'rtl',
+  });
 });
 
-it('applies RTL text alignment and writing direction to the TextInput (outlined)', () => {
+it('applies RTL text alignment and writing direction to the TextInput (outlined)', async () => {
   I18nManager.isRTL = true;
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       variant="outlined"
       label="Email"
@@ -772,20 +837,16 @@ it('applies RTL text alignment and writing direction to the TextInput (outlined)
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-input-rtl-outlined').props.style)
-  ).toEqual(
-    expect.objectContaining({
-      textAlign: 'right',
-      writingDirection: 'rtl',
-    })
-  );
+  expect(screen.getByTestId('tf-input-rtl-outlined')).toHaveStyle({
+    textAlign: 'right',
+    writingDirection: 'rtl',
+  });
 });
 
-it('applies RTL writing direction to supporting text', () => {
+it('applies RTL writing direction to supporting text', async () => {
   I18nManager.isRTL = true;
 
-  const { getByText } = render(
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -794,14 +855,12 @@ it('applies RTL writing direction to supporting text', () => {
     />
   );
 
-  expect(StyleSheet.flatten(getByText('Hint').props.style)).toEqual(
-    expect.objectContaining({
-      writingDirection: 'rtl',
-    })
-  );
+  expect(screen.getByText('Hint', includeHiddenElements)).toHaveStyle({
+    writingDirection: 'rtl',
+  });
 });
 
-it('places EndAccessory before StartAccessory in the tree when RTL', () => {
+it('places EndAccessory before StartAccessory in the tree when RTL', async () => {
   I18nManager.isRTL = true;
 
   function StartAccessory() {
@@ -812,7 +871,7 @@ it('places EndAccessory before StartAccessory in the tree when RTL', () => {
     return <View testID="rtl-acc-from-end-prop" />;
   }
 
-  const { toJSON } = render(
+  const { toJSON } = await render(
     <TextInput
       label="Email"
       value=""
@@ -829,7 +888,7 @@ it('places EndAccessory before StartAccessory in the tree when RTL', () => {
   );
 });
 
-it('places StartAccessory before EndAccessory in the tree when LTR', () => {
+it('places StartAccessory before EndAccessory in the tree when LTR', async () => {
   I18nManager.isRTL = false;
 
   function StartAccessory() {
@@ -840,7 +899,7 @@ it('places StartAccessory before EndAccessory in the tree when LTR', () => {
     return <View testID="ltr-acc-from-end-prop" />;
   }
 
-  const { toJSON } = render(
+  const { toJSON } = await render(
     <TextInput
       label="Email"
       value=""
@@ -857,8 +916,8 @@ it('places StartAccessory before EndAccessory in the tree when LTR', () => {
   ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'ltr-acc-from-end-prop'));
 });
 
-it('does not expose the placeholder string when the TextInput is not focused', () => {
-  const { getByTestId } = render(
+it('does not expose the placeholder string when the TextInput is not focused', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -869,11 +928,12 @@ it('does not expose the placeholder string when the TextInput is not focused', (
   );
 
   /* Sentinel space avoids iOS multiline UITextView not updating placeholder from nil (react-native#31573). */
-  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('shows placeholder when unfocused and no label is given', () => {
-  const { getByTestId } = render(
+it('shows placeholder when unfocused and no label is given', async () => {
+  await render(
     <TextInput
       value=""
       onChangeText={() => {}}
@@ -882,11 +942,14 @@ it('shows placeholder when unfocused and no label is given', () => {
     />
   );
 
-  expect(getByTestId('tf-input-no-label').props.placeholder).toBe('Search');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input-no-label').props.placeholder).toBe(
+    'Search'
+  );
 });
 
-it('shows placeholder when the TextInput is focused', () => {
-  const { getByTestId } = render(
+it('shows placeholder when the TextInput is focused', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -896,15 +959,16 @@ it('shows placeholder when the TextInput is focused', () => {
     />
   );
 
-  fireEvent(getByTestId('tf-input'), 'focus');
+  await fireEvent(screen.getByTestId('tf-input'), 'focus');
 
-  expect(getByTestId('tf-input').props.placeholder).toBe(
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe(
     'e.g. user@example.com'
   );
 });
 
-it('shows placeholder on multiline TextInput when focused', () => {
-  const { getByTestId } = render(
+it('shows placeholder on multiline TextInput when focused', async () => {
+  await render(
     <TextInput
       label="Notes"
       value=""
@@ -915,15 +979,19 @@ it('shows placeholder on multiline TextInput when focused', () => {
     />
   );
 
-  expect(getByTestId('tf-multiline').props.placeholder).toBe(' ');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(' ');
 
-  fireEvent(getByTestId('tf-multiline'), 'focus');
+  await fireEvent(screen.getByTestId('tf-multiline'), 'focus');
 
-  expect(getByTestId('tf-multiline').props.placeholder).toBe('Add a note…');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
+    'Add a note…'
+  );
 });
 
-it('does not expose the placeholder string again after the TextInput loses focus', () => {
-  const { getByTestId } = render(
+it('does not expose the placeholder string again after the TextInput loses focus', async () => {
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -933,20 +1001,21 @@ it('does not expose the placeholder string again after the TextInput loses focus
     />
   );
 
-  fireEvent(getByTestId('tf-input'), 'focus');
-  fireEvent(getByTestId('tf-input'), 'blur');
+  await fireEvent(screen.getByTestId('tf-input'), 'focus');
+  await fireEvent(screen.getByTestId('tf-input'), 'blur');
 
-  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', () => {
+it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', async () => {
   function LoneStartAccessory() {
     return <View testID="lone-start-acc" />;
   }
 
   I18nManager.isRTL = false;
 
-  const { toJSON: toJsonLtr } = render(
+  const { toJSON: toJsonLtr } = await render(
     <TextInput
       label="Email"
       value=""
@@ -958,7 +1027,7 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
 
   I18nManager.isRTL = true;
 
-  const { toJSON: toJsonRtl } = render(
+  const { toJSON: toJsonRtl } = await render(
     <TextInput
       label="Email"
       value=""
@@ -979,8 +1048,8 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
   );
 });
 
-it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', () => {
-  const { getByTestId, getByText, queryByText, rerender } = render(
+it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {
+  const { rerender } = await render(
     <TextInput
       label="Amount"
       value="1"
@@ -991,10 +1060,10 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText('/100')).toBeTruthy();
+  expect(screen.getByText('$')).toBeOnTheScreen();
+  expect(screen.getByText('/100')).toBeOnTheScreen();
 
-  rerender(
+  await rerender(
     <TextInput
       label="Amount"
       value=""
@@ -1005,13 +1074,13 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(queryByText('$')).toBeNull();
-  expect(queryByText('/100')).toBeNull();
-  expect(getByTestId('tf-ps')).toBeTruthy();
+  expect(screen.queryByText('$')).not.toBeOnTheScreen();
+  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.getByTestId('tf-ps')).toBeOnTheScreen();
 });
 
-it('renders prefix and suffix while focused even when value is empty', () => {
-  const { getByTestId, getByText, queryByText } = render(
+it('renders prefix and suffix while focused even when value is empty', async () => {
+  await render(
     <TextInput
       label="Amount"
       value=""
@@ -1022,17 +1091,17 @@ it('renders prefix and suffix while focused even when value is empty', () => {
     />
   );
 
-  expect(queryByText('$')).toBeNull();
-  expect(queryByText(' kg')).toBeNull();
+  expect(screen.queryByText('$')).not.toBeOnTheScreen();
+  expect(screen.queryByText(' kg')).not.toBeOnTheScreen();
 
-  fireEvent(getByTestId('tf-ps-focus'), 'focus');
+  await fireEvent(screen.getByTestId('tf-ps-focus'), 'focus');
 
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText(' kg')).toBeTruthy();
+  expect(screen.getByText('$')).toBeOnTheScreen();
+  expect(screen.getByText(' kg')).toBeOnTheScreen();
 });
 
-it('places prefix Text before the TextInput and suffix Text after it', () => {
-  const { toJSON } = render(
+it('places prefix Text before the TextInput and suffix Text after it', async () => {
+  const { toJSON } = await render(
     <TextInput
       label="Label"
       value="x"
@@ -1052,8 +1121,8 @@ it('places prefix Text before the TextInput and suffix Text after it', () => {
   );
 });
 
-it('aligns input text toward the suffix when suffix is active (LTR)', () => {
-  const { getByTestId } = render(
+it('aligns input text toward the suffix when suffix is active (LTR)', async () => {
+  await render(
     <TextInput
       label="Label"
       value="5"
@@ -1063,20 +1132,16 @@ it('aligns input text toward the suffix when suffix is active (LTR)', () => {
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-suffix-align-ltr').props.style)
-  ).toEqual(
-    expect.objectContaining({
-      textAlign: 'right',
-      writingDirection: 'ltr',
-    })
-  );
+  expect(screen.getByTestId('tf-suffix-align-ltr')).toHaveStyle({
+    textAlign: 'right',
+    writingDirection: 'ltr',
+  });
 });
 
-it('aligns input text toward the suffix when suffix is active (RTL)', () => {
+it('aligns input text toward the suffix when suffix is active (RTL)', async () => {
   I18nManager.isRTL = true;
 
-  const { getByTestId } = render(
+  await render(
     <TextInput
       label="Label"
       value="5"
@@ -1086,18 +1151,14 @@ it('aligns input text toward the suffix when suffix is active (RTL)', () => {
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-suffix-align-rtl').props.style)
-  ).toEqual(
-    expect.objectContaining({
-      textAlign: 'left',
-      writingDirection: 'rtl',
-    })
-  );
+  expect(screen.getByTestId('tf-suffix-align-rtl')).toHaveStyle({
+    textAlign: 'left',
+    writingDirection: 'rtl',
+  });
 });
 
-it('uses default horizontal alignment when suffix prop exists but suffix is not shown yet (LTR)', () => {
-  const { getByTestId } = render(
+it('uses default horizontal alignment when suffix prop exists but suffix is not shown yet (LTR)', async () => {
+  await render(
     <TextInput
       label="Label"
       value=""
@@ -1107,18 +1168,14 @@ it('uses default horizontal alignment when suffix prop exists but suffix is not 
     />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tf-no-suffix-yet').props.style)
-  ).toEqual(
-    expect.objectContaining({
-      textAlign: 'left',
-      writingDirection: 'ltr',
-    })
-  );
+  expect(screen.getByTestId('tf-no-suffix-yet')).toHaveStyle({
+    textAlign: 'left',
+    writingDirection: 'ltr',
+  });
 });
 
-it('does not apply the TextInput style prop to prefix or suffix Text', () => {
-  const { getByTestId, getByText } = render(
+it('does not apply the TextInput style prop to prefix or suffix Text', async () => {
+  await render(
     <TextInput
       label="Label"
       value="1"
@@ -1130,24 +1187,19 @@ it('does not apply the TextInput style prop to prefix or suffix Text', () => {
     />
   );
 
-  const inputFlat = StyleSheet.flatten(
-    getByTestId('tf-input-style').props.style
-  );
-  expect(inputFlat).toEqual(
-    expect.objectContaining({ fontSize: 40, letterSpacing: 9 })
-  );
+  expect(screen.getByTestId('tf-input-style')).toHaveStyle({
+    fontSize: 40,
+    letterSpacing: 9,
+  });
 
-  const prefixFlat = StyleSheet.flatten(getByText('$').props.style);
-  const suffixFlat = StyleSheet.flatten(getByText(']').props.style);
-
-  expect(prefixFlat.fontSize).not.toBe(40);
-  expect(prefixFlat.letterSpacing).toBeUndefined();
-  expect(suffixFlat.fontSize).not.toBe(40);
-  expect(suffixFlat.letterSpacing).toBeUndefined();
+  expect(screen.getByText('$')).not.toHaveStyle({ fontSize: 40 });
+  expect(screen.getByText('$')).not.toHaveStyle({ letterSpacing: 9 });
+  expect(screen.getByText(']')).not.toHaveStyle({ fontSize: 40 });
+  expect(screen.getByText(']')).not.toHaveStyle({ letterSpacing: 9 });
 });
 
-it('passes defaultValue to the native input when uncontrolled without counter', () => {
-  const { getByTestId } = render(
+it('passes defaultValue to the native input when uncontrolled without counter', async () => {
+  await render(
     <TextInput
       label="Email"
       defaultValue="hello"
@@ -1156,14 +1208,16 @@ it('passes defaultValue to the native input when uncontrolled without counter', 
     />
   );
 
-  const input = getByTestId('tf-uncontrolled');
+  const input = screen.getByTestId('tf-uncontrolled');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.defaultValue).toBe('hello');
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.value).toBeUndefined();
 });
 
-it('updates the character counter for an uncontrolled field with counter enabled', () => {
+it('updates the character counter for an uncontrolled field with counter enabled', async () => {
   const onChangeText = jest.fn();
-  const { getByTestId, getByText } = render(
+  await render(
     <TextInput
       label="Bio"
       defaultValue="a"
@@ -1174,17 +1228,17 @@ it('updates the character counter for an uncontrolled field with counter enabled
     />
   );
 
-  expect(getByText('1/10')).toBeTruthy();
+  expect(screen.getByText('1/10')).toBeOnTheScreen();
 
-  fireEvent.changeText(getByTestId('tf-uncontrolled-counter'), 'abcd');
+  await userEvent.type(screen.getByTestId('tf-uncontrolled-counter'), 'bcd');
 
   expect(onChangeText).toHaveBeenCalledWith('abcd');
-  expect(getByText('4/10')).toBeTruthy();
+  expect(screen.getByText('4/10')).toBeOnTheScreen();
 });
 
-it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', () => {
+it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', async () => {
   const ref = React.createRef<TextInputHandles>();
-  const { getByText, queryByText } = render(
+  await render(
     <TextInput
       ref={ref}
       label="Amount"
@@ -1196,22 +1250,22 @@ it('resets counter and hides prefix/suffix when clear() is called on uncontrolle
     />
   );
 
-  expect(getByText('3/200')).toBeTruthy();
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText('/100')).toBeTruthy();
+  expect(screen.getByText('3/200')).toBeOnTheScreen();
+  expect(screen.getByText('$')).toBeOnTheScreen();
+  expect(screen.getByText('/100')).toBeOnTheScreen();
 
-  act(() => {
+  await act(() => {
     ref.current?.clear();
   });
 
-  expect(getByText('0/200')).toBeTruthy();
-  expect(queryByText('$')).toBeNull();
-  expect(queryByText('/100')).toBeNull();
+  expect(screen.getByText('0/200', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.queryByText('$')).not.toBeOnTheScreen();
+  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
 });
 
-it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', () => {
+it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', async () => {
   const ref = React.createRef<TextInputHandles>();
-  const { getByTestId, getByText } = render(
+  await render(
     <TextInput
       ref={ref}
       label="Amount"
@@ -1224,25 +1278,25 @@ it('resets counter but keeps prefix/suffix visible when clear() is called on unc
     />
   );
 
-  expect(getByText('2/100')).toBeTruthy();
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText(' kg')).toBeTruthy();
+  expect(screen.getByText('2/100', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText(' kg', includeHiddenElements)).toBeOnTheScreen();
 
-  fireEvent(getByTestId('tf-clear-focused'), 'focus');
+  await fireEvent(screen.getByTestId('tf-clear-focused'), 'focus');
 
-  act(() => {
+  await act(() => {
     ref.current?.clear();
   });
 
-  expect(getByText('0/100')).toBeTruthy();
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText(' kg')).toBeTruthy();
+  expect(screen.getByText('0/100', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText(' kg', includeHiddenElements)).toBeOnTheScreen();
 });
 
-it('notifies the parent via onChangeText when clear() is called on a controlled field', () => {
+it('notifies the parent via onChangeText when clear() is called on a controlled field', async () => {
   const ref = React.createRef<TextInputHandles>();
   const onChangeText = jest.fn();
-  const { getByTestId } = render(
+  await render(
     <TextInput
       ref={ref}
       label="Email"
@@ -1252,10 +1306,11 @@ it('notifies the parent via onChangeText when clear() is called on a controlled 
     />
   );
 
-  const input = getByTestId('tf-controlled');
+  const input = screen.getByTestId('tf-controlled', includeHiddenElements);
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(input.props.value).toBe('test@example.com');
 
-  act(() => {
+  await act(() => {
     ref.current?.clear();
   });
 
@@ -1263,9 +1318,9 @@ it('notifies the parent via onChangeText when clear() is called on a controlled 
   expect(onChangeText).toHaveBeenCalledTimes(1);
 });
 
-it('hides prefix/suffix when blurring after clear() was called while focused', () => {
+it('hides prefix/suffix when blurring after clear() was called while focused', async () => {
   const ref = React.createRef<TextInputHandles>();
-  const { getByTestId, getByText, queryByText } = render(
+  await render(
     <TextInput
       ref={ref}
       label="Amount"
@@ -1276,22 +1331,22 @@ it('hides prefix/suffix when blurring after clear() was called while focused', (
     />
   );
 
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText('/100')).toBeTruthy();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
-  fireEvent(getByTestId('tf-clear-then-blur'), 'focus');
+  await fireEvent(screen.getByTestId('tf-clear-then-blur'), 'focus');
 
-  act(() => {
+  await act(() => {
     ref.current?.clear();
   });
 
   // While focused, prefix/suffix stay visible
-  expect(getByText('$')).toBeTruthy();
-  expect(getByText('/100')).toBeTruthy();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
-  fireEvent(getByTestId('tf-clear-then-blur'), 'blur');
+  await fireEvent(screen.getByTestId('tf-clear-then-blur'), 'blur');
 
   // After blur with no text, prefix/suffix should be hidden
-  expect(queryByText('$')).toBeNull();
-  expect(queryByText('/100')).toBeNull();
+  expect(screen.queryByText('$')).not.toBeOnTheScreen();
+  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
 });

@@ -219,8 +219,8 @@ const Checkbox = ({
     status === 'checked'
       ? 'check'
       : status === 'indeterminate'
-      ? 'indeterminate'
-      : lastGlyph;
+        ? 'indeterminate'
+        : lastGlyph;
   if (nextGlyph !== lastGlyph) {
     setLastGlyph(nextGlyph);
   }

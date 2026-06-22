@@ -1,54 +1,52 @@
 import { expect, it, jest } from '@jest/globals';
-import { act, fireEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import Checkbox from '../../Checkbox';
 
-it('renders unchecked', () => {
-  const tree = render(
-    <Checkbox.Item status="unchecked" label="Unchecked Button" />
+it('renders unchecked', async () => {
+  const tree = (
+    await render(<Checkbox.Item status="unchecked" label="Unchecked Button" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('can render leading checkbox control', () => {
-  const tree = render(
-    <Checkbox.Item
-      label="Default with leading control"
-      status={'unchecked'}
-      position="leading"
-    />
+it('can render leading checkbox control', async () => {
+  const tree = (
+    await render(
+      <Checkbox.Item
+        label="Default with leading control"
+        status={'unchecked'}
+        position="leading"
+      />
+    )
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('should have `accessibilityState={ checked: true }` when `status="checked"`', () => {
-  const { getAllByA11yState } = render(
-    <Checkbox.Item status="checked" label="Checked Button" />
-  );
+it('should have `accessibilityState={ checked: true }` when `status="checked"`', async () => {
+  await render(<Checkbox.Item status="checked" label="Checked Button" />);
 
-  expect(getAllByA11yState({ checked: true })).toHaveLength(1);
+  expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(1);
 });
 
-it('should have `accessibilityState={ checked: false }` when `status="unchecked"', () => {
-  const { getAllByA11yState } = render(
-    <Checkbox.Item status="unchecked" label="Unchecked Button" />
-  );
+it('should have `accessibilityState={ checked: false }` when `status="unchecked"', async () => {
+  await render(<Checkbox.Item status="unchecked" label="Unchecked Button" />);
 
-  expect(getAllByA11yState({ checked: false })).toHaveLength(1);
+  expect(screen.getAllByRole('checkbox', { checked: false })).toHaveLength(1);
 });
 
-it('should have `accessibilityState={ checked: "mixed" }` when `status="indeterminate"`', () => {
-  const { getAllByA11yState } = render(
+it('should have `accessibilityState={ checked: "mixed" }` when `status="indeterminate"`', async () => {
+  await render(
     <Checkbox.Item status="indeterminate" label="Indeterminate Button" />
   );
 
-  expect(getAllByA11yState({ checked: 'mixed' })).toHaveLength(1);
+  expect(screen.getAllByRole('checkbox', { checked: 'mixed' })).toHaveLength(1);
 });
 
-it('disables the row when the prop disabled is true', () => {
-  const { getByLabelText } = render(
+it('disables the row when the prop disabled is true', async () => {
+  await render(
     <Checkbox.Item
       status="unchecked"
       label=""
@@ -57,25 +55,24 @@ it('disables the row when the prop disabled is true', () => {
     />
   );
 
-  const touchable = getByLabelText('some checkbox');
-
-  expect(touchable.props).toMatchObject({
-    accessibilityState: { disabled: true },
-  });
+  expect(screen.getByLabelText('some checkbox')).toBeDisabled();
 });
 
-it('should have maxFontSizeMultiplier set to 1.5 by default', () => {
-  const { getByTestId } = render(
+it('should have maxFontSizeMultiplier set to 1.5 by default', async () => {
+  await render(
     <Checkbox.Item label="" testID="checkbox-item" status="unchecked" />
   );
-  const checkboxItemText = getByTestId('checkbox-item-text');
+  const checkboxItemText = screen.getByTestId('checkbox-item-text', {
+    includeHiddenElements: true,
+  });
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(checkboxItemText.props.maxFontSizeMultiplier).toBe(1.5);
 });
 
-it('should execute onLongPress', () => {
+it('should execute onLongPress', async () => {
   const onLongPress = jest.fn();
 
-  const { getByTestId } = render(
+  await render(
     <Checkbox.Item
       label="Item"
       status="unchecked"
@@ -84,9 +81,7 @@ it('should execute onLongPress', () => {
     />
   );
 
-  act(() => {
-    fireEvent(getByTestId('checkbox-item'), 'longPress', { key: 'value' });
-  });
+  await userEvent.longPress(screen.getByTestId('checkbox-item'));
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
 });

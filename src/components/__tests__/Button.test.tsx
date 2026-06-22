@@ -1,10 +1,10 @@
 import { Animated, StyleSheet } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { act, fireEvent } from '@testing-library/react-native';
+import { act, userEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
@@ -27,143 +27,149 @@ const styles = StyleSheet.create({
   },
 });
 
-it('renders text button by default', () => {
-  const tree = render(<Button>Text Button</Button>).toJSON();
+it('renders text button by default', async () => {
+  const tree = (await render(<Button>Text Button</Button>)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders text button with mode', () => {
-  const tree = render(<Button mode="text">Text Button</Button>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders outlined button with mode', () => {
-  const tree = render(
-    <Button mode="outlined">Outlined Button</Button>
+it('renders text button with mode', async () => {
+  const tree = (
+    await render(<Button mode="text">Text Button</Button>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders contained contained with mode', () => {
-  const tree = render(
-    <Button mode="contained">Contained Button</Button>
+it('renders outlined button with mode', async () => {
+  const tree = (
+    await render(<Button mode="outlined">Outlined Button</Button>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with icon', () => {
-  const tree = render(<Button icon="camera">Icon Button</Button>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders button with icon in reverse order', () => {
-  const tree = render(
-    <Button icon="chevron-right" contentStyle={styles.flexing}>
-      Right Icon
-    </Button>
+it('renders contained contained with mode', async () => {
+  const tree = (
+    await render(<Button mode="contained">Contained Button</Button>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders loading button', () => {
-  const tree = render(<Button loading>Loading Button</Button>).toJSON();
+it('renders button with icon', async () => {
+  const tree = (
+    await render(<Button icon="camera">Icon Button</Button>)
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled button', () => {
-  const tree = render(<Button disabled>Disabled Button</Button>).toJSON();
+it('renders button with icon in reverse order', async () => {
+  const tree = (
+    await render(
+      <Button icon="chevron-right" contentStyle={styles.flexing}>
+        Right Icon
+      </Button>
+    )
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled button if there is no touch handler passed', () => {
-  const { getByTestId } = render(
-    <Button testID="disabled-button">Disabled button</Button>
-  );
+it('renders loading button', async () => {
+  const tree = (await render(<Button loading>Loading Button</Button>)).toJSON();
 
-  expect(getByTestId('disabled-button').props.accessibilityState).toMatchObject(
-    {
-      disabled: true,
-    }
-  );
+  expect(tree).toMatchSnapshot();
 });
 
-it('renders active button if only onLongPress handler is passed', () => {
-  const { getByTestId } = render(
+it('renders disabled button', async () => {
+  const tree = (
+    await render(<Button disabled>Disabled Button</Button>)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders disabled button if there is no touch handler passed', async () => {
+  await render(<Button testID="disabled-button">Disabled button</Button>);
+
+  expect(screen.getByTestId('disabled-button')).toBeDisabled();
+});
+
+it('renders active button if only onLongPress handler is passed', async () => {
+  await render(
     <Button onLongPress={() => {}} testID="active-button">
       Active button
     </Button>
   );
 
-  expect(getByTestId('active-button').props.accessibilityState).toMatchObject({
-    disabled: false,
-  });
+  expect(screen.getByTestId('active-button')).toBeEnabled();
 });
 
-it('renders button with color', () => {
-  const tree = render(
-    <Button textColor={pink500}>Custom Button</Button>
+it('renders button with color', async () => {
+  const tree = (
+    await render(<Button textColor={pink500}>Custom Button</Button>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with button color', () => {
-  const tree = render(
-    <Button buttonColor={pink500}>Custom Button</Button>
+it('renders button with button color', async () => {
+  const tree = (
+    await render(<Button buttonColor={pink500}>Custom Button</Button>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with custom testID', () => {
-  const tree = render(
-    <Button testID={'custom:testID'}>Button with custom testID</Button>
+it('renders button with custom testID', async () => {
+  const tree = (
+    await render(
+      <Button testID={'custom:testID'}>Button with custom testID</Button>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with an accessibility label', () => {
-  const tree = render(
-    <Button accessibilityLabel={'label'}>
-      Button with accessibility label
-    </Button>
+it('renders button with an accessibility label', async () => {
+  const tree = (
+    await render(
+      <Button accessibilityLabel={'label'}>
+        Button with accessibility label
+      </Button>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with an accessibility hint', () => {
-  const tree = render(
-    <Button accessibilityHint={'hint'}>Button with accessibility hint</Button>
+it('renders button with an accessibility hint', async () => {
+  const tree = (
+    await render(
+      <Button accessibilityHint={'hint'}>Button with accessibility hint</Button>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders button with custom border radius', () => {
-  const { getByTestId } = render(
+it('renders button with custom border radius', async () => {
+  await render(
     <Button testID="custom-radius" style={styles.customRadius}>
       Custom radius
     </Button>
   );
 
-  expect(getByTestId('custom-radius-container')).toHaveStyle(
+  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
     styles.customRadius
   );
-  expect(getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
+  expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
 });
 
-it('renders outlined button with custom border radius', () => {
-  const { getByTestId } = render(
+it('renders outlined button with custom border radius', async () => {
+  await render(
     <Button
       mode={'outlined'}
       testID="custom-radius"
@@ -173,10 +179,10 @@ it('renders outlined button with custom border radius', () => {
     </Button>
   );
 
-  expect(getByTestId('custom-radius-container')).toHaveStyle(
+  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
     styles.customRadius
   );
-  expect(getByTestId('custom-radius')).toHaveStyle({
+  expect(screen.getByTestId('custom-radius')).toHaveStyle({
     borderTopLeftRadius: 15, // styles.customRadius - 1px outline
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 0,
@@ -184,77 +190,79 @@ it('renders outlined button with custom border radius', () => {
   });
 });
 
-it('renders button without border radius', () => {
-  const { getByTestId } = render(
+it('renders button without border radius', async () => {
+  await render(
     <Button testID="custom-radius" style={styles.noRadius}>
       Custom radius
     </Button>
   );
 
-  expect(getByTestId('custom-radius-container')).toHaveStyle(styles.noRadius);
-  expect(getByTestId('custom-radius')).toHaveStyle(styles.noRadius);
+  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
+    styles.noRadius
+  );
+  expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.noRadius);
 });
 
-it('should execute onPressIn', () => {
+it('should execute onPressIn', async () => {
   const onPressInMock = jest.fn();
   const onPress = jest.fn();
 
-  const { getByTestId } = render(
+  await render(
     <Button onPress={onPress} onPressIn={onPressInMock} testID="button">
       {null}
     </Button>
   );
-  fireEvent(getByTestId('button'), 'onPressIn');
+  await userEvent.press(screen.getByTestId('button'));
   expect(onPressInMock).toHaveBeenCalledTimes(1);
 });
 
-it('should execute onPressOut', () => {
+it('should execute onPressOut', async () => {
   const onPressOutMock = jest.fn();
   const onPress = jest.fn();
 
-  const { getByTestId } = render(
+  await render(
     <Button onPress={onPress} onPressOut={onPressOutMock} testID="button">
       {null}
     </Button>
   );
-  fireEvent(getByTestId('button'), 'onPressOut');
+  await userEvent.press(screen.getByTestId('button'));
   expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
 describe('button text styles', () => {
-  it('applies uppercase styles if uppercase prop is truthy', () => {
-    const { getByTestId } = render(
+  it('applies uppercase styles if uppercase prop is truthy', async () => {
+    await render(
       <Button testID="button" uppercase>
         Test
       </Button>
     );
 
-    expect(getByTestId('button-text')).toHaveStyle({
+    expect(screen.getByTestId('button-text')).toHaveStyle({
       textTransform: 'uppercase',
     });
   });
 
-  it('does not apply uppercase styles if uppercase prop is falsy', () => {
-    const { getByTestId } = render(
+  it('does not apply uppercase styles if uppercase prop is falsy', async () => {
+    await render(
       <Button testID="button" uppercase={false}>
         Test
       </Button>
     );
 
-    expect(getByTestId('button-text')).not.toHaveStyle({
+    expect(screen.getByTestId('button-text')).not.toHaveStyle({
       textTransform: 'uppercase',
     });
   });
 });
 
 describe('button icon styles', () => {
-  it('should return correct icon styles for compact text button', () => {
-    const { getByTestId } = render(
+  it('should return correct icon styles for compact text button', async () => {
+    await render(
       <Button mode={'text'} compact icon="camera" testID="compact-button">
         Compact text button
       </Button>
     );
-    expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
       marginLeft: 6,
       marginRight: 0,
     });
@@ -262,26 +270,28 @@ describe('button icon styles', () => {
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
-      it(`should return correct icon styles for compact ${mode} button`, () => {
-        const { getByTestId } = render(
+      it(`should return correct icon styles for compact ${mode} button`, async () => {
+        await render(
           <Button mode={mode} compact icon="camera" testID="compact-button">
             Compact {mode} button
           </Button>
         );
-        expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-          marginLeft: 8,
-          marginRight: 0,
-        });
+        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
+          {
+            marginLeft: 8,
+            marginRight: 0,
+          }
+        );
       })
   );
 
-  it('should return correct icon styles for text button', () => {
-    const { getByTestId } = render(
+  it('should return correct icon styles for text button', async () => {
+    await render(
       <Button mode={'text'} icon="camera" testID="compact-button">
         text button
       </Button>
     );
-    expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
       marginLeft: 12,
       marginRight: -8,
     });
@@ -289,16 +299,18 @@ describe('button icon styles', () => {
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
-      it(`should return correct icon styles for compact ${mode} button`, () => {
-        const { getByTestId } = render(
+      it(`should return correct icon styles for compact ${mode} button`, async () => {
+        await render(
           <Button mode={mode} icon="camera" testID="compact-button">
             {mode} button
           </Button>
         );
-        expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-          marginLeft: 16,
-          marginRight: -16,
-        });
+        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
+          {
+            marginLeft: 16,
+            marginRight: -16,
+          }
+        );
       })
   );
 });
@@ -698,9 +710,9 @@ describe('getButtonColors - border width', () => {
   );
 });
 
-it('animated value changes correctly', () => {
+it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  const { getByTestId } = render(
+  await render(
     <Button
       mode="elevated"
       compact
@@ -710,7 +722,7 @@ it('animated value changes correctly', () => {
       Compact button
     </Button>
   );
-  expect(getByTestId('button-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -720,10 +732,10 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  act(() => {
+  await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getByTestId('button-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

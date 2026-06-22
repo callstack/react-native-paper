@@ -38,7 +38,6 @@ function configureFontsConfig(
   );
 }
 
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
   config?: Partial<TypescaleStyle>;
 }): Typescale;

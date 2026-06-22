@@ -54,7 +54,7 @@ const Root = createNativeStackNavigator({
       (
         Object.entries(examplesWithoutParams) as [
           ExampleRouteName,
-          (typeof examplesWithoutParams)[ExampleRouteName]
+          (typeof examplesWithoutParams)[ExampleRouteName],
         ][]
       ).map(([id, screen]) => [
         id,

@@ -1,7 +1,0 @@
-{
-  "rules": {
-    "no-unused-vars": "off",
-    "import/no-duplicates": "off",
-    "import/no-unresolved": "off",
-  }
-}

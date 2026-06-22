@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders menu with content styles 1`] = `
-[
+<>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -165,7 +165,7 @@ exports[`renders menu with content styles 1`] = `
         </View>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -560,8 +560,8 @@ exports[`renders menu with content styles 1`] = `
         </View>
       </View>
     </View>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders not visible menu 1`] = `
@@ -732,7 +732,7 @@ exports[`renders not visible menu 1`] = `
 `;
 
 exports[`renders visible menu 1`] = `
-[
+<>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -896,7 +896,7 @@ exports[`renders visible menu 1`] = `
         </View>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -1287,6 +1287,6 @@ exports[`renders visible menu 1`] = `
         </View>
       </View>
     </View>
-  </View>,
-]
+  </View>
+</>
 `;
