@@ -613,11 +613,14 @@ a .badge .badge-text {
 }
 
 .paper-version-selector-link {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   border-radius: 12px;
   padding: 8px 10px;
   color: inherit;
   text-decoration: none;
+  gap: 6px;
 }
 
 .paper-version-selector-link:hover,
@@ -642,6 +645,11 @@ html:not(.dark) .paper-version-selector-menu {
   .paper-version-selector summary {
     padding-inline: 12px;
   }
+}
+
+.rp-nav__others > .rp-nav-menu__item,
+.rp-nav-hamburger__md__hover-group > .rp-nav-menu__item {
+  display: none;
 }
 
 .rp-doc-layout__outline:empty,
