@@ -1,4 +1,5 @@
-const childProcess = require('node:child_process') as typeof import('node:child_process');
+const childProcess =
+  require('node:child_process') as typeof import('node:child_process');
 const fs = require('node:fs') as typeof import('node:fs');
 const Module = require('node:module') as typeof import('node:module') & {
   _load: (request: string, parent: unknown, isMain: boolean) => unknown;
@@ -193,10 +194,9 @@ const main = async () => {
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
 
-    writeJson(
-      destination,
-      { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) }
-    );
+    writeJson(destination, {
+      docs: normalizeDocs(docs, fs.realpathSync(sourceDir)),
+    });
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;
