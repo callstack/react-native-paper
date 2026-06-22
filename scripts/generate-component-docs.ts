@@ -1,85 +1,137 @@
-// @ts-nocheck
+import * as childProcess from 'node:child_process';
+import * as fs from 'node:fs';
+import Module, { createRequire } from 'node:module';
+import * as os from 'node:os';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-/** @type {typeof import('child_process')} */
-const childProcess = require('child_process');
-/** @type {typeof import('fs')} */
-const fs = require('fs');
-/** @type {typeof import('module') & {_load: (request: string, parent: unknown, isMain: boolean) => unknown}} */
-const Module = require('module');
-/** @type {typeof import('os')} */
-const os = require('os');
-/** @type {typeof import('path')} */
-const path = require('path');
+type PluginOptions = {
+  docsRootDir: string;
+  libsRootDir: string;
+  pages: unknown;
+};
 
-/**
- * @typedef {Record<string, unknown>} UnknownRecord
- */
+type PluginConfig = [string, PluginOptions];
 
-/**
- * @typedef {{
- *   docsRootDir: string;
- *   libsRootDir: string;
- * }} ComponentDocsConfig
- */
+type PluginFactory = (
+  context: unknown,
+  options: PluginOptions
+) => Promise<{
+  loadContent: () => Promise<unknown>;
+}>;
 
-/**
- * @param {unknown} value
- * @returns {UnknownRecord | null}
- */
-function toRecord(value) {
-  return typeof value === 'object' && value !== null ? value : null;
-}
+const isRecord = (value: unknown): value is { [key: string]: unknown } =>
+  typeof value === 'object' && value !== null;
+
+const isPluginOptions = (value: unknown): value is PluginOptions => {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.docsRootDir === 'string' &&
+    typeof value.libsRootDir === 'string' &&
+    'pages' in value
+  );
+};
+
+const isPluginConfig = (value: unknown): value is PluginConfig =>
+  Array.isArray(value) &&
+  value[0] === './component-docs-plugin' &&
+  isPluginOptions(value[1]);
+
+const isPluginFactory = (value: unknown): value is PluginFactory =>
+  typeof value === 'function';
+
 const legacyDocusaurusShims = new Set([
   '@docusaurus/remark-plugin-npm2yarn',
   'prism-react-renderer/themes/dracula',
   'prism-react-renderer/themes/github',
 ]);
 
-/**
- * @param {string} configPath
- * @returns {unknown}
- */
-function loadLegacyDocusaurusConfig(configPath) {
-  const originalLoad = Module._load;
+const loadLegacyDocusaurusConfig = (
+  configPath: string,
+  requireFromScript: ReturnType<typeof createRequire>
+): unknown => {
+  const originalLoad = Reflect.get(Module, '_load');
 
-  Module._load =
-    /** @type {typeof Module._load} */ function loadWithLegacyDocsShims(
-      request,
-      parent,
-      isMain
-    ) {
-      if (legacyDocusaurusShims.has(request)) {
-        return {};
-      }
+  if (typeof originalLoad !== 'function') {
+    throw new Error('Unable to patch Node module loader');
+  }
 
-      return originalLoad.call(this, request, parent, isMain);
-    };
+  function loadWithLegacyDocsShims(
+    this: unknown,
+    request: string,
+    parent: NodeJS.Module | null,
+    isMain: boolean
+  ): unknown {
+    if (legacyDocusaurusShims.has(request)) {
+      return {};
+    }
+
+    return Reflect.apply(originalLoad, this, [request, parent, isMain]);
+  }
+
+  Reflect.set(Module, '_load', loadWithLegacyDocsShims);
 
   try {
-    return require(configPath);
+    return requireFromScript(configPath);
   } finally {
-    Module._load = originalLoad;
+    Reflect.set(Module, '_load', originalLoad);
   }
-}
+};
 
-/**
- * @param {unknown} value
- * @param {string} sourceDir
- * @returns {unknown}
- */
-function normalizeDocs(value, sourceDir) {
+const loadPluginConfig = (
+  sourceDir: string,
+  requireFromScript: ReturnType<typeof createRequire>
+): PluginConfig => {
+  const sharedConfigPath = path.join(
+    sourceDir,
+    'docs',
+    'component-docs.config.js'
+  );
+
+  if (fs.existsSync(sharedConfigPath)) {
+    const sharedConfig: unknown = requireFromScript(sharedConfigPath);
+
+    if (!isPluginOptions(sharedConfig)) {
+      throw new Error(
+        `Unable to read component docs config from ${sharedConfigPath}`
+      );
+    }
+
+    return ['./component-docs-plugin', sharedConfig];
+  }
+
+  const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
+  const config = loadLegacyDocusaurusConfig(configPath, requireFromScript);
+
+  if (!isRecord(config) || !Array.isArray(config.plugins)) {
+    throw new Error(`Unable to read plugins from ${configPath}`);
+  }
+
+  const pluginConfig = config.plugins.find(isPluginConfig);
+
+  if (!pluginConfig) {
+    throw new Error(
+      `Unable to find component docs plugin config in ${configPath}`
+    );
+  }
+
+  return pluginConfig;
+};
+
+const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
   if (Array.isArray(value)) {
     return value.map((item) => normalizeDocs(item, sourceDir));
   }
 
-  const record = toRecord(value);
-
-  if (!record) {
+  if (!isRecord(value)) {
     return value;
   }
 
   return Object.fromEntries(
-    Object.entries(record).map(([key, item]) => {
+    Object.entries(value).map(([key, item]) => {
       if (key !== 'dependencies' || !Array.isArray(item)) {
         return [key, normalizeDocs(item, sourceDir)];
       }
@@ -108,17 +160,12 @@ function normalizeDocs(value, sourceDir) {
       ];
     })
   );
-}
+};
 
-/**
- * @param {string} destination
- * @param {unknown} value
- * @returns {void}
- */
-function writeJson(destination, value) {
+const writeJson = (destination: string, value: unknown) => {
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.writeFileSync(destination, `${JSON.stringify(value, null, 2)}\n`);
-}
+};
 
 const main = async () => {
   const [branchName, outputPath = 'docs/src/data/componentDocs5x.json'] =
@@ -132,7 +179,11 @@ const main = async () => {
     return;
   }
 
-  const rootDir = path.resolve(__dirname, '..');
+  const requireFromScript = createRequire(import.meta.url);
+  const rootDir = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '..'
+  );
   const tempDir = fs.mkdtempSync(
     path.join(os.tmpdir(), 'react-native-paper-docs-')
   );
@@ -175,69 +226,20 @@ const main = async () => {
       fs.symlinkSync(nodeModulesPath, archivedNodeModulesPath, 'dir');
     }
 
-    const sharedConfigPath = path.join(
-      sourceDir,
-      'docs',
-      'component-docs.config.js'
-    );
-
-    let pluginConfig;
-
-    if (fs.existsSync(sharedConfigPath)) {
-      const sharedConfig = toRecord(require(sharedConfigPath));
-
-      if (
-        sharedConfig &&
-        typeof sharedConfig.docsRootDir === 'string' &&
-        typeof sharedConfig.libsRootDir === 'string'
-      ) {
-        pluginConfig = [
-          './component-docs-plugin',
-          {
-            docsRootDir: sharedConfig.docsRootDir,
-            libsRootDir: sharedConfig.libsRootDir,
-          },
-        ];
-      }
-    }
-
-    if (!pluginConfig) {
-      const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-      const config = loadLegacyDocusaurusConfig(configPath);
-      const configRecord = toRecord(config);
-
-      if (!configRecord || !Array.isArray(configRecord.plugins)) {
-        throw new Error(`Unable to read plugins from ${configPath}`);
-      }
-
-      /** @type {unknown[]} */
-      const plugins = configRecord.plugins;
-
-      for (const plugin of plugins) {
-        if (
-          Array.isArray(plugin) &&
-          plugin[0] === './component-docs-plugin' &&
-          toRecord(plugin[1]) &&
-          typeof plugin[1].docsRootDir === 'string' &&
-          typeof plugin[1].libsRootDir === 'string'
-        ) {
-          pluginConfig = plugin;
-          break;
-        }
-      }
-
-      if (!pluginConfig) {
-        throw new Error(
-          `Unable to find component docs plugin config in ${configPath}`
-        );
-      }
-    }
-
-    const pluginFactory = require(path.join(
+    const pluginConfig = loadPluginConfig(sourceDir, requireFromScript);
+    const pluginFactoryPath = path.join(
       sourceDir,
       'docs',
       'component-docs-plugin'
-    ));
+    );
+    const pluginFactory: unknown = requireFromScript(pluginFactoryPath);
+
+    if (!isPluginFactory(pluginFactory)) {
+      throw new Error(
+        `Unable to read component docs plugin from ${pluginFactoryPath}`
+      );
+    }
+
     const plugin = await pluginFactory({}, pluginConfig[1]);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);

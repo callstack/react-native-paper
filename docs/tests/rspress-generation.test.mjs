@@ -19,9 +19,7 @@ test('guide routes keep stripped public paths', () => {
   );
   assert.ok(fs.existsSync(path.join(docsRoot, '6.x/docs/guides/rtl.md')));
   assert.equal(
-    fs.existsSync(
-      path.join(docsRoot, '5.x/docs/guides/01-getting-started.md')
-    ),
+    fs.existsSync(path.join(docsRoot, '5.x/docs/guides/01-getting-started.md')),
     false
   );
 });
@@ -170,8 +168,14 @@ test('version selector exposes current and legacy versions', () => {
     assert.match(selectorSource, new RegExp(label.replace('.', '\\.')));
   }
 
-  assert.match(selectorSource, /target=\{link\.external \? '_blank' : undefined\}/);
-  assert.match(selectorSource, /rel=\{link\.external \? 'noopener noreferrer' : undefined\}/);
+  assert.match(
+    selectorSource,
+    /target=\{link\.external \? '_blank' : undefined\}/
+  );
+  assert.match(
+    selectorSource,
+    /rel=\{link\.external \? 'noopener noreferrer' : undefined\}/
+  );
   assert.match(selectorSource, /getStableRoute/);
   assert.match(selectorSource, /getNextRoute/);
 });

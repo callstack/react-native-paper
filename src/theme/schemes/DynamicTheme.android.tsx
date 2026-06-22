@@ -7,6 +7,7 @@ import type { Theme, ThemeColors } from '../types';
 
 const apiLevel = Platform.Version as number;
 
+// eslint-disable-next-line @react-native/platform-colors
 const ac = (name: string) => PlatformColor(`@android:color/${name}`);
 
 /**
@@ -23,8 +24,8 @@ const pick = (api34: string, api31: string | null, ref: string): ColorValue =>
   apiLevel >= 34
     ? ac(api34)
     : apiLevel >= 31 && api31 !== null
-    ? ac(api31)
-    : ref;
+      ? ac(api31)
+      : ref;
 
 // Known limitation: surface/container roles on API 31-33 use
 // @color/m3_ref_palette_dynamic_neutral_variant* (MCL resources that require a

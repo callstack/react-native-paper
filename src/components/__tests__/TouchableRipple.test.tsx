@@ -2,44 +2,44 @@ import { Platform, Text } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { fireEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 describe('TouchableRipple', () => {
-  it('renders children correctly', () => {
-    const { getByText } = render(
+  it('renders children correctly', async () => {
+    await render(
       <TouchableRipple>
         <Text>Button</Text>
       </TouchableRipple>
     );
 
-    expect(getByText('Button')).toBeTruthy();
+    expect(screen.getByText('Button')).toBeOnTheScreen();
   });
 
-  it('calls onPress when pressed', () => {
+  it('calls onPress when pressed', async () => {
     const onPress = jest.fn<(event: GestureResponderEvent) => void>();
-    const { getByText } = render(
+    await render(
       <TouchableRipple onPress={onPress}>
         <Text>Button</Text>
       </TouchableRipple>
     );
 
-    fireEvent.press(getByText('Button'));
+    await userEvent.press(screen.getByText('Button'));
 
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('disables the button when disabled prop is true', () => {
+  it('disables the button when disabled prop is true', async () => {
     const onPress = jest.fn<(event: GestureResponderEvent) => void>();
-    const { getByText } = render(
+    await render(
       <TouchableRipple disabled onPress={onPress}>
         <Text>Button</Text>
       </TouchableRipple>
     );
 
-    fireEvent.press(getByText('Button'));
+    await userEvent.press(screen.getByText('Button'));
 
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -47,25 +47,25 @@ describe('TouchableRipple', () => {
   describe('on iOS', () => {
     Platform.OS = 'ios';
 
-    it('displays the underlay when pressed', () => {
-      const { getByTestId } = render(
+    it('displays the underlay when pressed', async () => {
+      await render(
         <TouchableRipple testOnly_pressed>
           <Text>Press me!</Text>
         </TouchableRipple>
       );
 
-      const underlay = getByTestId('touchable-ripple-underlay');
-      expect(underlay).toBeDefined();
+      const underlay = screen.getByTestId('touchable-ripple-underlay');
+      expect(underlay).toBeOnTheScreen();
     });
 
-    it('renders custom underlay color', () => {
-      const { getByTestId } = render(
+    it('renders custom underlay color', async () => {
+      await render(
         <TouchableRipple testOnly_pressed underlayColor="purple">
           <Text>Press me!</Text>
         </TouchableRipple>
       );
 
-      const underlay = getByTestId('touchable-ripple-underlay');
+      const underlay = screen.getByTestId('touchable-ripple-underlay');
       expect(underlay).toHaveStyle({ backgroundColor: 'purple' });
     });
   });

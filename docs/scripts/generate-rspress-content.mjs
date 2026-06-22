@@ -1,17 +1,19 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 const componentDocsConfig = require('../component-docs.config');
 
-const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const rootDir = path.resolve(
+  path.dirname(new URL(import.meta.url).pathname),
+  '..'
+);
 const sourcePagesDir = path.join(rootDir, 'src', 'pages');
 const staticDir = path.join(rootDir, 'static');
 const publicDir = path.join(rootDir, 'public');
 const docsOrder = ['5.x', '6.x'];
 
-const FRONTMATTER_TITLE = /^---[\s\S]*?title:\s*(.+?)\s*$/m;
 const NUMERIC_PREFIX = /^\d+-/;
 
 const ensureDir = (dirPath) => {
@@ -29,37 +31,6 @@ const stripExtension = (fileName) => fileName.replace(/\.(md|mdx)$/, '');
 
 const stripNumericPrefix = (fileName) =>
   stripExtension(fileName).replace(NUMERIC_PREFIX, '');
-
-const getTitle = (content, fallbackName) => {
-  const match = content.match(FRONTMATTER_TITLE);
-  if (match?.[1]) {
-    return match[1].trim();
-  }
-
-  return fallbackName;
-};
-
-const transformSharedContent = (content, version) =>
-  content
-    .replace(/((?:\.\.\/)+)static\//g, '/react-native-paper/')
-    .replace(
-      /\]\(((?:\.\.\/|\.\/)?)(\d{2}-[a-z0-9-]+)\.(md|mdx)\)/gi,
-      (_, prefix, fileName) => `](${prefix}${fileName.replace(NUMERIC_PREFIX, '')})`
-    )
-    .replace(/\]\(\.\/Portal\)/g, '](./Portal/Portal)')
-    .replace(/\]\(\.\.\/Portal\)/g, '](../Portal/Portal)')
-    .replace(
-      /2\. <b>Advanced theme overrides<\/b> - when you <i>add new properties<\/i> or <i>\s+change the built-in schema shape\s+<\/i>/g,
-      '2. <b>Advanced theme overrides</b> - when you <i>add new properties</i> or <i>change the built-in schema shape</i>'
-    )
-    .replace(
-      /<i>\s+We are planning to provide a better support of handling custom theme overrides\s+in future releases\.\s+<\/i>/g,
-      '<i>We are planning to provide a better support of handling custom theme overrides in future releases.</i>'
-    )
-    .replace(
-      /<PropTable componentLink="([^"]+)" prop="([^"]+)" \/>/g,
-      '<PropTable componentLink="$1" prop="$2" version="' + version + '" />'
-    );
 
 const transformIndexContent = (content) =>
   content
@@ -87,8 +58,7 @@ const copyFile = (sourcePath, targetPath, transform) => {
 const getVersionDocsDir = (version) => path.join(rootDir, version, 'docs');
 
 const createNav = (version) => {
-  const activePrefix =
-    version === '6.x' ? '^/(?:6\\.x/)?docs' : '^/docs';
+  const activePrefix = version === '6.x' ? '^/(?:6\\.x/)?docs' : '^/docs';
 
   return [
     {
@@ -169,8 +139,12 @@ const createGuidesMeta = (version) => {
     .filter((entry) => entry.isFile() && /\.(md|mdx)$/.test(entry.name))
     .map((entry) => stripNumericPrefix(entry.name));
 
-  const knownEntries = existingOrder.filter((entry) => currentEntries.includes(entry));
-  const newEntries = currentEntries.filter((entry) => !existingOrder.includes(entry));
+  const knownEntries = existingOrder.filter((entry) =>
+    currentEntries.includes(entry)
+  );
+  const newEntries = currentEntries.filter(
+    (entry) => !existingOrder.includes(entry)
+  );
 
   return [...knownEntries, ...newEntries];
 };
@@ -205,7 +179,10 @@ const writeMetaFiles = (version, targetVersionDir) => {
     path.join(docsDir, 'guides', '_meta.json'),
     createGuidesMeta(version)
   );
-  writeJson(path.join(componentsDir, '_meta.json'), createComponentMeta(version));
+  writeJson(
+    path.join(componentsDir, '_meta.json'),
+    createComponentMeta(version)
+  );
 
   for (const entry of fs.readdirSync(componentsDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) {

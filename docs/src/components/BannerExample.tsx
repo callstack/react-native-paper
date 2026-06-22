@@ -19,6 +19,8 @@ import {
 import BrowserOnly from '../rspress-compat/BrowserOnly';
 import { useColorMode } from '../rspress-compat/theme-common';
 
+const shimmerBorderColor = 'rgba(125, 82, 96, 0.4)';
+
 const styles = StyleSheet.create({
   container: {
     padding: 24,
@@ -31,6 +33,19 @@ const styles = StyleSheet.create({
   row: {
     alignItems: 'flex-start',
     flexWrap: 'wrap',
+  },
+  shimmer: {
+    alignContent: 'center',
+    borderColor: shimmerBorderColor,
+    borderRadius: 16,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: 32,
+    marginTop: 36,
+    minHeight: 500,
+    padding: 30,
   },
 });
 
@@ -141,23 +156,7 @@ const BannerExample = () => {
 };
 
 const Shimmer = () => {
-  return (
-    <View
-      style={{
-        display: 'flex',
-        minHeight: 500,
-        borderWidth: 1,
-        borderColor: 'rgba(125, 82, 96, 0.4)',
-        borderStyle: 'solid',
-        borderRadius: 16,
-        alignContent: 'center',
-        justifyContent: 'center',
-        padding: 30,
-        marginTop: 36,
-        marginBottom: 32,
-      }}
-    />
-  );
+  return <View style={styles.shimmer} />;
 };
 
 const ThemedBannerExample = () => {

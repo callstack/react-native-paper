@@ -113,17 +113,17 @@ export const getSelectionControlColor = ({
   const checkedColor = customColor
     ? customColor
     : error
-    ? theme.colors.error
-    : theme.colors.primary;
+      ? theme.colors.error
+      : theme.colors.primary;
   const uncheckedColor = customUncheckedColor
     ? customUncheckedColor
     : error
-    ? theme.colors.error
-    : theme.colors.onSurfaceVariant;
+      ? theme.colors.error
+      : theme.colors.onSurfaceVariant;
   const color = disabled
     ? theme.colors.onSurface
     : checked
-    ? checkedColor
-    : uncheckedColor;
+      ? checkedColor
+      : uncheckedColor;
   return { selectionControlColor: color, selectionControlOpacity: opacity };
 };

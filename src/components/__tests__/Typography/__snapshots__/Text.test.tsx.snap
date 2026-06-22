@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders every variant of Text with children as content 1`] = `
-[
+<>
   <Text
     style={
       [
@@ -26,7 +26,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -51,7 +51,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -76,7 +76,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -101,7 +101,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -126,7 +126,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -151,7 +151,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -176,7 +176,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -201,7 +201,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -226,7 +226,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -251,7 +251,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -276,7 +276,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -301,7 +301,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -326,7 +326,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -351,7 +351,7 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
+  </Text>
   <Text
     style={
       [
@@ -376,8 +376,8 @@ exports[`renders every variant of Text with children as content 1`] = `
     }
   >
     Something rendered as a child content
-  </Text>,
-]
+  </Text>
+</>
 `;
 
 exports[`renders v3 Text component with custom variant correctly 1`] = `

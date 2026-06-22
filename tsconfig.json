@@ -2,9 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-paper": [
-        "./src/index"
-      ]
+      "react-native-paper": ["./src/index"]
     },
     "noEmit": true,
     "customConditions": ["react-native-paper-source"],
@@ -14,10 +12,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "moduleSuffixes": [".ios", ".native", ".android", ""],
     "module": "preserve",
     "moduleResolution": "bundler",
@@ -35,7 +30,5 @@
     "types": ["node"],
     "verbatimModuleSyntax": true
   },
-  "exclude": [
-    "lib/**/*"
-  ]
+  "exclude": ["lib/**/*"]
 }

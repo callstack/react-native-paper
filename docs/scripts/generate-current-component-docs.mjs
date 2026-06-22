@@ -1,10 +1,11 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 const parseComponentDocs =
   require('component-docs/dist/parsers/component').default;
+
 const generatePageMDX = require('../component-docs-plugin/generatePageMDX');
 const componentDocsConfig = require('../component-docs.config');
 
@@ -114,12 +115,17 @@ const writeMetaFiles = () => {
     })
   );
 
-  for (const [entryName, pageValue] of Object.entries(componentDocsConfig.pages)) {
+  for (const [entryName, pageValue] of Object.entries(
+    componentDocsConfig.pages
+  )) {
     if (typeof pageValue === 'string') {
       continue;
     }
 
-    writeJson(path.join(outputDir, entryName, '_meta.json'), Object.keys(pageValue));
+    writeJson(
+      path.join(outputDir, entryName, '_meta.json'),
+      Object.keys(pageValue)
+    );
   }
 };
 
@@ -129,7 +135,9 @@ const main = () => {
 
   const docs = {};
 
-  for (const [entryName, pageValue] of Object.entries(componentDocsConfig.pages)) {
+  for (const [entryName, pageValue] of Object.entries(
+    componentDocsConfig.pages
+  )) {
     if (typeof pageValue === 'string') {
       writeDocPage(
         path.join(outputDir, `${entryName}.mdx`),

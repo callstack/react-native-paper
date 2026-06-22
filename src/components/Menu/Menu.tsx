@@ -388,18 +388,16 @@ const Menu = ({
     async (display: boolean) => {
       // Menu is rendered in Portal, which updates items asynchronously
       // We need to do the same here so that the ref is up-to-date
-      await Promise.resolve().then(() => {
-        if (display && !prevRendered.current) {
-          show();
-          return;
-        }
+      await Promise.resolve();
 
-        if (!display) {
-          hide();
-        }
-
+      if (display && !prevRendered.current) {
+        await show();
         return;
-      });
+      }
+
+      if (!display) {
+        hide();
+      }
     },
     [hide, show]
   );
@@ -436,14 +434,14 @@ const Menu = ({
         }
       } else {
         // Keep the Portal mounted so the hide animation can finish.
-        updateVisibility(false);
+        void updateVisibility(false);
       }
     }
   }, [visible, rendered, updateVisibility]);
 
   React.useEffect(() => {
     if (rendered && visible) {
-      updateVisibility(true);
+      void updateVisibility(true);
     }
   }, [rendered, visible, updateVisibility]);
 

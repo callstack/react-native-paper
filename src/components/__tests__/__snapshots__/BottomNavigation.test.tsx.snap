@@ -66,7 +66,9 @@ exports[`allows customizing Route's type via generics 1`] = `
           }
         }
       >
-        First
+        <Text>
+          First
+        </Text>
       </View>
     </View>
   </View>
@@ -733,7 +735,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -1474,7 +1478,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -2215,7 +2221,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
     <View
@@ -2259,7 +2267,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 1
+        <Text>
+          Route: 1
+        </Text>
       </View>
     </View>
     <View
@@ -2303,7 +2313,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 3
+        <Text>
+          Route: 3
+        </Text>
       </View>
     </View>
     <View
@@ -2347,7 +2359,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 4
+        <Text>
+          Route: 4
+        </Text>
       </View>
     </View>
   </View>
@@ -4076,7 +4090,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -5550,7 +5566,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -5789,11 +5807,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -5808,11 +5830,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -5970,11 +5996,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -5989,11 +6019,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6151,11 +6185,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -6170,11 +6208,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6252,7 +6294,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -6496,11 +6540,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6663,11 +6711,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6830,11 +6882,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6997,11 +7053,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 3
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -7164,11 +7224,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 4
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -7246,7 +7310,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -8347,7 +8413,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -9295,7 +9363,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -10396,7 +10466,9 @@ exports[`renders shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>

@@ -12,7 +12,7 @@ import type { ColorSchemeName } from 'react-native';
  */
 export function useSystemColorScheme(enabled: boolean): ColorSchemeName {
   const [colorScheme, setColorScheme] = React.useState<ColorSchemeName>(() =>
-    enabled ? Appearance?.getColorScheme() ?? 'light' : 'light'
+    enabled ? (Appearance?.getColorScheme() ?? 'light') : 'light'
   );
 
   React.useEffect(() => {

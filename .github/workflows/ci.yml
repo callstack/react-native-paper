@@ -18,10 +18,10 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Lint
-        run: yarn lint-no-fix
+        run: yarn lint
 
-  typescript:
-    name: TypeScript
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Check types
-        run: yarn typescript
+        run: yarn typecheck
 
   unit-tests:
     name: Unit tests
@@ -73,7 +73,20 @@ jobs:
       - name: Build package
         run: |
           yarn prepack
-          node ./scripts/typescript-output-lint
+          node ./scripts/typescript-output-lint.ts
+
+  build-example:
+    name: Build example
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Build example
+        run: yarn example expo export --platform all
 
   build-docs:
     name: Build docs

@@ -724,6 +724,58 @@ html:not(.dark) .paper-version-selector-menu {
   color: inherit;
 }
 
+.paper-get-started-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.paper-get-started-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 120ms ease,
+    background-color 120ms ease;
+}
+
+.paper-get-started-button:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.paper-get-started-button--primary {
+  border-color: #6750a4;
+  background-color: #6750a4;
+  color: #ffffff;
+}
+
+.paper-get-started-button--secondary {
+  border-color: #79747e;
+  background-color: transparent;
+  color: #49454f;
+}
+
+[data-theme='dark'] .paper-get-started-button--primary {
+  border-color: #d0bcff;
+  background-color: #d0bcff;
+  color: #1d192b;
+}
+
+[data-theme='dark'] .paper-get-started-button--secondary {
+  border-color: #938f99;
+  color: #e6e1e5;
+}
+
 .paper-home-showcase__gallery {
   display: grid;
   gap: 16px;

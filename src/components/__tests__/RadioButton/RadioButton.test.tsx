@@ -27,8 +27,8 @@ describe('RadioButton', () => {
       });
     });
 
-    it('renders properly', () => {
-      const tree = render(<RadioButton value="first" />).toJSON();
+    it('renders properly', async () => {
+      const tree = (await render(<RadioButton value="first" />)).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -50,21 +50,23 @@ describe('RadioButton', () => {
       });
     });
 
-    it('renders properly', () => {
-      const tree = render(<RadioButton value="first" />).toJSON();
+    it('renders properly', async () => {
+      const tree = (await render(<RadioButton value="first" />)).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   describe('when RadioButton is wrapped by RadioButtonContext.Provider', () => {
-    it('renders properly', () => {
-      const tree = render(
-        <RadioButtonContext.Provider
-          value={{ value: 'first', onValueChange: () => {} }}
-        >
-          <RadioButton value="first" />
-        </RadioButtonContext.Provider>
+    it('renders properly', async () => {
+      const tree = (
+        await render(
+          <RadioButtonContext.Provider
+            value={{ value: 'first', onValueChange: () => {} }}
+          >
+            <RadioButton value="first" />
+          </RadioButtonContext.Provider>
+        )
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -72,9 +74,9 @@ describe('RadioButton', () => {
   });
 
   describe('RadioButton with custom testID', () => {
-    it('renders properly', () => {
-      const tree = render(
-        <RadioButton value="first" testID={'custom:testID'} />
+    it('renders properly', async () => {
+      const tree = (
+        await render(<RadioButton value="first" testID={'custom:testID'} />)
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
