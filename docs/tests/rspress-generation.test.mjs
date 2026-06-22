@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
+import childProcess from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 
 const docsRoot = path.resolve(import.meta.dirname, '..');
+const repoRoot = path.resolve(docsRoot, '..');
 
 const read = (relativePath) =>
   fs.readFileSync(path.join(docsRoot, relativePath), 'utf8');
@@ -192,6 +194,24 @@ test('homepage theme layout includes the Callstack banner and live Paper showcas
   ]) {
     assert.match(bannerExampleSource, new RegExp(marker));
   }
+});
+
+test('component docs generator executes under plain node without strip-types', () => {
+  const result = childProcess.spawnSync(
+    'node',
+    [path.join(repoRoot, 'scripts', 'generate-component-docs.ts')],
+    {
+      cwd: repoRoot,
+      encoding: 'utf8',
+    }
+  );
+
+  assert.equal(result.status, 1);
+  assert.match(
+    result.stderr,
+    /Usage: node scripts\/generate-component-docs\.ts <branch> \[output\]/
+  );
+  assert.doesNotMatch(result.stderr, /SyntaxError/);
 });
 
 test('generated nav files use Paper-style docs routes', () => {

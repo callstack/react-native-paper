@@ -1,58 +1,84 @@
-const childProcess = require('child_process') as typeof import('child_process');
-const fs = require('fs') as typeof import('fs');
-const Module = require('module') as typeof import('module') & {
-  _load: (request: string, parent: unknown, isMain: boolean) => unknown;
-};
-const os = require('os') as typeof import('os');
-const path = require('path') as typeof import('path');
+// @ts-nocheck
 
-type UnknownRecord = Record<string, unknown>;
-type ComponentDocsConfig = {
-  docsRootDir: string;
-  libsRootDir: string;
-};
+/** @type {typeof import('child_process')} */
+const childProcess = require('child_process');
+/** @type {typeof import('fs')} */
+const fs = require('fs');
+/** @type {typeof import('module') & {_load: (request: string, parent: unknown, isMain: boolean) => unknown}} */
+const Module = require('module');
+/** @type {typeof import('os')} */
+const os = require('os');
+/** @type {typeof import('path')} */
+const path = require('path');
 
-const isRecord = (value: unknown): value is UnknownRecord =>
-  typeof value === 'object' && value !== null;
+/**
+ * @typedef {Record<string, unknown>} UnknownRecord
+ */
+
+/**
+ * @typedef {{
+ *   docsRootDir: string;
+ *   libsRootDir: string;
+ * }} ComponentDocsConfig
+ */
+
+/**
+ * @param {unknown} value
+ * @returns {UnknownRecord | null}
+ */
+function toRecord(value) {
+  return typeof value === 'object' && value !== null ? value : null;
+}
 const legacyDocusaurusShims = new Set([
   '@docusaurus/remark-plugin-npm2yarn',
   'prism-react-renderer/themes/dracula',
   'prism-react-renderer/themes/github',
 ]);
 
-const loadLegacyDocusaurusConfig = (configPath: string): unknown => {
+/**
+ * @param {string} configPath
+ * @returns {unknown}
+ */
+function loadLegacyDocusaurusConfig(configPath) {
   const originalLoad = Module._load;
 
-  Module._load = function loadWithLegacyDocsShims(
-    request: string,
-    parent: unknown,
-    isMain: boolean
+  Module._load = /** @type {typeof Module._load} */ (function loadWithLegacyDocsShims(
+    request,
+    parent,
+    isMain
   ) {
     if (legacyDocusaurusShims.has(request)) {
       return {};
     }
 
     return originalLoad.call(this, request, parent, isMain);
-  };
+  });
 
   try {
     return require(configPath);
   } finally {
     Module._load = originalLoad;
   }
-};
+}
 
-const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
+/**
+ * @param {unknown} value
+ * @param {string} sourceDir
+ * @returns {unknown}
+ */
+function normalizeDocs(value, sourceDir) {
   if (Array.isArray(value)) {
     return value.map((item) => normalizeDocs(item, sourceDir));
   }
 
-  if (!isRecord(value)) {
+  const record = toRecord(value);
+
+  if (!record) {
     return value;
   }
 
   return Object.fromEntries(
-    Object.entries(value).map(([key, item]) => {
+    Object.entries(record).map(([key, item]) => {
       if (key !== 'dependencies' || !Array.isArray(item)) {
         return [key, normalizeDocs(item, sourceDir)];
       }
@@ -81,12 +107,17 @@ const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
       ];
     })
   );
-};
+}
 
-const writeJson = (destination: string, value: unknown) => {
+/**
+ * @param {string} destination
+ * @param {unknown} value
+ * @returns {void}
+ */
+function writeJson(destination, value) {
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.writeFileSync(destination, `${JSON.stringify(value, null, 2)}\n`);
-};
+}
 
 const main = async () => {
   const [branchName, outputPath = 'docs/src/data/componentDocs5x.json'] =
@@ -94,7 +125,7 @@ const main = async () => {
 
   if (!branchName) {
     console.error(
-      'Usage: node --experimental-strip-types scripts/generate-component-docs.ts <branch> [output]'
+      'Usage: node scripts/generate-component-docs.ts <branch> [output]'
     );
     process.exitCode = 1;
     return;
@@ -149,13 +180,13 @@ const main = async () => {
       'component-docs.config.js'
     );
 
-    let pluginConfig: [string, ComponentDocsConfig] | undefined;
+    let pluginConfig;
 
     if (fs.existsSync(sharedConfigPath)) {
-      const sharedConfig = require(sharedConfigPath) as UnknownRecord;
+      const sharedConfig = toRecord(require(sharedConfigPath));
 
       if (
-        isRecord(sharedConfig) &&
+        sharedConfig &&
         typeof sharedConfig.docsRootDir === 'string' &&
         typeof sharedConfig.libsRootDir === 'string'
       ) {
@@ -172,19 +203,27 @@ const main = async () => {
     if (!pluginConfig) {
       const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
       const config = loadLegacyDocusaurusConfig(configPath);
+      const configRecord = toRecord(config);
 
-      if (!isRecord(config) || !Array.isArray(config.plugins)) {
+      if (!configRecord || !Array.isArray(configRecord.plugins)) {
         throw new Error(`Unable to read plugins from ${configPath}`);
       }
 
-      pluginConfig = config.plugins.find(
-        (plugin) =>
+      /** @type {unknown[]} */
+      const plugins = configRecord.plugins;
+
+      for (const plugin of plugins) {
+        if (
           Array.isArray(plugin) &&
           plugin[0] === './component-docs-plugin' &&
-          isRecord(plugin[1]) &&
+          toRecord(plugin[1]) &&
           typeof plugin[1].docsRootDir === 'string' &&
           typeof plugin[1].libsRootDir === 'string'
-      );
+        ) {
+          pluginConfig = plugin;
+          break;
+        }
+      }
 
       if (!pluginConfig) {
         throw new Error(
@@ -197,10 +236,7 @@ const main = async () => {
       sourceDir,
       'docs',
       'component-docs-plugin'
-    )) as (
-      context: unknown,
-      options: ComponentDocsConfig
-    ) => Promise<{ loadContent: () => Promise<unknown> }>;
+    ));
     const plugin = await pluginFactory({}, pluginConfig[1]);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
@@ -212,7 +248,7 @@ const main = async () => {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;
   } finally {
-    fs.rmdirSync(tempDir, { recursive: true });
+    fs.rmSync(tempDir, { recursive: true, force: true });
   }
 };
 
