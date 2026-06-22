@@ -60,9 +60,23 @@ it('renders selected chip', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', () => {
+it('does not mark chip disabled if there is no touch handler passed', () => {
   const { getByTestId } = render(
-    <Chip testID="disabled-chip">Disabled chip</Chip>
+    <Chip testID="informational-chip">Informational chip</Chip>
+  );
+
+  expect(
+    getByTestId('informational-chip').props.accessibilityState
+  ).toMatchObject({
+    disabled: false,
+  });
+});
+
+it('marks chip disabled when disabled prop is passed', () => {
+  const { getByTestId } = render(
+    <Chip disabled testID="disabled-chip">
+      Disabled chip
+    </Chip>
   );
 
   expect(getByTestId('disabled-chip').props.accessibilityState).toMatchObject({
