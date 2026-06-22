@@ -1,17 +1,22 @@
-const childProcess = require('child_process');
-const fs = require('fs');
-const Module = require('module');
-const os = require('os');
-const path = require('path');
+const childProcess = require('node:child_process') as typeof import('node:child_process');
+const fs = require('node:fs') as typeof import('node:fs');
+const Module = require('node:module') as typeof import('node:module') & {
+  _load: (request: string, parent: unknown, isMain: boolean) => unknown;
+};
+const os = require('node:os') as typeof import('node:os');
+const path = require('node:path') as typeof import('node:path');
 
-const isRecord = (value) => typeof value === 'object' && value !== null;
+type UnknownRecord = Record<string, unknown>;
+
+const isRecord = (value: unknown): value is UnknownRecord =>
+  typeof value === 'object' && value !== null;
 const legacyDocusaurusShims = new Set([
   '@docusaurus/remark-plugin-npm2yarn',
   'prism-react-renderer/themes/dracula',
   'prism-react-renderer/themes/github',
 ]);
 
-const loadLegacyDocusaurusConfig = (configPath) => {
+const loadLegacyDocusaurusConfig = (configPath: string): unknown => {
   const originalLoad = Module._load;
 
   Module._load = function loadWithLegacyDocsShims(request, parent, isMain) {
@@ -29,7 +34,7 @@ const loadLegacyDocusaurusConfig = (configPath) => {
   }
 };
 
-const normalizeDocs = (value, sourceDir) => {
+const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
   if (Array.isArray(value)) {
     return value.map((item) => normalizeDocs(item, sourceDir));
   }
@@ -70,21 +75,18 @@ const normalizeDocs = (value, sourceDir) => {
   );
 };
 
-const writeGeneratedModule = (destination, value, variableName) => {
+const writeJson = (destination: string, value: unknown) => {
   fs.mkdirSync(path.dirname(destination), { recursive: true });
-  fs.writeFileSync(
-    destination,
-    `const ${variableName} = ${JSON.stringify(value, null, 2)};\n\nexport default ${variableName};\n`
-  );
+  fs.writeFileSync(destination, `${JSON.stringify(value, null, 2)}\n`);
 };
 
 const main = async () => {
-  const [branchName, outputPath = 'docs/src/data/componentDocs5x.ts'] =
+  const [branchName, outputPath = 'docs/src/data/componentDocs5x.json'] =
     process.argv.slice(2);
 
   if (!branchName) {
     console.error(
-      'Usage: node scripts/generate-component-docs.js <branch> [output]'
+      'Usage: node --experimental-strip-types scripts/generate-component-docs.ts <branch> [output]'
     );
     process.exitCode = 1;
     return;
@@ -139,10 +141,12 @@ const main = async () => {
       'component-docs.config.js'
     );
 
-    let pluginConfig;
+    let pluginConfig:
+      | [string, { docsRootDir: string; libsRootDir: string }]
+      | undefined;
 
     if (fs.existsSync(sharedConfigPath)) {
-      const sharedConfig = require(sharedConfigPath);
+      const sharedConfig = require(sharedConfigPath) as UnknownRecord;
 
       if (
         isRecord(sharedConfig) &&
@@ -181,15 +185,17 @@ const main = async () => {
       sourceDir,
       'docs',
       'component-docs-plugin'
-    ));
+    )) as (
+      context: unknown,
+      options: { docsRootDir: string; libsRootDir: string }
+    ) => Promise<{ loadContent: () => Promise<unknown> }>;
     const plugin = await pluginFactory({}, pluginConfig[1]);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
 
-    writeGeneratedModule(
+    writeJson(
       destination,
-      { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) },
-      'componentDocs5x'
+      { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) }
     );
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));

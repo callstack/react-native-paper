@@ -1,5 +1,5 @@
-import componentDocs5x from '../src/data/componentDocs5x';
-import componentDocs6x from '../src/data/componentDocs6x';
+import componentDocs5x from '../src/data/componentDocs5x.json';
+import componentDocs6x from '../src/data/componentDocs6x.json';
 
 export interface ComponentDocsPluginData {
   docs: { [key in string]: PageDoc };

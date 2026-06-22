@@ -1,4 +1,4 @@
-const componentDocs6x = {
+{
   "docs": {
     "ActivityIndicator": {
       "filepath": "ActivityIndicator.tsx",
@@ -12253,6 +12253,4 @@ const componentDocs6x = {
       ]
     }
   }
-};
-
-export default componentDocs6x;
+}
