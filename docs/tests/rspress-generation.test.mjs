@@ -33,6 +33,27 @@ test('generated pages stay free of layout-only version selector markup', () => {
   );
 });
 
+test('current docs tree stays free of legacy docusaurus scaffold files', () => {
+  for (const relativePath of [
+    'babel.config.js',
+    'docusaurus.config.js',
+    'sidebars.js',
+    'versions.json',
+  ]) {
+    assert.equal(
+      fs.existsSync(path.join(docsRoot, relativePath)),
+      false,
+      `${relativePath} should not exist in the rspress docs tree`
+    );
+  }
+
+  assert.equal(
+    fs.existsSync(path.join(docsRoot, 'versioned_sidebars')),
+    false,
+    'versioned_sidebars should not exist in the rspress docs tree'
+  );
+});
+
 test('theme layout does not append a second right-side version selector', () => {
   const themeLayoutSource = read('theme/index.tsx');
 
