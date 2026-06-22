@@ -17,59 +17,65 @@ const styles = StyleSheet.create({
 
 const testID = 'list-item';
 
-it('renders list section without subheader', () => {
-  const tree = render(
-    <ListSection>
-      <ListItem
-        title="First Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-      <ListItem
-        title="Second Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-    </ListSection>
+it('renders list section without subheader', async () => {
+  const tree = (
+    await render(
+      <ListSection>
+        <ListItem
+          title="First Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+        <ListItem
+          title="Second Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+      </ListSection>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list section with subheader', () => {
-  const tree = render(
-    <ListSection>
-      <ListSubheader>Some title</ListSubheader>
-      <ListItem
-        title="First Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-      <ListItem
-        title="Second Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-    </ListSection>
+it('renders list section with subheader', async () => {
+  const tree = (
+    await render(
+      <ListSection>
+        <ListSubheader>Some title</ListSubheader>
+        <ListItem
+          title="First Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+        <ListItem
+          title="Second Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+      </ListSection>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list section with custom title style', () => {
-  const tree = render(
-    <ListSection title="Some title" titleStyle={styles.itemColor}>
-      <ListItem
-        title="First Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-      <ListItem
-        title="Second Item"
-        testID={testID}
-        left={(props) => <ListIcon {...props} icon="folder" />}
-      />
-    </ListSection>
+it('renders list section with custom title style', async () => {
+  const tree = (
+    await render(
+      <ListSection title="Some title" titleStyle={styles.itemColor}>
+        <ListItem
+          title="First Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+        <ListItem
+          title="Second Item"
+          testID={testID}
+          left={(props) => <ListIcon {...props} icon="folder" />}
+        />
+      </ListSection>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

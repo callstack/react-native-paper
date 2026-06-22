@@ -81,7 +81,6 @@ export const getTheme = <Scheme extends boolean = false>(
   return defaultThemes[scheme];
 };
 
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
@@ -98,7 +97,7 @@ export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<
   TLight extends NavigationTheme,
-  TDark extends NavigationTheme
+  TDark extends NavigationTheme,
 >(themes: {
   reactNavigationLight: TLight;
   reactNavigationDark: TDark;

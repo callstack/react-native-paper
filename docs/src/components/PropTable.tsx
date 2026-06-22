@@ -1,5 +1,4 @@
 // @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import useDoc from '@site/component-docs-plugin/useDocs';
 
 import Markdown from './Markdown';
@@ -27,7 +26,6 @@ const typeDefinitions = {
 const renderBadge = (annotation: string) => {
   const [annotType, ...annotLabel] = annotation.split(' ');
 
-  // eslint-disable-next-line prettier/prettier
   return `<span class="badge badge-${annotType.replace(
     '@',
     ''
@@ -65,7 +63,7 @@ export default function PropTable({
           // Replace annotations with styled badges.
           if (line.includes('@')) {
             const annotIndex = line.indexOf('@');
-            // eslint-disable-next-line prettier/prettier
+
             return `${line.substr(0, annotIndex)} ${renderBadge(
               line.substr(annotIndex)
             )}`;

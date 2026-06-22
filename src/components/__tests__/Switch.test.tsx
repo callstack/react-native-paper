@@ -1,67 +1,65 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
-import { fireEvent, render } from '../../test-utils';
+import { render, screen, userEvent } from '../../test-utils';
 import Switch from '../Switch/Switch';
 
 describe('Switch render', () => {
-  it('renders on', () => {
-    expect(render(<Switch value />).toJSON()).toMatchSnapshot();
+  it('renders on', async () => {
+    expect((await render(<Switch value />)).toJSON()).toMatchSnapshot();
   });
 
-  it('renders off', () => {
-    expect(render(<Switch value={false} />).toJSON()).toMatchSnapshot();
+  it('renders off', async () => {
+    expect((await render(<Switch value={false} />)).toJSON()).toMatchSnapshot();
   });
 
-  it('renders disabled on', () => {
-    expect(render(<Switch disabled value />).toJSON()).toMatchSnapshot();
-  });
-
-  it('renders disabled off', () => {
+  it('renders disabled on', async () => {
     expect(
-      render(<Switch disabled value={false} />).toJSON()
+      (await render(<Switch disabled value />)).toJSON()
     ).toMatchSnapshot();
   });
 
-  it('renders with checked icon', () => {
+  it('renders disabled off', async () => {
     expect(
-      render(<Switch value checkedIcon="check" />).toJSON()
+      (await render(<Switch disabled value={false} />)).toJSON()
     ).toMatchSnapshot();
   });
 
-  it('renders with per-state icons', () => {
+  it('renders with checked icon', async () => {
     expect(
-      render(
-        <Switch value checkedIcon="check" uncheckedIcon="close" />
+      (await render(<Switch value checkedIcon="check" />)).toJSON()
+    ).toMatchSnapshot();
+  });
+
+  it('renders with per-state icons', async () => {
+    expect(
+      (
+        await render(<Switch value checkedIcon="check" uncheckedIcon="close" />)
       ).toJSON()
     ).toMatchSnapshot();
   });
 });
 
 describe('Switch interaction', () => {
-  it('toggles to true when off and pressed', () => {
+  it('toggles to true when off and pressed', async () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
-      <Switch value={false} onValueChange={onValueChange} />
-    );
-    fireEvent.press(getByRole('switch'));
+    await render(<Switch value={false} onValueChange={onValueChange} />);
+    await userEvent.press(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledWith(true);
   });
 
-  it('toggles to false when on and pressed', () => {
+  it('toggles to false when on and pressed', async () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
-      <Switch value onValueChange={onValueChange} />
-    );
-    fireEvent.press(getByRole('switch'));
+    await render(<Switch value onValueChange={onValueChange} />);
+    await userEvent.press(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledWith(false);
   });
 
-  it('does not fire onValueChange when disabled', () => {
+  it('does not fire onValueChange when disabled', async () => {
     const onValueChange = jest.fn();
-    const { getByRole } = render(
+    await render(
       <Switch value={false} disabled onValueChange={onValueChange} />
     );
-    fireEvent.press(getByRole('switch'));
+    await userEvent.press(screen.getByRole('switch'));
     expect(onValueChange).not.toHaveBeenCalled();
   });
 });

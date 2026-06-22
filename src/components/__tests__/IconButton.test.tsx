@@ -4,7 +4,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
@@ -21,40 +21,40 @@ const styles = StyleSheet.create({
   },
 });
 
-it('renders icon button by default', () => {
-  const tree = render(<IconButton icon="camera" />).toJSON();
+it('renders icon button by default', async () => {
+  const tree = (await render(<IconButton icon="camera" />)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with color', () => {
-  const tree = render(
-    <IconButton icon="camera" iconColor={pink500} />
+it('renders icon button with color', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" iconColor={pink500} />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with size', () => {
-  const tree = render(<IconButton icon="camera" size={30} />).toJSON();
+it('renders icon button with size', async () => {
+  const tree = (await render(<IconButton icon="camera" size={30} />)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled icon button', () => {
-  const tree = render(<IconButton icon="camera" disabled />).toJSON();
+it('renders disabled icon button', async () => {
+  const tree = (await render(<IconButton icon="camera" disabled />)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon change animated', () => {
-  const tree = render(<IconButton icon="camera" animated />).toJSON();
+it('renders icon change animated', async () => {
+  const tree = (await render(<IconButton icon="camera" animated />)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with custom border radius', () => {
-  const { getByTestId } = render(
+it('renders icon button with custom border radius', async () => {
+  await render(
     <IconButton
       icon="camera"
       testID="icon-button"
@@ -64,11 +64,13 @@ it('renders icon button with custom border radius', () => {
     />
   );
 
-  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 0 });
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: 0,
+  });
 });
 
-it('renders icon button with small border radius', () => {
-  const { getByTestId } = render(
+it('renders icon button with small border radius', async () => {
+  await render(
     <IconButton
       icon="camera"
       testID="icon-button"
@@ -78,7 +80,9 @@ it('renders icon button with small border radius', () => {
     />
   );
 
-  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 4 });
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: 4,
+  });
 });
 
 describe('getIconButtonColor - icon color', () => {
@@ -315,16 +319,16 @@ describe('getIconButtonColor - border color', () => {
   });
 });
 
-it('action animated value changes correctly', () => {
+it('action animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  const { getByTestId } = render(
+  await render(
     <IconButton
       icon="menu"
       style={[{ transform: [{ scale: value }] }]}
       testID="icon-button"
     />
   );
-  expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -334,10 +338,10 @@ it('action animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  act(() => {
+  await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

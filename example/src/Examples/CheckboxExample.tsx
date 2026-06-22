@@ -100,8 +100,8 @@ const IndeterminateParent = () => {
   const parentStatus: Status = allChecked
     ? 'checked'
     : noneChecked
-    ? 'unchecked'
-    : 'indeterminate';
+      ? 'unchecked'
+      : 'indeterminate';
   const toggleAll = () => {
     const next = !allChecked;
     setChild1(next);

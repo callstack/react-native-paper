@@ -5,91 +5,95 @@ import { act } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-it('renders chip with onPress', () => {
-  const tree = render(<Chip onPress={() => {}}>Example Chip</Chip>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders chip with icon', () => {
-  const tree = render(<Chip icon="information">Example Chip</Chip>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders chip with close button', () => {
-  const tree = render(
-    <Chip icon="information" onClose={() => {}}>
-      Example Chip
-    </Chip>
+it('renders chip with onPress', async () => {
+  const tree = (
+    await render(<Chip onPress={() => {}}>Example Chip</Chip>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders chip with custom close button', () => {
-  const tree = render(
-    <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
-      Example Chip
-    </Chip>
+it('renders chip with icon', async () => {
+  const tree = (
+    await render(<Chip icon="information">Example Chip</Chip>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders outlined disabled chip', () => {
-  const tree = render(
-    <Chip mode="outlined" disabled>
-      Example Chip
-    </Chip>
+it('renders chip with close button', async () => {
+  const tree = (
+    await render(
+      <Chip icon="information" onClose={() => {}}>
+        Example Chip
+      </Chip>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders selected chip', () => {
-  const tree = render(<Chip selected>Example Chip</Chip>).toJSON();
+it('renders chip with custom close button', async () => {
+  const tree = (
+    await render(
+      <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', () => {
-  const { getByTestId } = render(
-    <Chip testID="disabled-chip">Disabled chip</Chip>
-  );
+it('renders outlined disabled chip', async () => {
+  const tree = (
+    await render(
+      <Chip mode="outlined" disabled>
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
 
-  expect(getByTestId('disabled-chip').props.accessibilityState).toMatchObject({
-    disabled: true,
-  });
+  expect(tree).toMatchSnapshot();
 });
 
-it('renders active chip if only onLongPress handler is passed', () => {
-  const { getByTestId } = render(
+it('renders selected chip', async () => {
+  const tree = (await render(<Chip selected>Example Chip</Chip>)).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders disabled chip if there is no touch handler passed', async () => {
+  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
+
+  expect(screen.getByTestId('disabled-chip')).toBeDisabled();
+});
+
+it('renders active chip if only onLongPress handler is passed', async () => {
+  await render(
     <Chip onLongPress={() => {}} testID="active-chip">
       Active chip
     </Chip>
   );
 
-  expect(getByTestId('active-chip').props.accessibilityState).toMatchObject({
-    disabled: false,
-  });
+  expect(screen.getByTestId('active-chip')).toBeEnabled();
 });
 
-it('renders chip with zero border radius', () => {
-  const { getByTestId } = render(
+it('renders chip with zero border radius', async () => {
+  await render(
     <Chip testID="active-chip" theme={{ shapes: { corner: { small: 0 } } }}>
       Active chip
     </Chip>
   );
 
-  expect(getByTestId('active-chip')).toHaveStyle({
+  expect(screen.getByTestId('active-chip')).toHaveStyle({
     borderRadius: 0,
   });
 });
@@ -370,9 +374,9 @@ describe('getChipColor - border color', () => {
   });
 });
 
-it('animated value changes correctly', () => {
+it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  const { getByTestId } = render(
+  await render(
     <Chip
       onPress={() => {}}
       testID="chip"
@@ -381,7 +385,7 @@ it('animated value changes correctly', () => {
       Example Chip
     </Chip>
   );
-  expect(getByTestId('chip-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -391,10 +395,10 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  act(() => {
+  await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getByTestId('chip-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

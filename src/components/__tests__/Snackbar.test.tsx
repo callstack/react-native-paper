@@ -3,7 +3,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { red200, white } from '../../theme/colors';
 import Snackbar from '../Snackbar';
 
@@ -23,69 +23,79 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
 }));
 
-it('renders snackbar with content', () => {
-  const tree = render(
-    <Snackbar visible onDismiss={jest.fn()}>
-      Snackbar content
-    </Snackbar>
+it('renders snackbar with content', async () => {
+  const tree = (
+    await render(
+      <Snackbar visible onDismiss={jest.fn()}>
+        Snackbar content
+      </Snackbar>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders not visible snackbar with content wrapper but no actual content', () => {
-  const tree = render(
-    <Snackbar visible={false} onDismiss={jest.fn()}>
-      Snackbar content
-    </Snackbar>
+it('renders not visible snackbar with content wrapper but no actual content', async () => {
+  const tree = (
+    await render(
+      <Snackbar visible={false} onDismiss={jest.fn()}>
+        Snackbar content
+      </Snackbar>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders snackbar with Text as a child', () => {
-  const tree = render(
-    <Snackbar visible onDismiss={jest.fn()}>
-      <Text>Snackbar content</Text>
-    </Snackbar>
+it('renders snackbar with Text as a child', async () => {
+  const tree = (
+    await render(
+      <Snackbar visible onDismiss={jest.fn()}>
+        <Text>Snackbar content</Text>
+      </Snackbar>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders snackbar with action button', () => {
-  const tree = render(
-    <Snackbar
-      visible
-      onDismiss={() => {}}
-      action={{ label: 'Undo', onPress: jest.fn() }}
-    >
-      Snackbar content
-    </Snackbar>
+it('renders snackbar with action button', async () => {
+  const tree = (
+    await render(
+      <Snackbar
+        visible
+        onDismiss={() => {}}
+        action={{ label: 'Undo', onPress: jest.fn() }}
+      >
+        Snackbar content
+      </Snackbar>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders snackbar with View & Text as a child', () => {
-  const tree = render(
-    <Snackbar visible onDismiss={jest.fn()}>
-      <View style={styles.snackContent}>
-        <View style={styles.iconView} />
-        <Text style={styles.text}>
-          Error Message which is veryyyyyyyyyyyy longggggggg Error Message which
-          is veryyyyyyyyyyyy longggggggg
-        </Text>
-      </View>
-    </Snackbar>
+it('renders snackbar with View & Text as a child', async () => {
+  const tree = (
+    await render(
+      <Snackbar visible onDismiss={jest.fn()}>
+        <View style={styles.snackContent}>
+          <View style={styles.iconView} />
+          <Text style={styles.text}>
+            Error Message which is veryyyyyyyyyyyy longggggggg Error Message
+            which is veryyyyyyyyyyyy longggggggg
+          </Text>
+        </View>
+      </Snackbar>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('animated value changes correctly', () => {
+it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  const { getByTestId } = render(
+  await render(
     <Snackbar
       visible
       onDismiss={jest.fn()}
@@ -95,7 +105,7 @@ it('animated value changes correctly', () => {
       Snackbar content
     </Snackbar>
   );
-  expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -105,10 +115,10 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  act(() => {
+  await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

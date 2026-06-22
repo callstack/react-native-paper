@@ -74,7 +74,6 @@ const getShadowColor = (shadowColor: ColorValue, shadowOpacity: number) => {
 const getBoxShadowValue = (elevation: number, shadowColor: string) =>
   `0px ${shadowLayers[0].height[elevation]}px ${shadowLayers[0].shadowRadius[elevation]}px ${shadowColor}`;
 
-// eslint-disable-next-line no-redeclare
 export function shadow(elevation: number, shadowColor: ColorValue): ViewStyle;
 // eslint-disable-next-line no-redeclare
 export function shadow(

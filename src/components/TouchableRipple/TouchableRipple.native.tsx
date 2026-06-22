@@ -80,11 +80,11 @@ const TouchableRipple = ({
 
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
-      ? background ?? {
+      ? (background ?? {
           color: calculatedRippleColor,
           borderless,
           foreground: useForeground,
-        }
+        })
       : undefined;
 
     return (

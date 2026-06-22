@@ -2,9 +2,9 @@ import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import { act, fireEvent } from '@testing-library/react-native';
+import { act, userEvent } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
@@ -37,30 +37,30 @@ describe('Modal', () => {
   });
 
   describe('by default', () => {
-    it('should render passed children', () => {
-      const { getByTestId } = render(
+    it('should render passed children', async () => {
+      await render(
         <Modal visible={true} testID="modal">
           <Text>Children</Text>
         </Modal>
       );
 
-      expect(getByTestId('modal')).toHaveTextContent('Children');
+      expect(screen.getByTestId('modal')).toHaveTextContent('Children');
     });
 
-    it("should render a backdrop in default theme's color", () => {
-      const { getByTestId } = render(
+    it("should render a backdrop in default theme's color", async () => {
+      await render(
         <Modal visible={true} testID="modal">
           {null}
         </Modal>
       );
 
-      expect(getByTestId('modal-backdrop')).toHaveStyle({
+      expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
         backgroundColor: LightTheme.colors.scrim,
       });
     });
 
-    it('should render a custom backdrop color if specified', () => {
-      const { getByTestId } = render(
+    it('should render a custom backdrop color if specified', async () => {
+      await render(
         <Modal
           visible={true}
           testID="modal"
@@ -74,19 +74,19 @@ describe('Modal', () => {
         </Modal>
       );
 
-      expect(getByTestId('modal-backdrop')).toHaveStyle({
+      expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
         backgroundColor: 'transparent',
       });
     });
 
-    it('should receive appropriate top and bottom insets', () => {
-      const { getByTestId } = render(
+    it('should receive appropriate top and bottom insets', async () => {
+      await render(
         <Modal visible={true} testID="modal">
           {null}
         </Modal>
       );
 
-      expect(getByTestId('modal-wrapper')).toHaveStyle({
+      expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
         marginTop: 37,
         marginBottom: 44,
       });
@@ -94,9 +94,9 @@ describe('Modal', () => {
   });
   describe('when open', () => {
     describe('if backdrop touched', () => {
-      it('should invoke the onDismiss function immediately', () => {
+      it('should invoke the onDismiss function immediately', async () => {
         const onDismiss = jest.fn();
-        const { getByTestId } = render(
+        await render(
           <Modal testID="modal" visible onDismiss={onDismiss}>
             {null}
           </Modal>
@@ -104,25 +104,23 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
-          fireEvent.press(getByTestId('modal-backdrop'));
-        });
+        await userEvent.press(screen.getByTestId('modal-backdrop'));
 
         expect(onDismiss).toHaveBeenCalled();
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
@@ -130,78 +128,78 @@ describe('Modal', () => {
       });
     });
 
-    it('runs the closing animation if visible toggled', () => {
-      const { getByTestId, queryByTestId, rerender } = render(
+    it('runs the closing animation if visible toggled', async () => {
+      const { rerender } = await render(
         <Modal testID="modal" visible onDismiss={() => {}}>
           {null}
         </Modal>
       );
 
-      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
         opacity: 1,
       });
 
-      act(() => {
-        fireEvent.press(getByTestId('modal-backdrop'));
-      });
+      await userEvent.press(screen.getByTestId('modal-backdrop'));
 
-      rerender(
+      await rerender(
         <Modal testID="modal" visible={false} onDismiss={() => {}}>
           {null}
         </Modal>
       );
 
-      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
         opacity: 1,
       });
 
-      expect(getByTestId('modal-backdrop')).toHaveStyle({
+      expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
         opacity: scrimAlpha,
       });
 
-      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
         opacity: 1,
       });
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
 
-      expect(queryByTestId('modal-surface-outer-layer')).not.toBeOnTheScreen();
+      expect(
+        screen.queryByTestId('modal-surface-outer-layer')
+      ).not.toBeOnTheScreen();
 
-      expect(queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
+      expect(screen.queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
     });
 
     describe('if closed via Android back button', () => {
       it('invokes onDismiss', async () => {
         const onDismiss = jest.fn();
-        const { getByTestId } = render(
+        await render(
           <Modal testID="modal" visible onDismiss={onDismiss}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           BackHandler.mockPressBack();
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
@@ -213,7 +211,7 @@ describe('Modal', () => {
   describe('when open as non-dismissible modal', () => {
     describe('if closed via touching backdrop', () => {
       it('will run the animation but not fade out', async () => {
-        const { getByTestId } = render(
+        await render(
           <Modal
             testID="modal"
             visible
@@ -224,34 +222,32 @@ describe('Modal', () => {
           </Modal>
         );
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
-          fireEvent.press(getByTestId('modal-backdrop'));
-        });
+        await userEvent.press(screen.getByTestId('modal-backdrop'));
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
       });
 
-      it('should not invoke onDismiss', () => {
+      it('should not invoke onDismiss', async () => {
         const onDismiss = jest.fn();
-        const { getByTestId } = render(
+        await render(
           <Modal
             testID="modal"
             visible
@@ -264,13 +260,11 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
-          fireEvent.press(getByTestId('modal-backdrop'));
-        });
+        await userEvent.press(screen.getByTestId('modal-backdrop'));
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
@@ -280,7 +274,7 @@ describe('Modal', () => {
 
     describe('if closed via Android back button', () => {
       it('will run the animation but not fade out', async () => {
-        const { getByTestId } = render(
+        await render(
           <Modal
             testID="modal"
             visible
@@ -291,35 +285,35 @@ describe('Modal', () => {
           </Modal>
         );
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           BackHandler.mockPressBack();
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
       });
 
-      it('should not invoke onDismiss', () => {
+      it('should not invoke onDismiss', async () => {
         const onDismiss = jest.fn();
 
-        render(
+        await render(
           <Modal
             testID="modal"
             visible
@@ -332,13 +326,13 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
+        await act(() => {
           BackHandler.mockPressBack();
         });
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
@@ -349,36 +343,36 @@ describe('Modal', () => {
 
   describe('when visible prop changes', () => {
     describe('from false to true (closed to open)', () => {
-      it('should run fade-in animation on opening', () => {
-        const { queryByTestId, getByTestId, rerender } = render(
+      it('should run fade-in animation on opening', async () => {
+        const { rerender } = await render(
           <Modal testID="modal" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(queryByTestId('modal')).toBe(null);
+        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: 0,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 0,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
       });
@@ -386,43 +380,43 @@ describe('Modal', () => {
 
     describe('from true to false (open to closed)', () => {
       it('should run fade-out animation on closing', async () => {
-        const { queryByTestId, getByTestId, rerender } = render(
+        const { rerender } = await render(
           <Modal testID="modal" visible>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(queryByTestId('modal')).toBe(null);
+        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
       });
 
       it('should not invoke onDismiss', async () => {
         const onDismiss = jest.fn();
 
-        const { rerender } = render(
+        const { rerender } = await render(
           <Modal testID="modal" visible onDismiss={onDismiss}>
             {null}
           </Modal>
@@ -430,7 +424,7 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible={false} onDismiss={onDismiss}>
             {null}
           </Modal>
@@ -438,7 +432,7 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
@@ -446,144 +440,144 @@ describe('Modal', () => {
       });
 
       it('should close even if the dialog is not dismissible', async () => {
-        const { queryByTestId, getByTestId, rerender } = render(
+        const { rerender } = await render(
           <Modal testID="modal" visible dismissable={false}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible={false} dismissable={false}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(queryByTestId('modal')).toBe(null);
+        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
       });
     });
   });
 
   describe('when visible prop changes again during the open/close animation', () => {
     describe('while closing, back to true (visible)', () => {
-      it('should keep the modal open', () => {
-        const { getByTestId, rerender } = render(
+      it('should keep the modal open', async () => {
+        const { rerender } = await render(
           <Modal testID="modal" visible>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
 
-        act(() => {
+        await act(() => {
           // Not a real seconds, this depends on how frequently
           // requestAnimationFrame is called
           jest.advanceTimersToNextTimer(1000);
         });
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible>
             {null}
           </Modal>
         );
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
         });
       });
     });
 
     describe('while opening, back to false (hidden)', () => {
-      it('should keep the modal closed', () => {
-        const { queryByTestId, getByTestId, rerender } = render(
+      it('should keep the modal closed', async () => {
+        const { rerender } = await render(
           <Modal testID="modal" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(queryByTestId('modal-backdrop')).toBe(null);
+        expect(screen.queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-backdrop')).toHaveStyle({
+        expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: 0,
         });
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 0,
         });
 
-        act(() => {
+        await act(() => {
           // Not a real seconds, this depends on how frequently
           // requestAnimationFrame is called
           jest.advanceTimersToNextTimer(1000);
         });
 
-        expect(queryByTestId('modal-backdrop')).not.toBe(null);
+        expect(screen.getByTestId('modal-backdrop')).toBeOnTheScreen();
 
-        rerender(
+        await rerender(
           <Modal testID="modal" visible={false}>
             {null}
           </Modal>
         );
 
-        act(() => {
+        await act(() => {
           jest.runAllTimers();
         });
 
-        expect(queryByTestId('modal-backdrop')).toBe(null);
+        expect(screen.queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
       });
     });
   });
 
-  it('animated value changes correctly', () => {
+  it('animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    const { getByTestId } = render(
+    await render(
       <Modal
         visible={true}
         testID="modal"
@@ -592,7 +586,7 @@ describe('Modal', () => {
         {null}
       </Modal>
     );
-    expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -602,11 +596,11 @@ describe('Modal', () => {
       duration: 200,
     }).start();
 
-    act(() => {
+    await act(() => {
       jest.runAllTimers();
     });
 
-    expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });

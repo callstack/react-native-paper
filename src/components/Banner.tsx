@@ -242,7 +242,7 @@ const Banner = ({
           <View style={styles.actions}>
             {actions.map(({ label, ...others }, i) => (
               <Button
-                key={/* eslint-disable-line react/no-array-index-key */ i}
+                key={i}
                 compact
                 mode="text"
                 style={styles.button}
