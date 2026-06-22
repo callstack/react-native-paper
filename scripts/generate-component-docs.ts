@@ -42,17 +42,18 @@ const legacyDocusaurusShims = new Set([
 function loadLegacyDocusaurusConfig(configPath) {
   const originalLoad = Module._load;
 
-  Module._load = /** @type {typeof Module._load} */ (function loadWithLegacyDocsShims(
-    request,
-    parent,
-    isMain
-  ) {
-    if (legacyDocusaurusShims.has(request)) {
-      return {};
-    }
+  Module._load =
+    /** @type {typeof Module._load} */ function loadWithLegacyDocsShims(
+      request,
+      parent,
+      isMain
+    ) {
+      if (legacyDocusaurusShims.has(request)) {
+        return {};
+      }
 
-    return originalLoad.call(this, request, parent, isMain);
-  });
+      return originalLoad.call(this, request, parent, isMain);
+    };
 
   try {
     return require(configPath);
