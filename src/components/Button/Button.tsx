@@ -4,6 +4,7 @@ import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
+  Role,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -87,7 +88,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility role for the button. The "button" role is set by default.
    */
-  role?: string;
+  role?: Role;
   /**
    * Function to execute on press.
    */

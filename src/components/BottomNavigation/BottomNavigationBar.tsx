@@ -91,7 +91,7 @@ export type Props<Route extends BaseRoute> = {
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -134,7 +134,7 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` by default.
+   * Uses `route['aria-label']` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
