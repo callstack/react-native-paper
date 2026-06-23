@@ -8,7 +8,7 @@ const generatePageMDX = require('./generatePageMDX');
 
 const pluginName = 'component-docs-plugin';
 
-async function componentsPlugin(_, options) {
+function componentsPlugin(_, options) {
   const { docsRootDir, libsRootDir, pages } = options;
 
   function clean() {
@@ -55,7 +55,7 @@ async function componentsPlugin(_, options) {
 
   return {
     name: pluginName,
-    async loadContent() {
+    loadContent() {
       // Clean up docs directory.
       clean();
       // Create root components category.
@@ -80,7 +80,7 @@ async function componentsPlugin(_, options) {
 
       return docs;
     },
-    async contentLoaded({ content: docs, actions }) {
+    contentLoaded({ content: docs, actions }) {
       // Store component docs global data so it can be used in `PropsTable` component.
       actions.setGlobalData({
         docs,

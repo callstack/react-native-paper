@@ -52,7 +52,6 @@ export default class PortalHost extends React.Component<Props> {
     while (queue.length && manager) {
       const action = queue.pop();
       if (action) {
-        // eslint-disable-next-line default-case
         switch (action.type) {
           case 'mount':
             manager.mount(action.key, action.children);

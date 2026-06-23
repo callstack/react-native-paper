@@ -144,12 +144,12 @@ const useTextInputInput = (
   const [charCount, setCharCount] = useState(initialText?.length ?? 0);
 
   const inputLength = isControlled
-    ? props.value?.length ?? 0
+    ? (props.value?.length ?? 0)
     : hasCounter
-    ? charCount
-    : hasValue
-    ? 1
-    : 0;
+      ? charCount
+      : hasValue
+        ? 1
+        : 0;
 
   const getHasText = () => {
     if (isControlled) {

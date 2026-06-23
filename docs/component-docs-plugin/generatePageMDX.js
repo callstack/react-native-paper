@@ -5,7 +5,6 @@ const { baseUrl, customFields } = config;
 function renderBadge(annotation) {
   const [annotType, ...annotLabel] = annotation.split(' ');
 
-  // eslint-disable-next-line prettier/prettier
   return `<span class="badge badge-${annotType.replace('@', '')} "><span class="badge-text">${annotLabel.join(' ')}</span></span>`;
 }
 

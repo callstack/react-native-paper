@@ -1,7 +1,7 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import {
@@ -11,25 +11,29 @@ import {
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-it('renders segmented button', () => {
-  const tree = render(
-    <SegmentedButtons
-      onValueChange={() => {}}
-      value={'walk'}
-      buttons={[{ value: 'walk' }, { value: 'ride' }]}
-    />
+it('renders segmented button', async () => {
+  const tree = (
+    await render(
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[{ value: 'walk' }, { value: 'ride' }]}
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders disabled segmented button', async () => {
-  const tree = render(
-    <SegmentedButtons
-      onValueChange={() => {}}
-      value={'walk'}
-      buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
-    />
+  const tree = (
+    await render(
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
+      />
+    )
   ).toJSON();
 
   process.nextTick(() => {
@@ -38,15 +42,17 @@ it('renders disabled segmented button', async () => {
 });
 
 it('renders checked segmented button with selected check', async () => {
-  const tree = render(
-    <SegmentedButtons
-      onValueChange={() => {}}
-      value={'walk'}
-      buttons={[
-        { value: 'walk', showSelectedCheck: true },
-        { value: 'ride', disabled: true },
-      ]}
-    />
+  const tree = (
+    await render(
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[
+          { value: 'walk', showSelectedCheck: true },
+          { value: 'ride', disabled: true },
+        ]}
+      />
+    )
   ).toJSON();
 
   process.nextTick(() => {
@@ -266,8 +272,8 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
 });
 
 describe('should render icon when', () => {
-  it('icon prop is passed', () => {
-    const { getByTestId } = render(
+  it('icon prop is passed', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -286,12 +292,12 @@ describe('should render icon when', () => {
       />
     );
 
-    expect(getByTestId('walking-button-icon')).toBeTruthy();
-    expect(getByTestId('driving-button-icon')).toBeTruthy();
+    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
   });
 
-  it('icon prop is passed along with label, no matter if button is checked', () => {
-    const { getByTestId } = render(
+  it('icon prop is passed along with label, no matter if button is checked', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -312,12 +318,12 @@ describe('should render icon when', () => {
       />
     );
 
-    expect(getByTestId('walking-button-icon')).toBeTruthy();
-    expect(getByTestId('driving-button-icon')).toBeTruthy();
+    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
   });
 
-  it('icon prop is passed along with label, button is checked, showSelectedCheck is false', () => {
-    const { getByTestId } = render(
+  it('icon prop is passed along with label, button is checked, showSelectedCheck is false', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -340,14 +346,14 @@ describe('should render icon when', () => {
       />
     );
 
-    expect(getByTestId('walking-button-icon')).toBeTruthy();
-    expect(getByTestId('driving-button-icon')).toBeTruthy();
+    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
   });
 });
 
 describe('should not render icon when', () => {
-  it('icon prop is not passed', () => {
-    const { queryByTestId } = render(
+  it('icon prop is not passed', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -364,12 +370,12 @@ describe('should not render icon when', () => {
       />
     );
 
-    expect(queryByTestId('walking-button-icon')).toBeNull();
-    expect(queryByTestId('driving-button-icon')).toBeNull();
+    expect(screen.queryByTestId('walking-button-icon')).not.toBeOnTheScreen();
+    expect(screen.queryByTestId('driving-button-icon')).not.toBeOnTheScreen();
   });
 
-  it('icon prop is passed along with label, button is checked, showSelectedCheck is true', () => {
-    const { getByTestId, queryByTestId } = render(
+  it('icon prop is passed along with label, button is checked, showSelectedCheck is true', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -392,16 +398,16 @@ describe('should not render icon when', () => {
       />
     );
 
-    expect(queryByTestId('walking-button-icon')).toBeNull();
-    expect(getByTestId('walking-button-check-icon')).toBeTruthy();
-    expect(getByTestId('driving-button-icon')).toBeTruthy();
+    expect(screen.queryByTestId('walking-button-icon')).not.toBeOnTheScreen();
+    expect(screen.getByTestId('walking-button-check-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
   });
 });
 
 describe('should have `accessibilityState={ checked: true }` when selected', () => {
-  it('should have two button selected', () => {
+  it('should have two button selected', async () => {
     const onValueChange = jest.fn();
-    const { getAllByA11yState } = render(
+    await render(
       <SegmentedButtons<string>
         multiSelect
         value={['walk', 'transit']}
@@ -414,14 +420,26 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
       />
     );
 
-    const checkedButtons = getAllByA11yState({ checked: true });
-    expect(checkedButtons).toHaveLength(2);
+    const buttons = screen.getAllByRole('button');
+
+    expect(buttons[0]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(buttons[1]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(buttons[2]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: false })
+    );
   });
 
-  it('show selected check icon should be shown', () => {
+  it('show selected check icon should be shown', async () => {
     const onValueChange = jest.fn();
 
-    const { getByTestId } = render(
+    await render(
       <SegmentedButtons<string>
         multiSelect
         value={['walk', 'transit']}
@@ -439,13 +457,13 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
       />
     );
 
-    expect(getByTestId('walking-check-icon')).toBeDefined();
+    expect(screen.getByTestId('walking-check-icon')).toBeOnTheScreen();
   });
 });
 
 describe('labelStyle is handled', () => {
-  it('when labelStyle is given', () => {
-    const { getByTestId } = render(
+  it('when labelStyle is given', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -466,12 +484,16 @@ describe('labelStyle is handled', () => {
       />
     );
 
-    expect(getByTestId('walking-button-label')).toHaveStyle({ fontSize: 10 });
-    expect(getByTestId('driving-button-label')).toHaveStyle({ fontSize: 12 });
+    expect(screen.getByTestId('walking-button-label')).toHaveStyle({
+      fontSize: 10,
+    });
+    expect(screen.getByTestId('driving-button-label')).toHaveStyle({
+      fontSize: 12,
+    });
   });
 
-  it('when labelStyle is omitted', () => {
-    const { getByTestId } = render(
+  it('when labelStyle is omitted', async () => {
+    await render(
       <SegmentedButtons
         value={'walk'}
         buttons={[
@@ -485,6 +507,8 @@ describe('labelStyle is handled', () => {
       />
     );
 
-    expect(getByTestId('walking-button-label')).toHaveStyle({ fontSize: 14 });
+    expect(screen.getByTestId('walking-button-label')).toHaveStyle({
+      fontSize: 14,
+    });
   });
 });

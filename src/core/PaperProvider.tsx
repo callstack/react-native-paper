@@ -32,7 +32,9 @@ const PaperProvider = (props: Props) => {
   const theme = React.useMemo(() => {
     const isDark = props.theme?.dark ?? colorScheme === 'dark';
     const base = defaultThemes[isDark ? 'dark' : 'light'];
-    const scale = resolvedReduceMotion ? 0 : props.theme?.animation?.scale ?? 1;
+    const scale = resolvedReduceMotion
+      ? 0
+      : (props.theme?.animation?.scale ?? 1);
 
     return {
       ...base,
