@@ -60,12 +60,11 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
 
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
-  // Mount as soon as the tooltip is requested.
-  React.useEffect(() => {
-    if (visible) {
-      setRendered(true);
-    }
-  }, [visible]);
+  // Mount as soon as the tooltip is requested — derived during render rather
+  // than synced from an effect.
+  if (visible && !rendered) {
+    setRendered(true);
+  }
 
   // Drive the fade and defer unmount until the exit animation has played.
   React.useEffect(() => {
