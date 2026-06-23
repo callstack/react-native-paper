@@ -10,6 +10,7 @@ import {
 } from 'react-native-reanimated';
 
 import { Tokens } from './tokens';
+import type { Measurement } from './utils';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { InternalTheme } from '../../types';
 
@@ -32,6 +33,11 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     measured: false,
   });
   const childrenWrapperRef = React.useRef<View>(null);
+  // The trigger is measured synchronously and stashed here so the tooltip's
+  // own layout can combine the two into the final measurement in one update.
+  const childrenMeasurement = React.useRef<Measurement['children'] | null>(
+    null
+  );
 
   const opacity = useSharedValue(0);
   const reanimatedReduceMotion = reduceMotion
@@ -66,6 +72,21 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     setRendered(true);
   }
 
+  // Measure the trigger synchronously once the tooltip is requested, instead
+  // of waiting for the tooltip's `onLayout` to do it. (The tooltip itself
+  // lives in a `Portal`, so its own size still comes from its layout below.)
+  React.useLayoutEffect(() => {
+    if (!rendered || !visible) {
+      return;
+    }
+
+    childrenWrapperRef.current?.measure(
+      (_x, _y, width, height, pageX, pageY) => {
+        childrenMeasurement.current = { pageX, pageY, width, height };
+      }
+    );
+  }, [rendered, visible]);
+
   // Drive the fade and defer unmount until the exit animation has played.
   React.useEffect(() => {
     if (!rendered) {
@@ -81,6 +102,7 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     const id = setTimeout(() => {
       setRendered(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
+      childrenMeasurement.current = null;
     }, exitDurationMs) as unknown as NodeJS.Timeout;
 
     return () => clearTimeout(id);
@@ -94,16 +116,18 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     exitDurationMs,
   ]);
 
+  // The tooltip reports its own size on layout; combine it with the trigger
+  // measurement captured above to compute the final position in one update.
   const onLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current?.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
-      }
-    );
+    if (!childrenMeasurement.current) {
+      return;
+    }
+
+    setMeasurement({
+      children: childrenMeasurement.current,
+      tooltip: layout,
+      measured: true,
+    });
   };
 
   return { rendered, measurement, animatedStyle, onLayout, childrenWrapperRef };
