@@ -54,11 +54,11 @@ const BadgeExample = () => {
         <View style={styles.row}>
           <View style={styles.item}>
             <IconButton icon="book-open" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} size={6} />
+            <Badge visible={visible} style={styles.badge} />
           </View>
           <View style={styles.item}>
             <IconButton icon="receipt" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} size={6} />
+            <Badge visible={visible} style={styles.badge} />
           </View>
         </View>
       </List.Section>

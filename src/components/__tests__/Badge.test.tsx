@@ -16,18 +16,8 @@ it('renders badge with content', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders badge in different size', () => {
-  const tree = render(<Badge size={12}>3</Badge>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders badge as hidden', () => {
-  const tree = render(
-    <Badge visible={false} size={12}>
-      3
-    </Badge>
-  ).toJSON();
+  const tree = render(<Badge visible={false}>3</Badge>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -38,4 +28,39 @@ it('renders badge in different color', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('applies small dot dimensions when no children', () => {
+  const { getByTestId } = render(<Badge testID="badge" />);
+
+  expect(getByTestId('badge')).toHaveStyle({
+    height: 6,
+    minWidth: 6,
+    borderRadius: 9999,
+  });
+});
+
+it('applies large pill dimensions when children are present', () => {
+  const { getByTestId } = render(<Badge testID="badge">3</Badge>);
+
+  expect(getByTestId('badge')).toHaveStyle({
+    height: 16,
+    minWidth: 16,
+    paddingHorizontal: 4,
+    fontSize: 11,
+    borderRadius: 9999,
+  });
+});
+
+it('clips oversized label via maxWidth', () => {
+  const { getByTestId } = render(<Badge testID="badge">9999999</Badge>);
+
+  expect(getByTestId('badge')).toHaveStyle({ maxWidth: 34 });
+});
+
+it('does not apply typography or padding to dot badge', () => {
+  const { getByTestId } = render(<Badge testID="badge" />);
+
+  expect(getByTestId('badge')).not.toHaveStyle({ paddingHorizontal: 4 });
+  expect(getByTestId('badge')).not.toHaveStyle({ fontSize: 11 });
 });

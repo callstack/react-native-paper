@@ -67,7 +67,6 @@ export type Props = ViewProps & {
   testID?: string;
 };
 
-const badgeSize = 8;
 const iconSize = 24;
 const itemSize = 56;
 const outlineHeight = 32;
@@ -204,11 +203,9 @@ const DrawerCollapsedItem = ({
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
-                  <Badge visible={badge} size={badgeSize} />
+                  <Badge visible={badge} />
                 ) : (
-                  <Badge visible={badge != null} size={2 * badgeSize}>
-                    {badge}
-                  </Badge>
+                  <Badge visible={badge != null}>{badge}</Badge>
                 )}
               </View>
             )}

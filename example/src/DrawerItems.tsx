@@ -32,11 +32,7 @@ const DrawerItemsData = [
     icon: 'star',
     key: 1,
     right: ({ color }: { color: ColorValue }) => (
-      <Badge
-        visible
-        size={8}
-        style={[styles.badge, { backgroundColor: color }]}
-      />
+      <Badge visible style={[styles.badge, { backgroundColor: color }]} />
     ),
   },
   { label: 'Sent mail', icon: 'send', key: 2 },
@@ -45,7 +41,7 @@ const DrawerItemsData = [
     label: 'A very long title that will be truncated',
     icon: 'delete',
     key: 4,
-    right: () => <Badge visible size={8} style={styles.badge} />,
+    right: () => <Badge visible style={styles.badge} />,
   },
 ];
 

@@ -3,9 +3,13 @@ import { Animated, StyleSheet, useWindowDimensions } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
+import { cornerFull } from '../theme/tokens/sys/shape';
 import type { ThemeProp } from '../types';
 
-const defaultSize = 20;
+const SMALL_SIZE = 6;
+const LARGE_SIZE = 16;
+const MAX_LARGE_WIDTH = 34;
+const LARGE_PADDING = 4;
 
 export type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
@@ -16,10 +20,6 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
    * Content of the `Badge`.
    */
   children?: string | number;
-  /**
-   * Size of the `Badge`.
-   */
-  size?: number;
   style?: StyleProp<TextStyle>;
   ref?: React.RefObject<typeof Animated.Text>;
   /**
@@ -31,6 +31,8 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+ *
+ * Variant is determined automatically: no children renders a 6dp dot; children renders a 16dp pill.
  *
  * ## Usage
  * ```js
@@ -46,7 +48,6 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
  */
 const Badge = ({
   children,
-  size = defaultSize,
   style,
   theme: themeOverrides,
   visible = true,
@@ -83,9 +84,9 @@ const Badge = ({
 
   const textColor = theme.colors.onError;
 
-  const borderRadius = size / 2;
-
-  const paddingHorizontal = 3;
+  const isLarge = children != null;
+  const badgeSize = isLarge ? LARGE_SIZE : SMALL_SIZE;
+  const labelFont = theme.fonts.labelSmall;
 
   return (
     <Animated.Text
@@ -95,12 +96,15 @@ const Badge = ({
           opacity,
           backgroundColor,
           color: textColor,
-          fontSize: size * 0.5,
-          lineHeight: size / fontScale,
-          height: size,
-          minWidth: size,
-          borderRadius,
-          paddingHorizontal,
+          borderRadius: cornerFull,
+          height: badgeSize,
+          minWidth: badgeSize,
+          ...(isLarge && {
+            maxWidth: MAX_LARGE_WIDTH,
+            paddingHorizontal: LARGE_PADDING,
+            ...labelFont,
+            lineHeight: LARGE_SIZE / fontScale,
+          }),
         },
         styles.container,
         restStyle,
