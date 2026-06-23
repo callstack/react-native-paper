@@ -95,6 +95,8 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
+ * Card clips its inner content to the card shape and renders children directly;
+ * section spacing is owned by the section components themselves.
  *
  * ## Usage
  * ```js
@@ -112,8 +114,8 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  *     </Card.Content>
  *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="contained">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -185,13 +187,6 @@ const Card = ({
     runElevationAnimation('out');
   });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type
-      ? (child.type as any).displayName
-      : null
-  );
-
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
@@ -212,17 +207,11 @@ const Card = ({
   };
 
   const content = (
-    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-              borderRadiusStyles,
-            })
-          : child
-      )}
+    <View
+      style={[styles.innerContainer, borderRadiusCombinedStyles, contentStyle]}
+      testID={testID}
+    >
+      {children}
     </View>
   );
 
@@ -288,6 +277,7 @@ Card.Title = CardTitle;
 const styles = StyleSheet.create({
   innerContainer: {
     flexShrink: 1,
+    overflow: 'hidden',
   },
   outline: {
     borderWidth: 1,

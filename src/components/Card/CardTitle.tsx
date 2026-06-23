@@ -82,14 +82,6 @@ export type Props = ViewProps & {
    */
   rightStyle?: StyleProp<ViewStyle>;
   /**
-   * @internal
-   */
-  index?: number;
-  /**
-   * @internal
-   */
-  total?: number;
-  /**
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
