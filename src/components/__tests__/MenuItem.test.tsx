@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
@@ -9,34 +9,36 @@ import { getMenuItemColor } from '../Menu/utils';
 const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('Menu Item', () => {
-  it('renders menu item', () => {
-    const tree = render(
-      <>
-        <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
-        <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
-        <Menu.Item
-          leadingIcon="content-cut"
-          onPress={() => {}}
-          title="Cut"
-          disabled
-        />
-        <Menu.Item
-          leadingIcon="content-copy"
-          onPress={() => {}}
-          title="Copy"
-          disabled
-        />
-        <Menu.Item onPress={() => {}} title="Paste" />
-      </>
+  it('renders menu item', async () => {
+    const tree = (
+      await render(
+        <>
+          <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+          <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+          <Menu.Item
+            leadingIcon="content-cut"
+            onPress={() => {}}
+            title="Cut"
+            disabled
+          />
+          <Menu.Item
+            leadingIcon="content-copy"
+            onPress={() => {}}
+            title="Copy"
+            disabled
+          />
+          <Menu.Item onPress={() => {}} title="Paste" />
+        </>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('should have titleMaxFontSizeMultiplier passed to title', () => {
+  it('should have titleMaxFontSizeMultiplier passed to title', async () => {
     const labelMaxFontSizeMultiplier = 2;
 
-    const { getByTestId } = render(
+    await render(
       <Menu.Item
         titleMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         leadingIcon="content-cut"
@@ -45,19 +47,19 @@ describe('Menu Item', () => {
       />
     );
 
-    expect(getByTestId('menu-item-title').props.maxFontSizeMultiplier).toBe(
-      labelMaxFontSizeMultiplier
-    );
+    expect(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId('menu-item-title').props.maxFontSizeMultiplier
+    ).toBe(labelMaxFontSizeMultiplier);
   });
 
-  it('accepts aria-checked prop', () => {
-    const { getByTestId } = render(
-      <Menu.Item aria-checked={true} title="Option 1" testID="touchable" />
-    );
+  it('accepts aria-checked prop', async () => {
+    await render(<Menu.Item aria-checked={true} title="Option 1" />);
 
-    expect(getByTestId('touchable').props.accessibilityState).toMatchObject({
-      checked: true,
-    });
+    expect(screen.getByRole('menuitem')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
   });
 });
 

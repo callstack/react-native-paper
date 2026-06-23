@@ -1,15 +1,14 @@
 import { Text } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { waitFor } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import Portal from '../Portal/Portal';
 
 jest.useRealTimers();
 
 it('renders portal with siblings', async () => {
-  const { toJSON, getByTestId } = render(
+  const { toJSON } = await render(
     <Portal.Host>
       <Text>Outside content</Text>
       <Portal>
@@ -18,7 +17,7 @@ it('renders portal with siblings', async () => {
     </Portal.Host>
   );
 
-  await waitFor(() => getByTestId('content'));
+  await screen.findByTestId('content');
 
   expect(toJSON()).toMatchSnapshot();
 });

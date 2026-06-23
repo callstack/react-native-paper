@@ -432,8 +432,8 @@ const MorphingTrigger = ({
     alignment === 'start'
       ? 'flex-start'
       : alignment === 'center'
-      ? 'center'
-      : 'flex-end';
+        ? 'center'
+        : 'flex-end';
 
   return (
     <View
@@ -565,18 +565,18 @@ const Menu = ({
     alignment === 'start'
       ? 'flex-start'
       : alignment === 'center'
-      ? 'center'
-      : 'flex-end';
+        ? 'center'
+        : 'flex-end';
   const itemTransformOrigin: 'left' | 'center' | 'right' =
     alignment === 'start'
       ? isRTL
         ? 'right'
         : 'left'
       : alignment === 'center'
-      ? 'center'
-      : isRTL
-      ? 'left'
-      : 'right';
+        ? 'center'
+        : isRTL
+          ? 'left'
+          : 'right';
 
   const triggerSlotSize = Tokens.sizes[size].container;
 
@@ -600,8 +600,8 @@ const Menu = ({
             alignment === 'start'
               ? styles.itemsStart
               : alignment === 'center'
-              ? styles.itemsCenter
-              : styles.itemsEnd,
+                ? styles.itemsCenter
+                : styles.itemsEnd,
             {
               bottom: triggerSlotSize + MenuTokens.spacing.closeToLastItem,
               alignItems: flexAlign,

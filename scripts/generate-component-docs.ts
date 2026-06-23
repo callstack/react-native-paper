@@ -1,7 +1,9 @@
-const childProcess = require('child_process');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
+import * as childProcess from 'node:child_process';
+import * as fs from 'node:fs';
+import { createRequire } from 'node:module';
+import * as os from 'node:os';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 type PluginOptions = {
   docsRootDir: string;
@@ -20,6 +22,9 @@ type PluginFactory = (
 
 const isRecord = (value: unknown): value is { [key: string]: unknown } =>
   typeof value === 'object' && value !== null;
+
+const isPluginFactory = (value: unknown): value is PluginFactory =>
+  typeof value === 'function';
 
 const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
   if (Array.isArray(value)) {
@@ -74,7 +79,11 @@ const main = async () => {
     return;
   }
 
-  const rootDir = path.resolve(__dirname, '..');
+  const requireFromScript = createRequire(import.meta.url);
+  const rootDir = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '..'
+  );
   const tempDir = fs.mkdtempSync(
     path.join(os.tmpdir(), 'react-native-paper-docs-')
   );
@@ -118,7 +127,7 @@ const main = async () => {
     }
 
     const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-    const config = require(configPath);
+    const config: unknown = requireFromScript(configPath);
 
     if (!isRecord(config) || !Array.isArray(config.plugins)) {
       throw new Error(`Unable to read plugins from ${configPath}`);
@@ -139,11 +148,19 @@ const main = async () => {
       );
     }
 
-    const pluginFactory: PluginFactory = require(path.join(
+    const pluginFactoryPath = path.join(
       sourceDir,
       'docs',
       'component-docs-plugin'
-    ));
+    );
+    const pluginFactory: unknown = requireFromScript(pluginFactoryPath);
+
+    if (!isPluginFactory(pluginFactory)) {
+      throw new Error(
+        `Unable to read component docs plugin from ${pluginFactoryPath}`
+      );
+    }
+
     const plugin = await pluginFactory({}, pluginConfig[1]);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);

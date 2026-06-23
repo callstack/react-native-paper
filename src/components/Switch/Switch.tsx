@@ -255,8 +255,8 @@ const Switch = ({
         current === 'pressed'
           ? stateOpacity.pressed
           : current === 'hovered'
-          ? stateOpacity.hovered
-          : 0;
+            ? stateOpacity.hovered
+            : 0;
       if (wasPressed && current !== 'pressed') {
         // On release: rise to peak, then fall to the next state.
         stateLayerAlpha.value = withSequence(

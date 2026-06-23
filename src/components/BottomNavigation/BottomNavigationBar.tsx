@@ -539,8 +539,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             const v3InactiveOpacity = shifting
               ? inactiveOpacity
               : focused
-              ? 0
-              : 1;
+                ? 0
+                : 1;
 
             // Scale horizontally the outline pill
             const outlineScale = focused

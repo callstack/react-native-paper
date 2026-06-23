@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import Surface from '../Surface';
 
 type StyleCase = {
@@ -14,14 +14,15 @@ type StyleCase = {
 };
 
 describe('Surface', () => {
-  it('should properly render passed props', () => {
+  it('should properly render passed props', async () => {
     const testID = 'surface-container';
-    const { getByTestId } = render(
+    await render(
       <Surface pointerEvents="box-none" testID={testID}>
         {null}
       </Surface>
     );
-    expect(getByTestId(testID).props.pointerEvents).toBe('box-none');
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    expect(screen.getByTestId(testID).props.pointerEvents).toBe('box-none');
   });
 
   describe('on iOS', () => {
@@ -46,8 +47,8 @@ describe('Surface', () => {
       },
     });
 
-    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', () => {
-      const { getByTestId } = render(
+    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', async () => {
+      await render(
         <Surface
           mode="flat"
           elevation={5}
@@ -58,19 +59,19 @@ describe('Surface', () => {
         </Surface>
       );
 
-      expect(getByTestId('surface-test')).not.toHaveStyle({
+      expect(screen.getByTestId('surface-test')).not.toHaveStyle({
         shadowColor: '#000',
         shadowOpacity: 0.3,
         shadowOffset: { width: 0, height: 4 },
         shadowRadius: 4,
       });
-      expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle({
+      expect(screen.getByTestId('surface-test-outer-layer')).not.toHaveStyle({
         shadowColor: '#000',
         shadowOpacity: 0.15,
         shadowOffset: { width: 0, height: 8 },
         shadowRadius: 12,
       });
-      expect(getByTestId('surface-test')).toHaveStyle({
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
         backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });
@@ -98,17 +99,19 @@ describe('Surface', () => {
       { property: 'flex', value: 6 },
     ] satisfies StyleCase[])(
       'applies $property to outer layer only',
-      ({ property, value }) => {
+      async ({ property, value }) => {
         const style = { [property]: value };
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
-        expect(getByTestId('surface-test')).not.toHaveStyle(style);
+        expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(
+          style
+        );
+        expect(screen.getByTestId('surface-test')).not.toHaveStyle(style);
       }
     );
 
@@ -124,17 +127,19 @@ describe('Surface', () => {
       { property: 'borderColor', value: 'black' },
     ] satisfies StyleCase[])(
       'applies $property to inner layer only',
-      ({ property, value }) => {
+      async ({ property, value }) => {
         const style = { [property]: value };
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
-        expect(getByTestId('surface-test')).toHaveStyle(style);
+        expect(screen.getByTestId('surface-test-outer-layer')).not.toHaveStyle(
+          style
+        );
+        expect(screen.getByTestId('surface-test')).toHaveStyle(style);
       }
     );
 
@@ -147,81 +152,85 @@ describe('Surface', () => {
       { property: 'backgroundColor', value: 'rgb(4, 5, 6)' },
     ] satisfies StyleCase[])(
       'applies $property to every layer',
-      ({ property, value }) => {
+      async ({ property, value }) => {
         const style = { [property]: value };
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
-        expect(getByTestId('surface-test')).toHaveStyle(style);
+        expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(
+          style
+        );
+        expect(screen.getByTestId('surface-test')).toHaveStyle(style);
       }
     );
 
     describe('outer layer', () => {
-      it('should not render rest style', () => {
+      it('should not render rest style', async () => {
         const testID = 'surface-test';
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID={testID} style={styles.restStyle}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId(`${testID}-outer-layer`)).not.toHaveStyle(
+        expect(screen.getByTestId(`${testID}-outer-layer`)).not.toHaveStyle(
           styles.restStyle
         );
       });
 
-      it('should render absolute position properties on outer layer', () => {
+      it('should render absolute position properties on outer layer', async () => {
         const testID = 'surface-test';
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID={testID} style={styles.absoluteStyles}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
+        expect(screen.getByTestId(`${testID}-outer-layer`)).toHaveStyle(
           styles.absoluteStyles
         );
       });
 
-      it('should render absolute position properties on the outer layer', () => {
+      it('should render absolute position properties on the outer layer', async () => {
         const testID = 'surface-test';
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID={testID} style={styles.absoluteStyles}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
+        expect(screen.getByTestId(`${testID}-outer-layer`)).toHaveStyle(
           styles.absoluteStyles
         );
       });
     });
 
     describe('inner layer', () => {
-      it('should render inner layer styles on the inner layer', () => {
+      it('should render inner layer styles on the inner layer', async () => {
         const testID = 'surface-test';
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID={testID} style={styles.innerLayerViewStyle}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId(testID)).toHaveStyle(styles.innerLayerViewStyle);
+        expect(screen.getByTestId(testID)).toHaveStyle(
+          styles.innerLayerViewStyle
+        );
       });
     });
 
-    it('applies backgroundColor to every layer', () => {
+    it('applies backgroundColor to every layer', async () => {
       const backgroundColor = 'rgb(1, 2, 3)';
-      const { getByTestId } = render(
+      await render(
         <Surface
           testID="surface-test"
           theme={{ colors: { elevation: { level1: backgroundColor } } }}
@@ -231,31 +240,31 @@ describe('Surface', () => {
       );
 
       const style = { backgroundColor };
-      expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
-      expect(getByTestId('surface-test')).toHaveStyle(style);
+      expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(style);
+      expect(screen.getByTestId('surface-test')).toHaveStyle(style);
     });
 
     describe('children wrapper', () => {
-      it('should render rest styles', () => {
+      it('should render rest styles', async () => {
         const testID = 'surface-test';
         const combinedStyles = [styles.innerLayerViewStyle, styles.restStyle];
 
-        const { getByTestId } = render(
+        await render(
           <Surface testID={testID} style={combinedStyles}>
             {null}
           </Surface>
         );
 
-        expect(getByTestId(testID)).toHaveStyle(combinedStyles);
+        expect(screen.getByTestId(testID)).toHaveStyle(combinedStyles);
       });
     });
   });
 
   describe('on Android', () => {
-    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', () => {
+    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', async () => {
       Platform.OS = 'android';
       const testID = 'surface-container';
-      const { getByTestId } = render(
+      await render(
         <Surface
           mode="flat"
           elevation={5}
@@ -266,8 +275,8 @@ describe('Surface', () => {
         </Surface>
       );
 
-      expect(getByTestId(testID)).not.toHaveStyle({ elevation: 5 });
-      expect(getByTestId(testID)).toHaveStyle({
+      expect(screen.getByTestId(testID)).not.toHaveStyle({ elevation: 5 });
+      expect(screen.getByTestId(testID)).toHaveStyle({
         backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });

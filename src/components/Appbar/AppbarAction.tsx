@@ -91,8 +91,8 @@ const AppbarAction = ({
   const actionIconColor = iconColor
     ? iconColor
     : isLeading
-    ? colors.onSurface
-    : colors.onSurfaceVariant;
+      ? colors.onSurface
+      : colors.onSurfaceVariant;
 
   return (
     <IconButton

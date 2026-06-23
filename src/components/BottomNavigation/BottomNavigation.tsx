@@ -497,8 +497,8 @@ const BottomNavigation = <Route extends BaseRoute>({
                 outputRange: [0, 1, 0],
               })
             : focused
-            ? 1
-            : 0;
+              ? 1
+              : 0;
 
           const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu Item renders menu item 1`] = `
-[
+<>
   <View
     accessibilityState={
       {
@@ -165,7 +165,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     accessibilityState={
       {
@@ -329,7 +329,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     accessibilityState={
       {
@@ -493,7 +493,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     accessibilityState={
       {
@@ -657,7 +657,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
     </View>
-  </View>,
+  </View>
   <View
     accessibilityState={
       {
@@ -781,6 +781,6 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
     </View>
-  </View>,
-]
+  </View>
+</>
 `;

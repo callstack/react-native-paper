@@ -164,7 +164,6 @@ const DrawerCollapsedItem = ({
 
   return (
     <View {...rest}>
-      {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
       <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}

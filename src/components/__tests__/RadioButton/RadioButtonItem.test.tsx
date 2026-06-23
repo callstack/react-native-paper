@@ -1,69 +1,77 @@
 import { Platform } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { act, fireEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 
-it('renders unchecked', () => {
-  const tree = render(
-    <RadioButton.Item
-      status="unchecked"
-      label="Unchecked Button"
-      value="unchecked"
-    />
+it('renders unchecked', async () => {
+  const tree = (
+    await render(
+      <RadioButton.Item
+        status="unchecked"
+        label="Unchecked Button"
+        value="unchecked"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('can render the iOS radio button on different platforms', () => {
+it('can render the iOS radio button on different platforms', async () => {
   Platform.OS = 'android';
-  const tree = render(
-    <RadioButton.Item
-      status="unchecked"
-      label="iOS Radio button"
-      mode="ios"
-      value="ios"
-    />
+  const tree = (
+    await render(
+      <RadioButton.Item
+        status="unchecked"
+        label="iOS Radio button"
+        mode="ios"
+        value="ios"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('can render the Android radio button on different platforms', () => {
+it('can render the Android radio button on different platforms', async () => {
   Platform.OS = 'ios';
-  const tree = render(
-    <RadioButton.Item
-      status="unchecked"
-      label="iOS Checkbox"
-      mode="android"
-      value="android"
-    />
+  const tree = (
+    await render(
+      <RadioButton.Item
+        status="unchecked"
+        label="iOS Checkbox"
+        mode="android"
+        value="android"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('can render leading radio button control', () => {
+it('can render leading radio button control', async () => {
   Platform.OS = 'ios';
-  const tree = render(
-    <RadioButton.Item
-      label="Default with leading control"
-      status={'unchecked'}
-      value="iOS"
-      position="leading"
-    />
+  const tree = (
+    await render(
+      <RadioButton.Item
+        label="Default with leading control"
+        status={'unchecked'}
+        value="iOS"
+        position="leading"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('should execute onLongPress', () => {
+it('should execute onLongPress', async () => {
   const onLongPress = jest.fn();
 
-  const { getByTestId } = render(
+  await render(
     <RadioButton.Item
       label="Item"
       value="android"
@@ -72,9 +80,7 @@ it('should execute onLongPress', () => {
     />
   );
 
-  act(() => {
-    fireEvent(getByTestId('radio-button-item'), 'longPress', { key: 'value' });
-  });
+  await userEvent.longPress(screen.getByTestId('radio-button-item'));
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
 });

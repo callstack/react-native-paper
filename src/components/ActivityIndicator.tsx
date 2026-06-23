@@ -130,8 +130,8 @@ const ActivityIndicator = ({
         ? 24
         : 48
       : indicatorSize
-      ? indicatorSize
-      : 24;
+        ? indicatorSize
+        : 24;
 
   const frames = (60 * DURATION) / 1000;
   const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);

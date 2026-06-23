@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Animated, Platform, StyleSheet } from 'react-native';
 
 import { afterEach, expect, it } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import ProgressBar from '../ProgressBar';
 import type { Props } from '../ProgressBar';
 
@@ -22,12 +22,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const triggerLayout = async (
-  tree: ReturnType<typeof render>
-): Promise<void> => {
-  await act(async () => {
-    tree.getByTestId('progress-bar').props.onLayout(layoutEvent);
-  });
+const a11yRole = 'progressbar';
+const triggerLayout = async (): Promise<void> => {
+  await fireEvent(screen.getByRole(a11yRole), 'layout', layoutEvent);
 };
 
 class ClassProgressBar extends React.Component<Props> {
@@ -43,64 +40,65 @@ afterEach(() => {
 });
 
 it('renders progress bar with animated value', async () => {
-  const tree = render(<AnimatedProgressBar animatedValue={0.2} />);
-  await triggerLayout(tree);
+  const view = await render(<AnimatedProgressBar animatedValue={0.2} />);
+  await triggerLayout();
 
-  tree.update(<AnimatedProgressBar animatedValue={0.4} />);
+  await view.rerender(<AnimatedProgressBar animatedValue={0.4} />);
 
-  expect(tree.getByTestId('progress-bar')).toBeTruthy();
+  expect(screen.getByRole(a11yRole)).toBeOnTheScreen();
 });
 
 it('renders progress bar with specific progress', async () => {
-  const tree = render(<ProgressBar progress={0.2} />);
-  await triggerLayout(tree);
+  const view = await render(<ProgressBar progress={0.2} />);
+  await triggerLayout();
 
-  expect(tree.toJSON()).toMatchSnapshot();
+  expect(view.toJSON()).toMatchSnapshot();
 });
 
 it('renders hidden progress bar', async () => {
-  const tree = render(<ProgressBar progress={0.2} visible={false} />);
-  await triggerLayout(tree);
+  const view = await render(<ProgressBar progress={0.2} visible={false} />);
+  await triggerLayout();
 
-  expect(tree.toJSON()).toMatchSnapshot();
+  expect(view.toJSON()).toMatchSnapshot();
 });
 
 it('renders colored progress bar', async () => {
-  const tree = render(<ProgressBar progress={0.2} color="red" />);
-  await triggerLayout(tree);
+  const view = await render(<ProgressBar progress={0.2} color="red" />);
+  await triggerLayout();
 
-  expect(tree.toJSON()).toMatchSnapshot();
+  expect(view.toJSON()).toMatchSnapshot();
 });
 
 it('renders indeterminate progress bar', async () => {
-  const tree = render(<ProgressBar indeterminate />);
-  await triggerLayout(tree);
+  const view = await render(<ProgressBar indeterminate />);
+  await triggerLayout();
 
-  expect(tree.toJSON()).toMatchSnapshot();
+  expect(view.toJSON()).toMatchSnapshot();
 });
 
-it('renders progress bar with full height on web', () => {
+it('renders progress bar with full height on web', async () => {
   Platform.OS = 'web';
-  const tree = render(<ProgressBar progress={0.2} />);
+  await render(<ProgressBar progress={0.2} />);
 
-  expect(tree.getByTestId('progress-bar')).toHaveStyle({
+  expect(screen.getByRole(a11yRole)).toHaveStyle({
     width: '100%',
     height: '100%',
   });
 });
 
-it('has progressbar role', () => {
-  const tree = render(<ProgressBar progress={0.5} />);
-  expect(tree.getByTestId('progress-bar').props.role).toBe('progressbar');
+it('has progressbar role', async () => {
+  await render(<ProgressBar progress={0.5} />);
+
+  expect(screen.getByRole(a11yRole)).toBeOnTheScreen();
 });
 
 it('renders progress bar with custom style of filled part', async () => {
-  const tree = render(
+  await render(
     <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />
   );
-  await triggerLayout(tree);
+  await triggerLayout();
 
-  expect(tree.getByTestId('progress-bar-fill')).toHaveStyle({
+  expect(screen.getByTestId('progress-bar-fill')).toHaveStyle({
     borderRadius: 4,
   });
 });

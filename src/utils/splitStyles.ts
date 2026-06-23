@@ -55,6 +55,6 @@ export function splitStyles<Tuple extends FiltersArray>(
   // Convert arrays of entries into objects
   return newStyles.map((styles) => Object.fromEntries(styles)) as unknown as [
     ViewStyle,
-    ...MappedTuple<Tuple>
+    ...MappedTuple<Tuple>,
   ];
 }

@@ -105,8 +105,8 @@ export default function PaperExample() {
         ? DynamicDarkTheme
         : DynamicLightTheme
       : isDarkMode
-      ? DarkTheme
-      : LightTheme;
+        ? DarkTheme
+        : LightTheme;
 
   const direction = rtl ? 'rtl' : 'ltr';
 
@@ -130,7 +130,7 @@ export default function PaperExample() {
       }
     };
 
-    restorePrefs();
+    void restorePrefs();
   }, []);
 
   React.useEffect(() => {
@@ -159,12 +159,12 @@ export default function PaperExample() {
         I18nManager.forceRTL(rtl);
 
         if (Platform.OS !== 'web') {
-          Updates.reloadAsync();
+          await Updates.reloadAsync();
         }
       }
     };
 
-    savePrefs();
+    void savePrefs();
   }, [direction, isDarkMode, isReady, rtl]);
 
   const preferences = React.useMemo(
@@ -230,7 +230,7 @@ export default function PaperExample() {
             },
           }}
           onReady={() => {
-            SplashScreen.hideAsync();
+            void SplashScreen.hideAsync();
           }}
         />
         {Platform.OS !== 'web' ? (

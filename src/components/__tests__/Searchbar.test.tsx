@@ -1,82 +1,87 @@
 import { Animated } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { act, fireEvent } from '@testing-library/react-native';
+import { act, userEvent } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
 
-it('renders with placeholder', () => {
-  const tree = render(<Searchbar placeholder="Search" value="" />).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders with text', () => {
-  const tree = render(
-    <Searchbar placeholder="Search" value="query" />
+it('renders with placeholder', async () => {
+  const tree = (
+    await render(<Searchbar placeholder="Search" value="" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('activity indicator snapshot test', () => {
-  const tree = render(<Searchbar loading={true} value="" />).toJSON();
+it('renders with text', async () => {
+  const tree = (
+    await render(<Searchbar placeholder="Search" value="query" />)
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders with ActivityIndicator', () => {
-  const tree = render(<Searchbar loading={true} value="" />);
+it('activity indicator snapshot test', async () => {
+  const tree = (await render(<Searchbar loading={true} value="" />)).toJSON();
 
-  expect(tree.getByTestId('activity-indicator')).toBeTruthy();
+  expect(tree).toMatchSnapshot();
 });
 
-it('renders without ActivityIndicator', () => {
-  const { getByTestId } = render(<Searchbar loading={false} value="" />);
+it('renders with ActivityIndicator', async () => {
+  await render(<Searchbar loading={true} value="" />);
 
-  expect(() => getByTestId('activity-indicator')).toThrow();
+  expect(screen.getByTestId('activity-indicator')).toBeOnTheScreen();
 });
 
-it('renders clear icon with custom color', () => {
-  const { getByTestId } = render(
+it('renders without ActivityIndicator', async () => {
+  await render(<Searchbar loading={false} value="" />);
+
+  expect(screen.queryByTestId('activity-indicator')).not.toBeOnTheScreen();
+});
+
+it('renders clear icon with custom color', async () => {
+  await render(
     <Searchbar testID="search-bar" value="value" iconColor="purple" />
   );
 
-  const iconComponent = getByTestId('search-bar-icon-wrapper').props.children;
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  const iconComponent = screen.getByTestId('search-bar-icon-wrapper').props
+    .children;
 
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(iconComponent.props.iconColor).toBe('purple');
 });
 
-it('renders clear icon wrapper, which can be the target of touch events, if search has value', () => {
-  const { getByTestId } = render(
-    <Searchbar testID="search-bar" value="value" />
-  );
+it('renders clear icon wrapper, which can be the target of touch events, if search has value', async () => {
+  await render(<Searchbar testID="search-bar" value="value" />);
 
-  expect(getByTestId('search-bar-icon-wrapper').props.pointerEvents).toBe(
-    'auto'
-  );
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
+  ).toBe('auto');
 });
 
-it('renders clear icon wrapper, which is never target of touch events, if search has no value', () => {
-  const { getByTestId } = render(<Searchbar testID="search-bar" value="" />);
+it('renders clear icon wrapper, which is never target of touch events, if search has no value', async () => {
+  await render(<Searchbar testID="search-bar" value="" />);
 
-  expect(getByTestId('search-bar-icon-wrapper').props.pointerEvents).toBe(
-    'none'
-  );
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
+  ).toBe('none');
 });
 
-it('animated value changes correctly', () => {
+it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  const { getByTestId } = render(
+  await render(
     <Searchbar
       testID="search-bar"
       value=""
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -86,41 +91,37 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  act(() => {
+  await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });
 
-it('defines onClearIconPress action and checks if it is called when close button is pressed', () => {
+it('defines onClearIconPress action and checks if it is called when close button is pressed', async () => {
   const onClearIconPressMock = jest.fn();
-  const { getByTestId } = render(
+  await render(
     <Searchbar
       testID="search-bar"
       value="value"
       onClearIconPress={onClearIconPressMock}
     />
   );
-  const iconComponent = getByTestId('search-bar-icon-wrapper').props.children;
-
-  fireEvent(iconComponent, 'onPress');
+  await userEvent.press(screen.getByTestId('search-bar-clear-icon'));
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon wrapper, with appropriate style for v3', () => {
-  const { getByTestId, update } = render(
-    <Searchbar testID="search-bar" value="" />
-  );
+it('renders clear icon wrapper, with appropriate style for v3', async () => {
+  const { rerender } = await render(<Searchbar testID="search-bar" value="" />);
 
-  expect(getByTestId('search-bar-icon-wrapper')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-icon-wrapper')).toHaveStyle({
     position: 'absolute',
     right: 0,
     marginLeft: 16,
   });
 
-  update(
+  await rerender(
     <Searchbar
       testID="search-bar"
       value=""
@@ -128,13 +129,15 @@ it('renders clear icon wrapper, with appropriate style for v3', () => {
     />
   );
 
-  expect(getByTestId('search-bar-icon-wrapper')).toHaveStyle({
-    display: 'none',
-  });
+  expect(
+    screen.getByTestId('search-bar-icon-wrapper', {
+      includeHiddenElements: true,
+    })
+  ).toHaveStyle({ display: 'none' });
 });
 
-it('renders trailering icon when mode is set to "bar"', () => {
-  const { getByTestId } = render(
+it('renders trailering icon when mode is set to "bar"', async () => {
+  await render(
     <Searchbar
       testID="search-bar"
       value={''}
@@ -143,13 +146,13 @@ it('renders trailering icon when mode is set to "bar"', () => {
     />
   );
 
-  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
 });
 
-it('renders trailering icon with press functionality', () => {
+it('renders trailering icon with press functionality', async () => {
   const onTraileringIconPressMock = jest.fn();
 
-  const { getByTestId } = render(
+  await render(
     <Searchbar
       testID="search-bar"
       value={''}
@@ -159,12 +162,12 @@ it('renders trailering icon with press functionality', () => {
     />
   );
 
-  fireEvent(getByTestId('search-bar-trailering-icon'), 'onPress');
+  await userEvent.press(screen.getByTestId('search-bar-trailering-icon'));
   expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon instead of trailering icon', () => {
-  const { getByTestId, update, queryByTestId } = render(
+it('renders clear icon instead of trailering icon', async () => {
+  const { rerender } = await render(
     <Searchbar
       testID="search-bar"
       value={''}
@@ -173,9 +176,9 @@ it('renders clear icon instead of trailering icon', () => {
     />
   );
 
-  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
 
-  update(
+  await rerender(
     <Searchbar
       testID="search-bar"
       value={'test'}
@@ -184,14 +187,16 @@ it('renders clear icon instead of trailering icon', () => {
     />
   );
 
-  expect(queryByTestId('search-bar-trailering-icon')).toBeNull();
-  expect(getByTestId('search-bar-icon-wrapper')).toBeTruthy();
+  expect(
+    screen.queryByTestId('search-bar-trailering-icon')
+  ).not.toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-icon-wrapper')).toBeOnTheScreen();
 });
 
-it('renders searchbar in "view" mode', () => {
-  const { getByTestId } = render(
-    <Searchbar testID="search-bar" value={''} mode="view" />
-  );
+it('renders searchbar in "view" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="view" />);
 
-  expect(getByTestId('search-bar-container')).toHaveStyle({ borderRadius: 0 });
+  expect(screen.getByTestId('search-bar-container')).toHaveStyle({
+    borderRadius: 0,
+  });
 });

@@ -1,16 +1,18 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
 import DataTable from '../DataTable/DataTable';
 
 describe('DataTable.Header', () => {
-  it('renders data table header', () => {
-    const tree = render(
-      <DataTable.Header>
-        <DataTable.Title>Dessert</DataTable.Title>
-        <DataTable.Title>Calories</DataTable.Title>
-      </DataTable.Header>
+  it('renders data table header', async () => {
+    const tree = (
+      await render(
+        <DataTable.Header>
+          <DataTable.Title>Dessert</DataTable.Title>
+          <DataTable.Title>Calories</DataTable.Title>
+        </DataTable.Header>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -18,27 +20,31 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
-  it('renders data table title with sort icon', () => {
-    const tree = render(
-      <DataTable.Title sortDirection="descending">Dessert</DataTable.Title>
+  it('renders data table title with sort icon', async () => {
+    const tree = (
+      await render(
+        <DataTable.Title sortDirection="descending">Dessert</DataTable.Title>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders right aligned data table title', () => {
-    const tree = render(
-      <DataTable.Title numeric>Calories</DataTable.Title>
+  it('renders right aligned data table title', async () => {
+    const tree = (
+      await render(<DataTable.Title numeric>Calories</DataTable.Title>)
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table title with press handler', () => {
-    const tree = render(
-      <DataTable.Title sortDirection="descending" onPress={() => {}}>
-        Dessert
-      </DataTable.Title>
+  it('renders data table title with press handler', async () => {
+    const tree = (
+      await render(
+        <DataTable.Title sortDirection="descending" onPress={() => {}}>
+          Dessert
+        </DataTable.Title>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -46,62 +52,72 @@ describe('DataTable.Title', () => {
 });
 
 describe('DataTable.Cell', () => {
-  it('renders data table cell', () => {
-    const tree = render(<DataTable.Cell>Cupcake</DataTable.Cell>).toJSON();
+  it('renders data table cell', async () => {
+    const tree = (
+      await render(<DataTable.Cell>Cupcake</DataTable.Cell>)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders right aligned data table cell', () => {
-    const tree = render(<DataTable.Cell numeric>356</DataTable.Cell>).toJSON();
+  it('renders right aligned data table cell', async () => {
+    const tree = (
+      await render(<DataTable.Cell numeric>356</DataTable.Cell>)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table cell with text container', () => {
-    const { getByText, getByTestId } = render(
+  it('renders data table cell with text container', async () => {
+    await render(
       <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
     );
 
-    expect(getByText('Table cell')).toBeOnTheScreen();
-    expect(getByTestId('table-cell-text-container')).toBeOnTheScreen();
+    expect(screen.getByText('Table cell')).toBeOnTheScreen();
+    expect(screen.getByTestId('table-cell-text-container')).toBeOnTheScreen();
   });
 
-  it('renders data table cell children without text container', () => {
-    const { queryByTestId } = render(
+  it('renders data table cell children without text container', async () => {
+    await render(
       <DataTable.Cell testID="table-cell">
         <Checkbox status="checked" testID="table-cell-checkbox" />
       </DataTable.Cell>
     );
 
-    expect(queryByTestId('table-cell-text-container')).not.toBeOnTheScreen();
+    expect(
+      screen.queryByTestId('table-cell-text-container')
+    ).not.toBeOnTheScreen();
   });
 });
 
 describe('DataTable.Pagination', () => {
-  it('renders data table pagination', () => {
-    const tree = render(
-      <DataTable.Pagination
-        page={3}
-        numberOfPages={15}
-        onPageChange={() => {}}
-      />
+  it('renders data table pagination', async () => {
+    const tree = (
+      await render(
+        <DataTable.Pagination
+          page={3}
+          numberOfPages={15}
+          onPageChange={() => {}}
+        />
+      )
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table pagination with label', () => {
-    const tree = render(
-      <DataTable.Pagination
-        page={3}
-        numberOfPages={15}
-        onPageChange={() => {}}
-        label="11-20 of 150"
-      />
+  it('renders data table pagination with label', async () => {
+    const tree = (
+      await render(
+        <DataTable.Pagination
+          page={3}
+          numberOfPages={15}
+          onPageChange={() => {}}
+          label="11-20 of 150"
+        />
+      )
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table pagination with fast-forward buttons', () => {
-    const { getByLabelText, toJSON } = render(
+  it('renders data table pagination with fast-forward buttons', async () => {
+    const { toJSON } = await render(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
@@ -111,13 +127,13 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(getByLabelText('page-first')).toBeTruthy();
-    expect(getByLabelText('page-last')).toBeTruthy();
+    expect(screen.getByLabelText('page-first')).toBeOnTheScreen();
+    expect(screen.getByLabelText('page-last')).toBeOnTheScreen();
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('renders data table pagination without options select', () => {
-    const { queryByTestId } = render(
+  it('renders data table pagination without options select', async () => {
+    await render(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
@@ -127,11 +143,11 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(queryByTestId('options-select')).toBeFalsy();
+    expect(screen.queryByLabelText('Options Select')).not.toBeOnTheScreen();
   });
 
-  it('renders data table pagination with options select', () => {
-    const { getByTestId, toJSON } = render(
+  it('renders data table pagination with options select', async () => {
+    const { toJSON } = await render(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
@@ -145,12 +161,8 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(getByTestId('options-select').props['aria-label']).toBe(
-      'Options Select'
-    );
-    expect(getByTestId('select-page-dropdown-label').props['aria-label']).toBe(
-      'selectPageDropdownLabel'
-    );
+    expect(screen.getByLabelText('Options Select')).toBeOnTheScreen();
+    expect(screen.getByLabelText('selectPageDropdownLabel')).toBeOnTheScreen();
 
     expect(toJSON()).toMatchSnapshot();
   });

@@ -11,104 +11,116 @@ import {
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import Banner from '../Banner';
 
-it('renders hidden banner, without action buttons and without image', () => {
-  const tree = render(
-    <Banner visible={false}>
-      Two line text string with two actions. One to two lines is preferable on
-      mobile.
-    </Banner>
+it('renders hidden banner, without action buttons and without image', async () => {
+  const tree = (
+    await render(
+      <Banner visible={false}>
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders visible banner, without action buttons and without image', () => {
-  const tree = render(
-    <Banner visible>
-      Two line text string with two actions. One to two lines is preferable on
-      mobile.
-    </Banner>
+it('renders visible banner, without action buttons and without image', async () => {
+  const tree = (
+    await render(
+      <Banner visible>
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders visible banner, with action buttons and without image', () => {
-  const tree = render(
-    <Banner
-      visible
-      actions={[
-        { label: 'first', onPress: () => {} },
-        { label: 'second', onPress: () => {} },
-      ]}
-    >
-      Two line text string with two actions. One to two lines is preferable on
-      mobile.
-    </Banner>
+it('renders visible banner, with action buttons and without image', async () => {
+  const tree = (
+    await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {} },
+          { label: 'second', onPress: () => {} },
+        ]}
+      >
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders visible banner, without action buttons and with image', () => {
-  const tree = render(
-    <Banner
-      visible
-      icon={({ size }) => (
-        <Image
-          source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
-          style={{ width: size, height: size }}
-          accessibilityIgnoresInvertColors
-        />
-      )}
-    >
-      Two line text string with two actions. One to two lines is preferable on
-      mobile.
-    </Banner>
+it('renders visible banner, without action buttons and with image', async () => {
+  const tree = (
+    await render(
+      <Banner
+        visible
+        icon={({ size }) => (
+          <Image
+            source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
+            style={{ width: size, height: size }}
+            accessibilityIgnoresInvertColors
+          />
+        )}
+      >
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders visible banner, with action buttons and with image', () => {
-  const tree = render(
-    <Banner
-      visible
-      icon={({ size }) => (
-        <Image
-          source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
-          style={{ width: size, height: size }}
-          accessibilityIgnoresInvertColors
-        />
-      )}
-      actions={[{ label: 'first', onPress: () => {} }]}
-    >
-      Two line text string with two actions. One to two lines is preferable on
-      mobile.
-    </Banner>
+it('renders visible banner, with action buttons and with image', async () => {
+  const tree = (
+    await render(
+      <Banner
+        visible
+        icon={({ size }) => (
+          <Image
+            source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
+            style={{ width: size, height: size }}
+            accessibilityIgnoresInvertColors
+          />
+        )}
+        actions={[{ label: 'first', onPress: () => {} }]}
+      >
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('render visible banner, with custom theme', () => {
-  const tree = render(
-    <Banner
-      visible
-      theme={{
-        colors: {
-          onSurface: '#00f',
-          surface: '#ccc',
-          primary: '#043',
-        },
-      }}
-      actions={[{ label: 'first', onPress: () => {} }]}
-    >
-      Custom theme
-    </Banner>
+it('render visible banner, with custom theme', async () => {
+  const tree = (
+    await render(
+      <Banner
+        visible
+        theme={{
+          colors: {
+            onSurface: '#00f',
+            surface: '#ccc',
+            primary: '#043',
+          },
+        }}
+        actions={[{ label: 'first', onPress: () => {} }]}
+      >
+        Custom theme
+      </Banner>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -135,8 +147,8 @@ describe('animations', () => {
 
   describe('when component is rendered hidden', () => {
     // This behaviour is probably a bug. Needs triage before next version.
-    it('will fire onHideAnimationFinished on mount', () => {
-      render(
+    it('will fire onHideAnimationFinished on mount', async () => {
+      await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -149,15 +161,15 @@ describe('animations', () => {
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).toHaveBeenCalled();
     });
 
-    it('should fire onShowAnimationFinished upon opening', () => {
-      const tree = render(
+    it('should fire onShowAnimationFinished upon opening', async () => {
+      const view = await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -167,13 +179,13 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(1);
 
-      tree.update(
+      await view.rerender(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -182,7 +194,7 @@ describe('animations', () => {
           Text
         </Banner>
       );
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -192,8 +204,8 @@ describe('animations', () => {
 
   describe('when component is rendered visible', () => {
     // This behaviour is probably a bug. Needs triage before next version.
-    it('will fire onShowAnimationFinished on mount', () => {
-      render(
+    it('will fire onShowAnimationFinished on mount', async () => {
+      await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -206,15 +218,15 @@ describe('animations', () => {
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
     });
 
-    it('should fire onHideAnimationFinished upon closing', () => {
-      const tree = render(
+    it('should fire onHideAnimationFinished upon closing', async () => {
+      const view = await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -224,13 +236,13 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
-      tree.update(
+      await view.rerender(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -239,7 +251,7 @@ describe('animations', () => {
           Text
         </Banner>
       );
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -248,8 +260,8 @@ describe('animations', () => {
   });
 
   describe('when the callbacks change while the component is mounted', () => {
-    it('should not cause another open/close animation', () => {
-      const tree = render(
+    it('should not cause another open/close animation', async () => {
+      const view = await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -259,7 +271,7 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -268,7 +280,7 @@ describe('animations', () => {
       const nextShowCallback = jest.fn();
       const nextHideCallback = jest.fn();
 
-      tree.update(
+      await view.rerender(
         <Banner
           onShowAnimationFinished={nextShowCallback}
           onHideAnimationFinished={nextHideCallback}
@@ -278,7 +290,7 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -287,8 +299,8 @@ describe('animations', () => {
       expect(nextHideCallback).toHaveBeenCalledTimes(0);
     });
 
-    it('should use the new callbacks upon opening/closing', () => {
-      const tree = render(
+    it('should use the new callbacks upon opening/closing', async () => {
+      const view = await render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -298,7 +310,7 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -307,7 +319,7 @@ describe('animations', () => {
       const nextShowCallback = jest.fn();
       const nextHideCallback = jest.fn();
 
-      tree.update(
+      await view.rerender(
         <Banner
           onShowAnimationFinished={nextShowCallback}
           onHideAnimationFinished={nextHideCallback}
@@ -317,7 +329,7 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -325,7 +337,7 @@ describe('animations', () => {
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(0);
 
-      tree.update(
+      await view.rerender(
         <Banner
           onShowAnimationFinished={nextShowCallback}
           onHideAnimationFinished={nextHideCallback}
@@ -335,7 +347,7 @@ describe('animations', () => {
         </Banner>
       );
 
-      act(() => {
+      await act(() => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
@@ -345,9 +357,9 @@ describe('animations', () => {
     });
   });
 
-  it('animated value changes correctly', () => {
+  it('animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    const { getByTestId } = render(
+    await render(
       <Banner
         visible
         testID="banner"
@@ -356,7 +368,7 @@ describe('animations', () => {
         Banner
       </Banner>
     );
-    expect(getByTestId('banner-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -366,11 +378,11 @@ describe('animations', () => {
       duration: 200,
     }).start();
 
-    act(() => {
+    await act(() => {
       jest.runAllTimers();
     });
 
-    expect(getByTestId('banner-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });

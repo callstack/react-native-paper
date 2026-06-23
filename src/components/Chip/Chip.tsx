@@ -358,8 +358,8 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                      ? (theme as Theme).colors.primary
-                      : iconColor
+                        ? (theme as Theme).colors.primary
+                        : iconColor
                   }
                   size={18}
                   theme={theme}

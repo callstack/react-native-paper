@@ -153,7 +153,6 @@ const AppbarContent = ({
 
   if (onPress) {
     return (
-      // eslint-disable-next-line react-native-a11y/has-accessibility-props
       <Pressable
         role="button"
         aria-disabled={disabled}
