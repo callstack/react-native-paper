@@ -62,12 +62,13 @@ test('current docs tree stays free of legacy docusaurus scaffold files', () => {
   );
 });
 
-test('theme layout does not append a second right-side version selector', () => {
+test('theme layout mounts the version selector inside the navbar', () => {
   const themeLayoutSource = read('theme/index.tsx');
 
   assert.match(themeLayoutSource, /PaperVersionSelector/);
   assert.match(themeLayoutSource, /VersionedPrereleaseNotice/);
-  assert.doesNotMatch(themeLayoutSource, /afterNavMenu/);
+  assert.match(themeLayoutSource, /afterNavMenu/);
+  assert.doesNotMatch(themeLayoutSource, /afterNav={<PaperVersionSelector \/>}/);
 });
 
 test('component prop metadata exists for both 5.x and 6.x', () => {

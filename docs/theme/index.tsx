@@ -24,7 +24,7 @@ const Layout = (props: LayoutProps) => (
         />
       </Fragment>
     }
-    afterNav={<PaperVersionSelector />}
+    afterNavMenu={<PaperVersionSelector />}
     afterOutline={false}
     beforeDocContent={<VersionedPrereleaseNotice />}
   />
