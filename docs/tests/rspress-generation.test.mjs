@@ -68,7 +68,10 @@ test('theme layout mounts the version selector inside the navbar', () => {
   assert.match(themeLayoutSource, /PaperVersionSelector/);
   assert.match(themeLayoutSource, /VersionedPrereleaseNotice/);
   assert.match(themeLayoutSource, /afterNavMenu/);
-  assert.doesNotMatch(themeLayoutSource, /afterNav={<PaperVersionSelector \/>}/);
+  assert.doesNotMatch(
+    themeLayoutSource,
+    /afterNav={<PaperVersionSelector \/>}/
+  );
 });
 
 test('component prop metadata exists for both 5.x and 6.x', () => {
