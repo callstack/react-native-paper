@@ -93,17 +93,52 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', async () => {
+  it('should apply top spacing to the dialog surface for a title-first dialog', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Title testID="dialog-title">
           <Text>Test Dialog Content</Text>
         </Dialog.Title>
       </Dialog>
     );
 
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
+    });
+  });
+
+  it('should apply top spacing to the dialog surface for a content-first dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Content testID="dialog-content">
+          <Text>Test Dialog Content</Text>
+        </Dialog.Content>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
-      marginTop: 24,
+      paddingBottom: 24,
+    });
+  });
+
+  it('should apply top spacing to the dialog surface for an icon-first dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Icon icon="alert" testID="dialog-icon" />
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      paddingTop: 0,
     });
   });
 });
@@ -133,11 +168,29 @@ describe('DialogActions', () => {
     const dialogActionButtons = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
+      gap: 8,
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(dialogActionButtons[0]).not.toHaveStyle({ marginRight: 8 });
+    expect(dialogActionButtons[1]).not.toHaveStyle({ marginRight: 0 });
+  });
+
+  it('should not inject button props into actions', async () => {
+    await render(
+      <Dialog.Actions testID="dialog-actions">
+        <Button>Cancel</Button>
+        <Button>Ok</Button>
+      </Dialog.Actions>
+    );
+
+    const dialogActionsContainer = screen.getByTestId('dialog-actions');
+    const [cancelButton, okButton] = dialogActionsContainer.props.children;
+
+    expect(cancelButton.props.compact).toBeUndefined();
+    expect(cancelButton.props.uppercase).toBeUndefined();
+    expect(okButton.props.compact).toBeUndefined();
+    expect(okButton.props.uppercase).toBeUndefined();
   });
 
   it('should apply custom styles', async () => {
