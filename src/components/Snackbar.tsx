@@ -284,7 +284,7 @@ const Snackbar = ({
     >
       <Surface
         pointerEvents="box-none"
-        accessibilityLiveRegion="polite"
+        aria-live="polite"
         theme={theme}
         style={[
           styles.container,
@@ -331,7 +331,7 @@ const Snackbar = ({
             ) : null}
             {isIconButton ? (
               <IconButton
-                accessibilityRole="button"
+                role="button"
                 borderless
                 onPress={onIconPress}
                 iconColor={colors.inverseOnSurface}
@@ -349,7 +349,7 @@ const Snackbar = ({
                     );
                   })
                 }
-                accessibilityLabel={iconAccessibilityLabel}
+                aria-label={iconAccessibilityLabel}
                 style={styles.icon}
                 testID={`${testID}-icon`}
               />

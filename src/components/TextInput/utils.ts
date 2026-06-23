@@ -611,19 +611,14 @@ export const getAccessibilityData = ({
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
-  const accessibilityState = {
-    disabled: isDisabled,
-    invalid: isInvalid,
-    ...props.accessibilityState,
-  } as const;
-
   return {
     input: {
       'aria-label': ariaLabel,
       'aria-valuemax': isCounterReached ? maxLength : undefined,
       'aria-valuenow': isCounterReached ? inputLength : undefined,
+      'aria-disabled': isDisabled,
+      'aria-invalid': isInvalid,
       accessibilityHint: hint,
-      accessibilityState,
     },
     supportingText: {
       'aria-hidden': isSupportingTextHidden,

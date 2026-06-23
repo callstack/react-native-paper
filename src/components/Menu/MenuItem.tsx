@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
-  AccessibilityState,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -95,11 +94,24 @@ export type Props = {
   /**
    * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state for the Touchable. This is read by the screen reader when the user taps the component.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
 };
 
 /**
@@ -137,8 +149,11 @@ const MenuItem = ({
   contentStyle,
   titleStyle,
   testID = 'menu-item',
-  accessibilityLabel,
-  accessibilityState,
+  'aria-label': ariaLabel,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
   hitSlop,
@@ -165,8 +180,6 @@ const MenuItem = ({
     ...(theme as Theme).fonts.bodyLarge,
   };
 
-  const newAccessibilityState = { ...accessibilityState, disabled };
-
   return (
     <TouchableRipple
       style={[
@@ -179,9 +192,13 @@ const MenuItem = ({
       disabled={disabled}
       testID={testID}
       background={background}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="menuitem"
-      accessibilityState={newAccessibilityState}
+      aria-label={ariaLabel}
+      role="menuitem"
+      aria-disabled={disabled}
+      aria-checked={ariaChecked}
+      aria-selected={ariaSelected}
+      aria-busy={ariaBusy}
+      aria-expanded={ariaExpanded}
       hitSlop={hitSlop}
     >
       <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -92,11 +91,24 @@ export type ShellProps = {
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state forwarded to the underlying button.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
   /**
    * Largest scale the label font can reach (auto-built content only).
    */
@@ -182,8 +194,11 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
-  accessibilityLabel = label,
-  accessibilityState,
+  'aria-label': ariaLabel = label,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -290,9 +305,12 @@ const Shell = ({
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={accessibilityState}
+          aria-label={ariaLabel}
+          role="button"
+          aria-checked={ariaChecked}
+          aria-selected={ariaSelected}
+          aria-busy={ariaBusy}
+          aria-expanded={ariaExpanded}
           testID={testID}
           style={[
             children ? styles.fill : null,

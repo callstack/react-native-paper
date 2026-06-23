@@ -57,7 +57,7 @@ export type TextInputColors = {
 };
 
 export type GetAccessibilityDataReturn = {
-  input: AccessibilityProps;
+  input: AccessibilityProps & { 'aria-invalid'?: boolean };
   supportingText: AccessibilityProps;
   counter: AccessibilityProps;
 };

@@ -34,7 +34,10 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the tab. This is read by the screen reader when the user focuses the tab.
+   */
+  'aria-label'?: string;
   testID?: string;
   lazy?: boolean;
 };
@@ -88,7 +91,7 @@ export type Props<Route extends BaseRoute> = {
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -131,7 +134,7 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` by default.
+   * Uses `route['aria-label']` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -305,8 +308,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
+  getAccessibilityLabel = ({ route }: { route: Route }) => route['aria-label'],
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -507,7 +509,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               maxWidth: maxTabBarWidth,
             },
           ]}
-          accessibilityRole={'tablist'}
+          role={'tablist'}
           testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
@@ -585,9 +587,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
-              accessibilityLabel: getAccessibilityLabel({ route }),
-              accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
-              accessibilityState: { selected: focused },
+              'aria-label': getAccessibilityLabel({ route }),
+              role: Platform.OS === 'ios' ? 'button' : 'tab',
+              'aria-selected': focused,
               style: [styles.item, styles.v3Item],
               children: (
                 <View

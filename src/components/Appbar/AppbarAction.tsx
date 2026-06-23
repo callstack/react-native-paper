@@ -32,7 +32,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -79,7 +79,7 @@ const AppbarAction = ({
   icon,
   disabled,
   onPress,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   isLeading,
   theme: themeOverrides,
   ref,
@@ -101,7 +101,7 @@ const AppbarAction = ({
       iconColor={actionIconColor}
       icon={icon}
       disabled={disabled}
-      accessibilityLabel={accessibilityLabel}
+      aria-label={ariaLabel}
       animated
       ref={ref}
       {...rest}

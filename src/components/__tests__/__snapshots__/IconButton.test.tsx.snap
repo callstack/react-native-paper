@@ -44,8 +44,6 @@ exports[`renders disabled icon button 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -54,12 +52,6 @@ exports[`renders disabled icon button 1`] = `
           "expanded": undefined,
           "selected": undefined,
         }
-      }
-      accessibilityTraits={
-        [
-          "button",
-          "disabled",
-        ]
       }
       accessibilityValue={
         {
@@ -90,6 +82,7 @@ exports[`renders disabled icon button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -193,8 +186,6 @@ exports[`renders icon button by default 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -204,7 +195,6 @@ exports[`renders icon button by default 1`] = `
           "selected": undefined,
         }
       }
-      accessibilityTraits="button"
       accessibilityValue={
         {
           "max": undefined,
@@ -234,6 +224,7 @@ exports[`renders icon button by default 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -337,8 +328,6 @@ exports[`renders icon button with color 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -348,7 +337,6 @@ exports[`renders icon button with color 1`] = `
           "selected": undefined,
         }
       }
-      accessibilityTraits="button"
       accessibilityValue={
         {
           "max": undefined,
@@ -378,6 +366,7 @@ exports[`renders icon button with color 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -481,8 +470,6 @@ exports[`renders icon button with size 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -492,7 +479,6 @@ exports[`renders icon button with size 1`] = `
           "selected": undefined,
         }
       }
-      accessibilityTraits="button"
       accessibilityValue={
         {
           "max": undefined,
@@ -522,6 +508,7 @@ exports[`renders icon button with size 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -625,8 +612,6 @@ exports[`renders icon change animated 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -636,7 +621,6 @@ exports[`renders icon change animated 1`] = `
           "selected": undefined,
         }
       }
-      accessibilityTraits="button"
       accessibilityValue={
         {
           "max": undefined,
@@ -666,6 +650,7 @@ exports[`renders icon change animated 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {

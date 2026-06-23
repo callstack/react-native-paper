@@ -51,7 +51,7 @@ export type MenuItemProps = {
   /**
    * Accessibility label. Falls back to `label`.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   testID?: string;
 };
 
@@ -67,7 +67,10 @@ export type MenuTriggerProps = {
   contentColor?: ColorValue;
   visible?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the trigger FAB.
+   */
+  'aria-label'?: string;
   testID?: string;
 };
 
@@ -206,7 +209,7 @@ const AnimatedItem = ({
         expanded ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       importantForAccessibility={expanded ? 'yes' : 'no-hide-descendants'}
-      accessibilityElementsHidden={!expanded}
+      aria-hidden={!expanded}
     >
       {children}
     </Animated.View>
@@ -219,7 +222,10 @@ type ItemProps = {
   variant: Variant;
   theme: InternalTheme;
   onPress: (e: GestureResponderEvent) => void;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label. Falls back to `label`.
+   */
+  'aria-label'?: string;
   testID?: string;
 };
 
@@ -235,7 +241,7 @@ const MenuItem = ({
   variant,
   theme,
   onPress,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   testID,
 }: ItemProps) => {
   const colors = resolveColors({ theme, variant });
@@ -261,8 +267,8 @@ const MenuItem = ({
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}
-          accessibilityRole="button"
-          accessibilityLabel={accessibilityLabel ?? label}
+          role="button"
+          aria-label={ariaLabel ?? label}
           style={[
             { borderRadius },
             Platform.OS === 'web' ? webNoOutline : null,
@@ -309,7 +315,10 @@ type MorphingTriggerProps = {
   visible: boolean;
   alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the trigger button.
+   */
+  'aria-label'?: string;
   theme: InternalTheme;
   testID?: string;
 };
@@ -326,7 +335,7 @@ const MorphingTrigger = ({
   visible,
   alignment,
   onPress,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   theme,
   testID,
 }: MorphingTriggerProps) => {
@@ -446,7 +455,7 @@ const MorphingTrigger = ({
         contentColor={triggerContentColor}
         visible={visible}
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={ariaLabel}
         widthShared={widthShared}
         heightShared={heightShared}
         borderRadiusShared={borderRadiusShared}
@@ -616,7 +625,7 @@ const Menu = ({
                   label={item.label}
                   variant={itemsVariant}
                   theme={theme}
-                  accessibilityLabel={item.accessibilityLabel ?? item.label}
+                  aria-label={item['aria-label'] ?? item.label}
                   onPress={handleItemPress(item)}
                   testID={item.testID}
                 />
@@ -636,7 +645,7 @@ const Menu = ({
           visible={triggerVisible}
           alignment={alignment}
           onPress={effectiveExpanded ? onDismiss : openOnPress}
-          accessibilityLabel={trigger.accessibilityLabel}
+          aria-label={trigger['aria-label']}
           theme={theme}
           testID={trigger.testID}
         />

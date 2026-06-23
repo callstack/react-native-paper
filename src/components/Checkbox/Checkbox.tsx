@@ -247,14 +247,12 @@ const Checkbox = ({
     rest.accessible === false
       ? {}
       : {
-          accessibilityRole: 'checkbox' as const,
-          accessibilityState: {
-            disabled: !!disabled,
-            checked: (status === 'indeterminate'
-              ? 'mixed'
-              : status === 'checked') as boolean | 'mixed',
-          },
-          accessibilityLiveRegion: 'polite' as const,
+          role: 'checkbox' as const,
+          'aria-disabled': !!disabled,
+          'aria-checked': (status === 'indeterminate'
+            ? 'mixed'
+            : status === 'checked') as boolean | 'mixed',
+          'aria-live': 'polite' as const,
         };
 
   return (

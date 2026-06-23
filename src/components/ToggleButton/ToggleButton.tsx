@@ -29,7 +29,7 @@ export type Props = {
   /**
    * Accessibility label for the `ToggleButton`. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -88,7 +88,7 @@ const ToggleButton = ({
   icon,
   size,
   theme: themeOverrides,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   disabled,
   style,
   value,
@@ -123,8 +123,9 @@ const ToggleButton = ({
               }
             }}
             size={size}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityState={{ disabled, selected: checked }}
+            aria-label={ariaLabel}
+            aria-disabled={disabled}
+            aria-selected={checked}
             disabled={disabled}
             style={[
               styles.content,

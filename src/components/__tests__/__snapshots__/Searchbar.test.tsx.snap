@@ -81,9 +81,7 @@ exports[`activity indicator snapshot test 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -93,7 +91,6 @@ exports[`activity indicator snapshot test 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -123,6 +120,7 @@ exports[`activity indicator snapshot test 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -181,11 +179,11 @@ exports[`activity indicator snapshot test 1`] = `
       </View>
     </View>
     <TextInput
-      accessibilityRole="search"
       keyboardAppearance="light"
       placeholder=""
       placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
+      role="searchbox"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -217,13 +215,9 @@ exports[`activity indicator snapshot test 1`] = `
       value=""
     />
     <View
-      accessibilityRole="progressbar"
-      accessibilityState={
-        {
-          "busy": true,
-        }
-      }
       accessible={true}
+      aria-busy={true}
+      role="progressbar"
       style={
         [
           {
@@ -499,9 +493,7 @@ exports[`renders with placeholder 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -511,7 +503,6 @@ exports[`renders with placeholder 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -541,6 +532,7 @@ exports[`renders with placeholder 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -599,11 +591,11 @@ exports[`renders with placeholder 1`] = `
       </View>
     </View>
     <TextInput
-      accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
       placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
+      role="searchbox"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -691,9 +683,7 @@ exports[`renders with placeholder 1`] = `
           testID="search-bar-clear-icon-container"
         >
           <View
-            accessibilityComponentType="button"
             accessibilityLabel="clear"
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -703,7 +693,6 @@ exports[`renders with placeholder 1`] = `
                 "selected": undefined,
               }
             }
-            accessibilityTraits="button"
             accessibilityValue={
               {
                 "max": undefined,
@@ -733,6 +722,7 @@ exports[`renders with placeholder 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -876,9 +866,7 @@ exports[`renders with text 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -888,7 +876,6 @@ exports[`renders with text 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -918,6 +905,7 @@ exports[`renders with text 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -976,11 +964,11 @@ exports[`renders with text 1`] = `
       </View>
     </View>
     <TextInput
-      accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
       placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
+      role="searchbox"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -1064,9 +1052,7 @@ exports[`renders with text 1`] = `
           testID="search-bar-clear-icon-container"
         >
           <View
-            accessibilityComponentType="button"
             accessibilityLabel="clear"
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1076,7 +1062,6 @@ exports[`renders with text 1`] = `
                 "selected": undefined,
               }
             }
-            accessibilityTraits="button"
             accessibilityValue={
               {
                 "max": undefined,
@@ -1106,6 +1091,7 @@ exports[`renders with text 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {

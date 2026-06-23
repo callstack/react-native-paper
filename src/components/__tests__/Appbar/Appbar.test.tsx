@@ -153,7 +153,7 @@ describe('renderAppbarContent', () => {
     );
   });
 
-  it('Is recognized as a header when no onPress callback has been pressed', async () => {
+  it('Is recognized as a heading when no onPress callback has been passed', async () => {
     await render(
       <SafeAreaProvider>
         <Appbar.Header>
@@ -162,7 +162,7 @@ describe('renderAppbarContent', () => {
       </SafeAreaProvider>
     );
 
-    expect(screen.getByRole('header')).toBeOnTheScreen();
+    expect(screen.getByRole('heading')).toBeOnTheScreen();
   });
   it('is recognized as a button when onPress callback has been passed', async () => {
     await render(
@@ -174,7 +174,7 @@ describe('renderAppbarContent', () => {
     );
 
     expect(screen.getByRole('button')).toBeEnabled();
-    expect(screen.queryByRole('header')).not.toBeOnTheScreen();
+    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
   });
   it('is recognized as a disabled button when onPress and disabled is passed', async () => {
     await render(
@@ -186,7 +186,7 @@ describe('renderAppbarContent', () => {
     );
 
     expect(screen.getByRole('button')).toBeDisabled();
-    expect(screen.queryByRole('header')).not.toBeOnTheScreen();
+    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
   });
 });
 

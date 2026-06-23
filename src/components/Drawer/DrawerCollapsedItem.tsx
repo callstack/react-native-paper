@@ -54,7 +54,7 @@ export type Props = ViewProps & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -102,7 +102,7 @@ const DrawerCollapsedItem = ({
   style,
   onPress,
   disabled,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
   labelMaxFontSizeMultiplier,
@@ -164,17 +164,13 @@ const DrawerCollapsedItem = ({
 
   return (
     <View {...rest}>
-      {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
       <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
         disabled={disabled}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={active ? ['button', 'selected'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ selected: active }}
-        accessibilityLabel={accessibilityLabel}
+        role="button"
+        aria-selected={active}
+        aria-label={ariaLabel}
         testID={testID}
       >
         <View style={styles.wrapper}>

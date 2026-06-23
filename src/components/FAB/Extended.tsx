@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -71,11 +70,24 @@ export type Props = {
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state forwarded to the underlying button.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -148,8 +160,11 @@ const Extended = ({
   expanded,
   visible = true,
   onPress,
-  accessibilityLabel = label,
-  accessibilityState,
+  'aria-label': ariaLabel = label,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   labelMaxFontSizeMultiplier,
   background,
   style,
@@ -239,8 +254,11 @@ const Extended = ({
         size={size}
         visible={visible}
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityState={accessibilityState}
+        aria-label={ariaLabel}
+        aria-checked={ariaChecked}
+        aria-selected={ariaSelected}
+        aria-busy={ariaBusy}
+        aria-expanded={ariaExpanded}
         background={background}
         widthShared={widthValue}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
@@ -253,7 +271,7 @@ const Extended = ({
         ref={offscreenLabelRef}
         style={styles.offscreenMeasure}
         importantForAccessibility="no-hide-descendants"
-        accessibilityElementsHidden
+        aria-hidden
       >
         <AnimatedText
           variant={dimensions.labelTypescale}

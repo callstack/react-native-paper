@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { I18nManager, TextInput as NativeTextInput, View } from 'react-native';
+import {
+  I18nManager,
+  StyleSheet,
+  TextInput as NativeTextInput,
+  View,
+} from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import {
@@ -22,6 +27,13 @@ import type {
 import type { TextInputAccessoryProps } from '../TextInput/TextInputIcon';
 
 const stateOpacity = tokens.md.sys.state.opacity;
+
+const styles = StyleSheet.create({
+  textInputStyle: {
+    fontSize: 40,
+    letterSpacing: 9,
+  },
+});
 
 const defaultI18nIsRTL = I18nManager.isRTL;
 const includeHiddenElements = { includeHiddenElements: true };
@@ -181,6 +193,7 @@ it('renders outlined TextInput with TextInput.Icon accessories when error is tru
 });
 
 it('fires onPress on TextInput.Icon end accessory', async () => {
+  const user = userEvent.setup();
   const onClear = jest.fn<(event: GestureResponderEvent) => void>();
   await render(
     <TextInput
@@ -195,13 +208,13 @@ it('fires onPress on TextInput.Icon end accessory', async () => {
           {...props}
           icon="close"
           onPress={onClear}
-          accessibilityLabel="Clear"
+          aria-label="Clear"
         />
       )}
     />
   );
 
-  await userEvent.press(screen.getAllByTestId('icon-button')[1]);
+  await user.press(screen.getByRole('button', { name: 'Clear' }));
 
   expect(onClear).toHaveBeenCalledTimes(1);
 });
@@ -222,11 +235,9 @@ it('disables TextInput.Icon when the field is disabled', async () => {
     />
   );
 
-  const buttons = screen.getAllByTestId('icon-button');
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(buttons[0].props.accessibilityState?.disabled).toBe(true);
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(buttons[1].props.accessibilityState?.disabled).toBe(true);
+  const buttons = screen.getAllByRole('button');
+  expect(buttons[0]).toBeDisabled();
+  expect(buttons[1]).toBeDisabled();
 });
 
 it('does not disable TextInput.Icon when the field is read-only (editable false)', async () => {
@@ -245,11 +256,9 @@ it('does not disable TextInput.Icon when the field is read-only (editable false)
     />
   );
 
-  const buttons = screen.getAllByTestId('icon-button');
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(buttons[0].props.accessibilityState?.disabled).not.toBe(true);
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(buttons[1].props.accessibilityState?.disabled).not.toBe(true);
+  const buttons = screen.getAllByRole('button');
+  expect(buttons[0]).toBeEnabled();
+  expect(buttons[1]).toBeEnabled();
 });
 
 it('renders supporting text below the field', async () => {
@@ -279,12 +288,8 @@ it('uses polite aria-live on error supporting text', async () => {
     />
   );
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByText('Invalid').props['aria-live']).toBe('polite');
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.accessibilityState?.invalid).toBe(
-    true
-  );
+  expect(screen.getByText('Invalid')).toHaveProp('aria-live', 'polite');
+  expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
 });
 
 it('marks the input invalid when error is true without supporting text', async () => {
@@ -298,14 +303,9 @@ it('marks the input invalid when error is true without supporting text', async (
     />
   );
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.accessibilityState?.invalid).toBe(
-    true
-  );
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('tf-input').props.accessibilityHint
-  ).toBeUndefined();
+  const input = screen.getByLabelText('Email');
+  expect(input).toHaveProp('aria-invalid', true);
+  expect(input).not.toHaveProp('accessibilityHint');
 });
 
 it('hides helper supporting text from the accessibility tree and omits aria-live', async () => {
@@ -319,18 +319,10 @@ it('hides helper supporting text from the accessibility tree and omits aria-live
     />
   );
 
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByText('Optional', includeHiddenElements).props['aria-hidden']
-  ).toBe(true);
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByText('Optional', includeHiddenElements).props['aria-live']
-  ).toBeUndefined();
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props['aria-label']).toBe(
-    'Email, Optional'
-  );
+  const supportingText = screen.getByText('Optional', includeHiddenElements);
+  expect(supportingText).toHaveProp('aria-hidden', true);
+  expect(supportingText).not.toHaveProp('aria-live');
+  expect(screen.getByLabelText('Email, Optional')).toBeOnTheScreen();
 });
 
 it('includes supporting text in aria-label when label is omitted', async () => {
@@ -343,10 +335,7 @@ it('includes supporting text in aria-label when label is omitted', async () => {
     />
   );
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props['aria-label']).toBe(
-    'Helper only'
-  );
+  expect(screen.getByLabelText('Helper only')).toBeOnTheScreen();
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {
@@ -360,13 +349,10 @@ it('does not mark the input as aria-disabled when editable is false (read-only)'
     />
   );
 
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('tf-input').props.accessibilityState?.disabled
-  ).not.toBe(true);
+  expect(screen.getByLabelText('Email')).toHaveProp('aria-disabled', false);
 });
 
-it('marks the input as disabled in accessibilityState when disabled is true', async () => {
+it('marks the input as aria-disabled when disabled is true', async () => {
   await render(
     <TextInput
       label="Email"
@@ -377,10 +363,7 @@ it('marks the input as disabled in accessibilityState when disabled is true', as
     />
   );
 
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('tf-input').props.accessibilityState?.disabled
-  ).toBe(true);
+  expect(screen.getByLabelText('Email')).toBeDisabled();
 });
 
 it('renders the input via render with merged props', async () => {
@@ -624,6 +607,7 @@ it('invokes onFocus and onBlur on the TextInput', async () => {
 });
 
 it('focuses the TextInput when the outer Pressable is pressed', async () => {
+  const user = userEvent.setup();
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
   const { root } = await render(
@@ -637,26 +621,28 @@ it('focuses the TextInput when the outer Pressable is pressed', async () => {
 
   expect(screen.getByTestId('tf-input')).toBeOnTheScreen();
 
-  await userEvent.press(getOuterTextInputPressable(root));
+  await user.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
 it('does not focus the TextInput when disabled and the Pressable is pressed', async () => {
+  const user = userEvent.setup();
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
   const { root } = await render(
     <TextInput label="Email" value="" onChangeText={() => {}} disabled />
   );
 
-  await userEvent.press(getOuterTextInputPressable(root));
+  await user.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).not.toHaveBeenCalled();
   focusSpy.mockRestore();
 });
 
 it('focuses the TextInput when read-only and the Pressable is pressed', async () => {
+  const user = userEvent.setup();
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
 
   const { root } = await render(
@@ -668,7 +654,7 @@ it('focuses the TextInput when read-only and the Pressable is pressed', async ()
     />
   );
 
-  await userEvent.press(getOuterTextInputPressable(root));
+  await user.press(getOuterTextInputPressable(root));
 
   expect(focusSpy).toHaveBeenCalled();
   focusSpy.mockRestore();
@@ -1182,7 +1168,7 @@ it('does not apply the TextInput style prop to prefix or suffix Text', async () 
       onChangeText={() => {}}
       prefix="$"
       suffix="]"
-      style={{ fontSize: 40, letterSpacing: 9 }}
+      style={styles.textInputStyle}
       testID="tf-input-style"
     />
   );
@@ -1217,6 +1203,7 @@ it('passes defaultValue to the native input when uncontrolled without counter', 
 
 it('updates the character counter for an uncontrolled field with counter enabled', async () => {
   const onChangeText = jest.fn();
+  const user = userEvent.setup();
   await render(
     <TextInput
       label="Bio"
@@ -1230,7 +1217,7 @@ it('updates the character counter for an uncontrolled field with counter enabled
 
   expect(screen.getByText('1/10')).toBeOnTheScreen();
 
-  await userEvent.type(screen.getByTestId('tf-uncontrolled-counter'), 'bcd');
+  await user.type(screen.getByTestId('tf-uncontrolled-counter'), 'bcd');
 
   expect(onChangeText).toHaveBeenCalledWith('abcd');
   expect(screen.getByText('4/10')).toBeOnTheScreen();

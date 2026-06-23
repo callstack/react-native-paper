@@ -39,27 +39,38 @@ describe('Switch render', () => {
   });
 });
 
+describe('Switch accessibility', () => {
+  it('has switch role', async () => {
+    await render(<Switch value={false} />);
+
+    expect(screen.getByRole('switch')).toBeOnTheScreen();
+  });
+});
+
 describe('Switch interaction', () => {
   it('toggles to true when off and pressed', async () => {
+    const user = userEvent.setup();
     const onValueChange = jest.fn();
     await render(<Switch value={false} onValueChange={onValueChange} />);
-    await userEvent.press(screen.getByRole('switch'));
+    await user.press(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledWith(true);
   });
 
   it('toggles to false when on and pressed', async () => {
+    const user = userEvent.setup();
     const onValueChange = jest.fn();
     await render(<Switch value onValueChange={onValueChange} />);
-    await userEvent.press(screen.getByRole('switch'));
+    await user.press(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledWith(false);
   });
 
   it('does not fire onValueChange when disabled', async () => {
+    const user = userEvent.setup();
     const onValueChange = jest.fn();
     await render(
       <Switch value={false} disabled onValueChange={onValueChange} />
     );
-    await userEvent.press(screen.getByRole('switch'));
+    await user.press(screen.getByRole('switch'));
     expect(onValueChange).not.toHaveBeenCalled();
   });
 });
