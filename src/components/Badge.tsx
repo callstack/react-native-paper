@@ -32,7 +32,9 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
  *
- * Variant is determined automatically: no children renders a 6dp dot; children renders a 16dp pill.
+ * The bagde is styled differently based on whether `children` is passed:
+ * - Small dot when it doesn't have `children` 
+ * - Larger pill when it has `children`
  *
  * ## Usage
  * ```js
