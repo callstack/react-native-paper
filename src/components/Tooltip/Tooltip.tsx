@@ -75,8 +75,6 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
@@ -122,7 +120,7 @@ const Tooltip = ({
       hideTooltipTimer.current = [];
     }
 
-    if (isWeb) {
+    if (Platform.OS === 'web') {
       let id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
@@ -132,7 +130,7 @@ const Tooltip = ({
       touched.current = true;
       setVisible(true);
     }
-  }, [isWeb, enterTouchDelay]);
+  }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
@@ -220,11 +218,11 @@ const Tooltip = ({
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
+        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
+          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
         })}
       </Pressable>
     </>

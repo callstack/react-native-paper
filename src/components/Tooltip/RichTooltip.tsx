@@ -128,8 +128,6 @@ const RichTooltip = ({
   contentMaxFontSizeMultiplier,
   theme: themeOverrides,
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
@@ -202,20 +200,22 @@ const RichTooltip = ({
   }, [clearHideTimers, enterTouchDelay]);
 
   // Trigger props handed to the consumer's render function.
-  const triggerProps: TooltipRichTriggerProps = isWeb
-    ? {
-        onHoverIn: handleHoverIn,
-        onHoverOut: scheduleHide,
-        onFocus: show,
-        onBlur: scheduleHide,
-      }
-    : { onPress: handlePress };
+  const triggerProps: TooltipRichTriggerProps =
+    Platform.OS === 'web'
+      ? {
+          onHoverIn: handleHoverIn,
+          onHoverOut: scheduleHide,
+          onFocus: show,
+          onBlur: scheduleHide,
+        }
+      : { onPress: handlePress };
 
   // Web only: keep the tooltip open while the pointer travels from the trigger
   // into the tooltip (and re-schedule the hide once it leaves the tooltip).
-  const tooltipHoverProps = isWeb
-    ? { onHoverIn: clearHideTimers, onHoverOut: scheduleHide }
-    : {};
+  const tooltipHoverProps =
+    Platform.OS === 'web'
+      ? { onHoverIn: clearHideTimers, onHoverOut: scheduleHide }
+      : {};
 
   return (
     <>
@@ -293,7 +293,7 @@ const RichTooltip = ({
         // trigger element (e.g. `IconButton`) doesn't reliably forward them.
         // On mobile the press handler stays on the trigger itself (via
         // `triggerProps` below) so the wrapper doesn't double-fire the toggle.
-        {...(isWeb ? triggerProps : null)}
+        {...(Platform.OS === 'web' ? triggerProps : null)}
       >
         {children(triggerProps)}
       </Pressable>
