@@ -57,7 +57,7 @@ it('renders extended FAB transitioning to collapsed', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('uses label as default accessibilityLabel', async () => {
+it('uses label as default aria-label', async () => {
   await render(
     <FAB.Extended
       icon="plus"
@@ -70,13 +70,13 @@ it('uses label as default accessibilityLabel', async () => {
   expect(screen.getByLabelText('New message')).toBeOnTheScreen();
 });
 
-it('respects explicit accessibilityLabel', async () => {
+it('respects explicit aria-label', async () => {
   await render(
     <FAB.Extended
       icon="plus"
       label="New message"
       expanded
-      accessibilityLabel="Create new message"
+      aria-label="Create new message"
       testID="extended-fab"
     />
   );
@@ -85,6 +85,7 @@ it('respects explicit accessibilityLabel', async () => {
 });
 
 it('calls onPress when pressed', async () => {
+  const user = userEvent.setup();
   const onPress = jest.fn();
   await render(
     <FAB.Extended
@@ -95,7 +96,7 @@ it('calls onPress when pressed', async () => {
       testID="extended-fab"
     />
   );
-  await userEvent.press(screen.getByTestId('extended-fab'));
+  await user.press(screen.getByRole('button', { name: 'New message' }));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
@@ -110,8 +111,12 @@ it('forwards event object to onPress', async () => {
       testID="extended-fab"
     />
   );
-  await fireEvent(screen.getByTestId('extended-fab'), 'onPress', {
-    key: 'value',
-  });
+  await fireEvent(
+    screen.getByRole('button', { name: 'New message' }),
+    'onPress',
+    {
+      key: 'value',
+    }
+  );
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });

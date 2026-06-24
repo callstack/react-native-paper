@@ -63,7 +63,7 @@ const DialogTitle = ({
   return (
     <Text
       variant="headlineSmall"
-      accessibilityRole="header"
+      role="heading"
       style={[styles.text, styles.v3Text, headerTextStyle, style]}
       {...rest}
     >

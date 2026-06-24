@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import type {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -47,11 +46,24 @@ export type Props = {
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state forwarded to the underlying button.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
   /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -110,8 +122,11 @@ const FAB = ({
   onPress,
   containerColor,
   contentColor,
-  accessibilityLabel,
-  accessibilityState,
+  'aria-label': ariaLabel,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   background,
   style,
   testID = 'floating-action-button',
@@ -127,8 +142,11 @@ const FAB = ({
     onPress={onPress}
     containerColor={containerColor}
     contentColor={contentColor}
-    accessibilityLabel={accessibilityLabel}
-    accessibilityState={accessibilityState}
+    aria-label={ariaLabel}
+    aria-checked={ariaChecked}
+    aria-selected={ariaSelected}
+    aria-busy={ariaBusy}
+    aria-expanded={ariaExpanded}
     background={background}
     style={style}
     testID={testID}

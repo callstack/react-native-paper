@@ -53,21 +53,13 @@ describe('Menu Item', () => {
     ).toBe(labelMaxFontSizeMultiplier);
   });
 
-  it('accepts different values for accessibilityState', async () => {
-    await render(
-      <Menu.Item
-        accessibilityState={{ checked: true }}
-        title="Option 1"
-        testID="touchable"
-      />
-    );
+  it('accepts aria-checked prop', async () => {
+    await render(<Menu.Item aria-checked={true} title="Option 1" />);
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('touchable').props.accessibilityState
-    ).toMatchObject({
-      checked: true,
-    });
+    expect(screen.getByRole('menuitem')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
   });
 });
 

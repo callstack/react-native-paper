@@ -329,7 +329,7 @@ exports[`DataTable.Header renders data table header 1`] = `
 
 exports[`DataTable.Pagination renders data table pagination 1`] = `
 <View
-  accessibilityLabel="pagination-container"
+  aria-label="pagination-container"
   style={
     [
       {
@@ -344,7 +344,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
   }
 >
   <Text
-    accessibilityLabel="label"
+    aria-label="label"
     numberOfLines={3}
     style={
       [
@@ -422,9 +422,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-left"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -434,7 +432,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -464,6 +461,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -564,9 +562,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-right"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -576,7 +572,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -606,6 +601,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -669,7 +665,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
 
 exports[`DataTable.Pagination renders data table pagination with fast-forward buttons 1`] = `
 <View
-  accessibilityLabel="pagination-container"
+  aria-label="pagination-container"
   style={
     [
       {
@@ -684,7 +680,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
   }
 >
   <Text
-    accessibilityLabel="label"
+    aria-label="label"
     numberOfLines={3}
     style={
       [
@@ -764,9 +760,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="page-first"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -776,7 +770,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -806,6 +799,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -906,9 +900,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-left"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -918,7 +910,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -948,6 +939,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1048,9 +1040,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-right"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -1060,7 +1050,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -1090,6 +1079,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1190,9 +1180,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="page-last"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -1202,7 +1190,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -1232,6 +1219,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1295,7 +1283,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
 
 exports[`DataTable.Pagination renders data table pagination with label 1`] = `
 <View
-  accessibilityLabel="pagination-container"
+  aria-label="pagination-container"
   style={
     [
       {
@@ -1310,7 +1298,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
   }
 >
   <Text
-    accessibilityLabel="label"
+    aria-label="label"
     numberOfLines={3}
     style={
       [
@@ -1390,9 +1378,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-left"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -1402,7 +1388,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -1432,6 +1417,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1532,9 +1518,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-right"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -1544,7 +1528,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -1574,6 +1557,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1637,7 +1621,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
 
 exports[`DataTable.Pagination renders data table pagination with options select 1`] = `
 <View
-  accessibilityLabel="pagination-container"
+  aria-label="pagination-container"
   style={
     [
       {
@@ -1652,7 +1636,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
   }
 >
   <View
-    accessibilityLabel="Options Select"
+    aria-label="Options Select"
     style={
       {
         "alignItems": "center",
@@ -1660,9 +1644,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         "marginVertical": 6,
       }
     }
+    testID="options-select"
   >
     <Text
-      accessibilityLabel="selectPageDropdownLabel"
+      aria-label="selectPageDropdownLabel"
       numberOfLines={3}
       style={
         [
@@ -1689,6 +1674,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           ],
         ]
       }
+      testID="select-page-dropdown-label"
     >
       Rows per page
     </Text>
@@ -1737,7 +1723,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           testID="button-container"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1767,6 +1752,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1898,7 +1884,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
     </View>
   </View>
   <Text
-    accessibilityLabel="label"
+    aria-label="label"
     numberOfLines={3}
     style={
       [
@@ -1978,9 +1964,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="page-first"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -1990,7 +1974,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2020,6 +2003,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -2120,9 +2104,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-left"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -2132,7 +2114,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2162,6 +2143,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -2262,9 +2244,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="chevron-right"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -2274,7 +2254,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2304,6 +2283,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -2404,9 +2384,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         testID="icon-button-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="page-last"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -2416,7 +2394,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2446,6 +2423,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {

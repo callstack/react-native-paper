@@ -49,7 +49,7 @@ export type Props = {
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Custom color for unchecked radio.
    */
@@ -149,7 +149,7 @@ const RadioButtonItem = ({
   status,
   theme: themeOverrides,
   background,
-  accessibilityLabel = label,
+  'aria-label': ariaLabel = label,
   testID,
   mode,
   position = 'trailing',
@@ -204,12 +204,10 @@ const RadioButtonItem = ({
               })
             }
             onLongPress={onLongPress}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityRole="radio"
-            accessibilityState={{
-              checked,
-              disabled,
-            }}
+            aria-label={ariaLabel}
+            role="radio"
+            aria-checked={checked}
+            aria-disabled={disabled}
             testID={testID}
             disabled={disabled}
             background={background}

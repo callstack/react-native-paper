@@ -245,7 +245,7 @@ const Searchbar = ({
       theme={theme}
     >
       <IconButton
-        accessibilityRole="button"
+        role="button"
         borderless
         onPress={onIconPress}
         iconColor={iconColor}
@@ -261,7 +261,7 @@ const Searchbar = ({
           ))
         }
         theme={theme}
-        accessibilityLabel={searchAccessibilityLabel}
+        aria-label={searchAccessibilityLabel}
         testID={`${testID}-icon`}
       />
       <TextInput
@@ -282,7 +282,7 @@ const Searchbar = ({
         underlineColorAndroid="transparent"
         returnKeyType="search"
         keyboardAppearance={dark ? 'dark' : 'light'}
-        accessibilityRole="search"
+        role="searchbox"
         ref={root}
         value={value}
         testID={testID}
@@ -308,7 +308,7 @@ const Searchbar = ({
         >
           <IconButton
             borderless
-            accessibilityLabel={clearAccessibilityLabel}
+            aria-label={clearAccessibilityLabel}
             iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
             onPress={handleClearPress}
             icon={
@@ -323,19 +323,19 @@ const Searchbar = ({
               ))
             }
             testID={`${testID}-clear-icon`}
-            accessibilityRole="button"
+            role="button"
             theme={theme}
           />
         </View>
       )}
       {shouldRenderTraileringIcon ? (
         <IconButton
-          accessibilityRole="button"
+          role="button"
           borderless
           onPress={onTraileringIconPress}
           iconColor={traileringIconColor || colors.onSurfaceVariant}
           icon={traileringIcon}
-          accessibilityLabel={traileringIconAccessibilityLabel}
+          aria-label={traileringIconAccessibilityLabel}
           testID={`${testID}-trailering-icon`}
         />
       ) : null}

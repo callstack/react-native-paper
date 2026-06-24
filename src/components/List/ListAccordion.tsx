@@ -120,7 +120,7 @@ export type Props = {
   /**
    * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * `pointerEvents` passed to the `View` container
    */
@@ -190,7 +190,7 @@ const ListAccordion = ({
   onLongPress,
   delayLongPress,
   expanded: expandedProp,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
@@ -249,9 +249,9 @@ const ListAccordion = ({
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          accessibilityRole="button"
-          accessibilityState={{ expanded: isExpanded }}
-          accessibilityLabel={accessibilityLabel}
+          role="button"
+          aria-expanded={isExpanded}
+          aria-label={ariaLabel}
           testID={testID}
           theme={theme}
           background={background}

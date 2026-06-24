@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -81,7 +80,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
    */
@@ -178,8 +177,8 @@ const Chip = ({
   selected = false,
   disabled = false,
   background,
-  accessibilityLabel,
-  accessibilityRole = 'button',
+  'aria-label': ariaLabel,
+  role = 'button',
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
@@ -263,11 +262,6 @@ const Chip = ({
     disabled,
   });
 
-  const accessibilityState: AccessibilityState = {
-    selected,
-    disabled,
-  };
-
   const elevationStyle = elevation;
   const multiplier = compact ? 1.5 : 2;
   const labelSpacings = {
@@ -312,9 +306,10 @@ const Chip = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={accessibilityState}
+        aria-label={ariaLabel}
+        role={role}
+        aria-selected={selected}
+        aria-disabled={disabled}
         testID={testID}
         theme={theme}
         hitSlop={hitSlop}
@@ -401,8 +396,8 @@ const Chip = ({
           <Pressable
             onPress={onClose}
             disabled={disabled}
-            accessibilityRole="button"
-            accessibilityLabel={closeIconAccessibilityLabel}
+            role="button"
+            aria-label={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
               {closeIcon ? (

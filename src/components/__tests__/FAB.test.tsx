@@ -38,6 +38,13 @@ it('renders FAB with tonalTertiary variant', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders FAB with aria-label', async () => {
+  const tree = (
+    await render(<FAB icon="plus" aria-label="Add item" />)
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders FAB medium size', async () => {
   const tree = (await render(<FAB icon="plus" size="medium" />)).toJSON();
   expect(tree).toMatchSnapshot();
@@ -64,13 +71,6 @@ it('renders FAB with containerColor and contentColor overrides', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with accessibilityLabel', async () => {
-  const tree = (
-    await render(<FAB icon="plus" accessibilityLabel="Add item" />)
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders FAB transitioning to not visible', async () => {
   const { rerender, toJSON } = await render(<FAB icon="plus" />);
   await rerender(<FAB icon="plus" visible={false} />);
@@ -86,15 +86,18 @@ it('renders FAB transitioning to visible', async () => {
 });
 
 it('calls onPress when FAB is pressed', async () => {
+  const user = userEvent.setup();
   const onPress = jest.fn();
-  await render(<FAB icon="plus" onPress={onPress} testID="fab" />);
-  await userEvent.press(screen.getByTestId('fab'));
+  await render(<FAB icon="plus" aria-label="Add item" onPress={onPress} />);
+  await user.press(screen.getByRole('button', { name: 'Add item' }));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
 it('forwards event object to onPress', async () => {
   const onPress = jest.fn();
-  await render(<FAB icon="plus" onPress={onPress} testID="fab" />);
-  await fireEvent(screen.getByTestId('fab'), 'onPress', { key: 'value' });
+  await render(<FAB icon="plus" aria-label="Add item" onPress={onPress} />);
+  await fireEvent(screen.getByRole('button', { name: 'Add item' }), 'onPress', {
+    key: 'value',
+  });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });

@@ -86,6 +86,12 @@ it('renders progress bar with full height on web', async () => {
   });
 });
 
+it('has progressbar role', async () => {
+  await render(<ProgressBar progress={0.5} />);
+
+  expect(screen.getByRole(a11yRole)).toBeOnTheScreen();
+});
+
 it('renders progress bar with custom style of filled part', async () => {
   await render(
     <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />

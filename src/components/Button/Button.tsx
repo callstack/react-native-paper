@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
-  AccessibilityRole,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
+  Role,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -80,7 +80,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
@@ -88,7 +88,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility role for the button. The "button" role is set by default.
    */
-  accessibilityRole?: AccessibilityRole;
+  role?: Role;
   /**
    * Function to execute on press.
    */
@@ -169,9 +169,9 @@ const Button = ({
   buttonColor: customButtonColor,
   textColor: customTextColor,
   children,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   accessibilityHint,
-  accessibilityRole = 'button',
+  role = 'button',
   hitSlop,
   onPress,
   onPressIn,
@@ -352,10 +352,10 @@ const Button = ({
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={ariaLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={{ disabled }}
+        role={role}
+        aria-disabled={disabled}
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}

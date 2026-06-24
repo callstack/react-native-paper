@@ -46,7 +46,7 @@ export type Props = ViewProps & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
@@ -94,7 +94,7 @@ const DrawerItem = ({
   style,
   onPress,
   background,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   right,
   labelMaxFontSizeMultiplier,
   hitSlop,
@@ -124,9 +124,9 @@ const DrawerItem = ({
           { backgroundColor, borderRadius },
           style,
         ]}
-        accessibilityRole="button"
-        accessibilityState={{ selected: active }}
-        accessibilityLabel={accessibilityLabel}
+        role="button"
+        aria-selected={active}
+        aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
       >
