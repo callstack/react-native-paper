@@ -11,7 +11,8 @@ import Animated from 'react-native-reanimated';
 
 import { useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
-import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
+import { getTooltipPosition } from './utils';
+import type { TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -82,15 +83,10 @@ const Tooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
 
-  const showTimer = React.useRef<NodeJS.Timeout | null>(null);
-  const hideTimer = React.useRef<NodeJS.Timeout | null>(null);
+  const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const touched = React.useRef(false);
-
-  const isValidChild = React.useMemo(
-    () => React.isValidElement<TooltipChildProps>(children),
-    [children]
-  );
 
   React.useEffect(() => {
     return () => {
@@ -117,7 +113,7 @@ const Tooltip = ({
       showTimer.current = setTimeout(() => {
         touched.current = true;
         setVisible(true);
-      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+      }, enterTouchDelay);
     } else {
       touched.current = true;
       setVisible(true);
@@ -130,35 +126,31 @@ const Tooltip = ({
       clearTimeout(showTimer.current);
       showTimer.current = null;
     }
-    hideTimer.current = setTimeout(
-      () => setVisible(false),
-      leaveTouchDelay
-    ) as unknown as NodeJS.Timeout;
+    hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 
   const handlePress = React.useCallback(() => {
     if (touched.current) {
       return null;
     }
-    if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
-    if (props.disabled) return null;
-    return props.onPress?.();
-  }, [children.props, isValidChild]);
+    if (!React.isValidElement<TooltipChildProps>(children)) return null;
+    if (children.props.disabled) return null;
+    return children.props.onPress?.();
+  }, [children]);
 
   const handleHoverIn = React.useCallback(() => {
     handleTouchStart();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverIn?.();
+    if (React.isValidElement<TooltipChildProps>(children)) {
+      children.props.onHoverIn?.();
     }
-  }, [children.props, handleTouchStart, isValidChild]);
+  }, [children, handleTouchStart]);
 
   const handleHoverOut = React.useCallback(() => {
     handleTouchEnd();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverOut?.();
+    if (React.isValidElement<TooltipChildProps>(children)) {
+      children.props.onHoverOut?.();
     }
-  }, [children.props, handleTouchEnd, isValidChild]);
+  }, [children, handleTouchEnd]);
 
   const mobilePressProps = {
     onPress: handlePress,
@@ -172,6 +164,10 @@ const Tooltip = ({
     onHoverOut: handleHoverOut,
   };
 
+  const childStyle = React.isValidElement<TooltipChildProps>(children)
+    ? children.props.style
+    : undefined;
+
   return (
     <>
       {rendered && (
@@ -182,11 +178,7 @@ const Tooltip = ({
               styles.tooltip,
               {
                 backgroundColor: theme.colors[Tokens.plain.container],
-                ...getTooltipPosition(
-                  measurement as Measurement,
-                  (children as React.ReactElement<TooltipChildProps>).props
-                    .style
-                ),
+                ...getTooltipPosition(measurement, childStyle),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
               fadeStyle,

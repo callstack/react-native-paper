@@ -21,9 +21,9 @@ import type { InternalTheme } from '../../types';
 export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
   const reduceMotion = useReduceMotion();
   const [rendered, setRendered] = React.useState(false);
-  const [measurement, setMeasurement] = React.useState({
-    children: {},
-    tooltip: {},
+  const [measurement, setMeasurement] = React.useState<Measurement>({
+    children: { pageX: 0, pageY: 0, width: 0, height: 0 },
+    tooltip: { x: 0, y: 0, width: 0, height: 0 },
     measured: false,
   });
   const childrenWrapperRef = React.useRef<View>(null);
@@ -69,9 +69,13 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
 
     const id = setTimeout(() => {
       setRendered(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
+      setMeasurement({
+        children: { pageX: 0, pageY: 0, width: 0, height: 0 },
+        tooltip: { x: 0, y: 0, width: 0, height: 0 },
+        measured: false,
+      });
       childrenMeasurement.current = null;
-    }, exitDuration) as unknown as NodeJS.Timeout;
+    }, exitDuration);
 
     return () => clearTimeout(id);
   }, [rendered, visible, exitDuration]);
@@ -100,7 +104,7 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     transitionTimingFunction: visible
       ? cubicBezier(...theme.motion.easing[Tokens.motion.enter.easing])
       : cubicBezier(...theme.motion.easing[Tokens.motion.exit.easing]),
-  } as const;
+  };
 
   return { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef };
 };

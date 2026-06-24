@@ -13,7 +13,6 @@ import Animated from 'react-native-reanimated';
 import { useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
-import type { Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -135,8 +134,8 @@ const RichTooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
 
-  const showTimer = React.useRef<NodeJS.Timeout | null>(null);
-  const hideTimer = React.useRef<NodeJS.Timeout | null>(null);
+  const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearShowTimer = React.useCallback(() => {
     if (showTimer.current) {
@@ -179,10 +178,7 @@ const RichTooltip = ({
 
   const scheduleHide = React.useCallback(() => {
     clearShowTimer();
-    hideTimer.current = setTimeout(
-      () => setVisible(false),
-      leaveTouchDelay
-    ) as unknown as NodeJS.Timeout;
+    hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [clearShowTimer, leaveTouchDelay]);
 
   // Mobile: a tap toggles the tooltip.
@@ -195,10 +191,7 @@ const RichTooltip = ({
   // Web: open on hover (with a short enter delay) and on keyboard focus.
   const handleHoverIn = React.useCallback(() => {
     clearHideTimer();
-    showTimer.current = setTimeout(
-      () => setVisible(true),
-      enterTouchDelay
-    ) as unknown as NodeJS.Timeout;
+    showTimer.current = setTimeout(() => setVisible(true), enterTouchDelay);
   }, [clearHideTimer, enterTouchDelay]);
 
   // Trigger props handed to the consumer's render function.
@@ -236,7 +229,7 @@ const RichTooltip = ({
             onLayout={onLayout}
             style={[
               styles.container,
-              getTooltipPosition(measurement as Measurement),
+              getTooltipPosition(measurement),
               fadeStyle,
             ]}
             testID="tooltip-rich-container"
