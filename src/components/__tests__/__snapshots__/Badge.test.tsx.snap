@@ -3,6 +3,7 @@
 exports[`renders badge 1`] = `
 <Text
   collapsable={false}
+  maxFontSizeMultiplier={1}
   numberOfLines={1}
   style={
     {
@@ -24,6 +25,7 @@ exports[`renders badge 1`] = `
 exports[`renders badge as hidden 1`] = `
 <Text
   collapsable={false}
+  maxFontSizeMultiplier={1}
   numberOfLines={1}
   style={
     {
@@ -54,6 +56,7 @@ exports[`renders badge as hidden 1`] = `
 exports[`renders badge in different color 1`] = `
 <Text
   collapsable={false}
+  maxFontSizeMultiplier={1}
   numberOfLines={1}
   style={
     {
@@ -84,6 +87,7 @@ exports[`renders badge in different color 1`] = `
 exports[`renders badge with content 1`] = `
 <Text
   collapsable={false}
+  maxFontSizeMultiplier={1}
   numberOfLines={1}
   style={
     {

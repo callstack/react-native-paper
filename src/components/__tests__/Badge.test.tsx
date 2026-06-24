@@ -48,6 +48,7 @@ it('applies large pill dimensions when children are present', async () => {
     minWidth: 16,
     paddingHorizontal: 4,
     fontSize: 11,
+    lineHeight: 16,
     borderRadius: 9999,
   });
 });

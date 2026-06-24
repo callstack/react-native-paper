@@ -264,6 +264,7 @@ exports[`allows customizing Route's type via generics 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -515,6 +516,7 @@ exports[`allows customizing Route's type via generics 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -988,6 +990,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -1179,6 +1182,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -1370,6 +1374,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -1722,6 +1727,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -1913,6 +1919,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -2104,6 +2111,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -2593,6 +2601,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -2904,6 +2913,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -3215,6 +3225,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -3526,6 +3537,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -3837,6 +3849,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -4314,6 +4327,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -4574,6 +4588,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -4834,6 +4849,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -5094,6 +5110,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -5354,6 +5371,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -5710,6 +5728,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -5896,6 +5915,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -6082,6 +6102,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -6434,6 +6455,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -6602,6 +6624,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -6770,6 +6793,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -6938,6 +6962,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -7106,6 +7131,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -7490,6 +7516,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -7801,6 +7828,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -8112,6 +8140,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -8589,6 +8618,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -8849,6 +8879,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -9109,6 +9140,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -9525,6 +9557,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -9836,6 +9869,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -10147,6 +10181,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -10624,6 +10659,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -10884,6 +10920,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -11144,6 +11181,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -11404,6 +11442,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {
@@ -11664,6 +11703,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     collapsable={false}
+                    maxFontSizeMultiplier={1}
                     numberOfLines={1}
                     style={
                       {

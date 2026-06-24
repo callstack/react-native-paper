@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, useWindowDimensions } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
@@ -32,8 +32,8 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
  *
- * The bagde is styled differently based on whether `children` is passed:
- * - Small dot when it doesn't have `children` 
+ * The badge is styled differently based on whether `children` is passed:
+ * - Small dot when it doesn't have `children`
  * - Larger pill when it has `children`
  *
  * ## Usage
@@ -59,8 +59,6 @@ const Badge = ({
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
-  const { fontScale } = useWindowDimensions();
-
   const isFirstRendering = React.useRef<boolean>(true);
 
   const {
@@ -93,6 +91,7 @@ const Badge = ({
   return (
     <Animated.Text
       numberOfLines={1}
+      maxFontSizeMultiplier={1}
       style={[
         {
           opacity,
@@ -105,7 +104,7 @@ const Badge = ({
             maxWidth: MAX_LARGE_WIDTH,
             paddingHorizontal: LARGE_PADDING,
             ...labelFont,
-            lineHeight: LARGE_SIZE / fontScale,
+            lineHeight: LARGE_SIZE,
           }),
         },
         styles.container,
