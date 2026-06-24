@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
 
-import {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { cubicBezier } from 'react-native-reanimated';
 
 import { Tokens } from './tokens';
 import type { Measurement } from './utils';
@@ -20,9 +14,9 @@ import type { InternalTheme } from '../../types';
  * Given a `visible` intent it keeps the tooltip mounted (`rendered`) through
  * the exit fade so the animation can play before unmounting, holds the opacity
  * at 0 until the tooltip has been measured (so it never flashes at the wrong
- * position), and honors the reduce-motion preference. The actual unmount is
- * deferred by the exit duration via a timer rather than a Reanimated callback,
- * which keeps the behavior deterministic and testable with fake timers.
+ * position), and honors the reduce-motion preference. The fade itself is a
+ * Reanimated CSS transition on `opacity`; the unmount is deferred by the exit
+ * duration via a timer, which keeps the behavior deterministic and testable.
  */
 export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
   const reduceMotion = useReduceMotion();
@@ -39,32 +33,12 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     null
   );
 
-  const opacity = useSharedValue(0);
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
-
-  const enterConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration[Tokens.motion.enter.duration],
-      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.enter.easing]),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion, reanimatedReduceMotion]
-  );
-  const exitConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration[Tokens.motion.exit.duration],
-      easing: Easing.bezier(...theme.motion.easing[Tokens.motion.exit.easing]),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion, reanimatedReduceMotion]
-  );
-  const exitDurationMs = reduceMotion
+  const enterDuration = reduceMotion
+    ? 0
+    : theme.motion.duration[Tokens.motion.enter.duration];
+  const exitDuration = reduceMotion
     ? 0
     : theme.motion.duration[Tokens.motion.exit.duration];
-
-  const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
 
   // Mount as soon as the tooltip is requested — derived during render rather
   // than synced from an effect.
@@ -87,34 +61,20 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     );
   }, [rendered, visible]);
 
-  // Drive the fade and defer unmount until the exit animation has played.
+  // Keep the tooltip mounted through the exit fade, then unmount.
   React.useEffect(() => {
-    if (!rendered) {
+    if (!rendered || visible) {
       return;
     }
 
-    if (visible) {
-      opacity.value = measurement.measured ? withTiming(1, enterConfig) : 0;
-      return;
-    }
-
-    opacity.value = withTiming(0, exitConfig);
     const id = setTimeout(() => {
       setRendered(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
       childrenMeasurement.current = null;
-    }, exitDurationMs) as unknown as NodeJS.Timeout;
+    }, exitDuration) as unknown as NodeJS.Timeout;
 
     return () => clearTimeout(id);
-  }, [
-    visible,
-    rendered,
-    measurement.measured,
-    opacity,
-    enterConfig,
-    exitConfig,
-    exitDurationMs,
-  ]);
+  }, [rendered, visible, exitDuration]);
 
   // The tooltip reports its own size on layout; combine it with the trigger
   // measurement captured above to compute the final position in one update.
@@ -130,5 +90,17 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     });
   };
 
-  return { rendered, measurement, animatedStyle, onLayout, childrenWrapperRef };
+  // A Reanimated CSS transition drives the fade — no shared values. Opacity is
+  // held at 0 until the tooltip has been measured so it never flashes at the
+  // wrong position; entering decelerates in, exiting accelerates out.
+  const fadeStyle = {
+    opacity: visible && measurement.measured ? 1 : 0,
+    transitionProperty: 'opacity',
+    transitionDuration: `${visible ? enterDuration : exitDuration}ms`,
+    transitionTimingFunction: visible
+      ? cubicBezier(...theme.motion.easing[Tokens.motion.enter.easing])
+      : cubicBezier(...theme.motion.easing[Tokens.motion.exit.easing]),
+  } as const;
+
+  return { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef };
 };

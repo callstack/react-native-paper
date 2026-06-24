@@ -81,7 +81,7 @@ const Tooltip = ({
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
-  const { rendered, measurement, animatedStyle, onLayout, childrenWrapperRef } =
+  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
 
   const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
@@ -200,7 +200,7 @@ const Tooltip = ({
                 ),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
-              animatedStyle,
+              fadeStyle,
             ]}
             testID="tooltip-container"
           >
