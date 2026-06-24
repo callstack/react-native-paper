@@ -135,25 +135,29 @@ const RichTooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
 
-  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const showTimer = React.useRef<NodeJS.Timeout | null>(null);
+  const hideTimer = React.useRef<NodeJS.Timeout | null>(null);
 
-  const clearShowTimers = React.useCallback(() => {
-    showTooltipTimer.current.forEach((t) => clearTimeout(t));
-    showTooltipTimer.current = [];
+  const clearShowTimer = React.useCallback(() => {
+    if (showTimer.current) {
+      clearTimeout(showTimer.current);
+      showTimer.current = null;
+    }
   }, []);
 
-  const clearHideTimers = React.useCallback(() => {
-    hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-    hideTooltipTimer.current = [];
+  const clearHideTimer = React.useCallback(() => {
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+      hideTimer.current = null;
+    }
   }, []);
 
   React.useEffect(() => {
     return () => {
-      clearShowTimers();
-      clearHideTimers();
+      clearShowTimer();
+      clearHideTimer();
     };
-  }, [clearShowTimers, clearHideTimers]);
+  }, [clearShowTimer, clearHideTimer]);
 
   React.useEffect(() => {
     const subscription = addEventListener(Dimensions, 'change', () =>
@@ -164,40 +168,38 @@ const RichTooltip = ({
   }, []);
 
   const show = React.useCallback(() => {
-    clearHideTimers();
+    clearHideTimer();
     setVisible(true);
-  }, [clearHideTimers]);
+  }, [clearHideTimer]);
 
   const hide = React.useCallback(() => {
-    clearShowTimers();
+    clearShowTimer();
     setVisible(false);
-  }, [clearShowTimers]);
+  }, [clearShowTimer]);
 
   const scheduleHide = React.useCallback(() => {
-    clearShowTimers();
-    const id = setTimeout(
+    clearShowTimer();
+    hideTimer.current = setTimeout(
       () => setVisible(false),
       leaveTouchDelay
     ) as unknown as NodeJS.Timeout;
-    hideTooltipTimer.current.push(id);
-  }, [clearShowTimers, leaveTouchDelay]);
+  }, [clearShowTimer, leaveTouchDelay]);
 
   // Mobile: a tap toggles the tooltip.
   const handlePress = React.useCallback(() => {
     setVisible((v) => !v);
-    clearShowTimers();
-    clearHideTimers();
-  }, [clearShowTimers, clearHideTimers]);
+    clearShowTimer();
+    clearHideTimer();
+  }, [clearShowTimer, clearHideTimer]);
 
   // Web: open on hover (with a short enter delay) and on keyboard focus.
   const handleHoverIn = React.useCallback(() => {
-    clearHideTimers();
-    const id = setTimeout(
+    clearHideTimer();
+    showTimer.current = setTimeout(
       () => setVisible(true),
       enterTouchDelay
     ) as unknown as NodeJS.Timeout;
-    showTooltipTimer.current.push(id);
-  }, [clearHideTimers, enterTouchDelay]);
+  }, [clearHideTimer, enterTouchDelay]);
 
   // Trigger props handed to the consumer's render function.
   const triggerProps: TooltipRichTriggerProps =
@@ -214,7 +216,7 @@ const RichTooltip = ({
   // into the tooltip (and re-schedule the hide once it leaves the tooltip).
   const tooltipHoverProps =
     Platform.OS === 'web'
-      ? { onHoverIn: clearHideTimers, onHoverOut: scheduleHide }
+      ? { onHoverIn: clearHideTimer, onHoverOut: scheduleHide }
       : {};
 
   return (

@@ -82,8 +82,8 @@ const Tooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
 
-  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const showTimer = React.useRef<NodeJS.Timeout | null>(null);
+  const hideTimer = React.useRef<NodeJS.Timeout | null>(null);
 
   const touched = React.useRef(false);
 
@@ -94,15 +94,8 @@ const Tooltip = ({
 
   React.useEffect(() => {
     return () => {
-      if (showTooltipTimer.current.length) {
-        showTooltipTimer.current.forEach((t) => clearTimeout(t));
-        showTooltipTimer.current = [];
-      }
-
-      if (hideTooltipTimer.current.length) {
-        hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-        hideTooltipTimer.current = [];
-      }
+      if (showTimer.current) clearTimeout(showTimer.current);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
     };
   }, []);
 
@@ -115,17 +108,16 @@ const Tooltip = ({
   }, []);
 
   const handleTouchStart = React.useCallback(() => {
-    if (hideTooltipTimer.current.length) {
-      hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-      hideTooltipTimer.current = [];
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+      hideTimer.current = null;
     }
 
     if (Platform.OS === 'web') {
-      let id = setTimeout(() => {
+      showTimer.current = setTimeout(() => {
         touched.current = true;
         setVisible(true);
       }, enterTouchDelay) as unknown as NodeJS.Timeout;
-      showTooltipTimer.current.push(id);
     } else {
       touched.current = true;
       setVisible(true);
@@ -134,15 +126,14 @@ const Tooltip = ({
 
   const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
-    if (showTooltipTimer.current.length) {
-      showTooltipTimer.current.forEach((t) => clearTimeout(t));
-      showTooltipTimer.current = [];
+    if (showTimer.current) {
+      clearTimeout(showTimer.current);
+      showTimer.current = null;
     }
-
-    let id = setTimeout(() => {
-      setVisible(false);
-    }, leaveTouchDelay) as unknown as NodeJS.Timeout;
-    hideTooltipTimer.current.push(id);
+    hideTimer.current = setTimeout(
+      () => setVisible(false),
+      leaveTouchDelay
+    ) as unknown as NodeJS.Timeout;
   }, [leaveTouchDelay]);
 
   const handlePress = React.useCallback(() => {
