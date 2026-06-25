@@ -56,7 +56,7 @@ it('applies large pill dimensions when children are present', async () => {
 it('clips oversized label via maxWidth', async () => {
   await render(<Badge testID="badge">9999999</Badge>);
 
-  expect(screen.getByTestId('badge')).toHaveStyle({ maxWidth: 34 });
+  expect(screen.getByTestId('badge')).toHaveStyle({ maxWidth: 36 });
 });
 
 it('does not apply typography or padding to dot badge', async () => {

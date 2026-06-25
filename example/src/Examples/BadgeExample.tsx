@@ -30,7 +30,7 @@ const BadgeExample = () => {
         <View style={styles.row}>
           <View style={styles.item}>
             <IconButton icon="palette-swatch" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge}>
+            <Badge visible={visible} style={styles.textBadge}>
               12
             </Badge>
           </View>
@@ -39,7 +39,7 @@ const BadgeExample = () => {
             <Badge
               visible={visible}
               style={[
-                styles.badge,
+                styles.textBadge,
                 {
                   backgroundColor: Palette.primary80,
                 },
@@ -54,11 +54,11 @@ const BadgeExample = () => {
         <View style={styles.row}>
           <View style={styles.item}>
             <IconButton icon="book-open" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} />
+            <Badge visible={visible} style={styles.dotBadge} />
           </View>
           <View style={styles.item}>
             <IconButton icon="receipt" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} />
+            <Badge visible={visible} style={styles.dotBadge} />
           </View>
         </View>
       </List.Section>
@@ -79,10 +79,15 @@ const styles = StyleSheet.create({
   button: {
     opacity: 0.6,
   },
-  badge: {
+  textBadge: {
     position: 'absolute',
-    top: 4,
-    right: 0,
+    top: 12,
+    left: 38,
+  },
+  dotBadge: {
+    position: 'absolute',
+    top: 14,
+    right: 14,
   },
   label: {
     flex: 1,

@@ -8,7 +8,7 @@ import type { ThemeProp } from '../types';
 
 const SMALL_SIZE = 6;
 const LARGE_SIZE = 16;
-const MAX_LARGE_WIDTH = 34;
+const MAX_LARGE_WIDTH = 36;
 const LARGE_PADDING = 4;
 
 export type Props = React.ComponentProps<typeof Animated.Text> & {
