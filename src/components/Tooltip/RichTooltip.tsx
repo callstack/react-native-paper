@@ -282,6 +282,7 @@ const RichTooltip = ({
       )}
       <Pressable
         ref={childrenWrapperRef}
+        collapsable={false}
         style={styles.pressContainer}
         testID="tooltip-rich-trigger"
         // On web the wrapper carries the hover/focus handlers because the

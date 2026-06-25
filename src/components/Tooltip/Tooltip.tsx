@@ -180,6 +180,7 @@ const Tooltip = ({
       )}
       <Pressable
         ref={childrenWrapperRef}
+        collapsable={false}
         style={styles.pressContainer}
         {...(Platform.OS === 'web' ? triggerProps : null)}
       >
