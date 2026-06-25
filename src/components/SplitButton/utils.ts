@@ -10,7 +10,7 @@ import {
 } from './tokens';
 import { tokens } from '../../theme/tokens';
 import { cornerFull } from '../../theme/tokens/sys/shape';
-import type { InternalTheme, Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -32,7 +32,7 @@ export const normalizeSplitButtonMode = (
 export const resolveSplitButtonCorner = (
   theme: InternalTheme,
   key: SplitButtonShapeKey
-) => (key === 'full' ? cornerFull : (theme as Theme).shapes.corner[key]);
+) => (key === 'full' ? cornerFull : theme.shapes.corner[key]);
 
 export const getSplitButtonSizeStyle = ({
   size,
@@ -65,7 +65,7 @@ const getSplitButtonContainerColor = ({
   disabled?: boolean;
   customButtonColor?: ColorValue;
 }) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   if (customButtonColor && !disabled) {
     return customButtonColor;
@@ -101,7 +101,7 @@ const getSplitButtonContentColor = ({
   disabled?: boolean;
   customTextColor?: ColorValue;
 }) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   if (customTextColor && !disabled) {
     return customTextColor;
@@ -157,7 +157,7 @@ export const getSplitButtonColors = ({
   return {
     containerColor,
     contentColor,
-    borderColor: isOutlined ? (theme as Theme).colors.outline : 'transparent',
+    borderColor: isOutlined ? theme.colors.outlineVariant : 'transparent',
     borderWidth: isOutlined ? 1 : 0,
     containerOpacity:
       disabled && normalizedMode !== 'outlined'

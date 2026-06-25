@@ -103,6 +103,7 @@ export const splitButtonSizeTokens: Record<
 export const splitButtonMinInteractiveSize = 48;
 
 export const splitButtonElevation = {
+  disabled: 0,
   enabled: 1,
   pressed: 2,
 } as const;
