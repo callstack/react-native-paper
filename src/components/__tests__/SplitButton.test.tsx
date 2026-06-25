@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { PlatformColor, StyleSheet } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 
@@ -10,6 +10,7 @@ import {
   getSplitButtonColors,
   getSplitButtonHitSlop,
   getSplitButtonLeadingShape,
+  getSplitButtonRippleColor,
   getSplitButtonSizeStyle,
   getSplitButtonTrailingShape,
   normalizeSplitButtonMode,
@@ -27,10 +28,21 @@ const styles = StyleSheet.create({
   },
 });
 
-it('renders a filled split button by default', () => {
-  const { getByTestId } = render(
-    <SplitButton label="Send" onPress={() => {}} onTrailingPress={() => {}} />
+const renderSplitButton = (
+  props: Partial<React.ComponentProps<typeof SplitButton>> = {}
+) =>
+  render(
+    <SplitButton
+      testID="split-button"
+      label="Send"
+      onPress={() => {}}
+      onTrailingPress={() => {}}
+      {...props}
+    />
   );
+
+it('renders a filled split button by default', () => {
+  const { getByTestId } = renderSplitButton();
 
   expect(getByTestId('split-button-label')).toHaveTextContent('Send');
   expect(getByTestId('split-button-container')).toHaveStyle({
@@ -43,13 +55,7 @@ it('renders a filled split button by default', () => {
 it('calls leading and trailing press handlers separately', () => {
   const onPress = jest.fn();
   const onTrailingPress = jest.fn();
-  const { getByTestId } = render(
-    <SplitButton
-      label="Send"
-      onPress={onPress}
-      onTrailingPress={onTrailingPress}
-    />
-  );
+  const { getByTestId } = renderSplitButton({ onPress, onTrailingPress });
 
   fireEvent.press(getByTestId('split-button-leading'));
   fireEvent.press(getByTestId('split-button-trailing'));
@@ -65,17 +71,14 @@ it('calls leading and trailing press-in and press-out handlers separately', () =
   const onTrailingPress = jest.fn();
   const onTrailingPressIn = jest.fn();
   const onTrailingPressOut = jest.fn();
-  const { getByTestId } = render(
-    <SplitButton
-      label="Send"
-      onPress={onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      onTrailingPress={onTrailingPress}
-      onTrailingPressIn={onTrailingPressIn}
-      onTrailingPressOut={onTrailingPressOut}
-    />
-  );
+  const { getByTestId } = renderSplitButton({
+    onPress,
+    onPressIn,
+    onPressOut,
+    onTrailingPress,
+    onTrailingPressIn,
+    onTrailingPressOut,
+  });
 
   fireEvent(getByTestId('split-button-leading'), 'onPressIn');
   fireEvent(getByTestId('split-button-leading'), 'onPressOut');
@@ -88,41 +91,22 @@ it('calls leading and trailing press-in and press-out handlers separately', () =
   expect(onTrailingPressOut).toHaveBeenCalledTimes(1);
 });
 
-it('uses pressed inner-corner tokens for the active side', () => {
+it('uses resting inner-corner tokens for both sides', () => {
   const theme = getTheme();
-  const { getByTestId } = render(
-    <SplitButton label="Send" onPress={() => {}} onTrailingPress={() => {}} />
-  );
-
-  fireEvent(getByTestId('split-button-leading'), 'onPressIn');
+  const { getByTestId } = renderSplitButton();
 
   expect(getByTestId('split-button-leading-container')).toHaveStyle({
-    borderTopEndRadius: theme.shapes.corner.medium,
-    borderBottomEndRadius: theme.shapes.corner.medium,
+    borderTopEndRadius: theme.shapes.corner.extraSmall,
+    borderBottomEndRadius: theme.shapes.corner.extraSmall,
   });
   expect(getByTestId('split-button-trailing-container')).toHaveStyle({
     borderTopStartRadius: theme.shapes.corner.extraSmall,
     borderBottomStartRadius: theme.shapes.corner.extraSmall,
   });
-
-  fireEvent(getByTestId('split-button-leading'), 'onPressOut');
-  fireEvent(getByTestId('split-button-trailing'), 'onPressIn');
-
-  expect(getByTestId('split-button-trailing-container')).toHaveStyle({
-    borderTopStartRadius: theme.shapes.corner.medium,
-    borderBottomStartRadius: theme.shapes.corner.medium,
-  });
 });
 
 it('marks both press targets disabled when disabled', () => {
-  const { getByTestId } = render(
-    <SplitButton
-      label="Send"
-      disabled
-      onPress={() => {}}
-      onTrailingPress={() => {}}
-    />
-  );
+  const { getByTestId } = renderSplitButton({ disabled: true });
 
   expect(getByTestId('split-button-leading').props.accessibilityState).toEqual({
     disabled: true,
@@ -135,16 +119,11 @@ it('marks both press targets disabled when disabled', () => {
 });
 
 it('passes custom styles to the correct target', () => {
-  const { getByTestId } = render(
-    <SplitButton
-      label="Send"
-      onPress={() => {}}
-      onTrailingPress={() => {}}
-      leadingButtonStyle={styles.leading}
-      trailingButtonStyle={styles.trailing}
-      labelStyle={styles.label}
-    />
-  );
+  const { getByTestId } = renderSplitButton({
+    leadingButtonStyle: styles.leading,
+    trailingButtonStyle: styles.trailing,
+    labelStyle: styles.label,
+  });
 
   expect(getByTestId('split-button-leading-container')).toHaveStyle(
     styles.leading
@@ -156,20 +135,25 @@ it('passes custom styles to the correct target', () => {
 });
 
 it('merges trailing accessibility state with expanded state', () => {
-  const { getByTestId } = render(
-    <SplitButton
-      label="Send"
-      onPress={() => {}}
-      onTrailingPress={() => {}}
-      trailingAccessibilityState={{ expanded: true }}
-    />
-  );
+  const { getByTestId } = renderSplitButton({
+    trailingAccessibilityState: { expanded: true },
+  });
 
   expect(
     getByTestId('split-button-trailing').props.accessibilityState
   ).toMatchObject({
     expanded: true,
   });
+});
+
+it('does not add SplitButton test IDs unless testID is provided', () => {
+  const { queryByTestId } = render(
+    <SplitButton label="Send" onPress={() => {}} onTrailingPress={() => {}} />
+  );
+
+  expect(queryByTestId('split-button-container')).toBeNull();
+  expect(queryByTestId('split-button-leading')).toBeNull();
+  expect(queryByTestId('split-button-trailing')).toBeNull();
 });
 
 describe('SplitButton utils', () => {
@@ -192,8 +176,26 @@ describe('SplitButton utils', () => {
       theme.colors.primary
     );
     expect(getSplitButtonColors({ theme, mode: 'outlined' }).borderColor).toBe(
-      theme.colors.outline
+      theme.colors.outlineVariant
     );
+  });
+
+  it('resolves ripple colors from overrides, string content colors, and opaque colors', () => {
+    const theme = getTheme();
+    const customRippleColor = 'rgba(1, 2, 3, 0.4)';
+
+    expect(
+      getSplitButtonRippleColor({
+        contentColor: theme.colors.primary,
+        customRippleColor,
+      })
+    ).toBe(customRippleColor);
+    expect(
+      getSplitButtonRippleColor({ contentColor: theme.colors.primary })
+    ).toBe('rgba(103, 80, 164, 0.1)');
+    expect(
+      getSplitButtonRippleColor({ contentColor: PlatformColor('label') })
+    ).toBeUndefined();
   });
 
   it('resolves per-size tokens against theme shape values', () => {
