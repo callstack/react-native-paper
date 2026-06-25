@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
-import type { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextProps, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import Animated from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
 import { cornerFull } from '../theme/tokens/sys/shape';
@@ -11,7 +12,7 @@ const LARGE_SIZE = 16;
 const MAX_LARGE_WIDTH = 36;
 const LARGE_PADDING = 4;
 
-export type Props = React.ComponentProps<typeof Animated.Text> & {
+export type Props = TextProps & {
   /**
    * Whether the badge is visible
    */
@@ -21,7 +22,6 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
    */
   children?: string | number;
   style?: StyleProp<TextStyle>;
-  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
@@ -56,31 +56,10 @@ const Badge = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
-  );
-  const isFirstRendering = React.useRef<boolean>(true);
 
   const {
     animation: { scale },
   } = theme;
-
-  React.useEffect(() => {
-    // Do not run animation on very first rendering
-    if (isFirstRendering.current) {
-      isFirstRendering.current = false;
-      return;
-    }
-
-    Animated.timing(opacity, {
-      toValue: visible ? 1 : 0,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
-  }, [visible, opacity, scale]);
-
-  const { backgroundColor = theme.colors.error, ...restStyle } =
-    (StyleSheet.flatten(style) || {}) as TextStyle;
 
   const textColor = theme.colors.onError;
 
@@ -88,27 +67,35 @@ const Badge = ({
   const badgeSize = isLarge ? LARGE_SIZE : SMALL_SIZE;
   const labelFont = theme.fonts.labelSmall;
 
+  const transitionStyle = {
+    opacity: visible ? 1 : 0,
+    transitionDuration: 150 * scale,
+    transitionProperty: 'opacity',
+  };
+
   return (
     <Animated.Text
       numberOfLines={1}
-      maxFontSizeMultiplier={1}
+      allowFontScaling={false}
       style={[
+        styles.container,
+        transitionStyle,
         {
-          opacity,
-          backgroundColor,
+          backgroundColor: theme.colors.error,
           color: textColor,
           borderRadius: cornerFull,
           height: badgeSize,
           minWidth: badgeSize,
-          ...(isLarge && {
+        },
+        isLarge && [
+          labelFont,
+          {
+            lineHeight: LARGE_SIZE,
             maxWidth: MAX_LARGE_WIDTH,
             paddingHorizontal: LARGE_PADDING,
-            ...labelFont,
-            lineHeight: LARGE_SIZE,
-          }),
-        },
-        styles.container,
-        restStyle,
+          },
+        ],
+        style,
       ]}
       {...rest}
     >
