@@ -18,7 +18,7 @@ import PaperProvider from '../../core/PaperProvider';
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import TooltipCompound from '../Tooltip';
-import Tooltip from '../Tooltip/Tooltip';
+import Tooltip, { type TooltipTriggerProps } from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
 
@@ -31,10 +31,11 @@ jest.mock('../../utils/addEventListener', () => ({
 const DummyComponent = ({
   ref,
   ...props
-}: ViewProps & {
-  ref?: React.RefObject<View | null>;
-}) => (
-  <View {...props} ref={ref}>
+}: ViewProps &
+  TooltipTriggerProps & {
+    ref?: React.RefObject<View | null>;
+  }) => (
+  <View {...(props as any)} ref={ref}>
     <Text>dummy component</Text>
   </View>
 );
@@ -68,7 +69,7 @@ describe('Tooltip', () => {
     measure = {}
   ) => {
     const defaultProps = {
-      children: <DummyComponent />,
+      children: (props: TooltipTriggerProps) => <DummyComponent {...props} />,
       title: 'some tooltip text',
       ...propOverrides,
     };

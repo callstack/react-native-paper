@@ -12,18 +12,36 @@ import Animated from 'react-native-reanimated';
 import { useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
-import type { TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
+/**
+ * Props passed to the `children` render function. Spread them onto the trigger
+ * element (and merge with your own handlers when you have them).
+ */
+export type TooltipTriggerProps = {
+  onLongPress?: () => void;
+  onPressOut?: () => void;
+  delayLongPress?: number;
+  onHoverIn?: () => void;
+  onHoverOut?: () => void;
+};
+
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Render function returning the trigger element. The provided props wire the
+   * tooltip's show/hide behavior and must be spread onto the returned element:
+   *
+   * ```js
+   * <Tooltip title="Selected Camera">
+   *   {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
+   * </Tooltip>
+   * ```
    */
-  children: React.ReactElement;
+  children: (props: TooltipTriggerProps) => React.ReactElement;
   /**
    * The number of milliseconds a user must touch the element before showing the tooltip.
    */
@@ -60,7 +78,7 @@ export type Props = {
  *
  * const MyComponent = () => (
  *   <Tooltip title="Selected Camera">
- *     <IconButton icon="camera" selected size={24} onPress={() => {}} />
+ *     {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
  *   </Tooltip>
  * );
  *
@@ -74,7 +92,6 @@ const Tooltip = ({
   title,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
-  ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
@@ -85,8 +102,6 @@ const Tooltip = ({
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const touched = React.useRef(false);
 
   React.useEffect(() => {
     return () => {
@@ -110,18 +125,13 @@ const Tooltip = ({
     }
 
     if (Platform.OS === 'web') {
-      showTimer.current = setTimeout(() => {
-        touched.current = true;
-        setVisible(true);
-      }, enterTouchDelay);
+      showTimer.current = setTimeout(() => setVisible(true), enterTouchDelay);
     } else {
-      touched.current = true;
       setVisible(true);
     }
   }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
-    touched.current = false;
     if (showTimer.current) {
       clearTimeout(showTimer.current);
       showTimer.current = null;
@@ -129,44 +139,14 @@ const Tooltip = ({
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 
-  const handlePress = React.useCallback(() => {
-    if (touched.current) {
-      return null;
-    }
-    if (!React.isValidElement<TooltipChildProps>(children)) return null;
-    if (children.props.disabled) return null;
-    return children.props.onPress?.();
-  }, [children]);
-
-  const handleHoverIn = React.useCallback(() => {
-    handleTouchStart();
-    if (React.isValidElement<TooltipChildProps>(children)) {
-      children.props.onHoverIn?.();
-    }
-  }, [children, handleTouchStart]);
-
-  const handleHoverOut = React.useCallback(() => {
-    handleTouchEnd();
-    if (React.isValidElement<TooltipChildProps>(children)) {
-      children.props.onHoverOut?.();
-    }
-  }, [children, handleTouchEnd]);
-
-  const mobilePressProps = {
-    onPress: handlePress,
-    onLongPress: () => handleTouchStart(),
-    onPressOut: () => handleTouchEnd(),
-    delayLongPress: enterTouchDelay,
-  };
-
-  const webPressProps = {
-    onHoverIn: handleHoverIn,
-    onHoverOut: handleHoverOut,
-  };
-
-  const childStyle = React.isValidElement<TooltipChildProps>(children)
-    ? children.props.style
-    : undefined;
+  const triggerProps: TooltipTriggerProps =
+    Platform.OS === 'web'
+      ? { onHoverIn: handleTouchStart, onHoverOut: handleTouchEnd }
+      : {
+          onLongPress: handleTouchStart,
+          onPressOut: handleTouchEnd,
+          delayLongPress: enterTouchDelay,
+        };
 
   return (
     <>
@@ -178,7 +158,7 @@ const Tooltip = ({
               styles.tooltip,
               {
                 backgroundColor: theme.colors[Tokens.plain.container],
-                ...getTooltipPosition(measurement, childStyle),
+                ...getTooltipPosition(measurement),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
               fadeStyle,
@@ -201,12 +181,9 @@ const Tooltip = ({
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}
-        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
+        {...(Platform.OS === 'web' ? triggerProps : null)}
       >
-        {React.cloneElement(children, {
-          ...rest,
-          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
-        })}
+        {children(triggerProps)}
       </Pressable>
     </>
   );
