@@ -681,11 +681,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     </Animated.View>
                     <View style={[styles.badgeContainer, badgeStyle]}>
                       {typeof badge === 'boolean' ? (
-                        <Badge visible={badge} size={6} />
+                        <Badge visible={badge} />
                       ) : (
-                        <Badge visible={badge != null} size={16}>
-                          {badge}
-                        </Badge>
+                        <Badge visible={badge != null}>{badge}</Badge>
                       )}
                     </View>
                   </Animated.View>

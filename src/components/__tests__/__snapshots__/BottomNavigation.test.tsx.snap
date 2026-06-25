@@ -263,24 +263,31 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -517,24 +524,31 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -993,24 +1007,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1187,24 +1208,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1381,24 +1409,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1736,24 +1771,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1930,24 +1972,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -2124,24 +2173,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -2616,24 +2672,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -2930,24 +2993,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3244,24 +3314,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3558,24 +3635,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3872,24 +3956,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4352,24 +4443,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4615,24 +4713,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4878,24 +4983,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5141,24 +5253,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5404,24 +5523,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5763,24 +5889,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5952,24 +6085,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6141,24 +6281,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6496,24 +6643,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6667,24 +6821,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6838,24 +6999,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7009,24 +7177,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7180,24 +7355,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7567,24 +7749,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7881,24 +8070,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8195,24 +8391,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8675,24 +8878,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8938,24 +9148,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -9201,24 +9418,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -9620,24 +9844,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -9934,24 +10165,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10248,24 +10486,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10728,24 +10973,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10991,24 +11243,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11254,24 +11513,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11517,24 +11783,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11780,24 +12053,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>

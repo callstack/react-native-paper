@@ -1,13 +1,18 @@
-import * as React from 'react';
-import { Animated, StyleSheet, useWindowDimensions } from 'react-native';
-import type { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextProps, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import Animated from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
+import { cornerFull } from '../theme/tokens/sys/shape';
 import type { ThemeProp } from '../types';
 
-const defaultSize = 20;
+const SMALL_SIZE = 6;
+const LARGE_SIZE = 16;
+const MAX_LARGE_WIDTH = 36;
+const LARGE_PADDING = 4;
 
-export type Props = React.ComponentProps<typeof Animated.Text> & {
+export type Props = TextProps & {
   /**
    * Whether the badge is visible
    */
@@ -16,12 +21,7 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
    * Content of the `Badge`.
    */
   children?: string | number;
-  /**
-   * Size of the `Badge`.
-   */
-  size?: number;
   style?: StyleProp<TextStyle>;
-  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
@@ -31,6 +31,10 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+ *
+ * The badge is styled differently based on whether `children` is passed:
+ * - Small dot when it doesn't have `children`
+ * - Larger pill when it has `children`
  *
  * ## Usage
  * ```js
@@ -46,64 +50,52 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
  */
 const Badge = ({
   children,
-  size = defaultSize,
   style,
   theme: themeOverrides,
   visible = true,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
-  );
-  const { fontScale } = useWindowDimensions();
-
-  const isFirstRendering = React.useRef<boolean>(true);
 
   const {
     animation: { scale },
   } = theme;
 
-  React.useEffect(() => {
-    // Do not run animation on very first rendering
-    if (isFirstRendering.current) {
-      isFirstRendering.current = false;
-      return;
-    }
-
-    Animated.timing(opacity, {
-      toValue: visible ? 1 : 0,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
-  }, [visible, opacity, scale]);
-
-  const { backgroundColor = theme.colors.error, ...restStyle } =
-    (StyleSheet.flatten(style) || {}) as TextStyle;
-
   const textColor = theme.colors.onError;
 
-  const borderRadius = size / 2;
+  const isLarge = children != null;
+  const badgeSize = isLarge ? LARGE_SIZE : SMALL_SIZE;
+  const labelFont = theme.fonts.labelSmall;
 
-  const paddingHorizontal = 3;
+  const transitionStyle = {
+    opacity: visible ? 1 : 0,
+    transitionDuration: 150 * scale,
+    transitionProperty: 'opacity',
+  };
 
   return (
     <Animated.Text
       numberOfLines={1}
+      allowFontScaling={false}
       style={[
-        {
-          opacity,
-          backgroundColor,
-          color: textColor,
-          fontSize: size * 0.5,
-          lineHeight: size / fontScale,
-          height: size,
-          minWidth: size,
-          borderRadius,
-          paddingHorizontal,
-        },
         styles.container,
-        restStyle,
+        transitionStyle,
+        {
+          backgroundColor: theme.colors.error,
+          color: textColor,
+          borderRadius: cornerFull,
+          height: badgeSize,
+          minWidth: badgeSize,
+        },
+        isLarge && [
+          labelFont,
+          {
+            lineHeight: LARGE_SIZE,
+            maxWidth: MAX_LARGE_WIDTH,
+            paddingHorizontal: LARGE_PADDING,
+          },
+        ],
+        style,
       ]}
       {...rest}
     >
