@@ -1,17 +1,23 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  Animated,
   ColorValue,
-  Easing,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
   View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
+
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { splitButtonElevation, type SplitButtonSize } from './tokens';
 import {
@@ -25,8 +31,7 @@ import {
   type SplitButtonMode,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, Theme, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
+import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import { getButtonTouchableRippleStyle } from '../Button/utils';
@@ -37,9 +42,11 @@ import TouchableRipple, {
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
+
 export type Props = $Omit<
-  React.ComponentProps<typeof Surface>,
-  'children' | 'mode'
+  ViewProps,
+  'children' | 'style' | 'onPress' | 'onPressIn' | 'onPressOut'
 > & {
   /**
    * Mode of the split button.
@@ -149,7 +156,7 @@ export type Props = $Omit<
   /**
    * Style for the outer split-button group.
    */
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Style for both button containers.
    */
@@ -190,7 +197,6 @@ export type Props = $Omit<
    * TestID used for testing purposes.
    */
   testID?: string;
-  ref?: React.RefObject<View>;
 };
 
 /**
@@ -216,397 +222,412 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-const SplitButton = forwardRef<View, Props>(
-  (
-    {
-      mode = 'filled',
-      size = 'small',
-      label,
-      icon,
-      trailingIcon = 'menu-down',
-      loading,
-      disabled,
-      buttonColor: customButtonColor,
-      textColor: customTextColor,
-      rippleColor: customRippleColor,
-      onPress,
-      onTrailingPress,
-      onPressIn,
-      onPressOut,
-      onTrailingPressIn,
-      onTrailingPressOut,
-      onLongPress,
-      onTrailingLongPress,
-      delayLongPress,
-      trailingDelayLongPress,
-      accessibilityLabel = label,
-      trailingAccessibilityLabel = 'Show options',
-      accessibilityState,
-      trailingAccessibilityState,
-      background,
-      style,
-      buttonStyle,
-      leadingButtonStyle,
-      trailingButtonStyle,
-      contentStyle,
-      labelStyle,
-      maxFontSizeMultiplier,
-      hitSlop,
-      trailingHitSlop,
-      theme: themeOverrides,
-      testID = 'split-button',
-      ...rest
+const SplitButton = ({
+  mode = 'filled',
+  size = 'small',
+  label,
+  icon,
+  trailingIcon = 'menu-down',
+  loading,
+  disabled,
+  buttonColor: customButtonColor,
+  textColor: customTextColor,
+  rippleColor: customRippleColor,
+  onPress,
+  onTrailingPress,
+  onPressIn,
+  onPressOut,
+  onTrailingPressIn,
+  onTrailingPressOut,
+  onLongPress,
+  onTrailingLongPress,
+  delayLongPress,
+  trailingDelayLongPress,
+  accessibilityLabel = label,
+  trailingAccessibilityLabel = 'Show options',
+  accessibilityState,
+  trailingAccessibilityState,
+  background,
+  style,
+  buttonStyle,
+  leadingButtonStyle,
+  trailingButtonStyle,
+  contentStyle,
+  labelStyle,
+  maxFontSizeMultiplier,
+  hitSlop,
+  trailingHitSlop,
+  theme: themeOverrides,
+  testID,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const normalizedMode = normalizeSplitButtonMode(mode);
+  const sizeStyle = React.useMemo(
+    () => getSplitButtonSizeStyle({ size, theme }),
+    [size, theme]
+  );
+  const leadingInnerRadius = useSharedValue(sizeStyle.innerRadius);
+  const trailingInnerRadius = useSharedValue(sizeStyle.innerRadius);
+  const colors = React.useMemo(
+    () =>
+      getSplitButtonColors({
+        theme,
+        mode,
+        disabled,
+        customButtonColor,
+        customTextColor,
+      }),
+    [theme, mode, disabled, customButtonColor, customTextColor]
+  );
+  const rippleColor = React.useMemo(
+    () =>
+      getSplitButtonRippleColor({
+        contentColor: colors.contentColor,
+        customRippleColor,
+      }),
+    [colors.contentColor, customRippleColor]
+  );
+  const leadingShape = React.useMemo(
+    () =>
+      getSplitButtonLeadingShape({
+        containerRadius: sizeStyle.containerRadius,
+        innerRadius: sizeStyle.innerRadius,
+      }),
+    [sizeStyle.containerRadius, sizeStyle.innerRadius]
+  );
+  const trailingShape = React.useMemo(
+    () =>
+      getSplitButtonTrailingShape({
+        containerRadius: sizeStyle.containerRadius,
+        innerRadius: sizeStyle.innerRadius,
+      }),
+    [sizeStyle.containerRadius, sizeStyle.innerRadius]
+  );
+  const pressTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short4,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+    }),
+    [theme.motion.duration.short4, theme.motion.easing.standard]
+  );
+  const releaseTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short3,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+    }),
+    [theme.motion.duration.short3, theme.motion.easing.standard]
+  );
+  const leadingAnimatedShapeStyle = useAnimatedStyle(
+    () => ({
+      ...getSplitButtonLeadingShape({
+        containerRadius: sizeStyle.containerRadius,
+        innerRadius: leadingInnerRadius.value,
+      }),
+    }),
+    [sizeStyle.containerRadius]
+  );
+  const trailingAnimatedShapeStyle = useAnimatedStyle(
+    () => ({
+      ...getSplitButtonTrailingShape({
+        containerRadius: sizeStyle.containerRadius,
+        innerRadius: trailingInnerRadius.value,
+      }),
+    }),
+    [sizeStyle.containerRadius]
+  );
+  const leadingHitSlop = React.useMemo(
+    () => getSplitButtonHitSlop({ size, hitSlop }),
+    [size, hitSlop]
+  );
+  const resolvedTrailingHitSlop = React.useMemo(
+    () => getSplitButtonHitSlop({ size, hitSlop: trailingHitSlop }),
+    [size, trailingHitSlop]
+  );
+
+  const { color: customLabelColor, fontSize: customLabelSize } =
+    StyleSheet.flatten(labelStyle) || {};
+  const contentColor =
+    typeof customLabelColor === 'string'
+      ? customLabelColor
+      : colors.contentColor;
+  const labelTextStyle: TextStyle = {
+    color: colors.contentColor,
+    ...theme.fonts[sizeStyle.labelVariant],
+  };
+  const disabledState = { disabled: true };
+  const leadingAccessibilityState = disabled
+    ? { ...accessibilityState, ...disabledState }
+    : accessibilityState;
+  const trailingAccessibilityStateWithDisabled = disabled
+    ? { ...trailingAccessibilityState, ...disabledState }
+    : trailingAccessibilityState;
+  const isElevationEntitled = !disabled && normalizedMode === 'elevated';
+  const leadingHasTouchHandler = hasTouchHandler({
+    onPress,
+    onPressIn,
+    onPressOut,
+    onLongPress,
+  });
+  const trailingHasTouchHandler = hasTouchHandler({
+    onPress: onTrailingPress,
+    onPressIn: onTrailingPressIn,
+    onPressOut: onTrailingPressOut,
+    onLongPress: onTrailingLongPress,
+  });
+  const handleLeadingPressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressIn?.(e);
+      leadingInnerRadius.value = withTiming(
+        sizeStyle.innerPressedRadius,
+        pressTimingConfig
+      );
+      trailingInnerRadius.value = withTiming(
+        sizeStyle.innerRadius,
+        releaseTimingConfig
+      );
     },
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const normalizedMode = normalizeSplitButtonMode(mode);
-    const [pressedButton, setPressedButton] = React.useState<
-      'leading' | 'trailing' | null
-    >(null);
-    const sizeStyle = React.useMemo(
-      () => getSplitButtonSizeStyle({ size, theme }),
-      [size, theme]
-    );
-    const colors = React.useMemo(
-      () =>
-        getSplitButtonColors({
-          theme,
-          mode,
-          disabled,
-          customButtonColor,
-          customTextColor,
-        }),
-      [theme, mode, disabled, customButtonColor, customTextColor]
-    );
-    const rippleColor = React.useMemo(
-      () =>
-        getSplitButtonRippleColor({
-          contentColor: colors.contentColor,
-          customRippleColor,
-        }),
-      [colors.contentColor, customRippleColor]
-    );
-    const leadingShape = React.useMemo(
-      () =>
-        getSplitButtonLeadingShape({
-          containerRadius: sizeStyle.containerRadius,
-          innerRadius:
-            pressedButton === 'leading'
-              ? sizeStyle.innerPressedRadius
-              : sizeStyle.innerRadius,
-        }),
-      [
-        pressedButton,
-        sizeStyle.containerRadius,
-        sizeStyle.innerPressedRadius,
-        sizeStyle.innerRadius,
-      ]
-    );
-    const trailingShape = React.useMemo(
-      () =>
-        getSplitButtonTrailingShape({
-          containerRadius: sizeStyle.containerRadius,
-          innerRadius:
-            pressedButton === 'trailing'
-              ? sizeStyle.innerPressedRadius
-              : sizeStyle.innerRadius,
-        }),
-      [
-        pressedButton,
-        sizeStyle.containerRadius,
-        sizeStyle.innerPressedRadius,
-        sizeStyle.innerRadius,
-      ]
-    );
-    const leadingHitSlop = React.useMemo(
-      () => getSplitButtonHitSlop({ size, hitSlop }),
-      [size, hitSlop]
-    );
-    const resolvedTrailingHitSlop = React.useMemo(
-      () => getSplitButtonHitSlop({ size, hitSlop: trailingHitSlop }),
-      [size, trailingHitSlop]
-    );
-
-    const { color: customLabelColor, fontSize: customLabelSize } =
-      StyleSheet.flatten(labelStyle) || {};
-    const contentColor =
-      typeof customLabelColor === 'string'
-        ? customLabelColor
-        : colors.contentColor;
-    const labelTextStyle: TextStyle = {
-      color: colors.contentColor,
-      ...(theme as Theme).fonts[sizeStyle.labelVariant],
-    };
-    const disabledState = { disabled: true };
-    const leadingAccessibilityState = disabled
-      ? { ...accessibilityState, ...disabledState }
-      : accessibilityState;
-    const trailingAccessibilityStateWithDisabled = disabled
-      ? { ...trailingAccessibilityState, ...disabledState }
-      : trailingAccessibilityState;
-    const isElevationEntitled = !disabled && normalizedMode === 'elevated';
-    const { current: elevation } = React.useRef<Animated.Value>(
-      new Animated.Value(isElevationEntitled ? splitButtonElevation.enabled : 0)
-    );
-    const animateElevation = React.useCallback(
-      (toValue: number) => {
-        if (!isElevationEntitled) {
-          return;
-        }
-
-        Animated.timing(elevation, {
-          toValue,
-          duration:
-            toValue === splitButtonElevation.pressed
-              ? theme.motion.duration.short4
-              : theme.motion.duration.short3,
-          easing: Easing.bezier(...theme.motion.easing.standard),
-          useNativeDriver: false,
-        }).start();
-      },
-      [
-        elevation,
-        isElevationEntitled,
-        theme.motion.duration.short3,
-        theme.motion.duration.short4,
-        theme.motion.easing.standard,
-      ]
-    );
-    const leadingHasTouchHandler = hasTouchHandler({
-      onPress,
+    [
+      leadingInnerRadius,
       onPressIn,
-      onPressOut,
-      onLongPress,
-    });
-    const trailingHasTouchHandler = hasTouchHandler({
-      onPress: onTrailingPress,
-      onPressIn: onTrailingPressIn,
-      onPressOut: onTrailingPressOut,
-      onLongPress: onTrailingLongPress,
-    });
-    const handleLeadingPressIn = React.useCallback(
-      (e: GestureResponderEvent) => {
-        onPressIn?.(e);
-        setPressedButton('leading');
-        animateElevation(splitButtonElevation.pressed);
-      },
-      [animateElevation, onPressIn]
-    );
-    const handleLeadingPressOut = React.useCallback(
-      (e: GestureResponderEvent) => {
-        onPressOut?.(e);
-        setPressedButton(null);
-        animateElevation(splitButtonElevation.enabled);
-      },
-      [animateElevation, onPressOut]
-    );
-    const handleTrailingPressIn = React.useCallback(
-      (e: GestureResponderEvent) => {
-        onTrailingPressIn?.(e);
-        setPressedButton('trailing');
-        animateElevation(splitButtonElevation.pressed);
-      },
-      [animateElevation, onTrailingPressIn]
-    );
-    const handleTrailingPressOut = React.useCallback(
-      (e: GestureResponderEvent) => {
-        onTrailingPressOut?.(e);
-        setPressedButton(null);
-        animateElevation(splitButtonElevation.enabled);
-      },
-      [animateElevation, onTrailingPressOut]
-    );
-    React.useEffect(() => {
-      if (!isElevationEntitled) {
-        setPressedButton(null);
-      }
+      pressTimingConfig,
+      releaseTimingConfig,
+      sizeStyle.innerPressedRadius,
+      sizeStyle.innerRadius,
+      trailingInnerRadius,
+    ]
+  );
+  const handleLeadingPressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressOut?.(e);
+      leadingInnerRadius.value = withTiming(
+        sizeStyle.innerRadius,
+        releaseTimingConfig
+      );
+    },
+    [leadingInnerRadius, onPressOut, releaseTimingConfig, sizeStyle.innerRadius]
+  );
+  const handleTrailingPressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onTrailingPressIn?.(e);
+      trailingInnerRadius.value = withTiming(
+        sizeStyle.innerPressedRadius,
+        pressTimingConfig
+      );
+      leadingInnerRadius.value = withTiming(
+        sizeStyle.innerRadius,
+        releaseTimingConfig
+      );
+    },
+    [
+      leadingInnerRadius,
+      onTrailingPressIn,
+      pressTimingConfig,
+      releaseTimingConfig,
+      sizeStyle.innerPressedRadius,
+      sizeStyle.innerRadius,
+      trailingInnerRadius,
+    ]
+  );
+  const handleTrailingPressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onTrailingPressOut?.(e);
+      trailingInnerRadius.value = withTiming(
+        sizeStyle.innerRadius,
+        releaseTimingConfig
+      );
+    },
+    [
+      onTrailingPressOut,
+      releaseTimingConfig,
+      sizeStyle.innerRadius,
+      trailingInnerRadius,
+    ]
+  );
+  React.useEffect(() => {
+    leadingInnerRadius.value = sizeStyle.innerRadius;
+    trailingInnerRadius.value = sizeStyle.innerRadius;
+  }, [leadingInnerRadius, sizeStyle.innerRadius, trailingInnerRadius]);
 
-      Animated.timing(elevation, {
-        toValue: isElevationEntitled ? splitButtonElevation.enabled : 0,
-        duration: 0,
-        useNativeDriver: false,
-      }).start();
-    }, [elevation, isElevationEntitled]);
+  const commonButtonStyle: ViewStyle = {
+    height: sizeStyle.containerHeight,
+    backgroundColor:
+      colors.containerOpacity < 1 ? 'transparent' : colors.containerColor,
+    borderColor: colors.borderColor,
+    borderWidth: colors.borderWidth,
+  };
+  const elevation = isElevationEntitled
+    ? splitButtonElevation.enabled
+    : splitButtonElevation.disabled;
+  const getTestID = (suffix: string) =>
+    testID ? `${testID}-${suffix}` : undefined;
 
-    const commonButtonStyle: ViewStyle = {
-      height: sizeStyle.containerHeight,
-      backgroundColor:
-        colors.containerOpacity < 1 ? 'transparent' : colors.containerColor,
-      borderColor: colors.borderColor,
-      borderWidth: colors.borderWidth,
-    };
-
-    return (
-      <Animated.View
-        {...rest}
-        ref={ref}
-        testID={`${testID}-container`}
-        style={
-          [
-            styles.group,
-            {
-              columnGap: sizeStyle.betweenSpace,
-              height: sizeStyle.containerHeight,
-            },
-            style,
-          ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-        }
+  return (
+    <Animated.View
+      {...rest}
+      testID={getTestID('container')}
+      style={[
+        styles.group,
+        {
+          columnGap: sizeStyle.betweenSpace,
+          height: sizeStyle.containerHeight,
+        },
+        style,
+      ]}
+    >
+      <AnimatedSurface
+        testID={getTestID('leading-container')}
+        elevation={elevation}
+        style={[
+          styles.leading,
+          commonButtonStyle,
+          leadingShape,
+          leadingAnimatedShapeStyle,
+          buttonStyle,
+          leadingButtonStyle,
+        ]}
+        container
       >
-        <Surface
-          testID={`${testID}-leading-container`}
-          elevation={elevation}
+        <ButtonBackground
+          backgroundColor={colors.containerColor}
+          opacity={colors.containerOpacity}
+          borderRadiusStyle={leadingShape}
+        />
+        <TouchableRipple
+          borderless
+          disabled={disabled}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onPressIn={leadingHasTouchHandler ? handleLeadingPressIn : undefined}
+          onPressOut={
+            leadingHasTouchHandler ? handleLeadingPressOut : undefined
+          }
+          delayLongPress={delayLongPress}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityRole="button"
+          accessibilityState={leadingAccessibilityState}
+          background={background}
+          hitSlop={leadingHitSlop}
+          rippleColor={rippleColor}
           style={[
-            styles.leading,
-            commonButtonStyle,
-            leadingShape,
-            buttonStyle,
-            leadingButtonStyle,
+            styles.ripple,
+            getButtonTouchableRippleStyle(leadingShape, colors.borderWidth),
           ]}
-          container
+          testID={getTestID('leading')}
+          theme={theme}
         >
-          <ButtonBackground
-            backgroundColor={colors.containerColor}
-            opacity={colors.containerOpacity}
-            borderRadiusStyle={leadingShape}
-          />
-          <TouchableRipple
-            borderless
-            disabled={disabled}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            onPressIn={
-              leadingHasTouchHandler ? handleLeadingPressIn : undefined
-            }
-            onPressOut={
-              leadingHasTouchHandler ? handleLeadingPressOut : undefined
-            }
-            delayLongPress={delayLongPress}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityRole="button"
-            accessibilityState={leadingAccessibilityState}
-            background={background}
-            hitSlop={leadingHitSlop}
-            rippleColor={rippleColor}
+          <View
             style={[
-              styles.ripple,
-              getButtonTouchableRippleStyle(leadingShape, colors.borderWidth),
+              styles.leadingContent,
+              {
+                height: sizeStyle.containerHeight,
+                paddingStart: sizeStyle.leadingButtonLeadingSpace,
+                paddingEnd: sizeStyle.leadingButtonTrailingSpace,
+                opacity: colors.contentOpacity,
+              },
+              contentStyle,
             ]}
-            testID={`${testID}-leading`}
-            theme={theme}
           >
-            <View
-              style={[
-                styles.leadingContent,
-                {
-                  height: sizeStyle.containerHeight,
-                  paddingStart: sizeStyle.leadingButtonLeadingSpace,
-                  paddingEnd: sizeStyle.leadingButtonTrailingSpace,
-                  opacity: colors.contentOpacity,
-                },
-                contentStyle,
-              ]}
-            >
-              {icon && !loading ? (
-                <Icon
-                  source={icon}
-                  size={customLabelSize ?? sizeStyle.leadingIconSize}
-                  color={contentColor}
-                />
-              ) : null}
-              {loading ? (
-                <ActivityIndicator
-                  size={customLabelSize ?? sizeStyle.leadingIconSize}
-                  color={contentColor}
-                />
-              ) : null}
-              <Text
-                variant={sizeStyle.labelVariant}
-                selectable={false}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                maxFontSizeMultiplier={maxFontSizeMultiplier}
-                style={[
-                  styles.label,
-                  icon || loading
-                    ? { marginStart: sizeStyle.leadingIconSize / 3 }
-                    : null,
-                  labelTextStyle,
-                  labelStyle,
-                ]}
-                testID={`${testID}-label`}
-              >
-                {label}
-              </Text>
-            </View>
-          </TouchableRipple>
-        </Surface>
-
-        <Surface
-          testID={`${testID}-trailing-container`}
-          elevation={elevation}
-          style={[
-            styles.trailing,
-            commonButtonStyle,
-            trailingShape,
-            buttonStyle,
-            trailingButtonStyle,
-          ]}
-          container
-        >
-          <ButtonBackground
-            backgroundColor={colors.containerColor}
-            opacity={colors.containerOpacity}
-            borderRadiusStyle={trailingShape}
-          />
-          <TouchableRipple
-            borderless
-            disabled={disabled}
-            onPress={onTrailingPress}
-            onLongPress={onTrailingLongPress}
-            onPressIn={
-              trailingHasTouchHandler ? handleTrailingPressIn : undefined
-            }
-            onPressOut={
-              trailingHasTouchHandler ? handleTrailingPressOut : undefined
-            }
-            delayLongPress={trailingDelayLongPress}
-            accessibilityLabel={trailingAccessibilityLabel}
-            accessibilityRole="button"
-            accessibilityState={trailingAccessibilityStateWithDisabled}
-            background={background}
-            hitSlop={resolvedTrailingHitSlop}
-            rippleColor={rippleColor}
-            style={[
-              styles.ripple,
-              getButtonTouchableRippleStyle(trailingShape, colors.borderWidth),
-            ]}
-            testID={`${testID}-trailing`}
-            theme={theme}
-          >
-            <View
-              style={[
-                styles.trailingContent,
-                {
-                  height: sizeStyle.containerHeight,
-                  paddingStart: sizeStyle.trailingButtonLeadingSpace,
-                  paddingEnd: sizeStyle.trailingButtonTrailingSpace,
-                  opacity: colors.contentOpacity,
-                },
-              ]}
-            >
+            {icon && !loading ? (
               <Icon
-                source={trailingIcon}
-                size={sizeStyle.trailingIconSize}
+                source={icon}
+                size={customLabelSize ?? sizeStyle.leadingIconSize}
                 color={contentColor}
               />
-            </View>
-          </TouchableRipple>
-        </Surface>
-      </Animated.View>
-    );
-  }
-);
+            ) : null}
+            {loading ? (
+              <ActivityIndicator
+                size={customLabelSize ?? sizeStyle.leadingIconSize}
+                color={contentColor}
+              />
+            ) : null}
+            <Text
+              variant={sizeStyle.labelVariant}
+              selectable={false}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              maxFontSizeMultiplier={maxFontSizeMultiplier}
+              style={[
+                styles.label,
+                icon || loading
+                  ? { marginStart: sizeStyle.leadingIconSize / 3 }
+                  : null,
+                labelTextStyle,
+                labelStyle,
+              ]}
+              testID={getTestID('label')}
+            >
+              {label}
+            </Text>
+          </View>
+        </TouchableRipple>
+      </AnimatedSurface>
+
+      <AnimatedSurface
+        testID={getTestID('trailing-container')}
+        elevation={elevation}
+        style={[
+          styles.trailing,
+          commonButtonStyle,
+          trailingShape,
+          trailingAnimatedShapeStyle,
+          buttonStyle,
+          trailingButtonStyle,
+        ]}
+        container
+      >
+        <ButtonBackground
+          backgroundColor={colors.containerColor}
+          opacity={colors.containerOpacity}
+          borderRadiusStyle={trailingShape}
+        />
+        <TouchableRipple
+          borderless
+          disabled={disabled}
+          onPress={onTrailingPress}
+          onLongPress={onTrailingLongPress}
+          onPressIn={
+            trailingHasTouchHandler ? handleTrailingPressIn : undefined
+          }
+          onPressOut={
+            trailingHasTouchHandler ? handleTrailingPressOut : undefined
+          }
+          delayLongPress={trailingDelayLongPress}
+          accessibilityLabel={trailingAccessibilityLabel}
+          accessibilityRole="button"
+          accessibilityState={trailingAccessibilityStateWithDisabled}
+          background={background}
+          hitSlop={resolvedTrailingHitSlop}
+          rippleColor={rippleColor}
+          style={[
+            styles.ripple,
+            getButtonTouchableRippleStyle(trailingShape, colors.borderWidth),
+          ]}
+          testID={getTestID('trailing')}
+          theme={theme}
+        >
+          <View
+            style={[
+              styles.trailingContent,
+              {
+                height: sizeStyle.containerHeight,
+                paddingStart: sizeStyle.trailingButtonLeadingSpace,
+                paddingEnd: sizeStyle.trailingButtonTrailingSpace,
+                opacity: colors.contentOpacity,
+              },
+            ]}
+          >
+            <Icon
+              source={trailingIcon}
+              size={sizeStyle.trailingIconSize}
+              color={contentColor}
+            />
+          </View>
+        </TouchableRipple>
+      </AnimatedSurface>
+    </Animated.View>
+  );
+};
 
 const ButtonBackground = ({
   backgroundColor,
