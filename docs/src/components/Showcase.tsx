@@ -182,8 +182,8 @@ export default function Showcase() {
       {data.map((item) => {
         const tintColor = color(item.color).isLight() ? '#000000' : '#FFFFFF';
         return (
-          <div key={item.image}>
-            <div className="showcase-image-container">
+          <div key={item.image} className="showcase-card">
+            <div className="showcase-image-container" tabIndex={0}>
               <img className="showcase-image" src={item.image} alt="" />
               <div
                 className="showcase-info"

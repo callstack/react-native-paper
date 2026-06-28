@@ -49,6 +49,10 @@ __ts-tests__/
 #
 .eslintcache
 
+# TypeScript
+#
+*.tsbuildinfo
+
 # BUCK
 #
 buck-out/

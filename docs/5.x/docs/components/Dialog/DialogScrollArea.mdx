@@ -1,0 +1,81 @@
+---
+title: Dialog.ScrollArea
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+A component to show a scrollable content in a Dialog. The component only provides appropriate styling.
+For the scrollable content you can use `ScrollView`, `FlatList` etc. depending on your requirement.
+
+<ScreenshotTabs screenshotData={'screenshots/dialog-scroll-area.gif'} />
+
+## Usage
+
+```js
+import * as React from 'react';
+import { ScrollView } from 'react-native';
+import { Dialog, Portal, Text } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const hideDialog = () => setVisible(false);
+
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.ScrollArea>
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+            <Text>This is a scrollable area</Text>
+          </ScrollView>
+        </Dialog.ScrollArea>
+      </Dialog>
+    </Portal>
+  );
+};
+
+export default MyComponent;
+```
+
+## Props
+
+<span />
+
+<div>
+
+### children (required)
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogScrollArea" prop="children" />
+  
+<div>
+
+### style
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogScrollArea" prop="style" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogScrollArea" prop="theme" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{ '-': { borderColor: 'theme.colors.surfaceVariant' } }}
+  componentName="Dialog.ScrollArea"
+/>
+
+<span />

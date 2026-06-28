@@ -88,9 +88,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/ActivityIndicator.tsx"
-      ]
+      "dependencies": ["src/components/ActivityIndicator.tsx"]
     },
     "Appbar/Appbar": {
       "filepath": "Appbar/Appbar.tsx",
@@ -225,9 +223,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Appbar/Appbar.tsx"
-      ]
+      "dependencies": ["src/components/Appbar/Appbar.tsx"]
     },
     "Appbar/AppbarAction": {
       "filepath": "Appbar/AppbarAction.tsx",
@@ -350,9 +346,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Appbar/AppbarAction.tsx"
-      ],
+      "dependencies": ["src/components/Appbar/AppbarAction.tsx"],
       "group": "Appbar"
     },
     "Appbar/AppbarBackAction": {
@@ -455,9 +449,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Appbar/AppbarBackAction.tsx"
-      ],
+      "dependencies": ["src/components/Appbar/AppbarBackAction.tsx"],
       "group": "Appbar"
     },
     "Appbar/AppbarContent": {
@@ -633,9 +625,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Appbar/AppbarContent.tsx"
-      ],
+      "dependencies": ["src/components/Appbar/AppbarContent.tsx"],
       "group": "Appbar"
     },
     "Appbar/AppbarHeader": {
@@ -749,9 +739,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Appbar/AppbarHeader.tsx"
-      ],
+      "dependencies": ["src/components/Appbar/AppbarHeader.tsx"],
       "group": "Appbar"
     },
     "Avatar/AvatarIcon": {
@@ -813,9 +801,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Avatar/AvatarIcon.tsx"
-      ],
+      "dependencies": ["src/components/Avatar/AvatarIcon.tsx"],
       "group": "Avatar"
     },
     "Avatar/AvatarImage": {
@@ -927,9 +913,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Avatar/AvatarImage.tsx"
-      ],
+      "dependencies": ["src/components/Avatar/AvatarImage.tsx"],
       "group": "Avatar"
     },
     "Avatar/AvatarText": {
@@ -1011,9 +995,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Avatar/AvatarText.tsx"
-      ],
+      "dependencies": ["src/components/Avatar/AvatarText.tsx"],
       "group": "Avatar"
     },
     "Badge": {
@@ -1083,9 +1065,7 @@
             "tsType": {
               "name": "ReactRefObject",
               "raw": "React.RefObject<typeof Animated.Text>",
-              "elements": [
-                {}
-              ]
+              "elements": [{}]
             },
             "description": ""
           },
@@ -1099,9 +1079,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Badge.tsx"
-      ]
+      "dependencies": ["src/components/Badge.tsx"]
     },
     "Banner": {
       "filepath": "Banner.tsx",
@@ -1306,9 +1284,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Banner.tsx"
-      ]
+      "dependencies": ["src/components/Banner.tsx"]
     },
     "BottomNavigation/BottomNavigation": {
       "filepath": "BottomNavigation/BottomNavigation.tsx",
@@ -1322,9 +1298,7 @@
           {
             "name": "SceneMap",
             "docblock": "Function which takes a map of route keys to components.\nPure components are used to minimize re-rendering of the pages.\nThis drastically improves the animation performance.",
-            "modifiers": [
-              "static"
-            ],
+            "modifiers": ["static"],
             "params": [
               {
                 "name": "scenes",
@@ -2318,9 +2292,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/BottomNavigation/BottomNavigation.tsx"
-      ]
+      "dependencies": ["src/components/BottomNavigation/BottomNavigation.tsx"]
     },
     "BottomNavigation/BottomNavigationBar": {
       "filepath": "BottomNavigation/BottomNavigationBar.tsx",
@@ -3445,9 +3417,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Button/Button.tsx"
-      ]
+      "dependencies": ["src/components/Button/Button.tsx"]
     },
     "Card/Card": {
       "filepath": "Card/Card.tsx",
@@ -3690,9 +3660,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Card/Card.tsx"
-      ]
+      "dependencies": ["src/components/Card/Card.tsx"]
     },
     "Card/CardActions": {
       "filepath": "Card/CardActions.tsx",
@@ -3736,9 +3704,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Card/CardActions.tsx"
-      ],
+      "dependencies": ["src/components/Card/CardActions.tsx"],
       "group": "Card"
     },
     "Card/CardContent": {
@@ -3803,9 +3769,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Card/CardContent.tsx"
-      ],
+      "dependencies": ["src/components/Card/CardContent.tsx"],
       "group": "Card"
     },
     "Card/CardCover": {
@@ -3856,9 +3820,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Card/CardCover.tsx"
-      ],
+      "dependencies": ["src/components/Card/CardCover.tsx"],
       "group": "Card"
     },
     "Card/CardTitle": {
@@ -4107,9 +4069,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Card/CardTitle.tsx"
-      ],
+      "dependencies": ["src/components/Card/CardTitle.tsx"],
       "group": "Card"
     },
     "Checkbox/Checkbox": {
@@ -4205,9 +4165,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Checkbox/Checkbox.tsx"
-      ]
+      "dependencies": ["src/components/Checkbox/Checkbox.tsx"]
     },
     "Checkbox/CheckboxAndroid": {
       "filepath": "Checkbox/CheckboxAndroid.tsx",
@@ -4302,9 +4260,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Checkbox/CheckboxAndroid.tsx"
-      ],
+      "dependencies": ["src/components/Checkbox/CheckboxAndroid.tsx"],
       "group": "Checkbox"
     },
     "Checkbox/CheckboxIOS": {
@@ -4393,9 +4349,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Checkbox/CheckboxIOS.tsx"
-      ],
+      "dependencies": ["src/components/Checkbox/CheckboxIOS.tsx"],
       "group": "Checkbox"
     },
     "Checkbox/CheckboxItem": {
@@ -4641,9 +4595,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Checkbox/CheckboxItem.tsx"
-      ],
+      "dependencies": ["src/components/Checkbox/CheckboxItem.tsx"],
       "group": "Checkbox"
     },
     "Chip/Chip": {
@@ -4996,9 +4948,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Chip/Chip.tsx"
-      ]
+      "dependencies": ["src/components/Chip/Chip.tsx"]
     },
     "DataTable/DataTable": {
       "filepath": "DataTable/DataTable.tsx",
@@ -5035,9 +4985,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTable.tsx"
-      ]
+      "dependencies": ["src/components/DataTable/DataTable.tsx"]
     },
     "DataTable/DataTableCell": {
       "filepath": "DataTable/DataTableCell.tsx",
@@ -5130,9 +5078,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTableCell.tsx"
-      ],
+      "dependencies": ["src/components/DataTable/DataTableCell.tsx"],
       "group": "DataTable"
     },
     "DataTable/DataTableHeader": {
@@ -5177,9 +5123,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTableHeader.tsx"
-      ],
+      "dependencies": ["src/components/DataTable/DataTableHeader.tsx"],
       "group": "DataTable"
     },
     "DataTable/DataTablePagination": {
@@ -5356,9 +5300,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTablePagination.tsx"
-      ],
+      "dependencies": ["src/components/DataTable/DataTablePagination.tsx"],
       "group": "DataTable"
     },
     "DataTable/DataTableRow": {
@@ -5433,9 +5375,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTableRow.tsx"
-      ],
+      "dependencies": ["src/components/DataTable/DataTableRow.tsx"],
       "group": "DataTable"
     },
     "DataTable/DataTableTitle": {
@@ -5558,9 +5498,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/DataTable/DataTableTitle.tsx"
-      ],
+      "dependencies": ["src/components/DataTable/DataTableTitle.tsx"],
       "group": "DataTable"
     },
     "Dialog/Dialog": {
@@ -5666,9 +5604,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/Dialog.tsx"
-      ]
+      "dependencies": ["src/components/Dialog/Dialog.tsx"]
     },
     "Dialog/DialogActions": {
       "filepath": "Dialog/DialogActions.tsx",
@@ -5712,9 +5648,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/DialogActions.tsx"
-      ],
+      "dependencies": ["src/components/Dialog/DialogActions.tsx"],
       "group": "Dialog"
     },
     "Dialog/DialogContent": {
@@ -5752,9 +5686,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/DialogContent.tsx"
-      ],
+      "dependencies": ["src/components/Dialog/DialogContent.tsx"],
       "group": "Dialog"
     },
     "Dialog/DialogIcon": {
@@ -5803,9 +5735,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/DialogIcon.tsx"
-      ],
+      "dependencies": ["src/components/Dialog/DialogIcon.tsx"],
       "group": "Dialog"
     },
     "Dialog/DialogScrollArea": {
@@ -5850,9 +5780,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/DialogScrollArea.tsx"
-      ],
+      "dependencies": ["src/components/Dialog/DialogScrollArea.tsx"],
       "group": "Dialog"
     },
     "Dialog/DialogTitle": {
@@ -5897,9 +5825,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Dialog/DialogTitle.tsx"
-      ],
+      "dependencies": ["src/components/Dialog/DialogTitle.tsx"],
       "group": "Dialog"
     },
     "Divider": {
@@ -5965,9 +5891,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Divider.tsx"
-      ]
+      "dependencies": ["src/components/Divider.tsx"]
     },
     "Drawer/DrawerCollapsedItem": {
       "filepath": "Drawer/DrawerCollapsedItem.tsx",
@@ -6108,9 +6032,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Drawer/DrawerCollapsedItem.tsx"
-      ],
+      "dependencies": ["src/components/Drawer/DrawerCollapsedItem.tsx"],
       "group": "Drawer"
     },
     "Drawer/DrawerItem": {
@@ -6269,9 +6191,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Drawer/DrawerItem.tsx"
-      ],
+      "dependencies": ["src/components/Drawer/DrawerItem.tsx"],
       "group": "Drawer"
     },
     "Drawer/DrawerSection": {
@@ -6341,9 +6261,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Drawer/DrawerSection.tsx"
-      ],
+      "dependencies": ["src/components/Drawer/DrawerSection.tsx"],
       "group": "Drawer"
     },
     "FAB/FAB": {
@@ -6656,9 +6574,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/FAB/FAB.tsx"
-      ]
+      "dependencies": ["src/components/FAB/FAB.tsx"]
     },
     "FAB/AnimatedFAB": {
       "filepath": "FAB/AnimatedFAB.tsx",
@@ -6940,9 +6856,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/FAB/AnimatedFAB.tsx"
-      ]
+      "dependencies": ["src/components/FAB/AnimatedFAB.tsx"]
     },
     "FAB/FABGroup": {
       "filepath": "FAB/FABGroup.tsx",
@@ -7384,9 +7298,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/FAB/FABGroup.tsx"
-      ],
+      "dependencies": ["src/components/FAB/FABGroup.tsx"],
       "group": "FAB"
     },
     "HelperText/HelperText": {
@@ -7500,9 +7412,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/HelperText/HelperText.tsx"
-      ]
+      "dependencies": ["src/components/HelperText/HelperText.tsx"]
     },
     "IconButton/IconButton": {
       "filepath": "IconButton/IconButton.tsx",
@@ -7711,9 +7621,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/IconButton/IconButton.tsx"
-      ]
+      "dependencies": ["src/components/IconButton/IconButton.tsx"]
     },
     "Icon": {
       "filepath": "Icon.tsx",
@@ -7771,9 +7679,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Icon.tsx"
-      ]
+      "dependencies": ["src/components/Icon.tsx"]
     },
     "List/ListAccordion": {
       "filepath": "List/ListAccordion.tsx",
@@ -8122,9 +8028,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListAccordion.tsx"
-      ],
+      "dependencies": ["src/components/List/ListAccordion.tsx"],
       "group": "List"
     },
     "List/ListAccordionGroup": {
@@ -8196,9 +8100,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListAccordionGroup.tsx"
-      ],
+      "dependencies": ["src/components/List/ListAccordionGroup.tsx"],
       "group": "List"
     },
     "List/ListIcon": {
@@ -8249,9 +8151,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListIcon.tsx"
-      ],
+      "dependencies": ["src/components/List/ListIcon.tsx"],
       "group": "List"
     },
     "List/ListItem": {
@@ -8539,9 +8439,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListItem.tsx"
-      ],
+      "dependencies": ["src/components/List/ListItem.tsx"],
       "group": "List"
     },
     "List/ListSection": {
@@ -8606,9 +8504,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListSection.tsx"
-      ],
+      "dependencies": ["src/components/List/ListSection.tsx"],
       "group": "List"
     },
     "List/ListSubheader": {
@@ -8652,9 +8548,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/List/ListSubheader.tsx"
-      ],
+      "dependencies": ["src/components/List/ListSubheader.tsx"],
       "group": "List"
     },
     "Menu/Menu": {
@@ -8865,9 +8759,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Menu/Menu.tsx"
-      ]
+      "dependencies": ["src/components/Menu/Menu.tsx"]
     },
     "Menu/MenuItem": {
       "filepath": "Menu/MenuItem.tsx",
@@ -9058,9 +8950,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Menu/MenuItem.tsx"
-      ],
+      "dependencies": ["src/components/Menu/MenuItem.tsx"],
       "group": "Menu"
     },
     "Modal": {
@@ -9198,9 +9088,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Modal.tsx"
-      ]
+      "dependencies": ["src/components/Modal.tsx"]
     },
     "Portal/Portal": {
       "filepath": "Portal/Portal.tsx",
@@ -9241,9 +9129,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Portal/Portal.tsx"
-      ]
+      "dependencies": ["src/components/Portal/Portal.tsx"]
     },
     "Portal/PortalHost": {
       "filepath": "Portal/PortalHost.tsx",
@@ -9267,9 +9153,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Portal/PortalHost.tsx"
-      ],
+      "dependencies": ["src/components/Portal/PortalHost.tsx"],
       "group": "Portal"
     },
     "ProgressBar": {
@@ -9379,9 +9263,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/ProgressBar.tsx"
-      ]
+      "dependencies": ["src/components/ProgressBar.tsx"]
     },
     "RadioButton/RadioButton": {
       "filepath": "RadioButton/RadioButton.tsx",
@@ -9479,9 +9361,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/RadioButton/RadioButton.tsx"
-      ]
+      "dependencies": ["src/components/RadioButton/RadioButton.tsx"]
     },
     "RadioButton/RadioButtonAndroid": {
       "filepath": "RadioButton/RadioButtonAndroid.tsx",
@@ -9579,9 +9459,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/RadioButton/RadioButtonAndroid.tsx"
-      ],
+      "dependencies": ["src/components/RadioButton/RadioButtonAndroid.tsx"],
       "group": "RadioButton"
     },
     "RadioButton/RadioButtonGroup": {
@@ -9635,9 +9513,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/RadioButton/RadioButtonGroup.tsx"
-      ],
+      "dependencies": ["src/components/RadioButton/RadioButtonGroup.tsx"],
       "group": "RadioButton"
     },
     "RadioButton/RadioButtonIOS": {
@@ -9729,9 +9605,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/RadioButton/RadioButtonIOS.tsx"
-      ],
+      "dependencies": ["src/components/RadioButton/RadioButtonIOS.tsx"],
       "group": "RadioButton"
     },
     "RadioButton/RadioButtonItem": {
@@ -9976,9 +9850,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/RadioButton/RadioButtonItem.tsx"
-      ],
+      "dependencies": ["src/components/RadioButton/RadioButtonItem.tsx"],
       "group": "RadioButton"
     },
     "Searchbar": {
@@ -10360,9 +10232,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Searchbar.tsx"
-      ]
+      "dependencies": ["src/components/Searchbar.tsx"]
     },
     "SegmentedButtons/SegmentedButtons": {
       "filepath": "SegmentedButtons/SegmentedButtons.tsx",
@@ -10554,9 +10424,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/SegmentedButtons/SegmentedButtons.tsx"
-      ]
+      "dependencies": ["src/components/SegmentedButtons/SegmentedButtons.tsx"]
     },
     "Snackbar": {
       "filepath": "Snackbar.tsx",
@@ -10808,9 +10676,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Snackbar.tsx"
-      ]
+      "dependencies": ["src/components/Snackbar.tsx"]
     },
     "Surface": {
       "filepath": "Surface.tsx",
@@ -10954,9 +10820,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Surface.tsx"
-      ]
+      "dependencies": ["src/components/Surface.tsx"]
     },
     "Switch/Switch": {
       "filepath": "Switch/Switch.tsx",
@@ -11020,9 +10884,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Switch/Switch.tsx"
-      ]
+      "dependencies": ["src/components/Switch/Switch.tsx"]
     },
     "TextInput/TextInput": {
       "filepath": "TextInput/TextInput.tsx",
@@ -11349,9 +11211,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/TextInput/TextInput.tsx"
-      ]
+      "dependencies": ["src/components/TextInput/TextInput.tsx"]
     },
     "TextInput/Adornment/TextInputAffix": {
       "filepath": "TextInput/Adornment/TextInputAffix.tsx",
@@ -11449,9 +11309,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/TextInput/Adornment/TextInputAffix.tsx"
-      ],
+      "dependencies": ["src/components/TextInput/Adornment/TextInputAffix.tsx"],
       "group": "TextInput"
     },
     "TextInput/Adornment/TextInputIcon": {
@@ -11551,9 +11409,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/TextInput/Adornment/TextInputIcon.tsx"
-      ],
+      "dependencies": ["src/components/TextInput/Adornment/TextInputIcon.tsx"],
       "group": "TextInput"
     },
     "ToggleButton/ToggleButton": {
@@ -11714,9 +11570,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/ToggleButton/ToggleButton.tsx"
-      ]
+      "dependencies": ["src/components/ToggleButton/ToggleButton.tsx"]
     },
     "ToggleButton/ToggleButtonGroup": {
       "filepath": "ToggleButton/ToggleButtonGroup.tsx",
@@ -11778,9 +11632,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/ToggleButton/ToggleButtonGroup.tsx"
-      ],
+      "dependencies": ["src/components/ToggleButton/ToggleButtonGroup.tsx"],
       "group": "ToggleButton"
     },
     "ToggleButton/ToggleButtonRow": {
@@ -11847,9 +11699,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/ToggleButton/ToggleButtonRow.tsx"
-      ],
+      "dependencies": ["src/components/ToggleButton/ToggleButtonRow.tsx"],
       "group": "ToggleButton"
     },
     "Tooltip/Tooltip": {
@@ -11917,9 +11767,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Tooltip/Tooltip.tsx"
-      ]
+      "dependencies": ["src/components/Tooltip/Tooltip.tsx"]
     },
     "TouchableRipple/TouchableRipple": {
       "filepath": "TouchableRipple/TouchableRipple.tsx",
@@ -12118,9 +11966,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/TouchableRipple/TouchableRipple.tsx"
-      ]
+      "dependencies": ["src/components/TouchableRipple/TouchableRipple.tsx"]
     },
     "Typography/Text": {
       "filepath": "Typography/Text.tsx",
@@ -12177,9 +12023,7 @@
         }
       },
       "type": "component",
-      "dependencies": [
-        "src/components/Typography/Text.tsx"
-      ]
+      "dependencies": ["src/components/Typography/Text.tsx"]
     }
   }
 }

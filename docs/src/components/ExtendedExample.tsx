@@ -1,9 +1,6 @@
-//@ts-ignore
-import CodeBlock from '@theme/CodeBlock';
-//@ts-ignore
-import TabItem from '@theme/TabItem';
-//@ts-ignore
-import Tabs from '@theme/Tabs';
+import CodeBlock from './CodeBlock';
+import TabItem from './TabItem';
+import Tabs from './Tabs';
 
 interface ExtendedExampleProps {
   extendedExamplesData: {

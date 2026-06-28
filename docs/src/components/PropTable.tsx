@@ -1,19 +1,19 @@
-// @ts-ignore
-import useDoc from '@site/component-docs-plugin/useDocs';
+import { useVersion } from '@rspress/core/dist/runtime/index.js';
 
 import Markdown from './Markdown';
+import useDoc from '../../component-docs-plugin/useDocs';
 
 const typeDefinitions = {
   IconSource:
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/Icon.tsx#L16',
+    'https://github.com/callstack/react-native-paper/blob/main/components/Icon.tsx#L16',
   ThemeProp:
     'https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties',
   '(props: TextInputAccessoryProps) => React.ReactNode':
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInputIcon.tsx#L11',
+    'https://github.com/callstack/react-native-paper/blob/main/components/TextInput/TextInputIcon.tsx#L11',
   '(props: TextInputRenderProps) => React.ReactNode':
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L168',
+    'https://github.com/callstack/react-native-paper/blob/main/components/TextInput/TextInput.tsx#L168',
   'React.Ref<TextInputHandles>':
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextInput/TextInput.tsx#L172',
+    'https://github.com/callstack/react-native-paper/blob/main/components/TextInput/TextInput.tsx#L172',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
@@ -39,7 +39,8 @@ export default function PropTable({
   componentLink: string;
   prop: string;
 }) {
-  const doc = useDoc(componentLink);
+  const version = useVersion() || '5.x';
+  const doc = useDoc(componentLink, version);
 
   if (!doc?.data?.props) {
     return null;

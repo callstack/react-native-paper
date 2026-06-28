@@ -1,24 +1,26 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
-//@ts-ignore
-import BrowserOnly from '@docusaurus/BrowserOnly';
-//@ts-ignore
-import { useColorMode } from '@docusaurus/theme-common';
+import { BrowserOnly } from '@rspress/core/runtime';
 import {
   Avatar,
   Button,
-  FAB,
   DarkTheme,
+  FAB,
   LightTheme,
   ProgressBar,
-  PaperProvider,
+  Provider,
   RadioButton,
   Switch,
   Text,
   TextInput,
   useTheme,
 } from 'react-native-paper';
+
+import { useColorMode } from './theme-common';
+
+const shimmerBorderColor = 'rgba(125, 82, 96, 0.4)';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,15 +35,33 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexWrap: 'wrap',
   },
+  shimmer: {
+    alignContent: 'center',
+    borderColor: shimmerBorderColor,
+    borderRadius: 16,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: 32,
+    marginTop: 36,
+    minHeight: 500,
+    padding: 30,
+  },
 });
 
-const Stack: React.FC<
-  React.PropsWithChildren<{
-    direction?: 'row' | 'column';
-    spacing?: number;
-    style?: any;
-  }>
-> = ({ direction = 'column', spacing = 0, style, children }) => {
+type StackProps = React.PropsWithChildren<{
+  direction?: 'row' | 'column';
+  spacing?: number;
+  style?: StyleProp<ViewStyle>;
+}>;
+
+const Stack = ({
+  direction = 'column',
+  spacing = 0,
+  style,
+  children,
+}: StackProps) => {
   return (
     <View style={[{ flexDirection: direction, margin: -spacing }, style]}>
       {React.Children.map(children, (child, index) => (
@@ -109,13 +129,13 @@ const BannerExample = () => {
           <TextInput
             label="Email"
             value={text}
-            onChangeText={(text) => setText(text)}
+            onChangeText={(value) => setText(value)}
           />
           <TextInput
             label="Email"
             variant="outlined"
             value={text}
-            onChangeText={(text) => setText(text)}
+            onChangeText={(value) => setText(value)}
           />
         </Stack>
 
@@ -142,34 +162,16 @@ const BannerExample = () => {
 };
 
 const Shimmer = () => {
-  /* Docusaurus won't call StyleSheet.create() server-side */
-  /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals */
-
-  return (
-    <View
-      style={{
-        display: 'flex',
-        minHeight: 500,
-        borderWidth: 1,
-        borderColor: 'rgba(125, 82, 96, 0.4)',
-        borderStyle: 'solid',
-        borderRadius: 16,
-        alignContent: 'center',
-        justifyContent: 'center',
-        padding: 30,
-        marginTop: 36,
-        marginBottom: 32,
-      }}
-    />
-  );
+  return <View style={styles.shimmer} />;
 };
 
 const ThemedBannerExample = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
+
   return (
-    <PaperProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
+    <Provider theme={isDarkTheme ? DarkTheme : LightTheme}>
       <BannerExample />
-    </PaperProvider>
+    </Provider>
   );
 };
 

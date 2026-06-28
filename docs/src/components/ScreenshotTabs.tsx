@@ -1,16 +1,13 @@
-import React from 'react';
 import type { ReactNode } from 'react';
 
-//@ts-ignore
-import TabItem from '@theme/TabItem';
-//@ts-ignore
-import Tabs from '@theme/Tabs';
+import { withBase } from '@rspress/core/runtime';
 
+import TabItem from './TabItem';
+import Tabs from './Tabs';
 import type { DataObject } from '../utils/themeColors';
 
 type ScreenshotTabsProps = {
   screenshotData: DataObject | string;
-  baseUrl: string;
 };
 
 const getClassName = (value: string) =>
@@ -18,12 +15,9 @@ const getClassName = (value: string) =>
     ? 'gifScreenshot'
     : `tabScreenshot${value.includes('full-width') ? 'full-width' : ''}`;
 
-const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
-  screenshotData,
-  baseUrl,
-}) => {
+const ScreenshotTabs = ({ screenshotData }: ScreenshotTabsProps) => {
   const renderScreenhot = (src: string): ReactNode => (
-    <img src={`${baseUrl}${src}`} className={getClassName(src)} />
+    <img src={withBase(src)} className={getClassName(src)} />
   );
 
   if (typeof screenshotData === 'string') {
@@ -32,7 +26,7 @@ const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
 
   const screenshots = Object.entries(screenshotData).map(([key, value]) => (
     <TabItem key={key} value={key} label={key} default>
-      {renderScreenhot(value as string)}
+      {typeof value === 'string' ? renderScreenhot(value) : null}
     </TabItem>
   ));
 

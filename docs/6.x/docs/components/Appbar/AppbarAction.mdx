@@ -1,0 +1,134 @@
+---
+title: Appbar.Action
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+A component used to display an action item in the appbar.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/appbar-action-android.png"}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { Appbar } from 'react-native-paper';
+import { Platform } from 'react-native';
+
+const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+
+const MyComponent = () => (
+  <Appbar.Header>
+     <Appbar.Content title="Title" subtitle={'Subtitle'} />
+      <Appbar.Action icon="magnify" onPress={() => {}} />
+      <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+  </Appbar.Header>
+);
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+
+
+
+<div>
+
+### color
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="color" />
+
+<div>
+
+### icon (required)
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="icon" />
+
+<div>
+
+### size
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="size" />
+
+<div>
+
+### disabled
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="disabled" />
+
+<div>
+
+### accessibilityLabel
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="accessibilityLabel" />
+
+<div>
+
+### onPress
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="onPress" />
+
+<div>
+
+### isLeading  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="isLeading" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="style" />
+
+<div>
+
+### ref
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="ref" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarAction" prop="theme" />
+
+
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"leading icon":{"iconColor":"theme.colors.onSurface"},"not leading icon":{"iconColor":"theme.colors.onSurfaceVariant"}}} componentName="Appbar.Action" />
+
+
+<span />

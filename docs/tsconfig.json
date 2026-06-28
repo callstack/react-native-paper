@@ -2,7 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "react-native-paper": ["./src"]
+      "@docs/*": ["./src/*"],
+      "react-native-paper": ["../src/index"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
 }

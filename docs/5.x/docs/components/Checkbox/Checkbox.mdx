@@ -1,0 +1,108 @@
+---
+title: Checkbox
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+Checkboxes allow the selection of multiple options from a set.
+
+<ScreenshotTabs
+  screenshotData={{
+    'Android (enabled)': 'screenshots/checkbox-enabled.android.png',
+    'Android (disabled)': 'screenshots/checkbox-disabled.android.png',
+    'iOS (enabled)': 'screenshots/checkbox-enabled.ios.png',
+    'iOS (disabled)': 'screenshots/checkbox-disabled.ios.png',
+  }}
+/>
+
+## Usage
+
+```js
+import * as React from 'react';
+import { Checkbox } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [checked, setChecked] = React.useState(false);
+
+  return (
+    <Checkbox
+      status={checked ? 'checked' : 'unchecked'}
+      onPress={() => {
+        setChecked(!checked);
+      }}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+## Props
+
+<span />
+
+<div>
+
+### status (required)
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="status" />
+  
+<div>
+
+### disabled
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="disabled" />
+  
+<div>
+
+### onPress
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="onPress" />
+  
+<div>
+
+### uncheckedColor
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="uncheckedColor" />
+  
+<div>
+
+### color
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="color" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="theme" />
+  
+<div>
+
+### testID
+
+</div>
+  
+  <PropTable componentLink="Checkbox/Checkbox" prop="testID" />
+
+<span />
+
+<span />
+
+<span />

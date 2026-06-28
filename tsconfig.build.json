@@ -1,4 +1,13 @@
 {
-  "extends": "./tsconfig",
-  "exclude": ["example", "docs", "**/__tests__/*", "src/test-utils.tsx"]
+  "extends": "./tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "**/__tests__/*",
+    "__ts-tests__",
+    "docs",
+    "example",
+    "lib",
+    "node_modules",
+    "src/test-utils.tsx"
+  ]
 }

@@ -11,8 +11,6 @@ type PluginOptions = {
   pages: unknown;
 };
 
-type PluginConfig = [string, PluginOptions];
-
 type PluginFactory = (
   context: unknown,
   options: PluginOptions
@@ -23,8 +21,40 @@ type PluginFactory = (
 const isRecord = (value: unknown): value is { [key: string]: unknown } =>
   typeof value === 'object' && value !== null;
 
+const isPluginOptions = (value: unknown): value is PluginOptions => {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.docsRootDir === 'string' &&
+    typeof value.libsRootDir === 'string' &&
+    'pages' in value
+  );
+};
+
 const isPluginFactory = (value: unknown): value is PluginFactory =>
   typeof value === 'function';
+
+const loadPluginConfig = (
+  sourceDir: string,
+  requireFromScript: ReturnType<typeof createRequire>
+): PluginOptions => {
+  const sharedConfigPath = path.join(
+    sourceDir,
+    'docs',
+    'component-docs.config.js'
+  );
+  const sharedConfig: unknown = requireFromScript(sharedConfigPath);
+
+  if (!isPluginOptions(sharedConfig)) {
+    throw new Error(
+      `Unable to read component docs config from ${sharedConfigPath}`
+    );
+  }
+
+  return sharedConfig;
+};
 
 const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
   if (Array.isArray(value)) {
@@ -65,6 +95,11 @@ const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
       ];
     })
   );
+};
+
+const writeJson = (destination: string, value: unknown) => {
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, `${JSON.stringify(value, null, 2)}\n`);
 };
 
 const main = async () => {
@@ -126,28 +161,7 @@ const main = async () => {
       fs.symlinkSync(nodeModulesPath, archivedNodeModulesPath, 'dir');
     }
 
-    const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-    const config: unknown = requireFromScript(configPath);
-
-    if (!isRecord(config) || !Array.isArray(config.plugins)) {
-      throw new Error(`Unable to read plugins from ${configPath}`);
-    }
-
-    const pluginConfig = config.plugins.find(
-      (plugin: unknown): plugin is PluginConfig =>
-        Array.isArray(plugin) &&
-        plugin[0] === './component-docs-plugin' &&
-        isRecord(plugin[1]) &&
-        typeof plugin[1].docsRootDir === 'string' &&
-        typeof plugin[1].libsRootDir === 'string'
-    );
-
-    if (!pluginConfig) {
-      throw new Error(
-        `Unable to find component docs plugin config in ${configPath}`
-      );
-    }
-
+    const pluginOptions = loadPluginConfig(sourceDir, requireFromScript);
     const pluginFactoryPath = path.join(
       sourceDir,
       'docs',
@@ -161,19 +175,13 @@ const main = async () => {
       );
     }
 
-    const plugin = await pluginFactory({}, pluginConfig[1]);
+    const plugin = await pluginFactory({}, pluginOptions);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
 
-    fs.mkdirSync(path.dirname(destination), { recursive: true });
-    fs.writeFileSync(
-      destination,
-      `${JSON.stringify(
-        { docs: normalizeDocs(docs, fs.realpathSync(sourceDir)) },
-        null,
-        2
-      )}\n`
-    );
+    writeJson(destination, {
+      docs: normalizeDocs(docs, fs.realpathSync(sourceDir)),
+    });
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;

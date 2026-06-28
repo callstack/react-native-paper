@@ -1,0 +1,146 @@
+---
+title: Modal
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+The Modal component is a simple way to present content above an enclosing view.
+To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal/Portal) component.
+Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/modal.gif"}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = { backgroundColor: 'white', padding: 20 };
+
+  return (
+    <PaperProvider>
+      <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+          <Text>Example Modal.  Click outside this area to dismiss.</Text>
+        </Modal>
+      </Portal>
+      <Button style={{ marginTop: 30 }} onPress={showModal}>
+        Show
+      </Button>
+    </PaperProvider>
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+
+
+
+<div>
+
+### dismissable
+
+</div>
+
+  <PropTable componentLink="Modal" prop="dismissable" />
+
+<div>
+
+### dismissableBackButton
+
+</div>
+
+  <PropTable componentLink="Modal" prop="dismissableBackButton" />
+
+<div>
+
+### onDismiss
+
+</div>
+
+  <PropTable componentLink="Modal" prop="onDismiss" />
+
+<div>
+
+### overlayAccessibilityLabel
+
+</div>
+
+  <PropTable componentLink="Modal" prop="overlayAccessibilityLabel" />
+
+<div>
+
+### visible
+
+</div>
+
+  <PropTable componentLink="Modal" prop="visible" />
+
+<div>
+
+### children (required)
+
+</div>
+
+  <PropTable componentLink="Modal" prop="children" />
+
+<div>
+
+### contentContainerStyle
+
+</div>
+
+  <PropTable componentLink="Modal" prop="contentContainerStyle" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="Modal" prop="style" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="Modal" prop="theme" />
+
+<div>
+
+### testID
+
+</div>
+
+  <PropTable componentLink="Modal" prop="testID" />
+
+
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.backdrop"}}} componentName="Modal" />
+
+
+<span />
