@@ -2,24 +2,26 @@
 title: Surface
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Surface is a basic container that can give depth to an element with elevation shadow.
 On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
 See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
 Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
 
-
-
-
-  <ScreenshotTabs screenshotData={{"elevated":"screenshots/surface-elevated-full-width.png","flat":"screenshots/surface-flat-full-width.png"}} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs
+  screenshotData={{
+    elevated: 'screenshots/surface-elevated-full-width.png',
+    flat: 'screenshots/surface-flat-full-width.png',
+  }}
+/>
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { Surface, Text } from 'react-native-paper';
@@ -27,7 +29,7 @@ import { StyleSheet } from 'react-native';
 
 const MyComponent = () => (
   <Surface style={styles.surface} elevation={4}>
-     <Text>Surface</Text>
+    <Text>Surface</Text>
   </Surface>
 );
 
@@ -44,76 +46,76 @@ const styles = StyleSheet.create({
 });
 ```
 
-
-  ## Props
-  <span />
-  
-
-  
-<div>
-
-### children (required) 
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="children" version="5.x" />
-  
-<div>
-
-### style  
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="style" version="5.x" />
-  
-<div>
-
-### elevation  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="elevation" version="5.x" />
-  
-<div>
-
-### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="mode" version="5.x" />
-  
-<div>
-
-### theme  
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="theme" version="5.x" />
-  
-<div>
-
-### testID  
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="testID" version="5.x" />
-  
-<div>
-
-### ref  
-
-</div>
-  
-  <PropTable componentLink="Surface" prop="ref" version="5.x" />
-  
-  
+## Props
 
 <span />
 
+<div>
 
-  ## Theme colors
+### children (required)
 
-  <ThemeColorsTable themeColorsData={{"flat":{"backgroundColor":"theme.colors.elevation[elevation]"},"elevated":{"backgroundColor":"theme.colors.elevation[elevation]"}}} componentName="Surface" />
+</div>
   
+  <PropTable componentLink="Surface" prop="children" />
+  
+<div>
+
+### style
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="style" />
+  
+<div>
+
+### elevation <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="elevation" />
+  
+<div>
+
+### mode <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="mode" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="theme" />
+  
+<div>
+
+### testID
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="testID" />
+  
+<div>
+
+### ref
+
+</div>
+  
+  <PropTable componentLink="Surface" prop="ref" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{
+    flat: { backgroundColor: 'theme.colors.elevation[elevation]' },
+    elevated: { backgroundColor: 'theme.colors.elevation[elevation]' },
+  }}
+  componentName="Surface"
+/>
 
 <span />

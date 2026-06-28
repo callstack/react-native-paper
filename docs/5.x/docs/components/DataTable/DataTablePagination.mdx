@@ -2,21 +2,18 @@
 title: DataTable.Pagination
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 A component to show pagination for data table.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/data-table-pagination.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/data-table-pagination.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { DataTable } from 'react-native-paper';
@@ -40,12 +37,14 @@ const items = [
 
 const MyComponent = () => {
   const [page, setPage] = React.useState(0);
-  const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(numberOfItemsPerPageList[0]);
+  const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(
+    numberOfItemsPerPageList[0]
+  );
   const from = page * numberOfItemsPerPage;
   const to = Math.min((page + 1) * numberOfItemsPerPage, items.length);
 
   React.useEffect(() => {
-     setPage(0);
+    setPage(0);
   }, [numberOfItemsPerPage]);
 
   return (
@@ -53,7 +52,7 @@ const MyComponent = () => {
       <DataTable.Pagination
         page={page}
         numberOfPages={Math.ceil(items.length / numberOfItemsPerPage)}
-        onPageChange={page => setPage(page)}
+        onPageChange={(page) => setPage(page)}
         label={`${from + 1}-${to} of ${items.length}`}
         showFastPaginationControls
         numberOfItemsPerPageList={numberOfItemsPerPageList}
@@ -68,141 +67,137 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### page (required) 
+### page (required)
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="page" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="page" />
   
 <div>
 
-### numberOfPages (required) 
+### numberOfPages (required)
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfPages" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfPages" />
   
 <div>
 
-### onPageChange (required) 
+### onPageChange (required)
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="onPageChange" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="onPageChange" />
   
 <div>
 
-### showFastPaginationControls  
+### showFastPaginationControls
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="showFastPaginationControls" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="showFastPaginationControls" />
   
 <div>
 
-### paginationControlRippleColor  
+### paginationControlRippleColor
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="paginationControlRippleColor" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="paginationControlRippleColor" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="theme" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="theme" />
   
 <div>
 
-### numberOfItemsPerPage  
+### numberOfItemsPerPage
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfItemsPerPage" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfItemsPerPage" />
   
 <div>
 
-### numberOfItemsPerPageList  
+### numberOfItemsPerPageList
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfItemsPerPageList" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="numberOfItemsPerPageList" />
   
 <div>
 
-### onItemsPerPageChange  
+### onItemsPerPageChange
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="onItemsPerPageChange" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="onItemsPerPageChange" />
   
 <div>
 
-### dropdownItemRippleColor  
+### dropdownItemRippleColor
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="dropdownItemRippleColor" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="dropdownItemRippleColor" />
   
 <div>
 
-### selectPageDropdownRippleColor  
+### selectPageDropdownRippleColor
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownRippleColor" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownRippleColor" />
   
 <div>
 
-### selectPageDropdownLabel  
+### selectPageDropdownLabel
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownLabel" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownLabel" />
   
 <div>
 
-### selectPageDropdownAccessibilityLabel  
+### selectPageDropdownAccessibilityLabel
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownAccessibilityLabel" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="selectPageDropdownAccessibilityLabel" />
   
 <div>
 
-### label  
+### label
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="label" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="label" />
   
 <div>
 
-### accessibilityLabel  
+### accessibilityLabel
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="accessibilityLabel" version="5.x" />
+  <PropTable componentLink="DataTable/DataTablePagination" prop="accessibilityLabel" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTablePagination" prop="style" version="5.x" />
-  
-  
+  <PropTable componentLink="DataTable/DataTablePagination" prop="style" />
 
 <span />
 

@@ -6,7 +6,6 @@ import camelCase from 'camelcase';
 import Color from 'color';
 
 type ARGBTheme = ReturnType<typeof argbThemeFromColor>;
-type CSSTheme = Record<keyof ARGBTheme, string>;
 
 type RGBColorList = {
   primary: string;
@@ -46,22 +45,22 @@ const argbThemeFromColor = (
   return themeFromSourceColor(argbFromHex(color)).schemes[type].toJSON();
 };
 
+const hexFromArgb = (value: number) =>
+  `#${(value & 0xffffff).toString(16).padStart(6, '0')}`;
+
 const argbThemeToHexTheme = (theme: ARGBTheme) => {
   return Object.fromEntries(
-    //@ts-ignore
-    Object.entries(theme).map(([key, value]) => [key, Color(value).hex()])
-  ) as CSSTheme;
+    Object.entries(theme).map(([key, value]) => [key, hexFromArgb(value)])
+  );
 };
 
 const argbThemeToRgbTheme = (theme: ARGBTheme) => {
   return Object.fromEntries(
-    //@ts-ignore
     Object.entries(theme).map(([key, value]) => [
       key,
-      //@ts-ignore
-      Color(value).rgb().string(),
+      Color(hexFromArgb(value)).rgb().string(),
     ])
-  ) as CSSTheme;
+  );
 };
 
 export const hexThemeFromColor = (

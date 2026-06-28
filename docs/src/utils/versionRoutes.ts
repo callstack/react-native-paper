@@ -3,6 +3,8 @@ import routeFallbacks from '../data/versionRouteFallbacks.json';
 const NEXT_VERSION_PREFIX = '/6.x';
 const NEXT_HOME_ROUTE = '/6.x/';
 const STABLE_HOME_ROUTE = '/';
+const stableFallbacks: Record<string, string> = routeFallbacks.stable;
+const nextFallbacks: Record<string, string> = routeFallbacks.next;
 
 const stripNextVersionPrefix = (routePath: string) => {
   const stableRoute = routePath.replace(/^\/6\.x(?=\/|$)/, '');
@@ -19,10 +21,7 @@ export const getStableRoute = (routePath: string) => {
     return STABLE_HOME_ROUTE;
   }
 
-  return (
-    routeFallbacks.stable[routePath as keyof typeof routeFallbacks.stable] ??
-    stripNextVersionPrefix(routePath)
-  );
+  return stableFallbacks[routePath] ?? stripNextVersionPrefix(routePath);
 };
 
 export const getNextRoute = (routePath: string) => {
@@ -34,10 +33,7 @@ export const getNextRoute = (routePath: string) => {
     return NEXT_HOME_ROUTE;
   }
 
-  return (
-    routeFallbacks.next[routePath as keyof typeof routeFallbacks.next] ??
-    `${NEXT_VERSION_PREFIX}${routePath}`
-  );
+  return nextFallbacks[routePath] ?? `${NEXT_VERSION_PREFIX}${routePath}`;
 };
 
 export const hasSameStableRoute = (routePath: string) =>

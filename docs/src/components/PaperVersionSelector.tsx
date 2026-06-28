@@ -24,7 +24,7 @@ type VersionLink = {
 
 export default function PaperVersionSelector() {
   const { page } = usePage();
-  const version = useVersion() ?? '5.x';
+  const version = useVersion() || '5.x';
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
   const links = useMemo<VersionLink[]>(() => {

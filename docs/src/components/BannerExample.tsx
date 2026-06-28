@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
+import { BrowserOnly } from '@rspress/core/runtime';
 import {
   Avatar,
   Button,
@@ -16,8 +18,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import BrowserOnly from '../rspress-compat/BrowserOnly';
-import { useColorMode } from '../rspress-compat/theme-common';
+import { useColorMode } from './theme-common';
 
 const shimmerBorderColor = 'rgba(125, 82, 96, 0.4)';
 
@@ -49,13 +50,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stack: React.FC<
-  React.PropsWithChildren<{
-    direction?: 'row' | 'column';
-    spacing?: number;
-    style?: any;
-  }>
-> = ({ direction = 'column', spacing = 0, style, children }) => {
+type StackProps = React.PropsWithChildren<{
+  direction?: 'row' | 'column';
+  spacing?: number;
+  style?: StyleProp<ViewStyle>;
+}>;
+
+const Stack = ({
+  direction = 'column',
+  spacing = 0,
+  style,
+  children,
+}: StackProps) => {
   return (
     <View style={[{ flexDirection: direction, margin: -spacing }, style]}>
       {React.Children.map(children, (child, index) => (

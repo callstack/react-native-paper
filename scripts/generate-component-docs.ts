@@ -1,6 +1,6 @@
 import * as childProcess from 'node:child_process';
 import * as fs from 'node:fs';
-import Module, { createRequire } from 'node:module';
+import { createRequire } from 'node:module';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,8 +10,6 @@ type PluginOptions = {
   libsRootDir: string;
   pages: unknown;
 };
-
-type PluginConfig = [string, PluginOptions];
 
 type PluginFactory = (
   context: unknown,
@@ -35,90 +33,27 @@ const isPluginOptions = (value: unknown): value is PluginOptions => {
   );
 };
 
-const isPluginConfig = (value: unknown): value is PluginConfig =>
-  Array.isArray(value) &&
-  value[0] === './component-docs-plugin' &&
-  isPluginOptions(value[1]);
-
 const isPluginFactory = (value: unknown): value is PluginFactory =>
   typeof value === 'function';
-
-const legacyDocusaurusShims = new Set([
-  '@docusaurus/remark-plugin-npm2yarn',
-  'prism-react-renderer/themes/dracula',
-  'prism-react-renderer/themes/github',
-]);
-
-const loadLegacyDocusaurusConfig = (
-  configPath: string,
-  requireFromScript: ReturnType<typeof createRequire>
-): unknown => {
-  const originalLoad = Reflect.get(Module, '_load');
-
-  if (typeof originalLoad !== 'function') {
-    throw new Error('Unable to patch Node module loader');
-  }
-
-  function loadWithLegacyDocsShims(
-    this: unknown,
-    request: string,
-    parent: NodeJS.Module | null,
-    isMain: boolean
-  ): unknown {
-    if (legacyDocusaurusShims.has(request)) {
-      return {};
-    }
-
-    return Reflect.apply(originalLoad, this, [request, parent, isMain]);
-  }
-
-  Reflect.set(Module, '_load', loadWithLegacyDocsShims);
-
-  try {
-    return requireFromScript(configPath);
-  } finally {
-    Reflect.set(Module, '_load', originalLoad);
-  }
-};
 
 const loadPluginConfig = (
   sourceDir: string,
   requireFromScript: ReturnType<typeof createRequire>
-): PluginConfig => {
+): PluginOptions => {
   const sharedConfigPath = path.join(
     sourceDir,
     'docs',
     'component-docs.config.js'
   );
+  const sharedConfig: unknown = requireFromScript(sharedConfigPath);
 
-  if (fs.existsSync(sharedConfigPath)) {
-    const sharedConfig: unknown = requireFromScript(sharedConfigPath);
-
-    if (!isPluginOptions(sharedConfig)) {
-      throw new Error(
-        `Unable to read component docs config from ${sharedConfigPath}`
-      );
-    }
-
-    return ['./component-docs-plugin', sharedConfig];
-  }
-
-  const configPath = path.join(sourceDir, 'docs', 'docusaurus.config.js');
-  const config = loadLegacyDocusaurusConfig(configPath, requireFromScript);
-
-  if (!isRecord(config) || !Array.isArray(config.plugins)) {
-    throw new Error(`Unable to read plugins from ${configPath}`);
-  }
-
-  const pluginConfig = config.plugins.find(isPluginConfig);
-
-  if (!pluginConfig) {
+  if (!isPluginOptions(sharedConfig)) {
     throw new Error(
-      `Unable to find component docs plugin config in ${configPath}`
+      `Unable to read component docs config from ${sharedConfigPath}`
     );
   }
 
-  return pluginConfig;
+  return sharedConfig;
 };
 
 const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
@@ -226,7 +161,7 @@ const main = async () => {
       fs.symlinkSync(nodeModulesPath, archivedNodeModulesPath, 'dir');
     }
 
-    const pluginConfig = loadPluginConfig(sourceDir, requireFromScript);
+    const pluginOptions = loadPluginConfig(sourceDir, requireFromScript);
     const pluginFactoryPath = path.join(
       sourceDir,
       'docs',
@@ -240,7 +175,7 @@ const main = async () => {
       );
     }
 
-    const plugin = await pluginFactory({}, pluginConfig[1]);
+    const plugin = await pluginFactory({}, pluginOptions);
     const docs = await plugin.loadContent();
     const destination = path.resolve(rootDir, outputPath);
 

@@ -21,15 +21,12 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 
-import {
-  MD2LightTheme,
-  MD2DarkTheme,
-} from 'react-native-paper';
+import { MD2LightTheme, MD2DarkTheme } from 'react-native-paper';
 ```
 
 ### Material Design 3
 
-From v5, React Native Paper theme colors structure follows the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both the previous Paper's theme and React Navigation theme. 
+From v5, React Native Paper theme colors structure follows the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both the previous Paper's theme and React Navigation theme.
 
 However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called `adaptNavigationTheme` – it accepts navigation-compliant themes in both modes and returns their equivalents adjusted to Material Design 3.
 
@@ -49,10 +46,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 Library exports also Material Design 3 themes in both modes:
 
 ```js
-import {
-  MD3LightTheme,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import { MD3LightTheme, MD3DarkTheme } from 'react-native-paper';
 ```
 
 ## Combining theme objects
@@ -117,8 +111,6 @@ export default function App() {
 }
 ```
 
-
-
 Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.
 
 To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepmerge) package. We can install it with:
@@ -135,10 +127,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-} from 'react-native-paper';
+import { MD2DarkTheme, MD2LightTheme } from 'react-native-paper';
 import merge from 'deepmerge';
 
 const CombinedDefaultTheme = merge(MD2LightTheme, NavigationDefaultTheme);
@@ -331,11 +320,7 @@ const Header = ({ scene }) => {
       }}
     >
       <Appbar.Content title={scene.route?.name} />
-        <Switch
-          color={'red'}
-          value={isThemeDark}
-          onValueChange={toggleTheme}
-        />
+      <Switch color={'red'} value={isThemeDark} onValueChange={toggleTheme} />
     </Appbar.Header>
   );
 };

@@ -24,17 +24,19 @@ An implementation of the [bottom sheet behaviour](https://material.io/design/com
 [gorhom/react-native-bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet)
 An implementation of the [bottom sheet behaviour](https://material.io/design/components/sheets-bottom.html), maintained by [@Gorhom](https://twitter.com/Gorhom).
 
-
 ## Date Picker
+
 [web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)
 Material Design themed [date picker](https://material.io/components/date-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)
- 
+
 [react-native-community/react-native-datetimepicker](https://github.com/react-native-community/react-native-datetimepicker)
 
 ## Time Picker
+
 [web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)
-Material Design themed [time picker](https://material.io/components/time-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout) 
+Material Design themed [time picker](https://material.io/components/time-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)
 
 ## System Colors
+
 [pchmn/expo-material3-theme](https://github.com/pchmn/expo-material3-theme)
 Retrieve Material 3 system colors from Android 12+ devices

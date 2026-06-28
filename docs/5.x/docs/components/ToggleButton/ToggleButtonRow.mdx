@@ -2,21 +2,18 @@
 title: ToggleButton.Row
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Toggle button row renders a group of toggle buttons in a row.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/toggle-button-row.gif"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/toggle-button-row.gif'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { ToggleButton } from 'react-native-paper';
@@ -25,7 +22,7 @@ const MyComponent = () => {
   const [value, setValue] = React.useState('left');
 
   return (
-    <ToggleButton.Row onValueChange={value => setValue(value)} value={value}>
+    <ToggleButton.Row onValueChange={(value) => setValue(value)} value={value}>
       <ToggleButton icon="format-align-left" value="left" />
       <ToggleButton icon="format-align-right" value="right" />
     </ToggleButton.Row>
@@ -33,48 +30,43 @@ const MyComponent = () => {
 };
 
 export default MyComponent;
-
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### onValueChange (required) 
+### onValueChange (required)
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="onValueChange" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="onValueChange" />
   
 <div>
 
-### value (required) 
+### value (required)
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="value" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="value" />
   
 <div>
 
-### children (required) 
+### children (required)
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="children" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="children" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="style" version="5.x" />
-  
-  
+  <PropTable componentLink="ToggleButton/ToggleButtonRow" prop="style" />
 
 <span />
 

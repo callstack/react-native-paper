@@ -1,4 +1,4 @@
-import Link from '../rspress-compat/Link';
+import Link from './Link';
 
 type PrereleaseNoticeProps = {
   stableHref: string;

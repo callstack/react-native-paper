@@ -33,7 +33,8 @@ You will also need to manually load the Material Design icon font used by Paper.
 ```css
 @font-face {
   font-family: 'MaterialDesignIcons';
-  src: url('~@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf') format('truetype');
+  src: url('~@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf')
+    format('truetype');
 }
 ```
 

@@ -33,10 +33,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 Library exports also Material Design 3 themes in both modes:
 
 ```js
-import {
-  MD3LightTheme,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import { MD3LightTheme, MD3DarkTheme } from 'react-native-paper';
 ```
 
 ## Combining theme objects
@@ -49,12 +46,7 @@ For React Native Paper theme to work, we need to use `PaperProvider` also at the
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native';
-import {
-  Card,
-  Text,
-  List,
-  PaperProvider,
-} from 'react-native-paper';
+import { Card, Text, List, PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
@@ -99,8 +91,6 @@ export default function App() {
   );
 }
 ```
-
-
 
 Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.
 
@@ -275,11 +265,7 @@ const Header = ({ scene }) => {
       }}
     >
       <Appbar.Content title={scene.route?.name} />
-        <Switch
-          color={'red'}
-          value={isThemeDark}
-          onValueChange={toggleTheme}
-        />
+      <Switch color={'red'} value={isThemeDark} onValueChange={toggleTheme} />
     </Appbar.Header>
   );
 };

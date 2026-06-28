@@ -2,86 +2,82 @@
 title: DataTable.Row
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 A component to show a single row inside of a table.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/data-table-row-cell.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/data-table-row-cell.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { DataTable } from 'react-native-paper';
 
 const MyComponent = () => (
- <DataTable.Row>
-   <DataTable.Cell numeric>1</DataTable.Cell>
-   <DataTable.Cell numeric>2</DataTable.Cell>
-   <DataTable.Cell numeric>3</DataTable.Cell>
-   <DataTable.Cell numeric>4</DataTable.Cell>
- </DataTable.Row>
+  <DataTable.Row>
+    <DataTable.Cell numeric>1</DataTable.Cell>
+    <DataTable.Cell numeric>2</DataTable.Cell>
+    <DataTable.Cell numeric>3</DataTable.Cell>
+    <DataTable.Cell numeric>4</DataTable.Cell>
+  </DataTable.Row>
 );
 
 export default MyComponent;
 ```
 
+## Props
 
+### TouchableRipple props
 
+<ExtendsLink
+  name="TouchableRipple props"
+  link="https://callstack.github.io/react-native-paper/docs/components/TouchableRipple"
+/>
 
-  ## Props
-  ### TouchableRipple props
-  <ExtendsLink name="TouchableRipple props" link="https://callstack.github.io/react-native-paper/docs/components/TouchableRipple" />
-
-  
 <div>
 
-### children (required) 
+### children (required)
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTableRow" prop="children" version="5.x" />
+  <PropTable componentLink="DataTable/DataTableRow" prop="children" />
   
 <div>
 
-### onPress  
+### onPress
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTableRow" prop="onPress" version="5.x" />
+  <PropTable componentLink="DataTable/DataTableRow" prop="onPress" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTableRow" prop="style" version="5.x" />
+  <PropTable componentLink="DataTable/DataTableRow" prop="style" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTableRow" prop="theme" version="5.x" />
+  <PropTable componentLink="DataTable/DataTableRow" prop="theme" />
   
 <div>
 
-### pointerEvents  
+### pointerEvents
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTableRow" prop="pointerEvents" version="5.x" />
-  
-  
+  <PropTable componentLink="DataTable/DataTableRow" prop="pointerEvents" />
 
 <span />
 

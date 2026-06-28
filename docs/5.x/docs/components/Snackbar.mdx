@@ -2,23 +2,20 @@
 title: Snackbar
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Snackbars provide brief feedback about an operation through a message rendered at the bottom of the container in which it's wrapped.
 
 Note: To display it as a popup, regardless of the parent's position, wrap it with a `Portal` component – refer to the example in the "More Examples` section.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/snackbar.gif"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/snackbar.gif'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
@@ -42,7 +39,8 @@ const MyComponent = () => {
           onPress: () => {
             // Do something
           },
-        }}>
+        }}
+      >
         Hey there! I'm a Snackbar.
       </Snackbar>
     </View>
@@ -59,168 +57,164 @@ const styles = StyleSheet.create({
 export default MyComponent;
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### visible (required) 
+### visible (required)
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="visible" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="visible" />
   
 <div>
 
-### action  
+### action
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="action" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="action" />
   
 <div>
 
-### icon  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### icon <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="icon" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="icon" />
   
 <div>
 
-### rippleColor  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### rippleColor <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="rippleColor" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="rippleColor" />
   
 <div>
 
-### onIconPress  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### onIconPress <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="onIconPress" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="onIconPress" />
   
 <div>
 
-### iconAccessibilityLabel  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### iconAccessibilityLabel <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="iconAccessibilityLabel" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="iconAccessibilityLabel" />
   
 <div>
 
-### duration  
+### duration
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="duration" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="duration" />
   
 <div>
 
-### onDismiss (required) 
+### onDismiss (required)
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="onDismiss" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="onDismiss" />
   
 <div>
 
-### children (required) 
+### children (required)
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="children" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="children" />
   
 <div>
 
-### elevation  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### elevation <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="elevation" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="elevation" />
   
 <div>
 
-### maxFontSizeMultiplier  
+### maxFontSizeMultiplier
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="maxFontSizeMultiplier" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="maxFontSizeMultiplier" />
   
 <div>
 
-### wrapperStyle  
+### wrapperStyle
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="wrapperStyle" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="wrapperStyle" />
   
 <div>
 
-### contentStyle  
+### contentStyle
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="contentStyle" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="contentStyle" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="style" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="style" />
   
 <div>
 
-### ref  
+### ref
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="ref" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="ref" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="theme" version="5.x" />
+  <PropTable componentLink="Snackbar" prop="theme" />
   
 <div>
 
-### testID  
+### testID
 
 </div>
   
-  <PropTable componentLink="Snackbar" prop="testID" version="5.x" />
-  
-  
+  <PropTable componentLink="Snackbar" prop="testID" />
 
+## More Examples
 
-  ## More Examples
-  <details>
-    <summary>Toggle to grab more examples</summary>
-    <ul>
-      
-        <li key="Snackbar rendered regardless of the parent positioning">
-          <a href="https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning">Snackbar rendered regardless of the parent positioning</a>
-        </li>
-    
-    </ul>
-  </details>
-  
+<details>
+  <summary>Toggle to grab more examples</summary>
+  <ul>
+    <li key="Snackbar rendered regardless of the parent positioning">
+      <a href="https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning">
+        Snackbar rendered regardless of the parent positioning
+      </a>
+    </li>
+  </ul>
+</details>
 
+## Theme colors
 
-  ## Theme colors
-
-  <ThemeColorsTable themeColorsData={{"-":{"iconColor":"theme.colors.inverseOnSurface"}}} componentName="Snackbar" />
-  
+<ThemeColorsTable
+  themeColorsData={{ '-': { iconColor: 'theme.colors.inverseOnSurface' } }}
+  componentName="Snackbar"
+/>
 
 <span />

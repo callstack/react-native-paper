@@ -40,6 +40,3 @@ import { Provider as PaperProvider } from 'react-native-paper';
   // ...
 </PaperProvider>
 ```
-
-
-

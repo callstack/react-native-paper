@@ -2,22 +2,19 @@
 title: ToggleButton
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
 a group should share a common container.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/toggle-button.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/toggle-button.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { ToggleButton } from 'react-native-paper';
@@ -25,7 +22,7 @@ import { ToggleButton } from 'react-native-paper';
 const ToggleButtonExample = () => {
   const [status, setStatus] = React.useState('checked');
 
-  const onButtonToggle = value => {
+  const onButtonToggle = (value) => {
     setStatus(status === 'checked' ? 'unchecked' : 'checked');
   };
 
@@ -40,120 +37,115 @@ const ToggleButtonExample = () => {
 };
 
 export default ToggleButtonExample;
-
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### icon (required) 
+### icon (required)
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="icon" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="icon" />
   
 <div>
 
-### size  
+### size
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="size" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="size" />
   
 <div>
 
-### iconColor  
+### iconColor
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="iconColor" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="iconColor" />
   
 <div>
 
-### rippleColor  
+### rippleColor
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="rippleColor" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="rippleColor" />
   
 <div>
 
-### disabled  
+### disabled
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="disabled" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="disabled" />
   
 <div>
 
-### accessibilityLabel  
+### accessibilityLabel
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="accessibilityLabel" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="accessibilityLabel" />
   
 <div>
 
-### onPress  
+### onPress
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="onPress" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="onPress" />
   
 <div>
 
-### value  
+### value
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="value" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="value" />
   
 <div>
 
-### status  
+### status
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="status" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="status" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="style" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="style" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="theme" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="theme" />
   
 <div>
 
-### ref  
+### ref
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="ref" version="5.x" />
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="ref" />
   
 <div>
 
-### testID  
+### testID
 
 </div>
   
-  <PropTable componentLink="ToggleButton/ToggleButton" prop="testID" version="5.x" />
-  
-  
+  <PropTable componentLink="ToggleButton/ToggleButton" prop="testID" />
 
 <span />
 

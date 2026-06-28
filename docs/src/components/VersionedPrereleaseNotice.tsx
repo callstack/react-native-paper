@@ -6,7 +6,7 @@ import { getStableRoute, hasSameStableRoute } from '../utils/versionRoutes';
 const DOCS_PREFIX = '/6.x/docs/';
 
 export default function VersionedPrereleaseNotice() {
-  const version = useVersion() ?? '5.x';
+  const version = useVersion() || '5.x';
   const { page } = usePage();
   const routePath = page.routePath ?? '/';
 

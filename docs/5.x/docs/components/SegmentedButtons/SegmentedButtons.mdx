@@ -2,21 +2,23 @@
 title: SegmentedButtons
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Segmented buttons can be used to select options, switch views or sort elements.
 
-
-
-
-  <ScreenshotTabs screenshotData={{"single select":"screenshots/segmented-button-single-select.png","multiselect":"screenshots/segmented-button-multi-select.png"}} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs
+  screenshotData={{
+    'single select': 'screenshots/segmented-button-single-select.png',
+    multiselect: 'screenshots/segmented-button-multi-select.png',
+  }}
+/>
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
@@ -56,52 +58,69 @@ const styles = StyleSheet.create({
 export default MyComponent;
 ```
 
-
-  ## Props
-  <span />
-  
-
-  
-<div>
-
-### buttons (required) 
-
-</div>
-  
-  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="buttons" version="5.x" />
-  
-<div>
-
-### density  
-
-</div>
-  
-  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="density" version="5.x" />
-  
-<div>
-
-### style  
-
-</div>
-  
-  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="style" version="5.x" />
-  
-<div>
-
-### theme  
-
-</div>
-  
-  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="theme" version="5.x" />
-  
-  
+## Props
 
 <span />
 
+<div>
 
-  ## Theme colors
+### buttons (required)
 
-  <ThemeColorsTable themeColorsData={{"checked":{"-":{"backgroundColor":"theme.colors.secondaryContainer","textColor":"theme.colors.onSecondaryContainer","borderColor":"theme.colors.primary"}},"unchecked":{"-":{"textColor":"theme.colors.onSurface","borderColor":"theme.colors.outline"}},"disabled":{"-":{"borderColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"}}}} componentName="SegmentedButtons" />
+</div>
   
+  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="buttons" />
+  
+<div>
+
+### density
+
+</div>
+  
+  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="density" />
+  
+<div>
+
+### style
+
+</div>
+  
+  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="style" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="SegmentedButtons/SegmentedButtons" prop="theme" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{
+    checked: {
+      '-': {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+        borderColor: 'theme.colors.primary',
+      },
+    },
+    unchecked: {
+      '-': {
+        textColor: 'theme.colors.onSurface',
+        borderColor: 'theme.colors.outline',
+      },
+    },
+    disabled: {
+      '-': {
+        borderColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
+      },
+    },
+  }}
+  componentName="SegmentedButtons"
+/>
 
 <span />

@@ -8,6 +8,7 @@
     "customConditions": ["react-native-paper-source"],
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -30,5 +31,16 @@
     "types": ["node"],
     "verbatimModuleSyntax": true
   },
-  "exclude": ["lib/**/*"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.source.json"
+    },
+    {
+      "path": "./docs"
+    },
+    {
+      "path": "./example"
+    }
+  ]
 }

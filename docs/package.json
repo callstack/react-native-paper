@@ -2,14 +2,14 @@
   "name": "docs",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "yarn generate && rspress dev",
     "start": "yarn dev",
     "build": "yarn generate && rspress build",
     "preview": "rspress preview",
     "typecheck": "tsc --noEmit",
-    "generate": "node scripts/generate-rspress-content.mjs && node scripts/generate-current-component-docs.mjs",
-    "test:generate": "node --test tests/**/*.test.mjs"
+    "generate": "node scripts/generate-rspress-content.ts && node scripts/generate-current-component-docs.ts"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.9",
@@ -21,7 +21,6 @@
     "camelcase": "^7.0.1",
     "color": "^4.2.3",
     "marked": "^4.1.1",
-    "process": "^0.11.10",
     "react": "19.2.6",
     "react-color": "^2.19.3",
     "react-dom": "19.2.6",
@@ -30,7 +29,6 @@
     "use-latest-callback": "^0.2.3"
   },
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
     "@types/marked": "^4.0.7",
     "@types/react": "^19.2.7",
     "@types/react-color": "^3.0.6",

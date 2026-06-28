@@ -38,7 +38,7 @@ Supported values:
 ```js
 import * as React from 'react';
 import { PaperProvider } from 'react-native-paper';
-import App from './src/App';
+import App from './App';
 
 export default function Main() {
   return (

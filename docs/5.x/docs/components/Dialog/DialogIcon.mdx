@@ -2,22 +2,19 @@
 title: Dialog.Icon
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 @supported Available in v5.x with theme version 3
 A component to show an icon in a Dialog.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/dialog-icon.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/dialog-icon.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
@@ -45,57 +42,54 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
   },
-})
+});
 
 export default MyComponent;
 ```
 
-
-  ## Props
-  <span />
-  
-
-  
-<div>
-
-### color  
-
-</div>
-  
-  <PropTable componentLink="Dialog/DialogIcon" prop="color" version="5.x" />
-  
-<div>
-
-### icon (required) 
-
-</div>
-  
-  <PropTable componentLink="Dialog/DialogIcon" prop="icon" version="5.x" />
-  
-<div>
-
-### size  
-
-</div>
-  
-  <PropTable componentLink="Dialog/DialogIcon" prop="size" version="5.x" />
-  
-<div>
-
-### theme  
-
-</div>
-  
-  <PropTable componentLink="Dialog/DialogIcon" prop="theme" version="5.x" />
-  
-  
+## Props
 
 <span />
 
+<div>
 
-  ## Theme colors
+### color
 
-  <ThemeColorsTable themeColorsData={{"-":{"iconColor":"theme.colors.secondary"}}} componentName="Dialog.Icon" />
+</div>
   
+  <PropTable componentLink="Dialog/DialogIcon" prop="color" />
+  
+<div>
+
+### icon (required)
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="icon" />
+  
+<div>
+
+### size
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="size" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="Dialog/DialogIcon" prop="theme" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{ '-': { iconColor: 'theme.colors.secondary' } }}
+  componentName="Dialog.Icon"
+/>
 
 <span />

@@ -2,21 +2,25 @@
 title: RadioButton
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Radio buttons allow the selection a single option from a set.
 
-
-
-
-  <ScreenshotTabs screenshotData={{"Android (enabled)":"screenshots/radio-enabled.android.png","Android (disabled)":"screenshots/radio-disabled.android.png","iOS (enabled)":"screenshots/radio-enabled.ios.png","iOS (disabled)":"screenshots/radio-disabled.ios.png"}} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs
+  screenshotData={{
+    'Android (enabled)': 'screenshots/radio-enabled.android.png',
+    'Android (disabled)': 'screenshots/radio-disabled.android.png',
+    'iOS (enabled)': 'screenshots/radio-enabled.ios.png',
+    'iOS (disabled)': 'screenshots/radio-disabled.ios.png',
+  }}
+/>
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
@@ -29,12 +33,12 @@ const MyComponent = () => {
     <View>
       <RadioButton
         value="first"
-        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        status={checked === 'first' ? 'checked' : 'unchecked'}
         onPress={() => setChecked('first')}
       />
       <RadioButton
         value="second"
-        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        status={checked === 'second' ? 'checked' : 'unchecked'}
         onPress={() => setChecked('second')}
       />
     </View>
@@ -44,77 +48,73 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### value (required) 
+### value (required)
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="value" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="value" />
   
 <div>
 
-### status  
+### status
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="status" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="status" />
   
 <div>
 
-### disabled  
+### disabled
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="disabled" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="disabled" />
   
 <div>
 
-### onPress  
+### onPress
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="onPress" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="onPress" />
   
 <div>
 
-### uncheckedColor  
+### uncheckedColor
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="uncheckedColor" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="uncheckedColor" />
   
 <div>
 
-### color  
+### color
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="color" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="color" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="theme" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButton" prop="theme" />
   
 <div>
 
-### testID  
+### testID
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButton" prop="testID" version="5.x" />
-  
-  
+  <PropTable componentLink="RadioButton/RadioButton" prop="testID" />
 
 <span />
 

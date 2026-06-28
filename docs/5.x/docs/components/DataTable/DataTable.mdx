@@ -2,57 +2,54 @@
 title: DataTable
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Data tables allow displaying sets of data.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/data-table-full-width.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/data-table-full-width.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { DataTable } from 'react-native-paper';
 
 const MyComponent = () => {
-  const [page, setPage] = React.useState<number>(0);
+  const [page, setPage] = React.useState < number > 0;
   const [numberOfItemsPerPageList] = React.useState([2, 3, 4]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
   );
 
   const [items] = React.useState([
-   {
-     key: 1,
-     name: 'Cupcake',
-     calories: 356,
-     fat: 16,
-   },
-   {
-     key: 2,
-     name: 'Eclair',
-     calories: 262,
-     fat: 16,
-   },
-   {
-     key: 3,
-     name: 'Frozen yogurt',
-     calories: 159,
-     fat: 6,
-   },
-   {
-     key: 4,
-     name: 'Gingerbread',
-     calories: 305,
-     fat: 3.7,
-   },
+    {
+      key: 1,
+      name: 'Cupcake',
+      calories: 356,
+      fat: 16,
+    },
+    {
+      key: 2,
+      name: 'Eclair',
+      calories: 262,
+      fat: 16,
+    },
+    {
+      key: 3,
+      name: 'Frozen yogurt',
+      calories: 159,
+      fat: 6,
+    },
+    {
+      key: 4,
+      name: 'Gingerbread',
+      calories: 305,
+      fat: 3.7,
+    },
   ]);
 
   const from = page * itemsPerPage;
@@ -96,29 +93,25 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### children (required) 
+### children (required)
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTable" prop="children" version="5.x" />
+  <PropTable componentLink="DataTable/DataTable" prop="children" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="DataTable/DataTable" prop="style" version="5.x" />
-  
-  
+  <PropTable componentLink="DataTable/DataTable" prop="style" />
 
 <span />
 

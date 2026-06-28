@@ -2,21 +2,18 @@
 title: RadioButton.Item
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/radio-item.ios.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/radio-item.ios.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { RadioButton } from 'react-native-paper';
@@ -25,7 +22,7 @@ const MyComponent = () => {
   const [value, setValue] = React.useState('first');
 
   return (
-    <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+    <RadioButton.Group onValueChange={(value) => setValue(value)} value={value}>
       <RadioButton.Item label="First item" value="first" />
       <RadioButton.Item label="Second item" value="second" />
     </RadioButton.Group>
@@ -35,173 +32,169 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
+## Props
 
-  ## Props
-  <span />
-  
+<span />
 
-  
 <div>
 
-### value (required) 
+### value (required)
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="value" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="value" />
   
 <div>
 
-### label (required) 
+### label (required)
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="label" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="label" />
   
 <div>
 
-### disabled  
+### disabled
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="disabled" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="disabled" />
   
 <div>
 
-### background  
+### background
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="background" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="background" />
   
 <div>
 
-### onPress  
+### onPress
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onPress" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onPress" />
   
 <div>
 
-### onLongPress  
+### onLongPress
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onLongPress" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="onLongPress" />
   
 <div>
 
-### accessibilityLabel  
+### accessibilityLabel
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="accessibilityLabel" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="accessibilityLabel" />
   
 <div>
 
-### uncheckedColor  
+### uncheckedColor
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="uncheckedColor" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="uncheckedColor" />
   
 <div>
 
-### color  
+### color
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="color" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="color" />
   
 <div>
 
-### rippleColor  
+### rippleColor
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="rippleColor" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="rippleColor" />
   
 <div>
 
-### status  
+### status
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="status" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="status" />
   
 <div>
 
-### style  
+### style
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="style" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="style" />
   
 <div>
 
-### labelStyle  
+### labelStyle
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelStyle" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelStyle" />
   
 <div>
 
-### labelVariant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### labelVariant <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelVariant" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelVariant" />
   
 <div>
 
-### labelMaxFontSizeMultiplier  
+### labelMaxFontSizeMultiplier
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelMaxFontSizeMultiplier" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="labelMaxFontSizeMultiplier" />
   
 <div>
 
-### theme  
+### theme
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="theme" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="theme" />
   
 <div>
 
-### testID  
+### testID
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="testID" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="testID" />
   
 <div>
 
-### mode  
+### mode
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="mode" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="mode" />
   
 <div>
 
-### position  
+### position
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="position" version="5.x" />
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="position" />
   
 <div>
 
-### hitSlop  
+### hitSlop
 
 </div>
   
-  <PropTable componentLink="RadioButton/RadioButtonItem" prop="hitSlop" version="5.x" />
-  
-  
+  <PropTable componentLink="RadioButton/RadioButtonItem" prop="hitSlop" />
 
 <span />
 

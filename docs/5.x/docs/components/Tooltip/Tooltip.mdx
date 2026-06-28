@@ -2,23 +2,20 @@
 title: Tooltip
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Tooltips display informative text when users hover over, focus on, or tap an element.
 
 Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
 
-
-
-
-  <ScreenshotTabs screenshotData={"screenshots/tooltip.png"} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs screenshotData={'screenshots/tooltip.png'} />
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { IconButton, Tooltip } from 'react-native-paper';
@@ -32,68 +29,70 @@ const MyComponent = () => (
 export default MyComponent;
 ```
 
-
-  ## Props
-  <span />
-  
-
-  
-<div>
-
-### children (required) 
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="children" version="5.x" />
-  
-<div>
-
-### enterTouchDelay  
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="enterTouchDelay" version="5.x" />
-  
-<div>
-
-### leaveTouchDelay  
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="leaveTouchDelay" version="5.x" />
-  
-<div>
-
-### title (required) 
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="title" version="5.x" />
-  
-<div>
-
-### titleMaxFontSizeMultiplier  
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="titleMaxFontSizeMultiplier" version="5.x" />
-  
-<div>
-
-### theme  
-
-</div>
-  
-  <PropTable componentLink="Tooltip/Tooltip" prop="theme" version="5.x" />
-  
-  
+## Props
 
 <span />
 
+<div>
 
-  ## Theme colors
+### children (required)
 
-  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.onSurface","textColor":"theme.colors.surface"}}} componentName="Tooltip" />
+</div>
   
+  <PropTable componentLink="Tooltip/Tooltip" prop="children" />
+  
+<div>
+
+### enterTouchDelay
+
+</div>
+  
+  <PropTable componentLink="Tooltip/Tooltip" prop="enterTouchDelay" />
+  
+<div>
+
+### leaveTouchDelay
+
+</div>
+  
+  <PropTable componentLink="Tooltip/Tooltip" prop="leaveTouchDelay" />
+  
+<div>
+
+### title (required)
+
+</div>
+  
+  <PropTable componentLink="Tooltip/Tooltip" prop="title" />
+  
+<div>
+
+### titleMaxFontSizeMultiplier
+
+</div>
+  
+  <PropTable componentLink="Tooltip/Tooltip" prop="titleMaxFontSizeMultiplier" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="Tooltip/Tooltip" prop="theme" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{
+    '-': {
+      backgroundColor: 'theme.colors.onSurface',
+      textColor: 'theme.colors.surface',
+    },
+  }}
+  componentName="Tooltip"
+/>
 
 <span />

@@ -2,7 +2,7 @@
 title: Theming
 ---
 
-import DynamicColorTheme from '@site/src/components/DynamicColorTheme.tsx';
+import DynamicColorTheme from '@docs/components/DynamicColorTheme.tsx';
 
 # Theming
 
@@ -71,14 +71,12 @@ A theme usually contains the following properties:
 - `colors` (`object`): various colors used throughout different elements.
 
   > The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.
-
   - `primary`
   - `onPrimary`
   - `primaryContainer`
   - `onPrimaryContainer`
 
   > The secondary key color is used for less prominent components in the UI such as filter chips, while expanding the opportunity for color expression.
-
   - `secondary`
   - `onSecondary`
   - `secondaryContainer`
@@ -87,34 +85,29 @@ A theme usually contains the following properties:
   > The tertiary key color is used to derive the roles of contrasting accents that can be used to balance primary and secondary colors or bring heightened attention to an element.
 
   > The tertiary color role is left for teams to use at their discretion and is intended to support broader color expression in products.
-
   - `tertiary`
   - `onTertiary`
   - `tertiaryContainer`
   - `onTertiaryContainer`
 
   > The neutral key color is used to derive the roles of surface and background, as well as high emphasis text and icons.
-
   - `background`
   - `onBackground`
   - `surface`
   - `onSurface`
 
   > The neutral variant key color is used to derive medium emphasis text and icons, surface variants, and component outlines.
-
   - `surfaceVariant`
   - `onSurfaceVariant`
   - `outline`
 
   > In addition to the accent and neutral key color, the color system includes a semantic color role for error
-
   - `error`
   - `onError`
   - `errorContainer`
   - `onErrorContainer`
 
   > Surfaces at elevation levels 0-5 are tinted via color overlays based on the primary color, such as app bars or menus. The addition of a grade from 0-5 introduces tonal variation to the surface baseline.
-
   - `elevation` (`object`)
     - `level0` - transparent
     - `level1` - 5% opacity
@@ -124,12 +117,10 @@ A theme usually contains the following properties:
     - `level5` - 14% opacity
 
   > Colors for disabled state
-
   - `surfaceDisabled`
   - `onSurfaceDisabled`
 
   > These additional role mappings exist in a scheme and are mapped to components where needed.
-
   - `shadow`
   - `inverseOnSurface`
   - `inverseSurface`
@@ -340,14 +331,18 @@ By default, TypeScript works well whenever you change the value of the built-in 
 
 There are two supported ways of overriding the theme:
 
-1. <b>Simple built-in theme overrides</b> - when you only customize the values and
-   the whole theme schema remains the same
-2. <b>Advanced theme overrides</b> - when you <i>add new properties</i> or <i>change the built-in schema shape</i>
+1. <b>Simple built-in theme overrides</b> - when you only customize the values
+   and the whole theme schema remains the same
+2. <b>Advanced theme overrides</b> - when you <i>add new properties</i> or
+   <i>change the built-in schema shape</i>
 
 :::caution
 TypeScript support for `withTheme` is currently limited to <b>Material You (MD3)</b> theme only.
 
-<i>We are planning to provide a better support of handling custom theme overrides in future releases.</i>
+<i>
+  We are planning to provide a better support of handling custom theme overrides
+  in future releases.
+</i>
 :::
 
 ### Simple built-in theme overrides

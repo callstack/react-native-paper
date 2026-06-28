@@ -2,32 +2,32 @@
 title: FAB
 ---
 
-import PropTable from '@site/src/components/PropTable.tsx';
-import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
-import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
-import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 A floating action button represents the primary action on a screen. It appears in front of all screen content.
 
-
-
-
-  <ScreenshotTabs screenshotData={{"all variants":"screenshots/fab-1.png","all sizes":"screenshots/fab-2.png","all modes":"screenshots/fab-4.png","with label":"screenshots/fab-3.png"}} baseUrl="/react-native-paper/"/>
-  
+<ScreenshotTabs
+  screenshotData={{
+    'all variants': 'screenshots/fab-1.png',
+    'all sizes': 'screenshots/fab-2.png',
+    'all modes': 'screenshots/fab-4.png',
+    'with label': 'screenshots/fab-3.png',
+  }}
+/>
 
 ## Usage
+
 ```js
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 
 const MyComponent = () => (
-  <FAB
-    icon="plus"
-    style={styles.fab}
-    onPress={() => console.log('Pressed')}
-  />
+  <FAB icon="plus" style={styles.fab} onPress={() => console.log('Pressed')} />
 );
 
 const styles = StyleSheet.create({
@@ -37,225 +37,243 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-})
+});
 
 export default MyComponent;
 ```
 
-
-  ## Props
-  <span />
-  
-
-  
-<div>
-
-### icon  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="icon" version="5.x" />
-  
-<div>
-
-### label  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="label" version="5.x" />
-  
-<div>
-
-### uppercase  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="uppercase" version="5.x" />
-  
-<div>
-
-### background  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="background" version="5.x" />
-  
-<div>
-
-### accessibilityLabel  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="accessibilityLabel" version="5.x" />
-  
-<div>
-
-### accessibilityState  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="accessibilityState" version="5.x" />
-  
-<div>
-
-### animated  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="animated" version="5.x" />
-  
-<div>
-
-### small  <span class="badge badge-deprecated "><span class="badge-text">Deprecated in v.5x - use prop size="small".</span></span>
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="small" version="5.x" />
-  
-<div>
-
-### color  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="color" version="5.x" />
-  
-<div>
-
-### rippleColor  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="rippleColor" version="5.x" />
-  
-<div>
-
-### disabled  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="disabled" version="5.x" />
-  
-<div>
-
-### visible  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="visible" version="5.x" />
-  
-<div>
-
-### loading  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="loading" version="5.x" />
-  
-<div>
-
-### onPress  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="onPress" version="5.x" />
-  
-<div>
-
-### onLongPress  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="onLongPress" version="5.x" />
-  
-<div>
-
-### delayLongPress  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="delayLongPress" version="5.x" />
-  
-<div>
-
-### size  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="size" version="5.x" />
-  
-<div>
-
-### customSize  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="customSize" version="5.x" />
-  
-<div>
-
-### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="mode" version="5.x" />
-  
-<div>
-
-### variant  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="variant" version="5.x" />
-  
-<div>
-
-### labelMaxFontSizeMultiplier  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="labelMaxFontSizeMultiplier" version="5.x" />
-  
-<div>
-
-### style  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="style" version="5.x" />
-  
-<div>
-
-### theme  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="theme" version="5.x" />
-  
-<div>
-
-### testID  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="testID" version="5.x" />
-  
-<div>
-
-### ref  
-
-</div>
-  
-  <PropTable componentLink="FAB/FAB" prop="ref" version="5.x" />
-  
-  
+## Props
 
 <span />
 
+<div>
 
-  ## Theme colors
+### icon
 
-  <ThemeColorsTable themeColorsData={{"disabled":{"backgroundColor":"theme.colors.surfaceDisabled","textColor/iconColor":"theme.colors.onSurfaceDisabled"},"primary":{"backgroundColor":"theme.colors.primaryContainer","textColor/iconColor":"theme.colors.onPrimaryContainer"},"secondary":{"backgroundColor":"theme.colors.secondaryContainer","textColor/iconColor":"theme.colors.onSecondaryContainer"},"tertiary":{"backgroundColor":"theme.colors.tertiaryContainer","textColor/iconColor":"theme.colors.onTertiaryContainer"},"surface":{"backgroundColor":"theme.colors.elevarion.level3","textColor/iconColor":"theme.colors.primary"}}} componentName="FAB" />
+</div>
   
+  <PropTable componentLink="FAB/FAB" prop="icon" />
+  
+<div>
+
+### label
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="label" />
+  
+<div>
+
+### uppercase
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="uppercase" />
+  
+<div>
+
+### background
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="background" />
+  
+<div>
+
+### accessibilityLabel
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="accessibilityLabel" />
+  
+<div>
+
+### accessibilityState
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="accessibilityState" />
+  
+<div>
+
+### animated
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="animated" />
+  
+<div>
+
+### small <span class="badge badge-deprecated "><span class="badge-text">Deprecated in v.5x - use prop size="small".</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="small" />
+  
+<div>
+
+### color
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="color" />
+  
+<div>
+
+### rippleColor
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="rippleColor" />
+  
+<div>
+
+### disabled
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="disabled" />
+  
+<div>
+
+### visible
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="visible" />
+  
+<div>
+
+### loading
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="loading" />
+  
+<div>
+
+### onPress
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="onPress" />
+  
+<div>
+
+### onLongPress
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="onLongPress" />
+  
+<div>
+
+### delayLongPress
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="delayLongPress" />
+  
+<div>
+
+### size <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="size" />
+  
+<div>
+
+### customSize
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="customSize" />
+  
+<div>
+
+### mode <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="mode" />
+  
+<div>
+
+### variant <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="variant" />
+  
+<div>
+
+### labelMaxFontSizeMultiplier
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="labelMaxFontSizeMultiplier" />
+  
+<div>
+
+### style
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="style" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="theme" />
+  
+<div>
+
+### testID
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="testID" />
+  
+<div>
+
+### ref
+
+</div>
+  
+  <PropTable componentLink="FAB/FAB" prop="ref" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{
+    disabled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      'textColor/iconColor': 'theme.colors.onSurfaceDisabled',
+    },
+    primary: {
+      backgroundColor: 'theme.colors.primaryContainer',
+      'textColor/iconColor': 'theme.colors.onPrimaryContainer',
+    },
+    secondary: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      'textColor/iconColor': 'theme.colors.onSecondaryContainer',
+    },
+    tertiary: {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+      'textColor/iconColor': 'theme.colors.onTertiaryContainer',
+    },
+    surface: {
+      backgroundColor: 'theme.colors.elevarion.level3',
+      'textColor/iconColor': 'theme.colors.primary',
+    },
+  }}
+  componentName="FAB"
+/>
 
 <span />
