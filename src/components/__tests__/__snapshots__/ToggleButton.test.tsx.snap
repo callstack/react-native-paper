@@ -89,7 +89,7 @@ exports[`renders disabled toggle button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,
@@ -229,7 +229,7 @@ exports[`renders toggle button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,
@@ -369,7 +369,7 @@ exports[`renders unchecked toggle button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,

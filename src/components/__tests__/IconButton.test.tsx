@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   slightlyRounded: {
     borderRadius: 4,
   },
+  customBackground: {
+    backgroundColor: pink500,
+  },
 });
 
 it('renders icon button by default', async () => {
@@ -82,6 +85,22 @@ it('renders icon button with small border radius', async () => {
 
   expect(screen.getByTestId('icon-button-container')).toHaveStyle({
     borderRadius: 4,
+  });
+});
+
+it('keeps touchable content centered with custom container style', async () => {
+  await render(
+    <IconButton
+      icon="delete"
+      testID="icon-button"
+      style={styles.customBackground}
+    />
+  );
+
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   });
 });
 
