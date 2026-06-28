@@ -236,7 +236,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -441,7 +441,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -738,7 +738,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -943,7 +943,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -1417,7 +1417,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -1622,7 +1622,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -1900,7 +1900,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,
@@ -2105,7 +2105,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
                   undefined,

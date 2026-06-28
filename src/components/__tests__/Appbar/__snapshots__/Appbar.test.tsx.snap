@@ -170,7 +170,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "flexGrow": 1,
+                      "flex": 1,
                       "justifyContent": "center",
                     },
                     undefined,
@@ -360,7 +360,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     [
                       {
                         "alignItems": "center",
-                        "flexGrow": 1,
+                        "flex": 1,
                         "justifyContent": "center",
                       },
                       undefined,
@@ -549,7 +549,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
                 undefined,
@@ -792,7 +792,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
                 undefined,

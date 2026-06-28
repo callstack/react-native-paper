@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   touchable: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
