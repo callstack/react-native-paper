@@ -272,7 +272,7 @@
             },
             "description": "Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -380,7 +380,7 @@
             },
             "description": "Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -991,10 +991,10 @@
     "Badge": {
       "filepath": "Badge.tsx",
       "title": "Badge",
-      "description": "Badges are small status descriptors for UI elements.\nA badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Badge } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Badge>3</Badge>\n);\n\nexport default MyComponent;\n```",
+      "description": "Badges are small status descriptors for UI elements.\nA badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.\n\nThe badge is styled differently based on whether `children` is passed:\n- Small dot when it doesn't have `children`\n- Larger pill when it has `children`\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Badge } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Badge>3</Badge>\n);\n\nexport default MyComponent;\n```",
       "link": "badge",
       "data": {
-        "description": "Badges are small status descriptors for UI elements.\nA badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Badge } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Badge>3</Badge>\n);\n\nexport default MyComponent;\n```",
+        "description": "Badges are small status descriptors for UI elements.\nA badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.\n\nThe badge is styled differently based on whether `children` is passed:\n- Small dot when it doesn't have `children`\n- Larger pill when it has `children`\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Badge } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Badge>3</Badge>\n);\n\nexport default MyComponent;\n```",
         "displayName": "Badge",
         "methods": [],
         "statics": [],
@@ -1026,17 +1026,6 @@
             },
             "description": "Content of the `Badge`."
           },
-          "size": {
-            "required": false,
-            "tsType": {
-              "name": "number"
-            },
-            "description": "Size of the `Badge`.",
-            "defaultValue": {
-              "value": "20",
-              "computed": false
-            }
-          },
           "style": {
             "required": false,
             "tsType": {
@@ -1047,17 +1036,6 @@
                 }
               ],
               "raw": "StyleProp<TextStyle>"
-            },
-            "description": ""
-          },
-          "ref": {
-            "required": false,
-            "tsType": {
-              "name": "ReactRefObject",
-              "raw": "React.RefObject<typeof Animated.Text>",
-              "elements": [
-                {}
-              ]
             },
             "description": ""
           },
@@ -1424,7 +1402,7 @@
                 ]
               }
             },
-            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `accessibilityLabel`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback."
+            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `aria-label`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback."
           },
           "onIndexChange": {
             "required": true,
@@ -1738,7 +1716,7 @@
                 }
               }
             },
-            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route.accessibilityLabel` by default."
+            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route['aria-label']` by default."
           },
           "getBadge": {
             "required": false,
@@ -2317,7 +2295,7 @@
                 ]
               }
             },
-            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `accessibilityLabel`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback."
+            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `aria-label`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback."
           },
           "renderIcon": {
             "required": false,
@@ -2546,9 +2524,9 @@
                 }
               }
             },
-            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route.accessibilityLabel` by default.",
+            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route['aria-label']` by default.",
             "defaultValue": {
-              "value": "({ route }: { route: Route }) =>\nroute.accessibilityLabel",
+              "value": "({ route }: { route: Route }) => route['aria-label']",
               "computed": false
             }
           },
@@ -3097,7 +3075,7 @@
             },
             "description": "Type of background drawabale to display the feedback (Android).\nhttps://reactnative.dev/docs/pressable#rippleconfig"
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -3111,10 +3089,10 @@
             },
             "description": "Accessibility hint for the button. This is read by the screen reader when the user taps the button."
           },
-          "accessibilityRole": {
+          "role": {
             "required": false,
             "tsType": {
-              "name": "AccessibilityRole"
+              "name": "Role"
             },
             "description": "Accessibility role for the button. The \"button\" role is set by default.",
             "defaultValue": {
@@ -4206,7 +4184,7 @@
             },
             "description": "Type of background drawabale to display the feedback (Android).\nhttps://reactnative.dev/docs/pressable#rippleconfig"
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -4448,7 +4426,7 @@
             },
             "description": "Type of background drawabale to display the feedback (Android).\nhttps://reactnative.dev/docs/pressable#rippleconfig"
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -4659,7 +4637,7 @@
             },
             "description": "Specifies the largest possible scale a text font can reach."
           },
-          "accessibilityRole": {
+          "role": {
             "defaultValue": {
               "value": "'button'",
               "computed": false
@@ -4986,7 +4964,7 @@
             },
             "description": "Label text to display which indicates current pagination."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -5720,7 +5698,7 @@
             },
             "description": "Specifies the largest possible scale a label font can reach."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -5834,7 +5812,7 @@
             },
             "description": "Type of background drawabale to display the feedback (Android).\nhttps://reactnative.dev/docs/pressable#rippleconfig"
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -6079,19 +6057,50 @@
             },
             "description": "Function to execute on press."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
             },
             "description": "Accessibility label. Falls back to nothing if unset."
           },
-          "accessibilityState": {
+          "aria-checked": {
             "required": false,
             "tsType": {
-              "name": "AccessibilityState"
+              "name": "union",
+              "raw": "boolean | 'mixed'",
+              "elements": [
+                {
+                  "name": "boolean"
+                },
+                {
+                  "name": "literal",
+                  "value": "'mixed'"
+                }
+              ]
             },
-            "description": "Accessibility state forwarded to the underlying button."
+            "description": "Indicates whether the element is checked. Accepts `true`, `false`,\nor `'mixed'` for an indeterminate state."
+          },
+          "aria-selected": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is selected."
+          },
+          "aria-busy": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is currently busy (e.g. loading)."
+          },
+          "aria-expanded": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element's controlled content is expanded."
           },
           "background": {
             "required": false,
@@ -6252,7 +6261,7 @@
             },
             "description": "Function to execute on press."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -6263,12 +6272,43 @@
               "computed": true
             }
           },
-          "accessibilityState": {
+          "aria-checked": {
             "required": false,
             "tsType": {
-              "name": "AccessibilityState"
+              "name": "union",
+              "raw": "boolean | 'mixed'",
+              "elements": [
+                {
+                  "name": "boolean"
+                },
+                {
+                  "name": "literal",
+                  "value": "'mixed'"
+                }
+              ]
             },
-            "description": "Accessibility state forwarded to the underlying button."
+            "description": "Indicates whether the element is checked. Accepts `true`, `false`,\nor `'mixed'` for an indeterminate state."
+          },
+          "aria-selected": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is selected."
+          },
+          "aria-busy": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is currently busy (e.g. loading)."
+          },
+          "aria-expanded": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element's controlled content is expanded."
           },
           "labelMaxFontSizeMultiplier": {
             "required": false,
@@ -6373,7 +6413,7 @@
             "tsType": {
               "name": "signature",
               "type": "object",
-              "raw": "{\n  /**\n   * Icon displayed in the trigger FAB (and cross-faded to `closeIcon` when\n   * the menu is open).\n   */\n  icon: IconSource;\n  variant?: Variant;\n  size?: Size;\n  containerColor?: ColorValue;\n  contentColor?: ColorValue;\n  visible?: boolean;\n  onPress?: (e: GestureResponderEvent) => void;\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+              "raw": "{\n  /**\n   * Icon displayed in the trigger FAB (and cross-faded to `closeIcon` when\n   * the menu is open).\n   */\n  icon: IconSource;\n  variant?: Variant;\n  size?: Size;\n  containerColor?: ColorValue;\n  contentColor?: ColorValue;\n  visible?: boolean;\n  onPress?: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label for the trigger FAB.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
               "signature": {
                 "properties": [
                   {
@@ -6441,7 +6481,7 @@
                     }
                   },
                   {
-                    "key": "accessibilityLabel",
+                    "key": "aria-label",
                     "value": {
                       "name": "string",
                       "required": false
@@ -6509,7 +6549,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6549,7 +6589,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6568,7 +6608,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6608,7 +6648,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6633,7 +6673,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6673,7 +6713,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6692,7 +6732,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6732,7 +6772,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6751,7 +6791,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6791,7 +6831,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6816,7 +6856,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6856,7 +6896,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6875,7 +6915,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6915,7 +6955,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6934,7 +6974,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -6974,7 +7014,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -6993,7 +7033,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7033,7 +7073,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7058,7 +7098,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7098,7 +7138,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7117,7 +7157,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7157,7 +7197,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7176,7 +7216,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7216,7 +7256,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7235,7 +7275,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7275,7 +7315,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7294,7 +7334,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7334,7 +7374,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7359,7 +7399,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7399,7 +7439,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7418,7 +7458,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7458,7 +7498,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7477,7 +7517,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7517,7 +7557,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7536,7 +7576,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7576,7 +7616,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7595,7 +7635,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7635,7 +7675,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7654,7 +7694,7 @@
                     {
                       "name": "signature",
                       "type": "object",
-                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  accessibilityLabel?: string;\n  testID?: string;\n}",
+                      "raw": "{\n  /**\n   * Optional icon for the item.\n   */\n  icon?: IconSource;\n  /**\n   * Mandatory label.\n   */\n  label: string;\n  /**\n   * Called when the item is pressed. The menu is dismissed automatically\n   * after `onPress` runs.\n   */\n  onPress: (e: GestureResponderEvent) => void;\n  /**\n   * Accessibility label. Falls back to `label`.\n   */\n  'aria-label'?: string;\n  testID?: string;\n}",
                       "signature": {
                         "properties": [
                           {
@@ -7694,7 +7734,7 @@
                             }
                           },
                           {
-                            "key": "accessibilityLabel",
+                            "key": "aria-label",
                             "value": {
                               "name": "string",
                               "required": false
@@ -7835,7 +7875,7 @@
               "computed": false
             }
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -8315,7 +8355,7 @@
             },
             "description": "TestID used for testing purposes"
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -9270,19 +9310,50 @@
               "computed": false
             }
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
             },
             "description": "Accessibility label for the Touchable. This is read by the screen reader when the user taps the component."
           },
-          "accessibilityState": {
+          "aria-checked": {
             "required": false,
             "tsType": {
-              "name": "AccessibilityState"
+              "name": "union",
+              "raw": "boolean | 'mixed'",
+              "elements": [
+                {
+                  "name": "boolean"
+                },
+                {
+                  "name": "literal",
+                  "value": "'mixed'"
+                }
+              ]
             },
-            "description": "Accessibility state for the Touchable. This is read by the screen reader when the user taps the component."
+            "description": "Indicates whether the element is checked. Accepts `true`, `false`,\nor `'mixed'` for an indeterminate state."
+          },
+          "aria-selected": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is selected."
+          },
+          "aria-busy": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element is currently busy (e.g. loading)."
+          },
+          "aria-expanded": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Indicates whether the element's controlled content is expanded."
           }
         }
       },
@@ -10046,7 +10117,7 @@
             },
             "description": "Function to execute on long press."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
@@ -10640,7 +10711,7 @@
                 {
                   "name": "signature",
                   "type": "object",
-                  "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  accessibilityLabel?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}",
+                  "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}",
                   "signature": {
                     "properties": [
                       {
@@ -10665,7 +10736,7 @@
                         }
                       },
                       {
-                        "key": "accessibilityLabel",
+                        "key": "aria-label",
                         "value": {
                           "name": "string",
                           "required": false
@@ -10758,9 +10829,9 @@
                   }
                 }
               ],
-              "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  accessibilityLabel?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}[]"
+              "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}[]"
             },
-            "description": "Buttons to display as options in toggle button.\nButton should contain the following properties:\n- `value`: value of button (required)\n- `icon`: icon to display for the item\n- `disabled`: whether the button is disabled\n- `accessibilityLabel`: acccessibility label for the button. This is read by the screen reader when the user taps the button.\n- `checkedColor`: custom color for checked Text and Icon\n- `uncheckedColor`: custom color for unchecked Text and Icon\n- `onPress`: callback that is called when button is pressed\n- `label`: label text of the button\n- `showSelectedCheck`: show optional check icon to indicate selected state\n- `style`: pass additional styles for the button\n- `testID`: testID to be used on tests"
+            "description": "Buttons to display as options in toggle button.\nButton should contain the following properties:\n- `value`: value of button (required)\n- `icon`: icon to display for the item\n- `disabled`: whether the button is disabled\n- `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.\n- `checkedColor`: custom color for checked Text and Icon\n- `uncheckedColor`: custom color for unchecked Text and Icon\n- `onPress`: callback that is called when button is pressed\n- `label`: label text of the button\n- `showSelectedCheck`: show optional check icon to indicate selected state\n- `style`: pass additional styles for the button\n- `testID`: testID to be used on tests"
           },
           "density": {
             "required": false,
@@ -11275,12 +11346,12 @@
             },
             "description": ""
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
             },
-            "description": ""
+            "description": "Accessibility label for the switch. This is read by the screen reader when the user focuses the switch."
           }
         }
       },
@@ -11634,7 +11705,7 @@
             },
             "description": "Whether the button is disabled."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"

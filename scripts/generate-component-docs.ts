@@ -4,6 +4,7 @@ import { createRequire } from 'node:module';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as vm from 'node:vm';
 
 type PluginOptions = {
   docsRootDir: string;
@@ -36,6 +37,57 @@ const isPluginOptions = (value: unknown): value is PluginOptions => {
 const isPluginFactory = (value: unknown): value is PluginFactory =>
   typeof value === 'function';
 
+const findObjectEnd = (source: string, start: number) => {
+  let depth = 0;
+
+  for (let index = start; index < source.length; index++) {
+    const char = source[index];
+
+    if (char === '{') {
+      depth++;
+    }
+
+    if (char === '}') {
+      depth--;
+    }
+
+    if (depth === 0) {
+      return index + 1;
+    }
+  }
+
+  return -1;
+};
+
+const loadLegacyPluginConfig = (
+  docusaurusConfigPath: string
+): PluginOptions => {
+  const source = fs.readFileSync(docusaurusConfigPath, 'utf8');
+  const pluginPathIndex = source.indexOf("'./component-docs-plugin'");
+  const optionsStart = source.indexOf('{', pluginPathIndex);
+  const optionsEnd = findObjectEnd(source, optionsStart);
+
+  if (pluginPathIndex === -1 || optionsStart === -1 || optionsEnd === -1) {
+    throw new Error(
+      `Unable to read component docs plugin options from ${docusaurusConfigPath}`
+    );
+  }
+
+  const optionsSource = source.slice(optionsStart, optionsEnd);
+  const pluginOptions: unknown = vm.runInNewContext(`(${optionsSource})`, {
+    __dirname: path.dirname(docusaurusConfigPath),
+    path,
+  });
+
+  if (!isPluginOptions(pluginOptions)) {
+    throw new Error(
+      `Unable to read component docs plugin options from ${docusaurusConfigPath}`
+    );
+  }
+
+  return pluginOptions;
+};
+
 const loadPluginConfig = (
   sourceDir: string,
   requireFromScript: ReturnType<typeof createRequire>
@@ -45,15 +97,43 @@ const loadPluginConfig = (
     'docs',
     'component-docs.config.js'
   );
-  const sharedConfig: unknown = requireFromScript(sharedConfigPath);
 
-  if (!isPluginOptions(sharedConfig)) {
-    throw new Error(
-      `Unable to read component docs config from ${sharedConfigPath}`
-    );
+  if (fs.existsSync(sharedConfigPath)) {
+    const sharedConfig: unknown = requireFromScript(sharedConfigPath);
+
+    if (!isPluginOptions(sharedConfig)) {
+      throw new Error(
+        `Unable to read component docs config from ${sharedConfigPath}`
+      );
+    }
+
+    return sharedConfig;
   }
 
-  return sharedConfig;
+  const docusaurusConfigPath = path.join(
+    sourceDir,
+    'docs',
+    'docusaurus.config.js'
+  );
+
+  return loadLegacyPluginConfig(docusaurusConfigPath);
+};
+
+const writeDocusaurusConfigStub = (sourceDir: string) => {
+  fs.writeFileSync(
+    path.join(sourceDir, 'docs', 'docusaurus.config.js'),
+    `module.exports = {
+  baseUrl: '/react-native-paper/',
+  customFields: {
+    moreExamples: {},
+    knownIssues: {},
+    themeColors: {},
+    screenshots: {},
+    extendedExamples: {},
+  },
+};
+`
+  );
 };
 
 const normalizeDocs = (value: unknown, sourceDir: string): unknown => {
@@ -162,6 +242,9 @@ const main = async () => {
     }
 
     const pluginOptions = loadPluginConfig(sourceDir, requireFromScript);
+
+    writeDocusaurusConfigStub(sourceDir);
+
     const pluginFactoryPath = path.join(
       sourceDir,
       'docs',
