@@ -380,36 +380,17 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -417,7 +398,36 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -520,36 +530,17 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -557,7 +548,36 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -718,36 +738,17 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
     }
   >
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -755,7 +756,36 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -858,36 +888,17 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -895,7 +906,36 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -998,36 +1038,17 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1035,7 +1056,36 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -1138,36 +1188,17 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1175,7 +1206,36 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -1336,36 +1396,17 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1373,7 +1414,36 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -1476,36 +1546,17 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1513,7 +1564,36 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -1682,34 +1762,16 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       collapsable={false}
     >
       <View
-        collapsable={false}
         style={
-          {
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "marginRight": 16,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
             },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-          }
-        }
-        testID="button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "flex": undefined,
-              "minWidth": 64,
+              "marginRight": 16,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1717,8 +1779,36 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-              "textAlign": "center",
-            }
+            },
+          ]
+        }
+        testID="button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 1,
+                "flex": undefined,
+                "minWidth": 64,
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+                "textAlign": "center",
+              },
+            ]
           }
           testID="button-container"
         >
@@ -1922,36 +2012,17 @@ exports[`DataTable.Pagination renders data table pagination with options select 
     }
   >
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -1959,7 +2030,36 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -2062,36 +2162,17 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2099,7 +2180,36 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -2202,36 +2312,17 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2239,7 +2330,36 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -2342,36 +2462,17 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -2379,7 +2480,36 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -2530,17 +2660,24 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
   }
 >
   <View
-    collapsable={false}
     style={
-      {
-        "height": 24,
-        "justifyContent": "center",
-        "transform": [
-          {
-            "rotate": "180deg",
-          },
-        ],
-      }
+      [
+        {
+          "height": 24,
+          "justifyContent": "center",
+        },
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "transform",
+        },
+        {
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        },
+      ]
     }
   >
     <Text
@@ -2658,17 +2795,24 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
   }
 >
   <View
-    collapsable={false}
     style={
-      {
-        "height": 24,
-        "justifyContent": "center",
-        "transform": [
-          {
-            "rotate": "180deg",
-          },
-        ],
-      }
+      [
+        {
+          "height": 24,
+          "justifyContent": "center",
+        },
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "transform",
+        },
+        {
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        },
+      ]
     }
   >
     <Text

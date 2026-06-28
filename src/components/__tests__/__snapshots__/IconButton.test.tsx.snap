@@ -2,36 +2,17 @@
 
 exports[`renders disabled icon button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "height": 40,
-      "margin": 6,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 40,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 40,
+        "margin": 6,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -39,7 +20,36 @@ exports[`renders disabled icon button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 40,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 20,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -144,36 +154,17 @@ exports[`renders disabled icon button 1`] = `
 
 exports[`renders icon button by default 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "height": 40,
-      "margin": 6,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 40,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 40,
+        "margin": 6,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -181,7 +172,36 @@ exports[`renders icon button by default 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 40,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 20,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -286,36 +306,17 @@ exports[`renders icon button by default 1`] = `
 
 exports[`renders icon button with color 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "height": 40,
-      "margin": 6,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 40,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 40,
+        "margin": 6,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -323,7 +324,36 @@ exports[`renders icon button with color 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 40,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 20,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -428,36 +458,17 @@ exports[`renders icon button with color 1`] = `
 
 exports[`renders icon button with size 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 23,
-      "height": 46,
-      "margin": 6,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 46,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 23,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 46,
+        "margin": 6,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -465,7 +476,36 @@ exports[`renders icon button with size 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 46,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 23,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -570,36 +610,17 @@ exports[`renders icon button with size 1`] = `
 
 exports[`renders icon change animated 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "height": 40,
-      "margin": 6,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 40,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 40,
+        "margin": 6,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -607,7 +628,36 @@ exports[`renders icon change animated 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 40,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 20,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -690,21 +740,24 @@ exports[`renders icon change animated 1`] = `
           }
         >
           <View
-            collapsable={false}
             style={
-              {
-                "bottom": 0,
-                "left": 0,
-                "opacity": 1,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "transform": [
-                  {
-                    "rotate": "0deg",
-                  },
-                ],
-              }
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "opacity": 1,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
+                },
+              ]
             }
             testID="cross-fade-icon-current"
           >

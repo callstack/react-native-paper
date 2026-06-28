@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type {
-  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
@@ -36,7 +35,7 @@ export type Props = $Omit<
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   ref?: React.Ref<View>;
 };
 

@@ -142,40 +142,19 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginStart": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginStart": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -183,7 +162,38 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -347,40 +357,19 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginEnd": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginEnd": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -388,7 +377,38 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -644,40 +664,19 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginStart": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginStart": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -685,7 +684,38 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -849,40 +879,19 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginEnd": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginEnd": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -890,7 +899,38 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -1323,40 +1363,19 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginStart": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginStart": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1364,7 +1383,38 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -1528,40 +1578,19 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginEnd": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginEnd": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1569,7 +1598,38 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -1806,40 +1866,19 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginStart": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginStart": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1847,7 +1886,38 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >
@@ -2011,40 +2081,19 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "alignSelf": "center",
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "height": 24,
-            "margin": 0,
-            "marginEnd": 12,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "width": 24,
-          }
-        }
-        testID="icon-button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "alignItems": "center",
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignSelf": "center",
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": 1,
-              "justifyContent": "center",
-              "overflow": "hidden",
+              "height": 24,
+              "margin": 0,
+              "marginEnd": 12,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -2052,7 +2101,38 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+              "width": 24,
+            },
+          ]
+        }
+        testID="icon-button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+                "elevation": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "overflow": "hidden",
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="icon-button-container"
         >

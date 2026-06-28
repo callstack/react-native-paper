@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -35,7 +35,7 @@ export type Props = {
    * Content of the `Dialog`.
    */
   children: React.ReactNode;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */

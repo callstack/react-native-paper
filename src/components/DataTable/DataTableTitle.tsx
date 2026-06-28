@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
+import { PixelRatio, Pressable, StyleSheet } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -8,11 +8,18 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
+
+const iconTransitionStyle = {
+  transitionDuration: 150,
+  transitionProperty: 'transform' as const,
+};
 
 export type Props = PressableProps & {
   /**
@@ -90,29 +97,23 @@ const DataTableTitle = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const { current: spinAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
-  );
-
-  React.useEffect(() => {
-    Animated.timing(spinAnim, {
-      toValue: sortDirection === 'ascending' ? 0 : 1,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
-  }, [sortDirection, spinAnim]);
 
   const textColor = theme.colors.onSurface;
 
   const alphaTextColor = theme.colors.onSurfaceVariant;
 
-  const spin = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '180deg'],
-  });
+  const spin = sortDirection === 'ascending' ? '0deg' : '180deg';
 
   const icon = sortDirection ? (
-    <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
+    <Animated.View
+      style={[
+        styles.icon,
+        iconTransitionStyle,
+        {
+          transform: [{ rotate: spin }],
+        },
+      ]}
+    >
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}

@@ -1,7 +1,6 @@
-import { Animated, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../../core/theming';
 import { render, screen } from '../../../test-utils';
@@ -221,34 +220,5 @@ describe('getCardCoverStyle - border radius', () => {
         borderRadiusStyles: {},
       })
     ).toMatchObject({ borderRadius: getTheme().shapes.corner.medium });
-  });
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Card
-      mode="outlined"
-      accessibilityLabel="card"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      {null}
-    </Card>
-  );
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
   });
 });

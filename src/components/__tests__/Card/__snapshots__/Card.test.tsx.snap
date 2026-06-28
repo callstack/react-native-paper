@@ -2,29 +2,15 @@
 
 exports[`Card renders an outlined card 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(254, 247, 255, 1)",
-      "borderRadius": 12,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="card-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
         "borderRadius": 12,
-        "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -32,7 +18,31 @@ exports[`Card renders an outlined card 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="card-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "borderRadius": 12,
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="card-container"
   >

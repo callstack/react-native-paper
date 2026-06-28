@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { white } from '../../theme/colors';
 import type { InternalTheme, Theme, ThemeProp } from '../../types';
@@ -54,17 +54,12 @@ export const getAppbarColor = ({
   return undefined;
 };
 
-export const getAppbarBorders = (
-  style:
-    | Animated.Value
-    | Animated.AnimatedInterpolation<string | number>
-    | Animated.WithAnimatedObject<ViewStyle>
-) => {
+export const getAppbarBorders = (style: ViewStyle) => {
   const borders: Record<string, number> = {};
 
   for (const property of borderStyleProperties) {
     const value = style[property as keyof typeof style];
-    if (value) {
+    if (typeof value === 'number') {
       borders[property] = value;
     }
   }

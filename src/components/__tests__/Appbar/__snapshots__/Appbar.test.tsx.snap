@@ -2,35 +2,15 @@
 
 exports[`Appbar does not pass any additional props to Searchbar 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(254, 247, 255, 1)",
-      "height": 64,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "alignItems": "center",
+        "transitionDuration": 150,
+        "transitionProperty": "all",
+      },
+      {
         "backgroundColor": "rgba(254, 247, 255, 1)",
-        "flex": 1,
-        "flexDirection": "row",
-        "paddingBottom": undefined,
-        "paddingHorizontal": 4,
-        "paddingLeft": undefined,
-        "paddingRight": undefined,
-        "paddingTop": undefined,
+        "height": 64,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -38,16 +18,28 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
-    }
-    testID="surface"
-  >
-    <View
-      collapsable={false}
-      style={
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
         {
-          "backgroundColor": "rgba(236, 230, 240, 1)",
-          "borderRadius": 28,
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "alignItems": "center",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingBottom": undefined,
+          "paddingHorizontal": 4,
+          "paddingLeft": undefined,
+          "paddingRight": undefined,
+          "paddingTop": undefined,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
@@ -55,19 +47,21 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-        }
-      }
-      testID="search-bar-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
+        },
+      ]
+    }
+    testID="surface"
+  >
+    <View
+      style={
+        [
           {
-            "alignItems": "center",
+            "transitionDuration": 150,
+            "transitionProperty": "all",
+          },
+          {
             "backgroundColor": "rgba(236, 230, 240, 1)",
             "borderRadius": 28,
-            "flex": undefined,
-            "flexDirection": "row",
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -75,18 +69,24 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
-        }
-        testID="search-bar-container"
-      >
-        <View
-          collapsable={false}
-          style={
+          },
+        ]
+      }
+      testID="search-bar-container-outer-layer"
+    >
+      <View
+        style={
+          [
             {
-              "backgroundColor": "transparent",
-              "borderRadius": 20,
-              "height": 40,
-              "margin": 6,
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "alignItems": "center",
+              "backgroundColor": "rgba(236, 230, 240, 1)",
+              "borderRadius": 28,
+              "flex": undefined,
+              "flexDirection": "row",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -94,22 +94,23 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-              "width": 40,
-            }
-          }
-          testID="search-bar-icon-container-outer-layer"
-        >
-          <View
-            collapsable={false}
-            style={
+            },
+          ]
+        }
+        testID="search-bar-container"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
               {
                 "backgroundColor": "transparent",
-                "borderColor": "rgba(202, 196, 208, 1)",
                 "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "flex": 1,
-                "overflow": "hidden",
+                "height": 40,
+                "margin": 6,
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
@@ -117,7 +118,36 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-              }
+                "width": 40,
+              },
+            ]
+          }
+          testID="search-bar-icon-container-outer-layer"
+        >
+          <View
+            style={
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
+                },
+                {
+                  "backgroundColor": "transparent",
+                  "borderColor": "rgba(202, 196, 208, 1)",
+                  "borderRadius": 20,
+                  "borderWidth": 0,
+                  "elevation": 0,
+                  "flex": 1,
+                  "overflow": "hidden",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
+                },
+              ]
             }
             testID="search-bar-icon-container"
           >
@@ -270,36 +300,17 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           testID="search-bar-icon-wrapper"
         >
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "transparent",
-                "borderRadius": 20,
-                "height": 40,
-                "margin": 6,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-                "width": 40,
-              }
-            }
-            testID="search-bar-clear-icon-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "rgba(202, 196, 208, 1)",
                   "borderRadius": 20,
-                  "borderWidth": 0,
-                  "elevation": 0,
-                  "flex": 1,
-                  "overflow": "hidden",
+                  "height": 40,
+                  "margin": 6,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -307,7 +318,36 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                  "width": 40,
+                },
+              ]
+            }
+            testID="search-bar-clear-icon-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "rgba(202, 196, 208, 1)",
+                    "borderRadius": 20,
+                    "borderWidth": 0,
+                    "elevation": 0,
+                    "flex": 1,
+                    "overflow": "hidden",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="search-bar-clear-icon-container"
             >
@@ -418,35 +458,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
 
 exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and AppbarAction 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(254, 247, 255, 1)",
-      "height": 64,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "alignItems": "center",
+        "transitionDuration": 150,
+        "transitionProperty": "all",
+      },
+      {
         "backgroundColor": "rgba(254, 247, 255, 1)",
-        "flex": 1,
-        "flexDirection": "row",
-        "paddingBottom": undefined,
-        "paddingHorizontal": 4,
-        "paddingLeft": undefined,
-        "paddingRight": undefined,
-        "paddingTop": undefined,
+        "height": 64,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -454,18 +474,28 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
-    }
-    testID="surface"
-  >
-    <View
-      collapsable={false}
-      style={
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
         {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "alignItems": "center",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingBottom": undefined,
+          "paddingHorizontal": 4,
+          "paddingLeft": undefined,
+          "paddingRight": undefined,
+          "paddingTop": undefined,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
@@ -473,22 +503,23 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
+        },
+      ]
+    }
+    testID="surface"
+  >
+    <View
+      style={
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
+          },
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -496,7 +527,36 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -580,21 +640,24 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               }
             >
               <View
-                collapsable={false}
                 style={
-                  {
-                    "bottom": 0,
-                    "left": 0,
-                    "opacity": 1,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "transform": [
-                      {
-                        "rotate": "0deg",
-                      },
-                    ],
-                  }
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "opacity": 1,
+                      "transform": [
+                        {
+                          "rotate": "0deg",
+                        },
+                      ],
+                    },
+                  ]
                 }
                 testID="cross-fade-icon-current"
               >
@@ -703,36 +766,17 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       </Text>
     </View>
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "margin": 6,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-          "width": 40,
-        }
-      }
-      testID="icon-button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderWidth": 0,
-            "elevation": 0,
-            "flex": 1,
-            "overflow": "hidden",
+            "height": 40,
+            "margin": 6,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -740,7 +784,36 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+            "width": 40,
+          },
+        ]
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="icon-button-container"
       >
@@ -823,21 +896,24 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               }
             >
               <View
-                collapsable={false}
                 style={
-                  {
-                    "bottom": 0,
-                    "left": 0,
-                    "opacity": 1,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                    "transform": [
-                      {
-                        "rotate": "0deg",
-                      },
-                    ],
-                  }
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "opacity": 1,
+                      "transform": [
+                        {
+                          "rotate": "0deg",
+                        },
+                      ],
+                    },
+                  ]
                 }
                 testID="cross-fade-icon-current"
               >

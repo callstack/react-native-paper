@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -111,12 +111,12 @@ export type Props = TextInputProps & {
    * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /**
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import AppbarContent from './AppbarContent';
@@ -51,7 +51,7 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
    * @optional
    */
   theme?: ThemeProp;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

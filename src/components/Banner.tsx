@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
+import Animated from 'react-native-reanimated';
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
@@ -14,6 +15,8 @@ import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
+
+type AnimationFinishedCallback = (result: { finished: boolean }) => void;
 
 export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
@@ -51,12 +54,12 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @supported Available in v5.x with theme version 3
    * Changes Banner shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -66,12 +69,12 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @optional
    * Optional callback that will be called after the opening animation finished running normally
    */
-  onShowAnimationFinished?: Animated.EndCallback;
+  onShowAnimationFinished?: AnimationFinishedCallback;
   /**
    * @optional
    * Optional callback that will be called after the closing animation finished running normally
    */
-  onHideAnimationFinished?: Animated.EndCallback;
+  onHideAnimationFinished?: AnimationFinishedCallback;
 };
 
 /**
@@ -134,9 +137,6 @@ const Banner = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme as Theme;
-  const { current: position } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
-  );
   const [layout, setLayout] = React.useState<{
     height: number;
     measured: boolean;
@@ -149,30 +149,18 @@ const Banner = ({
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
   const { scale } = theme.animation;
-
-  const opacity = position.interpolate({
-    inputRange: [0, 0.1, 1],
-    outputRange: [0, 1, 1],
-  });
+  const animationDuration = (visible ? 250 : 200) * scale;
+  const opacity = visible ? 1 : 0;
 
   React.useEffect(() => {
-    if (visible) {
-      // show
-      Animated.timing(position, {
-        duration: 250 * scale,
-        toValue: 1,
-        useNativeDriver: false,
-      }).start(showCallback);
-    } else {
-      // hide
-      Animated.timing(position, {
-        duration: 200 * scale,
-        toValue: 0,
-        useNativeDriver: false,
-      }).start(hideCallback);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, position, scale]);
+    const callback = visible ? showCallback : hideCallback;
+    const timeout = setTimeout(
+      () => callback({ finished: true }),
+      animationDuration
+    );
+
+    return () => clearTimeout(timeout);
+  }, [animationDuration, hideCallback, showCallback, visible]);
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
@@ -186,29 +174,48 @@ const Banner = ({
   // Once we have the height, we apply the height to the spacer and switch the banner to position: absolute
   // We need this because we need to move the content below as if banner's height was being animated
   // However we can't animated banner's height directly as it'll also resize the content inside
-  const height = Animated.multiply(position, layout.height);
+  const height = visible ? layout.height : 0;
+  const translateY = visible ? 0 : -layout.height;
+  const opacityTransitionStyle: React.ComponentProps<
+    typeof Animated.View
+  >['style'] = {
+    transitionDuration: animationDuration,
+    transitionProperty: 'opacity',
+  };
+  const heightTransitionStyle: React.ComponentProps<
+    typeof Animated.View
+  >['style'] = {
+    transitionDuration: animationDuration,
+    transitionProperty: 'height',
+  };
+  const transformTransitionStyle: React.ComponentProps<
+    typeof Animated.View
+  >['style'] = {
+    transitionDuration: animationDuration,
+    transitionProperty: 'transform',
+  };
 
-  const translateY = Animated.multiply(
-    Animated.add(position, -1),
-    layout.height
-  );
   return (
     <Surface
       {...rest}
-      style={[{ opacity }, style]}
+      style={[{ opacity }, opacityTransitionStyle, style]}
       theme={theme}
       container
       elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
-        <Animated.View style={{ height }} />
+        <Animated.View style={[{ height }, heightTransitionStyle]} />
         <Animated.View
           onLayout={handleLayout}
           style={[
             layout.measured || !visible
               ? // If we have measured banner's height or it's invisible,
                 // Position it absolutely, the layout will be taken care of the spacer
-                [styles.absolute, { transform: [{ translateY }] }]
+                [
+                  styles.absolute,
+                  { transform: [{ translateY }] },
+                  transformTransitionStyle,
+                ]
               : // Otherwise position it normally
                 null,
             !layout.measured && !visible

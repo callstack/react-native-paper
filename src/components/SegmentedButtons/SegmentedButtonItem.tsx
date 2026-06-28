@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -7,6 +7,8 @@ import type {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+
+import Animated from 'react-native-reanimated';
 
 import {
   getSegmentedButtonBorderRadius,
@@ -122,25 +124,6 @@ const SegmentedButtonItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const checkScale = React.useRef(new Animated.Value(0)).current;
-
-  React.useEffect(() => {
-    if (!showSelectedCheck) {
-      return;
-    }
-    if (checked) {
-      Animated.spring(checkScale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.spring(checkScale, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [checked, checkScale, showSelectedCheck]);
-
   const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
@@ -159,15 +142,18 @@ const SegmentedButtonItem = ({
   const showCheckedIcon = checked && showSelectedCheck;
 
   const iconSize = 18;
+  const iconTransitionStyle: React.ComponentProps<
+    typeof Animated.View
+  >['style'] = {
+    transitionDuration: 150 * theme.animation.scale,
+    transitionProperty: 'transform',
+  };
   const iconStyle = {
     marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
     ...(label && {
       transform: [
         {
-          scale: checkScale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
+          scale: checked && showSelectedCheck ? 0 : 1,
         },
       ],
     }),
@@ -212,13 +198,20 @@ const SegmentedButtonItem = ({
           {showCheckedIcon ? (
             <Animated.View
               testID={`${testID}-check-icon`}
-              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
+              style={[
+                iconStyle,
+                iconTransitionStyle,
+                { transform: [{ scale: checked ? 1 : 0 }] },
+              ]}
             >
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
+            <Animated.View
+              testID={`${testID}-icon`}
+              style={[iconStyle, iconTransitionStyle]}
+            >
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}

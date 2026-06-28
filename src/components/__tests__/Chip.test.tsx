@@ -1,7 +1,4 @@
-import { Animated } from 'react-native';
-
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -371,34 +368,5 @@ describe('getChipColor - border color', () => {
     ).toMatchObject({
       borderColor: 'transparent',
     });
-  });
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Chip
-      onPress={() => {}}
-      testID="chip"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      Example Chip
-    </Chip>
-  );
-  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
   });
 });

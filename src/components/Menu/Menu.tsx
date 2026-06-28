@@ -1,14 +1,12 @@
 import * as React from 'react';
 import {
-  Animated,
   Dimensions,
-  Easing,
   Keyboard,
   Platform,
+  Pressable,
   ScrollView,
   StyleSheet,
   View,
-  Pressable,
 } from 'react-native';
 import type { KeyboardEvent as RNKeyboardEvent } from 'react-native';
 import type {
@@ -20,6 +18,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
@@ -67,7 +66,7 @@ export type Props = {
   /**
    * Style of menu's inner content.
    */
-  contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   /**
    * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
@@ -100,8 +99,6 @@ export type Props = {
 const SCREEN_INDENT = 8;
 // From https://material.io/design/motion/speed.html#duration
 const ANIMATION_DURATION = 250;
-// From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
-const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
@@ -197,6 +194,7 @@ const Menu = ({
   const { colors: md3Colors } = theme as Theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
+  const [expanded, setExpanded] = React.useState(false);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
   const [menuLayout, setMenuLayout] = React.useState({ width: 0, height: 0 });
@@ -209,9 +207,10 @@ const Menu = ({
     height: WINDOW_LAYOUT.height,
   });
 
-  const opacityAnimationRef = React.useRef(new Animated.Value(0));
-  const scaleAnimationRef = React.useRef(new Animated.ValueXY({ x: 0, y: 0 }));
   const keyboardHeightRef = React.useRef(0);
+  const animationTimeoutRef = React.useRef<
+    ReturnType<typeof setTimeout> | undefined
+  >(undefined);
   const prevVisible = React.useRef<boolean | null>(null);
   const anchorRef = React.useRef<View | null>(null);
   const menuRef = React.useRef<View | null>(null);
@@ -260,6 +259,13 @@ const Menu = ({
     dimensionsSubscriptionRef.current?.remove();
     isBrowser() && document.removeEventListener('keyup', handleKeypress);
   }, [handleKeypress]);
+
+  const clearAnimationTimeout = React.useCallback(() => {
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+      animationTimeoutRef.current = undefined;
+    }
+  }, []);
 
   const attachListeners = React.useCallback(() => {
     backHandlerSubscriptionRef.current = addEventListener(
@@ -343,46 +349,42 @@ const Menu = ({
       width: windowLayoutResult.width,
     });
 
+    clearAnimationTimeout();
+    setExpanded(false);
+    prevRendered.current = true;
     attachListeners();
     requestAnimationFrame(() => {
       const { animation } = theme;
-      Animated.parallel([
-        Animated.timing(scaleAnimationRef.current, {
-          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-          duration: ANIMATION_DURATION * animation.scale,
-          easing: EASING,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacityAnimationRef.current, {
-          toValue: 1,
-          duration: ANIMATION_DURATION * animation.scale,
-          easing: EASING,
-          useNativeDriver: true,
-        }),
-      ]).start(() => {
+      setExpanded(true);
+
+      animationTimeoutRef.current = setTimeout(() => {
         focusFirstDOMNode(menuRef.current);
-        prevRendered.current = true;
-      });
+        animationTimeoutRef.current = undefined;
+      }, ANIMATION_DURATION * animation.scale);
     });
-  }, [anchor, attachListeners, measureAnchorLayout, theme]);
+  }, [
+    anchor,
+    attachListeners,
+    clearAnimationTimeout,
+    measureAnchorLayout,
+    theme,
+  ]);
 
   const hide = React.useCallback(() => {
     removeListeners();
+    clearAnimationTimeout();
+    setExpanded(false);
 
     const { animation } = theme;
 
-    Animated.timing(opacityAnimationRef.current, {
-      toValue: 0,
-      duration: ANIMATION_DURATION * animation.scale,
-      easing: EASING,
-      useNativeDriver: true,
-    }).start(() => {
+    animationTimeoutRef.current = setTimeout(() => {
       setMenuLayout({ width: 0, height: 0 });
       setRendered(false);
       prevRendered.current = false;
       focusFirstDOMNode(anchorRef.current);
-    });
-  }, [removeListeners, theme]);
+      animationTimeoutRef.current = undefined;
+    }, ANIMATION_DURATION * animation.scale);
+  }, [clearAnimationTimeout, removeListeners, theme]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {
@@ -403,8 +405,6 @@ const Menu = ({
   );
 
   React.useEffect(() => {
-    const opacityAnimation = opacityAnimationRef.current;
-    const scaleAnimation = scaleAnimationRef.current;
     keyboardDidShowListenerRef.current = Keyboard.addListener(
       'keyboardDidShow',
       keyboardDidShow
@@ -415,13 +415,17 @@ const Menu = ({
     );
 
     return () => {
+      clearAnimationTimeout();
       removeListeners();
       keyboardDidShowListenerRef.current?.remove();
       keyboardDidHideListenerRef.current?.remove();
-      scaleAnimation.removeAllListeners();
-      opacityAnimation?.removeAllListeners();
     };
-  }, [removeListeners, keyboardDidHide, keyboardDidShow]);
+  }, [
+    clearAnimationTimeout,
+    removeListeners,
+    keyboardDidHide,
+    keyboardDidShow,
+  ]);
 
   React.useEffect(() => {
     if (prevVisible.current !== visible) {
@@ -462,10 +466,7 @@ const Menu = ({
   // Check if menu fits horizontally and if not align it to right.
   if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
     positionTransforms.push({
-      translateX: scaleAnimationRef.current.x.interpolate({
-        inputRange: [0, menuLayout.width],
-        outputRange: [-(menuLayout.width / 2), 0],
-      }),
+      translateX: expanded ? 0 : -(menuLayout.width / 2),
     });
 
     // Check if menu position has enough space from left side
@@ -474,10 +475,7 @@ const Menu = ({
     }
   } else {
     positionTransforms.push({
-      translateX: scaleAnimationRef.current.x.interpolate({
-        inputRange: [0, menuLayout.width],
-        outputRange: [menuLayout.width / 2, 0],
-      }),
+      translateX: expanded ? 0 : menuLayout.width / 2,
     });
 
     leftTransformation += anchorLayout.width - menuLayout.width;
@@ -560,10 +558,9 @@ const Menu = ({
       topTransformation <= windowLayout.height - topTransformation)
   ) {
     positionTransforms.push({
-      translateY: scaleAnimationRef.current.y.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [-((scrollableMenuHeight || menuLayout.height) / 2), 0],
-      }),
+      translateY: expanded
+        ? 0
+        : -((scrollableMenuHeight || menuLayout.height) / 2),
     });
 
     // Check if menu position has enough space from top side
@@ -572,10 +569,9 @@ const Menu = ({
     }
   } else {
     positionTransforms.push({
-      translateY: scaleAnimationRef.current.y.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [(scrollableMenuHeight || menuLayout.height) / 2, 0],
-      }),
+      translateY: expanded
+        ? 0
+        : (scrollableMenuHeight || menuLayout.height) / 2,
     });
 
     topTransformation +=
@@ -598,24 +594,33 @@ const Menu = ({
     }
   }
 
-  const shadowMenuContainerStyle = {
-    opacity: opacityAnimationRef.current,
+  const transitionStyle: React.ComponentProps<typeof Animated.View>['style'] = {
+    transitionDuration: ANIMATION_DURATION * theme.animation.scale,
+    transitionProperty: 'transform',
+  };
+
+  const shadowMenuContainerStyle: React.ComponentProps<
+    typeof Surface
+  >['style'] = {
+    opacity: expanded ? 1 : 0,
     transform: [
       {
-        scaleX: scaleAnimationRef.current.x.interpolate({
-          inputRange: [0, menuLayout.width],
-          outputRange: [0, 1],
-        }),
+        scaleX: expanded ? 1 : 0,
       },
       {
-        scaleY: scaleAnimationRef.current.y.interpolate({
-          inputRange: [0, menuLayout.height],
-          outputRange: [0, 1],
-        }),
+        scaleY: expanded ? 1 : 0,
       },
     ],
     borderRadius: theme.shapes.corner.extraSmall,
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
+    transitionDuration: ANIMATION_DURATION * theme.animation.scale,
+    transitionProperty: ['opacity', 'transform'],
+  };
+
+  const positionTransformStyle: React.ComponentProps<
+    typeof Animated.View
+  >['style'] = {
+    transform: [...positionTransforms],
   };
 
   const positionStyle = {
@@ -659,19 +664,17 @@ const Menu = ({
           >
             <Animated.View
               pointerEvents={pointerEvents}
-              style={{
-                transform: positionTransforms,
-              }}
+              style={[positionTransformStyle, transitionStyle]}
             >
               <Surface
                 mode={mode}
                 pointerEvents={pointerEvents}
                 style={[
                   styles.shadowMenuContainer,
-                  shadowMenuContainerStyle,
                   {
                     backgroundColor: md3Colors.elevation[`level${elevation}`],
                   },
+                  shadowMenuContainerStyle,
                   contentStyle,
                 ]}
                 elevation={elevation}

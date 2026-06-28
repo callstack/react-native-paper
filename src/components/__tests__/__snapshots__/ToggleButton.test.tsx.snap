@@ -2,36 +2,17 @@
 
 exports[`renders disabled toggle button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(230, 224, 233, 1)",
-      "borderRadius": 4,
-      "height": 42,
-      "margin": 0,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 42,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(230, 224, 233, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 42,
+        "margin": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -39,7 +20,36 @@ exports[`renders disabled toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 42,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(230, 224, 233, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 4,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -142,36 +152,17 @@ exports[`renders disabled toggle button 1`] = `
 
 exports[`renders toggle button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(230, 224, 233, 1)",
-      "borderRadius": 4,
-      "height": 42,
-      "margin": 0,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 42,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(230, 224, 233, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 42,
+        "margin": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -179,7 +170,36 @@ exports[`renders toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 42,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(230, 224, 233, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 4,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >
@@ -282,36 +302,17 @@ exports[`renders toggle button 1`] = `
 
 exports[`renders unchecked toggle button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(243, 237, 247, 1)",
-      "borderRadius": 4,
-      "height": 42,
-      "margin": 0,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-      "width": 42,
-    }
-  }
-  testID="icon-button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(243, 237, 247, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
-        "borderWidth": 0,
-        "elevation": 0,
-        "flex": 1,
-        "overflow": "hidden",
+        "height": 42,
+        "margin": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -319,7 +320,36 @@ exports[`renders unchecked toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+        "width": 42,
+      },
+    ]
+  }
+  testID="icon-button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 4,
+          "borderWidth": 0,
+          "elevation": 0,
+          "flex": 1,
+          "overflow": "hidden",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="icon-button-container"
   >

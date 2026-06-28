@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -123,7 +123,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style of chip's text
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -201,11 +201,9 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const isWeb = Platform.OS === 'web';
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(elevated ? 1 : 0)
-  );
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -217,25 +215,13 @@ const Chip = ({
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressIn?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 2 : 0,
-      duration: 200 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(true);
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressOut?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 1 : 0,
-      duration: 150 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(false);
   });
 
   const opacity = 0.38;

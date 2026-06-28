@@ -1,4 +1,4 @@
-import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
+import { BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
@@ -575,33 +575,18 @@ describe('Modal', () => {
     });
   });
 
-  it('animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+  it('applies content container style', async () => {
     await render(
       <Modal
         visible={true}
         testID="modal"
-        contentContainerStyle={[{ transform: [{ scale: value }] }]}
+        contentContainerStyle={{ marginTop: 12 }}
       >
         {null}
       </Modal>
     );
     expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      marginTop: 12,
     });
   });
 });

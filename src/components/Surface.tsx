@@ -1,32 +1,31 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   ShadowStyleIOS,
-  StyleProp,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
 import { useInternalTheme } from '../core/theming';
 import {
   androidElevationLevels,
-  elevationInputRange,
   shadow,
   shadowLayers,
 } from '../theme/tokens/sys/elevation';
 import type { Elevation, Theme, ThemeProp } from '../types';
-import { isAnimatedValue } from '../utils/animations';
 import { splitStyles } from '../utils/splitStyles';
 
-type SurfaceElevation = Elevation | Animated.Value;
+type MotionViewStyle = React.ComponentProps<typeof Animated.View>['style'];
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Content of the `Surface`.
    */
   children: React.ReactNode;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: MotionViewStyle;
   /**
    * @supported Available in v5.x with theme version 3
    * Changes shadows and background on iOS and Android.
@@ -37,7 +36,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
-  elevation?: SurfaceElevation;
+  elevation?: Elevation;
   /**
    * @supported Available in v5.x with theme version 3
    * Mode of the Surface.
@@ -79,32 +78,10 @@ const outerLayerStyleProperties: (keyof ViewStyle)[] = [
 ];
 
 function getStyleForShadowLayer(
-  elevation: SurfaceElevation,
+  elevation: Elevation,
   layer: 0 | 1,
   shadowColor: ColorValue
-): Animated.WithAnimatedValue<ShadowStyleIOS> {
-  if (isAnimatedValue(elevation)) {
-    return {
-      shadowColor,
-      shadowOpacity: elevation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, shadowLayers[layer].shadowOpacity],
-        extrapolate: 'clamp',
-      }),
-      shadowOffset: {
-        width: 0,
-        height: elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: shadowLayers[layer].height,
-        }),
-      },
-      shadowRadius: elevation.interpolate({
-        inputRange: elevationInputRange,
-        outputRange: shadowLayers[layer].shadowRadius,
-      }),
-    };
-  }
-
+): ShadowStyleIOS {
   return {
     shadowColor,
     shadowOpacity: elevation ? shadowLayers[layer].shadowOpacity : 0,
@@ -117,11 +94,15 @@ function getStyleForShadowLayer(
 }
 
 type SurfaceIOSProps = Omit<Props, 'elevation'> & {
-  elevation: SurfaceElevation;
-  backgroundColor?:
-    | ColorValue
-    | Animated.AnimatedInterpolation<string | number>;
+  elevation: Elevation;
+  backgroundColor?: ColorValue;
   shadowColor: ColorValue;
+  transitionStyle: TransitionStyle;
+};
+
+type TransitionStyle = {
+  transitionDuration: number;
+  transitionProperty: 'all';
 };
 
 const SurfaceIOS = ({
@@ -129,6 +110,7 @@ const SurfaceIOS = ({
   style,
   backgroundColor,
   shadowColor,
+  transitionStyle,
   testID,
   children,
   mode = 'elevated',
@@ -181,13 +163,16 @@ const SurfaceIOS = ({
     return [outerLayerViewStyles, innerLayerViewStyles];
   }, [style, elevation, backgroundColor, shadowColor, mode, container]);
 
+  const outerStyle: MotionViewStyle = [transitionStyle, outerLayerViewStyles];
+  const innerStyle: MotionViewStyle = [transitionStyle, innerLayerViewStyles];
+
   return (
     <Animated.View
       ref={ref}
-      style={outerLayerViewStyles}
+      style={outerStyle}
       testID={`${testID}-outer-layer`}
     >
-      <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
+      <Animated.View {...props} style={innerStyle} testID={testID}>
         {children}
       </Animated.View>
     </Animated.View>
@@ -239,36 +224,30 @@ const Surface = ({
 
   const { colors } = theme as Theme;
 
-  const backgroundColor = (() => {
-    if (isAnimatedValue(elevation)) {
-      return elevation.interpolate({
-        inputRange: elevationInputRange,
-        outputRange: elevationInputRange.map((elevation) => {
-          return colors.elevation?.[`level${elevation}`];
-        }),
-      });
-    }
-
-    return colors.elevation?.[`level${elevation}`];
-  })();
+  const backgroundColor = colors.elevation?.[`level${elevation}`];
 
   const isElevated = mode === 'elevated';
+  const transitionStyle = {
+    transitionDuration: 150 * theme.animation.scale,
+    transitionProperty: 'all' as const,
+  };
 
   if (Platform.OS === 'web') {
     const { pointerEvents = 'auto' } = props;
+    const reanimatedViewStyle: MotionViewStyle = [
+      transitionStyle,
+      { backgroundColor },
+      elevation && isElevated ? shadow(elevation, theme.colors.shadow) : null,
+      style,
+    ];
+
     return (
       <Animated.View
         {...props}
         pointerEvents={pointerEvents}
         ref={ref}
         testID={testID}
-        style={[
-          { backgroundColor },
-          elevation && isElevated
-            ? shadow(elevation, theme.colors.shadow)
-            : null,
-          style,
-        ]}
+        style={reanimatedViewStyle}
       >
         {children}
       </Animated.View>
@@ -276,16 +255,7 @@ const Surface = ({
   }
 
   if (Platform.OS === 'android') {
-    const getElevationAndroid = () => {
-      if (isAnimatedValue(elevation)) {
-        return elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: androidElevationLevels,
-        });
-      }
-
-      return androidElevationLevels[elevation];
-    };
+    const elevationAndroid = androidElevationLevels[elevation];
 
     const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
       style
@@ -294,22 +264,25 @@ const Surface = ({
     const outerLayerStyles = { margin, padding, transform, borderRadius };
     const sharedStyle = [{ backgroundColor }, style];
 
+    const reanimatedViewStyle: MotionViewStyle = [
+      transitionStyle,
+      {
+        backgroundColor,
+        transform,
+      },
+      outerLayerStyles,
+      sharedStyle,
+      isElevated && {
+        elevation: elevationAndroid,
+      },
+    ];
+
     return (
       <Animated.View
         {...props}
         testID={testID}
         ref={ref}
-        style={[
-          {
-            backgroundColor,
-            transform,
-          },
-          outerLayerStyles,
-          sharedStyle,
-          isElevated && {
-            elevation: getElevationAndroid(),
-          },
-        ]}
+        style={reanimatedViewStyle}
       >
         {children}
       </Animated.View>
@@ -323,6 +296,7 @@ const Surface = ({
       elevation={elevation}
       backgroundColor={backgroundColor}
       shadowColor={theme.colors.shadow}
+      transitionStyle={transitionStyle}
       style={style}
       testID={testID}
       mode={mode}
