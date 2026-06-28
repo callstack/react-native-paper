@@ -1,7 +1,4 @@
-import { Animated } from 'react-native';
-
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
@@ -301,40 +298,24 @@ describe('getAppbarColors', () => {
   });
 });
 
-describe('animated value changes correctly', () => {
-  it('appbar animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+describe('style props', () => {
+  it('appbar style is applied correctly', async () => {
     await render(
-      <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
+      <Appbar testID="appbar" style={{ marginTop: 12 }}>
         <Appbar.Action icon="menu" />
       </Appbar>
     );
     expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      marginTop: 12,
     });
   });
 
-  it('action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+  it('action style is applied correctly', async () => {
     await render(
       <Appbar>
         <Appbar.Action
           icon="menu"
-          style={[{ transform: [{ scale: value }] }]}
+          style={{ marginTop: 12 }}
           testID="appbar-action"
         />
       </Appbar>
@@ -342,32 +323,15 @@ describe('animated value changes correctly', () => {
     expect(
       screen.getByTestId('appbar-action-container-outer-layer')
     ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      marginTop: 12,
     });
   });
 
-  it('back action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+  it('back action style is applied correctly', async () => {
     await render(
       <Appbar>
         <Appbar.BackAction
-          style={[{ transform: [{ scale: value }] }]}
+          style={{ marginTop: 12 }}
           testID="appbar-back-action"
         />
       </Appbar>
@@ -375,54 +339,20 @@ describe('animated value changes correctly', () => {
     expect(
       screen.getByTestId('appbar-back-action-container-outer-layer')
     ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      marginTop: 12,
     });
   });
 
-  it('header animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+  it('header style is applied correctly', async () => {
     await render(
       <SafeAreaProvider>
-        <Appbar.Header
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-header"
-        >
+        <Appbar.Header style={{ marginTop: 12 }} testID="appbar-header">
           {null}
         </Appbar.Header>
       </SafeAreaProvider>
     );
     expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      marginTop: 12,
     });
   });
 

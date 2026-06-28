@@ -118,33 +118,15 @@ exports[`renders list item with custom description 1`] = `
         </Text>
         <View>
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "rgba(232, 222, 248, 1)",
-                "borderRadius": 8,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="chip-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "rgba(232, 222, 248, 1)",
-                  "borderColor": "transparent",
                   "borderRadius": 8,
-                  "borderStyle": "solid",
-                  "borderWidth": 1,
-                  "flex": undefined,
-                  "flexDirection": "column",
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -152,7 +134,35 @@ exports[`renders list item with custom description 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                },
+              ]
+            }
+            testID="chip-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "borderColor": "transparent",
+                    "borderRadius": 8,
+                    "borderStyle": "solid",
+                    "borderWidth": 1,
+                    "flex": undefined,
+                    "flexDirection": "column",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="chip-container"
             >

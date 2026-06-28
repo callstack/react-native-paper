@@ -461,9 +461,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   };
 
   return (
-    <Surface
-      elevation={0}
-      testID={testID}
+    <Animated.View
+      testID={`${testID}-animated-wrapper`}
       style={[
         styles.bar,
         keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
@@ -491,207 +490,155 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             : 'auto'
           : 'none'
       }
-      onLayout={onLayout}
-      container
     >
-      <Animated.View
-        style={[styles.barContent, { backgroundColor }]}
-        testID={`${testID}-content`}
+      <Surface
+        elevation={0}
+        testID={testID}
+        pointerEvents={
+          layout.measured
+            ? keyboardHidesNavigationBar && keyboardVisible
+              ? 'none'
+              : 'auto'
+            : 'none'
+        }
+        onLayout={onLayout}
+        container
       >
-        <View
-          style={[
-            styles.items,
-            {
-              marginBottom: insets.bottom,
-              marginHorizontal: Math.max(insets.left, insets.right),
-            },
-            compact && {
-              maxWidth: maxTabBarWidth,
-            },
-          ]}
-          role={'tablist'}
-          testID={`${testID}-content-wrapper`}
+        <Animated.View
+          style={[styles.barContent, { backgroundColor }]}
+          testID={`${testID}-content`}
         >
-          {routes.map((route, index) => {
-            const focused = navigationState.index === index;
-            const active = tabsAnims[index];
+          <View
+            style={[
+              styles.items,
+              {
+                marginBottom: insets.bottom,
+                marginHorizontal: Math.max(insets.left, insets.right),
+              },
+              compact && {
+                maxWidth: maxTabBarWidth,
+              },
+            ]}
+            role={'tablist'}
+            testID={`${testID}-content-wrapper`}
+          >
+            {routes.map((route, index) => {
+              const focused = navigationState.index === index;
+              const active = tabsAnims[index];
 
-            // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-            const translateY = labeled
-              ? shifting
+              // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
+              const translateY = labeled
+                ? shifting
+                  ? active.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [7, 0],
+                    })
+                  : 0
+                : 7;
+
+              // We render the active icon and label on top of inactive ones and cross-fade them on change.
+              // This trick gives the illusion that we are animating between active and inactive colors.
+              // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
+              const activeOpacity = active;
+              const inactiveOpacity = active.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              });
+
+              const v3ActiveOpacity = focused ? 1 : 0;
+              const v3InactiveOpacity = shifting
+                ? inactiveOpacity
+                : focused
+                  ? 0
+                  : 1;
+
+              // Scale horizontally the outline pill
+              const outlineScale = focused
                 ? active.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [7, 0],
+                    outputRange: [0.5, 1],
                   })
-                : 0
-              : 7;
+                : 0;
 
-            // We render the active icon and label on top of inactive ones and cross-fade them on change.
-            // This trick gives the illusion that we are animating between active and inactive colors.
-            // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-            const activeOpacity = active;
-            const inactiveOpacity = active.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            });
+              const badge = getBadge({ route });
 
-            const v3ActiveOpacity = focused ? 1 : 0;
-            const v3InactiveOpacity = shifting
-              ? inactiveOpacity
-              : focused
-                ? 0
-                : 1;
+              const activeLabelColor = getLabelColor({
+                tintColor: activeTintColor,
+                hasColor: Boolean(activeColor),
+                focused,
+                theme,
+              });
 
-            // Scale horizontally the outline pill
-            const outlineScale = focused
-              ? active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.5, 1],
-                })
-              : 0;
+              const inactiveLabelColor = getLabelColor({
+                tintColor: inactiveTintColor,
+                hasColor: Boolean(inactiveColor),
+                focused,
+                theme,
+              });
 
-            const badge = getBadge({ route });
+              const badgeStyle = {
+                top: typeof badge === 'boolean' ? 4 : 2,
+                right:
+                  badge != null && typeof badge !== 'boolean'
+                    ? String(badge).length * -2
+                    : 0,
+              };
 
-            const activeLabelColor = getLabelColor({
-              tintColor: activeTintColor,
-              hasColor: Boolean(activeColor),
-              focused,
-              theme,
-            });
+              const isLegacyOrV3Shifting = shifting && labeled;
 
-            const inactiveLabelColor = getLabelColor({
-              tintColor: inactiveTintColor,
-              hasColor: Boolean(inactiveColor),
-              focused,
-              theme,
-            });
+              const font = (theme as Theme).fonts.labelMedium;
 
-            const badgeStyle = {
-              top: typeof badge === 'boolean' ? 4 : 2,
-              right:
-                badge != null && typeof badge !== 'boolean'
-                  ? String(badge).length * -2
-                  : 0,
-            };
-
-            const isLegacyOrV3Shifting = shifting && labeled;
-
-            const font = (theme as Theme).fonts.labelMedium;
-
-            return renderTouchable({
-              key: route.key,
-              route,
-              borderless: true,
-              centered: true,
-              rippleColor: 'transparent',
-              onPress: () => onTabPress(eventForIndex(index)),
-              onLongPress: () => onTabLongPress?.(eventForIndex(index)),
-              testID: getTestID({ route }),
-              'aria-label': getAccessibilityLabel({ route }),
-              role: Platform.OS === 'ios' ? 'button' : 'tab',
-              'aria-selected': focused,
-              style: [styles.item, styles.v3Item],
-              children: (
-                <View
-                  pointerEvents="none"
-                  style={
-                    labeled
-                      ? styles.v3TouchableContainer
-                      : styles.v3NoLabelContainer
-                  }
-                >
-                  <Animated.View
-                    style={[
-                      styles.iconContainer,
-                      styles.v3IconContainer,
-                      isLegacyOrV3Shifting && {
-                        transform: [{ translateY }],
-                      },
-                    ]}
+              return renderTouchable({
+                key: route.key,
+                route,
+                borderless: true,
+                centered: true,
+                rippleColor: 'transparent',
+                onPress: () => onTabPress(eventForIndex(index)),
+                onLongPress: () => onTabLongPress?.(eventForIndex(index)),
+                testID: getTestID({ route }),
+                'aria-label': getAccessibilityLabel({ route }),
+                role: Platform.OS === 'ios' ? 'button' : 'tab',
+                'aria-selected': focused,
+                style: [styles.item, styles.v3Item],
+                children: (
+                  <View
+                    pointerEvents="none"
+                    style={
+                      labeled
+                        ? styles.v3TouchableContainer
+                        : styles.v3NoLabelContainer
+                    }
                   >
-                    {focused && (
-                      <Animated.View
-                        style={[
-                          styles.outline,
-                          {
-                            transform: [
-                              {
-                                scaleX: outlineScale,
-                              },
-                            ],
-                            backgroundColor: colors.secondaryContainer,
-                          },
-                          activeIndicatorStyle,
-                        ]}
-                      />
-                    )}
                     <Animated.View
                       style={[
-                        styles.iconWrapper,
-                        styles.v3IconWrapper,
-                        {
-                          opacity: isLegacyOrV3Shifting
-                            ? activeOpacity
-                            : v3ActiveOpacity,
+                        styles.iconContainer,
+                        styles.v3IconContainer,
+                        isLegacyOrV3Shifting && {
+                          transform: [{ translateY }],
                         },
                       ]}
                     >
-                      {renderIcon ? (
-                        renderIcon({
-                          route,
-                          focused: true,
-                          color: activeTintColor,
-                        })
-                      ) : (
-                        <Icon
-                          source={route.focusedIcon as IconSource}
-                          color={activeTintColor}
-                          size={24}
+                      {focused && (
+                        <Animated.View
+                          style={[
+                            styles.outline,
+                            {
+                              transform: [
+                                {
+                                  scaleX: outlineScale,
+                                },
+                              ],
+                              backgroundColor: colors.secondaryContainer,
+                            },
+                            activeIndicatorStyle,
+                          ]}
                         />
                       )}
-                    </Animated.View>
-                    <Animated.View
-                      style={[
-                        styles.iconWrapper,
-                        styles.v3IconWrapper,
-                        {
-                          opacity: isLegacyOrV3Shifting
-                            ? inactiveOpacity
-                            : v3InactiveOpacity,
-                        },
-                      ]}
-                    >
-                      {renderIcon ? (
-                        renderIcon({
-                          route,
-                          focused: false,
-                          color: inactiveTintColor,
-                        })
-                      ) : (
-                        <Icon
-                          source={
-                            route.unfocusedIcon !== undefined
-                              ? route.unfocusedIcon
-                              : (route.focusedIcon as IconSource)
-                          }
-                          color={inactiveTintColor}
-                          size={24}
-                        />
-                      )}
-                    </Animated.View>
-                    <View style={[styles.badgeContainer, badgeStyle]}>
-                      {typeof badge === 'boolean' ? (
-                        <Badge visible={badge} />
-                      ) : (
-                        <Badge visible={badge != null}>{badge}</Badge>
-                      )}
-                    </View>
-                  </Animated.View>
-                  {labeled ? (
-                    <Animated.View style={[styles.labelContainer]}>
                       <Animated.View
                         style={[
-                          styles.labelWrapper,
+                          styles.iconWrapper,
+                          styles.v3IconWrapper,
                           {
                             opacity: isLegacyOrV3Shifting
                               ? activeOpacity
@@ -699,54 +646,83 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           },
                         ]}
                       >
-                        {renderLabel ? (
-                          renderLabel({
+                        {renderIcon ? (
+                          renderIcon({
                             route,
                             focused: true,
-                            color: activeLabelColor,
+                            color: activeTintColor,
                           })
                         ) : (
-                          <Text
-                            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                            variant="labelMedium"
-                            style={[
-                              styles.label,
-                              {
-                                color: activeLabelColor,
-                                ...font,
-                              },
-                            ]}
-                          >
-                            {getLabelText({ route })}
-                          </Text>
+                          <Icon
+                            source={route.focusedIcon as IconSource}
+                            color={activeTintColor}
+                            size={24}
+                          />
                         )}
                       </Animated.View>
-                      {shifting ? null : (
+                      <Animated.View
+                        style={[
+                          styles.iconWrapper,
+                          styles.v3IconWrapper,
+                          {
+                            opacity: isLegacyOrV3Shifting
+                              ? inactiveOpacity
+                              : v3InactiveOpacity,
+                          },
+                        ]}
+                      >
+                        {renderIcon ? (
+                          renderIcon({
+                            route,
+                            focused: false,
+                            color: inactiveTintColor,
+                          })
+                        ) : (
+                          <Icon
+                            source={
+                              route.unfocusedIcon !== undefined
+                                ? route.unfocusedIcon
+                                : (route.focusedIcon as IconSource)
+                            }
+                            color={inactiveTintColor}
+                            size={24}
+                          />
+                        )}
+                      </Animated.View>
+                      <View style={[styles.badgeContainer, badgeStyle]}>
+                        {typeof badge === 'boolean' ? (
+                          <Badge visible={badge} />
+                        ) : (
+                          <Badge visible={badge != null}>{badge}</Badge>
+                        )}
+                      </View>
+                    </Animated.View>
+                    {labeled ? (
+                      <Animated.View style={[styles.labelContainer]}>
                         <Animated.View
                           style={[
                             styles.labelWrapper,
                             {
                               opacity: isLegacyOrV3Shifting
-                                ? inactiveOpacity
-                                : v3InactiveOpacity,
+                                ? activeOpacity
+                                : v3ActiveOpacity,
                             },
                           ]}
                         >
                           {renderLabel ? (
                             renderLabel({
                               route,
-                              focused: false,
-                              color: inactiveLabelColor,
+                              focused: true,
+                              color: activeLabelColor,
                             })
                           ) : (
                             <Text
                               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
                               variant="labelMedium"
-                              selectable={false}
                               style={[
                                 styles.label,
                                 {
-                                  color: inactiveLabelColor,
+                                  color: activeLabelColor,
                                   ...font,
                                 },
                               ]}
@@ -755,16 +731,53 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             </Text>
                           )}
                         </Animated.View>
-                      )}
-                    </Animated.View>
-                  ) : null}
-                </View>
-              ),
-            });
-          })}
-        </View>
-      </Animated.View>
-    </Surface>
+                        {shifting ? null : (
+                          <Animated.View
+                            style={[
+                              styles.labelWrapper,
+                              {
+                                opacity: isLegacyOrV3Shifting
+                                  ? inactiveOpacity
+                                  : v3InactiveOpacity,
+                              },
+                            ]}
+                          >
+                            {renderLabel ? (
+                              renderLabel({
+                                route,
+                                focused: false,
+                                color: inactiveLabelColor,
+                              })
+                            ) : (
+                              <Text
+                                maxFontSizeMultiplier={
+                                  labelMaxFontSizeMultiplier
+                                }
+                                variant="labelMedium"
+                                selectable={false}
+                                style={[
+                                  styles.label,
+                                  {
+                                    color: inactiveLabelColor,
+                                    ...font,
+                                  },
+                                ]}
+                              >
+                                {getLabelText({ route })}
+                              </Text>
+                            )}
+                          </Animated.View>
+                        )}
+                      </Animated.View>
+                    ) : null}
+                  </View>
+                ),
+              });
+            })}
+          </View>
+        </Animated.View>
+      </Surface>
+    </Animated.View>
   );
 };
 

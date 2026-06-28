@@ -1,14 +1,17 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { Animated, StyleSheet, Text } from 'react-native';
-import type { StyleProp, TextProps, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import Animated from 'react-native-reanimated';
 
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
-type Props<T> = Animated.AnimatedProps<TextProps> & {
+type AnimatedTextProps = React.ComponentProps<typeof Animated.Text>;
+
+type Props<T> = AnimatedTextProps & {
   /**
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
@@ -24,8 +27,8 @@ type Props<T> = Animated.AnimatedProps<TextProps> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: VariantProp<T>;
-  style?: StyleProp<TextStyle>;
-  ref?: React.Ref<Text & HTMLElement>;
+  style?: AnimatedTextProps['style'];
+  ref?: AnimatedTextProps['ref'];
   /**
    * @optional
    */

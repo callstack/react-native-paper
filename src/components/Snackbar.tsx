@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Animated, Easing, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
@@ -58,7 +57,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * @supported Available in v5.x with theme version 3
    * Changes Snackbar shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
@@ -71,7 +70,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style for the content of the snackbar
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -155,80 +154,42 @@ const Snackbar = ({
   const { direction } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
-  const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(0.0)
-  );
-  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
-
   const [hidden, setHidden] = React.useState(!visible);
 
   const { scale } = theme.animation;
+  const opacity = visible ? 1 : 0;
 
-  const animateShow = useLatestCallback(() => {
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 200 * scale,
-      easing: Easing.out(Easing.ease),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        const isInfinity =
-          duration === Number.POSITIVE_INFINITY ||
-          duration === Number.NEGATIVE_INFINITY;
-
-        if (!isInfinity) {
-          hideTimeout.current = setTimeout(
-            onDismiss,
-            duration
-          ) as unknown as NodeJS.Timeout;
-        }
-      }
-    });
-  });
-
-  const handleOnVisible = useLatestCallback(() => {
-    // show
+  if (visible && hidden) {
     setHidden(false);
-  });
-
-  const handleOnHidden = useLatestCallback(() => {
-    // hide
-    if (hideTimeout.current) {
-      clearTimeout(hideTimeout.current);
-    }
-
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 100 * scale,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        setHidden(true);
-      }
-    });
-  });
+  }
 
   React.useEffect(() => {
-    if (!hidden) {
-      animateShow();
+    if (!visible || hidden) {
+      return undefined;
     }
-  }, [animateShow, hidden]);
+
+    const isInfinity =
+      duration === Number.POSITIVE_INFINITY ||
+      duration === Number.NEGATIVE_INFINITY;
+
+    if (isInfinity) {
+      return undefined;
+    }
+
+    const timeout = setTimeout(onDismiss, duration);
+
+    return () => clearTimeout(timeout);
+  }, [duration, hidden, onDismiss, visible]);
 
   React.useEffect(() => {
-    return () => {
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    };
-  }, []);
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      handleOnVisible();
-    } else {
-      handleOnHidden();
+    if (visible || hidden) {
+      return undefined;
     }
-  }, [visible, handleOnVisible, handleOnHidden]);
+
+    const timeout = setTimeout(() => setHidden(true), 100 * scale);
+
+    return () => clearTimeout(timeout);
+  }, [hidden, scale, visible]);
 
   const { colors } = theme as Theme;
 
@@ -254,6 +215,10 @@ const Snackbar = ({
   const wrapperPaddings = {
     paddingBottom: bottom,
     paddingHorizontal: Math.max(left, right),
+  };
+  const transitionStyle: React.ComponentProps<typeof Surface>['style'] = {
+    transitionDuration: (visible ? 200 : 100) * scale,
+    transitionProperty: ['opacity', 'transform'],
   };
 
   const renderChildrenWithWrapper = () => {
@@ -294,15 +259,11 @@ const Snackbar = ({
             opacity: opacity,
             transform: [
               {
-                scale: visible
-                  ? opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
+                scale: visible ? 1 : 0.9,
               },
             ],
           },
+          transitionStyle,
           style,
         ]}
         testID={testID}

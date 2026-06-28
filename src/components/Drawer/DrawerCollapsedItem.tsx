@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
@@ -8,6 +8,8 @@ import type {
   ViewProps,
   ViewStyle,
 } from 'react-native';
+
+import Animated from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -70,6 +72,9 @@ export type Props = ViewProps & {
 const iconSize = 24;
 const itemSize = 56;
 const outlineHeight = 32;
+const outlineTransitionStyle = {
+  transitionProperty: 'transform' as const,
+};
 
 /**
  * Note: Available in v5.x with theme version 3
@@ -112,22 +117,21 @@ const DrawerCollapsedItem = ({
 
   const [numOfLines, setNumOfLines] = React.useState(1);
 
-  const { current: animScale } = React.useRef<Animated.Value>(
-    new Animated.Value(active ? 1 : 0.5)
-  );
+  const [prevActive, setPrevActive] = React.useState(active);
+  const [pressedOut, setPressedOut] = React.useState(false);
 
-  React.useEffect(() => {
+  if (prevActive !== active) {
+    setPrevActive(active);
+
     if (!active) {
-      animScale.setValue(0.5);
+      setPressedOut(false);
     }
-  }, [animScale, active]);
+  }
+
+  const outlineScale = active || pressedOut ? 1 : 0.5;
 
   const handlePressOut = () => {
-    Animated.timing(animScale, {
-      toValue: 1,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
+    setPressedOut(true);
   };
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
@@ -181,12 +185,14 @@ const DrawerCollapsedItem = ({
                 transform: [
                   label
                     ? {
-                        scaleX: animScale,
+                        scaleX: outlineScale,
                       }
-                    : { scale: animScale },
+                    : { scale: outlineScale },
                 ],
                 backgroundColor,
+                transitionDuration: 150 * scale,
               },
+              outlineTransitionStyle,
               style,
             ]}
             testID={`${testID}-outline`}

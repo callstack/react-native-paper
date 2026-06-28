@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, Pressable, View } from 'react-native';
+import { StyleSheet, Pressable, View } from 'react-native';
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -73,12 +73,12 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Changes Card shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /**
    * Style of card's inner content.
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -155,12 +155,8 @@ const Card = ({
     onPressOut,
   });
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(cardElevation)
-  );
-  const { animation } = theme;
-
-  const animationDuration = 150 * animation.scale;
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
 
   const runElevationAnimation = (pressType: HandlePressType) => {
     if (isMode('contained')) {
@@ -168,11 +164,7 @@ const Card = ({
     }
 
     const isPressTypeIn = pressType === 'in';
-    Animated.timing(elevation, {
-      toValue: isPressTypeIn ? 2 : cardElevation,
-      duration: animationDuration,
-      useNativeDriver: false,
-    }).start();
+    setPressed(isPressTypeIn);
   };
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
@@ -235,7 +227,7 @@ const Card = ({
         style,
       ]}
       theme={theme}
-      elevation={isMode('elevated') ? elevation : 0}
+      elevation={elevation}
       testID={`${testID}-container`}
       container
       {...rest}

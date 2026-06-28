@@ -15,33 +15,15 @@ exports[`renders menu with content styles 1`] = `
       collapsable={false}
     >
       <View
-        collapsable={false}
         style={
-          {
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
             },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-          }
-        }
-        testID="button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "flex": undefined,
-              "minWidth": 64,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -49,7 +31,35 @@ exports[`renders menu with content styles 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+            },
+          ]
+        }
+        testID="button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 1,
+                "flex": undefined,
+                "minWidth": 64,
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="button-container"
         >
@@ -243,68 +253,88 @@ exports[`renders menu with content styles 1`] = `
       testID="menu-view"
     >
       <View
-        collapsable={false}
         pointerEvents="box-none"
         style={
-          {
-            "transform": [
-              {
-                "translateX": -0,
-              },
-              {
-                "translateY": -0,
-              },
-            ],
-          }
+          [
+            {
+              "transform": [
+                {
+                  "translateX": -0,
+                },
+                {
+                  "translateY": -0,
+                },
+              ],
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "transform",
+            },
+          ]
         }
       >
         <View
-          collapsable={false}
           style={
-            {
-              "backgroundColor": "rgba(243, 237, 247, 1)",
-              "borderRadius": 4,
-              "borderTopLeftRadius": 0,
-              "borderTopRightRadius": 0,
-              "opacity": 0,
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 2,
-                "width": 0,
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
               },
-              "shadowOpacity": 0.15,
-              "shadowRadius": 6,
-              "transform": [
-                {
-                  "scaleX": 0,
-                },
-                {
-                  "scaleY": 0,
-                },
-              ],
-            }
-          }
-          testID="menu-surface-outer-layer"
-        >
-          <View
-            collapsable={false}
-            pointerEvents="box-none"
-            style={
               {
                 "backgroundColor": "rgba(243, 237, 247, 1)",
                 "borderRadius": 4,
                 "borderTopLeftRadius": 0,
                 "borderTopRightRadius": 0,
-                "flex": undefined,
-                "paddingVertical": 8,
+                "opacity": 0,
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
-                  "height": 1,
+                  "height": 2,
                   "width": 0,
                 },
-                "shadowOpacity": 0.3,
-                "shadowRadius": 2,
-              }
+                "shadowOpacity": 0.15,
+                "shadowRadius": 6,
+                "transform": [
+                  {
+                    "scaleX": 0,
+                  },
+                  {
+                    "scaleY": 0,
+                  },
+                ],
+              },
+            ]
+          }
+          testID="menu-surface-outer-layer"
+        >
+          <View
+            pointerEvents="box-none"
+            style={
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
+                },
+                {
+                  "backgroundColor": "rgba(243, 237, 247, 1)",
+                  "borderRadius": 4,
+                  "borderTopLeftRadius": 0,
+                  "borderTopRightRadius": 0,
+                  "flex": undefined,
+                  "paddingVertical": 8,
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.3,
+                  "shadowRadius": 2,
+                  "transitionDuration": 250,
+                  "transitionProperty": [
+                    "opacity",
+                    "transform",
+                  ],
+                },
+              ]
             }
             testID="menu-surface"
           >
@@ -578,33 +608,15 @@ exports[`renders not visible menu 1`] = `
     collapsable={false}
   >
     <View
-      collapsable={false}
       style={
-        {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
+        [
+          {
+            "transitionDuration": 150,
+            "transitionProperty": "all",
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        }
-      }
-      testID="button-container-outer-layer"
-    >
-      <View
-        collapsable={false}
-        style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "flex": undefined,
-            "minWidth": 64,
             "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
@@ -612,7 +624,35 @@ exports[`renders not visible menu 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-          }
+          },
+        ]
+      }
+      testID="button-container-outer-layer"
+    >
+      <View
+        style={
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "flex": undefined,
+              "minWidth": 64,
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
         testID="button-container"
       >
@@ -746,33 +786,15 @@ exports[`renders visible menu 1`] = `
       collapsable={false}
     >
       <View
-        collapsable={false}
         style={
-          {
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
+          [
+            {
+              "transitionDuration": 150,
+              "transitionProperty": "all",
             },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-          }
-        }
-        testID="button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "flex": undefined,
-              "minWidth": 64,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -780,7 +802,35 @@ exports[`renders visible menu 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-            }
+            },
+          ]
+        }
+        testID="button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
+              },
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 1,
+                "flex": undefined,
+                "minWidth": 64,
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+              },
+            ]
           }
           testID="button-container"
         >
@@ -974,64 +1024,84 @@ exports[`renders visible menu 1`] = `
       testID="menu-view"
     >
       <View
-        collapsable={false}
         pointerEvents="box-none"
         style={
-          {
-            "transform": [
-              {
-                "translateX": -0,
-              },
-              {
-                "translateY": -0,
-              },
-            ],
-          }
+          [
+            {
+              "transform": [
+                {
+                  "translateX": -0,
+                },
+                {
+                  "translateY": -0,
+                },
+              ],
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "transform",
+            },
+          ]
         }
       >
         <View
-          collapsable={false}
           style={
-            {
-              "backgroundColor": "rgba(243, 237, 247, 1)",
-              "borderRadius": 4,
-              "opacity": 0,
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 2,
-                "width": 0,
+            [
+              {
+                "transitionDuration": 150,
+                "transitionProperty": "all",
               },
-              "shadowOpacity": 0.15,
-              "shadowRadius": 6,
-              "transform": [
-                {
-                  "scaleX": 0,
+              {
+                "backgroundColor": "rgba(243, 237, 247, 1)",
+                "borderRadius": 4,
+                "opacity": 0,
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 2,
+                  "width": 0,
                 },
-                {
-                  "scaleY": 0,
-                },
-              ],
-            }
+                "shadowOpacity": 0.15,
+                "shadowRadius": 6,
+                "transform": [
+                  {
+                    "scaleX": 0,
+                  },
+                  {
+                    "scaleY": 0,
+                  },
+                ],
+              },
+            ]
           }
           testID="menu-surface-outer-layer"
         >
           <View
-            collapsable={false}
             pointerEvents="box-none"
             style={
-              {
-                "backgroundColor": "rgba(243, 237, 247, 1)",
-                "borderRadius": 4,
-                "flex": undefined,
-                "paddingVertical": 8,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 1,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0.3,
-                "shadowRadius": 2,
-              }
+                {
+                  "backgroundColor": "rgba(243, 237, 247, 1)",
+                  "borderRadius": 4,
+                  "flex": undefined,
+                  "paddingVertical": 8,
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.3,
+                  "shadowRadius": 2,
+                  "transitionDuration": 250,
+                  "transitionProperty": [
+                    "opacity",
+                    "transform",
+                  ],
+                },
+              ]
             }
             testID="menu-surface"
           >

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -122,7 +122,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Style for the button text.
    */
@@ -198,9 +198,7 @@ const Button = ({
     },
     [mode]
   );
-  const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
-  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -213,43 +211,24 @@ const Button = ({
   const initialElevation = 1;
   const activeElevation = 2;
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isElevationEntitled ? initialElevation : 0)
-  );
-
-  React.useEffect(() => {
-    // Workaround not to call setValue on Animated.Value, because it breaks styles.
-    // https://github.com/callstack/react-native-paper/issues/4559
-    Animated.timing(elevation, {
-      toValue: isElevationEntitled ? initialElevation : 0,
-      duration: 0,
-      useNativeDriver: true,
-    });
-  }, [isElevationEntitled, elevation, initialElevation]);
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = isElevationEntitled
+    ? pressed
+      ? activeElevation
+      : initialElevation
+    : 0;
 
   const handlePressIn = (e: GestureResponderEvent) => {
     onPressIn?.(e);
     if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: activeElevation,
-        duration: 200 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
+      setPressed(true);
     }
   };
 
   const handlePressOut = (e: GestureResponderEvent) => {
     onPressOut?.(e);
     if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: initialElevation,
-        duration: 150 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
+      setPressed(false);
     }
   };
 
@@ -320,14 +299,7 @@ const Button = ({
       {...rest}
       ref={ref}
       testID={`${testID}-container`}
-      style={
-        [
-          styles.button,
-          compact && styles.compact,
-          buttonStyle,
-          style,
-        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-      }
+      style={[styles.button, compact && styles.compact, buttonStyle, style]}
       elevation={elevation}
       container
     >

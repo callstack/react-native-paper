@@ -1,6 +1,13 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { ColorValue } from 'react-native';
+
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
@@ -44,7 +51,7 @@ const CrossFadeIcon = ({
   const [previousIcon, setPreviousIcon] = React.useState<IconSource | null>(
     null
   );
-  const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(1));
+  const fade = useSharedValue(1);
 
   const { scale } = theme.animation;
 
@@ -55,35 +62,32 @@ const CrossFadeIcon = ({
 
   React.useEffect(() => {
     if (isValidIcon(previousIcon) && !isEqualIcon(previousIcon, currentIcon)) {
-      fade.setValue(1);
-
-      Animated.timing(fade, {
+      fade.value = 1;
+      fade.value = withTiming(0, {
         duration: scale * 200,
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
+      });
     }
   }, [currentIcon, previousIcon, fade, scale]);
 
-  const opacityPrev = fade;
-  const opacityNext = previousIcon
-    ? fade.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 0],
-      })
-    : 1;
+  const previousIconStyle = useAnimatedStyle(() => ({
+    opacity: fade.value,
+    transform: [
+      {
+        rotate: `${interpolate(fade.value, [0, 1], [-90, 0])}deg`,
+      },
+    ],
+  }));
 
-  const rotatePrev = fade.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['-90deg', '0deg'],
-  });
-
-  const rotateNext = previousIcon
-    ? fade.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['0deg', '-180deg'],
-      })
-    : '0deg';
+  const currentIconStyle = useAnimatedStyle(() => ({
+    opacity: previousIcon ? interpolate(fade.value, [0, 1], [1, 0]) : 1,
+    transform: [
+      {
+        rotate: `${
+          previousIcon ? interpolate(fade.value, [0, 1], [0, -180]) : 0
+        }deg`,
+      },
+    ],
+  }));
 
   return (
     <View
@@ -97,26 +101,14 @@ const CrossFadeIcon = ({
     >
       {previousIcon ? (
         <Animated.View
-          style={[
-            styles.icon,
-            {
-              opacity: opacityPrev,
-              transform: [{ rotate: rotatePrev }],
-            },
-          ]}
+          style={[styles.icon, previousIconStyle]}
           testID={`${testID}-previous`}
         >
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
       ) : null}
       <Animated.View
-        style={[
-          styles.icon,
-          {
-            opacity: opacityNext,
-            transform: [{ rotate: rotateNext }],
-          },
-        ]}
+        style={[styles.icon, currentIconStyle]}
         testID={`${testID}-current`}
       >
         <Icon source={currentIcon} size={size} color={color} theme={theme} />

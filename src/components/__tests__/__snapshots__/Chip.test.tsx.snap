@@ -2,33 +2,15 @@
 
 exports[`renders chip with close button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -36,7 +18,35 @@ exports[`renders chip with close button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >
@@ -300,33 +310,15 @@ exports[`renders chip with close button 1`] = `
 
 exports[`renders chip with custom close button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -334,7 +326,35 @@ exports[`renders chip with custom close button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >
@@ -598,33 +618,15 @@ exports[`renders chip with custom close button 1`] = `
 
 exports[`renders chip with icon 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -632,7 +634,35 @@ exports[`renders chip with icon 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >
@@ -803,33 +833,15 @@ exports[`renders chip with icon 1`] = `
 
 exports[`renders chip with onPress 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -837,7 +849,35 @@ exports[`renders chip with onPress 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >
@@ -963,33 +1003,15 @@ exports[`renders chip with onPress 1`] = `
 
 exports[`renders outlined disabled chip 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -997,7 +1019,35 @@ exports[`renders outlined disabled chip 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(243, 237, 247, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >
@@ -1123,33 +1173,15 @@ exports[`renders outlined disabled chip 1`] = `
 
 exports[`renders selected chip 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
-      "borderRadius": 8,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="chip-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
         "borderRadius": 8,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1157,7 +1189,35 @@ exports[`renders selected chip 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+  testID="chip-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flex": undefined,
+          "flexDirection": "column",
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
     testID="chip-container"
   >

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -69,7 +69,7 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   ref?: React.Ref<View>;
   /**
    * TestID used for testing purposes

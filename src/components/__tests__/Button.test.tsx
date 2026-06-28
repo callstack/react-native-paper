@@ -1,7 +1,7 @@
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
@@ -708,34 +708,4 @@ describe('getButtonColors - border width', () => {
         });
       })
   );
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Button
-      mode="elevated"
-      compact
-      icon="camera"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      Compact button
-    </Button>
-  );
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
 });

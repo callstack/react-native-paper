@@ -1,4 +1,4 @@
-import { Animated, Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
@@ -208,8 +208,7 @@ it('respects anchorPosition bottom', async () => {
   dimensionsSpy.mockRestore();
 });
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
+it('applies content styles', async () => {
   await render(
     <Portal.Host>
       <Menu
@@ -217,27 +216,14 @@ it('animated value changes correctly', async () => {
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
         testID="menu"
-        contentStyle={[{ transform: [{ scale: value }] }]}
+        contentStyle={{ marginTop: 12 }}
       >
         <Menu.Item onPress={jest.fn()} title="Test" />
       </Menu>
     </Portal.Host>
   );
   expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
+    marginTop: 12,
   });
 });
 

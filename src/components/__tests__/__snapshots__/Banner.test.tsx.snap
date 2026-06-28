@@ -2,36 +2,48 @@
 
 exports[`render visible banner, with custom theme 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 1,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 250,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -49,17 +61,26 @@ exports[`render visible banner, with custom theme 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -118,34 +139,16 @@ exports[`render visible banner, with custom theme 1`] = `
           }
         >
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "transparent",
-                "borderRadius": 20,
-                "margin": 4,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="button-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "transparent",
                   "borderRadius": 20,
-                  "borderStyle": "solid",
-                  "borderWidth": 0,
-                  "flex": undefined,
-                  "minWidth": "auto",
+                  "margin": 4,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -153,7 +156,35 @@ exports[`render visible banner, with custom theme 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                },
+              ]
+            }
+            testID="button-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "minWidth": "auto",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="button-container"
             >
@@ -278,36 +309,48 @@ exports[`render visible banner, with custom theme 1`] = `
 
 exports[`renders hidden banner, without action buttons and without image 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 0,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 200,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -325,28 +368,44 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 200,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
         style={
-          {
-            "opacity": 0,
-            "position": "absolute",
-            "top": 0,
-            "transform": [
+          [
+            [
               {
-                "translateY": -0,
+                "position": "absolute",
+                "top": 0,
+                "width": "100%",
+              },
+              {
+                "transform": [
+                  {
+                    "translateY": -0,
+                  },
+                ],
+              },
+              {
+                "transitionDuration": 200,
+                "transitionProperty": "transform",
               },
             ],
-            "width": "100%",
-          }
+            {
+              "opacity": 0,
+            },
+          ]
         }
       >
         <View
@@ -413,36 +472,48 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
 
 exports[`renders visible banner, with action buttons and with image 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 1,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 250,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -460,17 +531,26 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -551,34 +631,16 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
           }
         >
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "transparent",
-                "borderRadius": 20,
-                "margin": 4,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="button-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "transparent",
                   "borderRadius": 20,
-                  "borderStyle": "solid",
-                  "borderWidth": 0,
-                  "flex": undefined,
-                  "minWidth": "auto",
+                  "margin": 4,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -586,7 +648,35 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                },
+              ]
+            }
+            testID="button-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "minWidth": "auto",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="button-container"
             >
@@ -711,36 +801,48 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
 
 exports[`renders visible banner, with action buttons and without image 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 1,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 250,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -758,17 +860,26 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -827,34 +938,16 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           }
         >
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "transparent",
-                "borderRadius": 20,
-                "margin": 4,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="button-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "transparent",
                   "borderRadius": 20,
-                  "borderStyle": "solid",
-                  "borderWidth": 0,
-                  "flex": undefined,
-                  "minWidth": "auto",
+                  "margin": 4,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -862,7 +955,35 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                },
+              ]
+            }
+            testID="button-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "minWidth": "auto",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="button-container"
             >
@@ -979,34 +1100,16 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             </View>
           </View>
           <View
-            collapsable={false}
             style={
-              {
-                "backgroundColor": "transparent",
-                "borderRadius": 20,
-                "margin": 4,
-                "shadowColor": "rgba(0, 0, 0, 1)",
-                "shadowOffset": {
-                  "height": 0,
-                  "width": 0,
+              [
+                {
+                  "transitionDuration": 150,
+                  "transitionProperty": "all",
                 },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="button-container-outer-layer"
-          >
-            <View
-              collapsable={false}
-              style={
                 {
                   "backgroundColor": "transparent",
-                  "borderColor": "transparent",
                   "borderRadius": 20,
-                  "borderStyle": "solid",
-                  "borderWidth": 0,
-                  "flex": undefined,
-                  "minWidth": "auto",
+                  "margin": 4,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -1014,7 +1117,35 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                }
+                },
+              ]
+            }
+            testID="button-container-outer-layer"
+          >
+            <View
+              style={
+                [
+                  {
+                    "transitionDuration": 150,
+                    "transitionProperty": "all",
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "minWidth": "auto",
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
               }
               testID="button-container"
             >
@@ -1139,36 +1270,48 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
 
 exports[`renders visible banner, without action buttons and with image 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 1,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 250,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -1186,17 +1329,26 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -1284,36 +1436,48 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
 
 exports[`renders visible banner, without action buttons and without image 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(247, 242, 250, 1)",
-      "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 1,
-        "width": 0,
+    [
+      {
+        "transitionDuration": 150,
+        "transitionProperty": "all",
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
-    }
-  }
-  testID="surface-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
-        "flex": undefined,
+        "opacity": 1,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
-      }
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
+      },
+    ]
+  }
+  testID="surface-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "transitionDuration": 150,
+          "transitionProperty": "all",
+        },
+        {
+          "backgroundColor": "rgba(247, 242, 250, 1)",
+          "flex": undefined,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+          "transitionDuration": 250,
+          "transitionProperty": "opacity",
+        },
+      ]
     }
     testID="surface"
   >
@@ -1331,17 +1495,26 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       }
     >
       <View
-        collapsable={false}
         style={
-          {
-            "height": 0,
-          }
+          [
+            {
+              "height": 0,
+            },
+            {
+              "transitionDuration": 250,
+              "transitionProperty": "height",
+            },
+          ]
         }
       />
       <View
-        collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
