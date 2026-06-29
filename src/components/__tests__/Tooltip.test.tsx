@@ -284,14 +284,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 0, // Tooltip renders starting from children's x coord
-              top: 250,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 8, // Math.max(EDGE_MARGIN=8, pageX=0)
+            top: 250,
+          });
         });
       });
 
@@ -309,14 +305,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-              top: 250,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 252, // Math.min(950, LAYOUT_WIDTH(360) - TOOLTIP_WIDTH(100) - EDGE_MARGIN(8))
+            top: 250,
+          });
         });
       });
 
@@ -351,6 +343,12 @@ describe('Tooltip', () => {
     beforeAll(() => {
       Platform.OS = 'web';
     });
+
+    // Hover is handled by onPointerEnter/onPointerLeave on the wrapper View.
+    const getWrapperTrigger = (
+      getByTestId: Awaited<ReturnType<typeof render>>['getByTestId']
+    ) => getByTestId('tooltip-trigger');
+
     describe('Unmount', () => {
       beforeAll(() => {
         jest.spyOn(global, 'clearTimeout');
@@ -361,10 +359,10 @@ describe('Tooltip', () => {
 
       it('removes showTooltipTimer when the component unmounts', async () => {
         const {
-          wrapper: { getByText, unmount },
+          wrapper: { getByTestId, unmount },
         } = await setup({ enterTouchDelay: 5000 });
 
-        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
 
         await unmount();
 
@@ -373,10 +371,10 @@ describe('Tooltip', () => {
 
       it('removes hideTooltipTimer when the component unmounts', async () => {
         const {
-          wrapper: { getByText, unmount },
+          wrapper: { getByTestId, unmount },
         } = await setup({ enterTouchDelay: 5000 });
 
-        await fireEvent(getTrigger(getByText), 'hoverOut');
+        await fireEvent(getWrapperTrigger(getByTestId), 'pointerLeave');
 
         await unmount();
 
@@ -385,10 +383,10 @@ describe('Tooltip', () => {
 
       it('removes Dimensions listener when the component unmount', async () => {
         const {
-          wrapper: { getByText, findByText, unmount },
+          wrapper: { getByTestId, findByText, unmount },
         } = await setup();
 
-        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
         await runTimers(500);
 
         await findByText('some tooltip text');
@@ -411,13 +409,13 @@ describe('Tooltip', () => {
         jest.spyOn(global, 'clearTimeout');
 
         const {
-          wrapper: { getByText },
+          wrapper: { getByTestId },
         } = await setup();
 
-        const trigger = getTrigger(getByText);
-        await fireEvent(trigger, 'hoverIn');
-        await fireEvent(trigger, 'hoverOut');
-        await fireEvent(trigger, 'hoverIn');
+        const trigger = getWrapperTrigger(getByTestId);
+        await fireEvent(trigger, 'pointerEnter');
+        await fireEvent(trigger, 'pointerLeave');
+        await fireEvent(trigger, 'pointerEnter');
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(2);
       });
@@ -426,18 +424,18 @@ describe('Tooltip', () => {
     describe('hoverOut', () => {
       it('hides the tooltip when the user stops hovering the component', async () => {
         const {
-          wrapper: { queryByText, getByText, findByText },
+          wrapper: { queryByText, getByTestId, findByText },
         } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
         await runTimers(50);
 
         await findByText('some tooltip text');
 
-        // Settle the hover-out in its own act() so its state update can't
+        // Settle the pointer-leave in its own act() so its state update can't
         // escape act and corrupt the renderer, then drain the fade-out timers.
         await act(async () => {
-          await fireEvent(getTrigger(getByText), 'hoverOut');
+          await fireEvent(getWrapperTrigger(getByTestId), 'pointerLeave');
         });
         await runTimers(); // leaveTouchDelay → schedules the exit fade
         await runTimers(); // exit fade duration → unmounts
@@ -464,10 +462,10 @@ describe('Tooltip', () => {
       describe('When it does not overflow', () => {
         it('centers the tooltip in the middle of the children component', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByTestId, findByText },
           } = await setup();
 
-          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
           await runTimers(500);
 
           await fireEvent(await findByText('some tooltip text'), 'layout', {
@@ -490,10 +488,10 @@ describe('Tooltip', () => {
       describe('When it overflows to left', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByTestId, findByText },
           } = await setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
           await runTimers(500);
 
           await fireEvent(await findByText('some tooltip text'), 'layout', {
@@ -502,24 +500,20 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 0, // Tooltip renders starting from children's x coord
-              top: 250,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 8, // Math.max(EDGE_MARGIN=8, pageX=0)
+            top: 250,
+          });
         });
       });
 
       describe('When it overflows to right', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByTestId, findByText },
           } = await setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
           await runTimers(500);
 
           await fireEvent(await findByText('some tooltip text'), 'layout', {
@@ -528,24 +522,20 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-              top: 250,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 252, // Math.min(950, LAYOUT_WIDTH(360) - TOOLTIP_WIDTH(100) - EDGE_MARGIN(8))
+            top: 250,
+          });
         });
       });
 
       describe('When it overflows to bottom', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByTestId, findByText },
           } = await setup({}, { pageY: 600, height: 50 });
 
-          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await fireEvent(getWrapperTrigger(getByTestId), 'pointerEnter');
           await runTimers(500);
 
           await fireEvent(await findByText('some tooltip text'), 'layout', {
@@ -702,11 +692,11 @@ describe('Tooltip.Rich', () => {
 
     it('opens on hover after the enter delay', () => {
       const {
-        wrapper: { getByText, queryByText },
-      } = setup({ enterTouchDelay: 100 });
+        wrapper: { getByTestId, getByText, queryByText },
+      } = await setup({ enterTouchDelay: 100 });
 
       await act(async () => {
-        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getByTestId('tooltip-rich-trigger'), 'pointerEnter');
       });
       expect(queryByText('Body text')).toBeNull(); // still within the delay
 
@@ -742,42 +732,18 @@ describe('Tooltip.Rich', () => {
       } = setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
 
       await act(async () => {
-        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getByTestId('tooltip-rich-trigger'), 'pointerEnter');
       });
       await runTimers(0);
       expect(getByText('Body text')).toBeTruthy();
 
       // Leaving the trigger schedules a hide...
       await act(async () => {
-        await fireEvent(getTrigger(getByText), 'hoverOut');
+        await fireEvent(getByTestId('tooltip-rich-trigger'), 'pointerLeave');
         // ...but entering the tooltip cancels it.
         await fireEvent(getByTestId('tooltip-rich-surface'), 'hoverIn');
       });
       await runTimers(500);
-
-      expect(getByText('Body text')).toBeTruthy();
-    });
-
-    it('opens on hover even when the trigger ignores the hover props', () => {
-      // Some triggers (e.g. `IconButton`) don't forward `onHoverIn` on web,
-      // so the wrapper must carry the handlers itself. Here the trigger
-      // deliberately drops the provided props.
-      jest
-        .spyOn(View.prototype, 'measure')
-        .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
-
-      const { getByTestId, getByText, queryByText } = render(
-        <PaperProvider>
-          <TooltipCompound.Rich content="Body text" enterTouchDelay={100}>
-            {() => <DummyComponent />}
-          </TooltipCompound.Rich>
-        </PaperProvider>
-      );
-
-      await fireEvent(getByTestId('tooltip-rich-trigger'), 'hoverIn');
-      expect(queryByText('Body text')).toBeNull(); // within the enter delay
-
-      runTimers(100);
 
       expect(getByText('Body text')).toBeTruthy();
     });

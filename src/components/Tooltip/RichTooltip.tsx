@@ -7,10 +7,11 @@ import {
   Pressable,
   ViewStyle,
 } from 'react-native';
+import type { PointerEvent, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { useTooltipFade } from './hooks';
+import { takeSingletonSlot, useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -167,6 +168,7 @@ const RichTooltip = ({
   }, []);
 
   const show = React.useCallback(() => {
+    takeSingletonSlot(() => setVisible(false));
     clearHideTimer();
     setVisible(true);
   }, [clearHideTimer]);
@@ -183,7 +185,10 @@ const RichTooltip = ({
 
   // Mobile: a tap toggles the tooltip.
   const handlePress = React.useCallback(() => {
-    setVisible((v) => !v);
+    setVisible((v) => {
+      if (!v) takeSingletonSlot(() => setVisible(false));
+      return !v;
+    });
     clearShowTimer();
     clearHideTimer();
   }, [clearShowTimer, clearHideTimer]);
@@ -191,18 +196,47 @@ const RichTooltip = ({
   // Web: open on hover (with a short enter delay) and on keyboard focus.
   const handleHoverIn = React.useCallback(() => {
     clearHideTimer();
-    showTimer.current = setTimeout(() => setVisible(true), enterTouchDelay);
+    showTimer.current = setTimeout(() => {
+      takeSingletonSlot(() => setVisible(false));
+      setVisible(true);
+    }, enterTouchDelay);
   }, [clearHideTimer, enterTouchDelay]);
 
-  // Trigger props handed to the consumer's render function.
+  // On web, pointer events on the wrapper View handle hover without going
+  // through RNW's Pressable lock/unlock mechanism that caused flicker.
+  // Guard against spurious pointerleave: only schedule hide when cursor has
+  // actually left wrapper bounds (same reasoning as Tooltip.tsx).
+  const handlePointerLeave = React.useCallback(
+    (e?: PointerEvent) => {
+      if (Platform.OS === 'web' && e?.nativeEvent) {
+        const el = childrenWrapperRef.current as unknown as HTMLElement | null;
+        if (el) {
+          const { clientX, clientY } = e.nativeEvent;
+          const rect = el.getBoundingClientRect();
+          if (
+            (rect.width > 0 || rect.height > 0) &&
+            clientX >= rect.left &&
+            clientX <= rect.right &&
+            clientY >= rect.top &&
+            clientY <= rect.bottom
+          ) {
+            return;
+          }
+        }
+      }
+      scheduleHide();
+    },
+    [scheduleHide, childrenWrapperRef]
+  );
+
+  const wrapperPointerProps =
+    Platform.OS === 'web'
+      ? { onPointerEnter: handleHoverIn, onPointerLeave: handlePointerLeave }
+      : {};
+
   const triggerProps: TooltipRichTriggerProps =
     Platform.OS === 'web'
-      ? {
-          onHoverIn: handleHoverIn,
-          onHoverOut: scheduleHide,
-          onFocus: show,
-          onBlur: scheduleHide,
-        }
+      ? { onFocus: show, onBlur: scheduleHide }
       : { onPress: handlePress };
 
   // Web only: keep the tooltip open while the pointer travels from the trigger
@@ -221,12 +255,13 @@ const RichTooltip = ({
             accessibilityLabel="Close"
             accessibilityHint="Dismisses the tooltip"
             onPress={hide}
-            pointerEvents={visible ? 'auto' : 'none'}
+            pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
             testID="tooltip-rich-backdrop"
           />
           <Animated.View
             onLayout={onLayout}
+            pointerEvents="box-none"
             style={[
               styles.container,
               getTooltipPosition(measurement),
@@ -280,19 +315,15 @@ const RichTooltip = ({
           </Animated.View>
         </Portal>
       )}
-      <Pressable
+      <View
         ref={childrenWrapperRef}
         collapsable={false}
         style={styles.pressContainer}
         testID="tooltip-rich-trigger"
-        // On web the wrapper carries the hover/focus handlers because the
-        // trigger element (e.g. `IconButton`) doesn't reliably forward them.
-        // On mobile the press handler stays on the trigger itself (via
-        // `triggerProps` below) so the wrapper doesn't double-fire the toggle.
-        {...(Platform.OS === 'web' ? triggerProps : null)}
+        {...wrapperPointerProps}
       >
         {children(triggerProps)}
-      </Pressable>
+      </View>
     </>
   );
 };

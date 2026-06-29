@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+import { Platform, View } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import { cubicBezier } from 'react-native-reanimated';
 
@@ -7,6 +8,15 @@ import { Tokens } from './tokens';
 import type { Measurement } from './utils';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { InternalTheme } from '../../types';
+
+// Ensures only one tooltip is visible at a time. When a tooltip calls
+// takeSingletonSlot it immediately hides the previous one.
+let dismissCurrentTooltip: (() => void) | null = null;
+
+export const takeSingletonSlot = (dismiss: () => void) => {
+  dismissCurrentTooltip?.();
+  dismissCurrentTooltip = dismiss;
+};
 
 /**
  * Drives the show/hide fade shared by both tooltip variants.
@@ -56,7 +66,18 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
 
     childrenWrapperRef.current?.measure(
       (_x, _y, width, height, pageX, pageY) => {
-        childrenMeasurement.current = { pageX, pageY, width, height };
+        // On web, measure() returns viewport-relative coords but the Portal
+        // container is positioned at the document origin — add scroll offset.
+        const scrollX =
+          Platform.OS === 'web' ? ((window as Window).scrollX ?? 0) : 0;
+        const scrollY =
+          Platform.OS === 'web' ? ((window as Window).scrollY ?? 0) : 0;
+        childrenMeasurement.current = {
+          pageX: pageX + scrollX,
+          pageY: pageY + scrollY,
+          width,
+          height,
+        };
       }
     );
   }, [rendered, visible]);

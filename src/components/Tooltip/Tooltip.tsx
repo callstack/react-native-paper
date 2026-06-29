@@ -1,15 +1,10 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  Platform,
-  Pressable,
-} from 'react-native';
-import type { LayoutChangeEvent, ViewStyle } from 'react-native';
+import { Dimensions, StyleSheet, Platform, View } from 'react-native';
+import type { PointerEvent, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { useTooltipFade } from './hooks';
+import { takeSingletonSlot, useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -125,8 +120,12 @@ const Tooltip = ({
     }
 
     if (Platform.OS === 'web') {
-      showTimer.current = setTimeout(() => setVisible(true), enterTouchDelay);
+      showTimer.current = setTimeout(() => {
+        takeSingletonSlot(() => setVisible(false));
+        setVisible(true);
+      }, enterTouchDelay);
     } else {
+      takeSingletonSlot(() => setVisible(false));
       setVisible(true);
     }
   }, [enterTouchDelay]);
@@ -139,14 +138,47 @@ const Tooltip = ({
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 
-  const triggerProps: TooltipTriggerProps =
+  // On web, pointer events on the wrapper View handle hover without going
+  // through RNW's Pressable lock/unlock mechanism that caused flicker.
+  // Long-press in triggerProps lets touchscreen-web users still trigger it.
+  //
+  // Guard against spurious pointerleave events (e.g. fired when the tooltip
+  // renders in the Portal): only start the hide timer when the cursor has
+  // actually left the wrapper bounds. In JSDOM getBoundingClientRect() returns
+  // a zero-size rect, so the check is skipped and tests continue to pass.
+  const handlePointerLeave = React.useCallback(
+    (e?: PointerEvent) => {
+      if (Platform.OS === 'web' && e?.nativeEvent) {
+        const el = childrenWrapperRef.current as unknown as HTMLElement | null;
+        if (el) {
+          const { clientX, clientY } = e.nativeEvent;
+          const rect = el.getBoundingClientRect();
+          if (
+            (rect.width > 0 || rect.height > 0) &&
+            clientX >= rect.left &&
+            clientX <= rect.right &&
+            clientY >= rect.top &&
+            clientY <= rect.bottom
+          ) {
+            return;
+          }
+        }
+      }
+      handleTouchEnd();
+    },
+    [handleTouchEnd, childrenWrapperRef]
+  );
+
+  const wrapperPointerProps =
     Platform.OS === 'web'
-      ? { onHoverIn: handleTouchStart, onHoverOut: handleTouchEnd }
-      : {
-          onLongPress: handleTouchStart,
-          onPressOut: handleTouchEnd,
-          delayLongPress: enterTouchDelay,
-        };
+      ? { onPointerEnter: handleTouchStart, onPointerLeave: handlePointerLeave }
+      : {};
+
+  const triggerProps: TooltipTriggerProps = {
+    onLongPress: handleTouchStart,
+    onPressOut: handleTouchEnd,
+    delayLongPress: enterTouchDelay,
+  };
 
   return (
     <>
@@ -154,6 +186,7 @@ const Tooltip = ({
         <Portal>
           <Animated.View
             onLayout={onLayout}
+            pointerEvents="none"
             style={[
               styles.tooltip,
               {
@@ -178,14 +211,15 @@ const Tooltip = ({
           </Animated.View>
         </Portal>
       )}
-      <Pressable
+      <View
         ref={childrenWrapperRef}
         collapsable={false}
         style={styles.pressContainer}
-        {...(Platform.OS === 'web' ? triggerProps : null)}
+        testID="tooltip-trigger"
+        {...wrapperPointerProps}
       >
         {children(triggerProps)}
-      </Pressable>
+      </View>
     </>
   );
 };

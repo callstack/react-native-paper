@@ -94,6 +94,18 @@ export type ShellProps = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Called when the pointer enters the element (web only).
+   */
+  onHoverIn?: () => void;
+  /**
+   * Called when the pointer leaves the element (web only).
+   */
+  onHoverOut?: () => void;
+  /**
    * Accessibility label. Falls back to `label` if unset.
    */
   accessibilityLabel?: string;
@@ -172,40 +184,40 @@ export type ShellProps = {
  *
  * Not exported from the package.
  */
-const Shell = forwardRef<View, ShellProps>(
-  (
-    {
-      icon,
-      label,
-      variant = 'tonalPrimary',
-      size = 'default',
-      containerColor,
-      contentColor,
-      shape,
-      iconSize,
-      leading,
-      trailing,
-      elevation = Tokens.stateElevation.enabled,
-      visible = true,
-      onPress,
-      accessibilityLabel = label,
-      accessibilityState,
-      labelMaxFontSizeMultiplier,
-      labelAnimatedStyle,
-      background,
-      widthShared,
-      heightShared,
-      borderRadiusShared,
-      transparentBackground = false,
-      overlay,
-      children,
-      style,
-      testID = 'fab-shell',
-      theme: themeOverrides,
-    },
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
+const Shell = ({
+  icon,
+  label,
+  variant = 'tonalPrimary',
+  size = 'default',
+  containerColor,
+  contentColor,
+  shape,
+  iconSize,
+  leading,
+  trailing,
+  elevation = Tokens.stateElevation.enabled,
+  visible = true,
+  onPress,
+  onLongPress,
+  onHoverIn,
+  onHoverOut,
+  accessibilityLabel = label,
+  accessibilityState,
+  labelMaxFontSizeMultiplier,
+  labelAnimatedStyle,
+  background,
+  widthShared,
+  heightShared,
+  borderRadiusShared,
+  transparentBackground = false,
+  overlay,
+  children,
+  style,
+  testID = 'fab-shell',
+  theme: themeOverrides,
+  ref,
+}: ShellProps) => {
+  const theme = useInternalTheme(themeOverrides);
 
     const dimensions = React.useMemo(
       () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
@@ -279,7 +291,58 @@ const Shell = forwardRef<View, ShellProps>(
       [borderRadius]
     );
 
-    return (
+  return (
+    <Reanimated.View
+      ref={ref}
+      style={[
+        style,
+        styles.container,
+        outerStyle,
+        shadowStyle,
+        visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
+      ]}
+      testID={`${testID}-container`}
+    >
+      <Reanimated.View style={[styles.clip, clipStyle]}>
+        {overlay}
+        <TouchableRipple
+          borderless
+          background={background}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onHoverIn={onHoverIn}
+          onHoverOut={onHoverOut}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityRole="button"
+          accessibilityState={accessibilityState}
+          testID={testID}
+          style={[
+            children ? styles.fill : null,
+            Platform.OS === 'web' ? webNoOutline : null,
+          ]}
+        >
+          {children ?? (
+            <Content
+              icon={icon}
+              label={label}
+              contentColor={colors.content}
+              height={dimensions.height}
+              iconSize={dimensions.iconSize}
+              leading={dimensions.leading}
+              trailing={dimensions.trailing}
+              iconLabelGap={dimensions.iconLabelGap}
+              labelTypescale={dimensions.labelTypescale}
+              labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+              labelAnimatedStyle={labelAnimatedStyle}
+              labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
+              labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
+              testID={testID}
+            />
+          )}
+        </TouchableRipple>
+      </Reanimated.View>
       <Reanimated.View
         ref={ref}
         style={[

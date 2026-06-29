@@ -46,6 +46,18 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Called when the pointer enters the element (web only).
+   */
+  onHoverIn?: () => void;
+  /**
+   * Called when the pointer leaves the element (web only).
+   */
+  onHoverOut?: () => void;
+  /**
    * Accessibility label. Falls back to nothing if unset.
    */
   accessibilityLabel?: string;
@@ -103,42 +115,44 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const FAB = forwardRef<View, Props>(
-  (
-    {
-      icon,
-      variant = 'tonalPrimary',
-      size = 'default',
-      visible = true,
-      onPress,
-      containerColor,
-      contentColor,
-      accessibilityLabel,
-      accessibilityState,
-      background,
-      style,
-      testID = 'floating-action-button',
-      theme,
-    },
-    ref
-  ) => (
-    <Shell
-      ref={ref}
-      icon={icon}
-      variant={variant}
-      size={size}
-      visible={visible}
-      onPress={onPress}
-      containerColor={containerColor}
-      contentColor={contentColor}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityState={accessibilityState}
-      background={background}
-      style={style}
-      testID={testID}
-      theme={theme}
-    />
-  )
+const FAB = ({
+  icon,
+  variant = 'tonalPrimary',
+  size = 'default',
+  visible = true,
+  onPress,
+  onLongPress,
+  onHoverIn,
+  onHoverOut,
+  containerColor,
+  contentColor,
+  accessibilityLabel,
+  accessibilityState,
+  background,
+  style,
+  testID = 'floating-action-button',
+  theme,
+  ref,
+}: Props) => (
+  <Shell
+    ref={ref}
+    icon={icon}
+    variant={variant}
+    size={size}
+    visible={visible}
+    onPress={onPress}
+    onLongPress={onLongPress}
+    onHoverIn={onHoverIn}
+    onHoverOut={onHoverOut}
+    containerColor={containerColor}
+    contentColor={contentColor}
+    accessibilityLabel={accessibilityLabel}
+    accessibilityState={accessibilityState}
+    background={background}
+    style={style}
+    testID={testID}
+    theme={theme}
+  />
 );
 
 export default FAB;
