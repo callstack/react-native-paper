@@ -142,6 +142,25 @@ describe('Dialog', () => {
       paddingTop: 0,
     });
   });
+
+  it('should preserve the icon-to-title spacing for an icon dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Icon icon="alert" testID="dialog-icon" />
+        <Dialog.Title testID="dialog-title">
+          <Text>Test Dialog Content</Text>
+        </Dialog.Title>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      marginBottom: 16,
+      paddingTop: 0,
+    });
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
+    });
+  });
 });
 
 describe('DialogActions', () => {

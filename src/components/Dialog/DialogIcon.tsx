@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 16,
     paddingTop: 0,
   },
 });
