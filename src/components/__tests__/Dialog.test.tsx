@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import {
   Text,
   StyleSheet,
@@ -177,20 +178,27 @@ describe('DialogActions', () => {
   });
 
   it('should not inject button props into actions', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
+      <Dialog.Actions>
+        <ProbeButton>Cancel</ProbeButton>
+        <ProbeButton>Ok</ProbeButton>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const [cancelButton, okButton] = dialogActionsContainer.props.children;
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
 
-    expect(cancelButton.props.compact).toBeUndefined();
-    expect(cancelButton.props.uppercase).toBeUndefined();
-    expect(okButton.props.compact).toBeUndefined();
-    expect(okButton.props.uppercase).toBeUndefined();
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(cancelButtonProps).not.toHaveProperty('uppercase');
+    expect(okButtonProps).not.toHaveProperty('compact');
+    expect(okButtonProps).not.toHaveProperty('uppercase');
   });
 
   it('should apply custom styles', async () => {

@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
@@ -140,38 +141,50 @@ describe('CardCover', () => {
 
 describe('CardActions', () => {
   it('renders button with passed mode', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
       <Card>
-        <Card.Actions testID="card-actions">
-          <Button mode="contained">Agree</Button>
+        <Card.Actions>
+          <ProbeButton mode="contained">Agree</ProbeButton>
         </Card.Actions>
       </Card>
     );
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('card-actions').props.children[0].props.mode
-    ).toBe('contained');
+    expect(buttonProps).toHaveBeenCalledWith(
+      expect.objectContaining({ mode: 'contained' })
+    );
   });
 
   it('does not inject default button props', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
       <Card>
-        <Card.Actions testID="card-actions">
-          <Button>Cancel</Button>
-          <Button>Agree</Button>
+        <Card.Actions>
+          <ProbeButton>Cancel</ProbeButton>
+          <ProbeButton>Agree</ProbeButton>
         </Card.Actions>
       </Card>
     );
 
-    const [cancelButton, agreeButton] =
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('card-actions').props.children;
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [agreeButtonProps] = buttonProps.mock.calls[1];
 
-    expect(cancelButton.props.mode).toBeUndefined();
-    expect(cancelButton.props.compact).toBeUndefined();
-    expect(agreeButton.props.mode).toBeUndefined();
-    expect(agreeButton.props.compact).toBeUndefined();
+    expect(cancelButtonProps).not.toHaveProperty('mode');
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(agreeButtonProps).not.toHaveProperty('mode');
+    expect(agreeButtonProps).not.toHaveProperty('compact');
   });
 
   it('renders actions in a styled row', async () => {
