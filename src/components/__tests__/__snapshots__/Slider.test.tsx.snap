@@ -1,0 +1,2380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider renders Slider.Centered shorthand 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 30,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders Slider.Range shorthand 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 90,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders centered variant 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 75,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders disabled standard 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": true,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.38,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(29, 27, 32, 1)",
+          "opacity": 0.38,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders each size 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 16,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 14,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders each size 2`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders each size 3`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 40,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 2,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 6,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 6,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 12,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 12,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders each size 4`] = `
+<View
+  style={
+    [
+      {
+        "height": 68,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 56,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 6,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 16,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 16,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 16,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 16,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders each size 5`] = `
+<View
+  style={
+    [
+      {
+        "height": 108,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 96,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 6,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 28,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 28,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 28,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 28,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders range variant 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 80,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders standard slider 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders vertical orientation 1`] = `
+<View
+  style={
+    [
+      {
+        "overflow": "visible",
+        "width": 44,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "bottom": 0,
+        "left": 10,
+        "position": "absolute",
+        "top": 0,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": undefined,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": undefined,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": undefined,
+            "width": undefined,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+        },
+        {
+          "height": 4,
+          "top": -2,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders with stop indicators 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 44,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 10,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 0,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Slider renders with value indicator 1`] = `
+<View
+  style={
+    [
+      {
+        "height": 100,
+        "overflow": "visible",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityActions={
+      [
+        {
+          "label": "increment",
+          "name": "increment",
+        },
+        {
+          "label": "decrement",
+          "name": "decrement",
+        },
+      ]
+    }
+    accessibilityRole="adjustable"
+    accessibilityState={
+      {
+        "disabled": false,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": 100,
+        "min": 0,
+        "now": 50,
+      }
+    }
+    onAccessibilityAction={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "height": 24,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 66,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 2,
+            "borderBottomRightRadius": 8,
+            "borderTopLeftRadius": 2,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 6,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "position": "absolute",
+          },
+          {
+            "borderBottomLeftRadius": 8,
+            "borderBottomRightRadius": 2,
+            "borderTopLeftRadius": 8,
+            "borderTopRightRadius": 2,
+          },
+          {
+            "bottom": 0,
+            "height": undefined,
+            "left": 0,
+            "right": undefined,
+            "top": 0,
+            "width": 0,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "borderRadius": 9999,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "top": 56,
+        },
+        {
+          "left": -2,
+          "width": 4,
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
+    }
+  />
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 9999,
+          "height": 44,
+          "justifyContent": "center",
+          "position": "absolute",
+          "top": 0,
+          "width": 44,
+        },
+        {
+          "opacity": 0,
+          "transform": [
+            {
+              "translateX": -22,
+            },
+          ],
+        },
+        {
+          "backgroundColor": "rgba(50, 47, 53, 1)",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          [
+            {
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "letterSpacing": 0.1,
+              "lineHeight": 20,
+            },
+            {
+              "color": "rgba(245, 239, 247, 1)",
+            },
+          ],
+        ]
+      }
+    >
+      50
+    </Text>
+  </View>
+</View>
+`;

@@ -49,6 +49,7 @@ export { default as TouchableRipple } from './components/TouchableRipple/Touchab
 export { default as TextInput } from './components/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
+export { default as Slider } from './components/Slider';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 
 export { default as Text, customText } from './components/Typography/Text';
@@ -125,6 +126,7 @@ export type { Props as RadioButtonGroupProps } from './components/RadioButton/Ra
 export type { Props as RadioButtonIOSProps } from './components/RadioButton/RadioButtonIOS';
 export type { Props as RadioButtonItemProps } from './components/RadioButton/RadioButtonItem';
 export type { Props as SearchbarProps } from './components/Searchbar';
+export type { Props as SliderProps } from './components/Slider/Slider';
 export type { Props as SnackbarProps } from './components/Snackbar';
 export type { Props as SurfaceProps } from './components/Surface';
 export type { Props as SwitchProps } from './components/Switch/Switch';

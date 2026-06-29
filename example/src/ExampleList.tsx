@@ -35,6 +35,7 @@ import SearchbarExample from './Examples/SearchbarExample';
 import SegmentedButtonMultiselectRealCase from './Examples/SegmentedButtons/SegmentedButtonMultiselectRealCase';
 import SegmentedButtonRealCase from './Examples/SegmentedButtons/SegmentedButtonRealCase';
 import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
+import SliderExample from './Examples/SliderExample';
 import SnackbarExample from './Examples/SnackbarExample';
 import SurfaceExample from './Examples/SurfaceExample';
 import SwitchExample from './Examples/SwitchExample';
@@ -78,6 +79,7 @@ export const mainExamples = {
   RadioItem: RadioButtonItemExample,
   Searchbar: SearchbarExample,
   SegmentedButton: SegmentedButtonExample,
+  Slider: SliderExample,
   Snackbar: SnackbarExample,
   Surface: SurfaceExample,
   Switch: SwitchExample,
