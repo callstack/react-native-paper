@@ -18,6 +18,49 @@ export const takeSingletonSlot = (dismiss: () => void) => {
   dismissCurrentTooltip = dismiss;
 };
 
+// Mobile backdrop hit-forwarding: each RichTooltip registers its trigger's
+// screen rect so the backdrop can forward presses that land on another trigger
+// rather than consuming them. This allows one-tap switching between tooltips.
+type RichTriggerEntry = {
+  pageX: number;
+  pageY: number;
+  width: number;
+  height: number;
+  onPress: () => void;
+};
+const richTriggerRegistry = new Map<symbol, RichTriggerEntry>();
+
+export const registerRichTrigger = (
+  id: symbol,
+  entry: RichTriggerEntry
+): void => {
+  richTriggerRegistry.set(id, entry);
+};
+
+export const unregisterRichTrigger = (id: symbol): void => {
+  richTriggerRegistry.delete(id);
+};
+
+// Returns true if a registered trigger was hit and pressed (caller should NOT
+// also call hide() in this case — the singleton dismisses the current tooltip).
+export const forwardPressToTriggerAt = (
+  pageX: number,
+  pageY: number
+): boolean => {
+  for (const entry of richTriggerRegistry.values()) {
+    if (
+      pageX >= entry.pageX &&
+      pageX <= entry.pageX + entry.width &&
+      pageY >= entry.pageY &&
+      pageY <= entry.pageY + entry.height
+    ) {
+      entry.onPress();
+      return true;
+    }
+  }
+  return false;
+};
+
 /**
  * Drives the show/hide fade shared by both tooltip variants.
  *
@@ -127,5 +170,12 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
       : cubicBezier(...theme.motion.easing[Tokens.motion.exit.easing]),
   };
 
-  return { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef };
+  return {
+    rendered,
+    measurement,
+    fadeStyle,
+    onLayout,
+    childrenWrapperRef,
+    enterDuration,
+  };
 };

@@ -11,7 +11,13 @@ import type { PointerEvent, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { takeSingletonSlot, useTooltipFade } from './hooks';
+import {
+  takeSingletonSlot,
+  useTooltipFade,
+  registerRichTrigger,
+  unregisterRichTrigger,
+  forwardPressToTriggerAt,
+} from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -132,8 +138,31 @@ const RichTooltip = ({
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
-  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
-    useTooltipFade(theme, visible);
+  const {
+    rendered,
+    measurement,
+    fadeStyle,
+    onLayout,
+    childrenWrapperRef,
+    enterDuration,
+  } = useTooltipFade(theme, visible);
+
+  // Android: elevation shadows don't participate in opacity compositing.
+  // Keep elevation at 0 during the enter fade so there's no grey-border
+  // artifact, then add it exactly when the content reaches full opacity.
+  const [elevationReady, setElevationReady] = React.useState(false);
+  React.useEffect(() => {
+    if (Platform.OS !== 'android') {
+      setElevationReady(true);
+      return;
+    }
+    if (visible && measurement.measured) {
+      const id = setTimeout(() => setElevationReady(true), enterDuration);
+      return () => clearTimeout(id);
+    }
+    setElevationReady(false);
+    return undefined;
+  }, [visible, measurement.measured, enterDuration]);
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -184,14 +213,19 @@ const RichTooltip = ({
   }, [clearShowTimer, leaveTouchDelay]);
 
   // Mobile: a tap toggles the tooltip.
+  // takeSingletonSlot must be called outside the setVisible updater — calling
+  // setVisible inside an updater queues it for a later render, so the dismiss
+  // of the stale slot would undo the show on the same cycle.
   const handlePress = React.useCallback(() => {
-    setVisible((v) => {
-      if (!v) takeSingletonSlot(() => setVisible(false));
-      return !v;
-    });
+    if (!visible) {
+      takeSingletonSlot(() => setVisible(false));
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
     clearShowTimer();
     clearHideTimer();
-  }, [clearShowTimer, clearHideTimer]);
+  }, [visible, clearShowTimer, clearHideTimer]);
 
   // Web: open on hover (with a short enter delay) and on keyboard focus.
   const handleHoverIn = React.useCallback(() => {
@@ -246,6 +280,44 @@ const RichTooltip = ({
       ? { onHoverIn: clearHideTimer, onHoverOut: scheduleHide }
       : {};
 
+  // Mobile: stable id + ref for the latest handlePress, used by the global
+  // trigger registry so the backdrop can forward taps to another trigger.
+  const triggerId = React.useRef<symbol>(Symbol()).current;
+  const handlePressRef = React.useRef(handlePress);
+  React.useEffect(() => {
+    handlePressRef.current = handlePress;
+  }, [handlePress]);
+
+  const updateTriggerRegistration = React.useCallback(() => {
+    if (Platform.OS === 'web') return;
+    childrenWrapperRef.current?.measureInWindow?.((x, y, width, height) => {
+      registerRichTrigger(triggerId, {
+        pageX: x,
+        pageY: y,
+        width,
+        height,
+        onPress: () => handlePressRef.current(),
+      });
+    });
+  }, [childrenWrapperRef, triggerId]);
+
+  React.useEffect(() => {
+    return () => {
+      unregisterRichTrigger(triggerId);
+    };
+  }, [triggerId]);
+
+  const handleBackdropPress = React.useCallback(
+    (e: { nativeEvent: { pageX?: number; pageY?: number } }) => {
+      const pageX = e?.nativeEvent?.pageX ?? -1;
+      const pageY = e?.nativeEvent?.pageY ?? -1;
+      if (!forwardPressToTriggerAt(pageX, pageY)) {
+        hide();
+      }
+    },
+    [hide]
+  );
+
   return (
     <>
       {rendered && (
@@ -254,7 +326,7 @@ const RichTooltip = ({
             accessibilityRole="button"
             accessibilityLabel="Close"
             accessibilityHint="Dismisses the tooltip"
-            onPress={hide}
+            onPress={handleBackdropPress}
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
             testID="tooltip-rich-backdrop"
@@ -271,7 +343,7 @@ const RichTooltip = ({
           >
             <Pressable {...tooltipHoverProps} testID="tooltip-rich-surface">
               <Surface
-                elevation={Tokens.rich.elevation}
+                elevation={elevationReady ? Tokens.rich.elevation : 0}
                 testID="tooltip-rich-surface-container"
                 style={[
                   styles.surface,
@@ -318,6 +390,7 @@ const RichTooltip = ({
       <View
         ref={childrenWrapperRef}
         collapsable={false}
+        onLayout={updateTriggerRegistration}
         style={styles.pressContainer}
         testID="tooltip-rich-trigger"
         {...wrapperPointerProps}

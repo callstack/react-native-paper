@@ -580,6 +580,9 @@ describe('Tooltip.Rich', () => {
     jest
       .spyOn(View.prototype, 'measure')
       .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+    jest
+      .spyOn(View.prototype, 'measureInWindow')
+      .mockImplementation((cb) => cb(0, 0, 0, 0));
 
     const wrapper = render(
       <PaperProvider>
@@ -667,7 +670,40 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
-    it('dismisses when an action calls dismiss', () => {
+    it('dismisses the open tooltip when another tooltip trigger is pressed', async () => {
+      jest
+        .spyOn(View.prototype, 'measure')
+        .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+      jest
+        .spyOn(View.prototype, 'measureInWindow')
+        .mockImplementation((cb) => cb(0, 0, 0, 0));
+
+      const { getAllByText, getByText, queryByText } = await render(
+        <PaperProvider>
+          <TooltipCompound.Rich content="First tooltip">
+            {(props) => <DummyComponent {...props} />}
+          </TooltipCompound.Rich>
+          <TooltipCompound.Rich content="Second tooltip">
+            {(props) => <DummyComponent {...props} />}
+          </TooltipCompound.Rich>
+        </PaperProvider>
+      );
+
+      const [textA, textB] = getAllByText('dummy component');
+      const triggerA = textA.parent!;
+      const triggerB = textB.parent!;
+
+      await user.press(triggerA);
+      expect(getByText('First tooltip')).toBeTruthy();
+
+      await user.press(triggerB);
+      await runTimers(); // exit fade → unmount
+
+      expect(queryByText('First tooltip')).toBeNull();
+      expect(getByText('Second tooltip')).toBeTruthy();
+    });
+
+    it('dismisses when an action calls dismiss', async () => {
       const {
         wrapper: { getByText, queryByText },
       } = setup({
