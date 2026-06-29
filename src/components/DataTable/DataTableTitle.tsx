@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
+import {
+  Animated,
+  Easing,
+  PixelRatio,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -94,13 +100,16 @@ const DataTableTitle = ({
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
 
+  const { duration, easing } = theme.motion;
+
   React.useEffect(() => {
     Animated.timing(spinAnim, {
       toValue: sortDirection === 'ascending' ? 0 : 1,
-      duration: 150,
+      duration: duration.short3,
+      easing: Easing.bezier(...easing.standard),
       useNativeDriver: true,
     }).start();
-  }, [sortDirection, spinAnim]);
+  }, [sortDirection, spinAnim, duration, easing]);
 
   const textColor = theme.colors.onSurface;
 
@@ -132,6 +141,7 @@ const DataTableTitle = ({
       {icon}
 
       <Text
+        variant="labelMedium"
         style={[
           styles.cell,
           // height must scale with numberOfLines
@@ -183,10 +193,8 @@ const styles = StyleSheet.create({
   },
 
   cell: {
-    lineHeight: 24,
-    fontSize: 12,
-    fontWeight: '500',
     alignItems: 'center',
+    lineHeight: 24,
   },
 
   sorted: {
