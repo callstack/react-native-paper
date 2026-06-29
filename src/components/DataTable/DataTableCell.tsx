@@ -105,6 +105,7 @@ const CellContent = ({
 
   return (
     <Text
+      variant="bodyMedium"
       style={textStyle}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
