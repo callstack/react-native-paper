@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, Easing, StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
@@ -14,6 +14,7 @@ import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
+const ICON_SIZE = 40;
 
 export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
@@ -148,7 +149,7 @@ const Banner = ({
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
-  const { scale } = theme.animation;
+  const { duration, easing } = theme.motion;
 
   const opacity = position.interpolate({
     inputRange: [0, 0.1, 1],
@@ -159,20 +160,22 @@ const Banner = ({
     if (visible) {
       // show
       Animated.timing(position, {
-        duration: 250 * scale,
+        duration: duration.medium1,
         toValue: 1,
         useNativeDriver: false,
+        easing: Easing.bezier(...easing.standard),
       }).start(showCallback);
     } else {
       // hide
       Animated.timing(position, {
-        duration: 200 * scale,
+        duration: duration.short4,
         toValue: 0,
         useNativeDriver: false,
+        easing: Easing.bezier(...easing.standard),
       }).start(hideCallback);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, position, scale]);
+  }, [visible, position, duration, easing]);
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
@@ -221,7 +224,7 @@ const Banner = ({
           <View style={styles.content}>
             {icon ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={40} />
+                <Icon source={icon} size={ICON_SIZE} />
               </View>
             ) : null}
             <Text
