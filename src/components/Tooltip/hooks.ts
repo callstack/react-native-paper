@@ -96,7 +96,9 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     tooltip: { x: 0, y: 0, width: 0, height: 0 },
     measured: false,
   });
-  const childrenWrapperRef = React.useRef<View>(null);
+  const childrenWrapperRef = React.useRef<
+    View & { getBoundingClientRect?(): DOMRect }
+  >(null);
   // The trigger measurement and tooltip layout are each obtained via async
   // native calls that can complete in either order. Both refs are written by
   // whichever side fires first; the second side checks whether the other is

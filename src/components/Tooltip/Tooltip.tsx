@@ -152,8 +152,8 @@ const Tooltip = ({
   const handlePointerLeave = React.useCallback(
     (e?: PointerEvent) => {
       if (Platform.OS === 'web' && e?.nativeEvent) {
-        const el = childrenWrapperRef.current as unknown as HTMLElement | null;
-        if (el) {
+        const el = childrenWrapperRef.current;
+        if (el?.getBoundingClientRect) {
           const { clientX, clientY } = e.nativeEvent;
           const rect = el.getBoundingClientRect();
           if (
