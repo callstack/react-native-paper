@@ -3,12 +3,8 @@ import { Animated, StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import AppbarContent from './AppbarContent';
-import {
-  getAppbarBackgroundColor,
-  modeAppbarHeight,
-  renderAppbarContent,
-  filterAppbarActions,
-} from './utils';
+import { AppbarContext } from './AppbarContext';
+import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
 import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
@@ -174,44 +170,47 @@ const Appbar = ({
 
   const isDark = typeof dark === 'boolean' ? dark : false;
 
-  const isCenterAlignedMode = isMode('center-aligned');
-
-  let shouldCenterContent = false;
-  let shouldAddLeftSpacing = false;
-  let shouldAddRightSpacing = false;
-  if (isCenterAlignedMode) {
-    let hasAppbarContent = false;
-    let leftItemsCount = 0;
-    let rightItemsCount = 0;
-
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement<AppbarChildProps>(child)) {
-        const isLeading = child.props.isLeading === true;
-
-        if (child.type === AppbarContent) {
-          hasAppbarContent = true;
-        } else if (isLeading || !hasAppbarContent) {
-          leftItemsCount++;
-        } else {
-          rightItemsCount++;
-        }
-      }
-    });
-
-    shouldCenterContent =
-      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 3;
-    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
-    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
-  }
-
-  const spacingStyle = styles.v3Spacing;
-
   const insets = {
     paddingBottom: safeAreaInsets?.bottom,
     paddingTop: safeAreaInsets?.top,
     paddingLeft: safeAreaInsets?.left,
     paddingRight: safeAreaInsets?.right,
   };
+
+  const appbarContextValue = React.useMemo(
+    () => ({ isDark, mode }),
+    [isDark, mode]
+  );
+
+  let content: React.ReactNode = children;
+
+  if (isMode('medium') || isMode('large')) {
+    // Medium/large top app bars use a two-row layout: a controls row with the
+    // leading and trailing actions above a full-width title row. React Native
+    // flexbox has no `order`, so the title has to be separated from the actions
+    // structurally. We partition the children by element identity and the
+    // `isLeading` prop for layout only — nothing is injected into them; shared
+    // values flow through `AppbarContext`.
+    const items = React.Children.toArray(children).filter(
+      React.isValidElement
+    ) as React.ReactElement<AppbarChildProps>[];
+    const titleItems = items.filter((child) => child.type === AppbarContent);
+    const actionItems = items.filter((child) => child.type !== AppbarContent);
+    const leadingActions = actionItems.filter((child) => child.props.isLeading);
+    const trailingActions = actionItems.filter(
+      (child) => !child.props.isLeading
+    );
+
+    content = (
+      <View style={styles.columnContainer}>
+        <View style={styles.controlsRow}>
+          {leadingActions}
+          <View style={styles.rightActionControls}>{trailingActions}</View>
+        </View>
+        {titleItems}
+      </View>
+    );
+  }
 
   return (
     <Surface
@@ -228,77 +227,9 @@ const Appbar = ({
       container
       {...rest}
     >
-      {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(isMode('small') || isMode('center-aligned')) && (
-        <>
-          {/* Render only the back action at first place  */}
-          {renderAppbarContent({
-            children,
-            isDark,
-            theme,
-            renderOnly: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-          {/* Render the rest of the content except the back action */}
-          {renderAppbarContent({
-            // Filter appbar actions - first leading icons, then trailing icons
-            children: [
-              ...filterAppbarActions(children, true),
-              ...filterAppbarActions(children),
-            ],
-            isDark,
-            theme,
-            renderExcept: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-        </>
-      )}
-      {(isMode('medium') || isMode('large')) && (
-        <View
-          style={[
-            styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
-          ]}
-        >
-          {/* Appbar top row with controls */}
-          <View style={styles.controlsRow}>
-            {/* Left side of row container, can contain AppbarBackAction or AppbarAction if it's leading icon  */}
-            {renderAppbarContent({
-              children,
-              isDark,
-              renderOnly: ['Appbar.BackAction'],
-              mode,
-            })}
-            {renderAppbarContent({
-              children: filterAppbarActions(children, true),
-              isDark,
-              renderOnly: ['Appbar.Action'],
-              mode,
-            })}
-            {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
-            <View style={styles.rightActionControls}>
-              {renderAppbarContent({
-                children: filterAppbarActions(children),
-                isDark,
-                renderExcept: [
-                  'Appbar',
-                  'Appbar.BackAction',
-                  'Appbar.Content',
-                  'Appbar.Header',
-                ],
-                mode,
-              })}
-            </View>
-          </View>
-          {renderAppbarContent({
-            children,
-            isDark,
-            renderOnly: ['Appbar.Content'],
-            mode,
-          })}
-        </View>
-      )}
-      {shouldAddRightSpacing ? <View style={spacingStyle} /> : null}
+      <AppbarContext.Provider value={appbarContextValue}>
+        {content}
+      </AppbarContext.Provider>
     </Surface>
   );
 };
@@ -308,9 +239,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
-  },
-  v3Spacing: {
-    width: 52,
   },
   controlsRow: {
     flex: 1,
@@ -327,9 +255,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     paddingTop: 8,
-  },
-  centerAlignedContainer: {
-    paddingTop: 0,
   },
 });
 
