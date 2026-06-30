@@ -199,14 +199,17 @@ const Snackbar = ({
       clearTimeout(hideTimeout.current);
     }
 
+    // Under the New Architecture (Fabric), the animation callback can fire
+    // with `finished: false` even when the animation completes naturally.
+    // Guarding `setHidden(true)` on `finished` causes the Snackbar to stay
+    // mounted after `visible` becomes false on Fabric (issue #4951).
+    // Mirror the show-path fix from PR #4447: call setHidden unconditionally.
     Animated.timing(opacity, {
       toValue: 0,
       duration: 100 * scale,
       useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        setHidden(true);
-      }
+    }).start(() => {
+      setHidden(true);
     });
   });
 
