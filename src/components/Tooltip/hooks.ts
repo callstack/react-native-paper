@@ -13,9 +13,26 @@ import type { InternalTheme } from '../../types';
 // takeSingletonSlot it immediately hides the previous one.
 let dismissCurrentTooltip: (() => void) | null = null;
 
+// When any tooltip opens, trigger re-measurement of all registered triggers so
+// scroll-invalidated coordinates are refreshed before the backdrop is used.
+type RefreshCallback = () => void;
+const triggerRefreshCallbacks = new Set<RefreshCallback>();
+
+export const subscribeToTriggerRefresh = (
+  cb: RefreshCallback
+): (() => void) => {
+  triggerRefreshCallbacks.add(cb);
+  return () => triggerRefreshCallbacks.delete(cb);
+};
+
+const refreshAllTriggers = () => {
+  triggerRefreshCallbacks.forEach((cb) => cb());
+};
+
 export const takeSingletonSlot = (dismiss: () => void) => {
   dismissCurrentTooltip?.();
   dismissCurrentTooltip = dismiss;
+  refreshAllTriggers();
 };
 
 // Mobile backdrop hit-forwarding: each RichTooltip registers its trigger's
@@ -80,11 +97,14 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     measured: false,
   });
   const childrenWrapperRef = React.useRef<View>(null);
-  // The trigger is measured synchronously and stashed here so the tooltip's
-  // own layout can combine the two into the final measurement in one update.
+  // The trigger measurement and tooltip layout are each obtained via async
+  // native calls that can complete in either order. Both refs are written by
+  // whichever side fires first; the second side checks whether the other is
+  // already available and, if so, completes the combined measurement.
   const childrenMeasurement = React.useRef<Measurement['children'] | null>(
     null
   );
+  const tooltipLayout = React.useRef<Measurement['tooltip'] | null>(null);
 
   const enterDuration = reduceMotion
     ? 0
@@ -121,6 +141,15 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
           width,
           height,
         };
+        // If onLayout already fired before this callback, use the stashed
+        // tooltip layout to complete the measurement now.
+        if (tooltipLayout.current) {
+          setMeasurement({
+            children: childrenMeasurement.current,
+            tooltip: tooltipLayout.current,
+            measured: true,
+          });
+        }
       }
     );
   }, [rendered, visible]);
@@ -139,14 +168,17 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
         measured: false,
       });
       childrenMeasurement.current = null;
+      tooltipLayout.current = null;
     }, exitDuration);
 
     return () => clearTimeout(id);
   }, [rendered, visible, exitDuration]);
 
   // The tooltip reports its own size on layout; combine it with the trigger
-  // measurement captured above to compute the final position in one update.
+  // measurement to compute the final position. Either side can arrive first:
+  // stash the layout and let the measure callback pick it up if it's late.
   const onLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+    tooltipLayout.current = layout;
     if (!childrenMeasurement.current) {
       return;
     }

@@ -17,6 +17,7 @@ import {
   registerRichTrigger,
   unregisterRichTrigger,
   forwardPressToTriggerAt,
+  subscribeToTriggerRefresh,
 } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
@@ -306,6 +307,12 @@ const RichTooltip = ({
       unregisterRichTrigger(triggerId);
     };
   }, [triggerId]);
+
+  // Re-measure this trigger whenever any tooltip opens so scroll-invalidated
+  // coordinates are refreshed before the backdrop needs to hit-test against them.
+  React.useEffect(() => {
+    return subscribeToTriggerRefresh(updateTriggerRegistration);
+  }, [updateTriggerRegistration]);
 
   const handleBackdropPress = React.useCallback(
     (e: { nativeEvent: { pageX?: number; pageY?: number } }) => {
