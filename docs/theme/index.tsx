@@ -20,7 +20,7 @@ const Layout = (props: LayoutProps) => (
           buttonText="Let's talk"
           description="We've spent years building full-stack, cross-platform apps and solving tough technical challenges."
           headline="Need React or React Native expertise you can count on?"
-          href="https://www.callstack.com/contact-us"
+          href="https://www.callstack.com/contact"
         />
       </Fragment>
     }
