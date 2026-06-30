@@ -60,7 +60,7 @@ const ToggleButtonRow = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderRadius = theme.shapes.corner.largeIncreased;
+  const borderRadius = theme.shapes.corner.extraSmall;
   const outlineColor = theme.colors.outline;
 
   return (

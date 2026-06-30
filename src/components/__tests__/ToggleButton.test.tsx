@@ -62,16 +62,20 @@ it('renders row buttons with segmented styling through context', async () => {
   });
 });
 
-it('applies the MD3 secondaryContainer fill to the selected segment in a row', async () => {
+it('applies the same selection color in a row as standalone (no row-specific override)', async () => {
   await render(
     <ToggleButton.Row value="left" onValueChange={() => {}}>
       <ToggleButton icon="format-align-left" value="left" testID="selected" />
-      <ToggleButton icon="format-align-right" value="right" testID="unselected" />
+      <ToggleButton
+        icon="format-align-right"
+        value="right"
+        testID="unselected"
+      />
     </ToggleButton.Row>
   );
 
   expect(screen.getByTestId('selected-container')).toHaveStyle({
-    backgroundColor: getTheme().colors.secondaryContainer,
+    backgroundColor: getTheme().colors.surfaceContainerHighest,
   });
   expect(screen.getByTestId('unselected-container')).toHaveStyle({
     backgroundColor: getTheme().colors.surfaceContainer,

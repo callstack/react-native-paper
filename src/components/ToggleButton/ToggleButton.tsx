@@ -109,10 +109,7 @@ const ToggleButton = ({
         const checked: boolean | null =
           (context && context.value === value) || status === 'checked';
 
-        const backgroundColor =
-          isSegmentedRow && checked
-            ? theme.colors.secondaryContainer
-            : getToggleButtonColor({ theme, checked });
+        const backgroundColor = getToggleButtonColor({ theme, checked });
         const borderColor = theme.colors.outline;
 
         return (
