@@ -274,7 +274,7 @@ const RichTooltip = ({
 
   const triggerProps: TooltipRichTriggerProps =
     Platform.OS === 'web'
-      ? { onFocus: show, onBlur: scheduleHide }
+      ? { onPress: handlePress, onFocus: show, onBlur: scheduleHide }
       : { onPress: handlePress };
 
   // Web only: keep the tooltip open while the pointer travels from the trigger

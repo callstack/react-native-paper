@@ -98,6 +98,14 @@ export type ShellProps = {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute when a touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Called when the pointer enters the element (web only).
    */
   onHoverIn?: () => void;
@@ -199,6 +207,8 @@ const Shell = ({
   visible = true,
   onPress,
   onLongPress,
+  onPressOut,
+  delayLongPress,
   onHoverIn,
   onHoverOut,
   accessibilityLabel = label,
@@ -310,6 +320,8 @@ const Shell = ({
           background={background}
           onPress={onPress}
           onLongPress={onLongPress}
+          onPressOut={onPressOut}
+          delayLongPress={delayLongPress}
           onHoverIn={onHoverIn}
           onHoverOut={onHoverOut}
           onFocus={onFocus}
