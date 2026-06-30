@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PlatformColor, StyleSheet } from 'react-native';
 
-import { fireEvent } from '@testing-library/react-native';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import SplitButton from '../SplitButton/SplitButton';
 import {
   getSplitButtonColors,
@@ -41,49 +41,46 @@ const renderSplitButton = (
     />
   );
 
-it('renders a filled split button by default', () => {
-  const { getByTestId } = renderSplitButton();
+it('renders a filled split button by default', async () => {
+  await renderSplitButton();
 
-  expect(getByTestId('split-button-label')).toHaveTextContent('Send');
-  expect(getByTestId('split-button-container')).toHaveStyle({
+  expect(screen.getByTestId('split-button-label')).toHaveTextContent('Send');
+  expect(screen.getByTestId('split-button-container')).toHaveStyle({
     height: 40,
   });
-  expect(getByTestId('split-button-leading-container')).toBeTruthy();
-  expect(getByTestId('split-button-trailing-container')).toBeTruthy();
+  expect(screen.getByTestId('split-button-leading-container')).toBeTruthy();
+  expect(screen.getByTestId('split-button-trailing-container')).toBeTruthy();
 });
 
-it('calls leading and trailing press handlers separately', () => {
+it('calls leading and trailing press handlers separately', async () => {
+  const user = userEvent.setup();
   const onPress = jest.fn();
   const onTrailingPress = jest.fn();
-  const { getByTestId } = renderSplitButton({ onPress, onTrailingPress });
+  await renderSplitButton({ onPress, onTrailingPress });
 
-  fireEvent.press(getByTestId('split-button-leading'));
-  fireEvent.press(getByTestId('split-button-trailing'));
+  await user.press(screen.getByTestId('split-button-leading'));
+  await user.press(screen.getByTestId('split-button-trailing'));
 
   expect(onPress).toHaveBeenCalledTimes(1);
   expect(onTrailingPress).toHaveBeenCalledTimes(1);
 });
 
-it('calls leading and trailing press-in and press-out handlers separately', () => {
-  const onPress = jest.fn();
+it('calls leading and trailing press-in and press-out handlers separately', async () => {
   const onPressIn = jest.fn();
   const onPressOut = jest.fn();
-  const onTrailingPress = jest.fn();
   const onTrailingPressIn = jest.fn();
   const onTrailingPressOut = jest.fn();
-  const { getByTestId } = renderSplitButton({
-    onPress,
+  await renderSplitButton({
     onPressIn,
     onPressOut,
-    onTrailingPress,
     onTrailingPressIn,
     onTrailingPressOut,
   });
 
-  fireEvent(getByTestId('split-button-leading'), 'onPressIn');
-  fireEvent(getByTestId('split-button-leading'), 'onPressOut');
-  fireEvent(getByTestId('split-button-trailing'), 'onPressIn');
-  fireEvent(getByTestId('split-button-trailing'), 'onPressOut');
+  await fireEvent(screen.getByTestId('split-button-leading'), 'onPressIn');
+  await fireEvent(screen.getByTestId('split-button-leading'), 'onPressOut');
+  await fireEvent(screen.getByTestId('split-button-trailing'), 'onPressIn');
+  await fireEvent(screen.getByTestId('split-button-trailing'), 'onPressOut');
 
   expect(onPressIn).toHaveBeenCalledTimes(1);
   expect(onPressOut).toHaveBeenCalledTimes(1);
@@ -91,69 +88,62 @@ it('calls leading and trailing press-in and press-out handlers separately', () =
   expect(onTrailingPressOut).toHaveBeenCalledTimes(1);
 });
 
-it('uses resting inner-corner tokens for both sides', () => {
+it('uses resting inner-corner tokens for both sides', async () => {
   const theme = getTheme();
-  const { getByTestId } = renderSplitButton();
+  await renderSplitButton();
 
-  expect(getByTestId('split-button-leading-container')).toHaveStyle({
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
     borderTopEndRadius: theme.shapes.corner.extraSmall,
     borderBottomEndRadius: theme.shapes.corner.extraSmall,
   });
-  expect(getByTestId('split-button-trailing-container')).toHaveStyle({
+  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
     borderTopStartRadius: theme.shapes.corner.extraSmall,
     borderBottomStartRadius: theme.shapes.corner.extraSmall,
   });
 });
 
-it('marks both press targets disabled when disabled', () => {
-  const { getByTestId } = renderSplitButton({ disabled: true });
+it('marks both press targets disabled when disabled', async () => {
+  await renderSplitButton({ disabled: true });
 
-  expect(getByTestId('split-button-leading').props.accessibilityState).toEqual({
-    disabled: true,
-  });
-  expect(getByTestId('split-button-trailing').props.accessibilityState).toEqual(
-    {
-      disabled: true,
-    }
-  );
+  expect(screen.getByTestId('split-button-leading')).toBeDisabled();
+  expect(screen.getByTestId('split-button-trailing')).toBeDisabled();
 });
 
-it('passes custom styles to the correct target', () => {
-  const { getByTestId } = renderSplitButton({
+it('passes custom styles to the correct target', async () => {
+  await renderSplitButton({
     leadingButtonStyle: styles.leading,
     trailingButtonStyle: styles.trailing,
     labelStyle: styles.label,
   });
 
-  expect(getByTestId('split-button-leading-container')).toHaveStyle(
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle(
     styles.leading
   );
-  expect(getByTestId('split-button-trailing-container')).toHaveStyle(
+  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle(
     styles.trailing
   );
-  expect(getByTestId('split-button-label')).toHaveStyle(styles.label);
+  expect(screen.getByTestId('split-button-label')).toHaveStyle(styles.label);
 });
 
-it('merges trailing accessibility state with expanded state', () => {
-  const { getByTestId } = renderSplitButton({
+it('merges trailing accessibility state with expanded state', async () => {
+  await renderSplitButton({
     trailingAccessibilityState: { expanded: true },
   });
 
-  expect(
-    getByTestId('split-button-trailing').props.accessibilityState
-  ).toMatchObject({
-    expanded: true,
-  });
+  expect(screen.getByTestId('split-button-trailing')).toHaveProp(
+    'accessibilityState',
+    expect.objectContaining({ expanded: true })
+  );
 });
 
-it('does not add SplitButton test IDs unless testID is provided', () => {
-  const { queryByTestId } = render(
+it('does not add SplitButton test IDs unless testID is provided', async () => {
+  await render(
     <SplitButton label="Send" onPress={() => {}} onTrailingPress={() => {}} />
   );
 
-  expect(queryByTestId('split-button-container')).toBeNull();
-  expect(queryByTestId('split-button-leading')).toBeNull();
-  expect(queryByTestId('split-button-trailing')).toBeNull();
+  expect(screen.queryByTestId('split-button-container')).toBeNull();
+  expect(screen.queryByTestId('split-button-leading')).toBeNull();
+  expect(screen.queryByTestId('split-button-trailing')).toBeNull();
 });
 
 describe('SplitButton utils', () => {
