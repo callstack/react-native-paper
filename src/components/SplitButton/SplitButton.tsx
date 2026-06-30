@@ -1,13 +1,12 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -35,10 +34,10 @@ import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import { getButtonTouchableRippleStyle } from '../Button/utils';
-import Icon, { IconSource } from '../Icon';
+import Icon, { type IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple, {
-  Props as TouchableRippleProps,
+  type Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
@@ -320,19 +319,19 @@ const SplitButton = ({
   );
   const leadingAnimatedShapeStyle = useAnimatedStyle(
     () => ({
-      ...getSplitButtonLeadingShape({
-        containerRadius: sizeStyle.containerRadius,
-        innerRadius: leadingInnerRadius.value,
-      }),
+      borderTopStartRadius: sizeStyle.containerRadius,
+      borderBottomStartRadius: sizeStyle.containerRadius,
+      borderTopEndRadius: leadingInnerRadius.value,
+      borderBottomEndRadius: leadingInnerRadius.value,
     }),
     [sizeStyle.containerRadius]
   );
   const trailingAnimatedShapeStyle = useAnimatedStyle(
     () => ({
-      ...getSplitButtonTrailingShape({
-        containerRadius: sizeStyle.containerRadius,
-        innerRadius: trailingInnerRadius.value,
-      }),
+      borderTopStartRadius: trailingInnerRadius.value,
+      borderBottomStartRadius: trailingInnerRadius.value,
+      borderTopEndRadius: sizeStyle.containerRadius,
+      borderBottomEndRadius: sizeStyle.containerRadius,
     }),
     [sizeStyle.containerRadius]
   );
