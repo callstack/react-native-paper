@@ -6,7 +6,11 @@ import {
   Platform,
   Pressable,
 } from 'react-native';
-import type { LayoutChangeEvent, ViewStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  LayoutChangeEvent,
+  ViewStyle,
+} from 'react-native';
 
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
@@ -146,15 +150,18 @@ const Tooltip = ({
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
 
-  const handlePress = React.useCallback(() => {
-    if (touched.current) {
-      return null;
-    }
-    if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
-    if (props.disabled) return null;
-    return props.onPress?.();
-  }, [children.props, isValidChild]);
+  const handlePress = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (touched.current) {
+        return null;
+      }
+      if (!isValidChild) return null;
+      const props = children.props as TooltipChildProps;
+      if (props.disabled) return null;
+      return props.onPress?.(e);
+    },
+    [children.props, isValidChild]
+  );
 
   const handleHoverIn = React.useCallback(() => {
     handleTouchStart();
