@@ -135,6 +135,9 @@ const Tooltip = ({
       clearTimeout(showTimer.current);
       showTimer.current = null;
     }
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+    }
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 

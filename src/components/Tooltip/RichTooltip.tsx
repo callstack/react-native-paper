@@ -210,6 +210,9 @@ const RichTooltip = ({
 
   const scheduleHide = React.useCallback(() => {
     clearShowTimer();
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+    }
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [clearShowTimer, leaveTouchDelay]);
 
