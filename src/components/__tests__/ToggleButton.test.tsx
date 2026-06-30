@@ -62,6 +62,22 @@ it('renders row buttons with segmented styling through context', async () => {
   });
 });
 
+it('applies the MD3 secondaryContainer fill to the selected segment in a row', async () => {
+  await render(
+    <ToggleButton.Row value="left" onValueChange={() => {}}>
+      <ToggleButton icon="format-align-left" value="left" testID="selected" />
+      <ToggleButton icon="format-align-right" value="right" testID="unselected" />
+    </ToggleButton.Row>
+  );
+
+  expect(screen.getByTestId('selected-container')).toHaveStyle({
+    backgroundColor: getTheme().colors.secondaryContainer,
+  });
+  expect(screen.getByTestId('unselected-container')).toHaveStyle({
+    backgroundColor: getTheme().colors.surfaceContainer,
+  });
+});
+
 describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
