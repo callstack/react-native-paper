@@ -154,6 +154,25 @@ describe('DialogActions', () => {
     expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
     expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
   });
+
+  it('should apply action props to children wrapped in a fragment', () => {
+    const { getByTestId } = render(
+      <Dialog.Actions testID="dialog-actions">
+        <>
+          <Button testID="button-cancel">Cancel</Button>
+          <Button testID="button-ok">Ok</Button>
+        </>
+      </Dialog.Actions>
+    );
+
+    const dialogActionsContainer = getByTestId('dialog-actions');
+    const dialogActionButtons = dialogActionsContainer.children;
+
+    expect(getByTestId('button-cancel')).toBeDefined();
+    expect(getByTestId('button-ok')).toBeDefined();
+    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
+    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+  });
 });
 
 const styles = StyleSheet.create({
