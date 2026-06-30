@@ -42,6 +42,7 @@ export { default as ProgressBar } from './components/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
 export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
+export { default as SplitButton } from './components/SplitButton';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
@@ -126,6 +127,7 @@ export type { Props as RadioButtonIOSProps } from './components/RadioButton/Radi
 export type { Props as RadioButtonItemProps } from './components/RadioButton/RadioButtonItem';
 export type { Props as SearchbarProps } from './components/Searchbar';
 export type { Props as SnackbarProps } from './components/Snackbar';
+export type { Props as SplitButtonProps } from './components/SplitButton';
 export type { Props as SurfaceProps } from './components/Surface';
 export type { Props as SwitchProps } from './components/Switch/Switch';
 export type {
