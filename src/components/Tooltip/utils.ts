@@ -1,5 +1,10 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  LayoutRectangle,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 type ChildrenMeasurement = {
   width: number;
@@ -19,7 +24,7 @@ export type Measurement = {
 export type TooltipChildProps = {
   style: StyleProp<ViewStyle>;
   disabled?: boolean;
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   onHoverIn?: () => void;
   onHoverOut?: () => void;
 };
