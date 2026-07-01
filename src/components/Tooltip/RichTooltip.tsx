@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Platform,
   Pressable,
-  ViewStyle,
 } from 'react-native';
 import type { PointerEvent, ViewStyle } from 'react-native';
 
@@ -365,7 +364,7 @@ const RichTooltip = ({
               >
                 {title ? (
                   <Text
-                    accessibilityLiveRegion="polite"
+                    aria-live="polite"
                     selectable={false}
                     variant={Tokens.rich.titleTypescale}
                     style={{ color: theme.colors[Tokens.rich.title] }}
@@ -376,7 +375,7 @@ const RichTooltip = ({
                 ) : null}
                 {typeof content === 'string' ? (
                   <Text
-                    accessibilityLiveRegion="polite"
+                    aria-live="polite"
                     selectable={false}
                     variant={Tokens.rich.contentTypescale}
                     style={{ color: theme.colors[Tokens.rich.content] }}

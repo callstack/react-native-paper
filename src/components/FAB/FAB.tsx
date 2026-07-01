@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -12,7 +11,6 @@ import {
 import Shell from './Shell';
 import { Size, Variant } from './tokens';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 
 export type Props = {
@@ -68,11 +66,24 @@ export type Props = {
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state forwarded to the underlying button.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
   /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -136,8 +147,11 @@ const FAB = ({
   onHoverOut,
   containerColor,
   contentColor,
-  accessibilityLabel,
-  accessibilityState,
+  'aria-label': ariaLabel,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   background,
   style,
   testID = 'floating-action-button',
@@ -158,8 +172,11 @@ const FAB = ({
     onHoverOut={onHoverOut}
     containerColor={containerColor}
     contentColor={contentColor}
-    accessibilityLabel={accessibilityLabel}
-    accessibilityState={accessibilityState}
+    aria-label={ariaLabel}
+    aria-checked={ariaChecked}
+    aria-selected={ariaSelected}
+    aria-busy={ariaBusy}
+    aria-expanded={ariaExpanded}
     background={background}
     style={style}
     testID={testID}

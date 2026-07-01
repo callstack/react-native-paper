@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   Platform,
@@ -33,7 +32,6 @@ import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ShapeToken } from '../../theme/utils/shape';
 import type { Elevation, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -116,11 +114,24 @@ export type ShellProps = {
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
-   * Accessibility state forwarded to the underlying button.
+   * Indicates whether the element is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
    */
-  accessibilityState?: AccessibilityState;
+  'aria-checked'?: boolean | 'mixed';
+  /**
+   * Indicates whether the element is selected.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Indicates whether the element is currently busy (e.g. loading).
+   */
+  'aria-busy'?: boolean;
+  /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
   /**
    * Largest scale the label font can reach (auto-built content only).
    */
@@ -180,7 +191,7 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -211,8 +222,11 @@ const Shell = ({
   delayLongPress,
   onHoverIn,
   onHoverOut,
-  accessibilityLabel = label,
-  accessibilityState,
+  'aria-label': ariaLabel = label,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  'aria-busy': ariaBusy,
+  'aria-expanded': ariaExpanded,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -229,77 +243,75 @@ const Shell = ({
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
 
-    const dimensions = React.useMemo(
-      () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
-      [theme, size, shape, iconSize, leading, trailing]
-    );
+  const dimensions = React.useMemo(
+    () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
+    [theme, size, shape, iconSize, leading, trailing]
+  );
 
-    const colors = React.useMemo(
-      () => resolveColors({ theme, variant, containerColor, contentColor }),
-      [theme, variant, containerColor, contentColor]
-    );
+  const colors = React.useMemo(
+    () => resolveColors({ theme, variant, containerColor, contentColor }),
+    [theme, variant, containerColor, contentColor]
+  );
 
-    const { scale, alpha, shadowStyle } = useVisibility({
-      visible,
-      theme,
-      elevation,
-    });
+  const { scale, alpha, shadowStyle } = useVisibility({
+    visible,
+    theme,
+    elevation,
+  });
 
-    // Fallback shared values track the static size-driven dimensions. Consumers
-    // that don't supply their own animated shared values get these. Keeping
-    // everything as a shared value means there's exactly one animated style
-    // per view — no static-vs-animated merge surprises.
-    const fallbackWidth = useSharedValue(dimensions.width);
-    const fallbackHeight = useSharedValue(dimensions.height);
-    const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
-    React.useEffect(() => {
-      fallbackWidth.value = dimensions.width;
-      fallbackHeight.value = dimensions.height;
-      fallbackBorderRadius.value = dimensions.borderRadius;
-    }, [
-      dimensions.width,
-      dimensions.height,
-      dimensions.borderRadius,
-      fallbackWidth,
-      fallbackHeight,
-      fallbackBorderRadius,
-    ]);
+  // Fallback shared values track the static size-driven dimensions. Consumers
+  // that don't supply their own animated shared values get these. Keeping
+  // everything as a shared value means there's exactly one animated style
+  // per view — no static-vs-animated merge surprises.
+  const fallbackWidth = useSharedValue(dimensions.width);
+  const fallbackHeight = useSharedValue(dimensions.height);
+  const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
+  React.useEffect(() => {
+    fallbackWidth.value = dimensions.width;
+    fallbackHeight.value = dimensions.height;
+    fallbackBorderRadius.value = dimensions.borderRadius;
+  }, [
+    dimensions.width,
+    dimensions.height,
+    dimensions.borderRadius,
+    fallbackWidth,
+    fallbackHeight,
+    fallbackBorderRadius,
+  ]);
 
-    const width = widthShared ?? fallbackWidth;
-    const height = heightShared ?? fallbackHeight;
-    const borderRadius = borderRadiusShared ?? fallbackBorderRadius;
-    const containerBg = transparentBackground
-      ? 'transparent'
-      : colors.container;
+  const width = widthShared ?? fallbackWidth;
+  const height = heightShared ?? fallbackHeight;
+  const borderRadius = borderRadiusShared ?? fallbackBorderRadius;
+  const containerBg = transparentBackground ? 'transparent' : colors.container;
 
-    const outerStyle = useAnimatedStyle(
-      () => ({
-        transform: [{ scale: scale.value }],
-        opacity: alpha.value,
-        width: width.value,
-        height: height.value,
-        borderRadius: borderRadius.value,
-        backgroundColor: containerBg,
-      }),
-      [width, height, borderRadius, containerBg]
-    );
+  const outerStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ scale: scale.value }],
+      opacity: alpha.value,
+      width: width.value,
+      height: height.value,
+      borderRadius: borderRadius.value,
+      backgroundColor: containerBg,
+    }),
+    [width, height, borderRadius, containerBg]
+  );
 
-    const clipStyle = useAnimatedStyle(
-      () => ({
-        borderRadius: borderRadius.value,
-        backgroundColor: containerBg,
-      }),
-      [borderRadius, containerBg]
-    );
+  const clipStyle = useAnimatedStyle(
+    () => ({
+      borderRadius: borderRadius.value,
+      backgroundColor: containerBg,
+    }),
+    [borderRadius, containerBg]
+  );
 
-    const { focusedSV, onFocus, onBlur } = useFocusRing();
-    const focusRingStyle = useAnimatedStyle(
-      () => ({
-        opacity: focusedSV.value ? 1 : 0,
-        borderRadius: borderRadius.value + FOCUS_RING_INSET,
-      }),
-      [borderRadius]
-    );
+  const { focusedSV, onFocus, onBlur } = useFocusRing();
+  const focusRingStyle = useAnimatedStyle(
+    () => ({
+      opacity: focusedSV.value ? 1 : 0,
+      borderRadius: borderRadius.value + FOCUS_RING_INSET,
+    }),
+    [borderRadius]
+  );
 
   return (
     <Reanimated.View
@@ -326,9 +338,12 @@ const Shell = ({
           onHoverOut={onHoverOut}
           onFocus={onFocus}
           onBlur={onBlur}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={accessibilityState}
+          aria-label={ariaLabel}
+          role="button"
+          aria-checked={ariaChecked}
+          aria-selected={ariaSelected}
+          aria-busy={ariaBusy}
+          aria-expanded={ariaExpanded}
           testID={testID}
           style={[
             children ? styles.fill : null,
@@ -356,64 +371,15 @@ const Shell = ({
         </TouchableRipple>
       </Reanimated.View>
       <Reanimated.View
-        ref={ref}
         style={[
-          style,
-          styles.container,
-          outerStyle,
-          shadowStyle,
-          visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
+          styles.focusRing,
+          { borderColor: theme.colors.secondary },
+          focusRingStyle,
         ]}
-        testID={`${testID}-container`}
-      >
-        <Reanimated.View style={[styles.clip, clipStyle]}>
-          {overlay}
-          <TouchableRipple
-            borderless
-            background={background}
-            onPress={onPress}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityRole="button"
-            accessibilityState={accessibilityState}
-            testID={testID}
-            style={[
-              children ? styles.fill : null,
-              Platform.OS === 'web' ? webNoOutline : null,
-            ]}
-          >
-            {children ?? (
-              <Content
-                icon={icon}
-                label={label}
-                contentColor={colors.content}
-                height={dimensions.height}
-                iconSize={dimensions.iconSize}
-                leading={dimensions.leading}
-                trailing={dimensions.trailing}
-                iconLabelGap={dimensions.iconLabelGap}
-                labelTypescale={dimensions.labelTypescale}
-                labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                labelAnimatedStyle={labelAnimatedStyle}
-                labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
-                labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-                testID={testID}
-              />
-            )}
-          </TouchableRipple>
-        </Reanimated.View>
-        <Reanimated.View
-          style={[
-            styles.focusRing,
-            { borderColor: theme.colors.secondary },
-            focusRingStyle,
-          ]}
-        />
-      </Reanimated.View>
-    );
-  }
-);
+      />
+    </Reanimated.View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

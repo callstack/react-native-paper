@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders extended FAB collapsed 1`] = `
-[
+<>
   <View
     style={
       [
@@ -54,7 +54,6 @@ exports[`renders extended FAB collapsed 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -84,6 +83,7 @@ exports[`renders extended FAB collapsed 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -204,7 +204,7 @@ exports[`renders extended FAB collapsed 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -235,12 +235,12 @@ exports[`renders extended FAB collapsed 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders extended FAB expanded 1`] = `
-[
+<>
   <View
     style={
       [
@@ -293,7 +293,6 @@ exports[`renders extended FAB expanded 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -323,6 +322,7 @@ exports[`renders extended FAB expanded 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -443,7 +443,7 @@ exports[`renders extended FAB expanded 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -474,12 +474,12 @@ exports[`renders extended FAB expanded 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders extended FAB large size 1`] = `
-[
+<>
   <View
     style={
       [
@@ -532,7 +532,6 @@ exports[`renders extended FAB large size 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -562,6 +561,7 @@ exports[`renders extended FAB large size 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -682,7 +682,7 @@ exports[`renders extended FAB large size 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -713,12 +713,12 @@ exports[`renders extended FAB large size 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders extended FAB medium size 1`] = `
-[
+<>
   <View
     style={
       [
@@ -771,7 +771,6 @@ exports[`renders extended FAB medium size 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -801,6 +800,7 @@ exports[`renders extended FAB medium size 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -921,7 +921,7 @@ exports[`renders extended FAB medium size 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -952,12 +952,12 @@ exports[`renders extended FAB medium size 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders extended FAB not visible 1`] = `
-[
+<>
   <View
     style={
       [
@@ -1010,7 +1010,6 @@ exports[`renders extended FAB not visible 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -1040,6 +1039,7 @@ exports[`renders extended FAB not visible 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -1160,7 +1160,7 @@ exports[`renders extended FAB not visible 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -1191,12 +1191,12 @@ exports[`renders extended FAB not visible 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;
 
 exports[`renders extended FAB transitioning to collapsed 1`] = `
-[
+<>
   <View
     style={
       [
@@ -1249,7 +1249,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
     >
       <View
         accessibilityLabel="New message"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -1279,6 +1278,7 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
         style={
           [
             {
@@ -1399,7 +1399,7 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         ]
       }
     />
-  </View>,
+  </View>
   <View
     accessibilityElementsHidden={true}
     importantForAccessibility="no-hide-descendants"
@@ -1430,6 +1430,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
     >
       New message
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;

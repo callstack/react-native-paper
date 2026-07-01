@@ -28,7 +28,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest", "node", "@testing-library/jest-native"]
+    "types": ["jest", "node"]
   },
   "files": [],
   "references": [

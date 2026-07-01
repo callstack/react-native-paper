@@ -8,7 +8,6 @@ import {
   Button,
   FAB,
   DarkTheme,
-  FAB,
   LightTheme,
   ProgressBar,
   Provider,

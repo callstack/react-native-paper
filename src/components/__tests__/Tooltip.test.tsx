@@ -191,7 +191,7 @@ describe('Tooltip', () => {
       it('renders an inverseSurface container with inverseOnSurface text', async () => {
         const {
           wrapper: { getByText, getByTestId, findByText },
-        } = setup();
+        } = await setup();
 
         await user.longPress(getTrigger(getByText));
 
@@ -213,7 +213,7 @@ describe('Tooltip', () => {
       it('stays mounted through the exit fade before unmounting', async () => {
         const {
           wrapper: { queryByText, getByText, findByText },
-        } = setup({ leaveTouchDelay: 0 });
+        } = await setup({ leaveTouchDelay: 0 });
 
         // `longPress` includes the release (pressOut), which schedules the hide.
         await user.longPress(getTrigger(getByText));
@@ -225,7 +225,7 @@ describe('Tooltip', () => {
         // Still mounted while fading out so the animation can play.
         expect(getByText('some tooltip text')).toBeTruthy();
 
-        runTimers(); // exit fade duration elapses → unmounts
+        await runTimers(); // exit fade duration elapses → unmounts
         expect(queryByText('some tooltip text')).toBeNull();
       });
     });
@@ -259,14 +259,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-              top: 250, // pageY (200) + height (50)
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+            top: 250, // pageY (200) + height (50)
+          });
         });
       });
 
@@ -326,14 +322,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210,
-              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210,
+            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+          });
         });
       });
     });
@@ -474,14 +466,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-              top: 250, // pageY (200) + height (50)
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+            top: 250, // pageY (200) + height (50)
+          });
         });
       });
 
@@ -544,14 +532,10 @@ describe('Tooltip', () => {
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210,
-              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-            },
-            {},
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210,
+            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+          });
         });
       });
     });
@@ -584,7 +568,7 @@ describe('Tooltip.Rich', () => {
       .spyOn(View.prototype, 'measureInWindow')
       .mockImplementation((cb) => cb(0, 0, 0, 0));
 
-    const wrapper = render(
+    const wrapper = await render(
       <PaperProvider>
         <TooltipCompound.Rich content="Body text" {...propOverrides}>
           {(props) => <DummyComponent {...props} />}
@@ -603,12 +587,17 @@ describe('Tooltip.Rich', () => {
     beforeAll(() => {
       Platform.OS = 'android';
     });
-    afterEach(() => jest.clearAllMocks());
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
-    it('toggles title, content and actions when the trigger is pressed', () => {
+    it('toggles title, content and actions when the trigger is pressed', async () => {
       const {
         wrapper: { getByText, getByTestId, queryByText },
-      } = setup({ title: 'Heading', actions: () => <Text>Learn more</Text> });
+      } = await setup({
+        title: 'Heading',
+        actions: () => <Text>Learn more</Text>,
+      });
 
       expect(queryByText('Body text')).toBeNull();
 
@@ -626,20 +615,20 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
-    it('renders a custom element as content', () => {
+    it('renders a custom element as content', async () => {
       const {
         wrapper: { getByText },
-      } = setup({ content: <Text>Custom node</Text> });
+      } = await setup({ content: <Text>Custom node</Text> });
 
       await user.press(getTrigger(getByText));
 
       expect(getByText('Custom node')).toBeTruthy();
     });
 
-    it('uses the surfaceContainer container with MD3 title/content roles', () => {
+    it('uses the surfaceContainer container with MD3 title/content roles', async () => {
       const {
         wrapper: { getByText, getByTestId },
-      } = setup({ title: 'Heading' });
+      } = await setup({ title: 'Heading' });
 
       await user.press(getTrigger(getByText));
 
@@ -656,10 +645,10 @@ describe('Tooltip.Rich', () => {
       });
     });
 
-    it('dismisses when the backdrop is pressed', () => {
+    it('dismisses when the backdrop is pressed', async () => {
       const {
         wrapper: { getByText, getByTestId, queryByText },
-      } = setup();
+      } = await setup();
 
       await user.press(getTrigger(getByText));
       expect(getByText('Body text')).toBeTruthy();
@@ -706,7 +695,7 @@ describe('Tooltip.Rich', () => {
     it('dismisses when an action calls dismiss', async () => {
       const {
         wrapper: { getByText, queryByText },
-      } = setup({
+      } = await setup({
         actions: ({ dismiss }) => <Text onPress={dismiss}>Learn more</Text>,
       });
 
@@ -724,9 +713,11 @@ describe('Tooltip.Rich', () => {
     beforeAll(() => {
       Platform.OS = 'web';
     });
-    afterEach(() => jest.clearAllMocks());
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
-    it('opens on hover after the enter delay', () => {
+    it('opens on hover after the enter delay', async () => {
       const {
         wrapper: { getByTestId, getByText, queryByText },
       } = await setup({ enterTouchDelay: 100 });
@@ -736,15 +727,15 @@ describe('Tooltip.Rich', () => {
       });
       expect(queryByText('Body text')).toBeNull(); // still within the delay
 
-      runTimers(100);
+      await runTimers(100);
 
       expect(getByText('Body text')).toBeTruthy();
     });
 
-    it('opens on keyboard focus and hides on blur', () => {
+    it('opens on keyboard focus and hides on blur', async () => {
       const {
         wrapper: { getByText, queryByText },
-      } = setup({ leaveTouchDelay: 500 });
+      } = await setup({ leaveTouchDelay: 500 });
 
       // Focus shows the tooltip synchronously, so settle it in act() before
       // asserting (and so its update can't escape act and corrupt the renderer).
@@ -762,10 +753,10 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
-    it('keeps the tooltip open while the pointer moves into it (gap bridge)', () => {
+    it('keeps the tooltip open while the pointer moves into it (gap bridge)', async () => {
       const {
         wrapper: { getByText, getByTestId },
-      } = setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
+      } = await setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
 
       await act(async () => {
         await fireEvent(getByTestId('tooltip-rich-trigger'), 'pointerEnter');
