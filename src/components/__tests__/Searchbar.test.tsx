@@ -136,13 +136,13 @@ it('renders clear icon wrapper, with appropriate style for v3', async () => {
   ).toHaveStyle({ display: 'none' });
 });
 
-it('renders trailering icon when mode is set to "bar"', async () => {
+it('renders trailering icon when mode is set to "contained"', async () => {
   await render(
     <Searchbar
       testID="search-bar"
       value={''}
       traileringIcon={'microphone'}
-      mode="bar"
+      mode="contained"
     />
   );
 
@@ -158,7 +158,7 @@ it('renders trailering icon with press functionality', async () => {
       value={''}
       traileringIcon={'microphone'}
       onTraileringIconPress={onTraileringIconPressMock}
-      mode="bar"
+      mode="contained"
     />
   );
 
@@ -172,7 +172,7 @@ it('renders clear icon instead of trailering icon', async () => {
       testID="search-bar"
       value={''}
       traileringIcon={'microphone'}
-      mode="bar"
+      mode="contained"
     />
   );
 
@@ -183,7 +183,7 @@ it('renders clear icon instead of trailering icon', async () => {
       testID="search-bar"
       value={'test'}
       traileringIcon={'microphone'}
-      mode="bar"
+      mode="contained"
     />
   );
 
@@ -193,10 +193,28 @@ it('renders clear icon instead of trailering icon', async () => {
   expect(screen.getByTestId('search-bar-icon-wrapper')).toBeOnTheScreen();
 });
 
-it('renders searchbar in "view" mode', async () => {
-  await render(<Searchbar testID="search-bar" value={''} mode="view" />);
+it('renders searchbar in "divided" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="divided" />);
 
   expect(screen.getByTestId('search-bar-container')).toHaveStyle({
     borderRadius: 0,
   });
+});
+
+it('applies the unfocused container margin in "contained" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="contained" />);
+
+  expect(screen.getByTestId('search-bar-container-wrapper')).toHaveStyle({
+    marginHorizontal: 24,
+  });
+});
+
+it('renders a results container via Searchbar.Results', async () => {
+  await render(
+    <Searchbar.Results testID="search-bar-results">
+      <Searchbar testID="nested" value="" />
+    </Searchbar.Results>
+  );
+
+  expect(screen.getByTestId('search-bar-results')).toBeOnTheScreen();
 });

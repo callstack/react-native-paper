@@ -10274,8 +10274,8 @@
       ],
       "group": "RadioButton"
     },
-    "Searchbar": {
-      "filepath": "Searchbar.tsx",
+    "Searchbar/Searchbar": {
+      "filepath": "Searchbar/Searchbar.tsx",
       "title": "Searchbar",
       "description": "Searchbar is a simple input box where users can type search queries.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Searchbar } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [searchQuery, setSearchQuery] = React.useState('');\n\n  return (\n    <Searchbar\n      placeholder=\"Search\"\n      onChangeText={setSearchQuery}\n      value={searchQuery}\n    />\n  );\n};\n\nexport default MyComponent;\n\n```",
       "link": "searchbar",
@@ -10325,21 +10325,21 @@
             "required": false,
             "tsType": {
               "name": "union",
-              "raw": "'bar' | 'view'",
+              "raw": "'contained' | 'divided'",
               "elements": [
                 {
                   "name": "literal",
-                  "value": "'bar'"
+                  "value": "'contained'"
                 },
                 {
                   "name": "literal",
-                  "value": "'view'"
+                  "value": "'divided'"
                 }
               ]
             },
-            "description": "@supported Available in v5.x with theme version 3\nSearch layout mode, the default value is \"bar\".",
+            "description": "@supported Available in v5.x with theme version 3\nSearch layout mode, the default value is \"contained\".\n- `contained` - the recommended M3 Expressive style: a rounded, elevated\n  bar whose horizontal margins shrink on focus (grow-wider effect).\n- `divided` - a full-bleed search view with square corners and a bottom\n  `Divider`. Deprecated in M3 Expressive in favor of `contained`.",
             "defaultValue": {
-              "value": "'bar'",
+              "value": "'contained'",
               "computed": false
             }
           },
@@ -10435,7 +10435,7 @@
             "tsType": {
               "name": "IconSource"
             },
-            "description": "@supported Available in v5.x with theme version 3\nIcon name for the right trailering icon button.\nWorks only when `mode` is set to \"bar\". It won't be displayed if `loading` is set to `true`."
+            "description": "@supported Available in v5.x with theme version 3\nIcon name for the right trailering icon button.\nWorks only when `mode` is set to \"contained\". It won't be displayed if `loading` is set to `true`."
           },
           "traileringIconColor": {
             "required": false,
@@ -10521,14 +10521,14 @@
                 }
               }
             },
-            "description": "@supported Available in v5.x with theme version 3\nCallback which returns a React element to display on the right side.\nWorks only when `mode` is set to \"bar\"."
+            "description": "@supported Available in v5.x with theme version 3\nCallback which returns a React element to display on the right side.\nWorks only when `mode` is set to \"contained\"."
           },
           "showDivider": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "@supported Available in v5.x with theme version 3\nWhether to show `Divider` at the bottom of the search.\nWorks only when `mode` is set to \"view\". True by default.",
+            "description": "@supported Available in v5.x with theme version 3\nWhether to show `Divider` at the bottom of the search.\nWorks only when `mode` is set to \"divided\". True by default.",
             "defaultValue": {
               "value": "true",
               "computed": false
@@ -10689,7 +10689,105 @@
       },
       "type": "component",
       "dependencies": [
-        "src/components/Searchbar.tsx"
+        "src/components/Searchbar/Searchbar.tsx"
+      ]
+    },
+    "Searchbar/SearchbarResults": {
+      "filepath": "Searchbar/SearchbarResults.tsx",
+      "title": "SearchbarResults",
+      "description": "A container for the search results / suggestions list shown below a\n`Searchbar` (MD3 search anatomy element 6). It only provides the surface;\ngrouping results with gaps is left to the consumer.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Searchbar, List } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [query, setQuery] = React.useState('');\n\n  return (\n    <>\n      <Searchbar value={query} onChangeText={setQuery} placeholder=\"Search\" />\n      <Searchbar.Results>\n        <List.Item title=\"Result 1\" />\n        <List.Item title=\"Result 2\" />\n      </Searchbar.Results>\n    </>\n  );\n};\n\nexport default MyComponent;\n```",
+      "link": "searchbar-results",
+      "data": {
+        "description": "A container for the search results / suggestions list shown below a\n`Searchbar` (MD3 search anatomy element 6). It only provides the surface;\ngrouping results with gaps is left to the consumer.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Searchbar, List } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [query, setQuery] = React.useState('');\n\n  return (\n    <>\n      <Searchbar value={query} onChangeText={setQuery} placeholder=\"Search\" />\n      <Searchbar.Results>\n        <List.Item title=\"Result 1\" />\n        <List.Item title=\"Result 2\" />\n      </Searchbar.Results>\n    </>\n  );\n};\n\nexport default MyComponent;\n```",
+        "displayName": "SearchbarResults",
+        "methods": [],
+        "statics": [],
+        "props": {
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Search results / suggestions to render inside the container."
+          },
+          "elevation": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "0 | 1 | 2 | 3 | 4 | 5 | Animated.Value",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "0"
+                },
+                {
+                  "name": "literal",
+                  "value": "1"
+                },
+                {
+                  "name": "literal",
+                  "value": "2"
+                },
+                {
+                  "name": "literal",
+                  "value": "3"
+                },
+                {
+                  "name": "literal",
+                  "value": "4"
+                },
+                {
+                  "name": "literal",
+                  "value": "5"
+                },
+                {
+                  "name": "Animated.Value"
+                }
+              ]
+            },
+            "description": "Changes the container's shadow and background.",
+            "defaultValue": {
+              "value": "0",
+              "computed": false
+            }
+          },
+          "style": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": ""
+          },
+          "theme": {
+            "required": false,
+            "tsType": {
+              "name": "ThemeProp"
+            },
+            "description": ""
+          },
+          "testID": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "TestID used for testing purposes",
+            "defaultValue": {
+              "value": "'search-bar-results'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "type": "component",
+      "dependencies": [
+        "src/components/Searchbar/SearchbarResults.tsx"
       ]
     },
     "SegmentedButtons/SegmentedButtons": {
