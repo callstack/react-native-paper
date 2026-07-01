@@ -2,15 +2,11 @@ import { Animated } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
-import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
-
-const stateOpacity = tokens.md.sys.state.opacity;
 
 it('renders chip with onPress', async () => {
   const tree = (
@@ -86,6 +82,60 @@ it('renders active chip if only onLongPress handler is passed', async () => {
   expect(screen.getByTestId('active-chip')).toBeEnabled();
 });
 
+it('applies disabled opacity to the close button', async () => {
+  await render(
+    <Chip disabled onClose={() => {}} testID="disabled-chip">
+      Disabled chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('disabled-chip-close')).toHaveStyle({
+    opacity: 0.38,
+  });
+});
+
+it('spans the chip ripple behind the close button', async () => {
+  await render(
+    <Chip onPress={() => {}} onClose={() => {}} testID="chip">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip')).toHaveStyle({
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  });
+});
+
+it('clips the ripple to custom chip border radius', async () => {
+  await render(
+    <Chip onPress={() => {}} testID="rounded-chip" style={{ borderRadius: 16 }}>
+      Rounded chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('rounded-chip')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
+});
+
+it('renders close button with a circular state layer', async () => {
+  await render(
+    <Chip onClose={() => {}} testID="chip">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip-close')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
+});
+
 it('renders chip with zero border radius', async () => {
   await render(
     <Chip testID="active-chip" theme={{ shapes: { corner: { small: 0 } } }}>
@@ -108,7 +158,7 @@ describe('getChipColors - text color', () => {
       })
     ).toMatchObject({
       textColor: getTheme().colors.onSurface,
-      contentOpacity: stateOpacity.disabled,
+      contentOpacity: 0.38,
     });
   });
 
@@ -119,7 +169,7 @@ describe('getChipColors - text color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSecondaryContainer,
+      textColor: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -157,7 +207,7 @@ describe('getChipColors - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.onSurface,
-      contentOpacity: stateOpacity.disabled,
+      contentOpacity: 0.38,
     });
   });
 
@@ -168,7 +218,7 @@ describe('getChipColors - icon color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSecondaryContainer,
+      iconColor: getTheme().colors.primary,
     });
   });
 
@@ -179,7 +229,7 @@ describe('getChipColors - icon color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceVariant,
+      iconColor: getTheme().colors.primary,
     });
   });
 
@@ -226,6 +276,7 @@ describe('getChipColor - selected background color', () => {
       getChipColors({
         theme: getTheme(),
         isOutlined: false,
+        selected: true,
       })
     ).toMatchObject({
       selectedBackgroundColor: getTheme().colors.secondaryContainer,
@@ -264,7 +315,43 @@ describe('getChipColor - background color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
+      backgroundColor: getTheme().colors.surfaceContainerLow,
+    });
+  });
+
+  it('uses the precomputed state layer color for disabled filled chips', () => {
+    const theme = getTheme();
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        isOutlined: false,
+      })
+    ).toMatchObject({
+      backgroundColor: theme.colors.stateLayerPressed,
+    });
+  });
+});
+
+describe('getChipColor - ripple color', () => {
+  it('uses the precomputed state layer color', () => {
+    const theme = {
+      ...getTheme(),
+      colors: {
+        ...getTheme().colors,
+        stateLayerPressed: 'rgba(29, 27, 32, 0.1)',
+      },
+    };
+
+    expect(
+      getChipColors({
+        theme,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      rippleColor: 'rgba(29, 27, 32, 0.1)',
+      avatarOverlayColor: 'rgba(29, 27, 32, 0.1)',
     });
   });
 });
@@ -313,7 +400,21 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: color('purple').alpha(0.29).rgb().string(),
+      borderColor: 'purple',
+    });
+  });
+
+  it('uses the tokenized outline color for disabled outlined chips', () => {
+    const theme = getTheme();
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      borderColor: theme.colors.outlineVariant,
     });
   });
 
@@ -336,7 +437,7 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(false).colors.outlineVariant,
+      borderColor: getTheme(false).colors.outline,
     });
   });
 
@@ -347,7 +448,7 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: getTheme(true).colors.outline,
     });
   });
 

@@ -5,8 +5,10 @@ exports[`renders chip with close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -22,13 +24,14 @@ exports[`renders chip with close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
+        "alignItems": "center",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -61,6 +64,12 @@ exports[`renders chip with close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -78,10 +87,19 @@ exports[`renders chip with close button 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -90,209 +108,199 @@ exports[`renders chip with close button 1`] = `
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
-              "paddingLeft": 0,
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "paddingRight": 34,
-            },
-          ]
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+            "paddingLeft": 8,
+            "paddingRight": 8,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "height": 18,
+            "justifyContent": "center",
+            "marginRight": 8,
+            "width": 18,
+          }
         }
       >
-        <View
-          style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
-                },
-                [
-                  {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
-            }
-          >
-            information
-          </Text>
-        </View>
         <Text
-          numberOfLines={1}
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           selectable={false}
           style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "color": "rgba(103, 80, 164, 1)",
+                "fontSize": 18,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "lineHeight": 18,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 0,
-                  },
-                  undefined,
-                ],
+                {
+                  "backgroundColor": "transparent",
+                },
               ],
             ]
           }
         >
-          Example Chip
+          information
         </Text>
       </View>
-    </View>
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "height": "100%",
-          "justifyContent": "center",
-          "position": "absolute",
-          "right": 0,
-        }
-      }
-    >
-      <View
-        accessibilityLabel="Close"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
-      >
-        <View
-          style={
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
             [
               {
-                "alignSelf": "center",
-                "padding": 4,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
-              {
-                "marginRight": 4,
-              },
-              {
-                "marginRight": 8,
-                "padding": 0,
-              },
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
               [
                 {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
                 },
-                [
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
+    </View>
+    <View
+      accessibilityLabel="Close"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 16,
+              "height": "100%",
+              "justifyContent": "center",
+              "overflow": "hidden",
+              "width": 32,
+            },
+            null,
+          ],
+        ]
+      }
+      testID="chip-close"
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
                   {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
+                    "scaleX": 1,
                   },
                 ],
-              ]
-            }
-          >
-            close
-          </Text>
-        </View>
-      </View>
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        close
+      </Text>
     </View>
   </View>
 </View>
@@ -303,8 +311,10 @@ exports[`renders chip with custom close button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -320,13 +330,14 @@ exports[`renders chip with custom close button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
+        "alignItems": "center",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -359,6 +370,12 @@ exports[`renders chip with custom close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -376,10 +393,19 @@ exports[`renders chip with custom close button 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -388,209 +414,199 @@ exports[`renders chip with custom close button 1`] = `
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
-              "paddingLeft": 0,
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "paddingRight": 34,
-            },
-          ]
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+            "paddingLeft": 8,
+            "paddingRight": 8,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "height": 18,
+            "justifyContent": "center",
+            "marginRight": 8,
+            "width": 18,
+          }
         }
       >
-        <View
-          style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
-                },
-                [
-                  {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
-            }
-          >
-            information
-          </Text>
-        </View>
         <Text
-          numberOfLines={1}
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           selectable={false}
           style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "color": "rgba(103, 80, 164, 1)",
+                "fontSize": 18,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "lineHeight": 18,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 0,
-                  },
-                  undefined,
-                ],
+                {
+                  "backgroundColor": "transparent",
+                },
               ],
             ]
           }
         >
-          Example Chip
+          information
         </Text>
       </View>
-    </View>
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "height": "100%",
-          "justifyContent": "center",
-          "position": "absolute",
-          "right": 0,
-        }
-      }
-    >
-      <View
-        accessibilityLabel="Close"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
-      >
-        <View
-          style={
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
             [
               {
-                "alignSelf": "center",
-                "padding": 4,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
-              {
-                "marginRight": 4,
-              },
-              {
-                "marginRight": 8,
-                "padding": 0,
-              },
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
               [
                 {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
                 },
-                [
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
+    </View>
+    <View
+      accessibilityLabel="Close"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 16,
+              "height": "100%",
+              "justifyContent": "center",
+              "overflow": "hidden",
+              "width": 32,
+            },
+            null,
+          ],
+        ]
+      }
+      testID="chip-close"
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
                   {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
+                    "scaleX": 1,
                   },
                 ],
-              ]
-            }
-          >
-            arrow-down
-          </Text>
-        </View>
-      </View>
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        arrow-down
+      </Text>
     </View>
   </View>
 </View>
@@ -601,8 +617,10 @@ exports[`renders chip with icon 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -618,13 +636,14 @@ exports[`renders chip with icon 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
+        "alignItems": "center",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -657,6 +676,12 @@ exports[`renders chip with icon 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -674,10 +699,19 @@ exports[`renders chip with icon 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -686,116 +720,110 @@ exports[`renders chip with icon 1`] = `
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
-              "paddingLeft": 0,
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
-            },
-          ]
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+            "paddingLeft": 8,
+            "paddingRight": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "height": 18,
+            "justifyContent": "center",
+            "marginRight": 8,
+            "width": 18,
+          }
         }
       >
-        <View
-          style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
-                },
-                [
-                  {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
-            }
-          >
-            information
-          </Text>
-        </View>
         <Text
-          numberOfLines={1}
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           selectable={false}
           style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "color": "rgba(103, 80, 164, 1)",
+                "fontSize": 18,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "lineHeight": 18,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 16,
-                  },
-                  undefined,
-                ],
+                {
+                  "backgroundColor": "transparent",
+                },
               ],
             ]
           }
         >
-          Example Chip
+          information
         </Text>
       </View>
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              [
+                {
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
+                },
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
     </View>
   </View>
 </View>
@@ -806,8 +834,10 @@ exports[`renders chip with onPress 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -823,13 +853,14 @@ exports[`renders chip with onPress 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "transparent",
+        "alignItems": "center",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -862,6 +893,12 @@ exports[`renders chip with onPress 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -879,10 +916,19 @@ exports[`renders chip with onPress 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -891,71 +937,69 @@ exports[`renders chip with onPress 1`] = `
     >
       <View
         style={
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
           [
             {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
+              "textAlign": "left",
             },
             {
-              "paddingLeft": 0,
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
             },
-            {
-              "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
-            },
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 16,
-                    "marginRight": 16,
-                  },
-                  undefined,
-                ],
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                },
+                undefined,
               ],
-            ]
-          }
-        >
-          Example Chip
-        </Text>
-      </View>
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
     </View>
   </View>
 </View>
@@ -966,8 +1010,10 @@ exports[`renders outlined disabled chip 1`] = `
   collapsable={false}
   style={
     {
+      "alignSelf": "flex-start",
       "backgroundColor": "transparent",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -983,13 +1029,14 @@ exports[`renders outlined disabled chip 1`] = `
     collapsable={false}
     style={
       {
+        "alignItems": "center",
         "backgroundColor": "transparent",
-        "borderColor": "rgba(243, 237, 247, 1)",
+        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1022,6 +1069,12 @@ exports[`renders outlined disabled chip 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1039,10 +1092,19 @@ exports[`renders outlined disabled chip 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -1051,71 +1113,69 @@ exports[`renders outlined disabled chip 1`] = `
     >
       <View
         style={
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 0.38,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
           [
             {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
+              "textAlign": "left",
             },
             {
-              "paddingLeft": 0,
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
             },
-            {
-              "opacity": 0.38,
-            },
-            {
-              "paddingRight": 0,
-            },
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 16,
-                    "marginRight": 16,
-                  },
-                  undefined,
-                ],
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                },
+                undefined,
               ],
-            ]
-          }
-        >
-          Example Chip
-        </Text>
-      </View>
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
     </View>
   </View>
 </View>
@@ -1126,8 +1186,10 @@ exports[`renders selected chip 1`] = `
   collapsable={false}
   style={
     {
+      "alignSelf": "flex-start",
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
+      "height": 32,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -1143,13 +1205,14 @@ exports[`renders selected chip 1`] = `
     collapsable={false}
     style={
       {
+        "alignItems": "center",
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "flex": undefined,
-        "flexDirection": "column",
+        "flex": 1,
+        "flexDirection": "row",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1182,6 +1245,12 @@ exports[`renders selected chip 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1199,10 +1268,19 @@ exports[`renders selected chip 1`] = `
           },
           [
             {
-              "borderRadius": 8,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "height": "100%",
             },
             {
-              "width": "100%",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderRadius": 8,
             },
           ],
         ]
@@ -1211,116 +1289,110 @@ exports[`renders selected chip 1`] = `
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
-              "paddingLeft": 0,
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "paddingRight": 0,
-            },
-          ]
+          {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+            "paddingLeft": 8,
+            "paddingRight": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "height": 18,
+            "justifyContent": "center",
+            "marginRight": 8,
+            "width": 18,
+          }
         }
       >
-        <View
-          style={
-            [
-              {
-                "alignSelf": "center",
-                "padding": 4,
-              },
-              {
-                "paddingLeft": 8,
-                "paddingRight": 0,
-              },
-              null,
-            ]
-          }
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
-                },
-                [
-                  {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
-            }
-          >
-            check
-          </Text>
-        </View>
         <Text
-          numberOfLines={1}
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           selectable={false}
           style={
             [
               {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 18,
               },
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "lineHeight": 18,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
                 },
-                [
-                  {
-                    "marginVertical": 6,
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  {
-                    "marginLeft": 8,
-                    "marginRight": 16,
-                  },
-                  undefined,
-                ],
+                {
+                  "backgroundColor": "transparent",
+                },
               ],
             ]
           }
         >
-          Example Chip
+          check
         </Text>
       </View>
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              [
+                {
+                  "includeFontPadding": false,
+                  "textAlignVertical": "center",
+                },
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
     </View>
   </View>
 </View>

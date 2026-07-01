@@ -121,8 +121,10 @@ exports[`renders list item with custom description 1`] = `
             collapsable={false}
             style={
               {
-                "backgroundColor": "rgba(232, 222, 248, 1)",
+                "alignSelf": "flex-start",
+                "backgroundColor": "rgba(254, 247, 255, 1)",
                 "borderRadius": 8,
+                "height": 32,
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
@@ -138,13 +140,14 @@ exports[`renders list item with custom description 1`] = `
               collapsable={false}
               style={
                 {
-                  "backgroundColor": "rgba(232, 222, 248, 1)",
-                  "borderColor": "transparent",
+                  "alignItems": "center",
+                  "backgroundColor": "rgba(254, 247, 255, 1)",
+                  "borderColor": "rgba(121, 116, 126, 1)",
                   "borderRadius": 8,
                   "borderStyle": "solid",
                   "borderWidth": 1,
-                  "flex": undefined,
-                  "flexDirection": "column",
+                  "flex": 1,
+                  "flexDirection": "row",
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -177,6 +180,12 @@ exports[`renders list item with custom description 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 8,
+                    "top": 8,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -194,10 +203,19 @@ exports[`renders list item with custom description 1`] = `
                     },
                     [
                       {
-                        "borderRadius": 8,
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                        "height": "100%",
                       },
                       {
-                        "width": "100%",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "borderRadius": 8,
                       },
                     ],
                   ]
@@ -206,116 +224,110 @@ exports[`renders list item with custom description 1`] = `
               >
                 <View
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "flexDirection": "row",
-                        "paddingLeft": 4,
-                        "position": "relative",
-                      },
-                      {
-                        "paddingLeft": 0,
-                      },
-                      {
-                        "opacity": 1,
-                      },
-                      {
-                        "paddingRight": 0,
-                      },
-                    ]
+                    {
+                      "flex": 1,
+                    }
+                  }
+                />
+              </View>
+              <View
+                pointerEvents="none"
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "flexGrow": 1,
+                      "flexShrink": 1,
+                      "height": "100%",
+                      "overflow": "hidden",
+                      "position": "relative",
+                    },
+                    {
+                      "opacity": 1,
+                      "paddingLeft": 8,
+                      "paddingRight": 16,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 18,
+                      "justifyContent": "center",
+                      "marginRight": 8,
+                      "width": 18,
+                    }
                   }
                 >
-                  <View
-                    style={
-                      [
-                        {
-                          "alignSelf": "center",
-                          "padding": 4,
-                        },
-                        {
-                          "paddingLeft": 8,
-                          "paddingRight": 0,
-                        },
-                        null,
-                      ]
-                    }
-                  >
-                    <Text
-                      accessibilityElementsHidden={true}
-                      importantForAccessibility="no-hide-descendants"
-                      pointerEvents="none"
-                      selectable={false}
-                      style={
-                        [
-                          {
-                            "color": "rgba(103, 80, 164, 1)",
-                            "fontSize": 18,
-                          },
-                          [
-                            {
-                              "lineHeight": 18,
-                              "transform": [
-                                {
-                                  "scaleX": 1,
-                                },
-                              ],
-                            },
-                            {
-                              "backgroundColor": "transparent",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      file-pdf-box
-                    </Text>
-                  </View>
                   <Text
-                    numberOfLines={1}
+                    accessibilityElementsHidden={true}
+                    importantForAccessibility="no-hide-descendants"
+                    pointerEvents="none"
                     selectable={false}
                     style={
                       [
                         {
-                          "textAlign": "left",
-                        },
-                        {
-                          "color": "rgba(29, 27, 32, 1)",
-                          "writingDirection": "ltr",
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontSize": 18,
                         },
                         [
                           {
-                            "fontFamily": "System",
-                            "fontSize": 14,
-                            "fontWeight": "500",
-                            "letterSpacing": 0.1,
-                            "lineHeight": 20,
+                            "lineHeight": 18,
+                            "transform": [
+                              {
+                                "scaleX": 1,
+                              },
+                            ],
                           },
-                          [
-                            {
-                              "marginVertical": 6,
-                              "textAlignVertical": "center",
-                            },
-                            {
-                              "color": "rgba(29, 25, 43, 1)",
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            {
-                              "marginLeft": 8,
-                              "marginRight": 16,
-                            },
-                            undefined,
-                          ],
+                          {
+                            "backgroundColor": "transparent",
+                          },
                         ],
                       ]
                     }
                   >
-                    DOCS.pdf
+                    file-pdf-box
                   </Text>
                 </View>
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "includeFontPadding": false,
+                            "textAlignVertical": "center",
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                          undefined,
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  DOCS.pdf
+                </Text>
               </View>
             </View>
           </View>
