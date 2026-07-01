@@ -31,7 +31,7 @@ export const CHIP_SELECTED_ICON_COLOR: ColorRole = 'onSecondaryContainer';
 export const CHIP_TRAILING_ICON_COLOR: ColorRole = 'onSurfaceVariant';
 export const CHIP_SELECTED_TRAILING_ICON_COLOR: ColorRole =
   'onSecondaryContainer';
-export const CHIP_OUTLINE_COLOR: ColorRole = 'outlineVariant';
+export const CHIP_OUTLINE_COLOR: ColorRole = 'outline';
 export const CHIP_DISABLED_COLOR: ColorRole = 'onSurface';
 
 export const CHIP_DISABLED_CONTENT_OPACITY = 0.38;

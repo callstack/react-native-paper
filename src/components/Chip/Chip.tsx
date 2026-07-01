@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -41,10 +41,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = Omit<
-  React.ComponentProps<typeof Surface>,
-  'children' | 'mode'
-> & {
+export type Props = Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Mode of the chip.
    * - `flat` - chip with a filled container.
@@ -52,9 +49,9 @@ export type Props = Omit<
    */
   mode?: 'flat' | 'outlined';
   /**
-   * Text label of the `Chip`.
+   * Text content of the `Chip`.
    */
-  label: string;
+  children: React.ReactNode;
   /**
    * Leading icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
@@ -170,15 +167,15 @@ export type Props = Omit<
  * import { Chip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Chip label="Example chip" icon="information" onPress={() => console.log('Pressed')} />
+ *   <Chip icon="information" onPress={() => console.log('Pressed')}>Example Chip</Chip>
  * );
  *
  * export default MyComponent;
  * ```
  */
 const Chip = ({
-  mode = 'flat',
-  label,
+  mode = 'outlined',
+  children,
   icon,
   avatar,
   selected = false,
@@ -265,7 +262,11 @@ const Chip = ({
   };
   const closeAndroidRipple =
     Platform.OS === 'android'
-      ? { color: rippleColor, borderless: false }
+      ? {
+          color: rippleColor,
+          borderless: true,
+          radius: CHIP_TRAILING_ICON_TOUCH_TARGET / 2,
+        }
       : undefined;
 
   return (
@@ -291,14 +292,14 @@ const Chip = ({
         borderless
         background={background}
         rippleColor={rippleColor}
-        style={[styles.touchable, { borderRadius }]}
+        style={[styles.touchable, styles.rippleLayer, { borderRadius }]}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         delayLongPress={delayLongPress}
         disabled={isTouchableDisabled}
-        aria-label={ariaLabel ?? label}
+        aria-label={ariaLabel}
         role={role}
         aria-selected={selected}
         aria-disabled={isTouchableDisabled}
@@ -306,64 +307,68 @@ const Chip = ({
         theme={theme}
         hitSlop={hitSlop ?? touchTargetHitSlop}
       >
-        <View
-          style={[
-            styles.content,
-            {
-              opacity: contentOpacity,
-              paddingLeft: leftPadding,
-              paddingRight: rightPadding,
-            },
-          ]}
-        >
-          {hasAvatar ? (
-            <View style={[styles.avatarWrapper, disabled && styles.disabled]}>
-              {React.isValidElement<ChipAvatarProps>(avatar)
-                ? React.cloneElement(avatar, {
-                    style: [styles.avatar, avatar.props.style],
-                  })
-                : avatar}
-              {showSelectedIcon ? (
-                <View
-                  style={[
-                    styles.avatarSelectedOverlay,
-                    { backgroundColor: avatarOverlayColor },
-                  ]}
-                >
-                  <Icon
-                    source="check"
-                    color={theme.colors.surface}
-                    size={CHIP_SELECTED_ICON_SIZE}
-                    theme={theme}
-                  />
-                </View>
-              ) : null}
-            </View>
-          ) : null}
-          {showLeadingIcon && !hasAvatar ? (
-            <View style={styles.leadingIcon}>
-              <Icon
-                source={icon ?? 'check'}
-                color={iconColor}
-                size={CHIP_LEADING_ICON_SIZE}
-                theme={theme}
-              />
-            </View>
-          ) : null}
-          <Text
-            variant={CHIP_LABEL_TYPESCALE}
-            selectable={false}
-            numberOfLines={1}
-            style={[styles.labelText, { color: textColor }, textStyle]}
-            ellipsizeMode={ellipsizeMode}
-            maxFontSizeMultiplier={maxFontSizeMultiplier}
-          >
-            {label}
-          </Text>
-        </View>
+        <View style={styles.rippleContent} />
       </TouchableRipple>
+      <View
+        pointerEvents="none"
+        style={[
+          styles.content,
+          {
+            opacity: contentOpacity,
+            paddingLeft: leftPadding,
+            paddingRight: rightPadding,
+          },
+        ]}
+      >
+        {hasAvatar ? (
+          <View style={[styles.avatarWrapper, disabled && styles.disabled]}>
+            {React.isValidElement<ChipAvatarProps>(avatar)
+              ? React.cloneElement(avatar, {
+                  style: [styles.avatar, avatar.props.style],
+                })
+              : avatar}
+            {showSelectedIcon ? (
+              <View
+                style={[
+                  styles.avatarSelectedOverlay,
+                  { backgroundColor: avatarOverlayColor },
+                ]}
+              >
+                <Icon
+                  source="check"
+                  color={theme.colors.surface}
+                  size={CHIP_SELECTED_ICON_SIZE}
+                  theme={theme}
+                />
+              </View>
+            ) : null}
+          </View>
+        ) : null}
+        {showLeadingIcon && !hasAvatar ? (
+          <View style={styles.leadingIcon}>
+            <Icon
+              source={icon ?? 'check'}
+              color={iconColor}
+              size={CHIP_LEADING_ICON_SIZE}
+              theme={theme}
+            />
+          </View>
+        ) : null}
+        <Text
+          variant={CHIP_LABEL_TYPESCALE}
+          selectable={false}
+          numberOfLines={1}
+          style={[styles.labelText, { color: textColor }, textStyle]}
+          ellipsizeMode={ellipsizeMode}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+        >
+          {children}
+        </Text>
+      </View>
       {hasClose ? (
-        <Pressable
+        <TouchableRipple
+          borderless
+          centered
           onPress={onClose}
           disabled={disabled}
           role="button"
@@ -371,14 +376,13 @@ const Chip = ({
           aria-disabled={disabled}
           testID={`${testID}-close`}
           hitSlop={touchTargetHitSlop}
-          android_ripple={closeAndroidRipple}
-          style={({ pressed }) => [
+          background={closeAndroidRipple}
+          rippleColor={rippleColor}
+          style={[
             styles.closeButton,
             disabled ? { opacity: contentOpacity } : null,
-            Platform.OS === 'web' && pressed
-              ? { backgroundColor: rippleColor }
-              : null,
           ]}
+          theme={theme}
         >
           <Icon
             source={closeIcon ?? 'close'}
@@ -386,7 +390,7 @@ const Chip = ({
             size={CHIP_TRAILING_ICON_SIZE}
             theme={theme}
           />
-        </Pressable>
+        </TouchableRipple>
       ) : null}
     </Surface>
   );
@@ -406,8 +410,16 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
+  rippleLayer: {
+    ...StyleSheet.absoluteFill,
+  },
+  rippleContent: {
+    flex: 1,
+  },
   content: {
     height: '100%',
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
@@ -444,6 +456,8 @@ const styles = StyleSheet.create({
   closeButton: {
     width: CHIP_TRAILING_ICON_TOUCH_TARGET,
     height: '100%',
+    borderRadius: CHIP_TRAILING_ICON_TOUCH_TARGET / 2,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
   },

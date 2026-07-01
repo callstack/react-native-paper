@@ -76,10 +76,11 @@ const ChipRow = <T extends string>({
       {options.map((option) => (
         <Chip
           key={option}
-          label={option}
           selected={option === value}
           onPress={() => onChange(option)}
-        />
+        >
+          {option}
+        </Chip>
       ))}
     </ScrollView>
   </View>

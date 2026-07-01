@@ -24,60 +24,58 @@ const ChipExample = () => {
             {filters.map((filter) => (
               <Chip
                 key={filter}
-                label={filter}
                 selected={selectedFilter === filter}
                 onPress={() => setSelectedFilter(filter)}
                 style={styles.chip}
-              />
+              >
+                {filter}
+              </Chip>
             ))}
+            <Chip icon="tag" selected onPress={() => {}} style={styles.chip}>
+              With icon
+            </Chip>
             <Chip
-              label="With icon"
-              icon="tag"
-              selected
-              onPress={() => {}}
-              style={styles.chip}
-            />
-            <Chip
-              label="No check"
               selected
               showSelectedCheck={false}
               onPress={() => {}}
               style={styles.chip}
-            />
-            <Chip label="Disabled" disabled style={styles.chip} />
+            >
+              No check
+            </Chip>
+            <Chip disabled style={styles.chip}>
+              Disabled
+            </Chip>
           </View>
         </List.Section>
 
         <List.Section title="Assist chips">
           <View style={styles.row}>
+            <Chip icon="information" onPress={() => {}} style={styles.chip}>
+              Outlined
+            </Chip>
             <Chip
-              label="Outlined"
-              icon="information"
-              onPress={() => {}}
-              style={styles.chip}
-            />
-            <Chip
-              label="Flat"
               icon="calendar"
               mode="flat"
               onPress={() => {}}
               style={styles.chip}
-            />
+            >
+              Flat
+            </Chip>
             <Chip
-              label="Elevated"
               icon="map-marker"
               elevated
               mode="flat"
               onPress={() => {}}
               style={styles.chip}
-            />
+            >
+              Elevated
+            </Chip>
           </View>
         </List.Section>
 
         <List.Section title="Input chips">
           <View style={styles.row}>
             <Chip
-              label="Avatar"
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
@@ -86,9 +84,10 @@ const ChipExample = () => {
               }
               onPress={() => {}}
               style={styles.chip}
-            />
+            >
+              Avatar
+            </Chip>
             <Chip
-              label="Selected avatar"
               selected
               avatar={
                 <Image
@@ -98,9 +97,10 @@ const ChipExample = () => {
               }
               onPress={() => {}}
               style={styles.chip}
-            />
+            >
+              Selected avatar
+            </Chip>
             <Chip
-              label="Removable"
               icon="file-document"
               onPress={() => {}}
               onClose={() =>
@@ -110,9 +110,10 @@ const ChipExample = () => {
                 })
               }
               style={styles.chip}
-            />
+            >
+              Removable
+            </Chip>
             <Chip
-              label="Custom close"
               closeIcon="arrow-down"
               onPress={() => {}}
               onClose={() =>
@@ -123,14 +124,15 @@ const ChipExample = () => {
               }
               style={styles.chip}
               closeIconAccessibilityLabel="Custom close icon accessibility label"
-            />
+            >
+              Custom close
+            </Chip>
           </View>
         </List.Section>
 
         <List.Section title="Custom styling">
           <View style={styles.row}>
             <Chip
-              label="Custom color"
               mode="flat"
               selected
               icon="palette"
@@ -142,17 +144,18 @@ const ChipExample = () => {
                   backgroundColor: color(customColor).alpha(0.2).rgb().string(),
                 },
               ]}
-            />
+            >
+              Custom color
+            </Chip>
             <Chip
-              label="Rounded"
               onPress={() => {}}
               style={[styles.chip, styles.customBorderRadius]}
-            />
-            <Chip
-              label="Full width chip"
-              onPress={() => {}}
-              style={styles.fullWidthChip}
-            />
+            >
+              Rounded
+            </Chip>
+            <Chip onPress={() => {}} style={styles.fullWidthChip}>
+              Full width chip
+            </Chip>
           </View>
         </List.Section>
       </ScreenWrapper>

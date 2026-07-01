@@ -10,7 +10,7 @@ import { getChipColors } from '../Chip/helpers';
 
 it('renders chip with onPress', async () => {
   const tree = (
-    await render(<Chip label="Example Chip" onPress={() => {}} />)
+    await render(<Chip onPress={() => {}}>Example Chip</Chip>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -18,7 +18,7 @@ it('renders chip with onPress', async () => {
 
 it('renders chip with icon', async () => {
   const tree = (
-    await render(<Chip icon="information" label="Example Chip" />)
+    await render(<Chip icon="information">Example Chip</Chip>)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -27,7 +27,9 @@ it('renders chip with icon', async () => {
 it('renders chip with close button', async () => {
   const tree = (
     await render(
-      <Chip icon="information" label="Example Chip" onClose={() => {}} />
+      <Chip icon="information" onClose={() => {}}>
+        Example Chip
+      </Chip>
     )
   ).toJSON();
 
@@ -37,12 +39,9 @@ it('renders chip with close button', async () => {
 it('renders chip with custom close button', async () => {
   const tree = (
     await render(
-      <Chip
-        icon="information"
-        label="Example Chip"
-        onClose={() => {}}
-        closeIcon="arrow-down"
-      />
+      <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
+        Example Chip
+      </Chip>
     )
   ).toJSON();
 
@@ -51,27 +50,33 @@ it('renders chip with custom close button', async () => {
 
 it('renders outlined disabled chip', async () => {
   const tree = (
-    await render(<Chip label="Example Chip" mode="outlined" disabled />)
+    await render(
+      <Chip mode="outlined" disabled>
+        Example Chip
+      </Chip>
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders selected chip', async () => {
-  const tree = (await render(<Chip label="Example Chip" selected />)).toJSON();
+  const tree = (await render(<Chip selected>Example Chip</Chip>)).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders disabled chip if there is no touch handler passed', async () => {
-  await render(<Chip label="Disabled chip" testID="disabled-chip" />);
+  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
 
   expect(screen.getByTestId('disabled-chip')).toBeDisabled();
 });
 
 it('renders active chip if only onLongPress handler is passed', async () => {
   await render(
-    <Chip label="Active chip" onLongPress={() => {}} testID="active-chip" />
+    <Chip onLongPress={() => {}} testID="active-chip">
+      Active chip
+    </Chip>
   );
 
   expect(screen.getByTestId('active-chip')).toBeEnabled();
@@ -79,12 +84,9 @@ it('renders active chip if only onLongPress handler is passed', async () => {
 
 it('applies disabled opacity to the close button', async () => {
   await render(
-    <Chip
-      label="Disabled chip"
-      disabled
-      onClose={() => {}}
-      testID="disabled-chip"
-    />
+    <Chip disabled onClose={() => {}} testID="disabled-chip">
+      Disabled chip
+    </Chip>
   );
 
   expect(screen.getByTestId('disabled-chip-close')).toHaveStyle({
@@ -92,13 +94,53 @@ it('applies disabled opacity to the close button', async () => {
   });
 });
 
+it('spans the chip ripple behind the close button', async () => {
+  await render(
+    <Chip onPress={() => {}} onClose={() => {}} testID="chip">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip')).toHaveStyle({
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  });
+});
+
+it('clips the ripple to custom chip border radius', async () => {
+  await render(
+    <Chip onPress={() => {}} testID="rounded-chip" style={{ borderRadius: 16 }}>
+      Rounded chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('rounded-chip')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
+});
+
+it('renders close button with a circular state layer', async () => {
+  await render(
+    <Chip onClose={() => {}} testID="chip">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip-close')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
+});
+
 it('renders chip with zero border radius', async () => {
   await render(
-    <Chip
-      label="Active chip"
-      testID="active-chip"
-      theme={{ shapes: { corner: { small: 0 } } }}
-    />
+    <Chip testID="active-chip" theme={{ shapes: { corner: { small: 0 } } }}>
+      Active chip
+    </Chip>
   );
 
   expect(screen.getByTestId('active-chip')).toHaveStyle({
@@ -395,7 +437,7 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(false).colors.outlineVariant,
+      borderColor: getTheme(false).colors.outline,
     });
   });
 
@@ -406,7 +448,7 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: getTheme(true).colors.outline,
     });
   });
 
@@ -437,11 +479,12 @@ it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
   await render(
     <Chip
-      label="Example Chip"
       onPress={() => {}}
       testID="chip"
       style={[{ transform: [{ scale: value }] }]}
-    />
+    >
+      Example Chip
+    </Chip>
   );
   expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
