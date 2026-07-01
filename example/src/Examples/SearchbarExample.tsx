@@ -28,7 +28,7 @@ const SearchExample = () => {
     loadingViewMode: '',
     clickableBack: '',
     clickableDrawer: '',
-    clickableLoading: '',
+    withResults: '',
   });
 
   const { colors } = useTheme();
@@ -36,7 +36,7 @@ const SearchExample = () => {
   return (
     <>
       <ScreenWrapper>
-        <List.Section title="Bar mode">
+        <List.Section title="Contained mode">
           <Searchbar
             placeholder="Search"
             onChangeText={(query) =>
@@ -44,7 +44,7 @@ const SearchExample = () => {
             }
             value={searchQueries.searchBarMode}
             style={styles.searchbar}
-            mode="bar"
+            mode="contained"
           />
           <Searchbar
             placeholder="Trailering icon"
@@ -59,10 +59,10 @@ const SearchExample = () => {
             traileringIconAccessibilityLabel={'microphone button'}
             onTraileringIconPress={() => setIsVisible(true)}
             style={styles.searchbar}
-            mode="bar"
+            mode="contained"
           />
           <Searchbar
-            mode="bar"
+            mode="contained"
             placeholder="Trailering icon with right item"
             onChangeText={(query) =>
               setSearchQuery({
@@ -87,7 +87,7 @@ const SearchExample = () => {
             style={styles.searchbar}
           />
           <Searchbar
-            mode="bar"
+            mode="contained"
             placeholder="Right item"
             onChangeText={(query) =>
               setSearchQuery({
@@ -115,12 +115,12 @@ const SearchExample = () => {
             }
             value={searchQueries.loadingBarMode}
             style={styles.searchbar}
-            mode="bar"
+            mode="contained"
             loading
             traileringIcon={'microphone'}
           />
         </List.Section>
-        <List.Section title="View mode">
+        <List.Section title="Divided mode (deprecated)">
           <Searchbar
             placeholder="Search"
             onChangeText={(query) =>
@@ -131,7 +131,7 @@ const SearchExample = () => {
             }
             value={searchQueries.searchViewMode}
             style={styles.searchbar}
-            mode="view"
+            mode="divided"
           />
           <Searchbar
             placeholder="Search without bottom line"
@@ -143,7 +143,7 @@ const SearchExample = () => {
             }
             value={searchQueries.searchWithoutBottomLine}
             style={styles.searchbar}
-            mode="view"
+            mode="divided"
             showDivider={false}
           />
           <Searchbar
@@ -156,7 +156,7 @@ const SearchExample = () => {
             }
             value={searchQueries.loadingViewMode}
             style={styles.searchbar}
-            mode="view"
+            mode="divided"
             loading
           />
         </List.Section>
@@ -196,18 +196,30 @@ const SearchExample = () => {
             icon="menu"
             style={styles.searchbar}
           />
+        </List.Section>
+        <List.Section title="With results">
           <Searchbar
-            placeholder="Search"
+            placeholder="Search fruit"
             onChangeText={(query) =>
-              setSearchQuery({
-                ...searchQueries,
-                clickableLoading: query,
-              })
+              setSearchQuery({ ...searchQueries, withResults: query })
             }
-            value={searchQueries.clickableLoading}
-            loading
+            value={searchQueries.withResults}
             style={styles.searchbar}
+            mode="contained"
           />
+          {searchQueries.withResults ? (
+            <Searchbar.Results style={styles.searchbar}>
+              {['Apple', 'Apricot', 'Avocado', 'Banana', 'Blueberry']
+                .filter((fruit) =>
+                  fruit
+                    .toLowerCase()
+                    .includes(searchQueries.withResults.toLowerCase())
+                )
+                .map((fruit) => (
+                  <List.Item key={fruit} title={fruit} />
+                ))}
+            </Searchbar.Results>
+          ) : null}
         </List.Section>
       </ScreenWrapper>
       <Snackbar

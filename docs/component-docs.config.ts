@@ -115,7 +115,10 @@ const pages = {
     RadioButtonIOS: 'RadioButton/RadioButtonIOS',
     RadioButtonItem: 'RadioButton/RadioButtonItem',
   },
-  Searchbar: 'Searchbar',
+  Searchbar: {
+    Searchbar: 'Searchbar/Searchbar',
+    SearchbarResults: 'Searchbar/SearchbarResults',
+  },
   SegmentedButtons: {
     SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
   },
