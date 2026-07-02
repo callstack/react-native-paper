@@ -5,8 +5,8 @@ import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 
 describe('RadioButton', () => {
-  it('renders properly', () => {
-    const tree = render(<RadioButton value="first" />).toJSON();
+  it('renders properly', async () => {
+    const tree = (await render(<RadioButton value="first" />)).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

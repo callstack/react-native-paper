@@ -2,7 +2,7 @@
 
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
-  role="radiogroup"
+  accessibilityRole="radiogroup"
 >
   <View
     accessibilityRole="radio"
@@ -35,7 +35,6 @@ exports[`RadioButtonGroup renders properly 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="radio"
     style={
       [
         {

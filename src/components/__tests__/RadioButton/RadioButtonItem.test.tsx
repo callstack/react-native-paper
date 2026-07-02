@@ -18,26 +18,28 @@ it('renders unchecked', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('can render leading radio button control', () => {
-  const tree = render(
-    <RadioButton.Item
-      label="Default with leading control"
-      status={'unchecked'}
-      value="iOS"
-      position="leading"
-    />
+it('can render leading radio button control', async () => {
+  const tree = (
+    await render(
+      <RadioButton.Item
+        label="Default with leading control"
+        status={'unchecked'}
+        value="iOS"
+        position="leading"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('exposes a single radio a11y node per item', () => {
-  const { queryAllByRole } = render(
+it('exposes a single radio a11y node per item', async () => {
+  await render(
     <RadioButton.Item label="Item" value="first" status="checked" />
   );
 
   // The inner control is `accessible={false}`, so only the row is a radio.
-  expect(queryAllByRole('radio')).toHaveLength(1);
+  expect(screen.queryAllByRole('radio')).toHaveLength(1);
 });
 
 it('should execute onLongPress', async () => {

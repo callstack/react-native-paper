@@ -20,7 +20,7 @@ describe('RadioButtonGroup', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('keeps a stable context value when an unrelated parent prop changes', () => {
+  it('keeps a stable context value when an unrelated parent prop changes', async () => {
     const contexts: RadioButtonContextType[] = [];
 
     const Capture = ({ extra }: { extra: number }) => {
@@ -36,8 +36,8 @@ describe('RadioButtonGroup', () => {
       </RadioButton.Group>
     );
 
-    const { rerender } = render(<Parent extra={1} />);
-    rerender(<Parent extra={2} />);
+    const { rerender } = await render(<Parent extra={1} />);
+    await rerender(<Parent extra={2} />);
 
     expect(contexts.length).toBe(2);
     expect(contexts[0]).toBe(contexts[1]);

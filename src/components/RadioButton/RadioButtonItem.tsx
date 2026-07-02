@@ -197,7 +197,7 @@ const RadioButtonItem = ({
         })
       }
       onLongPress={onLongPress}
-      accessibilityLabel={accessibilityLabel}
+      accessibilityLabel={ariaLabel}
       accessibilityRole="radio"
       accessibilityState={{
         checked,

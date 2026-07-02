@@ -32,7 +32,6 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="radio"
   style={
     [
       {
@@ -97,7 +96,6 @@ exports[`RadioButton renders properly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="radio"
   style={
     [
       {
@@ -161,7 +159,6 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="radio"
   style={
     [
       {
