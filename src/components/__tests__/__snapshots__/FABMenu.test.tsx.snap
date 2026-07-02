@@ -55,7 +55,7 @@ exports[`renders FAB.Menu closed 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={true}
+        aria-hidden={true}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -100,7 +100,6 @@ exports[`renders FAB.Menu closed 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -130,6 +129,7 @@ exports[`renders FAB.Menu closed 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -220,7 +220,7 @@ exports[`renders FAB.Menu closed 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={true}
+        aria-hidden={true}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -265,7 +265,6 @@ exports[`renders FAB.Menu closed 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -295,6 +294,7 @@ exports[`renders FAB.Menu closed 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -740,7 +740,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={true}
+        aria-hidden={true}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -785,7 +785,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -815,6 +814,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -905,7 +905,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={true}
+        aria-hidden={true}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -950,7 +950,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -980,6 +979,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -1425,7 +1425,7 @@ exports[`renders FAB.Menu open 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -1470,7 +1470,6 @@ exports[`renders FAB.Menu open 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -1500,6 +1499,7 @@ exports[`renders FAB.Menu open 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -1590,7 +1590,7 @@ exports[`renders FAB.Menu open 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -1635,7 +1635,6 @@ exports[`renders FAB.Menu open 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -1665,6 +1664,7 @@ exports[`renders FAB.Menu open 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2110,7 +2110,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2155,7 +2155,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 1"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -2185,6 +2184,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2275,7 +2275,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2320,7 +2320,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 2"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -2350,6 +2349,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2440,7 +2440,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2485,7 +2485,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 3"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -2515,6 +2514,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2605,7 +2605,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2650,7 +2650,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 4"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -2680,6 +2679,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2770,7 +2770,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2815,7 +2815,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 5"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -2845,6 +2844,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -2935,7 +2935,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2980,7 +2980,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
           >
             <View
               accessibilityLabel="Item 6"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -3010,6 +3009,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -3456,7 +3456,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -3501,7 +3501,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -3531,6 +3530,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -3621,7 +3621,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -3666,7 +3666,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -3696,6 +3695,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -4141,7 +4141,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4186,7 +4186,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -4216,6 +4215,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -4335,7 +4335,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4380,7 +4380,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -4410,6 +4409,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -4884,7 +4884,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
       }
     >
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4929,7 +4929,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
           >
             <View
               accessibilityLabel="Send email"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -4959,6 +4958,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {
@@ -5049,7 +5049,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
         </View>
       </View>
       <View
-        accessibilityElementsHidden={false}
+        aria-hidden={false}
         importantForAccessibility="yes"
         style={
           [
@@ -5094,7 +5094,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
           >
             <View
               accessibilityLabel="Set reminder"
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -5124,6 +5123,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {

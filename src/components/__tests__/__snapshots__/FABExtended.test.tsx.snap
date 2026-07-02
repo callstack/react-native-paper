@@ -206,7 +206,7 @@ exports[`renders extended FAB collapsed 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
@@ -445,7 +445,7 @@ exports[`renders extended FAB expanded 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
@@ -684,7 +684,7 @@ exports[`renders extended FAB large size 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
@@ -923,7 +923,7 @@ exports[`renders extended FAB medium size 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
@@ -1162,7 +1162,7 @@ exports[`renders extended FAB not visible 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
@@ -1401,7 +1401,7 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
     />
   </View>
   <View
-    accessibilityElementsHidden={true}
+    aria-hidden={true}
     importantForAccessibility="no-hide-descendants"
     style={
       {
