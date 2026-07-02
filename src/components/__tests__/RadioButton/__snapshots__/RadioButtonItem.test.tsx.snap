@@ -3,6 +3,7 @@
 exports[`can render leading radio button control 1`] = `
 <View
   accessibilityLabel="Default with leading control"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -32,7 +33,6 @@ exports[`can render leading radio button control 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="radio"
   style={
     [
       false,
@@ -41,6 +41,7 @@ exports[`can render leading radio button control 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -56,11 +57,10 @@ exports[`can render leading radio button control 1`] = `
     }
   >
     <View
-      accessibilityLiveRegion="polite"
       accessibilityState={
         {
           "busy": undefined,
-          "checked": false,
+          "checked": undefined,
           "disabled": false,
           "expanded": undefined,
           "selected": undefined,
@@ -74,7 +74,7 @@ exports[`can render leading radio button control 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
       collapsable={false}
       focusable={true}
       onBlur={[Function]}
@@ -86,7 +86,6 @@ exports[`can render leading radio button control 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="radio"
       style={
         [
           {
@@ -94,51 +93,30 @@ exports[`can render leading radio button control 1`] = `
           },
           {
             "borderRadius": 18,
-            "padding": 6,
           },
         ]
       }
     >
       <View
         style={
-          {
-            "opacity": 0,
-          }
+          [
+            {
+              "borderRadius": 10,
+              "borderWidth": 2,
+              "height": 20,
+              "margin": 8,
+              "width": 20,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+              "opacity": 1,
+            },
+          ]
         }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          check
-        </Text>
-      </View>
+      />
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -171,6 +149,7 @@ exports[`can render leading radio button control 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -178,339 +157,10 @@ exports[`can render leading radio button control 1`] = `
 </View>
 `;
 
-exports[`can render the Android radio button on different platforms 1`] = `
-<View
-  accessibilityLabel="iOS Checkbox"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  role="radio"
-  style={
-    [
-      false,
-      undefined,
-    ]
-  }
->
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingHorizontal": 16,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ]
-    }
-  >
-    <Text
-      style={
-        [
-          {
-            "textAlign": "left",
-          },
-          {
-            "color": "rgba(29, 27, 32, 1)",
-            "writingDirection": "ltr",
-          },
-          [
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.5,
-              "lineHeight": 24,
-            },
-            [
-              {
-                "flexGrow": 1,
-                "flexShrink": 1,
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "opacity": 1,
-                "textAlign": "left",
-              },
-              undefined,
-            ],
-          ],
-        ]
-      }
-    >
-      iOS Checkbox
-    </Text>
-    <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="radio"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 18,
-          },
-        ]
-      }
-    >
-      <View
-        collapsable={false}
-        style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderRadius": 10,
-            "borderWidth": 2,
-            "height": 20,
-            "margin": 8,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-  </View>
-</View>
-`;
-
-exports[`can render the iOS radio button on different platforms 1`] = `
-<View
-  accessibilityLabel="iOS Radio button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  role="radio"
-  style={
-    [
-      false,
-      undefined,
-    ]
-  }
->
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingHorizontal": 16,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ]
-    }
-  >
-    <Text
-      style={
-        [
-          {
-            "textAlign": "left",
-          },
-          {
-            "color": "rgba(29, 27, 32, 1)",
-            "writingDirection": "ltr",
-          },
-          [
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.5,
-              "lineHeight": 24,
-            },
-            [
-              {
-                "flexGrow": 1,
-                "flexShrink": 1,
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "opacity": 1,
-                "textAlign": "left",
-              },
-              undefined,
-            ],
-          ],
-        ]
-      }
-    >
-      iOS Radio button
-    </Text>
-    <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="radio"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 18,
-            "padding": 6,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          {
-            "opacity": 0,
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          check
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
 exports[`renders unchecked 1`] = `
 <View
   accessibilityLabel="Unchecked Button"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -540,7 +190,6 @@ exports[`renders unchecked 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  role="radio"
   style={
     [
       false,
@@ -549,6 +198,7 @@ exports[`renders unchecked 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -564,6 +214,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -596,15 +247,15 @@ exports[`renders unchecked 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Unchecked Button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
       accessibilityState={
         {
           "busy": undefined,
-          "checked": false,
+          "checked": undefined,
           "disabled": false,
           "expanded": undefined,
           "selected": undefined,
@@ -618,7 +269,7 @@ exports[`renders unchecked 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
       collapsable={false}
       focusable={true}
       onBlur={[Function]}
@@ -630,7 +281,6 @@ exports[`renders unchecked 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="radio"
       style={
         [
           {
@@ -638,49 +288,27 @@ exports[`renders unchecked 1`] = `
           },
           {
             "borderRadius": 18,
-            "padding": 6,
           },
         ]
       }
     >
       <View
         style={
-          {
-            "opacity": 0,
-          }
+          [
+            {
+              "borderRadius": 10,
+              "borderWidth": 2,
+              "height": 20,
+              "margin": 8,
+              "width": 20,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+              "opacity": 1,
+            },
+          ]
         }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          check
-        </Text>
-      </View>
+      />
     </View>
   </View>
 </View>

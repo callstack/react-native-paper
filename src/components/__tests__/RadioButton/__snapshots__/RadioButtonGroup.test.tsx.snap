@@ -2,10 +2,10 @@
 
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
-  role="radiogroup"
+  accessibilityRole="radiogroup"
 >
   <View
-    accessibilityLiveRegion="polite"
+    accessibilityRole="radio"
     accessibilityState={
       {
         "busy": undefined,
@@ -35,7 +35,6 @@ exports[`RadioButtonGroup renders properly 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="radio"
     style={
       [
         {
@@ -43,48 +42,66 @@ exports[`RadioButtonGroup renders properly 1`] = `
         },
         {
           "borderRadius": 18,
-          "padding": 6,
         },
       ]
     }
   >
     <View
       style={
-        {
-          "opacity": 1,
-        }
+        [
+          {
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "height": 20,
+            "margin": 8,
+            "width": 20,
+          },
+          {
+            "borderColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
+          },
+        ]
       }
     >
-      <Text
-        accessibilityElementsHidden={true}
-        allowFontScaling={false}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
           [
             {
-              "color": "rgba(103, 80, 164, 1)",
-              "fontSize": 24,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
             },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
           ]
         }
       >
-        check
-      </Text>
+        <View
+          style={
+            [
+              {
+                "borderRadius": 5,
+                "height": 10,
+                "width": 10,
+              },
+              {
+                "backgroundColor": "rgba(103, 80, 164, 1)",
+              },
+              {
+                "transform": [
+                  {
+                    "scale": 1,
+                  },
+                ],
+              },
+            ]
+          }
+        />
+      </View>
     </View>
   </View>
 </View>

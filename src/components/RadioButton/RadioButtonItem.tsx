@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
@@ -8,10 +9,7 @@ import type {
 } from 'react-native';
 
 import RadioButton from './RadioButton';
-import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext } from './RadioButtonGroup';
-import type { RadioButtonContextType } from './RadioButtonGroup';
-import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { getStateLayer } from '../../theme/utils/state';
@@ -63,6 +61,11 @@ export type Props = {
    */
   status?: 'checked' | 'unchecked';
   /**
+   * Whether the radio button is in an error state. When true, the control
+   * uses `theme.colors.error`.
+   */
+  error?: boolean;
+  /**
    * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
@@ -99,11 +102,6 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
-  /**
-   * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
-   * Left undefined `<RadioButton />` will be used.
-   */
-  mode?: 'android' | 'ios';
   /**
    * Radio button control position.
    */
@@ -147,17 +145,18 @@ const RadioButtonItem = ({
   color,
   uncheckedColor,
   status,
+  error,
   theme: themeOverrides,
   background,
   'aria-label': ariaLabel = label,
   testID,
-  mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const context = React.useContext(RadioButtonContext);
   const radioButtonProps = {
     value,
     disabled,
@@ -165,17 +164,13 @@ const RadioButtonItem = ({
     color,
     theme,
     uncheckedColor,
+    error,
   };
   const isLeading = position === 'leading';
-  let radioButton: any;
-
-  if (mode === 'android') {
-    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
-  } else if (mode === 'ios') {
-    radioButton = <RadioButtonIOS {...radioButtonProps} />;
-  } else {
-    radioButton = <RadioButton {...radioButtonProps} />;
-  }
+  // The outer TouchableRipple is the interactable element + a11y radio; the
+  // inner control is purely visual, so exclude it from the a11y tree to
+  // avoid duplicate `checked` states.
+  const radioButton = <RadioButton {...radioButtonProps} accessible={false} />;
 
   const textAlign = isLeading ? 'right' : 'left';
 
@@ -184,51 +179,53 @@ const RadioButtonItem = ({
     textAlign,
   } as TextStyle;
 
+  const checked =
+    isChecked({
+      contextValue: context?.value,
+      status,
+      value,
+    }) === 'checked';
+
   return (
-    <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
-        const checked =
-          isChecked({
-            contextValue: context?.value,
-            status,
-            value,
-          }) === 'checked';
-        return (
-          <TouchableRipple
-            onPress={(event) =>
-              handlePress({
-                onPress: onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              })
-            }
-            onLongPress={onLongPress}
-            aria-label={ariaLabel}
-            role="radio"
-            aria-checked={checked}
-            aria-disabled={disabled}
-            testID={testID}
-            disabled={disabled}
-            background={background}
-            theme={theme}
-            hitSlop={hitSlop}
-          >
-            <View style={[styles.container, style]} pointerEvents="none">
-              {isLeading && radioButton}
-              <Text
-                variant={labelVariant}
-                style={[styles.label, computedStyle, labelStyle]}
-                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-              >
-                {label}
-              </Text>
-              {!isLeading && radioButton}
-            </View>
-          </TouchableRipple>
-        );
+    <TouchableRipple
+      onPress={(event) =>
+        handlePress({
+          onPress: onPress,
+          onValueChange: context?.onValueChange,
+          value,
+          event,
+        })
+      }
+      onLongPress={onLongPress}
+      accessibilityLabel={ariaLabel}
+      accessibilityRole="radio"
+      accessibilityState={{
+        checked,
+        disabled,
       }}
-    </RadioButtonContext.Consumer>
+      testID={testID}
+      disabled={disabled}
+      background={background}
+      theme={theme}
+      hitSlop={hitSlop}
+    >
+      <View
+        style={[styles.container, style]}
+        pointerEvents="none"
+        importantForAccessibility="no-hide-descendants"
+      >
+        {isLeading && radioButton}
+        <Text
+          variant={labelVariant}
+          testID={`${testID}-text`}
+          style={[styles.label, computedStyle, labelStyle]}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        >
+          {label}
+        </Text>
+        {!isLeading && radioButton}
+      </View>
+    </TouchableRipple>
   );
 };
 

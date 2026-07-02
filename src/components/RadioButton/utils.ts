@@ -1,5 +1,6 @@
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
+import { RadioButtonTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
@@ -41,59 +42,6 @@ export const isChecked = ({
   }
 };
 
-const getIOSCheckedColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  customColor?: ColorValue;
-  disabled?: boolean;
-  error?: boolean;
-}) => {
-  if (disabled) {
-    return theme.colors.primary;
-  }
-
-  if (customColor) {
-    return customColor;
-  }
-
-  if (error) {
-    return theme.colors.error;
-  }
-
-  return theme.colors.primary;
-};
-
-export const getSelectionControlIOSColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  disabled?: boolean;
-  customColor?: ColorValue;
-  error?: boolean;
-}) => {
-  const checkedColor = getIOSCheckedColor({
-    theme,
-    disabled,
-    customColor,
-    error,
-  });
-  const checkedColorOpacity = disabled
-    ? stateOpacity.disabled
-    : stateOpacity.enabled;
-
-  return {
-    checkedColor,
-    checkedColorOpacity,
-  };
-};
-
 export const getSelectionControlColor = ({
   theme,
   disabled,
@@ -113,15 +61,15 @@ export const getSelectionControlColor = ({
   const checkedColor = customColor
     ? customColor
     : error
-      ? theme.colors.error
-      : theme.colors.primary;
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.checkedColor];
   const uncheckedColor = customUncheckedColor
     ? customUncheckedColor
     : error
-      ? theme.colors.error
-      : theme.colors.onSurfaceVariant;
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.uncheckedColor];
   const color = disabled
-    ? theme.colors.onSurface
+    ? theme.colors[RadioButtonTokens.disabledColor]
     : checked
       ? checkedColor
       : uncheckedColor;

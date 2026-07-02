@@ -110,9 +110,7 @@ const pages = {
   ProgressBar: 'ProgressBar',
   RadioButton: {
     RadioButton: 'RadioButton/RadioButton',
-    RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',
     RadioButtonGroup: 'RadioButton/RadioButtonGroup',
-    RadioButtonIOS: 'RadioButton/RadioButtonIOS',
     RadioButtonItem: 'RadioButton/RadioButtonItem',
   },
   Searchbar: 'Searchbar',
