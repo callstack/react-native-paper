@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
@@ -34,6 +34,52 @@ it('renders unchecked toggle button', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders row buttons with segmented styling through context', async () => {
+  await render(
+    <ToggleButton.Row value="left" onValueChange={() => {}}>
+      <View>
+        <ToggleButton
+          icon="format-align-left"
+          value="left"
+          testID="wrapped-toggle"
+        />
+      </View>
+      <ToggleButton
+        icon="format-align-right"
+        value="right"
+        testID="direct-toggle"
+      />
+    </ToggleButton.Row>
+  );
+
+  expect(screen.getByTestId('wrapped-toggle-container')).toHaveStyle({
+    borderRadius: 0,
+  });
+  expect(screen.getByTestId('direct-toggle-container')).toHaveStyle({
+    borderRadius: 0,
+  });
+});
+
+it('applies the same selection color in a row as standalone (no row-specific override)', async () => {
+  await render(
+    <ToggleButton.Row value="left" onValueChange={() => {}}>
+      <ToggleButton icon="format-align-left" value="left" testID="selected" />
+      <ToggleButton
+        icon="format-align-right"
+        value="right"
+        testID="unselected"
+      />
+    </ToggleButton.Row>
+  );
+
+  expect(screen.getByTestId('selected-container')).toHaveStyle({
+    backgroundColor: getTheme().colors.surfaceContainerHighest,
+  });
+  expect(screen.getByTestId('unselected-container')).toHaveStyle({
+    backgroundColor: getTheme().colors.surfaceContainer,
+  });
 });
 
 describe('getToggleButtonColor', () => {

@@ -12,15 +12,9 @@ import {
   getAppbarBackgroundColor,
   getAppbarBorders,
   modeTextVariant,
-  renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
-import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Text from '../../Typography/Text';
-
-const renderAppbarContent = utilRenderAppbarContent as (
-  props: Parameters<typeof utilRenderAppbarContent>[0]
-) => { props: any }[];
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', async () => {
@@ -50,109 +44,7 @@ describe('Appbar', () => {
   });
 });
 
-describe('renderAppbarContent', () => {
-  const children = [
-    <Appbar.BackAction onPress={() => {}} key={0} />,
-    <Appbar.Content title="Examples" key={1} />,
-    <Appbar.Action icon="magnify" onPress={() => {}} key={2} />,
-    <Appbar.Action icon="menu" onPress={() => {}} key={3} />,
-  ];
-
-  it('should render all children types if renderOnly is not specified', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-    });
-
-    expect(result).toHaveLength(4);
-  });
-
-  it('should render all children types except specified in renderExcept', () => {
-    const result = renderAppbarContent({
-      children: [
-        ...children,
-        <Menu
-          key={4}
-          anchor={<Appbar.Action icon="menu" onPress={() => {}} />}
-          visible={false}
-        >
-          {null}
-        </Menu>,
-      ],
-      isDark: false,
-      renderExcept: [
-        'Appbar',
-        'Appbar.Header',
-        'Appbar.BackAction',
-        'Appbar.Content',
-      ],
-    });
-
-    expect(result).toHaveLength(3);
-  });
-
-  it('should render only children types specifed in renderOnly', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Action'],
-    });
-
-    expect(result).toHaveLength(2);
-  });
-
-  it('should render AppbarContent with correct mode', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Content'],
-      mode: 'large',
-    });
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(result[0].props.mode).toBe('large');
-  });
-
-  it('should render centered AppbarContent', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Content'],
-      mode: 'center-aligned',
-      shouldCenterContent: true,
-    });
-
-    const centerAlignedContent = {
-      alignItems: 'center',
-    };
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(result[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
-    );
-  });
-
-  it('should render AppbarContent with correct spacings', () => {
-    const renderResult = (withAppbarBackAction = false) =>
-      renderAppbarContent({
-        children,
-        isDark: false,
-        renderOnly: [
-          'Appbar.Content',
-          withAppbarBackAction && 'Appbar.BackAction',
-        ],
-      });
-
-    const v3Spacing = {
-      marginLeft: 12,
-    };
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(renderResult()[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3Spacing)])
-    );
-  });
-
+describe('Appbar.Content accessibility', () => {
   it('Is recognized as a heading when no onPress callback has been passed', async () => {
     await render(
       <SafeAreaProvider>

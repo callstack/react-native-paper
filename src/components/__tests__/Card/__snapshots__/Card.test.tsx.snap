@@ -62,6 +62,10 @@ exports[`Card renders an outlined card 1`] = `
         [
           {
             "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderRadius": 12,
           },
           undefined,
         ]

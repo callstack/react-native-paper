@@ -2,8 +2,10 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';
+import { ToggleButtonRowContext } from './ToggleButtonRowContext';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 
 export type Props = {
   /**
@@ -19,7 +21,13 @@ export type Props = {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
+
+const SEGMENTED_ROW_CONTEXT = { segmented: true };
 
 /**
  * Toggle button row renders a group of toggle buttons in a row.
@@ -44,33 +52,33 @@ export type Props = {
  *
  *```
  */
-const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
-  const count = React.Children.count(children);
+const ToggleButtonRow = ({
+  value,
+  onValueChange,
+  children,
+  style,
+  theme: themeOverrides,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const borderRadius = theme.shapes.corner.extraSmall;
+  const outlineColor = theme.colors.outline;
 
   return (
     <ToggleButtonGroup value={value} onValueChange={onValueChange}>
-      <View style={[styles.row, style]}>
-        {React.Children.map(children, (child, i) => {
-          // @ts-expect-error: TypeScript complains about child.type but it doesn't matter
-          if (child && child.type === ToggleButton) {
-            // @ts-expect-error: We're sure that child is a React Element
-            return React.cloneElement(child, {
-              style: [
-                styles.button,
-                i === 0
-                  ? styles.first
-                  : i === count - 1
-                    ? styles.last
-                    : styles.middle,
-                // @ts-expect-error: We're sure that child is a React Element
-                child.props.style,
-              ],
-            });
-          }
-
-          return child;
-        })}
-      </View>
+      <ToggleButtonRowContext.Provider value={SEGMENTED_ROW_CONTEXT}>
+        <View
+          style={[
+            styles.row,
+            {
+              backgroundColor: outlineColor,
+              borderRadius,
+            },
+            style,
+          ]}
+        >
+          {children}
+        </View>
+      </ToggleButtonRowContext.Provider>
     </ToggleButtonGroup>
   );
 };
@@ -80,25 +88,10 @@ ToggleButtonRow.displayName = 'ToggleButton.Row';
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-  },
-  button: {
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-
-  first: {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-  },
-
-  middle: {
-    borderRadius: 0,
-    borderLeftWidth: 0,
-  },
-
-  last: {
-    borderLeftWidth: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
+    alignSelf: 'flex-start',
+    overflow: 'hidden',
+    padding: StyleSheet.hairlineWidth,
+    paddingLeft: 0,
   },
 });
 

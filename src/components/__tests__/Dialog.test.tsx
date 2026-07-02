@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import {
   Text,
   StyleSheet,
@@ -93,17 +94,71 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', async () => {
+  it('should apply top spacing to the dialog surface for a title-first dialog', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Title testID="dialog-title">
           <Text>Test Dialog Content</Text>
         </Dialog.Title>
       </Dialog>
     );
 
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
+    });
+  });
+
+  it('should apply top spacing to the dialog surface for a content-first dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Content testID="dialog-content">
+          <Text>Test Dialog Content</Text>
+        </Dialog.Content>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
-      marginTop: 24,
+      paddingBottom: 24,
+    });
+  });
+
+  it('should apply top spacing to the dialog surface for an icon-first dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Icon icon="alert" testID="dialog-icon" />
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
+      paddingTop: 24,
+    });
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      paddingTop: 0,
+    });
+  });
+
+  it('should preserve the icon-to-title spacing for an icon dialog', async () => {
+    await render(
+      <Dialog visible={true} testID="dialog">
+        <Dialog.Icon icon="alert" testID="dialog-icon" />
+        <Dialog.Title testID="dialog-title">
+          <Text>Test Dialog Content</Text>
+        </Dialog.Title>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      marginBottom: 16,
+      paddingTop: 0,
+    });
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
     });
   });
 });
@@ -133,11 +188,36 @@ describe('DialogActions', () => {
     const dialogActionButtons = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
+      gap: 8,
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(dialogActionButtons[0]).not.toHaveStyle({ marginRight: 8 });
+    expect(dialogActionButtons[1]).not.toHaveStyle({ marginRight: 0 });
+  });
+
+  it('should not inject button props into actions', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
+    await render(
+      <Dialog.Actions>
+        <ProbeButton>Cancel</ProbeButton>
+        <ProbeButton>Ok</ProbeButton>
+      </Dialog.Actions>
+    );
+
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
+
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(cancelButtonProps).not.toHaveProperty('uppercase');
+    expect(okButtonProps).not.toHaveProperty('compact');
+    expect(okButtonProps).not.toHaveProperty('uppercase');
   });
 
   it('should apply custom styles', async () => {

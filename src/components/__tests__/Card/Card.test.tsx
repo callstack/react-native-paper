@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
@@ -91,6 +92,19 @@ describe('Card', () => {
     expect(screen.getByTestId('card')).toHaveStyle(styles.contentStyle);
   });
 
+  it('clips inner content to the card shape', async () => {
+    await render(
+      <Card>
+        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+      </Card>
+    );
+
+    expect(screen.getByTestId('card')).toHaveStyle({
+      borderRadius: getTheme().shapes.corner.medium,
+      overflow: 'hidden',
+    });
+  });
+
   it('does not render a disabled accessibility state', async () => {
     await render(<Card>{null}</Card>);
 
@@ -127,18 +141,67 @@ describe('CardCover', () => {
 
 describe('CardActions', () => {
   it('renders button with passed mode', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
       <Card>
-        <Card.Actions testID="card-actions">
-          <Button mode="contained">Agree</Button>
+        <Card.Actions>
+          <ProbeButton mode="contained">Agree</ProbeButton>
         </Card.Actions>
       </Card>
     );
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('card-actions').props.children[0].props.mode
-    ).toBe('contained');
+    expect(buttonProps).toHaveBeenCalledWith(
+      expect.objectContaining({ mode: 'contained' })
+    );
+  });
+
+  it('does not inject default button props', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
+    await render(
+      <Card>
+        <Card.Actions>
+          <ProbeButton>Cancel</ProbeButton>
+          <ProbeButton>Agree</ProbeButton>
+        </Card.Actions>
+      </Card>
+    );
+
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [agreeButtonProps] = buttonProps.mock.calls[1];
+
+    expect(cancelButtonProps).not.toHaveProperty('mode');
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(agreeButtonProps).not.toHaveProperty('mode');
+    expect(agreeButtonProps).not.toHaveProperty('compact');
+  });
+
+  it('renders actions in a styled row', async () => {
+    await render(
+      <Card>
+        <Card.Actions testID="card-actions">
+          <Button>Cancel</Button>
+          <Button>Agree</Button>
+        </Card.Actions>
+      </Card>
+    );
+
+    expect(screen.getByTestId('card-actions')).toHaveStyle({
+      flexDirection: 'row',
+      gap: 8,
+      justifyContent: 'flex-end',
+    });
   });
 
   it('renders button with custom styles', async () => {
@@ -221,6 +284,25 @@ describe('getCardCoverStyle - border radius', () => {
         borderRadiusStyles: {},
       })
     ).toMatchObject({ borderRadius: getTheme().shapes.corner.medium });
+  });
+});
+
+describe('CardContent', () => {
+  it('renders uniform vertical padding regardless of neighboring sections', async () => {
+    await render(
+      <Card>
+        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+        <Card.Title title="Card Title" />
+        <Card.Content testID="card-content">
+          <Text>Card content</Text>
+        </Card.Content>
+      </Card>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingTop: 16,
+      paddingBottom: 16,
+    });
   });
 });
 
