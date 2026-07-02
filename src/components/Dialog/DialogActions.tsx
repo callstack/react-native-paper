@@ -47,12 +47,17 @@ export type Props = ViewProps & {
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => {
-  useInternalTheme(props.theme);
+const DialogActions = ({
+  theme: themeOverrides,
+  style,
+  children,
+  ...rest
+}: Props) => {
+  useInternalTheme(themeOverrides);
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
-      {props.children}
+    <View {...rest} style={[styles.v3Container, style]}>
+      {children}
     </View>
   );
 };
