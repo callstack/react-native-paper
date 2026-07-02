@@ -61,13 +61,13 @@ export const getSelectionControlColor = ({
   const checkedColor = customColor
     ? customColor
     : error
-    ? theme.colors[RadioButtonTokens.errorColor]
-    : theme.colors[RadioButtonTokens.checkedColor];
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.checkedColor];
   const uncheckedColor = customUncheckedColor
     ? customUncheckedColor
     : error
-    ? theme.colors[RadioButtonTokens.errorColor]
-    : theme.colors[RadioButtonTokens.uncheckedColor];
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.uncheckedColor];
   const color = disabled
     ? theme.colors[RadioButtonTokens.disabledColor]
     : checked
