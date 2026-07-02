@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import type {
+import {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native';
 
 import Shell from './Shell';
-import type { Size, Variant } from './tokens';
+import { Size, Variant } from './tokens';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 
@@ -43,6 +43,26 @@ export type Props = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute when a touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
+   * Called when the pointer enters the element (web only).
+   */
+  onHoverIn?: () => void;
+  /**
+   * Called when the pointer leaves the element (web only).
+   */
+  onHoverOut?: () => void;
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
@@ -82,7 +102,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.RefObject<View>;
 };
 
 /**
@@ -120,6 +140,11 @@ const FAB = ({
   size = 'default',
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
+  onHoverIn,
+  onHoverOut,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -140,6 +165,11 @@ const FAB = ({
     size={size}
     visible={visible}
     onPress={onPress}
+    onLongPress={onLongPress}
+    onPressOut={onPressOut}
+    delayLongPress={delayLongPress}
+    onHoverIn={onHoverIn}
+    onHoverOut={onHoverOut}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}

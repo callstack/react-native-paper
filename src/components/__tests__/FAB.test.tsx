@@ -1,7 +1,7 @@
 import { expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 
 it('renders FAB with default props', async () => {
@@ -38,13 +38,6 @@ it('renders FAB with tonalTertiary variant', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with aria-label', async () => {
-  const tree = (
-    await render(<FAB icon="plus" aria-label="Add item" />)
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders FAB medium size', async () => {
   const tree = (await render(<FAB icon="plus" size="medium" />)).toJSON();
   expect(tree).toMatchSnapshot();
@@ -67,6 +60,13 @@ it('renders FAB with containerColor and contentColor overrides', async () => {
     await render(
       <FAB icon="plus" containerColor="#ff5722" contentColor="#ffffff" />
     )
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders FAB with aria-label', async () => {
+  const tree = (
+    await render(<FAB icon="plus" aria-label="Add item" />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });

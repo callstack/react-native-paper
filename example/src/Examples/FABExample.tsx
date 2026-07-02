@@ -1,17 +1,24 @@
 import * as React from 'react';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import {
   Chip,
   Divider,
   FAB,
+  FABSize,
+  FABVariant,
   List,
   Switch,
   Text,
   useTheme,
 } from 'react-native-paper';
-import type { FABSize, FABVariant } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type FabType = 'icon' | 'extended' | 'extendedTransforming' | 'menu';

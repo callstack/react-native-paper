@@ -1,28 +1,31 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import type {
+import {
   ColorValue,
   GestureResponderEvent,
+  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
 import Reanimated, {
+  AnimatedStyle,
   useAnimatedStyle,
   useSharedValue,
+  type SharedValue,
 } from 'react-native-reanimated';
-import type { SharedValue } from 'react-native-reanimated';
-import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
 import {
+  Size,
   Tokens,
+  Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
-import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { useVisibility } from './useVisibility';
 import { getDimensions, resolveColors } from './utils';
@@ -88,6 +91,26 @@ export type ShellProps = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute when a touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
+   * Called when the pointer enters the element (web only).
+   */
+  onHoverIn?: () => void;
+  /**
+   * Called when the pointer leaves the element (web only).
+   */
+  onHoverOut?: () => void;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -194,6 +217,11 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
+  onHoverIn,
+  onHoverOut,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -303,6 +331,11 @@ const Shell = ({
           borderless
           background={background}
           onPress={onPress}
+          onLongPress={onLongPress}
+          onPressOut={onPressOut}
+          delayLongPress={delayLongPress}
+          onHoverIn={onHoverIn}
+          onHoverOut={onHoverOut}
           onFocus={onFocus}
           onBlur={onBlur}
           aria-label={ariaLabel}

@@ -8,9 +8,15 @@ jest.mock('react-native-worklets', () =>
   require('react-native-worklets/lib/module/mock')
 );
 
-jest.mock('react-native-reanimated', () =>
-  require('react-native-reanimated/mock')
-);
+jest.mock('react-native-reanimated', () => {
+  const Reanimated = require('react-native-reanimated/mock');
+
+  // The mock doesn't ship the CSS easing helpers; stub the ones we use.
+  return {
+    ...Reanimated,
+    cubicBezier: (...points) => `cubic-bezier(${points.join(', ')})`,
+  };
+});
 
 jest.mock('@react-native-vector-icons/material-design-icons', () => {
   const React = require('react');

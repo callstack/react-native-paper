@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type {
+import {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -18,7 +19,7 @@ import Reanimated, {
 import { scheduleOnUI } from 'react-native-worklets';
 
 import Shell from './Shell';
-import type { Size, Variant } from './tokens';
+import { Size, Variant } from './tokens';
 import { getDimensions } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -110,7 +111,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  /**
+   * @optional
+   */
+  ref?: React.RefObject<View>;
 };
 
 /**

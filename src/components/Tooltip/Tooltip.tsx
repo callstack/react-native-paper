@@ -1,26 +1,42 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Platform,
-  Pressable,
-} from 'react-native';
-import type { LayoutChangeEvent, ViewStyle } from 'react-native';
+import { Dimensions, StyleSheet, Platform, View } from 'react-native';
+import type { PointerEvent, ViewStyle } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
+import { takeSingletonSlot, useTooltipFade } from './hooks';
+import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
-import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
+/**
+ * Props passed to the `children` render function. Spread them onto the trigger
+ * element (and merge with your own handlers when you have them).
+ */
+export type TooltipTriggerProps = {
+  onLongPress?: () => void;
+  onPressOut?: () => void;
+  delayLongPress?: number;
+  onHoverIn?: () => void;
+  onHoverOut?: () => void;
+};
+
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Render function returning the trigger element. The provided props wire the
+   * tooltip's show/hide behavior and must be spread onto the returned element:
+   *
+   * ```js
+   * <Tooltip title="Selected Camera">
+   *   {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
+   * </Tooltip>
+   * ```
    */
-  children: React.ReactElement;
+  children: (props: TooltipTriggerProps) => React.ReactElement;
   /**
    * The number of milliseconds a user must touch the element before showing the tooltip.
    */
@@ -48,6 +64,8 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
+ * For tooltips with a title, supporting text and action buttons, see `Tooltip.Rich`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -55,7 +73,7 @@ export type Props = {
  *
  * const MyComponent = () => (
  *   <Tooltip title="Selected Camera">
- *     <IconButton icon="camera" selected size={24} onPress={() => {}} />
+ *     {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
  *   </Tooltip>
  * );
  *
@@ -69,40 +87,21 @@ const Tooltip = ({
   title,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
-  ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
+  // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
+  // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
+  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
+    useTooltipFade(theme, visible);
 
-  const [measurement, setMeasurement] = React.useState({
-    children: {},
-    tooltip: {},
-    measured: false,
-  });
-  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-
-  const childrenWrapperRef = React.useRef<View>(null);
-  const touched = React.useRef(false);
-
-  const isValidChild = React.useMemo(
-    () => React.isValidElement<TooltipChildProps>(children),
-    [children]
-  );
+  const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => {
     return () => {
-      if (showTooltipTimer.current.length) {
-        showTooltipTimer.current.forEach((t) => clearTimeout(t));
-        showTooltipTimer.current = [];
-      }
-
-      if (hideTooltipTimer.current.length) {
-        hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-        hideTooltipTimer.current = [];
-      }
+      if (showTimer.current) clearTimeout(showTimer.current);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
     };
   }, []);
 
@@ -115,102 +114,90 @@ const Tooltip = ({
   }, []);
 
   const handleTouchStart = React.useCallback(() => {
-    if (hideTooltipTimer.current.length) {
-      hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-      hideTooltipTimer.current = [];
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+      hideTimer.current = null;
     }
 
-    if (isWeb) {
-      let id = setTimeout(() => {
-        touched.current = true;
+    if (Platform.OS === 'web') {
+      showTimer.current = setTimeout(() => {
+        takeSingletonSlot(() => setVisible(false));
         setVisible(true);
-      }, enterTouchDelay) as unknown as NodeJS.Timeout;
-      showTooltipTimer.current.push(id);
+      }, enterTouchDelay);
     } else {
-      touched.current = true;
+      takeSingletonSlot(() => setVisible(false));
       setVisible(true);
     }
-  }, [isWeb, enterTouchDelay]);
+  }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
-    touched.current = false;
-    if (showTooltipTimer.current.length) {
-      showTooltipTimer.current.forEach((t) => clearTimeout(t));
-      showTooltipTimer.current = [];
+    if (showTimer.current) {
+      clearTimeout(showTimer.current);
+      showTimer.current = null;
     }
-
-    let id = setTimeout(() => {
-      setVisible(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, leaveTouchDelay) as unknown as NodeJS.Timeout;
-    hideTooltipTimer.current.push(id);
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+    }
+    hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 
-  const handlePress = React.useCallback(() => {
-    if (touched.current) {
-      return null;
-    }
-    if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
-    if (props.disabled) return null;
-    return props.onPress?.();
-  }, [children.props, isValidChild]);
-
-  const handleHoverIn = React.useCallback(() => {
-    handleTouchStart();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverIn?.();
-    }
-  }, [children.props, handleTouchStart, isValidChild]);
-
-  const handleHoverOut = React.useCallback(() => {
-    handleTouchEnd();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverOut?.();
-    }
-  }, [children.props, handleTouchEnd, isValidChild]);
-
-  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current?.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
+  // On web, pointer events on the wrapper View handle hover without going
+  // through RNW's Pressable lock/unlock mechanism that caused flicker.
+  // Long-press in triggerProps lets touchscreen-web users still trigger it.
+  //
+  // Guard against spurious pointerleave events (e.g. fired when the tooltip
+  // renders in the Portal): only start the hide timer when the cursor has
+  // actually left the wrapper bounds. In JSDOM getBoundingClientRect() returns
+  // a zero-size rect, so the check is skipped and tests continue to pass.
+  const handlePointerLeave = React.useCallback(
+    (e?: PointerEvent) => {
+      if (Platform.OS === 'web' && e?.nativeEvent) {
+        const el = childrenWrapperRef.current;
+        if (el?.getBoundingClientRect) {
+          const { clientX, clientY } = e.nativeEvent;
+          const rect = el.getBoundingClientRect();
+          if (
+            (rect.width > 0 || rect.height > 0) &&
+            clientX >= rect.left &&
+            clientX <= rect.right &&
+            clientY >= rect.top &&
+            clientY <= rect.bottom
+          ) {
+            return;
+          }
+        }
       }
-    );
-  };
+      handleTouchEnd();
+    },
+    [handleTouchEnd, childrenWrapperRef]
+  );
 
-  const mobilePressProps = {
-    onPress: handlePress,
-    onLongPress: () => handleTouchStart(),
-    onPressOut: () => handleTouchEnd(),
+  const wrapperPointerProps =
+    Platform.OS === 'web'
+      ? { onPointerEnter: handleTouchStart, onPointerLeave: handlePointerLeave }
+      : {};
+
+  const triggerProps: TooltipTriggerProps = {
+    onLongPress: handleTouchStart,
+    onPressOut: handleTouchEnd,
     delayLongPress: enterTouchDelay,
-  };
-
-  const webPressProps = {
-    onHoverIn: handleHoverIn,
-    onHoverOut: handleHoverOut,
   };
 
   return (
     <>
-      {visible && (
+      {rendered && (
         <Portal>
-          <View
-            onLayout={handleOnLayout}
+          <Animated.View
+            onLayout={onLayout}
+            pointerEvents="none"
             style={[
               styles.tooltip,
               {
-                backgroundColor: theme.colors.onSurface,
-                ...getTooltipPosition(
-                  measurement as Measurement,
-                  children as React.ReactElement<TooltipChildProps>
-                ),
-                borderRadius: theme.shapes.corner.extraSmall,
-                ...(measurement.measured ? styles.visible : styles.hidden),
+                backgroundColor: theme.colors[Tokens.plain.container],
+                ...getTooltipPosition(measurement),
+                borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
+              fadeStyle,
             ]}
             testID="tooltip-container"
           >
@@ -218,25 +205,24 @@ const Tooltip = ({
               aria-live="polite"
               numberOfLines={1}
               selectable={false}
-              variant="labelLarge"
-              style={{ color: theme.colors.surface }}
+              variant={Tokens.plain.typescale}
+              style={{ color: theme.colors[Tokens.plain.content] }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>
-          </View>
+          </Animated.View>
         </Portal>
       )}
-      <Pressable
+      <View
         ref={childrenWrapperRef}
+        collapsable={false}
         style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
+        testID="tooltip-trigger"
+        {...wrapperPointerProps}
       >
-        {React.cloneElement(children, {
-          ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
-        })}
-      </Pressable>
+        {children(triggerProps)}
+      </View>
     </>
   );
 };
@@ -247,15 +233,9 @@ const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    height: 32,
-    maxHeight: 32,
-  },
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
+    paddingHorizontal: Tokens.plain.paddingHorizontal,
+    height: Tokens.plain.height,
+    maxHeight: Tokens.plain.height,
   },
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
