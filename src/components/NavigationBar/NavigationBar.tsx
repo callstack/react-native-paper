@@ -359,10 +359,10 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const stateLayer = pressed
     ? getStateLayer(theme, stateLayerRole, 'pressed')
     : keyboardFocused
-    ? getStateLayer(theme, stateLayerRole, 'focused')
-    : hovered
-    ? getStateLayer(theme, stateLayerRole, 'hovered')
-    : null;
+      ? getStateLayer(theme, stateLayerRole, 'focused')
+      : hovered
+        ? getStateLayer(theme, stateLayerRole, 'hovered')
+        : null;
   const stateLayerColor = stateLayer
     ? { backgroundColor: stateLayer.color, opacity: stateLayer.opacity }
     : null;
@@ -386,7 +386,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
       source={
         (focused
           ? route.focusedIcon
-          : route.unfocusedIcon ?? route.focusedIcon) as IconSource
+          : (route.unfocusedIcon ?? route.focusedIcon)) as IconSource
       }
       color={iconColor}
       size={ICON_SIZE}
@@ -396,11 +396,9 @@ const NavigationBarItem = <Route extends BaseRoute>({
   const tabBadge = (
     <View style={[styles.badgeContainer, badgeStyle]}>
       {typeof badge === 'boolean' ? (
-        <Badge visible={badge} size={6} />
+        <Badge visible={badge} />
       ) : (
-        <Badge visible={badge != null} size={16}>
-          {badge}
-        </Badge>
+        <Badge visible={badge != null}>{badge}</Badge>
       )}
     </View>
   );

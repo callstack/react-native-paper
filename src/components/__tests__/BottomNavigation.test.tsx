@@ -151,13 +151,12 @@ it('calls onIndexChange', async () => {
       renderScene={renderScene}
     />
   );
-  // The active scene also renders the route title, so target the last match
-  // (the tab label) to fire the tab press.
+  await layoutNavigationBar();
   // pressing same index as active navigation state does not call onIndexChange
-  fireEvent(screen.getAllByText('Route: 0').at(-1)!, 'onPress');
+  await userEvent.press(getTab(0));
   expect(onIndexChange).not.toHaveBeenCalled();
 
-  fireEvent(screen.getAllByText('Route: 1').at(-1)!, 'onPress');
+  await userEvent.press(getTab(1));
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
@@ -173,7 +172,8 @@ it('calls onTabPress', async () => {
       renderScene={renderScene}
     />
   );
-  fireEvent(screen.getAllByText('Route: 1').at(-1)!, 'onPress');
+  await layoutNavigationBar();
+  await userEvent.press(getTab(1));
   expect(onTabPress).toHaveBeenCalled();
   expect(onTabPress).toHaveBeenCalledTimes(1);
   expect(onTabPress).toHaveBeenLastCalledWith(
@@ -199,7 +199,8 @@ it('calls onTabLongPress', async () => {
       renderScene={renderScene}
     />
   );
-  fireEvent(screen.getAllByText('Route: 2').at(-1)!, 'onLongPress');
+  await layoutNavigationBar();
+  await userEvent.longPress(getTab(2));
   expect(onTabLongPress).toHaveBeenCalled();
   expect(onTabLongPress).toHaveBeenCalledTimes(1);
   expect(onTabLongPress).toHaveBeenLastCalledWith(
@@ -432,8 +433,8 @@ it('does not render the legacy ripple overlay', async () => {
   ).not.toBeOnTheScreen();
 });
 
-it('renders tab labels when labeled', () => {
-  const { getAllByText } = render(
+it('renders tab labels when labeled', async () => {
+  await render(
     <NavigationBar
       navigationState={{
         index: 0,
@@ -447,24 +448,26 @@ it('renders tab labels when labeled', () => {
   );
 
   // Each tab renders a single label (no cross-fade layers).
-  expect(getAllByText('Alpha').length).toBeGreaterThan(0);
-  expect(getAllByText('Beta').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('Alpha').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('Beta').length).toBeGreaterThan(0);
 });
 
-it('renders the horizontal (flexible) variant', () => {
-  const tree = render(
-    <NavigationBar
-      navigationState={createState(0, 3)}
-      onTabPress={jest.fn()}
-      variant="horizontal"
-    />
+it('renders the horizontal (flexible) variant', async () => {
+  const tree = (
+    await render(
+      <NavigationBar
+        navigationState={createState(0, 3)}
+        onTabPress={jest.fn()}
+        variant="horizontal"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('falls back to icon-only when horizontal is combined with labeled=false', () => {
-  const { queryByText } = render(
+it('falls back to icon-only when horizontal is combined with labeled=false', async () => {
+  await render(
     <NavigationBar
       navigationState={createState(0, 3)}
       onTabPress={jest.fn()}
@@ -474,11 +477,11 @@ it('falls back to icon-only when horizontal is combined with labeled=false', () 
   );
 
   // `horizontal` is a no-op without labels, so no label text is rendered.
-  expect(queryByText('Route: 0')).toBeNull();
-  expect(queryByText('Route: 1')).toBeNull();
+  expect(screen.queryByText('Route: 0')).toBeNull();
+  expect(screen.queryByText('Route: 1')).toBeNull();
 });
 
-it('renders MD3 state layers on hover, focus and press', () => {
+it('renders MD3 state layers on hover, focus and press', async () => {
   const navigationState = {
     index: 0,
     routes: [
@@ -487,35 +490,34 @@ it('renders MD3 state layers on hover, focus and press', () => {
     ],
   };
 
-  const { getByTestId } = render(
+  await render(
     <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
   );
 
-  const layerOpacity = () =>
-    StyleSheet.flatten(getByTestId('tab-b-state-layer').props.style).opacity;
+  const stateLayer = () => screen.getByTestId('tab-b-state-layer');
 
   // Idle: no visible state layer.
-  expect(layerOpacity()).toBeUndefined();
+  expect(stateLayer()).toHaveStyle({ opacity: undefined });
 
   // Hovered: 8% state layer.
-  fireEvent(getByTestId('tab-b'), 'hoverIn');
-  expect(layerOpacity()).toBe(0.08);
-  fireEvent(getByTestId('tab-b'), 'hoverOut');
-  expect(layerOpacity()).toBeUndefined();
+  await fireEvent(screen.getByTestId('tab-b'), 'hoverIn');
+  expect(stateLayer()).toHaveStyle({ opacity: 0.08 });
+  await fireEvent(screen.getByTestId('tab-b'), 'hoverOut');
+  expect(stateLayer()).toHaveStyle({ opacity: undefined });
 
   // Focused: 10% state layer.
-  fireEvent(getByTestId('tab-b'), 'focus');
-  expect(layerOpacity()).toBe(0.1);
-  fireEvent(getByTestId('tab-b'), 'blur');
+  await fireEvent(screen.getByTestId('tab-b'), 'focus');
+  expect(stateLayer()).toHaveStyle({ opacity: 0.1 });
+  await fireEvent(screen.getByTestId('tab-b'), 'blur');
 
   // Pressed: 10% state layer.
-  fireEvent(getByTestId('tab-b'), 'pressIn');
-  expect(layerOpacity()).toBe(0.1);
-  fireEvent(getByTestId('tab-b'), 'pressOut');
-  expect(layerOpacity()).toBeUndefined();
+  await fireEvent(screen.getByTestId('tab-b'), 'pressIn');
+  expect(stateLayer()).toHaveStyle({ opacity: 0.1 });
+  await fireEvent(screen.getByTestId('tab-b'), 'pressOut');
+  expect(stateLayer()).toHaveStyle({ opacity: undefined });
 });
 
-it('colors the focused tab label with secondary and others with onSurfaceVariant', () => {
+it('colors the focused tab label with secondary and others with onSurfaceVariant', async () => {
   const navigationState = {
     index: 0,
     routes: [
@@ -524,20 +526,19 @@ it('colors the focused tab label with secondary and others with onSurfaceVariant
     ],
   };
 
-  const { getAllByText } = render(
+  await render(
     <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
   );
 
-  const colorsOf = (text: string) =>
-    getAllByText(text).map(
-      (node) => StyleSheet.flatten(node.props.style).color
-    );
-
-  expect(colorsOf('Alpha')).toContain(getTheme().colors.secondary);
-  expect(colorsOf('Beta')).toContain(getTheme().colors.onSurfaceVariant);
+  expect(screen.getAllByText('Alpha').at(-1)).toHaveStyle({
+    color: getTheme().colors.secondary,
+  });
+  expect(screen.getAllByText('Beta').at(-1)).toHaveStyle({
+    color: getTheme().colors.onSurfaceVariant,
+  });
 });
 
-it('renders the active indicator with the secondaryContainer color', () => {
+it('renders the active indicator with the secondaryContainer color', async () => {
   const navigationState = {
     index: 0,
     routes: [
@@ -546,17 +547,16 @@ it('renders the active indicator with the secondaryContainer color', () => {
     ],
   };
 
-  const { getByTestId } = render(
+  await render(
     <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
   );
 
-  expect(
-    StyleSheet.flatten(getByTestId('tab-a-active-indicator').props.style)
-      .backgroundColor
-  ).toBe(getTheme().colors.secondaryContainer);
+  expect(screen.getByTestId('tab-a-active-indicator')).toHaveStyle({
+    backgroundColor: getTheme().colors.secondaryContainer,
+  });
 });
 
-it('renders a badge for routes that define one', () => {
+it('renders a badge for routes that define one', async () => {
   const navigationState = {
     index: 0,
     routes: [
@@ -565,11 +565,11 @@ it('renders a badge for routes that define one', () => {
     ],
   };
 
-  const { getByText } = render(
+  await render(
     <NavigationBar navigationState={navigationState} onTabPress={jest.fn()} />
   );
 
-  expect(getByText('3')).toBeTruthy();
+  expect(screen.getByText('3')).toBeTruthy();
 });
 
 describe('getActiveTintColor', () => {
