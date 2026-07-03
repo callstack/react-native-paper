@@ -18,13 +18,6 @@
   "Banner",
   {
     "type": "dir",
-    "name": "BottomNavigation",
-    "label": "BottomNavigation",
-    "collapsible": true,
-    "collapsed": false
-  },
-  {
-    "type": "dir",
     "name": "Button",
     "label": "Button",
     "collapsible": true,

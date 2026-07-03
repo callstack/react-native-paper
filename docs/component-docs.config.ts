@@ -38,9 +38,6 @@ const pages = {
   },
   Badge: 'Badge',
   Banner: 'Banner',
-  BottomNavigation: {
-    BottomNavigation: 'BottomNavigation/BottomNavigation',
-  },
   Button: {
     Button: 'Button/Button',
   },

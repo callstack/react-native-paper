@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  Easing,
   FlatList,
   ScrollView,
   StyleSheet,
@@ -11,7 +10,7 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {
   Appbar,
-  BottomNavigation,
+  NavigationBar,
   Card,
   Button,
   Text,
@@ -211,20 +210,19 @@ const ThemeBasedOnSourceColor = () => {
           <Appbar.BackAction onPress={() => navigation.goBack()} />
           <Appbar.Content title={headerTitle} />
         </Appbar.Header>
-        <BottomNavigation
+        <View style={styles.scene}>
+          {routes[index].key === 'news' && <News />}
+          {routes[index].key === 'results' && <Results />}
+          {routes[index].key === 'roster' && <Roster />}
+        </View>
+        <NavigationBar
           safeAreaInsets={{ bottom: insets.bottom }}
           navigationState={{ index, routes }}
-          onIndexChange={setIndex}
+          onTabPress={({ route }) => {
+            const i = routes.findIndex((r) => r.key === route.key);
+            if (i !== -1 && i !== index) setIndex(i);
+          }}
           labelMaxFontSizeMultiplier={2}
-          renderScene={BottomNavigation.SceneMap({
-            news: News,
-            results: Results,
-            roster: Roster,
-          })}
-          sceneAnimationEnabled
-          sceneAnimationType={'opacity'}
-          sceneAnimationEasing={Easing.ease}
-          getLazy={({ route }) => route.key !== 'album'}
         />
       </View>
     </PaperProvider>
@@ -237,6 +235,9 @@ export default ThemeBasedOnSourceColor;
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
+  },
+  scene: {
     flex: 1,
   },
   winner: {
