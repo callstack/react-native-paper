@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, Easing, StyleSheet, Pressable, View } from 'react-native';
+import {
+  Animated,
+  Easing,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -206,7 +212,16 @@ function Modal({
         ]}
         testID={`${testID}-backdrop`}
       />
-      <View
+      {/*
+       * Keep the modal content clear of the soft keyboard. In legacy Android
+       * (non edge-to-edge) the window is resized by `adjustResize`, so the
+       * centered content shifts up on its own. In edge-to-edge mode (Android
+       * 15+ default) the window is no longer resized, so we rely on
+       * `KeyboardAvoidingView` to reserve space for the keyboard instead. It
+       * measures its own frame, so it doesn't double up with `adjustResize`.
+       */}
+      <KeyboardAvoidingView
+        behavior="padding"
         style={[
           styles.wrapper,
           { marginTop: top, marginBottom: bottom },
@@ -223,7 +238,7 @@ function Modal({
         >
           {children}
         </Surface>
-      </View>
+      </KeyboardAvoidingView>
     </Animated.View>
   );
 }
