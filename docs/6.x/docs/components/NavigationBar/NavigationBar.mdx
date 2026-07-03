@@ -8,35 +8,74 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-The Material Design 3 flexible navigation bar. It can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
+The Material Design 3 flexible navigation bar. It can easily be integrated
+with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
 
-The flexible navigation bar replaces the original (now deprecated) navigation bar exposed as `BottomNavigation.Bar`. Set the `variant` prop to `'horizontal'` to lay items out horizontally (icon beside label) in medium-width windows.
+Set the `variant` prop to `'horizontal'` to lay items out horizontally
+(icon beside label) in medium-width windows.
+
+
+
+<span />
 
 ## Usage
+### without React Navigation
 ```js
 import * as React from 'react';
-import { NavigationBar } from 'react-native-paper';
+import { View } from 'react-native';
+import { NavigationBar, Text, Provider } from 'react-native-paper';
 
-const MyComponent = () => {
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+  </View>
+  );
+}
+
+export default function MyComponent() {
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'music', title: 'Favorites', focusedIcon: 'heart' },
-    { key: 'albums', title: 'Albums', focusedIcon: 'album' },
-    { key: 'recents', title: 'Recents', focusedIcon: 'history' },
-  ]);
+
+  const routes = [
+    { key: 'home', title: 'Home', focusedIcon: 'home' },
+    { key: 'settings', title: 'Settings', focusedIcon: 'cog' },
+  ];
+
+  const renderScene = ({ route }) => {
+    switch (route.key) {
+      case 'home':
+        return <HomeScreen />;
+      case 'settings':
+        return <SettingsScreen />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <NavigationBar
-      navigationState={{ index, routes }}
-      onTabPress={({ route }) => {
-        const newIndex = routes.findIndex((r) => r.key === route.key);
-        setIndex(newIndex);
-      }}
-    />
+    <Provider>
+      {renderScene({ route: routes[index] })}
+      <NavigationBar
+        navigationState={{ index, routes }}
+        onTabPress={({ route }) => {
+          const newIndex = routes.findIndex((r) => r.key === route.key);
+          if (newIndex !== -1) {
+            setIndex(newIndex);
+          }
+        }}
+        getLabelText={({ route }) => route.title}
+      />
+    </Provider>
   );
-};
-
-export default MyComponent;
+}
 ```
 
 
@@ -76,22 +115,6 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="NavigationBar/NavigationBar" prop="navigationState" />
-
-<div>
-
-### onTabPress (required)
-
-</div>
-
-  <PropTable componentLink="NavigationBar/NavigationBar" prop="onTabPress" />
-
-<div>
-
-### onTabLongPress
-
-</div>
-
-  <PropTable componentLink="NavigationBar/NavigationBar" prop="onTabLongPress" />
 
 <div>
 
@@ -151,6 +174,22 @@ export default MyComponent;
 
 <div>
 
+### onTabPress (required)
+
+</div>
+
+  <PropTable componentLink="NavigationBar/NavigationBar" prop="onTabPress" />
+
+<div>
+
+### onTabLongPress
+
+</div>
+
+  <PropTable componentLink="NavigationBar/NavigationBar" prop="onTabLongPress" />
+
+<div>
+
 ### activeColor
 
 </div>
@@ -164,14 +203,6 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="NavigationBar/NavigationBar" prop="inactiveColor" />
-
-<div>
-
-### animationEasing
-
-</div>
-
-  <PropTable componentLink="NavigationBar/NavigationBar" prop="animationEasing" />
 
 <div>
 
@@ -207,11 +238,27 @@ export default MyComponent;
 
 <div>
 
+### activeIndicatorStyle
+
+</div>
+
+  <PropTable componentLink="NavigationBar/NavigationBar" prop="activeIndicatorStyle" />
+
+<div>
+
 ### theme
 
 </div>
 
   <PropTable componentLink="NavigationBar/NavigationBar" prop="theme" />
+
+<div>
+
+### testID
+
+</div>
+
+  <PropTable componentLink="NavigationBar/NavigationBar" prop="testID" />
 
 
 

@@ -1263,10 +1263,10 @@
     "BottomNavigation/BottomNavigation": {
       "filepath": "BottomNavigation/BottomNavigation.tsx",
       "title": "BottomNavigation",
-      "description": "BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.\nIt is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).\n\nBy default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { BottomNavigation, Text } from 'react-native-paper';\n\nconst MusicRoute = () => <Text>Music</Text>;\n\nconst AlbumsRoute = () => <Text>Albums</Text>;\n\nconst RecentsRoute = () => <Text>Recents</Text>;\n\nconst NotificationsRoute = () => <Text>Notifications</Text>;\n\nconst MyComponent = () => {\n  const [index, setIndex] = React.useState(0);\n  const [routes] = React.useState([\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]);\n\n  const renderScene = BottomNavigation.SceneMap({\n    music: MusicRoute,\n    albums: AlbumsRoute,\n    recents: RecentsRoute,\n    notifications: NotificationsRoute,\n  });\n\n  return (\n    <BottomNavigation\n      navigationState={{ index, routes }}\n      onIndexChange={setIndex}\n      renderScene={renderScene}\n    />\n  );\n};\n\nexport default MyComponent;\n```",
+      "description": "BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.\nIt is primarily designed for use on mobile. If you want to use the navigation bar only see [`NavigationBar`](../NavigationBar/NavigationBar).\n\nBy default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { BottomNavigation, Text } from 'react-native-paper';\n\nconst MusicRoute = () => <Text>Music</Text>;\n\nconst AlbumsRoute = () => <Text>Albums</Text>;\n\nconst RecentsRoute = () => <Text>Recents</Text>;\n\nconst NotificationsRoute = () => <Text>Notifications</Text>;\n\nconst MyComponent = () => {\n  const [index, setIndex] = React.useState(0);\n  const [routes] = React.useState([\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]);\n\n  const renderScene = BottomNavigation.SceneMap({\n    music: MusicRoute,\n    albums: AlbumsRoute,\n    recents: RecentsRoute,\n    notifications: NotificationsRoute,\n  });\n\n  return (\n    <BottomNavigation\n      navigationState={{ index, routes }}\n      onIndexChange={setIndex}\n      renderScene={renderScene}\n    />\n  );\n};\n\nexport default MyComponent;\n```",
       "link": "bottom-navigation",
       "data": {
-        "description": "BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.\nIt is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).\n\nBy default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { BottomNavigation, Text } from 'react-native-paper';\n\nconst MusicRoute = () => <Text>Music</Text>;\n\nconst AlbumsRoute = () => <Text>Albums</Text>;\n\nconst RecentsRoute = () => <Text>Recents</Text>;\n\nconst NotificationsRoute = () => <Text>Notifications</Text>;\n\nconst MyComponent = () => {\n  const [index, setIndex] = React.useState(0);\n  const [routes] = React.useState([\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]);\n\n  const renderScene = BottomNavigation.SceneMap({\n    music: MusicRoute,\n    albums: AlbumsRoute,\n    recents: RecentsRoute,\n    notifications: NotificationsRoute,\n  });\n\n  return (\n    <BottomNavigation\n      navigationState={{ index, routes }}\n      onIndexChange={setIndex}\n      renderScene={renderScene}\n    />\n  );\n};\n\nexport default MyComponent;\n```",
+        "description": "BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.\nIt is primarily designed for use on mobile. If you want to use the navigation bar only see [`NavigationBar`](../NavigationBar/NavigationBar).\n\nBy default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { BottomNavigation, Text } from 'react-native-paper';\n\nconst MusicRoute = () => <Text>Music</Text>;\n\nconst AlbumsRoute = () => <Text>Albums</Text>;\n\nconst RecentsRoute = () => <Text>Recents</Text>;\n\nconst NotificationsRoute = () => <Text>Notifications</Text>;\n\nconst MyComponent = () => {\n  const [index, setIndex] = React.useState(0);\n  const [routes] = React.useState([\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]);\n\n  const renderScene = BottomNavigation.SceneMap({\n    music: MusicRoute,\n    albums: AlbumsRoute,\n    recents: RecentsRoute,\n    notifications: NotificationsRoute,\n  });\n\n  return (\n    <BottomNavigation\n      navigationState={{ index, routes }}\n      onIndexChange={setIndex}\n      renderScene={renderScene}\n    />\n  );\n};\n\nexport default MyComponent;\n```",
         "displayName": "BottomNavigation",
         "methods": [
           {
@@ -1346,13 +1346,6 @@
         ],
         "statics": [],
         "props": {
-          "shifting": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.\n\nBy default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.\nPass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.\nNote that you need at least 2 tabs be able to run this animation."
-          },
           "labeled": {
             "required": false,
             "tsType": {
@@ -2051,7 +2044,7 @@
             "tsType": {
               "name": "boolean"
             },
-            "description": "Whether animation is enabled for scenes transitions in `shifting` mode.\nBy default, the scenes cross-fade during tab change when `shifting` is enabled.\nSpecify `sceneAnimationEnabled` as `false` to disable the animation.",
+            "description": "Whether animation is enabled for scene transitions.\nBy default, the scenes cross-fade during tab change.\nSpecify `sceneAnimationEnabled` as `false` to disable the animation.",
             "defaultValue": {
               "value": "false",
               "computed": false
@@ -2227,737 +2220,6 @@
       "dependencies": [
         "src/components/BottomNavigation/BottomNavigation.tsx"
       ]
-    },
-    "BottomNavigation/BottomNavigationBar": {
-      "filepath": "BottomNavigation/BottomNavigationBar.tsx",
-      "title": "BottomNavigation.Bar",
-      "description": "A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).\n\n## Usage\n### without React Navigation\n```js\nimport React from 'react';\nimport { useState } from 'react';\nimport { View } from 'react-native';\nimport { BottomNavigation, Text, Provider } from 'react-native-paper';\nimport MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';\n\nfunction HomeScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Home!</Text>\n    </View>\n  );\n}\n\nfunction SettingsScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Settings!</Text>\n  </View>\n  );\n}\n\nexport default function MyComponent() {\n  const [index, setIndex] = useState(0);\n\n  const routes = [\n    { key: 'home', title: 'Home', icon: 'home' },\n    { key: 'settings', title: 'Settings', icon: 'cog' },\n  ];\n\n  const renderScene = ({ route }) => {\n    switch (route.key) {\n      case 'home':\n        return <HomeScreen />;\n      case 'settings':\n        return <SettingsScreen />;\n      default:\n        return null;\n    }\n  };\n\n  return (\n    <Provider>\n      {renderScene({ route: routes[index] })}\n      <BottomNavigation.Bar\n        navigationState={{ index, routes }}\n        onTabPress={({ route }) => {\n          const newIndex = routes.findIndex((r) => r.key === route.key);\n          if (newIndex !== -1) {\n            setIndex(newIndex);\n          }\n        }}\n        renderIcon={({ route, color }) => (\n          <Icon name={route.icon} size={24} color={color} />\n        )}\n        getLabelText={({ route }) => route.title}\n      />\n    </Provider>\n  );\n}\n```",
-      "link": "bottom-navigation-bar",
-      "data": {
-        "description": "A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).\n\n## Usage\n### without React Navigation\n```js\nimport React from 'react';\nimport { useState } from 'react';\nimport { View } from 'react-native';\nimport { BottomNavigation, Text, Provider } from 'react-native-paper';\nimport MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';\n\nfunction HomeScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Home!</Text>\n    </View>\n  );\n}\n\nfunction SettingsScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Settings!</Text>\n  </View>\n  );\n}\n\nexport default function MyComponent() {\n  const [index, setIndex] = useState(0);\n\n  const routes = [\n    { key: 'home', title: 'Home', icon: 'home' },\n    { key: 'settings', title: 'Settings', icon: 'cog' },\n  ];\n\n  const renderScene = ({ route }) => {\n    switch (route.key) {\n      case 'home':\n        return <HomeScreen />;\n      case 'settings':\n        return <SettingsScreen />;\n      default:\n        return null;\n    }\n  };\n\n  return (\n    <Provider>\n      {renderScene({ route: routes[index] })}\n      <BottomNavigation.Bar\n        navigationState={{ index, routes }}\n        onTabPress={({ route }) => {\n          const newIndex = routes.findIndex((r) => r.key === route.key);\n          if (newIndex !== -1) {\n            setIndex(newIndex);\n          }\n        }}\n        renderIcon={({ route, color }) => (\n          <Icon name={route.icon} size={24} color={color} />\n        )}\n        getLabelText={({ route }) => route.title}\n      />\n    </Provider>\n  );\n}\n```",
-        "displayName": "BottomNavigation.Bar",
-        "methods": [],
-        "statics": [],
-        "props": {
-          "shifting": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.\n\nBy default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.\nPass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.\nNote that you need at least 2 tabs be able to run this animation."
-          },
-          "labeled": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Whether to show labels in tabs. When `false`, only icons will be displayed.",
-            "defaultValue": {
-              "value": "true",
-              "computed": false
-            }
-          },
-          "compact": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Whether tabs should be spread across the entire width."
-          },
-          "navigationState": {
-            "required": true,
-            "tsType": {
-              "name": "signature",
-              "type": "object",
-              "raw": "{\n  index: number;\n  routes: Route[];\n}",
-              "signature": {
-                "properties": [
-                  {
-                    "key": "index",
-                    "value": {
-                      "name": "number",
-                      "required": true
-                    }
-                  },
-                  {
-                    "key": "routes",
-                    "value": {
-                      "name": "Array",
-                      "elements": [
-                        {
-                          "name": "Route"
-                        }
-                      ],
-                      "raw": "Route[]",
-                      "required": true
-                    }
-                  }
-                ]
-              }
-            },
-            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `aria-label`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback."
-          },
-          "renderIcon": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: {\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}) => React.ReactNode",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          },
-                          {
-                            "key": "focused",
-                            "value": {
-                              "name": "boolean",
-                              "required": true
-                            }
-                          },
-                          {
-                            "key": "color",
-                            "value": {
-                              "name": "ColorValue",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "ReactReactNode",
-                  "raw": "React.ReactNode"
-                }
-              }
-            },
-            "description": "Callback which returns a React Element to be used as tab icon."
-          },
-          "renderLabel": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: {\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}) => React.ReactNode",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          },
-                          {
-                            "key": "focused",
-                            "value": {
-                              "name": "boolean",
-                              "required": true
-                            }
-                          },
-                          {
-                            "key": "color",
-                            "value": {
-                              "name": "ColorValue",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "ReactReactNode",
-                  "raw": "React.ReactNode"
-                }
-              }
-            },
-            "description": "Callback which React Element to be used as tab label."
-          },
-          "renderTouchable": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: TouchableProps<Route>) => React.ReactNode",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "intersection",
-                      "raw": "TouchableRippleProps & {\n  key: string;\n  route: Route;\n  children: React.ReactNode;\n  borderless?: boolean;\n  centered?: boolean;\n  rippleColor?: ColorValue;\n}",
-                      "elements": [
-                        {
-                          "name": "TouchableRippleProps"
-                        },
-                        {
-                          "name": "signature",
-                          "type": "object",
-                          "raw": "{\n  key: string;\n  route: Route;\n  children: React.ReactNode;\n  borderless?: boolean;\n  centered?: boolean;\n  rippleColor?: ColorValue;\n}",
-                          "signature": {
-                            "properties": [
-                              {
-                                "key": "key",
-                                "value": {
-                                  "name": "string",
-                                  "required": true
-                                }
-                              },
-                              {
-                                "key": "route",
-                                "value": {
-                                  "name": "Route",
-                                  "required": true
-                                }
-                              },
-                              {
-                                "key": "children",
-                                "value": {
-                                  "name": "ReactReactNode",
-                                  "raw": "React.ReactNode",
-                                  "required": true
-                                }
-                              },
-                              {
-                                "key": "borderless",
-                                "value": {
-                                  "name": "boolean",
-                                  "required": false
-                                }
-                              },
-                              {
-                                "key": "centered",
-                                "value": {
-                                  "name": "boolean",
-                                  "required": false
-                                }
-                              },
-                              {
-                                "key": "rippleColor",
-                                "value": {
-                                  "name": "ColorValue",
-                                  "required": false
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "ReactReactNode",
-                  "raw": "React.ReactNode"
-                }
-              }
-            },
-            "description": "Callback which returns a React element to be used as the touchable for the tab item.\nRenders a `TouchableRipple` on Android and `Pressable` on iOS.",
-            "defaultValue": {
-              "value": "({ key, ...props }: TouchableProps<Route>) => (\n  <Touchable key={key} {...props} />\n)",
-              "computed": false
-            }
-          },
-          "getAccessibilityLabel": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route }) => string | undefined",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{ route: Route }",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "union",
-                  "raw": "string | undefined",
-                  "elements": [
-                    {
-                      "name": "string"
-                    },
-                    {
-                      "name": "undefined"
-                    }
-                  ]
-                }
-              }
-            },
-            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route['aria-label']` by default.",
-            "defaultValue": {
-              "value": "({ route }: { route: Route }) => route['aria-label']",
-              "computed": false
-            }
-          },
-          "getBadge": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route }) => boolean | number | string | undefined",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{ route: Route }",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "union",
-                  "raw": "boolean | number | string | undefined",
-                  "elements": [
-                    {
-                      "name": "boolean"
-                    },
-                    {
-                      "name": "number"
-                    },
-                    {
-                      "name": "string"
-                    },
-                    {
-                      "name": "undefined"
-                    }
-                  ]
-                }
-              }
-            },
-            "description": "Get badge for the tab, uses `route.badge` by default.",
-            "defaultValue": {
-              "value": "({ route }: { route: Route }) => route.badge",
-              "computed": false
-            }
-          },
-          "getLabelText": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route }) => string | undefined",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{ route: Route }",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "union",
-                  "raw": "string | undefined",
-                  "elements": [
-                    {
-                      "name": "string"
-                    },
-                    {
-                      "name": "undefined"
-                    }
-                  ]
-                }
-              }
-            },
-            "description": "Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.",
-            "defaultValue": {
-              "value": "({ route }: { route: Route }) => route.title",
-              "computed": false
-            }
-          },
-          "getTestID": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route }) => string | undefined",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{ route: Route }",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "route",
-                            "value": {
-                              "name": "Route",
-                              "required": true
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "union",
-                  "raw": "string | undefined",
-                  "elements": [
-                    {
-                      "name": "string"
-                    },
-                    {
-                      "name": "undefined"
-                    }
-                  ]
-                }
-              }
-            },
-            "description": "Get the id to locate this tab button in tests, uses `route.testID` by default.",
-            "defaultValue": {
-              "value": "({ route }: { route: Route }) => route.testID",
-              "computed": false
-            }
-          },
-          "onTabPress": {
-            "required": true,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route } & TabPressEvent) => void",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "intersection",
-                      "raw": "{ route: Route } & TabPressEvent",
-                      "elements": [
-                        {
-                          "name": "signature",
-                          "type": "object",
-                          "raw": "{ route: Route }",
-                          "signature": {
-                            "properties": [
-                              {
-                                "key": "route",
-                                "value": {
-                                  "name": "Route",
-                                  "required": true
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "signature",
-                          "type": "object",
-                          "raw": "{\n  defaultPrevented: boolean;\n  preventDefault(): void;\n}",
-                          "signature": {
-                            "properties": [
-                              {
-                                "key": "defaultPrevented",
-                                "value": {
-                                  "name": "boolean",
-                                  "required": true
-                                }
-                              },
-                              {
-                                "key": "preventDefault",
-                                "value": {
-                                  "name": "void",
-                                  "required": true
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "void"
-                }
-              }
-            },
-            "description": "Function to execute on tab press. It receives the route for the pressed tab. Use this to update the navigation state."
-          },
-          "onTabLongPress": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(props: { route: Route } & TabPressEvent) => void",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "props",
-                    "type": {
-                      "name": "intersection",
-                      "raw": "{ route: Route } & TabPressEvent",
-                      "elements": [
-                        {
-                          "name": "signature",
-                          "type": "object",
-                          "raw": "{ route: Route }",
-                          "signature": {
-                            "properties": [
-                              {
-                                "key": "route",
-                                "value": {
-                                  "name": "Route",
-                                  "required": true
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "signature",
-                          "type": "object",
-                          "raw": "{\n  defaultPrevented: boolean;\n  preventDefault(): void;\n}",
-                          "signature": {
-                            "properties": [
-                              {
-                                "key": "defaultPrevented",
-                                "value": {
-                                  "name": "boolean",
-                                  "required": true
-                                }
-                              },
-                              {
-                                "key": "preventDefault",
-                                "value": {
-                                  "name": "void",
-                                  "required": true
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "void"
-                }
-              }
-            },
-            "description": "Function to execute on tab long press. It receives the route for the pressed tab"
-          },
-          "activeColor": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": "Custom color for icon and label in the active tab."
-          },
-          "inactiveColor": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": "Custom color for icon and label in the inactive tab."
-          },
-          "animationEasing": {
-            "required": false,
-            "tsType": {
-              "name": "union",
-              "raw": "EasingFunction | undefined",
-              "elements": [
-                {
-                  "name": "EasingFunction"
-                },
-                {
-                  "name": "undefined"
-                }
-              ]
-            },
-            "description": "The scene animation Easing."
-          },
-          "keyboardHidesNavigationBar": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Whether the bottom navigation bar is hidden when keyboard is shown.\nOn Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.",
-            "defaultValue": {
-              "value": "Platform.OS === 'android'",
-              "computed": false
-            }
-          },
-          "safeAreaInsets": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "object",
-              "raw": "{\n  top?: number;\n  right?: number;\n  bottom?: number;\n  left?: number;\n}",
-              "signature": {
-                "properties": [
-                  {
-                    "key": "top",
-                    "value": {
-                      "name": "number",
-                      "required": false
-                    }
-                  },
-                  {
-                    "key": "right",
-                    "value": {
-                      "name": "number",
-                      "required": false
-                    }
-                  },
-                  {
-                    "key": "bottom",
-                    "value": {
-                      "name": "number",
-                      "required": false
-                    }
-                  },
-                  {
-                    "key": "left",
-                    "value": {
-                      "name": "number",
-                      "required": false
-                    }
-                  }
-                ]
-              }
-            },
-            "description": "Safe area insets for the tab bar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.\nThe bottom insets for iOS is added by default. You can override the behavior with this option."
-          },
-          "labelMaxFontSizeMultiplier": {
-            "required": false,
-            "tsType": {
-              "name": "number"
-            },
-            "description": "Specifies the largest possible scale a label font can reach.",
-            "defaultValue": {
-              "value": "1",
-              "computed": false
-            }
-          },
-          "style": {
-            "required": false,
-            "tsType": {
-              "name": "Animated.WithAnimatedValue",
-              "elements": [
-                {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
-                }
-              ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
-            },
-            "description": ""
-          },
-          "activeIndicatorStyle": {
-            "required": false,
-            "tsType": {
-              "name": "StyleProp",
-              "elements": [
-                {
-                  "name": "ViewStyle"
-                }
-              ],
-              "raw": "StyleProp<ViewStyle>"
-            },
-            "description": ""
-          },
-          "theme": {
-            "required": false,
-            "tsType": {
-              "name": "ThemeProp"
-            },
-            "description": ""
-          },
-          "testID": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": "TestID used for testing purposes",
-            "defaultValue": {
-              "value": "'bottom-navigation-bar'",
-              "computed": false
-            }
-          }
-        }
-      },
-      "type": "component",
-      "dependencies": [
-        "src/components/BottomNavigation/BottomNavigationBar.tsx"
-      ],
-      "group": "BottomNavigation"
     },
     "Button/Button": {
       "filepath": "Button/Button.tsx",
@@ -9500,6 +8762,795 @@
       "type": "component",
       "dependencies": [
         "src/components/Modal.tsx"
+      ]
+    },
+    "NavigationBar/NavigationBar": {
+      "filepath": "NavigationBar/NavigationBar.tsx",
+      "title": "NavigationBar",
+      "description": "The Material Design 3 flexible navigation bar. It can easily be integrated\nwith [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).\n\nSet the `variant` prop to `'horizontal'` to lay items out horizontally\n(icon beside label) in medium-width windows.\n\n## Usage\n### without React Navigation\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { NavigationBar, Text, Provider } from 'react-native-paper';\n\nfunction HomeScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Home!</Text>\n    </View>\n  );\n}\n\nfunction SettingsScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Settings!</Text>\n  </View>\n  );\n}\n\nexport default function MyComponent() {\n  const [index, setIndex] = React.useState(0);\n\n  const routes = [\n    { key: 'home', title: 'Home', focusedIcon: 'home' },\n    { key: 'settings', title: 'Settings', focusedIcon: 'cog' },\n  ];\n\n  const renderScene = ({ route }) => {\n    switch (route.key) {\n      case 'home':\n        return <HomeScreen />;\n      case 'settings':\n        return <SettingsScreen />;\n      default:\n        return null;\n    }\n  };\n\n  return (\n    <Provider>\n      {renderScene({ route: routes[index] })}\n      <NavigationBar\n        navigationState={{ index, routes }}\n        onTabPress={({ route }) => {\n          const newIndex = routes.findIndex((r) => r.key === route.key);\n          if (newIndex !== -1) {\n            setIndex(newIndex);\n          }\n        }}\n        getLabelText={({ route }) => route.title}\n      />\n    </Provider>\n  );\n}\n```",
+      "link": "navigation-bar",
+      "data": {
+        "description": "The Material Design 3 flexible navigation bar. It can easily be integrated\nwith [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).\n\nSet the `variant` prop to `'horizontal'` to lay items out horizontally\n(icon beside label) in medium-width windows.\n\n## Usage\n### without React Navigation\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { NavigationBar, Text, Provider } from 'react-native-paper';\n\nfunction HomeScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Home!</Text>\n    </View>\n  );\n}\n\nfunction SettingsScreen() {\n  return (\n    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>\n      <Text>Settings!</Text>\n  </View>\n  );\n}\n\nexport default function MyComponent() {\n  const [index, setIndex] = React.useState(0);\n\n  const routes = [\n    { key: 'home', title: 'Home', focusedIcon: 'home' },\n    { key: 'settings', title: 'Settings', focusedIcon: 'cog' },\n  ];\n\n  const renderScene = ({ route }) => {\n    switch (route.key) {\n      case 'home':\n        return <HomeScreen />;\n      case 'settings':\n        return <SettingsScreen />;\n      default:\n        return null;\n    }\n  };\n\n  return (\n    <Provider>\n      {renderScene({ route: routes[index] })}\n      <NavigationBar\n        navigationState={{ index, routes }}\n        onTabPress={({ route }) => {\n          const newIndex = routes.findIndex((r) => r.key === route.key);\n          if (newIndex !== -1) {\n            setIndex(newIndex);\n          }\n        }}\n        getLabelText={({ route }) => route.title}\n      />\n    </Provider>\n  );\n}\n```",
+        "displayName": "NavigationBar",
+        "methods": [],
+        "statics": [],
+        "props": {
+          "labeled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether to show labels in tabs. When `false`, only icons will be displayed.",
+            "defaultValue": {
+              "value": "true",
+              "computed": false
+            }
+          },
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'stacked' | 'horizontal'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'stacked'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'horizontal'"
+                }
+              ]
+            },
+            "description": "The item layout variant of the flexible navigation bar.\n\n- `stacked` (default): the icon sits above the label.\n- `horizontal`: the icon sits beside the label and the active indicator\n  hugs both. Recommended for medium-width windows (e.g. foldables and\n  tablets). Has no effect when `labeled` is `false`.",
+            "defaultValue": {
+              "value": "'stacked'",
+              "computed": false
+            }
+          },
+          "compact": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether tabs should be spread across the entire width."
+          },
+          "navigationState": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "object",
+              "raw": "{\n  index: number;\n  routes: Route[];\n}",
+              "signature": {
+                "properties": [
+                  {
+                    "key": "index",
+                    "value": {
+                      "name": "number",
+                      "required": true
+                    }
+                  },
+                  {
+                    "key": "routes",
+                    "value": {
+                      "name": "Array",
+                      "elements": [
+                        {
+                          "name": "Route"
+                        }
+                      ],
+                      "raw": "Route[]",
+                      "required": true
+                    }
+                  }
+                ]
+              }
+            },
+            "description": "State for the bottom navigation. The state should contain the following properties:\n\n- `index`: a number representing the index of the active route in the `routes` array\n- `routes`: an array containing a list of route objects used for rendering the tabs\n\nEach route object should contain the following properties:\n\n- `key`: a unique key to identify the route (required)\n- `title`: title of the route to use as the tab label\n- `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x\n- `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3\n- `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.\n- `accessibilityLabel`: accessibility label for the tab button\n- `testID`: test id for the tab button\n\nExample:\n\n```js\n{\n  index: 1,\n  routes: [\n    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},\n    { key: 'albums', title: 'Albums', focusedIcon: 'album' },\n    { key: 'recents', title: 'Recents', focusedIcon: 'history' },\n    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },\n  ]\n}\n```\n\n`NavigationBar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback."
+          },
+          "renderIcon": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: {\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}) => React.ReactNode",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          },
+                          {
+                            "key": "focused",
+                            "value": {
+                              "name": "boolean",
+                              "required": true
+                            }
+                          },
+                          {
+                            "key": "color",
+                            "value": {
+                              "name": "ColorValue",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "ReactReactNode",
+                  "raw": "React.ReactNode"
+                }
+              }
+            },
+            "description": "Callback which returns a React Element to be used as tab icon."
+          },
+          "renderLabel": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: {\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}) => React.ReactNode",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{\n  route: Route;\n  focused: boolean;\n  color: ColorValue;\n}",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          },
+                          {
+                            "key": "focused",
+                            "value": {
+                              "name": "boolean",
+                              "required": true
+                            }
+                          },
+                          {
+                            "key": "color",
+                            "value": {
+                              "name": "ColorValue",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "ReactReactNode",
+                  "raw": "React.ReactNode"
+                }
+              }
+            },
+            "description": "Callback which React Element to be used as tab label."
+          },
+          "renderTouchable": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: TouchableProps<Route>) => React.ReactNode",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "intersection",
+                      "raw": "TouchableRippleProps & {\n  key: string;\n  route: Route;\n  children: React.ReactNode;\n  borderless?: boolean;\n  centered?: boolean;\n  rippleColor?: ColorValue;\n  onHoverIn?: () => void;\n  onHoverOut?: () => void;\n  onFocus?: () => void;\n  onBlur?: () => void;\n}",
+                      "elements": [
+                        {
+                          "name": "TouchableRippleProps"
+                        },
+                        {
+                          "name": "signature",
+                          "type": "object",
+                          "raw": "{\n  key: string;\n  route: Route;\n  children: React.ReactNode;\n  borderless?: boolean;\n  centered?: boolean;\n  rippleColor?: ColorValue;\n  onHoverIn?: () => void;\n  onHoverOut?: () => void;\n  onFocus?: () => void;\n  onBlur?: () => void;\n}",
+                          "signature": {
+                            "properties": [
+                              {
+                                "key": "key",
+                                "value": {
+                                  "name": "string",
+                                  "required": true
+                                }
+                              },
+                              {
+                                "key": "route",
+                                "value": {
+                                  "name": "Route",
+                                  "required": true
+                                }
+                              },
+                              {
+                                "key": "children",
+                                "value": {
+                                  "name": "ReactReactNode",
+                                  "raw": "React.ReactNode",
+                                  "required": true
+                                }
+                              },
+                              {
+                                "key": "borderless",
+                                "value": {
+                                  "name": "boolean",
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "centered",
+                                "value": {
+                                  "name": "boolean",
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "rippleColor",
+                                "value": {
+                                  "name": "ColorValue",
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "onHoverIn",
+                                "value": {
+                                  "name": "signature",
+                                  "type": "function",
+                                  "raw": "() => void",
+                                  "signature": {
+                                    "arguments": [],
+                                    "return": {
+                                      "name": "void"
+                                    }
+                                  },
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "onHoverOut",
+                                "value": {
+                                  "name": "signature",
+                                  "type": "function",
+                                  "raw": "() => void",
+                                  "signature": {
+                                    "arguments": [],
+                                    "return": {
+                                      "name": "void"
+                                    }
+                                  },
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "onFocus",
+                                "value": {
+                                  "name": "signature",
+                                  "type": "function",
+                                  "raw": "() => void",
+                                  "signature": {
+                                    "arguments": [],
+                                    "return": {
+                                      "name": "void"
+                                    }
+                                  },
+                                  "required": false
+                                }
+                              },
+                              {
+                                "key": "onBlur",
+                                "value": {
+                                  "name": "signature",
+                                  "type": "function",
+                                  "raw": "() => void",
+                                  "signature": {
+                                    "arguments": [],
+                                    "return": {
+                                      "name": "void"
+                                    }
+                                  },
+                                  "required": false
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "ReactReactNode",
+                  "raw": "React.ReactNode"
+                }
+              }
+            },
+            "description": "Callback which returns a React element to be used as the touchable for the tab item.\nRenders a `TouchableRipple` on Android and `Pressable` on iOS.",
+            "defaultValue": {
+              "value": "({ key, ...props }: TouchableProps<Route>) => (\n  <Touchable key={key} {...props} />\n)",
+              "computed": false
+            }
+          },
+          "getAccessibilityLabel": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route }) => string | undefined",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ route: Route }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "union",
+                  "raw": "string | undefined",
+                  "elements": [
+                    {
+                      "name": "string"
+                    },
+                    {
+                      "name": "undefined"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.\nUses `route.accessibilityLabel` by default.",
+            "defaultValue": {
+              "value": "({ route }: { route: Route }) =>\nroute.accessibilityLabel",
+              "computed": false
+            }
+          },
+          "getBadge": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route }) => boolean | number | string | undefined",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ route: Route }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "union",
+                  "raw": "boolean | number | string | undefined",
+                  "elements": [
+                    {
+                      "name": "boolean"
+                    },
+                    {
+                      "name": "number"
+                    },
+                    {
+                      "name": "string"
+                    },
+                    {
+                      "name": "undefined"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Get badge for the tab, uses `route.badge` by default.",
+            "defaultValue": {
+              "value": "({ route }: { route: Route }) => route.badge",
+              "computed": false
+            }
+          },
+          "getLabelText": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route }) => string | undefined",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ route: Route }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "union",
+                  "raw": "string | undefined",
+                  "elements": [
+                    {
+                      "name": "string"
+                    },
+                    {
+                      "name": "undefined"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.",
+            "defaultValue": {
+              "value": "({ route }: { route: Route }) => route.title",
+              "computed": false
+            }
+          },
+          "getTestID": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route }) => string | undefined",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ route: Route }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "route",
+                            "value": {
+                              "name": "Route",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "union",
+                  "raw": "string | undefined",
+                  "elements": [
+                    {
+                      "name": "string"
+                    },
+                    {
+                      "name": "undefined"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Get the id to locate this tab button in tests, uses `route.testID` by default.",
+            "defaultValue": {
+              "value": "({ route }: { route: Route }) => route.testID",
+              "computed": false
+            }
+          },
+          "onTabPress": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route } & TabPressEvent) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "intersection",
+                      "raw": "{ route: Route } & TabPressEvent",
+                      "elements": [
+                        {
+                          "name": "signature",
+                          "type": "object",
+                          "raw": "{ route: Route }",
+                          "signature": {
+                            "properties": [
+                              {
+                                "key": "route",
+                                "value": {
+                                  "name": "Route",
+                                  "required": true
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "signature",
+                          "type": "object",
+                          "raw": "{\n  defaultPrevented: boolean;\n  preventDefault(): void;\n}",
+                          "signature": {
+                            "properties": [
+                              {
+                                "key": "defaultPrevented",
+                                "value": {
+                                  "name": "boolean",
+                                  "required": true
+                                }
+                              },
+                              {
+                                "key": "preventDefault",
+                                "value": {
+                                  "name": "void",
+                                  "required": true
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "Function to execute on tab press. It receives the route for the pressed tab. Use this to update the navigation state."
+          },
+          "onTabLongPress": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { route: Route } & TabPressEvent) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "intersection",
+                      "raw": "{ route: Route } & TabPressEvent",
+                      "elements": [
+                        {
+                          "name": "signature",
+                          "type": "object",
+                          "raw": "{ route: Route }",
+                          "signature": {
+                            "properties": [
+                              {
+                                "key": "route",
+                                "value": {
+                                  "name": "Route",
+                                  "required": true
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "signature",
+                          "type": "object",
+                          "raw": "{\n  defaultPrevented: boolean;\n  preventDefault(): void;\n}",
+                          "signature": {
+                            "properties": [
+                              {
+                                "key": "defaultPrevented",
+                                "value": {
+                                  "name": "boolean",
+                                  "required": true
+                                }
+                              },
+                              {
+                                "key": "preventDefault",
+                                "value": {
+                                  "name": "void",
+                                  "required": true
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "Function to execute on tab long press. It receives the route for the pressed tab"
+          },
+          "activeColor": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Custom color for icon and label in the active tab."
+          },
+          "inactiveColor": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Custom color for icon and label in the inactive tab."
+          },
+          "keyboardHidesNavigationBar": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether the bottom navigation bar is hidden when keyboard is shown.\nOn Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.",
+            "defaultValue": {
+              "value": "Platform.OS === 'android'",
+              "computed": false
+            }
+          },
+          "safeAreaInsets": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "object",
+              "raw": "{\n  top?: number;\n  right?: number;\n  bottom?: number;\n  left?: number;\n}",
+              "signature": {
+                "properties": [
+                  {
+                    "key": "top",
+                    "value": {
+                      "name": "number",
+                      "required": false
+                    }
+                  },
+                  {
+                    "key": "right",
+                    "value": {
+                      "name": "number",
+                      "required": false
+                    }
+                  },
+                  {
+                    "key": "bottom",
+                    "value": {
+                      "name": "number",
+                      "required": false
+                    }
+                  },
+                  {
+                    "key": "left",
+                    "value": {
+                      "name": "number",
+                      "required": false
+                    }
+                  }
+                ]
+              }
+            },
+            "description": "Safe area insets for the tab bar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.\nThe bottom insets for iOS is added by default. You can override the behavior with this option."
+          },
+          "labelMaxFontSizeMultiplier": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Specifies the largest possible scale a label font can reach.",
+            "defaultValue": {
+              "value": "1",
+              "computed": false
+            }
+          },
+          "style": {
+            "required": false,
+            "tsType": {
+              "name": "RNAnimated.WithAnimatedValue",
+              "elements": [
+                {
+                  "name": "StyleProp",
+                  "elements": [
+                    {
+                      "name": "ViewStyle"
+                    }
+                  ],
+                  "raw": "StyleProp<ViewStyle>"
+                }
+              ],
+              "raw": "RNAnimated.WithAnimatedValue<StyleProp<ViewStyle>>"
+            },
+            "description": ""
+          },
+          "activeIndicatorStyle": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": ""
+          },
+          "theme": {
+            "required": false,
+            "tsType": {
+              "name": "ThemeProp"
+            },
+            "description": ""
+          },
+          "testID": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "TestID used for testing purposes",
+            "defaultValue": {
+              "value": "'bottom-navigation-bar'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "type": "component",
+      "dependencies": [
+        "src/components/NavigationBar/NavigationBar.tsx"
       ]
     },
     "Portal/Portal": {

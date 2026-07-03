@@ -128,8 +128,18 @@ const getVersionComponentOrder = (version: string): MetaEntry[] => {
     return fromConfig;
   }
 
+  const componentsDir = path.join(getVersionDocsDir(version), 'components');
+  const filteredFromConfig = fromConfig.filter((entry) => {
+    const name = typeof entry === 'string' ? entry : entry.name;
+    return (
+      fs.existsSync(path.join(componentsDir, name)) ||
+      fs.existsSync(path.join(componentsDir, `${name}.mdx`)) ||
+      fs.existsSync(path.join(componentsDir, `${name}.md`))
+    );
+  });
+
   return [
-    ...fromConfig,
+    ...filteredFromConfig,
     {
       type: 'dir',
       name: 'HelperText',
