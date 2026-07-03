@@ -217,7 +217,7 @@ const RadioButtonItem = ({
         {isLeading && radioButton}
         <Text
           variant={labelVariant}
-          testID={`${testID}-text`}
+          testID={testID ? `${testID}-text` : undefined}
           style={[styles.label, computedStyle, labelStyle]}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         >

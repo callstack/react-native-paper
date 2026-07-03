@@ -40,9 +40,12 @@ exports[`RadioButtonGroup renders properly 1`] = `
         {
           "overflow": "hidden",
         },
-        {
-          "borderRadius": 18,
-        },
+        [
+          {
+            "borderRadius": 18,
+          },
+          undefined,
+        ],
       ]
     }
   >

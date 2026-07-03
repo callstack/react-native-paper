@@ -37,9 +37,12 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-      },
+      [
+        {
+          "borderRadius": 18,
+        },
+        undefined,
+      ],
     ]
   }
   testID="custom:testID"
@@ -101,9 +104,12 @@ exports[`RadioButton renders properly 1`] = `
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-      },
+      [
+        {
+          "borderRadius": 18,
+        },
+        undefined,
+      ],
     ]
   }
 >
@@ -164,9 +170,12 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-      },
+      [
+        {
+          "borderRadius": 18,
+        },
+        undefined,
+      ],
     ]
   }
 >

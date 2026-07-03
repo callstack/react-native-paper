@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import Animated, {
   Easing,
@@ -15,6 +16,7 @@ import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -33,7 +35,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: (param?: any) => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked radio.
    */
@@ -178,9 +180,18 @@ const RadioButton = ({
           accessibilityState: { disabled: !!disabled, checked },
         };
 
+  const { style: restStyle, ...restProps } = rest;
+  const combinedStyle =
+    typeof restStyle === 'function'
+      ? (state: PressableStateCallbackType) => [
+          styles.container,
+          restStyle(state),
+        ]
+      : [styles.container, restStyle];
+
   return (
     <TouchableRipple
-      {...rest}
+      {...restProps}
       borderless
       onPress={(event) => {
         handlePress({
@@ -192,7 +203,7 @@ const RadioButton = ({
       }}
       disabled={disabled}
       {...accessibilityProps}
-      style={styles.container}
+      style={combinedStyle}
       testID={testID}
       theme={theme}
     >

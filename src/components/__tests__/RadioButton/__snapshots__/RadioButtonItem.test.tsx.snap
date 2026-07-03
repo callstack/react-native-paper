@@ -91,9 +91,12 @@ exports[`can render leading radio button control 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 18,
-          },
+          [
+            {
+              "borderRadius": 18,
+            },
+            undefined,
+          ],
         ]
       }
     >
@@ -149,7 +152,6 @@ exports[`can render leading radio button control 1`] = `
           ],
         ]
       }
-      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -247,7 +249,6 @@ exports[`renders unchecked 1`] = `
           ],
         ]
       }
-      testID="undefined-text"
     >
       Unchecked Button
     </Text>
@@ -286,9 +287,12 @@ exports[`renders unchecked 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 18,
-          },
+          [
+            {
+              "borderRadius": 18,
+            },
+            undefined,
+          ],
         ]
       }
     >
