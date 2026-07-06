@@ -199,7 +199,6 @@ describe('CardActions', () => {
 
     expect(screen.getByTestId('card-actions')).toHaveStyle({
       flexDirection: 'row',
-      gap: 8,
       justifyContent: 'flex-end',
     });
   });

@@ -41,10 +41,16 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
 
   const justifyContent = 'flex-end' as ViewStyle['justifyContent'];
   const containerStyle = [styles.container, { justifyContent }, style];
+  const items = React.Children.toArray(children);
 
   return (
     <View {...rest} style={containerStyle}>
-      {children}
+      {items.map((child, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && <View style={styles.spacer} />}
+          {child}
+        </React.Fragment>
+      ))}
     </View>
   );
 };
@@ -55,8 +61,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
     padding: 8,
+  },
+  spacer: {
+    width: 8,
   },
 });
 

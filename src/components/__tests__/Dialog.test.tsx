@@ -179,21 +179,23 @@ describe('DialogActions', () => {
   it('should apply default styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
+        <Button testID="button-cancel">Cancel</Button>
+        <Button testID="button-ok">Ok</Button>
       </Dialog.Actions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
-      gap: 8,
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).not.toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).not.toHaveStyle({ marginRight: 0 });
+    expect(screen.getByTestId('button-cancel-container')).not.toHaveStyle({
+      marginRight: 8,
+    });
+    expect(screen.getByTestId('button-ok-container')).not.toHaveStyle({
+      marginRight: 0,
+    });
   });
 
   it('should not inject button props into actions', async () => {
@@ -223,16 +225,21 @@ describe('DialogActions', () => {
   it('should apply custom styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
+        <Button testID="button-cancel" style={styles.spacing}>
+          Cancel
+        </Button>
+        <Button testID="button-ok" style={styles.noSpacing}>
+          Ok
+        </Button>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
-
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(screen.getByTestId('button-cancel-container')).toHaveStyle({
+      margin: 10,
+    });
+    expect(screen.getByTestId('button-ok-container')).toHaveStyle({
+      margin: 0,
+    });
   });
 });
 

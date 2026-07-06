@@ -194,8 +194,19 @@ const Appbar = ({
     const items = React.Children.toArray(children).filter(
       React.isValidElement
     ) as React.ReactElement<AppbarChildProps>[];
-    const titleItems = items.filter((child) => child.type === AppbarContent);
-    const actionItems = items.filter((child) => child.type !== AppbarContent);
+    const isAppbarContent = (child: React.ReactElement<AppbarChildProps>) => {
+      const { type } = child;
+      // React.memo(AppbarContent) wraps the component in an object whose
+      // `.type` holds the original component — unwrap it so memoized
+      // Content still lands in the title row.
+      const innerType =
+        typeof type === 'object' && type !== null && 'type' in type
+          ? (type as { type: unknown }).type
+          : type;
+      return innerType === AppbarContent;
+    };
+    const titleItems = items.filter(isAppbarContent);
+    const actionItems = items.filter((child) => !isAppbarContent(child));
     const leadingActions = actionItems.filter((child) => child.props.isLeading);
     const trailingActions = actionItems.filter(
       (child) => !child.props.isLeading

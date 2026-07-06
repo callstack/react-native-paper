@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Animated } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
@@ -41,6 +42,20 @@ describe('Appbar', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('places a memoized Appbar.Content in the title row in medium/large mode', async () => {
+    const MemoContent = React.memo(Appbar.Content);
+
+    await render(
+      <Appbar mode="medium">
+        <Appbar.BackAction onPress={() => {}} />
+        <MemoContent title="Memoized title" />
+        <Appbar.Action icon="menu" onPress={() => {}} />
+      </Appbar>
+    );
+
+    expect(screen.getByRole('heading')).toHaveTextContent('Memoized title');
   });
 });
 

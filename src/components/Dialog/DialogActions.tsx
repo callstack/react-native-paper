@@ -55,9 +55,16 @@ const DialogActions = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
+  const items = React.Children.toArray(children);
+
   return (
     <View {...rest} style={[styles.v3Container, style]}>
-      {children}
+      {items.map((child, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && <View style={styles.spacer} />}
+          {child}
+        </React.Fragment>
+      ))}
     </View>
   );
 };
@@ -70,9 +77,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    gap: 8,
     paddingBottom: 24,
     paddingHorizontal: 24,
+  },
+  spacer: {
+    width: 8,
   },
 });
 
