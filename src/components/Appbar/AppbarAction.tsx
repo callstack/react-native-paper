@@ -7,7 +7,9 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { useAppbarContext } from './AppbarContext';
 import { useInternalTheme } from '../../core/theming';
+import { white } from '../../theme/colors';
 import type { Theme, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -87,12 +89,15 @@ const AppbarAction = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme as Theme;
+  const { isDark = false } = useAppbarContext() ?? {};
 
   const actionIconColor = iconColor
     ? iconColor
-    : isLeading
-      ? colors.onSurface
-      : colors.onSurfaceVariant;
+    : isDark
+      ? white
+      : isLeading
+        ? colors.onSurface
+        : colors.onSurfaceVariant;
 
   return (
     <IconButton

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
@@ -20,6 +19,8 @@ export type Props = ViewProps & {
 
 /**
  * A component to show a list of actions in a Dialog.
+ * Actions are rendered directly, so configure each action button's props
+ * explicitly when you need non-default behavior.
  *
  * ## Usage
  * ```js
@@ -46,26 +47,24 @@ export type Props = ViewProps & {
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => {
-  useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+const DialogActions = ({
+  theme: themeOverrides,
+  style,
+  children,
+  ...rest
+}: Props) => {
+  useInternalTheme(themeOverrides);
+
+  const items = React.Children.toArray(children);
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
-      {React.Children.map(props.children, (child, i) =>
-        React.isValidElement<DialogActionChildProps>(child)
-          ? React.cloneElement(child, {
-              compact: true,
-              uppercase: false,
-              style: [
-                {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
-                },
-                child.props.style,
-              ],
-            })
-          : child
-      )}
+    <View {...rest} style={[styles.v3Container, style]}>
+      {items.map((child, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && <View style={styles.spacer} />}
+          {child}
+        </React.Fragment>
+      ))}
     </View>
   );
 };
@@ -80,6 +79,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 24,
     paddingHorizontal: 24,
+  },
+  spacer: {
+    width: 8,
   },
 });
 

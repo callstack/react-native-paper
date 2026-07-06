@@ -12,7 +12,6 @@ import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
 import type { Theme, ThemeProp } from '../../types';
 import Modal from '../Modal';
-import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -51,6 +50,8 @@ const DIALOG_ELEVATION: number = 24;
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
+ * Dialog owns the top content inset, so first-slot components render without
+ * adding their own top offset.
  *
  * ## Usage
  * ```js
@@ -122,17 +123,7 @@ const Dialog = ({
       theme={theme}
       testID={testID}
     >
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
-            return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
-            });
-          }
-
-          return child;
-        })}
+      {children}
     </Modal>
   );
 };
@@ -160,6 +151,7 @@ const styles = StyleSheet.create({
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
+    paddingTop: 24,
   },
 });
 

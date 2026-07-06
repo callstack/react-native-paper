@@ -24,6 +24,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -68,6 +72,7 @@ const DialogIcon = ({
   color,
   icon,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme as Theme;
@@ -76,7 +81,7 @@ const DialogIcon = ({
   const iconColor = color || colors.secondary;
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} testID={testID}>
       <Icon source={icon} color={iconColor} size={size} />
     </View>
   );
@@ -88,7 +93,8 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 24,
+    marginBottom: 16,
+    paddingTop: 0,
   },
 });
 

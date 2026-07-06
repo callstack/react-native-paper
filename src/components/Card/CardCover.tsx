@@ -8,14 +8,6 @@ import type { ThemeProp } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
 export type Props = ImageProps & {
-  /**
-   * @internal
-   */
-  index?: number;
-  /**
-   * @internal
-   */
-  total?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -42,13 +34,7 @@ export type Props = ImageProps & {
  *
  * @extends Image props https://reactnative.dev/docs/image#props
  */
-const CardCover = ({
-  index,
-  total,
-  style,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+const CardCover = ({ style, theme: themeOverrides, ...rest }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
@@ -59,8 +45,6 @@ const CardCover = ({
 
   const coverStyle = getCardCoverStyle({
     theme,
-    index,
-    total,
     borderRadiusStyles,
   });
 
