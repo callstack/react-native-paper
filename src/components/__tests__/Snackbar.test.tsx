@@ -153,6 +153,52 @@ it('unmounts after visible becomes false even when the hide animation reports fi
   expect(view.toJSON()).toBeNull();
 });
 
+// Regression test for the race between the hide animation started by
+// removing the `finished` guard above and a re-show that happens while that
+// hide animation is still in flight. If the hide callback unconditionally
+// called setHidden(true), the Snackbar would stay unmounted even though
+// `visible` was flipped back to true before the animation completed, because
+// the useLayoutEffect deps ([visible, ...]) don't fire again for an
+// already-true `visible` value.
+it('stays mounted when visible is flipped back to true before the hide animation completes', async () => {
+  // Arrange: mount visible Snackbar and settle the show animation.
+  const view = await render(
+    <Snackbar visible onDismiss={jest.fn()} testID="snack-bar">
+      Snackbar content
+    </Snackbar>
+  );
+
+  await act(() => {
+    jest.advanceTimersByTime(300); // > 200 ms show animation
+  });
+
+  expect(view.toJSON()).not.toBeNull();
+
+  // Act: hide the Snackbar, which schedules the 100ms hide animation...
+  await view.rerender(
+    <Snackbar visible={false} onDismiss={jest.fn()} testID="snack-bar">
+      Snackbar content
+    </Snackbar>
+  );
+
+  // ...then re-show it before that hide animation has a chance to complete.
+  await view.rerender(
+    <Snackbar visible onDismiss={jest.fn()} testID="snack-bar">
+      Snackbar content
+    </Snackbar>
+  );
+
+  // Let the pending hide animation's callback fire.
+  await act(async () => {
+    jest.advanceTimersByTime(200);
+    await Promise.resolve();
+  });
+
+  // Assert: the Snackbar must still be rendered, the stale hide callback
+  // must not have hidden it after it was re-shown.
+  expect(view.toJSON()).not.toBeNull();
+});
+
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
   await render(
