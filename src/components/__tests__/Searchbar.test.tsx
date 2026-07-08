@@ -204,7 +204,7 @@ it('renders searchbar in "divided" mode', async () => {
 it('applies the unfocused container margin in "contained" mode', async () => {
   await render(<Searchbar testID="search-bar" value={''} mode="contained" />);
 
-  expect(screen.getByTestId('search-bar-container-wrapper')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     marginHorizontal: 24,
   });
 });
