@@ -118,7 +118,13 @@
     "collapsible": true,
     "collapsed": false
   },
-  "Searchbar",
+  {
+    "type": "dir",
+    "name": "Searchbar",
+    "label": "Searchbar",
+    "collapsible": true,
+    "collapsed": false
+  },
   {
     "type": "dir",
     "name": "SegmentedButtons",
