@@ -33,7 +33,8 @@ const data: Data[] = [
     color: '#1a203a',
     name: 'Todo List',
     image: '/react-native-paper/showcase/todolist.png',
-    android: 'https://play.google.com/store/apps/details?id=com.rehankhalil462.TodoApp',
+    android:
+      'https://play.google.com/store/apps/details?id=com.rehankhalil462.TodoApp',
   },
   {
     color: '#2979FF',
