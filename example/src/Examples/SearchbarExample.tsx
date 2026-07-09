@@ -237,7 +237,7 @@ SearchExample.title = 'Searchbar';
 
 const styles = StyleSheet.create({
   searchbar: {
-    margin: 4,
+    marginVertical: 4,
   },
 });
 

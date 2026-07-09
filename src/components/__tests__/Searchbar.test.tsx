@@ -1,7 +1,7 @@
-import { Animated } from 'react-native';
+import { Animated, Text } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
@@ -204,15 +204,63 @@ it('renders searchbar in "divided" mode', async () => {
 it('applies the unfocused container margin in "contained" mode', async () => {
   await render(<Searchbar testID="search-bar" value={''} mode="contained" />);
 
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
-    marginHorizontal: 24,
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
   });
+});
+
+it('does not apply the container margin in "divided" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="divided" />);
+
+  expect(screen.getByTestId('search-bar-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+});
+
+it('lets a custom horizontal margin win over the built-in one', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      mode="contained"
+      style={{ marginHorizontal: 0 }}
+    />
+  );
+
+  expect(screen.getByTestId('search-bar-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+    marginHorizontal: 0,
+  });
+});
+
+it('forwards onFocus and onBlur to the input', async () => {
+  const onFocus = jest.fn();
+  const onBlur = jest.fn();
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    />
+  );
+
+  await fireEvent(screen.getByTestId('search-bar'), 'focus');
+  await fireEvent(screen.getByTestId('search-bar'), 'blur');
+
+  expect(onFocus).toHaveBeenCalledTimes(1);
+  expect(onBlur).toHaveBeenCalledTimes(1);
 });
 
 it('renders a results container via Searchbar.Results', async () => {
   await render(
     <Searchbar.Results testID="search-bar-results">
-      <Searchbar testID="nested" value="" />
+      <Text>Result</Text>
     </Searchbar.Results>
   );
 

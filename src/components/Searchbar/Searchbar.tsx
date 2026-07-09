@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  Platform,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, TextInput, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -16,11 +9,19 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Reanimated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
 import { SearchbarTokens } from './tokens';
 import { getSearchbarColors, getSearchbarInputFont } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
@@ -33,6 +34,15 @@ import Surface from '../Surface';
 interface Style {
   marginRight: number;
 }
+
+const HORIZONTAL_MARGIN_KEYS = [
+  'margin',
+  'marginHorizontal',
+  'marginLeft',
+  'marginRight',
+  'marginStart',
+  'marginEnd',
+] as const;
 
 export type Props = TextInputProps & {
   /**
@@ -48,10 +58,11 @@ export type Props = TextInputProps & {
    */
   onChangeText?: (query: string) => void;
   /**
-   * @supported Available in v5.x with theme version 3
    * Search layout mode, the default value is "contained".
    * - `contained` - the recommended M3 Expressive style: a rounded, elevated
-   *   bar whose horizontal margins shrink on focus (grow-wider effect).
+   *   bar whose horizontal margins animate from 24dp down to 12dp on focus
+   *   (grow-wider effect). Providing any horizontal margin via `style`
+   *   replaces the built-in margin and disables the focus transition.
    * - `divided` - a full-bleed search view with square corners and a bottom
    *   `Divider`. Deprecated in M3 Expressive in favor of `contained`.
    */
@@ -87,13 +98,11 @@ export type Props = TextInputProps & {
    */
   clearAccessibilityLabel?: string;
   /**
-   * @supported Available in v5.x with theme version 3
    * Icon name for the right trailering icon button.
    * Works only when `mode` is set to "contained". It won't be displayed if `loading` is set to `true`.
    */
   traileringIcon?: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
    * Custom color for the right trailering icon, default will be derived from theme
    */
   traileringIconColor?: ColorValue;
@@ -106,7 +115,6 @@ export type Props = TextInputProps & {
    */
   traileringIconAccessibilityLabel?: string;
   /**
-   * @supported Available in v5.x with theme version 3
    * Callback which returns a React element to display on the right side.
    * Works only when `mode` is set to "contained".
    */
@@ -116,13 +124,11 @@ export type Props = TextInputProps & {
     testID: string;
   }) => React.ReactNode;
   /**
-   * @supported Available in v5.x with theme version 3
    * Whether to show `Divider` at the bottom of the search.
    * Works only when `mode` is set to "divided". True by default.
    */
   showDivider?: boolean;
   /**
-   * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
@@ -235,7 +241,7 @@ const Searchbar = ({
     trailingIconColor,
     cursorColor,
     dividerColor,
-  } = getSearchbarColors(theme);
+  } = React.useMemo(() => getSearchbarColors(theme), [theme]);
   const iconColor = customIconColor || leadingIconColor;
 
   const font = getSearchbarInputFont(theme);
@@ -253,167 +259,193 @@ const Searchbar = ({
     isContained ? SearchbarTokens.contained : SearchbarTokens.divided
   );
 
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
   // M3 Expressive focus transition: the contained bar grows wider on focus as
   // its horizontal margin shrinks from `marginUnfocused` to `marginFocused`.
-  // `marginHorizontal` is a layout prop, so it must be animated on the JS
-  // driver (`useNativeDriver: false`) for the relayout to actually happen.
-  const marginAnim = React.useRef(
-    new Animated.Value(SearchbarTokens.marginUnfocused)
-  ).current;
+  const focusMargin = useSharedValue<number>(SearchbarTokens.marginUnfocused);
 
-  const animateMargin = (toValue: number) => {
-    if (reduceMotion) {
-      marginAnim.setValue(toValue);
-      return;
-    }
-    Animated.timing(marginAnim, {
-      toValue,
-      duration: theme.motion.duration.short4,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      useNativeDriver: false,
-    }).start();
-  };
+  const growSpring = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion.spring.fast.spatial, reanimatedReduceMotion]
+  );
+  const shrinkSpring = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.default.spatial),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion.spring.default.spatial, reanimatedReduceMotion]
+  );
 
   const handleFocus: NonNullable<TextInputProps['onFocus']> = (e) => {
-    if (isContained) {
-      animateMargin(SearchbarTokens.marginFocused);
-    }
+    focusMargin.value = withSpring(SearchbarTokens.marginFocused, growSpring);
     onFocus?.(e);
   };
 
   const handleBlur: NonNullable<TextInputProps['onBlur']> = (e) => {
-    if (isContained) {
-      animateMargin(SearchbarTokens.marginUnfocused);
-    }
+    focusMargin.value = withSpring(
+      SearchbarTokens.marginUnfocused,
+      shrinkSpring
+    );
     onBlur?.(e);
   };
 
+  // Long-form margins on purpose: reanimated's web updater bypasses
+  // react-native-web's preprocessing, which is the only place the
+  // `marginHorizontal` shorthand gets expanded — as a raw DOM style
+  // it would be silently ignored.
+  const containedMarginStyle = useAnimatedStyle(() => ({
+    marginLeft: focusMargin.value,
+    marginRight: focusMargin.value,
+  }));
+
+  // A consumer-provided horizontal margin wins over the built-in one and
+  // disables the focus transition.
+  const flatStyle = StyleSheet.flatten(style as StyleProp<ViewStyle>);
+  const hasCustomHorizontalMargin = HORIZONTAL_MARGIN_KEYS.some(
+    (key) => flatStyle?.[key] !== undefined
+  );
+  const applyFocusMargin = isContained && !hasCustomHorizontalMargin;
+
   return (
-    <Surface
-      style={[
-        styles.container,
-        { backgroundColor: containerColor, borderRadius },
-        isContained && { marginHorizontal: marginAnim },
-        style,
-      ]}
-      testID={`${testID}-container`}
-      elevation={elevation}
-      container
-      theme={theme}
+    <Reanimated.View
+      style={applyFocusMargin ? containedMarginStyle : null}
+      testID={`${testID}-wrapper`}
     >
-      <IconButton
-        role="button"
-        borderless
-        onPress={onIconPress}
-        iconColor={iconColor}
-        icon={
-          icon ||
-          (({ size, color }) => (
-            <MaterialCommunityIcon
-              name="magnify"
-              color={color}
-              size={size}
-              direction={direction}
-            />
-          ))
-        }
-        theme={theme}
-        aria-label={searchAccessibilityLabel}
-        testID={`${testID}-icon`}
-      />
-      <TextInput
+      <Surface
         style={[
-          styles.input,
-          {
-            color: inputColor,
-            ...font,
-            ...Platform.select({ web: { outline: 'none' } }),
-            textAlign: inputTextAlign,
-          },
-          isContained ? styles.containedInput : styles.dividedInput,
-          inputStyle,
+          styles.container,
+          { backgroundColor: containerColor, borderRadius },
+          style,
         ]}
-        placeholder={placeholder || ''}
-        placeholderTextColor={placeholderColor}
-        selectionColor={cursorColor}
-        underlineColorAndroid="transparent"
-        returnKeyType="search"
-        keyboardAppearance={dark ? 'dark' : 'light'}
-        role="searchbox"
-        ref={root}
-        value={value}
-        testID={testID}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        {...rest}
-      />
-      {loading ? (
-        <ActivityIndicator
-          testID="activity-indicator"
-          style={styles.v3Loader}
-        />
-      ) : (
-        // Clear icon should be always rendered within Searchbar – it's transparent,
-        // without touch events, when there is no value. It's done to avoid issues
-        // with the abruptly stopping ripple effect and changing bar width on web,
-        // when clearing the value.
-        <View
-          pointerEvents={value ? 'auto' : 'none'}
-          testID={`${testID}-icon-wrapper`}
-          style={[
-            !value && styles.v3ClearIcon,
-            right !== undefined && styles.v3ClearIconHidden,
-          ]}
-        >
-          <IconButton
-            borderless
-            aria-label={clearAccessibilityLabel}
-            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-            onPress={handleClearPress}
-            icon={
-              clearIcon ||
-              (({ size, color }) => (
-                <MaterialCommunityIcon
-                  name="close"
-                  color={color}
-                  size={size}
-                  direction={direction}
-                />
-              ))
-            }
-            testID={`${testID}-clear-icon`}
-            role="button"
-            theme={theme}
-          />
-        </View>
-      )}
-      {shouldRenderTraileringIcon ? (
+        testID={`${testID}-container`}
+        elevation={elevation}
+        container
+        theme={theme}
+      >
         <IconButton
           role="button"
           borderless
-          onPress={onTraileringIconPress}
-          iconColor={traileringIconColor || trailingIconColor}
-          icon={traileringIcon}
-          aria-label={traileringIconAccessibilityLabel}
+          onPress={onIconPress}
+          iconColor={iconColor}
+          icon={
+            icon ||
+            (({ size, color }) => (
+              <MaterialCommunityIcon
+                name="magnify"
+                color={color}
+                size={size}
+                direction={direction}
+              />
+            ))
+          }
           theme={theme}
-          testID={`${testID}-trailering-icon`}
+          aria-label={searchAccessibilityLabel}
+          testID={`${testID}-icon`}
         />
-      ) : null}
-      {isContained &&
-        right?.({ color: inputColor, style: styles.rightStyle, testID })}
-      {!isContained && showDivider && (
-        <Divider
-          bold
+        <TextInput
           style={[
-            styles.divider,
+            styles.input,
             {
-              backgroundColor: dividerColor,
+              color: inputColor,
+              ...font,
+              ...Platform.select({ web: { outline: 'none' } }),
+              textAlign: inputTextAlign,
             },
+            isContained ? styles.containedInput : styles.dividedInput,
+            inputStyle,
           ]}
-          testID={`${testID}-divider`}
+          placeholder={placeholder || ''}
+          placeholderTextColor={placeholderColor}
+          selectionColor={cursorColor}
+          underlineColorAndroid="transparent"
+          returnKeyType="search"
+          keyboardAppearance={dark ? 'dark' : 'light'}
+          role="searchbox"
+          ref={root}
+          value={value}
+          testID={testID}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          {...rest}
         />
-      )}
-    </Surface>
+        {loading ? (
+          <ActivityIndicator
+            testID="activity-indicator"
+            style={styles.v3Loader}
+          />
+        ) : (
+          // Clear icon should be always rendered within Searchbar – it's transparent,
+          // without touch events, when there is no value. It's done to avoid issues
+          // with the abruptly stopping ripple effect and changing bar width on web,
+          // when clearing the value.
+          <View
+            pointerEvents={value ? 'auto' : 'none'}
+            testID={`${testID}-icon-wrapper`}
+            style={[
+              !value && styles.v3ClearIcon,
+              right !== undefined && styles.v3ClearIconHidden,
+            ]}
+          >
+            <IconButton
+              borderless
+              aria-label={clearAccessibilityLabel}
+              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+              onPress={handleClearPress}
+              icon={
+                clearIcon ||
+                (({ size, color }) => (
+                  <MaterialCommunityIcon
+                    name="close"
+                    color={color}
+                    size={size}
+                    direction={direction}
+                  />
+                ))
+              }
+              testID={`${testID}-clear-icon`}
+              role="button"
+              theme={theme}
+            />
+          </View>
+        )}
+        {shouldRenderTraileringIcon ? (
+          <IconButton
+            role="button"
+            borderless
+            onPress={onTraileringIconPress}
+            iconColor={traileringIconColor || trailingIconColor}
+            icon={traileringIcon}
+            aria-label={traileringIconAccessibilityLabel}
+            theme={theme}
+            testID={`${testID}-trailering-icon`}
+          />
+        ) : null}
+        {isContained &&
+          right?.({
+            color: trailingIconColor,
+            style: styles.rightStyle,
+            testID,
+          })}
+        {!isContained && showDivider && (
+          <Divider
+            bold
+            style={[
+              styles.divider,
+              {
+                backgroundColor: dividerColor,
+              },
+            ]}
+            testID={`${testID}-divider`}
+          />
+        )}
+      </Surface>
+    </Reanimated.View>
   );
 };
 

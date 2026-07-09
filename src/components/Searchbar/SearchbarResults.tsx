@@ -62,7 +62,10 @@ const SearchbarResults = ({
   testID = 'search-bar-results',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { resultsContainerColor } = getSearchbarColors(theme);
+  const { resultsContainerColor } = React.useMemo(
+    () => getSearchbarColors(theme),
+    [theme]
+  );
 
   return (
     <Surface
