@@ -25,6 +25,13 @@ const data: Data[] = [
   },
   {
     color: '#2979FF',
+    name: 'Vaultly',
+    image: '/react-native-paper/showcase/vaultly.png',
+    github: 'https://github.com/Rehankhalil462/Vaultly',
+   
+  },
+  {
+    color: '#2979FF',
     name: 'Bluebirding',
     image: '/react-native-paper/showcase/bluebirding.png',
     android:
