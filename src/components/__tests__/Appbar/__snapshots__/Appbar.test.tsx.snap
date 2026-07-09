@@ -242,7 +242,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 {
                   "alignSelf": "stretch",
                   "flex": 1,
-                  "fontSize": 18,
                   "minWidth": 0,
                   "paddingLeft": 8,
                 },

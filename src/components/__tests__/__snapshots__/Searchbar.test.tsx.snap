@@ -201,7 +201,6 @@ exports[`activity indicator snapshot test 1`] = `
             {
               "alignSelf": "stretch",
               "flex": 1,
-              "fontSize": 18,
               "minWidth": 0,
               "paddingLeft": 8,
             },
@@ -625,7 +624,6 @@ exports[`renders with placeholder 1`] = `
             {
               "alignSelf": "stretch",
               "flex": 1,
-              "fontSize": 18,
               "minWidth": 0,
               "paddingLeft": 8,
             },
@@ -1010,7 +1008,6 @@ exports[`renders with text 1`] = `
             {
               "alignSelf": "stretch",
               "flex": 1,
-              "fontSize": 18,
               "minWidth": 0,
               "paddingLeft": 8,
             },

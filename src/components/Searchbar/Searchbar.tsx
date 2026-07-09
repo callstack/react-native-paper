@@ -456,7 +456,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 18,
     paddingLeft: SearchbarTokens.inputPaddingHorizontal,
     alignSelf: 'stretch',
     minWidth: 0,
