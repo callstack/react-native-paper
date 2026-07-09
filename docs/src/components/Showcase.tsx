@@ -29,7 +29,7 @@ const data: Data[] = [
     image: '/react-native-paper/showcase/vaultly.png',
     github: 'https://github.com/Rehankhalil462/Vaultly',
   },
-   {
+  {
     color: '#1a203a',
     name: 'Todo List',
     image: '/react-native-paper/showcase/todolist.png',
