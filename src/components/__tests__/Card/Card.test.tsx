@@ -91,6 +91,26 @@ describe('Card', () => {
     expect(screen.getByTestId('card')).toHaveStyle(styles.contentStyle);
   });
 
+  it('renders Fragment children without passing invalid props', async () => {
+    const fragment = (
+      <>
+        <Text>First item</Text>
+        <Text>Second item</Text>
+      </>
+    );
+    await render(<Card>{fragment}</Card>);
+
+    // eslint-disable-next-line no-restricted-syntax -- The native test renderer does not surface React's invalid Fragment prop warning.
+    const fragmentProps = screen.getByTestId('card').props.children[0].props;
+
+    expect(screen.getByText('First item')).toBeOnTheScreen();
+    expect(screen.getByText('Second item')).toBeOnTheScreen();
+    expect(fragmentProps).not.toHaveProperty('index');
+    expect(fragmentProps).not.toHaveProperty('total');
+    expect(fragmentProps).not.toHaveProperty('siblings');
+    expect(fragmentProps).not.toHaveProperty('borderRadiusStyles');
+  });
+
   it('does not render a disabled accessibility state', async () => {
     await render(<Card>{null}</Card>);
 
@@ -159,6 +179,30 @@ describe('CardActions', () => {
     expect(screen.getByTestId('card-actions-button')).toHaveStyle({
       borderRadius: 32,
     });
+  });
+
+  it('renders Fragment children without passing invalid props', async () => {
+    const fragment = (
+      <>
+        <Button>Cancel</Button>
+        <Button>Confirm</Button>
+      </>
+    );
+    await render(
+      <Card>
+        <Card.Actions testID="card-actions">{fragment}</Card.Actions>
+      </Card>
+    );
+
+    const fragmentProps =
+      // eslint-disable-next-line no-restricted-syntax -- The native test renderer does not surface React's invalid Fragment prop warning.
+      screen.getByTestId('card-actions').props.children[0].props;
+
+    expect(screen.getByText('Cancel')).toBeOnTheScreen();
+    expect(screen.getByText('Confirm')).toBeOnTheScreen();
+    expect(fragmentProps).not.toHaveProperty('compact');
+    expect(fragmentProps).not.toHaveProperty('mode');
+    expect(fragmentProps).not.toHaveProperty('style');
   });
 });
 

@@ -214,7 +214,7 @@ const Card = ({
   const content = (
     <View style={[styles.innerContainer, contentStyle]} testID={testID}>
       {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
+        React.isValidElement(child) && child.type !== React.Fragment
           ? React.cloneElement(child as React.ReactElement<any>, {
               index,
               total,
