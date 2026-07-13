@@ -29,6 +29,11 @@ export const isPlatformColorSentinel = (v: unknown): boolean =>
   typeof v === 'object' &&
   ('resource_paths' in v || 'semantic' in v || 'dynamic' in v);
 
+// Keys that would otherwise let a crafted `overrides` object (e.g. parsed via
+// `JSON.parse` from an external theme config) hijack the prototype of the
+// merged output through bracket-notation assignment below.
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
     !base ||
@@ -45,6 +50,9 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
   for (const key of Object.keys(overrides as Record<string, unknown>)) {
+    if (UNSAFE_KEYS.has(key)) {
+      continue;
+    }
     out[key] = safeMerge(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
