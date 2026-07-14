@@ -1,17 +1,12 @@
-import type { ColorValue, Insets } from 'react-native';
-
-import color from 'color';
+import type { ColorValue } from 'react-native';
 
 import {
-  connectedButtonMinInteractiveSize,
   connectedButtonSizeTokens,
   type ConnectedButtonGroupSize,
-  type ConnectedButtonShapeKey,
 } from './tokens';
 import { tokens } from '../../theme/tokens';
-import { cornerFull } from '../../theme/tokens/sys/shape';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
-import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -43,11 +38,6 @@ export const getConnectedButtonPosition = (
   return 'middle';
 };
 
-export const resolveConnectedButtonCorner = (
-  theme: InternalTheme,
-  key: ConnectedButtonShapeKey
-): number => (key === 'full' ? cornerFull : theme.shapes.corner[key]);
-
 export const getConnectedButtonSizeStyle = ({
   size,
   theme,
@@ -59,9 +49,9 @@ export const getConnectedButtonSizeStyle = ({
 
   return {
     ...sizeTokens,
-    outerRadius: resolveConnectedButtonCorner(theme, sizeTokens.outerShape),
-    innerRadius: resolveConnectedButtonCorner(theme, sizeTokens.innerShape),
-    pressedRadius: resolveConnectedButtonCorner(theme, sizeTokens.pressedShape),
+    outerRadius: resolveCornerRadius(theme, sizeTokens.outerShape),
+    innerRadius: resolveCornerRadius(theme, sizeTokens.innerShape),
+    pressedRadius: resolveCornerRadius(theme, sizeTokens.pressedShape),
   };
 };
 
@@ -138,54 +128,4 @@ export const getConnectedButtonColors = ({
     : stateOpacity.enabled;
 
   return { containerColor, containerOpacity, contentColor, contentOpacity };
-};
-
-export const getConnectedButtonRippleColor = ({
-  contentColor,
-  customRippleColor,
-}: {
-  contentColor: ColorValue;
-  customRippleColor?: ColorValue;
-}): ColorValue | undefined => {
-  if (customRippleColor) {
-    return customRippleColor;
-  }
-  if (typeof contentColor !== 'string') {
-    return undefined;
-  }
-  return color(contentColor).alpha(stateOpacity.pressed).rgb().string();
-};
-
-/**
- * Expands the touch target of shorter buttons to the minimum interactive size
- * (48dp) without changing their visual height.
- */
-export const getConnectedButtonHitSlop = ({
-  size,
-  hitSlop,
-}: {
-  size: ConnectedButtonGroupSize;
-  hitSlop?: TouchableRippleProps['hitSlop'];
-}): TouchableRippleProps['hitSlop'] => {
-  if (typeof hitSlop === 'number') {
-    return hitSlop;
-  }
-
-  const height = connectedButtonSizeTokens[size].containerHeight;
-  const verticalSlop = Math.max(
-    0,
-    (connectedButtonMinInteractiveSize - height) / 2
-  );
-
-  if (verticalSlop === 0) {
-    return hitSlop;
-  }
-
-  const insetHitSlop = (hitSlop || {}) as Insets;
-
-  return {
-    ...insetHitSlop,
-    top: insetHitSlop.top ?? verticalSlop,
-    bottom: insetHitSlop.bottom ?? verticalSlop,
-  };
 };

@@ -52,15 +52,15 @@ const pages = {
     CardCover: 'Card/CardCover',
     CardTitle: 'Card/CardTitle',
   },
-  ConnectedButtonGroup: {
-    ConnectedButtonGroup: 'ConnectedButtonGroup/ConnectedButtonGroup',
-  },
   Checkbox: {
     Checkbox: 'Checkbox/Checkbox',
     CheckboxItem: 'Checkbox/CheckboxItem',
   },
   Chip: {
     Chip: 'Chip/Chip',
+  },
+  ConnectedButtonGroup: {
+    ConnectedButtonGroup: 'ConnectedButtonGroup/ConnectedButtonGroup',
   },
   DataTable: {
     DataTable: 'DataTable/DataTable',

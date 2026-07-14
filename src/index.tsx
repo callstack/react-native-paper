@@ -82,6 +82,7 @@ export type { Props as ChipProps } from './components/Chip/Chip';
 export type {
   Props as ConnectedButtonGroupProps,
   ConnectedButtonConfig,
+  ConnectedButtonGroupSize,
 } from './components/ConnectedButtonGroup';
 export type { Props as DataTableProps } from './components/DataTable/DataTable';
 export type { Props as DataTableCellProps } from './components/DataTable/DataTableCell';

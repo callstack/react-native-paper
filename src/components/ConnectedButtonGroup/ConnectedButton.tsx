@@ -9,23 +9,21 @@ import type {
 } from 'react-native';
 
 import Animated, {
-  Easing,
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
+  withSpring,
 } from 'react-native-reanimated';
 
 import type { ConnectedButtonGroupSize } from './tokens';
 import {
   getConnectedButtonColors,
-  getConnectedButtonHitSlop,
-  getConnectedButtonRippleColor,
   getConnectedButtonSizeStyle,
   type ConnectedButtonPosition,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../types';
 import Icon, { type IconSource } from '../Icon';
 import TouchableRipple, {
@@ -78,10 +76,6 @@ export type Props = {
    */
   uncheckedColor?: string;
   /**
-   * Custom ripple color.
-   */
-  rippleColor?: string;
-  /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
@@ -133,7 +127,6 @@ const ConnectedButton = ({
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
-  rippleColor: customRippleColor,
   background,
   'aria-label': ariaLabel,
   onPress,
@@ -161,51 +154,18 @@ const ConnectedButton = ({
       }),
     [theme, checked, disabled, checkedColor, uncheckedColor]
   );
-  const rippleColor = React.useMemo(
-    () =>
-      getConnectedButtonRippleColor({
-        contentColor: colors.contentColor,
-        customRippleColor,
-      }),
-    [colors.contentColor, customRippleColor]
-  );
-  const resolvedHitSlop = React.useMemo(
-    () => getConnectedButtonHitSlop({ size, hitSlop }),
-    [size, hitSlop]
-  );
 
   const { outerRadius, innerRadius, pressedRadius } = sizeStyle;
   const restRadius = checked ? outerRadius : innerRadius;
   const cornerRadius = useSharedValue(restRadius);
 
   const reduceMotion = useReduceMotion();
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
-
-  const pressTimingConfig = React.useMemo(
+  const springConfig = React.useMemo(
     () => ({
-      duration: theme.motion.duration.short4,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
     }),
-    [
-      theme.motion.duration.short4,
-      theme.motion.easing.standard,
-      reanimatedReduceMotion,
-    ]
-  );
-  const releaseTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short3,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [
-      theme.motion.duration.short3,
-      theme.motion.easing.standard,
-      reanimatedReduceMotion,
-    ]
+    [theme.motion.spring.fast.spatial, reduceMotion]
   );
 
   const isFirstRender = React.useRef(true);
@@ -217,17 +177,17 @@ const ConnectedButton = ({
       isFirstRender.current = false;
       return;
     }
-    cornerRadius.value = withTiming(restRadius, releaseTimingConfig);
-  }, [restRadius, cornerRadius, releaseTimingConfig]);
+    cornerRadius.value = withSpring(restRadius, springConfig);
+  }, [restRadius, cornerRadius, springConfig]);
 
   const handlePressIn = React.useCallback(() => {
     // Pressed takes precedence over selection: even a selected (fully-rounded)
     // button morphs its connected corner while pressed, matching the M3 spec.
-    cornerRadius.value = withTiming(pressedRadius, pressTimingConfig);
-  }, [cornerRadius, pressedRadius, pressTimingConfig]);
+    cornerRadius.value = withSpring(pressedRadius, springConfig);
+  }, [cornerRadius, pressedRadius, springConfig]);
   const handlePressOut = React.useCallback(() => {
-    cornerRadius.value = withTiming(restRadius, releaseTimingConfig);
-  }, [cornerRadius, restRadius, releaseTimingConfig]);
+    cornerRadius.value = withSpring(restRadius, springConfig);
+  }, [cornerRadius, restRadius, springConfig]);
 
   // The "outer" side keeps the group's fully-rounded radius; the "inner" side
   // (the connected edge) morphs between the resting, pressed and selected radii.
@@ -292,13 +252,12 @@ const ConnectedButton = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         disabled={disabled}
-        rippleColor={rippleColor}
         background={background}
         aria-label={ariaLabel}
         aria-disabled={disabled}
         aria-checked={checked}
         role={multiSelect ? 'checkbox' : 'radio'}
-        hitSlop={resolvedHitSlop}
+        hitSlop={hitSlop}
         style={styles.ripple}
         theme={theme}
         testID={testID}
@@ -353,7 +312,9 @@ const ConnectedButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 'auto',
     overflow: 'hidden',
   },
   ripple: {

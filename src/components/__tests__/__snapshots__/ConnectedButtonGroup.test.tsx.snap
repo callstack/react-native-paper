@@ -1,0 +1,1500 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders connected button group 1`] = `
+<View
+  role="radiogroup"
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      {
+        "columnGap": 2,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 9999,
+        },
+        undefined,
+      ]
+    }
+    testID="walk-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="walk"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 1,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="walk-label"
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 8,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 8,
+          "borderTopStartRadius": 8,
+        },
+        undefined,
+      ]
+    }
+    testID="train-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="train"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 1,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="train-label"
+        >
+          Transit
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 8,
+        },
+        undefined,
+      ]
+    }
+    testID="drive-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="drive"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 1,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="drive-label"
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders disabled connected button group 1`] = `
+<View
+  role="radiogroup"
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      {
+        "columnGap": 2,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": undefined,
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 9999,
+        },
+        undefined,
+      ]
+    }
+    testID="walk-container"
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="walk"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 0.38,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="walk-label"
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": undefined,
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 8,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 8,
+          "borderTopStartRadius": 8,
+        },
+        undefined,
+      ]
+    }
+    testID="train-container"
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="train"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 0.38,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="train-label"
+        >
+          Transit
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": undefined,
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 8,
+        },
+        undefined,
+      ]
+    }
+    testID="drive-container"
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.12,
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="drive"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 0.38,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="drive-label"
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders large connected button group 1`] = `
+<View
+  role="radiogroup"
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      {
+        "columnGap": 2,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "height": 96,
+          "minWidth": 96,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 9999,
+        },
+        undefined,
+      ]
+    }
+    testID="walk-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="walk"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 96,
+              "opacity": 1,
+              "paddingEnd": 48,
+              "paddingStart": 48,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 24,
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                  "lineHeight": 32,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="walk-label"
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "height": 96,
+          "minWidth": 96,
+        },
+        {
+          "borderBottomEndRadius": 16,
+          "borderBottomStartRadius": 16,
+          "borderTopEndRadius": 16,
+          "borderTopStartRadius": 16,
+        },
+        undefined,
+      ]
+    }
+    testID="train-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="train"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 96,
+              "opacity": 1,
+              "paddingEnd": 48,
+              "paddingStart": 48,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 24,
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                  "lineHeight": 32,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="train-label"
+        >
+          Transit
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "height": 96,
+          "minWidth": 96,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 16,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 16,
+        },
+        undefined,
+      ]
+    }
+    testID="drive-container"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="radio"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+      testID="drive"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 96,
+              "opacity": 1,
+              "paddingEnd": 48,
+              "paddingStart": 48,
+            },
+          ]
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 24,
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                  "lineHeight": 32,
+                },
+                [
+                  {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="drive-label"
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders multi-select connected button group with icons 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      {
+        "columnGap": 2,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 9999,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityLabel="Bold"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="checkbox"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 1,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <View
+          style={null}
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 20,
+                },
+                [
+                  {
+                    "lineHeight": 20,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            format-bold
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "height": 40,
+          "minWidth": 48,
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityLabel="Italic"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="checkbox"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "flex": 1,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "height": 40,
+              "opacity": 1,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+          ]
+        }
+      >
+        <View
+          style={null}
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 20,
+                },
+                [
+                  {
+                    "lineHeight": 20,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            format-italic
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

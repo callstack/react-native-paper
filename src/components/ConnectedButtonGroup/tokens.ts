@@ -1,4 +1,5 @@
-import type { ThemeShapeCorners, TypescaleKey } from '../../theme/types';
+import type { TypescaleKey } from '../../theme/types';
+import type { ShapeToken } from '../../theme/utils/shape';
 
 export type ConnectedButtonGroupSize =
   | 'extra-small'
@@ -6,8 +7,6 @@ export type ConnectedButtonGroupSize =
   | 'medium'
   | 'large'
   | 'extra-large';
-
-export type ConnectedButtonShapeKey = keyof ThemeShapeCorners | 'full';
 
 export type ConnectedButtonSizeTokens = {
   /**
@@ -23,15 +22,15 @@ export type ConnectedButtonSizeTokens = {
    * the first button, trailing corners of the last button) and to any
    * selected button.
    */
-  outerShape: ConnectedButtonShapeKey;
+  outerShape: ShapeToken;
   /**
    * Corner shape applied to the connected (inner) edges of unselected buttons.
    */
-  innerShape: ConnectedButtonShapeKey;
+  innerShape: ShapeToken;
   /**
    * Corner shape the connected edges morph to while a button is pressed.
    */
-  pressedShape: ConnectedButtonShapeKey;
+  pressedShape: ShapeToken;
   /**
    * Icon size for both the leading icon and the selected-state check icon.
    */
@@ -133,9 +132,3 @@ export const connectedButtonSizeTokens: Record<
     labelVariant: 'headlineLarge',
   },
 };
-
-/**
- * Minimum interactive size guaranteed via `hitSlop` for the smaller button
- * sizes, per WCAG / MD3 touch-target guidance.
- */
-export const connectedButtonMinInteractiveSize = 48;

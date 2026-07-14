@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -15,6 +16,7 @@ import { getConnectedButtonPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 type ConditionalValue<T extends string = string> =
   | {
@@ -80,13 +82,19 @@ export type ConnectedButtonConfig<T extends string = string> = {
    */
   uncheckedColor?: string;
   /**
-   * Custom ripple color for the button.
-   */
-  rippleColor?: string;
-  /**
    * Show an optional check icon to indicate the selected state.
    */
   showSelectedCheck?: boolean;
+  /**
+   * Type of background drawable to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
+   * Sets additional distance outside of the button in which a press can be
+   * detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * Callback that is called when the button is pressed, in addition to the
    * group's `onValueChange`.
@@ -121,7 +129,6 @@ export type Props<T extends string = string> = {
    * - `aria-label`: accessibility label for the button
    * - `checkedColor`: custom color for the selected label and icon
    * - `uncheckedColor`: custom color for the unselected label and icon
-   * - `rippleColor`: custom ripple color for the button
    * - `showSelectedCheck`: show an optional check icon to indicate the selected state
    * - `onPress`: callback that is called when the button is pressed
    * - `style`: pass additional styles for the button
@@ -199,6 +206,7 @@ const ConnectedButtonGroup = <T extends string = string>({
 
   return (
     <View
+      role={multiSelect ? undefined : 'radiogroup'}
       style={[styles.row, { columnGap: betweenSpace }, style]}
       testID={testID}
     >
@@ -225,7 +233,7 @@ const ConnectedButtonGroup = <T extends string = string>({
 
         return (
           <ConnectedButton
-            key={item.value}
+            key={`${item.value}-${index}`}
             position={position}
             size={size}
             checked={checked}
@@ -236,7 +244,8 @@ const ConnectedButtonGroup = <T extends string = string>({
             showSelectedCheck={item.showSelectedCheck}
             checkedColor={item.checkedColor}
             uncheckedColor={item.uncheckedColor}
-            rippleColor={item.rippleColor}
+            background={item.background}
+            hitSlop={item.hitSlop}
             aria-label={item['aria-label']}
             onPress={handlePress}
             labelMaxFontSizeMultiplier={item.labelMaxFontSizeMultiplier}
@@ -254,10 +263,6 @@ const ConnectedButtonGroup = <T extends string = string>({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    // Guarantees a 48dp interactive band so the shorter button sizes' hitSlop
-    // enlarges the touch target within the row's bounds (WCAG / MD3 target).
-    minHeight: 48,
-    alignItems: 'center',
   },
 });
 

@@ -8,7 +8,6 @@ import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
 import { connectedButtonSizeTokens } from '../ConnectedButtonGroup/tokens';
 import {
   getConnectedButtonColors,
-  getConnectedButtonHitSlop,
   getConnectedButtonPosition,
   getConnectedButtonSizeStyle,
 } from '../ConnectedButtonGroup/utils';
@@ -259,21 +258,42 @@ describe('getConnectedButtonColors', () => {
   });
 });
 
-describe('getConnectedButtonHitSlop', () => {
-  it('expands short buttons to the minimum interactive size', () => {
-    expect(getConnectedButtonHitSlop({ size: 'extra-small' })).toMatchObject({
-      top: 8,
-      bottom: 8,
-    });
-  });
+it('renders connected button group', async () => {
+  const tree = (await renderGroup()).toJSON();
 
-  it('leaves tall buttons untouched', () => {
-    expect(getConnectedButtonHitSlop({ size: 'medium' })).toBeUndefined();
-  });
+  expect(tree).toMatchSnapshot();
+});
 
-  it('respects a numeric hitSlop override', () => {
-    expect(getConnectedButtonHitSlop({ size: 'extra-small', hitSlop: 4 })).toBe(
-      4
-    );
-  });
+it('renders multi-select connected button group with icons', async () => {
+  const tree = (
+    await render(
+      <ConnectedButtonGroup
+        multiSelect
+        value={['bold'] as string[]}
+        onValueChange={() => {}}
+        buttons={[
+          { value: 'bold', icon: 'format-bold', 'aria-label': 'Bold' },
+          { value: 'italic', icon: 'format-italic', 'aria-label': 'Italic' },
+        ]}
+      />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders disabled connected button group', async () => {
+  const tree = (
+    await renderGroup({
+      buttons: buttons.map((button) => ({ ...button, disabled: true })),
+    })
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders large connected button group', async () => {
+  const tree = (await renderGroup({ size: 'large' })).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
