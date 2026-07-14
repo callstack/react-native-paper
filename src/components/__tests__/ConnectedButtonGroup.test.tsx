@@ -5,10 +5,12 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { getTheme } from '../../core/theming';
 import { render, screen, userEvent } from '../../test-utils';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
+import { connectedButtonSizeTokens } from '../ConnectedButtonGroup/tokens';
 import {
   getConnectedButtonColors,
   getConnectedButtonHitSlop,
   getConnectedButtonPosition,
+  getConnectedButtonSizeStyle,
 } from '../ConnectedButtonGroup/utils';
 
 const theme = getTheme();
@@ -164,6 +166,45 @@ it('applies a custom checked color to the selected label', async () => {
 
   expect(screen.getByTestId('walk-label')).toHaveStyle({
     color: 'rgb(255, 0, 0)',
+  });
+});
+
+it('marks single-select buttons with the radio role', async () => {
+  await renderGroup();
+
+  expect(screen.getByTestId('walk')).toHaveProp('role', 'radio');
+});
+
+it('marks multi-select buttons with the checkbox role', async () => {
+  await render(
+    <ConnectedButtonGroup
+      multiSelect
+      value={['walk']}
+      onValueChange={() => {}}
+      buttons={buttons}
+    />
+  );
+
+  expect(screen.getByTestId('walk')).toHaveProp('role', 'checkbox');
+});
+
+describe('connected button shape tokens', () => {
+  it('presses the inner corner sharper than its resting radius (M3)', () => {
+    // small: inner = small (8dp), pressed inner = extraSmall (4dp)
+    const { innerRadius, pressedRadius, outerRadius } =
+      getConnectedButtonSizeStyle({ size: 'small', theme });
+    expect(pressedRadius).toBeLessThan(innerRadius);
+    expect(innerRadius).toBe(theme.shapes.corner.small);
+    expect(pressedRadius).toBe(theme.shapes.corner.extraSmall);
+    // outer edge stays fully rounded
+    expect(outerRadius).toBeGreaterThan(innerRadius);
+  });
+
+  it('uses the spec inner corners for large and extra-large', () => {
+    expect(connectedButtonSizeTokens.large.innerShape).toBe('large');
+    expect(connectedButtonSizeTokens['extra-large'].innerShape).toBe(
+      'largeIncreased'
+    );
   });
 });
 

@@ -229,6 +229,7 @@ const ConnectedButtonGroup = <T extends string = string>({
             position={position}
             size={size}
             checked={checked}
+            multiSelect={Boolean(multiSelect)}
             icon={item.icon}
             label={item.label}
             disabled={item.disabled}
@@ -253,6 +254,10 @@ const ConnectedButtonGroup = <T extends string = string>({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
+    // Guarantees a 48dp interactive band so the shorter button sizes' hitSlop
+    // enlarges the touch target within the row's bounds (WCAG / MD3 target).
+    minHeight: 48,
+    alignItems: 'center',
   },
 });
 

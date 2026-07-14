@@ -10,6 +10,7 @@ import type {
 
 import Animated, {
   Easing,
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -24,6 +25,7 @@ import {
   type ConnectedButtonPosition,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import Icon, { type IconSource } from '../Icon';
 import TouchableRipple, {
@@ -36,6 +38,11 @@ export type Props = {
    * Whether the button is currently selected.
    */
   checked: boolean;
+  /**
+   * Whether the parent group allows multiple selections. Controls the
+   * accessibility role (checkbox vs radio).
+   */
+  multiSelect?: boolean;
   /**
    * Position of the button inside the connected group. Controls which corners
    * stay pinned to the group's outer radius and which morph on selection/press.
@@ -117,6 +124,7 @@ export type Props = {
  */
 const ConnectedButton = ({
   checked,
+  multiSelect,
   position,
   size,
   icon,
@@ -170,19 +178,34 @@ const ConnectedButton = ({
   const restRadius = checked ? outerRadius : innerRadius;
   const cornerRadius = useSharedValue(restRadius);
 
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
   const pressTimingConfig = React.useMemo(
     () => ({
       duration: theme.motion.duration.short4,
       easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
     }),
-    [theme.motion.duration.short4, theme.motion.easing.standard]
+    [
+      theme.motion.duration.short4,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
   );
   const releaseTimingConfig = React.useMemo(
     () => ({
       duration: theme.motion.duration.short3,
       easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
     }),
-    [theme.motion.duration.short3, theme.motion.easing.standard]
+    [
+      theme.motion.duration.short3,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
   );
 
   const isFirstRender = React.useRef(true);
@@ -198,15 +221,13 @@ const ConnectedButton = ({
   }, [restRadius, cornerRadius, releaseTimingConfig]);
 
   const handlePressIn = React.useCallback(() => {
-    if (!checked) {
-      cornerRadius.value = withTiming(pressedRadius, pressTimingConfig);
-    }
-  }, [checked, cornerRadius, pressedRadius, pressTimingConfig]);
+    // Pressed takes precedence over selection: even a selected (fully-rounded)
+    // button morphs its connected corner while pressed, matching the M3 spec.
+    cornerRadius.value = withTiming(pressedRadius, pressTimingConfig);
+  }, [cornerRadius, pressedRadius, pressTimingConfig]);
   const handlePressOut = React.useCallback(() => {
-    if (!checked) {
-      cornerRadius.value = withTiming(innerRadius, releaseTimingConfig);
-    }
-  }, [checked, cornerRadius, innerRadius, releaseTimingConfig]);
+    cornerRadius.value = withTiming(restRadius, releaseTimingConfig);
+  }, [cornerRadius, restRadius, releaseTimingConfig]);
 
   // The "outer" side keeps the group's fully-rounded radius; the "inner" side
   // (the connected edge) morphs between the resting, pressed and selected radii.
@@ -232,6 +253,11 @@ const ConnectedButton = ({
   const getTestID = (suffix: string) =>
     testID ? `${testID}-${suffix}` : undefined;
 
+  // When the container is translucent (disabled), the fill is drawn by the
+  // overlay below, so the base view stays transparent.
+  const containerBackground =
+    colors.containerOpacity < 1 ? undefined : colors.containerColor;
+
   return (
     <Animated.View
       testID={getTestID('container')}
@@ -240,8 +266,7 @@ const ConnectedButton = ({
         {
           height: sizeStyle.containerHeight,
           minWidth: sizeStyle.minWidth,
-          backgroundColor:
-            colors.containerOpacity < 1 ? 'transparent' : colors.containerColor,
+          backgroundColor: containerBackground,
         },
         animatedShapeStyle,
         style,
@@ -272,7 +297,7 @@ const ConnectedButton = ({
         aria-label={ariaLabel}
         aria-disabled={disabled}
         aria-checked={checked}
-        role="button"
+        role={multiSelect ? 'checkbox' : 'radio'}
         hitSlop={resolvedHitSlop}
         style={styles.ripple}
         theme={theme}
