@@ -240,12 +240,27 @@ const ConnectedButton = ({
         {
           height: sizeStyle.containerHeight,
           minWidth: sizeStyle.minWidth,
-          backgroundColor: colors.containerColor,
+          backgroundColor:
+            colors.containerOpacity < 1 ? 'transparent' : colors.containerColor,
         },
         animatedShapeStyle,
         style,
       ]}
     >
+      {colors.containerOpacity < 1 ? (
+        // Opacity is applied as a style so PlatformColor container values
+        // (Android dynamic themes) render at the MD3 disabled 12% correctly.
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor: colors.containerColor,
+              opacity: colors.containerOpacity,
+            },
+          ]}
+        />
+      ) : null}
       <TouchableRipple
         borderless
         onPress={onPress}

@@ -77,10 +77,7 @@ const getContainerColor = ({
   const { colors } = theme;
 
   if (disabled) {
-    const base = colors.onSurface;
-    return typeof base === 'string'
-      ? color(base).alpha(DISABLED_CONTAINER_OPACITY).rgb().string()
-      : base;
+    return colors.onSurface;
   }
 
   return selected ? colors.secondaryContainer : colors.surfaceContainer;
@@ -131,11 +128,16 @@ export const getConnectedButtonColors = ({
     checkedColor,
     uncheckedColor,
   });
+  // Opacity is applied as a style instead of blending it into the color so
+  // that PlatformColor values (Android dynamic themes) keep working.
+  const containerOpacity = disabled
+    ? DISABLED_CONTAINER_OPACITY
+    : stateOpacity.enabled;
   const contentOpacity = disabled
     ? stateOpacity.disabled
     : stateOpacity.enabled;
 
-  return { containerColor, contentColor, contentOpacity };
+  return { containerColor, containerOpacity, contentColor, contentOpacity };
 };
 
 export const getConnectedButtonRippleColor = ({
