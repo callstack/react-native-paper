@@ -83,7 +83,7 @@ export type Props<T extends string = string> = {
 /**
  * @deprecated Segmented buttons are deprecated in the Material Design 3 spec
  * and replaced by the Connected Button Group. Use
- * [`ConnectedButtonGroup`](./ConnectedButtonGroup) instead — it exposes the
+ * [`ConnectedButtonGroup`](../ConnectedButtonGroup/ConnectedButtonGroup) instead — it exposes the
  * same single/multi-select API with `buttons`, `value` and `onValueChange`.
  *
  * Segmented buttons can be used to select options, switch views or sort elements.</br>

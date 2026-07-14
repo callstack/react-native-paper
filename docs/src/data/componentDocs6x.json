@@ -4652,6 +4652,214 @@
         "src/components/Chip/Chip.tsx"
       ]
     },
+    "ConnectedButtonGroup/ConnectedButtonGroup": {
+      "filepath": "ConnectedButtonGroup/ConnectedButtonGroup.tsx",
+      "title": "ConnectedButtonGroup",
+      "description": "Connected button groups let people select from a set of related options,\nswitch views or sort elements. They are the Material Design 3 successor to\n`SegmentedButtons`: selected buttons morph to a fully-rounded shape and the\ngroup supports single- and multi-select.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { ConnectedButtonGroup } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('walk');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <ConnectedButtonGroup\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          { value: 'walk', label: 'Walking' },\n          { value: 'train', label: 'Transit' },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+      "link": "connected-button-group",
+      "data": {
+        "description": "Connected button groups let people select from a set of related options,\nswitch views or sort elements. They are the Material Design 3 successor to\n`SegmentedButtons`: selected buttons morph to a fully-rounded shape and the\ngroup supports single- and multi-select.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { ConnectedButtonGroup } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('walk');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <ConnectedButtonGroup\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          { value: 'walk', label: 'Walking' },\n          { value: 'train', label: 'Transit' },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+        "displayName": "ConnectedButtonGroup",
+        "methods": [],
+        "statics": [],
+        "props": {
+          "buttons": {
+            "required": true,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "signature",
+                  "type": "object",
+                  "raw": "{\n  /**\n   * Value of the button (required).\n   */\n  value: T;\n  /**\n   * Icon to display for the button.\n   */\n  icon?: IconSource;\n  /**\n   * Label text of the button.\n   */\n  label?: string;\n  /**\n   * Whether the button is disabled.\n   */\n  disabled?: boolean;\n  /**\n   * Accessibility label for the button. Read by the screen reader when the\n   * user taps the button.\n   */\n  'aria-label'?: string;\n  /**\n   * Custom color for the selected label and icon.\n   */\n  checkedColor?: string;\n  /**\n   * Custom color for the unselected label and icon.\n   */\n  uncheckedColor?: string;\n  /**\n   * Show an optional check icon to indicate the selected state.\n   */\n  showSelectedCheck?: boolean;\n  /**\n   * Type of background drawable to display the feedback (Android).\n   * https://reactnative.dev/docs/pressable#rippleconfig\n   */\n  background?: PressableAndroidRippleConfig;\n  /**\n   * Sets additional distance outside of the button in which a press can be\n   * detected.\n   */\n  hitSlop?: TouchableRippleProps['hitSlop'];\n  /**\n   * Callback that is called when the button is pressed, in addition to the\n   * group's `onValueChange`.\n   */\n  onPress?: (event: GestureResponderEvent) => void;\n  /**\n   * Specifies the largest possible scale a label font can reach.\n   */\n  labelMaxFontSizeMultiplier?: number;\n  /**\n   * Pass additional styles for the button container.\n   */\n  style?: StyleProp<ViewStyle>;\n  /**\n   * Style for the button label.\n   */\n  labelStyle?: StyleProp<TextStyle>;\n  /**\n   * testID to be used on tests.\n   */\n  testID?: string;\n}",
+                  "signature": {
+                    "properties": [
+                      {
+                        "key": "value",
+                        "value": {
+                          "name": "T",
+                          "required": true
+                        }
+                      },
+                      {
+                        "key": "icon",
+                        "value": {
+                          "name": "IconSource",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "label",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "disabled",
+                        "value": {
+                          "name": "boolean",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "aria-label",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "checkedColor",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "uncheckedColor",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "showSelectedCheck",
+                        "value": {
+                          "name": "boolean",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "background",
+                        "value": {
+                          "name": "PressableAndroidRippleConfig",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "hitSlop",
+                        "value": {
+                          "name": "TouchableRippleProps['hitSlop']",
+                          "raw": "TouchableRippleProps['hitSlop']",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "onPress",
+                        "value": {
+                          "name": "signature",
+                          "type": "function",
+                          "raw": "(event: GestureResponderEvent) => void",
+                          "signature": {
+                            "arguments": [
+                              {
+                                "name": "event",
+                                "type": {
+                                  "name": "GestureResponderEvent"
+                                }
+                              }
+                            ],
+                            "return": {
+                              "name": "void"
+                            }
+                          },
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "labelMaxFontSizeMultiplier",
+                        "value": {
+                          "name": "number",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "style",
+                        "value": {
+                          "name": "StyleProp",
+                          "elements": [
+                            {
+                              "name": "ViewStyle"
+                            }
+                          ],
+                          "raw": "StyleProp<ViewStyle>",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "labelStyle",
+                        "value": {
+                          "name": "StyleProp",
+                          "elements": [
+                            {
+                              "name": "TextStyle"
+                            }
+                          ],
+                          "raw": "StyleProp<TextStyle>",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "testID",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "raw": "ConnectedButtonConfig<T>[]"
+            },
+            "description": "Buttons to display as options in the group. Each button should contain the\nfollowing properties:\n- `value`: value of the button (required)\n- `icon`: icon to display for the button\n- `label`: label text of the button\n- `disabled`: whether the button is disabled\n- `aria-label`: accessibility label for the button\n- `checkedColor`: custom color for the selected label and icon\n- `uncheckedColor`: custom color for the unselected label and icon\n- `showSelectedCheck`: show an optional check icon to indicate the selected state\n- `onPress`: callback that is called when the button is pressed\n- `style`: pass additional styles for the button\n- `labelStyle`: style for the button label\n- `testID`: testID to be used on tests"
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "ConnectedButtonGroupSize"
+            },
+            "description": "Size of the buttons, following the Material Design 3 button-group scale.",
+            "defaultValue": {
+              "value": "'small'",
+              "computed": false
+            }
+          },
+          "style": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": ""
+          },
+          "testID": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "testID to be used on tests."
+          },
+          "theme": {
+            "required": false,
+            "tsType": {
+              "name": "ThemeProp"
+            },
+            "description": ""
+          }
+        }
+      },
+      "type": "component",
+      "dependencies": [
+        "src/components/ConnectedButtonGroup/ConnectedButtonGroup.tsx"
+      ]
+    },
     "DataTable/DataTable": {
       "filepath": "DataTable/DataTable.tsx",
       "title": "DataTable",
@@ -10695,10 +10903,10 @@
     "SegmentedButtons/SegmentedButtons": {
       "filepath": "SegmentedButtons/SegmentedButtons.tsx",
       "title": "SegmentedButtons",
-      "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+      "description": "@deprecated Segmented buttons are deprecated in the Material Design 3 spec\nand replaced by the Connected Button Group. Use\n[`ConnectedButtonGroup`](../ConnectedButtonGroup/ConnectedButtonGroup) instead — it exposes the\nsame single/multi-select API with `buttons`, `value` and `onValueChange`.\n\nSegmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
       "link": "segmented-buttons",
       "data": {
-        "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+        "description": "@deprecated Segmented buttons are deprecated in the Material Design 3 spec\nand replaced by the Connected Button Group. Use\n[`ConnectedButtonGroup`](../ConnectedButtonGroup/ConnectedButtonGroup) instead — it exposes the\nsame single/multi-select API with `buttons`, `value` and `onValueChange`.\n\nSegmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
         "displayName": "SegmentedButtons",
         "methods": [],
         "statics": [],

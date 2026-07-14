@@ -1,0 +1,122 @@
+---
+title: ConnectedButtonGroup
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+Connected button groups let people select from a set of related options, switch views or sort elements. They are the Material Design 3 successor to `SegmentedButtons`: selected buttons morph to a fully-rounded shape and the group supports single- and multi-select.
+
+<ScreenshotTabs screenshotData="screenshots/connected-button-group.png" />
+
+## Usage
+
+```js
+import * as React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { ConnectedButtonGroup } from 'react-native-paper';
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState('walk');
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ConnectedButtonGroup
+        value={value}
+        onValueChange={setValue}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'train', label: 'Transit' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+      />
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});
+
+export default MyComponent;
+```
+
+## Props
+
+<span />
+
+<div>
+
+### buttons (required)
+
+</div>
+  
+  <PropTable componentLink="ConnectedButtonGroup/ConnectedButtonGroup" prop="buttons" />
+  
+<div>
+
+### size
+
+</div>
+  
+  <PropTable componentLink="ConnectedButtonGroup/ConnectedButtonGroup" prop="size" />
+  
+<div>
+
+### style
+
+</div>
+  
+  <PropTable componentLink="ConnectedButtonGroup/ConnectedButtonGroup" prop="style" />
+  
+<div>
+
+### testID
+
+</div>
+  
+  <PropTable componentLink="ConnectedButtonGroup/ConnectedButtonGroup" prop="testID" />
+  
+<div>
+
+### theme
+
+</div>
+  
+  <PropTable componentLink="ConnectedButtonGroup/ConnectedButtonGroup" prop="theme" />
+
+<span />
+
+## Theme colors
+
+<ThemeColorsTable
+  themeColorsData={{
+    checked: {
+      '-': {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+      },
+    },
+    unchecked: {
+      '-': {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        textColor: 'theme.colors.onSurfaceVariant',
+      },
+    },
+    disabled: {
+      '-': {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+    },
+  }}
+  componentName="ConnectedButtonGroup"
+/>
+
+<span />
