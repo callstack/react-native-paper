@@ -29,6 +29,7 @@ export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Chip } from './components/Chip/Chip';
+export { default as ConnectedButtonGroup } from './components/ConnectedButtonGroup';
 export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
@@ -78,6 +79,10 @@ export type { Props as CardTitleProps } from './components/Card/CardTitle';
 export type { Props as CheckboxProps } from './components/Checkbox/Checkbox';
 export type { Props as CheckboxItemProps } from './components/Checkbox/CheckboxItem';
 export type { Props as ChipProps } from './components/Chip/Chip';
+export type {
+  Props as ConnectedButtonGroupProps,
+  ConnectedButtonConfig,
+} from './components/ConnectedButtonGroup';
 export type { Props as DataTableProps } from './components/DataTable/DataTable';
 export type { Props as DataTableCellProps } from './components/DataTable/DataTableCell';
 export type { Props as DataTableHeaderProps } from './components/DataTable/DataTableHeader';
