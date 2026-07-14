@@ -1,0 +1,238 @@
+import * as React from 'react';
+
+import { describe, expect, it, jest } from '@jest/globals';
+
+import { getTheme } from '../../core/theming';
+import { render, screen, userEvent } from '../../test-utils';
+import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
+import {
+  getConnectedButtonColors,
+  getConnectedButtonHitSlop,
+  getConnectedButtonPosition,
+} from '../ConnectedButtonGroup/utils';
+
+const theme = getTheme();
+
+type SingleSelectProps = Extract<
+  React.ComponentProps<typeof ConnectedButtonGroup>,
+  { multiSelect?: false | undefined }
+>;
+
+const buttons = [
+  { value: 'walk', label: 'Walking', testID: 'walk' },
+  { value: 'train', label: 'Transit', testID: 'train' },
+  { value: 'drive', label: 'Driving', testID: 'drive' },
+];
+
+const renderGroup = (props: Partial<SingleSelectProps> = {}) =>
+  render(
+    <ConnectedButtonGroup
+      value="walk"
+      onValueChange={() => {}}
+      buttons={buttons}
+      {...props}
+    />
+  );
+
+it('renders every button with its label', async () => {
+  await renderGroup();
+
+  expect(screen.getByTestId('walk-label')).toHaveTextContent('Walking');
+  expect(screen.getByTestId('train-label')).toHaveTextContent('Transit');
+  expect(screen.getByTestId('drive-label')).toHaveTextContent('Driving');
+});
+
+it('defaults to the small size (40dp height)', async () => {
+  await renderGroup();
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 40 });
+});
+
+it('applies the requested size height', async () => {
+  await renderGroup({ size: 'medium' });
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 56 });
+});
+
+it('calls onValueChange with the pressed value in single-select mode', async () => {
+  const user = userEvent.setup();
+  const onValueChange = jest.fn();
+  await renderGroup({ onValueChange });
+
+  await user.press(screen.getByTestId('train'));
+
+  expect(onValueChange).toHaveBeenCalledWith('train');
+});
+
+it('invokes the per-button onPress alongside onValueChange', async () => {
+  const user = userEvent.setup();
+  const onPress = jest.fn();
+  const onValueChange = jest.fn();
+  await renderGroup({
+    onValueChange,
+    buttons: [
+      { value: 'walk', label: 'Walking', testID: 'walk' },
+      { value: 'train', label: 'Transit', testID: 'train', onPress },
+    ],
+  });
+
+  await user.press(screen.getByTestId('train'));
+
+  expect(onPress).toHaveBeenCalledTimes(1);
+  expect(onValueChange).toHaveBeenCalledWith('train');
+});
+
+it('toggles values in multi-select mode', async () => {
+  const user = userEvent.setup();
+  const onValueChange = jest.fn();
+  await render(
+    <ConnectedButtonGroup
+      multiSelect
+      value={['walk']}
+      onValueChange={onValueChange}
+      buttons={buttons}
+    />
+  );
+
+  await user.press(screen.getByTestId('train'));
+  expect(onValueChange).toHaveBeenLastCalledWith(['walk', 'train']);
+
+  await user.press(screen.getByTestId('walk'));
+  expect(onValueChange).toHaveBeenLastCalledWith([]);
+});
+
+it('fills the selected button with the secondary container color', async () => {
+  await renderGroup();
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    backgroundColor: theme.colors.secondaryContainer,
+  });
+  expect(screen.getByTestId('train-container')).toHaveStyle({
+    backgroundColor: theme.colors.surfaceContainer,
+  });
+});
+
+it('does not fire onValueChange for a disabled button', async () => {
+  const user = userEvent.setup();
+  const onValueChange = jest.fn();
+  await renderGroup({
+    onValueChange,
+    buttons: [
+      { value: 'walk', label: 'Walking', testID: 'walk' },
+      { value: 'train', label: 'Transit', disabled: true, testID: 'train' },
+    ],
+  });
+
+  await user.press(screen.getByTestId('train'));
+
+  expect(onValueChange).not.toHaveBeenCalled();
+});
+
+it('shows the selection check only on the selected button', async () => {
+  await renderGroup({
+    buttons: [
+      {
+        value: 'walk',
+        label: 'Walking',
+        showSelectedCheck: true,
+        testID: 'walk',
+      },
+      {
+        value: 'train',
+        label: 'Transit',
+        showSelectedCheck: true,
+        testID: 'train',
+      },
+    ],
+  });
+
+  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
+  expect(screen.queryByTestId('train-check-icon')).toBeNull();
+});
+
+it('applies a custom checked color to the selected label', async () => {
+  await renderGroup({
+    buttons: [
+      {
+        value: 'walk',
+        label: 'Walking',
+        checkedColor: 'rgb(255, 0, 0)',
+        testID: 'walk',
+      },
+    ],
+  });
+
+  expect(screen.getByTestId('walk-label')).toHaveStyle({
+    color: 'rgb(255, 0, 0)',
+  });
+});
+
+describe('getConnectedButtonPosition', () => {
+  it('classifies a lone button as single', () => {
+    expect(getConnectedButtonPosition(0, 1)).toBe('single');
+  });
+
+  it('classifies first, middle and last positions', () => {
+    expect(getConnectedButtonPosition(0, 3)).toBe('first');
+    expect(getConnectedButtonPosition(1, 3)).toBe('middle');
+    expect(getConnectedButtonPosition(2, 3)).toBe('last');
+  });
+});
+
+describe('getConnectedButtonColors', () => {
+  it('uses MD3 selection color roles', () => {
+    const selected = getConnectedButtonColors({ theme, selected: true });
+    expect(selected.containerColor).toBe(theme.colors.secondaryContainer);
+    expect(selected.contentColor).toBe(theme.colors.onSecondaryContainer);
+
+    const unselected = getConnectedButtonColors({ theme, selected: false });
+    expect(unselected.containerColor).toBe(theme.colors.surfaceContainer);
+    expect(unselected.contentColor).toBe(theme.colors.onSurfaceVariant);
+  });
+
+  it('dims content and keeps onSurface when disabled', () => {
+    const disabled = getConnectedButtonColors({
+      theme,
+      selected: false,
+      disabled: true,
+    });
+    expect(disabled.contentColor).toBe(theme.colors.onSurface);
+    expect(disabled.contentOpacity).toBe(0.38);
+  });
+
+  it('honours custom checked and unchecked colors', () => {
+    expect(
+      getConnectedButtonColors({
+        theme,
+        selected: true,
+        checkedColor: 'red',
+      }).contentColor
+    ).toBe('red');
+    expect(
+      getConnectedButtonColors({
+        theme,
+        selected: false,
+        uncheckedColor: 'blue',
+      }).contentColor
+    ).toBe('blue');
+  });
+});
+
+describe('getConnectedButtonHitSlop', () => {
+  it('expands short buttons to the minimum interactive size', () => {
+    expect(getConnectedButtonHitSlop({ size: 'extra-small' })).toMatchObject({
+      top: 8,
+      bottom: 8,
+    });
+  });
+
+  it('leaves tall buttons untouched', () => {
+    expect(getConnectedButtonHitSlop({ size: 'medium' })).toBeUndefined();
+  });
+
+  it('respects a numeric hitSlop override', () => {
+    expect(getConnectedButtonHitSlop({ size: 'extra-small', hitSlop: 4 })).toBe(
+      4
+    );
+  });
+});
