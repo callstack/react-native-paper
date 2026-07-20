@@ -30,6 +30,7 @@ export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
+export { default as NavigationRail } from './components/NavigationRail/NavigationRail';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
@@ -84,6 +85,12 @@ export type {
   Props as BottomNavigationProps,
   BaseRoute as BottomNavigationRoute,
 } from './components/BottomNavigation/BottomNavigation';
+export type {
+  Props as NavigationRailProps,
+  NavigationRailDestination,
+  NavigationRailLabelType,
+  NavigationRailAlignment,
+} from './components/NavigationRail/NavigationRail';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
 export type { Props as CardActionsProps } from './components/Card/CardActions';
