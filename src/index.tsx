@@ -32,6 +32,7 @@ export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
+export { default as TimePicker } from './components/TimePicker/TimePicker';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Chip } from './components/Chip/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
@@ -86,6 +87,7 @@ export type {
 } from './components/BottomNavigation/BottomNavigation';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
+export type { TimePickerProps } from './components/TimePicker/types';
 export type { Props as CardActionsProps } from './components/Card/CardActions';
 export type { Props as CardContentProps } from './components/Card/CardContent';
 export type { Props as CardCoverProps } from './components/Card/CardCover';
