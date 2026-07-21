@@ -38,15 +38,24 @@ exports[`Menu Item renders menu item 1`] = `
         false,
         [
           {
-            "height": 48,
             "justifyContent": "center",
             "maxWidth": 280,
             "minWidth": 112,
+            "overflow": "hidden",
           },
           {
+            "height": 48,
+            "maxWidth": 280,
+            "minWidth": 112,
             "paddingHorizontal": 12,
           },
-          undefined,
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
           undefined,
         ],
       ]
@@ -57,6 +66,7 @@ exports[`Menu Item renders menu item 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flexDirection": "row",
           },
           {
@@ -111,6 +121,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -140,19 +151,19 @@ exports[`Menu Item renders menu item 1`] = `
               [
                 {
                   "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   undefined,
                 ],
@@ -202,15 +213,24 @@ exports[`Menu Item renders menu item 1`] = `
         false,
         [
           {
-            "height": 48,
             "justifyContent": "center",
             "maxWidth": 280,
             "minWidth": 112,
+            "overflow": "hidden",
           },
           {
+            "height": 48,
+            "maxWidth": 280,
+            "minWidth": 112,
             "paddingHorizontal": 12,
           },
-          undefined,
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
           undefined,
         ],
       ]
@@ -221,6 +241,7 @@ exports[`Menu Item renders menu item 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flexDirection": "row",
           },
           {
@@ -275,6 +296,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -304,19 +326,19 @@ exports[`Menu Item renders menu item 1`] = `
               [
                 {
                   "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   undefined,
                 ],
@@ -366,15 +388,24 @@ exports[`Menu Item renders menu item 1`] = `
         false,
         [
           {
-            "height": 48,
             "justifyContent": "center",
             "maxWidth": 280,
             "minWidth": 112,
+            "overflow": "hidden",
           },
           {
+            "height": 48,
+            "maxWidth": 280,
+            "minWidth": 112,
             "paddingHorizontal": 12,
           },
-          undefined,
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
           undefined,
         ],
       ]
@@ -385,6 +416,7 @@ exports[`Menu Item renders menu item 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flexDirection": "row",
           },
           {
@@ -439,6 +471,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -468,19 +501,19 @@ exports[`Menu Item renders menu item 1`] = `
               [
                 {
                   "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   undefined,
                 ],
@@ -530,15 +563,24 @@ exports[`Menu Item renders menu item 1`] = `
         false,
         [
           {
-            "height": 48,
             "justifyContent": "center",
             "maxWidth": 280,
             "minWidth": 112,
+            "overflow": "hidden",
           },
           {
+            "height": 48,
+            "maxWidth": 280,
+            "minWidth": 112,
             "paddingHorizontal": 12,
           },
-          undefined,
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
           undefined,
         ],
       ]
@@ -549,6 +591,7 @@ exports[`Menu Item renders menu item 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flexDirection": "row",
           },
           {
@@ -603,6 +646,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -632,19 +676,19 @@ exports[`Menu Item renders menu item 1`] = `
               [
                 {
                   "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   undefined,
                 ],
@@ -694,15 +738,24 @@ exports[`Menu Item renders menu item 1`] = `
         false,
         [
           {
-            "height": 48,
             "justifyContent": "center",
             "maxWidth": 280,
             "minWidth": 112,
+            "overflow": "hidden",
           },
           {
+            "height": 48,
+            "maxWidth": 280,
+            "minWidth": 112,
             "paddingHorizontal": 12,
           },
-          undefined,
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
           undefined,
         ],
       ]
@@ -713,6 +766,7 @@ exports[`Menu Item renders menu item 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flexDirection": "row",
           },
           {
@@ -727,6 +781,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -756,19 +811,19 @@ exports[`Menu Item renders menu item 1`] = `
               [
                 {
                   "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   undefined,
                 ],
