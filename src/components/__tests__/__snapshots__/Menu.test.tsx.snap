@@ -263,7 +263,7 @@ exports[`renders menu with content styles 1`] = `
           style={
             {
               "backgroundColor": "rgba(243, 237, 247, 1)",
-              "borderRadius": 4,
+              "borderRadius": 16,
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "opacity": 0,
@@ -292,7 +292,7 @@ exports[`renders menu with content styles 1`] = `
             style={
               {
                 "backgroundColor": "rgba(243, 237, 247, 1)",
-                "borderRadius": 4,
+                "borderRadius": 16,
                 "borderTopLeftRadius": 0,
                 "borderTopRightRadius": 0,
                 "flex": undefined,
@@ -344,15 +344,24 @@ exports[`renders menu with content styles 1`] = `
                   false,
                   [
                     {
-                      "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
+                      "overflow": "hidden",
                     },
                     {
+                      "height": 48,
+                      "maxWidth": 280,
+                      "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
-                    undefined,
+                    {
+                      "borderBottomLeftRadius": 0,
+                      "borderBottomRightRadius": 0,
+                      "borderTopLeftRadius": 12,
+                      "borderTopRightRadius": 12,
+                    },
+                    null,
                     undefined,
                   ],
                 ]
@@ -363,6 +372,7 @@ exports[`renders menu with content styles 1`] = `
                 style={
                   [
                     {
+                      "alignItems": "center",
                       "flexDirection": "row",
                     },
                     {
@@ -377,6 +387,7 @@ exports[`renders menu with content styles 1`] = `
                   style={
                     [
                       {
+                        "flex": 1,
                         "justifyContent": "center",
                       },
                       {
@@ -406,19 +417,19 @@ exports[`renders menu with content styles 1`] = `
                         [
                           {
                             "fontFamily": "System",
-                            "fontSize": 16,
-                            "fontWeight": "400",
-                            "letterSpacing": 0.5,
-                            "lineHeight": 24,
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           [
                             {
                               "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                              "letterSpacing": 0.5,
-                              "lineHeight": 24,
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
                             },
                             undefined,
                           ],
@@ -468,15 +479,24 @@ exports[`renders menu with content styles 1`] = `
                   false,
                   [
                     {
-                      "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
+                      "overflow": "hidden",
                     },
                     {
+                      "height": 48,
+                      "maxWidth": 280,
+                      "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
-                    undefined,
+                    {
+                      "borderBottomLeftRadius": 12,
+                      "borderBottomRightRadius": 12,
+                      "borderTopLeftRadius": 0,
+                      "borderTopRightRadius": 0,
+                    },
+                    null,
                     undefined,
                   ],
                 ]
@@ -487,6 +507,7 @@ exports[`renders menu with content styles 1`] = `
                 style={
                   [
                     {
+                      "alignItems": "center",
                       "flexDirection": "row",
                     },
                     {
@@ -501,6 +522,7 @@ exports[`renders menu with content styles 1`] = `
                   style={
                     [
                       {
+                        "flex": 1,
                         "justifyContent": "center",
                       },
                       {
@@ -530,19 +552,19 @@ exports[`renders menu with content styles 1`] = `
                         [
                           {
                             "fontFamily": "System",
-                            "fontSize": 16,
-                            "fontWeight": "400",
-                            "letterSpacing": 0.5,
-                            "lineHeight": 24,
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           [
                             {
                               "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                              "letterSpacing": 0.5,
-                              "lineHeight": 24,
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
                             },
                             undefined,
                           ],
@@ -994,7 +1016,7 @@ exports[`renders visible menu 1`] = `
           style={
             {
               "backgroundColor": "rgba(243, 237, 247, 1)",
-              "borderRadius": 4,
+              "borderRadius": 16,
               "opacity": 0,
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
@@ -1021,7 +1043,7 @@ exports[`renders visible menu 1`] = `
             style={
               {
                 "backgroundColor": "rgba(243, 237, 247, 1)",
-                "borderRadius": 4,
+                "borderRadius": 16,
                 "flex": undefined,
                 "paddingVertical": 8,
                 "shadowColor": "rgba(0, 0, 0, 1)",
@@ -1071,15 +1093,24 @@ exports[`renders visible menu 1`] = `
                   false,
                   [
                     {
-                      "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
+                      "overflow": "hidden",
                     },
                     {
+                      "height": 48,
+                      "maxWidth": 280,
+                      "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
-                    undefined,
+                    {
+                      "borderBottomLeftRadius": 0,
+                      "borderBottomRightRadius": 0,
+                      "borderTopLeftRadius": 12,
+                      "borderTopRightRadius": 12,
+                    },
+                    null,
                     undefined,
                   ],
                 ]
@@ -1090,6 +1121,7 @@ exports[`renders visible menu 1`] = `
                 style={
                   [
                     {
+                      "alignItems": "center",
                       "flexDirection": "row",
                     },
                     {
@@ -1104,6 +1136,7 @@ exports[`renders visible menu 1`] = `
                   style={
                     [
                       {
+                        "flex": 1,
                         "justifyContent": "center",
                       },
                       {
@@ -1133,19 +1166,19 @@ exports[`renders visible menu 1`] = `
                         [
                           {
                             "fontFamily": "System",
-                            "fontSize": 16,
-                            "fontWeight": "400",
-                            "letterSpacing": 0.5,
-                            "lineHeight": 24,
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           [
                             {
                               "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                              "letterSpacing": 0.5,
-                              "lineHeight": 24,
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
                             },
                             undefined,
                           ],
@@ -1195,15 +1228,24 @@ exports[`renders visible menu 1`] = `
                   false,
                   [
                     {
-                      "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
+                      "overflow": "hidden",
                     },
                     {
+                      "height": 48,
+                      "maxWidth": 280,
+                      "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
-                    undefined,
+                    {
+                      "borderBottomLeftRadius": 12,
+                      "borderBottomRightRadius": 12,
+                      "borderTopLeftRadius": 0,
+                      "borderTopRightRadius": 0,
+                    },
+                    null,
                     undefined,
                   ],
                 ]
@@ -1214,6 +1256,7 @@ exports[`renders visible menu 1`] = `
                 style={
                   [
                     {
+                      "alignItems": "center",
                       "flexDirection": "row",
                     },
                     {
@@ -1228,6 +1271,7 @@ exports[`renders visible menu 1`] = `
                   style={
                     [
                       {
+                        "flex": 1,
                         "justifyContent": "center",
                       },
                       {
@@ -1257,19 +1301,19 @@ exports[`renders visible menu 1`] = `
                         [
                           {
                             "fontFamily": "System",
-                            "fontSize": 16,
-                            "fontWeight": "400",
-                            "letterSpacing": 0.5,
-                            "lineHeight": 24,
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           [
                             {
                               "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
-                              "fontSize": 16,
-                              "fontWeight": "400",
-                              "letterSpacing": 0.5,
-                              "lineHeight": 24,
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
                             },
                             undefined,
                           ],

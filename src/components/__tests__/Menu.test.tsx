@@ -99,6 +99,47 @@ it('renders menu with content styles', async () => {
   })
 );
 
+it('uses corner.large for the menu surface', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    borderRadius: theme.shapes.corner.large,
+  });
+});
+
+it('uses tertiaryContainer for vibrant color scheme', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    backgroundColor: theme.colors.tertiaryContainer,
+  });
+});
+
 it('uses the default anchorPosition of top', async () => {
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
     width: 400,

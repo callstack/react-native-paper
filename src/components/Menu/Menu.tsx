@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   Dimensions,
-  Easing,
   Keyboard,
   Platform,
   ScrollView,
@@ -23,8 +22,12 @@ import type {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
+import { MenuTokens, type MenuColorScheme } from './tokens';
+import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
@@ -83,6 +86,12 @@ export type Props = {
    */
   mode?: 'flat' | 'elevated';
   /**
+   * Color scheme for the menu surface and its items.
+   * - `standard` (default) — elevation surface + onSurface content
+   * - `vibrant` — M3 Expressive tertiary roles
+   */
+  colorScheme?: MenuColorScheme;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -97,15 +106,11 @@ export type Props = {
 };
 
 // Minimum padding between the edge of the screen and the menu
-const SCREEN_INDENT = 8;
-// From https://material.io/design/motion/speed.html#duration
-const ANIMATION_DURATION = 250;
-// From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
-const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+const SCREEN_INDENT = MenuTokens.sizes.screenIndent;
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
-const DEFAULT_ELEVATION: Elevation = 2;
+const DEFAULT_ELEVATION: Elevation = MenuTokens.elevation.default;
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (el: View | null | undefined) => {
@@ -188,13 +193,14 @@ const Menu = ({
   style,
   elevation = DEFAULT_ELEVATION,
   mode = DEFAULT_MODE,
+  colorScheme = 'standard',
   children,
   theme: themeOverrides,
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const { colors: md3Colors } = theme as Theme;
+  const reduceMotion = useReduceMotion();
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
@@ -345,44 +351,65 @@ const Menu = ({
 
     attachListeners();
     requestAnimationFrame(() => {
-      const { animation } = theme;
-      Animated.parallel([
-        Animated.timing(scaleAnimationRef.current, {
-          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-          duration: ANIMATION_DURATION * animation.scale,
-          easing: EASING,
-          useNativeDriver: true,
-        }),
-        Animated.timing(opacityAnimationRef.current, {
-          toValue: 1,
-          duration: ANIMATION_DURATION * animation.scale,
-          easing: EASING,
-          useNativeDriver: true,
-        }),
-      ]).start(() => {
+      const finish = () => {
         focusFirstDOMNode(menuRef.current);
         prevRendered.current = true;
-      });
+      };
+
+      if (reduceMotion) {
+        scaleAnimationRef.current.setValue({
+          x: menuLayoutResult.width,
+          y: menuLayoutResult.height,
+        });
+        opacityAnimationRef.current.setValue(1);
+        finish();
+        return;
+      }
+
+      // M3 spring motion (spatial for scale, effects for opacity).
+      // @see https://m3.material.io/styles/motion/easing-and-duration/tokens-specs
+      const spatialSpring = toRawSpring(theme.motion.spring.fast.spatial);
+      const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
+
+      Animated.parallel([
+        Animated.spring(scaleAnimationRef.current, {
+          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
+          ...spatialSpring,
+          useNativeDriver: true,
+        }),
+        Animated.spring(opacityAnimationRef.current, {
+          toValue: 1,
+          ...effectsSpring,
+          useNativeDriver: true,
+        }),
+      ]).start(finish);
     });
-  }, [anchor, attachListeners, measureAnchorLayout, theme]);
+  }, [anchor, attachListeners, measureAnchorLayout, reduceMotion, theme]);
 
   const hide = React.useCallback(() => {
     removeListeners();
 
-    const { animation } = theme;
-
-    Animated.timing(opacityAnimationRef.current, {
-      toValue: 0,
-      duration: ANIMATION_DURATION * animation.scale,
-      easing: EASING,
-      useNativeDriver: true,
-    }).start(() => {
+    const finish = () => {
       setMenuLayout({ width: 0, height: 0 });
       setRendered(false);
       prevRendered.current = false;
       focusFirstDOMNode(anchorRef.current);
-    });
-  }, [removeListeners, theme]);
+    };
+
+    if (reduceMotion) {
+      opacityAnimationRef.current.setValue(0);
+      finish();
+      return;
+    }
+
+    const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
+
+    Animated.spring(opacityAnimationRef.current, {
+      toValue: 0,
+      ...effectsSpring,
+      useNativeDriver: true,
+    }).start(finish);
+  }, [reduceMotion, removeListeners, theme]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {
@@ -614,7 +641,7 @@ const Menu = ({
         }),
       },
     ],
-    borderRadius: theme.shapes.corner.extraSmall,
+    borderRadius: getMenuContainerBorderRadius(theme),
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
 
@@ -628,6 +655,36 @@ const Menu = ({
   };
 
   const pointerEvents = visible ? 'box-none' : 'none';
+
+  // First/last corner.medium + colorScheme inheritance for direct Menu.Item
+  // children only (type identity — no displayName filtering). Wrappers keep
+  // working via explicit roundedTop/roundedBottom/colorScheme props.
+  const menuChildren = React.Children.toArray(children);
+  const itemIndices = menuChildren
+    .map((child, index) =>
+      React.isValidElement(child) && child.type === MenuItem ? index : -1
+    )
+    .filter((index) => index >= 0);
+  const firstItemIndex = itemIndices[0];
+  const lastItemIndex = itemIndices[itemIndices.length - 1];
+
+  const renderedChildren = menuChildren.map((child, index) => {
+    if (!React.isValidElement(child) || child.type !== MenuItem) {
+      return child;
+    }
+    const childProps = child.props as React.ComponentProps<typeof MenuItem>;
+    return React.cloneElement(child as React.ReactElement<typeof childProps>, {
+      colorScheme: childProps.colorScheme ?? colorScheme,
+      roundedTop: childProps.roundedTop ?? index === firstItemIndex,
+      roundedBottom: childProps.roundedBottom ?? index === lastItemIndex,
+    });
+  });
+
+  const surfaceBackground = getMenuContainerColor({
+    theme: theme as Theme,
+    elevation,
+    colorScheme,
+  });
 
   return (
     <View
@@ -670,7 +727,8 @@ const Menu = ({
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
                   {
-                    backgroundColor: md3Colors.elevation[`level${elevation}`],
+                    backgroundColor: surfaceBackground,
+                    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
                   },
                   contentStyle,
                 ]}
@@ -683,9 +741,9 @@ const Menu = ({
                   <ScrollView
                     keyboardShouldPersistTaps={keyboardShouldPersistTaps}
                   >
-                    {children}
+                    {renderedChildren}
                   </ScrollView>
-                )) || <React.Fragment>{children}</React.Fragment>}
+                )) || <React.Fragment>{renderedChildren}</React.Fragment>}
               </Surface>
             </Animated.View>
           </View>
@@ -703,7 +761,6 @@ const styles = StyleSheet.create({
   },
   shadowMenuContainer: {
     opacity: 0,
-    paddingVertical: 8,
   },
   pressableOverlay: {
     ...Platform.select({

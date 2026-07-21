@@ -138,13 +138,30 @@ const MenuExample = () => {
             anchorPosition="bottom"
             anchor={
               <Button mode="outlined" onPress={_toggleMenu('menu5')}>
-                Menu with anchor position bottom
+                Menu with selection + supporting text
               </Button>
             }
           >
-            <Menu.Item onPress={() => {}} title="Item 1" />
-            <Menu.Item onPress={() => {}} title="Item 2" />
-            <Menu.Item onPress={() => {}} title="Item 3" />
+            <Menu.Item
+              leadingIcon="content-copy"
+              onPress={() => {}}
+              title="Copy"
+              trailingSupportingText="⌘C"
+            />
+            <Menu.Item
+              leadingIcon="content-paste"
+              onPress={() => {}}
+              title="Paste"
+              supportingText="Insert clipboard"
+              selected
+            />
+            <Menu.Item
+              leadingIcon="share-variant"
+              onPress={() => {}}
+              title="Share"
+              dense
+            />
+            <Menu.Item onPress={() => {}} title="Delete" disabled />
           </Menu>
         </View>
 
