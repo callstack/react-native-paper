@@ -352,6 +352,7 @@ exports[`renders menu with content styles 1`] = `
                     {
                       "height": 48,
                       "maxWidth": 280,
+                      "minHeight": 48,
                       "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
@@ -373,7 +374,9 @@ exports[`renders menu with content styles 1`] = `
                   [
                     {
                       "alignItems": "center",
+                      "alignSelf": "flex-start",
                       "flexDirection": "row",
+                      "maxWidth": 256,
                     },
                     {
                       "opacity": 1,
@@ -387,12 +390,12 @@ exports[`renders menu with content styles 1`] = `
                   style={
                     [
                       {
-                        "flex": 1,
+                        "flexGrow": 0,
+                        "flexShrink": 1,
                         "justifyContent": "center",
                       },
                       {
                         "maxWidth": 268,
-                        "minWidth": 100,
                       },
                       {
                         "marginLeft": 4,
@@ -487,6 +490,7 @@ exports[`renders menu with content styles 1`] = `
                     {
                       "height": 48,
                       "maxWidth": 280,
+                      "minHeight": 48,
                       "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
@@ -508,7 +512,9 @@ exports[`renders menu with content styles 1`] = `
                   [
                     {
                       "alignItems": "center",
+                      "alignSelf": "flex-start",
                       "flexDirection": "row",
+                      "maxWidth": 256,
                     },
                     {
                       "opacity": 1,
@@ -522,12 +528,12 @@ exports[`renders menu with content styles 1`] = `
                   style={
                     [
                       {
-                        "flex": 1,
+                        "flexGrow": 0,
+                        "flexShrink": 1,
                         "justifyContent": "center",
                       },
                       {
                         "maxWidth": 268,
-                        "minWidth": 100,
                       },
                       {
                         "marginLeft": 4,
@@ -1101,6 +1107,7 @@ exports[`renders visible menu 1`] = `
                     {
                       "height": 48,
                       "maxWidth": 280,
+                      "minHeight": 48,
                       "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
@@ -1122,7 +1129,9 @@ exports[`renders visible menu 1`] = `
                   [
                     {
                       "alignItems": "center",
+                      "alignSelf": "flex-start",
                       "flexDirection": "row",
+                      "maxWidth": 256,
                     },
                     {
                       "opacity": 1,
@@ -1136,12 +1145,12 @@ exports[`renders visible menu 1`] = `
                   style={
                     [
                       {
-                        "flex": 1,
+                        "flexGrow": 0,
+                        "flexShrink": 1,
                         "justifyContent": "center",
                       },
                       {
                         "maxWidth": 268,
-                        "minWidth": 100,
                       },
                       {
                         "marginLeft": 4,
@@ -1236,6 +1245,7 @@ exports[`renders visible menu 1`] = `
                     {
                       "height": 48,
                       "maxWidth": 280,
+                      "minHeight": 48,
                       "minWidth": 112,
                       "paddingHorizontal": 12,
                     },
@@ -1257,7 +1267,9 @@ exports[`renders visible menu 1`] = `
                   [
                     {
                       "alignItems": "center",
+                      "alignSelf": "flex-start",
                       "flexDirection": "row",
+                      "maxWidth": 256,
                     },
                     {
                       "opacity": 1,
@@ -1271,12 +1283,12 @@ exports[`renders visible menu 1`] = `
                   style={
                     [
                       {
-                        "flex": 1,
+                        "flexGrow": 0,
+                        "flexShrink": 1,
                         "justifyContent": "center",
                       },
                       {
                         "maxWidth": 268,
-                        "minWidth": 100,
                       },
                       {
                         "marginLeft": 4,
