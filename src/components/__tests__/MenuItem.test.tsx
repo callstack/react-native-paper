@@ -83,11 +83,22 @@ describe('Menu Item', () => {
         title="Share"
         supportingText="Send a link"
         trailingSupportingText="⌘S"
+        testID="menu-item"
       />
     );
 
     expect(screen.getByText('Send a link')).toBeOnTheScreen();
     expect(screen.getByText('⌘S')).toBeOnTheScreen();
+    // two-line anatomy must not use fixed 48 height (would clip supporting)
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      minHeight: 48,
+      paddingVertical: 8,
+    });
+  });
+
+  it('keeps fixed height for single-line items', async () => {
+    await render(<Menu.Item title="Paste" testID="menu-item" />);
+    expect(screen.getByTestId('menu-item')).toHaveStyle({ height: 48 });
   });
 
   it('applies selected colors and aria-selected', async () => {

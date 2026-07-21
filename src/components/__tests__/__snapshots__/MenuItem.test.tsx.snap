@@ -46,6 +46,7 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "height": 48,
             "maxWidth": 280,
+            "minHeight": 48,
             "minWidth": 112,
             "paddingHorizontal": 12,
           },
@@ -66,7 +67,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
+            "alignSelf": "flex-start",
             "flexDirection": "row",
+            "maxWidth": 256,
           },
           {
             "opacity": 1,
@@ -81,6 +84,9 @@ exports[`Menu Item renders menu item 1`] = `
           [
             {
               "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
@@ -120,12 +126,12 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flex": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
             {
               "maxWidth": 232,
-              "minWidth": 100,
             },
             {
               "marginLeft": 12,
@@ -219,6 +225,7 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "height": 48,
             "maxWidth": 280,
+            "minHeight": 48,
             "minWidth": 112,
             "paddingHorizontal": 12,
           },
@@ -239,7 +246,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
+            "alignSelf": "flex-start",
             "flexDirection": "row",
+            "maxWidth": 256,
           },
           {
             "opacity": 1,
@@ -254,6 +263,9 @@ exports[`Menu Item renders menu item 1`] = `
           [
             {
               "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
@@ -293,12 +305,12 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flex": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
             {
               "maxWidth": 232,
-              "minWidth": 100,
             },
             {
               "marginLeft": 12,
@@ -392,6 +404,7 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "height": 48,
             "maxWidth": 280,
+            "minHeight": 48,
             "minWidth": 112,
             "paddingHorizontal": 12,
           },
@@ -412,7 +425,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
+            "alignSelf": "flex-start",
             "flexDirection": "row",
+            "maxWidth": 256,
           },
           {
             "opacity": 0.38,
@@ -427,6 +442,9 @@ exports[`Menu Item renders menu item 1`] = `
           [
             {
               "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
@@ -466,12 +484,12 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flex": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
             {
               "maxWidth": 232,
-              "minWidth": 100,
             },
             {
               "marginLeft": 12,
@@ -565,6 +583,7 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "height": 48,
             "maxWidth": 280,
+            "minHeight": 48,
             "minWidth": 112,
             "paddingHorizontal": 12,
           },
@@ -585,7 +604,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
+            "alignSelf": "flex-start",
             "flexDirection": "row",
+            "maxWidth": 256,
           },
           {
             "opacity": 0.38,
@@ -600,6 +621,9 @@ exports[`Menu Item renders menu item 1`] = `
           [
             {
               "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
@@ -639,12 +663,12 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flex": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
             {
               "maxWidth": 232,
-              "minWidth": 100,
             },
             {
               "marginLeft": 12,
@@ -738,6 +762,7 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "height": 48,
             "maxWidth": 280,
+            "minHeight": 48,
             "minWidth": 112,
             "paddingHorizontal": 12,
           },
@@ -758,7 +783,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
+            "alignSelf": "flex-start",
             "flexDirection": "row",
+            "maxWidth": 256,
           },
           {
             "opacity": 1,
@@ -772,12 +799,12 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flex": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
             {
               "maxWidth": 268,
-              "minWidth": 100,
             },
             {
               "marginLeft": 4,

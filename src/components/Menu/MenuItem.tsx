@@ -273,7 +273,12 @@ const MenuItem = ({
           paddingHorizontal: itemPaddingHorizontal,
           minWidth,
           maxWidth,
-          height: dense ? denseItemHeight : itemHeight,
+          // Supporting text needs vertical room; use minHeight so two-line
+          // anatomy is not clipped (spec single-line title is 48 / dense 32).
+          minHeight: dense ? denseItemHeight : itemHeight,
+          ...(supportingText
+            ? { paddingVertical: 8 }
+            : { height: dense ? denseItemHeight : itemHeight }),
         },
         borderRadiusStyle,
         containerColor ? { backgroundColor: containerColor } : null,
@@ -294,7 +299,10 @@ const MenuItem = ({
     >
       <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
         {leadingIcon ? (
-          <View style={[{ width: iconSize }]} pointerEvents="box-none">
+          <View
+            style={[{ width: iconSize }, styles.leadingIcon]}
+            pointerEvents="box-none"
+          >
             <Icon source={leadingIcon} size={iconSize} color={iconColor} />
           </View>
         ) : null}
@@ -302,7 +310,7 @@ const MenuItem = ({
           style={[
             styles.content,
             {
-              minWidth: minWidth - itemPaddingHorizontal,
+              // Keep room for trailing slots; do not force min that starves them.
               maxWidth: contentMaxWidth,
             },
             leadingIcon
@@ -348,7 +356,10 @@ const MenuItem = ({
           </Text>
         ) : null}
         {trailingIcon ? (
-          <View style={[{ width: iconSize }]} pointerEvents="box-none">
+          <View
+            style={[{ width: iconSize }, styles.trailingIcon]}
+            pointerEvents="box-none"
+          >
             <Icon source={trailingIcon} size={iconSize} color={iconColor} />
           </View>
         ) : null}
@@ -369,13 +380,26 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    // Intrinsic width: do not let flex children collapse trailing slots
+    // when the parent width is still content-driven.
+    alignSelf: 'flex-start',
+    maxWidth: MAX_WIDTH - MenuTokens.sizes.itemPaddingHorizontal * 2,
+  },
+  leadingIcon: {
+    flexShrink: 0,
   },
   content: {
-    flex: 1,
+    flexShrink: 1,
+    flexGrow: 0,
     justifyContent: 'center',
   },
   trailingSupporting: {
     marginLeft: 12,
+    flexShrink: 0,
+  },
+  trailingIcon: {
+    marginLeft: 12,
+    flexShrink: 0,
   },
 });
 
