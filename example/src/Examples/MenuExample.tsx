@@ -165,6 +165,33 @@ const MenuExample = () => {
           </Menu>
         </View>
 
+        <View style={styles.alignCenter}>
+          <Menu
+            visible={_getVisible('menu6')}
+            onDismiss={_toggleMenu('menu6')}
+            colorScheme="vibrant"
+            anchor={
+              <Button mode="outlined" onPress={_toggleMenu('menu6')}>
+                Vibrant color scheme
+              </Button>
+            }
+          >
+            <Menu.Item leadingIcon="star" onPress={() => {}} title="Featured" />
+            <Menu.Item
+              leadingIcon="heart"
+              onPress={() => {}}
+              title="Favorite"
+              selected
+            />
+            <Menu.Item
+              leadingIcon="bell-off"
+              onPress={() => {}}
+              title="Muted"
+              disabled
+            />
+          </Menu>
+        </View>
+
         <View style={styles.bottomMenu}>
           <Menu
             visible={_getVisible('menu4')}

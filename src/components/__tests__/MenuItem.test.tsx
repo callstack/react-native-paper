@@ -91,6 +91,16 @@ describe('Menu Item', () => {
     expect(
       screen.getByTestId('menu-item-trailing-supporting')
     ).toHaveTextContent('⌘S');
+    // two-line anatomy must not use fixed 48 height (would clip supporting)
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      minHeight: 48,
+      paddingVertical: 8,
+    });
+  });
+
+  it('keeps fixed height for single-line items', async () => {
+    await render(<Menu.Item title="Paste" />);
+    expect(screen.getByTestId('menu-item')).toHaveStyle({ height: 48 });
   });
 
   it('applies selected colors and aria-selected', async () => {
