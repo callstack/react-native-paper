@@ -30,6 +30,8 @@ import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
 import MenuItem from './MenuItem';
+import { MenuTokens, type MenuColorScheme } from './tokens';
+import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
@@ -96,6 +98,12 @@ export type Props = {
    */
   mode?: 'flat' | 'elevated';
   /**
+   * Color scheme for the menu surface and its items.
+   * - `standard` (default) — elevation surface + onSurface content
+   * - `vibrant` — M3 Expressive tertiary roles
+   */
+  colorScheme?: MenuColorScheme;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -110,7 +118,7 @@ export type Props = {
 };
 
 // Minimum padding between the edge of the screen and the menu
-const SCREEN_INDENT = 8;
+const SCREEN_INDENT = MenuTokens.sizes.screenIndent;
 // From https://material.io/design/motion/speed.html#duration
 const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
@@ -120,7 +128,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
 
 const getKeyboardHeight = (fallback: number) =>
   Keyboard.metrics?.()?.height ?? fallback;
-const DEFAULT_ELEVATION: Elevation = 2;
+const DEFAULT_ELEVATION: Elevation = MenuTokens.elevation.default;
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (
@@ -204,6 +212,7 @@ const Menu = ({
   style,
   elevation = DEFAULT_ELEVATION,
   mode = DEFAULT_MODE,
+  colorScheme = 'standard',
   children,
   theme: themeOverrides,
   keyboardShouldPersistTaps,
@@ -665,6 +674,36 @@ const Menu = ({
 
   const pointerEvents = visible ? 'box-none' : 'none';
 
+  // First/last corner.medium + colorScheme inheritance for direct Menu.Item
+  // children only (type identity — no displayName filtering). Wrappers keep
+  // working via explicit roundedTop/roundedBottom/colorScheme props.
+  const menuChildren = React.Children.toArray(children);
+  const itemIndices = menuChildren
+    .map((child, index) =>
+      React.isValidElement(child) && child.type === MenuItem ? index : -1
+    )
+    .filter((index) => index >= 0);
+  const firstItemIndex = itemIndices[0];
+  const lastItemIndex = itemIndices[itemIndices.length - 1];
+
+  const renderedChildren = menuChildren.map((child, index) => {
+    if (!React.isValidElement(child) || child.type !== MenuItem) {
+      return child;
+    }
+    const childProps = child.props as React.ComponentProps<typeof MenuItem>;
+    return React.cloneElement(child as React.ReactElement<typeof childProps>, {
+      colorScheme: childProps.colorScheme ?? colorScheme,
+      roundedTop: childProps.roundedTop ?? index === firstItemIndex,
+      roundedBottom: childProps.roundedBottom ?? index === lastItemIndex,
+    });
+  });
+
+  const surfaceBackground = getMenuContainerColor({
+    theme,
+    elevation,
+    colorScheme,
+  });
+
   return (
     <View
       ref={(ref) => {
@@ -699,7 +738,8 @@ const Menu = ({
             >
               <Surface
                 mode={mode}
-                borderRadius={theme.shapes.corner.extraSmall}
+                borderRadius={getMenuContainerBorderRadius(theme)}
+                backgroundColor={surfaceBackground}
                 style={[
                   styles.shadowMenuContainer,
                   { pointerEvents },
@@ -721,9 +761,9 @@ const Menu = ({
                     <ScrollView
                       keyboardShouldPersistTaps={keyboardShouldPersistTaps}
                     >
-                      {children}
+                      {renderedChildren}
                     </ScrollView>
-                  )) || <React.Fragment>{children}</React.Fragment>}
+                  )) || <React.Fragment>{renderedChildren}</React.Fragment>}
                 </Animated.View>
               </Surface>
             </Animated.View>
@@ -744,7 +784,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   menuContent: {
-    paddingVertical: 8,
+    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
   },
   fill: {
     height: '100%',

@@ -197,6 +197,49 @@ elevations.forEach((elevation) =>
   })
 );
 
+it('uses corner.large for the menu surface', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        testID="menu-surface"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    borderRadius: theme.shapes.corner.large,
+  });
+});
+
+it('uses tertiaryContainer for vibrant color scheme', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        testID="menu-surface"
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    backgroundColor: theme.colors.tertiaryContainer,
+  });
+});
+
 it('uses the default anchorPosition of top', async () => {
   const testID = 'top-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({

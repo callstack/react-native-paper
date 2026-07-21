@@ -3,8 +3,14 @@ import { describe, expect, it } from '@jest/globals';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import Menu from '../Menu/Menu';
-import { getMenuItemColor } from '../Menu/utils';
+import { MenuTokens } from '../Menu/tokens';
+import {
+  getMenuContainerBorderRadius,
+  getMenuItemBorderRadius,
+  getMenuItemColor,
+} from '../Menu/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -64,6 +70,64 @@ describe('Menu Item', () => {
       expect.objectContaining({ checked: true })
     );
   });
+
+  it('uses labelLarge for the title', async () => {
+    await render(<Menu.Item title="Paste" />);
+
+    expect(screen.getByText('Paste')).toHaveStyle(LightTheme.fonts.labelLarge);
+  });
+
+  it('renders supporting and trailing supporting text', async () => {
+    await render(
+      <Menu.Item
+        title="Share"
+        supportingText="Send a link"
+        trailingSupportingText="⌘S"
+      />
+    );
+
+    expect(screen.getByText('Send a link')).toBeOnTheScreen();
+    expect(screen.getByText('⌘S')).toBeOnTheScreen();
+  });
+
+  it('applies selected colors and aria-selected', async () => {
+    const theme = LightTheme;
+    await render(
+      <Menu.Item title="Paste" selected testID="menu-item" onPress={() => {}} />
+    );
+
+    expect(screen.getByRole('menuitem')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: true })
+    );
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      backgroundColor: theme.colors.tertiaryContainer,
+    });
+    expect(screen.getByText('Paste')).toHaveStyle({
+      color: theme.colors.onTertiaryContainer,
+    });
+  });
+
+  it('disabled wins over selected for content opacity', async () => {
+    await render(
+      <Menu.Item
+        title="Paste"
+        selected
+        disabled
+        testID="menu-item"
+        onPress={() => {}}
+      />
+    );
+
+    expect(screen.getByRole('menuitem')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ disabled: true })
+    );
+    // selected container is suppressed when disabled
+    expect(screen.getByTestId('menu-item')).not.toHaveStyle({
+      backgroundColor: LightTheme.colors.tertiaryContainer,
+    });
+  });
 });
 
 describe('getMenuItemColor - title color', () => {
@@ -88,6 +152,36 @@ describe('getMenuItemColor - title color', () => {
       titleColor: LightTheme.colors.onSurface,
     });
   });
+
+  it('returns selected tertiary roles when selected', () => {
+    const theme = LightTheme;
+    expect(
+      getMenuItemColor({
+        theme,
+        selected: true,
+      })
+    ).toMatchObject({
+      titleColor: theme.colors.onTertiaryContainer,
+      iconColor: theme.colors.onTertiaryContainer,
+      containerColor: theme.colors.tertiaryContainer,
+      contentOpacity: stateOpacity.enabled,
+    });
+  });
+
+  it('ignores selected colors when disabled', () => {
+    const theme = LightTheme;
+    expect(
+      getMenuItemColor({
+        theme,
+        selected: true,
+        disabled: true,
+      })
+    ).toMatchObject({
+      titleColor: theme.colors.onSurface,
+      containerColor: undefined,
+      contentOpacity: stateOpacity.disabled,
+    });
+  });
 });
 
 describe('getMenuItemColor - icon color', () => {
@@ -110,6 +204,41 @@ describe('getMenuItemColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: LightTheme.colors.onSurfaceVariant,
+    });
+  });
+});
+
+describe('Menu shape tokens', () => {
+  it('resolves container border radius to corner.large', () => {
+    const theme = LightTheme;
+    expect(getMenuContainerBorderRadius(theme)).toBe(
+      resolveCornerRadius(theme, MenuTokens.shapes.container)
+    );
+    expect(getMenuContainerBorderRadius(theme)).toBe(theme.shapes.corner.large);
+  });
+
+  it('applies corner.medium on selected items', () => {
+    const theme = LightTheme;
+    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+    expect(getMenuItemBorderRadius({ theme, selected: true })).toMatchObject({
+      borderRadius: radius,
+    });
+  });
+
+  it('applies top/bottom corner.medium for first/last items', () => {
+    const theme = LightTheme;
+    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+    expect(getMenuItemBorderRadius({ theme, roundedTop: true })).toMatchObject({
+      borderTopLeftRadius: radius,
+      borderTopRightRadius: radius,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
+    });
+    expect(
+      getMenuItemBorderRadius({ theme, roundedBottom: true })
+    ).toMatchObject({
+      borderBottomLeftRadius: radius,
+      borderBottomRightRadius: radius,
     });
   });
 });
