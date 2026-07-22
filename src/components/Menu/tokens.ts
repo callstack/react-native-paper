@@ -48,9 +48,13 @@ const typography = {
 
 /**
  * Standard (baseline) color scheme roles.
- * Container fill still comes from elevation[levelN] → surfaceContainerLow at default elevation 2.
+ * Menu surface fill is the MD3 role `surfaceContainerLow` (not elevation.level2 —
+ * Paper's elevation.level2 maps to surfaceContainer tones, which is a different color).
+ * The `elevation` prop still drives shadow only.
  */
 const standardColors = {
+  /** MD3 menu container fill. */
+  container: 'surfaceContainerLow' as ColorRole,
   label: 'onSurface' as ColorRole,
   icon: 'onSurfaceVariant' as ColorRole,
   supporting: 'onSurfaceVariant' as ColorRole,

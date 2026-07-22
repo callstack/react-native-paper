@@ -37,7 +37,10 @@ import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
@@ -88,21 +91,24 @@ export type Props = {
   contentStyle?: StyleProp<SurfaceStyle>;
   style?: StyleProp<ViewStyle>;
   /**
-   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * Elevation level of the menu's content. Controls shadow only.
+   * Default fill is MD3 `surfaceContainerLow` (standard scheme) regardless of
+   * elevation — Paper's `elevation.levelN` tones are not the same as that role.
+   * By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
   elevation?: Elevation;
   /**
    * Mode of the menu's content.
-   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   * - `elevated` - Surface with a shadow; fill from MD3 menu container role.
+   * - `flat` - Surface without a shadow; same fill role.
    *
    * @supported Available in v5.x with theme version 3
    */
   mode?: 'flat' | 'elevated';
   /**
    * Color scheme for the menu surface and its items.
-   * - `standard` (default) — elevation surface + onSurface content
+   * - `standard` (default) — `surfaceContainerLow` fill + onSurface content
    * - `vibrant` — M3 Expressive tertiary roles
    */
   colorScheme?: MenuColorScheme;
@@ -344,6 +350,7 @@ const Menu = ({
   });
 
   const getDuration = useMotionDuration();
+  const reduceMotion = useReduceMotion();
 
   const show = React.useCallback(async () => {
     const windowLayoutResult = Dimensions.get('window');
@@ -685,11 +692,12 @@ const Menu = ({
     colorScheme,
     focusedKey,
     setFocusedKey,
+    reduceMotion,
   });
 
   const rootContext = React.useMemo(
-    () => ({ colorScheme, focusedKey, setFocusedKey }),
-    [colorScheme, focusedKey]
+    () => ({ colorScheme, focusedKey, setFocusedKey, reduceMotion }),
+    [colorScheme, focusedKey, reduceMotion]
   );
 
   const surfaceBackground = getMenuContainerColor({

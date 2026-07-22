@@ -173,7 +173,8 @@ const ViewPrototype: ComponentRef<typeof View> = View.prototype;
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
+  it(`uses surfaceContainerLow fill independent of elevation value = ${elevation}`, async () => {
+    const theme = LightTheme;
     const testID = 'menu-with-elevation';
 
     await render(
@@ -192,9 +193,14 @@ elevations.forEach((elevation) =>
       </Portal.Host>
     );
 
+    // C1: MD3 menu fill is surfaceContainerLow, not elevation.levelN
+    // (level2 is surfaceContainer tones in this theme — a different color).
     expect(screen.getByTestId(testID)).toHaveStyle({
-      backgroundColor: LightTheme.colors.elevation[`level${elevation}`],
+      backgroundColor: theme.colors.surfaceContainerLow,
     });
+    expect(theme.colors.surfaceContainerLow).not.toBe(
+      theme.colors.elevation.level2
+    );
   })
 );
 
@@ -559,6 +565,7 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
+    // PaperProvider reduceMotion="on" is the real product path for reduce-motion.
     return (
       <Portal.Host>
         <Menu

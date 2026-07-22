@@ -10,16 +10,25 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
 import { useMenuItemLayout } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
-  getMenuItemBorderRadius,
+  getMenuContainerColor,
+  getMenuItemMorphRadii,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import Badge from '../Badge';
 import Icon from '../Icon';
@@ -49,8 +58,10 @@ export type Props = {
    */
   badge?: boolean | string | number;
   /**
-   * Nested menu content. When set, pressing the item opens a submenu surface
-   * with these children (typically more `Menu.Item`s).
+   * Nested menu content. When set, pressing the item opens a lightweight
+   * nested surface (portal) with these children (typically more `Menu.Item`s).
+   * This is not a full nested `Menu` instance (no independent spring open of
+   * the submenu surface); it is an M3 expressive stretch for simple submenus.
    */
   submenu?: React.ReactNode;
   /**
@@ -225,12 +236,15 @@ const MenuItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const layout = useMenuItemLayout();
+  // Prefer layout/root value so portaled items still honor reduce-motion.
+  const ambientReduceMotion = useReduceMotion();
+  const reduceMotion = layout?.reduceMotion ?? ambientReduceMotion;
 
   const colorScheme = colorSchemeProp ?? layout?.colorScheme ?? 'standard';
   const roundedTop = roundedTopProp ?? layout?.roundedTop ?? false;
   const roundedBottom = roundedBottomProp ?? layout?.roundedBottom ?? false;
-  // H3: selected or focus morph target gets full medium corners
-  const morphOrSelected = Boolean(selected) || Boolean(layout?.morphActive);
+  // H3: selected or focus morph target animates to full medium corners
+  const morphActive = Boolean(layout?.morphActive);
 
   const {
     titleColor,
@@ -286,12 +300,58 @@ const MenuItem = ({
     ...theme.fonts[MenuTokens.typography.trailingSupporting],
   };
 
-  const borderRadiusStyle = getMenuItemBorderRadius({
+  const morphRadii = getMenuItemMorphRadii({
     theme,
-    selected: morphOrSelected,
+    selected,
+    morphActive,
     roundedTop,
     roundedBottom,
   });
+
+  // H3: spring-animated per-corner radii as focus/selection morphs the item shape.
+  const topLeftRadius = useSharedValue(morphRadii.topLeft);
+  const topRightRadius = useSharedValue(morphRadii.topRight);
+  const bottomLeftRadius = useSharedValue(morphRadii.bottomLeft);
+  const bottomRightRadius = useSharedValue(morphRadii.bottomRight);
+
+  React.useEffect(() => {
+    const targets = [
+      { value: topLeftRadius, toValue: morphRadii.topLeft },
+      { value: topRightRadius, toValue: morphRadii.topRight },
+      { value: bottomLeftRadius, toValue: morphRadii.bottomLeft },
+      { value: bottomRightRadius, toValue: morphRadii.bottomRight },
+    ];
+
+    if (reduceMotion) {
+      targets.forEach(({ value, toValue }) => {
+        value.value = toValue;
+      });
+      return;
+    }
+
+    const spatialSpring = toRawSpring(theme.motion.spring.fast.spatial);
+    targets.forEach(({ value, toValue }) => {
+      value.value = withSpring(toValue, spatialSpring);
+    });
+  }, [
+    morphRadii.topLeft,
+    morphRadii.topRight,
+    morphRadii.bottomLeft,
+    morphRadii.bottomRight,
+    reduceMotion,
+    theme.motion.spring.fast.spatial,
+    topLeftRadius,
+    topRightRadius,
+    bottomLeftRadius,
+    bottomRightRadius,
+  ]);
+
+  const animatedBorderStyle = useAnimatedStyle(() => ({
+    borderTopLeftRadius: topLeftRadius.value,
+    borderTopRightRadius: topRightRadius.value,
+    borderBottomLeftRadius: bottomLeftRadius.value,
+    borderBottomRightRadius: bottomRightRadius.value,
+  }));
 
   const isSelected = selected && !disabled;
   const [submenuOpen, setSubmenuOpen] = React.useState(false);
@@ -321,13 +381,9 @@ const MenuItem = ({
   return (
     <>
       <View ref={itemRef} collapsable={false}>
-        <TouchableRipple
-          // Items fill the menu's scroll view edge to edge with no gap, which
-          // clips an outward ring and runs it into the neighbouring items.
-          focusRing="inward"
-          theme={theme}
+        <Animated.View
           style={[
-            styles.container,
+            styles.morphShell,
             {
               paddingHorizontal: itemPaddingHorizontal,
               minWidth,
@@ -337,110 +393,122 @@ const MenuItem = ({
                 ? { paddingVertical: 8 }
                 : { height: dense ? denseItemHeight : itemHeight }),
             },
-            borderRadiusStyle,
+            animatedBorderStyle,
             containerColor ? { backgroundColor: containerColor } : null,
             style,
           ]}
-          onPress={handlePress}
-          onPressIn={() => {
-            if (!disabled && layout) {
-              layout.setFocusedKey(layout.itemKey);
-            }
-          }}
-          disabled={disabled}
           testID={testID}
-          background={background}
-          aria-label={ariaLabel}
-          role="menuitem"
-          aria-disabled={disabled}
-          aria-checked={ariaChecked}
-          aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
-          aria-busy={ariaBusy}
-          aria-expanded={ariaExpanded ?? (submenu ? submenuOpen : undefined)}
-          hitSlop={hitSlop}
         >
-          <View
-            style={[styles.row, { opacity: contentOpacity }, containerStyle]}
+          <TouchableRipple
+            // Items fill the menu's scroll view edge to edge with no gap, which
+            // clips an outward ring and runs it into the neighbouring items.
+            focusRing="inward"
+            theme={theme}
+            style={styles.pressableFill}
+            onPress={handlePress}
+            onPressIn={() => {
+              if (!disabled && layout) {
+                layout.setFocusedKey(layout.itemKey);
+              }
+            }}
+            disabled={disabled}
+            background={background}
+            aria-label={ariaLabel}
+            role="menuitem"
+            aria-disabled={disabled}
+            aria-checked={ariaChecked}
+            aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
+            aria-busy={ariaBusy}
+            aria-expanded={ariaExpanded ?? (submenu ? submenuOpen : undefined)}
+            hitSlop={hitSlop}
           >
-            {leadingIcon ? (
-              <View
-                style={[{ width: iconSize }, styles.leadingIcon]}
-                pointerEvents="box-none"
-              >
-                <Icon source={leadingIcon} size={iconSize} color={iconColor} />
-              </View>
-            ) : null}
             <View
-              style={[
-                styles.content,
-                {
-                  maxWidth: contentMaxWidth,
-                },
-                leadingIcon
-                  ? { marginLeft: iconLabelGap }
-                  : { marginLeft: noLeadingIconStart },
-                contentStyle,
-              ]}
-              pointerEvents="none"
+              style={[styles.row, { opacity: contentOpacity }, containerStyle]}
             >
-              <Text
-                variant={MenuTokens.typography.label}
-                selectable={false}
-                numberOfLines={1}
-                style={[titleTextStyle, titleStyle]}
-                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              >
-                {title}
-              </Text>
-              {supportingText ? (
-                <Text
-                  variant={MenuTokens.typography.supporting}
-                  selectable={false}
-                  numberOfLines={1}
-                  style={[supportingTextStyleResolved, supportingTextStyle]}
+              {leadingIcon ? (
+                <View
+                  style={[{ width: iconSize }, styles.leadingIcon]}
+                  pointerEvents="box-none"
                 >
-                  {supportingText}
-                </Text>
+                  <Icon
+                    source={leadingIcon}
+                    size={iconSize}
+                    color={iconColor}
+                  />
+                </View>
               ) : null}
-            </View>
-            {trailingSupportingText ? (
-              <Text
-                variant={MenuTokens.typography.trailingSupporting}
-                selectable={false}
-                numberOfLines={1}
+              <View
                 style={[
-                  styles.trailingSupporting,
-                  trailingSupportingTextStyleResolved,
-                  trailingSupportingTextStyle,
+                  styles.content,
+                  {
+                    maxWidth: contentMaxWidth,
+                  },
+                  leadingIcon
+                    ? { marginLeft: iconLabelGap }
+                    : { marginLeft: noLeadingIconStart },
+                  contentStyle,
                 ]}
                 pointerEvents="none"
               >
-                {trailingSupportingText}
-              </Text>
-            ) : null}
-            {showBadge ? (
-              <View
-                style={styles.badgeSlot}
-                testID="menu-item-badge"
-                pointerEvents="none"
-              >
-                <Badge visible>{badgeIsDot ? undefined : badge}</Badge>
+                <Text
+                  variant={MenuTokens.typography.label}
+                  selectable={false}
+                  numberOfLines={1}
+                  style={[titleTextStyle, titleStyle]}
+                  maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+                >
+                  {title}
+                </Text>
+                {supportingText ? (
+                  <Text
+                    variant={MenuTokens.typography.supporting}
+                    selectable={false}
+                    numberOfLines={1}
+                    style={[supportingTextStyleResolved, supportingTextStyle]}
+                  >
+                    {supportingText}
+                  </Text>
+                ) : null}
               </View>
-            ) : null}
-            {resolvedTrailingIcon ? (
-              <View
-                style={[{ width: iconSize }, styles.trailingIcon]}
-                pointerEvents="box-none"
-              >
-                <Icon
-                  source={resolvedTrailingIcon}
-                  size={iconSize}
-                  color={iconColor}
-                />
-              </View>
-            ) : null}
-          </View>
-        </TouchableRipple>
+              {trailingSupportingText ? (
+                <Text
+                  variant={MenuTokens.typography.trailingSupporting}
+                  selectable={false}
+                  numberOfLines={1}
+                  style={[
+                    styles.trailingSupporting,
+                    trailingSupportingTextStyleResolved,
+                    trailingSupportingTextStyle,
+                  ]}
+                  pointerEvents="none"
+                >
+                  {trailingSupportingText}
+                </Text>
+              ) : null}
+              {showBadge ? (
+                <View
+                  style={styles.badgeSlot}
+                  testID="menu-item-badge"
+                  pointerEvents="none"
+                >
+                  <Badge visible>{badgeIsDot ? undefined : badge}</Badge>
+                </View>
+              ) : null}
+              {resolvedTrailingIcon ? (
+                <View
+                  style={[{ width: iconSize }, styles.trailingIcon]}
+                  pointerEvents="box-none"
+                >
+                  <Icon
+                    source={resolvedTrailingIcon}
+                    size={iconSize}
+                    color={iconColor}
+                  />
+                </View>
+              ) : null}
+            </View>
+          </TouchableRipple>
+        </Animated.View>
       </View>
       {submenu && submenuOpen ? (
         <Portal>
@@ -467,11 +535,11 @@ const MenuItem = ({
             <Surface
               elevation={MenuTokens.elevation.default}
               borderRadius={theme.shapes.corner.large}
-              backgroundColor={
-                colorScheme === 'vibrant'
-                  ? theme.colors.tertiaryContainer
-                  : theme.colors.elevation.level2
-              }
+              backgroundColor={getMenuContainerColor({
+                theme,
+                elevation: MenuTokens.elevation.default,
+                colorScheme,
+              })}
               style={styles.submenuSurface}
             >
               {submenu}
@@ -486,11 +554,15 @@ const MenuItem = ({
 MenuItem.displayName = 'Menu.Item';
 
 const styles = StyleSheet.create({
-  container: {
+  morphShell: {
     minWidth: MIN_WIDTH,
     maxWidth: MAX_WIDTH,
-    justifyContent: 'center',
     overflow: 'hidden',
+    justifyContent: 'center',
+  },
+  pressableFill: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',

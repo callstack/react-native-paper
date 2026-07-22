@@ -8,12 +8,23 @@ import Menu from '../Menu/Menu';
 import { MenuTokens } from '../Menu/tokens';
 import {
   getMenuContainerBorderRadius,
+  getMenuContainerColor,
   getMenuItemBorderRadius,
   getMenuItemColor,
+  getMenuItemMorphRadii,
 } from '../Menu/utils';
 import Portal from '../Portal/Portal';
 
 const stateOpacity = tokens.md.sys.state.opacity;
+
+// The row that carries content opacity wraps the title's text column.
+const contentRow = (title: string) => {
+  const row = screen.getByText(title).parent?.parent;
+  if (!row) {
+    throw new Error(`No content row found for "${title}"`);
+  }
+  return row;
+};
 
 describe('Menu Item', () => {
   it('renders menu item', async () => {
@@ -79,6 +90,7 @@ describe('Menu Item', () => {
   });
 
   it('renders supporting and trailing supporting text', async () => {
+    const theme = LightTheme;
     await render(
       <Menu.Item
         title="Share"
@@ -97,6 +109,16 @@ describe('Menu Item', () => {
       minHeight: 48,
       paddingVertical: 8,
     });
+    // B2: supporting uses bodySmall + onSurfaceVariant
+    expect(screen.getByText('Send a link')).toHaveStyle({
+      ...theme.fonts.bodySmall,
+      color: theme.colors.onSurfaceVariant,
+    });
+    // B3: trailing supporting uses labelLarge
+    expect(screen.getByText('⌘S')).toHaveStyle({
+      ...theme.fonts.labelLarge,
+      color: theme.colors.onSurfaceVariant,
+    });
     // explicit aria-label stays on the menuitem
     expect(
       screen.getByRole('menuitem', {
@@ -108,6 +130,15 @@ describe('Menu Item', () => {
   it('keeps fixed height for single-line items', async () => {
     await render(<Menu.Item title="Paste" testID="menu-item" />);
     expect(screen.getByTestId('menu-item')).toHaveStyle({ height: 48 });
+  });
+
+  it('uses dense item height of 32 when dense', async () => {
+    await render(<Menu.Item title="Share" dense testID="menu-item" />);
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      height: MenuTokens.sizes.denseItemHeight,
+      minHeight: MenuTokens.sizes.denseItemHeight,
+    });
+    expect(MenuTokens.sizes.denseItemHeight).toBe(32);
   });
 
   it('applies selected colors and aria-selected', async () => {
@@ -146,6 +177,40 @@ describe('Menu Item', () => {
     // selected container is suppressed when disabled
     expect(screen.getByTestId('menu-item')).not.toHaveStyle({
       backgroundColor: LightTheme.colors.tertiaryContainer,
+    });
+    // I3: rendered content row must apply disabled opacity from the real path
+    expect(contentRow('Paste')).toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+  });
+
+  it('applies rendered disabled opacity on the content row', async () => {
+    await render(<Menu.Item title="Cut" disabled />);
+    expect(contentRow('Cut')).toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+  });
+
+  it('applies full corner.medium radii on the morph shell when selected', async () => {
+    const theme = LightTheme;
+    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+
+    await render(
+      <Menu.Item
+        title="Paste"
+        selected
+        roundedTop
+        roundedBottom={false}
+        testID="menu-item"
+      />
+    );
+
+    // Initial targets are full medium for selected (morph shell carries animated radii)
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      borderTopLeftRadius: radius,
+      borderTopRightRadius: radius,
+      borderBottomLeftRadius: radius,
+      borderBottomRightRadius: radius,
     });
   });
 });
@@ -237,6 +302,17 @@ describe('Menu shape tokens', () => {
     expect(getMenuContainerBorderRadius(theme)).toBe(theme.shapes.corner.large);
   });
 
+  it('resolves standard container fill to surfaceContainerLow (C1)', () => {
+    const theme = LightTheme;
+    expect(getMenuContainerColor({ theme, elevation: 2 })).toBe(
+      theme.colors.surfaceContainerLow
+    );
+    expect(getMenuContainerColor({ theme, elevation: 2 })).not.toBe(
+      theme.colors.elevation.level2
+    );
+    expect(MenuTokens.standardColors.container).toBe('surfaceContainerLow');
+  });
+
   it('applies corner.medium on selected items', () => {
     const theme = LightTheme;
     const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
@@ -265,7 +341,20 @@ describe('Menu shape tokens', () => {
   it('uses full corner.medium when morph/selected (shape morph target)', () => {
     const theme = LightTheme;
     const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
-    // Morph path reuses selected all-corner medium
+    expect(
+      getMenuItemMorphRadii({
+        theme,
+        morphActive: true,
+        roundedTop: true,
+        roundedBottom: false,
+      })
+    ).toMatchObject({
+      topLeft: radius,
+      topRight: radius,
+      bottomLeft: radius,
+      bottomRight: radius,
+      medium: radius,
+    });
     expect(
       getMenuItemBorderRadius({
         theme,
@@ -301,7 +390,7 @@ describe('Menu.Item badge and submenu', () => {
       </Portal.Host>
     );
 
-    await user.press(screen.getByTestId('parent-item'));
+    await user.press(screen.getByRole('menuitem'));
 
     await waitFor(() => {
       expect(screen.getByTestId('nested-item')).toBeOnTheScreen();

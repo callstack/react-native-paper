@@ -11,6 +11,7 @@ type ComposeArgs = {
   colorScheme: MenuColorScheme;
   focusedKey: string | null;
   setFocusedKey: (key: string | null) => void;
+  reduceMotion: boolean;
 };
 
 const isMenuItemElement = (
@@ -48,6 +49,7 @@ export function composeMenuChildren({
   colorScheme,
   focusedKey,
   setFocusedKey,
+  reduceMotion,
 }: ComposeArgs): React.ReactNode {
   const totalItems = countMenuItems(children);
   let itemCursor = 0;
@@ -106,6 +108,7 @@ export function composeMenuChildren({
             morphActive,
             itemKey,
             setFocusedKey,
+            reduceMotion,
           }}
         >
           {child}
