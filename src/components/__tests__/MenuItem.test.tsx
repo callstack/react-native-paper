@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { render, screen, userEvent, waitFor } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import Menu from '../Menu/Menu';
@@ -11,6 +11,7 @@ import {
   getMenuItemBorderRadius,
   getMenuItemColor,
 } from '../Menu/utils';
+import Portal from '../Portal/Portal';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -252,5 +253,52 @@ describe('Menu shape tokens', () => {
       borderBottomLeftRadius: radius,
       borderBottomRightRadius: radius,
     });
+  });
+
+  it('uses full corner.medium when morph/selected (shape morph target)', () => {
+    const theme = getTheme();
+    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+    // Morph path reuses selected all-corner medium
+    expect(
+      getMenuItemBorderRadius({
+        theme,
+        selected: true,
+        roundedTop: true,
+        roundedBottom: false,
+      })
+    ).toMatchObject({ borderRadius: radius });
+  });
+});
+
+describe('Menu.Item badge and submenu', () => {
+  it('renders a numeric badge on the real Menu.Item', async () => {
+    await render(<Menu.Item title="Inbox" badge={3} />);
+    expect(screen.getByTestId('menu-item-badge')).toBeOnTheScreen();
+    expect(screen.getByText('3')).toBeOnTheScreen();
+  });
+
+  it('renders a dot badge when badge is true', async () => {
+    await render(<Menu.Item title="Alerts" badge />);
+    expect(screen.getByTestId('menu-item-badge')).toBeOnTheScreen();
+  });
+
+  it('opens submenu content when pressed', async () => {
+    const user = userEvent.setup();
+    await render(
+      <Portal.Host>
+        <Menu.Item
+          title="More"
+          testID="parent-item"
+          submenu={<Menu.Item title="Nested" testID="nested-item" />}
+        />
+      </Portal.Host>
+    );
+
+    await user.press(screen.getByTestId('parent-item'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('parent-item-submenu')).toBeOnTheScreen();
+    });
+    expect(screen.getByTestId('nested-item')).toBeOnTheScreen();
   });
 });

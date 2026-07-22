@@ -21,7 +21,10 @@ import type {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { composeMenuChildren } from './composeMenuChildren';
+import { MenuRootContext } from './context';
 import MenuItem from './MenuItem';
+import MenuSection from './MenuSection';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
@@ -202,6 +205,7 @@ const Menu = ({
   const { direction } = useLocale();
   const reduceMotion = useReduceMotion();
   const insets = useSafeAreaInsets();
+  const [focusedKey, setFocusedKey] = React.useState<string | null>(null);
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
@@ -656,29 +660,20 @@ const Menu = ({
 
   const pointerEvents = visible ? 'box-none' : 'none';
 
-  // First/last corner.medium + colorScheme inheritance for direct Menu.Item
-  // children only (type identity — no displayName filtering). Wrappers keep
-  // working via explicit roundedTop/roundedBottom/colorScheme props.
-  const menuChildren = React.Children.toArray(children);
-  const itemIndices = menuChildren
-    .map((child, index) =>
-      React.isValidElement(child) && child.type === MenuItem ? index : -1
-    )
-    .filter((index) => index >= 0);
-  const firstItemIndex = itemIndices[0];
-  const lastItemIndex = itemIndices[itemIndices.length - 1];
-
-  const renderedChildren = menuChildren.map((child, index) => {
-    if (!React.isValidElement(child) || child.type !== MenuItem) {
-      return child;
-    }
-    const childProps = child.props as React.ComponentProps<typeof MenuItem>;
-    return React.cloneElement(child as React.ReactElement<typeof childProps>, {
-      colorScheme: childProps.colorScheme ?? colorScheme,
-      roundedTop: childProps.roundedTop ?? index === firstItemIndex,
-      roundedBottom: childProps.roundedBottom ?? index === lastItemIndex,
-    });
+  // Parent-owned layout context (no cloneElement). Type identity only for
+  // first/last detection — no displayName filtering. Wrappers keep working
+  // via explicit roundedTop/roundedBottom/colorScheme props.
+  const renderedChildren = composeMenuChildren({
+    children,
+    colorScheme,
+    focusedKey,
+    setFocusedKey,
   });
+
+  const rootContext = React.useMemo(
+    () => ({ colorScheme, focusedKey, setFocusedKey }),
+    [colorScheme, focusedKey]
+  );
 
   const surfaceBackground = getMenuContainerColor({
     theme: theme as Theme,
@@ -737,13 +732,15 @@ const Menu = ({
                 theme={theme}
                 container
               >
-                {(scrollableMenuHeight && (
-                  <ScrollView
-                    keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-                  >
-                    {renderedChildren}
-                  </ScrollView>
-                )) || <React.Fragment>{renderedChildren}</React.Fragment>}
+                <MenuRootContext.Provider value={rootContext}>
+                  {(scrollableMenuHeight && (
+                    <ScrollView
+                      keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                    >
+                      {renderedChildren}
+                    </ScrollView>
+                  )) || <React.Fragment>{renderedChildren}</React.Fragment>}
+                </MenuRootContext.Provider>
               </Surface>
             </Animated.View>
           </View>
@@ -754,6 +751,7 @@ const Menu = ({
 };
 
 Menu.Item = MenuItem;
+Menu.Section = MenuSection;
 
 const styles = StyleSheet.create({
   wrapper: {

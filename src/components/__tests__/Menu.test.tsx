@@ -8,6 +8,7 @@ import { render } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation } from '../../types';
 import Button from '../Button/Button';
+import Divider from '../Divider';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
@@ -139,6 +140,81 @@ it('uses tertiaryContainer for vibrant color scheme', async () => {
   expect(screen.getByTestId('menu-surface')).toHaveStyle({
     backgroundColor: theme.colors.tertiaryContainer,
   });
+});
+
+it('applies first/last medium corners via layout context (no cloneElement props required)', async () => {
+  const theme = getTheme();
+  const radius = theme.shapes.corner.medium;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="First" testID="first-item" />
+        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
+        <Menu.Item onPress={jest.fn()} title="Last" testID="last-item" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('first-item')).toHaveStyle({
+    borderTopLeftRadius: radius,
+    borderTopRightRadius: radius,
+  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({
+    borderBottomLeftRadius: radius,
+    borderBottomRightRadius: radius,
+  });
+  // Middle item is not fully rounded on all corners
+  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
+    borderRadius: radius,
+  });
+});
+
+it('renders Menu.Section groups with M3 group gap', async () => {
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Section title="Edit" testID="sec-edit">
+          <Menu.Item onPress={jest.fn()} title="Cut" />
+        </Menu.Section>
+        <Menu.Section title="Share" testID="sec-share">
+          <Menu.Item onPress={jest.fn()} title="Share" />
+        </Menu.Section>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('sec-edit-title')).toHaveTextContent('Edit');
+  expect(screen.getByTestId('sec-share-title')).toHaveTextContent('Share');
+  expect(screen.getByTestId('menu-section-gap')).toHaveStyle({
+    marginTop: 8,
+  });
+  // Divider still a valid composition sibling
+});
+
+it('still renders Divider between items', async () => {
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="A" />
+        <Divider testID="menu-divider" />
+        <Menu.Item onPress={jest.fn()} title="B" />
+      </Menu>
+    </Portal.Host>
+  );
+  expect(screen.getByTestId('menu-divider')).toBeOnTheScreen();
 });
 
 it('uses the default anchorPosition of top', async () => {
