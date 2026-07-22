@@ -101,7 +101,9 @@ export const screenshots = {
   'List.Section': 'screenshots/list-section.png',
   Menu: {
     'with icons': 'screenshots/menu-1.png',
-    'without icons': 'screenshots/menu-2.png',
+    'selected + supporting': 'screenshots/menu-2.png',
+    'vibrant scheme': 'screenshots/menu-3.png',
+    'bottom anchor': 'screenshots/menu-4.png',
   },
   'Menu.Item': 'screenshots/menu-item.png',
   Modal: 'screenshots/modal.gif',

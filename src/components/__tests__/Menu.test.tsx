@@ -3,9 +3,9 @@ import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
-import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Divider from '../Divider';
@@ -80,7 +80,7 @@ it('renders menu with content styles', async () => {
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
+  it(`uses surfaceContainerLow fill independent of elevation value = ${elevation}`, async () => {
     const theme = getTheme();
 
     await render(
@@ -97,9 +97,14 @@ elevations.forEach((elevation) =>
       </Portal.Host>
     );
 
+    // C1: MD3 menu fill is surfaceContainerLow, not elevation.levelN
+    // (level2 is surfaceContainer tones in this theme — a different color).
     expect(screen.getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[`level${elevation}`],
+      backgroundColor: theme.colors.surfaceContainerLow,
     });
+    expect(theme.colors.surfaceContainerLow).not.toBe(
+      theme.colors.elevation.level2
+    );
   })
 );
 
@@ -340,23 +345,22 @@ it('snaps open without spring when reduce-motion is enabled', async () => {
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
+    // PaperProvider reduceMotion="on" is the real product path for reduce-motion.
     return (
-      <ReduceMotionContext.Provider value={true}>
-        <Portal.Host>
-          <Menu
-            visible={visible}
-            onDismiss={jest.fn()}
-            anchor={
-              <Button mode="outlined" testID="anchor">
-                Open menu
-              </Button>
-            }
-            testID="menu"
-          >
-            <Menu.Item onPress={jest.fn()} title="Undo" />
-          </Menu>
-        </Portal.Host>
-      </ReduceMotionContext.Provider>
+      <PaperProvider reduceMotion="on">
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID="menu"
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </PaperProvider>
     );
   }
 
@@ -365,9 +369,11 @@ it('snaps open without spring when reduce-motion is enabled', async () => {
   await act(async () => {
     await rerender(makeMenu(true));
     await Promise.resolve();
+    jest.runOnlyPendingTimers();
+    await Promise.resolve();
   });
 
-  // Reduce-motion path snaps scale/opacity via setValue; menu must still position.
+  // Reduce-motion path must still position the menu and mount the surface.
   await waitFor(() => {
     expect(screen.getByTestId('menu-view')).toHaveStyle({
       position: 'absolute',
@@ -376,7 +382,6 @@ it('snaps open without spring when reduce-motion is enabled', async () => {
     });
   });
 
-  // Surface is mounted and fully opaque after the snap (no hanging open animation).
   expect(screen.getByTestId('menu-surface')).toBeOnTheScreen();
 
   measureSpy.mockRestore();

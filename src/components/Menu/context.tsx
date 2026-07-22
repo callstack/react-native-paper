@@ -3,13 +3,16 @@ import * as React from 'react';
 import type { MenuColorScheme } from './tokens';
 
 /**
- * Root menu state: color scheme + focus key for shape morph.
+ * Root menu state: color scheme + focus key for shape morph + reduce-motion.
  * Provided by `Menu`; consumed by layout helpers and items.
+ * `reduceMotion` is threaded here because portaled menu content can sit outside
+ * the ambient ReduceMotionContext tree (Portal host).
  */
 export type MenuRootContextValue = {
   colorScheme: MenuColorScheme;
   focusedKey: string | null;
   setFocusedKey: (key: string | null) => void;
+  reduceMotion: boolean;
 };
 
 export const MenuRootContext = React.createContext<MenuRootContextValue | null>(
@@ -28,6 +31,8 @@ export type MenuItemLayoutContextValue = {
   morphActive: boolean;
   itemKey: string;
   setFocusedKey: (key: string | null) => void;
+  /** Prefer over ambient context when portaled. */
+  reduceMotion: boolean;
 };
 
 export const MenuItemLayoutContext =

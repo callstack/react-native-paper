@@ -245,18 +245,41 @@ export const themeColors = {
     },
   },
   Menu: {
-    '-': {
-      backgroundColor: 'theme.colors.elevation.level2',
+    standard: {
+      backgroundColor: 'theme.colors.surfaceContainerLow',
+    },
+    vibrant: {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+    },
+    'selected item': {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+      textColor: 'theme.colors.onTertiaryContainer',
     },
   },
   'Menu.Item': {
     default: {
       textColor: 'theme.colors.onSurface',
       iconColor: 'theme.colors.onSurfaceVariant',
+      supportingColor: 'theme.colors.onSurfaceVariant',
+    },
+    selected: {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+      textColor: 'theme.colors.onTertiaryContainer',
+      iconColor: 'theme.colors.onTertiaryContainer',
     },
     disabled: {
-      textColor: 'theme.colors.onSurfaceDisabled',
-      iconColor: 'theme.colors.onSurfaceDisabled',
+      textColor: 'theme.colors.onSurface',
+      iconColor: 'theme.colors.onSurfaceVariant',
+      contentOpacity: 'theme.state.opacity.disabled (0.38)',
+    },
+    vibrant: {
+      textColor: 'theme.colors.onTertiaryContainer',
+      iconColor: 'theme.colors.onTertiaryContainer',
+    },
+    'vibrant selected': {
+      backgroundColor: 'theme.colors.tertiary',
+      textColor: 'theme.colors.onTertiary',
+      iconColor: 'theme.colors.onTertiary',
     },
   },
   Modal: {
