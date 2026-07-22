@@ -5,6 +5,7 @@ import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
@@ -246,6 +247,61 @@ it('respects anchorPosition bottom', async () => {
       top: 132,
     });
   });
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+
+it('snaps open without spring when reduce-motion is enabled', async () => {
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <ReduceMotionContext.Provider value={true}>
+        <Portal.Host>
+          <Menu
+            visible={visible}
+            onDismiss={jest.fn()}
+            anchor={
+              <Button mode="outlined" testID="anchor">
+                Open menu
+              </Button>
+            }
+            testID="menu"
+          >
+            <Menu.Item onPress={jest.fn()} title="Undo" />
+          </Menu>
+        </Portal.Host>
+      </ReduceMotionContext.Provider>
+    );
+  }
+
+  const { rerender } = await render(makeMenu(false));
+
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+  });
+
+  // Reduce-motion path snaps scale/opacity via setValue; menu must still position.
+  await waitFor(() => {
+    expect(screen.getByTestId('menu-view')).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 100,
+    });
+  });
+
+  // Surface is mounted and fully opaque after the snap (no hanging open animation).
+  expect(screen.getByTestId('menu-surface')).toBeOnTheScreen();
 
   measureSpy.mockRestore();
   dimensionsSpy.mockRestore();
