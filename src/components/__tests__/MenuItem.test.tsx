@@ -84,6 +84,8 @@ describe('Menu Item', () => {
         supportingText="Send a link"
         trailingSupportingText="⌘S"
         testID="menu-item"
+        aria-label="Share, send a link, keyboard shortcut Command S"
+        onPress={() => {}}
       />
     );
 
@@ -94,6 +96,12 @@ describe('Menu Item', () => {
       minHeight: 48,
       paddingVertical: 8,
     });
+    // explicit aria-label stays on the menuitem
+    expect(
+      screen.getByRole('menuitem', {
+        name: 'Share, send a link, keyboard shortcut Command S',
+      })
+    ).toBeOnTheScreen();
   });
 
   it('keeps fixed height for single-line items', async () => {
