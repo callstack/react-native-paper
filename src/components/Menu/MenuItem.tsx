@@ -178,6 +178,9 @@ export type Props = {
 /**
  * A component to show a single list item inside a Menu.
  *
+ * Supports MD3 selection (`selected`), supporting text, trailing supporting text,
+ * dense layout, badges, and lightweight nested `submenu` surfaces.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -190,7 +193,15 @@ export type Props = {
  *     <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
  *     <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
  *     <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
- *     <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" selected />
+ *     <Menu.Item
+ *       leadingIcon="content-paste"
+ *       onPress={() => {}}
+ *       title="Paste"
+ *       supportingText="Insert clipboard"
+ *       trailingSupportingText="⌘V"
+ *       selected
+ *     />
+ *     <Menu.Item title="Share" dense badge={3} />
  *   </View>
  * );
  *

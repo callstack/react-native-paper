@@ -144,6 +144,10 @@ const isBrowser = () => Platform.OS === 'web' && 'document' in global;
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
+ * Follows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container
+ * `corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label
+ * `labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -169,10 +173,26 @@ const isBrowser = () => Platform.OS === 'web' && 'document' in global;
  *           visible={visible}
  *           onDismiss={closeMenu}
  *           anchor={<Button onPress={openMenu}>Show menu</Button>}>
- *           <Menu.Item onPress={() => {}} title="Item 1" />
- *           <Menu.Item onPress={() => {}} title="Item 2" />
+ *           <Menu.Item
+ *             leadingIcon="content-paste"
+ *             onPress={() => {}}
+ *             title="Paste"
+ *             supportingText="Insert clipboard"
+ *             trailingSupportingText="⌘V"
+ *             selected
+ *           />
+ *           <Menu.Item onPress={() => {}} title="Undo" />
  *           <Divider />
- *           <Menu.Item onPress={() => {}} title="Item 3" />
+ *           <Menu.Section title="More">
+ *             <Menu.Item onPress={() => {}} title="Share" dense />
+ *           </Menu.Section>
+ *         </Menu>
+ *         <Menu
+ *           visible={false}
+ *           onDismiss={() => {}}
+ *           colorScheme="vibrant"
+ *           anchor={<Button onPress={() => {}}>Vibrant</Button>}>
+ *           <Menu.Item onPress={() => {}} title="Featured" selected />
  *         </Menu>
  *       </View>
  *     </PaperProvider>

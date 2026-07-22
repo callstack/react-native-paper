@@ -10,6 +10,10 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
 
+Follows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container
+`corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label
+`labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.
+
 
 
 
@@ -41,10 +45,26 @@ const MyComponent = () => {
           visible={visible}
           onDismiss={closeMenu}
           anchor={<Button onPress={openMenu}>Show menu</Button>}>
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Menu.Item
+            leadingIcon="content-paste"
+            onPress={() => {}}
+            title="Paste"
+            supportingText="Insert clipboard"
+            trailingSupportingText="⌘V"
+            selected
+          />
+          <Menu.Item onPress={() => {}} title="Undo" />
           <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
+          <Menu.Section title="More">
+            <Menu.Item onPress={() => {}} title="Share" dense />
+          </Menu.Section>
+        </Menu>
+        <Menu
+          visible={false}
+          onDismiss={() => {}}
+          colorScheme="vibrant"
+          anchor={<Button onPress={() => {}}>Vibrant</Button>}>
+          <Menu.Item onPress={() => {}} title="Featured" selected />
         </Menu>
       </View>
     </PaperProvider>
@@ -163,14 +183,6 @@ wrapping is not necessary if you use Paper's `Modal` instead.
 
 <div>
 
-### Section
-
-</div>
-
-`Menu.Section` groups items with an M3 vertical group gap between sections. Optional `title` uses `labelMedium`. `Divider` remains supported for callers who prefer hairlines.
-
-<div>
-
 ### theme
 
 </div>
@@ -199,8 +211,6 @@ wrapping is not necessary if you use Paper's `Modal` instead.
 
 
   ## Theme colors
-
-  Menu follows the [Material Design 3 menu specs](https://m3.material.io/components/menus/specs): container shape `corner.large`, default fill **`surfaceContainerLow`** (MD3 role — not `elevation.level2`, which maps to different surfaceContainer tones in Paper's theme). The `elevation` prop controls shadow only. Optional vibrant scheme uses `tertiaryContainer`. Selected items use `tertiaryContainer` / `onTertiaryContainer`.
 
   <ThemeColorsTable themeColorsData={{"standard":{"backgroundColor":"theme.colors.surfaceContainerLow"},"vibrant":{"backgroundColor":"theme.colors.tertiaryContainer"},"selected item":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer"}}} componentName="Menu" />
 

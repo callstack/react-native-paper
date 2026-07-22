@@ -19,7 +19,7 @@ via the close button or by tapping an item.
 
 
 
-  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","without icons":"screenshots/menu-2.png"}}/>
+  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","selected + supporting":"screenshots/menu-2.png","vibrant scheme":"screenshots/menu-3.png","bottom anchor":"screenshots/menu-4.png"}}/>
 
 
 ## Usage
@@ -116,7 +116,7 @@ const [open, setOpen] = React.useState(false);
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Menu" />
+  <ThemeColorsTable themeColorsData={{"standard":{"backgroundColor":"theme.colors.surfaceContainerLow"},"vibrant":{"backgroundColor":"theme.colors.tertiaryContainer"},"selected item":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer"}}} componentName="Menu" />
 
 
 <span />
