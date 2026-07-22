@@ -70,22 +70,23 @@ export const getMenuItemColor = ({
 
 /**
  * Resolve the menu surface background.
- * Standard: elevation[levelN] (default level2 → surfaceContainerLow).
+ * Standard: MD3 `surfaceContainerLow` (not elevation.levelN — those map to
+ * different surfaceContainer* tones in this theme; elevation drives shadow only).
  * Vibrant: tertiaryContainer.
  */
 export const getMenuContainerColor = ({
   theme,
-  elevation,
   colorScheme = 'standard',
 }: {
   theme: InternalTheme;
-  elevation: 0 | 1 | 2 | 3 | 4 | 5;
+  /** @deprecated Ignored for fill; elevation still sets Surface shadow. Kept for call-site compat. */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   colorScheme?: MenuColorScheme;
 }): ColorValue => {
   if (colorScheme === 'vibrant') {
     return theme.colors[MenuTokens.vibrantColors.container];
   }
-  return theme.colors.elevation[`level${elevation}`];
+  return theme.colors[MenuTokens.standardColors.container];
 };
 
 export const getContentMaxWidth = ({
@@ -109,7 +110,43 @@ export const getContentMaxWidth = ({
 };
 
 /**
- * Per-item corner radii for first / last / selected / single items.
+ * Target per-corner radii for first / last / selected / focus-morph items.
+ * Spec: corner.medium on the relevant corners; selected or morph-active uses
+ * medium on all corners.
+ */
+export const getMenuItemMorphRadii = ({
+  theme,
+  selected,
+  morphActive,
+  roundedTop,
+  roundedBottom,
+}: {
+  theme: InternalTheme;
+  selected?: boolean;
+  morphActive?: boolean;
+  roundedTop?: boolean;
+  roundedBottom?: boolean;
+}): {
+  topLeft: number;
+  topRight: number;
+  bottomLeft: number;
+  bottomRight: number;
+  medium: number;
+} => {
+  const medium = resolveCornerRadius(theme, MenuTokens.shapes.item);
+  const full = Boolean(selected) || Boolean(morphActive);
+
+  return {
+    medium,
+    topLeft: full || roundedTop ? medium : 0,
+    topRight: full || roundedTop ? medium : 0,
+    bottomLeft: full || roundedBottom ? medium : 0,
+    bottomRight: full || roundedBottom ? medium : 0,
+  };
+};
+
+/**
+ * Static per-item corner radii (initial / reduce-motion snapshot).
  * Spec: corner.medium on the relevant corners; selected uses medium all around.
  */
 export const getMenuItemBorderRadius = ({
@@ -123,17 +160,23 @@ export const getMenuItemBorderRadius = ({
   roundedTop?: boolean;
   roundedBottom?: boolean;
 }): ViewStyle => {
-  const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+  const { topLeft, topRight, bottomLeft, bottomRight, medium } =
+    getMenuItemMorphRadii({
+      theme,
+      selected,
+      roundedTop,
+      roundedBottom,
+    });
 
   if (selected) {
-    return { borderRadius: radius };
+    return { borderRadius: medium };
   }
 
   return {
-    borderTopLeftRadius: roundedTop ? radius : 0,
-    borderTopRightRadius: roundedTop ? radius : 0,
-    borderBottomLeftRadius: roundedBottom ? radius : 0,
-    borderBottomRightRadius: roundedBottom ? radius : 0,
+    borderTopLeftRadius: topLeft,
+    borderTopRightRadius: topRight,
+    borderBottomLeftRadius: bottomLeft,
+    borderBottomRightRadius: bottomRight,
   };
 };
 

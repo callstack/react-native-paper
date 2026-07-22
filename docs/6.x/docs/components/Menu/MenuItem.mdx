@@ -272,7 +272,9 @@ export default MyComponent;
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"default":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant"},"disabled":{"textColor":"theme.colors.onSurfaceDisabled","iconColor":"theme.colors.onSurfaceDisabled"}}} componentName="Menu.Item" />
+  Standard items use `onSurface` / `onSurfaceVariant`. Selected items use `tertiaryContainer` / `onTertiaryContainer`. Vibrant scheme maps content to `onTertiaryContainer` and selected items to `tertiary` / `onTertiary`. Disabled items keep role colors and apply `state.opacity.disabled` (0.38) on the content row.
+
+  <ThemeColorsTable themeColorsData={{"default":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant","supportingColor":"theme.colors.onSurfaceVariant"},"selected":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer","iconColor":"theme.colors.onTertiaryContainer"},"disabled":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant","contentOpacity":"theme.state.opacity.disabled (0.38)"},"vibrant":{"textColor":"theme.colors.onTertiaryContainer","iconColor":"theme.colors.onTertiaryContainer"},"vibrant selected":{"backgroundColor":"theme.colors.tertiary","textColor":"theme.colors.onTertiary","iconColor":"theme.colors.onTertiary"}}} componentName="Menu.Item" />
 
 
 <span />

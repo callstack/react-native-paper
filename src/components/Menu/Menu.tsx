@@ -25,12 +25,12 @@ import { composeMenuChildren } from './composeMenuChildren';
 import { MenuRootContext } from './context';
 import MenuItem from './MenuItem';
 import MenuSection from './MenuSection';
+import { runMenuCloseMotion, runMenuOpenMotion } from './motion';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
@@ -76,21 +76,24 @@ export type Props = {
   contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
-   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * Elevation level of the menu's content. Controls shadow only.
+   * Default fill is MD3 `surfaceContainerLow` (standard scheme) regardless of
+   * elevation — Paper's `elevation.levelN` tones are not the same as that role.
+   * By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
   elevation?: Elevation;
   /**
    * Mode of the menu's content.
-   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   * - `elevated` - Surface with a shadow; fill from MD3 menu container role.
+   * - `flat` - Surface without a shadow; same fill role.
    *
    * @supported Available in v5.x with theme version 3
    */
   mode?: 'flat' | 'elevated';
   /**
    * Color scheme for the menu surface and its items.
-   * - `standard` (default) — elevation surface + onSurface content
+   * - `standard` (default) — `surfaceContainerLow` fill + onSurface content
    * - `vibrant` — M3 Expressive tertiary roles
    */
   colorScheme?: MenuColorScheme;
@@ -360,33 +363,17 @@ const Menu = ({
         prevRendered.current = true;
       };
 
-      if (reduceMotion) {
-        scaleAnimationRef.current.setValue({
-          x: menuLayoutResult.width,
-          y: menuLayoutResult.height,
-        });
-        opacityAnimationRef.current.setValue(1);
-        finish();
-        return;
-      }
-
-      // M3 spring motion (spatial for scale, effects for opacity).
-      // @see https://m3.material.io/styles/motion/easing-and-duration/tokens-specs
-      const spatialSpring = toRawSpring(theme.motion.spring.fast.spatial);
-      const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
-
-      Animated.parallel([
-        Animated.spring(scaleAnimationRef.current, {
-          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-          ...spatialSpring,
-          useNativeDriver: true,
-        }),
-        Animated.spring(opacityAnimationRef.current, {
-          toValue: 1,
-          ...effectsSpring,
-          useNativeDriver: true,
-        }),
-      ]).start(finish);
+      // M3 spring motion (spatial for scale, effects for opacity), or snap
+      // under reduce-motion. Shared helper so unit tests drive the real path.
+      runMenuOpenMotion({
+        reduceMotion,
+        scaleAnimation: scaleAnimationRef.current,
+        opacityAnimation: opacityAnimationRef.current,
+        menuWidth: menuLayoutResult.width,
+        menuHeight: menuLayoutResult.height,
+        theme: theme as Theme,
+        onFinish: finish,
+      });
     });
   }, [anchor, attachListeners, measureAnchorLayout, reduceMotion, theme]);
 
@@ -400,19 +387,12 @@ const Menu = ({
       focusFirstDOMNode(anchorRef.current);
     };
 
-    if (reduceMotion) {
-      opacityAnimationRef.current.setValue(0);
-      finish();
-      return;
-    }
-
-    const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
-
-    Animated.spring(opacityAnimationRef.current, {
-      toValue: 0,
-      ...effectsSpring,
-      useNativeDriver: true,
-    }).start(finish);
+    runMenuCloseMotion({
+      reduceMotion,
+      opacityAnimation: opacityAnimationRef.current,
+      theme: theme as Theme,
+      onFinish: finish,
+    });
   }, [reduceMotion, removeListeners, theme]);
 
   const updateVisibility = React.useCallback(
@@ -668,11 +648,12 @@ const Menu = ({
     colorScheme,
     focusedKey,
     setFocusedKey,
+    reduceMotion,
   });
 
   const rootContext = React.useMemo(
-    () => ({ colorScheme, focusedKey, setFocusedKey }),
-    [colorScheme, focusedKey]
+    () => ({ colorScheme, focusedKey, setFocusedKey, reduceMotion }),
+    [colorScheme, focusedKey, reduceMotion]
   );
 
   const surfaceBackground = getMenuContainerColor({

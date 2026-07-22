@@ -200,9 +200,9 @@ wrapping is not necessary if you use Paper's `Modal` instead.
 
   ## Theme colors
 
-  Menu follows the [Material Design 3 menu specs](https://m3.material.io/components/menus/specs): container shape `corner.large`, default fill `elevation.level2` (`surfaceContainerLow`), optional vibrant scheme uses `tertiaryContainer`.
+  Menu follows the [Material Design 3 menu specs](https://m3.material.io/components/menus/specs): container shape `corner.large`, default fill **`surfaceContainerLow`** (MD3 role — not `elevation.level2`, which maps to different surfaceContainer tones in Paper's theme). The `elevation` prop controls shadow only. Optional vibrant scheme uses `tertiaryContainer`. Selected items use `tertiaryContainer` / `onTertiaryContainer`.
 
-  <ThemeColorsTable themeColorsData={{"standard":{"backgroundColor":"theme.colors.elevation.level2"},"vibrant":{"backgroundColor":"theme.colors.tertiaryContainer"},"selected item":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer"}}} componentName="Menu" />
+  <ThemeColorsTable themeColorsData={{"standard":{"backgroundColor":"theme.colors.surfaceContainerLow"},"vibrant":{"backgroundColor":"theme.colors.tertiaryContainer"},"selected item":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer"}}} componentName="Menu" />
 
 
 <span />
