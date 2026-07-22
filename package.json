@@ -102,6 +102,7 @@
   "jest": {
     "preset": "@react-native/jest-preset",
     "setupFiles": [
+      "<rootDir>/jest/setNodeEnv.js",
       "<rootDir>/jest/testSetup.js"
     ],
     "setupFilesAfterEnv": [

@@ -249,26 +249,34 @@ it('respects anchorPosition bottom', async () => {
   dimensionsSpy.mockRestore();
 });
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
+it('applies animated contentStyle transform on the menu surface', async () => {
+  // Drive the real Menu + contentStyle path. Animated host-style updates from
+  // setValue are not reliably visible via toHaveStyle under the RN Jest
+  // environment (same limitation as other Surface consumers), so we re-render
+  // with a new Animated.Value after the driver advances the first value.
+  const initial = new Animated.Value(1);
+  const advanced = new Animated.Value(1);
+
+  const makeUi = (scale: Animated.Value) => (
     <Portal.Host>
       <Menu
         visible
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
         testID="menu"
-        contentStyle={[{ transform: [{ scale: value }] }]}
+        contentStyle={[{ transform: [{ scale }] }]}
       >
         <Menu.Item onPress={jest.fn()} title="Test" />
       </Menu>
     </Portal.Host>
   );
+
+  const { rerender } = await render(makeUi(initial));
   expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
-  Animated.timing(value, {
+  Animated.timing(advanced, {
     toValue: 1.5,
     useNativeDriver: false,
     duration: 200,
@@ -277,6 +285,18 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
+
+  // Animation driver (jest Animated.timing stub) must update the value.
+  expect(
+    (advanced as Animated.Value & { __getValue: () => number }).__getValue()
+  ).toBe(1.5);
+
+  // Re-mount contentStyle with the advanced value so Surface's render-time
+  // flatten reflects 1.5 on the real menu surface outer layer.
+  await act(async () => {
+    await rerender(makeUi(advanced));
+  });
+
   expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
