@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type {
-  GestureResponderEvent,
-  PressableAndroidRippleConfig,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  type GestureResponderEvent,
+  type PressableAndroidRippleConfig,
+  type StyleProp,
+  type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 
+import { useMenuItemLayout } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
@@ -18,8 +21,11 @@ import {
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import Portal from '../Portal/Portal';
+import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -37,6 +43,16 @@ export type Props = {
    * Optional trailing supporting text (`labelLarge`), e.g. a keyboard shortcut.
    */
   trailingSupportingText?: React.ReactNode;
+  /**
+   * Optional badge content. `true` shows a small dot; string/number shows a pill badge.
+   * @see https://m3.material.io/components/menus/overview
+   */
+  badge?: boolean | string | number;
+  /**
+   * Nested menu content. When set, pressing the item opens a submenu surface
+   * with these children (typically more `Menu.Item`s).
+   */
+  submenu?: React.ReactNode;
   /**
    * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
    *
@@ -182,11 +198,13 @@ const MenuItem = ({
   title,
   supportingText,
   trailingSupportingText,
+  badge,
+  submenu,
   selected = false,
-  colorScheme = 'standard',
+  colorScheme: colorSchemeProp,
   disabled,
-  roundedTop,
-  roundedBottom,
+  roundedTop: roundedTopProp,
+  roundedBottom: roundedBottomProp,
   background,
   onPress,
   style,
@@ -206,6 +224,14 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const layout = useMenuItemLayout();
+
+  const colorScheme = colorSchemeProp ?? layout?.colorScheme ?? 'standard';
+  const roundedTop = roundedTopProp ?? layout?.roundedTop ?? false;
+  const roundedBottom = roundedBottomProp ?? layout?.roundedBottom ?? false;
+  // H3: selected or focus morph target gets full medium corners
+  const morphOrSelected = Boolean(selected) || Boolean(layout?.morphActive);
+
   const {
     titleColor,
     iconColor,
@@ -230,11 +256,19 @@ const MenuItem = ({
     maxWidth,
   } = MenuTokens.sizes;
 
+  const resolvedTrailingIcon: IconSource | undefined = trailingIcon
+    ? trailingIcon
+    : submenu
+      ? 'menu-right'
+      : undefined;
+
   const contentMaxWidth = getContentMaxWidth({
     iconWidth: iconSize,
     leadingIcon,
-    trailingIcon,
-    hasTrailingSupportingText: Boolean(trailingSupportingText),
+    trailingIcon: resolvedTrailingIcon,
+    hasTrailingSupportingText:
+      Boolean(trailingSupportingText) ||
+      (badge !== undefined && badge !== false && badge !== null),
   });
 
   const titleTextStyle = {
@@ -254,116 +288,202 @@ const MenuItem = ({
 
   const borderRadiusStyle = getMenuItemBorderRadius({
     theme,
-    selected,
+    selected: morphOrSelected,
     roundedTop,
     roundedBottom,
   });
 
   const isSelected = selected && !disabled;
+  const [submenuOpen, setSubmenuOpen] = React.useState(false);
+  const [submenuAnchor, setSubmenuAnchor] = React.useState({ x: 0, y: 0 });
+  const itemRef = React.useRef<View>(null);
+
+  const handlePress = (e: GestureResponderEvent) => {
+    layout?.setFocusedKey(layout.itemKey);
+
+    if (submenu && !disabled) {
+      setSubmenuOpen(true);
+      itemRef.current?.measureInWindow((x, y, width) => {
+        setSubmenuAnchor({
+          x: x + width,
+          y,
+        });
+      });
+      return;
+    }
+
+    onPress?.(e);
+  };
+
+  const showBadge = badge !== undefined && badge !== false && badge !== null;
+  const badgeIsDot = badge === true;
 
   return (
-    <TouchableRipple
-      style={[
-        styles.container,
-        {
-          paddingHorizontal: itemPaddingHorizontal,
-          minWidth,
-          maxWidth,
-          // Supporting text needs vertical room; use minHeight so two-line
-          // anatomy is not clipped (spec single-line title is 48 / dense 32).
-          minHeight: dense ? denseItemHeight : itemHeight,
-          ...(supportingText
-            ? { paddingVertical: 8 }
-            : { height: dense ? denseItemHeight : itemHeight }),
-        },
-        borderRadiusStyle,
-        containerColor ? { backgroundColor: containerColor } : null,
-        style,
-      ]}
-      onPress={onPress}
-      disabled={disabled}
-      testID={testID}
-      background={background}
-      aria-label={ariaLabel}
-      role="menuitem"
-      aria-disabled={disabled}
-      aria-checked={ariaChecked}
-      aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
-      aria-busy={ariaBusy}
-      aria-expanded={ariaExpanded}
-      hitSlop={hitSlop}
-    >
-      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
-        {leadingIcon ? (
-          <View
-            style={[{ width: iconSize }, styles.leadingIcon]}
-            pointerEvents="box-none"
-          >
-            <Icon source={leadingIcon} size={iconSize} color={iconColor} />
-          </View>
-        ) : null}
-        <View
+    <>
+      <View ref={itemRef} collapsable={false}>
+        <TouchableRipple
           style={[
-            styles.content,
+            styles.container,
             {
-              // Keep room for trailing slots; do not force min that starves them.
-              maxWidth: contentMaxWidth,
+              paddingHorizontal: itemPaddingHorizontal,
+              minWidth,
+              maxWidth,
+              minHeight: dense ? denseItemHeight : itemHeight,
+              ...(supportingText
+                ? { paddingVertical: 8 }
+                : { height: dense ? denseItemHeight : itemHeight }),
             },
-            leadingIcon
-              ? { marginLeft: iconLabelGap }
-              : { marginLeft: noLeadingIconStart },
-            contentStyle,
+            borderRadiusStyle,
+            containerColor ? { backgroundColor: containerColor } : null,
+            style,
           ]}
-          pointerEvents="none"
+          onPress={handlePress}
+          onPressIn={() => {
+            if (!disabled && layout) {
+              layout.setFocusedKey(layout.itemKey);
+            }
+          }}
+          disabled={disabled}
+          testID={testID}
+          background={background}
+          aria-label={ariaLabel}
+          role="menuitem"
+          aria-disabled={disabled}
+          aria-checked={ariaChecked}
+          aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
+          aria-busy={ariaBusy}
+          aria-expanded={ariaExpanded ?? (submenu ? submenuOpen : undefined)}
+          hitSlop={hitSlop}
         >
-          <Text
-            variant={MenuTokens.typography.label}
-            selectable={false}
-            numberOfLines={1}
-            testID={`${testID}-title`}
-            style={[titleTextStyle, titleStyle]}
-            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-          >
-            {title}
-          </Text>
-          {supportingText ? (
-            <Text
-              variant={MenuTokens.typography.supporting}
-              selectable={false}
-              numberOfLines={1}
-              testID={`${testID}-supporting`}
-              style={[supportingTextStyleResolved, supportingTextStyle]}
-            >
-              {supportingText}
-            </Text>
-          ) : null}
-        </View>
-        {trailingSupportingText ? (
-          <Text
-            variant={MenuTokens.typography.trailingSupporting}
-            selectable={false}
-            numberOfLines={1}
-            testID={`${testID}-trailing-supporting`}
-            style={[
-              styles.trailingSupporting,
-              trailingSupportingTextStyleResolved,
-              trailingSupportingTextStyle,
-            ]}
-            pointerEvents="none"
-          >
-            {trailingSupportingText}
-          </Text>
-        ) : null}
-        {trailingIcon ? (
           <View
-            style={[{ width: iconSize }, styles.trailingIcon]}
-            pointerEvents="box-none"
+            style={[styles.row, { opacity: contentOpacity }, containerStyle]}
           >
-            <Icon source={trailingIcon} size={iconSize} color={iconColor} />
+            {leadingIcon ? (
+              <View
+                style={[{ width: iconSize }, styles.leadingIcon]}
+                pointerEvents="box-none"
+              >
+                <Icon source={leadingIcon} size={iconSize} color={iconColor} />
+              </View>
+            ) : null}
+            <View
+              style={[
+                styles.content,
+                {
+                  maxWidth: contentMaxWidth,
+                },
+                leadingIcon
+                  ? { marginLeft: iconLabelGap }
+                  : { marginLeft: noLeadingIconStart },
+                contentStyle,
+              ]}
+              pointerEvents="none"
+            >
+              <Text
+                variant={MenuTokens.typography.label}
+                selectable={false}
+                numberOfLines={1}
+                testID={`${testID}-title`}
+                style={[titleTextStyle, titleStyle]}
+                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+              >
+                {title}
+              </Text>
+              {supportingText ? (
+                <Text
+                  variant={MenuTokens.typography.supporting}
+                  selectable={false}
+                  numberOfLines={1}
+                  testID={`${testID}-supporting`}
+                  style={[supportingTextStyleResolved, supportingTextStyle]}
+                >
+                  {supportingText}
+                </Text>
+              ) : null}
+            </View>
+            {trailingSupportingText ? (
+              <Text
+                variant={MenuTokens.typography.trailingSupporting}
+                selectable={false}
+                numberOfLines={1}
+                testID={`${testID}-trailing-supporting`}
+                style={[
+                  styles.trailingSupporting,
+                  trailingSupportingTextStyleResolved,
+                  trailingSupportingTextStyle,
+                ]}
+                pointerEvents="none"
+              >
+                {trailingSupportingText}
+              </Text>
+            ) : null}
+            {showBadge ? (
+              <View
+                style={styles.badgeSlot}
+                testID={`${testID}-badge`}
+                pointerEvents="none"
+              >
+                <Badge visible>{badgeIsDot ? undefined : badge}</Badge>
+              </View>
+            ) : null}
+            {resolvedTrailingIcon ? (
+              <View
+                style={[{ width: iconSize }, styles.trailingIcon]}
+                pointerEvents="box-none"
+              >
+                <Icon
+                  source={resolvedTrailingIcon}
+                  size={iconSize}
+                  color={iconColor}
+                />
+              </View>
+            ) : null}
           </View>
-        ) : null}
+        </TouchableRipple>
       </View>
-    </TouchableRipple>
+      {submenu && submenuOpen ? (
+        <Portal>
+          <TouchableRipple
+            testID={`${testID}-submenu-overlay`}
+            onPress={() => setSubmenuOpen(false)}
+            style={styles.submenuOverlay}
+            accessibilityRole="button"
+            accessibilityLabel="Dismiss submenu"
+          >
+            <View />
+          </TouchableRipple>
+          <View
+            testID={`${testID}-submenu`}
+            style={[
+              styles.submenu,
+              {
+                left: Math.min(
+                  submenuAnchor.x,
+                  Dimensions.get('window').width - MIN_WIDTH - 8
+                ),
+                top: submenuAnchor.y,
+              },
+            ]}
+          >
+            <Surface
+              elevation={MenuTokens.elevation.default}
+              style={[
+                styles.submenuSurface,
+                {
+                  borderRadius: theme.shapes.corner.large,
+                  backgroundColor:
+                    colorScheme === 'vibrant'
+                      ? theme.colors.tertiaryContainer
+                      : theme.colors.elevation.level2,
+                },
+              ]}
+            >
+              {submenu}
+            </Surface>
+          </View>
+        </Portal>
+      ) : null}
+    </>
   );
 };
 
@@ -379,8 +499,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    // Intrinsic width: do not let flex children collapse trailing slots
-    // when the parent width is still content-driven.
     alignSelf: 'flex-start',
     maxWidth: MAX_WIDTH - MenuTokens.sizes.itemPaddingHorizontal * 2,
   },
@@ -399,6 +517,24 @@ const styles = StyleSheet.create({
   trailingIcon: {
     marginLeft: 12,
     flexShrink: 0,
+  },
+  badgeSlot: {
+    marginLeft: 8,
+    flexShrink: 0,
+    justifyContent: 'center',
+  },
+  submenuOverlay: {
+    ...StyleSheet.absoluteFill,
+  },
+  submenu: {
+    position: 'absolute',
+    zIndex: 1000,
+  },
+  submenuSurface: {
+    minWidth: MIN_WIDTH,
+    maxWidth: MAX_WIDTH,
+    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
+    overflow: 'hidden',
   },
 });
 
