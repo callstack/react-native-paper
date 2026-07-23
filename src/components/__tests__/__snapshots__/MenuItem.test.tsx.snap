@@ -3,894 +3,869 @@
 exports[`Menu Item renders menu item 1`] = `
 <>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
     collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="menuitem"
+    style={
+      [
+        false,
+        [
+          {
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "maxWidth": 280,
+            "minHeight": 48,
+            "minWidth": 112,
+            "paddingHorizontal": 12,
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
+          undefined,
+        ],
+      ]
+    }
+    testID="menu-item"
   >
     <View
-      collapsable={false}
       style={
-        {
-          "borderBottomLeftRadius": 0,
-          "borderBottomRightRadius": 0,
-          "borderTopLeftRadius": 0,
-          "borderTopRightRadius": 0,
-          "height": 48,
-          "justifyContent": "center",
-          "maxWidth": 280,
-          "minHeight": 48,
-          "minWidth": 112,
-          "overflow": "hidden",
-          "paddingHorizontal": 12,
-        }
+        [
+          {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "flexDirection": "row",
+            "maxWidth": 256,
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
       }
-      testID="menu-item"
+      testID="menu-item-content"
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="menuitem"
+        pointerEvents="box-none"
         style={
           [
-            false,
             {
-              "flexGrow": 1,
-              "justifyContent": "center",
+              "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
-        testID="menu-item-pressable"
       >
-        <View
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
           style={
             [
               {
-                "alignItems": "center",
-                "alignSelf": "flex-start",
-                "flexDirection": "row",
-                "maxWidth": 256,
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
               },
-              {
-                "opacity": 1,
-              },
-              undefined,
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
             ]
           }
-          testID="menu-item-content"
         >
-          <View
-            pointerEvents="box-none"
-            style={
+          redo
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "flexGrow": 0,
+              "flexShrink": 1,
+              "justifyContent": "center",
+            },
+            {
+              "maxWidth": 232,
+            },
+            {
+              "marginLeft": 12,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "width": 24,
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
-                {
-                  "flexShrink": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
                 [
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              redo
-            </Text>
-          </View>
-          <View
-            pointerEvents="none"
-            style={
-              [
-                {
-                  "flexGrow": 0,
-                  "flexShrink": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "maxWidth": 232,
-                },
-                {
-                  "marginLeft": 12,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              maxFontSizeMultiplier={1.5}
-              numberOfLines={1}
-              selectable={false}
-              style={
-                [
-                  {
-                    "textAlign": "left",
-                  },
                   {
                     "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    [
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      undefined,
-                    ],
-                  ],
-                ]
-              }
-              testID="menu-item-title"
-            >
-              Redo
-            </Text>
-          </View>
-        </View>
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="menu-item-title"
+        >
+          Redo
+        </Text>
       </View>
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
     collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="menuitem"
+    style={
+      [
+        false,
+        [
+          {
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "maxWidth": 280,
+            "minHeight": 48,
+            "minWidth": 112,
+            "paddingHorizontal": 12,
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
+          undefined,
+        ],
+      ]
+    }
+    testID="menu-item"
   >
     <View
-      collapsable={false}
       style={
-        {
-          "borderBottomLeftRadius": 0,
-          "borderBottomRightRadius": 0,
-          "borderTopLeftRadius": 0,
-          "borderTopRightRadius": 0,
-          "height": 48,
-          "justifyContent": "center",
-          "maxWidth": 280,
-          "minHeight": 48,
-          "minWidth": 112,
-          "overflow": "hidden",
-          "paddingHorizontal": 12,
-        }
+        [
+          {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "flexDirection": "row",
+            "maxWidth": 256,
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
       }
-      testID="menu-item"
+      testID="menu-item-content"
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="menuitem"
+        pointerEvents="box-none"
         style={
           [
-            false,
             {
-              "flexGrow": 1,
-              "justifyContent": "center",
+              "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
-        testID="menu-item-pressable"
       >
-        <View
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
           style={
             [
               {
-                "alignItems": "center",
-                "alignSelf": "flex-start",
-                "flexDirection": "row",
-                "maxWidth": 256,
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
               },
-              {
-                "opacity": 1,
-              },
-              undefined,
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
             ]
           }
-          testID="menu-item-content"
         >
-          <View
-            pointerEvents="box-none"
-            style={
+          undo
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "flexGrow": 0,
+              "flexShrink": 1,
+              "justifyContent": "center",
+            },
+            {
+              "maxWidth": 232,
+            },
+            {
+              "marginLeft": 12,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "width": 24,
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
-                {
-                  "flexShrink": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
                 [
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              undo
-            </Text>
-          </View>
-          <View
-            pointerEvents="none"
-            style={
-              [
-                {
-                  "flexGrow": 0,
-                  "flexShrink": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "maxWidth": 232,
-                },
-                {
-                  "marginLeft": 12,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              maxFontSizeMultiplier={1.5}
-              numberOfLines={1}
-              selectable={false}
-              style={
-                [
-                  {
-                    "textAlign": "left",
-                  },
                   {
                     "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    [
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      undefined,
-                    ],
-                  ],
-                ]
-              }
-              testID="menu-item-title"
-            >
-              Undo
-            </Text>
-          </View>
-        </View>
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="menu-item-title"
+        >
+          Undo
+        </Text>
       </View>
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
     collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="menuitem"
+    style={
+      [
+        false,
+        [
+          {
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "maxWidth": 280,
+            "minHeight": 48,
+            "minWidth": 112,
+            "paddingHorizontal": 12,
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
+          undefined,
+        ],
+      ]
+    }
+    testID="menu-item"
   >
     <View
-      collapsable={false}
       style={
-        {
-          "borderBottomLeftRadius": 0,
-          "borderBottomRightRadius": 0,
-          "borderTopLeftRadius": 0,
-          "borderTopRightRadius": 0,
-          "height": 48,
-          "justifyContent": "center",
-          "maxWidth": 280,
-          "minHeight": 48,
-          "minWidth": 112,
-          "overflow": "hidden",
-          "paddingHorizontal": 12,
-        }
+        [
+          {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "flexDirection": "row",
+            "maxWidth": 256,
+          },
+          {
+            "opacity": 0.38,
+          },
+          undefined,
+        ]
       }
-      testID="menu-item"
+      testID="menu-item-content"
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="menuitem"
+        pointerEvents="box-none"
         style={
           [
-            false,
             {
-              "flexGrow": 1,
-              "justifyContent": "center",
+              "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
-        testID="menu-item-pressable"
       >
-        <View
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
           style={
             [
               {
-                "alignItems": "center",
-                "alignSelf": "flex-start",
-                "flexDirection": "row",
-                "maxWidth": 256,
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
               },
-              {
-                "opacity": 0.38,
-              },
-              undefined,
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
             ]
           }
-          testID="menu-item-content"
         >
-          <View
-            pointerEvents="box-none"
-            style={
+          content-cut
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "flexGrow": 0,
+              "flexShrink": 1,
+              "justifyContent": "center",
+            },
+            {
+              "maxWidth": 232,
+            },
+            {
+              "marginLeft": 12,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "width": 24,
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
-                {
-                  "flexShrink": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
                 [
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              content-cut
-            </Text>
-          </View>
-          <View
-            pointerEvents="none"
-            style={
-              [
-                {
-                  "flexGrow": 0,
-                  "flexShrink": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "maxWidth": 232,
-                },
-                {
-                  "marginLeft": 12,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              maxFontSizeMultiplier={1.5}
-              numberOfLines={1}
-              selectable={false}
-              style={
-                [
-                  {
-                    "textAlign": "left",
-                  },
                   {
                     "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    [
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      undefined,
-                    ],
-                  ],
-                ]
-              }
-              testID="menu-item-title"
-            >
-              Cut
-            </Text>
-          </View>
-        </View>
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="menu-item-title"
+        >
+          Cut
+        </Text>
       </View>
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
     collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="menuitem"
+    style={
+      [
+        false,
+        [
+          {
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "maxWidth": 280,
+            "minHeight": 48,
+            "minWidth": 112,
+            "paddingHorizontal": 12,
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
+          undefined,
+        ],
+      ]
+    }
+    testID="menu-item"
   >
     <View
-      collapsable={false}
       style={
-        {
-          "borderBottomLeftRadius": 0,
-          "borderBottomRightRadius": 0,
-          "borderTopLeftRadius": 0,
-          "borderTopRightRadius": 0,
-          "height": 48,
-          "justifyContent": "center",
-          "maxWidth": 280,
-          "minHeight": 48,
-          "minWidth": 112,
-          "overflow": "hidden",
-          "paddingHorizontal": 12,
-        }
+        [
+          {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "flexDirection": "row",
+            "maxWidth": 256,
+          },
+          {
+            "opacity": 0.38,
+          },
+          undefined,
+        ]
       }
-      testID="menu-item"
+      testID="menu-item-content"
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="menuitem"
+        pointerEvents="box-none"
         style={
           [
-            false,
             {
-              "flexGrow": 1,
-              "justifyContent": "center",
+              "width": 24,
+            },
+            {
+              "flexShrink": 0,
             },
           ]
         }
-        testID="menu-item-pressable"
       >
-        <View
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
           style={
             [
               {
-                "alignItems": "center",
-                "alignSelf": "flex-start",
-                "flexDirection": "row",
-                "maxWidth": 256,
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
               },
-              {
-                "opacity": 0.38,
-              },
-              undefined,
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
             ]
           }
-          testID="menu-item-content"
         >
-          <View
-            pointerEvents="box-none"
-            style={
+          content-copy
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "flexGrow": 0,
+              "flexShrink": 1,
+              "justifyContent": "center",
+            },
+            {
+              "maxWidth": 232,
+            },
+            {
+              "marginLeft": 12,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          maxFontSizeMultiplier={1.5}
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "width": 24,
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
-                {
-                  "flexShrink": 0,
-                },
-              ]
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
                 [
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              content-copy
-            </Text>
-          </View>
-          <View
-            pointerEvents="none"
-            style={
-              [
-                {
-                  "flexGrow": 0,
-                  "flexShrink": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "maxWidth": 232,
-                },
-                {
-                  "marginLeft": 12,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              maxFontSizeMultiplier={1.5}
-              numberOfLines={1}
-              selectable={false}
-              style={
-                [
-                  {
-                    "textAlign": "left",
-                  },
                   {
                     "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    [
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      undefined,
-                    ],
-                  ],
-                ]
-              }
-              testID="menu-item-title"
-            >
-              Copy
-            </Text>
-          </View>
-        </View>
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="menu-item-title"
+        >
+          Copy
+        </Text>
       </View>
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
     collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="menuitem"
+    style={
+      [
+        false,
+        [
+          {
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "maxWidth": 280,
+            "minHeight": 48,
+            "minWidth": 112,
+            "paddingHorizontal": 12,
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderBottomRightRadius": 0,
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+          },
+          null,
+          undefined,
+        ],
+      ]
+    }
+    testID="menu-item"
   >
     <View
-      collapsable={false}
       style={
-        {
-          "borderBottomLeftRadius": 0,
-          "borderBottomRightRadius": 0,
-          "borderTopLeftRadius": 0,
-          "borderTopRightRadius": 0,
-          "height": 48,
-          "justifyContent": "center",
-          "maxWidth": 280,
-          "minHeight": 48,
-          "minWidth": 112,
-          "overflow": "hidden",
-          "paddingHorizontal": 12,
-        }
+        [
+          {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "flexDirection": "row",
+            "maxWidth": 256,
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
       }
-      testID="menu-item"
+      testID="menu-item-content"
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="menuitem"
+        pointerEvents="none"
         style={
           [
-            false,
             {
-              "flexGrow": 1,
+              "flexGrow": 0,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            {
+              "maxWidth": 268,
+            },
+            {
+              "marginLeft": 4,
+            },
+            undefined,
           ]
         }
-        testID="menu-item-pressable"
       >
-        <View
+        <Text
+          maxFontSizeMultiplier={1.5}
+          numberOfLines={1}
+          selectable={false}
           style={
             [
               {
-                "alignItems": "center",
-                "alignSelf": "flex-start",
-                "flexDirection": "row",
-                "maxWidth": 256,
+                "textAlign": "left",
               },
               {
-                "opacity": 1,
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
               },
-              undefined,
-            ]
-          }
-          testID="menu-item-content"
-        >
-          <View
-            pointerEvents="none"
-            style={
               [
                 {
-                  "flexGrow": 0,
-                  "flexShrink": 1,
-                  "justifyContent": "center",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
-                {
-                  "maxWidth": 268,
-                },
-                {
-                  "marginLeft": 4,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              maxFontSizeMultiplier={1.5}
-              numberOfLines={1}
-              selectable={false}
-              style={
                 [
                   {
-                    "textAlign": "left",
-                  },
-                  {
                     "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    [
-                      {
-                        "color": "rgba(29, 27, 32, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      undefined,
-                    ],
-                  ],
-                ]
-              }
-              testID="menu-item-title"
-            >
-              Paste
-            </Text>
-          </View>
-        </View>
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="menu-item-title"
+        >
+          Paste
+        </Text>
       </View>
     </View>
   </View>

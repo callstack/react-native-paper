@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render, screen, userEvent, waitFor } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import Menu from '../Menu/Menu';
@@ -14,9 +14,7 @@ import {
   getMenuContainerColor,
   getMenuItemBorderRadius,
   getMenuItemColor,
-  getMenuItemMorphRadii,
 } from '../Menu/utils';
-import Portal from '../Portal/Portal';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -178,33 +176,17 @@ describe('Menu Item', () => {
     });
   });
 
-  it('animates corner radii via Animated.spring when selected (H3 morph path)', async () => {
+  it('applies corner.medium on all sides when selected', async () => {
     const theme = getTheme();
-    const springSpy = jest.spyOn(Animated, 'spring');
     const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
 
     await render(
       <Menu.Item title="Paste" selected roundedTop roundedBottom={false} />
     );
 
-    // Initial targets are full medium for selected (morph shell carries animated radii)
     expect(screen.getByTestId('menu-item')).toHaveStyle({
-      borderTopLeftRadius: radius,
-      borderTopRightRadius: radius,
-      borderBottomLeftRadius: radius,
-      borderBottomRightRadius: radius,
+      borderRadius: radius,
     });
-    // Shipped code starts Animated.spring on the morph effect path
-    expect(springSpy).toHaveBeenCalled();
-    // At least one spring targets a border-radius driver with useNativeDriver: false
-    const usedJsDriver = springSpy.mock.calls.some(
-      (call) =>
-        call[1] &&
-        typeof call[1] === 'object' &&
-        (call[1] as { useNativeDriver?: boolean }).useNativeDriver === false
-    );
-    expect(usedJsDriver).toBe(true);
-    springSpy.mockRestore();
   });
 });
 
@@ -331,23 +313,9 @@ describe('Menu shape tokens', () => {
     });
   });
 
-  it('uses full corner.medium when morph/selected (shape morph target)', () => {
+  it('uses full corner.medium when selected even if only roundedTop was set', () => {
     const theme = getTheme();
     const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
-    expect(
-      getMenuItemMorphRadii({
-        theme,
-        morphActive: true,
-        roundedTop: true,
-        roundedBottom: false,
-      })
-    ).toMatchObject({
-      topLeft: radius,
-      topRight: radius,
-      bottomLeft: radius,
-      bottomRight: radius,
-      medium: radius,
-    });
     expect(
       getMenuItemBorderRadius({
         theme,
@@ -432,38 +400,5 @@ describe('Menu open/close motion (I6 / D2)', () => {
 
     expect((opacity as unknown as { _value: number })._value).toBe(0);
     springSpy.mockRestore();
-  });
-});
-
-describe('Menu.Item badge and submenu', () => {
-  it('renders a numeric badge on the real Menu.Item', async () => {
-    await render(<Menu.Item title="Inbox" badge={3} />);
-    expect(screen.getByTestId('menu-item-badge')).toBeOnTheScreen();
-    expect(screen.getByText('3')).toBeOnTheScreen();
-  });
-
-  it('renders a dot badge when badge is true', async () => {
-    await render(<Menu.Item title="Alerts" badge />);
-    expect(screen.getByTestId('menu-item-badge')).toBeOnTheScreen();
-  });
-
-  it('opens submenu content when pressed', async () => {
-    const user = userEvent.setup();
-    await render(
-      <Portal.Host>
-        <Menu.Item
-          title="More"
-          testID="parent-item"
-          submenu={<Menu.Item title="Nested" testID="nested-item" />}
-        />
-      </Portal.Host>
-    );
-
-    await user.press(screen.getByTestId('parent-item-pressable'));
-
-    await waitFor(() => {
-      expect(screen.getByTestId('parent-item-submenu')).toBeOnTheScreen();
-    });
-    expect(screen.getByTestId('nested-item')).toBeOnTheScreen();
   });
 });

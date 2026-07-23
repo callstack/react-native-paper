@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {
-  Animated,
-  Dimensions,
   StyleSheet,
   View,
   type GestureResponderEvent,
@@ -15,21 +13,15 @@ import { useMenuItemLayout } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
-  getMenuContainerColor,
-  getMenuItemMorphRadii,
+  getMenuItemBorderRadius,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../types';
-import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Portal from '../Portal/Portal';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -47,18 +39,6 @@ export type Props = {
    * Optional trailing supporting text (`labelLarge`), e.g. a keyboard shortcut.
    */
   trailingSupportingText?: React.ReactNode;
-  /**
-   * Optional badge content. `true` shows a small dot; string/number shows a pill badge.
-   * @see https://m3.material.io/components/menus/overview
-   */
-  badge?: boolean | string | number;
-  /**
-   * Nested menu content. When set, pressing the item opens a lightweight
-   * nested surface (portal) with these children (typically more `Menu.Item`s).
-   * This is not a full nested `Menu` instance (no independent spring open of
-   * the submenu surface); it is an M3 expressive stretch for simple submenus.
-   */
-  submenu?: React.ReactNode;
   /**
    * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
    *
@@ -125,7 +105,7 @@ export type Props = {
    */
   containerStyle?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the content container, which wraps the title text.
+   * Style that is passed to the content container.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -179,7 +159,7 @@ export type Props = {
  * A component to show a single list item inside a Menu.
  *
  * Supports MD3 selection (`selected`), supporting text, trailing supporting text,
- * dense layout, badges, and lightweight nested `submenu` surfaces.
+ * and dense layout.
  *
  * ## Usage
  * ```js
@@ -201,7 +181,7 @@ export type Props = {
  *       trailingSupportingText="⌘V"
  *       selected
  *     />
- *     <Menu.Item title="Share" dense badge={3} />
+ *     <Menu.Item title="Share" dense />
  *   </View>
  * );
  *
@@ -215,8 +195,6 @@ const MenuItem = ({
   title,
   supportingText,
   trailingSupportingText,
-  badge,
-  submenu,
   selected = false,
   colorScheme: colorSchemeProp,
   disabled,
@@ -242,15 +220,10 @@ const MenuItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const layout = useMenuItemLayout();
-  // Prefer layout/root value so portaled items still honor reduce-motion.
-  const ambientReduceMotion = useReduceMotion();
-  const reduceMotion = layout?.reduceMotion ?? ambientReduceMotion;
 
   const colorScheme = colorSchemeProp ?? layout?.colorScheme ?? 'standard';
   const roundedTop = roundedTopProp ?? layout?.roundedTop ?? false;
   const roundedBottom = roundedBottomProp ?? layout?.roundedBottom ?? false;
-  // H3: selected or focus morph target animates to full medium corners
-  const morphActive = Boolean(layout?.morphActive);
 
   const {
     titleColor,
@@ -276,19 +249,11 @@ const MenuItem = ({
     maxWidth,
   } = MenuTokens.sizes;
 
-  const resolvedTrailingIcon: IconSource | undefined = trailingIcon
-    ? trailingIcon
-    : submenu
-      ? 'menu-right'
-      : undefined;
-
   const contentMaxWidth = getContentMaxWidth({
     iconWidth: iconSize,
     leadingIcon,
-    trailingIcon: resolvedTrailingIcon,
-    hasTrailingSupportingText:
-      Boolean(trailingSupportingText) ||
-      (badge !== undefined && badge !== false && badge !== null),
+    trailingIcon,
+    hasTrailingSupportingText: Boolean(trailingSupportingText),
   });
 
   const titleTextStyle = {
@@ -306,288 +271,129 @@ const MenuItem = ({
     ...theme.fonts[MenuTokens.typography.trailingSupporting],
   };
 
-  const morphRadii = getMenuItemMorphRadii({
+  const borderRadiusStyle = getMenuItemBorderRadius({
     theme,
     selected,
-    morphActive,
     roundedTop,
     roundedBottom,
   });
 
-  // H3: spring-animated per-corner radii as focus/selection morphs the item shape.
-  const topLeftAnim = React.useRef(
-    new Animated.Value(morphRadii.topLeft)
-  ).current;
-  const topRightAnim = React.useRef(
-    new Animated.Value(morphRadii.topRight)
-  ).current;
-  const bottomLeftAnim = React.useRef(
-    new Animated.Value(morphRadii.bottomLeft)
-  ).current;
-  const bottomRightAnim = React.useRef(
-    new Animated.Value(morphRadii.bottomRight)
-  ).current;
-
-  React.useEffect(() => {
-    const targets = [
-      { value: topLeftAnim, toValue: morphRadii.topLeft },
-      { value: topRightAnim, toValue: morphRadii.topRight },
-      { value: bottomLeftAnim, toValue: morphRadii.bottomLeft },
-      { value: bottomRightAnim, toValue: morphRadii.bottomRight },
-    ];
-
-    if (reduceMotion) {
-      targets.forEach(({ value, toValue }) => value.setValue(toValue));
-      return;
-    }
-
-    const spatialSpring = toRawSpring(theme.motion.spring.fast.spatial);
-    Animated.parallel(
-      targets.map(({ value, toValue }) =>
-        Animated.spring(value, {
-          toValue,
-          ...spatialSpring,
-          useNativeDriver: false, // border radius cannot use native driver
-        })
-      )
-    ).start();
-  }, [
-    morphRadii.topLeft,
-    morphRadii.topRight,
-    morphRadii.bottomLeft,
-    morphRadii.bottomRight,
-    reduceMotion,
-    theme.motion.spring.fast.spatial,
-    topLeftAnim,
-    topRightAnim,
-    bottomLeftAnim,
-    bottomRightAnim,
-  ]);
-
-  const animatedBorderStyle = {
-    borderTopLeftRadius: topLeftAnim,
-    borderTopRightRadius: topRightAnim,
-    borderBottomLeftRadius: bottomLeftAnim,
-    borderBottomRightRadius: bottomRightAnim,
-  };
-
   const isSelected = selected && !disabled;
-  const [submenuOpen, setSubmenuOpen] = React.useState(false);
-  const [submenuAnchor, setSubmenuAnchor] = React.useState({ x: 0, y: 0 });
-  const itemRef = React.useRef<View>(null);
-
-  const handlePress = (e: GestureResponderEvent) => {
-    layout?.setFocusedKey(layout.itemKey);
-
-    if (submenu && !disabled) {
-      setSubmenuOpen(true);
-      itemRef.current?.measureInWindow((x, y, width) => {
-        setSubmenuAnchor({
-          x: x + width,
-          y,
-        });
-      });
-      return;
-    }
-
-    onPress?.(e);
-  };
-
-  const showBadge = badge !== undefined && badge !== false && badge !== null;
-  const badgeIsDot = badge === true;
 
   return (
-    <>
-      <View ref={itemRef} collapsable={false}>
-        <Animated.View
-          style={[
-            styles.morphShell,
-            {
-              paddingHorizontal: itemPaddingHorizontal,
-              minWidth,
-              maxWidth,
-              minHeight: dense ? denseItemHeight : itemHeight,
-              ...(supportingText
-                ? { paddingVertical: 8 }
-                : { height: dense ? denseItemHeight : itemHeight }),
-            },
-            animatedBorderStyle,
-            containerColor ? { backgroundColor: containerColor } : null,
-            style,
-          ]}
-          testID={testID}
-        >
-          <TouchableRipple
-            style={styles.pressableFill}
-            onPress={handlePress}
-            onPressIn={() => {
-              if (!disabled && layout) {
-                layout.setFocusedKey(layout.itemKey);
-              }
-            }}
-            disabled={disabled}
-            testID={testID ? `${testID}-pressable` : undefined}
-            background={background}
-            aria-label={ariaLabel}
-            role="menuitem"
-            aria-disabled={disabled}
-            aria-checked={ariaChecked}
-            aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
-            aria-busy={ariaBusy}
-            aria-expanded={ariaExpanded ?? (submenu ? submenuOpen : undefined)}
-            hitSlop={hitSlop}
-          >
-            <View
-              style={[styles.row, { opacity: contentOpacity }, containerStyle]}
-              testID={testID ? `${testID}-content` : undefined}
-            >
-              {leadingIcon ? (
-                <View
-                  style={[{ width: iconSize }, styles.leadingIcon]}
-                  pointerEvents="box-none"
-                >
-                  <Icon
-                    source={leadingIcon}
-                    size={iconSize}
-                    color={iconColor}
-                  />
-                </View>
-              ) : null}
-              <View
-                style={[
-                  styles.content,
-                  {
-                    maxWidth: contentMaxWidth,
-                  },
-                  leadingIcon
-                    ? { marginLeft: iconLabelGap }
-                    : { marginLeft: noLeadingIconStart },
-                  contentStyle,
-                ]}
-                pointerEvents="none"
-              >
-                <Text
-                  variant={MenuTokens.typography.label}
-                  selectable={false}
-                  numberOfLines={1}
-                  testID={`${testID}-title`}
-                  style={[titleTextStyle, titleStyle]}
-                  maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-                >
-                  {title}
-                </Text>
-                {supportingText ? (
-                  <Text
-                    variant={MenuTokens.typography.supporting}
-                    selectable={false}
-                    numberOfLines={1}
-                    testID={`${testID}-supporting`}
-                    style={[supportingTextStyleResolved, supportingTextStyle]}
-                  >
-                    {supportingText}
-                  </Text>
-                ) : null}
-              </View>
-              {trailingSupportingText ? (
-                <Text
-                  variant={MenuTokens.typography.trailingSupporting}
-                  selectable={false}
-                  numberOfLines={1}
-                  testID={`${testID}-trailing-supporting`}
-                  style={[
-                    styles.trailingSupporting,
-                    trailingSupportingTextStyleResolved,
-                    trailingSupportingTextStyle,
-                  ]}
-                  pointerEvents="none"
-                >
-                  {trailingSupportingText}
-                </Text>
-              ) : null}
-              {showBadge ? (
-                <View
-                  style={styles.badgeSlot}
-                  testID={`${testID}-badge`}
-                  pointerEvents="none"
-                >
-                  <Badge visible>{badgeIsDot ? undefined : badge}</Badge>
-                </View>
-              ) : null}
-              {resolvedTrailingIcon ? (
-                <View
-                  style={[{ width: iconSize }, styles.trailingIcon]}
-                  pointerEvents="box-none"
-                >
-                  <Icon
-                    source={resolvedTrailingIcon}
-                    size={iconSize}
-                    color={iconColor}
-                  />
-                </View>
-              ) : null}
-            </View>
-          </TouchableRipple>
-        </Animated.View>
-      </View>
-      {submenu && submenuOpen ? (
-        <Portal>
-          <TouchableRipple
-            testID={`${testID}-submenu-overlay`}
-            onPress={() => setSubmenuOpen(false)}
-            style={styles.submenuOverlay}
-            accessibilityRole="button"
-            accessibilityLabel="Dismiss submenu"
-          >
-            <View />
-          </TouchableRipple>
+    <TouchableRipple
+      style={[
+        styles.container,
+        {
+          paddingHorizontal: itemPaddingHorizontal,
+          minWidth,
+          maxWidth,
+          minHeight: dense ? denseItemHeight : itemHeight,
+          ...(supportingText
+            ? { paddingVertical: 8 }
+            : { height: dense ? denseItemHeight : itemHeight }),
+        },
+        borderRadiusStyle,
+        containerColor ? { backgroundColor: containerColor } : null,
+        style,
+      ]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      background={background}
+      aria-label={ariaLabel}
+      role="menuitem"
+      aria-disabled={disabled}
+      aria-checked={ariaChecked}
+      aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
+      aria-busy={ariaBusy}
+      aria-expanded={ariaExpanded}
+      hitSlop={hitSlop}
+    >
+      <View
+        style={[styles.row, { opacity: contentOpacity }, containerStyle]}
+        testID={testID ? `${testID}-content` : undefined}
+      >
+        {leadingIcon ? (
           <View
-            testID={`${testID}-submenu`}
-            style={[
-              styles.submenu,
-              {
-                left: Math.min(
-                  submenuAnchor.x,
-                  Dimensions.get('window').width - MIN_WIDTH - 8
-                ),
-                top: submenuAnchor.y,
-              },
-            ]}
+            style={[{ width: iconSize }, styles.leadingIcon]}
+            pointerEvents="box-none"
           >
-            <Surface
-              elevation={MenuTokens.elevation.default}
-              style={[
-                styles.submenuSurface,
-                {
-                  borderRadius: theme.shapes.corner.large,
-                  backgroundColor: getMenuContainerColor({
-                    theme,
-                    elevation: MenuTokens.elevation.default,
-                    colorScheme,
-                  }),
-                },
-              ]}
-            >
-              {submenu}
-            </Surface>
+            <Icon source={leadingIcon} size={iconSize} color={iconColor} />
           </View>
-        </Portal>
-      ) : null}
-    </>
+        ) : null}
+        <View
+          style={[
+            styles.content,
+            {
+              maxWidth: contentMaxWidth,
+            },
+            leadingIcon
+              ? { marginLeft: iconLabelGap }
+              : { marginLeft: noLeadingIconStart },
+            contentStyle,
+          ]}
+          pointerEvents="none"
+        >
+          <Text
+            variant={MenuTokens.typography.label}
+            selectable={false}
+            numberOfLines={1}
+            testID={`${testID}-title`}
+            style={[titleTextStyle, titleStyle]}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          >
+            {title}
+          </Text>
+          {supportingText ? (
+            <Text
+              variant={MenuTokens.typography.supporting}
+              selectable={false}
+              numberOfLines={1}
+              testID={`${testID}-supporting`}
+              style={[supportingTextStyleResolved, supportingTextStyle]}
+            >
+              {supportingText}
+            </Text>
+          ) : null}
+        </View>
+        {trailingSupportingText ? (
+          <Text
+            variant={MenuTokens.typography.trailingSupporting}
+            selectable={false}
+            numberOfLines={1}
+            testID={`${testID}-trailing-supporting`}
+            style={[
+              styles.trailingSupporting,
+              trailingSupportingTextStyleResolved,
+              trailingSupportingTextStyle,
+            ]}
+            pointerEvents="none"
+          >
+            {trailingSupportingText}
+          </Text>
+        ) : null}
+        {trailingIcon ? (
+          <View
+            style={[{ width: iconSize }, styles.trailingIcon]}
+            pointerEvents="box-none"
+          >
+            <Icon source={trailingIcon} size={iconSize} color={iconColor} />
+          </View>
+        ) : null}
+      </View>
+    </TouchableRipple>
   );
 };
 
 MenuItem.displayName = 'Menu.Item';
 
 const styles = StyleSheet.create({
-  morphShell: {
+  container: {
     minWidth: MIN_WIDTH,
     maxWidth: MAX_WIDTH,
+    justifyContent: 'center',
     overflow: 'hidden',
-    justifyContent: 'center',
-  },
-  pressableFill: {
-    flexGrow: 1,
-    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -610,24 +416,6 @@ const styles = StyleSheet.create({
   trailingIcon: {
     marginLeft: 12,
     flexShrink: 0,
-  },
-  badgeSlot: {
-    marginLeft: 8,
-    flexShrink: 0,
-    justifyContent: 'center',
-  },
-  submenuOverlay: {
-    ...StyleSheet.absoluteFill,
-  },
-  submenu: {
-    position: 'absolute',
-    zIndex: 1000,
-  },
-  submenuSurface: {
-    minWidth: MIN_WIDTH,
-    maxWidth: MAX_WIDTH,
-    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
-    overflow: 'hidden',
   },
 });
 
