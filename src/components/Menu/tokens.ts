@@ -26,11 +26,6 @@ const sizes = {
   containerPaddingVertical: 8,
   /** Min distance from screen edge. */
   screenIndent: 8,
-  /**
-   * Vertical gap between menu groups (`Menu.Section`).
-   * @see https://m3.material.io/components/menus/specs
-   */
-  groupGap: 8,
 } as const;
 
 const shapes = {
