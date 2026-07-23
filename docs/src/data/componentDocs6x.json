@@ -95,10 +95,10 @@
     "Appbar/Appbar": {
       "filepath": "Appbar/Appbar.tsx",
       "title": "Appbar",
-      "description": "A component to display action items in a bar. It can be placed at the top or bottom.\nThe top bar usually contains the screen title, controls such as navigation buttons, menu button etc.\nThe bottom bar usually provides access to a drawer and up to four actions.\n\nBy default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations\n\n## Usage\n### Top bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n    <Appbar.BackAction onPress={() => {}} />\n    <Appbar.Content title=\"Title\" />\n    <Appbar.Action icon=\"calendar\" onPress={() => {}} />\n    <Appbar.Action icon=\"magnify\" onPress={() => {}} />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Bottom bar\n```js\nimport * as React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Appbar, FAB, useTheme } from 'react-native-paper';\nimport { useSafeAreaInsets } from 'react-native-safe-area-context';\n\nconst BOTTOM_APPBAR_HEIGHT = 80;\nconst MEDIUM_FAB_HEIGHT = 56;\n\nconst MyComponent = () => {\n  const { bottom } = useSafeAreaInsets();\n  const theme = useTheme();\n\n  return (\n    <Appbar\n      style={[\n        styles.bottom,\n        {\n          height: BOTTOM_APPBAR_HEIGHT + bottom,\n          backgroundColor: theme.colors.surfaceContainer,\n        },\n      ]}\n      safeAreaInsets={{ bottom }}\n    >\n      <Appbar.Action icon=\"archive\" onPress={() => {}} />\n      <Appbar.Action icon=\"email\" onPress={() => {}} />\n      <Appbar.Action icon=\"label\" onPress={() => {}} />\n      <Appbar.Action icon=\"delete\" onPress={() => {}} />\n      <FAB\n        mode=\"flat\"\n        size=\"medium\"\n        icon=\"plus\"\n        onPress={() => {}}\n        style={[\n          styles.fab,\n          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },\n        ]}\n      />\n    </Appbar>\n  );\n};\n\nconst styles = StyleSheet.create({\n  bottom: {\n    backgroundColor: 'aquamarine',\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 0,\n  },\n  fab: {\n    position: 'absolute',\n    right: 16,\n  },\n});\n\nexport default MyComponent;\n```",
+      "description": "MD3 top app bar (`TopAppBar`; `Appbar` is a compatibility alias).\n\nFollows [Material Design 3 app bars](https://m3.material.io/components/app-bars/specs):\nsmall (64dp) with `titleAlign`, medium-flexible / large-flexible expanded layouts,\ncontainer `surface` at rest and `surfaceContainer` when scrolled (`scrollProgress` or `elevated`),\nheadline `onSurface`, leading icons `onSurface`, trailing icons `onSurfaceVariant`.\n\nPrefer `TopAppBar` in new code. Can also be used as a bottom action bar.\n\n## Usage\n### Top bar\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"small\" titleAlign=\"start\">\n    <TopAppBar.BackAction onPress={() => {}} />\n    <TopAppBar.Content title=\"Title\" />\n    <TopAppBar.Action icon=\"calendar\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Flexible with subtitle and filled trailing action\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"medium-flexible\" scrollProgress={1}>\n    <TopAppBar.BackAction onPress={() => {}} />\n    <TopAppBar.Content title=\"Title\" subtitle=\"Supporting text\" />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"plus\" mode=\"filled\" onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Bottom bar\n```js\nimport * as React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Appbar, FAB, useTheme } from 'react-native-paper';\nimport { useSafeAreaInsets } from 'react-native-safe-area-context';\n\nconst BOTTOM_APPBAR_HEIGHT = 80;\nconst MEDIUM_FAB_HEIGHT = 56;\n\nconst MyComponent = () => {\n  const { bottom } = useSafeAreaInsets();\n  const theme = useTheme();\n\n  return (\n    <Appbar\n      style={[\n        styles.bottom,\n        {\n          height: BOTTOM_APPBAR_HEIGHT + bottom,\n          backgroundColor: theme.colors.surfaceContainer,\n        },\n      ]}\n      safeAreaInsets={{ bottom }}\n    >\n      <Appbar.Action icon=\"archive\" onPress={() => {}} />\n      <Appbar.Action icon=\"email\" onPress={() => {}} />\n      <Appbar.Action icon=\"label\" onPress={() => {}} />\n      <Appbar.Action icon=\"delete\" onPress={() => {}} />\n      <FAB\n        mode=\"flat\"\n        size=\"medium\"\n        icon=\"plus\"\n        onPress={() => {}}\n        style={[\n          styles.fab,\n          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },\n        ]}\n      />\n    </Appbar>\n  );\n};\n\nconst styles = StyleSheet.create({\n  bottom: {\n    backgroundColor: 'aquamarine',\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 0,\n  },\n  fab: {\n    position: 'absolute',\n    right: 16,\n  },\n});\n\nexport default MyComponent;\n```",
       "link": "appbar",
       "data": {
-        "description": "A component to display action items in a bar. It can be placed at the top or bottom.\nThe top bar usually contains the screen title, controls such as navigation buttons, menu button etc.\nThe bottom bar usually provides access to a drawer and up to four actions.\n\nBy default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations\n\n## Usage\n### Top bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n    <Appbar.BackAction onPress={() => {}} />\n    <Appbar.Content title=\"Title\" />\n    <Appbar.Action icon=\"calendar\" onPress={() => {}} />\n    <Appbar.Action icon=\"magnify\" onPress={() => {}} />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Bottom bar\n```js\nimport * as React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Appbar, FAB, useTheme } from 'react-native-paper';\nimport { useSafeAreaInsets } from 'react-native-safe-area-context';\n\nconst BOTTOM_APPBAR_HEIGHT = 80;\nconst MEDIUM_FAB_HEIGHT = 56;\n\nconst MyComponent = () => {\n  const { bottom } = useSafeAreaInsets();\n  const theme = useTheme();\n\n  return (\n    <Appbar\n      style={[\n        styles.bottom,\n        {\n          height: BOTTOM_APPBAR_HEIGHT + bottom,\n          backgroundColor: theme.colors.surfaceContainer,\n        },\n      ]}\n      safeAreaInsets={{ bottom }}\n    >\n      <Appbar.Action icon=\"archive\" onPress={() => {}} />\n      <Appbar.Action icon=\"email\" onPress={() => {}} />\n      <Appbar.Action icon=\"label\" onPress={() => {}} />\n      <Appbar.Action icon=\"delete\" onPress={() => {}} />\n      <FAB\n        mode=\"flat\"\n        size=\"medium\"\n        icon=\"plus\"\n        onPress={() => {}}\n        style={[\n          styles.fab,\n          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },\n        ]}\n      />\n    </Appbar>\n  );\n};\n\nconst styles = StyleSheet.create({\n  bottom: {\n    backgroundColor: 'aquamarine',\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 0,\n  },\n  fab: {\n    position: 'absolute',\n    right: 16,\n  },\n});\n\nexport default MyComponent;\n```",
+        "description": "MD3 top app bar (`TopAppBar`; `Appbar` is a compatibility alias).\n\nFollows [Material Design 3 app bars](https://m3.material.io/components/app-bars/specs):\nsmall (64dp) with `titleAlign`, medium-flexible / large-flexible expanded layouts,\ncontainer `surface` at rest and `surfaceContainer` when scrolled (`scrollProgress` or `elevated`),\nheadline `onSurface`, leading icons `onSurface`, trailing icons `onSurfaceVariant`.\n\nPrefer `TopAppBar` in new code. Can also be used as a bottom action bar.\n\n## Usage\n### Top bar\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"small\" titleAlign=\"start\">\n    <TopAppBar.BackAction onPress={() => {}} />\n    <TopAppBar.Content title=\"Title\" />\n    <TopAppBar.Action icon=\"calendar\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Flexible with subtitle and filled trailing action\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"medium-flexible\" scrollProgress={1}>\n    <TopAppBar.BackAction onPress={() => {}} />\n    <TopAppBar.Content title=\"Title\" subtitle=\"Supporting text\" />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"plus\" mode=\"filled\" onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```\n\n### Bottom bar\n```js\nimport * as React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Appbar, FAB, useTheme } from 'react-native-paper';\nimport { useSafeAreaInsets } from 'react-native-safe-area-context';\n\nconst BOTTOM_APPBAR_HEIGHT = 80;\nconst MEDIUM_FAB_HEIGHT = 56;\n\nconst MyComponent = () => {\n  const { bottom } = useSafeAreaInsets();\n  const theme = useTheme();\n\n  return (\n    <Appbar\n      style={[\n        styles.bottom,\n        {\n          height: BOTTOM_APPBAR_HEIGHT + bottom,\n          backgroundColor: theme.colors.surfaceContainer,\n        },\n      ]}\n      safeAreaInsets={{ bottom }}\n    >\n      <Appbar.Action icon=\"archive\" onPress={() => {}} />\n      <Appbar.Action icon=\"email\" onPress={() => {}} />\n      <Appbar.Action icon=\"label\" onPress={() => {}} />\n      <Appbar.Action icon=\"delete\" onPress={() => {}} />\n      <FAB\n        mode=\"flat\"\n        size=\"medium\"\n        icon=\"plus\"\n        onPress={() => {}}\n        style={[\n          styles.fab,\n          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },\n        ]}\n      />\n    </Appbar>\n  );\n};\n\nconst styles = StyleSheet.create({\n  bottom: {\n    backgroundColor: 'aquamarine',\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 0,\n  },\n  fab: {\n    position: 'absolute',\n    right: 16,\n  },\n});\n\nexport default MyComponent;\n```",
         "displayName": "Appbar",
         "methods": [],
         "statics": [],
@@ -116,44 +116,48 @@
               "name": "ReactReactNode",
               "raw": "React.ReactNode"
             },
-            "description": "Content of the `Appbar`."
+            "description": "Content of the `Appbar` / `TopAppBar`."
           },
           "mode": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "'small' | 'medium' | 'large' | 'center-aligned'",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "'small'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'medium'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'large'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'center-aligned'"
-                }
-              ]
+              "name": "TopAppBarMode"
             },
-            "description": "@supported Available in v5.x with theme version 3\n\nMode of the Appbar.\n- `small` - Appbar with default height (64).\n- `medium` - Appbar with medium height (112).\n- `large` - Appbar with large height (152).\n- `center-aligned` - Appbar with default height and center-aligned title.",
+            "description": "Mode of the top app bar.\n- `small` — 64dp height (default).\n- `medium-flexible` — MD3 medium flexible (expanded height + subtitle/logo support).\n- `large-flexible` — MD3 large flexible (expanded height + subtitle/logo support).\n- `medium` / `large` — legacy baseline heights (**deprecated**; prefer flexible modes).\n- `center-aligned` — **deprecated**; use `mode=\"small\"` with `titleAlign=\"center\"`.",
             "defaultValue": {
               "value": "'small'",
               "computed": false
             }
+          },
+          "titleAlign": {
+            "required": false,
+            "tsType": {
+              "name": "TitleAlign"
+            },
+            "description": "Title alignment for `small` mode. Replaces the deprecated `center-aligned` mode.\n@default 'start'"
           },
           "elevated": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "@supported Available in v5.x with theme version 3\nWhether Appbar background should have the elevation along with primary color pigment."
+            "description": "Whether Appbar background should use the scrolled/elevated container role\n(`surfaceContainer`). Prefer `scrollProgress` for scroll-reactive MD3 behavior."
+          },
+          "scrollProgress": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "number | Animated.Value",
+              "elements": [
+                {
+                  "name": "number"
+                },
+                {
+                  "name": "Animated.Value"
+                }
+              ]
+            },
+            "description": "Scroll progress from 0 (resting `surface`) to 1 (scrolled `surfaceContainer`).\nAccepts a number or `Animated.Value` for continuous transitions."
           },
           "safeAreaInsets": {
             "required": false,
@@ -232,10 +236,10 @@
     "Appbar/AppbarAction": {
       "filepath": "Appbar/AppbarAction.tsx",
       "title": "Appbar.Action",
-      "description": "A component used to display an action item in the appbar.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\nimport { Platform } from 'react-native';\n\nconst MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n     <Appbar.Content title=\"Title\" subtitle={'Subtitle'} />\n      <Appbar.Action icon=\"magnify\" onPress={() => {}} />\n      <Appbar.Action icon={MORE_ICON} onPress={() => {}} />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```",
+      "description": "Action item for a top app bar. Supports standard icon buttons and a single\nfilled / tonal trailing action (`mode=\"filled\"` | `mode=\"tonal\"`).\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\nimport { Platform } from 'react-native';\n\nconst MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';\n\nconst MyComponent = () => (\n  <TopAppBar.Header>\n    <TopAppBar.Content title=\"Title\" />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"plus\" mode=\"filled\" onPress={() => {}} />\n    <TopAppBar.Action icon={MORE_ICON} onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```",
       "link": "appbar-action",
       "data": {
-        "description": "A component used to display an action item in the appbar.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\nimport { Platform } from 'react-native';\n\nconst MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n     <Appbar.Content title=\"Title\" subtitle={'Subtitle'} />\n      <Appbar.Action icon=\"magnify\" onPress={() => {}} />\n      <Appbar.Action icon={MORE_ICON} onPress={() => {}} />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```",
+        "description": "Action item for a top app bar. Supports standard icon buttons and a single\nfilled / tonal trailing action (`mode=\"filled\"` | `mode=\"tonal\"`).\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\nimport { Platform } from 'react-native';\n\nconst MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';\n\nconst MyComponent = () => (\n  <TopAppBar.Header>\n    <TopAppBar.Content title=\"Title\" />\n    <TopAppBar.Action icon=\"magnify\" onPress={() => {}} />\n    <TopAppBar.Action icon=\"plus\" mode=\"filled\" onPress={() => {}} />\n    <TopAppBar.Action icon={MORE_ICON} onPress={() => {}} />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```",
         "displayName": "Appbar.Action",
         "methods": [],
         "statics": [],
@@ -300,6 +304,32 @@
               "name": "boolean"
             },
             "description": "@supported Available in v5.x with theme version 3\n\nWhether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons."
+          },
+          "mode": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'standard' | 'filled' | 'tonal'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'standard'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'filled'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'tonal'"
+                }
+              ]
+            },
+            "description": "Visual mode for the action.\n- `standard` — default icon button (default)\n- `filled` — contained (primary) filled trailing action (MD3)\n- `tonal` — contained-tonal filled trailing action (MD3)",
+            "defaultValue": {
+              "value": "'standard'",
+              "computed": false
+            }
           },
           "style": {
             "required": false,
@@ -456,10 +486,10 @@
     "Appbar/AppbarContent": {
       "filepath": "Appbar/AppbarContent.tsx",
       "title": "Appbar.Content",
-      "description": "A component used to display a title in an appbar.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n     <Appbar.Content title=\"Title\" />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```",
+      "description": "Title (and optional subtitle / logo) content for a top app bar.\nSubtitle and logo are intended for medium-flexible and large-flexible modes.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"medium-flexible\">\n    <TopAppBar.Content title=\"Title\" subtitle=\"Subtitle\" />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```",
       "link": "appbar-content",
       "data": {
-        "description": "A component used to display a title in an appbar.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar.Header>\n     <Appbar.Content title=\"Title\" />\n  </Appbar.Header>\n);\n\nexport default MyComponent;\n```",
+        "description": "Title (and optional subtitle / logo) content for a top app bar.\nSubtitle and logo are intended for medium-flexible and large-flexible modes.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <TopAppBar.Header mode=\"medium-flexible\">\n    <TopAppBar.Content title=\"Title\" subtitle=\"Subtitle\" />\n  </TopAppBar.Header>\n);\n\nexport default MyComponent;\n```",
         "displayName": "Appbar.Content",
         "methods": [],
         "statics": [],
@@ -484,6 +514,44 @@
               "raw": "StyleProp<TextStyle>"
             },
             "description": "Style for the title, if `title` is a string."
+          },
+          "subtitle": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Optional subtitle (restored for MD3 flexible medium/large variants)."
+          },
+          "subtitleStyle": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "TextStyle"
+                }
+              ],
+              "raw": "StyleProp<TextStyle>"
+            },
+            "description": "Style for the subtitle when it is a string."
+          },
+          "logo": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "ImageSourcePropType | React.ReactNode",
+              "elements": [
+                {
+                  "name": "ImageSourcePropType"
+                },
+                {
+                  "name": "ReactReactNode",
+                  "raw": "React.ReactNode"
+                }
+              ]
+            },
+            "description": "Optional logo / image shown with flexible app bar content."
           },
           "titleRef": {
             "required": false,
@@ -544,26 +612,7 @@
           "mode": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "'small' | 'medium' | 'large' | 'center-aligned'",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "'small'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'medium'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'large'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'center-aligned'"
-                }
-              ]
+              "name": "TopAppBarMode"
             },
             "description": "@internal",
             "defaultValue": {
@@ -613,10 +662,10 @@
     "Appbar/AppbarHeader": {
       "filepath": "Appbar/AppbarHeader.tsx",
       "title": "Appbar.Header",
-      "description": "A component to use as a header at the top of the screen.\nIt can contain the screen title, controls such as navigation buttons, menu button etc.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const _goBack = () => console.log('Went back');\n\n  const _handleSearch = () => console.log('Searching');\n\n  const _handleMore = () => console.log('Shown more');\n\n  return (\n    <Appbar.Header>\n      <Appbar.BackAction onPress={_goBack} />\n      <Appbar.Content title=\"Title\" />\n      <Appbar.Action icon=\"magnify\" onPress={_handleSearch} />\n      <Appbar.Action icon=\"dots-vertical\" onPress={_handleMore} />\n    </Appbar.Header>\n  );\n};\n\nexport default MyComponent;\n```",
+      "description": "A component to use as a header at the top of the screen.\nPrefer `TopAppBar.Header` in new code (`Appbar.Header` remains a compatibility alias).\n\nIt can contain the screen title, controls such as navigation buttons, menu button etc.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const _goBack = () => console.log('Went back');\n\n  const _handleSearch = () => console.log('Searching');\n\n  const _handleMore = () => console.log('Shown more');\n\n  return (\n    <TopAppBar.Header>\n      <TopAppBar.BackAction onPress={_goBack} />\n      <TopAppBar.Content title=\"Title\" />\n      <TopAppBar.Action icon=\"magnify\" onPress={_handleSearch} />\n      <TopAppBar.Action icon=\"dots-vertical\" onPress={_handleMore} />\n    </TopAppBar.Header>\n  );\n};\n\nexport default MyComponent;\n```",
       "link": "appbar-header",
       "data": {
-        "description": "A component to use as a header at the top of the screen.\nIt can contain the screen title, controls such as navigation buttons, menu button etc.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const _goBack = () => console.log('Went back');\n\n  const _handleSearch = () => console.log('Searching');\n\n  const _handleMore = () => console.log('Shown more');\n\n  return (\n    <Appbar.Header>\n      <Appbar.BackAction onPress={_goBack} />\n      <Appbar.Content title=\"Title\" />\n      <Appbar.Action icon=\"magnify\" onPress={_handleSearch} />\n      <Appbar.Action icon=\"dots-vertical\" onPress={_handleMore} />\n    </Appbar.Header>\n  );\n};\n\nexport default MyComponent;\n```",
+        "description": "A component to use as a header at the top of the screen.\nPrefer `TopAppBar.Header` in new code (`Appbar.Header` remains a compatibility alias).\n\nIt can contain the screen title, controls such as navigation buttons, menu button etc.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { TopAppBar } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const _goBack = () => console.log('Went back');\n\n  const _handleSearch = () => console.log('Searching');\n\n  const _handleMore = () => console.log('Shown more');\n\n  return (\n    <TopAppBar.Header>\n      <TopAppBar.BackAction onPress={_goBack} />\n      <TopAppBar.Content title=\"Title\" />\n      <TopAppBar.Action icon=\"magnify\" onPress={_handleSearch} />\n      <TopAppBar.Action icon=\"dots-vertical\" onPress={_handleMore} />\n    </TopAppBar.Header>\n  );\n};\n\nexport default MyComponent;\n```",
         "displayName": "Appbar.Header",
         "methods": [],
         "statics": [],
@@ -646,39 +695,47 @@
           "mode": {
             "required": false,
             "tsType": {
+              "name": "TopAppBarMode"
+            },
+            "description": "Mode of the top app bar. See `Appbar` / `TopAppBar` for supported values including\n`medium-flexible`, `large-flexible`, and deprecated baseline modes.",
+            "defaultValue": {
+              "value": "'small'",
+              "computed": false
+            }
+          },
+          "titleAlign": {
+            "required": false,
+            "tsType": {
+              "name": "TitleAlign"
+            },
+            "description": "Title alignment for `small` mode (`start` | `center`).\nOn iOS the default is `center` (replaces the deprecated `center-aligned` mode).",
+            "defaultValue": {
+              "value": "Platform.OS === 'ios' ? 'center' : 'start'",
+              "computed": false
+            }
+          },
+          "scrollProgress": {
+            "required": false,
+            "tsType": {
               "name": "union",
-              "raw": "'small' | 'medium' | 'large' | 'center-aligned'",
+              "raw": "number | Animated.Value",
               "elements": [
                 {
-                  "name": "literal",
-                  "value": "'small'"
+                  "name": "number"
                 },
                 {
-                  "name": "literal",
-                  "value": "'medium'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'large'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'center-aligned'"
+                  "name": "Animated.Value"
                 }
               ]
             },
-            "description": "@supported Available in v5.x with theme version 3\n\nMode of the Appbar.\n- `small` - Appbar with default height (64).\n- `medium` - Appbar with medium height (112).\n- `large` - Appbar with large height (152).\n- `center-aligned` - Appbar with default height and center-aligned title.",
-            "defaultValue": {
-              "value": "Platform.OS === 'ios' ? 'center-aligned' : 'small'",
-              "computed": false
-            }
+            "description": "Scroll progress 0→1 for MD3 surface → surfaceContainer transition.\nAccepts a number or `Animated.Value`."
           },
           "elevated": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "@supported Available in v5.x with theme version 3\nWhether Appbar background should have the elevation along with primary color pigment.",
+            "description": "Whether Appbar background should use the scrolled container color statically.\nPrefer `scrollProgress` for scroll-reactive MD3 behavior.",
             "defaultValue": {
               "value": "false",
               "computed": false

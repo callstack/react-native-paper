@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  View,
+  type ImageSourcePropType,
+} from 'react-native';
 import type {
   GestureResponderEvent,
   StyleProp,
@@ -7,7 +13,10 @@ import type {
   ViewStyle,
   ViewProps,
 } from 'react-native';
+// ViewStyle used for mode container map
 
+import { AppbarTokens } from './tokens';
+import type { TopAppBarMode } from './tokens';
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type {
@@ -38,6 +47,18 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Optional subtitle (restored for MD3 flexible medium/large variants).
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * Style for the subtitle when it is a string.
+   */
+  subtitleStyle?: StyleProp<TextStyle>;
+  /**
+   * Optional logo / image shown with flexible app bar content.
+   */
+  logo?: ImageSourcePropType | React.ReactNode;
+  /**
    * Reference for the title.
    */
   titleRef?: React.RefObject<TextRef>;
@@ -60,7 +81,7 @@ export type Props = $RemoveChildren<typeof View> & {
   /**
    * @internal
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: TopAppBarMode;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -73,17 +94,18 @@ export type Props = $RemoveChildren<typeof View> & {
 } & (TitleString | TitleElement);
 
 /**
- * A component used to display a title in an appbar.
+ * Title (and optional subtitle / logo) content for a top app bar.
+ * Subtitle and logo are intended for medium-flexible and large-flexible modes.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Appbar } from 'react-native-paper';
+ * import { TopAppBar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
- *      <Appbar.Content title="Title" />
- *   </Appbar.Header>
+ *   <TopAppBar.Header mode="medium-flexible">
+ *     <TopAppBar.Content title="Title" subtitle="Subtitle" />
+ *   </TopAppBar.Header>
  * );
  *
  * export default MyComponent;
@@ -97,6 +119,9 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
+  subtitle,
+  subtitleStyle,
+  logo,
   titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
@@ -107,15 +132,25 @@ const AppbarContent = ({
   const { colors, fonts } = theme as Theme;
 
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
+  const subtitleColor = colors.onSurfaceVariant;
 
-  const modeContainerStyles = {
+  const modeContainerStyles: Record<string, ViewStyle> = {
     small: styles.v3DefaultContainer,
     medium: styles.v3MediumContainer,
     large: styles.v3LargeContainer,
     'center-aligned': styles.v3DefaultContainer,
+    'medium-flexible': styles.v3MediumContainer,
+    'large-flexible': styles.v3LargeContainer,
   };
 
-  const variant = modeTextVariant[mode] as TypescaleKey;
+  const variant = (modeTextVariant[mode] ??
+    AppbarTokens.typography.small) as TypescaleKey;
+  const subtitleVariant = AppbarTokens.typography.subtitle as TypescaleKey;
+  const isFlexible =
+    mode === 'medium-flexible' ||
+    mode === 'large-flexible' ||
+    mode === 'medium' ||
+    mode === 'large';
 
   const contentWrapperProps = {
     pointerEvents: 'box-none' as ViewProps['pointerEvents'],
@@ -124,8 +159,21 @@ const AppbarContent = ({
     ...rest,
   };
 
+  const logoNode =
+    logo == null ? null : React.isValidElement(logo) ? (
+      logo
+    ) : (
+      <Image
+        source={logo as ImageSourcePropType}
+        style={styles.logo}
+        accessibilityIgnoresInvertColors
+        testID={`${testID}-logo`}
+      />
+    );
+
   const content = (
-    <>
+    <View style={isFlexible ? styles.flexibleColumn : undefined}>
+      {logoNode}
       {typeof title === 'string' ? (
         <Text
           variant={variant}
@@ -137,7 +185,7 @@ const AppbarContent = ({
             },
             titleStyle,
           ]}
-          numberOfLines={1}
+          numberOfLines={isFlexible ? 2 : 1}
           accessible
           role={onPress ? 'none' : 'heading'}
           testID={`${testID}-title-text`}
@@ -148,7 +196,27 @@ const AppbarContent = ({
       ) : (
         title
       )}
-    </>
+      {subtitle != null && subtitle !== false && isFlexible ? (
+        typeof subtitle === 'string' ? (
+          <Text
+            variant={subtitleVariant}
+            style={[
+              {
+                color: subtitleColor,
+                ...fonts[subtitleVariant],
+              },
+              subtitleStyle,
+            ]}
+            numberOfLines={1}
+            testID={`${testID}-subtitle-text`}
+          >
+            {subtitle}
+          </Text>
+        ) : (
+          subtitle
+        )
+      ) : null}
+    </View>
   );
 
   if (onPress) {
@@ -188,6 +256,15 @@ const styles = StyleSheet.create({
     paddingTop: 36,
     justifyContent: 'flex-end',
     paddingBottom: 28,
+  },
+  flexibleColumn: {
+    justifyContent: 'flex-end',
+  },
+  logo: {
+    width: AppbarTokens.sizes.logoSize,
+    height: AppbarTokens.sizes.logoSize,
+    marginBottom: 8,
+    borderRadius: 4,
   },
 });
 

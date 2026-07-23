@@ -8,12 +8,14 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-A component to display action items in a bar. It can be placed at the top or bottom.
-The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
-The bottom bar usually provides access to a drawer and up to four actions.
+MD3 top app bar (`TopAppBar`; `Appbar` is a compatibility alias).
 
-By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
-See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
+Follows [Material Design 3 app bars](https://m3.material.io/components/app-bars/specs):
+small (64dp) with `titleAlign`, medium-flexible / large-flexible expanded layouts,
+container `surface` at rest and `surfaceContainer` when scrolled (`scrollProgress` or `elevated`),
+headline `onSurface`, leading icons `onSurface`, trailing icons `onSurfaceVariant`.
+
+Prefer `TopAppBar` in new code. Can also be used as a bottom action bar.
 
 
 
@@ -25,15 +27,32 @@ See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/them
 ### Top bar
 ```js
 import * as React from 'react';
-import { Appbar } from 'react-native-paper';
+import { TopAppBar } from 'react-native-paper';
 
 const MyComponent = () => (
-  <Appbar.Header>
-    <Appbar.BackAction onPress={() => {}} />
-    <Appbar.Content title="Title" />
-    <Appbar.Action icon="calendar" onPress={() => {}} />
-    <Appbar.Action icon="magnify" onPress={() => {}} />
-  </Appbar.Header>
+  <TopAppBar.Header mode="small" titleAlign="start">
+    <TopAppBar.BackAction onPress={() => {}} />
+    <TopAppBar.Content title="Title" />
+    <TopAppBar.Action icon="calendar" onPress={() => {}} />
+    <TopAppBar.Action icon="magnify" onPress={() => {}} />
+  </TopAppBar.Header>
+);
+
+export default MyComponent;
+```
+
+### Flexible with subtitle and filled trailing action
+```js
+import * as React from 'react';
+import { TopAppBar } from 'react-native-paper';
+
+const MyComponent = () => (
+  <TopAppBar.Header mode="medium-flexible" scrollProgress={1}>
+    <TopAppBar.BackAction onPress={() => {}} />
+    <TopAppBar.Content title="Title" subtitle="Supporting text" />
+    <TopAppBar.Action icon="magnify" onPress={() => {}} />
+    <TopAppBar.Action icon="plus" mode="filled" onPress={() => {}} />
+  </TopAppBar.Header>
 );
 
 export default MyComponent;
@@ -123,7 +142,7 @@ export default MyComponent;
 
 <div>
 
-### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### mode
 
 </div>
 
@@ -131,11 +150,27 @@ export default MyComponent;
 
 <div>
 
-### elevated  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### titleAlign
+
+</div>
+
+  <PropTable componentLink="Appbar/Appbar" prop="titleAlign" />
+
+<div>
+
+### elevated
 
 </div>
 
   <PropTable componentLink="Appbar/Appbar" prop="elevated" />
+
+<div>
+
+### scrollProgress
+
+</div>
+
+  <PropTable componentLink="Appbar/Appbar" prop="scrollProgress" />
 
 <div>
 

@@ -3,15 +3,17 @@ import { Animated, StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import AppbarContent from './AppbarContent';
+import type { TitleAlign, TopAppBarMode } from './tokens';
 import {
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
   filterAppbarActions,
+  resolveAppbarMode,
 } from './utils';
 import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, Theme, ThemeProp } from '../../types';
 import Surface from '../Surface';
 
 export type Props = Omit<Partial<ViewProps>, 'style'> & {
@@ -20,24 +22,33 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
    */
   dark?: boolean;
   /**
-   * Content of the `Appbar`.
+   * Content of the `Appbar` / `TopAppBar`.
    */
   children: React.ReactNode;
   /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Mode of the Appbar.
-   * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
-   * - `center-aligned` - Appbar with default height and center-aligned title.
+   * Mode of the top app bar.
+   * - `small` — 64dp height (default).
+   * - `medium-flexible` — MD3 medium flexible (expanded height + subtitle/logo support).
+   * - `large-flexible` — MD3 large flexible (expanded height + subtitle/logo support).
+   * - `medium` / `large` — legacy baseline heights (**deprecated**; prefer flexible modes).
+   * - `center-aligned` — **deprecated**; use `mode="small"` with `titleAlign="center"`.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: TopAppBarMode;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Whether Appbar background should have the elevation along with primary color pigment.
+   * Title alignment for `small` mode. Replaces the deprecated `center-aligned` mode.
+   * @default 'start'
+   */
+  titleAlign?: TitleAlign;
+  /**
+   * Whether Appbar background should use the scrolled/elevated container role
+   * (`surfaceContainer`). Prefer `scrollProgress` for scroll-reactive MD3 behavior.
    */
   elevated?: boolean;
+  /**
+   * Scroll progress from 0 (resting `surface`) to 1 (scrolled `surfaceContainer`).
+   * Accepts a number or `Animated.Value` for continuous transitions.
+   */
+  scrollProgress?: number | Animated.Value;
   /**
    * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
    */
@@ -55,26 +66,45 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
 };
 
 /**
- * A component to display action items in a bar. It can be placed at the top or bottom.
- * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
- * The bottom bar usually provides access to a drawer and up to four actions.
+ * MD3 top app bar (`TopAppBar`; `Appbar` is a compatibility alias).
  *
- * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
+ * Follows [Material Design 3 app bars](https://m3.material.io/components/app-bars/specs):
+ * small (64dp) with `titleAlign`, medium-flexible / large-flexible expanded layouts,
+ * container `surface` at rest and `surfaceContainer` when scrolled (`scrollProgress` or `elevated`),
+ * headline `onSurface`, leading icons `onSurface`, trailing icons `onSurfaceVariant`.
+ *
+ * Prefer `TopAppBar` in new code. Can also be used as a bottom action bar.
  *
  * ## Usage
  * ### Top bar
  * ```js
  * import * as React from 'react';
- * import { Appbar } from 'react-native-paper';
+ * import { TopAppBar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
- *     <Appbar.BackAction onPress={() => {}} />
- *     <Appbar.Content title="Title" />
- *     <Appbar.Action icon="calendar" onPress={() => {}} />
- *     <Appbar.Action icon="magnify" onPress={() => {}} />
- *   </Appbar.Header>
+ *   <TopAppBar.Header mode="small" titleAlign="start">
+ *     <TopAppBar.BackAction onPress={() => {}} />
+ *     <TopAppBar.Content title="Title" />
+ *     <TopAppBar.Action icon="calendar" onPress={() => {}} />
+ *     <TopAppBar.Action icon="magnify" onPress={() => {}} />
+ *   </TopAppBar.Header>
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ *
+ * ### Flexible with subtitle and filled trailing action
+ * ```js
+ * import * as React from 'react';
+ * import { TopAppBar } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <TopAppBar.Header mode="medium-flexible" scrollProgress={1}>
+ *     <TopAppBar.BackAction onPress={() => {}} />
+ *     <TopAppBar.Content title="Title" subtitle="Supporting text" />
+ *     <TopAppBar.Action icon="magnify" onPress={() => {}} />
+ *     <TopAppBar.Action icon="plus" mode="filled" onPress={() => {}} />
+ *   </TopAppBar.Header>
  * );
  *
  * export default MyComponent;
@@ -145,7 +175,9 @@ const Appbar = ({
   dark,
   style,
   mode = 'small',
+  titleAlign: titleAlignProp,
   elevated,
+  scrollProgress,
   safeAreaInsets,
   theme: themeOverrides,
   ...rest
@@ -161,25 +193,65 @@ const Appbar = ({
     backgroundColor?: ColorValue;
   };
 
-  const backgroundColor = getAppbarBackgroundColor(
-    theme,
-    elevation,
-    customBackground,
-    elevated
-  );
+  const resolved = resolveAppbarMode(mode);
+  const effectiveMode = resolved.mode;
+  const titleAlign = titleAlignProp ?? resolved.titleAlign;
 
-  const isMode = (modeToCompare: AppbarModes) => {
-    return mode === modeToCompare;
-  };
+  React.useEffect(() => {
+    if (mode === 'center-aligned') {
+      console.warn(
+        'Appbar: mode "center-aligned" is deprecated. Use mode="small" with titleAlign="center".'
+      );
+    }
+    if (resolved.isLegacyBaseline) {
+      console.warn(
+        `Appbar: mode "${mode}" is a deprecated baseline variant. Prefer "medium-flexible" or "large-flexible".`
+      );
+    }
+  }, [mode, resolved.isLegacyBaseline]);
+
+  const scrollNumber =
+    typeof scrollProgress === 'number' ? scrollProgress : undefined;
+
+  let backgroundColor:
+    | ColorValue
+    | Animated.AnimatedInterpolation<string | number> =
+    getAppbarBackgroundColor(
+      theme,
+      elevation,
+      customBackground,
+      elevated,
+      scrollNumber
+    );
+
+  if (
+    scrollProgress instanceof Animated.Value &&
+    customBackground === undefined
+  ) {
+    const { colors } = theme as Theme;
+    backgroundColor = scrollProgress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [String(colors.surface), String(colors.surfaceContainer)],
+      extrapolate: 'clamp',
+    });
+  }
 
   const isDark = typeof dark === 'boolean' ? dark : false;
 
-  const isCenterAlignedMode = isMode('center-aligned');
+  const isSmallLayout = effectiveMode === 'small' || mode === 'center-aligned';
+  const isExpandedLayout =
+    effectiveMode === 'medium' ||
+    effectiveMode === 'large' ||
+    effectiveMode === 'medium-flexible' ||
+    effectiveMode === 'large-flexible';
+
+  const isCenterAlignedMode =
+    titleAlign === 'center' || mode === 'center-aligned';
 
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if (isCenterAlignedMode) {
+  if (isCenterAlignedMode && isSmallLayout) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -213,6 +285,10 @@ const Appbar = ({
     paddingRight: safeAreaInsets?.right,
   };
 
+  const layoutMode = (
+    isExpandedLayout ? effectiveMode : 'small'
+  ) as AppbarModes;
+
   return (
     <Surface
       style={[
@@ -229,9 +305,8 @@ const Appbar = ({
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(isMode('small') || isMode('center-aligned')) && (
+      {isSmallLayout && (
         <>
-          {/* Render only the back action at first place  */}
           {renderAppbarContent({
             children,
             isDark,
@@ -239,9 +314,7 @@ const Appbar = ({
             renderOnly: ['Appbar.BackAction'],
             shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
           })}
-          {/* Render the rest of the content except the back action */}
           {renderAppbarContent({
-            // Filter appbar actions - first leading icons, then trailing icons
             children: [
               ...filterAppbarActions(children, true),
               ...filterAppbarActions(children),
@@ -253,29 +326,21 @@ const Appbar = ({
           })}
         </>
       )}
-      {(isMode('medium') || isMode('large')) && (
-        <View
-          style={[
-            styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
-          ]}
-        >
-          {/* Appbar top row with controls */}
+      {isExpandedLayout && (
+        <View style={styles.columnContainer}>
           <View style={styles.controlsRow}>
-            {/* Left side of row container, can contain AppbarBackAction or AppbarAction if it's leading icon  */}
             {renderAppbarContent({
               children,
               isDark,
               renderOnly: ['Appbar.BackAction'],
-              mode,
+              mode: layoutMode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(children, true),
               isDark,
               renderOnly: ['Appbar.Action'],
-              mode,
+              mode: layoutMode,
             })}
-            {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
             <View style={styles.rightActionControls}>
               {renderAppbarContent({
                 children: filterAppbarActions(children),
@@ -286,7 +351,7 @@ const Appbar = ({
                   'Appbar.Content',
                   'Appbar.Header',
                 ],
-                mode,
+                mode: layoutMode,
               })}
             </View>
           </View>
@@ -294,7 +359,7 @@ const Appbar = ({
             children,
             isDark,
             renderOnly: ['Appbar.Content'],
-            mode,
+            mode: layoutMode,
           })}
         </View>
       )}
@@ -327,9 +392,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     paddingTop: 8,
-  },
-  centerAlignedContainer: {
-    paddingTop: 0,
   },
 });
 

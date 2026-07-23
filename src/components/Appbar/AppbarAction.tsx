@@ -12,7 +12,10 @@ import type { Theme, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
-export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
+export type Props = Omit<
+  React.ComponentPropsWithoutRef<typeof IconButton>,
+  'mode' | 'icon' | 'iconColor'
+> & {
   /**
    *  Custom color for action icon.
    */
@@ -43,6 +46,13 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
+  /**
+   * Visual mode for the action.
+   * - `standard` — default icon button (default)
+   * - `filled` — contained (primary) filled trailing action (MD3)
+   * - `tonal` — contained-tonal filled trailing action (MD3)
+   */
+  mode?: 'standard' | 'filled' | 'tonal';
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
@@ -52,22 +62,24 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
 };
 
 /**
- * A component used to display an action item in the appbar.
+ * Action item for a top app bar. Supports standard icon buttons and a single
+ * filled / tonal trailing action (`mode="filled"` | `mode="tonal"`).
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Appbar } from 'react-native-paper';
+ * import { TopAppBar } from 'react-native-paper';
  * import { Platform } from 'react-native';
  *
  * const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
- *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
- *       <Appbar.Action icon="magnify" onPress={() => {}} />
- *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
- *   </Appbar.Header>
+ *   <TopAppBar.Header>
+ *     <TopAppBar.Content title="Title" />
+ *     <TopAppBar.Action icon="magnify" onPress={() => {}} />
+ *     <TopAppBar.Action icon="plus" mode="filled" onPress={() => {}} />
+ *     <TopAppBar.Action icon={MORE_ICON} onPress={() => {}} />
+ *   </TopAppBar.Header>
  * );
  *
  * export default MyComponent;
@@ -81,6 +93,7 @@ const AppbarAction = ({
   onPress,
   'aria-label': ariaLabel,
   isLeading,
+  mode = 'standard',
   theme: themeOverrides,
   ref,
   ...rest
@@ -88,11 +101,23 @@ const AppbarAction = ({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme as Theme;
 
+  const isFilled = mode === 'filled' || mode === 'tonal';
+  const iconButtonMode =
+    mode === 'filled'
+      ? 'contained'
+      : mode === 'tonal'
+        ? 'contained-tonal'
+        : undefined;
+
   const actionIconColor = iconColor
     ? iconColor
-    : isLeading
-      ? colors.onSurface
-      : colors.onSurfaceVariant;
+    : isFilled
+      ? mode === 'filled'
+        ? colors.onPrimary
+        : colors.onSecondaryContainer
+      : isLeading
+        ? colors.onSurface
+        : colors.onSurfaceVariant;
 
   return (
     <IconButton
@@ -102,6 +127,14 @@ const AppbarAction = ({
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
+      mode={iconButtonMode}
+      containerColor={
+        isFilled
+          ? mode === 'filled'
+            ? colors.primary
+            : colors.secondaryContainer
+          : undefined
+      }
       animated
       ref={ref}
       {...rest}
