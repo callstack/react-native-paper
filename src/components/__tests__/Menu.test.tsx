@@ -179,32 +179,6 @@ it('applies first/last medium corners via layout context (no cloneElement props 
   });
 });
 
-it('renders Menu.Section groups with M3 group gap', async () => {
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-      >
-        <Menu.Section title="Edit" testID="sec-edit">
-          <Menu.Item onPress={jest.fn()} title="Cut" />
-        </Menu.Section>
-        <Menu.Section title="Share" testID="sec-share">
-          <Menu.Item onPress={jest.fn()} title="Share" />
-        </Menu.Section>
-      </Menu>
-    </Portal.Host>
-  );
-
-  expect(screen.getByTestId('sec-edit-title')).toHaveTextContent('Edit');
-  expect(screen.getByTestId('sec-share-title')).toHaveTextContent('Share');
-  expect(screen.getByTestId('menu-section-gap')).toHaveStyle({
-    marginTop: 8,
-  });
-  // Divider still a valid composition sibling
-});
-
 it('still renders Divider between items', async () => {
   await render(
     <Portal.Host>

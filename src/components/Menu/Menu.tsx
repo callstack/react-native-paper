@@ -24,7 +24,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { composeMenuChildren } from './composeMenuChildren';
 import { MenuRootContext } from './context';
 import MenuItem from './MenuItem';
-import MenuSection from './MenuSection';
 import { runMenuCloseMotion, runMenuOpenMotion } from './motion';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
@@ -182,9 +181,7 @@ const isBrowser = () => Platform.OS === 'web' && 'document' in global;
  *           />
  *           <Menu.Item onPress={() => {}} title="Undo" />
  *           <Divider />
- *           <Menu.Section title="More">
- *             <Menu.Item onPress={() => {}} title="Share" dense />
- *           </Menu.Section>
+ *           <Menu.Item onPress={() => {}} title="Share" dense />
  *         </Menu>
  *         <Menu
  *           visible={false}
@@ -228,7 +225,6 @@ const Menu = ({
   const { direction } = useLocale();
   const reduceMotion = useReduceMotion();
   const insets = useSafeAreaInsets();
-  const [focusedKey, setFocusedKey] = React.useState<string | null>(null);
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
@@ -666,15 +662,9 @@ const Menu = ({
   const renderedChildren = composeMenuChildren({
     children,
     colorScheme,
-    focusedKey,
-    setFocusedKey,
-    reduceMotion,
   });
 
-  const rootContext = React.useMemo(
-    () => ({ colorScheme, focusedKey, setFocusedKey, reduceMotion }),
-    [colorScheme, focusedKey, reduceMotion]
-  );
+  const rootContext = React.useMemo(() => ({ colorScheme }), [colorScheme]);
 
   const surfaceBackground = getMenuContainerColor({
     theme: theme as Theme,
@@ -752,7 +742,6 @@ const Menu = ({
 };
 
 Menu.Item = MenuItem;
-Menu.Section = MenuSection;
 
 const styles = StyleSheet.create({
   wrapper: {

@@ -110,43 +110,7 @@ export const getContentMaxWidth = ({
 };
 
 /**
- * Target per-corner radii for first / last / selected / focus-morph items.
- * Spec: corner.medium on the relevant corners; selected or morph-active uses
- * medium on all corners.
- */
-export const getMenuItemMorphRadii = ({
-  theme,
-  selected,
-  morphActive,
-  roundedTop,
-  roundedBottom,
-}: {
-  theme: InternalTheme;
-  selected?: boolean;
-  morphActive?: boolean;
-  roundedTop?: boolean;
-  roundedBottom?: boolean;
-}): {
-  topLeft: number;
-  topRight: number;
-  bottomLeft: number;
-  bottomRight: number;
-  medium: number;
-} => {
-  const medium = resolveCornerRadius(theme, MenuTokens.shapes.item);
-  const full = Boolean(selected) || Boolean(morphActive);
-
-  return {
-    medium,
-    topLeft: full || roundedTop ? medium : 0,
-    topRight: full || roundedTop ? medium : 0,
-    bottomLeft: full || roundedBottom ? medium : 0,
-    bottomRight: full || roundedBottom ? medium : 0,
-  };
-};
-
-/**
- * Static per-item corner radii (initial / reduce-motion snapshot).
+ * Per-item corner radii for first / last / selected items.
  * Spec: corner.medium on the relevant corners; selected uses medium all around.
  */
 export const getMenuItemBorderRadius = ({
@@ -160,23 +124,17 @@ export const getMenuItemBorderRadius = ({
   roundedTop?: boolean;
   roundedBottom?: boolean;
 }): ViewStyle => {
-  const { topLeft, topRight, bottomLeft, bottomRight, medium } =
-    getMenuItemMorphRadii({
-      theme,
-      selected,
-      roundedTop,
-      roundedBottom,
-    });
+  const medium = resolveCornerRadius(theme, MenuTokens.shapes.item);
 
   if (selected) {
     return { borderRadius: medium };
   }
 
   return {
-    borderTopLeftRadius: topLeft,
-    borderTopRightRadius: topRight,
-    borderBottomLeftRadius: bottomLeft,
-    borderBottomRightRadius: bottomRight,
+    borderTopLeftRadius: roundedTop ? medium : 0,
+    borderTopRightRadius: roundedTop ? medium : 0,
+    borderBottomLeftRadius: roundedBottom ? medium : 0,
+    borderBottomRightRadius: roundedBottom ? medium : 0,
   };
 };
 

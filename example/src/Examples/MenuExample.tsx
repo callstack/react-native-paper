@@ -192,51 +192,6 @@ const MenuExample = () => {
           </Menu>
         </View>
 
-        <View style={styles.alignCenter}>
-          <Menu
-            visible={_getVisible('menu7')}
-            onDismiss={_toggleMenu('menu7')}
-            anchor={
-              <Button mode="outlined" onPress={_toggleMenu('menu7')}>
-                Sections, badge, submenu
-              </Button>
-            }
-          >
-            <Menu.Section title="Edit">
-              <Menu.Item
-                leadingIcon="content-cut"
-                onPress={() => {}}
-                title="Cut"
-              />
-              <Menu.Item
-                leadingIcon="content-copy"
-                onPress={() => {}}
-                title="Copy"
-                badge={2}
-              />
-            </Menu.Section>
-            <Menu.Section title="More">
-              <Menu.Item
-                leadingIcon="dots-horizontal"
-                onPress={() => {}}
-                title="More actions"
-                submenu={
-                  <>
-                    <Menu.Item onPress={() => {}} title="Archive" />
-                    <Menu.Item onPress={() => {}} title="Report" />
-                  </>
-                }
-              />
-              <Menu.Item
-                leadingIcon="bell"
-                onPress={() => {}}
-                title="Notifications"
-                badge
-              />
-            </Menu.Section>
-          </Menu>
-        </View>
-
         <View style={styles.bottomMenu}>
           <Menu
             visible={_getVisible('menu4')}

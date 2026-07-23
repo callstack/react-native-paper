@@ -11,7 +11,7 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 A component to show a single list item inside a Menu.
 
 Supports MD3 selection (`selected`), supporting text, trailing supporting text,
-dense layout, badges, and lightweight nested `submenu` surfaces.
+and dense layout.
 
 
 
@@ -39,7 +39,7 @@ const MyComponent = () => (
       trailingSupportingText="⌘V"
       selected
     />
-    <Menu.Item title="Share" dense badge={3} />
+    <Menu.Item title="Share" dense />
   </View>
 );
 
@@ -75,22 +75,6 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Menu/MenuItem" prop="trailingSupportingText" />
-
-<div>
-
-### badge
-
-</div>
-
-  <PropTable componentLink="Menu/MenuItem" prop="badge" />
-
-<div>
-
-### submenu
-
-</div>
-
-  <PropTable componentLink="Menu/MenuItem" prop="submenu" />
 
 <div>
 
