@@ -5,6 +5,7 @@ import { Button } from 'react-native-paper';
 
 import {
   DialogWithCustomColors,
+  DialogWithDeclarativeApi,
   DialogWithDismissableBackButton,
   DialogWithIcon,
   DialogWithLoadingIndicator,
@@ -79,6 +80,13 @@ const DialogExample = () => {
           Dismissable back button
         </Button>
       )}
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog8')}
+        style={styles.button}
+      >
+        Declarative API
+      </Button>
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -106,6 +114,10 @@ const DialogExample = () => {
       <DialogWithDismissableBackButton
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}
+      />
+      <DialogWithDeclarativeApi
+        visible={_getVisible('dialog8')}
+        close={_toggleDialog('dialog8')}
       />
     </ScreenWrapper>
   );
