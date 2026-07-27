@@ -108,6 +108,74 @@ describe('Dialog', () => {
   });
 });
 
+describe('Dialog declarative API', () => {
+  it('should render title and string content passed via props', async () => {
+    await render(
+      <Dialog
+        visible
+        testID="dialog"
+        title="Delete item"
+        content="Are you sure?"
+      />
+    );
+
+    expect(screen.getByText('Delete item')).toBeOnTheScreen();
+    expect(screen.getByText('Are you sure?')).toBeOnTheScreen();
+  });
+
+  it('should render action buttons passed via the actions prop', async () => {
+    const onCancel = jest.fn();
+    const onConfirm = jest.fn();
+
+    await render(
+      <Dialog
+        visible
+        testID="dialog"
+        title="Delete item"
+        actions={[
+          { label: 'Cancel', onPress: onCancel, testID: 'action-cancel' },
+          { label: 'Delete', onPress: onConfirm, testID: 'action-delete' },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('action-cancel')).toBeOnTheScreen();
+    expect(screen.getByTestId('action-delete')).toBeOnTheScreen();
+
+    await userEvent.press(screen.getByTestId('action-delete'));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+    expect(onCancel).toHaveBeenCalledTimes(0);
+  });
+
+  it('should accept a React node as content', async () => {
+    await render(
+      <Dialog visible testID="dialog" title="Title">
+        <Dialog.Content>
+          <Text testID="custom-content">Custom node</Text>
+        </Dialog.Content>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('custom-content')).toBeOnTheScreen();
+  });
+
+  it('should prefer children over declarative props and warn in dev', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <Dialog visible testID="dialog" title="From prop">
+        <Text testID="from-children">From children</Text>
+      </Dialog>
+    );
+
+    expect(screen.getByTestId('dialog')).toHaveTextContent('From children');
+    expect(screen.getByTestId('dialog')).not.toHaveTextContent('From prop');
+    expect(warn).toHaveBeenCalled();
+
+    warn.mockRestore();
+  });
+});
+
 describe('DialogActions', () => {
   it('should render passed children', async () => {
     await render(

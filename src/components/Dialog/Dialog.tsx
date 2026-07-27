@@ -9,10 +9,13 @@ import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import type { DialogAction, DialogChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Theme, ThemeProp } from '../../types';
+import Button from '../Button/Button';
+import type { IconSource } from '../Icon';
 import Modal from '../Modal';
-import type { DialogChildProps } from './utils';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -32,9 +35,31 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Content of the `Dialog`.
+   * Icon to display at the top of the dialog, above the title (MD3).
+   * Only used by the declarative API; ignored when `children` are provided.
    */
-  children: React.ReactNode;
+  icon?: IconSource;
+  /**
+   * Title of the dialog. When provided (and `children` are omitted), it is
+   * rendered inside a `Dialog.Title`. Accepts a string or any React node.
+   */
+  title?: React.ReactNode;
+  /**
+   * Supporting text of the dialog. When provided (and `children` are omitted),
+   * it is rendered inside a `Dialog.Content`. A string is wrapped in a themed
+   * `Text`; any other node is rendered as-is.
+   */
+  content?: React.ReactNode;
+  /**
+   * List of action buttons rendered inside a `Dialog.Actions` row. Only used by
+   * the declarative API; ignored when `children` are provided.
+   */
+  actions?: DialogAction[];
+  /**
+   * Content of the `Dialog`. When provided, the declarative `icon` / `title` /
+   * `content` / `actions` props are ignored and the composition API is used.
+   */
+  children?: React.ReactNode;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
@@ -87,9 +112,31 @@ const DIALOG_ELEVATION: number = 24;
  *
  * export default MyComponent;
  * ```
+ *
+ * Alternatively, the dialog can be described declaratively via the `icon`,
+ * `title`, `content` and `actions` props instead of composing children:
+ *
+ * ```js
+ * <Portal>
+ *   <Dialog
+ *     visible={visible}
+ *     onDismiss={hideDialog}
+ *     title="Delete item"
+ *     content="Are you sure? This action cannot be undone."
+ *     actions={[
+ *       { label: 'Cancel', onPress: hideDialog },
+ *       { label: 'Delete', onPress: onConfirmDelete },
+ *     ]}
+ *   />
+ * </Portal>
+ * ```
  */
 const Dialog = ({
   children,
+  icon,
+  title,
+  content,
+  actions,
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
@@ -103,6 +150,87 @@ const Dialog = ({
   const borderRadius = (theme as Theme).shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
+
+  const hasDeclarativeProps =
+    icon != null || title != null || content != null || actions != null;
+
+  if (__DEV__ && children != null && hasDeclarativeProps) {
+    console.warn(
+      'Dialog: `children` was provided together with the declarative ' +
+        '`icon`/`title`/`content`/`actions` props. `children` take precedence ' +
+        'and the declarative props are ignored. Use one API or the other.'
+    );
+  }
+
+  // Build the composition tree from the declarative props when no explicit
+  // `children` are passed. This keeps the existing children-based API fully
+  // backward compatible while offering a simpler declarative alternative.
+  const dialogChildren = React.useMemo(() => {
+    if (children != null) {
+      return children;
+    }
+
+    const centered = icon != null;
+    const items: React.ReactNode[] = [];
+
+    if (icon != null) {
+      items.push(<DialogIcon key="icon" icon={icon} />);
+    }
+
+    if (title != null) {
+      items.push(
+        <DialogTitle
+          key="title"
+          style={centered ? styles.centeredTitle : undefined}
+        >
+          {title}
+        </DialogTitle>
+      );
+    }
+
+    if (content != null) {
+      items.push(
+        <DialogContent key="content">
+          {typeof content === 'string' ? (
+            <Text
+              variant="bodyMedium"
+              style={[
+                { color: theme.colors.onSurfaceVariant },
+                centered && styles.centeredContent,
+              ]}
+            >
+              {content}
+            </Text>
+          ) : (
+            content
+          )}
+        </DialogContent>
+      );
+    }
+
+    if (actions != null && actions.length > 0) {
+      items.push(
+        <DialogActions key="actions">
+          {actions.map((action, i) => (
+            <Button
+              key={action.key ?? i}
+              mode={action.mode ?? 'text'}
+              onPress={action.onPress}
+              icon={action.icon}
+              loading={action.loading}
+              disabled={action.disabled}
+              labelStyle={action.labelStyle}
+              testID={action.testID}
+            >
+              {action.label}
+            </Button>
+          ))}
+        </DialogActions>
+      );
+    }
+
+    return items;
+  }, [children, icon, title, content, actions, theme.colors.onSurfaceVariant]);
 
   return (
     <Modal
@@ -122,7 +250,7 @@ const Dialog = ({
       theme={theme}
       testID={testID}
     >
-      {React.Children.toArray(children)
+      {React.Children.toArray(dialogChildren)
         .filter((child) => child != null && typeof child !== 'boolean')
         .map((child, i) => {
           if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
@@ -160,6 +288,12 @@ const styles = StyleSheet.create({
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
+  },
+  centeredTitle: {
+    textAlign: 'center',
+  },
+  centeredContent: {
+    textAlign: 'center',
   },
 });
 
