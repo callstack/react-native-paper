@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -304,6 +304,18 @@ describe('MD3 top app bar acceptance', () => {
     );
   });
 
+  it('applies surfaceContainer when scrollProgress is 1 on the component', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar mode="small" scrollProgress={1} testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      backgroundColor: theme.colors.surfaceContainer,
+    });
+  });
+
   it('renders subtitle for medium-flexible mode', async () => {
     await render(
       <Appbar mode="medium-flexible">
@@ -366,7 +378,8 @@ describe('MD3 top app bar acceptance', () => {
     expect(screen.getByTestId('appbar-content-logo')).toBeTruthy();
   });
 
-  it('supports filled trailing action mode', async () => {
+  it('supports filled trailing action mode with primary container', async () => {
+    const theme = getTheme();
     await render(
       <Appbar mode="small">
         <Appbar.Content title="Title" />
@@ -378,7 +391,46 @@ describe('MD3 top app bar acceptance', () => {
         />
       </Appbar>
     );
-    expect(screen.getByTestId('filled-action-container')).toBeTruthy();
+    expect(screen.getByTestId('filled-action-container')).toHaveStyle({
+      backgroundColor: theme.colors.primary,
+    });
+  });
+
+  it('supports tonal trailing action mode with secondary container', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar mode="small">
+        <Appbar.Content title="Title" />
+        <Appbar.Action
+          icon="plus"
+          mode="tonal"
+          testID="tonal-action"
+          onPress={() => {}}
+        />
+      </Appbar>
+    );
+    expect(screen.getByTestId('tonal-action-container')).toHaveStyle({
+      backgroundColor: theme.colors.secondaryContainer,
+    });
+  });
+
+  it('warns when using deprecated center-aligned and baseline medium modes', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    await render(
+      <Appbar mode="center-aligned">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    await render(
+      <Appbar mode="medium">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('center-aligned')
+    );
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('medium'));
+    warn.mockRestore();
   });
 
   it('centers title when titleAlign is center on small mode', async () => {
