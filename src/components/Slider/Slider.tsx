@@ -30,8 +30,9 @@ import {
 } from './tokens';
 import {
   fractionToValue,
-  nearestHandle,
+  HANDLE_DIRECTION_THRESHOLD,
   positionToFraction,
+  rangeHandleForTouch,
   stopFractions,
   valueToFraction,
 } from './utils';
@@ -480,7 +481,9 @@ const Slider = (props: Props) => {
   propsRef.current = props;
 
   const grantTouchRef = React.useRef(0);
-  const activeHandleRef = React.useRef<'start' | 'end'>('end');
+  // 'pending' means the handles overlapped at touch-down, so which one moves is
+  // decided by the first deliberate drag direction instead.
+  const activeHandleRef = React.useRef<'start' | 'end' | 'pending'>('end');
 
   const panResponder = React.useRef(
     PanResponder.create({
@@ -508,7 +511,7 @@ const Slider = (props: Props) => {
 
         if (vt === 'range') {
           const f = positionToFraction(touchPx, tl, rtl, iv);
-          activeHandleRef.current = nearestHandle(
+          activeHandleRef.current = rangeHandleForTouch(
             f,
             valueToFraction(sv, mn, mx),
             valueToFraction(ev, mn, mx)
@@ -517,9 +520,10 @@ const Slider = (props: Props) => {
           activeHandleRef.current = 'end';
         }
 
+        // Left 'pending' the choice isn't made yet, so nothing is pressed yet.
         if (activeHandleRef.current === 'start') {
           startHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
-        } else {
+        } else if (activeHandleRef.current === 'end') {
           endHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
         }
 
@@ -547,12 +551,37 @@ const Slider = (props: Props) => {
           isVertical: iv,
           isRTL: rtl,
           disabled: dis,
+          spec: sp,
+          timingConfig: tc,
         } = valuesRef.current;
 
         // `disabled` can flip mid-drag; the responder is already active by then.
         if (dis) return;
 
         const delta = iv ? gestureState.dy : gestureState.dx;
+
+        if (activeHandleRef.current === 'pending') {
+          if (Math.abs(delta) < HANDLE_DIRECTION_THRESHOLD) return;
+          // Read the direction through the same mapping that positions the
+          // handle, so the vertical and RTL inversions cannot drift apart from
+          // it. Equal fractions mean the drag is pushing past an end stop, so
+          // 'end' is chosen and its clamp makes the move a no-op.
+          const from = positionToFraction(grantTouchRef.current, tl, rtl, iv);
+          const to = positionToFraction(
+            grantTouchRef.current + delta,
+            tl,
+            rtl,
+            iv
+          );
+          activeHandleRef.current = to >= from ? 'end' : 'start';
+
+          if (activeHandleRef.current === 'start') {
+            startHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+          } else {
+            endHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+          }
+        }
+
         const touchPx = grantTouchRef.current + delta;
         const fraction = positionToFraction(touchPx, tl, rtl, iv);
         const snapped = fractionToValue(fraction, mn, mx, st);
@@ -593,11 +622,10 @@ const Slider = (props: Props) => {
           timingConfig: tc,
         } = valuesRef.current;
 
-        if (activeHandleRef.current === 'start') {
-          startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
-        } else {
-          endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
-        }
+        // Reset both: the gesture may have ended while still 'pending', and the
+        // handle that was never pressed is already at its resting width.
+        startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+        endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
 
         if (svi) {
           valueIndicatorAlphaSV.value = withTiming(0, tc);
@@ -618,11 +646,9 @@ const Slider = (props: Props) => {
           timingConfig: tc,
         } = valuesRef.current;
 
-        if (activeHandleRef.current === 'start') {
-          startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
-        } else {
-          endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
-        }
+        startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+        endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+
         if (svi) {
           valueIndicatorAlphaSV.value = withTiming(0, tc);
         }

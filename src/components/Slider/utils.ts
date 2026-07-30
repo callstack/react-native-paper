@@ -90,3 +90,29 @@ export function nearestHandle(
   const distEnd = Math.abs(touchFraction - endFraction);
   return distStart < distEnd ? 'start' : 'end';
 }
+
+/** Handles closer together than this count as sitting on the same value. */
+const HANDLE_OVERLAP_EPSILON = 1e-4;
+
+/** Pixels a drag must travel before its direction is taken as deliberate. */
+export const HANDLE_DIRECTION_THRESHOLD = 1;
+
+/**
+ * Picks the handle a range gesture should drag.
+ *
+ * While the handles are apart it is simply the nearest one. Once they sit on the
+ * same value there is no nearest handle — every touch is equidistant — and
+ * guessing deadlocks the gesture: with both at `max`, the end handle is floored
+ * by the start handle and cannot move, while the start handle can never be
+ * picked. So overlap defers to 'pending', and the drag direction decides.
+ */
+export function rangeHandleForTouch(
+  touchFraction: number,
+  startFraction: number,
+  endFraction: number
+): 'start' | 'end' | 'pending' {
+  if (Math.abs(endFraction - startFraction) <= HANDLE_OVERLAP_EPSILON) {
+    return 'pending';
+  }
+  return nearestHandle(touchFraction, startFraction, endFraction);
+}

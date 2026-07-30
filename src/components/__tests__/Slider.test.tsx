@@ -1,12 +1,13 @@
 import * as React from 'react';
 
-import { render } from '../../test-utils';
+import { act, fireEvent, render } from '../../test-utils';
 import Slider from '../Slider';
 import {
   activeSegment,
   fractionToValue,
   nearestHandle,
   positionToFraction,
+  rangeHandleForTouch,
   snapToStep,
   stopFractions,
   valueToFraction,
@@ -136,6 +137,21 @@ describe('nearestHandle', () => {
   });
 });
 
+describe('rangeHandleForTouch', () => {
+  it('picks the nearest handle while they are apart', () => {
+    expect(rangeHandleForTouch(0.2, 0.1, 0.9)).toBe('start');
+    expect(rangeHandleForTouch(0.8, 0.1, 0.9)).toBe('end');
+  });
+
+  // Overlapping handles make every touch equidistant, so nearest-handle would
+  // always answer 'end' — and at max that handle is the one that cannot move.
+  it('defers to the drag direction when the handles overlap', () => {
+    expect(rangeHandleForTouch(0.5, 1, 1)).toBe('pending');
+    expect(rangeHandleForTouch(0, 0, 0)).toBe('pending');
+    expect(rangeHandleForTouch(0.5, 0.5, 0.5)).toBe('pending');
+  });
+});
+
 // ---- Component render tests ----
 
 describe('Slider renders', () => {
@@ -232,39 +248,101 @@ describe('Slider disabled', () => {
   });
 });
 
-// A synthetic touch, shaped the way PanResponder's internals expect: it reads
-// the centroid out of `touchHistory.touchBank` before delegating to our handler.
-const touchTrack = (x: number) => ({
-  touchActive: true,
-  startPageX: x,
-  startPageY: 0,
-  startTimeStamp: 0,
-  currentPageX: x,
-  currentPageY: 0,
-  currentTimeStamp: 0,
-  previousPageX: x,
-  previousPageY: 0,
-  previousTimeStamp: 0,
-});
+// Synthetic touches, shaped the way PanResponder's internals expect: it reads
+// the centroid out of `touchHistory.touchBank`, and derives dx from the gap
+// between a touch's previous and current position, for touches whose timestamp
+// is newer than the last move it accounted for.
+const touchEvent = (fromX: number, toX: number) => {
+  const moved = toX !== fromX;
+  return {
+    nativeEvent: {
+      locationX: fromX,
+      locationY: 0,
+      identifier: 0,
+      pageX: fromX,
+      pageY: 0,
+      timestamp: 0,
+      target: 1,
+      touches: [],
+      changedTouches: [],
+    },
+    touchHistory: {
+      touchBank: [
+        {
+          touchActive: true,
+          startPageX: fromX,
+          startPageY: 0,
+          startTimeStamp: 0,
+          currentPageX: toX,
+          currentPageY: 0,
+          currentTimeStamp: moved ? 1 : 0,
+          previousPageX: fromX,
+          previousPageY: 0,
+          previousTimeStamp: 0,
+        },
+      ],
+      numberActiveTouches: 1,
+      indexOfSingleActiveTouch: 0,
+      mostRecentTimeStamp: moved ? 1 : 0,
+    },
+  };
+};
 
-const grantEvent = (x: number) => ({
-  nativeEvent: {
-    locationX: x,
-    locationY: 0,
-    identifier: 0,
-    pageX: x,
-    pageY: 0,
-    timestamp: 0,
-    target: 1,
-    touches: [],
-    changedTouches: [],
-  },
-  touchHistory: {
-    touchBank: [touchTrack(x)],
-    numberActiveTouches: 1,
-    indexOfSingleActiveTouch: 0,
-    mostRecentTimeStamp: 0,
-  },
+const grantEvent = (x: number) => touchEvent(x, x);
+
+const TRACK_WIDTH = 300;
+
+// Nothing lays out in the test renderer, so the track measures 0 and every
+// touch maps to fraction 0. Fire the layout the component is waiting for.
+const layoutTrack = (r: ReturnType<typeof render>) => {
+  const nodes = r.container.findAll(
+    (n) => typeof n.props.onLayout === 'function'
+  );
+  fireEvent(nodes[nodes.length - 1], 'layout', {
+    nativeEvent: { layout: { width: TRACK_WIDTH, height: 44 } },
+  });
+};
+
+const drag = (r: ReturnType<typeof render>, fromX: number, toX: number) => {
+  const view = r.getByRole('adjustable');
+  act(() => {
+    view.props.onResponderGrant(grantEvent(fromX));
+    view.props.onResponderMove(touchEvent(fromX, toX));
+  });
+};
+
+describe('Slider range gestures', () => {
+  const setup = (value: [number, number]) => {
+    const onValueChange = jest.fn();
+    const r = render(
+      <Slider.Range
+        value={value}
+        min={0}
+        max={100}
+        onValueChange={onValueChange}
+      />
+    );
+    layoutTrack(r);
+    return { r, onValueChange };
+  };
+
+  it('frees the start handle when both are pinned at max', () => {
+    const { r, onValueChange } = setup([100, 100]);
+    drag(r, 150, 90);
+    expect(onValueChange).toHaveBeenCalledWith([30, 100]);
+  });
+
+  it('frees the end handle when both are pinned at min', () => {
+    const { r, onValueChange } = setup([0, 0]);
+    drag(r, 150, 210);
+    expect(onValueChange).toHaveBeenCalledWith([0, 70]);
+  });
+
+  it('still drags the nearest handle when they are apart', () => {
+    const { r, onValueChange } = setup([20, 80]);
+    drag(r, 240, 210);
+    expect(onValueChange).toHaveBeenCalledWith([20, 70]);
+  });
 });
 
 describe('Slider gesture callbacks', () => {
