@@ -439,6 +439,10 @@ const Slider = (props: Props) => {
   });
 
   // Gesture handling
+  //
+  // The PanResponder below is created once, so its handler closures capture the
+  // first render's scope forever. Anything they read that can change between
+  // renders has to come through this ref instead.
   const valuesRef = React.useRef({
     min,
     max,
@@ -449,6 +453,10 @@ const Slider = (props: Props) => {
     variant,
     isRTL,
     isVertical,
+    disabled,
+    showValueIndicator,
+    spec,
+    timingConfig,
   });
   valuesRef.current = {
     min,
@@ -460,15 +468,24 @@ const Slider = (props: Props) => {
     variant,
     isRTL,
     isVertical,
+    disabled,
+    showValueIndicator,
+    spec,
+    timingConfig,
   };
+
+  // Callbacks are read through their own ref so that a consumer passing an
+  // inline arrow gets the current one rather than the first render's.
+  const propsRef = React.useRef(props);
+  propsRef.current = props;
 
   const grantTouchRef = React.useRef(0);
   const activeHandleRef = React.useRef<'start' | 'end'>('end');
 
   const panResponder = React.useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => !disabled,
-      onMoveShouldSetPanResponder: () => !disabled,
+      onStartShouldSetPanResponder: () => !valuesRef.current.disabled,
+      onMoveShouldSetPanResponder: () => !valuesRef.current.disabled,
 
       onPanResponderGrant: (evt) => {
         const {
@@ -480,6 +497,9 @@ const Slider = (props: Props) => {
           startValue: sv,
           endValue: ev,
           variant: vt,
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
         } = valuesRef.current;
         const touchPx = iv
           ? evt.nativeEvent.locationY
@@ -498,27 +518,20 @@ const Slider = (props: Props) => {
         }
 
         if (activeHandleRef.current === 'start') {
-          startHandleWidthSV.value = withTiming(
-            spec.handlePressWidth,
-            timingConfig
-          );
+          startHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
         } else {
-          endHandleWidthSV.value = withTiming(
-            spec.handlePressWidth,
-            timingConfig
-          );
+          endHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
         }
 
-        if (showValueIndicator) {
-          valueIndicatorAlphaSV.value = withTiming(1, timingConfig);
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(1, tc);
         }
 
-        if (props.onSlidingStart) {
-          if (isRange) {
-            (props as RangeProps).onSlidingStart?.([sv, ev]);
-          } else {
-            (props as StandardProps | CenteredProps).onSlidingStart?.(ev);
-          }
+        const p = propsRef.current;
+        if (vt === 'range') {
+          (p as RangeProps).onSlidingStart?.([sv, ev]);
+        } else {
+          (p as StandardProps | CenteredProps).onSlidingStart?.(ev);
         }
       },
 
@@ -533,7 +546,11 @@ const Slider = (props: Props) => {
           variant: vt,
           isVertical: iv,
           isRTL: rtl,
+          disabled: dis,
         } = valuesRef.current;
+
+        // `disabled` can flip mid-drag; the responder is already active by then.
+        if (dis) return;
 
         const delta = iv ? gestureState.dy : gestureState.dx;
         const touchPx = grantTouchRef.current + delta;
@@ -543,58 +560,71 @@ const Slider = (props: Props) => {
         const displayFraction =
           st > 0 ? valueToFraction(snapped, mn, mx) : fraction;
 
+        const p = propsRef.current;
         if (vt === 'range') {
           if (activeHandleRef.current === 'start') {
             const clamped = Math.min(snapped, ev);
             startFractionSV.value = valueToFraction(clamped, mn, mx);
             setStartValue(clamped);
             setIndicatorDisplayValue(clamped);
-            (props as RangeProps).onValueChange?.([clamped, ev]);
+            (p as RangeProps).onValueChange?.([clamped, ev]);
           } else {
             const clamped = Math.max(snapped, sv);
             endFractionSV.value = valueToFraction(clamped, mn, mx);
             setEndValue(clamped);
             setIndicatorDisplayValue(clamped);
-            (props as RangeProps).onValueChange?.([sv, clamped]);
+            (p as RangeProps).onValueChange?.([sv, clamped]);
           }
         } else {
           endFractionSV.value = displayFraction;
           setEndValue(snapped);
           setIndicatorDisplayValue(snapped);
-          (props as StandardProps | CenteredProps).onValueChange?.(snapped);
+          (p as StandardProps | CenteredProps).onValueChange?.(snapped);
         }
       },
 
       onPanResponderRelease: () => {
-        const { endValue: ev, startValue: sv } = valuesRef.current;
+        const {
+          endValue: ev,
+          startValue: sv,
+          variant: vt,
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
+        } = valuesRef.current;
 
         if (activeHandleRef.current === 'start') {
-          startHandleWidthSV.value = withTiming(spec.handleWidth, timingConfig);
+          startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
         } else {
-          endHandleWidthSV.value = withTiming(spec.handleWidth, timingConfig);
+          endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
         }
 
-        if (showValueIndicator) {
-          valueIndicatorAlphaSV.value = withTiming(0, timingConfig);
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(0, tc);
         }
 
-        if (props.onSlidingComplete) {
-          if (isRange) {
-            (props as RangeProps).onSlidingComplete?.([sv, ev]);
-          } else {
-            (props as StandardProps | CenteredProps).onSlidingComplete?.(ev);
-          }
+        const p = propsRef.current;
+        if (vt === 'range') {
+          (p as RangeProps).onSlidingComplete?.([sv, ev]);
+        } else {
+          (p as StandardProps | CenteredProps).onSlidingComplete?.(ev);
         }
       },
 
       onPanResponderTerminate: () => {
+        const {
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
+        } = valuesRef.current;
+
         if (activeHandleRef.current === 'start') {
-          startHandleWidthSV.value = withTiming(spec.handleWidth, timingConfig);
+          startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
         } else {
-          endHandleWidthSV.value = withTiming(spec.handleWidth, timingConfig);
+          endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
         }
-        if (showValueIndicator) {
-          valueIndicatorAlphaSV.value = withTiming(0, timingConfig);
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(0, tc);
         }
       },
     })

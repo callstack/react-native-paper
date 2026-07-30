@@ -203,3 +203,85 @@ describe('Slider accessibility', () => {
     });
   });
 });
+
+// The PanResponder is built once and never rebuilt, so `disabled` has to be
+// read through a ref. These assert it is, in both directions.
+describe('Slider disabled', () => {
+  it('stops accepting gestures when disabled is toggled on after mount', () => {
+    const { getByRole, update } = render(<Slider value={50} />);
+    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
+      true
+    );
+
+    update(<Slider value={50} disabled />);
+    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
+      false
+    );
+  });
+
+  it('accepts gestures again when disabled is toggled back off', () => {
+    const { getByRole, update } = render(<Slider value={50} disabled />);
+    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
+      false
+    );
+
+    update(<Slider value={50} />);
+    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
+      true
+    );
+  });
+});
+
+// A synthetic touch, shaped the way PanResponder's internals expect: it reads
+// the centroid out of `touchHistory.touchBank` before delegating to our handler.
+const touchTrack = (x: number) => ({
+  touchActive: true,
+  startPageX: x,
+  startPageY: 0,
+  startTimeStamp: 0,
+  currentPageX: x,
+  currentPageY: 0,
+  currentTimeStamp: 0,
+  previousPageX: x,
+  previousPageY: 0,
+  previousTimeStamp: 0,
+});
+
+const grantEvent = (x: number) => ({
+  nativeEvent: {
+    locationX: x,
+    locationY: 0,
+    identifier: 0,
+    pageX: x,
+    pageY: 0,
+    timestamp: 0,
+    target: 1,
+    touches: [],
+    changedTouches: [],
+  },
+  touchHistory: {
+    touchBank: [touchTrack(x)],
+    numberActiveTouches: 1,
+    indexOfSingleActiveTouch: 0,
+    mostRecentTimeStamp: 0,
+  },
+});
+
+describe('Slider gesture callbacks', () => {
+  it('calls the callback from the latest render, not the first', () => {
+    const first = jest.fn();
+    const second = jest.fn();
+
+    const { getByRole, update } = render(
+      <Slider value={50} onSlidingStart={first} />
+    );
+    getByRole('adjustable').props.onResponderGrant(grantEvent(10));
+    expect(first).toHaveBeenCalledTimes(1);
+
+    update(<Slider value={50} onSlidingStart={second} />);
+    getByRole('adjustable').props.onResponderGrant(grantEvent(10));
+
+    expect(second).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledTimes(1);
+  });
+});
