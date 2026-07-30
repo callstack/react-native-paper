@@ -200,30 +200,16 @@ const AppbarExample = () => {
               setAppbarMode(value as AppbarModes)
             }
           >
-            <View style={styles.row}>
-              <Text>Small (default)</Text>
-              <RadioButton value="small" />
-            </View>
-            <View style={styles.row}>
-              <Text>Medium flexible</Text>
-              <RadioButton value="medium-flexible" />
-            </View>
-            <View style={styles.row}>
-              <Text>Large flexible</Text>
-              <RadioButton value="large-flexible" />
-            </View>
-            <View style={styles.row}>
-              <Text>Medium (legacy baseline)</Text>
-              <RadioButton value="medium" />
-            </View>
-            <View style={styles.row}>
-              <Text>Large (legacy baseline)</Text>
-              <RadioButton value="large" />
-            </View>
-            <View style={styles.row}>
-              <Text>Center-aligned (legacy)</Text>
-              <RadioButton value="center-aligned" />
-            </View>
+            {/* RadioButton.Item makes the whole row the press target (same pattern as RadioButtonGroupExample). */}
+            <RadioButton.Item label="Small (default)" value="small" />
+            <RadioButton.Item label="Medium flexible" value="medium-flexible" />
+            <RadioButton.Item label="Large flexible" value="large-flexible" />
+            <RadioButton.Item label="Medium (legacy baseline)" value="medium" />
+            <RadioButton.Item label="Large (legacy baseline)" value="large" />
+            <RadioButton.Item
+              label="Center-aligned (legacy)"
+              value="center-aligned"
+            />
           </RadioButton.Group>
         </List.Section>
       </ScreenWrapper>
