@@ -143,7 +143,7 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -298,7 +298,7 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -325,7 +325,7 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -503,7 +503,7 @@ exports[`Slider renders centered variant 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -658,7 +658,7 @@ exports[`Slider renders disabled standard 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -813,7 +813,7 @@ exports[`Slider renders each size 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -968,7 +968,7 @@ exports[`Slider renders each size 2`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1039,7 +1039,7 @@ exports[`Slider renders each size 3`] = `
   style={
     [
       {
-        "height": 44,
+        "height": 52,
         "overflow": "visible",
       },
       undefined,
@@ -1104,7 +1104,7 @@ exports[`Slider renders each size 3`] = `
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "top": 2,
+        "top": 6,
       }
     }
   >
@@ -1116,14 +1116,14 @@ exports[`Slider renders each size 3`] = `
           },
           {
             "borderBottomLeftRadius": 2,
-            "borderBottomRightRadius": 6,
+            "borderBottomRightRadius": 12,
             "borderTopLeftRadius": 2,
-            "borderTopRightRadius": 6,
+            "borderTopRightRadius": 12,
           },
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1278,7 +1278,7 @@ exports[`Slider renders each size 4`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1433,7 +1433,7 @@ exports[`Slider renders each size 5`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1615,7 +1615,7 @@ exports[`Slider renders range variant 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1642,7 +1642,7 @@ exports[`Slider renders range variant 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -1793,7 +1793,7 @@ exports[`Slider renders standard slider 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -2103,7 +2103,7 @@ exports[`Slider renders with stop indicators 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -2258,7 +2258,7 @@ exports[`Slider renders with value indicator 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 6,
+            "left": 8,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -2332,13 +2332,13 @@ exports[`Slider renders with value indicator 1`] = `
           "justifyContent": "center",
           "position": "absolute",
           "top": 0,
-          "width": 44,
+          "width": 48,
         },
         {
           "opacity": 0,
           "transform": [
             {
-              "translateX": -22,
+              "translateX": -24,
             },
           ],
         },

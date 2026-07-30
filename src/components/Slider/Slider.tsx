@@ -23,7 +23,8 @@ import {
   SIZE_SPECS,
   STOP_SIZE,
   VALUE_INDICATOR_BOTTOM_SPACE,
-  VALUE_INDICATOR_SIZE,
+  VALUE_INDICATOR_HEIGHT,
+  VALUE_INDICATOR_WIDTH,
   SliderTokens,
   type SliderSize,
 } from './tokens';
@@ -183,7 +184,7 @@ const Slider = (props: Props) => {
   // Extra space above the track for the value indicator bubble (horizontal only)
   const verticalOffset =
     showValueIndicator && !isVertical
-      ? VALUE_INDICATOR_SIZE + VALUE_INDICATOR_BOTTOM_SPACE
+      ? VALUE_INDICATOR_HEIGHT + VALUE_INDICATOR_BOTTOM_SPACE
       : 0;
 
   const trackLengthSV = useSharedValue(0);
@@ -422,8 +423,8 @@ const Slider = (props: Props) => {
       const pos = (1 - endFractionSV.value) * len;
       return {
         opacity: valueIndicatorAlphaSV.value,
-        top: pos - VALUE_INDICATOR_SIZE / 2,
-        left: -(VALUE_INDICATOR_SIZE + VALUE_INDICATOR_BOTTOM_SPACE),
+        top: pos - VALUE_INDICATOR_HEIGHT / 2,
+        left: -(VALUE_INDICATOR_WIDTH + VALUE_INDICATOR_BOTTOM_SPACE),
         right: undefined,
         bottom: undefined,
         transform: [],
@@ -432,7 +433,7 @@ const Slider = (props: Props) => {
     return {
       opacity: valueIndicatorAlphaSV.value,
       transform: [
-        { translateX: endFractionSV.value * len - VALUE_INDICATOR_SIZE / 2 },
+        { translateX: endFractionSV.value * len - VALUE_INDICATOR_WIDTH / 2 },
       ],
     };
   });
@@ -954,8 +955,8 @@ const styles = StyleSheet.create({
   valueIndicator: {
     position: 'absolute',
     top: 0,
-    width: VALUE_INDICATOR_SIZE,
-    height: VALUE_INDICATOR_SIZE,
+    width: VALUE_INDICATOR_WIDTH,
+    height: VALUE_INDICATOR_HEIGHT,
     borderRadius: cornerFull,
     justifyContent: 'center',
     alignItems: 'center',

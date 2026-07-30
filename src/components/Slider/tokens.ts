@@ -36,11 +36,11 @@ export const SIZE_SPECS: Record<SliderSize, SizeSpec> = {
   },
   m: {
     trackThickness: 40,
-    handleHeight: 44,
+    handleHeight: 52,
     handleWidth: 4,
     handlePressWidth: 2,
     activeLeadingRadius: 12,
-    inactiveTrailingRadius: 6,
+    inactiveTrailingRadius: 12,
     iconSize: 24,
     iconPadding: 6,
   },
@@ -67,9 +67,12 @@ export const SIZE_SPECS: Record<SliderSize, SizeSpec> = {
 } as const;
 
 export const STOP_SIZE = 4;
-export const BETWEEN_HANDLE_SPACE = 4;
+/** md.comp.slider active handle leading/trailing space — the gap either side of the handle. */
+export const BETWEEN_HANDLE_SPACE = 6;
 export const INNER_CORNER_RADIUS = 2;
-export const VALUE_INDICATOR_SIZE = 44;
+/** Label container: 48dp wide by 44dp tall, so not a square. */
+export const VALUE_INDICATOR_WIDTH = 48;
+export const VALUE_INDICATOR_HEIGHT = 44;
 export const VALUE_INDICATOR_BOTTOM_SPACE = 12;
 
 export const DISABLED_CONTENT_OPACITY = 0.38;
