@@ -116,7 +116,7 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
           {
             "bottom": 0,
             "height": undefined,
-            "left": 8,
+            "left": 16,
             "right": undefined,
             "top": 0,
             "width": 0,
@@ -479,7 +479,7 @@ exports[`Slider renders centered variant 1`] = `
             "left": 0,
             "right": undefined,
             "top": 0,
-            "width": 8,
+            "width": 0,
           },
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",

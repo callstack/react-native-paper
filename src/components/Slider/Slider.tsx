@@ -322,10 +322,12 @@ const Slider = (props: Props) => {
         const hi = Math.max(sf, vf);
         height = Math.max(0, len - (origin + hi * usable) - gap);
       } else if (variant === 'centered') {
-        height =
-          vf >= 0.5
-            ? Math.max(0, len - (origin + vf * usable) - gap)
-            : Math.max(0, len - (origin + 0.5 * usable));
+        // Mirror of the left segment: the midpoint normally bounds this edge,
+        // but the handle has to bound it too once the active track vanishes.
+        height = Math.max(
+          0,
+          len - Math.max(origin + 0.5 * usable, origin + vf * usable + gap)
+        );
       } else {
         height = Math.max(0, len - (origin + vf * usable) - gap);
       }
@@ -346,13 +348,8 @@ const Slider = (props: Props) => {
       left = origin + hi * usable + gap;
       width = Math.max(0, len - left);
     } else if (variant === 'centered') {
-      if (vf >= 0.5) {
-        left = origin + vf * usable + gap;
-        width = Math.max(0, len - left);
-      } else {
-        left = origin + 0.5 * usable;
-        width = Math.max(0, len - left);
-      }
+      left = Math.max(origin + 0.5 * usable, origin + vf * usable + gap);
+      width = Math.max(0, len - left);
     } else {
       left = origin + vf * usable + gap;
       width = Math.max(0, len - left);
@@ -383,6 +380,11 @@ const Slider = (props: Props) => {
 
     // This segment always starts at the track's own leading edge, so its extent
     // is just the distance out to the handle it stops behind.
+    //
+    // Centered: normally it stops at the midpoint, where the active track takes
+    // over and holds it clear of the handle. But the active track shrinks to
+    // nothing once the handle is closer to the midpoint than `gap`, so the
+    // handle has to bound this edge too or the segment runs under it.
     if (isVertical) {
       let height: number;
       if (variant === 'range') {
@@ -390,10 +392,10 @@ const Slider = (props: Props) => {
         height = Math.max(0, origin + lo * usable - gap);
       } else {
         // centered
-        height =
-          vf >= 0.5
-            ? Math.max(0, origin + 0.5 * usable)
-            : Math.max(0, origin + vf * usable - gap);
+        height = Math.max(
+          0,
+          Math.min(origin + 0.5 * usable, origin + vf * usable - gap)
+        );
       }
       return {
         bottom: 0,
@@ -411,10 +413,10 @@ const Slider = (props: Props) => {
       width = Math.max(0, origin + lo * usable - gap);
     } else {
       // centered
-      width =
-        vf >= 0.5
-          ? Math.max(0, origin + 0.5 * usable)
-          : Math.max(0, origin + vf * usable - gap);
+      width = Math.max(
+        0,
+        Math.min(origin + 0.5 * usable, origin + vf * usable - gap)
+      );
     }
     return {
       left: 0,
