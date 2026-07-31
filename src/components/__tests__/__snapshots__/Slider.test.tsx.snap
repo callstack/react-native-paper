@@ -87,10 +87,8 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -114,10 +112,8 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -141,10 +137,8 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -162,14 +156,12 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -269,10 +261,8 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -296,10 +286,8 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -323,10 +311,8 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -344,14 +330,12 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -367,14 +351,12 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -474,10 +456,8 @@ exports[`Slider renders centered variant 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -501,10 +481,8 @@ exports[`Slider renders centered variant 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -528,10 +506,8 @@ exports[`Slider renders centered variant 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 8,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -549,14 +525,12 @@ exports[`Slider renders centered variant 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -656,10 +630,8 @@ exports[`Slider renders disabled standard 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -683,10 +655,8 @@ exports[`Slider renders disabled standard 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -704,14 +674,12 @@ exports[`Slider renders disabled standard 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -811,10 +779,8 @@ exports[`Slider renders each size 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 16,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -838,10 +804,8 @@ exports[`Slider renders each size 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 16,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -859,14 +823,12 @@ exports[`Slider renders each size 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -966,10 +928,8 @@ exports[`Slider renders each size 2`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -993,10 +953,8 @@ exports[`Slider renders each size 2`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1014,14 +972,12 @@ exports[`Slider renders each size 2`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1121,10 +1077,8 @@ exports[`Slider renders each size 3`] = `
             "borderTopRightRadius": 12,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 40,
             "left": 20,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1148,10 +1102,8 @@ exports[`Slider renders each size 3`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 40,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 4,
           },
@@ -1169,14 +1121,12 @@ exports[`Slider renders each size 3`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 52,
           "left": 10,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1276,10 +1226,8 @@ exports[`Slider renders each size 4`] = `
             "borderTopRightRadius": 16,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 56,
             "left": 24,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1303,10 +1251,8 @@ exports[`Slider renders each size 4`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 56,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 8,
           },
@@ -1324,14 +1270,12 @@ exports[`Slider renders each size 4`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 68,
           "left": 14,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1431,10 +1375,8 @@ exports[`Slider renders each size 5`] = `
             "borderTopRightRadius": 28,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 96,
             "left": 36,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1458,10 +1400,8 @@ exports[`Slider renders each size 5`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 96,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 20,
           },
@@ -1479,14 +1419,12 @@ exports[`Slider renders each size 5`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 108,
           "left": 26,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1586,10 +1524,8 @@ exports[`Slider renders range variant 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1613,10 +1549,8 @@ exports[`Slider renders range variant 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1640,10 +1574,8 @@ exports[`Slider renders range variant 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1661,14 +1593,12 @@ exports[`Slider renders range variant 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1684,14 +1614,12 @@ exports[`Slider renders range variant 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1791,10 +1719,8 @@ exports[`Slider renders standard slider 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1818,10 +1744,8 @@ exports[`Slider renders standard slider 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -1839,14 +1763,12 @@ exports[`Slider renders standard slider 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -1946,12 +1868,10 @@ exports[`Slider renders vertical orientation 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": undefined,
             "height": 0,
             "left": 0,
-            "right": 0,
-            "top": 0,
-            "width": undefined,
+            "top": -16,
+            "width": 24,
           },
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -1973,12 +1893,10 @@ exports[`Slider renders vertical orientation 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
             "height": 0,
             "left": 0,
-            "right": 0,
-            "top": undefined,
-            "width": undefined,
+            "top": 0,
+            "width": 24,
           },
           {
             "backgroundColor": "rgba(103, 80, 164, 1)",
@@ -1994,15 +1912,13 @@ exports[`Slider renders vertical orientation 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "left": 0,
           "position": "absolute",
-          "right": 0,
         },
         {
           "height": 4,
+          "left": 0,
           "top": -10,
+          "width": 44,
         },
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
@@ -2101,10 +2017,8 @@ exports[`Slider renders with stop indicators 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -2128,10 +2042,8 @@ exports[`Slider renders with stop indicators 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -2149,14 +2061,12 @@ exports[`Slider renders with stop indicators 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 0,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 0,
           "width": 4,
         },
         {
@@ -2256,10 +2166,8 @@ exports[`Slider renders with value indicator 1`] = `
             "borderTopRightRadius": 8,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 16,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -2283,10 +2191,8 @@ exports[`Slider renders with value indicator 1`] = `
             "borderTopRightRadius": 2,
           },
           {
-            "bottom": 0,
-            "height": undefined,
+            "height": 24,
             "left": 0,
-            "right": undefined,
             "top": 0,
             "width": 0,
           },
@@ -2304,14 +2210,12 @@ exports[`Slider renders with value indicator 1`] = `
       [
         {
           "borderRadius": 9999,
-        },
-        {
-          "bottom": 0,
           "position": "absolute",
-          "top": 56,
         },
         {
+          "height": 44,
           "left": 6,
+          "top": 56,
           "width": 4,
         },
         {
@@ -2335,12 +2239,9 @@ exports[`Slider renders with value indicator 1`] = `
           "width": 48,
         },
         {
+          "left": -16,
           "opacity": 0,
-          "transform": [
-            {
-              "translateX": -16,
-            },
-          ],
+          "top": 0,
         },
         {
           "backgroundColor": "rgba(50, 47, 53, 1)",

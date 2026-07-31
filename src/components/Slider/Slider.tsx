@@ -215,6 +215,10 @@ const Slider = (props: Props) => {
   // gap = half handle width + between-handle space
   const trackHandleOffset = spec.handleWidth / 2 + BETWEEN_HANDLE_SPACE;
 
+  // Sizes across the track, perpendicular to the direction values grow.
+  const trackThickness = spec.trackThickness;
+  const handleCrossSize = spec.handleHeight;
+
   // Where the handles travel: fraction 0 sits `handleInsetStart` px in from the
   // leading edge of the track, fraction 1 sits `handleInsetEnd` px back from the
   // trailing edge. Every handle, track segment, indicator, stop and touch
@@ -240,69 +244,42 @@ const Slider = (props: Props) => {
     const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
     const gap = trackHandleOffset;
 
-    if (isVertical) {
-      let bottom: number;
-      let height: number;
-
-      if (variant === 'range') {
-        const lo = Math.min(sf, vf);
-        const hi = Math.max(sf, vf);
-        bottom = origin + lo * usable + gap;
-        height = Math.max(0, (hi - lo) * usable - 2 * gap);
-      } else if (variant === 'centered') {
-        if (vf >= 0.5) {
-          bottom = origin + 0.5 * usable;
-          height = Math.max(0, (vf - 0.5) * usable - gap);
-        } else {
-          bottom = origin + vf * usable + gap;
-          height = Math.max(0, (0.5 - vf) * usable - gap);
-        }
-      } else {
-        // Leading edge is the track's own end, not a handle position.
-        bottom = 0;
-        height = Math.max(0, origin + vf * usable - gap);
-      }
-
-      return {
-        bottom,
-        height,
-        top: undefined,
-        left: 0,
-        right: 0,
-        width: undefined,
-      };
-    }
-
-    let left: number;
-    let width: number;
+    // `start` is the distance from the low-value end of the track and `length`
+    // the extent from there. Both are the same whichever way the track runs.
+    let start: number;
+    let length: number;
 
     if (variant === 'range') {
       const lo = Math.min(sf, vf);
       const hi = Math.max(sf, vf);
-      left = origin + lo * usable + gap;
-      width = Math.max(0, (hi - lo) * usable - 2 * gap);
+      start = origin + lo * usable + gap;
+      length = Math.max(0, (hi - lo) * usable - 2 * gap);
     } else if (variant === 'centered') {
       if (vf >= 0.5) {
-        left = origin + 0.5 * usable;
-        width = Math.max(0, (vf - 0.5) * usable - gap);
+        start = origin + 0.5 * usable;
+        length = Math.max(0, (vf - 0.5) * usable - gap);
       } else {
-        left = origin + vf * usable + gap;
-        width = Math.max(0, (0.5 - vf) * usable - gap);
+        start = origin + vf * usable + gap;
+        length = Math.max(0, (0.5 - vf) * usable - gap);
       }
     } else {
       // Leading edge is the track's own end, not a handle position.
-      left = 0;
-      width = Math.max(0, origin + vf * usable - gap);
+      start = 0;
+      length = Math.max(0, origin + vf * usable - gap);
     }
 
-    return {
-      left,
-      width,
-      top: 0,
-      bottom: 0,
-      right: undefined,
-      height: undefined,
-    };
+    // Both branches must name the same keys with concrete numbers. An animated
+    // style cannot clear a property by returning `undefined`, so anything only
+    // one orientation sets would stay applied after switching to the other.
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - start - length,
+        width: trackThickness,
+        height: length,
+      };
+    }
+    return { left: start, top: 0, width: length, height: trackThickness };
   });
 
   // Right inactive track: from (handle + gap) to track end, 2dp inner left corners
@@ -314,63 +291,33 @@ const Slider = (props: Props) => {
     const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
     const gap = trackHandleOffset;
 
-    // This segment always ends at the track's own trailing edge, so its extent
-    // is measured back from `len` rather than from fraction 1.
+    // Runs from whichever edge bounds it out to the track's own far end.
+    let edge: number;
+    if (variant === 'range') {
+      edge = origin + Math.max(sf, vf) * usable + gap;
+    } else if (variant === 'centered') {
+      // The midpoint normally bounds this edge, but the handle has to bound it
+      // too once the active track shrinks to nothing near the centre.
+      edge = Math.max(origin + 0.5 * usable, origin + vf * usable + gap);
+    } else {
+      edge = origin + vf * usable + gap;
+    }
+    const length = Math.max(0, len - edge);
+
     if (isVertical) {
-      let height: number;
-      if (variant === 'range') {
-        const hi = Math.max(sf, vf);
-        height = Math.max(0, len - (origin + hi * usable) - gap);
-      } else if (variant === 'centered') {
-        // Mirror of the left segment: the midpoint normally bounds this edge,
-        // but the handle has to bound it too once the active track vanishes.
-        height = Math.max(
-          0,
-          len - Math.max(origin + 0.5 * usable, origin + vf * usable + gap)
-        );
-      } else {
-        height = Math.max(0, len - (origin + vf * usable) - gap);
-      }
       return {
-        top: 0,
-        height,
-        bottom: undefined,
         left: 0,
-        right: 0,
-        width: undefined,
+        top: len - edge - length,
+        width: trackThickness,
+        height: length,
       };
     }
-
-    let left: number;
-    let width: number;
-    if (variant === 'range') {
-      const hi = Math.max(sf, vf);
-      left = origin + hi * usable + gap;
-      width = Math.max(0, len - left);
-    } else if (variant === 'centered') {
-      left = Math.max(origin + 0.5 * usable, origin + vf * usable + gap);
-      width = Math.max(0, len - left);
-    } else {
-      left = origin + vf * usable + gap;
-      width = Math.max(0, len - left);
-    }
-    return {
-      left,
-      width,
-      top: 0,
-      bottom: 0,
-      right: undefined,
-      height: undefined,
-    };
+    return { left: edge, top: 0, width: length, height: trackThickness };
   });
 
   // Left inactive track: from track start to (handle - gap), 2dp inner right corners
   // Only needed for centered and range variants.
   const leftInactiveAnimStyle = useAnimatedStyle(() => {
-    if (variant === 'standard') {
-      return { width: 0 };
-    }
-
     const vf = endFractionSV.value;
     const sf = startFractionSV.value;
     const len = trackLengthSV.value;
@@ -378,54 +325,34 @@ const Slider = (props: Props) => {
     const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
     const gap = trackHandleOffset;
 
-    // This segment always starts at the track's own leading edge, so its extent
-    // is just the distance out to the handle it stops behind.
+    // Always starts at the track's own near end, so only its extent varies.
     //
     // Centered: normally it stops at the midpoint, where the active track takes
     // over and holds it clear of the handle. But the active track shrinks to
     // nothing once the handle is closer to the midpoint than `gap`, so the
     // handle has to bound this edge too or the segment runs under it.
-    if (isVertical) {
-      let height: number;
-      if (variant === 'range') {
-        const lo = Math.min(sf, vf);
-        height = Math.max(0, origin + lo * usable - gap);
-      } else {
-        // centered
-        height = Math.max(
-          0,
-          Math.min(origin + 0.5 * usable, origin + vf * usable - gap)
-        );
-      }
-      return {
-        bottom: 0,
-        height,
-        top: undefined,
-        left: 0,
-        right: 0,
-        width: undefined,
-      };
-    }
-
-    let width: number;
-    if (variant === 'range') {
-      const lo = Math.min(sf, vf);
-      width = Math.max(0, origin + lo * usable - gap);
+    let length: number;
+    if (variant === 'standard') {
+      // Not rendered for this variant, but the keys still have to be concrete.
+      length = 0;
+    } else if (variant === 'range') {
+      length = Math.max(0, origin + Math.min(sf, vf) * usable - gap);
     } else {
-      // centered
-      width = Math.max(
+      length = Math.max(
         0,
         Math.min(origin + 0.5 * usable, origin + vf * usable - gap)
       );
     }
-    return {
-      left: 0,
-      width,
-      top: 0,
-      bottom: 0,
-      right: undefined,
-      height: undefined,
-    };
+
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - length,
+        width: trackThickness,
+        height: length,
+      };
+    }
+    return { left: 0, top: 0, width: length, height: trackThickness };
   });
 
   // End handle animated position along the track axis
@@ -434,12 +361,22 @@ const Slider = (props: Props) => {
     const origin = handleInsetStart;
     const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
     const w = endHandleWidthSV.value;
-    const along = origin + endFractionSV.value * usable;
+    const start = origin + endFractionSV.value * usable - w / 2;
     if (isVertical) {
       // Vertical runs bottom-to-top, so measure back from the far edge.
-      return { top: len - along - w / 2, height: w };
+      return {
+        left: 0,
+        top: len - start - w,
+        width: handleCrossSize,
+        height: w,
+      };
     }
-    return { left: along - w / 2, width: w };
+    return {
+      left: start,
+      top: verticalOffset,
+      width: w,
+      height: handleCrossSize,
+    };
   });
 
   // Start handle animated position along the track axis
@@ -448,11 +385,21 @@ const Slider = (props: Props) => {
     const origin = handleInsetStart;
     const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
     const w = startHandleWidthSV.value;
-    const along = origin + startFractionSV.value * usable;
+    const start = origin + startFractionSV.value * usable - w / 2;
     if (isVertical) {
-      return { top: len - along - w / 2, height: w };
+      return {
+        left: 0,
+        top: len - start - w,
+        width: handleCrossSize,
+        height: w,
+      };
     }
-    return { left: along - w / 2, width: w };
+    return {
+      left: start,
+      top: verticalOffset,
+      width: w,
+      height: handleCrossSize,
+    };
   });
 
   // Value indicator animated style
@@ -465,16 +412,15 @@ const Slider = (props: Props) => {
     if (isVertical) {
       return {
         opacity: valueIndicatorAlphaSV.value,
-        top: len - along - VALUE_INDICATOR_HEIGHT / 2,
         left: -(VALUE_INDICATOR_WIDTH + VALUE_INDICATOR_BOTTOM_SPACE),
-        right: undefined,
-        bottom: undefined,
-        transform: [],
+        top: len - along - VALUE_INDICATOR_HEIGHT / 2,
       };
     }
+    // `left` rather than a transform, so both branches name the same keys.
     return {
       opacity: valueIndicatorAlphaSV.value,
-      transform: [{ translateX: along - VALUE_INDICATOR_WIDTH / 2 }],
+      left: along - VALUE_INDICATOR_WIDTH / 2,
+      top: 0,
     };
   });
 
@@ -847,15 +793,6 @@ const Slider = (props: Props) => {
     ? { width: spec.handleHeight, overflow: 'visible' }
     : { height: spec.handleHeight + verticalOffset, overflow: 'visible' };
 
-  // Static handle positioning perpendicular to the track axis
-  const endHandleStaticStyle: ViewStyle = isVertical
-    ? { position: 'absolute', left: 0, right: 0 }
-    : { position: 'absolute', top: verticalOffset, bottom: 0 };
-
-  const startHandleStaticStyle: ViewStyle = isVertical
-    ? { position: 'absolute', left: 0, right: 0 }
-    : { position: 'absolute', top: verticalOffset, bottom: 0 };
-
   // Icon: center it at the leading corner's inscribed-square focal point
   const iconLeadingOffset = Math.max(
     0,
@@ -1001,7 +938,6 @@ const Slider = (props: Props) => {
       <Animated.View
         style={[
           styles.handle,
-          endHandleStaticStyle,
           endHandleAnimStyle,
           {
             backgroundColor: disabled ? colors.disabledContent : colors.handle,
@@ -1016,7 +952,6 @@ const Slider = (props: Props) => {
         <Animated.View
           style={[
             styles.handle,
-            startHandleStaticStyle,
             startHandleAnimStyle,
             {
               backgroundColor: disabled
@@ -1056,6 +991,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   handle: {
+    position: 'absolute',
     borderRadius: cornerFull,
   },
   stopDot: {
