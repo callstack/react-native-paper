@@ -69,9 +69,12 @@ describe('positionToFraction', () => {
     expect(positionToFraction(50, 100, false, false)).toBe(0.5);
   });
 
-  it('inverts for RTL', () => {
-    expect(positionToFraction(0, 100, true, false)).toBe(1);
-    expect(positionToFraction(100, 100, true, false)).toBe(0);
+  // Deliberately not inverted: the rendering is not mirrored for RTL, so
+  // inverting here made dragging right move the handle right and lower the
+  // value. Flip this back alongside mirrored rendering.
+  it('does not invert for RTL while the rendering is unmirrored', () => {
+    expect(positionToFraction(0, 100, true, false)).toBe(0);
+    expect(positionToFraction(100, 100, true, false)).toBe(1);
   });
 
   it('inverts for vertical (top=high, bottom=low)', () => {

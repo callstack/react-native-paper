@@ -33,6 +33,16 @@ export function fractionToValue(
 }
 
 /**
+ * The slider renders left-to-right in every direction: nothing in its handle,
+ * track, corner radii or icon placement is mirrored for RTL. Honouring `isRTL`
+ * here while that is true inverts the drag against the handle, so that dragging
+ * right moves the handle right and lowers the value.
+ *
+ * Flip this to `true` in the same change that mirrors the rendering.
+ */
+const RTL_MIRRORING_IMPLEMENTED = false;
+
+/**
  * Maps a touch position along the track axis onto a value fraction.
  *
  * `insetStart` and `insetEnd` must match the range the handle is drawn across,
@@ -50,8 +60,11 @@ export function positionToFraction(
 ): number {
   const usable = trackLengthPx - insetStart - insetEnd;
   if (usable <= 0) return 0;
-  // Vertical: top of track = max, bottom = min. RTL horizontal: right = min.
-  const along = isVertical || isRTL ? trackLengthPx - touchPx : touchPx;
+  // Vertical: top of track = max, bottom = min.
+  const along =
+    isVertical || (isRTL && RTL_MIRRORING_IMPLEMENTED)
+      ? trackLengthPx - touchPx
+      : touchPx;
   return clamp((along - insetStart) / usable, 0, 1);
 }
 
