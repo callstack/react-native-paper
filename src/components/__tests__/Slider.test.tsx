@@ -83,6 +83,28 @@ describe('positionToFraction', () => {
   it('returns 0 when trackLengthPx is 0', () => {
     expect(positionToFraction(50, 0, false, false)).toBe(0);
   });
+
+  // Handles are drawn across an inset range, so touches must map onto the same
+  // range or the handle trails behind the finger.
+  it('maps onto the inset range, clamping outside it', () => {
+    // 300px track inset 12 either end: the usable span is 276, from 12 to 288.
+    expect(positionToFraction(12, 300, false, false, 12, 12)).toBe(0);
+    expect(positionToFraction(150, 300, false, false, 12, 12)).toBe(0.5);
+    expect(positionToFraction(288, 300, false, false, 12, 12)).toBe(1);
+    expect(positionToFraction(0, 300, false, false, 12, 12)).toBe(0);
+    expect(positionToFraction(300, 300, false, false, 12, 12)).toBe(1);
+  });
+
+  it('keeps the two insets independent when vertical', () => {
+    // Vertical runs bottom-to-top, so fraction 0 sits `insetStart` up from the
+    // bottom (y = 280) and fraction 1 sits `insetEnd` down from the top (y = 10).
+    expect(positionToFraction(280, 300, false, true, 20, 10)).toBe(0);
+    expect(positionToFraction(10, 300, false, true, 20, 10)).toBe(1);
+  });
+
+  it('returns 0 when the insets swallow the whole track', () => {
+    expect(positionToFraction(10, 20, false, false, 12, 12)).toBe(0);
+  });
 });
 
 describe('stopFractions', () => {
@@ -326,22 +348,24 @@ describe('Slider range gestures', () => {
     return { r, onValueChange };
   };
 
+  // Handles travel an inset range, so on a 300px track at size `s` (8dp insets)
+  // the usable span is 284: fraction 0.25 is at pixel 79, 0.5 at 150, 0.75 at 221.
   it('frees the start handle when both are pinned at max', () => {
     const { r, onValueChange } = setup([100, 100]);
-    drag(r, 150, 90);
-    expect(onValueChange).toHaveBeenCalledWith([30, 100]);
+    drag(r, 150, 79);
+    expect(onValueChange).toHaveBeenCalledWith([25, 100]);
   });
 
   it('frees the end handle when both are pinned at min', () => {
     const { r, onValueChange } = setup([0, 0]);
-    drag(r, 150, 210);
-    expect(onValueChange).toHaveBeenCalledWith([0, 70]);
+    drag(r, 150, 221);
+    expect(onValueChange).toHaveBeenCalledWith([0, 75]);
   });
 
   it('still drags the nearest handle when they are apart', () => {
     const { r, onValueChange } = setup([20, 80]);
-    drag(r, 240, 210);
-    expect(onValueChange).toHaveBeenCalledWith([20, 70]);
+    drag(r, 221, 150);
+    expect(onValueChange).toHaveBeenCalledWith([20, 50]);
   });
 });
 

@@ -32,19 +32,27 @@ export function fractionToValue(
   return snapToStep(raw, min, max, step);
 }
 
+/**
+ * Maps a touch position along the track axis onto a value fraction.
+ *
+ * `insetStart` and `insetEnd` must match the range the handle is drawn across,
+ * otherwise the handle trails behind the finger by up to the inset. Distance is
+ * resolved in the direction values grow *before* the inset is applied, so the
+ * two insets stay independent rather than only working when they are equal.
+ */
 export function positionToFraction(
   touchPx: number,
   trackLengthPx: number,
   isRTL: boolean,
-  isVertical: boolean
+  isVertical: boolean,
+  insetStart: number = 0,
+  insetEnd: number = 0
 ): number {
-  if (trackLengthPx <= 0) return 0;
-  let fraction = touchPx / trackLengthPx;
-  // Vertical: top of track = max, bottom = min (invert)
-  if (isVertical) fraction = 1 - fraction;
-  // RTL horizontal: invert
-  if (!isVertical && isRTL) fraction = 1 - fraction;
-  return clamp(fraction, 0, 1);
+  const usable = trackLengthPx - insetStart - insetEnd;
+  if (usable <= 0) return 0;
+  // Vertical: top of track = max, bottom = min. RTL horizontal: right = min.
+  const along = isVertical || isRTL ? trackLengthPx - touchPx : touchPx;
+  return clamp((along - insetStart) / usable, 0, 1);
 }
 
 export function stopFractions(
