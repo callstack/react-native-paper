@@ -9,7 +9,10 @@ export const themeColors = {
       backgroundColor: 'theme.colors.surface',
     },
     elevated: {
-      backgroundColor: 'theme.colors.elevation.level2',
+      backgroundColor: 'theme.colors.surfaceContainer',
+    },
+    scrolled: {
+      backgroundColor: 'theme.colors.surfaceContainer',
     },
   },
   'Appbar.Action': {
@@ -19,10 +22,21 @@ export const themeColors = {
     'not leading icon': {
       iconColor: 'theme.colors.onSurfaceVariant',
     },
+    filled: {
+      backgroundColor: 'theme.colors.primary',
+      iconColor: 'theme.colors.onPrimary',
+    },
+    tonal: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      iconColor: 'theme.colors.onSecondaryContainer',
+    },
   },
   'Appbar.Content': {
     '-': {
       textColor: 'theme.colors.onSurface',
+    },
+    subtitle: {
+      textColor: 'theme.colors.onSurfaceVariant',
     },
   },
   'Appbar.Header': {
@@ -30,7 +44,10 @@ export const themeColors = {
       backgroundColor: 'theme.colors.surface',
     },
     elevated: {
-      backgroundColor: 'theme.colors.elevation.level2',
+      backgroundColor: 'theme.colors.surfaceContainer',
+    },
+    scrolled: {
+      backgroundColor: 'theme.colors.surfaceContainer',
     },
   },
   Banner: {

@@ -4,7 +4,11 @@ import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
 import AppbarHeader from './AppbarHeader';
 
-const Appbar = Object.assign(
+/**
+ * MD3 Top app bar (renamed public surface). Prefer `TopAppBar` in new code.
+ * `Appbar` remains as a compatibility alias for the same compound component.
+ */
+const TopAppBar = Object.assign(
   // @component ./Appbar.tsx
   AppbarComponent,
   {
@@ -19,4 +23,8 @@ const Appbar = Object.assign(
   }
 );
 
+/** @deprecated Prefer `TopAppBar`. Same compound component. */
+const Appbar = TopAppBar;
+
 export default Appbar;
+export { TopAppBar };

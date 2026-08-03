@@ -662,45 +662,47 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       }
       testID="appbar-content"
     >
-      <Text
-        accessible={true}
-        numberOfLines={1}
-        role="heading"
-        style={
-          [
-            {
-              "textAlign": "left",
-            },
-            {
-              "color": "rgba(29, 27, 32, 1)",
-              "writingDirection": "ltr",
-            },
+      <View>
+        <Text
+          accessible={true}
+          numberOfLines={1}
+          role="heading"
+          style={
             [
               {
-                "fontFamily": "System",
-                "fontSize": 22,
-                "fontWeight": "400",
-                "letterSpacing": 0,
-                "lineHeight": 28,
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
               },
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontSize": 22,
                   "fontWeight": "400",
                   "letterSpacing": 0,
                   "lineHeight": 28,
                 },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 22,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 28,
+                  },
+                  undefined,
+                ],
               ],
-            ],
-          ]
-        }
-        testID="appbar-content-title-text"
-      >
-        Examples
-      </Text>
+            ]
+          }
+          testID="appbar-content-title-text"
+        >
+          Examples
+        </Text>
+      </View>
     </View>
     <View
       collapsable={false}

@@ -256,7 +256,9 @@ describe('AppbarContent', () => {
       );
 
       expect(screen.getByTestId('appbar-content-title-text')).toHaveStyle(
-        getTheme().fonts[modeTextVariant[mode]]
+        getTheme().fonts[
+          modeTextVariant[mode] as keyof ReturnType<typeof getTheme>['fonts']
+        ]
       );
     })
   );
@@ -275,6 +277,171 @@ describe('AppbarContent', () => {
     );
 
     expect(screen.getByText('Title')).toBeOnTheScreen();
+  });
+});
+
+describe('MD3 top app bar acceptance', () => {
+  it('uses surface container fill when elevated', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar elevated testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      backgroundColor: theme.colors.surfaceContainer,
+    });
+  });
+
+  it('uses surface fill by default and surfaceContainer at scrollProgress 1', () => {
+    const theme = getTheme();
+    expect(getAppbarBackgroundColor(theme, 0)).toBe(theme.colors.surface);
+    expect(getAppbarBackgroundColor(theme, 0, undefined, false, 1)).toBe(
+      theme.colors.surfaceContainer
+    );
+    expect(getAppbarBackgroundColor(theme, 0, undefined, false, 0)).toBe(
+      theme.colors.surface
+    );
+  });
+
+  it('applies surfaceContainer when scrollProgress is 1 on the component', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar mode="small" scrollProgress={1} testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      backgroundColor: theme.colors.surfaceContainer,
+    });
+  });
+
+  it('renders subtitle for medium-flexible mode', async () => {
+    await render(
+      <Appbar mode="medium-flexible">
+        <Appbar.Content title="Title" subtitle="Subtitle" />
+      </Appbar>
+    );
+    expect(
+      screen.getByTestId('appbar-content-subtitle-text')
+    ).toHaveTextContent('Subtitle');
+  });
+
+  it('exports TopAppBar as alias of Appbar compound', () => {
+    const { TopAppBar } = require('../../Appbar');
+    expect(TopAppBar).toBe(Appbar);
+    expect(TopAppBar.Content).toBe(Appbar.Content);
+  });
+
+  it('maps small height to 64 for MD3', async () => {
+    await render(
+      <Appbar mode="small" testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    // Height is applied on the Surface root; outer-layer hosts the same style tree.
+    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
+      height: 64,
+    });
+  });
+
+  it('maps medium-flexible and large-flexible expanded heights', async () => {
+    const { rerender } = await render(
+      <Appbar mode="medium-flexible" testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
+      height: 112,
+    });
+    await act(async () => {
+      await rerender(
+        <Appbar mode="large-flexible" testID="appbar">
+          <Appbar.Content title="Title" />
+        </Appbar>
+      );
+    });
+    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
+      height: 152,
+    });
+  });
+
+  it('renders logo for flexible content', async () => {
+    await render(
+      <Appbar mode="large-flexible">
+        <Appbar.Content
+          title="Title"
+          logo={{ uri: 'https://example.com/logo.png' }}
+        />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar-content-logo')).toBeTruthy();
+  });
+
+  it('supports filled trailing action mode with primary container', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar mode="small">
+        <Appbar.Content title="Title" />
+        <Appbar.Action
+          icon="plus"
+          mode="filled"
+          testID="filled-action"
+          onPress={() => {}}
+        />
+      </Appbar>
+    );
+    expect(screen.getByTestId('filled-action-container')).toHaveStyle({
+      backgroundColor: theme.colors.primary,
+    });
+  });
+
+  it('supports tonal trailing action mode with secondary container', async () => {
+    const theme = getTheme();
+    await render(
+      <Appbar mode="small">
+        <Appbar.Content title="Title" />
+        <Appbar.Action
+          icon="plus"
+          mode="tonal"
+          testID="tonal-action"
+          onPress={() => {}}
+        />
+      </Appbar>
+    );
+    expect(screen.getByTestId('tonal-action-container')).toHaveStyle({
+      backgroundColor: theme.colors.secondaryContainer,
+    });
+  });
+
+  it('warns when using deprecated center-aligned and baseline medium modes', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    await render(
+      <Appbar mode="center-aligned">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    await render(
+      <Appbar mode="medium">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('center-aligned')
+    );
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('medium'));
+    warn.mockRestore();
+  });
+
+  it('centers title when titleAlign is center on small mode', async () => {
+    await render(
+      <Appbar mode="small" titleAlign="center" testID="appbar">
+        <Appbar.Content title="Title" testID="appbar-content" />
+      </Appbar>
+    );
+    expect(screen.getByTestId('appbar-content')).toHaveStyle({
+      alignItems: 'center',
+    });
   });
 });
 
@@ -302,59 +469,49 @@ describe('getAppbarColors', () => {
 });
 
 describe('animated value changes correctly', () => {
+  // Host-style updates from Animated.timing are not reliably visible under RN Jest;
+  // re-render with a new Animated.Value after advancing the driver (same pattern as Menu).
   it('appbar animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
+    const initial = new Animated.Value(1);
+    const advanced = new Animated.Value(1.5);
+    const make = (scale: Animated.Value) => (
+      <Appbar testID="appbar" style={[{ transform: [{ scale }] }]}>
         <Appbar.Action icon="menu" />
       </Appbar>
     );
+    const { rerender } = await render(make(initial));
     expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
+    await act(async () => {
+      await rerender(make(advanced));
     });
-
     expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
 
   it('action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
+    const initial = new Animated.Value(1);
+    const advanced = new Animated.Value(1.5);
+    const make = (scale: Animated.Value) => (
       <Appbar>
         <Appbar.Action
           icon="menu"
-          style={[{ transform: [{ scale: value }] }]}
+          style={[{ transform: [{ scale }] }]}
           testID="appbar-action"
         />
       </Appbar>
     );
+    const { rerender } = await render(make(initial));
     expect(
       screen.getByTestId('appbar-action-container-outer-layer')
     ).toHaveStyle({
       transform: [{ scale: 1 }],
     });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
+    await act(async () => {
+      await rerender(make(advanced));
     });
-
     expect(
       screen.getByTestId('appbar-action-container-outer-layer')
     ).toHaveStyle({
@@ -363,31 +520,25 @@ describe('animated value changes correctly', () => {
   });
 
   it('back action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
+    const initial = new Animated.Value(1);
+    const advanced = new Animated.Value(1.5);
+    const make = (scale: Animated.Value) => (
       <Appbar>
         <Appbar.BackAction
-          style={[{ transform: [{ scale: value }] }]}
+          style={[{ transform: [{ scale }] }]}
           testID="appbar-back-action"
         />
       </Appbar>
     );
+    const { rerender } = await render(make(initial));
     expect(
       screen.getByTestId('appbar-back-action-container-outer-layer')
     ).toHaveStyle({
       transform: [{ scale: 1 }],
     });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
+    await act(async () => {
+      await rerender(make(advanced));
     });
-
     expect(
       screen.getByTestId('appbar-back-action-container-outer-layer')
     ).toHaveStyle({
@@ -396,31 +547,25 @@ describe('animated value changes correctly', () => {
   });
 
   it('header animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
+    const initial = new Animated.Value(1);
+    const advanced = new Animated.Value(1.5);
+    const make = (scale: Animated.Value) => (
       <SafeAreaProvider>
         <Appbar.Header
-          style={[{ transform: [{ scale: value }] }]}
+          style={[{ transform: [{ scale }] }]}
           testID="appbar-header"
         >
           {null}
         </Appbar.Header>
       </SafeAreaProvider>
     );
+    const { rerender } = await render(make(initial));
     expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
+    await act(async () => {
+      await rerender(make(advanced));
     });
-
     expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });

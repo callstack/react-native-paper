@@ -8,7 +8,8 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-A component used to display a title in an appbar.
+Title (and optional subtitle / logo) content for a top app bar.
+Subtitle and logo are intended for medium-flexible and large-flexible modes.
 
 
 
@@ -19,12 +20,12 @@ A component used to display a title in an appbar.
 ## Usage
 ```js
 import * as React from 'react';
-import { Appbar } from 'react-native-paper';
+import { TopAppBar } from 'react-native-paper';
 
 const MyComponent = () => (
-  <Appbar.Header>
-     <Appbar.Content title="Title" />
-  </Appbar.Header>
+  <TopAppBar.Header mode="medium-flexible">
+    <TopAppBar.Content title="Title" subtitle="Subtitle" />
+  </TopAppBar.Header>
 );
 
 export default MyComponent;
@@ -51,6 +52,30 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Appbar/AppbarContent" prop="titleStyle" />
+
+<div>
+
+### subtitle
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarContent" prop="subtitle" />
+
+<div>
+
+### subtitleStyle
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarContent" prop="subtitleStyle" />
+
+<div>
+
+### logo
+
+</div>
+
+  <PropTable componentLink="Appbar/AppbarContent" prop="logo" />
 
 <div>
 

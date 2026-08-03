@@ -2,10 +2,12 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
+import { AppbarTokens, type TopAppBarMode } from './tokens';
 import { white } from '../../theme/colors';
 import type { InternalTheme, Theme, ThemeProp } from '../../types';
 
-export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+/** @deprecated Prefer `TopAppBarMode` from tokens. */
+export type AppbarModes = TopAppBarMode;
 
 export type AppbarChildProps = {
   isLeading?: boolean;
@@ -21,22 +23,34 @@ const borderStyleProperties = [
   'borderBottomLeftRadius',
 ];
 
+/**
+ * Resolve resting / elevated / scroll-driven container fill.
+ * MD3: surface at rest → surfaceContainer when scrolled or elevated.
+ */
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
   _elevation: number,
   customBackground?: ColorValue,
-  elevated?: boolean
+  elevated?: boolean,
+  scrollProgress?: number
 ) => {
   const { colors } = theme as Theme;
   if (customBackground) {
     return customBackground;
   }
 
-  if (elevated) {
-    return colors.surfaceContainer;
+  if (typeof scrollProgress === 'number') {
+    // Discrete pick for non-animated consumers; full interpolation uses Animated in Appbar.
+    return scrollProgress >= 0.5
+      ? colors[AppbarTokens.colors.containerScrolled]
+      : colors[AppbarTokens.colors.container];
   }
 
-  return colors.surface;
+  if (elevated) {
+    return colors[AppbarTokens.colors.containerScrolled];
+  }
+
+  return colors[AppbarTokens.colors.container];
 };
 
 export const getAppbarColor = ({
@@ -86,21 +100,74 @@ type RenderAppbarContentProps = BaseProps & {
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
-const MD3_DEFAULT_APPBAR_HEIGHT = 64;
+const MD3_DEFAULT_APPBAR_HEIGHT = AppbarTokens.sizes.smallHeight;
 
-export const modeAppbarHeight = {
+export const modeAppbarHeight: Record<TopAppBarMode, number> = {
   small: MD3_DEFAULT_APPBAR_HEIGHT,
-  medium: 112,
-  large: 152,
+  medium: AppbarTokens.sizes.mediumFlexibleHeight,
+  large: AppbarTokens.sizes.largeFlexibleHeight,
   'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
+  'medium-flexible': AppbarTokens.sizes.mediumFlexibleHeight,
+  'large-flexible': AppbarTokens.sizes.largeFlexibleHeight,
 };
 
-export const modeTextVariant = {
-  small: 'titleLarge',
-  medium: 'headlineSmall',
-  large: 'headlineMedium',
-  'center-aligned': 'titleLarge',
-} as const;
+export const modeTextVariant: Record<TopAppBarMode, string> = {
+  small: AppbarTokens.typography.small,
+  medium: AppbarTokens.typography.mediumFlexible,
+  large: AppbarTokens.typography.largeFlexible,
+  'center-aligned': AppbarTokens.typography.small,
+  'medium-flexible': AppbarTokens.typography.mediumFlexible,
+  'large-flexible': AppbarTokens.typography.largeFlexible,
+};
+
+/** Normalize deprecated modes to the modern mode + title alignment. */
+export const resolveAppbarMode = (
+  mode: TopAppBarMode
+): {
+  mode: TopAppBarMode;
+  titleAlign: 'start' | 'center';
+  isFlexible: boolean;
+  isLegacyBaseline: boolean;
+} => {
+  if (mode === 'center-aligned') {
+    return {
+      mode: 'small',
+      titleAlign: 'center',
+      isFlexible: false,
+      isLegacyBaseline: false,
+    };
+  }
+  if (mode === 'medium') {
+    return {
+      mode: 'medium',
+      titleAlign: 'start',
+      isFlexible: false,
+      isLegacyBaseline: true,
+    };
+  }
+  if (mode === 'large') {
+    return {
+      mode: 'large',
+      titleAlign: 'start',
+      isFlexible: false,
+      isLegacyBaseline: true,
+    };
+  }
+  if (mode === 'medium-flexible' || mode === 'large-flexible') {
+    return {
+      mode,
+      titleAlign: 'start',
+      isFlexible: true,
+      isLegacyBaseline: false,
+    };
+  }
+  return {
+    mode: 'small',
+    titleAlign: 'start',
+    isFlexible: false,
+    isLegacyBaseline: false,
+  };
+};
 
 export const filterAppbarActions = (
   children: React.ReactNode,
@@ -176,6 +243,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   v3Spacing: {
-    marginLeft: 12,
+    marginLeft: AppbarTokens.sizes.contentStartMargin,
   },
 });

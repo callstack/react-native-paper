@@ -17,7 +17,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+type AppbarModes =
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'center-aligned'
+  | 'medium-flexible'
+  | 'large-flexible';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
@@ -33,13 +39,20 @@ const AppbarExample = () => {
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
+  const [titleAlignCenter, setTitleAlignCenter] = React.useState(false);
+  const [showFilledAction, setShowFilledAction] = React.useState(false);
+  const [showLogo, setShowLogo] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
   const theme = useTheme();
   const { bottom, left, right } = useSafeAreaInsets();
   const height = 80;
 
-  const isCenterAlignedMode = appbarMode === 'center-aligned';
+  const isCenterAlignedMode =
+    appbarMode === 'center-aligned' ||
+    (appbarMode === 'small' && titleAlignCenter);
+  const isFlexible =
+    appbarMode === 'medium-flexible' || appbarMode === 'large-flexible';
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -47,12 +60,27 @@ const AppbarExample = () => {
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
           mode={appbarMode}
+          titleAlign={titleAlignCenter ? 'center' : 'start'}
           elevated={showElevated}
+          scrollProgress={showElevated ? 1 : 0}
         >
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Appbar.Content title="Title" onPress={() => setShowSnackbar(true)} />
+          <Appbar.Content
+            title="Title"
+            subtitle={
+              showSubtitle && isFlexible ? 'MD3 flexible subtitle' : undefined
+            }
+            logo={
+              showLogo && isFlexible
+                ? {
+                    uri: 'https://callstack.github.io/react-native-paper/images/favicon.ico',
+                  }
+                : undefined
+            }
+            onPress={() => setShowSnackbar(true)}
+          />
           {isCenterAlignedMode
             ? false
             : showCalendarIcon && (
@@ -60,6 +88,9 @@ const AppbarExample = () => {
               )}
           {showSearchIcon && (
             <Appbar.Action icon="magnify" onPress={() => {}} />
+          )}
+          {showFilledAction && (
+            <Appbar.Action icon="plus" mode="filled" onPress={() => {}} />
           )}
           {showMoreIcon && (
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
@@ -78,6 +109,10 @@ const AppbarExample = () => {
     showCalendarIcon,
     isCenterAlignedMode,
     showElevated,
+    titleAlignCenter,
+    showFilledAction,
+    showLogo,
+    isFlexible,
   ]);
 
   const renderFAB = () => {
@@ -121,8 +156,30 @@ const AppbarExample = () => {
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
       <View style={styles.row}>
-        <Text>Elevated</Text>
+        <Text>Scrolled container (surfaceContainer)</Text>
         <Switch value={showElevated} onValueChange={setShowElevated} />
+      </View>
+      <View style={styles.row}>
+        <Text>Title align center (small)</Text>
+        <Switch
+          value={titleAlignCenter}
+          onValueChange={setTitleAlignCenter}
+          disabled={appbarMode !== 'small' && appbarMode !== 'center-aligned'}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Filled trailing action</Text>
+        <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
+      </View>
+      <View style={styles.row}>
+        <Text>Logo (flexible modes)</Text>
+        <Switch
+          value={showLogo}
+          onValueChange={setShowLogo}
+          disabled={
+            !isFlexible && appbarMode !== 'medium' && appbarMode !== 'large'
+          }
+        />
       </View>
     </>
   );
@@ -136,29 +193,23 @@ const AppbarExample = () => {
         <List.Section title="Default options">
           {renderDefaultOptions()}
         </List.Section>
-        <List.Section title="Appbar Modes">
+        <List.Section title="TopAppBar modes (MD3)">
           <RadioButton.Group
             value={appbarMode}
             onValueChange={(value: string) =>
               setAppbarMode(value as AppbarModes)
             }
           >
-            <View style={styles.row}>
-              <Text>Small (default)</Text>
-              <RadioButton value="small" />
-            </View>
-            <View style={styles.row}>
-              <Text>Medium</Text>
-              <RadioButton value="medium" />
-            </View>
-            <View style={styles.row}>
-              <Text>Large</Text>
-              <RadioButton value="large" />
-            </View>
-            <View style={styles.row}>
-              <Text>Center-aligned</Text>
-              <RadioButton value="center-aligned" />
-            </View>
+            {/* RadioButton.Item makes the whole row the press target (same pattern as RadioButtonGroupExample). */}
+            <RadioButton.Item label="Small (default)" value="small" />
+            <RadioButton.Item label="Medium flexible" value="medium-flexible" />
+            <RadioButton.Item label="Large flexible" value="large-flexible" />
+            <RadioButton.Item label="Medium (legacy baseline)" value="medium" />
+            <RadioButton.Item label="Large (legacy baseline)" value="large" />
+            <RadioButton.Item
+              label="Center-aligned (legacy)"
+              value="center-aligned"
+            />
           </RadioButton.Group>
         </List.Section>
       </ScreenWrapper>
