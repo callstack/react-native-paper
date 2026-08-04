@@ -126,6 +126,13 @@
     "collapsible": true,
     "collapsed": false
   },
+  {
+    "type": "dir",
+    "name": "Slider",
+    "label": "Slider",
+    "collapsible": true,
+    "collapsed": false
+  },
   "Snackbar",
   "Surface",
   {

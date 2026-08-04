@@ -107,9 +107,18 @@ const createNav = (version: string) => {
   ];
 };
 
+// `pages` describes the current version, so components added after 5.x have no
+// pages under `docs/5.x` and have to be left out of its sidebar. The mirror of
+// the `HelperText` case below, which 5.x has and the current version dropped.
+const componentsAddedAfter5x = new Set(['Slider']);
+
 const getVersionComponentOrder = (version: string): MetaEntry[] => {
-  const fromConfig = Object.entries(componentDocsConfig.pages).map(
-    ([entryName, value]) => {
+  const fromConfig = Object.entries(componentDocsConfig.pages)
+    .filter(
+      ([entryName]) =>
+        version !== '5.x' || !componentsAddedAfter5x.has(entryName)
+    )
+    .map(([entryName, value]) => {
       if (typeof value === 'string') {
         return entryName;
       }
@@ -121,8 +130,7 @@ const getVersionComponentOrder = (version: string): MetaEntry[] => {
         collapsible: true,
         collapsed: false,
       };
-    }
-  );
+    });
 
   if (version !== '5.x') {
     return fromConfig;

@@ -1,0 +1,195 @@
+---
+title: Slider
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+Material 3 slider for selecting a value from a range.
+Supports standard, centered, and range variants.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"standard":"screenshots/slider-standard.png","centered":"screenshots/slider-centered.png","range":"screenshots/slider-range.png","vertical":"screenshots/slider-vertical.png"}}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { Slider } from 'react-native-paper';
+
+const Example = () => {
+  const [value, setValue] = React.useState(50);
+  return <Slider value={value} onValueChange={setValue} />;
+};
+```
+
+`Slider.Centered` fills outwards from the midpoint, and `Slider.Range` takes a
+`[start, end]` tuple and shows two handles:
+
+```js
+const [range, setRange] = React.useState([20, 75]);
+return <Slider.Range value={range} onValueChange={setRange} />;
+```
+
+## Variants and `value`
+`variant` decides the type of `value` and of the three change callbacks, so
+none of them can appear in the props table below:
+
+| `variant` | `value` | callbacks receive |
+| --- | --- | --- |
+| `'standard'` (default) | `number` | `number` |
+| `'centered'` | `number` | `number` |
+| `'range'` | `[number, number]` | `[number, number]` |
+
+`value` is required; `onValueChange`, `onSlidingStart` and `onSlidingComplete`
+are optional. `Slider.Centered` and `Slider.Range` set `variant` for you, so
+you never pass it directly with those.
+
+## Theming
+Customize by overriding these `theme.colors` roles:
+- `primary`: active track and handles. Override per instance with `color`
+- `secondaryContainer`: inactive track
+- `onPrimary`: stop indicators sitting on the active track
+- `onSecondaryContainer`: stop indicators sitting on the inactive track
+- `inverseSurface` / `inverseOnSurface`: value indicator background / label
+- `onSurface`: every element while `disabled`, at 38% opacity, or 12% for the
+  inactive track
+
+
+  ## Props
+  <span />
+
+
+
+<div>
+
+### min
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="min" />
+
+<div>
+
+### max
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="max" />
+
+<div>
+
+### step
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="step" />
+
+<div>
+
+### size
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="size" />
+
+<div>
+
+### orientation
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="orientation" />
+
+<div>
+
+### disabled
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="disabled" />
+
+<div>
+
+### icon
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="icon" />
+
+<div>
+
+### showStops
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="showStops" />
+
+<div>
+
+### showValueIndicator
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="showValueIndicator" />
+
+<div>
+
+### valueIndicatorLabel
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="valueIndicatorLabel" />
+
+<div>
+
+### color
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="color" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="style" />
+
+<div>
+
+### testID
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="testID" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="theme" />
+
+<div>
+
+### accessibilityLabel
+
+</div>
+
+  <PropTable componentLink="Slider/Slider" prop="accessibilityLabel" />
+
+
+
+<span />
+
+<span />
+
+<span />

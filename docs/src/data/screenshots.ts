@@ -133,6 +133,12 @@ export const screenshots = {
     'single select': 'screenshots/segmented-button-single-select.png',
     multiselect: 'screenshots/segmented-button-multi-select.png',
   },
+  Slider: {
+    standard: 'screenshots/slider-standard.png',
+    centered: 'screenshots/slider-centered.png',
+    range: 'screenshots/slider-range.png',
+    vertical: 'screenshots/slider-vertical.png',
+  },
   Snackbar: 'screenshots/snackbar.gif',
   Surface: {
     elevated: 'screenshots/surface-elevated-full-width.png',

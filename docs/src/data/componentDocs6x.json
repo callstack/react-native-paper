@@ -10886,6 +10886,161 @@
         "src/components/SegmentedButtons/SegmentedButtons.tsx"
       ]
     },
+    "Slider/Slider": {
+      "filepath": "Slider/Slider.tsx",
+      "title": "Slider",
+      "description": "Material 3 slider for selecting a value from a range.\nSupports standard, centered, and range variants.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Slider } from 'react-native-paper';\n\nconst Example = () => {\n  const [value, setValue] = React.useState(50);\n  return <Slider value={value} onValueChange={setValue} />;\n};\n```\n\n`Slider.Centered` fills outwards from the midpoint, and `Slider.Range` takes a\n`[start, end]` tuple and shows two handles:\n\n```js\nconst [range, setRange] = React.useState([20, 75]);\nreturn <Slider.Range value={range} onValueChange={setRange} />;\n```\n\n## Variants and `value`\n`variant` decides the type of `value` and of the three change callbacks, so\nnone of them can appear in the props table below:\n\n| `variant` | `value` | callbacks receive |\n| --- | --- | --- |\n| `'standard'` (default) | `number` | `number` |\n| `'centered'` | `number` | `number` |\n| `'range'` | `[number, number]` | `[number, number]` |\n\n`value` is required; `onValueChange`, `onSlidingStart` and `onSlidingComplete`\nare optional. `Slider.Centered` and `Slider.Range` set `variant` for you, so\nyou never pass it directly with those.\n\n## Theming\nCustomize by overriding these `theme.colors` roles:\n- `primary`: active track and handles. Override per instance with `color`\n- `secondaryContainer`: inactive track\n- `onPrimary`: stop indicators sitting on the active track\n- `onSecondaryContainer`: stop indicators sitting on the inactive track\n- `inverseSurface` / `inverseOnSurface`: value indicator background / label\n- `onSurface`: every element while `disabled`, at 38% opacity, or 12% for the\n  inactive track",
+      "link": "slider",
+      "data": {
+        "description": "Material 3 slider for selecting a value from a range.\nSupports standard, centered, and range variants.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Slider } from 'react-native-paper';\n\nconst Example = () => {\n  const [value, setValue] = React.useState(50);\n  return <Slider value={value} onValueChange={setValue} />;\n};\n```\n\n`Slider.Centered` fills outwards from the midpoint, and `Slider.Range` takes a\n`[start, end]` tuple and shows two handles:\n\n```js\nconst [range, setRange] = React.useState([20, 75]);\nreturn <Slider.Range value={range} onValueChange={setRange} />;\n```\n\n## Variants and `value`\n`variant` decides the type of `value` and of the three change callbacks, so\nnone of them can appear in the props table below:\n\n| `variant` | `value` | callbacks receive |\n| --- | --- | --- |\n| `'standard'` (default) | `number` | `number` |\n| `'centered'` | `number` | `number` |\n| `'range'` | `[number, number]` | `[number, number]` |\n\n`value` is required; `onValueChange`, `onSlidingStart` and `onSlidingComplete`\nare optional. `Slider.Centered` and `Slider.Range` set `variant` for you, so\nyou never pass it directly with those.\n\n## Theming\nCustomize by overriding these `theme.colors` roles:\n- `primary`: active track and handles. Override per instance with `color`\n- `secondaryContainer`: inactive track\n- `onPrimary`: stop indicators sitting on the active track\n- `onSecondaryContainer`: stop indicators sitting on the inactive track\n- `inverseSurface` / `inverseOnSurface`: value indicator background / label\n- `onSurface`: every element while `disabled`, at 38% opacity, or 12% for the\n  inactive track",
+        "displayName": "Slider",
+        "methods": [],
+        "statics": [],
+        "props": {
+          "min": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Lowest selectable value. Defaults to `0`."
+          },
+          "max": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Highest selectable value. Defaults to `100`."
+          },
+          "step": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Interval the value snaps to while dragging. `0`, the default, slides\ncontinuously. Also sets the spacing of the intermediate stop indicators\ndrawn when `showStops` is enabled."
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "SliderSize"
+            },
+            "description": "Track and handle dimensions, from `xs` to `xl`. Defaults to `s`. Only `m`,\n`l` and `xl` are tall enough to show an `icon`."
+          },
+          "orientation": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'horizontal' | 'vertical'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'horizontal'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'vertical'"
+                }
+              ]
+            },
+            "description": "Axis the slider runs along. Defaults to `horizontal`. A `vertical` slider\ngrows upwards from `min` and needs a height from its container or `style`,\nsince it has no intrinsic length."
+          },
+          "disabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether the slider ignores touches and dims its colors. Defaults to `false`."
+          },
+          "icon": {
+            "required": false,
+            "tsType": {
+              "name": "IconSource"
+            },
+            "description": "Icon inset into the leading end of the active track. Ignored at sizes `xs`\nand `s`, which are too short to fit one, and while `disabled`."
+          },
+          "showStops": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether to mark each `step` with a stop indicator. Requires `step` to be\ngreater than `0`. The indicators at `min` and `max` are always drawn."
+          },
+          "showValueIndicator": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether to show a bubble above the handle with the current value while\ndragging. Defaults to `false`."
+          },
+          "valueIndicatorLabel": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(v: number) => string",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "v",
+                    "type": {
+                      "name": "number"
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "string"
+                }
+              }
+            },
+            "description": "Formats the text inside the value indicator. Receives the value being\ndragged and defaults to rounding it to a whole number."
+          },
+          "color": {
+            "required": false,
+            "tsType": {
+              "name": "ColorValue"
+            },
+            "description": "Overrides the active track and handle color for this instance, in place of\nthe theme's `primary` role."
+          },
+          "style": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": "Style for sizing and positioning the slider. Thickness comes from `size`,\nso only the length along the track is yours to set. A `height` when\n`orientation` is `vertical`, a `width` or `flex` when it is `horizontal`."
+          },
+          "testID": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "testID to be used on tests."
+          },
+          "theme": {
+            "required": false,
+            "tsType": {
+              "name": "ThemeProp"
+            },
+            "description": ""
+          },
+          "accessibilityLabel": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Label read out by the screen reader in place of the slider's value."
+          }
+        }
+      },
+      "type": "component",
+      "dependencies": [
+        "src/components/Slider/Slider.tsx"
+      ]
+    },
     "Snackbar": {
       "filepath": "Snackbar.tsx",
       "title": "Snackbar",
