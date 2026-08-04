@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
 
-import { act, fireEvent, render } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import Slider from '../Slider';
 import {
   activeSegment,
@@ -169,7 +169,7 @@ describe('rangeHandleForTouch', () => {
   });
 
   // Overlapping handles make every touch equidistant, so nearest-handle would
-  // always answer 'end' — and at max that handle is the one that cannot move.
+  // always answer 'end', and at max that handle is the one that cannot move.
   it('defers to the drag direction when the handles overlap', () => {
     expect(rangeHandleForTouch(0.5, 1, 1)).toBe('pending');
     expect(rangeHandleForTouch(0, 0, 0)).toBe('pending');
@@ -180,96 +180,78 @@ describe('rangeHandleForTouch', () => {
 // ---- Component render tests ----
 
 describe('Slider renders', () => {
-  it('standard slider', () => {
-    const tree = render(<Slider value={50} />).toJSON();
+  it('standard slider', async () => {
+    const tree = (await render(<Slider value={50} />)).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('each size', () => {
+  it('each size', async () => {
     for (const size of ['xs', 's', 'm', 'l', 'xl'] as const) {
-      const tree = render(<Slider value={50} size={size} />).toJSON();
+      const tree = (await render(<Slider value={50} size={size} />)).toJSON();
       expect(tree).toMatchSnapshot();
     }
   });
 
-  it('centered variant', () => {
-    const tree = render(<Slider variant="centered" value={75} />).toJSON();
+  it('centered variant', async () => {
+    const tree = (
+      await render(<Slider variant="centered" value={75} />)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('range variant', () => {
-    const tree = render(<Slider variant="range" value={[20, 80]} />).toJSON();
+  it('range variant', async () => {
+    const tree = (
+      await render(<Slider variant="range" value={[20, 80]} />)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('disabled standard', () => {
-    const tree = render(<Slider value={50} disabled />).toJSON();
+  it('disabled standard', async () => {
+    const tree = (await render(<Slider value={50} disabled />)).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('with stop indicators', () => {
-    const tree = render(<Slider value={50} step={25} showStops />).toJSON();
+  it('with stop indicators', async () => {
+    const tree = (
+      await render(<Slider value={50} step={25} showStops />)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('with value indicator', () => {
-    const tree = render(<Slider value={50} showValueIndicator />).toJSON();
+  it('with value indicator', async () => {
+    const tree = (
+      await render(<Slider value={50} showValueIndicator />)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('vertical orientation', () => {
-    const tree = render(<Slider value={50} orientation="vertical" />).toJSON();
+  it('vertical orientation', async () => {
+    const tree = (
+      await render(<Slider value={50} orientation="vertical" />)
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('Slider.Centered shorthand', () => {
-    const tree = render(<Slider.Centered value={30} />).toJSON();
+  it('Slider.Centered shorthand', async () => {
+    const tree = (await render(<Slider.Centered value={30} />)).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('Slider.Range shorthand', () => {
-    const tree = render(<Slider.Range value={[10, 90]} />).toJSON();
+  it('Slider.Range shorthand', async () => {
+    const tree = (await render(<Slider.Range value={[10, 90]} />)).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
 
 describe('Slider accessibility', () => {
-  it('has adjustable role with correct value', () => {
-    const { getByRole } = render(<Slider value={42} min={0} max={100} />);
-    const slider = getByRole('adjustable');
-    expect(slider.props.accessibilityValue).toEqual({
+  it('has adjustable role with correct value', async () => {
+    await render(<Slider value={42} min={0} max={100} />);
+
+    expect(screen.getByRole('adjustable')).toHaveAccessibilityValue({
       min: 0,
       max: 100,
       now: 42,
     });
-  });
-});
-
-// The PanResponder is built once and never rebuilt, so `disabled` has to be
-// read through a ref. These assert it is, in both directions.
-describe('Slider disabled', () => {
-  it('stops accepting gestures when disabled is toggled on after mount', () => {
-    const { getByRole, update } = render(<Slider value={50} />);
-    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
-      true
-    );
-
-    update(<Slider value={50} disabled />);
-    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
-      false
-    );
-  });
-
-  it('accepts gestures again when disabled is toggled back off', () => {
-    const { getByRole, update } = render(<Slider value={50} disabled />);
-    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
-      false
-    );
-
-    update(<Slider value={50} />);
-    expect(getByRole('adjustable').props.onStartShouldSetResponder()).toBe(
-      true
-    );
   });
 });
 
@@ -319,72 +301,132 @@ const TRACK_WIDTH = 300;
 
 // Nothing lays out in the test renderer, so the track measures 0 and every
 // touch maps to fraction 0. Fire the layout the component is waiting for.
-const layoutTrack = (r: ReturnType<typeof render>) => {
-  const nodes = r.container.findAll(
-    (n) => typeof n.props.onLayout === 'function'
-  );
-  fireEvent(nodes[nodes.length - 1], 'layout', {
+// Needs the slider rendered with `testID="slider"`.
+const layoutTrack = async () => {
+  await fireEvent(screen.getByTestId('slider-track'), 'layout', {
     nativeEvent: { layout: { width: TRACK_WIDTH, height: 44 } },
   });
 };
 
-const drag = (r: ReturnType<typeof render>, fromX: number, toX: number) => {
-  const view = r.getByRole('adjustable');
-  act(() => {
-    view.props.onResponderGrant(grantEvent(fromX));
-    view.props.onResponderMove(touchEvent(fromX, toX));
-  });
+// Each `fireEvent` has to be awaited: it settles its own `act()`, and the grant
+// has to finish before the move arrives or the drag direction is never seen.
+//
+// `fireEvent` also refuses to deliver to a view whose `onStartShouldSetResponder`
+// returns false, so a disabled slider drops these on the floor by itself.
+const drag = async (fromX: number, toX: number) => {
+  const slider = screen.getByRole('adjustable');
+  await fireEvent(slider, 'responderGrant', grantEvent(fromX));
+  await fireEvent(slider, 'responderMove', touchEvent(fromX, toX));
 };
 
-describe('Slider range gestures', () => {
-  const setup = (value: [number, number]) => {
+// The PanResponder is built once and never rebuilt, so `disabled` has to be
+// read through a ref. These assert it is, in both directions, by checking
+// whether a drag still reaches the value.
+describe('Slider disabled', () => {
+  it('stops accepting gestures when disabled is toggled on after mount', async () => {
     const onValueChange = jest.fn();
-    const r = render(
+    const view = await render(
+      <Slider value={50} testID="slider" onValueChange={onValueChange} />
+    );
+    await layoutTrack();
+
+    await drag(150, 79);
+    expect(onValueChange).toHaveBeenCalledWith(25);
+
+    onValueChange.mockClear();
+    await view.rerender(
+      <Slider
+        value={50}
+        disabled
+        testID="slider"
+        onValueChange={onValueChange}
+      />
+    );
+
+    await drag(150, 79);
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it('accepts gestures again when disabled is toggled back off', async () => {
+    const onValueChange = jest.fn();
+    const view = await render(
+      <Slider
+        value={50}
+        disabled
+        testID="slider"
+        onValueChange={onValueChange}
+      />
+    );
+    await layoutTrack();
+
+    await drag(150, 79);
+    expect(onValueChange).not.toHaveBeenCalled();
+
+    await view.rerender(
+      <Slider value={50} testID="slider" onValueChange={onValueChange} />
+    );
+
+    await drag(150, 79);
+    expect(onValueChange).toHaveBeenCalledWith(25);
+  });
+});
+
+describe('Slider range gestures', () => {
+  const setup = async (value: [number, number]) => {
+    const onValueChange = jest.fn();
+    await render(
       <Slider.Range
         value={value}
         min={0}
         max={100}
+        testID="slider"
         onValueChange={onValueChange}
       />
     );
-    layoutTrack(r);
-    return { r, onValueChange };
+    await layoutTrack();
+    return { onValueChange };
   };
 
   // Handles travel an inset range, so on a 300px track at size `s` (8dp insets)
   // the usable span is 284: fraction 0.25 is at pixel 79, 0.5 at 150, 0.75 at 221.
-  it('frees the start handle when both are pinned at max', () => {
-    const { r, onValueChange } = setup([100, 100]);
-    drag(r, 150, 79);
+  it('frees the start handle when both are pinned at max', async () => {
+    const { onValueChange } = await setup([100, 100]);
+    await drag(150, 79);
     expect(onValueChange).toHaveBeenCalledWith([25, 100]);
   });
 
-  it('frees the end handle when both are pinned at min', () => {
-    const { r, onValueChange } = setup([0, 0]);
-    drag(r, 150, 221);
+  it('frees the end handle when both are pinned at min', async () => {
+    const { onValueChange } = await setup([0, 0]);
+    await drag(150, 221);
     expect(onValueChange).toHaveBeenCalledWith([0, 75]);
   });
 
-  it('still drags the nearest handle when they are apart', () => {
-    const { r, onValueChange } = setup([20, 80]);
-    drag(r, 221, 150);
+  it('still drags the nearest handle when they are apart', async () => {
+    const { onValueChange } = await setup([20, 80]);
+    await drag(221, 150);
     expect(onValueChange).toHaveBeenCalledWith([20, 50]);
   });
 });
 
 describe('Slider gesture callbacks', () => {
-  it('calls the callback from the latest render, not the first', () => {
+  it('calls the callback from the latest render, not the first', async () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    const { getByRole, update } = render(
-      <Slider value={50} onSlidingStart={first} />
+    const view = await render(<Slider value={50} onSlidingStart={first} />);
+    await fireEvent(
+      screen.getByRole('adjustable'),
+      'responderGrant',
+      grantEvent(10)
     );
-    getByRole('adjustable').props.onResponderGrant(grantEvent(10));
     expect(first).toHaveBeenCalledTimes(1);
 
-    update(<Slider value={50} onSlidingStart={second} />);
-    getByRole('adjustable').props.onResponderGrant(grantEvent(10));
+    await view.rerender(<Slider value={50} onSlidingStart={second} />);
+    await fireEvent(
+      screen.getByRole('adjustable'),
+      'responderGrant',
+      grantEvent(10)
+    );
 
     expect(second).toHaveBeenCalledTimes(1);
     expect(first).toHaveBeenCalledTimes(1);

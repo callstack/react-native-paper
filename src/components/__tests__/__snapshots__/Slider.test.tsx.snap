@@ -38,6 +38,7 @@ exports[`Slider renders Slider.Centered shorthand 1`] = `
         "now": 30,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -212,6 +213,7 @@ exports[`Slider renders Slider.Range shorthand 1`] = `
         "now": 90,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -407,6 +409,7 @@ exports[`Slider renders centered variant 1`] = `
         "now": 75,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -581,6 +584,7 @@ exports[`Slider renders disabled standard 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -730,6 +734,7 @@ exports[`Slider renders each size 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -879,6 +884,7 @@ exports[`Slider renders each size 2`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1028,6 +1034,7 @@ exports[`Slider renders each size 3`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1177,6 +1184,7 @@ exports[`Slider renders each size 4`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1326,6 +1334,7 @@ exports[`Slider renders each size 5`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1475,6 +1484,7 @@ exports[`Slider renders range variant 1`] = `
         "now": 80,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1670,6 +1680,7 @@ exports[`Slider renders standard slider 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1819,6 +1830,7 @@ exports[`Slider renders vertical orientation 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -1968,6 +1980,7 @@ exports[`Slider renders with stop indicators 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}
@@ -2117,6 +2130,7 @@ exports[`Slider renders with value indicator 1`] = `
         "now": 50,
       }
     }
+    accessible={true}
     onAccessibilityAction={[Function]}
     onMoveShouldSetResponder={[Function]}
     onMoveShouldSetResponderCapture={[Function]}

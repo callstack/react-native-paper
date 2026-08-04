@@ -122,7 +122,7 @@ export const HANDLE_DIRECTION_THRESHOLD = 1;
  * Picks the handle a range gesture should drag.
  *
  * While the handles are apart it is simply the nearest one. Once they sit on the
- * same value there is no nearest handle — every touch is equidistant — and
+ * same value there is no nearest handle (every touch is equidistant), and
  * guessing deadlocks the gesture: with both at `max`, the end handle is floored
  * by the start handle and cannot move, while the start handle can never be
  * picked. So overlap defers to 'pending', and the drag direction decides.

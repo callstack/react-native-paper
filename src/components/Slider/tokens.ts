@@ -67,7 +67,7 @@ export const SIZE_SPECS: Record<SliderSize, SizeSpec> = {
 } as const;
 
 export const STOP_SIZE = 4;
-/** md.comp.slider active handle leading/trailing space — the gap either side of the handle. */
+/** md.comp.slider active handle leading/trailing space: the gap either side of the handle. */
 export const BETWEEN_HANDLE_SPACE = 6;
 export const INNER_CORNER_RADIUS = 2;
 /** Label container: 48dp wide by 44dp tall, so not a square. */

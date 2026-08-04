@@ -46,24 +46,89 @@ import Icon, { type IconSource } from '../Icon';
 import Text from '../Typography/Text';
 
 type BaseProps = {
+  /**
+   * Lowest selectable value. Defaults to `0`.
+   */
   min?: number;
+  /**
+   * Highest selectable value. Defaults to `100`.
+   */
   max?: number;
+  /**
+   * Interval the value snaps to while dragging. `0`, the default, slides
+   * continuously. Also sets the spacing of the intermediate stop indicators
+   * drawn when `showStops` is enabled.
+   */
   step?: number;
+  /**
+   * Track and handle dimensions, from `xs` to `xl`. Defaults to `s`. Only `m`,
+   * `l` and `xl` are tall enough to show an `icon`.
+   */
   size?: SliderSize;
+  /**
+   * Axis the slider runs along. Defaults to `horizontal`. A `vertical` slider
+   * grows upwards from `min` and needs a height from its container or `style`,
+   * since it has no intrinsic length.
+   */
   orientation?: 'horizontal' | 'vertical';
+  /**
+   * Whether the slider ignores touches and dims its colors. Defaults to `false`.
+   */
   disabled?: boolean;
+  /**
+   * Icon inset into the leading end of the active track. Ignored at sizes `xs`
+   * and `s`, which are too short to fit one, and while `disabled`.
+   */
   icon?: IconSource;
+  /**
+   * Whether to mark each `step` with a stop indicator. Requires `step` to be
+   * greater than `0`. The indicators at `min` and `max` are always drawn.
+   */
   showStops?: boolean;
+  /**
+   * Whether to show a bubble above the handle with the current value while
+   * dragging. Defaults to `false`.
+   */
   showValueIndicator?: boolean;
+  /**
+   * Formats the text inside the value indicator. Receives the value being
+   * dragged and defaults to rounding it to a whole number.
+   */
   valueIndicatorLabel?: (v: number) => string;
+  /**
+   * Overrides the active track and handle color for this instance, in place of
+   * the theme's `primary` role.
+   */
   color?: ColorValue;
+  /**
+   * Style for sizing and positioning the slider. Thickness comes from `size`,
+   * so only the length along the track is yours to set. A `height` when
+   * `orientation` is `vertical`, a `width` or `flex` when it is `horizontal`.
+   */
   style?: StyleProp<ViewStyle>;
+  /**
+   * testID to be used on tests.
+   */
   testID?: string;
+  /**
+   * @optional
+   */
   theme?: ThemeProp;
+  /**
+   * Label read out by the screen reader in place of the slider's value.
+   */
   accessibilityLabel?: string;
 };
 
-type StandardProps = BaseProps & {
+/**
+ * `value` and the change callbacks depend on `variant`, so they live in a
+ * discriminated union intersected onto the shared props. The same shape
+ * `SegmentedButtons` uses for its conditional `value`. Keeping the union out of
+ * the top level lets the docs generator resolve the shared half; the props in
+ * here are documented in the component's JSDoc instead, since the generated
+ * table cannot express them.
+ */
+type StandardValue = {
   variant?: 'standard';
   value: number;
   onValueChange?: (v: number) => void;
@@ -71,7 +136,7 @@ type StandardProps = BaseProps & {
   onSlidingComplete?: (v: number) => void;
 };
 
-type CenteredProps = BaseProps & {
+type CenteredValue = {
   variant: 'centered';
   value: number;
   onValueChange?: (v: number) => void;
@@ -79,7 +144,7 @@ type CenteredProps = BaseProps & {
   onSlidingComplete?: (v: number) => void;
 };
 
-type RangeProps = BaseProps & {
+type RangeValue = {
   variant: 'range';
   value: [number, number];
   onValueChange?: (v: [number, number]) => void;
@@ -87,7 +152,9 @@ type RangeProps = BaseProps & {
   onSlidingComplete?: (v: [number, number]) => void;
 };
 
-export type Props = StandardProps | CenteredProps | RangeProps;
+type ConditionalValue = StandardValue | CenteredValue | RangeValue;
+
+export type Props = BaseProps & ConditionalValue;
 
 /**
  * Material 3 slider for selecting a value from a range.
@@ -103,6 +170,38 @@ export type Props = StandardProps | CenteredProps | RangeProps;
  *   return <Slider value={value} onValueChange={setValue} />;
  * };
  * ```
+ *
+ * `Slider.Centered` fills outwards from the midpoint, and `Slider.Range` takes a
+ * `[start, end]` tuple and shows two handles:
+ *
+ * ```js
+ * const [range, setRange] = React.useState([20, 75]);
+ * return <Slider.Range value={range} onValueChange={setRange} />;
+ * ```
+ *
+ * ## Variants and `value`
+ * `variant` decides the type of `value` and of the three change callbacks, so
+ * none of them can appear in the props table below:
+ *
+ * | `variant` | `value` | callbacks receive |
+ * | --- | --- | --- |
+ * | `'standard'` (default) | `number` | `number` |
+ * | `'centered'` | `number` | `number` |
+ * | `'range'` | `[number, number]` | `[number, number]` |
+ *
+ * `value` is required; `onValueChange`, `onSlidingStart` and `onSlidingComplete`
+ * are optional. `Slider.Centered` and `Slider.Range` set `variant` for you, so
+ * you never pass it directly with those.
+ *
+ * ## Theming
+ * Customize by overriding these `theme.colors` roles:
+ * - `primary`: active track and handles. Override per instance with `color`
+ * - `secondaryContainer`: inactive track
+ * - `onPrimary`: stop indicators sitting on the active track
+ * - `onSecondaryContainer`: stop indicators sitting on the inactive track
+ * - `inverseSurface` / `inverseOnSurface`: value indicator background / label
+ * - `onSurface`: every element while `disabled`, at 38% opacity, or 12% for the
+ *   inactive track
  */
 const Slider = (props: Props) => {
   const {
@@ -159,9 +258,9 @@ const Slider = (props: Props) => {
   );
 
   const initialEndValue = isRange
-    ? (props as RangeProps).value[1]
-    : (props as StandardProps | CenteredProps).value;
-  const initialStartValue = isRange ? (props as RangeProps).value[0] : min;
+    ? (props as RangeValue).value[1]
+    : (props as StandardValue | CenteredValue).value;
+  const initialStartValue = isRange ? (props as RangeValue).value[0] : min;
 
   const [endValue, setEndValue] = React.useState(initialEndValue);
   const [startValue, setStartValue] = React.useState(initialStartValue);
@@ -170,11 +269,11 @@ const Slider = (props: Props) => {
 
   React.useEffect(() => {
     if (isRange) {
-      const [s, e] = (props as RangeProps).value;
+      const [s, e] = (props as RangeValue).value;
       setStartValue(s);
       setEndValue(e);
     } else {
-      const v = (props as StandardProps | CenteredProps).value;
+      const v = (props as StandardValue | CenteredValue).value;
       setEndValue(v);
     }
   }, [props, isRange]);
@@ -226,7 +325,7 @@ const Slider = (props: Props) => {
   // change it.
   //
   // The corner radii put each end of the range at the centre of its rounded cap,
-  // which is where the end stops are drawn — so a handle at min or max lands on
+  // which is where the end stops are drawn so that a handle at min or max lands on
   // its own stop instead of overshooting it by the radius.
   const handleInsetStart = spec.activeLeadingRadius;
   const handleInsetEnd = spec.inactiveTrailingRadius;
@@ -524,9 +623,9 @@ const Slider = (props: Props) => {
 
         const p = propsRef.current;
         if (vt === 'range') {
-          (p as RangeProps).onSlidingStart?.([sv, ev]);
+          (p as RangeValue).onSlidingStart?.([sv, ev]);
         } else {
-          (p as StandardProps | CenteredProps).onSlidingStart?.(ev);
+          (p as StandardValue | CenteredValue).onSlidingStart?.(ev);
         }
       },
 
@@ -598,19 +697,19 @@ const Slider = (props: Props) => {
             startFractionSV.value = valueToFraction(clamped, mn, mx);
             setStartValue(clamped);
             setIndicatorDisplayValue(clamped);
-            (p as RangeProps).onValueChange?.([clamped, ev]);
+            (p as RangeValue).onValueChange?.([clamped, ev]);
           } else {
             const clamped = Math.max(snapped, sv);
             endFractionSV.value = valueToFraction(clamped, mn, mx);
             setEndValue(clamped);
             setIndicatorDisplayValue(clamped);
-            (p as RangeProps).onValueChange?.([sv, clamped]);
+            (p as RangeValue).onValueChange?.([sv, clamped]);
           }
         } else {
           endFractionSV.value = displayFraction;
           setEndValue(snapped);
           setIndicatorDisplayValue(snapped);
-          (p as StandardProps | CenteredProps).onValueChange?.(snapped);
+          (p as StandardValue | CenteredValue).onValueChange?.(snapped);
         }
       },
 
@@ -635,9 +734,9 @@ const Slider = (props: Props) => {
 
         const p = propsRef.current;
         if (vt === 'range') {
-          (p as RangeProps).onSlidingComplete?.([sv, ev]);
+          (p as RangeValue).onSlidingComplete?.([sv, ev]);
         } else {
-          (p as StandardProps | CenteredProps).onSlidingComplete?.(ev);
+          (p as StandardValue | CenteredValue).onSlidingComplete?.(ev);
         }
       },
 
@@ -666,7 +765,7 @@ const Slider = (props: Props) => {
     setEndValue(next);
     endFractionSV.value = valueToFraction(next, min, max);
     if (!isRange) {
-      (props as StandardProps | CenteredProps).onValueChange?.(next);
+      (props as StandardValue | CenteredValue).onValueChange?.(next);
     }
   };
 
@@ -677,7 +776,7 @@ const Slider = (props: Props) => {
     setEndValue(next);
     endFractionSV.value = valueToFraction(next, min, max);
     if (!isRange) {
-      (props as StandardProps | CenteredProps).onValueChange?.(next);
+      (props as StandardValue | CenteredValue).onValueChange?.(next);
     }
   };
 
@@ -698,14 +797,14 @@ const Slider = (props: Props) => {
     variant === 'centered'
       ? Math.min(0.5, endFraction)
       : variant === 'range'
-      ? Math.min(startFraction, endFraction)
-      : 0;
+        ? Math.min(startFraction, endFraction)
+        : 0;
   const activeTrail =
     variant === 'centered'
       ? Math.max(0.5, endFraction)
       : variant === 'range'
-      ? Math.max(startFraction, endFraction)
-      : endFraction;
+        ? Math.max(startFraction, endFraction)
+        : endFraction;
 
   const indicatorText = valueIndicatorLabel
     ? valueIndicatorLabel(indicatorDisplayValue)
@@ -810,6 +909,9 @@ const Slider = (props: Props) => {
       <View
         {...panResponder.panHandlers}
         style={StyleSheet.absoluteFill}
+        // A bare `View` is not an accessibility element on its own, so the role,
+        // value and actions below would never reach a screen reader without this.
+        accessible
         accessibilityRole="adjustable"
         accessibilityValue={{ min, max, now: Math.round(endValue) }}
         accessibilityActions={[
@@ -832,6 +934,7 @@ const Slider = (props: Props) => {
         style={trackContainerStyle}
         onLayout={onLayout}
         pointerEvents="none"
+        testID={testID ? `${testID}-track` : undefined}
       >
         {/* Left inactive track segment (centered/range only) */}
         {variant !== 'standard' && (
@@ -893,8 +996,8 @@ const Slider = (props: Props) => {
                   backgroundColor: disabled
                     ? colors.disabledContent
                     : isActive
-                    ? colors.stopOnActive
-                    : colors.stopOnInactive,
+                      ? colors.stopOnActive
+                      : colors.stopOnInactive,
                   opacity: contentOpacity,
                 },
               ]}
