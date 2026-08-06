@@ -2,17 +2,20 @@ import * as React from 'react';
 
 import type { Theme } from 'react-native-paper';
 
-export const PreferencesContext = React.createContext<{
+export type Preferences = {
   toggleTheme: () => void;
   toggleRtl: () => void;
-  toggleCollapsed: () => void;
   toggleCustomFont: () => void;
+  togglePreferences: () => void;
   toggleRippleEffect: () => void;
   toggleShouldUseDynamicTheme?: () => void;
+  resetPreferences: () => void;
   theme: Theme;
   rtl: boolean;
-  collapsed: boolean;
   customFontLoaded: boolean;
+  preferencesVisible: boolean;
   rippleEffectEnabled: boolean;
   shouldUseDynamicTheme?: boolean;
-} | null>(null);
+};
+
+export const PreferencesContext = React.createContext<Preferences | null>(null);
