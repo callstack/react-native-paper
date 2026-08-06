@@ -37,10 +37,10 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   );
 
   return (
-    <Appbar.Header elevated>
+    <Appbar.Header>
       {back ? backAction : isIOS ? searchAction : null}
       <Appbar.Content title={options.title || route.name} />
-      {!isIOS && searchAction}
+      {!isIOS && !back && searchAction}
       <Appbar.Action icon="cog" onPress={togglePreferences} />
     </Appbar.Header>
   );
@@ -69,6 +69,7 @@ const Root = createNativeStackNavigator({
       screen: ExampleList,
       options: {
         title: 'Examples',
+        headerShown: false,
       },
       linking: '',
     }),

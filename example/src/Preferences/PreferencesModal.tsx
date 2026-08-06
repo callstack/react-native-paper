@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   resetButton: {
     marginHorizontal: 28,
-    marginTop: 12,
+    marginVertical: 12,
   },
   annotation: {
     marginHorizontal: 24,
