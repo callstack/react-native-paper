@@ -55,7 +55,27 @@ export const ListRowContext = React.createContext<{ verticalPadding: number }>({
   verticalPadding: ListTokens.verticalPadding,
 });
 
-export const getAccordionColors = ({ theme }: { theme: InternalTheme }) => ({
-  titleTextColor: theme.colors[ListTokens.headlineColor],
-  descriptionColor: theme.colors[ListTokens.supportingTextColor],
-});
+export const getAccordionColors = ({
+  theme,
+  selected,
+}: {
+  theme: InternalTheme;
+  selected?: boolean;
+}) => {
+  const selectedContentColor = theme.colors[ListTokens.selectedContentColor];
+
+  return {
+    titleTextColor: selected
+      ? selectedContentColor
+      : theme.colors[ListTokens.headlineColor],
+    descriptionColor: selected
+      ? selectedContentColor
+      : theme.colors[ListTokens.supportingTextColor],
+    leadingIconColor: selected
+      ? selectedContentColor
+      : theme.colors[ListTokens.leadingIconColor],
+    trailingIconColor: selected
+      ? selectedContentColor
+      : theme.colors[ListTokens.expandTrailingIconColor],
+  };
+};

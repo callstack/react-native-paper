@@ -1,10 +1,34 @@
+import { useState } from 'react';
+
 import { List, Divider, Checkbox, Avatar, Switch } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
+const SelectableSection = () => {
+  const [selected, setSelected] = useState(0);
+
+  return (
+    <List.Section title="Selected">
+      {[0, 1, 2].map((index) => (
+        <List.Item
+          key={index}
+          title="Headline"
+          description="Supporting text"
+          selected={index === selected}
+          onPress={() => setSelected(index)}
+          left={(props) => <List.Icon {...props} icon="account-outline" />}
+        />
+      ))}
+      <Divider />
+    </List.Section>
+  );
+};
+
 const ListItemExample = () => {
   return (
     <ScreenWrapper>
+      <SelectableSection />
+
       <List.Section title="Text-only">
         <List.Item title="Headline" />
         <List.Item title="Headline" description="Supporting text" />

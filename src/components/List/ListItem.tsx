@@ -58,6 +58,10 @@ export type Props = Omit<
    */
   right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
   /**
+   * Whether to highlight the list item as selected.
+   */
+  selected?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -148,6 +152,7 @@ const ListItem = ({
   right,
   title,
   description,
+  selected,
   onPress,
   theme: themeOverrides,
   style,
@@ -173,6 +178,13 @@ const ListItem = ({
     const { nativeEvent } = event;
     setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
   };
+
+  const backgroundColor = selected
+    ? theme.colors[ListTokens.selectedContainerColor]
+    : undefined;
+  const titleColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.headlineColor];
 
   const renderDescription = (
     descriptionColor: ColorValue,
@@ -202,8 +214,6 @@ const ListItem = ({
   };
 
   const renderTitle = () => {
-    const titleColor = theme.colors[ListTokens.headlineColor];
-
     return typeof title === 'function' ? (
       title({
         selectable: false,
@@ -226,7 +236,9 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = theme.colors[ListTokens.supportingTextColor];
+  const descriptionColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.supportingTextColor];
 
   const rowContext = React.useMemo(
     () => ({
@@ -246,16 +258,20 @@ const ListItem = ({
           styles.container,
           description ? styles.containerTwoLine : styles.containerOneLine,
           isDescriptionMultiline && styles.containerThreeLine,
+          { backgroundColor },
           style,
         ]}
         onPress={onPress}
+        aria-selected={selected}
         theme={theme}
         testID={testID}
       >
         <View style={[styles.row, containerStyle]}>
           {left
             ? left({
-                color: theme.colors[ListTokens.leadingIconColor],
+                color: selected
+                  ? theme.colors[ListTokens.selectedContentColor]
+                  : theme.colors[ListTokens.leadingIconColor],
                 style: getLeftStyles(isDescriptionMultiline, description),
               })
             : null}
@@ -271,7 +287,9 @@ const ListItem = ({
           </View>
           {right
             ? right({
-                color: theme.colors[ListTokens.trailingIconColor],
+                color: selected
+                  ? theme.colors[ListTokens.selectedContentColor]
+                  : theme.colors[ListTokens.trailingIconColor],
                 style: getRightStyles(isDescriptionMultiline, description),
               })
             : null}
