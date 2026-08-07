@@ -124,10 +124,14 @@ const Text = ({
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
       //              </Chip>
-      // Solution:  To address the following scenario, the code below overrides the
-      //            parent's style with children's style:
+      // Solution:  To address the following scenario, the code below lets the
+      //            children's style win over the parent's, while keeping the
+      //            parent's `variant` as the base. Dropping the base instead
+      //            would leave a parent wrapping an unstyled `Text` with no
+      //            typography at all, since there is no child style to take over
+      //            from it.
       if (!props.variant) {
-        textStyle = [style, props.style];
+        textStyle = [font, style, props.style];
       }
     }
 

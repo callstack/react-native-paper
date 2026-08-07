@@ -116,6 +116,34 @@ it("nested text without variant, but with styles, should override parent's style
   expect(screen.getByTestId('parent-text')).toHaveStyle(customStyle);
 });
 
+it("nested unstyled text should leave the parent's variant intact", async () => {
+  await render(
+    <Text testID="parent-text" variant="displayLarge">
+      <Text>Test</Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('parent-text')).toHaveStyle(
+    LightTheme.fonts.displayLarge
+  );
+});
+
+it("nested styled text should only override the parent's clashing properties", async () => {
+  await render(
+    <Text testID="parent-text" variant="displayLarge">
+      <Text style={{ fontSize: 50 }}>Test</Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('parent-text')).toHaveStyle({
+    // The child wins where the two overlap,
+    fontSize: 50,
+    // but the rest of the parent's variant survives.
+    letterSpacing: LightTheme.fonts.displayLarge.letterSpacing,
+    lineHeight: LightTheme.fonts.displayLarge.lineHeight,
+  });
+});
+
 it('throws when custom variant not provided', async () => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
 
