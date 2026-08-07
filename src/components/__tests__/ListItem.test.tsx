@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
+import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import Chip from '../Chip/Chip';
@@ -344,4 +345,42 @@ it('applies the theme override to title and description typography', async () =>
 
   expect(screen.getByText('First Item')).toHaveStyle({ fontSize: 99 });
   expect(screen.getByText('Item description')).toHaveStyle({ fontSize: 77 });
+});
+
+it('renders an unselected list item on surface colors', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('First Item')).toHaveStyle({
+    color: getTheme().colors.onSurface,
+  });
+  expect(screen.getByText('Item description')).toHaveStyle({
+    color: getTheme().colors.onSurfaceVariant,
+  });
+});
+
+it('renders a selected list item on the primary container', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      selected
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    backgroundColor: getTheme().colors.primaryContainer,
+  });
+  expect(screen.getByText('First Item')).toHaveStyle({
+    color: getTheme().colors.onPrimaryContainer,
+  });
+  expect(screen.getByText('Item description')).toHaveStyle({
+    color: getTheme().colors.onPrimaryContainer,
+  });
 });

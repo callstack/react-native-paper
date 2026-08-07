@@ -48,6 +48,10 @@ export type Props = {
    */
   expanded?: boolean;
   /**
+   * Whether to highlight the accordion as selected.
+   */
+  selected?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -191,6 +195,7 @@ const ListAccordion = ({
   onLongPress,
   delayLongPress,
   expanded: expandedProp,
+  selected,
   'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
@@ -234,7 +239,12 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor } = getAccordionColors({ theme });
+  const {
+    descriptionColor,
+    titleTextColor,
+    leadingIconColor,
+    trailingIconColor,
+  } = getAccordionColors({ theme, selected });
 
   const handlePress =
     groupContext && id !== undefined
@@ -253,7 +263,11 @@ const ListAccordion = ({
   return (
     <View>
       <View
-        style={{ backgroundColor: theme.colors[ListTokens.containerColor] }}
+        style={{
+          backgroundColor: selected
+            ? theme.colors[ListTokens.selectedContainerColor]
+            : theme.colors[ListTokens.containerColor],
+        }}
       >
         <ListRowContext.Provider value={rowContext}>
           <TouchableRipple
@@ -268,6 +282,7 @@ const ListAccordion = ({
             delayLongPress={delayLongPress}
             role="button"
             aria-expanded={isExpanded}
+            aria-selected={selected}
             aria-label={ariaLabel}
             testID={testID}
             theme={theme}
@@ -281,7 +296,7 @@ const ListAccordion = ({
             >
               {left
                 ? left({
-                    color: theme.colors[ListTokens.leadingIconColor],
+                    color: leadingIconColor,
                     style: getLeftStyles(isDescriptionMultiline, description),
                   })
                 : null}
@@ -328,7 +343,7 @@ const ListAccordion = ({
                 ) : (
                   <MaterialCommunityIcon
                     name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                    color={theme.colors[ListTokens.expandTrailingIconColor]}
+                    color={trailingIconColor}
                     size={24}
                     direction={direction}
                   />

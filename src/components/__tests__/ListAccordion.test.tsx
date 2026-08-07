@@ -217,4 +217,19 @@ describe('ListAccordion', () => {
       fontSize: 77,
     });
   });
+
+  it('renders a selected accordion on the primary container', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" description="Supporting" selected>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onPrimaryContainer,
+    });
+    expect(screen.getByText('Supporting')).toHaveStyle({
+      color: getTheme().colors.onPrimaryContainer,
+    });
+  });
 });
