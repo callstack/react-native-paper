@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { EllipsizeProp, InternalTheme, ThemeProp } from '../../types';
+import { ListTokens } from './tokens';
+import type { EllipsizeProp, ThemeProp } from '../../types';
 
 type Description =
   | React.ReactNode
@@ -26,82 +26,21 @@ export type Style = {
   alignSelf?: 'flex-start' | 'center';
 };
 
-const stylesV3Left = {
-  marginRight: 0,
-  marginLeft: 16,
-};
-
-const stylesV3Right = {
-  marginLeft: 16,
-};
-
-export const getLeftStyles = (
+const getAccessoryStyles = (
   alignToTop: boolean,
   description: Description
-) => {
-  const stylesV3: Style = {
-    ...stylesV3Left,
+): Style => {
+  const style: Style = {
+    marginLeft: ListTokens.leadingSpace,
+    marginRight: 0,
     alignSelf: alignToTop ? 'flex-start' : 'center',
   };
 
-  if (!description) {
-    return {
-      ...styles.iconMarginLeft,
-      ...styles.marginVerticalNone,
-      ...stylesV3,
-    };
-  }
-
-  return {
-    ...styles.iconMarginLeft,
-    ...stylesV3,
-  };
+  return description ? style : { ...style, marginVertical: 0 };
 };
 
-export const getRightStyles = (
-  alignToTop: boolean,
-  description: Description
-) => {
-  const stylesV3: Style = {
-    ...stylesV3Right,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
-  };
+export const getLeftStyles = (alignToTop: boolean, description: Description) =>
+  getAccessoryStyles(alignToTop, description);
 
-  if (!description) {
-    return {
-      ...styles.iconMarginRight,
-      ...styles.marginVerticalNone,
-      ...stylesV3,
-    };
-  }
-
-  return {
-    ...styles.iconMarginRight,
-    ...stylesV3,
-  };
-};
-
-const styles = StyleSheet.create({
-  marginVerticalNone: { marginVertical: 0 },
-  iconMarginLeft: { marginLeft: 0, marginRight: 16 },
-  iconMarginRight: { marginRight: 0 },
-});
-
-export const getAccordionColors = ({
-  theme,
-  isExpanded,
-}: {
-  theme: InternalTheme;
-  isExpanded?: boolean;
-}) => {
-  const titleColor = theme.colors.onSurface;
-
-  const descriptionColor = theme.colors.onSurfaceVariant;
-
-  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
-
-  return {
-    descriptionColor,
-    titleTextColor,
-  };
-};
+export const getRightStyles = (alignToTop: boolean, description: Description) =>
+  getAccessoryStyles(alignToTop, description);

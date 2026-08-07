@@ -489,7 +489,9 @@ exports[`renders list section with custom title style 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -502,7 +504,6 @@ exports[`renders list section with custom title style 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -582,21 +583,22 @@ exports[`renders list section with custom title style 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -642,7 +644,9 @@ exports[`renders list section with custom title style 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -655,7 +659,6 @@ exports[`renders list section with custom title style 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -735,21 +738,22 @@ exports[`renders list section with custom title style 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1249,7 +1253,9 @@ exports[`renders list section with subheader 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -1262,7 +1268,6 @@ exports[`renders list section with subheader 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -1342,21 +1347,22 @@ exports[`renders list section with subheader 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1402,7 +1408,9 @@ exports[`renders list section with subheader 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -1415,7 +1423,6 @@ exports[`renders list section with subheader 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -1495,21 +1502,22 @@ exports[`renders list section with subheader 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1969,7 +1977,9 @@ exports[`renders list section without subheader 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -1982,7 +1992,6 @@ exports[`renders list section without subheader 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -2062,21 +2071,22 @@ exports[`renders list section without subheader 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -2122,7 +2132,9 @@ exports[`renders list section without subheader 1`] = `
         [
           {
             "paddingRight": 24,
-            "paddingVertical": 8,
+          },
+          {
+            "paddingVertical": 16,
           },
           undefined,
         ],
@@ -2135,7 +2147,6 @@ exports[`renders list section without subheader 1`] = `
         [
           {
             "flexDirection": "row",
-            "marginVertical": 6,
             "width": "100%",
           },
           undefined,
@@ -2215,21 +2226,22 @@ exports[`renders list section without subheader 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
                 "writingDirection": "ltr",
               },
               [
                 {
+                  "fontFamily": "System",
                   "fontSize": 16,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 24,
                 },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
+                  undefined,
+                ],
               ],
             ]
           }

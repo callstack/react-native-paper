@@ -13,8 +13,9 @@ import type {
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import { ListTokens } from './tokens';
 import type { ListChildProps, Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
+import { getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -232,10 +233,8 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor } = getAccordionColors({
-    theme,
-    isExpanded,
-  });
+  const titleTextColor = theme.colors[ListTokens.headlineColor];
+  const descriptionColor = theme.colors[ListTokens.supportingTextColor];
 
   const handlePress =
     groupContext && id !== undefined
@@ -243,9 +242,15 @@ const ListAccordion = ({
       : handlePressAction;
   return (
     <View>
-      <View style={{ backgroundColor: theme?.colors?.background }}>
+      <View
+        style={{ backgroundColor: theme.colors[ListTokens.containerColor] }}
+      >
         <TouchableRipple
-          style={[styles.container, style]}
+          style={[
+            styles.container,
+            description ? styles.containerTwoLine : styles.containerOneLine,
+            style,
+          ]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -264,16 +269,16 @@ const ListAccordion = ({
           >
             {left
               ? left({
-                  color: isExpanded ? theme.colors?.primary : descriptionColor,
+                  color: theme.colors[ListTokens.leadingIconColor],
                   style: getLeftStyles(alignToTop, description),
                 })
               : null}
             <View style={[styles.contentItem, styles.content, contentStyle]}>
               <Text
+                variant="bodyLarge"
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
                 style={[
-                  styles.title,
                   {
                     color: titleTextColor,
                   },
@@ -285,10 +290,10 @@ const ListAccordion = ({
               </Text>
               {description ? (
                 <Text
+                  variant="bodyMedium"
                   selectable={false}
                   numberOfLines={descriptionNumberOfLines}
                   style={[
-                    styles.description,
                     {
                       color: descriptionColor,
                     },
@@ -301,12 +306,7 @@ const ListAccordion = ({
                 </Text>
               ) : null}
             </View>
-            <View
-              style={[
-                styles.trailingItem,
-                description ? styles.multiline : undefined,
-              ]}
-            >
+            <View style={styles.trailingItem}>
               {right ? (
                 right({
                   isExpanded: isExpanded,
@@ -314,7 +314,7 @@ const ListAccordion = ({
               ) : (
                 <MaterialCommunityIcon
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={descriptionColor}
+                  color={theme.colors[ListTokens.trailingIconColor]}
                   size={24}
                   direction={direction}
                 />
@@ -349,29 +349,22 @@ ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingRight: 24,
+    paddingRight: ListTokens.trailingSpace,
+  },
+  containerOneLine: {
+    paddingVertical: ListTokens.oneLineVerticalPadding,
+  },
+  containerTwoLine: {
+    paddingVertical: ListTokens.twoLineVerticalPadding,
   },
   row: {
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  multiline: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   contentItem: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   trailingItem: {
-    marginVertical: 6,
+    alignSelf: 'center',
     paddingLeft: 8,
   },
   child: {
