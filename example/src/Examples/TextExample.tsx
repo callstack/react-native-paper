@@ -85,6 +85,24 @@ const TextExample = () => {
           Body Small
         </Text>
 
+        <Text style={styles.heading} variant="titleMedium">
+          Nested text
+        </Text>
+
+        <Text style={styles.text} variant="headlineSmall">
+          <Text>Unstyled child, stays Headline Small</Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          <Text style={styles.nestedChild}>
+            Styled child, italic but still Headline Small
+          </Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          <Text variant="bodySmall">
+            Child variant wins, renders Body Small
+          </Text>
+        </Text>
+
         <PaperProvider theme={theme}>
           <Text style={styles.text} variant="customVariant">
             Custom Variant
@@ -103,6 +121,13 @@ const styles = StyleSheet.create({
   },
   text: {
     marginVertical: 4,
+  },
+  heading: {
+    marginTop: 24,
+    marginBottom: 4,
+  },
+  nestedChild: {
+    fontStyle: 'italic',
   },
 });
 
