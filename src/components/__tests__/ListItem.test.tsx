@@ -308,6 +308,50 @@ it('keeps a 64dp leading video on the same height once the description wraps', a
   });
 });
 
+it('colors a leading List.Icon from the list item context', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<ListIcon icon="folder" />}
+      testID={testID}
+    />
+  );
+
+  expect(
+    screen.getByText('folder', { includeHiddenElements: true })
+  ).toHaveStyle({ color: getTheme().colors.onSurfaceVariant });
+});
+
+it('renders the trailing slot', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      trailing={<Text>Trailing</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Trailing')).toBeOnTheScreen();
+});
+
+it('prefers the typed slots over the left and right render props', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<Text>Leading slot</Text>}
+      trailing={<Text>Trailing slot</Text>}
+      left={() => <Text>Left render prop</Text>}
+      right={() => <Text>Right render prop</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Leading slot')).toBeOnTheScreen();
+  expect(screen.getByText('Trailing slot')).toBeOnTheScreen();
+  expect(screen.queryByText('Left render prop')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Right render prop')).not.toBeOnTheScreen();
+});
+
 it('top aligns the accessories once the description wraps', async () => {
   await render(
     <ListItem

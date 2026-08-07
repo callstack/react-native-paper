@@ -16,7 +16,7 @@ const SelectableSection = () => {
           description="Supporting text"
           selected={index === selected}
           onPress={() => setSelected(index)}
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
+          leading={<List.Icon icon="account-outline" />}
         />
       ))}
       <Divider />

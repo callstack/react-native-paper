@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
+import { ListItemContext } from './ListItemContext';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon from '../Icon';
@@ -50,10 +52,12 @@ const ListIcon = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const listItem = React.useContext(ListItemContext);
+  const color = iconColor ?? listItem?.color;
 
   return (
     <View style={[styles.item, style]} pointerEvents="box-none">
-      <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
+      <Icon source={icon} size={ICON_SIZE} color={color} theme={theme} />
     </View>
   );
 };

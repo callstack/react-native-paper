@@ -10,6 +10,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListItemContext } from './ListItemContext';
 import { ListTokens } from './tokens';
 import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
@@ -45,6 +46,14 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Description text for the list item or callback which returns a React element to display the description.
    */
   description?: Description;
+  /**
+   * Element to display in the leading slot. Takes precedence over `left`.
+   */
+  leading?: React.ReactNode;
+  /**
+   * Element to display in the trailing slot. Takes precedence over `right`.
+   */
+  trailing?: React.ReactNode;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -146,6 +155,8 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 const ListItem = ({
   left,
   right,
+  leading,
+  trailing,
   title,
   description,
   selected,
@@ -247,6 +258,45 @@ const ListItem = ({
     [isDescriptionMultiline]
   );
 
+  const accessoryContext = React.useMemo(
+    () => ({ color: descriptionColor }),
+    [descriptionColor]
+  );
+
+  const renderLeading = () => {
+    const accessoryStyle = getLeftStyles(isDescriptionMultiline, description);
+
+    if (leading) {
+      return <View style={accessoryStyle}>{leading}</View>;
+    }
+
+    return left
+      ? left({
+          color: selected
+            ? theme.colors[ListTokens.selectedContentColor]
+            : theme.colors[ListTokens.leadingIconColor],
+          style: accessoryStyle,
+        })
+      : null;
+  };
+
+  const renderTrailing = () => {
+    const accessoryStyle = getRightStyles(isDescriptionMultiline, description);
+
+    if (trailing) {
+      return <View style={accessoryStyle}>{trailing}</View>;
+    }
+
+    return right
+      ? right({
+          color: selected
+            ? theme.colors[ListTokens.selectedContentColor]
+            : theme.colors[ListTokens.trailingIconColor],
+          style: accessoryStyle,
+        })
+      : null;
+  };
+
   return (
     <ListRowContext.Provider value={rowContext}>
       <TouchableRipple
@@ -264,34 +314,22 @@ const ListItem = ({
         theme={theme}
         testID={testID}
       >
-        <View style={[styles.row, containerStyle]}>
-          {left
-            ? left({
-                color: selected
-                  ? theme.colors[ListTokens.selectedContentColor]
-                  : theme.colors[ListTokens.leadingIconColor],
-                style: getLeftStyles(isDescriptionMultiline, description),
-              })
-            : null}
-          <View
-            style={[styles.item, styles.content, contentStyle]}
-            testID={`${testID}-content`}
-          >
-            {renderTitle()}
+        <ListItemContext.Provider value={accessoryContext}>
+          <View style={[styles.row, containerStyle]}>
+            {renderLeading()}
+            <View
+              style={[styles.item, styles.content, contentStyle]}
+              testID={`${testID}-content`}
+            >
+              {renderTitle()}
 
-            {description
-              ? renderDescription(descriptionColor, description)
-              : null}
+              {description
+                ? renderDescription(descriptionColor, description)
+                : null}
+            </View>
+            {renderTrailing()}
           </View>
-          {right
-            ? right({
-                color: selected
-                  ? theme.colors[ListTokens.selectedContentColor]
-                  : theme.colors[ListTokens.trailingIconColor],
-                style: getRightStyles(isDescriptionMultiline, description),
-              })
-            : null}
-        </View>
+        </ListItemContext.Provider>
       </TouchableRipple>
     </ListRowContext.Provider>
   );
