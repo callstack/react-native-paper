@@ -102,6 +102,9 @@ const TextExample = () => {
             Child variant wins, renders Body Small
           </Text>
         </Text>
+        <Text style={[styles.text, styles.boldParent]} variant="headlineSmall">
+          Bold parent, <Text>and the nested child inherits the weight</Text>
+        </Text>
 
         <PaperProvider theme={theme}>
           <Text style={styles.text} variant="customVariant">
@@ -128,6 +131,9 @@ const styles = StyleSheet.create({
   },
   nestedChild: {
     fontStyle: 'italic',
+  },
+  boldParent: {
+    fontWeight: 'bold',
   },
 });
 
