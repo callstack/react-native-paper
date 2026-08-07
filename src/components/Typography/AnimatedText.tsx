@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 import type { StyleProp, TextProps, TextStyle } from 'react-native';
 
+import { NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -46,6 +47,9 @@ function AnimatedText({
 }: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
   const { direction: writingDirection } = useLocale();
+  const isNested = React.useContext(NestedTextContext);
+
+  let element: React.ReactElement;
 
   if (variant) {
     const font = theme.fonts[variant];
@@ -57,7 +61,7 @@ function AnimatedText({
       );
     }
 
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
@@ -69,13 +73,17 @@ function AnimatedText({
         ]}
       />
     );
+  } else if (isNested) {
+    // Declare only what this component was asked for. Everything else, including
+    // the font and the color, inherits from the enclosing text.
+    element = <Animated.Text ref={ref} {...rest} style={style} />;
   } else {
     const font = theme.fonts.bodyMedium;
     const textStyle = {
       ...font,
       color: theme.colors.onSurface,
     };
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
@@ -90,6 +98,12 @@ function AnimatedText({
       />
     );
   }
+
+  return (
+    <NestedTextContext.Provider value={true}>
+      {element}
+    </NestedTextContext.Provider>
+  );
 }
 
 const styles = StyleSheet.create({

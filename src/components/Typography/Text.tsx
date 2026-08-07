@@ -4,6 +4,7 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
+import { NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -87,10 +88,13 @@ const Text = ({
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
+  const isNested = React.useContext(NestedTextContext);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
+
+  let element: React.ReactElement;
 
   if (variant) {
     let font = theme.fonts[variant];
@@ -143,7 +147,7 @@ const Text = ({
       );
     }
 
-    return (
+    element = (
       <NativeText
         ref={root}
         style={[
@@ -154,13 +158,17 @@ const Text = ({
         {...rest}
       />
     );
+  } else if (isNested) {
+    // Declare only what this `Text` was asked for. Everything else, including
+    // the font and the color, inherits from the enclosing `Text`.
+    element = <NativeText {...rest} ref={root} style={style} />;
   } else {
     const font = theme.fonts.default;
     const textStyle = {
       ...font,
       color: theme.colors?.onSurface,
     };
-    return (
+    element = (
       <NativeText
         {...rest}
         ref={root}
@@ -168,6 +176,12 @@ const Text = ({
       />
     );
   }
+
+  return (
+    <NestedTextContext.Provider value={true}>
+      {element}
+    </NestedTextContext.Provider>
+  );
 };
 
 const styles = StyleSheet.create({
