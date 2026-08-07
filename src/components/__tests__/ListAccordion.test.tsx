@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
+import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
@@ -9,7 +10,6 @@ import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
-import { getAccordionColors } from '../List/utils';
 
 const styles = StyleSheet.create({
   coloring: {
@@ -164,39 +164,28 @@ describe('ListAccordion', () => {
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );
   });
-});
 
-describe('getAccordionColors - description color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: LightTheme,
-      })
-    ).toMatchObject({
-      descriptionColor: LightTheme.colors.onSurfaceVariant,
-    });
-  });
-});
+  it('keeps the title on onSurface when collapsed', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
 
-describe('getAccordionColors - title text color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: LightTheme,
-      })
-    ).toMatchObject({
-      titleTextColor: LightTheme.colors.onSurface,
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onSurface,
     });
   });
 
-  it('should return primary color if it is expanded', () => {
-    expect(
-      getAccordionColors({
-        theme: LightTheme,
-        isExpanded: true,
-      })
-    ).toMatchObject({
-      titleTextColor: LightTheme.colors?.primary,
+  it('keeps the title on onSurface when expanded', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" expanded>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onSurface,
     });
   });
 });
