@@ -126,98 +126,114 @@ exports[`renders expanded accordion 1`] = `
             }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "180deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-up
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
   </View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    entering={[Function]}
+    exiting={[Function]}
     style={
       [
-        false,
-        [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
-          {
-            "backgroundColor": undefined,
-          },
-          undefined,
-        ],
+        {
+          "overflow": "hidden",
+        },
       ]
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         [
-          {
-            "flexDirection": "row",
-            "width": "100%",
-          },
-          undefined,
+          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+            {
+              "backgroundColor": undefined,
+            },
+            undefined,
+          ],
         ]
       }
     >
@@ -225,50 +241,62 @@ exports[`renders expanded accordion 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "justifyContent": "center",
+              "flexDirection": "row",
+              "width": "100%",
             },
             undefined,
           ]
         }
-        testID="undefined-content"
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
           style={
             [
               {
-                "textAlign": "left",
+                "paddingLeft": 16,
               },
               {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "justifyContent": "center",
               },
+              undefined,
+            ]
+          }
+          testID="undefined-content"
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "400",
-                  "letterSpacing": 0.5,
-                  "lineHeight": 24,
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
                 },
                 [
                   {
-                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
-              ],
-            ]
-          }
-        >
-          List item 1
-        </Text>
+              ]
+            }
+          >
+            List item 1
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -448,35 +476,50 @@ exports[`renders list accordion with children 1`] = `
             }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -647,35 +690,50 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -856,35 +914,50 @@ exports[`renders list accordion with left items 1`] = `
             }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -1051,35 +1124,50 @@ exports[`renders multiline list accordion 1`] = `
             }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>

@@ -12,12 +12,25 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import type {
+  EntryAnimationsValues,
+  ExitAnimationsValues,
+} from 'react-native-reanimated';
+
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import { ListTokens } from './tokens';
 import type { ListChildProps, Style } from './utils';
 import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -239,6 +252,62 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const timingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.medium2,
+      easing: Easing.bezier(...theme.motion.easing.emphasized),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.medium2,
+      theme.motion.easing.emphasized,
+      reanimatedReduceMotion,
+    ]
+  );
+
+  const chevronProgress = useSharedValue(isExpanded ? 1 : 0);
+
+  React.useEffect(() => {
+    chevronProgress.value = withTiming(isExpanded ? 1 : 0, timingConfig);
+  }, [isExpanded, chevronProgress, timingConfig]);
+
+  const chevronStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${chevronProgress.value * 180}deg` }],
+  }));
+
+  const expandAnimation = React.useCallback(
+    (values: EntryAnimationsValues) => {
+      'worklet';
+      return {
+        initialValues: { height: 0, opacity: 0 },
+        animations: {
+          height: withTiming(values.targetHeight, timingConfig),
+          opacity: withTiming(1, timingConfig),
+        },
+      };
+    },
+    [timingConfig]
+  );
+
+  const collapseAnimation = React.useCallback(
+    (values: ExitAnimationsValues) => {
+      'worklet';
+      return {
+        initialValues: { height: values.currentHeight, opacity: 1 },
+        animations: {
+          height: withTiming(0, timingConfig),
+          opacity: withTiming(0, timingConfig),
+        },
+      };
+    },
+    [timingConfig]
+  );
+
   const {
     descriptionColor,
     titleTextColor,
@@ -341,12 +410,14 @@ const ListAccordion = ({
                     isExpanded: isExpanded,
                   })
                 ) : (
-                  <MaterialCommunityIcon
-                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                    color={trailingIconColor}
-                    size={24}
-                    direction={direction}
-                  />
+                  <Animated.View style={chevronStyle}>
+                    <MaterialCommunityIcon
+                      name="chevron-down"
+                      color={trailingIconColor}
+                      size={24}
+                      direction={direction}
+                    />
+                  </Animated.View>
                 )}
               </View>
             </View>
@@ -354,8 +425,13 @@ const ListAccordion = ({
         </ListRowContext.Provider>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
+      {isExpanded ? (
+        <Animated.View
+          entering={expandAnimation}
+          exiting={collapseAnimation}
+          style={styles.expandedContent}
+        >
+          {React.Children.map(children, (child) => {
             if (
               left &&
               React.isValidElement<ListChildProps>(child) &&
@@ -369,8 +445,9 @@ const ListAccordion = ({
             }
 
             return child;
-          })
-        : null}
+          })}
+        </Animated.View>
+      ) : null}
     </View>
   );
 };
@@ -404,6 +481,9 @@ const styles = StyleSheet.create({
   },
   child: {
     paddingLeft: 40,
+  },
+  expandedContent: {
+    overflow: 'hidden',
   },
   content: {
     flex: 1,
