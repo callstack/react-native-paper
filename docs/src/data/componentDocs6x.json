@@ -11955,6 +11955,136 @@
       ],
       "group": "ToggleButton"
     },
+    "Toolbar/Toolbar": {
+      "filepath": "Toolbar/Toolbar.tsx",
+      "title": "Toolbar",
+      "description": "A toolbar is a floating or docked bar of actions.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { StyleSheet, View } from 'react-native';\nimport { Toolbar, IconButton } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={styles.anchor} pointerEvents=\"box-none\">\n    <Toolbar>\n      <IconButton icon=\"format-bold\" aria-label=\"Bold\" onPress={() => {}} />\n      <IconButton icon=\"format-italic\" aria-label=\"Italic\" onPress={() => {}} />\n      <IconButton icon=\"format-underline\" aria-label=\"Underline\" onPress={() => {}} />\n    </Toolbar>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  anchor: {\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 24,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+      "link": "toolbar",
+      "data": {
+        "description": "A toolbar is a floating or docked bar of actions.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { StyleSheet, View } from 'react-native';\nimport { Toolbar, IconButton } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={styles.anchor} pointerEvents=\"box-none\">\n    <Toolbar>\n      <IconButton icon=\"format-bold\" aria-label=\"Bold\" onPress={() => {}} />\n      <IconButton icon=\"format-italic\" aria-label=\"Italic\" onPress={() => {}} />\n      <IconButton icon=\"format-underline\" aria-label=\"Underline\" onPress={() => {}} />\n    </Toolbar>\n  </View>\n);\n\nconst styles = StyleSheet.create({\n  anchor: {\n    position: 'absolute',\n    left: 0,\n    right: 0,\n    bottom: 24,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+        "displayName": "Toolbar",
+        "methods": [],
+        "statics": [],
+        "props": {
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Content of the toolbar, typically a row of `IconButton`s."
+          },
+          "variant": {
+            "required": false,
+            "tsType": {
+              "name": "Variant"
+            },
+            "description": "`floating` is a self-positioned pill (like a `FAB`); `docked` is a\nfull-width bar anchored to the bottom edge, extending into safe-area\ninsets automatically. Defaults to `floating`.",
+            "defaultValue": {
+              "value": "'floating'",
+              "computed": false
+            }
+          },
+          "orientation": {
+            "required": false,
+            "tsType": {
+              "name": "Orientation"
+            },
+            "description": "Layout axis for `floating` (`docked` is always horizontal, per spec).\nDefaults to `horizontal`.",
+            "defaultValue": {
+              "value": "'horizontal'",
+              "computed": false
+            }
+          },
+          "colorScheme": {
+            "required": false,
+            "tsType": {
+              "name": "ColorScheme"
+            },
+            "description": "Role-color preset. Sets default colors on direct, mode-less `IconButton`/`Button`\nchildren, unless they already set their own. Defaults to `standard`.",
+            "defaultValue": {
+              "value": "'standard'",
+              "computed": false
+            }
+          },
+          "containerColor": {
+            "required": false,
+            "tsType": {
+              "name": "ColorValue"
+            },
+            "description": "Override the container (background) color."
+          },
+          "style": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": "Style for positioning `floating`'s pill, or overriding `docked`'s\ndefault anchoring."
+          },
+          "contentContainerStyle": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "ViewStyle"
+                }
+              ],
+              "raw": "StyleProp<ViewStyle>"
+            },
+            "description": "Style for the row/column wrapping `children`. Overrides the default\npadding/gap."
+          },
+          "testID": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "TestID used for testing purposes.",
+            "defaultValue": {
+              "value": "'toolbar'",
+              "computed": false
+            }
+          },
+          "aria-label": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Accessibility label for the toolbar group. `children` still need\ntheir own `aria-label`s."
+          },
+          "theme": {
+            "required": false,
+            "tsType": {
+              "name": "ThemeProp"
+            },
+            "description": ""
+          },
+          "ref": {
+            "required": false,
+            "tsType": {
+              "name": "ReactRefObject",
+              "raw": "React.RefObject<View>",
+              "elements": [
+                {
+                  "name": "View"
+                }
+              ]
+            },
+            "description": ""
+          }
+        }
+      },
+      "type": "component",
+      "dependencies": [
+        "src/components/Toolbar/Toolbar.tsx"
+      ]
+    },
     "Tooltip/Tooltip": {
       "filepath": "Tooltip/Tooltip.tsx",
       "title": "Tooltip",

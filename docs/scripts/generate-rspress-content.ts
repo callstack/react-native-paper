@@ -128,8 +128,20 @@ const getVersionComponentOrder = (version: string): MetaEntry[] => {
     return fromConfig;
   }
 
+  // `componentDocsConfig.pages` is shared across versions, but components
+  // added there for 6.x-only features (e.g. `Toolbar`) have no docs source
+  // under 5.x -- keep them out of the 5.x nav rather than linking to an
+  // empty/missing page.
+  const componentsDir = path.join(getVersionDocsDir(version), 'components');
+  const existsForVersion = (name: string) =>
+    fs.existsSync(path.join(componentsDir, name)) ||
+    fs.existsSync(path.join(componentsDir, `${name}.mdx`)) ||
+    fs.existsSync(path.join(componentsDir, `${name}.md`));
+
   return [
-    ...fromConfig,
+    ...fromConfig.filter((entry) =>
+      existsForVersion(typeof entry === 'string' ? entry : entry.name)
+    ),
     {
       type: 'dir',
       name: 'HelperText',

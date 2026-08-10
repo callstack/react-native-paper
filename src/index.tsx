@@ -46,6 +46,7 @@ export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
+export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as TextInput } from './components/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
@@ -145,6 +146,12 @@ export type { Props as TouchableRippleProps } from './components/TouchableRipple
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
+export type { Props as ToolbarProps } from './components/Toolbar/Toolbar';
+export type {
+  Variant as ToolbarVariant,
+  ColorScheme as ToolbarColorScheme,
+  Orientation as ToolbarOrientation,
+} from './components/Toolbar/tokens';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
 export { type TypescaleKey, type Theme, type Elevation } from './types';

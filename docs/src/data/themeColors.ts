@@ -320,6 +320,33 @@ export const themeColors = {
       textColor: 'theme.colors.onSurface',
     },
   },
+  Toolbar: {
+    standard: {
+      unselected: {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        iconColor: 'theme.colors.onSurfaceVariant',
+        textColor: 'theme.colors.onSurfaceVariant',
+      },
+      selected: {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        iconColor:
+          'theme.colors.onSecondaryFixedVariant (light) / theme.colors.onSecondaryContainer (dark)',
+      },
+    },
+    vibrant: {
+      unselected: {
+        backgroundColor: 'theme.colors.primaryContainer',
+        iconColor:
+          'theme.colors.onPrimaryFixedVariant (light) / theme.colors.onPrimaryContainer (dark)',
+        textColor:
+          'theme.colors.onPrimaryFixedVariant (light) / theme.colors.onPrimaryContainer (dark)',
+      },
+      selected: {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        iconColor: 'theme.colors.onSurface',
+      },
+    },
+  },
   Tooltip: {
     '-': {
       backgroundColor: 'theme.colors.onSurface',
