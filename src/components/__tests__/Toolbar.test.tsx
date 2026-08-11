@@ -95,6 +95,18 @@ it("applies `style` directly to the floating pill's outer (position) layer", asy
   Platform.OS = originalPlatform;
 });
 
+it("lets `style` override the floating pill's internal container styles", async () => {
+  await render(
+    <Toolbar testID="floating" style={{ height: 200 }}>
+      <ToolbarChildren />
+    </Toolbar>
+  );
+
+  expect(screen.getByTestId('floating-outer-layer')).toHaveStyle({
+    height: 200,
+  });
+});
+
 it("applies `style` to the docked variant's self-anchoring container", async () => {
   await render(
     <Toolbar testID="docked" variant="docked" style={{ bottom: 10 }}>

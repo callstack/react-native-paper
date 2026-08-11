@@ -186,7 +186,6 @@ const Toolbar = ({
       ref={isDocked ? undefined : ref}
       elevation={elevation}
       style={[
-        !isDocked && style,
         {
           backgroundColor,
           borderRadius,
@@ -195,6 +194,7 @@ const Toolbar = ({
           (isVertical ? { width: thickness } : { height: thickness }),
         isDocked && styles.dockedFill,
         styles.content,
+        !isDocked && style,
       ]}
       testID={testID}
     >

@@ -24,7 +24,6 @@ const toolbarItems = [
   { icon: 'format-bold', label: 'Bold' },
   { icon: 'format-italic', label: 'Italic' },
   { icon: 'format-underline', label: 'Underline' },
-  { icon: 'format-', label: '' },
 ] as const;
 
 // Dummy list content, purely to give the screen something to scroll behind
