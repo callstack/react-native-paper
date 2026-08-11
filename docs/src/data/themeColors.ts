@@ -140,10 +140,14 @@ export const themeColors = {
     inactive: {
       'iconColor/textColor': 'theme.colors.onSurfaceVariant',
     },
+    focused: {
+      focusIndicatorColor: 'theme.colors.secondary',
+    },
   },
   'Drawer.Section': {
     '-': {
       titleColor: 'theme.colors.onSurfaceVariant',
+      dividerColor: 'theme.colors.outlineVariant',
     },
   },
   FAB: {
