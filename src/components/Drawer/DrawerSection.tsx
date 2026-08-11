@@ -2,8 +2,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { DrawerSectionTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
-import { Palette } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
@@ -72,39 +72,34 @@ const DrawerSection = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const titleColor = theme.colors.onSurfaceVariant;
-  const titleMargin = 28;
-  const font = theme.fonts.titleSmall;
 
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
-        <View style={[styles.titleContainer, styles.v3TitleContainer]}>
-          {title && (
-            <Text
-              variant="titleSmall"
-              numberOfLines={1}
-              style={[
-                {
-                  color: titleColor,
-                  marginLeft: titleMargin,
-                  ...font,
-                },
-              ]}
-              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-            >
-              {title}
-            </Text>
-          )}
+        <View style={styles.titleContainer}>
+          <Text
+            variant={DrawerSectionTokens.headlineText}
+            numberOfLines={1}
+            style={[
+              styles.title,
+              { color: theme.colors[DrawerSectionTokens.headlineColor] },
+            ]}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          >
+            {title}
+          </Text>
         </View>
       )}
       {children}
+      {/* Drawer-specific divider tokens are deprecated in MD3; the standalone
+          divider spec (`outlineVariant`, 1dp) applies instead. */}
       {showDivider && (
         <Divider
           horizontalInset
           bold
-          style={[styles.divider, styles.v3Divider]}
+          style={styles.divider}
           theme={theme}
+          testID="drawer-section-divider"
         />
       )}
     </View>
@@ -115,20 +110,18 @@ DrawerSection.displayName = 'Drawer.Section';
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 4,
+    marginBottom: DrawerSectionTokens.bottomSpacing,
   },
   titleContainer: {
-    height: 40,
+    height: DrawerSectionTokens.headlineHeight,
     justifyContent: 'center',
   },
-  v3TitleContainer: {
-    height: 56,
+  // Aligns the headline with the destination icons.
+  title: {
+    marginStart: DrawerSectionTokens.headlinePadding,
   },
   divider: {
-    marginTop: 4,
-  },
-  v3Divider: {
-    backgroundColor: Palette.neutralVariant50,
+    marginTop: DrawerSectionTokens.dividerSpacing,
   },
 });
 

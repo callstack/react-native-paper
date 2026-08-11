@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
+import { DrawerItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -101,15 +106,26 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const [focused, setFocused] = React.useState(false);
 
-  const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    if (isKeyboardFocusEvent(e)) {
+      setFocused(true);
+    }
+  };
+
+  const backgroundColor = active
+    ? theme.colors[DrawerItemTokens.activeIndicatorColor]
+    : undefined;
   const contentColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerItemTokens.activeIconColor]
+    : theme.colors[DrawerItemTokens.inactiveIconColor];
 
-  const labelMargin = icon ? 12 : 0;
-  const borderRadius = theme.shapes.corner.extraLarge;
-  const font = theme.fonts.labelLarge;
+  const borderRadius = resolveCornerRadius(
+    theme,
+    DrawerItemTokens.indicatorShape
+  );
+  const { inset } = DrawerItemTokens.focusIndicator;
 
   return (
     <View {...rest}>
@@ -118,10 +134,12 @@ const DrawerItem = ({
         disabled={disabled}
         background={background}
         onPress={onPress}
+        onFocus={handleFocus}
+        onBlur={() => setFocused(false)}
         style={[
           styles.container,
-          styles.v3Container,
           { backgroundColor, borderRadius },
+          Platform.OS === 'web' ? webNoOutline : null,
           style,
         ]}
         role="button"
@@ -130,30 +148,51 @@ const DrawerItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, styles.v3Wrapper]}>
-          <View style={styles.content}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
-            <Text
-              variant="labelLarge"
-              selectable={false}
-              numberOfLines={1}
-              style={[
-                styles.label,
-                {
-                  color: contentColor,
-                  marginLeft: labelMargin,
-                  ...font,
-                },
-              ]}
-              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            >
-              {label}
-            </Text>
+        <View style={styles.inner}>
+          <View style={styles.wrapper} testID="drawer-item-content">
+            <View style={styles.content}>
+              {icon ? (
+                <Icon
+                  source={icon}
+                  size={DrawerItemTokens.iconSize}
+                  color={contentColor}
+                />
+              ) : null}
+              <Text
+                variant={
+                  active
+                    ? DrawerItemTokens.activeLabelText
+                    : DrawerItemTokens.labelText
+                }
+                selectable={false}
+                numberOfLines={1}
+                style={[
+                  styles.label,
+                  icon ? styles.labelWithIcon : null,
+                  { color: contentColor },
+                ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+              >
+                {label}
+              </Text>
+            </View>
+
+            {right?.({ color: contentColor })}
           </View>
 
-          {right?.({ color: contentColor })}
+          {focused ? (
+            <View
+              testID="drawer-item-focus-ring"
+              style={[
+                styles.focusRing,
+                {
+                  borderColor:
+                    theme.colors[DrawerItemTokens.focusIndicatorColor],
+                  borderRadius: borderRadius - inset,
+                },
+              ]}
+            />
+          ) : null}
         </View>
       </TouchableRipple>
     </View>
@@ -162,27 +201,25 @@ const DrawerItem = ({
 
 DrawerItem.displayName = 'Drawer.Item';
 
+// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginVertical: 4,
-  },
-  v3Container: {
+    height: DrawerItemTokens.height,
     justifyContent: 'center',
-    height: 56,
-    marginLeft: 12,
-    marginRight: 12,
-    marginVertical: 0,
+    marginHorizontal: DrawerItemTokens.indicatorInset,
+  },
+  // Fills the active indicator so the focus ring can be positioned against
+  // its bounds rather than the content's.
+  inner: {
+    flex: 1,
+    justifyContent: 'center',
   },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  v3Wrapper: {
-    marginLeft: 16,
-    marginRight: 24,
-    padding: 0,
+    marginHorizontal: DrawerItemTokens.contentInset,
   },
   content: {
     flex: 1,
@@ -190,7 +227,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    marginRight: 32,
+    marginEnd: DrawerItemTokens.labelTrailingGap,
+  },
+  labelWithIcon: {
+    marginStart: DrawerItemTokens.iconLabelGap,
+  },
+  // Drawn inside the indicator: destinations sit flush, so an outer ring
+  // would overlap its neighbours.
+  focusRing: {
+    position: 'absolute',
+    top: DrawerItemTokens.focusIndicator.inset,
+    bottom: DrawerItemTokens.focusIndicator.inset,
+    left: DrawerItemTokens.focusIndicator.inset,
+    right: DrawerItemTokens.focusIndicator.inset,
+    borderWidth: DrawerItemTokens.focusIndicator.thickness,
+    pointerEvents: 'none',
   },
 });
 

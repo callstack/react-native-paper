@@ -9,6 +9,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DrawerCollapsedItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
@@ -67,9 +68,12 @@ export type Props = ViewProps & {
   testID?: string;
 };
 
-const iconSize = 24;
-const itemSize = 56;
-const outlineHeight = 32;
+const {
+  iconSize,
+  activeIndicatorWidth,
+  activeIndicatorHeight,
+  noLabelActiveIndicatorHeight,
+} = DrawerCollapsedItemTokens;
 
 /**
  * Note: Available in v5.x with theme version 3
@@ -130,17 +134,20 @@ const DrawerCollapsedItem = ({
     }).start();
   };
 
-  const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
+  const iconPadding =
+    ((!label ? noLabelActiveIndicatorHeight : activeIndicatorHeight) -
+      iconSize) /
+    2;
 
   const backgroundColor = active
-    ? theme.colors.secondaryContainer
+    ? theme.colors[DrawerCollapsedItemTokens.activeIndicatorColor]
     : 'transparent';
   const labelColor = active
-    ? theme.colors.onSurface
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeLabelTextColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveLabelTextColor];
   const iconColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeIconColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveIconColor];
 
   const onTextLayout = ({
     nativeEvent,
@@ -155,7 +162,7 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...theme.fonts.labelMedium,
+    ...theme.fonts[DrawerCollapsedItemTokens.labelText],
   };
 
   const icon =
@@ -210,7 +217,7 @@ const DrawerCollapsedItem = ({
 
           {label ? (
             <Text
-              variant="labelMedium"
+              variant={DrawerCollapsedItemTokens.labelText}
               selectable={false}
               numberOfLines={2}
               onTextLayout={onTextLayout}
@@ -230,20 +237,20 @@ DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: 80,
-    marginBottom: 12,
-    minHeight: itemSize,
+    width: DrawerCollapsedItemTokens.containerWidth,
+    marginBottom: DrawerCollapsedItemTokens.containerSpacing,
+    minHeight: noLabelActiveIndicatorHeight,
     alignItems: 'center',
   },
   outline: {
-    width: itemSize,
-    height: outlineHeight,
-    borderRadius: itemSize / 2,
+    width: activeIndicatorWidth,
+    height: activeIndicatorHeight,
+    borderRadius: activeIndicatorWidth / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   roundedOutline: {
-    height: itemSize,
+    height: noLabelActiveIndicatorHeight,
   },
   icon: {
     position: 'absolute',
@@ -253,8 +260,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   label: {
-    marginHorizontal: 12,
-    marginTop: 4,
+    marginHorizontal: DrawerCollapsedItemTokens.labelPadding,
+    marginTop: DrawerCollapsedItemTokens.labelSpacing,
     textAlign: 'center',
   },
   badgeContainer: {

@@ -37,7 +37,25 @@ export type TypescaleKey =
   | 'labelSmall'
   | 'bodyLarge'
   | 'bodyMedium'
-  | 'bodySmall';
+  | 'bodySmall'
+  // Emphasized styles carry the `*-weight-prominent` weight of their base
+  // style, used to mark selection (e.g. the active navigation destination).
+  // @see https://m3.material.io/styles/typography/type-scale-tokens
+  | 'displayLargeEmphasized'
+  | 'displayMediumEmphasized'
+  | 'displaySmallEmphasized'
+  | 'headlineLargeEmphasized'
+  | 'headlineMediumEmphasized'
+  | 'headlineSmallEmphasized'
+  | 'titleLargeEmphasized'
+  | 'titleMediumEmphasized'
+  | 'titleSmallEmphasized'
+  | 'labelLargeEmphasized'
+  | 'labelMediumEmphasized'
+  | 'labelSmallEmphasized'
+  | 'bodyLargeEmphasized'
+  | 'bodyMediumEmphasized'
+  | 'bodySmallEmphasized';
 
 export type TypescaleStyle = {
   fontFamily: string;

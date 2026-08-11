@@ -14,5 +14,9 @@ export const state = {
   focusIndicator: {
     thickness: 3,
     outerOffset: 2,
+    // Negative: the indicator is drawn *inside* the component's bounds.
+    // Used where an outer ring would collide with flush neighbours, e.g.
+    // navigation drawer destinations, which sit at 0dp spacing.
+    innerOffset: -3,
   },
 } as const;
