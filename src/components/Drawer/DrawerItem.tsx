@@ -36,7 +36,7 @@ export type Props = ViewProps & {
    */
   active?: boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -126,6 +126,9 @@ const DrawerItem = ({
     DrawerItemTokens.indicatorShape
   );
   const { inset } = DrawerItemTokens.focusIndicator;
+  const opacity = disabled
+    ? DrawerItemTokens.stateOpacity.disabled
+    : DrawerItemTokens.stateOpacity.enabled;
 
   return (
     <View {...rest}>
@@ -138,7 +141,7 @@ const DrawerItem = ({
         onBlur={() => setFocused(false)}
         style={[
           styles.container,
-          { backgroundColor, borderRadius },
+          { backgroundColor, borderRadius, opacity },
           Platform.OS === 'web' ? webNoOutline : null,
           style,
         ]}

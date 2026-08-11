@@ -2,9 +2,11 @@ import { expect, it } from '@jest/globals';
 
 import { defaultThemes } from '../../core/theming';
 import { fireEvent, render, screen } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
 import DrawerItem from '../Drawer/DrawerItem';
 
 const { colors } = defaultThemes.light;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 it('renders basic DrawerItem', async () => {
   const tree = (
@@ -82,4 +84,33 @@ it('shows a focus indicator while focused', async () => {
 
   await fireEvent(screen.getByRole('button'), 'blur');
   expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
+});
+
+it('renders an enabled destination at full opacity', async () => {
+  await render(<DrawerItem label="Example item" onPress={() => {}} />);
+
+  expect(screen.getByRole('button')).toHaveStyle({
+    opacity: stateOpacity.enabled,
+  });
+});
+
+it('dims a disabled destination', async () => {
+  await render(<DrawerItem label="Example item" onPress={() => {}} disabled />);
+
+  expect(screen.getByRole('button')).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
+});
+
+it('dims the active indicator of a disabled destination', async () => {
+  await render(
+    <DrawerItem label="Example item" onPress={() => {}} active disabled />
+  );
+
+  // The active indicator is the destination's own background, so dimming the
+  // destination dims the indicator, icon, label and trailing slot in one pass.
+  expect(screen.getByRole('button')).toHaveStyle({
+    backgroundColor: colors.secondaryContainer,
+    opacity: stateOpacity.disabled,
+  });
 });

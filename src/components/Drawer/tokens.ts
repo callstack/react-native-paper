@@ -3,6 +3,19 @@ import type { ColorRole, TypescaleKey } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
 /**
+ * Neither the drawer nor the rail token set defines a disabled state — both
+ * spec Enabled / Hovered / Focused / Pressed only. Paper's `disabled` prop
+ * therefore falls back to the generic MD3 disabled-content opacity, applied to
+ * the destination as a whole so the active indicator, icon, label and trailing
+ * slot dim together.
+ * @see https://m3.material.io/foundations/interaction/states/state-layers
+ */
+const stateOpacity = {
+  enabled: tokens.md.sys.state.opacity.enabled,
+  disabled: tokens.md.sys.state.opacity.disabled,
+} as const;
+
+/**
  * MD3 navigation drawer destination ("item") spec.
  * @see https://m3.material.io/components/navigation-drawer/specs
  */
@@ -57,6 +70,7 @@ export const DrawerItemTokens = {
   ...itemTypescale,
   ...itemColors,
   focusIndicator: itemFocusIndicator,
+  stateOpacity,
 };
 
 /**
@@ -120,4 +134,5 @@ export const DrawerCollapsedItemTokens = {
   ...collapsedItemSizes,
   ...collapsedItemTypescale,
   ...collapsedItemColors,
+  stateOpacity,
 };

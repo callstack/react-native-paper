@@ -90,6 +90,13 @@ const DrawerExample = () => {
       <Section title="Disabled">
         <Drawer.Section showDivider={false}>
           <Drawer.Item icon="archive" label="Archive" disabled />
+          <Drawer.Item
+            icon="star"
+            label="Active and disabled"
+            active
+            disabled
+            right={() => <Text variant="labelLarge">24</Text>}
+          />
         </Drawer.Section>
       </Section>
 
@@ -145,6 +152,12 @@ const DrawerExample = () => {
             badge
             active={collapsed === 'alerts'}
             onPress={() => setCollapsed('alerts')}
+          />
+          <Drawer.CollapsedItem
+            focusedIcon="archive"
+            unfocusedIcon="archive-outline"
+            label="Disabled"
+            disabled
           />
         </View>
       </Section>

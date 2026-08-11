@@ -27,7 +27,7 @@ export type Props = ViewProps & {
    */
   badge?: string | number | boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -168,12 +168,17 @@ const DrawerCollapsedItem = ({
   const icon =
     !active && unfocusedIcon !== undefined ? unfocusedIcon : focusedIcon;
 
+  const opacity = disabled
+    ? DrawerCollapsedItemTokens.stateOpacity.disabled
+    : DrawerCollapsedItemTokens.stateOpacity.enabled;
+
   return (
     <View {...rest}>
       <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
         disabled={disabled}
+        style={{ opacity }}
         role="button"
         aria-selected={active}
         aria-label={ariaLabel}

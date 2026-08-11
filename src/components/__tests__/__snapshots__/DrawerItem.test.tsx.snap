@@ -47,6 +47,7 @@ exports[`renders DrawerItem with icon 1`] = `
           {
             "backgroundColor": undefined,
             "borderRadius": 9999,
+            "opacity": 1,
           },
           null,
           undefined,
@@ -201,6 +202,7 @@ exports[`renders active DrawerItem 1`] = `
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
             "borderRadius": 9999,
+            "opacity": 1,
           },
           null,
           undefined,
@@ -355,6 +357,7 @@ exports[`renders basic DrawerItem 1`] = `
           {
             "backgroundColor": undefined,
             "borderRadius": 9999,
+            "opacity": 1,
           },
           null,
           undefined,
