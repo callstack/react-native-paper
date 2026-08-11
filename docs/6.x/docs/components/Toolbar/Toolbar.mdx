@@ -8,11 +8,25 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-A toolbar is a floating or docked bar of actions.
+A toolbar groups a row (or column) of icon actions behind a shared surface, so related
+actions read as one control instead of loose buttons scattered on the screen.
+
+It comes in two `variant`s: `floating`, a self-positioned pill anchored wherever you place it
+(similar to a `FAB`), and `docked`, a full-width bar pinned to the bottom edge that extends
+into the safe-area insets automatically. A floating toolbar can also be laid out vertically
+via `orientation`.
+
+The `colorScheme` prop controls how contained `IconButton`/`Button` children are colored by
+default: `standard` keeps them neutral against a surface-colored container, while `vibrant`
+gives the toolbar itself a bold, primary-tinted container and switches selected/unselected
+children to matching vibrant colors, making the toolbar stand out as a focal point on the
+screen.
 
 
 
-<span />
+
+  <ScreenshotTabs screenshotData={{"floating horizontal":"screenshots/toolbar_floating_horizontal_standard.png","floating horizontal - vibrant":"screenshots/toolbar_floating_horizontal_vibrant.png","floating vertical":"screenshots/toolbar_floating_vertical_standard.png","floating vertical - vibrant":"screenshots/toolbar_floating_vertical_vibrant.png","docked":"screenshots/toolbar_docked_standard.png","docked - vibrant":"screenshots/toolbar_docked_vibrant.png"}}/>
+
 
 ## Usage
 ```js

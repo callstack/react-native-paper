@@ -2,7 +2,6 @@ import * as React from 'react';
 import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
-  Button,
   Chip,
   Divider,
   IconButton,
@@ -25,6 +24,7 @@ const toolbarItems = [
   { icon: 'format-bold', label: 'Bold' },
   { icon: 'format-italic', label: 'Italic' },
   { icon: 'format-underline', label: 'Underline' },
+  { icon: 'format-', label: '' },
 ] as const;
 
 // Dummy list content, purely to give the screen something to scroll behind
@@ -108,7 +108,6 @@ const ToolbarExample = () => {
           onPress={() => {}}
         />
       ))}
-      {!isVertical && <Button onPress={() => {}}>Done</Button>}
     </>
   );
 
