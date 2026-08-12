@@ -1,6 +1,10 @@
 import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type {
+  GestureResponderEvent,
+  MouseEvent,
+  ViewProps,
+} from 'react-native';
 
 import {
   afterAll,
@@ -30,6 +34,9 @@ const DummyComponent = ({
   ...props
 }: ViewProps & {
   ref?: React.RefObject<View | null>;
+  onPress?: (event: GestureResponderEvent) => void;
+  onHoverIn?: (event: MouseEvent) => void;
+  onHoverOut?: (event: MouseEvent) => void;
 }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -156,6 +163,23 @@ describe('Tooltip', () => {
         await userEvent.longPress(trigger);
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('press', () => {
+      it("passes the event object to the children's onPress", async () => {
+        const onPress = jest.fn();
+
+        const {
+          wrapper: { getByText },
+        } = await setup({ children: <DummyComponent onPress={onPress} /> });
+
+        await userEvent.press(getTrigger(getByText));
+
+        expect(onPress).toHaveBeenCalledTimes(1);
+        expect(onPress).toHaveBeenCalledWith(
+          expect.objectContaining({ nativeEvent: expect.anything() })
+        );
       });
     });
 
@@ -350,6 +374,19 @@ describe('Tooltip', () => {
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(2);
       });
+
+      it("passes the event object to the children's onHoverIn", async () => {
+        const onHoverIn = jest.fn();
+        const event = { nativeEvent: {} };
+
+        const {
+          wrapper: { getByText },
+        } = await setup({ children: <DummyComponent onHoverIn={onHoverIn} /> });
+
+        await fireEvent(getTrigger(getByText), 'hoverIn', event);
+
+        expect(onHoverIn).toHaveBeenCalledWith(event);
+      });
     });
 
     describe('hoverOut', () => {
@@ -367,6 +404,21 @@ describe('Tooltip', () => {
         await runTimers();
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
+      });
+
+      it("passes the event object to the children's onHoverOut", async () => {
+        const onHoverOut = jest.fn();
+        const event = { nativeEvent: {} };
+
+        const {
+          wrapper: { getByText },
+        } = await setup({
+          children: <DummyComponent onHoverOut={onHoverOut} />,
+        });
+
+        await fireEvent(getTrigger(getByText), 'hoverOut', event);
+
+        expect(onHoverOut).toHaveBeenCalledWith(event);
       });
     });
 

@@ -6,7 +6,12 @@ import {
   Platform,
   Pressable,
 } from 'react-native';
-import type { LayoutChangeEvent, ViewStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  LayoutChangeEvent,
+  MouseEvent,
+  ViewStyle,
+} from 'react-native';
 
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
@@ -146,29 +151,38 @@ const Tooltip = ({
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
 
-  const handlePress = React.useCallback(() => {
-    if (touched.current) {
-      return null;
-    }
-    if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
-    if (props.disabled) return null;
-    return props.onPress?.();
-  }, [children.props, isValidChild]);
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      if (touched.current) {
+        return null;
+      }
+      if (!isValidChild) return null;
+      const props = children.props as TooltipChildProps;
+      if (props.disabled) return null;
+      return props.onPress?.(event);
+    },
+    [children.props, isValidChild]
+  );
 
-  const handleHoverIn = React.useCallback(() => {
-    handleTouchStart();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverIn?.();
-    }
-  }, [children.props, handleTouchStart, isValidChild]);
+  const handleHoverIn = React.useCallback(
+    (event: MouseEvent) => {
+      handleTouchStart();
+      if (isValidChild) {
+        (children.props as TooltipChildProps).onHoverIn?.(event);
+      }
+    },
+    [children.props, handleTouchStart, isValidChild]
+  );
 
-  const handleHoverOut = React.useCallback(() => {
-    handleTouchEnd();
-    if (isValidChild) {
-      (children.props as TooltipChildProps).onHoverOut?.();
-    }
-  }, [children.props, handleTouchEnd, isValidChild]);
+  const handleHoverOut = React.useCallback(
+    (event: MouseEvent) => {
+      handleTouchEnd();
+      if (isValidChild) {
+        (children.props as TooltipChildProps).onHoverOut?.(event);
+      }
+    },
+    [children.props, handleTouchEnd, isValidChild]
+  );
 
   const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     childrenWrapperRef.current?.measure(
