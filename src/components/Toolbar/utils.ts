@@ -3,7 +3,7 @@ import type { ColorValue } from 'react-native';
 
 import { ToolbarTokens } from './tokens';
 import type { ColorScheme, Variant } from './tokens';
-import type { ColorRole, Elevation } from '../../theme/types';
+import type { Elevation } from '../../theme/types';
 import type { InternalTheme } from '../../types';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
@@ -12,12 +12,6 @@ const resolveColors = (colorScheme: ColorScheme) =>
   colorScheme === 'vibrant'
     ? ToolbarTokens.vibrantColors
     : ToolbarTokens.standardColors;
-
-/** Picks the role that applies for `theme`'s own light/dark mode. */
-const resolveTone = (
-  theme: InternalTheme,
-  role: { light: ColorRole; dark: ColorRole }
-): ColorValue => theme.colors[theme.dark ? role.dark : role.light];
 
 /** Resolve the container (background) color; an explicit `containerColor` wins over `colorScheme`. */
 export const resolveContainerColor = ({
@@ -33,7 +27,7 @@ export const resolveContainerColor = ({
     return containerColor;
   }
 
-  return resolveTone(theme, resolveColors(colorScheme).container);
+  return theme.colors[resolveColors(colorScheme).container];
 };
 
 /**
@@ -54,10 +48,10 @@ export const resolveIconColors = ({
 
   return selected
     ? {
-        iconColor: resolveTone(theme, roles.selectedIcon),
-        containerColor: resolveTone(theme, roles.selectedButtonContainer),
+        iconColor: theme.colors[roles.selectedIcon],
+        containerColor: theme.colors[roles.selectedButtonContainer],
       }
-    : { iconColor: resolveTone(theme, roles.icon) };
+    : { iconColor: theme.colors[roles.icon] };
 };
 
 /** Resolve a `Button` child's label color (`Button` has no `selected` state, so there's just one). */
@@ -67,7 +61,7 @@ export const resolveLabelColor = ({
 }: {
   theme: InternalTheme;
   colorScheme: ColorScheme;
-}): ColorValue => resolveTone(theme, resolveColors(colorScheme).label);
+}): ColorValue => theme.colors[resolveColors(colorScheme).label];
 
 type RecolorableProps = {
   children?: React.ReactNode;
@@ -115,7 +109,11 @@ const recolorChildren = (
         colorScheme,
         selected: child.props.selected ?? false,
       });
-      return React.cloneElement(child, { iconColor, containerColor });
+      return React.cloneElement(child, {
+        iconColor,
+        containerColor,
+        ...(child.props.selected ? { mode: 'contained-tonal' } : null),
+      });
     }
 
     if (child.type === Button) {

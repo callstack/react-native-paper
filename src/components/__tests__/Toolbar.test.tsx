@@ -227,6 +227,25 @@ it('gives a selected IconButton child the selected container color', async () =>
   });
 });
 
+it('gives a disabled, selected IconButton child the disabled treatment instead of its selected color', async () => {
+  await render(
+    <Toolbar>
+      <IconButton
+        testID="disabled-selected"
+        selected
+        disabled
+        icon="format-bold"
+        onPress={() => {}}
+      />
+    </Toolbar>
+  );
+
+  const theme = getTheme();
+  expect(screen.getByTestId('disabled-selected-container')).not.toHaveStyle({
+    backgroundColor: theme.colors.secondaryContainer,
+  });
+});
+
 it("leaves a selected IconButton child's explicit containerColor untouched", async () => {
   await render(
     <Toolbar colorScheme="vibrant">
