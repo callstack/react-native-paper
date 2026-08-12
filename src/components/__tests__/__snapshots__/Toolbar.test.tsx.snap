@@ -895,7 +895,7 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
                 style={
                   [
                     {
-                      "color": "rgba(79, 55, 139, 1)",
+                      "color": "rgba(33, 0, 93, 1)",
                       "fontSize": 24,
                     },
                     [
@@ -1533,7 +1533,7 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
                 style={
                   [
                     {
-                      "color": "rgba(79, 55, 139, 1)",
+                      "color": "rgba(33, 0, 93, 1)",
                       "fontSize": 24,
                     },
                     [
@@ -1672,7 +1672,7 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
                 style={
                   [
                     {
-                      "color": "rgba(79, 55, 139, 1)",
+                      "color": "rgba(33, 0, 93, 1)",
                       "fontSize": 24,
                     },
                     [

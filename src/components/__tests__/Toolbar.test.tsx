@@ -266,7 +266,7 @@ it("defaults a mode-less Button child's textColor to the toolbar's content color
     color: theme.colors.onSurfaceVariant,
   });
   expect(screen.getByTestId('vibrant-text')).toHaveStyle({
-    color: theme.colors.onPrimaryFixedVariant,
+    color: theme.colors.onPrimaryContainer,
   });
 });
 
@@ -281,7 +281,7 @@ it('recolors a Button child with an explicit mode="text", same as no mode', asyn
 
   const theme = getTheme();
   expect(screen.getByTestId('text-mode-text')).toHaveStyle({
-    color: theme.colors.onPrimaryFixedVariant,
+    color: theme.colors.onPrimaryContainer,
   });
 });
 
@@ -348,13 +348,13 @@ describe('color resolution across light/dark themes', () => {
     ['standard', 'dark', 'label', '#CAC4D0'],
     ['standard', 'light', 'selectedContainer', '#E8DEF8'],
     ['standard', 'dark', 'selectedContainer', '#4A4458'],
-    ['standard', 'light', 'selectedIcon', '#4A4458'],
+    ['standard', 'light', 'selectedIcon', '#1D192B'],
     ['standard', 'dark', 'selectedIcon', '#E8DEF8'],
     ['vibrant', 'light', 'container', '#EADDFF'],
     ['vibrant', 'dark', 'container', '#4F378B'],
-    ['vibrant', 'light', 'icon', '#4F378B'],
+    ['vibrant', 'light', 'icon', '#21005D'],
     ['vibrant', 'dark', 'icon', '#EADDFF'],
-    ['vibrant', 'light', 'label', '#4F378B'],
+    ['vibrant', 'light', 'label', '#21005D'],
     ['vibrant', 'dark', 'label', '#EADDFF'],
     ['vibrant', 'light', 'selectedContainer', '#F3EDF7'],
     ['vibrant', 'dark', 'selectedContainer', '#211F26'],

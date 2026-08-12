@@ -32,15 +32,6 @@ const elevation = {
   floating: 3,
 } as const satisfies Record<string, Elevation>;
 
-// A role that resolves differently per theme mode. Most roles below
-// happen to use the same one in `light`/`dark` (they're already
-// theme-aware on their own), but a couple of MD3's "Fixed" roles
-// (`on*FixedVariant`) are the wrong pick for `dark`: those are
-// *intentionally* the same tone in both modes, whereas the spec's actual
-// color for that slot isn't, so `light`/`dark` need to name different
-// roles there.
-type ToneRole = { light: ColorRole; dark: ColorRole };
-
 // Per https://m3.material.io/components/toolbars/specs—color roles for
 // the toolbar itself (`container`) and its mode-less children: `IconButton`
 // (`icon`, `buttonContainer`) and `Button` (`label`); a `mode` on either
@@ -51,31 +42,22 @@ type ToneRole = { light: ColorRole; dark: ColorRole };
 // it's the same role as the toolbar's own `container` (i.e. no visible
 // pill, it just blends in).
 const standardColors = {
-  container: { light: 'surfaceContainer', dark: 'surfaceContainer' },
-  buttonContainer: { light: 'surfaceContainer', dark: 'surfaceContainer' },
-  selectedButtonContainer: {
-    light: 'secondaryContainer',
-    dark: 'secondaryContainer',
-  },
-  icon: { light: 'onSurfaceVariant', dark: 'onSurfaceVariant' },
-  selectedIcon: {
-    light: 'onSecondaryFixedVariant',
-    dark: 'onSecondaryContainer',
-  },
-  label: { light: 'onSurfaceVariant', dark: 'onSurfaceVariant' },
-} as const satisfies Record<string, ToneRole>;
+  container: 'surfaceContainer',
+  buttonContainer: 'surfaceContainer',
+  selectedButtonContainer: 'secondaryContainer',
+  icon: 'onSurfaceVariant',
+  selectedIcon: 'onSecondaryContainer',
+  label: 'onSurfaceVariant',
+} as const satisfies Record<string, ColorRole>;
 
 const vibrantColors = {
-  container: { light: 'primaryContainer', dark: 'primaryContainer' },
-  buttonContainer: { light: 'primaryContainer', dark: 'primaryContainer' },
-  selectedButtonContainer: {
-    light: 'surfaceContainer',
-    dark: 'surfaceContainer',
-  },
-  icon: { light: 'onPrimaryFixedVariant', dark: 'onPrimaryContainer' },
-  selectedIcon: { light: 'onSurface', dark: 'onSurface' },
-  label: { light: 'onPrimaryFixedVariant', dark: 'onPrimaryContainer' },
-} as const satisfies Record<string, ToneRole>;
+  container: 'primaryContainer',
+  buttonContainer: 'primaryContainer',
+  selectedButtonContainer: 'surfaceContainer',
+  icon: 'onPrimaryContainer',
+  selectedIcon: 'onSurface',
+  label: 'onPrimaryContainer',
+} as const satisfies Record<string, ColorRole>;
 
 export const ToolbarTokens = {
   floating,
