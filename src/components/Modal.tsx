@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Animated, Easing, StyleSheet, Pressable, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
@@ -12,6 +12,7 @@ import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
+import useKeyboardOverlap from '../utils/useKeyboardOverlap';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -114,6 +115,18 @@ function Modal({
   const { top, bottom } = useSafeAreaInsets();
   const opacity = useAnimatedValue(visible ? 1 : 0);
   const [visibleInternal, setVisibleInternal] = React.useState(visible);
+  const [wrapperBottom, setWrapperBottom] = React.useState<number | null>(null);
+
+  const keyboardOverlap = useKeyboardOverlap({
+    enabled: visibleInternal,
+    containerBottom: wrapperBottom,
+  });
+
+  const onWrapperLayout = React.useCallback((event: LayoutChangeEvent) => {
+    const { y, height } = event.nativeEvent.layout;
+
+    setWrapperBottom(y + height);
+  }, []);
 
   const showModalAnimation = React.useCallback(() => {
     Animated.timing(opacity, {
@@ -209,9 +222,16 @@ function Modal({
       <View
         style={[
           styles.wrapper,
-          { marginTop: top, marginBottom: bottom },
+          {
+            marginTop: top,
+            marginBottom: bottom,
+            // Keeps the content above the on-screen keyboard on platforms where
+            // the system doesn't resize the window, e.g. iOS or edge-to-edge Android.
+            paddingBottom: keyboardOverlap,
+          },
           style,
         ]}
+        onLayout={onWrapperLayout}
         pointerEvents="box-none"
         testID={`${testID}-wrapper`}
       >

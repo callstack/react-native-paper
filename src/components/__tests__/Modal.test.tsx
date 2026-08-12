@@ -1,8 +1,15 @@
-import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
+import {
+  Animated,
+  BackHandler as RNBackHandler,
+  DeviceEventEmitter,
+  Dimensions,
+  Platform,
+  Text,
+} from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
@@ -574,6 +581,186 @@ describe('Modal', () => {
       });
     });
   });
+
+  // `keyboardWillShow` and `keyboardWillHide` are not emitted on Android
+  const keyboardEventsPerPlatform: Array<[typeof Platform.OS, string, string]> =
+    [
+      ['ios', 'keyboardWillShow', 'keyboardWillHide'],
+      ['android', 'keyboardDidShow', 'keyboardDidHide'],
+    ];
+
+  describe.each(keyboardEventsPerPlatform)(
+    'when the on-screen keyboard is shown on %s',
+    (platform, showEvent, hideEvent) => {
+      const KEYBOARD_HEIGHT = 300;
+      const TOP_INSET = 37;
+      const BOTTOM_INSET = 44;
+
+      const screenHeight = Dimensions.get('screen').height;
+      // Space taken by the keyboard below the bottom edge of the wrapper
+      const expectedOverlap = KEYBOARD_HEIGHT - BOTTOM_INSET;
+      const originalPlatform = Platform.OS;
+
+      beforeAll(() => {
+        Platform.OS = platform;
+      });
+
+      afterAll(() => {
+        Platform.OS = originalPlatform;
+      });
+
+      const showKeyboard = async () => {
+        await act(() => {
+          DeviceEventEmitter.emit(showEvent, {
+            endCoordinates: {
+              screenX: 0,
+              screenY: screenHeight - KEYBOARD_HEIGHT,
+              width: 750,
+              height: KEYBOARD_HEIGHT,
+            },
+          });
+        });
+      };
+
+      const hideKeyboard = async () => {
+        await act(() => {
+          DeviceEventEmitter.emit(hideEvent, {
+            endCoordinates: {
+              screenX: 0,
+              screenY: screenHeight,
+              width: 750,
+              height: 0,
+            },
+          });
+        });
+      };
+
+      const layoutWrapper = async (y: number, height: number) => {
+        await act(() =>
+          fireEvent(screen.getByTestId('modal-wrapper'), 'layout', {
+            nativeEvent: { layout: { x: 0, y, width: 750, height } },
+          })
+        );
+      };
+
+      it('should keep the content above the keyboard if the window is not resized', async () => {
+        await render(
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        );
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: 0,
+        });
+
+        await layoutWrapper(TOP_INSET, screenHeight - TOP_INSET - BOTTOM_INSET);
+        await showKeyboard();
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: expectedOverlap,
+        });
+      });
+
+      it('should account for a keyboard which is already open when it becomes visible', async () => {
+        // `Keyboard.metrics()` is populated from `keyboardDidShow` on every platform
+        await act(() => {
+          DeviceEventEmitter.emit('keyboardDidShow', {
+            endCoordinates: {
+              screenX: 0,
+              screenY: screenHeight - KEYBOARD_HEIGHT,
+              width: 750,
+              height: KEYBOARD_HEIGHT,
+            },
+          });
+        });
+
+        const { rerender } = await render(
+          <Modal visible={false} testID="modal">
+            {null}
+          </Modal>
+        );
+
+        await rerender(
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        );
+
+        await layoutWrapper(TOP_INSET, screenHeight - TOP_INSET - BOTTOM_INSET);
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: expectedOverlap,
+        });
+
+        await act(() => {
+          DeviceEventEmitter.emit('keyboardDidHide', {
+            endCoordinates: {
+              screenX: 0,
+              screenY: screenHeight,
+              width: 750,
+              height: 0,
+            },
+          });
+        });
+      });
+
+      it('should not add any padding if the window is resized by the system', async () => {
+        await render(
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        );
+
+        // The system shrunk the window, so the wrapper is already above the keyboard
+        await layoutWrapper(
+          TOP_INSET,
+          screenHeight - TOP_INSET - BOTTOM_INSET - KEYBOARD_HEIGHT
+        );
+        await showKeyboard();
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: 0,
+        });
+      });
+
+      it('should follow the wrapper if the safe area insets are overridden', async () => {
+        await render(
+          <Modal visible={true} testID="modal" style={{ marginBottom: 0 }}>
+            {null}
+          </Modal>
+        );
+
+        await layoutWrapper(TOP_INSET, screenHeight - TOP_INSET);
+        await showKeyboard();
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: KEYBOARD_HEIGHT,
+        });
+      });
+
+      it('should restore the original padding once the keyboard is hidden', async () => {
+        await render(
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        );
+
+        await layoutWrapper(TOP_INSET, screenHeight - TOP_INSET - BOTTOM_INSET);
+        await showKeyboard();
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: expectedOverlap,
+        });
+
+        await hideKeyboard();
+
+        expect(screen.getByTestId('modal-wrapper')).toHaveStyle({
+          paddingBottom: 0,
+        });
+      });
+    }
+  );
 
   it('animated value changes correctly', async () => {
     const value = new Animated.Value(1);

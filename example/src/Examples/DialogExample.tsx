@@ -10,6 +10,7 @@ import {
   DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
+  DialogWithTextInput,
   UndismissableDialog,
 } from './Dialogs';
 import ScreenWrapper from '../ScreenWrapper';
@@ -70,6 +71,13 @@ const DialogExample = () => {
       >
         With icon
       </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog8')}
+        style={styles.button}
+      >
+        With text input
+      </Button>
       {Platform.OS === 'android' && (
         <Button
           mode="outlined"
@@ -106,6 +114,10 @@ const DialogExample = () => {
       <DialogWithDismissableBackButton
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}
+      />
+      <DialogWithTextInput
+        visible={_getVisible('dialog8')}
+        close={_toggleDialog('dialog8')}
       />
     </ScreenWrapper>
   );
