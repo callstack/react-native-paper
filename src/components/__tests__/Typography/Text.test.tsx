@@ -146,19 +146,29 @@ it("nested styled text should only override the parent's clashing properties", a
 });
 
 it('nested text alongside other content inherits instead of resetting', async () => {
+  const parentColor = 'tomato';
+
   await render(
-    <Text variant="displayLarge">
+    <Text
+      testID="parent-text"
+      variant="displayLarge"
+      style={{ color: parentColor }}
+    >
       Parent <Text testID="child-text">child</Text>
     </Text>
   );
 
-  // React Native's `Text` inherits from the enclosing `Text`, so the child must
-  // not restate the default font, which would override what it inherits.
   const { fontFamily, fontWeight, letterSpacing } = LightTheme.fonts.default;
 
+  expect(screen.getByTestId('parent-text')).toHaveStyle({
+    color: parentColor,
+  });
   expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontFamily });
   expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontWeight });
   expect(screen.getByTestId('child-text')).not.toHaveStyle({ letterSpacing });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({
+    color: LightTheme.colors.onSurface,
+  });
 });
 
 it('nested text keeps applying its own style while inheriting the rest', async () => {
