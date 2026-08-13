@@ -177,6 +177,10 @@ const Text = ({
     );
   }
 
+  if (!canContainNestedText(rest.children)) {
+    return element;
+  }
+
   return (
     <NestedTextContext.Provider value={true}>
       {element}
