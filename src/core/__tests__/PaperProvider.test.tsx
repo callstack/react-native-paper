@@ -10,6 +10,7 @@ import {
 } from '@jest/globals';
 import { act, render, screen } from '@testing-library/react-native';
 
+import Text from '../../components/Typography/Text';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
@@ -328,5 +329,91 @@ describe('PaperProvider', () => {
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
       customTheme
     );
+  });
+
+  describe('partial theme merging', () => {
+    // A v2-shaped `fonts` object, as produced by `configureFonts` before v5.13
+    // and still widely copy-pasted. It shares no keys with the MD3 typescale.
+    const legacyFonts = {
+      regular: { fontFamily: 'CustomSans-Regular', fontWeight: '400' },
+      medium: { fontFamily: 'CustomSans-Medium', fontWeight: '500' },
+      light: { fontFamily: 'CustomSans-Light', fontWeight: '300' },
+      thin: { fontFamily: 'CustomSans-Thin', fontWeight: '100' },
+    } as const;
+
+    it('keeps the base typescale when only part of theme.fonts is provided', async () => {
+      mockAppearance();
+      await render(createProvider({ fonts: legacyFonts } as ThemeProp));
+
+      const theme =
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        screen.getByTestId('provider-child-view').props.theme;
+
+      // The MD3 variants the user did not mention must survive...
+      expect(theme.fonts.titleLarge).toStrictEqual(LightTheme.fonts.titleLarge);
+      expect(theme.fonts.bodyMedium).toStrictEqual(LightTheme.fonts.bodyMedium);
+      // ...alongside the keys the user did provide.
+      expect(theme.fonts.regular).toStrictEqual(legacyFonts.regular);
+    });
+
+    it('renders <Text variant> instead of throwing when theme.fonts is partial', async () => {
+      mockAppearance();
+      // Reproduces #4589: `<Text variant>` threw
+      // "Variant titleLarge was not provided properly. Valid variants are
+      // regular, medium, light, thin." because the provider dropped the typescale.
+      await render(
+        <PaperProvider theme={{ fonts: legacyFonts } as ThemeProp}>
+          <Text variant="titleLarge">Merged typescale</Text>
+        </PaperProvider>
+      );
+
+      expect(screen.getByText('Merged typescale')).toBeOnTheScreen();
+    });
+
+    it('still merges theme.colors with the base palette', async () => {
+      mockAppearance();
+      await render(createProvider({ colors: { primary: 'tomato' } }));
+
+      const theme =
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        screen.getByTestId('provider-child-view').props.theme;
+
+      expect(theme.colors.primary).toBe('tomato');
+      expect(theme.colors.onSurface).toBe(LightTheme.colors.onSurface);
+      expect(Object.keys(theme.colors)).toStrictEqual(
+        Object.keys(LightTheme.colors)
+      );
+    });
+
+    it('keeps sibling tokens when a nested shape token is overridden', async () => {
+      mockAppearance();
+      await render(createProvider({ shapes: { corner: { small: 2 } } }));
+
+      const theme =
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        screen.getByTestId('provider-child-view').props.theme;
+
+      expect(theme.shapes.corner.small).toBe(2);
+      expect(theme.shapes.corner.large).toBe(LightTheme.shapes.corner.large);
+    });
+
+    it('lets a complete fonts object override every default variant', async () => {
+      mockAppearance();
+      // Shaped like the output of `configureFonts`: every variant present, with
+      // the same properties as the defaults, so nothing can be inherited.
+      const completeFonts = Object.fromEntries(
+        Object.entries(LightTheme.fonts).map(([variant, style]) => [
+          variant,
+          { ...style, fontFamily: 'Overridden' },
+        ])
+      );
+      await render(createProvider({ fonts: completeFonts } as ThemeProp));
+
+      const theme =
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        screen.getByTestId('provider-child-view').props.theme;
+
+      expect(theme.fonts).toStrictEqual(completeFonts);
+    });
   });
 });
