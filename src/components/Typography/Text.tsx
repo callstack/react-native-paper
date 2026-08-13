@@ -4,7 +4,7 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
-import { NestedTextContext } from './NestedTextContext';
+import { canContainNestedText, NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';

@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 import type { StyleProp, TextProps, TextStyle } from 'react-native';
 
-import { NestedTextContext } from './NestedTextContext';
+import { canContainNestedText, NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -97,6 +97,10 @@ function AnimatedText({
         ]}
       />
     );
+  }
+
+  if (!canContainNestedText(rest.children)) {
+    return element;
   }
 
   return (
