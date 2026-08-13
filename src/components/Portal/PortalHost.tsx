@@ -51,7 +51,9 @@ export default class PortalHost extends React.Component<Props> {
     const queue = this.queue;
 
     while (queue.length && manager) {
-      const action = queue.pop();
+      // Replay in the order the operations were recorded, otherwise portals
+      // that mounted in the same commit end up stacked in reverse.
+      const action = queue.shift();
       if (action) {
         switch (action.type) {
           case 'mount':
