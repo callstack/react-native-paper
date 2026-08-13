@@ -49,7 +49,8 @@ export type Props = {
   style?: StyleProp<ViewStyle>;
   /**
    * Style for the row/column wrapping `children`. Overrides the default
-   * padding/gap.
+   * padding/gap, and, for consumers who need full control, the fixed
+   * cross-axis thickness (64dp per spec) as well.
    */
   contentContainerStyle?: StyleProp<ViewStyle>;
   /**
@@ -178,11 +179,6 @@ const Toolbar = ({
 
   const pill = (
     <Surface
-      // Keying on the axis forces a fresh mount when `floating`'s pill
-      // jumps position (e.g. bottom-center to a vertical trailing edge),
-      // avoiding a stale shadow "ghost" that `Surface`'s iOS shadow can
-      // leave at the old frame when an existing view is resized in place.
-      key={isVertical ? 'vertical' : 'horizontal'}
       ref={isDocked ? undefined : ref}
       elevation={elevation}
       style={[
@@ -190,8 +186,6 @@ const Toolbar = ({
           backgroundColor,
           borderRadius,
         },
-        !isDocked &&
-          (isVertical ? { width: thickness } : { height: thickness }),
         isDocked && styles.dockedFill,
         styles.content,
         !isDocked && style,
@@ -201,12 +195,23 @@ const Toolbar = ({
       <View
         role="toolbar"
         aria-label={ariaLabel}
+        testID={`${testID}-content`}
         style={[
           styles.content,
           isVertical ? styles.column : styles.row,
-          isDocked && { height: thickness },
           { ...contentPadding, gap },
           dockedInsetMargin,
+          // Cross-axis thickness is the spec default (see `thickness`
+          // above). Deliberately set here rather than on `Surface` (which
+          // wraps this `View` with no size of its own, so it just hugs
+          // it) — giving `Surface` an explicit width/height that flips
+          // between renders is what previously left a stale shadow
+          // "ghost" on iOS when `floating`'s `orientation` changed axis;
+          // that no longer happens with the fixed dimension living here
+          // instead.
+          isDocked && { height: thickness },
+          !isDocked &&
+            (isVertical ? { width: thickness } : { height: thickness }),
           contentContainerStyle,
         ]}
       >

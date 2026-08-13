@@ -7,7 +7,6 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
     {
       "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -26,7 +25,7 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
         "alignItems": "center",
         "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -52,7 +51,6 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -61,9 +59,14 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -277,9 +280,6 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
               "justifyContent": "center",
             },
             {
-              "height": 64,
-            },
-            {
               "gap": 32,
               "paddingLeft": 16,
               "paddingRight": 16,
@@ -289,9 +289,14 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
               "marginLeft": 0,
               "marginRight": 0,
             },
+            {
+              "height": 64,
+            },
+            false,
             undefined,
           ]
         }
+        testID="toolbar-content"
       >
         <View
           collapsable={false}
@@ -584,7 +589,6 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
     {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -603,7 +607,7 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
         "alignItems": "center",
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -629,7 +633,6 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -638,9 +641,14 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -932,7 +940,6 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
     {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -951,7 +958,7 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
         "alignItems": "center",
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -977,7 +984,6 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -986,9 +992,14 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1152,7 +1163,6 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
     {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -1171,7 +1181,7 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
         "alignItems": "center",
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -1197,7 +1207,6 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -1206,9 +1215,14 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1361,7 +1375,6 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
     {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -1380,7 +1393,7 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
         "alignItems": "center",
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -1406,7 +1419,6 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -1415,9 +1427,14 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1709,7 +1726,6 @@ exports[`renders Toolbar with default props 1`] = `
     {
       "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -1728,7 +1744,7 @@ exports[`renders Toolbar with default props 1`] = `
         "alignItems": "center",
         "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -1754,7 +1770,6 @@ exports[`renders Toolbar with default props 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -1763,9 +1778,14 @@ exports[`renders Toolbar with default props 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -2118,9 +2138,6 @@ exports[`renders Toolbar with docked variant 1`] = `
               "justifyContent": "center",
             },
             {
-              "height": 64,
-            },
-            {
               "gap": 32,
               "paddingLeft": 16,
               "paddingRight": 16,
@@ -2130,9 +2147,14 @@ exports[`renders Toolbar with docked variant 1`] = `
               "marginLeft": 0,
               "marginRight": 0,
             },
+            {
+              "height": 64,
+            },
+            false,
             undefined,
           ]
         }
+        testID="toolbar-content"
       >
         <View
           collapsable={false}
@@ -2432,7 +2454,6 @@ exports[`renders Toolbar with vertical orientation 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "width": 64,
     }
   }
   testID="toolbar-outer-layer"
@@ -2470,7 +2491,6 @@ exports[`renders Toolbar with vertical orientation 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -2479,9 +2499,14 @@ exports[`renders Toolbar with vertical orientation 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "width": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -2773,7 +2798,6 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
     {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 9999,
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
@@ -2792,7 +2816,7 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
         "alignItems": "center",
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 9999,
-        "flex": 1,
+        "flex": undefined,
         "justifyContent": "center",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
@@ -2818,7 +2842,6 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
-          false,
           {
             "gap": 4,
             "paddingBottom": 8,
@@ -2827,9 +2850,14 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
             "paddingTop": 8,
           },
           null,
+          false,
+          {
+            "height": 64,
+          },
           undefined,
         ]
       }
+      testID="toolbar-content"
     >
       <View
         collapsable={false}

@@ -107,6 +107,16 @@ it("lets `style` override the floating pill's internal container styles", async 
   });
 });
 
+it("lets `contentContainerStyle` override the pill's fixed cross-axis thickness for full control", async () => {
+  await render(
+    <Toolbar testID="floating" contentContainerStyle={{ height: 10 }}>
+      <ToolbarChildren />
+    </Toolbar>
+  );
+
+  expect(screen.getByTestId('floating-content')).toHaveStyle({ height: 10 });
+});
+
 it("applies `style` to the docked variant's self-anchoring container", async () => {
   await render(
     <Toolbar testID="docked" variant="docked" style={{ bottom: 10 }}>
