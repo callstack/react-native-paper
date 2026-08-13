@@ -22,7 +22,9 @@ export default function ExampleListHeader({ query, onQueryChange }: Props) {
         placeholder="Search examples"
         value={query}
         onChangeText={onQueryChange}
-        icon={canGoBack ? 'arrow-left' : 'magnify'}
+        icon={
+          canGoBack ? { source: 'arrow-left', direction: 'auto' } : 'magnify'
+        }
         onIconPress={canGoBack ? () => navigation.goBack() : undefined}
         searchAccessibilityLabel={canGoBack ? 'go back' : 'search'}
         traileringIcon="cog"

@@ -65,6 +65,7 @@ export default function PaperExample() {
           theme={navigationTheme}
           direction={direction}
           persistor={navigationPersistor}
+          linking={{ config: { initialRouteName: 'SamplesList' } }}
           onReady={() => {
             void SplashScreen.hideAsync();
           }}

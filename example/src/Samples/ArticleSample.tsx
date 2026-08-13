@@ -60,20 +60,22 @@ const ArticleSample = () => {
             </View>
           </Card.Content>
           <Card.Actions>
-            <Tooltip title={liked ? 'Remove like' : 'Like'}>
-              <IconButton
-                icon={liked ? 'heart' : 'heart-outline'}
-                selected={liked}
-                onPress={() => setLiked(!liked)}
-              />
-            </Tooltip>
-            <Tooltip title={bookmarked ? 'Remove bookmark' : 'Bookmark'}>
-              <IconButton
-                icon={bookmarked ? 'bookmark' : 'bookmark-outline'}
-                selected={bookmarked}
-                onPress={() => setBookmarked(!bookmarked)}
-              />
-            </Tooltip>
+            <View style={styles.cardIcons}>
+              <Tooltip title={liked ? 'Remove like' : 'Like'}>
+                <IconButton
+                  icon={liked ? 'heart' : 'heart-outline'}
+                  selected={liked}
+                  onPress={() => setLiked(!liked)}
+                />
+              </Tooltip>
+              <Tooltip title={bookmarked ? 'Remove bookmark' : 'Bookmark'}>
+                <IconButton
+                  icon={bookmarked ? 'bookmark' : 'bookmark-outline'}
+                  selected={bookmarked}
+                  onPress={() => setBookmarked(!bookmarked)}
+                />
+              </Tooltip>
+            </View>
             <Button mode="contained" onPress={() => {}}>
               Read
             </Button>
@@ -104,6 +106,10 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     gap: 16,
+  },
+  cardIcons: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   topics: {
     flexDirection: 'row',

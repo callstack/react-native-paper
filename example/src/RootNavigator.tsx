@@ -33,6 +33,7 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   const searchAction = (
     <Appbar.Action
       icon="folder-search"
+      aria-label="examples"
       onPress={() => navigation.navigate('ExampleList')}
     />
   );
@@ -42,7 +43,11 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
       {back ? backAction : isIOS ? searchAction : null}
       <Appbar.Content title={options.title || route.name} />
       {!isIOS && !back && searchAction}
-      <Appbar.Action icon="cog" onPress={togglePreferences} />
+      <Appbar.Action
+        icon="cog"
+        aria-label="preferences"
+        onPress={togglePreferences}
+      />
     </Appbar.Header>
   );
 }
@@ -88,7 +93,7 @@ const Root = createNativeStackNavigator({
         title: 'Examples',
         headerShown: false,
       },
-      linking: '',
+      linking: 'examples',
     }),
     /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
     ...fromEntries(

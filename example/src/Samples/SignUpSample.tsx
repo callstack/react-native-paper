@@ -41,7 +41,8 @@ const SignUpSample = () => {
   const passwordIcon = (props: TextInputAccessoryProps) => (
     <TextInput.Icon
       {...props}
-      icon={secure ? 'eye-off-outline' : 'eye-outline'}
+      icon={secure ? 'eye-outline' : 'eye-off-outline'}
+      aria-label={secure ? 'Show password' : 'Hide password'}
       onPress={() => setSecure(!secure)}
     />
   );
