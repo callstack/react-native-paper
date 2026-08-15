@@ -165,7 +165,12 @@ const RadioButtonItem = ({
     color,
     theme,
     uncheckedColor,
-  };
+    // The outer TouchableRipple in RadioButtonItem already provides the
+    // interactive surface. Disable the inner RadioButton's focusability
+    // so there is only one tabstop per radio button item on web.
+    focusable: false,
+    tabIndex: -1,
+  } as const;
   const isLeading = position === 'leading';
   let radioButton: any;
 
