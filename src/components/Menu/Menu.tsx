@@ -371,6 +371,12 @@ const Menu = ({
 
     const { animation } = theme;
 
+    // Reset before the animation starts so that the menu can be re-opened
+    // even if the hide animation's completion callback never fires (e.g. on
+    // React Native >= 0.80 where the animation `finished` event is not
+    // delivered). Without this the menu stays closed and cannot be shown again.
+    prevRendered.current = false;
+
     Animated.timing(opacityAnimationRef.current, {
       toValue: 0,
       duration: ANIMATION_DURATION * animation.scale,
@@ -379,7 +385,6 @@ const Menu = ({
     }).start(() => {
       setMenuLayout({ width: 0, height: 0 });
       setRendered(false);
-      prevRendered.current = false;
       focusFirstDOMNode(anchorRef.current);
     });
   }, [removeListeners, theme]);
