@@ -245,8 +245,6 @@ export default function PaperExample() {
 const styles = StyleSheet.create({
   drawer: {
     width: 360,
-    // Keep the drawer usable on narrow phones, where 360dp would leave no
-    // room for the scrim.
     maxWidth: '80%',
     borderTopEndRadius: 16,
     borderBottomEndRadius: 16,

@@ -63,9 +63,6 @@ it('leaves an inactive destination without an indicator', async () => {
 it('insets destination content 28dp from both drawer edges', async () => {
   await render(<DrawerItem label="Example item" />);
 
-  // The 28dp of MD3 container padding is split between the active
-  // indicator's inset from the drawer edge and the content's inset from
-  // the indicator edge. `marginHorizontal` keeps both sides symmetric.
   expect(screen.getByRole('button')).toHaveStyle({ marginHorizontal: 12 });
   expect(screen.getByTestId('drawer-item-content')).toHaveStyle({
     marginHorizontal: 16,
@@ -114,8 +111,6 @@ it('dims the active indicator of a disabled destination', async () => {
     <DrawerItem label="Example item" onPress={() => {}} active disabled />
   );
 
-  // The active indicator is the destination's own background, so dimming the
-  // destination dims the indicator, icon, label and trailing slot in one pass.
   expect(screen.getByRole('button')).toHaveStyle({
     backgroundColor: colors.secondaryContainer,
     opacity: stateOpacity.disabled,

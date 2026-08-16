@@ -18,7 +18,6 @@ The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, o
 If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout. To restore the old trailing padding, pass it through `style`:
 
 ```tsx
-// Paper 5.x spacing
 <Drawer.Item label="Inbox" icon="inbox" style={{ marginEnd: 20 }} />
 ```
 

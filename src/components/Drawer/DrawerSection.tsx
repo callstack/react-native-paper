@@ -91,8 +91,6 @@ const DrawerSection = ({
         </View>
       )}
       {children}
-      {/* Drawer-specific divider tokens are deprecated in MD3; the standalone
-          divider spec (`outlineVariant`, 1dp) applies instead. */}
       {showDivider && (
         <Divider
           horizontalInset
@@ -116,7 +114,6 @@ const styles = StyleSheet.create({
     height: DrawerSectionTokens.headlineHeight,
     justifyContent: 'center',
   },
-  // Aligns the headline with the destination icons.
   title: {
     marginStart: DrawerSectionTokens.headlinePadding,
   },

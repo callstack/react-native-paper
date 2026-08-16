@@ -207,7 +207,6 @@ const DrawerItem = ({
 
 DrawerItem.displayName = 'Drawer.Item';
 
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
@@ -216,8 +215,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: DrawerItemTokens.indicatorInset,
   },
-  // Fills the active indicator so the focus ring can be positioned against
-  // its bounds rather than the content's.
   inner: {
     flex: 1,
     justifyContent: 'center',
@@ -238,8 +235,6 @@ const styles = StyleSheet.create({
   labelWithIcon: {
     marginStart: DrawerItemTokens.iconLabelGap,
   },
-  // Drawn inside the indicator: destinations sit flush, so an outer ring
-  // would overlap its neighbours.
   focusRing: {
     position: 'absolute',
     top: DrawerItemTokens.focusIndicator.inset,

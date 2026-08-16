@@ -38,9 +38,6 @@ export type TypescaleKey =
   | 'bodyLarge'
   | 'bodyMedium'
   | 'bodySmall'
-  // Emphasized styles carry the `*-weight-prominent` weight of their base
-  // style, used to mark selection (e.g. the active navigation destination).
-  // @see https://m3.material.io/styles/typography/type-scale-tokens
   | 'displayLargeEmphasized'
   | 'displayMediumEmphasized'
   | 'displaySmallEmphasized'
