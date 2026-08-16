@@ -135,7 +135,6 @@ function DrawerItems() {
 
   return (
     <DrawerContentScrollView
-      alwaysBounceVertical={false}
       style={[
         styles.drawerContent,
         {

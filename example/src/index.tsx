@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -65,10 +65,9 @@ const Drawer = createDrawerNavigator({
   return (
     <Navigator
       screenOptions={{
-        drawerStyle: [
-          styles.drawer,
-          preferences?.collapsed && { width: collapsedDrawerWidth },
-        ],
+        drawerStyle: preferences?.collapsed && {
+          width: collapsedDrawerWidth,
+        },
       }}
       drawerContent={() => <DrawerItems />}
     />
@@ -241,12 +240,3 @@ export default function PaperExample() {
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  drawer: {
-    width: 360,
-    maxWidth: '80%',
-    borderTopEndRadius: 16,
-    borderBottomEndRadius: 16,
-  },
-});
