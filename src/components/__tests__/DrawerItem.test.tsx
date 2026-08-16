@@ -102,6 +102,13 @@ it('dims a disabled destination', async () => {
   });
 });
 
+it('does not show a focus indicator on a disabled destination', async () => {
+  await render(<DrawerItem label="Example item" onPress={() => {}} disabled />);
+
+  await fireEvent(screen.getByRole('button'), 'focus');
+  expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
+});
+
 it('dims the active indicator of a disabled destination', async () => {
   await render(
     <DrawerItem label="Example item" onPress={() => {}} active disabled />

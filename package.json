@@ -114,8 +114,7 @@
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
-      "<rootDir>/lib/",
-      "<rootDir>/.claude/"
+      "<rootDir>/lib/"
     ],
     "watchPathIgnorePatterns": [
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"

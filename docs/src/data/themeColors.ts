@@ -1,15 +1,3 @@
-/**
- * Theme color roles rendered by each component, surfaced in the docs as
- * `<ThemeColorsTable />`.
- *
- * Top-level keys must match the generated page title (see
- * `component-docs-plugin/generatePageMDX.ts`), which is the component's
- * `displayName` - e.g. `FAB.Extended` is titled `Extended`.
- *
- * Values must reference roles that exist on `ThemeColors`
- * (`src/theme/types/color.ts`). Disabled states no longer have dedicated
- * roles - components draw them from `onSurface` at a reduced opacity.
- */
 export const themeColors = {
   ActivityIndicator: {
     '-': {
@@ -21,7 +9,7 @@ export const themeColors = {
       backgroundColor: 'theme.colors.surface',
     },
     elevated: {
-      backgroundColor: 'theme.colors.surfaceContainer',
+      backgroundColor: 'theme.colors.elevation.level2',
     },
   },
   'Appbar.Action': {
@@ -42,7 +30,7 @@ export const themeColors = {
       backgroundColor: 'theme.colors.surface',
     },
     elevated: {
-      backgroundColor: 'theme.colors.surfaceContainer',
+      backgroundColor: 'theme.colors.elevation.level2',
     },
   },
   Banner: {
@@ -60,7 +48,7 @@ export const themeColors = {
   Button: {
     active: {
       elevated: {
-        backgroundColor: 'theme.colors.surfaceContainerLow',
+        backgroundColor: 'theme.colors.elevation.level1',
         textColor: 'theme.colors.primary',
       },
       contained: {
@@ -73,7 +61,7 @@ export const themeColors = {
       },
       outlined: {
         textColor: 'theme.colors.primary',
-        borderColor: 'theme.colors.outlineVariant',
+        borderColor: 'theme.colors.outline',
       },
       text: {
         textColor: 'theme.colors.primary',
@@ -81,25 +69,23 @@ export const themeColors = {
     },
     disabled: {
       elevated: {
-        backgroundColor: 'theme.colors.onSurface (10% opacity)',
-        textColor: 'theme.colors.onSurface (38% opacity)',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
       },
       contained: {
-        backgroundColor: 'theme.colors.onSurface (10% opacity)',
-        textColor: 'theme.colors.onSurface (38% opacity)',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
       },
       'contained-tonal': {
-        backgroundColor: 'theme.colors.onSurface (10% opacity)',
-        textColor: 'theme.colors.onSurface (38% opacity)',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
       },
       outlined: {
-        backgroundColor: 'transparent',
-        textColor: 'theme.colors.onSurface (38% opacity)',
-        borderColor: 'theme.colors.outlineVariant',
+        textColor: 'theme.colors.onSurfaceDisabled',
+        borderColor: 'theme.colors.surfaceDisabled',
       },
       text: {
-        backgroundColor: 'transparent',
-        textColor: 'theme.colors.onSurface (38% opacity)',
+        textColor: 'theme.colors.onSurfaceDisabled',
       },
     },
   },
@@ -117,7 +103,7 @@ export const themeColors = {
   },
   Dialog: {
     '-': {
-      backgroundColor: 'theme.colors.surfaceContainerHigh',
+      backgroundColor: 'theme.colors.elevation.level3',
     },
   },
   'Dialog.Icon': {
@@ -165,56 +151,47 @@ export const themeColors = {
     },
   },
   FAB: {
+    disabled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      'textColor/iconColor': 'theme.colors.onSurfaceDisabled',
+    },
     primary: {
-      backgroundColor: 'theme.colors.primary',
-      'textColor/iconColor': 'theme.colors.onPrimary',
-    },
-    secondary: {
-      backgroundColor: 'theme.colors.secondary',
-      'textColor/iconColor': 'theme.colors.onSecondary',
-    },
-    tertiary: {
-      backgroundColor: 'theme.colors.tertiary',
-      'textColor/iconColor': 'theme.colors.onTertiary',
-    },
-    tonalPrimary: {
       backgroundColor: 'theme.colors.primaryContainer',
       'textColor/iconColor': 'theme.colors.onPrimaryContainer',
     },
-    tonalSecondary: {
+    secondary: {
       backgroundColor: 'theme.colors.secondaryContainer',
       'textColor/iconColor': 'theme.colors.onSecondaryContainer',
     },
-    tonalTertiary: {
+    tertiary: {
       backgroundColor: 'theme.colors.tertiaryContainer',
       'textColor/iconColor': 'theme.colors.onTertiaryContainer',
+    },
+    surface: {
+      backgroundColor: 'theme.colors.elevarion.level3',
+      'textColor/iconColor': 'theme.colors.primary',
     },
   },
-  // `FAB.Extended`
-  Extended: {
+  AnimatedFAB: {
+    disabled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      'textColor/iconColor': 'theme.colors.onSurfaceDisabled',
+    },
     primary: {
-      backgroundColor: 'theme.colors.primary',
-      'textColor/iconColor': 'theme.colors.onPrimary',
-    },
-    secondary: {
-      backgroundColor: 'theme.colors.secondary',
-      'textColor/iconColor': 'theme.colors.onSecondary',
-    },
-    tertiary: {
-      backgroundColor: 'theme.colors.tertiary',
-      'textColor/iconColor': 'theme.colors.onTertiary',
-    },
-    tonalPrimary: {
       backgroundColor: 'theme.colors.primaryContainer',
       'textColor/iconColor': 'theme.colors.onPrimaryContainer',
     },
-    tonalSecondary: {
+    secondary: {
       backgroundColor: 'theme.colors.secondaryContainer',
       'textColor/iconColor': 'theme.colors.onSecondaryContainer',
     },
-    tonalTertiary: {
+    tertiary: {
       backgroundColor: 'theme.colors.tertiaryContainer',
       'textColor/iconColor': 'theme.colors.onTertiaryContainer',
+    },
+    surface: {
+      backgroundColor: 'theme.colors.elevarion.level3',
+      'textColor/iconColor': 'theme.colors.primary',
     },
   },
   IconButton: {
@@ -241,7 +218,7 @@ export const themeColors = {
       },
       outlined: {
         iconColor: 'theme.colors.onSurfaceVariant',
-        borderColor: 'theme.colors.outlineVariant',
+        borderColor: 'theme.colors.outline',
       },
       contained: {
         backgroundColor: 'theme.colors.surfaceVariant',
@@ -254,19 +231,20 @@ export const themeColors = {
     },
     disabled: {
       default: {
-        iconColor: 'theme.colors.onSurface (38% opacity)',
+        iconColor: 'theme.colors.onSurfaceDisabled',
       },
       outlined: {
-        iconColor: 'theme.colors.onSurface (38% opacity)',
-        borderColor: 'theme.colors.outlineVariant',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        iconColor: 'theme.colors.onSurfaceDisabled',
+        borderColor: 'theme.colors.surfaceDisabled',
       },
       contained: {
-        backgroundColor: 'theme.colors.onSurface (38% opacity)',
-        iconColor: 'theme.colors.onSurface (38% opacity)',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        iconColor: 'theme.colors.onSurfaceDisabled',
       },
       'contained-tonal': {
-        backgroundColor: 'theme.colors.onSurface (38% opacity)',
-        iconColor: 'theme.colors.onSurface (38% opacity)',
+        backgroundColor: 'theme.colors.surfaceDisabled',
+        iconColor: 'theme.colors.onSurfaceDisabled',
       },
     },
   },
@@ -281,13 +259,13 @@ export const themeColors = {
       iconColor: 'theme.colors.onSurfaceVariant',
     },
     disabled: {
-      textColor: 'theme.colors.onSurface (38% opacity)',
-      iconColor: 'theme.colors.onSurfaceVariant (38% opacity)',
+      textColor: 'theme.colors.onSurfaceDisabled',
+      iconColor: 'theme.colors.onSurfaceDisabled',
     },
   },
   Modal: {
     '-': {
-      backdropColor: 'theme.colors.scrim (32% opacity)',
+      backgroundColor: 'theme.colors.backdrop',
     },
   },
   ProgressBar: {
@@ -298,7 +276,7 @@ export const themeColors = {
   },
   Searchbar: {
     '-': {
-      backgroundColor: 'theme.colors.surfaceContainerHigh',
+      backgroundColor: 'theme.colors.elevation.level3',
       placeholderTextColor: 'theme.colors.onSurface',
       textColor: 'theme.colors.onSurfaceVariant',
       selectionColor: 'theme.colors.primary',
@@ -312,28 +290,24 @@ export const themeColors = {
       '-': {
         backgroundColor: 'theme.colors.secondaryContainer',
         textColor: 'theme.colors.onSecondaryContainer',
-        borderColor: 'theme.colors.outline',
+        borderColor: 'theme.colors.primary',
       },
     },
     unchecked: {
       '-': {
-        backgroundColor: 'transparent',
         textColor: 'theme.colors.onSurface',
         borderColor: 'theme.colors.outline',
       },
     },
     disabled: {
       '-': {
-        borderColor: 'theme.colors.outlineVariant',
-        textColor: 'theme.colors.onSurface (38% opacity)',
+        borderColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
       },
     },
   },
   Snackbar: {
     '-': {
-      backgroundColor: 'theme.colors.inverseSurface',
-      textColor: 'theme.colors.inverseOnSurface',
-      'action textColor': 'theme.colors.inversePrimary',
       iconColor: 'theme.colors.inverseOnSurface',
     },
   },

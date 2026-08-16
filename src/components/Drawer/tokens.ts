@@ -1,5 +1,10 @@
 import { tokens } from '../../theme/tokens';
-import type { ColorRole, TypescaleKey } from '../../theme/types';
+import type {
+  ColorRole,
+  MotionDuration,
+  MotionEasing,
+  TypescaleKey,
+} from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
 const stateOpacity = {
@@ -110,6 +115,19 @@ const collapsedItemSizes = {
   containerSpacing: 12,
 } as const;
 
+const collapsedItemShape = {
+  activeIndicatorShape: 'full',
+} as const satisfies Record<string, ShapeToken>;
+
+/** The active indicator settles back to full size when the press is released. */
+const collapsedItemMotion = {
+  activeIndicatorDuration: 'short3',
+  activeIndicatorEasing: 'standard',
+} as const satisfies {
+  activeIndicatorDuration: keyof MotionDuration;
+  activeIndicatorEasing: keyof MotionEasing;
+};
+
 const collapsedItemTypescale = {
   labelText: 'labelMedium',
 } as const satisfies Record<string, TypescaleKey>;
@@ -124,6 +142,8 @@ const collapsedItemColors = {
 
 export const DrawerCollapsedItemTokens = {
   ...collapsedItemSizes,
+  ...collapsedItemShape,
+  ...collapsedItemMotion,
   ...collapsedItemTypescale,
   ...collapsedItemColors,
   stateOpacity,

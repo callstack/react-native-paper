@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Animated, Platform, Pressable, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
@@ -11,6 +18,7 @@ import type {
 
 import { DrawerCollapsedItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
 import Icon from '../Icon';
@@ -129,7 +137,13 @@ const DrawerCollapsedItem = ({
   const handlePressOut = () => {
     Animated.timing(animScale, {
       toValue: 1,
-      duration: 150 * scale,
+      duration:
+        theme.motion.duration[
+          DrawerCollapsedItemTokens.activeIndicatorDuration
+        ] * scale,
+      easing: Easing.bezier(
+        ...theme.motion.easing[DrawerCollapsedItemTokens.activeIndicatorEasing]
+      ),
       useNativeDriver: true,
     }).start();
   };
@@ -138,6 +152,11 @@ const DrawerCollapsedItem = ({
     ((!label ? noLabelActiveIndicatorHeight : activeIndicatorHeight) -
       iconSize) /
     2;
+
+  const activeIndicatorRadius = resolveCornerRadius(
+    theme,
+    DrawerCollapsedItemTokens.activeIndicatorShape
+  );
 
   const backgroundColor = active
     ? theme.colors[DrawerCollapsedItemTokens.activeIndicatorColor]
@@ -198,6 +217,7 @@ const DrawerCollapsedItem = ({
                     : { scale: animScale },
                 ],
                 backgroundColor,
+                borderRadius: activeIndicatorRadius,
               },
               style,
             ]}
@@ -250,7 +270,6 @@ const styles = StyleSheet.create({
   outline: {
     width: activeIndicatorWidth,
     height: activeIndicatorHeight,
-    borderRadius: activeIndicatorWidth / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },

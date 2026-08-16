@@ -120,6 +120,9 @@ const DrawerItem = ({
   const contentColor = active
     ? theme.colors[DrawerItemTokens.activeIconColor]
     : theme.colors[DrawerItemTokens.inactiveIconColor];
+  const labelColor = active
+    ? theme.colors[DrawerItemTokens.activeLabelTextColor]
+    : theme.colors[DrawerItemTokens.inactiveLabelTextColor];
 
   const borderRadius = resolveCornerRadius(
     theme,
@@ -172,7 +175,7 @@ const DrawerItem = ({
                 style={[
                   styles.label,
                   icon ? styles.labelWithIcon : null,
-                  { color: contentColor },
+                  { color: labelColor },
                 ]}
                 maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
@@ -183,7 +186,7 @@ const DrawerItem = ({
             {right?.({ color: contentColor })}
           </View>
 
-          {focused ? (
+          {focused && !disabled ? (
             <View
               testID="drawer-item-focus-ring"
               style={[
