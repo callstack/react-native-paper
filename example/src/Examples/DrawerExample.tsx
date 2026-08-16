@@ -6,9 +6,6 @@ import { Badge, Drawer, Text, useTheme } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-// MD3 specifies a 360dp drawer container. The surface below stands in for the
-// container that `@react-navigation/drawer` would normally provide, so the
-// 336dp active indicator sits at its intended proportions.
 const DRAWER_WIDTH = 360;
 
 const Section = ({
@@ -183,7 +180,6 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     alignSelf: 'center',
     paddingVertical: 8,
-    // MD3: rounded corners on the drawer's ending edge only.
     borderTopEndRadius: 16,
     borderBottomEndRadius: 16,
   },

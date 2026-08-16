@@ -66,8 +66,6 @@ const Drawer = createDrawerNavigator({
     <Navigator
       screenOptions={{
         drawerStyle: [
-          // MD3 navigation drawer container: 360dp wide with rounded
-          // corners on the ending edge only.
           styles.drawer,
           preferences?.collapsed && { width: collapsedDrawerWidth },
         ],
