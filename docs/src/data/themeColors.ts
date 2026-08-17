@@ -142,6 +142,7 @@ export const themeColors = {
     },
     focused: {
       focusIndicatorColor: 'theme.colors.secondary',
+      'iconColor/textColor (inactive)': 'theme.colors.onSurface',
     },
   },
   'Drawer.Section': {

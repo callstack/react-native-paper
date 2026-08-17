@@ -36,6 +36,8 @@ const itemColors = {
   activeLabelTextColor: 'onSecondaryContainer',
   inactiveIconColor: 'onSurfaceVariant',
   inactiveLabelTextColor: 'onSurfaceVariant',
+  inactiveFocusIconColor: 'onSurface',
+  inactiveFocusLabelTextColor: 'onSurface',
   focusIndicatorColor: 'secondary',
 } as const satisfies Record<string, ColorRole>;
 

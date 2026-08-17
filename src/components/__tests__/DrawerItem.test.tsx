@@ -83,6 +83,28 @@ it('shows a focus indicator while focused', async () => {
   expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
 });
 
+it('strengthens the label of an inactive destination while focused', async () => {
+  await render(<DrawerItem label="Example item" onPress={() => {}} />);
+
+  expect(screen.getByText('Example item')).toHaveStyle({
+    color: colors.onSurfaceVariant,
+  });
+
+  await fireEvent(screen.getByRole('button'), 'focus');
+  expect(screen.getByText('Example item')).toHaveStyle({
+    color: colors.onSurface,
+  });
+});
+
+it('keeps the label of an active destination while focused', async () => {
+  await render(<DrawerItem label="Example item" active onPress={() => {}} />);
+
+  await fireEvent(screen.getByRole('button'), 'focus');
+  expect(screen.getByText('Example item')).toHaveStyle({
+    color: colors.onSecondaryContainer,
+  });
+});
+
 it('renders an enabled destination at full opacity', async () => {
   await render(<DrawerItem label="Example item" onPress={() => {}} />);
 

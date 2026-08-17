@@ -114,15 +114,23 @@ const DrawerItem = ({
     }
   };
 
+  const isFocused = Boolean(focused && !disabled);
+
   const backgroundColor = active
     ? theme.colors[DrawerItemTokens.activeIndicatorColor]
     : undefined;
+  const inactiveIconColor = isFocused
+    ? DrawerItemTokens.inactiveFocusIconColor
+    : DrawerItemTokens.inactiveIconColor;
+  const inactiveLabelTextColor = isFocused
+    ? DrawerItemTokens.inactiveFocusLabelTextColor
+    : DrawerItemTokens.inactiveLabelTextColor;
   const contentColor = active
     ? theme.colors[DrawerItemTokens.activeIconColor]
-    : theme.colors[DrawerItemTokens.inactiveIconColor];
+    : theme.colors[inactiveIconColor];
   const labelColor = active
     ? theme.colors[DrawerItemTokens.activeLabelTextColor]
-    : theme.colors[DrawerItemTokens.inactiveLabelTextColor];
+    : theme.colors[inactiveLabelTextColor];
 
   const borderRadius = resolveCornerRadius(
     theme,
@@ -186,7 +194,7 @@ const DrawerItem = ({
             {right?.({ color: contentColor })}
           </View>
 
-          {focused && !disabled ? (
+          {isFocused ? (
             <View
               testID="drawer-item-focus-ring"
               style={[
