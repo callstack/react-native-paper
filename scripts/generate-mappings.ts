@@ -2,7 +2,13 @@ import { parse } from '@babel/parser';
 import * as types from '@babel/types';
 import type { Identifier, StringLiteral } from '@babel/types';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join, relative as relativePath, resolve } from 'node:path';
+import {
+  dirname,
+  join,
+  relative as relativePath,
+  resolve,
+  sep,
+} from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 type PackageJson = {
@@ -49,8 +55,12 @@ const ast = parse(source, {
 });
 
 const index = packageJson.main;
+// The result ends up in an import specifier, which always uses forward slashes,
+// so normalise the platform separator that `relative` returns on Windows.
 const relative = (value: string) =>
-  relativePath(root, resolve(root, dirname(index), value));
+  relativePath(root, resolve(root, dirname(index), value))
+    .split(sep)
+    .join('/');
 
 const mappings = ast.program.body.reduce<{ [key: string]: Mapping }>(
   (acc, declaration, _index, self) => {
