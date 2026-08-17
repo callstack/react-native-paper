@@ -10,8 +10,8 @@ import { PaperProvider } from 'react-native-paper';
 import { PreferencesContext } from './Preferences/PreferencesContext';
 import {
   navigationPersistor,
-  setupPreferences,
-} from './Preferences/setupPreferences';
+  useSetupPreferences,
+} from './Preferences/useSetupPreferences';
 import App from './RootNavigator';
 import {
   CombinedDarkTheme,
@@ -36,7 +36,7 @@ export default function PaperExample() {
   });
 
   const { preferences, isReady, isDarkMode, direction, navigationKey } =
-    setupPreferences();
+    useSetupPreferences();
 
   if (!isReady || !fontsLoaded) {
     return null;

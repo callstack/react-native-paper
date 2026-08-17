@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks -- `setupPreferences` is a hook, named after its role at the root of the app */
 import * as React from 'react';
 import { I18nManager, Platform } from 'react-native';
 
@@ -36,7 +35,7 @@ export const navigationPersistor = {
   },
 };
 
-export function setupPreferences() {
+export function useSetupPreferences() {
   const [isReady, setIsReady] = React.useState(false);
 
   const [initialRtl] = React.useState(getInitialRtl);
