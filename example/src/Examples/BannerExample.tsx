@@ -13,6 +13,7 @@ const PHOTOS = Array.from({ length: 24 }).map(
 const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
+  const [urgent, setUrgent] = React.useState<boolean>(false);
   const defaultTheme = useTheme();
 
   const [height, setHeight] = React.useState(0);
@@ -52,8 +53,14 @@ const BannerExample = () => {
         </View>
       </ScreenWrapper>
       <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
+      <FAB
+        icon="alert"
+        style={styles.urgentFab}
+        onPress={() => setUrgent(!urgent)}
+      />
       <Banner
         onLayout={handleLayout}
+        urgent={urgent}
         actions={[
           {
             label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
@@ -75,8 +82,9 @@ const BannerExample = () => {
         theme={useCustomTheme ? customTheme : defaultTheme}
         style={styles.banner}
       >
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
+        {urgent
+          ? 'Urgent: this message interrupts the screen reader.'
+          : 'Two line text string with two actions. One to two lines is preferable on mobile.'}
       </Banner>
     </>
   );
@@ -124,6 +132,12 @@ const styles = StyleSheet.create({
   },
   fab: {
     alignSelf: 'center',
+    position: 'absolute',
+    bottom: 0,
+    margin: 16,
+  },
+  urgentFab: {
+    alignSelf: 'flex-end',
     position: 'absolute',
     bottom: 0,
     margin: 16,

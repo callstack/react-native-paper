@@ -1,8 +1,8 @@
-import { Animated, Image } from 'react-native';
+import { AccessibilityInfo, Animated, Image, Platform } from 'react-native';
 
 import {
   afterAll,
-  beforeAll,
+  afterEach,
   beforeEach,
   describe,
   expect,
@@ -11,7 +11,7 @@ import {
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen, within } from '../../test-utils';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', async () => {
@@ -126,6 +126,598 @@ it('render visible banner, with custom theme', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+describe('inert when hidden', () => {
+  const ACTIONS = [{ label: 'Fix it', onPress: () => {} }];
+  // queries are a11y-aware by default, so opt in explicitly to tell
+  // "hidden from screen readers" apart from "not in the tree at all"
+  const ALL = { includeHiddenElements: true };
+
+  it('exposes the content while visible', async () => {
+    await render(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Message')).toBeOnTheScreen();
+    expect(screen.getByText('Fix it')).toBeOnTheScreen();
+    expect(screen.getByTestId('banner-content')).toHaveProp(
+      'aria-hidden',
+      false
+    );
+    expect(screen.getByTestId('banner-content')).toHaveProp(
+      'pointerEvents',
+      'auto'
+    );
+  });
+
+  it('keeps the content inert while the hide animation is running', async () => {
+    const view = await render(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    await view.rerender(
+      <Banner visible={false} actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+
+    // animation still in flight, so the content is mounted but must be dead
+    const content = screen.getByTestId('banner-content', ALL);
+    expect(content).toHaveProp('aria-hidden', true);
+    expect(content).toHaveProp('pointerEvents', 'none');
+    expect(content).toHaveProp('inert', true);
+
+    // and already unreachable through a11y-aware queries
+    expect(screen.queryByText('Message')).toBeNull();
+    expect(screen.queryByText('Fix it')).toBeNull();
+  });
+
+  it('unmounts the content once the hide animation finishes', async () => {
+    const view = await render(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    await view.rerender(
+      <Banner visible={false} actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    // ALL, so null means genuinely gone rather than merely hidden
+    expect(screen.queryByText('Message', ALL)).toBeNull();
+    expect(screen.queryByText('Fix it', ALL)).toBeNull();
+    expect(screen.queryByTestId('banner-content', ALL)).toBeNull();
+  });
+
+  it('measures once then unmounts the content when mounted hidden', async () => {
+    await render(
+      <Banner visible={false} actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+
+    // the measuring pass must not be reachable either
+    const content = screen.getByTestId('banner-content', ALL);
+    expect(content).toHaveProp('aria-hidden', true);
+    expect(screen.queryByText('Message')).toBeNull();
+
+    await fireEvent(content, 'layout', {
+      nativeEvent: { layout: { height: 80, width: 320 } },
+    });
+
+    expect(screen.queryByTestId('banner-content', ALL)).toBeNull();
+  });
+
+  it('keeps the content mounted when the hide animation is interrupted', async () => {
+    // a hide interrupted by a re-show reports finished:false; acting on it
+    // would unmount the content while the banner is on its way back in
+    let hideDone: ((result: { finished: boolean }) => void) | undefined;
+    const timing = jest
+      .spyOn(Animated, 'timing')
+      .mockImplementation((_value: any, config: any) => {
+        return {
+          start: (cb?: (result: { finished: boolean }) => void) => {
+            if (config.toValue === 0) {
+              hideDone = cb;
+            }
+          },
+          stop: () => {},
+          reset: () => {},
+        } as any;
+      });
+
+    const view = await render(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+
+    await view.rerender(
+      <Banner visible={false} actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    // banner comes back before the hide finishes
+    await view.rerender(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+
+    await act(() => {
+      hideDone?.({ finished: false });
+    });
+
+    expect(screen.getByTestId('banner-content', ALL)).toBeTruthy();
+    expect(screen.getByText('Message')).toBeOnTheScreen();
+
+    timing.mockRestore();
+  });
+
+  it('remounts the content when shown again', async () => {
+    const view = await render(
+      <Banner visible={false} actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    await view.rerender(
+      <Banner visible actions={ACTIONS} testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.getByText('Message')).toBeOnTheScreen();
+    expect(screen.getByTestId('banner-content')).toHaveProp(
+      'aria-hidden',
+      false
+    );
+  });
+});
+
+describe('actions', () => {
+  let warn: jest.SpiedFunction<typeof console.warn>;
+
+  beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    warn.mockClear();
+  });
+
+  afterEach(() => {
+    warn.mockRestore();
+  });
+
+  it('renders every action up to the two the spec allows', async () => {
+    await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {} },
+          { label: 'second', onPress: () => {} },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByText('first')).toBeOnTheScreen();
+    expect(screen.getByText('second')).toBeOnTheScreen();
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  it('drops actions beyond the second one', async () => {
+    await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {} },
+          { label: 'second', onPress: () => {} },
+          { label: 'third', onPress: () => {} },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByText('first')).toBeOnTheScreen();
+    expect(screen.getByText('second')).toBeOnTheScreen();
+    expect(screen.queryByText('third')).toBeNull();
+  });
+
+  it('moves focus to a surviving action when the focused one disappears', async () => {
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+          { label: 'second', onPress: () => {}, testID: 'action-second' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-second-container'), 'focus');
+    expect(setFocus).not.toHaveBeenCalled();
+
+    await view.rerender(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(setFocus).toHaveBeenCalledTimes(1);
+    setFocus.mockRestore();
+  });
+
+  it('leaves focus alone when the focused action survives a shrink', async () => {
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+          { label: 'second', onPress: () => {}, testID: 'action-second' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    // focus the first action, then drop the second: the count changes, so the
+    // effect runs, but the focused index is still valid and must be left alone
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await view.rerender(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByText('first')).toBeOnTheScreen();
+    expect(setFocus).not.toHaveBeenCalled();
+    setFocus.mockRestore();
+  });
+
+  it('does not move focus into the banner once it starts hiding', async () => {
+    // the content is inert from the moment it hides, so focusing it would be
+    // worse than releasing focus. returning focus to wherever it came from
+    // needs an api the consumer owns
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+
+    await view.rerender(
+      <Banner
+        visible={false}
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(setFocus).not.toHaveBeenCalled();
+    setFocus.mockRestore();
+  });
+
+  it('moves focus off the last action when every action is removed', async () => {
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+
+    await view.rerender(
+      <Banner visible actions={[]} testID="banner">
+        Message
+      </Banner>
+    );
+
+    // nothing left to focus inside the actions, so land on the message
+    expect(setFocus).toHaveBeenCalledTimes(1);
+    setFocus.mockRestore();
+  });
+
+  it('still calls a consumer onFocus handler on an action', async () => {
+    const onFocus = jest.fn();
+
+    await render(
+      <Banner
+        visible
+        actions={[
+          {
+            label: 'first',
+            onPress: () => {},
+            onFocus,
+            testID: 'action-first',
+          },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+
+    expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it('warns when given more actions than it can render', async () => {
+    await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {} },
+          { label: 'second', onPress: () => {} },
+          { label: 'third', onPress: () => {} },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('Banner supports a maximum of 2 actions')
+    );
+  });
+});
+
+describe('live region', () => {
+  const ALL = { includeHiddenElements: true };
+
+  it('is a polite status region by default', async () => {
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+
+    const region = screen.getByTestId('banner-message');
+    expect(region).toHaveProp('role', 'status');
+    expect(region).toHaveProp('aria-live', 'polite');
+  });
+
+  it('is an assertive alert region when urgent', async () => {
+    await render(
+      <Banner visible urgent testID="banner">
+        Message
+      </Banner>
+    );
+
+    const region = screen.getByTestId('banner-message');
+    expect(region).toHaveProp('role', 'alert');
+    expect(region).toHaveProp('aria-live', 'assertive');
+  });
+
+  it('silences the region while hidden', async () => {
+    await render(
+      <Banner visible={false} testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByTestId('banner-message', ALL)).toHaveProp(
+      'aria-live',
+      'off'
+    );
+  });
+
+  it('scopes the region to the message so actions do not re-announce it', async () => {
+    // status/alert imply aria-atomic, so anything inside the region is
+    // re-announced whenever it changes - keep the buttons out of it
+    await render(
+      <Banner
+        visible
+        testID="banner"
+        actions={[{ label: 'Fix it', onPress: () => {} }]}
+      >
+        Message
+      </Banner>
+    );
+
+    const region = screen.getByTestId('banner-message');
+    expect(within(region).getByText('Message')).toBeOnTheScreen();
+    expect(within(region).queryByText('Fix it')).toBeNull();
+  });
+
+  it('does not leave the live region on the message text', async () => {
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+
+    // react-native only maps aria-live -> accessibilityLiveRegion on View,
+    // so leaving it on Text is a no-op on android
+    const message = screen.getByText('Message');
+    expect(message).not.toHaveProp('aria-live');
+    expect(message).not.toHaveProp('role');
+  });
+});
+
+describe('announcements', () => {
+  const originalPlatform = Platform.OS;
+  let announce: jest.SpiedFunction<
+    typeof AccessibilityInfo.announceForAccessibilityWithOptions
+  >;
+
+  beforeEach(() => {
+    Platform.OS = 'ios';
+    // the rn jest preset already mocks AccessibilityInfo, so spyOn hands back
+    // that mock with every earlier test's calls still on it
+    announce = jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
+      .mockImplementation(() => {});
+    announce.mockClear();
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+    announce.mockRestore();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  it('announces on ios when mounted visible', async () => {
+    await render(<Banner visible>Something went wrong</Banner>);
+
+    expect(announce).toHaveBeenCalledTimes(1);
+    // polite by default: queue behind whatever the screen reader is saying
+    expect(announce).toHaveBeenCalledWith('Something went wrong', {
+      queue: true,
+    });
+  });
+
+  it('does not announce on ios while hidden', async () => {
+    const view = await render(<Banner visible={false}>Quiet</Banner>);
+
+    expect(announce).not.toHaveBeenCalled();
+
+    await view.rerender(<Banner visible>Quiet</Banner>);
+    expect(announce).toHaveBeenCalledTimes(1);
+    expect(announce).toHaveBeenCalledWith('Quiet', { queue: true });
+  });
+
+  it('re-announces on ios when the message changes while visible', async () => {
+    const view = await render(<Banner visible>First</Banner>);
+    expect(announce).toHaveBeenCalledTimes(1);
+
+    await view.rerender(<Banner visible>Second</Banner>);
+
+    expect(announce).toHaveBeenCalledTimes(2);
+    expect(announce).toHaveBeenLastCalledWith('Second', { queue: true });
+  });
+
+  it('does not announce again when an unrelated prop changes', async () => {
+    const view = await render(<Banner visible>Same</Banner>);
+    expect(announce).toHaveBeenCalledTimes(1);
+
+    await view.rerender(
+      <Banner visible elevation={3}>
+        Same
+      </Banner>
+    );
+
+    expect(announce).toHaveBeenCalledTimes(1);
+  });
+
+  it('interrupts the screen reader on ios when urgent', async () => {
+    await render(
+      <Banner visible urgent>
+        Your payment failed
+      </Banner>
+    );
+
+    expect(announce).toHaveBeenCalledWith('Your payment failed', {
+      queue: false,
+    });
+  });
+
+  it('re-announces on ios when urgency changes while visible', async () => {
+    const view = await render(<Banner visible>Same message</Banner>);
+    expect(announce).toHaveBeenCalledTimes(1);
+
+    await view.rerender(
+      <Banner visible urgent>
+        Same message
+      </Banner>
+    );
+
+    expect(announce).toHaveBeenCalledTimes(2);
+    expect(announce).toHaveBeenLastCalledWith('Same message', {
+      queue: false,
+    });
+  });
+
+  it('announces children that are not a plain string', async () => {
+    const name = 'Ada';
+    await render(<Banner visible>Hello {name}, your card was declined</Banner>);
+
+    expect(announce).toHaveBeenCalledWith('Hello Ada, your card was declined', {
+      queue: true,
+    });
+  });
+
+  it('leaves announcing to the live region off ios', async () => {
+    Platform.OS = 'android';
+
+    await render(<Banner visible>Handled by the live region</Banner>);
+
+    expect(announce).not.toHaveBeenCalled();
+  });
+});
+
 describe('animations', () => {
   let showCallback: (() => void) | undefined,
     hideCallback: (() => void) | undefined;
@@ -135,19 +727,13 @@ describe('animations', () => {
     hideCallback = jest.fn();
   });
 
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
   afterAll(() => {
-    jest.useRealTimers();
     showCallback = undefined;
     hideCallback = undefined;
   });
 
   describe('when component is rendered hidden', () => {
-    // This behaviour is probably a bug. Needs triage before next version.
-    it('will fire onHideAnimationFinished on mount', async () => {
+    it('will not fire any callback on mount', async () => {
       await render(
         <Banner
           onShowAnimationFinished={showCallback}
@@ -165,7 +751,7 @@ describe('animations', () => {
         jest.runAllTimers();
       });
       expect(showCallback).not.toHaveBeenCalled();
-      expect(hideCallback).toHaveBeenCalled();
+      expect(hideCallback).not.toHaveBeenCalled();
     });
 
     it('should fire onShowAnimationFinished upon opening', async () => {
@@ -183,7 +769,7 @@ describe('animations', () => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(0);
-      expect(hideCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
 
       await view.rerender(
         <Banner
@@ -198,13 +784,12 @@ describe('animations', () => {
         jest.runAllTimers();
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
-      expect(hideCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
     });
   });
 
   describe('when component is rendered visible', () => {
-    // This behaviour is probably a bug. Needs triage before next version.
-    it('will fire onShowAnimationFinished on mount', async () => {
+    it('will not fire any callback on mount', async () => {
       await render(
         <Banner
           onShowAnimationFinished={showCallback}
@@ -221,7 +806,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalled();
+      expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
     });
 
@@ -239,7 +824,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
       await view.rerender(
@@ -254,7 +839,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(1);
     });
   });
@@ -274,7 +859,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
       const nextShowCallback = jest.fn();
@@ -293,7 +878,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(0);
@@ -313,7 +898,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
       const nextShowCallback = jest.fn();
@@ -332,7 +917,7 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(0);
@@ -350,11 +935,45 @@ describe('animations', () => {
       await act(() => {
         jest.runAllTimers();
       });
-      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(1);
     });
+  });
+
+  it('should not fire callbacks when only the theme animation scale changes', async () => {
+    const view = await render(
+      <Banner
+        onShowAnimationFinished={showCallback}
+        onHideAnimationFinished={hideCallback}
+        theme={{ animation: { scale: 1 } }}
+        visible
+      >
+        Text
+      </Banner>
+    );
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    await view.rerender(
+      <Banner
+        onShowAnimationFinished={showCallback}
+        onHideAnimationFinished={hideCallback}
+        theme={{ animation: { scale: 2 } }}
+        visible
+      >
+        Text
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(showCallback).not.toHaveBeenCalled();
+    expect(hideCallback).not.toHaveBeenCalled();
   });
 
   it('animated value changes correctly', async () => {
