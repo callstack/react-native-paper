@@ -16,7 +16,7 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -36,7 +36,7 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -66,7 +66,6 @@ exports[`defaults a mode-less IconButton child's iconColor to the toolbar's cont
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -226,7 +225,6 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
       undefined,
     ]
   }
-  testID="toolbar-container"
 >
   <View
     collapsable={false}
@@ -244,7 +242,7 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
         "width": "100%",
       }
     }
-    testID="toolbar-outer-layer"
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
@@ -264,7 +262,7 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="toolbar"
+      testID="surface"
     >
       <View
         role="toolbar"
@@ -296,7 +294,6 @@ exports[`extends the docked container into the bottom safe-area inset 1`] = `
             undefined,
           ]
         }
-        testID="toolbar-content"
       >
         <View
           collapsable={false}
@@ -598,7 +595,7 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -618,7 +615,7 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -648,7 +645,6 @@ exports[`keeps an explicit iconColor instead of the vibrant default 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -949,7 +945,7 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -969,7 +965,7 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -999,7 +995,6 @@ exports[`leaves a Button child with a more opinionated mode uncolored 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1172,7 +1167,7 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -1192,7 +1187,7 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -1222,7 +1217,6 @@ exports[`leaves an IconButton child with an explicit mode uncolored 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1384,7 +1378,7 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -1404,7 +1398,7 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -1434,7 +1428,6 @@ exports[`recolors IconButtons through a Fragment held in a variable, not just di
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -1735,7 +1728,7 @@ exports[`renders Toolbar with default props 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -1755,7 +1748,7 @@ exports[`renders Toolbar with default props 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -1785,7 +1778,6 @@ exports[`renders Toolbar with default props 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -2084,7 +2076,6 @@ exports[`renders Toolbar with docked variant 1`] = `
       undefined,
     ]
   }
-  testID="toolbar-container"
 >
   <View
     collapsable={false}
@@ -2102,7 +2093,7 @@ exports[`renders Toolbar with docked variant 1`] = `
         "width": "100%",
       }
     }
-    testID="toolbar-outer-layer"
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
@@ -2122,7 +2113,7 @@ exports[`renders Toolbar with docked variant 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="toolbar"
+      testID="surface"
     >
       <View
         role="toolbar"
@@ -2154,7 +2145,6 @@ exports[`renders Toolbar with docked variant 1`] = `
             undefined,
           ]
         }
-        testID="toolbar-content"
       >
         <View
           collapsable={false}
@@ -2456,7 +2446,7 @@ exports[`renders Toolbar with vertical orientation 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -2476,7 +2466,7 @@ exports[`renders Toolbar with vertical orientation 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -2506,7 +2496,6 @@ exports[`renders Toolbar with vertical orientation 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -2807,7 +2796,7 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
       "shadowRadius": 8,
     }
   }
-  testID="toolbar-outer-layer"
+  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -2827,7 +2816,7 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="toolbar"
+    testID="surface"
   >
     <View
       role="toolbar"
@@ -2857,7 +2846,6 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
           undefined,
         ]
       }
-      testID="toolbar-content"
     >
       <View
         collapsable={false}
@@ -2973,7 +2961,7 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
                 style={
                   [
                     {
-                      "color": "rgba(73, 69, 79, 1)",
+                      "color": "rgba(33, 0, 93, 1)",
                       "fontSize": 24,
                     },
                     [
@@ -3112,7 +3100,7 @@ exports[`renders floating Toolbar with vibrant colorScheme 1`] = `
                 style={
                   [
                     {
-                      "color": "rgba(73, 69, 79, 1)",
+                      "color": "rgba(33, 0, 93, 1)",
                       "fontSize": 24,
                     },
                     [

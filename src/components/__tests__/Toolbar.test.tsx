@@ -10,10 +10,10 @@ import IconButton from '../IconButton/IconButton';
 import type { ColorScheme } from '../Toolbar/tokens';
 import Toolbar from '../Toolbar/Toolbar';
 import {
-  resolveContainerColor,
   resolveIconColors,
   resolveLabelColor,
-} from '../Toolbar/utils';
+} from '../Toolbar/ToolbarColorContext';
+import { resolveContainerColor } from '../Toolbar/utils';
 
 type Field =
   | 'container'

@@ -6,12 +6,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ToolbarTokens } from './tokens';
 import type { ColorScheme, Orientation, Variant } from './tokens';
-import {
-  getSpacing,
-  resolveContainerColor,
-  resolveElevation,
-  withToolbarChildColors,
-} from './utils';
+import { ToolbarColorContext } from './ToolbarColorContext';
+import { getSpacing, resolveContainerColor, resolveElevation } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
@@ -34,8 +30,9 @@ export type Props = {
    */
   orientation?: Orientation;
   /**
-   * Role-color preset. Sets default colors on direct, mode-less `IconButton`/`Button`
-   * children, unless they already set their own. Defaults to `standard`.
+   * Role-color preset. Sets default colors on descendant, mode-less
+   * `IconButton`/`Button`s, unless they already set their own. Defaults to
+   * `standard`.
    */
   colorScheme?: ColorScheme;
   /**
@@ -120,7 +117,7 @@ const Toolbar = ({
   containerColor,
   style,
   contentContainerStyle,
-  testID = 'toolbar',
+  testID,
   'aria-label': ariaLabel,
   theme: themeOverrides,
   ref,
@@ -195,7 +192,7 @@ const Toolbar = ({
       <View
         role="toolbar"
         aria-label={ariaLabel}
-        testID={`${testID}-content`}
+        testID={testID ? `${testID}-content` : undefined}
         style={[
           styles.content,
           isVertical ? styles.column : styles.row,
@@ -215,7 +212,9 @@ const Toolbar = ({
           contentContainerStyle,
         ]}
       >
-        {withToolbarChildColors({ children, theme, colorScheme })}
+        <ToolbarColorContext.Provider value={{ theme, colorScheme }}>
+          {children}
+        </ToolbarColorContext.Provider>
       </View>
     </Surface>
   );
@@ -234,7 +233,7 @@ const Toolbar = ({
       // ancestor) doesn't intercept touches outside the bar itself.
       pointerEvents="box-none"
       style={[styles.dockedContainer, style]}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
     >
       {pill}
     </View>

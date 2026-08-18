@@ -329,17 +329,14 @@ export const themeColors = {
       },
       selected: {
         backgroundColor: 'theme.colors.secondaryContainer',
-        iconColor:
-          'theme.colors.onSecondaryFixedVariant (light) / theme.colors.onSecondaryContainer (dark)',
+        iconColor: 'theme.colors.onSecondaryContainer',
       },
     },
     vibrant: {
       unselected: {
         backgroundColor: 'theme.colors.primaryContainer',
-        iconColor:
-          'theme.colors.onPrimaryFixedVariant (light) / theme.colors.onPrimaryContainer (dark)',
-        textColor:
-          'theme.colors.onPrimaryFixedVariant (light) / theme.colors.onPrimaryContainer (dark)',
+        iconColor: 'theme.colors.onPrimaryContainer',
+        textColor: 'theme.colors.onPrimaryContainer',
       },
       selected: {
         backgroundColor: 'theme.colors.surfaceContainer',

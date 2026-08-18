@@ -1,5 +1,4 @@
 import type { ColorRole, Elevation } from '../../theme/types';
-import type { ShapeToken } from '../../theme/utils/shape';
 
 /**
  * MD3 Toolbar spec dimensions, shape, and color-role tokens.
@@ -13,7 +12,7 @@ export type Orientation = 'horizontal' | 'vertical';
 
 const docked = {
   containerHeight: 64,
-  containerShape: 'none' as ShapeToken,
+  containerShape: 'none',
   containerLeadingSpace: 16,
   containerTrailingSpace: 16,
   defaultSpacing: 32,
@@ -21,7 +20,7 @@ const docked = {
 
 const floating = {
   containerHeight: 64,
-  containerShape: 'full' as ShapeToken,
+  containerShape: 'full',
   containerLeadingSpace: 8,
   containerTrailingSpace: 8,
   defaultSpacing: 4,
@@ -33,11 +32,11 @@ const elevation = {
 } as const satisfies Record<string, Elevation>;
 
 // Per https://m3.material.io/components/toolbars/specs—color roles for
-// the toolbar itself (`container`) and its mode-less children: `IconButton`
+// the toolbar itself (`container`) and its mode-less descendants: `IconButton`
 // (`icon`, `buttonContainer`) and `Button` (`label`); a `mode` on either
 // (filled, outlined, etc.) opts it out in favor of its own mode-based
-// coloring instead (see `withToolbarChildColors`). `selected*` roles apply
-// only to `IconButton`—`Button` has no `selected` state, and an
+// coloring instead (see `ToolbarColorContext`). `selected*` roles apply
+// only to `IconButton`, `Button` has no `selected` state, and an
 // unselected `IconButton` gets no `buttonContainer` override at all, since
 // it's the same role as the toolbar's own `container` (i.e. no visible
 // pill, it just blends in).

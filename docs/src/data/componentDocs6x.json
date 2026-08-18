@@ -12001,7 +12001,7 @@
             "tsType": {
               "name": "ColorScheme"
             },
-            "description": "Role-color preset. Sets default colors on direct, mode-less `IconButton`/`Button`\nchildren, unless they already set their own. Defaults to `standard`.",
+            "description": "Role-color preset. Sets default colors on descendant, mode-less\n`IconButton`/`Button`s, unless they already set their own. Defaults to\n`standard`.",
             "defaultValue": {
               "value": "'standard'",
               "computed": false
@@ -12038,18 +12038,14 @@
               ],
               "raw": "StyleProp<ViewStyle>"
             },
-            "description": "Style for the row/column wrapping `children`. Overrides the default\npadding/gap."
+            "description": "Style for the row/column wrapping `children`. Overrides the default\npadding/gap, and, for consumers who need full control, the fixed\ncross-axis thickness (64dp per spec) as well."
           },
           "testID": {
             "required": false,
             "tsType": {
               "name": "string"
             },
-            "description": "TestID used for testing purposes.",
-            "defaultValue": {
-              "value": "'toolbar'",
-              "computed": false
-            }
+            "description": "TestID used for testing purposes."
           },
           "aria-label": {
             "required": false,
