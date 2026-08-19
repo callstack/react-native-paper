@@ -102,6 +102,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
 
 exports[`renders avatar with image 1`] = `
 <View
+  importantForAccessibility="no"
   style={
     [
       {

@@ -168,3 +168,39 @@ describe('AvatarImage listener', () => {
     expect(onListenerMock).toHaveBeenCalled();
   });
 });
+
+it('forwards accessibility props to the image, not the wrapper', async () => {
+  const tree = (
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        accessibilityLabel="Profile photo"
+        accessibilityHint="User avatar"
+        accessibilityRole="image"
+        aria-label="Jane Doe"
+      />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchObject({
+    props: {
+      importantForAccessibility: 'no',
+    },
+    children: [
+      {
+        props: {
+          accessibilityLabel: 'Profile photo',
+          accessibilityHint: 'User avatar',
+          accessibilityRole: 'image',
+          'aria-label': 'Jane Doe',
+        },
+      },
+    ],
+  });
+  expect(tree).not.toMatchObject({
+    props: {
+      accessibilityLabel: 'Profile photo',
+    },
+  });
+});

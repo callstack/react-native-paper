@@ -10,6 +10,7 @@ import type {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { splitAccessibilityProps } from '../../utils/splitAccessibilityProps';
 
 const defaultSize = 64;
 
@@ -89,6 +90,7 @@ const AvatarImage = ({
 }: Props) => {
   const { colors } = useInternalTheme(themeOverrides);
   const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
+  const { accessibilityProps, rest: viewProps } = splitAccessibilityProps(rest);
 
   return (
     <View
@@ -101,7 +103,8 @@ const AvatarImage = ({
         },
         style,
       ]}
-      {...rest}
+      {...viewProps}
+      importantForAccessibility="no"
     >
       {typeof source === 'function' && source({ size })}
       {typeof source !== 'function' && (
@@ -116,6 +119,7 @@ const AvatarImage = ({
           onLoadStart={onLoadStart}
           onProgress={onProgress}
           accessibilityIgnoresInvertColors
+          {...accessibilityProps}
         />
       )}
     </View>
