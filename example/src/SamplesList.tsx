@@ -45,7 +45,11 @@ export default function SamplesList() {
       keyExtractor={({ id }) => id}
       contentContainerStyle={[
         styles.content,
-        { paddingBottom: safeArea.bottom + 16 },
+        {
+          paddingBottom: safeArea.bottom + 16,
+          paddingLeft: safeArea.left + 16,
+          paddingRight: safeArea.right + 16,
+        },
       ]}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => (
