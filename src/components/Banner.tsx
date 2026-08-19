@@ -202,7 +202,11 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(showCallback);
+      }).start((result) => {
+        if (result.finished) {
+          showCallback(result);
+        }
+      });
     } else {
       // hide
       Animated.timing(position, {
@@ -212,8 +216,8 @@ const Banner = ({
       }).start((result) => {
         if (result.finished) {
           setExited(true);
+          hideCallback(result);
         }
-        hideCallback(result);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

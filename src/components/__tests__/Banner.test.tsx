@@ -1006,3 +1006,97 @@ describe('animations', () => {
     });
   });
 });
+
+describe('interrupted animations', () => {
+  let showDone: ((result: { finished: boolean }) => void) | undefined;
+  let hideDone: ((result: { finished: boolean }) => void) | undefined;
+  let timing: jest.SpiedFunction<typeof Animated.timing>;
+
+  beforeEach(() => {
+    showDone = undefined;
+    hideDone = undefined;
+    timing = jest
+      .spyOn(Animated, 'timing')
+      .mockImplementation((_value: any, config: any) => {
+        return {
+          start: (cb?: (result: { finished: boolean }) => void) => {
+            if (config.toValue === 1) {
+              showDone = cb;
+            } else if (config.toValue === 0) {
+              hideDone = cb;
+            }
+          },
+          stop: () => {},
+          reset: () => {},
+        } as any;
+      });
+  });
+
+  afterEach(() => {
+    timing.mockRestore();
+  });
+
+  it('does not fire onHideAnimationFinished when hide is interrupted', async () => {
+    const onHideAnimationFinished = jest.fn();
+    const onShowAnimationFinished = jest.fn();
+
+    const view = await render(
+      <Banner
+        visible
+        onShowAnimationFinished={onShowAnimationFinished}
+        onHideAnimationFinished={onHideAnimationFinished}
+      >
+        Text
+      </Banner>
+    );
+
+    await view.rerender(
+      <Banner
+        visible={false}
+        onShowAnimationFinished={onShowAnimationFinished}
+        onHideAnimationFinished={onHideAnimationFinished}
+      >
+        Text
+      </Banner>
+    );
+
+    await act(() => {
+      hideDone?.({ finished: false });
+    });
+
+    expect(onShowAnimationFinished).not.toHaveBeenCalled();
+    expect(onHideAnimationFinished).not.toHaveBeenCalled();
+  });
+
+  it('does not fire onShowAnimationFinished when show is interrupted', async () => {
+    const onHideAnimationFinished = jest.fn();
+    const onShowAnimationFinished = jest.fn();
+
+    const view = await render(
+      <Banner
+        visible={false}
+        onShowAnimationFinished={onShowAnimationFinished}
+        onHideAnimationFinished={onHideAnimationFinished}
+      >
+        Text
+      </Banner>
+    );
+
+    await view.rerender(
+      <Banner
+        visible
+        onShowAnimationFinished={onShowAnimationFinished}
+        onHideAnimationFinished={onHideAnimationFinished}
+      >
+        Text
+      </Banner>
+    );
+
+    await act(() => {
+      showDone?.({ finished: false });
+    });
+
+    expect(onShowAnimationFinished).not.toHaveBeenCalled();
+    expect(onHideAnimationFinished).not.toHaveBeenCalled();
+  });
+});
