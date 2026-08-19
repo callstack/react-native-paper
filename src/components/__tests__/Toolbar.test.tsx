@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
@@ -204,6 +204,40 @@ it('recolors IconButtons through a Fragment held in a variable, not just direct 
     await render(<Toolbar colorScheme="vibrant">{fragmentChildren}</Toolbar>)
   ).toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+it('recolors an IconButton nested inside a View, not just direct children', async () => {
+  await render(
+    <Toolbar colorScheme="vibrant">
+      <View>
+        <IconButton icon="magnify" testID="wrapped" />
+      </View>
+    </Toolbar>
+  );
+
+  const theme = getTheme();
+  expect(
+    screen.getByText('magnify', { includeHiddenElements: true })
+  ).toHaveStyle({
+    color: theme.colors.onPrimaryContainer,
+  });
+});
+
+it('recolors a Button nested inside a View, not just direct children', async () => {
+  await render(
+    <Toolbar colorScheme="vibrant">
+      <View>
+        <Button testID="wrapped" onPress={() => {}}>
+          Done
+        </Button>
+      </View>
+    </Toolbar>
+  );
+
+  const theme = getTheme();
+  expect(screen.getByTestId('wrapped-text')).toHaveStyle({
+    color: theme.colors.onPrimaryContainer,
+  });
 });
 
 it('gives a selected IconButton child the selected container color', async () => {
