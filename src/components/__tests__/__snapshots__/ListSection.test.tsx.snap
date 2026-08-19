@@ -460,7 +460,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -586,7 +586,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -1166,7 +1166,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -1292,7 +1292,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -1832,7 +1832,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -1958,7 +1958,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,

@@ -5,7 +5,7 @@ const sizes = {
   twoLineVerticalPadding: 14,
   threeLineVerticalPadding: 12,
   leadingSpace: 16,
-  trailingSpace: 24,
+  trailingSpace: 16,
 } as const;
 
 const colors = {
