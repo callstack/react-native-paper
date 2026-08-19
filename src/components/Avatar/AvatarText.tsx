@@ -5,6 +5,7 @@ import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
 import type { ThemeProp } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
+import { takeGraphemes } from '../../utils/takeGraphemes';
 import Text from '../Typography/Text';
 
 const defaultSize = 64;
@@ -70,6 +71,7 @@ const AvatarText = ({
     customColor ??
     getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
   const { fontScale } = useWindowDimensions();
+  const avatarInitials = takeGraphemes(label, 2);
 
   return (
     <View
@@ -98,7 +100,7 @@ const AvatarText = ({
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
-        {label}
+        {avatarInitials}
       </Text>
     </View>
   );
