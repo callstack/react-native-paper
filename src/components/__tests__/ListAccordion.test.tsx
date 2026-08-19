@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
@@ -141,6 +141,51 @@ describe('ListAccordion', () => {
 
     expect(screen.getByText('Accordion item 1')).toHaveStyle({
       color: getTheme().colors.onSurface,
+    });
+  });
+
+  it('drops to 12dp padding once the description wraps to a third line', async () => {
+    await render(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        testID="list-accordion"
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      paddingVertical: 14,
+    });
+
+    await fireEvent(
+      screen.getByText('Describes the expandable list item'),
+      'textLayout',
+      { nativeEvent: { lines: [{}, {}] } }
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      paddingVertical: 12,
+    });
+  });
+
+  it('applies the theme override to title and description typography', async () => {
+    await render(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        theme={{
+          fonts: { bodyLarge: { fontSize: 99 }, bodyMedium: { fontSize: 77 } },
+        }}
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({ fontSize: 99 });
+    expect(screen.getByText('Describes the expandable list item')).toHaveStyle({
+      fontSize: 77,
     });
   });
 });

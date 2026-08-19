@@ -3,6 +3,7 @@ import type { ColorRole } from '../../theme/types';
 const sizes = {
   oneLineVerticalPadding: 16,
   twoLineVerticalPadding: 14,
+  threeLineVerticalPadding: 12,
   leadingSpace: 16,
   trailingSpace: 24,
 } as const;

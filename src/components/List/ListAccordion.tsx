@@ -202,13 +202,24 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-  const [alignToTop, setAlignToTop] = React.useState(false);
+  const [isDescriptionMultiline, setIsDescriptionMultiline] =
+    React.useState(false);
 
   const onDescriptionTextLayout = (
     event: NativeSyntheticEvent<TextLayoutEventData>
   ) => {
     const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
+    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
+  };
+
+  const getVerticalPaddingStyle = () => {
+    if (!description) {
+      return styles.containerOneLine;
+    }
+
+    return isDescriptionMultiline
+      ? styles.containerThreeLine
+      : styles.containerTwoLine;
   };
 
   const handlePressAction = (e: GestureResponderEvent) => {
@@ -246,11 +257,7 @@ const ListAccordion = ({
         style={{ backgroundColor: theme.colors[ListTokens.containerColor] }}
       >
         <TouchableRipple
-          style={[
-            styles.container,
-            description ? styles.containerTwoLine : styles.containerOneLine,
-            style,
-          ]}
+          style={[styles.container, getVerticalPaddingStyle(), style]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -270,12 +277,13 @@ const ListAccordion = ({
             {left
               ? left({
                   color: theme.colors[ListTokens.leadingIconColor],
-                  style: getLeftStyles(alignToTop, description),
+                  style: getLeftStyles(isDescriptionMultiline, description),
                 })
               : null}
             <View style={[styles.contentItem, styles.content, contentStyle]}>
               <Text
                 variant="bodyLarge"
+                theme={theme}
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
                 style={[
@@ -291,6 +299,7 @@ const ListAccordion = ({
               {description ? (
                 <Text
                   variant="bodyMedium"
+                  theme={theme}
                   selectable={false}
                   numberOfLines={descriptionNumberOfLines}
                   style={[
@@ -356,6 +365,9 @@ const styles = StyleSheet.create({
   },
   containerTwoLine: {
     paddingVertical: ListTokens.twoLineVerticalPadding,
+  },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
   },
   row: {
     flexDirection: 'row',

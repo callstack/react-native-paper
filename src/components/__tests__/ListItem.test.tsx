@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
@@ -174,4 +174,38 @@ it('renders list item with custom content style', async () => {
   );
 
   expect(screen.getByTestId('list-item-content')).toHaveStyle(styles.content);
+});
+
+it('drops to 12dp padding once the description wraps to a third line', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 14 });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 12 });
+});
+
+it('applies the theme override to title and description typography', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+      theme={{
+        fonts: { bodyLarge: { fontSize: 99 }, bodyMedium: { fontSize: 77 } },
+      }}
+    />
+  );
+
+  expect(screen.getByText('First Item')).toHaveStyle({ fontSize: 99 });
+  expect(screen.getByText('Item description')).toHaveStyle({ fontSize: 77 });
 });
