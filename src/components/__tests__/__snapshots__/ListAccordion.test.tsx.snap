@@ -47,7 +47,7 @@ exports[`renders expanded accordion 1`] = `
           },
           [
             {
-              "paddingRight": 24,
+              "paddingRight": 16,
             },
             {
               "paddingVertical": 16,
@@ -191,7 +191,7 @@ exports[`renders expanded accordion 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingRight": 16,
           },
           {
             "paddingVertical": 16,
@@ -313,7 +313,7 @@ exports[`renders list accordion with children 1`] = `
           },
           [
             {
-              "paddingRight": 24,
+              "paddingRight": 16,
             },
             {
               "paddingVertical": 16,
@@ -519,7 +519,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           },
           [
             {
-              "paddingRight": 24,
+              "paddingRight": 16,
             },
             {
               "paddingVertical": 14,
@@ -715,7 +715,7 @@ exports[`renders list accordion with left items 1`] = `
           },
           [
             {
-              "paddingRight": 24,
+              "paddingRight": 16,
             },
             {
               "paddingVertical": 16,
@@ -921,7 +921,7 @@ exports[`renders multiline list accordion 1`] = `
           },
           [
             {
-              "paddingRight": 24,
+              "paddingRight": 16,
             },
             {
               "paddingVertical": 14,
