@@ -8,8 +8,13 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import { modeTextVariant } from './utils';
+import {
+  modeTextVariant,
+  modeSubtitleTextVariant,
+  modeSubtitleTextSpacing,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { TypescaleKey } from '../../theme/types';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
@@ -36,6 +41,14 @@ export type Props = $RemoveChildren<typeof View> & {
    * Reference for the title.
    */
   titleRef?: React.RefObject<TextRef>;
+  /**
+   * Text or component for the subtitle.
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * Style for the subtitle.
+   */
+  subtitleStyle?: StyleProp<TextStyle>;
   /**
    * Function to execute on press.
    */
@@ -68,7 +81,7 @@ export type Props = $RemoveChildren<typeof View> & {
 } & (TitleString | TitleElement);
 
 /**
- * A component used to display a title in an appbar.
+ * A component used to display a title and optional subtitle in an appbar.
  *
  * ## Usage
  * ```js
@@ -77,7 +90,7 @@ export type Props = $RemoveChildren<typeof View> & {
  *
  * const MyComponent = () => (
  *   <Appbar.Header>
- *      <Appbar.Content title="Title" />
+ *      <Appbar.Content title="Title" subtitle="Subtitle" />
  *   </Appbar.Header>
  * );
  *
@@ -86,6 +99,8 @@ export type Props = $RemoveChildren<typeof View> & {
  */
 const AppbarContent = ({
   color: titleColor,
+  subtitle,
+  subtitleStyle,
   onPress,
   disabled,
   style,
@@ -110,7 +125,9 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
-  const variant = modeTextVariant[mode];
+  const variant = modeTextVariant[mode] as TypescaleKey;
+  const subtitleVariant = modeSubtitleTextVariant[mode] as TypescaleKey;
+  const subtitleTopPadding = modeSubtitleTextSpacing[mode];
 
   const contentWrapperProps = {
     pointerEvents: 'box-none',
@@ -122,24 +139,43 @@ const AppbarContent = ({
   const content = (
     <>
       {typeof title === 'string' ? (
-        <Text
-          variant={variant}
-          ref={titleRef}
-          style={[
-            {
-              color: titleTextColor,
-              ...fonts[variant],
-            },
-            titleStyle,
-          ]}
-          numberOfLines={1}
-          accessible
-          role={onPress ? 'none' : 'heading'}
-          testID={`${testID}-title-text`}
-          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-        >
-          {title}
-        </Text>
+        <>
+          <Text
+            variant={variant}
+            ref={titleRef}
+            style={[
+              {
+                color: titleTextColor,
+                ...fonts[variant],
+              },
+              titleStyle,
+            ]}
+            numberOfLines={1}
+            accessible
+            role={onPress ? 'none' : 'heading'}
+            testID={`${testID}-title-text`}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          >
+            {title}
+          </Text>
+          {subtitle ? (
+            <Text
+              variant={subtitleVariant}
+              style={[
+                {
+                  color: colors.onSurfaceVariant,
+                  paddingTop: subtitleTopPadding,
+                  ...fonts[subtitleVariant],
+                },
+                subtitleStyle,
+              ]}
+              numberOfLines={1}
+              testID={`${testID}-subtitle-text`}
+            >
+              {subtitle}
+            </Text>
+          ) : null}
+        </>
       ) : (
         title
       )}

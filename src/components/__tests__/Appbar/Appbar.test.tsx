@@ -277,6 +277,37 @@ describe('AppbarContent', () => {
 
     expect(screen.getByText('Title')).toBeOnTheScreen();
   });
+
+  it('should render subtitle with MD3 typography and color tokens', async () => {
+    await render(
+      <Appbar>
+        <Appbar.Content title="Title" subtitle="Subtitle" />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
+      ...getTheme().fonts.labelSmall,
+      color: getTheme().colors.onSurfaceVariant,
+    });
+  });
+
+  it('should apply a custom subtitle style', async () => {
+    const customSubtitleColor = getTheme().colors.error;
+
+    await render(
+      <Appbar>
+        <Appbar.Content
+          title="Title"
+          subtitle="Subtitle"
+          subtitleStyle={{ color: customSubtitleColor }}
+        />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
+      color: customSubtitleColor,
+    });
+  });
 });
 
 describe('getAppbarColors', () => {

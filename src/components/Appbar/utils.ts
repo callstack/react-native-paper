@@ -86,7 +86,6 @@ type RenderAppbarContentProps = BaseProps & {
   theme?: ThemeProp;
 };
 
-export const DEFAULT_APPBAR_HEIGHT = 56;
 const MD3_DEFAULT_APPBAR_HEIGHT = 64;
 
 export const modeAppbarHeight = {
@@ -102,6 +101,20 @@ export const modeTextVariant = {
   large: 'headlineMedium',
   'center-aligned': 'titleLarge',
 } as const;
+
+export const modeSubtitleTextVariant = {
+  small: 'labelSmall',
+  medium: 'labelMedium',
+  large: 'labelLarge',
+  'center-aligned': 'labelSmall',
+} as const;
+
+export const modeSubtitleTextSpacing = {
+  small: undefined,
+  medium: 4,
+  large: 8,
+  'center-aligned': undefined,
+} as const satisfies Record<AppbarModes, number | undefined>;
 
 export const filterAppbarActions = (
   children: React.ReactNode,

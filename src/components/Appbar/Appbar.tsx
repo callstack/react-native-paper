@@ -220,7 +220,7 @@ const Appbar = ({
         { backgroundColor },
         styles.appbar,
         {
-          height: modeAppbarHeight[mode],
+          minHeight: modeAppbarHeight[mode],
         },
         insets,
         restStyle,

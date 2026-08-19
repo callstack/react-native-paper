@@ -6,7 +6,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   style={
     {
       "backgroundColor": "rgba(254, 247, 255, 1)",
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -24,8 +23,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       {
         "alignItems": "center",
         "backgroundColor": "rgba(254, 247, 255, 1)",
-        "flex": 1,
+        "flex": undefined,
         "flexDirection": "row",
+        "minHeight": 64,
         "paddingBottom": undefined,
         "paddingHorizontal": 4,
         "paddingLeft": undefined,
@@ -422,7 +422,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   style={
     {
       "backgroundColor": "rgba(254, 247, 255, 1)",
-      "height": 64,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -440,8 +439,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       {
         "alignItems": "center",
         "backgroundColor": "rgba(254, 247, 255, 1)",
-        "flex": 1,
+        "flex": undefined,
         "flexDirection": "row",
+        "minHeight": 64,
         "paddingBottom": undefined,
         "paddingHorizontal": 4,
         "paddingLeft": undefined,
