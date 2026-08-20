@@ -1,0 +1,101 @@
+import type { ColorValue } from 'react-native';
+
+import { describe, expect, it } from '@jest/globals';
+
+import { getTheme } from '../../core/theming';
+import { red50, red500 } from '../../theme/colors';
+import type { InternalTheme } from '../../types';
+import { resolveAvatarColors } from '../Avatar/utils';
+
+const withPlatformColor = (
+  theme: InternalTheme,
+  role: 'primary' | 'error',
+  resource: string
+): InternalTheme => ({
+  ...theme,
+  colors: {
+    ...theme.colors,
+    [role]: { resource_paths: [resource] } as unknown as ColorValue,
+  },
+});
+
+describe('resolveAvatarColors', () => {
+  it('uses the luminance heuristic for a string default primary', () => {
+    const theme = getTheme();
+    expect(typeof theme.colors.primary).toBe('string');
+    expect(resolveAvatarColors({ theme })).toEqual({
+      background: theme.colors.primary,
+      textColor: '#ffffff',
+    });
+  });
+
+  it('pairs an opaque theme-role token via contentColorFor', () => {
+    const theme = withPlatformColor(
+      getTheme(),
+      'primary',
+      '@android:color/system_primary_light'
+    );
+    expect(resolveAvatarColors({ theme })).toEqual({
+      background: theme.colors.primary,
+      textColor: theme.colors.onPrimary,
+    });
+  });
+
+  it('pairs a custom opaque theme-role background via contentColorFor', () => {
+    const theme = withPlatformColor(
+      getTheme(),
+      'error',
+      '@android:color/system_error_light'
+    );
+    expect(
+      resolveAvatarColors({ theme, backgroundColor: theme.colors.error })
+    ).toEqual({
+      background: theme.colors.error,
+      textColor: theme.colors.onError,
+    });
+  });
+
+  it('uses the luminance heuristic for a dark hex background', () => {
+    const theme = getTheme();
+    expect(resolveAvatarColors({ theme, backgroundColor: red500 })).toEqual({
+      background: red500,
+      textColor: '#ffffff',
+    });
+  });
+
+  it('uses the luminance heuristic for a light hex background', () => {
+    const theme = getTheme();
+    expect(resolveAvatarColors({ theme, backgroundColor: red50 })).toEqual({
+      background: red50,
+      textColor: 'rgba(0, 0, 0, .54)',
+    });
+  });
+
+  it('falls back to onSurface for an unknown PlatformColor', () => {
+    const theme = getTheme();
+    const platformColor = {
+      resource_paths: ['@android:color/holo_blue_bright'],
+    } as unknown as ColorValue;
+
+    expect(
+      resolveAvatarColors({ theme, backgroundColor: platformColor })
+    ).toEqual({
+      background: platformColor,
+      textColor: theme.colors.onSurface,
+    });
+  });
+
+  it('lets an explicit color override derived content color', () => {
+    const theme = getTheme();
+    expect(
+      resolveAvatarColors({
+        theme,
+        backgroundColor: theme.colors.error,
+        color: '#00ff00',
+      })
+    ).toEqual({
+      background: theme.colors.error,
+      textColor: '#00ff00',
+    });
+  });
+});

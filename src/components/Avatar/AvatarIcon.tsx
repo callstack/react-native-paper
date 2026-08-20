@@ -1,10 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
 import type { ThemeProp } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 
@@ -48,14 +47,16 @@ const Avatar = ({
   size = defaultSize,
   style,
   theme: themeOverrides,
+  color: customColor,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    rest.color ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { backgroundColor, ...restStyle } = StyleSheet.flatten(style) || {};
+  const { background, textColor } = resolveAvatarColors({
+    theme,
+    backgroundColor,
+    color: customColor,
+  });
 
   return (
     <View
@@ -64,7 +65,7 @@ const Avatar = ({
           width: size,
           height: size,
           borderRadius: size / 2,
-          backgroundColor,
+          backgroundColor: background,
         },
         styles.container,
         restStyle,

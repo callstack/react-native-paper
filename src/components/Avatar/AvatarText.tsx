@@ -1,10 +1,9 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
 import type { ThemeProp } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import { takeGraphemes } from '../../utils/takeGraphemes';
 import Text from '../Typography/Text';
 
@@ -65,11 +64,12 @@ const AvatarText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    customColor ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { backgroundColor, ...restStyle } = StyleSheet.flatten(style) || {};
+  const { background, textColor } = resolveAvatarColors({
+    theme,
+    backgroundColor,
+    color: customColor,
+  });
   const { fontScale } = useWindowDimensions();
   const avatarInitials = takeGraphemes(label, 2);
 
@@ -80,7 +80,7 @@ const AvatarText = ({
           width: size,
           height: size,
           borderRadius: size / 2,
-          backgroundColor,
+          backgroundColor: background,
         },
         styles.container,
         restStyle,
