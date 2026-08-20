@@ -359,9 +359,11 @@ const Menu = ({
           easing: EASING,
           useNativeDriver: true,
         }),
-      ]).start(() => {
-        focusFirstDOMNode(menuRef.current);
-        prevRendered.current = true;
+      ]).start(({ finished }) => {
+        if (finished) {
+          focusFirstDOMNode(menuRef.current);
+          prevRendered.current = true;
+        }
       });
     });
   }, [anchor, attachListeners, measureAnchorLayout, theme]);
