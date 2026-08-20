@@ -207,6 +207,8 @@ const styles = StyleSheet.create({
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     justifyContent: 'flex-start',
     paddingTop: 24,
+    minWidth: 280,
+    maxWidth: 560,
   },
 });
 
