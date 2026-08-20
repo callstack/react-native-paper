@@ -1,9 +1,11 @@
+import * as React from 'react';
 import {
   AccessibilityInfo,
   Animated,
   Image,
   Platform,
   Text,
+  View,
 } from 'react-native';
 
 import {
@@ -351,6 +353,43 @@ describe('actions', () => {
     expect(screen.getByText('first')).toBeOnTheScreen();
     expect(screen.getByText('second')).toBeOnTheScreen();
     expect(screen.queryByText('third')).toBeNull();
+  });
+
+  it('keeps a touchableRef passed through an action', async () => {
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+    const touchableRef = React.createRef<View>();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          {
+            label: 'first',
+            onPress: () => {},
+            testID: 'action-first',
+            touchableRef,
+          },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    // the consumer gets the node, and the internal ref still restores focus
+    expect(touchableRef.current).not.toBeNull();
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await view.rerender(
+      <Banner visible actions={[]}>
+        Message
+      </Banner>
+    );
+
+    expect(setFocus).toHaveBeenCalledTimes(1);
+    setFocus.mockRestore();
   });
 
   it('moves focus to a surviving action when the focused one disappears', async () => {

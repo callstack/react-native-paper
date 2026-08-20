@@ -134,7 +134,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Reference for the touchable
    */
-  touchableRef?: React.RefObject<View>;
+  touchableRef?: React.Ref<View>;
   ref?: React.Ref<View>;
   /**
    * testID to be used on tests.
