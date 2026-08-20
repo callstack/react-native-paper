@@ -1,7 +1,7 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type DialogChildProps = {
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle | TextStyle>;
 };
 
 export type DialogActionChildProps = DialogChildProps & {

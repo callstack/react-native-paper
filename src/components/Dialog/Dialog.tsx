@@ -105,6 +105,12 @@ const Dialog = ({
   const borderRadius = theme.shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
+  const dialogChildren = React.Children.toArray(children).filter(
+    (child) => child != null && typeof child !== 'boolean'
+  );
+  const hasIcon = dialogChildren.some(
+    (child) => React.isValidElement(child) && child.type === DialogIcon
+  );
 
   return (
     <Modal
@@ -125,17 +131,28 @@ const Dialog = ({
       theme={theme}
       testID={testID}
     >
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
+      {dialogChildren.map((child, i) => {
+        if (React.isValidElement<DialogChildProps>(child)) {
+          const topMarginStyle =
+            i === 0 && child.type !== DialogIcon
+              ? { marginTop: 24 }
+              : undefined;
+          const titleAlignmentStyle =
+            hasIcon && child.type === DialogTitle
+              ? styles.titleWithIcon
+              : undefined;
+
+          if (topMarginStyle || titleAlignmentStyle) {
             return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
+              style: [topMarginStyle, child.props.style, titleAlignmentStyle],
             });
           }
 
           return child;
-        })}
+        }
+
+        return child;
+      })}
     </Modal>
   );
 };
@@ -162,6 +179,11 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     justifyContent: 'flex-start',
+    minWidth: 280,
+    maxWidth: 560,
+  },
+  titleWithIcon: {
+    textAlign: 'center',
   },
 });
 
