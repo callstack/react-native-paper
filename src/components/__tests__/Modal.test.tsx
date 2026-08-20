@@ -19,6 +19,7 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Modal', () => {
@@ -31,9 +32,11 @@ describe('Modal', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
     (
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
+    /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
   });
 
   describe('by default', () => {

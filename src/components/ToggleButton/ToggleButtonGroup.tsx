@@ -22,6 +22,7 @@ type ToggleButtonContextType<Value> = {
 
 export const ToggleButtonGroupContext =
   //@ts-expect-error: TS can't ensure the type from Group to children
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   React.createContext<ToggleButtonContextType>(null as any);
 
 /**

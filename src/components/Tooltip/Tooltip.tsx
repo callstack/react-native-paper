@@ -81,8 +81,8 @@ const Tooltip = ({
     tooltip: {},
     measured: false,
   });
-  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
+  const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const childrenWrapperRef = React.useRef<View>(null);
   const touched = React.useRef(false);
@@ -121,10 +121,10 @@ const Tooltip = ({
     }
 
     if (isWeb) {
-      let id = setTimeout(() => {
+      const id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
-      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+      }, enterTouchDelay);
       showTooltipTimer.current.push(id);
     } else {
       touched.current = true;
@@ -139,10 +139,10 @@ const Tooltip = ({
       showTooltipTimer.current = [];
     }
 
-    let id = setTimeout(() => {
+    const id = setTimeout(() => {
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+    }, leaveTouchDelay);
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
 
@@ -151,7 +151,9 @@ const Tooltip = ({
       return null;
     }
     if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
+    const props =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      children.props as TooltipChildProps;
     if (props.disabled) return null;
     return props.onPress?.();
   }, [children.props, isValidChild]);
@@ -159,6 +161,7 @@ const Tooltip = ({
   const handleHoverIn = React.useCallback(() => {
     handleTouchStart();
     if (isValidChild) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       (children.props as TooltipChildProps).onHoverIn?.();
     }
   }, [children.props, handleTouchStart, isValidChild]);
@@ -166,6 +169,7 @@ const Tooltip = ({
   const handleHoverOut = React.useCallback(() => {
     handleTouchEnd();
     if (isValidChild) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       (children.props as TooltipChildProps).onHoverOut?.();
     }
   }, [children.props, handleTouchEnd, isValidChild]);
@@ -205,7 +209,9 @@ const Tooltip = ({
               {
                 backgroundColor: theme.colors.onSurface,
                 ...getTooltipPosition(
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                   measurement as Measurement,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                   children as React.ReactElement<TooltipChildProps>
                 ),
                 borderRadius: theme.shapes.corner.extraSmall,
@@ -257,6 +263,7 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,

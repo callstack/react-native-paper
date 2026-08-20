@@ -539,6 +539,7 @@ const styles = StyleSheet.create({
 });
 
 // Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default Switch;

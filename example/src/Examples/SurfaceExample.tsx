@@ -6,14 +6,14 @@ import type { Elevation } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SurfaceExample = () => {
-  const elevationValues = Array.from({ length: 6 });
+  const elevationValues: Elevation[] = [0, 1, 2, 3, 4, 5];
 
-  const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
+  const renderSurface = (index: Elevation, mode: 'flat' | 'elevated') => (
     <Surface
       key={index}
       style={[styles.surface, styles.v3Surface]}
       mode={mode}
-      elevation={index as Elevation}
+      elevation={index}
     >
       <Text variant="bodyLarge">
         {`Elevation ${index === 1 ? '(default)' : ''} ${index}`}
@@ -25,13 +25,15 @@ const SurfaceExample = () => {
     <ScreenWrapper>
       <List.Section title="Elevated surface">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'elevated'))}
+          {elevationValues.map((elevation) =>
+            renderSurface(elevation, 'elevated')
+          )}
         </ScrollView>
       </List.Section>
 
       <List.Section title="Flat surface">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'flat'))}
+          {elevationValues.map((elevation) => renderSurface(elevation, 'flat'))}
         </ScrollView>
       </List.Section>
 

@@ -38,8 +38,11 @@ export type Props = ViewProps & {
 const CardActions = ({ theme, style, children, ...rest }: Props) => {
   useInternalTheme(theme);
 
-  const justifyContent = 'flex-end' as ViewStyle['justifyContent'];
-  const containerStyle = [styles.container, { justifyContent }, style];
+  const containerStyle = [
+    styles.container,
+    { justifyContent: 'flex-end' } satisfies ViewStyle,
+    style,
+  ];
 
   return (
     <View {...rest} style={containerStyle}>

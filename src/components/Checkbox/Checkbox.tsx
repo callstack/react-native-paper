@@ -239,6 +239,9 @@ const Checkbox = ({
     setFocused(false);
   }, []);
 
+  const checked: boolean | 'mixed' =
+    status === 'indeterminate' ? 'mixed' : status === 'checked';
+
   // When `accessible={false}` is passed (typically by `CheckboxItem`, which
   // owns the a11y tree for the wrapped row), suppress our own a11y role
   // and state so the same logical control doesn't expose two `checked`
@@ -249,9 +252,7 @@ const Checkbox = ({
       : {
           role: 'checkbox' as const,
           'aria-disabled': !!disabled,
-          'aria-checked': (status === 'indeterminate'
-            ? 'mixed'
-            : status === 'checked') as boolean | 'mixed',
+          'aria-checked': checked,
           'aria-live': 'polite' as const,
         };
 
@@ -369,6 +370,7 @@ const Checkmark = ({
 };
 
 // Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
