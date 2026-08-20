@@ -111,12 +111,16 @@ exports[`renders avatar with image 1`] = `
         "height": 64,
         "width": 64,
       },
+      {
+        "overflow": "hidden",
+      },
       undefined,
     ]
   }
 >
   <Image
     accessibilityIgnoresInvertColors={true}
+    onError={[Function]}
     source={
       {
         "uri": "avatar.png",

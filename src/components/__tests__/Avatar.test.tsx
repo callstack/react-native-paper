@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
@@ -202,5 +202,172 @@ it('forwards accessibility props to the image, not the wrapper', async () => {
     props: {
       accessibilityLabel: 'Profile photo',
     },
+  });
+});
+
+describe('AvatarImage fallback', () => {
+  it('shows fallback when the image fails to load', async () => {
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(screen.getByText('JD')).toBeTruthy();
+  });
+
+  it('still calls onError when showing a fallback', async () => {
+    const onError = jest.fn();
+
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        onError={onError}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(onError).toHaveBeenCalled();
+    expect(screen.getByText('JD')).toBeTruthy();
+  });
+
+  it('keeps the image mounted and still calls onError without a fallback', async () => {
+    const onError = jest.fn();
+
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        onError={onError}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(onError).toHaveBeenCalled();
+    expect(screen.getByTestId('avatar-image')).toBeTruthy();
+  });
+
+  it('retries the image when the source URI changes', async () => {
+    const { rerender } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'bad.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+    expect(screen.getByText('JD')).toBeTruthy();
+
+    await rerender(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'good.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    expect(screen.getByTestId('avatar-image')).toBeTruthy();
+    expect(screen.queryByText('JD')).toBeNull();
+  });
+
+  it('keeps the fallback when the source object identity changes', async () => {
+    const { rerender } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'bad.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    await rerender(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'bad.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    expect(screen.getByText('JD')).toBeTruthy();
+  });
+
+  it('passes host size and style to a function source', async () => {
+    const source = jest.fn(
+      ({
+        style,
+      }: {
+        size: number;
+        style: { width: number; height: number; borderRadius: number };
+      }) => (
+        <Image
+          testID="custom-image"
+          source={{ uri: 'avatar.png' }}
+          style={style}
+          accessibilityIgnoresInvertColors
+        />
+      )
+    );
+
+    await render(<Avatar.Image size={48} source={source} />);
+
+    expect(source).toHaveBeenCalledWith({
+      size: 48,
+      style: { width: 48, height: 48, borderRadius: 24 },
+      onError: expect.any(Function),
+    });
+    expect(screen.getByTestId('custom-image')).toBeTruthy();
+  });
+
+  it('shows fallback when a function source reports an error', async () => {
+    await render(
+      <Avatar.Image
+        source={({ style, onError }) => (
+          <Image
+            testID="custom-image"
+            source={{ uri: 'avatar.png' }}
+            style={style}
+            onError={onError}
+            accessibilityIgnoresInvertColors
+          />
+        )}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('custom-image'), 'onError');
+
+    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.queryByTestId('custom-image')).toBeNull();
+  });
+
+  it('forwards accessibility props to the host when fallback is shown', async () => {
+    const { toJSON } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        accessibilityLabel="Profile photo"
+        accessibilityRole="image"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(toJSON()).toMatchObject({
+      props: {
+        accessibilityLabel: 'Profile photo',
+        accessibilityRole: 'image',
+      },
+    });
   });
 });

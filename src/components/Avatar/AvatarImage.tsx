@@ -16,19 +16,31 @@ const defaultSize = 64;
 
 export type AvatarImageSource =
   | ImageSourcePropType
-  | ((props: { size: number }) => React.ReactNode);
+  | ((props: {
+      size: number;
+      style: { width: number; height: number; borderRadius: number };
+      onError?: ImageProps['onError'];
+    }) => React.ReactNode);
 
 export type Props = ViewProps & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
-   * Or a function that returns an `Image`.
+   * or a function that returns an image component.
+   * Function sources receive `{ size, style, onError }` matching the host avatar.
+   * Apply `style` so the image fills the circle, and `onError` to trigger `fallback`.
+   * Spread `size` from hosts such as `Card.Title` `left`.
    */
   source: AvatarImageSource;
   /**
    * Size of the avatar.
    */
   size?: number;
+  /**
+   * Content shown when the image fails to load.
+   * Receives host `size` so custom content can match the avatar.
+   */
+  fallback?: (props: { size: number }) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
   /**
    * Invoked on load error.
@@ -73,10 +85,31 @@ export type Props = ViewProps & {
  * );
  * export default MyComponent
  * ```
+ *
+ * Show another avatar when the image fails to load:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   source={{ uri: user.avatarUrl }}
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
+ * ```
+ *
+ * Custom image components should apply the host `style`:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   source={({ style, onError }) => (
+ *     <CustomImage source={{ uri }} style={style} onError={onError} />
+ *   )}
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
+ * ```
  */
 const AvatarImage = ({
   size = defaultSize,
   source,
+  fallback,
   style,
   onError,
   onLayout,
@@ -91,6 +124,34 @@ const AvatarImage = ({
   const { colors } = useInternalTheme(themeOverrides);
   const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
   const { accessibilityProps, rest: viewProps } = splitAccessibilityProps(rest);
+  const imageStyle = {
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+  };
+  const sourceKey =
+    source &&
+    typeof source === 'object' &&
+    !Array.isArray(source) &&
+    'uri' in source
+      ? source.uri
+      : source;
+  const previousSourceKey = React.useRef(sourceKey);
+  const [hasError, setHasError] = React.useState(false);
+
+  if (!Object.is(previousSourceKey.current, sourceKey)) {
+    previousSourceKey.current = sourceKey;
+    if (hasError) {
+      setHasError(false);
+    }
+  }
+
+  const handleError: ImageProps['onError'] = (event) => {
+    setHasError(true);
+    onError?.(event);
+  };
+
+  const showImage = !(hasError && fallback !== undefined);
 
   return (
     <View
@@ -101,18 +162,23 @@ const AvatarImage = ({
           borderRadius: size / 2,
           backgroundColor,
         },
+        styles.container,
         style,
       ]}
       {...viewProps}
-      importantForAccessibility="no"
+      {...(showImage
+        ? { importantForAccessibility: 'no' as const }
+        : accessibilityProps)}
     >
-      {typeof source === 'function' && source({ size })}
-      {typeof source !== 'function' && (
+      {showImage && typeof source === 'function'
+        ? source({ size, style: imageStyle, onError: handleError })
+        : null}
+      {showImage && typeof source !== 'function' ? (
         <Image
           testID={testID}
           source={source}
-          style={{ width: size, height: size, borderRadius: size / 2 }}
-          onError={onError}
+          style={imageStyle}
+          onError={handleError}
           onLayout={onLayout}
           onLoad={onLoad}
           onLoadEnd={onLoadEnd}
@@ -121,11 +187,18 @@ const AvatarImage = ({
           accessibilityIgnoresInvertColors
           {...accessibilityProps}
         />
-      )}
+      ) : null}
+      {!showImage ? fallback({ size }) : null}
     </View>
   );
 };
 
 AvatarImage.displayName = 'Avatar.Image';
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+});
 
 export default AvatarImage;
