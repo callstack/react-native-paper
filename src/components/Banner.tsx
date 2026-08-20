@@ -38,9 +38,8 @@ const extractText = (node: React.ReactNode): string =>
       if (typeof child === 'string' || typeof child === 'number') {
         return String(child);
       }
-      if (React.isValidElement(child)) {
-        const { children } = child.props as { children?: React.ReactNode };
-        return extractText(children);
+      if (React.isValidElement<{ children?: React.ReactNode }>(child)) {
+        return extractText(child.props.children);
       }
       return '';
     })
@@ -262,9 +261,9 @@ const Banner = ({
     }
   }, [actions.length]);
 
-  const region = urgent
-    ? ({ role: 'alert', live: 'assertive' } as const)
-    : ({ role: 'status', live: 'polite' } as const);
+  const region: Pick<ViewProps, 'role' | 'aria-live'> = urgent
+    ? { role: 'alert', 'aria-live': 'assertive' }
+    : { role: 'status', 'aria-live': 'polite' };
   const message = extractText(children);
 
   React.useEffect(() => {
@@ -298,10 +297,9 @@ const Banner = ({
   }, [visible, message, urgent]);
 
   // one stable ref per action slot; the cap is what bounds the array
-  const actionRefs = React.useRef<Array<React.RefObject<View>>>([]);
+  const actionRefs = React.useRef<Array<React.RefObject<View | null>>>([]);
   for (let i = 0; i < MAX_ACTIONS; i++) {
-    // Button types touchableRef as non-nullable, but a ref always starts null
-    actionRefs.current[i] ??= React.createRef<View>() as React.RefObject<View>;
+    actionRefs.current[i] ??= React.createRef<View>();
   }
   const messageRef = React.useRef<View>(null);
   const focusedAction = React.useRef<number | null>(null);
@@ -313,7 +311,7 @@ const Banner = ({
 
     // rnw's findNodeHandle throws, and the ref is already the dom node there
     if (Platform.OS === 'web') {
-      (node as unknown as { focus?: () => void }).focus?.();
+      node.focus();
       return;
     }
 
@@ -369,7 +367,7 @@ const Banner = ({
   );
   // rnw forwards `inert` to the dom, which drops the subtree from the a11y
   // tree and the tab order. native ignores the unknown prop
-  const inertProps = visible ? null : ({ inert: true } as object);
+  const inertProps: { inert?: boolean } = visible ? {} : { inert: true };
 
   // annotated, not cast: the literal -1 widens to number on its own
   const messageFocusProps: Pick<ViewProps, 'tabIndex' | 'accessible'> =
@@ -479,8 +477,7 @@ const Banner = ({
           <View
             testID={`${testID ?? 'banner'}-announcer`}
             style={styles.announcer}
-            role={region.role}
-            aria-live={region.live}
+            {...region}
           >
             <Text>{announcement}</Text>
           </View>
