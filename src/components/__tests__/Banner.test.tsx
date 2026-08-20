@@ -239,16 +239,16 @@ describe('inert when hidden', () => {
     let hideDone: ((result: { finished: boolean }) => void) | undefined;
     const timing = jest
       .spyOn(Animated, 'timing')
-      .mockImplementation((_value: any, config: any) => {
+      .mockImplementation((_value, config) => {
         return {
-          start: (cb?: (result: { finished: boolean }) => void) => {
+          start: (cb) => {
             if (config.toValue === 0) {
               hideDone = cb;
             }
           },
           stop: () => {},
           reset: () => {},
-        } as any;
+        };
       });
 
     const view = await render(
@@ -1318,9 +1318,9 @@ describe('interrupted animations', () => {
     hideDone = undefined;
     timing = jest
       .spyOn(Animated, 'timing')
-      .mockImplementation((_value: any, config: any) => {
+      .mockImplementation((_value, config) => {
         return {
-          start: (cb?: (result: { finished: boolean }) => void) => {
+          start: (cb) => {
             if (config.toValue === 1) {
               showDone = cb;
             } else if (config.toValue === 0) {
@@ -1329,7 +1329,7 @@ describe('interrupted animations', () => {
           },
           stop: () => {},
           reset: () => {},
-        } as any;
+        };
       });
   });
 
