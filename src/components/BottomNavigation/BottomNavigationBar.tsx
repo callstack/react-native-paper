@@ -714,8 +714,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                               styles.label,
                               {
                                 color: activeLabelColor,
-                                fontWeight: '700' as TextStyle['fontWeight'],
                                 ...font,
+                                fontWeight: '700' as TextStyle['fontWeight'],
                               },
                             ]}
                           >
