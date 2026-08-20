@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -23,6 +23,27 @@ import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 const DEFAULT_MAX_WIDTH = 960;
 // banners carry at most two actions per the material spec
 const MAX_ACTIONS = 2;
+// a tradeoff, not a safe number: too short and the set and clear can batch into
+// one a11y update, too long and a talkback swipe hears the message twice
+const ANNOUNCE_CLEAR_DELAY = 3000;
+
+// only android and web have a real live region. everywhere else announces by hand
+const hasLiveRegion = () => Platform.OS === 'android' || Platform.OS === 'web';
+
+// a nested <Text> would otherwise be dropped from the announcement
+const extractText = (node: React.ReactNode): string =>
+  React.Children.toArray(node)
+    .map((child) => {
+      if (typeof child === 'string' || typeof child === 'number') {
+        return String(child);
+      }
+      if (React.isValidElement(child)) {
+        const { children } = child.props as { children?: React.ReactNode };
+        return extractText(children);
+      }
+      return '';
+    })
+    .join('');
 
 export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
@@ -37,6 +58,12 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Icon to display for the `Banner`. Can be an image.
    */
   icon?: IconSource;
+  /**
+   * Accessibility label for the icon. Leave it out when the icon is decorative
+   * and the message already says everything - the icon is then hidden from
+   * screen readers instead of being read out as an unlabelled image.
+   */
+  iconAccessibilityLabel?: string;
   /**
    * Action items to shown in the banner.
    * An action item should contain the following properties:
@@ -139,6 +166,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 const Banner = ({
   visible,
   icon,
+  iconAccessibilityLabel,
   children,
   actions = [],
   contentStyle,
@@ -233,22 +261,39 @@ const Banner = ({
     }
   }, [actions.length]);
 
-  const liveRegion = urgent ? 'assertive' : 'polite';
-  const message = React.Children.toArray(children)
-    .filter((child) => typeof child === 'string' || typeof child === 'number')
-    .join('');
+  const region = urgent
+    ? ({ role: 'alert', live: 'assertive' } as const)
+    : ({ role: 'status', live: 'polite' } as const);
+  const message = extractText(children);
 
-  // aria-live only reaches a real live region on android and web. ios has no
-  // equivalent, so announce there by hand whenever the message becomes
-  // available. doing it everywhere would double up with the live region
   React.useEffect(() => {
-    if (Platform.OS !== 'ios' || !visible || !message) {
+    if (hasLiveRegion() || !visible || !message) {
       return;
     }
 
     AccessibilityInfo.announceForAccessibilityWithOptions(message, {
       queue: !urgent,
     });
+  }, [visible, message, urgent]);
+
+  // a region only fires when its text changes while it is already in the tree.
+  // the banner unmounts when hidden, so the message can never be that change
+  const [announcement, setAnnouncement] = React.useState('');
+  React.useEffect(() => {
+    if (!hasLiveRegion() || !visible || !message) {
+      setAnnouncement('');
+      return;
+    }
+
+    // re-setting the same string is not a render, so empty it first or an
+    // unchanged message announces nothing
+    setAnnouncement('');
+    const fill = setTimeout(() => setAnnouncement(message), 0);
+    const clear = setTimeout(() => setAnnouncement(''), ANNOUNCE_CLEAR_DELAY);
+    return () => {
+      clearTimeout(fill);
+      clearTimeout(clear);
+    };
   }, [visible, message, urgent]);
 
   // one stable ref per action slot; the cap is what bounds the array
@@ -265,13 +310,16 @@ const Banner = ({
       return;
     }
 
+    // rnw's findNodeHandle throws, and the ref is already the dom node there
+    if (Platform.OS === 'web') {
+      (node as unknown as { focus?: () => void }).focus?.();
+      return;
+    }
+
     const handle = findNodeHandle(node);
     if (handle !== null) {
       AccessibilityInfo.setAccessibilityFocus(handle);
     }
-
-    // rnw resolves the ref to the dom node, which takes focus directly
-    (node as unknown as { focus?: () => void }).focus?.();
   };
 
   // a removed action would otherwise strand focus at the top of the document
@@ -322,6 +370,10 @@ const Banner = ({
   // tree and the tab order. native ignores the unknown prop
   const inertProps = visible ? null : ({ inert: true } as object);
 
+  // annotated, not cast: the literal -1 widens to number on its own
+  const messageFocusProps: Pick<ViewProps, 'tabIndex' | 'accessible'> =
+    Platform.OS === 'web' ? { tabIndex: -1 } : { accessible: true };
+
   return (
     <Surface
       {...rest}
@@ -358,20 +410,23 @@ const Banner = ({
               {/* icon and message travel together as one flex item, so only
                   the actions can be wrapped onto the next line */}
               <View style={styles.body}>
+                {/* rnw gives the icon role="img" with no name */}
                 {icon ? (
-                  <View style={styles.icon}>
+                  <View
+                    testID={`${testID ?? 'banner'}-icon`}
+                    style={styles.icon}
+                    aria-hidden={!iconAccessibilityLabel}
+                    accessible={iconAccessibilityLabel ? true : undefined}
+                    aria-label={iconAccessibilityLabel}
+                  >
                     <Icon source={icon} size={40} />
                   </View>
                 ) : null}
-                {/* the region is scoped to the message: status/alert imply
-                    aria-atomic, so keeping the actions out of it stops their
-                    labels from re-announcing the whole banner */}
                 <View
                   ref={messageRef}
                   testID={`${testID ?? 'banner'}-message`}
                   style={styles.message}
-                  role={urgent ? 'alert' : 'status'}
-                  aria-live={visible ? liveRegion : 'off'}
+                  {...messageFocusProps}
                 >
                   <Text
                     variant="bodyMedium"
@@ -415,6 +470,17 @@ const Banner = ({
             </View>
           </Animated.View>
         )}
+        {/* last, so a screen reader reaches the real message first */}
+        {hasLiveRegion() ? (
+          <View
+            testID={`${testID ?? 'banner'}-announcer`}
+            style={styles.announcer}
+            role={region.role}
+            aria-live={region.live}
+          >
+            <Text>{announcement}</Text>
+          </View>
+        ) : null}
       </View>
     </Surface>
   );
@@ -468,6 +534,14 @@ const styles = StyleSheet.create({
   },
   transparent: {
     opacity: 0,
+  },
+  announcer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 1,
+    height: 1,
+    overflow: 'hidden',
   },
 });
 

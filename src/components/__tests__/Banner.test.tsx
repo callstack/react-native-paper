@@ -1,4 +1,10 @@
-import { AccessibilityInfo, Animated, Image, Platform } from 'react-native';
+import {
+  AccessibilityInfo,
+  Animated,
+  Image,
+  Platform,
+  Text,
+} from 'react-native';
 
 import {
   afterAll,
@@ -533,6 +539,27 @@ describe('actions', () => {
 
 describe('live region', () => {
   const ALL = { includeHiddenElements: true };
+  const originalPlatform = Platform.OS;
+
+  // the preset runs as ios, which has no live region and announces by hand
+  beforeEach(() => {
+    Platform.OS = 'android';
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+  });
+
+  // the announcer empties itself first and fills on a later task, so the text
+  // is never there on the render pass itself
+  const flush = () =>
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+  const announcerHas = (text: string) =>
+    within(screen.getByTestId('banner-announcer', ALL)).queryByText(text) !==
+    null;
 
   it('is a polite status region by default', async () => {
     await render(
@@ -541,7 +568,7 @@ describe('live region', () => {
       </Banner>
     );
 
-    const region = screen.getByTestId('banner-message');
+    const region = screen.getByTestId('banner-announcer');
     expect(region).toHaveProp('role', 'status');
     expect(region).toHaveProp('aria-live', 'polite');
   });
@@ -553,25 +580,149 @@ describe('live region', () => {
       </Banner>
     );
 
-    const region = screen.getByTestId('banner-message');
+    const region = screen.getByTestId('banner-announcer');
     expect(region).toHaveProp('role', 'alert');
     expect(region).toHaveProp('aria-live', 'assertive');
   });
 
-  it('silences the region while hidden', async () => {
+  it('stays mounted and empty while the banner is hidden', async () => {
     await render(
       <Banner visible={false} testID="banner">
         Message
       </Banner>
     );
+    await flush();
 
-    expect(screen.getByTestId('banner-message', ALL)).toHaveProp(
-      'aria-live',
-      'off'
-    );
+    expect(screen.getByTestId('banner-announcer', ALL)).toBeOnTheScreen();
+    expect(announcerHas('Message')).toBe(false);
   });
 
-  it('scopes the region to the message so actions do not re-announce it', async () => {
+  it('announces again every time the banner is shown', async () => {
+    const view = await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+    await flush();
+    expect(announcerHas('Message')).toBe(true);
+
+    await view.rerender(
+      <Banner visible={false} testID="banner">
+        Message
+      </Banner>
+    );
+    // finish the hide so the content really unmounts, which the bug needed
+    await act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.queryByTestId('banner-content', ALL)).toBeNull();
+    expect(announcerHas('Message')).toBe(false);
+
+    await view.rerender(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+    await flush();
+    expect(announcerHas('Message')).toBe(true);
+  });
+
+  it('announces an unchanged message again on every show', async () => {
+    const view = await render(
+      <Banner visible={false} testID="banner">
+        Same text
+      </Banner>
+    );
+
+    for (let i = 0; i < 2; i++) {
+      await view.rerender(
+        <Banner visible testID="banner">
+          Same text
+        </Banner>
+      );
+      await flush();
+      expect(announcerHas('Same text')).toBe(true);
+
+      await view.rerender(
+        <Banner visible={false} testID="banner">
+          Same text
+        </Banner>
+      );
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(announcerHas('Same text')).toBe(false);
+    }
+  });
+
+  it('re-announces when the message changes while visible', async () => {
+    const view = await render(
+      <Banner visible testID="banner">
+        First
+      </Banner>
+    );
+    await flush();
+    expect(announcerHas('First')).toBe(true);
+
+    await view.rerender(
+      <Banner visible testID="banner">
+        Second
+      </Banner>
+    );
+    await flush();
+    expect(announcerHas('Second')).toBe(true);
+  });
+
+  it('re-announces when urgency changes while visible', async () => {
+    const view = await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+    expect(announcerHas('Message')).toBe(false);
+
+    await view.rerender(
+      <Banner visible urgent testID="banner">
+        Message
+      </Banner>
+    );
+    await flush();
+
+    expect(screen.getByTestId('banner-announcer')).toHaveProp('role', 'alert');
+    expect(announcerHas('Message')).toBe(true);
+  });
+
+  it('announces text nested inside elements', async () => {
+    await render(
+      <Banner visible testID="banner">
+        Your card <Text>ending 4242</Text> was declined
+      </Banner>
+    );
+    await flush();
+
+    expect(announcerHas('Your card ending 4242 was declined')).toBe(true);
+  });
+
+  it('drops the text again so it is not a second copy of the message', async () => {
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(announcerHas('Message')).toBe(false);
+    expect(
+      within(screen.getByTestId('banner-message')).getByText('Message')
+    ).toBeOnTheScreen();
+  });
+
+  it('carries the message only, so action labels never re-announce it', async () => {
     // status/alert imply aria-atomic, so anything inside the region is
     // re-announced whenever it changes - keep the buttons out of it
     await render(
@@ -583,24 +734,139 @@ describe('live region', () => {
         Message
       </Banner>
     );
+    await flush();
 
-    const region = screen.getByTestId('banner-message');
+    const region = screen.getByTestId('banner-announcer');
     expect(within(region).getByText('Message')).toBeOnTheScreen();
     expect(within(region).queryByText('Fix it')).toBeNull();
   });
 
-  it('does not leave the live region on the message text', async () => {
+  it('leaves the region off the message and its text', async () => {
+    // the message is a focus target now, not a region
     await render(
       <Banner visible testID="banner">
         Message
       </Banner>
     );
 
-    // react-native only maps aria-live -> accessibilityLiveRegion on View,
-    // so leaving it on Text is a no-op on android
-    const message = screen.getByText('Message');
-    expect(message).not.toHaveProp('aria-live');
-    expect(message).not.toHaveProp('role');
+    const container = screen.getByTestId('banner-message');
+    expect(container).not.toHaveProp('aria-live');
+    expect(container).not.toHaveProp('role');
+
+    const text = within(container).getByText('Message');
+    expect(text).not.toHaveProp('aria-live');
+    expect(text).not.toHaveProp('role');
+  });
+
+  it('is left out on ios, which announces by hand instead', async () => {
+    Platform.OS = 'ios';
+
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(screen.queryByTestId('banner-announcer', ALL)).toBeNull();
+  });
+});
+
+describe('icon', () => {
+  it('hides a decorative icon from screen readers', async () => {
+    // an unlabelled icon reads as a bare "image"
+    await render(
+      <Banner visible icon="camera" testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(screen.queryByTestId('banner-icon')).toBeNull();
+    expect(
+      screen.getByTestId('banner-icon', { includeHiddenElements: true })
+    ).toHaveProp('aria-hidden', true);
+  });
+
+  it('exposes the icon when it is given a label', async () => {
+    await render(
+      <Banner
+        visible
+        icon="camera"
+        iconAccessibilityLabel="Payment failed"
+        testID="banner"
+      >
+        Message
+      </Banner>
+    );
+
+    const wrapper = screen.getByTestId('banner-icon');
+    expect(wrapper).toHaveProp('aria-hidden', false);
+    expect(wrapper).toHaveProp('accessible', true);
+    expect(wrapper).toHaveProp('aria-label', 'Payment failed');
+  });
+});
+
+describe('message focus', () => {
+  const originalPlatform = Platform.OS;
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+  });
+
+  it('makes the message focusable on web', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByTestId('banner-message')).toHaveProp('tabIndex', -1);
+  });
+
+  it('makes the message an accessibility element on native', async () => {
+    Platform.OS = 'ios';
+
+    await render(
+      <Banner visible testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(screen.getByTestId('banner-message')).toHaveProp('accessible', true);
+  });
+
+  it('does not reach for a native handle on web', async () => {
+    // rnw's findNodeHandle throws, and calling it took the whole tree down
+    Platform.OS = 'web';
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        testID="banner"
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+
+    await view.rerender(
+      <Banner visible actions={[]} testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(setFocus).not.toHaveBeenCalled();
+    expect(screen.getByTestId('banner-message')).toBeOnTheScreen();
+    setFocus.mockRestore();
   });
 });
 
@@ -623,10 +889,6 @@ describe('announcements', () => {
   afterEach(() => {
     Platform.OS = originalPlatform;
     announce.mockRestore();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
   });
 
   it('announces on ios when mounted visible', async () => {

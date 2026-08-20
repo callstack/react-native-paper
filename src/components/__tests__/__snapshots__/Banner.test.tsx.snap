@@ -89,8 +89,7 @@ exports[`render visible banner, with custom theme 1`] = `
             }
           >
             <View
-              aria-live="polite"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
@@ -404,8 +403,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
             }
           >
             <View
-              aria-live="off"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
@@ -541,11 +539,13 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             }
           >
             <View
+              aria-hidden={true}
               style={
                 {
                   "margin": 8,
                 }
               }
+              testID="banner-icon"
             >
               <Image
                 accessibilityIgnoresInvertColors={true}
@@ -563,8 +563,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               />
             </View>
             <View
-              aria-live="polite"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
@@ -865,8 +864,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             }
           >
             <View
-              aria-live="polite"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
@@ -1321,11 +1319,13 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             }
           >
             <View
+              aria-hidden={true}
               style={
                 {
                   "margin": 8,
                 }
               }
+              testID="banner-icon"
             >
               <Image
                 accessibilityIgnoresInvertColors={true}
@@ -1343,8 +1343,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
               />
             </View>
             <View
-              aria-live="polite"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
@@ -1480,8 +1479,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
             }
           >
             <View
-              aria-live="polite"
-              role="status"
+              accessible={true}
               style={
                 {
                   "flexBasis": "auto",
