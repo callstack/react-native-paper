@@ -150,6 +150,7 @@ const Banner = ({
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
   const { duration, easing } = theme.motion;
+  const { scale } = theme.animation;
 
   const opacity = position.interpolate({
     inputRange: [0, 0.1, 1],
@@ -160,7 +161,7 @@ const Banner = ({
     if (visible) {
       // show
       Animated.timing(position, {
-        duration: duration.medium1,
+        duration: duration.medium1 * scale,
         toValue: 1,
         useNativeDriver: false,
         easing: Easing.bezier(...easing.standard),
@@ -168,14 +169,14 @@ const Banner = ({
     } else {
       // hide
       Animated.timing(position, {
-        duration: duration.short4,
+        duration: duration.short4 * scale,
         toValue: 0,
         useNativeDriver: false,
         easing: Easing.bezier(...easing.standard),
       }).start(hideCallback);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, position, duration, easing]);
+  }, [visible, position, duration, easing, scale]);
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;

@@ -145,6 +145,33 @@ describe('animations', () => {
     hideCallback = undefined;
   });
 
+  it('uses zero-duration animations when animation scale is disabled', async () => {
+    const timingSpy = jest.spyOn(Animated, 'timing');
+    const view = await render(
+      <Banner visible={false} theme={{ animation: { scale: 0 } }}>
+        Text
+      </Banner>
+    );
+
+    expect(timingSpy).toHaveBeenLastCalledWith(
+      expect.anything(),
+      expect.objectContaining({ duration: 0 })
+    );
+
+    await view.rerender(
+      <Banner visible theme={{ animation: { scale: 0 } }}>
+        Text
+      </Banner>
+    );
+
+    expect(timingSpy).toHaveBeenLastCalledWith(
+      expect.anything(),
+      expect.objectContaining({ duration: 0 })
+    );
+
+    timingSpy.mockRestore();
+  });
+
   describe('when component is rendered hidden', () => {
     // This behaviour is probably a bug. Needs triage before next version.
     it('will fire onHideAnimationFinished on mount', async () => {
