@@ -33,7 +33,9 @@ export type Props = ViewProps & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
-   * Or a function that returns an `Image`.
+   * or a function that returns an image component.
+   * Function sources receive `{ size, style, onError }` matching the host avatar.
+   * Apply `style` so the image fills the circle, and call `onError` to trigger `fallback`.
    */
   source: AvatarImageSource;
   /**
@@ -88,6 +90,26 @@ export type Props = ViewProps & {
  *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
  * );
  * export default MyComponent
+ * ```
+ *
+ * Show another avatar when the image fails to load:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   source={{ uri: user.avatarUrl }}
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
+ * ```
+ *
+ * Custom image components should apply the host `style` and `onError`:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   source={({ style, onError }) => (
+ *     <CustomImage source={{ uri }} style={style} onError={onError} />
+ *   )}
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
  * ```
  */
 const AvatarImage = ({

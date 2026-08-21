@@ -751,8 +751,8 @@
             },
             "description": "Size of the avatar.",
             "defaultValue": {
-              "value": "64",
-              "computed": false
+              "value": "DEFAULT_SIZE",
+              "computed": true
             }
           },
           "color": {
@@ -760,7 +760,7 @@
             "tsType": {
               "name": "string"
             },
-            "description": "Custom color for the icon."
+            "description": "Custom color for the icon. Takes precedence over the automatic contrast\ncolor below."
           },
           "style": {
             "required": false,
@@ -773,7 +773,7 @@
               ],
               "raw": "StyleProp<ViewStyle>"
             },
-            "description": ""
+            "description": "Style for the icon container. A custom `backgroundColor` is\nautomatically paired with a contrasting icon color when `color` is not\nset: string values use a luminance heuristic, while opaque/dynamic\nvalues (`PlatformColor` / `DynamicColorIOS`) are paired with a theme\nrole's `on-` color, falling back to `onSurface`."
           },
           "theme": {
             "required": false,
@@ -793,10 +793,10 @@
     "Avatar/AvatarImage": {
       "filepath": "Avatar/AvatarImage.tsx",
       "title": "Avatar.Image",
-      "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} />\n);\nexport default MyComponent\n```",
+      "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} />\n);\nexport default MyComponent\n```\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style` and `onError`:\n```js\n<Avatar.Image\n  size={64}\n  source={({ style, onError }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
       "link": "avatar-image",
       "data": {
-        "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} />\n);\nexport default MyComponent\n```",
+        "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} />\n);\nexport default MyComponent\n```\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style` and `onError`:\n```js\n<Avatar.Image\n  size={64}\n  source={({ style, onError }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
         "displayName": "Avatar.Image",
         "methods": [],
         "statics": [],
@@ -805,7 +805,7 @@
             "required": true,
             "tsType": {
               "name": "union",
-              "raw": "| ImageSourcePropType\n| ((props: { size: number }) => React.ReactNode)",
+              "raw": "| ImageSourcePropType\n| ((props: AvatarImageSourceProps) => React.ReactNode)",
               "elements": [
                 {
                   "name": "ImageSourcePropType"
@@ -815,7 +815,7 @@
                 }
               ]
             },
-            "description": "Image to display for the `Avatar`.\nIt accepts a standard React Native Image `source` prop\nOr a function that returns an `Image`."
+            "description": "Image to display for the `Avatar`.\nIt accepts a standard React Native Image `source` prop\nor a function that returns an image component.\nFunction sources receive `{ size, style, onError }` matching the host avatar.\nApply `style` so the image fills the circle, and call `onError` to trigger `fallback`."
           },
           "size": {
             "required": false,
@@ -824,9 +824,45 @@
             },
             "description": "Size of the avatar.",
             "defaultValue": {
-              "value": "64",
-              "computed": false
+              "value": "DEFAULT_SIZE",
+              "computed": true
             }
+          },
+          "fallback": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(props: { size: number }) => React.ReactNode",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "props",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ size: number }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "size",
+                            "value": {
+                              "name": "number",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "ReactReactNode",
+                  "raw": "React.ReactNode"
+                }
+              }
+            },
+            "description": "Content shown when the image fails to load.\nReceives host `size` so custom content can match the avatar."
           },
           "style": {
             "required": false,
@@ -920,7 +956,7 @@
             "tsType": {
               "name": "string"
             },
-            "description": "Initials to show as the text in the `Avatar`."
+            "description": "Initials to show as the text in the `Avatar`.\nTruncated to the first two graphemes (emoji, ZWJ sequences and combining\nmarks stay intact)."
           },
           "size": {
             "required": false,
@@ -929,8 +965,8 @@
             },
             "description": "Size of the avatar.",
             "defaultValue": {
-              "value": "64",
-              "computed": false
+              "value": "DEFAULT_SIZE",
+              "computed": true
             }
           },
           "color": {
@@ -938,7 +974,7 @@
             "tsType": {
               "name": "string"
             },
-            "description": "Custom color for the text."
+            "description": "Custom color for the text. Takes precedence over the automatic contrast\ncolor below."
           },
           "style": {
             "required": false,
@@ -951,7 +987,7 @@
               ],
               "raw": "StyleProp<ViewStyle>"
             },
-            "description": "Style for text container"
+            "description": "Style for text container. A custom `backgroundColor` is automatically\npaired with a contrasting text color when `color` is not set: string\nvalues use a luminance heuristic, while opaque/dynamic values\n(`PlatformColor` / `DynamicColorIOS`) are paired with a theme role's\n`on-` color, falling back to `onSurface`."
           },
           "labelStyle": {
             "required": false,

@@ -27,6 +27,26 @@ const MyComponent = () => (
 export default MyComponent
 ```
 
+Show another avatar when the image fails to load:
+```js
+<Avatar.Image
+  size={64}
+  source={{ uri: user.avatarUrl }}
+  fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+/>
+```
+
+Custom image components should apply the host `style` and `onError`:
+```js
+<Avatar.Image
+  size={64}
+  source={({ style, onError }) => (
+    <CustomImage source={{ uri }} style={style} onError={onError} />
+  )}
+  fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+/>
+```
+
 
   ## Props
   <span />
@@ -48,6 +68,14 @@ export default MyComponent
 </div>
 
   <PropTable componentLink="Avatar/AvatarImage" prop="size" />
+
+<div>
+
+### fallback
+
+</div>
+
+  <PropTable componentLink="Avatar/AvatarImage" prop="fallback" />
 
 <div>
 

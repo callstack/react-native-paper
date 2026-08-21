@@ -18,9 +18,17 @@ export type Props = ViewProps & {
    */
   size?: number;
   /**
-   * Custom color for the icon.
+   * Custom color for the icon. Takes precedence over the automatic contrast
+   * color below.
    */
   color?: string;
+  /**
+   * Style for the icon container. A custom `backgroundColor` is
+   * automatically paired with a contrasting icon color when `color` is not
+   * set: string values use a luminance heuristic, while opaque/dynamic
+   * values (`PlatformColor` / `DynamicColorIOS`) are paired with a theme
+   * role's `on-` color, falling back to `onSurface`.
+   */
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
