@@ -65,36 +65,41 @@ exports[`render visible banner, with custom theme 1`] = `
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }
@@ -379,36 +384,41 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }
@@ -515,27 +525,34 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
@@ -566,9 +583,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }
@@ -840,36 +855,41 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }
@@ -1295,27 +1315,34 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
@@ -1346,9 +1373,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }
@@ -1455,36 +1480,41 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         testID="banner-content"
       >
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "marginBottom": 0,
-              "marginHorizontal": 8,
-              "marginTop": 16,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "marginBottom": 0,
+                "marginHorizontal": 8,
+                "marginTop": 16,
+              },
+              {
+                "alignItems": "stretch",
+                "flexDirection": "column",
+              },
+            ]
           }
+          testID="banner-row"
         >
           <View
             style={
-              {
-                "alignItems": "center",
-                "flexBasis": "auto",
-                "flexDirection": "row",
-                "flexGrow": 1,
-                "flexShrink": 1,
-              }
+              [
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexShrink": 1,
+                },
+                null,
+              ]
             }
           >
             <View
               accessible={true}
               style={
                 {
-                  "flexBasis": "auto",
-                  "flexGrow": 1,
-                  "flexShrink": 1,
+                  "flex": 1,
                   "margin": 8,
                 }
               }

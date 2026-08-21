@@ -576,6 +576,76 @@ describe('actions', () => {
   });
 });
 
+describe('reflow', () => {
+  const ACTIONS_TWO = [
+    { label: 'first', onPress: () => {} },
+    { label: 'second', onPress: () => {} },
+  ];
+
+  const measure = (width: number) =>
+    fireEvent(screen.getByTestId('banner-row'), 'layout', {
+      nativeEvent: { layout: { height: 80, width } },
+    });
+
+  it('stacks the actions below the message on a phone width', async () => {
+    await render(
+      <Banner visible actions={ACTIONS_TWO} testID="banner">
+        Two line text string with two actions.
+      </Banner>
+    );
+
+    await measure(400);
+
+    expect(screen.getByTestId('banner-row')).toHaveStyle({
+      flexDirection: 'column',
+    });
+  });
+
+  it('puts the actions inline once there is room', async () => {
+    await render(
+      <Banner visible actions={ACTIONS_TWO} testID="banner">
+        Two line text string with two actions.
+      </Banner>
+    );
+
+    await measure(800);
+
+    expect(screen.getByTestId('banner-row')).toHaveStyle({
+      flexDirection: 'row',
+    });
+  });
+
+  it('stacks until the banner has been measured', async () => {
+    await render(
+      <Banner visible actions={ACTIONS_TWO} testID="banner">
+        Two line text string with two actions.
+      </Banner>
+    );
+
+    expect(screen.getByTestId('banner-row')).toHaveStyle({
+      flexDirection: 'column',
+    });
+  });
+
+  it('reflows again when the banner is resized', async () => {
+    await render(
+      <Banner visible actions={ACTIONS_TWO} testID="banner">
+        Two line text string with two actions.
+      </Banner>
+    );
+
+    await measure(800);
+    expect(screen.getByTestId('banner-row')).toHaveStyle({
+      flexDirection: 'row',
+    });
+
+    await measure(400);
+    expect(screen.getByTestId('banner-row')).toHaveStyle({
+      flexDirection: 'column',
+    });
+  });
+});
+
 describe('live region', () => {
   const ALL = { includeHiddenElements: true };
   const originalPlatform = Platform.OS;
