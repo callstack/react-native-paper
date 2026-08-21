@@ -17,6 +17,8 @@ import {
   useTheme,
 } from 'react-native-paper';
 import type {
+  AppbarV3Actions,
+  AppbarV3FilledAction,
   AppbarV3StandardAction,
   AppbarV3TitleAlignment,
   AppbarV3Variant,
@@ -26,6 +28,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ScreenWrapper from '../ScreenWrapper';
 
 type AppbarConfiguration = AppbarV3Variant | 'small-centered';
+type FilledActionVariant = AppbarV3FilledAction['variant'];
+type FilledActionWidth = NonNullable<AppbarV3FilledAction['width']>;
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const BOTTOM_APPBAR_HEIGHT = 80;
@@ -42,6 +46,11 @@ const AppbarV3Example = () => {
   const [appbarConfiguration, setAppbarConfiguration] =
     React.useState<AppbarConfiguration>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
+  const [showFilledAction, setShowFilledAction] = React.useState(false);
+  const [filledActionVariant, setFilledActionVariant] =
+    React.useState<FilledActionVariant>('filled');
+  const [filledActionWidth, setFilledActionWidth] =
+    React.useState<FilledActionWidth>('default');
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
@@ -55,10 +64,10 @@ const AppbarV3Example = () => {
     : 'leading';
 
   React.useLayoutEffect(() => {
-    const actions: AppbarV3StandardAction[] = [];
+    const standardActions: AppbarV3StandardAction[] = [];
 
     if (!isCentered && showCalendarIcon) {
-      actions.push({
+      standardActions.push({
         key: 'calendar',
         icon: 'calendar',
         'aria-label': 'Calendar',
@@ -67,7 +76,7 @@ const AppbarV3Example = () => {
     }
 
     if (showSearchIcon) {
-      actions.push({
+      standardActions.push({
         key: 'search',
         icon: 'magnify',
         'aria-label': 'Search',
@@ -76,7 +85,7 @@ const AppbarV3Example = () => {
     }
 
     if (showMoreIcon) {
-      actions.push({
+      standardActions.push({
         key: 'more',
         icon: MORE_ICON,
         'aria-label': 'More options',
@@ -84,13 +93,26 @@ const AppbarV3Example = () => {
       });
     }
 
+    const actions: AppbarV3Actions = showFilledAction
+      ? [
+          {
+            key: 'share',
+            icon: 'share-variant',
+            'aria-label': 'Share',
+            variant: filledActionVariant,
+            width: filledActionWidth,
+            onPress: () => {},
+          },
+        ]
+      : standardActions;
+
     navigation.setOptions({
       header: () => (
         <AppbarV3
           style={showCustomColor ? styles.customColor : null}
           variant={variant}
           titleAlignment={titleAlignment}
-          title="Title"
+          title="Title V3"
           subtitle={showSubtitle ? 'Subtitle' : undefined}
           onTitlePress={() => setShowSnackbar(true)}
           isScrolled={isScrolled}
@@ -108,9 +130,12 @@ const AppbarV3Example = () => {
     });
   }, [
     isCentered,
+    filledActionVariant,
+    filledActionWidth,
     navigation,
     showCalendarIcon,
     showCustomColor,
+    showFilledAction,
     showLeftIcon,
     showMoreIcon,
     isScrolled,
@@ -158,18 +183,30 @@ const AppbarV3Example = () => {
         <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
       </View>
       <View style={styles.row}>
+        <Text>Filled trailing action</Text>
+        <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
+      </View>
+      <View style={styles.row}>
         <Text>Search icon</Text>
-        <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
+        <Switch
+          value={showSearchIcon}
+          disabled={showFilledAction}
+          onValueChange={setShowSearchIcon}
+        />
       </View>
       <View style={styles.row}>
         <Text>More icon</Text>
-        <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
+        <Switch
+          value={showMoreIcon}
+          disabled={showFilledAction}
+          onValueChange={setShowMoreIcon}
+        />
       </View>
       <View style={styles.row}>
         <Text>Calendar icon</Text>
         <Switch
           value={isCentered ? false : showCalendarIcon}
-          disabled={isCentered}
+          disabled={isCentered || showFilledAction}
           onValueChange={setShowCalendarIcon}
         />
       </View>
@@ -202,6 +239,42 @@ const AppbarV3Example = () => {
         <List.Section title="Default options">
           {renderDefaultOptions()}
         </List.Section>
+        {showFilledAction ? (
+          <List.Section title="Filled action options">
+            <List.Subheader>Style</List.Subheader>
+            <RadioButton.Group
+              value={filledActionVariant}
+              onValueChange={(value: string) =>
+                setFilledActionVariant(value as FilledActionVariant)
+              }
+            >
+              <View style={styles.row}>
+                <Text>Primary filled</Text>
+                <RadioButton value="filled" />
+              </View>
+              <View style={styles.row}>
+                <Text>Tonal filled</Text>
+                <RadioButton value="tonal" />
+              </View>
+            </RadioButton.Group>
+            <List.Subheader>Width</List.Subheader>
+            <RadioButton.Group
+              value={filledActionWidth}
+              onValueChange={(value: string) =>
+                setFilledActionWidth(value as FilledActionWidth)
+              }
+            >
+              <View style={styles.row}>
+                <Text>Default</Text>
+                <RadioButton value="default" />
+              </View>
+              <View style={styles.row}>
+                <Text>Wide</Text>
+                <RadioButton value="wide" />
+              </View>
+            </RadioButton.Group>
+          </List.Section>
+        ) : null}
         <List.Section title="Appbar variants">
           <RadioButton.Group
             value={appbarConfiguration}

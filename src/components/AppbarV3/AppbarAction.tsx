@@ -34,6 +34,13 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
       : variant === 'tonal'
         ? 'contained-tonal'
         : undefined;
+  const iconColor =
+    color ??
+    (mode
+      ? undefined
+      : leading
+        ? resolvedTheme.colors.onSurface
+        : resolvedTheme.colors.onSurfaceVariant);
 
   return (
     <IconButton
@@ -42,12 +49,7 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
       aria-label={
         isBackAction ? (action['aria-label'] ?? 'Back') : action['aria-label']
       }
-      iconColor={
-        color ??
-        (leading
-          ? resolvedTheme.colors.onSurface
-          : resolvedTheme.colors.onSurfaceVariant)
-      }
+      iconColor={iconColor}
       mode={mode}
       selected={mode ? true : undefined}
       size={24}
