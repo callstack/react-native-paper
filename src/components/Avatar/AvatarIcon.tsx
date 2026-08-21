@@ -1,13 +1,12 @@
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE, ICON_SIZE_RATIO, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-
-const defaultSize = 64;
 
 export type Props = ViewProps & {
   /**
@@ -44,7 +43,7 @@ export type Props = ViewProps & {
  */
 const Avatar = ({
   icon,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   theme: themeOverrides,
   color: customColor,
@@ -64,7 +63,7 @@ const Avatar = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
+          borderRadius: cornerFull,
           backgroundColor: background,
         },
         styles.container,
@@ -72,7 +71,7 @@ const Avatar = ({
       ]}
       {...rest}
     >
-      <Icon source={icon} color={textColor} size={size * 0.6} />
+      <Icon source={icon} color={textColor} size={size * ICON_SIZE_RATIO} />
     </View>
   );
 };

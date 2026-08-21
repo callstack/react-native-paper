@@ -5,6 +5,9 @@ import { contentColorFor } from '../../theme/utils/color';
 import type { InternalTheme } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 
+export const DEFAULT_SIZE = 64;
+export const ICON_SIZE_RATIO = 0.6;
+
 export type ResolvedAvatarColors = {
   background: ColorValue;
   textColor: ColorValue;
@@ -13,10 +16,12 @@ export type ResolvedAvatarColors = {
 /**
  * Resolve background and content colors for an avatar.
  *
+ * - No custom background → MD3 container pair (primaryContainer /
+ *   onPrimaryContainer).
  * - Explicit `color` wins.
- * - String backgrounds keep the luminance heuristic (including string theme
- *   tokens such as `theme.colors.primary` in the static schemes).
- * - Opaque values (`PlatformColor` / `DynamicColorIOS`) go through
+ * - String custom backgrounds keep the luminance heuristic (arbitrary
+ *   per-user colors have no on- role).
+ * - Opaque custom values (`PlatformColor` / `DynamicColorIOS`) go through
  *   `contentColorFor`: a theme-role token pairs with its on-color; anything
  *   else falls back to `onSurface`. Pass `color` when that fallback is not
  *   appropriate.
@@ -30,10 +35,15 @@ export const resolveAvatarColors = ({
   backgroundColor?: ColorValue;
   color?: ColorValue;
 }): ResolvedAvatarColors => {
-  const background = backgroundColor ?? theme.colors.primary;
+  const usingDefault = backgroundColor == null;
+  const background = backgroundColor ?? theme.colors.primaryContainer;
 
   if (color != null) {
     return { background, textColor: color };
+  }
+
+  if (usingDefault) {
+    return { background, textColor: theme.colors.onPrimaryContainer };
   }
 
   if (typeof background === 'string') {

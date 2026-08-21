@@ -9,7 +9,7 @@ import { resolveAvatarColors, getAvatarImageSourceKey } from '../Avatar/utils';
 
 const withPlatformColor = (
   theme: InternalTheme,
-  role: 'primary' | 'error',
+  role: 'primary' | 'primaryContainer' | 'error',
   resource: string
 ): InternalTheme => ({
   ...theme,
@@ -20,24 +20,24 @@ const withPlatformColor = (
 });
 
 describe('resolveAvatarColors', () => {
-  it('uses the luminance heuristic for a string default primary', () => {
+  it('uses the MD3 container pair for the default background', () => {
     const theme = getTheme();
-    expect(typeof theme.colors.primary).toBe('string');
+    expect(typeof theme.colors.primaryContainer).toBe('string');
     expect(resolveAvatarColors({ theme })).toEqual({
-      background: theme.colors.primary,
-      textColor: '#ffffff',
+      background: theme.colors.primaryContainer,
+      textColor: theme.colors.onPrimaryContainer,
     });
   });
 
-  it('pairs an opaque theme-role token via contentColorFor', () => {
+  it('uses onPrimaryContainer for an opaque default container token', () => {
     const theme = withPlatformColor(
       getTheme(),
-      'primary',
-      '@android:color/system_primary_light'
+      'primaryContainer',
+      '@android:color/system_primary_container_light'
     );
     expect(resolveAvatarColors({ theme })).toEqual({
-      background: theme.colors.primary,
-      textColor: theme.colors.onPrimary,
+      background: theme.colors.primaryContainer,
+      textColor: theme.colors.onPrimaryContainer,
     });
   });
 

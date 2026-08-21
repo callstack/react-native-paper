@@ -1,13 +1,12 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
-import { resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../types';
 import { takeGraphemes } from '../../utils/takeGraphemes';
 import Text from '../Typography/Text';
-
-const defaultSize = 64;
 
 export type Props = ViewProps & {
   /**
@@ -55,7 +54,7 @@ export type Props = ViewProps & {
  */
 const AvatarText = ({
   label,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   labelStyle,
   color: customColor,
@@ -79,7 +78,7 @@ const AvatarText = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
+          borderRadius: cornerFull,
           backgroundColor: background,
         },
         styles.container,
@@ -90,6 +89,7 @@ const AvatarText = ({
       <Text
         style={[
           styles.text,
+          theme.fonts.titleMedium,
           {
             color: textColor,
             fontSize: size / 2,

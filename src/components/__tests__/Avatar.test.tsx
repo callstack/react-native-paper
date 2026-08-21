@@ -5,6 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import * as Avatar from '../Avatar/Avatar';
 
 const hidden = { includeHiddenElements: true };
@@ -384,7 +385,7 @@ describe('AvatarImage fallback', () => {
 
     expect(source).toHaveBeenCalledWith({
       size: 48,
-      style: { width: 48, height: 48, borderRadius: 24 },
+      style: { width: 48, height: 48, borderRadius: cornerFull },
       onError: expect.any(Function),
       accessible: false,
     });
