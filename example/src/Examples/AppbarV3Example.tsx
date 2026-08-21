@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -41,11 +42,12 @@ const AppbarV3Example = () => {
   const [appbarConfiguration, setAppbarConfiguration] =
     React.useState<AppbarConfiguration>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
-  const [showScrolled, setShowScrolled] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
   const theme = useTheme();
   const { bottom, left, right } = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
   const isCentered = appbarConfiguration === 'small-centered';
   const variant: AppbarV3Variant = isCentered ? 'small' : appbarConfiguration;
   const titleAlignment: AppbarV3TitleAlignment = isCentered
@@ -88,7 +90,7 @@ const AppbarV3Example = () => {
           title="Title"
           subtitle={showSubtitle ? 'Subtitle' : undefined}
           onTitlePress={() => setShowSnackbar(true)}
-          isScrolled={showScrolled}
+          isScrolled={isScrolled}
           leadingAction={
             showLeftIcon
               ? {
@@ -108,12 +110,25 @@ const AppbarV3Example = () => {
     showCustomColor,
     showLeftIcon,
     showMoreIcon,
-    showScrolled,
+    isScrolled,
     showSearchIcon,
     showSubtitle,
     titleAlignment,
     variant,
   ]);
+
+  const handleScroll = React.useCallback(
+    ({ nativeEvent }: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const nextIsScrolled = nativeEvent.contentOffset.y > 1;
+
+      setIsScrolled((currentIsScrolled) =>
+        currentIsScrolled === nextIsScrolled
+          ? currentIsScrolled
+          : nextIsScrolled
+      );
+    },
+    []
+  );
 
   const renderFAB = () => (
     <FAB
@@ -159,10 +174,6 @@ const AppbarV3Example = () => {
         <Text>Custom Color</Text>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
-      <View style={styles.row}>
-        <Text>Scrolled</Text>
-        <Switch value={showScrolled} onValueChange={setShowScrolled} />
-      </View>
     </>
   );
 
@@ -170,8 +181,21 @@ const AppbarV3Example = () => {
     <>
       <ScreenWrapper
         style={{ marginBottom: BOTTOM_APPBAR_HEIGHT + bottom }}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={[
+          styles.contentContainer,
+          { minHeight: windowHeight },
+        ]}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
       >
+        <List.Section title="Scroll behavior">
+          <List.Item
+            title="Scroll to change the appbar color"
+            description={
+              isScrolled ? 'Scrolled: surfaceContainer' : 'Flat: surface'
+            }
+          />
+        </List.Section>
         <List.Section title="Default options">
           {renderDefaultOptions()}
         </List.Section>
