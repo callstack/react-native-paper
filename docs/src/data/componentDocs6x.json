@@ -12072,7 +12072,7 @@
                 }
               ]
             },
-            "description": ""
+            "description": "For `floating`, the ref lands on the `Surface` pill itself; for\n`docked`, it lands on the outer positioning wrapper `View`, not the\npill inside it."
           }
         }
       },

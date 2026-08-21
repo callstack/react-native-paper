@@ -63,6 +63,11 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * For `floating`, the ref lands on the `Surface` pill itself; for
+   * `docked`, it lands on the outer positioning wrapper `View`, not the
+   * pill inside it.
+   */
   ref?: React.RefObject<View>;
 };
 
