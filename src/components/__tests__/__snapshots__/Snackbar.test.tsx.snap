@@ -30,11 +30,11 @@ exports[`renders snackbar with Text as a child 1`] = `
         "opacity": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 2,
+          "height": 1.66,
           "width": 0,
         },
-        "shadowOpacity": 0.15,
-        "shadowRadius": 6,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 2.36,
         "transform": [
           {
             "scale": 0.9,
@@ -58,11 +58,11 @@ exports[`renders snackbar with Text as a child 1`] = `
           "minHeight": 48,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 1,
+            "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 2,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.75,
         }
       }
       testID="surface"
@@ -118,11 +118,11 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "opacity": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 2,
+          "height": 1.66,
           "width": 0,
         },
-        "shadowOpacity": 0.15,
-        "shadowRadius": 6,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 2.36,
         "transform": [
           {
             "scale": 0.9,
@@ -146,11 +146,11 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           "minHeight": 48,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 1,
+            "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 2,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.75,
         }
       }
       testID="surface"
@@ -232,11 +232,11 @@ exports[`renders snackbar with action button 1`] = `
         "opacity": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 2,
+          "height": 1.66,
           "width": 0,
         },
-        "shadowOpacity": 0.15,
-        "shadowRadius": 6,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 2.36,
         "transform": [
           {
             "scale": 0.9,
@@ -260,11 +260,11 @@ exports[`renders snackbar with action button 1`] = `
           "minHeight": 48,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 1,
+            "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 2,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.75,
         }
       }
       testID="surface"
@@ -503,11 +503,11 @@ exports[`renders snackbar with content 1`] = `
         "opacity": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 2,
+          "height": 1.66,
           "width": 0,
         },
-        "shadowOpacity": 0.15,
-        "shadowRadius": 6,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 2.36,
         "transform": [
           {
             "scale": 0.9,
@@ -531,11 +531,11 @@ exports[`renders snackbar with content 1`] = `
           "minHeight": 48,
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 1,
+            "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 2,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.75,
         }
       }
       testID="surface"

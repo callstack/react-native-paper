@@ -23,11 +23,11 @@ exports[`renders FAB large size 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -195,11 +195,11 @@ exports[`renders FAB medium size 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -367,11 +367,11 @@ exports[`renders FAB transitioning to not visible 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
         "shadowOpacity": 0,
-        "shadowRadius": 4,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "none",
@@ -539,11 +539,11 @@ exports[`renders FAB transitioning to visible 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -711,11 +711,11 @@ exports[`renders FAB with aria-label 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -884,11 +884,11 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1056,11 +1056,11 @@ exports[`renders FAB with containerColor override 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1228,11 +1228,11 @@ exports[`renders FAB with default props 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1400,11 +1400,11 @@ exports[`renders FAB with primary variant 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1572,11 +1572,11 @@ exports[`renders FAB with secondary variant 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1744,11 +1744,11 @@ exports[`renders FAB with tertiary variant 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -1916,11 +1916,11 @@ exports[`renders FAB with tonalSecondary variant 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
@@ -2088,11 +2088,11 @@ exports[`renders FAB with tonalTertiary variant 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 4,
+          "height": 3.33,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
       {
         "pointerEvents": "auto",
