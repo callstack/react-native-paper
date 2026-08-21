@@ -45,3 +45,24 @@ export const resolveAvatarColors = ({
 
   return { background, textColor: contentColorFor(theme, background) };
 };
+
+/**
+ * Identity for retrying a failed avatar image.
+ * Function sources are keyed stably so inline renderers do not reset state.
+ */
+export const getAvatarImageSourceKey = (source: unknown) => {
+  if (typeof source === 'function') {
+    return 'function';
+  }
+
+  if (
+    source &&
+    typeof source === 'object' &&
+    !Array.isArray(source) &&
+    'uri' in source
+  ) {
+    return (source as { uri: unknown }).uri;
+  }
+
+  return source;
+};

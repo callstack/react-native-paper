@@ -102,6 +102,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
 
 exports[`renders avatar with image 1`] = `
 <View
+  accessible={false}
   importantForAccessibility="no"
   style={
     [
@@ -120,6 +121,7 @@ exports[`renders avatar with image 1`] = `
 >
   <Image
     accessibilityIgnoresInvertColors={true}
+    accessible={false}
     onError={[Function]}
     source={
       {
@@ -156,6 +158,8 @@ exports[`renders avatar with text 1`] = `
   }
 >
   <Text
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
     numberOfLines={1}
     style={
       [
@@ -210,6 +214,8 @@ exports[`renders avatar with text and custom background color 1`] = `
   }
 >
   <Text
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
     numberOfLines={1}
     style={
       [
@@ -264,6 +270,8 @@ exports[`renders avatar with text and custom colors 1`] = `
   }
 >
   <Text
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
     numberOfLines={1}
     style={
       [
@@ -318,6 +326,8 @@ exports[`renders avatar with text and custom size 1`] = `
   }
 >
   <Text
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
     numberOfLines={1}
     style={
       [

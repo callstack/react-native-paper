@@ -99,6 +99,8 @@ const AvatarText = ({
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
       >
         {avatarInitials}
       </Text>

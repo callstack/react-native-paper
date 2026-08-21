@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import type {
+  AccessibilityProps,
   ImageProps,
   ImageSourcePropType,
   StyleProp,
@@ -8,28 +9,28 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { getAvatarImageSourceKey } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { splitAccessibilityProps } from '../../utils/splitAccessibilityProps';
 
 const defaultSize = 64;
 
+export type AvatarImageSourceProps = {
+  size: number;
+  style: { width: number; height: number; borderRadius: number };
+  onError?: ImageProps['onError'];
+} & AccessibilityProps;
+
 export type AvatarImageSource =
   | ImageSourcePropType
-  | ((props: {
-      size: number;
-      style: { width: number; height: number; borderRadius: number };
-      onError?: ImageProps['onError'];
-    }) => React.ReactNode);
+  | ((props: AvatarImageSourceProps) => React.ReactNode);
 
 export type Props = ViewProps & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
-   * or a function that returns an image component.
-   * Function sources receive `{ size, style, onError }` matching the host avatar.
-   * Apply `style` so the image fills the circle, and `onError` to trigger `fallback`.
-   * Spread `size` from hosts such as `Card.Title` `left`.
+   * Or a function that returns an `Image`.
    */
   source: AvatarImageSource;
   /**
@@ -85,26 +86,6 @@ export type Props = ViewProps & {
  * );
  * export default MyComponent
  * ```
- *
- * Show another avatar when the image fails to load:
- * ```js
- * <Avatar.Image
- *   size={64}
- *   source={{ uri: user.avatarUrl }}
- *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
- * />
- * ```
- *
- * Custom image components should apply the host `style`:
- * ```js
- * <Avatar.Image
- *   size={64}
- *   source={({ style, onError }) => (
- *     <CustomImage source={{ uri }} style={style} onError={onError} />
- *   )}
- *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
- * />
- * ```
  */
 const AvatarImage = ({
   size = defaultSize,
@@ -129,13 +110,11 @@ const AvatarImage = ({
     height: size,
     borderRadius: size / 2,
   };
-  const sourceKey =
-    source &&
-    typeof source === 'object' &&
-    !Array.isArray(source) &&
-    'uri' in source
-      ? source.uri
-      : source;
+  const imageA11y =
+    Object.keys(accessibilityProps).length > 0
+      ? accessibilityProps
+      : { accessible: false as const };
+  const sourceKey = getAvatarImageSourceKey(source);
   const previousSourceKey = React.useRef(sourceKey);
   const [hasError, setHasError] = React.useState(false);
 
@@ -167,11 +146,16 @@ const AvatarImage = ({
       ]}
       {...viewProps}
       {...(showImage
-        ? { importantForAccessibility: 'no' as const }
+        ? { accessible: false, importantForAccessibility: 'no' as const }
         : accessibilityProps)}
     >
       {showImage && typeof source === 'function'
-        ? source({ size, style: imageStyle, onError: handleError })
+        ? source({
+            size,
+            style: imageStyle,
+            onError: handleError,
+            ...imageA11y,
+          })
         : null}
       {showImage && typeof source !== 'function' ? (
         <Image
@@ -185,7 +169,7 @@ const AvatarImage = ({
           onLoadStart={onLoadStart}
           onProgress={onProgress}
           accessibilityIgnoresInvertColors
-          {...accessibilityProps}
+          {...imageA11y}
         />
       ) : null}
       {!showImage ? fallback({ size }) : null}

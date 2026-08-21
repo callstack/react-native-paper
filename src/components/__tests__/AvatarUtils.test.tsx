@@ -5,7 +5,7 @@ import { describe, expect, it } from '@jest/globals';
 import { getTheme } from '../../core/theming';
 import { red50, red500 } from '../../theme/colors';
 import type { InternalTheme } from '../../types';
-import { resolveAvatarColors } from '../Avatar/utils';
+import { resolveAvatarColors, getAvatarImageSourceKey } from '../Avatar/utils';
 
 const withPlatformColor = (
   theme: InternalTheme,
@@ -97,5 +97,22 @@ describe('resolveAvatarColors', () => {
       background: theme.colors.error,
       textColor: '#00ff00',
     });
+  });
+});
+
+describe('getAvatarImageSourceKey', () => {
+  it('keys object sources by uri', () => {
+    expect(getAvatarImageSourceKey({ uri: 'a.png' })).toBe('a.png');
+  });
+
+  it('is stable for function sources', () => {
+    expect(getAvatarImageSourceKey(() => null)).toBe('function');
+    expect(getAvatarImageSourceKey(() => null)).toBe(
+      getAvatarImageSourceKey(() => null)
+    );
+  });
+
+  it('uses the value for module ids', () => {
+    expect(getAvatarImageSourceKey(1)).toBe(1);
   });
 });

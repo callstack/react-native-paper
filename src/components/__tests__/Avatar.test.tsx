@@ -7,6 +7,8 @@ import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import * as Avatar from '../Avatar/Avatar';
 
+const hidden = { includeHiddenElements: true };
+
 const styles = StyleSheet.create({
   bgColor: {
     backgroundColor: red500,
@@ -185,6 +187,7 @@ it('forwards accessibility props to the image, not the wrapper', async () => {
 
   expect(tree).toMatchObject({
     props: {
+      accessible: false,
       importantForAccessibility: 'no',
     },
     children: [
@@ -205,6 +208,65 @@ it('forwards accessibility props to the image, not the wrapper', async () => {
   });
 });
 
+it('keeps an unlabeled image unfocusable', async () => {
+  const tree = (
+    await render(<Avatar.Image source={{ uri: 'avatar.png' }} />)
+  ).toJSON();
+
+  expect(tree).toMatchObject({
+    props: {
+      accessible: false,
+      importantForAccessibility: 'no',
+    },
+    children: [
+      {
+        props: {
+          accessible: false,
+        },
+      },
+    ],
+  });
+});
+
+it('hides text avatar initials from assistive tech', async () => {
+  const tree = (
+    await render(
+      <Avatar.Text
+        label="XD"
+        accessibilityLabel="Jane Doe"
+        accessibilityRole="image"
+      />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchObject({
+    props: {
+      accessibilityLabel: 'Jane Doe',
+      accessibilityRole: 'image',
+    },
+    children: [
+      {
+        props: {
+          accessibilityElementsHidden: true,
+          importantForAccessibility: 'no-hide-descendants',
+        },
+      },
+    ],
+  });
+});
+
+it('bounds text avatar initials by grapheme', async () => {
+  const tree = (await render(<Avatar.Text label="👨‍👩‍👧X" />)).toJSON();
+
+  expect(tree).toMatchObject({
+    children: [
+      {
+        children: ['👨‍👩‍👧X'],
+      },
+    ],
+  });
+});
+
 describe('AvatarImage fallback', () => {
   it('shows fallback when the image fails to load', async () => {
     await render(
@@ -217,7 +279,7 @@ describe('AvatarImage fallback', () => {
 
     await fireEvent(screen.getByTestId('avatar-image'), 'onError');
 
-    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
   });
 
   it('still calls onError when showing a fallback', async () => {
@@ -235,7 +297,7 @@ describe('AvatarImage fallback', () => {
     await fireEvent(screen.getByTestId('avatar-image'), 'onError');
 
     expect(onError).toHaveBeenCalled();
-    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
   });
 
   it('keeps the image mounted and still calls onError without a fallback', async () => {
@@ -265,7 +327,7 @@ describe('AvatarImage fallback', () => {
     );
 
     await fireEvent(screen.getByTestId('avatar-image'), 'onError');
-    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
 
     await rerender(
       <Avatar.Image
@@ -276,7 +338,7 @@ describe('AvatarImage fallback', () => {
     );
 
     expect(screen.getByTestId('avatar-image')).toBeTruthy();
-    expect(screen.queryByText('JD')).toBeNull();
+    expect(screen.queryByText('JD', hidden)).toBeNull();
   });
 
   it('keeps the fallback when the source object identity changes', async () => {
@@ -298,10 +360,10 @@ describe('AvatarImage fallback', () => {
       />
     );
 
-    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
   });
 
-  it('passes host size and style to a function source', async () => {
+  it('passes host size, style, and a11y to a function source', async () => {
     const source = jest.fn(
       ({
         style,
@@ -324,8 +386,45 @@ describe('AvatarImage fallback', () => {
       size: 48,
       style: { width: 48, height: 48, borderRadius: 24 },
       onError: expect.any(Function),
+      accessible: false,
     });
     expect(screen.getByTestId('custom-image')).toBeTruthy();
+  });
+
+  it('forwards accessibility props to a function source', async () => {
+    const source = jest.fn(
+      ({
+        style,
+        ...a11y
+      }: {
+        size: number;
+        style: { width: number; height: number; borderRadius: number };
+      }) => (
+        <Image
+          testID="custom-image"
+          source={{ uri: 'avatar.png' }}
+          style={style}
+          accessibilityIgnoresInvertColors
+          {...a11y}
+        />
+      )
+    );
+
+    await render(
+      <Avatar.Image
+        size={48}
+        source={source}
+        accessibilityLabel="Profile photo"
+        accessibilityRole="image"
+      />
+    );
+
+    expect(source).toHaveBeenCalledWith(
+      expect.objectContaining({
+        accessibilityLabel: 'Profile photo',
+        accessibilityRole: 'image',
+      })
+    );
   });
 
   it('shows fallback when a function source reports an error', async () => {
@@ -346,7 +445,44 @@ describe('AvatarImage fallback', () => {
 
     await fireEvent(screen.getByTestId('custom-image'), 'onError');
 
-    expect(screen.getByText('JD')).toBeTruthy();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
+    expect(screen.queryByTestId('custom-image')).toBeNull();
+  });
+
+  it('keeps the fallback when a function source identity changes', async () => {
+    const { rerender } = await render(
+      <Avatar.Image
+        source={({ style, onError }) => (
+          <Image
+            testID="custom-image"
+            source={{ uri: 'avatar.png' }}
+            style={style}
+            onError={onError}
+            accessibilityIgnoresInvertColors
+          />
+        )}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('custom-image'), 'onError');
+
+    await rerender(
+      <Avatar.Image
+        source={({ style, onError }) => (
+          <Image
+            testID="custom-image"
+            source={{ uri: 'avatar.png' }}
+            style={style}
+            onError={onError}
+            accessibilityIgnoresInvertColors
+          />
+        )}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
     expect(screen.queryByTestId('custom-image')).toBeNull();
   });
 
