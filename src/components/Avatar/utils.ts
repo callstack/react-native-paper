@@ -71,7 +71,7 @@ export const getAvatarImageSourceKey = (source: unknown) => {
     !Array.isArray(source) &&
     'uri' in source
   ) {
-    return (source as { uri: unknown }).uri;
+    return source.uri;
   }
 
   return source;

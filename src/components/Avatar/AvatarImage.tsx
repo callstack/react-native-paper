@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import type {
-  AccessibilityProps,
   ImageProps,
   ImageSourcePropType,
   StyleProp,
@@ -17,13 +16,21 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../types';
-import { splitAccessibilityProps } from '../../utils/splitAccessibilityProps';
 
 export type AvatarImageSourceProps = {
   size: number;
   style: { width: number; height: number; borderRadius: number };
   onError?: ImageProps['onError'];
-} & AccessibilityProps;
+  /**
+   * Present when the host received an `alt`. Pass it to your image so it is
+   * announced by assistive technology.
+   */
+  alt?: string;
+  /**
+   * `false` when the host received no `alt`, marking the image as decorative.
+   */
+  accessible?: boolean;
+};
 
 export type AvatarImageSource =
   | ImageSourcePropType
@@ -34,14 +41,19 @@ export type Props = ViewProps & {
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
    * or a function that returns an image component.
-   * Function sources receive `{ size, style, onError }` matching the host avatar.
-   * Apply `style` so the image fills the circle, and call `onError` to trigger `fallback`.
+   * Function sources receive `{ size, style, onError, alt }` matching the host avatar.
+   * Apply `style` so the image fills the circle, pass `alt` on for assistive
+   * technology, and call `onError` to trigger `fallback`.
    */
   source: AvatarImageSource;
   /**
    * Size of the avatar.
    */
   size?: number;
+  /**
+   * Text describing the image for assistive technology.
+   */
+  alt?: string;
   /**
    * Content shown when the image fails to load.
    * Receives host `size` so custom content can match the avatar.
@@ -87,26 +99,31 @@ export type Props = ViewProps & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+ *   <Avatar.Image size={24} source={require('../assets/avatar.png')} alt="Jane Doe" />
  * );
  * export default MyComponent
  * ```
+ *
+ * Pass `alt` to describe the image to assistive technology. Avatars without it
+ * are treated as decorative and skipped by screen readers.
  *
  * Show another avatar when the image fails to load:
  * ```js
  * <Avatar.Image
  *   size={64}
  *   source={{ uri: user.avatarUrl }}
+ *   alt="Jane Doe"
  *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
  * />
  * ```
  *
- * Custom image components should apply the host `style` and `onError`:
+ * Custom image components should apply the host `style`, `onError` and `alt`:
  * ```js
  * <Avatar.Image
  *   size={64}
- *   source={({ style, onError }) => (
- *     <CustomImage source={{ uri }} style={style} onError={onError} />
+ *   alt="Jane Doe"
+ *   source={({ style, onError, alt }) => (
+ *     <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />
  *   )}
  *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
  * />
@@ -116,6 +133,7 @@ const AvatarImage = ({
   size = DEFAULT_SIZE,
   source,
   fallback,
+  alt,
   style,
   onError,
   onLayout,
@@ -130,16 +148,13 @@ const AvatarImage = ({
   const theme = useInternalTheme(themeOverrides);
   const { backgroundColor } = StyleSheet.flatten(style) || {};
   const { background } = resolveAvatarColors({ theme, backgroundColor });
-  const { accessibilityProps, rest: viewProps } = splitAccessibilityProps(rest);
   const imageStyle = {
     width: size,
     height: size,
     borderRadius: cornerFull,
   };
   const imageA11y =
-    Object.keys(accessibilityProps).length > 0
-      ? accessibilityProps
-      : { accessible: false as const };
+    alt === undefined ? { accessible: false as const } : { alt };
   const sourceKey = getAvatarImageSourceKey(source);
   const previousSourceKey = React.useRef(sourceKey);
   const [hasError, setHasError] = React.useState(false);
@@ -158,6 +173,12 @@ const AvatarImage = ({
 
   const showImage = !(hasError && fallback !== undefined);
 
+  const hostA11y = showImage
+    ? { accessible: false, importantForAccessibility: 'no' as const }
+    : alt !== undefined
+      ? { accessible: true, 'aria-label': alt }
+      : {};
+
   return (
     <View
       style={[
@@ -170,10 +191,8 @@ const AvatarImage = ({
         styles.container,
         style,
       ]}
-      {...viewProps}
-      {...(showImage
-        ? { accessible: false, importantForAccessibility: 'no' as const }
-        : accessibilityProps)}
+      {...hostA11y}
+      {...rest}
     >
       {showImage && typeof source === 'function'
         ? source({

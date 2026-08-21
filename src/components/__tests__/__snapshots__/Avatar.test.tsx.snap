@@ -141,6 +141,8 @@ exports[`renders avatar with image 1`] = `
 
 exports[`renders avatar with text 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
@@ -158,8 +160,7 @@ exports[`renders avatar with text 1`] = `
   }
 >
   <Text
-    accessibilityElementsHidden={true}
-    importantForAccessibility="no-hide-descendants"
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -204,6 +205,8 @@ exports[`renders avatar with text 1`] = `
 
 exports[`renders avatar with text and custom background color 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
@@ -221,8 +224,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   }
 >
   <Text
-    accessibilityElementsHidden={true}
-    importantForAccessibility="no-hide-descendants"
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -267,6 +269,8 @@ exports[`renders avatar with text and custom background color 1`] = `
 
 exports[`renders avatar with text and custom colors 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
@@ -284,8 +288,7 @@ exports[`renders avatar with text and custom colors 1`] = `
   }
 >
   <Text
-    accessibilityElementsHidden={true}
-    importantForAccessibility="no-hide-descendants"
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -330,6 +333,8 @@ exports[`renders avatar with text and custom colors 1`] = `
 
 exports[`renders avatar with text and custom size 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
@@ -347,8 +352,7 @@ exports[`renders avatar with text and custom size 1`] = `
   }
 >
   <Text
-    accessibilityElementsHidden={true}
-    importantForAccessibility="no-hide-descendants"
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [

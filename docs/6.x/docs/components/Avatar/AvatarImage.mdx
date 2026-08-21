@@ -22,26 +22,31 @@ import * as React from 'react';
 import { Avatar } from 'react-native-paper';
 
 const MyComponent = () => (
-  <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+  <Avatar.Image size={24} source={require('../assets/avatar.png')} alt="Jane Doe" />
 );
 export default MyComponent
 ```
+
+Pass `alt` to describe the image to assistive technology. Avatars without it
+are treated as decorative and skipped by screen readers.
 
 Show another avatar when the image fails to load:
 ```js
 <Avatar.Image
   size={64}
   source={{ uri: user.avatarUrl }}
+  alt="Jane Doe"
   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
 />
 ```
 
-Custom image components should apply the host `style` and `onError`:
+Custom image components should apply the host `style`, `onError` and `alt`:
 ```js
 <Avatar.Image
   size={64}
-  source={({ style, onError }) => (
-    <CustomImage source={{ uri }} style={style} onError={onError} />
+  alt="Jane Doe"
+  source={({ style, onError, alt }) => (
+    <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />
   )}
   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
 />
@@ -68,6 +73,14 @@ Custom image components should apply the host `style` and `onError`:
 </div>
 
   <PropTable componentLink="Avatar/AvatarImage" prop="size" />
+
+<div>
+
+### alt
+
+</div>
+
+  <PropTable componentLink="Avatar/AvatarImage" prop="alt" />
 
 <div>
 

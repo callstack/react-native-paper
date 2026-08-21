@@ -76,6 +76,8 @@ const AvatarText = ({
   });
   const { fontScale } = useWindowDimensions();
   const avatarInitials = takeGraphemes(label, 2);
+  const hasCustomLabel =
+    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
   return (
     <View
@@ -89,6 +91,8 @@ const AvatarText = ({
         styles.container,
         restStyle,
       ]}
+      accessible
+      {...(!hasCustomLabel && { 'aria-label': label })}
       {...rest}
     >
       <Text
@@ -104,8 +108,7 @@ const AvatarText = ({
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        accessibilityElementsHidden
-        importantForAccessibility="no-hide-descendants"
+        aria-hidden
       >
         {avatarInitials}
       </Text>

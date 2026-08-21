@@ -172,16 +172,15 @@ describe('AvatarImage listener', () => {
   });
 });
 
-it('forwards accessibility props to the image, not the wrapper', async () => {
+// React Native turns `alt` into `accessible` plus a label inside the platform
+// `Image`, so asserting it reaches the image is enough here.
+it('labels the image with alt, not the wrapper', async () => {
   const tree = (
     await render(
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        accessibilityLabel="Profile photo"
-        accessibilityHint="User avatar"
-        accessibilityRole="image"
-        aria-label="Jane Doe"
+        alt="Jane Doe"
       />
     )
   ).toJSON();
@@ -194,17 +193,14 @@ it('forwards accessibility props to the image, not the wrapper', async () => {
     children: [
       {
         props: {
-          accessibilityLabel: 'Profile photo',
-          accessibilityHint: 'User avatar',
-          accessibilityRole: 'image',
-          'aria-label': 'Jane Doe',
+          alt: 'Jane Doe',
         },
       },
     ],
   });
   expect(tree).not.toMatchObject({
     props: {
-      accessibilityLabel: 'Profile photo',
+      'aria-label': 'Jane Doe',
     },
   });
 });
@@ -242,18 +238,39 @@ it('hides text avatar initials from assistive tech', async () => {
 
   expect(tree).toMatchObject({
     props: {
+      accessible: true,
       accessibilityLabel: 'Jane Doe',
       accessibilityRole: 'image',
     },
     children: [
       {
         props: {
-          accessibilityElementsHidden: true,
-          importantForAccessibility: 'no-hide-descendants',
+          'aria-hidden': true,
         },
       },
     ],
   });
+});
+
+it('makes a labelled icon avatar an accessibility element', async () => {
+  const tree = (
+    await render(<Avatar.Icon icon="folder" accessibilityLabel="Folder" />)
+  ).toJSON();
+
+  // `View` is not an accessibility element by default, so without `accessible`
+  // the label is never announced on iOS.
+  expect(tree).toMatchObject({
+    props: {
+      accessible: true,
+      accessibilityLabel: 'Folder',
+    },
+  });
+});
+
+it('leaves an unlabelled icon avatar decorative', async () => {
+  const tree = (await render(<Avatar.Icon icon="folder" />)).toJSON();
+
+  expect(tree).not.toMatchObject({ props: { accessible: true } });
 });
 
 it('bounds text avatar initials by grapheme', async () => {
@@ -392,7 +409,7 @@ describe('AvatarImage fallback', () => {
     expect(screen.getByTestId('custom-image')).toBeTruthy();
   });
 
-  it('forwards accessibility props to a function source', async () => {
+  it('passes alt to a function source', async () => {
     const source = jest.fn(
       ({
         style,
@@ -411,20 +428,13 @@ describe('AvatarImage fallback', () => {
       )
     );
 
-    await render(
-      <Avatar.Image
-        size={48}
-        source={source}
-        accessibilityLabel="Profile photo"
-        accessibilityRole="image"
-      />
-    );
+    await render(<Avatar.Image size={48} source={source} alt="Jane Doe" />);
 
     expect(source).toHaveBeenCalledWith(
-      expect.objectContaining({
-        accessibilityLabel: 'Profile photo',
-        accessibilityRole: 'image',
-      })
+      expect.objectContaining({ alt: 'Jane Doe' })
+    );
+    expect(source).not.toHaveBeenCalledWith(
+      expect.objectContaining({ accessible: false })
     );
   });
 
@@ -487,14 +497,13 @@ describe('AvatarImage fallback', () => {
     expect(screen.queryByTestId('custom-image')).toBeNull();
   });
 
-  it('forwards accessibility props to the host when fallback is shown', async () => {
+  it('moves alt onto the host when fallback is shown', async () => {
     const { toJSON } = await render(
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
         fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
-        accessibilityLabel="Profile photo"
-        accessibilityRole="image"
+        alt="Jane Doe"
       />
     );
 
@@ -502,9 +511,24 @@ describe('AvatarImage fallback', () => {
 
     expect(toJSON()).toMatchObject({
       props: {
-        accessibilityLabel: 'Profile photo',
-        accessibilityRole: 'image',
+        accessible: true,
+        'aria-label': 'Jane Doe',
       },
     });
+  });
+
+  it('leaves the host unlabelled when a fallback is shown without alt', async () => {
+    const { toJSON } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    // The fallback carries its own label, so the host must not swallow it.
+    expect(toJSON()).not.toMatchObject({ props: { accessible: true } });
   });
 });

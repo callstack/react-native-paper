@@ -64,6 +64,8 @@ const Avatar = ({
     backgroundColor,
     color: customColor,
   });
+  const hasLabel =
+    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
   return (
     <View
@@ -77,6 +79,7 @@ const Avatar = ({
         styles.container,
         restStyle,
       ]}
+      {...(hasLabel && { accessible: true })}
       {...rest}
     >
       <Icon source={icon} color={textColor} size={size * ICON_SIZE_RATIO} />
