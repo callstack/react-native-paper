@@ -424,11 +424,11 @@ exports[`renders FAB.Menu closed 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
@@ -1109,11 +1109,11 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
               "shadowOpacity": 0,
-              "shadowRadius": 4,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "none",
@@ -1794,11 +1794,11 @@ exports[`renders FAB.Menu open 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
@@ -3139,11 +3139,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
@@ -3825,11 +3825,11 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
@@ -4568,11 +4568,11 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
@@ -5253,11 +5253,11 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
-                "height": 4,
+                "height": 3.33,
                 "width": 0,
               },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
             },
             {
               "pointerEvents": "auto",
