@@ -66,8 +66,12 @@ const Appbar = ({
     ) : null;
 
   const renderActions = () =>
-    actions.map((action, index) => (
-      <AppbarAction key={action.key ?? index} action={action} theme={theme} />
+    actions.map((action) => (
+      <AppbarAction
+        key={action.key ?? action['aria-label']}
+        action={action}
+        theme={theme}
+      />
     ));
 
   const contentProps = {

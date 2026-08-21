@@ -59,6 +59,7 @@ const AppbarV3Example = () => {
 
     if (!isCentered && showCalendarIcon) {
       actions.push({
+        key: 'calendar',
         icon: 'calendar',
         'aria-label': 'Calendar',
         onPress: () => {},
@@ -67,6 +68,7 @@ const AppbarV3Example = () => {
 
     if (showSearchIcon) {
       actions.push({
+        key: 'search',
         icon: 'magnify',
         'aria-label': 'Search',
         onPress: () => {},
@@ -75,6 +77,7 @@ const AppbarV3Example = () => {
 
     if (showMoreIcon) {
       actions.push({
+        key: 'more',
         icon: MORE_ICON,
         'aria-label': 'More options',
         onPress: () => {},
