@@ -45,6 +45,7 @@ export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
+export { default as AppbarV3 } from './components/AppbarV3';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
@@ -60,6 +61,16 @@ export type { Props as AppbarActionProps } from './components/Appbar/AppbarActio
 export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';
 export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
 export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
+export type {
+  Props as AppbarV3Props,
+  AppbarAction as AppbarV3Action,
+  AppbarActions as AppbarV3Actions,
+  AppbarFilledAction as AppbarV3FilledAction,
+  AppbarLeadingAction as AppbarV3LeadingAction,
+  AppbarStandardAction as AppbarV3StandardAction,
+  AppbarTitleAlignment as AppbarV3TitleAlignment,
+  AppbarVariant as AppbarV3Variant,
+} from './components/AppbarV3';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';
 export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage';
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';
