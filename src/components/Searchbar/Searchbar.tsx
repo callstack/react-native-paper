@@ -24,6 +24,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
+import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Divider from '../Divider';
 import type { IconSource } from '../Icon';
@@ -35,6 +36,41 @@ interface Style {
   marginRight: number;
 }
 
+const OUTER_LAYOUT_STYLE_KEYS: (keyof ViewStyle)[] = [
+  'position',
+  'alignSelf',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'start',
+  'end',
+  'flex',
+  'flexBasis',
+  'flexShrink',
+  'flexGrow',
+  'width',
+  'minWidth',
+  'maxWidth',
+  'height',
+  'minHeight',
+  'maxHeight',
+  'aspectRatio',
+  'transform',
+  'opacity',
+  'zIndex',
+  'display',
+];
+
+const VERTICAL_FILL_STYLE_KEYS: (keyof ViewStyle)[] = [
+  'height',
+  'minHeight',
+  'maxHeight',
+  'flex',
+  'flexGrow',
+  'flexBasis',
+];
+
 const HORIZONTAL_MARGIN_KEYS = [
   'margin',
   'marginHorizontal',
@@ -42,6 +78,9 @@ const HORIZONTAL_MARGIN_KEYS = [
   'marginRight',
   'marginStart',
   'marginEnd',
+  'marginInline',
+  'marginInlineStart',
+  'marginInlineEnd',
 ] as const;
 
 export type Props = TextInputProps & {
@@ -311,141 +350,155 @@ const Searchbar = ({
     (key) => flatStyle?.[key] !== undefined
   );
   const applyFocusMargin = isContained && !hasCustomHorizontalMargin;
+  const [surfaceStyle, wrapperStyle] = splitStyles(
+    flatStyle || {},
+    (key) => OUTER_LAYOUT_STYLE_KEYS.includes(key) || key.startsWith('margin')
+  );
+  const shouldFillWrapper = VERTICAL_FILL_STYLE_KEYS.some(
+    (key) => flatStyle?.[key] !== undefined
+  );
+  const hasWrapperStyle = Object.keys(wrapperStyle).length > 0;
 
   return (
-    <Reanimated.View
-      style={applyFocusMargin ? containedMarginStyle : null}
+    <Animated.View
+      style={hasWrapperStyle ? wrapperStyle : null}
       testID={`${testID}-wrapper`}
     >
-      <Surface
-        style={[
-          styles.container,
-          { backgroundColor: containerColor, borderRadius },
-          style,
-        ]}
-        testID={`${testID}-container`}
-        elevation={elevation}
-        container
-        theme={theme}
+      <Reanimated.View
+        style={applyFocusMargin ? containedMarginStyle : null}
+        testID={`${testID}-focus-wrapper`}
       >
-        <IconButton
-          role="button"
-          borderless
-          onPress={onIconPress}
-          iconColor={iconColor}
-          icon={
-            icon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="magnify"
-                color={color}
-                size={size}
-                direction={direction}
-              />
-            ))
-          }
-          theme={theme}
-          aria-label={searchAccessibilityLabel}
-          testID={`${testID}-icon`}
-        />
-        <TextInput
+        <Surface
           style={[
-            styles.input,
-            {
-              color: inputColor,
-              ...font,
-              ...Platform.select({ web: { outline: 'none' } }),
-              textAlign: inputTextAlign,
-            },
-            isContained ? styles.containedInput : styles.dividedInput,
-            inputStyle,
+            styles.container,
+            shouldFillWrapper && styles.fillWrapper,
+            { backgroundColor: containerColor, borderRadius },
+            surfaceStyle,
           ]}
-          placeholder={placeholder || ''}
-          placeholderTextColor={placeholderColor}
-          selectionColor={cursorColor}
-          underlineColorAndroid="transparent"
-          returnKeyType="search"
-          keyboardAppearance={dark ? 'dark' : 'light'}
-          role="searchbox"
-          ref={root}
-          value={value}
-          testID={testID}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          {...rest}
-        />
-        {loading ? (
-          <ActivityIndicator
-            testID="activity-indicator"
-            style={styles.v3Loader}
-          />
-        ) : (
-          // Clear icon should be always rendered within Searchbar – it's transparent,
-          // without touch events, when there is no value. It's done to avoid issues
-          // with the abruptly stopping ripple effect and changing bar width on web,
-          // when clearing the value.
-          <View
-            pointerEvents={value ? 'auto' : 'none'}
-            testID={`${testID}-icon-wrapper`}
-            style={[
-              !value && styles.v3ClearIcon,
-              right !== undefined && styles.v3ClearIconHidden,
-            ]}
-          >
-            <IconButton
-              borderless
-              aria-label={clearAccessibilityLabel}
-              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-              onPress={handleClearPress}
-              icon={
-                clearIcon ||
-                (({ size, color }) => (
-                  <MaterialCommunityIcon
-                    name="close"
-                    color={color}
-                    size={size}
-                    direction={direction}
-                  />
-                ))
-              }
-              testID={`${testID}-clear-icon`}
-              role="button"
-              theme={theme}
-            />
-          </View>
-        )}
-        {shouldRenderTraileringIcon ? (
+          testID={`${testID}-container`}
+          elevation={elevation}
+          container
+          theme={theme}
+        >
           <IconButton
             role="button"
             borderless
-            onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || trailingIconColor}
-            icon={traileringIcon}
-            aria-label={traileringIconAccessibilityLabel}
+            onPress={onIconPress}
+            iconColor={iconColor}
+            icon={
+              icon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="magnify"
+                  color={color}
+                  size={size}
+                  direction={direction}
+                />
+              ))
+            }
             theme={theme}
-            testID={`${testID}-trailering-icon`}
+            aria-label={searchAccessibilityLabel}
+            testID={`${testID}-icon`}
           />
-        ) : null}
-        {isContained &&
-          right?.({
-            color: trailingIconColor,
-            style: styles.rightStyle,
-            testID,
-          })}
-        {!isContained && showDivider && (
-          <Divider
-            bold
+          <TextInput
             style={[
-              styles.divider,
+              styles.input,
               {
-                backgroundColor: dividerColor,
+                color: inputColor,
+                ...font,
+                ...Platform.select({ web: { outline: 'none' } }),
+                textAlign: inputTextAlign,
               },
+              isContained ? styles.containedInput : styles.dividedInput,
+              inputStyle,
             ]}
-            testID={`${testID}-divider`}
+            placeholder={placeholder || ''}
+            placeholderTextColor={placeholderColor}
+            selectionColor={cursorColor}
+            underlineColorAndroid="transparent"
+            returnKeyType="search"
+            keyboardAppearance={dark ? 'dark' : 'light'}
+            role="searchbox"
+            ref={root}
+            value={value}
+            testID={testID}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            {...rest}
           />
-        )}
-      </Surface>
-    </Reanimated.View>
+          {loading ? (
+            <ActivityIndicator
+              testID="activity-indicator"
+              style={styles.v3Loader}
+            />
+          ) : (
+            // Clear icon should be always rendered within Searchbar – it's transparent,
+            // without touch events, when there is no value. It's done to avoid issues
+            // with the abruptly stopping ripple effect and changing bar width on web,
+            // when clearing the value.
+            <View
+              pointerEvents={value ? 'auto' : 'none'}
+              testID={`${testID}-icon-wrapper`}
+              style={[
+                !value && styles.v3ClearIcon,
+                right !== undefined && styles.v3ClearIconHidden,
+              ]}
+            >
+              <IconButton
+                borderless
+                aria-label={clearAccessibilityLabel}
+                iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+                onPress={handleClearPress}
+                icon={
+                  clearIcon ||
+                  (({ size, color }) => (
+                    <MaterialCommunityIcon
+                      name="close"
+                      color={color}
+                      size={size}
+                      direction={direction}
+                    />
+                  ))
+                }
+                testID={`${testID}-clear-icon`}
+                role="button"
+                theme={theme}
+              />
+            </View>
+          )}
+          {shouldRenderTraileringIcon ? (
+            <IconButton
+              role="button"
+              borderless
+              onPress={onTraileringIconPress}
+              iconColor={traileringIconColor || trailingIconColor}
+              icon={traileringIcon}
+              aria-label={traileringIconAccessibilityLabel}
+              theme={theme}
+              testID={`${testID}-trailering-icon`}
+            />
+          ) : null}
+          {isContained &&
+            right?.({
+              color: trailingIconColor,
+              style: styles.rightStyle,
+              testID,
+            })}
+          {!isContained && showDivider && (
+            <Divider
+              bold
+              style={[
+                styles.divider,
+                {
+                  backgroundColor: dividerColor,
+                },
+              ]}
+              testID={`${testID}-divider`}
+            />
+          )}
+        </Surface>
+      </Reanimated.View>
+    </Animated.View>
   );
 };
 
@@ -453,6 +506,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  fillWrapper: {
+    flex: 1,
   },
   input: {
     flex: 1,

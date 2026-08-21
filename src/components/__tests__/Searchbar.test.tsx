@@ -81,7 +81,7 @@ it('animated value changes correctly', async () => {
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -94,7 +94,7 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });
@@ -204,7 +204,13 @@ it('renders searchbar in "divided" mode', async () => {
 it('applies the unfocused container margin in "contained" mode', async () => {
   await render(<Searchbar testID="search-bar" value={''} mode="contained" />);
 
-  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-focus-wrapper')).toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+  expect(
+    screen.getByTestId('search-bar-container-outer-layer')
+  ).not.toHaveStyle({
     marginLeft: 24,
     marginRight: 24,
   });
@@ -213,7 +219,7 @@ it('applies the unfocused container margin in "contained" mode', async () => {
 it('does not apply the container margin in "divided" mode', async () => {
   await render(<Searchbar testID="search-bar" value={''} mode="divided" />);
 
-  expect(screen.getByTestId('search-bar-wrapper')).not.toHaveStyle({
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
     marginLeft: 24,
     marginRight: 24,
   });
@@ -229,13 +235,50 @@ it('lets a custom horizontal margin win over the built-in one', async () => {
     />
   );
 
-  expect(screen.getByTestId('search-bar-wrapper')).not.toHaveStyle({
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
     marginLeft: 24,
     marginRight: 24,
   });
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
     marginHorizontal: 0,
   });
+});
+
+it('lets a custom logical horizontal margin win over the built-in one', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      mode="contained"
+      style={{ marginInline: 0 }}
+    />
+  );
+
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+    marginInline: 0,
+  });
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+});
+
+it('keeps layout styles on the outermost element', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      style={{ flex: 1, position: 'absolute', top: 0 }}
+    />
+  );
+
+  const wrapper = screen.getByTestId('search-bar-wrapper');
+
+  expect(wrapper).toBe(screen.root);
+  expect(wrapper).toHaveStyle({ flex: 1, position: 'absolute', top: 0 });
+  expect(
+    screen.getByTestId('search-bar-container-outer-layer')
+  ).not.toHaveStyle({ flex: 1, position: 'absolute', top: 0 });
 });
 
 it('forwards onFocus and onBlur to the input', async () => {
