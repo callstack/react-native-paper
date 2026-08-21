@@ -1,25 +1,35 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
+import { SegmentedButtonTokens } from './tokens';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
-  getSegmentedButtonDensityPadding,
+  getSegmentedButtonHeight,
+  getSegmentedButtonOutlineStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+const stateTokens = tokens.md.sys.state;
+const FOCUS_RING_INSET =
+  stateTokens.focusIndicator.thickness + stateTokens.focusIndicator.outerOffset;
 
 export type Props = {
   /**
@@ -122,6 +132,9 @@ const SegmentedButtonItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
+  const [pressed, setPressed] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
@@ -141,26 +154,32 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
-    getSegmentedButtonColors({
-      checked,
-      theme,
-      disabled,
-      checkedColor,
-      uncheckedColor,
-    });
+  const {
+    borderColor,
+    borderOpacity,
+    textColor,
+    textOpacity,
+    backgroundColor,
+    stateLayerColor,
+    focusIndicatorColor,
+  } = getSegmentedButtonColors({
+    checked,
+    theme,
+    disabled,
+    checkedColor,
+    uncheckedColor,
+  });
 
-  const borderRadius = theme.shapes.corner.largeIncreased;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
   });
+  const outlineStyle = getSegmentedButtonOutlineStyle(segment);
+  const visualHeight = getSegmentedButtonHeight(density);
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
-  const iconSize = 18;
-  const iconStyle = {
-    marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
+  const optionIconStyle = {
     ...(label && {
       transform: [
         {
@@ -173,67 +192,149 @@ const SegmentedButtonItem = ({
     }),
   };
 
-  const buttonStyle: ViewStyle = {
-    backgroundColor,
-    borderColor,
-    borderWidth,
-    borderRadius,
-    ...segmentBorderRadius,
-  };
-  const paddingVertical = getSegmentedButtonDensityPadding({ density });
-  const rippleStyle: ViewStyle = {
-    borderRadius,
-    ...segmentBorderRadius,
-  };
   const labelTextStyle: TextStyle = {
     ...theme.fonts.labelLarge,
     color: textColor,
   };
+  const stateLayerOpacity = disabled
+    ? 0
+    : pressed
+      ? stateTokens.opacity.pressed
+      : focused
+        ? stateTokens.opacity.focused
+        : hovered
+          ? stateTokens.opacity.hovered
+          : 0;
+  const focusRingVerticalInset =
+    (SegmentedButtonTokens.touchTargetHeight - visualHeight) / 2 -
+    FOCUS_RING_INSET;
+
+  const handleFocus = (event: NativeSyntheticEvent<TargetedEvent>) => {
+    if (!disabled && isKeyboardFocusEvent(event)) {
+      setFocused(true);
+    }
+  };
+
+  const handleBlur = () => {
+    setPressed(false);
+    setFocused(false);
+  };
 
   return (
-    <View style={[buttonStyle, styles.button, style]}>
+    <View
+      style={[
+        styles.button,
+        focused && !disabled && styles.focusedButton,
+        style,
+      ]}
+    >
       <TouchableRipple
         borderless
         onPress={onPress}
+        onPressIn={() => setPressed(true)}
+        onPressOut={() => setPressed(false)}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         aria-label={ariaLabel}
         aria-disabled={disabled}
         aria-checked={checked}
         role="button"
         disabled={disabled}
         testID={testID}
-        style={rippleStyle}
+        style={[
+          styles.touchable,
+          segmentBorderRadius,
+          Platform.OS === 'web' ? webNoOutline : undefined,
+        ]}
         background={background}
+        rippleColor="transparent"
+        underlayColor="transparent"
         theme={theme}
         hitSlop={hitSlop}
       >
         <View
-          style={[styles.content, { paddingVertical, opacity: textOpacity }]}
+          testID={testID ? `${testID}-container` : undefined}
+          style={[
+            styles.visual,
+            segmentBorderRadius,
+            { height: visualHeight, backgroundColor },
+          ]}
         >
-          {showCheckedIcon ? (
-            <Animated.View
-              testID={`${testID}-check-icon`}
-              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
-            >
-              <Icon source={'check'} size={iconSize} color={textColor} />
-            </Animated.View>
-          ) : null}
-          {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon source={icon} size={iconSize} color={textColor} />
-            </Animated.View>
-          ) : null}
-          <Text
-            variant="labelLarge"
-            style={[styles.label, labelTextStyle, labelStyle]}
-            selectable={false}
-            numberOfLines={1}
-            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
-          >
-            {label}
-          </Text>
+          <View
+            pointerEvents="none"
+            testID={testID ? `${testID}-state-layer` : undefined}
+            style={[
+              styles.stateLayer,
+              { backgroundColor: stateLayerColor, opacity: stateLayerOpacity },
+            ]}
+          />
+          <View style={[styles.content, { opacity: textOpacity }]}>
+            {showCheckedIcon ? (
+              <Animated.View
+                testID={testID ? `${testID}-check-icon` : undefined}
+                style={[styles.icon, { transform: [{ scale: checkScale }] }]}
+              >
+                <Icon
+                  source="check"
+                  size={SegmentedButtonTokens.iconSize}
+                  color={textColor}
+                />
+              </Animated.View>
+            ) : null}
+            {showIcon ? (
+              <Animated.View
+                testID={testID ? `${testID}-icon` : undefined}
+                style={[styles.icon, optionIconStyle]}
+              >
+                <Icon
+                  source={icon}
+                  size={SegmentedButtonTokens.iconSize}
+                  color={textColor}
+                />
+              </Animated.View>
+            ) : null}
+            {label ? (
+              <Text
+                variant="labelLarge"
+                style={[styles.label, labelTextStyle, labelStyle]}
+                selectable={false}
+                numberOfLines={1}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                testID={testID ? `${testID}-label` : undefined}
+              >
+                {label}
+              </Text>
+            ) : null}
+          </View>
+          <View
+            pointerEvents="none"
+            testID={testID ? `${testID}-outline` : undefined}
+            style={[
+              styles.outline,
+              segmentBorderRadius,
+              outlineStyle,
+              { borderColor, opacity: borderOpacity },
+            ]}
+          />
         </View>
       </TouchableRipple>
+      {focused && !disabled ? (
+        <View
+          pointerEvents="none"
+          testID={testID ? `${testID}-focus-ring` : undefined}
+          style={[
+            styles.focusRing,
+            segmentBorderRadius,
+            {
+              top: focusRingVerticalInset,
+              bottom: focusRingVerticalInset,
+              borderColor: focusIndicatorColor,
+            },
+          ]}
+        />
+      ) : null}
     </View>
   );
 };
@@ -241,20 +342,66 @@ const SegmentedButtonItem = ({
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    minWidth: 76,
-    borderStyle: 'solid',
+    minWidth: SegmentedButtonTokens.minimumWidth,
+    minHeight: SegmentedButtonTokens.touchTargetHeight,
+    justifyContent: 'center',
+    overflow: 'visible',
+  },
+  focusedButton: {
+    zIndex: 1,
+  },
+  touchable: {
+    minHeight: SegmentedButtonTokens.touchTargetHeight,
+    justifyContent: 'center',
+  },
+  visual: {
+    width: '100%',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  stateLayer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   label: {
+    flexShrink: 1,
     textAlign: 'center',
   },
   content: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 9,
-    paddingHorizontal: 16,
+    paddingHorizontal: SegmentedButtonTokens.horizontalPadding,
+    columnGap: SegmentedButtonTokens.iconLabelGap,
+  },
+  icon: {
+    width: SegmentedButtonTokens.iconSize,
+    height: SegmentedButtonTokens.iconSize,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  outline: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    pointerEvents: 'none',
+  },
+  focusRing: {
+    position: 'absolute',
+    left: -FOCUS_RING_INSET,
+    right: -FOCUS_RING_INSET,
+    borderWidth: stateTokens.focusIndicator.thickness,
+    pointerEvents: 'none',
   },
 });
+
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default SegmentedButtonItem;
 

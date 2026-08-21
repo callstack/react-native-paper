@@ -1,12 +1,14 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
+import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
 import {
   getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
+  getSegmentedButtonHeight,
 } from '../SegmentedButtons/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -26,38 +28,36 @@ it('renders segmented button', async () => {
 });
 
 it('renders disabled segmented button', async () => {
-  const tree = (
-    await render(
-      <SegmentedButtons
-        onValueChange={() => {}}
-        value={'walk'}
-        buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
-      />
-    )
-  ).toJSON();
+  await render(
+    <SegmentedButtons
+      onValueChange={() => {}}
+      value="walk"
+      buttons={[
+        { value: 'walk' },
+        { value: 'ride', disabled: true, testID: 'ride' },
+      ]}
+    />
+  );
 
-  process.nextTick(() => {
-    expect(tree).toMatchSnapshot();
+  expect(screen.getByTestId('ride-outline')).toHaveStyle({
+    borderColor: getTheme().colors.onSurface,
+    opacity: SegmentedButtonTokens.disabledOutlineOpacity,
   });
 });
 
 it('renders checked segmented button with selected check', async () => {
-  const tree = (
-    await render(
-      <SegmentedButtons
-        onValueChange={() => {}}
-        value={'walk'}
-        buttons={[
-          { value: 'walk', showSelectedCheck: true },
-          { value: 'ride', disabled: true },
-        ]}
-      />
-    )
-  ).toJSON();
+  await render(
+    <SegmentedButtons
+      onValueChange={() => {}}
+      value="walk"
+      buttons={[
+        { value: 'walk', showSelectedCheck: true, testID: 'walk' },
+        { value: 'ride', disabled: true },
+      ]}
+    />
+  );
 
-  process.nextTick(() => {
-    expect(tree).toMatchSnapshot();
-  });
+  expect(screen.getByTestId('walk-check-icon')).toBeOnTheScreen();
 });
 
 describe('getSegmentedButtonColors', () => {
@@ -184,7 +184,8 @@ describe('getSegmentedButtonColors', () => {
         checked: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: getTheme().colors.onSurface,
+      borderOpacity: SegmentedButtonTokens.disabledOutlineOpacity,
     });
   });
 
@@ -210,6 +211,61 @@ describe('getSegmentedButtonColors', () => {
     ).toMatchObject({
       textColor: getTheme().colors.onSurface,
       textOpacity: stateOpacity.disabled,
+    });
+  });
+});
+
+describe('segmented button presentation', () => {
+  it.each([
+    { density: 'regular' as const, expected: 40 },
+    { density: 'small' as const, expected: 36 },
+    { density: 'medium' as const, expected: 32 },
+    { density: 'high' as const, expected: 28 },
+  ])('uses the $density density height', ({ density, expected }) => {
+    expect(getSegmentedButtonHeight(density)).toBe(expected);
+  });
+
+  it('keeps a 48dp target around the visual container', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={() => {}}
+        buttons={[
+          { value: 'walk', label: 'Walking', testID: 'walk' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('walk')).toHaveStyle({
+      minHeight: SegmentedButtonTokens.touchTargetHeight,
+    });
+    expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 40 });
+  });
+
+  it('renders token opacity for hover and keyboard focus states', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={() => {}}
+        buttons={[
+          { value: 'walk', label: 'Walking', testID: 'walk' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+      />
+    );
+
+    const button = screen.getByTestId('walk');
+    const stateLayer = screen.getByTestId('walk-state-layer');
+
+    await fireEvent(button, 'hoverIn');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
+
+    await fireEvent(button, 'focus');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
+    expect(screen.getByTestId('walk-focus-ring')).toHaveStyle({
+      borderWidth: tokens.md.sys.state.focusIndicator.thickness,
+      borderColor: getTheme().colors.secondary,
     });
   });
 });

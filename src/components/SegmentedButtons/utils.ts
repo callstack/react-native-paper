@@ -1,6 +1,8 @@
 import type { ViewStyle } from 'react-native';
 
+import { SegmentedButtonTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { InternalTheme } from '../../types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -16,25 +18,21 @@ type SegmentedButtonProps = {
   uncheckedColor?: string;
 } & BaseProps;
 
-const DEFAULT_PADDING = 9;
+export const getSegmentedButtonHeight = (
+  density: 'regular' | 'small' | 'medium' | 'high' = 'regular'
+) => SegmentedButtonTokens.containerHeight[density];
 
 export const getSegmentedButtonDensityPadding = ({
   density,
 }: {
   density?: 'regular' | 'small' | 'medium' | 'high';
 }) => {
-  let padding = DEFAULT_PADDING;
-
-  switch (density) {
-    case 'small':
-      return padding - 2;
-    case 'medium':
-      return padding - 4;
-    case 'high':
-      return padding - 8;
-    default:
-      return padding;
-  }
+  return (
+    (getSegmentedButtonHeight(density) -
+      tokens.md.sys.typescale.labelLarge.lineHeight -
+      SegmentedButtonTokens.outlineWidth * 2) /
+    2
+  );
 };
 
 export const getDisabledSegmentedButtonStyle = ({
@@ -66,41 +64,52 @@ export const getSegmentedButtonBorderRadius = ({
 }): ViewStyle => {
   if (segment === 'first') {
     return {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      borderEndWidth: 0,
+      borderTopStartRadius: cornerFull,
+      borderBottomStartRadius: cornerFull,
+      borderTopEndRadius: 0,
+      borderBottomEndRadius: 0,
     };
   } else if (segment === 'last') {
     return {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
+      borderTopStartRadius: 0,
+      borderBottomStartRadius: 0,
+      borderTopEndRadius: cornerFull,
+      borderBottomEndRadius: cornerFull,
     };
   } else {
     return {
       borderRadius: 0,
-      borderEndWidth: 0,
     };
   }
 };
 
+export const getSegmentedButtonOutlineStyle = (
+  segment?: 'first' | 'last'
+): ViewStyle => ({
+  borderTopWidth: SegmentedButtonTokens.outlineWidth,
+  borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+  borderStartWidth: SegmentedButtonTokens.outlineWidth,
+  borderEndWidth: segment === 'last' ? SegmentedButtonTokens.outlineWidth : 0,
+});
+
 const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
   if (checked) {
-    return theme.colors.secondaryContainer;
+    return theme.colors[SegmentedButtonTokens.selectedContainerColor];
   }
   return 'transparent';
 };
 
 const getSegmentedButtonBorderColor = ({ theme, disabled }: BaseProps) => {
   if (disabled) {
-    return theme.colors.outlineVariant;
+    return theme.colors[SegmentedButtonTokens.disabledOutlineColor];
   }
-  return theme.colors.outline;
+  return theme.colors[SegmentedButtonTokens.outlineColor];
 };
 
 const getSegmentedButtonBorderWidth = ({
   theme: _t,
 }: Omit<BaseProps, 'disabled' | 'checked'>) => {
-  return 1;
+  return SegmentedButtonTokens.outlineWidth;
 };
 
 const getSegmentedButtonTextColor = ({
@@ -111,12 +120,16 @@ const getSegmentedButtonTextColor = ({
   uncheckedColor,
 }: SegmentedButtonProps) => {
   if (disabled) {
-    return theme.colors.onSurface;
+    return theme.colors[SegmentedButtonTokens.disabledContentColor];
   }
   if (checked) {
-    return checkedColor ?? theme.colors.onSecondaryContainer;
+    return (
+      checkedColor ?? theme.colors[SegmentedButtonTokens.selectedContentColor]
+    );
   }
-  return uncheckedColor ?? theme.colors.onSurface;
+  return (
+    uncheckedColor ?? theme.colors[SegmentedButtonTokens.unselectedContentColor]
+  );
 };
 
 export const getSegmentedButtonColors = ({
@@ -143,8 +156,26 @@ export const getSegmentedButtonColors = ({
     uncheckedColor,
   });
   const borderWidth = getSegmentedButtonBorderWidth({ theme });
+  const borderOpacity = disabled
+    ? SegmentedButtonTokens.disabledOutlineOpacity
+    : stateOpacity.enabled;
+  const textOpacity = disabled
+    ? SegmentedButtonTokens.disabledContentOpacity
+    : stateOpacity.enabled;
+  const stateLayerColor = checked
+    ? theme.colors[SegmentedButtonTokens.selectedStateLayerColor]
+    : theme.colors[SegmentedButtonTokens.unselectedStateLayerColor];
+  const focusIndicatorColor =
+    theme.colors[SegmentedButtonTokens.focusIndicatorColor];
 
-  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
-
-  return { backgroundColor, borderColor, textColor, textOpacity, borderWidth };
+  return {
+    backgroundColor,
+    borderColor,
+    borderOpacity,
+    textColor,
+    textOpacity,
+    borderWidth,
+    stateLayerColor,
+    focusIndicatorColor,
+  };
 };

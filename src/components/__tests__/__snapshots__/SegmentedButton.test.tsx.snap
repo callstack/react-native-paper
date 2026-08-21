@@ -6,6 +6,10 @@ exports[`renders segmented button 1`] = `
     [
       {
         "flexDirection": "row",
+        "overflow": "visible",
+      },
+      {
+        "direction": "ltr",
       },
       undefined,
     ]
@@ -15,23 +19,14 @@ exports[`renders segmented button 1`] = `
     style={
       [
         {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderBottomRightRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderEndWidth": 0,
-          "borderRadius": 20,
-          "borderTopRightRadius": 0,
-          "borderWidth": 1,
-        },
-        {
-          "borderStyle": "solid",
           "flex": 1,
-          "minWidth": 76,
+          "justifyContent": "center",
+          "minHeight": 48,
+          "minWidth": 48,
+          "overflow": "visible",
         },
-        [
-          undefined,
-          {},
-        ],
+        false,
+        undefined,
       ]
     }
   >
@@ -71,12 +66,19 @@ exports[`renders segmented button 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderBottomRightRadius": 0,
-            "borderEndWidth": 0,
-            "borderRadius": 20,
-            "borderTopRightRadius": 0,
-          },
+          [
+            {
+              "justifyContent": "center",
+              "minHeight": 48,
+            },
+            {
+              "borderBottomEndRadius": 0,
+              "borderBottomStartRadius": 9999,
+              "borderTopEndRadius": 0,
+              "borderTopStartRadius": 9999,
+            },
+            undefined,
+          ],
         ]
       }
     >
@@ -84,57 +86,88 @@ exports[`renders segmented button 1`] = `
         style={
           [
             {
-              "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
+              "overflow": "hidden",
+              "width": "100%",
             },
             {
-              "opacity": 1,
-              "paddingVertical": 9,
+              "borderBottomEndRadius": 0,
+              "borderBottomStartRadius": 9999,
+              "borderTopEndRadius": 0,
+              "borderTopStartRadius": 9999,
+            },
+            {
+              "backgroundColor": "rgba(232, 222, 248, 1)",
+              "height": 40,
             },
           ]
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
+          pointerEvents="none"
           style={
             [
               {
-                "textAlign": "left",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               },
               {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "backgroundColor": "rgba(29, 25, 43, 1)",
+                "opacity": 0,
               },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "textAlign": "center",
-                  },
-                  {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
             ]
           }
-          testID="undefined-label"
+        />
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "columnGap": 8,
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "paddingHorizontal": 12,
+              },
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderBottomEndRadius": 0,
+                "borderBottomStartRadius": 9999,
+                "borderTopEndRadius": 0,
+                "borderTopStartRadius": 9999,
+              },
+              {
+                "borderBottomWidth": 1,
+                "borderEndWidth": 0,
+                "borderStartWidth": 1,
+                "borderTopWidth": 1,
+              },
+              {
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "opacity": 1,
+              },
+            ]
+          }
         />
       </View>
     </View>
@@ -143,22 +176,14 @@ exports[`renders segmented button 1`] = `
     style={
       [
         {
-          "backgroundColor": "transparent",
-          "borderBottomLeftRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderTopLeftRadius": 0,
-          "borderWidth": 1,
-        },
-        {
-          "borderStyle": "solid",
           "flex": 1,
-          "minWidth": 76,
+          "justifyContent": "center",
+          "minHeight": 48,
+          "minWidth": 48,
+          "overflow": "visible",
         },
-        [
-          undefined,
-          {},
-        ],
+        false,
+        undefined,
       ]
     }
   >
@@ -198,11 +223,19 @@ exports[`renders segmented button 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderBottomLeftRadius": 0,
-            "borderRadius": 20,
-            "borderTopLeftRadius": 0,
-          },
+          [
+            {
+              "justifyContent": "center",
+              "minHeight": 48,
+            },
+            {
+              "borderBottomEndRadius": 9999,
+              "borderBottomStartRadius": 0,
+              "borderTopEndRadius": 9999,
+              "borderTopStartRadius": 0,
+            },
+            undefined,
+          ],
         ]
       }
     >
@@ -210,57 +243,88 @@ exports[`renders segmented button 1`] = `
         style={
           [
             {
-              "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
+              "overflow": "hidden",
+              "width": "100%",
             },
             {
-              "opacity": 1,
-              "paddingVertical": 9,
+              "borderBottomEndRadius": 9999,
+              "borderBottomStartRadius": 0,
+              "borderTopEndRadius": 9999,
+              "borderTopStartRadius": 0,
+            },
+            {
+              "backgroundColor": "transparent",
+              "height": 40,
             },
           ]
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
+          pointerEvents="none"
           style={
             [
               {
-                "textAlign": "left",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               },
               {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
+                "backgroundColor": "rgba(29, 27, 32, 1)",
+                "opacity": 0,
               },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "textAlign": "center",
-                  },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
             ]
           }
-          testID="undefined-label"
+        />
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "columnGap": 8,
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "paddingHorizontal": 12,
+              },
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderBottomEndRadius": 9999,
+                "borderBottomStartRadius": 0,
+                "borderTopEndRadius": 9999,
+                "borderTopStartRadius": 0,
+              },
+              {
+                "borderBottomWidth": 1,
+                "borderEndWidth": 1,
+                "borderStartWidth": 1,
+                "borderTopWidth": 1,
+              },
+              {
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "opacity": 1,
+              },
+            ]
+          }
         />
       </View>
     </View>

@@ -7,7 +7,7 @@ import type {
 } from 'react-native';
 
 import SegmentedButtonItem from './SegmentedButtonItem';
-import { getDisabledSegmentedButtonStyle } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -133,15 +133,11 @@ const SegmentedButtons = <T extends string = string>({
   theme: themeOverrides,
 }: Props<T>) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
 
   return (
-    <View style={[styles.row, style]}>
+    <View style={[styles.row, { direction }, style]}>
       {buttons.map((item, i) => {
-        const disabledChildStyle = getDisabledSegmentedButtonStyle({
-          theme,
-          buttons,
-          index: i,
-        });
         const segment =
           i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
 
@@ -172,7 +168,7 @@ const SegmentedButtons = <T extends string = string>({
             segment={segment}
             density={density}
             onPress={onPress}
-            style={[item.style, disabledChildStyle]}
+            style={item.style}
             labelStyle={item.labelStyle}
             theme={theme}
           />
@@ -185,6 +181,7 @@ const SegmentedButtons = <T extends string = string>({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
+    overflow: 'visible',
   },
 });
 
