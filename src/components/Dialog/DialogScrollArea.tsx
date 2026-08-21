@@ -4,7 +4,6 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import type { Theme } from '../../types';
 
 export type Props = ViewProps & {
   /**
@@ -51,7 +50,7 @@ export type Props = ViewProps & {
  */
 const DialogScrollArea = (props: Props) => {
   const theme = useInternalTheme(props.theme);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const borderStyles = {
     borderColor: colors.surfaceVariant,
     borderTopWidth: 1,

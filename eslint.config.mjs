@@ -145,6 +145,14 @@ export default defineConfig(
     },
   },
   {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': 'error',
+      '@typescript-eslint/no-unsafe-type-assertion': 'error',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+    },
+  },
+  {
     files: ['**/*.test.{js,ts,tsx}', '**/__tests__/**/*.{js,ts,tsx}'],
 
     ...testingLibraryReact,

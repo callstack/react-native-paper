@@ -104,6 +104,7 @@ const AppbarHeader = ({
     backgroundColor: customBackground,
     zIndex = elevated ? 1 : 0,
     ...restStyle
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     height?: number;
     elevation?: number;
@@ -134,7 +135,7 @@ const AppbarHeader = ({
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
-        shadow(elevation, theme.colors.shadow) as ViewStyle,
+        shadow(elevation, theme.colors.shadow),
       ]}
     >
       <Appbar

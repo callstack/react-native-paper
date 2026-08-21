@@ -345,7 +345,7 @@ const Searchbar = ({
 
   // A consumer-provided horizontal margin wins over the built-in one and
   // disables the focus transition.
-  const flatStyle = StyleSheet.flatten(style as StyleProp<ViewStyle>);
+  const flatStyle = StyleSheet.flatten<ViewStyle>(style);
   const hasCustomHorizontalMargin = HORIZONTAL_MARGIN_KEYS.some(
     (key) => flatStyle?.[key] !== undefined
   );

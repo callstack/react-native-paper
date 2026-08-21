@@ -9,14 +9,20 @@ export const typeface = {
     ios: 'System',
     default: 'sans-serif',
   }),
-  weightRegular: '400' as Font['fontWeight'],
+  weightRegular: '400',
 
   plainMedium: Platform.select({
     web: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
     ios: 'System',
     default: 'sans-serif-medium',
   }),
-  weightMedium: '500' as Font['fontWeight'],
+  weightMedium: '500',
 
-  weightBold: '700' as Font['fontWeight'],
+  weightBold: '700',
+} satisfies {
+  brandRegular?: string;
+  weightRegular: Font['fontWeight'];
+  plainMedium?: string;
+  weightMedium: Font['fontWeight'];
+  weightBold: Font['fontWeight'];
 };
