@@ -397,6 +397,41 @@ describe('PaperProvider', () => {
       expect(theme.shapes.corner.large).toBe(LightTheme.shapes.corner.large);
     });
 
+    it('keeps the defaults when the theme owns a custom property named `dynamic`', async () => {
+      mockAppearance();
+      // `dynamic`, `semantic` and `resource_paths` are the keys that mark a
+      // native platform color. A user theme is allowed to own them as ordinary
+      // custom properties (docs: "Extending the theme"), and doing so must not
+      // make the whole theme look like a leaf value.
+      await render(
+        createProvider({
+          dynamic: true,
+          colors: { primary: 'tomato' },
+        } as ThemeProp)
+      );
+
+      const theme =
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        screen.getByTestId('provider-child-view').props.theme;
+
+      expect(theme.dynamic).toBe(true);
+      expect(theme.colors.primary).toBe('tomato');
+      expect(theme.colors.onSurface).toBe(LightTheme.colors.onSurface);
+      expect(theme.fonts.titleLarge).toStrictEqual(LightTheme.fonts.titleLarge);
+      expect(theme.shapes.corner.large).toBe(LightTheme.shapes.corner.large);
+    });
+
+    it('renders <Text variant> when the theme owns a custom `dynamic` property', async () => {
+      mockAppearance();
+      await render(
+        <PaperProvider theme={{ dynamic: true } as ThemeProp}>
+          <Text variant="titleLarge">Custom dynamic property</Text>
+        </PaperProvider>
+      );
+
+      expect(screen.getByText('Custom dynamic property')).toBeOnTheScreen();
+    });
+
     it('lets a complete fonts object override every default variant', async () => {
       mockAppearance();
       // Shaped like the output of `configureFonts`: every variant present, with
