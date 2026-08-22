@@ -166,10 +166,14 @@ const RadioButtonItem = ({
     theme,
     uncheckedColor,
     // The outer TouchableRipple in RadioButtonItem already provides the
-    // interactive surface. Disable the inner RadioButton's focusability
-    // so there is only one tabstop per radio button item on web.
+    // interactive surface. Hide the inner RadioButton from the
+    // accessibility tree so screen readers only encounter one control,
+    // and keep tabIndex: -1 so web keyboard users have a single
+    // tabstop per row (matches the approach used in Checkbox.Item).
     focusable: false,
     tabIndex: -1,
+    accessible: false,
+    'aria-hidden': true,
   } as const;
   const isLeading = position === 'leading';
   let radioButton: any;
