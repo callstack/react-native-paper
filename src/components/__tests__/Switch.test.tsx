@@ -1,3 +1,6 @@
+import * as React from 'react';
+import type { View } from 'react-native';
+
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen, userEvent } from '../../test-utils';
@@ -72,5 +75,23 @@ describe('Switch interaction', () => {
     );
     await user.press(screen.getByRole('switch'));
     expect(onValueChange).not.toHaveBeenCalled();
+  });
+});
+
+describe('Switch ref', () => {
+  it('forwards ref to the root view', async () => {
+    const ref = React.createRef<View>();
+
+    await render(<Switch value ref={ref} />);
+
+    expect(ref.current).not.toBeNull();
+  });
+
+  it('exposes the measure methods of the root view', async () => {
+    const ref = React.createRef<View>();
+
+    await render(<Switch value ref={ref} />);
+
+    expect(typeof ref.current?.measure).toBe('function');
   });
 });
