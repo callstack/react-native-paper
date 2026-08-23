@@ -2,7 +2,7 @@ import { Image, Platform, StyleSheet, View } from 'react-native';
 import type { ColorValue } from 'react-native';
 
 import { useLocale } from '../../core/locale';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Icon from '../Icon';
 
 const AppbarBackIcon = ({
   size,
@@ -34,11 +34,10 @@ const AppbarBackIcon = ({
       />
     </View>
   ) : (
-    <MaterialCommunityIcon
-      name="arrow-left"
+    <Icon
+      source={{ source: 'arrow-left', direction }}
       color={color}
       size={size}
-      direction={direction}
     />
   );
 };
