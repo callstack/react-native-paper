@@ -114,7 +114,7 @@ export type Props = {
   /**
    * @optional
    */
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
