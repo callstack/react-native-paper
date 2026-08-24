@@ -13,9 +13,16 @@ import type {
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import type { Props as IconButtonProps } from '../IconButton/IconButton';
+import type { Props as SearchbarProps } from '../Searchbar';
 import type { TextRef } from '../Typography/Text';
 
-export type AppbarVariant = 'small' | 'medium-flexible' | 'large-flexible';
+export type AppbarVariant =
+  | 'search'
+  | 'small'
+  | 'medium-flexible'
+  | 'large-flexible';
+
+export type AppbarTitleVariant = Exclude<AppbarVariant, 'search'>;
 
 export type AppbarTitleAlignment = 'leading' | 'center';
 
@@ -86,7 +93,7 @@ type AppbarTitleImage = {
 };
 
 type AppbarTextTitle = AppbarWrittenTitle & {
-  variant: AppbarVariant;
+  variant: AppbarTitleVariant;
   titleImage?: never;
 };
 
@@ -104,16 +111,12 @@ type AppbarSmallImageTitle = AppbarTitleImage & {
 
 type AppbarFlexibleImageTitle = AppbarWrittenTitle &
   AppbarTitleImage & {
-    variant: Exclude<AppbarVariant, 'small'>;
+    variant: Exclude<AppbarTitleVariant, 'small'>;
   };
 
 type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
-  /** Headline and subtitle alignment. */
-  titleAlignment?: AppbarTitleAlignment;
   /** Optional leading navigation action. */
   leadingAction?: AppbarLeadingAction;
-  /** Trailing icon actions. */
-  actions?: AppbarActions;
   /** Uses the on-scroll container color when true. */
   isScrolled?: boolean;
   /** Override for the automatic top safe-area inset. */
@@ -124,6 +127,16 @@ type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
     left?: number;
     right?: number;
   };
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  ref?: React.Ref<View>;
+  theme?: ThemeProp;
+};
+
+type AppbarTitleProps = {
+  /** Headline and subtitle alignment. */
+  titleAlignment?: AppbarTitleAlignment;
+  /** Trailing icon actions. */
+  actions?: AppbarActions;
   /** Called when the title area is pressed. */
   onTitlePress?: (event: GestureResponderEvent) => void;
   /** Disables title-area interaction. */
@@ -134,10 +147,42 @@ type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
   subtitleColor?: ColorValue;
   /** Style applied to the title area. */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.Ref<View>;
-  theme?: ThemeProp;
+  searchBar?: never;
+};
+
+export type AppbarSearchbarProps = Omit<
+  SearchbarProps,
+  'elevation' | 'mode' | 'showDivider' | 'theme'
+> & {
+  /** Search hint. Material guidance recommends including the word “Search”. */
+  placeholder: string;
+};
+
+type AppbarSearchProps = {
+  variant: 'search';
+  /** Props forwarded to the existing Paper Searchbar. */
+  searchBar: AppbarSearchbarProps;
+  /** Exterior trailing icon actions. */
+  actions?: readonly AppbarStandardAction[];
+  title?: never;
+  subtitle?: never;
+  titleImage?: never;
+  titleAlignment?: never;
+  titleStyle?: never;
+  subtitleStyle?: never;
+  titleRef?: never;
+  titleMaxFontSizeMultiplier?: never;
+  subtitleMaxFontSizeMultiplier?: never;
+  onTitlePress?: never;
+  titleDisabled?: never;
+  titleColor?: never;
+  subtitleColor?: never;
+  contentStyle?: never;
 };
 
 export type Props = AppbarBaseProps &
-  (AppbarTextTitle | AppbarSmallImageTitle | AppbarFlexibleImageTitle);
+  (
+    | (AppbarTitleProps &
+        (AppbarTextTitle | AppbarSmallImageTitle | AppbarFlexibleImageTitle))
+    | AppbarSearchProps
+  );

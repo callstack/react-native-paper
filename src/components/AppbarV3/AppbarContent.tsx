@@ -3,7 +3,7 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import type {
   AppbarTitleAlignment,
-  AppbarVariant,
+  AppbarTitleVariant,
   Props as AppbarProps,
 } from './types';
 import { APPBAR_TITLE_IMAGE_HEIGHT } from './utils';
@@ -28,7 +28,7 @@ type Props = Pick<
   subtitleColor: ColorValue;
   theme: Theme;
   titleColor: ColorValue;
-  variant: AppbarVariant;
+  variant: AppbarTitleVariant;
   style?: StyleProp<ViewStyle>;
   testID: string;
 };
@@ -37,19 +37,19 @@ const titleVariants = {
   small: 'titleLarge',
   'medium-flexible': 'headlineMedium',
   'large-flexible': 'displaySmall',
-} as const satisfies Record<AppbarVariant, TypescaleKey>;
+} as const satisfies Record<AppbarTitleVariant, TypescaleKey>;
 
 const subtitleVariants = {
   small: 'labelMedium',
   'medium-flexible': 'labelLarge',
   'large-flexible': 'titleMedium',
-} as const satisfies Record<AppbarVariant, TypescaleKey>;
+} as const satisfies Record<AppbarTitleVariant, TypescaleKey>;
 
 const subtitleSpacing = {
   small: 0,
   'medium-flexible': 4,
   'large-flexible': 8,
-} as const satisfies Record<AppbarVariant, number>;
+} as const satisfies Record<AppbarTitleVariant, number>;
 
 const AppbarContent = ({
   alignment,

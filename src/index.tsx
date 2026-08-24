@@ -67,6 +67,7 @@ export type {
   AppbarActions as AppbarV3Actions,
   AppbarFilledAction as AppbarV3FilledAction,
   AppbarLeadingAction as AppbarV3LeadingAction,
+  AppbarSearchbarProps as AppbarV3SearchbarProps,
   AppbarStandardAction as AppbarV3StandardAction,
   AppbarTitleAlignment as AppbarV3TitleAlignment,
   AppbarVariant as AppbarV3Variant,

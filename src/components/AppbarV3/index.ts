@@ -5,6 +5,7 @@ export type {
   AppbarActions,
   AppbarFilledAction,
   AppbarLeadingAction,
+  AppbarSearchbarProps,
   AppbarStandardAction,
   AppbarTitleAlignment,
   AppbarVariant,

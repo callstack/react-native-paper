@@ -1,5 +1,6 @@
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue } from 'react-native';
+import type { ColorValue, LayoutChangeEvent } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -11,9 +12,11 @@ import {
   APPBAR_TITLE_IMAGE_HEIGHT,
   getActionsWidth,
   getAppbarHeight,
+  getAppbarSearchWidth,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { getAppbarBorders } from '../Appbar/utils';
+import Searchbar from '../Searchbar';
 import Surface from '../Surface';
 
 const Appbar = ({
@@ -23,6 +26,7 @@ const Appbar = ({
   leadingAction,
   onTitlePress,
   safeAreaInsets,
+  searchBar,
   statusBarHeight,
   style,
   subtitle,
@@ -45,6 +49,7 @@ const Appbar = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const detectedInsets = useSafeAreaInsets();
+  const [searchSlotWidth, setSearchSlotWidth] = React.useState(0);
   const flattenedStyle = StyleSheet.flatten(style);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const resolvedStyle = (flattenedStyle || {}) as Exclude<
@@ -68,6 +73,17 @@ const Appbar = ({
   const borderRadius = getAppbarBorders(restStyle);
   const centered = titleAlignment === 'center';
 
+  const handleSearchSlotLayout = React.useCallback(
+    ({ nativeEvent }: LayoutChangeEvent) => {
+      const nextWidth = nativeEvent.layout.width;
+
+      setSearchSlotWidth((currentWidth) =>
+        currentWidth === nextWidth ? currentWidth : nextWidth
+      );
+    },
+    []
+  );
+
   const renderLeadingAction = () =>
     leadingAction ? (
       <AppbarAction action={leadingAction} leading theme={theme} />
@@ -82,25 +98,82 @@ const Appbar = ({
       />
     ));
 
-  const contentProps = {
-    alignment: titleAlignment,
-    contentStyle,
-    onTitlePress,
-    subtitle,
-    subtitleColor: resolvedSubtitleColor,
-    subtitleMaxFontSizeMultiplier,
-    subtitleStyle,
-    testID: `${testID}-content`,
-    theme,
-    title,
-    titleColor: resolvedTitleColor,
-    titleDisabled,
-    titleImage,
-    titleMaxFontSizeMultiplier,
-    titleRef,
-    titleStyle,
-    variant,
+  const renderSearchAppbar = () => {
+    if (!searchBar) {
+      return null;
+    }
+
+    const {
+      inputStyle: searchInputStyle,
+      style: searchStyle,
+      testID: searchTestID = `${testID}-search`,
+      ...searchProps
+    } = searchBar;
+    const searchWidth = searchSlotWidth
+      ? getAppbarSearchWidth(searchSlotWidth)
+      : '100%';
+    const searchBackgroundColor = isScrolled
+      ? theme.colors.surfaceContainerHighest
+      : theme.colors.surfaceContainer;
+
+    return (
+      <View style={styles.searchRow}>
+        {renderLeadingAction()}
+        <View
+          testID={`${testID}-search-slot`}
+          onLayout={handleSearchSlotLayout}
+          style={styles.searchSlot}
+        >
+          <Searchbar
+            {...searchProps}
+            aria-label={searchProps['aria-label'] ?? searchProps.placeholder}
+            inputStyle={[
+              searchInputStyle,
+              styles.searchInput,
+              { color: theme.colors.onSurface },
+            ]}
+            placeholderTextColor={
+              searchProps.placeholderTextColor ?? theme.colors.onSurfaceVariant
+            }
+            mode="bar"
+            elevation={0}
+            testID={searchTestID}
+            style={[
+              styles.searchBar,
+              { backgroundColor: searchBackgroundColor },
+              searchStyle,
+              { width: searchWidth },
+            ]}
+            theme={theme}
+          />
+        </View>
+        <View style={styles.trailingActions}>{renderActions()}</View>
+      </View>
+    );
   };
+
+  const contentProps =
+    variant !== 'search'
+      ? {
+          alignment: titleAlignment,
+          contentStyle,
+          onTitlePress,
+          subtitle,
+          subtitleColor: resolvedSubtitleColor,
+          subtitleMaxFontSizeMultiplier,
+          subtitleStyle,
+          testID: `${testID}-content`,
+          theme,
+          title,
+          titleColor: resolvedTitleColor,
+          titleDisabled,
+          titleImage,
+          titleMaxFontSizeMultiplier,
+          titleRef,
+          titleStyle,
+          variant,
+        }
+      : null;
 
   const renderFlexibleTitleImage = () =>
     titleImage ? (
@@ -115,6 +188,10 @@ const Appbar = ({
     ) : null;
 
   const renderSmallAppbar = () => {
+    if (!contentProps) {
+      return null;
+    }
+
     if (centered || titleImage) {
       const sideWidth = Math.max(
         leadingAction ? APPBAR_ACTION_SIZE : 0,
@@ -149,6 +226,10 @@ const Appbar = ({
   };
 
   const renderFlexibleAppbar = () => {
+    if (!contentProps) {
+      return null;
+    }
+
     const sideWidth = Math.max(
       leadingAction ? APPBAR_ACTION_SIZE : 0,
       getActionsWidth(actions)
@@ -204,7 +285,11 @@ const Appbar = ({
         testID={testID}
         style={[styles.appbar, { backgroundColor, minHeight }, restStyle]}
       >
-        {variant === 'small' ? renderSmallAppbar() : renderFlexibleAppbar()}
+        {variant === 'search'
+          ? renderSearchAppbar()
+          : variant === 'small'
+            ? renderSmallAppbar()
+            : renderFlexibleAppbar()}
       </View>
     </Surface>
   );
@@ -218,6 +303,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  searchRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchSlot: {
+    flex: 1,
+    marginHorizontal: 8,
+    alignItems: 'center',
+  },
+  searchBar: {
+    maxWidth: '100%',
+  },
+  searchInput: {
+    textAlign: 'center',
   },
   flexibleContainer: {
     flex: 1,

@@ -25,6 +25,7 @@ import {
 import type {
   AppbarV3Actions,
   AppbarV3FilledAction,
+  AppbarV3LeadingAction,
   AppbarV3StandardAction,
   AppbarV3TitleAlignment,
   AppbarV3Variant,
@@ -39,6 +40,38 @@ type FilledActionWidth = NonNullable<AppbarV3FilledAction['width']>;
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const BOTTOM_APPBAR_HEIGHT = 80;
 const MEDIUM_FAB_HEIGHT = 56;
+
+type SearchAppbarHeaderProps = {
+  actions: AppbarV3StandardAction[];
+  isScrolled: boolean;
+  leadingAction?: AppbarV3LeadingAction;
+  showCustomColor: boolean;
+};
+
+const SearchAppbarHeader = ({
+  actions,
+  isScrolled,
+  leadingAction,
+  showCustomColor,
+}: SearchAppbarHeaderProps) => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  return (
+    <AppbarV3
+      variant="search"
+      actions={actions}
+      isScrolled={isScrolled}
+      leadingAction={leadingAction}
+      style={showCustomColor ? styles.customColor : null}
+      searchBar={{
+        placeholder: 'Search components',
+        'aria-label': 'Search components',
+        value: searchQuery,
+        onChangeText: setSearchQuery,
+      }}
+    />
+  );
+};
 
 const AppbarV3Example = () => {
   const navigation = useNavigation('AppbarV3');
@@ -80,7 +113,7 @@ const AppbarV3Example = () => {
       });
     }
 
-    if (showSearchIcon) {
+    if (showSearchIcon && appbarConfiguration !== 'search') {
       standardActions.push({
         key: 'search',
         icon: 'magnify',
@@ -136,6 +169,17 @@ const AppbarV3Example = () => {
 
     navigation.setOptions({
       header: () => {
+        if (appbarConfiguration === 'search') {
+          return (
+            <SearchAppbarHeader
+              actions={standardActions.slice(0, 2)}
+              isScrolled={isScrolled}
+              leadingAction={leadingAction}
+              showCustomColor={showCustomColor}
+            />
+          );
+        }
+
         if (appbarConfiguration === 'small') {
           return showTitleImage ? (
             <AppbarV3
@@ -232,27 +276,42 @@ const AppbarV3Example = () => {
         <Text>Subtitle</Text>
         <Switch
           value={showSubtitle}
-          disabled={showTitleImage && appbarConfiguration === 'small'}
+          disabled={
+            appbarConfiguration === 'search' ||
+            (showTitleImage && appbarConfiguration === 'small')
+          }
           onValueChange={setShowSubtitle}
         />
       </View>
       <View style={styles.row}>
         <Text>Title image</Text>
-        <Switch value={showTitleImage} onValueChange={setShowTitleImage} />
+        <Switch
+          value={showTitleImage}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setShowTitleImage}
+        />
       </View>
       <View style={styles.row}>
         <Text>Center title and subtitle</Text>
-        <Switch value={isTitleCentered} onValueChange={setIsTitleCentered} />
+        <Switch
+          value={isTitleCentered}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setIsTitleCentered}
+        />
       </View>
       <View style={styles.row}>
         <Text>Filled trailing action</Text>
-        <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
+        <Switch
+          value={showFilledAction}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setShowFilledAction}
+        />
       </View>
       <View style={styles.row}>
         <Text>Search icon</Text>
         <Switch
           value={showSearchIcon}
-          disabled={showFilledAction}
+          disabled={showFilledAction || appbarConfiguration === 'search'}
           onValueChange={setShowSearchIcon}
         />
       </View>
@@ -347,6 +406,7 @@ const AppbarV3Example = () => {
             onValueChange={(value: string) => {
               if (
                 value === 'small' ||
+                value === 'search' ||
                 value === 'medium-flexible' ||
                 value === 'large-flexible'
               ) {
@@ -354,6 +414,10 @@ const AppbarV3Example = () => {
               }
             }}
           >
+            <View style={styles.row}>
+              <Text>Search</Text>
+              <RadioButton value="search" />
+            </View>
             <View style={styles.row}>
               <Text>Small (default)</Text>
               <RadioButton value="small" />
