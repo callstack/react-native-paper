@@ -170,7 +170,14 @@ const RadioButtonItem = ({
   // The outer TouchableRipple is the interactable element + a11y radio; the
   // inner control is purely visual, so exclude it from the a11y tree to
   // avoid duplicate `checked` states.
-  const radioButton = <RadioButton {...radioButtonProps} accessible={false} />;
+  const radioButton = (
+    <RadioButton
+      {...radioButtonProps}
+      accessible={false}
+      focusable={false}
+      tabIndex={-1}
+    />
+  );
 
   const textAlign = isLeading ? 'right' : 'left';
 

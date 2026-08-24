@@ -38,7 +38,7 @@ it('exposes a single radio a11y node per item', async () => {
     <RadioButton.Item label="Item" value="first" status="checked" />
   );
 
-  // The inner control is `accessible={false}`, so only the row is a radio.
+  // The inner control is visual-only, so only the row is a radio.
   expect(screen.queryAllByRole('radio')).toHaveLength(1);
 });
 

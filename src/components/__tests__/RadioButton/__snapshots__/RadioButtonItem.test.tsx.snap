@@ -76,7 +76,7 @@ exports[`can render leading radio button control 1`] = `
       }
       accessible={false}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -93,12 +93,17 @@ exports[`can render leading radio button control 1`] = `
           },
           [
             {
-              "borderRadius": 18,
+              "alignItems": "center",
+              "borderRadius": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "width": 40,
             },
             undefined,
           ],
         ]
       }
+      tabIndex={-1}
     >
       <View
         style={
@@ -107,7 +112,6 @@ exports[`can render leading radio button control 1`] = `
               "borderRadius": 10,
               "borderWidth": 2,
               "height": 20,
-              "margin": 8,
               "width": 20,
             },
             {
@@ -272,7 +276,7 @@ exports[`renders unchecked 1`] = `
       }
       accessible={false}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -289,12 +293,17 @@ exports[`renders unchecked 1`] = `
           },
           [
             {
-              "borderRadius": 18,
+              "alignItems": "center",
+              "borderRadius": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "width": 40,
             },
             undefined,
           ],
         ]
       }
+      tabIndex={-1}
     >
       <View
         style={
@@ -303,7 +312,6 @@ exports[`renders unchecked 1`] = `
               "borderRadius": 10,
               "borderWidth": 2,
               "height": 20,
-              "margin": 8,
               "width": 20,
             },
             {
