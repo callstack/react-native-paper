@@ -22,6 +22,35 @@ npm install react-native-reanimated react-native-worklets
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `react`, `react-native`, `react-native-safe-area-context` | `react`, `react-native`, `react-native-safe-area-context`, **`react-native-reanimated >=4.3.0`**, **`react-native-worklets >=0.8.1`** |
 
+### Icons: only `@react-native-vector-icons/material-design-icons` is auto-detected
+
+This one fails at runtime, not at compile time. In v5, Paper looked for an icon package in this order: `@react-native-vector-icons/material-design-icons`, then `@expo/vector-icons`, then the old single package `react-native-vector-icons`. In v6 only the first one is picked up. With any of the others, every icon renders as broken (the □ placeholder character) and Paper logs a warning.
+
+| v5                                                                                       | v6                                                        |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `@react-native-vector-icons/material-design-icons`, `@expo/vector-icons` or `react-native-vector-icons` picked up automatically | only `@react-native-vector-icons/material-design-icons`   |
+
+If you use `@expo/vector-icons` or `react-native-vector-icons` 10.x, either install the supported package:
+
+```bash npm2yarn
+npm install @react-native-vector-icons/material-design-icons
+```
+
+or keep your current package and pass a custom icon renderer to `PaperProvider`:
+
+```js
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+// ...
+
+<PaperProvider
+  settings={{
+    icon: (props) => <MaterialCommunityIcons {...props} />,
+  }}
+>
+  <App />
+</PaperProvider>;
+```
+
 ### ESM-only package
 
 The CommonJS build was dropped. `main` now points to `lib/module/index.js` and the `module`, `react-native` and `source` fields are gone. Metro and Re.Pack handle this out of the box. Jest does not, so if your tests import Paper, add it to `transformIgnorePatterns` in your Jest config:
