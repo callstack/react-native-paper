@@ -139,8 +139,6 @@ type AppbarTitleProps = {
   actions?: AppbarActions;
   /** Called when the title area is pressed. */
   onTitlePress?: (event: GestureResponderEvent) => void;
-  /** Disables title-area interaction. */
-  titleDisabled?: boolean;
   /** Custom headline color. */
   titleColor?: ColorValue;
   /** Custom subtitle color. */
@@ -174,7 +172,6 @@ type AppbarSearchProps = {
   titleMaxFontSizeMultiplier?: never;
   subtitleMaxFontSizeMultiplier?: never;
   onTitlePress?: never;
-  titleDisabled?: never;
   titleColor?: never;
   subtitleColor?: never;
   contentStyle?: never;

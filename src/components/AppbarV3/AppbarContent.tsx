@@ -18,7 +18,6 @@ type Props = Pick<
   | 'subtitleMaxFontSizeMultiplier'
   | 'subtitleStyle'
   | 'title'
-  | 'titleDisabled'
   | 'titleImage'
   | 'titleMaxFontSizeMultiplier'
   | 'titleRef'
@@ -63,7 +62,6 @@ const AppbarContent = ({
   theme,
   title,
   titleColor,
-  titleDisabled,
   titleImage,
   titleMaxFontSizeMultiplier,
   titleRef,
@@ -143,8 +141,6 @@ const AppbarContent = ({
         {...wrapperProps}
         role="button"
         accessibilityLabel={hasTitleImage ? title : undefined}
-        aria-disabled={titleDisabled}
-        disabled={titleDisabled}
         onPress={onTitlePress}
       >
         {content}
