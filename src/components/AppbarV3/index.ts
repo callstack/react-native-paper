@@ -7,7 +7,9 @@ export type {
   AppbarLeadingAction,
   AppbarSearchbarProps,
   AppbarStandardAction,
+  AppbarTextProps,
   AppbarTitleAlignment,
+  AppbarTitleTextProps,
   AppbarVariant,
   Props,
 } from './types';

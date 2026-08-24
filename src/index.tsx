@@ -69,7 +69,9 @@ export type {
   AppbarLeadingAction as AppbarV3LeadingAction,
   AppbarSearchbarProps as AppbarV3SearchbarProps,
   AppbarStandardAction as AppbarV3StandardAction,
+  AppbarTextProps as AppbarV3TextProps,
   AppbarTitleAlignment as AppbarV3TitleAlignment,
+  AppbarTitleTextProps as AppbarV3TitleTextProps,
   AppbarVariant as AppbarV3Variant,
 } from './components/AppbarV3';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';

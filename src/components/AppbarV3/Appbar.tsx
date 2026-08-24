@@ -30,18 +30,13 @@ const Appbar = ({
   statusBarHeight,
   style,
   subtitle,
-  subtitleColor,
-  subtitleMaxFontSizeMultiplier,
-  subtitleStyle,
+  subtitleProps,
   testID = 'appbar',
   theme: themeOverrides,
   title,
   titleAlignment = 'leading',
-  titleColor,
   titleImage,
-  titleMaxFontSizeMultiplier,
-  titleRef,
-  titleStyle,
+  titleProps,
   variant,
   ref,
   ...rest
@@ -61,8 +56,6 @@ const Appbar = ({
   const backgroundColor =
     customBackground ??
     (isScrolled ? theme.colors.surfaceContainer : theme.colors.surface);
-  const resolvedTitleColor = titleColor ?? theme.colors.onSurface;
-  const resolvedSubtitleColor = subtitleColor ?? theme.colors.onSurfaceVariant;
   const hasSubtitle = typeof subtitle === 'string' && subtitle.length > 0;
   const minHeight = getAppbarHeight(variant, hasSubtitle);
   const topInset = statusBarHeight ?? safeAreaInsets?.top ?? detectedInsets.top;
@@ -158,17 +151,12 @@ const Appbar = ({
           contentStyle,
           onTitlePress,
           subtitle,
-          subtitleColor: resolvedSubtitleColor,
-          subtitleMaxFontSizeMultiplier,
-          subtitleStyle,
+          subtitleProps,
           testID: `${testID}-content`,
           theme,
           title,
-          titleColor: resolvedTitleColor,
           titleImage,
-          titleMaxFontSizeMultiplier,
-          titleRef,
-          titleStyle,
+          titleProps,
           variant,
         }
       : null;

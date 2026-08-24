@@ -26,6 +26,18 @@ export type AppbarTitleVariant = Exclude<AppbarVariant, 'search'>;
 
 export type AppbarTitleAlignment = 'leading' | 'center';
 
+export type AppbarTextProps = {
+  /** Style applied to the text. */
+  style?: StyleProp<TextStyle>;
+  /** Specifies the largest possible scale the font can reach. */
+  maxFontSizeMultiplier?: number;
+};
+
+export type AppbarTitleTextProps = AppbarTextProps & {
+  /** Reference for the title heading. */
+  ref?: React.RefObject<TextRef | null>;
+};
+
 type AppbarActionBase = Omit<
   IconButtonProps,
   'icon' | 'iconColor' | 'mode' | 'selected' | 'size' | 'theme' | 'aria-label'
@@ -80,11 +92,10 @@ type AppbarWrittenTitle = {
   title: string;
   /** Optional supporting text displayed below the headline. */
   subtitle?: string;
-  titleStyle?: StyleProp<TextStyle>;
-  subtitleStyle?: StyleProp<TextStyle>;
-  titleRef?: React.RefObject<TextRef | null>;
-  titleMaxFontSizeMultiplier?: number;
-  subtitleMaxFontSizeMultiplier?: number;
+  /** Props applied to the title heading. */
+  titleProps?: AppbarTitleTextProps;
+  /** Props applied to the subtitle text. */
+  subtitleProps?: AppbarTextProps;
 };
 
 type AppbarTitleImage = {
@@ -102,11 +113,8 @@ type AppbarSmallImageTitle = AppbarTitleImage & {
   /** Accessible page title. The image replaces this text visually. */
   title: string;
   subtitle?: never;
-  titleStyle?: never;
-  subtitleStyle?: never;
-  titleRef?: never;
-  titleMaxFontSizeMultiplier?: never;
-  subtitleMaxFontSizeMultiplier?: never;
+  titleProps?: never;
+  subtitleProps?: never;
 };
 
 type AppbarFlexibleImageTitle = AppbarWrittenTitle &
@@ -139,10 +147,6 @@ type AppbarTitleProps = {
   actions?: AppbarActions;
   /** Called when the title area is pressed. */
   onTitlePress?: (event: GestureResponderEvent) => void;
-  /** Custom headline color. */
-  titleColor?: ColorValue;
-  /** Custom subtitle color. */
-  subtitleColor?: ColorValue;
   /** Style applied to the title area. */
   contentStyle?: StyleProp<ViewStyle>;
   searchBar?: never;
@@ -166,14 +170,9 @@ type AppbarSearchProps = {
   subtitle?: never;
   titleImage?: never;
   titleAlignment?: never;
-  titleStyle?: never;
-  subtitleStyle?: never;
-  titleRef?: never;
-  titleMaxFontSizeMultiplier?: never;
-  subtitleMaxFontSizeMultiplier?: never;
+  titleProps?: never;
+  subtitleProps?: never;
   onTitlePress?: never;
-  titleColor?: never;
-  subtitleColor?: never;
   contentStyle?: never;
 };
 

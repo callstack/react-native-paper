@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import type {
   AppbarTitleAlignment,
@@ -15,18 +15,13 @@ type Props = Pick<
   | 'contentStyle'
   | 'onTitlePress'
   | 'subtitle'
-  | 'subtitleMaxFontSizeMultiplier'
-  | 'subtitleStyle'
+  | 'subtitleProps'
   | 'title'
   | 'titleImage'
-  | 'titleMaxFontSizeMultiplier'
-  | 'titleRef'
-  | 'titleStyle'
+  | 'titleProps'
 > & {
   alignment: AppbarTitleAlignment;
-  subtitleColor: ColorValue;
   theme: Theme;
-  titleColor: ColorValue;
   variant: AppbarTitleVariant;
   style?: StyleProp<ViewStyle>;
   testID: string;
@@ -55,17 +50,12 @@ const AppbarContent = ({
   contentStyle,
   onTitlePress,
   subtitle,
-  subtitleColor,
-  subtitleMaxFontSizeMultiplier,
-  subtitleStyle,
+  subtitleProps,
   testID,
   theme,
   title,
-  titleColor,
   titleImage,
-  titleMaxFontSizeMultiplier,
-  titleRef,
-  titleStyle,
+  titleProps,
   variant,
   style,
 }: Props) => {
@@ -86,19 +76,19 @@ const AppbarContent = ({
   ) : (
     <>
       <Text
-        ref={titleRef}
+        ref={titleProps?.ref}
         theme={theme}
         variant={titleVariant}
         numberOfLines={variant === 'small' ? 1 : 2}
         role={onTitlePress ? 'none' : 'heading'}
         accessible
-        maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+        maxFontSizeMultiplier={titleProps?.maxFontSizeMultiplier}
         testID={`${testID}-title-text`}
         style={[
           styles.text,
           centered && styles.centeredText,
-          { color: titleColor },
-          titleStyle,
+          { color: theme.colors.onSurface },
+          titleProps?.style,
         ]}
       >
         {title}
@@ -108,14 +98,14 @@ const AppbarContent = ({
           variant={subtitleVariant}
           theme={theme}
           numberOfLines={1}
-          maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
+          maxFontSizeMultiplier={subtitleProps?.maxFontSizeMultiplier}
           testID={`${testID}-subtitle-text`}
           style={[
             styles.text,
             centered && styles.centeredText,
             { marginTop: subtitleSpacing[variant] },
-            { color: subtitleColor },
-            subtitleStyle,
+            { color: theme.colors.onSurfaceVariant },
+            subtitleProps?.style,
           ]}
         >
           {subtitle}
