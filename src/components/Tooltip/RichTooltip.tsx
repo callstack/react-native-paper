@@ -337,7 +337,6 @@ const RichTooltip = ({
             onPress={handleBackdropPress}
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
-            testID="tooltip-rich-backdrop"
           />
           <Animated.View
             onLayout={onLayout}
@@ -347,12 +346,10 @@ const RichTooltip = ({
               getTooltipPosition(measurement),
               fadeStyle,
             ]}
-            testID="tooltip-rich-container"
           >
-            <Pressable {...tooltipHoverProps} testID="tooltip-rich-surface">
+            <Pressable {...tooltipHoverProps}>
               <Surface
                 elevation={elevationReady ? Tokens.rich.elevation : 0}
-                testID="tooltip-rich-surface-container"
                 style={[
                   styles.surface,
                   {
@@ -386,7 +383,7 @@ const RichTooltip = ({
                   content
                 )}
                 {actions ? (
-                  <View style={styles.actions} testID="tooltip-rich-actions">
+                  <View style={styles.actions}>
                     {actions({ dismiss: hide })}
                   </View>
                 ) : null}
@@ -400,7 +397,6 @@ const RichTooltip = ({
         collapsable={false}
         onLayout={updateTriggerRegistration}
         style={styles.pressContainer}
-        testID="tooltip-rich-trigger"
         {...wrapperPointerProps}
       >
         {children(triggerProps)}

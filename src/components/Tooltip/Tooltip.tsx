@@ -199,7 +199,6 @@ const Tooltip = ({
               },
               fadeStyle,
             ]}
-            testID="tooltip-container"
           >
             <Text
               aria-live="polite"
@@ -218,7 +217,6 @@ const Tooltip = ({
         ref={childrenWrapperRef}
         collapsable={false}
         style={styles.pressContainer}
-        testID="tooltip-trigger"
         {...wrapperPointerProps}
       >
         {children(triggerProps)}
