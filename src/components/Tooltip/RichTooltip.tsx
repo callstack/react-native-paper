@@ -426,6 +426,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
     alignSelf: 'flex-start',
     ...(Platform.OS === 'web' && { cursor: 'default' }),

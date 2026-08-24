@@ -102,7 +102,7 @@ const RadioButtonAndroid = ({
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,

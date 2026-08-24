@@ -25,7 +25,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, Theme, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -194,7 +194,7 @@ const Menu = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const { colors: md3Colors } = theme as Theme;
+  const { colors: md3Colors } = theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);

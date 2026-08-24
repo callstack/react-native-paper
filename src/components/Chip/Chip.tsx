@@ -15,7 +15,7 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
+import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -245,6 +245,7 @@ const Chip = ({
   const {
     backgroundColor: customBackgroundColor,
     borderRadius = defaultBorderRadius,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const {
@@ -276,7 +277,7 @@ const Chip = ({
   };
   const labelTextStyle = {
     color: textColor,
-    ...(theme as Theme).fonts.labelLarge,
+    ...theme.fonts.labelLarge,
   };
   return (
     <Surface
@@ -358,7 +359,7 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                        ? (theme as Theme).colors.primary
+                        ? theme.colors.primary
                         : iconColor
                   }
                   size={18}

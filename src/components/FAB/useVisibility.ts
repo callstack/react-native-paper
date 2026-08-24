@@ -11,8 +11,6 @@ import {
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import {
-  IOS_SHADOW_RADIUS_FACTOR,
-  SHADOW_OPACITY,
   androidElevationLevels,
   shadow,
   shadowLayers,
@@ -79,6 +77,7 @@ export function useVisibility({
   const restingElevationDp = androidElevationLevels[elevation];
   const shadowOffsetHeight = shadowLayers[0].height[elevation];
   const shadowRadius = shadowLayers[0].shadowRadius[elevation];
+  const shadowOpacity = elevation ? shadowLayers[0].shadowOpacity : 0;
   const shadowColor = theme.colors.shadow;
 
   const webShadow =
@@ -93,9 +92,9 @@ export function useVisibility({
     }
     return {
       shadowColor,
-      shadowOpacity: alpha.value * (elevation ? SHADOW_OPACITY : 0),
+      shadowOpacity: alpha.value * shadowOpacity,
       shadowOffset: { width: 0, height: shadowOffsetHeight },
-      shadowRadius: shadowRadius * IOS_SHADOW_RADIUS_FACTOR,
+      shadowRadius,
     };
   });
 

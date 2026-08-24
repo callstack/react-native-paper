@@ -179,14 +179,14 @@ const RadioButtonItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
+  const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,

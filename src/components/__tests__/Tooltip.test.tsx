@@ -35,7 +35,7 @@ const DummyComponent = ({
   TooltipTriggerProps & {
     ref?: React.RefObject<View | null>;
   }) => (
-  <View {...(props as any)} ref={ref}>
+  <View {...props} ref={ref}>
     <Text>dummy component</Text>
   </View>
 );
@@ -545,7 +545,15 @@ describe('Tooltip', () => {
 describe('Tooltip.Rich', () => {
   const getTrigger = (
     getByText: Awaited<ReturnType<typeof render>>['getByText']
-  ) => getByText('dummy component').parent!;
+  ) => {
+    const trigger = getByText('dummy component').parent;
+
+    if (!trigger) {
+      throw new Error('Expected Tooltip.Rich trigger');
+    }
+
+    return trigger;
+  };
 
   const runTimers = async (ms = 1000) => {
     await act(async () => {
@@ -679,8 +687,12 @@ describe('Tooltip.Rich', () => {
       );
 
       const [textA, textB] = getAllByText('dummy component');
-      const triggerA = textA.parent!;
-      const triggerB = textB.parent!;
+      const triggerA = textA.parent;
+      const triggerB = textB.parent;
+
+      if (!triggerA || !triggerB) {
+        throw new Error('Expected both Tooltip.Rich triggers');
+      }
 
       await user.press(triggerA);
       expect(getByText('First tooltip')).toBeTruthy();

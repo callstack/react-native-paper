@@ -100,6 +100,9 @@
     "react-native-safe-area-context": "*",
     "react-native-worklets": ">=0.8.1"
   },
+  "resolutions": {
+    "ast-types": "0.16.1"
+  },
   "jest": {
     "preset": "@react-native/jest-preset",
     "setupFiles": [

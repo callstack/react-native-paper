@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
     height: Tokens.plain.height,
     maxHeight: Tokens.plain.height,
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,
