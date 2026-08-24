@@ -21,7 +21,7 @@ describe('RadioButtonGroup', () => {
   });
 
   it('keeps a stable context value when an unrelated parent prop changes', async () => {
-    const contexts: RadioButtonContextType[] = [];
+    const contexts: Array<RadioButtonContextType | null> = [];
 
     const Capture = ({ extra }: { extra: number }) => {
       contexts.push(React.useContext(RadioButtonContext));
@@ -40,6 +40,7 @@ describe('RadioButtonGroup', () => {
     await rerender(<Parent extra={2} />);
 
     expect(contexts.length).toBe(2);
+    expect(contexts[0]).not.toBeNull();
     expect(contexts[0]).toBe(contexts[1]);
   });
 });

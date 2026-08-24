@@ -9,11 +9,11 @@ exports[`render visible banner, with custom theme 1`] = `
       "opacity": 1,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -26,11 +26,11 @@ exports[`render visible banner, with custom theme 1`] = `
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"
@@ -285,11 +285,11 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       "opacity": 0,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -302,11 +302,11 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"
@@ -420,11 +420,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       "opacity": 1,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -437,11 +437,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"
@@ -718,11 +718,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       "opacity": 1,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -735,11 +735,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"
@@ -1146,11 +1146,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       "opacity": 1,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -1163,11 +1163,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"
@@ -1291,11 +1291,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       "opacity": 1,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
-        "height": 1,
+        "height": 0.55,
         "width": 0,
       },
-      "shadowOpacity": 0.15,
-      "shadowRadius": 3,
+      "shadowOpacity": 0.19,
+      "shadowRadius": 0.79,
     }
   }
   testID="surface-outer-layer"
@@ -1308,11 +1308,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         "flex": undefined,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 1,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 2,
+        "shadowOpacity": 0.039,
+        "shadowRadius": 0.25,
       }
     }
     testID="surface"

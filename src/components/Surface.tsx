@@ -15,7 +15,7 @@ import {
   shadow,
   shadowLayers,
 } from '../theme/tokens/sys/elevation';
-import type { Elevation, Theme, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../types';
 import { isAnimatedValue } from '../utils/animations';
 import { splitStyles } from '../utils/splitStyles';
 
@@ -137,6 +137,7 @@ const SurfaceIOS = ({
   ...props
 }: SurfaceIOSProps) => {
   const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
     const [filteredStyles, outerLayerStyles, borderRadiusStyles] = splitStyles(
@@ -237,7 +238,7 @@ const Surface = ({
 }: Props) => {
   const theme = useInternalTheme(overridenTheme);
 
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   const backgroundColor = (() => {
     if (isAnimatedValue(elevation)) {
@@ -287,6 +288,7 @@ const Surface = ({
       return androidElevationLevels[elevation];
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
       style
     ) || {}) as ViewStyle;

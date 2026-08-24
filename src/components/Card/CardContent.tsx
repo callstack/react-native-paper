@@ -18,7 +18,7 @@ export type Props = ViewProps & {
   /**
    * @internal
    */
-  siblings?: Array<string>;
+  siblings?: Array<string | null>;
   style?: StyleProp<ViewStyle>;
 };
 

@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     web: {
       content: {
         // there is no 'grid' type in RN :(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         display: 'grid' as 'none',
         gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
         gridRowGap: '8px',

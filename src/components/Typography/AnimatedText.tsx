@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
 });
 
 export const customAnimatedText = <T,>() =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   AnimatedText as (props: Props<T>) => ReactNode;
 
 export default AnimatedText;

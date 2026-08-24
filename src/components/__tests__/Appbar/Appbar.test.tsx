@@ -18,6 +18,7 @@ import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Text from '../../Typography/Text';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const renderAppbarContent = utilRenderAppbarContent as (
   props: Parameters<typeof utilRenderAppbarContent>[0]
 ) => { props: any }[];
