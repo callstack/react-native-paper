@@ -6,6 +6,7 @@ import type {
   AppbarVariant,
   Props as AppbarProps,
 } from './types';
+import { APPBAR_TITLE_IMAGE_HEIGHT } from './utils';
 import type { Theme, TypescaleKey } from '../../types';
 import Text from '../Typography/Text';
 
@@ -39,7 +40,7 @@ const titleVariants = {
 } as const satisfies Record<AppbarVariant, TypescaleKey>;
 
 const subtitleVariants = {
-  small: 'labelSmall',
+  small: 'labelMedium',
   'medium-flexible': 'labelLarge',
   'large-flexible': 'titleMedium',
 } as const satisfies Record<AppbarVariant, TypescaleKey>;
@@ -73,9 +74,17 @@ const AppbarContent = ({
   const titleVariant = titleVariants[variant];
   const subtitleVariant = subtitleVariants[variant];
   const centered = alignment === 'center';
+  const hasTitleImage = variant === 'small' && Boolean(titleImage);
 
-  const content = titleImage ? (
-    titleImage
+  const content = hasTitleImage ? (
+    <View
+      testID={`${testID}-title-image`}
+      aria-hidden
+      importantForAccessibility="no-hide-descendants"
+      style={styles.titleImage}
+    >
+      {titleImage}
+    </View>
   ) : (
     <>
       <Text
@@ -133,6 +142,7 @@ const AppbarContent = ({
       <Pressable
         {...wrapperProps}
         role="button"
+        accessibilityLabel={hasTitleImage ? title : undefined}
         aria-disabled={titleDisabled}
         disabled={titleDisabled}
         onPress={onTitlePress}
@@ -142,7 +152,16 @@ const AppbarContent = ({
     );
   }
 
-  return <View {...wrapperProps}>{content}</View>;
+  return (
+    <View
+      {...wrapperProps}
+      accessible={hasTitleImage || undefined}
+      accessibilityLabel={hasTitleImage ? title : undefined}
+      role={hasTitleImage ? 'heading' : undefined}
+    >
+      {content}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -165,6 +184,13 @@ const styles = StyleSheet.create({
   },
   centeredText: {
     textAlign: 'center',
+  },
+  titleImage: {
+    height: APPBAR_TITLE_IMAGE_HEIGHT,
+    maxWidth: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
 

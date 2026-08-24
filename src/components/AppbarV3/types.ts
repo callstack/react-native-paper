@@ -68,10 +68,9 @@ type AppbarBackAction = Omit<
 
 export type AppbarLeadingAction = AppbarLeadingIconAction | AppbarBackAction;
 
-type AppbarTextTitle = {
+type AppbarWrittenTitle = {
   /** Written headline displayed by the app bar. */
   title: string;
-  titleImage?: never;
   /** Optional supporting text displayed below the headline. */
   subtitle?: string;
   titleStyle?: StyleProp<TextStyle>;
@@ -81,10 +80,20 @@ type AppbarTextTitle = {
   subtitleMaxFontSizeMultiplier?: number;
 };
 
-type AppbarImageTitle = {
-  title?: never;
-  /** Image or logo which replaces the written headline. */
+type AppbarTitleImage = {
+  /** Image or logo displayed in the app bar. It should fit within 32dp height. */
   titleImage: React.ReactElement;
+};
+
+type AppbarTextTitle = AppbarWrittenTitle & {
+  variant: AppbarVariant;
+  titleImage?: never;
+};
+
+type AppbarSmallImageTitle = AppbarTitleImage & {
+  variant: 'small';
+  /** Accessible page title. The image replaces this text visually. */
+  title: string;
   subtitle?: never;
   titleStyle?: never;
   subtitleStyle?: never;
@@ -93,9 +102,12 @@ type AppbarImageTitle = {
   subtitleMaxFontSizeMultiplier?: never;
 };
 
+type AppbarFlexibleImageTitle = AppbarWrittenTitle &
+  AppbarTitleImage & {
+    variant: Exclude<AppbarVariant, 'small'>;
+  };
+
 type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
-  /** Expressive app bar size variant. */
-  variant: AppbarVariant;
   /** Headline and subtitle alignment. */
   titleAlignment?: AppbarTitleAlignment;
   /** Optional leading navigation action. */
@@ -127,4 +139,5 @@ type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
   theme?: ThemeProp;
 };
 
-export type Props = AppbarBaseProps & (AppbarTextTitle | AppbarImageTitle);
+export type Props = AppbarBaseProps &
+  (AppbarTextTitle | AppbarSmallImageTitle | AppbarFlexibleImageTitle);

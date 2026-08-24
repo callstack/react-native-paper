@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -39,6 +45,7 @@ const AppbarV3Example = () => {
 
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
   const [showSubtitle, setShowSubtitle] = React.useState(true);
+  const [showTitleImage, setShowTitleImage] = React.useState(false);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
@@ -104,27 +111,72 @@ const AppbarV3Example = () => {
         ]
       : standardActions;
 
+    const leadingAction = showLeftIcon
+      ? {
+          type: 'back' as const,
+          onPress: () => navigation.goBack(),
+        }
+      : undefined;
+    const titleImage = (
+      <Image
+        source={require('../../assets/images/paper-icon.png')}
+        resizeMode="contain"
+        style={styles.titleImage}
+        accessibilityIgnoresInvertColors
+      />
+    );
+    const commonProps = {
+      actions,
+      isScrolled,
+      leadingAction,
+      onTitlePress: () => setShowSnackbar(true),
+      style: showCustomColor ? styles.customColor : null,
+      titleAlignment,
+    };
+
     navigation.setOptions({
-      header: () => (
-        <AppbarV3
-          style={showCustomColor ? styles.customColor : null}
-          variant={appbarConfiguration}
-          titleAlignment={titleAlignment}
-          title="Title V3"
-          subtitle={showSubtitle ? 'Subtitle' : undefined}
-          onTitlePress={() => setShowSnackbar(true)}
-          isScrolled={isScrolled}
-          leadingAction={
-            showLeftIcon
-              ? {
-                  type: 'back',
-                  onPress: () => navigation.goBack(),
-                }
-              : undefined
-          }
-          actions={actions}
-        />
-      ),
+      header: () => {
+        if (appbarConfiguration === 'small') {
+          return showTitleImage ? (
+            <AppbarV3
+              {...commonProps}
+              variant="small"
+              title="React Native Paper"
+              titleImage={titleImage}
+            />
+          ) : (
+            <AppbarV3
+              {...commonProps}
+              variant="small"
+              title="React Native Paper"
+              subtitle={
+                showSubtitle ? 'Material Design for React Native' : undefined
+              }
+            />
+          );
+        }
+
+        return showTitleImage ? (
+          <AppbarV3
+            {...commonProps}
+            variant={appbarConfiguration}
+            title="React Native Paper"
+            titleImage={titleImage}
+            subtitle={
+              showSubtitle ? 'Material Design for React Native' : undefined
+            }
+          />
+        ) : (
+          <AppbarV3
+            {...commonProps}
+            variant={appbarConfiguration}
+            title="React Native Paper"
+            subtitle={
+              showSubtitle ? 'Material Design for React Native' : undefined
+            }
+          />
+        );
+      },
     });
   }, [
     appbarConfiguration,
@@ -139,6 +191,7 @@ const AppbarV3Example = () => {
     isScrolled,
     showSearchIcon,
     showSubtitle,
+    showTitleImage,
     titleAlignment,
   ]);
 
@@ -177,7 +230,15 @@ const AppbarV3Example = () => {
       </View>
       <View style={styles.row}>
         <Text>Subtitle</Text>
-        <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
+        <Switch
+          value={showSubtitle}
+          disabled={showTitleImage && appbarConfiguration === 'small'}
+          onValueChange={setShowSubtitle}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Title image</Text>
+        <Switch value={showTitleImage} onValueChange={setShowTitleImage} />
       </View>
       <View style={styles.row}>
         <Text>Center title and subtitle</Text>
@@ -372,5 +433,9 @@ const styles = StyleSheet.create({
   },
   customColor: {
     backgroundColor: Palette.secondary80,
+  },
+  titleImage: {
+    width: 32,
+    height: 32,
   },
 });

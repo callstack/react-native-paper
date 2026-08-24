@@ -1,14 +1,18 @@
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue, ViewStyle } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AppbarAction from './AppbarAction';
 import AppbarContent from './AppbarContent';
-import type { AppbarAction as AppbarActionConfig, Props } from './types';
-import { APPBAR_ACTION_SIZE, getActionsWidth, getAppbarHeight } from './utils';
+import type { Props } from './types';
+import {
+  APPBAR_ACTION_SIZE,
+  APPBAR_TITLE_IMAGE_HEIGHT,
+  getActionsWidth,
+  getAppbarHeight,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme } from '../../types';
 import { getAppbarBorders } from '../Appbar/utils';
 import Surface from '../Surface';
 
@@ -39,13 +43,17 @@ const Appbar = ({
   ref,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides) as Theme;
+  const theme = useInternalTheme(themeOverrides);
   const detectedInsets = useSafeAreaInsets();
   const flattenedStyle = StyleSheet.flatten(style);
-  const { backgroundColor: customBackground, ...restStyle } = (flattenedStyle ||
-    {}) as Exclude<typeof flattenedStyle, number> & {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const resolvedStyle = (flattenedStyle || {}) as Exclude<
+    typeof flattenedStyle,
+    number
+  > & {
     backgroundColor?: ColorValue;
   };
+  const { backgroundColor: customBackground, ...restStyle } = resolvedStyle;
   const backgroundColor =
     customBackground ??
     (isScrolled ? theme.colors.surfaceContainer : theme.colors.surface);
@@ -57,7 +65,7 @@ const Appbar = ({
   const leftInset = safeAreaInsets?.left ?? detectedInsets.left;
   const rightInset = safeAreaInsets?.right ?? detectedInsets.right;
   const horizontalInset = Math.max(leftInset, rightInset);
-  const borderRadius = getAppbarBorders(restStyle as ViewStyle);
+  const borderRadius = getAppbarBorders(restStyle);
   const centered = titleAlignment === 'center';
 
   const renderLeadingAction = () =>
@@ -94,11 +102,23 @@ const Appbar = ({
     variant,
   };
 
+  const renderFlexibleTitleImage = () =>
+    titleImage ? (
+      <View
+        testID={`${testID}-content-title-image`}
+        aria-hidden
+        importantForAccessibility="no-hide-descendants"
+        style={styles.flexibleTitleImage}
+      >
+        {titleImage}
+      </View>
+    ) : null;
+
   const renderSmallAppbar = () => {
-    if (centered) {
+    if (centered || titleImage) {
       const sideWidth = Math.max(
         leadingAction ? APPBAR_ACTION_SIZE : 0,
-        getActionsWidth(actions as readonly AppbarActionConfig[])
+        getActionsWidth(actions)
       );
 
       return (
@@ -128,15 +148,40 @@ const Appbar = ({
     );
   };
 
-  const renderFlexibleAppbar = () => (
-    <View style={styles.flexibleContainer}>
-      <View style={styles.controlsRow}>
-        {renderLeadingAction()}
-        <View style={styles.trailingActions}>{renderActions()}</View>
+  const renderFlexibleAppbar = () => {
+    const sideWidth = Math.max(
+      leadingAction ? APPBAR_ACTION_SIZE : 0,
+      getActionsWidth(actions)
+    );
+
+    return (
+      <View style={styles.flexibleContainer}>
+        {titleImage ? (
+          <View style={styles.controlsRow}>
+            <View style={[styles.side, { width: sideWidth }]}>
+              {renderLeadingAction()}
+            </View>
+            {renderFlexibleTitleImage()}
+            <View
+              style={[
+                styles.side,
+                styles.trailingActions,
+                { width: sideWidth },
+              ]}
+            >
+              {renderActions()}
+            </View>
+          </View>
+        ) : (
+          <View style={styles.controlsRow}>
+            {renderLeadingAction()}
+            <View style={styles.trailingActions}>{renderActions()}</View>
+          </View>
+        )}
+        <AppbarContent {...contentProps} titleImage={undefined} />
       </View>
-      <AppbarContent {...contentProps} />
-    </View>
-  );
+    );
+  };
 
   return (
     <Surface
@@ -195,6 +240,15 @@ const styles = StyleSheet.create({
   },
   titleWithLeading: {
     marginStart: 4,
+  },
+  flexibleTitleImage: {
+    flex: 1,
+    height: APPBAR_TITLE_IMAGE_HEIGHT,
+    maxWidth: '100%',
+    marginTop: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
 
