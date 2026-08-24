@@ -75,7 +75,9 @@ it('renders menu with content styles', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-([0, 1, 2, 3, 4, 5] as Elevation[]).forEach((elevation) =>
+const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
+
+elevations.forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
     const theme = getTheme();
 

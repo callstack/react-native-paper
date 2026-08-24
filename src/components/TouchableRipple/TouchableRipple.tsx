@@ -232,14 +232,16 @@ const TouchableRipple = ({
       onPressOut?.(e);
 
       if (rippleEffectEnabled) {
-        const containers = e.currentTarget.querySelectorAll(
-          '[data-paper-ripple]'
-        ) as HTMLElement[];
+        const containers: NodeListOf<HTMLElement> =
+          e.currentTarget.querySelectorAll('[data-paper-ripple]');
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             containers.forEach((container) => {
-              const ripple = container.firstChild as HTMLSpanElement;
+              const ripple = container.firstElementChild;
+              if (!(ripple instanceof HTMLSpanElement)) {
+                return;
+              }
 
               Object.assign(ripple.style, {
                 transitionDuration: '250ms',

@@ -188,7 +188,9 @@ const Card = ({
   const total = React.Children.count(children);
   const siblings = React.Children.map(children, (child) =>
     React.isValidElement(child) && child.type
-      ? (child.type as any).displayName
+      ? typeof child.type !== 'string' && 'displayName' in child.type
+        ? child.type.displayName
+        : null
       : null
   );
 
@@ -197,6 +199,7 @@ const Card = ({
     mode: cardMode,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const { borderColor = themedBorderColor } = flattenedStyles;

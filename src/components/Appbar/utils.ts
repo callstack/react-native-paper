@@ -3,7 +3,7 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
 import { white } from '../../theme/colors';
-import type { InternalTheme, Theme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -19,7 +19,7 @@ const borderStyleProperties = [
   'borderTopRightRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
-];
+] satisfies readonly (keyof ViewStyle)[];
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
@@ -27,7 +27,7 @@ export const getAppbarBackgroundColor = (
   customBackground?: ColorValue,
   elevated?: boolean
 ) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   if (customBackground) {
     return customBackground;
   }
@@ -63,6 +63,7 @@ export const getAppbarBorders = (
   const borders: Record<string, number> = {};
 
   for (const property of borderStyleProperties) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const value = style[property as keyof typeof style];
     if (value) {
       borders[property] = value;
@@ -121,7 +122,7 @@ export const renderAppbarContent = ({
   mode = 'small',
   theme,
 }: RenderAppbarContentProps) => {
-  return React.Children.toArray(children as React.ReactNode | React.ReactNode[])
+  return React.Children.toArray(children)
     .filter((child) => child != null && typeof child !== 'boolean')
     .filter((child) =>
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
