@@ -19,12 +19,12 @@ const sizes = {
 
 const colors = {
   selectedContainerColor: 'secondaryContainer',
-  selectedContentColor: 'onSecondaryContainer',
+  selectedContentColor: 'onSecondaryContainerVariant',
   unselectedContentColor: 'onSurface',
   outlineColor: 'outline',
   disabledContentColor: 'onSurface',
   disabledOutlineColor: 'onSurface',
-  selectedStateLayerColor: 'onSecondaryContainer',
+  selectedStateLayerColor: 'onSecondaryContainerVariant',
   unselectedStateLayerColor: 'onSurface',
   focusIndicatorColor: 'secondary',
 } as const satisfies Record<string, ColorRole>;

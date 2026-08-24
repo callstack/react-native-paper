@@ -130,6 +130,19 @@ const colorRoleMap: RoleEntry[] = [
       Palette.secondary90,
     ],
   },
+  {
+    role: 'onSecondaryContainerVariant',
+    light: [
+      'system_on_secondary_fixed_variant',
+      'system_accent2_700',
+      Palette.secondary30,
+    ],
+    dark: [
+      'system_on_secondary_container_dark',
+      'system_accent2_100',
+      Palette.secondary90,
+    ],
+  },
   // Tertiary family
   {
     role: 'tertiary',

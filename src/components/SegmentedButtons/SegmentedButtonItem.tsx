@@ -38,6 +38,10 @@ export type Props = {
    */
   checked: boolean;
   /**
+   * Accessibility role determined by the segmented button selection variant.
+   */
+  role: 'radio' | 'checkbox';
+  /**
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
@@ -113,6 +117,7 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   checked,
+  role,
   'aria-label': ariaLabel,
   disabled,
   style,
@@ -143,6 +148,8 @@ const SegmentedButtonItem = ({
 
     checkmarkScale.value = withSpring(checked ? 1 : 0);
   }, [checked, checkmarkScale, showSelectedCheck]);
+
+  const accessibilityLabel = label || ariaLabel;
 
   const {
     backgroundColor,
@@ -238,11 +245,12 @@ const SegmentedButtonItem = ({
         onHoverOut={() => setHovered(false)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        aria-label={ariaLabel}
+        aria-label={accessibilityLabel}
         aria-disabled={disabled}
         aria-checked={checked}
-        role="button"
+        role={role}
         disabled={disabled}
+        focusable={!disabled}
         testID={testID}
         style={touchableStyle}
         background={background}

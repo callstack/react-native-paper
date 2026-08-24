@@ -2,6 +2,7 @@
 
 exports[`renders segmented button 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -31,6 +32,7 @@ exports[`renders segmented button 1`] = `
     }
   >
     <View
+      accessibilityLabel="Walking"
       accessibilityState={
         {
           "busy": undefined,
@@ -60,7 +62,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -115,7 +117,7 @@ exports[`renders segmented button 1`] = `
                 "top": 0,
               },
               {
-                "backgroundColor": "rgba(29, 25, 43, 1)",
+                "backgroundColor": "rgba(74, 68, 88, 1)",
                 "opacity": 0,
               },
             ]
@@ -137,7 +139,49 @@ exports[`renders segmented button 1`] = `
               },
             ]
           }
-        />
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flexShrink": 1,
+                      "textAlign": "center",
+                    },
+                    {
+                      "color": "rgba(74, 68, 88, 1)",
+                      "fontFamily": "System",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.1,
+                      "lineHeight": 20,
+                    },
+                    undefined,
+                  ],
+                ],
+              ]
+            }
+          >
+            Walking
+          </Text>
+        </View>
         <View
           pointerEvents="none"
           style={
@@ -188,6 +232,7 @@ exports[`renders segmented button 1`] = `
     }
   >
     <View
+      accessibilityLabel="Riding"
       accessibilityState={
         {
           "busy": undefined,
@@ -217,7 +262,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -294,7 +339,49 @@ exports[`renders segmented button 1`] = `
               },
             ]
           }
-        />
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flexShrink": 1,
+                      "textAlign": "center",
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                      "fontFamily": "System",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.1,
+                      "lineHeight": 20,
+                    },
+                    undefined,
+                  ],
+                ],
+              ]
+            }
+          >
+            Riding
+          </Text>
+        </View>
         <View
           pointerEvents="none"
           style={

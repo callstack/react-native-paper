@@ -42,36 +42,52 @@ type ConditionalValue<T extends string = string> =
       onValueChange: (value: T) => void;
     };
 
+type SegmentedButton<T extends string> = {
+  value: T;
+  /**
+   * Icon to display for the segment. Required when `label` is omitted.
+   */
+  icon?: IconSource;
+  disabled?: boolean;
+  'aria-label'?: string;
+  checkedColor?: string;
+  uncheckedColor?: string;
+  onPress?: (event: GestureResponderEvent) => void;
+  /**
+   * Non-empty visible label text. This is also used as the accessibility label.
+   */
+  label?: string;
+  showSelectedCheck?: boolean;
+  style?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  testID?: string;
+} & (
+  | { label: string }
+  | { label?: never; icon: IconSource; 'aria-label': string }
+);
+
 export type Props<T extends string = string> = {
   /**
+   * Accessibility label for the segmented button group.
+   */
+  'aria-label'?: string;
+  /**
    * Buttons to display as options in toggle button.
+   * Each button must contain a non-empty `label`, an `icon`, or both.
    * Button should contain the following properties:
    * - `value`: value of button (required)
-   * - `icon`: icon to display for the item
+   * - `icon`: icon to display for the item (required when `label` is omitted)
    * - `disabled`: whether the button is disabled
    * - `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.
    * - `checkedColor`: custom color for checked Text and Icon
    * - `uncheckedColor`: custom color for unchecked Text and Icon
    * - `onPress`: callback that is called when button is pressed
-   * - `label`: label text of the button
+   * - `label`: non-empty visible label text of the button, also used as its accessibility label
    * - `showSelectedCheck`: show optional check icon to indicate selected state
    * - `style`: pass additional styles for the button
    * - `testID`: testID to be used on tests
    */
-  buttons: {
-    value: T;
-    icon?: IconSource;
-    disabled?: boolean;
-    'aria-label'?: string;
-    checkedColor?: string;
-    uncheckedColor?: string;
-    onPress?: (event: GestureResponderEvent) => void;
-    label?: string;
-    showSelectedCheck?: boolean;
-    style?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<TextStyle>;
-    testID?: string;
-  }[];
+  buttons: SegmentedButton<T>[];
   /**
    * Density is applied to the height, to allow usage in denser UIs
    */
@@ -95,6 +111,7 @@ export type Props<T extends string = string> = {
  *   return (
  *     <SafeAreaView style={styles.container}>
  *       <SegmentedButtons
+ *         aria-label="Transport mode"
  *         value={value}
  *         onValueChange={setValue}
  *         buttons={[
@@ -124,6 +141,7 @@ export type Props<T extends string = string> = {
  *```
  */
 const SegmentedButtons = <T extends string = string>({
+  'aria-label': ariaLabel,
   value,
   onValueChange,
   buttons,
@@ -137,9 +155,14 @@ const SegmentedButtons = <T extends string = string>({
 
   const selectedValues =
     multiSelect && Array.isArray(value) ? value : undefined;
+  const singleSelectedIndex = selectedValues
+    ? -1
+    : buttons.findIndex((item) => value === item.value);
 
   return (
     <View
+      aria-label={ariaLabel}
+      role={multiSelect ? 'group' : 'radiogroup'}
       style={[styles.row, direction === 'rtl' ? styles.rtl : styles.ltr, style]}
     >
       {buttons.map((item, i) => {
@@ -148,7 +171,7 @@ const SegmentedButtons = <T extends string = string>({
 
         const checked = selectedValues
           ? selectedValues.includes(item.value)
-          : value === item.value;
+          : i === singleSelectedIndex;
 
         const onPress = (event: GestureResponderEvent) => {
           item.onPress?.(event);
@@ -168,6 +191,7 @@ const SegmentedButtons = <T extends string = string>({
             {...item}
             key={i}
             checked={checked}
+            role={multiSelect ? 'checkbox' : 'radio'}
             segment={segment}
             density={density}
             onPress={onPress}

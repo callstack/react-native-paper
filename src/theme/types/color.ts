@@ -29,6 +29,7 @@ export type ThemeColors = {
   onPrimaryContainer: ColorValue;
   onSecondary: ColorValue;
   onSecondaryContainer: ColorValue;
+  onSecondaryContainerVariant: ColorValue;
   onTertiary: ColorValue;
   onTertiaryContainer: ColorValue;
   onSurface: ColorValue;

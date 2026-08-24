@@ -1,5 +1,8 @@
+import { Text } from 'react-native';
+
 import { describe, expect, it, jest } from '@jest/globals';
 
+import { LocaleProvider } from '../../core/locale';
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
@@ -20,7 +23,10 @@ it('renders segmented button', async () => {
       <SegmentedButtons
         onValueChange={() => {}}
         value={'walk'}
-        buttons={[{ value: 'walk' }, { value: 'ride' }]}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
       />
     )
   ).toJSON();
@@ -34,8 +40,13 @@ it('renders disabled segmented button', async () => {
       onValueChange={() => {}}
       value="walk"
       buttons={[
-        { value: 'walk' },
-        { value: 'ride', disabled: true, testID: 'ride' },
+        { value: 'walk', label: 'Walking' },
+        {
+          value: 'ride',
+          label: 'Riding',
+          disabled: true,
+          testID: 'ride',
+        },
       ]}
     />
   );
@@ -52,8 +63,13 @@ it('renders checked segmented button with selected check', async () => {
       onValueChange={() => {}}
       value="walk"
       buttons={[
-        { value: 'walk', showSelectedCheck: true, testID: 'walk' },
-        { value: 'ride', disabled: true },
+        {
+          value: 'walk',
+          label: 'Walking',
+          showSelectedCheck: true,
+          testID: 'walk',
+        },
+        { value: 'ride', label: 'Riding', disabled: true },
       ]}
     />
   );
@@ -77,10 +93,11 @@ describe('selection behavior', () => {
         buttons={[
           {
             value: 'walk',
+            label: 'Walking',
             onPress: initialItemOnPress,
             testID: 'walk',
           },
-          { value: 'ride' },
+          { value: 'ride', label: 'Riding' },
         ]}
       />
     );
@@ -90,8 +107,13 @@ describe('selection behavior', () => {
         value="ride"
         onValueChange={onValueChange}
         buttons={[
-          { value: 'walk', onPress: itemOnPress, testID: 'walk' },
-          { value: 'ride' },
+          {
+            value: 'walk',
+            label: 'Walking',
+            onPress: itemOnPress,
+            testID: 'walk',
+          },
+          { value: 'ride', label: 'Riding' },
         ]}
       />
     );
@@ -104,13 +126,89 @@ describe('selection behavior', () => {
     expect(callOrder).toEqual(['item', 'value']);
   });
 
+  it('selects only the first matching item when single-select values are duplicated', async () => {
+    const user = userEvent.setup();
+    const duplicateOnPress = jest.fn();
+    const onValueChange = jest.fn();
+
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={onValueChange}
+        buttons={[
+          { value: 'walk', label: 'Walking', testID: 'first-walk' },
+          {
+            value: 'walk',
+            label: 'Walking again',
+            onPress: duplicateOnPress,
+            testID: 'second-walk',
+          },
+          { value: 'ride', label: 'Riding' },
+        ]}
+      />
+    );
+
+    const radios = screen.getAllByRole('radio');
+
+    expect(radios[0]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(radios[1]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: false })
+    );
+
+    await user.press(screen.getByTestId('second-walk'));
+
+    expect(duplicateOnPress).toHaveBeenCalledTimes(1);
+    expect(onValueChange).toHaveBeenCalledWith('walk');
+    expect(screen.getAllByRole('radio')[1]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: false })
+    );
+  });
+
+  it('keeps duplicate button values selected and toggleable in multiselect', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+
+    await render(
+      <SegmentedButtons<string>
+        multiSelect
+        value={['walk']}
+        onValueChange={onValueChange}
+        buttons={[
+          { value: 'walk', label: 'Walking', testID: 'first-walk' },
+          { value: 'walk', label: 'Walking again', testID: 'second-walk' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+      />
+    );
+
+    const checkboxes = screen.getAllByRole('checkbox');
+
+    expect(checkboxes[0]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(checkboxes[1]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+
+    await user.press(screen.getByTestId('second-walk'));
+
+    expect(onValueChange).toHaveBeenCalledWith([]);
+  });
+
   it('preserves multiselect append order and removes duplicate values', async () => {
     const user = userEvent.setup();
     const onValueChange = jest.fn();
     const buttons = [
-      { value: 'walk', testID: 'walk' },
-      { value: 'ride' },
-      { value: 'drive', testID: 'drive' },
+      { value: 'walk', label: 'Walking', testID: 'walk' },
+      { value: 'ride', label: 'Riding' },
+      { value: 'drive', label: 'Driving', testID: 'drive' },
     ];
     const { rerender } = await render(
       <SegmentedButtons
@@ -142,7 +240,10 @@ it('applies group theme overrides to items', async () => {
     <SegmentedButtons
       value="walk"
       onValueChange={() => {}}
-      buttons={[{ value: 'walk', testID: 'walk' }, { value: 'ride' }]}
+      buttons={[
+        { value: 'walk', label: 'Walking', testID: 'walk' },
+        { value: 'ride', label: 'Riding' },
+      ]}
       theme={{ colors: { secondaryContainer: '#123456' } }}
     />
   );
@@ -155,13 +256,67 @@ it('applies group theme overrides to items', async () => {
 describe('getSegmentedButtonColors', () => {
   const theme = getTheme();
 
+  it('maps the default light selected colors to secondary tone 30', () => {
+    const selectedColor = tokens.md.ref.palette.secondary30;
+
+    expect(theme.colors.onSecondaryContainer).toBe(
+      tokens.md.ref.palette.secondary10
+    );
+    expect(theme.colors[SegmentedButtonTokens.selectedContentColor]).toBe(
+      selectedColor
+    );
+    expect(theme.colors[SegmentedButtonTokens.selectedStateLayerColor]).toBe(
+      selectedColor
+    );
+  });
+
+  it('preserves dark, custom theme, and checked color resolution', () => {
+    const darkTheme = getTheme(true);
+    const customTheme = {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        onSecondaryContainerVariant: '#123456',
+      },
+    };
+
+    expect(
+      getSegmentedButtonColors({
+        theme: darkTheme,
+        checked: true,
+      })
+    ).toMatchObject({
+      textColor: tokens.md.ref.palette.secondary90,
+      stateLayerColor: tokens.md.ref.palette.secondary90,
+    });
+    expect(
+      getSegmentedButtonColors({
+        theme: customTheme,
+        checked: true,
+      })
+    ).toMatchObject({
+      textColor: '#123456',
+      stateLayerColor: '#123456',
+    });
+    expect(
+      getSegmentedButtonColors({
+        theme,
+        checked: true,
+        checkedColor: '#654321',
+      })
+    ).toMatchObject({
+      textColor: '#654321',
+      stateLayerColor: tokens.md.ref.palette.secondary30,
+    });
+  });
+
   it.each([
     {
       disabled: false,
       checked: true,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSecondaryContainer,
+      expected: theme.colors.onSecondaryContainerVariant,
     },
     {
       disabled: false,
@@ -217,7 +372,7 @@ describe('getSegmentedButtonColors', () => {
       checked: true,
       checkedColor: undefined,
       uncheckedColor: '000',
-      expected: theme.colors.onSecondaryContainer,
+      expected: theme.colors.onSecondaryContainerVariant,
     },
   ])(
     'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor',
@@ -365,6 +520,49 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
 });
 
 describe('segmented button presentation', () => {
+  it('renders selected content and state layers with the default light color', async () => {
+    const selectedColor = tokens.md.ref.palette.secondary30;
+
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={() => {}}
+        buttons={[
+          {
+            value: 'walk',
+            icon: ({ color }) => <Text testID="walk-glyph" style={{ color }} />,
+            label: 'Walking',
+            testID: 'walk',
+          },
+          { value: 'drive', label: 'Driving' },
+        ]}
+      />
+    );
+
+    const button = screen.getByTestId('walk');
+    const stateLayer = screen.getByTestId('walk-state-layer');
+
+    expect(screen.getByTestId('walk-label')).toHaveStyle({
+      color: selectedColor,
+    });
+    expect(screen.getByTestId('walk-glyph')).toHaveStyle({
+      color: selectedColor,
+    });
+    expect(stateLayer).toHaveStyle({
+      backgroundColor: selectedColor,
+      opacity: 0,
+    });
+
+    await fireEvent(button, 'hoverIn');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
+
+    await fireEvent(button, 'focus');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
+
+    await fireEvent(button, 'pressIn');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.pressed });
+  });
+
   it.each([
     { density: 'regular' as const, expected: 40 },
     { density: 'small' as const, expected: 36 },
@@ -485,11 +683,13 @@ describe('should render icon when', () => {
           {
             icon: 'walk',
             value: 'walk',
+            'aria-label': 'Walking',
             testID: 'walking-button',
           },
           {
             icon: 'car',
             value: 'drive',
+            'aria-label': 'Driving',
             testID: 'driving-button',
           },
         ]}
@@ -564,10 +764,12 @@ describe('should not render icon when', () => {
         buttons={[
           {
             value: 'walk',
+            label: 'Walking',
             testID: 'walking-button',
           },
           {
             value: 'drive',
+            label: 'Driving',
             testID: 'driving-button',
           },
         ]}
@@ -609,38 +811,260 @@ describe('should not render icon when', () => {
   });
 });
 
-describe('should have `accessibilityState={ checked: true }` when selected', () => {
-  it('should have two button selected', async () => {
-    const onValueChange = jest.fn();
+describe('segment content', () => {
+  it('accepts label-only, icon-only, and icon-and-label segments', async () => {
     await render(
-      <SegmentedButtons<string>
-        multiSelect
-        value={['walk', 'transit']}
+      <SegmentedButtons
+        value="label"
         buttons={[
-          { value: 'walk', label: 'Walking' },
-          { value: 'transit', label: 'Transit' },
-          { value: 'drive', label: 'Driving' },
+          { value: 'label', label: 'Label only', testID: 'label-only' },
+          {
+            value: 'icon',
+            icon: 'walk',
+            'aria-label': 'Icon only',
+            testID: 'icon-only',
+          },
+          {
+            value: 'both',
+            icon: 'car',
+            label: 'Icon and label',
+            testID: 'icon-and-label',
+          },
         ]}
-        onValueChange={onValueChange}
+        onValueChange={() => {}}
       />
     );
 
-    const buttons = screen.getAllByRole('button');
+    expect(screen.getByTestId('label-only-label')).toBeOnTheScreen();
+    expect(screen.queryByTestId('label-only-icon')).not.toBeOnTheScreen();
+    expect(screen.getByTestId('icon-only-icon')).toBeOnTheScreen();
+    expect(screen.queryByTestId('icon-only-label')).not.toBeOnTheScreen();
+    expect(screen.getByTestId('icon-and-label-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('icon-and-label-label')).toBeOnTheScreen();
+  });
+});
 
-    expect(buttons[0]).toHaveProp(
+describe('accessibility semantics', () => {
+  it('uses icon descriptions and visible text as segment names', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        buttons={[
+          { value: 'walk', icon: 'walk', 'aria-label': 'Walking' },
+          {
+            value: 'drive',
+            label: 'Driving',
+            'aria-label': 'Travel by car',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.getByRole('radio', { name: 'Walking' })).toBeOnTheScreen();
+    expect(screen.getByRole('radio', { name: 'Driving' })).toBeOnTheScreen();
+    expect(
+      screen.queryByRole('radio', { name: 'Travel by car' })
+    ).not.toBeOnTheScreen();
+  });
+
+  it('exposes a single-select radiogroup containing radio controls', async () => {
+    const group = (
+      await render(
+        <SegmentedButtons
+          aria-label="Transport mode"
+          value="walk"
+          buttons={[
+            { value: 'walk', label: 'Walking' },
+            { value: 'transit', label: 'Transit' },
+            { value: 'drive', label: 'Driving' },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
+    const radios = screen.getAllByRole('radio');
+
+    expect(group).toMatchObject({
+      props: { 'aria-label': 'Transport mode', role: 'radiogroup' },
+    });
+    expect(radios).toHaveLength(3);
+    expect(radios[0]).toHaveProp(
       'accessibilityState',
       expect.objectContaining({ checked: true })
     );
-    expect(buttons[1]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
-    expect(buttons[2]).toHaveProp(
+    expect(radios[1]).toHaveProp(
       'accessibilityState',
       expect.objectContaining({ checked: false })
     );
   });
 
+  it('exposes a multi-select group containing checkbox controls', async () => {
+    const onValueChange = jest.fn();
+    const group = (
+      await render(
+        <SegmentedButtons<string>
+          aria-label="Transport modes"
+          multiSelect
+          value={['walk', 'transit']}
+          buttons={[
+            { value: 'walk', label: 'Walking' },
+            { value: 'transit', label: 'Transit' },
+            { value: 'drive', label: 'Driving' },
+          ]}
+          onValueChange={onValueChange}
+        />
+      )
+    ).toJSON();
+    const checkboxes = screen.getAllByRole('checkbox');
+
+    expect(group).toMatchObject({
+      props: { 'aria-label': 'Transport modes', role: 'group' },
+    });
+    expect(checkboxes).toHaveLength(3);
+    expect(checkboxes[0]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(checkboxes[1]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(checkboxes[2]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: false })
+    );
+  });
+});
+
+describe('keyboard traversal', () => {
+  const buttons = [
+    { value: 'first', label: 'First', testID: 'first' },
+    {
+      value: 'disabled',
+      label: 'Disabled',
+      disabled: true,
+      testID: 'disabled',
+    },
+    { value: 'last', label: 'Last', testID: 'last' },
+  ];
+
+  it.each([
+    { variant: 'single-select', multiSelect: false },
+    { variant: 'multi-select', multiSelect: true },
+  ])(
+    'skips disabled segments in forward and reverse $variant tab order',
+    async ({ multiSelect }) => {
+      if (multiSelect) {
+        await render(
+          <SegmentedButtons
+            multiSelect
+            value={[]}
+            buttons={buttons}
+            onValueChange={() => {}}
+          />
+        );
+      } else {
+        await render(
+          <SegmentedButtons
+            value="first"
+            buttons={buttons}
+            onValueChange={() => {}}
+          />
+        );
+      }
+
+      const controls = screen.getAllByRole(multiSelect ? 'checkbox' : 'radio');
+
+      expect(controls[0]).toHaveProp('focusable', true);
+      expect(controls[1]).toHaveProp('focusable', false);
+      expect(controls[2]).toHaveProp('focusable', true);
+    }
+  );
+
+  it('has no keyboard focus target when every segment is disabled', async () => {
+    await render(
+      <SegmentedButtons
+        value="first"
+        buttons={buttons.map((button) => ({ ...button, disabled: true }))}
+        onValueChange={() => {}}
+      />
+    );
+
+    screen
+      .getAllByRole('radio')
+      .forEach((control) => expect(control).toHaveProp('focusable', false));
+  });
+
+  it.each(['ltr', 'rtl'] as const)(
+    'keeps disabled group edges out of the %s keyboard order',
+    async (direction) => {
+      const view = await render(
+        <LocaleProvider direction={direction}>
+          <SegmentedButtons
+            value="middle"
+            buttons={[
+              { value: 'first', label: 'First', disabled: true },
+              { value: 'middle', label: 'Middle' },
+              { value: 'last', label: 'Last', disabled: true },
+            ]}
+            onValueChange={() => {}}
+          />
+        </LocaleProvider>
+      );
+      const controls = screen.getAllByRole('radio');
+
+      expect(view.root).toHaveStyle({ direction });
+      expect(controls[0]).toHaveProp('focusable', false);
+      expect(controls[1]).toHaveProp('focusable', true);
+      expect(controls[2]).toHaveProp('focusable', false);
+    }
+  );
+
+  it('updates the traversal targets when disabled segments change', async () => {
+    const view = await render(
+      <SegmentedButtons
+        value="first"
+        buttons={[
+          { value: 'first', label: 'First', disabled: true },
+          { value: 'last', label: 'Last' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.getByRole('radio', { name: 'First' })).toHaveProp(
+      'focusable',
+      false
+    );
+    expect(screen.getByRole('radio', { name: 'Last' })).toHaveProp(
+      'focusable',
+      true
+    );
+
+    await view.rerender(
+      <SegmentedButtons
+        value="first"
+        buttons={[
+          { value: 'first', label: 'First' },
+          { value: 'last', label: 'Last', disabled: true },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.getByRole('radio', { name: 'First' })).toHaveProp(
+      'focusable',
+      true
+    );
+    expect(screen.getByRole('radio', { name: 'Last' })).toHaveProp(
+      'focusable',
+      false
+    );
+  });
+});
+
+describe('selected check icon', () => {
   it('show selected check icon should be shown', async () => {
     const onValueChange = jest.fn();
 
