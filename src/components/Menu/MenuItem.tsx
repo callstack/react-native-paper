@@ -9,7 +9,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { useMenuItemLayout } from './context';
+import { useMenuItemLayout, useMenuRoot } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
@@ -220,8 +220,10 @@ const MenuItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const layout = useMenuItemLayout();
+  const root = useMenuRoot();
 
-  const colorScheme = colorSchemeProp ?? layout?.colorScheme ?? 'standard';
+  const colorScheme =
+    colorSchemeProp ?? layout?.colorScheme ?? root?.colorScheme ?? 'standard';
   const roundedTop = roundedTopProp ?? layout?.roundedTop ?? false;
   const roundedBottom = roundedBottomProp ?? layout?.roundedBottom ?? false;
 
@@ -249,11 +251,17 @@ const MenuItem = ({
     maxWidth,
   } = MenuTokens.sizes;
 
+  const hasSupportingText =
+    supportingText != null && typeof supportingText !== 'boolean';
+  const hasTrailingSupportingText =
+    trailingSupportingText != null &&
+    typeof trailingSupportingText !== 'boolean';
+
   const contentMaxWidth = getContentMaxWidth({
     iconWidth: iconSize,
     leadingIcon,
     trailingIcon,
-    hasTrailingSupportingText: Boolean(trailingSupportingText),
+    hasTrailingSupportingText,
   });
 
   const titleTextStyle = {
@@ -289,7 +297,7 @@ const MenuItem = ({
           minWidth,
           maxWidth,
           minHeight: dense ? denseItemHeight : itemHeight,
-          ...(supportingText
+          ...(hasSupportingText || hasTrailingSupportingText
             ? { paddingVertical: 8 }
             : { height: dense ? denseItemHeight : itemHeight }),
         },
@@ -345,7 +353,7 @@ const MenuItem = ({
           >
             {title}
           </Text>
-          {supportingText ? (
+          {hasSupportingText ? (
             <Text
               variant={MenuTokens.typography.supporting}
               selectable={false}
@@ -357,7 +365,7 @@ const MenuItem = ({
             </Text>
           ) : null}
         </View>
-        {trailingSupportingText ? (
+        {hasTrailingSupportingText ? (
           <Text
             variant={MenuTokens.typography.trailingSupporting}
             selectable={false}
