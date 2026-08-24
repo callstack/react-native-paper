@@ -125,6 +125,43 @@ describe('Menu Item', () => {
     ).toBeOnTheScreen();
   });
 
+  it('renders numeric supporting text values like 0', async () => {
+    await render(
+      <Menu.Item title="Unread" supportingText={0} trailingSupportingText={0} />
+    );
+
+    // One `0` for the supporting text, one for the trailing supporting text.
+    expect(screen.getAllByText('0')).toHaveLength(2);
+  });
+
+  it('ignores boolean placeholders for supporting text', async () => {
+    await render(
+      <Menu.Item
+        title="Paste"
+        supportingText={false}
+        trailingSupportingText={false}
+      />
+    );
+
+    expect(screen.queryByText('false')).toBeNull();
+    // No trailing text node: the row holds only the content column.
+    expect(contentRow('Paste').children).toHaveLength(1);
+  });
+
+  it('grows for a trailing-only row so large font scales are not clipped', async () => {
+    await render(
+      <Menu.Item title="Share" trailingSupportingText="⌘S" testID="menu-item" />
+    );
+
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      minHeight: MenuTokens.sizes.itemHeight,
+      paddingVertical: 8,
+    });
+    expect(screen.getByTestId('menu-item')).not.toHaveStyle({
+      height: MenuTokens.sizes.itemHeight,
+    });
+  });
+
   it('keeps fixed height for single-line items', async () => {
     await render(<Menu.Item title="Paste" testID="menu-item" />);
     expect(screen.getByTestId('menu-item')).toHaveStyle({ height: 48 });

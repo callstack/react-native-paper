@@ -247,6 +247,29 @@ it('uses tertiaryContainer for vibrant color scheme', async () => {
   });
 });
 
+it('inherits the vibrant color scheme for items rendered inside a wrapper', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="wrapped-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('Undo')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
+  });
+});
+
 it('applies first/last medium corners via layout context (no cloneElement props required)', async () => {
   const theme = LightTheme;
   const radius = theme.shapes.corner.medium;
