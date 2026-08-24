@@ -122,28 +122,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             testID="search-bar-icon-container"
           >
             <View
-              accessibilityLabel="search"
-              accessibilityState={
-                {
-                  "busy": undefined,
-                  "checked": undefined,
-                  "disabled": true,
-                  "expanded": undefined,
-                  "selected": undefined,
-                }
-              }
-              accessibilityValue={
-                {
-                  "max": undefined,
-                  "min": undefined,
-                  "now": undefined,
-                  "text": undefined,
-                }
-              }
               accessible={true}
+              aria-label="search"
               centered={true}
               collapsable={false}
-              focusable={true}
+              focusable={false}
               hitSlop={
                 {
                   "bottom": 6,
@@ -152,30 +135,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "top": 6,
                 }
               }
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
               role="button"
               style={
-                [
-                  {
-                    "overflow": "hidden",
-                  },
-                  [
-                    {
-                      "alignItems": "center",
-                      "flexGrow": 1,
-                      "justifyContent": "center",
-                    },
-                    undefined,
-                  ],
-                ]
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                  "overflow": "hidden",
+                }
               }
               testID="search-bar-icon"
             >
@@ -317,7 +284,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   {
                     "busy": undefined,
                     "checked": undefined,
-                    "disabled": false,
+                    "disabled": undefined,
                     "expanded": undefined,
                     "selected": undefined,
                   }
@@ -506,7 +473,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             {
               "busy": undefined,
               "checked": undefined,
-              "disabled": false,
+              "disabled": undefined,
               "expanded": undefined,
               "selected": undefined,
             }
@@ -749,7 +716,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             {
               "busy": undefined,
               "checked": undefined,
-              "disabled": false,
+              "disabled": undefined,
               "expanded": undefined,
               "selected": undefined,
             }

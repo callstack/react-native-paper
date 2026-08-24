@@ -97,6 +97,21 @@ describe('getIconButtonColor - icon color', () => {
     });
   });
 
+  it('should keep an explicit icon color when disabled', () => {
+    expect(
+      getIconButtonColor({
+        theme: getTheme(),
+        disabled: true,
+        customIconColor: 'purple',
+      })
+    ).toMatchObject({
+      // disabled is still conveyed by the opacity, so it must not silently
+      // override a color the caller asked for
+      iconColor: 'purple',
+      iconOpacity: stateOpacity.disabled,
+    });
+  });
+
   it('should return correct disabled color, for theme version 3', () => {
     expect(
       getIconButtonColor({

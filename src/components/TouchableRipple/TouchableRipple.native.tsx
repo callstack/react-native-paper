@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   PressableAndroidRippleConfig,
   StyleProp,
@@ -61,7 +61,12 @@ const TouchableRipple = ({
     onPressOut,
   });
 
-  const disabled = disabledProp || !hasPassedTouchHandler;
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -78,21 +83,44 @@ const TouchableRipple = ({
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
+  const containerStyle = TouchableRipple.supported
+    ? [useForeground && styles.overflowHidden, style]
+    : [borderless && styles.overflowHidden, style];
+
+  if (!isControl) {
+    return (
+      <Animated.View
+        {...rest}
+        ref={ref}
+        // Pressable defaults this to true, so keep it to preserve any role and
+        // state the caller set, e.g. a read only checked CheckboxItem.
+        accessible={rest.accessible !== false}
+        // A consumer role of button makes react-native-web render a real
+        // <button>, which is tabbable by default. Nothing to activate here.
+        focusable={rest.focusable ?? false}
+        style={containerStyle}
+      >
+        {React.Children.only(children)}
+      </Animated.View>
+    );
+  }
+
   if (TouchableRipple.supported) {
-    const androidRipple = rippleEffectEnabled
-      ? (background ?? {
-          color: calculatedRippleColor,
-          borderless,
-          foreground: useForeground,
-        })
-      : undefined;
+    const androidRipple =
+      rippleEffectEnabled && isInteractive
+        ? (background ?? {
+            color: calculatedRippleColor,
+            borderless,
+            foreground: useForeground,
+          })
+        : undefined;
 
     return (
       <Pressable
         {...rest}
         ref={ref}
-        disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        disabled={disabledProp}
+        style={containerStyle}
         android_ripple={androidRipple}
       >
         {React.Children.only(children)}
@@ -104,12 +132,12 @@ const TouchableRipple = ({
     <Pressable
       {...rest}
       ref={ref}
-      disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      disabled={disabledProp}
+      style={containerStyle}
     >
       {({ pressed }) => (
         <>
-          {pressed && rippleEffectEnabled && (
+          {pressed && rippleEffectEnabled && isInteractive && (
             <View
               testID="touchable-ripple-underlay"
               style={[

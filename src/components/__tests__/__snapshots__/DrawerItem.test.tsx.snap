@@ -3,60 +3,22 @@
 exports[`renders DrawerItem with icon 1`] = `
 <View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    focusable={false}
     role="button"
     style={
-      [
-        {
-          "overflow": "hidden",
-        },
-        [
-          {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
-            "height": 56,
-            "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
-          },
-          {
-            "backgroundColor": undefined,
-            "borderRadius": 28,
-          },
-          undefined,
-        ],
-      ]
+      {
+        "backgroundColor": undefined,
+        "borderRadius": 28,
+        "height": 56,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginLeft": 12,
+        "marginRight": 12,
+        "marginVertical": 0,
+        "overflow": "hidden",
+      }
     }
   >
     <View
@@ -162,60 +124,23 @@ exports[`renders DrawerItem with icon 1`] = `
 exports[`renders active DrawerItem 1`] = `
 <View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": true,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
+    aria-selected={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    focusable={false}
     role="button"
     style={
-      [
-        {
-          "overflow": "hidden",
-        },
-        [
-          {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
-            "height": 56,
-            "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
-          },
-          {
-            "backgroundColor": "rgba(232, 222, 248, 1)",
-            "borderRadius": 28,
-          },
-          undefined,
-        ],
-      ]
+      {
+        "backgroundColor": "rgba(232, 222, 248, 1)",
+        "borderRadius": 28,
+        "height": 56,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginLeft": 12,
+        "marginRight": 12,
+        "marginVertical": 0,
+        "overflow": "hidden",
+      }
     }
   >
     <View
@@ -325,7 +250,7 @@ exports[`renders basic DrawerItem 1`] = `
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": false,
+        "disabled": undefined,
         "expanded": undefined,
         "selected": undefined,
       }

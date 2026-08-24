@@ -41,50 +41,18 @@ exports[`renders chip with close button 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": false,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-disabled={false}
+      aria-selected={false}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      focusable={false}
       role="button"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "borderRadius": 8,
-            },
-            {
-              "width": "100%",
-            },
-          ],
-        ]
+        {
+          "borderRadius": 8,
+          "overflow": "hidden",
+          "width": "100%",
+        }
       }
       testID="chip"
     >
@@ -339,50 +307,18 @@ exports[`renders chip with custom close button 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": false,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-disabled={false}
+      aria-selected={false}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      focusable={false}
       role="button"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "borderRadius": 8,
-            },
-            {
-              "width": "100%",
-            },
-          ],
-        ]
+        {
+          "borderRadius": 8,
+          "overflow": "hidden",
+          "width": "100%",
+        }
       }
       testID="chip"
     >
@@ -637,50 +573,18 @@ exports[`renders chip with icon 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": false,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-disabled={false}
+      aria-selected={false}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      focusable={false}
       role="button"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "borderRadius": 8,
-            },
-            {
-              "width": "100%",
-            },
-          ],
-        ]
+        {
+          "borderRadius": 8,
+          "overflow": "hidden",
+          "width": "100%",
+        }
       }
       testID="chip"
     >
@@ -1162,50 +1066,18 @@ exports[`renders selected chip 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": true,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-disabled={false}
+      aria-selected={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      focusable={false}
       role="button"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "borderRadius": 8,
-            },
-            {
-              "width": "100%",
-            },
-          ],
-        ]
+        {
+          "borderRadius": 8,
+          "overflow": "hidden",
+          "width": "100%",
+        }
       }
       testID="chip"
     >
