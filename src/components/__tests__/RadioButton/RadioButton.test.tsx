@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 
@@ -9,6 +9,16 @@ describe('RadioButton', () => {
     const tree = (await render(<RadioButton value="first" />)).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('uses the MD3 40dp state layer', async () => {
+    await render(<RadioButton value="first" />);
+
+    expect(screen.getByRole('radio')).toHaveStyle({
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+    });
   });
 
   describe('when RadioButton is wrapped by RadioButtonContext.Provider', () => {

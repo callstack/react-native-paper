@@ -60,7 +60,12 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   testID?: string;
 };
 
-const { ringSize, dotSize, outlineWidth: OUTLINE_WIDTH } = RadioButtonTokens;
+const {
+  ringSize,
+  dotSize,
+  outlineWidth: OUTLINE_WIDTH,
+  stateLayerSize,
+} = RadioButtonTokens;
 
 /**
  * Radio buttons allow the selection a single option from a set.
@@ -236,7 +241,11 @@ RadioButton.displayName = 'RadioButton';
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 18,
+    width: stateLayerSize,
+    height: stateLayerSize,
+    borderRadius: stateLayerSize / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   radioContainer: {
     alignItems: 'center',
@@ -247,7 +256,6 @@ const styles = StyleSheet.create({
     width: ringSize,
     borderRadius: ringSize / 2,
     borderWidth: OUTLINE_WIDTH,
-    margin: 8,
   },
   dot: {
     height: dotSize,

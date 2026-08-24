@@ -8,6 +8,7 @@ const sizes = {
   ringSize: 20,
   dotSize: 10,
   outlineWidth: 2,
+  stateLayerSize: 40,
 } as const;
 
 const colors = {
