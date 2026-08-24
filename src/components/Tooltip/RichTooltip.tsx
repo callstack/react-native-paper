@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import type { PointerEvent, ViewStyle } from 'react-native';
 
-import Animated from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 
 import {
   takeSingletonSlot,
@@ -26,6 +26,8 @@ import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
+
+const AnimatedSurface = Reanimated.createAnimatedComponent(Surface);
 
 /**
  * Props passed to the `children` render function. Spread them onto the trigger
@@ -138,31 +140,8 @@ const RichTooltip = ({
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
-  const {
-    rendered,
-    measurement,
-    fadeStyle,
-    onLayout,
-    childrenWrapperRef,
-    enterDuration,
-  } = useTooltipFade(theme, visible);
-
-  // Android: elevation shadows don't participate in opacity compositing.
-  // Keep elevation at 0 during the enter fade so there's no grey-border
-  // artifact, then add it exactly when the content reaches full opacity.
-  const [elevationReady, setElevationReady] = React.useState(false);
-  React.useEffect(() => {
-    if (Platform.OS !== 'android') {
-      setElevationReady(true);
-      return;
-    }
-    if (visible && measurement.measured) {
-      const id = setTimeout(() => setElevationReady(true), enterDuration);
-      return () => clearTimeout(id);
-    }
-    setElevationReady(false);
-    return undefined;
-  }, [visible, measurement.measured, enterDuration]);
+  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
+    useTooltipFade(theme, visible);
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -338,24 +317,21 @@ const RichTooltip = ({
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
           />
-          <Animated.View
+          <Reanimated.View
             onLayout={onLayout}
             pointerEvents="box-none"
-            style={[
-              styles.container,
-              getTooltipPosition(measurement),
-              fadeStyle,
-            ]}
+            style={[styles.container, getTooltipPosition(measurement)]}
           >
             <Pressable {...tooltipHoverProps}>
-              <Surface
-                elevation={elevationReady ? Tokens.rich.elevation : 0}
+              <AnimatedSurface
+                elevation={Tokens.rich.elevation}
                 style={[
                   styles.surface,
                   {
                     backgroundColor: theme.colors[Tokens.rich.container],
                     borderRadius: theme.shapes.corner[Tokens.rich.shape],
                   },
+                  fadeStyle,
                 ]}
               >
                 {title ? (
@@ -387,9 +363,9 @@ const RichTooltip = ({
                     {actions({ dismiss: hide })}
                   </View>
                 ) : null}
-              </Surface>
+              </AnimatedSurface>
             </Pressable>
-          </Animated.View>
+          </Reanimated.View>
         </Portal>
       )}
       <View
