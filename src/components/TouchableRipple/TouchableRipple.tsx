@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -42,7 +42,8 @@ export type Props = PressableProps & {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press. If not set, will cause the touchable to be disabled.
+   * Function to execute on press. If not set, the touchable renders as a plain
+   * container and is not exposed as a control.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -136,6 +137,20 @@ const TouchableRipple = ({
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
 
   const handlePressIn = React.useCallback(
     (e: any) => {
@@ -272,14 +287,29 @@ const TouchableRipple = ({
     [onPressOut, rippleEffectEnabled]
   );
 
-  const hasPassedTouchHandler = hasTouchHandler({
-    onPress,
-    onLongPress,
-    onPressIn,
-    onPressOut,
-  });
+  if (!isControl) {
+    const state = { pressed: false, hovered: false, focused: false };
 
-  const disabled = disabledProp || !hasPassedTouchHandler;
+    return (
+      <Animated.View
+        {...rest}
+        ref={ref}
+        // Pressable defaults this to true, so keep it to preserve any role and
+        // state the caller set, e.g. a read only checked CheckboxItem.
+        accessible={rest.accessible !== false}
+        // A consumer role of button makes react-native-web render a real
+        // <button>, which is tabbable by default. Nothing to activate here.
+        focusable={rest.focusable ?? false}
+        style={[
+          styles.touchable,
+          styles.disabled,
+          typeof style === 'function' ? style(state) : style,
+        ]}
+      >
+        {resolveChildren(children, state)}
+      </Animated.View>
+    );
+  }
 
   return (
     <Pressable
@@ -287,13 +317,13 @@ const TouchableRipple = ({
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      disabled={disabled}
+      disabled={disabledProp}
       style={(state) => [
         styles.touchable,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
-        state.hovered && { backgroundColor: hoverColor },
-        disabled && styles.disabled,
+        state.hovered && isInteractive && { backgroundColor: hoverColor },
+        !isInteractive && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
@@ -319,7 +349,7 @@ const TouchableRipple = ({
 
         return (
           <>
-            {!disabled && touchTargetStyle && (
+            {isInteractive && touchTargetStyle && (
               <View aria-hidden style={touchTargetStyle} />
             )}
             {resolveChildren(children, state)}

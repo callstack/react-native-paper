@@ -61,12 +61,14 @@ const getIconColor = ({
   selected,
   customIconColor,
 }: BaseProps & { customIconColor?: ColorValue }) => {
-  if (disabled) {
-    return theme.colors.onSurface;
-  }
-
+  // An explicitly passed color is an instruction, so it outranks the disabled
+  // default. Disabled is still conveyed by the reduced icon opacity.
   if (typeof customIconColor !== 'undefined') {
     return customIconColor;
+  }
+
+  if (disabled) {
+    return theme.colors.onSurface;
   }
 
   if (isMode('contained')) {

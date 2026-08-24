@@ -86,8 +86,6 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
-  const onPressHandler = disabled ? undefined : onPress;
-
   return (
     <View style={styles.iconWrapper}>
       <IconButton
@@ -97,7 +95,8 @@ const TextInputIcon = ({
         iconColor={color}
         size={iconSize}
         style={[styles.icon, style]}
-        onPress={onPressHandler}
+        disabled={disabled}
+        onPress={onPress}
       />
     </View>
   );
