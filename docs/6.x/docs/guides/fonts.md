@@ -67,6 +67,11 @@ Platform.select({
 }),
 ```
 
+Material Design 3 splits the typescale across two font families: <b>Brand</b> (Display,
+Headline and Title Large) and <b>Plain</b> (Title Medium/Small, Label and Body). Both
+resolve to the same platform default above, so they are interchangeable until you
+override one of them.
+
 :::
 
 - #### Display
@@ -291,13 +296,30 @@ Platform.select({
   "fontFamily": "Font",
   "fontSize": 16,
   "fontWeight": "400",
-  "letterSpacing": 0.15,
+  "letterSpacing": 0.5,
   "lineHeight": 24,
 }
 ```
 
   </div>
 </div>
+
+- #### Emphasized
+
+Each of the 15 variants above has an `Emphasized` counterpart — `displayLargeEmphasized`,
+`bodyMediumEmphasized`, and so on. They keep the size, line height and letter spacing of
+their baseline variant and only raise the weight: Display, Headline, Title Large and Body
+go to `"500"`, while Title Medium/Small and Label go to `"700"`.
+
+```json
+"bodyMediumEmphasized": {
+  "fontFamily": "Font",
+  "fontSize": 14,
+  "fontWeight": "500",
+  "letterSpacing": 0.25,
+  "lineHeight": 20,
+}
+```
 
 :::info
 If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied:

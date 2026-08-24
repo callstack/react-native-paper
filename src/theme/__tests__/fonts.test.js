@@ -340,6 +340,40 @@ describe('configureFonts', () => {
     });
   });
 
+  it('resolves the Android font families per MD3 family assignment', () => {
+    mockPlatform('android');
+    const { typescale } = loadFonts();
+
+    for (const variant of ['bodyLarge', 'bodyMedium', 'bodySmall']) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '400',
+      });
+    }
+
+    for (const variant of [
+      'displayLargeEmphasized',
+      'displayMediumEmphasized',
+      'displaySmallEmphasized',
+      'headlineLargeEmphasized',
+      'headlineMediumEmphasized',
+      'headlineSmallEmphasized',
+      'titleLargeEmphasized',
+    ]) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif-medium',
+        fontWeight: '500',
+      });
+    }
+
+    for (const variant of ['displayLarge', 'headlineLarge', 'titleLarge']) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '400',
+      });
+    }
+  });
+
   it('should be deterministic', () => {
     mockPlatform('ios');
     const { configureFonts } = loadFonts();
