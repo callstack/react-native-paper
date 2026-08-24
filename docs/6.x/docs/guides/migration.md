@@ -6,6 +6,35 @@ TBC
 
 ## Components
 
+### Tooltip
+
+The `Tooltip` trigger is now a render function. Spread the supplied props onto
+the trigger element so the tooltip can attach its interactions without cloning
+the element.
+
+```tsx
+// Before (v5)
+<Tooltip title="Print">
+  <Appbar.Action icon="printer" onPress={handlePrint} />
+</Tooltip>
+
+// After (v6)
+<Tooltip title="Print">
+  {(props) => (
+    <Appbar.Action {...props} icon="printer" onPress={handlePrint} />
+  )}
+</Tooltip>
+```
+
+`Tooltip.Rich` is new in Paper 6.x and follows the same render-function pattern
+for its trigger:
+
+```tsx
+<Tooltip.Rich content="Print the current document">
+  {(props) => <Appbar.Action {...props} icon="printer" onPress={handlePrint} />}
+</Tooltip.Rich>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
