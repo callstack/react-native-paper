@@ -150,6 +150,7 @@ const IconButton = ({
   const {
     borderWidth = mode === 'outlined' && !selected ? 1 : 0,
     borderRadius = buttonSize / 2,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const borderStyles = {

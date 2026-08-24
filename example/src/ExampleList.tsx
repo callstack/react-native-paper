@@ -103,11 +103,9 @@ export const examples = {
   ...nestedExamples,
 };
 
-type MainExampleId = keyof typeof mainExamples;
-
-const data = (Object.keys(mainExamples) as MainExampleId[]).map((id) => ({
+const data = Object.entries(mainExamples).map(([id, example]) => ({
   id,
-  data: mainExamples[id],
+  data: example,
 }));
 
 export default function ExampleList() {

@@ -18,7 +18,7 @@ import Surface from './Surface';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import { cornerNone } from '../theme/tokens/sys/shape';
-import type { Theme, ThemeProp } from '../types';
+import type { ThemeProp } from '../types';
 
 interface Style {
   marginRight: number;
@@ -189,7 +189,7 @@ const Searchbar = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const { colors, fonts } = theme as Theme;
+  const { colors, fonts } = theme;
   const root = React.useRef<TextInput>(null);
 
   React.useImperativeHandle(ref, () => ({
