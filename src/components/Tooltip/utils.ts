@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native';
 import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
 
 type ChildrenMeasurement = {
@@ -134,8 +134,13 @@ export const getTooltipPosition = (
     measures = getChildrenMeasures(childStyle, children);
   }
 
-  return {
-    left: getTooltipXPosition(measures, tooltip),
-    top: getTooltipYPosition(measures, tooltip),
-  };
+  const left = getTooltipXPosition(measures, tooltip);
+  const top = getTooltipYPosition(measures, tooltip);
+
+  return Platform.OS === 'web'
+    ? { left, top }
+    : {
+        left: PixelRatio.roundToNearestPixel(left),
+        top: PixelRatio.roundToNearestPixel(top),
+      };
 };

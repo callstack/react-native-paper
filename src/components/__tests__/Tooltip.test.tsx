@@ -339,6 +339,28 @@ describe('Tooltip', () => {
             top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
           });
         });
+
+        it('snaps the tooltip position to the physical pixel grid', async () => {
+          const {
+            wrapper: { getByText, findByText },
+          } = await setup(
+            {},
+            { pageX: 220.2, pageY: 600.2, width: 80, height: 50 }
+          );
+
+          await user.longPress(getTrigger(getByText));
+
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
+            nativeEvent: {
+              layout: { width: 100.1, height: 100.1 },
+            },
+          });
+
+          expect(getTooltipContainer(getByText)).toHaveStyle({
+            left: 210,
+            top: 500,
+          });
+        });
       });
     });
   });
@@ -667,6 +689,24 @@ describe('Tooltip.Rich', () => {
       // Surface (container) uses the surfaceContainer color.
       expect(getSurface(getByText)).toHaveStyle({
         backgroundColor: getTheme().colors.surfaceContainer,
+      });
+    });
+
+    it('fades the Android shadow with the elevated surface', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup();
+
+      await user.press(getTrigger(getByText));
+      await fireEvent(getByText('Body text'), 'layout', {
+        nativeEvent: {
+          layout: { width: 100, height: 100 },
+        },
+      });
+
+      expect(getSurface(getByText)).toHaveStyle({
+        elevation: 3,
+        opacity: 1,
       });
     });
 

@@ -180,14 +180,27 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
   // measurement to compute the final position. Either side can arrive first:
   // stash the layout and let the measure callback pick it up if it's late.
   const onLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    tooltipLayout.current = layout;
+    // Positioning the tooltip causes another onLayout with different x/y but
+    // the same dimensions. Only its size affects our position calculation, so
+    // ignore that second event instead of rebuilding the animated native layer
+    // while it is fading in (which can move it by one physical pixel on
+    // Android).
+    if (
+      tooltipLayout.current?.width === layout.width &&
+      tooltipLayout.current?.height === layout.height
+    ) {
+      return;
+    }
+
+    const nextLayout = { ...layout, x: 0, y: 0 };
+    tooltipLayout.current = nextLayout;
     if (!childrenMeasurement.current) {
       return;
     }
 
     setMeasurement({
       children: childrenMeasurement.current,
-      tooltip: layout,
+      tooltip: nextLayout,
       measured: true,
     });
   };
@@ -210,6 +223,5 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     fadeStyle,
     onLayout,
     childrenWrapperRef,
-    enterDuration,
   };
 };
