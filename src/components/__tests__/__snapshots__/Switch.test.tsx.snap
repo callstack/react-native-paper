@@ -946,7 +946,9 @@ exports[`Switch render renders with checked icon 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "bottom": 0,
+            "justifyContent": "center",
             "left": 0,
             "position": "absolute",
             "right": 0,
@@ -1190,7 +1192,9 @@ exports[`Switch render renders with per-state icons 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "bottom": 0,
+            "justifyContent": "center",
             "left": 0,
             "position": "absolute",
             "right": 0,

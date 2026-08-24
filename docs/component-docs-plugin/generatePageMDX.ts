@@ -96,6 +96,27 @@ function generateThemeColors(
   `;
 }
 
+type LiveExampleData = {
+  module: string;
+  exports: string[];
+};
+
+function generateLiveExamplesImport(liveExample: LiveExampleData | undefined) {
+  if (!liveExample) {
+    return '';
+  }
+
+  return `\nimport { ${liveExample.exports.join(', ')} } from '${liveExample.module}';`;
+}
+
+function generateLiveExamples(liveExample: LiveExampleData | undefined) {
+  if (!liveExample) {
+    return '';
+  }
+
+  return `\n\n${liveExample.exports.map((name) => `<${name} />`).join('\n')}`;
+}
+
 function generateScreenshots(screenshotData: string | undefined) {
   if (!screenshotData) {
     return `<span />`;
@@ -224,8 +245,12 @@ export default function generatePageMDX(doc: ComponentDoc, link: string) {
   const summary = summaryMatch ? summaryMatch[1] : '';
   const usage = description.replace(summary, '');
 
+  const liveExample = customFields.liveExamples[doc.title];
   const themeColorsData = JSON.stringify(customFields.themeColors[doc.title]);
-  const screenshotData = JSON.stringify(customFields.screenshots[doc.title]);
+  // Live examples supersede screenshots, so a component never shows both.
+  const screenshotData = liveExample
+    ? undefined
+    : JSON.stringify(customFields.screenshots[doc.title]);
   const extendedExamplesData = JSON.stringify(
     customFields.extendedExamples[doc.title]
   );
@@ -241,11 +266,11 @@ import PropTable from '@docs/components/PropTable.tsx';
 import ExtendsLink from '@docs/components/ExtendsLink.tsx';
 import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';${generateLiveExamplesImport(liveExample)}
 
 ${summary}
 
-${generateScreenshots(screenshotData)}
+${generateScreenshots(screenshotData)}${generateLiveExamples(liveExample)}
 
 ${generateExtendedExamples(usage, extendedExamplesData)}
 
