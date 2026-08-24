@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {
+import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Shell from './Shell';
-import { Size, Variant } from './tokens';
+import type { Size, Variant } from './tokens';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 

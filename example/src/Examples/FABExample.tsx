@@ -1,19 +1,13 @@
 import * as React from 'react';
-import {
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 import {
   Chip,
   Divider,
   FAB,
-  FABSize,
-  FABVariant,
+  type FABSize,
+  type FABVariant,
   List,
   Switch,
   Text,

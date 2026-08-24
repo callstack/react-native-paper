@@ -1,27 +1,26 @@
 import * as React from 'react';
-import {
+import { Platform, StyleSheet } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 
 import Reanimated, {
-  AnimatedStyle,
   useAnimatedStyle,
   useSharedValue,
+  type AnimatedStyle,
   type SharedValue,
 } from 'react-native-reanimated';
 
 import Content from './Content';
 import {
-  Size,
+  type Size,
   Tokens,
-  Variant,
+  type Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
