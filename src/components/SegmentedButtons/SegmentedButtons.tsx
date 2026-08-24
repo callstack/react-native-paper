@@ -135,26 +135,29 @@ const SegmentedButtons = <T extends string = string>({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
 
+  const selectedValues =
+    multiSelect && Array.isArray(value) ? value : undefined;
+
   return (
-    <View style={[styles.row, { direction }, style]}>
+    <View
+      style={[styles.row, direction === 'rtl' ? styles.rtl : styles.ltr, style]}
+    >
       {buttons.map((item, i) => {
         const segment =
           i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
 
-        const checked =
-          multiSelect && Array.isArray(value)
-            ? value.includes(item.value)
-            : value === item.value;
+        const checked = selectedValues
+          ? selectedValues.includes(item.value)
+          : value === item.value;
 
-        const onPress = (e: GestureResponderEvent) => {
-          item.onPress?.(e);
+        const onPress = (event: GestureResponderEvent) => {
+          item.onPress?.(event);
 
-          const nextValue =
-            multiSelect && Array.isArray(value)
-              ? checked
-                ? value.filter((val) => item.value !== val)
-                : [...value, item.value]
-              : item.value;
+          const nextValue = selectedValues
+            ? checked
+              ? selectedValues.filter((val) => item.value !== val)
+              : [...selectedValues, item.value]
+            : item.value;
 
           // @ts-expect-error: TS doesn't preserve types after destructuring, so the type isn't inferred correctly
           onValueChange(nextValue);
@@ -182,6 +185,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     overflow: 'visible',
+  },
+  ltr: {
+    direction: 'ltr',
+  },
+  rtl: {
+    direction: 'rtl',
   },
 });
 

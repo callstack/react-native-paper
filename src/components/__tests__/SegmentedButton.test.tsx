@@ -1,7 +1,7 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { fireEvent, render, screen } from '../../test-utils';
+import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
@@ -9,6 +9,7 @@ import {
   getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
   getSegmentedButtonHeight,
+  getSegmentedButtonStateLayerOpacity,
 } from '../SegmentedButtons/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -58,6 +59,97 @@ it('renders checked segmented button with selected check', async () => {
   );
 
   expect(screen.getByTestId('walk-check-icon')).toBeOnTheScreen();
+});
+
+describe('selection behavior', () => {
+  it('uses updated item and value callbacks while preserving their order', async () => {
+    const user = userEvent.setup();
+    const initialItemOnPress = jest.fn();
+    const initialValueChange = jest.fn();
+    const callOrder: string[] = [];
+    const itemOnPress = jest.fn(() => callOrder.push('item'));
+    const onValueChange = jest.fn(() => callOrder.push('value'));
+
+    const { rerender } = await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={initialValueChange}
+        buttons={[
+          {
+            value: 'walk',
+            onPress: initialItemOnPress,
+            testID: 'walk',
+          },
+          { value: 'ride' },
+        ]}
+      />
+    );
+
+    await rerender(
+      <SegmentedButtons
+        value="ride"
+        onValueChange={onValueChange}
+        buttons={[
+          { value: 'walk', onPress: itemOnPress, testID: 'walk' },
+          { value: 'ride' },
+        ]}
+      />
+    );
+    await user.press(screen.getByTestId('walk'));
+
+    expect(initialItemOnPress).not.toHaveBeenCalled();
+    expect(initialValueChange).not.toHaveBeenCalled();
+    expect(itemOnPress).toHaveBeenCalledTimes(1);
+    expect(onValueChange).toHaveBeenCalledWith('walk');
+    expect(callOrder).toEqual(['item', 'value']);
+  });
+
+  it('preserves multiselect append order and removes duplicate values', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    const buttons = [
+      { value: 'walk', testID: 'walk' },
+      { value: 'ride' },
+      { value: 'drive', testID: 'drive' },
+    ];
+    const { rerender } = await render(
+      <SegmentedButtons
+        multiSelect
+        value={['walk', 'ride', 'walk']}
+        onValueChange={onValueChange}
+        buttons={buttons}
+      />
+    );
+
+    await user.press(screen.getByTestId('walk'));
+    expect(onValueChange).toHaveBeenLastCalledWith(['ride']);
+
+    await rerender(
+      <SegmentedButtons
+        multiSelect
+        value={['ride']}
+        onValueChange={onValueChange}
+        buttons={buttons}
+      />
+    );
+    await user.press(screen.getByTestId('drive'));
+    expect(onValueChange).toHaveBeenLastCalledWith(['ride', 'drive']);
+  });
+});
+
+it('applies group theme overrides to items', async () => {
+  await render(
+    <SegmentedButtons
+      value="walk"
+      onValueChange={() => {}}
+      buttons={[{ value: 'walk', testID: 'walk' }, { value: 'ride' }]}
+      theme={{ colors: { secondaryContainer: '#123456' } }}
+    />
+  );
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    backgroundColor: '#123456',
+  });
 });
 
 describe('getSegmentedButtonColors', () => {
@@ -213,6 +305,63 @@ describe('getSegmentedButtonColors', () => {
       textOpacity: stateOpacity.disabled,
     });
   });
+});
+
+describe('getSegmentedButtonStateLayerOpacity', () => {
+  it.each([
+    {
+      state: 'disabled',
+      disabled: true,
+      pressed: true,
+      focused: true,
+      hovered: true,
+      expected: 0,
+    },
+    {
+      state: 'pressed',
+      disabled: false,
+      pressed: true,
+      focused: true,
+      hovered: true,
+      expected: stateOpacity.pressed,
+    },
+    {
+      state: 'focused',
+      disabled: false,
+      pressed: false,
+      focused: true,
+      hovered: true,
+      expected: stateOpacity.focused,
+    },
+    {
+      state: 'hovered',
+      disabled: false,
+      pressed: false,
+      focused: false,
+      hovered: true,
+      expected: stateOpacity.hovered,
+    },
+    {
+      state: 'idle',
+      disabled: false,
+      pressed: false,
+      focused: false,
+      hovered: false,
+      expected: 0,
+    },
+  ])(
+    'returns the $state state opacity',
+    ({ disabled, pressed, focused, hovered, expected }) => {
+      expect(
+        getSegmentedButtonStateLayerOpacity({
+          disabled,
+          pressed,
+          focused,
+          hovered,
+        })
+      ).toBe(expected);
+    }
+  );
 });
 
 describe('segmented button presentation', () => {
