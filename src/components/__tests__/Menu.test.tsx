@@ -12,6 +12,15 @@ import Divider from '../Divider';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
+/** Read an Animated.Value without reaching into its internals. */
+const currentValue = (node: Animated.Value) => {
+  let value = NaN;
+  node.stopAnimation((v) => {
+    value = v;
+  });
+  return value;
+};
+
 const styles = StyleSheet.create({
   contentStyle: {
     borderTopLeftRadius: 0,
@@ -146,6 +155,29 @@ it('uses tertiaryContainer for vibrant color scheme', async () => {
 
   expect(screen.getByTestId('menu-surface')).toHaveStyle({
     backgroundColor: theme.colors.tertiaryContainer,
+  });
+});
+
+it('inherits the vibrant color scheme for items rendered inside a wrapper', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="wrapped-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('wrapped-item-title')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
   });
 });
 
@@ -400,9 +432,7 @@ it('applies animated contentStyle transform on the menu surface', async () => {
   });
 
   // Animation driver (jest Animated.timing stub) must update the value.
-  expect(
-    (advanced as Animated.Value & { __getValue: () => number }).__getValue()
-  ).toBe(1.5);
+  expect(currentValue(advanced)).toBe(1.5);
 
   // Re-mount contentStyle with the advanced value so Surface's render-time
   // flatten reflects 1.5 on the real menu surface outer layer.

@@ -18,6 +18,15 @@ import {
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
+/** Read an Animated.Value without reaching into its internals. */
+const currentValue = (node: Animated.Value) => {
+  let value = NaN;
+  node.stopAnimation((v) => {
+    value = v;
+  });
+  return value;
+};
+
 describe('Menu Item', () => {
   it('renders menu item', async () => {
     const tree = (
@@ -120,6 +129,42 @@ describe('Menu Item', () => {
         name: 'Share, send a link, keyboard shortcut Command S',
       })
     ).toBeOnTheScreen();
+  });
+
+  it('renders numeric supporting text values like 0', async () => {
+    await render(
+      <Menu.Item title="Unread" supportingText={0} trailingSupportingText={0} />
+    );
+
+    expect(screen.getByTestId('menu-item-supporting')).toHaveTextContent('0');
+    expect(
+      screen.getByTestId('menu-item-trailing-supporting')
+    ).toHaveTextContent('0');
+  });
+
+  it('ignores boolean placeholders for supporting text', async () => {
+    await render(
+      <Menu.Item
+        title="Paste"
+        supportingText={false}
+        trailingSupportingText={false}
+      />
+    );
+
+    expect(screen.queryByTestId('menu-item-supporting')).toBeNull();
+    expect(screen.queryByTestId('menu-item-trailing-supporting')).toBeNull();
+  });
+
+  it('grows for a trailing-only row so large font scales are not clipped', async () => {
+    await render(<Menu.Item title="Share" trailingSupportingText="⌘S" />);
+
+    expect(screen.getByTestId('menu-item')).toHaveStyle({
+      minHeight: MenuTokens.sizes.itemHeight,
+      paddingVertical: 8,
+    });
+    expect(screen.getByTestId('menu-item')).not.toHaveStyle({
+      height: MenuTokens.sizes.itemHeight,
+    });
   });
 
   it('keeps fixed height for single-line items', async () => {
@@ -350,11 +395,11 @@ describe('Menu open/close motion (I6 / D2)', () => {
     expect(finish).toHaveBeenCalled();
     // Concrete snap values on the real Animated drivers Menu uses
 
-    expect((opacity as unknown as { _value: number })._value).toBe(1);
+    expect(currentValue(opacity)).toBe(1);
 
-    expect((scale.x as unknown as { _value: number })._value).toBe(200);
+    expect(currentValue(scale.x)).toBe(200);
 
-    expect((scale.y as unknown as { _value: number })._value).toBe(100);
+    expect(currentValue(scale.y)).toBe(100);
 
     springSpy.mockRestore();
   });
@@ -398,7 +443,7 @@ describe('Menu open/close motion (I6 / D2)', () => {
     expect(springSpy).not.toHaveBeenCalled();
     expect(finish).toHaveBeenCalled();
 
-    expect((opacity as unknown as { _value: number })._value).toBe(0);
+    expect(currentValue(opacity)).toBe(0);
     springSpy.mockRestore();
   });
 });
