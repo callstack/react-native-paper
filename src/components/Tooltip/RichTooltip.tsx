@@ -332,9 +332,8 @@ const RichTooltip = ({
       {rendered && (
         <Portal>
           <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Close"
-            accessibilityHint="Dismisses the tooltip"
+            role="button"
+            aria-label="Close"
             onPress={handleBackdropPress}
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
