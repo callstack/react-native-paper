@@ -27,7 +27,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type AppbarConfiguration = AppbarV3Variant | 'small-centered';
 type FilledActionVariant = AppbarV3FilledAction['variant'];
 type FilledActionWidth = NonNullable<AppbarV3FilledAction['width']>;
 
@@ -44,7 +43,8 @@ const AppbarV3Example = () => {
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [appbarConfiguration, setAppbarConfiguration] =
-    React.useState<AppbarConfiguration>('small');
+    React.useState<AppbarV3Variant>('small');
+  const [isTitleCentered, setIsTitleCentered] = React.useState(false);
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showFilledAction, setShowFilledAction] = React.useState(false);
   const [filledActionVariant, setFilledActionVariant] =
@@ -57,16 +57,14 @@ const AppbarV3Example = () => {
   const theme = useTheme();
   const { bottom, left, right } = useSafeAreaInsets();
   const { height: windowHeight } = useWindowDimensions();
-  const isCentered = appbarConfiguration === 'small-centered';
-  const variant: AppbarV3Variant = isCentered ? 'small' : appbarConfiguration;
-  const titleAlignment: AppbarV3TitleAlignment = isCentered
+  const titleAlignment: AppbarV3TitleAlignment = isTitleCentered
     ? 'center'
     : 'leading';
 
   React.useLayoutEffect(() => {
     const standardActions: AppbarV3StandardAction[] = [];
 
-    if (!isCentered && showCalendarIcon) {
+    if (showCalendarIcon) {
       standardActions.push({
         key: 'calendar',
         icon: 'calendar',
@@ -110,7 +108,7 @@ const AppbarV3Example = () => {
       header: () => (
         <AppbarV3
           style={showCustomColor ? styles.customColor : null}
-          variant={variant}
+          variant={appbarConfiguration}
           titleAlignment={titleAlignment}
           title="Title V3"
           subtitle={showSubtitle ? 'Subtitle' : undefined}
@@ -129,7 +127,7 @@ const AppbarV3Example = () => {
       ),
     });
   }, [
-    isCentered,
+    appbarConfiguration,
     filledActionVariant,
     filledActionWidth,
     navigation,
@@ -142,7 +140,6 @@ const AppbarV3Example = () => {
     showSearchIcon,
     showSubtitle,
     titleAlignment,
-    variant,
   ]);
 
   const handleScroll = React.useCallback(
@@ -183,6 +180,10 @@ const AppbarV3Example = () => {
         <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
       </View>
       <View style={styles.row}>
+        <Text>Center title and subtitle</Text>
+        <Switch value={isTitleCentered} onValueChange={setIsTitleCentered} />
+      </View>
+      <View style={styles.row}>
         <Text>Filled trailing action</Text>
         <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
       </View>
@@ -205,8 +206,8 @@ const AppbarV3Example = () => {
       <View style={styles.row}>
         <Text>Calendar icon</Text>
         <Switch
-          value={isCentered ? false : showCalendarIcon}
-          disabled={isCentered || showFilledAction}
+          value={showCalendarIcon}
+          disabled={showFilledAction}
           onValueChange={setShowCalendarIcon}
         />
       </View>
@@ -244,9 +245,11 @@ const AppbarV3Example = () => {
             <List.Subheader>Style</List.Subheader>
             <RadioButton.Group
               value={filledActionVariant}
-              onValueChange={(value: string) =>
-                setFilledActionVariant(value as FilledActionVariant)
-              }
+              onValueChange={(value: string) => {
+                if (value === 'filled' || value === 'tonal') {
+                  setFilledActionVariant(value);
+                }
+              }}
             >
               <View style={styles.row}>
                 <Text>Primary filled</Text>
@@ -260,9 +263,11 @@ const AppbarV3Example = () => {
             <List.Subheader>Width</List.Subheader>
             <RadioButton.Group
               value={filledActionWidth}
-              onValueChange={(value: string) =>
-                setFilledActionWidth(value as FilledActionWidth)
-              }
+              onValueChange={(value: string) => {
+                if (value === 'default' || value === 'wide') {
+                  setFilledActionWidth(value);
+                }
+              }}
             >
               <View style={styles.row}>
                 <Text>Default</Text>
@@ -278,9 +283,15 @@ const AppbarV3Example = () => {
         <List.Section title="Appbar variants">
           <RadioButton.Group
             value={appbarConfiguration}
-            onValueChange={(value: string) =>
-              setAppbarConfiguration(value as AppbarConfiguration)
-            }
+            onValueChange={(value: string) => {
+              if (
+                value === 'small' ||
+                value === 'medium-flexible' ||
+                value === 'large-flexible'
+              ) {
+                setAppbarConfiguration(value);
+              }
+            }}
           >
             <View style={styles.row}>
               <Text>Small (default)</Text>
@@ -293,10 +304,6 @@ const AppbarV3Example = () => {
             <View style={styles.row}>
               <Text>Large flexible</Text>
               <RadioButton value="large-flexible" />
-            </View>
-            <View style={styles.row}>
-              <Text>Small (centered)</Text>
-              <RadioButton value="small-centered" />
             </View>
           </RadioButton.Group>
         </List.Section>
