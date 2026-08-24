@@ -3,12 +3,16 @@ import type { AppbarAction, AppbarVariant } from './types';
 export const APPBAR_ACTION_SIZE = 48;
 export const APPBAR_WIDE_ACTION_SIZE = 64;
 export const APPBAR_TITLE_IMAGE_HEIGHT = 32;
-export const APPBAR_SEARCH_WIDTH_BREAKPOINT = 312;
+export const APPBAR_SEARCH_MIN_WIDTH = 360;
+export const APPBAR_SEARCH_MAX_WIDTH = 720;
 
-export const getAppbarSearchWidth = (availableWidth: number) =>
-  availableWidth > APPBAR_SEARCH_WIDTH_BREAKPOINT
-    ? Math.max(APPBAR_SEARCH_WIDTH_BREAKPOINT, availableWidth / 2)
-    : availableWidth;
+export const getAppbarSearchWidth = (availableWidth: number) => {
+  if (availableWidth < APPBAR_SEARCH_MIN_WIDTH) {
+    return availableWidth;
+  }
+
+  return Math.min(availableWidth, APPBAR_SEARCH_MAX_WIDTH);
+};
 
 export const getAppbarHeight = (
   variant: AppbarVariant,
