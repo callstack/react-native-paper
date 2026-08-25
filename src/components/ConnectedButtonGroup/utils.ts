@@ -36,6 +36,19 @@ export const getConnectedButtonPosition = (
   return connectedButtonPositions.middle;
 };
 
+/**
+ * Which of a button's two sides morph with selection and press.
+ */
+export const morphingCorners: Record<
+  ConnectedButtonPosition,
+  { start: boolean; end: boolean }
+> = {
+  single: { start: false, end: false },
+  first: { start: false, end: true },
+  middle: { start: true, end: true },
+  last: { start: true, end: false },
+};
+
 export const getConnectedButtonSizeStyle = ({
   size,
   theme,

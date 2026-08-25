@@ -10,14 +10,12 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import {
-  connectedButtonPositions,
-  type ConnectedButtonProps as Props,
-} from './types';
+import type { ConnectedButtonProps as Props } from './types';
 import {
   getConnectedButtonColors,
   getConnectedButtonSizeStyle,
   getTestID,
+  morphingCorners,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -114,14 +112,7 @@ const ConnectedButton = ({
     [pressed, onPress]
   );
 
-  // The "outer" side keeps the group's fully-rounded radius; the "inner" side
-  // (the connected edge) morphs between the resting, pressed and selected radii.
-  const animateStart =
-    position === connectedButtonPositions.last ||
-    position === connectedButtonPositions.middle;
-  const animateEnd =
-    position === connectedButtonPositions.first ||
-    position === connectedButtonPositions.middle;
+  const { start: animateStart, end: animateEnd } = morphingCorners[position];
 
   // A single spring owns the morphing radius, derived from the current props
   // rather than written by the press handlers and the selection separately —
@@ -133,6 +124,10 @@ const ConnectedButton = ({
   );
 
   const animatedShapeStyle = useAnimatedStyle(() => {
+    // Read the plain number. A `withSpring` result is a stateful animation
+    // object and must never be handed to more than one style prop: four
+    // corners sharing one object step the same state machine four times a
+    // frame and desync.
     const morph = cornerRadius.value;
     const startRadius = animateStart ? morph : outerRadius;
     const endRadius = animateEnd ? morph : outerRadius;
@@ -148,9 +143,13 @@ const ConnectedButton = ({
     transform: [{ scale: checkScale.value }],
   }));
 
-  // The mirror of `checkIconStyle`: on a labelled button the incoming element
-  // grows in as `checkScale` moves. Icon-only buttons show both at once and
-  // never swap, so they stay at scale 1.
+  // The mirror of `checkIconStyle`, and it cannot be flattened to a constant.
+  // `useAnimatedStyle` caches its initial style from the component's *first*
+  // render, so whichever of the two remounts is painted at that cached value
+  // before the animation can take over. The icon only has something to grow
+  // from because `checkScale` still holds the previous selection when it
+  // mounts — see the effect above, whose after-paint timing is load-bearing.
+  // Icon-only buttons show both at once and never swap, so they stay at 1.
   const hasLabel = Boolean(label);
   const leadingIconStyle = useAnimatedStyle(
     () => ({
@@ -168,8 +167,10 @@ const ConnectedButton = ({
 
   // When the container is translucent (disabled), the fill is drawn by the
   // overlay below, so the base view stays transparent.
-  const containerBackground =
-    colors.containerOpacity < 1 ? undefined : colors.containerColor;
+  const hasContainerOverlay = colors.containerOpacity < 1;
+  const containerBackground = hasContainerOverlay
+    ? undefined
+    : colors.containerColor;
 
   return (
     <Animated.View
@@ -185,7 +186,7 @@ const ConnectedButton = ({
         style,
       ]}
     >
-      {colors.containerOpacity < 1 ? (
+      {hasContainerOverlay ? (
         // Opacity is applied as a style so PlatformColor container values
         // (Android dynamic themes) render at the MD3 disabled 12% correctly.
         <View

@@ -229,6 +229,47 @@ it('marks multi-select buttons with the checkbox role', async () => {
   expect(screen.getByTestId('walk')).toHaveProp('role', 'checkbox');
 });
 
+it('morphs only the connected corners of each position', async () => {
+  const { innerRadius, outerRadius } = getConnectedButtonSizeStyle({
+    size: 'small',
+    theme,
+  });
+
+  await renderGroup({ value: 'train' });
+
+  // first, unselected — leading corner pinned, trailing corner morphs
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    borderTopStartRadius: outerRadius,
+    borderTopEndRadius: innerRadius,
+  });
+  // middle, selected — both sides morph, so both reach the pill
+  expect(screen.getByTestId('train-container')).toHaveStyle({
+    borderTopStartRadius: outerRadius,
+    borderTopEndRadius: outerRadius,
+  });
+  // last, unselected — leading corner morphs, trailing corner pinned
+  expect(screen.getByTestId('drive-container')).toHaveStyle({
+    borderTopStartRadius: innerRadius,
+    borderTopEndRadius: outerRadius,
+  });
+});
+
+it('leaves a lone button fully rounded on both sides', async () => {
+  const { outerRadius } = getConnectedButtonSizeStyle({
+    size: 'small',
+    theme,
+  });
+
+  await renderGroup({
+    buttons: [{ value: 'walk', label: 'Walking', testID: 'walk' }],
+  });
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    borderTopStartRadius: outerRadius,
+    borderTopEndRadius: outerRadius,
+  });
+});
+
 describe('connected button shape tokens', () => {
   it('presses the inner corner sharper than its resting radius (M3)', () => {
     // small: inner = small (8dp), pressed inner = extraSmall (4dp)
@@ -242,11 +283,6 @@ describe('connected button shape tokens', () => {
   });
 
   it('resolves the pill corner to half the height, not the full-corner sentinel', () => {
-    // `cornerFull` is 9999. Animating a corner between it and the 8dp inner
-    // radius makes the spring overshoot by hundreds of units on the way back
-    // down, clamping the button square and bouncing — most visible on a middle
-    // button, where every corner morphs at once. Half the container height is
-    // the same pill and keeps the travel to a few pixels.
     const sizes: ConnectedButtonGroupSize[] = [
       'extra-small',
       'small',
