@@ -74,7 +74,7 @@ const DialogIcon = ({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
 
-  //@ts-ignore
+  // @ts-ignore
   const iconColor = color || colors.secondary;
 
   return (
