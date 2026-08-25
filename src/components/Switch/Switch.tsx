@@ -61,7 +61,7 @@ export type Props = {
    * Accessibility label for the switch. This is read by the screen reader when the user focuses the switch.
    */
   'aria-label'?: string;
-  ref?: React.RefObject<View | null>;
+  ref?: React.RefObject<View | null> | ((instance: View | null) => void) | null;
 };
 
 const {

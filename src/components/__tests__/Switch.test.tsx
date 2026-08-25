@@ -94,4 +94,15 @@ describe('Switch ref', () => {
 
     expect(typeof ref.current?.measure).toBe('function');
   });
+
+  it('accepts a callback ref', async () => {
+    let instance: View | null = null;
+    const ref: React.RefCallback<View> = (node) => {
+      instance = node;
+    };
+
+    await render(<Switch value ref={ref} />);
+
+    expect(instance).not.toBeNull();
+  });
 });
