@@ -4,6 +4,10 @@ import {
   connectedButtonSizeTokens,
   type ConnectedButtonGroupSize,
 } from './tokens';
+import {
+  connectedButtonPositions,
+  type ConnectedButtonPosition,
+} from './types';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
@@ -16,26 +20,20 @@ const stateOpacity = tokens.md.sys.state.opacity;
  */
 const DISABLED_CONTAINER_OPACITY = 0.12;
 
-/**
- * Position of a button within the connected group. Determines which corners
- * stay pinned to the outer (fully-rounded) radius and which morph.
- */
-export type ConnectedButtonPosition = 'first' | 'middle' | 'last' | 'single';
-
 export const getConnectedButtonPosition = (
   index: number,
   count: number
 ): ConnectedButtonPosition => {
   if (count <= 1) {
-    return 'single';
+    return connectedButtonPositions.single;
   }
   if (index === 0) {
-    return 'first';
+    return connectedButtonPositions.first;
   }
   if (index === count - 1) {
-    return 'last';
+    return connectedButtonPositions.last;
   }
-  return 'middle';
+  return connectedButtonPositions.middle;
 };
 
 export const getConnectedButtonSizeStyle = ({
@@ -129,3 +127,6 @@ export const getConnectedButtonColors = ({
 
   return { containerColor, containerOpacity, contentColor, contentOpacity };
 };
+
+export const getTestID = (testID: string | undefined, suffix: string) =>
+  testID ? `${testID}-${suffix}` : undefined;

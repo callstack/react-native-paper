@@ -1,12 +1,5 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type {
-  GestureResponderEvent,
-  PressableAndroidRippleConfig,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
 
 import Animated, {
   ReduceMotion,
@@ -15,102 +8,21 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-import type { ConnectedButtonGroupSize } from './tokens';
+import {
+  connectedButtonPositions,
+  type ConnectedButtonProps as Props,
+} from './types';
 import {
   getConnectedButtonColors,
   getConnectedButtonSizeStyle,
-  type ConnectedButtonPosition,
+  getTestID,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { ThemeProp } from '../../types';
-import Icon, { type IconSource } from '../Icon';
-import TouchableRipple, {
-  type Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-
-export type Props = {
-  /**
-   * Whether the button is currently selected.
-   */
-  checked: boolean;
-  /**
-   * Whether the parent group allows multiple selections. Controls the
-   * accessibility role (checkbox vs radio).
-   */
-  multiSelect?: boolean;
-  /**
-   * Position of the button inside the connected group. Controls which corners
-   * stay pinned to the group's outer radius and which morph on selection/press.
-   */
-  position: ConnectedButtonPosition;
-  /**
-   * Size of the button, matching the parent group.
-   */
-  size: ConnectedButtonGroupSize;
-  /**
-   * Icon to display before the label.
-   */
-  icon?: IconSource;
-  /**
-   * Label text of the button.
-   */
-  label?: string;
-  /**
-   * Whether the button is disabled.
-   */
-  disabled?: boolean;
-  /**
-   * Show an optional check icon in place of the leading icon to indicate the
-   * selected state.
-   */
-  showSelectedCheck?: boolean;
-  /**
-   * Custom color for the selected label and icon.
-   */
-  checkedColor?: string;
-  /**
-   * Custom color for the unselected label and icon.
-   */
-  uncheckedColor?: string;
-  /**
-   * Type of background drawable to display the feedback (Android).
-   * https://reactnative.dev/docs/pressable#rippleconfig
-   */
-  background?: PressableAndroidRippleConfig;
-  /**
-   * Accessibility label. Read by the screen reader when the button is focused.
-   */
-  'aria-label'?: string;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: (event: GestureResponderEvent) => void;
-  /**
-   * Specifies the largest possible scale a label font can reach.
-   */
-  labelMaxFontSizeMultiplier?: number;
-  /**
-   * Sets additional distance outside of the button in which a press can be
-   * detected.
-   */
-  hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: StyleProp<ViewStyle>;
-  /**
-   * Style for the button label.
-   */
-  labelStyle?: StyleProp<TextStyle>;
-  /**
-   * testID to be used on tests.
-   */
-  testID?: string;
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-};
 
 /**
  * A single button within a {@link ConnectedButtonGroup}. Not exported on its
@@ -191,8 +103,12 @@ const ConnectedButton = ({
 
   // The "outer" side keeps the group's fully-rounded radius; the "inner" side
   // (the connected edge) morphs between the resting, pressed and selected radii.
-  const animateStart = position === 'last' || position === 'middle';
-  const animateEnd = position === 'first' || position === 'middle';
+  const animateStart =
+    position === connectedButtonPositions.last ||
+    position === connectedButtonPositions.middle;
+  const animateEnd =
+    position === connectedButtonPositions.first ||
+    position === connectedButtonPositions.middle;
 
   const animatedShapeStyle = useAnimatedStyle(() => {
     const morph = cornerRadius.value;
@@ -210,9 +126,6 @@ const ConnectedButton = ({
   const showIcon = Boolean(icon) && !showCheck;
   const iconGap = label ? { marginEnd: sizeStyle.iconLabelGap } : null;
 
-  const getTestID = (suffix: string) =>
-    testID ? `${testID}-${suffix}` : undefined;
-
   // When the container is translucent (disabled), the fill is drawn by the
   // overlay below, so the base view stays transparent.
   const containerBackground =
@@ -220,7 +133,7 @@ const ConnectedButton = ({
 
   return (
     <Animated.View
-      testID={getTestID('container')}
+      testID={getTestID(testID, 'container')}
       style={[
         styles.container,
         {
@@ -274,7 +187,7 @@ const ConnectedButton = ({
           ]}
         >
           {showCheck ? (
-            <View testID={getTestID('check-icon')} style={iconGap}>
+            <View testID={getTestID(testID, 'check-icon')} style={iconGap}>
               <Icon
                 source="check"
                 size={sizeStyle.iconSize}
@@ -283,7 +196,7 @@ const ConnectedButton = ({
             </View>
           ) : null}
           {showIcon ? (
-            <View testID={getTestID('icon')} style={iconGap}>
+            <View testID={getTestID(testID, 'icon')} style={iconGap}>
               <Icon
                 source={icon}
                 size={sizeStyle.iconSize}
@@ -299,7 +212,7 @@ const ConnectedButton = ({
               ellipsizeMode="tail"
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               style={[styles.label, { color: colors.contentColor }, labelStyle]}
-              testID={getTestID('label')}
+              testID={getTestID(testID, 'label')}
             >
               {label}
             </Text>
