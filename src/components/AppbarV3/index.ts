@@ -1,16 +1,16 @@
 export { default } from './Appbar';
 export { Appbar } from './Appbar';
 export type {
-  AppbarAction,
-  AppbarActions,
-  AppbarFilledAction,
-  AppbarLeadingAction,
+  AppbarFilledTrailingAction,
+  AppbarHeadlineAlignment,
+  AppbarHeadlinePressableProps,
+  AppbarHeadlineTextProps,
+  AppbarLeadingButton,
   AppbarSearchbarProps,
-  AppbarStandardAction,
+  AppbarStandardTrailingAction,
   AppbarTextProps,
-  AppbarTitleActionProps,
-  AppbarTitleAlignment,
-  AppbarTitleTextProps,
+  AppbarTrailingAction,
+  AppbarTrailingActions,
   AppbarVariant,
   Props,
 } from './types';

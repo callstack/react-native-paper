@@ -22,9 +22,9 @@ export type AppbarVariant =
   | 'medium-flexible'
   | 'large-flexible';
 
-export type AppbarTitleVariant = Exclude<AppbarVariant, 'search'>;
+export type AppbarHeadlineVariant = Exclude<AppbarVariant, 'search'>;
 
-export type AppbarTitleAlignment = 'leading' | 'center';
+export type AppbarHeadlineAlignment = 'leading' | 'center';
 
 export type AppbarTextProps = {
   /** Style applied to the text. */
@@ -33,12 +33,12 @@ export type AppbarTextProps = {
   maxFontSizeMultiplier?: number;
 };
 
-export type AppbarTitleTextProps = AppbarTextProps & {
-  /** Reference for the title heading. */
+export type AppbarHeadlineTextProps = AppbarTextProps & {
+  /** Reference for the headline heading. */
   ref?: React.RefObject<TextRef | null>;
 };
 
-export type AppbarTitleActionProps = Pick<
+export type AppbarHeadlinePressableProps = Pick<
   ViewProps,
   | 'accessibilityActions'
   | 'accessibilityHint'
@@ -55,50 +55,52 @@ export type AppbarTitleActionProps = Pick<
   | 'aria-selected'
   | 'onAccessibilityAction'
 > & {
-  /** Whether the title action is disabled. */
+  /** Whether the headline interaction is disabled. */
   disabled?: boolean;
 };
 
-type AppbarActionBase = Omit<
+type AppbarTrailingActionBase = Omit<
   IconButtonProps,
   'icon' | 'iconColor' | 'mode' | 'selected' | 'size' | 'theme' | 'aria-label'
 > & {
-  /** Stable key used when rendering an action from the actions array. */
+  /** Stable key used when rendering an action from the trailing actions array. */
   key: React.Key;
-  /** Icon displayed by the action. */
+  /** Icon displayed by the trailing action. */
   icon: IconSource;
   /** Accessible label announced for the icon button. */
   'aria-label': string;
-  /** Custom action icon color. */
+  /** Custom trailing action icon color. */
   color?: ColorValue;
 };
 
-export type AppbarStandardAction = AppbarActionBase & {
+export type AppbarStandardTrailingAction = AppbarTrailingActionBase & {
   variant?: 'standard';
   width?: never;
 };
 
-export type AppbarFilledAction = AppbarActionBase & {
-  /** Filled primary and tonal actions use the corresponding IconButton colors. */
+export type AppbarFilledTrailingAction = AppbarTrailingActionBase & {
+  /** Filled primary and tonal icons use the corresponding IconButton colors. */
   variant: 'filled' | 'tonal';
-  /** Expressive filled actions can use the default or wide container. */
+  /** Expressive filled icons can use the default or wide container. */
   width?: 'default' | 'wide';
 };
 
-export type AppbarAction = AppbarStandardAction | AppbarFilledAction;
+export type AppbarTrailingAction =
+  | AppbarStandardTrailingAction
+  | AppbarFilledTrailingAction;
 
-/** A filled action replaces the standard action group and is valid on its own. */
-export type AppbarActions =
-  | readonly AppbarStandardAction[]
-  | readonly [AppbarFilledAction];
+/** A filled trailing action replaces the standard action group and is valid on its own. */
+export type AppbarTrailingActions =
+  | readonly AppbarStandardTrailingAction[]
+  | readonly [AppbarFilledTrailingAction];
 
-type AppbarLeadingIconAction = Omit<AppbarStandardAction, 'key'> & {
+type AppbarLeadingIconButton = Omit<AppbarStandardTrailingAction, 'key'> & {
   key?: never;
   type?: 'icon';
 };
 
-type AppbarBackAction = Omit<
-  AppbarStandardAction,
+type AppbarBackButton = Omit<
+  AppbarStandardTrailingAction,
   'aria-label' | 'icon' | 'key' | 'type'
 > & {
   /** Uses the platform-aware Paper back icon. */
@@ -108,41 +110,41 @@ type AppbarBackAction = Omit<
   'aria-label'?: string;
 };
 
-export type AppbarLeadingAction = AppbarLeadingIconAction | AppbarBackAction;
+export type AppbarLeadingButton = AppbarLeadingIconButton | AppbarBackButton;
 
-type AppbarWrittenTitle = {
+type AppbarWrittenHeadline = {
   /** Written headline displayed by the app bar. */
-  title: string;
+  headline: string;
   /** Optional supporting text displayed below the headline. */
   subtitle?: string;
-  /** Props applied to the title heading. */
-  titleProps?: AppbarTitleTextProps;
+  /** Props applied to the headline heading. */
+  headlineProps?: AppbarHeadlineTextProps;
   /** Props applied to the subtitle text. */
   subtitleProps?: AppbarTextProps;
 };
 
-type AppbarTitleImage = {
+type AppbarHeadlineImage = {
   /** Image or logo displayed in the app bar. It should fit within 32dp height. */
-  titleImage: React.ReactElement;
+  headlineImage: React.ReactElement;
 };
 
-type AppbarTextTitle = AppbarWrittenTitle & {
-  variant: AppbarTitleVariant;
-  titleImage?: never;
+type AppbarTextHeadline = AppbarWrittenHeadline & {
+  variant: AppbarHeadlineVariant;
+  headlineImage?: never;
 };
 
-type AppbarSmallImageTitle = AppbarTitleImage & {
+type AppbarSmallImageHeadline = AppbarHeadlineImage & {
   variant: 'small';
-  /** Accessible page title. The image replaces this text visually. */
-  title: string;
+  /** Accessible page headline. The image replaces this text visually. */
+  headline: string;
   subtitle?: never;
-  titleProps?: never;
+  headlineProps?: never;
   subtitleProps?: never;
 };
 
-type AppbarFlexibleImageTitle = AppbarWrittenTitle &
-  AppbarTitleImage & {
-    variant: Exclude<AppbarTitleVariant, 'small'>;
+type AppbarFlexibleImageHeadline = AppbarWrittenHeadline &
+  AppbarHeadlineImage & {
+    variant: Exclude<AppbarHeadlineVariant, 'small'>;
   };
 
 type AppbarBaseProps = Omit<
@@ -155,8 +157,8 @@ type AppbarBaseProps = Omit<
   | 'role'
   | 'style'
 > & {
-  /** Optional leading navigation action. */
-  leadingAction?: AppbarLeadingAction;
+  /** Optional leading button. */
+  leadingButton?: AppbarLeadingButton;
   /** Uses the on-scroll container color when true. */
   isScrolled?: boolean;
   /** Override for the automatic top safe-area inset. */
@@ -172,24 +174,24 @@ type AppbarBaseProps = Omit<
   theme?: ThemeProp;
 };
 
-type AppbarTitleProps = {
+type AppbarHeadlineProps = {
   /** Headline and subtitle alignment. */
-  titleAlignment?: AppbarTitleAlignment;
-  /** Trailing icon actions. */
-  actions?: AppbarActions;
-  /** Style applied to the title area. */
+  headlineAlignment?: AppbarHeadlineAlignment;
+  /** Trailing actions. */
+  trailingActions?: AppbarTrailingActions;
+  /** Style applied to the headline and subtitle area. */
   contentStyle?: StyleProp<ViewStyle>;
   searchBar?: never;
 } & (
   | {
-      /** Called when the title area is pressed. */
-      onTitlePress: (event: GestureResponderEvent) => void;
-      /** Accessibility props applied to the interactive title area. */
-      titleActionProps?: AppbarTitleActionProps;
+      /** Called when the headline area is pressed. */
+      onHeadlinePress: (event: GestureResponderEvent) => void;
+      /** Props applied to the interactive headline area. */
+      headlinePressableProps?: AppbarHeadlinePressableProps;
     }
   | {
-      onTitlePress?: never;
-      titleActionProps?: never;
+      onHeadlinePress?: never;
+      headlinePressableProps?: never;
     }
 );
 
@@ -205,22 +207,26 @@ type AppbarSearchProps = {
   variant: 'search';
   /** Props forwarded to the existing Paper Searchbar. */
   searchBar: AppbarSearchbarProps;
-  /** Exterior trailing icon actions. */
-  actions?: readonly AppbarStandardAction[];
-  title?: never;
+  /** Exterior trailing actions. */
+  trailingActions?: readonly AppbarStandardTrailingAction[];
+  headline?: never;
   subtitle?: never;
-  titleImage?: never;
-  titleAlignment?: never;
-  titleProps?: never;
+  headlineImage?: never;
+  headlineAlignment?: never;
+  headlineProps?: never;
   subtitleProps?: never;
-  onTitlePress?: never;
-  titleActionProps?: never;
+  onHeadlinePress?: never;
+  headlinePressableProps?: never;
   contentStyle?: never;
 };
 
 export type Props = AppbarBaseProps &
   (
-    | (AppbarTitleProps &
-        (AppbarTextTitle | AppbarSmallImageTitle | AppbarFlexibleImageTitle))
+    | (AppbarHeadlineProps &
+        (
+          | AppbarTextHeadline
+          | AppbarSmallImageHeadline
+          | AppbarFlexibleImageHeadline
+        ))
     | AppbarSearchProps
   );

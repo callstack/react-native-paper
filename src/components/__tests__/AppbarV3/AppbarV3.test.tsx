@@ -6,13 +6,13 @@ import { render, screen } from '../../../test-utils';
 import AppbarV3 from '../../AppbarV3';
 import type { AppbarVariant } from '../../AppbarV3';
 
-const writtenTitleVariants: Exclude<AppbarVariant, 'search'>[] = [
+const writtenHeadlineVariants: Exclude<AppbarVariant, 'search'>[] = [
   'small',
   'medium-flexible',
   'large-flexible',
 ];
 
-const decorativeTitleImage = (
+const decorativeHeadlineImage = (
   <View>
     <View accessible role="img" accessibilityLabel="Brand artwork" />
     <Text accessible role="heading">
@@ -22,21 +22,21 @@ const decorativeTitleImage = (
 );
 
 describe('AppbarV3 accessibility', () => {
-  it.each(writtenTitleVariants)(
-    'exposes a written %s title as a heading',
+  it.each(writtenHeadlineVariants)(
+    'exposes a written %s headline as a heading',
     async (variant) => {
-      await render(<AppbarV3 variant={variant} title="Inbox" />);
+      await render(<AppbarV3 variant={variant} headline="Inbox" />);
 
       expect(screen.getByRole('heading', { name: 'Inbox' })).toBeOnTheScreen();
     }
   );
 
-  it('hides a small title image behind one named heading', async () => {
+  it('hides a small headline image behind one named heading', async () => {
     await render(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        titleImage={decorativeTitleImage}
+        headline="Inbox"
+        headlineImage={decorativeHeadlineImage}
       />
     );
 
@@ -47,13 +47,13 @@ describe('AppbarV3 accessibility', () => {
   });
 
   it.each(['medium-flexible', 'large-flexible'] as const)(
-    'does not expose duplicate content for a %s title image',
+    'does not expose duplicate content for a %s headline image',
     async (variant) => {
       await render(
         <AppbarV3
           variant={variant}
-          title="Inbox"
-          titleImage={decorativeTitleImage}
+          headline="Inbox"
+          headlineImage={decorativeHeadlineImage}
         />
       );
 
@@ -63,24 +63,28 @@ describe('AppbarV3 accessibility', () => {
     }
   );
 
-  it('exposes a pressable written title as a named button and heading', async () => {
-    const onTitlePress = jest.fn();
+  it('exposes a pressable written headline as a named button and heading', async () => {
+    const onHeadlinePress = jest.fn();
     await render(
-      <AppbarV3 variant="small" title="Inbox" onTitlePress={onTitlePress} />
+      <AppbarV3
+        variant="small"
+        headline="Inbox"
+        onHeadlinePress={onHeadlinePress}
+      />
     );
 
     expect(screen.getByRole('button', { name: 'Inbox' })).toBeOnTheScreen();
     expect(screen.getByRole('heading', { name: 'Inbox' })).toBeOnTheScreen();
   });
 
-  it('forwards custom title button accessibility props', async () => {
+  it('forwards custom headline button accessibility props', async () => {
     const onAccessibilityAction = jest.fn();
     await render(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        onTitlePress={() => {}}
-        titleActionProps={{
+        headline="Inbox"
+        onHeadlinePress={() => {}}
+        headlinePressableProps={{
           accessibilityActions: [{ name: 'activate', label: 'Open inbox' }],
           accessibilityHint: 'Opens the inbox menu',
           accessibilityLabel: 'Inbox options',
@@ -113,20 +117,20 @@ describe('AppbarV3 accessibility', () => {
     );
   });
 
-  it('uses default and custom labels for back actions', async () => {
+  it('uses default and custom labels for back buttons', async () => {
     await render(
       <View>
         <AppbarV3
           testID="default-back-appbar"
           variant="small"
-          title="Inbox"
-          leadingAction={{ type: 'back' }}
+          headline="Inbox"
+          leadingButton={{ type: 'back' }}
         />
         <AppbarV3
           testID="custom-back-appbar"
           variant="small"
-          title="Archive"
-          leadingAction={{ type: 'back', 'aria-label': 'Return to inbox' }}
+          headline="Archive"
+          leadingButton={{ type: 'back', 'aria-label': 'Return to inbox' }}
         />
       </View>
     );
@@ -137,12 +141,12 @@ describe('AppbarV3 accessibility', () => {
     ).toBeOnTheScreen();
   });
 
-  it('preserves icon action labels, hints, disabled state, and busy state', async () => {
+  it('preserves trailing action labels, hints, disabled state, and busy state', async () => {
     await render(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        actions={[
+        headline="Inbox"
+        trailingActions={[
           {
             key: 'save',
             icon: 'content-save',
@@ -155,39 +159,43 @@ describe('AppbarV3 accessibility', () => {
       />
     );
 
-    const action = screen.getByRole('button', {
+    const trailingAction = screen.getByRole('button', {
       name: 'Save message',
       busy: true,
       disabled: true,
     });
 
-    expect(action).toHaveProp('accessibilityHint', 'Saves the current draft');
-    expect(action).toBeDisabled();
-    expect(action).toBeBusy();
+    expect(trailingAction).toHaveProp(
+      'accessibilityHint',
+      'Saves the current draft'
+    );
+    expect(trailingAction).toBeDisabled();
+    expect(trailingAction).toBeBusy();
   });
 
   it.each(['small', 'medium-flexible'] as const)(
-    'hides decorative descendants of a %s title image',
+    'hides decorative descendants of a %s headline image',
     async (variant) => {
       await render(
         variant === 'small' ? (
           <AppbarV3
             variant="small"
-            title="Inbox"
-            titleImage={decorativeTitleImage}
+            headline="Inbox"
+            headlineImage={decorativeHeadlineImage}
           />
         ) : (
           <AppbarV3
             variant="medium-flexible"
-            title="Inbox"
-            titleImage={decorativeTitleImage}
+            headline="Inbox"
+            headlineImage={decorativeHeadlineImage}
           />
         )
       );
 
-      const imageContainer = screen.getByTestId('appbar-content-title-image', {
-        includeHiddenElements: true,
-      });
+      const imageContainer = screen.getByTestId(
+        'appbar-content-headline-image',
+        { includeHiddenElements: true }
+      );
 
       expect(imageContainer).toHaveProp('aria-hidden', true);
       expect(imageContainer).toHaveProp(
@@ -200,13 +208,13 @@ describe('AppbarV3 accessibility', () => {
     }
   );
 
-  it('exposes leading, title, and trailing elements in source order', async () => {
+  it('exposes the leading button, headline, and trailing actions in source order', async () => {
     await render(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        leadingAction={{ type: 'back', 'aria-label': 'Navigate back' }}
-        actions={[
+        headline="Inbox"
+        leadingButton={{ type: 'back', 'aria-label': 'Navigate back' }}
+        trailingActions={[
           { key: 'search', icon: 'magnify', 'aria-label': 'Search inbox' },
           { key: 'more', icon: 'dots-vertical', 'aria-label': 'More options' },
         ]}
@@ -221,26 +229,26 @@ describe('AppbarV3 accessibility', () => {
     ]);
   });
 
-  it('does not remount a surviving action when its configuration changes', async () => {
+  it('does not remount a surviving trailing action when its configuration changes', async () => {
     const { rerender } = await render(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        actions={[
+        headline="Inbox"
+        trailingActions={[
           { key: 'keep', icon: 'star', 'aria-label': 'Keep action' },
           { key: 'remove', icon: 'delete', 'aria-label': 'Remove action' },
         ]}
       />
     );
-    const survivingAction = screen.getByRole('button', {
+    const survivingTrailingAction = screen.getByRole('button', {
       name: 'Keep action',
     });
 
     await rerender(
       <AppbarV3
         variant="small"
-        title="Inbox"
-        actions={[
+        headline="Inbox"
+        trailingActions={[
           { key: 'new', icon: 'plus', 'aria-label': 'New action' },
           {
             key: 'keep',
@@ -253,7 +261,7 @@ describe('AppbarV3 accessibility', () => {
     );
 
     expect(screen.getByRole('button', { name: 'Keep action' })).toBe(
-      survivingAction
+      survivingTrailingAction
     );
   });
 });

@@ -1,20 +1,17 @@
 import { StyleSheet } from 'react-native';
 
-import type {
-  AppbarAction as AppbarActionConfig,
-  AppbarLeadingAction,
-} from './types';
+import type { AppbarLeadingButton, AppbarTrailingAction } from './types';
 import type { Theme } from '../../types';
 import AppbarBackIcon from '../Appbar/AppbarBackIcon';
 import IconButton from '../IconButton/IconButton';
 
 type Props = {
-  action: AppbarActionConfig | AppbarLeadingAction;
+  button: AppbarTrailingAction | AppbarLeadingButton;
   leading?: boolean;
   theme: Theme;
 };
 
-const AppbarAction = ({ action, leading = false, theme }: Props) => {
+const AppbarButton = ({ button, leading = false, theme }: Props) => {
   const {
     color,
     key: _key,
@@ -22,11 +19,11 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
     variant = 'standard',
     width,
     ...rest
-  } = action;
+  } = button;
   const { type: _type, ...buttonProps } = rest as typeof rest & {
     type?: 'back' | 'icon';
   };
-  const isBackAction = 'type' in action && action.type === 'back';
+  const isBackButton = 'type' in button && button.type === 'back';
   const mode =
     variant === 'filled'
       ? 'contained'
@@ -44,28 +41,28 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
   return (
     <IconButton
       {...buttonProps}
-      icon={action.icon ?? AppbarBackIcon}
+      icon={button.icon ?? AppbarBackIcon}
       aria-label={
-        isBackAction ? (action['aria-label'] ?? 'Back') : action['aria-label']
+        isBackButton ? (button['aria-label'] ?? 'Back') : button['aria-label']
       }
       iconColor={iconColor}
       mode={mode}
       selected={mode ? true : undefined}
       size={24}
       animated
-      style={[styles.action, width === 'wide' && styles.wideAction, style]}
+      style={[styles.button, width === 'wide' && styles.wideButton, style]}
       theme={theme}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  action: {
+  button: {
     margin: 4,
   },
-  wideAction: {
+  wideButton: {
     width: 56,
   },
 });
 
-export default AppbarAction;
+export default AppbarButton;

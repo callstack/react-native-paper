@@ -2,98 +2,98 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import type {
-  AppbarTitleAlignment,
-  AppbarTitleVariant,
+  AppbarHeadlineAlignment,
+  AppbarHeadlineVariant,
   Props as AppbarProps,
 } from './types';
-import { APPBAR_TITLE_IMAGE_HEIGHT } from './utils';
+import { APPBAR_HEADLINE_IMAGE_HEIGHT } from './utils';
 import type { Theme, TypescaleKey } from '../../types';
 import Text from '../Typography/Text';
 
 type Props = Pick<
   AppbarProps,
   | 'contentStyle'
-  | 'onTitlePress'
+  | 'headline'
+  | 'headlineImage'
+  | 'headlinePressableProps'
+  | 'headlineProps'
+  | 'onHeadlinePress'
   | 'subtitle'
   | 'subtitleProps'
-  | 'title'
-  | 'titleActionProps'
-  | 'titleImage'
-  | 'titleProps'
 > & {
-  alignment: AppbarTitleAlignment;
+  alignment: AppbarHeadlineAlignment;
   theme: Theme;
-  variant: AppbarTitleVariant;
+  variant: AppbarHeadlineVariant;
   style?: StyleProp<ViewStyle>;
   testID: string;
 };
 
-const titleVariants = {
+const headlineVariants = {
   small: 'titleLarge',
   'medium-flexible': 'headlineMedium',
   'large-flexible': 'displaySmall',
-} as const satisfies Record<AppbarTitleVariant, TypescaleKey>;
+} as const satisfies Record<AppbarHeadlineVariant, TypescaleKey>;
 
 const subtitleVariants = {
   small: 'labelMedium',
   'medium-flexible': 'labelLarge',
   'large-flexible': 'titleMedium',
-} as const satisfies Record<AppbarTitleVariant, TypescaleKey>;
+} as const satisfies Record<AppbarHeadlineVariant, TypescaleKey>;
 
 const subtitleSpacing = {
   small: 0,
   'medium-flexible': 4,
   'large-flexible': 8,
-} as const satisfies Record<AppbarTitleVariant, number>;
+} as const satisfies Record<AppbarHeadlineVariant, number>;
 
 const AppbarContent = ({
   alignment,
   contentStyle,
-  onTitlePress,
+  headline,
+  headlineImage,
+  headlinePressableProps,
+  headlineProps,
+  onHeadlinePress,
   subtitle,
   subtitleProps,
   testID,
   theme,
-  title,
-  titleActionProps,
-  titleImage,
-  titleProps,
   variant,
   style,
 }: Props) => {
-  const titleVariant = titleVariants[variant];
+  const headlineVariant = headlineVariants[variant];
   const subtitleVariant = subtitleVariants[variant];
   const centered = alignment === 'center';
-  const hasTitleImage = variant === 'small' && Boolean(titleImage);
+  const hasHeadlineImage = variant === 'small' && Boolean(headlineImage);
 
-  const content = hasTitleImage ? (
+  const content = hasHeadlineImage ? (
     <View
-      testID={`${testID}-title-image`}
+      testID={`${testID}-headline-image`}
       aria-hidden
       importantForAccessibility="no-hide-descendants"
-      style={styles.titleImage}
+      style={styles.headlineImage}
     >
-      {titleImage}
+      {headlineImage}
     </View>
   ) : (
     <>
       <Text
-        ref={titleProps?.ref}
+        ref={headlineProps?.ref}
         theme={theme}
-        variant={titleVariant}
+        variant={headlineVariant}
         numberOfLines={variant === 'small' ? 1 : 2}
         role="heading"
         accessible
-        maxFontSizeMultiplier={titleProps?.maxFontSizeMultiplier}
-        testID={`${testID}-title-text`}
+        maxFontSizeMultiplier={headlineProps?.maxFontSizeMultiplier}
+        testID={`${testID}-headline-text`}
         style={[
           styles.text,
           centered && styles.centeredText,
           { color: theme.colors.onSurface },
-          titleProps?.style,
+          headlineProps?.style,
         ]}
       >
-        {title}
+        {headline}
       </Text>
       {subtitle ? (
         <Text
@@ -127,29 +127,31 @@ const AppbarContent = ({
     ],
   };
 
-  if (onTitlePress) {
+  if (onHeadlinePress) {
     const {
       'aria-label': ariaLabel,
       accessibilityLabel,
       disabled,
-      ...restTitleActionProps
-    } = titleActionProps ?? {};
+      ...restHeadlinePressableProps
+    } = headlinePressableProps ?? {};
 
     return (
       <Pressable
         {...wrapperProps}
-        {...restTitleActionProps}
+        {...restHeadlinePressableProps}
         role="button"
         aria-label={
-          ariaLabel ?? accessibilityLabel ?? (hasTitleImage ? title : undefined)
+          ariaLabel ??
+          accessibilityLabel ??
+          (hasHeadlineImage ? headline : undefined)
         }
         aria-disabled={
-          restTitleActionProps['aria-disabled'] ??
-          restTitleActionProps.accessibilityState?.disabled ??
+          restHeadlinePressableProps['aria-disabled'] ??
+          restHeadlinePressableProps.accessibilityState?.disabled ??
           disabled
         }
         disabled={disabled}
-        onPress={onTitlePress}
+        onPress={onHeadlinePress}
       >
         {content}
       </Pressable>
@@ -159,9 +161,9 @@ const AppbarContent = ({
   return (
     <View
       {...wrapperProps}
-      accessible={hasTitleImage || undefined}
-      accessibilityLabel={hasTitleImage ? title : undefined}
-      role={hasTitleImage ? 'heading' : undefined}
+      accessible={hasHeadlineImage || undefined}
+      accessibilityLabel={hasHeadlineImage ? headline : undefined}
+      role={hasHeadlineImage ? 'heading' : undefined}
     >
       {content}
     </View>
@@ -189,8 +191,8 @@ const styles = StyleSheet.create({
   centeredText: {
     textAlign: 'center',
   },
-  titleImage: {
-    height: APPBAR_TITLE_IMAGE_HEIGHT,
+  headlineImage: {
+    height: APPBAR_HEADLINE_IMAGE_HEIGHT,
     maxWidth: '100%',
     alignItems: 'center',
     justifyContent: 'center',

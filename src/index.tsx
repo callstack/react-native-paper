@@ -63,16 +63,16 @@ export type { Props as AppbarContentProps } from './components/Appbar/AppbarCont
 export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
 export type {
   Props as AppbarV3Props,
-  AppbarAction as AppbarV3Action,
-  AppbarActions as AppbarV3Actions,
-  AppbarFilledAction as AppbarV3FilledAction,
-  AppbarLeadingAction as AppbarV3LeadingAction,
+  AppbarFilledTrailingAction as AppbarV3FilledTrailingAction,
+  AppbarHeadlineAlignment as AppbarV3HeadlineAlignment,
+  AppbarHeadlinePressableProps as AppbarV3HeadlinePressableProps,
+  AppbarHeadlineTextProps as AppbarV3HeadlineTextProps,
+  AppbarLeadingButton as AppbarV3LeadingButton,
   AppbarSearchbarProps as AppbarV3SearchbarProps,
-  AppbarStandardAction as AppbarV3StandardAction,
+  AppbarStandardTrailingAction as AppbarV3StandardTrailingAction,
   AppbarTextProps as AppbarV3TextProps,
-  AppbarTitleActionProps as AppbarV3TitleActionProps,
-  AppbarTitleAlignment as AppbarV3TitleAlignment,
-  AppbarTitleTextProps as AppbarV3TitleTextProps,
+  AppbarTrailingAction as AppbarV3TrailingAction,
+  AppbarTrailingActions as AppbarV3TrailingActions,
   AppbarVariant as AppbarV3Variant,
 } from './components/AppbarV3';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';

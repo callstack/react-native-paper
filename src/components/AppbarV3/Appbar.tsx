@@ -4,15 +4,15 @@ import type { ColorValue, LayoutChangeEvent, ViewProps } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import AppbarAction from './AppbarAction';
+import AppbarButton from './AppbarButton';
 import AppbarContent from './AppbarContent';
 import type { Props } from './types';
 import {
-  APPBAR_ACTION_SIZE,
-  APPBAR_TITLE_IMAGE_HEIGHT,
-  getActionsWidth,
+  APPBAR_HEADLINE_IMAGE_HEIGHT,
+  APPBAR_ICON_BUTTON_SIZE,
   getAppbarHeight,
   getAppbarSearchWidth,
+  getTrailingActionsWidth,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { getAppbarBorders } from '../Appbar/utils';
@@ -20,11 +20,15 @@ import Searchbar from '../Searchbar';
 import Surface from '../Surface';
 
 const Appbar = ({
-  actions = [],
   contentStyle,
+  headline,
+  headlineAlignment = 'leading',
+  headlineImage,
+  headlinePressableProps,
+  headlineProps,
   isScrolled = false,
-  leadingAction,
-  onTitlePress,
+  leadingButton,
+  onHeadlinePress,
   safeAreaInsets,
   searchBar,
   statusBarHeight,
@@ -33,11 +37,7 @@ const Appbar = ({
   subtitleProps,
   testID = 'appbar',
   theme: themeOverrides,
-  title,
-  titleActionProps,
-  titleAlignment = 'leading',
-  titleImage,
-  titleProps,
+  trailingActions = [],
   variant,
   ref,
   ...rest
@@ -64,7 +64,7 @@ const Appbar = ({
   const rightInset = safeAreaInsets?.right ?? detectedInsets.right;
   const horizontalInset = Math.max(leftInset, rightInset);
   const borderRadius = getAppbarBorders(restStyle);
-  const centered = titleAlignment === 'center';
+  const centered = headlineAlignment === 'center';
   const {
     accessibilityLabel: _accessibilityLabel,
     accessibilityRole: _accessibilityRole,
@@ -85,14 +85,14 @@ const Appbar = ({
     []
   );
 
-  const renderLeadingAction = () =>
-    leadingAction ? (
-      <AppbarAction action={leadingAction} leading theme={theme} />
+  const renderLeadingButton = () =>
+    leadingButton ? (
+      <AppbarButton button={leadingButton} leading theme={theme} />
     ) : null;
 
-  const renderActions = () =>
-    actions.map((action) => (
-      <AppbarAction key={action.key} action={action} theme={theme} />
+  const renderTrailingActions = () =>
+    trailingActions.map((action) => (
+      <AppbarButton key={action.key} button={action} theme={theme} />
     ));
 
   const renderSearchAppbar = () => {
@@ -115,7 +115,7 @@ const Appbar = ({
 
     return (
       <View style={styles.searchRow}>
-        {renderLeadingAction()}
+        {renderLeadingButton()}
         <View
           testID={`${testID}-search-slot`}
           onLayout={handleSearchSlotLayout}
@@ -144,7 +144,7 @@ const Appbar = ({
             theme={theme}
           />
         </View>
-        <View style={styles.trailingActions}>{renderActions()}</View>
+        <View style={styles.trailingActions}>{renderTrailingActions()}</View>
       </View>
     );
   };
@@ -152,30 +152,30 @@ const Appbar = ({
   const contentProps =
     variant !== 'search'
       ? {
-          alignment: titleAlignment,
+          alignment: headlineAlignment,
           contentStyle,
-          onTitlePress,
+          headline,
+          headlineImage,
+          headlinePressableProps,
+          headlineProps,
+          onHeadlinePress,
           subtitle,
           subtitleProps,
           testID: `${testID}-content`,
           theme,
-          title,
-          titleActionProps,
-          titleImage,
-          titleProps,
           variant,
         }
       : null;
 
-  const renderFlexibleTitleImage = () =>
-    titleImage ? (
+  const renderFlexibleHeadlineImage = () =>
+    headlineImage ? (
       <View
-        testID={`${testID}-content-title-image`}
+        testID={`${testID}-content-headline-image`}
         aria-hidden
         importantForAccessibility="no-hide-descendants"
-        style={styles.flexibleTitleImage}
+        style={styles.flexibleHeadlineImage}
       >
-        {titleImage}
+        {headlineImage}
       </View>
     ) : null;
 
@@ -184,22 +184,22 @@ const Appbar = ({
       return null;
     }
 
-    if (centered || titleImage) {
+    if (centered || headlineImage) {
       const sideWidth = Math.max(
-        leadingAction ? APPBAR_ACTION_SIZE : 0,
-        getActionsWidth(actions)
+        leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
+        getTrailingActionsWidth(trailingActions)
       );
 
       return (
         <View style={styles.smallRow}>
           <View style={[styles.side, { width: sideWidth }]}>
-            {renderLeadingAction()}
+            {renderLeadingButton()}
           </View>
           <AppbarContent {...contentProps} />
           <View
             style={[styles.side, styles.trailingActions, { width: sideWidth }]}
           >
-            {renderActions()}
+            {renderTrailingActions()}
           </View>
         </View>
       );
@@ -207,12 +207,14 @@ const Appbar = ({
 
     return (
       <View style={styles.smallRow}>
-        {renderLeadingAction()}
+        {renderLeadingButton()}
         <AppbarContent
           {...contentProps}
-          style={leadingAction ? styles.titleWithLeading : styles.titleLeading}
+          style={
+            leadingButton ? styles.headlineWithLeading : styles.headlineLeading
+          }
         />
-        <View style={styles.trailingActions}>{renderActions()}</View>
+        <View style={styles.trailingActions}>{renderTrailingActions()}</View>
       </View>
     );
   };
@@ -223,18 +225,18 @@ const Appbar = ({
     }
 
     const sideWidth = Math.max(
-      leadingAction ? APPBAR_ACTION_SIZE : 0,
-      getActionsWidth(actions)
+      leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
+      getTrailingActionsWidth(trailingActions)
     );
 
     return (
       <View style={styles.flexibleContainer}>
-        {titleImage ? (
+        {headlineImage ? (
           <View style={styles.controlsRow}>
             <View style={[styles.side, { width: sideWidth }]}>
-              {renderLeadingAction()}
+              {renderLeadingButton()}
             </View>
-            {renderFlexibleTitleImage()}
+            {renderFlexibleHeadlineImage()}
             <View
               style={[
                 styles.side,
@@ -242,16 +244,18 @@ const Appbar = ({
                 { width: sideWidth },
               ]}
             >
-              {renderActions()}
+              {renderTrailingActions()}
             </View>
           </View>
         ) : (
           <View style={styles.controlsRow}>
-            {renderLeadingAction()}
-            <View style={styles.trailingActions}>{renderActions()}</View>
+            {renderLeadingButton()}
+            <View style={styles.trailingActions}>
+              {renderTrailingActions()}
+            </View>
           </View>
         )}
-        <AppbarContent {...contentProps} titleImage={undefined} />
+        <AppbarContent {...contentProps} headlineImage={undefined} />
       </View>
     );
   };
@@ -328,15 +332,15 @@ const styles = StyleSheet.create({
   side: {
     flexDirection: 'row',
   },
-  titleLeading: {
+  headlineLeading: {
     marginStart: 12,
   },
-  titleWithLeading: {
+  headlineWithLeading: {
     marginStart: 4,
   },
-  flexibleTitleImage: {
+  flexibleHeadlineImage: {
     flex: 1,
-    height: APPBAR_TITLE_IMAGE_HEIGHT,
+    height: APPBAR_HEADLINE_IMAGE_HEIGHT,
     maxWidth: '100%',
     marginTop: 12,
     alignItems: 'center',

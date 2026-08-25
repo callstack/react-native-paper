@@ -1,8 +1,8 @@
-import type { AppbarAction, AppbarVariant } from './types';
+import type { AppbarTrailingAction, AppbarVariant } from './types';
 
-export const APPBAR_ACTION_SIZE = 48;
-export const APPBAR_WIDE_ACTION_SIZE = 64;
-export const APPBAR_TITLE_IMAGE_HEIGHT = 32;
+export const APPBAR_ICON_BUTTON_SIZE = 48;
+export const APPBAR_WIDE_ICON_BUTTON_SIZE = 64;
+export const APPBAR_HEADLINE_IMAGE_HEIGHT = 32;
 export const APPBAR_SEARCH_MIN_WIDTH = 360;
 export const APPBAR_SEARCH_MAX_WIDTH = 720;
 
@@ -29,12 +29,14 @@ export const getAppbarHeight = (
   return hasSubtitle ? 152 : 120;
 };
 
-export const getActionsWidth = (actions: readonly AppbarAction[]) =>
+export const getTrailingActionsWidth = (
+  actions: readonly AppbarTrailingAction[]
+) =>
   actions.reduce(
     (width, action) =>
       width +
       (action.variant !== 'standard' && action.width === 'wide'
-        ? APPBAR_WIDE_ACTION_SIZE
-        : APPBAR_ACTION_SIZE),
+        ? APPBAR_WIDE_ICON_BUTTON_SIZE
+        : APPBAR_ICON_BUTTON_SIZE),
     0
   );

@@ -19,33 +19,35 @@ import {
   Text,
 } from 'react-native-paper';
 import type {
-  AppbarV3Actions,
-  AppbarV3FilledAction,
-  AppbarV3LeadingAction,
-  AppbarV3StandardAction,
-  AppbarV3TitleAlignment,
+  AppbarV3FilledTrailingAction,
+  AppbarV3HeadlineAlignment,
+  AppbarV3LeadingButton,
+  AppbarV3StandardTrailingAction,
+  AppbarV3TrailingActions,
   AppbarV3Variant,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type FilledActionVariant = AppbarV3FilledAction['variant'];
-type FilledActionWidth = NonNullable<AppbarV3FilledAction['width']>;
+type FilledTrailingActionVariant = AppbarV3FilledTrailingAction['variant'];
+type FilledTrailingActionWidth = NonNullable<
+  AppbarV3FilledTrailingAction['width']
+>;
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 type SearchAppbarHeaderProps = {
-  actions: AppbarV3StandardAction[];
+  trailingActions: AppbarV3StandardTrailingAction[];
   isScrolled: boolean;
-  leadingAction?: AppbarV3LeadingAction;
+  leadingButton?: AppbarV3LeadingButton;
   showCustomColor: boolean;
 };
 
 const SearchAppbarHeader = ({
-  actions,
+  trailingActions,
   isScrolled,
-  leadingAction,
+  leadingButton,
   showCustomColor,
 }: SearchAppbarHeaderProps) => {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -53,10 +55,10 @@ const SearchAppbarHeader = ({
   return (
     <AppbarV3
       variant="search"
-      actions={actions}
       isScrolled={isScrolled}
-      leadingAction={leadingAction}
+      leadingButton={leadingButton}
       style={showCustomColor ? styles.customColor : null}
+      trailingActions={trailingActions}
       searchBar={{
         placeholder: 'Search components',
         'aria-label': 'Search components',
@@ -70,35 +72,36 @@ const SearchAppbarHeader = ({
 const AppbarV3Example = () => {
   const navigation = useNavigation('AppbarV3');
 
-  const [showLeftIcon, setShowLeftIcon] = React.useState(true);
+  const [showLeadingButton, setShowLeadingButton] = React.useState(true);
   const [showSubtitle, setShowSubtitle] = React.useState(true);
-  const [showTitleImage, setShowTitleImage] = React.useState(false);
+  const [showHeadlineImage, setShowHeadlineImage] = React.useState(false);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [appbarConfiguration, setAppbarConfiguration] =
     React.useState<AppbarV3Variant>('small');
-  const [isTitleCentered, setIsTitleCentered] = React.useState(false);
+  const [isHeadlineCentered, setIsHeadlineCentered] = React.useState(false);
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
-  const [showFilledAction, setShowFilledAction] = React.useState(false);
-  const [filledActionVariant, setFilledActionVariant] =
-    React.useState<FilledActionVariant>('filled');
-  const [filledActionWidth, setFilledActionWidth] =
-    React.useState<FilledActionWidth>('default');
+  const [showFilledTrailingAction, setShowFilledTrailingAction] =
+    React.useState(false);
+  const [filledTrailingActionVariant, setFilledTrailingActionVariant] =
+    React.useState<FilledTrailingActionVariant>('filled');
+  const [filledTrailingActionWidth, setFilledTrailingActionWidth] =
+    React.useState<FilledTrailingActionWidth>('default');
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
   const { bottom } = useSafeAreaInsets();
   const { height: windowHeight } = useWindowDimensions();
-  const titleAlignment: AppbarV3TitleAlignment = isTitleCentered
+  const headlineAlignment: AppbarV3HeadlineAlignment = isHeadlineCentered
     ? 'center'
     : 'leading';
 
   React.useLayoutEffect(() => {
-    const standardActions: AppbarV3StandardAction[] = [];
+    const standardTrailingActions: AppbarV3StandardTrailingAction[] = [];
 
     if (showCalendarIcon) {
-      standardActions.push({
+      standardTrailingActions.push({
         key: 'calendar',
         icon: 'calendar',
         'aria-label': 'Calendar',
@@ -107,7 +110,7 @@ const AppbarV3Example = () => {
     }
 
     if (showSearchIcon && appbarConfiguration !== 'search') {
-      standardActions.push({
+      standardTrailingActions.push({
         key: 'search',
         icon: 'magnify',
         'aria-label': 'Search',
@@ -116,7 +119,7 @@ const AppbarV3Example = () => {
     }
 
     if (showMoreIcon) {
-      standardActions.push({
+      standardTrailingActions.push({
         key: 'more',
         icon: MORE_ICON,
         'aria-label': 'More options',
@@ -124,40 +127,40 @@ const AppbarV3Example = () => {
       });
     }
 
-    const actions: AppbarV3Actions = showFilledAction
+    const trailingActions: AppbarV3TrailingActions = showFilledTrailingAction
       ? [
           {
             key: 'share',
             icon: 'share-variant',
             'aria-label': 'Share',
-            variant: filledActionVariant,
-            width: filledActionWidth,
+            variant: filledTrailingActionVariant,
+            width: filledTrailingActionWidth,
             onPress: () => {},
           },
         ]
-      : standardActions;
+      : standardTrailingActions;
 
-    const leadingAction = showLeftIcon
+    const leadingButton = showLeadingButton
       ? {
           type: 'back' as const,
           onPress: () => navigation.goBack(),
         }
       : undefined;
-    const titleImage = (
+    const headlineImage = (
       <Image
         source={require('../../assets/images/paper-icon.png')}
         resizeMode="contain"
-        style={styles.titleImage}
+        style={styles.headlineImage}
         accessibilityIgnoresInvertColors
       />
     );
     const commonProps = {
-      actions,
+      headlineAlignment,
       isScrolled,
-      leadingAction,
-      onTitlePress: () => setShowSnackbar(true),
+      leadingButton,
+      onHeadlinePress: () => setShowSnackbar(true),
       style: showCustomColor ? styles.customColor : null,
-      titleAlignment,
+      trailingActions,
     };
 
     navigation.setOptions({
@@ -165,27 +168,27 @@ const AppbarV3Example = () => {
         if (appbarConfiguration === 'search') {
           return (
             <SearchAppbarHeader
-              actions={standardActions.slice(0, 2)}
               isScrolled={isScrolled}
-              leadingAction={leadingAction}
+              leadingButton={leadingButton}
               showCustomColor={showCustomColor}
+              trailingActions={standardTrailingActions.slice(0, 2)}
             />
           );
         }
 
         if (appbarConfiguration === 'small') {
-          return showTitleImage ? (
+          return showHeadlineImage ? (
             <AppbarV3
               {...commonProps}
               variant="small"
-              title="React Native Paper"
-              titleImage={titleImage}
+              headline="React Native Paper"
+              headlineImage={headlineImage}
             />
           ) : (
             <AppbarV3
               {...commonProps}
               variant="small"
-              title="React Native Paper"
+              headline="React Native Paper"
               subtitle={
                 showSubtitle ? 'Material Design for React Native' : undefined
               }
@@ -193,12 +196,12 @@ const AppbarV3Example = () => {
           );
         }
 
-        return showTitleImage ? (
+        return showHeadlineImage ? (
           <AppbarV3
             {...commonProps}
             variant={appbarConfiguration}
-            title="React Native Paper"
-            titleImage={titleImage}
+            headline="React Native Paper"
+            headlineImage={headlineImage}
             subtitle={
               showSubtitle ? 'Material Design for React Native' : undefined
             }
@@ -207,7 +210,7 @@ const AppbarV3Example = () => {
           <AppbarV3
             {...commonProps}
             variant={appbarConfiguration}
-            title="React Native Paper"
+            headline="React Native Paper"
             subtitle={
               showSubtitle ? 'Material Design for React Native' : undefined
             }
@@ -217,19 +220,19 @@ const AppbarV3Example = () => {
     });
   }, [
     appbarConfiguration,
-    filledActionVariant,
-    filledActionWidth,
+    filledTrailingActionVariant,
+    filledTrailingActionWidth,
     navigation,
     showCalendarIcon,
     showCustomColor,
-    showFilledAction,
-    showLeftIcon,
+    showFilledTrailingAction,
+    showLeadingButton,
     showMoreIcon,
     isScrolled,
     showSearchIcon,
     showSubtitle,
-    showTitleImage,
-    titleAlignment,
+    showHeadlineImage,
+    headlineAlignment,
   ]);
 
   const handleScroll = React.useCallback(
@@ -248,8 +251,11 @@ const AppbarV3Example = () => {
   const renderDefaultOptions = () => (
     <>
       <View style={styles.row}>
-        <Text>Left icon</Text>
-        <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
+        <Text>Leading button</Text>
+        <Switch
+          value={showLeadingButton}
+          onValueChange={setShowLeadingButton}
+        />
       </View>
       <View style={styles.row}>
         <Text>Subtitle</Text>
@@ -257,40 +263,42 @@ const AppbarV3Example = () => {
           value={showSubtitle}
           disabled={
             appbarConfiguration === 'search' ||
-            (showTitleImage && appbarConfiguration === 'small')
+            (showHeadlineImage && appbarConfiguration === 'small')
           }
           onValueChange={setShowSubtitle}
         />
       </View>
       <View style={styles.row}>
-        <Text>Title image</Text>
+        <Text>Headline image</Text>
         <Switch
-          value={showTitleImage}
+          value={showHeadlineImage}
           disabled={appbarConfiguration === 'search'}
-          onValueChange={setShowTitleImage}
+          onValueChange={setShowHeadlineImage}
         />
       </View>
       <View style={styles.row}>
-        <Text>Center title and subtitle</Text>
+        <Text>Center headline and subtitle</Text>
         <Switch
-          value={isTitleCentered}
+          value={isHeadlineCentered}
           disabled={appbarConfiguration === 'search'}
-          onValueChange={setIsTitleCentered}
+          onValueChange={setIsHeadlineCentered}
         />
       </View>
       <View style={styles.row}>
         <Text>Filled trailing action</Text>
         <Switch
-          value={showFilledAction}
+          value={showFilledTrailingAction}
           disabled={appbarConfiguration === 'search'}
-          onValueChange={setShowFilledAction}
+          onValueChange={setShowFilledTrailingAction}
         />
       </View>
       <View style={styles.row}>
         <Text>Search icon</Text>
         <Switch
           value={showSearchIcon}
-          disabled={showFilledAction || appbarConfiguration === 'search'}
+          disabled={
+            showFilledTrailingAction || appbarConfiguration === 'search'
+          }
           onValueChange={setShowSearchIcon}
         />
       </View>
@@ -298,7 +306,7 @@ const AppbarV3Example = () => {
         <Text>More icon</Text>
         <Switch
           value={showMoreIcon}
-          disabled={showFilledAction}
+          disabled={showFilledTrailingAction}
           onValueChange={setShowMoreIcon}
         />
       </View>
@@ -306,7 +314,7 @@ const AppbarV3Example = () => {
         <Text>Calendar icon</Text>
         <Switch
           value={showCalendarIcon}
-          disabled={showFilledAction}
+          disabled={showFilledTrailingAction}
           onValueChange={setShowCalendarIcon}
         />
       </View>
@@ -339,14 +347,14 @@ const AppbarV3Example = () => {
         <List.Section title="Default options">
           {renderDefaultOptions()}
         </List.Section>
-        {showFilledAction ? (
-          <List.Section title="Filled action options">
+        {showFilledTrailingAction ? (
+          <List.Section title="Filled trailing action options">
             <List.Subheader>Style</List.Subheader>
             <RadioButton.Group
-              value={filledActionVariant}
+              value={filledTrailingActionVariant}
               onValueChange={(value: string) => {
                 if (value === 'filled' || value === 'tonal') {
-                  setFilledActionVariant(value);
+                  setFilledTrailingActionVariant(value);
                 }
               }}
             >
@@ -361,10 +369,10 @@ const AppbarV3Example = () => {
             </RadioButton.Group>
             <List.Subheader>Width</List.Subheader>
             <RadioButton.Group
-              value={filledActionWidth}
+              value={filledTrailingActionWidth}
               onValueChange={(value: string) => {
                 if (value === 'default' || value === 'wide') {
-                  setFilledActionWidth(value);
+                  setFilledTrailingActionWidth(value);
                 }
               }}
             >
@@ -417,7 +425,7 @@ const AppbarV3Example = () => {
         onDismiss={() => setShowSnackbar(false)}
         duration={Snackbar.DURATION_SHORT}
       >
-        Heading pressed
+        Headline pressed
       </Snackbar>
     </>
   );
@@ -441,7 +449,7 @@ const styles = StyleSheet.create({
   customColor: {
     backgroundColor: Palette.secondary80,
   },
-  titleImage: {
+  headlineImage: {
     width: 32,
     height: 32,
   },
