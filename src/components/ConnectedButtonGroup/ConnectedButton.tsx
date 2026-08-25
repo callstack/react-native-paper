@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import Animated, {
   ReduceMotion,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
@@ -69,7 +71,7 @@ const ConnectedButton = ({
 
   const { outerRadius, innerRadius, pressedRadius } = sizeStyle;
   const restRadius = checked ? outerRadius : innerRadius;
-  const cornerRadius = useSharedValue(restRadius);
+  const pressed = useSharedValue(false);
 
   // Selection-check behaviour matches `SegmentedButtonItem` for migration
   // parity: the check scales in and takes the place of the leading icon on a
@@ -87,27 +89,30 @@ const ConnectedButton = ({
     [theme.motion.spring.fast.spatial, reduceMotion]
   );
 
-  const isFirstRender = React.useRef(true);
-
   React.useEffect(() => {
-    // The shared values are already initialised to their resting state, so skip
-    // the mount render and only animate subsequent selection / size changes.
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    cornerRadius.value = withSpring(restRadius, springConfig);
+    // Springs to the value it already holds on mount, which is a no-op.
     checkScale.value = withSpring(showCheck ? 1 : 0, springConfig);
-  }, [restRadius, showCheck, cornerRadius, checkScale, springConfig]);
+  }, [showCheck, checkScale, springConfig]);
 
+  // Only the raw pressed flag is tracked here; the radius itself is derived
+  // from props in the worklet below, so no handler writes a radius directly.
   const handlePressIn = React.useCallback(() => {
-    // Pressed takes precedence over selection: even a selected (fully-rounded)
-    // button morphs its connected corner while pressed, matching the M3 spec.
-    cornerRadius.value = withSpring(pressedRadius, springConfig);
-  }, [cornerRadius, pressedRadius, springConfig]);
+    pressed.value = true;
+  }, [pressed]);
   const handlePressOut = React.useCallback(() => {
-    cornerRadius.value = withSpring(restRadius, springConfig);
-  }, [cornerRadius, restRadius, springConfig]);
+    pressed.value = false;
+  }, [pressed]);
+  // Clearing on press as well as press-out matters: re-pressing the already
+  // selected button reports the same value, so the group never re-renders and
+  // nothing else would restore the shape. A press-out swallowed by a gesture
+  // race used to leave the button stuck at its pressed corner indefinitely.
+  const handlePress = React.useCallback(
+    (event: GestureResponderEvent) => {
+      pressed.value = false;
+      onPress?.(event);
+    },
+    [pressed, onPress]
+  );
 
   // The "outer" side keeps the group's fully-rounded radius; the "inner" side
   // (the connected edge) morphs between the resting, pressed and selected radii.
@@ -117,6 +122,15 @@ const ConnectedButton = ({
   const animateEnd =
     position === connectedButtonPositions.first ||
     position === connectedButtonPositions.middle;
+
+  // A single spring owns the morphing radius, derived from the current props
+  // rather than written by the press handlers and the selection separately —
+  // those used to fire competing springs on one shared value, so a tap ran
+  // three transitions (pressed, old rest, new rest) instead of one.
+  const cornerRadius = useDerivedValue(
+    () => withSpring(pressed.value ? pressedRadius : restRadius, springConfig),
+    [restRadius, pressedRadius, springConfig]
+  );
 
   const animatedShapeStyle = useAnimatedStyle(() => {
     const morph = cornerRadius.value;
@@ -134,13 +148,9 @@ const ConnectedButton = ({
     transform: [{ scale: checkScale.value }],
   }));
 
-  // Whichever of the two mounts scales in from `checkScale`, which still holds
-  // the *previous* selection state on the render that swaps them — the effect
-  // above only retargets it after paint. So on select the check grows from 0,
-  // and on deselect the leading icon grows from 0 as `checkScale` unwinds.
-  // Do not "simplify" this to a constant: without it the icon pops back in at
-  // full size the moment the check unmounts. Icon-only buttons show both at
-  // once and never swap, so they stay at scale 1.
+  // The mirror of `checkIconStyle`: on a labelled button the incoming element
+  // grows in as `checkScale` moves. Icon-only buttons show both at once and
+  // never swap, so they stay at scale 1.
   const hasLabel = Boolean(label);
   const leadingIconStyle = useAnimatedStyle(
     () => ({
@@ -191,7 +201,7 @@ const ConnectedButton = ({
       ) : null}
       <TouchableRipple
         borderless
-        onPress={onPress}
+        onPress={handlePress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         disabled={disabled}
@@ -261,9 +271,11 @@ const ConnectedButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 'auto',
+    // `flex: 1` (basis 0), like `SegmentedButtonItem`, so every button in the
+    // group is the same width. With a content-derived basis the row reflows
+    // whenever the selection check mounts or unmounts, which reads as the
+    // buttons snapping to a new width on every tap.
+    flex: 1,
     overflow: 'hidden',
   },
   ripple: {

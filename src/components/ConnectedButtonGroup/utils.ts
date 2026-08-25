@@ -9,7 +9,7 @@ import {
   type ConnectedButtonPosition,
 } from './types';
 import { tokens } from '../../theme/tokens';
-import { resolveCornerRadius } from '../../theme/utils/shape';
+import { resolveCornerRadius, type ShapeToken } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -45,11 +45,15 @@ export const getConnectedButtonSizeStyle = ({
 }) => {
   const sizeTokens = connectedButtonSizeTokens[size];
 
+  const pillRadius = sizeTokens.containerHeight / 2;
+  const resolve = (token: ShapeToken) =>
+    token === 'full' ? pillRadius : resolveCornerRadius(theme, token);
+
   return {
     ...sizeTokens,
-    outerRadius: resolveCornerRadius(theme, sizeTokens.outerShape),
-    innerRadius: resolveCornerRadius(theme, sizeTokens.innerShape),
-    pressedRadius: resolveCornerRadius(theme, sizeTokens.pressedShape),
+    outerRadius: resolve(sizeTokens.outerShape),
+    innerRadius: resolve(sizeTokens.innerShape),
+    pressedRadius: resolve(sizeTokens.pressedShape),
   };
 };
 

@@ -19,9 +19,7 @@ exports[`renders connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -30,10 +28,10 @@ exports[`renders connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
-          "borderBottomStartRadius": 9999,
-          "borderTopEndRadius": 9999,
-          "borderTopStartRadius": 9999,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -145,9 +143,7 @@ exports[`renders connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -271,9 +267,7 @@ exports[`renders connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -282,9 +276,9 @@ exports[`renders connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
+          "borderBottomEndRadius": 20,
           "borderBottomStartRadius": 8,
-          "borderTopEndRadius": 9999,
+          "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
         undefined,
@@ -415,9 +409,7 @@ exports[`renders disabled connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -426,10 +418,10 @@ exports[`renders disabled connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
-          "borderBottomStartRadius": 9999,
-          "borderTopEndRadius": 9999,
-          "borderTopStartRadius": 9999,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -559,9 +551,7 @@ exports[`renders disabled connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -703,9 +693,7 @@ exports[`renders disabled connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -714,9 +702,9 @@ exports[`renders disabled connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
+          "borderBottomEndRadius": 20,
           "borderBottomStartRadius": 8,
-          "borderTopEndRadius": 9999,
+          "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
         undefined,
@@ -865,9 +853,7 @@ exports[`renders large connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -876,10 +862,10 @@ exports[`renders large connected button group 1`] = `
           "minWidth": 96,
         },
         {
-          "borderBottomEndRadius": 9999,
-          "borderBottomStartRadius": 9999,
-          "borderTopEndRadius": 9999,
-          "borderTopStartRadius": 9999,
+          "borderBottomEndRadius": 48,
+          "borderBottomStartRadius": 48,
+          "borderTopEndRadius": 48,
+          "borderTopStartRadius": 48,
         },
         undefined,
       ]
@@ -991,9 +977,7 @@ exports[`renders large connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -1117,9 +1101,7 @@ exports[`renders large connected button group 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -1128,9 +1110,9 @@ exports[`renders large connected button group 1`] = `
           "minWidth": 96,
         },
         {
-          "borderBottomEndRadius": 9999,
+          "borderBottomEndRadius": 48,
           "borderBottomStartRadius": 16,
-          "borderTopEndRadius": 9999,
+          "borderTopEndRadius": 48,
           "borderTopStartRadius": 16,
         },
         undefined,
@@ -1260,9 +1242,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -1271,10 +1251,10 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
-          "borderBottomStartRadius": 9999,
-          "borderTopEndRadius": 9999,
-          "borderTopStartRadius": 9999,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -1391,9 +1371,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
     style={
       [
         {
-          "flexBasis": "auto",
-          "flexGrow": 1,
-          "flexShrink": 1,
+          "flex": 1,
           "overflow": "hidden",
         },
         {
@@ -1402,9 +1380,9 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "minWidth": 48,
         },
         {
-          "borderBottomEndRadius": 9999,
+          "borderBottomEndRadius": 20,
           "borderBottomStartRadius": 8,
-          "borderTopEndRadius": 9999,
+          "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
         undefined,

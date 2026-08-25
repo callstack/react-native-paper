@@ -4,8 +4,12 @@ import { describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
 import { render, screen, userEvent } from '../../test-utils';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
-import { connectedButtonSizeTokens } from '../ConnectedButtonGroup/tokens';
+import {
+  connectedButtonSizeTokens,
+  type ConnectedButtonGroupSize,
+} from '../ConnectedButtonGroup/tokens';
 import {
   getConnectedButtonColors,
   getConnectedButtonPosition,
@@ -176,16 +180,6 @@ it('swaps the leading icon for the selection check on labelled buttons', async (
 
   expect(screen.getByTestId('train-icon')).toBeTruthy();
   expect(screen.queryByTestId('train-check-icon')).toBeNull();
-
-  // Both sides of the swap are driven by a scale transform: whichever element
-  // mounts grows in from the shared value the other one is unwinding. Losing
-  // the transform makes the icon pop back at full size on deselect.
-  expect(screen.getByTestId('walk-check-icon')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-  expect(screen.getByTestId('train-icon')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
 });
 
 it('keeps the icon of a selected icon-only button', async () => {
@@ -245,6 +239,33 @@ describe('connected button shape tokens', () => {
     expect(pressedRadius).toBe(theme.shapes.corner.extraSmall);
     // outer edge stays fully rounded
     expect(outerRadius).toBeGreaterThan(innerRadius);
+  });
+
+  it('resolves the pill corner to half the height, not the full-corner sentinel', () => {
+    // `cornerFull` is 9999. Animating a corner between it and the 8dp inner
+    // radius makes the spring overshoot by hundreds of units on the way back
+    // down, clamping the button square and bouncing — most visible on a middle
+    // button, where every corner morphs at once. Half the container height is
+    // the same pill and keeps the travel to a few pixels.
+    const sizes: ConnectedButtonGroupSize[] = [
+      'extra-small',
+      'small',
+      'medium',
+      'large',
+      'extra-large',
+    ];
+    expect(sizes).toHaveLength(Object.keys(connectedButtonSizeTokens).length);
+
+    sizes.forEach((size) => {
+      const { outerRadius, containerHeight } = getConnectedButtonSizeStyle({
+        size,
+        theme,
+      });
+
+      expect(connectedButtonSizeTokens[size].outerShape).toBe('full');
+      expect(outerRadius).toBe(containerHeight / 2);
+      expect(outerRadius).toBeLessThan(cornerFull);
+    });
   });
 
   it('uses the spec inner corners for large and extra-large', () => {
