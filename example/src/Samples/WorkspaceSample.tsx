@@ -17,6 +17,7 @@ import ScreenWrapper from '../ScreenWrapper';
 export const WorkspaceSampleConfig: SampleConfig = {
   title: 'Workspace',
   icon: 'view-dashboard-outline',
+  headerShown: false,
   components: ['Appbar', 'Avatar', 'BottomNavigation', 'Drawer', 'Text'],
 };
 
@@ -101,10 +102,6 @@ const routes: BottomNavigationRoute[] = [
 const WorkspaceSample = () => {
   const navigation = useNavigation('WorkspaceSample');
   const [index, setIndex] = React.useState(0);
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
 
   return (
     <View style={styles.screen}>

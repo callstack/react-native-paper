@@ -11,6 +11,7 @@ import {
 } from 'react-native-paper';
 
 import type { SampleConfig } from './types';
+import { objectKeys } from '../../utils/typedObject';
 import ScreenWrapper from '../ScreenWrapper';
 
 export const OrdersSampleConfig: SampleConfig = {
@@ -92,7 +93,7 @@ const OrdersSample = () => {
             </Button>
           }
         >
-          {(Object.keys(SORT_LABELS) as SortKey[]).map((key) => (
+          {objectKeys(SORT_LABELS).map((key) => (
             <Menu.Item
               key={key}
               title={SORT_LABELS[key]}

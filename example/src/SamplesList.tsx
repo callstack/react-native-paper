@@ -16,6 +16,7 @@ import SignUpSample, { SignUpSampleConfig } from './Samples/SignUpSample';
 import WorkspaceSample, {
   WorkspaceSampleConfig,
 } from './Samples/WorkspaceSample';
+import { objectKeys } from '../utils/typedObject';
 
 export const samples = {
   SignUpSample: { ...SignUpSampleConfig, screen: SignUpSample },
@@ -28,9 +29,7 @@ export const samples = {
   WorkspaceSample: { ...WorkspaceSampleConfig, screen: WorkspaceSample },
 };
 
-type SampleId = keyof typeof samples;
-
-const data = (Object.keys(samples) as SampleId[]).map((id) => ({
+const data = objectKeys(samples).map((id) => ({
   id,
   ...samples[id],
 }));

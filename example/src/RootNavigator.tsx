@@ -10,39 +10,32 @@ import { Appbar } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
 import { colorThemes } from '../utils';
 import PreferencesModal from './Preferences/PreferencesModal';
-import { usePreferences } from './Preferences/usePreferences';
 import SamplesList, { samples } from './SamplesList';
+import { objectEntries, objectFromEntries } from '../utils/typedObject';
+import { usePreferences } from './Preferences/usePreferences';
 
 const { TeamDetails, ...examplesWithoutParams } = examples;
-
-type ExampleRouteName = keyof typeof examplesWithoutParams;
-type SampleRouteName = keyof typeof samples;
-
-const fromEntries = <Key extends PropertyKey, Value>(
-  entries: Array<[Key, Value]>
-) =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  Object.fromEntries(entries) as Record<Key, Value>;
 
 function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   const { togglePreferences } = usePreferences();
 
-  const isIOS = Platform.OS === 'ios';
-
-  const backAction = <Appbar.BackAction onPress={() => navigation.goBack()} />;
-  const searchAction = (
-    <Appbar.Action
-      icon="folder-search"
-      onPress={() => navigation.navigate('ExampleList')}
-    />
-  );
-
   return (
     <Appbar.Header>
-      {back ? backAction : isIOS ? searchAction : null}
+      {back && <Appbar.BackAction onPress={() => navigation.goBack()} />}
+      {!back && (
+        <Appbar.Action
+          isLeading
+          icon="folder-search"
+          accessibilityLabel="search examples"
+          onPress={() => navigation.navigate('ExampleList')}
+        />
+      )}
       <Appbar.Content title={options.title || route.name} />
-      {!isIOS && !back && searchAction}
-      <Appbar.Action icon="cog" onPress={togglePreferences} />
+      <Appbar.Action
+        icon="cog"
+        accessibilityLabel="preferences"
+        onPress={togglePreferences}
+      />
     </Appbar.Header>
   );
 }
@@ -66,18 +59,14 @@ const Root = createNativeStackNavigator({
       },
       linking: '',
     }),
-    ...fromEntries(
-      (
-        Object.entries(samples) as [
-          SampleRouteName,
-          (typeof samples)[SampleRouteName],
-        ][]
-      ).map(([id, sample]) => [
+    ...objectFromEntries(
+      objectEntries(samples).map(([id, sample]) => [
         id,
         createNativeStackScreen({
           screen: sample.screen,
           options: {
             title: sample.title,
+            headerShown: sample.headerShown ?? true,
           },
         }),
       ])
@@ -90,14 +79,8 @@ const Root = createNativeStackNavigator({
       },
       linking: 'examples',
     }),
-    /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-    ...fromEntries(
-      (
-        Object.entries(examplesWithoutParams) as [
-          ExampleRouteName,
-          (typeof examplesWithoutParams)[ExampleRouteName],
-        ][]
-      ).map(([id, screen]) => [
+    ...objectFromEntries(
+      objectEntries(examplesWithoutParams).map(([id, screen]) => [
         id,
         createNativeStackScreen({
           screen: screen,
@@ -108,7 +91,6 @@ const Root = createNativeStackNavigator({
         }),
       ])
     ),
-    /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
     TeamDetails: createNativeStackScreen({
       screen: TeamDetails,
       options: {
