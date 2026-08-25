@@ -1,10 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import {
-  getAppbarHeight,
-  getAppbarSearchWidth,
-  getTrailingActionsWidth,
-} from '../../AppbarV3/utils';
+import { getAppbarHeight, getTrailingActionsWidth } from '../../AppbarV3/utils';
 
 describe('getAppbarHeight', () => {
   it.each([
@@ -22,17 +18,6 @@ describe('getAppbarHeight', () => {
       expect(getAppbarHeight(variant, subtitle)).toBe(height);
     }
   );
-});
-
-describe('getAppbarSearchWidth', () => {
-  it.each([
-    [320, 320],
-    [360, 360],
-    [600, 600],
-    [800, 720],
-  ])('constrains %i available pixels to %i', (availableWidth, width) => {
-    expect(getAppbarSearchWidth(availableWidth)).toBe(width);
-  });
 });
 
 describe('getTrailingActionsWidth', () => {

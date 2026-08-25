@@ -5,7 +5,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
-import { fireEvent, render, screen, userEvent } from '../../../test-utils';
+import { render, screen, userEvent } from '../../../test-utils';
 import AppbarV3 from '../../AppbarV3';
 import type { AppbarVariant } from '../../AppbarV3';
 
@@ -236,6 +236,33 @@ describe('AppbarV3 surface', () => {
 });
 
 describe('AppbarV3 actions', () => {
+  it('skips rendering unchanged action configurations', async () => {
+    const icon = jest.fn(() => <View testID="stable-action-icon" />);
+    const { rerender } = await render(
+      <AppbarV3
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'stable', icon, 'aria-label': 'Stable action' },
+        ]}
+      />
+    );
+    const initialRenderCount = icon.mock.calls.length;
+
+    await rerender(
+      <AppbarV3
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'stable', icon, 'aria-label': 'Stable action' },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('stable-action-icon')).toBeOnTheScreen();
+    expect(icon).toHaveBeenCalledTimes(initialRenderCount);
+  });
+
   it('maps leading, trailing, and custom action colors', async () => {
     await render(
       <AppbarV3
@@ -352,7 +379,7 @@ describe('AppbarV3 search', () => {
     ).toBeOnTheScreen();
   });
 
-  it('configures the search field, forwards its behavior, and constrains its measured width', async () => {
+  it('configures the search field, forwards its behavior, and constrains its width', async () => {
     const onChangeText = jest.fn();
     const SearchAppbar = () => {
       const [value, setValue] = React.useState('');
@@ -409,13 +436,13 @@ describe('AppbarV3 search', () => {
     expect(onChangeText).toHaveBeenLastCalledWith('draft');
     expect(searchbox).toHaveProp('value', 'draft');
 
-    await fireEvent(screen.getByTestId('appbar-search-slot'), 'layout', {
-      nativeEvent: { layout: { x: 0, y: 0, width: 800, height: 56 } },
-    });
-
     expect(
       screen.getByTestId('message-search-container-outer-layer')
-    ).toHaveStyle({ width: 720 });
+    ).toHaveStyle({ width: '100%' });
+    expect(screen.getByTestId('appbar-search-width-limiter')).toHaveStyle({
+      width: '100%',
+      maxWidth: 720,
+    });
   });
 });
 

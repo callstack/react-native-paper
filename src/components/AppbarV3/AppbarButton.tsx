@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import type { AppbarLeadingButton, AppbarTrailingAction } from './types';
@@ -56,6 +57,41 @@ const AppbarButton = ({ button, leading = false, theme }: Props) => {
   );
 };
 
+const hasEqualButtonProps = (
+  previous: Props['button'],
+  next: Props['button']
+) => {
+  if (previous === next) {
+    return true;
+  }
+
+  const previousKeys = Object.keys(previous);
+  const nextKeys = Object.keys(next);
+
+  if (previousKeys.length !== nextKeys.length) {
+    return false;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const previousRecord = previous as unknown as Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const nextRecord = next as unknown as Record<string, unknown>;
+
+  return previousKeys.every(
+    (key) =>
+      Object.prototype.hasOwnProperty.call(nextRecord, key) &&
+      Object.is(previousRecord[key], nextRecord[key])
+  );
+};
+
+const MemoizedAppbarButton = React.memo(
+  AppbarButton,
+  (previous, next) =>
+    previous.leading === next.leading &&
+    previous.theme === next.theme &&
+    hasEqualButtonProps(previous.button, next.button)
+);
+
 const styles = StyleSheet.create({
   button: {
     margin: 4,
@@ -65,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppbarButton;
+export default MemoizedAppbarButton;

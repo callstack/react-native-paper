@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue, LayoutChangeEvent, ViewProps } from 'react-native';
+import type { ColorValue, ViewProps } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -10,14 +10,16 @@ import type { Props } from './types';
 import {
   APPBAR_HEADLINE_IMAGE_HEIGHT,
   APPBAR_ICON_BUTTON_SIZE,
+  APPBAR_SEARCH_MAX_WIDTH,
   getAppbarHeight,
-  getAppbarSearchWidth,
   getTrailingActionsWidth,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { getAppbarBorders } from '../Appbar/utils';
 import Searchbar from '../Searchbar';
 import Surface from '../Surface';
+
+const EMPTY_TRAILING_ACTIONS = [] as const;
 
 const Appbar = ({
   contentStyle,
@@ -37,23 +39,30 @@ const Appbar = ({
   subtitleProps,
   testID = 'appbar',
   theme: themeOverrides,
-  trailingActions = [],
+  trailingActions = EMPTY_TRAILING_ACTIONS,
   variant,
   ref,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const detectedInsets = useSafeAreaInsets();
-  const [searchSlotWidth, setSearchSlotWidth] = React.useState(0);
-  const flattenedStyle = StyleSheet.flatten(style);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const resolvedStyle = (flattenedStyle || {}) as Exclude<
-    typeof flattenedStyle,
-    number
-  > & {
-    backgroundColor?: ColorValue;
-  };
-  const { backgroundColor: customBackground, ...restStyle } = resolvedStyle;
+  const { customBackground, restStyle, borderRadius } = React.useMemo(() => {
+    const flattenedStyle = StyleSheet.flatten(style);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    const resolvedStyle = (flattenedStyle || {}) as Exclude<
+      typeof flattenedStyle,
+      number
+    > & {
+      backgroundColor?: ColorValue;
+    };
+    const { backgroundColor, ...remainingStyle } = resolvedStyle;
+
+    return {
+      customBackground: backgroundColor,
+      restStyle: remainingStyle,
+      borderRadius: getAppbarBorders(remainingStyle),
+    };
+  }, [style]);
   const backgroundColor =
     customBackground ??
     (isScrolled ? theme.colors.surfaceContainer : theme.colors.surface);
@@ -63,8 +72,46 @@ const Appbar = ({
   const leftInset = safeAreaInsets?.left ?? detectedInsets.left;
   const rightInset = safeAreaInsets?.right ?? detectedInsets.right;
   const horizontalInset = Math.max(leftInset, rightInset);
-  const borderRadius = getAppbarBorders(restStyle);
   const centered = headlineAlignment === 'center';
+  const sideWidth = Math.max(
+    leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
+    getTrailingActionsWidth(trailingActions)
+  );
+  const sideStyle = React.useMemo(() => ({ width: sideWidth }), [sideWidth]);
+  const surfaceStyle = React.useMemo(
+    () => [
+      {
+        backgroundColor,
+        paddingTop: topInset,
+        paddingHorizontal: horizontalInset,
+      },
+      borderRadius,
+    ],
+    [backgroundColor, borderRadius, horizontalInset, topInset]
+  );
+  const appbarStyle = React.useMemo(
+    () => [styles.appbar, { backgroundColor, minHeight }, restStyle],
+    [backgroundColor, minHeight, restStyle]
+  );
+  const resolvedSearchInputStyle = React.useMemo(
+    () => [
+      searchBar?.inputStyle,
+      styles.searchInput,
+      { color: theme.colors.onSurface },
+    ],
+    [searchBar?.inputStyle, theme.colors.onSurface]
+  );
+  const searchBackgroundColor = isScrolled
+    ? theme.colors.surfaceContainerHighest
+    : theme.colors.surfaceContainer;
+  const resolvedSearchStyle = React.useMemo(
+    () => [
+      styles.searchBar,
+      { backgroundColor: searchBackgroundColor },
+      searchBar?.style,
+    ],
+    [searchBackgroundColor, searchBar?.style]
+  );
   const {
     accessibilityLabel: _accessibilityLabel,
     accessibilityRole: _accessibilityRole,
@@ -73,17 +120,6 @@ const Appbar = ({
     role: _role,
     ...viewProps
   } = rest as ViewProps;
-
-  const handleSearchSlotLayout = React.useCallback(
-    ({ nativeEvent }: LayoutChangeEvent) => {
-      const nextWidth = nativeEvent.layout.width;
-
-      setSearchSlotWidth((currentWidth) =>
-        currentWidth === nextWidth ? currentWidth : nextWidth
-      );
-    },
-    []
-  );
 
   const renderLeadingButton = () =>
     leadingButton ? (
@@ -101,48 +137,35 @@ const Appbar = ({
     }
 
     const {
-      inputStyle: searchInputStyle,
-      style: searchStyle,
+      inputStyle: _searchInputStyle,
+      style: _searchStyle,
       testID: searchTestID = `${testID}-search`,
       ...searchProps
     } = searchBar;
-    const searchWidth = searchSlotWidth
-      ? getAppbarSearchWidth(searchSlotWidth)
-      : '100%';
-    const searchBackgroundColor = isScrolled
-      ? theme.colors.surfaceContainerHighest
-      : theme.colors.surfaceContainer;
 
     return (
       <View style={styles.searchRow}>
         {renderLeadingButton()}
-        <View
-          testID={`${testID}-search-slot`}
-          onLayout={handleSearchSlotLayout}
-          style={styles.searchSlot}
-        >
-          <Searchbar
-            {...searchProps}
-            aria-label={searchProps['aria-label'] ?? searchProps.placeholder}
-            inputStyle={[
-              searchInputStyle,
-              styles.searchInput,
-              { color: theme.colors.onSurface },
-            ]}
-            placeholderTextColor={
-              searchProps.placeholderTextColor ?? theme.colors.onSurfaceVariant
-            }
-            mode="bar"
-            elevation={0}
-            testID={searchTestID}
-            style={[
-              styles.searchBar,
-              { backgroundColor: searchBackgroundColor },
-              searchStyle,
-              { width: searchWidth },
-            ]}
-            theme={theme}
-          />
+        <View testID={`${testID}-search-slot`} style={styles.searchSlot}>
+          <View
+            testID={`${testID}-search-width-limiter`}
+            style={styles.searchWidthLimiter}
+          >
+            <Searchbar
+              {...searchProps}
+              aria-label={searchProps['aria-label'] ?? searchProps.placeholder}
+              inputStyle={resolvedSearchInputStyle}
+              placeholderTextColor={
+                searchProps.placeholderTextColor ??
+                theme.colors.onSurfaceVariant
+              }
+              mode="bar"
+              elevation={0}
+              testID={searchTestID}
+              style={resolvedSearchStyle}
+              theme={theme}
+            />
+          </View>
         </View>
         <View style={styles.trailingActions}>{renderTrailingActions()}</View>
       </View>
@@ -185,20 +208,11 @@ const Appbar = ({
     }
 
     if (centered || headlineImage) {
-      const sideWidth = Math.max(
-        leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
-        getTrailingActionsWidth(trailingActions)
-      );
-
       return (
         <View style={styles.smallRow}>
-          <View style={[styles.side, { width: sideWidth }]}>
-            {renderLeadingButton()}
-          </View>
+          <View style={[styles.side, sideStyle]}>{renderLeadingButton()}</View>
           <AppbarContent {...contentProps} />
-          <View
-            style={[styles.side, styles.trailingActions, { width: sideWidth }]}
-          >
+          <View style={[styles.side, styles.trailingActions, sideStyle]}>
             {renderTrailingActions()}
           </View>
         </View>
@@ -224,26 +238,15 @@ const Appbar = ({
       return null;
     }
 
-    const sideWidth = Math.max(
-      leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
-      getTrailingActionsWidth(trailingActions)
-    );
-
     return (
       <View style={styles.flexibleContainer}>
         {headlineImage ? (
           <View style={styles.controlsRow}>
-            <View style={[styles.side, { width: sideWidth }]}>
+            <View style={[styles.side, sideStyle]}>
               {renderLeadingButton()}
             </View>
             {renderFlexibleHeadlineImage()}
-            <View
-              style={[
-                styles.side,
-                styles.trailingActions,
-                { width: sideWidth },
-              ]}
-            >
+            <View style={[styles.side, styles.trailingActions, sideStyle]}>
               {renderTrailingActions()}
             </View>
           </View>
@@ -267,20 +270,9 @@ const Appbar = ({
       elevation={0}
       container
       theme={theme}
-      style={[
-        {
-          backgroundColor,
-          paddingTop: topInset,
-          paddingHorizontal: horizontalInset,
-        },
-        borderRadius,
-      ]}
+      style={surfaceStyle}
     >
-      <View
-        {...viewProps}
-        testID={testID}
-        style={[styles.appbar, { backgroundColor, minHeight }, restStyle]}
-      >
+      <View {...viewProps} testID={testID} style={appbarStyle}>
         {variant === 'search'
           ? renderSearchAppbar()
           : variant === 'small'
@@ -311,7 +303,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchBar: {
-    maxWidth: '100%',
+    width: '100%',
+  },
+  searchWidthLimiter: {
+    width: '100%',
+    maxWidth: APPBAR_SEARCH_MAX_WIDTH,
   },
   searchInput: {
     textAlign: 'center',
@@ -349,7 +345,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Appbar;
+const MemoizedAppbar = React.memo(Appbar);
+
+export default MemoizedAppbar;
 
 // @component-docs ignore-next-line
-export { Appbar };
+export { MemoizedAppbar as Appbar };

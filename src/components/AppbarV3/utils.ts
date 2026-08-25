@@ -3,16 +3,7 @@ import type { AppbarTrailingAction, AppbarVariant } from './types';
 export const APPBAR_ICON_BUTTON_SIZE = 48;
 export const APPBAR_WIDE_ICON_BUTTON_SIZE = 64;
 export const APPBAR_HEADLINE_IMAGE_HEIGHT = 32;
-export const APPBAR_SEARCH_MIN_WIDTH = 360;
 export const APPBAR_SEARCH_MAX_WIDTH = 720;
-
-export const getAppbarSearchWidth = (availableWidth: number) => {
-  if (availableWidth < APPBAR_SEARCH_MIN_WIDTH) {
-    return availableWidth;
-  }
-
-  return Math.min(availableWidth, APPBAR_SEARCH_MAX_WIDTH);
-};
 
 export const getAppbarHeight = (
   variant: AppbarVariant,

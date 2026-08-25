@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -65,6 +66,35 @@ const AppbarContent = ({
   const subtitleVariant = subtitleVariants[variant];
   const centered = alignment === 'center';
   const hasHeadlineImage = variant === 'small' && Boolean(headlineImage);
+  const headlineStyle = React.useMemo(
+    () => [
+      styles.text,
+      centered && styles.centeredText,
+      { color: theme.colors.onSurface },
+      headlineProps?.style,
+    ],
+    [centered, headlineProps?.style, theme.colors.onSurface]
+  );
+  const subtitleStyle = React.useMemo(
+    () => [
+      styles.text,
+      centered && styles.centeredText,
+      { marginTop: subtitleSpacing[variant] },
+      { color: theme.colors.onSurfaceVariant },
+      subtitleProps?.style,
+    ],
+    [centered, subtitleProps?.style, theme.colors.onSurfaceVariant, variant]
+  );
+  const wrapperStyle = React.useMemo(
+    () => [
+      styles.container,
+      variant !== 'small' && styles.flexibleContainer,
+      centered && styles.centeredContainer,
+      style,
+      contentStyle,
+    ],
+    [centered, contentStyle, style, variant]
+  );
 
   const content = hasHeadlineImage ? (
     <View
@@ -86,12 +116,7 @@ const AppbarContent = ({
         accessible
         maxFontSizeMultiplier={headlineProps?.maxFontSizeMultiplier}
         testID={`${testID}-headline-text`}
-        style={[
-          styles.text,
-          centered && styles.centeredText,
-          { color: theme.colors.onSurface },
-          headlineProps?.style,
-        ]}
+        style={headlineStyle}
       >
         {headline}
       </Text>
@@ -102,13 +127,7 @@ const AppbarContent = ({
           numberOfLines={1}
           maxFontSizeMultiplier={subtitleProps?.maxFontSizeMultiplier}
           testID={`${testID}-subtitle-text`}
-          style={[
-            styles.text,
-            centered && styles.centeredText,
-            { marginTop: subtitleSpacing[variant] },
-            { color: theme.colors.onSurfaceVariant },
-            subtitleProps?.style,
-          ]}
+          style={subtitleStyle}
         >
           {subtitle}
         </Text>
@@ -118,13 +137,7 @@ const AppbarContent = ({
 
   const wrapperProps = {
     testID,
-    style: [
-      styles.container,
-      variant !== 'small' && styles.flexibleContainer,
-      centered && styles.centeredContainer,
-      style,
-      contentStyle,
-    ],
+    style: wrapperStyle,
   };
 
   if (onHeadlinePress) {
@@ -200,4 +213,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppbarContent;
+export default React.memo(AppbarContent);
