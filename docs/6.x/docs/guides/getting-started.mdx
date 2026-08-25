@@ -32,7 +32,15 @@ Minimum requirements:
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
-If you use Expo, you don't need to install vector icons - those are the part of the expo package. However, if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
+You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons). It is the only icon package Paper detects, `@expo/vector-icons` is no longer picked up automatically:
+
+```bash
+npx expo install @react-native-vector-icons/material-design-icons
+```
+
+If you prefer to keep using `@expo/vector-icons`, pass a custom icon renderer to `PaperProvider` as described in the [Icons guide](./icons#4-use-custom-icons).
+
+If you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
 
   </TabItem>
   <TabItem value="community-cli" label="Community CLI">
@@ -49,7 +57,7 @@ Minimum requirements:
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
-If you're on a vanilla React Native project, you also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons).
+You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons). It is the only icon package Paper detects, the old single package `react-native-vector-icons` is no longer picked up.
 
 Specifically, the `MaterialDesignIcons` icon pack needs to be included in the project because some components use those icons internally, such as `AppBar.BackAction` on Android.
 

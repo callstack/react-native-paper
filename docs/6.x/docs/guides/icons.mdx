@@ -2,15 +2,13 @@
 title: Icons
 ---
 
-import TabItem from '@docs/components/TabItem';
-import Tabs from '@docs/components/Tabs';
 import IconsList from '@docs/components/IconsList.tsx';
 
 # Icons
 
 ## Configuring icons
 
-Many of the components render icon names using [`@react-native-vector-icons/material-design-icons`](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons). In Expo projects this usually works without extra setup. In vanilla React Native projects, install the package and complete any required platform setup as described in the [getting started guide](./getting-started).
+Many of the components render icon names using [`@react-native-vector-icons/material-design-icons`](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons). It is the only icon package Paper detects, in Expo projects too, so install it and complete any required platform setup as described in the [getting started guide](./getting-started). Without it, icon names render as broken (the □ placeholder character). If you use another icon package, such as `@expo/vector-icons`, pass a [custom icon renderer](#4-use-custom-icons) instead. If you're upgrading from v5, the [migration guide](./migration#icons-only-react-native-vector-iconsmaterial-design-icons-is-auto-detected) explains this change in detail.
 
 :::note
 If you opted out of vector icons support using [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require), you won't be able to use icon names for the icon prop. Some components may not look correct without vector icons and might need extra configuration.
@@ -30,29 +28,10 @@ Example:
 <Button icon="camera">Press me</Button>
 ```
 
-:::note
-Choose the correct tab below based on your `react-native-vector-icons` version:
-
-- Use **latest** tab if you're using the latest version of `@react-native-vector-icons/material-design-icons`
-- Use **10.x** tab if you're still using the old single package `react-native-vector-icons`, version `10.x`
-
-If you are using `@expo/vector-icons`, please check their [searchable list of icons](https://icons.expo.fyi/).
-:::
-
-<Tabs>
-  <TabItem value="material-design-icons" label="latest">
-    <details>
-      <summary>See the list of supported icons</summary>
-      <IconsList latest />
-    </details>
-  </TabItem>
-  <TabItem value="material-community-icons" label="10.x">
-    <details>
-      <summary>See the list of supported icons</summary>
-      <IconsList />
-    </details>
-  </TabItem>
-</Tabs>
+<details>
+  <summary>See the list of supported icons</summary>
+  <IconsList latest />
+</details>
 
 ### 2. An image source
 
