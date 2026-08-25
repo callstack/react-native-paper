@@ -167,6 +167,58 @@ describe('Menu Item', () => {
     });
   });
 
+  it('caps supporting text font scaling like the title', async () => {
+    await render(
+      <Menu.Item
+        title="Share"
+        supportingText="Send a link"
+        trailingSupportingText="⌘S"
+        supportingTextMaxFontSizeMultiplier={2}
+        trailingSupportingTextMaxFontSizeMultiplier={3}
+      />
+    );
+
+    expect(screen.getByTestId('menu-item-supporting')).toHaveProp(
+      'maxFontSizeMultiplier',
+      2
+    );
+    expect(screen.getByTestId('menu-item-trailing-supporting')).toHaveProp(
+      'maxFontSizeMultiplier',
+      3
+    );
+  });
+
+  it('defaults supporting text scaling to the title cap', async () => {
+    await render(
+      <Menu.Item
+        title="Share"
+        supportingText="Send a link"
+        trailingSupportingText="⌘S"
+      />
+    );
+
+    expect(screen.getByTestId('menu-item-supporting')).toHaveProp(
+      'maxFontSizeMultiplier',
+      1.5
+    );
+    expect(screen.getByTestId('menu-item-trailing-supporting')).toHaveProp(
+      'maxFontSizeMultiplier',
+      1.5
+    );
+  });
+
+  it('pins trailing supporting text to the trailing edge', async () => {
+    await render(<Menu.Item title="Copy" trailingSupportingText="⌘C" />);
+
+    // row stretches so the auto margin has space to push against
+    expect(screen.getByTestId('menu-item-content')).toHaveStyle({
+      alignSelf: 'stretch',
+    });
+    expect(screen.getByTestId('menu-item-trailing-supporting')).toHaveStyle({
+      marginLeft: 'auto',
+    });
+  });
+
   it('keeps fixed height for single-line items', async () => {
     await render(<Menu.Item title="Paste" />);
     expect(screen.getByTestId('menu-item')).toHaveStyle({ height: 48 });

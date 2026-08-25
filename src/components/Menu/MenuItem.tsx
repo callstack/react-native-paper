@@ -96,6 +96,14 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * Specifies the largest possible scale the supporting text font can reach.
+   */
+  supportingTextMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale the trailing supporting text font can reach.
+   */
+  trailingSupportingTextMaxFontSizeMultiplier?: number;
+  /**
    * Style that is passed to the root TouchableRipple container.
    * @optional
    */
@@ -216,6 +224,8 @@ const MenuItem = ({
   'aria-expanded': ariaExpanded,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
+  supportingTextMaxFontSizeMultiplier = 1.5,
+  trailingSupportingTextMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -360,6 +370,7 @@ const MenuItem = ({
               numberOfLines={1}
               testID={`${testID}-supporting`}
               style={[supportingTextStyleResolved, supportingTextStyle]}
+              maxFontSizeMultiplier={supportingTextMaxFontSizeMultiplier}
             >
               {supportingText}
             </Text>
@@ -376,6 +387,7 @@ const MenuItem = ({
               trailingSupportingTextStyleResolved,
               trailingSupportingTextStyle,
             ]}
+            maxFontSizeMultiplier={trailingSupportingTextMaxFontSizeMultiplier}
             pointerEvents="none"
           >
             {trailingSupportingText}
@@ -406,7 +418,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignSelf: 'stretch',
     maxWidth: MAX_WIDTH - MenuTokens.sizes.itemPaddingHorizontal * 2,
   },
   leadingIcon: {
@@ -418,7 +430,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   trailingSupporting: {
-    marginLeft: 12,
+    marginLeft: 'auto',
+    paddingLeft: 12,
     flexShrink: 0,
   },
   trailingIcon: {

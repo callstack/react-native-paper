@@ -9300,6 +9300,28 @@
               "computed": false
             }
           },
+          "supportingTextMaxFontSizeMultiplier": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Specifies the largest possible scale the supporting text font can reach.",
+            "defaultValue": {
+              "value": "1.5",
+              "computed": false
+            }
+          },
+          "trailingSupportingTextMaxFontSizeMultiplier": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Specifies the largest possible scale the trailing supporting text font can reach.",
+            "defaultValue": {
+              "value": "1.5",
+              "computed": false
+            }
+          },
           "style": {
             "required": false,
             "tsType": {

@@ -68,7 +68,7 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -250,7 +250,7 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -432,7 +432,7 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -614,7 +614,7 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -796,7 +796,7 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
