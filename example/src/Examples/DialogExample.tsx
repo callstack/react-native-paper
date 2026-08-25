@@ -10,6 +10,13 @@ import {
   DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
+  NewDialogWithCustomColors,
+  NewDialogWithDismissableBackButton,
+  NewDialogWithIcon,
+  NewDialogWithLoadingIndicator,
+  NewDialogWithLongText,
+  NewDialogWithRadioBtns,
+  NewUndismissableDialog,
   UndismissableDialog,
 } from './Dialogs';
 import ScreenWrapper from '../ScreenWrapper';
@@ -79,6 +86,57 @@ const DialogExample = () => {
           Dismissable back button
         </Button>
       )}
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog8')}
+        style={styles.button}
+      >
+        Long text (props)
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog9')}
+        style={styles.button}
+      >
+        Radio buttons (props)
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog10')}
+        style={styles.button}
+      >
+        Progress indicator (props)
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog11')}
+        style={styles.button}
+      >
+        Undismissable Dialog (props)
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog12')}
+        style={styles.button}
+      >
+        Custom colors (props)
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog13')}
+        style={styles.button}
+      >
+        With icon (props)
+      </Button>
+      {Platform.OS === 'android' && (
+        <Button
+          mode="outlined"
+          onPress={_toggleDialog('dialog14')}
+          style={styles.button}
+        >
+          Dismissable back button (props)
+        </Button>
+      )}
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -103,10 +161,42 @@ const DialogExample = () => {
         visible={_getVisible('dialog6')}
         close={_toggleDialog('dialog6')}
       />
-      <DialogWithDismissableBackButton
-        visible={_getVisible('dialog7')}
-        close={_toggleDialog('dialog7')}
+      {Platform.OS === 'android' && (
+        <DialogWithDismissableBackButton
+          visible={_getVisible('dialog7')}
+          close={_toggleDialog('dialog7')}
+        />
+      )}
+      <NewDialogWithLongText
+        visible={_getVisible('dialog8')}
+        close={_toggleDialog('dialog8')}
       />
+      <NewDialogWithRadioBtns
+        visible={_getVisible('dialog9')}
+        close={_toggleDialog('dialog9')}
+      />
+      <NewDialogWithLoadingIndicator
+        visible={_getVisible('dialog10')}
+        close={_toggleDialog('dialog10')}
+      />
+      <NewUndismissableDialog
+        visible={_getVisible('dialog11')}
+        close={_toggleDialog('dialog11')}
+      />
+      <NewDialogWithCustomColors
+        visible={_getVisible('dialog12')}
+        close={_toggleDialog('dialog12')}
+      />
+      <NewDialogWithIcon
+        visible={_getVisible('dialog13')}
+        close={_toggleDialog('dialog13')}
+      />
+      {Platform.OS === 'android' && (
+        <NewDialogWithDismissableBackButton
+          visible={_getVisible('dialog14')}
+          close={_toggleDialog('dialog14')}
+        />
+      )}
     </ScreenWrapper>
   );
 };
