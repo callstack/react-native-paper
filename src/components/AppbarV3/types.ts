@@ -38,12 +38,33 @@ export type AppbarTitleTextProps = AppbarTextProps & {
   ref?: React.RefObject<TextRef | null>;
 };
 
+export type AppbarTitleActionProps = Pick<
+  ViewProps,
+  | 'accessibilityActions'
+  | 'accessibilityHint'
+  | 'accessibilityLabel'
+  | 'accessibilityLabelledBy'
+  | 'accessibilityLanguage'
+  | 'accessibilityState'
+  | 'accessibilityValue'
+  | 'aria-busy'
+  | 'aria-disabled'
+  | 'aria-expanded'
+  | 'aria-label'
+  | 'aria-labelledby'
+  | 'aria-selected'
+  | 'onAccessibilityAction'
+> & {
+  /** Whether the title action is disabled. */
+  disabled?: boolean;
+};
+
 type AppbarActionBase = Omit<
   IconButtonProps,
   'icon' | 'iconColor' | 'mode' | 'selected' | 'size' | 'theme' | 'aria-label'
 > & {
   /** Stable key used when rendering an action from the actions array. */
-  key?: React.Key;
+  key: React.Key;
   /** Icon displayed by the action. */
   icon: IconSource;
   /** Accessible label announced for the icon button. */
@@ -71,17 +92,19 @@ export type AppbarActions =
   | readonly AppbarStandardAction[]
   | readonly [AppbarFilledAction];
 
-type AppbarLeadingIconAction = AppbarStandardAction & {
+type AppbarLeadingIconAction = Omit<AppbarStandardAction, 'key'> & {
+  key?: never;
   type?: 'icon';
 };
 
 type AppbarBackAction = Omit<
   AppbarStandardAction,
-  'aria-label' | 'icon' | 'type'
+  'aria-label' | 'icon' | 'key' | 'type'
 > & {
   /** Uses the platform-aware Paper back icon. */
   type: 'back';
   icon?: never;
+  key?: never;
   'aria-label'?: string;
 };
 
@@ -122,7 +145,16 @@ type AppbarFlexibleImageTitle = AppbarWrittenTitle &
     variant: Exclude<AppbarTitleVariant, 'small'>;
   };
 
-type AppbarBaseProps = Omit<ViewProps, 'children' | 'style'> & {
+type AppbarBaseProps = Omit<
+  ViewProps,
+  | 'accessibilityLabel'
+  | 'accessibilityRole'
+  | 'accessible'
+  | 'aria-label'
+  | 'children'
+  | 'role'
+  | 'style'
+> & {
   /** Optional leading navigation action. */
   leadingAction?: AppbarLeadingAction;
   /** Uses the on-scroll container color when true. */
@@ -145,12 +177,21 @@ type AppbarTitleProps = {
   titleAlignment?: AppbarTitleAlignment;
   /** Trailing icon actions. */
   actions?: AppbarActions;
-  /** Called when the title area is pressed. */
-  onTitlePress?: (event: GestureResponderEvent) => void;
   /** Style applied to the title area. */
   contentStyle?: StyleProp<ViewStyle>;
   searchBar?: never;
-};
+} & (
+  | {
+      /** Called when the title area is pressed. */
+      onTitlePress: (event: GestureResponderEvent) => void;
+      /** Accessibility props applied to the interactive title area. */
+      titleActionProps?: AppbarTitleActionProps;
+    }
+  | {
+      onTitlePress?: never;
+      titleActionProps?: never;
+    }
+);
 
 export type AppbarSearchbarProps = Omit<
   SearchbarProps,
@@ -173,6 +214,7 @@ type AppbarSearchProps = {
   titleProps?: never;
   subtitleProps?: never;
   onTitlePress?: never;
+  titleActionProps?: never;
   contentStyle?: never;
 };
 

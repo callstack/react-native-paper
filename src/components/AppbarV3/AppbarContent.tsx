@@ -17,6 +17,7 @@ type Props = Pick<
   | 'subtitle'
   | 'subtitleProps'
   | 'title'
+  | 'titleActionProps'
   | 'titleImage'
   | 'titleProps'
 > & {
@@ -54,6 +55,7 @@ const AppbarContent = ({
   testID,
   theme,
   title,
+  titleActionProps,
   titleImage,
   titleProps,
   variant,
@@ -80,7 +82,7 @@ const AppbarContent = ({
         theme={theme}
         variant={titleVariant}
         numberOfLines={variant === 'small' ? 1 : 2}
-        role={onTitlePress ? 'none' : 'heading'}
+        role="heading"
         accessible
         maxFontSizeMultiplier={titleProps?.maxFontSizeMultiplier}
         testID={`${testID}-title-text`}
@@ -126,11 +128,27 @@ const AppbarContent = ({
   };
 
   if (onTitlePress) {
+    const {
+      'aria-label': ariaLabel,
+      accessibilityLabel,
+      disabled,
+      ...restTitleActionProps
+    } = titleActionProps ?? {};
+
     return (
       <Pressable
         {...wrapperProps}
+        {...restTitleActionProps}
         role="button"
-        accessibilityLabel={hasTitleImage ? title : undefined}
+        aria-label={
+          ariaLabel ?? accessibilityLabel ?? (hasTitleImage ? title : undefined)
+        }
+        aria-disabled={
+          restTitleActionProps['aria-disabled'] ??
+          restTitleActionProps.accessibilityState?.disabled ??
+          disabled
+        }
+        disabled={disabled}
         onPress={onTitlePress}
       >
         {content}

@@ -70,6 +70,7 @@ export type {
   AppbarSearchbarProps as AppbarV3SearchbarProps,
   AppbarStandardAction as AppbarV3StandardAction,
   AppbarTextProps as AppbarV3TextProps,
+  AppbarTitleActionProps as AppbarV3TitleActionProps,
   AppbarTitleAlignment as AppbarV3TitleAlignment,
   AppbarTitleTextProps as AppbarV3TitleTextProps,
   AppbarVariant as AppbarV3Variant,

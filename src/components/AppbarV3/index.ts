@@ -8,6 +8,7 @@ export type {
   AppbarSearchbarProps,
   AppbarStandardAction,
   AppbarTextProps,
+  AppbarTitleActionProps,
   AppbarTitleAlignment,
   AppbarTitleTextProps,
   AppbarVariant,

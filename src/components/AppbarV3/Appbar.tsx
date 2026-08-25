@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue, LayoutChangeEvent } from 'react-native';
+import type { ColorValue, LayoutChangeEvent, ViewProps } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -34,6 +34,7 @@ const Appbar = ({
   testID = 'appbar',
   theme: themeOverrides,
   title,
+  titleActionProps,
   titleAlignment = 'leading',
   titleImage,
   titleProps,
@@ -64,6 +65,14 @@ const Appbar = ({
   const horizontalInset = Math.max(leftInset, rightInset);
   const borderRadius = getAppbarBorders(restStyle);
   const centered = titleAlignment === 'center';
+  const {
+    accessibilityLabel: _accessibilityLabel,
+    accessibilityRole: _accessibilityRole,
+    accessible: _accessible,
+    'aria-label': _ariaLabel,
+    role: _role,
+    ...viewProps
+  } = rest as ViewProps;
 
   const handleSearchSlotLayout = React.useCallback(
     ({ nativeEvent }: LayoutChangeEvent) => {
@@ -83,11 +92,7 @@ const Appbar = ({
 
   const renderActions = () =>
     actions.map((action) => (
-      <AppbarAction
-        key={action.key ?? action['aria-label']}
-        action={action}
-        theme={theme}
-      />
+      <AppbarAction key={action.key} action={action} theme={theme} />
     ));
 
   const renderSearchAppbar = () => {
@@ -155,6 +160,7 @@ const Appbar = ({
           testID: `${testID}-content`,
           theme,
           title,
+          titleActionProps,
           titleImage,
           titleProps,
           variant,
@@ -267,7 +273,7 @@ const Appbar = ({
       ]}
     >
       <View
-        {...rest}
+        {...viewProps}
         testID={testID}
         style={[styles.appbar, { backgroundColor, minHeight }, restStyle]}
       >
