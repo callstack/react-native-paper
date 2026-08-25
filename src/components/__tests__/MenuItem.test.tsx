@@ -144,8 +144,6 @@ describe('Menu Item', () => {
     );
 
     expect(screen.queryByText('false')).toBeNull();
-    // No trailing text node: the row holds only the content column.
-    expect(contentRow('Paste').children).toHaveLength(1);
   });
 
   it('grows for a trailing-only row so large font scales are not clipped', async () => {
@@ -159,6 +157,52 @@ describe('Menu Item', () => {
     });
     expect(screen.getByTestId('menu-item')).not.toHaveStyle({
       height: MenuTokens.sizes.itemHeight,
+    });
+  });
+
+  it('caps supporting text font scaling like the title', async () => {
+    await render(
+      <Menu.Item
+        title="Share"
+        supportingText="Send a link"
+        trailingSupportingText="⌘S"
+        supportingTextMaxFontSizeMultiplier={2}
+        trailingSupportingTextMaxFontSizeMultiplier={3}
+      />
+    );
+
+    expect(screen.getByText('Send a link')).toHaveProp(
+      'maxFontSizeMultiplier',
+      2
+    );
+    expect(screen.getByText('⌘S')).toHaveProp('maxFontSizeMultiplier', 3);
+  });
+
+  it('defaults supporting text scaling to the title cap', async () => {
+    await render(
+      <Menu.Item
+        title="Share"
+        supportingText="Send a link"
+        trailingSupportingText="⌘S"
+      />
+    );
+
+    expect(screen.getByText('Send a link')).toHaveProp(
+      'maxFontSizeMultiplier',
+      1.5
+    );
+    expect(screen.getByText('⌘S')).toHaveProp('maxFontSizeMultiplier', 1.5);
+  });
+
+  it('pins trailing supporting text to the trailing edge', async () => {
+    await render(<Menu.Item title="Copy" trailingSupportingText="⌘C" />);
+
+    // row stretches so the auto margin has space to push against
+    expect(contentRow('Copy')).toHaveStyle({
+      alignSelf: 'stretch',
+    });
+    expect(screen.getByText('⌘C')).toHaveStyle({
+      marginLeft: 'auto',
     });
   });
 

@@ -693,7 +693,7 @@ exports[`renders visible menu 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
@@ -829,7 +829,7 @@ exports[`renders visible menu 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
@@ -1392,7 +1392,7 @@ exports[`respects anchorPosition bottom 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
@@ -1528,7 +1528,7 @@ exports[`respects anchorPosition bottom 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
@@ -2091,7 +2091,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
@@ -2227,7 +2227,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                   [
                     {
                       "alignItems": "center",
-                      "alignSelf": "flex-start",
+                      "alignSelf": "stretch",
                       "flexDirection": "row",
                       "maxWidth": 256,
                     },
