@@ -369,6 +369,16 @@ describe('Appbar.BackAction icon', () => {
     ).toBeOnTheScreen();
   });
 
+  it('renders the icon provided through PaperProvider settings on iOS', async () => {
+    Platform.OS = 'ios';
+
+    await renderBackAction();
+
+    expect(
+      screen.getByText('custom-arrow-left', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
   it('keeps the icon mirrored in RTL', async () => {
     Platform.OS = 'android';
 
