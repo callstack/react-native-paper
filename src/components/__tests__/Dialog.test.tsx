@@ -107,6 +107,53 @@ describe('Dialog', () => {
       marginTop: 24,
     });
   });
+
+  it('should render a content', async () => {
+    await render(
+      <Dialog
+        visible
+        content="Content"
+        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
+      />
+    );
+
+    expect(screen.getByText('Content')).toBeOnTheScreen();
+  });
+
+  it('should render string content in a scroll area', async () => {
+    await render(
+      <Dialog
+        visible
+        content="Scrollable content"
+        scrollable
+        scrollAreaProps={{ testID: 'dialog-scroll-area' }}
+        scrollViewProps={{ testID: 'dialog-scroll-view' }}
+        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
+      />
+    );
+
+    expect(screen.getByTestId('dialog-scroll-area')).toBeOnTheScreen();
+    expect(screen.getByTestId('dialog-scroll-view')).toBeOnTheScreen();
+    expect(screen.getByText('Scrollable content')).toBeOnTheScreen();
+  });
+
+  it('should render passed action', async () => {
+    await render(
+      <Dialog
+        visible
+        content="Content"
+        actions={[
+          {
+            onPress: jest.fn(),
+            label: 'Cancel',
+            testID: 'cancel-btn',
+          },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('cancel-btn')).toBeOnTheScreen();
+  });
 });
 
 describe('DialogActions', () => {
