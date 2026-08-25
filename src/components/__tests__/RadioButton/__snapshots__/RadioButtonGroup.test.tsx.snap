@@ -2,10 +2,9 @@
 
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
-  accessibilityRole="radiogroup"
+  role="radiogroup"
 >
   <View
-    accessibilityRole="radio"
     accessibilityState={
       {
         "busy": undefined,
@@ -35,6 +34,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="radio"
     style={
       [
         {
@@ -57,9 +57,11 @@ exports[`RadioButtonGroup renders properly 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "borderRadius": 10,
             "borderWidth": 2,
             "height": 20,
+            "justifyContent": "center",
             "width": 20,
           },
           {
@@ -73,41 +75,23 @@ exports[`RadioButtonGroup renders properly 1`] = `
         style={
           [
             {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
+              "borderRadius": 5,
+              "height": 10,
+              "width": 10,
             },
             {
-              "alignItems": "center",
-              "justifyContent": "center",
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
             },
           ]
         }
-      >
-        <View
-          style={
-            [
-              {
-                "borderRadius": 5,
-                "height": 10,
-                "width": 10,
-              },
-              {
-                "backgroundColor": "rgba(103, 80, 164, 1)",
-              },
-              {
-                "transform": [
-                  {
-                    "scale": 1,
-                  },
-                ],
-              },
-            ]
-          }
-        />
-      </View>
+      />
     </View>
   </View>
 </View>

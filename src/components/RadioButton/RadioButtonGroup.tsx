@@ -66,7 +66,7 @@ const RadioButtonGroup = ({ value, onValueChange, children }: Props) => {
 
   return (
     <RadioButtonContext.Provider value={context}>
-      <View accessibilityRole="radiogroup">{children}</View>
+      <View role="radiogroup">{children}</View>
     </RadioButtonContext.Provider>
   );
 };

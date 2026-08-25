@@ -181,8 +181,9 @@ const RadioButton = ({
     rest.accessible === false
       ? {}
       : {
-          accessibilityRole: 'radio' as const,
-          accessibilityState: { disabled: !!disabled, checked },
+          role: 'radio' as const,
+          'aria-disabled': !!disabled,
+          'aria-checked': checked,
         };
 
   const { style: restStyle, ...restProps } = rest;
@@ -222,15 +223,13 @@ const RadioButton = ({
         ]}
       >
         {checked ? (
-          <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
-            <Animated.View
-              style={[
-                styles.dot,
-                { backgroundColor: selectionControlColor },
-                dotAnimatedStyle,
-              ]}
-            />
-          </View>
+          <Animated.View
+            style={[
+              styles.dot,
+              { backgroundColor: selectionControlColor },
+              dotAnimatedStyle,
+            ]}
+          />
         ) : null}
       </View>
     </TouchableRipple>
@@ -247,15 +246,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  radioContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   radio: {
     height: ringSize,
     width: ringSize,
     borderRadius: ringSize / 2,
     borderWidth: OUTLINE_WIDTH,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dot: {
     height: dotSize,
