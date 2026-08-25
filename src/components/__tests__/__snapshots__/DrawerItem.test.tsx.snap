@@ -40,20 +40,16 @@ exports[`renders DrawerItem with icon 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": undefined,
-            "borderRadius": 28,
+            "borderRadius": 9999,
+            "opacity": 1,
           },
+          null,
           undefined,
         ],
       ]
@@ -61,98 +57,98 @@ exports[`renders DrawerItem with icon 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "flex": 1,
+          "justifyContent": "center",
+        }
       }
     >
       <View
         style={
           {
             "alignItems": "center",
-            "flex": 1,
             "flexDirection": "row",
+            "marginHorizontal": 16,
           }
         }
+        testID="drawer-item-content"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
-            [
-              {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+            }
           }
         >
-          information
-        </Text>
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "lineHeight": 24,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
                   },
                   {
-                    "color": "rgba(73, 69, 79, 1)",
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            information
+          </Text>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
-                    "marginLeft": 12,
                   },
+                  [
+                    {
+                      "marginEnd": 32,
+                    },
+                    {
+                      "marginStart": 12,
+                    },
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                  ],
                 ],
-              ],
-            ]
-          }
-        >
-          Example item
-        </Text>
+              ]
+            }
+          >
+            Example item
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -199,20 +195,16 @@ exports[`renders active DrawerItem 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
-            "borderRadius": 28,
+            "borderRadius": 9999,
+            "opacity": 1,
           },
+          null,
           undefined,
         ],
       ]
@@ -220,98 +212,98 @@ exports[`renders active DrawerItem 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "flex": 1,
+          "justifyContent": "center",
+        }
       }
     >
       <View
         style={
           {
             "alignItems": "center",
-            "flex": 1,
             "flexDirection": "row",
+            "marginHorizontal": 16,
           }
         }
+        testID="drawer-item-content"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
-            [
-              {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+            }
           }
         >
-          information
-        </Text>
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 24,
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "lineHeight": 24,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                    "marginLeft": 12,
+                    "backgroundColor": "transparent",
                   },
                 ],
-              ],
-            ]
-          }
-        >
-          Example item
-        </Text>
+              ]
+            }
+          >
+            information
+          </Text>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "700",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "marginEnd": 32,
+                    },
+                    {
+                      "marginStart": 12,
+                    },
+                    {
+                      "color": "rgba(29, 25, 43, 1)",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Example item
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -358,20 +350,16 @@ exports[`renders basic DrawerItem 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": undefined,
-            "borderRadius": 28,
+            "borderRadius": 9999,
+            "opacity": 1,
           },
+          null,
           undefined,
         ],
       ]
@@ -379,69 +367,67 @@ exports[`renders basic DrawerItem 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "flex": 1,
+          "justifyContent": "center",
+        }
       }
     >
       <View
         style={
           {
             "alignItems": "center",
-            "flex": 1,
             "flexDirection": "row",
+            "marginHorizontal": 16,
           }
         }
+        testID="drawer-item-content"
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
           style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
               [
                 {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
                 },
                 [
                   {
-                    "marginRight": 32,
-                  },
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
-                    "marginLeft": 0,
                   },
+                  [
+                    {
+                      "marginEnd": 32,
+                    },
+                    null,
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                  ],
                 ],
-              ],
-            ]
-          }
-        >
-          Example item
-        </Text>
+              ]
+            }
+          >
+            Example item
+          </Text>
+        </View>
       </View>
     </View>
   </View>

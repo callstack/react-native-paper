@@ -135,11 +135,10 @@ function DrawerItems() {
 
   return (
     <DrawerContentScrollView
-      alwaysBounceVertical={false}
       style={[
         styles.drawerContent,
         {
-          backgroundColor: colors.surface,
+          backgroundColor: colors.surfaceContainerLow,
         },
       ]}
     >
@@ -175,7 +174,7 @@ function DrawerItems() {
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
               <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
-                <View style={[styles.preference, styles.v3Preference]}>
+                <View style={styles.preference}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
                     <Switch value={shouldUseDynamicTheme} />
@@ -184,7 +183,7 @@ function DrawerItems() {
               </TouchableRipple>
             ) : null}
             <TouchableRipple onPress={toggleTheme}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none">
                   <Switch value={isDarkTheme} />
@@ -193,7 +192,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={_handleToggleRTL}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none">
                   <Switch value={isRTL} />
@@ -202,7 +201,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={toggleCollapsed}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
                 <View pointerEvents="none">
                   <Switch value={collapsed} />
@@ -211,7 +210,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={toggleCustomFont}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Custom font *</Text>
                 <View pointerEvents="none">
                   <Switch value={customFontLoaded} />
@@ -220,7 +219,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={toggleRippleEffect}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">
                   {isIOS ? 'Highlight' : 'Ripple'} effect *
                 </Text>
@@ -271,10 +270,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
     height: 56,
     paddingHorizontal: 28,
   },

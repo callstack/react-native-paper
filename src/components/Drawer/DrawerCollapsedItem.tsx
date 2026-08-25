@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Animated, Platform, Pressable, StyleSheet, View } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
@@ -9,7 +16,9 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DrawerCollapsedItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
 import Icon from '../Icon';
@@ -26,7 +35,7 @@ export type Props = ViewProps & {
    */
   badge?: string | number | boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -67,9 +76,12 @@ export type Props = ViewProps & {
   testID?: string;
 };
 
-const iconSize = 24;
-const itemSize = 56;
-const outlineHeight = 32;
+const {
+  iconSize,
+  activeIndicatorWidth,
+  activeIndicatorHeight,
+  noLabelActiveIndicatorHeight,
+} = DrawerCollapsedItemTokens;
 
 /**
  * Note: Available in v5.x with theme version 3
@@ -125,22 +137,36 @@ const DrawerCollapsedItem = ({
   const handlePressOut = () => {
     Animated.timing(animScale, {
       toValue: 1,
-      duration: 150 * scale,
+      duration:
+        theme.motion.duration[
+          DrawerCollapsedItemTokens.activeIndicatorDuration
+        ] * scale,
+      easing: Easing.bezier(
+        ...theme.motion.easing[DrawerCollapsedItemTokens.activeIndicatorEasing]
+      ),
       useNativeDriver: true,
     }).start();
   };
 
-  const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
+  const iconPadding =
+    ((!label ? noLabelActiveIndicatorHeight : activeIndicatorHeight) -
+      iconSize) /
+    2;
+
+  const activeIndicatorRadius = resolveCornerRadius(
+    theme,
+    DrawerCollapsedItemTokens.activeIndicatorShape
+  );
 
   const backgroundColor = active
-    ? theme.colors.secondaryContainer
+    ? theme.colors[DrawerCollapsedItemTokens.activeIndicatorColor]
     : 'transparent';
   const labelColor = active
-    ? theme.colors.onSurface
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeLabelTextColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveLabelTextColor];
   const iconColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeIconColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveIconColor];
 
   const onTextLayout = ({
     nativeEvent,
@@ -155,11 +181,15 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...theme.fonts.labelMedium,
+    ...theme.fonts[DrawerCollapsedItemTokens.labelText],
   };
 
   const icon =
     !active && unfocusedIcon !== undefined ? unfocusedIcon : focusedIcon;
+
+  const opacity = disabled
+    ? DrawerCollapsedItemTokens.stateOpacity.disabled
+    : DrawerCollapsedItemTokens.stateOpacity.enabled;
 
   return (
     <View {...rest}>
@@ -167,6 +197,7 @@ const DrawerCollapsedItem = ({
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
         disabled={disabled}
+        style={{ opacity }}
         role="button"
         aria-selected={active}
         aria-label={ariaLabel}
@@ -186,6 +217,7 @@ const DrawerCollapsedItem = ({
                     : { scale: animScale },
                 ],
                 backgroundColor,
+                borderRadius: activeIndicatorRadius,
               },
               style,
             ]}
@@ -210,7 +242,7 @@ const DrawerCollapsedItem = ({
 
           {label ? (
             <Text
-              variant="labelMedium"
+              variant={DrawerCollapsedItemTokens.labelText}
               selectable={false}
               numberOfLines={2}
               onTextLayout={onTextLayout}
@@ -230,20 +262,19 @@ DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: 80,
-    marginBottom: 12,
-    minHeight: itemSize,
+    width: DrawerCollapsedItemTokens.containerWidth,
+    marginBottom: DrawerCollapsedItemTokens.containerSpacing,
+    minHeight: noLabelActiveIndicatorHeight,
     alignItems: 'center',
   },
   outline: {
-    width: itemSize,
-    height: outlineHeight,
-    borderRadius: itemSize / 2,
+    width: activeIndicatorWidth,
+    height: activeIndicatorHeight,
     alignItems: 'center',
     justifyContent: 'center',
   },
   roundedOutline: {
-    height: itemSize,
+    height: noLabelActiveIndicatorHeight,
   },
   icon: {
     position: 'absolute',
@@ -253,8 +284,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   label: {
-    marginHorizontal: 12,
-    marginTop: 4,
+    marginHorizontal: DrawerCollapsedItemTokens.labelPadding,
+    marginTop: DrawerCollapsedItemTokens.labelSpacing,
     textAlign: 'center',
   },
   badgeContainer: {

@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
+import { DrawerItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -31,7 +36,7 @@ export type Props = ViewProps & {
    */
   active?: boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -101,15 +106,40 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const [focused, setFocused] = React.useState(false);
 
-  const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    if (isKeyboardFocusEvent(e)) {
+      setFocused(true);
+    }
+  };
+
+  const isFocused = Boolean(focused && !disabled);
+
+  const backgroundColor = active
+    ? theme.colors[DrawerItemTokens.activeIndicatorColor]
+    : undefined;
+  const inactiveIconColor = isFocused
+    ? DrawerItemTokens.inactiveFocusIconColor
+    : DrawerItemTokens.inactiveIconColor;
+  const inactiveLabelTextColor = isFocused
+    ? DrawerItemTokens.inactiveFocusLabelTextColor
+    : DrawerItemTokens.inactiveLabelTextColor;
   const contentColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerItemTokens.activeIconColor]
+    : theme.colors[inactiveIconColor];
+  const labelColor = active
+    ? theme.colors[DrawerItemTokens.activeLabelTextColor]
+    : theme.colors[inactiveLabelTextColor];
 
-  const labelMargin = icon ? 12 : 0;
-  const borderRadius = theme.shapes.corner.extraLarge;
-  const font = theme.fonts.labelLarge;
+  const borderRadius = resolveCornerRadius(
+    theme,
+    DrawerItemTokens.indicatorShape
+  );
+  const { inset } = DrawerItemTokens.focusIndicator;
+  const opacity = disabled
+    ? DrawerItemTokens.stateOpacity.disabled
+    : DrawerItemTokens.stateOpacity.enabled;
 
   return (
     <View {...rest}>
@@ -118,10 +148,12 @@ const DrawerItem = ({
         disabled={disabled}
         background={background}
         onPress={onPress}
+        onFocus={handleFocus}
+        onBlur={() => setFocused(false)}
         style={[
           styles.container,
-          styles.v3Container,
-          { backgroundColor, borderRadius },
+          { backgroundColor, borderRadius, opacity },
+          Platform.OS === 'web' ? webNoOutline : null,
           style,
         ]}
         role="button"
@@ -130,30 +162,51 @@ const DrawerItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, styles.v3Wrapper]}>
-          <View style={styles.content}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
-            <Text
-              variant="labelLarge"
-              selectable={false}
-              numberOfLines={1}
-              style={[
-                styles.label,
-                {
-                  color: contentColor,
-                  marginLeft: labelMargin,
-                  ...font,
-                },
-              ]}
-              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            >
-              {label}
-            </Text>
+        <View style={styles.inner}>
+          <View style={styles.wrapper} testID="drawer-item-content">
+            <View style={styles.content}>
+              {icon ? (
+                <Icon
+                  source={icon}
+                  size={DrawerItemTokens.iconSize}
+                  color={contentColor}
+                />
+              ) : null}
+              <Text
+                variant={
+                  active
+                    ? DrawerItemTokens.activeLabelText
+                    : DrawerItemTokens.labelText
+                }
+                selectable={false}
+                numberOfLines={1}
+                style={[
+                  styles.label,
+                  icon ? styles.labelWithIcon : null,
+                  { color: labelColor },
+                ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+              >
+                {label}
+              </Text>
+            </View>
+
+            {right?.({ color: contentColor })}
           </View>
 
-          {right?.({ color: contentColor })}
+          {isFocused ? (
+            <View
+              testID="drawer-item-focus-ring"
+              style={[
+                styles.focusRing,
+                {
+                  borderColor:
+                    theme.colors[DrawerItemTokens.focusIndicatorColor],
+                  borderRadius: borderRadius - inset,
+                },
+              ]}
+            />
+          ) : null}
         </View>
       </TouchableRipple>
     </View>
@@ -162,27 +215,22 @@ const DrawerItem = ({
 
 DrawerItem.displayName = 'Drawer.Item';
 
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginVertical: 4,
-  },
-  v3Container: {
+    height: DrawerItemTokens.height,
     justifyContent: 'center',
-    height: 56,
-    marginLeft: 12,
-    marginRight: 12,
-    marginVertical: 0,
+    marginHorizontal: DrawerItemTokens.indicatorInset,
+  },
+  inner: {
+    flex: 1,
+    justifyContent: 'center',
   },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  v3Wrapper: {
-    marginLeft: 16,
-    marginRight: 24,
-    padding: 0,
+    marginHorizontal: DrawerItemTokens.contentInset,
   },
   content: {
     flex: 1,
@@ -190,7 +238,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    marginRight: 32,
+    marginEnd: DrawerItemTokens.labelTrailingGap,
+  },
+  labelWithIcon: {
+    marginStart: DrawerItemTokens.iconLabelGap,
+  },
+  focusRing: {
+    position: 'absolute',
+    top: DrawerItemTokens.focusIndicator.inset,
+    bottom: DrawerItemTokens.focusIndicator.inset,
+    left: DrawerItemTokens.focusIndicator.inset,
+    right: DrawerItemTokens.focusIndicator.inset,
+    borderWidth: DrawerItemTokens.focusIndicator.thickness,
+    pointerEvents: 'none',
   },
 });
 

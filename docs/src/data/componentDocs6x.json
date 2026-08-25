@@ -5655,7 +5655,7 @@
             "tsType": {
               "name": "boolean"
             },
-            "description": "Whether the item is disabled."
+            "description": "Whether the item is disabled. Disabled items are dimmed and don't respond to touch."
           },
           "focusedIcon": {
             "required": false,
@@ -5790,7 +5790,7 @@
             "tsType": {
               "name": "boolean"
             },
-            "description": "Whether the item is disabled."
+            "description": "Whether the item is disabled. Disabled items are dimmed and don't respond to touch."
           },
           "onPress": {
             "required": false,

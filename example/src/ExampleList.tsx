@@ -19,6 +19,7 @@ import ChipExample from './Examples/ChipExample';
 import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
+import DrawerExample from './Examples/DrawerExample';
 import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import IconExample from './Examples/IconExample';
@@ -64,6 +65,7 @@ export const mainExamples = {
   DataTable: DataTableExample,
   Dialog: DialogExample,
   Divider: DividerExample,
+  Drawer: DrawerExample,
   FAB: FABExample,
   IconButton: IconButtonExample,
   Icon: IconExample,

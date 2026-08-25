@@ -1,7 +1,10 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { render, screen } from '../../../test-utils';
+import { tokens } from '../../../theme/tokens';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
+
+const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', async () => {
@@ -64,5 +67,23 @@ describe('DrawerCollapsedItem', () => {
       screen.getByTestId('drawer-collapsed-item-container').props.children[1]
         .props.source
     ).toBe('star');
+  });
+
+  it('should render at full opacity when enabled', async () => {
+    await render(<DrawerCollapsedItem label="starred" focusedIcon="star" />);
+
+    expect(screen.getByTestId('drawer-collapsed-item')).toHaveStyle({
+      opacity: stateOpacity.enabled,
+    });
+  });
+
+  it('should dim the destination when disabled', async () => {
+    await render(
+      <DrawerCollapsedItem label="starred" focusedIcon="star" disabled />
+    );
+
+    expect(screen.getByTestId('drawer-collapsed-item')).toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
   });
 });

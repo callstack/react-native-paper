@@ -6,6 +6,23 @@ TBC
 
 ## Components
 
+### Drawer
+
+The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, or given new defaults. `Drawer.Item` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
+
+- **Trailing padding.** `Drawer.Item` reserved 36dp on the trailing edge and 28dp on the leading edge. Both are now 28dp, as the spec requires. Items sit 8dp wider.
+- **Active label weight.** The label of an active `Drawer.Item` now uses the prominent `labelLargeEmphasized` weight (700). Inactive labels are unchanged at 500.
+- **Section divider colour.** `Drawer.Section` drew its divider in a fixed grey that ignored the theme and was wrong in dark mode. It now uses `theme.colors.outlineVariant`, like every other `Divider`.
+- **Focus indicator.** `Drawer.Item` gains a keyboard focus ring in `theme.colors.secondary`. It appears only on keyboard focus, not on press.
+
+If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout. To restore the old trailing padding, pass it through `style`:
+
+```tsx
+<Drawer.Item label="Inbox" icon="inbox" style={{ marginEnd: 20 }} />
+```
+
+The theme also gains the 15 `*Emphasized` typescale keys (`labelLargeEmphasized`, `titleSmallEmphasized`, and so on). The values already existed in the token set; only the types were missing, so `<Text variant="labelLargeEmphasized">` now typechecks. This is additive — no existing key changed.
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.

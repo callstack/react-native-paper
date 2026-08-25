@@ -27,16 +27,12 @@ exports[`DrawerSection renders properly 1`] = `
         {
           "height": 1,
         },
-        [
-          {
-            "marginTop": 4,
-          },
-          {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
-          },
-        ],
+        {
+          "marginTop": 4,
+        },
       ]
     }
+    testID="drawer-section-divider"
   />
 </View>
 `;
