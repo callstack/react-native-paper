@@ -152,6 +152,17 @@ export const screenshots = {
   ToggleButton: 'screenshots/toggle-button.png',
   'ToggleButton.Group': 'screenshots/toggle-button-group.gif',
   'ToggleButton.Row': 'screenshots/toggle-button-row.gif',
+  Toolbar: {
+    'floating horizontal':
+      'screenshots/toolbar_floating_horizontal_standard.png',
+    'floating horizontal - vibrant':
+      'screenshots/toolbar_floating_horizontal_vibrant.png',
+    'floating vertical': 'screenshots/toolbar_floating_vertical_standard.png',
+    'floating vertical - vibrant':
+      'screenshots/toolbar_floating_vertical_vibrant.png',
+    docked: 'screenshots/toolbar_docked_standard.png',
+    'docked - vibrant': 'screenshots/toolbar_docked_vibrant.png',
+  },
   Tooltip: 'screenshots/tooltip.png',
   TouchableRipple: 'screenshots/touchable-ripple.gif',
 };

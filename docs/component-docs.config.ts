@@ -133,6 +133,9 @@ const pages = {
     ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
     ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
   },
+  Toolbar: {
+    Toolbar: 'Toolbar/Toolbar',
+  },
   Tooltip: {
     Tooltip: 'Tooltip/Tooltip',
   },

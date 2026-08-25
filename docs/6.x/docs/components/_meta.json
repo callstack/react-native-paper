@@ -151,6 +151,13 @@
   },
   {
     "type": "dir",
+    "name": "Toolbar",
+    "label": "Toolbar",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "dir",
     "name": "Tooltip",
     "label": "Tooltip",
     "collapsible": true,

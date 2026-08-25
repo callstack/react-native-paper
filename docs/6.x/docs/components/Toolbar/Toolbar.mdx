@@ -1,0 +1,163 @@
+---
+title: Toolbar
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+A toolbar groups icon actions behind a shared surface.
+
+It comes in two `variant`s: `floating`, a self-positioned pill anchored wherever you place it
+(similar to a `FAB`), and `docked`, a full-width bar pinned to the bottom edge that extends
+into the safe-area insets automatically. A floating toolbar can also be laid out vertically
+via `orientation`.
+
+The `colorScheme` prop controls how contained `IconButton`/`Button` children are colored. By
+default: `standard` keeps them neutral against a surface-colored container, while `vibrant`
+gives the toolbar itself a bold, primary-tinted container and switches selected/unselected
+children to matching vibrant colors, making the toolbar stand out as a focal point on the
+screen.
+
+
+
+
+  <ScreenshotTabs screenshotData={{"floating horizontal":"screenshots/toolbar_floating_horizontal_standard.png","floating horizontal - vibrant":"screenshots/toolbar_floating_horizontal_vibrant.png","floating vertical":"screenshots/toolbar_floating_vertical_standard.png","floating vertical - vibrant":"screenshots/toolbar_floating_vertical_vibrant.png","docked":"screenshots/toolbar_docked_standard.png","docked - vibrant":"screenshots/toolbar_docked_vibrant.png"}}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Toolbar, IconButton } from 'react-native-paper';
+
+const MyComponent = () => (
+  <View style={styles.anchor} pointerEvents="box-none">
+    <Toolbar>
+      <IconButton icon="format-bold" aria-label="Bold" onPress={() => {}} />
+      <IconButton icon="format-italic" aria-label="Italic" onPress={() => {}} />
+      <IconButton icon="format-underline" aria-label="Underline" onPress={() => {}} />
+    </Toolbar>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  anchor: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 24,
+    alignItems: 'center',
+  },
+});
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+
+
+
+<div>
+
+### children (required)
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="children" />
+
+<div>
+
+### variant
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="variant" />
+
+<div>
+
+### orientation
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="orientation" />
+
+<div>
+
+### colorScheme
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="colorScheme" />
+
+<div>
+
+### containerColor
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="containerColor" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="style" />
+
+<div>
+
+### contentContainerStyle
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="contentContainerStyle" />
+
+<div>
+
+### testID
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="testID" />
+
+<div>
+
+### aria-label
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="aria-label" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="theme" />
+
+<div>
+
+### ref
+
+</div>
+
+  <PropTable componentLink="Toolbar/Toolbar" prop="ref" />
+
+
+
+<span />
+
+
+  ## Theme colors
+
+  <ThemeColorsTable themeColorsData={{"standard":{"unselected":{"backgroundColor":"theme.colors.surfaceContainer","iconColor":"theme.colors.onSurfaceVariant","textColor":"theme.colors.onSurfaceVariant"},"selected":{"backgroundColor":"theme.colors.secondaryContainer","iconColor":"theme.colors.onSecondaryContainer"}},"vibrant":{"unselected":{"backgroundColor":"theme.colors.primaryContainer","iconColor":"theme.colors.onPrimaryContainer","textColor":"theme.colors.onPrimaryContainer"},"selected":{"backgroundColor":"theme.colors.surfaceContainer","iconColor":"theme.colors.onSurface"}}}} componentName="Toolbar" />
+
+
+<span />
