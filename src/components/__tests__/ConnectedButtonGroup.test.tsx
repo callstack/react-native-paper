@@ -151,6 +151,54 @@ it('shows the selection check only on the selected button', async () => {
   expect(screen.queryByTestId('train-check-icon')).toBeNull();
 });
 
+it('swaps the leading icon for the selection check on labelled buttons', async () => {
+  await renderGroup({
+    buttons: [
+      {
+        value: 'walk',
+        label: 'Walking',
+        icon: 'walk',
+        showSelectedCheck: true,
+        testID: 'walk',
+      },
+      {
+        value: 'train',
+        label: 'Transit',
+        icon: 'train',
+        showSelectedCheck: true,
+        testID: 'train',
+      },
+    ],
+  });
+
+  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
+  expect(screen.queryByTestId('walk-icon')).toBeNull();
+
+  expect(screen.getByTestId('train-icon')).toBeTruthy();
+  expect(screen.queryByTestId('train-check-icon')).toBeNull();
+
+  // Both sides of the swap are driven by a scale transform: whichever element
+  // mounts grows in from the shared value the other one is unwinding. Losing
+  // the transform makes the icon pop back at full size on deselect.
+  expect(screen.getByTestId('walk-check-icon')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+  expect(screen.getByTestId('train-icon')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+});
+
+it('keeps the icon of a selected icon-only button', async () => {
+  await renderGroup({
+    buttons: [
+      { value: 'walk', icon: 'walk', showSelectedCheck: true, testID: 'walk' },
+    ],
+  });
+
+  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
+  expect(screen.getByTestId('walk-icon')).toBeTruthy();
+});
+
 it('applies a custom checked color to the selected label', async () => {
   await renderGroup({
     buttons: [

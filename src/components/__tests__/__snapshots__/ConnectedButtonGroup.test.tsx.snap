@@ -1341,7 +1341,18 @@ exports[`renders multi-select connected button group with icons 1`] = `
         }
       >
         <View
-          style={null}
+          style={
+            [
+              null,
+              {
+                "transform": [
+                  {
+                    "scale": 1,
+                  },
+                ],
+              },
+            ]
+          }
         >
           <Text
             accessibilityElementsHidden={true}
@@ -1461,7 +1472,18 @@ exports[`renders multi-select connected button group with icons 1`] = `
         }
       >
         <View
-          style={null}
+          style={
+            [
+              null,
+              {
+                "transform": [
+                  {
+                    "scale": 1,
+                  },
+                ],
+              },
+            ]
+          }
         >
           <Text
             accessibilityElementsHidden={true}

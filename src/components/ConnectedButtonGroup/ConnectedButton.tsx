@@ -71,6 +71,13 @@ const ConnectedButton = ({
   const restRadius = checked ? outerRadius : innerRadius;
   const cornerRadius = useSharedValue(restRadius);
 
+  // Selection-check behaviour matches `SegmentedButtonItem` for migration
+  // parity: the check scales in and takes the place of the leading icon on a
+  // labelled button, while an icon-only button keeps its icon alongside it.
+  const showCheck = Boolean(checked && showSelectedCheck);
+  const showIcon = Boolean(icon) && !(label && showCheck);
+  const checkScale = useSharedValue(showCheck ? 1 : 0);
+
   const reduceMotion = useReduceMotion();
   const springConfig = React.useMemo(
     () => ({
@@ -83,14 +90,15 @@ const ConnectedButton = ({
   const isFirstRender = React.useRef(true);
 
   React.useEffect(() => {
-    // The shared value is already initialised to the resting radius, so skip
+    // The shared values are already initialised to their resting state, so skip
     // the mount render and only animate subsequent selection / size changes.
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
     cornerRadius.value = withSpring(restRadius, springConfig);
-  }, [restRadius, cornerRadius, springConfig]);
+    checkScale.value = withSpring(showCheck ? 1 : 0, springConfig);
+  }, [restRadius, showCheck, cornerRadius, checkScale, springConfig]);
 
   const handlePressIn = React.useCallback(() => {
     // Pressed takes precedence over selection: even a selected (fully-rounded)
@@ -122,9 +130,31 @@ const ConnectedButton = ({
     };
   }, [animateStart, animateEnd, outerRadius]);
 
-  const showCheck = checked && showSelectedCheck;
-  const showIcon = Boolean(icon) && !showCheck;
-  const iconGap = label ? { marginEnd: sizeStyle.iconLabelGap } : null;
+  const checkIconStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: checkScale.value }],
+  }));
+
+  // Whichever of the two mounts scales in from `checkScale`, which still holds
+  // the *previous* selection state on the render that swaps them — the effect
+  // above only retargets it after paint. So on select the check grows from 0,
+  // and on deselect the leading icon grows from 0 as `checkScale` unwinds.
+  // Do not "simplify" this to a constant: without it the icon pops back in at
+  // full size the moment the check unmounts. Icon-only buttons show both at
+  // once and never swap, so they stay at scale 1.
+  const hasLabel = Boolean(label);
+  const leadingIconStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ scale: hasLabel ? 1 - checkScale.value : 1 }],
+    }),
+    [hasLabel]
+  );
+
+  // A gap is needed before the label, and between the check and the leading
+  // icon when an icon-only button shows both.
+  const iconGap =
+    label || (showCheck && showIcon)
+      ? { marginEnd: sizeStyle.iconLabelGap }
+      : null;
 
   // When the container is translucent (disabled), the fill is drawn by the
   // overlay below, so the base view stays transparent.
@@ -187,22 +217,28 @@ const ConnectedButton = ({
           ]}
         >
           {showCheck ? (
-            <View testID={getTestID(testID, 'check-icon')} style={iconGap}>
+            <Animated.View
+              testID={getTestID(testID, 'check-icon')}
+              style={[iconGap, checkIconStyle]}
+            >
               <Icon
                 source="check"
                 size={sizeStyle.iconSize}
                 color={colors.contentColor}
               />
-            </View>
+            </Animated.View>
           ) : null}
           {showIcon ? (
-            <View testID={getTestID(testID, 'icon')} style={iconGap}>
+            <Animated.View
+              testID={getTestID(testID, 'icon')}
+              style={[iconGap, leadingIconStyle]}
+            >
               <Icon
                 source={icon}
                 size={sizeStyle.iconSize}
                 color={colors.contentColor}
               />
-            </View>
+            </Animated.View>
           ) : null}
           {label ? (
             <Text
