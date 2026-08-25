@@ -11,6 +11,19 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
 To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal/Portal) component.
 
+## Recommended props
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `icon` | `IconSource` | Icon rendered through `Dialog.Icon`. |
+| `title` | `ReactNode` | Dialog title rendered through `Dialog.Title`. |
+| `content` | `ReactNode` | Required dialog content. Non-empty strings use Material 3 supporting-text styles. |
+| `actions` | `DialogActionsProps[]` | Action labels, press handlers, and Button props. |
+| `scrollable` | `boolean` | Renders content through `Dialog.ScrollArea` and a `ScrollView`. |
+| `contentProps` | `DialogContentProps` | Props forwarded to `Dialog.Content`. |
+| `scrollAreaProps` | `DialogScrollAreaProps` | Props forwarded to `Dialog.ScrollArea`. |
+| `scrollViewProps` | `ScrollViewProps` | Props forwarded to `ScrollView`. |
+
 
 
 
@@ -21,7 +34,7 @@ To render the `Dialog` above other components, you'll need to wrap it with the [
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+import { Button, Dialog, Portal, PaperProvider } from 'react-native-paper';
 
 const MyComponent = () => {
   const [visible, setVisible] = React.useState(false);
@@ -35,15 +48,13 @@ const MyComponent = () => {
       <View>
         <Button onPress={showDialog}>Show Dialog</Button>
         <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Alert</Dialog.Title>
-            <Dialog.Content>
-              <Text variant="bodyMedium">This is simple dialog</Text>
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button onPress={hideDialog}>Done</Button>
-            </Dialog.Actions>
-          </Dialog>
+          <Dialog
+            visible={visible}
+            onDismiss={hideDialog}
+            title="Alert"
+            content="This is simple dialog"
+            actions={[{ label: 'Done', onPress: hideDialog }]}
+          />
         </Portal>
       </View>
     </PaperProvider>
@@ -51,6 +62,32 @@ const MyComponent = () => {
 };
 
 export default MyComponent;
+```
+
+## Compound composition
+
+`Dialog.Icon`, `Dialog.Title`, `Dialog.Content`, `Dialog.ScrollArea`, and
+`Dialog.Actions` remain available for custom composition within `Dialog`.
+Passing them through `children` is deprecated; prefer the props above.
+
+## Migrating from children
+
+```js
+// Before
+<Dialog visible={visible} onDismiss={hideDialog}>
+  <Dialog.Title>Alert</Dialog.Title>
+  <Dialog.Content><Text>Something happened.</Text></Dialog.Content>
+  <Dialog.Actions><Button onPress={hideDialog}>Done</Button></Dialog.Actions>
+</Dialog>
+
+// After
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Alert"
+  content="Something happened."
+  actions={[{ label: 'Done', onPress: hideDialog }]}
+/>
 ```
 
 
@@ -93,7 +130,7 @@ export default MyComponent;
 
 <div>
 
-### children (required)
+### children (depracated, use props instead)
 
 </div>
 
