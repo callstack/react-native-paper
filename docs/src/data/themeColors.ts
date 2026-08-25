@@ -276,7 +276,7 @@ export const themeColors = {
       placeholderTextColor: 'theme.colors.onSurfaceVariant',
       textColor: 'theme.colors.onSurface',
       selectionColor: 'theme.colors.primary',
-      iconColor: 'theme.colors.onSurfaceVariant',
+      iconColor: 'theme.colors.onSurface',
       trailingIconColor: 'theme.colors.onSurfaceVariant',
       dividerColor: 'theme.colors.outline',
     },

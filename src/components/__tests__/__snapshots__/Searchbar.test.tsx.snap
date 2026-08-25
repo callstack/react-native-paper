@@ -2,7 +2,7 @@
 
 exports[`activity indicator snapshot test 1`] = `
 <View
-  collapsable={false}
+  style={null}
   testID="search-bar-wrapper"
 >
   <View
@@ -166,7 +166,7 @@ exports[`activity indicator snapshot test 1`] = `
                   style={
                     [
                       {
-                        "color": "rgba(73, 69, 79, 1)",
+                        "color": "rgba(29, 27, 32, 1)",
                         "fontSize": 24,
                       },
                       [
@@ -430,7 +430,7 @@ exports[`activity indicator snapshot test 1`] = `
 
 exports[`renders with placeholder 1`] = `
 <View
-  collapsable={false}
+  style={null}
   testID="search-bar-wrapper"
 >
   <View
@@ -594,7 +594,7 @@ exports[`renders with placeholder 1`] = `
                   style={
                     [
                       {
-                        "color": "rgba(73, 69, 79, 1)",
+                        "color": "rgba(29, 27, 32, 1)",
                         "fontSize": 24,
                       },
                       [
@@ -819,7 +819,7 @@ exports[`renders with placeholder 1`] = `
 
 exports[`renders with text 1`] = `
 <View
-  collapsable={false}
+  style={null}
   testID="search-bar-wrapper"
 >
   <View
@@ -983,7 +983,7 @@ exports[`renders with text 1`] = `
                   style={
                     [
                       {
-                        "color": "rgba(73, 69, 79, 1)",
+                        "color": "rgba(29, 27, 32, 1)",
                         "fontSize": 24,
                       },
                       [

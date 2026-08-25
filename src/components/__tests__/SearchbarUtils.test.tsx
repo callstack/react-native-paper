@@ -10,7 +10,7 @@ describe('getSearchbarColors', () => {
       containerColor: theme.colors.surfaceContainerHigh,
       inputColor: theme.colors.onSurface,
       placeholderColor: theme.colors.onSurfaceVariant,
-      leadingIconColor: theme.colors.onSurfaceVariant,
+      leadingIconColor: theme.colors.onSurface,
       trailingIconColor: theme.colors.onSurfaceVariant,
       cursorColor: theme.colors.primary,
       dividerColor: theme.colors.outline,

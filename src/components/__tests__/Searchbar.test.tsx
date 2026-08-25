@@ -1,8 +1,9 @@
-import { Animated, Text } from 'react-native';
+import { Text } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import { fireEvent, userEvent } from '@testing-library/react-native';
 
+import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
@@ -41,7 +42,7 @@ it('renders without ActivityIndicator', async () => {
   expect(screen.queryByTestId('activity-indicator')).not.toBeOnTheScreen();
 });
 
-it('renders clear icon with custom color', async () => {
+it('uses the trailing icon color for the clear icon', async () => {
   await render(
     <Searchbar testID="search-bar" value="value" iconColor="purple" />
   );
@@ -51,7 +52,9 @@ it('renders clear icon with custom color', async () => {
     .children;
 
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(iconComponent.props.iconColor).toBe('purple');
+  expect(iconComponent.props.iconColor).toBe(
+    getTheme().colors.onSurfaceVariant
+  );
 });
 
 it('renders clear icon wrapper, which can be the target of touch events, if search has value', async () => {
@@ -72,28 +75,15 @@ it('renders clear icon wrapper, which is never target of touch events, if search
   ).toBe('none');
 });
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
+it('applies transform styles to the outer wrapper', async () => {
   await render(
     <Searchbar
       testID="search-bar"
       value=""
-      style={[{ transform: [{ scale: value }] }]}
+      style={{ transform: [{ scale: 1.5 }] }}
     />
   );
-  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
 
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
   expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
@@ -308,4 +298,7 @@ it('renders a results container via Searchbar.Results', async () => {
   );
 
   expect(screen.getByTestId('search-bar-results')).toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-results')).toHaveStyle({
+    borderRadius: getTheme().shapes.corner.medium,
+  });
 });

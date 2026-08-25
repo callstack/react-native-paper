@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type { Animated, StyleProp, ViewStyle } from 'react-native';
 
+import { SearchbarTokens } from './tokens';
 import { getSearchbarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ThemeProp } from '../../types';
 import Surface from '../Surface';
 
@@ -66,6 +68,7 @@ const SearchbarResults = ({
     () => getSearchbarColors(theme),
     [theme]
   );
+  const borderRadius = resolveCornerRadius(theme, SearchbarTokens.results);
 
   return (
     <Surface
@@ -73,7 +76,7 @@ const SearchbarResults = ({
       elevation={elevation}
       style={[
         styles.container,
-        { backgroundColor: resultsContainerColor },
+        { backgroundColor: resultsContainerColor, borderRadius },
         style,
       ]}
       theme={theme}

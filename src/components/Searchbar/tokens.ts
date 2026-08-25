@@ -23,6 +23,8 @@ const shape = {
   contained: 'extraLarge',
   /** Divided search view: square corners. */
   divided: 'none',
+  /** Contained docked results: medium corners (12dp). */
+  results: 'medium',
 } as const satisfies Record<string, ShapeToken>;
 
 const colors = {
@@ -31,7 +33,7 @@ const colors = {
   // component (input was onSurfaceVariant, placeholder was onSurface).
   input: 'onSurface',
   placeholder: 'onSurfaceVariant',
-  leadingIcon: 'onSurfaceVariant',
+  leadingIcon: 'onSurface',
   trailingIcon: 'onSurfaceVariant',
   cursor: 'primary',
   divider: 'outline',

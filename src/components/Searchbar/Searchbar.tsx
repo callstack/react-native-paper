@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import type {
+  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
@@ -175,7 +176,7 @@ export type Props = TextInputProps & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */
@@ -360,7 +361,7 @@ const Searchbar = ({
   const hasWrapperStyle = Object.keys(wrapperStyle).length > 0;
 
   return (
-    <Animated.View
+    <Reanimated.View
       style={hasWrapperStyle ? wrapperStyle : null}
       testID={`${testID}-wrapper`}
     >
@@ -447,7 +448,7 @@ const Searchbar = ({
               <IconButton
                 borderless
                 aria-label={clearAccessibilityLabel}
-                iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+                iconColor={value ? trailingIconColor : 'rgba(255, 255, 255, 0)'}
                 onPress={handleClearPress}
                 icon={
                   clearIcon ||
@@ -498,7 +499,7 @@ const Searchbar = ({
           )}
         </Surface>
       </Reanimated.View>
-    </Animated.View>
+    </Reanimated.View>
   );
 };
 

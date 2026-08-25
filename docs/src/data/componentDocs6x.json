@@ -10600,19 +10600,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "ViewStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<ViewStyle>"
             },
             "description": ""
           },

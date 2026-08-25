@@ -43,7 +43,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     testID="surface"
   >
     <View
-      collapsable={false}
+      style={null}
       testID="search-bar-wrapper"
     >
       <View
@@ -207,7 +207,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       style={
                         [
                           {
-                            "color": "rgba(73, 69, 79, 1)",
+                            "color": "rgba(29, 27, 32, 1)",
                             "fontSize": 24,
                           },
                           [
