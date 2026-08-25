@@ -60,7 +60,11 @@ const DialogActions = ({
   return (
     <View {...rest} style={[styles.v3Container, style]}>
       {items.map((child, index) => (
-        <React.Fragment key={index}>
+        <React.Fragment
+          key={
+            React.isValidElement(child) && child.key != null ? child.key : index
+          }
+        >
           {index > 0 && <View style={styles.spacer} />}
           {child}
         </React.Fragment>
