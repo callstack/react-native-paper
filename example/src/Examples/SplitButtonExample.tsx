@@ -6,6 +6,13 @@ import { List, Menu, SplitButton, Switch, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const modes = ['filled', 'tonal', 'elevated', 'outlined'] as const;
+const sizes = [
+  'extra-small',
+  'small',
+  'medium',
+  'large',
+  'extra-large',
+] as const;
 const SplitButtonExample = () => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
@@ -67,6 +74,22 @@ const SplitButtonExample = () => {
               onPress={() => {}}
               onTrailingPress={() => {}}
               trailingAccessibilityLabel={`${mode} options`}
+            />
+          ))}
+        </View>
+      </List.Section>
+
+      <List.Section title="Sizes">
+        <View style={styles.column}>
+          {sizes.map((size) => (
+            <SplitButton
+              key={size}
+              size={size}
+              icon="plus"
+              label={size}
+              onPress={() => {}}
+              onTrailingPress={() => {}}
+              trailingAccessibilityLabel={`${size} options`}
             />
           ))}
         </View>
