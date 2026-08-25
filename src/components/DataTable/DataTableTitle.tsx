@@ -101,15 +101,16 @@ const DataTableTitle = ({
   );
 
   const { duration, easing } = theme.motion;
+  const { scale } = theme.animation;
 
   React.useEffect(() => {
     Animated.timing(spinAnim, {
       toValue: sortDirection === 'ascending' ? 0 : 1,
-      duration: duration.short3,
+      duration: duration.short3 * scale,
       easing: Easing.bezier(...easing.standard),
       useNativeDriver: true,
     }).start();
-  }, [sortDirection, spinAnim, duration, easing]);
+  }, [sortDirection, spinAnim, duration, easing, scale]);
 
   const textColor = theme.colors.onSurface;
 

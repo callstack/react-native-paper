@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+import { Animated } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
@@ -20,6 +22,26 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
+  it('uses zero-duration sort animation when animation scale is disabled', async () => {
+    const timingSpy = jest.spyOn(Animated, 'timing');
+
+    await render(
+      <DataTable.Title
+        sortDirection="descending"
+        theme={{ animation: { scale: 0 } }}
+      >
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(timingSpy).toHaveBeenLastCalledWith(
+      expect.anything(),
+      expect.objectContaining({ duration: 0 })
+    );
+
+    timingSpy.mockRestore();
+  });
+
   it('renders data table title with sort icon', async () => {
     const tree = (
       await render(
