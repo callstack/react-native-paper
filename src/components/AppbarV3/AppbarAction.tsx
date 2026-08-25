@@ -4,14 +4,14 @@ import type {
   AppbarAction as AppbarActionConfig,
   AppbarLeadingAction,
 } from './types';
-import type { Theme, ThemeProp } from '../../types';
+import type { Theme } from '../../types';
 import AppbarBackIcon from '../Appbar/AppbarBackIcon';
 import IconButton from '../IconButton/IconButton';
 
 type Props = {
   action: AppbarActionConfig | AppbarLeadingAction;
   leading?: boolean;
-  theme: ThemeProp;
+  theme: Theme;
 };
 
 const AppbarAction = ({ action, leading = false, theme }: Props) => {
@@ -27,7 +27,6 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
     type?: 'back' | 'icon';
   };
   const isBackAction = 'type' in action && action.type === 'back';
-  const resolvedTheme = theme as Theme;
   const mode =
     variant === 'filled'
       ? 'contained'
@@ -39,13 +38,13 @@ const AppbarAction = ({ action, leading = false, theme }: Props) => {
     (mode
       ? undefined
       : leading
-        ? resolvedTheme.colors.onSurface
-        : resolvedTheme.colors.onSurfaceVariant);
+        ? theme.colors.onSurface
+        : theme.colors.onSurfaceVariant);
 
   return (
     <IconButton
       {...buttonProps}
-      icon={isBackAction ? AppbarBackIcon : action.icon!}
+      icon={action.icon ?? AppbarBackIcon}
       aria-label={
         isBackAction ? (action['aria-label'] ?? 'Back') : action['aria-label']
       }
