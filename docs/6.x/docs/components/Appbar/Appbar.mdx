@@ -8,95 +8,100 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-A component to display action items in a bar. It can be placed at the top or bottom.
-The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
-The bottom bar usually provides access to a drawer and up to four actions.
+A Material Design app bar for displaying a page headline, navigation, and
+contextual actions. Appbar supports small, medium flexible, large flexible,
+and search variants. Its surface color automatically changes when content
+has scrolled, and it accounts for safe-area insets.
 
-By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
-See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
+## Variants
 
+| `variant` | Purpose |
+| --- | --- |
+| `small` | A compact 64dp app bar with a one-line headline. |
+| `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |
+| `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |
+| `search` | An app bar containing a centered Paper `Searchbar`. |
 
+## Main props
 
+| Prop | Description |
+| --- | --- |
+| `headline` | Required accessible headline for every non-search variant. |
+| `subtitle` | Optional supporting text for written headlines. |
+| `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |
+| `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |
+| `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |
+| `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. |
+| `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`. |
+| `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |
+| `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |
+| `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |
+| `statusBarHeight` | Overrides only the automatic top inset. |
+| `contentStyle` | Styles the headline and subtitle area. |
+| `style` | Styles the app bar and can override its background color. |
 
-  <ScreenshotTabs screenshotData={"screenshots/appbar.png"}/>
+## Migrating from the compound API
 
-
+`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and
+`Appbar.BackAction` have been removed. Render one `Appbar` and provide its
+headline, leading button, and trailing actions as props. The former
+`mode="medium"` and `mode="large"` values are now
+`variant="medium-flexible"` and `variant="large-flexible"`; centered
+content uses `headlineAlignment="center"`.
 ## Usage
-### Top bar
+
+### Small app bar
 ```js
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 
 const MyComponent = () => (
-  <Appbar.Header>
-    <Appbar.BackAction onPress={() => {}} />
-    <Appbar.Content title="Title" />
-    <Appbar.Action icon="calendar" onPress={() => {}} />
-    <Appbar.Action icon="magnify" onPress={() => {}} />
-  </Appbar.Header>
+  <Appbar
+    variant="small"
+    headline="Inbox"
+    leadingButton={{ type: 'back', onPress: () => {} }}
+    trailingActions={[
+      {
+        key: 'search',
+        icon: 'magnify',
+        'aria-label': 'Search',
+        onPress: () => {},
+      },
+      {
+        key: 'more',
+        icon: 'dots-vertical',
+        'aria-label': 'More options',
+        onPress: () => {},
+      },
+    ]}
+  />
 );
 
 export default MyComponent;
 ```
 
-### Bottom bar
+### Flexible app bar
 ```js
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Appbar, FAB, useTheme } from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+<Appbar
+  variant="large-flexible"
+  headline="Photos"
+  subtitle="Summer holiday"
+  headlineAlignment="center"
+  isScrolled={isScrolled}
+/>
+```
 
-const BOTTOM_APPBAR_HEIGHT = 80;
-const MEDIUM_FAB_HEIGHT = 56;
-
-const MyComponent = () => {
-  const { bottom } = useSafeAreaInsets();
-  const theme = useTheme();
-
-  return (
-    <Appbar
-      style={[
-        styles.bottom,
-        {
-          height: BOTTOM_APPBAR_HEIGHT + bottom,
-          backgroundColor: theme.colors.surfaceContainer,
-        },
-      ]}
-      safeAreaInsets={{ bottom }}
-    >
-      <Appbar.Action icon="archive" onPress={() => {}} />
-      <Appbar.Action icon="email" onPress={() => {}} />
-      <Appbar.Action icon="label" onPress={() => {}} />
-      <Appbar.Action icon="delete" onPress={() => {}} />
-      <FAB
-        mode="flat"
-        size="medium"
-        icon="plus"
-        onPress={() => {}}
-        style={[
-          styles.fab,
-          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
-        ]}
-      />
-    </Appbar>
-  );
-};
-
-const styles = StyleSheet.create({
-  bottom: {
-    backgroundColor: 'aquamarine',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  fab: {
-    position: 'absolute',
-    right: 16,
-  },
-});
-
-export default MyComponent;
+### Search app bar
+```js
+<Appbar
+  variant="search"
+  leadingButton={{ type: 'back', onPress: () => {} }}
+  searchBar={{
+    placeholder: 'Search messages',
+    value: query,
+    onChangeText: setQuery,
+  }}
+/>
 ```
 
 
@@ -107,59 +112,35 @@ export default MyComponent;
 
 <div>
 
-### dark
+### headlineAlignment
 
 </div>
 
-  <PropTable componentLink="Appbar/Appbar" prop="dark" />
+  <PropTable componentLink="Appbar/Appbar" prop="headlineAlignment" />
 
 <div>
 
-### children (required)
+### isScrolled
 
 </div>
 
-  <PropTable componentLink="Appbar/Appbar" prop="children" />
+  <PropTable componentLink="Appbar/Appbar" prop="isScrolled" />
 
 <div>
 
-### mode  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### testID
 
 </div>
 
-  <PropTable componentLink="Appbar/Appbar" prop="mode" />
+  <PropTable componentLink="Appbar/Appbar" prop="testID" />
 
 <div>
 
-### elevated  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### trailingActions
 
 </div>
 
-  <PropTable componentLink="Appbar/Appbar" prop="elevated" />
-
-<div>
-
-### safeAreaInsets
-
-</div>
-
-  <PropTable componentLink="Appbar/Appbar" prop="safeAreaInsets" />
-
-<div>
-
-### theme
-
-</div>
-
-  <PropTable componentLink="Appbar/Appbar" prop="theme" />
-
-<div>
-
-### style
-
-</div>
-
-  <PropTable componentLink="Appbar/Appbar" prop="style" />
+  <PropTable componentLink="Appbar/Appbar" prop="trailingActions" />
 
 
 
@@ -168,7 +149,7 @@ export default MyComponent;
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"default":{"backgroundColor":"theme.colors.surface"},"elevated":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Appbar" />
+  <ThemeColorsTable themeColorsData={{"default":{"backgroundColor":"theme.colors.surface"},"scrolled":{"backgroundColor":"theme.colors.surfaceContainer"},"leading action":{"iconColor":"theme.colors.onSurface"},"trailing action":{"iconColor":"theme.colors.onSurfaceVariant"},"headline":{"textColor":"theme.colors.onSurface"},"subtitle":{"textColor":"theme.colors.onSurfaceVariant"}}} componentName="Appbar" />
 
 
 <span />

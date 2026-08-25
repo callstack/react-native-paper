@@ -1,486 +1,725 @@
-import { Animated } from 'react-native';
+import * as React from 'react';
+import { Text, View } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
-import { render, screen } from '../../../test-utils';
-import { tokens } from '../../../theme/tokens';
+import { render, screen, userEvent } from '../../../test-utils';
 import Appbar from '../../Appbar';
-import {
-  getAppbarBackgroundColor,
-  getAppbarBorders,
-  modeTextVariant,
-  renderAppbarContent as utilRenderAppbarContent,
-} from '../../Appbar/utils';
-import Menu from '../../Menu/Menu';
-import Searchbar from '../../Searchbar';
-import Text from '../../Typography/Text';
+import type { AppbarVariant } from '../../Appbar';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const renderAppbarContent = utilRenderAppbarContent as (
-  props: Parameters<typeof utilRenderAppbarContent>[0]
-) => { props: any }[];
+const writtenHeadlineVariants: Exclude<AppbarVariant, 'search'>[] = [
+  'small',
+  'medium-flexible',
+  'large-flexible',
+];
 
-describe('Appbar', () => {
-  it('does not pass any additional props to Searchbar', async () => {
-    const tree = (
+const decorativeHeadlineImage = (
+  <View>
+    <View accessible role="img" accessibilityLabel="Brand artwork" />
+    <Text accessible role="heading">
+      Brand words
+    </Text>
+  </View>
+);
+
+describe('Appbar content', () => {
+  it.each([
+    {
+      variant: 'small',
+      headlineVariant: 'titleLarge',
+      headlineLines: 1,
+      subtitleVariant: 'labelMedium',
+      subtitleSpacing: 0,
+    },
+    {
+      variant: 'medium-flexible',
+      headlineVariant: 'headlineMedium',
+      headlineLines: 2,
+      subtitleVariant: 'labelLarge',
+      subtitleSpacing: 4,
+    },
+    {
+      variant: 'large-flexible',
+      headlineVariant: 'displaySmall',
+      headlineLines: 2,
+      subtitleVariant: 'titleMedium',
+      subtitleSpacing: 8,
+    },
+  ] as const)(
+    'uses the $variant content treatment',
+    async ({
+      variant,
+      headlineVariant,
+      headlineLines,
+      subtitleVariant,
+      subtitleSpacing,
+    }) => {
       await render(
-        <Appbar>
-          <Searchbar placeholder="Search" value="" />
-        </Appbar>
-      )
-    ).toJSON();
+        <Appbar variant={variant} headline="Inbox" subtitle="3 unread" />
+      );
 
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', async () => {
-    const tree = (
-      await render(
-        <Appbar>
-          <Appbar.BackAction onPress={() => {}} />
-          <Appbar.Content title="Examples" />
-          <Appbar.Action icon="menu" onPress={() => {}} />
-        </Appbar>
-      )
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-});
-
-describe('renderAppbarContent', () => {
-  const children = [
-    <Appbar.BackAction onPress={() => {}} key={0} />,
-    <Appbar.Content title="Examples" key={1} />,
-    <Appbar.Action icon="magnify" onPress={() => {}} key={2} />,
-    <Appbar.Action icon="menu" onPress={() => {}} key={3} />,
-  ];
-
-  it('should render all children types if renderOnly is not specified', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-    });
-
-    expect(result).toHaveLength(4);
-  });
-
-  it('should render all children types except specified in renderExcept', () => {
-    const result = renderAppbarContent({
-      children: [
-        ...children,
-        <Menu
-          key={4}
-          anchor={<Appbar.Action icon="menu" onPress={() => {}} />}
-          visible={false}
-        >
-          {null}
-        </Menu>,
-      ],
-      isDark: false,
-      renderExcept: [
-        'Appbar',
-        'Appbar.Header',
-        'Appbar.BackAction',
-        'Appbar.Content',
-      ],
-    });
-
-    expect(result).toHaveLength(3);
-  });
-
-  it('should render only children types specifed in renderOnly', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Action'],
-    });
-
-    expect(result).toHaveLength(2);
-  });
-
-  it('should render AppbarContent with correct mode', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Content'],
-      mode: 'large',
-    });
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(result[0].props.mode).toBe('large');
-  });
-
-  it('should render centered AppbarContent', () => {
-    const result = renderAppbarContent({
-      children,
-      isDark: false,
-      renderOnly: ['Appbar.Content'],
-      mode: 'center-aligned',
-      shouldCenterContent: true,
-    });
-
-    const centerAlignedContent = {
-      alignItems: 'center',
-    };
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(result[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
-    );
-  });
-
-  it('should render AppbarContent with correct spacings', () => {
-    const renderResult = (withAppbarBackAction = false) =>
-      renderAppbarContent({
-        children,
-        isDark: false,
-        renderOnly: [
-          'Appbar.Content',
-          withAppbarBackAction && 'Appbar.BackAction',
-        ],
+      expect(screen.getByTestId('appbar-content-headline-text')).toHaveStyle(
+        getTheme().fonts[headlineVariant]
+      );
+      expect(screen.getByTestId('appbar-content-headline-text')).toHaveProp(
+        'numberOfLines',
+        headlineLines
+      );
+      expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
+        ...getTheme().fonts[subtitleVariant],
+        color: getTheme().colors.onSurfaceVariant,
+        marginTop: subtitleSpacing,
       });
-
-    const v3Spacing = {
-      marginLeft: 12,
-    };
-
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(renderResult()[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3Spacing)])
-    );
-  });
-
-  it('Is recognized as a heading when no onPress callback has been passed', async () => {
-    await render(
-      <SafeAreaProvider>
-        <Appbar.Header>
-          <Appbar.Content title="Accessible test" />
-        </Appbar.Header>
-      </SafeAreaProvider>
-    );
-
-    expect(screen.getByRole('heading')).toBeOnTheScreen();
-  });
-  it('is recognized as a button when onPress callback has been passed', async () => {
-    await render(
-      <SafeAreaProvider>
-        <Appbar.Header>
-          <Appbar.Content title="Accessible test" onPress={() => {}} />
-        </Appbar.Header>
-      </SafeAreaProvider>
-    );
-
-    expect(screen.getByRole('button')).toBeEnabled();
-    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
-  });
-  it('is recognized as a disabled button when onPress and disabled is passed', async () => {
-    await render(
-      <SafeAreaProvider>
-        <Appbar.Header>
-          <Appbar.Content title="Accessible test" onPress={() => {}} disabled />
-        </Appbar.Header>
-      </SafeAreaProvider>
-    );
-
-    expect(screen.getByRole('button')).toBeDisabled();
-    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
-  });
-});
-
-describe('AppbarAction', () => {
-  it('should be rendered with default theme color', async () => {
-    await render(
-      <Appbar>
-        <Appbar.Action icon="menu" testID="appbar-action" />
-      </Appbar>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(
-      getTheme().colors.onSurfaceVariant
-    );
-  });
-
-  it('should be rendered with specific theme color if is leading', async () => {
-    await render(
-      <Appbar>
-        <Appbar.Action icon="menu" testID="appbar-action" isLeading />
-      </Appbar>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
-  });
-
-  it('should be rendered with custom color', async () => {
-    await render(
-      <Appbar>
-        <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
-      </Appbar>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe('purple');
-  });
-
-  it('should render AppbarBackAction with custom color', async () => {
-    await render(
-      <Appbar>
-        <Appbar.BackAction color="purple" testID="appbar-action" />
-      </Appbar>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarBackActionIcon = screen.getByTestId('cross-fade-icon-current')
-      .props.children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarBackActionIcon.props.color).toBe('purple');
-  });
-});
-
-describe('AppbarContent', () => {
-  (['small', 'medium', 'large', 'center-aligned'] as const).forEach((mode) =>
-    it(`should render text component with appropriate variant for ${mode} mode`, async () => {
-      await render(
-        <Appbar mode={mode}>
-          <Appbar.Content title="Title" />
-        </Appbar>
-      );
-
-      expect(screen.getByTestId('appbar-content-title-text')).toHaveStyle(
-        getTheme().fonts[modeTextVariant[mode]]
-      );
-    })
+    }
   );
 
-  it('should render component passed to title', async () => {
-    await render(
-      <Appbar>
-        <Appbar.Content
-          title={
-            <Text testID="title" variant="displaySmall">
-              Title
-            </Text>
-          }
-        />
-      </Appbar>
+  it('centers text and balances asymmetric controls for centered and image layouts', async () => {
+    const { rerender } = await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        subtitle="3 unread"
+        headlineAlignment="center"
+        leadingButton={{
+          type: 'back',
+          testID: 'leading-action',
+        }}
+        trailingActions={[
+          {
+            key: 'more',
+            icon: 'dots-vertical',
+            'aria-label': 'More options',
+            testID: 'trailing-action',
+          },
+          {
+            key: 'search',
+            icon: 'magnify',
+            'aria-label': 'Search inbox',
+          },
+        ]}
+      />
     );
 
-    expect(screen.getByText('Title')).toBeOnTheScreen();
-  });
-
-  it('should render subtitle with MD3 typography and color tokens', async () => {
-    await render(
-      <Appbar>
-        <Appbar.Content title="Title" subtitle="Subtitle" />
-      </Appbar>
-    );
-
-    expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
-      ...getTheme().fonts.labelSmall,
-      color: getTheme().colors.onSurfaceVariant,
+    expect(screen.getByTestId('appbar-content-headline-text')).toHaveStyle({
+      textAlign: 'center',
     });
-  });
+    expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
+      textAlign: 'center',
+    });
+    expect(
+      screen.getByTestId('leading-action-container-outer-layer').parent
+    ).toHaveStyle({ width: 96 });
+    expect(
+      screen.getByTestId('trailing-action-container-outer-layer').parent
+    ).toHaveStyle({ width: 96 });
 
-  it('should apply a custom subtitle style', async () => {
-    const customSubtitleColor = getTheme().colors.error;
-
-    await render(
-      <Appbar>
-        <Appbar.Content
-          title="Title"
-          subtitle="Subtitle"
-          subtitleStyle={{ color: customSubtitleColor }}
-        />
-      </Appbar>
+    await rerender(
+      <Appbar
+        variant="medium-flexible"
+        headline="Inbox"
+        headlineImage={<View testID="brand-mark" />}
+        leadingButton={{
+          type: 'back',
+          testID: 'leading-action',
+        }}
+        trailingActions={[
+          {
+            key: 'more',
+            icon: 'dots-vertical',
+            'aria-label': 'More options',
+            testID: 'trailing-action',
+          },
+          {
+            key: 'search',
+            icon: 'magnify',
+            'aria-label': 'Search inbox',
+          },
+        ]}
+      />
     );
 
-    expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
-      color: customSubtitleColor,
+    expect(
+      screen.getByTestId('leading-action-container-outer-layer').parent
+    ).toHaveStyle({ width: 96 });
+    expect(
+      screen.getByTestId('trailing-action-container-outer-layer').parent
+    ).toHaveStyle({ width: 96 });
+    expect(
+      screen.getByTestId('brand-mark', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
+  it('adjusts leading headline spacing when a leading button is present', async () => {
+    const { rerender } = await render(
+      <Appbar variant="small" headline="Inbox" />
+    );
+
+    expect(screen.getByTestId('appbar-content')).toHaveStyle({
+      marginStart: 12,
+    });
+
+    await rerender(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        leadingButton={{ type: 'back' }}
+      />
+    );
+
+    expect(screen.getByTestId('appbar-content')).toHaveStyle({
+      marginStart: 4,
     });
   });
 });
 
-describe('getAppbarColors', () => {
-  const elevation = 4;
-  const customBackground = 'aquamarine';
+describe('Appbar surface', () => {
+  it('uses scroll container colors unless a custom background is supplied', async () => {
+    const customBackground = 'rebeccapurple';
+    const { rerender } = await render(
+      <Appbar variant="small" headline="Inbox" />
+    );
 
-  it('should return custom color no matter what is the theme version', () => {
-    expect(
-      getAppbarBackgroundColor(getTheme(), elevation, customBackground)
-    ).toBe(customBackground);
+    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+      backgroundColor: getTheme().colors.surface,
+    });
+
+    await rerender(<Appbar variant="small" headline="Inbox" isScrolled />);
+
+    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+      backgroundColor: getTheme().colors.surfaceContainer,
+    });
+
+    await rerender(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        isScrolled
+        style={{ backgroundColor: customBackground }}
+      />
+    );
+
+    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+      backgroundColor: customBackground,
+    });
   });
 
-  it('should return v3 light color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
-      tokens.md.ref.palette.neutral98
+  it('applies border clipping and resolves safe-area overrides on the surface', async () => {
+    await render(
+      <SafeAreaProvider
+        initialMetrics={{
+          frame: { x: 0, y: 0, width: 390, height: 844 },
+          insets: { top: 47, left: 3, right: 8, bottom: 34 },
+        }}
+      >
+        <Appbar
+          variant="small"
+          headline="Inbox"
+          statusBarHeight={20}
+          safeAreaInsets={{ left: 12 }}
+          style={{
+            borderBottomLeftRadius: 16,
+            borderBottomRightRadius: 16,
+          }}
+        />
+      </SafeAreaProvider>
     );
-  });
 
-  it('should return v3 dark color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
-      tokens.md.ref.palette.neutral6
-    );
+    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+      borderBottomLeftRadius: 16,
+      borderBottomRightRadius: 16,
+      paddingTop: 20,
+      paddingHorizontal: 12,
+    });
   });
 });
 
-describe('animated value changes correctly', () => {
-  it('appbar animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
-        <Appbar.Action icon="menu" />
-      </Appbar>
+describe('Appbar actions', () => {
+  it('skips rendering unchanged action configurations', async () => {
+    const icon = jest.fn(() => <View testID="stable-action-icon" />);
+    const { rerender } = await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'stable', icon, 'aria-label': 'Stable action' },
+        ]}
+      />
     );
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
+    const initialRenderCount = icon.mock.calls.length;
+
+    await rerender(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'stable', icon, 'aria-label': 'Stable action' },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('stable-action-icon')).toBeOnTheScreen();
+    expect(icon).toHaveBeenCalledTimes(initialRenderCount);
+  });
+
+  it('maps leading, trailing, and custom action colors', async () => {
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        leadingButton={{
+          icon: ({ color }) => (
+            <View
+              testID="leading-icon-color"
+              style={{ backgroundColor: color }}
+            />
+          ),
+          'aria-label': 'Navigation',
+        }}
+        trailingActions={[
+          {
+            key: 'default',
+            icon: ({ color }) => (
+              <View
+                testID="trailing-icon-color"
+                style={{ backgroundColor: color }}
+              />
+            ),
+            'aria-label': 'Default action',
+          },
+          {
+            key: 'custom',
+            icon: ({ color }) => (
+              <View
+                testID="custom-icon-color"
+                style={{ backgroundColor: color }}
+              />
+            ),
+            'aria-label': 'Custom action',
+            color: 'rebeccapurple',
+          },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('leading-icon-color')).toHaveStyle({
+      backgroundColor: getTheme().colors.onSurface,
     });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
+    expect(screen.getByTestId('trailing-icon-color')).toHaveStyle({
+      backgroundColor: getTheme().colors.onSurfaceVariant,
     });
-
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+    expect(screen.getByTestId('custom-icon-color')).toHaveStyle({
+      backgroundColor: 'rebeccapurple',
     });
   });
 
-  it('action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar>
-        <Appbar.Action
-          icon="menu"
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-action"
+  it.each([
+    { variant: 'filled', color: getTheme().colors.primary },
+    { variant: 'tonal', color: getTheme().colors.secondaryContainer },
+  ] as const)(
+    'maps $variant actions to their selected container color',
+    async ({ variant, color }) => {
+      await render(
+        <Appbar
+          variant="small"
+          headline="Inbox"
+          trailingActions={[
+            {
+              key: variant,
+              icon: 'star',
+              'aria-label': `${variant} action`,
+              variant,
+              width: 'wide',
+              testID: 'expressive-action',
+            },
+          ]}
         />
-      </Appbar>
+      );
+
+      expect(screen.getByTestId('expressive-action-container')).toHaveStyle({
+        backgroundColor: color,
+      });
+      expect(
+        screen.getByTestId('expressive-action-container-outer-layer')
+      ).toHaveStyle({ width: 56 });
+    }
+  );
+});
+
+describe('Appbar search', () => {
+  it('uses the placeholder as the searchbox label unless an explicit label is supplied', async () => {
+    const { rerender } = await render(
+      <Appbar
+        variant="search"
+        searchBar={{ placeholder: 'Search messages', value: '' }}
+      />
     );
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
 
     expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      screen.getByRole('searchbox', { name: 'Search messages' })
+    ).toBeOnTheScreen();
+    expect(screen.getByTestId('appbar-search-container')).toHaveStyle({
+      backgroundColor: getTheme().colors.surfaceContainer,
     });
+
+    await rerender(
+      <Appbar
+        variant="search"
+        searchBar={{
+          placeholder: 'Search messages',
+          value: '',
+          'aria-label': 'Message search',
+        }}
+      />
+    );
+
+    expect(
+      screen.getByRole('searchbox', { name: 'Message search' })
+    ).toBeOnTheScreen();
   });
 
-  it('back action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar>
-        <Appbar.BackAction
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-back-action"
+  it('configures the search field, forwards its behavior, and constrains its width', async () => {
+    const onChangeText = jest.fn();
+    const SearchAppbar = () => {
+      const [value, setValue] = React.useState('');
+
+      return (
+        <Appbar
+          variant="search"
+          isScrolled
+          leadingButton={{ type: 'back', 'aria-label': 'Navigate back' }}
+          searchBar={{
+            placeholder: 'Search messages',
+            value,
+            onChangeText: (nextValue) => {
+              setValue(nextValue);
+              onChangeText(nextValue);
+            },
+            testID: 'message-search',
+          }}
+          trailingActions={[
+            {
+              key: 'more',
+              icon: 'dots-vertical',
+              'aria-label': 'More options',
+            },
+          ]}
         />
-      </Appbar>
+      );
+    };
+
+    await render(<SearchAppbar />);
+
+    const searchbox = screen.getByRole('searchbox', {
+      name: 'Search messages',
+    });
+    expect(searchbox).toHaveStyle({
+      color: getTheme().colors.onSurface,
+      textAlign: 'center',
+    });
+    expect(searchbox).toHaveProp(
+      'placeholderTextColor',
+      getTheme().colors.onSurfaceVariant
     );
+    expect(screen.getByTestId('message-search-container')).toHaveStyle({
+      backgroundColor: getTheme().colors.surfaceContainerHighest,
+    });
     expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+      screen.getByRole('button', { name: 'Navigate back' })
+    ).toBeOnTheScreen();
+    expect(
+      screen.getByRole('button', { name: 'More options' })
+    ).toBeOnTheScreen();
 
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
+    await userEvent.type(searchbox, 'draft');
+    expect(onChangeText).toHaveBeenLastCalledWith('draft');
+    expect(searchbox).toHaveProp('value', 'draft');
 
     expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
+      screen.getByTestId('message-search-container-outer-layer')
+    ).toHaveStyle({ width: '100%' });
+    expect(screen.getByTestId('appbar-search-width-limiter')).toHaveStyle({
+      width: '100%',
+      maxWidth: 720,
     });
   });
+});
 
-  it('header animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
+describe('Appbar accessibility', () => {
+  it.each(writtenHeadlineVariants)(
+    'exposes a written %s headline as a heading',
+    async (variant) => {
+      await render(<Appbar variant={variant} headline="Inbox" />);
+
+      expect(screen.getByRole('heading', { name: 'Inbox' })).toBeOnTheScreen();
+    }
+  );
+
+  it('hides a small headline image behind one named heading', async () => {
     await render(
-      <SafeAreaProvider>
-        <Appbar.Header
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-header"
-        >
-          {null}
-        </Appbar.Header>
-      </SafeAreaProvider>
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        headlineImage={decorativeHeadlineImage}
+      />
     );
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
 
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(screen.getAllByRole('heading')).toHaveLength(1);
+    expect(screen.getByRole('heading', { name: 'Inbox' })).toBeOnTheScreen();
+    expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    expect(screen.queryByText('Brand words')).not.toBeOnTheScreen();
   });
 
-  it('header bottom border radius applied correctly', async () => {
-    const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
+  it.each(['medium-flexible', 'large-flexible'] as const)(
+    'does not expose duplicate content for a %s headline image',
+    async (variant) => {
+      await render(
+        <Appbar
+          variant={variant}
+          headline="Inbox"
+          headlineImage={decorativeHeadlineImage}
+        />
+      );
 
+      expect(screen.getAllByRole('heading', { name: 'Inbox' })).toHaveLength(1);
+      expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+      expect(screen.queryByLabelText('Brand artwork')).not.toBeOnTheScreen();
+    }
+  );
+
+  it('exposes a pressable written headline as a named button and heading', async () => {
+    const onHeadlinePress = jest.fn();
     await render(
-      <SafeAreaProvider>
-        <Appbar.Header style={style} testID="appbar-header">
-          {null}
-        </Appbar.Header>
-      </SafeAreaProvider>
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        onHeadlinePress={onHeadlinePress}
+      />
     );
-    expect(screen.getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+
+    expect(screen.getByRole('button', { name: 'Inbox' })).toBeOnTheScreen();
+    expect(screen.getByRole('heading', { name: 'Inbox' })).toBeOnTheScreen();
   });
 
-  describe('getAppbarBorders', () => {
-    const style = { borderRadius: 10, height: 60, top: 13 };
+  it('does not invoke a disabled headline action', async () => {
+    const onHeadlinePress = jest.fn();
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        onHeadlinePress={onHeadlinePress}
+        headlinePressableProps={{ disabled: true }}
+      />
+    );
 
-    it('should return only border radius styles', () => {
-      expect(getAppbarBorders(style)).toEqual({ borderRadius: 10 });
+    const headlineButton = screen.getByRole('button', {
+      name: 'Inbox',
+      disabled: true,
+    });
+    await userEvent.press(headlineButton);
+
+    expect(onHeadlinePress).not.toHaveBeenCalled();
+  });
+
+  it('names a pressable small headline image from its fallback headline', async () => {
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        headlineImage={decorativeHeadlineImage}
+        onHeadlinePress={() => {}}
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Inbox' })).toBeOnTheScreen();
+  });
+
+  it('forwards custom headline button accessibility props', async () => {
+    const onAccessibilityAction = jest.fn();
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        onHeadlinePress={() => {}}
+        headlinePressableProps={{
+          accessibilityActions: [{ name: 'activate', label: 'Open inbox' }],
+          accessibilityHint: 'Opens the inbox menu',
+          accessibilityLabel: 'Inbox options',
+          accessibilityState: { busy: true, expanded: true },
+          accessibilityValue: { text: 'Unread messages available' },
+          onAccessibilityAction,
+        }}
+      />
+    );
+
+    const titleButton = screen.getByRole('button', {
+      name: 'Inbox options',
+      busy: true,
+      expanded: true,
     });
 
-    it('should return empty object if no borders are passed', () => {
-      const style = { height: 60, top: 13 };
-      expect(getAppbarBorders(style)).toEqual({});
+    expect(titleButton).toHaveProp(
+      'accessibilityActions',
+      expect.arrayContaining([
+        expect.objectContaining({ name: 'activate', label: 'Open inbox' }),
+      ])
+    );
+    expect(titleButton).toHaveProp('accessibilityHint', 'Opens the inbox menu');
+    expect(titleButton).toHaveAccessibilityValue({
+      text: 'Unread messages available',
     });
+    expect(titleButton).toHaveProp(
+      'onAccessibilityAction',
+      onAccessibilityAction
+    );
+  });
+
+  it('uses default and custom labels for back buttons', async () => {
+    await render(
+      <View>
+        <Appbar
+          testID="default-back-appbar"
+          variant="small"
+          headline="Inbox"
+          leadingButton={{ type: 'back' }}
+        />
+        <Appbar
+          testID="custom-back-appbar"
+          variant="small"
+          headline="Archive"
+          leadingButton={{ type: 'back', 'aria-label': 'Return to inbox' }}
+        />
+      </View>
+    );
+
+    expect(screen.getByRole('button', { name: 'Back' })).toBeOnTheScreen();
+    expect(
+      screen.getByRole('button', { name: 'Return to inbox' })
+    ).toBeOnTheScreen();
+  });
+
+  it('preserves trailing action labels, hints, disabled state, and busy state', async () => {
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          {
+            key: 'save',
+            icon: 'content-save',
+            'aria-label': 'Save message',
+            accessibilityHint: 'Saves the current draft',
+            'aria-busy': true,
+            disabled: true,
+          },
+        ]}
+      />
+    );
+
+    const trailingAction = screen.getByRole('button', {
+      name: 'Save message',
+      busy: true,
+      disabled: true,
+    });
+
+    expect(trailingAction).toHaveProp(
+      'accessibilityHint',
+      'Saves the current draft'
+    );
+    expect(trailingAction).toBeDisabled();
+    expect(trailingAction).toBeBusy();
+  });
+
+  it.each(['small', 'medium-flexible'] as const)(
+    'hides decorative descendants of a %s headline image',
+    async (variant) => {
+      await render(
+        variant === 'small' ? (
+          <Appbar
+            variant="small"
+            headline="Inbox"
+            headlineImage={decorativeHeadlineImage}
+          />
+        ) : (
+          <Appbar
+            variant="medium-flexible"
+            headline="Inbox"
+            headlineImage={decorativeHeadlineImage}
+          />
+        )
+      );
+
+      const imageContainer = screen.getByTestId(
+        'appbar-content-headline-image',
+        { includeHiddenElements: true }
+      );
+
+      expect(imageContainer).toHaveProp('aria-hidden', true);
+      expect(imageContainer).toHaveProp(
+        'importantForAccessibility',
+        'no-hide-descendants'
+      );
+      expect(
+        screen.queryByRole('heading', { name: 'Brand words' })
+      ).not.toBeOnTheScreen();
+    }
+  );
+
+  it('exposes the leading button, headline, and trailing actions in source order', async () => {
+    await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        leadingButton={{ type: 'back', 'aria-label': 'Navigate back' }}
+        trailingActions={[
+          { key: 'search', icon: 'magnify', 'aria-label': 'Search inbox' },
+          { key: 'more', icon: 'dots-vertical', 'aria-label': 'More options' },
+        ]}
+      />
+    );
+
+    expect(screen.getAllByRole(/button|heading/)).toEqual([
+      screen.getByRole('button', { name: 'Navigate back' }),
+      screen.getByRole('heading', { name: 'Inbox' }),
+      screen.getByRole('button', { name: 'Search inbox' }),
+      screen.getByRole('button', { name: 'More options' }),
+    ]);
+  });
+
+  it('does not remount a surviving trailing action when its configuration changes', async () => {
+    const { rerender } = await render(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'keep', icon: 'star', 'aria-label': 'Keep action' },
+          { key: 'remove', icon: 'delete', 'aria-label': 'Remove action' },
+        ]}
+      />
+    );
+    const survivingTrailingAction = screen.getByRole('button', {
+      name: 'Keep action',
+    });
+
+    await rerender(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        trailingActions={[
+          { key: 'new', icon: 'plus', 'aria-label': 'New action' },
+          {
+            key: 'keep',
+            icon: 'star-outline',
+            'aria-label': 'Keep action',
+            accessibilityHint: 'Updated hint',
+          },
+        ]}
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Keep action' })).toBe(
+      survivingTrailingAction
+    );
   });
 });

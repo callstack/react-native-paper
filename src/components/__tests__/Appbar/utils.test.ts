@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getAppbarHeight, getTrailingActionsWidth } from '../../AppbarV3/utils';
+import { getAppbarHeight, getTrailingActionsWidth } from '../../Appbar/utils';
 
 describe('getAppbarHeight', () => {
   it.each([

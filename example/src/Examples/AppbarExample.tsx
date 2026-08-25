@@ -1,122 +1,320 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
+import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
-  FAB,
   List,
   Palette,
   RadioButton,
   Snackbar,
   Switch,
   Text,
-  useTheme,
+} from 'react-native-paper';
+import type {
+  AppbarFilledTrailingAction,
+  AppbarHeadlineAlignment,
+  AppbarLeadingButton,
+  AppbarStandardTrailingAction,
+  AppbarTrailingActions,
+  AppbarVariant,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+type FilledTrailingActionVariant = AppbarFilledTrailingAction['variant'];
+type FilledTrailingActionWidth = NonNullable<
+  AppbarFilledTrailingAction['width']
+>;
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
-const MEDIUM_FAB_HEIGHT = 56;
+
+type SearchAppbarHeaderProps = {
+  trailingActions: AppbarStandardTrailingAction[];
+  isScrolled: boolean;
+  leadingButton?: AppbarLeadingButton;
+  showCustomColor: boolean;
+};
+
+const SearchAppbarHeader = ({
+  trailingActions,
+  isScrolled,
+  leadingButton,
+  showCustomColor,
+}: SearchAppbarHeaderProps) => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  return (
+    <Appbar
+      variant="search"
+      isScrolled={isScrolled}
+      leadingButton={leadingButton}
+      style={showCustomColor ? styles.customColor : null}
+      trailingActions={trailingActions}
+      searchBar={{
+        placeholder: 'Search components',
+        'aria-label': 'Search components',
+        value: searchQuery,
+        onChangeText: setSearchQuery,
+      }}
+    />
+  );
+};
 
 const AppbarExample = () => {
   const navigation = useNavigation('Appbar');
 
-  const [showLeftIcon, setShowLeftIcon] = React.useState(true);
+  const [showLeadingButton, setShowLeadingButton] = React.useState(true);
   const [showSubtitle, setShowSubtitle] = React.useState(true);
+  const [showHeadlineImage, setShowHeadlineImage] = React.useState(false);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
-  const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
+  const [appbarConfiguration, setAppbarConfiguration] =
+    React.useState<AppbarVariant>('small');
+  const [isHeadlineCentered, setIsHeadlineCentered] = React.useState(false);
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
-  const [showElevated, setShowElevated] = React.useState(false);
+  const [showFilledTrailingAction, setShowFilledTrailingAction] =
+    React.useState(false);
+  const [filledTrailingActionVariant, setFilledTrailingActionVariant] =
+    React.useState<FilledTrailingActionVariant>('filled');
+  const [filledTrailingActionWidth, setFilledTrailingActionWidth] =
+    React.useState<FilledTrailingActionWidth>('default');
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
-  const theme = useTheme();
-  const { bottom, left, right } = useSafeAreaInsets();
-  const height = 80;
-
-  const isCenterAlignedMode = appbarMode === 'center-aligned';
+  const { bottom } = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
+  const headlineAlignment: AppbarHeadlineAlignment = isHeadlineCentered
+    ? 'center'
+    : 'leading';
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <Appbar.Header
-          style={showCustomColor ? styles.customColor : null}
-          mode={appbarMode}
-          elevated={showElevated}
-        >
-          {showLeftIcon && (
-            <Appbar.BackAction onPress={() => navigation.goBack()} />
-          )}
-          <Appbar.Content
-            title="Title"
-            subtitle={showSubtitle ? 'Subtitle' : undefined}
-            onPress={() => setShowSnackbar(true)}
-          />
-          {isCenterAlignedMode
-            ? false
-            : showCalendarIcon && (
-                <Appbar.Action icon="calendar" onPress={() => {}} />
-              )}
-          {showSearchIcon && (
-            <Appbar.Action icon="magnify" onPress={() => {}} />
-          )}
-          {showMoreIcon && (
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
-          )}
-        </Appbar.Header>
-      ),
-    });
-  }, [
-    navigation,
-    showLeftIcon,
-    showSubtitle,
-    showSearchIcon,
-    showMoreIcon,
-    showCustomColor,
-    appbarMode,
-    showCalendarIcon,
-    isCenterAlignedMode,
-    showElevated,
-  ]);
+    const standardTrailingActions: AppbarStandardTrailingAction[] = [];
 
-  const renderFAB = () => {
-    return (
-      <FAB
-        icon="plus"
-        onPress={() => {}}
-        style={[styles.fab, { top: (height - MEDIUM_FAB_HEIGHT) / 2 }]}
+    if (showCalendarIcon) {
+      standardTrailingActions.push({
+        key: 'calendar',
+        icon: 'calendar',
+        'aria-label': 'Calendar',
+        onPress: () => {},
+      });
+    }
+
+    if (showSearchIcon && appbarConfiguration !== 'search') {
+      standardTrailingActions.push({
+        key: 'search',
+        icon: 'magnify',
+        'aria-label': 'Search',
+        onPress: () => {},
+      });
+    }
+
+    if (showMoreIcon) {
+      standardTrailingActions.push({
+        key: 'more',
+        icon: MORE_ICON,
+        'aria-label': 'More options',
+        onPress: () => {},
+      });
+    }
+
+    const trailingActions: AppbarTrailingActions = showFilledTrailingAction
+      ? [
+          {
+            key: 'share',
+            icon: 'share-variant',
+            'aria-label': 'Share',
+            variant: filledTrailingActionVariant,
+            width: filledTrailingActionWidth,
+            onPress: () => {},
+          },
+        ]
+      : standardTrailingActions;
+
+    const leadingButton = showLeadingButton
+      ? {
+          type: 'back' as const,
+          onPress: () => navigation.goBack(),
+        }
+      : undefined;
+    const headlineImage = (
+      <Image
+        source={require('../../assets/images/paper-icon.png')}
+        resizeMode="contain"
+        style={styles.headlineImage}
+        accessibilityIgnoresInvertColors
       />
     );
-  };
+    const commonProps = {
+      headlineAlignment,
+      isScrolled,
+      leadingButton,
+      onHeadlinePress: () => setShowSnackbar(true),
+      style: showCustomColor ? styles.customColor : null,
+      trailingActions,
+    };
+
+    navigation.setOptions({
+      header: () => {
+        if (appbarConfiguration === 'search') {
+          return (
+            <SearchAppbarHeader
+              isScrolled={isScrolled}
+              leadingButton={leadingButton}
+              showCustomColor={showCustomColor}
+              trailingActions={standardTrailingActions.slice(0, 2)}
+            />
+          );
+        }
+
+        if (appbarConfiguration === 'small') {
+          return showHeadlineImage ? (
+            <Appbar
+              {...commonProps}
+              variant="small"
+              headline="React Native Paper"
+              headlineImage={headlineImage}
+            />
+          ) : (
+            <Appbar
+              {...commonProps}
+              variant="small"
+              headline="React Native Paper"
+              subtitle={
+                showSubtitle ? 'Material Design for React Native' : undefined
+              }
+            />
+          );
+        }
+
+        return showHeadlineImage ? (
+          <Appbar
+            {...commonProps}
+            variant={appbarConfiguration}
+            headline="React Native Paper"
+            headlineImage={headlineImage}
+            subtitle={
+              showSubtitle ? 'Material Design for React Native' : undefined
+            }
+          />
+        ) : (
+          <Appbar
+            {...commonProps}
+            variant={appbarConfiguration}
+            headline="React Native Paper"
+            subtitle={
+              showSubtitle ? 'Material Design for React Native' : undefined
+            }
+          />
+        );
+      },
+    });
+  }, [
+    appbarConfiguration,
+    filledTrailingActionVariant,
+    filledTrailingActionWidth,
+    navigation,
+    showCalendarIcon,
+    showCustomColor,
+    showFilledTrailingAction,
+    showLeadingButton,
+    showMoreIcon,
+    isScrolled,
+    showSearchIcon,
+    showSubtitle,
+    showHeadlineImage,
+    headlineAlignment,
+  ]);
+
+  const handleScroll = React.useCallback(
+    ({ nativeEvent }: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const nextIsScrolled = nativeEvent.contentOffset.y > 1;
+
+      setIsScrolled((currentIsScrolled) =>
+        currentIsScrolled === nextIsScrolled
+          ? currentIsScrolled
+          : nextIsScrolled
+      );
+    },
+    []
+  );
 
   const renderDefaultOptions = () => (
     <>
       <View style={styles.row}>
-        <Text>Left icon</Text>
-        <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
+        <Text>Leading button</Text>
+        <Switch
+          value={showLeadingButton}
+          onValueChange={setShowLeadingButton}
+        />
       </View>
       <View style={styles.row}>
         <Text>Subtitle</Text>
-        <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
+        <Switch
+          value={showSubtitle}
+          disabled={
+            appbarConfiguration === 'search' ||
+            (showHeadlineImage && appbarConfiguration === 'small')
+          }
+          onValueChange={setShowSubtitle}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Headline image</Text>
+        <Switch
+          value={showHeadlineImage}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setShowHeadlineImage}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Center headline and subtitle</Text>
+        <Switch
+          value={isHeadlineCentered}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setIsHeadlineCentered}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Filled trailing action</Text>
+        <Switch
+          value={showFilledTrailingAction}
+          disabled={appbarConfiguration === 'search'}
+          onValueChange={setShowFilledTrailingAction}
+        />
       </View>
       <View style={styles.row}>
         <Text>Search icon</Text>
-        <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
+        <Switch
+          value={showSearchIcon}
+          disabled={
+            showFilledTrailingAction || appbarConfiguration === 'search'
+          }
+          onValueChange={setShowSearchIcon}
+        />
       </View>
       <View style={styles.row}>
         <Text>More icon</Text>
-        <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
+        <Switch
+          value={showMoreIcon}
+          disabled={showFilledTrailingAction}
+          onValueChange={setShowMoreIcon}
+        />
       </View>
       <View style={styles.row}>
         <Text>Calendar icon</Text>
         <Switch
-          value={isCenterAlignedMode ? false : showCalendarIcon}
-          disabled={isCenterAlignedMode}
+          value={showCalendarIcon}
+          disabled={showFilledTrailingAction}
           onValueChange={setShowCalendarIcon}
         />
       </View>
@@ -124,73 +322,110 @@ const AppbarExample = () => {
         <Text>Custom Color</Text>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
-      <View style={styles.row}>
-        <Text>Elevated</Text>
-        <Switch value={showElevated} onValueChange={setShowElevated} />
-      </View>
     </>
   );
 
   return (
     <>
       <ScreenWrapper
-        style={{ marginBottom: height + bottom }}
-        contentContainerStyle={styles.contentContainer}
+        style={{ marginBottom: bottom }}
+        contentContainerStyle={[
+          styles.contentContainer,
+          { minHeight: windowHeight },
+        ]}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
       >
+        <List.Section title="Scroll behavior">
+          <List.Item
+            title="Scroll to change the appbar color"
+            description={
+              isScrolled ? 'Scrolled: surfaceContainer' : 'Flat: surface'
+            }
+          />
+        </List.Section>
         <List.Section title="Default options">
           {renderDefaultOptions()}
         </List.Section>
-        <List.Section title="Appbar Modes">
+        {showFilledTrailingAction ? (
+          <List.Section title="Filled trailing action options">
+            <List.Subheader>Style</List.Subheader>
+            <RadioButton.Group
+              value={filledTrailingActionVariant}
+              onValueChange={(value: string) => {
+                if (value === 'filled' || value === 'tonal') {
+                  setFilledTrailingActionVariant(value);
+                }
+              }}
+            >
+              <View style={styles.row}>
+                <Text>Primary filled</Text>
+                <RadioButton value="filled" />
+              </View>
+              <View style={styles.row}>
+                <Text>Tonal filled</Text>
+                <RadioButton value="tonal" />
+              </View>
+            </RadioButton.Group>
+            <List.Subheader>Width</List.Subheader>
+            <RadioButton.Group
+              value={filledTrailingActionWidth}
+              onValueChange={(value: string) => {
+                if (value === 'default' || value === 'wide') {
+                  setFilledTrailingActionWidth(value);
+                }
+              }}
+            >
+              <View style={styles.row}>
+                <Text>Default</Text>
+                <RadioButton value="default" />
+              </View>
+              <View style={styles.row}>
+                <Text>Wide</Text>
+                <RadioButton value="wide" />
+              </View>
+            </RadioButton.Group>
+          </List.Section>
+        ) : null}
+        <List.Section title="Appbar variants">
           <RadioButton.Group
-            value={appbarMode}
-            onValueChange={(value: string) =>
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-              setAppbarMode(value as AppbarModes)
-            }
+            value={appbarConfiguration}
+            onValueChange={(value: string) => {
+              if (
+                value === 'small' ||
+                value === 'search' ||
+                value === 'medium-flexible' ||
+                value === 'large-flexible'
+              ) {
+                setAppbarConfiguration(value);
+              }
+            }}
           >
+            <View style={styles.row}>
+              <Text>Search</Text>
+              <RadioButton value="search" />
+            </View>
             <View style={styles.row}>
               <Text>Small (default)</Text>
               <RadioButton value="small" />
             </View>
             <View style={styles.row}>
-              <Text>Medium</Text>
-              <RadioButton value="medium" />
+              <Text>Medium flexible</Text>
+              <RadioButton value="medium-flexible" />
             </View>
             <View style={styles.row}>
-              <Text>Large</Text>
-              <RadioButton value="large" />
-            </View>
-            <View style={styles.row}>
-              <Text>Center-aligned</Text>
-              <RadioButton value="center-aligned" />
+              <Text>Large flexible</Text>
+              <RadioButton value="large-flexible" />
             </View>
           </RadioButton.Group>
         </List.Section>
       </ScreenWrapper>
-      <Appbar
-        style={[
-          styles.bottom,
-          {
-            height: height + bottom,
-          },
-          {
-            backgroundColor: theme.colors.surfaceContainerHigh,
-          },
-        ]}
-        safeAreaInsets={{ bottom, left, right }}
-      >
-        <Appbar.Action icon="archive" onPress={() => {}} />
-        <Appbar.Action icon="email" onPress={() => {}} />
-        <Appbar.Action icon="label" onPress={() => {}} />
-        <Appbar.Action icon="delete" onPress={() => {}} />
-        {renderFAB()}
-      </Appbar>
       <Snackbar
         visible={showSnackbar}
         onDismiss={() => setShowSnackbar(false)}
         duration={Snackbar.DURATION_SHORT}
       >
-        Heading pressed
+        Headline pressed
       </Snackbar>
     </>
   );
@@ -211,17 +446,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
-  bottom: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  fab: {
-    position: 'absolute',
-    right: 16,
-  },
   customColor: {
     backgroundColor: Palette.secondary80,
+  },
+  headlineImage: {
+    width: 32,
+    height: 32,
   },
 });

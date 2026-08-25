@@ -45,7 +45,6 @@ export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
-export { default as AppbarV3 } from './components/AppbarV3';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
@@ -56,25 +55,20 @@ export { default as Text, customText } from './components/Typography/Text';
 
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
-export type { Props as AppbarProps } from './components/Appbar/Appbar';
-export type { Props as AppbarActionProps } from './components/Appbar/AppbarAction';
-export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';
-export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
-export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
 export type {
-  Props as AppbarV3Props,
-  AppbarFilledTrailingAction as AppbarV3FilledTrailingAction,
-  AppbarHeadlineAlignment as AppbarV3HeadlineAlignment,
-  AppbarHeadlinePressableProps as AppbarV3HeadlinePressableProps,
-  AppbarHeadlineTextProps as AppbarV3HeadlineTextProps,
-  AppbarLeadingButton as AppbarV3LeadingButton,
-  AppbarSearchbarProps as AppbarV3SearchbarProps,
-  AppbarStandardTrailingAction as AppbarV3StandardTrailingAction,
-  AppbarTextProps as AppbarV3TextProps,
-  AppbarTrailingAction as AppbarV3TrailingAction,
-  AppbarTrailingActions as AppbarV3TrailingActions,
-  AppbarVariant as AppbarV3Variant,
-} from './components/AppbarV3';
+  Props as AppbarProps,
+  AppbarFilledTrailingAction,
+  AppbarHeadlineAlignment,
+  AppbarHeadlinePressableProps,
+  AppbarHeadlineTextProps,
+  AppbarLeadingButton,
+  AppbarSearchbarProps,
+  AppbarStandardTrailingAction,
+  AppbarTextProps,
+  AppbarTrailingAction,
+  AppbarTrailingActions,
+  AppbarVariant,
+} from './components/Appbar';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';
 export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage';
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';

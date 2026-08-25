@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import AppbarBackIcon from './AppbarBackIcon';
 import type { AppbarLeadingButton, AppbarTrailingAction } from './types';
 import type { Theme } from '../../types';
-import AppbarBackIcon from '../Appbar/AppbarBackIcon';
 import IconButton from '../IconButton/IconButton';
 
 type Props = {

@@ -6,7 +6,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
-import AppbarV3Example from './Examples/AppbarV3Example';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
@@ -52,7 +51,6 @@ import TouchableRippleExample from './Examples/TouchableRippleExample';
 export const mainExamples = {
   ActivityIndicator: ActivityIndicatorExample,
   Appbar: AppbarExample,
-  AppbarV3: AppbarV3Example,
   Avatar: AvatarExample,
   Badge: BadgeExample,
   Banner: BannerExample,
