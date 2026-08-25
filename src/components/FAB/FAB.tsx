@@ -102,7 +102,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
