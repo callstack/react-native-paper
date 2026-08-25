@@ -30,6 +30,7 @@ export type Props = ViewProps & {
  *
  *   const hideDialog = () => setVisible(false);
  *
+ *	 // Before
  *   return (
  *     <Dialog visible={visible} onDismiss={hideDialog}>
  *       <Dialog.Actions>
@@ -37,6 +38,20 @@ export type Props = ViewProps & {
  *         <Button mode="text" onPress={() => console.log('Ok')}>Ok</Button>
  *       </Dialog.Actions>
  *     </Dialog>
+ *   );
+ *
+ * 	 // V6 and later
+ *   return (
+ *     <Portal>
+ *       <Dialog
+ * 					visible={visible}
+ * 					onDismiss={hideDialog}
+ * 					actions={[
+ * 						{ onPress: () => console.log('Cancel'), label: 'Cancel' },
+ * 						{ onPress: () => console.log('Ok'), label: 'Ok' },
+ * 					]}
+ * 		   />
+ *     </Portal>
  *   );
  * };
  *
