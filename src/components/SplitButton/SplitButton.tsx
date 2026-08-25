@@ -18,7 +18,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { splitButtonElevation, type SplitButtonSize } from './tokens';
+import {
+  splitButtonElevation,
+  splitButtonMinInteractiveSize,
+  type SplitButtonSize,
+} from './tokens';
 import {
   getSplitButtonColors,
   getSplitButtonHitSlop,
@@ -26,7 +30,6 @@ import {
   getSplitButtonRippleColor,
   getSplitButtonSizeStyle,
   getSplitButtonTrailingShape,
-  normalizeSplitButtonMode,
   type SplitButtonMode,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -43,10 +46,7 @@ import Text from '../Typography/Text';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
-export type Props = $Omit<
-  ViewProps,
-  'children' | 'style' | 'onPress' | 'onPressIn' | 'onPressOut'
-> & {
+export type Props = $Omit<ViewProps, 'children' | 'style'> & {
   /**
    * Mode of the split button.
    * - `filled` - high-emphasis split button for important or final actions.
@@ -261,7 +261,6 @@ const SplitButton = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const normalizedMode = normalizeSplitButtonMode(mode);
   const sizeStyle = React.useMemo(
     () => getSplitButtonSizeStyle({ size, theme }),
     [size, theme]
@@ -352,7 +351,6 @@ const SplitButton = ({
       : colors.contentColor;
   const labelTextStyle: TextStyle = {
     color: colors.contentColor,
-    ...theme.fonts[sizeStyle.labelVariant],
   };
   const disabledState = { disabled: true };
   const leadingAccessibilityState = disabled
@@ -361,7 +359,7 @@ const SplitButton = ({
   const trailingAccessibilityStateWithDisabled = disabled
     ? { ...trailingAccessibilityState, ...disabledState }
     : trailingAccessibilityState;
-  const isElevationEntitled = !disabled && normalizedMode === 'elevated';
+  const isElevationEntitled = !disabled && mode === 'elevated';
   const leadingHasTouchHandler = hasTouchHandler({
     onPress,
     onPressIn,
@@ -549,7 +547,7 @@ const SplitButton = ({
               style={[
                 styles.label,
                 icon || loading
-                  ? { marginStart: sizeStyle.leadingIconSize / 3 }
+                  ? { marginStart: sizeStyle.iconLabelGap }
                   : null,
                 labelTextStyle,
                 labelStyle,
@@ -660,12 +658,12 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
   },
   leading: {
-    minWidth: 48,
+    minWidth: splitButtonMinInteractiveSize,
     flexShrink: 1,
     borderStyle: 'solid',
   },
   trailing: {
-    minWidth: 48,
+    minWidth: splitButtonMinInteractiveSize,
     borderStyle: 'solid',
   },
   ripple: {

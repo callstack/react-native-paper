@@ -18,6 +18,7 @@ export type SplitButtonSizeTokens = {
   leadingButtonLeadingSpace: number;
   leadingButtonTrailingSpace: number;
   leadingIconSize: number;
+  iconLabelGap: number;
   trailingButtonLeadingSpace: number;
   trailingButtonTrailingSpace: number;
   trailingIconSize: number;
@@ -37,6 +38,7 @@ export const splitButtonSizeTokens: Record<
     leadingButtonLeadingSpace: 12,
     leadingButtonTrailingSpace: 10,
     leadingIconSize: 20,
+    iconLabelGap: 8,
     trailingButtonLeadingSpace: 13,
     trailingButtonTrailingSpace: 13,
     trailingIconSize: 22,
@@ -51,6 +53,7 @@ export const splitButtonSizeTokens: Record<
     leadingButtonLeadingSpace: 16,
     leadingButtonTrailingSpace: 12,
     leadingIconSize: 20,
+    iconLabelGap: 8,
     trailingButtonLeadingSpace: 13,
     trailingButtonTrailingSpace: 13,
     trailingIconSize: 22,
@@ -65,6 +68,7 @@ export const splitButtonSizeTokens: Record<
     leadingButtonLeadingSpace: 24,
     leadingButtonTrailingSpace: 24,
     leadingIconSize: 24,
+    iconLabelGap: 8,
     trailingButtonLeadingSpace: 15,
     trailingButtonTrailingSpace: 15,
     trailingIconSize: 26,
@@ -79,6 +83,7 @@ export const splitButtonSizeTokens: Record<
     leadingButtonLeadingSpace: 48,
     leadingButtonTrailingSpace: 48,
     leadingIconSize: 32,
+    iconLabelGap: 12,
     trailingButtonLeadingSpace: 29,
     trailingButtonTrailingSpace: 29,
     trailingIconSize: 38,
@@ -93,6 +98,7 @@ export const splitButtonSizeTokens: Record<
     leadingButtonLeadingSpace: 64,
     leadingButtonTrailingSpace: 64,
     leadingIconSize: 40,
+    iconLabelGap: 16,
     trailingButtonLeadingSpace: 43,
     trailingButtonTrailingSpace: 43,
     trailingIconSize: 50,
@@ -102,8 +108,9 @@ export const splitButtonSizeTokens: Record<
 
 export const splitButtonMinInteractiveSize = 48;
 
+export const splitButtonDisabledOutlineOpacity = 0.12;
+
 export const splitButtonElevation = {
   disabled: 0,
   enabled: 1,
-  pressed: 2,
 } as const;

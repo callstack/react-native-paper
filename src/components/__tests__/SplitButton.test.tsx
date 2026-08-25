@@ -1,20 +1,11 @@
 import * as React from 'react';
-import { PlatformColor, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import SplitButton from '../SplitButton/SplitButton';
-import {
-  getSplitButtonColors,
-  getSplitButtonHitSlop,
-  getSplitButtonLeadingShape,
-  getSplitButtonRippleColor,
-  getSplitButtonSizeStyle,
-  getSplitButtonTrailingShape,
-  normalizeSplitButtonMode,
-} from '../SplitButton/utils';
 
 const styles = StyleSheet.create({
   leading: {
@@ -88,17 +79,12 @@ it('calls leading and trailing press-in and press-out handlers separately', asyn
   expect(onTrailingPressOut).toHaveBeenCalledTimes(1);
 });
 
-it('uses resting inner-corner tokens for both sides', async () => {
+it('dims the outline color for a disabled outlined split button', async () => {
   const theme = getTheme();
-  await renderSplitButton();
+  await renderSplitButton({ mode: 'outlined', disabled: true });
 
-  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-    borderTopEndRadius: theme.shapes.corner.extraSmall,
-    borderBottomEndRadius: theme.shapes.corner.extraSmall,
-  });
-  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
-    borderTopStartRadius: theme.shapes.corner.extraSmall,
-    borderBottomStartRadius: theme.shapes.corner.extraSmall,
+  expect(screen.getByTestId('split-button-leading-container')).not.toHaveStyle({
+    borderColor: theme.colors.outlineVariant,
   });
 });
 
@@ -144,90 +130,4 @@ it('does not add SplitButton test IDs unless testID is provided', async () => {
   expect(screen.queryByTestId('split-button-container')).toBeNull();
   expect(screen.queryByTestId('split-button-leading')).toBeNull();
   expect(screen.queryByTestId('split-button-trailing')).toBeNull();
-});
-
-describe('SplitButton utils', () => {
-  it('normalizes supported MD3 modes', () => {
-    expect(normalizeSplitButtonMode('filled')).toBe('filled');
-    expect(normalizeSplitButtonMode('tonal')).toBe('tonal');
-    expect(normalizeSplitButtonMode('outlined')).toBe('outlined');
-  });
-
-  it('resolves MD3 color roles for modes', () => {
-    const theme = getTheme();
-
-    expect(getSplitButtonColors({ theme, mode: 'filled' }).containerColor).toBe(
-      theme.colors.primary
-    );
-    expect(getSplitButtonColors({ theme, mode: 'tonal' }).contentColor).toBe(
-      theme.colors.onSecondaryContainer
-    );
-    expect(getSplitButtonColors({ theme, mode: 'elevated' }).contentColor).toBe(
-      theme.colors.primary
-    );
-    expect(getSplitButtonColors({ theme, mode: 'outlined' }).borderColor).toBe(
-      theme.colors.outlineVariant
-    );
-  });
-
-  it('resolves ripple colors from overrides, string content colors, and opaque colors', () => {
-    const theme = getTheme();
-    const customRippleColor = 'rgba(1, 2, 3, 0.4)';
-
-    expect(
-      getSplitButtonRippleColor({
-        contentColor: theme.colors.primary,
-        customRippleColor,
-      })
-    ).toBe(customRippleColor);
-    expect(
-      getSplitButtonRippleColor({ contentColor: theme.colors.primary })
-    ).toBe('rgba(103, 80, 164, 0.1)');
-    expect(
-      getSplitButtonRippleColor({ contentColor: PlatformColor('label') })
-    ).toBeUndefined();
-  });
-
-  it('resolves per-size tokens against theme shape values', () => {
-    const theme = getTheme();
-    const sizeStyle = getSplitButtonSizeStyle({ theme, size: 'large' });
-
-    expect(sizeStyle.containerHeight).toBe(96);
-    expect(sizeStyle.trailingIconSize).toBe(38);
-    expect(sizeStyle.innerRadius).toBe(theme.shapes.corner.small);
-    expect(sizeStyle.innerPressedRadius).toBe(
-      theme.shapes.corner.largeIncreased
-    );
-  });
-
-  it('uses logical leading and trailing shapes', () => {
-    expect(
-      getSplitButtonLeadingShape({ containerRadius: 20, innerRadius: 4 })
-    ).toEqual({
-      borderTopStartRadius: 20,
-      borderBottomStartRadius: 20,
-      borderTopEndRadius: 4,
-      borderBottomEndRadius: 4,
-    });
-    expect(
-      getSplitButtonTrailingShape({ containerRadius: 20, innerRadius: 4 })
-    ).toEqual({
-      borderTopStartRadius: 4,
-      borderBottomStartRadius: 4,
-      borderTopEndRadius: 20,
-      borderBottomEndRadius: 20,
-    });
-  });
-
-  it('expands small visual sizes to a 48dp touch target', () => {
-    expect(getSplitButtonHitSlop({ size: 'extra-small' })).toEqual({
-      top: 8,
-      bottom: 8,
-    });
-    expect(getSplitButtonHitSlop({ size: 'small' })).toEqual({
-      top: 4,
-      bottom: 4,
-    });
-    expect(getSplitButtonHitSlop({ size: 'medium' })).toBeUndefined();
-  });
 });

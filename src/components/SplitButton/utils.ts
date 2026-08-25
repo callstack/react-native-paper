@@ -1,8 +1,9 @@
-import type { ColorValue, Insets, ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
 
 import color from 'color';
 
 import {
+  splitButtonDisabledOutlineOpacity,
   splitButtonMinInteractiveSize,
   splitButtonSizeTokens,
   type SplitButtonShapeKey,
@@ -16,18 +17,6 @@ import type { Props as TouchableRippleProps } from '../TouchableRipple/Touchable
 const stateOpacity = tokens.md.sys.state.opacity;
 
 export type SplitButtonMode = 'filled' | 'tonal' | 'elevated' | 'outlined';
-
-export type SplitButtonNormalizedMode =
-  | 'filled'
-  | 'tonal'
-  | 'elevated'
-  | 'outlined';
-
-export const normalizeSplitButtonMode = (
-  mode: SplitButtonMode
-): SplitButtonNormalizedMode => {
-  return mode;
-};
 
 export const resolveSplitButtonCorner = (
   theme: InternalTheme,
@@ -60,7 +49,7 @@ const getSplitButtonContainerColor = ({
   disabled,
   customButtonColor,
 }: {
-  mode: SplitButtonNormalizedMode;
+  mode: SplitButtonMode;
   theme: InternalTheme;
   disabled?: boolean;
   customButtonColor?: ColorValue;
@@ -96,7 +85,7 @@ const getSplitButtonContentColor = ({
   disabled,
   customTextColor,
 }: {
-  mode: SplitButtonNormalizedMode;
+  mode: SplitButtonMode;
   theme: InternalTheme;
   disabled?: boolean;
   customTextColor?: ColorValue;
@@ -139,28 +128,38 @@ export const getSplitButtonColors = ({
   customButtonColor?: ColorValue;
   customTextColor?: ColorValue;
 }) => {
-  const normalizedMode = normalizeSplitButtonMode(mode);
   const containerColor = getSplitButtonContainerColor({
-    mode: normalizedMode,
+    mode,
     theme,
     disabled,
     customButtonColor,
   });
   const contentColor = getSplitButtonContentColor({
-    mode: normalizedMode,
+    mode,
     theme,
     disabled,
     customTextColor,
   });
-  const isOutlined = normalizedMode === 'outlined';
+  const isOutlined = mode === 'outlined';
+  const disabledBorderColor =
+    typeof theme.colors.onSurface === 'string'
+      ? color(theme.colors.onSurface)
+          .alpha(splitButtonDisabledOutlineOpacity)
+          .rgb()
+          .string()
+      : theme.colors.outlineVariant;
 
   return {
     containerColor,
     contentColor,
-    borderColor: isOutlined ? theme.colors.outlineVariant : 'transparent',
+    borderColor: isOutlined
+      ? disabled
+        ? disabledBorderColor
+        : theme.colors.outlineVariant
+      : 'transparent',
     borderWidth: isOutlined ? 1 : 0,
     containerOpacity:
-      disabled && normalizedMode !== 'outlined'
+      disabled && mode !== 'outlined'
         ? stateOpacity.pressed
         : stateOpacity.enabled,
     contentOpacity: disabled ? stateOpacity.disabled : stateOpacity.enabled,
@@ -206,12 +205,10 @@ export const getSplitButtonHitSlop = ({
     return hitSlop;
   }
 
-  const insetHitSlop = (hitSlop || {}) as Insets;
-
   return {
-    ...insetHitSlop,
-    top: insetHitSlop.top ?? verticalSlop,
-    bottom: insetHitSlop.bottom ?? verticalSlop,
+    ...hitSlop,
+    top: hitSlop?.top ?? verticalSlop,
+    bottom: hitSlop?.bottom ?? verticalSlop,
   };
 };
 
