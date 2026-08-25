@@ -87,12 +87,12 @@ const renderChildren = (children: React.ReactNode) => {
  * | --- | --- | --- |
  * | `icon` | `IconSource` | Icon rendered through `Dialog.Icon`. |
  * | `title` | `ReactNode` | Dialog title rendered through `Dialog.Title`. |
- * | `content` | `string | ReactNode` | Required dialog content. Non-empty strings use Material 3 supporting-text styles. |
+ * | `content` | `ReactNode` | Required dialog content. Non-empty strings use Material 3 supporting-text styles. |
  * | `actions` | `DialogActionsProps[]` | Action labels, press handlers, and optional Button props. |
  * | `scrollable` | `boolean` | Renders content through `Dialog.ScrollArea` and a `ScrollView`. |
  * | `contentProps` | `DialogContentProps` | Props forwarded to `Dialog.Content`. |
  * | `scrollAreaProps` | `DialogScrollAreaProps` | Props forwarded to `Dialog.ScrollArea`. |
- * | `scrollViewProps` | `ScrollViewProps` | Props forwarded to the generated `ScrollView`. |
+ * | `scrollViewProps` | `ScrollViewProps` | Props forwarded to the `ScrollView`. |
  *
  * ## Usage
  * ```js
