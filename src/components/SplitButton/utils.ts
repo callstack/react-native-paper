@@ -23,6 +23,22 @@ export const resolveSplitButtonCorner = (
   key: SplitButtonShapeKey
 ) => (key === 'full' ? cornerFull : theme.shapes.corner[key]);
 
+// `resolveSplitButtonCorner`'s 'full' case returns a large sentinel radius
+// (`cornerFull`) meant for shapes whose corners are all resolved the same
+// way. Paired on the same edge with the smaller `innerRadius`, that
+// sentinel triggers RN's corner-overlap correction and collapses the inner
+// radius too — so the container shape is resolved on its own, relative to
+// its own height, instead: 'full' means "fully rounded", i.e. a stadium
+// whose radius is exactly half its height.
+export const resolveSplitButtonContainerRadius = (
+  theme: InternalTheme,
+  shape: SplitButtonShapeKey,
+  containerHeight: number
+) =>
+  shape === 'full'
+    ? containerHeight / 2
+    : resolveSplitButtonCorner(theme, shape);
+
 export const getSplitButtonSizeStyle = ({
   size,
   theme,
@@ -34,12 +50,12 @@ export const getSplitButtonSizeStyle = ({
 
   return {
     ...sizeTokens,
-    containerRadius: resolveSplitButtonCorner(theme, sizeTokens.containerShape),
-    innerRadius: resolveSplitButtonCorner(theme, sizeTokens.innerCornerShape),
-    innerPressedRadius: resolveSplitButtonCorner(
+    containerRadius: resolveSplitButtonContainerRadius(
       theme,
-      sizeTokens.innerPressedCornerShape
+      sizeTokens.containerShape,
+      sizeTokens.containerHeight
     ),
+    innerRadius: resolveSplitButtonCorner(theme, sizeTokens.innerCornerShape),
   };
 };
 

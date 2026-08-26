@@ -21,6 +21,7 @@ import Animated, {
 import {
   splitButtonElevation,
   splitButtonMinInteractiveSize,
+  splitButtonStateLayerOpacity,
   type SplitButtonSize,
 } from './tokens';
 import {
@@ -39,12 +40,11 @@ import ActivityIndicator from '../ActivityIndicator';
 import { getButtonTouchableRippleStyle } from '../Button/utils';
 import Icon, { type IconSource } from '../Icon';
 import Surface from '../Surface';
+import SplitButtonSurface from './SplitButtonSurface';
 import TouchableRipple, {
   type Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 export type Props = $Omit<ViewProps, 'children' | 'style'> & {
   /**
@@ -226,7 +226,7 @@ const SplitButton = ({
   size = 'small',
   label,
   icon,
-  trailingIcon = 'menu-down',
+  trailingIcon = 'chevron-down',
   loading,
   disabled,
   buttonColor: customButtonColor,
@@ -265,8 +265,11 @@ const SplitButton = ({
     () => getSplitButtonSizeStyle({ size, theme }),
     [size, theme]
   );
-  const leadingInnerRadius = useSharedValue(sizeStyle.innerRadius);
-  const trailingInnerRadius = useSharedValue(sizeStyle.innerRadius);
+  const isTrailingExpanded = trailingAccessibilityState?.expanded === true;
+  const trailingIconRotation = useSharedValue(isTrailingExpanded ? 1 : 0);
+  const trailingInnerRadiusProgress = useSharedValue(
+    isTrailingExpanded ? 1 : 0
+  );
   const colors = React.useMemo(
     () =>
       getSplitButtonColors({
@@ -278,13 +281,19 @@ const SplitButton = ({
       }),
     [theme, mode, disabled, customButtonColor, customTextColor]
   );
+  const { color: customLabelColor, fontSize: customLabelSize } =
+    StyleSheet.flatten(labelStyle) || {};
+  const contentColor =
+    typeof customLabelColor === 'string'
+      ? customLabelColor
+      : colors.contentColor;
   const rippleColor = React.useMemo(
     () =>
       getSplitButtonRippleColor({
-        contentColor: colors.contentColor,
+        contentColor,
         customRippleColor,
       }),
-    [colors.contentColor, customRippleColor]
+    [contentColor, customRippleColor]
   );
   const leadingShape = React.useMemo(
     () =>
@@ -309,31 +318,32 @@ const SplitButton = ({
     }),
     [theme.motion.duration.short4, theme.motion.easing.standard]
   );
-  const releaseTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short3,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-    }),
-    [theme.motion.duration.short3, theme.motion.easing.standard]
-  );
-  const leadingAnimatedShapeStyle = useAnimatedStyle(
-    () => ({
-      borderTopStartRadius: sizeStyle.containerRadius,
-      borderBottomStartRadius: sizeStyle.containerRadius,
-      borderTopEndRadius: leadingInnerRadius.value,
-      borderBottomEndRadius: leadingInnerRadius.value,
-    }),
-    [sizeStyle.containerRadius]
-  );
-  const trailingAnimatedShapeStyle = useAnimatedStyle(
-    () => ({
-      borderTopStartRadius: trailingInnerRadius.value,
-      borderBottomStartRadius: trailingInnerRadius.value,
-      borderTopEndRadius: sizeStyle.containerRadius,
-      borderBottomEndRadius: sizeStyle.containerRadius,
-    }),
-    [sizeStyle.containerRadius]
-  );
+  // Interpolated between `trailingShape`'s own Start radius (resting) and
+  // its End radius (expanded), so the Start corner always lands exactly on
+  // the same radius already driving the segment's static End corners.
+  const trailingRestingRadius = trailingShape.borderTopStartRadius as number;
+  const trailingExpandedRadius = trailingShape.borderTopEndRadius as number;
+  const trailingAnimatedShapeStyle = useAnimatedStyle(() => {
+    const radius =
+      trailingRestingRadius +
+      trailingInnerRadiusProgress.value *
+        (trailingExpandedRadius - trailingRestingRadius);
+
+    return {
+      borderTopStartRadius: radius,
+      borderBottomStartRadius: radius,
+    };
+  });
+  const trailingIconAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${trailingIconRotation.value * 180}deg` }],
+  }));
+  // Per the M3 spec, the trailing button's color doesn't change when
+  // selected (expanded) — only a state layer is applied on top of it.
+  const trailingStateLayerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: disabled
+      ? 0
+      : trailingInnerRadiusProgress.value * splitButtonStateLayerOpacity,
+  }));
   const leadingHitSlop = React.useMemo(
     () => getSplitButtonHitSlop({ size, hitSlop }),
     [size, hitSlop]
@@ -343,12 +353,6 @@ const SplitButton = ({
     [size, trailingHitSlop]
   );
 
-  const { color: customLabelColor, fontSize: customLabelSize } =
-    StyleSheet.flatten(labelStyle) || {};
-  const contentColor =
-    typeof customLabelColor === 'string'
-      ? customLabelColor
-      : colors.contentColor;
   const labelTextStyle: TextStyle = {
     color: colors.contentColor,
   };
@@ -372,79 +376,17 @@ const SplitButton = ({
     onPressOut: onTrailingPressOut,
     onLongPress: onTrailingLongPress,
   });
-  const handleLeadingPressIn = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onPressIn?.(e);
-      leadingInnerRadius.value = withTiming(
-        sizeStyle.innerPressedRadius,
-        pressTimingConfig
-      );
-      trailingInnerRadius.value = withTiming(
-        sizeStyle.innerRadius,
-        releaseTimingConfig
-      );
-    },
-    [
-      leadingInnerRadius,
-      onPressIn,
-      pressTimingConfig,
-      releaseTimingConfig,
-      sizeStyle.innerPressedRadius,
-      sizeStyle.innerRadius,
-      trailingInnerRadius,
-    ]
-  );
-  const handleLeadingPressOut = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onPressOut?.(e);
-      leadingInnerRadius.value = withTiming(
-        sizeStyle.innerRadius,
-        releaseTimingConfig
-      );
-    },
-    [leadingInnerRadius, onPressOut, releaseTimingConfig, sizeStyle.innerRadius]
-  );
-  const handleTrailingPressIn = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onTrailingPressIn?.(e);
-      trailingInnerRadius.value = withTiming(
-        sizeStyle.innerPressedRadius,
-        pressTimingConfig
-      );
-      leadingInnerRadius.value = withTiming(
-        sizeStyle.innerRadius,
-        releaseTimingConfig
-      );
-    },
-    [
-      leadingInnerRadius,
-      onTrailingPressIn,
-      pressTimingConfig,
-      releaseTimingConfig,
-      sizeStyle.innerPressedRadius,
-      sizeStyle.innerRadius,
-      trailingInnerRadius,
-    ]
-  );
-  const handleTrailingPressOut = React.useCallback(
-    (e: GestureResponderEvent) => {
-      onTrailingPressOut?.(e);
-      trailingInnerRadius.value = withTiming(
-        sizeStyle.innerRadius,
-        releaseTimingConfig
-      );
-    },
-    [
-      onTrailingPressOut,
-      releaseTimingConfig,
-      sizeStyle.innerRadius,
-      trailingInnerRadius,
-    ]
-  );
   React.useEffect(() => {
-    leadingInnerRadius.value = sizeStyle.innerRadius;
-    trailingInnerRadius.value = sizeStyle.innerRadius;
-  }, [leadingInnerRadius, sizeStyle.innerRadius, trailingInnerRadius]);
+    const progress = isTrailingExpanded ? 1 : 0;
+
+    trailingIconRotation.value = withTiming(progress, pressTimingConfig);
+    trailingInnerRadiusProgress.value = withTiming(progress, pressTimingConfig);
+  }, [
+    isTrailingExpanded,
+    pressTimingConfig,
+    trailingIconRotation,
+    trailingInnerRadiusProgress,
+  ]);
 
   const commonButtonStyle: ViewStyle = {
     height: sizeStyle.containerHeight,
@@ -460,7 +402,7 @@ const SplitButton = ({
     testID ? `${testID}-${suffix}` : undefined;
 
   return (
-    <Animated.View
+    <View
       {...rest}
       testID={getTestID('container')}
       style={[
@@ -472,14 +414,13 @@ const SplitButton = ({
         style,
       ]}
     >
-      <AnimatedSurface
+      <Surface
         testID={getTestID('leading-container')}
         elevation={elevation}
         style={[
           styles.leading,
           commonButtonStyle,
           leadingShape,
-          leadingAnimatedShapeStyle,
           buttonStyle,
           leadingButtonStyle,
         ]}
@@ -495,10 +436,8 @@ const SplitButton = ({
           disabled={disabled}
           onPress={onPress}
           onLongPress={onLongPress}
-          onPressIn={leadingHasTouchHandler ? handleLeadingPressIn : undefined}
-          onPressOut={
-            leadingHasTouchHandler ? handleLeadingPressOut : undefined
-          }
+          onPressIn={leadingHasTouchHandler ? onPressIn : undefined}
+          onPressOut={leadingHasTouchHandler ? onPressOut : undefined}
           delayLongPress={delayLongPress}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
@@ -558,9 +497,9 @@ const SplitButton = ({
             </Text>
           </View>
         </TouchableRipple>
-      </AnimatedSurface>
+      </Surface>
 
-      <AnimatedSurface
+      <SplitButtonSurface
         testID={getTestID('trailing-container')}
         elevation={elevation}
         style={[
@@ -571,58 +510,76 @@ const SplitButton = ({
           buttonStyle,
           trailingButtonStyle,
         ]}
-        container
       >
-        <ButtonBackground
-          backgroundColor={colors.containerColor}
-          opacity={colors.containerOpacity}
-          borderRadiusStyle={trailingShape}
-        />
-        <TouchableRipple
-          borderless
-          disabled={disabled}
-          onPress={onTrailingPress}
-          onLongPress={onTrailingLongPress}
-          onPressIn={
-            trailingHasTouchHandler ? handleTrailingPressIn : undefined
-          }
-          onPressOut={
-            trailingHasTouchHandler ? handleTrailingPressOut : undefined
-          }
-          delayLongPress={trailingDelayLongPress}
-          accessibilityLabel={trailingAccessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={trailingAccessibilityStateWithDisabled}
-          background={background}
-          hitSlop={resolvedTrailingHitSlop}
-          rippleColor={rippleColor}
+        <Animated.View
           style={[
-            styles.ripple,
-            getButtonTouchableRippleStyle(trailingShape, colors.borderWidth),
+            styles.trailingClip,
+            { height: sizeStyle.containerHeight },
+            trailingShape,
+            trailingAnimatedShapeStyle,
           ]}
-          testID={getTestID('trailing')}
-          theme={theme}
         >
-          <View
+          <ButtonBackground
+            backgroundColor={colors.containerColor}
+            opacity={colors.containerOpacity}
+            borderRadiusStyle={trailingShape}
+          />
+          <Animated.View
+            testID={getTestID('trailing-state-layer')}
+            pointerEvents="none"
             style={[
-              styles.trailingContent,
-              {
-                height: sizeStyle.containerHeight,
-                paddingStart: sizeStyle.trailingButtonLeadingSpace,
-                paddingEnd: sizeStyle.trailingButtonTrailingSpace,
-                opacity: colors.contentOpacity,
-              },
+              StyleSheet.absoluteFill,
+              // The M3 state layer is always tinted with the container's
+              // own "on" color (e.g. `onPrimary` for a `primary` filled
+              // container), which is exactly what `contentColor` already
+              // resolves to per mode.
+              { backgroundColor: contentColor },
+              trailingStateLayerAnimatedStyle,
             ]}
+          />
+          <TouchableRipple
+            borderless
+            disabled={disabled}
+            onPress={onTrailingPress}
+            onLongPress={onTrailingLongPress}
+            onPressIn={trailingHasTouchHandler ? onTrailingPressIn : undefined}
+            onPressOut={
+              trailingHasTouchHandler ? onTrailingPressOut : undefined
+            }
+            delayLongPress={trailingDelayLongPress}
+            accessibilityLabel={trailingAccessibilityLabel}
+            accessibilityRole="button"
+            accessibilityState={trailingAccessibilityStateWithDisabled}
+            background={background}
+            hitSlop={resolvedTrailingHitSlop}
+            rippleColor={rippleColor}
+            style={styles.ripple}
+            testID={getTestID('trailing')}
+            theme={theme}
           >
-            <Icon
-              source={trailingIcon}
-              size={sizeStyle.trailingIconSize}
-              color={contentColor}
-            />
-          </View>
-        </TouchableRipple>
-      </AnimatedSurface>
-    </Animated.View>
+            <View
+              style={[
+                styles.trailingContent,
+                {
+                  height: sizeStyle.containerHeight,
+                  paddingStart: sizeStyle.trailingButtonLeadingSpace,
+                  paddingEnd: sizeStyle.trailingButtonTrailingSpace,
+                  opacity: colors.contentOpacity,
+                },
+              ]}
+            >
+              <Animated.View style={trailingIconAnimatedStyle}>
+                <Icon
+                  source={trailingIcon}
+                  size={sizeStyle.trailingIconSize}
+                  color={contentColor}
+                />
+              </Animated.View>
+            </View>
+          </TouchableRipple>
+        </Animated.View>
+      </SplitButtonSurface>
+    </View>
   );
 };
 
@@ -665,6 +622,12 @@ const styles = StyleSheet.create({
   trailing: {
     minWidth: splitButtonMinInteractiveSize,
     borderStyle: 'solid',
+  },
+  // Clips the ripple and background to the trailing segment's current
+  // (possibly animated) shape, since `TouchableRipple`'s own clip is static
+  // and would let the ripple show past the segment once its corners morph.
+  trailingClip: {
+    overflow: 'hidden',
   },
   ripple: {
     height: '100%',

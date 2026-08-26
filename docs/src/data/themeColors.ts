@@ -323,12 +323,16 @@ export const themeColors = {
       },
       outlined: {
         textColor: 'theme.colors.onSurfaceVariant',
-        borderColor: 'theme.colors.outline',
+        borderColor: 'theme.colors.outlineVariant',
       },
     },
     disabled: {
       '-': {
         backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+      outlined: {
+        backgroundColor: 'transparent',
         textColor: 'theme.colors.onSurface',
       },
     },
