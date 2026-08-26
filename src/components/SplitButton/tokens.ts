@@ -14,7 +14,6 @@ export type SplitButtonSizeTokens = {
   containerHeight: number;
   containerShape: SplitButtonShapeKey;
   innerCornerShape: SplitButtonShapeKey;
-  innerPressedCornerShape: SplitButtonShapeKey;
   leadingButtonLeadingSpace: number;
   leadingButtonTrailingSpace: number;
   leadingIconSize: number;
@@ -34,7 +33,6 @@ export const splitButtonSizeTokens: Record<
     containerHeight: 32,
     containerShape: 'full',
     innerCornerShape: 'extraSmall',
-    innerPressedCornerShape: 'small',
     leadingButtonLeadingSpace: 12,
     leadingButtonTrailingSpace: 10,
     leadingIconSize: 20,
@@ -49,7 +47,6 @@ export const splitButtonSizeTokens: Record<
     containerHeight: 40,
     containerShape: 'full',
     innerCornerShape: 'extraSmall',
-    innerPressedCornerShape: 'medium',
     leadingButtonLeadingSpace: 16,
     leadingButtonTrailingSpace: 12,
     leadingIconSize: 20,
@@ -64,7 +61,6 @@ export const splitButtonSizeTokens: Record<
     containerHeight: 56,
     containerShape: 'full',
     innerCornerShape: 'extraSmall',
-    innerPressedCornerShape: 'medium',
     leadingButtonLeadingSpace: 24,
     leadingButtonTrailingSpace: 24,
     leadingIconSize: 24,
@@ -79,7 +75,6 @@ export const splitButtonSizeTokens: Record<
     containerHeight: 96,
     containerShape: 'full',
     innerCornerShape: 'small',
-    innerPressedCornerShape: 'largeIncreased',
     leadingButtonLeadingSpace: 48,
     leadingButtonTrailingSpace: 48,
     leadingIconSize: 32,
@@ -94,7 +89,6 @@ export const splitButtonSizeTokens: Record<
     containerHeight: 136,
     containerShape: 'full',
     innerCornerShape: 'medium',
-    innerPressedCornerShape: 'largeIncreased',
     leadingButtonLeadingSpace: 64,
     leadingButtonTrailingSpace: 64,
     leadingIconSize: 40,
@@ -109,6 +103,8 @@ export const splitButtonSizeTokens: Record<
 export const splitButtonMinInteractiveSize = 48;
 
 export const splitButtonDisabledOutlineOpacity = 0.12;
+
+export const splitButtonStateLayerOpacity = 0.1;
 
 export const splitButtonElevation = {
   disabled: 0,

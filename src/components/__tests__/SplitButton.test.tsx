@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
+import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
@@ -83,8 +84,129 @@ it('dims the outline color for a disabled outlined split button', async () => {
   const theme = getTheme();
   await renderSplitButton({ mode: 'outlined', disabled: true });
 
-  expect(screen.getByTestId('split-button-leading-container')).not.toHaveStyle({
+  const expectedBorderColor = color(theme.colors.onSurface as string)
+    .alpha(0.12)
+    .rgb()
+    .string();
+
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
+    borderColor: expectedBorderColor,
+  });
+});
+
+it('applies the filled mode container color', async () => {
+  const theme = getTheme();
+  await renderSplitButton({ mode: 'filled' });
+
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
+    backgroundColor: theme.colors.primary,
+  });
+});
+
+it('applies the tonal mode container color', async () => {
+  const theme = getTheme();
+  await renderSplitButton({ mode: 'tonal' });
+
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
+    backgroundColor: theme.colors.secondaryContainer,
+  });
+});
+
+it('applies a transparent container and visible border for outlined mode', async () => {
+  const theme = getTheme();
+  await renderSplitButton({ mode: 'outlined' });
+
+  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
+    backgroundColor: 'transparent',
     borderColor: theme.colors.outlineVariant,
+  });
+});
+
+it('applies the container height for the extra-small size', async () => {
+  await renderSplitButton({ size: 'extra-small' });
+
+  expect(screen.getByTestId('split-button-container')).toHaveStyle({
+    height: 32,
+  });
+});
+
+it('applies the container height for the large size', async () => {
+  await renderSplitButton({ size: 'large' });
+
+  expect(screen.getByTestId('split-button-container')).toHaveStyle({
+    height: 96,
+  });
+});
+
+it('shows a progress indicator instead of the icon while loading', async () => {
+  await renderSplitButton({ icon: 'send', loading: true });
+
+  expect(screen.getByRole('progressbar')).toBeTruthy();
+});
+
+it('defaults accessibility labels from label and to "Show options"', async () => {
+  await renderSplitButton();
+
+  expect(screen.getByTestId('split-button-leading')).toHaveProp(
+    'accessibilityLabel',
+    'Send'
+  );
+  expect(screen.getByTestId('split-button-trailing')).toHaveProp(
+    'accessibilityLabel',
+    'Show options'
+  );
+});
+
+it('calls leading and trailing long-press handlers separately', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onTrailingLongPress = jest.fn();
+  await renderSplitButton({ onLongPress, onTrailingLongPress });
+
+  await user.longPress(screen.getByTestId('split-button-leading'));
+  await user.longPress(screen.getByTestId('split-button-trailing'));
+
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onTrailingLongPress).toHaveBeenCalledTimes(1);
+});
+
+it('applies a state layer instead of a color change when selected', async () => {
+  const theme = getTheme();
+  await renderSplitButton({
+    mode: 'filled',
+    trailingAccessibilityState: { expanded: true },
+  });
+
+  // Per the M3 spec, the trailing button's color doesn't change when
+  // selected — only a state layer, tinted with the container's own "on"
+  // color, is applied on top of it.
+  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
+    backgroundColor: theme.colors.primary,
+  });
+  expect(screen.getByTestId('split-button-trailing-state-layer')).toHaveStyle({
+    backgroundColor: theme.colors.onPrimary,
+    opacity: 0.1,
+  });
+});
+
+it('hides the state layer when not selected', async () => {
+  await renderSplitButton({
+    trailingAccessibilityState: { expanded: false },
+  });
+
+  expect(screen.getByTestId('split-button-trailing-state-layer')).toHaveStyle({
+    opacity: 0,
+  });
+});
+
+it('hides the state layer when disabled, even if selected', async () => {
+  await renderSplitButton({
+    disabled: true,
+    trailingAccessibilityState: { expanded: true },
+  });
+
+  expect(screen.getByTestId('split-button-trailing-state-layer')).toHaveStyle({
+    opacity: 0,
   });
 });
 
