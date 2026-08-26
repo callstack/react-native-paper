@@ -12,7 +12,7 @@ const LARGE_SIZE = 16;
 const MAX_LARGE_WIDTH = 36;
 const LARGE_PADDING = 4;
 
-export type Props = TextProps & {
+export type Props = Omit<TextProps, 'style'> & {
   /**
    * Whether the badge is visible
    */
