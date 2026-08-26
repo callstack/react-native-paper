@@ -90,6 +90,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   role?: Role;
   /**
+   * Whether the control the button opens is currently expanded. Set this when
+   * the button anchors a menu or another disclosure.
+   */
+  'aria-expanded'?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -170,6 +175,7 @@ const Button = ({
   textColor: customTextColor,
   children,
   'aria-label': ariaLabel,
+  'aria-expanded': ariaExpanded,
   accessibilityHint,
   role = 'button',
   hitSlop,
@@ -349,6 +355,7 @@ const Button = ({
         aria-label={ariaLabel}
         accessibilityHint={accessibilityHint}
         role={role}
+        aria-expanded={ariaExpanded}
         aria-disabled={disabled}
         accessible={accessible}
         hitSlop={hitSlop}
