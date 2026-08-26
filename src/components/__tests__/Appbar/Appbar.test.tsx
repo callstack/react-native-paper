@@ -442,7 +442,6 @@ describe('Appbar search', () => {
     });
     expect(searchbox).toHaveStyle({
       color: getTheme().colors.onSurface,
-      textAlign: 'center',
     });
     expect(searchbox).toHaveProp(
       'placeholderTextColor',

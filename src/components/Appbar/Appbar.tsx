@@ -192,11 +192,7 @@ const Appbar = ({
     [backgroundColor, minHeight, restStyle]
   );
   const resolvedSearchInputStyle = React.useMemo(
-    () => [
-      styles.searchInput,
-      { color: theme.colors.onSurface },
-      searchBar?.inputStyle,
-    ],
+    () => [{ color: theme.colors.onSurface }, searchBar?.inputStyle],
     [searchBar?.inputStyle, theme.colors.onSurface]
   );
   const searchBackgroundColor = isScrolled
@@ -406,9 +402,6 @@ const styles = StyleSheet.create({
   searchWidthLimiter: {
     width: '100%',
     maxWidth: APPBAR_SEARCH_MAX_WIDTH,
-  },
-  searchInput: {
-    textAlign: 'center',
   },
   flexibleContainer: {
     flex: 1,
