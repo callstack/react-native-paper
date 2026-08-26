@@ -144,43 +144,47 @@ const SegmentedButtons = <T extends string = string>({
       role={multiSelect ? 'group' : 'radiogroup'}
       style={[styles.row, direction === 'rtl' ? styles.rtl : styles.ltr, style]}
     >
-      {buttons.map((item, i) => {
-        const segment =
-          i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
+      {buttons.map(
+        ({ value: itemValue, onPress: onItemPress, ...itemProps }, index) => {
+          const segment =
+            index === 0
+              ? 'first'
+              : index === buttons.length - 1
+                ? 'last'
+                : undefined;
 
-        const checked = multiSelect
-          ? value.includes(item.value)
-          : i === singleSelectedIndex;
+          const checked = multiSelect
+            ? value.includes(itemValue)
+            : index === singleSelectedIndex;
 
-        const onPress = (event: GestureResponderEvent) => {
-          item.onPress?.(event);
+          const handlePress = (event: GestureResponderEvent) => {
+            onItemPress?.(event);
 
-          if (multiSelect) {
-            onValueChange(
-              checked
-                ? value.filter((selectedValue) => item.value !== selectedValue)
-                : [...value, item.value]
-            );
-          } else {
-            onValueChange(item.value);
-          }
-        };
+            if (multiSelect) {
+              onValueChange(
+                checked
+                  ? value.filter((selectedValue) => itemValue !== selectedValue)
+                  : [...value, itemValue]
+              );
+            } else {
+              onValueChange(itemValue);
+            }
+          };
 
-        return (
-          <SegmentedButtonItem
-            {...item}
-            key={i}
-            checked={checked}
-            role={multiSelect ? 'checkbox' : 'radio'}
-            segment={segment}
-            density={density}
-            onPress={onPress}
-            style={item.style}
-            labelStyle={item.labelStyle}
-            theme={theme}
-          />
-        );
-      })}
+          return (
+            <SegmentedButtonItem
+              {...itemProps}
+              key={index}
+              checked={checked}
+              role={multiSelect ? 'checkbox' : 'radio'}
+              segment={segment}
+              density={density}
+              onPress={handlePress}
+              theme={theme}
+            />
+          );
+        }
+      )}
     </View>
   );
 };

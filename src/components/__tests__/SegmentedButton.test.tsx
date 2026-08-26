@@ -307,13 +307,17 @@ it('applies group theme overrides to items', async () => {
         { value: 'walk', label: 'Walking', testID: 'walk' },
         { value: 'ride', label: 'Riding' },
       ]}
-      theme={{ colors: { secondaryContainer: '#123456' } }}
+      theme={{
+        colors: { secondaryContainer: '#123456' },
+        fonts: { labelLarge: { fontSize: 18 } },
+      }}
     />
   );
 
   expect(screen.getByTestId('walk-container')).toHaveStyle({
     backgroundColor: '#123456',
   });
+  expect(screen.getByTestId('walk-label')).toHaveStyle({ fontSize: 18 });
 });
 
 describe('getSegmentedButtonColors', () => {
@@ -753,6 +757,38 @@ describe('should render icon when', () => {
     );
 
     expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
+  });
+
+  it('selected check is shown alongside an icon-only option', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            showSelectedCheck: true,
+            'aria-label': 'Walking',
+            testID: 'walking-button',
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+            showSelectedCheck: true,
+            'aria-label': 'Driving',
+            testID: 'driving-button',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.getByTestId('walking-button-check-icon')).toBeOnTheScreen();
+    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
+    expect(
+      screen.queryByTestId('driving-button-check-icon')
+    ).not.toBeOnTheScreen();
     expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
   });
 

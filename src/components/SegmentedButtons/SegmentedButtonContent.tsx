@@ -1,10 +1,16 @@
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 
 import { SegmentedButtonTokens } from './tokens';
+import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
@@ -62,47 +68,62 @@ const AnimatedOptionIcon = ({
 };
 
 type Props = {
-  checkmarkScale: SharedValue<number>;
+  checked: boolean;
+  contentColor: TextStyle['color'];
+  contentOpacity: number;
   icon?: IconSource;
   label?: string;
   labelMaxFontSizeMultiplier?: number;
   labelStyle?: StyleProp<TextStyle>;
-  labelTextStyle: TextStyle;
-  shouldShowCheckIcon: boolean;
-  shouldShowOptionIcon: boolean;
+  showSelectedCheck?: boolean;
   testID?: string;
-  textColor: TextStyle['color'];
-  textOpacity: number;
+  theme: Theme;
 };
 
 const SegmentedButtonContent = ({
-  checkmarkScale,
+  checked,
+  contentColor,
+  contentOpacity,
   icon,
   label,
   labelMaxFontSizeMultiplier,
   labelStyle,
-  labelTextStyle,
-  shouldShowCheckIcon,
-  shouldShowOptionIcon,
+  showSelectedCheck,
   testID,
-  textColor,
-  textOpacity,
+  theme,
 }: Props) => {
+  const checkmarkScale = useSharedValue(0);
+
+  React.useEffect(() => {
+    if (!showSelectedCheck) {
+      return;
+    }
+
+    checkmarkScale.value = withSpring(checked ? 1 : 0);
+  }, [checked, checkmarkScale, showSelectedCheck]);
+
+  const showCheckIcon = Boolean(checked && showSelectedCheck);
+  const optionIcon = icon && (!label || !showCheckIcon) ? icon : undefined;
+  const labelTextStyle: TextStyle = {
+    ...theme.fonts.labelLarge,
+    color: contentColor,
+  };
+
   return (
-    <View style={[styles.content, { opacity: textOpacity }]}>
-      {shouldShowCheckIcon ? (
+    <View style={[styles.content, { opacity: contentOpacity }]}>
+      {showCheckIcon ? (
         <AnimatedCheckIcon
-          color={textColor}
+          color={contentColor}
           scale={checkmarkScale}
           testID={testID ? `${testID}-check-icon` : undefined}
         />
       ) : null}
-      {shouldShowOptionIcon ? (
+      {optionIcon ? (
         <AnimatedOptionIcon
           animated={Boolean(label)}
-          color={textColor}
+          color={contentColor}
           scale={checkmarkScale}
-          source={icon as IconSource}
+          source={optionIcon}
           testID={testID ? `${testID}-icon` : undefined}
         />
       ) : null}
