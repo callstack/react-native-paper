@@ -7,13 +7,78 @@ import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
 import {
-  getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
   getSegmentedButtonHeight,
   getSegmentedButtonStateLayerOpacity,
 } from '../SegmentedButtons/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
+
+it('type checks single- and multi-select values with their callbacks', () => {
+  type Value = 'walk' | 'ride';
+  const buttons: { value: Value }[] = [{ value: 'walk' }, { value: 'ride' }];
+  const singleValue: Value = 'walk';
+  const multiValue: Value[] = ['walk'];
+  const onSingleValueChange = (_value: Value) => {};
+  const onMultiValueChange = (_value: Value[]) => {};
+
+  const validSingleSelect = (
+    <SegmentedButtons<Value>
+      value={singleValue}
+      buttons={buttons}
+      onValueChange={onSingleValueChange}
+    />
+  );
+  const validMultiSelect = (
+    <SegmentedButtons<Value>
+      multiSelect
+      value={multiValue}
+      buttons={buttons}
+      onValueChange={onMultiValueChange}
+    />
+  );
+  const invalidSingleSelectValue = (
+    // @ts-expect-error Single-select value must be a string.
+    <SegmentedButtons<Value>
+      value={multiValue}
+      buttons={buttons}
+      onValueChange={onSingleValueChange}
+    />
+  );
+  const invalidMultiSelectValue = (
+    // @ts-expect-error Multi-select value must be an array.
+    <SegmentedButtons<Value>
+      multiSelect
+      value={singleValue}
+      buttons={buttons}
+      onValueChange={onMultiValueChange}
+    />
+  );
+  const invalidSingleSelectCallback = (
+    // @ts-expect-error Single-select callback must receive a string.
+    <SegmentedButtons<Value>
+      value={singleValue}
+      buttons={buttons}
+      onValueChange={onMultiValueChange}
+    />
+  );
+  const invalidMultiSelectCallback = (
+    // @ts-expect-error Multi-select callback must receive an array.
+    <SegmentedButtons<Value>
+      multiSelect
+      value={multiValue}
+      buttons={buttons}
+      onValueChange={onSingleValueChange}
+    />
+  );
+
+  expect(validSingleSelect).toBeDefined();
+  expect(validMultiSelect).toBeDefined();
+  void invalidSingleSelectValue;
+  void invalidMultiSelectValue;
+  void invalidSingleSelectCallback;
+  void invalidMultiSelectCallback;
+});
 
 it('renders segmented button', async () => {
   const tree = (
@@ -624,7 +689,7 @@ describe('segmented button presentation', () => {
     }
   );
 
-  it('renders token opacity for hover and keyboard focus states', async () => {
+  it('renders state opacity with press, focus, and hover precedence', async () => {
     await render(
       <SegmentedButtons
         value="walk"
@@ -648,63 +713,19 @@ describe('segmented button presentation', () => {
       borderWidth: tokens.md.sys.state.focusIndicator.thickness,
       borderColor: getTheme().colors.secondary,
     });
-  });
-});
 
-describe('getDisabledSegmentedButtonBorderWidth', () => {
-  it('Returns empty style object for all enabled buttons', () => {
-    [0, 1, 2].forEach((index) => {
-      expect(
-        getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
-          buttons: [
-            { disabled: false },
-            { disabled: false },
-            { disabled: false },
-          ],
-          index,
-        })
-      ).toMatchObject({});
-    });
-  });
+    await fireEvent(button, 'pressIn');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.pressed });
 
-  it('Returns empty style object for all disabled buttons', () => {
-    [0, 1, 2].forEach((index) => {
-      expect(
-        getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
-          buttons: [{ disabled: true }, { disabled: true }, { disabled: true }],
-          index,
-        })
-      ).toMatchObject({});
-    });
-  });
+    await fireEvent(button, 'pressOut');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
 
-  it('Returns proper style object for one disabled button', () => {
-    expect(
-      getDisabledSegmentedButtonStyle({
-        theme: getTheme(),
-        buttons: [{ disabled: false }, { disabled: true }, { disabled: true }],
-        index: 0,
-      })
-    ).toMatchObject({ borderRightWidth: 1 });
-  });
+    await fireEvent(button, 'blur');
+    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
+    expect(screen.queryByTestId('walk-focus-ring')).not.toBeOnTheScreen();
 
-  it('Returns proper style object for two disabled buttons (alternately)', () => {
-    [0, 2].forEach((index) => {
-      expect(
-        getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
-          buttons: [
-            { disabled: false },
-            { disabled: true },
-            { disabled: false },
-            { disabled: true },
-          ],
-          index,
-        })
-      ).toMatchObject({ borderRightWidth: 1 });
-    });
+    await fireEvent(button, 'hoverOut');
+    expect(stateLayer).toHaveStyle({ opacity: 0 });
   });
 });
 
@@ -1109,7 +1130,7 @@ describe('selected check icon', () => {
             value: 'walk',
             label: 'Walking',
             showSelectedCheck: true,
-            testID: 'walking-check-icon',
+            testID: 'walking',
           },
           { value: 'transit', label: 'Transit' },
           { value: 'drive', label: 'Driving' },

@@ -22,42 +22,9 @@ export const getSegmentedButtonHeight = (
   density: 'regular' | 'small' | 'medium' | 'high' = 'regular'
 ) => SegmentedButtonTokens.containerHeight[density];
 
-export const getSegmentedButtonDensityPadding = ({
-  density,
-}: {
-  density?: 'regular' | 'small' | 'medium' | 'high';
-}) => {
-  return (
-    (getSegmentedButtonHeight(density) -
-      tokens.md.sys.typescale.labelLarge.lineHeight -
-      SegmentedButtonTokens.outlineWidth * 2) /
-    2
-  );
-};
-
-export const getDisabledSegmentedButtonStyle = ({
-  index,
-  buttons,
-}: {
-  theme: InternalTheme;
-  buttons: { disabled?: boolean }[];
-  index: number;
-}): ViewStyle => {
-  const isDisabled = buttons[index]?.disabled;
-  const isNextDisabled = buttons[index + 1]?.disabled;
-
-  if (!isDisabled && isNextDisabled) {
-    return {
-      borderRightWidth: SegmentedButtonTokens.outlineWidth,
-    };
-  }
-  return {};
-};
-
 export const getSegmentedButtonBorderRadius = ({
   segment,
 }: {
-  theme: InternalTheme;
   segment?: 'first' | 'last';
 }): ViewStyle => {
   if (segment === 'first') {
@@ -160,7 +127,6 @@ export const getSegmentedButtonColors = ({
     borderOpacity,
     textColor,
     textOpacity,
-    borderWidth: SegmentedButtonTokens.outlineWidth,
     stateLayerColor,
     focusIndicatorColor,
   };

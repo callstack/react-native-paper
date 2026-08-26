@@ -135,9 +135,7 @@ const SegmentedButtons = <T extends string = string>({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
 
-  const selectedValues =
-    multiSelect && Array.isArray(value) ? value : undefined;
-  const singleSelectedIndex = selectedValues
+  const singleSelectedIndex = multiSelect
     ? -1
     : buttons.findIndex((item) => value === item.value);
 
@@ -150,21 +148,22 @@ const SegmentedButtons = <T extends string = string>({
         const segment =
           i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
 
-        const checked = selectedValues
-          ? selectedValues.includes(item.value)
+        const checked = multiSelect
+          ? value.includes(item.value)
           : i === singleSelectedIndex;
 
         const onPress = (event: GestureResponderEvent) => {
           item.onPress?.(event);
 
-          const nextValue = selectedValues
-            ? checked
-              ? selectedValues.filter((val) => item.value !== val)
-              : [...selectedValues, item.value]
-            : item.value;
-
-          // @ts-expect-error: TS doesn't preserve types after destructuring, so the type isn't inferred correctly
-          onValueChange(nextValue);
+          if (multiSelect) {
+            onValueChange(
+              checked
+                ? value.filter((selectedValue) => item.value !== selectedValue)
+                : [...value, item.value]
+            );
+          } else {
+            onValueChange(item.value);
+          }
         };
 
         return (

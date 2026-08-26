@@ -2,10 +2,8 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TargetedEvent,
   TextStyle,
   ViewStyle,
 } from 'react-native';
@@ -14,6 +12,7 @@ import { useSharedValue, withSpring } from 'react-native-reanimated';
 
 import SegmentedButtonContent from './SegmentedButtonContent';
 import { SegmentedButtonTokens } from './tokens';
+import { useSegmentedButtonInteraction } from './useSegmentedButtonInteraction';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
@@ -22,14 +21,12 @@ import {
 } from './utils';
 import { tokens } from '../../theme/tokens';
 import type { Theme } from '../../types';
-import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { splitStyles } from '../../utils/splitStyles';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const focusIndicatorTokens = tokens.md.sys.state.focusIndicator;
-const stateOpacity = tokens.md.sys.state.opacity;
 const FOCUS_RING_OUTSET =
   focusIndicatorTokens.thickness + focusIndicatorTokens.outerOffset;
 
@@ -137,10 +134,9 @@ const SegmentedButtonItem = ({
   labelMaxFontSizeMultiplier,
   hitSlop,
 }: Props) => {
-  const [pressed, setPressed] = React.useState(false);
-  const [hovered, setHovered] = React.useState(false);
-  const [focused, setFocused] = React.useState(false);
   const checkmarkScale = useSharedValue(0);
+  const { interactionProps, stateLayerOpacity, showFocusRing } =
+    useSegmentedButtonInteraction(disabled);
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
@@ -167,10 +163,7 @@ const SegmentedButtonItem = ({
     checkedColor,
     uncheckedColor,
   });
-  const segmentBorderRadius = getSegmentedButtonBorderRadius({
-    theme,
-    segment,
-  });
+  const segmentBorderRadius = getSegmentedButtonBorderRadius({ segment });
   const outlineStyle = getSegmentedButtonOutlineStyle(segment);
   const containerHeight = getSegmentedButtonHeight(density);
   const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
@@ -226,30 +219,6 @@ const SegmentedButtonItem = ({
     icon && (!label || !shouldShowCheckIcon)
   );
 
-  const stateLayerOpacity = disabled
-    ? 0
-    : pressed
-      ? stateOpacity.pressed
-      : focused
-        ? stateOpacity.focused
-        : hovered
-          ? stateOpacity.hovered
-          : 0;
-  const showFocusRing = focused && !disabled;
-
-  const handleFocus = (event: NativeSyntheticEvent<TargetedEvent>) => {
-    if (disabled || !isKeyboardFocusEvent(event)) {
-      return;
-    }
-
-    setFocused(true);
-  };
-
-  const handleBlur = () => {
-    setPressed(false);
-    setFocused(false);
-  };
-
   return (
     <View
       testID={testID ? `${testID}-wrapper` : undefined}
@@ -258,12 +227,7 @@ const SegmentedButtonItem = ({
       <TouchableRipple
         borderless
         onPress={onPress}
-        onPressIn={() => setPressed(true)}
-        onPressOut={() => setPressed(false)}
-        onHoverIn={() => setHovered(true)}
-        onHoverOut={() => setHovered(false)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        {...interactionProps}
         aria-label={accessibilityLabel}
         aria-disabled={disabled}
         aria-checked={checked}
