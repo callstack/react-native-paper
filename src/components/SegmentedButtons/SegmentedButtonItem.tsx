@@ -146,6 +146,7 @@ const SegmentedButtonItem = ({
     checkedColor,
     uncheckedColor,
   });
+
   const layerStyles = getSegmentedButtonItemStyles({
     colors,
     density,
@@ -285,13 +286,16 @@ function getSegmentedButtonItemStyles({
   const segmentBorderRadius = getSegmentedButtonBorderRadius({ segment });
   const segmentOutlineStyle = getSegmentedButtonOutlineStyle(segment);
   const containerHeight = getSegmentedButtonHeight(density);
-  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const flattenedStyle = StyleSheet.flatten(style) || {};
+
   const [containerStyleOverrides, borderRadiusOverrides, borderOverrides] =
     splitStyles(flattenedStyle, isBorderRadiusStyle, isBorderStyle);
+
   const borderRadiusStyle = {
     ...(flattenedStyle.borderRadius === undefined ? segmentBorderRadius : {}),
     ...borderRadiusOverrides,
   };
+
   const focusRingVerticalInset =
     (SegmentedButtonTokens.touchTargetHeight - containerHeight) / 2 -
     FOCUS_RING_OUTSET;

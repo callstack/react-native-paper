@@ -99,9 +99,11 @@ export const getSegmentedButtonColors = ({
   const backgroundColor = checked
     ? theme.colors[SegmentedButtonTokens.selectedContainerColor]
     : 'transparent';
+
   const borderColor = disabled
     ? theme.colors[SegmentedButtonTokens.disabledOutlineColor]
     : theme.colors[SegmentedButtonTokens.outlineColor];
+
   const textColor = disabled
     ? theme.colors[SegmentedButtonTokens.disabledContentColor]
     : checked
@@ -109,15 +111,19 @@ export const getSegmentedButtonColors = ({
         theme.colors[SegmentedButtonTokens.selectedContentColor])
       : (uncheckedColor ??
         theme.colors[SegmentedButtonTokens.unselectedContentColor]);
+
   const borderOpacity = disabled
     ? SegmentedButtonTokens.disabledOutlineOpacity
     : stateOpacity.enabled;
+
   const textOpacity = disabled
     ? SegmentedButtonTokens.disabledContentOpacity
     : stateOpacity.enabled;
+
   const stateLayerColor = checked
     ? theme.colors[SegmentedButtonTokens.selectedStateLayerColor]
     : theme.colors[SegmentedButtonTokens.unselectedStateLayerColor];
+
   const focusIndicatorColor =
     theme.colors[SegmentedButtonTokens.focusIndicatorColor];
 
