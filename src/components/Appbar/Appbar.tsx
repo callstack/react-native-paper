@@ -193,9 +193,9 @@ const Appbar = ({
   );
   const resolvedSearchInputStyle = React.useMemo(
     () => [
-      searchBar?.inputStyle,
       styles.searchInput,
       { color: theme.colors.onSurface },
+      searchBar?.inputStyle,
     ],
     [searchBar?.inputStyle, theme.colors.onSurface]
   );
