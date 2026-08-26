@@ -31,7 +31,6 @@ exports[`renders disabled toggle button 1`] = `
         "borderWidth": 0,
         "elevation": 0,
         "flex": 1,
-        "overflow": "hidden",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -65,17 +64,10 @@ exports[`renders disabled toggle button 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -91,6 +83,12 @@ exports[`renders disabled toggle button 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 4,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -171,7 +169,6 @@ exports[`renders toggle button 1`] = `
         "borderWidth": 0,
         "elevation": 0,
         "flex": 1,
-        "overflow": "hidden",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -205,17 +202,10 @@ exports[`renders toggle button 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -231,6 +221,12 @@ exports[`renders toggle button 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 4,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -311,7 +307,6 @@ exports[`renders unchecked toggle button 1`] = `
         "borderWidth": 0,
         "elevation": 0,
         "flex": 1,
-        "overflow": "hidden",
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -345,17 +340,10 @@ exports[`renders unchecked toggle button 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -371,6 +359,12 @@ exports[`renders unchecked toggle button 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 4,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],

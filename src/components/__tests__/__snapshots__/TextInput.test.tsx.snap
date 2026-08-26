@@ -175,7 +175,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -209,18 +208,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -238,6 +230,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -380,7 +378,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -414,18 +411,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -443,6 +433,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -677,7 +673,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -711,18 +706,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -740,6 +728,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -882,7 +876,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -916,18 +909,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -945,6 +931,12 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -1356,7 +1348,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1390,18 +1381,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1419,6 +1403,12 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -1561,7 +1551,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1595,18 +1584,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1624,6 +1606,12 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -1839,7 +1827,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1873,18 +1860,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1902,6 +1882,12 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
@@ -2044,7 +2030,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "elevation": 0,
               "flex": 1,
               "justifyContent": "center",
-              "overflow": "hidden",
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -2078,18 +2063,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             centered={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
             multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -2107,6 +2085,12 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
                   },
                   undefined,
                 ],
