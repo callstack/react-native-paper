@@ -321,8 +321,17 @@ const SplitButton = ({
   // Interpolated between `trailingShape`'s own Start radius (resting) and
   // its End radius (expanded), so the Start corner always lands exactly on
   // the same radius already driving the segment's static End corners.
-  const trailingRestingRadius = trailingShape.borderTopStartRadius as number;
-  const trailingExpandedRadius = trailingShape.borderTopEndRadius as number;
+  // `trailingShape`'s corner properties are typed loosely (`ViewStyle`), so
+  // narrow to the `sizeStyle` values that `getSplitButtonTrailingShape`
+  // always assigns them from, rather than asserting the type.
+  const trailingRestingRadius =
+    typeof trailingShape.borderTopStartRadius === 'number'
+      ? trailingShape.borderTopStartRadius
+      : sizeStyle.innerRadius;
+  const trailingExpandedRadius =
+    typeof trailingShape.borderTopEndRadius === 'number'
+      ? trailingShape.borderTopEndRadius
+      : sizeStyle.containerRadius;
   const trailingAnimatedShapeStyle = useAnimatedStyle(() => {
     const radius =
       trailingRestingRadius +

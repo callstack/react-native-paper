@@ -84,10 +84,11 @@ it('dims the outline color for a disabled outlined split button', async () => {
   const theme = getTheme();
   await renderSplitButton({ mode: 'outlined', disabled: true });
 
-  const expectedBorderColor = color(theme.colors.onSurface as string)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const { onSurface } = theme.colors;
+  if (typeof onSurface !== 'string') {
+    throw new Error('Expected default theme onSurface to be a string');
+  }
+  const expectedBorderColor = color(onSurface).alpha(0.12).rgb().string();
 
   expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
     borderColor: expectedBorderColor,
