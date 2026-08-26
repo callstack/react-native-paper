@@ -1,30 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { BrowserOnly } from '@rspress/core/runtime';
 import { DarkTheme, LightTheme, Provider, Text } from 'react-native-paper';
 
 import { useColorMode } from './theme-common';
-
-const styles = StyleSheet.create({
-  content: {
-    alignItems: 'flex-start',
-  },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 24,
-  },
-  item: {
-    alignItems: 'center',
-    gap: 8,
-  },
-  itemLabel: {
-    fontSize: 12,
-    opacity: 0.7,
-  },
-});
 
 /**
  * Row of demo variations, wrapping on narrow viewports.
@@ -57,12 +36,10 @@ type InteractiveExampleProps = React.PropsWithChildren<{
 /**
  * Shared shell for live component demos embedded in the docs.
  *
- * Paper components depend on browser APIs through `react-native-web`, so the
- * tree is only mounted on the client and a same-sized placeholder is rendered
- * during SSR to avoid layout shift. The Paper theme is kept in sync with the
- * active docs color mode so demos match the surrounding page.
+ * The Paper theme follows the active docs color mode so demos match the
+ * surrounding page.
  */
-const Frame = ({ title, children }: InteractiveExampleProps) => {
+const InteractiveExample = ({ title, children }: InteractiveExampleProps) => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
 
   return (
@@ -79,14 +56,24 @@ const Frame = ({ title, children }: InteractiveExampleProps) => {
   );
 };
 
-const Placeholder = () => (
-  <div className="paper-interactive-example paper-interactive-example--loading" />
-);
-
-const InteractiveExample = (props: InteractiveExampleProps) => (
-  <BrowserOnly fallback={<Placeholder />}>
-    {() => <Frame {...props} />}
-  </BrowserOnly>
-);
+const styles = StyleSheet.create({
+  content: {
+    alignItems: 'flex-start',
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: 24,
+  },
+  item: {
+    alignItems: 'center',
+    gap: 8,
+  },
+  itemLabel: {
+    fontSize: 12,
+    opacity: 0.7,
+  },
+});
 
 export default InteractiveExample;

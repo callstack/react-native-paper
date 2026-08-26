@@ -1302,10 +1302,3 @@ html:not(.dark) .paper-version-selector-menu {
   font-size: 13px;
   font-weight: 600;
 }
-
-/* Nominal reserve so the page does not jump to zero height during SSR. Demos
-   vary in height, so this deliberately approximates a single row rather than
-   claiming to match any particular example. */
-.paper-interactive-example--loading {
-  min-height: 96px;
-}

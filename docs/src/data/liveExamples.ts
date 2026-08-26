@@ -1,13 +1,3 @@
-/**
- * Components whose docs page renders live, interactive examples instead of
- * static screenshots.
- *
- * Each entry maps a component title (as it appears in the generated docs) to
- * the named exports of a module under `@docs/components` that should be
- * rendered right below the page summary. Adding an entry here automatically
- * removes the component's screenshot tabs, so a component is documented either
- * with screenshots or with live examples — never both.
- */
 export type LiveExample = {
   /** Module specifier the examples are imported from. */
   module: string;

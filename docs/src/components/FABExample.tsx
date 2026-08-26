@@ -1,29 +1,22 @@
 import * as React from 'react';
 
-import { FAB } from 'react-native-paper';
+import { FAB, type FABSize, type FABVariant } from 'react-native-paper';
 
 import InteractiveExample, { ExampleRow, Labelled } from './InteractiveExample';
 
-/**
- * Every role-color preset accepted by the `variant` prop, kept in the same
- * order as the `Variant` union in `src/components/FAB/tokens.ts`.
- */
-const VARIANTS = [
+const VARIANTS: FABVariant[] = [
   'primary',
   'secondary',
   'tertiary',
   'tonalPrimary',
   'tonalSecondary',
   'tonalTertiary',
-] as const;
+];
 
-/**
- * Every spec size accepted by the `size` prop.
- */
-const SIZES = ['default', 'medium', 'large'] as const;
+const SIZES: FABSize[] = ['default', 'medium', 'large'];
 
 export const FABVariantsExample = () => (
-  <InteractiveExample title="All variants — press for the ripple and state layer">
+  <InteractiveExample title="Variants">
     <ExampleRow>
       {VARIANTS.map((variant) => (
         <Labelled key={variant} label={variant}>
@@ -40,7 +33,7 @@ export const FABVariantsExample = () => (
 );
 
 export const FABSizesExample = () => (
-  <InteractiveExample title="All sizes — press for the ripple and state layer">
+  <InteractiveExample title="Sizes">
     <ExampleRow>
       {SIZES.map((size) => (
         <Labelled key={size} label={size}>
@@ -60,7 +53,7 @@ export const FABExtendedExample = () => {
   const [expanded, setExpanded] = React.useState(true);
 
   return (
-    <InteractiveExample title="Extended — press to collapse and expand">
+    <InteractiveExample title="Extended">
       <FAB.Extended
         icon="plus"
         label="New message"
