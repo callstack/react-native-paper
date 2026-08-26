@@ -36,7 +36,7 @@ const BannerExample = () => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <ScreenWrapper>
         <View style={[styles.grid, { paddingTop: height }]}>
           {PHOTOS.map((uri) => (
@@ -78,13 +78,16 @@ const BannerExample = () => {
         Two line text string with two actions. One to two lines is preferable on
         mobile.
       </Banner>
-    </>
+    </View>
   );
 };
 
 BannerExample.title = 'Banner';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   ...Platform.select({
     web: {
       grid: {
