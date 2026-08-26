@@ -1,3 +1,5 @@
+import { PlatformColor } from 'react-native';
+
 import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
@@ -160,10 +162,11 @@ describe('getSplitButtonColors', () => {
       mode: 'outlined',
       disabled: true,
     });
-    const expectedBorderColor = color(theme.colors.onSurface as string)
-      .alpha(0.12)
-      .rgb()
-      .string();
+    const { onSurface } = theme.colors;
+    if (typeof onSurface !== 'string') {
+      throw new Error('Expected default theme onSurface to be a string');
+    }
+    const expectedBorderColor = color(onSurface).alpha(0.12).rgb().string();
 
     expect(colors.borderColor).toBe(expectedBorderColor);
     expect(colors.borderColor).not.toBe(theme.colors.outlineVariant);
@@ -204,8 +207,7 @@ describe('getSplitButtonRippleColor', () => {
 
   it('returns undefined when the content color is not a string', () => {
     const rippleColor = getSplitButtonRippleColor({
-      // OpaqueColorValue-like non-string value, e.g. from a native color.
-      contentColor: {} as unknown as string,
+      contentColor: PlatformColor('label'),
     });
 
     expect(rippleColor).toBeUndefined();
