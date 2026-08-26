@@ -135,7 +135,7 @@ const Appbar = ({
   style,
   subtitle,
   subtitleProps,
-  testID = 'appbar',
+  testID,
   theme: themeOverrides,
   trailingActions = EMPTY_TRAILING_ACTIONS,
   variant,

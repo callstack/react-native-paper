@@ -9,6 +9,8 @@ import { render, screen, userEvent } from '../../../test-utils';
 import Appbar from '../../Appbar';
 import type { AppbarVariant } from '../../Appbar';
 
+const testIDPrefix = 'appbar';
+
 const writtenHeadlineVariants: Exclude<AppbarVariant, 'search'>[] = [
   'small',
   'medium-flexible',
@@ -57,7 +59,12 @@ describe('Appbar content', () => {
       subtitleSpacing,
     }) => {
       await render(
-        <Appbar variant={variant} headline="Inbox" subtitle="3 unread" />
+        <Appbar
+          variant={variant}
+          headline="Inbox"
+          subtitle="3 unread"
+          testID={testIDPrefix}
+        />
       );
 
       expect(screen.getByTestId('appbar-content-headline-text')).toHaveStyle(
@@ -99,6 +106,7 @@ describe('Appbar content', () => {
             'aria-label': 'Search inbox',
           },
         ]}
+        testID={testIDPrefix}
       />
     );
 
@@ -137,6 +145,7 @@ describe('Appbar content', () => {
             'aria-label': 'Search inbox',
           },
         ]}
+        testID={testIDPrefix}
       />
     );
 
@@ -153,7 +162,7 @@ describe('Appbar content', () => {
 
   it('adjusts leading headline spacing when a leading button is present', async () => {
     const { rerender } = await render(
-      <Appbar variant="small" headline="Inbox" />
+      <Appbar variant="small" headline="Inbox" testID={testIDPrefix} />
     );
 
     expect(screen.getByTestId('appbar-content')).toHaveStyle({
@@ -165,6 +174,7 @@ describe('Appbar content', () => {
         variant="small"
         headline="Inbox"
         leadingButton={{ type: 'back' }}
+        testID={testIDPrefix}
       />
     );
 
@@ -178,14 +188,21 @@ describe('Appbar surface', () => {
   it('uses scroll container colors unless a custom background is supplied', async () => {
     const customBackground = 'rebeccapurple';
     const { rerender } = await render(
-      <Appbar variant="small" headline="Inbox" />
+      <Appbar variant="small" headline="Inbox" testID={testIDPrefix} />
     );
 
     expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
       backgroundColor: getTheme().colors.surface,
     });
 
-    await rerender(<Appbar variant="small" headline="Inbox" isScrolled />);
+    await rerender(
+      <Appbar
+        variant="small"
+        headline="Inbox"
+        isScrolled
+        testID={testIDPrefix}
+      />
+    );
 
     expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
       backgroundColor: getTheme().colors.surfaceContainer,
@@ -197,6 +214,7 @@ describe('Appbar surface', () => {
         headline="Inbox"
         isScrolled
         style={{ backgroundColor: customBackground }}
+        testID={testIDPrefix}
       />
     );
 
@@ -222,6 +240,7 @@ describe('Appbar surface', () => {
             borderBottomLeftRadius: 16,
             borderBottomRightRadius: 16,
           }}
+          testID={testIDPrefix}
         />
       </SafeAreaProvider>
     );
@@ -245,6 +264,7 @@ describe('Appbar actions', () => {
         trailingActions={[
           { key: 'stable', icon, 'aria-label': 'Stable action' },
         ]}
+        testID={testIDPrefix}
       />
     );
     const initialRenderCount = icon.mock.calls.length;
@@ -256,6 +276,7 @@ describe('Appbar actions', () => {
         trailingActions={[
           { key: 'stable', icon, 'aria-label': 'Stable action' },
         ]}
+        testID={testIDPrefix}
       />
     );
 
@@ -300,6 +321,7 @@ describe('Appbar actions', () => {
             color: 'rebeccapurple',
           },
         ]}
+        testID={testIDPrefix}
       />
     );
 
@@ -334,6 +356,7 @@ describe('Appbar actions', () => {
               testID: 'expressive-action',
             },
           ]}
+          testID={testIDPrefix}
         />
       );
 
@@ -353,6 +376,7 @@ describe('Appbar search', () => {
       <Appbar
         variant="search"
         searchBar={{ placeholder: 'Search messages', value: '' }}
+        testID={testIDPrefix}
       />
     );
 
@@ -371,6 +395,7 @@ describe('Appbar search', () => {
           value: '',
           'aria-label': 'Message search',
         }}
+        testID={testIDPrefix}
       />
     );
 
@@ -405,6 +430,7 @@ describe('Appbar search', () => {
               'aria-label': 'More options',
             },
           ]}
+          testID={testIDPrefix}
         />
       );
     };
@@ -479,6 +505,7 @@ describe('Appbar accessibility', () => {
           variant={variant}
           headline="Inbox"
           headlineImage={decorativeHeadlineImage}
+          testID={testIDPrefix}
         />
       );
 
@@ -495,6 +522,7 @@ describe('Appbar accessibility', () => {
         variant="small"
         headline="Inbox"
         onHeadlinePress={onHeadlinePress}
+        testID={testIDPrefix}
       />
     );
 
@@ -510,6 +538,7 @@ describe('Appbar accessibility', () => {
         headline="Inbox"
         onHeadlinePress={onHeadlinePress}
         headlinePressableProps={{ disabled: true }}
+        testID={testIDPrefix}
       />
     );
 
@@ -529,6 +558,7 @@ describe('Appbar accessibility', () => {
         headline="Inbox"
         headlineImage={decorativeHeadlineImage}
         onHeadlinePress={() => {}}
+        testID={testIDPrefix}
       />
     );
 
@@ -550,6 +580,7 @@ describe('Appbar accessibility', () => {
           accessibilityValue: { text: 'Unread messages available' },
           onAccessibilityAction,
         }}
+        testID={testIDPrefix}
       />
     );
 
@@ -640,12 +671,14 @@ describe('Appbar accessibility', () => {
             variant="small"
             headline="Inbox"
             headlineImage={decorativeHeadlineImage}
+            testID={testIDPrefix}
           />
         ) : (
           <Appbar
             variant="medium-flexible"
             headline="Inbox"
             headlineImage={decorativeHeadlineImage}
+            testID={testIDPrefix}
           />
         )
       );
@@ -676,6 +709,7 @@ describe('Appbar accessibility', () => {
           { key: 'search', icon: 'magnify', 'aria-label': 'Search inbox' },
           { key: 'more', icon: 'dots-vertical', 'aria-label': 'More options' },
         ]}
+        testID={testIDPrefix}
       />
     );
 
@@ -696,6 +730,7 @@ describe('Appbar accessibility', () => {
           { key: 'keep', icon: 'star', 'aria-label': 'Keep action' },
           { key: 'remove', icon: 'delete', 'aria-label': 'Remove action' },
         ]}
+        testID={testIDPrefix}
       />
     );
     const survivingTrailingAction = screen.getByRole('button', {
@@ -715,6 +750,7 @@ describe('Appbar accessibility', () => {
             accessibilityHint: 'Updated hint',
           },
         ]}
+        testID={testIDPrefix}
       />
     );
 
