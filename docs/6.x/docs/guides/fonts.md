@@ -67,10 +67,12 @@ Platform.select({
 }),
 ```
 
-Material Design 3 splits the typescale across two font families: <b>Brand</b> (Display,
-Headline and Title Large) and <b>Plain</b> (Title Medium/Small, Label and Body). Both
-resolve to the same platform default above, so they are interchangeable until you
-override one of them.
+Material Design 3 typescale uses two font families:
+
+- **Brand**: Headline and Title Large
+- **Plain**: Title Medium/Small, Label, and Body
+
+The default theme uses the platform default for both font families.
 
 :::
 
@@ -306,10 +308,8 @@ override one of them.
 
 - #### Emphasized
 
-Each of the 15 variants above has an `Emphasized` counterpart — `displayLargeEmphasized`,
-`bodyMediumEmphasized`, and so on. They keep the size, line height and letter spacing of
-their baseline variant and only raise the weight: Display, Headline, Title Large and Body
-go to `"500"`, while Title Medium/Small and Label go to `"700"`.
+Each variant also has an `Emphasized` counterpart with a heavier font weight: `displayLargeEmphasized`,
+`bodyMediumEmphasized` etc.
 
 ```json
 "bodyMediumEmphasized": {

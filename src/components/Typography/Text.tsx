@@ -26,8 +26,8 @@ export type Props<T> = React.ComponentProps<typeof NativeText> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    *
-   * Every variant also has an `Emphasized` counterpart, e.g. `displayLargeEmphasized`
-   * or `bodyMediumEmphasized`, which renders the same size at a heavier weight.
+   *  Each variant also has an `Emphasized` counterpart with a heavier font weight.
+   *  e.g. `displayLargeEmphasized`, `bodyMediumEmphasized` etc.
    */
   variant?: VariantProp<T>;
   children: React.ReactNode;
