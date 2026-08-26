@@ -153,7 +153,11 @@
             "tsType": {
               "name": "boolean"
             },
-            "description": "@supported Available in v5.x with theme version 3\nWhether Appbar background should have the elevation along with primary color pigment."
+            "description": "@supported Available in v5.x with theme version 3\nWhether Appbar background should have the elevation along with primary color pigment.",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
           },
           "safeAreaInsets": {
             "required": false,
@@ -206,19 +210,23 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "Omit",
                   "elements": [
                     {
                       "name": "ViewStyle"
+                    },
+                    {
+                      "name": "literal",
+                      "value": "'elevation'"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "Omit<ViewStyle, 'elevation'>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AppbarStyle>"
             },
             "description": ""
           }
@@ -304,19 +312,19 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "AnimatedStyle",
                   "elements": [
                     {
                       "name": "ViewStyle"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": ""
           },
@@ -416,19 +424,19 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "AnimatedStyle",
                   "elements": [
                     {
                       "name": "ViewStyle"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": ""
           },
@@ -694,19 +702,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "AppbarStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AppbarStyle>"
             },
             "description": ""
           },
@@ -1032,10 +1034,16 @@
               "name": "StyleProp",
               "elements": [
                 {
-                  "name": "TextStyle"
+                  "name": "AnimatedStyle",
+                  "elements": [
+                    {
+                      "name": "TextStyle"
+                    }
+                  ],
+                  "raw": "AnimatedStyle<TextStyle>"
                 }
               ],
-              "raw": "StyleProp<TextStyle>"
+              "raw": "StyleProp<AnimatedStyle<TextStyle>>"
             },
             "description": ""
           },
@@ -1147,37 +1155,7 @@
           "elevation": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "0 | 1 | 2 | 3 | 4 | 5 | Animated.Value",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "0"
-                },
-                {
-                  "name": "literal",
-                  "value": "1"
-                },
-                {
-                  "name": "literal",
-                  "value": "2"
-                },
-                {
-                  "name": "literal",
-                  "value": "3"
-                },
-                {
-                  "name": "literal",
-                  "value": "4"
-                },
-                {
-                  "name": "literal",
-                  "value": "5"
-                },
-                {
-                  "name": "Animated.Value"
-                }
-              ]
+              "name": "Elevation"
             },
             "description": "@supported Available in v5.x with theme version 3\nChanges Banner shadow and background on iOS and Android.",
             "defaultValue": {
@@ -1195,19 +1173,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -1234,7 +1206,35 @@
           "onShowAnimationFinished": {
             "required": false,
             "tsType": {
-              "name": "Animated.EndCallback"
+              "name": "signature",
+              "type": "function",
+              "raw": "(result: { finished: boolean }) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "result",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ finished: boolean }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "finished",
+                            "value": {
+                              "name": "boolean",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
             },
             "description": "\nOptional callback that will be called after the opening animation finished running normally",
             "defaultValue": {
@@ -1245,7 +1245,35 @@
           "onHideAnimationFinished": {
             "required": false,
             "tsType": {
-              "name": "Animated.EndCallback"
+              "name": "signature",
+              "type": "function",
+              "raw": "(result: { finished: boolean }) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "result",
+                    "type": {
+                      "name": "signature",
+                      "type": "object",
+                      "raw": "{ finished: boolean }",
+                      "signature": {
+                        "properties": [
+                          {
+                            "key": "finished",
+                            "value": {
+                              "name": "boolean",
+                              "required": true
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
             },
             "description": "\nOptional callback that will be called after the closing animation finished running normally",
             "defaultValue": {
@@ -3226,19 +3254,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -3449,37 +3471,7 @@
           "elevation": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "0 | 1 | 2 | 3 | 4 | 5 | Animated.Value",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "0"
-                },
-                {
-                  "name": "literal",
-                  "value": "1"
-                },
-                {
-                  "name": "literal",
-                  "value": "2"
-                },
-                {
-                  "name": "literal",
-                  "value": "3"
-                },
-                {
-                  "name": "literal",
-                  "value": "4"
-                },
-                {
-                  "name": "literal",
-                  "value": "5"
-                },
-                {
-                  "name": "Animated.Value"
-                }
-              ]
+              "name": "Elevation"
             },
             "description": "Changes Card shadow and background on iOS and Android.",
             "defaultValue": {
@@ -3503,19 +3495,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -3543,6 +3529,19 @@
               "name": "boolean"
             },
             "description": "Pass down accessible from card props to touchable"
+          },
+          "ref": {
+            "required": false,
+            "tsType": {
+              "name": "ReactRef",
+              "raw": "React.Ref<View>",
+              "elements": [
+                {
+                  "name": "View"
+                }
+              ]
+            },
+            "description": "Reference to the card container."
           }
         }
       },
@@ -4590,19 +4589,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -4645,6 +4638,19 @@
               "name": "number"
             },
             "description": "Specifies the largest possible scale a text font can reach."
+          },
+          "ref": {
+            "required": false,
+            "tsType": {
+              "name": "ReactRef",
+              "raw": "React.Ref<View>",
+              "elements": [
+                {
+                  "name": "View"
+                }
+              ]
+            },
+            "description": "Reference to the chip container."
           },
           "role": {
             "defaultValue": {
@@ -5273,19 +5279,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -6124,10 +6124,16 @@
               "name": "StyleProp",
               "elements": [
                 {
-                  "name": "ViewStyle"
+                  "name": "AnimatedStyle",
+                  "elements": [
+                    {
+                      "name": "ViewStyle"
+                    }
+                  ],
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "StyleProp<ViewStyle>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": "Style for positioning the FAB. The visual treatment (size, shape, color)\nis driven by `variant` and `size`."
           },
@@ -6339,10 +6345,16 @@
               "name": "StyleProp",
               "elements": [
                 {
-                  "name": "ViewStyle"
+                  "name": "AnimatedStyle",
+                  "elements": [
+                    {
+                      "name": "ViewStyle"
+                    }
+                  ],
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "StyleProp<ViewStyle>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": "Style for positioning the FAB. The visual treatment (size, shape, color)\nis driven by `variant` and `size`."
           },
@@ -7929,19 +7941,19 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "AnimatedStyle",
                   "elements": [
                     {
                       "name": "ViewStyle"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": ""
           },
@@ -9059,19 +9071,13 @@
           "contentStyle": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": "Style of menu's inner content."
           },
@@ -9375,10 +9381,10 @@
     "Modal": {
       "filepath": "Modal.tsx",
       "title": "Modal",
-      "description": "The Modal component is a simple way to present content above an enclosing view.\nTo render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.\nNote that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const showModal = () => setVisible(true);\n  const hideModal = () => setVisible(false);\n  const containerStyle = { backgroundColor: 'white', padding: 20 };\n\n  return (\n    <PaperProvider>\n      <Portal>\n        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>\n          <Text>Example Modal.  Click outside this area to dismiss.</Text>\n        </Modal>\n      </Portal>\n      <Button style={{ marginTop: 30 }} onPress={showModal}>\n        Show\n      </Button>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```",
+      "description": "The Modal component is a simple way to present content above an enclosing view.\nTo render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.\nNote that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const showModal = () => setVisible(true);\n  const hideModal = () => setVisible(false);\n\n  const containerStyle = { padding: 20 };\n\n  return (\n    <PaperProvider>\n      <Portal>\n        <Modal\n          visible={visible}\n          onDismiss={hideModal}\n          contentBackgroundColor=\"white\"\n          contentContainerStyle={containerStyle}\n        >\n          <Text>Example Modal.  Click outside this area to dismiss.</Text>\n        </Modal>\n      </Portal>\n      <Button style={{ marginTop: 30 }} onPress={showModal}>\n        Show\n      </Button>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```",
       "link": "modal",
       "data": {
-        "description": "The Modal component is a simple way to present content above an enclosing view.\nTo render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.\nNote that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const showModal = () => setVisible(true);\n  const hideModal = () => setVisible(false);\n  const containerStyle = { backgroundColor: 'white', padding: 20 };\n\n  return (\n    <PaperProvider>\n      <Portal>\n        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>\n          <Text>Example Modal.  Click outside this area to dismiss.</Text>\n        </Modal>\n      </Portal>\n      <Button style={{ marginTop: 30 }} onPress={showModal}>\n        Show\n      </Button>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```",
+        "description": "The Modal component is a simple way to present content above an enclosing view.\nTo render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.\nNote that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const showModal = () => setVisible(true);\n  const hideModal = () => setVisible(false);\n\n  const containerStyle = { padding: 20 };\n\n  return (\n    <PaperProvider>\n      <Portal>\n        <Modal\n          visible={visible}\n          onDismiss={hideModal}\n          contentBackgroundColor=\"white\"\n          contentContainerStyle={containerStyle}\n        >\n          <Text>Example Modal.  Click outside this area to dismiss.</Text>\n        </Modal>\n      </Portal>\n      <Button style={{ marginTop: 30 }} onPress={showModal}>\n        Show\n      </Button>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```",
         "displayName": "Modal",
         "methods": [],
         "statics": [],
@@ -9457,21 +9463,42 @@
           "contentContainerStyle": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
-            "description": "Style for the content of the modal"
+            "description": "Style for the content of the modal.\n\nBackground color and border radius should be specified via props instead:\n- `contentBackgroundColor`\n- `contentBorderRadius`"
+          },
+          "contentBackgroundColor": {
+            "required": false,
+            "tsType": {
+              "name": "SurfaceProps['backgroundColor']",
+              "raw": "SurfaceProps['backgroundColor']"
+            },
+            "description": "Background color of the modal content. Defaults to transparent.",
+            "defaultValue": {
+              "value": "'transparent'",
+              "computed": false
+            }
+          },
+          "contentBorderRadius": {
+            "required": false,
+            "tsType": {
+              "name": "SurfaceProps['borderRadius']",
+              "raw": "SurfaceProps['borderRadius']"
+            },
+            "description": "Border radius of the modal content."
+          },
+          "contentElevation": {
+            "required": false,
+            "tsType": {
+              "name": "Elevation"
+            },
+            "description": "Elevation level of the modal content. Defaults to level 1."
           },
           "style": {
             "required": false,
@@ -10546,37 +10573,7 @@
           "elevation": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "0 | 1 | 2 | 3 | 4 | 5 | Animated.Value",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "0"
-                },
-                {
-                  "name": "literal",
-                  "value": "1"
-                },
-                {
-                  "name": "literal",
-                  "value": "2"
-                },
-                {
-                  "name": "literal",
-                  "value": "3"
-                },
-                {
-                  "name": "literal",
-                  "value": "4"
-                },
-                {
-                  "name": "literal",
-                  "value": "5"
-                },
-                {
-                  "name": "Animated.Value"
-                }
-              ]
+              "name": "Elevation"
             },
             "description": "@supported Available in v5.x with theme version 3\nChanges Searchbar shadow and background on iOS and Android.",
             "defaultValue": {
@@ -10600,19 +10597,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -11018,37 +11009,7 @@
           "elevation": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "0 | 1 | 2 | 3 | 4 | 5 | Animated.Value",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "0"
-                },
-                {
-                  "name": "literal",
-                  "value": "1"
-                },
-                {
-                  "name": "literal",
-                  "value": "2"
-                },
-                {
-                  "name": "literal",
-                  "value": "3"
-                },
-                {
-                  "name": "literal",
-                  "value": "4"
-                },
-                {
-                  "name": "literal",
-                  "value": "5"
-                },
-                {
-                  "name": "Animated.Value"
-                }
-              ]
+              "name": "Elevation"
             },
             "description": "@supported Available in v5.x with theme version 3\nChanges Snackbar shadow and background on iOS and Android.",
             "defaultValue": {
@@ -11092,19 +11053,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "SurfaceStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
             "description": ""
           },
@@ -11145,54 +11100,186 @@
     "Surface": {
       "filepath": "Surface.tsx",
       "title": "Surface",
-      "description": "Surface is a basic container that can give depth to an element with elevation shadow.\nOn dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\nOverlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Surface, Text } from 'react-native-paper';\nimport { StyleSheet } from 'react-native';\n\nconst MyComponent = () => (\n  <Surface style={styles.surface} elevation={4}>\n     <Text>Surface</Text>\n  </Surface>\n);\n\nexport default MyComponent;\n\nconst styles = StyleSheet.create({\n  surface: {\n    padding: 8,\n    height: 80,\n    width: 80,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```",
+      "description": "Surface is a basic container that can give depth to an element with elevation shadow.\n\nOn Android, Surface uses the native `elevation` style,\nand falls back to shadows that approximate the elevation on other platforms.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Surface, Text } from 'react-native-paper';\nimport { StyleSheet } from 'react-native';\n\nconst MyComponent = () => (\n  <Surface style={styles.surface} elevation={4} borderRadius={8}>\n     <Text>Surface</Text>\n  </Surface>\n);\n\nexport default MyComponent;\n\nconst styles = StyleSheet.create({\n  surface: {\n    height: 80,\n    width: 80,\n    padding: 8,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```",
       "link": "surface",
       "data": {
-        "description": "Surface is a basic container that can give depth to an element with elevation shadow.\nOn dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.\nSee [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.\nOverlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Surface, Text } from 'react-native-paper';\nimport { StyleSheet } from 'react-native';\n\nconst MyComponent = () => (\n  <Surface style={styles.surface} elevation={4}>\n     <Text>Surface</Text>\n  </Surface>\n);\n\nexport default MyComponent;\n\nconst styles = StyleSheet.create({\n  surface: {\n    padding: 8,\n    height: 80,\n    width: 80,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```",
+        "description": "Surface is a basic container that can give depth to an element with elevation shadow.\n\nOn Android, Surface uses the native `elevation` style,\nand falls back to shadows that approximate the elevation on other platforms.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Surface, Text } from 'react-native-paper';\nimport { StyleSheet } from 'react-native';\n\nconst MyComponent = () => (\n  <Surface style={styles.surface} elevation={4} borderRadius={8}>\n     <Text>Surface</Text>\n  </Surface>\n);\n\nexport default MyComponent;\n\nconst styles = StyleSheet.create({\n  surface: {\n    height: 80,\n    width: 80,\n    padding: 8,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n```",
         "displayName": "Surface",
         "methods": [],
         "statics": [],
         "props": {
-          "children": {
-            "required": true,
+          "backgroundColor": {
+            "required": false,
             "tsType": {
-              "name": "ReactReactNode",
-              "raw": "React.ReactNode"
+              "name": "ColorValue"
             },
-            "description": "Content of the `Surface`."
+            "description": "Background color of the Surface. Overrides the color derived from\n`elevation`."
+          },
+          "borderRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of every corner of the Surface."
+          },
+          "borderBottomEndRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the bottom-end corner of the Surface."
+          },
+          "borderBottomLeftRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the bottom-left corner of the Surface."
+          },
+          "borderBottomRightRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the bottom-right corner of the Surface."
+          },
+          "borderBottomStartRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the bottom-start corner of the Surface."
+          },
+          "borderEndEndRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the end-end corner of the Surface."
+          },
+          "borderEndStartRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the end-start corner of the Surface."
+          },
+          "borderStartEndRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the start-end corner of the Surface."
+          },
+          "borderStartStartRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the start-start corner of the Surface."
+          },
+          "borderTopEndRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the top-end corner of the Surface."
+          },
+          "borderTopLeftRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the top-left corner of the Surface."
+          },
+          "borderTopRightRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the top-right corner of the Surface."
+          },
+          "borderTopStartRadius": {
+            "required": false,
+            "tsType": {
+              "name": "Extract['borderRadius']",
+              "raw": "Extract<\n  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,\n  Record<Key, unknown>\n>[Key]"
+            },
+            "description": "Radius of the top-start corner of the Surface."
+          },
+          "borderCurve": {
+            "required": false,
+            "tsType": {
+              "name": "ViewStyle['borderCurve']",
+              "raw": "ViewStyle['borderCurve']"
+            },
+            "description": "Corner curve of the Surface on iOS.",
+            "defaultValue": {
+              "value": "'continuous'",
+              "computed": false
+            }
+          },
+          "transitionDuration": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Duration of the background, elevation, and shadow transitions in\nmilliseconds."
           },
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "AnimatedStyle",
                   "elements": [
                     {
-                      "name": "ViewStyle"
+                      "name": "Omit",
+                      "elements": [
+                        {
+                          "name": "ViewStyle"
+                        },
+                        {
+                          "name": "union",
+                          "raw": "keyof SurfaceVisualProps | 'elevation'",
+                          "elements": [
+                            {
+                              "name": "unknown"
+                            },
+                            {
+                              "name": "literal",
+                              "value": "'elevation'"
+                            }
+                          ]
+                        }
+                      ],
+                      "raw": "Omit<ViewStyle, keyof SurfaceVisualProps | 'elevation'>"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "AnimatedStyle<\n  Omit<ViewStyle, keyof SurfaceVisualProps | 'elevation'>\n>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<SurfaceStyle>"
             },
-            "description": ""
+            "description": "Style of the Surface.\n\nThis doesn't support all View style properties:\n- Background color and border radius should be specified via props instead.\n- `overflow: 'hidden'` is not supported with `elevation` as it can clip the shadow.\n   To achieve the same effect, wrap the content in a child View with the overflow style."
           },
           "elevation": {
             "required": false,
             "tsType": {
-              "name": "union",
-              "raw": "Elevation | Animated.Value",
-              "elements": [
-                {
-                  "name": "Elevation"
-                },
-                {
-                  "name": "Animated.Value"
-                }
-              ]
+              "name": "Elevation"
             },
             "description": "@supported Available in v5.x with theme version 3\nChanges shadows and background on iOS and Android.\nUsed to create UI hierarchy between components.\n\nNote: If `mode` is set to `flat`, Surface doesn't have a shadow.\n\nNote: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.\nIt's no longer supported with theme version 3 and you should use `elevation` property instead.",
             "defaultValue": {
@@ -11229,16 +11316,20 @@
             },
             "description": ""
           },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Content of the `Surface`."
+          },
           "testID": {
             "required": false,
             "tsType": {
               "name": "string"
             },
-            "description": "TestID used for testing purposes",
-            "defaultValue": {
-              "value": "'surface'",
-              "computed": false
-            }
+            "description": "TestID used for testing purposes"
           },
           "ref": {
             "required": false,
@@ -11252,13 +11343,6 @@
               ]
             },
             "description": ""
-          },
-          "container": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "@internal"
           }
         }
       },
@@ -11780,19 +11864,19 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
+                  "name": "AnimatedStyle",
                   "elements": [
                     {
                       "name": "ViewStyle"
                     }
                   ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": ""
           },

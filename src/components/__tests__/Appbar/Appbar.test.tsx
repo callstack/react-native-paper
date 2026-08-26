@@ -1,7 +1,4 @@
-import { Animated } from 'react-native';
-
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
@@ -280,176 +277,53 @@ describe('AppbarContent', () => {
 });
 
 describe('getAppbarColors', () => {
-  const elevation = 4;
+  const elevated = true;
   const customBackground = 'aquamarine';
 
   it('should return custom color no matter what is the theme version', () => {
     expect(
-      getAppbarBackgroundColor(getTheme(), elevation, customBackground)
+      getAppbarBackgroundColor(getTheme(), elevated, customBackground)
     ).toBe(customBackground);
   });
 
-  it('should return v3 light color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
-      tokens.md.ref.palette.neutral98
+  it('returns the light surface container color for an elevated appbar', () => {
+    expect(getAppbarBackgroundColor(getTheme(), elevated)).toBe(
+      tokens.md.ref.palette.neutral94
     );
   });
 
-  it('should return v3 dark color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
-      tokens.md.ref.palette.neutral6
+  it('returns the dark surface container color for an elevated appbar', () => {
+    expect(getAppbarBackgroundColor(getTheme(true), elevated)).toBe(
+      tokens.md.ref.palette.neutral12
     );
   });
 });
 
-describe('animated value changes correctly', () => {
-  it('appbar animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
-        <Appbar.Action icon="menu" />
-      </Appbar>
+describe('getAppbarBorders', () => {
+  const borderStyles = {
+    borderRadius: 1,
+    borderBottomEndRadius: 2,
+    borderBottomStartRadius: 3,
+    borderEndEndRadius: 4,
+    borderEndStartRadius: 5,
+    borderStartEndRadius: 6,
+    borderStartStartRadius: 7,
+    borderTopEndRadius: 8,
+    borderTopStartRadius: 9,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 11,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 13,
+    borderCurve: 'continuous' as const,
+  };
+
+  it('returns every border style and excludes unrelated styles', () => {
+    expect(getAppbarBorders({ ...borderStyles, height: 60, top: 13 })).toEqual(
+      borderStyles
     );
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
   });
 
-  it('action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar>
-        <Appbar.Action
-          icon="menu"
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-action"
-        />
-      </Appbar>
-    );
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
-  });
-
-  it('back action animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Appbar>
-        <Appbar.BackAction
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-back-action"
-        />
-      </Appbar>
-    );
-    expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
-  });
-
-  it('header animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <SafeAreaProvider>
-        <Appbar.Header
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-header"
-        >
-          {null}
-        </Appbar.Header>
-      </SafeAreaProvider>
-    );
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
-  });
-
-  it('header bottom border radius applied correctly', async () => {
-    const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
-
-    await render(
-      <SafeAreaProvider>
-        <Appbar.Header style={style} testID="appbar-header">
-          {null}
-        </Appbar.Header>
-      </SafeAreaProvider>
-    );
-    expect(screen.getByTestId('appbar-header-root-layer')).toHaveStyle(style);
-  });
-
-  describe('getAppbarBorders', () => {
-    const style = { borderRadius: 10, height: 60, top: 13 };
-
-    it('should return only border radius styles', () => {
-      expect(getAppbarBorders(style)).toEqual({ borderRadius: 10 });
-    });
-
-    it('should return empty object if no borders are passed', () => {
-      const style = { height: 60, top: 13 };
-      expect(getAppbarBorders(style)).toEqual({});
-    });
+  it('returns an empty object when no border styles are passed', () => {
+    expect(getAppbarBorders({ height: 60, top: 13 })).toEqual({});
   });
 });

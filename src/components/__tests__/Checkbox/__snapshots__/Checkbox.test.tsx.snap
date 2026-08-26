@@ -83,6 +83,7 @@ exports[`renders Checkbox with custom testID 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -105,6 +106,7 @@ exports[`renders Checkbox with custom testID 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -126,6 +128,7 @@ exports[`renders Checkbox with custom testID 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -268,6 +271,7 @@ exports[`renders checked Checkbox with color 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -290,6 +294,7 @@ exports[`renders checked Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -311,6 +316,7 @@ exports[`renders checked Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -453,6 +459,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -475,6 +482,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -496,6 +504,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -638,6 +647,7 @@ exports[`renders indeterminate Checkbox 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -660,6 +670,7 @@ exports[`renders indeterminate Checkbox 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -681,6 +692,7 @@ exports[`renders indeterminate Checkbox 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -810,6 +822,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -832,6 +845,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -853,6 +867,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -982,6 +997,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -1004,6 +1020,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -1025,6 +1042,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {
@@ -1167,6 +1185,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -1189,6 +1208,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
         }
       />
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           [
@@ -1210,6 +1230,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
         }
       />
       <View
+        collapsable={false}
         style={
           [
             {

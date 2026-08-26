@@ -1,4 +1,12 @@
-import { Animated, Easing, Platform, StyleSheet, Text } from 'react-native';
+import {
+  Animated,
+  Easing,
+  Keyboard,
+  Platform,
+  StyleSheet,
+  Text,
+} from 'react-native';
+import type { KeyboardEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
@@ -431,6 +439,60 @@ it('renders custom background color passed to barStyle property', async () => {
   expect(wrapper).toHaveStyle({ backgroundColor: Palette.error60 });
 });
 
+it('uses the rendered bar height when hiding it for the keyboard', async () => {
+  let handleKeyboardShow: ((event: KeyboardEvent) => void) | undefined;
+  const addKeyboardListener = Keyboard.addListener.bind(Keyboard);
+  const keyboardListenerSpy = jest
+    .spyOn(Keyboard, 'addListener')
+    .mockImplementation((event, listener) => {
+      if (event.endsWith('Show')) {
+        handleKeyboardShow = listener;
+      }
+
+      return addKeyboardListener(event, listener);
+    });
+
+  await render(
+    <BottomNavigation.Bar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      keyboardHidesNavigationBar
+      style={{ height: 96 }}
+      testID="bottom-navigation"
+    />
+  );
+
+  const navigation = screen.getByTestId('bottom-navigation');
+
+  await fireEvent(navigation, 'layout', {
+    nativeEvent: {
+      layout: { height: 72, width: 360 },
+    },
+  });
+
+  await act(() => {
+    handleKeyboardShow?.({
+      duration: 0,
+      easing: 'keyboard',
+      endCoordinates: {
+        screenX: 0,
+        screenY: 500,
+        width: 360,
+        height: 300,
+      },
+    });
+    jest.runAllTimers();
+  });
+
+  expect(navigation).toHaveStyle({
+    height: 96,
+    position: 'absolute',
+    transform: [{ translateY: 72 }],
+  });
+
+  keyboardListenerSpy.mockRestore();
+});
+
 it('renders a single tab', async () => {
   await render(
     <BottomNavigation
@@ -590,18 +652,18 @@ describe('getLabelColor', () => {
   );
 });
 
-it('barStyle animated value changes correctly', async () => {
+it('supports animated styles in bar', async () => {
   const value = new Animated.Value(1);
   await render(
-    <BottomNavigation
+    <BottomNavigation.Bar
       navigationState={createState(0, 1)}
-      onIndexChange={() => {}}
-      renderScene={renderScene}
-      testID={'bottom-navigation'}
-      barStyle={[{ transform: [{ scale: value }] }]}
+      onTabPress={jest.fn()}
+      testID="bottom-navigation"
+      style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(screen.getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
+
+  expect(screen.getByTestId('bottom-navigation')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -614,7 +676,8 @@ it('barStyle animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
+
+  expect(screen.getByTestId('bottom-navigation')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

@@ -135,6 +135,7 @@ exports[`can render leading checkbox control 1`] = `
           }
         >
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -157,6 +158,7 @@ exports[`can render leading checkbox control 1`] = `
             }
           />
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -178,6 +180,7 @@ exports[`can render leading checkbox control 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -451,6 +454,7 @@ exports[`renders unchecked 1`] = `
           }
         >
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -473,6 +477,7 @@ exports[`renders unchecked 1`] = `
             }
           />
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -494,6 +499,7 @@ exports[`renders unchecked 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
