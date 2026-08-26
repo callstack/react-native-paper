@@ -62,7 +62,6 @@ exports[`render visible banner, with custom theme 1`] = `
         onLayout={[Function]}
         pointerEvents="auto"
         style={{}}
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -81,7 +80,6 @@ exports[`render visible banner, with custom theme 1`] = `
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -103,7 +101,6 @@ exports[`render visible banner, with custom theme 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={
@@ -381,7 +378,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
             "width": "100%",
           }
         }
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -400,7 +396,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -422,7 +417,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={
@@ -522,7 +516,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         onLayout={[Function]}
         pointerEvents="auto"
         style={{}}
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -541,7 +534,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -562,7 +554,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-icon"
             >
               <Image
                 accessibilityIgnoresInvertColors={true}
@@ -587,7 +578,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={
@@ -852,7 +842,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         onLayout={[Function]}
         pointerEvents="auto"
         style={{}}
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -871,7 +860,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -893,7 +881,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={
@@ -1312,7 +1299,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         onLayout={[Function]}
         pointerEvents="auto"
         style={{}}
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -1331,7 +1317,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -1352,7 +1337,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-icon"
             >
               <Image
                 accessibilityIgnoresInvertColors={true}
@@ -1377,7 +1361,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={
@@ -1477,7 +1460,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         onLayout={[Function]}
         pointerEvents="auto"
         style={{}}
-        testID="banner-content"
       >
         <View
           onLayout={[Function]}
@@ -1496,7 +1478,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
               },
             ]
           }
-          testID="banner-row"
         >
           <View
             style={
@@ -1518,7 +1499,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                   "margin": 8,
                 }
               }
-              testID="banner-message"
             >
               <Text
                 style={

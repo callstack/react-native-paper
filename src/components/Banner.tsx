@@ -25,11 +25,10 @@ import useLayout from '../utils/useLayout';
 const DEFAULT_MAX_WIDTH = 960;
 // banners carry at most two actions per the material spec
 const MAX_ACTIONS = 2;
-// md3's compact window size class. md3 has no banner spec, so where the
-// actions go is a choice, not a spec value
+// md3's compact window size class. md3 has no banner spec, so this is a choice
 const COMPACT_BREAKPOINT = 600;
-// a tradeoff, not a safe number: too short and the set and clear can batch into
-// one a11y update, too long and a talkback swipe hears the message twice
+// too short and the set and clear batch into one a11y update, too long and a
+// talkback swipe hears the message twice
 const ANNOUNCE_CLEAR_DELAY = 3000;
 
 // only android and web have a real live region. everywhere else announces by hand
@@ -196,8 +195,8 @@ const Banner = ({
     height: 0,
     measured: false,
   });
-  // content is dropped from the tree once it's fully hidden, so it can't be
-  // read, focused or pressed. the spacer stays behind to keep the layout
+  // hidden content leaves the tree so it can't be read, focused or pressed.
+  // the spacer stays behind to keep the layout
   const [exited, setExited] = React.useState(false);
 
   const showCallback = useLatestCallback(onShowAnimationFinished);
@@ -213,8 +212,7 @@ const Banner = ({
   const prevVisible = React.useRef<boolean | null>(null);
 
   React.useEffect(() => {
-    // only animate for transitions that actually happened, so the callbacks
-    // don't fire on mount or when unrelated deps (e.g. scale) change
+    // don't fire the callbacks on mount or when scale changes
     if (prevVisible.current === visible) {
       return;
     }
@@ -280,7 +278,7 @@ const Banner = ({
     });
   }, [visible, message, urgent]);
 
-  // a region only fires when its text changes while it is already in the tree.
+  // a region only fires when its text changes while already in the tree, and
   // the banner unmounts when hidden, so the message can never be that change
   const [announcement, setAnnouncement] = React.useState('');
   React.useEffect(() => {
@@ -289,8 +287,7 @@ const Banner = ({
       return;
     }
 
-    // re-setting the same string is not a render, so empty it first or an
-    // unchanged message announces nothing
+    // re-setting the same string is not a render, so empty it first
     setAnnouncement('');
     const fill = setTimeout(() => setAnnouncement(message), 0);
     const clear = setTimeout(() => setAnnouncement(''), ANNOUNCE_CLEAR_DELAY);
@@ -300,11 +297,27 @@ const Banner = ({
     };
   }, [visible, message, urgent]);
 
-  // one stable ref per action slot; the cap is what bounds the array
+  // one stable ref per action slot
   const actionRefs = React.useRef<Array<React.RefObject<View | null>>>([]);
   for (let i = 0; i < MAX_ACTIONS; i++) {
     actionRefs.current[i] ??= React.createRef<View>();
   }
+  // fixed length, so the dep list below keeps a constant size
+  const touchableRefs = Array.from(
+    { length: MAX_ACTIONS },
+    (_, i) => visibleActions[i]?.touchableRef
+  );
+  // a new callback each render would detach and reattach on every commit,
+  // handing a consumer's callback null each time
+  const mergedActionRefs = React.useMemo(
+    () =>
+      touchableRefs.map((touchableRef, i) =>
+        mergeRefs(actionRefs.current[i], touchableRef)
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    touchableRefs
+  );
+
   const [row, onRowLayout] = useLayout();
   const messageRef = React.useRef<View>(null);
   const focusedAction = React.useRef<number | null>(null);
@@ -328,14 +341,15 @@ const Banner = ({
 
   // a removed action would otherwise strand focus at the top of the document
   React.useEffect(() => {
-    const focused = focusedAction.current;
-
-    if (focused === null || focused < actionCount) {
+    // the index is stale once hidden, and a later show would act on it
+    if (!visible) {
+      focusedAction.current = null;
       return;
     }
 
-    if (!visible) {
-      focusedAction.current = null;
+    const focused = focusedAction.current;
+
+    if (focused === null || focused < actionCount) {
       return;
     }
 
@@ -350,8 +364,7 @@ const Banner = ({
 
     setLayout({ height, measured: true });
 
-    // mounted hidden: we only render to measure the spacer height, so drop the
-    // content again right after. later measurements happen mid-transition
+    // mounted hidden: we rendered only to measure the spacer, so drop it again
     if (isFirstMeasure && !visible) {
       setExited(true);
     }
@@ -370,13 +383,16 @@ const Banner = ({
     Animated.add(position, -1),
     layout.height
   );
-  // rnw forwards `inert` to the dom, which drops the subtree from the a11y
-  // tree and the tab order. native ignores the unknown prop
+  // rnw forwards `inert` to the dom, dropping the subtree from the a11y tree
+  // and the tab order. native ignores the unknown prop
   const inertProps: { inert?: boolean } = visible ? {} : { inert: true };
 
   const stacked = !row.measured || row.width < COMPACT_BREAKPOINT;
 
-  // annotated, not cast: the literal -1 widens to number on its own
+  // no default: it would land on every banner and collide with the consumer's
+  const subTestID = (suffix: string) =>
+    testID ? `${testID}-${suffix}` : undefined;
+
   const messageFocusProps: Pick<ViewProps, 'tabIndex' | 'accessible'> =
     Platform.OS === 'web' ? { tabIndex: -1 } : { accessible: true };
 
@@ -393,7 +409,7 @@ const Banner = ({
         <Animated.View style={{ height }} />
         {exited ? null : (
           <Animated.View
-            testID={`${testID ?? 'banner'}-content`}
+            testID={subTestID('content')}
             onLayout={handleLayout}
             aria-hidden={!visible}
             pointerEvents={visible ? 'auto' : 'none'}
@@ -413,26 +429,28 @@ const Banner = ({
             ]}
           >
             <View
-              testID={`${testID ?? 'banner'}-row`}
+              testID={subTestID('row')}
               onLayout={onRowLayout}
               style={[styles.content, stacked ? styles.contentStacked : null]}
             >
               <View style={[styles.body, stacked ? null : styles.bodyInline]}>
-                {/* rnw gives the icon role="img" with no name */}
+                {/* rnw renders this View as a plain div, which cannot take a
+                    name, and gives the inner icon role="img" with none */}
                 {icon ? (
                   <View
-                    testID={`${testID ?? 'banner'}-icon`}
+                    testID={subTestID('icon')}
                     style={styles.icon}
                     aria-hidden={!iconAccessibilityLabel}
                     accessible={iconAccessibilityLabel ? true : undefined}
                     aria-label={iconAccessibilityLabel}
+                    role={iconAccessibilityLabel ? 'img' : undefined}
                   >
                     <Icon source={icon} size={40} />
                   </View>
                 ) : null}
                 <View
                   ref={messageRef}
-                  testID={`${testID ?? 'banner'}-message`}
+                  testID={subTestID('message')}
                   style={styles.message}
                   {...messageFocusProps}
                 >
@@ -456,10 +474,7 @@ const Banner = ({
                       textColor={colors.primary}
                       theme={theme}
                       {...others}
-                      touchableRef={mergeRefs(
-                        actionRefs.current[i],
-                        others.touchableRef
-                      )}
+                      touchableRef={mergedActionRefs[i]}
                       onFocus={(e) => {
                         focusedAction.current = i;
                         others.onFocus?.(e);
@@ -482,7 +497,7 @@ const Banner = ({
         {/* last, so a screen reader reaches the real message first */}
         {hasLiveRegion() ? (
           <View
-            testID={`${testID ?? 'banner'}-announcer`}
+            testID={subTestID('announcer')}
             style={styles.announcer}
             {...region}
           >

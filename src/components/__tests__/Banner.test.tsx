@@ -532,6 +532,78 @@ describe('actions', () => {
     setFocus.mockRestore();
   });
 
+  it('does not move focus into the banner when it is shown again', async () => {
+    // the remembered index is stale once hidden, so a later show must ignore it
+    const setFocus = jest
+      .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
+      .mockImplementation(() => {});
+    setFocus.mockClear();
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+
+    await view.rerender(
+      <Banner
+        visible={false}
+        actions={[
+          { label: 'first', onPress: () => {}, testID: 'action-first' },
+        ]}
+      >
+        Message
+      </Banner>
+    );
+
+    await view.rerender(
+      <Banner visible actions={[]}>
+        Message
+      </Banner>
+    );
+
+    expect(setFocus).not.toHaveBeenCalled();
+    setFocus.mockRestore();
+  });
+
+  it('holds on to a consumer touchableRef across re-renders', async () => {
+    // a callback rebuilt every render hands the consumer null between commits
+    const nodes: Array<View | null> = [];
+    const touchableRef = (node: View | null) => {
+      nodes.push(node);
+    };
+
+    const view = await render(
+      <Banner
+        visible
+        actions={[{ label: 'first', onPress: () => {}, touchableRef }]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(nodes).toHaveLength(1);
+    expect(nodes[0]).not.toBeNull();
+
+    await view.rerender(
+      <Banner
+        visible
+        actions={[{ label: 'first', onPress: () => {}, touchableRef }]}
+      >
+        Message
+      </Banner>
+    );
+
+    expect(nodes).toHaveLength(1);
+  });
+
   it('still calls a consumer onFocus handler on an action', async () => {
     const onFocus = jest.fn();
 
@@ -911,6 +983,59 @@ describe('icon', () => {
     expect(wrapper).toHaveProp('aria-hidden', false);
     expect(wrapper).toHaveProp('accessible', true);
     expect(wrapper).toHaveProp('aria-label', 'Payment failed');
+    // a generic element cannot carry a name, so the label alone is dropped
+    expect(wrapper).toHaveProp('role', 'img');
+  });
+
+  it('leaves a decorative icon without a role', async () => {
+    await render(
+      <Banner visible icon="camera" testID="banner">
+        Message
+      </Banner>
+    );
+
+    expect(
+      screen.getByTestId('banner-icon', { includeHiddenElements: true })
+    ).not.toHaveProp('role', 'img');
+  });
+});
+
+describe('test ids', () => {
+  const ALL = { includeHiddenElements: true };
+  const originalPlatform = Platform.OS;
+
+  // the preset runs as ios, which renders no live region to give an id to
+  beforeEach(() => {
+    Platform.OS = 'android';
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+  });
+
+  it('derives ids for the inner parts from the one it was given', async () => {
+    await render(
+      <Banner visible icon="camera" testID="notice">
+        Message
+      </Banner>
+    );
+
+    for (const part of ['content', 'row', 'icon', 'message', 'announcer']) {
+      expect(screen.getByTestId(`notice-${part}`, ALL)).toBeTruthy();
+    }
+  });
+
+  it('leaves the inner parts without ids when it was given none', async () => {
+    // a default would collide with the consumer's own ids
+    await render(
+      <Banner visible icon="camera">
+        Message
+      </Banner>
+    );
+
+    for (const part of ['content', 'row', 'icon', 'message', 'announcer']) {
+      expect(screen.queryByTestId(`banner-${part}`, ALL)).toBeNull();
+    }
   });
 });
 
