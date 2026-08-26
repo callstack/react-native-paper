@@ -18,17 +18,14 @@ const SegmentedButtonOnlyIcons = () => {
           {
             icon: 'walk',
             value: 'walk',
-            'aria-label': 'Walking',
           },
           {
             icon: 'train',
             value: 'train',
-            'aria-label': 'Transit',
           },
           {
             icon: 'car',
             value: 'drive',
-            'aria-label': 'Driving',
           },
         ]}
       />

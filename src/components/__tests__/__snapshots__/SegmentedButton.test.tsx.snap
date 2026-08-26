@@ -27,7 +27,6 @@ exports[`renders segmented button 1`] = `
           "overflow": "visible",
         },
         false,
-        undefined,
       ]
     }
   >
@@ -72,6 +71,7 @@ exports[`renders segmented button 1`] = `
             {
               "justifyContent": "center",
               "minHeight": 48,
+              "overflow": "visible",
             },
             {
               "borderBottomEndRadius": 0,
@@ -89,7 +89,6 @@ exports[`renders segmented button 1`] = `
           [
             {
               "justifyContent": "center",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -102,6 +101,7 @@ exports[`renders segmented button 1`] = `
               "backgroundColor": "rgba(232, 222, 248, 1)",
               "height": 40,
             },
+            undefined,
           ]
         }
       >
@@ -117,7 +117,13 @@ exports[`renders segmented button 1`] = `
                 "top": 0,
               },
               {
-                "backgroundColor": "rgba(74, 68, 88, 1)",
+                "borderBottomEndRadius": 0,
+                "borderBottomStartRadius": 9999,
+                "borderTopEndRadius": 0,
+                "borderTopStartRadius": 9999,
+              },
+              {
+                "backgroundColor": "rgba(29, 25, 43, 1)",
                 "opacity": 0,
               },
             ]
@@ -166,7 +172,7 @@ exports[`renders segmented button 1`] = `
                       "textAlign": "center",
                     },
                     {
-                      "color": "rgba(74, 68, 88, 1)",
+                      "color": "rgba(29, 25, 43, 1)",
                       "fontFamily": "System",
                       "fontSize": 14,
                       "fontWeight": "500",
@@ -210,6 +216,7 @@ exports[`renders segmented button 1`] = `
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "opacity": 1,
               },
+              undefined,
             ]
           }
         />
@@ -227,7 +234,6 @@ exports[`renders segmented button 1`] = `
           "overflow": "visible",
         },
         false,
-        undefined,
       ]
     }
   >
@@ -272,6 +278,7 @@ exports[`renders segmented button 1`] = `
             {
               "justifyContent": "center",
               "minHeight": 48,
+              "overflow": "visible",
             },
             {
               "borderBottomEndRadius": 9999,
@@ -289,7 +296,6 @@ exports[`renders segmented button 1`] = `
           [
             {
               "justifyContent": "center",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -302,6 +308,7 @@ exports[`renders segmented button 1`] = `
               "backgroundColor": "transparent",
               "height": 40,
             },
+            undefined,
           ]
         }
       >
@@ -315,6 +322,12 @@ exports[`renders segmented button 1`] = `
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
+              },
+              {
+                "borderBottomEndRadius": 9999,
+                "borderBottomStartRadius": 0,
+                "borderTopEndRadius": 9999,
+                "borderTopStartRadius": 0,
               },
               {
                 "backgroundColor": "rgba(29, 27, 32, 1)",
@@ -410,6 +423,7 @@ exports[`renders segmented button 1`] = `
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "opacity": 1,
               },
+              undefined,
             ]
           }
         />

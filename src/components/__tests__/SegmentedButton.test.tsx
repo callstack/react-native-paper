@@ -1,5 +1,3 @@
-import { Text } from 'react-native';
-
 import { describe, expect, it, jest } from '@jest/globals';
 
 import { LocaleProvider } from '../../core/locale';
@@ -256,67 +254,13 @@ it('applies group theme overrides to items', async () => {
 describe('getSegmentedButtonColors', () => {
   const theme = getTheme();
 
-  it('maps the default light selected colors to secondary tone 30', () => {
-    const selectedColor = tokens.md.ref.palette.secondary30;
-
-    expect(theme.colors.onSecondaryContainer).toBe(
-      tokens.md.ref.palette.secondary10
-    );
-    expect(theme.colors[SegmentedButtonTokens.selectedContentColor]).toBe(
-      selectedColor
-    );
-    expect(theme.colors[SegmentedButtonTokens.selectedStateLayerColor]).toBe(
-      selectedColor
-    );
-  });
-
-  it('preserves dark, custom theme, and checked color resolution', () => {
-    const darkTheme = getTheme(true);
-    const customTheme = {
-      ...theme,
-      colors: {
-        ...theme.colors,
-        onSecondaryContainerVariant: '#123456',
-      },
-    };
-
-    expect(
-      getSegmentedButtonColors({
-        theme: darkTheme,
-        checked: true,
-      })
-    ).toMatchObject({
-      textColor: tokens.md.ref.palette.secondary90,
-      stateLayerColor: tokens.md.ref.palette.secondary90,
-    });
-    expect(
-      getSegmentedButtonColors({
-        theme: customTheme,
-        checked: true,
-      })
-    ).toMatchObject({
-      textColor: '#123456',
-      stateLayerColor: '#123456',
-    });
-    expect(
-      getSegmentedButtonColors({
-        theme,
-        checked: true,
-        checkedColor: '#654321',
-      })
-    ).toMatchObject({
-      textColor: '#654321',
-      stateLayerColor: tokens.md.ref.palette.secondary30,
-    });
-  });
-
   it.each([
     {
       disabled: false,
       checked: true,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSecondaryContainerVariant,
+      expected: theme.colors.onSecondaryContainer,
     },
     {
       disabled: false,
@@ -372,7 +316,7 @@ describe('getSegmentedButtonColors', () => {
       checked: true,
       checkedColor: undefined,
       uncheckedColor: '000',
-      expected: theme.colors.onSecondaryContainerVariant,
+      expected: theme.colors.onSecondaryContainer,
     },
   ])(
     'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor',
@@ -520,8 +464,20 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
 });
 
 describe('segmented button presentation', () => {
-  it('renders selected content and state layers with the default light color', async () => {
-    const selectedColor = tokens.md.ref.palette.secondary30;
+  it('applies custom backgrounds, radii, and shadows to selected and unselected visual containers', async () => {
+    const selectedStyle = {
+      backgroundColor: '#112233',
+      borderRadius: 12,
+      elevation: 4,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 3,
+    };
+    const unselectedStyle = {
+      backgroundColor: '#445566',
+      borderRadius: 6,
+    };
 
     await render(
       <SegmentedButtons
@@ -530,37 +486,108 @@ describe('segmented button presentation', () => {
         buttons={[
           {
             value: 'walk',
-            icon: ({ color }) => <Text testID="walk-glyph" style={{ color }} />,
             label: 'Walking',
             testID: 'walk',
+            style: selectedStyle,
+          },
+          {
+            value: 'drive',
+            label: 'Driving',
+            testID: 'drive',
+            style: unselectedStyle,
+          },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('walk-container')).toHaveStyle(selectedStyle);
+    expect(screen.getByTestId('drive-container')).toHaveStyle(unselectedStyle);
+    expect(screen.getByTestId('walk-state-layer')).toHaveStyle({
+      borderRadius: selectedStyle.borderRadius,
+    });
+    expect(screen.getByTestId('drive-state-layer')).toHaveStyle({
+      borderRadius: unselectedStyle.borderRadius,
+    });
+    expect(screen.getByTestId('walk')).toHaveStyle({ overflow: 'visible' });
+    expect(screen.getByTestId('walk-wrapper')).not.toHaveStyle({
+      backgroundColor: selectedStyle.backgroundColor,
+      shadowColor: selectedStyle.shadowColor,
+    });
+  });
+
+  it('applies custom borders to the outline and lets borderWidth replace its edge widths', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={() => {}}
+        buttons={[
+          {
+            value: 'walk',
+            label: 'Walking',
+            testID: 'walk',
+            style: {
+              borderColor: '#123456',
+              borderStyle: 'dashed',
+              borderWidth: 3,
+            },
+          },
+          {
+            value: 'drive',
+            label: 'Driving',
+            testID: 'drive',
+            style: {
+              borderColor: '#654321',
+              borderTopWidth: 4,
+            },
+          },
+        ]}
+      />
+    );
+
+    const selectedOutline = screen.getByTestId('walk-outline');
+
+    expect(selectedOutline).toHaveStyle({
+      borderColor: '#123456',
+      borderStyle: 'dashed',
+      borderWidth: 3,
+    });
+    expect(selectedOutline).not.toHaveStyle({
+      borderTopWidth: SegmentedButtonTokens.outlineWidth,
+    });
+    expect(screen.getByTestId('drive-outline')).toHaveStyle({
+      borderColor: '#654321',
+      borderTopWidth: 4,
+      borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+      borderStartWidth: SegmentedButtonTokens.outlineWidth,
+      borderEndWidth: SegmentedButtonTokens.outlineWidth,
+    });
+  });
+
+  it('does not move visual styles to the hit target', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        onValueChange={() => {}}
+        buttons={[
+          {
+            value: 'walk',
+            label: 'Walking',
+            testID: 'walk',
+            style: { flex: 3, backgroundColor: '#123456' },
           },
           { value: 'drive', label: 'Driving' },
         ]}
       />
     );
 
-    const button = screen.getByTestId('walk');
-    const stateLayer = screen.getByTestId('walk-state-layer');
-
-    expect(screen.getByTestId('walk-label')).toHaveStyle({
-      color: selectedColor,
+    expect(screen.getByTestId('walk-container')).toHaveStyle({
+      flex: 3,
+      backgroundColor: '#123456',
     });
-    expect(screen.getByTestId('walk-glyph')).toHaveStyle({
-      color: selectedColor,
+    expect(screen.getByTestId('walk-wrapper')).toHaveStyle({
+      flex: 1,
+      minHeight: SegmentedButtonTokens.touchTargetHeight,
     });
-    expect(stateLayer).toHaveStyle({
-      backgroundColor: selectedColor,
-      opacity: 0,
-    });
-
-    await fireEvent(button, 'hoverIn');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
-
-    await fireEvent(button, 'focus');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
-
-    await fireEvent(button, 'pressIn');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.pressed });
   });
 
   it.each([
@@ -568,27 +595,34 @@ describe('segmented button presentation', () => {
     { density: 'small' as const, expected: 36 },
     { density: 'medium' as const, expected: 32 },
     { density: 'high' as const, expected: 28 },
-  ])('uses the $density density height', ({ density, expected }) => {
-    expect(getSegmentedButtonHeight(density)).toBe(expected);
-  });
+  ])(
+    'uses the $density density height inside a 48dp target',
+    async ({ density, expected }) => {
+      expect(getSegmentedButtonHeight(density)).toBe(expected);
 
-  it('keeps a 48dp target around the visual container', async () => {
-    await render(
-      <SegmentedButtons
-        value="walk"
-        onValueChange={() => {}}
-        buttons={[
-          { value: 'walk', label: 'Walking', testID: 'walk' },
-          { value: 'drive', label: 'Driving' },
-        ]}
-      />
-    );
+      await render(
+        <SegmentedButtons
+          density={density}
+          value="walk"
+          onValueChange={() => {}}
+          buttons={[
+            { value: 'walk', label: 'Walking', testID: 'walk' },
+            { value: 'drive', label: 'Driving' },
+          ]}
+        />
+      );
 
-    expect(screen.getByTestId('walk')).toHaveStyle({
-      minHeight: SegmentedButtonTokens.touchTargetHeight,
-    });
-    expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 40 });
-  });
+      expect(screen.getByTestId('walk-wrapper')).toHaveStyle({
+        minHeight: SegmentedButtonTokens.touchTargetHeight,
+      });
+      expect(screen.getByTestId('walk')).toHaveStyle({
+        minHeight: SegmentedButtonTokens.touchTargetHeight,
+      });
+      expect(screen.getByTestId('walk-container')).toHaveStyle({
+        height: expected,
+      });
+    }
+  );
 
   it('renders token opacity for hover and keyboard focus states', async () => {
     await render(
@@ -872,7 +906,6 @@ describe('accessibility semantics', () => {
     const group = (
       await render(
         <SegmentedButtons
-          aria-label="Transport mode"
           value="walk"
           buttons={[
             { value: 'walk', label: 'Walking' },
@@ -886,7 +919,7 @@ describe('accessibility semantics', () => {
     const radios = screen.getAllByRole('radio');
 
     expect(group).toMatchObject({
-      props: { 'aria-label': 'Transport mode', role: 'radiogroup' },
+      props: { role: 'radiogroup' },
     });
     expect(radios).toHaveLength(3);
     expect(radios[0]).toHaveProp(
@@ -904,7 +937,6 @@ describe('accessibility semantics', () => {
     const group = (
       await render(
         <SegmentedButtons<string>
-          aria-label="Transport modes"
           multiSelect
           value={['walk', 'transit']}
           buttons={[
@@ -919,7 +951,7 @@ describe('accessibility semantics', () => {
     const checkboxes = screen.getAllByRole('checkbox');
 
     expect(group).toMatchObject({
-      props: { 'aria-label': 'Transport modes', role: 'group' },
+      props: { role: 'group' },
     });
     expect(checkboxes).toHaveLength(3);
     expect(checkboxes[0]).toHaveProp(

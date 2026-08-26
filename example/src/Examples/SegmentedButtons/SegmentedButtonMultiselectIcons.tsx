@@ -19,27 +19,22 @@ const SegmentedButtonMultiselectIcons = () => {
           {
             value: 'size-s',
             icon: 'size-s',
-            'aria-label': 'Small',
           },
           {
             value: 'size-m',
             icon: 'size-m',
-            'aria-label': 'Medium',
           },
           {
             value: 'size-l',
             icon: 'size-l',
-            'aria-label': 'Large',
           },
           {
             value: 'size-xl',
             icon: 'size-xl',
-            'aria-label': 'Extra large',
           },
           {
             value: 'size-xxl',
             icon: 'size-xxl',
-            'aria-label': 'Extra extra large',
           },
         ]}
       />

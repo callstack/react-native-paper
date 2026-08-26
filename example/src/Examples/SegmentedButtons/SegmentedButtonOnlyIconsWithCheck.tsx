@@ -18,19 +18,16 @@ const SegmentedButtonOnlyIconsWithCheck = () => {
           {
             icon: 'walk',
             value: 'walk',
-            'aria-label': 'Walking',
             showSelectedCheck: true,
           },
           {
             icon: 'train',
             value: 'transit',
-            'aria-label': 'Transit',
             showSelectedCheck: true,
           },
           {
             icon: 'car',
             value: 'drive',
-            'aria-label': 'Driving',
             showSelectedCheck: true,
           },
         ]}

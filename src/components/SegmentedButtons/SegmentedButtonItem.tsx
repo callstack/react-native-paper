@@ -23,6 +23,7 @@ import {
 import { tokens } from '../../theme/tokens';
 import type { Theme } from '../../types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { splitStyles } from '../../utils/splitStyles';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -172,6 +173,19 @@ const SegmentedButtonItem = ({
   });
   const outlineStyle = getSegmentedButtonOutlineStyle(segment);
   const containerHeight = getSegmentedButtonHeight(density);
+  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const [visualStyleOverrides, borderRadiusStyleOverrides, borderOverrides] =
+    splitStyles(
+      flattenedStyle,
+      (property) =>
+        property === 'borderCurve' ||
+        (property.startsWith('border') && property.endsWith('Radius')),
+      (property) => property.startsWith('border')
+    );
+  const borderRadiusStyle = {
+    ...(flattenedStyle.borderRadius === undefined ? segmentBorderRadius : {}),
+    ...borderRadiusStyleOverrides,
+  };
   const focusRingVerticalInset =
     (SegmentedButtonTokens.touchTargetHeight - containerHeight) / 2 -
     FOCUS_RING_OUTSET;
@@ -181,23 +195,25 @@ const SegmentedButtonItem = ({
   };
   const touchableStyle = [
     styles.touchable,
-    segmentBorderRadius,
+    borderRadiusStyle,
     Platform.OS === 'web' ? webNoOutline : undefined,
   ];
   const visualStyle = [
     styles.visual,
-    segmentBorderRadius,
+    borderRadiusStyle,
     { height: containerHeight, backgroundColor },
+    Object.keys(visualStyleOverrides).length ? visualStyleOverrides : undefined,
   ];
   const outlineContainerStyle = [
     styles.outline,
-    segmentBorderRadius,
-    outlineStyle,
+    borderRadiusStyle,
+    flattenedStyle.borderWidth === undefined ? outlineStyle : undefined,
     { borderColor, opacity: borderOpacity },
+    Object.keys(borderOverrides).length ? borderOverrides : undefined,
   ];
   const focusRingStyle = [
     styles.focusRing,
-    segmentBorderRadius,
+    borderRadiusStyle,
     {
       top: focusRingVerticalInset,
       bottom: focusRingVerticalInset,
@@ -235,7 +251,10 @@ const SegmentedButtonItem = ({
   };
 
   return (
-    <View style={[styles.button, showFocusRing && styles.focusedButton, style]}>
+    <View
+      testID={testID ? `${testID}-wrapper` : undefined}
+      style={[styles.button, showFocusRing && styles.focusedButton]}
+    >
       <TouchableRipple
         borderless
         onPress={onPress}
@@ -267,6 +286,7 @@ const SegmentedButtonItem = ({
             testID={testID ? `${testID}-state-layer` : undefined}
             style={[
               styles.stateLayer,
+              borderRadiusStyle,
               {
                 backgroundColor: stateLayerColor,
                 opacity: stateLayerOpacity,
@@ -318,11 +338,11 @@ const styles = StyleSheet.create({
   touchable: {
     minHeight: SegmentedButtonTokens.touchTargetHeight,
     justifyContent: 'center',
+    overflow: 'visible',
   },
   visual: {
     width: '100%',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
   stateLayer: {
     position: 'absolute',

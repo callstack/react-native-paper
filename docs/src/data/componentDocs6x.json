@@ -10695,159 +10695,143 @@
     "SegmentedButtons/SegmentedButtons": {
       "filepath": "SegmentedButtons/SegmentedButtons.tsx",
       "title": "SegmentedButtons",
-      "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        aria-label=\"Transport mode\"\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+      "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
       "link": "segmented-buttons",
       "data": {
-        "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        aria-label=\"Transport mode\"\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
+        "description": "Segmented buttons can be used to select options, switch views or sort elements.</br>\n\n## Usage\n```js\nimport * as React from 'react';\nimport { SafeAreaView, StyleSheet } from 'react-native';\nimport { SegmentedButtons } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n    <SafeAreaView style={styles.container}>\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          { value: 'drive', label: 'Driving' },\n        ]}\n      />\n    </SafeAreaView>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n  },\n});\n\nexport default MyComponent;\n```",
         "displayName": "SegmentedButtons",
         "methods": [],
         "statics": [],
         "props": {
-          "aria-label": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": "Accessibility label for the segmented button group."
-          },
           "buttons": {
             "required": true,
             "tsType": {
               "name": "Array",
               "elements": [
                 {
-                  "name": "intersection",
-                  "raw": "{\n  value: T;\n  /**\n   * Icon to display for the segment. Required when `label` is omitted.\n   */\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  /**\n   * Non-empty visible label text. This is also used as the accessibility label.\n   */\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n} & (\n  | { label: string }\n  | { label?: never; icon: IconSource; 'aria-label': string }\n)",
-                  "elements": [
-                    {
-                      "name": "signature",
-                      "type": "object",
-                      "raw": "{\n  value: T;\n  /**\n   * Icon to display for the segment. Required when `label` is omitted.\n   */\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  /**\n   * Non-empty visible label text. This is also used as the accessibility label.\n   */\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}",
-                      "signature": {
-                        "properties": [
-                          {
-                            "key": "value",
-                            "value": {
-                              "name": "T",
-                              "required": true
-                            }
-                          },
-                          {
-                            "key": "icon",
-                            "value": {
-                              "name": "IconSource",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "disabled",
-                            "value": {
-                              "name": "boolean",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "aria-label",
-                            "value": {
-                              "name": "string",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "checkedColor",
-                            "value": {
-                              "name": "string",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "uncheckedColor",
-                            "value": {
-                              "name": "string",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "onPress",
-                            "value": {
-                              "name": "signature",
-                              "type": "function",
-                              "raw": "(event: GestureResponderEvent) => void",
-                              "signature": {
-                                "arguments": [
-                                  {
-                                    "name": "event",
-                                    "type": {
-                                      "name": "GestureResponderEvent"
-                                    }
-                                  }
-                                ],
-                                "return": {
-                                  "name": "void"
+                  "name": "signature",
+                  "type": "object",
+                  "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}",
+                  "signature": {
+                    "properties": [
+                      {
+                        "key": "value",
+                        "value": {
+                          "name": "T",
+                          "required": true
+                        }
+                      },
+                      {
+                        "key": "icon",
+                        "value": {
+                          "name": "IconSource",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "disabled",
+                        "value": {
+                          "name": "boolean",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "aria-label",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "checkedColor",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "uncheckedColor",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "onPress",
+                        "value": {
+                          "name": "signature",
+                          "type": "function",
+                          "raw": "(event: GestureResponderEvent) => void",
+                          "signature": {
+                            "arguments": [
+                              {
+                                "name": "event",
+                                "type": {
+                                  "name": "GestureResponderEvent"
                                 }
-                              },
-                              "required": false
+                              }
+                            ],
+                            "return": {
+                              "name": "void"
                             }
                           },
-                          {
-                            "key": "label",
-                            "value": {
-                              "name": "string",
-                              "required": false
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "label",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "showSelectedCheck",
+                        "value": {
+                          "name": "boolean",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "style",
+                        "value": {
+                          "name": "StyleProp",
+                          "elements": [
+                            {
+                              "name": "ViewStyle"
                             }
-                          },
-                          {
-                            "key": "showSelectedCheck",
-                            "value": {
-                              "name": "boolean",
-                              "required": false
+                          ],
+                          "raw": "StyleProp<ViewStyle>",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "labelStyle",
+                        "value": {
+                          "name": "StyleProp",
+                          "elements": [
+                            {
+                              "name": "TextStyle"
                             }
-                          },
-                          {
-                            "key": "style",
-                            "value": {
-                              "name": "StyleProp",
-                              "elements": [
-                                {
-                                  "name": "ViewStyle"
-                                }
-                              ],
-                              "raw": "StyleProp<ViewStyle>",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "labelStyle",
-                            "value": {
-                              "name": "StyleProp",
-                              "elements": [
-                                {
-                                  "name": "TextStyle"
-                                }
-                              ],
-                              "raw": "StyleProp<TextStyle>",
-                              "required": false
-                            }
-                          },
-                          {
-                            "key": "testID",
-                            "value": {
-                              "name": "string",
-                              "required": false
-                            }
-                          }
-                        ]
+                          ],
+                          "raw": "StyleProp<TextStyle>",
+                          "required": false
+                        }
+                      },
+                      {
+                        "key": "testID",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
                       }
-                    },
-                    {
-                      "name": "unknown"
-                    }
-                  ]
+                    ]
+                  }
                 }
               ],
-              "raw": "SegmentedButton<T>[]"
+              "raw": "{\n  value: T;\n  icon?: IconSource;\n  disabled?: boolean;\n  'aria-label'?: string;\n  checkedColor?: string;\n  uncheckedColor?: string;\n  onPress?: (event: GestureResponderEvent) => void;\n  label?: string;\n  showSelectedCheck?: boolean;\n  style?: StyleProp<ViewStyle>;\n  labelStyle?: StyleProp<TextStyle>;\n  testID?: string;\n}[]"
             },
-            "description": "Buttons to display as options in toggle button.\nEach button must contain a non-empty `label`, an `icon`, or both.\nButton should contain the following properties:\n- `value`: value of button (required)\n- `icon`: icon to display for the item (required when `label` is omitted)\n- `disabled`: whether the button is disabled\n- `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.\n- `checkedColor`: custom color for checked Text and Icon\n- `uncheckedColor`: custom color for unchecked Text and Icon\n- `onPress`: callback that is called when button is pressed\n- `label`: non-empty visible label text of the button, also used as its accessibility label\n- `showSelectedCheck`: show optional check icon to indicate selected state\n- `style`: pass additional styles for the button\n- `testID`: testID to be used on tests"
+            "description": "Buttons to display as options in toggle button.\nButton should contain the following properties:\n- `value`: value of button (required)\n- `icon`: icon to display for the item\n- `disabled`: whether the button is disabled\n- `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.\n- `checkedColor`: custom color for checked Text and Icon\n- `uncheckedColor`: custom color for unchecked Text and Icon\n- `onPress`: callback that is called when button is pressed\n- `label`: label text of the button\n- `showSelectedCheck`: show optional check icon to indicate selected state\n- `style`: pass additional styles for the button\n- `testID`: testID to be used on tests"
           },
           "density": {
             "required": false,
