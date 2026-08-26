@@ -1,0 +1,1119 @@
+import * as React from 'react';
+import {
+  PanResponder,
+  StyleSheet,
+  View,
+  type ColorValue,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
+
+import Animated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
+import {
+  BETWEEN_HANDLE_SPACE,
+  DISABLED_CONTENT_OPACITY,
+  DISABLED_INACTIVE_OPACITY,
+  INNER_CORNER_RADIUS,
+  SIZE_SPECS,
+  STOP_SIZE,
+  VALUE_INDICATOR_BOTTOM_SPACE,
+  VALUE_INDICATOR_HEIGHT,
+  VALUE_INDICATOR_WIDTH,
+  SliderTokens,
+  type SliderSize,
+} from './tokens';
+import {
+  fractionToValue,
+  HANDLE_DIRECTION_THRESHOLD,
+  positionToFraction,
+  rangeHandleForTouch,
+  stopFractions,
+  valueToFraction,
+} from './utils';
+import { useLocale } from '../../core/locale';
+import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { cornerFull } from '../../theme/tokens/sys/shape';
+import type { ThemeProp } from '../../types';
+import useLayout from '../../utils/useLayout';
+import Icon, { type IconSource } from '../Icon';
+import Text from '../Typography/Text';
+
+type BaseProps = {
+  /**
+   * Lowest selectable value. Defaults to `0`.
+   */
+  min?: number;
+  /**
+   * Highest selectable value. Defaults to `100`.
+   */
+  max?: number;
+  /**
+   * Interval the value snaps to while dragging. `0`, the default, slides
+   * continuously. Also sets the spacing of the intermediate stop indicators
+   * drawn when `showStops` is enabled.
+   */
+  step?: number;
+  /**
+   * Track and handle dimensions, from `xs` to `xl`. Defaults to `s`. Only `m`,
+   * `l` and `xl` are tall enough to show an `icon`.
+   */
+  size?: SliderSize;
+  /**
+   * Axis the slider runs along. Defaults to `horizontal`. A `vertical` slider
+   * grows upwards from `min` and needs a height from its container or `style`,
+   * since it has no intrinsic length.
+   */
+  orientation?: 'horizontal' | 'vertical';
+  /**
+   * Whether the slider ignores touches and dims its colors. Defaults to `false`.
+   */
+  disabled?: boolean;
+  /**
+   * Icon inset into the leading end of the active track. Ignored at sizes `xs`
+   * and `s`, which are too short to fit one, and while `disabled`.
+   */
+  icon?: IconSource;
+  /**
+   * Whether to mark each `step` with a stop indicator. Requires `step` to be
+   * greater than `0`. The indicators at `min` and `max` are always drawn.
+   */
+  showStops?: boolean;
+  /**
+   * Whether to show a bubble above the handle with the current value while
+   * dragging. Defaults to `false`.
+   */
+  showValueIndicator?: boolean;
+  /**
+   * Formats the text inside the value indicator. Receives the value being
+   * dragged and defaults to rounding it to a whole number.
+   */
+  valueIndicatorLabel?: (v: number) => string;
+  /**
+   * Overrides the active track and handle color for this instance, in place of
+   * the theme's `primary` role.
+   */
+  color?: ColorValue;
+  /**
+   * Style for sizing and positioning the slider. Thickness comes from `size`,
+   * so only the length along the track is yours to set. A `height` when
+   * `orientation` is `vertical`, a `width` or `flex` when it is `horizontal`.
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
+  /**
+   * Label read out by the screen reader in place of the slider's value.
+   */
+  accessibilityLabel?: string;
+};
+
+/**
+ * `value` and the change callbacks depend on `variant`, so they live in a
+ * discriminated union intersected onto the shared props. The same shape
+ * `SegmentedButtons` uses for its conditional `value`. Keeping the union out of
+ * the top level lets the docs generator resolve the shared half; the props in
+ * here are documented in the component's JSDoc instead, since the generated
+ * table cannot express them.
+ */
+type StandardValue = {
+  variant?: 'standard';
+  value: number;
+  onValueChange?: (v: number) => void;
+  onSlidingStart?: (v: number) => void;
+  onSlidingComplete?: (v: number) => void;
+};
+
+type CenteredValue = {
+  variant: 'centered';
+  value: number;
+  onValueChange?: (v: number) => void;
+  onSlidingStart?: (v: number) => void;
+  onSlidingComplete?: (v: number) => void;
+};
+
+type RangeValue = {
+  variant: 'range';
+  value: [number, number];
+  onValueChange?: (v: [number, number]) => void;
+  onSlidingStart?: (v: [number, number]) => void;
+  onSlidingComplete?: (v: [number, number]) => void;
+};
+
+type ConditionalValue = StandardValue | CenteredValue | RangeValue;
+
+export type Props = BaseProps & ConditionalValue;
+
+/**
+ * Material 3 slider for selecting a value from a range.
+ * Supports standard, centered, and range variants.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Slider } from 'react-native-paper';
+ *
+ * const Example = () => {
+ *   const [value, setValue] = React.useState(50);
+ *   return <Slider value={value} onValueChange={setValue} />;
+ * };
+ * ```
+ *
+ * `Slider.Centered` fills outwards from the midpoint, and `Slider.Range` takes a
+ * `[start, end]` tuple and shows two handles:
+ *
+ * ```js
+ * const [range, setRange] = React.useState([20, 75]);
+ * return <Slider.Range value={range} onValueChange={setRange} />;
+ * ```
+ *
+ * ## Variants and `value`
+ * `variant` decides the type of `value` and of the three change callbacks, so
+ * none of them can appear in the props table below:
+ *
+ * | `variant` | `value` | callbacks receive |
+ * | --- | --- | --- |
+ * | `'standard'` (default) | `number` | `number` |
+ * | `'centered'` | `number` | `number` |
+ * | `'range'` | `[number, number]` | `[number, number]` |
+ *
+ * `value` is required; `onValueChange`, `onSlidingStart` and `onSlidingComplete`
+ * are optional. `Slider.Centered` and `Slider.Range` set `variant` for you, so
+ * you never pass it directly with those.
+ *
+ * ## Theming
+ * Customize by overriding these `theme.colors` roles:
+ * - `primary`: active track and handles. Override per instance with `color`
+ * - `secondaryContainer`: inactive track
+ * - `onPrimary`: stop indicators sitting on the active track
+ * - `onSecondaryContainer`: stop indicators sitting on the inactive track
+ * - `inverseSurface` / `inverseOnSurface`: value indicator background / label
+ * - `onSurface`: every element while `disabled`, at 38% opacity, or 12% for the
+ *   inactive track
+ */
+const Slider = (props: Props) => {
+  const {
+    min = 0,
+    max = 100,
+    step = 0,
+    size = 's',
+    orientation = 'horizontal',
+    disabled = false,
+    icon,
+    showStops = false,
+    showValueIndicator = false,
+    valueIndicatorLabel,
+    color,
+    style,
+    testID,
+    theme: themeOverrides,
+    accessibilityLabel,
+  } = props;
+
+  const variant = props.variant ?? 'standard';
+  const isRange = variant === 'range';
+
+  const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
+  const isVertical = orientation === 'vertical';
+
+  const spec = SIZE_SPECS[size];
+
+  const colors = React.useMemo(() => {
+    const t = SliderTokens.colors;
+    const c = theme.colors;
+    return {
+      activeTrack: color ?? c[t.activeTrack],
+      inactiveTrack: c[t.inactiveTrack],
+      handle: color ?? c[t.handle],
+      stopOnActive: c[t.stopOnActive],
+      stopOnInactive: c[t.stopOnInactive],
+      valueIndicatorBg: c[t.valueIndicatorBg],
+      valueIndicatorText: c[t.valueIndicatorText],
+      disabledContent: c[t.disabledContent],
+    };
+  }, [theme, color]);
+
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const timingConfig = React.useMemo(
+    () => ({ duration: 100, reduceMotion: reanimatedReduceMotion }),
+    [reanimatedReduceMotion]
+  );
+
+  const initialEndValue = isRange
+    ? (props as RangeValue).value[1]
+    : (props as StandardValue | CenteredValue).value;
+  const initialStartValue = isRange ? (props as RangeValue).value[0] : min;
+
+  const [endValue, setEndValue] = React.useState(initialEndValue);
+  const [startValue, setStartValue] = React.useState(initialStartValue);
+  const [indicatorDisplayValue, setIndicatorDisplayValue] =
+    React.useState(initialEndValue);
+
+  React.useEffect(() => {
+    if (isRange) {
+      const [s, e] = (props as RangeValue).value;
+      setStartValue(s);
+      setEndValue(e);
+    } else {
+      const v = (props as StandardValue | CenteredValue).value;
+      setEndValue(v);
+    }
+  }, [props, isRange]);
+
+  const [layout, onLayout] = useLayout();
+  const trackLength = isVertical ? layout.height : layout.width;
+
+  // Extra space above the track for the value indicator bubble (horizontal only)
+  const verticalOffset =
+    showValueIndicator && !isVertical
+      ? VALUE_INDICATOR_HEIGHT + VALUE_INDICATOR_BOTTOM_SPACE
+      : 0;
+
+  const trackLengthSV = useSharedValue(0);
+  const endFractionSV = useSharedValue(valueToFraction(endValue, min, max));
+  const startFractionSV = useSharedValue(valueToFraction(startValue, min, max));
+  const endHandleWidthSV = useSharedValue(spec.handleWidth);
+  const startHandleWidthSV = useSharedValue(spec.handleWidth);
+  const valueIndicatorAlphaSV = useSharedValue(0);
+
+  React.useEffect(() => {
+    trackLengthSV.value = trackLength;
+  }, [trackLength, trackLengthSV]);
+
+  React.useEffect(() => {
+    if (!isRange) {
+      endFractionSV.value = valueToFraction(endValue, min, max);
+    }
+  }, [endValue, min, max, isRange, endFractionSV]);
+
+  React.useEffect(() => {
+    if (isRange) {
+      startFractionSV.value = valueToFraction(startValue, min, max);
+      endFractionSV.value = valueToFraction(endValue, min, max);
+    }
+  }, [startValue, endValue, min, max, isRange, startFractionSV, endFractionSV]);
+
+  // gap = half handle width + between-handle space
+  const trackHandleOffset = spec.handleWidth / 2 + BETWEEN_HANDLE_SPACE;
+
+  // Sizes across the track, perpendicular to the direction values grow.
+  const trackThickness = spec.trackThickness;
+  const handleCrossSize = spec.handleHeight;
+
+  // Where the handles travel: fraction 0 sits `handleInsetStart` px in from the
+  // leading edge of the track, fraction 1 sits `handleInsetEnd` px back from the
+  // trailing edge. Every handle, track segment, indicator, stop and touch
+  // position is derived from these two numbers, so they are the only place to
+  // change it.
+  //
+  // The corner radii put each end of the range at the centre of its rounded cap,
+  // which is where the end stops are drawn so that a handle at min or max lands on
+  // its own stop instead of overshooting it by the radius.
+  const handleInsetStart = spec.activeLeadingRadius;
+  const handleInsetEnd = spec.inactiveTrailingRadius;
+  const usableTrackLength = Math.max(
+    0,
+    trackLength - handleInsetStart - handleInsetEnd
+  );
+
+  // Active track: gaps on handle sides, 2dp inner corners
+  const activeTrackAnimStyle = useAnimatedStyle(() => {
+    const vf = endFractionSV.value;
+    const sf = startFractionSV.value;
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    const gap = trackHandleOffset;
+
+    // `start` is the distance from the low-value end of the track and `length`
+    // the extent from there. Both are the same whichever way the track runs.
+    let start: number;
+    let length: number;
+
+    if (variant === 'range') {
+      const lo = Math.min(sf, vf);
+      const hi = Math.max(sf, vf);
+      start = origin + lo * usable + gap;
+      length = Math.max(0, (hi - lo) * usable - 2 * gap);
+    } else if (variant === 'centered') {
+      if (vf >= 0.5) {
+        start = origin + 0.5 * usable;
+        length = Math.max(0, (vf - 0.5) * usable - gap);
+      } else {
+        start = origin + vf * usable + gap;
+        length = Math.max(0, (0.5 - vf) * usable - gap);
+      }
+    } else {
+      // Leading edge is the track's own end, not a handle position.
+      start = 0;
+      length = Math.max(0, origin + vf * usable - gap);
+    }
+
+    // Both branches must name the same keys with concrete numbers. An animated
+    // style cannot clear a property by returning `undefined`, so anything only
+    // one orientation sets would stay applied after switching to the other.
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - start - length,
+        width: trackThickness,
+        height: length,
+      };
+    }
+    return { left: start, top: 0, width: length, height: trackThickness };
+  });
+
+  // Right inactive track: from (handle + gap) to track end, 2dp inner left corners
+  const rightInactiveAnimStyle = useAnimatedStyle(() => {
+    const vf = endFractionSV.value;
+    const sf = startFractionSV.value;
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    const gap = trackHandleOffset;
+
+    // Runs from whichever edge bounds it out to the track's own far end.
+    let edge: number;
+    if (variant === 'range') {
+      edge = origin + Math.max(sf, vf) * usable + gap;
+    } else if (variant === 'centered') {
+      // The midpoint normally bounds this edge, but the handle has to bound it
+      // too once the active track shrinks to nothing near the centre.
+      edge = Math.max(origin + 0.5 * usable, origin + vf * usable + gap);
+    } else {
+      edge = origin + vf * usable + gap;
+    }
+    const length = Math.max(0, len - edge);
+
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - edge - length,
+        width: trackThickness,
+        height: length,
+      };
+    }
+    return { left: edge, top: 0, width: length, height: trackThickness };
+  });
+
+  // Left inactive track: from track start to (handle - gap), 2dp inner right corners
+  // Only needed for centered and range variants.
+  const leftInactiveAnimStyle = useAnimatedStyle(() => {
+    const vf = endFractionSV.value;
+    const sf = startFractionSV.value;
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    const gap = trackHandleOffset;
+
+    // Always starts at the track's own near end, so only its extent varies.
+    //
+    // Centered: normally it stops at the midpoint, where the active track takes
+    // over and holds it clear of the handle. But the active track shrinks to
+    // nothing once the handle is closer to the midpoint than `gap`, so the
+    // handle has to bound this edge too or the segment runs under it.
+    let length: number;
+    if (variant === 'standard') {
+      // Not rendered for this variant, but the keys still have to be concrete.
+      length = 0;
+    } else if (variant === 'range') {
+      length = Math.max(0, origin + Math.min(sf, vf) * usable - gap);
+    } else {
+      length = Math.max(
+        0,
+        Math.min(origin + 0.5 * usable, origin + vf * usable - gap)
+      );
+    }
+
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - length,
+        width: trackThickness,
+        height: length,
+      };
+    }
+    return { left: 0, top: 0, width: length, height: trackThickness };
+  });
+
+  // End handle animated position along the track axis
+  const endHandleAnimStyle = useAnimatedStyle(() => {
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    const w = endHandleWidthSV.value;
+    const start = origin + endFractionSV.value * usable - w / 2;
+    if (isVertical) {
+      // Vertical runs bottom-to-top, so measure back from the far edge.
+      return {
+        left: 0,
+        top: len - start - w,
+        width: handleCrossSize,
+        height: w,
+      };
+    }
+    return {
+      left: start,
+      top: verticalOffset,
+      width: w,
+      height: handleCrossSize,
+    };
+  });
+
+  // Start handle animated position along the track axis
+  const startHandleAnimStyle = useAnimatedStyle(() => {
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    const w = startHandleWidthSV.value;
+    const start = origin + startFractionSV.value * usable - w / 2;
+    if (isVertical) {
+      return {
+        left: 0,
+        top: len - start - w,
+        width: handleCrossSize,
+        height: w,
+      };
+    }
+    return {
+      left: start,
+      top: verticalOffset,
+      width: w,
+      height: handleCrossSize,
+    };
+  });
+
+  // Value indicator animated style
+  const valueIndicatorAnimStyle = useAnimatedStyle(() => {
+    const len = trackLengthSV.value;
+    const origin = handleInsetStart;
+    const usable = Math.max(0, len - handleInsetStart - handleInsetEnd);
+    // Tracks the end handle, so it shares the handle's mapping.
+    const along = origin + endFractionSV.value * usable;
+    if (isVertical) {
+      return {
+        opacity: valueIndicatorAlphaSV.value,
+        left: -(VALUE_INDICATOR_WIDTH + VALUE_INDICATOR_BOTTOM_SPACE),
+        top: len - along - VALUE_INDICATOR_HEIGHT / 2,
+      };
+    }
+    // `left` rather than a transform, so both branches name the same keys.
+    return {
+      opacity: valueIndicatorAlphaSV.value,
+      left: along - VALUE_INDICATOR_WIDTH / 2,
+      top: 0,
+    };
+  });
+
+  // Gesture handling
+  //
+  // The PanResponder below is created once, so its handler closures capture the
+  // first render's scope forever. Anything they read that can change between
+  // renders has to come through this ref instead.
+  const valuesRef = React.useRef({
+    min,
+    max,
+    step,
+    trackLength,
+    endValue,
+    startValue,
+    variant,
+    isRTL,
+    isVertical,
+    disabled,
+    showValueIndicator,
+    spec,
+    timingConfig,
+    handleInsetStart,
+    handleInsetEnd,
+  });
+  valuesRef.current = {
+    min,
+    max,
+    step,
+    trackLength,
+    endValue,
+    startValue,
+    variant,
+    isRTL,
+    isVertical,
+    disabled,
+    showValueIndicator,
+    spec,
+    timingConfig,
+    handleInsetStart,
+    handleInsetEnd,
+  };
+
+  // Callbacks are read through their own ref so that a consumer passing an
+  // inline arrow gets the current one rather than the first render's.
+  const propsRef = React.useRef(props);
+  propsRef.current = props;
+
+  const grantTouchRef = React.useRef(0);
+  // 'pending' means the handles overlapped at touch-down, so which one moves is
+  // decided by the first deliberate drag direction instead.
+  const activeHandleRef = React.useRef<'start' | 'end' | 'pending'>('end');
+
+  const panResponder = React.useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => !valuesRef.current.disabled,
+      onMoveShouldSetPanResponder: () => !valuesRef.current.disabled,
+
+      onPanResponderGrant: (evt) => {
+        const {
+          min: mn,
+          max: mx,
+          isVertical: iv,
+          isRTL: rtl,
+          trackLength: tl,
+          startValue: sv,
+          endValue: ev,
+          variant: vt,
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
+          handleInsetStart: is,
+          handleInsetEnd: ie,
+        } = valuesRef.current;
+        const touchPx = iv
+          ? evt.nativeEvent.locationY
+          : evt.nativeEvent.locationX;
+        grantTouchRef.current = touchPx;
+
+        if (vt === 'range') {
+          const f = positionToFraction(touchPx, tl, rtl, iv, is, ie);
+          activeHandleRef.current = rangeHandleForTouch(
+            f,
+            valueToFraction(sv, mn, mx),
+            valueToFraction(ev, mn, mx)
+          );
+        } else {
+          activeHandleRef.current = 'end';
+        }
+
+        // Left 'pending' the choice isn't made yet, so nothing is pressed yet.
+        if (activeHandleRef.current === 'start') {
+          startHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+        } else if (activeHandleRef.current === 'end') {
+          endHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+        }
+
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(1, tc);
+        }
+
+        const p = propsRef.current;
+        if (vt === 'range') {
+          (p as RangeValue).onSlidingStart?.([sv, ev]);
+        } else {
+          (p as StandardValue | CenteredValue).onSlidingStart?.(ev);
+        }
+      },
+
+      onPanResponderMove: (_, gestureState) => {
+        const {
+          min: mn,
+          max: mx,
+          step: st,
+          trackLength: tl,
+          startValue: sv,
+          endValue: ev,
+          variant: vt,
+          isVertical: iv,
+          isRTL: rtl,
+          disabled: dis,
+          spec: sp,
+          timingConfig: tc,
+          handleInsetStart: is,
+          handleInsetEnd: ie,
+        } = valuesRef.current;
+
+        // `disabled` can flip mid-drag; the responder is already active by then.
+        if (dis) return;
+
+        const delta = iv ? gestureState.dy : gestureState.dx;
+
+        if (activeHandleRef.current === 'pending') {
+          if (Math.abs(delta) < HANDLE_DIRECTION_THRESHOLD) return;
+          // Read the direction through the same mapping that positions the
+          // handle, so the vertical and RTL inversions cannot drift apart from
+          // it. Equal fractions mean the drag is pushing past an end stop, so
+          // 'end' is chosen and its clamp makes the move a no-op.
+          const from = positionToFraction(
+            grantTouchRef.current,
+            tl,
+            rtl,
+            iv,
+            is,
+            ie
+          );
+          const to = positionToFraction(
+            grantTouchRef.current + delta,
+            tl,
+            rtl,
+            iv,
+            is,
+            ie
+          );
+          activeHandleRef.current = to >= from ? 'end' : 'start';
+
+          if (activeHandleRef.current === 'start') {
+            startHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+          } else {
+            endHandleWidthSV.value = withTiming(sp.handlePressWidth, tc);
+          }
+        }
+
+        const touchPx = grantTouchRef.current + delta;
+        const fraction = positionToFraction(touchPx, tl, rtl, iv, is, ie);
+        const snapped = fractionToValue(fraction, mn, mx, st);
+        // Snap the visual handle position for discrete mode
+        const displayFraction =
+          st > 0 ? valueToFraction(snapped, mn, mx) : fraction;
+
+        const p = propsRef.current;
+        if (vt === 'range') {
+          if (activeHandleRef.current === 'start') {
+            const clamped = Math.min(snapped, ev);
+            startFractionSV.value = valueToFraction(clamped, mn, mx);
+            setStartValue(clamped);
+            setIndicatorDisplayValue(clamped);
+            (p as RangeValue).onValueChange?.([clamped, ev]);
+          } else {
+            const clamped = Math.max(snapped, sv);
+            endFractionSV.value = valueToFraction(clamped, mn, mx);
+            setEndValue(clamped);
+            setIndicatorDisplayValue(clamped);
+            (p as RangeValue).onValueChange?.([sv, clamped]);
+          }
+        } else {
+          endFractionSV.value = displayFraction;
+          setEndValue(snapped);
+          setIndicatorDisplayValue(snapped);
+          (p as StandardValue | CenteredValue).onValueChange?.(snapped);
+        }
+      },
+
+      onPanResponderRelease: () => {
+        const {
+          endValue: ev,
+          startValue: sv,
+          variant: vt,
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
+        } = valuesRef.current;
+
+        // Reset both: the gesture may have ended while still 'pending', and the
+        // handle that was never pressed is already at its resting width.
+        startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+        endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(0, tc);
+        }
+
+        const p = propsRef.current;
+        if (vt === 'range') {
+          (p as RangeValue).onSlidingComplete?.([sv, ev]);
+        } else {
+          (p as StandardValue | CenteredValue).onSlidingComplete?.(ev);
+        }
+      },
+
+      onPanResponderTerminate: () => {
+        const {
+          showValueIndicator: svi,
+          spec: sp,
+          timingConfig: tc,
+        } = valuesRef.current;
+
+        startHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+        endHandleWidthSV.value = withTiming(sp.handleWidth, tc);
+
+        if (svi) {
+          valueIndicatorAlphaSV.value = withTiming(0, tc);
+        }
+      },
+    })
+  ).current;
+
+  // Accessibility
+  const handleAccessibilityIncrement = () => {
+    if (disabled) return;
+    const increment = step > 0 ? step : (max - min) / 100;
+    const next = Math.min(endValue + increment, max);
+    setEndValue(next);
+    endFractionSV.value = valueToFraction(next, min, max);
+    if (!isRange) {
+      (props as StandardValue | CenteredValue).onValueChange?.(next);
+    }
+  };
+
+  const handleAccessibilityDecrement = () => {
+    if (disabled) return;
+    const decrement = step > 0 ? step : (max - min) / 100;
+    const next = Math.max(endValue - decrement, min);
+    setEndValue(next);
+    endFractionSV.value = valueToFraction(next, min, max);
+    if (!isRange) {
+      (props as StandardValue | CenteredValue).onValueChange?.(next);
+    }
+  };
+
+  // End stops are always visible at the track's min/max positions.
+  // Intermediate step tick marks are only shown when showStops && step > 0,
+  // and skip fractions 0 and 1 since those are covered by the end stops.
+  const endStopFractions: number[] = trackLength > 0 ? [0, 1] : [];
+  const stepTickFractions: number[] =
+    showStops && step > 0 && trackLength > 0
+      ? stopFractions(min, max, step).filter((f) => f > 0.001 && f < 0.999)
+      : [];
+  const allStopFractions = [...endStopFractions, ...stepTickFractions];
+
+  // Active segment bounds for stop color determination
+  const endFraction = valueToFraction(endValue, min, max);
+  const startFraction = isRange ? valueToFraction(startValue, min, max) : 0;
+  const activeLead =
+    variant === 'centered'
+      ? Math.min(0.5, endFraction)
+      : variant === 'range'
+        ? Math.min(startFraction, endFraction)
+        : 0;
+  const activeTrail =
+    variant === 'centered'
+      ? Math.max(0.5, endFraction)
+      : variant === 'range'
+        ? Math.max(startFraction, endFraction)
+        : endFraction;
+
+  const indicatorText = valueIndicatorLabel
+    ? valueIndicatorLabel(indicatorDisplayValue)
+    : String(Math.round(indicatorDisplayValue));
+
+  const contentOpacity = disabled ? DISABLED_CONTENT_OPACITY : 1;
+  const inactiveOpacity = disabled ? DISABLED_INACTIVE_OPACITY : 1;
+
+  // Track container: positioned within the handle area, offset for indicator zone
+  const trackContainerStyle: ViewStyle = isVertical
+    ? {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: (spec.handleHeight - spec.trackThickness) / 2,
+        width: spec.trackThickness,
+      }
+    : {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: verticalOffset + (spec.handleHeight - spec.trackThickness) / 2,
+        height: spec.trackThickness,
+      };
+
+  // Corner radii for each track segment
+  // Outer corners use the size spec radii; inner corners (facing the handle gap) use 2dp.
+  const leftInactiveCorners: ViewStyle = isVertical
+    ? {
+        borderBottomLeftRadius: spec.activeLeadingRadius,
+        borderBottomRightRadius: spec.activeLeadingRadius,
+        borderTopLeftRadius: INNER_CORNER_RADIUS,
+        borderTopRightRadius: INNER_CORNER_RADIUS,
+      }
+    : {
+        borderTopLeftRadius: spec.activeLeadingRadius,
+        borderBottomLeftRadius: spec.activeLeadingRadius,
+        borderTopRightRadius: INNER_CORNER_RADIUS,
+        borderBottomRightRadius: INNER_CORNER_RADIUS,
+      };
+
+  const rightInactiveCorners: ViewStyle = isVertical
+    ? {
+        borderBottomLeftRadius: INNER_CORNER_RADIUS,
+        borderBottomRightRadius: INNER_CORNER_RADIUS,
+        borderTopLeftRadius: spec.inactiveTrailingRadius,
+        borderTopRightRadius: spec.inactiveTrailingRadius,
+      }
+    : {
+        borderTopLeftRadius: INNER_CORNER_RADIUS,
+        borderBottomLeftRadius: INNER_CORNER_RADIUS,
+        borderTopRightRadius: spec.inactiveTrailingRadius,
+        borderBottomRightRadius: spec.inactiveTrailingRadius,
+      };
+
+  // Active track: leading outer corner uses size spec (standard only), all others 2dp inner
+  const activeTrackCorners: ViewStyle = isVertical
+    ? {
+        borderBottomLeftRadius:
+          variant === 'standard'
+            ? spec.activeLeadingRadius
+            : INNER_CORNER_RADIUS,
+        borderBottomRightRadius:
+          variant === 'standard'
+            ? spec.activeLeadingRadius
+            : INNER_CORNER_RADIUS,
+        borderTopLeftRadius: INNER_CORNER_RADIUS,
+        borderTopRightRadius: INNER_CORNER_RADIUS,
+      }
+    : {
+        borderTopLeftRadius:
+          variant === 'standard'
+            ? spec.activeLeadingRadius
+            : INNER_CORNER_RADIUS,
+        borderBottomLeftRadius:
+          variant === 'standard'
+            ? spec.activeLeadingRadius
+            : INNER_CORNER_RADIUS,
+        borderTopRightRadius: INNER_CORNER_RADIUS,
+        borderBottomRightRadius: INNER_CORNER_RADIUS,
+      };
+
+  // Outer wrapper: extends for indicator space above the track (horizontal only)
+  const outerStyle: ViewStyle = isVertical
+    ? { width: spec.handleHeight, overflow: 'visible' }
+    : { height: spec.handleHeight + verticalOffset, overflow: 'visible' };
+
+  // Icon: center it at the leading corner's inscribed-square focal point
+  const iconLeadingOffset = Math.max(
+    0,
+    spec.activeLeadingRadius - spec.iconSize / 2
+  );
+
+  const inactiveColor = disabled
+    ? colors.disabledContent
+    : colors.inactiveTrack;
+  const activeColor = disabled ? colors.disabledContent : colors.activeTrack;
+
+  return (
+    <View style={[outerStyle, style]} testID={testID}>
+      {/* Gesture and accessibility wrapper */}
+      <View
+        {...panResponder.panHandlers}
+        style={StyleSheet.absoluteFill}
+        // A bare `View` is not an accessibility element on its own, so the role,
+        // value and actions below would never reach a screen reader without this.
+        accessible
+        accessibilityRole="adjustable"
+        accessibilityValue={{ min, max, now: Math.round(endValue) }}
+        accessibilityActions={[
+          { name: 'increment', label: 'increment' },
+          { name: 'decrement', label: 'decrement' },
+        ]}
+        onAccessibilityAction={(evt) => {
+          if (evt.nativeEvent.actionName === 'increment') {
+            handleAccessibilityIncrement();
+          } else if (evt.nativeEvent.actionName === 'decrement') {
+            handleAccessibilityDecrement();
+          }
+        }}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityState={{ disabled }}
+      />
+
+      {/* Track container */}
+      <View
+        style={trackContainerStyle}
+        onLayout={onLayout}
+        pointerEvents="none"
+        testID={testID ? `${testID}-track` : undefined}
+      >
+        {/* Left inactive track segment (centered/range only) */}
+        {variant !== 'standard' && (
+          <Animated.View
+            style={[
+              styles.trackSegment,
+              leftInactiveCorners,
+              leftInactiveAnimStyle,
+              { backgroundColor: inactiveColor, opacity: inactiveOpacity },
+            ]}
+          />
+        )}
+
+        {/* Right inactive track segment */}
+        <Animated.View
+          style={[
+            styles.trackSegment,
+            rightInactiveCorners,
+            rightInactiveAnimStyle,
+            { backgroundColor: inactiveColor, opacity: inactiveOpacity },
+          ]}
+        />
+
+        {/* Active track segment */}
+        <Animated.View
+          style={[
+            styles.trackSegment,
+            activeTrackCorners,
+            activeTrackAnimStyle,
+            { backgroundColor: activeColor, opacity: contentOpacity },
+          ]}
+        />
+
+        {/* Stop indicators: always-on end stops + optional intermediate step ticks */}
+        {allStopFractions.map((f) => {
+          const isActive = f >= activeLead && f <= activeTrail;
+          // Stops sit on the handle's own travel range, so a handle at any stop
+          // lands exactly on its dot.
+          if (usableTrackLength <= 0) return null;
+          const pixelCenter = handleInsetStart + f * usableTrackLength;
+          const dotStyle: ViewStyle = isVertical
+            ? {
+                position: 'absolute',
+                left: (spec.trackThickness - STOP_SIZE) / 2,
+                bottom: pixelCenter - STOP_SIZE / 2,
+              }
+            : {
+                position: 'absolute',
+                top: (spec.trackThickness - STOP_SIZE) / 2,
+                left: pixelCenter - STOP_SIZE / 2,
+              };
+          return (
+            <View
+              key={f}
+              style={[
+                styles.stopDot,
+                dotStyle,
+                {
+                  backgroundColor: disabled
+                    ? colors.disabledContent
+                    : isActive
+                      ? colors.stopOnActive
+                      : colors.stopOnInactive,
+                  opacity: contentOpacity,
+                },
+              ]}
+            />
+          );
+        })}
+
+        {/* Inset icon: positioned at the leading corner's focal point */}
+        {spec.iconSize > 0 && icon != null && !disabled && (
+          <View
+            style={[
+              styles.iconWrapper,
+              isVertical
+                ? {
+                    left: (spec.trackThickness - spec.iconSize) / 2,
+                    bottom:
+                      handleInsetStart +
+                      activeLead * usableTrackLength +
+                      iconLeadingOffset,
+                  }
+                : {
+                    top: (spec.trackThickness - spec.iconSize) / 2,
+                    left:
+                      handleInsetStart +
+                      activeLead * usableTrackLength +
+                      iconLeadingOffset,
+                  },
+            ]}
+            pointerEvents="none"
+          >
+            <Icon
+              source={icon}
+              size={spec.iconSize}
+              color={colors.stopOnActive}
+            />
+          </View>
+        )}
+      </View>
+
+      {/* End handle */}
+      <Animated.View
+        style={[
+          styles.handle,
+          endHandleAnimStyle,
+          {
+            backgroundColor: disabled ? colors.disabledContent : colors.handle,
+            opacity: contentOpacity,
+          },
+        ]}
+        pointerEvents="none"
+      />
+
+      {/* Start handle (range only) */}
+      {isRange && (
+        <Animated.View
+          style={[
+            styles.handle,
+            startHandleAnimStyle,
+            {
+              backgroundColor: disabled
+                ? colors.disabledContent
+                : colors.handle,
+              opacity: contentOpacity,
+            },
+          ]}
+          pointerEvents="none"
+        />
+      )}
+
+      {/* Value indicator bubble */}
+      {showValueIndicator && (
+        <Animated.View
+          style={[
+            styles.valueIndicator,
+            valueIndicatorAnimStyle,
+            { backgroundColor: colors.valueIndicatorBg },
+          ]}
+          pointerEvents="none"
+        >
+          <Text
+            variant="labelLarge"
+            style={{ color: colors.valueIndicatorText }}
+          >
+            {indicatorText}
+          </Text>
+        </Animated.View>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  trackSegment: {
+    position: 'absolute',
+  },
+  handle: {
+    position: 'absolute',
+    borderRadius: cornerFull,
+  },
+  stopDot: {
+    width: STOP_SIZE,
+    height: STOP_SIZE,
+    borderRadius: STOP_SIZE / 2,
+  },
+  iconWrapper: {
+    position: 'absolute',
+  },
+  valueIndicator: {
+    position: 'absolute',
+    top: 0,
+    width: VALUE_INDICATOR_WIDTH,
+    height: VALUE_INDICATOR_HEIGHT,
+    borderRadius: cornerFull,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default Slider;

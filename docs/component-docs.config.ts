@@ -119,6 +119,9 @@ const pages = {
   SegmentedButtons: {
     SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
   },
+  Slider: {
+    Slider: 'Slider/Slider',
+  },
   Snackbar: 'Snackbar',
   Surface: 'Surface',
   Switch: {
