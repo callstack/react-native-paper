@@ -333,7 +333,8 @@ export const themeColors = {
       },
       outlined: {
         backgroundColor: 'transparent',
-        textColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.outlineVariant',
+        borderColor: 'theme.colors.outlineVariant',
       },
     },
   },

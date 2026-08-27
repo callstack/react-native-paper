@@ -19,7 +19,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import {
-  splitButtonElevation,
   splitButtonMinInteractiveSize,
   splitButtonStateLayerOpacity,
   type SplitButtonSize,
@@ -372,7 +371,6 @@ const SplitButton = ({
   const trailingAccessibilityStateWithDisabled = disabled
     ? { ...trailingAccessibilityState, ...disabledState }
     : trailingAccessibilityState;
-  const isElevationEntitled = !disabled && mode === 'elevated';
   const leadingHasTouchHandler = hasTouchHandler({
     onPress,
     onPressIn,
@@ -404,9 +402,6 @@ const SplitButton = ({
     borderColor: colors.borderColor,
     borderWidth: colors.borderWidth,
   };
-  const elevation = isElevationEntitled
-    ? splitButtonElevation.enabled
-    : splitButtonElevation.disabled;
   const getTestID = (suffix: string) =>
     testID ? `${testID}-${suffix}` : undefined;
 
@@ -425,7 +420,7 @@ const SplitButton = ({
     >
       <Surface
         testID={getTestID('leading-container')}
-        elevation={elevation}
+        elevation={colors.elevation}
         style={[
           styles.leading,
           commonButtonStyle,
@@ -510,7 +505,7 @@ const SplitButton = ({
 
       <SplitButtonSurface
         testID={getTestID('trailing-container')}
-        elevation={elevation}
+        elevation={colors.elevation}
         style={[
           styles.trailing,
           commonButtonStyle,
@@ -538,10 +533,6 @@ const SplitButton = ({
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              // The M3 state layer is always tinted with the container's
-              // own "on" color (e.g. `onPrimary` for a `primary` filled
-              // container), which is exactly what `contentColor` already
-              // resolves to per mode.
               { backgroundColor: contentColor },
               trailingStateLayerAnimatedStyle,
             ]}
@@ -656,6 +647,3 @@ const styles = StyleSheet.create({
 });
 
 export default SplitButton;
-
-// @component-docs ignore-next-line
-export { SplitButton };

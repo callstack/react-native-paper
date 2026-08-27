@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
@@ -80,18 +79,12 @@ it('calls leading and trailing press-in and press-out handlers separately', asyn
   expect(onTrailingPressOut).toHaveBeenCalledTimes(1);
 });
 
-it('dims the outline color for a disabled outlined split button', async () => {
+it('keeps the outline color at full opacity for a disabled outlined split button', async () => {
   const theme = getTheme();
   await renderSplitButton({ mode: 'outlined', disabled: true });
 
-  const { onSurface } = theme.colors;
-  if (typeof onSurface !== 'string') {
-    throw new Error('Expected default theme onSurface to be a string');
-  }
-  const expectedBorderColor = color(onSurface).alpha(0.12).rgb().string();
-
   expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-    borderColor: expectedBorderColor,
+    borderColor: theme.colors.outlineVariant,
   });
 });
 
