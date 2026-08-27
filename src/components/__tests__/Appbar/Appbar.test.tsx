@@ -688,10 +688,6 @@ describe('Appbar accessibility', () => {
       );
 
       expect(imageContainer).toHaveProp('aria-hidden', true);
-      expect(imageContainer).toHaveProp(
-        'importantForAccessibility',
-        'no-hide-descendants'
-      );
       expect(
         screen.queryByRole('heading', { name: 'Brand words' })
       ).not.toBeOnTheScreen();

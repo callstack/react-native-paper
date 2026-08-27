@@ -100,7 +100,6 @@ const AppbarContent = ({
     <View
       testID={`${testID}-headline-image`}
       aria-hidden
-      importantForAccessibility="no-hide-descendants"
       style={styles.headlineImage}
     >
       {headlineImage}
