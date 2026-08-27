@@ -159,11 +159,11 @@ const ConnectedButton = ({
   );
 
   // A gap is needed before the label, and between the check and the leading
-  // icon when an icon-only button shows both.
-  const iconGap =
-    label || (showCheck && showIcon)
-      ? { marginEnd: sizeStyle.iconLabelGap }
-      : null;
+  // icon when an icon-only button shows both. The last element in the row
+  // never gets one, or the content would sit off-centre.
+  const gap = { marginEnd: sizeStyle.iconLabelGap };
+  const checkGap = label || (showCheck && showIcon) ? gap : null;
+  const leadingIconGap = label ? gap : null;
 
   // When the container is translucent (disabled), the fill is drawn by the
   // overlay below, so the base view stays transparent.
@@ -230,7 +230,7 @@ const ConnectedButton = ({
           {showCheck ? (
             <Animated.View
               testID={getTestID(testID, 'check-icon')}
-              style={[iconGap, checkIconStyle]}
+              style={[checkGap, checkIconStyle]}
             >
               <Icon
                 source="check"
@@ -242,7 +242,7 @@ const ConnectedButton = ({
           {showIcon ? (
             <Animated.View
               testID={getTestID(testID, 'icon')}
-              style={[iconGap, leadingIconStyle]}
+              style={[leadingIconGap, leadingIconStyle]}
             >
               <Icon
                 source={icon}

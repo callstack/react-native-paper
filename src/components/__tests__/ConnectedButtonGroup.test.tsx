@@ -193,6 +193,26 @@ it('keeps the icon of a selected icon-only button', async () => {
   expect(screen.getByTestId('walk-icon')).toBeTruthy();
 });
 
+it('gaps the check from the icon but not the end of an icon-only button', async () => {
+  await renderGroup({
+    buttons: [
+      { value: 'walk', icon: 'walk', showSelectedCheck: true, testID: 'walk' },
+    ],
+  });
+
+  const { iconLabelGap } = getConnectedButtonSizeStyle({
+    size: 'small',
+    theme,
+  });
+
+  expect(screen.getByTestId('walk-check-icon')).toHaveStyle({
+    marginEnd: iconLabelGap,
+  });
+  expect(screen.getByTestId('walk-icon')).not.toHaveStyle({
+    marginEnd: iconLabelGap,
+  });
+});
+
 it('applies a custom checked color to the selected label', async () => {
   await renderGroup({
     buttons: [
