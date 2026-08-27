@@ -4680,7 +4680,7 @@
                 {
                   "name": "signature",
                   "type": "object",
-                  "raw": "{\n  /**\n   * Value of the button (required).\n   */\n  value: T;\n  /**\n   * Icon to display for the button.\n   */\n  icon?: IconSource;\n  /**\n   * Label text of the button.\n   */\n  label?: string;\n  /**\n   * Whether the button is disabled.\n   */\n  disabled?: boolean;\n  /**\n   * Accessibility label for the button. Read by the screen reader when the\n   * user taps the button.\n   */\n  'aria-label'?: string;\n  /**\n   * Custom color for the selected label and icon.\n   */\n  checkedColor?: string;\n  /**\n   * Custom color for the unselected label and icon.\n   */\n  uncheckedColor?: string;\n  /**\n   * Show an optional check icon to indicate the selected state. On a button\n   * that also has a label the check replaces the leading icon.\n   */\n  showSelectedCheck?: boolean;\n  /**\n   * Type of background drawable to display the feedback (Android).\n   * https://reactnative.dev/docs/pressable#rippleconfig\n   */\n  background?: PressableAndroidRippleConfig;\n  /**\n   * Sets additional distance outside of the button in which a press can be\n   * detected.\n   */\n  hitSlop?: TouchableRippleProps['hitSlop'];\n  /**\n   * Callback that is called when the button is pressed, in addition to the\n   * group's `onValueChange`.\n   */\n  onPress?: (event: GestureResponderEvent) => void;\n  /**\n   * Specifies the largest possible scale a label font can reach.\n   */\n  labelMaxFontSizeMultiplier?: number;\n  /**\n   * Pass additional styles for the button container.\n   */\n  style?: StyleProp<ViewStyle>;\n  /**\n   * Style for the button label.\n   */\n  labelStyle?: StyleProp<TextStyle>;\n  /**\n   * testID to be used on tests.\n   */\n  testID?: string;\n}",
+                  "raw": "{\n  /**\n   * Value of the button (required).\n   */\n  value: T;\n  /**\n   * Icon to display for the button.\n   */\n  icon?: IconSource;\n  /**\n   * Label text of the button.\n   */\n  label?: string;\n  /**\n   * Whether the button is disabled.\n   */\n  disabled?: boolean;\n  /**\n   * Accessibility label for the button. Read by the screen reader when the\n   * user taps the button.\n   */\n  'aria-label'?: string;\n  /**\n   * Custom color for the selected label and icon.\n   */\n  checkedColor?: string;\n  /**\n   * Custom color for the unselected label and icon.\n   */\n  uncheckedColor?: string;\n  /**\n   * Show an optional check icon to indicate the selected state.\n   */\n  showSelectedCheck?: boolean;\n  /**\n   * Type of background drawable to display the feedback (Android).\n   * https://reactnative.dev/docs/pressable#rippleconfig\n   */\n  background?: PressableAndroidRippleConfig;\n  /**\n   * Sets additional distance outside of the button in which a press can be\n   * detected.\n   */\n  hitSlop?: TouchableRippleProps['hitSlop'];\n  /**\n   * Callback that is called when the button is pressed, in addition to the\n   * group's `onValueChange`.\n   */\n  onPress?: (event: GestureResponderEvent) => void;\n  /**\n   * Specifies the largest possible scale a label font can reach.\n   */\n  labelMaxFontSizeMultiplier?: number;\n  /**\n   * Pass additional styles for the button container.\n   */\n  style?: StyleProp<ViewStyle>;\n  /**\n   * Style for the button label.\n   */\n  labelStyle?: StyleProp<TextStyle>;\n  /**\n   * testID to be used on tests.\n   */\n  testID?: string;\n}",
                   "signature": {
                     "properties": [
                       {
@@ -4823,6 +4823,51 @@
               "raw": "ConnectedButtonConfig<T>[]"
             },
             "description": "Buttons to display as options in the group. Each button should contain the\nfollowing properties:\n- `value`: value of the button (required)\n- `icon`: icon to display for the button\n- `label`: label text of the button\n- `disabled`: whether the button is disabled\n- `aria-label`: accessibility label for the button\n- `checkedColor`: custom color for the selected label and icon\n- `uncheckedColor`: custom color for the unselected label and icon\n- `showSelectedCheck`: show an optional check icon to indicate the selected state\n- `onPress`: callback that is called when the button is pressed\n- `style`: pass additional styles for the button\n- `labelStyle`: style for the button label\n- `testID`: testID to be used on tests"
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "T | T[]",
+              "elements": [
+                {
+                  "name": "T"
+                },
+                {
+                  "name": "Array",
+                  "elements": [
+                    {
+                      "name": "T"
+                    }
+                  ],
+                  "raw": "T[]"
+                }
+              ]
+            },
+            "description": "Value of the currently selected button, or an array of the selected\nvalues when `multiSelect` is enabled."
+          },
+          "multiSelect": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Allow more than one button to be selected at a time."
+          },
+          "onValueChange": {
+            "required": true,
+            "tsType": {
+              "name": "union",
+              "raw": "((value: T) => void) | ((value: T[]) => void)",
+              "elements": [
+                {
+                  "name": "unknown"
+                },
+                {
+                  "name": "unknown"
+                }
+              ]
+            },
+            "description": "Function to execute on selection change."
           },
           "size": {
             "required": false,

@@ -137,6 +137,19 @@ export type Props<T extends string = string> = {
    */
   buttons: ConnectedButtonConfig<T>[];
   /**
+   * Value of the currently selected button, or an array of the selected
+   * values when `multiSelect` is enabled.
+   */
+  value: T | T[];
+  /**
+   * Allow more than one button to be selected at a time.
+   */
+  multiSelect?: boolean;
+  /**
+   * Function to execute on selection change.
+   */
+  onValueChange: ((value: T) => void) | ((value: T[]) => void);
+  /**
    * Size of the buttons, following the Material Design 3 button-group scale.
    */
   size?: ConnectedButtonGroupSize;
