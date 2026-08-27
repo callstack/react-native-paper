@@ -1,4 +1,11 @@
-import type { ThemeShapeCorners, TypescaleKey } from '../../theme/types';
+import type {
+  ColorRole,
+  Elevation,
+  ThemeShapeCorners,
+  TypescaleKey,
+} from '../../theme/types';
+
+export type SplitButtonMode = 'filled' | 'tonal' | 'elevated' | 'outlined';
 
 export type SplitButtonSize =
   | 'extra-small'
@@ -102,11 +109,89 @@ export const splitButtonSizeTokens: Record<
 
 export const splitButtonMinInteractiveSize = 48;
 
-export const splitButtonDisabledOutlineOpacity = 0.12;
-
 export const splitButtonStateLayerOpacity = 0.1;
 
-export const splitButtonElevation = {
-  disabled: 0,
-  enabled: 1,
-} as const;
+// Per-mode/state color roles, straight from the M3 split button spec. Filled,
+// tonal, and elevated share the same disabled treatment (a 10%/38% tint of
+// `onSurface` for container/content). `outlined` has no container fill in
+// either state — only its content dims (to `outlineVariant` at 38%); its
+// border stays `outlineVariant` at full opacity throughout, same as
+// `Button`'s outlined mode never dims its border either.
+export type SplitButtonColorTokens = {
+  containerColor?: ColorRole;
+  containerOpacity: number;
+  contentColor: ColorRole;
+  contentOpacity: number;
+  borderColor?: ColorRole;
+  elevation: Elevation;
+};
+
+export const splitButtonColorTokens: Record<
+  SplitButtonMode,
+  { enabled: SplitButtonColorTokens; disabled: SplitButtonColorTokens }
+> = {
+  elevated: {
+    enabled: {
+      containerColor: 'surfaceContainerLow',
+      containerOpacity: 1,
+      contentColor: 'primary',
+      contentOpacity: 1,
+      elevation: 1,
+    },
+    disabled: {
+      containerColor: 'onSurface',
+      containerOpacity: 0.1,
+      contentColor: 'onSurface',
+      contentOpacity: 0.38,
+      elevation: 0,
+    },
+  },
+  filled: {
+    enabled: {
+      containerColor: 'primary',
+      containerOpacity: 1,
+      contentColor: 'onPrimary',
+      contentOpacity: 1,
+      elevation: 0,
+    },
+    disabled: {
+      containerColor: 'onSurface',
+      containerOpacity: 0.1,
+      contentColor: 'onSurface',
+      contentOpacity: 0.38,
+      elevation: 0,
+    },
+  },
+  tonal: {
+    enabled: {
+      containerColor: 'secondaryContainer',
+      containerOpacity: 1,
+      contentColor: 'onSecondaryContainer',
+      contentOpacity: 1,
+      elevation: 0,
+    },
+    disabled: {
+      containerColor: 'onSurface',
+      containerOpacity: 0.1,
+      contentColor: 'onSurface',
+      contentOpacity: 0.38,
+      elevation: 0,
+    },
+  },
+  outlined: {
+    enabled: {
+      containerOpacity: 1,
+      contentColor: 'onSurfaceVariant',
+      contentOpacity: 1,
+      borderColor: 'outlineVariant',
+      elevation: 0,
+    },
+    disabled: {
+      containerOpacity: 1,
+      contentColor: 'outlineVariant',
+      contentOpacity: 0.38,
+      borderColor: 'outlineVariant',
+      elevation: 0,
+    },
+  },
+};

@@ -31,7 +31,6 @@ const SplitButtonExample = () => {
               <SplitButton
                 label="Send"
                 icon="send"
-                mode="filled"
                 disabled={disabled}
                 loading={loading}
                 onPress={() => {}}

@@ -143,6 +143,19 @@ describe('getSplitButtonColors', () => {
     expect(colors.containerOpacity).toBeLessThan(1);
   });
 
+  it('shares the same disabled onSurface treatment across filled, tonal, and elevated', () => {
+    const theme = getTheme();
+
+    (['filled', 'tonal', 'elevated'] as const).forEach((mode) => {
+      const colors = getSplitButtonColors({ theme, mode, disabled: true });
+
+      expect(colors.containerColor).toBe(theme.colors.onSurface);
+      expect(colors.contentColor).toBe(theme.colors.onSurface);
+      expect(colors.containerOpacity).toBe(0.1);
+      expect(colors.contentOpacity).toBe(0.38);
+    });
+  });
+
   it('uses a transparent container for a disabled outlined split button', () => {
     const theme = getTheme();
     const colors = getSplitButtonColors({
@@ -155,21 +168,38 @@ describe('getSplitButtonColors', () => {
     expect(colors.containerOpacity).toBe(1);
   });
 
-  it('dims the outline color for a disabled outlined split button', () => {
+  it('keeps the outline color at full opacity for a disabled outlined split button', () => {
     const theme = getTheme();
     const colors = getSplitButtonColors({
       theme,
       mode: 'outlined',
       disabled: true,
     });
-    const { onSurface } = theme.colors;
-    if (typeof onSurface !== 'string') {
-      throw new Error('Expected default theme onSurface to be a string');
-    }
-    const expectedBorderColor = color(onSurface).alpha(0.12).rgb().string();
 
-    expect(colors.borderColor).toBe(expectedBorderColor);
-    expect(colors.borderColor).not.toBe(theme.colors.outlineVariant);
+    expect(colors.borderColor).toBe(theme.colors.outlineVariant);
+  });
+
+  it('uses outline-variant content color for a disabled outlined split button', () => {
+    const theme = getTheme();
+    const colors = getSplitButtonColors({
+      theme,
+      mode: 'outlined',
+      disabled: true,
+    });
+
+    expect(colors.contentColor).toBe(theme.colors.outlineVariant);
+  });
+
+  it('only grants elevation to an enabled elevated split button', () => {
+    const theme = getTheme();
+
+    (['elevated', 'filled', 'tonal', 'outlined'] as const).forEach((mode) => {
+      const enabled = getSplitButtonColors({ theme, mode });
+      const disabled = getSplitButtonColors({ theme, mode, disabled: true });
+
+      expect(enabled.elevation).toBe(mode === 'elevated' ? 1 : 0);
+      expect(disabled.elevation).toBe(0);
+    });
   });
 
   it('reduces content opacity when disabled', () => {
