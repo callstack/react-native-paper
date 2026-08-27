@@ -14,7 +14,6 @@ import type { DialogChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { OverlayFocusTarget } from '../../utils/useOverlayFocus';
-import Button from '../Button/Button';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
 import Text from '../Typography/Text';
@@ -225,20 +224,7 @@ const Dialog = ({
     );
 
     const dialogActions = actions?.length ? (
-      <DialogActions key="dialogActions">
-        {actions.map(
-          ({ label, onPress: onActionPress, ...buttonProps }, index) => (
-            <Button
-              key={index}
-              mode="text"
-              {...buttonProps}
-              onPress={onActionPress}
-            >
-              {label}
-            </Button>
-          )
-        )}
-      </DialogActions>
+      <Dialog.Actions key="dialogActions">{actions}</Dialog.Actions>
     ) : null;
 
     return [dialogIcon, dialogTitle, dialogContent, dialogActions];

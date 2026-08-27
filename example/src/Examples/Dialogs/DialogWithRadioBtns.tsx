@@ -7,6 +7,7 @@ import {
   Text,
   TouchableRipple,
   useTheme,
+  Button,
 } from 'react-native-paper';
 
 type Props = {
@@ -85,8 +86,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
         </View>
       }
       actions={[
-        { label: 'Cancel', onPress: close },
-        { label: 'Ok', onPress: close },
+        <Button key="cancel-btn" onPress={close}>
+          Cancel
+        </Button>,
+        <Button key="ok-btn" onPress={close}>
+          Ok
+        </Button>,
       ]}
     />
   );
