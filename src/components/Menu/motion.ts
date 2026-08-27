@@ -1,21 +1,25 @@
-import { Animated } from 'react-native';
+import { runOnJS, withSpring } from 'react-native-reanimated';
 
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme } from '../../types';
 
+/**
+ * The slice of a Reanimated shared value these helpers touch. Keeping it
+ * structural lets unit tests drive the real code path with a plain object.
+ */
+type MotionValue = { value: number };
+
 type OpenMotionArgs = {
   reduceMotion: boolean;
-  scaleAnimation: Animated.ValueXY;
-  opacityAnimation: Animated.Value;
-  menuWidth: number;
-  menuHeight: number;
+  scale: MotionValue;
+  opacity: MotionValue;
   theme: InternalTheme;
   onFinish: () => void;
 };
 
 type CloseMotionArgs = {
   reduceMotion: boolean;
-  opacityAnimation: Animated.Value;
+  opacity: MotionValue;
   theme: InternalTheme;
   onFinish: () => void;
 };
@@ -26,35 +30,29 @@ type CloseMotionArgs = {
  */
 export function runMenuOpenMotion({
   reduceMotion,
-  scaleAnimation,
-  opacityAnimation,
-  menuWidth,
-  menuHeight,
+  scale,
+  opacity,
   theme,
   onFinish,
 }: OpenMotionArgs): 'snap' | 'spring' {
   if (reduceMotion) {
-    scaleAnimation.setValue({ x: menuWidth, y: menuHeight });
-    opacityAnimation.setValue(1);
+    scale.value = 1;
+    opacity.value = 1;
     onFinish();
     return 'snap';
   }
 
-  const spatialSpring = toRawSpring(theme.motion.spring.fast.spatial);
-  const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
-
-  Animated.parallel([
-    Animated.spring(scaleAnimation, {
-      toValue: { x: menuWidth, y: menuHeight },
-      ...spatialSpring,
-      useNativeDriver: true,
-    }),
-    Animated.spring(opacityAnimation, {
-      toValue: 1,
-      ...effectsSpring,
-      useNativeDriver: true,
-    }),
-  ]).start(onFinish);
+  scale.value = withSpring(1, toRawSpring(theme.motion.spring.fast.spatial));
+  opacity.value = withSpring(
+    1,
+    toRawSpring(theme.motion.spring.fast.effects),
+    (finished) => {
+      'worklet';
+      if (finished) {
+        runOnJS(onFinish)();
+      }
+    }
+  );
 
   return 'spring';
 }
@@ -64,23 +62,26 @@ export function runMenuOpenMotion({
  */
 export function runMenuCloseMotion({
   reduceMotion,
-  opacityAnimation,
+  opacity,
   theme,
   onFinish,
 }: CloseMotionArgs): 'snap' | 'spring' {
   if (reduceMotion) {
-    opacityAnimation.setValue(0);
+    opacity.value = 0;
     onFinish();
     return 'snap';
   }
 
-  const effectsSpring = toRawSpring(theme.motion.spring.fast.effects);
-
-  Animated.spring(opacityAnimation, {
-    toValue: 0,
-    ...effectsSpring,
-    useNativeDriver: true,
-  }).start(onFinish);
+  opacity.value = withSpring(
+    0,
+    toRawSpring(theme.motion.spring.fast.effects),
+    (finished) => {
+      'worklet';
+      if (finished) {
+        runOnJS(onFinish)();
+      }
+    }
+  );
 
   return 'spring';
 }

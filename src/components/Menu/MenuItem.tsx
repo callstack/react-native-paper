@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {
+  Platform,
   StyleSheet,
   View,
+  type Role,
   type GestureResponderEvent,
   type PressableAndroidRippleConfig,
   type StyleProp,
@@ -9,7 +11,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { useMenuItemLayout, useMenuRoot } from './context';
+import { useMenuItemPosition, useMenuRoot } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
@@ -55,6 +57,10 @@ export type Props = {
    * Whether the item is selected / active. Applies MD3 selected colors
    * (`tertiaryContainer` / `onTertiaryContainer` in the standard scheme)
    * and `corner.medium` rounding.
+   *
+   * On web this also marks the item as `menuitemradio`, so assistive tech
+   * announces it as one of a set. Pass `selected={false}` on the other items
+   * in the group so they share the role.
    */
   selected?: boolean;
   /**
@@ -147,10 +153,14 @@ export type Props = {
   /**
    * Indicates whether the element is checked. Accepts `true`, `false`,
    * or `'mixed'` for an indeterminate state.
+   *
+   * On web this marks the item as `menuitemcheckbox`, for options that toggle
+   * independently rather than forming a single-choice group.
    */
   'aria-checked'?: boolean | 'mixed';
   /**
-   * Indicates whether the element is selected.
+   * Indicates whether the element is selected. Prefer `selected`, which maps to
+   * `aria-checked` — the state assistive tech reads on a menu item.
    */
   'aria-selected'?: boolean;
   /**
@@ -203,7 +213,7 @@ const MenuItem = ({
   title,
   supportingText,
   trailingSupportingText,
-  selected = false,
+  selected: selectedProp,
   colorScheme: colorSchemeProp,
   disabled,
   roundedTop: roundedTopProp,
@@ -229,13 +239,30 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const layout = useMenuItemLayout();
   const root = useMenuRoot();
+  const position = useMenuItemPosition();
+  const selected = selectedProp ?? false;
 
-  const colorScheme =
-    colorSchemeProp ?? layout?.colorScheme ?? root?.colorScheme ?? 'standard';
-  const roundedTop = roundedTopProp ?? layout?.roundedTop ?? false;
-  const roundedBottom = roundedBottomProp ?? layout?.roundedBottom ?? false;
+  // Native keeps plain `menuitem`: Android drops the role description for a
+  // value it cannot map, and iOS ignores all of them anyway.
+  const role: Role = React.useMemo(() => {
+    if (Platform.OS !== 'web') {
+      return 'menuitem';
+    }
+    if (ariaChecked !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+      return 'menuitemcheckbox' as Role;
+    }
+    if (selectedProp !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+      return 'menuitemradio' as Role;
+    }
+    return 'menuitem';
+  }, [ariaChecked, selectedProp]);
+
+  const colorScheme = colorSchemeProp ?? root?.colorScheme ?? 'standard';
+  const roundedTop = roundedTopProp ?? position?.roundedTop ?? false;
+  const roundedBottom = roundedBottomProp ?? position?.roundedBottom ?? false;
 
   const {
     titleColor,
@@ -296,8 +323,6 @@ const MenuItem = ({
     roundedBottom,
   });
 
-  const isSelected = selected && !disabled;
-
   return (
     <TouchableRipple
       style={[
@@ -320,10 +345,10 @@ const MenuItem = ({
       testID={testID}
       background={background}
       aria-label={ariaLabel}
-      role="menuitem"
+      role={role}
       aria-disabled={disabled}
-      aria-checked={ariaChecked}
-      aria-selected={ariaSelected ?? (isSelected ? true : undefined)}
+      aria-checked={ariaChecked ?? (selected == null ? undefined : selected)}
+      aria-selected={ariaSelected}
       aria-busy={ariaBusy}
       aria-expanded={ariaExpanded}
       hitSlop={hitSlop}
@@ -418,7 +443,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'stretch',
     maxWidth: MAX_WIDTH - MenuTokens.sizes.itemPaddingHorizontal * 2,
   },
   leadingIcon: {
@@ -426,12 +450,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flexShrink: 1,
-    flexGrow: 0,
+    flexGrow: 1,
     justifyContent: 'center',
   },
   trailingSupporting: {
-    marginLeft: 'auto',
-    paddingLeft: 12,
+    marginLeft: 12,
     flexShrink: 0,
   },
   trailingIcon: {

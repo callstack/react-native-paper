@@ -30,16 +30,16 @@ const sizes = {
 
 const shapes = {
   /** Menu surface corner. Spec: corner.large (16dp). */
-  container: 'large' as ShapeToken,
+  container: 'large',
   /** First / last / selected item corners. Spec: corner.medium. */
-  item: 'medium' as ShapeToken,
-} as const;
+  item: 'medium',
+} as const satisfies Record<string, ShapeToken>;
 
 const typography = {
-  label: 'labelLarge' as TypescaleKey,
-  supporting: 'bodySmall' as TypescaleKey,
-  trailingSupporting: 'labelLarge' as TypescaleKey,
-} as const;
+  label: 'labelLarge',
+  supporting: 'bodySmall',
+  trailingSupporting: 'labelLarge',
+} as const satisfies Record<string, TypescaleKey>;
 
 /**
  * Standard (baseline) color scheme roles.
@@ -49,31 +49,31 @@ const typography = {
  */
 const standardColors = {
   /** MD3 menu container fill. */
-  container: 'surfaceContainerLow' as ColorRole,
-  label: 'onSurface' as ColorRole,
-  icon: 'onSurfaceVariant' as ColorRole,
-  supporting: 'onSurfaceVariant' as ColorRole,
-  selectedContainer: 'tertiaryContainer' as ColorRole,
-  selectedContent: 'onTertiaryContainer' as ColorRole,
-} as const;
+  container: 'surfaceContainerLow',
+  label: 'onSurface',
+  icon: 'onSurfaceVariant',
+  supporting: 'onSurfaceVariant',
+  selectedContainer: 'tertiaryContainer',
+  selectedContent: 'onTertiaryContainer',
+} as const satisfies Record<string, ColorRole>;
 
 /**
  * M3 Expressive vibrant menu roles.
  * @see https://m3.material.io/components/menus/specs
  */
 const vibrantColors = {
-  label: 'onTertiaryContainer' as ColorRole,
-  icon: 'onTertiaryContainer' as ColorRole,
-  supporting: 'onTertiaryContainer' as ColorRole,
+  label: 'onTertiaryContainer',
+  icon: 'onTertiaryContainer',
+  supporting: 'onTertiaryContainer',
   /** Vibrant menu surface uses tertiaryContainer instead of elevation surface. */
-  container: 'tertiaryContainer' as ColorRole,
-  selectedContainer: 'tertiary' as ColorRole,
-  selectedContent: 'onTertiary' as ColorRole,
-} as const;
+  container: 'tertiaryContainer',
+  selectedContainer: 'tertiary',
+  selectedContent: 'onTertiary',
+} as const satisfies Record<string, ColorRole>;
 
 const elevation = {
-  default: 2 as Elevation,
-} as const;
+  default: 2,
+} as const satisfies Record<string, Elevation>;
 
 export const MenuTokens = {
   sizes,

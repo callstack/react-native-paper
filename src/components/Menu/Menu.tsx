@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  Animated,
   Dimensions,
   Keyboard,
   Platform,
@@ -9,7 +8,7 @@ import {
   View,
   Pressable,
 } from 'react-native';
-import type { KeyboardEvent as RNKeyboardEvent } from 'react-native';
+import type { Animated, KeyboardEvent as RNKeyboardEvent } from 'react-native';
 import type {
   EmitterSubscription,
   LayoutRectangle,
@@ -19,10 +18,13 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Reanimated, {
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { composeMenuChildren } from './composeMenuChildren';
-import { MenuRootContext } from './context';
+import { MenuItemPositionContext, MenuRootContext } from './context';
 import MenuItem from './MenuItem';
 import { runMenuCloseMotion, runMenuOpenMotion } from './motion';
 import { MenuTokens, type MenuColorScheme } from './tokens';
@@ -35,6 +37,11 @@ import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
+
+const isMenuItemElement = (
+  child: React.ReactNode
+): child is React.ReactElement<React.ComponentProps<typeof MenuItem>> =>
+  React.isValidElement(child) && child.type === MenuItem;
 
 export type Props = {
   /**
@@ -238,8 +245,15 @@ const Menu = ({
     height: WINDOW_LAYOUT.height,
   });
 
-  const opacityAnimationRef = React.useRef(new Animated.Value(0));
-  const scaleAnimationRef = React.useRef(new Animated.ValueXY({ x: 0, y: 0 }));
+  // `show` / `hide` are memoised and drive state, so they must not be
+  // invalidated on every render. Shared values are already stable in
+  // Reanimated; pinning them keeps that true under the Jest mock too.
+  const opacityValue = useSharedValue(0);
+  const scaleValue = useSharedValue(0);
+  const motion = React.useRef({
+    opacity: opacityValue,
+    scale: scaleValue,
+  }).current;
   const keyboardHeightRef = React.useRef(0);
   const prevVisible = React.useRef<boolean | null>(null);
   const anchorRef = React.useRef<View | null>(null);
@@ -383,15 +397,20 @@ const Menu = ({
       // under reduce-motion. Shared helper so unit tests drive the real path.
       runMenuOpenMotion({
         reduceMotion,
-        scaleAnimation: scaleAnimationRef.current,
-        opacityAnimation: opacityAnimationRef.current,
-        menuWidth: menuLayoutResult.width,
-        menuHeight: menuLayoutResult.height,
+        scale: motion.scale,
+        opacity: motion.opacity,
         theme,
         onFinish: finish,
       });
     });
-  }, [anchor, attachListeners, measureAnchorLayout, reduceMotion, theme]);
+  }, [
+    anchor,
+    attachListeners,
+    measureAnchorLayout,
+    motion,
+    reduceMotion,
+    theme,
+  ]);
 
   const hide = React.useCallback(() => {
     removeListeners();
@@ -405,11 +424,11 @@ const Menu = ({
 
     runMenuCloseMotion({
       reduceMotion,
-      opacityAnimation: opacityAnimationRef.current,
+      opacity: motion.opacity,
       theme,
       onFinish: finish,
     });
-  }, [reduceMotion, removeListeners, theme]);
+  }, [motion, reduceMotion, removeListeners, theme]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {
@@ -430,8 +449,6 @@ const Menu = ({
   );
 
   React.useEffect(() => {
-    const opacityAnimation = opacityAnimationRef.current;
-    const scaleAnimation = scaleAnimationRef.current;
     keyboardDidShowListenerRef.current = Keyboard.addListener(
       'keyboardDidShow',
       keyboardDidShow
@@ -445,8 +462,6 @@ const Menu = ({
       removeListeners();
       keyboardDidShowListenerRef.current?.remove();
       keyboardDidHideListenerRef.current?.remove();
-      scaleAnimation.removeAllListeners();
-      opacityAnimation?.removeAllListeners();
     };
   }, [removeListeners, keyboardDidHide, keyboardDidShow]);
 
@@ -479,7 +494,8 @@ const Menu = ({
   });
 
   // We need to translate menu while animating scale to imitate transform origin for scale animation
-  const positionTransforms = [];
+  let translateXFrom = 0;
+  let translateYFrom = 0;
   let leftTransformation = left;
   let topTransformation =
     !isCoordinate(anchorRef.current) && anchorPosition === 'bottom'
@@ -488,24 +504,14 @@ const Menu = ({
 
   // Check if menu fits horizontally and if not align it to right.
   if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
-    positionTransforms.push({
-      translateX: scaleAnimationRef.current.x.interpolate({
-        inputRange: [0, menuLayout.width],
-        outputRange: [-(menuLayout.width / 2), 0],
-      }),
-    });
+    translateXFrom = -(menuLayout.width / 2);
 
     // Check if menu position has enough space from left side
     if (leftTransformation < SCREEN_INDENT) {
       leftTransformation = SCREEN_INDENT;
     }
   } else {
-    positionTransforms.push({
-      translateX: scaleAnimationRef.current.x.interpolate({
-        inputRange: [0, menuLayout.width],
-        outputRange: [menuLayout.width / 2, 0],
-      }),
-    });
+    translateXFrom = menuLayout.width / 2;
 
     leftTransformation += anchorLayout.width - menuLayout.width;
 
@@ -586,24 +592,14 @@ const Menu = ({
       // And bottom side of the screen has more space than top side
       topTransformation <= windowLayout.height - topTransformation)
   ) {
-    positionTransforms.push({
-      translateY: scaleAnimationRef.current.y.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [-((scrollableMenuHeight || menuLayout.height) / 2), 0],
-      }),
-    });
+    translateYFrom = -((scrollableMenuHeight || menuLayout.height) / 2);
 
     // Check if menu position has enough space from top side
     if (topTransformation < SCREEN_INDENT) {
       topTransformation = SCREEN_INDENT;
     }
   } else {
-    positionTransforms.push({
-      translateY: scaleAnimationRef.current.y.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [(scrollableMenuHeight || menuLayout.height) / 2, 0],
-      }),
-    });
+    translateYFrom = (scrollableMenuHeight || menuLayout.height) / 2;
 
     topTransformation +=
       anchorLayout.height - (scrollableMenuHeight || menuLayout.height);
@@ -626,24 +622,21 @@ const Menu = ({
   }
 
   const shadowMenuContainerStyle = {
-    opacity: opacityAnimationRef.current,
-    transform: [
-      {
-        scaleX: scaleAnimationRef.current.x.interpolate({
-          inputRange: [0, menuLayout.width],
-          outputRange: [0, 1],
-        }),
-      },
-      {
-        scaleY: scaleAnimationRef.current.y.interpolate({
-          inputRange: [0, menuLayout.height],
-          outputRange: [0, 1],
-        }),
-      },
-    ],
     borderRadius: getMenuContainerBorderRadius(theme),
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
+
+  const positionAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateXFrom * (1 - scaleValue.value) },
+      { translateY: translateYFrom * (1 - scaleValue.value) },
+    ],
+  }));
+
+  const surfaceAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: opacityValue.value,
+    transform: [{ scaleX: scaleValue.value }, { scaleY: scaleValue.value }],
+  }));
 
   const positionStyle = {
     top: isCoordinate(anchor)
@@ -656,15 +649,33 @@ const Menu = ({
 
   const pointerEvents = visible ? 'box-none' : 'none';
 
-  // Parent-owned layout context (no cloneElement). Type identity only for
-  // first/last detection — no displayName filtering. Wrappers keep working
-  // via explicit roundedTop/roundedBottom/colorScheme props.
-  const renderedChildren = composeMenuChildren({
-    children,
-    colorScheme,
-  });
-
   const rootContext = React.useMemo(() => ({ colorScheme }), [colorScheme]);
+
+  // Positional only, like `Card.Actions`. Nothing is injected into children —
+  // `colorScheme` comes from `MenuRootContext`, so wrappers keep working.
+  const items = React.Children.toArray(children);
+  const firstItemIndex = items.findIndex(isMenuItemElement);
+  const lastItemIndex = items.reduce(
+    (last, child, index) => (isMenuItemElement(child) ? index : last),
+    -1
+  );
+  const renderedChildren = items.map((child, index) => {
+    if (!isMenuItemElement(child)) {
+      return child;
+    }
+
+    return (
+      <MenuItemPositionContext.Provider
+        key={child.key ?? index}
+        value={{
+          roundedTop: index === firstItemIndex,
+          roundedBottom: index === lastItemIndex,
+        }}
+      >
+        {child}
+      </MenuItemPositionContext.Provider>
+    );
+  });
 
   const surfaceBackground = getMenuContainerColor({
     theme,
@@ -700,40 +711,44 @@ const Menu = ({
             onAccessibilityEscape={onDismiss}
             testID={`${testID}-view`}
           >
-            <Animated.View
+            <Reanimated.View
               pointerEvents={pointerEvents}
-              style={{
-                transform: positionTransforms,
-              }}
+              style={positionAnimatedStyle}
             >
-              <Surface
-                mode={mode}
+              <Reanimated.View
                 pointerEvents={pointerEvents}
-                style={[
-                  styles.shadowMenuContainer,
-                  shadowMenuContainerStyle,
-                  {
-                    backgroundColor: surfaceBackground,
-                    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
-                  },
-                  contentStyle,
-                ]}
-                elevation={elevation}
-                testID={`${testID}-surface`}
-                theme={theme}
-                container
+                style={surfaceAnimatedStyle}
               >
-                <MenuRootContext.Provider value={rootContext}>
-                  {(scrollableMenuHeight && (
-                    <ScrollView
-                      keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-                    >
-                      {renderedChildren}
-                    </ScrollView>
-                  )) || <React.Fragment>{renderedChildren}</React.Fragment>}
-                </MenuRootContext.Provider>
-              </Surface>
-            </Animated.View>
+                <Surface
+                  mode={mode}
+                  pointerEvents={pointerEvents}
+                  style={[
+                    styles.shadowMenuContainer,
+                    shadowMenuContainerStyle,
+                    {
+                      backgroundColor: surfaceBackground,
+                      paddingVertical:
+                        MenuTokens.sizes.containerPaddingVertical,
+                    },
+                    contentStyle,
+                  ]}
+                  elevation={elevation}
+                  testID={`${testID}-surface`}
+                  theme={theme}
+                  container
+                >
+                  <MenuRootContext.Provider value={rootContext}>
+                    {(scrollableMenuHeight && (
+                      <ScrollView
+                        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                      >
+                        {children}
+                      </ScrollView>
+                    )) || <React.Fragment>{renderedChildren}</React.Fragment>}
+                  </MenuRootContext.Provider>
+                </Surface>
+              </Reanimated.View>
+            </Reanimated.View>
           </View>
         </Portal>
       ) : null}

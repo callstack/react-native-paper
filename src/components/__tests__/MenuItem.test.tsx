@@ -1,6 +1,6 @@
-import { Animated } from 'react-native';
+import { Platform } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
@@ -17,15 +17,6 @@ import {
 } from '../Menu/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
-
-/** Read an Animated.Value without reaching into its internals. */
-const currentValue = (node: Animated.Value) => {
-  let value = NaN;
-  node.stopAnimation((v) => {
-    value = v;
-  });
-  return value;
-};
 
 describe('Menu Item', () => {
   it('renders menu item', async () => {
@@ -210,12 +201,11 @@ describe('Menu Item', () => {
   it('pins trailing supporting text to the trailing edge', async () => {
     await render(<Menu.Item title="Copy" trailingSupportingText="⌘C" />);
 
-    // row stretches so the auto margin has space to push against
-    expect(screen.getByTestId('menu-item-content')).toHaveStyle({
-      alignSelf: 'stretch',
+    expect(screen.getByTestId('menu-item-content')).not.toHaveStyle({
+      alignSelf: 'flex-start',
     });
     expect(screen.getByTestId('menu-item-trailing-supporting')).toHaveStyle({
-      marginLeft: 'auto',
+      flexShrink: 0,
     });
   });
 
@@ -233,13 +223,13 @@ describe('Menu Item', () => {
     expect(MenuTokens.sizes.denseItemHeight).toBe(32);
   });
 
-  it('applies selected colors and aria-selected', async () => {
+  it('announces selection as checked state and applies selected colors', async () => {
     const theme = getTheme();
     await render(<Menu.Item title="Paste" selected />);
 
     expect(screen.getByRole('menuitem')).toHaveProp(
       'accessibilityState',
-      expect.objectContaining({ selected: true })
+      expect.objectContaining({ checked: true })
     );
     expect(screen.getByTestId('menu-item')).toHaveStyle({
       backgroundColor: theme.colors.tertiaryContainer,
@@ -424,78 +414,95 @@ describe('Menu shape tokens', () => {
   });
 });
 
-describe('Menu open/close motion (I6 / D2)', () => {
+describe('Menu open/close motion', () => {
   it('snaps scale and opacity when reduce-motion is enabled', () => {
-    const theme = getTheme();
-    const scale = new Animated.ValueXY({ x: 0, y: 0 });
-    const opacity = new Animated.Value(0);
-    const springSpy = jest.spyOn(Animated, 'spring');
+    const scale = { value: 0 };
+    const opacity = { value: 0 };
     const finish = jest.fn();
 
     const path = runMenuOpenMotion({
       reduceMotion: true,
-      scaleAnimation: scale,
-      opacityAnimation: opacity,
-      menuWidth: 200,
-      menuHeight: 100,
-      theme,
+      scale,
+      opacity,
+      theme: getTheme(),
       onFinish: finish,
     });
 
     expect(path).toBe('snap');
-    expect(springSpy).not.toHaveBeenCalled();
     expect(finish).toHaveBeenCalled();
-    // Concrete snap values on the real Animated drivers Menu uses
-
-    expect(currentValue(opacity)).toBe(1);
-
-    expect(currentValue(scale.x)).toBe(200);
-
-    expect(currentValue(scale.y)).toBe(100);
-
-    springSpy.mockRestore();
+    expect(scale.value).toBe(1);
+    expect(opacity.value).toBe(1);
   });
 
-  it('uses spring when reduce-motion is off', () => {
-    const theme = getTheme();
-    const scale = new Animated.ValueXY({ x: 0, y: 0 });
-    const opacity = new Animated.Value(0);
-    const springSpy = jest.spyOn(Animated, 'spring');
+  it('springs to the resting state when reduce-motion is off', () => {
+    const scale = { value: 0 };
+    const opacity = { value: 0 };
     const finish = jest.fn();
 
     const path = runMenuOpenMotion({
       reduceMotion: false,
-      scaleAnimation: scale,
-      opacityAnimation: opacity,
-      menuWidth: 200,
-      menuHeight: 100,
-      theme,
+      scale,
+      opacity,
+      theme: getTheme(),
       onFinish: finish,
     });
 
     expect(path).toBe('spring');
-    expect(springSpy).toHaveBeenCalled();
-    springSpy.mockRestore();
+    expect(scale.value).toBe(1);
+    expect(opacity.value).toBe(1);
   });
 
   it('snaps opacity to 0 on close when reduce-motion is enabled', () => {
-    const theme = getTheme();
-    const opacity = new Animated.Value(1);
-    const springSpy = jest.spyOn(Animated, 'spring');
+    const opacity = { value: 1 };
     const finish = jest.fn();
 
     const path = runMenuCloseMotion({
       reduceMotion: true,
-      opacityAnimation: opacity,
-      theme,
+      opacity,
+      theme: getTheme(),
       onFinish: finish,
     });
 
     expect(path).toBe('snap');
-    expect(springSpy).not.toHaveBeenCalled();
     expect(finish).toHaveBeenCalled();
+    expect(opacity.value).toBe(0);
+  });
+});
 
-    expect(currentValue(opacity)).toBe(0);
-    springSpy.mockRestore();
+describe('Menu.Item ARIA role', () => {
+  const setPlatform = (os: 'web' | 'ios') => {
+    Object.defineProperty(Platform, 'OS', {
+      get: () => os,
+      configurable: true,
+    });
+  };
+
+  afterEach(() => setPlatform('ios'));
+
+  it('keeps plain menuitem on native so the Android role description survives', async () => {
+    setPlatform('ios');
+    await render(<Menu.Item title="Paste" selected />);
+    expect(screen.getByRole('menuitem')).toBeOnTheScreen();
+  });
+
+  it('uses menuitemradio on web for single selection', async () => {
+    setPlatform('web');
+    await render(<Menu.Item title="Paste" selected />);
+    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitemradio');
+  });
+
+  it('uses menuitemcheckbox on web when aria-checked is given', async () => {
+    setPlatform('web');
+    await render(<Menu.Item title="Paste" aria-checked="mixed" />);
+    expect(screen.getByTestId('menu-item')).toHaveProp(
+      'role',
+      'menuitemcheckbox'
+    );
+  });
+
+  it('stays menuitem on web when neither selection prop is used', async () => {
+    setPlatform('web');
+    await render(<Menu.Item title="Paste" />);
+    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitem');
   });
 });

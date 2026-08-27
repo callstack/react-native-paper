@@ -181,7 +181,7 @@ it('inherits the vibrant color scheme for items rendered inside a wrapper', asyn
   });
 });
 
-it('applies first/last medium corners via layout context (no cloneElement props required)', async () => {
+it('rounds first and last item corners from child order', async () => {
   const theme = getTheme();
   const radius = theme.shapes.corner.medium;
 
@@ -207,9 +207,72 @@ it('applies first/last medium corners via layout context (no cloneElement props 
     borderBottomLeftRadius: radius,
     borderBottomRightRadius: radius,
   });
-  // Middle item is not fully rounded on all corners
   expect(screen.getByTestId('mid-item')).not.toHaveStyle({
     borderRadius: radius,
+  });
+});
+
+it('applies medium corners from explicit roundedTop / roundedBottom props', async () => {
+  const theme = getTheme();
+  const radius = theme.shapes.corner.medium;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item
+          onPress={jest.fn()}
+          title="First"
+          testID="first-item"
+          roundedTop
+        />
+        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
+        <Menu.Item
+          onPress={jest.fn()}
+          title="Last"
+          testID="last-item"
+          roundedBottom
+        />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('first-item')).toHaveStyle({
+    borderTopLeftRadius: radius,
+    borderTopRightRadius: radius,
+  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({
+    borderBottomLeftRadius: radius,
+    borderBottomRightRadius: radius,
+  });
+  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
+    borderRadius: radius,
+  });
+});
+
+it('inherits the vibrant color scheme without a React.Children walk', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="nested-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('nested-item-title')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
   });
 });
 
