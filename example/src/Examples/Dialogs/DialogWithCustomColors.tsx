@@ -1,6 +1,4 @@
-import { Button, Portal, Dialog, Palette } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
+import { Dialog, Palette, Portal } from 'react-native-paper';
 
 const DialogWithCustomColors = ({
   visible,

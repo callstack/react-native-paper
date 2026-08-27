@@ -11,7 +11,6 @@ import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
 import { render, screen } from '../../test-utils';
-import Button from '../Button/Button';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -21,11 +20,9 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Dialog', () => {
-  it('should render passed children', async () => {
+  it('should render passed content', async () => {
     await render(
-      <Dialog visible testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Dialog visible testID="dialog" content="This is simple dialog" />
     );
 
     expect(screen.getByTestId('dialog')).toHaveTextContent(
@@ -36,9 +33,13 @@ describe('Dialog', () => {
   it('should call onDismiss when dismissable', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Dialog
+        visible
+        onDismiss={onDismiss}
+        dismissable
+        testID="dialog"
+        content="This is simple dialog"
+      />
     );
 
     await userEvent.press(screen.getByTestId('dialog-backdrop'));
@@ -52,9 +53,13 @@ describe('Dialog', () => {
   it('should not call onDismiss when dismissable is false', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Dialog
+        visible
+        onDismiss={onDismiss}
+        dismissable={false}
+        testID="dialog"
+        content="This is simple dialog"
+      />
     );
 
     await userEvent.press(screen.getByTestId('dialog-backdrop'));
@@ -75,9 +80,8 @@ describe('Dialog', () => {
         dismissable={false}
         dismissableBackButton
         testID="dialog"
-      >
-        <Text>This is simple dialog</Text>
-      </Dialog>
+        content="This is simple dialog"
+      />
     );
 
     await userEvent.press(screen.getByTestId('dialog-backdrop'));
@@ -96,31 +100,21 @@ describe('Dialog', () => {
 
   it('should apply top margin to the first child if the dialog is V3', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
-          <Text>Test Dialog Content</Text>
-        </Dialog.Title>
-      </Dialog>
+      <Dialog
+        visible
+        title={<Text testID="dialog-title">This is simple dialog</Text>}
+        content="This is simple dialog"
+      />
     );
 
-    expect(screen.getByTestId('dialog-content')).toHaveStyle({
+    const element = screen.getByTestId('dialog-title').parent;
+
+    expect(element).toHaveStyle({
       marginTop: 24,
     });
   });
 
-  it('should render a content', async () => {
-    await render(
-      <Dialog
-        visible
-        content="Content"
-        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
-      />
-    );
-
-    expect(screen.getByText('Content')).toBeOnTheScreen();
-  });
-
-  it('should render string content in a scroll area', async () => {
+  it('should render content in a scroll area', async () => {
     await render(
       <Dialog
         visible
@@ -141,7 +135,7 @@ describe('Dialog', () => {
     await render(
       <Dialog
         visible
-        content="Content"
+        content="This is simple dialog"
         actions={[
           {
             onPress: jest.fn(),
@@ -157,12 +151,17 @@ describe('Dialog', () => {
 });
 
 describe('DialogActions', () => {
-  it('should render passed children', async () => {
+  it('should render passed actions', async () => {
     await render(
-      <Dialog.Actions>
-        <Button testID="button-cancel">Cancel</Button>
-        <Button testID="button-ok">Ok</Button>
-      </Dialog.Actions>
+      <Dialog
+        visible
+        testID="dialog"
+        content="This is simple dialog"
+        actions={[
+          { testID: 'button-cancel', label: 'Cancel' },
+          { testID: 'button-ok', label: 'Ok' },
+        ]}
+      />
     );
 
     expect(screen.getByTestId('button-cancel')).toBeOnTheScreen();
@@ -171,36 +170,42 @@ describe('DialogActions', () => {
 
   it('should apply default styles', async () => {
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Dialog.Actions>
+      <Dialog
+        visible
+        testID="dialog"
+        content="This is simple dialog"
+        actions={[
+          { testID: 'button-cancel', label: 'Cancel' },
+          { testID: 'button-ok', label: 'Ok' },
+        ]}
+      />
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
+    const buttonCancelParent = screen.getByTestId('button-cancel').parent;
+    const buttonOkParent = screen.getByTestId('button-ok').parent;
 
-    expect(dialogActionsContainer).toHaveStyle({
-      paddingBottom: 24,
-      paddingHorizontal: 24,
-    });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(buttonCancelParent).toHaveStyle({ marginRight: 8 });
+    expect(buttonOkParent).toHaveStyle({ marginRight: 0 });
   });
 
   it('should apply custom styles', async () => {
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
-      </Dialog.Actions>
+      <Dialog
+        visible
+        testID="dialog"
+        content="This is simple dialog"
+        actions={[
+          { testID: 'button-cancel', label: 'Cancel', style: styles.spacing },
+          { testID: 'button-ok', label: 'Ok', style: styles.noSpacing },
+        ]}
+      />
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
+    const buttonCancel = screen.getByTestId('button-cancel').parent;
+    const buttonOk = screen.getByTestId('button-ok').parent;
 
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(buttonCancel).toHaveStyle({ marginRight: 8 });
+    expect(buttonOk).toHaveStyle({ marginRight: 0 });
   });
 });
 

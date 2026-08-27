@@ -6,7 +6,6 @@ import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 import {
   Badge,
-  Button,
   Dialog,
   Drawer,
   Palette,
@@ -242,9 +241,11 @@ function DrawerItems() {
         </>
       )}
       <Portal>
-        <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
-          <Dialog.Title>Changing to RTL</Dialog.Title>
-          <Dialog.Content>
+        <Dialog
+          visible={showRTLDialog}
+          onDismiss={_handleDismissRTLDialog}
+          title="Changing to RTL"
+          content={
             <Text variant="bodyMedium">
               Due to Expo Go limitations it is impossible to change RTL
               dynamically. To do so, you need to create a development build of
@@ -253,11 +254,9 @@ function DrawerItems() {
               <Text variant="labelMedium">app.json</Text> within{' '}
               <Text variant="labelMedium">example</Text> directory.
             </Text>
-            <Dialog.Actions>
-              <Button onPress={_handleDismissRTLDialog}>Ok</Button>
-            </Dialog.Actions>
-          </Dialog.Content>
-        </Dialog>
+          }
+          actions={[{ onPress: _handleDismissRTLDialog, label: 'Ok' }]}
+        />
       </Portal>
     </DrawerContentScrollView>
   );

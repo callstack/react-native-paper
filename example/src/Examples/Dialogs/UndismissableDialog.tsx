@@ -1,6 +1,4 @@
-import { Button, Portal, Dialog, Palette } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
+import { Dialog, Palette, Portal } from 'react-native-paper';
 
 const UndismissableDialog = ({
   visible,
@@ -10,18 +8,22 @@ const UndismissableDialog = ({
   close: () => void;
 }) => (
   <Portal>
-    <Dialog onDismiss={close} visible={visible} dismissable={false}>
-      <Dialog.Title>Alert</Dialog.Title>
-      <Dialog.Content>
-        <TextComponent>This is an undismissable dialog!!</TextComponent>
-      </Dialog.Content>
-      <Dialog.Actions>
-        <Button textColor={Palette.tertiary50} disabled>
-          Disagree
-        </Button>
-        <Button onPress={close}>Agree</Button>
-      </Dialog.Actions>
-    </Dialog>
+    <Dialog
+      onDismiss={close}
+      visible={visible}
+      dismissable={false}
+      title="Alert"
+      content="This is an undismissable dialog!!"
+      actions={[
+        {
+          label: 'Disagree',
+          onPress: close,
+          disabled: true,
+          textColor: Palette.tertiary50,
+        },
+        { label: 'Agree', onPress: close },
+      ]}
+    />
   </Portal>
 );
 
