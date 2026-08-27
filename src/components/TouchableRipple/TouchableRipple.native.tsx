@@ -140,14 +140,12 @@ const TouchableRipple = ({
     undefined
   );
 
-  // A caller hitSlop wins, so there is nothing to measure for. `null` counts as
-  // supplied, it means "no slop".
-  const shouldMeasure = hitSlop === undefined;
-
   // Gates whether the measurement is applied, not whether it happens. RN emits
-  // onLayout on mount and on layout change, so a touchable that mounts disabled
-  // gets no event once it is enabled and would stay small.
-  const shouldExpand = shouldMeasure && !disabled;
+  // onLayout on mount and on layout change, so a touchable that mounts disabled,
+  // or with a caller hitSlop, gets no event once that goes away and would stay
+  // small. A caller hitSlop wins while it is set; `null` counts as set, it means
+  // "no slop".
+  const shouldExpand = hitSlop === undefined && !disabled;
 
   const handleLayout = React.useCallback(
     (event: LayoutChangeEvent) => {
@@ -207,7 +205,7 @@ const TouchableRipple = ({
         ref={ref}
         disabled={disabled}
         hitSlop={shouldExpand ? expansion : hitSlop}
-        onLayout={shouldMeasure ? handleLayout : onLayout}
+        onLayout={handleLayout}
         style={[useForeground && styles.overflowHidden, style]}
         android_ripple={androidRipple}
       >
@@ -222,7 +220,7 @@ const TouchableRipple = ({
       ref={ref}
       disabled={disabled}
       hitSlop={shouldExpand ? expansion : hitSlop}
-      onLayout={shouldMeasure ? handleLayout : onLayout}
+      onLayout={handleLayout}
       style={[borderless && styles.overflowHidden, style]}
     >
       {({ pressed }) => (

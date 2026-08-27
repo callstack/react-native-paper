@@ -221,6 +221,28 @@ describe('TouchableRipple', () => {
       expect(hitSlopOf()).toEqual(expanded);
     });
 
+    it('expands once a caller-supplied hitSlop is taken away', async () => {
+      const Harness = ({ hitSlop }: { hitSlop?: number }) => (
+        <TouchableRipple
+          testID="touchable"
+          hitSlop={hitSlop}
+          onPress={() => {}}
+        >
+          <Text>Button</Text>
+        </TouchableRipple>
+      );
+      const view = await render(<Harness hitSlop={2} />);
+
+      await fireLayout(32, 32);
+      expect(hitSlopOf()).toBe(2);
+
+      // back to the default, with no second layout event to rely on
+      await act(async () => {
+        await view.rerender(<Harness />);
+      });
+      expect(hitSlopOf()).toEqual({ top: 8, bottom: 8, left: 8, right: 8 });
+    });
+
     it('still calls a caller-supplied onLayout', async () => {
       const onLayout = jest.fn();
       await renderTouchable({ onLayout });

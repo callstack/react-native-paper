@@ -10,6 +10,7 @@ import type {
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -147,16 +148,26 @@ const IconButton = ({
 
   const buttonSize = size + 2 * PADDING;
 
-  const {
-    borderWidth = mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius = buttonSize / 2,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const { borderWidth = mode === 'outlined' && !selected ? 1 : 0 } =
+    flattenedStyle;
+
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyle,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  const shapeStyles = {
+    borderRadius: buttonSize / 2,
+    ...borderRadiusStyles,
+  };
 
   const borderStyles = {
     borderWidth,
-    borderRadius,
     borderColor,
+    ...shapeStyles,
   };
 
   return (
@@ -181,7 +192,8 @@ const IconButton = ({
           pointerEvents="none"
           style={[
             StyleSheet.absoluteFill,
-            { backgroundColor, opacity: backgroundOpacity, borderRadius },
+            { backgroundColor, opacity: backgroundOpacity },
+            shapeStyles,
           ]}
         />
       )}
@@ -192,7 +204,7 @@ const IconButton = ({
         aria-label={ariaLabel}
         style={[
           styles.touchable,
-          { borderRadius },
+          shapeStyles,
           // The Surface used to clip the ripple, so the touchable does it now.
           // Native only: its own overflow does not clip its hitSlop, but on web
           // it would clip the touch target, where the container already clips.
