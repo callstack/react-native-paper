@@ -149,13 +149,7 @@ type AppbarFlexibleImageHeadline = AppbarWrittenHeadline &
 
 type AppbarBaseProps = Omit<
   ViewProps,
-  | 'accessibilityLabel'
-  | 'accessibilityRole'
-  | 'accessible'
-  | 'aria-label'
-  | 'children'
-  | 'role'
-  | 'style'
+  'accessibilityLabel' | 'accessibilityRole' | 'children' | 'style'
 > & {
   /** Optional leading button. */
   leadingButton?: AppbarLeadingButton;
