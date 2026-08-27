@@ -1,8 +1,4 @@
-import { StyleSheet } from 'react-native';
-
-import { Button, Dialog, Palette } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
+import { Dialog, Palette } from 'react-native-paper';
 
 const DialogWithIcon = ({
   visible,
@@ -10,32 +6,22 @@ const DialogWithIcon = ({
 }: {
   visible: boolean;
   close: () => void;
-}) => {
-  return (
-    <Dialog onDismiss={close} visible={visible}>
-      <Dialog.Icon icon="alert" />
-      <Dialog.Title style={styles.title}>Dialog with Icon</Dialog.Title>
-      <Dialog.Content>
-        <TextComponent>
-          This is a dialog with new component called DialogIcon. When icon is
-          displayed you should center the header.
-        </TextComponent>
-      </Dialog.Content>
-      <Dialog.Actions>
-        <Button mode="text" onPress={close} textColor={Palette.error50}>
-          Disagree
-        </Button>
-        <Button mode="text" onPress={close}>
-          Agree
-        </Button>
-      </Dialog.Actions>
-    </Dialog>
-  );
-};
+}) => (
+  <Dialog
+    onDismiss={close}
+    visible={visible}
+    icon="alert"
+    title="Dialog with Icon"
+    content="This is a dialog with a component called DialogIcon. When the icon is displayed, the title is centered automatically."
+    actions={[
+      {
+        label: 'Disagree',
+        onPress: close,
+        textColor: Palette.error50,
+      },
+      { label: 'Agree', onPress: close },
+    ]}
+  />
+);
 
-const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-  },
-});
 export default DialogWithIcon;

@@ -23,16 +23,6 @@ export type Props = ViewProps & {
  *
  *   const hideDialog = () => setVisible(false);
  *
- *   // Before
- *   return (
- *     <Dialog visible={visible} onDismiss={hideDialog}>
- *       <Dialog.Content>
- *         <Text variant="bodyMedium">This is simple dialog</Text>
- *       </Dialog.Content>
- *     </Dialog>
- *   );
- *
- * 	 // V6 and later
  *   return (
  *     <Portal>
  *       <Dialog visible={visible} onDismiss={hideDialog} content="This is simple dialog" />

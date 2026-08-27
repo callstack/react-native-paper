@@ -19,7 +19,7 @@ import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
 import Text from '../Typography/Text';
 
-type CommonProps = {
+export type Props = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
@@ -125,19 +125,6 @@ const renderChildren = (children: React.ReactNode) => {
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  *
- * ## Recommended props
- *
- * | Prop | Type | Description |
- * | --- | --- | --- |
- * | `icon` | `IconSource` | Icon rendered through `Dialog.Icon`. |
- * | `title` | `ReactNode` | Dialog title rendered through `Dialog.Title`. |
- * | `content` | `ReactNode` | Required dialog content. Non-empty strings use Material 3 supporting-text styles. |
- * | `actions` | `DialogActionsProps[]` | Action labels, press handlers, and optional Button props. |
- * | `scrollable` | `boolean` | Renders content through `Dialog.ScrollArea` and a `ScrollView`. |
- * | `contentProps` | `DialogContentProps` | Props forwarded to `Dialog.Content`. |
- * | `scrollAreaProps` | `DialogScrollAreaProps` | Props forwarded to `Dialog.ScrollArea`. |
- * | `scrollViewProps` | `ScrollViewProps` | Props forwarded to the `ScrollView`. |
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -169,35 +156,8 @@ const renderChildren = (children: React.ReactNode) => {
  *
  * export default MyComponent;
  * ```
- *
- * ## Compound composition
- *
- * `Dialog.Icon`, `Dialog.Title`, `Dialog.Content`, `Dialog.ScrollArea`, and
- * `Dialog.Actions` remain available for custom composition within `Dialog`.
- * Passing them through `children` is deprecated; prefer the props above.
- *
- * ## Migrating from children
- *
- * ```js
- * // Before
- * <Dialog visible={visible} onDismiss={hideDialog}>
- *   <Dialog.Title>Alert</Dialog.Title>
- *   <Dialog.Content><Text>Something happened.</Text></Dialog.Content>
- *   <Dialog.Actions><Button onPress={hideDialog}>Done</Button></Dialog.Actions>
- * </Dialog>
- *
- * // After
- * <Dialog
- *   visible={visible}
- *   onDismiss={hideDialog}
- *   title="Alert"
- *   content="Something happened."
- *   actions={[{ label: 'Done', onPress: hideDialog }]}
- * />
- * ```
  */
 const Dialog = ({
-  children,
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
@@ -210,7 +170,14 @@ const Dialog = ({
   theme: themeOverrides,
   testID,
   overlayTestID,
-  ...props
+  actions,
+  content,
+  icon,
+  scrollable,
+  contentProps,
+  scrollAreaProps,
+  scrollViewProps,
+  title,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -222,19 +189,6 @@ const Dialog = ({
   const titleId = React.useId();
 
   const _children = React.useMemo(() => {
-    if (children) return children;
-
-    const {
-      actions,
-      content,
-      icon,
-      scrollable,
-      contentProps,
-      scrollAreaProps,
-      scrollViewProps,
-      title,
-    } = props;
-
     const dialogIcon = icon ? (
       <DialogIcon icon={icon} key="dialogIcon" />
     ) : null;
@@ -288,7 +242,17 @@ const Dialog = ({
     ) : null;
 
     return [dialogIcon, dialogTitle, dialogContent, dialogActions];
-  }, [children, props, theme.colors.onSurfaceVariant]);
+  }, [
+    actions,
+    content,
+    contentProps,
+    icon,
+    scrollAreaProps,
+    scrollViewProps,
+    scrollable,
+    theme.colors.onSurfaceVariant,
+    title,
+  ]);
 
   return (
     <Modal

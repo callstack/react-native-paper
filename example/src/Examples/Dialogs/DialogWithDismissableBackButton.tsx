@@ -1,6 +1,4 @@
-import { Button, Dialog, Palette } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
+import { Dialog, Palette } from 'react-native-paper';
 
 const DialogWithDismissableBackButton = ({
   visible,
@@ -14,23 +12,18 @@ const DialogWithDismissableBackButton = ({
     visible={visible}
     dismissable={false}
     dismissableBackButton
-  >
-    <Dialog.Title>Alert</Dialog.Title>
-    <Dialog.Content>
-      <TextComponent>
-        This is an undismissable dialog, however you can use hardware back
-        button to close it!
-      </TextComponent>
-    </Dialog.Content>
-    <Dialog.Actions>
-      <Button mode="text" textColor={Palette.tertiary50} disabled>
-        Disagree
-      </Button>
-      <Button mode="text" onPress={close}>
-        Agree
-      </Button>
-    </Dialog.Actions>
-  </Dialog>
+    title="Alert"
+    content="This is an undismissable dialog, however you can use hardware back button to close it!"
+    actions={[
+      {
+        label: 'Disagree',
+        onPress: close,
+        disabled: true,
+        textColor: Palette.tertiary50,
+      },
+      { label: 'Agree', onPress: close },
+    ]}
+  />
 );
 
 export default DialogWithDismissableBackButton;
