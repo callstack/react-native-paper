@@ -32,20 +32,6 @@ export type Props = ViewProps & {
  *
  *   const hideDialog = () => setVisible(false);
  *
- * 	 // Before
- *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.ScrollArea>
- *           <ScrollView contentContainerStyle={{paddingHorizontal: 24}}>
- *             <Text>This is a scrollable area</Text>
- *           </ScrollView>
- *         </Dialog.ScrollArea>
- *       </Dialog>
- *     </Portal>
- *   );
- *
- * 	 // V6 and later
  *   return (
  *     <Portal>
  *       <Dialog visible={visible} onDismiss={hideDialog} scrollable content="This is a scrollable area" />

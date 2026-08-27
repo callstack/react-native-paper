@@ -1,6 +1,4 @@
-import { Button, Portal, Dialog, Palette } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
+import { Dialog, Palette, Portal } from 'react-native-paper';
 
 const DialogWithIcon = ({
   visible,
@@ -8,27 +6,24 @@ const DialogWithIcon = ({
 }: {
   visible: boolean;
   close: () => void;
-}) => {
-  return (
-    <Portal>
-      <Dialog onDismiss={close} visible={visible}>
-        <Dialog.Icon icon="alert" />
-        <Dialog.Title>Dialog with Icon</Dialog.Title>
-        <Dialog.Content>
-          <TextComponent>
-            This is a dialog with a component called DialogIcon. When the icon
-            is displayed, the title is centered automatically.
-          </TextComponent>
-        </Dialog.Content>
-        <Dialog.Actions>
-          <Button onPress={close} textColor={Palette.error50}>
-            Disagree
-          </Button>
-          <Button onPress={close}>Agree</Button>
-        </Dialog.Actions>
-      </Dialog>
-    </Portal>
-  );
-};
+}) => (
+  <Portal>
+    <Dialog
+      onDismiss={close}
+      visible={visible}
+      icon="alert"
+      title="Dialog with Icon"
+      content="This is a dialog with a component called DialogIcon. When the icon is displayed, the title is centered automatically."
+      actions={[
+        {
+          label: 'Disagree',
+          onPress: close,
+          textColor: Palette.error50,
+        },
+        { label: 'Agree', onPress: close },
+      ]}
+    />
+  </Portal>
+);
 
 export default DialogWithIcon;
