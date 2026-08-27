@@ -51,7 +51,7 @@ const AppbarButton = ({ button, leading = false, theme }: Props) => {
       selected={mode ? true : undefined}
       size={24}
       animated
-      style={[styles.button, width === 'wide' && styles.wideButton, style]}
+      style={[width === 'wide' && styles.wideButton, style]}
       theme={theme}
     />
   );
@@ -93,9 +93,6 @@ const MemoizedAppbarButton = React.memo(
 );
 
 const styles = StyleSheet.create({
-  button: {
-    margin: 4,
-  },
   wideButton: {
     width: 56,
   },
