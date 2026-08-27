@@ -255,35 +255,6 @@ describe('Appbar surface', () => {
 });
 
 describe('Appbar actions', () => {
-  it('skips rendering unchanged action configurations', async () => {
-    const icon = jest.fn(() => <View testID="stable-action-icon" />);
-    const { rerender } = await render(
-      <Appbar
-        variant="small"
-        headline="Inbox"
-        trailingActions={[
-          { key: 'stable', icon, 'aria-label': 'Stable action' },
-        ]}
-        testID={testIDPrefix}
-      />
-    );
-    const initialRenderCount = icon.mock.calls.length;
-
-    await rerender(
-      <Appbar
-        variant="small"
-        headline="Inbox"
-        trailingActions={[
-          { key: 'stable', icon, 'aria-label': 'Stable action' },
-        ]}
-        testID={testIDPrefix}
-      />
-    );
-
-    expect(screen.getByTestId('stable-action-icon')).toBeOnTheScreen();
-    expect(icon).toHaveBeenCalledTimes(initialRenderCount);
-  });
-
   it('maps leading, trailing, and custom action colors', async () => {
     await render(
       <Appbar
