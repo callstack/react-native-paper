@@ -55,7 +55,7 @@ const NavigationBarExample = () => {
 
           <SegmentedButtons
             value={variantMode}
-            onValueChange={(value) => setVariantMode(value as VariantMode)}
+            onValueChange={setVariantMode}
             buttons={[
               { value: 'auto', label: `Auto (${autoVariant})` },
               { value: 'stacked', label: 'Stacked' },

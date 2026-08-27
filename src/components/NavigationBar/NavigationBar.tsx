@@ -384,9 +384,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
   ) : (
     <Icon
       source={
-        (focused
-          ? route.focusedIcon
-          : (route.unfocusedIcon ?? route.focusedIcon)) as IconSource
+        focused ? route.focusedIcon : (route.unfocusedIcon ?? route.focusedIcon)
       }
       color={iconColor}
       size={ICON_SIZE}
@@ -597,7 +595,7 @@ const NavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, motion } = theme as Theme;
+  const { colors, motion } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const compact = compactProp ?? false;
 
@@ -672,8 +670,10 @@ const NavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
-    {}) as {
+  const {
+    backgroundColor: customBackground,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  } = (StyleSheet.flatten(style) || {}) as {
     elevation?: number;
     backgroundColor?: ColorValue;
   };
@@ -761,7 +761,7 @@ const NavigationBar = <Route extends BaseRoute>({
                   onLongPress={() => onTabLongPress?.(eventForIndex(index))}
                   activeIndicatorStyle={activeIndicatorStyle}
                   labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                  theme={theme as Theme}
+                  theme={theme}
                 />
               );
             })}

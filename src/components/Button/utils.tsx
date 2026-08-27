@@ -2,7 +2,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme, Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -46,7 +46,7 @@ const getButtonBackgroundColor = ({
 }: BaseProps & {
   customButtonColor?: ColorValue;
 }) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   if (customButtonColor && !disabled) {
     return customButtonColor;
   }
@@ -85,7 +85,7 @@ const getButtonTextColor = ({
   backgroundColor: ColorValue;
   dark?: boolean;
 }) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   if (customTextColor && !disabled) {
     return customTextColor;
   }
@@ -217,14 +217,16 @@ export const getButtonTouchableRippleStyle = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
-  (
-    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>
-  ).forEach((key) => {
-    const value = style[key as keyof ViewStyleBorderRadiusStyles];
+  const borderRadiusKeys =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>;
+
+  borderRadiusKeys.forEach((key) => {
+    const value = style[key];
     if (typeof value === 'number') {
       // Only subtract borderWidth if value is greater than 0
       const radius = value > 0 ? value - borderWidth : 0;
-      touchableRippleStyle[key as keyof ViewStyleBorderRadiusStyles] = radius;
+      touchableRippleStyle[key] = radius;
     }
   });
   return touchableRippleStyle;

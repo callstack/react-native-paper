@@ -13,7 +13,7 @@ import type {
 import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
 import type { ButtonMode } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, Theme, ThemeProp } from '../../types';
+import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
@@ -253,6 +253,7 @@ const Button = ({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
@@ -293,7 +294,7 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = (theme as Theme).fonts.labelLarge;
+  const font = theme.fonts.labelLarge;
 
   const textStyle = {
     color: textColor,
@@ -320,14 +321,7 @@ const Button = ({
       {...rest}
       ref={ref}
       testID={`${testID}-container`}
-      style={
-        [
-          styles.button,
-          compact && styles.compact,
-          buttonStyle,
-          style,
-        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-      }
+      style={[styles.button, compact && styles.compact, buttonStyle, style]}
       elevation={elevation}
       container
     >

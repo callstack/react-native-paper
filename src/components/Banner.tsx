@@ -11,7 +11,7 @@ import type { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
@@ -133,7 +133,7 @@ const Banner = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );

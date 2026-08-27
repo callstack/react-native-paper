@@ -36,6 +36,7 @@ export type PressableProps = Omit<
     | undefined;
 };
 
+// @ts-expect-error React Native Web adds focused and hovered callback state fields that React Native omits.
 export const Pressable: React.ForwardRefExoticComponent<
   PressableProps & React.RefAttributes<View>
-> = PressableNative as any;
+> = PressableNative;

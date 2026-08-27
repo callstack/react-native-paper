@@ -10,12 +10,7 @@ import type {
 
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type {
-  $RemoveChildren,
-  Theme,
-  TypescaleKey,
-  ThemeProp,
-} from '../../types';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -104,7 +99,7 @@ const AppbarContent = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme as Theme;
+  const { colors, fonts } = theme;
 
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
@@ -115,14 +110,14 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
-  const variant = modeTextVariant[mode] as TypescaleKey;
+  const variant = modeTextVariant[mode];
 
   const contentWrapperProps = {
-    pointerEvents: 'box-none' as ViewProps['pointerEvents'],
+    pointerEvents: 'box-none',
     style: [styles.container, modeContainerStyles[mode], style],
     testID,
     ...rest,
-  };
+  } satisfies ViewProps;
 
   const content = (
     <>

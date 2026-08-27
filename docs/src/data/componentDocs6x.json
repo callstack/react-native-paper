@@ -2899,10 +2899,19 @@
               "name": "Array",
               "elements": [
                 {
-                  "name": "string"
+                  "name": "union",
+                  "raw": "string | null",
+                  "elements": [
+                    {
+                      "name": "string"
+                    },
+                    {
+                      "name": "null"
+                    }
+                  ]
                 }
               ],
-              "raw": "Array<string>"
+              "raw": "Array<string | null>"
             },
             "description": "@internal"
           },
