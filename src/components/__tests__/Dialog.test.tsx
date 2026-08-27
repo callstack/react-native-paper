@@ -11,6 +11,7 @@ import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
 import { render, screen } from '../../test-utils';
+import Button from '../Button/Button';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -122,7 +123,6 @@ describe('Dialog', () => {
         scrollable
         scrollAreaProps={{ testID: 'dialog-scroll-area' }}
         scrollViewProps={{ testID: 'dialog-scroll-view' }}
-        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
       />
     );
 
@@ -137,11 +137,9 @@ describe('Dialog', () => {
         visible
         content="This is simple dialog"
         actions={[
-          {
-            onPress: jest.fn(),
-            label: 'Cancel',
-            testID: 'cancel-btn',
-          },
+          <Button key="cancel" onPress={() => jest.fn()} testID="cancel-btn">
+            Cancel
+          </Button>,
         ]}
       />
     );
@@ -158,8 +156,12 @@ describe('DialogActions', () => {
         testID="dialog"
         content="This is simple dialog"
         actions={[
-          { testID: 'button-cancel', label: 'Cancel' },
-          { testID: 'button-ok', label: 'Ok' },
+          <Button key="cancel" testID="button-cancel">
+            Cancel
+          </Button>,
+          <Button key="ok" testID="button-ok">
+            Ok
+          </Button>,
         ]}
       />
     );
@@ -170,42 +172,36 @@ describe('DialogActions', () => {
 
   it('should apply default styles', async () => {
     await render(
-      <Dialog
-        visible
-        testID="dialog"
-        content="This is simple dialog"
-        actions={[
-          { testID: 'button-cancel', label: 'Cancel' },
-          { testID: 'button-ok', label: 'Ok' },
-        ]}
-      />
+      <Dialog.Actions testID="dialog-actions">
+        <Button>Cancel</Button>
+        <Button>Ok</Button>
+      </Dialog.Actions>
     );
 
-    const buttonCancelParent = screen.getByTestId('button-cancel').parent;
-    const buttonOkParent = screen.getByTestId('button-ok').parent;
+    const dialogActionsContainer = screen.getByTestId('dialog-actions');
+    const dialogActionButtons = dialogActionsContainer.children;
 
-    expect(buttonCancelParent).toHaveStyle({ marginRight: 8 });
-    expect(buttonOkParent).toHaveStyle({ marginRight: 0 });
+    expect(dialogActionsContainer).toHaveStyle({
+      paddingBottom: 24,
+      paddingHorizontal: 24,
+    });
+    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
+    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
   });
 
   it('should apply custom styles', async () => {
     await render(
-      <Dialog
-        visible
-        testID="dialog"
-        content="This is simple dialog"
-        actions={[
-          { testID: 'button-cancel', label: 'Cancel', style: styles.spacing },
-          { testID: 'button-ok', label: 'Ok', style: styles.noSpacing },
-        ]}
-      />
+      <Dialog.Actions testID="dialog-actions">
+        <Button style={styles.spacing}>Cancel</Button>
+        <Button style={styles.noSpacing}>Ok</Button>
+      </Dialog.Actions>
     );
 
-    const buttonCancel = screen.getByTestId('button-cancel').parent;
-    const buttonOk = screen.getByTestId('button-ok').parent;
+    const dialogActionsContainer = screen.getByTestId('dialog-actions');
+    const dialogActionButtons = dialogActionsContainer.children;
 
-    expect(buttonCancel).toHaveStyle({ marginRight: 8 });
-    expect(buttonOk).toHaveStyle({ marginRight: 0 });
+    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
+    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
   });
 });
 

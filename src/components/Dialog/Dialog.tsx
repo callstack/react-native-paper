@@ -176,20 +176,7 @@ const Dialog = ({
     );
 
     const dialogActions = actions?.length ? (
-      <DialogActions key="dialogActions">
-        {actions.map(
-          ({ label, onPress: onActionPress, ...buttonProps }, index) => (
-            <Button
-              key={index}
-              mode="text"
-              {...buttonProps}
-              onPress={onActionPress}
-            >
-              {label}
-            </Button>
-          )
-        )}
-      </DialogActions>
+      <Dialog.Actions key="dialogActions">{actions}</Dialog.Actions>
     ) : null;
 
     return [dialogIcon, dialogTitle, dialogContent, dialogActions];

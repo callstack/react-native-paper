@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
@@ -48,26 +47,26 @@ export type Props = ViewProps & {
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => {
-  useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+const DialogActions = ({ children, style, theme, ...rest }: Props) => {
+  useInternalTheme(theme);
+
+  const actions = React.Children.toArray(children).filter((child) =>
+    React.isValidElement<{ style?: StyleProp<ViewStyle> }>(child)
+  );
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
-      {React.Children.map(props.children, (child, i) =>
-        React.isValidElement<DialogActionChildProps>(child)
-          ? React.cloneElement(child, {
-              compact: true,
-              uppercase: false,
-              style: [
-                {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
-                },
-                child.props.style,
-              ],
-            })
-          : child
-      )}
+    <View {...rest} style={[styles.v3Container, style]}>
+      {actions.map((child, index) => (
+        <View
+          key={child.key ?? index}
+          style={[
+            index === actions.length - 1 ? styles.itemLast : styles.item,
+            child.props.style,
+          ]}
+        >
+          {child}
+        </View>
+      ))}
     </View>
   );
 };
@@ -82,6 +81,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 24,
     paddingHorizontal: 24,
+  },
+  item: {
+    marginRight: 8,
+  },
+  itemLast: {
+    marginRight: 0,
   },
 });
 

@@ -6,6 +6,7 @@ import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 import {
   Badge,
+  Button,
   Dialog,
   Drawer,
   Palette,
@@ -255,7 +256,11 @@ function DrawerItems() {
               <Text variant="labelMedium">example</Text> directory.
             </Text>
           }
-          actions={[{ onPress: _handleDismissRTLDialog, label: 'Ok' }]}
+          actions={[
+            <Button key="ok-btn" onPress={_handleDismissRTLDialog}>
+              Ok
+            </Button>,
+          ]}
         />
       </Portal>
     </DrawerContentScrollView>
