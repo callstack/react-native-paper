@@ -3,12 +3,23 @@ import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import type { Elevation } from '../../types';
 import Button from '../Button/Button';
+import Divider from '../Divider';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
+
+/** Read an Animated.Value without reaching into its internals. */
+const currentValue = (node: Animated.Value) => {
+  let value = NaN;
+  node.stopAnimation((v) => {
+    value = v;
+  });
+  return value;
+};
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -78,7 +89,7 @@ it('renders menu with content styles', async () => {
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
+  it(`uses surfaceContainerLow fill independent of elevation value = ${elevation}`, async () => {
     const theme = getTheme();
 
     await render(
@@ -95,11 +106,192 @@ elevations.forEach((elevation) =>
       </Portal.Host>
     );
 
+    // C1: MD3 menu fill is surfaceContainerLow, not elevation.levelN
+    // (level2 is surfaceContainer tones in this theme — a different color).
     expect(screen.getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[`level${elevation}`],
+      backgroundColor: theme.colors.surfaceContainerLow,
     });
+    expect(theme.colors.surfaceContainerLow).not.toBe(
+      theme.colors.elevation.level2
+    );
   })
 );
+
+it('uses corner.large for the menu surface', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    borderRadius: theme.shapes.corner.large,
+  });
+});
+
+it('uses tertiaryContainer for vibrant color scheme', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    backgroundColor: theme.colors.tertiaryContainer,
+  });
+});
+
+it('inherits the vibrant color scheme for items rendered inside a wrapper', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="wrapped-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('wrapped-item-title')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
+  });
+});
+
+it('rounds first and last item corners from child order', async () => {
+  const theme = getTheme();
+  const radius = theme.shapes.corner.medium;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="First" testID="first-item" />
+        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
+        <Menu.Item onPress={jest.fn()} title="Last" testID="last-item" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('first-item')).toHaveStyle({
+    borderTopLeftRadius: radius,
+    borderTopRightRadius: radius,
+  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({
+    borderBottomLeftRadius: radius,
+    borderBottomRightRadius: radius,
+  });
+  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
+    borderRadius: radius,
+  });
+});
+
+it('applies medium corners from explicit roundedTop / roundedBottom props', async () => {
+  const theme = getTheme();
+  const radius = theme.shapes.corner.medium;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item
+          onPress={jest.fn()}
+          title="First"
+          testID="first-item"
+          roundedTop
+        />
+        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
+        <Menu.Item
+          onPress={jest.fn()}
+          title="Last"
+          testID="last-item"
+          roundedBottom
+        />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('first-item')).toHaveStyle({
+    borderTopLeftRadius: radius,
+    borderTopRightRadius: radius,
+  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({
+    borderBottomLeftRadius: radius,
+    borderBottomRightRadius: radius,
+  });
+  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
+    borderRadius: radius,
+  });
+});
+
+it('inherits the vibrant color scheme without a React.Children walk', async () => {
+  const theme = getTheme();
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="nested-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('nested-item-title')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
+  });
+});
+
+it('still renders Divider between items', async () => {
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="A" />
+        <Divider testID="menu-divider" />
+        <Menu.Item onPress={jest.fn()} title="B" />
+      </Menu>
+    </Portal.Host>
+  );
+  expect(screen.getByTestId('menu-divider')).toBeOnTheScreen();
+});
 
 it('uses the default anchorPosition of top', async () => {
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
@@ -210,26 +402,89 @@ it('respects anchorPosition bottom', async () => {
   dimensionsSpy.mockRestore();
 });
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
+it('snaps open without spring when reduce-motion is enabled', async () => {
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    // PaperProvider reduceMotion="on" is the real product path for reduce-motion.
+    return (
+      <PaperProvider reduceMotion="on">
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID="menu"
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </PaperProvider>
+    );
+  }
+
+  const { rerender } = await render(makeMenu(false));
+
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+    jest.runOnlyPendingTimers();
+    await Promise.resolve();
+  });
+
+  // Reduce-motion path must still position the menu and mount the surface.
+  await waitFor(() => {
+    expect(screen.getByTestId('menu-view')).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 100,
+    });
+  });
+
+  expect(screen.getByTestId('menu-surface')).toBeOnTheScreen();
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+
+it('applies animated contentStyle transform on the menu surface', async () => {
+  // Drive the real Menu + contentStyle path. Animated host-style updates from
+  // setValue are not reliably visible via toHaveStyle under the RN Jest
+  // environment (same limitation as other Surface consumers), so we re-render
+  // with a new Animated.Value after the driver advances the first value.
+  const initial = new Animated.Value(1);
+  const advanced = new Animated.Value(1);
+
+  const makeUi = (scale: Animated.Value) => (
     <Portal.Host>
       <Menu
         visible
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
         testID="menu"
-        contentStyle={[{ transform: [{ scale: value }] }]}
+        contentStyle={[{ transform: [{ scale }] }]}
       >
         <Menu.Item onPress={jest.fn()} title="Test" />
       </Menu>
     </Portal.Host>
   );
+
+  const { rerender } = await render(makeUi(initial));
   expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
-  Animated.timing(value, {
+  Animated.timing(advanced, {
     toValue: 1.5,
     useNativeDriver: false,
     duration: 200,
@@ -238,6 +493,16 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
+
+  // Animation driver (jest Animated.timing stub) must update the value.
+  expect(currentValue(advanced)).toBe(1.5);
+
+  // Re-mount contentStyle with the advanced value so Surface's render-time
+  // flatten reflects 1.5 on the real menu surface outer layer.
+  await act(async () => {
+    await rerender(makeUi(advanced));
+  });
+
   expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

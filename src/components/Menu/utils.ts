@@ -1,55 +1,142 @@
+import type { ColorValue, ViewStyle } from 'react-native';
+
+import { MenuTokens, type MenuColorScheme } from './tokens';
 import { tokens } from '../../theme/tokens';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-export const MIN_WIDTH = 112;
-export const MAX_WIDTH = 280;
+export const MIN_WIDTH = MenuTokens.sizes.minWidth;
+export const MAX_WIDTH = MenuTokens.sizes.maxWidth;
 
 type ContentProps = {
   iconWidth: number;
   leadingIcon?: IconSource;
   trailingIcon?: IconSource;
+  hasTrailingSupportingText?: boolean;
 };
 
 type ColorProps = {
   theme: InternalTheme;
   disabled?: boolean;
+  selected?: boolean;
+  colorScheme?: MenuColorScheme;
 };
 
-const getTitleColor = ({ theme }: ColorProps) => {
-  return theme.colors.onSurface;
-};
+const resolveRoles = (colorScheme: MenuColorScheme = 'standard') =>
+  colorScheme === 'vibrant'
+    ? MenuTokens.vibrantColors
+    : MenuTokens.standardColors;
 
-const getIconColor = ({ theme }: ColorProps) => {
-  return theme.colors.onSurfaceVariant;
-};
-
-export const getMenuItemColor = ({ theme, disabled }: ColorProps) => {
+export const getMenuItemColor = ({
+  theme,
+  disabled,
+  selected,
+  colorScheme = 'standard',
+}: ColorProps) => {
+  const roles = resolveRoles(colorScheme);
   const contentOpacity = disabled
     ? stateOpacity.disabled
     : stateOpacity.enabled;
 
+  const useSelected = Boolean(selected) && !disabled;
+
+  const titleColor: ColorValue = useSelected
+    ? theme.colors[roles.selectedContent]
+    : theme.colors[roles.label];
+
+  const iconColor: ColorValue = useSelected
+    ? theme.colors[roles.selectedContent]
+    : theme.colors[roles.icon];
+
+  const supportingColor: ColorValue = useSelected
+    ? theme.colors[roles.selectedContent]
+    : theme.colors[roles.supporting];
+
+  const containerColor: ColorValue | undefined = useSelected
+    ? theme.colors[roles.selectedContainer]
+    : undefined;
+
   return {
-    titleColor: getTitleColor({ theme, disabled }),
-    iconColor: getIconColor({ theme, disabled }),
+    titleColor,
+    iconColor,
+    supportingColor,
+    containerColor,
     contentOpacity,
   };
+};
+
+/**
+ * Resolve the menu surface background.
+ * Standard: MD3 `surfaceContainerLow` (not elevation.levelN — those map to
+ * different surfaceContainer* tones in this theme; elevation drives shadow only).
+ * Vibrant: tertiaryContainer.
+ */
+export const getMenuContainerColor = ({
+  theme,
+  colorScheme = 'standard',
+}: {
+  theme: InternalTheme;
+  /** @deprecated Ignored for fill; elevation still sets Surface shadow. Kept for call-site compat. */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
+  colorScheme?: MenuColorScheme;
+}): ColorValue => {
+  if (colorScheme === 'vibrant') {
+    return theme.colors[MenuTokens.vibrantColors.container];
+  }
+  return theme.colors[MenuTokens.standardColors.container];
 };
 
 export const getContentMaxWidth = ({
   iconWidth,
   leadingIcon,
   trailingIcon,
+  hasTrailingSupportingText,
 }: ContentProps) => {
-  if (leadingIcon && trailingIcon) {
-    return MAX_WIDTH - (2 * iconWidth + 24);
+  let reserved = 12;
+  if (leadingIcon) {
+    reserved += iconWidth + MenuTokens.sizes.iconLabelGap;
   }
-
-  if (leadingIcon || trailingIcon) {
-    return MAX_WIDTH - (iconWidth + 24);
+  if (trailingIcon) {
+    reserved += iconWidth + 12;
   }
-
-  return MAX_WIDTH - 12;
+  if (hasTrailingSupportingText) {
+    // Trailing supporting text shares trailing space; reserve a modest slot.
+    reserved += 48;
+  }
+  return MAX_WIDTH - reserved;
 };
+
+/**
+ * Per-item corner radii for first / last / selected items.
+ * Spec: corner.medium on the relevant corners; selected uses medium all around.
+ */
+export const getMenuItemBorderRadius = ({
+  theme,
+  selected,
+  roundedTop,
+  roundedBottom,
+}: {
+  theme: InternalTheme;
+  selected?: boolean;
+  roundedTop?: boolean;
+  roundedBottom?: boolean;
+}): ViewStyle => {
+  const medium = resolveCornerRadius(theme, MenuTokens.shapes.item);
+
+  if (selected) {
+    return { borderRadius: medium };
+  }
+
+  return {
+    borderTopLeftRadius: roundedTop ? medium : 0,
+    borderTopRightRadius: roundedTop ? medium : 0,
+    borderBottomLeftRadius: roundedBottom ? medium : 0,
+    borderBottomRightRadius: roundedBottom ? medium : 0,
+  };
+};
+
+export const getMenuContainerBorderRadius = (theme: InternalTheme): number =>
+  resolveCornerRadius(theme, MenuTokens.shapes.container);

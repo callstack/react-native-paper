@@ -10,10 +10,14 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
 
+Follows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container
+`corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label
+`labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.
 
 
 
-  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","without icons":"screenshots/menu-2.png"}}/>
+
+  <ScreenshotTabs screenshotData={{"with icons":"screenshots/menu-1.png","selected + supporting":"screenshots/menu-2.png","vibrant scheme":"screenshots/menu-3.png","bottom anchor":"screenshots/menu-4.png"}}/>
 
 
 ## Usage
@@ -41,10 +45,24 @@ const MyComponent = () => {
           visible={visible}
           onDismiss={closeMenu}
           anchor={<Button onPress={openMenu}>Show menu</Button>}>
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Menu.Item
+            leadingIcon="content-paste"
+            onPress={() => {}}
+            title="Paste"
+            supportingText="Insert clipboard"
+            trailingSupportingText="⌘V"
+            selected
+          />
+          <Menu.Item onPress={() => {}} title="Undo" />
           <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
+          <Menu.Item onPress={() => {}} title="Share" dense />
+        </Menu>
+        <Menu
+          visible={false}
+          onDismiss={() => {}}
+          colorScheme="vibrant"
+          anchor={<Button onPress={() => {}}>Vibrant</Button>}>
+          <Menu.Item onPress={() => {}} title="Featured" selected />
         </Menu>
       </View>
     </PaperProvider>
@@ -155,6 +173,14 @@ wrapping is not necessary if you use Paper's `Modal` instead.
 
 <div>
 
+### colorScheme
+
+</div>
+
+  <PropTable componentLink="Menu/Menu" prop="colorScheme" />
+
+<div>
+
 ### theme
 
 </div>
@@ -184,7 +210,7 @@ wrapping is not necessary if you use Paper's `Modal` instead.
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"-":{"backgroundColor":"theme.colors.elevation.level2"}}} componentName="Menu" />
+  <ThemeColorsTable themeColorsData={{"standard":{"backgroundColor":"theme.colors.surfaceContainerLow"},"vibrant":{"backgroundColor":"theme.colors.tertiaryContainer"},"selected item":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer"}}} componentName="Menu" />
 
 
 <span />

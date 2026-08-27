@@ -6386,12 +6386,12 @@
     },
     "FAB/Menu": {
       "filepath": "FAB/Menu.tsx",
-      "title": "Menu",
+      "title": "FAB.Menu",
       "description": "Floating action button menu. Wraps a trigger FAB; when `expanded` is true,\nitems appear stacked above and the trigger morphs into the spec'd close\nbutton (`shape: 'full'`, 56 dp, saturated role color).\n\nNo visual backdrop and no outside-tap dismiss — that matches the MD3 spec\nand lets the user keep interacting with the content underneath. Dismiss\nvia the close button or by tapping an item.\n\n## Usage\n```tsx\nconst [open, setOpen] = React.useState(false);\n\n<Portal>\n  <FAB.Menu\n    expanded={open}\n    onDismiss={() => setOpen(false)}\n    trigger={{ icon: 'plus', variant: 'primary', onPress: () => setOpen(true) }}\n    items={[\n      { icon: 'email', label: 'Send', onPress: () => {} },\n      { icon: 'bell', label: 'Remind', onPress: () => {} },\n    ]}\n  />\n</Portal>\n```",
-      "link": "menu",
+      "link": "fab-menu",
       "data": {
         "description": "Floating action button menu. Wraps a trigger FAB; when `expanded` is true,\nitems appear stacked above and the trigger morphs into the spec'd close\nbutton (`shape: 'full'`, 56 dp, saturated role color).\n\nNo visual backdrop and no outside-tap dismiss — that matches the MD3 spec\nand lets the user keep interacting with the content underneath. Dismiss\nvia the close button or by tapping an item.\n\n## Usage\n```tsx\nconst [open, setOpen] = React.useState(false);\n\n<Portal>\n  <FAB.Menu\n    expanded={open}\n    onDismiss={() => setOpen(false)}\n    trigger={{ icon: 'plus', variant: 'primary', onPress: () => setOpen(true) }}\n    items={[\n      { icon: 'email', label: 'Send', onPress: () => {} },\n      { icon: 'bell', label: 'Remind', onPress: () => {} },\n    ]}\n  />\n</Portal>\n```",
-        "displayName": "Menu",
+        "displayName": "FAB.Menu",
         "methods": [],
         "statics": [],
         "props": {
@@ -7788,7 +7788,8 @@
       "type": "component",
       "dependencies": [
         "src/components/FAB/Menu.tsx"
-      ]
+      ],
+      "group": "FAB"
     },
     "IconButton/IconButton": {
       "filepath": "IconButton/IconButton.tsx",
@@ -8945,10 +8946,10 @@
     "Menu/Menu": {
       "filepath": "Menu/Menu.tsx",
       "title": "Menu",
-      "description": "Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Button, Menu, Divider, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const openMenu = () => setVisible(true);\n\n  const closeMenu = () => setVisible(false);\n\n  return (\n    <PaperProvider>\n      <View\n        style={{\n          paddingTop: 50,\n          flexDirection: 'row',\n          justifyContent: 'center',\n        }}>\n        <Menu\n          visible={visible}\n          onDismiss={closeMenu}\n          anchor={<Button onPress={openMenu}>Show menu</Button>}>\n          <Menu.Item onPress={() => {}} title=\"Item 1\" />\n          <Menu.Item onPress={() => {}} title=\"Item 2\" />\n          <Divider />\n          <Menu.Item onPress={() => {}} title=\"Item 3\" />\n        </Menu>\n      </View>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```\n\n### Note\nWhen using `Menu` within a React Native's `Modal` component, you need to wrap all\n`Modal` contents within a `PaperProvider` in order for the menu to show. This\nwrapping is not necessary if you use Paper's `Modal` instead.",
+      "description": "Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.\n\nFollows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container\n`corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label\n`labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Button, Menu, Divider, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const openMenu = () => setVisible(true);\n\n  const closeMenu = () => setVisible(false);\n\n  return (\n    <PaperProvider>\n      <View\n        style={{\n          paddingTop: 50,\n          flexDirection: 'row',\n          justifyContent: 'center',\n        }}>\n        <Menu\n          visible={visible}\n          onDismiss={closeMenu}\n          anchor={<Button onPress={openMenu}>Show menu</Button>}>\n          <Menu.Item\n            leadingIcon=\"content-paste\"\n            onPress={() => {}}\n            title=\"Paste\"\n            supportingText=\"Insert clipboard\"\n            trailingSupportingText=\"⌘V\"\n            selected\n          />\n          <Menu.Item onPress={() => {}} title=\"Undo\" />\n          <Divider />\n          <Menu.Item onPress={() => {}} title=\"Share\" dense />\n        </Menu>\n        <Menu\n          visible={false}\n          onDismiss={() => {}}\n          colorScheme=\"vibrant\"\n          anchor={<Button onPress={() => {}}>Vibrant</Button>}>\n          <Menu.Item onPress={() => {}} title=\"Featured\" selected />\n        </Menu>\n      </View>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```\n\n### Note\nWhen using `Menu` within a React Native's `Modal` component, you need to wrap all\n`Modal` contents within a `PaperProvider` in order for the menu to show. This\nwrapping is not necessary if you use Paper's `Modal` instead.",
       "link": "menu",
       "data": {
-        "description": "Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Button, Menu, Divider, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const openMenu = () => setVisible(true);\n\n  const closeMenu = () => setVisible(false);\n\n  return (\n    <PaperProvider>\n      <View\n        style={{\n          paddingTop: 50,\n          flexDirection: 'row',\n          justifyContent: 'center',\n        }}>\n        <Menu\n          visible={visible}\n          onDismiss={closeMenu}\n          anchor={<Button onPress={openMenu}>Show menu</Button>}>\n          <Menu.Item onPress={() => {}} title=\"Item 1\" />\n          <Menu.Item onPress={() => {}} title=\"Item 2\" />\n          <Divider />\n          <Menu.Item onPress={() => {}} title=\"Item 3\" />\n        </Menu>\n      </View>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```\n\n### Note\nWhen using `Menu` within a React Native's `Modal` component, you need to wrap all\n`Modal` contents within a `PaperProvider` in order for the menu to show. This\nwrapping is not necessary if you use Paper's `Modal` instead.",
+        "description": "Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.\n\nFollows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container\n`corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label\n`labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Button, Menu, Divider, PaperProvider } from 'react-native-paper';\n\nconst MyComponent = () => {\n  const [visible, setVisible] = React.useState(false);\n\n  const openMenu = () => setVisible(true);\n\n  const closeMenu = () => setVisible(false);\n\n  return (\n    <PaperProvider>\n      <View\n        style={{\n          paddingTop: 50,\n          flexDirection: 'row',\n          justifyContent: 'center',\n        }}>\n        <Menu\n          visible={visible}\n          onDismiss={closeMenu}\n          anchor={<Button onPress={openMenu}>Show menu</Button>}>\n          <Menu.Item\n            leadingIcon=\"content-paste\"\n            onPress={() => {}}\n            title=\"Paste\"\n            supportingText=\"Insert clipboard\"\n            trailingSupportingText=\"⌘V\"\n            selected\n          />\n          <Menu.Item onPress={() => {}} title=\"Undo\" />\n          <Divider />\n          <Menu.Item onPress={() => {}} title=\"Share\" dense />\n        </Menu>\n        <Menu\n          visible={false}\n          onDismiss={() => {}}\n          colorScheme=\"vibrant\"\n          anchor={<Button onPress={() => {}}>Vibrant</Button>}>\n          <Menu.Item onPress={() => {}} title=\"Featured\" selected />\n        </Menu>\n      </View>\n    </PaperProvider>\n  );\n};\n\nexport default MyComponent;\n```\n\n### Note\nWhen using `Menu` within a React Native's `Modal` component, you need to wrap all\n`Modal` contents within a `PaperProvider` in order for the menu to show. This\nwrapping is not necessary if you use Paper's `Modal` instead.",
         "displayName": "Menu",
         "methods": [],
         "statics": [],
@@ -9093,10 +9094,10 @@
             "tsType": {
               "name": "Elevation"
             },
-            "description": "Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.\n@supported Available in v5.x with theme version 3",
+            "description": "Elevation level of the menu's content. Controls shadow only.\nDefault fill is MD3 `surfaceContainerLow` (standard scheme) regardless of\nelevation — Paper's `elevation.levelN` tones are not the same as that role.\nBy default equals `2`.\n@supported Available in v5.x with theme version 3",
             "defaultValue": {
-              "value": "2",
-              "computed": false
+              "value": "MenuTokens.elevation.default",
+              "computed": true
             }
           },
           "mode": {
@@ -9115,9 +9116,20 @@
                 }
               ]
             },
-            "description": "Mode of the menu's content.\n- `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.\n- `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.\n\n@supported Available in v5.x with theme version 3",
+            "description": "Mode of the menu's content.\n- `elevated` - Surface with a shadow; fill from MD3 menu container role.\n- `flat` - Surface without a shadow; same fill role.\n\n@supported Available in v5.x with theme version 3",
             "defaultValue": {
               "value": "'elevated'",
+              "computed": false
+            }
+          },
+          "colorScheme": {
+            "required": false,
+            "tsType": {
+              "name": "MenuColorScheme"
+            },
+            "description": "Color scheme for the menu surface and its items.\n- `standard` (default) — `surfaceContainerLow` fill + onSurface content\n- `vibrant` — M3 Expressive tertiary roles",
+            "defaultValue": {
+              "value": "'standard'",
               "computed": false
             }
           },
@@ -9157,10 +9169,10 @@
     "Menu/MenuItem": {
       "filepath": "Menu/MenuItem.tsx",
       "title": "Menu.Item",
-      "description": "A component to show a single list item inside a Menu.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Menu } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={{ flex: 1 }}>\n    <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n    <Menu.Item leadingIcon=\"undo\" onPress={() => {}} title=\"Undo\" />\n    <Menu.Item leadingIcon=\"content-cut\" onPress={() => {}} title=\"Cut\" disabled />\n    <Menu.Item leadingIcon=\"content-copy\" onPress={() => {}} title=\"Copy\" disabled />\n    <Menu.Item leadingIcon=\"content-paste\" onPress={() => {}} title=\"Paste\" />\n  </View>\n);\n\nexport default MyComponent;\n```",
+      "description": "A component to show a single list item inside a Menu.\n\nSupports MD3 selection (`selected`), supporting text, trailing supporting text,\nand dense layout.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Menu } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={{ flex: 1 }}>\n    <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n    <Menu.Item leadingIcon=\"undo\" onPress={() => {}} title=\"Undo\" />\n    <Menu.Item leadingIcon=\"content-cut\" onPress={() => {}} title=\"Cut\" disabled />\n    <Menu.Item leadingIcon=\"content-copy\" onPress={() => {}} title=\"Copy\" disabled />\n    <Menu.Item\n      leadingIcon=\"content-paste\"\n      onPress={() => {}}\n      title=\"Paste\"\n      supportingText=\"Insert clipboard\"\n      trailingSupportingText=\"⌘V\"\n      selected\n    />\n    <Menu.Item title=\"Share\" dense />\n  </View>\n);\n\nexport default MyComponent;\n```",
       "link": "menu-item",
       "data": {
-        "description": "A component to show a single list item inside a Menu.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Menu } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={{ flex: 1 }}>\n    <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n    <Menu.Item leadingIcon=\"undo\" onPress={() => {}} title=\"Undo\" />\n    <Menu.Item leadingIcon=\"content-cut\" onPress={() => {}} title=\"Cut\" disabled />\n    <Menu.Item leadingIcon=\"content-copy\" onPress={() => {}} title=\"Copy\" disabled />\n    <Menu.Item leadingIcon=\"content-paste\" onPress={() => {}} title=\"Paste\" />\n  </View>\n);\n\nexport default MyComponent;\n```",
+        "description": "A component to show a single list item inside a Menu.\n\nSupports MD3 selection (`selected`), supporting text, trailing supporting text,\nand dense layout.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Menu } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View style={{ flex: 1 }}>\n    <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n    <Menu.Item leadingIcon=\"undo\" onPress={() => {}} title=\"Undo\" />\n    <Menu.Item leadingIcon=\"content-cut\" onPress={() => {}} title=\"Cut\" disabled />\n    <Menu.Item leadingIcon=\"content-copy\" onPress={() => {}} title=\"Copy\" disabled />\n    <Menu.Item\n      leadingIcon=\"content-paste\"\n      onPress={() => {}}\n      title=\"Paste\"\n      supportingText=\"Insert clipboard\"\n      trailingSupportingText=\"⌘V\"\n      selected\n    />\n    <Menu.Item title=\"Share\" dense />\n  </View>\n);\n\nexport default MyComponent;\n```",
         "displayName": "Menu.Item",
         "methods": [],
         "statics": [],
@@ -9172,6 +9184,22 @@
               "raw": "React.ReactNode"
             },
             "description": "Title text for the `MenuItem`."
+          },
+          "supportingText": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Optional supporting text rendered under the title (`bodySmall`)."
+          },
+          "trailingSupportingText": {
+            "required": false,
+            "tsType": {
+              "name": "ReactReactNode",
+              "raw": "React.ReactNode"
+            },
+            "description": "Optional trailing supporting text (`labelLarge`), e.g. a keyboard shortcut."
           },
           "leadingIcon": {
             "required": false,
@@ -9187,6 +9215,20 @@
             },
             "description": "@supported Available in v5.x with theme version 3\n\nTrailing icon to display for the `MenuItem`."
           },
+          "selected": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Whether the item is selected / active. Applies MD3 selected colors\n(`tertiaryContainer` / `onTertiaryContainer` in the standard scheme)\nand `corner.medium` rounding.\n\nOn web this also marks the item as `menuitemradio`, so assistive tech\nannounces it as one of a set. Pass `selected={false}` on the other items\nin the group so they share the role."
+          },
+          "colorScheme": {
+            "required": false,
+            "tsType": {
+              "name": "MenuColorScheme"
+            },
+            "description": "Color scheme for the item. Inherited from parent `Menu` when omitted.\n- `standard` (default)\n- `vibrant` — M3 Expressive tertiary roles"
+          },
           "disabled": {
             "required": false,
             "tsType": {
@@ -9200,6 +9242,20 @@
               "name": "boolean"
             },
             "description": "@supported Available in v5.x with theme version 3\n\nSets min height with densed layout."
+          },
+          "roundedTop": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Round the top corners (`corner.medium`). Used for the first item in a menu.\nPrefer letting the parent `Menu` set this via context when possible."
+          },
+          "roundedBottom": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Round the bottom corners (`corner.medium`). Used for the last item in a menu."
           },
           "background": {
             "required": false,
@@ -9236,6 +9292,28 @@
               "name": "number"
             },
             "description": "Specifies the largest possible scale a title font can reach.",
+            "defaultValue": {
+              "value": "1.5",
+              "computed": false
+            }
+          },
+          "supportingTextMaxFontSizeMultiplier": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Specifies the largest possible scale the supporting text font can reach.",
+            "defaultValue": {
+              "value": "1.5",
+              "computed": false
+            }
+          },
+          "trailingSupportingTextMaxFontSizeMultiplier": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "Specifies the largest possible scale the trailing supporting text font can reach.",
             "defaultValue": {
               "value": "1.5",
               "computed": false
@@ -9278,7 +9356,7 @@
               ],
               "raw": "StyleProp<ViewStyle>"
             },
-            "description": "Style that is passed to the content container, which wraps the title text."
+            "description": "Style that is passed to the content container."
           },
           "titleStyle": {
             "required": false,
@@ -9292,6 +9370,32 @@
               "raw": "StyleProp<TextStyle>"
             },
             "description": "Style that is passed to the Title element."
+          },
+          "supportingTextStyle": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "TextStyle"
+                }
+              ],
+              "raw": "StyleProp<TextStyle>"
+            },
+            "description": "Style that is passed to the supporting text element."
+          },
+          "trailingSupportingTextStyle": {
+            "required": false,
+            "tsType": {
+              "name": "StyleProp",
+              "elements": [
+                {
+                  "name": "TextStyle"
+                }
+              ],
+              "raw": "StyleProp<TextStyle>"
+            },
+            "description": "Style that is passed to the trailing supporting text element."
           },
           "theme": {
             "required": false,
@@ -9341,14 +9445,14 @@
                 }
               ]
             },
-            "description": "Indicates whether the element is checked. Accepts `true`, `false`,\nor `'mixed'` for an indeterminate state."
+            "description": "Indicates whether the element is checked. Accepts `true`, `false`,\nor `'mixed'` for an indeterminate state.\n\nOn web this marks the item as `menuitemcheckbox`, for options that toggle\nindependently rather than forming a single-choice group."
           },
           "aria-selected": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "Indicates whether the element is selected."
+            "description": "Indicates whether the element is selected. Prefer `selected`, which maps to\n`aria-checked` — the state assistive tech reads on a menu item."
           },
           "aria-busy": {
             "required": false,

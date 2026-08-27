@@ -1,15 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type {
-  GestureResponderEvent,
-  PressableAndroidRippleConfig,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
+import {
+  Platform,
+  StyleSheet,
+  View,
+  type Role,
+  type GestureResponderEvent,
+  type PressableAndroidRippleConfig,
+  type StyleProp,
+  type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 
+import { useMenuItemPosition, useMenuRoot } from './context';
+import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
+  getMenuItemBorderRadius,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
@@ -28,6 +34,14 @@ export type Props = {
    */
   title: React.ReactNode;
   /**
+   * Optional supporting text rendered under the title (`bodySmall`).
+   */
+  supportingText?: React.ReactNode;
+  /**
+   * Optional trailing supporting text (`labelLarge`), e.g. a keyboard shortcut.
+   */
+  trailingSupportingText?: React.ReactNode;
+  /**
    * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
    *
    * Leading icon to display for the `MenuItem`.
@@ -40,6 +54,22 @@ export type Props = {
    */
   trailingIcon?: IconSource;
   /**
+   * Whether the item is selected / active. Applies MD3 selected colors
+   * (`tertiaryContainer` / `onTertiaryContainer` in the standard scheme)
+   * and `corner.medium` rounding.
+   *
+   * On web this also marks the item as `menuitemradio`, so assistive tech
+   * announces it as one of a set. Pass `selected={false}` on the other items
+   * in the group so they share the role.
+   */
+  selected?: boolean;
+  /**
+   * Color scheme for the item. Inherited from parent `Menu` when omitted.
+   * - `standard` (default)
+   * - `vibrant` — M3 Expressive tertiary roles
+   */
+  colorScheme?: MenuColorScheme;
+  /**
    * Whether the 'item' is disabled. A disabled 'item' is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -49,6 +79,15 @@ export type Props = {
    * Sets min height with densed layout.
    */
   dense?: boolean;
+  /**
+   * Round the top corners (`corner.medium`). Used for the first item in a menu.
+   * Prefer letting the parent `Menu` set this via context when possible.
+   */
+  roundedTop?: boolean;
+  /**
+   * Round the bottom corners (`corner.medium`). Used for the last item in a menu.
+   */
+  roundedBottom?: boolean;
   /**
    * Type of background drawabale to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -63,6 +102,14 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * Specifies the largest possible scale the supporting text font can reach.
+   */
+  supportingTextMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale the trailing supporting text font can reach.
+   */
+  trailingSupportingTextMaxFontSizeMultiplier?: number;
+  /**
    * Style that is passed to the root TouchableRipple container.
    * @optional
    */
@@ -72,13 +119,21 @@ export type Props = {
    */
   containerStyle?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the content container, which wraps the title text.
+   * Style that is passed to the content container.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * Style that is passed to the Title element.
    */
   titleStyle?: StyleProp<TextStyle>;
+  /**
+   * Style that is passed to the supporting text element.
+   */
+  supportingTextStyle?: StyleProp<TextStyle>;
+  /**
+   * Style that is passed to the trailing supporting text element.
+   */
+  trailingSupportingTextStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -98,10 +153,14 @@ export type Props = {
   /**
    * Indicates whether the element is checked. Accepts `true`, `false`,
    * or `'mixed'` for an indeterminate state.
+   *
+   * On web this marks the item as `menuitemcheckbox`, for options that toggle
+   * independently rather than forming a single-choice group.
    */
   'aria-checked'?: boolean | 'mixed';
   /**
-   * Indicates whether the element is selected.
+   * Indicates whether the element is selected. Prefer `selected`, which maps to
+   * `aria-checked` — the state assistive tech reads on a menu item.
    */
   'aria-selected'?: boolean;
   /**
@@ -117,6 +176,9 @@ export type Props = {
 /**
  * A component to show a single list item inside a Menu.
  *
+ * Supports MD3 selection (`selected`), supporting text, trailing supporting text,
+ * and dense layout.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -129,7 +191,15 @@ export type Props = {
  *     <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
  *     <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
  *     <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
- *     <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" />
+ *     <Menu.Item
+ *       leadingIcon="content-paste"
+ *       onPress={() => {}}
+ *       title="Paste"
+ *       supportingText="Insert clipboard"
+ *       trailingSupportingText="⌘V"
+ *       selected
+ *     />
+ *     <Menu.Item title="Share" dense />
  *   </View>
  * );
  *
@@ -141,13 +211,21 @@ const MenuItem = ({
   trailingIcon,
   dense,
   title,
+  supportingText,
+  trailingSupportingText,
+  selected: selectedProp,
+  colorScheme: colorSchemeProp,
   disabled,
+  roundedTop: roundedTopProp,
+  roundedBottom: roundedBottomProp,
   background,
   onPress,
   style,
   containerStyle,
   contentStyle,
   titleStyle,
+  supportingTextStyle,
+  trailingSupportingTextStyle,
   testID = 'menu-item',
   'aria-label': ariaLabel,
   'aria-checked': ariaChecked,
@@ -156,36 +234,110 @@ const MenuItem = ({
   'aria-expanded': ariaExpanded,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
+  supportingTextMaxFontSizeMultiplier = 1.5,
+  trailingSupportingTextMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor, contentOpacity } = getMenuItemColor({
+  const root = useMenuRoot();
+  const position = useMenuItemPosition();
+  const selected = selectedProp ?? false;
+
+  // Native keeps plain `menuitem`: Android drops the role description for a
+  // value it cannot map, and iOS ignores all of them anyway.
+  const role: Role = React.useMemo(() => {
+    if (Platform.OS !== 'web') {
+      return 'menuitem';
+    }
+    if (ariaChecked !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+      return 'menuitemcheckbox' as Role;
+    }
+    if (selectedProp !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+      return 'menuitemradio' as Role;
+    }
+    return 'menuitem';
+  }, [ariaChecked, selectedProp]);
+
+  const colorScheme = colorSchemeProp ?? root?.colorScheme ?? 'standard';
+  const roundedTop = roundedTopProp ?? position?.roundedTop ?? false;
+  const roundedBottom = roundedBottomProp ?? position?.roundedBottom ?? false;
+
+  const {
+    titleColor,
+    iconColor,
+    supportingColor,
+    containerColor,
+    contentOpacity,
+  } = getMenuItemColor({
     theme,
     disabled,
+    selected,
+    colorScheme,
   });
-  const containerPadding = 12;
 
-  const iconWidth = 24;
+  const {
+    itemPaddingHorizontal,
+    iconSize,
+    iconLabelGap,
+    noLeadingIconStart,
+    itemHeight,
+    denseItemHeight,
+    minWidth,
+    maxWidth,
+  } = MenuTokens.sizes;
 
-  const minWidth = MIN_WIDTH - 12;
+  const hasSupportingText =
+    supportingText != null && typeof supportingText !== 'boolean';
+  const hasTrailingSupportingText =
+    trailingSupportingText != null &&
+    typeof trailingSupportingText !== 'boolean';
 
-  const maxWidth = getContentMaxWidth({
-    iconWidth,
+  const contentMaxWidth = getContentMaxWidth({
+    iconWidth: iconSize,
     leadingIcon,
     trailingIcon,
+    hasTrailingSupportingText,
   });
 
   const titleTextStyle = {
     color: titleColor,
-    ...theme.fonts.bodyLarge,
+    ...theme.fonts[MenuTokens.typography.label],
   };
+
+  const supportingTextStyleResolved = {
+    color: supportingColor,
+    ...theme.fonts[MenuTokens.typography.supporting],
+  };
+
+  const trailingSupportingTextStyleResolved = {
+    color: supportingColor,
+    ...theme.fonts[MenuTokens.typography.trailingSupporting],
+  };
+
+  const borderRadiusStyle = getMenuItemBorderRadius({
+    theme,
+    selected,
+    roundedTop,
+    roundedBottom,
+  });
 
   return (
     <TouchableRipple
       style={[
         styles.container,
-        { paddingHorizontal: containerPadding },
-        dense && styles.md3DenseContainer,
+        {
+          paddingHorizontal: itemPaddingHorizontal,
+          minWidth,
+          maxWidth,
+          minHeight: dense ? denseItemHeight : itemHeight,
+          ...(hasSupportingText || hasTrailingSupportingText
+            ? { paddingVertical: 8 }
+            : { height: dense ? denseItemHeight : itemHeight }),
+        },
+        borderRadiusStyle,
+        containerColor ? { backgroundColor: containerColor } : null,
         style,
       ]}
       onPress={onPress}
@@ -193,31 +345,41 @@ const MenuItem = ({
       testID={testID}
       background={background}
       aria-label={ariaLabel}
-      role="menuitem"
+      role={role}
       aria-disabled={disabled}
-      aria-checked={ariaChecked}
+      aria-checked={ariaChecked ?? (selected == null ? undefined : selected)}
       aria-selected={ariaSelected}
       aria-busy={ariaBusy}
       aria-expanded={ariaExpanded}
       hitSlop={hitSlop}
     >
-      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
+      <View
+        style={[styles.row, { opacity: contentOpacity }, containerStyle]}
+        testID={testID ? `${testID}-content` : undefined}
+      >
         {leadingIcon ? (
-          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
-            <Icon source={leadingIcon} size={24} color={iconColor} />
+          <View
+            style={[{ width: iconSize }, styles.leadingIcon]}
+            pointerEvents="box-none"
+          >
+            <Icon source={leadingIcon} size={iconSize} color={iconColor} />
           </View>
         ) : null}
         <View
           style={[
             styles.content,
-            { minWidth, maxWidth },
-            leadingIcon ? styles.md3LeadingIcon : styles.md3WithoutLeadingIcon,
+            {
+              maxWidth: contentMaxWidth,
+            },
+            leadingIcon
+              ? { marginLeft: iconLabelGap }
+              : { marginLeft: noLeadingIconStart },
             contentStyle,
           ]}
           pointerEvents="none"
         >
           <Text
-            variant="bodyLarge"
+            variant={MenuTokens.typography.label}
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-title`}
@@ -226,10 +388,42 @@ const MenuItem = ({
           >
             {title}
           </Text>
+          {hasSupportingText ? (
+            <Text
+              variant={MenuTokens.typography.supporting}
+              selectable={false}
+              numberOfLines={1}
+              testID={`${testID}-supporting`}
+              style={[supportingTextStyleResolved, supportingTextStyle]}
+              maxFontSizeMultiplier={supportingTextMaxFontSizeMultiplier}
+            >
+              {supportingText}
+            </Text>
+          ) : null}
         </View>
+        {hasTrailingSupportingText ? (
+          <Text
+            variant={MenuTokens.typography.trailingSupporting}
+            selectable={false}
+            numberOfLines={1}
+            testID={`${testID}-trailing-supporting`}
+            style={[
+              styles.trailingSupporting,
+              trailingSupportingTextStyleResolved,
+              trailingSupportingTextStyle,
+            ]}
+            maxFontSizeMultiplier={trailingSupportingTextMaxFontSizeMultiplier}
+            pointerEvents="none"
+          >
+            {trailingSupportingText}
+          </Text>
+        ) : null}
         {trailingIcon ? (
-          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
-            <Icon source={trailingIcon} size={24} color={iconColor} />
+          <View
+            style={[{ width: iconSize }, styles.trailingIcon]}
+            pointerEvents="box-none"
+          >
+            <Icon source={trailingIcon} size={iconSize} color={iconColor} />
           </View>
         ) : null}
       </View>
@@ -243,23 +437,29 @@ const styles = StyleSheet.create({
   container: {
     minWidth: MIN_WIDTH,
     maxWidth: MAX_WIDTH,
-    height: 48,
     justifyContent: 'center',
-  },
-  md3DenseContainer: {
-    height: 32,
+    overflow: 'hidden',
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
+    maxWidth: MAX_WIDTH - MenuTokens.sizes.itemPaddingHorizontal * 2,
+  },
+  leadingIcon: {
+    flexShrink: 0,
   },
   content: {
+    flexShrink: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
-  md3LeadingIcon: {
+  trailingSupporting: {
     marginLeft: 12,
+    flexShrink: 0,
   },
-  md3WithoutLeadingIcon: {
-    marginLeft: 4,
+  trailingIcon: {
+    marginLeft: 12,
+    flexShrink: 0,
   },
 });
 

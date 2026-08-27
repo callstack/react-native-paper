@@ -10,6 +10,9 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 A component to show a single list item inside a Menu.
 
+Supports MD3 selection (`selected`), supporting text, trailing supporting text,
+and dense layout.
+
 
 
 
@@ -28,7 +31,15 @@ const MyComponent = () => (
     <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
     <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
     <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
-    <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" />
+    <Menu.Item
+      leadingIcon="content-paste"
+      onPress={() => {}}
+      title="Paste"
+      supportingText="Insert clipboard"
+      trailingSupportingText="⌘V"
+      selected
+    />
+    <Menu.Item title="Share" dense />
   </View>
 );
 
@@ -51,6 +62,22 @@ export default MyComponent;
 
 <div>
 
+### supportingText
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="supportingText" />
+
+<div>
+
+### trailingSupportingText
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="trailingSupportingText" />
+
+<div>
+
 ### leadingIcon  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'icon' to 'leadingIcon' in v5.x</span></span>
 
 </div>
@@ -67,6 +94,22 @@ export default MyComponent;
 
 <div>
 
+### selected
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="selected" />
+
+<div>
+
+### colorScheme
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="colorScheme" />
+
+<div>
+
 ### disabled
 
 </div>
@@ -80,6 +123,22 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Menu/MenuItem" prop="dense" />
+
+<div>
+
+### roundedTop
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="roundedTop" />
+
+<div>
+
+### roundedBottom
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="roundedBottom" />
 
 <div>
 
@@ -104,6 +163,22 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Menu/MenuItem" prop="titleMaxFontSizeMultiplier" />
+
+<div>
+
+### supportingTextMaxFontSizeMultiplier
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="supportingTextMaxFontSizeMultiplier" />
+
+<div>
+
+### trailingSupportingTextMaxFontSizeMultiplier
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="trailingSupportingTextMaxFontSizeMultiplier" />
 
 <div>
 
@@ -136,6 +211,22 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Menu/MenuItem" prop="titleStyle" />
+
+<div>
+
+### supportingTextStyle
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="supportingTextStyle" />
+
+<div>
+
+### trailingSupportingTextStyle
+
+</div>
+
+  <PropTable componentLink="Menu/MenuItem" prop="trailingSupportingTextStyle" />
 
 <div>
 
@@ -208,7 +299,7 @@ export default MyComponent;
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"default":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant"},"disabled":{"textColor":"theme.colors.onSurfaceDisabled","iconColor":"theme.colors.onSurfaceDisabled"}}} componentName="Menu.Item" />
+  <ThemeColorsTable themeColorsData={{"default":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant","supportingColor":"theme.colors.onSurfaceVariant"},"selected":{"backgroundColor":"theme.colors.tertiaryContainer","textColor":"theme.colors.onTertiaryContainer","iconColor":"theme.colors.onTertiaryContainer"},"disabled":{"textColor":"theme.colors.onSurface","iconColor":"theme.colors.onSurfaceVariant","contentOpacity":"theme.state.opacity.disabled (0.38)"},"vibrant":{"textColor":"theme.colors.onTertiaryContainer","iconColor":"theme.colors.onTertiaryContainer"},"vibrant selected":{"backgroundColor":"theme.colors.tertiary","textColor":"theme.colors.onTertiary","iconColor":"theme.colors.onTertiary"}}} componentName="Menu.Item" />
 
 
 <span />
