@@ -6,7 +6,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": undefined,
+        "checked": false,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -67,7 +67,6 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -126,7 +125,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flexGrow": 0,
+              "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
             },
@@ -185,7 +184,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": undefined,
+        "checked": false,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -246,7 +245,6 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -305,7 +303,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flexGrow": 0,
+              "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
             },
@@ -364,7 +362,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": undefined,
+        "checked": false,
         "disabled": true,
         "expanded": undefined,
         "selected": undefined,
@@ -425,7 +423,6 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -484,7 +481,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flexGrow": 0,
+              "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
             },
@@ -543,7 +540,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": undefined,
+        "checked": false,
         "disabled": true,
         "expanded": undefined,
         "selected": undefined,
@@ -604,7 +601,6 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -663,7 +659,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flexGrow": 0,
+              "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
             },
@@ -722,7 +718,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": undefined,
+        "checked": false,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -783,7 +779,6 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "alignItems": "center",
-            "alignSelf": "stretch",
             "flexDirection": "row",
             "maxWidth": 256,
           },
@@ -799,7 +794,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "flexGrow": 0,
+              "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
             },

@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import { afterEach, describe, expect, it } from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
@@ -197,12 +199,11 @@ describe('Menu Item', () => {
   it('pins trailing supporting text to the trailing edge', async () => {
     await render(<Menu.Item title="Copy" trailingSupportingText="⌘C" />);
 
-    // row stretches so the auto margin has space to push against
-    expect(contentRow('Copy')).toHaveStyle({
-      alignSelf: 'stretch',
+    expect(contentRow('Copy')).not.toHaveStyle({
+      alignSelf: 'flex-start',
     });
     expect(screen.getByText('⌘C')).toHaveStyle({
-      marginLeft: 'auto',
+      flexShrink: 0,
     });
   });
 
@@ -220,7 +221,7 @@ describe('Menu Item', () => {
     expect(MenuTokens.sizes.denseItemHeight).toBe(32);
   });
 
-  it('applies selected colors and aria-selected', async () => {
+  it('announces selection as checked state and applies selected colors', async () => {
     const theme = LightTheme;
     await render(
       <Menu.Item title="Paste" selected testID="menu-item" onPress={() => {}} />
@@ -228,7 +229,7 @@ describe('Menu Item', () => {
 
     expect(screen.getByRole('menuitem')).toHaveProp(
       'accessibilityState',
-      expect.objectContaining({ selected: true })
+      expect.objectContaining({ checked: true })
     );
     expect(screen.getByTestId('menu-item')).toHaveStyle({
       backgroundColor: theme.colors.tertiaryContainer,
@@ -424,5 +425,54 @@ describe('Menu shape tokens', () => {
         roundedBottom: false,
       })
     ).toMatchObject({ borderRadius: radius });
+  });
+});
+
+describe('Menu.Item ARIA role', () => {
+  const setPlatform = (os: 'web' | 'ios') => {
+    Object.defineProperty(Platform, 'OS', {
+      get: () => os,
+      configurable: true,
+    });
+  };
+
+  afterEach(() => setPlatform('ios'));
+
+  it('keeps plain menuitem on native so the Android role description survives', async () => {
+    setPlatform('ios');
+    await render(<Menu.Item title="Paste" selected onPress={() => {}} />);
+    expect(screen.getByRole('menuitem')).toBeOnTheScreen();
+  });
+
+  it('uses menuitemradio on web for single selection', async () => {
+    setPlatform('web');
+    await render(
+      <Menu.Item title="Paste" selected testID="menu-item" onPress={() => {}} />
+    );
+    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitemradio');
+  });
+
+  it('uses menuitemcheckbox on web when aria-checked is given', async () => {
+    setPlatform('web');
+    await render(
+      <Menu.Item
+        title="Paste"
+        aria-checked="mixed"
+        testID="menu-item"
+        onPress={() => {}}
+      />
+    );
+    expect(screen.getByTestId('menu-item')).toHaveProp(
+      'role',
+      'menuitemcheckbox'
+    );
+  });
+
+  it('stays menuitem on web when neither selection prop is used', async () => {
+    setPlatform('web');
+    await render(
+      <Menu.Item title="Paste" testID="menu-item" onPress={() => {}} />
+    );
+    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitem');
   });
 });

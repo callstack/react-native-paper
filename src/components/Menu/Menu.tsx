@@ -29,8 +29,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
-import { composeMenuChildren } from './composeMenuChildren';
-import { MenuRootContext } from './context';
+import { MenuItemPositionContext, MenuRootContext } from './context';
 import MenuItem from './MenuItem';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
@@ -43,6 +42,11 @@ import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
+
+const isMenuItemElement = (
+  child: React.ReactNode
+): child is React.ReactElement<React.ComponentProps<typeof MenuItem>> =>
+  React.isValidElement(child) && child.type === MenuItem;
 
 export type Props = {
   /**
@@ -696,15 +700,33 @@ const Menu = ({
 
   const pointerEvents = visible ? 'box-none' : 'none';
 
-  // Parent-owned layout context (no cloneElement). Type identity only for
-  // first/last detection — no displayName filtering. Wrappers keep working
-  // via explicit roundedTop/roundedBottom/colorScheme props.
-  const renderedChildren = composeMenuChildren({
-    children,
-    colorScheme,
-  });
-
   const rootContext = React.useMemo(() => ({ colorScheme }), [colorScheme]);
+
+  // Positional only, like `Card.Actions`. Nothing is injected into children —
+  // `colorScheme` comes from `MenuRootContext`, so wrappers keep working.
+  const items = React.Children.toArray(children);
+  const firstItemIndex = items.findIndex(isMenuItemElement);
+  const lastItemIndex = items.reduce(
+    (last, child, index) => (isMenuItemElement(child) ? index : last),
+    -1
+  );
+  const renderedChildren = items.map((child, index) => {
+    if (!isMenuItemElement(child)) {
+      return child;
+    }
+
+    return (
+      <MenuItemPositionContext.Provider
+        key={child.key ?? index}
+        value={{
+          roundedTop: index === firstItemIndex,
+          roundedBottom: index === lastItemIndex,
+        }}
+      >
+        {child}
+      </MenuItemPositionContext.Provider>
+    );
+  });
 
   const surfaceBackground = getMenuContainerColor({
     theme,

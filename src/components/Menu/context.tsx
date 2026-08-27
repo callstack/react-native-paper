@@ -14,23 +14,22 @@ export const MenuRootContext = React.createContext<MenuRootContextValue | null>(
   null
 );
 
+export function useMenuRoot() {
+  return React.useContext(MenuRootContext);
+}
+
 /**
- * Per-item layout from the parent `Menu`.
- * Items prefer explicit props over these defaults. No `cloneElement`.
+ * Where an item sits in the menu, so first / last can round their outer
+ * corners. `Menu` derives it from child order; no props reach the children.
  */
-export type MenuItemLayoutContextValue = {
-  colorScheme: MenuColorScheme;
+export type MenuItemPositionContextValue = {
   roundedTop: boolean;
   roundedBottom: boolean;
 };
 
-export const MenuItemLayoutContext =
-  React.createContext<MenuItemLayoutContextValue | null>(null);
+export const MenuItemPositionContext =
+  React.createContext<MenuItemPositionContextValue | null>(null);
 
-export function useMenuItemLayout() {
-  return React.useContext(MenuItemLayoutContext);
-}
-
-export function useMenuRoot() {
-  return React.useContext(MenuRootContext);
+export function useMenuItemPosition() {
+  return React.useContext(MenuItemPositionContext);
 }
