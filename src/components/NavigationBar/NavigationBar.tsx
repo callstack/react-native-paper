@@ -24,6 +24,8 @@ import {
   colorRoles,
   ICON_LABEL_GAP,
   ICON_SIZE,
+  HORIZONTAL_INDICATOR_BORDER_RADIUS,
+  HORIZONTAL_INDICATOR_HEIGHT,
   INDICATOR_BORDER_RADIUS,
   INDICATOR_HEIGHT,
   INDICATOR_WIDTH,
@@ -41,6 +43,8 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { getStateLayer } from '../../theme/utils/state';
 import type { Theme, ThemeProp } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { splitStyles } from '../../utils/splitStyles';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
@@ -79,11 +83,23 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: ColorValue;
-  onHoverIn?: () => void;
-  onHoverOut?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
 };
+
+const rootLayoutStyleProperties: (keyof ViewStyle)[] = [
+  'position',
+  'alignSelf',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'start',
+  'end',
+  'flex',
+  'flexShrink',
+  'flexGrow',
+  'width',
+  'height',
+];
 
 export type Props<Route extends BaseRoute> = {
   /**
@@ -401,12 +417,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
     </View>
   );
 
-  const renderTabLabel = (labelStyle: StyleProp<TextStyle>) =>
+  const renderTabLabel = (
+    labelStyle: StyleProp<TextStyle>,
+    numberOfLines?: number
+  ) =>
     renderLabel ? (
       renderLabel({ route, focused, color: labelColor })
     ) : (
       <Text
         maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        numberOfLines={numberOfLines}
+        ellipsizeMode={numberOfLines ? 'tail' : undefined}
         variant="labelMedium"
         selectable={false}
         style={[labelStyle, { color: labelColor, ...font }]}
@@ -449,7 +470,10 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   const horizontalContent = (
     <View pointerEvents="none" style={styles.horizontalContainer}>
-      <View style={styles.horizontalItem}>
+      <View
+        testID={itemTestID ? `${itemTestID}-horizontal-item` : undefined}
+        style={styles.horizontalItem}
+      >
         <Animated.View
           testID={indicatorTestID}
           style={[
@@ -472,7 +496,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
           {icon}
           {tabBadge}
         </View>
-        {renderTabLabel(styles.horizontalLabel)}
+        {renderTabLabel(styles.horizontalLabel, 1)}
       </View>
     </View>
   );
@@ -489,13 +513,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
     onPressOut: () => setPressed(false),
     onHoverIn: () => setHovered(true),
     onHoverOut: () => setHovered(false),
-    onFocus: () => setKeyboardFocused(true),
+    onFocus: (event) => {
+      if (isKeyboardFocusEvent(event)) {
+        setKeyboardFocused(true);
+      }
+    },
     onBlur: () => setKeyboardFocused(false),
     testID: itemTestID,
     accessibilityLabel: getAccessibilityLabel({ route }),
     accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
     accessibilityState: { selected: focused },
-    style: styles.item,
+    style: horizontal ? styles.horizontalTouchable : styles.item,
     children: horizontal ? horizontalContent : stackedContent,
   });
 };
@@ -670,13 +698,16 @@ const NavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const {
-    backgroundColor: customBackground,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as {
-    elevation?: number;
-    backgroundColor?: ColorValue;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const [surfaceStyle, rootLayoutStyle] = splitStyles(
+    flattenedStyle,
+    (property) =>
+      rootLayoutStyleProperties.includes(property) ||
+      property.startsWith('margin')
+  );
+
+  const customBackground = surfaceStyle.backgroundColor;
 
   const backgroundColor = customBackground || colors.surfaceContainer;
 
@@ -703,6 +734,7 @@ const NavigationBar = <Route extends BaseRoute>({
     <Animated.View
       style={[
         styles.bar,
+        rootLayoutStyle,
         // When the keyboard hides the bar, slide it down by its own height and
         // absolutely position it so the content can sit below.
         keyboardHidesNavigationBar ? barAnimatedStyle : null,
@@ -716,8 +748,9 @@ const NavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
+      testID={`${testID}-container`}
     >
-      <Surface elevation={0} testID={testID} style={style} container>
+      <Surface elevation={0} testID={testID} style={surfaceStyle} container>
         <View
           style={[styles.barContent, { backgroundColor }]}
           testID={`${testID}-content`}
@@ -725,6 +758,9 @@ const NavigationBar = <Route extends BaseRoute>({
           <View
             style={[
               styles.items,
+              variant === 'horizontal' && labeled
+                ? styles.horizontalItems
+                : null,
               {
                 marginBottom: insets.bottom,
                 marginHorizontal: Math.max(insets.left, insets.right),
@@ -801,6 +837,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 0,
   },
+  horizontalTouchable: {
+    flexGrow: 0,
+    flexShrink: 1,
+    maxWidth: MAX_TAB_WIDTH,
+    paddingVertical: 0,
+  },
   iconContainer: {
     height: INDICATOR_HEIGHT,
     width: INDICATOR_HEIGHT,
@@ -859,6 +901,7 @@ const styles = StyleSheet.create({
     width: INDICATOR_WIDTH,
     height: INDICATOR_HEIGHT,
     borderRadius: INDICATOR_BORDER_RADIUS,
+    overflow: 'hidden',
   },
   horizontalContainer: {
     height: BAR_HEIGHT,
@@ -869,13 +912,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: INDICATOR_HEIGHT,
+    height: HORIZONTAL_INDICATOR_HEIGHT,
     paddingHorizontal: 16,
   },
   horizontalIndicator: {
-    borderRadius: INDICATOR_BORDER_RADIUS,
+    borderRadius: HORIZONTAL_INDICATOR_BORDER_RADIUS,
+    overflow: 'hidden',
   },
   horizontalLabel: {
+    flexShrink: 1,
     marginLeft: ICON_LABEL_GAP,
     textAlign: 'center',
     ...(Platform.OS === 'web'
@@ -883,5 +928,8 @@ const styles = StyleSheet.create({
           whiteSpace: 'nowrap',
         }
       : null),
+  },
+  horizontalItems: {
+    justifyContent: 'center',
   },
 });

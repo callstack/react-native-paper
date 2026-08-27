@@ -11,10 +11,12 @@ exports[`renders the horizontal (flexible) variant 1`] = `
         "left": 0,
         "right": 0,
       },
+      {},
       null,
       null,
     ]
   }
+  testID="bottom-navigation-bar-container"
 >
   <View
     collapsable={false}
@@ -71,6 +73,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                 "flexDirection": "row",
               },
               {
+                "justifyContent": "center",
+              },
+              {
                 "marginBottom": 0,
                 "marginHorizontal": 0,
               },
@@ -112,7 +117,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               {
-                "flex": 1,
+                "flexGrow": 0,
+                "flexShrink": 1,
+                "maxWidth": 168,
                 "paddingVertical": 0,
               }
             }
@@ -132,7 +139,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   {
                     "alignItems": "center",
                     "flexDirection": "row",
-                    "height": 32,
+                    "height": 56,
                     "justifyContent": "center",
                     "paddingHorizontal": 16,
                   }
@@ -149,7 +156,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       {
                         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -177,7 +185,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       null,
                     ]
@@ -258,7 +267,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   </View>
                 </View>
                 <Text
+                  ellipsizeMode="tail"
                   maxFontSizeMultiplier={1}
+                  numberOfLines={1}
                   selectable={false}
                   style={
                     [
@@ -279,6 +290,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         },
                         [
                           {
+                            "flexShrink": 1,
                             "marginLeft": 4,
                             "textAlign": "center",
                           },
@@ -333,7 +345,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               {
-                "flex": 1,
+                "flexGrow": 0,
+                "flexShrink": 1,
+                "maxWidth": 168,
                 "paddingVertical": 0,
               }
             }
@@ -353,7 +367,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   {
                     "alignItems": "center",
                     "flexDirection": "row",
-                    "height": 32,
+                    "height": 56,
                     "justifyContent": "center",
                     "paddingHorizontal": 16,
                   }
@@ -370,7 +384,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       {
                         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -398,7 +413,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       null,
                     ]
@@ -479,7 +495,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   </View>
                 </View>
                 <Text
+                  ellipsizeMode="tail"
                   maxFontSizeMultiplier={1}
+                  numberOfLines={1}
                   selectable={false}
                   style={
                     [
@@ -500,6 +518,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         },
                         [
                           {
+                            "flexShrink": 1,
                             "marginLeft": 4,
                             "textAlign": "center",
                           },
@@ -554,7 +573,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               {
-                "flex": 1,
+                "flexGrow": 0,
+                "flexShrink": 1,
+                "maxWidth": 168,
                 "paddingVertical": 0,
               }
             }
@@ -574,7 +595,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   {
                     "alignItems": "center",
                     "flexDirection": "row",
-                    "height": 32,
+                    "height": 56,
                     "justifyContent": "center",
                     "paddingHorizontal": 16,
                   }
@@ -591,7 +612,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       {
                         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -619,7 +641,8 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         "top": 0,
                       },
                       {
-                        "borderRadius": 16,
+                        "borderRadius": 28,
+                        "overflow": "hidden",
                       },
                       null,
                     ]
@@ -700,7 +723,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                   </View>
                 </View>
                 <Text
+                  ellipsizeMode="tail"
                   maxFontSizeMultiplier={1}
+                  numberOfLines={1}
                   selectable={false}
                   style={
                     [
@@ -721,6 +746,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                         },
                         [
                           {
+                            "flexShrink": 1,
                             "marginLeft": 4,
                             "textAlign": "center",
                           },

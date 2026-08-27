@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
@@ -56,6 +58,52 @@ it('renders the horizontal (flexible) variant', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('uses content-sized tabs and the expanded indicator in the horizontal variant', async () => {
+  await render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+      getTestID={({ route }) => route.key}
+    />
+  );
+
+  expect(screen.getByTestId('key-0')).toHaveStyle({
+    flexGrow: 0,
+    flexShrink: 1,
+    maxWidth: 168,
+  });
+  expect(
+    screen.getByTestId('bottom-navigation-bar-content-wrapper')
+  ).toHaveStyle({
+    justifyContent: 'center',
+  });
+  expect(screen.getByTestId('key-0-horizontal-item')).toHaveStyle({
+    height: 56,
+  });
+  expect(screen.getByTestId('key-0-active-indicator')).toHaveStyle({
+    borderRadius: 28,
+    overflow: 'hidden',
+  });
+  expect(screen.getByText('Route: 0')).toHaveProp('numberOfLines', 1);
+  expect(screen.getByText('Route: 0')).toHaveProp('ellipsizeMode', 'tail');
+});
+
+it('uses the expressive indicator width in the stacked variant', async () => {
+  await render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      getTestID={({ route }) => route.key}
+    />
+  );
+
+  expect(screen.getByTestId('key-0-active-indicator')).toHaveStyle({
+    width: 56,
+    height: 32,
+  });
+});
+
 it('falls back to icon-only when horizontal is combined with labeled=false', async () => {
   await render(
     <NavigationBar
@@ -105,6 +153,118 @@ it('renders MD3 state layers on hover, focus and press', async () => {
   expect(stateLayer()).toHaveStyle({ opacity: 0.1 });
   await fireEvent(screen.getByTestId('tab-b'), 'pressOut');
   expect(stateLayer()).toHaveStyle({ opacity: undefined });
+});
+
+it('clips the pressed state layer to the rounded indicator shape', async () => {
+  await render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          {
+            key: 'a',
+            title: 'Route: 0',
+            focusedIcon: 'magnify',
+            testID: 'tab-a',
+          },
+        ],
+      }}
+      onTabPress={jest.fn()}
+    />
+  );
+
+  const tab = screen.getByTestId('tab-a');
+  const stateLayer = screen.getByTestId('tab-a-state-layer');
+
+  await fireEvent(tab, 'pressIn');
+  expect(stateLayer).toHaveStyle({
+    width: 56,
+    height: 32,
+    borderRadius: 16,
+    overflow: 'hidden',
+    opacity: 0.1,
+  });
+});
+
+it('only shows the focus state layer for keyboard focus on web', async () => {
+  const platform = Platform.OS;
+  Platform.OS = 'web';
+  let rendered = false;
+
+  try {
+    await render(
+      <NavigationBar
+        navigationState={{
+          index: 0,
+          routes: [
+            {
+              key: 'a',
+              title: 'Route: 0',
+              focusedIcon: 'magnify',
+              testID: 'tab-a',
+            },
+            {
+              key: 'b',
+              title: 'Route: 1',
+              focusedIcon: 'camera',
+              testID: 'tab-b',
+            },
+          ],
+        }}
+        onTabPress={jest.fn()}
+      />
+    );
+    rendered = true;
+
+    const tab = screen.getByTestId('tab-b');
+    const stateLayer = screen.getByTestId('tab-b-state-layer');
+
+    await fireEvent(tab, 'hoverIn');
+    expect(stateLayer).toHaveStyle({ opacity: 0.08 });
+
+    await fireEvent(tab, 'focus', {
+      currentTarget: { matches: () => false },
+    });
+    expect(stateLayer).toHaveStyle({ opacity: 0.08 });
+
+    await fireEvent(tab, 'focus', {
+      currentTarget: { matches: () => true },
+    });
+    expect(stateLayer).toHaveStyle({ opacity: 0.1 });
+  } finally {
+    if (rendered) {
+      await screen.unmount();
+    }
+    Platform.OS = platform;
+  }
+});
+
+it('applies layout styles to the animated root and visual styles to the surface', async () => {
+  await render(
+    <NavigationBar
+      navigationState={createState(0, 3)}
+      onTabPress={jest.fn()}
+      style={{
+        position: 'absolute',
+        top: 12,
+        flex: 1,
+        backgroundColor: Palette.error40,
+      }}
+      testID="navigation-bar"
+    />
+  );
+
+  expect(screen.getByTestId('navigation-bar-container')).toHaveStyle({
+    position: 'absolute',
+    top: 12,
+    flex: 1,
+  });
+  expect(screen.getByTestId('navigation-bar')).toHaveStyle({
+    backgroundColor: Palette.error40,
+  });
+  expect(screen.getByTestId('navigation-bar')).not.toHaveStyle({
+    position: 'absolute',
+  });
 });
 
 it('colors the focused tab label with secondary and others with onSurfaceVariant', async () => {

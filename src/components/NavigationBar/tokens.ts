@@ -10,10 +10,14 @@ import type { ColorRole, TypescaleKey } from '../../theme/types';
 export const BAR_HEIGHT = 64;
 export const NO_LABEL_BAR_HEIGHT = 64;
 
-// Active indicator / state-layer pill (dp). Matches the M3 `large` corner (16).
-export const INDICATOR_WIDTH = 64;
+// Stacked active indicator / state-layer pill (dp).
+export const INDICATOR_WIDTH = 56;
 export const INDICATOR_HEIGHT = 32;
 export const INDICATOR_BORDER_RADIUS = 16;
+
+// Horizontal active indicator / state-layer pill (dp). Its width hugs content.
+export const HORIZONTAL_INDICATOR_HEIGHT = 56;
+export const HORIZONTAL_INDICATOR_BORDER_RADIUS = 28;
 
 // Icon + spacing (dp).
 export const ICON_SIZE = 24;
