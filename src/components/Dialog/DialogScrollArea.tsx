@@ -46,7 +46,7 @@ const DialogScrollArea = (props: Props) => {
   const theme = useInternalTheme(props.theme);
   const { colors } = theme;
   const borderStyles = {
-    borderColor: colors.outline,
+    borderColor: colors.outlineVariant,
     borderTopWidth: 1,
     borderBottomWidth: 1,
   };
