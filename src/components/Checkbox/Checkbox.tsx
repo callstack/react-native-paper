@@ -80,9 +80,10 @@ const {
 
 const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
 // Focus indicator is a circular ring at the 40dp state-layer boundary.
-// We don't apply `focusIndicator.outerOffset` here because the surrounding
-// `TouchableRipple borderless` clips overflow to the tap-target shape,
-// so a ring drawn outside the 40dp circle would be cropped.
+// We don't apply `focusIndicator.outerOffset`, so the ring stays inside the 40dp
+// circle. `TouchableRipple borderless` used to crop anything outside it; on web
+// it no longer does, since the touchable cannot clip without clipping the touch
+// target. Native still clips. Check both when revisiting the offset.
 const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
 const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
 

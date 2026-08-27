@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   slightlyRounded: {
     borderRadius: 4,
   },
+  cutCorner: {
+    borderTopLeftRadius: 0,
+  },
 });
 
 it('renders icon button by default', async () => {
@@ -82,6 +85,24 @@ it('renders icon button with small border radius', async () => {
 
   expect(screen.getByTestId('icon-button-container')).toHaveStyle({
     borderRadius: 4,
+  });
+});
+
+it('clips to a custom corner radius', async () => {
+  await render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      style={styles.cutCorner}
+    />
+  );
+
+  // The container stopped clipping so the touch target can escape it, so the
+  // touchable has to take the shape itself, corners included.
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
+    borderTopLeftRadius: 0,
   });
 });
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -10,6 +10,7 @@ import type {
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -147,16 +148,26 @@ const IconButton = ({
 
   const buttonSize = size + 2 * PADDING;
 
-  const {
-    borderWidth = mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius = buttonSize / 2,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const { borderWidth = mode === 'outlined' && !selected ? 1 : 0 } =
+    flattenedStyle;
+
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyle,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  const shapeStyles = {
+    borderRadius: buttonSize / 2,
+    ...borderRadiusStyles,
+  };
 
   const borderStyles = {
     borderWidth,
-    borderRadius,
     borderColor,
+    ...shapeStyles,
   };
 
   return (
@@ -182,6 +193,7 @@ const IconButton = ({
           style={[
             StyleSheet.absoluteFill,
             { backgroundColor, opacity: backgroundOpacity },
+            shapeStyles,
           ]}
         />
       )}
@@ -190,15 +202,18 @@ const IconButton = ({
         centered
         onPress={onPress}
         aria-label={ariaLabel}
-        style={[styles.touchable, contentStyle]}
+        style={[
+          styles.touchable,
+          shapeStyles,
+          // The Surface used to clip the ripple, so the touchable does it now.
+          // Native only: its own overflow does not clip its hitSlop, but on web
+          // it would clip the touch target, where the container already clips.
+          Platform.OS !== 'web' && styles.clipToShape,
+          contentStyle,
+        ]}
         role="button"
         aria-disabled={disabled}
         disabled={disabled}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
-        }
         testID={testID}
         {...rest}
       >
@@ -216,7 +231,9 @@ const IconButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
+    // No `overflow: 'hidden'`. An ancestor that clips also clips the touch
+    // target, which is why the hitSlop this component used to pass never
+    // applied. The overlay and the touchable clip themselves instead.
     margin: 6,
     elevation: 0,
   },
@@ -224,6 +241,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  clipToShape: {
+    overflow: 'hidden',
   },
 });
 
