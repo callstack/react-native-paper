@@ -193,7 +193,11 @@ describe('Dialog', () => {
       <Dialog
         visible
         content="Content"
-        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
+        actions={[
+          <Button key="ok" onPress={jest.fn()}>
+            Ok
+          </Button>,
+        ]}
       />
     );
 
@@ -208,7 +212,6 @@ describe('Dialog', () => {
         scrollable
         scrollAreaProps={{ testID: 'dialog-scroll-area' }}
         scrollViewProps={{ testID: 'dialog-scroll-view' }}
-        actions={[{ onPress: jest.fn(), label: 'Ok' }]}
       />
     );
 
@@ -223,11 +226,9 @@ describe('Dialog', () => {
         visible
         content="This is simple dialog"
         actions={[
-          {
-            onPress: jest.fn(),
-            label: 'Cancel',
-            testID: 'cancel-btn',
-          },
+          <Button key="cancel" onPress={() => jest.fn()} testID="cancel-btn">
+            Cancel
+          </Button>,
         ]}
       />
     );
@@ -244,8 +245,12 @@ describe('DialogActions', () => {
         testID="dialog"
         content="This is simple dialog"
         actions={[
-          { testID: 'button-cancel', label: 'Cancel' },
-          { testID: 'button-ok', label: 'Ok' },
+          <Button key="cancel" testID="button-cancel">
+            Cancel
+          </Button>,
+          <Button key="ok" testID="button-ok">
+            Ok
+          </Button>,
         ]}
       />
     );

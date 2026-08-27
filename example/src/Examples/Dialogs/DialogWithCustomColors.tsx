@@ -1,4 +1,4 @@
-import { Dialog, Palette, Text } from 'react-native-paper';
+import { Button, Dialog, Palette, Text } from 'react-native-paper';
 
 const DialogWithCustomColors = ({
   visible,
@@ -22,7 +22,11 @@ const DialogWithCustomColors = ({
           This is a dialog with custom colors
         </Text>
       }
-      actions={[{ label: 'Ok', onPress: close, textColor: Palette.primary95 }]}
+      actions={[
+        <Button key="ok-btn" onPress={close} textColor={Palette.primary95}>
+          Ok
+        </Button>,
+      ]}
     />
   );
 };
