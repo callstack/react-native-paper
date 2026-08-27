@@ -26,12 +26,10 @@ afterEach(() => {
 });
 
 describe('Dialog', () => {
-  it('renders passed children', async () => {
+  it('should render passed content', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible testID="dialog">
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog visible testID="dialog" content="This is simple dialog" />
       </Portal.Host>
     );
 
@@ -45,9 +43,12 @@ describe('Dialog', () => {
 
     await render(
       <Portal.Host>
-        <Dialog visible onDismiss={onDismiss} dismissable>
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -70,9 +71,8 @@ describe('Dialog', () => {
           onDismiss={onDismiss}
           dismissable={false}
           overlayTestID="backdrop"
-        >
-          <Text>This is simple dialog</Text>
-        </Dialog>
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -100,9 +100,8 @@ describe('Dialog', () => {
           dismissable={false}
           overlayTestID="backdrop"
           dismissableBackButton
-        >
-          <Text>This is simple dialog</Text>
-        </Dialog>
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -127,27 +126,29 @@ describe('Dialog', () => {
   it('does not add a top margin to a title-first dialog', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible>
-          <Dialog.Title testID="dialog-title">
-            <Text>Test Dialog Content</Text>
-          </Dialog.Title>
-        </Dialog>
+        <Dialog
+          visible
+          title={<Text testID="dialog-title">This is simple dialog</Text>}
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
-    expect(screen.getByTestId('dialog-title')).toHaveStyle({
-      marginTop: 0,
+    const element = screen.getByTestId('dialog-title').parent;
+
+    expect(element).toHaveStyle({
+      marginTop: 24,
     });
   });
 
   it('should keep the bottom padding on a content-first dialog', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible>
-          <Dialog.Content testID="dialog-content">
-            <Text>Test Dialog Content</Text>
-          </Dialog.Content>
-        </Dialog>
+        <Dialog
+          visible
+          content={<Text>Test Dialog Content</Text>}
+          contentProps={{ testID: 'dialog-content' }}
+        />
       </Portal.Host>
     );
 
@@ -156,50 +157,12 @@ describe('Dialog', () => {
     });
   });
 
-  it('should not add a top padding to an icon-first dialog', async () => {
-    await render(
-      <Portal.Host>
-        <Dialog visible>
-          <Dialog.Icon icon="alert" testID="dialog-icon" />
-        </Dialog>
-      </Portal.Host>
-    );
-
-    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
-      paddingTop: 0,
-    });
-  });
-
-  it('should preserve the icon-to-title spacing for an icon dialog', async () => {
-    await render(
-      <Portal.Host>
-        <Dialog visible>
-          <Dialog.Icon icon="alert" testID="dialog-icon" />
-          <Dialog.Title testID="dialog-title">
-            <Text>Test Dialog Content</Text>
-          </Dialog.Title>
-        </Dialog>
-      </Portal.Host>
-    );
-
-    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
-      marginBottom: 16,
-      paddingTop: 0,
-    });
-    expect(screen.getByTestId('dialog-title')).toHaveStyle({
-      marginTop: 0,
-    });
-  });
-
   it('uses the title as the accessible name on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
 
     await render(
       <Portal.Host>
-        <Dialog visible>
-          <Dialog.Title>Alert</Dialog.Title>
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog visible title="Alert" content="This is simple dialog" />
       </Portal.Host>
     );
 
@@ -209,9 +172,12 @@ describe('Dialog', () => {
   it('uses aria-label over the title as the accessible name', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible aria-label="Confirm deletion">
-          <Dialog.Title>Alert</Dialog.Title>
-        </Dialog>
+        <Dialog
+          visible
+          aria-label="Confirm deletion"
+          title="Alert"
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -255,7 +221,7 @@ describe('Dialog', () => {
     await render(
       <Dialog
         visible
-        content="Content"
+        content="This is simple dialog"
         actions={[
           {
             onPress: jest.fn(),
@@ -271,12 +237,17 @@ describe('Dialog', () => {
 });
 
 describe('DialogActions', () => {
-  it('renders passed children', async () => {
+  it('should render passed actions', async () => {
     await render(
-      <Dialog.Actions>
-        <Button testID="button-cancel">Cancel</Button>
-        <Button testID="button-ok">Ok</Button>
-      </Dialog.Actions>
+      <Dialog
+        visible
+        testID="dialog"
+        content="This is simple dialog"
+        actions={[
+          { testID: 'button-cancel', label: 'Cancel' },
+          { testID: 'button-ok', label: 'Ok' },
+        ]}
+      />
     );
 
     expect(screen.getByTestId('button-cancel')).toBeOnTheScreen();
