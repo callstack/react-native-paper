@@ -53,13 +53,6 @@
   },
   {
     "type": "dir",
-    "name": "ConnectedButtonGroup",
-    "label": "ConnectedButtonGroup",
-    "collapsible": true,
-    "collapsed": false
-  },
-  {
-    "type": "dir",
     "name": "DataTable",
     "label": "DataTable",
     "collapsible": true,
