@@ -194,6 +194,7 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
+        focusRing="inward"
         onPress={onPress}
         aria-label={ariaLabel}
         aria-disabled={disabled}

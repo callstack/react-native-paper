@@ -6,6 +6,10 @@ import type {
   ViewStyle,
   GestureResponderEvent,
   ColorValue,
+  Insets,
+  LayoutChangeEvent,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -14,17 +18,104 @@ import { getTouchableRippleColors } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
+
+const { minInteractiveSize } = tokens.md.sys.state;
+
+/**
+ * The underlay fills the touchable absolutely and has no radius of its own, so
+ * it paints square corners over a rounded one. A clipping ancestor used to hide
+ * that, and those ancestors have to stop clipping for the expansion to work.
+ */
+const getUnderlayShape = (style: StyleProp<ViewStyle>): ViewStyle => {
+  const flat = StyleSheet.flatten(style);
+
+  if (!flat) {
+    return {};
+  }
+
+  const {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  } = flat;
+
+  return {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  };
+};
+
+/**
+ * Slop needed to bring a rendered size up to `minInteractiveSize`. Expands
+ * outside the bounds rather than resizing, so a 40dp state layer keeps its 40dp
+ * and gains 4dp per side. Returns undefined when the size is already enough, so
+ * that case does not re-render.
+ * @see https://developer.android.com/develop/ui/compose/accessibility/api-defaults
+ */
+const getExpansion = (width: number, height: number): Insets | undefined => {
+  // A collapsed touchable would otherwise claim 24dp of slop around a point
+  // where nothing is drawn.
+  if (width === 0 || height === 0) {
+    return undefined;
+  }
+
+  const horizontal = Math.max(0, (minInteractiveSize - width) / 2);
+  const vertical = Math.max(0, (minInteractiveSize - height) / 2);
+
+  if (horizontal === 0 && vertical === 0) {
+    return undefined;
+  }
+
+  return {
+    top: vertical,
+    bottom: vertical,
+    left: horizontal,
+    right: horizontal,
+  };
+};
 
 export type Props = PressableProps & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS, which does not dispatch focus events for a
+   * `Pressable`.
+   */
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -46,6 +137,11 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  onLayout,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
@@ -62,6 +158,58 @@ const TouchableRipple = ({
   });
 
   const disabled = disabledProp || !hasPassedTouchHandler;
+
+  const ring = useFocusRing(disabled || focusRing === 'none');
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    ring.onFocus(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    ring.onBlur();
+  };
+  const ringStyles = toStyleList(
+    getFocusRingStyle(ring.focused, theme.colors.secondary, focusRing)
+  );
+
+  const [expansion, setExpansion] = React.useState<Insets | undefined>(
+    undefined
+  );
+
+  // Gates whether the measurement is applied, not whether it happens. RN emits
+  // onLayout on mount and on layout change, so a touchable that mounts disabled,
+  // or with a caller hitSlop, gets no event once that goes away and would stay
+  // small. A caller hitSlop wins while it is set; `null` counts as set, it means
+  // "no slop".
+  const shouldExpand = hitSlop === undefined && !disabled;
+
+  const handleLayout = React.useCallback(
+    (event: LayoutChangeEvent) => {
+      onLayout?.(event);
+
+      const { width, height } = event.nativeEvent.layout;
+      const next = getExpansion(width, height);
+
+      setExpansion((current) => {
+        // Nothing changed, so a big enough touchable does not re-render.
+        if (current === next) {
+          return current;
+        }
+        if (
+          current &&
+          next &&
+          current.top === next.top &&
+          current.bottom === next.bottom &&
+          current.left === next.left &&
+          current.right === next.right
+        ) {
+          return current;
+        }
+        return next;
+      });
+    },
+    [onLayout]
+  );
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -92,7 +240,11 @@ const TouchableRipple = ({
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        hitSlop={shouldExpand ? expansion : hitSlop}
+        onLayout={handleLayout}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={[useForeground && styles.overflowHidden, style, ...ringStyles]}
         android_ripple={androidRipple}
       >
         {React.Children.only(children)}
@@ -105,7 +257,11 @@ const TouchableRipple = ({
       {...rest}
       ref={ref}
       disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      hitSlop={shouldExpand ? expansion : hitSlop}
+      onLayout={handleLayout}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      style={[borderless && styles.overflowHidden, style, ...ringStyles]}
     >
       {({ pressed }) => (
         <>
@@ -114,6 +270,7 @@ const TouchableRipple = ({
               testID="touchable-ripple-underlay"
               style={[
                 styles.underlay,
+                getUnderlayShape(style),
                 { backgroundColor: calculatedUnderlayColor },
               ]}
             />

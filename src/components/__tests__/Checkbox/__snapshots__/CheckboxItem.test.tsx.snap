@@ -26,6 +26,7 @@ exports[`can render leading checkbox control 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -81,6 +82,7 @@ exports[`can render leading checkbox control 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -100,7 +102,6 @@ exports[`can render leading checkbox control 1`] = `
               "justifyContent": "center",
               "width": 40,
             },
-            undefined,
             undefined,
           ],
         ]
@@ -304,6 +305,7 @@ exports[`renders unchecked 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -397,6 +399,7 @@ exports[`renders unchecked 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -416,7 +419,6 @@ exports[`renders unchecked 1`] = `
               "justifyContent": "center",
               "width": 40,
             },
-            undefined,
             undefined,
           ],
         ]

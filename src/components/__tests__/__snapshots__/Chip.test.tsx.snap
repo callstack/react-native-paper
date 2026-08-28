@@ -64,6 +64,7 @@ exports[`renders chip with close button 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -204,11 +205,12 @@ exports[`renders chip with close button 1`] = `
     <View
       style={
         {
-          "alignItems": "center",
           "height": "100%",
-          "justifyContent": "center",
+          "maxWidth": "50%",
+          "minWidth": 26,
           "position": "absolute",
           "right": 0,
+          "width": 34,
         }
       }
     >
@@ -244,6 +246,18 @@ exports[`renders chip with close button 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         role="button"
+        style={
+          [
+            {
+              "height": "100%",
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
       >
         <View
           style={
@@ -256,11 +270,13 @@ exports[`renders chip with close button 1`] = `
                 "marginRight": 4,
               },
               {
+                "alignSelf": "flex-end",
                 "marginRight": 8,
                 "padding": 0,
               },
             ]
           }
+          testID="chip-close-icon"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -362,6 +378,7 @@ exports[`renders chip with custom close button 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -502,11 +519,12 @@ exports[`renders chip with custom close button 1`] = `
     <View
       style={
         {
-          "alignItems": "center",
           "height": "100%",
-          "justifyContent": "center",
+          "maxWidth": "50%",
+          "minWidth": 26,
           "position": "absolute",
           "right": 0,
+          "width": 34,
         }
       }
     >
@@ -542,6 +560,18 @@ exports[`renders chip with custom close button 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         role="button"
+        style={
+          [
+            {
+              "height": "100%",
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
       >
         <View
           style={
@@ -554,11 +584,13 @@ exports[`renders chip with custom close button 1`] = `
                 "marginRight": 4,
               },
               {
+                "alignSelf": "flex-end",
                 "marginRight": 8,
                 "padding": 0,
               },
             ]
           }
+          testID="chip-close-icon"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -660,6 +692,7 @@ exports[`renders chip with icon 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -865,6 +898,7 @@ exports[`renders chip with onPress 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -1025,6 +1059,7 @@ exports[`renders outlined disabled chip 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -1185,6 +1220,7 @@ exports[`renders selected chip 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

@@ -17,6 +17,11 @@ import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -169,6 +174,25 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
+/**
+ * Room the chip reserves on its right for the close button, which fills all of
+ * it, so the body stops here and the two divide the chip.
+ *
+ * MD3 splits the same way and does not give a chip's trailing action 48dp; in
+ * material-web it is 24x24 with no expansion. This column is wider than that and
+ * gets no vertical expansion, so the strips above and below belong to the body
+ * and a near miss activates the chip rather than deleting it.
+ * @see https://github.com/material-components/material-web/blob/main/chips/internal/_trailing-icon.scss
+ */
+const CLOSE_AFFORDANCE_WIDTH = 34;
+
+/**
+ * Floor for the clamp below. The glyph is 18dp and sits 8dp from the right, so
+ * under this it hangs over the chip body, and part of the visible icon would
+ * activate the chip instead of removing it.
+ */
+const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
+
 const Chip = ({
   mode = 'flat',
   children,
@@ -201,6 +225,7 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const closeFocusRing = useFocusRing(disabled);
   const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -273,7 +298,7 @@ const Chip = ({
         : 8 * multiplier,
   };
   const contentSpacings = {
-    paddingRight: onClose ? 34 : 0,
+    paddingRight: onClose ? CLOSE_AFFORDANCE_WIDTH : 0,
   };
   const labelTextStyle = {
     color: textColor,
@@ -299,6 +324,7 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
+        focusRing="inward"
         background={background}
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
@@ -399,8 +425,24 @@ const Chip = ({
             disabled={disabled}
             role="button"
             aria-label={closeIconAccessibilityLabel}
+            onFocus={closeFocusRing.onFocus}
+            onBlur={closeFocusRing.onBlur}
+            style={[
+              styles.closeButton,
+              { borderRadius },
+              ...toStyleList(
+                getFocusRingStyle(
+                  closeFocusRing.focused,
+                  theme.colors.secondary,
+                  'inward'
+                )
+              ),
+            ]}
           >
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+            <View
+              testID={`${testID}-close-icon`}
+              style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}
+            >
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -451,6 +493,10 @@ const styles = StyleSheet.create({
   md3CloseIcon: {
     marginRight: 8,
     padding: 0,
+    // `styles.icon` sets `alignSelf: 'center'`, which beats `alignItems` on the
+    // parent. Without this the glyph centres in the wider column and moves 4dp
+    // left.
+    alignSelf: 'flex-end',
   },
   md3LabelText: {
     textAlignVertical: 'center',
@@ -481,9 +527,19 @@ const styles = StyleSheet.create({
   closeButtonStyle: {
     position: 'absolute',
     right: 0,
+    width: CLOSE_AFFORDANCE_WIDTH,
+    // A chip narrower than this column would hand the whole thing to the close
+    // button. Never more than half, never less than the glyph needs; minWidth
+    // wins over maxWidth.
+    minWidth: CLOSE_AFFORDANCE_MIN_WIDTH,
+    maxWidth: '50%',
     height: '100%',
+  },
+  closeButton: {
+    width: '100%',
+    height: '100%',
+    // Vertical only. The glyph pins itself horizontally with `alignSelf`.
     justifyContent: 'center',
-    alignItems: 'center',
   },
   touchable: {
     width: '100%',

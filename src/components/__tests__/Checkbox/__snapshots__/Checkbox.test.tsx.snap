@@ -27,6 +27,7 @@ exports[`renders Checkbox with custom testID 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -47,7 +48,6 @@ exports[`renders Checkbox with custom testID 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -213,6 +213,7 @@ exports[`renders checked Checkbox with color 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -233,7 +234,6 @@ exports[`renders checked Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -398,6 +398,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -418,7 +419,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -583,6 +583,7 @@ exports[`renders indeterminate Checkbox 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -603,7 +604,6 @@ exports[`renders indeterminate Checkbox 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -755,6 +755,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -775,7 +776,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -927,6 +927,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -947,7 +948,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -1112,6 +1112,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onLayout={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -1132,7 +1133,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]

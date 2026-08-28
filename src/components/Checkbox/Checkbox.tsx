@@ -3,9 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TargetedEvent,
   ViewStyle,
 } from 'react-native';
 
@@ -22,9 +20,7 @@ import { getSelectionVisualState } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { tokens } from '../../theme/tokens';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -78,14 +74,6 @@ const {
   stateLayerSize: STATE_LAYER_SIZE,
 } = CheckboxTokens;
 
-const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
-// Focus indicator is a circular ring at the 40dp state-layer boundary.
-// We don't apply `focusIndicator.outerOffset` here because the surrounding
-// `TouchableRipple borderless` clips overflow to the tap-target shape,
-// so a ring drawn outside the 40dp circle would be cropped.
-const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
-const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
-
 /**
  * Checkboxes allow the selection of multiple options from a set.
  *
@@ -128,7 +116,6 @@ const Checkbox = ({
   // Web (react-native-web) doesn't auto-mirror layout, so flip the mask
   // anchor manually for RTL. Native handles it via `I18nManager`.
   const flipMaskForWebRTL = Platform.OS === 'web' && direction === 'rtl';
-  const [focused, setFocused] = React.useState(false);
 
   const selected = status === 'checked' || status === 'indeterminate';
 
@@ -226,19 +213,6 @@ const Checkbox = ({
   }
   const showIndeterminate = nextGlyph === 'indeterminate';
 
-  const handleFocus = React.useCallback(
-    (e: NativeSyntheticEvent<TargetedEvent>) => {
-      if (disabled) return;
-      if (!isKeyboardFocusEvent(e)) return;
-      setFocused(true);
-    },
-    [disabled]
-  );
-
-  const handleBlur = React.useCallback(() => {
-    setFocused(false);
-  }, []);
-
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';
 
@@ -262,24 +236,12 @@ const Checkbox = ({
       borderless
       centered
       onPress={onPress}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
       disabled={disabled}
       {...accessibilityProps}
       testID={testID}
-      style={[
-        styles.tapTarget,
-        Platform.OS === 'web' ? webNoOutline : undefined,
-        style,
-      ]}
+      style={[styles.tapTarget, style]}
     >
       <View pointerEvents="none" style={styles.tapTargetInner}>
-        {focused && !disabled ? (
-          <View
-            pointerEvents="none"
-            style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
-          />
-        ) : null}
         <View style={[styles.container, { opacity: visual.containerOpacity }]}>
           <Animated.View
             pointerEvents="none"
@@ -369,10 +331,6 @@ const Checkmark = ({
   );
 };
 
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
-
 const styles = StyleSheet.create({
   tapTarget: {
     width: STATE_LAYER_SIZE,
@@ -386,13 +344,6 @@ const styles = StyleSheet.create({
     height: STATE_LAYER_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  focusRing: {
-    position: 'absolute',
-    width: FOCUS_RING_SIZE,
-    height: FOCUS_RING_SIZE,
-    borderRadius: FOCUS_RING_RADIUS,
-    borderWidth: FOCUS_THICKNESS,
   },
   container: {
     width: CONTAINER_SIZE,

@@ -402,3 +402,41 @@ it('animated value changes correctly', async () => {
     transform: [{ scale: 1.5 }],
   });
 });
+
+describe('close affordance', () => {
+  // The chip already reserved room on its right, but only the icon was tappable,
+  // so the body owned the rest of that column. MD3 has the primary action stop
+  // where the trailing one starts.
+  it('fills the column the chip reserves for it', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByLabelText('Close')).toHaveStyle({
+      width: '100%',
+      height: '100%',
+    });
+  });
+
+  it('keeps the close glyph pinned right so it does not drift', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    // `styles.icon` sets alignSelf center, which would otherwise win and move
+    // the glyph 4dp left
+    expect(screen.getByTestId('chip-close-icon')).toHaveStyle({
+      alignSelf: 'flex-end',
+    });
+  });
+
+  it('is not rendered without onClose', async () => {
+    await render(<Chip onPress={() => {}}>Example</Chip>);
+
+    expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
+  });
+});

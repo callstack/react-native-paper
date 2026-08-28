@@ -3,7 +3,9 @@ import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   StyleProp,
+  TargetedEvent,
   ViewStyle,
 } from 'react-native';
 
@@ -15,12 +17,64 @@ import { getTouchableRippleColors } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
+
+const { minInteractiveSize } = tokens.md.sys.state;
+
+/**
+ * react-native-web removed `hitSlop` in 0.13.0, so web needs a real element the
+ * browser can hit-test instead. An absolutely positioned box at least the
+ * minimum target size, which is what material-web does, and it costs no layout.
+ * @see https://github.com/necolas/react-native-web/releases/tag/0.13.0
+ * @see https://github.com/material-components/material-web/blob/main/iconbutton/internal/_shared.scss
+ */
+const getTouchTargetStyle = (hitSlop: PressableProps['hitSlop']): ViewStyle => {
+  // `undefined` means the caller said nothing, so the minimum applies. `null`
+  // means "no slop", same as native.
+  if (hitSlop === undefined) {
+    return styles.touchTarget;
+  }
+  if (hitSlop === null) {
+    return styles.noTouchTarget;
+  }
+
+  // A caller hitSlop wins here too, so web matches native instead of ignoring
+  // the prop.
+  const inset = (value: number | undefined) => -(value ?? 0);
+
+  return typeof hitSlop === 'number'
+    ? {
+        position: 'absolute',
+        top: inset(hitSlop),
+        bottom: inset(hitSlop),
+        left: inset(hitSlop),
+        right: inset(hitSlop),
+      }
+    : {
+        position: 'absolute',
+        top: inset(hitSlop.top),
+        bottom: inset(hitSlop.bottom),
+        left: inset(hitSlop.left),
+        right: inset(hitSlop.right),
+      };
+};
 
 export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
+   *
+   * On web the ripple is bounded by its own container, so this no longer clips
+   * the touchable's content. The touchable cannot clip without clipping the
+   * touch target, so children needing a rounded shape carry the radius
+   * themselves.
    */
   borderless?: boolean;
   /**
@@ -36,6 +90,18 @@ export type Props = PressableProps & {
    * Whether to prevent interaction with the touchable.
    */
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS, which does not dispatch focus events for a
+   * `Pressable`.
+   */
+  focusRing?: FocusRingPlacement;
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
@@ -105,12 +171,17 @@ export type Props = PressableProps & {
 const TouchableRipple = ({
   style,
   background: _background,
-  borderless = false,
+  // consumed so it does not reach the DOM; the ripple container clips regardless
+  borderless: _borderless = false,
   disabled: disabledProp,
   rippleColor,
   underlayColor: _underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
@@ -178,7 +249,16 @@ const TouchableRipple = ({
           borderTopRightRadius: style.borderTopRightRadius,
           borderBottomRightRadius: style.borderBottomRightRadius,
           borderBottomLeftRadius: style.borderBottomLeftRadius,
-          overflow: centered ? 'visible' : 'hidden',
+          // The touchable cannot clip, it would clip the touch target too, so
+          // the ripple is contained here. This container is inset to the
+          // touchable and copies its radii, so it clips to the same shape.
+          //
+          // Always, not `centered ? 'visible' : 'hidden'` as before. A ripple
+          // that escaped used to be caught by whichever ancestor clipped, and
+          // those ancestors have to stop. ToggleButton hit this: it passes
+          // `borderless={false}` to IconButton, which spreads it over its own,
+          // so the Surface was holding the ripple in.
+          overflow: 'hidden',
         });
 
         // Create span to show the ripple effect
@@ -273,28 +353,57 @@ const TouchableRipple = ({
 
   const disabled = disabledProp || !hasPassedTouchHandler;
 
+  const ring = useFocusRing(disabled || focusRing === 'none');
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    ring.onFocus(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    ring.onBlur();
+  };
+
   return (
     <Pressable
       {...rest}
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       disabled={disabled}
       style={(state) => [
         styles.touchable,
-        borderless && styles.borderless,
-        // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
-        // state.focused && { backgroundColor: ___ },
+        // RNW's own `state.focused` fires for mouse clicks too, so the ring is
+        // driven by onFocus instead: https://github.com/necolas/react-native-web/issues/1849
         state.hovered && { backgroundColor: hoverColor },
         disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
+        ...toStyleList(
+          getFocusRingStyle(ring.focused, theme.colors.secondary, focusRing)
+        ),
       ]}
     >
-      {(state) =>
-        React.Children.only(
-          typeof children === 'function' ? children(state) : children
-        )
-      }
+      {(state) => (
+        <>
+          {/* Before the children, not after. It hit-tests, so as the last
+              sibling it covers anything interactive inside the touchable and
+              takes its presses, e.g. a pressable List.Item with a control in
+              `right`. Ahead of them it still covers the area outside the
+              touchable, where there is nothing else to hit.
+              Nothing that cannot be pressed gets a target, same as native. */}
+          {!disabled && (
+            <View
+              aria-hidden
+              style={getTouchTargetStyle(hitSlop)}
+              testID="touchable-ripple-touch-target"
+            />
+          )}
+          {React.Children.only(
+            typeof children === 'function' ? children(state) : children
+          )}
+        </>
+      )}
     </Pressable>
   );
 };
@@ -317,8 +426,23 @@ const styles = StyleSheet.create({
       cursor: 'auto',
     }),
   },
-  borderless: {
-    overflow: 'hidden',
+  noTouchTarget: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  touchTarget: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    // max(minInteractiveSize, 100%), same as MD3 web's .touch
+    width: '100%',
+    height: '100%',
+    minWidth: minInteractiveSize,
+    minHeight: minInteractiveSize,
+    transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
   },
 });
 
