@@ -11,9 +11,8 @@ import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
+import type { IconSource } from '../Icon';
 import Modal from '../Modal';
-import type { SurfaceStyle } from '../Surface';
-import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -35,8 +34,45 @@ export type Props = {
   /**
    * Content of the `Dialog`.
    */
-  children: React.ReactNode;
-  style?: StyleProp<SurfaceStyle>;
+  icon?: IconSource;
+  /**
+   * Title of the dialog.
+   */
+  title?: React.ReactNode;
+  /**
+   * Content of the dialog. Non-empty strings are rendered as Material 3
+   * supporting text.
+   */
+  content?: React.ReactNode;
+  /**
+   * Action buttons displayed at the bottom of the dialog.
+   * Keep their order stable between renders.
+   */
+  actions?: React.ReactNode[];
+  /**
+   * Whether to render the content in a `ScrollView` within the dialog scroll
+   * area.
+   */
+  scrollable?: boolean;
+  /**
+   * Props passed to `Dialog.Content` when `scrollable` is not enabled.
+   */
+  contentProps?: Omit<DialogContentProps, 'children'>;
+  /**
+   * Props passed to `Dialog.ScrollArea` when `scrollable` is enabled.
+   */
+  scrollAreaProps?: Omit<DialogScrollAreaProps, 'children'>;
+  /**
+   * Props passed to the `ScrollView` when `scrollable` is enabled.
+   */
+  scrollViewProps?: Omit<ScrollViewProps, 'children'>;
+  /**
+   * Accessibility label for the dialog. You can use it to override the defaults.
+   * By default if a `title` is a string then it's passed as an accessibility label.
+   */
+  accessibilityLabel?: string;
+
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -48,34 +84,6 @@ export type Props = {
 };
 
 const DIALOG_ELEVATION: Elevation = 3;
-
-const renderChildren = (children: React.ReactNode) => {
-  const dialogChildren = React.Children.toArray(children).filter(
-    (child) => child != null && typeof child !== 'boolean'
-  );
-  const hasIcon = dialogChildren.some(
-    (child) => React.isValidElement(child) && child.type === DialogIcon
-  );
-
-  return dialogChildren.map((child, i) => {
-    if (React.isValidElement<DialogChildProps>(child)) {
-      const topMarginStyle =
-        i === 0 && child.type !== DialogIcon ? styles.firstChild : undefined;
-      const titleAlignmentStyle =
-        hasIcon && child.type === DialogTitle
-          ? styles.titleWithIcon
-          : undefined;
-
-      if (topMarginStyle || titleAlignmentStyle) {
-        return React.cloneElement(child, {
-          style: [topMarginStyle, child.props.style, titleAlignmentStyle],
-        });
-      }
-    }
-
-    return child;
-  });
-};
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -131,6 +139,7 @@ const Dialog = ({
   scrollAreaProps,
   scrollViewProps,
   title,
+  accessibilityLabel,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -139,58 +148,17 @@ const Dialog = ({
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 
-  const _children = React.useMemo(() => {
-    const dialogIcon = icon ? (
-      <DialogIcon icon={icon} key="dialogIcon" />
-    ) : null;
-    const dialogTitle = title ? <DialogTitle>{title}</DialogTitle> : null;
-
-    const contentNode =
-      typeof content === 'string' ? (
-        <Text
-          variant="bodyMedium"
-          style={{ color: theme.colors.onSurfaceVariant }}
-        >
-          {content}
-        </Text>
-      ) : (
-        content
-      );
-
-    const dialogContent = scrollable ? (
-      <DialogScrollArea
-        key="dialogScrollArea"
-        {...scrollAreaProps}
-        style={scrollAreaProps?.style}
+  const contentNode =
+    typeof content === 'string' ? (
+      <Text
+        variant="bodyMedium"
+        style={{ color: theme.colors.onSurfaceVariant }}
       >
-        <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
-      </DialogScrollArea>
+        {content}
+      </Text>
     ) : (
-      <DialogContent
-        key="dialogContent"
-        {...contentProps}
-        style={contentProps?.style}
-      >
-        {contentNode}
-      </DialogContent>
+      content
     );
-
-    const dialogActions = actions?.length ? (
-      <Dialog.Actions key="dialogActions">{actions}</Dialog.Actions>
-    ) : null;
-
-    return [dialogIcon, dialogTitle, dialogContent, dialogActions];
-  }, [
-    actions,
-    content,
-    contentProps,
-    icon,
-    scrollAreaProps,
-    scrollViewProps,
-    scrollable,
-    theme.colors.onSurfaceVariant,
-    title,
-  ]);
 
   return (
     <Modal
@@ -210,8 +178,45 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
+      dialogAccessibilityLabel={
+        typeof title === 'string' ? title : accessibilityLabel
+      }
     >
-      {renderChildren(_children)}
+      {icon ? <DialogIcon icon={icon} /> : null}
+
+      {title ? (
+        <DialogTitle
+          style={{
+            ...(icon ? styles.titleWithIcon : styles.firstChild),
+          }}
+        >
+          {title}
+        </DialogTitle>
+      ) : null}
+
+      {scrollable ? (
+        <DialogScrollArea
+          {...scrollAreaProps}
+          style={{
+            ...(!title ? styles.firstChild : {}),
+            ...scrollAreaProps?.style,
+          }}
+        >
+          <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
+        </DialogScrollArea>
+      ) : (
+        <DialogContent
+          {...contentProps}
+          style={{
+            ...(!title ? styles.firstChild : {}),
+            ...contentProps?.style,
+          }}
+        >
+          {contentNode}
+        </DialogContent>
+      )}
+
+      {actions?.length ? <Dialog.Actions>{actions}</Dialog.Actions> : null}
     </Modal>
   );
 };

@@ -37,6 +37,10 @@ export type Props = {
    */
   overlayAccessibilityLabel?: string;
   /**
+   * Accessibility label for the dialog.
+   */
+  dialogAccessibilityLabel?: string;
+  /**
    * Determines Whether the modal is visible.
    */
   visible: boolean;
@@ -127,6 +131,7 @@ function Modal({
   dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
+  dialogAccessibilityLabel,
   onDismiss = () => {},
   children,
   contentContainerStyle,
@@ -259,6 +264,7 @@ function Modal({
           ]}
           elevation={contentElevation}
           transitionDuration={scale * DEFAULT_DURATION}
+          aria-label={dialogAccessibilityLabel}
         >
           {children}
         </Surface>

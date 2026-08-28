@@ -146,6 +146,46 @@ describe('Dialog', () => {
 
     expect(screen.getByTestId('cancel-btn')).toBeOnTheScreen();
   });
+
+  it('should render passed content if no title or accessibilityLabel were passed', async () => {
+    await render(
+      <Dialog testID="dialog" visible content="This is simple dialog" />
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveAccessibleName(
+      'This is simple dialog'
+    );
+  });
+
+  it('should render passed title as a default accessibility label', async () => {
+    await render(
+      <Dialog
+        testID="dialog"
+        visible
+        title="dialog-title"
+        content="This is simple dialog"
+      />
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveAccessibleName(
+      'dialog-title'
+    );
+  });
+
+  it('should render passed accessibility label', async () => {
+    await render(
+      <Dialog
+        testID="dialog"
+        visible
+        content="This is simple dialog"
+        accessibilityLabel="dialog-label"
+      />
+    );
+
+    expect(screen.getByTestId('dialog-surface')).toHaveAccessibleName(
+      'dialog-label'
+    );
+  });
 });
 
 describe('DialogActions', () => {
