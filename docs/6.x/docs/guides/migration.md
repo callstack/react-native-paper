@@ -6,6 +6,22 @@ TBC
 
 ## Components
 
+### RadioButton
+
+`RadioButton` renders one Material 3 circular radio control on every platform. The platform-specific components and their prop types are gone. On iOS checked controls no longer render a checkmark; they use the same ring-and-dot indicator as other platforms. `RadioButton` now also forwards `TouchableRipple` props (`accessible`, `onFocus`, `onBlur`, `borderless`, `rippleColor`, ...).
+
+| v5                                               | v6                                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------------------- |
+| `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                           |
+| `RadioButtonAndroidProps`, `RadioButtonIOSProps` | `RadioButtonProps`                                                      |
+| `RadioButton.Item` `mode="android" \| "ios"`     | `mode` removed; `RadioButton.Item` always renders `RadioButton`         |
+| n/a                                              | new `error` (uses `theme.colors.error`) and `style` (state-layer style) |
+
+```diff
+- <RadioButton.IOS value="first" status="checked" onPress={select} />
++ <RadioButton value="first" status="checked" onPress={select} />
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
