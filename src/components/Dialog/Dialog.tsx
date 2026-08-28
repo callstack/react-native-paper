@@ -67,11 +67,9 @@ export type Props = {
    */
   scrollViewProps?: Omit<ScrollViewProps, 'children'>;
   /**
-   * Accessibility label for the dialog. You can use it to override the defaults.
-   * By default if a `title` is a string then it's passed as an accessibility label.
+   * Accessibility label for the dialog. This is read by the screen reader when the user opens a dialog.
    */
-  accessibilityLabel?: string;
-
+  'aria-label'?: string;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
@@ -139,7 +137,7 @@ const Dialog = ({
   scrollAreaProps,
   scrollViewProps,
   title,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -178,9 +176,7 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
-      dialogAccessibilityLabel={
-        typeof title === 'string' ? title : accessibilityLabel
-      }
+      aria-label={typeof title === 'string' ? title : ariaLabel}
     >
       {icon ? <DialogIcon icon={icon} /> : null}
 
