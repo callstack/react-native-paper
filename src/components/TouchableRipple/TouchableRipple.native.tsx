@@ -6,6 +6,8 @@ import type {
   ViewStyle,
   GestureResponderEvent,
   ColorValue,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -16,6 +18,12 @@ import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -25,6 +33,18 @@ export type Props = PressableProps & {
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS, which does not dispatch focus events for a
+   * `Pressable`.
+   */
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -44,6 +64,9 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
@@ -60,6 +83,19 @@ const TouchableRipple = ({
   });
 
   const disabled = disabledProp || !hasPassedTouchHandler;
+
+  const ring = useFocusRing(disabled || focusRing === 'none');
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    ring.onFocus(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    ring.onBlur();
+  };
+  const ringStyles = toStyleList(
+    getFocusRingStyle(ring.focused, theme.colors.secondary, focusRing)
+  );
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -82,8 +118,8 @@ const TouchableRipple = ({
     baseStyle: StyleProp<ViewStyle>
   ): PressableProps['style'] =>
     typeof style === 'function'
-      ? (state) => [baseStyle, style(state)]
-      : [baseStyle, style];
+      ? (state) => [baseStyle, style(state), ...ringStyles]
+      : [baseStyle, style, ...ringStyles];
 
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
@@ -99,6 +135,8 @@ const TouchableRipple = ({
         {...rest}
         ref={ref}
         disabled={disabled}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
@@ -114,6 +152,8 @@ const TouchableRipple = ({
       {...rest}
       ref={ref}
       disabled={disabled}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       style={resolveStyle(borderless && styles.overflowHidden)}
     >
       {(state) => (

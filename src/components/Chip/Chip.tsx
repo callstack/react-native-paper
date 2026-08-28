@@ -3,14 +3,11 @@ import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TargetedEvent,
   TextProps,
   TextStyle,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -20,11 +17,14 @@ import type { ChipAvatarProps } from './helpers';
 import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -188,13 +188,6 @@ const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
 // The close column spans the chip's height, so it gets the same vertical slop.
 const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
 
-const CLOSE_ICON_SIZE = 18;
-const CLOSE_FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
-
-// Web-only style; `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
-
 /**
  * Chips are compact elements that can represent inputs, attributes, or actions.
  * They can have an icon or avatar on the left, and a close button icon on the right.
@@ -251,9 +244,9 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const closeFocusRing = useFocusRing(disabled);
 
   const [pressed, setPressed] = React.useState(false);
-  const [closeFocused, setCloseFocused] = React.useState(false);
   const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -273,18 +266,6 @@ const Chip = ({
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
     setPressed(false);
-  });
-
-  const handleCloseFocus = useLatestCallback(
-    (e: NativeSyntheticEvent<TargetedEvent>) => {
-      if (Platform.OS === 'web' && isKeyboardFocusEvent(e)) {
-        setCloseFocused(true);
-      }
-    }
-  );
-
-  const handleCloseBlur = useLatestCallback(() => {
-    setCloseFocused(false);
   });
 
   const elevationTransitionDuration =
@@ -342,6 +323,7 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
+        focusRing="inward"
         background={background}
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
@@ -449,15 +431,20 @@ const Chip = ({
             role="button"
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
-            onFocus={handleCloseFocus}
-            onBlur={handleCloseBlur}
-            // The browser outline would wrap the whole column and cover the
-            // label, so a ring is drawn around the glyph instead.
+            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
+            onFocus={closeFocusRing.onFocus}
+            onBlur={closeFocusRing.onBlur}
             style={[
               styles.closeButton,
-              Platform.OS === 'web' ? webNoOutline : undefined,
+              { borderRadius },
+              ...toStyleList(
+                getFocusRingStyle(
+                  closeFocusRing.focused,
+                  theme.colors.secondary,
+                  'inward'
+                )
+              ),
             ]}
-            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
           >
             {/* react-native-web removed `hitSlop` in 0.13.0,
                 so web needs a real element the browser can
@@ -466,15 +453,6 @@ const Chip = ({
               <View aria-hidden style={styles.closeButtonWebTouchTarget} />
             )}
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
-              {closeFocused && !disabled ? (
-                <View
-                  pointerEvents="none"
-                  style={[
-                    styles.closeFocusRing,
-                    { borderColor: theme.colors.secondary },
-                  ]}
-                />
-              ) : null}
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -568,15 +546,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'center',
-  },
-  closeFocusRing: {
-    position: 'absolute',
-    top: -CLOSE_FOCUS_THICKNESS,
-    left: -CLOSE_FOCUS_THICKNESS,
-    width: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
-    height: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
-    borderRadius: CLOSE_ICON_SIZE / 2 + CLOSE_FOCUS_THICKNESS,
-    borderWidth: CLOSE_FOCUS_THICKNESS,
   },
   closeButtonWebTouchTarget: {
     position: 'absolute',

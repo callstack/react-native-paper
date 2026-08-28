@@ -195,6 +195,7 @@ const RadioButtonItem = ({
           }) === 'checked';
         return (
           <TouchableRipple
+            focusRing="inward"
             onPress={(event) =>
               handlePress({
                 onPress: onPress,

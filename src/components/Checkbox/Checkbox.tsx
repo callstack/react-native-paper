@@ -500,6 +500,8 @@ const Checkbox = ({
         onBlur={handleBlur}
         {...interactionHandlers}
         borderless
+        // Checkbox draws its own circular ring around the state layer.
+        focusRing="none"
         // The platform press paints the wrong thing: it covers the whole 48dp
         // target instead of the 40dp state layer, tints with a neutral role,
         // and on web its hover overlay doubles up with the layer. Android also

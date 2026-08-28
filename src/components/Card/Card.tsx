@@ -19,6 +19,7 @@ import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { getFocusRingStyle, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
@@ -165,7 +166,7 @@ const Card = ({
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
-
+  const focusRing = useFocusRing(disabled);
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
@@ -267,6 +268,12 @@ const Card = ({
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           testID={testID}
+          onFocus={focusRing.onFocus}
+          onBlur={focusRing.onBlur}
+          style={[
+            { borderRadius },
+            getFocusRingStyle(focusRing.focused, theme.colors.secondary),
+          ]}
         >
           {content}
         </Pressable>

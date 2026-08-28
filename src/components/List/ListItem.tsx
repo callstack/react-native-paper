@@ -233,6 +233,7 @@ const ListItem = ({
     <TouchableRipple
       {...rest}
       ref={ref}
+      focusRing="inward"
       style={
         shouldIndent
           ? [styles.container, styles.indent, style]
