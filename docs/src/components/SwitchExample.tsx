@@ -9,7 +9,7 @@ export const SwitchStatesExample = () => {
   const [off, setOff] = React.useState(false);
 
   return (
-    <InteractiveExample title="Enabled — toggle to see the handle animate">
+    <InteractiveExample title="Enabled">
       <ExampleRow>
         <Labelled label="selected">
           <Switch value={on} onValueChange={setOn} aria-label="Selected" />
@@ -23,7 +23,7 @@ export const SwitchStatesExample = () => {
 };
 
 export const SwitchDisabledExample = () => (
-  <InteractiveExample title="Disabled — does not respond to input">
+  <InteractiveExample title="Disabled">
     <ExampleRow>
       <Labelled label="selected">
         <Switch value disabled aria-label="Disabled and selected" />
@@ -40,7 +40,7 @@ export const SwitchIconsExample = () => {
   const [off, setOff] = React.useState(false);
 
   return (
-    <InteractiveExample title="With icons in the handle — toggle to swap the icon">
+    <InteractiveExample title="With icons in the handle">
       <ExampleRow>
         <Labelled label="selected">
           <Switch
