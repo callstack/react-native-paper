@@ -40,26 +40,36 @@ const SettingsSample = () => {
 
   return (
     <ScreenWrapper>
-      <List.Section title="Notifications">
+      <List.Section>
+        <List.Subheader role="heading">Notifications</List.Subheader>
         <List.Item
           title="Push notifications"
           description="Alerts about mentions and replies"
           right={() => (
-            <Switch value={notifications} onValueChange={setNotifications} />
+            <Switch
+              value={notifications}
+              onValueChange={setNotifications}
+              aria-label="Push notifications"
+            />
           )}
         />
         <List.Item
           title="Background sync"
           description="Keep content up to date while closed"
           right={() => (
-            <Switch value={backgroundSync} onValueChange={setBackgroundSync} />
+            <Switch
+              value={backgroundSync}
+              onValueChange={setBackgroundSync}
+              aria-label="Background sync"
+            />
           )}
         />
       </List.Section>
 
       <Divider />
 
-      <List.Section title="List density">
+      <List.Section>
+        <List.Subheader role="heading">List density</List.Subheader>
         <RadioButton.Group value={density} onValueChange={setDensity}>
           <RadioButton.Item label="Comfortable" value="comfortable" />
           <RadioButton.Item label="Compact" value="compact" />
@@ -68,11 +78,14 @@ const SettingsSample = () => {
 
       <Divider />
 
-      <List.Section title="Account">
+      <List.Section>
+        <List.Subheader role="heading">Account</List.Subheader>
         <List.Item
           title="Sign out"
           left={(props) => <List.Icon {...props} icon="logout" />}
           onPress={() => setDialogVisible(true)}
+          role="button"
+          accessibilityHint="Opens a confirmation dialog"
         />
       </List.Section>
 

@@ -105,10 +105,10 @@ const WorkspaceSample = () => {
 
   return (
     <View style={styles.screen}>
-      <Appbar.Header elevated>
+      <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title="Workspace" />
-        <Appbar.Action icon="magnify" onPress={() => {}} />
+        <Appbar.Action aria-label="magnify" icon="magnify" onPress={() => {}} />
       </Appbar.Header>
       <BottomNavigation
         navigationState={{ index, routes }}

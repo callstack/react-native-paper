@@ -14,7 +14,6 @@ import {
   Portal,
   Switch,
   Text,
-  TouchableRipple,
   useTheme,
 } from 'react-native-paper';
 import { Modal } from 'react-native-paper';
@@ -30,6 +29,8 @@ export default function PreferencesModal() {
   const isIOS = Platform.OS === 'ios';
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
+  const rtlToggleUnavailable = !isWeb && expoGoExecution;
+  const rippleEffectLabel = `${isIOS ? 'Highlight' : 'Ripple'} effect`;
 
   const {
     toggleShouldUseDynamicTheme,
@@ -48,7 +49,7 @@ export default function PreferencesModal() {
   } = usePreferences();
 
   const _handleToggleRTL = () => {
-    if (!isWeb && expoGoExecution) {
+    if (rtlToggleUnavailable) {
       setShowRTLDialog(true);
       return;
     }
@@ -66,6 +67,7 @@ export default function PreferencesModal() {
         <Modal
           visible={preferencesVisible}
           onDismiss={togglePreferences}
+          overlayAccessibilityLabel="Close preferences"
           contentContainerStyle={[
             styles.modalContent,
             { backgroundColor: theme.colors.elevation.level2 },
@@ -78,62 +80,65 @@ export default function PreferencesModal() {
             alwaysBounceVertical={false}
           >
             {dynamicThemeSupported ? (
-              <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
-                <View style={[styles.preference, styles.v3Preference]}>
-                  <Text variant="labelLarge">Use Dynamic Theme</Text>
-                  <View pointerEvents="none">
-                    <Switch value={shouldUseDynamicTheme} />
-                  </View>
-                </View>
-              </TouchableRipple>
+              <View style={[styles.preference, styles.v3Preference]}>
+                <Text variant="labelLarge">Use Dynamic Theme</Text>
+                <Switch
+                  value={shouldUseDynamicTheme}
+                  onValueChange={toggleShouldUseDynamicTheme}
+                  aria-label="Use dynamic theme"
+                />
+              </View>
             ) : null}
-            <TouchableRipple onPress={toggleTheme}>
-              <View style={[styles.preference, styles.v3Preference]}>
-                <Text variant="labelLarge">Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <View style={[styles.preference, styles.v3Preference]}>
+              <Text variant="labelLarge">Dark Theme</Text>
+              <Switch
+                value={isDarkTheme}
+                onValueChange={toggleTheme}
+                aria-label="Dark theme"
+              />
+            </View>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
-              <View style={[styles.preference, styles.v3Preference]}>
-                <Text variant="labelLarge">RTL</Text>
-                <View pointerEvents="none">
-                  <Switch value={isRTL} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <View style={[styles.preference, styles.v3Preference]}>
+              <Text variant="labelLarge">RTL</Text>
+              <Switch
+                value={isRTL}
+                onValueChange={_handleToggleRTL}
+                aria-label="Right-to-left layout"
+              />
+            </View>
 
-            <TouchableRipple onPress={toggleCustomFont}>
-              <View style={[styles.preference, styles.v3Preference]}>
-                <Text variant="labelLarge">Custom font *</Text>
-                <View pointerEvents="none">
-                  <Switch value={customFontLoaded} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <View style={[styles.preference, styles.v3Preference]}>
+              <Text variant="labelLarge">Custom font *</Text>
+              <Switch
+                value={customFontLoaded}
+                onValueChange={toggleCustomFont}
+                aria-label="Custom font"
+              />
+            </View>
 
-            <TouchableRipple onPress={toggleRippleEffect}>
-              <View style={[styles.preference, styles.v3Preference]}>
-                <Text variant="labelLarge">
-                  {isIOS ? 'Highlight' : 'Ripple'} effect *
-                </Text>
-                <View pointerEvents="none">
-                  <Switch value={rippleEffectEnabled} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <View style={[styles.preference, styles.v3Preference]}>
+              <Text variant="labelLarge">{rippleEffectLabel} *</Text>
+              <Switch
+                value={rippleEffectEnabled}
+                onValueChange={toggleRippleEffect}
+                aria-label={rippleEffectLabel}
+              />
+            </View>
 
             <Button
               mode="contained-tonal"
               onPress={resetPreferences}
+              aria-label="Reset all preferences"
               style={styles.resetButton}
             >
               Reset
             </Button>
 
-            <Text variant="bodySmall" style={styles.annotation}>
+            <Text
+              variant="bodySmall"
+              style={styles.annotation}
+              aria-label="Preferences marked with an asterisk are optional example toggles"
+            >
               * - optional example toggles
             </Text>
             <Text variant="bodySmall" style={styles.annotation}>

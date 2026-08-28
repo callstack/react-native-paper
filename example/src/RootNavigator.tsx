@@ -26,14 +26,14 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
         <Appbar.Action
           isLeading
           icon="folder-search"
-          accessibilityLabel="search examples"
+          aria-label="search examples"
           onPress={() => navigation.navigate('ExampleList')}
         />
       )}
       <Appbar.Content title={options.title || route.name} />
       <Appbar.Action
         icon="cog"
-        accessibilityLabel="preferences"
+        aria-label="preferences"
         onPress={togglePreferences}
       />
     </Appbar.Header>
