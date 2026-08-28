@@ -84,6 +84,17 @@ export type { Props as DataTableHeaderProps } from './components/DataTable/DataT
 export type { Props as DataTablePaginationProps } from './components/DataTable/DataTablePagination';
 export type { Props as DataTableRowProps } from './components/DataTable/DataTableRow';
 export type { Props as DataTableTitleProps } from './components/DataTable/DataTableTitle';
+export type {
+  ColumnLayoutProps as DataTableColumnLayoutProps,
+  DataTableColumn,
+  DataTableColumnAlign,
+  DataTableLayout,
+} from './components/DataTable/columns';
+export type { NativeFocusMode as DataTableNativeFocusMode } from './components/DataTable/DataTableContext';
+export type {
+  FormatRowPosition as DataTableFormatRowPosition,
+  SortAccessibilityLabels as DataTableSortAccessibilityLabels,
+} from './components/DataTable/utils';
 export type { Props as DialogProps } from './components/Dialog/Dialog';
 export type { Props as DialogActionsProps } from './components/Dialog/DialogActions';
 export type { Props as DialogContentProps } from './components/Dialog/DialogContent';

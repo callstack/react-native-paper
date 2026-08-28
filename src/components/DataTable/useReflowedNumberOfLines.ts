@@ -1,7 +1,5 @@
 import { useWindowDimensions } from 'react-native';
 
-import { REFLOW_FONT_SCALE } from './tokens';
-
 /**
  * How many lines a title or cell may use.
  *
@@ -16,5 +14,5 @@ export default function useReflowedNumberOfLines(numberOfLines?: number) {
     return numberOfLines || undefined;
   }
 
-  return fontScale >= REFLOW_FONT_SCALE ? undefined : 1;
+  return fontScale > 1 ? undefined : 1;
 }

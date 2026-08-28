@@ -30,13 +30,18 @@ type LabelledProps = {
 };
 
 /**
+ * A label the consumer set, which is the element's complete accessible name -
+ * never a value for a column name to be prefixed onto.
+ */
+export const getExplicitLabel = (props: LabelledProps): string | undefined =>
+  props['aria-label'] ?? props.accessibilityLabel;
+
+/**
  * The accessible name of a title or cell: an explicit label if given, and
  * otherwise its text content.
  */
 export const getElementLabel = (props: LabelledProps): string | undefined =>
-  props['aria-label'] ??
-  props.accessibilityLabel ??
-  getNodeText(props.children);
+  getExplicitLabel(props) ?? getNodeText(props.children);
 
 /**
  * Names a cell by the column it belongs to.

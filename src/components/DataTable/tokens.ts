@@ -18,13 +18,3 @@ export const TITLE_FONT_SIZE = 12;
 
 /** Size of the sort-direction indicator. */
 export const SORT_ICON_SIZE = 16;
-
-/**
- * At or above this OS font scale, titles and cells stop truncating to a single
- * line and are allowed to wrap.
- *
- * MD guidance discourages multiline text in tables
- * (https://github.com/callstack/react-native-paper/issues/2381), but at large
- * font scales truncating loses content outright, failing WCAG 1.4.4 and 1.4.10.
- */
-export const REFLOW_FONT_SCALE = 1.5;
