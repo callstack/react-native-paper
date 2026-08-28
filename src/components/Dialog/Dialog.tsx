@@ -193,20 +193,14 @@ const Dialog = ({
       {scrollable ? (
         <DialogScrollArea
           {...scrollAreaProps}
-          style={{
-            ...(!title ? styles.firstChild : {}),
-            ...scrollAreaProps?.style,
-          }}
+          style={[!title && styles.firstChild, scrollAreaProps?.style]}
         >
           <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
         </DialogScrollArea>
       ) : (
         <DialogContent
           {...contentProps}
-          style={{
-            ...(!title ? styles.firstChild : {}),
-            ...contentProps?.style,
-          }}
+          style={[!title && styles.firstChild, contentProps?.style]}
         >
           {contentNode}
         </DialogContent>
