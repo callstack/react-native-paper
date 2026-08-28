@@ -15,7 +15,7 @@ import type {
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import { ListTokens } from './tokens';
 import type { ListChildProps, Style } from './utils';
-import { getLeftStyles } from './utils';
+import { getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -234,8 +234,7 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const titleTextColor = theme.colors[ListTokens.headlineColor];
-  const descriptionColor = theme.colors[ListTokens.supportingTextColor];
+  const { descriptionColor, titleTextColor } = getAccordionColors({ theme });
 
   const handlePress =
     groupContext && id !== undefined
