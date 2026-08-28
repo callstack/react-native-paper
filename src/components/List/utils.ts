@@ -1,7 +1,7 @@
 import type { StyleProp, TextProps, ViewStyle } from 'react-native';
 
 import { ListTokens } from './tokens';
-import type { ThemeProp } from '../../theme/types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 type Description =
   | React.ReactNode
@@ -44,3 +44,8 @@ export const getLeftStyles = (alignToTop: boolean, description: Description) =>
 
 export const getRightStyles = (alignToTop: boolean, description: Description) =>
   getAccessoryStyles(alignToTop, description);
+
+export const getAccordionColors = ({ theme }: { theme: InternalTheme }) => ({
+  titleTextColor: theme.colors[ListTokens.headlineColor],
+  descriptionColor: theme.colors[ListTokens.supportingTextColor],
+});
