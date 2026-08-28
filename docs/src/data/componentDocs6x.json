@@ -5363,12 +5363,12 @@
             },
             "description": "Props passed to the `ScrollView` when `scrollable` is enabled."
           },
-          "accessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
             },
-            "description": "Accessibility label for the dialog. You can use it to override the defaults.\nBy default if a `title` is a string then it's passed as an accessibility label."
+            "description": "Accessibility label for the dialog. This is read by the screen reader when the user opens a dialog."
           },
           "style": {
             "required": false,
@@ -9535,12 +9535,12 @@
               "computed": false
             }
           },
-          "dialogAccessibilityLabel": {
+          "aria-label": {
             "required": false,
             "tsType": {
               "name": "string"
             },
-            "description": "Accessibility label for the dialog."
+            "description": "Accessibility label for the dialog. This is read by the screen reader when the user opens a dialog."
           },
           "visible": {
             "required": false,
