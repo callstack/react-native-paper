@@ -3,6 +3,12 @@ export const screenshots = {
   'Avatar.Icon': 'screenshots/avatar-icon.png',
   'Avatar.Image': 'screenshots/avatar-image.png',
   'Avatar.Text': 'screenshots/avatar-text.png',
+  Appbar: {
+    search: 'screenshots/appbar-v6-search.png',
+    small: 'screenshots/appbar-v6-small.png',
+    'medium flexible': 'screenshots/appbar-v6-medium-flexible.png',
+    'large flexible': 'screenshots/appbar-v6-large-flexible.png',
+  },
   Badge: {
     'with text': 'screenshots/badge-1.png',
     'without text': 'screenshots/badge-2.png',

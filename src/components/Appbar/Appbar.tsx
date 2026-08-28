@@ -27,42 +27,6 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  * and search variants. Its surface color automatically changes when content
  * has scrolled, and it accounts for safe-area insets.
  *
- * ## Variants
- *
- * | `variant` | Purpose |
- * | --- | --- |
- * | `small` | A compact 64dp app bar with a one-line headline. |
- * | `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |
- * | `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |
- * | `search` | An app bar containing a centered Paper `Searchbar`. |
- *
- * ## Main props
- *
- * | Prop | Description |
- * | --- | --- |
- * | `headline` | Required accessible headline for every non-search variant. |
- * | `subtitle` | Optional supporting text for written headlines. |
- * | `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |
- * | `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |
- * | `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |
- * | `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |
- * | `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |
- * | `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |
- * | `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |
- * | `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |
- * | `statusBarHeight` | Overrides only the automatic top inset. |
- * | `contentStyle` | Styles the headline and subtitle area. |
- * | `style` | Styles the app bar and can override its background color. |
- *
- * ## Migrating from the compound API
- *
- * `Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and
- * `Appbar.BackAction` have been removed. Render one `Appbar` and provide its
- * headline, leading button, and trailing actions as props. The former
- * `mode="medium"` and `mode="large"` values are now
- * `variant="medium-flexible"` and `variant="large-flexible"`; centered
- * content uses `headlineAlignment="center"`.
- *
  * ## Usage
  *
  * ### Small app bar
@@ -139,6 +103,42 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  *   }}
  * />
  * ```
+ *
+ * ## Variants
+ *
+ * | `variant` | Purpose |
+ * | --- | --- |
+ * | `small` | A compact 64dp app bar with a one-line headline. |
+ * | `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |
+ * | `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |
+ * | `search` | An app bar containing a centered Paper `Searchbar`. |
+ *
+ * ## Main props
+ *
+ * | Prop | Description |
+ * | --- | --- |
+ * | `headline` | Required accessible headline for every non-search variant. |
+ * | `subtitle` | Optional supporting text for written headlines. |
+ * | `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |
+ * | `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |
+ * | `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |
+ * | `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |
+ * | `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |
+ * | `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |
+ * | `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |
+ * | `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |
+ * | `statusBarHeight` | Overrides only the automatic top inset. |
+ * | `contentStyle` | Styles the headline and subtitle area. |
+ * | `style` | Styles the app bar and can override its background color. |
+ *
+ * ## Migrating from the compound API
+ *
+ * `Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and
+ * `Appbar.BackAction` have been removed. Render one `Appbar` and provide its
+ * headline, leading button, and trailing actions as props. The former
+ * `mode="medium"` and `mode="large"` values are now
+ * `variant="medium-flexible"` and `variant="large-flexible"`; centered
+ * content uses `headlineAlignment="center"`.
  *
  * @extends View props https://reactnative.dev/docs/view#props
  */
