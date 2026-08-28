@@ -36,8 +36,12 @@ export type Props = ViewProps & {
  * 					visible={visible}
  * 					onDismiss={hideDialog}
  * 					actions={[
- * 						{ onPress: () => console.log('Cancel'), label: 'Cancel' },
- * 						{ onPress: () => console.log('Ok'), label: 'Ok' },
+ * 						<Button key="disagree-btn" onPress={close} textColor={Palette.error50}>
+ * 							Disagree
+ * 						</Button>,
+ * 						<Button key="agree-btn" onPress={close}>
+ * 							Agree
+ *  					</Button>,
  * 					]}
  * 		   />
  *     </Portal>

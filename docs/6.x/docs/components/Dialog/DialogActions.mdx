@@ -28,12 +28,18 @@ const MyComponent = () => {
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Actions>
-          <Button onPress={() => console.log('Cancel')}>Cancel</Button>
-          <Button onPress={() => console.log('Ok')}>Ok</Button>
-        </Dialog.Actions>
-      </Dialog>
+      <Dialog
+					visible={visible}
+					onDismiss={hideDialog}
+					actions={[
+						<Button key="disagree-btn" onPress={close} textColor={Palette.error50}>
+							Disagree
+						</Button>,
+						<Button key="agree-btn" onPress={close}>
+							Agree
+ 					</Button>,
+					]}
+		   />
     </Portal>
   );
 };
