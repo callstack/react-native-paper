@@ -296,6 +296,8 @@ Use the dedicated props instead:
 - **`Dialog.Content`** → **`content`**
 - **`Dialog.Actions`** → **`actions`**
 
+The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. When **`actions`** is provided, the passed components are rendered through **`Dialog.Actions`** internally.
+
 #### New props
 
 - **`scrollable`** renders the dialog content inside a scrollable area.
