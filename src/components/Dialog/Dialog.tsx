@@ -1,19 +1,21 @@
 import * as React from 'react';
 import { Platform, ScrollView, StyleSheet } from 'react-native';
-import type { StyleProp } from 'react-native';
+import type { ScrollViewProps, StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
+import type { Props as DialogContentProps } from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
+import type { Props as DialogScrollAreaProps } from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { DialogTitleIdContext } from './utils';
-import type { DialogChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { OverlayFocusTarget } from '../../utils/useOverlayFocus';
+import type { IconSource } from '../Icon';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
 import Text from '../Typography/Text';
@@ -73,9 +75,40 @@ export type Props = {
    */
   restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
-   * Content of the `Dialog`.
+   * Icon displayed at the top of the dialog.
    */
-  children: React.ReactNode;
+  icon?: IconSource;
+  /**
+   * Title of the dialog.
+   */
+  title?: React.ReactNode;
+  /**
+   * Content of the dialog. Non-empty strings are rendered as Material 3
+   * supporting text.
+   */
+  content?: React.ReactNode;
+  /**
+   * Action buttons displayed at the bottom of the dialog.
+   * Keep their order stable between renders.
+   */
+  actions?: React.ReactNode[];
+  /**
+   * Whether to render the content in a `ScrollView` within the dialog scroll
+   * area.
+   */
+  scrollable?: boolean;
+  /**
+   * Props passed to `Dialog.Content` when `scrollable` is not enabled.
+   */
+  contentProps?: Omit<DialogContentProps, 'children'>;
+  /**
+   * Props passed to `Dialog.ScrollArea` when `scrollable` is enabled.
+   */
+  scrollAreaProps?: Omit<DialogScrollAreaProps, 'children'>;
+  /**
+   * Props passed to the `ScrollView` when `scrollable` is enabled.
+   */
+  scrollViewProps?: Omit<ScrollViewProps, 'children'>;
   style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
@@ -92,34 +125,6 @@ export type Props = {
 };
 
 const DIALOG_ELEVATION: Elevation = 3;
-
-const renderChildren = (children: React.ReactNode) => {
-  const dialogChildren = React.Children.toArray(children).filter(
-    (child) => child != null && typeof child !== 'boolean'
-  );
-  const hasIcon = dialogChildren.some(
-    (child) => React.isValidElement(child) && child.type === DialogIcon
-  );
-
-  return dialogChildren.map((child, i) => {
-    if (React.isValidElement<DialogChildProps>(child)) {
-      const topMarginStyle =
-        i === 0 && child.type !== DialogIcon ? styles.firstChild : undefined;
-      const titleAlignmentStyle =
-        hasIcon && child.type === DialogTitle
-          ? styles.titleWithIcon
-          : undefined;
-
-      if (topMarginStyle || titleAlignmentStyle) {
-        return React.cloneElement(child, {
-          style: [topMarginStyle, child.props.style, titleAlignmentStyle],
-        });
-      }
-    }
-
-    return child;
-  });
-};
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -187,58 +192,17 @@ const Dialog = ({
 
   const titleId = React.useId();
 
-  const _children = React.useMemo(() => {
-    const dialogIcon = icon ? (
-      <DialogIcon icon={icon} key="dialogIcon" />
-    ) : null;
-    const dialogTitle = title ? <DialogTitle>{title}</DialogTitle> : null;
-
-    const contentNode =
-      typeof content === 'string' ? (
-        <Text
-          variant="bodyMedium"
-          style={{ color: theme.colors.onSurfaceVariant }}
-        >
-          {content}
-        </Text>
-      ) : (
-        content
-      );
-
-    const dialogContent = scrollable ? (
-      <DialogScrollArea
-        key="dialogScrollArea"
-        {...scrollAreaProps}
-        style={scrollAreaProps?.style}
+  const contentNode =
+    typeof content === 'string' ? (
+      <Text
+        variant="bodyMedium"
+        style={{ color: theme.colors.onSurfaceVariant }}
       >
-        <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
-      </DialogScrollArea>
+        {content}
+      </Text>
     ) : (
-      <DialogContent
-        key="dialogContent"
-        {...contentProps}
-        style={contentProps?.style}
-      >
-        {contentNode}
-      </DialogContent>
+      content
     );
-
-    const dialogActions = actions?.length ? (
-      <Dialog.Actions key="dialogActions">{actions}</Dialog.Actions>
-    ) : null;
-
-    return [dialogIcon, dialogTitle, dialogContent, dialogActions];
-  }, [
-    actions,
-    content,
-    contentProps,
-    icon,
-    scrollAreaProps,
-    scrollViewProps,
-    scrollable,
-    theme.colors.onSurfaceVariant,
-    title,
-  ]);
 
   return (
     <Modal
@@ -266,7 +230,41 @@ const Dialog = ({
       overlayTestID={overlayTestID}
     >
       <DialogTitleIdContext.Provider value={titleId}>
-        {renderChildren(_children)}
+        {icon ? <DialogIcon icon={icon} /> : null}
+
+        {title ? (
+          <DialogTitle
+            style={{
+              ...(icon ? styles.titleWithIcon : styles.firstChild),
+            }}
+          >
+            {title}
+          </DialogTitle>
+        ) : null}
+
+        {scrollable ? (
+          <DialogScrollArea
+            {...scrollAreaProps}
+            style={{
+              ...(!title ? styles.firstChild : {}),
+              ...scrollAreaProps?.style,
+            }}
+          >
+            <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
+          </DialogScrollArea>
+        ) : (
+          <DialogContent
+            {...contentProps}
+            style={{
+              ...(!title ? styles.firstChild : {}),
+              ...contentProps?.style,
+            }}
+          >
+            {contentNode}
+          </DialogContent>
+        )}
+
+        {actions?.length ? <DialogActions>{actions}</DialogActions> : null}
       </DialogTitleIdContext.Provider>
     </Modal>
   );
