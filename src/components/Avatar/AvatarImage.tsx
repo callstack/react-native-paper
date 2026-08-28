@@ -22,12 +22,19 @@ export type AvatarImageSourceProps = {
   style: { width: number; height: number; borderRadius: number };
   onError?: ImageProps['onError'];
   /**
-   * Present when the host received an `alt`. Pass it to your image so it is
-   * announced by assistive technology.
+   * Present when the host received a description through `alt`, `aria-label`
+   * or `accessibilityLabel`. Pass it to your image so it is announced by
+   * assistive technology.
    */
   alt?: string;
   /**
-   * `false` when the host received no `alt`, marking the image as decorative.
+   * Mirrors `alt`. `react-native-web` fills the rendered `<img alt>` from
+   * `aria-label` only, so pass both to your image.
+   */
+  'aria-label'?: string;
+  /**
+   * `false` when the host received no description, marking the image as
+   * decorative.
    */
   accessible?: boolean;
 };
@@ -41,9 +48,10 @@ export type Props = ViewProps & {
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
    * or a function that returns an image component.
-   * Function sources receive `{ size, style, onError, alt }` matching the host avatar.
-   * Apply `style` so the image fills the circle, pass `alt` on for assistive
-   * technology, and call `onError` to trigger `fallback`.
+   * Function sources receive `{ size, style, onError, alt, 'aria-label',
+   * accessible }` matching the host avatar. Apply `style` so the image fills
+   * the circle, forward the accessibility props for assistive technology, and
+   * call `onError` to trigger `fallback`.
    */
   source: AvatarImageSource;
   /**
@@ -51,7 +59,8 @@ export type Props = ViewProps & {
    */
   size?: number;
   /**
-   * Text describing the image for assistive technology.
+   * Text describing the image for assistive technology. `aria-label` and
+   * `accessibilityLabel` are treated the same way.
    */
   alt?: string;
   /**
@@ -104,8 +113,9 @@ export type Props = ViewProps & {
  * export default MyComponent
  * ```
  *
- * Pass `alt` to describe the image to assistive technology. Avatars without it
- * are treated as decorative and skipped by screen readers.
+ * Pass `alt` to describe the image to assistive technology — `aria-label` and
+ * `accessibilityLabel` work the same way. Avatars without a description are
+ * treated as decorative and skipped by screen readers.
  *
  * Show another avatar when the image fails to load:
  * ```js
@@ -117,13 +127,14 @@ export type Props = ViewProps & {
  * />
  * ```
  *
- * Custom image components should apply the host `style`, `onError` and `alt`:
+ * Custom image components should apply the host `style`, `onError` and the
+ * accessibility props:
  * ```js
  * <Avatar.Image
  *   size={64}
  *   alt="Jane Doe"
- *   source={({ style, onError, alt }) => (
- *     <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />
+ *   source={({ size, style, onError, ...a11y }) => (
+ *     <CustomImage source={{ uri }} style={style} onError={onError} {...a11y} />
  *   )}
  *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
  * />
@@ -134,6 +145,8 @@ const AvatarImage = ({
   source,
   fallback,
   alt,
+  'aria-label': ariaLabel,
+  accessibilityLabel,
   style,
   onError,
   onLayout,
@@ -153,8 +166,11 @@ const AvatarImage = ({
     height: size,
     borderRadius: cornerFull,
   };
+  const description = alt ?? ariaLabel ?? accessibilityLabel;
   const imageA11y =
-    alt === undefined ? { accessible: false as const } : { alt };
+    description === undefined
+      ? { accessible: false as const }
+      : { alt: description, 'aria-label': description };
   const sourceKey = getAvatarImageSourceKey(source);
   const previousSourceKey = React.useRef(sourceKey);
   const [hasError, setHasError] = React.useState(false);
@@ -175,8 +191,8 @@ const AvatarImage = ({
 
   const hostA11y = showImage
     ? { accessible: false, importantForAccessibility: 'no' as const }
-    : alt !== undefined
-      ? { accessible: true, 'aria-label': alt }
+    : description !== undefined
+      ? { accessible: true, 'aria-label': description }
       : {};
 
   return (

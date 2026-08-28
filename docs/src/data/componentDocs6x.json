@@ -793,10 +793,10 @@
     "Avatar/AvatarImage": {
       "filepath": "Avatar/AvatarImage.tsx",
       "title": "Avatar.Image",
-      "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} alt=\"Jane Doe\" />\n);\nexport default MyComponent\n```\n\nPass `alt` to describe the image to assistive technology. Avatars without it\nare treated as decorative and skipped by screen readers.\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  alt=\"Jane Doe\"\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style`, `onError` and `alt`:\n```js\n<Avatar.Image\n  size={64}\n  alt=\"Jane Doe\"\n  source={({ style, onError, alt }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
+      "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} alt=\"Jane Doe\" />\n);\nexport default MyComponent\n```\n\nPass `alt` to describe the image to assistive technology — `aria-label` and\n`accessibilityLabel` work the same way. Avatars without a description are\ntreated as decorative and skipped by screen readers.\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  alt=\"Jane Doe\"\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style`, `onError` and the\naccessibility props:\n```js\n<Avatar.Image\n  size={64}\n  alt=\"Jane Doe\"\n  source={({ size, style, onError, ...a11y }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} {...a11y} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
       "link": "avatar-image",
       "data": {
-        "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} alt=\"Jane Doe\" />\n);\nexport default MyComponent\n```\n\nPass `alt` to describe the image to assistive technology. Avatars without it\nare treated as decorative and skipped by screen readers.\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  alt=\"Jane Doe\"\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style`, `onError` and `alt`:\n```js\n<Avatar.Image\n  size={64}\n  alt=\"Jane Doe\"\n  source={({ style, onError, alt }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
+        "description": "Avatars can be used to represent people in a graphical way.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Avatar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Avatar.Image size={24} source={require('../assets/avatar.png')} alt=\"Jane Doe\" />\n);\nexport default MyComponent\n```\n\nPass `alt` to describe the image to assistive technology — `aria-label` and\n`accessibilityLabel` work the same way. Avatars without a description are\ntreated as decorative and skipped by screen readers.\n\nShow another avatar when the image fails to load:\n```js\n<Avatar.Image\n  size={64}\n  source={{ uri: user.avatarUrl }}\n  alt=\"Jane Doe\"\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```\n\nCustom image components should apply the host `style`, `onError` and the\naccessibility props:\n```js\n<Avatar.Image\n  size={64}\n  alt=\"Jane Doe\"\n  source={({ size, style, onError, ...a11y }) => (\n    <CustomImage source={{ uri }} style={style} onError={onError} {...a11y} />\n  )}\n  fallback={({ size }) => <Avatar.Text size={size} label=\"JD\" />}\n/>\n```",
         "displayName": "Avatar.Image",
         "methods": [],
         "statics": [],
@@ -815,7 +815,7 @@
                 }
               ]
             },
-            "description": "Image to display for the `Avatar`.\nIt accepts a standard React Native Image `source` prop\nor a function that returns an image component.\nFunction sources receive `{ size, style, onError, alt }` matching the host avatar.\nApply `style` so the image fills the circle, pass `alt` on for assistive\ntechnology, and call `onError` to trigger `fallback`."
+            "description": "Image to display for the `Avatar`.\nIt accepts a standard React Native Image `source` prop\nor a function that returns an image component.\nFunction sources receive `{ size, style, onError, alt, 'aria-label',\naccessible }` matching the host avatar. Apply `style` so the image fills\nthe circle, forward the accessibility props for assistive technology, and\ncall `onError` to trigger `fallback`."
           },
           "size": {
             "required": false,
@@ -833,7 +833,7 @@
             "tsType": {
               "name": "string"
             },
-            "description": "Text describing the image for assistive technology."
+            "description": "Text describing the image for assistive technology. `aria-label` and\n`accessibilityLabel` are treated the same way."
           },
           "fallback": {
             "required": false,

@@ -194,6 +194,8 @@ it('labels the image with alt, not the wrapper', async () => {
       {
         props: {
           alt: 'Jane Doe',
+          // `react-native-web` fills the rendered `<img alt>` from `aria-label`.
+          'aria-label': 'Jane Doe',
         },
       },
     ],
@@ -204,6 +206,37 @@ it('labels the image with alt, not the wrapper', async () => {
     },
   });
 });
+
+it.each(['aria-label', 'accessibilityLabel'] as const)(
+  'labels the image when the description comes from %s',
+  async (prop) => {
+    const tree = (
+      await render(
+        <Avatar.Image
+          source={{ uri: 'avatar.png' }}
+          {...{ [prop]: 'Jane Doe' }}
+        />
+      )
+    ).toJSON();
+
+    // The host is not an accessibility element while the image shows, so the
+    // description has to reach the image to be announced at all.
+    expect(tree).toMatchObject({
+      props: {
+        accessible: false,
+        importantForAccessibility: 'no',
+      },
+      children: [
+        {
+          props: {
+            alt: 'Jane Doe',
+            'aria-label': 'Jane Doe',
+          },
+        },
+      ],
+    });
+  }
+);
 
 it('keeps an unlabeled image unfocusable', async () => {
   const tree = (
@@ -431,7 +464,7 @@ describe('AvatarImage fallback', () => {
     await render(<Avatar.Image size={48} source={source} alt="Jane Doe" />);
 
     expect(source).toHaveBeenCalledWith(
-      expect.objectContaining({ alt: 'Jane Doe' })
+      expect.objectContaining({ alt: 'Jane Doe', 'aria-label': 'Jane Doe' })
     );
     expect(source).not.toHaveBeenCalledWith(
       expect.objectContaining({ accessible: false })
@@ -504,6 +537,26 @@ describe('AvatarImage fallback', () => {
         source={{ uri: 'avatar.png' }}
         fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
         alt="Jane Doe"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(toJSON()).toMatchObject({
+      props: {
+        accessible: true,
+        'aria-label': 'Jane Doe',
+      },
+    });
+  });
+
+  it('moves an aliased description onto the host when fallback is shown', async () => {
+    const { toJSON } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        accessibilityLabel="Jane Doe"
       />
     );
 

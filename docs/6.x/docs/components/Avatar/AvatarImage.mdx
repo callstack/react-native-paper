@@ -27,8 +27,9 @@ const MyComponent = () => (
 export default MyComponent
 ```
 
-Pass `alt` to describe the image to assistive technology. Avatars without it
-are treated as decorative and skipped by screen readers.
+Pass `alt` to describe the image to assistive technology — `aria-label` and
+`accessibilityLabel` work the same way. Avatars without a description are
+treated as decorative and skipped by screen readers.
 
 Show another avatar when the image fails to load:
 ```js
@@ -40,13 +41,14 @@ Show another avatar when the image fails to load:
 />
 ```
 
-Custom image components should apply the host `style`, `onError` and `alt`:
+Custom image components should apply the host `style`, `onError` and the
+accessibility props:
 ```js
 <Avatar.Image
   size={64}
   alt="Jane Doe"
-  source={({ style, onError, alt }) => (
-    <CustomImage source={{ uri }} style={style} onError={onError} alt={alt} />
+  source={({ size, style, onError, ...a11y }) => (
+    <CustomImage source={{ uri }} style={style} onError={onError} {...a11y} />
   )}
   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
 />
