@@ -36,10 +36,12 @@ exports[`renders list item with custom description 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 14,
+          "minHeight": 72,
         },
         undefined,
       ],
@@ -421,10 +423,12 @@ exports[`renders list item with custom title and description styles 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 14,
+          "minHeight": 72,
         },
         undefined,
       ],
@@ -569,10 +573,12 @@ exports[`renders list item with left and right items 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 14,
+          "minHeight": 72,
         },
         undefined,
       ],
@@ -762,10 +768,12 @@ exports[`renders list item with left item 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 16,
+          "minHeight": 56,
         },
         undefined,
       ],
@@ -920,10 +928,12 @@ exports[`renders list item with right item 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 16,
+          "minHeight": 56,
         },
         undefined,
       ],
@@ -1034,10 +1044,12 @@ exports[`renders list item with title and description 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 14,
+          "minHeight": 72,
         },
         undefined,
       ],
@@ -1178,10 +1190,12 @@ exports[`renders with a description with typeof number 1`] = `
       false,
       [
         {
+          "justifyContent": "center",
           "paddingRight": 16,
+          "paddingVertical": 12,
         },
         {
-          "paddingVertical": 14,
+          "minHeight": 72,
         },
         undefined,
       ],

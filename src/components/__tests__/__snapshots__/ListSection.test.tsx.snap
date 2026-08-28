@@ -488,10 +488,12 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],
@@ -643,10 +645,12 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],
@@ -1252,10 +1256,12 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],
@@ -1407,10 +1413,12 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],
@@ -1976,10 +1984,12 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],
@@ -2131,10 +2141,12 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
+            "justifyContent": "center",
             "paddingRight": 16,
+            "paddingVertical": 12,
           },
           {
-            "paddingVertical": 16,
+            "minHeight": 56,
           },
           undefined,
         ],

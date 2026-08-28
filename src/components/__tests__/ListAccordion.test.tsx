@@ -144,7 +144,20 @@ describe('ListAccordion', () => {
     });
   });
 
-  it('drops to 12dp padding once the description wraps to a third line', async () => {
+  it('hits the container heights without measuring the description', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" testID="list-accordion">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      minHeight: 56,
+      paddingVertical: 12,
+    });
+  });
+
+  it('keeps the two line container height once a description is present', async () => {
     await render(
       <ListAccordion
         title="Accordion item 1"
@@ -156,7 +169,8 @@ describe('ListAccordion', () => {
     );
 
     expect(screen.getByTestId('list-accordion')).toHaveStyle({
-      paddingVertical: 14,
+      minHeight: 72,
+      paddingVertical: 12,
     });
 
     await fireEvent(
@@ -166,7 +180,22 @@ describe('ListAccordion', () => {
     );
 
     expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      minHeight: 72,
       paddingVertical: 12,
+    });
+  });
+
+  it('uses the expand token for the chevron', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(
+      screen.getByText('chevron-down', { includeHiddenElements: true })
+    ).toHaveStyle({
+      color: getTheme().colors.onSurface,
     });
   });
 
