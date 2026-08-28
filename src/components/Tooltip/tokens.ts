@@ -18,7 +18,7 @@ const plain = {
  */
 const rich = {
   container: 'surfaceContainer',
-  title: 'onSurface',
+  title: 'onSurfaceVariant',
   content: 'onSurfaceVariant',
   shape: 'medium',
   elevation: 2,

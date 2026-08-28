@@ -680,7 +680,7 @@ describe('Tooltip.Rich', () => {
       await user.press(getTrigger(getByText));
 
       expect(getByText('Heading')).toHaveStyle({
-        color: getTheme().colors.onSurface,
+        color: getTheme().colors.onSurfaceVariant,
       });
       expect(getByText('Body text')).toHaveStyle({
         color: getTheme().colors.onSurfaceVariant,
