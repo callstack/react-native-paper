@@ -6,6 +6,18 @@ TBC
 
 ## Components
 
+### Appbar
+
+The Paper 6.x `Appbar` is a big refatctor, which drops the previously used compound component approach.
+
+#### Migrating from the compound API
+
+`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and `Appbar.BackAction` have been removed. Render one `Appbar` and provide its headline, leading button, and trailing actions as props. The former `mode="medium"` and `mode="large"` values are now `variant="medium-flexible"` and `variant="large-flexible"`; centered content uses `headlineAlignment="center"`.
+
+#### Bottom toolbar support
+
+Material Design 3 drops the bottom bar support contained previously in the `Appbar` scope and moves it to `Toolbars`, hence you can't use the component to construct a bottom bar anymore - for these cases please use the `Toolbar` component.
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
