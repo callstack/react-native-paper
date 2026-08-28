@@ -1021,3 +1021,178 @@ describe('DataTable snapshots', () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+describe('DataTable.Pagination', () => {
+  it('does not name its containers on native, where they would swallow the controls', async () => {
+    await render(
+      <DataTable.Pagination
+        testID="pager"
+        page={0}
+        numberOfPages={3}
+        onPageChange={() => {}}
+        label="1-2 of 6"
+        numberOfItemsPerPageList={[2, 4]}
+        numberOfItemsPerPage={2}
+        onItemsPerPageChange={() => {}}
+        selectPageDropdownLabel="Rows per page"
+      />
+    );
+
+    // Same bug as the table container: an accessibility label on a view makes
+    // it one screen-reader stop on Android, hiding the buttons inside it.
+    expect(screen.getByTestId('pager')).not.toHaveProp('aria-label');
+    expect(screen.getByTestId('options-select')).not.toHaveProp('aria-label');
+  });
+
+  it('names the pagination region on the web', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <DataTable.Pagination
+        testID="pager"
+        page={0}
+        numberOfPages={3}
+        onPageChange={() => {}}
+      />
+    );
+
+    const pager = screen.getByTestId('pager');
+
+    expect(pager).toHaveProp('role', 'group');
+    expect(pager).toHaveProp('aria-label', 'Pagination');
+  });
+
+  it('makes its text labels their own stops on native', async () => {
+    await render(
+      <DataTable.Pagination
+        page={0}
+        numberOfPages={3}
+        onPageChange={() => {}}
+        label="1-2 of 6"
+        numberOfItemsPerPageList={[2, 4]}
+        numberOfItemsPerPage={2}
+        onItemsPerPageChange={() => {}}
+        selectPageDropdownLabel="Rows per page"
+      />
+    );
+
+    // Unclaimed text is merged into whatever ancestor is focusable, which on
+    // native is the enclosing scroll view - the whole screen.
+    expect(screen.getByTestId('select-page-dropdown-label')).toHaveProp(
+      'accessible',
+      true
+    );
+    expect(screen.getByText('1-2 of 6')).toHaveProp('accessible', true);
+  });
+
+  it('gives every control a human name', async () => {
+    await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        label="11-20 of 150"
+        showFastPaginationControls
+      />
+    );
+
+    expect(screen.getByLabelText('First page')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Previous page')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Next page')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Last page')).toBeOnTheScreen();
+  });
+
+  it('takes localized wording for every control', async () => {
+    await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        label="11-20 of 150"
+        showFastPaginationControls
+        labels={{
+          firstPage: 'Pierwsza strona',
+          lastPage: 'Ostatnia strona',
+        }}
+      />
+    );
+
+    expect(screen.getByLabelText('Pierwsza strona')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Ostatnia strona')).toBeOnTheScreen();
+    // Untouched entries keep their defaults.
+    expect(screen.getByLabelText('Next page')).toBeOnTheScreen();
+  });
+
+  it('names the page position when there is no visible range', async () => {
+    await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+      />
+    );
+
+    expect(screen.getByLabelText('Page 4 of 15')).toBeOnTheScreen();
+  });
+
+  it('lets the visible range speak for itself', async () => {
+    await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        label="11-20 of 150"
+      />
+    );
+
+    expect(screen.queryByLabelText('Page 4 of 15')).toBeNull();
+    expect(screen.getByText('11-20 of 150')).toBeOnTheScreen();
+  });
+
+  it('renders the rows-per-page selector only when it can work', async () => {
+    const view = await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        label="11-20 of 150"
+      />
+    );
+
+    expect(screen.queryByTestId('options-select')).not.toBeOnTheScreen();
+
+    await view.rerender(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        label="11-20 of 150"
+        numberOfItemsPerPageList={[2, 4, 6]}
+        numberOfItemsPerPage={2}
+        onItemsPerPageChange={() => {}}
+        selectPageDropdownLabel="Rows per page"
+      />
+    );
+
+    expect(screen.getByTestId('options-select')).toBeOnTheScreen();
+    expect(screen.getByTestId('select-page-dropdown-label')).toBeOnTheScreen();
+  });
+
+  it('announces the selected page size and that it opens a menu', async () => {
+    await render(
+      <DataTable.Pagination
+        page={3}
+        numberOfPages={15}
+        onPageChange={() => {}}
+        numberOfItemsPerPageList={[2, 4, 6]}
+        numberOfItemsPerPage={2}
+        onItemsPerPageChange={() => {}}
+        selectPageDropdownLabel="Rows per page"
+      />
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Rows per page, 2', expanded: false })
+    ).toBeOnTheScreen();
+  });
+});

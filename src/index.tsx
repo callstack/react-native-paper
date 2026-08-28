@@ -91,6 +91,7 @@ export type {
   DataTableLayout,
 } from './components/DataTable/columns';
 export type { NativeFocusMode as DataTableNativeFocusMode } from './components/DataTable/DataTableContext';
+export type { DataTablePaginationLabels } from './components/DataTable/DataTablePagination';
 export type {
   FormatRowPosition as DataTableFormatRowPosition,
   SortAccessibilityLabels as DataTableSortAccessibilityLabels,
