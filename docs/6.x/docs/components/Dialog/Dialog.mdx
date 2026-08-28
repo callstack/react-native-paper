@@ -11,19 +11,6 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
 To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal/Portal) component.
 
-## Recommended props
-
-| Prop | Type | Description |
-| --- | --- | --- |
-| `icon` | `IconSource` | Icon rendered through `Dialog.Icon`. |
-| `title` | `ReactNode` | Dialog title rendered through `Dialog.Title`. |
-| `content` | `ReactNode` | Required dialog content. Non-empty strings use Material 3 supporting-text styles. |
-| `actions` | `DialogActionsProps[]` | Action labels, press handlers, and Button props. |
-| `scrollable` | `boolean` | Renders content through `Dialog.ScrollArea` and a `ScrollView`. |
-| `contentProps` | `DialogContentProps` | Props forwarded to `Dialog.Content`. |
-| `scrollAreaProps` | `DialogScrollAreaProps` | Props forwarded to `Dialog.ScrollArea`. |
-| `scrollViewProps` | `ScrollViewProps` | Props forwarded to `ScrollView`. |
-
 
 
 
@@ -62,32 +49,6 @@ const MyComponent = () => {
 };
 
 export default MyComponent;
-```
-
-## Compound composition
-
-`Dialog.Icon`, `Dialog.Title`, `Dialog.Content`, `Dialog.ScrollArea`, and
-`Dialog.Actions` remain available for custom composition within `Dialog`.
-Passing them through `children` is deprecated; prefer the props above.
-
-## Migrating from children
-
-```js
-// Before
-<Dialog visible={visible} onDismiss={hideDialog}>
-  <Dialog.Title>Alert</Dialog.Title>
-  <Dialog.Content><Text>Something happened.</Text></Dialog.Content>
-  <Dialog.Actions><Button onPress={hideDialog}>Done</Button></Dialog.Actions>
-</Dialog>
-
-// After
-<Dialog
-  visible={visible}
-  onDismiss={hideDialog}
-  title="Alert"
-  content="Something happened."
-  actions={[{ label: 'Done', onPress: hideDialog }]}
-/>
 ```
 
 
@@ -130,11 +91,75 @@ Passing them through `children` is deprecated; prefer the props above.
 
 <div>
 
-### children (depracated, use props instead)
+### icon
 
 </div>
 
-  <PropTable componentLink="Dialog/Dialog" prop="children" />
+  <PropTable componentLink="Dialog/Dialog" prop="icon" />
+
+<div>
+
+### title
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="title" />
+
+<div>
+
+### content
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="content" />
+
+<div>
+
+### actions
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="actions" />
+
+<div>
+
+### scrollable
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollable" />
+
+<div>
+
+### contentProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="contentProps" />
+
+<div>
+
+### scrollAreaProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollAreaProps" />
+
+<div>
+
+### scrollViewProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollViewProps" />
+
+<div>
+
+### accessibilityLabel
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="accessibilityLabel" />
 
 <div>
 

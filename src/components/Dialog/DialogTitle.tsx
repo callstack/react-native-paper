@@ -31,19 +31,6 @@ export type Props = React.ComponentPropsWithRef<typeof Text> & {
  *
  *   const hideDialog = () => setVisible(false);
  *
- *   // Before
- *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Title>This is a title</Dialog.Title>
- *         <Dialog.Content>
- *           <Text variant="bodyMedium">This is simple dialog</Text>
- *         </Dialog.Content>
- *       </Dialog>
- *     </Portal>
- *   );
- *
- * 	 // V6 and later
  *   return (
  *     <Portal>
  *       <Dialog visible={visible} onDismiss={hideDialog} title="This is a title" content="This is simple dialog" />
