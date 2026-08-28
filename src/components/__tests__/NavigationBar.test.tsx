@@ -44,6 +44,34 @@ it('renders tab labels when labeled', async () => {
   expect(screen.getAllByText('Beta').length).toBeGreaterThan(0);
 });
 
+it('exposes navigation semantics through aria props', async () => {
+  await render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          {
+            key: 'a',
+            title: 'Alpha',
+            focusedIcon: 'magnify',
+            'aria-label': 'Alpha destination',
+          },
+        ],
+      }}
+      onTabPress={jest.fn()}
+    />
+  );
+
+  expect(
+    screen.getByTestId('bottom-navigation-bar-content-wrapper')
+  ).toHaveProp('role', 'tablist');
+  expect(
+    screen.getByRole(Platform.OS === 'ios' ? 'button' : 'tab', {
+      name: 'Alpha destination',
+    })
+  ).toBeSelected();
+});
+
 it('renders the horizontal (flexible) variant', async () => {
   const tree = (
     await render(
@@ -79,10 +107,10 @@ it('uses content-sized tabs and the expanded indicator in the horizontal variant
     justifyContent: 'center',
   });
   expect(screen.getByTestId('key-0-horizontal-item')).toHaveStyle({
-    height: 56,
+    height: 40,
   });
   expect(screen.getByTestId('key-0-active-indicator')).toHaveStyle({
-    borderRadius: 28,
+    borderRadius: 9999,
     overflow: 'hidden',
   });
   expect(screen.getByText('Route: 0')).toHaveProp('numberOfLines', 1);
@@ -139,7 +167,10 @@ it('renders MD3 state layers on hover, focus and press', async () => {
 
   // Hovered: 8% state layer.
   await fireEvent(screen.getByTestId('tab-b'), 'hoverIn');
-  expect(stateLayer()).toHaveStyle({ opacity: 0.08 });
+  expect(stateLayer()).toHaveStyle({
+    backgroundColor: getTheme().colors.onSecondaryContainer,
+    opacity: 0.08,
+  });
   await fireEvent(screen.getByTestId('tab-b'), 'hoverOut');
   expect(stateLayer()).toHaveStyle({ opacity: undefined });
 
@@ -180,7 +211,7 @@ it('clips the pressed state layer to the rounded indicator shape', async () => {
   expect(stateLayer).toHaveStyle({
     width: 56,
     height: 32,
-    borderRadius: 16,
+    borderRadius: 9999,
     overflow: 'hidden',
     opacity: 0.1,
   });

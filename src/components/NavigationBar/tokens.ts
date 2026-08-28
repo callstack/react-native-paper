@@ -13,11 +13,9 @@ export const NO_LABEL_BAR_HEIGHT = 64;
 // Stacked active indicator / state-layer pill (dp).
 export const INDICATOR_WIDTH = 56;
 export const INDICATOR_HEIGHT = 32;
-export const INDICATOR_BORDER_RADIUS = 16;
 
 // Horizontal active indicator / state-layer pill (dp). Its width hugs content.
-export const HORIZONTAL_INDICATOR_HEIGHT = 56;
-export const HORIZONTAL_INDICATOR_BORDER_RADIUS = 28;
+export const HORIZONTAL_INDICATOR_HEIGHT = 40;
 
 // Icon + spacing (dp).
 export const ICON_SIZE = 24;
@@ -38,6 +36,7 @@ export const colorRoles = {
   activeIcon: 'onSecondaryContainer',
   activeIndicator: 'secondaryContainer',
   activeLabel: 'secondary',
+  stateLayer: 'onSecondaryContainer',
   inactiveIcon: 'onSurfaceVariant',
   inactiveLabel: 'onSurfaceVariant',
 } as const satisfies Record<string, ColorRole>;

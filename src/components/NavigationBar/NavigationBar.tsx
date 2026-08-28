@@ -24,9 +24,7 @@ import {
   colorRoles,
   ICON_LABEL_GAP,
   ICON_SIZE,
-  HORIZONTAL_INDICATOR_BORDER_RADIUS,
   HORIZONTAL_INDICATOR_HEIGHT,
-  INDICATOR_BORDER_RADIUS,
   INDICATOR_HEIGHT,
   INDICATOR_WIDTH,
   MAX_TAB_WIDTH,
@@ -41,6 +39,7 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import { getStateLayer } from '../../theme/utils/state';
 import type { Theme, ThemeProp } from '../../types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
@@ -61,7 +60,7 @@ export type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   testID?: string;
   lazy?: boolean;
 };
@@ -132,7 +131,7 @@ export type Props<Route extends BaseRoute> = {
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -175,7 +174,7 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` by default.
+   * Uses `route['aria-label']` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -367,17 +366,14 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   const font = theme.fonts.labelMedium;
 
-  // MD3 state layer: visible on hover (8%) and focus/press (10%). Active items
-  // use the on-secondary-container role, inactive the on-surface-variant role.
-  const stateLayerRole = focused
-    ? colorRoles.activeIcon
-    : colorRoles.inactiveIcon;
+  // MD3 state layer: visible on hover (8%) and focus/press (10%). Both active
+  // and inactive items use the on-secondary-container role.
   const stateLayer = pressed
-    ? getStateLayer(theme, stateLayerRole, 'pressed')
+    ? getStateLayer(theme, colorRoles.stateLayer, 'pressed')
     : keyboardFocused
-      ? getStateLayer(theme, stateLayerRole, 'focused')
+      ? getStateLayer(theme, colorRoles.stateLayer, 'focused')
       : hovered
-        ? getStateLayer(theme, stateLayerRole, 'hovered')
+        ? getStateLayer(theme, colorRoles.stateLayer, 'hovered')
         : null;
   const stateLayerColor = stateLayer
     ? { backgroundColor: stateLayer.color, opacity: stateLayer.opacity }
@@ -520,9 +516,9 @@ const NavigationBarItem = <Route extends BaseRoute>({
     },
     onBlur: () => setKeyboardFocused(false),
     testID: itemTestID,
-    accessibilityLabel: getAccessibilityLabel({ route }),
-    accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
-    accessibilityState: { selected: focused },
+    'aria-label': getAccessibilityLabel({ route }),
+    role: Platform.OS === 'ios' ? 'button' : 'tab',
+    'aria-selected': focused,
     style: horizontal ? styles.horizontalTouchable : styles.item,
     children: horizontal ? horizontalContent : stackedContent,
   });
@@ -604,8 +600,7 @@ const NavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
+  getAccessibilityLabel = ({ route }: { route: Route }) => route['aria-label'],
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -769,7 +764,7 @@ const NavigationBar = <Route extends BaseRoute>({
                 maxWidth: maxTabBarWidth,
               },
             ]}
-            accessibilityRole={'tablist'}
+            role={'tablist'}
             testID={`${testID}-content-wrapper`}
           >
             {routes.map((route, index) => {
@@ -889,7 +884,7 @@ const styles = StyleSheet.create({
   stackedIndicator: {
     width: INDICATOR_WIDTH,
     height: INDICATOR_HEIGHT,
-    borderRadius: INDICATOR_BORDER_RADIUS,
+    borderRadius: cornerFull,
     alignSelf: 'center',
   },
   stateLayerWrapper: {
@@ -900,7 +895,7 @@ const styles = StyleSheet.create({
   stateLayer: {
     width: INDICATOR_WIDTH,
     height: INDICATOR_HEIGHT,
-    borderRadius: INDICATOR_BORDER_RADIUS,
+    borderRadius: cornerFull,
     overflow: 'hidden',
   },
   horizontalContainer: {
@@ -916,7 +911,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   horizontalIndicator: {
-    borderRadius: HORIZONTAL_INDICATOR_BORDER_RADIUS,
+    borderRadius: cornerFull,
     overflow: 'hidden',
   },
   horizontalLabel: {
