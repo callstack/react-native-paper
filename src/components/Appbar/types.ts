@@ -136,11 +136,13 @@ type AppbarHeadlineImage = {
 };
 
 type AppbarTextHeadline = AppbarWrittenHeadline & {
+  /** Visual and layout variant of the app bar. */
   variant: AppbarHeadlineVariant;
   headlineImage?: never;
 };
 
 type AppbarSmallImageHeadline = AppbarHeadlineImage & {
+  /** Visual and layout variant of the app bar. */
   variant: 'small';
   /** Accessible page headline. The image replaces this text visually. */
   headline: string;
@@ -151,12 +153,13 @@ type AppbarSmallImageHeadline = AppbarHeadlineImage & {
 
 type AppbarFlexibleImageHeadline = AppbarWrittenHeadline &
   AppbarHeadlineImage & {
+    /** Visual and layout variant of the app bar. */
     variant: Exclude<AppbarHeadlineVariant, 'small'>;
   };
 
 type AppbarBaseProps = Omit<
   ViewProps,
-  'accessibilityLabel' | 'accessibilityRole' | 'children' | 'style'
+  'accessibilityLabel' | 'accessibilityRole' | 'children' | 'style' | 'testID'
 > & {
   /** Optional leading button. */
   leadingButton?: AppbarLeadingButton;
@@ -170,9 +173,14 @@ type AppbarBaseProps = Omit<
     left?: number;
     right?: number;
   };
+  /** Style applied to the app bar container. */
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  /** Reference for the app bar container. */
   ref?: React.Ref<View>;
+  /** Theme override for the app bar. */
   theme?: ThemeProp;
+  /** TestID used for testing purposes. */
+  testID?: string;
 };
 
 type AppbarHeadlineProps = {
@@ -205,6 +213,7 @@ export type AppbarSearchbarProps = Omit<
 };
 
 type AppbarSearchProps = {
+  /** Visual and layout variant of the app bar. */
   variant: 'search';
   /** Props forwarded to the existing Paper Searchbar. */
   searchBar: AppbarSearchbarProps;

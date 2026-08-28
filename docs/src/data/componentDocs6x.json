@@ -104,7 +104,7 @@
         "statics": [],
         "props": {
           "theme": {
-            "description": "",
+            "description": "Theme override for the app bar.",
             "required": false,
             "tsType": {
               "name": "ThemeProp",
@@ -148,7 +148,7 @@
             }
           },
           "style": {
-            "description": "",
+            "description": "Style applied to the app bar container.",
             "required": false,
             "tsType": {
               "name": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>",
@@ -156,11 +156,19 @@
             }
           },
           "ref": {
-            "description": "",
+            "description": "Reference for the app bar container.",
             "required": false,
             "tsType": {
               "name": "React.Ref<View>",
               "raw": "React.Ref<View>"
+            }
+          },
+          "testID": {
+            "description": "TestID used for testing purposes.",
+            "required": false,
+            "tsType": {
+              "name": "string",
+              "raw": "string"
             }
           },
           "headlineAlignment": {
@@ -252,7 +260,7 @@
             }
           },
           "variant": {
-            "description": "",
+            "description": "Visual and layout variant of the app bar.",
             "required": true,
             "tsType": {
               "name": "\"search\" | AppbarHeadlineVariant",
