@@ -1,12 +1,6 @@
 [
   "ActivityIndicator",
-  {
-    "type": "dir",
-    "name": "Appbar",
-    "label": "Appbar",
-    "collapsible": true,
-    "collapsed": false
-  },
+  "Appbar",
   {
     "type": "dir",
     "name": "Avatar",

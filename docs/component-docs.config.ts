@@ -13,6 +13,13 @@ type ComponentDocsConfig = {
   docsRootDir: string;
   libsRootDir: string;
   pages: Pages;
+  typescriptProps: Record<
+    string,
+    {
+      sourcePath: string;
+      typeName: string;
+    }
+  >;
   customFields: {
     moreExamples: Record<string, Record<string, string>>;
     knownIssues: Record<string, Record<string, string>>;
@@ -24,9 +31,7 @@ type ComponentDocsConfig = {
 
 const pages = {
   ActivityIndicator: 'ActivityIndicator',
-  Appbar: {
-    Appbar: 'Appbar/Appbar',
-  },
+  Appbar: 'Appbar/Appbar',
   Avatar: {
     AvatarIcon: 'Avatar/AvatarIcon',
     AvatarImage: 'Avatar/AvatarImage',
@@ -144,6 +149,19 @@ const componentDocsConfig: ComponentDocsConfig = {
   docsRootDir: path.join(__dirname, '6.x', 'docs', 'components'),
   libsRootDir: path.join(__dirname, '..', 'src', 'components'),
   pages,
+  typescriptProps: {
+    'Appbar/Appbar': {
+      sourcePath: path.join(
+        __dirname,
+        '..',
+        'src',
+        'components',
+        'Appbar',
+        'types.ts'
+      ),
+      typeName: 'Props',
+    },
+  },
   customFields: {
     moreExamples: {
       Portal: {

@@ -139,6 +139,8 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  *   }}
  * />
  * ```
+ *
+ * @extends View props https://reactnative.dev/docs/view#props
  */
 const Appbar = ({
   contentStyle,

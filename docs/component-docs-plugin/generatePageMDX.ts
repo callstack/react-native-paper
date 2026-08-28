@@ -1,8 +1,16 @@
 import componentDocsConfig from '../component-docs.config.ts';
 
-type ComponentProp = {
+export type ComponentProp = {
+  defaultValue?: {
+    computed?: boolean;
+    value: string;
+  } | null;
   description?: string;
   required?: boolean;
+  tsType?: {
+    name: string;
+    raw?: string;
+  } | null;
 };
 
 export type ComponentDoc = {

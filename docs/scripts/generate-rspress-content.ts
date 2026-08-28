@@ -128,8 +128,29 @@ const getVersionComponentOrder = (version: string): MetaEntry[] => {
     return fromConfig;
   }
 
+  const stableComponentsDir = path.join(
+    getVersionDocsDir(version),
+    'components'
+  );
+  const stableOrder = fromConfig.map((entry) => {
+    const entryName = typeof entry === 'string' ? entry : entry.name;
+    const entryPath = path.join(stableComponentsDir, entryName);
+
+    if (fs.existsSync(entryPath) && fs.statSync(entryPath).isDirectory()) {
+      return {
+        type: 'dir',
+        name: entryName,
+        label: entryName,
+        collapsible: true,
+        collapsed: false,
+      };
+    }
+
+    return entry;
+  });
+
   return [
-    ...fromConfig,
+    ...stableOrder,
     {
       type: 'dir',
       name: 'HelperText',

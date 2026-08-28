@@ -95,45 +95,177 @@
     "Appbar/Appbar": {
       "filepath": "Appbar/Appbar.tsx",
       "title": "Appbar",
-      "description": "A Material Design app bar for displaying a page headline, navigation, and\ncontextual actions. Appbar supports small, medium flexible, large flexible,\nand search variants. Its surface color automatically changes when content\nhas scrolled, and it accounts for safe-area insets.\n\n## Variants\n\n| `variant` | Purpose |\n| --- | --- |\n| `small` | A compact 64dp app bar with a one-line headline. |\n| `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |\n| `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |\n| `search` | An app bar containing a centered Paper `Searchbar`. |\n\n## Main props\n\n| Prop | Description |\n| --- | --- |\n| `headline` | Required accessible headline for every non-search variant. |\n| `subtitle` | Optional supporting text for written headlines. |\n| `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |\n| `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |\n| `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |\n| `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |\n| `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |\n| `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |\n| `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |\n| `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |\n| `statusBarHeight` | Overrides only the automatic top inset. |\n| `contentStyle` | Styles the headline and subtitle area. |\n| `style` | Styles the app bar and can override its background color. |\n\n## Migrating from the compound API\n\n`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and\n`Appbar.BackAction` have been removed. Render one `Appbar` and provide its\nheadline, leading button, and trailing actions as props. The former\n`mode=\"medium\"` and `mode=\"large\"` values are now\n`variant=\"medium-flexible\"` and `variant=\"large-flexible\"`; centered\ncontent uses `headlineAlignment=\"center\"`.\n\n## Usage\n\n### Small app bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar\n    variant=\"small\"\n    headline=\"Inbox\"\n    leadingButton={{ type: 'back', onPress: () => {} }}\n    trailingActions={[\n      {\n        key: 'search',\n        icon: 'magnify',\n        'aria-label': 'Search',\n        onPress: () => {},\n      },\n      {\n        key: 'more',\n        icon: 'dots-vertical',\n        'aria-label': 'More options',\n        onPress: () => {},\n      },\n    ]}\n  />\n);\n\nexport default MyComponent;\n```\n\n### Decorated action\n```js\nimport { Appbar, Tooltip } from 'react-native-paper';\n\n<Appbar\n  variant=\"small\"\n  headline=\"Files\"\n  trailingActions={[\n    {\n      key: 'print',\n      icon: 'printer',\n      'aria-label': 'Print',\n      onPress: () => {},\n      decorate: (button) => (\n        <Tooltip title=\"Print shortcut\">{button}</Tooltip>\n      ),\n    },\n  ]}\n/>\n```\n\n### Flexible app bar\n```js\n<Appbar\n  variant=\"large-flexible\"\n  headline=\"Photos\"\n  subtitle=\"Summer holiday\"\n  headlineAlignment=\"center\"\n  isScrolled={isScrolled}\n/>\n```\n\n### Search app bar\n```js\n<Appbar\n  variant=\"search\"\n  leadingButton={{ type: 'back', onPress: () => {} }}\n  searchBar={{\n    placeholder: 'Search messages',\n    value: query,\n    onChangeText: setQuery,\n  }}\n/>\n```",
+      "description": "A Material Design app bar for displaying a page headline, navigation, and\ncontextual actions. Appbar supports small, medium flexible, large flexible,\nand search variants. Its surface color automatically changes when content\nhas scrolled, and it accounts for safe-area insets.\n\n## Variants\n\n| `variant` | Purpose |\n| --- | --- |\n| `small` | A compact 64dp app bar with a one-line headline. |\n| `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |\n| `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |\n| `search` | An app bar containing a centered Paper `Searchbar`. |\n\n## Main props\n\n| Prop | Description |\n| --- | --- |\n| `headline` | Required accessible headline for every non-search variant. |\n| `subtitle` | Optional supporting text for written headlines. |\n| `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |\n| `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |\n| `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |\n| `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |\n| `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |\n| `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |\n| `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |\n| `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |\n| `statusBarHeight` | Overrides only the automatic top inset. |\n| `contentStyle` | Styles the headline and subtitle area. |\n| `style` | Styles the app bar and can override its background color. |\n\n## Migrating from the compound API\n\n`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and\n`Appbar.BackAction` have been removed. Render one `Appbar` and provide its\nheadline, leading button, and trailing actions as props. The former\n`mode=\"medium\"` and `mode=\"large\"` values are now\n`variant=\"medium-flexible\"` and `variant=\"large-flexible\"`; centered\ncontent uses `headlineAlignment=\"center\"`.\n\n## Usage\n\n### Small app bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar\n    variant=\"small\"\n    headline=\"Inbox\"\n    leadingButton={{ type: 'back', onPress: () => {} }}\n    trailingActions={[\n      {\n        key: 'search',\n        icon: 'magnify',\n        'aria-label': 'Search',\n        onPress: () => {},\n      },\n      {\n        key: 'more',\n        icon: 'dots-vertical',\n        'aria-label': 'More options',\n        onPress: () => {},\n      },\n    ]}\n  />\n);\n\nexport default MyComponent;\n```\n\n### Decorated action\n```js\nimport { Appbar, Tooltip } from 'react-native-paper';\n\n<Appbar\n  variant=\"small\"\n  headline=\"Files\"\n  trailingActions={[\n    {\n      key: 'print',\n      icon: 'printer',\n      'aria-label': 'Print',\n      onPress: () => {},\n      decorate: (button) => (\n        <Tooltip title=\"Print shortcut\">{button}</Tooltip>\n      ),\n    },\n  ]}\n/>\n```\n\n### Flexible app bar\n```js\n<Appbar\n  variant=\"large-flexible\"\n  headline=\"Photos\"\n  subtitle=\"Summer holiday\"\n  headlineAlignment=\"center\"\n  isScrolled={isScrolled}\n/>\n```\n\n### Search app bar\n```js\n<Appbar\n  variant=\"search\"\n  leadingButton={{ type: 'back', onPress: () => {} }}\n  searchBar={{\n    placeholder: 'Search messages',\n    value: query,\n    onChangeText: setQuery,\n  }}\n/>\n```\n\n@extends View props https://reactnative.dev/docs/view#props",
       "link": "appbar",
       "data": {
-        "description": "A Material Design app bar for displaying a page headline, navigation, and\ncontextual actions. Appbar supports small, medium flexible, large flexible,\nand search variants. Its surface color automatically changes when content\nhas scrolled, and it accounts for safe-area insets.\n\n## Variants\n\n| `variant` | Purpose |\n| --- | --- |\n| `small` | A compact 64dp app bar with a one-line headline. |\n| `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |\n| `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |\n| `search` | An app bar containing a centered Paper `Searchbar`. |\n\n## Main props\n\n| Prop | Description |\n| --- | --- |\n| `headline` | Required accessible headline for every non-search variant. |\n| `subtitle` | Optional supporting text for written headlines. |\n| `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |\n| `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |\n| `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |\n| `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |\n| `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |\n| `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |\n| `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |\n| `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |\n| `statusBarHeight` | Overrides only the automatic top inset. |\n| `contentStyle` | Styles the headline and subtitle area. |\n| `style` | Styles the app bar and can override its background color. |\n\n## Migrating from the compound API\n\n`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and\n`Appbar.BackAction` have been removed. Render one `Appbar` and provide its\nheadline, leading button, and trailing actions as props. The former\n`mode=\"medium\"` and `mode=\"large\"` values are now\n`variant=\"medium-flexible\"` and `variant=\"large-flexible\"`; centered\ncontent uses `headlineAlignment=\"center\"`.\n\n## Usage\n\n### Small app bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar\n    variant=\"small\"\n    headline=\"Inbox\"\n    leadingButton={{ type: 'back', onPress: () => {} }}\n    trailingActions={[\n      {\n        key: 'search',\n        icon: 'magnify',\n        'aria-label': 'Search',\n        onPress: () => {},\n      },\n      {\n        key: 'more',\n        icon: 'dots-vertical',\n        'aria-label': 'More options',\n        onPress: () => {},\n      },\n    ]}\n  />\n);\n\nexport default MyComponent;\n```\n\n### Decorated action\n```js\nimport { Appbar, Tooltip } from 'react-native-paper';\n\n<Appbar\n  variant=\"small\"\n  headline=\"Files\"\n  trailingActions={[\n    {\n      key: 'print',\n      icon: 'printer',\n      'aria-label': 'Print',\n      onPress: () => {},\n      decorate: (button) => (\n        <Tooltip title=\"Print shortcut\">{button}</Tooltip>\n      ),\n    },\n  ]}\n/>\n```\n\n### Flexible app bar\n```js\n<Appbar\n  variant=\"large-flexible\"\n  headline=\"Photos\"\n  subtitle=\"Summer holiday\"\n  headlineAlignment=\"center\"\n  isScrolled={isScrolled}\n/>\n```\n\n### Search app bar\n```js\n<Appbar\n  variant=\"search\"\n  leadingButton={{ type: 'back', onPress: () => {} }}\n  searchBar={{\n    placeholder: 'Search messages',\n    value: query,\n    onChangeText: setQuery,\n  }}\n/>\n```",
+        "description": "A Material Design app bar for displaying a page headline, navigation, and\ncontextual actions. Appbar supports small, medium flexible, large flexible,\nand search variants. Its surface color automatically changes when content\nhas scrolled, and it accounts for safe-area insets.\n\n## Variants\n\n| `variant` | Purpose |\n| --- | --- |\n| `small` | A compact 64dp app bar with a one-line headline. |\n| `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |\n| `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |\n| `search` | An app bar containing a centered Paper `Searchbar`. |\n\n## Main props\n\n| Prop | Description |\n| --- | --- |\n| `headline` | Required accessible headline for every non-search variant. |\n| `subtitle` | Optional supporting text for written headlines. |\n| `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |\n| `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |\n| `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |\n| `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |\n| `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |\n| `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |\n| `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |\n| `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |\n| `statusBarHeight` | Overrides only the automatic top inset. |\n| `contentStyle` | Styles the headline and subtitle area. |\n| `style` | Styles the app bar and can override its background color. |\n\n## Migrating from the compound API\n\n`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and\n`Appbar.BackAction` have been removed. Render one `Appbar` and provide its\nheadline, leading button, and trailing actions as props. The former\n`mode=\"medium\"` and `mode=\"large\"` values are now\n`variant=\"medium-flexible\"` and `variant=\"large-flexible\"`; centered\ncontent uses `headlineAlignment=\"center\"`.\n\n## Usage\n\n### Small app bar\n```js\nimport * as React from 'react';\nimport { Appbar } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Appbar\n    variant=\"small\"\n    headline=\"Inbox\"\n    leadingButton={{ type: 'back', onPress: () => {} }}\n    trailingActions={[\n      {\n        key: 'search',\n        icon: 'magnify',\n        'aria-label': 'Search',\n        onPress: () => {},\n      },\n      {\n        key: 'more',\n        icon: 'dots-vertical',\n        'aria-label': 'More options',\n        onPress: () => {},\n      },\n    ]}\n  />\n);\n\nexport default MyComponent;\n```\n\n### Decorated action\n```js\nimport { Appbar, Tooltip } from 'react-native-paper';\n\n<Appbar\n  variant=\"small\"\n  headline=\"Files\"\n  trailingActions={[\n    {\n      key: 'print',\n      icon: 'printer',\n      'aria-label': 'Print',\n      onPress: () => {},\n      decorate: (button) => (\n        <Tooltip title=\"Print shortcut\">{button}</Tooltip>\n      ),\n    },\n  ]}\n/>\n```\n\n### Flexible app bar\n```js\n<Appbar\n  variant=\"large-flexible\"\n  headline=\"Photos\"\n  subtitle=\"Summer holiday\"\n  headlineAlignment=\"center\"\n  isScrolled={isScrolled}\n/>\n```\n\n### Search app bar\n```js\n<Appbar\n  variant=\"search\"\n  leadingButton={{ type: 'back', onPress: () => {} }}\n  searchBar={{\n    placeholder: 'Search messages',\n    value: query,\n    onChangeText: setQuery,\n  }}\n/>\n```\n\n@extends View props https://reactnative.dev/docs/view#props",
         "displayName": "Appbar",
         "methods": [],
         "statics": [],
         "props": {
-          "headlineAlignment": {
-            "defaultValue": {
-              "value": "'leading'",
-              "computed": false
-            },
+          "theme": {
+            "description": "",
             "required": false,
-            "description": ""
+            "tsType": {
+              "name": "ThemeProp",
+              "raw": "ThemeProp"
+            }
+          },
+          "leadingButton": {
+            "description": "Optional leading button.",
+            "required": false,
+            "tsType": {
+              "name": "AppbarLeadingButton",
+              "raw": "AppbarLeadingButton"
+            }
           },
           "isScrolled": {
             "defaultValue": {
               "value": "false",
               "computed": false
             },
+            "description": "Uses the on-scroll container color when true.",
             "required": false,
-            "description": ""
+            "tsType": {
+              "name": "boolean",
+              "raw": "boolean"
+            }
           },
-          "testID": {
+          "statusBarHeight": {
+            "description": "Override for the automatic top safe-area inset.",
+            "required": false,
+            "tsType": {
+              "name": "number",
+              "raw": "number"
+            }
+          },
+          "safeAreaInsets": {
+            "description": "Safe-area inset overrides. Unspecified values use the detected insets.",
+            "required": false,
+            "tsType": {
+              "name": "{\n    top?: number;\n    left?: number;\n    right?: number;\n  }",
+              "raw": "{\n    top?: number;\n    left?: number;\n    right?: number;\n  }"
+            }
+          },
+          "style": {
+            "description": "",
+            "required": false,
+            "tsType": {
+              "name": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>",
+              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+            }
+          },
+          "ref": {
+            "description": "",
+            "required": false,
+            "tsType": {
+              "name": "React.Ref<View>",
+              "raw": "React.Ref<View>"
+            }
+          },
+          "headlineAlignment": {
             "defaultValue": {
-              "value": "'appbar'",
+              "value": "'leading'",
               "computed": false
             },
+            "description": "Headline and subtitle alignment.",
             "required": false,
-            "description": ""
+            "tsType": {
+              "name": "AppbarHeadlineAlignment",
+              "raw": "AppbarHeadlineAlignment"
+            }
           },
           "trailingActions": {
             "defaultValue": {
               "value": "[]",
               "computed": false
             },
+            "description": "Trailing actions.\nExterior trailing actions.",
             "required": false,
-            "description": ""
+            "tsType": {
+              "name": "AppbarTrailingActions | readonly AppbarStandardTrailingAction[]",
+              "raw": "AppbarTrailingActions | readonly AppbarStandardTrailingAction[]"
+            }
+          },
+          "contentStyle": {
+            "description": "Style applied to the headline and subtitle area.",
+            "required": false,
+            "tsType": {
+              "name": "StyleProp<ViewStyle>",
+              "raw": "StyleProp<ViewStyle>"
+            }
+          },
+          "searchBar": {
+            "description": "Props forwarded to the existing Paper Searchbar.",
+            "required": false,
+            "tsType": {
+              "name": "AppbarSearchbarProps",
+              "raw": "AppbarSearchbarProps"
+            }
+          },
+          "onHeadlinePress": {
+            "description": "Called when the headline area is pressed.",
+            "required": false,
+            "tsType": {
+              "name": "(event: GestureResponderEvent) => void",
+              "raw": "(event: GestureResponderEvent) => void"
+            }
+          },
+          "headlinePressableProps": {
+            "description": "Props applied to the interactive headline area.",
+            "required": false,
+            "tsType": {
+              "name": "AppbarHeadlinePressableProps",
+              "raw": "AppbarHeadlinePressableProps"
+            }
+          },
+          "headline": {
+            "description": "Written headline displayed by the app bar.\nAccessible page headline. The image replaces this text visually.",
+            "required": false,
+            "tsType": {
+              "name": "string",
+              "raw": "string"
+            }
+          },
+          "subtitle": {
+            "description": "Optional supporting text displayed below the headline.",
+            "required": false,
+            "tsType": {
+              "name": "string",
+              "raw": "string"
+            }
+          },
+          "headlineProps": {
+            "description": "Props applied to the headline heading.",
+            "required": false,
+            "tsType": {
+              "name": "AppbarHeadlineTextProps",
+              "raw": "AppbarHeadlineTextProps"
+            }
+          },
+          "subtitleProps": {
+            "description": "Props applied to the subtitle text.",
+            "required": false,
+            "tsType": {
+              "name": "AppbarTextProps",
+              "raw": "AppbarTextProps"
+            }
+          },
+          "variant": {
+            "description": "",
+            "required": true,
+            "tsType": {
+              "name": "\"search\" | AppbarHeadlineVariant",
+              "raw": "\"search\" | AppbarHeadlineVariant"
+            }
+          },
+          "headlineImage": {
+            "description": "Image or logo displayed in the app bar. It should fit within 32dp height.",
+            "required": false,
+            "tsType": {
+              "name": "React.ReactElement",
+              "raw": "React.ReactElement"
+            }
           }
         }
       },

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import type { ComponentDoc } from '../component-docs-plugin/generatePageMDX.ts';
 import generatePageMDX from '../component-docs-plugin/generatePageMDX.ts';
 import componentDocsConfig from '../component-docs.config.ts';
+import { extractTypeScriptProps } from './typescript-component-props.ts';
 
 const parseComponentDocs = componentDocsParser.default;
 
@@ -78,27 +79,25 @@ const writeDocPage = (
   const doc = parseComponentDocs(sourcePath, {
     root: componentDocsConfig.libsRootDir,
   });
+  const componentLink = path
+    .relative(componentDocsConfig.libsRootDir, sourcePath)
+    .replace(/\.tsx$/, '')
+    .split(path.sep)
+    .join('/');
+  const typescriptPropsConfig =
+    componentDocsConfig.typescriptProps[componentLink];
+
+  if (typescriptPropsConfig) {
+    doc.data.props = extractTypeScriptProps(
+      typescriptPropsConfig,
+      doc.data.props
+    );
+  }
 
   ensureDir(path.dirname(targetPath));
-  fs.writeFileSync(
-    targetPath,
-    generatePageMDX(
-      doc,
-      path
-        .relative(componentDocsConfig.libsRootDir, sourcePath)
-        .replace(/\.tsx$/, '')
-        .split(path.sep)
-        .join('/')
-    )
-  );
+  fs.writeFileSync(targetPath, generatePageMDX(doc, componentLink));
 
-  docs[
-    path
-      .relative(componentDocsConfig.libsRootDir, sourcePath)
-      .replace(/\.tsx$/, '')
-      .split(path.sep)
-      .join('/')
-  ] = doc;
+  docs[componentLink] = doc;
 };
 
 const writeMetaFiles = () => {
