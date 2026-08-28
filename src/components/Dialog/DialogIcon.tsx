@@ -3,7 +3,6 @@ import type { ColorValue } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import type { Theme } from '../../types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 
@@ -75,7 +74,7 @@ const DialogIcon = ({
   testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   //@ts-ignore
   const iconColor = color || colors.secondary;

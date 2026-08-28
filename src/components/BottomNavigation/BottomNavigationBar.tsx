@@ -15,7 +15,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -327,7 +327,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -433,8 +433,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
-    {}) as {
+  const {
+    backgroundColor: customBackground,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  } = (StyleSheet.flatten(style) || {}) as {
     elevation?: number;
     backgroundColor?: ColorValue;
   };
@@ -576,7 +578,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = (theme as Theme).fonts.labelMedium;
+            const font = theme.fonts.labelMedium;
 
             return renderTouchable({
               key: route.key,
@@ -644,6 +646,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         })
                       ) : (
                         <Icon
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                           source={route.focusedIcon as IconSource}
                           color={activeTintColor}
                           size={24}
@@ -672,7 +675,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           source={
                             route.unfocusedIcon !== undefined
                               ? route.unfocusedIcon
-                              : (route.focusedIcon as IconSource)
+                              : // focusedIcon is required when renderIcon is omitted.
+                                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                                (route.focusedIcon as IconSource)
                           }
                           color={inactiveTintColor}
                           size={24}

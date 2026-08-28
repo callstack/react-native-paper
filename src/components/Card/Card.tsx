@@ -192,6 +192,7 @@ const Card = ({
     mode: cardMode,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const { borderColor = themedBorderColor } = flattenedStyles;

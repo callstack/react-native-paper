@@ -147,10 +147,10 @@ const CheckboxItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
+  const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <TouchableRipple

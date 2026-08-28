@@ -10,7 +10,7 @@ import type {
 import { useAppbarContext } from './AppbarContext';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
@@ -88,7 +88,7 @@ const AppbarAction = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { isDark = false } = useAppbarContext() ?? {};
 
   const actionIconColor = iconColor

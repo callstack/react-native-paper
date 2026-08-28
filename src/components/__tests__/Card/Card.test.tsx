@@ -260,7 +260,8 @@ describe('getCardColors - border color', () => {
     expect(
       getCardColors({
         theme: getTheme(),
-        mode: undefined as any,
+        // @ts-expect-error: Verify the runtime fallback when mode is omitted.
+        mode: undefined,
       })
     ).toMatchObject({ borderColor: getTheme().colors.outline });
   });

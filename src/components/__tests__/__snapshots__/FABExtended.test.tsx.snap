@@ -24,11 +24,11 @@ exports[`renders extended FAB collapsed 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 4,
+          "shadowOpacity": 0.19,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "auto",
@@ -263,11 +263,11 @@ exports[`renders extended FAB expanded 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 4,
+          "shadowOpacity": 0.19,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "auto",
@@ -502,11 +502,11 @@ exports[`renders extended FAB large size 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 4,
+          "shadowOpacity": 0.19,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "auto",
@@ -741,11 +741,11 @@ exports[`renders extended FAB medium size 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 4,
+          "shadowOpacity": 0.19,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "auto",
@@ -980,11 +980,11 @@ exports[`renders extended FAB not visible 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
           "shadowOpacity": 0,
-          "shadowRadius": 4,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "none",
@@ -1219,11 +1219,11 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
-            "height": 4,
+            "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0.3,
-          "shadowRadius": 4,
+          "shadowOpacity": 0.19,
+          "shadowRadius": 4.75,
         },
         {
           "pointerEvents": "auto",

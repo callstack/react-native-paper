@@ -152,6 +152,7 @@ const Appbar = ({
     backgroundColor: customBackground,
     elevation = elevated ? 2 : 0,
     ...restStyle
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     elevation?: Elevation;
     backgroundColor?: ColorValue;

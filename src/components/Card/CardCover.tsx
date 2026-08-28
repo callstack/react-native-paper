@@ -37,7 +37,7 @@ export type Props = ImageProps & {
 const CardCover = ({ style, theme: themeOverrides, ...rest }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const flattenedStyles = StyleSheet.flatten<ViewStyle>(style) || {};
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
     (style) => style.startsWith('border') && style.endsWith('Radius')

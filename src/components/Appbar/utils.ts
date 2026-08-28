@@ -1,7 +1,7 @@
 import { Animated } from 'react-native';
 import type { ColorValue, ViewStyle } from 'react-native';
 
-import type { InternalTheme, Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -15,7 +15,7 @@ const borderStyleProperties = [
   'borderTopRightRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
-];
+] satisfies readonly (keyof ViewStyle)[];
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
@@ -23,7 +23,7 @@ export const getAppbarBackgroundColor = (
   customBackground?: ColorValue,
   elevated?: boolean
 ) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   if (customBackground) {
     return customBackground;
   }
@@ -44,6 +44,7 @@ export const getAppbarBorders = (
   const borders: Record<string, number> = {};
 
   for (const property of borderStyleProperties) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const value = style[property as keyof typeof style];
     if (value) {
       borders[property] = value;
