@@ -210,16 +210,6 @@ const ListAccordion = ({
     setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
   };
 
-  const getVerticalPaddingStyle = () => {
-    if (!description) {
-      return styles.containerOneLine;
-    }
-
-    return isDescriptionMultiline
-      ? styles.containerThreeLine
-      : styles.containerTwoLine;
-  };
-
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);
 
@@ -259,7 +249,11 @@ const ListAccordion = ({
         style={{ backgroundColor: theme.colors[ListTokens.containerColor] }}
       >
         <TouchableRipple
-          style={[styles.container, getVerticalPaddingStyle(), style]}
+          style={[
+            styles.container,
+            description ? styles.containerTwoLine : styles.containerOneLine,
+            style,
+          ]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -325,7 +319,7 @@ const ListAccordion = ({
               ) : (
                 <MaterialCommunityIcon
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={theme.colors[ListTokens.trailingIconColor]}
+                  color={theme.colors[ListTokens.expandTrailingIconColor]}
                   size={24}
                   direction={direction}
                 />
@@ -348,16 +342,15 @@ ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: ListTokens.verticalPadding,
     paddingRight: ListTokens.trailingSpace,
+    justifyContent: 'center',
   },
   containerOneLine: {
-    paddingVertical: ListTokens.oneLineVerticalPadding,
+    minHeight: ListTokens.oneLineContainerHeight,
   },
   containerTwoLine: {
-    paddingVertical: ListTokens.twoLineVerticalPadding,
-  },
-  containerThreeLine: {
-    paddingVertical: ListTokens.threeLineVerticalPadding,
+    minHeight: ListTokens.twoLineContainerHeight,
   },
   row: {
     flexDirection: 'row',

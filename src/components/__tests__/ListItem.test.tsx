@@ -178,7 +178,16 @@ it('renders list item with custom content style', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('drops to 12dp padding once the description wraps to a third line', async () => {
+it('hits the one line container height without measuring the description', async () => {
+  await render(<ListItem title="First Item" testID={testID} />);
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 12,
+  });
+});
+
+it('hits the two and three line container heights without measuring', async () => {
   await render(
     <ListItem
       title="First Item"
@@ -187,13 +196,42 @@ it('drops to 12dp padding once the description wraps to a third line', async () 
     />
   );
 
-  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 14 });
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 12,
+  });
 
   await fireEvent(screen.getByText('Item description'), 'textLayout', {
     nativeEvent: { lines: [{}, {}] },
   });
 
-  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 12 });
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 12,
+  });
+});
+
+it('top aligns the accessories once the description wraps', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => <View testID="left-accessory" style={props.style} />}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'center',
+  });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'flex-start',
+  });
 });
 
 it('applies the theme override to title and description typography', async () => {

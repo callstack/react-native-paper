@@ -1,9 +1,9 @@
 import type { ColorRole } from '../../theme/types';
 
 const sizes = {
-  oneLineVerticalPadding: 16,
-  twoLineVerticalPadding: 14,
-  threeLineVerticalPadding: 12,
+  verticalPadding: 12,
+  oneLineContainerHeight: 56,
+  twoLineContainerHeight: 72,
   leadingSpace: 16,
   trailingSpace: 16,
 } as const;
@@ -14,6 +14,7 @@ const colors = {
   supportingTextColor: 'onSurfaceVariant',
   leadingIconColor: 'onSurfaceVariant',
   trailingIconColor: 'onSurfaceVariant',
+  expandTrailingIconColor: 'onSurface',
 } as const satisfies Record<string, ColorRole>;
 
 export const ListTokens = { ...sizes, ...colors };
