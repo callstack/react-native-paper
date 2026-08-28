@@ -140,6 +140,12 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  * `variant="medium-flexible"` and `variant="large-flexible"`; centered
  * content uses `headlineAlignment="center"`.
  *
+ * ## Bottom toolbar support
+ *
+ * Material Design 3 drops the bottom bar support contained previously in the Appbar scope
+ * and moves it to Toolbars, hence you can't use the component to construct a bottom bar
+ * anymore - for these cases please use the Toolbar component.
+ *
  * @extends View props https://reactnative.dev/docs/view#props
  */
 const Appbar = ({
