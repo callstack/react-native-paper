@@ -568,6 +568,57 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+#### Prop-based API
+
+The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+
+**Removed props**
+
+- **`children`** was removed from `Dialog`
+
+Use the dedicated props instead:
+
+- **`Dialog.Icon`** → **`icon`**
+- **`Dialog.Title`** → **`title`**
+- **`Dialog.Content`** → **`content`**
+- **`Dialog.Actions`** → **`actions`**
+
+**New props**
+
+- **`scrollable`** renders the dialog content inside a scrollable area.
+- **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
+- **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
+- **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
+
+```tsx
+// Before (v5)
+<Portal>
+  <Dialog visible={visible} onDismiss={hideDialog}>
+    <Dialog.Title>Alert</Dialog.Title>
+    <Dialog.Content>
+      <Text variant="bodyMedium">This is a simple dialog</Text>
+    </Dialog.Content>
+    <Dialog.Actions>
+      <Button onPress={hideDialog}>Done</Button>
+    </Dialog.Actions>
+  </Dialog>
+</Portal>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  icon="alert"
+  title="Alert"
+  content="This is a simple dialog"
+  actions={[
+    <Button key="done" onPress={hideDialog}>
+      Done
+    </Button>,
+  ]}
+/>
+```
+
 #### `Dialog.Actions`
 
 `Dialog.Actions` no longer injects `compact` on its buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
