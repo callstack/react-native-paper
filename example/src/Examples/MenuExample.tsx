@@ -28,8 +28,6 @@ const MenuExample = () => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
     React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
-  const [appbarMenuCoord, setAppbarMenuCoord] =
-    React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
   const _toggleMenu = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
 
@@ -42,14 +40,6 @@ const MenuExample = () => {
       y: nativeEvent.pageY,
     });
     setVisible({ menu3: true });
-  };
-
-  const _openAppbarMenu = (event: GestureResponderEvent) => {
-    setAppbarMenuCoord({
-      x: event.nativeEvent.pageX,
-      y: event.nativeEvent.pageY,
-    });
-    setVisible({ ...visible, menu1: true });
   };
 
   React.useLayoutEffect(() => {
@@ -73,22 +63,24 @@ const MenuExample = () => {
             key: 'more',
             icon: MORE_ICON,
             'aria-label': 'More options',
-            onPress: _openAppbarMenu,
+            onPress: _toggleMenu('menu1'),
+            decorate: (button) => (
+              <Menu
+                visible={_getVisible('menu1')}
+                onDismiss={_toggleMenu('menu1')}
+                anchor={button}
+              >
+                <Menu.Item onPress={() => {}} title="Undo" />
+                <Menu.Item onPress={() => {}} title="Redo" />
+                <Divider style={styles.md3Divider} />
+                <Menu.Item onPress={() => {}} title="Cut" disabled />
+                <Menu.Item onPress={() => {}} title="Copy" disabled />
+                <Menu.Item onPress={() => {}} title="Paste" />
+              </Menu>
+            ),
           },
         ]}
       />
-      <Menu
-        visible={_getVisible('menu1')}
-        onDismiss={_toggleMenu('menu1')}
-        anchor={appbarMenuCoord}
-      >
-        <Menu.Item onPress={() => {}} title="Undo" />
-        <Menu.Item onPress={() => {}} title="Redo" />
-        <Divider style={styles.md3Divider} />
-        <Menu.Item onPress={() => {}} title="Cut" disabled />
-        <Menu.Item onPress={() => {}} title="Copy" disabled />
-        <Menu.Item onPress={() => {}} title="Paste" />
-      </Menu>
       <ScreenWrapper
         contentContainerStyle={styles.contentContainer}
         style={styles.container}

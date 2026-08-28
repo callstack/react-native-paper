@@ -1,6 +1,7 @@
 export { default } from './Appbar';
 export { Appbar } from './Appbar';
 export type {
+  AppbarActionDecorator,
   AppbarFilledTrailingAction,
   AppbarHeadlineAlignment,
   AppbarHeadlinePressableProps,

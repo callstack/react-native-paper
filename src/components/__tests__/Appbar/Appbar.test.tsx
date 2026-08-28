@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
-import { render, screen, userEvent } from '../../../test-utils';
+import { render, screen, userEvent, waitFor } from '../../../test-utils';
 import Appbar from '../../Appbar';
 import type { AppbarVariant } from '../../Appbar';
+import Menu from '../../Menu/Menu';
+import Portal from '../../Portal/Portal';
+import Tooltip from '../../Tooltip/Tooltip';
 
 const testIDPrefix = 'appbar';
 
@@ -339,6 +343,97 @@ describe('Appbar actions', () => {
       ).toHaveStyle({ width: 56 });
     }
   );
+
+  it('decorates an action with a working tooltip without losing its press handler', async () => {
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+
+    await render(
+      <Portal.Host>
+        <Appbar
+          variant="small"
+          headline="Files"
+          trailingActions={[
+            {
+              key: 'print',
+              icon: 'printer',
+              'aria-label': 'Print',
+              onPress,
+              decorate: (button) => (
+                <Tooltip title="Print shortcut">{button}</Tooltip>
+              ),
+            },
+          ]}
+        />
+      </Portal.Host>
+    );
+
+    const action = screen.getByRole('button', { name: 'Print' });
+
+    await userEvent.press(action);
+    expect(onPress).toHaveBeenCalledTimes(1);
+
+    await userEvent.longPress(action);
+    expect(await screen.findByText('Print shortcut')).toBeOnTheScreen();
+  });
+
+  it('decorates an action with a menu anchored to the resolved button', async () => {
+    const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+      width: 400,
+      height: 800,
+      scale: 2,
+      fontScale: 2,
+    });
+    const measureSpy = jest
+      .spyOn(View.prototype, 'measureInWindow')
+      .mockImplementation((callback) => callback(100, 100, 80, 32));
+    const MenuAppbar = () => {
+      const [visible, setVisible] = React.useState(false);
+
+      return (
+        <Portal.Host>
+          <Appbar
+            variant="small"
+            headline="Files"
+            trailingActions={[
+              {
+                key: 'more',
+                icon: 'dots-vertical',
+                'aria-label': 'More options',
+                onPress: () => setVisible(true),
+                decorate: (button) => (
+                  <Menu
+                    visible={visible}
+                    onDismiss={() => setVisible(false)}
+                    anchor={button}
+                    anchorPosition="bottom"
+                  >
+                    <Menu.Item title="Undo" onPress={() => {}} />
+                  </Menu>
+                ),
+              },
+            ]}
+          />
+        </Portal.Host>
+      );
+    };
+
+    await render(<MenuAppbar />);
+
+    await userEvent.press(screen.getByRole('button', { name: 'More options' }));
+
+    await waitFor(() => {
+      expect(screen.getByText('Undo')).toBeOnTheScreen();
+      expect(screen.getByTestId('menu-view')).toHaveStyle({
+        position: 'absolute',
+        left: 100,
+        top: 132,
+      });
+    });
+    expect(measureSpy).toHaveBeenCalled();
+
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  });
 });
 
 describe('Appbar search', () => {

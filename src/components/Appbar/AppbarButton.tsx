@@ -14,6 +14,7 @@ type Props = {
 const AppbarButton = ({ button, leading = false, theme }: Props) => {
   const {
     color,
+    decorate,
     key: _key,
     style,
     variant = 'standard',
@@ -38,7 +39,7 @@ const AppbarButton = ({ button, leading = false, theme }: Props) => {
         ? theme.colors.onSurface
         : theme.colors.onSurfaceVariant);
 
-  return (
+  const iconButton = (
     <IconButton
       {...buttonProps}
       icon={button.icon ?? AppbarBackIcon}
@@ -54,6 +55,8 @@ const AppbarButton = ({ button, leading = false, theme }: Props) => {
       theme={theme}
     />
   );
+
+  return decorate ? decorate(iconButton) : iconButton;
 };
 
 const styles = StyleSheet.create({

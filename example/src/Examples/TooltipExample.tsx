@@ -52,6 +52,7 @@ const TooltipExample = () => {
             type: 'back',
             'aria-label': 'Go back',
             onPress: () => navigation.goBack(),
+            decorate: (button) => <Tooltip title="Go back">{button}</Tooltip>,
           }}
           trailingActions={[
             {
@@ -59,18 +60,25 @@ const TooltipExample = () => {
               icon: 'printer',
               'aria-label': 'Print',
               onPress: () => {},
+              decorate: (button) => (
+                <Tooltip title="Print ⌘ + P">{button}</Tooltip>
+              ),
             },
             {
               key: 'search',
               icon: 'magnify',
               'aria-label': 'Search',
               onPress: () => {},
+              decorate: (button) => <Tooltip title="Search">{button}</Tooltip>,
             },
             {
               key: 'more',
               icon: MORE_ICON,
               'aria-label': 'More options',
               onPress: () => {},
+              decorate: (button) => (
+                <Tooltip title="More options">{button}</Tooltip>
+              ),
             },
           ]}
         />

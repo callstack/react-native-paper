@@ -59,6 +59,11 @@ export type AppbarHeadlinePressableProps = Pick<
   disabled?: boolean;
 };
 
+/** Decorates the resolved icon button without replacing its action configuration. */
+export type AppbarActionDecorator = (
+  button: React.ReactElement<IconButtonProps>
+) => React.ReactElement;
+
 type AppbarTrailingActionBase = Omit<
   IconButtonProps,
   'icon' | 'iconColor' | 'mode' | 'selected' | 'size' | 'theme' | 'aria-label'
@@ -71,6 +76,8 @@ type AppbarTrailingActionBase = Omit<
   'aria-label': string;
   /** Custom trailing action icon color. */
   color?: ColorValue;
+  /** Wraps the resolved icon button, for example with a Tooltip or Menu. */
+  decorate?: AppbarActionDecorator;
 };
 
 export type AppbarStandardTrailingAction = AppbarTrailingActionBase & {

@@ -45,8 +45,8 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  * | `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |
  * | `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |
  * | `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |
- * | `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. |
- * | `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`. |
+ * | `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |
+ * | `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |
  * | `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |
  * | `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |
  * | `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |
@@ -93,6 +93,27 @@ const EMPTY_TRAILING_ACTIONS = [] as const;
  * );
  *
  * export default MyComponent;
+ * ```
+ *
+ * ### Decorated action
+ * ```js
+ * import { Appbar, Tooltip } from 'react-native-paper';
+ *
+ * <Appbar
+ *   variant="small"
+ *   headline="Files"
+ *   trailingActions={[
+ *     {
+ *       key: 'print',
+ *       icon: 'printer',
+ *       'aria-label': 'Print',
+ *       onPress: () => {},
+ *       decorate: (button) => (
+ *         <Tooltip title="Print shortcut">{button}</Tooltip>
+ *       ),
+ *     },
+ *   ]}
+ * />
  * ```
  *
  * ### Flexible app bar

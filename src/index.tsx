@@ -57,6 +57,7 @@ export { default as Text, customText } from './components/Typography/Text';
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
 export type {
   Props as AppbarProps,
+  AppbarActionDecorator,
   AppbarFilledTrailingAction,
   AppbarHeadlineAlignment,
   AppbarHeadlinePressableProps,
