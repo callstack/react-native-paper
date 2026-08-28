@@ -126,3 +126,112 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### DataTable
+
+The Paper 6.x `DataTable` adds table semantics. The structure it produces and the accessible names it exposes have both changed. Existing tables should still be working.
+
+#### Touch handling
+
+Rows, cells and titles with no touch handler render a plain `View` instead of a disabled touchable
+
+```tsx
+// Before (v5): announced as a disabled control
+<DataTable.Row>
+  <DataTable.Cell>{item.name}</DataTable.Cell>
+</DataTable.Row>
+
+// After (v6): pass a handler if the row is meant to be pressable
+<DataTable.Row onPress={() => select(item)}>
+  <DataTable.Cell>{item.name}</DataTable.Cell>
+</DataTable.Row>
+```
+
+#### Screen reader announcements
+
+- new `rowCount`, `firstRowIndex` needed for correct row positions when paginating
+- `nativeFocusMode="cell"` gives one stop per cell instead of one per row
+- `accessible={false}` on a row opts that row out
+- `formatRowPosition` replaces the wording, or removes it with `null`
+
+```tsx
+// Before (v5)
+<DataTable>
+  {items.slice(from, to).map((item) => (
+    <DataTable.Row key={item.key}>{/* ... */}</DataTable.Row>
+  ))}
+</DataTable>
+
+// After (v6)
+<DataTable aria-label="Nutrition" rowCount={items.length} firstRowIndex={from}>
+  {items.slice(from, to).map((item) => (
+    <DataTable.Row key={item.key}>{/* ... */}</DataTable.Row>
+  ))}
+</DataTable>
+```
+
+#### Pagination labels
+
+- `labels` is new, and localizes every control
+- `aria-label="pagination-container"` and `aria-label="Options Select"` were removed; query `testID="options-select"` instead
+
+```tsx
+// After (v6)
+<DataTable.Pagination
+  labels={{
+    container: 'Paginacja',
+    previousPage: 'Poprzednia strona',
+    nextPage: 'Następna strona',
+    pageStatus: ({ page, numberOfPages }) =>
+      `Strona ${page} z ${numberOfPages}`,
+  }}
+  /* ... */
+/>
+```
+
+#### Alignment
+
+- `numeric` is unchanged, and now also applies tabular figures
+- `align` is new, accepts `'start'`, `'center'`, `'end'`
+
+```tsx
+// Before (v5): right-aligned
+<DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+
+// After (v6): right-aligned, plus lined-up digits
+<DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+
+// Centred, still with lined-up digits
+<DataTable.Cell numeric align="center">{item.calories}</DataTable.Cell>
+
+// Right-aligned text that is not numeric
+<DataTable.Cell align="end">{item.status}</DataTable.Cell>
+```
+
+`align` defaults to `'end'` for numeric columns and `'start'` otherwise.
+
+#### Text wrapping
+
+- **single line, always** → single line at the default font scale, unclamped above it
+- `numberOfLines` is honoured exactly at every font scale; pass `0` to never clamp
+
+#### Column definitions
+
+- `columns` on `DataTable` is new and optional
+- `column` on a title or cell selects one by key, and is only needed where position is unreliable
+
+```tsx
+// Before (v5)
+const styles = StyleSheet.create({ first: { flex: 2 } });
+
+<DataTable.Title style={styles.first}>Dessert</DataTable.Title>
+<DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
+
+// After (v6)
+const columns = [{ key: 'name', flex: 2 }, { key: 'calories', numeric: true }];
+
+<DataTable columns={columns}>
+  <DataTable.Title>Dessert</DataTable.Title>
+  <DataTable.Cell>{item.name}</DataTable.Cell>
+</DataTable>
+```
