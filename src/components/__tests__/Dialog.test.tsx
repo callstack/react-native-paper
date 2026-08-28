@@ -178,7 +178,7 @@ describe('Dialog', () => {
         testID="dialog"
         visible
         content="This is simple dialog"
-        accessibilityLabel="dialog-label"
+        aria-label="dialog-label"
       />
     );
 
