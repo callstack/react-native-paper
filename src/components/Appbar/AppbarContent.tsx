@@ -8,10 +8,8 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import { useAppbarContext } from './AppbarContext';
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
@@ -95,27 +93,21 @@ const AppbarContent = ({
   titleStyle,
   title,
   titleMaxFontSizeMultiplier,
-  mode: modeOverride,
+  mode = 'small',
   theme: themeOverrides,
   testID = 'appbar-content',
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors, fonts } = theme;
-  const { isDark = false, mode: contextMode } = useAppbarContext() ?? {};
-  const mode = modeOverride ?? contextMode ?? 'small';
 
-  const titleTextColor = titleColor
-    ? titleColor
-    : isDark
-      ? white
-      : colors.onSurface;
+  const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
   const modeContainerStyles = {
     small: styles.v3DefaultContainer,
     medium: styles.v3MediumContainer,
     large: styles.v3LargeContainer,
-    'center-aligned': styles.v3CenterAlignedContainer,
+    'center-aligned': styles.v3DefaultContainer,
   };
 
   const variant = modeTextVariant[mode];
@@ -180,24 +172,17 @@ const styles = StyleSheet.create({
   },
   v3DefaultContainer: {
     paddingHorizontal: 0,
-    marginLeft: 12,
-  },
-  v3CenterAlignedContainer: {
-    paddingHorizontal: 0,
-    alignItems: 'center',
   },
   v3MediumContainer: {
     paddingHorizontal: 0,
     justifyContent: 'flex-end',
     paddingBottom: 24,
-    marginLeft: 12,
   },
   v3LargeContainer: {
     paddingHorizontal: 0,
     paddingTop: 36,
     justifyContent: 'flex-end',
     paddingBottom: 28,
-    marginLeft: 12,
   },
 });
 

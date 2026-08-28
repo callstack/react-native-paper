@@ -649,10 +649,15 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "paddingHorizontal": 12,
           },
           {
-            "marginLeft": 12,
             "paddingHorizontal": 0,
           },
-          undefined,
+          [
+            {
+              "marginLeft": 12,
+            },
+            false,
+            undefined,
+          ],
         ]
       }
       testID="appbar-content"
