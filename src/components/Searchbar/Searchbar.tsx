@@ -16,6 +16,7 @@ import Reanimated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { SearchbarTokens } from './tokens';
 import { getSearchbarColors, getSearchbarInputFont } from './utils';
@@ -176,7 +177,7 @@ export type Props = TextInputProps & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */

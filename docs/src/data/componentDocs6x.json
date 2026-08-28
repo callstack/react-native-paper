@@ -10603,10 +10603,16 @@
               "name": "StyleProp",
               "elements": [
                 {
-                  "name": "ViewStyle"
+                  "name": "AnimatedStyle",
+                  "elements": [
+                    {
+                      "name": "ViewStyle"
+                    }
+                  ],
+                  "raw": "AnimatedStyle<ViewStyle>"
                 }
               ],
-              "raw": "StyleProp<ViewStyle>"
+              "raw": "StyleProp<AnimatedStyle<ViewStyle>>"
             },
             "description": ""
           },
