@@ -8,6 +8,8 @@ import type {
   ColorValue,
   Insets,
   LayoutChangeEvent,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -19,6 +21,12 @@ import { useInternalTheme } from '../../core/theming';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+} from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -96,6 +104,18 @@ export type Props = PressableProps & {
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS, which does not dispatch focus events for a
+   * `Pressable`.
+   */
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -119,6 +139,9 @@ const TouchableRipple = ({
   theme: themeOverrides,
   hitSlop,
   onLayout,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
@@ -135,6 +158,19 @@ const TouchableRipple = ({
   });
 
   const disabled = disabledProp || !hasPassedTouchHandler;
+
+  const ring = useFocusRing(disabled || focusRing === 'none');
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    ring.onFocus(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    ring.onBlur();
+  };
+  const ringStyles = toStyleList(
+    getFocusRingStyle(ring.focused, theme.colors.secondary, focusRing)
+  );
 
   const [expansion, setExpansion] = React.useState<Insets | undefined>(
     undefined
@@ -206,7 +242,9 @@ const TouchableRipple = ({
         disabled={disabled}
         hitSlop={shouldExpand ? expansion : hitSlop}
         onLayout={handleLayout}
-        style={[useForeground && styles.overflowHidden, style]}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={[useForeground && styles.overflowHidden, style, ...ringStyles]}
         android_ripple={androidRipple}
       >
         {React.Children.only(children)}
@@ -221,7 +259,9 @@ const TouchableRipple = ({
       disabled={disabled}
       hitSlop={shouldExpand ? expansion : hitSlop}
       onLayout={handleLayout}
-      style={[borderless && styles.overflowHidden, style]}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      style={[borderless && styles.overflowHidden, style, ...ringStyles]}
     >
       {({ pressed }) => (
         <>

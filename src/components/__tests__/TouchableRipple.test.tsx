@@ -302,3 +302,71 @@ describe('TouchableRipple', () => {
     });
   });
 });
+
+describe('TouchableRipple focus ring', () => {
+  const focus = async () => {
+    await act(async () => {
+      await fireEvent(screen.getByTestId('ripple'), 'focus');
+    });
+  };
+
+  it('rings on keyboard focus and clears on blur', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).toHaveStyle({
+      outlineWidth: 3,
+      outlineOffset: 2,
+    });
+
+    await act(async () => {
+      await fireEvent(screen.getByTestId('ripple'), 'blur');
+    });
+    expect(screen.getByTestId('ripple')).not.toHaveStyle({ outlineWidth: 3 });
+  });
+
+  // Inward is opt-in, for controls a clipping ancestor would trim.
+  it('draws the ring inward only when asked', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} focusRing="inward">
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).toHaveStyle({
+      outlineWidth: 3,
+      outlineOffset: -3,
+    });
+  });
+
+  // The non-interactive case is covered in useFocusRing's own tests. It cannot
+  // be asserted here: RNTL will not dispatch to a disabled element, so a
+  // touchable with no press handler passes for free.
+  it('does not ring when the ring is turned off', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} focusRing="none">
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).not.toHaveStyle({ outlineWidth: 3 });
+  });
+
+  it('still calls a caller onFocus', async () => {
+    const onFocus = jest.fn();
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} onFocus={onFocus}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(onFocus).toHaveBeenCalled();
+  });
+});

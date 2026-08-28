@@ -247,11 +247,16 @@ exports[`renders chip with close button 1`] = `
         onStartShouldSetResponder={[Function]}
         role="button"
         style={
-          {
-            "height": "100%",
-            "justifyContent": "center",
-            "width": "100%",
-          }
+          [
+            {
+              "height": "100%",
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
         }
       >
         <View
@@ -556,11 +561,16 @@ exports[`renders chip with custom close button 1`] = `
         onStartShouldSetResponder={[Function]}
         role="button"
         style={
-          {
-            "height": "100%",
-            "justifyContent": "center",
-            "width": "100%",
-          }
+          [
+            {
+              "height": "100%",
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
         }
       >
         <View

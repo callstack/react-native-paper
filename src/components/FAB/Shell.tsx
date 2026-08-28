@@ -16,19 +16,19 @@ import type { SharedValue } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
-import {
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { useFocusRing } from './useFocusRing';
 import { useVisibility } from './useVisibility';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ShapeToken } from '../../theme/utils/shape';
 import type { Elevation, ThemeProp } from '../../types';
+import {
+  getFocusRingStyle,
+  toStyleList,
+  useFocusRing,
+  webNoOutline,
+} from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -276,14 +276,7 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
-  const focusRingStyle = useAnimatedStyle(
-    () => ({
-      opacity: focusedSV.value ? 1 : 0,
-      borderRadius: borderRadius.value + FOCUS_RING_INSET,
-    }),
-    [borderRadius]
-  );
+  const { focused, onFocus, onBlur } = useFocusRing();
 
   return (
     <Reanimated.View
@@ -297,11 +290,18 @@ const Shell = ({
       ]}
       testID={`${testID}-container`}
     >
-      <Reanimated.View style={[styles.clip, clipStyle]}>
+      <Reanimated.View
+        style={[
+          styles.clip,
+          clipStyle,
+          ...toStyleList(getFocusRingStyle(focused, theme.colors.secondary)),
+        ]}
+      >
         {overlay}
         <TouchableRipple
           borderless
           background={background}
+          focusRing="none"
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -337,13 +337,6 @@ const Shell = ({
           )}
         </TouchableRipple>
       </Reanimated.View>
-      <Reanimated.View
-        style={[
-          styles.focusRing,
-          { borderColor: theme.colors.secondary },
-          focusRingStyle,
-        ]}
-      />
     </Reanimated.View>
   );
 };
@@ -364,15 +357,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   pointerEventsNone: {
-    pointerEvents: 'none',
-  },
-  focusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
     pointerEvents: 'none',
   },
 });
