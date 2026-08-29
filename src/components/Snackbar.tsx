@@ -164,6 +164,11 @@ const Snackbar = ({
 
   const [hidden, setHidden] = React.useState(!visible);
 
+  // Tracks the latest `visible` value so the hide animation callback can
+  // check whether the Snackbar was re-shown before the animation completed.
+  const visibleRef = React.useRef(visible);
+  visibleRef.current = visible;
+
   const { scale } = theme.animation;
 
   const animateShow = useLatestCallback(() => {
@@ -198,12 +203,20 @@ const Snackbar = ({
       clearTimeout(hideTimeout.current);
     }
 
+    // Under the New Architecture (Fabric), the animation callback can fire
+    // with `finished: false` even when the animation completes naturally.
+    // Guarding `setHidden(true)` on `finished` causes the Snackbar to stay
+    // mounted after `visible` becomes false on Fabric (issue #4951).
+    // Mirror the show-path fix from PR #4447: call setHidden unconditionally,
+    // but only if the Snackbar wasn't re-shown while the hide animation was
+    // still running, otherwise a race would hide a Snackbar that should be
+    // visible again.
     Animated.timing(opacity, {
       toValue: 0,
       duration: 100 * scale,
       useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
+    }).start(() => {
+      if (!visibleRef.current) {
         setHidden(true);
       }
     });
