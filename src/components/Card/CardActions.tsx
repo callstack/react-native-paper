@@ -47,7 +47,10 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
   return (
     <View {...rest} style={containerStyle}>
       {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement<CardActionChildProps>(child)) {
+        if (
+          !React.isValidElement<CardActionChildProps>(child) ||
+          child.type === React.Fragment
+        ) {
           return child;
         }
 
