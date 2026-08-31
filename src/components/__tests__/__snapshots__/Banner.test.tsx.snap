@@ -145,7 +145,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   "borderStyle": "solid",
                   "borderWidth": 0,
                   "flex": undefined,
-                  "minWidth": "auto",
+                  "minWidth": 64,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -252,7 +252,6 @@ exports[`render visible banner, with custom theme 1`] = `
                             {
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "color": "#043",
                               "fontFamily": "System",
@@ -583,7 +582,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "borderStyle": "solid",
                   "borderWidth": 0,
                   "flex": undefined,
-                  "minWidth": "auto",
+                  "minWidth": 64,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -690,7 +689,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                             {
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "color": "rgba(103, 80, 164, 1)",
                               "fontFamily": "System",
@@ -864,7 +862,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "borderStyle": "solid",
                   "borderWidth": 0,
                   "flex": undefined,
-                  "minWidth": "auto",
+                  "minWidth": 64,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -971,7 +969,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                             {
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "color": "rgba(103, 80, 164, 1)",
                               "fontFamily": "System",
@@ -1021,7 +1018,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "borderStyle": "solid",
                   "borderWidth": 0,
                   "flex": undefined,
-                  "minWidth": "auto",
+                  "minWidth": 64,
                   "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
@@ -1128,7 +1125,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                             {
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "color": "rgba(103, 80, 164, 1)",
                               "fontFamily": "System",

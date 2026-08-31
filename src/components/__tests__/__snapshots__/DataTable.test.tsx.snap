@@ -1852,7 +1852,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                         {
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "color": "rgba(73, 69, 79, 1)",
                           "fontFamily": "System",

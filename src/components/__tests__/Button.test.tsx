@@ -263,32 +263,6 @@ it('should execute onPressOut', async () => {
   expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
-describe('button text styles', () => {
-  it('applies uppercase styles if uppercase prop is truthy', async () => {
-    await render(
-      <Button testID="button" uppercase>
-        Test
-      </Button>
-    );
-
-    expect(screen.getByTestId('button-text')).toHaveStyle({
-      textTransform: 'uppercase',
-    });
-  });
-
-  it('does not apply uppercase styles if uppercase prop is falsy', async () => {
-    await render(
-      <Button testID="button" uppercase={false}>
-        Test
-      </Button>
-    );
-
-    expect(screen.getByTestId('button-text')).not.toHaveStyle({
-      textTransform: 'uppercase',
-    });
-  });
-});
-
 describe('icon position', () => {
   it('places the icon before the label by default', async () => {
     await render(
@@ -317,28 +291,6 @@ describe('icon position', () => {
     expect(screen.getByTestId('button-content')).toHaveStyle({
       flexDirection: 'row-reverse',
     });
-  });
-
-  it('still flips the icon via the deprecated contentStyle row-reverse and warns', async () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    await render(
-      <Button
-        testID="button"
-        mode="outlined"
-        icon="chevron-right"
-        contentStyle={styles.flexing}
-      >
-        Next
-      </Button>
-    );
-
-    expect(screen.getByTestId('button-content')).toHaveStyle({
-      flexDirection: 'row-reverse',
-    });
-    expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining('`contentStyle`')
-    );
-    warn.mockRestore();
   });
 });
 
@@ -1044,11 +996,10 @@ it('animated value changes correctly', async () => {
   await render(
     <Button
       mode="elevated"
-      compact
       icon="camera"
       style={[{ transform: [{ scale: value }] }]}
     >
-      Compact button
+      Elevated button
     </Button>
   );
   expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({

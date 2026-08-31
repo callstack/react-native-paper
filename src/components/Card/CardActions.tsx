@@ -51,13 +51,11 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
           return child;
         }
 
-        const compact = child.props.compact;
         const mode = child.props.mode ?? (index === 0 ? 'outlined' : 'filled');
         const childStyle = [styles.button, child.props.style];
 
         return React.cloneElement(child, {
           ...child.props,
-          compact,
           mode,
           style: childStyle,
         });

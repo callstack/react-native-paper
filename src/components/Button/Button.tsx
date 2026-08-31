@@ -47,10 +47,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   dark?: boolean;
   /**
-   * Use a compact look, useful for `text` buttons in a row.
-   */
-  compact?: boolean;
-  /**
    * Size of the button (Material Design 3 expressive). Defaults to `small`.
    *
    * The size controls the minimum height, horizontal padding, icon size, the
@@ -105,10 +101,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   children: React.ReactNode;
   /**
-   * Make the label text uppercased. Note that this won't work if you pass React elements as children.
-   */
-  uppercase?: boolean;
-  /**
    * Type of background drawabale to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
@@ -153,9 +145,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width or to set a custom padding.
-   *
-   * Note: setting `flexDirection: 'row-reverse'` here to move the icon to the
-   * trailing edge is deprecated — use the `iconPosition` prop instead.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -214,7 +203,6 @@ const MIN_TOUCH_TARGET = 48;
 
 const Button = ({
   disabled,
-  compact,
   mode = 'filled',
   size = 'small',
   shape = 'round',
@@ -237,7 +225,6 @@ const Button = ({
   delayLongPress,
   style,
   theme: themeOverrides,
-  uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
   testID = 'button',
@@ -253,24 +240,9 @@ const Button = ({
   const { direction } = useLocale();
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
   const { animation } = theme;
-  const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
 
-  const flattenedContentStyle = React.useMemo(
-    () => StyleSheet.flatten(contentStyle) as ViewStyle | undefined,
-    [contentStyle]
-  );
-  const usesReverseContentStyle =
-    flattenedContentStyle?.flexDirection === 'row-reverse';
-
-  if (process.env.NODE_ENV !== 'production' && usesReverseContentStyle) {
-    console.warn(
-      'Button: setting `flexDirection: \'row-reverse\'` in `contentStyle` to move the icon to the trailing edge is deprecated. Use the `iconPosition="trailing"` prop instead.'
-    );
-  }
-
-  const requestedTrailingIcon =
-    iconPosition === 'trailing' || usesReverseContentStyle;
+  const requestedTrailingIcon = iconPosition === 'trailing';
   const shouldFlipForRTL = direction !== getDefaultDirection();
   const isTrailingIcon = shouldFlipForRTL
     ? !requestedTrailingIcon
@@ -536,7 +508,6 @@ const Button = ({
       style={
         [
           styles.button,
-          compact && styles.compact,
           buttonStyle,
           // Clip the rect ripple to the morphing radius (web; box-shadow safe).
           isWeb && animateShape && styles.clip,
@@ -623,12 +594,7 @@ const Button = ({
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-text`}
-            style={[
-              styles.label,
-              uppercase && styles.uppercaseLabel,
-              labelTypeStyle,
-              labelStyle,
-            ]}
+            style={[styles.label, labelTypeStyle, labelStyle]}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
             {children}
@@ -647,9 +613,6 @@ const styles = StyleSheet.create({
   clip: {
     overflow: 'hidden',
   },
-  compact: {
-    minWidth: 'auto',
-  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -660,9 +623,6 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-  },
-  uppercaseLabel: {
-    textTransform: 'uppercase',
   },
 });
 

@@ -454,7 +454,6 @@ exports[`renders snackbar with action button 1`] = `
                           {
                             "textAlign": "center",
                           },
-                          false,
                           {
                             "color": "rgba(208, 188, 255, 1)",
                             "fontFamily": "System",

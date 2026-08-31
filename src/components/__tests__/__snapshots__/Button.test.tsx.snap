@@ -136,7 +136,6 @@ exports[`renders button with an accessibility hint 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -296,7 +295,6 @@ exports[`renders button with an accessibility label 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -455,7 +453,6 @@ exports[`renders button with button color 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -614,7 +611,6 @@ exports[`renders button with color 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "#e91e63",
                     "fontFamily": "System",
@@ -773,7 +769,6 @@ exports[`renders button with custom testID 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -965,7 +960,6 @@ exports[`renders button with icon 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -1086,9 +1080,7 @@ exports[`renders button with icon in reverse order 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            {
-              "flexDirection": "row-reverse",
-            },
+            false,
             {
               "gap": 8,
               "minHeight": 40,
@@ -1161,7 +1153,6 @@ exports[`renders button with icon in reverse order 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -1339,7 +1330,6 @@ exports[`renders disabled button 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
@@ -1498,7 +1488,6 @@ exports[`renders filled button by default 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -1657,7 +1646,6 @@ exports[`renders filled button with mode 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -2007,7 +1995,6 @@ exports[`renders loading button 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -2166,7 +2153,6 @@ exports[`renders outlined button with mode 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(73, 69, 79, 1)",
                     "fontFamily": "System",
@@ -2325,7 +2311,6 @@ exports[`renders text button with mode 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(103, 80, 164, 1)",
                     "fontFamily": "System",
@@ -2511,7 +2496,6 @@ exports[`size prop renders a button with per-size metrics 1`] = `
                   {
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",

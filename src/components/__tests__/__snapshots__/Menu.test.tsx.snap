@@ -148,7 +148,6 @@ exports[`renders menu with content styles 1`] = `
                         {
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "color": "rgba(73, 69, 79, 1)",
                           "fontFamily": "System",
@@ -717,7 +716,6 @@ exports[`renders not visible menu 1`] = `
                       {
                         "textAlign": "center",
                       },
-                      false,
                       {
                         "color": "rgba(73, 69, 79, 1)",
                         "fontFamily": "System",
@@ -891,7 +889,6 @@ exports[`renders visible menu 1`] = `
                         {
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "color": "rgba(73, 69, 79, 1)",
                           "fontFamily": "System",

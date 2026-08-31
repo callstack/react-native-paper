@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { DialogActionChildProps } from './utils';
+import type { DialogChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
@@ -53,10 +53,8 @@ const DialogActions = (props: Props) => {
   return (
     <View {...props} style={[styles.v3Container, props.style]}>
       {React.Children.map(props.children, (child, i) =>
-        React.isValidElement<DialogActionChildProps>(child)
+        React.isValidElement<DialogChildProps>(child)
           ? React.cloneElement(child, {
-              compact: true,
-              uppercase: false,
               style: [
                 {
                   marginRight: i + 1 === actionsLength ? 0 : 8,

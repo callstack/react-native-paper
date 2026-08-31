@@ -85,7 +85,6 @@ const ButtonExample = () => {
   const [disabled, setDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [selected, setSelected] = React.useState(false);
-  const [compact, setCompact] = React.useState(false);
 
   // Selected state for the static toggle showcase below.
   const [selectedToggles, setSelectedToggles] = React.useState<
@@ -107,7 +106,6 @@ const ButtonExample = () => {
             disabled={disabled}
             loading={loading}
             selected={selected}
-            compact={compact}
             onPress={() => {}}
           >
             Play me
@@ -157,7 +155,6 @@ const ButtonExample = () => {
           value={selected}
           onValueChange={setSelected}
         />
-        <SwitchRow label="Compact" value={compact} onValueChange={setCompact} />
       </List.Section>
 
       <List.Section title="Modes">
