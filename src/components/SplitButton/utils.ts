@@ -7,11 +7,10 @@ import {
   splitButtonMinInteractiveSize,
   splitButtonSizeTokens,
   type SplitButtonMode,
-  type SplitButtonShapeKey,
   type SplitButtonSize,
 } from './tokens';
 import { tokens } from '../../theme/tokens';
-import { cornerFull } from '../../theme/tokens/sys/shape';
+import { resolveCornerRadius, type ShapeToken } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -19,12 +18,7 @@ const stateOpacity = tokens.md.sys.state.opacity;
 
 export type { SplitButtonMode } from './tokens';
 
-export const resolveSplitButtonCorner = (
-  theme: InternalTheme,
-  key: SplitButtonShapeKey
-) => (key === 'full' ? cornerFull : theme.shapes.corner[key]);
-
-// `resolveSplitButtonCorner`'s 'full' case returns a large sentinel radius
+// `resolveCornerRadius`'s 'full' case returns a large sentinel radius
 // (`cornerFull`) meant for shapes whose corners are all resolved the same
 // way. Paired on the same edge with the smaller `innerRadius`, that
 // sentinel triggers RN's corner-overlap correction and collapses the inner
@@ -33,12 +27,10 @@ export const resolveSplitButtonCorner = (
 // whose radius is exactly half its height.
 export const resolveSplitButtonContainerRadius = (
   theme: InternalTheme,
-  shape: SplitButtonShapeKey,
+  shape: ShapeToken,
   containerHeight: number
 ) =>
-  shape === 'full'
-    ? containerHeight / 2
-    : resolveSplitButtonCorner(theme, shape);
+  shape === 'full' ? containerHeight / 2 : resolveCornerRadius(theme, shape);
 
 export const getSplitButtonSizeStyle = ({
   size,
@@ -56,7 +48,7 @@ export const getSplitButtonSizeStyle = ({
       sizeTokens.containerShape,
       sizeTokens.containerHeight
     ),
-    innerRadius: resolveSplitButtonCorner(theme, sizeTokens.innerCornerShape),
+    innerRadius: resolveCornerRadius(theme, sizeTokens.innerCornerShape),
   };
 };
 

@@ -1,9 +1,5 @@
-import type {
-  ColorRole,
-  Elevation,
-  ThemeShapeCorners,
-  TypescaleKey,
-} from '../../theme/types';
+import type { ColorRole, Elevation, TypescaleKey } from '../../theme/types';
+import type { ShapeToken } from '../../theme/utils/shape';
 
 export type SplitButtonMode = 'filled' | 'tonal' | 'elevated' | 'outlined';
 
@@ -14,13 +10,11 @@ export type SplitButtonSize =
   | 'large'
   | 'extra-large';
 
-export type SplitButtonShapeKey = keyof ThemeShapeCorners | 'full';
-
 export type SplitButtonSizeTokens = {
   betweenSpace: number;
   containerHeight: number;
-  containerShape: SplitButtonShapeKey;
-  innerCornerShape: SplitButtonShapeKey;
+  containerShape: ShapeToken;
+  innerCornerShape: ShapeToken;
   leadingButtonLeadingSpace: number;
   leadingButtonTrailingSpace: number;
   leadingIconSize: number;
