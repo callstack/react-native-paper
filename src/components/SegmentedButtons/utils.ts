@@ -1,13 +1,11 @@
 import type { ViewStyle } from 'react-native';
 
 import { SegmentedButtonTokens } from './tokens';
-import type { SegmentedButtonInteractionState } from './tokens';
 import type { InternalTheme } from '../../types';
 
 type SegmentedButtonColorState = {
   checked: boolean;
   disabled: boolean;
-  interactionState: SegmentedButtonInteractionState;
 };
 
 type SegmentedButtonColorOptions = SegmentedButtonColorState & {
@@ -67,41 +65,9 @@ export const getSegmentedButtonBorderStyles = (
   return { outline, divider: { borderStartWidth: outlineWidth } };
 };
 
-export const getSegmentedButtonStateLayerOpacity = (
-  interactionState: SegmentedButtonInteractionState,
-  disabled?: boolean
-) =>
-  disabled || interactionState === 'enabled'
-    ? 0
-    : SegmentedButtonTokens.stateLayerOpacity[interactionState];
-
-export const getSegmentedButtonInteractionState = ({
-  pressed,
-  focused,
-  hovered,
-}: {
-  pressed: boolean;
-  focused: boolean;
-  hovered: boolean;
-}): SegmentedButtonInteractionState => {
-  if (pressed) {
-    return 'pressed';
-  }
-
-  if (focused) {
-    return 'focused';
-  }
-
-  if (hovered) {
-    return 'hovered';
-  }
-
-  return 'enabled';
-};
-
 const resolveContentColors = (
   theme: InternalTheme,
-  { checked, disabled, interactionState }: SegmentedButtonColorState,
+  { checked, disabled }: SegmentedButtonColorState,
   contentColor?: string
 ) => {
   if (disabled) {
@@ -113,19 +79,17 @@ const resolveContentColors = (
     };
   }
 
-  const labelColorsByState = checked
+  const labelColor = checked
     ? SegmentedButtonTokens.selectedLabelTextColor
     : SegmentedButtonTokens.unselectedLabelTextColor;
-  const iconColorsByState = checked
+  const iconColor = checked
     ? SegmentedButtonTokens.selectedIconColor
     : SegmentedButtonTokens.unselectedIconColor;
 
   return {
-    labelColor:
-      contentColor ?? theme.colors[labelColorsByState[interactionState]],
+    labelColor: contentColor ?? theme.colors[labelColor],
     labelOpacity: 1,
-    iconColor:
-      contentColor ?? theme.colors[iconColorsByState[interactionState]],
+    iconColor: contentColor ?? theme.colors[iconColor],
     iconOpacity: 1,
   };
 };
@@ -141,21 +105,6 @@ const resolveOutlineColors = (theme: InternalTheme, disabled: boolean) => {
   };
 };
 
-const resolveStateLayerColor = (
-  theme: InternalTheme,
-  { checked, disabled, interactionState }: SegmentedButtonColorState
-) => {
-  if (disabled || interactionState === 'enabled') {
-    return 'transparent';
-  }
-
-  const colorsByState = checked
-    ? SegmentedButtonTokens.selectedStateLayerColor
-    : SegmentedButtonTokens.unselectedStateLayerColor;
-
-  return theme.colors[colorsByState[interactionState]];
-};
-
 export const resolveColors = (
   theme: InternalTheme,
   options: SegmentedButtonColorOptions
@@ -169,7 +118,6 @@ export const resolveColors = (
     content: resolveContentColors(theme, options, contentColor),
     outline: resolveOutlineColors(theme, disabled),
     divider: resolveOutlineColors(theme, dividerDisabled),
-    stateLayer: resolveStateLayerColor(theme, options),
     focusIndicator: theme.colors[SegmentedButtonTokens.focusIndicatorColor],
   };
 };

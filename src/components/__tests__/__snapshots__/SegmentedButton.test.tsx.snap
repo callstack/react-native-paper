@@ -21,10 +21,16 @@ exports[`renders segmented button 1`] = `
       [
         {
           "flex": 1,
-          "justifyContent": "center",
-          "minHeight": 48,
-          "minWidth": 48,
           "overflow": "visible",
+        },
+        {
+          "borderBottomEndRadius": 0,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 0,
+          "borderTopStartRadius": 9999,
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
         },
         false,
         undefined,
@@ -70,11 +76,6 @@ exports[`renders segmented button 1`] = `
           },
           [
             {
-              "justifyContent": "center",
-              "minHeight": 48,
-              "overflow": "visible",
-            },
-            {
               "borderBottomEndRadius": 0,
               "borderBottomStartRadius": 9999,
               "borderTopEndRadius": 0,
@@ -93,42 +94,11 @@ exports[`renders segmented button 1`] = `
               "width": "100%",
             },
             {
-              "borderBottomEndRadius": 0,
-              "borderBottomStartRadius": 9999,
-              "borderTopEndRadius": 0,
-              "borderTopStartRadius": 9999,
-            },
-            {
-              "backgroundColor": "rgba(232, 222, 248, 1)",
               "height": 40,
             },
           ]
         }
       >
-        <View
-          pointerEvents="none"
-          style={
-            [
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              {
-                "borderBottomEndRadius": 0,
-                "borderBottomStartRadius": 9999,
-                "borderTopEndRadius": 0,
-                "borderTopStartRadius": 9999,
-              },
-              {
-                "backgroundColor": "transparent",
-                "opacity": 0,
-              },
-            ]
-          }
-        />
         <View
           style={
             {
@@ -225,10 +195,16 @@ exports[`renders segmented button 1`] = `
       [
         {
           "flex": 1,
-          "justifyContent": "center",
-          "minHeight": 48,
-          "minWidth": 48,
           "overflow": "visible",
+        },
+        {
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 0,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 0,
+        },
+        {
+          "backgroundColor": "transparent",
         },
         false,
         undefined,
@@ -274,11 +250,6 @@ exports[`renders segmented button 1`] = `
           },
           [
             {
-              "justifyContent": "center",
-              "minHeight": 48,
-              "overflow": "visible",
-            },
-            {
               "borderBottomEndRadius": 9999,
               "borderBottomStartRadius": 0,
               "borderTopEndRadius": 9999,
@@ -297,42 +268,11 @@ exports[`renders segmented button 1`] = `
               "width": "100%",
             },
             {
-              "borderBottomEndRadius": 9999,
-              "borderBottomStartRadius": 0,
-              "borderTopEndRadius": 9999,
-              "borderTopStartRadius": 0,
-            },
-            {
-              "backgroundColor": "transparent",
               "height": 40,
             },
           ]
         }
       >
-        <View
-          pointerEvents="none"
-          style={
-            [
-              {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              {
-                "borderBottomEndRadius": 9999,
-                "borderBottomStartRadius": 0,
-                "borderTopEndRadius": 9999,
-                "borderTopStartRadius": 0,
-              },
-              {
-                "backgroundColor": "transparent",
-                "opacity": 0,
-              },
-            ]
-          }
-        />
         <View
           style={
             {

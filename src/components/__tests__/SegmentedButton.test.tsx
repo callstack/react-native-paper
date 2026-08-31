@@ -9,11 +9,13 @@ import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
-import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
+import {
+  FOCUS_RING_OUTSET,
+  SegmentedButtonTokens,
+} from '../SegmentedButtons/tokens';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonBorderStyles,
-  getSegmentedButtonStateLayerOpacity,
   resolveColors,
 } from '../SegmentedButtons/utils';
 
@@ -242,7 +244,7 @@ describe('selection behavior', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('keeps interaction state and an in-flight press with the same value after reordering', async () => {
+  it('keeps focus and an in-flight press with the same value after reordering', async () => {
     const walkOnPress = jest.fn();
     const rideOnPress = jest.fn();
     const onValueChange = jest.fn();
@@ -281,9 +283,6 @@ describe('selection behavior', () => {
 
     expect(screen.getByTestId('walk-focus-ring')).toBeOnTheScreen();
     expect(screen.queryByTestId('ride-focus-ring')).not.toBeOnTheScreen();
-    expect(screen.getByTestId('walk-state-layer')).toHaveStyle({
-      opacity: SegmentedButtonTokens.stateLayerOpacity.pressed,
-    });
 
     await fireEvent(pressedButton, 'pressOut');
     // userEvent.press cannot interleave a rerender with the press lifecycle.
@@ -338,16 +337,29 @@ it('applies group theme overrides to items', async () => {
         { value: 'ride', label: 'Riding' },
       ]}
       theme={{
-        colors: { secondaryContainer: '#123456' },
+        colors: {
+          secondaryContainer: '#123456',
+          stateLayerPressed: '#654321',
+        },
         fonts: { labelLarge: { fontSize: 18 } },
       }}
     />
   );
 
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
+  expect(screen.getByTestId('walk-wrapper')).toHaveStyle({
     backgroundColor: '#123456',
   });
   expect(screen.getByTestId('walk-label')).toHaveStyle({ fontSize: 18 });
+
+  const button = screen.getByTestId('walk');
+  // Drive Pressability so the fallback render prop receives its pressed state.
+  await fireEvent(button, 'responderGrant', {
+    nativeEvent: {},
+    persist: jest.fn(),
+  });
+  expect(screen.getByTestId('touchable-ripple-underlay')).toHaveStyle({
+    backgroundColor: '#654321',
+  });
 });
 
 describe('segmented button colors', () => {
@@ -397,7 +409,6 @@ describe('segmented button colors', () => {
         resolveColors(theme, {
           checked,
           disabled,
-          interactionState: 'enabled',
           contentColor: customColor,
           dividerDisabled: false,
         }).content
@@ -451,7 +462,6 @@ describe('segmented button colors', () => {
       resolveColors(theme, {
         checked: false,
         disabled,
-        interactionState: 'enabled',
         dividerDisabled: false,
       }).outline
     ).toEqual({ color, opacity });
@@ -465,88 +475,10 @@ describe('segmented button colors', () => {
       resolveColors(theme, {
         checked,
         disabled: false,
-        interactionState: 'enabled',
         dividerDisabled: false,
       }).container
     ).toBe(expected);
   });
-
-  it('resolves state layer colors by selection and interaction', () => {
-    expect(
-      resolveColors(theme, {
-        checked: true,
-        disabled: false,
-        interactionState: 'hovered',
-        dividerDisabled: false,
-      }).stateLayer
-    ).toBe(theme.colors.onSecondaryContainer);
-    expect(
-      resolveColors(theme, {
-        checked: false,
-        disabled: false,
-        interactionState: 'pressed',
-        dividerDisabled: false,
-      }).stateLayer
-    ).toBe(theme.colors.onSurface);
-    expect(
-      resolveColors(theme, {
-        checked: true,
-        disabled: true,
-        interactionState: 'pressed',
-        dividerDisabled: false,
-      }).stateLayer
-    ).toBe('transparent');
-    expect(
-      resolveColors(theme, {
-        checked: true,
-        disabled: false,
-        interactionState: 'enabled',
-        dividerDisabled: false,
-      }).stateLayer
-    ).toBe('transparent');
-  });
-});
-
-describe('getSegmentedButtonStateLayerOpacity', () => {
-  it.each([
-    {
-      state: 'disabled',
-      disabled: true,
-      interactionState: 'pressed' as const,
-      expected: 0,
-    },
-    {
-      state: 'pressed',
-      disabled: false,
-      interactionState: 'pressed' as const,
-      expected: SegmentedButtonTokens.stateLayerOpacity.pressed,
-    },
-    {
-      state: 'focused',
-      disabled: false,
-      interactionState: 'focused' as const,
-      expected: SegmentedButtonTokens.stateLayerOpacity.focused,
-    },
-    {
-      state: 'hovered',
-      disabled: false,
-      interactionState: 'hovered' as const,
-      expected: SegmentedButtonTokens.stateLayerOpacity.hovered,
-    },
-    {
-      state: 'idle',
-      disabled: false,
-      interactionState: 'enabled' as const,
-      expected: 0,
-    },
-  ])(
-    'returns the $state state opacity',
-    ({ disabled, interactionState, expected }) => {
-      expect(
-        getSegmentedButtonStateLayerOpacity(interactionState, disabled)
-      ).toBe(expected);
-    }
-  );
 });
 
 describe('segmented button topology helpers', () => {
@@ -679,9 +611,8 @@ describe('segmented button presentation', () => {
       expect(view.root).toHaveStyle({ direction });
 
       for (const { id, radii, borderEndWidth } of segmentCases) {
+        expect(screen.getByTestId(`${id}-wrapper`)).toHaveStyle(radii);
         expect(screen.getByTestId(id)).toHaveStyle(radii);
-        expect(screen.getByTestId(`${id}-container`)).toHaveStyle(radii);
-        expect(screen.getByTestId(`${id}-state-layer`)).toHaveStyle(radii);
         expect(screen.getByTestId(`${id}-outline`)).toHaveStyle({
           ...radii,
           borderTopWidth: SegmentedButtonTokens.outlineWidth,
@@ -690,8 +621,17 @@ describe('segmented button presentation', () => {
         });
 
         await fireEvent(screen.getByTestId(id), 'focus');
-        expect(screen.getByTestId(`${id}-focus-ring`)).toHaveStyle(radii);
+        expect(screen.getByTestId(`${id}-focus-ring`)).toHaveStyle({
+          ...radii,
+          top: -FOCUS_RING_OUTSET,
+          bottom: -FOCUS_RING_OUTSET,
+          left: -FOCUS_RING_OUTSET,
+          right: -FOCUS_RING_OUTSET,
+          borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
+          borderColor: getTheme().colors.secondary,
+        });
         await fireEvent(screen.getByTestId(id), 'blur');
+        expect(screen.queryByTestId(`${id}-focus-ring`)).not.toBeOnTheScreen();
       }
 
       expect(screen.getByTestId('first-outline')).toHaveStyle({
@@ -782,9 +722,10 @@ describe('segmented button presentation', () => {
       />
     );
 
-    expect(screen.getByTestId('walk-wrapper')).toHaveStyle({
-      ...style,
-      minHeight: SegmentedButtonTokens.touchTargetHeight,
+    expect(screen.getByTestId('walk-wrapper')).toHaveStyle(style);
+    expect(screen.getByTestId('walk-wrapper')).not.toHaveStyle({
+      minHeight: 48,
+      minWidth: 48,
     });
     expect(screen.getByTestId('walk-container')).not.toHaveStyle({ flex: 3 });
     expect(screen.getByTestId('walk-container')).not.toHaveStyle({
@@ -826,7 +767,7 @@ describe('segmented button presentation', () => {
     { density: 'medium' as const, expected: 32 },
     { density: 'high' as const, expected: 28 },
   ])(
-    'uses the $density density height inside a 48dp target',
+    'uses the $density visual height without local target constraints',
     async ({ density, expected }) => {
       expect(SegmentedButtonTokens.containerHeight[density]).toBe(expected);
 
@@ -842,11 +783,13 @@ describe('segmented button presentation', () => {
         />
       );
 
-      expect(screen.getByTestId('walk-wrapper')).toHaveStyle({
-        minHeight: SegmentedButtonTokens.touchTargetHeight,
+      expect(screen.getByTestId('walk-wrapper')).not.toHaveStyle({
+        minHeight: 48,
+        minWidth: 48,
       });
-      expect(screen.getByTestId('walk')).toHaveStyle({
-        minHeight: SegmentedButtonTokens.touchTargetHeight,
+      expect(screen.getByTestId('walk')).not.toHaveStyle({
+        minHeight: 48,
+        minWidth: 48,
       });
       expect(screen.getByTestId('walk-container')).toHaveStyle({
         height: expected,
@@ -854,71 +797,25 @@ describe('segmented button presentation', () => {
     }
   );
 
-  it('renders state opacity with press, focus, and hover precedence', async () => {
+  it('does not render a focus ring for a disabled item', async () => {
     await render(
       <SegmentedButtons
         value="walk"
         onValueChange={() => {}}
         buttons={[
           { value: 'walk', label: 'Walking', testID: 'walk' },
-          { value: 'drive', label: 'Driving', testID: 'drive' },
+          {
+            value: 'drive',
+            label: 'Driving',
+            testID: 'drive',
+            disabled: true,
+          },
         ]}
       />
     );
 
-    const button = screen.getByTestId('walk');
-    const stateLayer = screen.getByTestId('walk-state-layer');
-    const focusRingInset =
-      (SegmentedButtonTokens.touchTargetHeight -
-        SegmentedButtonTokens.containerHeight.regular) /
-        2 -
-      SegmentedButtonTokens.focusIndicatorThickness -
-      SegmentedButtonTokens.focusIndicatorOutlineOffset;
-
-    await fireEvent(button, 'hoverIn');
-    expect(stateLayer).toHaveStyle({
-      backgroundColor: getTheme().colors.onSecondaryContainer,
-      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
-    });
-
-    await fireEvent(button, 'focus');
-    expect(stateLayer).toHaveStyle({
-      opacity: SegmentedButtonTokens.stateLayerOpacity.focused,
-    });
-    expect(screen.getByTestId('walk-focus-ring')).toHaveStyle({
-      borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
-      borderColor: getTheme().colors.secondary,
-      top: focusRingInset,
-      bottom: focusRingInset,
-    });
-
-    await fireEvent(button, 'pressIn');
-    expect(stateLayer).toHaveStyle({
-      opacity: SegmentedButtonTokens.stateLayerOpacity.pressed,
-    });
-
-    await fireEvent(button, 'pressOut');
-    expect(stateLayer).toHaveStyle({
-      opacity: SegmentedButtonTokens.stateLayerOpacity.focused,
-    });
-
-    await fireEvent(button, 'blur');
-    expect(stateLayer).toHaveStyle({
-      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
-    });
-    expect(screen.queryByTestId('walk-focus-ring')).not.toBeOnTheScreen();
-
-    await fireEvent(button, 'hoverOut');
-    expect(stateLayer).toHaveStyle({ opacity: 0 });
-
-    const unselectedButton = screen.getByTestId('drive');
-    const unselectedStateLayer = screen.getByTestId('drive-state-layer');
-
-    await fireEvent(unselectedButton, 'hoverIn');
-    expect(unselectedStateLayer).toHaveStyle({
-      backgroundColor: getTheme().colors.onSurface,
-      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
-    });
+    await fireEvent(screen.getByTestId('drive'), 'focus');
+    expect(screen.queryByTestId('drive-focus-ring')).not.toBeOnTheScreen();
   });
 });
 

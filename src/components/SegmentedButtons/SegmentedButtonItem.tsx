@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
@@ -9,7 +10,6 @@ import type {
 
 import SegmentedButtonContent from './SegmentedButtonContent';
 import { FOCUS_RING_OUTSET, SegmentedButtonTokens } from './tokens';
-import { useSegmentedButtonInteraction } from './useSegmentedButtonInteraction';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonBorderStyles,
@@ -17,6 +17,7 @@ import {
 } from './utils';
 import type { SegmentedButtonPosition } from './utils';
 import type { Theme } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -125,17 +126,12 @@ const SegmentedButtonItem = ({
 }: Props) => {
   const accessibilityLabel = ariaLabel ?? label;
 
-  const {
-    interactionProps,
-    interactionState,
-    stateLayerOpacity,
-    showFocusRing,
-  } = useSegmentedButtonInteraction(disabled);
+  const [focused, setFocused] = React.useState(false);
+  const showFocusRing = focused && !disabled;
 
   const colors = resolveColors(theme, {
     checked,
     disabled,
-    interactionState,
     contentColor: checked ? checkedColor : uncheckedColor,
     dividerDisabled: disabled && previousDisabled,
   });
@@ -144,14 +140,17 @@ const SegmentedButtonItem = ({
   const { outline, divider } = getSegmentedButtonBorderStyles(segment);
 
   const containerHeight = SegmentedButtonTokens.containerHeight[density];
-  const containerVerticalInset =
-    (SegmentedButtonTokens.touchTargetHeight - containerHeight) / 2;
-  const focusRingVerticalInset = containerVerticalInset - FOCUS_RING_OUTSET;
 
   return (
     <View
       testID={testID ? `${testID}-wrapper` : undefined}
-      style={[styles.wrapper, showFocusRing && styles.focusedWrapper, style]}
+      style={[
+        styles.wrapper,
+        borderRadius,
+        { backgroundColor: colors.container },
+        showFocusRing && styles.focusedWrapper,
+        style,
+      ]}
     >
       <TouchableRipple
         borderless
@@ -165,33 +164,19 @@ const SegmentedButtonItem = ({
         testID={testID}
         background={background}
         hitSlop={hitSlop}
-        style={[
-          styles.touchable,
-          borderRadius,
-          Platform.OS === 'web' && webNoOutline,
-        ]}
-        {...interactionProps}
+        theme={theme}
+        style={[borderRadius, Platform.OS === 'web' && webNoOutline]}
+        onFocus={(event) => {
+          if (!disabled && isKeyboardFocusEvent(event)) {
+            setFocused(true);
+          }
+        }}
+        onBlur={() => setFocused(false)}
       >
         <View
           testID={testID ? `${testID}-container` : undefined}
-          style={[
-            styles.container,
-            borderRadius,
-            { height: containerHeight, backgroundColor: colors.container },
-          ]}
+          style={[styles.container, { height: containerHeight }]}
         >
-          <View
-            pointerEvents="none"
-            testID={testID ? `${testID}-state-layer` : undefined}
-            style={[
-              styles.stateLayer,
-              borderRadius,
-              {
-                backgroundColor: colors.stateLayer,
-                opacity: stateLayerOpacity,
-              },
-            ]}
-          />
           <SegmentedButtonContent
             checked={checked}
             iconColor={colors.content.iconColor}
@@ -243,8 +228,6 @@ const SegmentedButtonItem = ({
             styles.focusRing,
             borderRadius,
             {
-              top: focusRingVerticalInset,
-              bottom: focusRingVerticalInset,
               borderColor: colors.focusIndicator,
             },
           ]}
@@ -257,29 +240,14 @@ const SegmentedButtonItem = ({
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    minWidth: SegmentedButtonTokens.minimumWidth,
-    minHeight: SegmentedButtonTokens.touchTargetHeight,
-    justifyContent: 'center',
     overflow: 'visible',
   },
   focusedWrapper: {
     zIndex: 1,
   },
-  touchable: {
-    minHeight: SegmentedButtonTokens.touchTargetHeight,
-    justifyContent: 'center',
-    overflow: 'visible',
-  },
   container: {
     width: '100%',
     justifyContent: 'center',
-  },
-  stateLayer: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
   },
   outline: {
     position: 'absolute',
@@ -291,6 +259,8 @@ const styles = StyleSheet.create({
   },
   focusRing: {
     position: 'absolute',
+    top: -FOCUS_RING_OUTSET,
+    bottom: -FOCUS_RING_OUTSET,
     left: -FOCUS_RING_OUTSET,
     right: -FOCUS_RING_OUTSET,
     borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
