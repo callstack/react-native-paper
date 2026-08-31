@@ -3,18 +3,16 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { LocaleProvider } from '../../core/locale';
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
-import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
 import {
   getSegmentedButtonBorderRadius,
+  getSegmentedButtonBorderStyles,
   getSegmentedButtonColors,
   getSegmentedButtonHeight,
   getSegmentedButtonOutlineStyle,
   getSegmentedButtonStateLayerOpacity,
 } from '../SegmentedButtons/utils';
-
-const stateOpacity = tokens.md.sys.state.opacity;
 
 it('type checks single- and multi-select values with their callbacks', () => {
   type Value = 'walk' | 'ride';
@@ -109,6 +107,7 @@ it('renders disabled segmented button', async () => {
         {
           value: 'ride',
           label: 'Riding',
+          icon: 'car',
           disabled: true,
           testID: 'ride',
         },
@@ -119,6 +118,12 @@ it('renders disabled segmented button', async () => {
   expect(screen.getByTestId('ride-outline')).toHaveStyle({
     borderColor: getTheme().colors.onSurface,
     opacity: SegmentedButtonTokens.disabledOutlineOpacity,
+  });
+  expect(screen.getByTestId('ride-label')).toHaveStyle({
+    opacity: SegmentedButtonTokens.disabledLabelTextOpacity,
+  });
+  expect(screen.getByTestId('ride-icon')).toHaveStyle({
+    opacity: SegmentedButtonTokens.disabledIconOpacity,
   });
 });
 
@@ -400,7 +405,7 @@ describe('getSegmentedButtonColors', () => {
           checkedColor,
           uncheckedColor,
         })
-      ).toMatchObject({ textColor: expected });
+      ).toMatchObject({ textColor: expected, iconColor: expected });
     }
   );
 
@@ -472,7 +477,9 @@ describe('getSegmentedButtonColors', () => {
       })
     ).toMatchObject({
       textColor: getTheme().colors.onSurface,
-      textOpacity: stateOpacity.disabled,
+      textOpacity: SegmentedButtonTokens.disabledLabelTextOpacity,
+      iconColor: getTheme().colors.onSurface,
+      iconOpacity: SegmentedButtonTokens.disabledIconOpacity,
     });
   });
 });
@@ -493,7 +500,7 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
       pressed: true,
       focused: true,
       hovered: true,
-      expected: stateOpacity.pressed,
+      expected: SegmentedButtonTokens.stateLayerOpacity.pressed,
     },
     {
       state: 'focused',
@@ -501,7 +508,7 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
       pressed: false,
       focused: true,
       hovered: true,
-      expected: stateOpacity.focused,
+      expected: SegmentedButtonTokens.stateLayerOpacity.focused,
     },
     {
       state: 'hovered',
@@ -509,7 +516,7 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
       pressed: false,
       focused: false,
       hovered: true,
-      expected: stateOpacity.hovered,
+      expected: SegmentedButtonTokens.stateLayerOpacity.hovered,
     },
     {
       state: 'idle',
@@ -577,6 +584,76 @@ describe('segmented button topology helpers', () => {
       });
     }
   );
+
+  it('keeps the first segment border on its outline', () => {
+    expect(
+      getSegmentedButtonBorderStyles({
+        segment: 'first',
+        borderOverrides: {
+          borderWidth: 3,
+          borderColor: '#123456',
+          borderStartColor: '#abcdef',
+          borderStyle: 'dashed',
+        },
+      })
+    ).toEqual({
+      outlineBorderStyle: {
+        borderTopWidth: 3,
+        borderBottomWidth: 3,
+        borderStartWidth: 3,
+        borderEndWidth: 0,
+        borderColor: '#123456',
+        borderStartColor: '#abcdef',
+        borderStyle: 'dashed',
+      },
+    });
+  });
+
+  it('moves a non-first segment start edge to the shared border', () => {
+    expect(
+      getSegmentedButtonBorderStyles({
+        segment: 'middle',
+        borderOverrides: {
+          borderWidth: 3,
+          borderTopWidth: 4,
+          borderStartWidth: 5,
+          borderColor: '#123456',
+          borderStartColor: '#abcdef',
+          borderStyle: 'dotted',
+        },
+      })
+    ).toEqual({
+      outlineBorderStyle: {
+        borderTopWidth: 4,
+        borderBottomWidth: 3,
+        borderEndWidth: 0,
+        borderColor: '#123456',
+        borderStyle: 'dotted',
+      },
+      sharedBorderStyle: {
+        borderStartWidth: 5,
+        borderColor: '#123456',
+        borderStartColor: '#abcdef',
+        borderStyle: 'dotted',
+      },
+    });
+  });
+
+  it('preserves a zero border width', () => {
+    expect(
+      getSegmentedButtonBorderStyles({
+        segment: 'last',
+        borderOverrides: { borderWidth: 0 },
+      })
+    ).toEqual({
+      outlineBorderStyle: {
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+        borderEndWidth: 0,
+      },
+      sharedBorderStyle: { borderStartWidth: 0 },
+    });
+  });
 });
 
 describe('segmented button presentation', () => {
@@ -707,7 +784,7 @@ describe('segmented button presentation', () => {
             : getTheme().colors.outline,
           opacity: dividerDisabled
             ? SegmentedButtonTokens.disabledOutlineOpacity
-            : stateOpacity.enabled,
+            : 1,
           borderStartWidth: SegmentedButtonTokens.outlineWidth,
         });
         expect(screen.getByTestId(`${ids[index]}-outline`)).not.toHaveStyle({
@@ -960,36 +1037,64 @@ describe('segmented button presentation', () => {
         onValueChange={() => {}}
         buttons={[
           { value: 'walk', label: 'Walking', testID: 'walk' },
-          { value: 'drive', label: 'Driving' },
+          { value: 'drive', label: 'Driving', testID: 'drive' },
         ]}
       />
     );
 
     const button = screen.getByTestId('walk');
     const stateLayer = screen.getByTestId('walk-state-layer');
+    const focusRingInset =
+      (SegmentedButtonTokens.touchTargetHeight -
+        SegmentedButtonTokens.containerHeight.regular) /
+        2 -
+      SegmentedButtonTokens.focusIndicatorThickness -
+      SegmentedButtonTokens.focusIndicatorOutlineOffset;
 
     await fireEvent(button, 'hoverIn');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
+    expect(stateLayer).toHaveStyle({
+      backgroundColor: getTheme().colors.onSecondaryContainer,
+      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
+    });
 
     await fireEvent(button, 'focus');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
+    expect(stateLayer).toHaveStyle({
+      opacity: SegmentedButtonTokens.stateLayerOpacity.focused,
+    });
     expect(screen.getByTestId('walk-focus-ring')).toHaveStyle({
-      borderWidth: tokens.md.sys.state.focusIndicator.thickness,
+      borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
       borderColor: getTheme().colors.secondary,
+      top: focusRingInset,
+      bottom: focusRingInset,
     });
 
     await fireEvent(button, 'pressIn');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.pressed });
+    expect(stateLayer).toHaveStyle({
+      opacity: SegmentedButtonTokens.stateLayerOpacity.pressed,
+    });
 
     await fireEvent(button, 'pressOut');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.focused });
+    expect(stateLayer).toHaveStyle({
+      opacity: SegmentedButtonTokens.stateLayerOpacity.focused,
+    });
 
     await fireEvent(button, 'blur');
-    expect(stateLayer).toHaveStyle({ opacity: stateOpacity.hovered });
+    expect(stateLayer).toHaveStyle({
+      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
+    });
     expect(screen.queryByTestId('walk-focus-ring')).not.toBeOnTheScreen();
 
     await fireEvent(button, 'hoverOut');
     expect(stateLayer).toHaveStyle({ opacity: 0 });
+
+    const unselectedButton = screen.getByTestId('drive');
+    const unselectedStateLayer = screen.getByTestId('drive-state-layer');
+
+    await fireEvent(unselectedButton, 'hoverIn');
+    expect(unselectedStateLayer).toHaveStyle({
+      backgroundColor: getTheme().colors.onSurface,
+      opacity: SegmentedButtonTokens.stateLayerOpacity.hovered,
+    });
   });
 });
 
@@ -1449,7 +1554,7 @@ describe('labelStyle is handled', () => {
             label: 'Walking',
             value: 'walk',
             testID: 'walking-button',
-            labelStyle: { fontSize: 10 },
+            labelStyle: { fontSize: 10, opacity: 0.5 },
           },
           {
             label: 'Driving',
@@ -1464,6 +1569,7 @@ describe('labelStyle is handled', () => {
 
     expect(screen.getByTestId('walking-button-label')).toHaveStyle({
       fontSize: 10,
+      opacity: 0.5,
     });
     expect(screen.getByTestId('driving-button-label')).toHaveStyle({
       fontSize: 12,

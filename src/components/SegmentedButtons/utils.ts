@@ -1,11 +1,8 @@
 import type { ViewStyle } from 'react-native';
 
 import { SegmentedButtonTokens } from './tokens';
-import { tokens } from '../../theme/tokens';
-import { cornerFull } from '../../theme/tokens/sys/shape';
+import type { SegmentedButtonInteractionState } from './tokens';
 import type { InternalTheme } from '../../types';
-
-const stateOpacity = tokens.md.sys.state.opacity;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -17,6 +14,7 @@ type SegmentedButtonProps = {
   checkedColor?: string;
   uncheckedColor?: string;
   previousDisabled?: boolean;
+  interactionState?: SegmentedButtonInteractionState;
 } & BaseProps;
 
 export type SegmentedButtonPosition = 'first' | 'last' | 'middle';
@@ -32,8 +30,8 @@ export const getSegmentedButtonBorderRadius = ({
 }): ViewStyle => {
   if (segment === 'first') {
     return {
-      borderTopStartRadius: cornerFull,
-      borderBottomStartRadius: cornerFull,
+      borderTopStartRadius: SegmentedButtonTokens.containerShape,
+      borderBottomStartRadius: SegmentedButtonTokens.containerShape,
       borderTopEndRadius: 0,
       borderBottomEndRadius: 0,
     };
@@ -43,8 +41,8 @@ export const getSegmentedButtonBorderRadius = ({
     return {
       borderTopStartRadius: 0,
       borderBottomStartRadius: 0,
-      borderTopEndRadius: cornerFull,
-      borderBottomEndRadius: cornerFull,
+      borderTopEndRadius: SegmentedButtonTokens.containerShape,
+      borderBottomEndRadius: SegmentedButtonTokens.containerShape,
     };
   }
 
@@ -63,6 +61,49 @@ export const getSegmentedButtonOutlineStyle = (
   borderEndWidth: segment === 'last' ? outlineWidth : 0,
 });
 
+type SegmentedButtonBorderStyles = {
+  outlineBorderStyle: ViewStyle;
+  sharedBorderStyle?: ViewStyle;
+};
+
+export const getSegmentedButtonBorderStyles = ({
+  segment,
+  borderOverrides,
+}: {
+  segment: SegmentedButtonPosition;
+  borderOverrides: ViewStyle;
+}): SegmentedButtonBorderStyles => {
+  const { borderWidth, ...explicitBorderOverrides } = borderOverrides;
+  const resolvedBorderStyle = {
+    ...getSegmentedButtonOutlineStyle(
+      segment,
+      borderWidth ?? SegmentedButtonTokens.outlineWidth
+    ),
+    ...explicitBorderOverrides,
+  };
+
+  if (segment === 'first') {
+    return { outlineBorderStyle: resolvedBorderStyle };
+  }
+
+  const { borderStartWidth, borderStartColor, ...outlineBorderStyle } =
+    resolvedBorderStyle;
+
+  // The shared edge is separate so adjacent disabled items can style it once.
+  const sharedBorderStyle: ViewStyle = {
+    borderStartWidth,
+    ...(resolvedBorderStyle.borderColor !== undefined
+      ? { borderColor: resolvedBorderStyle.borderColor }
+      : {}),
+    ...(resolvedBorderStyle.borderStyle !== undefined
+      ? { borderStyle: resolvedBorderStyle.borderStyle }
+      : {}),
+    ...(borderStartColor !== undefined ? { borderStartColor } : {}),
+  };
+
+  return { outlineBorderStyle, sharedBorderStyle };
+};
+
 export const getSegmentedButtonStateLayerOpacity = ({
   disabled,
   pressed,
@@ -79,18 +120,42 @@ export const getSegmentedButtonStateLayerOpacity = ({
   }
 
   if (pressed) {
-    return stateOpacity.pressed;
+    return SegmentedButtonTokens.stateLayerOpacity.pressed;
   }
 
   if (focused) {
-    return stateOpacity.focused;
+    return SegmentedButtonTokens.stateLayerOpacity.focused;
   }
 
   if (hovered) {
-    return stateOpacity.hovered;
+    return SegmentedButtonTokens.stateLayerOpacity.hovered;
   }
 
   return 0;
+};
+
+export const getSegmentedButtonInteractionState = ({
+  pressed,
+  focused,
+  hovered,
+}: {
+  pressed: boolean;
+  focused: boolean;
+  hovered: boolean;
+}): SegmentedButtonInteractionState => {
+  if (pressed) {
+    return 'pressed';
+  }
+
+  if (focused) {
+    return 'focused';
+  }
+
+  if (hovered) {
+    return 'hovered';
+  }
+
+  return 'enabled';
 };
 
 export const getSegmentedButtonColors = ({
@@ -100,6 +165,7 @@ export const getSegmentedButtonColors = ({
   checkedColor,
   uncheckedColor,
   previousDisabled,
+  interactionState = 'enabled',
 }: SegmentedButtonProps) => {
   const backgroundColor = checked
     ? theme.colors[SegmentedButtonTokens.selectedContainerColor]
@@ -109,25 +175,49 @@ export const getSegmentedButtonColors = ({
     ? theme.colors[SegmentedButtonTokens.disabledOutlineColor]
     : theme.colors[SegmentedButtonTokens.outlineColor];
 
+  const customContentColor = checked ? checkedColor : uncheckedColor;
   const textColor = disabled
-    ? theme.colors[SegmentedButtonTokens.disabledContentColor]
+    ? theme.colors[SegmentedButtonTokens.disabledLabelTextColor]
     : checked
-      ? (checkedColor ??
-        theme.colors[SegmentedButtonTokens.selectedContentColor])
-      : (uncheckedColor ??
-        theme.colors[SegmentedButtonTokens.unselectedContentColor]);
+      ? (customContentColor ??
+        theme.colors[
+          SegmentedButtonTokens.selectedLabelTextColor[interactionState]
+        ])
+      : (customContentColor ??
+        theme.colors[
+          SegmentedButtonTokens.unselectedLabelTextColor[interactionState]
+        ]);
+
+  const iconColor = disabled
+    ? theme.colors[SegmentedButtonTokens.disabledIconColor]
+    : checked
+      ? (customContentColor ??
+        theme.colors[SegmentedButtonTokens.selectedIconColor[interactionState]])
+      : (customContentColor ??
+        theme.colors[
+          SegmentedButtonTokens.unselectedIconColor[interactionState]
+        ]);
 
   const borderOpacity = disabled
     ? SegmentedButtonTokens.disabledOutlineOpacity
-    : stateOpacity.enabled;
+    : 1;
 
   const textOpacity = disabled
-    ? SegmentedButtonTokens.disabledContentOpacity
-    : stateOpacity.enabled;
+    ? SegmentedButtonTokens.disabledLabelTextOpacity
+    : 1;
 
-  const stateLayerColor = checked
-    ? theme.colors[SegmentedButtonTokens.selectedStateLayerColor]
-    : theme.colors[SegmentedButtonTokens.unselectedStateLayerColor];
+  const iconOpacity = disabled ? SegmentedButtonTokens.disabledIconOpacity : 1;
+
+  const stateLayerColor =
+    disabled || interactionState === 'enabled'
+      ? 'transparent'
+      : checked
+        ? theme.colors[
+            SegmentedButtonTokens.selectedStateLayerColor[interactionState]
+          ]
+        : theme.colors[
+            SegmentedButtonTokens.unselectedStateLayerColor[interactionState]
+          ];
 
   const sharedBorderDisabled = Boolean(disabled && previousDisabled);
   const sharedBorderColor = sharedBorderDisabled
@@ -135,7 +225,7 @@ export const getSegmentedButtonColors = ({
     : theme.colors[SegmentedButtonTokens.outlineColor];
   const sharedBorderOpacity = sharedBorderDisabled
     ? SegmentedButtonTokens.disabledOutlineOpacity
-    : stateOpacity.enabled;
+    : 1;
 
   const focusIndicatorColor =
     theme.colors[SegmentedButtonTokens.focusIndicatorColor];
@@ -146,6 +236,8 @@ export const getSegmentedButtonColors = ({
     borderOpacity,
     textColor,
     textOpacity,
+    iconColor,
+    iconOpacity,
     stateLayerColor,
     sharedBorderColor,
     sharedBorderOpacity,

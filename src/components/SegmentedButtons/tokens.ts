@@ -1,4 +1,19 @@
+import { tokens } from '../../theme/tokens';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ColorRole } from '../../theme/types';
+
+export type SegmentedButtonInteractionState =
+  | 'enabled'
+  | 'hovered'
+  | 'focused'
+  | 'pressed';
+
+type ActiveInteractionState = Exclude<
+  SegmentedButtonInteractionState,
+  'enabled'
+>;
+
+const stateTokens = tokens.md.sys.state;
 
 const sizes = {
   containerHeight: {
@@ -13,20 +28,85 @@ const sizes = {
   iconSize: 18,
   iconLabelGap: 8,
   outlineWidth: 1,
-  disabledContentOpacity: 0.38,
+  containerShape: cornerFull,
+  labelTextType: 'labelLarge',
+  disabledLabelTextOpacity: stateTokens.opacity.disabled,
+  disabledIconOpacity: stateTokens.opacity.disabled,
   disabledOutlineOpacity: 0.12,
+  stateLayerOpacity: {
+    hovered: stateTokens.opacity.hovered,
+    focused: stateTokens.opacity.focused,
+    pressed: stateTokens.opacity.pressed,
+  } as const satisfies Record<ActiveInteractionState, number>,
+  focusIndicatorThickness: stateTokens.focusIndicator.thickness,
+  focusIndicatorOutlineOffset: stateTokens.focusIndicator.outerOffset,
 } as const;
 
-const colors = {
+const baseColors = {
   selectedContainerColor: 'secondaryContainer',
-  selectedContentColor: 'onSecondaryContainer',
-  unselectedContentColor: 'onSurface',
   outlineColor: 'outline',
-  disabledContentColor: 'onSurface',
   disabledOutlineColor: 'onSurface',
-  selectedStateLayerColor: 'onSecondaryContainer',
-  unselectedStateLayerColor: 'onSurface',
+  disabledLabelTextColor: 'onSurface',
+  disabledIconColor: 'onSurface',
   focusIndicatorColor: 'secondary',
 } as const satisfies Record<string, ColorRole>;
 
-export const SegmentedButtonTokens = { ...sizes, ...colors };
+const contentColors = {
+  selectedLabelTextColor: {
+    enabled: 'onSecondaryContainer',
+    hovered: 'onSecondaryContainer',
+    focused: 'onSecondaryContainer',
+    pressed: 'onSecondaryContainer',
+  },
+  unselectedLabelTextColor: {
+    enabled: 'onSurface',
+    hovered: 'onSurface',
+    focused: 'onSurface',
+    pressed: 'onSurface',
+  },
+  selectedIconColor: {
+    enabled: 'onSecondaryContainer',
+    hovered: 'onSecondaryContainer',
+    focused: 'onSecondaryContainer',
+    pressed: 'onSecondaryContainer',
+  },
+  unselectedIconColor: {
+    enabled: 'onSurface',
+    hovered: 'onSurface',
+    focused: 'onSurface',
+    pressed: 'onSurface',
+  },
+} as const satisfies Record<
+  | 'selectedLabelTextColor'
+  | 'unselectedLabelTextColor'
+  | 'selectedIconColor'
+  | 'unselectedIconColor',
+  Record<SegmentedButtonInteractionState, ColorRole>
+>;
+
+const stateLayerColors = {
+  selectedStateLayerColor: {
+    hovered: 'onSecondaryContainer',
+    focused: 'onSecondaryContainer',
+    pressed: 'onSecondaryContainer',
+  },
+  unselectedStateLayerColor: {
+    hovered: 'onSurface',
+    focused: 'onSurface',
+    pressed: 'onSurface',
+  },
+} as const satisfies Record<
+  'selectedStateLayerColor' | 'unselectedStateLayerColor',
+  Record<ActiveInteractionState, ColorRole>
+>;
+
+export const SegmentedButtonTokens = {
+  ...sizes,
+  ...baseColors,
+  ...contentColors,
+  ...stateLayerColors,
+};
+
+export const FOCUS_RING_OUTSET =
+  SegmentedButtonTokens.focusIndicatorThickness +
+  SegmentedButtonTokens.focusIndicatorOutlineOffset;

@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { getSegmentedButtonStateLayerOpacity } from './utils';
+import {
+  getSegmentedButtonInteractionState,
+  getSegmentedButtonStateLayerOpacity,
+} from './utils';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -32,8 +35,15 @@ export const useSegmentedButtonInteraction = (disabled?: boolean) => {
     },
   };
 
+  const interactionState = getSegmentedButtonInteractionState({
+    pressed,
+    focused,
+    hovered,
+  });
+
   return {
     interactionProps,
+    interactionState,
     stateLayerOpacity: getSegmentedButtonStateLayerOpacity({
       disabled,
       pressed,

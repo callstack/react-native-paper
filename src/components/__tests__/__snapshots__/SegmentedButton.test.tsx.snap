@@ -123,7 +123,7 @@ exports[`renders segmented button 1`] = `
                 "borderTopStartRadius": 9999,
               },
               {
-                "backgroundColor": "rgba(29, 25, 43, 1)",
+                "backgroundColor": "transparent",
                 "opacity": 0,
               },
             ]
@@ -131,19 +131,14 @@ exports[`renders segmented button 1`] = `
         />
         <View
           style={
-            [
-              {
-                "alignItems": "center",
-                "columnGap": 8,
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "paddingHorizontal": 12,
-              },
-              {
-                "opacity": 1,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "columnGap": 8,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 12,
+            }
           }
         >
           <Text
@@ -178,6 +173,9 @@ exports[`renders segmented button 1`] = `
                       "fontWeight": "500",
                       "letterSpacing": 0.1,
                       "lineHeight": 20,
+                    },
+                    {
+                      "opacity": 1,
                     },
                     undefined,
                   ],
@@ -329,7 +327,7 @@ exports[`renders segmented button 1`] = `
                 "borderTopStartRadius": 0,
               },
               {
-                "backgroundColor": "rgba(29, 27, 32, 1)",
+                "backgroundColor": "transparent",
                 "opacity": 0,
               },
             ]
@@ -337,19 +335,14 @@ exports[`renders segmented button 1`] = `
         />
         <View
           style={
-            [
-              {
-                "alignItems": "center",
-                "columnGap": 8,
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "paddingHorizontal": 12,
-              },
-              {
-                "opacity": 1,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "columnGap": 8,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 12,
+            }
           }
         >
           <Text
@@ -384,6 +377,9 @@ exports[`renders segmented button 1`] = `
                       "fontWeight": "500",
                       "letterSpacing": 0.1,
                       "lineHeight": 20,
+                    },
+                    {
+                      "opacity": 1,
                     },
                     undefined,
                   ],

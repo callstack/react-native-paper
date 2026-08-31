@@ -8,25 +8,20 @@ import type {
 } from 'react-native';
 
 import SegmentedButtonContent from './SegmentedButtonContent';
-import { SegmentedButtonTokens } from './tokens';
+import { FOCUS_RING_OUTSET, SegmentedButtonTokens } from './tokens';
 import { useSegmentedButtonInteraction } from './useSegmentedButtonInteraction';
 import {
   getSegmentedButtonBorderRadius,
+  getSegmentedButtonBorderStyles,
   getSegmentedButtonColors,
   getSegmentedButtonHeight,
-  getSegmentedButtonOutlineStyle,
 } from './utils';
 import type { SegmentedButtonPosition } from './utils';
-import { tokens } from '../../theme/tokens';
 import type { Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
-
-const focusIndicatorTokens = tokens.md.sys.state.focusIndicator;
-const FOCUS_RING_OUTSET =
-  focusIndicatorTokens.thickness + focusIndicatorTokens.outerOffset;
 
 const isBorderRadiusStyle = (property: keyof ViewStyle) =>
   property === 'borderCurve' ||
@@ -137,8 +132,12 @@ const SegmentedButtonItem = ({
   labelMaxFontSizeMultiplier,
   hitSlop,
 }: Props) => {
-  const { interactionProps, stateLayerOpacity, showFocusRing } =
-    useSegmentedButtonInteraction(disabled);
+  const {
+    interactionProps,
+    interactionState,
+    stateLayerOpacity,
+    showFocusRing,
+  } = useSegmentedButtonInteraction(disabled);
 
   const accessibilityLabel = label || ariaLabel;
 
@@ -149,6 +148,7 @@ const SegmentedButtonItem = ({
     previousDisabled,
     checkedColor,
     uncheckedColor,
+    interactionState,
   });
 
   const layerStyles = getSegmentedButtonItemStyles({
@@ -192,11 +192,13 @@ const SegmentedButtonItem = ({
           />
           <SegmentedButtonContent
             checked={checked}
-            contentColor={colors.textColor}
-            contentOpacity={colors.textOpacity}
+            iconColor={colors.iconColor}
+            iconOpacity={colors.iconOpacity}
             icon={icon}
             label={label}
+            labelColor={colors.textColor}
             labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+            labelOpacity={colors.textOpacity}
             labelStyle={labelStyle}
             showSelectedCheck={showSelectedCheck}
             testID={testID}
@@ -266,7 +268,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: -FOCUS_RING_OUTSET,
     right: -FOCUS_RING_OUTSET,
-    borderWidth: focusIndicatorTokens.thickness,
+    borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
     pointerEvents: 'none',
   },
 });
@@ -279,6 +281,15 @@ type ItemStyleOptions = {
   segment: Props['segment'];
   stateLayerOpacity: number;
   style: Props['style'];
+};
+
+type ItemLayerStyles = {
+  touchable: StyleProp<ViewStyle>;
+  container: StyleProp<ViewStyle>;
+  stateLayer: StyleProp<ViewStyle>;
+  outline: StyleProp<ViewStyle>;
+  sharedBorder?: StyleProp<ViewStyle>;
+  focusRing: StyleProp<ViewStyle>;
 };
 
 function getSegmentedButtonItemStyles({
@@ -295,50 +306,26 @@ function getSegmentedButtonItemStyles({
   segment,
   stateLayerOpacity,
   style,
-}: ItemStyleOptions) {
+}: ItemStyleOptions): ItemLayerStyles {
   const segmentBorderRadius = getSegmentedButtonBorderRadius({ segment });
   const containerHeight = getSegmentedButtonHeight(density);
   const flattenedStyle = StyleSheet.flatten(style) || {};
 
+  // Radius properties must be matched before the broader border filter.
   const [containerStyleOverrides, borderRadiusOverrides, borderOverrides] =
     splitStyles(flattenedStyle, isBorderRadiusStyle, isBorderStyle);
 
-  const outlineWidth =
-    borderOverrides.borderWidth ?? SegmentedButtonTokens.outlineWidth;
-  const explicitBorderOverrides = { ...borderOverrides };
-  delete explicitBorderOverrides.borderWidth;
-
-  const resolvedBorderStyle = {
-    ...getSegmentedButtonOutlineStyle(segment, outlineWidth),
-    ...explicitBorderOverrides,
-  };
-  const hasSharedBorder = segment !== 'first';
-  const { borderStartWidth, borderStartColor, ...nonSharedBorderStyle } =
-    resolvedBorderStyle;
-  const outlineBorderStyle = hasSharedBorder
-    ? nonSharedBorderStyle
-    : resolvedBorderStyle;
-  const sharedBorderStyle: ViewStyle | undefined = hasSharedBorder
-    ? {
-        borderStartWidth,
-        ...(resolvedBorderStyle.borderColor !== undefined
-          ? { borderColor: resolvedBorderStyle.borderColor }
-          : {}),
-        ...(resolvedBorderStyle.borderStyle !== undefined
-          ? { borderStyle: resolvedBorderStyle.borderStyle }
-          : {}),
-        ...(borderStartColor !== undefined ? { borderStartColor } : {}),
-      }
-    : undefined;
+  const { outlineBorderStyle, sharedBorderStyle } =
+    getSegmentedButtonBorderStyles({ segment, borderOverrides });
 
   const borderRadiusStyle = {
     ...(flattenedStyle.borderRadius === undefined ? segmentBorderRadius : {}),
     ...borderRadiusOverrides,
   };
 
-  const focusRingVerticalInset =
-    (SegmentedButtonTokens.touchTargetHeight - containerHeight) / 2 -
-    FOCUS_RING_OUTSET;
+  const containerVerticalInset =
+    (SegmentedButtonTokens.touchTargetHeight - containerHeight) / 2;
+  const focusRingVerticalInset = containerVerticalInset - FOCUS_RING_OUTSET;
 
   return {
     touchable: [

@@ -17,17 +17,26 @@ import Text from '../Typography/Text';
 
 type AnimatedIconProps = {
   color: TextStyle['color'];
+  opacity: number;
   scale: SharedValue<number>;
   testID?: string;
 };
 
-const AnimatedCheckIcon = ({ color, scale, testID }: AnimatedIconProps) => {
+const AnimatedCheckIcon = ({
+  color,
+  opacity,
+  scale,
+  testID,
+}: AnimatedIconProps) => {
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
 
   return (
-    <Animated.View testID={testID} style={[styles.icon, animatedStyle]}>
+    <Animated.View
+      testID={testID}
+      style={[styles.icon, { opacity }, animatedStyle]}
+    >
       <Icon
         source="check"
         size={SegmentedButtonTokens.iconSize}
@@ -45,6 +54,7 @@ type AnimatedOptionIconProps = AnimatedIconProps & {
 const AnimatedOptionIcon = ({
   animated,
   color,
+  opacity,
   scale,
   source,
   testID,
@@ -56,7 +66,7 @@ const AnimatedOptionIcon = ({
   return (
     <Animated.View
       testID={testID}
-      style={[styles.icon, animated ? animatedStyle : undefined]}
+      style={[styles.icon, { opacity }, animated ? animatedStyle : undefined]}
     >
       <Icon
         source={source}
@@ -69,11 +79,13 @@ const AnimatedOptionIcon = ({
 
 type Props = {
   checked: boolean;
-  contentColor: TextStyle['color'];
-  contentOpacity: number;
   icon?: IconSource;
+  iconColor: TextStyle['color'];
+  iconOpacity: number;
   label?: string;
+  labelColor: TextStyle['color'];
   labelMaxFontSizeMultiplier?: number;
+  labelOpacity: number;
   labelStyle?: StyleProp<TextStyle>;
   showSelectedCheck?: boolean;
   testID?: string;
@@ -82,11 +94,13 @@ type Props = {
 
 const SegmentedButtonContent = ({
   checked,
-  contentColor,
-  contentOpacity,
   icon,
+  iconColor,
+  iconOpacity,
   label,
+  labelColor,
   labelMaxFontSizeMultiplier,
+  labelOpacity,
   labelStyle,
   showSelectedCheck,
   testID,
@@ -105,15 +119,16 @@ const SegmentedButtonContent = ({
   const showCheckIcon = Boolean(checked && showSelectedCheck);
   const optionIcon = icon && (!label || !showCheckIcon) ? icon : undefined;
   const labelTextStyle: TextStyle = {
-    ...theme.fonts.labelLarge,
-    color: contentColor,
+    ...theme.fonts[SegmentedButtonTokens.labelTextType],
+    color: labelColor,
   };
 
   return (
-    <View style={[styles.content, { opacity: contentOpacity }]}>
+    <View style={styles.content}>
       {showCheckIcon ? (
         <AnimatedCheckIcon
-          color={contentColor}
+          color={iconColor}
+          opacity={iconOpacity}
           scale={checkmarkScale}
           testID={testID ? `${testID}-check-icon` : undefined}
         />
@@ -121,7 +136,8 @@ const SegmentedButtonContent = ({
       {optionIcon ? (
         <AnimatedOptionIcon
           animated={Boolean(label)}
-          color={contentColor}
+          color={iconColor}
+          opacity={iconOpacity}
           scale={checkmarkScale}
           source={optionIcon}
           testID={testID ? `${testID}-icon` : undefined}
@@ -129,8 +145,13 @@ const SegmentedButtonContent = ({
       ) : null}
       {label ? (
         <Text
-          variant="labelLarge"
-          style={[styles.label, labelTextStyle, labelStyle]}
+          variant={SegmentedButtonTokens.labelTextType}
+          style={[
+            styles.label,
+            labelTextStyle,
+            { opacity: labelOpacity },
+            labelStyle,
+          ]}
           selectable={false}
           numberOfLines={1}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
