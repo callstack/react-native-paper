@@ -56,6 +56,11 @@ export type Props = $Omit<ViewProps, 'children' | 'style'> & {
   mode?: SplitButtonMode;
   /**
    * Size of the split button.
+   * - `extra-small` - the smallest split button size, for the most compact layouts.
+   * - `small` - the default split button size.
+   * - `medium` - a larger split button size for more prominent actions.
+   * - `large` - a larger split button size for high-emphasis actions.
+   * - `extra-large` - the largest split button size, for the most prominent actions.
    */
   size?: SplitButtonSize;
   /**
