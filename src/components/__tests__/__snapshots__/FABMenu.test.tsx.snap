@@ -21,7 +21,6 @@ exports[`renders FAB.Menu closed 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -479,7 +478,6 @@ exports[`renders FAB.Menu closed 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -630,7 +628,6 @@ exports[`renders FAB.Menu closed 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -803,7 +800,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -1261,7 +1257,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -1412,7 +1407,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -1585,7 +1579,6 @@ exports[`renders FAB.Menu open 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -2043,7 +2036,6 @@ exports[`renders FAB.Menu open 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -2194,7 +2186,6 @@ exports[`renders FAB.Menu open 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -2367,7 +2358,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -3533,7 +3523,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -3684,7 +3673,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -3857,7 +3845,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -4316,7 +4303,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -4467,7 +4453,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -4640,7 +4625,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -5156,7 +5140,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -5307,7 +5290,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -5480,7 +5462,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -5938,7 +5919,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           collapsable={false}
@@ -6089,7 +6069,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={

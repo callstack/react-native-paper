@@ -92,7 +92,7 @@ describe('Card', () => {
 
   it('renders with a content style', async () => {
     await render(
-      <Card contentStyle={styles.contentStyle}>
+      <Card testID="card" contentStyle={styles.contentStyle}>
         <Text>Content</Text>
       </Card>
     );
@@ -101,13 +101,13 @@ describe('Card', () => {
   });
 
   it('does not render a disabled accessibility state', async () => {
-    await render(<Card>{null}</Card>);
+    await render(<Card testID="card">{null}</Card>);
 
     expect(screen.getByTestId('card')).toBeEnabled();
   });
   it('does render a disabled accessibility state', async () => {
     await render(
-      <Card onPress={() => {}} disabled>
+      <Card testID="card" onPress={() => {}} disabled>
         {null}
       </Card>
     );

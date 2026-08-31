@@ -41,7 +41,6 @@ exports[`Card renders an outlined card 1`] = `
       },
     ]
   }
-  testID="card-container"
 >
   <View
     collapsable={false}
@@ -109,7 +108,6 @@ exports[`Card renders an outlined card 1`] = `
         },
       ]
     }
-    testID="card-outline"
   />
   <View
     style={
@@ -120,7 +118,6 @@ exports[`Card renders an outlined card 1`] = `
         undefined,
       ]
     }
-    testID="card"
   />
 </View>
 `;

@@ -59,7 +59,6 @@ exports[`renders not visible menu 1`] = `
           },
         ]
       }
-      testID="button-container"
     >
       <View
         collapsable={false}
@@ -149,7 +148,6 @@ exports[`renders not visible menu 1`] = `
             },
           ]
         }
-        testID="button"
       >
         <View
           style={
@@ -211,7 +209,6 @@ exports[`renders not visible menu 1`] = `
                 ],
               ]
             }
-            testID="button-text"
           >
             Open menu
           </Text>
@@ -282,7 +279,6 @@ exports[`renders visible menu 1`] = `
             },
           ]
         }
-        testID="button-container"
       >
         <View
           collapsable={false}
@@ -372,7 +368,6 @@ exports[`renders visible menu 1`] = `
               },
             ]
           }
-          testID="button"
         >
           <View
             style={
@@ -434,7 +429,6 @@ exports[`renders visible menu 1`] = `
                   ],
                 ]
               }
-              testID="button-text"
             >
               Open menu
             </Text>
@@ -517,7 +511,6 @@ exports[`renders visible menu 1`] = `
           undefined,
         ]
       }
-      testID="menu-view"
     >
       <View
         collapsable={false}
@@ -591,7 +584,6 @@ exports[`renders visible menu 1`] = `
               },
             ]
           }
-          testID="menu-surface"
         >
           <View
             collapsable={false}
@@ -701,7 +693,6 @@ exports[`renders visible menu 1`] = `
                   ],
                 ]
               }
-              testID="menu-item"
             >
               <View
                 style={
@@ -769,7 +760,6 @@ exports[`renders visible menu 1`] = `
                         ],
                       ]
                     }
-                    testID="menu-item-title"
                   >
                     Undo
                   </Text>
@@ -825,7 +815,6 @@ exports[`renders visible menu 1`] = `
                   ],
                 ]
               }
-              testID="menu-item"
             >
               <View
                 style={
@@ -893,7 +882,6 @@ exports[`renders visible menu 1`] = `
                         ],
                       ]
                     }
-                    testID="menu-item-title"
                   >
                     Redo
                   </Text>

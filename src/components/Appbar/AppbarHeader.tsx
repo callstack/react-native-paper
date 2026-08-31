@@ -88,7 +88,7 @@ const AppbarHeader = ({
   mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
   elevated = false,
   theme: themeOverrides,
-  testID = 'appbar-header',
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

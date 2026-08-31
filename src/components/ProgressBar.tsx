@@ -77,7 +77,7 @@ const ProgressBar = ({
   animatedValue,
   style,
   fillStyle,
-  testID = 'progress-bar',
+  testID,
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
@@ -213,7 +213,7 @@ const ProgressBar = ({
       >
         {width ? (
           <Animated.View
-            testID={`${testID}-fill`}
+            testID={testID ? `${testID}-fill` : undefined}
             style={[
               styles.progressBar,
               {

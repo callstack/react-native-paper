@@ -196,8 +196,8 @@ describe('AppbarAction', () => {
       </Appbar>
     );
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
+    const appbarActionIcon = screen.getByTestId('appbar-action-icon-current')
+      .props.children;
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe(
       getTheme().colors.onSurfaceVariant
@@ -211,8 +211,8 @@ describe('AppbarAction', () => {
       </Appbar>
     );
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
+    const appbarActionIcon = screen.getByTestId('appbar-action-icon-current')
+      .props.children;
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
   });
@@ -224,8 +224,8 @@ describe('AppbarAction', () => {
       </Appbar>
     );
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
+    const appbarActionIcon = screen.getByTestId('appbar-action-icon-current')
+      .props.children;
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe('purple');
   });
@@ -237,8 +237,9 @@ describe('AppbarAction', () => {
       </Appbar>
     );
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarBackActionIcon = screen.getByTestId('cross-fade-icon-current')
-      .props.children;
+    const appbarBackActionIcon = screen.getByTestId(
+      'appbar-action-icon-current'
+    ).props.children;
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarBackActionIcon.props.color).toBe('purple');
   });
@@ -249,7 +250,7 @@ describe('AppbarContent', () => {
     it(`should render text component with appropriate variant for ${mode} mode`, async () => {
       await render(
         <Appbar mode={mode}>
-          <Appbar.Content title="Title" />
+          <Appbar.Content testID="appbar-content" title="Title" />
         </Appbar>
       );
 

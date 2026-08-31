@@ -169,7 +169,7 @@ const Extended = ({
   labelMaxFontSizeMultiplier,
   background,
   style,
-  testID = 'extended-floating-action-button',
+  testID,
   theme: themeOverrides,
   ref,
 }: Props) => {

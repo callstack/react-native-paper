@@ -140,7 +140,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         },
       ]
     }
-    testID="search-bar-container"
   >
     <View
       collapsable={false}
@@ -210,7 +209,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           undefined,
         ]
       }
-      testID="search-bar-icon-container"
     >
       <View
         accessibilityLabel="search"
@@ -268,7 +266,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             ],
           ]
         }
-        testID="search-bar-icon"
       >
         <View
           style={
@@ -341,7 +338,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           undefined,
         ]
       }
-      testID="search-bar"
       underlineColorAndroid="transparent"
       value=""
     />
@@ -357,7 +353,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           false,
         ]
       }
-      testID="search-bar-icon-wrapper"
     >
       <View
         collapsable={false}
@@ -380,7 +375,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             undefined,
           ]
         }
-        testID="search-bar-clear-icon-container"
       >
         <View
           accessibilityLabel="clear"
@@ -438,7 +432,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               ],
             ]
           }
-          testID="search-bar-clear-icon"
         >
           <View
             style={
@@ -604,7 +597,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         undefined,
       ]
     }
-    testID="icon-button-container"
   >
     <View
       accessibilityLabel="Back"
@@ -662,7 +654,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           ],
         ]
       }
-      testID="icon-button"
     >
       <View
         style={
@@ -706,7 +697,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 },
               ]
             }
-            testID="cross-fade-icon-current"
           >
             <View
               style={
@@ -769,7 +759,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         ],
       ]
     }
-    testID="appbar-content"
   >
     <Text
       accessible={true}
@@ -806,7 +795,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           ],
         ]
       }
-      testID="appbar-content-title-text"
     >
       Examples
     </Text>
@@ -832,7 +820,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         undefined,
       ]
     }
-    testID="icon-button-container"
   >
     <View
       accessibilityState={
@@ -889,7 +876,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           ],
         ]
       }
-      testID="icon-button"
     >
       <View
         style={
@@ -933,7 +919,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 },
               ]
             }
-            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}

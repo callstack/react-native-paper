@@ -42,7 +42,6 @@ exports[`activity indicator snapshot test 1`] = `
       },
     ]
   }
-  testID="search-bar-container"
 >
   <View
     collapsable={false}
@@ -112,7 +111,6 @@ exports[`activity indicator snapshot test 1`] = `
         undefined,
       ]
     }
-    testID="search-bar-icon-container"
   >
     <View
       accessibilityLabel="search"
@@ -170,7 +168,6 @@ exports[`activity indicator snapshot test 1`] = `
           ],
         ]
       }
-      testID="search-bar-icon"
     >
       <View
         style={
@@ -243,7 +240,6 @@ exports[`activity indicator snapshot test 1`] = `
         undefined,
       ]
     }
-    testID="search-bar"
     underlineColorAndroid="transparent"
     value=""
   />
@@ -486,7 +482,6 @@ exports[`renders with placeholder 1`] = `
       },
     ]
   }
-  testID="search-bar-container"
 >
   <View
     collapsable={false}
@@ -556,7 +551,6 @@ exports[`renders with placeholder 1`] = `
         undefined,
       ]
     }
-    testID="search-bar-icon-container"
   >
     <View
       accessibilityLabel="search"
@@ -614,7 +608,6 @@ exports[`renders with placeholder 1`] = `
           ],
         ]
       }
-      testID="search-bar-icon"
     >
       <View
         style={
@@ -687,7 +680,6 @@ exports[`renders with placeholder 1`] = `
         undefined,
       ]
     }
-    testID="search-bar"
     underlineColorAndroid="transparent"
     value=""
   />
@@ -703,7 +695,6 @@ exports[`renders with placeholder 1`] = `
         false,
       ]
     }
-    testID="search-bar-icon-wrapper"
   >
     <View
       collapsable={false}
@@ -726,7 +717,6 @@ exports[`renders with placeholder 1`] = `
           undefined,
         ]
       }
-      testID="search-bar-clear-icon-container"
     >
       <View
         accessibilityLabel="clear"
@@ -784,7 +774,6 @@ exports[`renders with placeholder 1`] = `
             ],
           ]
         }
-        testID="search-bar-clear-icon"
       >
         <View
           style={
@@ -871,7 +860,6 @@ exports[`renders with text 1`] = `
       },
     ]
   }
-  testID="search-bar-container"
 >
   <View
     collapsable={false}
@@ -941,7 +929,6 @@ exports[`renders with text 1`] = `
         undefined,
       ]
     }
-    testID="search-bar-icon-container"
   >
     <View
       accessibilityLabel="search"
@@ -999,7 +986,6 @@ exports[`renders with text 1`] = `
           ],
         ]
       }
-      testID="search-bar-icon"
     >
       <View
         style={
@@ -1072,7 +1058,6 @@ exports[`renders with text 1`] = `
         undefined,
       ]
     }
-    testID="search-bar"
     underlineColorAndroid="transparent"
     value="query"
   />
@@ -1084,7 +1069,6 @@ exports[`renders with text 1`] = `
         false,
       ]
     }
-    testID="search-bar-icon-wrapper"
   >
     <View
       collapsable={false}
@@ -1107,7 +1091,6 @@ exports[`renders with text 1`] = `
           undefined,
         ]
       }
-      testID="search-bar-clear-icon-container"
     >
       <View
         accessibilityLabel="clear"
@@ -1165,7 +1148,6 @@ exports[`renders with text 1`] = `
             ],
           ]
         }
-        testID="search-bar-clear-icon"
       >
         <View
           style={
