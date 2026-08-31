@@ -132,7 +132,7 @@ const SegmentedButtonContent = ({
           color={iconColor}
           opacity={iconOpacity}
           scale={checkmarkScale}
-          testID={testID ? `${testID}-check-icon` : undefined}
+          testID={testID && `${testID}-check-icon`}
         />
       ) : null}
       {optionIcon ? (
@@ -142,7 +142,7 @@ const SegmentedButtonContent = ({
           opacity={iconOpacity}
           scale={checkmarkScale}
           source={optionIcon}
-          testID={testID ? `${testID}-icon` : undefined}
+          testID={testID && `${testID}-icon`}
         />
       ) : null}
       {label ? (
@@ -157,7 +157,7 @@ const SegmentedButtonContent = ({
           selectable={false}
           numberOfLines={1}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-          testID={testID ? `${testID}-label` : undefined}
+          testID={testID && `${testID}-label`}
         >
           {label}
         </Text>

@@ -143,7 +143,7 @@ const SegmentedButtonItem = ({
 
   return (
     <View
-      testID={testID ? `${testID}-wrapper` : undefined}
+      testID={testID && `${testID}-wrapper`}
       style={[
         styles.wrapper,
         borderRadius,
@@ -174,7 +174,7 @@ const SegmentedButtonItem = ({
         onBlur={() => setFocused(false)}
       >
         <View
-          testID={testID ? `${testID}-container` : undefined}
+          testID={testID && `${testID}-container`}
           style={[styles.container, { height: containerHeight }]}
         >
           <SegmentedButtonContent
@@ -193,7 +193,7 @@ const SegmentedButtonItem = ({
           />
           <View
             pointerEvents="none"
-            testID={testID ? `${testID}-outline` : undefined}
+            testID={testID && `${testID}-outline`}
             style={[
               styles.outline,
               borderRadius,
@@ -207,7 +207,7 @@ const SegmentedButtonItem = ({
           {divider ? (
             <View
               pointerEvents="none"
-              testID={testID ? `${testID}-divider` : undefined}
+              testID={testID && `${testID}-divider`}
               style={[
                 styles.outline,
                 {
@@ -223,7 +223,7 @@ const SegmentedButtonItem = ({
       {showFocusRing ? (
         <View
           pointerEvents="none"
-          testID={testID ? `${testID}-focus-ring` : undefined}
+          testID={testID && `${testID}-focus-ring`}
           style={[
             styles.focusRing,
             borderRadius,
