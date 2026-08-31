@@ -16,6 +16,7 @@ import {
   getSegmentedButtonHeight,
   getSegmentedButtonOutlineStyle,
 } from './utils';
+import type { SegmentedButtonPosition } from './utils';
 import { tokens } from '../../theme/tokens';
 import type { Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
@@ -61,6 +62,7 @@ export type Props = {
    * Whether the button is disabled.
    */
   disabled?: boolean;
+  previousDisabled?: boolean;
   /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -81,7 +83,7 @@ export type Props = {
   /**
    * Button segment.
    */
-  segment?: 'first' | 'last';
+  segment: SegmentedButtonPosition;
   /**
    * Show optional check icon to indicate selected state
    */
@@ -118,6 +120,7 @@ const SegmentedButtonItem = ({
   role,
   'aria-label': ariaLabel,
   disabled,
+  previousDisabled,
   style,
   labelStyle,
   showSelectedCheck,
@@ -143,6 +146,7 @@ const SegmentedButtonItem = ({
     checked,
     theme,
     disabled,
+    previousDisabled,
     checkedColor,
     uncheckedColor,
   });
@@ -203,6 +207,13 @@ const SegmentedButtonItem = ({
             testID={testID ? `${testID}-outline` : undefined}
             style={layerStyles.outline}
           />
+          {layerStyles.sharedBorder ? (
+            <View
+              pointerEvents="none"
+              testID={testID ? `${testID}-divider` : undefined}
+              style={layerStyles.sharedBorder}
+            />
+          ) : null}
         </View>
       </TouchableRipple>
       {showFocusRing ? (
@@ -277,6 +288,8 @@ function getSegmentedButtonItemStyles({
     borderOpacity: outlineOpacity,
     focusIndicatorColor,
     stateLayerColor,
+    sharedBorderColor,
+    sharedBorderOpacity,
   },
   density,
   segment,
@@ -284,12 +297,39 @@ function getSegmentedButtonItemStyles({
   style,
 }: ItemStyleOptions) {
   const segmentBorderRadius = getSegmentedButtonBorderRadius({ segment });
-  const segmentOutlineStyle = getSegmentedButtonOutlineStyle(segment);
   const containerHeight = getSegmentedButtonHeight(density);
   const flattenedStyle = StyleSheet.flatten(style) || {};
 
   const [containerStyleOverrides, borderRadiusOverrides, borderOverrides] =
     splitStyles(flattenedStyle, isBorderRadiusStyle, isBorderStyle);
+
+  const outlineWidth =
+    borderOverrides.borderWidth ?? SegmentedButtonTokens.outlineWidth;
+  const explicitBorderOverrides = { ...borderOverrides };
+  delete explicitBorderOverrides.borderWidth;
+
+  const resolvedBorderStyle = {
+    ...getSegmentedButtonOutlineStyle(segment, outlineWidth),
+    ...explicitBorderOverrides,
+  };
+  const hasSharedBorder = segment !== 'first';
+  const { borderStartWidth, borderStartColor, ...nonSharedBorderStyle } =
+    resolvedBorderStyle;
+  const outlineBorderStyle = hasSharedBorder
+    ? nonSharedBorderStyle
+    : resolvedBorderStyle;
+  const sharedBorderStyle: ViewStyle | undefined = hasSharedBorder
+    ? {
+        borderStartWidth,
+        ...(resolvedBorderStyle.borderColor !== undefined
+          ? { borderColor: resolvedBorderStyle.borderColor }
+          : {}),
+        ...(resolvedBorderStyle.borderStyle !== undefined
+          ? { borderStyle: resolvedBorderStyle.borderStyle }
+          : {}),
+        ...(borderStartColor !== undefined ? { borderStartColor } : {}),
+      }
+    : undefined;
 
   const borderRadiusStyle = {
     ...(flattenedStyle.borderRadius === undefined ? segmentBorderRadius : {}),
@@ -325,12 +365,19 @@ function getSegmentedButtonItemStyles({
     outline: [
       styles.outline,
       borderRadiusStyle,
-      flattenedStyle.borderWidth === undefined
-        ? segmentOutlineStyle
-        : undefined,
       { borderColor: outlineColor, opacity: outlineOpacity },
-      Object.keys(borderOverrides).length ? borderOverrides : undefined,
+      outlineBorderStyle,
     ],
+    sharedBorder: sharedBorderStyle
+      ? [
+          styles.outline,
+          {
+            borderColor: sharedBorderColor,
+            opacity: sharedBorderOpacity,
+          },
+          sharedBorderStyle,
+        ]
+      : undefined,
     focusRing: [
       styles.focusRing,
       borderRadiusStyle,

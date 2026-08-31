@@ -7,8 +7,10 @@ import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
 import {
+  getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonHeight,
+  getSegmentedButtonOutlineStyle,
   getSegmentedButtonStateLayerOpacity,
 } from '../SegmentedButtons/utils';
 
@@ -532,7 +534,189 @@ describe('getSegmentedButtonStateLayerOpacity', () => {
   );
 });
 
+describe('segmented button topology helpers', () => {
+  it.each([
+    {
+      segment: 'first' as const,
+      expected: {
+        borderTopStartRadius: 9999,
+        borderBottomStartRadius: 9999,
+        borderTopEndRadius: 0,
+        borderBottomEndRadius: 0,
+      },
+    },
+    {
+      segment: 'middle' as const,
+      expected: { borderRadius: 0 },
+    },
+    {
+      segment: 'last' as const,
+      expected: {
+        borderTopStartRadius: 0,
+        borderBottomStartRadius: 0,
+        borderTopEndRadius: 9999,
+        borderBottomEndRadius: 9999,
+      },
+    },
+  ])('returns the $segment segment radii', ({ segment, expected }) => {
+    expect(getSegmentedButtonBorderRadius({ segment })).toEqual(expected);
+  });
+
+  it.each([
+    { segment: 'first' as const, borderEndWidth: 0 },
+    { segment: 'middle' as const, borderEndWidth: 0 },
+    { segment: 'last' as const, borderEndWidth: 3 },
+  ])(
+    'returns the $segment segment outline widths',
+    ({ segment, borderEndWidth }) => {
+      expect(getSegmentedButtonOutlineStyle(segment, 3)).toEqual({
+        borderTopWidth: 3,
+        borderBottomWidth: 3,
+        borderStartWidth: 3,
+        borderEndWidth,
+      });
+    }
+  );
+});
+
 describe('segmented button presentation', () => {
+  const dividerCases = (['ltr', 'rtl'] as const).flatMap((direction) =>
+    (
+      [
+        [false, false, false],
+        [false, false, true],
+        [false, true, false],
+        [false, true, true],
+        [true, false, false],
+        [true, false, true],
+        [true, true, false],
+        [true, true, true],
+      ] as const
+    ).map((disabledStates) => ({ direction, disabledStates }))
+  );
+
+  it.each(['ltr', 'rtl'] as const)(
+    'renders first, middle, and last geometry in %s',
+    async (direction) => {
+      const view = await render(
+        <LocaleProvider direction={direction}>
+          <SegmentedButtons
+            value="first"
+            onValueChange={() => {}}
+            buttons={[
+              { value: 'first', label: 'First', testID: 'first' },
+              { value: 'middle', label: 'Middle', testID: 'middle' },
+              { value: 'last', label: 'Last', testID: 'last' },
+            ]}
+          />
+        </LocaleProvider>
+      );
+      const segmentCases = [
+        {
+          id: 'first',
+          radii: {
+            borderTopStartRadius: 9999,
+            borderBottomStartRadius: 9999,
+            borderTopEndRadius: 0,
+            borderBottomEndRadius: 0,
+          },
+          borderEndWidth: 0,
+        },
+        {
+          id: 'middle',
+          radii: { borderRadius: 0 },
+          borderEndWidth: 0,
+        },
+        {
+          id: 'last',
+          radii: {
+            borderTopStartRadius: 0,
+            borderBottomStartRadius: 0,
+            borderTopEndRadius: 9999,
+            borderBottomEndRadius: 9999,
+          },
+          borderEndWidth: SegmentedButtonTokens.outlineWidth,
+        },
+      ];
+
+      expect(view.root).toHaveStyle({ direction });
+
+      for (const { id, radii, borderEndWidth } of segmentCases) {
+        expect(screen.getByTestId(id)).toHaveStyle(radii);
+        expect(screen.getByTestId(`${id}-container`)).toHaveStyle(radii);
+        expect(screen.getByTestId(`${id}-state-layer`)).toHaveStyle(radii);
+        expect(screen.getByTestId(`${id}-outline`)).toHaveStyle({
+          ...radii,
+          borderTopWidth: SegmentedButtonTokens.outlineWidth,
+          borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+          borderEndWidth,
+        });
+
+        await fireEvent(screen.getByTestId(id), 'focus');
+        expect(screen.getByTestId(`${id}-focus-ring`)).toHaveStyle(radii);
+        await fireEvent(screen.getByTestId(id), 'blur');
+      }
+
+      expect(screen.getByTestId('first-outline')).toHaveStyle({
+        borderStartWidth: SegmentedButtonTokens.outlineWidth,
+      });
+      expect(screen.queryByTestId('first-divider')).not.toBeOnTheScreen();
+
+      ['middle', 'last'].forEach((id) => {
+        expect(screen.getByTestId(`${id}-outline`)).not.toHaveStyle({
+          borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        });
+        expect(screen.getByTestId(`${id}-divider`)).toHaveStyle({
+          borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        });
+      });
+    }
+  );
+
+  it.each(dividerCases)(
+    'renders each $direction divider once for disabled states $disabledStates',
+    async ({ direction, disabledStates }) => {
+      const ids = ['first', 'middle', 'last'] as const;
+
+      const view = await render(
+        <LocaleProvider direction={direction}>
+          <SegmentedButtons
+            value="first"
+            onValueChange={() => {}}
+            buttons={ids.map((id, index) => ({
+              value: id,
+              label: id,
+              testID: id,
+              disabled: disabledStates[index],
+            }))}
+          />
+        </LocaleProvider>
+      );
+
+      expect(view.root).toHaveStyle({ direction });
+      expect(screen.queryAllByTestId(/-divider$/)).toHaveLength(2);
+      expect(screen.queryByTestId('first-divider')).not.toBeOnTheScreen();
+
+      [1, 2].forEach((index) => {
+        const dividerDisabled =
+          disabledStates[index - 1] && disabledStates[index];
+
+        expect(screen.getByTestId(`${ids[index]}-divider`)).toHaveStyle({
+          borderColor: dividerDisabled
+            ? getTheme().colors.onSurface
+            : getTheme().colors.outline,
+          opacity: dividerDisabled
+            ? SegmentedButtonTokens.disabledOutlineOpacity
+            : stateOpacity.enabled,
+          borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        });
+        expect(screen.getByTestId(`${ids[index]}-outline`)).not.toHaveStyle({
+          borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        });
+      });
+    }
+  );
+
   it('applies custom backgrounds, radii, and shadows to selected and unselected visual containers', async () => {
     const selectedStyle = {
       backgroundColor: '#112233',
@@ -584,7 +768,7 @@ describe('segmented button presentation', () => {
     });
   });
 
-  it('applies custom borders to the outline and lets borderWidth replace its edge widths', async () => {
+  it('applies custom borders without double-drawing an interior edge', async () => {
     await render(
       <SegmentedButtons
         value="walk"
@@ -606,6 +790,8 @@ describe('segmented button presentation', () => {
             testID: 'drive',
             style: {
               borderColor: '#654321',
+              borderStartColor: '#abcdef',
+              borderStyle: 'dotted',
               borderTopWidth: 4,
             },
           },
@@ -618,19 +804,93 @@ describe('segmented button presentation', () => {
     expect(selectedOutline).toHaveStyle({
       borderColor: '#123456',
       borderStyle: 'dashed',
-      borderWidth: 3,
+      borderTopWidth: 3,
+      borderBottomWidth: 3,
+      borderStartWidth: 3,
+      borderEndWidth: 0,
     });
-    expect(selectedOutline).not.toHaveStyle({
-      borderTopWidth: SegmentedButtonTokens.outlineWidth,
-    });
+    expect(selectedOutline).not.toHaveStyle({ borderWidth: 3 });
     expect(screen.getByTestId('drive-outline')).toHaveStyle({
       borderColor: '#654321',
+      borderStyle: 'dotted',
       borderTopWidth: 4,
       borderBottomWidth: SegmentedButtonTokens.outlineWidth,
-      borderStartWidth: SegmentedButtonTokens.outlineWidth,
       borderEndWidth: SegmentedButtonTokens.outlineWidth,
     });
+    expect(screen.getByTestId('drive-outline')).not.toHaveStyle({
+      borderStartWidth: SegmentedButtonTokens.outlineWidth,
+    });
+    expect(screen.getByTestId('drive-divider')).toHaveStyle({
+      borderColor: '#654321',
+      borderStartColor: '#abcdef',
+      borderStyle: 'dotted',
+      borderStartWidth: SegmentedButtonTokens.outlineWidth,
+    });
   });
+
+  it.each(['ltr', 'rtl'] as const)(
+    'keeps generic and explicit custom widths topology-aware in %s',
+    async (direction) => {
+      await render(
+        <LocaleProvider direction={direction}>
+          <SegmentedButtons
+            value="first"
+            onValueChange={() => {}}
+            buttons={[
+              {
+                value: 'first',
+                label: 'First',
+                testID: 'custom-first',
+                style: { borderWidth: 3, borderTopWidth: 4 },
+              },
+              {
+                value: 'middle',
+                label: 'Middle',
+                testID: 'custom-middle',
+                style: { borderWidth: 3, borderStartWidth: 5 },
+              },
+              {
+                value: 'last',
+                label: 'Last',
+                testID: 'custom-last',
+                style: {
+                  borderWidth: 3,
+                  borderBottomWidth: 6,
+                  borderEndWidth: 7,
+                },
+              },
+            ]}
+          />
+        </LocaleProvider>
+      );
+
+      expect(screen.getByTestId('custom-first-outline')).toHaveStyle({
+        borderTopWidth: 4,
+        borderBottomWidth: 3,
+        borderStartWidth: 3,
+        borderEndWidth: 0,
+      });
+      expect(
+        screen.queryByTestId('custom-first-divider')
+      ).not.toBeOnTheScreen();
+      expect(screen.getByTestId('custom-middle-outline')).toHaveStyle({
+        borderTopWidth: 3,
+        borderBottomWidth: 3,
+        borderEndWidth: 0,
+      });
+      expect(screen.getByTestId('custom-middle-divider')).toHaveStyle({
+        borderStartWidth: 5,
+      });
+      expect(screen.getByTestId('custom-last-outline')).toHaveStyle({
+        borderTopWidth: 3,
+        borderBottomWidth: 6,
+        borderEndWidth: 7,
+      });
+      expect(screen.getByTestId('custom-last-divider')).toHaveStyle({
+        borderStartWidth: 3,
+      });
+    }
+  );
 
   it('does not move visual styles to the hit target', async () => {
     await render(

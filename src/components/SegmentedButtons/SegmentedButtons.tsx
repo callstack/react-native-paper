@@ -151,7 +151,7 @@ const SegmentedButtons = <T extends string = string>({
               ? 'first'
               : index === buttons.length - 1
                 ? 'last'
-                : undefined;
+                : 'middle';
 
           const checked = multiSelect
             ? value.includes(itemValue)
@@ -176,6 +176,7 @@ const SegmentedButtons = <T extends string = string>({
               {...itemProps}
               key={index}
               checked={checked}
+              previousDisabled={buttons[index - 1]?.disabled}
               role={multiSelect ? 'checkbox' : 'radio'}
               segment={segment}
               density={density}

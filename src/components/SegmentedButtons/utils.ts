@@ -16,7 +16,10 @@ type BaseProps = {
 type SegmentedButtonProps = {
   checkedColor?: string;
   uncheckedColor?: string;
+  previousDisabled?: boolean;
 } & BaseProps;
+
+export type SegmentedButtonPosition = 'first' | 'last' | 'middle';
 
 export const getSegmentedButtonHeight = (
   density: 'regular' | 'small' | 'medium' | 'high' = 'regular'
@@ -25,7 +28,7 @@ export const getSegmentedButtonHeight = (
 export const getSegmentedButtonBorderRadius = ({
   segment,
 }: {
-  segment?: 'first' | 'last';
+  segment: SegmentedButtonPosition;
 }): ViewStyle => {
   if (segment === 'first') {
     return {
@@ -51,12 +54,13 @@ export const getSegmentedButtonBorderRadius = ({
 };
 
 export const getSegmentedButtonOutlineStyle = (
-  segment?: 'first' | 'last'
+  segment: SegmentedButtonPosition,
+  outlineWidth: ViewStyle['borderWidth'] = SegmentedButtonTokens.outlineWidth
 ): ViewStyle => ({
-  borderTopWidth: SegmentedButtonTokens.outlineWidth,
-  borderBottomWidth: SegmentedButtonTokens.outlineWidth,
-  borderStartWidth: SegmentedButtonTokens.outlineWidth,
-  borderEndWidth: segment === 'last' ? SegmentedButtonTokens.outlineWidth : 0,
+  borderTopWidth: outlineWidth,
+  borderBottomWidth: outlineWidth,
+  borderStartWidth: outlineWidth,
+  borderEndWidth: segment === 'last' ? outlineWidth : 0,
 });
 
 export const getSegmentedButtonStateLayerOpacity = ({
@@ -95,6 +99,7 @@ export const getSegmentedButtonColors = ({
   checked,
   checkedColor,
   uncheckedColor,
+  previousDisabled,
 }: SegmentedButtonProps) => {
   const backgroundColor = checked
     ? theme.colors[SegmentedButtonTokens.selectedContainerColor]
@@ -124,6 +129,14 @@ export const getSegmentedButtonColors = ({
     ? theme.colors[SegmentedButtonTokens.selectedStateLayerColor]
     : theme.colors[SegmentedButtonTokens.unselectedStateLayerColor];
 
+  const sharedBorderDisabled = Boolean(disabled && previousDisabled);
+  const sharedBorderColor = sharedBorderDisabled
+    ? theme.colors[SegmentedButtonTokens.disabledOutlineColor]
+    : theme.colors[SegmentedButtonTokens.outlineColor];
+  const sharedBorderOpacity = sharedBorderDisabled
+    ? SegmentedButtonTokens.disabledOutlineOpacity
+    : stateOpacity.enabled;
+
   const focusIndicatorColor =
     theme.colors[SegmentedButtonTokens.focusIndicatorColor];
 
@@ -134,6 +147,8 @@ export const getSegmentedButtonColors = ({
     textColor,
     textOpacity,
     stateLayerColor,
+    sharedBorderColor,
+    sharedBorderOpacity,
     focusIndicatorColor,
   };
 };

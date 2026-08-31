@@ -207,16 +207,15 @@ exports[`renders segmented button 1`] = `
                 "borderTopStartRadius": 9999,
               },
               {
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "opacity": 1,
+              },
+              {
                 "borderBottomWidth": 1,
                 "borderEndWidth": 0,
                 "borderStartWidth": 1,
                 "borderTopWidth": 1,
               },
-              {
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "opacity": 1,
-              },
-              undefined,
             ]
           }
         />
@@ -414,16 +413,36 @@ exports[`renders segmented button 1`] = `
                 "borderTopStartRadius": 0,
               },
               {
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "opacity": 1,
+              },
+              {
                 "borderBottomWidth": 1,
                 "borderEndWidth": 1,
-                "borderStartWidth": 1,
                 "borderTopWidth": 1,
+              },
+            ]
+          }
+        />
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "pointerEvents": "none",
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               },
               {
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "opacity": 1,
               },
-              undefined,
+              {
+                "borderStartWidth": 1,
+              },
             ]
           }
         />
