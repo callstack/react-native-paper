@@ -6,26 +6,19 @@ import { Button, Chip, List, Switch, Text, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'text' | 'outlined' | 'elevated' | 'filled' | 'tonal';
-type SizeOption =
-  | 'unset'
-  | 'extra-small'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extra-large';
-type ShapeOption = 'unset' | 'round' | 'square';
+type Size = 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large';
+type Shape = 'round' | 'square';
 type IconPosition = 'leading' | 'trailing';
 
 const MODES: Mode[] = ['filled', 'tonal', 'elevated', 'outlined', 'text'];
-const SIZES: SizeOption[] = [
-  'unset',
+const SIZES: Size[] = [
   'extra-small',
   'small',
   'medium',
   'large',
   'extra-large',
 ];
-const SHAPES: ShapeOption[] = ['unset', 'round', 'square'];
+const SHAPES: Shape[] = ['round', 'square'];
 const ICON_POSITIONS: IconPosition[] = ['leading', 'trailing'];
 
 function OptionRow<T extends string>({
@@ -84,8 +77,8 @@ const ButtonExample = () => {
 
   // Playground state.
   const [mode, setMode] = React.useState<Mode>('filled');
-  const [size, setSize] = React.useState<SizeOption>('unset');
-  const [shape, setShape] = React.useState<ShapeOption>('unset');
+  const [size, setSize] = React.useState<Size>('small');
+  const [shape, setShape] = React.useState<Shape>('round');
   const [iconPosition, setIconPosition] =
     React.useState<IconPosition>('leading');
   const [showIcon, setShowIcon] = React.useState(false);
@@ -107,16 +100,14 @@ const ButtonExample = () => {
         <View style={styles.preview}>
           <Button
             mode={mode}
-            size={size === 'unset' ? undefined : size}
-            shape={shape === 'unset' ? undefined : shape}
+            size={size}
+            shape={shape}
             iconPosition={iconPosition}
             icon={showIcon ? 'camera' : undefined}
             disabled={disabled}
             loading={loading}
             selected={selected}
-            // `compact` only affects the legacy (unset-size) button; the size
-            // tokens own spacing once a size is set.
-            compact={size === 'unset' && compact}
+            compact={compact}
             onPress={() => {}}
           >
             Play me
@@ -166,14 +157,7 @@ const ButtonExample = () => {
           value={selected}
           onValueChange={setSelected}
         />
-        {/* `compact` is a no-op once a size is set, so only offer it for unset. */}
-        {size === 'unset' && (
-          <SwitchRow
-            label="Compact"
-            value={compact}
-            onValueChange={setCompact}
-          />
-        )}
+        <SwitchRow label="Compact" value={compact} onValueChange={setCompact} />
       </List.Section>
 
       <List.Section title="Modes">
@@ -212,9 +196,7 @@ const ButtonExample = () => {
 
       <List.Section title="Size (expressive)">
         <View style={styles.row}>
-          {SIZES.filter(
-            (s): s is Exclude<SizeOption, 'unset'> => s !== 'unset'
-          ).map((s) => (
+          {SIZES.map((s) => (
             <Button
               key={s}
               mode="filled"

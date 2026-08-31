@@ -94,10 +94,9 @@ it('swaps the icon to the trailing edge under RTL', async () => {
       Icon
     </Button>
   );
-  const ltrIconStyle = StyleSheet.flatten(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('button-icon-container').props.style
-  );
+  expect(screen.getByTestId('button-content')).toHaveStyle({
+    flexDirection: 'row',
+  });
 
   await render(
     <LocaleProvider direction="rtl">
@@ -106,14 +105,10 @@ it('swaps the icon to the trailing edge under RTL', async () => {
       </Button>
     </LocaleProvider>
   );
-  const rtlIconStyle = StyleSheet.flatten(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('button-icon-container').props.style
-  );
-
-  // The physical margins swap so a "leading" icon sits on the right in RTL.
-  expect(rtlIconStyle.marginLeft).toBe(ltrIconStyle.marginRight);
-  expect(rtlIconStyle.marginRight).toBe(ltrIconStyle.marginLeft);
+  // The content direction flips, so a "leading" icon sits on the right in RTL.
+  expect(screen.getByTestId('button-content')).toHaveStyle({
+    flexDirection: 'row-reverse',
+  });
 });
 
 it('renders loading button', async () => {
@@ -294,65 +289,6 @@ describe('button text styles', () => {
   });
 });
 
-describe('button icon styles', () => {
-  it('should return correct icon styles for compact text button', async () => {
-    await render(
-      <Button mode={'text'} compact icon="camera" testID="compact-button">
-        Compact text button
-      </Button>
-    );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 6,
-      marginRight: 0,
-    });
-  });
-
-  (['outlined', 'filled', 'tonal', 'elevated'] as const).forEach((mode) =>
-    it(`should return correct icon styles for compact ${mode} button`, async () => {
-      await render(
-        <Button
-          mode={mode}
-          compact
-          icon="camera"
-          testID="compact-button"
-        >{`Compact ${mode} button`}</Button>
-      );
-      expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-        marginLeft: 8,
-        marginRight: 0,
-      });
-    })
-  );
-
-  it('should return correct icon styles for text button', async () => {
-    await render(
-      <Button mode={'text'} icon="camera" testID="compact-button">
-        text button
-      </Button>
-    );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 12,
-      marginRight: -8,
-    });
-  });
-
-  (['outlined', 'filled', 'tonal', 'elevated'] as const).forEach((mode) =>
-    it(`should return correct icon styles for compact ${mode} button`, async () => {
-      await render(
-        <Button
-          mode={mode}
-          icon="camera"
-          testID="compact-button"
-        >{`${mode} button`}</Button>
-      );
-      expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-        marginLeft: 16,
-        marginRight: -8,
-      });
-    })
-  );
-});
-
 describe('icon position', () => {
   it('places the icon before the label by default', async () => {
     await render(
@@ -361,9 +297,8 @@ describe('icon position', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-icon-container')).toHaveStyle({
-      marginLeft: 16,
-      marginRight: -8,
+    expect(screen.getByTestId('button-content')).toHaveStyle({
+      flexDirection: 'row',
     });
   });
 
@@ -379,9 +314,8 @@ describe('icon position', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-icon-container')).toHaveStyle({
-      marginLeft: -8,
-      marginRight: 16,
+    expect(screen.getByTestId('button-content')).toHaveStyle({
+      flexDirection: 'row-reverse',
     });
   });
 
@@ -398,9 +332,8 @@ describe('icon position', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-icon-container')).toHaveStyle({
-      marginLeft: -8,
-      marginRight: 16,
+    expect(screen.getByTestId('button-content')).toHaveStyle({
+      flexDirection: 'row-reverse',
     });
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining('`contentStyle`')
@@ -980,12 +913,6 @@ describe('getButtonShapeRadius', () => {
       );
     }
   );
-
-  it('falls back to default radii when size is omitted', () => {
-    const theme = getTheme();
-    expect(getButtonShapeRadius({ shape: 'round', theme })).toBe(9999);
-    expect(getButtonShapeRadius({ shape: 'square', theme })).toBe(12);
-  });
 });
 
 describe('shape prop', () => {
@@ -995,8 +922,9 @@ describe('shape prop', () => {
         X
       </Button>
     );
+    // Half the small container height (40dp) is the real pill radius.
     expect(screen.getByTestId('button-container')).toHaveStyle({
-      borderRadius: 9999,
+      borderRadius: 20,
     });
   });
 
@@ -1065,7 +993,7 @@ describe('selected prop', () => {
     );
 
     expect(screen.getByTestId('button-container')).toHaveStyle({
-      borderRadius: 9999,
+      borderRadius: 20,
     });
   });
 
@@ -1197,25 +1125,16 @@ describe('shape morph animation', () => {
     spy.mockRestore();
   });
 
-  it('does not morph legacy or size-only buttons', async () => {
+  it('morphs a default button, with no size or shape passed', async () => {
     const spy = jest.spyOn(Animated, 'spring');
     await render(
       <Button onPress={() => {}} testID="button">
-        Legacy
+        Default
       </Button>
     );
     spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(spy).not.toHaveBeenCalled();
-
-    await screen.rerender(
-      <Button size="small" onPress={() => {}} testID="button">
-        Sized
-      </Button>
-    );
-    spy.mockClear();
-    await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(spy).not.toHaveBeenCalled();
+    expect(lastSpringToValue(spy)).toContain(getTheme().shapes.corner.small);
     spy.mockRestore();
   });
 

@@ -2,11 +2,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import {
-  buttonSizeTokens,
-  legacyContainerShape,
-  type ButtonCornerKey,
-} from './tokens';
+import { buttonSizeTokens, type ButtonCornerKey } from './tokens';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import { cornerFull } from '../../theme/tokens/sys/shape';
@@ -42,8 +38,7 @@ export type ButtonSizeStyle = {
 
 /**
  * Per-size metrics for the Material Design 3 (expressive) button sizes, read
- * from the component tokens. Used when the `size` prop is explicitly set; if
- * `size` is omitted, the Button keeps its legacy visuals.
+ * from the component tokens.
  */
 export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
   const t = buttonSizeTokens[size];
@@ -70,57 +65,22 @@ export const resolveButtonCorner = (
 /**
  * Corner radius for the requested shape, read from the component tokens and
  * resolved against the theme shape tokens. `round` is the full-pill radius;
- * `square` uses a per-size smaller corner. When `size` is omitted the legacy
- * shape mapping is used.
+ * `square` uses a per-size smaller corner.
  */
 export const getButtonShapeRadius = ({
   size,
   shape,
   theme,
 }: {
-  size?: ButtonSize;
+  size: ButtonSize;
   shape: ButtonShape;
   theme: InternalTheme;
 }): number => {
-  const key = size
-    ? shape === 'round'
+  const key =
+    shape === 'round'
       ? buttonSizeTokens[size].containerShapeRound
-      : buttonSizeTokens[size].containerShapeSquare
-    : legacyContainerShape[shape];
+      : buttonSizeTokens[size].containerShapeSquare;
   return resolveButtonCorner(theme, key);
-};
-
-/**
- * Returns the margins applied to the button's icon (or loading indicator)
- * depending on the button mode, density and the position of the icon relative
- * to the label.
- */
-export const getButtonIconStyle = ({
-  mode,
-  compact,
-  position,
-}: {
-  mode: ButtonMode;
-  compact?: boolean;
-  position: ButtonIconPosition;
-}): Pick<ViewStyle, 'marginLeft' | 'marginRight'> => {
-  const isTextMode = mode === 'text';
-
-  if (position === 'trailing') {
-    if (compact) {
-      return { marginLeft: 0, marginRight: isTextMode ? 6 : 8 };
-    }
-    return isTextMode
-      ? { marginLeft: -8, marginRight: 12 }
-      : { marginLeft: -8, marginRight: 16 };
-  }
-
-  if (compact) {
-    return { marginLeft: isTextMode ? 6 : 8, marginRight: 0 };
-  }
-  return isTextMode
-    ? { marginLeft: 12, marginRight: -8 }
-    : { marginLeft: 16, marginRight: -8 };
 };
 
 type BaseProps = {

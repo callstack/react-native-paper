@@ -178,6 +178,12 @@ exports[`render visible banner, with custom theme 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 4,
+                    "top": 4,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -210,11 +216,17 @@ exports[`render visible banner, with custom theme 1`] = `
                       },
                       false,
                       {
+                        "gap": 8,
+                        "minHeight": 40,
+                        "paddingHorizontal": 16,
+                      },
+                      {
                         "opacity": 1,
                       },
                       undefined,
                     ]
                   }
+                  testID="button-content"
                 >
                   <Text
                     numberOfLines={1}
@@ -238,15 +250,7 @@ exports[`render visible banner, with custom theme 1`] = `
                           },
                           [
                             {
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
                               "textAlign": "center",
-                            },
-                            {
-                              "marginHorizontal": 12,
-                            },
-                            {
-                              "marginHorizontal": 8,
                             },
                             false,
                             {
@@ -612,6 +616,12 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 4,
+                    "top": 4,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -644,11 +654,17 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       },
                       false,
                       {
+                        "gap": 8,
+                        "minHeight": 40,
+                        "paddingHorizontal": 16,
+                      },
+                      {
                         "opacity": 1,
                       },
                       undefined,
                     ]
                   }
+                  testID="button-content"
                 >
                   <Text
                     numberOfLines={1}
@@ -672,15 +688,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                           },
                           [
                             {
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
                               "textAlign": "center",
-                            },
-                            {
-                              "marginHorizontal": 12,
-                            },
-                            {
-                              "marginHorizontal": 8,
                             },
                             false,
                             {
@@ -889,6 +897,12 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 4,
+                    "top": 4,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -921,11 +935,17 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       },
                       false,
                       {
+                        "gap": 8,
+                        "minHeight": 40,
+                        "paddingHorizontal": 16,
+                      },
+                      {
                         "opacity": 1,
                       },
                       undefined,
                     ]
                   }
+                  testID="button-content"
                 >
                   <Text
                     numberOfLines={1}
@@ -949,15 +969,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                           },
                           [
                             {
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
                               "textAlign": "center",
-                            },
-                            {
-                              "marginHorizontal": 12,
-                            },
-                            {
-                              "marginHorizontal": 8,
                             },
                             false,
                             {
@@ -1042,6 +1054,12 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 accessible={true}
                 collapsable={false}
                 focusable={true}
+                hitSlop={
+                  {
+                    "bottom": 4,
+                    "top": 4,
+                  }
+                }
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -1074,11 +1092,17 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       },
                       false,
                       {
+                        "gap": 8,
+                        "minHeight": 40,
+                        "paddingHorizontal": 16,
+                      },
+                      {
                         "opacity": 1,
                       },
                       undefined,
                     ]
                   }
+                  testID="button-content"
                 >
                   <Text
                     numberOfLines={1}
@@ -1102,15 +1126,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                           },
                           [
                             {
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
                               "textAlign": "center",
-                            },
-                            {
-                              "marginHorizontal": 12,
-                            },
-                            {
-                              "marginHorizontal": 8,
                             },
                             false,
                             {

@@ -106,10 +106,3 @@ export const buttonSizeTokens: Record<ButtonSize, ButtonSizeTokens> = {
     selectedContainerShapeSquare: 'extraLarge',
   },
 };
-
-/** Corner used by the legacy (no-`size`) button for each shape variant. */
-export const legacyContainerShape: Record<'round' | 'square', ButtonCornerKey> =
-  {
-    round: 'full',
-    square: 'medium',
-  };

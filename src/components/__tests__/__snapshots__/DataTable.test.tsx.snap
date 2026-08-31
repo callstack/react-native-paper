@@ -1743,6 +1743,12 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             accessible={true}
             collapsable={false}
             focusable={true}
+            hitSlop={
+              {
+                "bottom": 4,
+                "top": 4,
+              }
+            }
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1777,19 +1783,19 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "flexDirection": "row-reverse",
                   },
                   {
+                    "gap": 8,
+                    "minHeight": 40,
+                    "paddingHorizontal": 16,
+                  },
+                  {
                     "opacity": 1,
                   },
                   undefined,
                 ]
               }
+              testID="button-content"
             >
               <View
-                style={
-                  {
-                    "marginLeft": -8,
-                    "marginRight": 16,
-                  }
-                }
                 testID="button-icon-container"
               >
                 <Text
@@ -1844,15 +1850,8 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                       },
                       [
                         {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
                           "textAlign": "center",
                         },
-                        {
-                          "marginHorizontal": 16,
-                          "marginVertical": 10,
-                        },
-                        undefined,
                         false,
                         {
                           "color": "rgba(73, 69, 79, 1)",

@@ -62,6 +62,12 @@ exports[`renders button with an accessibility hint 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -94,11 +100,17 @@ exports[`renders button with an accessibility hint 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -122,15 +134,8 @@ exports[`renders button with an accessibility hint 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -217,6 +222,12 @@ exports[`renders button with an accessibility label 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -249,11 +260,17 @@ exports[`renders button with an accessibility label 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -277,15 +294,8 @@ exports[`renders button with an accessibility label 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -371,6 +381,12 @@ exports[`renders button with button color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -403,11 +419,17 @@ exports[`renders button with button color 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -431,15 +453,8 @@ exports[`renders button with button color 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -525,6 +540,12 @@ exports[`renders button with color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -557,11 +578,17 @@ exports[`renders button with color 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -585,15 +612,8 @@ exports[`renders button with color 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "#e91e63",
@@ -679,6 +699,12 @@ exports[`renders button with custom testID 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -711,11 +737,17 @@ exports[`renders button with custom testID 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="custom:testID-content"
       >
         <Text
           numberOfLines={1}
@@ -739,15 +771,8 @@ exports[`renders button with custom testID 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -833,6 +858,12 @@ exports[`renders button with icon 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -865,19 +896,19 @@ exports[`renders button with icon 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <View
-          style={
-            {
-              "marginLeft": 16,
-              "marginRight": -8,
-            }
-          }
           testID="button-icon-container"
         >
           <Text
@@ -932,15 +963,8 @@ exports[`renders button with icon 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -1026,6 +1050,12 @@ exports[`renders button with icon in reverse order 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1060,6 +1090,11 @@ exports[`renders button with icon in reverse order 1`] = `
               "flexDirection": "row-reverse",
             },
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             {
@@ -1067,14 +1102,9 @@ exports[`renders button with icon in reverse order 1`] = `
             },
           ]
         }
+        testID="button-content"
       >
         <View
-          style={
-            {
-              "marginLeft": -8,
-              "marginRight": 16,
-            }
-          }
           testID="button-icon-container"
         >
           <Text
@@ -1129,15 +1159,8 @@ exports[`renders button with icon in reverse order 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -1242,6 +1265,12 @@ exports[`renders disabled button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1274,11 +1303,17 @@ exports[`renders disabled button 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 0.38,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -1302,15 +1337,8 @@ exports[`renders disabled button 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
@@ -1396,6 +1424,12 @@ exports[`renders filled button by default 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1428,11 +1462,17 @@ exports[`renders filled button by default 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -1456,15 +1496,8 @@ exports[`renders filled button by default 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -1550,6 +1583,12 @@ exports[`renders filled button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1582,11 +1621,17 @@ exports[`renders filled button with mode 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -1610,15 +1655,8 @@ exports[`renders filled button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -1704,6 +1742,12 @@ exports[`renders loading button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1736,11 +1780,17 @@ exports[`renders loading button 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <View
           accessible={true}
@@ -1752,10 +1802,7 @@ exports[`renders loading button 1`] = `
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              {
-                "marginLeft": 16,
-                "marginRight": -8,
-              },
+              undefined,
             ]
           }
         >
@@ -1958,15 +2005,8 @@ exports[`renders loading button 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
@@ -2052,6 +2092,12 @@ exports[`renders outlined button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2084,11 +2130,17 @@ exports[`renders outlined button with mode 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -2112,15 +2164,8 @@ exports[`renders outlined button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 10,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(73, 69, 79, 1)",
@@ -2206,6 +2251,12 @@ exports[`renders text button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2238,11 +2289,17 @@ exports[`renders text button with mode 1`] = `
             },
             false,
             {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingHorizontal": 16,
+            },
+            {
               "opacity": 1,
             },
             undefined,
           ]
         }
+        testID="button-content"
       >
         <Text
           numberOfLines={1}
@@ -2266,14 +2323,8 @@ exports[`renders text button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
                   false,
                   {
                     "color": "rgba(103, 80, 164, 1)",
@@ -2304,7 +2355,7 @@ exports[`size prop renders a button with per-size metrics 1`] = `
   style={
     {
       "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
+      "borderRadius": 28,
       "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
@@ -2322,7 +2373,7 @@ exports[`size prop renders a button with per-size metrics 1`] = `
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderColor": "transparent",
-        "borderRadius": 20,
+        "borderRadius": 28,
         "borderStyle": "solid",
         "borderWidth": 0,
         "flex": undefined,
@@ -2375,7 +2426,7 @@ exports[`size prop renders a button with per-size metrics 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 20,
+            "borderRadius": 28,
           },
         ]
       }
@@ -2401,6 +2452,7 @@ exports[`size prop renders a button with per-size metrics 1`] = `
             undefined,
           ]
         }
+        testID="button-content"
       >
         <View
           testID="button-icon-container"
@@ -2457,15 +2509,8 @@ exports[`size prop renders a button with per-size metrics 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 0,
-                    "marginVertical": 0,
-                  },
-                  false,
                   false,
                   {
                     "color": "rgba(255, 255, 255, 1)",

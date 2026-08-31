@@ -12,7 +12,6 @@ import type {
 
 import {
   getButtonColors,
-  getButtonIconStyle,
   getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
@@ -52,20 +51,17 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   compact?: boolean;
   /**
-   * Size of the button (Material Design 3 expressive). One of
-   * `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`.
+   * Size of the button (Material Design 3 expressive). Defaults to `small`.
    *
-   * When omitted, the button uses its legacy visuals. When set, the size
-   * controls the minimum height, horizontal padding, icon size, the gap
-   * between icon and label, and the label typescale.
+   * The size controls the minimum height, horizontal padding, icon size, the
+   * gap between icon and label, and the label typescale.
    */
   size?: ButtonSize;
   /**
-   * Shape variant of the button (Material Design 3 expressive). `'round'`
-   * uses the full-pill corner radius; `'square'` uses a smaller per-size
-   * corner radius. When omitted, the button keeps its legacy corner radius
-   * (`theme.shapes.corner.largeIncreased`). Overridden by an explicit
-   * `borderRadius` in `style`.
+   * Shape variant of the button (Material Design 3 expressive). Defaults to
+   * `round`. `'round'` uses the full-pill corner radius; `'square'` uses a
+   * smaller per-size corner radius. Overridden by an explicit `borderRadius`
+   * in `style`.
    */
   shape?: ButtonShape;
   /**
@@ -212,8 +208,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 // level 2 while pressed.
 const initialElevation = 1;
 const activeElevation = 2;
-// MD3 leading/trailing icon size for the legacy (no-`size`) button.
-const iconSize = 20;
 // Minimum accessible touch target (dp). Extra-small/small buttons are shorter
 // than this and get expanded via hitSlop.
 const MIN_TOUCH_TARGET = 48;
@@ -222,8 +216,8 @@ const Button = ({
   disabled,
   compact,
   mode = 'filled',
-  size,
-  shape,
+  size = 'small',
+  shape = 'round',
   selected,
   dark,
   loading,
@@ -317,32 +311,24 @@ const Button = ({
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
-  const effectiveShape: ButtonShape | undefined = shape
-    ? selected
-      ? shape === 'round'
-        ? 'square'
-        : 'round'
-      : shape
-    : undefined;
-  const staticRadius = effectiveShape
-    ? getButtonShapeRadius({ size, shape: effectiveShape, theme })
-    : theme.shapes.corner.largeIncreased;
-
-  const sizeStyle = React.useMemo(
-    () => (size ? getButtonSizeStyle(size) : undefined),
-    [size]
-  );
+  const effectiveShape: ButtonShape = selected
+    ? shape === 'round'
+      ? 'square'
+      : 'round'
+    : shape;
+  const sizeStyle = React.useMemo(() => getButtonSizeStyle(size), [size]);
 
   // Shape morph: animate the corner on press (→ corner.small) and on the
-  // `selected`/shape toggle. Shaped buttons only; skip a user-pinned radius.
+  // `selected`/shape toggle. Skipped when the user pins a radius via `style`.
   const hasPinnedRadius = Object.keys(borderRadiusStyles).length > 0;
-  const animateShape = shape != null && !hasPinnedRadius;
-  // Use the real pill radius (minHeight/2) for `round` so the spring stays
-  // bounded instead of animating from the full-pill sentinel.
+  const animateShape = !hasPinnedRadius;
+  // `round` resolves to the `cornerFull` sentinel, so use the real pill radius
+  // (half the container height) instead: it keeps the spring bounded and lets
+  // the ripple clip match the container exactly.
   const restingRadius =
-    effectiveShape === 'round' && sizeStyle
+    effectiveShape === 'round'
       ? sizeStyle.minHeight / 2
-      : staticRadius;
+      : getButtonShapeRadius({ size, shape: effectiveShape, theme });
   const pressedRadius = theme.shapes.corner.small;
   const { current: animatedRadius } = React.useRef<Animated.Value>(
     new Animated.Value(restingRadius)
@@ -439,8 +425,8 @@ const Button = ({
             outputRange: [0, 1],
             extrapolateLeft: 'clamp',
           })
-        : staticRadius,
-    [animateShape, animatedRadius, staticRadius]
+        : restingRadius,
+    [animateShape, animatedRadius, restingRadius]
   );
 
   const {
@@ -472,9 +458,9 @@ const Button = ({
   const touchableStyle = React.useMemo(
     () => ({
       ...borderRadiusStyles,
-      borderRadius: borderRadiusStyles.borderRadius ?? staticRadius,
+      borderRadius: borderRadiusStyles.borderRadius ?? restingRadius,
     }),
-    [borderRadiusStyles, staticRadius]
+    [borderRadiusStyles, restingRadius]
   );
 
   const buttonStyle = React.useMemo(
@@ -504,7 +490,7 @@ const Button = ({
     [isWeb, animateShape, touchableStyle, borderWidth]
   );
 
-  const { color: labelStyleColor, fontSize: labelStyleSize } = React.useMemo(
+  const { color: labelStyleColor } = React.useMemo(
     () => StyleSheet.flatten(labelStyle) || {},
     [labelStyle]
   );
@@ -513,9 +499,10 @@ const Button = ({
   // touch target, so expand the press area with hitSlop without changing the
   // visual size. A user-supplied `hitSlop` wins on the axes it sets.
   const hitSlopWithMinTarget = React.useMemo(() => {
-    const verticalSlop = sizeStyle
-      ? Math.max(0, (MIN_TOUCH_TARGET - sizeStyle.minHeight) / 2)
-      : 0;
+    const verticalSlop = Math.max(
+      0,
+      (MIN_TOUCH_TARGET - sizeStyle.minHeight) / 2
+    );
     if (verticalSlop === 0) {
       return hitSlop;
     }
@@ -536,21 +523,9 @@ const Button = ({
   const labelTypeStyle = React.useMemo(
     () => ({
       color: labelColor,
-      ...theme.fonts[sizeStyle?.labelVariant ?? 'labelLarge'],
+      ...theme.fonts[sizeStyle.labelVariant],
     }),
     [labelColor, theme, sizeStyle]
-  );
-
-  const iconStyle = React.useMemo(
-    () =>
-      sizeStyle
-        ? null
-        : getButtonIconStyle({
-            mode,
-            compact,
-            position: isTrailingIcon ? 'trailing' : 'leading',
-          }),
-    [mode, compact, isTrailingIcon, sizeStyle]
   );
 
   return (
@@ -607,30 +582,24 @@ const Button = ({
         ref={touchableRef}
       >
         <View
+          testID={`${testID}-content`}
           style={[
             styles.content,
             isTrailingIcon && styles.contentReverse,
-            ...(sizeStyle
-              ? [
-                  {
-                    minHeight: sizeStyle.minHeight,
-                    paddingHorizontal: sizeStyle.paddingHorizontal,
-                    gap: sizeStyle.iconGap,
-                  },
-                ]
-              : []),
+            {
+              minHeight: sizeStyle.minHeight,
+              paddingHorizontal: sizeStyle.paddingHorizontal,
+              gap: sizeStyle.iconGap,
+            },
             { opacity: labelOpacity },
             contentStyle,
           ]}
         >
           {icon && loading !== true ? (
-            <View
-              style={iconStyle ?? undefined}
-              testID={`${testID}-icon-container`}
-            >
+            <View testID={`${testID}-icon-container`}>
               <Icon
                 source={icon}
-                size={sizeStyle?.iconSize ?? labelStyleSize ?? iconSize}
+                size={sizeStyle.iconSize}
                 color={
                   typeof labelStyleColor === 'string'
                     ? labelStyleColor
@@ -641,30 +610,21 @@ const Button = ({
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={sizeStyle?.iconSize ?? labelStyleSize ?? iconSize}
+              size={sizeStyle.iconSize}
               color={
                 typeof labelStyleColor === 'string'
                   ? labelStyleColor
                   : labelColor
               }
-              style={iconStyle ?? undefined}
             />
           ) : null}
           <Text
-            variant={sizeStyle?.labelVariant ?? 'labelLarge'}
+            variant={sizeStyle.labelVariant}
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-text`}
             style={[
               styles.label,
-              sizeStyle
-                ? styles.sizedLabel
-                : isMode('text')
-                  ? icon || loading
-                    ? styles.legacyLabelTextAddons
-                    : styles.legacyLabelText
-                  : styles.legacyLabel,
-              !sizeStyle && compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               labelTypeStyle,
               labelStyle,
@@ -700,28 +660,9 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    marginVertical: 9,
-    marginHorizontal: 16,
-  },
-  sizedLabel: {
-    marginVertical: 0,
-    marginHorizontal: 0,
-  },
-  compactLabel: {
-    marginHorizontal: 8,
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
-  },
-  legacyLabel: {
-    marginVertical: 10,
-    marginHorizontal: 16,
-  },
-  legacyLabelText: {
-    marginHorizontal: 12,
-  },
-  legacyLabelTextAddons: {
-    marginHorizontal: 16,
   },
 });
 
