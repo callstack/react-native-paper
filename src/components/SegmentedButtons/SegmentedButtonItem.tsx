@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -123,7 +123,7 @@ const SegmentedButtonItem = ({
   labelMaxFontSizeMultiplier,
   hitSlop,
 }: Props) => {
-  const accessibilityLabel = label || ariaLabel;
+  const accessibilityLabel = ariaLabel ?? label;
 
   const {
     interactionProps,
@@ -155,8 +155,7 @@ const SegmentedButtonItem = ({
     >
       <TouchableRipple
         borderless
-        onPress={onPress}
-        {...interactionProps}
+        onPress={disabled ? undefined : onPress}
         aria-label={accessibilityLabel}
         aria-disabled={disabled}
         aria-checked={checked}
@@ -164,11 +163,14 @@ const SegmentedButtonItem = ({
         disabled={disabled}
         focusable={!disabled}
         testID={testID}
-        style={[styles.touchable, borderRadius]}
         background={background}
-        rippleColor="transparent"
-        underlayColor="transparent"
         hitSlop={hitSlop}
+        style={[
+          styles.touchable,
+          borderRadius,
+          Platform.OS === 'web' && webNoOutline,
+        ]}
+        {...interactionProps}
       >
         <View
           testID={testID ? `${testID}-container` : undefined}
@@ -295,6 +297,9 @@ const styles = StyleSheet.create({
     pointerEvents: 'none',
   },
 });
+
+// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default SegmentedButtonItem;
 

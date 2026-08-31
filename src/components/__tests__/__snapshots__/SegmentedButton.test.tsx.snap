@@ -80,6 +80,7 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 0,
               "borderTopStartRadius": 9999,
             },
+            false,
           ],
         ]
       }
@@ -283,6 +284,7 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 9999,
               "borderTopStartRadius": 0,
             },
+            false,
           ],
         ]
       }

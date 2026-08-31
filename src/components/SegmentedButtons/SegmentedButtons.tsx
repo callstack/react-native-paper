@@ -46,7 +46,7 @@ export type Props<T extends string = string> = {
   /**
    * Buttons to display as options in toggle button.
    * Button should contain the following properties:
-   * - `value`: value of button (required)
+   * - `value`: unique value of button (required)
    * - `icon`: icon to display for the item
    * - `disabled`: whether the button is disabled
    * - `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.
@@ -142,7 +142,7 @@ const SegmentedButtons = <T extends string = string>({
   return (
     <View
       role={multiSelect ? 'group' : 'radiogroup'}
-      style={[styles.row, direction === 'rtl' ? styles.rtl : styles.ltr, style]}
+      style={[styles.row, { direction }, style]}
     >
       {buttons.map(
         ({ value: itemValue, onPress: onItemPress, ...itemProps }, index) => {
@@ -174,7 +174,7 @@ const SegmentedButtons = <T extends string = string>({
           return (
             <SegmentedButtonItem
               {...itemProps}
-              key={index}
+              key={itemValue}
               checked={checked}
               previousDisabled={buttons[index - 1]?.disabled}
               role={multiSelect ? 'checkbox' : 'radio'}
@@ -194,12 +194,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     overflow: 'visible',
-  },
-  ltr: {
-    direction: 'ltr',
-  },
-  rtl: {
-    direction: 'rtl',
   },
 });
 

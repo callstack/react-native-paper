@@ -1,8 +1,13 @@
+import type { ViewStyle } from 'react-native';
+import { Platform } from 'react-native';
+
 import { describe, expect, it, jest } from '@jest/globals';
+import { ReduceMotion } from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../core/locale';
 import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import { SegmentedButtonTokens } from '../SegmentedButtons/tokens';
 import {
@@ -194,80 +199,100 @@ describe('selection behavior', () => {
     expect(callOrder).toEqual(['item', 'value']);
   });
 
-  it('selects only the first matching item when single-select values are duplicated', async () => {
-    const user = userEvent.setup();
-    const duplicateOnPress = jest.fn();
+  it('cancels an in-flight press when the item becomes disabled', async () => {
+    const itemOnPress = jest.fn();
     const onValueChange = jest.fn();
+    const buttons = [
+      {
+        value: 'walk',
+        label: 'Walking',
+        onPress: itemOnPress,
+        testID: 'walk',
+      },
+      { value: 'ride', label: 'Riding' },
+    ];
+    const { rerender } = await render(
+      <SegmentedButtons
+        value="ride"
+        onValueChange={onValueChange}
+        buttons={buttons}
+      />
+    );
+    const pressedButton = screen.getByTestId('walk');
 
-    await render(
+    await fireEvent(pressedButton, 'pressIn');
+    await rerender(
+      <SegmentedButtons
+        value="ride"
+        onValueChange={onValueChange}
+        buttons={buttons.map((button) =>
+          button.value === 'walk' ? { ...button, disabled: true } : button
+        )}
+      />
+    );
+
+    expect(screen.getByTestId('walk')).not.toHaveProp('onPress');
+
+    await fireEvent(pressedButton, 'pressOut');
+    // userEvent.press cannot interleave a rerender with the press lifecycle.
+    // eslint-disable-next-line no-restricted-syntax
+    await fireEvent(pressedButton, 'onPress');
+
+    expect(itemOnPress).not.toHaveBeenCalled();
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it('keeps interaction state and an in-flight press with the same value after reordering', async () => {
+    const walkOnPress = jest.fn();
+    const rideOnPress = jest.fn();
+    const onValueChange = jest.fn();
+    const buttons = [
+      {
+        value: 'walk',
+        label: 'Walking',
+        onPress: walkOnPress,
+        testID: 'walk',
+      },
+      {
+        value: 'ride',
+        label: 'Riding',
+        onPress: rideOnPress,
+        testID: 'ride',
+      },
+    ];
+    const { rerender } = await render(
       <SegmentedButtons
         value="walk"
         onValueChange={onValueChange}
-        buttons={[
-          { value: 'walk', label: 'Walking', testID: 'first-walk' },
-          {
-            value: 'walk',
-            label: 'Walking again',
-            onPress: duplicateOnPress,
-            testID: 'second-walk',
-          },
-          { value: 'ride', label: 'Riding' },
-        ]}
+        buttons={buttons}
       />
     );
+    const pressedButton = screen.getByTestId('walk');
 
-    const radios = screen.getAllByRole('radio');
-
-    expect(radios[0]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
-    expect(radios[1]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: false })
-    );
-
-    await user.press(screen.getByTestId('second-walk'));
-
-    expect(duplicateOnPress).toHaveBeenCalledTimes(1);
-    expect(onValueChange).toHaveBeenCalledWith('walk');
-    expect(screen.getAllByRole('radio')[1]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: false })
-    );
-  });
-
-  it('keeps duplicate button values selected and toggleable in multiselect', async () => {
-    const user = userEvent.setup();
-    const onValueChange = jest.fn();
-
-    await render(
-      <SegmentedButtons<string>
-        multiSelect
-        value={['walk']}
+    await fireEvent(pressedButton, 'focus');
+    await fireEvent(pressedButton, 'pressIn');
+    await rerender(
+      <SegmentedButtons
+        value="walk"
         onValueChange={onValueChange}
-        buttons={[
-          { value: 'walk', label: 'Walking', testID: 'first-walk' },
-          { value: 'walk', label: 'Walking again', testID: 'second-walk' },
-          { value: 'ride', label: 'Riding' },
-        ]}
+        buttons={[...buttons].reverse()}
       />
     );
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    expect(screen.getByTestId('walk-focus-ring')).toBeOnTheScreen();
+    expect(screen.queryByTestId('ride-focus-ring')).not.toBeOnTheScreen();
+    expect(screen.getByTestId('walk-state-layer')).toHaveStyle({
+      opacity: SegmentedButtonTokens.stateLayerOpacity.pressed,
+    });
 
-    expect(checkboxes[0]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
-    expect(checkboxes[1]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
+    await fireEvent(pressedButton, 'pressOut');
+    // userEvent.press cannot interleave a rerender with the press lifecycle.
+    // eslint-disable-next-line no-restricted-syntax
+    await fireEvent(pressedButton, 'onPress');
 
-    await user.press(screen.getByTestId('second-walk'));
-
-    expect(onValueChange).toHaveBeenCalledWith([]);
+    expect(walkOnPress).toHaveBeenCalledTimes(1);
+    expect(rideOnPress).not.toHaveBeenCalled();
+    expect(onValueChange).toHaveBeenCalledWith('walk');
   });
 
   it('preserves multiselect append order and removes duplicate values', async () => {
@@ -771,6 +796,30 @@ describe('segmented button presentation', () => {
     });
   });
 
+  it('always suppresses the user-agent outline on web', async () => {
+    const originalPlatform = Platform.OS;
+    Platform.OS = 'web';
+
+    try {
+      await render(
+        <SegmentedButtons
+          value="walk"
+          onValueChange={() => {}}
+          buttons={[
+            { value: 'walk', label: 'Walking', testID: 'walk' },
+            { value: 'drive', label: 'Driving' },
+          ]}
+        />
+      );
+
+      expect(screen.getByTestId('walk')).toHaveStyle({
+        outline: 'none',
+      } as unknown as ViewStyle);
+    } finally {
+      Platform.OS = originalPlatform;
+    }
+  });
+
   it.each([
     { density: 'regular' as const, expected: 40 },
     { density: 'small' as const, expected: 36 },
@@ -1076,7 +1125,7 @@ describe('segment content', () => {
 });
 
 describe('accessibility semantics', () => {
-  it('uses icon descriptions and visible text as segment names', async () => {
+  it('prioritizes aria-label and falls back to visible text', async () => {
     await render(
       <SegmentedButtons
         value="walk"
@@ -1087,15 +1136,19 @@ describe('accessibility semantics', () => {
             label: 'Driving',
             'aria-label': 'Travel by car',
           },
+          { value: 'transit', label: 'Transit' },
         ]}
         onValueChange={() => {}}
       />
     );
 
     expect(screen.getByRole('radio', { name: 'Walking' })).toBeOnTheScreen();
-    expect(screen.getByRole('radio', { name: 'Driving' })).toBeOnTheScreen();
     expect(
-      screen.queryByRole('radio', { name: 'Travel by car' })
+      screen.getByRole('radio', { name: 'Travel by car' })
+    ).toBeOnTheScreen();
+    expect(screen.getByRole('radio', { name: 'Transit' })).toBeOnTheScreen();
+    expect(
+      screen.queryByRole('radio', { name: 'Driving' })
     ).not.toBeOnTheScreen();
   });
 
@@ -1317,6 +1370,93 @@ describe('selected check icon', () => {
 
     expect(screen.getByTestId('walking-check-icon')).toBeOnTheScreen();
   });
+
+  it('restores the option icon and resets its scale when selected checks are disabled', async () => {
+    const reanimated = jest.requireMock('react-native-reanimated') as {
+      withSpring: typeof import('react-native-reanimated').withSpring;
+    };
+    const withSpringSpy = jest.spyOn(reanimated, 'withSpring');
+    const buttons = [
+      {
+        value: 'walk',
+        icon: 'walk',
+        label: 'Walking',
+        showSelectedCheck: true,
+        testID: 'walking',
+      },
+    ];
+
+    try {
+      const { rerender } = await render(
+        <SegmentedButtons
+          value="walk"
+          buttons={buttons}
+          onValueChange={() => {}}
+        />
+      );
+
+      expect(screen.getByTestId('walking-check-icon')).toHaveStyle({
+        transform: [{ scale: 1 }],
+      });
+
+      await rerender(
+        <SegmentedButtons
+          value="walk"
+          buttons={buttons.map((button) => ({
+            ...button,
+            showSelectedCheck: false,
+          }))}
+          onValueChange={() => {}}
+        />
+      );
+
+      const optionIcon = screen.getByTestId('walking-icon');
+      expect(optionIcon).toBeOnTheScreen();
+      expect(optionIcon).not.toHaveStyle({ transform: [{ scale: 0 }] });
+      expect(withSpringSpy).toHaveBeenLastCalledWith(0, {
+        reduceMotion: ReduceMotion.Never,
+      });
+    } finally {
+      withSpringSpy.mockRestore();
+    }
+  });
+
+  it.each([
+    { reduceMotion: true, expected: ReduceMotion.Always },
+    { reduceMotion: false, expected: ReduceMotion.Never },
+  ])(
+    'uses the resolved reduce-motion policy when reduceMotion is $reduceMotion',
+    async ({ reduceMotion, expected }) => {
+      const reanimated = jest.requireMock('react-native-reanimated') as {
+        withSpring: typeof import('react-native-reanimated').withSpring;
+      };
+      const withSpringSpy = jest.spyOn(reanimated, 'withSpring');
+
+      try {
+        await render(
+          <ReduceMotionContext.Provider value={reduceMotion}>
+            <SegmentedButtons
+              value="walk"
+              buttons={[
+                {
+                  value: 'walk',
+                  label: 'Walking',
+                  showSelectedCheck: true,
+                },
+              ]}
+              onValueChange={() => {}}
+            />
+          </ReduceMotionContext.Provider>
+        );
+
+        expect(withSpringSpy).toHaveBeenLastCalledWith(1, {
+          reduceMotion: expected,
+        });
+      } finally {
+        withSpringSpy.mockRestore();
+      }
+    }
+  );
 });
 
 describe('labelStyle is handled', () => {

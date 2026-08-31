@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -10,6 +11,7 @@ import Animated, {
 import type { SharedValue } from 'react-native-reanimated';
 
 import { SegmentedButtonTokens } from './tokens';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -106,18 +108,18 @@ const SegmentedButtonContent = ({
   testID,
   theme,
 }: Props) => {
-  const checkmarkScale = useSharedValue(0);
-
-  React.useEffect(() => {
-    if (!showSelectedCheck) {
-      return;
-    }
-
-    checkmarkScale.value = withSpring(checked ? 1 : 0);
-  }, [checked, checkmarkScale, showSelectedCheck]);
-
   const showCheckIcon = !!(checked && showSelectedCheck);
   const optionIcon = icon && (!label || !showCheckIcon) ? icon : undefined;
+
+  const reduceMotion = useReduceMotion();
+  const checkmarkScale = useSharedValue(checked ? 1 : 0);
+
+  React.useEffect(() => {
+    checkmarkScale.value = withSpring(showCheckIcon ? 1 : 0, {
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [checkmarkScale, reduceMotion, showCheckIcon]);
+
   const labelTextStyle: TextStyle = {
     ...theme.fonts[SegmentedButtonTokens.labelTextType],
     color: labelColor,
@@ -135,7 +137,7 @@ const SegmentedButtonContent = ({
       ) : null}
       {optionIcon ? (
         <AnimatedOptionIcon
-          animated={Boolean(label)}
+          animated={Boolean(label && showSelectedCheck)}
           color={iconColor}
           opacity={iconOpacity}
           scale={checkmarkScale}
