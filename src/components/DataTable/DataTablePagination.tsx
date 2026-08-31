@@ -184,8 +184,9 @@ const PaginationDropdown = ({
           icon="menu-down"
           iconPosition="trailing"
           theme={theme}
-          label={`${numberOfItemsPerPage}`}
-        />
+        >
+          {`${numberOfItemsPerPage}`}
+        </Button>
       }
     >
       {numberOfItemsPerPageList?.map((option) => (

@@ -248,9 +248,10 @@ const Banner = ({
                 style={styles.button}
                 textColor={colors.primary}
                 theme={theme}
-                label={label}
                 {...others}
-              />
+              >
+                {label}
+              </Button>
             ))}
           </View>
         </Animated.View>

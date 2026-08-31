@@ -118,8 +118,9 @@ const ButtonExample = () => {
             // tokens own spacing once a size is set.
             compact={size === 'unset' && compact}
             onPress={() => {}}
-            label="Play me"
-          />
+          >
+            Play me
+          </Button>
         </View>
 
         <OptionRow
@@ -178,39 +179,34 @@ const ButtonExample = () => {
       <List.Section title="Modes">
         <View style={styles.row}>
           {MODES.map((m) => (
-            <Button
-              key={m}
-              mode={m}
-              onPress={() => {}}
-              style={styles.button}
-              label={m}
-            />
+            <Button key={m} mode={m} onPress={() => {}} style={styles.button}>
+              {m}
+            </Button>
           ))}
         </View>
       </List.Section>
 
       <List.Section title="States">
         <View style={styles.row}>
-          <Button
-            mode="filled"
-            onPress={() => {}}
-            style={styles.button}
-            label="Enabled"
-          />
+          <Button mode="filled" onPress={() => {}} style={styles.button}>
+            Enabled
+          </Button>
           <Button
             mode="filled"
             disabled
             onPress={() => {}}
             style={styles.button}
-            label="Disabled"
-          />
+          >
+            Disabled
+          </Button>
           <Button
             mode="filled"
             loading
             onPress={() => {}}
             style={styles.button}
-            label="Loading"
-          />
+          >
+            Loading
+          </Button>
         </View>
       </List.Section>
 
@@ -226,8 +222,9 @@ const ButtonExample = () => {
               icon="star"
               onPress={() => {}}
               style={styles.button}
-              label={s}
-            />
+            >
+              {s}
+            </Button>
           ))}
         </View>
       </List.Section>
@@ -243,8 +240,9 @@ const ButtonExample = () => {
                 shape={shapeVariant}
                 onPress={() => {}}
                 style={styles.button}
-                label={`${s} ${shapeVariant}`}
-              />
+              >
+                {`${s} ${shapeVariant}`}
+              </Button>
             ))}
           </View>
         ))}
@@ -265,8 +263,9 @@ const ButtonExample = () => {
                 onPress={() => toggle(key)}
                 style={styles.button}
                 icon={isSelected ? 'check' : 'plus'}
-                label={m}
-              />
+              >
+                {m}
+              </Button>
             );
           })}
         </View>
@@ -279,8 +278,9 @@ const ButtonExample = () => {
             buttonColor={color}
             onPress={() => {}}
             style={styles.button}
-            label="Custom color"
-          />
+          >
+            Custom color
+          </Button>
           <Button
             mode="outlined"
             icon={{
@@ -288,8 +288,9 @@ const ButtonExample = () => {
             }}
             onPress={() => {}}
             style={styles.button}
-            label="Remote image"
-          />
+          >
+            Remote image
+          </Button>
           <Button
             mode="outlined"
             icon={({ size: iconSize }) => (
@@ -305,30 +306,34 @@ const ButtonExample = () => {
             )}
             onPress={() => {}}
             style={styles.button}
-            label="Custom component"
-          />
+          >
+            Custom component
+          </Button>
           <Button
             icon="heart"
             mode="outlined"
             onPress={() => {}}
             style={styles.button}
             labelStyle={styles.fontStyles}
-            label="Custom font"
-          />
+          >
+            Custom font
+          </Button>
           <Button
             mode="outlined"
             onPress={() => {}}
             style={styles.customRadius}
-            label="Custom radius"
-          />
+          >
+            Custom radius
+          </Button>
         </View>
         <View style={styles.row}>
           <Button
             mode="filled"
             onPress={() => {}}
             style={styles.fullWidthButton}
-            label="width: 100%"
-          />
+          >
+            width: 100%
+          </Button>
         </View>
       </List.Section>
     </ScreenWrapper>

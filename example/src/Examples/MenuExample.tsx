@@ -78,11 +78,9 @@ const MenuExample = () => {
               visible={_getVisible('menu2')}
               onDismiss={_toggleMenu('menu2')}
               anchor={
-                <Button
-                  mode="outlined"
-                  onPress={_toggleMenu('menu2')}
-                  label="Menu with icons"
-                />
+                <Button mode="outlined" onPress={_toggleMenu('menu2')}>
+                  Menu with icons
+                </Button>
               }
             >
               <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
@@ -139,11 +137,9 @@ const MenuExample = () => {
             onDismiss={_toggleMenu('menu5')}
             anchorPosition="bottom"
             anchor={
-              <Button
-                mode="outlined"
-                onPress={_toggleMenu('menu5')}
-                label="Menu with anchor position bottom"
-              />
+              <Button mode="outlined" onPress={_toggleMenu('menu5')}>
+                Menu with anchor position bottom
+              </Button>
             }
           >
             <Menu.Item onPress={() => {}} title="Item 1" />
@@ -157,11 +153,9 @@ const MenuExample = () => {
             visible={_getVisible('menu4')}
             onDismiss={_toggleMenu('menu4')}
             anchor={
-              <Button
-                mode="outlined"
-                onPress={_toggleMenu('menu4')}
-                label="Menu at bottom"
-              />
+              <Button mode="outlined" onPress={_toggleMenu('menu4')}>
+                Menu at bottom
+              </Button>
             }
           >
             <Menu.Item onPress={() => {}} title="Bottom Item 1" />

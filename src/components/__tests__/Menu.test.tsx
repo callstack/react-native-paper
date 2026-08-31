@@ -24,7 +24,7 @@ it('renders visible menu', async () => {
         <Menu
           visible
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" label="Open menu" />}
+          anchor={<Button mode="outlined">Open menu</Button>}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -43,7 +43,7 @@ it('renders not visible menu', async () => {
         <Menu
           visible={false}
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" label="Open menu" />}
+          anchor={<Button mode="outlined">Open menu</Button>}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -62,7 +62,7 @@ it('renders menu with content styles', async () => {
         <Menu
           visible
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" label="Open menu" />}
+          anchor={<Button mode="outlined">Open menu</Button>}
           contentStyle={styles.contentStyle}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
@@ -86,7 +86,7 @@ elevations.forEach((elevation) =>
         <Menu
           visible
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" label="Open menu" />}
+          anchor={<Button mode="outlined">Open menu</Button>}
           elevation={elevation}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
@@ -118,7 +118,11 @@ it('uses the default anchorPosition of top', async () => {
         <Menu
           visible={visible}
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" testID="anchor" label="Open menu" />}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
           contentStyle={styles.contentStyle}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
@@ -170,7 +174,11 @@ it('respects anchorPosition bottom', async () => {
         <Menu
           visible={visible}
           onDismiss={jest.fn()}
-          anchor={<Button mode="outlined" testID="anchor" label="Open menu" />}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
           anchorPosition="bottom"
           contentStyle={styles.contentStyle}
         >
@@ -209,7 +217,7 @@ it('animated value changes correctly', async () => {
       <Menu
         visible
         onDismiss={jest.fn()}
-        anchor={<Button mode="outlined" label="Open menu" />}
+        anchor={<Button mode="outlined">Open menu</Button>}
         testID="menu"
         contentStyle={[{ transform: [{ scale: value }] }]}
       >
@@ -241,7 +249,7 @@ it('renders menu with mode "elevated"', async () => {
       <Menu
         visible
         onDismiss={jest.fn()}
-        anchor={<Button mode="outlined" label="Open menu" />}
+        anchor={<Button mode="outlined">Open menu</Button>}
         mode="elevated"
       >
         <Menu.Item onPress={jest.fn()} title="Undo" />
@@ -266,7 +274,7 @@ it('renders menu with mode "flat"', async () => {
       <Menu
         visible
         onDismiss={jest.fn()}
-        anchor={<Button mode="outlined" label="Open menu" />}
+        anchor={<Button mode="outlined">Open menu</Button>}
         mode="flat"
       >
         <Menu.Item onPress={jest.fn()} title="Undo" />

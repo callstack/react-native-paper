@@ -26,8 +26,8 @@ export type Props = ViewProps & {
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Actions>
- *       <Button label="Cancel" />
- *       <Button label="Ok" />
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );

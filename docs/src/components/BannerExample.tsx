@@ -94,14 +94,15 @@ const BannerExample = () => {
     >
       <Stack spacing={16}>
         <Stack direction="row" spacing={8} style={styles.row}>
-          <Button loading onPress={() => {}} label="Loading" />
-          <Button mode="tonal" icon="camera" onPress={() => {}} label="Icon" />
-          <Button
-            icon="camera"
-            mode="filled"
-            onPress={() => {}}
-            label="Press me"
-          />
+          <Button loading onPress={() => {}}>
+            Loading
+          </Button>
+          <Button mode="tonal" icon="camera" onPress={() => {}}>
+            Icon
+          </Button>
+          <Button icon="camera" mode="filled" onPress={() => {}}>
+            Press me
+          </Button>
           <FAB icon="plus" size="default" onPress={() => {}} />
           <FAB icon="plus" size="medium" onPress={() => {}} />
           <FAB icon="plus" size="large" onPress={() => {}} />

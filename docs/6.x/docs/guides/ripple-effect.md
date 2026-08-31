@@ -19,9 +19,9 @@ The `rippleColor` prop is available for every pressable component which allows y
   rippleColor="#FF000020"
   icon="camera"
   mode="filled"
-  onPress={() => console.log('Pressed')}
-  label="Press me"
-/>
+  onPress={() => console.log('Pressed')}>
+  Press me
+</Button>
 ```
 
 ## Disable ripple effect in all components

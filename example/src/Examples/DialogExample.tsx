@@ -32,45 +32,52 @@ const DialogExample = () => {
         mode="outlined"
         onPress={_toggleDialog('dialog1')}
         style={styles.button}
-        label="Long text"
-      />
+      >
+        Long text
+      </Button>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog2')}
         style={styles.button}
-        label="Radio buttons"
-      />
+      >
+        Radio buttons
+      </Button>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog3')}
         style={styles.button}
-        label="Progress indicator"
-      />
+      >
+        Progress indicator
+      </Button>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog4')}
         style={styles.button}
-        label="Undismissable Dialog"
-      />
+      >
+        Undismissable Dialog
+      </Button>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog5')}
         style={styles.button}
-        label="Custom colors"
-      />
+      >
+        Custom colors
+      </Button>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog6')}
         style={styles.button}
-        label="With icon"
-      />
+      >
+        With icon
+      </Button>
       {Platform.OS === 'android' && (
         <Button
           mode="outlined"
           onPress={_toggleDialog('dialog7')}
           style={styles.button}
-          label="Dismissable back button"
-        />
+        >
+          Dismissable back button
+        </Button>
       )}
       <DialogWithLongText
         visible={_getVisible('dialog1')}

@@ -130,7 +130,7 @@ describe('CardActions', () => {
     await render(
       <Card>
         <Card.Actions testID="card-actions">
-          <Button mode="filled" label="Agree" />
+          <Button mode="filled">Agree</Button>
         </Card.Actions>
       </Card>
     );
@@ -149,8 +149,9 @@ describe('CardActions', () => {
             testID="card-actions-button"
             mode="filled"
             style={styles.customBorderRadius}
-            label="Agree"
-          />
+          >
+            Agree
+          </Button>
         </Card.Actions>
       </Card>
     );

@@ -68,7 +68,7 @@ const DIALOG_ELEVATION: number = 24;
  *   return (
  *     <PaperProvider>
  *       <View>
- *         <Button onPress={showDialog} label="Show Dialog" />
+ *         <Button onPress={showDialog}>Show Dialog</Button>
  *         <Portal>
  *           <Dialog visible={visible} onDismiss={hideDialog}>
  *             <Dialog.Title>Alert</Dialog.Title>
@@ -76,7 +76,7 @@ const DIALOG_ELEVATION: number = 24;
  *               <Text variant="bodyMedium">This is simple dialog</Text>
  *             </Dialog.Content>
  *             <Dialog.Actions>
- *               <Button onPress={hideDialog} label="Done" />
+ *               <Button onPress={hideDialog}>Done</Button>
  *             </Dialog.Actions>
  *           </Dialog>
  *         </Portal>

@@ -27,7 +27,7 @@ You can pass the name of an icon from [`MaterialDesignIcons`](https://pictogramm
 Example:
 
 ```js
-<Button icon="camera" label="Press me" />
+<Button icon="camera">Press me</Button>
 ```
 
 :::note
@@ -63,14 +63,15 @@ Remote image:
 ```js
 <Button
   icon={{ uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }}
-  label="Press me"
-/>
+>
+  Press me
+</Button>
 ```
 
 Local image:
 
 ```js
-<Button icon={require('../assets/chameleon.jpg')} label="Press me" />
+<Button icon={require('../assets/chameleon.jpg')}>Press me</Button>
 ```
 
 ### 3. A render function
@@ -87,8 +88,9 @@ Example:
       style={{ width: size, height: size, tintColor: color }}
     />
   )}
-  label="Press me"
-/>
+>
+  Press me
+</Button>
 ```
 
 ### 4. Use custom icons
@@ -129,14 +131,15 @@ Example for using an image source:
     },
     direction: 'rtl',
   }}
-  label="Press me"
-/>
+>
+  Press me
+</Button>
 ```
 
 Example for using an icon name:
 
 ```js
-<Button icon={{ source: 'add-a-photo', direction: 'rtl' }} label="Press me" />
+<Button icon={{ source: 'add-a-photo', direction: 'rtl' }}>Press me</Button>
 ```
 
 You can also use a render function. Along with `size` and `color`, you have access to `direction` which will either be `'rtl'` or `'ltr'`. You can then decide how to render your icon component accordingly.
@@ -160,6 +163,7 @@ Example of using a render function:
       ]}
     />
   )}
-  label="Press me"
-/>
+>
+  Press me
+</Button>
 ```

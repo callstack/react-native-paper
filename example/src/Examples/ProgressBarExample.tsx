@@ -41,12 +41,11 @@ const ProgressBarExample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>
-      <Button onPress={() => setVisible(!visible)} label="Toggle visibility" />
-      <Button
-        onPress={() => setProgress(Math.random())}
-        label="Random progress"
-      />
-      <Button onPress={runCustomAnimation} label="Toggle animation" />
+      <Button onPress={() => setVisible(!visible)}>Toggle visibility</Button>
+      <Button onPress={() => setProgress(Math.random())}>
+        Random progress
+      </Button>
+      <Button onPress={runCustomAnimation}>Toggle animation</Button>
 
       <View style={styles.row}>
         <Text variant="bodyMedium">Default ProgressBar</Text>

@@ -62,7 +62,7 @@ const DialogWithLongText = ({
         </ScrollView>
       </Dialog.ScrollArea>
       <Dialog.Actions>
-        <Button onPress={close} label="Ok" />
+        <Button onPress={close}>Ok</Button>
       </Dialog.Actions>
     </Dialog>
   </Portal>

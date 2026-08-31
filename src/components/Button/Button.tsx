@@ -33,10 +33,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<
-  React.ComponentProps<typeof Surface>,
-  'mode' | 'children'
-> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
    * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)
@@ -110,14 +107,9 @@ export type Props = $Omit<
   /**
    * Label text of the button.
    */
-  label?: string;
+  children: React.ReactNode;
   /**
-   * @deprecated Use `label` instead. When both `label` and `children` are set, `label` is used.
-   * Label text of the button.
-   */
-  children?: React.ReactNode;
-  /**
-   * Make the label text uppercased.
+   * Make the label text uppercased. Note that this won't work if you pass React elements as children.
    */
   uppercase?: boolean;
   /**
@@ -207,12 +199,9 @@ export type Props = $Omit<
  * import { Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Button
- *     icon="camera"
- *     mode="filled"
- *     onPress={() => console.log('Pressed')}
- *     label="Press me"
- *   />
+ *   <Button icon="camera" mode="filled" onPress={() => console.log('Pressed')}>
+ *     Press me
+ *   </Button>
  * );
  *
  * export default MyComponent;
@@ -242,7 +231,6 @@ const Button = ({
   iconPosition,
   buttonColor: customButtonColor,
   textColor: customLabelColor,
-  label,
   children,
   'aria-label': ariaLabel,
   accessibilityHint,
@@ -273,14 +261,6 @@ const Button = ({
   const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
-
-  if (process.env.NODE_ENV !== 'production' && children != null) {
-    console.warn(
-      'Button: the `children` prop is deprecated and will be removed in a future release. Use the `label` prop instead.'
-    );
-  }
-
-  const labelContent = label != null ? label : children;
 
   const flattenedContentStyle = React.useMemo(
     () => StyleSheet.flatten(contentStyle) as ViewStyle | undefined,
@@ -691,7 +671,7 @@ const Button = ({
             ]}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
-            {labelContent}
+            {children}
           </Text>
         </View>
       </TouchableRipple>
