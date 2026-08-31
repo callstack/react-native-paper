@@ -44,12 +44,10 @@ export const useSegmentedButtonInteraction = (disabled?: boolean) => {
   return {
     interactionProps,
     interactionState,
-    stateLayerOpacity: getSegmentedButtonStateLayerOpacity({
-      disabled,
-      pressed,
-      focused,
-      hovered,
-    }),
+    stateLayerOpacity: getSegmentedButtonStateLayerOpacity(
+      interactionState,
+      disabled
+    ),
     showFocusRing: focused && !disabled,
   };
 };

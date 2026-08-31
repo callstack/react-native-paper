@@ -116,7 +116,7 @@ const SegmentedButtonContent = ({
     checkmarkScale.value = withSpring(checked ? 1 : 0);
   }, [checked, checkmarkScale, showSelectedCheck]);
 
-  const showCheckIcon = Boolean(checked && showSelectedCheck);
+  const showCheckIcon = !!(checked && showSelectedCheck);
   const optionIcon = icon && (!label || !showCheckIcon) ? icon : undefined;
   const labelTextStyle: TextStyle = {
     ...theme.fonts[SegmentedButtonTokens.labelTextType],

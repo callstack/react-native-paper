@@ -27,6 +27,7 @@ exports[`renders segmented button 1`] = `
           "overflow": "visible",
         },
         false,
+        undefined,
       ]
     }
   >
@@ -79,7 +80,6 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 0,
               "borderTopStartRadius": 9999,
             },
-            undefined,
           ],
         ]
       }
@@ -101,7 +101,6 @@ exports[`renders segmented button 1`] = `
               "backgroundColor": "rgba(232, 222, 248, 1)",
               "height": 40,
             },
-            undefined,
           ]
         }
       >
@@ -231,6 +230,7 @@ exports[`renders segmented button 1`] = `
           "overflow": "visible",
         },
         false,
+        undefined,
       ]
     }
   >
@@ -283,7 +283,6 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 9999,
               "borderTopStartRadius": 0,
             },
-            undefined,
           ],
         ]
       }
@@ -305,7 +304,6 @@ exports[`renders segmented button 1`] = `
               "backgroundColor": "transparent",
               "height": 40,
             },
-            undefined,
           ]
         }
       >
