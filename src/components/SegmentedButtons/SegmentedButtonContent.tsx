@@ -2,82 +2,19 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
-import Animated, {
+import {
   ReduceMotion,
-  useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import type { SharedValue } from 'react-native-reanimated';
 
+import AnimatedCheckIcon from './AnimatedCheckIcon';
+import AnimatedOptionIcon from './AnimatedOptionIcon';
 import { SegmentedButtonTokens } from './tokens';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
-import Icon from '../Icon';
 import Text from '../Typography/Text';
-
-type AnimatedIconProps = {
-  color: TextStyle['color'];
-  opacity: number;
-  scale: SharedValue<number>;
-  testID?: string;
-};
-
-const AnimatedCheckIcon = ({
-  color,
-  opacity,
-  scale,
-  testID,
-}: AnimatedIconProps) => {
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
-
-  return (
-    <Animated.View
-      testID={testID}
-      style={[styles.icon, { opacity }, animatedStyle]}
-    >
-      <Icon
-        source="check"
-        size={SegmentedButtonTokens.iconSize}
-        color={color}
-      />
-    </Animated.View>
-  );
-};
-
-type AnimatedOptionIconProps = AnimatedIconProps & {
-  animated: boolean;
-  source: IconSource;
-};
-
-const AnimatedOptionIcon = ({
-  animated,
-  color,
-  opacity,
-  scale,
-  source,
-  testID,
-}: AnimatedOptionIconProps) => {
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: 1 - scale.value }],
-  }));
-
-  return (
-    <Animated.View
-      testID={testID}
-      style={[styles.icon, { opacity }, animated ? animatedStyle : undefined]}
-    >
-      <Icon
-        source={source}
-        size={SegmentedButtonTokens.iconSize}
-        color={color}
-      />
-    </Animated.View>
-  );
-};
 
 type Props = {
   checked: boolean;
@@ -174,12 +111,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: SegmentedButtonTokens.horizontalPadding,
     columnGap: SegmentedButtonTokens.iconLabelGap,
-  },
-  icon: {
-    width: SegmentedButtonTokens.iconSize,
-    height: SegmentedButtonTokens.iconSize,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   label: {
     flexShrink: 1,

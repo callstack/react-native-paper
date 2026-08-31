@@ -193,7 +193,6 @@ const SegmentedButtons = <T extends string = string>({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    overflow: 'visible',
   },
 });
 

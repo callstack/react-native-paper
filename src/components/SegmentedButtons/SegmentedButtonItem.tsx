@@ -154,7 +154,7 @@ const SegmentedButtonItem = ({
     >
       <TouchableRipple
         borderless
-        onPress={disabled ? undefined : onPress}
+        onPress={onPress}
         aria-label={accessibilityLabel}
         aria-disabled={disabled}
         aria-checked={checked}
@@ -165,7 +165,7 @@ const SegmentedButtonItem = ({
         background={background}
         hitSlop={hitSlop}
         theme={theme}
-        style={[borderRadius, Platform.OS === 'web' && webNoOutline]}
+        style={[borderRadius, Platform.select({ web: { outline: 'none' } })]}
         onFocus={(event) => {
           if (!disabled && isKeyboardFocusEvent(event)) {
             setFocused(true);
@@ -240,7 +240,6 @@ const SegmentedButtonItem = ({
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    overflow: 'visible',
   },
   focusedWrapper: {
     zIndex: 1,
@@ -267,9 +266,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'none',
   },
 });
-
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default SegmentedButtonItem;
 

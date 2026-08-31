@@ -7,7 +7,6 @@ exports[`renders segmented button 1`] = `
     [
       {
         "flexDirection": "row",
-        "overflow": "visible",
       },
       {
         "direction": "ltr",
@@ -21,7 +20,6 @@ exports[`renders segmented button 1`] = `
       [
         {
           "flex": 1,
-          "overflow": "visible",
         },
         {
           "borderBottomEndRadius": 0,
@@ -81,7 +79,7 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 0,
               "borderTopStartRadius": 9999,
             },
-            false,
+            undefined,
           ],
         ]
       }
@@ -195,7 +193,6 @@ exports[`renders segmented button 1`] = `
       [
         {
           "flex": 1,
-          "overflow": "visible",
         },
         {
           "borderBottomEndRadius": 9999,
@@ -255,7 +252,7 @@ exports[`renders segmented button 1`] = `
               "borderTopEndRadius": 9999,
               "borderTopStartRadius": 0,
             },
-            false,
+            undefined,
           ],
         ]
       }

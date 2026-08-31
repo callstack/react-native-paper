@@ -738,8 +738,9 @@ describe('segmented button presentation', () => {
   });
 
   it('always suppresses the user-agent outline on web', async () => {
-    const originalPlatform = Platform.OS;
-    Platform.OS = 'web';
+    const platformSelect = jest
+      .spyOn(Platform, 'select')
+      .mockImplementation((specifics) => specifics.web);
 
     try {
       await render(
@@ -757,7 +758,7 @@ describe('segmented button presentation', () => {
         outline: 'none',
       } as unknown as ViewStyle);
     } finally {
-      Platform.OS = originalPlatform;
+      platformSelect.mockRestore();
     }
   });
 
