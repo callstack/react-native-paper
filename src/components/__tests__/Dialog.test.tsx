@@ -219,29 +219,36 @@ describe('DialogActions', () => {
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
+    const dialogActionChildren = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+
+    // We expect 3 children because Dialog.Actions puts <View style={{ width: 8 }} /> in between actions to add a proper styling
+    expect(dialogActionChildren).toHaveLength(3);
+    expect(dialogActionChildren[1]).toHaveStyle({ width: 8 });
   });
 
   it('should apply custom styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
+        <Button testID="button-cancel" style={styles.spacing}>
+          Cancel
+        </Button>
+        <Button testID="button-ok" style={styles.noSpacing}>
+          Ok
+        </Button>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
-
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(screen.getByTestId('button-cancel-container')).toHaveStyle({
+      margin: 10,
+    });
+    expect(screen.getByTestId('button-ok-container')).toHaveStyle({
+      margin: 0,
+    });
   });
 });
 

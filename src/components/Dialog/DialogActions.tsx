@@ -61,15 +61,14 @@ const DialogActions = ({ children, style, theme, ...rest }: Props) => {
   return (
     <View {...rest} style={[styles.v3Container, style]}>
       {actions.map((child, index) => (
-        <View
-          key={child.key ?? index}
-          style={[
-            index === actions.length - 1 ? styles.itemLast : styles.item,
-            child.props.style,
-          ]}
+        <React.Fragment
+          key={
+            React.isValidElement(child) && child.key != null ? child.key : index
+          }
         >
+          {index > 0 && <View style={styles.spacer} />}
           {child}
-        </View>
+        </React.Fragment>
       ))}
     </View>
   );
@@ -86,11 +85,8 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
     paddingHorizontal: 24,
   },
-  item: {
-    marginRight: 8,
-  },
-  itemLast: {
-    marginRight: 0,
+  spacer: {
+    width: 8,
   },
 });
 
