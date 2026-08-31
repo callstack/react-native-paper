@@ -1,4 +1,6 @@
-import type { ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
+
+import color from 'color';
 
 import { SegmentedButtonTokens } from './tokens';
 import type { InternalTheme } from '../../types';
@@ -41,28 +43,25 @@ export const getSegmentedButtonBorderRadius = (
   };
 };
 
-type SegmentedButtonBorderStyles = {
-  outline: ViewStyle;
-  divider?: ViewStyle;
+type SegmentedButtonBorderColors = {
+  outline: ColorValue;
+  divider: ColorValue;
 };
 
 export const getSegmentedButtonBorderStyles = (
-  segment: SegmentedButtonPosition
-): SegmentedButtonBorderStyles => {
+  segment: SegmentedButtonPosition,
+  { outline, divider }: SegmentedButtonBorderColors
+): ViewStyle => {
   const outlineWidth = SegmentedButtonTokens.outlineWidth;
-  const outline = {
+
+  return {
+    borderColor: outline,
+    borderStartColor: segment === 'first' ? outline : divider,
     borderTopWidth: outlineWidth,
     borderBottomWidth: outlineWidth,
+    borderStartWidth: outlineWidth,
     borderEndWidth: segment === 'last' ? outlineWidth : 0,
   };
-
-  if (segment === 'first') {
-    return {
-      outline: { ...outline, borderStartWidth: outlineWidth },
-    };
-  }
-
-  return { outline, divider: { borderStartWidth: outlineWidth } };
 };
 
 const resolveContentColors = (
@@ -94,15 +93,24 @@ const resolveContentColors = (
   };
 };
 
-const resolveOutlineColors = (theme: InternalTheme, disabled: boolean) => {
+const applyOpacity = (value: ColorValue, opacity: number): ColorValue => {
+  if (opacity === 1 || typeof value !== 'string') {
+    return value;
+  }
+
+  return color(value)
+    .fade(1 - opacity)
+    .rgb()
+    .string();
+};
+
+const resolveOutlineColor = (theme: InternalTheme, disabled: boolean) => {
   const colorToken = disabled
     ? SegmentedButtonTokens.disabledOutlineColor
     : SegmentedButtonTokens.outlineColor;
+  const opacity = disabled ? SegmentedButtonTokens.disabledOutlineOpacity : 1;
 
-  return {
-    color: theme.colors[colorToken],
-    opacity: disabled ? SegmentedButtonTokens.disabledOutlineOpacity : 1,
-  };
+  return applyOpacity(theme.colors[colorToken], opacity);
 };
 
 export const resolveColors = (
@@ -112,12 +120,12 @@ export const resolveColors = (
   const { checked, disabled, contentColor, dividerDisabled } = options;
 
   return {
-    container: checked
+    wrapper: checked
       ? theme.colors[SegmentedButtonTokens.selectedContainerColor]
       : 'transparent',
     content: resolveContentColors(theme, options, contentColor),
-    outline: resolveOutlineColors(theme, disabled),
-    divider: resolveOutlineColors(theme, dividerDisabled),
+    outline: resolveOutlineColor(theme, disabled),
+    divider: resolveOutlineColor(theme, dividerDisabled),
     focusIndicator: theme.colors[SegmentedButtonTokens.focusIndicatorColor],
   };
 };

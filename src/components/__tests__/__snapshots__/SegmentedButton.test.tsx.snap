@@ -30,7 +30,6 @@ exports[`renders segmented button 1`] = `
         {
           "backgroundColor": "rgba(232, 222, 248, 1)",
         },
-        false,
         undefined,
       ]
     }
@@ -74,117 +73,87 @@ exports[`renders segmented button 1`] = `
           },
           [
             {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
               "borderBottomEndRadius": 0,
               "borderBottomStartRadius": 9999,
               "borderTopEndRadius": 0,
               "borderTopStartRadius": 9999,
             },
+            {
+              "borderBottomWidth": 1,
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderEndWidth": 0,
+              "borderStartColor": "rgba(121, 116, 126, 1)",
+              "borderStartWidth": 1,
+              "borderTopWidth": 1,
+            },
             undefined,
+            {
+              "height": 40,
+            },
           ],
         ]
       }
     >
       <View
         style={
-          [
-            {
-              "justifyContent": "center",
-              "width": "100%",
-            },
-            {
-              "height": 40,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "columnGap": 8,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingHorizontal": 12,
+          }
         }
       >
-        <View
+        <Text
+          numberOfLines={1}
+          selectable={false}
           style={
-            {
-              "alignItems": "center",
-              "columnGap": 8,
-              "flex": 1,
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 12,
-            }
-          }
-        >
-          <Text
-            numberOfLines={1}
-            selectable={false}
-            style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "textAlign": "left",
-                },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "writingDirection": "ltr",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
                   },
-                  [
-                    {
-                      "flexShrink": 1,
-                      "textAlign": "center",
-                    },
-                    {
-                      "color": "rgba(29, 25, 43, 1)",
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "opacity": 1,
-                    },
-                    undefined,
-                  ],
+                  {
+                    "opacity": 1,
+                  },
+                  undefined,
                 ],
-              ]
-            }
-          >
-            Walking
-          </Text>
-        </View>
-        <View
-          pointerEvents="none"
-          style={
-            [
-              {
-                "bottom": 0,
-                "left": 0,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              {
-                "borderBottomEndRadius": 0,
-                "borderBottomStartRadius": 9999,
-                "borderTopEndRadius": 0,
-                "borderTopStartRadius": 9999,
-              },
-              {
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "opacity": 1,
-              },
-              {
-                "borderBottomWidth": 1,
-                "borderEndWidth": 0,
-                "borderStartWidth": 1,
-                "borderTopWidth": 1,
-              },
+              ],
             ]
           }
-        />
+        >
+          Walking
+        </Text>
       </View>
     </View>
   </View>
@@ -203,7 +172,6 @@ exports[`renders segmented button 1`] = `
         {
           "backgroundColor": "transparent",
         },
-        false,
         undefined,
       ]
     }
@@ -247,138 +215,87 @@ exports[`renders segmented button 1`] = `
           },
           [
             {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
               "borderBottomEndRadius": 9999,
               "borderBottomStartRadius": 0,
               "borderTopEndRadius": 9999,
               "borderTopStartRadius": 0,
             },
+            {
+              "borderBottomWidth": 1,
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderEndWidth": 1,
+              "borderStartColor": "rgba(121, 116, 126, 1)",
+              "borderStartWidth": 1,
+              "borderTopWidth": 1,
+            },
             undefined,
+            {
+              "height": 40,
+            },
           ],
         ]
       }
     >
       <View
         style={
-          [
-            {
-              "justifyContent": "center",
-              "width": "100%",
-            },
-            {
-              "height": 40,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "columnGap": 8,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingHorizontal": 12,
+          }
         }
       >
-        <View
+        <Text
+          numberOfLines={1}
+          selectable={false}
           style={
-            {
-              "alignItems": "center",
-              "columnGap": 8,
-              "flex": 1,
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 12,
-            }
-          }
-        >
-          <Text
-            numberOfLines={1}
-            selectable={false}
-            style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
               [
                 {
-                  "textAlign": "left",
-                },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "writingDirection": "ltr",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
                 [
                   {
+                    "flexShrink": 1,
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
                   },
-                  [
-                    {
-                      "flexShrink": 1,
-                      "textAlign": "center",
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "opacity": 1,
-                    },
-                    undefined,
-                  ],
+                  {
+                    "opacity": 1,
+                  },
+                  undefined,
                 ],
-              ]
-            }
-          >
-            Riding
-          </Text>
-        </View>
-        <View
-          pointerEvents="none"
-          style={
-            [
-              {
-                "bottom": 0,
-                "left": 0,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              {
-                "borderBottomEndRadius": 9999,
-                "borderBottomStartRadius": 0,
-                "borderTopEndRadius": 9999,
-                "borderTopStartRadius": 0,
-              },
-              {
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "opacity": 1,
-              },
-              {
-                "borderBottomWidth": 1,
-                "borderEndWidth": 1,
-                "borderTopWidth": 1,
-              },
+              ],
             ]
           }
-        />
-        <View
-          pointerEvents="none"
-          style={
-            [
-              {
-                "bottom": 0,
-                "left": 0,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              {
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "opacity": 1,
-              },
-              {
-                "borderStartWidth": 1,
-              },
-            ]
-          }
-        />
+        >
+          Riding
+        </Text>
       </View>
     </View>
   </View>

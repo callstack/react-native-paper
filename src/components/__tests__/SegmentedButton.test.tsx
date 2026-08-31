@@ -2,6 +2,7 @@ import type { ViewStyle } from 'react-native';
 import { Platform } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
+import color from 'color';
 import { ReduceMotion } from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../core/locale';
@@ -120,9 +121,12 @@ it('renders disabled segmented button', async () => {
     />
   );
 
-  expect(screen.getByTestId('ride-outline')).toHaveStyle({
-    borderColor: getTheme().colors.onSurface,
-    opacity: SegmentedButtonTokens.disabledOutlineOpacity,
+  expect(screen.getByTestId('ride')).toHaveStyle({
+    borderColor: color(getTheme().colors.onSurface as string)
+      .fade(1 - SegmentedButtonTokens.disabledOutlineOpacity)
+      .rgb()
+      .string(),
+    borderStartColor: getTheme().colors.outline,
   });
   expect(screen.getByTestId('ride-label')).toHaveStyle({
     opacity: SegmentedButtonTokens.disabledLabelTextOpacity,
@@ -448,23 +452,24 @@ describe('segmented button colors', () => {
     {
       state: 'enabled',
       disabled: false,
-      color: theme.colors.outline,
-      opacity: 1,
+      expected: theme.colors.outline,
     },
     {
       state: 'disabled',
       disabled: true,
-      color: theme.colors.onSurface,
-      opacity: SegmentedButtonTokens.disabledOutlineOpacity,
+      expected: color(theme.colors.onSurface as string)
+        .fade(1 - SegmentedButtonTokens.disabledOutlineOpacity)
+        .rgb()
+        .string(),
     },
-  ])('resolves the $state outline', ({ disabled, color, opacity }) => {
+  ])('resolves the $state outline', ({ disabled, expected }) => {
     expect(
       resolveColors(theme, {
         checked: false,
         disabled,
         dividerDisabled: false,
       }).outline
-    ).toEqual({ color, opacity });
+    ).toBe(expected);
   });
 
   it.each([
@@ -476,12 +481,14 @@ describe('segmented button colors', () => {
         checked,
         disabled: false,
         dividerDisabled: false,
-      }).container
+      }).wrapper
     ).toBe(expected);
   });
 });
 
 describe('segmented button topology helpers', () => {
+  const borderColors = { outline: 'outline', divider: 'divider' };
+
   it.each([
     {
       segment: 'first' as const,
@@ -513,38 +520,40 @@ describe('segmented button topology helpers', () => {
     {
       segment: 'first' as const,
       expected: {
-        outline: {
-          borderTopWidth: SegmentedButtonTokens.outlineWidth,
-          borderBottomWidth: SegmentedButtonTokens.outlineWidth,
-          borderStartWidth: SegmentedButtonTokens.outlineWidth,
-          borderEndWidth: 0,
-        },
+        borderColor: borderColors.outline,
+        borderStartColor: borderColors.outline,
+        borderTopWidth: SegmentedButtonTokens.outlineWidth,
+        borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+        borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        borderEndWidth: 0,
       },
     },
     {
       segment: 'middle' as const,
       expected: {
-        outline: {
-          borderTopWidth: SegmentedButtonTokens.outlineWidth,
-          borderBottomWidth: SegmentedButtonTokens.outlineWidth,
-          borderEndWidth: 0,
-        },
-        divider: { borderStartWidth: SegmentedButtonTokens.outlineWidth },
+        borderColor: borderColors.outline,
+        borderStartColor: borderColors.divider,
+        borderTopWidth: SegmentedButtonTokens.outlineWidth,
+        borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+        borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        borderEndWidth: 0,
       },
     },
     {
       segment: 'last' as const,
       expected: {
-        outline: {
-          borderTopWidth: SegmentedButtonTokens.outlineWidth,
-          borderBottomWidth: SegmentedButtonTokens.outlineWidth,
-          borderEndWidth: SegmentedButtonTokens.outlineWidth,
-        },
-        divider: { borderStartWidth: SegmentedButtonTokens.outlineWidth },
+        borderColor: borderColors.outline,
+        borderStartColor: borderColors.divider,
+        borderTopWidth: SegmentedButtonTokens.outlineWidth,
+        borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+        borderStartWidth: SegmentedButtonTokens.outlineWidth,
+        borderEndWidth: SegmentedButtonTokens.outlineWidth,
       },
     },
   ])('returns the $segment segment borders', ({ segment, expected }) => {
-    expect(getSegmentedButtonBorderStyles(segment)).toEqual(expected);
+    expect(getSegmentedButtonBorderStyles(segment, borderColors)).toEqual(
+      expected
+    );
   });
 });
 
@@ -612,11 +621,13 @@ describe('segmented button presentation', () => {
 
       for (const { id, radii, borderEndWidth } of segmentCases) {
         expect(screen.getByTestId(`${id}-wrapper`)).toHaveStyle(radii);
-        expect(screen.getByTestId(id)).toHaveStyle(radii);
-        expect(screen.getByTestId(`${id}-outline`)).toHaveStyle({
+        expect(screen.getByTestId(id)).toHaveStyle({
           ...radii,
+          borderColor: getTheme().colors.outline,
+          borderStartColor: getTheme().colors.outline,
           borderTopWidth: SegmentedButtonTokens.outlineWidth,
           borderBottomWidth: SegmentedButtonTokens.outlineWidth,
+          borderStartWidth: SegmentedButtonTokens.outlineWidth,
           borderEndWidth,
         });
 
@@ -633,20 +644,6 @@ describe('segmented button presentation', () => {
         await fireEvent(screen.getByTestId(id), 'blur');
         expect(screen.queryByTestId(`${id}-focus-ring`)).not.toBeOnTheScreen();
       }
-
-      expect(screen.getByTestId('first-outline')).toHaveStyle({
-        borderStartWidth: SegmentedButtonTokens.outlineWidth,
-      });
-      expect(screen.queryByTestId('first-divider')).not.toBeOnTheScreen();
-
-      ['middle', 'last'].forEach((id) => {
-        expect(screen.getByTestId(`${id}-outline`)).not.toHaveStyle({
-          borderStartWidth: SegmentedButtonTokens.outlineWidth,
-        });
-        expect(screen.getByTestId(`${id}-divider`)).toHaveStyle({
-          borderStartWidth: SegmentedButtonTokens.outlineWidth,
-        });
-      });
     }
   );
 
@@ -671,23 +668,28 @@ describe('segmented button presentation', () => {
       );
 
       expect(view.root).toHaveStyle({ direction });
-      expect(screen.queryAllByTestId(/-divider$/)).toHaveLength(2);
-      expect(screen.queryByTestId('first-divider')).not.toBeOnTheScreen();
+      const disabledOutlineColor = color(getTheme().colors.onSurface as string)
+        .fade(1 - SegmentedButtonTokens.disabledOutlineOpacity)
+        .rgb()
+        .string();
+
+      expect(screen.getByTestId('first')).toHaveStyle({
+        borderStartColor: disabledStates[0]
+          ? disabledOutlineColor
+          : getTheme().colors.outline,
+      });
 
       [1, 2].forEach((index) => {
         const dividerDisabled =
           disabledStates[index - 1] && disabledStates[index];
 
-        expect(screen.getByTestId(`${ids[index]}-divider`)).toHaveStyle({
-          borderColor: dividerDisabled
-            ? getTheme().colors.onSurface
+        expect(screen.getByTestId(ids[index])).toHaveStyle({
+          borderColor: disabledStates[index]
+            ? disabledOutlineColor
             : getTheme().colors.outline,
-          opacity: dividerDisabled
-            ? SegmentedButtonTokens.disabledOutlineOpacity
-            : 1,
-          borderStartWidth: SegmentedButtonTokens.outlineWidth,
-        });
-        expect(screen.getByTestId(`${ids[index]}-outline`)).not.toHaveStyle({
+          borderStartColor: dividerDisabled
+            ? disabledOutlineColor
+            : getTheme().colors.outline,
           borderStartWidth: SegmentedButtonTokens.outlineWidth,
         });
       });
@@ -727,11 +729,12 @@ describe('segmented button presentation', () => {
       minHeight: 48,
       minWidth: 48,
     });
-    expect(screen.getByTestId('walk-container')).not.toHaveStyle({ flex: 3 });
-    expect(screen.getByTestId('walk-container')).not.toHaveStyle({
+    expect(screen.queryByTestId('walk-container')).not.toBeOnTheScreen();
+    expect(screen.getByTestId('walk')).not.toHaveStyle({ flex: 3 });
+    expect(screen.getByTestId('walk')).not.toHaveStyle({
       backgroundColor: style.backgroundColor,
     });
-    expect(screen.getByTestId('walk-outline')).not.toHaveStyle({
+    expect(screen.getByTestId('walk')).not.toHaveStyle({
       borderColor: style.borderColor,
       borderWidth: style.borderWidth,
     });
@@ -792,7 +795,7 @@ describe('segmented button presentation', () => {
         minHeight: 48,
         minWidth: 48,
       });
-      expect(screen.getByTestId('walk-container')).toHaveStyle({
+      expect(screen.getByTestId('walk')).toHaveStyle({
         height: expected,
       });
     }

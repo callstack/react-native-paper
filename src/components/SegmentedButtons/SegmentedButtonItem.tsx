@@ -137,9 +137,9 @@ const SegmentedButtonItem = ({
   });
 
   const borderRadius = getSegmentedButtonBorderRadius(segment);
-  const { outline, divider } = getSegmentedButtonBorderStyles(segment);
+  const borderStyles = getSegmentedButtonBorderStyles(segment, colors);
 
-  const containerHeight = SegmentedButtonTokens.containerHeight[density];
+  const height = SegmentedButtonTokens.containerHeight[density];
 
   return (
     <View
@@ -147,8 +147,7 @@ const SegmentedButtonItem = ({
       style={[
         styles.wrapper,
         borderRadius,
-        { backgroundColor: colors.container },
-        showFocusRing && styles.focusedWrapper,
+        { backgroundColor: colors.wrapper },
         style,
       ]}
     >
@@ -165,7 +164,13 @@ const SegmentedButtonItem = ({
         background={background}
         hitSlop={hitSlop}
         theme={theme}
-        style={[borderRadius, Platform.select({ web: { outline: 'none' } })]}
+        style={[
+          styles.touchable,
+          borderRadius,
+          borderStyles,
+          Platform.select({ web: { outline: 'none' } }),
+          { height },
+        ]}
         onFocus={(event) => {
           if (!disabled && isKeyboardFocusEvent(event)) {
             setFocused(true);
@@ -173,52 +178,20 @@ const SegmentedButtonItem = ({
         }}
         onBlur={() => setFocused(false)}
       >
-        <View
-          testID={testID && `${testID}-container`}
-          style={[styles.container, { height: containerHeight }]}
-        >
-          <SegmentedButtonContent
-            checked={checked}
-            iconColor={colors.content.iconColor}
-            iconOpacity={colors.content.iconOpacity}
-            icon={icon}
-            label={label}
-            labelColor={colors.content.labelColor}
-            labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            labelOpacity={colors.content.labelOpacity}
-            labelStyle={labelStyle}
-            showSelectedCheck={showSelectedCheck}
-            testID={testID}
-            theme={theme}
-          />
-          <View
-            pointerEvents="none"
-            testID={testID && `${testID}-outline`}
-            style={[
-              styles.outline,
-              borderRadius,
-              {
-                borderColor: colors.outline.color,
-                opacity: colors.outline.opacity,
-              },
-              outline,
-            ]}
-          />
-          {divider ? (
-            <View
-              pointerEvents="none"
-              testID={testID && `${testID}-divider`}
-              style={[
-                styles.outline,
-                {
-                  borderColor: colors.divider.color,
-                  opacity: colors.divider.opacity,
-                },
-                divider,
-              ]}
-            />
-          ) : null}
-        </View>
+        <SegmentedButtonContent
+          checked={checked}
+          iconColor={colors.content.iconColor}
+          iconOpacity={colors.content.iconOpacity}
+          icon={icon}
+          label={label}
+          labelColor={colors.content.labelColor}
+          labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+          labelOpacity={colors.content.labelOpacity}
+          labelStyle={labelStyle}
+          showSelectedCheck={showSelectedCheck}
+          testID={testID}
+          theme={theme}
+        />
       </TouchableRipple>
       {showFocusRing ? (
         <View
@@ -227,9 +200,7 @@ const SegmentedButtonItem = ({
           style={[
             styles.focusRing,
             borderRadius,
-            {
-              borderColor: colors.focusIndicator,
-            },
+            { borderColor: colors.focusIndicator },
           ]}
         />
       ) : null}
@@ -241,20 +212,9 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  focusedWrapper: {
-    zIndex: 1,
-  },
-  container: {
+  touchable: {
     width: '100%',
     justifyContent: 'center',
-  },
-  outline: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    pointerEvents: 'none',
   },
   focusRing: {
     position: 'absolute',

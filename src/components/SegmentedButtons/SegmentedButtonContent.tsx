@@ -64,15 +64,15 @@ const SegmentedButtonContent = ({
 
   return (
     <View style={styles.content}>
-      {showCheckIcon ? (
+      {showCheckIcon && (
         <AnimatedCheckIcon
           color={iconColor}
           opacity={iconOpacity}
           scale={checkmarkScale}
           testID={testID && `${testID}-check-icon`}
         />
-      ) : null}
-      {optionIcon ? (
+      )}
+      {optionIcon && (
         <AnimatedOptionIcon
           animated={Boolean(label && showSelectedCheck)}
           color={iconColor}
@@ -81,8 +81,8 @@ const SegmentedButtonContent = ({
           source={optionIcon}
           testID={testID && `${testID}-icon`}
         />
-      ) : null}
-      {label ? (
+      )}
+      {label && (
         <Text
           variant={SegmentedButtonTokens.labelTextType}
           style={[
@@ -98,7 +98,7 @@ const SegmentedButtonContent = ({
         >
           {label}
         </Text>
-      ) : null}
+      )}
     </View>
   );
 };
