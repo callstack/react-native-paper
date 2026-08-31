@@ -2,10 +2,10 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { buttonSizeTokens, type ButtonCornerKey } from './tokens';
+import { Tokens } from './tokens';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
-import { cornerFull } from '../../theme/tokens/sys/shape';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
@@ -30,9 +30,11 @@ export type ButtonLabelVariant =
 
 export type ButtonSizeStyle = {
   minHeight: number;
-  paddingHorizontal: number;
+  paddingStart: number;
+  paddingEnd: number;
   iconSize: number;
   iconGap: number;
+  outlineWidth: number;
   labelVariant: ButtonLabelVariant;
 };
 
@@ -41,12 +43,14 @@ export type ButtonSizeStyle = {
  * from the component tokens.
  */
 export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
-  const t = buttonSizeTokens[size];
+  const t = Tokens.sizes[size];
   return {
     minHeight: t.containerHeight,
-    paddingHorizontal: t.leadingSpace,
+    paddingStart: t.leadingSpace,
+    paddingEnd: t.trailingSpace,
     iconSize: t.iconSize,
     iconGap: t.iconLabelSpace,
+    outlineWidth: t.outlinedOutlineWidth,
     labelVariant: t.labelVariant,
   };
 };
@@ -54,34 +58,57 @@ export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
 export type ButtonShape = 'round' | 'square';
 
 /**
- * Resolves a shape key against the theme: `'full'` is the full-pill radius;
- * every other key maps to `theme.shapes.corner[key]`.
+ * A selected toggle contrasts with its unselected state by flipping the shape,
+ * so a selected `round` button renders square and vice versa.
  */
-export const resolveButtonCorner = (
-  theme: InternalTheme,
-  key: ButtonCornerKey
-): number => (key === 'full' ? cornerFull : theme.shapes.corner[key]);
+export const getEffectiveButtonShape = (
+  shape: ButtonShape,
+  selected?: boolean
+): ButtonShape => {
+  if (!selected) {
+    return shape;
+  }
+  return shape === 'round' ? 'square' : 'round';
+};
 
 /**
  * Corner radius for the requested shape, read from the component tokens and
  * resolved against the theme shape tokens. `round` is the full-pill radius;
- * `square` uses a per-size smaller corner.
+ * `square` uses a per-size smaller corner. A selected button resolves against
+ * the `selectedContainerShape*` token pair, after the shape flip above.
  */
 export const getButtonShapeRadius = ({
   size,
   shape,
   theme,
+  selected,
 }: {
   size: ButtonSize;
   shape: ButtonShape;
   theme: InternalTheme;
+  selected?: boolean;
 }): number => {
-  const key =
-    shape === 'round'
-      ? buttonSizeTokens[size].containerShapeRound
-      : buttonSizeTokens[size].containerShapeSquare;
-  return resolveButtonCorner(theme, key);
+  const t = Tokens.sizes[size];
+  const token =
+    getEffectiveButtonShape(shape, selected) === 'round'
+      ? selected
+        ? t.selectedContainerShapeRound
+        : t.containerShapeRound
+      : selected
+        ? t.selectedContainerShapeSquare
+        : t.containerShapeSquare;
+  return resolveCornerRadius(theme, token);
 };
+
+/** Corner the container morphs to while pressed. */
+export const getButtonPressedRadius = ({
+  size,
+  theme,
+}: {
+  size: ButtonSize;
+  theme: InternalTheme;
+}): number =>
+  resolveCornerRadius(theme, Tokens.sizes[size].pressedContainerShape);
 
 type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
@@ -220,12 +247,13 @@ const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
 const getButtonBorderWidth = ({
   isMode,
   selected,
-}: Omit<BaseProps, 'disabled' | 'theme'>) => {
+  size,
+}: Omit<BaseProps, 'disabled' | 'theme'> & { size: ButtonSize }) => {
   if (selected && isMode('outlined')) {
     return 0;
   }
   if (isMode('outlined')) {
-    return 1;
+    return Tokens.sizes[size].outlinedOutlineWidth;
   }
 
   return 0;
@@ -234,6 +262,7 @@ const getButtonBorderWidth = ({
 export const getButtonColors = ({
   theme,
   mode,
+  size = 'small',
   customButtonColor,
   customLabelColor,
   disabled,
@@ -242,6 +271,7 @@ export const getButtonColors = ({
 }: {
   theme: InternalTheme;
   mode: ButtonMode;
+  size?: ButtonSize;
   customButtonColor?: ColorValue;
   customLabelColor?: ColorValue;
   disabled?: boolean;
@@ -272,7 +302,7 @@ export const getButtonColors = ({
 
   const borderColor = getButtonBorderColor({ isMode, theme, selected });
 
-  const borderWidth = getButtonBorderWidth({ isMode, selected });
+  const borderWidth = getButtonBorderWidth({ isMode, selected, size });
 
   const labelOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 

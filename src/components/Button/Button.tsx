@@ -12,9 +12,11 @@ import type {
 
 import {
   getButtonColors,
+  getButtonPressedRadius,
   getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
+  getEffectiveButtonShape,
   getButtonTouchableRippleStyle,
 } from './utils';
 import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
@@ -283,15 +285,11 @@ const Button = ({
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
-  const effectiveShape: ButtonShape = selected
-    ? shape === 'round'
-      ? 'square'
-      : 'round'
-    : shape;
+  const effectiveShape = getEffectiveButtonShape(shape, selected);
   const sizeStyle = React.useMemo(() => getButtonSizeStyle(size), [size]);
 
-  // Shape morph: animate the corner on press (→ corner.small) and on the
-  // `selected`/shape toggle. Skipped when the user pins a radius via `style`.
+  // Shape morph: animate the corner on press (→ the pressed shape token) and on
+  // the `selected`/shape toggle. Skipped when the user pins a radius via `style`.
   const hasPinnedRadius = Object.keys(borderRadiusStyles).length > 0;
   const animateShape = !hasPinnedRadius;
   // `round` resolves to the `cornerFull` sentinel, so use the real pill radius
@@ -300,8 +298,8 @@ const Button = ({
   const restingRadius =
     effectiveShape === 'round'
       ? sizeStyle.minHeight / 2
-      : getButtonShapeRadius({ size, shape: effectiveShape, theme });
-  const pressedRadius = theme.shapes.corner.small;
+      : getButtonShapeRadius({ size, shape, theme, selected });
+  const pressedRadius = getButtonPressedRadius({ size, theme });
   const { current: animatedRadius } = React.useRef<Animated.Value>(
     new Animated.Value(restingRadius)
   );
@@ -415,11 +413,21 @@ const Button = ({
         customLabelColor,
         theme,
         mode,
+        size,
         disabled,
         dark,
         selected,
       }),
-    [customButtonColor, customLabelColor, theme, mode, disabled, dark, selected]
+    [
+      customButtonColor,
+      customLabelColor,
+      theme,
+      mode,
+      size,
+      disabled,
+      dark,
+      selected,
+    ]
   );
 
   const rippleColor = React.useMemo(
@@ -559,7 +567,8 @@ const Button = ({
             isTrailingIcon && styles.contentReverse,
             {
               minHeight: sizeStyle.minHeight,
-              paddingHorizontal: sizeStyle.paddingHorizontal,
+              paddingStart: sizeStyle.paddingStart,
+              paddingEnd: sizeStyle.paddingEnd,
               gap: sizeStyle.iconGap,
             },
             { opacity: labelOpacity },

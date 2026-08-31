@@ -114,7 +114,8 @@ exports[`renders menu with content styles 1`] = `
                   {
                     "gap": 8,
                     "minHeight": 40,
-                    "paddingHorizontal": 16,
+                    "paddingEnd": 16,
+                    "paddingStart": 16,
                   },
                   {
                     "opacity": 1,
@@ -682,7 +683,8 @@ exports[`renders not visible menu 1`] = `
                 {
                   "gap": 8,
                   "minHeight": 40,
-                  "paddingHorizontal": 16,
+                  "paddingEnd": 16,
+                  "paddingStart": 16,
                 },
                 {
                   "opacity": 1,
@@ -855,7 +857,8 @@ exports[`renders visible menu 1`] = `
                   {
                     "gap": 8,
                     "minHeight": 40,
-                    "paddingHorizontal": 16,
+                    "paddingEnd": 16,
+                    "paddingStart": 16,
                   },
                   {
                     "opacity": 1,

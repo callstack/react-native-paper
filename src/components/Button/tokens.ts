@@ -1,16 +1,5 @@
 import type { ButtonLabelVariant, ButtonSize } from './utils';
-
-/**
- * Shape keys for the button container corners. `'full'` resolves to the
- * full-pill radius (`cornerFull`); every other key resolves against
- * `theme.shapes.corner[key]`. Mirrors MD3 `ShapeKeyTokens`.
- */
-export type ButtonCornerKey =
-  | 'full'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extraLarge';
+import type { ShapeToken } from '../../theme/utils/shape';
 
 /**
  * Per-size component tokens for the Material Design 3 (expressive) button
@@ -18,7 +7,7 @@ export type ButtonCornerKey =
  * these here keeps every size-specific metric in one place and references the
  * theme shape tokens instead of magic numbers for the corner radii.
  */
-export type ButtonSizeTokens = {
+type ButtonSizeTokens = {
   containerHeight: number;
   iconSize: number;
   iconLabelSpace: number;
@@ -26,15 +15,15 @@ export type ButtonSizeTokens = {
   trailingSpace: number;
   outlinedOutlineWidth: number;
   labelVariant: ButtonLabelVariant;
-  containerShapeRound: ButtonCornerKey;
-  containerShapeSquare: ButtonCornerKey;
+  containerShapeRound: ShapeToken;
+  containerShapeSquare: ShapeToken;
   /** Corner the container morphs to while pressed (MD3: always `small`). */
-  pressedContainerShape: ButtonCornerKey;
-  selectedContainerShapeRound: ButtonCornerKey;
-  selectedContainerShapeSquare: ButtonCornerKey;
+  pressedContainerShape: ShapeToken;
+  selectedContainerShapeRound: ShapeToken;
+  selectedContainerShapeSquare: ShapeToken;
 };
 
-export const buttonSizeTokens: Record<ButtonSize, ButtonSizeTokens> = {
+const sizes = {
   'extra-small': {
     containerHeight: 32,
     iconSize: 20,
@@ -105,4 +94,6 @@ export const buttonSizeTokens: Record<ButtonSize, ButtonSizeTokens> = {
     selectedContainerShapeRound: 'full',
     selectedContainerShapeSquare: 'extraLarge',
   },
-};
+} as const satisfies Record<ButtonSize, ButtonSizeTokens>;
+
+export const Tokens = { sizes };

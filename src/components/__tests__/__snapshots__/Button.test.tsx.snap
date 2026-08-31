@@ -102,7 +102,8 @@ exports[`renders button with an accessibility hint 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -261,7 +262,8 @@ exports[`renders button with an accessibility label 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -419,7 +421,8 @@ exports[`renders button with button color 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -577,7 +580,8 @@ exports[`renders button with color 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -735,7 +739,8 @@ exports[`renders button with custom testID 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -893,7 +898,8 @@ exports[`renders button with icon 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -1084,7 +1090,8 @@ exports[`renders button with icon in reverse order 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -1296,7 +1303,8 @@ exports[`renders disabled button 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 0.38,
@@ -1454,7 +1462,8 @@ exports[`renders filled button by default 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -1612,7 +1621,8 @@ exports[`renders filled button with mode 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -1770,7 +1780,8 @@ exports[`renders loading button 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -2119,7 +2130,8 @@ exports[`renders outlined button with mode 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -2277,7 +2289,8 @@ exports[`renders text button with mode 1`] = `
             {
               "gap": 8,
               "minHeight": 40,
-              "paddingHorizontal": 16,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -2429,7 +2442,8 @@ exports[`size prop renders a button with per-size metrics 1`] = `
             {
               "gap": 8,
               "minHeight": 56,
-              "paddingHorizontal": 24,
+              "paddingEnd": 24,
+              "paddingStart": 24,
             },
             {
               "opacity": 1,

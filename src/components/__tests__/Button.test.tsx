@@ -731,27 +731,40 @@ describe('getButtonRippleColor', () => {
 const sizeMetrics: [
   size: ButtonSize,
   minHeight: number,
-  paddingHorizontal: number,
+  paddingStart: number,
+  paddingEnd: number,
   iconSize: number,
   iconGap: number,
+  outlineWidth: number,
   labelVariant: ButtonLabelVariant,
 ][] = [
-  ['extra-small', 32, 12, 20, 4, 'labelLarge'],
-  ['small', 40, 16, 20, 8, 'labelLarge'],
-  ['medium', 56, 24, 24, 8, 'titleMedium'],
-  ['large', 96, 48, 32, 12, 'headlineSmall'],
-  ['extra-large', 136, 64, 40, 16, 'headlineLarge'],
+  ['extra-small', 32, 12, 12, 20, 4, 1, 'labelLarge'],
+  ['small', 40, 16, 16, 20, 8, 1, 'labelLarge'],
+  ['medium', 56, 24, 24, 24, 8, 1, 'titleMedium'],
+  ['large', 96, 48, 48, 32, 12, 1, 'headlineSmall'],
+  ['extra-large', 136, 64, 64, 40, 16, 1, 'headlineLarge'],
 ];
 
 describe('getButtonSizeStyle', () => {
   it.each(sizeMetrics)(
     'returns expected metrics for %s',
-    (size, minHeight, paddingHorizontal, iconSize, iconGap, labelVariant) => {
+    (
+      size,
+      minHeight,
+      paddingStart,
+      paddingEnd,
+      iconSize,
+      iconGap,
+      outlineWidth,
+      labelVariant
+    ) => {
       expect(getButtonSizeStyle(size)).toEqual({
         minHeight,
-        paddingHorizontal,
+        paddingStart,
+        paddingEnd,
         iconSize,
         iconGap,
+        outlineWidth,
         labelVariant,
       });
     }
