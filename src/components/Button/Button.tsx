@@ -1,22 +1,16 @@
 import * as React from 'react';
-import {
-  AccessibilityRole,
-  Animated,
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
+  Role,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import {
-  ButtonMode,
-  ButtonShape,
-  ButtonSize,
   getButtonColors,
   getButtonIconStyle,
   getButtonRippleColor,
@@ -24,19 +18,19 @@ import {
   getButtonSizeStyle,
   getButtonTouchableRippleStyle,
 } from './utils';
+import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { $Omit, Theme, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
+import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<
@@ -84,8 +78,7 @@ export type Props = $Omit<
    * - The `shape` is flipped: `'round'` becomes `'square'` and vice versa.
    * - For `outlined` and `text` modes, the button adopts a filled
    *   `secondaryContainer` appearance (matches `tonal`).
-   * - `accessibilityState.selected` is set so screen readers announce the
-   *   toggle state.
+   * - `aria-selected` is set so screen readers announce the toggle state.
    *
    * Other modes only flip the shape.
    */
@@ -140,7 +133,7 @@ export type Props = $Omit<
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
@@ -148,7 +141,7 @@ export type Props = $Omit<
   /**
    * Accessibility role for the button. The "button" role is set by default.
    */
-  accessibilityRole?: AccessibilityRole;
+  role?: Role;
   /**
    * Function to execute on press.
    */
@@ -198,6 +191,7 @@ export type Props = $Omit<
    * Reference for the touchable
    */
   touchableRef?: React.RefObject<View>;
+  ref?: React.Ref<View>;
   /**
    * testID to be used on tests.
    */
@@ -235,46 +229,44 @@ const iconSize = 20;
 // than this and get expanded via hitSlop.
 const MIN_TOUCH_TARGET = 48;
 
-const Button = (
-  {
-    disabled,
-    compact,
-    mode = 'filled',
-    size,
-    shape,
-    selected,
-    dark,
-    loading,
-    icon,
-    iconPosition,
-    buttonColor: customButtonColor,
-    textColor: customLabelColor,
-    label,
-    children,
-    accessibilityLabel,
-    accessibilityHint,
-    accessibilityRole = 'button',
-    hitSlop,
-    onPress,
-    onPressIn,
-    onPressOut,
-    onLongPress,
-    delayLongPress,
-    style,
-    theme: themeOverrides,
-    uppercase: uppercaseProp,
-    contentStyle,
-    labelStyle,
-    testID = 'button',
-    accessible,
-    background,
-    rippleColor: customRippleColor,
-    maxFontSizeMultiplier,
-    touchableRef,
-    ...rest
-  }: Props,
-  ref: React.ForwardedRef<View>
-) => {
+const Button = ({
+  disabled,
+  compact,
+  mode = 'filled',
+  size,
+  shape,
+  selected,
+  dark,
+  loading,
+  icon,
+  iconPosition,
+  buttonColor: customButtonColor,
+  textColor: customLabelColor,
+  label,
+  children,
+  'aria-label': ariaLabel,
+  accessibilityHint,
+  role = 'button',
+  hitSlop,
+  onPress,
+  onPressIn,
+  onPressOut,
+  onLongPress,
+  delayLongPress,
+  style,
+  theme: themeOverrides,
+  uppercase: uppercaseProp,
+  contentStyle,
+  labelStyle,
+  testID = 'button',
+  accessible,
+  background,
+  rippleColor: customRippleColor,
+  maxFontSizeMultiplier,
+  touchableRef,
+  ref,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
@@ -334,6 +326,7 @@ const Button = (
   }, [isElevationEntitled, elevation]);
 
   const borderRadiusStyles = React.useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const [, radiusStyles] = splitStyles(
       flattenedStyles,
@@ -563,7 +556,7 @@ const Button = (
   const labelTypeStyle = React.useMemo(
     () => ({
       color: labelColor,
-      ...(theme as Theme).fonts[sizeStyle?.labelVariant ?? 'labelLarge'],
+      ...theme.fonts[sizeStyle?.labelVariant ?? 'labelLarge'],
     }),
     [labelColor, theme, sizeStyle]
   );
@@ -620,10 +613,11 @@ const Button = (
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={ariaLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={{ disabled, selected }}
+        role={role}
+        aria-disabled={disabled}
+        aria-selected={selected}
         accessible={accessible}
         hitSlop={hitSlopWithMinTarget}
         disabled={disabled}
@@ -686,10 +680,10 @@ const Button = (
               sizeStyle
                 ? styles.sizedLabel
                 : isMode('text')
-                ? icon || loading
-                  ? styles.legacyLabelTextAddons
-                  : styles.legacyLabelText
-                : styles.legacyLabel,
+                  ? icon || loading
+                    ? styles.legacyLabelTextAddons
+                    : styles.legacyLabelText
+                  : styles.legacyLabel,
               !sizeStyle && compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               labelTypeStyle,
@@ -751,4 +745,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default forwardRef(Button);
+export default Button;

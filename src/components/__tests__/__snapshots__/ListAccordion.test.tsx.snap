@@ -10,7 +10,6 @@ exports[`renders expanded accordion 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -40,6 +39,7 @@ exports[`renders expanded accordion 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -275,7 +275,6 @@ exports[`renders list accordion with children 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -305,6 +304,7 @@ exports[`renders list accordion with children 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -482,7 +482,6 @@ exports[`renders list accordion with custom title and description styles 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -512,6 +511,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -682,7 +682,6 @@ exports[`renders list accordion with left items 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -712,6 +711,7 @@ exports[`renders list accordion with left items 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -889,7 +889,6 @@ exports[`renders multiline list accordion 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -919,6 +918,7 @@ exports[`renders multiline list accordion 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {

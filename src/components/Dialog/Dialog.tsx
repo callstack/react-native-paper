@@ -1,11 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -15,9 +10,9 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import Modal from '../Modal';
-import { DialogChildProps } from './utils';
+import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -55,7 +50,7 @@ const DIALOG_ELEVATION: number = 24;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
- * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../../Portal) component.
+ * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
  * ## Usage
  * ```js
@@ -105,7 +100,7 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const borderRadius = (theme as Theme).shapes.corner.extraLarge;
+  const borderRadius = theme.shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 

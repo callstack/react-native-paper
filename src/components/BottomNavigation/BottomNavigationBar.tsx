@@ -1,13 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import type {
   ColorValue,
   EasingFunction,
-  Platform,
   StyleProp,
-  StyleSheet,
-  Pressable,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -19,16 +15,17 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 type BaseRoute = {
@@ -37,7 +34,10 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  accessibilityLabel?: string;
+  /**
+   * Accessibility label for the tab. This is read by the screen reader when the user focuses the tab.
+   */
+  'aria-label'?: string;
   testID?: string;
   lazy?: boolean;
 };
@@ -91,7 +91,7 @@ export type Props<Route extends BaseRoute> = {
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -134,7 +134,7 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` by default.
+   * Uses `route['aria-label']` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -241,7 +241,7 @@ const Touchable = <Route extends BaseRoute>({
  * import { useState } from 'react';
  * import { View } from 'react-native';
  * import { BottomNavigation, Text, Provider } from 'react-native-paper';
- * import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+ * import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
  *
  * function HomeScreen() {
  *   return (
@@ -308,8 +308,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
+  getAccessibilityLabel = ({ route }: { route: Route }) => route['aria-label'],
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -328,7 +327,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -434,8 +433,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
-    {}) as {
+  const {
+    backgroundColor: customBackground,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  } = (StyleSheet.flatten(style) || {}) as {
     elevation?: number;
     backgroundColor?: ColorValue;
   };
@@ -510,7 +511,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               maxWidth: maxTabBarWidth,
             },
           ]}
-          accessibilityRole={'tablist'}
+          role={'tablist'}
           testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
@@ -540,8 +541,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             const v3InactiveOpacity = shifting
               ? inactiveOpacity
               : focused
-              ? 0
-              : 1;
+                ? 0
+                : 1;
 
             // Scale horizontally the outline pill
             const outlineScale = focused
@@ -577,7 +578,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = (theme as Theme).fonts.labelMedium;
+            const font = theme.fonts.labelMedium;
 
             return renderTouchable({
               key: route.key,
@@ -588,9 +589,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
-              accessibilityLabel: getAccessibilityLabel({ route }),
-              accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
-              accessibilityState: { selected: focused },
+              'aria-label': getAccessibilityLabel({ route }),
+              role: Platform.OS === 'ios' ? 'button' : 'tab',
+              'aria-selected': focused,
               style: [styles.item, styles.v3Item],
               children: (
                 <View
@@ -645,6 +646,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         })
                       ) : (
                         <Icon
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                           source={route.focusedIcon as IconSource}
                           color={activeTintColor}
                           size={24}
@@ -673,7 +675,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           source={
                             route.unfocusedIcon !== undefined
                               ? route.unfocusedIcon
-                              : (route.focusedIcon as IconSource)
+                              : // focusedIcon is required when renderIcon is omitted.
+                                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                                (route.focusedIcon as IconSource)
                           }
                           color={inactiveTintColor}
                           size={24}
@@ -682,11 +686,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     </Animated.View>
                     <View style={[styles.badgeContainer, badgeStyle]}>
                       {typeof badge === 'boolean' ? (
-                        <Badge visible={badge} size={6} />
+                        <Badge visible={badge} />
                       ) : (
-                        <Badge visible={badge != null} size={16}>
-                          {badge}
-                        </Badge>
+                        <Badge visible={badge != null}>{badge}</Badge>
                       )}
                     </View>
                   </Animated.View>

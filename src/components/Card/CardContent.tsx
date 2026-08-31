@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Items inside the `Card.Content`.
    */
@@ -17,7 +18,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @internal
    */
-  siblings?: Array<string>;
+  siblings?: Array<string | null>;
   style?: StyleProp<ViewStyle>;
 };
 

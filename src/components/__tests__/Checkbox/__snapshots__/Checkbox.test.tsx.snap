@@ -3,7 +3,6 @@
 exports[`renders Checkbox with custom testID 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -22,6 +21,7 @@ exports[`renders Checkbox with custom testID 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
   focusable={true}
   onBlur={[Function]}
@@ -33,92 +33,154 @@ exports[`renders Checkbox with custom testID 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
   testID="custom:testID"
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      checkbox-marked
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "rgba(103, 80, 164, 1)",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "rgba(255, 255, 255, 1)",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -127,7 +189,6 @@ exports[`renders Checkbox with custom testID 1`] = `
 exports[`renders checked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -146,8 +207,8 @@ exports[`renders checked Checkbox with color 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
-  color="red"
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -158,91 +219,153 @@ exports[`renders checked Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "red",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      checkbox-marked
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "red",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "red",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "rgba(255, 255, 255, 1)",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -251,7 +374,6 @@ exports[`renders checked Checkbox with color 1`] = `
 exports[`renders checked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -270,6 +392,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
   focusable={true}
   onBlur={[Function]}
@@ -281,91 +404,153 @@ exports[`renders checked Checkbox with onPress 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      checkbox-marked
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "rgba(103, 80, 164, 1)",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "rgba(255, 255, 255, 1)",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -374,11 +559,10 @@ exports[`renders checked Checkbox with onPress 1`] = `
 exports[`renders indeterminate Checkbox 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
-      "checked": false,
+      "checked": "mixed",
       "disabled": false,
       "expanded": undefined,
       "selected": undefined,
@@ -393,6 +577,7 @@ exports[`renders indeterminate Checkbox 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
   focusable={true}
   onBlur={[Function]}
@@ -404,91 +589,140 @@ exports[`renders indeterminate Checkbox 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      minus-box
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 1,
+                  "height": 2,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(255, 255, 255, 1)",
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -497,11 +731,10 @@ exports[`renders indeterminate Checkbox 1`] = `
 exports[`renders indeterminate Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
-      "checked": false,
+      "checked": "mixed",
       "disabled": true,
       "expanded": undefined,
       "selected": undefined,
@@ -516,8 +749,8 @@ exports[`renders indeterminate Checkbox with color 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
-  color="red"
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -528,91 +761,140 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      minus-box
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "red",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 1,
+                  "height": 2,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(255, 255, 255, 1)",
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -621,7 +903,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -640,8 +921,8 @@ exports[`renders unchecked Checkbox with color 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
-  color="red"
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -652,91 +933,153 @@ exports[`renders unchecked Checkbox with color 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "red",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      checkbox-marked
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "red",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "red",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 1,
+              "width": 18,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "rgba(255, 255, 255, 1)",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -745,7 +1088,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -764,6 +1106,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
     }
   }
   accessible={true}
+  centered={true}
   collapsable={false}
   focusable={true}
   onBlur={[Function]}
@@ -775,91 +1118,153 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "height": 36,
-        "padding": 6,
-        "width": 36,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
   <View
-    collapsable={false}
+    pointerEvents="none"
     style={
       {
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
       }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      checkbox-blank-outline
-    </Text>
     <View
       style={
         [
           {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
           },
           {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "opacity": 1,
           },
         ]
       }
     >
       <View
-        collapsable={false}
+        pointerEvents="none"
         style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderWidth": 0,
-            "height": 14,
-            "width": 14,
-          }
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
         }
       />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "opacity": 0,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 0,
+              "width": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "transparent",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
     </View>
   </View>
 </View>

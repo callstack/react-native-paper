@@ -1,16 +1,14 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import type { ParamListBase } from '@react-navigation/native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { DataTable } from 'react-native-paper';
 
-import { teamsList } from '../../utils';
+import { teamsList, type colorThemes } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Props = NativeStackScreenProps<ParamListBase>;
+const TeamsList = () => {
+  const navigation = useNavigation('TeamsList');
 
-const TeamsList = ({ navigation }: Props) => {
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <DataTable>
@@ -25,10 +23,13 @@ const TeamsList = ({ navigation }: Props) => {
           <DataTable.Row
             key={item.key}
             onPress={() =>
-              navigation.navigate('teamDetails', {
-                sourceColor: item.name.split(' ')[1].toLowerCase(),
+              navigation.navigate('TeamDetails', {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                sourceColor: item.name
+                  .split(' ')[1]
+                  .toLowerCase() as keyof typeof colorThemes,
                 headerTitle: item.name,
-                darkMode: item.darkMode,
+                darkMode: item.darkMode ?? false,
               })
             }
           >

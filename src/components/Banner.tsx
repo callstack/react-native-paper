@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
-import Icon, { IconSource } from './Icon';
+import Icon from './Icon';
+import type { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
@@ -131,7 +133,7 @@ const Banner = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -230,8 +232,8 @@ const Banner = ({
                   color: colors.onSurface,
                 },
               ]}
-              accessibilityLiveRegion={visible ? 'polite' : 'none'}
-              accessibilityRole="alert"
+              aria-live={visible ? 'polite' : 'off'}
+              role="alert"
               maxFontSizeMultiplier={maxFontSizeMultiplier}
             >
               {children}
@@ -240,7 +242,7 @@ const Banner = ({
           <View style={styles.actions}>
             {actions.map(({ label, ...others }, i) => (
               <Button
-                key={/* eslint-disable-line react/no-array-index-key */ i}
+                key={i}
                 compact
                 mode="text"
                 style={styles.button}

@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Easing, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
@@ -19,7 +13,7 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -164,7 +158,9 @@ const Snackbar = ({
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
-  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+  const hideTimeout = React.useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  );
 
   const [hidden, setHidden] = React.useState(!visible);
 
@@ -185,10 +181,7 @@ const Snackbar = ({
           duration === Number.NEGATIVE_INFINITY;
 
         if (!isInfinity) {
-          hideTimeout.current = setTimeout(
-            onDismiss,
-            duration
-          ) as unknown as NodeJS.Timeout;
+          hideTimeout.current = setTimeout(onDismiss, duration);
         }
       }
     });
@@ -236,7 +229,7 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   if (hidden) {
     return null;
@@ -290,13 +283,13 @@ const Snackbar = ({
     >
       <Surface
         pointerEvents="box-none"
-        accessibilityLiveRegion="polite"
+        aria-live="polite"
         theme={theme}
         style={[
           styles.container,
           {
             backgroundColor,
-            borderRadius: (theme as Theme).shapes.corner.extraSmall,
+            borderRadius: theme.shapes.corner.extraSmall,
             opacity: opacity,
             transform: [
               {
@@ -336,7 +329,7 @@ const Snackbar = ({
             ) : null}
             {isIconButton ? (
               <IconButton
-                accessibilityRole="button"
+                role="button"
                 borderless
                 onPress={onIconPress}
                 iconColor={colors.inverseOnSurface}
@@ -354,7 +347,7 @@ const Snackbar = ({
                     );
                   })
                 }
-                accessibilityLabel={iconAccessibilityLabel}
+                aria-label={iconAccessibilityLabel}
                 style={styles.icon}
                 testID={`${testID}-icon`}
               />

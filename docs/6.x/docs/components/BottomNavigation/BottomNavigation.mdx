@@ -1,0 +1,308 @@
+---
+title: BottomNavigation
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
+It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
+
+By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/bottom-navigation.gif"}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { BottomNavigation, Text } from 'react-native-paper';
+
+const MusicRoute = () => <Text>Music</Text>;
+
+const AlbumsRoute = () => <Text>Albums</Text>;
+
+const RecentsRoute = () => <Text>Recents</Text>;
+
+const NotificationsRoute = () => <Text>Notifications</Text>;
+
+const MyComponent = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},
+    { key: 'albums', title: 'Albums', focusedIcon: 'album' },
+    { key: 'recents', title: 'Recents', focusedIcon: 'history' },
+    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    music: MusicRoute,
+    albums: AlbumsRoute,
+    recents: RecentsRoute,
+    notifications: NotificationsRoute,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
+  );
+};
+
+export default MyComponent;
+```
+
+
+  ## Props
+  <span />
+
+
+
+<div>
+
+### shifting
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="shifting" />
+
+<div>
+
+### labeled
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="labeled" />
+
+<div>
+
+### compact
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="compact" />
+
+<div>
+
+### navigationState (required)
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="navigationState" />
+
+<div>
+
+### onIndexChange (required)
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onIndexChange" />
+
+<div>
+
+### renderScene (required)
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderScene" />
+
+<div>
+
+### renderIcon
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderIcon" />
+
+<div>
+
+### renderLabel
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderLabel" />
+
+<div>
+
+### renderTouchable
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="renderTouchable" />
+
+<div>
+
+### getAccessibilityLabel
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getAccessibilityLabel" />
+
+<div>
+
+### getBadge
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getBadge" />
+
+<div>
+
+### getLabelText
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getLabelText" />
+
+<div>
+
+### getLazy
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getLazy" />
+
+<div>
+
+### getTestID
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="getTestID" />
+
+<div>
+
+### onTabPress
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onTabPress" />
+
+<div>
+
+### onTabLongPress
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="onTabLongPress" />
+
+<div>
+
+### activeColor
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="activeColor" />
+
+<div>
+
+### inactiveColor
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="inactiveColor" />
+
+<div>
+
+### sceneAnimationEnabled
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationEnabled" />
+
+<div>
+
+### sceneAnimationType
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationType" />
+
+<div>
+
+### sceneAnimationEasing
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="sceneAnimationEasing" />
+
+<div>
+
+### keyboardHidesNavigationBar
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="keyboardHidesNavigationBar" />
+
+<div>
+
+### safeAreaInsets
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="safeAreaInsets" />
+
+<div>
+
+### barStyle
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="barStyle" />
+
+<div>
+
+### labelMaxFontSizeMultiplier
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="labelMaxFontSizeMultiplier" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="style" />
+
+<div>
+
+### activeIndicatorStyle
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="activeIndicatorStyle" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="theme" />
+
+<div>
+
+### testID
+
+</div>
+
+  <PropTable componentLink="BottomNavigation/BottomNavigation" prop="testID" />
+
+
+
+<span />
+
+<span />
+
+<span />

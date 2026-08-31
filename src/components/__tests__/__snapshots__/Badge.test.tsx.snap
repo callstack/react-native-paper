@@ -2,48 +2,75 @@
 
 exports[`renders badge 1`] = `
 <Text
-  collapsable={false}
+  allowFontScaling={false}
   numberOfLines={1}
   style={
-    {
-      "alignSelf": "flex-end",
-      "backgroundColor": "rgba(179, 38, 30, 1)",
-      "borderRadius": 10,
-      "color": "rgba(255, 255, 255, 1)",
-      "fontSize": 10,
-      "height": 20,
-      "lineHeight": 20,
-      "minWidth": 20,
-      "opacity": 1,
-      "overflow": "hidden",
-      "paddingHorizontal": 3,
-      "textAlign": "center",
-      "textAlignVertical": "center",
-    }
+    [
+      {
+        "alignSelf": "flex-end",
+        "overflow": "hidden",
+        "textAlign": "center",
+        "textAlignVertical": "center",
+      },
+      {
+        "opacity": 1,
+        "transitionDuration": 150,
+        "transitionProperty": "opacity",
+      },
+      {
+        "backgroundColor": "rgba(179, 38, 30, 1)",
+        "borderRadius": 9999,
+        "color": "rgba(255, 255, 255, 1)",
+        "height": 6,
+        "minWidth": 6,
+      },
+      false,
+      undefined,
+    ]
   }
 />
 `;
 
 exports[`renders badge as hidden 1`] = `
 <Text
-  collapsable={false}
+  allowFontScaling={false}
   numberOfLines={1}
   style={
-    {
-      "alignSelf": "flex-end",
-      "backgroundColor": "rgba(179, 38, 30, 1)",
-      "borderRadius": 6,
-      "color": "rgba(255, 255, 255, 1)",
-      "fontSize": 6,
-      "height": 12,
-      "lineHeight": 12,
-      "minWidth": 12,
-      "opacity": 0,
-      "overflow": "hidden",
-      "paddingHorizontal": 3,
-      "textAlign": "center",
-      "textAlignVertical": "center",
-    }
+    [
+      {
+        "alignSelf": "flex-end",
+        "overflow": "hidden",
+        "textAlign": "center",
+        "textAlignVertical": "center",
+      },
+      {
+        "opacity": 0,
+        "transitionDuration": 150,
+        "transitionProperty": "opacity",
+      },
+      {
+        "backgroundColor": "rgba(179, 38, 30, 1)",
+        "borderRadius": 9999,
+        "color": "rgba(255, 255, 255, 1)",
+        "height": 16,
+        "minWidth": 16,
+      },
+      [
+        {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        {
+          "lineHeight": 16,
+          "maxWidth": 36,
+          "paddingHorizontal": 4,
+        },
+      ],
+      undefined,
+    ]
   }
 >
   3
@@ -52,50 +79,46 @@ exports[`renders badge as hidden 1`] = `
 
 exports[`renders badge in different color 1`] = `
 <Text
-  collapsable={false}
+  allowFontScaling={false}
   numberOfLines={1}
   style={
-    {
-      "alignSelf": "flex-end",
-      "backgroundColor": "#f44336",
-      "borderRadius": 10,
-      "color": "rgba(255, 255, 255, 1)",
-      "fontSize": 10,
-      "height": 20,
-      "lineHeight": 20,
-      "minWidth": 20,
-      "opacity": 1,
-      "overflow": "hidden",
-      "paddingHorizontal": 3,
-      "textAlign": "center",
-      "textAlignVertical": "center",
-    }
-  }
->
-  3
-</Text>
-`;
-
-exports[`renders badge in different size 1`] = `
-<Text
-  collapsable={false}
-  numberOfLines={1}
-  style={
-    {
-      "alignSelf": "flex-end",
-      "backgroundColor": "rgba(179, 38, 30, 1)",
-      "borderRadius": 6,
-      "color": "rgba(255, 255, 255, 1)",
-      "fontSize": 6,
-      "height": 12,
-      "lineHeight": 12,
-      "minWidth": 12,
-      "opacity": 1,
-      "overflow": "hidden",
-      "paddingHorizontal": 3,
-      "textAlign": "center",
-      "textAlignVertical": "center",
-    }
+    [
+      {
+        "alignSelf": "flex-end",
+        "overflow": "hidden",
+        "textAlign": "center",
+        "textAlignVertical": "center",
+      },
+      {
+        "opacity": 1,
+        "transitionDuration": 150,
+        "transitionProperty": "opacity",
+      },
+      {
+        "backgroundColor": "rgba(179, 38, 30, 1)",
+        "borderRadius": 9999,
+        "color": "rgba(255, 255, 255, 1)",
+        "height": 16,
+        "minWidth": 16,
+      },
+      [
+        {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        {
+          "lineHeight": 16,
+          "maxWidth": 36,
+          "paddingHorizontal": 4,
+        },
+      ],
+      {
+        "backgroundColor": "#f44336",
+      },
+    ]
   }
 >
   3
@@ -104,24 +127,44 @@ exports[`renders badge in different size 1`] = `
 
 exports[`renders badge with content 1`] = `
 <Text
-  collapsable={false}
+  allowFontScaling={false}
   numberOfLines={1}
   style={
-    {
-      "alignSelf": "flex-end",
-      "backgroundColor": "rgba(179, 38, 30, 1)",
-      "borderRadius": 10,
-      "color": "rgba(255, 255, 255, 1)",
-      "fontSize": 10,
-      "height": 20,
-      "lineHeight": 20,
-      "minWidth": 20,
-      "opacity": 1,
-      "overflow": "hidden",
-      "paddingHorizontal": 3,
-      "textAlign": "center",
-      "textAlignVertical": "center",
-    }
+    [
+      {
+        "alignSelf": "flex-end",
+        "overflow": "hidden",
+        "textAlign": "center",
+        "textAlignVertical": "center",
+      },
+      {
+        "opacity": 1,
+        "transitionDuration": 150,
+        "transitionProperty": "opacity",
+      },
+      {
+        "backgroundColor": "rgba(179, 38, 30, 1)",
+        "borderRadius": 9999,
+        "color": "rgba(255, 255, 255, 1)",
+        "height": 16,
+        "minWidth": 16,
+      },
+      [
+        {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        {
+          "lineHeight": 16,
+          "maxWidth": 36,
+          "paddingHorizontal": 4,
+        },
+      ],
+      undefined,
+    ]
   }
 >
   3

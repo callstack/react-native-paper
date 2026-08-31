@@ -5,8 +5,9 @@ import { LightTheme } from './LightTheme';
 import { Palette } from '../tokens';
 import type { Theme, ThemeColors } from '../types';
 
-const apiLevel = Platform.Version as number;
+const apiLevel = Platform.OS === 'android' ? Platform.Version : null;
 
+// eslint-disable-next-line @react-native/platform-colors
 const ac = (name: string) => PlatformColor(`@android:color/${name}`);
 
 /**
@@ -20,11 +21,11 @@ const ac = (name: string) => PlatformColor(`@android:color/${name}`);
  * @see https://github.com/material-components/material-components-android/blob/master/docs/theming/Color.md
  */
 const pick = (api34: string, api31: string | null, ref: string): ColorValue =>
-  apiLevel >= 34
+  apiLevel != null && apiLevel >= 34
     ? ac(api34)
-    : apiLevel >= 31 && api31 !== null
-    ? ac(api31)
-    : ref;
+    : apiLevel != null && apiLevel >= 31 && api31 !== null
+      ? ac(api31)
+      : ref;
 
 // Known limitation: surface/container roles on API 31-33 use
 // @color/m3_ref_palette_dynamic_neutral_variant* (MCL resources that require a
@@ -467,10 +468,10 @@ function buildDynamicColors(scheme: 'light' | 'dark'): Partial<ThemeColors> {
       role,
       pick(api34, api31, ref),
     ])
-  ) as Partial<ThemeColors>;
+  );
 }
 
-export const isDynamicColorSupported = apiLevel >= 31;
+export const isDynamicColorSupported = apiLevel != null && apiLevel >= 31;
 
 const lightDynamicColors = isDynamicColorSupported
   ? buildDynamicColors('light')

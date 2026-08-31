@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders portal with siblings 1`] = `
-[
+<>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -14,7 +14,7 @@ exports[`renders portal with siblings 1`] = `
     <Text>
       Outside content
     </Text>
-  </View>,
+  </View>
   <View
     collapsable={false}
     pointerEvents="box-none"
@@ -33,6 +33,6 @@ exports[`renders portal with siblings 1`] = `
     >
       Portal content
     </Text>
-  </View>,
-]
+  </View>
+</>
 `;

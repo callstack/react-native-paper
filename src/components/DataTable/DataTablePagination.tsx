@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -10,7 +11,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> &
+export type Props = ViewProps &
   PaginationControlsProps &
   PaginationDropdownProps & {
     /**
@@ -28,7 +29,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> &
     /**
      * AccessibilityLabel for `label`.
      */
-    accessibilityLabel?: string;
+    'aria-label'?: string;
     style?: StyleProp<ViewStyle>;
     /**
      * @optional
@@ -105,7 +106,7 @@ const PaginationControls = ({
           iconColor={textColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
-          accessibilityLabel="page-first"
+          aria-label="page-first"
           theme={theme}
         />
       ) : null}
@@ -121,7 +122,7 @@ const PaginationControls = ({
         iconColor={textColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
-        accessibilityLabel="chevron-left"
+        aria-label="chevron-left"
         theme={theme}
       />
       <IconButton
@@ -136,7 +137,7 @@ const PaginationControls = ({
         iconColor={textColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
-        accessibilityLabel="chevron-right"
+        aria-label="chevron-right"
         theme={theme}
       />
       {showFastPaginationControls ? (
@@ -152,7 +153,7 @@ const PaginationControls = ({
           iconColor={textColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
-          accessibilityLabel="page-last"
+          aria-label="page-last"
           theme={theme}
         />
       ) : null}
@@ -264,7 +265,7 @@ const PaginationDropdown = ({
  */
 const DataTablePagination = ({
   label,
-  accessibilityLabel,
+  'aria-label': accessibilityLabel,
   page,
   numberOfPages,
   onPageChange,
@@ -285,19 +286,21 @@ const DataTablePagination = ({
     <View
       {...rest}
       style={[styles.container, style]}
-      accessibilityLabel="pagination-container"
+      aria-label="pagination-container"
     >
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
           <View
-            accessibilityLabel="Options Select"
+            aria-label="Options Select"
+            testID="options-select"
             style={styles.optionsContainer}
           >
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
-              accessibilityLabel={
+              testID="select-page-dropdown-label"
+              aria-label={
                 selectPageDropdownAccessibilityLabel ||
                 'selectPageDropdownLabel'
               }
@@ -315,7 +318,7 @@ const DataTablePagination = ({
       <Text
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
-        accessibilityLabel={accessibilityLabel || 'label'}
+        aria-label={accessibilityLabel || 'label'}
       >
         {label}
       </Text>

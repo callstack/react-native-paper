@@ -26,7 +26,7 @@ exports[`allows customizing Route's type via generics 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -66,7 +66,9 @@ exports[`allows customizing Route's type via generics 1`] = `
           }
         }
       >
-        First
+        <Text>
+          First
+        </Text>
       </View>
     </View>
   </View>
@@ -120,7 +122,7 @@ exports[`allows customizing Route's type via generics 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -136,7 +138,6 @@ exports[`allows customizing Route's type via generics 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -166,6 +167,7 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -261,24 +263,31 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -407,7 +416,6 @@ exports[`allows customizing Route's type via generics 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -437,6 +445,7 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -515,24 +524,31 @@ exports[`allows customizing Route's type via generics 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -693,7 +709,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -733,7 +749,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -787,7 +805,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -803,7 +821,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -833,6 +850,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -989,24 +1007,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1014,7 +1039,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1044,6 +1068,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1183,24 +1208,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1208,7 +1240,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1238,6 +1269,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1377,24 +1409,31 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1434,7 +1473,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -1474,7 +1513,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -1528,7 +1569,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -1544,7 +1585,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1574,6 +1614,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1730,24 +1771,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1755,7 +1803,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1785,6 +1832,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1924,24 +1972,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -1949,7 +2004,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1979,6 +2033,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -2118,24 +2173,31 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -2175,7 +2237,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -2215,11 +2277,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2259,11 +2323,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 1
+        <Text>
+          Route: 1
+        </Text>
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2303,11 +2369,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 3
+        <Text>
+          Route: 3
+        </Text>
       </View>
     </View>
     <View
-      accessibilityElementsHidden={true}
+      aria-hidden={true}
       collapsable={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
@@ -2347,7 +2415,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
           }
         }
       >
-        Route: 4
+        <Text>
+          Route: 4
+        </Text>
       </View>
     </View>
   </View>
@@ -2401,7 +2471,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -2417,7 +2487,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -2447,6 +2516,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -2602,24 +2672,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -2748,7 +2825,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -2778,6 +2854,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -2916,24 +2993,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3062,7 +3146,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3092,6 +3175,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3230,24 +3314,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3376,7 +3467,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3406,6 +3496,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3544,24 +3635,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -3690,7 +3788,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -3720,6 +3817,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -3858,24 +3956,31 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4036,7 +4141,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -4076,7 +4181,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -4130,7 +4237,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -4146,7 +4253,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4176,6 +4282,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4336,24 +4443,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4426,7 +4540,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4456,6 +4569,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4599,24 +4713,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4689,7 +4810,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4719,6 +4839,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -4862,24 +4983,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -4952,7 +5080,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -4982,6 +5109,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5125,24 +5253,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5215,7 +5350,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5245,6 +5379,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5388,24 +5523,31 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5510,7 +5652,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -5550,7 +5692,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -5604,7 +5748,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -5620,7 +5764,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5650,6 +5793,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5745,24 +5889,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5789,11 +5940,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -5808,17 +5963,20 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -5848,6 +6006,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -5926,24 +6085,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -5970,11 +6136,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -5989,17 +6159,20 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6029,6 +6202,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6107,24 +6281,31 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6151,11 +6332,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
                 <View
                   collapsable={false}
@@ -6170,11 +6355,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -6212,7 +6401,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -6252,7 +6441,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -6306,7 +6497,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -6322,7 +6513,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6352,6 +6542,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6452,24 +6643,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6496,17 +6694,20 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(29, 27, 32, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      }
+                    }
                   >
                     Route: 0
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6536,6 +6737,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6619,24 +6821,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6663,17 +6872,20 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 1
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6703,6 +6915,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6786,24 +6999,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6830,17 +7050,20 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 2
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -6870,6 +7093,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -6953,24 +7177,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -6997,17 +7228,20 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 3
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7037,6 +7271,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7120,24 +7355,31 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7164,11 +7406,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <text
-                    color="rgba(73, 69, 79, 1)"
+                  <Text
+                    style={
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      }
+                    }
                   >
                     Route: 4
-                  </text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -7206,7 +7452,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -7246,7 +7492,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -7300,7 +7548,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -7316,7 +7564,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7346,6 +7593,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7501,24 +7749,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7647,7 +7902,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7677,6 +7931,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -7815,24 +8070,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -7961,7 +8223,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -7991,6 +8252,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8129,24 +8391,31 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8307,7 +8576,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -8347,7 +8616,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -8401,7 +8672,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -8417,7 +8688,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8447,6 +8717,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8607,24 +8878,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8697,7 +8975,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8727,6 +9004,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -8870,24 +9148,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -8960,7 +9245,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -8990,6 +9274,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -9133,24 +9418,31 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -9255,7 +9547,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -9295,7 +9587,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -9349,7 +9643,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -9365,7 +9659,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -9395,6 +9688,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -9550,24 +9844,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -9696,7 +9997,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -9726,6 +10026,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -9864,24 +10165,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10010,7 +10318,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10040,6 +10347,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10178,24 +10486,31 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10356,7 +10671,7 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
-      accessibilityElementsHidden={false}
+      aria-hidden={false}
       collapsable={false}
       importantForAccessibility="auto"
       pointerEvents="auto"
@@ -10396,7 +10711,9 @@ exports[`renders shifting bottom navigation 1`] = `
           }
         }
       >
-        Route: 0
+        <Text>
+          Route: 0
+        </Text>
       </View>
     </View>
   </View>
@@ -10450,7 +10767,7 @@ exports[`renders shifting bottom navigation 1`] = `
         testID="bottom-navigation-bar-content"
       >
         <View
-          accessibilityRole="tablist"
+          role="tablist"
           style={
             [
               {
@@ -10466,7 +10783,6 @@ exports[`renders shifting bottom navigation 1`] = `
           testID="bottom-navigation-bar-content-wrapper"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10496,6 +10812,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10656,24 +10973,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -10746,7 +11070,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -10776,6 +11099,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -10919,24 +11243,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11009,7 +11340,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11039,6 +11369,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11182,24 +11513,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11272,7 +11610,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11302,6 +11639,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11445,24 +11783,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>
@@ -11535,7 +11880,6 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -11565,6 +11909,7 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -11708,24 +12053,31 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <Text
-                    collapsable={false}
+                    allowFontScaling={false}
                     numberOfLines={1}
                     style={
-                      {
-                        "alignSelf": "flex-end",
-                        "backgroundColor": "rgba(179, 38, 30, 1)",
-                        "borderRadius": 8,
-                        "color": "rgba(255, 255, 255, 1)",
-                        "fontSize": 8,
-                        "height": 16,
-                        "lineHeight": 16,
-                        "minWidth": 16,
-                        "opacity": 0,
-                        "overflow": "hidden",
-                        "paddingHorizontal": 3,
-                        "textAlign": "center",
-                        "textAlignVertical": "center",
-                      }
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 0,
+                          "transitionDuration": 150,
+                          "transitionProperty": "opacity",
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
                     }
                   />
                 </View>

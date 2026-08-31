@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  Text as NativeText,
-  TextStyle,
-} from 'react-native';
+import type { ReactNode } from 'react';
+import { StyleSheet, Text as NativeText } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**
@@ -35,11 +30,12 @@ export type Props<T> = React.ComponentProps<typeof NativeText> & {
   children: React.ReactNode;
   theme?: ThemeProp;
   style?: StyleProp<TextStyle>;
+  ref?: React.Ref<TextRef>;
 };
 
-export type TextRef = React.ForwardedRef<{
+export type TextRef = {
   setNativeProps(args: Object): void;
-}>;
+};
 
 // @component-group Typography
 
@@ -80,10 +76,13 @@ export type TextRef = React.ForwardedRef<{
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-const Text = (
-  { style, variant, theme: initialTheme, ...rest }: Props<string>,
-  ref: TextRef
-) => {
+const Text = ({
+  style,
+  variant,
+  theme: initialTheme,
+  ref,
+  ...rest
+}: Props<string>) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
@@ -98,12 +97,13 @@ const Text = (
     let textStyle = [font, style];
 
     if (
-      React.isValidElement(rest.children) &&
+      React.isValidElement<{
+        variant?: string;
+        style?: StyleProp<TextStyle>;
+      }>(rest.children) &&
       (rest.children.type === Component || rest.children.type === AnimatedText)
     ) {
-      const { props } = rest.children as {
-        props: { variant?: string; style?: StyleProp<TextStyle> };
-      };
+      const { props } = rest.children;
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
@@ -116,7 +116,11 @@ const Text = (
       // Solution:  To address the following scenario, the code below overrides the `variant`
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
-        font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
+        font =
+          theme.fonts[
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+            props.variant as VariantProp<typeof props.variant>
+          ];
         textStyle = [style, font];
       }
 
@@ -173,12 +177,12 @@ const styles = StyleSheet.create({
   },
 });
 
-type TextComponent<T> = (
-  props: Props<T> & { ref?: React.RefObject<TextRef> }
-) => ReactNode;
+type TextComponent<T> = (props: Props<T>) => ReactNode;
 
-const Component = forwardRef(Text) as TextComponent<never>;
+const Component = Text as TextComponent<never>;
 
-export const customText = <T,>() => Component as unknown as TextComponent<T>;
+export const customText = <T,>() =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  Component as unknown as TextComponent<T>;
 
 export default Component;

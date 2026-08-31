@@ -41,7 +41,6 @@ exports[`renders chip with close button 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -71,6 +70,7 @@ exports[`renders chip with close button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -214,7 +214,6 @@ exports[`renders chip with close button 1`] = `
     >
       <View
         accessibilityLabel="Close"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -244,6 +243,7 @@ exports[`renders chip with close button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
       >
         <View
           style={
@@ -339,7 +339,6 @@ exports[`renders chip with custom close button 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -369,6 +368,7 @@ exports[`renders chip with custom close button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -512,7 +512,6 @@ exports[`renders chip with custom close button 1`] = `
     >
       <View
         accessibilityLabel="Close"
-        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -542,6 +541,7 @@ exports[`renders chip with custom close button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        role="button"
       >
         <View
           style={
@@ -637,7 +637,6 @@ exports[`renders chip with icon 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -667,6 +666,7 @@ exports[`renders chip with icon 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -842,7 +842,6 @@ exports[`renders chip with onPress 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -872,6 +871,7 @@ exports[`renders chip with onPress 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1002,7 +1002,6 @@ exports[`renders outlined disabled chip 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1032,6 +1031,7 @@ exports[`renders outlined disabled chip 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1162,7 +1162,6 @@ exports[`renders selected chip 1`] = `
     testID="chip-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1192,6 +1191,7 @@ exports[`renders selected chip 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {

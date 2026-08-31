@@ -1,19 +1,11 @@
 import * as React from 'react';
-import {
-  Animated,
-  ColorValue,
-  Easing,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * Whether to show the indicator or hide it.
    */
@@ -138,8 +130,8 @@ const ActivityIndicator = ({
         ? 24
         : 48
       : indicatorSize
-      ? indicatorSize
-      : 24;
+        ? indicatorSize
+        : 24;
 
   const frames = (60 * DURATION) / 1000;
   const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
@@ -154,8 +146,8 @@ const ActivityIndicator = ({
       style={[styles.container, style]}
       {...rest}
       accessible
-      accessibilityRole="progressbar"
-      accessibilityState={{ busy: animating }}
+      role="progressbar"
+      aria-busy={animating}
     >
       <Animated.View
         style={[{ width: size, height: size, opacity: fade }]}

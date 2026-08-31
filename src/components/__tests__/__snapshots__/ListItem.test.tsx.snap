@@ -157,7 +157,6 @@ exports[`renders list item with custom description 1`] = `
               testID="chip-container"
             >
               <View
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -187,6 +186,7 @@ exports[`renders list item with custom description 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {

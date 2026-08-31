@@ -11,7 +11,6 @@ import type {
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
-import { forwardRef } from '../../utils/forwardRef';
 
 export type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
@@ -32,13 +31,13 @@ export type Props = $Omit<
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -58,16 +57,18 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-const AppbarBackAction = forwardRef<View, Props>(
-  ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
-    <AppbarAction
-      accessibilityLabel={accessibilityLabel}
-      {...rest}
-      icon={AppbarBackIcon}
-      isLeading
-      ref={ref}
-    />
-  )
+const AppbarBackAction = ({
+  'aria-label': ariaLabel = 'Back',
+  ref,
+  ...rest
+}: Props) => (
+  <AppbarAction
+    aria-label={ariaLabel}
+    {...rest}
+    icon={AppbarBackIcon}
+    isLeading
+    ref={ref}
+  />
 );
 
 AppbarBackAction.displayName = 'Appbar.BackAction';

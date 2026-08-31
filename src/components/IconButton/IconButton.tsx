@@ -1,21 +1,19 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -61,7 +59,7 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width or to set a custom padding`.
@@ -72,7 +70,7 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
   /**
    * TestID used for testing purposes
    */
@@ -109,119 +107,112 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-const IconButton = forwardRef<View, Props>(
-  (
-    {
-      icon,
-      iconColor: customIconColor,
-      containerColor: customContainerColor,
-      size = 24,
-      accessibilityLabel,
-      disabled,
-      onPress,
-      selected = false,
-      animated = false,
-      mode,
-      style,
-      theme: themeOverrides,
-      testID = 'icon-button',
-      loading = false,
-      contentStyle,
-      ...rest
-    }: Props,
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
+const IconButton = ({
+  icon,
+  iconColor: customIconColor,
+  containerColor: customContainerColor,
+  size = 24,
+  'aria-label': ariaLabel,
+  disabled,
+  onPress,
+  selected = false,
+  animated = false,
+  mode,
+  style,
+  theme: themeOverrides,
+  testID = 'icon-button',
+  loading = false,
+  contentStyle,
+  ref,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
 
-    const IconComponent = animated ? CrossFadeIcon : Icon;
+  const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const {
-      iconColor,
-      iconOpacity,
-      backgroundColor,
-      borderColor,
-      backgroundOpacity,
-    } = getIconButtonColor({
-      theme,
-      disabled,
-      selected,
-      mode,
-      customIconColor,
-      customContainerColor,
-    });
+  const {
+    iconColor,
+    iconOpacity,
+    backgroundColor,
+    borderColor,
+    backgroundOpacity,
+  } = getIconButtonColor({
+    theme,
+    disabled,
+    selected,
+    mode,
+    customIconColor,
+    customContainerColor,
+  });
 
-    const buttonSize = size + 2 * PADDING;
+  const buttonSize = size + 2 * PADDING;
 
-    const {
-      borderWidth = mode === 'outlined' && !selected ? 1 : 0,
-      borderRadius = buttonSize / 2,
-    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const {
+    borderWidth = mode === 'outlined' && !selected ? 1 : 0,
+    borderRadius = buttonSize / 2,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const borderStyles = {
-      borderWidth,
-      borderRadius,
-      borderColor,
-    };
+  const borderStyles = {
+    borderWidth,
+    borderRadius,
+    borderColor,
+  };
 
-    return (
-      <Surface
-        ref={ref}
-        testID={`${testID}-container`}
-        style={[
-          {
-            backgroundColor:
-              backgroundOpacity < 1 ? undefined : backgroundColor,
-            width: buttonSize,
-            height: buttonSize,
-          },
-          styles.container,
-          borderStyles,
-          style,
-        ]}
-        container
-        elevation={0}
+  return (
+    <Surface
+      ref={ref}
+      testID={`${testID}-container`}
+      style={[
+        {
+          backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,
+          width: buttonSize,
+          height: buttonSize,
+        },
+        styles.container,
+        borderStyles,
+        style,
+      ]}
+      container
+      elevation={0}
+    >
+      {backgroundOpacity < 1 && (
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            { backgroundColor, opacity: backgroundOpacity },
+          ]}
+        />
+      )}
+      <TouchableRipple
+        borderless
+        centered
+        onPress={onPress}
+        aria-label={ariaLabel}
+        style={[styles.touchable, contentStyle]}
+        role="button"
+        aria-disabled={disabled}
+        disabled={disabled}
+        hitSlop={
+          TouchableRipple.supported
+            ? { top: 10, left: 10, bottom: 10, right: 10 }
+            : { top: 6, left: 6, bottom: 6, right: 6 }
+        }
+        testID={testID}
+        {...rest}
       >
-        {backgroundOpacity < 1 && (
-          <View
-            pointerEvents="none"
-            style={[
-              StyleSheet.absoluteFill,
-              { backgroundColor, opacity: backgroundOpacity },
-            ]}
-          />
-        )}
-        <TouchableRipple
-          borderless
-          centered
-          onPress={onPress}
-          accessibilityLabel={accessibilityLabel}
-          style={[styles.touchable, contentStyle]}
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          accessibilityState={{ disabled }}
-          disabled={disabled}
-          hitSlop={
-            TouchableRipple.supported
-              ? { top: 10, left: 10, bottom: 10, right: 10 }
-              : { top: 6, left: 6, bottom: 6, right: 6 }
-          }
-          testID={testID}
-          {...rest}
-        >
-          <View style={{ opacity: iconOpacity }}>
-            {loading ? (
-              <ActivityIndicator size={size} color={iconColor} />
-            ) : (
-              <IconComponent color={iconColor} source={icon} size={size} />
-            )}
-          </View>
-        </TouchableRipple>
-      </Surface>
-    );
-  }
-);
+        <View style={{ opacity: iconOpacity }}>
+          {loading ? (
+            <ActivityIndicator size={size} color={iconColor} />
+          ) : (
+            <IconComponent color={iconColor} source={icon} size={size} />
+          )}
+        </View>
+      </TouchableRipple>
+    </Surface>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

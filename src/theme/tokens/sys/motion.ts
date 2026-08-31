@@ -2,6 +2,7 @@ import type {
   MotionConfig,
   MotionDuration,
   MotionEasing,
+  RawSpring,
   SpringConfig,
 } from '../../types';
 
@@ -93,7 +94,20 @@ export const standardMotion: MotionConfig = {
  *   ...toRawSpring(theme.motion.spring.fast.spatial),
  *   useNativeDriver: true,
  * });
+ *
+ * // Reanimated
+ * sharedValue.value = withSpring(
+ *   target,
+ *   toRawSpring(theme.motion.spring.fast.spatial)
+ * );
  */
-export function toRawSpring({ stiffness, damping }: SpringConfig) {
-  return { stiffness, damping: damping * 2 * Math.sqrt(stiffness) };
+export function toRawSpring({
+  stiffness,
+  damping: ratio,
+}: SpringConfig): RawSpring {
+  return {
+    stiffness,
+    damping: ratio * 2 * Math.sqrt(stiffness),
+    mass: 1, // as per MD specs
+  };
 }

@@ -1,21 +1,18 @@
-import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../theme/tokens';
+import { getStateLayer } from '../../theme/utils/state';
 import type { ThemeProp, TypescaleKey } from '../../types';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -47,7 +44,7 @@ export type Props = {
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Custom color for unchecked checkbox.
    */
@@ -132,7 +129,7 @@ const CheckboxItem = ({
   theme: themeOverrides,
   testID,
   position = 'trailing',
-  accessibilityLabel = label,
+  'aria-label': ariaLabel = label,
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
@@ -143,27 +140,24 @@ const CheckboxItem = ({
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
-  const checkbox = <Checkbox {...checkboxProps} />;
+  // The outer TouchableRipple below is the interactable element + a11y
+  // checkbox; the inner Checkbox is purely visual, so we exclude it from
+  // the accessibility tree to avoid duplicate `checked` states.
+  const checkbox = <Checkbox {...checkboxProps} accessible={false} />;
 
-  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
-    color: textColor,
-    opacity: disabled
-      ? tokens.md.ref.stateOpacity.disabled
-      : tokens.md.ref.stateOpacity.enabled,
+  const computedStyle: TextStyle = {
+    ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <TouchableRipple
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="checkbox"
-      accessibilityState={{
-        checked: status === 'checked',
-        disabled,
-      }}
+      aria-label={ariaLabel}
+      role="checkbox"
+      aria-checked={status === 'indeterminate' ? 'mixed' : status === 'checked'}
+      aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
       testID={testID}

@@ -3,19 +3,21 @@ import {
   Animated,
   Dimensions,
   Easing,
-  EmitterSubscription,
   Keyboard,
-  KeyboardEvent as RNKeyboardEvent,
-  LayoutRectangle,
-  NativeEventSubscription,
   Platform,
   ScrollView,
-  ScrollViewProps,
-  StyleProp,
   StyleSheet,
   View,
-  ViewStyle,
   Pressable,
+} from 'react-native';
+import type { KeyboardEvent as RNKeyboardEvent } from 'react-native';
+import type {
+  EmitterSubscription,
+  LayoutRectangle,
+  NativeEventSubscription,
+  ScrollViewProps,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -23,7 +25,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, Theme, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -192,7 +194,7 @@ const Menu = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const { colors: md3Colors } = theme as Theme;
+  const { colors: md3Colors } = theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
@@ -386,18 +388,16 @@ const Menu = ({
     async (display: boolean) => {
       // Menu is rendered in Portal, which updates items asynchronously
       // We need to do the same here so that the ref is up-to-date
-      await Promise.resolve().then(() => {
-        if (display && !prevRendered.current) {
-          show();
-          return;
-        }
+      await Promise.resolve();
 
-        if (!display) {
-          hide();
-        }
-
+      if (display && !prevRendered.current) {
+        await show();
         return;
-      });
+      }
+
+      if (!display) {
+        hide();
+      }
     },
     [hide, show]
   );
@@ -434,14 +434,14 @@ const Menu = ({
         }
       } else {
         // Keep the Portal mounted so the hide animation can finish.
-        updateVisibility(false);
+        void updateVisibility(false);
       }
     }
   }, [visible, rendered, updateVisibility]);
 
   React.useEffect(() => {
     if (rendered && visible) {
-      updateVisibility(true);
+      void updateVisibility(true);
     }
   }, [rendered, visible, updateVisibility]);
 
@@ -640,8 +640,8 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            accessibilityLabel={overlayAccessibilityLabel}
-            accessibilityRole="button"
+            aria-label={overlayAccessibilityLabel}
+            role="button"
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
@@ -651,7 +651,7 @@ const Menu = ({
               menuRef.current = ref;
             }}
             collapsable={false}
-            accessibilityViewIsModal={visible}
+            aria-modal={visible}
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}

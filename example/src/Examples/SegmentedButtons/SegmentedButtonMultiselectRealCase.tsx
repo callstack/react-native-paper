@@ -13,6 +13,7 @@ const SegmentedButtonMultiselectRealCase = () => {
   const filteredData = React.useMemo(
     () =>
       restaurantsData.filter((item) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         value.includes(item.price.toString() as PriceRange)
       ),
     [value]

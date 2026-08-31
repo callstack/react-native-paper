@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
+import type {
   GestureResponderEvent,
-  PixelRatio,
-  Pressable,
+  PressableProps,
   StyleProp,
-  StyleSheet,
   TextStyle,
   ViewStyle,
 } from 'react-native';
@@ -16,7 +14,7 @@ import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
+export type Props = PressableProps & {
   /**
    * Text content of the `DataTableTitle`.
    */

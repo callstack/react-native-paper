@@ -1,0 +1,36 @@
+name: Setup
+description: Setup Node.js and install dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+      with:
+        node-version-file: .nvmrc
+
+    - name: Restore dependencies
+      id: yarn-cache
+      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae
+      with:
+        path: |
+          **/node_modules
+          .yarn/install-state.gz
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**/package.json', '!node_modules/**') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: yarn install --immutable
+      shell: bash
+
+    - name: Cache dependencies
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae
+      with:
+        path: |
+          **/node_modules
+          .yarn/install-state.gz
+        key: ${{ steps.yarn-cache.outputs.cache-primary-key }}

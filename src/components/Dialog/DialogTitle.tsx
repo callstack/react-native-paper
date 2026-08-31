@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof Text> & {
@@ -52,7 +53,7 @@ const DialogTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme as Theme;
+  const { colors, fonts } = theme;
 
   const headerTextStyle = {
     color: colors.onSurface,
@@ -62,7 +63,7 @@ const DialogTitle = ({
   return (
     <Text
       variant="headlineSmall"
-      accessibilityRole="header"
+      role="heading"
       style={[styles.text, styles.v3Text, headerTextStyle, style]}
       {...rest}
     >

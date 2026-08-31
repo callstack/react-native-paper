@@ -1,4 +1,10 @@
-import React from 'react';
+import {
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest as mockJest,
+} from '@jest/globals';
 
 import { render } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
@@ -7,19 +13,22 @@ import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 describe('RadioButton', () => {
   describe('on default platform', () => {
     beforeAll(() => {
-      jest.mock('react-native', () => {
-        const RN = jest.requireActual('react-native');
+      mockJest.mock('react-native', () => {
+        const RN =
+          mockJest.requireActual<typeof import('react-native')>('react-native');
 
-        RN.Platform = () => ({
-          select: (objs: { default: object }) => objs.default,
-        });
-
-        return RN;
+        return {
+          ...RN,
+          Platform: {
+            ...RN.Platform,
+            select: (objs: { default: object }) => objs.default,
+          },
+        };
       });
     });
 
-    it('renders properly', () => {
-      const tree = render(<RadioButton value="first" />).toJSON();
+    it('renders properly', async () => {
+      const tree = (await render(<RadioButton value="first" />)).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -27,32 +36,37 @@ describe('RadioButton', () => {
 
   describe('on ios platform', () => {
     beforeAll(() => {
-      jest.mock('react-native', () => {
-        const RN = jest.requireActual('react-native');
+      mockJest.mock('react-native', () => {
+        const RN =
+          mockJest.requireActual<typeof import('react-native')>('react-native');
 
-        RN.Platform = () => ({
-          select: (objs: { ios: object }) => objs.ios,
-        });
-
-        return RN;
+        return {
+          ...RN,
+          Platform: {
+            ...RN.Platform,
+            select: (objs: { ios: object }) => objs.ios,
+          },
+        };
       });
     });
 
-    it('renders properly', () => {
-      const tree = render(<RadioButton value="first" />).toJSON();
+    it('renders properly', async () => {
+      const tree = (await render(<RadioButton value="first" />)).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
   });
 
   describe('when RadioButton is wrapped by RadioButtonContext.Provider', () => {
-    it('renders properly', () => {
-      const tree = render(
-        <RadioButtonContext.Provider
-          value={{ value: 'first', onValueChange: () => {} }}
-        >
-          <RadioButton value="first" />
-        </RadioButtonContext.Provider>
+    it('renders properly', async () => {
+      const tree = (
+        await render(
+          <RadioButtonContext.Provider
+            value={{ value: 'first', onValueChange: () => {} }}
+          >
+            <RadioButton value="first" />
+          </RadioButtonContext.Provider>
+        )
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
@@ -60,9 +74,9 @@ describe('RadioButton', () => {
   });
 
   describe('RadioButton with custom testID', () => {
-    it('renders properly', () => {
-      const tree = render(
-        <RadioButton value="first" testID={'custom:testID'} />
+    it('renders properly', async () => {
+      const tree = (
+        await render(<RadioButton value="first" testID={'custom:testID'} />)
       ).toJSON();
 
       expect(tree).toMatchSnapshot();

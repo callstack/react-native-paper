@@ -1,8 +1,5 @@
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-import { usePluginData } from '@docusaurus/useGlobalData';
-
-const pluginName = 'component-docs-plugin';
+import componentDocs5x from '../src/data/componentDocs5x.json';
+import componentDocs6x from '../src/data/componentDocs6x.json';
 
 export interface ComponentDocsPluginData {
   docs: { [key in string]: PageDoc };
@@ -27,19 +24,23 @@ export interface Data {
 
 export interface Prop {
   required: boolean;
-  tsType: {
+  tsType?: {
     name: string;
     raw?: string;
-  };
+  } | null;
   description: string;
-  defaultValue: {
+  defaultValue?: {
     value: string;
-  };
+  } | null;
 }
 
-function useDoc(withPath: string) {
-  const pluginData = usePluginData(pluginName) as ComponentDocsPluginData;
-  return pluginData?.docs?.[withPath];
+const versionedDocs: { [versionName: string]: ComponentDocsPluginData } = {
+  '5.x': componentDocs5x,
+  '6.x': componentDocs6x,
+};
+
+function useDoc(withPath: string, versionName = '5.x') {
+  return versionedDocs[versionName]?.docs?.[withPath];
 }
 
 export default useDoc;

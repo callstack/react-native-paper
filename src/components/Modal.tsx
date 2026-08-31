@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  StyleProp,
-  StyleSheet,
-  Pressable,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Easing, StyleSheet, Pressable, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
@@ -20,7 +13,7 @@ import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
 
-const { scrimAlpha } = tokens.md.ref;
+const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
@@ -187,15 +180,15 @@ function Modal({
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
-      accessibilityViewIsModal
-      accessibilityLiveRegion="polite"
+      aria-modal
+      aria-live="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={onDismissCallback}
       testID={testID}
     >
       <AnimatedPressable
-        accessibilityLabel={overlayAccessibilityLabel}
-        accessibilityRole="button"
+        aria-label={overlayAccessibilityLabel}
+        role="button"
         disabled={!dismissable}
         onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"

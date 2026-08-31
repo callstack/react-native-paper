@@ -4,10 +4,12 @@
     "tagName": "v${version}"
   },
   "npm": {
-    "publish": true
+    "publish": true,
+    "tag": "alpha"
   },
   "github": {
-    "release": true
+    "release": true,
+    "preRelease": true
   },
   "plugins": {
     "@release-it/conventional-changelog": {

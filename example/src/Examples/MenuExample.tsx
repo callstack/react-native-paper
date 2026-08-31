@@ -1,12 +1,8 @@
 import * as React from 'react';
-import {
-  GestureResponderEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   Appbar,
   Button,
@@ -20,17 +16,15 @@ import ScreenWrapper from '../ScreenWrapper';
 
 type ContextualMenuCoord = { x: number; y: number };
 
-type Props = {
-  navigation: NativeStackNavigationProp<{}>;
-};
-
 type MenuVisibility = {
   [key: string]: boolean | undefined;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-const MenuExample = ({ navigation }: Props) => {
+const MenuExample = () => {
+  const navigation = useNavigation('Menu');
+
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
     React.useState<ContextualMenuCoord>({ x: 0, y: 0 });

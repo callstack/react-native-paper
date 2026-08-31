@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
+import { RadioButtonContext } from './RadioButtonGroup';
+import type { RadioButtonContextType } from './RadioButtonGroup';
+import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getSelectionControlColor } from '../Checkbox/utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -102,7 +102,7 @@ const RadioButtonAndroid = ({
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,
@@ -134,9 +134,10 @@ const RadioButtonAndroid = ({
                     });
                   }
             }
-            accessibilityRole="radio"
-            accessibilityState={{ disabled, checked }}
-            accessibilityLiveRegion="polite"
+            role="radio"
+            aria-disabled={disabled}
+            aria-checked={checked}
+            aria-live="polite"
             style={styles.container}
             testID={testID}
             theme={theme}

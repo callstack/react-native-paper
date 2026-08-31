@@ -1,17 +1,10 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-//@ts-ignore
-import Admonition from '@theme/Admonition';
-//@ts-ignore
-import TabItem from '@theme/TabItem';
-//@ts-ignore
-import Tabs from '@theme/Tabs';
-
-import {
-  DataObject,
-  getMaxNestedLevel,
-  getUniqueNestedKeys,
-} from '../utils/themeColors';
+import Admonition from './Admonition';
+import TabItem from './TabItem';
+import Tabs from './Tabs';
+import { getMaxNestedLevel, getUniqueNestedKeys } from '../utils/themeColors';
+import type { DataObject } from '../utils/themeColors';
 
 const getTableHeader = (keys: string[]): ReactNode[] => {
   return keys.map((key) => <th key={key}>{key}</th>);
@@ -27,6 +20,9 @@ const getTableCell = (keys: string[], modes: DataObject): ReactNode[] => {
   });
 };
 
+const isDataObject = (value: DataObject[string]): value is DataObject =>
+  typeof value === 'object';
+
 const FlatTable = ({
   themeColorsData,
   uniqueKeys,
@@ -35,10 +31,12 @@ const FlatTable = ({
   uniqueKeys: string[];
 }): ReactNode => {
   const rows = Object.keys(themeColorsData).map((mode) => {
+    const value = themeColorsData[mode];
+
     return (
       <tr key={`${mode}`}>
         <td>{mode}</td>
-        {getTableCell(uniqueKeys, themeColorsData[mode] as DataObject)}
+        {isDataObject(value) ? getTableCell(uniqueKeys, value) : null}
       </tr>
     );
   });
@@ -69,30 +67,37 @@ const TabbedTable = ({
   themeColorsData: DataObject;
   uniqueKeys: string[];
 }): ReactNode => {
-  const tabTableContent = Object.keys(themeColorsData).map((key) => {
-    const modes = themeColorsData[key] as DataObject;
-    const rows = Object.keys(modes).map((mode) => {
+  const tabTableContent = Object.entries(themeColorsData).map(
+    ([key, modes]) => {
+      if (!isDataObject(modes)) {
+        return null;
+      }
+
+      const rows = Object.keys(modes).map((mode) => {
+        const value = modes[mode];
+
+        return (
+          <tr key={`${key}-${mode}`}>
+            <td>{mode}</td>
+            {isDataObject(value) ? getTableCell(uniqueKeys, value) : null}
+          </tr>
+        );
+      });
       return (
-        <tr key={`${key}-${mode}`}>
-          <td>{mode}</td>
-          {getTableCell(uniqueKeys, modes[mode] as DataObject)}
-        </tr>
+        <TabItem label={key} value={key} key={key}>
+          <table>
+            <thead>
+              <tr>
+                <th>mode</th>
+                {getTableHeader(uniqueKeys)}
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </table>
+        </TabItem>
       );
-    });
-    return (
-      <TabItem label={key} value={key} key={key}>
-        <table>
-          <thead>
-            <tr>
-              <th>mode</th>
-              {getTableHeader(uniqueKeys)}
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-        </table>
-      </TabItem>
-    );
-  });
+    }
+  );
 
   return (
     <>

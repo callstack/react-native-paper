@@ -18,6 +18,7 @@ export type PortalMethods = {
   unmount: (key: number) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 export const PortalContext = React.createContext<PortalMethods>(null as any);
 
 /**
@@ -52,7 +53,6 @@ export default class PortalHost extends React.Component<Props> {
     while (queue.length && manager) {
       const action = queue.pop();
       if (action) {
-        // eslint-disable-next-line default-case
         switch (action.type) {
           case 'mount':
             manager.mount(action.key, action.children);
@@ -96,7 +96,7 @@ export default class PortalHost extends React.Component<Props> {
       if (index > -1) {
         this.queue[index] = op;
       } else {
-        this.queue.push(op as Operation);
+        this.queue.push(op);
       }
     }
   };

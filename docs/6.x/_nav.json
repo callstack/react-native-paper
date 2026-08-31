@@ -1,0 +1,17 @@
+[
+  {
+    "text": "Guides",
+    "link": "/docs/guides/getting-started",
+    "activeMatch": "^/(?:6\\.x/)?docs/guides/"
+  },
+  {
+    "text": "Components",
+    "link": "/docs/components/ActivityIndicator",
+    "activeMatch": "^/(?:6\\.x/)?docs/components/"
+  },
+  {
+    "text": "Showcase",
+    "link": "/docs/showcase",
+    "activeMatch": "^/(?:6\\.x/)?docs/showcase$"
+  }
+]

@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
+import type { RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -60,7 +61,7 @@ const RadioButtonIOS = ({
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,
@@ -91,9 +92,10 @@ const RadioButtonIOS = ({
                     });
                   }
             }
-            accessibilityRole="radio"
-            accessibilityState={{ disabled, checked }}
-            accessibilityLiveRegion="polite"
+            role="radio"
+            aria-disabled={disabled}
+            aria-checked={checked}
+            aria-live="polite"
             style={styles.container}
             testID={testID}
             theme={theme}

@@ -1,5 +1,7 @@
 import type { ViewStyle } from 'react-native';
 
+import { describe, expect, it } from '@jest/globals';
+
 import { splitStyles } from '../splitStyles';
 
 describe('splitStyles', () => {

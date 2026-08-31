@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  ColorValue,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -111,6 +104,7 @@ const AppbarHeader = ({
     backgroundColor: customBackground,
     zIndex = elevated ? 1 : 0,
     ...restStyle
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     height?: number;
     elevation?: number;
@@ -141,7 +135,7 @@ const AppbarHeader = ({
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
-        shadow(elevation, theme.colors.shadow) as ViewStyle,
+        shadow(elevation, theme.colors.shadow),
       ]}
     >
       <Appbar

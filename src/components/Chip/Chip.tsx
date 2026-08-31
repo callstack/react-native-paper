@@ -1,33 +1,28 @@
 import * as React from 'react';
-import {
-  AccessibilityState,
-  Animated,
+import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
-  Platform,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  Pressable,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
-import { ChipAvatarProps, getChipColors } from './helpers';
+import { getChipColors } from './helpers';
+import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
+import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -85,7 +80,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
    */
@@ -182,8 +177,8 @@ const Chip = ({
   selected = false,
   disabled = false,
   background,
-  accessibilityLabel,
-  accessibilityRole = 'button',
+  'aria-label': ariaLabel,
+  role = 'button',
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
@@ -250,6 +245,7 @@ const Chip = ({
   const {
     backgroundColor: customBackgroundColor,
     borderRadius = defaultBorderRadius,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const {
@@ -267,11 +263,6 @@ const Chip = ({
     disabled,
   });
 
-  const accessibilityState: AccessibilityState = {
-    selected,
-    disabled,
-  };
-
   const elevationStyle = elevation;
   const multiplier = compact ? 1.5 : 2;
   const labelSpacings = {
@@ -286,7 +277,7 @@ const Chip = ({
   };
   const labelTextStyle = {
     color: textColor,
-    ...(theme as Theme).fonts.labelLarge,
+    ...theme.fonts.labelLarge,
   };
   return (
     <Surface
@@ -316,9 +307,10 @@ const Chip = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={accessibilityState}
+        aria-label={ariaLabel}
+        role={role}
+        aria-selected={selected}
+        aria-disabled={disabled}
         testID={testID}
         theme={theme}
         hitSlop={hitSlop}
@@ -367,8 +359,8 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                      ? (theme as Theme).colors.primary
-                      : iconColor
+                        ? theme.colors.primary
+                        : iconColor
                   }
                   size={18}
                   theme={theme}
@@ -405,8 +397,8 @@ const Chip = ({
           <Pressable
             onPress={onClose}
             disabled={disabled}
-            accessibilityRole="button"
-            accessibilityLabel={closeIconAccessibilityLabel}
+            role="button"
+            aria-label={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
               {closeIcon ? (

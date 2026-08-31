@@ -29,12 +29,13 @@ export function splitStyles<Tuple extends FiltersArray>(
 
   // `Object.entries` will be used to iterate over the styles and `Object.fromEntries` will be called before returning
   // Entries which match the given filters will be temporarily stored in `newStyles`
-  const newStyles = filters.map(() => [] as Entry[]);
+  const newStyles: Entry[][] = filters.map(() => []);
 
   // Entries which match no filter
   const rest: Entry[] = [];
 
   // Iterate every style property
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   outer: for (const item of Object.entries(styles) as Entry[]) {
     // Check each filter
     for (let i = 0; i < filters.length; i++) {
@@ -53,8 +54,9 @@ export function splitStyles<Tuple extends FiltersArray>(
   newStyles.unshift(rest);
 
   // Convert arrays of entries into objects
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return newStyles.map((styles) => Object.fromEntries(styles)) as unknown as [
     ViewStyle,
-    ...MappedTuple<Tuple>
+    ...MappedTuple<Tuple>,
   ];
 }

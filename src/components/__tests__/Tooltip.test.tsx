@@ -1,8 +1,17 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
+import type { ViewProps } from 'react-native';
 
-import { act, fireEvent } from '@testing-library/react-native';
-import type { ReactTestInstance } from 'react-test-renderer';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
@@ -16,18 +25,34 @@ jest.mock('../../utils/addEventListener', () => ({
   }),
 }));
 
-const DummyComponent = React.forwardRef<View>((props, ref) => (
-  <View {...props} ref={ref as RefObject<View>}>
+const DummyComponent = ({
+  ref,
+  ...props
+}: ViewProps & {
+  ref?: React.RefObject<View | null>;
+}) => (
+  <View {...props} ref={ref}>
     <Text>dummy component</Text>
   </View>
-));
+);
 
 describe('Tooltip', () => {
-  const getTrigger = (getByText: (text: string) => ReactTestInstance) =>
-    getByText('dummy component').parent as ReactTestInstance;
+  const getTrigger = (
+    getByText: Awaited<ReturnType<typeof render>>['getByText']
+  ) => {
+    const trigger = getByText('dummy component', {
+      includeHiddenElements: true,
+    }).parent;
 
-  const runTimers = (ms?: number) => {
-    act(() => {
+    if (!trigger) {
+      throw new Error('Expected Tooltip trigger wrapper');
+    }
+
+    return trigger;
+  };
+
+  const runTimers = async (ms?: number) => {
+    await act(() => {
       if (ms === undefined) {
         jest.runOnlyPendingTimers();
       } else {
@@ -36,7 +61,7 @@ describe('Tooltip', () => {
     });
   };
 
-  const setup = (
+  const setup = async (
     propOverrides?: Partial<React.ComponentProps<typeof Tooltip>>,
     measure = {}
   ) => {
@@ -60,7 +85,7 @@ describe('Tooltip', () => {
       .spyOn(View.prototype, 'measure')
       .mockImplementation((cb) => cb(x, y, width, height, pageX, pageY));
 
-    const wrapper = render(
+    const wrapper = await render(
       <PaperProvider>
         <Tooltip {...defaultProps} />
       </PaperProvider>
@@ -77,17 +102,21 @@ describe('Tooltip', () => {
       jest.clearAllMocks();
     });
     describe('Unmount', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('removes hideTooltipTimer when the component unmounts', async () => {
         const {
           wrapper: { getByText, unmount },
-        } = setup({ enterTouchDelay: 5000 });
+        } = await setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getTrigger(getByText), 'pressOut');
+        await fireEvent(getTrigger(getByText), 'pressOut');
 
-        unmount();
+        await unmount();
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
       });
@@ -95,53 +124,54 @@ describe('Tooltip', () => {
       it('removes Dimensions listener when the component unmount', async () => {
         const {
           wrapper: { getByText, findByText, unmount },
-        } = setup();
+        } = await setup();
 
-        fireEvent(getTrigger(getByText), 'longPress');
+        await userEvent.longPress(getTrigger(getByText));
 
         await findByText('some tooltip text');
 
-        unmount();
+        await unmount();
 
         expect(mockedRemoveEventListener).toHaveBeenCalled();
       });
     });
 
     describe('longPress', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
-      it('clears the hide timer when the user start pressing the component again', () => {
+      it('clears the hide timer when the user start pressing the component again', async () => {
         jest.spyOn(global, 'clearTimeout');
 
         const {
           wrapper: { getByText },
-        } = setup();
+        } = await setup();
 
         const trigger = getTrigger(getByText);
-        fireEvent(trigger, 'longPress');
-        fireEvent(trigger, 'pressOut');
-        fireEvent(trigger, 'longPress');
+        await userEvent.longPress(trigger);
+        await userEvent.longPress(trigger);
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
       });
     });
 
     describe('pressOut', () => {
-      // eslint-disable-next-line jest/valid-title
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {
           wrapper: { queryByText, getByText, findByText },
-        } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
+        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-        fireEvent(getTrigger(getByText), 'longPress');
+        await userEvent.longPress(getTrigger(getByText));
 
         await findByText('some tooltip text');
 
-        fireEvent(getTrigger(getByText), 'pressOut');
-        runTimers();
+        await runTimers();
 
-        expect(queryByText('some tooltip text')).toBeNull();
+        expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
     });
 
@@ -164,23 +194,20 @@ describe('Tooltip', () => {
         it('centers the tooltip in the middle of the children component', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup();
+          } = await setup();
 
-          fireEvent(getTrigger(getByText), 'longPress');
+          await userEvent.longPress(getTrigger(getByText));
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-              top: 250, // pageY (200) + height (50)
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+            top: 250, // pageY (200) + height (50)
+          });
         });
       });
 
@@ -188,23 +215,20 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
+          } = await setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-          fireEvent(getTrigger(getByText), 'longPress');
+          await userEvent.longPress(getTrigger(getByText));
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 0, // Tooltip renders starting from children's x coord
-              top: 250,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 0, // Tooltip renders starting from children's x coord
+            top: 250,
+          });
         });
       });
 
@@ -212,23 +236,20 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
+          } = await setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-          fireEvent(getTrigger(getByText), 'longPress');
+          await userEvent.longPress(getTrigger(getByText));
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-              top: 250,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
+            top: 250,
+          });
         });
       });
 
@@ -236,23 +257,20 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageY: 600, height: 50 });
+          } = await setup({}, { pageY: 600, height: 50 });
 
-          fireEvent(getTrigger(getByText), 'longPress');
+          await userEvent.longPress(getTrigger(getByText));
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210,
-              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210,
+            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+          });
         });
       });
     });
@@ -263,17 +281,21 @@ describe('Tooltip', () => {
       Platform.OS = 'web';
     });
     describe('Unmount', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
       it('removes showTooltipTimer when the component unmounts', async () => {
         const {
           wrapper: { getByText, unmount },
-        } = setup({ enterTouchDelay: 5000 });
+        } = await setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getTrigger(getByText), 'hoverIn');
+        await fireEvent(getTrigger(getByText), 'hoverIn');
 
-        unmount();
+        await unmount();
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
       });
@@ -281,11 +303,11 @@ describe('Tooltip', () => {
       it('removes hideTooltipTimer when the component unmounts', async () => {
         const {
           wrapper: { getByText, unmount },
-        } = setup({ enterTouchDelay: 5000 });
+        } = await setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getTrigger(getByText), 'hoverOut');
+        await fireEvent(getTrigger(getByText), 'hoverOut');
 
-        unmount();
+        await unmount();
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
       });
@@ -293,55 +315,58 @@ describe('Tooltip', () => {
       it('removes Dimensions listener when the component unmount', async () => {
         const {
           wrapper: { getByText, findByText, unmount },
-        } = setup();
+        } = await setup();
 
-        fireEvent(getTrigger(getByText), 'hoverIn');
-        runTimers(500);
+        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await runTimers(500);
 
         await findByText('some tooltip text');
 
-        unmount();
+        await unmount();
 
         expect(mockedRemoveEventListener).toHaveBeenCalled();
       });
     });
 
     describe('hoverIn', () => {
-      beforeAll(() => jest.spyOn(global, 'clearTimeout'));
-      afterEach(() => jest.clearAllMocks());
+      beforeAll(() => {
+        jest.spyOn(global, 'clearTimeout');
+      });
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
 
-      it('clears the hide timer when the user start hovering the component again', () => {
+      it('clears the hide timer when the user start hovering the component again', async () => {
         jest.spyOn(global, 'clearTimeout');
 
         const {
           wrapper: { getByText },
-        } = setup();
+        } = await setup();
 
         const trigger = getTrigger(getByText);
-        fireEvent(trigger, 'hoverIn');
-        fireEvent(trigger, 'hoverOut');
-        fireEvent(trigger, 'hoverIn');
+        await fireEvent(trigger, 'hoverIn');
+        await fireEvent(trigger, 'hoverOut');
+        await fireEvent(trigger, 'hoverIn');
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(2);
       });
     });
 
     describe('hoverOut', () => {
-      // eslint-disable-next-line jest/valid-title
       it('hides the tooltip when the user stops hovering the component', async () => {
         const {
           wrapper: { queryByText, getByText, findByText },
-        } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
+        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-        fireEvent(getTrigger(getByText), 'hoverIn');
-        runTimers(50);
+        await fireEvent(getTrigger(getByText), 'hoverIn');
+        await runTimers(50);
 
         await findByText('some tooltip text');
 
-        fireEvent(getTrigger(getByText), 'hoverOut');
-        runTimers();
+        await fireEvent(getTrigger(getByText), 'hoverOut');
+        await runTimers();
 
-        expect(queryByText('some tooltip text')).toBeNull();
+        expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
     });
 
@@ -364,24 +389,21 @@ describe('Tooltip', () => {
         it('centers the tooltip in the middle of the children component', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup();
+          } = await setup();
 
-          fireEvent(getTrigger(getByText), 'hoverIn');
-          runTimers(500);
+          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await runTimers(500);
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
-              top: 250, // pageY (200) + height (50)
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
+            top: 250, // pageY (200) + height (50)
+          });
         });
       });
 
@@ -389,24 +411,21 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
+          } = await setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-          fireEvent(getTrigger(getByText), 'hoverIn');
-          runTimers(500);
+          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await runTimers(500);
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 0, // Tooltip renders starting from children's x coord
-              top: 250,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 0, // Tooltip renders starting from children's x coord
+            top: 250,
+          });
         });
       });
 
@@ -414,24 +433,21 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
+          } = await setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-          fireEvent(getTrigger(getByText), 'hoverIn');
-          runTimers(500);
+          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await runTimers(500);
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
-              top: 250,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
+            top: 250,
+          });
         });
       });
 
@@ -439,24 +455,21 @@ describe('Tooltip', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
             wrapper: { getByText, getByTestId, findByText },
-          } = setup({}, { pageY: 600, height: 50 });
+          } = await setup({}, { pageY: 600, height: 50 });
 
-          fireEvent(getTrigger(getByText), 'hoverIn');
-          runTimers(500);
+          await fireEvent(getTrigger(getByText), 'hoverIn');
+          await runTimers(500);
 
-          fireEvent(await findByText('some tooltip text'), 'layout', {
+          await fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container').props.style).toMatchObject([
-            {},
-            {
-              left: 210,
-              top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
-            },
-          ]);
+          expect(getByTestId('tooltip-container')).toHaveStyle({
+            left: 210,
+            top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
+          });
         });
       });
     });

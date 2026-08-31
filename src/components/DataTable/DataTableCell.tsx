@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {
-  StyleSheet,
+import { StyleSheet } from 'react-native';
+import type {
   StyleProp,
   ViewStyle,
   TextStyle,

@@ -45,3 +45,9 @@ export type MotionConfig = {
   easing: MotionEasing;
   duration: MotionDuration;
 };
+
+export type RawSpring = {
+  stiffness: number;
+  damping: number;
+  mass: number;
+};

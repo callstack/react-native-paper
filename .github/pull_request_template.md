@@ -13,4 +13,4 @@
 
 <!-- Describe the **steps to test this change**, so that a reviewer can verify it. Provide screenshots or videos if the change affects UI. -->
 
-<!-- Keep in mind that PR changes must pass lint, typescript and tests. -->
+<!-- Keep in mind that PR changes must pass lint, typecheck and tests. -->

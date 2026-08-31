@@ -1,24 +1,22 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, Pressable, StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
-  Platform,
-  Pressable,
   StyleProp,
-  StyleSheet,
   TextLayoutEventData,
-  View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * The label text of the item.
    */
@@ -56,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -69,7 +67,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   testID?: string;
 };
 
-const badgeSize = 8;
 const iconSize = 24;
 const itemSize = 56;
 const outlineHeight = 32;
@@ -104,7 +101,7 @@ const DrawerCollapsedItem = ({
   style,
   onPress,
   disabled,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
   labelMaxFontSizeMultiplier,
@@ -166,17 +163,13 @@ const DrawerCollapsedItem = ({
 
   return (
     <View {...rest}>
-      {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
       <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
         disabled={disabled}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={active ? ['button', 'selected'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ selected: active }}
-        accessibilityLabel={accessibilityLabel}
+        role="button"
+        aria-selected={active}
+        aria-label={ariaLabel}
         testID={testID}
       >
         <View style={styles.wrapper}>
@@ -206,11 +199,9 @@ const DrawerCollapsedItem = ({
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
-                  <Badge visible={badge} size={badgeSize} />
+                  <Badge visible={badge} />
                 ) : (
-                  <Badge visible={badge != null} size={2 * badgeSize}>
-                    {badge}
-                  </Badge>
+                  <Badge visible={badge != null}>{badge}</Badge>
                 )}
               </View>
             )}

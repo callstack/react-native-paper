@@ -1,0 +1,165 @@
+---
+title: TouchableRipple
+---
+
+import PropTable from '@docs/components/PropTable.tsx';
+import ExtendsLink from '@docs/components/ExtendsLink.tsx';
+import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
+import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+
+A wrapper for views that should respond to touches.
+Provides a material "ink ripple" interaction effect for supported platforms (>= Android Lollipop).
+On unsupported platforms, it falls back to a highlight effect.
+
+
+
+
+  <ScreenshotTabs screenshotData={"screenshots/touchable-ripple.gif"}/>
+
+
+## Usage
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { Text, TouchableRipple } from 'react-native-paper';
+
+const MyComponent = () => (
+  <TouchableRipple
+    onPress={() => console.log('Pressed')}
+    rippleColor="rgba(0, 0, 0, .32)"
+  >
+    <Text>Press anywhere</Text>
+  </TouchableRipple>
+);
+
+export default MyComponent;
+```
+
+
+
+
+  ## Props
+  ### Pressable props
+  <ExtendsLink name="Pressable props" link="https://reactnative.dev/docs/Pressable#props" />
+
+
+<div>
+
+### borderless
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="borderless" />
+
+<div>
+
+### background
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="background" />
+
+<div>
+
+### centered
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="centered" />
+
+<div>
+
+### disabled
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="disabled" />
+
+<div>
+
+### onPress
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="onPress" />
+
+<div>
+
+### onLongPress
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="onLongPress" />
+
+<div>
+
+### onPressIn
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="onPressIn" />
+
+<div>
+
+### onPressOut
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="onPressOut" />
+
+<div>
+
+### rippleColor
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="rippleColor" />
+
+<div>
+
+### underlayColor
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="underlayColor" />
+
+<div>
+
+### children (required)
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="children" />
+
+<div>
+
+### style
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="style" />
+
+<div>
+
+### ref
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="ref" />
+
+<div>
+
+### theme
+
+</div>
+
+  <PropTable componentLink="TouchableRipple/TouchableRipple" prop="theme" />
+
+
+
+<span />
+
+<span />
+
+<span />

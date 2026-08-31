@@ -1,11 +1,5 @@
-import * as React from 'react';
-import {
-  StyleSheet,
-  StyleProp,
-  Image,
-  ImageSourcePropType,
-  ImageStyle,
-} from 'react-native';
+import { StyleSheet, Image } from 'react-native';
+import type { StyleProp, ImageSourcePropType, ImageStyle } from 'react-native';
 
 import type { ThemeProp } from '../../types';
 

@@ -1,10 +1,8 @@
-import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -51,7 +49,7 @@ export type Props<T extends string = string> = {
    * - `value`: value of button (required)
    * - `icon`: icon to display for the item
    * - `disabled`: whether the button is disabled
-   * - `accessibilityLabel`: acccessibility label for the button. This is read by the screen reader when the user taps the button.
+   * - `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.
    * - `checkedColor`: custom color for checked Text and Icon
    * - `uncheckedColor`: custom color for unchecked Text and Icon
    * - `onPress`: callback that is called when button is pressed
@@ -64,7 +62,7 @@ export type Props<T extends string = string> = {
     value: T;
     icon?: IconSource;
     disabled?: boolean;
-    accessibilityLabel?: string;
+    'aria-label'?: string;
     checkedColor?: string;
     uncheckedColor?: string;
     onPress?: (event: GestureResponderEvent) => void;

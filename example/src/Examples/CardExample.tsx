@@ -19,7 +19,7 @@ type Mode = 'elevated' | 'outlined' | 'contained';
 
 const CardExample = () => {
   const { colors } = useTheme();
-  const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
+  const [selectedMode, setSelectedMode] = React.useState<Mode>('elevated');
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 

@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  ColorValue,
-  I18nManager,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Button,
@@ -38,11 +32,7 @@ const DrawerItemsData = [
     icon: 'star',
     key: 1,
     right: ({ color }: { color: ColorValue }) => (
-      <Badge
-        visible
-        size={8}
-        style={[styles.badge, { backgroundColor: color }]}
-      />
+      <Badge visible style={[styles.badge, { backgroundColor: color }]} />
     ),
   },
   { label: 'Sent mail', icon: 'send', key: 2 },
@@ -51,7 +41,7 @@ const DrawerItemsData = [
     label: 'A very long title that will be truncated',
     icon: 'delete',
     key: 4,
-    right: () => <Badge visible size={8} style={styles.badge} />,
+    right: () => <Badge visible style={styles.badge} />,
   },
 ];
 
@@ -124,16 +114,12 @@ function DrawerItems() {
   } = preferences;
 
   const _handleToggleRTL = () => {
-    if (expoGoExecution) {
+    if (!isWeb && expoGoExecution) {
       setShowRTLDialog(true);
       return;
     }
 
     toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
-      Updates.reloadAsync();
-    }
   };
 
   const _handleDismissRTLDialog = () => {
@@ -206,16 +192,14 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            {!isWeb && (
-              <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, styles.v3Preference]}>
-                  <Text variant="labelLarge">RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={isRTL} />
-                  </View>
+            <TouchableRipple onPress={_handleToggleRTL}>
+              <View style={[styles.preference, styles.v3Preference]}>
+                <Text variant="labelLarge">RTL</Text>
+                <View pointerEvents="none">
+                  <Switch value={isRTL} />
                 </View>
-              </TouchableRipple>
-            )}
+              </View>
+            </TouchableRipple>
 
             <TouchableRipple onPress={toggleCollapsed}>
               <View style={[styles.preference, styles.v3Preference]}>

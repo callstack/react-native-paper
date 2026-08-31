@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  Image,
-  LayoutChangeEvent,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import { Banner, FAB, Palette, useTheme } from 'react-native-paper';
 
@@ -42,13 +36,14 @@ const BannerExample = () => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       <ScreenWrapper>
         <View style={[styles.grid, { paddingTop: height }]}>
           {PHOTOS.map((uri) => (
             <View key={uri} style={styles.item}>
               <Image
                 source={{ uri }}
+                resizeMode="cover"
                 style={styles.photo}
                 accessibilityIgnoresInvertColors
               />
@@ -56,12 +51,7 @@ const BannerExample = () => {
           ))}
         </View>
       </ScreenWrapper>
-      <FAB
-        icon="eye"
-        label={visible ? 'Hide banner' : 'Show banner'}
-        style={styles.fab}
-        onPress={() => setVisible(!visible)}
-      />
+      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
       <Banner
         onLayout={handleLayout}
         actions={[
@@ -88,17 +78,21 @@ const BannerExample = () => {
         Two line text string with two actions. One to two lines is preferable on
         mobile.
       </Banner>
-    </>
+    </View>
   );
 };
 
 BannerExample.title = 'Banner';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   ...Platform.select({
     web: {
       grid: {
         // there is no 'grid' type in RN :(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         display: 'grid' as 'none',
         gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
         gridRowGap: '8px',
@@ -131,7 +125,6 @@ const styles = StyleSheet.create({
   },
   photo: {
     flex: 1,
-    resizeMode: 'cover',
   },
   fab: {
     alignSelf: 'center',

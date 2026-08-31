@@ -1,8 +1,10 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { getTheme } from '../../../core/theming';
 import { tokens } from '../../../theme/tokens';
 import { getSelectionControlIOSColor } from '../../RadioButton/utils';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('getSelectionControlIOSColor - checked color', () => {
   it('should return correct disabled color, for theme version 3', () => {

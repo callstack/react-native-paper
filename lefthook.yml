@@ -1,0 +1,17 @@
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: yarn commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: '*.{js,mjs,ts,tsx}'
+      run: yarn lint {staged_files}
+    typecheck:
+      glob: '*.{json,js,mjs,ts,tsx}'
+      run: yarn typecheck
+    test:
+      glob: '*.{json,js,mjs,ts,tsx}'
+      run: yarn test

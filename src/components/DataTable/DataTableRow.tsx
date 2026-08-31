@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   StyleProp,
-  StyleSheet,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';

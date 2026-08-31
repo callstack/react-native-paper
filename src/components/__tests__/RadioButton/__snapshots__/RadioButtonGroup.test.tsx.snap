@@ -2,11 +2,10 @@
 
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
-  accessibilityRole="radiogroup"
+  role="radiogroup"
 >
   <View
     accessibilityLiveRegion="polite"
-    accessibilityRole="radio"
     accessibilityState={
       {
         "busy": undefined,
@@ -36,6 +35,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="radio"
     style={
       [
         {

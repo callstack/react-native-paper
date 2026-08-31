@@ -1,14 +1,13 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextLayoutEventData,
   TextStyle,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -20,9 +19,8 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -122,7 +120,7 @@ export type Props = {
   /**
    * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * `pointerEvents` passed to the `View` container
    */
@@ -192,7 +190,7 @@ const ListAccordion = ({
   onLongPress,
   delayLongPress,
   expanded: expandedProp,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
@@ -251,9 +249,9 @@ const ListAccordion = ({
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          accessibilityRole="button"
-          accessibilityState={{ expanded: isExpanded }}
-          accessibilityLabel={accessibilityLabel}
+          role="button"
+          aria-expanded={isExpanded}
+          aria-label={ariaLabel}
           testID={testID}
           theme={theme}
           background={background}

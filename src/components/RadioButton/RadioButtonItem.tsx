@@ -1,25 +1,23 @@
-import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
 import RadioButton from './RadioButton';
 import RadioButtonAndroid from './RadioButtonAndroid';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
+import type { RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../theme/tokens';
+import { getStateLayer } from '../../theme/utils/state';
 import type { ThemeProp, TypescaleKey } from '../../types';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -51,7 +49,7 @@ export type Props = {
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Custom color for unchecked radio.
    */
@@ -151,7 +149,7 @@ const RadioButtonItem = ({
   status,
   theme: themeOverrides,
   background,
-  accessibilityLabel = label,
+  'aria-label': ariaLabel = label,
   testID,
   mode,
   position = 'trailing',
@@ -179,20 +177,16 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textColor = theme.colors.onSurface;
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
-    color: textColor,
-    opacity: disabled
-      ? tokens.md.ref.stateOpacity.disabled
-      : tokens.md.ref.stateOpacity.enabled,
+  const computedStyle: TextStyle = {
+    ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,
@@ -210,12 +204,10 @@ const RadioButtonItem = ({
               })
             }
             onLongPress={onLongPress}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityRole="radio"
-            accessibilityState={{
-              checked,
-              disabled,
-            }}
+            aria-label={ariaLabel}
+            role="radio"
+            aria-checked={checked}
+            aria-disabled={disabled}
             testID={testID}
             disabled={disabled}
             background={background}

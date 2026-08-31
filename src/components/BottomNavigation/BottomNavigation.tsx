@@ -1,12 +1,9 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, Platform, StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   EasingFunction,
-  Platform,
   StyleProp,
-  StyleSheet,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -18,7 +15,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type BaseRoute = {
   key: string;
@@ -26,7 +23,7 @@ export type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   testID?: string;
   lazy?: boolean;
 };
@@ -80,7 +77,7 @@ export type Props<Route extends BaseRoute> = {
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -167,7 +164,7 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` by default.
+   * Uses `route['aria-label']` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -500,8 +497,8 @@ const BottomNavigation = <Route extends BaseRoute>({
                 outputRange: [0, 1, 0],
               })
             : focused
-            ? 1
-            : 0;
+              ? 1
+              : 0;
 
           const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
 
@@ -526,7 +523,7 @@ const BottomNavigation = <Route extends BaseRoute>({
             <BottomNavigationRouteScreen
               key={route.key}
               pointerEvents={focused ? 'auto' : 'none'}
-              accessibilityElementsHidden={!focused}
+              aria-hidden={!focused}
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }

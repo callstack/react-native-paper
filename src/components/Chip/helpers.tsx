@@ -3,11 +3,11 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import color from 'color';
 
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme, Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
-const md3 = (theme: InternalTheme) => theme as Theme;
+const md3 = (theme: InternalTheme) => theme;
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;

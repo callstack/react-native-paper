@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Appearance, ColorSchemeName } from 'react-native';
+import { Appearance } from 'react-native';
+import type { ColorSchemeName } from 'react-native';
 
 /**
  * Subscribes to the OS color-scheme setting via `Appearance.addChangeListener`
@@ -11,7 +12,7 @@ import { Appearance, ColorSchemeName } from 'react-native';
  */
 export function useSystemColorScheme(enabled: boolean): ColorSchemeName {
   const [colorScheme, setColorScheme] = React.useState<ColorSchemeName>(() =>
-    enabled ? Appearance?.getColorScheme() ?? 'light' : 'light'
+    enabled ? (Appearance?.getColorScheme() ?? 'light') : 'light'
   );
 
   React.useEffect(() => {

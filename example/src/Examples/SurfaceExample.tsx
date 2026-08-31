@@ -1,38 +1,85 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Animated, ScrollView, StyleSheet, View } from 'react-native';
 
-import { Elevation, Surface, Text, Palette, List } from 'react-native-paper';
+import { Surface, Text, Palette, List, IconButton } from 'react-native-paper';
+import type { Elevation } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-const SurfaceExample = () => {
-  const elevationValues = Array.from({ length: 6 });
+const elevationLevels: Elevation[] = [0, 1, 2, 3, 4, 5];
 
-  const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
-    <Surface
-      key={index}
-      style={[styles.surface, styles.v3Surface]}
-      mode={mode}
-      elevation={index as Elevation}
-    >
-      <Text variant="bodyLarge">
-        {`Elevation ${index === 1 ? '(default)' : ''} ${index}`}
-      </Text>
+const AnimatedSurface = () => {
+  const [index, setIndex] = React.useState(3);
+
+  const level = elevationLevels[index];
+  const elevation = React.useRef(new Animated.Value(level)).current;
+
+  React.useEffect(() => {
+    Animated.timing(elevation, {
+      toValue: level,
+      duration: 250,
+      useNativeDriver: false,
+    }).start();
+  }, [elevation, level]);
+
+  return (
+    <View style={styles.scroll}>
+      <Surface style={styles.surface} elevation={elevation}>
+        <Text variant="bodySmall">{`Elevation ${level}`}</Text>
+      </Surface>
+      <View style={styles.actions}>
+        <IconButton
+          mode="contained-tonal"
+          icon="minus"
+          disabled={index === 0}
+          onPress={() => setIndex(index - 1)}
+        />
+        <IconButton
+          mode="contained-tonal"
+          icon="plus"
+          disabled={index === elevationLevels.length - 1}
+          onPress={() => setIndex(index + 1)}
+        />
+      </View>
+    </View>
+  );
+};
+
+const SurfaceExample = () => {
+  const elevationValues: Elevation[] = [0, 1, 2, 3, 4, 5];
+
+  const renderSurface = (index: Elevation, mode: 'flat' | 'elevated') => (
+    <Surface key={index} style={styles.surface} mode={mode} elevation={index}>
+      <Text variant="bodySmall">{`Elevation ${index}`}</Text>
     </Surface>
   );
 
   return (
     <ScreenWrapper>
       <List.Section title="Elevated surface">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'elevated'))}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scroll}
+        >
+          {elevationValues.map((elevation) =>
+            renderSurface(elevation, 'elevated')
+          )}
         </ScrollView>
       </List.Section>
 
       <List.Section title="Flat surface">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'flat'))}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scroll}
+        >
+          {elevationValues.map((elevation) => renderSurface(elevation, 'flat'))}
         </ScrollView>
+      </List.Section>
+
+      <List.Section title="Animated elevation">
+        <AnimatedSurface />
       </List.Section>
 
       <List.Section title="Layout">
@@ -66,21 +113,22 @@ const styles = StyleSheet.create({
     padding: 24,
     alignItems: 'center',
   },
+  scroll: {
+    gap: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
   surface: {
-    margin: 24,
-    height: 80,
-    width: 80,
+    height: 120,
+    width: 120,
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  v3Surface: {
-    borderRadius: 16,
-    height: 200,
-    width: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
+  actions: {
+    flexDirection: 'row',
+    gap: 16,
   },
-
   horizontalSurfacesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

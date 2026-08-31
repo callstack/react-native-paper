@@ -1,5 +1,7 @@
-import React, { ReactNode } from 'react';
-import { Animated, Platform, View, ViewProps } from 'react-native';
+import React from 'react';
+import type { ReactNode } from 'react';
+import { Animated, Platform, View } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
   visibility?: 0 | 1 | Animated.AnimatedInterpolation<number>;

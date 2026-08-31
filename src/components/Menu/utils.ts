@@ -2,7 +2,7 @@ import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 export const MIN_WIDTH = 112;
 export const MAX_WIDTH = 280;

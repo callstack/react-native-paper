@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Button, Portal, Dialog, Palette } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';

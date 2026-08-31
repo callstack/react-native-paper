@@ -32,9 +32,9 @@ Our pre-commit hooks verify that your commit message matches this format when co
 
 ### Linting and tests
 
-We use `typescript` for type checking, `eslint` with `prettier` for linting and formatting the code, and `jest` for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:
+We use `typescript` for type checking, `eslint` with `prettier` for linting and formatting the code, and `jest` for testing. Our pre-commit hooks verify that type checking, linting, and tests pass when committing. You can also run the following commands manually:
 
-- `yarn typescript`: type-check files with `tsc`.
+- `yarn typecheck`: type-check files with `tsc`.
 - `yarn lint`: lint files with `eslint` and `prettier`.
 - `yarn test`: run unit tests with `jest`.
 
@@ -43,7 +43,7 @@ We use `typescript` for type checking, `eslint` with `prettier` for linting and 
 When you're sending a pull request:
 
 - Prefer small pull requests focused on one change.
-- Verify that `typescript`, `eslint` and all tests are passing.
+- Verify that `typecheck`, `lint` and all tests are passing.
 - Preview the documentation to make sure it looks good.
 - Follow the pull request template when opening a pull request.
 
@@ -58,7 +58,7 @@ When you're working on a component:
 
 The example app uses [Expo](https://expo.dev/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > The example app is built with `react-native@0.77.x` and Expo SDK 52, which isn’t compatible with Expo Go. To run the app, you have to create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
 
 After you're done, you can run `yarn example start` in the project root (or `npx expo start` in the `example/` folder) and scan the QR code to launch it on your device.
@@ -72,7 +72,7 @@ If you want to test the changes brought by a pull request, you can do so by poin
 ```json
 {
   "dependencies": {
-    "react-native-paper": "git+https://github.com/callstack/react-native-paper.git#<commit-hash>",
+    "react-native-paper": "git+https://github.com/callstack/react-native-paper.git#<commit-hash>"
   }
 }
 ```

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const { marked } = require('marked');
 
 interface MarkdownProps {

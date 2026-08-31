@@ -13,11 +13,12 @@ function configureFontsConfig(
     return typescale;
   }
 
-  const isFlatConfig = Object.keys(config).every(
-    (key) => typeof config[key as keyof typeof config] !== 'object'
+  const isFlatConfig = Object.values(config).every(
+    (value) => typeof value !== 'object'
   );
 
   if (isFlatConfig) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     return Object.fromEntries(
       Object.entries(typescale).map(([variantName, variantProperties]) => [
         variantName,
@@ -26,19 +27,22 @@ function configureFontsConfig(
     ) as Typescale;
   }
 
+  const typescaleByVariant: Partial<
+    Record<string, Typescale[keyof Typescale]>
+  > = typescale;
+
   return Object.assign(
     {},
     typescale,
     ...Object.entries(config).map(([variantName, variantProperties]) => ({
       [variantName]: {
-        ...typescale[variantName as TypescaleKey],
+        ...typescaleByVariant[variantName],
         ...variantProperties,
       },
     }))
   );
 }
 
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
   config?: Partial<TypescaleStyle>;
 }): Typescale;

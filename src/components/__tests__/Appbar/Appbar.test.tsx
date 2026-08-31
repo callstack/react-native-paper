@@ -1,11 +1,11 @@
-import React from 'react';
 import { Animated } from 'react-native';
 
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { getTheme } from '../../../core/theming';
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import { tokens } from '../../../theme/tokens';
 import Appbar from '../../Appbar';
 import {
@@ -18,28 +18,33 @@ import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Text from '../../Typography/Text';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const renderAppbarContent = utilRenderAppbarContent as (
   props: Parameters<typeof utilRenderAppbarContent>[0]
 ) => { props: any }[];
 
 describe('Appbar', () => {
-  it('does not pass any additional props to Searchbar', () => {
-    const tree = render(
-      <Appbar>
-        <Searchbar placeholder="Search" value="" />
-      </Appbar>
+  it('does not pass any additional props to Searchbar', async () => {
+    const tree = (
+      await render(
+        <Appbar>
+          <Searchbar placeholder="Search" value="" />
+        </Appbar>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', () => {
-    const tree = render(
-      <Appbar>
-        <Appbar.BackAction onPress={() => {}} />
-        <Appbar.Content title="Examples" />
-        <Appbar.Action icon="menu" onPress={() => {}} />
-      </Appbar>
+  it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', async () => {
+    const tree = (
+      await render(
+        <Appbar>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Examples" />
+          <Appbar.Action icon="menu" onPress={() => {}} />
+        </Appbar>
+      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -105,6 +110,7 @@ describe('renderAppbarContent', () => {
       mode: 'large',
     });
 
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(result[0].props.mode).toBe('large');
   });
 
@@ -121,6 +127,7 @@ describe('renderAppbarContent', () => {
       alignItems: 'center',
     };
 
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(result[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
     );
@@ -141,127 +148,122 @@ describe('renderAppbarContent', () => {
       marginLeft: 12,
     };
 
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(renderResult()[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(v3Spacing)])
     );
   });
 
-  it('Is recognized as a header when no onPress callback has been pressed', () => {
-    const { getByRole } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+  it('Is recognized as a heading when no onPress callback has been passed', async () => {
+    await render(
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
-    expect(getByRole('header')).toBeTruthy();
+    expect(screen.getByRole('heading')).toBeOnTheScreen();
   });
-  it('is recognized as a button when onPress callback has been passed', () => {
-    const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+  it('is recognized as a button when onPress callback has been passed', async () => {
+    await render(
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" onPress={() => {}} />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
-    expect(
-      getByTestId('appbar-content').props.accessibilityState || {}
-    ).not.toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(screen.getByRole('button')).toBeEnabled();
+    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
   });
-  it('is recognized as a disabled button when onPress and disabled is passed', () => {
-    const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+  it('is recognized as a disabled button when onPress and disabled is passed', async () => {
+    await render(
+      <SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" onPress={() => {}} disabled />
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
-    expect(
-      getByTestId('appbar-content').props.accessibilityState
-    ).toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.queryByRole('heading')).not.toBeOnTheScreen();
   });
 });
 
 describe('AppbarAction', () => {
-  it('should be rendered with default theme color', () => {
-    const { getByTestId } = render(
+  it('should be rendered with default theme color', async () => {
+    await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
       .children;
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe(
       getTheme().colors.onSurfaceVariant
     );
   });
 
-  it('should be rendered with specific theme color if is leading', () => {
-    const { getByTestId } = render(
+  it('should be rendered with specific theme color if is leading', async () => {
+    await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" isLeading />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
       .children;
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
   });
 
-  it('should be rendered with custom color', () => {
-    const { getByTestId } = render(
+  it('should be rendered with custom color', async () => {
+    await render(
       <Appbar>
         <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
       .children;
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
-  it('should render AppbarBackAction with custom color', () => {
-    const { getByTestId } = render(
+  it('should render AppbarBackAction with custom color', async () => {
+    await render(
       <Appbar>
         <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarBackActionIcon = getByTestId('cross-fade-icon-current').props
-      .children;
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const appbarBackActionIcon = screen.getByTestId('cross-fade-icon-current')
+      .props.children;
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(appbarBackActionIcon.props.color).toBe('purple');
   });
 });
 
 describe('AppbarContent', () => {
   (['small', 'medium', 'large', 'center-aligned'] as const).forEach((mode) =>
-    it(`should render text component with appropriate variant for ${mode} mode`, () => {
-      const { getByTestId } = render(
+    it(`should render text component with appropriate variant for ${mode} mode`, async () => {
+      await render(
         <Appbar mode={mode}>
           <Appbar.Content title="Title" />
         </Appbar>
       );
 
-      expect(getByTestId('appbar-content-title-text')).toHaveStyle(
+      expect(screen.getByTestId('appbar-content-title-text')).toHaveStyle(
         getTheme().fonts[modeTextVariant[mode]]
       );
     })
   );
 
-  it('should render component passed to title', () => {
-    const { getByText } = render(
+  it('should render component passed to title', async () => {
+    await render(
       <Appbar>
         <Appbar.Content
           title={
@@ -273,7 +275,7 @@ describe('AppbarContent', () => {
       </Appbar>
     );
 
-    expect(getByText('Title')).toBeDefined();
+    expect(screen.getByText('Title')).toBeOnTheScreen();
   });
 });
 
@@ -301,14 +303,14 @@ describe('getAppbarColors', () => {
 });
 
 describe('animated value changes correctly', () => {
-  it('appbar animated value changes correctly', () => {
+  it('appbar animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    const { getByTestId } = render(
+    await render(
       <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
         <Appbar.Action icon="menu" />
       </Appbar>
     );
-    expect(getByTestId('appbar-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -318,18 +320,18 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(getByTestId('appbar-outer-layer')).toHaveStyle({
+    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
 
-  it('action animated value changes correctly', () => {
+  it('action animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    const { getByTestId } = render(
+    await render(
       <Appbar>
         <Appbar.Action
           icon="menu"
@@ -338,7 +340,9 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(getByTestId('appbar-action-container-outer-layer')).toHaveStyle({
+    expect(
+      screen.getByTestId('appbar-action-container-outer-layer')
+    ).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -348,18 +352,20 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(getByTestId('appbar-action-container-outer-layer')).toHaveStyle({
+    expect(
+      screen.getByTestId('appbar-action-container-outer-layer')
+    ).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
 
-  it('back action animated value changes correctly', () => {
+  it('back action animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    const { getByTestId } = render(
+    await render(
       <Appbar>
         <Appbar.BackAction
           style={[{ transform: [{ scale: value }] }]}
@@ -367,42 +373,9 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(getByTestId('appbar-back-action-container-outer-layer')).toHaveStyle(
-      {
-        transform: [{ scale: 1 }],
-      }
-    );
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    act(() => {
-      jest.advanceTimersByTime(200);
-    });
-
-    expect(getByTestId('appbar-back-action-container-outer-layer')).toHaveStyle(
-      {
-        transform: [{ scale: 1.5 }],
-      }
-    );
-  });
-
-  it('header animated value changes correctly', () => {
-    const value = new Animated.Value(1);
-    const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
-        <Appbar.Header
-          style={[{ transform: [{ scale: value }] }]}
-          testID="appbar-header"
-        >
-          {null}
-        </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
-    );
-    expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
+    expect(
+      screen.getByTestId('appbar-back-action-container-outer-layer')
+    ).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -412,26 +385,59 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
+    expect(
+      screen.getByTestId('appbar-back-action-container-outer-layer')
+    ).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
 
-  it('header bottom border radius applied correctly', () => {
+  it('header animated value changes correctly', async () => {
+    const value = new Animated.Value(1);
+    await render(
+      <SafeAreaProvider>
+        <Appbar.Header
+          style={[{ transform: [{ scale: value }] }]}
+          testID="appbar-header"
+        >
+          {null}
+        </Appbar.Header>
+      </SafeAreaProvider>
+    );
+    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    await act(() => {
+      jest.advanceTimersByTime(200);
+    });
+
+    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('header bottom border radius applied correctly', async () => {
     const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
 
-    const { getByTestId } = render(
-      <mockSafeAreaContext.SafeAreaProvider>
+    await render(
+      <SafeAreaProvider>
         <Appbar.Header style={style} testID="appbar-header">
           {null}
         </Appbar.Header>
-      </mockSafeAreaContext.SafeAreaProvider>
+      </SafeAreaProvider>
     );
-    expect(getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+    expect(screen.getByTestId('appbar-header-root-layer')).toHaveStyle(style);
   });
 
   describe('getAppbarBorders', () => {

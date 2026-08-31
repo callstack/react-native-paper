@@ -8,8 +8,7 @@ import type {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
@@ -33,7 +32,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -45,7 +44,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    */
   isLeading?: boolean;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
   /**
    * @optional
    */
@@ -74,45 +73,41 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * export default MyComponent;
  * ```
  */
-const AppbarAction = forwardRef<View, Props>(
-  (
-    {
-      size = 24,
-      color: iconColor,
-      icon,
-      disabled,
-      onPress,
-      accessibilityLabel,
-      isLeading,
-      theme: themeOverrides,
-      ...rest
-    }: Props,
-    ref
-  ) => {
-    const theme = useInternalTheme(themeOverrides);
-    const { colors } = theme as Theme;
+const AppbarAction = ({
+  size = 24,
+  color: iconColor,
+  icon,
+  disabled,
+  onPress,
+  'aria-label': ariaLabel,
+  isLeading,
+  theme: themeOverrides,
+  ref,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { colors } = theme;
 
-    const actionIconColor = iconColor
-      ? iconColor
-      : isLeading
+  const actionIconColor = iconColor
+    ? iconColor
+    : isLeading
       ? colors.onSurface
       : colors.onSurfaceVariant;
 
-    return (
-      <IconButton
-        size={size}
-        onPress={onPress}
-        iconColor={actionIconColor}
-        icon={icon}
-        disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
-        animated
-        ref={ref}
-        {...rest}
-      />
-    );
-  }
-);
+  return (
+    <IconButton
+      size={size}
+      onPress={onPress}
+      iconColor={actionIconColor}
+      icon={icon}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      animated
+      ref={ref}
+      {...rest}
+    />
+  );
+};
 
 AppbarAction.displayName = 'Appbar.Action';
 

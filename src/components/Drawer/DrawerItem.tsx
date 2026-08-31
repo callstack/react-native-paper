@@ -1,23 +1,23 @@
 import * as React from 'react';
-import {
+import { StyleSheet, View } from 'react-native';
+import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
-  View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = ViewProps & {
   /**
    * The label text of the item.
    */
@@ -46,7 +46,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
@@ -94,7 +94,7 @@ const DrawerItem = ({
   style,
   onPress,
   background,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   right,
   labelMaxFontSizeMultiplier,
   hitSlop,
@@ -124,9 +124,9 @@ const DrawerItem = ({
           { backgroundColor, borderRadius },
           style,
         ]}
-        accessibilityRole="button"
-        accessibilityState={{ selected: active }}
-        accessibilityLabel={accessibilityLabel}
+        role="button"
+        aria-selected={active}
+        aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
       >

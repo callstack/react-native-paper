@@ -1,12 +1,10 @@
 import * as React from 'react';
-import {
-  Animated,
+import { Animated, StyleSheet, View } from 'react-native';
+import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  StyleSheet,
   TextStyle,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -19,9 +17,8 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -55,7 +52,7 @@ export type Props = {
   /**
    * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string;
+  'aria-label'?: string;
   /**
    * Function to execute on press.
    */
@@ -105,7 +102,7 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   checked,
-  accessibilityLabel,
+  'aria-label': ariaLabel,
   disabled,
   style,
   labelStyle,
@@ -198,9 +195,10 @@ const SegmentedButtonItem = ({
       <TouchableRipple
         borderless
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityState={{ disabled, checked }}
-        accessibilityRole="button"
+        aria-label={ariaLabel}
+        aria-disabled={disabled}
+        aria-checked={checked}
+        role="button"
         disabled={disabled}
         testID={testID}
         style={rippleStyle}

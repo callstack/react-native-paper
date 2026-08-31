@@ -1,9 +1,9 @@
-import { ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
-const { stateOpacity } = tokens.md.ref;
+const stateOpacity = tokens.md.sys.state.opacity;
 
 type BaseProps = {
   theme: InternalTheme;
