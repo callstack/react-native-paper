@@ -77,6 +77,18 @@ export type Props = $Omit<ViewProps, 'style'> & {
    */
   shape?: ButtonShape;
   /**
+   * Whether the container animates its corner radius. Defaults to `true`.
+   *
+   * When `true` the corner springs to the pressed shape while the button is
+   * pressed, and animates between the two shapes as `selected` changes. When
+   * `false` the shape still changes, it just snaps instead of animating, and
+   * there is no press morph at all.
+   *
+   * Forced off when `style` pins a `borderRadius`, and the press morph is
+   * skipped when the OS reduce-motion setting is on.
+   */
+  animateShape?: boolean;
+  /**
    * Turns the button into a Material Design 3 expressive toggle and sets its
    * state. Leave it **undefined** for a plain button — a toggle that is merely
    * unselected is a different state, and MD3 gives the two different colours.
@@ -225,6 +237,7 @@ const Button = ({
   mode = 'filled',
   size = 'small',
   shape = 'round',
+  animateShape: animateShapeProp = true,
   selected,
   dark,
   loading,
@@ -311,7 +324,10 @@ const Button = ({
   // Shape morph: animate the corner on press (→ the pressed shape token) and on
   // the `selected`/shape toggle. Skipped when the user pins a radius via `style`.
   const hasPinnedRadius = Object.keys(borderRadiusStyles).length > 0;
-  const animateShape = !hasPinnedRadius;
+  const animateShape = animateShapeProp && !hasPinnedRadius;
+  // A press morph under reduce-motion would pop instantly rather than animate,
+  // so skip it; a `selected` change still snaps to the new shape.
+  const morphOnPress = animateShape && !reduceMotion;
   // `round` resolves to the `cornerFull` sentinel, so use the real pill radius
   // (half the container height) instead: it keeps the spring bounded and lets
   // the ripple clip match the container exactly.
@@ -344,7 +360,7 @@ const Button = ({
   const handlePressIn = React.useCallback(
     (e: GestureResponderEvent) => {
       onPressIn?.(e);
-      if (animateShape) {
+      if (morphOnPress) {
         springRadiusTo(pressedRadius);
       }
       if (isElevationEntitled) {
@@ -353,7 +369,7 @@ const Button = ({
     },
     [
       onPressIn,
-      animateShape,
+      morphOnPress,
       springRadiusTo,
       pressedRadius,
       isElevationEntitled,
@@ -365,7 +381,7 @@ const Button = ({
   const handlePressOut = React.useCallback(
     (e: GestureResponderEvent) => {
       onPressOut?.(e);
-      if (animateShape) {
+      if (morphOnPress) {
         springRadiusTo(restingRadiusRef.current);
       }
       if (isElevationEntitled) {
@@ -374,7 +390,7 @@ const Button = ({
     },
     [
       onPressOut,
-      animateShape,
+      morphOnPress,
       springRadiusTo,
       isElevationEntitled,
       pressProgress,
@@ -438,6 +454,7 @@ const Button = ({
   const containerColor =
     backgroundOpacity < 1 ? 'transparent' : backgroundColor;
 
+  // Clamp so a spring overshoot can never render a negative radius.
   const outerStyle = useAnimatedStyle(
     () => ({
       borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),

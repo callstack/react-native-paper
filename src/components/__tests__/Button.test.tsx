@@ -8,9 +8,11 @@ import * as Reanimated from 'react-native-reanimated';
 import { LocaleProvider } from '../../core/locale';
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import { pink500, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import { shadowLayers } from '../../theme/tokens/sys/elevation';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import Button from '../Button/Button';
 import {
   getButtonColors,
@@ -1238,6 +1240,88 @@ describe('shape morph animation', () => {
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
     // `pressedContainerShape` is `small` at every size.
     expect(springTargets(spy)).toContain(getTheme().shapes.corner.small);
+    spy.mockRestore();
+  });
+
+  it('springs with the same spatial config as the rest of the library', async () => {
+    const spy = jest.spyOn(Reanimated, 'withSpring');
+    await render(
+      <Button shape="round" size="small" onPress={() => {}} testID="button">
+        {null}
+      </Button>
+    );
+    spy.mockClear();
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
+
+    // Same spring FAB and Switch use, so the overshoot matches them.
+    const { damping, stiffness } = toRawSpring(
+      getTheme().motion.spring.fast.spatial
+    );
+    expect(spy).toHaveBeenCalledWith(
+      expect.any(Number),
+      expect.objectContaining({ damping, stiffness })
+    );
+    spy.mockRestore();
+  });
+
+  it('skips the press morph under reduce motion', async () => {
+    const spy = jest.spyOn(Reanimated, 'withSpring');
+    await render(
+      <ReduceMotionContext.Provider value={true}>
+        <Button shape="round" size="small" onPress={() => {}} testID="button">
+          {null}
+        </Button>
+      </ReduceMotionContext.Provider>
+    );
+    spy.mockClear();
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it('does not morph when animateShape is false', async () => {
+    const spy = jest.spyOn(Reanimated, 'withSpring');
+    await render(
+      <Button
+        shape="round"
+        size="small"
+        animateShape={false}
+        onPress={() => {}}
+        testID="button"
+      >
+        {null}
+      </Button>
+    );
+    spy.mockClear();
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it('snaps instead of springing when animateShape is false and selected flips', async () => {
+    const spy = jest.spyOn(Reanimated, 'withSpring');
+    await render(
+      <Button shape="square" size="large" animateShape={false} testID="button">
+        {null}
+      </Button>
+    );
+    await screen.rerender(
+      <Button
+        shape="square"
+        size="large"
+        animateShape={false}
+        selected
+        testID="button"
+      >
+        {null}
+      </Button>
+    );
+
+    // The shape still changes to the flipped radius, it just doesn't animate.
+    expect(spy).not.toHaveBeenCalled();
+    expect(screen.getByTestId('button-container')).toHaveStyle({
+      borderRadius: 48,
+    });
     spy.mockRestore();
   });
 });
