@@ -240,6 +240,108 @@ it('disables TextInput.Icon when the field is disabled', async () => {
   expect(buttons[1]).toBeDisabled();
 });
 
+it('does not expose a handler-less TextInput.Icon as a control when the field is disabled', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" testID="decorative" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={() => {}}
+          testID="clear"
+        />
+      )}
+    />
+  );
+
+  const decorative = screen.getByTestId('decorative');
+  expect(decorative).toHaveProp('role', 'none');
+  expect(decorative).not.toBeDisabled();
+
+  // control: a real handler still gets disabled
+  const clear = screen.getByTestId('clear');
+  expect(clear).toHaveProp('role', 'button');
+  expect(clear).toBeDisabled();
+});
+
+it('dims a disabled TextInput.Icon exactly once', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" testID="decorative" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={() => {}}
+          testID="clear"
+        />
+      )}
+    />
+  );
+
+  const disabledOpacity = tokens.md.sys.state.opacity.disabled;
+
+  // TextInput dims the accessory wrapper and IconButton dims a disabled icon.
+  // Both firing multiplies to 0.14, so exactly one has to apply per icon.
+  // decorative: IconButton is not disabled, so the wrapper carries the dim
+  expect(screen.getByTestId('decorative-container-outer-layer')).toHaveStyle({
+    opacity: disabledOpacity,
+  });
+  expect(screen.getByTestId('decorative-icon-opacity')).toHaveStyle({
+    opacity: 1,
+  });
+
+  // interactive: IconButton carries it, so the wrapper is cancelled
+  expect(screen.getByTestId('clear-container-outer-layer')).toHaveStyle({
+    opacity: 1,
+  });
+  expect(screen.getByTestId('clear-icon-opacity')).toHaveStyle({
+    opacity: disabledOpacity,
+  });
+});
+
+it('disables a TextInput.Icon that only has onLongPress when the field is disabled', async () => {
+  const onLongPress = jest.fn<(e: GestureResponderEvent) => void>();
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onLongPress={onLongPress}
+          testID="long"
+        />
+      )}
+    />
+  );
+
+  // onLongPress alone still makes this a control; keying off onPress would
+  // leave it live
+  const long = screen.getByTestId('long');
+  expect(long).toHaveProp('role', 'button');
+  expect(long).toBeDisabled();
+
+  await userEvent.longPress(long);
+  expect(onLongPress).not.toHaveBeenCalled();
+});
+
 it('does not disable TextInput.Icon when the field is read-only (editable false)', async () => {
   await render(
     <TextInput

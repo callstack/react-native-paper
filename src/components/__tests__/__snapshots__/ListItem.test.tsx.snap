@@ -2,46 +2,14 @@
 
 exports[`renders list item with custom description 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -328,46 +296,14 @@ exports[`renders list item with custom description 1`] = `
 
 exports[`renders list item with custom title and description styles 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -473,46 +409,14 @@ exports[`renders list item with custom title and description styles 1`] = `
 
 exports[`renders list item with left and right items 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -663,46 +567,14 @@ exports[`renders list item with left and right items 1`] = `
 
 exports[`renders list item with left item 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -819,46 +691,14 @@ exports[`renders list item with left item 1`] = `
 
 exports[`renders list item with right item 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -931,46 +771,14 @@ exports[`renders list item with right item 1`] = `
 
 exports[`renders list item with title and description 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >
@@ -1072,46 +880,14 @@ exports[`renders list item with title and description 1`] = `
 
 exports[`renders with a description with typeof number 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "paddingRight": 24,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ],
-    ]
+    {
+      "paddingRight": 24,
+      "paddingVertical": 8,
+    }
   }
   testID="list-item"
 >

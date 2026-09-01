@@ -2,55 +2,25 @@
 
 exports[`renders Checkbox with custom testID 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": true,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked={true}
+  aria-disabled={false}
+  aria-live="polite"
   centered={true}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   role="checkbox"
   style={
-    [
-      {
-        "overflow": "hidden",
-      },
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
-          "justifyContent": "center",
-          "width": 40,
-        },
-        undefined,
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "borderRadius": 20,
+      "height": 40,
+      "justifyContent": "center",
+      "overflow": "hidden",
+      "width": 40,
+    }
   }
   testID="custom:testID"
 >
@@ -188,55 +158,25 @@ exports[`renders Checkbox with custom testID 1`] = `
 
 exports[`renders checked Checkbox with color 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": true,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked={true}
+  aria-disabled={false}
+  aria-live="polite"
   centered={true}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   role="checkbox"
   style={
-    [
-      {
-        "overflow": "hidden",
-      },
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
-          "justifyContent": "center",
-          "width": 40,
-        },
-        undefined,
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "borderRadius": 20,
+      "height": 40,
+      "justifyContent": "center",
+      "overflow": "hidden",
+      "width": 40,
+    }
   }
 >
   <View
@@ -730,55 +670,25 @@ exports[`renders indeterminate Checkbox 1`] = `
 
 exports[`renders indeterminate Checkbox with color 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": "mixed",
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked="mixed"
+  aria-disabled={false}
+  aria-live="polite"
   centered={true}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   role="checkbox"
   style={
-    [
-      {
-        "overflow": "hidden",
-      },
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
-          "justifyContent": "center",
-          "width": 40,
-        },
-        undefined,
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "borderRadius": 20,
+      "height": 40,
+      "justifyContent": "center",
+      "overflow": "hidden",
+      "width": 40,
+    }
   }
 >
   <View
@@ -902,55 +812,25 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 
 exports[`renders unchecked Checkbox with color 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": true,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked={true}
+  aria-disabled={false}
+  aria-live="polite"
   centered={true}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   role="checkbox"
   style={
-    [
-      {
-        "overflow": "hidden",
-      },
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
-          "justifyContent": "center",
-          "width": 40,
-        },
-        undefined,
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "borderRadius": 20,
+      "height": 40,
+      "justifyContent": "center",
+      "overflow": "hidden",
+      "width": 40,
+    }
   }
 >
   <View

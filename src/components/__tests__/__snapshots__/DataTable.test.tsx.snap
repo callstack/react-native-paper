@@ -2,48 +2,15 @@
 
 exports[`DataTable.Cell renders data table cell 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-        },
-        undefined,
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+    }
   }
 >
   <Text
@@ -74,50 +41,16 @@ exports[`DataTable.Cell renders data table cell 1`] = `
 
 exports[`DataTable.Cell renders right aligned data table cell 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   style={
-    [
-      false,
-      [
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-        },
-        {
-          "justifyContent": "flex-end",
-        },
-        undefined,
-      ],
-    ]
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "flex-end",
+    }
   }
 >
   <Text
@@ -485,6 +418,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -625,6 +559,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -823,6 +758,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -963,6 +899,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1103,6 +1040,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1243,6 +1181,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1441,6 +1380,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1581,6 +1521,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1727,7 +1668,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -2027,6 +1968,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2167,6 +2109,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2307,6 +2250,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2447,6 +2391,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}

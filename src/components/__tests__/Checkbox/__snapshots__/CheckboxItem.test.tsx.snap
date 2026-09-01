@@ -2,43 +2,13 @@
 
 exports[`can render leading checkbox control 1`] = `
 <View
-  accessibilityLabel="Default with leading control"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked={false}
+  aria-label="Default with leading control"
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   role="checkbox"
-  style={
-    [
-      false,
-      undefined,
-    ]
-  }
+  style={{}}
 >
   <View
     importantForAccessibility="no-hide-descendants"
@@ -57,53 +27,21 @@ exports[`can render leading checkbox control 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={false}
       centered={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
-              "justifyContent": "center",
-              "width": 40,
-            },
-            undefined,
-            undefined,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 40,
+        }
       }
     >
       <View
@@ -280,43 +218,13 @@ exports[`can render leading checkbox control 1`] = `
 
 exports[`renders unchecked 1`] = `
 <View
-  accessibilityLabel="Unchecked Button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
+  aria-checked={false}
+  aria-label="Unchecked Button"
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   role="checkbox"
-  style={
-    [
-      false,
-      undefined,
-    ]
-  }
+  style={{}}
 >
   <View
     importantForAccessibility="no-hide-descendants"
@@ -373,53 +281,21 @@ exports[`renders unchecked 1`] = `
       Unchecked Button
     </Text>
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={false}
       centered={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            {
-              "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
-              "justifyContent": "center",
-              "width": 40,
-            },
-            undefined,
-            undefined,
-          ],
-        ]
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 40,
+        }
       }
     >
       <View

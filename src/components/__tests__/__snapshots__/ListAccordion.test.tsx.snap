@@ -14,7 +14,7 @@ exports[`renders expanded accordion 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": true,
           "selected": undefined,
         }
@@ -158,46 +158,14 @@ exports[`renders expanded accordion 1`] = `
     </View>
   </View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    focusable={false}
     style={
-      [
-        false,
-        [
-          {
-            "paddingRight": 24,
-            "paddingVertical": 8,
-          },
-          undefined,
-        ],
-      ]
+      {
+        "paddingRight": 24,
+        "paddingVertical": 8,
+      }
     }
   >
     <View
@@ -279,7 +247,7 @@ exports[`renders list accordion with children 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": false,
           "selected": undefined,
         }
@@ -486,7 +454,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": false,
           "selected": undefined,
         }
@@ -686,7 +654,7 @@ exports[`renders list accordion with left items 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": false,
           "selected": undefined,
         }
@@ -893,7 +861,7 @@ exports[`renders multiline list accordion 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": false,
           "selected": undefined,
         }

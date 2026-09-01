@@ -7,6 +7,7 @@ import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import IconButton from '../IconButton/IconButton';
 
 export type TextInputAccessoryProps = {
@@ -78,7 +79,16 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
-  const onPressHandler = disabled ? undefined : onPress;
+  // A decorative icon is not a control, so `disabled` would only announce it as
+  // a disabled button. Must match TouchableRipple's predicate, or an icon with
+  // only `onLongPress` stays pressable on a disabled field.
+  const { onLongPress, onPressIn, onPressOut } = rest;
+  const isInteractive = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
 
   return (
     <View style={styles.iconWrapper}>
@@ -87,8 +97,17 @@ const TextInputIcon = ({
         icon={icon}
         iconColor={color}
         size={iconSize}
-        style={[styles.icon, style]}
-        onPress={onPressHandler}
+        style={[
+          styles.icon,
+          style,
+          // TextInput already dims the whole accessory when the field is
+          // disabled. Forwarding `disabled` makes IconButton dim the icon too,
+          // and the two multiply, so let IconButton own it and cancel the outer
+          // one. A decorative icon keeps it, nothing else dims it.
+          isInteractive && disabled ? styles.notDimmed : null,
+        ]}
+        disabled={isInteractive ? disabled : undefined}
+        onPress={onPress}
       />
     </View>
   );

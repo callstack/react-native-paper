@@ -91,8 +91,18 @@ it('renders disabled button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled button if there is no touch handler passed', async () => {
-  await render(<Button testID="disabled-button">Disabled button</Button>);
+it('does not mark a button without a touch handler as disabled', async () => {
+  await render(<Button testID="plain-button">Plain button</Button>);
+
+  expect(screen.getByTestId('plain-button')).not.toBeDisabled();
+});
+
+it('renders disabled button when the disabled prop is passed', async () => {
+  await render(
+    <Button disabled onPress={() => {}} testID="disabled-button">
+      Disabled button
+    </Button>
+  );
 
   expect(screen.getByTestId('disabled-button')).toBeDisabled();
 });

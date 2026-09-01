@@ -42,45 +42,15 @@ exports[`renders button with an accessibility hint 1`] = `
   >
     <View
       accessibilityHint="hint"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -195,45 +165,15 @@ exports[`renders button with an accessibility label 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -347,45 +287,15 @@ exports[`renders button with button color 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -499,45 +409,15 @@ exports[`renders button with color 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -651,45 +531,15 @@ exports[`renders button with custom testID 1`] = `
     testID="custom:testID-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="custom:testID"
     >
@@ -803,45 +653,15 @@ exports[`renders button with icon 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -1004,45 +824,15 @@ exports[`renders button with icon in reverse order 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -1207,45 +997,15 @@ exports[`renders contained contained with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -1512,45 +1272,15 @@ exports[`renders loading button 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -1868,45 +1598,15 @@ exports[`renders outlined button with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 19,
-          },
-        ]
+        {
+          "borderRadius": 19,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -2021,45 +1721,15 @@ exports[`renders text button by default 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >
@@ -2173,45 +1843,15 @@ exports[`renders text button with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      focusable={false}
+      role="none"
       style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
+        {
+          "borderRadius": 20,
+          "overflow": "hidden",
+        }
       }
       testID="button"
     >

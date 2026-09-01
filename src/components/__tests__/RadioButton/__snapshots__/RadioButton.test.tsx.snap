@@ -7,7 +7,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -94,7 +94,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -180,7 +180,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -266,7 +266,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
     {
       "busy": undefined,
       "checked": true,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }

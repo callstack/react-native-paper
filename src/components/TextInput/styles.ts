@@ -73,6 +73,9 @@ export const styles = StyleSheet.create({
   icon: {
     margin: 0,
   },
+  notDimmed: {
+    opacity: 1,
+  },
 });
 
 export const filledStyles = StyleSheet.create({

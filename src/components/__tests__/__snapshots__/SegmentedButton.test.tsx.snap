@@ -40,7 +40,7 @@ exports[`renders segmented button 1`] = `
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -167,7 +167,7 @@ exports[`renders segmented button 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
