@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,8 +7,18 @@ import type {
   Role,
   StyleProp,
   TextStyle,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
+
+import Reanimated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 
 import {
   getButtonColors,
@@ -17,11 +27,16 @@ import {
   getButtonShapeRadius,
   getButtonSizeStyle,
   getEffectiveButtonShape,
-  getButtonTouchableRippleStyle,
 } from './utils';
 import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import {
+  androidElevationLevels,
+  shadow,
+  shadowLayers,
+} from '../../theme/tokens/sys/elevation';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -29,12 +44,11 @@ import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<ViewProps, 'style'> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
    * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)
@@ -160,7 +174,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Style for the button text.
    */
@@ -244,7 +258,6 @@ const Button = ({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
-  const { animation } = theme;
   const isWeb = Platform.OS === 'web';
 
   const requestedTrailingIcon = iconPosition === 'trailing';
@@ -260,25 +273,29 @@ const Button = ({
     onLongPress,
   });
 
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
   const isElevationEntitled = !disabled && isMode('elevated');
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isElevationEntitled ? initialElevation : 0)
+  // 0 = resting, 1 = pressed. The two ends are resolved from the elevation
+  // tokens further down, so a `disabled` / `mode` change moves the shadow on the
+  // next render.
+  const pressProgress = useSharedValue(0);
+
+  const elevationTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short4,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion, reanimatedReduceMotion]
   );
 
-  React.useEffect(() => {
-    // Workaround not to call setValue on Animated.Value, because it breaks styles.
-    // https://github.com/callstack/react-native-paper/issues/4559
-    Animated.timing(elevation, {
-      toValue: isElevationEntitled ? initialElevation : 0,
-      duration: 0,
-      useNativeDriver: true,
-    });
-  }, [isElevationEntitled, elevation]);
-
   const borderRadiusStyles = React.useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+    const flattenedStyles = StyleSheet.flatten(style) || {};
     const [, radiusStyles] = splitStyles(
       flattenedStyles,
       (key) => key.startsWith('border') && key.endsWith('Radius')
@@ -303,21 +320,25 @@ const Button = ({
       ? sizeStyle.minHeight / 2
       : getButtonShapeRadius({ size, shape, theme, selected });
   const pressedRadius = getButtonPressedRadius({ size, theme });
-  const { current: animatedRadius } = React.useRef<Animated.Value>(
-    new Animated.Value(restingRadius)
-  );
+  const animatedRadius = useSharedValue(restingRadius);
   const restingRadiusRef = React.useRef(restingRadius);
   const isRadiusMountedRef = React.useRef(false);
 
+  // The morph stays imperative: a press can interrupt it mid-flight, which a
+  // duration-based transition can't express.
+  const radiusSpringConfig = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion.spring.fast.spatial, reanimatedReduceMotion]
+  );
+
   const springRadiusTo = React.useCallback(
     (toValue: number) => {
-      Animated.spring(animatedRadius, {
-        toValue,
-        ...toRawSpring(theme.motion.spring.fast.spatial),
-        useNativeDriver: false,
-      }).start();
+      animatedRadius.value = withSpring(toValue, radiusSpringConfig);
     },
-    [animatedRadius, theme]
+    [animatedRadius, radiusSpringConfig]
   );
 
   const handlePressIn = React.useCallback(
@@ -326,14 +347,8 @@ const Button = ({
       if (animateShape) {
         springRadiusTo(pressedRadius);
       }
-      if (mode === 'elevated') {
-        const { scale } = animation;
-        Animated.timing(elevation, {
-          toValue: activeElevation,
-          duration: 200 * scale,
-          useNativeDriver:
-            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-        }).start();
+      if (isElevationEntitled) {
+        pressProgress.value = withTiming(1, elevationTimingConfig);
       }
     },
     [
@@ -341,10 +356,9 @@ const Button = ({
       animateShape,
       springRadiusTo,
       pressedRadius,
-      mode,
-      animation,
-      elevation,
-      isWeb,
+      isElevationEntitled,
+      pressProgress,
+      elevationTimingConfig,
     ]
   );
 
@@ -354,24 +368,17 @@ const Button = ({
       if (animateShape) {
         springRadiusTo(restingRadiusRef.current);
       }
-      if (mode === 'elevated') {
-        const { scale } = animation;
-        Animated.timing(elevation, {
-          toValue: initialElevation,
-          duration: 150 * scale,
-          useNativeDriver:
-            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-        }).start();
+      if (isElevationEntitled) {
+        pressProgress.value = withTiming(0, elevationTimingConfig);
       }
     },
     [
       onPressOut,
       animateShape,
       springRadiusTo,
-      mode,
-      animation,
-      elevation,
-      isWeb,
+      isElevationEntitled,
+      pressProgress,
+      elevationTimingConfig,
     ]
   );
 
@@ -385,22 +392,9 @@ const Button = ({
     if (animateShape) {
       springRadiusTo(restingRadius);
     } else {
-      animatedRadius.setValue(restingRadius);
+      animatedRadius.value = restingRadius;
     }
   }, [restingRadius, animateShape, animatedRadius, springRadiusTo]);
-
-  // Clamp so a spring overshoot can never render a negative radius.
-  const surfaceRadius = React.useMemo(
-    () =>
-      animateShape
-        ? animatedRadius.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
-            extrapolateLeft: 'clamp',
-          })
-        : restingRadius,
-    [animateShape, animatedRadius, restingRadius]
-  );
 
   const {
     backgroundColor,
@@ -438,40 +432,89 @@ const Button = ({
     [labelColor, customRippleColor]
   );
 
-  const touchableStyle = React.useMemo(
+  // A radius pinned via `style` wins over the animated one, and disables the
+  // morph entirely (see `animateShape`).
+  const pinnedRadius = borderRadiusStyles.borderRadius;
+  const containerColor =
+    backgroundOpacity < 1 ? 'transparent' : backgroundColor;
+
+  const outerStyle = useAnimatedStyle(
     () => ({
-      ...borderRadiusStyles,
-      borderRadius: borderRadiusStyles.borderRadius ?? restingRadius,
+      borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
+      backgroundColor: containerColor,
     }),
-    [borderRadiusStyles, restingRadius]
+    [animatedRadius, pinnedRadius, containerColor]
   );
 
-  const buttonStyle = React.useMemo(
+  // The clip carries the same animated radius, so the ripple and the disabled
+  // overlay follow the morph.
+  const clipStyle = useAnimatedStyle(
     () => ({
-      backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
+      borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
+      backgroundColor: containerColor,
       borderColor,
       borderWidth,
-      ...touchableStyle,
-      borderRadius: surfaceRadius, // animated; ripple clip + overlay stay static
     }),
-    [
-      backgroundOpacity,
-      backgroundColor,
-      borderColor,
-      borderWidth,
-      touchableStyle,
-      surfaceRadius,
-    ]
+    [animatedRadius, pinnedRadius, containerColor, borderColor, borderWidth]
   );
 
-  const touchableRippleStyle = React.useMemo(
-    () =>
-      // Web can't animate the inner radius — use a rect clipped by the Surface.
-      isWeb && animateShape
-        ? { borderRadius: 0 }
-        : getButtonTouchableRippleStyle(touchableStyle, borderWidth),
-    [isWeb, animateShape, touchableStyle, borderWidth]
-  );
+  // TODO: move this back to `Surface` once #5078 lands.
+  // Button builds its own shadow only because today's `Surface` can't host a
+  // Reanimated style: it accepts `Elevation | Animated.Value` for `elevation`
+  // and `StyleSheet.flatten`s `style`, which strips the metadata
+  // `useAnimatedStyle` needs. https://github.com/callstack/react-native-paper/pull/5078
+  // reworks `Surface` for Reanimated — single view, `backgroundColor` and
+  // `borderRadius` as (shared-value capable) props, ambient layer absolutely
+  // positioned behind the content — and already migrates Button and FAB to it.
+  // When it merges, drop this block and the outer `Reanimated.View` in favour of
+  // `<Surface backgroundColor={...} borderRadius={...} elevation={...}>`.
+  //
+  // Until then Button renders only the spot shadow layer, mirroring
+  // `FAB/useVisibility.ts`; `Surface`'s second, ambient layer is missing, so an
+  // elevated button's shadow is slightly flatter than it was.
+  const [spotLayer] = shadowLayers;
+  const shadowColor = theme.colors.shadow;
+  const restLevel = isElevationEntitled ? initialElevation : 0;
+  const pressedLevel = isElevationEntitled ? activeElevation : 0;
+  const webShadow =
+    isWeb && isElevationEntitled ? shadow(restLevel, shadowColor) : null;
+
+  const androidRest = androidElevationLevels[restLevel];
+  const androidPressed = androidElevationLevels[pressedLevel];
+  const heightRest = spotLayer.height[restLevel];
+  const heightPressed = spotLayer.height[pressedLevel];
+  const radiusRest = spotLayer.shadowRadius[restLevel];
+  const radiusPressed = spotLayer.shadowRadius[pressedLevel];
+  const spotOpacity = isElevationEntitled ? spotLayer.shadowOpacity : 0;
+
+  const shadowStyle = useAnimatedStyle(() => {
+    const blend = (from: number, to: number) =>
+      from + (to - from) * pressProgress.value;
+
+    if (Platform.OS === 'android') {
+      return { elevation: blend(androidRest, androidPressed) };
+    }
+    if (Platform.OS === 'web') {
+      return webShadow ?? {};
+    }
+    return {
+      shadowColor,
+      shadowOpacity: spotOpacity,
+      shadowOffset: { width: 0, height: blend(heightRest, heightPressed) },
+      shadowRadius: blend(radiusRest, radiusPressed),
+    };
+  }, [
+    pressProgress,
+    androidRest,
+    androidPressed,
+    heightRest,
+    heightPressed,
+    radiusRest,
+    radiusPressed,
+    shadowColor,
+    spotOpacity,
+    webShadow,
+  ]);
 
   const { color: labelStyleColor } = React.useMemo(
     () => StyleSheet.flatten(labelStyle) || {},
@@ -512,76 +555,76 @@ const Button = ({
   );
 
   return (
-    <Surface
+    <Reanimated.View
       {...rest}
       ref={ref}
-      testID={`${testID}-container`}
-      style={
-        [
-          styles.button,
-          buttonStyle,
-          // Clip the rect ripple to the morphing radius (web; box-shadow safe).
-          isWeb && animateShape && styles.clip,
-          style,
-        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-      }
-      elevation={elevation}
-      container
+      testID={`${testID}-container-outer-layer`}
+      style={[styles.button, shadowStyle, outerStyle, style]}
     >
-      {backgroundOpacity < 1 && (
-        <View
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            {
-              backgroundColor,
-              opacity: backgroundOpacity,
-              borderRadius: touchableStyle.borderRadius,
-            },
-          ]}
-        />
-      )}
-      <TouchableRipple
-        borderless
-        background={background}
-        rippleColor={rippleColor}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
-        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
-        delayLongPress={delayLongPress}
-        aria-label={ariaLabel}
-        accessibilityHint={accessibilityHint}
-        role={role}
-        aria-disabled={disabled}
-        aria-selected={selected}
-        accessible={accessible}
-        hitSlop={hitSlopWithMinTarget}
-        disabled={disabled}
-        style={touchableRippleStyle}
-        testID={testID}
-        theme={theme}
-        ref={touchableRef}
+      <Reanimated.View
+        testID={`${testID}-container`}
+        style={[styles.clip, clipStyle, borderRadiusStyles]}
       >
-        <View
-          testID={`${testID}-content`}
-          style={[
-            styles.content,
-            isTrailingIcon && styles.contentReverse,
-            {
-              minHeight: sizeStyle.minHeight,
-              paddingStart: sizeStyle.paddingStart,
-              paddingEnd: sizeStyle.paddingEnd,
-              gap: sizeStyle.iconGap,
-            },
-            { opacity: labelOpacity },
-            contentStyle,
-          ]}
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
+        <TouchableRipple
+          borderless
+          background={background}
+          rippleColor={rippleColor}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+          onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+          delayLongPress={delayLongPress}
+          aria-label={ariaLabel}
+          accessibilityHint={accessibilityHint}
+          role={role}
+          aria-disabled={disabled}
+          aria-selected={selected}
+          accessible={accessible}
+          hitSlop={hitSlopWithMinTarget}
+          disabled={disabled}
+          testID={testID}
+          theme={theme}
+          ref={touchableRef}
         >
-          {icon && loading !== true ? (
-            <View testID={`${testID}-icon-container`}>
-              <Icon
-                source={icon}
+          <View
+            testID={`${testID}-content`}
+            style={[
+              styles.content,
+              isTrailingIcon && styles.contentReverse,
+              {
+                minHeight: sizeStyle.minHeight,
+                paddingStart: sizeStyle.paddingStart,
+                paddingEnd: sizeStyle.paddingEnd,
+                gap: sizeStyle.iconGap,
+              },
+              { opacity: labelOpacity },
+              contentStyle,
+            ]}
+          >
+            {icon && loading !== true ? (
+              <View testID={`${testID}-icon-container`}>
+                <Icon
+                  source={icon}
+                  size={sizeStyle.iconSize}
+                  color={
+                    typeof labelStyleColor === 'string'
+                      ? labelStyleColor
+                      : labelColor
+                  }
+                />
+              </View>
+            ) : null}
+            {loading ? (
+              <ActivityIndicator
                 size={sizeStyle.iconSize}
                 color={
                   typeof labelStyleColor === 'string'
@@ -589,40 +632,30 @@ const Button = ({
                     : labelColor
                 }
               />
-            </View>
-          ) : null}
-          {loading ? (
-            <ActivityIndicator
-              size={sizeStyle.iconSize}
-              color={
-                typeof labelStyleColor === 'string'
-                  ? labelStyleColor
-                  : labelColor
-              }
-            />
-          ) : null}
-          <Text
-            variant={sizeStyle.labelVariant}
-            selectable={false}
-            numberOfLines={1}
-            testID={`${testID}-text`}
-            style={[styles.label, labelTypeStyle, labelStyle]}
-            maxFontSizeMultiplier={maxFontSizeMultiplier}
-          >
-            {children}
-          </Text>
-        </View>
-      </TouchableRipple>
-    </Surface>
+            ) : null}
+            <Text
+              variant={sizeStyle.labelVariant}
+              selectable={false}
+              numberOfLines={1}
+              testID={`${testID}-text`}
+              style={[styles.label, labelTypeStyle, labelStyle]}
+              maxFontSizeMultiplier={maxFontSizeMultiplier}
+            >
+              {children}
+            </Text>
+          </View>
+        </TouchableRipple>
+      </Reanimated.View>
+    </Reanimated.View>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
     minWidth: 64,
-    borderStyle: 'solid',
   },
   clip: {
+    borderStyle: 'solid',
     overflow: 'hidden',
   },
   content: {

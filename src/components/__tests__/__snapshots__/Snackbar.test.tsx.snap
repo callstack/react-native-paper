@@ -319,35 +319,12 @@ exports[`renders snackbar with action button 1`] = `
         }
       >
         <View
-          collapsable={false}
           style={
-            {
-              "backgroundColor": "transparent",
-              "borderRadius": 20,
-              "marginLeft": 4,
-              "marginRight": 8,
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 0,
-                "width": 0,
-              },
-              "shadowOpacity": 0,
-              "shadowRadius": 0,
-            }
-          }
-          testID="button-container-outer-layer"
-        >
-          <View
-            collapsable={false}
-            style={
+            [
               {
-                "backgroundColor": "transparent",
-                "borderColor": "transparent",
-                "borderRadius": 20,
-                "borderStyle": "solid",
-                "borderWidth": 0,
-                "flex": undefined,
                 "minWidth": 64,
+              },
+              {
                 "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
@@ -355,7 +332,37 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-              }
+              },
+              {
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
+              },
+              [
+                {
+                  "marginLeft": 4,
+                  "marginRight": 8,
+                },
+                undefined,
+              ],
+            ]
+          }
+          testID="button-container-outer-layer"
+        >
+          <View
+            style={
+              [
+                {
+                  "borderStyle": "solid",
+                  "overflow": "hidden",
+                },
+                {
+                  "backgroundColor": "transparent",
+                  "borderColor": "transparent",
+                  "borderRadius": 20,
+                  "borderWidth": 0,
+                },
+                {},
+              ]
             }
             testID="button-container"
           >
@@ -401,9 +408,7 @@ exports[`renders snackbar with action button 1`] = `
                   {
                     "overflow": "hidden",
                   },
-                  {
-                    "borderRadius": 20,
-                  },
+                  undefined,
                 ]
               }
               testID="button"

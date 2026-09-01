@@ -2,33 +2,12 @@
 
 exports[`renders button with an accessibility hint 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -36,7 +15,31 @@ exports[`renders button with an accessibility hint 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -83,9 +86,7 @@ exports[`renders button with an accessibility hint 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -162,34 +163,13 @@ exports[`renders button with an accessibility hint 1`] = `
 
 exports[`renders button with an accessibility label 1`] = `
 <View
-  collapsable={false}
+  accessibilityLabel="label"
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    accessibilityLabel="label"
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -197,7 +177,31 @@ exports[`renders button with an accessibility label 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -243,9 +247,7 @@ exports[`renders button with an accessibility label 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -322,33 +324,12 @@ exports[`renders button with an accessibility label 1`] = `
 
 exports[`renders button with button color 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "#e91e63",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "#e91e63",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -356,7 +337,31 @@ exports[`renders button with button color 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "#e91e63",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "#e91e63",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -402,9 +407,7 @@ exports[`renders button with button color 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -481,33 +484,12 @@ exports[`renders button with button color 1`] = `
 
 exports[`renders button with color 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -515,7 +497,31 @@ exports[`renders button with color 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -561,9 +567,7 @@ exports[`renders button with color 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -640,33 +644,12 @@ exports[`renders button with color 1`] = `
 
 exports[`renders button with custom testID 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="custom:testID-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -674,7 +657,31 @@ exports[`renders button with custom testID 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="custom:testID-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="custom:testID-container"
   >
@@ -720,9 +727,7 @@ exports[`renders button with custom testID 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="custom:testID"
@@ -799,33 +804,12 @@ exports[`renders button with custom testID 1`] = `
 
 exports[`renders button with icon 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -833,7 +817,31 @@ exports[`renders button with icon 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -879,9 +887,7 @@ exports[`renders button with icon 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -991,33 +997,12 @@ exports[`renders button with icon 1`] = `
 
 exports[`renders button with icon in reverse order 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1025,7 +1010,31 @@ exports[`renders button with icon in reverse order 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -1071,9 +1080,7 @@ exports[`renders button with icon in reverse order 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -1185,33 +1192,12 @@ exports[`renders button with icon in reverse order 1`] = `
 
 exports[`renders disabled button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1219,7 +1205,31 @@ exports[`renders disabled button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "transparent",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -1236,7 +1246,6 @@ exports[`renders disabled button 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-            "borderRadius": 20,
             "opacity": 0.1,
           },
         ]
@@ -1284,9 +1293,7 @@ exports[`renders disabled button 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -1363,33 +1370,12 @@ exports[`renders disabled button 1`] = `
 
 exports[`renders filled button by default 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1397,7 +1383,31 @@ exports[`renders filled button by default 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -1443,9 +1453,7 @@ exports[`renders filled button by default 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -1522,33 +1530,12 @@ exports[`renders filled button by default 1`] = `
 
 exports[`renders filled button with mode 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1556,7 +1543,31 @@ exports[`renders filled button with mode 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -1602,9 +1613,7 @@ exports[`renders filled button with mode 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -1681,33 +1690,12 @@ exports[`renders filled button with mode 1`] = `
 
 exports[`renders loading button 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1715,7 +1703,31 @@ exports[`renders loading button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -1761,9 +1773,7 @@ exports[`renders loading button 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -2031,33 +2041,12 @@ exports[`renders loading button 1`] = `
 
 exports[`renders outlined button with mode 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -2065,7 +2054,31 @@ exports[`renders outlined button with mode 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "transparent",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderRadius": 20,
+          "borderWidth": 1,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -2111,9 +2124,7 @@ exports[`renders outlined button with mode 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 19,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -2190,33 +2201,12 @@ exports[`renders outlined button with mode 1`] = `
 
 exports[`renders text button with mode 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -2224,7 +2214,31 @@ exports[`renders text button with mode 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "transparent",
+        "borderRadius": 20,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "transparent",
+          "borderColor": "transparent",
+          "borderRadius": 20,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -2270,9 +2284,7 @@ exports[`renders text button with mode 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          undefined,
         ]
       }
       testID="button"
@@ -2349,33 +2361,12 @@ exports[`renders text button with mode 1`] = `
 
 exports[`size prop renders a button with per-size metrics 1`] = `
 <View
-  collapsable={false}
   style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 28,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 28,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -2383,7 +2374,31 @@ exports[`size prop renders a button with per-size metrics 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+        "borderRadius": 28,
+      },
+      undefined,
+    ]
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    style={
+      [
+        {
+          "borderStyle": "solid",
+          "overflow": "hidden",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "transparent",
+          "borderRadius": 28,
+          "borderWidth": 0,
+        },
+        {},
+      ]
     }
     testID="button-container"
   >
@@ -2423,9 +2438,7 @@ exports[`size prop renders a button with per-size metrics 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 28,
-          },
+          undefined,
         ]
       }
       testID="button"

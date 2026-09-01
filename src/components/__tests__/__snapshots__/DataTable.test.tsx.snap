@@ -1682,34 +1682,12 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       collapsable={false}
     >
       <View
-        collapsable={false}
         style={
-          {
-            "backgroundColor": "transparent",
-            "borderRadius": 20,
-            "marginRight": 16,
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-          }
-        }
-        testID="button-container-outer-layer"
-      >
-        <View
-          collapsable={false}
-          style={
+          [
             {
-              "backgroundColor": "transparent",
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderStyle": "solid",
-              "borderWidth": 1,
-              "flex": undefined,
               "minWidth": 64,
+            },
+            {
               "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
@@ -1717,8 +1695,34 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+            },
+            {
+              "backgroundColor": "transparent",
+              "borderRadius": 20,
+            },
+            {
+              "marginRight": 16,
               "textAlign": "center",
-            }
+            },
+          ]
+        }
+        testID="button-container-outer-layer"
+      >
+        <View
+          style={
+            [
+              {
+                "borderStyle": "solid",
+                "overflow": "hidden",
+              },
+              {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 1,
+              },
+              {},
+            ]
           }
           testID="button-container"
         >
@@ -1764,9 +1768,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 {
                   "overflow": "hidden",
                 },
-                {
-                  "borderRadius": 19,
-                },
+                undefined,
               ]
             }
             testID="button"

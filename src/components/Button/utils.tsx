@@ -1,4 +1,4 @@
-import type { ColorValue, ViewStyle } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import color from 'color';
 
@@ -8,7 +8,6 @@ import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
-import { splitStyles } from '../../utils/splitStyles';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -376,45 +375,4 @@ export const getButtonRippleColor = ({
   }
 
   return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
-};
-
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
-    ViewStyle,
-    | 'borderBottomEndRadius'
-    | 'borderBottomLeftRadius'
-    | 'borderBottomRightRadius'
-    | 'borderBottomStartRadius'
-    | 'borderTopEndRadius'
-    | 'borderTopLeftRadius'
-    | 'borderTopRightRadius'
-    | 'borderTopStartRadius'
-    | 'borderRadius'
-  >
->;
-export const getButtonTouchableRippleStyle = (
-  style?: ViewStyle,
-  borderWidth: number = 0
-): ViewStyleBorderRadiusStyles => {
-  if (!style) return {};
-  const touchableRippleStyle: ViewStyleBorderRadiusStyles = {};
-
-  const [, borderRadiusStyles] = splitStyles(
-    style,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
-  );
-
-  const borderRadiusKeys =
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>;
-
-  borderRadiusKeys.forEach((key) => {
-    const value = style[key];
-    if (typeof value === 'number') {
-      // Only subtract borderWidth if value is greater than 0
-      const radius = value > 0 ? value - borderWidth : 0;
-      touchableRippleStyle[key] = radius;
-    }
-  });
-  return touchableRippleStyle;
 };

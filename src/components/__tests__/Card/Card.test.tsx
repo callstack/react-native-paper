@@ -156,7 +156,10 @@ describe('CardActions', () => {
       </Card>
     );
 
-    expect(screen.getByTestId('card-actions-button')).toHaveStyle({
+    // `style` lands on the shadow host, which is also what carries the radius.
+    expect(
+      screen.getByTestId('card-actions-button-container-outer-layer')
+    ).toHaveStyle({
       borderRadius: 32,
     });
   });
