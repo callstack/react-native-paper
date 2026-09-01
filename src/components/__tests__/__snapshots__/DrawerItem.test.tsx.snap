@@ -6,7 +6,7 @@ exports[`renders DrawerItem with icon 1`] = `
     accessible={true}
     collapsable={false}
     focusable={false}
-    role="button"
+    role="none"
     style={
       {
         "backgroundColor": undefined,
@@ -128,7 +128,7 @@ exports[`renders active DrawerItem 1`] = `
     aria-selected={true}
     collapsable={false}
     focusable={false}
-    role="button"
+    role="none"
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",

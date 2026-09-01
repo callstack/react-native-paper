@@ -189,7 +189,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -202,7 +201,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",
@@ -362,7 +361,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -375,7 +373,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",
@@ -627,7 +625,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -640,7 +637,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",
@@ -1274,7 +1271,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -1287,7 +1283,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",
@@ -1447,7 +1443,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -1460,7 +1455,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",
@@ -1693,7 +1688,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         >
           <View
             accessible={true}
-            aria-disabled={false}
             centered={true}
             collapsable={false}
             focusable={false}
@@ -1706,7 +1700,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               }
             }
             multiline={false}
-            role="button"
+            role="none"
             style={
               {
                 "alignItems": "center",

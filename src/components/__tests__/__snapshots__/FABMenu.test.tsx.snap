@@ -498,7 +498,7 @@ exports[`renders FAB.Menu closed 1`] = `
             focusable={false}
             onBlur={[Function]}
             onFocus={[Function]}
-            role="button"
+            role="none"
             style={
               {
                 "flex": 1,
@@ -1152,7 +1152,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             focusable={false}
             onBlur={[Function]}
             onFocus={[Function]}
-            role="button"
+            role="none"
             style={
               {
                 "flex": 1,

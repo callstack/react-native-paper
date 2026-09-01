@@ -7,6 +7,7 @@ import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import IconButton from '../IconButton/IconButton';
 
 export type TextInputAccessoryProps = {
@@ -78,6 +79,17 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
+  // A decorative icon is not a control, so `disabled` would only announce it as
+  // a disabled button. Must match TouchableRipple's predicate, or an icon with
+  // only `onLongPress` stays pressable on a disabled field.
+  const { onLongPress, onPressIn, onPressOut } = rest;
+  const isInteractive = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
   return (
     <View style={styles.iconWrapper}>
       <IconButton
@@ -86,7 +98,7 @@ const TextInputIcon = ({
         iconColor={color}
         size={iconSize}
         style={[styles.icon, style]}
-        disabled={disabled}
+        disabled={isInteractive ? disabled : undefined}
         onPress={onPress}
       />
     </View>

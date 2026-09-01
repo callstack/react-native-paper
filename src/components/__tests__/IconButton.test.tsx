@@ -97,7 +97,9 @@ describe('getIconButtonColor - icon color', () => {
     });
   });
 
-  it('should keep an explicit icon color when disabled', () => {
+  it('should let the disabled color outrank an explicit icon color', () => {
+    // matches Button's `customTextColor && !disabled` and the documented
+    // `onSurfaceDisabled`
     expect(
       getIconButtonColor({
         theme: getTheme(),
@@ -105,9 +107,7 @@ describe('getIconButtonColor - icon color', () => {
         customIconColor: 'purple',
       })
     ).toMatchObject({
-      // disabled is still conveyed by the opacity, so it must not silently
-      // override a color the caller asked for
-      iconColor: 'purple',
+      iconColor: getTheme().colors.onSurface,
       iconOpacity: stateOpacity.disabled,
     });
   });

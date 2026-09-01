@@ -198,7 +198,7 @@ exports[`renders icon button by default 1`] = `
           "top": 6,
         }
       }
-      role="button"
+      role="none"
       style={
         {
           "alignItems": "center",
@@ -307,7 +307,7 @@ exports[`renders icon button with color 1`] = `
           "top": 6,
         }
       }
-      role="button"
+      role="none"
       style={
         {
           "alignItems": "center",
@@ -416,7 +416,7 @@ exports[`renders icon button with size 1`] = `
           "top": 6,
         }
       }
-      role="button"
+      role="none"
       style={
         {
           "alignItems": "center",
@@ -525,7 +525,7 @@ exports[`renders icon change animated 1`] = `
           "top": 6,
         }
       }
-      role="button"
+      role="none"
       style={
         {
           "alignItems": "center",

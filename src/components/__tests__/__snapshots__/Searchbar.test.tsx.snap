@@ -94,7 +94,7 @@ exports[`activity indicator snapshot test 1`] = `
               "top": 6,
             }
           }
-          role="button"
+          role="none"
           style={
             {
               "alignItems": "center",
@@ -473,7 +473,7 @@ exports[`renders with placeholder 1`] = `
               "top": 6,
             }
           }
-          role="button"
+          role="none"
           style={
             {
               "alignItems": "center",
@@ -813,7 +813,7 @@ exports[`renders with text 1`] = `
               "top": 6,
             }
           }
-          role="button"
+          role="none"
           style={
             {
               "alignItems": "center",

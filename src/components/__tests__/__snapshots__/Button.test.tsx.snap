@@ -45,7 +45,7 @@ exports[`renders button with an accessibility hint 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -168,7 +168,7 @@ exports[`renders button with an accessibility label 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -290,7 +290,7 @@ exports[`renders button with button color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -412,7 +412,7 @@ exports[`renders button with color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -534,7 +534,7 @@ exports[`renders button with custom testID 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -656,7 +656,7 @@ exports[`renders button with icon 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -827,7 +827,7 @@ exports[`renders button with icon in reverse order 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -1000,7 +1000,7 @@ exports[`renders contained contained with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -1275,7 +1275,7 @@ exports[`renders loading button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -1601,7 +1601,7 @@ exports[`renders outlined button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 19,
@@ -1724,7 +1724,7 @@ exports[`renders text button by default 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,
@@ -1846,7 +1846,7 @@ exports[`renders text button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 20,

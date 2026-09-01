@@ -135,7 +135,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "top": 6,
                 }
               }
-              role="button"
+              role="none"
               style={
                 {
                   "alignItems": "center",

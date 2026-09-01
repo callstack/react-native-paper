@@ -46,7 +46,7 @@ exports[`renders chip with close button 1`] = `
       aria-selected={false}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 8,
@@ -312,7 +312,7 @@ exports[`renders chip with custom close button 1`] = `
       aria-selected={false}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 8,
@@ -578,7 +578,7 @@ exports[`renders chip with icon 1`] = `
       aria-selected={false}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 8,
@@ -1071,7 +1071,7 @@ exports[`renders selected chip 1`] = `
       aria-selected={true}
       collapsable={false}
       focusable={false}
-      role="button"
+      role="none"
       style={
         {
           "borderRadius": 8,

@@ -57,7 +57,7 @@ exports[`renders menu with content styles 1`] = `
             accessible={true}
             collapsable={false}
             focusable={false}
-            role="button"
+            role="none"
             style={
               {
                 "borderRadius": 19,
@@ -590,7 +590,7 @@ exports[`renders not visible menu 1`] = `
           accessible={true}
           collapsable={false}
           focusable={false}
-          role="button"
+          role="none"
           style={
             {
               "borderRadius": 19,
@@ -728,7 +728,7 @@ exports[`renders visible menu 1`] = `
             accessible={true}
             collapsable={false}
             focusable={false}
-            role="button"
+            role="none"
             style={
               {
                 "borderRadius": 19,

@@ -16,7 +16,9 @@ import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import hasTouchHandler, {
+  ACTIVATABLE_ROLES,
+} from '../../utils/hasTouchHandler';
 
 export type Props = PressableProps & {
   /**
@@ -143,6 +145,12 @@ const TouchableRipple = ({
   // it starts claiming the touch, swallowing taps meant for whatever wraps it.
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  // `role` wins over `accessibilityRole` on every platform, so resolve it the
+  // same way instead of testing both.
+  const effectiveRole: string | undefined = rest.role ?? rest.accessibilityRole;
+  const claimsActivatable =
+    effectiveRole !== undefined && ACTIVATABLE_ROLES.includes(effectiveRole);
 
   const handlePressIn = React.useCallback(
     (e: any) => {
@@ -289,6 +297,8 @@ const TouchableRipple = ({
         // Pressable defaults this to true, so keep it to preserve any role and
         // state the caller set, e.g. a read only checked CheckboxItem.
         accessible={rest.accessible !== false}
+        // Drop the claim, keep the element so its label is still announced.
+        role={claimsActivatable ? 'none' : rest.role}
         // A consumer role of button makes react-native-web render a real
         // <button>, which is tabbable by default. Nothing to activate here.
         focusable={rest.focusable ?? false}
