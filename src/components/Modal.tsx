@@ -265,6 +265,7 @@ function Modal({
           elevation={contentElevation}
           transitionDuration={scale * DEFAULT_DURATION}
           aria-label={ariaLabel}
+          role="dialog"
         >
           {children}
         </Surface>
