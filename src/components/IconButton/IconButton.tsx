@@ -216,7 +216,10 @@ const IconButton = ({
         hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
         {...rest}
       >
-        <View style={{ opacity: iconOpacity }}>
+        <View
+          testID={`${testID}-icon-opacity`}
+          style={{ opacity: iconOpacity }}
+        >
           {loading ? (
             <ActivityIndicator size={size} color={iconColor} />
           ) : (
