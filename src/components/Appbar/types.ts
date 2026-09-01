@@ -40,20 +40,15 @@ export type AppbarHeadlineTextProps = AppbarTextProps & {
 
 export type AppbarHeadlinePressableProps = Pick<
   ViewProps,
-  | 'accessibilityActions'
   | 'accessibilityHint'
   | 'accessibilityLabel'
-  | 'accessibilityLabelledBy'
-  | 'accessibilityLanguage'
   | 'accessibilityState'
-  | 'accessibilityValue'
   | 'aria-busy'
   | 'aria-disabled'
   | 'aria-expanded'
   | 'aria-label'
   | 'aria-labelledby'
   | 'aria-selected'
-  | 'onAccessibilityAction'
 > & {
   /** Whether the headline interaction is disabled. */
   disabled?: boolean;

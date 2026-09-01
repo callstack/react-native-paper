@@ -631,19 +631,15 @@ describe('Appbar accessibility', () => {
   });
 
   it('forwards custom headline button accessibility props', async () => {
-    const onAccessibilityAction = jest.fn();
     await render(
       <Appbar
         variant="small"
         headline="Inbox"
         onHeadlinePress={() => {}}
         headlinePressableProps={{
-          accessibilityActions: [{ name: 'activate', label: 'Open inbox' }],
           accessibilityHint: 'Opens the inbox menu',
           accessibilityLabel: 'Inbox options',
           accessibilityState: { busy: true, expanded: true },
-          accessibilityValue: { text: 'Unread messages available' },
-          onAccessibilityAction,
         }}
         testID={testIDPrefix}
       />
@@ -655,20 +651,7 @@ describe('Appbar accessibility', () => {
       expanded: true,
     });
 
-    expect(titleButton).toHaveProp(
-      'accessibilityActions',
-      expect.arrayContaining([
-        expect.objectContaining({ name: 'activate', label: 'Open inbox' }),
-      ])
-    );
     expect(titleButton).toHaveProp('accessibilityHint', 'Opens the inbox menu');
-    expect(titleButton).toHaveAccessibilityValue({
-      text: 'Unread messages available',
-    });
-    expect(titleButton).toHaveProp(
-      'onAccessibilityAction',
-      onAccessibilityAction
-    );
   });
 
   it('uses default and custom labels for back buttons', async () => {
