@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { HORIZONTAL_PADDING } from './tokens';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -10,6 +11,51 @@ import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Text from '../Typography/Text';
+
+export type DataTablePaginationLabels = {
+  /**
+   * Accessible name for the pagination region. Used on the web, where it names
+   * a real ARIA group. Defaults to `'Pagination'`.
+   */
+  container?: string;
+  /**
+   * Accessible name for the rows-per-page selector. Defaults to
+   * `'Rows per page'`.
+   */
+  itemsPerPage?: string;
+  /**
+   * Defaults to `'First page'`.
+   */
+  firstPage?: string;
+  /**
+   * Defaults to `'Previous page'`.
+   */
+  previousPage?: string;
+  /**
+   * Defaults to `'Next page'`.
+   */
+  nextPage?: string;
+  /**
+   * Defaults to `'Last page'`.
+   */
+  lastPage?: string;
+  /**
+   * Accessible name for the visible-range label, used when no `label` is
+   * given. Receives 1-based page numbers. Defaults to
+   * `` ({ page, numberOfPages }) => `Page ${page} of ${numberOfPages}` ``.
+   */
+  pageStatus?: (info: { page: number; numberOfPages: number }) => string;
+};
+
+const defaultLabels: Required<DataTablePaginationLabels> = {
+  container: 'Pagination',
+  itemsPerPage: 'Rows per page',
+  firstPage: 'First page',
+  previousPage: 'Previous page',
+  nextPage: 'Next page',
+  lastPage: 'Last page',
+  pageStatus: ({ page, numberOfPages }) => `Page ${page} of ${numberOfPages}`,
+};
 
 export type Props = ViewProps &
   PaginationControlsProps &
@@ -30,6 +76,10 @@ export type Props = ViewProps &
      * AccessibilityLabel for `label`.
      */
     'aria-label'?: string;
+    /**
+     * Wording of the controls' accessible names. Pass this to localize them.
+     */
+    labels?: DataTablePaginationLabels;
     style?: StyleProp<ViewStyle>;
     /**
      * @optional
@@ -84,8 +134,11 @@ const PaginationControls = ({
   numberOfPages,
   onPageChange,
   showFastPaginationControls,
+  labels,
   theme: themeOverrides,
-}: PaginationControlsProps) => {
+}: PaginationControlsProps & {
+  labels: Required<DataTablePaginationLabels>;
+}) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
 
@@ -106,7 +159,7 @@ const PaginationControls = ({
           iconColor={textColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
-          aria-label="page-first"
+          aria-label={labels.firstPage}
           theme={theme}
         />
       ) : null}
@@ -122,7 +175,7 @@ const PaginationControls = ({
         iconColor={textColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
-        aria-label="chevron-left"
+        aria-label={labels.previousPage}
         theme={theme}
       />
       <IconButton
@@ -137,7 +190,7 @@ const PaginationControls = ({
         iconColor={textColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
-        aria-label="chevron-right"
+        aria-label={labels.nextPage}
         theme={theme}
       />
       {showFastPaginationControls ? (
@@ -153,7 +206,7 @@ const PaginationControls = ({
           iconColor={textColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
-          aria-label="page-last"
+          aria-label={labels.lastPage}
           theme={theme}
         />
       ) : null}
@@ -165,8 +218,11 @@ const PaginationDropdown = ({
   numberOfItemsPerPageList,
   numberOfItemsPerPage,
   onItemsPerPageChange,
+  labels,
   theme: themeOverrides,
-}: PaginationDropdownProps) => {
+}: PaginationDropdownProps & {
+  labels: Required<DataTablePaginationLabels>;
+}) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
   const [showSelect, toggleSelect] = React.useState<boolean>(false);
@@ -183,6 +239,8 @@ const PaginationDropdown = ({
           style={styles.button}
           icon="menu-down"
           contentStyle={styles.contentStyle}
+          aria-label={`${labels.itemsPerPage}, ${numberOfItemsPerPage}`}
+          aria-expanded={showSelect}
           theme={theme}
         >
           {`${numberOfItemsPerPage}`}
@@ -267,6 +325,7 @@ const PaginationDropdown = ({
 const DataTablePagination = ({
   label,
   'aria-label': accessibilityLabel,
+  labels: labelOverrides,
   page,
   numberOfPages,
   onPageChange,
@@ -283,28 +342,30 @@ const DataTablePagination = ({
   const theme = useInternalTheme(themeOverrides);
   const labelColor = theme.colors.onSurfaceVariant;
 
+  const labels = React.useMemo(
+    () => ({ ...defaultLabels, ...labelOverrides }),
+    [labelOverrides]
+  );
+
+  const isWeb = Platform.OS === 'web';
+  const regionProps = isWeb
+    ? { role: 'group' as const, 'aria-label': labels.container }
+    : null;
+
+  const textIsFocusUnit = isWeb ? undefined : true;
+
   return (
-    <View
-      {...rest}
-      style={[styles.container, style]}
-      aria-label="pagination-container"
-    >
+    <View {...regionProps} {...rest} style={[styles.container, style]}>
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
-          <View
-            aria-label="Options Select"
-            testID="options-select"
-            style={styles.optionsContainer}
-          >
+          <View testID="options-select" style={styles.optionsContainer}>
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
               testID="select-page-dropdown-label"
-              aria-label={
-                selectPageDropdownAccessibilityLabel ||
-                'selectPageDropdownLabel'
-              }
+              accessible={textIsFocusUnit}
+              aria-label={selectPageDropdownAccessibilityLabel}
             >
               {selectPageDropdownLabel}
             </Text>
@@ -312,6 +373,7 @@ const DataTablePagination = ({
               numberOfItemsPerPageList={numberOfItemsPerPageList}
               numberOfItemsPerPage={numberOfItemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
+              labels={labels}
               theme={theme}
             />
           </View>
@@ -319,7 +381,13 @@ const DataTablePagination = ({
       <Text
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
-        aria-label={accessibilityLabel || 'label'}
+        accessible={textIsFocusUnit}
+        aria-label={
+          accessibilityLabel ??
+          (label != null
+            ? undefined
+            : labels.pageStatus({ page: page + 1, numberOfPages }))
+        }
       >
         {label}
       </Text>
@@ -329,6 +397,7 @@ const DataTablePagination = ({
           onPageChange={onPageChange}
           page={page}
           numberOfPages={numberOfPages}
+          labels={labels}
           theme={theme}
         />
       </View>
@@ -343,7 +412,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 16,
+    paddingStart: HORIZONTAL_PADDING,
     flexWrap: 'wrap',
   },
   optionsContainer: {
@@ -353,11 +422,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    marginRight: 16,
+    marginEnd: HORIZONTAL_PADDING,
   },
   button: {
-    textAlign: 'center',
-    marginRight: 16,
+    marginEnd: HORIZONTAL_PADDING,
   },
   iconsContainer: {
     flexDirection: 'row',

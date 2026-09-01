@@ -1,0 +1,1044 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable snapshots renders a cell 1`] = `
+<View
+  accessible={true}
+  aria-label="159"
+  role="cell"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+      {
+        "flex": 1,
+        "maxWidth": undefined,
+        "minWidth": undefined,
+      },
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(29, 27, 32, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        [
+          {
+            "fontVariant": [
+              "tabular-nums",
+            ],
+            "textAlign": "right",
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    159
+  </Text>
+</View>
+`;
+
+exports[`DataTable snapshots renders a header 1`] = `
+<View
+  role="row"
+  style={
+    [
+      {
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 16,
+      },
+      {
+        "borderBottomColor": "rgba(202, 196, 208, 1)",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingVertical": 12,
+        },
+        {
+          "flex": 1,
+          "maxWidth": undefined,
+          "minWidth": undefined,
+        },
+        {
+          "justifyContent": "flex-start",
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "fontFamily": "System",
+            "fontWeight": "400",
+            "letterSpacing": 0,
+          },
+          {
+            "writingDirection": "ltr",
+          },
+          [
+            {
+              "fontSize": 12,
+              "fontWeight": "500",
+              "lineHeight": 24,
+            },
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      Dessert
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`DataTable snapshots renders a pressable row 1`] = `
+<View
+  accessibilityLabel="Frozen yogurt"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="button"
+  style={
+    [
+      false,
+      [
+        {
+          "borderBottomWidth": 0.5,
+          "borderStyle": "solid",
+          "minHeight": 48,
+          "paddingHorizontal": 16,
+          "paddingVertical": 4,
+        },
+        {
+          "borderBottomColor": "rgba(202, 196, 208, 1)",
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <View
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
+    style={
+      {
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      role="cell"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          {
+            "flex": 1,
+            "maxWidth": undefined,
+            "minWidth": undefined,
+          },
+          {
+            "justifyContent": "flex-start",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "textAlign": "left",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Frozen yogurt
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DataTable snapshots renders a sortable title 1`] = `
+<View
+  accessibilityLabel="Dessert, sorted descending"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="button"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "paddingVertical": 12,
+      },
+      {
+        "flex": 1,
+        "maxWidth": undefined,
+        "minWidth": undefined,
+      },
+      {
+        "justifyContent": "flex-start",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    importantForAccessibility="no-hide-descendants"
+    style={
+      [
+        {
+          "height": 24,
+          "justifyContent": "center",
+        },
+        {
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      selectable={false}
+      style={
+        [
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "fontSize": 16,
+          },
+          [
+            {
+              "lineHeight": 16,
+              "transform": [
+                {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+          ],
+        ]
+      }
+    >
+      arrow-up
+    </Text>
+  </View>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(29, 27, 32, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        [
+          {
+            "fontSize": 12,
+            "fontWeight": "500",
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "marginLeft": 8,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    Dessert
+  </Text>
+</View>
+`;
+
+exports[`DataTable snapshots renders a static row 1`] = `
+<View
+  accessible={true}
+  aria-label="Frozen yogurt"
+  role="row"
+  style={
+    [
+      {
+        "borderBottomWidth": 0.5,
+        "borderStyle": "solid",
+        "minHeight": 48,
+        "paddingHorizontal": 16,
+        "paddingVertical": 4,
+      },
+      {
+        "position": "relative",
+      },
+      {
+        "borderBottomColor": "rgba(202, 196, 208, 1)",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no-hide-descendants"
+    style={
+      {
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      role="cell"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          {
+            "flex": 1,
+            "maxWidth": undefined,
+            "minWidth": undefined,
+          },
+          {
+            "justifyContent": "flex-start",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "textAlign": "left",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Frozen yogurt
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DataTable snapshots renders a static title 1`] = `
+<View
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "paddingVertical": 12,
+      },
+      {
+        "flex": 1,
+        "maxWidth": undefined,
+        "minWidth": undefined,
+      },
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(29, 27, 32, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        [
+          {
+            "fontSize": 12,
+            "fontWeight": "500",
+            "lineHeight": 24,
+          },
+          {
+            "fontVariant": [
+              "tabular-nums",
+            ],
+            "textAlign": "right",
+          },
+          {
+            "color": "rgba(73, 69, 79, 1)",
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    Calories
+  </Text>
+</View>
+`;
+
+exports[`DataTable snapshots renders a table 1`] = `
+<View
+  role="table"
+  style={
+    [
+      {
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    role="row"
+    style={
+      [
+        {
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        },
+        {
+          "borderBottomColor": "rgba(202, 196, 208, 1)",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingVertical": 12,
+          },
+          {
+            "flex": 1,
+            "maxWidth": undefined,
+            "minWidth": undefined,
+          },
+          {
+            "justifyContent": "flex-start",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 12,
+                "fontWeight": "500",
+                "lineHeight": 24,
+              },
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Dessert
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    aria-label="Dessert, Frozen yogurt, row 3 of 6"
+    role="row"
+    style={
+      [
+        {
+          "borderBottomWidth": 0.5,
+          "borderStyle": "solid",
+          "minHeight": 48,
+          "paddingHorizontal": 16,
+          "paddingVertical": 4,
+        },
+        {
+          "position": "relative",
+        },
+        {
+          "borderBottomColor": "rgba(202, 196, 208, 1)",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        role="cell"
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+            },
+            {
+              "flex": 1,
+              "maxWidth": undefined,
+              "minWidth": undefined,
+            },
+            {
+              "justifyContent": "flex-start",
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "letterSpacing": 0,
+              },
+              {
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "textAlign": "left",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Frozen yogurt
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DataTable snapshots renders pagination 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "flex-end",
+        "paddingStart": 16,
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    numberOfLines={3}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(29, 27, 32, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        [
+          {
+            "fontSize": 12,
+            "marginEnd": 16,
+          },
+          {
+            "color": "rgba(73, 69, 79, 1)",
+          },
+        ],
+      ]
+    }
+  >
+    1-2 of 6
+  </Text>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "margin": 6,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "width": 40,
+        }
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(202, 196, 208, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          }
+        }
+        testID="icon-button-container"
+      >
+        <View
+          accessibilityLabel="Previous page"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="button"
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
+            ]
+          }
+          testID="icon-button"
+        >
+          <View
+            style={
+              {
+                "opacity": 0.38,
+              }
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-left
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "margin": 6,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "width": 40,
+        }
+      }
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(202, 196, 208, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          }
+        }
+        testID="icon-button-container"
+      >
+        <View
+          accessibilityLabel="Next page"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="button"
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
+            ]
+          }
+          testID="icon-button"
+        >
+          <View
+            style={
+              {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-right
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

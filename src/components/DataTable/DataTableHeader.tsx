@@ -2,8 +2,12 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { withColumnIndices } from './DataTableColumnsContext';
+import { DataTableRowContext } from './DataTableContext';
+import { HORIZONTAL_PADDING } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import webAriaProps from '../../utils/webAriaProps';
 
 export type Props = ViewProps & {
   /**
@@ -50,12 +54,24 @@ const DataTableHeader = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderBottomColor = theme.colors.surfaceVariant;
+  const borderBottomColor = theme.colors.outlineVariant;
+
+  const rowContext = React.useMemo(
+    () => ({ header: true, rowIsFocusUnit: false }),
+    []
+  );
 
   return (
-    <View {...rest} style={[styles.header, { borderBottomColor }, style]}>
-      {children}
-    </View>
+    <DataTableRowContext.Provider value={rowContext}>
+      <View
+        role="row"
+        {...webAriaProps({ 'aria-rowindex': 1 })}
+        {...rest}
+        style={[styles.header, { borderBottomColor }, style]}
+      >
+        {withColumnIndices(children)}
+      </View>
+    </DataTableRowContext.Provider>
   );
 };
 
@@ -64,7 +80,7 @@ DataTableHeader.displayName = 'DataTable.Header';
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: HORIZONTAL_PADDING,
     borderBottomWidth: StyleSheet.hairlineWidth * 2,
   },
 });
