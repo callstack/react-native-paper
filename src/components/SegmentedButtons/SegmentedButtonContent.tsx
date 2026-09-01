@@ -49,7 +49,7 @@ const SegmentedButtonContent = ({
   const optionIcon = icon && (!label || !showCheckIcon) ? icon : undefined;
 
   const reduceMotion = useReduceMotion();
-  const checkmarkScale = useSharedValue(checked ? 1 : 0);
+  const checkmarkScale = useSharedValue(showCheckIcon ? 1 : 0);
 
   React.useEffect(() => {
     checkmarkScale.value = withSpring(showCheckIcon ? 1 : 0, {

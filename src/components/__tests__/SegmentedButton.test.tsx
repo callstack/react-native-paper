@@ -1272,6 +1272,31 @@ describe('selected check icon', () => {
     expect(screen.getByTestId('walking-check-icon')).toBeOnTheScreen();
   });
 
+  it('avoids animation setup for a static option icon', async () => {
+    const reanimated = jest.requireMock('react-native-reanimated') as {
+      useAnimatedStyle: typeof import('react-native-reanimated').useAnimatedStyle;
+      useSharedValue: typeof import('react-native-reanimated').useSharedValue;
+    };
+    const useAnimatedStyleSpy = jest.spyOn(reanimated, 'useAnimatedStyle');
+    const useSharedValueSpy = jest.spyOn(reanimated, 'useSharedValue');
+
+    try {
+      await render(
+        <SegmentedButtons
+          value="walk"
+          buttons={[{ value: 'walk', icon: 'walk' }]}
+          onValueChange={() => {}}
+        />
+      );
+
+      expect(useSharedValueSpy).toHaveBeenLastCalledWith(0);
+      expect(useAnimatedStyleSpy).not.toHaveBeenCalled();
+    } finally {
+      useAnimatedStyleSpy.mockRestore();
+      useSharedValueSpy.mockRestore();
+    }
+  });
+
   it('restores the option icon and resets its scale when selected checks are disabled', async () => {
     const reanimated = jest.requireMock('react-native-reanimated') as {
       withSpring: typeof import('react-native-reanimated').withSpring;

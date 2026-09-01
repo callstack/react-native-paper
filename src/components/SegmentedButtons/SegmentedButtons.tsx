@@ -135,10 +135,6 @@ const SegmentedButtons = <T extends string = string>({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
 
-  const singleSelectedIndex = multiSelect
-    ? -1
-    : buttons.findIndex((item) => value === item.value);
-
   return (
     <View
       role={multiSelect ? 'group' : 'radiogroup'}
@@ -155,7 +151,7 @@ const SegmentedButtons = <T extends string = string>({
 
           const checked = multiSelect
             ? value.includes(itemValue)
-            : index === singleSelectedIndex;
+            : value === itemValue;
 
           const handlePress = (event: GestureResponderEvent) => {
             onItemPress?.(event);

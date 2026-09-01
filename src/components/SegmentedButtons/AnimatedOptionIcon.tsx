@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { TextStyle } from 'react-native';
 
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
@@ -17,14 +17,15 @@ type Props = {
   testID?: string;
 };
 
-const AnimatedOptionIcon = ({
-  animated,
+type AnimatedIconProps = Omit<Props, 'animated'>;
+
+const AnimatedIcon = ({
   color,
   opacity,
   scale,
   source,
   testID,
-}: Props) => {
+}: AnimatedIconProps) => {
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: 1 - scale.value }],
   }));
@@ -32,7 +33,7 @@ const AnimatedOptionIcon = ({
   return (
     <Animated.View
       testID={testID}
-      style={[styles.icon, { opacity }, animated ? animatedStyle : undefined]}
+      style={[styles.icon, { opacity }, animatedStyle]}
     >
       <Icon
         source={source}
@@ -40,6 +41,24 @@ const AnimatedOptionIcon = ({
         color={color}
       />
     </Animated.View>
+  );
+};
+
+const AnimatedOptionIcon = ({ animated, ...props }: Props) => {
+  if (animated) {
+    return <AnimatedIcon {...props} />;
+  }
+
+  const { color, opacity, source, testID } = props;
+
+  return (
+    <View testID={testID} style={[styles.icon, { opacity }]}>
+      <Icon
+        source={source}
+        size={SegmentedButtonTokens.iconSize}
+        color={color}
+      />
+    </View>
   );
 };
 

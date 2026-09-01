@@ -163,7 +163,7 @@ const SegmentedButtonItem = ({
         testID={testID}
         background={background}
         hitSlop={hitSlop}
-        theme={theme}
+        rippleColor={theme.colors.stateLayerPressed}
         style={[
           styles.touchable,
           borderRadius,
