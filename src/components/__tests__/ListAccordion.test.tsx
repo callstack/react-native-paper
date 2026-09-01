@@ -198,7 +198,7 @@ describe('ListAccordion', () => {
 
     expect(screen.getByTestId('list-accordion')).toHaveStyle({
       minHeight: 56,
-      paddingVertical: 12,
+      paddingVertical: 8,
     });
   });
 
@@ -215,7 +215,7 @@ describe('ListAccordion', () => {
 
     expect(screen.getByTestId('list-accordion')).toHaveStyle({
       minHeight: 72,
-      paddingVertical: 12,
+      paddingVertical: 8,
     });
 
     await fireEvent(

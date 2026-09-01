@@ -11,7 +11,7 @@ import type {
 } from 'react-native';
 
 import { ListTokens } from './tokens';
-import { getLeftStyles, getRightStyles } from './utils';
+import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -228,43 +228,56 @@ const ListItem = ({
 
   const descriptionColor = theme.colors[ListTokens.supportingTextColor];
 
-  return (
-    <TouchableRipple
-      // Before `rest`, so a caller's `focusRing` wins
-      focusRing="inward"
-      {...rest}
-      ref={ref}
-      style={[
-        styles.container,
-        description ? styles.containerTwoLine : styles.containerOneLine,
-        style,
-      ]}
-      onPress={onPress}
-      theme={theme}
-      testID={testID}
-    >
-      <View style={[styles.row, containerStyle]}>
-        {left
-          ? left({
-              color: theme.colors[ListTokens.leadingIconColor],
-              style: getLeftStyles(isDescriptionMultiline, description),
-            })
-          : null}
-        <View style={[styles.item, styles.content, contentStyle]}>
-          {renderTitle()}
+  const rowContext = React.useMemo(
+    () => ({
+      verticalPadding: isDescriptionMultiline
+        ? ListTokens.threeLineVerticalPadding
+        : ListTokens.verticalPadding,
+    }),
+    [isDescriptionMultiline]
+  );
 
-          {description
-            ? renderDescription(descriptionColor, description)
+  return (
+    <ListRowContext.Provider value={rowContext}>
+      <TouchableRipple
+        {...rest}
+        ref={ref}
+        style={[
+          styles.container,
+          description ? styles.containerTwoLine : styles.containerOneLine,
+          isDescriptionMultiline && styles.containerThreeLine,
+          style,
+        ]}
+        onPress={onPress}
+        theme={theme}
+        testID={testID}
+      >
+        <View style={[styles.row, containerStyle]}>
+          {left
+            ? left({
+                color: theme.colors[ListTokens.leadingIconColor],
+                style: getLeftStyles(isDescriptionMultiline, description),
+              })
+            : null}
+          <View
+            style={[styles.item, styles.content, contentStyle]}
+            testID={testID ? `${testID}-content` : undefined}
+          >
+            {renderTitle()}
+
+            {description
+              ? renderDescription(descriptionColor, description)
+              : null}
+          </View>
+          {right
+            ? right({
+                color: theme.colors[ListTokens.trailingIconColor],
+                style: getRightStyles(isDescriptionMultiline, description),
+              })
             : null}
         </View>
-        {right
-          ? right({
-              color: theme.colors[ListTokens.trailingIconColor],
-              style: getRightStyles(isDescriptionMultiline, description),
-            })
-          : null}
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+    </ListRowContext.Provider>
   );
 };
 
@@ -281,6 +294,9 @@ const styles = StyleSheet.create({
   },
   containerTwoLine: {
     minHeight: ListTokens.twoLineContainerHeight,
+  },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
   },
   row: {
     width: '100%',
