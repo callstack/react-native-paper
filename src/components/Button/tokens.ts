@@ -1,4 +1,5 @@
-import type { ButtonLabelVariant, ButtonSize } from './utils';
+import type { ButtonLabelVariant, ButtonMode, ButtonSize } from './utils';
+import type { ColorRole } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
 /**
@@ -96,4 +97,48 @@ const sizes = {
   },
 } as const satisfies Record<ButtonSize, ButtonSizeTokens>;
 
-export const Tokens = { sizes };
+/**
+ * Modes that have a toggle variant. MD3 defines `ToggleButton`,
+ * `ElevatedToggleButton`, `TonalToggleButton` and `OutlinedToggleButton` — there
+ * is no text/plain toggle, so `text` keeps its plain colours when used as one.
+ */
+export type ButtonToggleMode = Exclude<ButtonMode, 'text'>;
+
+type ToggleColorSpec = {
+  /** `'transparent'` where the spec leaves the container unfilled. */
+  container: ColorRole | 'transparent';
+  label: ColorRole;
+};
+
+/**
+ * Selected/unselected colour roles for the toggle variant, taken from the MD3
+ * `{Filled,Elevated,Tonal,Outlined}ButtonTokens` `Unselected*` / `Selected*`
+ * sets. A toggle's unselected colours differ from the same mode's plain
+ * colours, which is why this table is separate from `getButtonColors`' defaults.
+ */
+const toggle = {
+  filled: {
+    unselected: { container: 'surfaceContainer', label: 'onSurfaceVariant' },
+    selected: { container: 'primary', label: 'onPrimary' },
+  },
+  tonal: {
+    unselected: {
+      container: 'secondaryContainer',
+      label: 'onSecondaryContainer',
+    },
+    selected: { container: 'secondary', label: 'onSecondary' },
+  },
+  elevated: {
+    unselected: { container: 'surfaceContainerLow', label: 'primary' },
+    selected: { container: 'primary', label: 'onPrimary' },
+  },
+  outlined: {
+    unselected: { container: 'transparent', label: 'onSurfaceVariant' },
+    selected: { container: 'inverseSurface', label: 'inverseOnSurface' },
+  },
+} as const satisfies Record<
+  ButtonToggleMode,
+  { unselected: ToggleColorSpec; selected: ToggleColorSpec }
+>;
+
+export const Tokens = { sizes, toggle };

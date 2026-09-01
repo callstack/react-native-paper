@@ -63,15 +63,18 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   shape?: ButtonShape;
   /**
-   * Whether this button is in the selected state (Material Design 3
-   * expressive toggle). When `true`:
+   * Turns the button into a Material Design 3 expressive toggle and sets its
+   * state. Leave it **undefined** for a plain button — a toggle that is merely
+   * unselected is a different state, and MD3 gives the two different colours.
    *
-   * - The `shape` is flipped: `'round'` becomes `'square'` and vice versa.
-   * - For `outlined` and `text` modes, the button adopts a filled
-   *   `secondaryContainer` appearance (matches `tonal`).
+   * When defined:
+   *
+   * - The button takes its container and label colours from the toggle set for
+   *   its `mode`, which differ between `false` and `true`. `text` is the one
+   *   exception: MD3 defines no text toggle, so it keeps its plain colours.
+   * - When `true` the `shape` is flipped: `'round'` renders square and vice
+   *   versa, and an `outlined` button drops its outline.
    * - `aria-selected` is set so screen readers announce the toggle state.
-   *
-   * Other modes only flip the shape.
    */
   selected?: boolean;
   /**

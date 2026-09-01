@@ -617,7 +617,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -629,7 +629,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outline,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 
@@ -640,7 +640,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -651,7 +651,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outline,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 
@@ -962,7 +962,7 @@ describe('selected prop', () => {
     });
   });
 
-  it('gives an outlined button the tonal-selected appearance', () => {
+  it('drops the outline when an outlined toggle is selected', () => {
     expect(
       getButtonColors({
         theme: getTheme(),
@@ -970,36 +970,112 @@ describe('selected prop', () => {
         selected: true,
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
-      labelColor: getTheme().colors.onSecondaryContainer,
       borderColor: 'transparent',
       borderWidth: 0,
     });
   });
 
-  it('gives a text-mode button the tonal-selected appearance', () => {
+  it('keeps a text button on its plain colors, having no toggle colours', async () => {
+    const plain = getButtonColors({ theme: getTheme(), mode: 'text' });
+
     expect(
-      getButtonColors({
-        theme: getTheme(),
-        mode: 'text',
-        selected: true,
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
-      labelColor: getTheme().colors.onSecondaryContainer,
+      getButtonColors({ theme: getTheme(), mode: 'text', selected: false })
+    ).toMatchObject(plain);
+    expect(
+      getButtonColors({ theme: getTheme(), mode: 'text', selected: true })
+    ).toMatchObject(plain);
+
+    // `selected` is still honoured for the shape flip and for screen readers.
+    await render(
+      <Button testID="button" mode="text" shape="round" selected>
+        X
+      </Button>
+    );
+    expect(screen.getByTestId('button-container')).toHaveStyle({
+      borderRadius: 12,
     });
+    expect(screen.getByTestId('button')).toBeSelected();
   });
 
-  it('does not change filled colors when selected', () => {
+  it('leaves a plain button untouched when `selected` is omitted', () => {
     expect(
-      getButtonColors({
-        theme: getTheme(),
-        mode: 'filled',
-        selected: true,
-      })
+      getButtonColors({ theme: getTheme(), mode: 'filled' })
     ).toMatchObject({
       backgroundColor: getTheme().colors.primary,
       labelColor: getTheme().colors.onPrimary,
+    });
+  });
+});
+
+describe('toggle colors', () => {
+  // From the MD3 {Filled,Elevated,Tonal,Outlined}ButtonTokens Unselected*/
+  // Selected* sets.
+  type Role = keyof ReturnType<typeof getTheme>['colors'];
+  // `null` = the spec leaves the container unfilled.
+  const toggleColors: [
+    mode: 'filled' | 'tonal' | 'elevated' | 'outlined',
+    unselectedContainer: Role | null,
+    unselectedLabel: Role,
+    selectedContainer: Role,
+    selectedLabel: Role,
+  ][] = [
+    ['filled', 'surfaceContainer', 'onSurfaceVariant', 'primary', 'onPrimary'],
+    [
+      'tonal',
+      'secondaryContainer',
+      'onSecondaryContainer',
+      'secondary',
+      'onSecondary',
+    ],
+    ['elevated', 'surfaceContainerLow', 'primary', 'primary', 'onPrimary'],
+    [
+      'outlined',
+      null,
+      'onSurfaceVariant',
+      'inverseSurface',
+      'inverseOnSurface',
+    ],
+  ];
+
+  it.each(toggleColors)(
+    '%s toggle uses the spec roles for both states',
+    (mode, uContainer, uLabel, sContainer, sLabel) => {
+      const theme = getTheme();
+
+      expect(getButtonColors({ theme, mode, selected: false })).toMatchObject({
+        backgroundColor:
+          uContainer === null ? 'transparent' : theme.colors[uContainer],
+        labelColor: theme.colors[uLabel],
+      });
+
+      expect(getButtonColors({ theme, mode, selected: true })).toMatchObject({
+        backgroundColor: theme.colors[sContainer],
+        labelColor: theme.colors[sLabel],
+      });
+    }
+  );
+
+  it('an unselected toggle differs from the same mode as a plain button', () => {
+    const theme = getTheme();
+    const plain = getButtonColors({ theme, mode: 'filled' });
+    const unselected = getButtonColors({
+      theme,
+      mode: 'filled',
+      selected: false,
+    });
+
+    expect(unselected.backgroundColor).not.toBe(plain.backgroundColor);
+    expect(unselected.labelColor).not.toBe(plain.labelColor);
+  });
+
+  it('ignores the toggle table when disabled', () => {
+    const theme = getTheme();
+
+    expect(
+      getButtonColors({ theme, mode: 'filled', selected: true, disabled: true })
+    ).toMatchObject({
+      backgroundColor: theme.colors.onSurface,
+      labelColor: theme.colors.onSurface,
     });
   });
 });

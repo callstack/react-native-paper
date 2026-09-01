@@ -229,7 +229,7 @@ const ButtonExample = () => {
 
       <List.Section title="Toggle (expressive)">
         <View style={styles.row}>
-          {(['outlined', 'text', 'tonal'] as const).map((m) => {
+          {MODES.map((m) => {
             const key = `toggle-${m}`;
             const isSelected = !!selectedToggles[key];
             return (

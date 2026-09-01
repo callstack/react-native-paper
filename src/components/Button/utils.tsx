@@ -3,6 +3,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 import color from 'color';
 
 import { Tokens } from './tokens';
+import type { ButtonToggleMode } from './tokens';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
@@ -117,6 +118,31 @@ type BaseProps = {
   selected?: boolean;
 };
 
+type ToggleColors = (typeof Tokens.toggle)[ButtonToggleMode][
+  | 'selected'
+  | 'unselected'];
+
+const isToggleMode = (mode: ButtonMode): mode is ButtonToggleMode =>
+  mode !== 'text';
+
+/**
+ * The toggle colour pair for a mode, or `undefined` when the button is not a
+ * toggle (`selected` omitted) or the mode has no toggle colours of its own
+ * (`text`, which MD3 gives no toggle tokens).
+ */
+const getToggleColors = ({
+  mode,
+  selected,
+}: {
+  mode: ButtonMode;
+  selected?: boolean;
+}) => {
+  if (!isToggleMode(mode) || selected === undefined) {
+    return undefined;
+  }
+  return Tokens.toggle[mode][selected ? 'selected' : 'unselected'];
+};
+
 const isDark = ({
   dark,
   backgroundColor,
@@ -140,9 +166,10 @@ const getButtonBackgroundColor = ({
   theme,
   disabled,
   customButtonColor,
-  selected,
-}: BaseProps & {
+  toggleColors,
+}: Omit<BaseProps, 'selected'> & {
   customButtonColor?: ColorValue;
+  toggleColors?: ToggleColors;
 }) => {
   const { colors } = theme;
   if (customButtonColor && !disabled) {
@@ -156,10 +183,9 @@ const getButtonBackgroundColor = ({
     return colors.onSurface;
   }
 
-  // Selected toggle (only outlined/text adopt a filled "tonal-selected" look;
-  // filled / tonal / elevated already render filled).
-  if (selected && (isMode('outlined') || isMode('text'))) {
-    return colors.secondaryContainer;
+  if (toggleColors) {
+    const { container } = toggleColors;
+    return container === 'transparent' ? 'transparent' : colors[container];
   }
 
   if (isMode('elevated')) {
@@ -184,11 +210,12 @@ const getButtonLabelColor = ({
   customLabelColor,
   backgroundColor,
   dark,
-  selected,
-}: BaseProps & {
+  toggleColors,
+}: Omit<BaseProps, 'selected'> & {
   customLabelColor?: ColorValue;
   backgroundColor: ColorValue;
   dark?: boolean;
+  toggleColors?: ToggleColors;
 }) => {
   const { colors } = theme;
   if (customLabelColor && !disabled) {
@@ -199,9 +226,8 @@ const getButtonLabelColor = ({
     return theme.colors.onSurface;
   }
 
-  // Selected toggle for outlined/text mirrors the tonal label color.
-  if (selected && (isMode('outlined') || isMode('text'))) {
-    return colors.onSecondaryContainer;
+  if (toggleColors) {
+    return colors[toggleColors.label];
   }
 
   if (typeof dark === 'boolean') {
@@ -232,13 +258,13 @@ const getButtonLabelColor = ({
 };
 
 const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
-  // A selected outlined toggle drops its outline (the filled background takes
-  // over as the visual affordance).
+  // A selected outlined toggle drops its outline (the filled inverse-surface
+  // background takes over as the visual affordance).
   if (selected && isMode('outlined')) {
     return 'transparent';
   }
   if (isMode('outlined')) {
-    return theme.colors.outline;
+    return theme.colors.outlineVariant;
   }
 
   return 'transparent';
@@ -282,12 +308,16 @@ export const getButtonColors = ({
     return mode === modeToCompare;
   };
 
+  const toggleColors = disabled
+    ? undefined
+    : getToggleColors({ mode, selected });
+
   const backgroundColor = getButtonBackgroundColor({
     isMode,
     theme,
     disabled,
     customButtonColor,
-    selected,
+    toggleColors,
   });
 
   const labelColor = getButtonLabelColor({
@@ -297,7 +327,7 @@ export const getButtonColors = ({
     customLabelColor,
     backgroundColor,
     dark,
-    selected,
+    toggleColors,
   });
 
   const borderColor = getButtonBorderColor({ isMode, theme, selected });

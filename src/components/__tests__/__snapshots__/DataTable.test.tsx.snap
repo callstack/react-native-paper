@@ -1704,7 +1704,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderStyle": "solid",
               "borderWidth": 1,
