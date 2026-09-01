@@ -151,7 +151,11 @@ const DIALOG_ELEVATION: Elevation = 3;
  *           onDismiss={hideDialog}
  *           title="Alert"
  *           content="This is simple dialog"
- *           actions={[{ label: 'Done', onPress: hideDialog }]}
+ *           actions={[
+ *             <Button key="done-btn" onPress={hideDialog}>
+ *               Done
+ *             </Button>,
+ *           ]}
  *         />
  *       </View>
  *     </PaperProvider>
