@@ -4,22 +4,25 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
 
+const THICKNESS = 1;
+const INSET = 16;
+
 export type Props = $RemoveChildren<typeof View> & {
   /**
-   * @renamed Renamed from 'inset' to 'leftInset` in v5.x
-   * Whether divider has a left inset.
+   * Orientation of the divider. A vertical divider stretches to the height of
+   * its parent, so the parent has to lay its children out in a row.
    */
-  leftInset?: boolean;
+  orientation?: 'horizontal' | 'vertical';
   /**
-   * @supported Available in v5.x with theme version 3
-   *  Whether divider has a horizontal inset on both sides.
+   * Whether the divider is inset from the leading edge, which is the left edge
+   * in LTR and the right edge in RTL. On a vertical divider it's the top edge.
+   */
+  startInset?: boolean;
+  /**
+   * Whether the divider is inset from both edges: left and right on a
+   * horizontal divider, top and bottom on a vertical one.
    */
   horizontalInset?: boolean;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *  Whether divider should be bolded.
-   */
-  bold?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -29,6 +32,10 @@ export type Props = $RemoveChildren<typeof View> & {
 
 /**
  * A divider is a thin, lightweight separator that groups content in lists and page layouts.
+ *
+ * Dividers are decorative, so screen readers skip them. If a divider means
+ * something on its own, pass `accessible`, `aria-hidden={false}` and
+ * `role="separator"`.
  *
  * ## Usage
  * ```js
@@ -49,25 +56,28 @@ export type Props = $RemoveChildren<typeof View> & {
  * ```
  */
 const Divider = ({
-  leftInset,
+  orientation = 'horizontal',
+  startInset = false,
   horizontalInset = false,
   style,
   theme: themeOverrides,
-  bold = false,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const dividerColor = theme.colors.outlineVariant;
+  const isVertical = orientation === 'vertical';
 
   return (
     <View
+      aria-hidden
       {...rest}
       style={[
-        { height: StyleSheet.hairlineWidth, backgroundColor: dividerColor },
-        leftInset && styles.v3LeftInset,
-        horizontalInset && styles.horizontalInset,
-        bold && styles.bold,
+        isVertical ? styles.vertical : styles.horizontal,
+        { backgroundColor: theme.colors.outlineVariant },
+        startInset &&
+          (isVertical ? styles.verticalStartInset : styles.startInset),
+        horizontalInset &&
+          (isVertical ? styles.verticalInset : styles.horizontalInset),
         style,
       ]}
     />
@@ -75,15 +85,26 @@ const Divider = ({
 };
 
 const styles = StyleSheet.create({
-  v3LeftInset: {
-    marginLeft: 16,
+  horizontal: {
+    height: THICKNESS,
+  },
+  vertical: {
+    width: THICKNESS,
+    alignSelf: 'stretch',
+  },
+  startInset: {
+    marginStart: INSET,
   },
   horizontalInset: {
-    marginLeft: 16,
-    marginRight: 16,
+    marginStart: INSET,
+    marginEnd: INSET,
   },
-  bold: {
-    height: 1,
+  verticalStartInset: {
+    marginTop: INSET,
+  },
+  verticalInset: {
+    marginTop: INSET,
+    marginBottom: INSET,
   },
 });
 

@@ -5545,38 +5545,53 @@
     "Divider": {
       "filepath": "Divider.tsx",
       "title": "Divider",
-      "description": "A divider is a thin, lightweight separator that groups content in lists and page layouts.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Divider, Text } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View>\n    <Text>Lemon</Text>\n    <Divider />\n    <Text>Mango</Text>\n    <Divider />\n  </View>\n);\n\nexport default MyComponent;\n```",
+      "description": "A divider is a thin, lightweight separator that groups content in lists and page layouts.\n\nDividers are decorative, so screen readers skip them. If a divider means\nsomething on its own, pass `accessible`, `aria-hidden={false}` and\n`role=\"separator\"`.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Divider, Text } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View>\n    <Text>Lemon</Text>\n    <Divider />\n    <Text>Mango</Text>\n    <Divider />\n  </View>\n);\n\nexport default MyComponent;\n```",
       "link": "divider",
       "data": {
-        "description": "A divider is a thin, lightweight separator that groups content in lists and page layouts.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Divider, Text } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View>\n    <Text>Lemon</Text>\n    <Divider />\n    <Text>Mango</Text>\n    <Divider />\n  </View>\n);\n\nexport default MyComponent;\n```",
+        "description": "A divider is a thin, lightweight separator that groups content in lists and page layouts.\n\nDividers are decorative, so screen readers skip them. If a divider means\nsomething on its own, pass `accessible`, `aria-hidden={false}` and\n`role=\"separator\"`.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { View } from 'react-native';\nimport { Divider, Text } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <View>\n    <Text>Lemon</Text>\n    <Divider />\n    <Text>Mango</Text>\n    <Divider />\n  </View>\n);\n\nexport default MyComponent;\n```",
         "displayName": "Divider",
         "methods": [],
         "statics": [],
         "props": {
-          "leftInset": {
+          "orientation": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'horizontal' | 'vertical'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'horizontal'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'vertical'"
+                }
+              ]
+            },
+            "description": "Orientation of the divider. A vertical divider stretches to the height of\nits parent, so the parent has to lay its children out in a row.",
+            "defaultValue": {
+              "value": "'horizontal'",
+              "computed": false
+            }
+          },
+          "startInset": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "@renamed Renamed from 'inset' to 'leftInset` in v5.x\nWhether divider has a left inset."
+            "description": "Whether the divider is inset from the leading edge, which is the left edge\nin LTR and the right edge in RTL. On a vertical divider it's the top edge.",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
           },
           "horizontalInset": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "@supported Available in v5.x with theme version 3\n Whether divider has a horizontal inset on both sides.",
-            "defaultValue": {
-              "value": "false",
-              "computed": false
-            }
-          },
-          "bold": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "@supported Available in v5.x with theme version 3\n Whether divider should be bolded.",
+            "description": "Whether the divider is inset from both edges: left and right on a\nhorizontal divider, top and bottom on a vertical one.",
             "defaultValue": {
               "value": "false",
               "computed": false

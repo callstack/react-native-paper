@@ -10,6 +10,10 @@ import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 A divider is a thin, lightweight separator that groups content in lists and page layouts.
 
+Dividers are decorative, so screen readers skip them. If a divider means
+something on its own, pass `accessible`, `aria-hidden={false}` and
+`role="separator"`.
+
 
 
 
@@ -42,27 +46,27 @@ export default MyComponent;
 
 <div>
 
-### leftInset  <span class="badge badge-renamed "><span class="badge-text">Renamed from 'inset' to 'leftInset` in v5.x</span></span>
+### orientation
 
 </div>
 
-  <PropTable componentLink="Divider" prop="leftInset" />
+  <PropTable componentLink="Divider" prop="orientation" />
 
 <div>
 
-### horizontalInset  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
+### startInset
+
+</div>
+
+  <PropTable componentLink="Divider" prop="startInset" />
+
+<div>
+
+### horizontalInset
 
 </div>
 
   <PropTable componentLink="Divider" prop="horizontalInset" />
-
-<div>
-
-### bold  <span class="badge badge-supported "><span class="badge-text">Available in v5.x with theme version 3</span></span>
-
-</div>
-
-  <PropTable componentLink="Divider" prop="bold" />
 
 <div>
 

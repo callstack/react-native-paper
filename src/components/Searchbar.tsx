@@ -343,7 +343,6 @@ const Searchbar = ({
         right?.({ color: textColor, style: styles.rightStyle, testID })}
       {!isBarMode && showDivider && (
         <Divider
-          bold
           style={[
             styles.divider,
             {
