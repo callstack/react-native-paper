@@ -110,7 +110,9 @@ const DIALOG_ELEVATION: Elevation = 3;
  *             onDismiss={hideDialog}
  *             title="Alert"
  *             content="This is simple dialog"
- *             actions={[{ label: 'Done', onPress: hideDialog }]}
+ *             actions={[
+ * 						 		<Button key='done-btn' onPress={hideDialog}>Done</Button>
+ * 						 ]}
  *           />
  *         </Portal>
  *       </View>
@@ -176,7 +178,7 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
-      aria-label={typeof title === 'string' ? title : ariaLabel}
+      aria-label={ariaLabel ?? (typeof title === 'string' ? title : undefined)}
     >
       {icon ? <DialogIcon icon={icon} /> : null}
 
