@@ -60,6 +60,26 @@ export const composeCellLabel = ({
   return columnLabel ? `${columnLabel}, ${value}` : value;
 };
 
+/**
+ * The column names of a header row, indexed by column position.
+ */
+export const readColumnLabels = (
+  children: React.ReactNode
+): Array<string | undefined> => {
+  const labels: Array<string | undefined> = [];
+
+  React.Children.forEach(children, (child, position) => {
+    labels[position] = isDataTableElement<LabelledProps>(
+      child,
+      'DataTable.Title'
+    )
+      ? getElementLabel(child.props)
+      : undefined;
+  });
+
+  return labels;
+};
+
 export type RowPositionInfo = { position: number; rowCount?: number };
 export type FormatRowPosition = (info: RowPositionInfo) => string;
 

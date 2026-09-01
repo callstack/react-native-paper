@@ -152,8 +152,13 @@ const DataTableCell = ({
     !React.isValidElement(children) &&
     value != null;
 
+  // The cell speaks for itself only when it is an accessibility element of its
+  // own: a focus unit, or a control the user can activate.
+  const namesItself = !isWeb && (cellIsFocusUnit || interactive);
+
   const label =
-    ariaLabel ?? (isWeb ? undefined : composeCellLabel({ columnLabel, value }));
+    ariaLabel ??
+    (namesItself ? composeCellLabel({ columnLabel, value }) : undefined);
 
   const structuralProps = {
     role: row?.header ? ('columnheader' as const) : ('cell' as const),

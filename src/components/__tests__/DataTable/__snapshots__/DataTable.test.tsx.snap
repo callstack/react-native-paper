@@ -196,7 +196,6 @@ exports[`DataTable snapshots renders a pressable row 1`] = `
     }
   >
     <View
-      aria-label="Frozen yogurt"
       role="cell"
       style={
         [
@@ -421,7 +420,6 @@ exports[`DataTable snapshots renders a static row 1`] = `
     }
   >
     <View
-      aria-label="Frozen yogurt"
       role="cell"
       style={
         [
@@ -656,7 +654,6 @@ exports[`DataTable snapshots renders a table 1`] = `
       }
     >
       <View
-        aria-label="Dessert, Frozen yogurt"
         role="cell"
         style={
           [

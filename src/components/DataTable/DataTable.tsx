@@ -5,20 +5,24 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import type { DataTableColumn, DataTableLayout } from './columns';
 import DataTableCell from './DataTableCell';
 import { ColumnsContext } from './DataTableColumnsContext';
-import { DataTableContext } from './DataTableContext';
+import { DataTableContext, RowIndexContext } from './DataTableContext';
 import type { NativeFocusMode } from './DataTableContext';
 import DataTableHeader, {
   DataTableHeader as _DataTableHeader,
 } from './DataTableHeader';
+import type { Props as DataTableHeaderProps } from './DataTableHeader';
 import DataTablePagination, {
   DataTablePagination as _DataTablePagination,
 } from './DataTablePagination';
 import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
-import type { Props as DataTableRowProps } from './DataTableRow';
 import DataTableTitle, {
   DataTableTitle as _DataTableTitle,
 } from './DataTableTitle';
-import { defaultFormatRowPosition, isDataTableElement } from './utils';
+import {
+  defaultFormatRowPosition,
+  isDataTableElement,
+  readColumnLabels,
+} from './utils';
 import type { FormatRowPosition } from './utils';
 import webAriaProps from '../../utils/webAriaProps';
 
@@ -170,10 +174,6 @@ const DataTable = ({
   style,
   ...rest
 }: Props) => {
-  const [headerLabels, setHeaderLabels] = React.useState<ReadonlyArray<
-    string | undefined
-  > | null>(null);
-
   if (
     __DEV__ &&
     layout === 'fixed' &&
@@ -184,46 +184,62 @@ const DataTable = ({
     );
   }
 
-  // Covers the common `items.map(...)` shape. Virtualized rows have no children
-  // to walk, so those pass `index` themselves.
-  const { rows, renderedRowCount } = React.useMemo(() => {
-    let rendered = 0;
+  // Everything the rows need to know about the table has to be resolved while
+  // rendering: an effect would leave the first render - the only one a server
+  // renders - with the wrong row indices and no column names.
+  const { rows, columnLabels, hasHeader, renderedRowCount } =
+    React.useMemo(() => {
+      let columnLabels: Array<string | undefined> = [];
+      let hasHeader = false;
+      let rendered = 0;
 
-    const rows = React.Children.map(children, (child) => {
-      if (!isDataTableElement<DataTableRowProps>(child, 'DataTable.Row')) {
-        return child;
-      }
+      const rows = React.Children.map(children, (child) => {
+        if (!React.isValidElement(child)) {
+          return child;
+        }
 
-      const offset = rendered++;
+        if (
+          isDataTableElement<DataTableHeaderProps>(child, 'DataTable.Header')
+        ) {
+          hasHeader = true;
+          columnLabels = readColumnLabels(child.props.children);
+          return child;
+        }
 
-      return child.props.index === undefined
-        ? React.cloneElement(child, { index: firstRowIndex + offset })
-        : child;
-    });
+        if (isDataTableElement(child, 'DataTable.Pagination')) {
+          return child;
+        }
 
-    return { rows, renderedRowCount: rendered };
-  }, [children, firstRowIndex]);
+        // Anything else is taken for a row. Virtualized rows have no children
+        // here to number, so those pass `index` themselves.
+        return (
+          <RowIndexContext.Provider value={firstRowIndex + rendered++}>
+            {child}
+          </RowIndexContext.Provider>
+        );
+      });
+
+      return { rows, columnLabels, hasHeader, renderedRowCount: rendered };
+    }, [children, firstRowIndex]);
 
   const resolvedRowCount =
     rowCount ??
     (renderedRowCount > 0 ? firstRowIndex + renderedRowCount : undefined);
 
-  const hasHeader = headerLabels !== null;
-
-  const columnCount = columns?.length ?? headerLabels?.length;
+  const columnCount =
+    columns?.length ?? (hasHeader ? columnLabels.length : undefined);
 
   const tableContext = React.useMemo(
     () => ({
       rowCount: resolvedRowCount,
-      columnLabels: headerLabels ?? [],
+      columnLabels,
       hasHeader,
       nativeFocusMode,
       formatRowPosition,
-      setHeaderLabels,
     }),
     [
       resolvedRowCount,
-      headerLabels,
+      columnLabels,
       hasHeader,
       nativeFocusMode,
       formatRowPosition,

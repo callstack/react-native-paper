@@ -9,7 +9,11 @@ import type {
 
 import type { Props as DataTableCellProps } from './DataTableCell';
 import { withColumnIndices } from './DataTableColumnsContext';
-import { DataTableContext, DataTableRowContext } from './DataTableContext';
+import {
+  DataTableContext,
+  DataTableRowContext,
+  RowIndexContext,
+} from './DataTableContext';
 import {
   HORIZONTAL_PADDING,
   ROW_MIN_HEIGHT,
@@ -40,6 +44,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Index of this row within the data set, counting from 0. Announced to
    * screen readers as the row's position.
+   *
+   * Rows rendered among the `DataTable`'s own children are numbered by their
+   * position there; pass this for rows rendered outside it, as a virtualized
+   * list does.
    */
   index?: number;
   style?: StyleProp<ViewStyle>;
@@ -98,7 +106,12 @@ const DataTableRow = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const table = React.useContext(DataTableContext);
+  const position = React.useContext(RowIndexContext);
   const borderBottomColor = theme.colors.outlineVariant;
+
+  // A virtualized list renders rows outside the table's own child list, so
+  // those pass their index themselves.
+  const rowIndex = index ?? position ?? undefined;
 
   const interactive = hasTouchHandler({
     onPress,
@@ -176,7 +189,7 @@ const DataTableRow = ({
     (rowIsFocusUnit
       ? composeRowLabel({
           cellLabels,
-          rowIndex: index,
+          rowIndex,
           rowCount: table?.rowCount,
           formatRowPosition: table?.formatRowPosition,
         })
@@ -195,9 +208,13 @@ const DataTableRow = ({
         : ('button' as const),
     ...webAriaProps({
       'aria-rowindex':
-        index == null ? undefined : index + 1 + (table?.hasHeader ? 1 : 0),
+        rowIndex == null
+          ? undefined
+          : rowIndex + 1 + (table?.hasHeader ? 1 : 0),
     }),
-    accessible: accessible ?? (rowIsFocusUnit || undefined),
+    // Left unset, `Pressable` defaults it to `true`, which would swallow
+    // whatever an interactive row holds.
+    accessible: accessible ?? rowIsFocusUnit,
     'aria-label': label,
   };
 

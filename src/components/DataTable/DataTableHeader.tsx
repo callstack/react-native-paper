@@ -2,13 +2,9 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
-
 import { withColumnIndices } from './DataTableColumnsContext';
-import { DataTableContext, DataTableRowContext } from './DataTableContext';
-import type { Props as DataTableTitleProps } from './DataTableTitle';
+import { DataTableRowContext } from './DataTableContext';
 import { HORIZONTAL_PADDING } from './tokens';
-import { getElementLabel, isDataTableElement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import webAriaProps from '../../utils/webAriaProps';
@@ -58,31 +54,7 @@ const DataTableHeader = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const table = React.useContext(DataTableContext);
   const borderBottomColor = theme.colors.outlineVariant;
-
-  const labels = React.useMemo(() => {
-    const labels: Array<string | undefined> = [];
-
-    React.Children.forEach(children, (child, index) => {
-      labels[index] = isDataTableElement<DataTableTitleProps>(
-        child,
-        'DataTable.Title'
-      )
-        ? getElementLabel(child.props)
-        : undefined;
-    });
-
-    return labels;
-  }, [children]);
-
-  const setHeaderLabels = table?.setHeaderLabels;
-  const publish = useLatestCallback(() => setHeaderLabels?.(labels));
-  const signature = labels.join(' ');
-
-  React.useEffect(publish, [publish, signature]);
-
-  React.useEffect(() => () => setHeaderLabels?.(null), [setHeaderLabels]);
 
   const rowContext = React.useMemo(
     () => ({ header: true, rowIsFocusUnit: false }),

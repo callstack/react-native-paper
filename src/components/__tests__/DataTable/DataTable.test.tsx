@@ -182,6 +182,46 @@ describe('DataTable.Row', () => {
     expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 4);
   });
 
+  it('numbers a row a consumer component renders, not just an inline one', async () => {
+    const NameRow = ({ name }: { name: string }) => (
+      <DataTable.Row testID="row">
+        <DataTable.Cell>{name}</DataTable.Cell>
+        <DataTable.Cell numeric>159</DataTable.Cell>
+      </DataTable.Row>
+    );
+
+    await render(
+      <Table>
+        <NameRow name="Frozen yogurt" />
+      </Table>
+    );
+
+    // The position reaches the row through context, so a wrapper component
+    // does not swallow it on the way down.
+    expect(
+      screen.getByRole('row', {
+        name: 'Dessert, Frozen yogurt, Calories, 159, row 3 of 6',
+      })
+    ).toBeOnTheScreen();
+  });
+
+  it('lets a control inside a pressable row keep its own stop', async () => {
+    await render(
+      <Table>
+        <DataTable.Row testID="row" onPress={() => {}}>
+          <DataTable.Cell>
+            <Checkbox status="checked" testID="row-checkbox" />
+          </DataTable.Cell>
+        </DataTable.Row>
+      </Table>
+    );
+
+    // Left unset, the row would default to being one accessibility element
+    // and the checkbox would be out of reach.
+    expect(screen.getByTestId('row')).toHaveProp('accessible', false);
+    expect(screen.getByTestId('row-checkbox')).toBeOnTheScreen();
+  });
+
   it('honours an explicitly passed index, as virtualized lists must', async () => {
     await render(
       <Table>
@@ -267,6 +307,24 @@ describe('DataTable.Cell', () => {
 
     // Making the cell accessible would swallow the checkbox's own state.
     expect(screen.getByTestId('cell')).not.toHaveProp('accessible', true);
+    expect(screen.getByTestId('row-checkbox')).toBeOnTheScreen();
+  });
+
+  it('does not name a cell after its column when it holds a control', async () => {
+    await render(
+      <Table>
+        <DataTable.Row>
+          <DataTable.Cell testID="cell">
+            <Checkbox status="checked" testID="row-checkbox" />
+          </DataTable.Cell>
+          <DataTable.Cell numeric>159</DataTable.Cell>
+        </DataTable.Row>
+      </Table>
+    );
+
+    // Not "Dessert" - the column name on the container would bury the
+    // checkbox's own role and state behind it.
+    expect(screen.getByTestId('cell')).not.toHaveProp('aria-label');
     expect(screen.getByTestId('row-checkbox')).toBeOnTheScreen();
   });
 
