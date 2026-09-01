@@ -3,10 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TextLayoutEventData,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -27,6 +25,7 @@ import type {
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import { ListTokens } from './tokens';
+import { useMultilineDescription } from './useMultilineDescription';
 import type { Style } from './utils';
 import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
@@ -221,15 +220,11 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-  const [isDescriptionMultiline, setIsDescriptionMultiline] =
-    React.useState(false);
-
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
-    const { nativeEvent } = event;
-    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
-  };
+  const {
+    isMultiline: isDescriptionMultiline,
+    contentRef,
+    descriptionProps,
+  } = useMultilineDescription(Boolean(description));
 
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);
@@ -373,7 +368,10 @@ const ListAccordion = ({
                     style: getLeftStyles(isDescriptionMultiline, description),
                   })
                 : null}
-              <View style={[styles.contentItem, styles.content, contentStyle]}>
+              <View
+                ref={contentRef}
+                style={[styles.contentItem, styles.content, contentStyle]}
+              >
                 <Text
                   variant="bodyLarge"
                   theme={theme}
@@ -401,7 +399,7 @@ const ListAccordion = ({
                       },
                       descriptionStyle,
                     ]}
-                    onTextLayout={onDescriptionTextLayout}
+                    {...descriptionProps}
                     maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
                   >
                     {description}

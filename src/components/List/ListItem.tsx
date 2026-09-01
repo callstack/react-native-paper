@@ -3,9 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
   TextProps,
   TextStyle,
   ViewStyle,
@@ -14,6 +12,7 @@ import type {
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListItemContext } from './ListItemContext';
 import { ListTokens } from './tokens';
+import { useMultilineDescription } from './useMultilineDescription';
 import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -186,15 +185,11 @@ const ListItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
   const shouldIndent = hasLeft && !left && !right;
-  const [isDescriptionMultiline, setIsDescriptionMultiline] =
-    React.useState(false);
-
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
-    const { nativeEvent } = event;
-    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
-  };
+  const {
+    isMultiline: isDescriptionMultiline,
+    contentRef,
+    descriptionProps,
+  } = useMultilineDescription(Boolean(description));
 
   const backgroundColor = selected
     ? theme.colors[ListTokens.selectedContainerColor]
@@ -222,7 +217,7 @@ const ListItem = ({
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
         style={[{ color: descriptionColor }, descriptionStyle]}
-        onTextLayout={onDescriptionTextLayout}
+        {...descriptionProps}
         maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
@@ -332,7 +327,10 @@ const ListItem = ({
       >
         <View style={[styles.row, containerStyle]}>
           {renderLeading()}
-          <View style={[styles.item, styles.content, contentStyle]}>
+          <View
+            ref={contentRef}
+            style={[styles.item, styles.content, contentStyle]}
+          >
             {renderTitle()}
 
             {description
