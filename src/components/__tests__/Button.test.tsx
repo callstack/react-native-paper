@@ -14,6 +14,7 @@ import { tokens } from '../../theme/tokens';
 import { shadowLayers } from '../../theme/tokens/sys/elevation';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import Button from '../Button/Button';
+import { Tokens } from '../Button/tokens';
 import {
   getButtonColors,
   getButtonRippleColor,
@@ -1136,6 +1137,60 @@ it('forwards `style` to the shadow host', async () => {
   expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle(
     styles.scaled
   );
+});
+
+describe('container height', () => {
+  const MODES = ['filled', 'tonal', 'elevated', 'outlined', 'text'] as const;
+  const { containerHeight, leadingSpace } = Tokens.sizes.small;
+
+  // The rendered container is the content box plus the outline Yoga draws
+  // around it, so those two have to add up to the token height in every mode.
+  const renderedBox = (testID: string) => {
+    const content = StyleSheet.flatten(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId(`${testID}-content`).props.style
+    );
+    const clip = StyleSheet.flatten(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId(`${testID}-container`).props.style
+    );
+    const outline = clip.borderWidth ?? 0;
+    return {
+      height: content.minHeight + outline * 2,
+      leading: content.paddingStart + outline,
+    };
+  };
+
+  it.each(MODES)('renders %s at the token height', async (mode) => {
+    await render(
+      <Button mode={mode} testID="button">
+        X
+      </Button>
+    );
+
+    expect(renderedBox('button')).toEqual({
+      height: containerHeight,
+      leading: leadingSpace,
+    });
+  });
+
+  it('keeps an outlined toggle the same size in both states', async () => {
+    await render(
+      <Button mode="outlined" selected={false} testID="button">
+        X
+      </Button>
+    );
+    const unselected = renderedBox('button');
+
+    await render(
+      <Button mode="outlined" selected testID="button">
+        X
+      </Button>
+    );
+
+    // Selecting drops the outline; without the inset this shrank by 2dp.
+    expect(renderedBox('button')).toEqual(unselected);
+  });
 });
 
 describe('shape morph animation', () => {

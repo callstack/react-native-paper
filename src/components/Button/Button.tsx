@@ -458,9 +458,8 @@ const Button = ({
   const outerStyle = useAnimatedStyle(
     () => ({
       borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
-      backgroundColor: containerColor,
     }),
-    [animatedRadius, pinnedRadius, containerColor]
+    [animatedRadius, pinnedRadius]
   );
 
   // The clip carries the same animated radius, so the ripple and the disabled
@@ -468,11 +467,18 @@ const Button = ({
   const clipStyle = useAnimatedStyle(
     () => ({
       borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
-      backgroundColor: containerColor,
-      borderColor,
-      borderWidth,
     }),
-    [animatedRadius, pinnedRadius, containerColor, borderColor, borderWidth]
+    [animatedRadius, pinnedRadius]
+  );
+
+  const containerStyle = React.useMemo(
+    () => ({ backgroundColor: containerColor }),
+    [containerColor]
+  );
+
+  const outlineStyle = React.useMemo(
+    () => ({ backgroundColor: containerColor, borderColor, borderWidth }),
+    [containerColor, borderColor, borderWidth]
   );
 
   // TODO: move this back to `Surface` once #5078 lands.
@@ -563,6 +569,16 @@ const Button = ({
     };
   }, [hitSlop, sizeStyle]);
 
+  const contentBoxStyle = React.useMemo(
+    () => ({
+      minHeight: sizeStyle.minHeight - borderWidth * 2,
+      paddingStart: sizeStyle.paddingStart - borderWidth,
+      paddingEnd: sizeStyle.paddingEnd - borderWidth,
+      gap: sizeStyle.iconGap,
+    }),
+    [sizeStyle, borderWidth]
+  );
+
   const labelTypeStyle = React.useMemo(
     () => ({
       color: labelColor,
@@ -576,11 +592,11 @@ const Button = ({
       {...rest}
       ref={ref}
       testID={`${testID}-container-outer-layer`}
-      style={[styles.button, shadowStyle, outerStyle, style]}
+      style={[styles.button, shadowStyle, containerStyle, outerStyle, style]}
     >
       <Reanimated.View
         testID={`${testID}-container`}
-        style={[styles.clip, clipStyle, borderRadiusStyles]}
+        style={[styles.clip, outlineStyle, clipStyle, borderRadiusStyles]}
       >
         {backgroundOpacity < 1 && (
           <View
@@ -617,12 +633,7 @@ const Button = ({
             style={[
               styles.content,
               isTrailingIcon && styles.contentReverse,
-              {
-                minHeight: sizeStyle.minHeight,
-                paddingStart: sizeStyle.paddingStart,
-                paddingEnd: sizeStyle.paddingEnd,
-                gap: sizeStyle.iconGap,
-              },
+              contentBoxStyle,
               { opacity: labelOpacity },
               contentStyle,
             ]}

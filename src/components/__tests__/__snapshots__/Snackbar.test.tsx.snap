@@ -335,6 +335,8 @@ exports[`renders snackbar with action button 1`] = `
               },
               {
                 "backgroundColor": "transparent",
+              },
+              {
                 "borderRadius": 20,
               },
               [
@@ -358,8 +360,10 @@ exports[`renders snackbar with action button 1`] = `
                 {
                   "backgroundColor": "transparent",
                   "borderColor": "transparent",
-                  "borderRadius": 20,
                   "borderWidth": 0,
+                },
+                {
+                  "borderRadius": 20,
                 },
                 {},
               ]

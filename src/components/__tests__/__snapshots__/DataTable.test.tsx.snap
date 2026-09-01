@@ -1698,6 +1698,8 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
             {
               "backgroundColor": "transparent",
+            },
+            {
               "borderRadius": 20,
             },
             {
@@ -1718,8 +1720,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "backgroundColor": "transparent",
                 "borderColor": "rgba(202, 196, 208, 1)",
-                "borderRadius": 20,
                 "borderWidth": 1,
+              },
+              {
+                "borderRadius": 20,
               },
               {},
             ]
@@ -1786,9 +1790,9 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   },
                   {
                     "gap": 8,
-                    "minHeight": 40,
-                    "paddingEnd": 16,
-                    "paddingStart": 16,
+                    "minHeight": 38,
+                    "paddingEnd": 15,
+                    "paddingStart": 15,
                   },
                   {
                     "opacity": 1,

@@ -18,6 +18,8 @@ exports[`renders button with an accessibility hint 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -35,8 +37,10 @@ exports[`renders button with an accessibility hint 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -180,6 +184,8 @@ exports[`renders button with an accessibility label 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -197,8 +203,10 @@ exports[`renders button with an accessibility label 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -340,6 +348,8 @@ exports[`renders button with button color 1`] = `
       },
       {
         "backgroundColor": "#e91e63",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -357,8 +367,10 @@ exports[`renders button with button color 1`] = `
         {
           "backgroundColor": "#e91e63",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -500,6 +512,8 @@ exports[`renders button with color 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -517,8 +531,10 @@ exports[`renders button with color 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -660,6 +676,8 @@ exports[`renders button with custom testID 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -677,8 +695,10 @@ exports[`renders button with custom testID 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -820,6 +840,8 @@ exports[`renders button with icon 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -837,8 +859,10 @@ exports[`renders button with icon 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -1013,6 +1037,8 @@ exports[`renders button with icon in reverse order 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -1030,8 +1056,10 @@ exports[`renders button with icon in reverse order 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -1208,6 +1236,8 @@ exports[`renders disabled button 1`] = `
       },
       {
         "backgroundColor": "transparent",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -1225,8 +1255,10 @@ exports[`renders disabled button 1`] = `
         {
           "backgroundColor": "transparent",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -1386,6 +1418,8 @@ exports[`renders filled button by default 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -1403,8 +1437,10 @@ exports[`renders filled button by default 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -1546,6 +1582,8 @@ exports[`renders filled button with mode 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -1563,8 +1601,10 @@ exports[`renders filled button with mode 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -1706,6 +1746,8 @@ exports[`renders loading button 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -1723,8 +1765,10 @@ exports[`renders loading button 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -2057,6 +2101,8 @@ exports[`renders outlined button with mode 1`] = `
       },
       {
         "backgroundColor": "transparent",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -2074,8 +2120,10 @@ exports[`renders outlined button with mode 1`] = `
         {
           "backgroundColor": "transparent",
           "borderColor": "rgba(202, 196, 208, 1)",
-          "borderRadius": 20,
           "borderWidth": 1,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -2140,9 +2188,9 @@ exports[`renders outlined button with mode 1`] = `
             false,
             {
               "gap": 8,
-              "minHeight": 40,
-              "paddingEnd": 16,
-              "paddingStart": 16,
+              "minHeight": 38,
+              "paddingEnd": 15,
+              "paddingStart": 15,
             },
             {
               "opacity": 1,
@@ -2217,6 +2265,8 @@ exports[`renders text button with mode 1`] = `
       },
       {
         "backgroundColor": "transparent",
+      },
+      {
         "borderRadius": 20,
       },
       undefined,
@@ -2234,8 +2284,10 @@ exports[`renders text button with mode 1`] = `
         {
           "backgroundColor": "transparent",
           "borderColor": "transparent",
-          "borderRadius": 20,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
         },
         {},
       ]
@@ -2377,6 +2429,8 @@ exports[`size prop renders a button with per-size metrics 1`] = `
       },
       {
         "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
         "borderRadius": 28,
       },
       undefined,
@@ -2394,8 +2448,10 @@ exports[`size prop renders a button with per-size metrics 1`] = `
         {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
-          "borderRadius": 28,
           "borderWidth": 0,
+        },
+        {
+          "borderRadius": 28,
         },
         {},
       ]

@@ -134,6 +134,8 @@ exports[`render visible banner, with custom theme 1`] = `
                 },
                 {
                   "backgroundColor": "transparent",
+                },
+                {
                   "borderRadius": 20,
                 },
                 {
@@ -153,8 +155,10 @@ exports[`render visible banner, with custom theme 1`] = `
                   {
                     "backgroundColor": "transparent",
                     "borderColor": "transparent",
-                    "borderRadius": 20,
                     "borderWidth": 0,
+                  },
+                  {
+                    "borderRadius": 20,
                   },
                   {},
                 ]
@@ -574,6 +578,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 },
                 {
                   "backgroundColor": "transparent",
+                },
+                {
                   "borderRadius": 20,
                 },
                 {
@@ -593,8 +599,10 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   {
                     "backgroundColor": "transparent",
                     "borderColor": "transparent",
-                    "borderRadius": 20,
                     "borderWidth": 0,
+                  },
+                  {
+                    "borderRadius": 20,
                   },
                   {},
                 ]
@@ -857,6 +865,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
                 {
                   "backgroundColor": "transparent",
+                },
+                {
                   "borderRadius": 20,
                 },
                 {
@@ -876,8 +886,10 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   {
                     "backgroundColor": "transparent",
                     "borderColor": "transparent",
-                    "borderRadius": 20,
                     "borderWidth": 0,
+                  },
+                  {
+                    "borderRadius": 20,
                   },
                   {},
                 ]
@@ -1016,6 +1028,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
                 {
                   "backgroundColor": "transparent",
+                },
+                {
                   "borderRadius": 20,
                 },
                 {
@@ -1035,8 +1049,10 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   {
                     "backgroundColor": "transparent",
                     "borderColor": "transparent",
-                    "borderRadius": 20,
                     "borderWidth": 0,
+                  },
+                  {
+                    "borderRadius": 20,
                   },
                   {},
                 ]
