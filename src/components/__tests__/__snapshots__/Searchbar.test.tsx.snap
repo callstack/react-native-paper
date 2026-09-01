@@ -111,6 +111,7 @@ exports[`activity indicator snapshot test 1`] = `
                 "opacity": 1,
               }
             }
+            testID="search-bar-icon-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -490,6 +491,7 @@ exports[`renders with placeholder 1`] = `
                 "opacity": 1,
               }
             }
+            testID="search-bar-icon-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -680,6 +682,7 @@ exports[`renders with placeholder 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="search-bar-clear-icon-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -830,6 +833,7 @@ exports[`renders with text 1`] = `
                 "opacity": 1,
               }
             }
+            testID="search-bar-icon-icon-opacity"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1016,6 +1020,7 @@ exports[`renders with text 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="search-bar-clear-icon-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}

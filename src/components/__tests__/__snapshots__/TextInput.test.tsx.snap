@@ -218,6 +218,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -390,6 +391,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -654,6 +656,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -859,6 +862,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1300,6 +1304,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1472,6 +1477,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1717,6 +1723,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1922,6 +1929,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                   "opacity": 1,
                 }
               }
+              testID="icon-button-icon-opacity"
             >
               <Text
                 accessibilityElementsHidden={true}

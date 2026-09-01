@@ -97,7 +97,15 @@ const TextInputIcon = ({
         icon={icon}
         iconColor={color}
         size={iconSize}
-        style={[styles.icon, style]}
+        style={[
+          styles.icon,
+          style,
+          // TextInput already dims the whole accessory when the field is
+          // disabled. Forwarding `disabled` makes IconButton dim the icon too,
+          // and the two multiply, so let IconButton own it and cancel the outer
+          // one. A decorative icon keeps it, nothing else dims it.
+          isInteractive && disabled ? styles.notDimmed : null,
+        ]}
         disabled={isInteractive ? disabled : undefined}
         onPress={onPress}
       />

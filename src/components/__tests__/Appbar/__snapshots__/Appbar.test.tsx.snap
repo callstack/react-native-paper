@@ -152,6 +152,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "opacity": 1,
                   }
                 }
+                testID="search-bar-icon-icon-opacity"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -342,6 +343,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "opacity": 1,
                     }
                   }
+                  testID="search-bar-clear-icon-icon-opacity"
                 >
                   <Text
                     accessibilityElementsHidden={true}
@@ -531,6 +533,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <View
               style={
@@ -774,6 +777,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "opacity": 1,
               }
             }
+            testID="icon-button-icon-opacity"
           >
             <View
               style={

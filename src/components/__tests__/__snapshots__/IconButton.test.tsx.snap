@@ -106,6 +106,7 @@ exports[`renders disabled icon button 1`] = `
             "opacity": 0.38,
           }
         }
+        testID="icon-button-icon-opacity"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -215,6 +216,7 @@ exports[`renders icon button by default 1`] = `
             "opacity": 1,
           }
         }
+        testID="icon-button-icon-opacity"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -324,6 +326,7 @@ exports[`renders icon button with color 1`] = `
             "opacity": 1,
           }
         }
+        testID="icon-button-icon-opacity"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -433,6 +436,7 @@ exports[`renders icon button with size 1`] = `
             "opacity": 1,
           }
         }
+        testID="icon-button-icon-opacity"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -542,6 +546,7 @@ exports[`renders icon change animated 1`] = `
             "opacity": 1,
           }
         }
+        testID="icon-button-icon-opacity"
       >
         <View
           style={
