@@ -15,7 +15,7 @@ import type {
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import { ListTokens } from './tokens';
 import type { ListChildProps, Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
+import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -240,90 +240,103 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const rowContext = React.useMemo(
+    () => ({
+      verticalPadding: isDescriptionMultiline
+        ? ListTokens.threeLineVerticalPadding
+        : ListTokens.verticalPadding,
+    }),
+    [isDescriptionMultiline]
+  );
+
   return (
     <View>
       <View
         style={{ backgroundColor: theme.colors[ListTokens.containerColor] }}
       >
-        <TouchableRipple
-          style={[
-            styles.container,
-            description ? styles.containerTwoLine : styles.containerOneLine,
-            style,
-          ]}
-          onPress={handlePress}
-          onLongPress={onLongPress}
-          delayLongPress={delayLongPress}
-          role="button"
-          aria-expanded={isExpanded}
-          aria-label={ariaLabel}
-          testID={testID}
-          theme={theme}
-          background={background}
-          borderless
-          hitSlop={hitSlop}
-        >
-          <View
-            style={[styles.row, containerStyle]}
-            pointerEvents={pointerEvents}
+        <ListRowContext.Provider value={rowContext}>
+          <TouchableRipple
+            style={[
+              styles.container,
+              description ? styles.containerTwoLine : styles.containerOneLine,
+              isDescriptionMultiline && styles.containerThreeLine,
+              style,
+            ]}
+            onPress={handlePress}
+            onLongPress={onLongPress}
+            delayLongPress={delayLongPress}
+            role="button"
+            aria-expanded={isExpanded}
+            aria-label={ariaLabel}
+            testID={testID}
+            theme={theme}
+            background={background}
+            borderless
+            hitSlop={hitSlop}
           >
-            {left
-              ? left({
-                  color: theme.colors[ListTokens.leadingIconColor],
-                  style: getLeftStyles(isDescriptionMultiline, description),
-                })
-              : null}
-            <View style={[styles.contentItem, styles.content, contentStyle]}>
-              <Text
-                variant="bodyLarge"
-                theme={theme}
-                selectable={false}
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  {
-                    color: titleTextColor,
-                  },
-                  titleStyle,
-                ]}
-                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              >
-                {title}
-              </Text>
-              {description ? (
+            <View
+              style={[styles.row, containerStyle]}
+              pointerEvents={pointerEvents}
+            >
+              {left
+                ? left({
+                    color: theme.colors[ListTokens.leadingIconColor],
+                    style: getLeftStyles(isDescriptionMultiline, description),
+                  })
+                : null}
+              <View style={[styles.contentItem, styles.content, contentStyle]}>
                 <Text
-                  variant="bodyMedium"
+                  variant="bodyLarge"
                   theme={theme}
                   selectable={false}
-                  numberOfLines={descriptionNumberOfLines}
+                  numberOfLines={titleNumberOfLines}
                   style={[
                     {
-                      color: descriptionColor,
+                      color: titleTextColor,
                     },
-                    descriptionStyle,
+                    titleStyle,
                   ]}
-                  onTextLayout={onDescriptionTextLayout}
-                  maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
+                  maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
                 >
-                  {description}
+                  {title}
                 </Text>
-              ) : null}
+                {description ? (
+                  <Text
+                    variant="bodyMedium"
+                    theme={theme}
+                    selectable={false}
+                    numberOfLines={descriptionNumberOfLines}
+                    style={[
+                      {
+                        color: descriptionColor,
+                      },
+                      descriptionStyle,
+                    ]}
+                    onTextLayout={onDescriptionTextLayout}
+                    maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
+                  >
+                    {description}
+                  </Text>
+                ) : null}
+              </View>
+              <View style={styles.trailingItem}>
+                {right ? (
+                  right({
+                    isExpanded: isExpanded,
+                  })
+                ) : (
+                  <MaterialCommunityIcon
+                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                    color={theme.colors[ListTokens.expandTrailingIconColor]}
+                    size={24}
+                    direction={direction}
+                  />
+                )}
+              </View>
             </View>
-            <View style={styles.trailingItem}>
-              {right ? (
-                right({
-                  isExpanded: isExpanded,
-                })
-              ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={theme.colors[ListTokens.expandTrailingIconColor]}
-                  size={24}
-                  direction={direction}
-                />
-              )}
-            </View>
-          </View>
-        </TouchableRipple>
+          </TouchableRipple>
+        </ListRowContext.Provider>
       </View>
 
       {isExpanded
@@ -361,6 +374,9 @@ const styles = StyleSheet.create({
   containerTwoLine: {
     minHeight: ListTokens.twoLineContainerHeight,
   },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
+  },
   row: {
     flexDirection: 'row',
   },
@@ -369,7 +385,7 @@ const styles = StyleSheet.create({
   },
   trailingItem: {
     alignSelf: 'center',
-    paddingLeft: 8,
+    paddingLeft: ListTokens.leadingSpace,
   },
   child: {
     paddingLeft: 40,

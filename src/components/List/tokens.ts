@@ -1,7 +1,8 @@
 import type { ColorRole } from '../../theme/types';
 
 const sizes = {
-  verticalPadding: 12,
+  verticalPadding: 8,
+  threeLineVerticalPadding: 12,
   oneLineContainerHeight: 56,
   twoLineContainerHeight: 72,
   leadingSpace: 16,

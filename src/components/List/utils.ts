@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { ListTokens } from './tokens';
@@ -44,6 +45,15 @@ export const getLeftStyles = (alignToTop: boolean, description: Description) =>
 
 export const getRightStyles = (alignToTop: boolean, description: Description) =>
   getAccessoryStyles(alignToTop, description);
+
+/**
+ * Rows change their vertical padding with the number of lines, so a leading
+ * element taller than the default slot needs to know how much of the MD3
+ * height the row already covers.
+ */
+export const ListRowContext = React.createContext<{ verticalPadding: number }>({
+  verticalPadding: ListTokens.verticalPadding,
+});
 
 export const getAccordionColors = ({ theme }: { theme: InternalTheme }) => ({
   titleTextColor: theme.colors[ListTokens.headlineColor],

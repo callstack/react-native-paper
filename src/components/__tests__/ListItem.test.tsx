@@ -10,6 +10,7 @@ import { red500 } from '../../theme/colors';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
+import ListImage from '../List/ListImage';
 import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
@@ -21,6 +22,14 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingLeft: 0,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+  },
+  image: {
+    width: 56,
+    height: 56,
   },
 });
 
@@ -181,7 +190,7 @@ it('hits the one line container height without measuring the description', async
 
   expect(screen.getByTestId(testID)).toHaveStyle({
     minHeight: 56,
-    paddingVertical: 12,
+    paddingVertical: 8,
   });
 });
 
@@ -196,7 +205,7 @@ it('hits the two and three line container heights without measuring', async () =
 
   expect(screen.getByTestId(testID)).toHaveStyle({
     minHeight: 72,
-    paddingVertical: 12,
+    paddingVertical: 8,
   });
 
   await fireEvent(screen.getByText('Item description'), 'textLayout', {
@@ -206,6 +215,95 @@ it('hits the two and three line container heights without measuring', async () =
   expect(screen.getByTestId(testID)).toHaveStyle({
     minHeight: 72,
     paddingVertical: 12,
+  });
+});
+
+it('leaves a 40dp leading element on the one line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      left={(props) => (
+        <View testID="left-accessory" style={[props.style, styles.avatar]} />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 40 });
+});
+
+it('leaves a 56dp leading image on the two line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => (
+        <View testID="left-accessory" style={[props.style, styles.image]} />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 56 });
+});
+
+it('pads a 64dp leading video to the three line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      left={(props) => (
+        <ListImage
+          variant="video"
+          style={props.style}
+          source={{ uri: 'https://www.someurl.com/apple' }}
+        />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('list-image')).toHaveStyle({
+    height: 64,
+    marginVertical: 4,
+  });
+});
+
+it('keeps a 64dp leading video on the same height once the description wraps', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => (
+        <ListImage
+          variant="video"
+          style={props.style}
+          source={{ uri: 'https://www.someurl.com/apple' }}
+        />
+      )}
+      testID={testID}
+    />
+  );
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 12 });
+  expect(screen.getByTestId('list-image')).toHaveStyle({
+    height: 64,
+    marginVertical: 0,
   });
 });
 
