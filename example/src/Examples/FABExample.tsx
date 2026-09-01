@@ -159,7 +159,7 @@ const FABExample = () => {
           )}
           onPress={() => setShowFab((v) => !v)}
         />
-        <Divider bold style={{ backgroundColor: colors.outline }} />
+        <Divider style={{ backgroundColor: colors.outline }} />
       </View>
       <FlatList
         data={rows}
