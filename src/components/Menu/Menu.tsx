@@ -127,8 +127,6 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
   typeof anchor?.x === 'number' &&
   typeof anchor?.y === 'number';
 
-const isBrowser = () => Platform.OS === 'web' && 'document' in global;
-
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
@@ -258,7 +256,9 @@ const Menu = ({
   const removeListeners = React.useCallback(() => {
     backHandlerSubscriptionRef.current?.remove();
     dimensionsSubscriptionRef.current?.remove();
-    isBrowser() && document.removeEventListener('keyup', handleKeypress);
+    Platform.OS === 'web' &&
+      'document' in global &&
+      document.removeEventListener('keyup', handleKeypress);
   }, [handleKeypress]);
 
   const attachListeners = React.useCallback(() => {

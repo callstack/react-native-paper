@@ -200,7 +200,6 @@ const Button = ({
   );
   const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
-  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -235,7 +234,8 @@ const Button = ({
         toValue: activeElevation,
         duration: 200 * scale,
         useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -248,7 +248,8 @@ const Button = ({
         toValue: initialElevation,
         duration: 150 * scale,
         useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };

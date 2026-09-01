@@ -201,7 +201,6 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(elevated ? 1 : 0)
@@ -223,7 +222,8 @@ const Chip = ({
       toValue: elevated ? 2 : 0,
       duration: 200 * scale,
       useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        Platform.OS === 'web' ||
+        Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
@@ -234,7 +234,8 @@ const Chip = ({
       toValue: elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        Platform.OS === 'web' ||
+        Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 

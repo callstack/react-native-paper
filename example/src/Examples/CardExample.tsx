@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
@@ -11,7 +11,6 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import { isWeb } from '../../utils';
 import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -144,7 +143,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            isWeb
+            Platform.OS === 'web'
               ? alert('The Chameleon is Pressed')
               : Alert.alert('The Chameleon is Pressed');
           }}
@@ -161,7 +160,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onLongPress={() => {
-            isWeb
+            Platform.OS === 'web'
               ? alert('The City is Long Pressed')
               : Alert.alert('The City is Long Pressed');
           }}
