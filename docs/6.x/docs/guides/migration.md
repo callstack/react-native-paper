@@ -343,6 +343,7 @@ a plain button
 - **`uppercase`** → `labelStyle={{ textTransform: 'uppercase' }}`.
 - **`compact`** → `size="extra-small"`.
 - **`contentStyle={{ flexDirection: 'row-reverse' }}`** → `iconPosition="trailing"`.
+- **`elevation`** → elevation follows `mode="elevated"`.
 
 ```tsx
 // Before (v5)
@@ -358,6 +359,34 @@ a plain button
   labelStyle={{ textTransform: 'uppercase' }}
 >
   Next
+</Button>
+```
+
+#### Style
+
+`Button` renders on `Surface`, so its `style` follows the same rules:
+
+- **Border radius** is no longer set through `style`. Use `shape`, or override
+  the corner token that the size maps to. `round` is the full pill; `square`
+  reads `corner.medium` at `extra-small` and `small`; `corner.large` at
+  `medium`; and `corner.extraLarge` at `large` and `extra-large`.
+- **Background color** is no longer set through `style`. Use `buttonColor`.
+- **Animated styles** must come from Reanimated. A React Native
+  `Animated.Value` in `style` is not applied.
+
+```tsx
+// Before (v5)
+<Button style={{ borderRadius: 8, backgroundColor: 'red' }}>
+  Press me
+</Button>
+
+// After (v6)
+<Button
+  shape="square"
+  theme={{ shapes: { corner: { medium: 8 } } }}
+  buttonColor="red"
+>
+  Press me
 </Button>
 ```
 
