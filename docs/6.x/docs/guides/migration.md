@@ -155,11 +155,6 @@ e.g.:
 </Modal>
 ```
 
-### Dialog
-
-- The default elevation changed from level `1` to level `3`.
-- The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
-
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
@@ -283,6 +278,9 @@ const theme = {
 
 ### Dialog
 
+- The default elevation changed from level `1` to level `3`.
+- The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
+
 The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
 
 #### Removed props
@@ -304,7 +302,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 - **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
 - **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
 - **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
-- **`aria-label`** provides an accessibility label when the dialog title is not a string.
+- **`aria-label`** overrides the title as the dialog's accessible name.
 
 ```tsx
 // Before (v5)

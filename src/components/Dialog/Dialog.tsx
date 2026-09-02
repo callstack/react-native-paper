@@ -2,10 +2,6 @@ import * as React from 'react';
 import { Platform, ScrollView, StyleSheet } from 'react-native';
 import type { ScrollViewProps, StyleProp } from 'react-native';
 
-import type {
-  DialogContentProps,
-  DialogScrollAreaProps,
-} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Modal from '../Modal';
@@ -18,6 +14,8 @@ import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import type { SurfaceStyle } from '../Surface';
+import type { Props as DialogContentProps } from './DialogContent';
+import type { Props as DialogScrollAreaProps } from './DialogScrollArea';
 import Text from '../Typography/Text';
 
 export type Props = {
