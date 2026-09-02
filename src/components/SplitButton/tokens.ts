@@ -105,12 +105,6 @@ export const splitButtonMinInteractiveSize = 48;
 
 export const splitButtonStateLayerOpacity = 0.1;
 
-// Per-mode/state color roles, straight from the M3 split button spec. Filled,
-// tonal, and elevated share the same disabled treatment (a 10%/38% tint of
-// `onSurface` for container/content). `outlined` has no container fill in
-// either state — only its content dims (to `outlineVariant` at 38%); its
-// border stays `outlineVariant` at full opacity throughout, same as
-// `Button`'s outlined mode never dims its border either.
 export type SplitButtonColorTokens = {
   containerColor?: ColorRole;
   containerOpacity: number;

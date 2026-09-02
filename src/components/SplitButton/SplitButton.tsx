@@ -13,6 +13,7 @@ import type {
 
 import Animated, {
   Easing,
+  type AnimatedStyle,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -274,17 +275,14 @@ const SplitButton = ({
   const trailingInnerRadiusProgress = useSharedValue(
     isTrailingExpanded ? 1 : 0
   );
-  const colors = React.useMemo(
+  // Resolved for both states up front, so the container crossfade below
+  // always has both endpoints on hand to animate between.
+  const { enabled: enabledColors, disabled: disabledColors } = React.useMemo(
     () =>
-      getSplitButtonColors({
-        theme,
-        mode,
-        disabled,
-        customButtonColor,
-        customTextColor,
-      }),
-    [theme, mode, disabled, customButtonColor, customTextColor]
+      getSplitButtonColors({ theme, mode, customButtonColor, customTextColor }),
+    [theme, mode, customButtonColor, customTextColor]
   );
+  const colors = disabled ? disabledColors : enabledColors;
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
   const contentColor =
@@ -322,6 +320,35 @@ const SplitButton = ({
     }),
     [theme.motion.duration.short4, theme.motion.easing.standard]
   );
+  // Passed to both containers below as their `transitionDuration`
+  // explicitly, so their elevation/shadow transitions and this container
+  // crossfade always share one duration instead of two independently-
+  // computed values that could drift apart.
+  const disabledTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short3 * theme.animation.scale,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+    }),
+    [
+      theme.motion.duration.short3,
+      theme.motion.easing.standard,
+      theme.animation.scale,
+    ]
+  );
+  const disabledProgress = useSharedValue(disabled ? 1 : 0);
+  React.useEffect(() => {
+    disabledProgress.value = withTiming(disabled ? 1 : 0, disabledTimingConfig);
+  }, [disabled, disabledTimingConfig, disabledProgress]);
+  // Neither `enabledColors.containerColor` nor `disabledColors.containerColor`
+  // is ever itself animated (each stays fixed on its own layer below) -
+  // only their opacity crossfades. That sidesteps Reanimated's inability to
+  // interpolate a Material You `PlatformColor`/`DynamicColorIOS` value.
+  const enabledContainerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: enabledColors.containerOpacity * (1 - disabledProgress.value),
+  }));
+  const dimContainerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: disabledProgress.value * disabledColors.containerOpacity,
+  }));
   // Interpolated between `trailingShape`'s own Start radius (resting) and
   // its End radius (expanded), so the Start corner always lands exactly on
   // the same radius already driving the segment's static End corners.
@@ -336,7 +363,7 @@ const SplitButton = ({
     typeof trailingShape.borderTopEndRadius === 'number'
       ? trailingShape.borderTopEndRadius
       : sizeStyle.containerRadius;
-  // Shared between the trailing `Surface`'s own start-corner props (for its
+  // Shared between the trailing segment's own start-corner props (for its
   // elevation shadow) and the inner clip view's animated style below, so
   // both always land on the same radius.
   const trailingStartRadius = useDerivedValue(
@@ -353,11 +380,14 @@ const SplitButton = ({
     transform: [{ rotate: `${trailingIconRotation.value * 180}deg` }],
   }));
   // Per the M3 spec, the trailing button's color doesn't change when
-  // selected (expanded) — only a state layer is applied on top of it.
+  // selected (expanded) — only a state layer is applied on top of it. Fades
+  // out via `disabledProgress` (rather than snapping on the raw `disabled`
+  // boolean) so it stays in sync with the container crossfade above.
   const trailingStateLayerAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: disabled
-      ? 0
-      : trailingInnerRadiusProgress.value * splitButtonStateLayerOpacity,
+    opacity:
+      (1 - disabledProgress.value) *
+      trailingInnerRadiusProgress.value *
+      splitButtonStateLayerOpacity,
   }));
   const leadingHitSlop = React.useMemo(
     () => getSplitButtonHitSlop({ size, hitSlop }),
@@ -402,14 +432,6 @@ const SplitButton = ({
     trailingInnerRadiusProgress,
   ]);
 
-  // Both `Surface`s below always get a constant `'transparent'`
-  // `backgroundColor` rather than switching to `colors.containerColor`
-  // once `containerOpacity` reaches 1: `colors.containerColor` may be a
-  // Material You `PlatformColor`, and flipping `Surface`'s `backgroundColor`
-  // between that and a plain string across renders (e.g. toggling
-  // `disabled`) crashes Reanimated's CSS-transition engine. The real
-  // (possibly platform) color is always painted via the plain, non-animated
-  // `ButtonBackground` view instead.
   const commonButtonStyle: ViewStyle = {
     height: sizeStyle.containerHeight,
     borderColor: colors.borderColor,
@@ -435,6 +457,7 @@ const SplitButton = ({
         testID={getTestID('leading-container')}
         {...leadingShape}
         elevation={colors.elevation}
+        transitionDuration={disabledTimingConfig.duration}
         backgroundColor="transparent"
         style={[
           styles.leading,
@@ -445,8 +468,14 @@ const SplitButton = ({
       >
         <ButtonBackground
           testID={getTestID('leading-background')}
-          backgroundColor={colors.containerColor}
-          opacity={colors.containerOpacity}
+          backgroundColor={enabledColors.containerColor}
+          animatedStyle={enabledContainerAnimatedStyle}
+          borderRadiusStyle={leadingShape}
+        />
+        <ButtonBackground
+          testID={getTestID('leading-disabled-background')}
+          backgroundColor={disabledColors.containerColor}
+          animatedStyle={dimContainerAnimatedStyle}
           borderRadiusStyle={leadingShape}
         />
         <TouchableRipple
@@ -523,6 +552,7 @@ const SplitButton = ({
         borderTopStartRadius={trailingStartRadius}
         borderBottomStartRadius={trailingStartRadius}
         elevation={colors.elevation}
+        transitionDuration={disabledTimingConfig.duration}
         backgroundColor="transparent"
         style={[
           styles.trailing,
@@ -541,8 +571,14 @@ const SplitButton = ({
         >
           <ButtonBackground
             testID={getTestID('trailing-background')}
-            backgroundColor={colors.containerColor}
-            opacity={colors.containerOpacity}
+            backgroundColor={enabledColors.containerColor}
+            animatedStyle={enabledContainerAnimatedStyle}
+            borderRadiusStyle={trailingShape}
+          />
+          <ButtonBackground
+            testID={getTestID('trailing-disabled-background')}
+            backgroundColor={disabledColors.containerColor}
+            animatedStyle={dimContainerAnimatedStyle}
             borderRadiusStyle={trailingShape}
           />
           <Animated.View
@@ -600,28 +636,30 @@ const SplitButton = ({
   );
 };
 
-// Always rendered (rather than skipped once `opacity` reaches 1) since the
-// `Surface`s above never get the real, possibly-`PlatformColor` value as
-// their own `backgroundColor` — see the comment above `commonButtonStyle`.
+// Both the enabled and disabled-dim container colors are always rendered as
+// two stacked, statically-colored layers, crossfading only via `animatedStyle`'s
+// `opacity` - never interpolating `backgroundColor` itself. See the comment
+// above `disabledProgress`.
 const ButtonBackground = ({
   testID,
   backgroundColor,
-  opacity,
+  animatedStyle,
   borderRadiusStyle,
 }: {
   testID?: string;
   backgroundColor: ColorValue;
-  opacity: number;
+  animatedStyle: AnimatedStyle<{ opacity: number }>;
   borderRadiusStyle: ViewStyle;
 }) => {
   return (
-    <View
+    <Animated.View
       testID={testID}
       pointerEvents="none"
       style={[
         StyleSheet.absoluteFill,
         borderRadiusStyle,
-        { backgroundColor, opacity },
+        { backgroundColor },
+        animatedStyle,
       ]}
     />
   );
