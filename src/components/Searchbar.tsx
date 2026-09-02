@@ -24,7 +24,7 @@ interface Style {
   marginRight: number;
 }
 
-export type Props = TextInputProps & {
+export type Props = Omit<TextInputProps, 'style'> & {
   /**
    * Hint text shown when the input is empty.
    */

@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
 import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,

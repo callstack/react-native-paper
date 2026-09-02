@@ -178,16 +178,25 @@ exports[`renders FAB.Menu closed 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -346,16 +355,25 @@ exports[`renders FAB.Menu closed 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >
@@ -942,16 +960,25 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -1110,16 +1137,25 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >
@@ -1706,16 +1742,25 @@ exports[`renders FAB.Menu open 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -1874,16 +1919,25 @@ exports[`renders FAB.Menu open 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >
@@ -2470,16 +2524,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -2638,16 +2701,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >
@@ -2806,16 +2878,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-2-text"
                   >
@@ -2974,16 +3055,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-3-text"
                   >
@@ -3142,16 +3232,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-4-text"
                   >
@@ -3310,16 +3409,25 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-5-text"
                   >
@@ -3907,16 +4015,25 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -4075,16 +4192,25 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >
@@ -4701,16 +4827,25 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                   >
                     Send email
@@ -4898,16 +5033,25 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                   >
                     Set reminder
@@ -5493,16 +5637,25 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-0-text"
                   >
@@ -5661,16 +5814,25 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                     testID="item-1-text"
                   >

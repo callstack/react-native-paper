@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports -- TODO: remove after BottomNavigation migrates to Reanimated. */
 import {
   Animated,
   Easing,
@@ -6,6 +7,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+/* eslint-enable no-restricted-imports */
 import type { KeyboardEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';

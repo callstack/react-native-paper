@@ -82,9 +82,9 @@ describe('getSelectionVisualState', () => {
   });
 
   describe('iconColor (checkmark / dash glyph)', () => {
-    it('is transparent when unselected (no glyph drawn)', () => {
+    it('keeps its color when unselected while the mask hides it', () => {
       expect(getSelectionVisualState({ theme, selected: false })).toMatchObject(
-        { iconColor: 'transparent' }
+        { iconColor: theme.colors.onPrimary }
       );
     });
 

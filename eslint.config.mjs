@@ -111,6 +111,20 @@ export default defineConfig(
         },
       ],
 
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'react-native',
+              importNames: ['Animated', 'PanResponder'],
+              message:
+                'Use react-native-reanimated for animations and react-native-gesture-handler for gestures.',
+            },
+          ],
+        },
+      ],
+
       '@react-native/platform-colors': 'error',
 
       'promise/no-callback-in-promise': 'error',

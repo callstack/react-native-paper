@@ -2348,15 +2348,19 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "height": 24,
-        "justifyContent": "center",
-        "transform": [
-          {
-            "rotate": "180deg",
-          },
-        ],
-      }
+      [
+        {
+          "height": 24,
+          "justifyContent": "center",
+        },
+        {
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        },
+      ]
     }
   >
     <Text
@@ -2476,15 +2480,19 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "height": 24,
-        "justifyContent": "center",
-        "transform": [
-          {
-            "rotate": "180deg",
-          },
-        ],
-      }
+      [
+        {
+          "height": 24,
+          "justifyContent": "center",
+        },
+        {
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        },
+      ]
     }
   >
     <Text
