@@ -80,6 +80,28 @@ You can specify a `testID` explicitly and use that value to query the component.
 
 ## Components
 
+### Chip
+
+#### Default mode
+
+- The default **`mode`** changed from **`"flat"`** to **`"outlined"`**.
+
+```tsx
+// Before (v5) - no mode passed, rendered flat
+<Chip onPress={() => {}}>Example Chip</Chip>
+
+// After (v6) - no mode passed, renders outlined; pass mode="flat" to keep the old look
+<Chip mode="flat" onPress={() => {}}>Example Chip</Chip>
+```
+
+#### Removed props
+
+- **`compact`**, **`showSelectedOverlay`** were removed and have no direct equivalent.
+
+#### New props
+
+- **`trailingIcon`** / **`onTrailingIconPress`** / **`trailingIconAccessibilityLabel`** add a trailing action (e.g. a dropdown) independent of the close button. `trailingIcon` takes precedence over `onClose`'s close icon when both are specified.
+
 ### Appbar
 
 The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
