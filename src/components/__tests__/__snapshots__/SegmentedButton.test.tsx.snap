@@ -2,10 +2,14 @@
 
 exports[`renders segmented button 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
         "flexDirection": "row",
+      },
+      {
+        "direction": "ltr",
       },
       undefined,
     ]
@@ -15,27 +19,23 @@ exports[`renders segmented button 1`] = `
     style={
       [
         {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderBottomRightRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderEndWidth": 0,
-          "borderRadius": 20,
-          "borderTopRightRadius": 0,
-          "borderWidth": 1,
+          "flex": 1,
         },
         {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
+          "borderBottomEndRadius": 0,
+          "borderBottomStartRadius": 9999,
+          "borderTopEndRadius": 0,
+          "borderTopStartRadius": 9999,
         },
-        [
-          undefined,
-          {},
-        ],
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+        },
+        undefined,
       ]
     }
   >
     <View
+      accessibilityLabel="Walking"
       accessibilityState={
         {
           "busy": undefined,
@@ -65,36 +65,49 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderBottomRightRadius": 0,
-            "borderEndWidth": 0,
-            "borderRadius": 20,
-            "borderTopRightRadius": 0,
-          },
+          [
+            {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderBottomEndRadius": 0,
+              "borderBottomStartRadius": 9999,
+              "borderTopEndRadius": 0,
+              "borderTopStartRadius": 9999,
+            },
+            {
+              "borderBottomWidth": 1,
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderEndWidth": 0,
+              "borderStartColor": "rgba(121, 116, 126, 1)",
+              "borderStartWidth": 1,
+              "borderTopWidth": 1,
+            },
+            undefined,
+            {
+              "height": 40,
+            },
+          ],
         ]
       }
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            {
-              "opacity": 1,
-              "paddingVertical": 9,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "columnGap": 8,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingHorizontal": 12,
+          }
         }
       >
         <Text
@@ -119,6 +132,7 @@ exports[`renders segmented button 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "textAlign": "center",
                   },
                   {
@@ -129,13 +143,17 @@ exports[`renders segmented button 1`] = `
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
                   },
+                  {
+                    "opacity": 1,
+                  },
                   undefined,
                 ],
               ],
             ]
           }
-          testID="undefined-label"
-        />
+        >
+          Walking
+        </Text>
       </View>
     </View>
   </View>
@@ -143,26 +161,23 @@ exports[`renders segmented button 1`] = `
     style={
       [
         {
-          "backgroundColor": "transparent",
-          "borderBottomLeftRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderTopLeftRadius": 0,
-          "borderWidth": 1,
+          "flex": 1,
         },
         {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
+          "borderBottomEndRadius": 9999,
+          "borderBottomStartRadius": 0,
+          "borderTopEndRadius": 9999,
+          "borderTopStartRadius": 0,
         },
-        [
-          undefined,
-          {},
-        ],
+        {
+          "backgroundColor": "transparent",
+        },
+        undefined,
       ]
     }
   >
     <View
+      accessibilityLabel="Riding"
       accessibilityState={
         {
           "busy": undefined,
@@ -192,35 +207,49 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderBottomLeftRadius": 0,
-            "borderRadius": 20,
-            "borderTopLeftRadius": 0,
-          },
+          [
+            {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            {
+              "borderBottomEndRadius": 9999,
+              "borderBottomStartRadius": 0,
+              "borderTopEndRadius": 9999,
+              "borderTopStartRadius": 0,
+            },
+            {
+              "borderBottomWidth": 1,
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderEndWidth": 1,
+              "borderStartColor": "rgba(121, 116, 126, 1)",
+              "borderStartWidth": 1,
+              "borderTopWidth": 1,
+            },
+            undefined,
+            {
+              "height": 40,
+            },
+          ],
         ]
       }
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            {
-              "opacity": 1,
-              "paddingVertical": 9,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "columnGap": 8,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingHorizontal": 12,
+          }
         }
       >
         <Text
@@ -245,6 +274,7 @@ exports[`renders segmented button 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "textAlign": "center",
                   },
                   {
@@ -255,13 +285,17 @@ exports[`renders segmented button 1`] = `
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
                   },
+                  {
+                    "opacity": 1,
+                  },
                   undefined,
                 ],
               ],
             ]
           }
-          testID="undefined-label"
-        />
+        >
+          Riding
+        </Text>
       </View>
     </View>
   </View>

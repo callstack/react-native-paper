@@ -7,7 +7,7 @@ import type {
 } from 'react-native';
 
 import SegmentedButtonItem from './SegmentedButtonItem';
-import { getDisabledSegmentedButtonStyle } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -46,7 +46,7 @@ export type Props<T extends string = string> = {
   /**
    * Buttons to display as options in toggle button.
    * Button should contain the following properties:
-   * - `value`: value of button (required)
+   * - `value`: unique value of button (required)
    * - `icon`: icon to display for the item
    * - `disabled`: whether the button is disabled
    * - `aria-label`: accessibility label for the button. This is read by the screen reader when the user taps the button.
@@ -133,51 +133,55 @@ const SegmentedButtons = <T extends string = string>({
   theme: themeOverrides,
 }: Props<T>) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
 
   return (
-    <View style={[styles.row, style]}>
-      {buttons.map((item, i) => {
-        const disabledChildStyle = getDisabledSegmentedButtonStyle({
-          theme,
-          buttons,
-          index: i,
-        });
-        const segment =
-          i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
+    <View
+      role={multiSelect ? 'group' : 'radiogroup'}
+      style={[styles.row, { direction }, style]}
+    >
+      {buttons.map(
+        ({ value: itemValue, onPress: onItemPress, ...itemProps }, index) => {
+          const segment =
+            index === 0
+              ? 'first'
+              : index === buttons.length - 1
+                ? 'last'
+                : 'middle';
 
-        const checked =
-          multiSelect && Array.isArray(value)
-            ? value.includes(item.value)
-            : value === item.value;
+          const checked = multiSelect
+            ? value.includes(itemValue)
+            : value === itemValue;
 
-        const onPress = (e: GestureResponderEvent) => {
-          item.onPress?.(e);
+          const handlePress = (event: GestureResponderEvent) => {
+            onItemPress?.(event);
 
-          const nextValue =
-            multiSelect && Array.isArray(value)
-              ? checked
-                ? value.filter((val) => item.value !== val)
-                : [...value, item.value]
-              : item.value;
+            if (multiSelect) {
+              onValueChange(
+                checked
+                  ? value.filter((selectedValue) => itemValue !== selectedValue)
+                  : [...value, itemValue]
+              );
+            } else {
+              onValueChange(itemValue);
+            }
+          };
 
-          // @ts-expect-error: TS doesn't preserve types after destructuring, so the type isn't inferred correctly
-          onValueChange(nextValue);
-        };
-
-        return (
-          <SegmentedButtonItem
-            {...item}
-            key={i}
-            checked={checked}
-            segment={segment}
-            density={density}
-            onPress={onPress}
-            style={[item.style, disabledChildStyle]}
-            labelStyle={item.labelStyle}
-            theme={theme}
-          />
-        );
-      })}
+          return (
+            <SegmentedButtonItem
+              {...itemProps}
+              key={itemValue}
+              checked={checked}
+              previousDisabled={buttons[index - 1]?.disabled}
+              role={multiSelect ? 'checkbox' : 'radio'}
+              segment={segment}
+              density={density}
+              onPress={handlePress}
+              theme={theme}
+            />
+          );
+        }
+      )}
     </View>
   );
 };

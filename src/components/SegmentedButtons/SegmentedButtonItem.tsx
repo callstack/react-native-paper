@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -8,24 +8,29 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import SegmentedButtonContent from './SegmentedButtonContent';
+import { FOCUS_RING_OUTSET, SegmentedButtonTokens } from './tokens';
 import {
   getSegmentedButtonBorderRadius,
-  getSegmentedButtonColors,
-  getSegmentedButtonDensityPadding,
+  getSegmentedButtonBorderStyles,
+  resolveColors,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { SegmentedButtonPosition } from './utils';
+import type { Theme } from '../../types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
-import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**
    * Whether the segmented button is checked
    */
   checked: boolean;
+  /**
+   * Accessibility role determined by the segmented button selection variant.
+   */
+  role: 'radio' | 'checkbox';
   /**
    * Icon to display for the `SegmentedButtonItem`.
    */
@@ -44,8 +49,9 @@ export type Props = {
    * Whether the button is disabled.
    */
   disabled?: boolean;
+  previousDisabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -58,17 +64,13 @@ export type Props = {
    */
   onPress?: (event: GestureResponderEvent) => void;
   /**
-   * Value of button.
-   */
-  value: string;
-  /**
    * Label text of the button.
    */
   label?: string;
   /**
    * Button segment.
    */
-  segment?: 'first' | 'last';
+  segment: SegmentedButtonPosition;
   /**
    * Show optional check icon to indicate selected state
    */
@@ -95,15 +97,17 @@ export type Props = {
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
   /**
-   * @optional
+   * Resolved theme inherited from the segmented button group.
    */
-  theme?: ThemeProp;
+  theme: Theme;
 };
 
 const SegmentedButtonItem = ({
   checked,
+  role,
   'aria-label': ariaLabel,
-  disabled,
+  disabled = false,
+  previousDisabled = false,
   style,
   labelStyle,
   showSelectedCheck,
@@ -116,143 +120,110 @@ const SegmentedButtonItem = ({
   onPress,
   segment,
   density = 'regular',
-  theme: themeOverrides,
+  theme,
   labelMaxFontSizeMultiplier,
   hitSlop,
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const accessibilityLabel = ariaLabel ?? label;
 
-  const checkScale = React.useRef(new Animated.Value(0)).current;
+  const [focused, setFocused] = React.useState(false);
+  const showFocusRing = focused && !disabled;
 
-  React.useEffect(() => {
-    if (!showSelectedCheck) {
-      return;
-    }
-    if (checked) {
-      Animated.spring(checkScale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.spring(checkScale, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [checked, checkScale, showSelectedCheck]);
-
-  const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
-    getSegmentedButtonColors({
-      checked,
-      theme,
-      disabled,
-      checkedColor,
-      uncheckedColor,
-    });
-
-  const borderRadius = theme.shapes.corner.largeIncreased;
-  const segmentBorderRadius = getSegmentedButtonBorderRadius({
-    theme,
-    segment,
+  const colors = resolveColors(theme, {
+    checked,
+    disabled,
+    contentColor: checked ? checkedColor : uncheckedColor,
+    dividerDisabled: disabled && previousDisabled,
   });
-  const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
-  const showCheckedIcon = checked && showSelectedCheck;
 
-  const iconSize = 18;
-  const iconStyle = {
-    marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
-    ...(label && {
-      transform: [
-        {
-          scale: checkScale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
-        },
-      ],
-    }),
-  };
+  const borderRadius = getSegmentedButtonBorderRadius(segment);
+  const borderStyles = getSegmentedButtonBorderStyles(segment, colors);
 
-  const buttonStyle: ViewStyle = {
-    backgroundColor,
-    borderColor,
-    borderWidth,
-    borderRadius,
-    ...segmentBorderRadius,
-  };
-  const paddingVertical = getSegmentedButtonDensityPadding({ density });
-  const rippleStyle: ViewStyle = {
-    borderRadius,
-    ...segmentBorderRadius,
-  };
-  const labelTextStyle: TextStyle = {
-    ...theme.fonts.labelLarge,
-    color: textColor,
-  };
+  const height = SegmentedButtonTokens.containerHeight[density];
 
   return (
-    <View style={[buttonStyle, styles.button, style]}>
+    <View
+      testID={testID && `${testID}-wrapper`}
+      style={[
+        styles.wrapper,
+        borderRadius,
+        { backgroundColor: colors.wrapper },
+        style,
+      ]}
+    >
       <TouchableRipple
         borderless
         onPress={onPress}
-        aria-label={ariaLabel}
+        aria-label={accessibilityLabel}
         aria-disabled={disabled}
         aria-checked={checked}
-        role="button"
+        role={role}
         disabled={disabled}
+        focusable={!disabled}
         testID={testID}
-        style={rippleStyle}
         background={background}
-        theme={theme}
         hitSlop={hitSlop}
+        rippleColor={theme.colors.stateLayerPressed}
+        style={[
+          styles.touchable,
+          borderRadius,
+          borderStyles,
+          Platform.select({ web: { outline: 'none' } }),
+          { height },
+        ]}
+        onFocus={(event) => {
+          if (!disabled && isKeyboardFocusEvent(event)) {
+            setFocused(true);
+          }
+        }}
+        onBlur={() => setFocused(false)}
       >
-        <View
-          style={[styles.content, { paddingVertical, opacity: textOpacity }]}
-        >
-          {showCheckedIcon ? (
-            <Animated.View
-              testID={`${testID}-check-icon`}
-              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
-            >
-              <Icon source={'check'} size={iconSize} color={textColor} />
-            </Animated.View>
-          ) : null}
-          {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon source={icon} size={iconSize} color={textColor} />
-            </Animated.View>
-          ) : null}
-          <Text
-            variant="labelLarge"
-            style={[styles.label, labelTextStyle, labelStyle]}
-            selectable={false}
-            numberOfLines={1}
-            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
-          >
-            {label}
-          </Text>
-        </View>
+        <SegmentedButtonContent
+          checked={checked}
+          iconColor={colors.content.iconColor}
+          iconOpacity={colors.content.iconOpacity}
+          icon={icon}
+          label={label}
+          labelColor={colors.content.labelColor}
+          labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+          labelOpacity={colors.content.labelOpacity}
+          labelStyle={labelStyle}
+          showSelectedCheck={showSelectedCheck}
+          testID={testID}
+          theme={theme}
+        />
       </TouchableRipple>
+      {showFocusRing ? (
+        <View
+          pointerEvents="none"
+          testID={testID && `${testID}-focus-ring`}
+          style={[
+            styles.focusRing,
+            borderRadius,
+            { borderColor: colors.focusIndicator },
+          ]}
+        />
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
+  wrapper: {
     flex: 1,
-    minWidth: 76,
-    borderStyle: 'solid',
   },
-  label: {
-    textAlign: 'center',
-  },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  touchable: {
+    width: '100%',
     justifyContent: 'center',
-    paddingVertical: 9,
-    paddingHorizontal: 16,
+  },
+  focusRing: {
+    position: 'absolute',
+    top: -FOCUS_RING_OUTSET,
+    bottom: -FOCUS_RING_OUTSET,
+    left: -FOCUS_RING_OUTSET,
+    right: -FOCUS_RING_OUTSET,
+    borderWidth: SegmentedButtonTokens.focusIndicatorThickness,
+    pointerEvents: 'none',
   },
 });
 

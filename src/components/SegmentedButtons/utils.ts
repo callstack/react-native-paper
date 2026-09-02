@@ -1,150 +1,131 @@
-import type { ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
 
-import { tokens } from '../../theme/tokens';
+import color from 'color';
+
+import { SegmentedButtonTokens } from './tokens';
 import type { InternalTheme } from '../../types';
 
-const stateOpacity = tokens.md.sys.state.opacity;
-
-type BaseProps = {
-  theme: InternalTheme;
-  disabled?: boolean;
+type SegmentedButtonColorState = {
   checked: boolean;
+  disabled: boolean;
 };
 
-type SegmentedButtonProps = {
-  checkedColor?: string;
-  uncheckedColor?: string;
-} & BaseProps;
-
-const DEFAULT_PADDING = 9;
-
-export const getSegmentedButtonDensityPadding = ({
-  density,
-}: {
-  density?: 'regular' | 'small' | 'medium' | 'high';
-}) => {
-  let padding = DEFAULT_PADDING;
-
-  switch (density) {
-    case 'small':
-      return padding - 2;
-    case 'medium':
-      return padding - 4;
-    case 'high':
-      return padding - 8;
-    default:
-      return padding;
-  }
+type SegmentedButtonColorOptions = SegmentedButtonColorState & {
+  contentColor?: string;
+  dividerDisabled: boolean;
 };
 
-export const getDisabledSegmentedButtonStyle = ({
-  theme,
-  index,
-  buttons,
-}: {
-  theme: InternalTheme;
-  buttons: { disabled?: boolean }[];
-  index: number;
-}): ViewStyle => {
-  const width = getSegmentedButtonBorderWidth({ theme });
-  const isDisabled = buttons[index]?.disabled;
-  const isNextDisabled = buttons[index + 1]?.disabled;
+export type SegmentedButtonPosition = 'first' | 'last' | 'middle';
 
-  if (!isDisabled && isNextDisabled) {
-    return {
-      borderRightWidth: width,
-    };
-  }
-  return {};
-};
-
-export const getSegmentedButtonBorderRadius = ({
-  segment,
-}: {
-  theme: InternalTheme;
-  segment?: 'first' | 'last';
-}): ViewStyle => {
+export const getSegmentedButtonBorderRadius = (
+  segment: SegmentedButtonPosition
+): ViewStyle => {
   if (segment === 'first') {
     return {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      borderEndWidth: 0,
+      borderTopStartRadius: SegmentedButtonTokens.containerShape,
+      borderBottomStartRadius: SegmentedButtonTokens.containerShape,
+      borderTopEndRadius: 0,
+      borderBottomEndRadius: 0,
     };
-  } else if (segment === 'last') {
+  }
+
+  if (segment === 'last') {
     return {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
+      borderTopStartRadius: 0,
+      borderBottomStartRadius: 0,
+      borderTopEndRadius: SegmentedButtonTokens.containerShape,
+      borderBottomEndRadius: SegmentedButtonTokens.containerShape,
     };
-  } else {
+  }
+
+  return {
+    borderRadius: 0,
+  };
+};
+
+type SegmentedButtonBorderColors = {
+  outline: ColorValue;
+  divider: ColorValue;
+};
+
+export const getSegmentedButtonBorderStyles = (
+  segment: SegmentedButtonPosition,
+  { outline, divider }: SegmentedButtonBorderColors
+): ViewStyle => {
+  const outlineWidth = SegmentedButtonTokens.outlineWidth;
+
+  return {
+    borderColor: outline,
+    borderStartColor: segment === 'first' ? outline : divider,
+    borderTopWidth: outlineWidth,
+    borderBottomWidth: outlineWidth,
+    borderStartWidth: outlineWidth,
+    borderEndWidth: segment === 'last' ? outlineWidth : 0,
+  };
+};
+
+const resolveContentColors = (
+  theme: InternalTheme,
+  { checked, disabled }: SegmentedButtonColorState,
+  contentColor?: string
+) => {
+  if (disabled) {
     return {
-      borderRadius: 0,
-      borderEndWidth: 0,
+      labelColor: theme.colors[SegmentedButtonTokens.disabledLabelTextColor],
+      labelOpacity: SegmentedButtonTokens.disabledLabelTextOpacity,
+      iconColor: theme.colors[SegmentedButtonTokens.disabledIconColor],
+      iconOpacity: SegmentedButtonTokens.disabledIconOpacity,
     };
   }
+
+  const labelColor = checked
+    ? SegmentedButtonTokens.selectedLabelTextColor
+    : SegmentedButtonTokens.unselectedLabelTextColor;
+  const iconColor = checked
+    ? SegmentedButtonTokens.selectedIconColor
+    : SegmentedButtonTokens.unselectedIconColor;
+
+  return {
+    labelColor: contentColor ?? theme.colors[labelColor],
+    labelOpacity: 1,
+    iconColor: contentColor ?? theme.colors[iconColor],
+    iconOpacity: 1,
+  };
 };
 
-const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
-  if (checked) {
-    return theme.colors.secondaryContainer;
+const applyOpacity = (value: ColorValue, opacity: number): ColorValue => {
+  if (opacity === 1 || typeof value !== 'string') {
+    return value;
   }
-  return 'transparent';
+
+  return color(value)
+    .fade(1 - opacity)
+    .rgb()
+    .string();
 };
 
-const getSegmentedButtonBorderColor = ({ theme, disabled }: BaseProps) => {
-  if (disabled) {
-    return theme.colors.outlineVariant;
-  }
-  return theme.colors.outline;
+const resolveOutlineColor = (theme: InternalTheme, disabled: boolean) => {
+  const colorToken = disabled
+    ? SegmentedButtonTokens.disabledOutlineColor
+    : SegmentedButtonTokens.outlineColor;
+  const opacity = disabled ? SegmentedButtonTokens.disabledOutlineOpacity : 1;
+
+  return applyOpacity(theme.colors[colorToken], opacity);
 };
 
-const getSegmentedButtonBorderWidth = ({
-  theme: _t,
-}: Omit<BaseProps, 'disabled' | 'checked'>) => {
-  return 1;
-};
+export const resolveColors = (
+  theme: InternalTheme,
+  options: SegmentedButtonColorOptions
+) => {
+  const { checked, disabled, contentColor, dividerDisabled } = options;
 
-const getSegmentedButtonTextColor = ({
-  theme,
-  disabled,
-  checked,
-  checkedColor,
-  uncheckedColor,
-}: SegmentedButtonProps) => {
-  if (disabled) {
-    return theme.colors.onSurface;
-  }
-  if (checked) {
-    return checkedColor ?? theme.colors.onSecondaryContainer;
-  }
-  return uncheckedColor ?? theme.colors.onSurface;
-};
-
-export const getSegmentedButtonColors = ({
-  theme,
-  disabled,
-  checked,
-  checkedColor,
-  uncheckedColor,
-}: SegmentedButtonProps) => {
-  const backgroundColor = getSegmentedButtonBackgroundColor({
-    theme,
-    checked,
-  });
-  const borderColor = getSegmentedButtonBorderColor({
-    theme,
-    disabled,
-    checked,
-  });
-  const textColor = getSegmentedButtonTextColor({
-    theme,
-    disabled,
-    checked,
-    checkedColor,
-    uncheckedColor,
-  });
-  const borderWidth = getSegmentedButtonBorderWidth({ theme });
-
-  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
-
-  return { backgroundColor, borderColor, textColor, textOpacity, borderWidth };
+  return {
+    wrapper: checked
+      ? theme.colors[SegmentedButtonTokens.selectedContainerColor]
+      : 'transparent',
+    content: resolveContentColors(theme, options, contentColor),
+    outline: resolveOutlineColor(theme, disabled),
+    divider: resolveOutlineColor(theme, dividerDisabled),
+    focusIndicator: theme.colors[SegmentedButtonTokens.focusIndicatorColor],
+  };
 };
