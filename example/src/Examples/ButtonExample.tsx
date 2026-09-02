@@ -9,6 +9,12 @@ type Mode = 'text' | 'outlined' | 'elevated' | 'filled' | 'tonal';
 type Size = 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large';
 type Shape = 'round' | 'square';
 type IconPosition = 'leading' | 'trailing';
+/**
+ * `selected` is nullable: leaving it undefined is a plain button, which MD3
+ * colours differently from a toggle that happens to be unselected. A boolean
+ * switch can't express all three, so this is a three-way.
+ */
+type ToggleState = 'off' | 'unselected' | 'selected';
 
 const MODES: Mode[] = ['filled', 'tonal', 'elevated', 'outlined', 'text'];
 const SIZES: Size[] = [
@@ -20,6 +26,10 @@ const SIZES: Size[] = [
 ];
 const SHAPES: Shape[] = ['round', 'square'];
 const ICON_POSITIONS: IconPosition[] = ['leading', 'trailing'];
+const TOGGLE_STATES: ToggleState[] = ['off', 'unselected', 'selected'];
+
+const selectedFor = (state: ToggleState) =>
+  state === 'off' ? undefined : state === 'selected';
 
 function OptionRow<T extends string>({
   label,
@@ -84,7 +94,8 @@ const ButtonExample = () => {
   const [showIcon, setShowIcon] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [selected, setSelected] = React.useState(false);
+  const [toggleState, setToggleState] = React.useState<ToggleState>('off');
+  const [animateShape, setAnimateShape] = React.useState(true);
 
   // Selected state for the static toggle showcase below.
   const [selectedToggles, setSelectedToggles] = React.useState<
@@ -105,7 +116,8 @@ const ButtonExample = () => {
             icon={showIcon ? 'camera' : undefined}
             disabled={disabled}
             loading={loading}
-            selected={selected}
+            selected={selectedFor(toggleState)}
+            animateShape={animateShape}
             onPress={() => {}}
           >
             Play me
@@ -150,10 +162,16 @@ const ButtonExample = () => {
           onValueChange={setDisabled}
         />
         <SwitchRow label="Loading" value={loading} onValueChange={setLoading} />
+        <OptionRow
+          label="Toggle"
+          value={toggleState}
+          options={TOGGLE_STATES}
+          onChange={setToggleState}
+        />
         <SwitchRow
-          label="Selected"
-          value={selected}
-          onValueChange={setSelected}
+          label="Animate shape"
+          value={animateShape}
+          onValueChange={setAnimateShape}
         />
       </List.Section>
 
@@ -209,9 +227,9 @@ const ButtonExample = () => {
       </List.Section>
 
       <List.Section title="Shape (expressive)">
-        {(['round', 'square'] as const).map((shapeVariant) => (
+        {SHAPES.map((shapeVariant) => (
           <View key={shapeVariant} style={styles.row}>
-            {(['extra-small', 'small', 'medium', 'large'] as const).map((s) => (
+            {SIZES.map((s) => (
               <Button
                 key={`${shapeVariant}-${s}`}
                 mode="outlined"
@@ -259,6 +277,23 @@ const ButtonExample = () => {
             style={styles.button}
           >
             Custom color
+          </Button>
+          <Button
+            mode="filled"
+            textColor={theme.colors.onTertiaryContainer}
+            buttonColor={theme.colors.tertiaryContainer}
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Custom label color
+          </Button>
+          <Button
+            mode="tonal"
+            rippleColor={theme.colors.error}
+            onPress={() => {}}
+            style={styles.button}
+          >
+            Custom ripple
           </Button>
           <Button
             mode="outlined"

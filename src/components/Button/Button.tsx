@@ -464,6 +464,15 @@ const Button = ({
 
   // The clip carries the same animated radius, so the ripple and the disabled
   // overlay follow the morph.
+  //
+  // TODO: revisit the focus ring's placement once #5084 lands.
+  // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
+  // focus indicators to every `TouchableRipple` consumer, so Button gets one
+  // with no code here. Deliberately not implemented locally: a second ring here
+  // would double up with it. The catch is placement — that PR defaults to
+  // `focusRing="outward"` and warns an outward ring is trimmed by "any clipping
+  // ancestor sized to its content", which is exactly this view. Button will
+  // likely need `focusRing="inward"`, or the ring on the outer view.
   const clipStyle = useAnimatedStyle(
     () => ({
       borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
