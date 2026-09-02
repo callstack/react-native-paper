@@ -8,27 +8,13 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
-A button is component that the user can press to trigger an action.
 
 
 
+  <ScreenshotTabs screenshotData={{"filled":"screenshots/button-3.png","tonal":"screenshots/button-5.png","elevated":"screenshots/button-4.png","outlined":"screenshots/button-2.png","text":"screenshots/button-1.png"}}/>
 
-  <ScreenshotTabs screenshotData={{"text":"screenshots/button-1.png","outlined":"screenshots/button-2.png","contained":"screenshots/button-3.png","elevated":"screenshots/button-4.png","contained-tonal":"screenshots/button-5.png"}}/>
 
 
-## Usage
-```js
-import * as React from 'react';
-import { Button } from 'react-native-paper';
-
-const MyComponent = () => (
-  <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-    Press me
-  </Button>
-);
-
-export default MyComponent;
-```
 
 
   ## Props
@@ -54,11 +40,35 @@ export default MyComponent;
 
 <div>
 
-### compact
+### size
 
 </div>
 
-  <PropTable componentLink="Button/Button" prop="compact" />
+  <PropTable componentLink="Button/Button" prop="size" />
+
+<div>
+
+### shape
+
+</div>
+
+  <PropTable componentLink="Button/Button" prop="shape" />
+
+<div>
+
+### animateShape
+
+</div>
+
+  <PropTable componentLink="Button/Button" prop="animateShape" />
+
+<div>
+
+### selected
+
+</div>
+
+  <PropTable componentLink="Button/Button" prop="selected" />
 
 <div>
 
@@ -94,6 +104,14 @@ export default MyComponent;
 
 <div>
 
+### iconPosition
+
+</div>
+
+  <PropTable componentLink="Button/Button" prop="iconPosition" />
+
+<div>
+
 ### disabled
 
 </div>
@@ -110,19 +128,19 @@ export default MyComponent;
 
 <div>
 
-### uppercase
-
-</div>
-
-  <PropTable componentLink="Button/Button" prop="uppercase" />
-
-<div>
-
 ### background
 
 </div>
 
   <PropTable componentLink="Button/Button" prop="background" />
+
+<div>
+
+### rippleColor
+
+</div>
+
+  <PropTable componentLink="Button/Button" prop="rippleColor" />
 
 <div>
 
@@ -267,7 +285,7 @@ export default MyComponent;
 
   ## Theme colors
 
-  <ThemeColorsTable themeColorsData={{"active":{"elevated":{"backgroundColor":"theme.colors.elevation.level1","textColor":"theme.colors.primary"},"contained":{"backgroundColor":"theme.colors.primary","textColor":"theme.colors.onPrimary"},"contained-tonal":{"backgroundColor":"theme.colors.secondaryContainer","textColor":"theme.colors.onSecondaryContainer"},"outlined":{"textColor":"theme.colors.primary","borderColor":"theme.colors.outline"},"text":{"textColor":"theme.colors.primary"}},"disabled":{"elevated":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"contained":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"contained-tonal":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"outlined":{"textColor":"theme.colors.onSurfaceDisabled","borderColor":"theme.colors.surfaceDisabled"},"text":{"textColor":"theme.colors.onSurfaceDisabled"}}}} componentName="Button" />
+  <ThemeColorsTable themeColorsData={{"active":{"filled":{"backgroundColor":"theme.colors.primary","textColor":"theme.colors.onPrimary"},"tonal":{"backgroundColor":"theme.colors.secondaryContainer","textColor":"theme.colors.onSecondaryContainer"},"elevated":{"backgroundColor":"theme.colors.elevation.level1","textColor":"theme.colors.primary"},"outlined":{"textColor":"theme.colors.onSurfaceVariant","borderColor":"theme.colors.outline"},"text":{"textColor":"theme.colors.primary"}},"disabled":{"filled":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"tonal":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"elevated":{"backgroundColor":"theme.colors.surfaceDisabled","textColor":"theme.colors.onSurfaceDisabled"},"outlined":{"textColor":"theme.colors.onSurfaceDisabled","borderColor":"theme.colors.surfaceDisabled"},"text":{"textColor":"theme.colors.onSurfaceDisabled"}}}} componentName="Button" />
 
 
 <span />

@@ -2962,10 +2962,10 @@
     "Button/Button": {
       "filepath": "Button/Button.tsx",
       "title": "Button",
-      "description": "A button is component that the user can press to trigger an action.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Button } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Button icon=\"camera\" mode=\"contained\" onPress={() => console.log('Pressed')}>\n    Press me\n  </Button>\n);\n\nexport default MyComponent;\n```",
+      "description": "",
       "link": "button",
       "data": {
-        "description": "A button is component that the user can press to trigger an action.\n\n## Usage\n```js\nimport * as React from 'react';\nimport { Button } from 'react-native-paper';\n\nconst MyComponent = () => (\n  <Button icon=\"camera\" mode=\"contained\" onPress={() => console.log('Pressed')}>\n    Press me\n  </Button>\n);\n\nexport default MyComponent;\n```",
+        "description": "",
         "displayName": "Button",
         "methods": [],
         "statics": [],
@@ -2974,7 +2974,7 @@
             "required": false,
             "tsType": {
               "name": "union",
-              "raw": "'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'",
+              "raw": "'text' | 'outlined' | 'filled' | 'elevated' | 'tonal'",
               "elements": [
                 {
                   "name": "literal",
@@ -2986,7 +2986,7 @@
                 },
                 {
                   "name": "literal",
-                  "value": "'contained'"
+                  "value": "'filled'"
                 },
                 {
                   "name": "literal",
@@ -2994,13 +2994,13 @@
                 },
                 {
                   "name": "literal",
-                  "value": "'contained-tonal'"
+                  "value": "'tonal'"
                 }
               ]
             },
-            "description": "Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.\n- `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.\n- `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.\n- `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.\n- `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3\n- `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3",
+            "description": "Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.\n- `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)\n- `tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.\n- `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.\n- `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.\n- `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.",
             "defaultValue": {
-              "value": "'text'",
+              "value": "'filled'",
               "computed": false
             }
           },
@@ -3009,14 +3009,47 @@
             "tsType": {
               "name": "boolean"
             },
-            "description": "Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:\n * `contained` mode for theme version 2\n * `contained`, `contained-tonal` and `elevated` modes for theme version 3."
+            "description": "Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for the `filled`, `tonal` and `elevated` modes."
           },
-          "compact": {
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "ButtonSize"
+            },
+            "description": "Size of the button (Material Design 3 expressive). Defaults to `small`.\n\nThe size controls the minimum height, horizontal padding, icon size, the\ngap between icon and label, and the label typescale.",
+            "defaultValue": {
+              "value": "'small'",
+              "computed": false
+            }
+          },
+          "shape": {
+            "required": false,
+            "tsType": {
+              "name": "ButtonShape"
+            },
+            "description": "Shape variant of the button (Material Design 3 expressive). Defaults to\n`round`. `'round'` uses the full-pill corner radius; `'square'` uses a\nsmaller per-size corner radius. Overridden by an explicit `borderRadius`\nin `style`.",
+            "defaultValue": {
+              "value": "'round'",
+              "computed": false
+            }
+          },
+          "animateShape": {
             "required": false,
             "tsType": {
               "name": "boolean"
             },
-            "description": "Use a compact look, useful for `text` buttons in a row."
+            "description": "Whether the container animates its corner radius. Defaults to `true`.\n\nWhen `true` the corner springs to the pressed shape while the button is\npressed, and animates between the two shapes as `selected` changes. When\n`false` the shape still changes, it just snaps instead of animating, and\nthere is no press morph at all.\n\nForced off when `style` pins a `borderRadius`, and the press morph is\nskipped when the OS reduce-motion setting is on.",
+            "defaultValue": {
+              "value": "true",
+              "computed": false
+            }
+          },
+          "selected": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Turns the button into a Material Design 3 expressive toggle and sets its\nstate. Leave it **undefined** for a plain button — a toggle that is merely\nunselected is a different state, and MD3 gives the two different colours.\n\nWhen defined:\n\n- The button takes its container and label colours from the toggle set for\n  its `mode`, which differ between `false` and `true`. `text` is the one\n  exception: MD3 defines no text toggle, so it keeps its plain colours.\n- When `true` the `shape` is flipped: `'round'` renders square and vice\n  versa, and an `outlined` button drops its outline.\n- `aria-selected` is set so screen readers announce the toggle state."
           },
           "buttonColor": {
             "required": false,
@@ -3046,6 +3079,24 @@
             },
             "description": "Icon to display for the `Button`."
           },
+          "iconPosition": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'leading' | 'trailing'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'leading'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'trailing'"
+                }
+              ]
+            },
+            "description": "Position of the `icon` relative to the label. Defaults to `'leading'`."
+          },
           "disabled": {
             "required": false,
             "tsType": {
@@ -3061,19 +3112,19 @@
             },
             "description": "Label text of the button."
           },
-          "uppercase": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Make the label text uppercased. Note that this won't work if you pass React elements as children."
-          },
           "background": {
             "required": false,
             "tsType": {
               "name": "PressableAndroidRippleConfig"
             },
             "description": "Type of background drawabale to display the feedback (Android).\nhttps://reactnative.dev/docs/pressable#rippleconfig"
+          },
+          "rippleColor": {
+            "required": false,
+            "tsType": {
+              "name": "ColorValue"
+            },
+            "description": "Color of the ripple effect / state layer. Defaults to the label color at\nthe pressed-state opacity."
           },
           "aria-label": {
             "required": false,
@@ -3206,7 +3257,7 @@
               ],
               "raw": "StyleProp<ViewStyle>"
             },
-            "description": "Style of button's inner content.\nUse this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`."
+            "description": "Style of button's inner content.\nUse this prop to apply custom height and width or to set a custom padding."
           },
           "maxFontSizeMultiplier": {
             "required": false,
@@ -3226,19 +3277,13 @@
           "style": {
             "required": false,
             "tsType": {
-              "name": "Animated.WithAnimatedValue",
+              "name": "StyleProp",
               "elements": [
                 {
-                  "name": "StyleProp",
-                  "elements": [
-                    {
-                      "name": "ViewStyle"
-                    }
-                  ],
-                  "raw": "StyleProp<ViewStyle>"
+                  "name": "ViewStyle"
                 }
               ],
-              "raw": "Animated.WithAnimatedValue<StyleProp<ViewStyle>>"
+              "raw": "StyleProp<ViewStyle>"
             },
             "description": ""
           },
