@@ -18,7 +18,10 @@ type ButtonSizeTokens = {
   labelVariant: ButtonLabelVariant;
   containerShapeRound: ShapeToken;
   containerShapeSquare: ShapeToken;
-  /** Corner the container morphs to while pressed (MD3: always `small`). */
+  /**
+   * Corner the container morphs to while pressed. Tightens with the size:
+   * 8dp for XS/S, 12dp for M, 16dp for L/XL.
+   */
   pressedContainerShape: ShapeToken;
   selectedContainerShapeRound: ShapeToken;
   selectedContainerShapeSquare: ShapeToken;
@@ -63,7 +66,7 @@ const sizes = {
     labelVariant: 'titleMedium',
     containerShapeRound: 'full',
     containerShapeSquare: 'large',
-    pressedContainerShape: 'small',
+    pressedContainerShape: 'medium',
     selectedContainerShapeRound: 'full',
     selectedContainerShapeSquare: 'large',
   },
@@ -77,7 +80,7 @@ const sizes = {
     labelVariant: 'headlineSmall',
     containerShapeRound: 'full',
     containerShapeSquare: 'extraLarge',
-    pressedContainerShape: 'small',
+    pressedContainerShape: 'large',
     selectedContainerShapeRound: 'full',
     selectedContainerShapeSquare: 'extraLarge',
   },
@@ -91,7 +94,7 @@ const sizes = {
     labelVariant: 'headlineLarge',
     containerShapeRound: 'full',
     containerShapeSquare: 'extraLarge',
-    pressedContainerShape: 'small',
+    pressedContainerShape: 'large',
     selectedContainerShapeRound: 'full',
     selectedContainerShapeSquare: 'extraLarge',
   },

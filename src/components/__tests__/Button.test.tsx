@@ -17,6 +17,7 @@ import Button from '../Button/Button';
 import { Tokens } from '../Button/tokens';
 import {
   getButtonColors,
+  getButtonPressedRadius,
   getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
@@ -842,6 +843,24 @@ describe('getButtonShapeRadius', () => {
   );
 });
 
+// The pressed corner tightens with the size, per the MD3 corner table.
+const pressedRadii: [size: ButtonSize, pressed: number][] = [
+  ['extra-small', 8],
+  ['small', 8],
+  ['medium', 12],
+  ['large', 16],
+  ['extra-large', 16],
+];
+
+describe('getButtonPressedRadius', () => {
+  it.each(pressedRadii)(
+    'returns the pressed radius for size=%s',
+    (size, pressed) => {
+      expect(getButtonPressedRadius({ size, theme: getTheme() })).toBe(pressed);
+    }
+  );
+});
+
 describe('shape prop', () => {
   it('applies the round (full-pill) radius', async () => {
     await render(
@@ -1215,8 +1234,8 @@ describe('shape morph animation', () => {
     );
     spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    // `pressedContainerShape` is `small` at every size.
-    expect(springTargets(spy)).toContain(getTheme().shapes.corner.small);
+    // A large button presses to `large` (16dp), not the small sizes' 8dp.
+    expect(springTargets(spy)).toContain(getTheme().shapes.corner.large);
     spy.mockClear();
   });
 
