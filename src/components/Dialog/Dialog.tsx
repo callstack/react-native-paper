@@ -38,7 +38,7 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Content of the `Dialog`.
+   * Icon to display above the dialog title.
    */
   icon?: IconSource;
   /**
