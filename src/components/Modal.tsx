@@ -227,7 +227,6 @@ function Modal({
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
       aria-live="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={onDismissCallback}
@@ -266,6 +265,7 @@ function Modal({
           transitionDuration={scale * DEFAULT_DURATION}
           aria-label={ariaLabel}
           role="dialog"
+          aria-modal
         >
           {children}
         </Surface>
