@@ -11,7 +11,7 @@ import {
 } from './tokens';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius, type ShapeToken } from '../../theme/utils/shape';
-import type { InternalTheme } from '../../types';
+import type { Elevation, InternalTheme } from '../../types';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const stateOpacity = tokens.md.sys.state.opacity;
@@ -52,7 +52,17 @@ export const getSplitButtonSizeStyle = ({
   };
 };
 
-export const getSplitButtonColors = ({
+export type SplitButtonResolvedColors = {
+  containerColor: ColorValue;
+  contentColor: ColorValue;
+  borderColor: ColorValue;
+  borderWidth: number;
+  containerOpacity: number;
+  contentOpacity: number;
+  elevation: Elevation;
+};
+
+const resolveSplitButtonColors = ({
   theme,
   mode,
   disabled,
@@ -61,10 +71,10 @@ export const getSplitButtonColors = ({
 }: {
   theme: InternalTheme;
   mode: SplitButtonMode;
-  disabled?: boolean;
+  disabled: boolean;
   customButtonColor?: ColorValue;
   customTextColor?: ColorValue;
-}) => {
+}): SplitButtonResolvedColors => {
   const { colors } = theme;
   const colorTokens =
     splitButtonColorTokens[mode][disabled ? 'disabled' : 'enabled'];
@@ -92,6 +102,40 @@ export const getSplitButtonColors = ({
     elevation: colorTokens.elevation,
   };
 };
+
+// Resolves both the enabled and disabled variants up front, so callers that
+// need to animate or crossfade between states (e.g. SplitButton's disabled
+// container crossfade) always have both endpoints on hand, instead of only
+// ever being able to derive the current one.
+export const getSplitButtonColors = ({
+  theme,
+  mode,
+  customButtonColor,
+  customTextColor,
+}: {
+  theme: InternalTheme;
+  mode: SplitButtonMode;
+  customButtonColor?: ColorValue;
+  customTextColor?: ColorValue;
+}): {
+  enabled: SplitButtonResolvedColors;
+  disabled: SplitButtonResolvedColors;
+} => ({
+  enabled: resolveSplitButtonColors({
+    theme,
+    mode,
+    disabled: false,
+    customButtonColor,
+    customTextColor,
+  }),
+  disabled: resolveSplitButtonColors({
+    theme,
+    mode,
+    disabled: true,
+    customButtonColor,
+    customTextColor,
+  }),
+});
 
 export const getSplitButtonRippleColor = ({
   contentColor,

@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
   },
 });
 
+const segments = ['leading', 'trailing'] as const;
+const modes = ['filled', 'tonal', 'elevated'] as const;
+
 const renderSplitButton = (
   props: Partial<React.ComponentProps<typeof SplitButton>> = {}
 ) =>
@@ -35,147 +38,206 @@ const renderSplitButton = (
     />
   );
 
-it('renders a filled split button by default', async () => {
+it('renders the label text', async () => {
   await renderSplitButton();
 
   expect(screen.getByTestId('split-button-label')).toHaveTextContent('Send');
+});
+
+it('applies the default container height', async () => {
+  await renderSplitButton();
+
   expect(screen.getByTestId('split-button-container')).toHaveStyle({
     height: 40,
   });
-  expect(screen.getByTestId('split-button-leading-container')).toBeTruthy();
-  expect(screen.getByTestId('split-button-trailing-container')).toBeTruthy();
 });
 
-it('calls leading and trailing press handlers separately', async () => {
-  const user = userEvent.setup();
-  const onPress = jest.fn();
-  const onTrailingPress = jest.fn();
-  await renderSplitButton({ onPress, onTrailingPress });
+it.each(segments)('renders the %s segment', async (segment) => {
+  await renderSplitButton();
 
-  await user.press(screen.getByTestId('split-button-leading'));
-  await user.press(screen.getByTestId('split-button-trailing'));
-
-  expect(onPress).toHaveBeenCalledTimes(1);
-  expect(onTrailingPress).toHaveBeenCalledTimes(1);
+  expect(screen.getByTestId(`split-button-${segment}-container`)).toBeTruthy();
 });
 
-it('calls leading and trailing press-in and press-out handlers separately', async () => {
-  const onPressIn = jest.fn();
-  const onPressOut = jest.fn();
-  const onTrailingPressIn = jest.fn();
-  const onTrailingPressOut = jest.fn();
-  await renderSplitButton({
-    onPressIn,
-    onPressOut,
-    onTrailingPressIn,
-    onTrailingPressOut,
-  });
+it.each(segments)(
+  'calls the %s press handler on its own press',
+  async (segment) => {
+    const user = userEvent.setup();
+    const propName = segment === 'leading' ? 'onPress' : 'onTrailingPress';
+    const handler = jest.fn();
+    await renderSplitButton({ [propName]: handler });
 
-  await fireEvent(screen.getByTestId('split-button-leading'), 'onPressIn');
-  await fireEvent(screen.getByTestId('split-button-leading'), 'onPressOut');
-  await fireEvent(screen.getByTestId('split-button-trailing'), 'onPressIn');
-  await fireEvent(screen.getByTestId('split-button-trailing'), 'onPressOut');
+    await user.press(screen.getByTestId(`split-button-${segment}`));
 
-  expect(onPressIn).toHaveBeenCalledTimes(1);
-  expect(onPressOut).toHaveBeenCalledTimes(1);
-  expect(onTrailingPressIn).toHaveBeenCalledTimes(1);
-  expect(onTrailingPressOut).toHaveBeenCalledTimes(1);
-});
+    expect(handler).toHaveBeenCalledTimes(1);
+  }
+);
 
-it('keeps the outline color at full opacity for a disabled outlined split button', async () => {
-  const theme = getTheme();
-  await renderSplitButton({ mode: 'outlined', disabled: true });
+it.each(segments)(
+  'calls the %s press-in handler separately',
+  async (segment) => {
+    const propName = segment === 'leading' ? 'onPressIn' : 'onTrailingPressIn';
+    const handler = jest.fn();
+    await renderSplitButton({ [propName]: handler });
 
-  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-    borderColor: theme.colors.outlineVariant,
-  });
-  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
-    borderColor: theme.colors.outlineVariant,
-  });
-});
+    await fireEvent(screen.getByTestId(`split-button-${segment}`), 'onPressIn');
 
-it('applies the filled mode container color', async () => {
-  const theme = getTheme();
-  await renderSplitButton({ mode: 'filled' });
+    expect(handler).toHaveBeenCalledTimes(1);
+  }
+);
 
-  expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
-    backgroundColor: theme.colors.primary,
-  });
-  expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
-    backgroundColor: theme.colors.primary,
-  });
-});
+it.each(segments)(
+  'calls the %s press-out handler separately',
+  async (segment) => {
+    const propName =
+      segment === 'leading' ? 'onPressOut' : 'onTrailingPressOut';
+    const handler = jest.fn();
+    await renderSplitButton({ [propName]: handler });
 
-it('applies the tonal mode container color', async () => {
-  const theme = getTheme();
-  await renderSplitButton({ mode: 'tonal' });
+    await fireEvent(
+      screen.getByTestId(`split-button-${segment}`),
+      'onPressOut'
+    );
 
-  expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
-    backgroundColor: theme.colors.secondaryContainer,
-  });
-  expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
-    backgroundColor: theme.colors.secondaryContainer,
-  });
-});
+    expect(handler).toHaveBeenCalledTimes(1);
+  }
+);
 
-it('applies the elevated mode container color', async () => {
-  const theme = getTheme();
-  await renderSplitButton({ mode: 'elevated' });
-
-  expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
-    backgroundColor: theme.colors.surfaceContainerLow,
-  });
-  expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
-    backgroundColor: theme.colors.surfaceContainerLow,
-  });
-});
-
-it('applies a transparent container and visible border for outlined mode', async () => {
-  const theme = getTheme();
-  await renderSplitButton({ mode: 'outlined' });
-
-  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-    backgroundColor: 'transparent',
-    borderColor: theme.colors.outlineVariant,
-  });
-  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
-    backgroundColor: 'transparent',
-    borderColor: theme.colors.outlineVariant,
-  });
-});
-
-it.each(['filled', 'tonal', 'elevated'] as const)(
-  'dims the %s container to a disabled onSurface tint on both segments',
-  async (mode) => {
+it.each(segments)(
+  'keeps the outline color at full opacity for a disabled outlined %s segment',
+  async (segment) => {
     const theme = getTheme();
-    await renderSplitButton({ mode, disabled: true });
+    await renderSplitButton({ mode: 'outlined', disabled: true });
 
-    expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
-      backgroundColor: theme.colors.onSurface,
-      opacity: 0.1,
-    });
-    expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
-      backgroundColor: theme.colors.onSurface,
-      opacity: 0.1,
-    });
-    expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-      backgroundColor: 'transparent',
-    });
-    expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
-      backgroundColor: 'transparent',
+    expect(screen.getByTestId(`split-button-${segment}-container`)).toHaveStyle(
+      {
+        borderColor: theme.colors.outlineVariant,
+      }
+    );
+  }
+);
+
+it.each(segments)(
+  'applies the filled mode container color to the %s segment',
+  async (segment) => {
+    const theme = getTheme();
+    await renderSplitButton({ mode: 'filled' });
+
+    expect(
+      screen.getByTestId(`split-button-${segment}-background`)
+    ).toHaveStyle({
+      backgroundColor: theme.colors.primary,
     });
   }
 );
 
-it('applies custom button and text colors to both segments', async () => {
-  await renderSplitButton({ buttonColor: 'purple', textColor: 'yellow' });
+it.each(segments)(
+  'applies the tonal mode container color to the %s segment',
+  async (segment) => {
+    const theme = getTheme();
+    await renderSplitButton({ mode: 'tonal' });
 
-  expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
-    backgroundColor: 'purple',
-  });
-  expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
-    backgroundColor: 'purple',
-  });
+    expect(
+      screen.getByTestId(`split-button-${segment}-background`)
+    ).toHaveStyle({
+      backgroundColor: theme.colors.secondaryContainer,
+    });
+  }
+);
+
+it.each(segments)(
+  'applies the elevated mode container color to the %s segment',
+  async (segment) => {
+    const theme = getTheme();
+    await renderSplitButton({ mode: 'elevated' });
+
+    expect(
+      screen.getByTestId(`split-button-${segment}-background`)
+    ).toHaveStyle({
+      backgroundColor: theme.colors.surfaceContainerLow,
+    });
+  }
+);
+
+it.each(segments)(
+  'applies a transparent container and visible border to the %s segment in outlined mode',
+  async (segment) => {
+    const theme = getTheme();
+    await renderSplitButton({ mode: 'outlined' });
+
+    expect(screen.getByTestId(`split-button-${segment}-container`)).toHaveStyle(
+      {
+        backgroundColor: 'transparent',
+        borderColor: theme.colors.outlineVariant,
+      }
+    );
+  }
+);
+
+it.each(
+  segments.flatMap((segment) =>
+    modes.map((mode) => [segment, mode] as [string, (typeof modes)[number]])
+  )
+)(
+  'dims the %s background to a disabled onSurface tint in %s mode',
+  async (segment, mode) => {
+    const theme = getTheme();
+    await renderSplitButton({ mode, disabled: true });
+
+    expect(
+      screen.getByTestId(`split-button-${segment}-disabled-background`)
+    ).toHaveStyle({
+      backgroundColor: theme.colors.onSurface,
+      opacity: 0.1,
+    });
+  }
+);
+
+it.each(segments)(
+  'fades out the %s enabled background when disabled',
+  async (segment) => {
+    await renderSplitButton({ mode: 'filled', disabled: true });
+
+    expect(
+      screen.getByTestId(`split-button-${segment}-background`)
+    ).toHaveStyle({
+      opacity: 0,
+    });
+  }
+);
+
+it.each(
+  segments.flatMap((segment) =>
+    modes.map((mode) => [segment, mode] as [string, (typeof modes)[number]])
+  )
+)(
+  'keeps the %s container transparent when disabled in %s mode',
+  async (segment, mode) => {
+    await renderSplitButton({ mode, disabled: true });
+
+    expect(screen.getByTestId(`split-button-${segment}-container`)).toHaveStyle(
+      {
+        backgroundColor: 'transparent',
+      }
+    );
+  }
+);
+
+it.each(segments)(
+  'applies the custom button color to the %s segment',
+  async (segment) => {
+    await renderSplitButton({ buttonColor: 'purple' });
+
+    expect(
+      screen.getByTestId(`split-button-${segment}-background`)
+    ).toHaveStyle({
+      backgroundColor: 'purple',
+    });
+  }
+);
+
+it('applies the custom text color to the label', async () => {
+  await renderSplitButton({ textColor: 'yellow' });
+
   expect(screen.getByTestId('split-button-label')).toHaveStyle({
     color: 'yellow',
   });
@@ -203,51 +265,74 @@ it('shows a progress indicator instead of the icon while loading', async () => {
   expect(screen.getByRole('progressbar')).toBeTruthy();
 });
 
-it('defaults accessibility labels from label and to "Show options"', async () => {
+it('defaults the leading accessibility label to the label prop', async () => {
   await renderSplitButton();
 
   expect(screen.getByTestId('split-button-leading')).toHaveProp(
     'accessibilityLabel',
     'Send'
   );
+});
+
+it('defaults the trailing accessibility label to "Show options"', async () => {
+  await renderSplitButton();
+
   expect(screen.getByTestId('split-button-trailing')).toHaveProp(
     'accessibilityLabel',
     'Show options'
   );
 });
 
-it('calls leading and trailing long-press handlers separately', async () => {
-  const user = userEvent.setup();
-  const onLongPress = jest.fn();
-  const onTrailingLongPress = jest.fn();
-  await renderSplitButton({ onLongPress, onTrailingLongPress });
+it.each(segments)(
+  'calls the %s long-press handler separately',
+  async (segment) => {
+    const user = userEvent.setup();
+    const propName =
+      segment === 'leading' ? 'onLongPress' : 'onTrailingLongPress';
+    const handler = jest.fn();
+    await renderSplitButton({ [propName]: handler });
 
-  await user.longPress(screen.getByTestId('split-button-leading'));
-  await user.longPress(screen.getByTestId('split-button-trailing'));
+    await user.longPress(screen.getByTestId(`split-button-${segment}`));
 
-  expect(onLongPress).toHaveBeenCalledTimes(1);
-  expect(onTrailingLongPress).toHaveBeenCalledTimes(1);
-});
+    expect(handler).toHaveBeenCalledTimes(1);
+  }
+);
 
-it('applies a state layer instead of a color change when selected', async () => {
+it('does not change the trailing background color when selected', async () => {
+  // Per the M3 spec, the trailing button's color doesn't change when
+  // selected — only a state layer, tinted with the container's own "on"
+  // color, is applied on top of it.
   const theme = getTheme();
   await renderSplitButton({
     mode: 'filled',
     trailingAccessibilityState: { expanded: true },
   });
 
-  // Per the M3 spec, the trailing button's color doesn't change when
-  // selected — only a state layer, tinted with the container's own "on"
-  // color, is applied on top of it.
   expect(screen.getByTestId('split-button-trailing-background')).toHaveStyle({
     backgroundColor: theme.colors.primary,
   });
+});
+
+it('applies a state layer tinted with the "on" color when selected', async () => {
+  const theme = getTheme();
+  await renderSplitButton({
+    mode: 'filled',
+    trailingAccessibilityState: { expanded: true },
+  });
+
   expect(screen.getByTestId('split-button-trailing-state-layer')).toHaveStyle({
     backgroundColor: theme.colors.onPrimary,
     opacity: 0.1,
   });
-  // The leading segment has no state layer of its own and shouldn't be
-  // affected by the trailing segment's expanded state.
+});
+
+it('does not affect the leading segment when the trailing segment is selected', async () => {
+  const theme = getTheme();
+  await renderSplitButton({
+    mode: 'filled',
+    trailingAccessibilityState: { expanded: true },
+  });
+
   expect(screen.getByTestId('split-button-leading-background')).toHaveStyle({
     backgroundColor: theme.colors.primary,
   });
@@ -274,29 +359,39 @@ it('hides the state layer when disabled, even if selected', async () => {
   });
 });
 
-it('marks both press targets disabled when disabled', async () => {
-  await renderSplitButton({ disabled: true });
+it.each(segments)(
+  'marks the %s press target disabled when disabled',
+  async (segment) => {
+    await renderSplitButton({ disabled: true });
 
-  expect(screen.getByTestId('split-button-leading')).toBeDisabled();
-  expect(screen.getByTestId('split-button-trailing')).toBeDisabled();
-});
+    expect(screen.getByTestId(`split-button-${segment}`)).toBeDisabled();
+  }
+);
 
-it('passes custom styles to the correct target', async () => {
-  await renderSplitButton({
-    buttonStyle: styles.button,
-    leadingButtonStyle: styles.leading,
-    trailingButtonStyle: styles.trailing,
-    labelStyle: styles.label,
-  });
+it.each([
+  ['leading', styles.leading],
+  ['trailing', styles.trailing],
+])(
+  'passes buttonStyle and its own segment style to the %s container',
+  async (segment, segmentStyle) => {
+    await renderSplitButton({
+      buttonStyle: styles.button,
+      leadingButtonStyle: styles.leading,
+      trailingButtonStyle: styles.trailing,
+    });
 
-  expect(screen.getByTestId('split-button-leading-container')).toHaveStyle({
-    ...styles.button,
-    ...styles.leading,
-  });
-  expect(screen.getByTestId('split-button-trailing-container')).toHaveStyle({
-    ...styles.button,
-    ...styles.trailing,
-  });
+    expect(screen.getByTestId(`split-button-${segment}-container`)).toHaveStyle(
+      {
+        ...styles.button,
+        ...segmentStyle,
+      }
+    );
+  }
+);
+
+it('passes labelStyle to the label', async () => {
+  await renderSplitButton({ labelStyle: styles.label });
+
   expect(screen.getByTestId('split-button-label')).toHaveStyle(styles.label);
 });
 
@@ -322,12 +417,14 @@ it('merges trailing accessibility state with expanded state', async () => {
   );
 });
 
-it('does not add SplitButton test IDs unless testID is provided', async () => {
+it.each([
+  'split-button-container',
+  'split-button-leading',
+  'split-button-trailing',
+])('does not add the %s test ID unless testID is provided', async (testID) => {
   await render(
     <SplitButton label="Send" onPress={() => {}} onTrailingPress={() => {}} />
   );
 
-  expect(screen.queryByTestId('split-button-container')).toBeNull();
-  expect(screen.queryByTestId('split-button-leading')).toBeNull();
-  expect(screen.queryByTestId('split-button-trailing')).toBeNull();
+  expect(screen.queryByTestId(testID)).toBeNull();
 });
