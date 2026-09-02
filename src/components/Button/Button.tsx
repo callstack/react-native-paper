@@ -42,6 +42,14 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
+// Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
+// level 2 while pressed.
+const initialElevation = 1;
+const activeElevation = 2;
+// Minimum accessible touch target (dp). Extra-small/small buttons are shorter
+// than this and get expanded via hitSlop.
+const MIN_TOUCH_TARGET = 48;
+
 export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
@@ -215,15 +223,6 @@ export type Props = Omit<ViewProps, 'style'> & {
  * export default MyComponent;
  * ```
  */
-
-// Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
-// level 2 while pressed.
-const initialElevation = 1;
-const activeElevation = 2;
-// Minimum accessible touch target (dp). Extra-small/small buttons are shorter
-// than this and get expanded via hitSlop.
-const MIN_TOUCH_TARGET = 48;
-
 const Button = ({
   disabled,
   mode = 'filled',

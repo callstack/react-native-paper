@@ -8,13 +8,27 @@ import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
+A button is component that the user can press to trigger an action.
+
 
 
 
   <ScreenshotTabs screenshotData={{"filled":"screenshots/button-3.png","tonal":"screenshots/button-5.png","elevated":"screenshots/button-4.png","outlined":"screenshots/button-2.png","text":"screenshots/button-1.png"}}/>
 
 
+## Usage
+```js
+import * as React from 'react';
+import { Button } from 'react-native-paper';
 
+const MyComponent = () => (
+  <Button icon="camera" mode="filled" onPress={() => console.log('Pressed')}>
+    Press me
+  </Button>
+);
+
+export default MyComponent;
+```
 
 
   ## Props
