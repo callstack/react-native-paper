@@ -15,7 +15,7 @@ import type { IconSource } from '../Icon';
 type ConditionalValue<T extends string = string> =
   | {
       /**
-       * Array of the currently selected segmented button values.
+       * Currently selected segmented button value or values.
        */
       value: T[];
       /**
@@ -29,7 +29,7 @@ type ConditionalValue<T extends string = string> =
     }
   | {
       /**
-       * Value of the currently selected segmented button.
+       * Currently selected segmented button value or values.
        */
       value: T;
       /**

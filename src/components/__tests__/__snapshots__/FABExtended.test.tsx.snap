@@ -232,16 +232,25 @@ exports[`renders extended FAB collapsed 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -295,16 +304,23 @@ exports[`renders extended FAB collapsed 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -545,16 +561,25 @@ exports[`renders extended FAB expanded 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -608,16 +633,23 @@ exports[`renders extended FAB expanded 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -858,16 +890,25 @@ exports[`renders extended FAB large size 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 24,
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                  "lineHeight": 32,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 24,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 32,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -921,16 +962,23 @@ exports[`renders extended FAB large size 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 24,
-          "fontWeight": "400",
-          "letterSpacing": 0,
-          "lineHeight": 32,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 24,
+            "fontWeight": "400",
+            "letterSpacing": 0,
+            "lineHeight": 32,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -1171,16 +1219,25 @@ exports[`renders extended FAB medium size 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 22,
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                  "lineHeight": 28,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 22,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 28,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -1234,16 +1291,23 @@ exports[`renders extended FAB medium size 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 22,
-          "fontWeight": "400",
-          "letterSpacing": 0,
-          "lineHeight": 28,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 22,
+            "fontWeight": "400",
+            "letterSpacing": 0,
+            "lineHeight": 28,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -1484,16 +1548,25 @@ exports[`renders extended FAB not visible 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -1547,16 +1620,23 @@ exports[`renders extended FAB not visible 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -1797,16 +1877,25 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -1860,16 +1949,23 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message

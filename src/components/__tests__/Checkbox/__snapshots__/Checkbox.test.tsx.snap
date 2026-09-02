@@ -98,8 +98,6 @@ exports[`renders Checkbox with custom testID 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -120,8 +118,6 @@ exports[`renders Checkbox with custom testID 1`] = `
             },
             {
               "backgroundColor": "rgba(103, 80, 164, 1)",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -286,8 +282,6 @@ exports[`renders checked Checkbox with color 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -308,8 +302,6 @@ exports[`renders checked Checkbox with color 1`] = `
             },
             {
               "backgroundColor": "red",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -474,8 +466,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -496,8 +486,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
             },
             {
               "backgroundColor": "rgba(103, 80, 164, 1)",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -662,8 +650,6 @@ exports[`renders indeterminate Checkbox 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -684,8 +670,6 @@ exports[`renders indeterminate Checkbox 1`] = `
             },
             {
               "backgroundColor": "rgba(103, 80, 164, 1)",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -837,8 +821,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -859,8 +841,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
             },
             {
               "backgroundColor": "red",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -1012,8 +992,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -1034,8 +1012,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
             },
             {
               "backgroundColor": "red",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -1200,8 +1176,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
             },
             {
               "borderColor": "rgba(73, 69, 79, 1)",
-            },
-            {
               "opacity": 1,
             },
           ]
@@ -1222,8 +1196,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
             },
             {
               "backgroundColor": "rgba(103, 80, 164, 1)",
-            },
-            {
               "opacity": 0,
             },
           ]
@@ -1278,7 +1250,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
                   "width": 11,
                 },
                 {
-                  "borderColor": "transparent",
+                  "borderColor": "rgba(255, 255, 255, 1)",
                 },
                 null,
               ]
