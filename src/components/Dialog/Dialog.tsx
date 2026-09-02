@@ -75,7 +75,7 @@ export type Props = {
    */
   restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
-   * Icon displayed at the top of the dialog.
+   * Icon to display above the dialog title.
    */
   icon?: IconSource;
   /**
