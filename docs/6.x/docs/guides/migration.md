@@ -591,6 +591,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 - **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
 - **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
 - **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
+- **`aria-label`** overrides the title as the dialog's accessible name.
 
 ```tsx
 // Before (v5)
