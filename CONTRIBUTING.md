@@ -13,8 +13,9 @@ The core team works directly on GitHub and all work is public.
 > **Working on your first pull request?** You can learn how from this _free_ series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
 
 1. Fork the repo and create your branch from `main` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
-2. Run `yarn` on the root level, to setup the development environment.
-3. Do the changes you want and test them out in the example app before sending a pull request.
+2. Use the Node.js version specified in `.nvmrc`.
+3. Run `yarn` on the root level, to setup the development environment.
+4. Do the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
 
@@ -25,7 +26,7 @@ We follow the [conventional commits specification](https://www.conventionalcommi
 - `refactor`: code refactor, e.g. new folder structure for components.
 - `docs`: changes into documentation, e.g. add usage example for Button.
 - `test`: adding or updating tests, eg unit, snapshot testing.
-- `chore`: tooling changes, e.g. change circleci config.
+- `chore`: tooling changes, e.g. change the CI configuration.
 - `BREAKING CHANGE`: for changes that break existing usage, e.g. change API of a component.
 
 Our pre-commit hooks verify that your commit message matches this format when committing.
@@ -49,21 +50,34 @@ When you're sending a pull request:
 
 When you're working on a component:
 
-- Follow the guidelines described in the [official material design docs](https://material.io/guidelines/).
-- Write a brief description of every prop when defining `type Props` to aid with documentation.
-- Provide an example usage for the component (check other components to get a idea).
-- Update the type definitions for Flow and TypeScript if you changed an API or added a component.
+- Follow the guidelines described in the [official material design docs](https://m3.material.io/).
+- Write a brief description of every prop when defining the props type to aid with documentation.
+- Provide an example usage for the component (check other components to get an idea).
+- Update the type definitions for TypeScript if you changed an API or added a component.
 
 ### Running the example
 
-The example app uses [Expo](https://expo.dev/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
+The example app uses [Expo](https://expo.dev/) development build for the React Native example.
 
-> [!IMPORTANT]
-> The example app is built with `react-native@0.77.x` and Expo SDK 52, which isn’t compatible with Expo Go. To run the app, you have to create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
+First, generate the native projects:
 
-After you're done, you can run `yarn example start` in the project root (or `npx expo start` in the `example/` folder) and scan the QR code to launch it on your device.
+```sh
+yarn example expo prebuild
+```
 
-To run the example on web, run `yarn example web` in the project root.
+Then build and install the development build:
+
+```sh
+yarn example ios
+```
+
+or:
+
+```sh
+yarn example android
+```
+
+After you're done, you can run `yarn example start` in the project root and scan the QR code to launch it on your device, or press `i`, `a` or `w` to launch it on the iOS simulator, Android emulator, or web browser, respectively.
 
 ### Testing a specific pull request/commit
 
@@ -83,7 +97,7 @@ Alternatively, you may clone the `react-native-paper` repo and use the [yalc](ht
 
 ### Working on documentation
 
-The documentation is automatically generated from the [TypeScript](https://www.typescriptlang.org/) annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn docs start` in the project root.
+To preview the documentation, run `yarn docs dev` in the project root.
 
 ### Publishing a release
 
