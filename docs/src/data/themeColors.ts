@@ -46,7 +46,7 @@ export const themeColors = {
     },
   },
   Button: {
-    active: {
+    default: {
       filled: {
         backgroundColor: 'theme.colors.primary',
         textColor: 'theme.colors.onPrimary',
@@ -56,36 +56,72 @@ export const themeColors = {
         textColor: 'theme.colors.onSecondaryContainer',
       },
       elevated: {
-        backgroundColor: 'theme.colors.elevation.level1',
+        backgroundColor: 'theme.colors.surfaceContainerLow',
         textColor: 'theme.colors.primary',
       },
       outlined: {
         textColor: 'theme.colors.onSurfaceVariant',
-        borderColor: 'theme.colors.outline',
+        borderColor: 'theme.colors.outlineVariant',
       },
       text: {
         textColor: 'theme.colors.primary',
       },
     },
-    disabled: {
+    selected: {
       filled: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        textColor: 'theme.colors.onSurfaceDisabled',
+        backgroundColor: 'theme.colors.primary',
+        textColor: 'theme.colors.onPrimary',
       },
       tonal: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        textColor: 'theme.colors.onSurfaceDisabled',
+        backgroundColor: 'theme.colors.secondary',
+        textColor: 'theme.colors.onSecondary',
       },
       elevated: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        textColor: 'theme.colors.onSurfaceDisabled',
+        backgroundColor: 'theme.colors.primary',
+        textColor: 'theme.colors.onPrimary',
       },
       outlined: {
-        textColor: 'theme.colors.onSurfaceDisabled',
-        borderColor: 'theme.colors.surfaceDisabled',
+        backgroundColor: 'theme.colors.inverseSurface',
+        textColor: 'theme.colors.inverseOnSurface',
+      },
+    },
+    unselected: {
+      filled: {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        textColor: 'theme.colors.onSurfaceVariant',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+      },
+      elevated: {
+        backgroundColor: 'theme.colors.surfaceContainerLow',
+        textColor: 'theme.colors.primary',
+      },
+      outlined: {
+        textColor: 'theme.colors.onSurfaceVariant',
+        borderColor: 'theme.colors.outlineVariant',
+      },
+    },
+    disabled: {
+      filled: {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+      elevated: {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+      outlined: {
+        textColor: 'theme.colors.onSurface',
+        borderColor: 'theme.colors.outlineVariant',
       },
       text: {
-        textColor: 'theme.colors.onSurfaceDisabled',
+        textColor: 'theme.colors.onSurface',
       },
     },
   },
