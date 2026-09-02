@@ -9,9 +9,9 @@ import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
 import ExtendedExample from '@docs/components/ExtendedExample.tsx';
 
 Surface is a basic container that can give depth to an element with elevation shadow.
-On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
-See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
-Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
+
+On Android, Surface uses the native `elevation` style,
+and falls back to shadows that approximate the elevation on other platforms.
 
 
 
@@ -26,7 +26,7 @@ import { Surface, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
 const MyComponent = () => (
-  <Surface style={styles.surface} elevation={4}>
+  <Surface style={styles.surface} elevation={4} borderRadius={8}>
      <Text>Surface</Text>
   </Surface>
 );
@@ -35,9 +35,9 @@ export default MyComponent;
 
 const styles = StyleSheet.create({
   surface: {
-    padding: 8,
     height: 80,
     width: 80,
+    padding: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -52,11 +52,131 @@ const styles = StyleSheet.create({
 
 <div>
 
-### children (required)
+### backgroundColor
 
 </div>
 
-  <PropTable componentLink="Surface" prop="children" />
+  <PropTable componentLink="Surface" prop="backgroundColor" />
+
+<div>
+
+### borderRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderRadius" />
+
+<div>
+
+### borderBottomEndRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderBottomEndRadius" />
+
+<div>
+
+### borderBottomLeftRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderBottomLeftRadius" />
+
+<div>
+
+### borderBottomRightRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderBottomRightRadius" />
+
+<div>
+
+### borderBottomStartRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderBottomStartRadius" />
+
+<div>
+
+### borderEndEndRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderEndEndRadius" />
+
+<div>
+
+### borderEndStartRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderEndStartRadius" />
+
+<div>
+
+### borderStartEndRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderStartEndRadius" />
+
+<div>
+
+### borderStartStartRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderStartStartRadius" />
+
+<div>
+
+### borderTopEndRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderTopEndRadius" />
+
+<div>
+
+### borderTopLeftRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderTopLeftRadius" />
+
+<div>
+
+### borderTopRightRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderTopRightRadius" />
+
+<div>
+
+### borderTopStartRadius
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderTopStartRadius" />
+
+<div>
+
+### borderCurve
+
+</div>
+
+  <PropTable componentLink="Surface" prop="borderCurve" />
+
+<div>
+
+### transitionDuration
+
+</div>
+
+  <PropTable componentLink="Surface" prop="transitionDuration" />
 
 <div>
 
@@ -89,6 +209,14 @@ const styles = StyleSheet.create({
 </div>
 
   <PropTable componentLink="Surface" prop="theme" />
+
+<div>
+
+### children (required)
+
+</div>
+
+  <PropTable componentLink="Surface" prop="children" />
 
 <div>
 

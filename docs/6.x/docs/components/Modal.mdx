@@ -28,12 +28,18 @@ const MyComponent = () => {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = { backgroundColor: 'white', padding: 20 };
+
+  const containerStyle = { padding: 20 };
 
   return (
     <PaperProvider>
       <Portal>
-        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentBackgroundColor="white"
+          contentContainerStyle={containerStyle}
+        >
           <Text>Example Modal.  Click outside this area to dismiss.</Text>
         </Modal>
       </Portal>
@@ -108,6 +114,30 @@ export default MyComponent;
 </div>
 
   <PropTable componentLink="Modal" prop="contentContainerStyle" />
+
+<div>
+
+### contentBackgroundColor
+
+</div>
+
+  <PropTable componentLink="Modal" prop="contentBackgroundColor" />
+
+<div>
+
+### contentBorderRadius
+
+</div>
+
+  <PropTable componentLink="Modal" prop="contentBorderRadius" />
+
+<div>
+
+### contentElevation
+
+</div>
+
+  <PropTable componentLink="Modal" prop="contentElevation" />
 
 <div>
 
