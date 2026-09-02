@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 import { Button, Dialog, Palette, Text } from 'react-native-paper';
 
 const DialogWithCustomColors = ({
@@ -10,15 +12,19 @@ const DialogWithCustomColors = ({
   return (
     <Dialog
       onDismiss={close}
+      visible={visible}
       theme={{
         colors: {
           surfaceContainerHigh: Palette.primary10,
         },
       }}
-      visible={visible}
-      title={<Text style={{ color: Palette.primary95 }}>Alert</Text>}
+      title={
+        <Text variant="headlineSmall" style={styles.text}>
+          Alert
+        </Text>
+      }
       content={
-        <Text variant="bodyMedium" style={{ color: Palette.primary95 }}>
+        <Text variant="bodyMedium" style={styles.text}>
           This is a dialog with custom colors
         </Text>
       }
@@ -30,5 +36,11 @@ const DialogWithCustomColors = ({
     />
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: Palette.primary95,
+  },
+});
 
 export default DialogWithCustomColors;
