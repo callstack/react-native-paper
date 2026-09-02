@@ -23,7 +23,6 @@ import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -437,7 +436,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     backgroundColor: customBackground,
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   } = (StyleSheet.flatten(style) || {}) as {
-    elevation?: number;
     backgroundColor?: ColorValue;
   };
 
@@ -462,9 +460,14 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     bottom: safeAreaInsets?.bottom ?? bottom,
   };
 
+  const pointerEvents = layout.measured
+    ? keyboardHidesNavigationBar && keyboardVisible
+      ? 'none'
+      : 'auto'
+    : 'none';
+
   return (
-    <Surface
-      elevation={0}
+    <Animated.View
       testID={testID}
       style={[
         styles.bar,
@@ -485,16 +488,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             }
           : null,
         style,
+        { pointerEvents },
       ]}
-      pointerEvents={
-        layout.measured
-          ? keyboardHidesNavigationBar && keyboardVisible
-            ? 'none'
-            : 'auto'
-          : 'none'
-      }
       onLayout={onLayout}
-      container
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}
@@ -532,12 +528,14 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             // This trick gives the illusion that we are animating between active and inactive colors.
             // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
             const activeOpacity = active;
+
             const inactiveOpacity = active.interpolate({
               inputRange: [0, 1],
               outputRange: [1, 0],
             });
 
             const v3ActiveOpacity = focused ? 1 : 0;
+
             const v3InactiveOpacity = shifting
               ? inactiveOpacity
               : focused
@@ -769,7 +767,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           })}
         </View>
       </Animated.View>
-    </Surface>
+    </Animated.View>
   );
 };
 

@@ -1,7 +1,6 @@
-import { Animated, StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { getTheme } from '../../../core/theming';
 import { render, screen } from '../../../test-utils';
@@ -11,9 +10,6 @@ import Card from '../../Card/Card';
 import { getCardColors, getCardCoverStyle } from '../../Card/utils';
 
 const styles = StyleSheet.create({
-  customBorderRadius: {
-    borderRadius: 32,
-  },
   customCoverRadius: {
     borderTopLeftRadius: 4,
     borderTopRightRadius: 8,
@@ -25,6 +21,10 @@ const styles = StyleSheet.create({
   },
 });
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe('Card', () => {
   it('renders an outlined card', async () => {
     const tree = (await render(<Card mode="outlined">{null}</Card>)).toJSON();
@@ -32,40 +32,49 @@ describe('Card', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders an outlined card with custom border radius and color', async () => {
+  it('renders an outlined card with a custom outline color', async () => {
+    const testID = 'custom-outline-card';
+
     await render(
       <Card
         mode="outlined"
+        accessibilityLabel="card"
         theme={{ colors: { outline: 'purple' } }}
-        style={styles.customBorderRadius}
+        testID={testID}
       >
         {null}
       </Card>
     );
 
-    expect(screen.getByTestId('card-outline')).toHaveStyle({
-      borderRadius: 32,
+    expect(screen.getByTestId(`${testID}-outline`)).toHaveStyle({
       borderColor: 'purple',
+      borderWidth: 1,
     });
   });
 
   it('renders an outlined card with custom border color', async () => {
+    const testID = 'custom-border-card';
+
     await render(
       <Card
         mode="outlined"
         accessibilityLabel="card"
         style={{ borderColor: Palette.error50 }}
+        testID={testID}
       >
         {null}
       </Card>
     );
 
-    expect(screen.getByLabelText('card')).toHaveStyle({
+    expect(screen.getByTestId(`${testID}-outline`)).toHaveStyle({
       borderColor: Palette.error50,
+      borderWidth: 1,
     });
   });
 
-  it('renders with a custom theme', async () => {
+  it('renders with a custom theme background color', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
     await render(
       <Card
         mode="outlined"
@@ -140,29 +149,6 @@ describe('CardActions', () => {
       screen.getByTestId('card-actions').props.children[0].props.mode
     ).toBe('filled');
   });
-
-  it('renders button with custom styles', async () => {
-    await render(
-      <Card>
-        <Card.Actions>
-          <Button
-            testID="card-actions-button"
-            mode="filled"
-            style={styles.customBorderRadius}
-          >
-            Agree
-          </Button>
-        </Card.Actions>
-      </Card>
-    );
-
-    // `style` lands on the shadow host, which is also what carries the radius.
-    expect(
-      screen.getByTestId('card-actions-button-container-outer-layer')
-    ).toHaveStyle({
-      borderRadius: 32,
-    });
-  });
 });
 
 describe('getCardColors - background color', () => {
@@ -225,34 +211,5 @@ describe('getCardCoverStyle - border radius', () => {
         borderRadiusStyles: {},
       })
     ).toMatchObject({ borderRadius: getTheme().shapes.corner.medium });
-  });
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Card
-      mode="outlined"
-      accessibilityLabel="card"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      {null}
-    </Card>
-  );
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
   });
 });

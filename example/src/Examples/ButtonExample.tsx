@@ -334,8 +334,10 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
+            shape="square"
             onPress={() => {}}
-            style={styles.customRadius}
+            style={styles.button}
+            theme={{ shapes: { corner: { medium: 4 } } }}
           >
             Custom radius
           </Button>
@@ -398,13 +400,6 @@ const styles = StyleSheet.create({
   fontStyles: {
     fontWeight: '800',
     fontSize: 20,
-  },
-  customRadius: {
-    margin: 4,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 16,
   },
   fullWidthButton: {
     width: '100%',

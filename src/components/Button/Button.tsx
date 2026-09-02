@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -12,12 +12,10 @@ import type {
 } from 'react-native';
 
 import Reanimated, {
-  Easing,
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 
 import {
@@ -32,23 +30,19 @@ import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import {
-  androidElevationLevels,
-  shadow,
-  shadowLayers,
-} from '../../theme/tokens/sys/elevation';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { $Omit, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<ViewProps, 'style'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
    * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)
@@ -72,8 +66,7 @@ export type Props = $Omit<ViewProps, 'style'> & {
   /**
    * Shape variant of the button (Material Design 3 expressive). Defaults to
    * `round`. `'round'` uses the full-pill corner radius; `'square'` uses a
-   * smaller per-size corner radius. Overridden by an explicit `borderRadius`
-   * in `style`.
+   * smaller per-size corner radius.
    */
   shape?: ButtonShape;
   /**
@@ -84,8 +77,7 @@ export type Props = $Omit<ViewProps, 'style'> & {
    * `false` the shape still changes, it just snaps instead of animating, and
    * there is no press morph at all.
    *
-   * Forced off when `style` pins a `borderRadius`, and the press morph is
-   * skipped when the OS reduce-motion setting is on.
+   * The press morph is skipped when the OS reduce-motion setting is on.
    */
   animateShape?: boolean;
   /**
@@ -186,7 +178,7 @@ export type Props = $Omit<ViewProps, 'style'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Style for the button text.
    */
@@ -271,7 +263,6 @@ const Button = ({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
-  const isWeb = Platform.OS === 'web';
 
   const requestedTrailingIcon = iconPosition === 'trailing';
   const shouldFlipForRTL = direction !== getDefaultDirection();
@@ -293,28 +284,17 @@ const Button = ({
 
   const isElevationEntitled = !disabled && isMode('elevated');
 
-  // 0 = resting, 1 = pressed. The two ends are resolved from the elevation
-  // tokens further down, so a `disabled` / `mode` change moves the shadow on the
-  // next render.
-  const pressProgress = useSharedValue(0);
-
-  const elevationTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short4,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion, reanimatedReduceMotion]
-  );
-
-  const borderRadiusStyles = React.useMemo(() => {
-    const flattenedStyles = StyleSheet.flatten(style) || {};
-    const [, radiusStyles] = splitStyles(
-      flattenedStyles,
-      (key) => key.startsWith('border') && key.endsWith('Radius')
-    );
-    return radiusStyles;
-  }, [style]);
+  // Level 1 at rest, level 2 while pressed. `Surface` animates the change, so
+  // a `disabled` / `mode` change moves the shadow on the next render too.
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = isElevationEntitled
+    ? pressed
+      ? activeElevation
+      : initialElevation
+    : 0;
+  const elevationTransitionDuration =
+    theme.motion.duration[pressed ? 'short4' : 'short3'] *
+    theme.animation.scale;
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
@@ -322,9 +302,8 @@ const Button = ({
   const sizeStyle = React.useMemo(() => getButtonSizeStyle(size), [size]);
 
   // Shape morph: animate the corner on press (→ the pressed shape token) and on
-  // the `selected`/shape toggle. Skipped when the user pins a radius via `style`.
-  const hasPinnedRadius = Object.keys(borderRadiusStyles).length > 0;
-  const animateShape = animateShapeProp && !hasPinnedRadius;
+  // the `selected`/shape toggle.
+  const animateShape = animateShapeProp;
   // A press morph under reduce-motion would pop instantly rather than animate,
   // so skip it; a `selected` change still snaps to the new shape.
   const morphOnPress = animateShape && !reduceMotion;
@@ -364,7 +343,7 @@ const Button = ({
         springRadiusTo(pressedRadius);
       }
       if (isElevationEntitled) {
-        pressProgress.value = withTiming(1, elevationTimingConfig);
+        setPressed(true);
       }
     },
     [
@@ -373,8 +352,6 @@ const Button = ({
       springRadiusTo,
       pressedRadius,
       isElevationEntitled,
-      pressProgress,
-      elevationTimingConfig,
     ]
   );
 
@@ -385,17 +362,10 @@ const Button = ({
         springRadiusTo(restingRadiusRef.current);
       }
       if (isElevationEntitled) {
-        pressProgress.value = withTiming(0, elevationTimingConfig);
+        setPressed(false);
       }
     },
-    [
-      onPressOut,
-      morphOnPress,
-      springRadiusTo,
-      isElevationEntitled,
-      pressProgress,
-      elevationTimingConfig,
-    ]
+    [onPressOut, morphOnPress, springRadiusTo, isElevationEntitled]
   );
 
   // Snap on mount; animate when a toggle/shape change moves the resting radius.
@@ -448,22 +418,11 @@ const Button = ({
     [labelColor, customRippleColor]
   );
 
-  // A radius pinned via `style` wins over the animated one, and disables the
-  // morph entirely (see `animateShape`).
-  const pinnedRadius = borderRadiusStyles.borderRadius;
   const containerColor =
     backgroundOpacity < 1 ? 'transparent' : backgroundColor;
 
-  // Clamp so a spring overshoot can never render a negative radius.
-  const outerStyle = useAnimatedStyle(
-    () => ({
-      borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
-    }),
-    [animatedRadius, pinnedRadius]
-  );
-
-  // The clip carries the same animated radius, so the ripple and the disabled
-  // overlay follow the morph.
+  // The clip carries the same animated radius as the `Surface`, so the ripple
+  // and the disabled overlay follow the morph.
   //
   // TODO: revisit the focus ring's placement once #5084 lands.
   // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
@@ -474,79 +433,14 @@ const Button = ({
   // ancestor sized to its content", which is exactly this view. Button will
   // likely need `focusRing="inward"`, or the ring on the outer view.
   const clipStyle = useAnimatedStyle(
-    () => ({
-      borderRadius: pinnedRadius ?? Math.max(0, animatedRadius.value),
-    }),
-    [animatedRadius, pinnedRadius]
-  );
-
-  const containerStyle = React.useMemo(
-    () => ({ backgroundColor: containerColor }),
-    [containerColor]
+    () => ({ borderRadius: animatedRadius.value }),
+    [animatedRadius]
   );
 
   const outlineStyle = React.useMemo(
     () => ({ backgroundColor: containerColor, borderColor, borderWidth }),
     [containerColor, borderColor, borderWidth]
   );
-
-  // TODO: move this back to `Surface` once #5078 lands.
-  // Button builds its own shadow only because today's `Surface` can't host a
-  // Reanimated style: it accepts `Elevation | Animated.Value` for `elevation`
-  // and `StyleSheet.flatten`s `style`, which strips the metadata
-  // `useAnimatedStyle` needs. https://github.com/callstack/react-native-paper/pull/5078
-  // reworks `Surface` for Reanimated — single view, `backgroundColor` and
-  // `borderRadius` as (shared-value capable) props, ambient layer absolutely
-  // positioned behind the content — and already migrates Button and FAB to it.
-  // When it merges, drop this block and the outer `Reanimated.View` in favour of
-  // `<Surface backgroundColor={...} borderRadius={...} elevation={...}>`.
-  //
-  // Until then Button renders only the spot shadow layer, mirroring
-  // `FAB/useVisibility.ts`; `Surface`'s second, ambient layer is missing, so an
-  // elevated button's shadow is slightly flatter than it was.
-  const [spotLayer] = shadowLayers;
-  const shadowColor = theme.colors.shadow;
-  const restLevel = isElevationEntitled ? initialElevation : 0;
-  const pressedLevel = isElevationEntitled ? activeElevation : 0;
-  const webShadow =
-    isWeb && isElevationEntitled ? shadow(restLevel, shadowColor) : null;
-
-  const androidRest = androidElevationLevels[restLevel];
-  const androidPressed = androidElevationLevels[pressedLevel];
-  const heightRest = spotLayer.height[restLevel];
-  const heightPressed = spotLayer.height[pressedLevel];
-  const radiusRest = spotLayer.shadowRadius[restLevel];
-  const radiusPressed = spotLayer.shadowRadius[pressedLevel];
-  const spotOpacity = isElevationEntitled ? spotLayer.shadowOpacity : 0;
-
-  const shadowStyle = useAnimatedStyle(() => {
-    const blend = (from: number, to: number) =>
-      from + (to - from) * pressProgress.value;
-
-    if (Platform.OS === 'android') {
-      return { elevation: blend(androidRest, androidPressed) };
-    }
-    if (Platform.OS === 'web') {
-      return webShadow ?? {};
-    }
-    return {
-      shadowColor,
-      shadowOpacity: spotOpacity,
-      shadowOffset: { width: 0, height: blend(heightRest, heightPressed) },
-      shadowRadius: blend(radiusRest, radiusPressed),
-    };
-  }, [
-    pressProgress,
-    androidRest,
-    androidPressed,
-    heightRest,
-    heightPressed,
-    radiusRest,
-    radiusPressed,
-    shadowColor,
-    spotOpacity,
-    webShadow,
-  ]);
 
   const { color: labelStyleColor } = React.useMemo(
     () => StyleSheet.flatten(labelStyle) || {},
@@ -597,15 +491,19 @@ const Button = ({
   );
 
   return (
-    <Reanimated.View
+    <Surface
       {...rest}
       ref={ref}
       testID={`${testID}-container-outer-layer`}
-      style={[styles.button, shadowStyle, containerStyle, outerStyle, style]}
+      backgroundColor={containerColor}
+      borderRadius={animatedRadius}
+      elevation={elevation}
+      transitionDuration={elevationTransitionDuration}
+      style={[styles.button, style]}
     >
       <Reanimated.View
         testID={`${testID}-container`}
-        style={[styles.clip, outlineStyle, clipStyle, borderRadiusStyles]}
+        style={[styles.clip, outlineStyle, clipStyle]}
       >
         {backgroundOpacity < 1 && (
           <View
@@ -683,7 +581,7 @@ const Button = ({
           </View>
         </TouchableRipple>
       </Reanimated.View>
-    </Reanimated.View>
+    </Surface>
   );
 };
 
