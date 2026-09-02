@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
-import type { StyleProp } from 'react-native';
+import { Platform, ScrollView, StyleSheet } from 'react-native';
+import type { ScrollViewProps, StyleProp } from 'react-native';
 
+import type {
+  DialogContentProps,
+  DialogScrollAreaProps,
+} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Modal from '../Modal';
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
@@ -12,7 +17,8 @@ import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
-import Modal from '../Modal';
+import type { SurfaceStyle } from '../Surface';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -70,7 +76,7 @@ export type Props = {
    * Accessibility label for the dialog. This is read by the screen reader when the user opens a dialog.
    */
   'aria-label'?: string;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
    */
