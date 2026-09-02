@@ -14,6 +14,7 @@ import type {
 import Animated, {
   Easing,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -38,8 +39,7 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import { getButtonTouchableRippleStyle } from '../Button/utils';
 import Icon, { type IconSource } from '../Icon';
-import Surface from '../Surface';
-import SplitButtonSurface from './SplitButtonSurface';
+import Surface, { type SurfaceStyle } from '../Surface';
 import TouchableRipple, {
   type Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
@@ -163,15 +163,15 @@ export type Props = $Omit<ViewProps, 'children' | 'style'> & {
   /**
    * Style for both button containers.
    */
-  buttonStyle?: StyleProp<ViewStyle>;
+  buttonStyle?: StyleProp<SurfaceStyle>;
   /**
    * Style for the leading button container.
    */
-  leadingButtonStyle?: StyleProp<ViewStyle>;
+  leadingButtonStyle?: StyleProp<SurfaceStyle>;
   /**
    * Style for the trailing button container.
    */
-  trailingButtonStyle?: StyleProp<ViewStyle>;
+  trailingButtonStyle?: StyleProp<SurfaceStyle>;
   /**
    * Style for the leading button content row.
    */
@@ -336,17 +336,19 @@ const SplitButton = ({
     typeof trailingShape.borderTopEndRadius === 'number'
       ? trailingShape.borderTopEndRadius
       : sizeStyle.containerRadius;
-  const trailingAnimatedShapeStyle = useAnimatedStyle(() => {
-    const radius =
+  // Shared between the trailing `Surface`'s own start-corner props (for its
+  // elevation shadow) and the inner clip view's animated style below, so
+  // both always land on the same radius.
+  const trailingStartRadius = useDerivedValue(
+    () =>
       trailingRestingRadius +
       trailingInnerRadiusProgress.value *
-        (trailingExpandedRadius - trailingRestingRadius);
-
-    return {
-      borderTopStartRadius: radius,
-      borderBottomStartRadius: radius,
-    };
-  });
+        (trailingExpandedRadius - trailingRestingRadius)
+  );
+  const trailingAnimatedShapeStyle = useAnimatedStyle(() => ({
+    borderTopStartRadius: trailingStartRadius.value,
+    borderBottomStartRadius: trailingStartRadius.value,
+  }));
   const trailingIconAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${trailingIconRotation.value * 180}deg` }],
   }));
@@ -400,10 +402,16 @@ const SplitButton = ({
     trailingInnerRadiusProgress,
   ]);
 
+  // Both `Surface`s below always get a constant `'transparent'`
+  // `backgroundColor` rather than switching to `colors.containerColor`
+  // once `containerOpacity` reaches 1: `colors.containerColor` may be a
+  // Material You `PlatformColor`, and flipping `Surface`'s `backgroundColor`
+  // between that and a plain string across renders (e.g. toggling
+  // `disabled`) crashes Reanimated's CSS-transition engine. The real
+  // (possibly platform) color is always painted via the plain, non-animated
+  // `ButtonBackground` view instead.
   const commonButtonStyle: ViewStyle = {
     height: sizeStyle.containerHeight,
-    backgroundColor:
-      colors.containerOpacity < 1 ? 'transparent' : colors.containerColor,
     borderColor: colors.borderColor,
     borderWidth: colors.borderWidth,
   };
@@ -425,17 +433,18 @@ const SplitButton = ({
     >
       <Surface
         testID={getTestID('leading-container')}
+        {...leadingShape}
         elevation={colors.elevation}
+        backgroundColor="transparent"
         style={[
           styles.leading,
           commonButtonStyle,
-          leadingShape,
           buttonStyle,
           leadingButtonStyle,
         ]}
-        container
       >
         <ButtonBackground
+          testID={getTestID('leading-background')}
           backgroundColor={colors.containerColor}
           opacity={colors.containerOpacity}
           borderRadiusStyle={leadingShape}
@@ -508,14 +517,16 @@ const SplitButton = ({
         </TouchableRipple>
       </Surface>
 
-      <SplitButtonSurface
+      <Surface
         testID={getTestID('trailing-container')}
+        {...trailingShape}
+        borderTopStartRadius={trailingStartRadius}
+        borderBottomStartRadius={trailingStartRadius}
         elevation={colors.elevation}
+        backgroundColor="transparent"
         style={[
           styles.trailing,
           commonButtonStyle,
-          trailingShape,
-          trailingAnimatedShapeStyle,
           buttonStyle,
           trailingButtonStyle,
         ]}
@@ -529,6 +540,7 @@ const SplitButton = ({
           ]}
         >
           <ButtonBackground
+            testID={getTestID('trailing-background')}
             backgroundColor={colors.containerColor}
             opacity={colors.containerOpacity}
             borderRadiusStyle={trailingShape}
@@ -583,26 +595,28 @@ const SplitButton = ({
             </View>
           </TouchableRipple>
         </Animated.View>
-      </SplitButtonSurface>
+      </Surface>
     </View>
   );
 };
 
+// Always rendered (rather than skipped once `opacity` reaches 1) since the
+// `Surface`s above never get the real, possibly-`PlatformColor` value as
+// their own `backgroundColor` — see the comment above `commonButtonStyle`.
 const ButtonBackground = ({
+  testID,
   backgroundColor,
   opacity,
   borderRadiusStyle,
 }: {
+  testID?: string;
   backgroundColor: ColorValue;
   opacity: number;
   borderRadiusStyle: ViewStyle;
 }) => {
-  if (opacity >= 1) {
-    return null;
-  }
-
   return (
     <View
+      testID={testID}
       pointerEvents="none"
       style={[
         StyleSheet.absoluteFill,
