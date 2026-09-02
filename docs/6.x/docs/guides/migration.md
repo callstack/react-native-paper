@@ -280,3 +280,55 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Dialog
+
+The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+
+#### Removed props
+
+- **`children`** was removed from `Dialog`
+
+Use the dedicated props instead:
+
+- **`Dialog.Icon`** → **`icon`**
+- **`Dialog.Title`** → **`title`**
+- **`Dialog.Content`** → **`content`**
+- **`Dialog.Actions`** → **`actions`**
+
+The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. When **`actions`** is provided, the passed components are rendered through **`Dialog.Actions`** internally.
+
+#### New props
+
+- **`scrollable`** renders the dialog content inside a scrollable area.
+- **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
+- **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
+- **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
+- **`aria-label`** provides an accessibility label when the dialog title is not a string.
+
+```tsx
+// Before (v5)
+<Portal>
+  <Dialog visible={visible} onDismiss={hideDialog}>
+    <Dialog.Title>Alert</Dialog.Title>
+    <Dialog.Content>
+      <Text variant="bodyMedium">This is a simple dialog</Text>
+    </Dialog.Content>
+    <Dialog.Actions>
+      <Button onPress={hideDialog}>Done</Button>
+    </Dialog.Actions>
+  </Dialog>
+</Portal>
+
+// After (v6)
+<Portal>
+  <Dialog
+    visible={visible}
+    onDismiss={hideDialog}
+    icon="alert"
+    title="Alert"
+    content="This is a simple dialog"
+    actions={[<Button key="done" onPress={hideDialog}>Done</Button>]}
+  />
+</Portal>
+```

@@ -103,10 +103,12 @@ const DialogExample = () => {
         visible={_getVisible('dialog6')}
         close={_toggleDialog('dialog6')}
       />
-      <DialogWithDismissableBackButton
-        visible={_getVisible('dialog7')}
-        close={_toggleDialog('dialog7')}
-      />
+      {Platform.OS === 'android' && (
+        <DialogWithDismissableBackButton
+          visible={_getVisible('dialog7')}
+          close={_toggleDialog('dialog7')}
+        />
+      )}
     </ScreenWrapper>
   );
 };

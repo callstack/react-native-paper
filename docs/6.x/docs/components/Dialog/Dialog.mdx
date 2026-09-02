@@ -21,7 +21,7 @@ To render the `Dialog` above other components, you'll need to wrap it with the [
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+import { Button, Dialog, Portal, PaperProvider } from 'react-native-paper';
 
 const MyComponent = () => {
   const [visible, setVisible] = React.useState(false);
@@ -35,15 +35,15 @@ const MyComponent = () => {
       <View>
         <Button onPress={showDialog}>Show Dialog</Button>
         <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Alert</Dialog.Title>
-            <Dialog.Content>
-              <Text variant="bodyMedium">This is simple dialog</Text>
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button onPress={hideDialog}>Done</Button>
-            </Dialog.Actions>
-          </Dialog>
+          <Dialog
+            visible={visible}
+            onDismiss={hideDialog}
+            title="Alert"
+            content="This is simple dialog"
+            actions={[
+						 		<Button key='done-btn' onPress={hideDialog}>Done</Button>
+						 ]}
+          />
         </Portal>
       </View>
     </PaperProvider>
@@ -93,11 +93,75 @@ export default MyComponent;
 
 <div>
 
-### children (required)
+### icon
 
 </div>
 
-  <PropTable componentLink="Dialog/Dialog" prop="children" />
+  <PropTable componentLink="Dialog/Dialog" prop="icon" />
+
+<div>
+
+### title
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="title" />
+
+<div>
+
+### content
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="content" />
+
+<div>
+
+### actions
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="actions" />
+
+<div>
+
+### scrollable
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollable" />
+
+<div>
+
+### contentProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="contentProps" />
+
+<div>
+
+### scrollAreaProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollAreaProps" />
+
+<div>
+
+### scrollViewProps
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="scrollViewProps" />
+
+<div>
+
+### aria-label
+
+</div>
+
+  <PropTable componentLink="Dialog/Dialog" prop="aria-label" />
 
 <div>
 

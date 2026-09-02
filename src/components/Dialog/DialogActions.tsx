@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
@@ -33,12 +32,18 @@ export type Props = ViewProps & {
  *
  *   return (
  *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Actions>
- *           <Button onPress={() => console.log('Cancel')}>Cancel</Button>
- *           <Button onPress={() => console.log('Ok')}>Ok</Button>
- *         </Dialog.Actions>
- *       </Dialog>
+ *       <Dialog
+ * 					visible={visible}
+ * 					onDismiss={hideDialog}
+ * 					actions={[
+ * 						<Button key="disagree-btn" onPress={close} textColor={Palette.error50}>
+ * 							Disagree
+ * 						</Button>,
+ * 						<Button key="agree-btn" onPress={close}>
+ * 							Agree
+ *  					</Button>,
+ * 					]}
+ * 		   />
  *     </Portal>
  *   );
  * };
@@ -46,26 +51,25 @@ export type Props = ViewProps & {
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => {
-  useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+const DialogActions = ({ children, style, theme, ...rest }: Props) => {
+  useInternalTheme(theme);
+
+  const actions = React.Children.toArray(children).filter((child) =>
+    React.isValidElement<{ style?: StyleProp<ViewStyle> }>(child)
+  );
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
-      {React.Children.map(props.children, (child, i) =>
-        React.isValidElement<DialogActionChildProps>(child)
-          ? React.cloneElement(child, {
-              compact: true,
-              uppercase: false,
-              style: [
-                {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
-                },
-                child.props.style,
-              ],
-            })
-          : child
-      )}
+    <View {...rest} style={[styles.v3Container, style]}>
+      {actions.map((child, index) => (
+        <React.Fragment
+          key={
+            React.isValidElement(child) && child.key != null ? child.key : index
+          }
+        >
+          {index > 0 && <View style={styles.spacer} />}
+          {child}
+        </React.Fragment>
+      ))}
     </View>
   );
 };
@@ -80,6 +84,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 24,
     paddingHorizontal: 24,
+  },
+  spacer: {
+    width: 8,
   },
 });
 

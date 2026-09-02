@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
-import type { StyleProp } from 'react-native';
+import { Platform, ScrollView, StyleSheet } from 'react-native';
+import type { ScrollViewProps, StyleProp } from 'react-native';
 
+import type {
+  DialogContentProps,
+  DialogScrollAreaProps,
+} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Modal from '../Modal';
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
@@ -11,9 +16,9 @@ import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../types';
-import Modal from '../Modal';
+import type { IconSource } from '../Icon';
 import type { SurfaceStyle } from '../Surface';
-import type { DialogChildProps } from './utils';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -33,9 +38,44 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Content of the `Dialog`.
+   * Icon to display above the dialog title.
    */
-  children: React.ReactNode;
+  icon?: IconSource;
+  /**
+   * Title of the dialog.
+   */
+  title?: React.ReactNode;
+  /**
+   * Content of the dialog. Non-empty strings are rendered as Material 3
+   * supporting text.
+   */
+  content?: React.ReactNode;
+  /**
+   * Action buttons displayed at the bottom of the dialog.
+   * Keep their order stable between renders.
+   */
+  actions?: React.ReactNode[];
+  /**
+   * Whether to render the content in a `ScrollView` within the dialog scroll
+   * area.
+   */
+  scrollable?: boolean;
+  /**
+   * Props passed to `Dialog.Content` when `scrollable` is not enabled.
+   */
+  contentProps?: Omit<DialogContentProps, 'children'>;
+  /**
+   * Props passed to `Dialog.ScrollArea` when `scrollable` is enabled.
+   */
+  scrollAreaProps?: Omit<DialogScrollAreaProps, 'children'>;
+  /**
+   * Props passed to the `ScrollView` when `scrollable` is enabled.
+   */
+  scrollViewProps?: Omit<ScrollViewProps, 'children'>;
+  /**
+   * Accessibility label for the dialog. This is read by the screen reader when the user opens a dialog.
+   */
+  'aria-label'?: string;
   style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
@@ -57,7 +97,7 @@ const DIALOG_ELEVATION: Elevation = 3;
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+ * import { Button, Dialog, Portal, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -71,15 +111,15 @@ const DIALOG_ELEVATION: Elevation = 3;
  *       <View>
  *         <Button onPress={showDialog}>Show Dialog</Button>
  *         <Portal>
- *           <Dialog visible={visible} onDismiss={hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Text variant="bodyMedium">This is simple dialog</Text>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
+ *           <Dialog
+ *             visible={visible}
+ *             onDismiss={hideDialog}
+ *             title="Alert"
+ *             content="This is simple dialog"
+ *             actions={[
+ * 						 		<Button key='done-btn' onPress={hideDialog}>Done</Button>
+ * 						 ]}
+ *           />
  *         </Portal>
  *       </View>
  *     </PaperProvider>
@@ -90,7 +130,6 @@ const DIALOG_ELEVATION: Elevation = 3;
  * ```
  */
 const Dialog = ({
-  children,
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
@@ -98,6 +137,15 @@ const Dialog = ({
   style,
   theme: themeOverrides,
   testID,
+  actions,
+  content,
+  icon,
+  scrollable,
+  contentProps,
+  scrollAreaProps,
+  scrollViewProps,
+  title,
+  'aria-label': ariaLabel,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -105,6 +153,18 @@ const Dialog = ({
   const borderRadius = theme.shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
+
+  const contentNode =
+    typeof content === 'string' ? (
+      <Text
+        variant="bodyMedium"
+        style={{ color: theme.colors.onSurfaceVariant }}
+      >
+        {content}
+      </Text>
+    ) : (
+      content
+    );
 
   return (
     <Modal
@@ -124,18 +184,37 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
+      aria-label={ariaLabel ?? (typeof title === 'string' ? title : undefined)}
     >
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
-            return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
-            });
-          }
+      {icon ? <DialogIcon icon={icon} /> : null}
 
-          return child;
-        })}
+      {title ? (
+        <DialogTitle
+          style={{
+            ...(icon ? styles.titleWithIcon : styles.firstChild),
+          }}
+        >
+          {title}
+        </DialogTitle>
+      ) : null}
+
+      {scrollable ? (
+        <DialogScrollArea
+          {...scrollAreaProps}
+          style={[!title && styles.firstChild, scrollAreaProps?.style]}
+        >
+          <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
+        </DialogScrollArea>
+      ) : (
+        <DialogContent
+          {...contentProps}
+          style={[!title && styles.firstChild, contentProps?.style]}
+        >
+          {contentNode}
+        </DialogContent>
+      )}
+
+      {actions?.length ? <Dialog.Actions>{actions}</Dialog.Actions> : null}
     </Modal>
   );
 };
@@ -162,6 +241,14 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     justifyContent: 'flex-start',
+    minWidth: 280,
+    maxWidth: 560,
+  },
+  titleWithIcon: {
+    textAlign: 'center',
+  },
+  firstChild: {
+    marginTop: 24,
   },
 });
 

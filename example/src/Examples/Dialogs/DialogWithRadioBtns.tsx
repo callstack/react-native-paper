@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import {
-  Button,
   Portal,
   Dialog,
   RadioButton,
+  Text,
   TouchableRipple,
+  useTheme,
+  Button,
 } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
 
 type Props = {
   visible: boolean;
@@ -20,74 +20,94 @@ type CheckedState = 'normal' | 'first' | 'second' | 'third' | 'fourth';
 
 const DialogWithRadioBtns = ({ visible, close }: Props) => {
   const [checked, setChecked] = React.useState<CheckedState>('normal');
+  const theme = useTheme();
+  const optionTextColor = { color: theme.colors.onSurfaceVariant };
 
   return (
     <Portal>
-      <Dialog onDismiss={close} visible={visible}>
-        <Dialog.Title>Choose an option</Dialog.Title>
-        <Dialog.ScrollArea style={styles.container}>
-          <ScrollView>
-            <View>
-              <TouchableRipple onPress={() => setChecked('normal')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="normal"
-                      status={checked === 'normal' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 1
-                  </TextComponent>
+      <Dialog
+        onDismiss={close}
+        visible={visible}
+        title="Choose an option"
+        scrollable
+        scrollAreaProps={{ style: styles.container }}
+        content={
+          <View>
+            <TouchableRipple onPress={() => setChecked('normal')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="normal"
+                    status={checked === 'normal' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('second')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="second"
-                      status={checked === 'second' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 2
-                  </TextComponent>
+                <Text
+                  variant="bodyLarge"
+                  style={[styles.text, optionTextColor]}
+                >
+                  Option 1
+                </Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('second')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="second"
+                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('third')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="third"
-                      status={checked === 'third' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 3
-                  </TextComponent>
+                <Text
+                  variant="bodyLarge"
+                  style={[styles.text, optionTextColor]}
+                >
+                  Option 2
+                </Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('third')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="third"
+                    status={checked === 'third' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('fourth')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="fourth"
-                      status={checked === 'fourth' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 4
-                  </TextComponent>
+                <Text
+                  variant="bodyLarge"
+                  style={[styles.text, optionTextColor]}
+                >
+                  Option 3
+                </Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('fourth')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="fourth"
+                    status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-            </View>
-          </ScrollView>
-        </Dialog.ScrollArea>
-        <Dialog.Actions>
-          <Button onPress={close}>Cancel</Button>
-          <Button onPress={close}>Ok</Button>
-        </Dialog.Actions>
-      </Dialog>
+                <Text
+                  variant="bodyLarge"
+                  style={[styles.text, optionTextColor]}
+                >
+                  Option 4
+                </Text>
+              </View>
+            </TouchableRipple>
+          </View>
+        }
+        actions={[
+          <Button key="cancel-btn" onPress={close}>
+            Cancel
+          </Button>,
+          <Button key="ok-btn" onPress={close}>
+            Ok
+          </Button>,
+        ]}
+      />
     </Portal>
   );
 };
