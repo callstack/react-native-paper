@@ -1,7 +1,8 @@
 import color from 'color';
 
+import { contrastSchemes } from './contrastSchemes';
 import { state } from './state';
-import type { ElevationColors, ThemeColors } from '../../types';
+import type { ContrastLevel, ElevationColors, ThemeColors } from '../../types';
 import { palette as defaultPalette } from '../ref/palette';
 
 type Palette = typeof defaultPalette;
@@ -10,11 +11,11 @@ type PaletteKey = keyof Palette;
 /** Roles that map 1:1 to a palette key. Excludes the computed fields. */
 type MappedRoles = Omit<ThemeColors, 'stateLayerPressed' | 'elevation'>;
 
-type Contrast = 'standard'; // extend with 'medium' | 'high' when those ship
-
+/** Only `standard` uses the reference palette steps. The other levels need
+ *  tones that are not in the palette, so they live in `./contrastSchemes`. */
 const roleToTone: Record<
   'light' | 'dark',
-  Record<Contrast, Record<keyof MappedRoles, PaletteKey>>
+  Record<'standard', Record<keyof MappedRoles, PaletteKey>>
 > = {
   light: {
     standard: {
@@ -124,7 +125,10 @@ const roleToTone: Record<
 
 const elevationToTone: Record<
   'light' | 'dark',
-  Record<Contrast, Record<Exclude<keyof ElevationColors, 'level0'>, PaletteKey>>
+  Record<
+    'standard',
+    Record<Exclude<keyof ElevationColors, 'level0'>, PaletteKey>
+  >
 > = {
   light: {
     standard: {
@@ -146,11 +150,34 @@ const elevationToTone: Record<
   },
 };
 
+/** Works out the press state layer up front, because changing alpha at
+ *  runtime breaks PlatformColor on Android.
+ *  @see ThemeColors.stateLayerPressed */
+const withPressedOpacity = (onSurface: string) =>
+  color(onSurface).alpha(state.opacity.pressed).rgb().string();
+
+/**
+ * Builds the color scheme for a mode and contrast level.
+ *
+ * `palette` is only used at `standard` contrast. The `medium` and `high`
+ * schemes already hold color values, so a custom `palette` is ignored there.
+ */
 export function buildScheme(
   palette: Palette,
-  opts: { mode: 'light' | 'dark'; contrast?: Contrast }
+  opts: { mode: 'light' | 'dark'; contrast?: ContrastLevel }
 ): ThemeColors {
   const contrast = opts.contrast ?? 'standard';
+
+  if (contrast !== 'standard') {
+    const { roles, elevation } = contrastSchemes[opts.mode][contrast];
+
+    return {
+      ...roles,
+      stateLayerPressed: withPressedOpacity(roles.onSurface),
+      elevation: { level0: 'transparent', ...elevation },
+    };
+  }
+
   const tones = roleToTone[opts.mode][contrast];
   const elevTones = elevationToTone[opts.mode][contrast];
 
@@ -161,10 +188,7 @@ export function buildScheme(
 
   return {
     ...mapped,
-    stateLayerPressed: color(palette[tones.onSurface])
-      .alpha(state.opacity.pressed)
-      .rgb()
-      .string(),
+    stateLayerPressed: withPressedOpacity(palette[tones.onSurface]),
     elevation: {
       level0: 'transparent',
       level1: palette[elevTones.level1],

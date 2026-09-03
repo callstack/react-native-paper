@@ -14,7 +14,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
-import { useTheme } from '../theming';
+import { getTheme, useTheme } from '../theming';
 
 declare module 'react-native' {
   interface AccessibilityInfoStatic {
@@ -328,5 +328,71 @@ describe('PaperProvider', () => {
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
       customTheme
     );
+  });
+
+  it('applies the contrast prop without a theme prop', async () => {
+    mockAppearance();
+    await render(
+      <PaperProvider contrast="high" reduceMotion="off">
+        <FakeChild />
+      </PaperProvider>
+    );
+
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const theme = screen.getByTestId('provider-child-view').props.theme;
+
+    expect(theme).toStrictEqual(getTheme(false, 'high'));
+    expect(theme.contrast).toBe('high');
+    expect(theme.colors.primary).not.toBe(LightTheme.colors.primary);
+  });
+
+  it('keeps following the system color scheme when only contrast is set', async () => {
+    mockAppearance();
+    await render(
+      <PaperProvider contrast="medium" reduceMotion="off">
+        <FakeChild />
+      </PaperProvider>
+    );
+
+    expect(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId('provider-child-view').props.theme
+    ).toStrictEqual(getTheme(false, 'medium'));
+
+    await act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
+
+    expect(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId('provider-child-view').props.theme
+    ).toStrictEqual(getTheme(true, 'medium'));
+  });
+
+  it('defaults to standard contrast', async () => {
+    mockAppearance();
+    await render(createProvider());
+
+    expect(
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      screen.getByTestId('provider-child-view').props.theme.contrast
+    ).toBe('standard');
+  });
+
+  it('lets the contrast prop win over a theme declaring its own level', async () => {
+    mockAppearance();
+    await render(
+      <PaperProvider
+        contrast="standard"
+        theme={{ contrast: 'high' }}
+        reduceMotion="off"
+      >
+        <FakeChild />
+      </PaperProvider>
+    );
+
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    const theme = screen.getByTestId('provider-child-view').props.theme;
+
+    expect(theme.contrast).toBe('standard');
+    expect(theme.colors.primary).toBe(LightTheme.colors.primary);
   });
 });

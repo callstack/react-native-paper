@@ -1,9 +1,10 @@
 import { Platform, PlatformColor, type ColorValue } from 'react-native';
 
+import { createTheme } from './createTheme';
 import { DarkTheme } from './DarkTheme';
 import { LightTheme } from './LightTheme';
 import { Palette } from '../tokens';
-import type { Theme, ThemeColors } from '../types';
+import type { ContrastLevel, Theme, ThemeColors } from '../types';
 
 const apiLevel = Platform.OS === 'android' ? Platform.Version : null;
 
@@ -488,4 +489,23 @@ export const DynamicLightTheme: Theme = {
 export const DynamicDarkTheme: Theme = {
   ...DarkTheme,
   colors: { ...DarkTheme.colors, ...darkDynamicColors },
+};
+
+/** Android has no high contrast version of its system colors, so dynamic
+ *  color is only used at `standard` contrast. */
+export const isDynamicColorSupportedAtContrast = (contrast: ContrastLevel) =>
+  isDynamicColorSupported && contrast === 'standard';
+
+/**
+ * Dynamic theme for a scheme and contrast level.
+ */
+export const getDynamicTheme = (
+  isDark: boolean,
+  contrast: ContrastLevel = 'standard'
+): Theme => {
+  if (!isDynamicColorSupportedAtContrast(contrast)) {
+    return createTheme({ dark: isDark, contrast });
+  }
+
+  return isDark ? DynamicDarkTheme : DynamicLightTheme;
 };

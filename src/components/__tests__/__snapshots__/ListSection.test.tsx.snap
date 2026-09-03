@@ -74,6 +74,7 @@ exports[`renders list section with custom title style 1`] = `
         "tertiaryFixed": "rgba(255, 216, 228, 1)",
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
+      "contrast": "standard",
       "dark": false,
       "elevation": {
         "level0": 0,
@@ -836,6 +837,7 @@ exports[`renders list section with subheader 1`] = `
         "tertiaryFixed": "rgba(255, 216, 228, 1)",
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
+      "contrast": "standard",
       "dark": false,
       "elevation": {
         "level0": 0,
@@ -1596,6 +1598,7 @@ exports[`renders list section without subheader 1`] = `
         "tertiaryFixed": "rgba(255, 216, 228, 1)",
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
+      "contrast": "standard",
       "dark": false,
       "elevation": {
         "level0": 0,

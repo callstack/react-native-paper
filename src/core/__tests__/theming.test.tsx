@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../theme/schemes';
-import { adaptNavigationTheme } from '../theming';
+import { adaptNavigationTheme, getTheme } from '../theming';
 
 const NavigationLightTheme = {
   dark: false,
@@ -272,5 +272,26 @@ describe('adaptNavigationTheme', () => {
 
     expect(navLight).not.toHaveProperty('fonts');
     expect(navDark).not.toHaveProperty('fonts');
+  });
+
+  it('adapts the colors of a raised-contrast material theme', () => {
+    const materialLight = getTheme(false, 'high');
+    const materialDark = getTheme(true, 'high');
+
+    const { LightTheme: navLight, DarkTheme: navDark } = adaptNavigationTheme({
+      reactNavigationLight: NavigationLightTheme,
+      reactNavigationDark: NavigationDarkTheme,
+      materialLight,
+      materialDark,
+    });
+
+    // Apps spread the navigation colors over the Paper theme, so these
+    // must match the contrast level that was asked for.
+    expect(navLight.colors.primary).toBe(materialLight.colors.primary);
+    expect(navLight.colors.text).toBe(materialLight.colors.onSurface);
+    expect(navDark.colors.primary).toBe(materialDark.colors.primary);
+
+    expect(navLight.colors.primary).not.toBe(LightTheme.colors.primary);
+    expect(navDark.colors.primary).not.toBe(DarkTheme.colors.primary);
   });
 });
