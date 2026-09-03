@@ -213,9 +213,6 @@ const Chip = ({
     onPressIn,
     onPressOut,
   });
-  const touchableOnPress =
-    !disabled && !hasPassedTouchHandler ? () => {} : onPress;
-
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
@@ -280,6 +277,91 @@ const Chip = ({
     color: textColor,
     ...(theme as Theme).fonts.labelLarge,
   };
+  const chipContent = (
+    <View
+      style={[
+        styles.content,
+        styles.md3Content,
+        { opacity: contentOpacity },
+        contentSpacings,
+      ]}
+    >
+      {avatar && !icon ? (
+        <View
+          style={[
+            styles.avatarWrapper,
+            styles.md3AvatarWrapper,
+            disabled && { opacity },
+          ]}
+        >
+          {React.isValidElement<ChipAvatarProps>(avatar)
+            ? React.cloneElement(avatar, {
+                style: [styles.avatar, avatar.props.style],
+              })
+            : avatar}
+        </View>
+      ) : null}
+      {icon || (selected && showSelectedCheck) ? (
+        <View
+          style={[
+            styles.icon,
+            styles.md3Icon,
+            avatar
+              ? [
+                  styles.avatar,
+                  styles.avatarSelected,
+                  selected && styles.md3SelectedIcon,
+                ]
+              : null,
+          ]}
+        >
+          {icon ? (
+            <Icon
+              source={icon}
+              color={
+                avatar
+                  ? white
+                  : !disabled
+                    ? (theme as Theme).colors.primary
+                    : iconColor
+              }
+              size={18}
+              theme={theme}
+            />
+          ) : (
+            <MaterialCommunityIcon
+              name="check"
+              color={avatar ? white : iconColor}
+              size={18}
+              direction="ltr"
+            />
+          )}
+        </View>
+      ) : null}
+      <Text
+        variant="labelLarge"
+        selectable={false}
+        numberOfLines={1}
+        style={[
+          styles.md3LabelText,
+          labelTextStyle,
+          labelSpacings,
+          textStyle,
+        ]}
+        ellipsizeMode={ellipsizeMode}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </Text>
+    </View>
+  );
+  const accessibilityProps = {
+    'aria-label': ariaLabel,
+    role,
+    'aria-selected': selected,
+    'aria-disabled': disabled,
+  } as const;
+
   return (
     <Surface
       style={[
@@ -298,101 +380,33 @@ const Chip = ({
       theme={theme}
       container
     >
-      <TouchableRipple
-        borderless
-        background={background}
-        style={[{ borderRadius }, styles.touchable]}
-        onPress={touchableOnPress}
-        onLongPress={onLongPress}
-        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
-        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
-        delayLongPress={delayLongPress}
-        disabled={disabled}
-        aria-label={ariaLabel}
-        role={role}
-        aria-selected={selected}
-        aria-disabled={disabled}
-        testID={testID}
-        theme={theme}
-        hitSlop={hitSlop}
-      >
-        <View
-          style={[
-            styles.content,
-            styles.md3Content,
-            { opacity: contentOpacity },
-            contentSpacings,
-          ]}
+      {hasPassedTouchHandler ? (
+        <TouchableRipple
+          borderless
+          background={background}
+          style={[{ borderRadius }, styles.touchable]}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+          delayLongPress={delayLongPress}
+          disabled={disabled}
+          {...accessibilityProps}
+          testID={testID}
+          theme={theme}
+          hitSlop={hitSlop}
         >
-          {avatar && !icon ? (
-            <View
-              style={[
-                styles.avatarWrapper,
-                styles.md3AvatarWrapper,
-                disabled && { opacity },
-              ]}
-            >
-              {React.isValidElement<ChipAvatarProps>(avatar)
-                ? React.cloneElement(avatar, {
-                    style: [styles.avatar, avatar.props.style],
-                  })
-                : avatar}
-            </View>
-          ) : null}
-          {icon || (selected && showSelectedCheck) ? (
-            <View
-              style={[
-                styles.icon,
-                styles.md3Icon,
-                avatar
-                  ? [
-                      styles.avatar,
-                      styles.avatarSelected,
-                      selected && styles.md3SelectedIcon,
-                    ]
-                  : null,
-              ]}
-            >
-              {icon ? (
-                <Icon
-                  source={icon}
-                  color={
-                    avatar
-                      ? white
-                      : !disabled
-                        ? (theme as Theme).colors.primary
-                        : iconColor
-                  }
-                  size={18}
-                  theme={theme}
-                />
-              ) : (
-                <MaterialCommunityIcon
-                  name="check"
-                  color={avatar ? white : iconColor}
-                  size={18}
-                  direction="ltr"
-                />
-              )}
-            </View>
-          ) : null}
-          <Text
-            variant="labelLarge"
-            selectable={false}
-            numberOfLines={1}
-            style={[
-              styles.md3LabelText,
-              labelTextStyle,
-              labelSpacings,
-              textStyle,
-            ]}
-            ellipsizeMode={ellipsizeMode}
-            maxFontSizeMultiplier={maxFontSizeMultiplier}
-          >
-            {children}
-          </Text>
+          {chipContent}
+        </TouchableRipple>
+      ) : (
+        <View
+          style={[{ borderRadius }, styles.touchable]}
+          {...accessibilityProps}
+          testID={testID}
+        >
+          {chipContent}
         </View>
-      </TouchableRipple>
+      )}
       {onClose ? (
         <View style={styles.closeButtonStyle}>
           <Pressable
