@@ -289,7 +289,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="tonal"
-            rippleColor={theme.colors.error}
+            rippleColor="rgba(179, 38, 30, 0.32)"
             onPress={() => {}}
             style={styles.button}
           >
