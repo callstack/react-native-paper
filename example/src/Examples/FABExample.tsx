@@ -154,7 +154,7 @@ const FABExample = () => {
           title="Show FAB"
           right={() => (
             <View pointerEvents="none">
-              <Switch value={showFab} />
+              <Switch value={showFab} readOnly />
             </View>
           )}
           onPress={() => setShowFab((v) => !v)}

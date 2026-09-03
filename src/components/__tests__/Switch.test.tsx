@@ -10,11 +10,17 @@ import Switch from '../Switch/Switch';
 
 describe('Switch render', () => {
   it('renders on', async () => {
-    expect((await render(<Switch value />)).toJSON()).toMatchSnapshot();
+    expect(
+      (await render(<Switch value onValueChange={jest.fn()} />)).toJSON()
+    ).toMatchSnapshot();
   });
 
   it('renders off', async () => {
-    expect((await render(<Switch value={false} />)).toJSON()).toMatchSnapshot();
+    expect(
+      (
+        await render(<Switch value={false} onValueChange={jest.fn()} />)
+      ).toJSON()
+    ).toMatchSnapshot();
   });
 
   it('renders disabled on', async () => {
@@ -31,14 +37,25 @@ describe('Switch render', () => {
 
   it('renders with checked icon', async () => {
     expect(
-      (await render(<Switch value checkedIcon="check" />)).toJSON()
+      (
+        await render(
+          <Switch value checkedIcon="check" onValueChange={jest.fn()} />
+        )
+      ).toJSON()
     ).toMatchSnapshot();
   });
 
   it('renders with per-state icons', async () => {
     expect(
       (
-        await render(<Switch value checkedIcon="check" uncheckedIcon="close" />)
+        await render(
+          <Switch
+            value
+            checkedIcon="check"
+            uncheckedIcon="close"
+            onValueChange={jest.fn()}
+          />
+        )
       ).toJSON()
     ).toMatchSnapshot();
   });
@@ -46,7 +63,7 @@ describe('Switch render', () => {
 
 describe('Switch accessibility', () => {
   it('has switch role', async () => {
-    await render(<Switch value={false} />);
+    await render(<Switch value={false} onValueChange={jest.fn()} />);
 
     expect(screen.getByRole('switch')).toBeOnTheScreen();
   });
@@ -106,6 +123,49 @@ describe('Switch focus state', () => {
     expect(animatedStyle('switch-handle')).toMatchObject({
       backgroundColor: defaultThemes.light.colors.primaryContainer,
     });
+  });
+});
+
+describe('Switch operability', () => {
+  it('warns when it is given no way to be operated', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // @ts-expect-error -- the props type requires a handler, `readOnly`, or
+    // `disabled`; this covers untyped callers that get past it.
+    await render(<Switch value />);
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('onValueChange')
+    );
+
+    jest.restoreAllMocks();
+  });
+
+  it('is not focusable when it has no way to be operated', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // @ts-expect-error -- see above.
+    await render(<Switch value />);
+
+    expect(screen.getByRole('switch')).toHaveProp('focusable', false);
+
+    jest.restoreAllMocks();
+  });
+
+  it('announces a read-only switch without making it focusable', async () => {
+    await render(<Switch value readOnly aria-label="Dark theme" />);
+
+    const control = screen.getByRole('switch');
+
+    expect(control).toHaveProp('focusable', false);
+    expect(control).toBeChecked();
+    expect(control).toBeEnabled();
+  });
+
+  it('keeps an interactive switch focusable', async () => {
+    await render(<Switch value onValueChange={jest.fn()} />);
+
+    expect(screen.getByRole('switch')).toHaveProp('focusable', true);
   });
 });
 
