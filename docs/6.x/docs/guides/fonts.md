@@ -69,8 +69,8 @@ Platform.select({
 
 Material Design 3 typescale uses two font families:
 
-- **Brand**: Headline and Title Large
-- **Plain**: Title Medium/Small, Label, and Body
+- **Brand**: Display, Headline and Title Large
+- **Plain**: Title Medium/Small, Label and Body
 
 The default theme uses the platform default for both font families.
 

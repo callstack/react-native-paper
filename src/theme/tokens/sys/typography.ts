@@ -32,7 +32,7 @@ const plainMediumEmphasizedType = {
 };
 
 const plainBoldType = {
-  fontFamily: typeface.plainMedium,
+  fontFamily: typeface.plainRegular,
   letterSpacing: 0,
   fontWeight: typeface.weightBold,
 };

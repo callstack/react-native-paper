@@ -372,6 +372,19 @@ describe('configureFonts', () => {
         fontWeight: '400',
       });
     }
+
+    for (const variant of [
+      'titleMediumEmphasized',
+      'titleSmallEmphasized',
+      'labelLargeEmphasized',
+      'labelMediumEmphasized',
+      'labelSmallEmphasized',
+    ]) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '700',
+      });
+    }
   });
 
   it('applies flat properties to every variant when the config also has per-variant entries', () => {
