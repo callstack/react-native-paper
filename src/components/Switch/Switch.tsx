@@ -15,7 +15,6 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withDelay,
   withSequence,
   withSpring,
   withTiming,
@@ -91,10 +90,6 @@ const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
 // positioned, so each one is centred against it.
 const centreY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
 const TRACK_TOP = centreY(TRACK_HEIGHT);
-
-// Hold-then-grow: a brief delay before snapping to PRESSED_HANDLE so a quick
-// tap doesn't flash the press-grow visual.
-const PRESS_GROW_DELAY = 100;
 
 function restingHandleSize(checked: boolean, hasIcon: boolean): number {
   if (hasIcon) return ICON_HANDLE;
@@ -234,14 +229,10 @@ const Switch = ({
     ({ p, c, hi }) => {
       const restingSize =
         hi === 1 ? ICON_HANDLE : c === 1 ? SELECTED_HANDLE : UNSELECTED_HANDLE;
-      if (p === 1) {
-        handleSize.value = withDelay(
-          PRESS_GROW_DELAY,
-          withTiming(PRESSED_HANDLE, { duration: 0 })
-        );
-      } else {
-        handleSize.value = withSpring(restingSize, springConfig);
-      }
+      handleSize.value = withSpring(
+        p === 1 ? PRESSED_HANDLE : restingSize,
+        springConfig
+      );
     },
     [springConfig]
   );
