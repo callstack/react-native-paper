@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate ProgressBar to Reanimated.
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   LayoutChangeEvent,
