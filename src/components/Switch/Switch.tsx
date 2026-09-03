@@ -3,7 +3,9 @@ import {
   Platform,
   Pressable,
   StyleSheet,
+  type NativeSyntheticEvent,
   type StyleProp,
+  type TargetedEvent,
   View,
   type ViewStyle,
 } from 'react-native';
@@ -32,19 +34,11 @@ import type { StateOpacityKey, ThemeProp } from '../../types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
 
-export type Props = {
+type SwitchBaseProps = {
   /**
    * Whether the switch is on.
    */
   value?: boolean;
-  /**
-   * Called with the new value when the user toggles the switch.
-   */
-  onValueChange?: (value: boolean) => void;
-  /**
-   * Disables interaction and renders the disabled visual state.
-   */
-  disabled?: boolean;
   /**
    * Icon shown inside the handle when checked
    */
@@ -61,6 +55,45 @@ export type Props = {
    */
   'aria-label'?: string;
 };
+
+export type Props = SwitchBaseProps & {
+  /**
+   * Called with the new value when the user toggles the switch. Required
+   * unless the switch is `readOnly` or `disabled`.
+   */
+  onValueChange?: (value: boolean) => void;
+  /**
+   * Reports state the user cannot change here. The switch keeps its enabled
+   * appearance and is still announced by a screen reader, but it is neither
+   * focusable nor pressable.
+   */
+  readOnly?: boolean;
+  /**
+   * Disables interaction and renders the disabled visual state.
+   */
+  disabled?: boolean;
+};
+
+/**
+ * `Props`, narrowed so a switch always declares how it can be operated and can
+ * never render as an enabled control that does nothing when activated.
+ *
+ * This is applied to the component's declared type rather than folded into
+ * `Props`, because the docs generator reads props off the parameter annotation
+ * and silently drops a union (a top-level one drops the whole page). So the
+ * parameter below stays annotated as the flat `Props`, and callers still get
+ * the narrowed type through this one.
+ */
+export type OperableProps = SwitchBaseProps &
+  (
+    | {
+        onValueChange: (value: boolean) => void;
+        readOnly?: false;
+        disabled?: boolean;
+      }
+    | { onValueChange?: never; readOnly: true; disabled?: boolean }
+    | { onValueChange?: never; readOnly?: false; disabled: true }
+  );
 
 const {
   trackWidth: TRACK_WIDTH,
@@ -126,9 +159,10 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
  * - `surface`: disabled selected handle
  * - `secondary`: focus indicator
  */
-const Switch = ({
+const Switch: (props: OperableProps) => React.JSX.Element = ({
   value,
   disabled,
+  readOnly,
   onValueChange,
   checkedIcon,
   uncheckedIcon,
@@ -145,6 +179,18 @@ const Switch = ({
   const checked = !!value;
   const isDisabled = !!disabled;
   const isEnabled = !isDisabled;
+  const isReadOnly = !!readOnly;
+  // `OperableProps` already requires one of these, but untyped callers can slip
+  // past it, so guard here too rather than rendering an enabled no-op.
+  const isMissingOperability = !onValueChange && !isReadOnly && !isDisabled;
+
+  if (isMissingOperability) {
+    console.warn(
+      'Switch: pass `onValueChange` to make the switch operable, or set `readOnly` or `disabled` to render it as a state indicator.'
+    );
+  }
+
+  const isInteractive = !isDisabled && !isReadOnly && !isMissingOperability;
   const iconSource = checked ? checkedIcon : uncheckedIcon;
   const hasIcon = iconSource !== undefined;
 
@@ -341,30 +387,40 @@ const Switch = ({
   const trackOpacityValue = isDisabled ? DISABLED_TRACK_OPACITY : 1;
   const iconSize = checked ? SELECTED_ICON : UNSELECTED_ICON;
 
+  // A non-interactive switch gets no press, hover, or focus affordances at all.
+  // It stays in the accessibility tree, so its state is still announced.
+  const interactionProps = isInteractive
+    ? {
+        onPress: () => onValueChange?.(!checked),
+        onPressIn: () => {
+          pressedSV.value = 1;
+        },
+        onPressOut: () => {
+          pressedSV.value = 0;
+        },
+        onHoverIn: () => {
+          hoveredSV.value = 1;
+        },
+        onHoverOut: () => {
+          hoveredSV.value = 0;
+        },
+        onFocus: (e: NativeSyntheticEvent<TargetedEvent>) => {
+          if (!isKeyboardFocusEvent(e)) return;
+          focusedSV.value = 1;
+        },
+        onBlur: () => {
+          focusedSV.value = 0;
+        },
+      }
+    : null;
+
   return (
     <View style={[styles.wrapper, style]}>
       <Pressable
         disabled={disabled}
-        onPress={() => onValueChange?.(!checked)}
-        onPressIn={() => {
-          pressedSV.value = 1;
-        }}
-        onPressOut={() => {
-          pressedSV.value = 0;
-        }}
-        onHoverIn={() => {
-          hoveredSV.value = 1;
-        }}
-        onHoverOut={() => {
-          hoveredSV.value = 0;
-        }}
-        onFocus={(e) => {
-          if (!isKeyboardFocusEvent(e)) return;
-          focusedSV.value = 1;
-        }}
-        onBlur={() => {
-          focusedSV.value = 0;
-        }}
+        focusable={isInteractive}
+        aria-readonly={isReadOnly}
+        {...interactionProps}
         android_ripple={{ color: 'transparent' }}
         role="switch"
         aria-disabled={isDisabled}
