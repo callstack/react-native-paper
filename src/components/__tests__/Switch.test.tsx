@@ -1,6 +1,11 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import type * as React from 'react';
 
-import { render, screen, userEvent } from '../../test-utils';
+import { describe, expect, it, jest } from '@jest/globals';
+import * as Reanimated from 'react-native-reanimated';
+
+import { defaultThemes } from '../../core/theming';
+import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
 import Switch from '../Switch/Switch';
 
 describe('Switch render', () => {
@@ -44,6 +49,57 @@ describe('Switch accessibility', () => {
     await render(<Switch value={false} />);
 
     expect(screen.getByRole('switch')).toBeOnTheScreen();
+  });
+});
+
+describe('Switch focus state', () => {
+  const renderAndFocus = async (element: React.ReactElement) => {
+    await render(element);
+
+    await fireEvent(screen.getByTestId('switch'), 'focus');
+    await jest.runAllTimersAsync();
+  };
+
+  const animatedStyle = (testID: string) =>
+    Reanimated.getAnimatedStyle(screen.getByTestId(testID));
+
+  it('shows the focus indicator on keyboard focus', async () => {
+    await renderAndFocus(
+      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
+    );
+
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
+  });
+
+  it('hides the focus indicator again on blur', async () => {
+    await renderAndFocus(
+      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
+    );
+
+    await fireEvent(screen.getByTestId('switch'), 'blur');
+    await jest.runAllTimersAsync();
+
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
+  });
+
+  it('raises the state layer to the focused opacity', async () => {
+    await renderAndFocus(
+      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
+    );
+
+    expect(animatedStyle('switch-state-layer')).toMatchObject({
+      opacity: tokens.md.sys.state.opacity.focused,
+    });
+  });
+
+  it('paints the focus handle color when selected and focused', async () => {
+    await renderAndFocus(
+      <Switch value onValueChange={jest.fn()} testID="switch" />
+    );
+
+    expect(animatedStyle('switch-handle')).toMatchObject({
+      backgroundColor: defaultThemes.light.colors.primaryContainer,
+    });
   });
 });
 
