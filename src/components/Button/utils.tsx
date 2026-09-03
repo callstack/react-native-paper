@@ -160,8 +160,7 @@ const isToggleMode = (mode: ButtonMode): mode is ButtonToggleMode =>
 
 /**
  * The toggle colour pair for a mode, or `undefined` when the button is not a
- * toggle (`selected` omitted) or the mode has no toggle colours of its own
- * (`text`, which MD3 gives no toggle tokens).
+ * toggle (`selected` omitted) or the mode has no toggle at all (`text`).
  */
 const getToggleColors = ({
   mode,

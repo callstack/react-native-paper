@@ -101,9 +101,9 @@ const sizes = {
 } as const satisfies Record<ButtonSize, ButtonSizeTokens>;
 
 /**
- * Modes that have a toggle variant. MD3 defines `ToggleButton`,
- * `ElevatedToggleButton`, `TonalToggleButton` and `OutlinedToggleButton` — there
- * is no text/plain toggle, so `text` keeps its plain colours when used as one.
+ * Modes that have a toggle variant. MD3 defines the toggle for the filled,
+ * elevated, tonal and outlined styles only, so `text` has no toggle at all and
+ * `selected` is ignored there.
  */
 export type ButtonToggleMode = Exclude<ButtonMode, 'text'>;
 

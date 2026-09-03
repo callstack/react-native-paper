@@ -329,7 +329,7 @@ The container now also morphs its corner while pressed. Pass
 #### Toggle
 
 `selected` turns a button into a toggle. Leave it **undefined** to make it
-a plain button
+a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 
 ```tsx
 <Button mode="filled" selected={isOn} onPress={toggle}>

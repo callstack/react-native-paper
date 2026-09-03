@@ -999,7 +999,8 @@ describe('selected prop', () => {
     });
   });
 
-  it('keeps a text button on its plain colors, having no toggle colours', async () => {
+  // MD3 gives the text style no toggle, so `selected` is inert there.
+  it('ignores `selected` entirely on a text button', async () => {
     const plain = getButtonColors({ theme: getTheme(), mode: 'text' });
 
     expect(
@@ -1009,16 +1010,17 @@ describe('selected prop', () => {
       getButtonColors({ theme: getTheme(), mode: 'text', selected: true })
     ).toMatchObject(plain);
 
-    // `selected` is still honoured for the shape flip and for screen readers.
     await render(
       <Button testID="button" mode="text" shape="round" selected>
         X
       </Button>
     );
+    // No shape flip: a round text button stays the pill, 40 / 2 = 20.
     expect(screen.getByTestId('button-container')).toHaveStyle({
-      borderRadius: 12,
+      borderRadius: 20,
     });
-    expect(screen.getByTestId('button')).toBeSelected();
+    // And no toggle state is announced.
+    expect(screen.getByTestId('button')).not.toBeSelected();
   });
 
   it('leaves a plain button untouched when `selected` is omitted', () => {

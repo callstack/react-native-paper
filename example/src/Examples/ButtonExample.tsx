@@ -24,6 +24,8 @@ const SIZES: Size[] = [
   'large',
   'extra-large',
 ];
+// MD3 defines no text toggle, so `text` is absent from the toggle showcase.
+const TOGGLE_MODES: Mode[] = MODES.filter((mode) => mode !== 'text');
 const SHAPES: Shape[] = ['round', 'square'];
 const ICON_POSITIONS: IconPosition[] = ['leading', 'trailing'];
 const TOGGLE_STATES: ToggleState[] = ['off', 'unselected', 'selected'];
@@ -247,7 +249,7 @@ const ButtonExample = () => {
 
       <List.Section title="Toggle (expressive)">
         <View style={styles.row}>
-          {MODES.map((m) => {
+          {TOGGLE_MODES.map((m) => {
             const key = `toggle-${m}`;
             const isSelected = !!selectedToggles[key];
             return (

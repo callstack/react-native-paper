@@ -97,11 +97,12 @@ export type Props = Omit<ViewProps, 'style'> & {
    * When defined:
    *
    * - The button takes its container and label colours from the toggle set for
-   *   its `mode`, which differ between `false` and `true`. `text` is the one
-   *   exception: MD3 defines no text toggle, so it keeps its plain colours.
+   *   its `mode`, which differ between `false` and `true`.
    * - When `true` the `shape` is flipped: `'round'` renders square and vice
    *   versa, and an `outlined` button drops its outline.
    * - `aria-selected` is set so screen readers announce the toggle state.
+   *
+   * Ignored on `mode="text"`, which MD3 gives no toggle.
    */
   selected?: boolean;
   /**
@@ -293,9 +294,14 @@ const Button = ({
       : initialElevation
     : 0;
 
+  // MD3 defines no text toggle, so `selected` is inert on `mode="text"`: no
+  // toggle colors, no shape flip, and no `aria-selected`. Every other use of
+  // the toggle state goes through this value.
+  const toggleSelected = isMode('text') ? undefined : selected;
+
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
-  const effectiveShape = getEffectiveButtonShape(shape, selected);
+  const effectiveShape = getEffectiveButtonShape(shape, toggleSelected);
   const sizeStyle = React.useMemo(() => getButtonSizeStyle(size), [size]);
 
   // Shape morph: animate the corner on press (→ the pressed shape token) and on
@@ -310,7 +316,7 @@ const Button = ({
   const restingRadius =
     effectiveShape === 'round'
       ? sizeStyle.minHeight / 2
-      : getButtonShapeRadius({ size, shape, theme, selected });
+      : getButtonShapeRadius({ size, shape, theme, selected: toggleSelected });
   const pressedRadius = getButtonPressedRadius({ size, theme });
   const animatedRadius = useSharedValue(restingRadius);
   const restingRadiusRef = React.useRef(restingRadius);
@@ -396,7 +402,7 @@ const Button = ({
         size,
         disabled,
         dark,
-        selected,
+        selected: toggleSelected,
       }),
     [
       customButtonColor,
@@ -406,7 +412,7 @@ const Button = ({
       size,
       disabled,
       dark,
-      selected,
+      toggleSelected,
     ]
   );
 
@@ -538,7 +544,7 @@ const Button = ({
           accessibilityHint={accessibilityHint}
           role={role}
           aria-disabled={disabled}
-          aria-selected={selected}
+          aria-selected={toggleSelected}
           accessible={accessible}
           hitSlop={hitSlopWithMinTarget}
           disabled={disabled}
