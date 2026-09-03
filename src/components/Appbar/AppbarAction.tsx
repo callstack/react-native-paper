@@ -9,7 +9,7 @@ import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
-export type Props = Omit<IconButtonProps, 'ref'> & {
+export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    *  Custom color for action icon.
    */

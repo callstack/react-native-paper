@@ -1,3 +1,4 @@
+import type * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
@@ -11,7 +12,10 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = Omit<TouchableRippleProps, 'children'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Value of the radio button
    */

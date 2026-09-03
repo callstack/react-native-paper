@@ -37,7 +37,10 @@ type Description =
       fontSize: number;
     }) => React.ReactNode);
 
-export type Props = Omit<TouchableRippleProps, 'children'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Title text for the list item.
    */

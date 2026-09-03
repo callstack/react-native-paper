@@ -1,10 +1,11 @@
+import type * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
-export type Props = Omit<ViewProps, 'children'> & {
+export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   /**
    * @renamed Renamed from 'inset' to 'leftInset` in v5.x
    * Whether divider has a left inset.

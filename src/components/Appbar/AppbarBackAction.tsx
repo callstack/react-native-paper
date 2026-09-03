@@ -13,7 +13,7 @@ import AppbarAction from './AppbarAction';
 import type { Props as AppbarActionProps } from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
 
-export type Props = Omit<AppbarActionProps, 'icon' | 'ref'> & {
+export type Props = Omit<React.PropsWithoutRef<AppbarActionProps>, 'icon'> & {
   /**
    *  Custom color for back icon.
    */

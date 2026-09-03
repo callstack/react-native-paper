@@ -21,7 +21,7 @@ type TitleString = {
 
 type TitleElement = { title: React.ReactNode; titleStyle?: never };
 
-export type Props = Omit<ViewProps, 'children'> & {
+export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   // For `title` and `titleStyle` props their types are duplicated due to the generation of documentation.
   // Appropriate type for them are either `TitleString` or `TitleElement`, depends on `title` type.
   /**

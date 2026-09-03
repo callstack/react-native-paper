@@ -12,7 +12,10 @@ import type { ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = Omit<TouchableRippleProps, 'children'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Content of the `DataTableRow`.
    */

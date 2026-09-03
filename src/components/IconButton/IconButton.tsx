@@ -23,7 +23,10 @@ const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = Omit<TouchableRippleProps, 'children' | 'style'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children' | 'style'
+> & {
   /**
    * Icon to display.
    */

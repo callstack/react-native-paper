@@ -36,7 +36,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: Omit<ButtonProps, 'children'> & {
+  action?: Omit<React.PropsWithoutRef<ButtonProps>, 'children'> & {
     label: string;
   };
   /**

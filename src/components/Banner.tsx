@@ -57,7 +57,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   actions?: Array<
     {
       label: string;
-    } & Omit<ButtonProps, 'children'>
+    } & Omit<React.PropsWithoutRef<ButtonProps>, 'children'>
   >;
   /**
    * Style of banner's inner content.

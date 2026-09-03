@@ -22,7 +22,10 @@ import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = Omit<TouchableRippleProps, 'children'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Status of checkbox.
    */
