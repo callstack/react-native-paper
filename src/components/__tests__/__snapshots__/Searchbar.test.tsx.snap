@@ -16,7 +16,6 @@ exports[`activity indicator snapshot test 1`] = `
       "shadowRadius": 0,
     }
   }
-  testID="search-bar-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -36,7 +35,7 @@ exports[`activity indicator snapshot test 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container"
+    testID="surface"
   >
     <View
       collapsable={false}
@@ -56,7 +55,6 @@ exports[`activity indicator snapshot test 1`] = `
           "width": 40,
         }
       }
-      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -78,7 +76,7 @@ exports[`activity indicator snapshot test 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="search-bar-icon-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="search"
@@ -136,7 +134,7 @@ exports[`activity indicator snapshot test 1`] = `
               ],
             ]
           }
-          testID="search-bar-icon"
+          testID="icon-button"
         >
           <View
             style={
@@ -428,7 +426,6 @@ exports[`renders with placeholder 1`] = `
       "shadowRadius": 0,
     }
   }
-  testID="search-bar-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -448,7 +445,7 @@ exports[`renders with placeholder 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container"
+    testID="surface"
   >
     <View
       collapsable={false}
@@ -468,7 +465,6 @@ exports[`renders with placeholder 1`] = `
           "width": 40,
         }
       }
-      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -490,7 +486,7 @@ exports[`renders with placeholder 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="search-bar-icon-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="search"
@@ -548,7 +544,7 @@ exports[`renders with placeholder 1`] = `
               ],
             ]
           }
-          testID="search-bar-icon"
+          testID="icon-button"
         >
           <View
             style={
@@ -638,7 +634,6 @@ exports[`renders with placeholder 1`] = `
           false,
         ]
       }
-      testID="search-bar-icon-wrapper"
     >
       <View
         collapsable={false}
@@ -658,7 +653,6 @@ exports[`renders with placeholder 1`] = `
             "width": 40,
           }
         }
-        testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -680,7 +674,7 @@ exports[`renders with placeholder 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="search-bar-clear-icon-container"
+          testID="surface"
         >
           <View
             accessibilityLabel="clear"
@@ -738,7 +732,7 @@ exports[`renders with placeholder 1`] = `
                 ],
               ]
             }
-            testID="search-bar-clear-icon"
+            testID="icon-button"
           >
             <View
               style={
@@ -801,7 +795,6 @@ exports[`renders with text 1`] = `
       "shadowRadius": 0,
     }
   }
-  testID="search-bar-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -821,7 +814,7 @@ exports[`renders with text 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container"
+    testID="surface"
   >
     <View
       collapsable={false}
@@ -841,7 +834,6 @@ exports[`renders with text 1`] = `
           "width": 40,
         }
       }
-      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -863,7 +855,7 @@ exports[`renders with text 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="search-bar-icon-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="search"
@@ -921,7 +913,7 @@ exports[`renders with text 1`] = `
               ],
             ]
           }
-          testID="search-bar-icon"
+          testID="icon-button"
         >
           <View
             style={
@@ -1007,7 +999,6 @@ exports[`renders with text 1`] = `
           false,
         ]
       }
-      testID="search-bar-icon-wrapper"
     >
       <View
         collapsable={false}
@@ -1027,7 +1018,6 @@ exports[`renders with text 1`] = `
             "width": 40,
           }
         }
-        testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1049,7 +1039,7 @@ exports[`renders with text 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="search-bar-clear-icon-container"
+          testID="surface"
         >
           <View
             accessibilityLabel="clear"
@@ -1107,7 +1097,7 @@ exports[`renders with text 1`] = `
                 ],
               ]
             }
-            testID="search-bar-clear-icon"
+            testID="icon-button"
           >
             <View
               style={

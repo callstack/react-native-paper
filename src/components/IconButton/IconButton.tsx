@@ -161,7 +161,6 @@ const IconButton = ({
   return (
     <Surface
       ref={ref}
-      testID={`${testID}-container`}
       style={[
         {
           backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,

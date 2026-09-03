@@ -3,7 +3,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import { red200, white } from '../../theme/colors';
 import Snackbar from '../Snackbar';
 
@@ -95,7 +95,7 @@ it('renders snackbar with View & Text as a child', async () => {
 
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <Snackbar
       visible
       onDismiss={jest.fn()}
@@ -105,9 +105,7 @@ it('animated value changes correctly', async () => {
       Snackbar content
     </Snackbar>
   );
-  expect(screen.getByTestId('snack-bar-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -118,7 +116,5 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('snack-bar-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });

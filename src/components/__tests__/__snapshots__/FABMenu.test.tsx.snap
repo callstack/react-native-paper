@@ -187,7 +187,6 @@ exports[`renders FAB.Menu closed 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -352,7 +351,6 @@ exports[`renders FAB.Menu closed 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -435,7 +433,6 @@ exports[`renders FAB.Menu closed 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -872,7 +869,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -1037,7 +1033,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -1120,7 +1115,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -1557,7 +1551,6 @@ exports[`renders FAB.Menu open 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -1722,7 +1715,6 @@ exports[`renders FAB.Menu open 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -1805,7 +1797,6 @@ exports[`renders FAB.Menu open 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -2242,7 +2233,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Item 1
                   </Text>
@@ -2407,7 +2397,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Item 2
                   </Text>
@@ -2572,7 +2561,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-2-text"
                   >
                     Item 3
                   </Text>
@@ -2737,7 +2725,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-3-text"
                   >
                     Item 4
                   </Text>
@@ -2902,7 +2889,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-4-text"
                   >
                     Item 5
                   </Text>
@@ -3067,7 +3053,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-5-text"
                   >
                     Item 6
                   </Text>
@@ -3150,7 +3135,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -3588,7 +3572,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -3753,7 +3736,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -3836,7 +3818,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -4579,7 +4560,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={
@@ -5016,7 +4996,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -5181,7 +5160,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                         "writingDirection": "ltr",
                       }
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -5264,7 +5242,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
           style={

@@ -48,7 +48,7 @@ describe('Surface', () => {
     });
 
     it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', async () => {
-      await render(
+      const { toJSON } = await render(
         <Surface
           mode="flat"
           elevation={5}
@@ -65,15 +65,10 @@ describe('Surface', () => {
         shadowOffset: { width: 0, height: 4 },
         shadowRadius: 4,
       });
-      expect(screen.getByTestId('surface-test-outer-layer')).not.toHaveStyle({
-        shadowColor: '#000',
-        shadowOpacity: 0.15,
-        shadowOffset: { width: 0, height: 8 },
-        shadowRadius: 12,
-      });
       expect(screen.getByTestId('surface-test')).toHaveStyle({
         backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
+      expect(toJSON()).toMatchSnapshot();
     });
 
     it.each([
@@ -102,16 +97,14 @@ describe('Surface', () => {
       async ({ property, value }) => {
         const style = { [property]: value };
 
-        await render(
+        const { toJSON } = await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(
-          style
-        );
         expect(screen.getByTestId('surface-test')).not.toHaveStyle(style);
+        expect(toJSON()).toMatchSnapshot();
       }
     );
 
@@ -130,16 +123,14 @@ describe('Surface', () => {
       async ({ property, value }) => {
         const style = { [property]: value };
 
-        await render(
+        const { toJSON } = await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(screen.getByTestId('surface-test-outer-layer')).not.toHaveStyle(
-          style
-        );
         expect(screen.getByTestId('surface-test')).toHaveStyle(style);
+        expect(toJSON()).toMatchSnapshot();
       }
     );
 
@@ -155,16 +146,14 @@ describe('Surface', () => {
       async ({ property, value }) => {
         const style = { [property]: value };
 
-        await render(
+        const { toJSON } = await render(
           <Surface testID="surface-test" style={style}>
             {null}
           </Surface>
         );
 
-        expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(
-          style
-        );
         expect(screen.getByTestId('surface-test')).toHaveStyle(style);
+        expect(toJSON()).toMatchSnapshot();
       }
     );
 
@@ -172,43 +161,25 @@ describe('Surface', () => {
       it('should not render rest style', async () => {
         const testID = 'surface-test';
 
-        await render(
+        const { toJSON } = await render(
           <Surface testID={testID} style={styles.restStyle}>
             {null}
           </Surface>
         );
 
-        expect(screen.getByTestId(`${testID}-outer-layer`)).not.toHaveStyle(
-          styles.restStyle
-        );
+        expect(toJSON()).toMatchSnapshot();
       });
 
       it('should render absolute position properties on outer layer', async () => {
         const testID = 'surface-test';
 
-        await render(
+        const { toJSON } = await render(
           <Surface testID={testID} style={styles.absoluteStyles}>
             {null}
           </Surface>
         );
 
-        expect(screen.getByTestId(`${testID}-outer-layer`)).toHaveStyle(
-          styles.absoluteStyles
-        );
-      });
-
-      it('should render absolute position properties on the outer layer', async () => {
-        const testID = 'surface-test';
-
-        await render(
-          <Surface testID={testID} style={styles.absoluteStyles}>
-            {null}
-          </Surface>
-        );
-
-        expect(screen.getByTestId(`${testID}-outer-layer`)).toHaveStyle(
-          styles.absoluteStyles
-        );
+        expect(toJSON()).toMatchSnapshot();
       });
     });
 
@@ -230,7 +201,7 @@ describe('Surface', () => {
 
     it('applies backgroundColor to every layer', async () => {
       const backgroundColor = 'rgb(1, 2, 3)';
-      await render(
+      const { toJSON } = await render(
         <Surface
           testID="surface-test"
           theme={{ colors: { elevation: { level1: backgroundColor } } }}
@@ -239,9 +210,10 @@ describe('Surface', () => {
         </Surface>
       );
 
-      const style = { backgroundColor };
-      expect(screen.getByTestId('surface-test-outer-layer')).toHaveStyle(style);
-      expect(screen.getByTestId('surface-test')).toHaveStyle(style);
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        backgroundColor,
+      });
+      expect(toJSON()).toMatchSnapshot();
     });
 
     describe('children wrapper', () => {

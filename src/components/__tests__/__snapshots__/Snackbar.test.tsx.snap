@@ -1,5 +1,211 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`animated value changes correctly 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    [
+      {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(50, 47, 53, 1)",
+        "borderRadius": 4,
+        "margin": 8,
+        "opacity": 0,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.15,
+        "shadowRadius": 6,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "backgroundColor": "rgba(50, 47, 53, 1)",
+          "borderRadius": 4,
+          "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+        }
+      }
+      testID="snack-bar"
+    >
+      <Text
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
+              },
+              [
+                {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                {
+                  "color": "rgba(245, 239, 247, 1)",
+                },
+              ],
+            ],
+          ]
+        }
+      >
+        Snackbar content
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`animated value changes correctly 2`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    [
+      {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(50, 47, 53, 1)",
+        "borderRadius": 4,
+        "margin": 8,
+        "opacity": 1,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.15,
+        "shadowRadius": 6,
+        "transform": [
+          {
+            "scale": 1.5,
+          },
+        ],
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "backgroundColor": "rgba(50, 47, 53, 1)",
+          "borderRadius": 4,
+          "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+        }
+      }
+      testID="snack-bar"
+    >
+      <Text
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
+              },
+              [
+                {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                {
+                  "color": "rgba(245, 239, 247, 1)",
+                },
+              ],
+            ],
+          ]
+        }
+      >
+        Snackbar content
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders not visible snackbar with content wrapper but no actual content 1`] = `null`;
 
 exports[`renders snackbar with Text as a child 1`] = `
@@ -42,7 +248,6 @@ exports[`renders snackbar with Text as a child 1`] = `
         ],
       }
     }
-    testID="surface-outer-layer"
   >
     <View
       aria-live="polite"
@@ -130,7 +335,6 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         ],
       }
     }
-    testID="surface-outer-layer"
   >
     <View
       aria-live="polite"
@@ -244,7 +448,6 @@ exports[`renders snackbar with action button 1`] = `
         ],
       }
     }
-    testID="surface-outer-layer"
   >
     <View
       aria-live="polite"
@@ -335,7 +538,6 @@ exports[`renders snackbar with action button 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="button-container-outer-layer"
         >
           <View
             collapsable={false}
@@ -357,7 +559,7 @@ exports[`renders snackbar with action button 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container"
+            testID="surface"
           >
             <View
               accessibilityState={
@@ -461,7 +663,6 @@ exports[`renders snackbar with action button 1`] = `
                       ],
                     ]
                   }
-                  testID="button-text"
                 >
                   Undo
                 </Text>
@@ -515,7 +716,6 @@ exports[`renders snackbar with content 1`] = `
         ],
       }
     }
-    testID="surface-outer-layer"
   >
     <View
       aria-live="polite"

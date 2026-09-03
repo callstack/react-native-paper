@@ -81,7 +81,6 @@ const DataTableCell = ({
     >
       <CellContent
         textStyle={textStyle}
-        testID={testID}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {children}
@@ -94,11 +93,7 @@ const CellContent = ({
   children,
   textStyle,
   maxFontSizeMultiplier,
-  testID,
-}: Pick<
-  Props,
-  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
->) => {
+}: Pick<Props, 'children' | 'textStyle' | 'maxFontSizeMultiplier'>) => {
   if (React.isValidElement(children)) {
     return children;
   }
@@ -108,7 +103,6 @@ const CellContent = ({
       style={textStyle}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-      testID={`${testID}-text-container`}
     >
       {children}
     </Text>

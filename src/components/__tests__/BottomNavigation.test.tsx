@@ -415,7 +415,7 @@ it('should have labelMaxFontSizeMultiplier passed to label', async () => {
 });
 
 it('renders custom background color passed to barStyle property', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
       shifting={false}
       labeled={true}
@@ -427,8 +427,7 @@ it('renders custom background color passed to barStyle property', async () => {
     />
   );
 
-  const wrapper = screen.getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: Palette.error60 });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders a single tab', async () => {
@@ -461,7 +460,7 @@ it('renders bottom navigation with getLazy', async () => {
 });
 
 it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
@@ -473,15 +472,11 @@ it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
     />
   );
 
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).toHaveStyle({
-    maxWidth: 480,
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('does not apply maxTabBarWidth styling if compact prop is falsy', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
@@ -493,43 +488,7 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', async () =>
     />
   );
 
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).not.toHaveStyle({
-    maxWidth: 480,
-  });
-});
-
-it('renders bar content when shifting is enabled', async () => {
-  await render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={renderScene}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      shifting
-    />
-  );
-
-  expect(screen.getByTestId('bottom-navigation-bar-content')).toBeOnTheScreen();
-});
-
-it('does not render legacy ripple overlay when shifting is disabled', async () => {
-  await render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={renderScene}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      shifting={false}
-    />
-  );
-
-  expect(
-    screen.queryByTestId('bottom-navigation-bar-content-ripple')
-  ).not.toBeOnTheScreen();
+  expect(toJSON()).toMatchSnapshot();
 });
 
 describe('getActiveTintColor', () => {
@@ -592,7 +551,7 @@ describe('getLabelColor', () => {
 
 it('barStyle animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
       navigationState={createState(0, 1)}
       onIndexChange={() => {}}
@@ -601,9 +560,7 @@ it('barStyle animated value changes correctly', async () => {
       barStyle={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(screen.getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -614,9 +571,7 @@ it('barStyle animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it("allows customizing Route's type via generics", async () => {

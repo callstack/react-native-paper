@@ -295,7 +295,6 @@ const Shell = ({
         shadowStyle,
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
-      testID={`${testID}-container`}
     >
       <Reanimated.View style={[styles.clip, clipStyle]}>
         {overlay}
@@ -332,7 +331,6 @@ const Shell = ({
               labelAnimatedStyle={labelAnimatedStyle}
               labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
               labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-              testID={testID}
             />
           )}
         </TouchableRipple>

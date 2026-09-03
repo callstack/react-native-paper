@@ -1,0 +1,594 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": true,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    testID="drawer-collapsed-item"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "borderRadius": 28,
+            "height": 56,
+            "justifyContent": "center",
+            "transform": [
+              {
+                "scale": 1,
+              },
+            ],
+            "width": 56,
+          }
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "position": "absolute",
+            },
+            {
+              "top": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          star
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DrawerCollapsedItem should display focused icon in inactive state, if unfocused icon is not specified 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    testID="drawer-collapsed-item"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "borderRadius": 28,
+            "height": 56,
+            "justifyContent": "center",
+            "transform": [
+              {
+                "scale": 0.5,
+              },
+            ],
+            "width": 56,
+          }
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "position": "absolute",
+            },
+            {
+              "top": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          star
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if unfocused icon is specified 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    testID="drawer-collapsed-item"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "borderRadius": 28,
+            "height": 56,
+            "justifyContent": "center",
+            "transform": [
+              {
+                "scale": 0.5,
+              },
+            ],
+            "width": 56,
+          }
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "position": "absolute",
+            },
+            {
+              "top": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          star-outline
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DrawerCollapsedItem should have regular outline if label is specified 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    testID="drawer-collapsed-item"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "borderRadius": 28,
+            "height": 32,
+            "justifyContent": "center",
+            "transform": [
+              {
+                "scaleX": 0.5,
+              },
+            ],
+            "width": 56,
+          }
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "position": "absolute",
+            },
+            {
+              "top": 4,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          star-outline
+        </Text>
+      </View>
+      <Text
+        numberOfLines={2}
+        onTextLayout={[Function]}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontFamily": "System",
+                "fontSize": 12,
+                "fontWeight": "500",
+                "letterSpacing": 0.5,
+                "lineHeight": 16,
+              },
+              [
+                {
+                  "marginHorizontal": 12,
+                  "marginTop": 4,
+                  "textAlign": "center",
+                },
+                false,
+                {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.5,
+                  "lineHeight": 16,
+                },
+              ],
+            ],
+          ]
+        }
+      >
+        starred
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DrawerCollapsedItem should have rounded outline if label is not specified 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    testID="drawer-collapsed-item"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "borderRadius": 28,
+            "height": 56,
+            "justifyContent": "center",
+            "transform": [
+              {
+                "scale": 0.5,
+              },
+            ],
+            "width": 56,
+          }
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "position": "absolute",
+            },
+            {
+              "top": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          star-outline
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

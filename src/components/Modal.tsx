@@ -204,7 +204,6 @@ function Modal({
             }),
           },
         ]}
-        testID={`${testID}-backdrop`}
       />
       <View
         style={[
@@ -213,10 +212,8 @@ function Modal({
           style,
         ]}
         pointerEvents="box-none"
-        testID={`${testID}-wrapper`}
       >
         <Surface
-          testID={`${testID}-surface`}
           theme={theme}
           style={[{ opacity }, styles.content, contentContainerStyle]}
           container

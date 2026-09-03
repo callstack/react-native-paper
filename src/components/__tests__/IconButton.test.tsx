@@ -4,7 +4,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
@@ -54,7 +54,7 @@ it('renders icon change animated', async () => {
 });
 
 it('renders icon button with custom border radius', async () => {
-  await render(
+  const { toJSON } = await render(
     <IconButton
       icon="camera"
       testID="icon-button"
@@ -64,13 +64,11 @@ it('renders icon button with custom border radius', async () => {
     />
   );
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
-    borderRadius: 0,
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders icon button with small border radius', async () => {
-  await render(
+  const { toJSON } = await render(
     <IconButton
       icon="camera"
       testID="icon-button"
@@ -80,9 +78,7 @@ it('renders icon button with small border radius', async () => {
     />
   );
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
-    borderRadius: 4,
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 describe('getIconButtonColor - icon color', () => {
@@ -321,16 +317,14 @@ describe('getIconButtonColor - border color', () => {
 
 it('action animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <IconButton
       icon="menu"
       style={[{ transform: [{ scale: value }] }]}
       testID="icon-button"
     />
   );
-  expect(screen.getByTestId('icon-button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -341,7 +335,5 @@ it('action animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('icon-button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });

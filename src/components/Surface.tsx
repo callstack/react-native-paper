@@ -182,11 +182,7 @@ const SurfaceIOS = ({
   }, [style, elevation, backgroundColor, shadowColor, mode, container]);
 
   return (
-    <Animated.View
-      ref={ref}
-      style={outerLayerViewStyles}
-      testID={`${testID}-outer-layer`}
-    >
+    <Animated.View ref={ref} style={outerLayerViewStyles}>
       <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
         {children}
       </Animated.View>

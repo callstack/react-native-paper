@@ -33,7 +33,7 @@ describe('Card', () => {
   });
 
   it('renders an outlined card with custom border radius and color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Card
         mode="outlined"
         theme={{ colors: { outline: 'purple' } }}
@@ -43,10 +43,7 @@ describe('Card', () => {
       </Card>
     );
 
-    expect(screen.getByTestId('card-outline')).toHaveStyle({
-      borderRadius: 32,
-      borderColor: 'purple',
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('renders an outlined card with custom border color', async () => {
@@ -226,7 +223,7 @@ describe('getCardCoverStyle - border radius', () => {
 
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <Card
       mode="outlined"
       accessibilityLabel="card"
@@ -235,9 +232,7 @@ it('animated value changes correctly', async () => {
       {null}
     </Card>
   );
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -248,7 +243,5 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('card-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });

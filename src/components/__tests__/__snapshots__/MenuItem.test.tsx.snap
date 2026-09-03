@@ -159,7 +159,6 @@ exports[`Menu Item renders menu item 1`] = `
               ],
             ]
           }
-          testID="menu-item-title"
         >
           Redo
         </Text>
@@ -323,7 +322,6 @@ exports[`Menu Item renders menu item 1`] = `
               ],
             ]
           }
-          testID="menu-item-title"
         >
           Undo
         </Text>
@@ -487,7 +485,6 @@ exports[`Menu Item renders menu item 1`] = `
               ],
             ]
           }
-          testID="menu-item-title"
         >
           Cut
         </Text>
@@ -651,7 +648,6 @@ exports[`Menu Item renders menu item 1`] = `
               ],
             ]
           }
-          testID="menu-item-title"
         >
           Copy
         </Text>
@@ -775,7 +771,6 @@ exports[`Menu Item renders menu item 1`] = `
               ],
             ]
           }
-          testID="menu-item-title"
         >
           Paste
         </Text>

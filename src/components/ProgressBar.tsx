@@ -212,7 +212,6 @@ const ProgressBar = ({
       >
         {width ? (
           <Animated.View
-            testID={`${testID}-fill`}
             style={[
               styles.progressBar,
               {

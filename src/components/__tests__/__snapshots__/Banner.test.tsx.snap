@@ -1,5 +1,259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`animations animated value changes correctly 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "opacity": 1,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "transform": [
+        {
+          "scale": 1,
+        },
+      ],
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="banner"
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 0,
+          }
+        }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={{}}
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
+            }
+          }
+        >
+          <Text
+            aria-live="polite"
+            role="alert"
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Banner
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`animations animated value changes correctly 2`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "opacity": 1,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "transform": [
+        {
+          "scale": 1.5,
+        },
+      ],
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="banner"
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 0,
+          }
+        }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={{}}
+      >
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
+            }
+          }
+        >
+          <Text
+            aria-live="polite"
+            role="alert"
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Banner
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`render visible banner, with custom theme 1`] = `
 <View
   collapsable={false}
@@ -16,7 +270,6 @@ exports[`render visible banner, with custom theme 1`] = `
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -133,7 +386,6 @@ exports[`render visible banner, with custom theme 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -155,7 +407,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="surface"
             >
               <View
                 accessibilityState={
@@ -261,7 +513,6 @@ exports[`render visible banner, with custom theme 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
                   >
                     first
                   </Text>
@@ -292,7 +543,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -427,7 +677,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -566,7 +815,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -588,7 +836,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="surface"
             >
               <View
                 accessibilityState={
@@ -694,7 +942,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
                   >
                     first
                   </Text>
@@ -725,7 +972,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -842,7 +1088,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -864,7 +1109,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="surface"
             >
               <View
                 accessibilityState={
@@ -970,7 +1215,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
                   >
                     first
                   </Text>
@@ -994,7 +1238,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -1016,7 +1259,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="surface"
             >
               <View
                 accessibilityState={
@@ -1122,7 +1365,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
                   >
                     second
                   </Text>
@@ -1153,7 +1395,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}
@@ -1298,7 +1539,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       "shadowRadius": 3,
     }
   }
-  testID="surface-outer-layer"
 >
   <View
     collapsable={false}

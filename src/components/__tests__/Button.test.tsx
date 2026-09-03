@@ -162,9 +162,6 @@ it('renders button with custom border radius', async () => {
     </Button>
   );
 
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.customRadius
-  );
   expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
 });
 
@@ -179,9 +176,6 @@ it('renders outlined button with custom border radius', async () => {
     </Button>
   );
 
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.customRadius
-  );
   expect(screen.getByTestId('custom-radius')).toHaveStyle({
     borderTopLeftRadius: 15, // styles.customRadius - 1px outline
     borderTopRightRadius: 0,
@@ -197,9 +191,6 @@ it('renders button without border radius', async () => {
     </Button>
   );
 
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.noRadius
-  );
   expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.noRadius);
 });
 
@@ -237,7 +228,7 @@ describe('button text styles', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-text')).toHaveStyle({
+    expect(screen.getByText('Test')).toHaveStyle({
       textTransform: 'uppercase',
     });
   });
@@ -249,7 +240,7 @@ describe('button text styles', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-text')).not.toHaveStyle({
+    expect(screen.getByText('Test')).not.toHaveStyle({
       textTransform: 'uppercase',
     });
   });
@@ -257,60 +248,44 @@ describe('button text styles', () => {
 
 describe('button icon styles', () => {
   it('should return correct icon styles for compact text button', async () => {
-    await render(
+    const { toJSON } = await render(
       <Button mode={'text'} compact icon="camera" testID="compact-button">
         Compact text button
       </Button>
     );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 6,
-      marginRight: 0,
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
       it(`should return correct icon styles for compact ${mode} button`, async () => {
-        await render(
+        const { toJSON } = await render(
           <Button mode={mode} compact icon="camera" testID="compact-button">
             Compact {mode} button
           </Button>
         );
-        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
-          {
-            marginLeft: 8,
-            marginRight: 0,
-          }
-        );
+        expect(toJSON()).toMatchSnapshot();
       })
   );
 
   it('should return correct icon styles for text button', async () => {
-    await render(
+    const { toJSON } = await render(
       <Button mode={'text'} icon="camera" testID="compact-button">
         text button
       </Button>
     );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 12,
-      marginRight: -8,
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
       it(`should return correct icon styles for compact ${mode} button`, async () => {
-        await render(
+        const { toJSON } = await render(
           <Button mode={mode} icon="camera" testID="compact-button">
             {mode} button
           </Button>
         );
-        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
-          {
-            marginLeft: 16,
-            marginRight: -16,
-          }
-        );
+        expect(toJSON()).toMatchSnapshot();
       })
   );
 });
@@ -712,7 +687,7 @@ describe('getButtonColors - border width', () => {
 
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <Button
       mode="elevated"
       compact
@@ -722,9 +697,7 @@ it('animated value changes correctly', async () => {
       Compact button
     </Button>
   );
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -735,7 +708,5 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });

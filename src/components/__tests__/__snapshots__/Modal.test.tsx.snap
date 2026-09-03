@@ -1,0 +1,3197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal animated value changes correctly 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+          "transform": [
+            {
+              "scale": 1,
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal animated value changes correctly 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+          "transform": [
+            {
+              "scale": 1.5,
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal by default should receive appropriate top and bottom insets 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via Android back button will run the animation but not fade out 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via Android back button will run the animation but not fade out 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via Android back button will run the animation but not fade out 3`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via touching backdrop will run the animation but not fade out 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via touching backdrop will run the animation but not fade out 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open as non-dismissible modal if closed via touching backdrop will run the animation but not fade out 3`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open if backdrop touched should invoke the onDismiss function immediately 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open if backdrop touched should invoke the onDismiss function immediately 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open if closed via Android back button invokes onDismiss 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open if closed via Android back button invokes onDismiss 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open if closed via Android back button invokes onDismiss 3`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open runs the closing animation if visible toggled 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open runs the closing animation if visible toggled 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="none"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when open runs the closing animation if visible toggled 3`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="none"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes again during the open/close animation while closing, back to true (visible) should keep the modal open 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes again during the open/close animation while closing, back to true (visible) should keep the modal open 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="none"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes again during the open/close animation while closing, back to true (visible) should keep the modal open 3`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes again during the open/close animation while opening, back to false (hidden) should keep the modal closed 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 0,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from false to true (closed to open) should run fade-in animation on opening 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 0,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from false to true (closed to open) should run fade-in animation on opening 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from true to false (open to closed) should close even if the dialog is not dismissible 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from true to false (open to closed) should close even if the dialog is not dismissible 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="none"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from true to false (open to closed) should run fade-out animation on closing 1`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="auto"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal when visible prop changes from true to false (open to closed) should run fade-out animation on closing 2`] = `
+<View
+  aria-live="polite"
+  aria-modal={true}
+  collapsable={false}
+  onAccessibilityEscape={[Function]}
+  pointerEvents="none"
+  style={
+    {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessibilityLabel="Close modal"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      {
+        "backgroundColor": "rgba(0, 0, 0, 1)",
+        "flex": 1,
+        "opacity": 0.32,
+      }
+    }
+  />
+  <View
+    pointerEvents="box-none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "marginBottom": 44,
+          "marginTop": 37,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.15,
+          "shadowRadius": 3,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "transparent",
+            "flex": undefined,
+            "justifyContent": "center",
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.3,
+            "shadowRadius": 2,
+          }
+        }
+        testID="surface"
+      />
+    </View>
+  </View>
+</View>
+`;

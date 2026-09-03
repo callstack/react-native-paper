@@ -192,57 +192,39 @@ describe('renderAppbarContent', () => {
 
 describe('AppbarAction', () => {
   it('should be rendered with default theme color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(
-      getTheme().colors.onSurfaceVariant
-    );
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should be rendered with specific theme color if is leading', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" isLeading />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should be rendered with custom color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe('purple');
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should render AppbarBackAction with custom color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarBackActionIcon = screen.getByTestId('cross-fade-icon-current')
-      .props.children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarBackActionIcon.props.color).toBe('purple');
+    expect(toJSON()).toMatchSnapshot();
   });
 });
 
@@ -255,7 +237,7 @@ describe('AppbarContent', () => {
         </Appbar>
       );
 
-      expect(screen.getByTestId('appbar-content-title-text')).toHaveStyle(
+      expect(screen.getByText('Title')).toHaveStyle(
         getTheme().fonts[modeTextVariant[mode]]
       );
     })
@@ -304,14 +286,12 @@ describe('getAppbarColors', () => {
 describe('animated value changes correctly', () => {
   it('appbar animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    await render(
+    const { toJSON } = await render(
       <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
         <Appbar.Action icon="menu" />
       </Appbar>
     );
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -323,14 +303,12 @@ describe('animated value changes correctly', () => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(screen.getByTestId('appbar-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('action animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action
           icon="menu"
@@ -339,11 +317,7 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -355,16 +329,12 @@ describe('animated value changes correctly', () => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(
-      screen.getByTestId('appbar-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('back action animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.BackAction
           style={[{ transform: [{ scale: value }] }]}
@@ -372,11 +342,7 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -388,16 +354,12 @@ describe('animated value changes correctly', () => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(
-      screen.getByTestId('appbar-back-action-container-outer-layer')
-    ).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('header animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    await render(
+    const { toJSON } = await render(
       <SafeAreaProvider>
         <Appbar.Header
           style={[{ transform: [{ scale: value }] }]}
@@ -407,9 +369,7 @@ describe('animated value changes correctly', () => {
         </Appbar.Header>
       </SafeAreaProvider>
     );
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -421,9 +381,7 @@ describe('animated value changes correctly', () => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(screen.getByTestId('appbar-header-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('header bottom border radius applied correctly', async () => {
@@ -436,7 +394,7 @@ describe('animated value changes correctly', () => {
         </Appbar.Header>
       </SafeAreaProvider>
     );
-    expect(screen.getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+    expect(screen.getByTestId('appbar-header')).toHaveStyle(style);
   });
 
   describe('getAppbarBorders', () => {

@@ -161,7 +161,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -185,7 +184,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -366,7 +365,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -390,7 +388,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -663,7 +661,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -687,7 +684,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -868,7 +865,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -892,7 +888,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -1342,7 +1338,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1366,7 +1361,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -1547,7 +1542,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1571,7 +1565,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -1825,7 +1819,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1849,7 +1842,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -2030,7 +2023,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             "width": 24,
           }
         }
-        testID="icon-button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -2054,7 +2046,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="surface"
         >
           <View
             accessibilityState={

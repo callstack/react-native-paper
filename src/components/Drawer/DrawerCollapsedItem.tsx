@@ -189,13 +189,9 @@ const DrawerCollapsedItem = ({
               },
               style,
             ]}
-            testID={`${testID}-outline`}
           />
 
-          <View
-            style={[styles.icon, { top: iconPadding }]}
-            testID={`${testID}-container`}
-          >
+          <View style={[styles.icon, { top: iconPadding }]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (

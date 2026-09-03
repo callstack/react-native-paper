@@ -11,7 +11,7 @@ import {
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', async () => {
@@ -359,7 +359,7 @@ describe('animations', () => {
 
   it('animated value changes correctly', async () => {
     const value = new Animated.Value(1);
-    await render(
+    const { toJSON } = await render(
       <Banner
         visible
         testID="banner"
@@ -368,9 +368,7 @@ describe('animations', () => {
         Banner
       </Banner>
     );
-    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -382,8 +380,6 @@ describe('animations', () => {
       jest.runAllTimers();
     });
 
-    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 });

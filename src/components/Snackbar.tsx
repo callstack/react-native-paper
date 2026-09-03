@@ -351,7 +351,6 @@ const Snackbar = ({
                 }
                 aria-label={iconAccessibilityLabel}
                 style={styles.icon}
-                testID={`${testID}-icon`}
               />
             ) : null}
           </View>

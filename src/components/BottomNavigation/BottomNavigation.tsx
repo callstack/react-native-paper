@@ -578,7 +578,6 @@ const BottomNavigation = <Route extends BaseRoute>({
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}
-        testID={`${testID}-bar`}
         theme={theme}
       />
     </View>

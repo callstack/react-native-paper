@@ -93,12 +93,10 @@ it('has progressbar role', async () => {
 });
 
 it('renders progress bar with custom style of filled part', async () => {
-  await render(
+  const view = await render(
     <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />
   );
   await triggerLayout();
 
-  expect(screen.getByTestId('progress-bar-fill')).toHaveStyle({
-    borderRadius: 4,
-  });
+  expect(view.toJSON()).toMatchSnapshot();
 });

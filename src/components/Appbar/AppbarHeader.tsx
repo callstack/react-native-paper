@@ -124,7 +124,6 @@ const AppbarHeader = ({
 
   return (
     <View
-      testID={`${testID}-root-layer`}
       style={[
         {
           backgroundColor,

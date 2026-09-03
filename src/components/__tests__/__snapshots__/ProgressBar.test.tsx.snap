@@ -40,7 +40,6 @@ exports[`renders colored progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -86,7 +85,6 @@ exports[`renders hidden progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -129,7 +127,52 @@ exports[`renders indeterminate progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
+    />
+  </View>
+</View>
+`;
+
+exports[`renders progress bar with custom style of filled part 1`] = `
+<View
+  accessible={true}
+  aria-busy={true}
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={20}
+  onLayout={[Function]}
+  role="progressbar"
+  style={false}
+  testID="progress-bar"
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(231, 224, 236, 1)",
+        "height": 4,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderRadius": 4,
+          "flex": 1,
+          "transform": [
+            {
+              "translateX": -50,
+            },
+            {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
     />
   </View>
 </View>
@@ -175,7 +218,6 @@ exports[`renders progress bar with specific progress 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>

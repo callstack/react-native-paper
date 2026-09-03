@@ -1,68 +1,62 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { render, screen } from '../../../test-utils';
+import { render } from '../../../test-utils';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
 
 describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', async () => {
-    await render(
-      <DrawerCollapsedItem
-        label="starred"
-        focusedIcon="star"
-        unfocusedIcon="star-outline"
-      />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem
+          label="starred"
+          focusedIcon="star"
+          unfocusedIcon="star-outline"
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('drawer-collapsed-item-outline')).toHaveStyle({
-      height: 32,
-    });
+    expect(tree).toMatchSnapshot();
   });
 
   it('should have rounded outline if label is not specified', async () => {
-    await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('drawer-collapsed-item-outline')).toHaveStyle({
-      height: 56,
-    });
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display unfocused icon in inactive state, if unfocused icon is specified', async () => {
-    await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      )
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star-outline');
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display focused icon in inactive state, if unfocused icon is not specified', async () => {
-    await render(<DrawerCollapsedItem focusedIcon="star" />);
+    const tree = (
+      await render(<DrawerCollapsedItem focusedIcon="star" />)
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star');
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display focused icon in active state', async () => {
-    await render(
-      <DrawerCollapsedItem
-        active
-        focusedIcon="star"
-        unfocusedIcon="star-outline"
-      />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem
+          active
+          focusedIcon="star"
+          unfocusedIcon="star-outline"
+        />
+      )
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star');
+    expect(tree).toMatchSnapshot();
   });
 });

@@ -66,25 +66,28 @@ describe('DataTable.Cell', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table cell with text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
-    );
+  it('renders data table cell with text content', async () => {
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
+      )
+    ).toJSON();
 
     expect(screen.getByText('Table cell')).toBeOnTheScreen();
-    expect(screen.getByTestId('table-cell-text-container')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table cell children without text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">
-        <Checkbox status="checked" testID="table-cell-checkbox" />
-      </DataTable.Cell>
-    );
+  it('renders data table cell children without wrapping text component', async () => {
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">
+          <Checkbox status="checked" testID="table-cell-checkbox" />
+        </DataTable.Cell>
+      )
+    ).toJSON();
 
-    expect(
-      screen.queryByTestId('table-cell-text-container')
-    ).not.toBeOnTheScreen();
+    expect(screen.getByTestId('table-cell-checkbox')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 });
 

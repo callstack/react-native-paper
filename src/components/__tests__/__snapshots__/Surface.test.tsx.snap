@@ -1,0 +1,1445 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Surface on iOS applies alignSelf to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies backgroundColor to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgb(4, 5, 6)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgb(4, 5, 6)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies backgroundColor to every layer 2`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgb(1, 2, 3)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgb(1, 2, 3)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderBottomLeftRadius to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "borderBottomLeftRadius": 3,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderBottomLeftRadius": 3,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderBottomRightRadius to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "borderBottomRightRadius": 4,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderBottomRightRadius": 4,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderColor to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderColor": "black",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderRadius to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "borderRadius": 3,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderRadius": 3,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderTopLeftRadius to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "borderTopLeftRadius": 1,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderTopLeftRadius": 1,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderTopRightRadius to every layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "borderTopRightRadius": 2,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderTopRightRadius": 2,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies borderWidth to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "borderWidth": 2,
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies bottom to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "bottom": 1.3,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies end to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "end": 1.6,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies flex to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "flex": 6,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": 1,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies height to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "height": "32.5%",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": 1,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies left to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "left": 1.4,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies margin to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "margin": 13,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginBottom to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginBottom": 13.4,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginHorizontal to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginHorizontal": 13.5,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginLeft to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginLeft": 13.1,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginRight to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginRight": 13.2,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginTop to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginTop": 13.3,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies marginVertical to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "marginVertical": 13.6,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies opacity to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "opacity": 0.7,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies padding to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "padding": 12,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingBottom to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingBottom": 12.4,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingHorizontal to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingHorizontal": 12.5,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingLeft to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingLeft": 12.1,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingRight to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingRight": 12.2,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingTop to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingTop": 12.3,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies paddingVertical to inner layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "paddingVertical": 12.6,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies position to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "position": "absolute",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies right to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "right": 1.2,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies start to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "start": 1.5,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies top to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "top": 1.1,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies transform to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "transform": [
+        {
+          "scale": 1.02,
+        },
+      ],
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS applies width to outer layer only 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "width": "42%",
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS outer layer should not render rest style 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignContent": "center",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "flexDirection": "row",
+        "padding": 10,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS outer layer should render absolute position properties on outer layer 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(247, 242, 250, 1)",
+      "bottom": 10,
+      "end": 20,
+      "left": 30,
+      "position": "absolute",
+      "right": 40,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+      "start": 50,
+      "top": 60,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(247, 242, 250, 1)",
+        "flex": undefined,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 2,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;
+
+exports[`Surface on iOS should render Surface with appropriate bg color but without shadow, if mode is set to "flat" 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(230, 224, 233, 1)",
+    }
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "backgroundColor": "rgba(230, 224, 233, 1)",
+        "flex": undefined,
+      }
+    }
+    testID="surface-test"
+  />
+</View>
+`;

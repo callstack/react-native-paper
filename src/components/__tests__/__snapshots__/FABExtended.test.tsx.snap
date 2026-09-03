@@ -35,7 +35,6 @@ exports[`renders extended FAB collapsed 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -174,7 +173,6 @@ exports[`renders extended FAB collapsed 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>
@@ -274,7 +272,6 @@ exports[`renders extended FAB expanded 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -413,7 +410,6 @@ exports[`renders extended FAB expanded 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>
@@ -513,7 +509,6 @@ exports[`renders extended FAB large size 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -652,7 +647,6 @@ exports[`renders extended FAB large size 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>
@@ -752,7 +746,6 @@ exports[`renders extended FAB medium size 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -891,7 +884,6 @@ exports[`renders extended FAB medium size 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>
@@ -991,7 +983,6 @@ exports[`renders extended FAB not visible 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -1130,7 +1121,6 @@ exports[`renders extended FAB not visible 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>
@@ -1230,7 +1220,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         },
       ]
     }
-    testID="extended-floating-action-button-container"
   >
     <View
       style={
@@ -1369,7 +1358,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
                   "writingDirection": "ltr",
                 }
               }
-              testID="extended-floating-action-button-text"
             >
               New message
             </Text>

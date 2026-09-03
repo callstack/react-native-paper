@@ -292,7 +292,6 @@ const Chip = ({
       ]}
       elevation={elevationStyle}
       {...rest}
-      testID={`${testID}-container`}
       theme={theme}
       container
     >

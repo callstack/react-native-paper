@@ -211,14 +211,13 @@ const SegmentedButtonItem = ({
         >
           {showCheckedIcon ? (
             <Animated.View
-              testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
             >
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
+            <Animated.View style={iconStyle}>
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
@@ -228,7 +227,6 @@ const SegmentedButtonItem = ({
             selectable={false}
             numberOfLines={1}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
           >
             {label}
           </Text>

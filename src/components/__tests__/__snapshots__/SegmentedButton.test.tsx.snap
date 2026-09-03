@@ -134,7 +134,6 @@ exports[`renders segmented button 1`] = `
               ],
             ]
           }
-          testID="undefined-label"
         />
       </View>
     </View>
@@ -260,8 +259,2131 @@ exports[`renders segmented button 1`] = `
               ],
             ]
           }
-          testID="undefined-label"
         />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should have \`accessibilityState={ checked: true }\` when selected show selected check icon should be shown 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 0,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            check
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderEndWidth": 0,
+            "borderRadius": 0,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Transit
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should not render icon when icon prop is not passed 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+      testID="walking-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+      testID="driving-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should not render icon when icon prop is passed along with label, button is checked, showSelectedCheck is true 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+      testID="walking-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 0,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            check
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+      testID="driving-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            car
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should render icon when icon prop is passed 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+      testID="walking-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 0,
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            walk
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+      testID="driving-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 0,
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            car
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should render icon when icon prop is passed along with label, button is checked, showSelectedCheck is false 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+      testID="walking-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            walk
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+      testID="driving-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            car
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Driving
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`should render icon when icon prop is passed along with label, no matter if button is checked 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomRightRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
+          "borderRadius": 20,
+          "borderTopRightRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": true,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
+            "borderRadius": 20,
+            "borderTopRightRadius": 0,
+          },
+        ]
+      }
+      testID="walking-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            walk
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Walking
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "borderBottomLeftRadius": 0,
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 20,
+          "borderTopLeftRadius": 0,
+          "borderWidth": 1,
+        },
+        {
+          "borderStyle": "solid",
+          "flex": 1,
+          "minWidth": 76,
+        },
+        [
+          undefined,
+          {},
+        ],
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": false,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 0,
+            "borderRadius": 20,
+            "borderTopLeftRadius": 0,
+          },
+        ]
+      }
+      testID="driving-button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 16,
+              "paddingVertical": 9,
+            },
+            {
+              "opacity": 1,
+              "paddingVertical": 9,
+            },
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "marginRight": 5,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 27, 32, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            car
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Driving
+        </Text>
       </View>
     </View>
   </View>

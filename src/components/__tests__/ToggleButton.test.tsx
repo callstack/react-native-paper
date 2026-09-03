@@ -4,7 +4,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 
@@ -58,7 +58,7 @@ describe('getToggleButtonColor', () => {
 
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <ToggleButton
       disabled
       status="unchecked"
@@ -67,11 +67,7 @@ it('animated value changes correctly', async () => {
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(screen.getByTestId('toggle-button-container-outer-layer')).toHaveStyle(
-    {
-      transform: [{ scale: 1 }],
-    }
-  );
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -82,9 +78,5 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('toggle-button-container-outer-layer')).toHaveStyle(
-    {
-      transform: [{ scale: 1.5 }],
-    }
-  );
+  expect(toJSON()).toMatchSnapshot();
 });

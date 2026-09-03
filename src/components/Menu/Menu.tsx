@@ -655,7 +655,6 @@ const Menu = ({
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}
-            testID={`${testID}-view`}
           >
             <Animated.View
               pointerEvents={pointerEvents}
@@ -675,7 +674,7 @@ const Menu = ({
                   contentStyle,
                 ]}
                 elevation={elevation}
-                testID={`${testID}-surface`}
+                testID={testID}
                 theme={theme}
                 container
               >

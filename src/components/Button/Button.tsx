@@ -319,7 +319,6 @@ const Button = ({
     <Surface
       {...rest}
       ref={ref}
-      testID={`${testID}-container`}
       style={
         [
           styles.button,
@@ -366,7 +365,7 @@ const Button = ({
       >
         <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
-            <View style={iconStyle} testID={`${testID}-icon-container`}>
+            <View style={iconStyle}>
               <Icon
                 source={icon}
                 size={customLabelSize ?? iconSize}
@@ -393,7 +392,6 @@ const Button = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            testID={`${testID}-text`}
             style={[
               styles.label,
               isMode('text')

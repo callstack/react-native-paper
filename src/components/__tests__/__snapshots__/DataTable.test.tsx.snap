@@ -65,9 +65,313 @@ exports[`DataTable.Cell renders data table cell 1`] = `
         undefined,
       ]
     }
-    testID="undefined-text-container"
   >
     Cupcake
+  </Text>
+</View>
+`;
+
+exports[`DataTable.Cell renders data table cell children without wrapping text component 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        },
+        undefined,
+        undefined,
+      ],
+    ]
+  }
+  testID="table-cell"
+>
+  <View
+    accessibilityLiveRegion="polite"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": true,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    centered={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="checkbox"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+    testID="table-cell-checkbox"
+  >
+    <View
+      pointerEvents="none"
+      style={
+        {
+          "alignItems": "center",
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        }
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 2,
+              "height": 18,
+              "justifyContent": "center",
+              "overflow": "hidden",
+              "width": 18,
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 2,
+                "borderWidth": 2,
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderColor": "rgba(73, 69, 79, 1)",
+              },
+              {
+                "opacity": 0,
+              },
+            ]
+          }
+        />
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 2,
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "backgroundColor": "rgba(103, 80, 164, 1)",
+              },
+              {
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            [
+              {
+                "height": 18,
+                "left": 0,
+                "overflow": "hidden",
+                "position": "absolute",
+                "top": 0,
+              },
+              {
+                "opacity": 1,
+                "width": 18,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "height": 18,
+                "justifyContent": "center",
+                "width": 18,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "borderBottomWidth": 2,
+                    "borderLeftWidth": 2,
+                    "height": 6,
+                    "transform": [
+                      {
+                        "rotate": "-45deg",
+                      },
+                      {
+                        "translateY": -1,
+                      },
+                      {
+                        "translateX": 1,
+                      },
+                    ],
+                    "width": 11,
+                  },
+                  {
+                    "borderColor": "rgba(255, 255, 255, 1)",
+                  },
+                  null,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`DataTable.Cell renders data table cell with text content 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        },
+        undefined,
+        undefined,
+      ],
+    ]
+  }
+  testID="table-cell"
+>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(29, 27, 32, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        undefined,
+      ]
+    }
+  >
+    Table cell
   </Text>
 </View>
 `;
@@ -139,7 +443,6 @@ exports[`DataTable.Cell renders right aligned data table cell 1`] = `
         undefined,
       ]
     }
-    testID="undefined-text-container"
   >
     356
   </Text>
@@ -397,7 +700,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -419,7 +721,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-left"
@@ -537,7 +839,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -559,7 +860,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-right"
@@ -735,7 +1036,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -757,7 +1057,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="page-first"
@@ -875,7 +1175,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -897,7 +1196,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-left"
@@ -1015,7 +1314,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -1037,7 +1335,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-right"
@@ -1155,7 +1453,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -1177,7 +1474,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="page-last"
@@ -1353,7 +1650,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -1375,7 +1671,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-left"
@@ -1493,7 +1789,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -1515,7 +1810,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-right"
@@ -1697,7 +1992,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "shadowRadius": 0,
           }
         }
-        testID="button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1720,7 +2014,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "textAlign": "center",
             }
           }
-          testID="button-container"
+          testID="surface"
         >
           <View
             accessibilityState={
@@ -1796,7 +2090,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     false,
                   ]
                 }
-                testID="button-icon-container"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -1873,7 +2166,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     ],
                   ]
                 }
-                testID="button-text"
               >
                 2
               </Text>
@@ -1939,7 +2231,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -1961,7 +2252,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="page-first"
@@ -2079,7 +2370,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -2101,7 +2391,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-left"
@@ -2219,7 +2509,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -2241,7 +2530,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="chevron-right"
@@ -2359,7 +2648,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -2381,7 +2669,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="surface"
       >
         <View
           accessibilityLabel="page-last"

@@ -87,6 +87,7 @@ const CrossFadeIcon = ({
 
   return (
     <View
+      testID={testID}
       style={[
         styles.content,
         {
@@ -104,7 +105,6 @@ const CrossFadeIcon = ({
               transform: [{ rotate: rotatePrev }],
             },
           ]}
-          testID={`${testID}-previous`}
         >
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
@@ -117,7 +117,6 @@ const CrossFadeIcon = ({
             transform: [{ rotate: rotateNext }],
           },
         ]}
-        testID={`${testID}-current`}
       >
         <Icon source={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>

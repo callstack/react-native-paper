@@ -1,5 +1,293 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`animated value changes correctly 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(243, 237, 247, 1)",
+      "borderRadius": 4,
+      "height": 42,
+      "margin": 0,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+      "transform": [
+        {
+          "scale": 1,
+        },
+      ],
+      "width": 42,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 4,
+        "borderWidth": 0,
+        "elevation": 0,
+        "flex": 1,
+        "overflow": "hidden",
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
+    }
+    testID="surface"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          false,
+          [
+            {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            undefined,
+          ],
+        ]
+      }
+      testID="toggle-button"
+    >
+      <View
+        style={
+          {
+            "opacity": 0.38,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          heart
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`animated value changes correctly 2`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "rgba(243, 237, 247, 1)",
+      "borderRadius": 4,
+      "height": 42,
+      "margin": 0,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+      "transform": [
+        {
+          "scale": 1.5,
+        },
+      ],
+      "width": 42,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 4,
+        "borderWidth": 0,
+        "elevation": 0,
+        "flex": 1,
+        "overflow": "hidden",
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
+    }
+    testID="surface"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          false,
+          [
+            {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            undefined,
+          ],
+        ]
+      }
+      testID="toggle-button"
+    >
+      <View
+        style={
+          {
+            "opacity": 0.38,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          heart
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders disabled toggle button 1`] = `
 <View
   collapsable={false}
@@ -19,7 +307,6 @@ exports[`renders disabled toggle button 1`] = `
       "width": 42,
     }
   }
-  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -41,7 +328,7 @@ exports[`renders disabled toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container"
+    testID="surface"
   >
     <View
       accessibilityState={
@@ -159,7 +446,6 @@ exports[`renders toggle button 1`] = `
       "width": 42,
     }
   }
-  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -181,7 +467,7 @@ exports[`renders toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container"
+    testID="surface"
   >
     <View
       accessibilityState={
@@ -299,7 +585,6 @@ exports[`renders unchecked toggle button 1`] = `
       "width": 42,
     }
   }
-  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
@@ -321,7 +606,7 @@ exports[`renders unchecked toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container"
+    testID="surface"
   >
     <View
       accessibilityState={

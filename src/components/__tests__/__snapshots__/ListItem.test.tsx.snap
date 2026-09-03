@@ -1,5 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders list item with custom content style 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "paddingRight": 24,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+  testID="list-item"
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "paddingLeft": 16,
+          },
+          {
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+          {
+            "paddingLeft": 0,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 16,
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        onTextLayout={[Function]}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 14,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Item description
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders list item with custom description 1`] = `
 <View
   accessibilityState={
@@ -71,7 +215,6 @@ exports[`renders list item with custom description 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -132,7 +275,6 @@ exports[`renders list item with custom description 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="chip-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -154,7 +296,7 @@ exports[`renders list item with custom description 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="chip-container"
+              testID="surface"
             >
               <View
                 accessibilityState={
@@ -397,7 +539,6 @@ exports[`renders list item with custom title and description styles 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -545,7 +686,6 @@ exports[`renders list item with left and right items 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -779,7 +919,6 @@ exports[`renders list item with left item 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -888,7 +1027,6 @@ exports[`renders list item with right item 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -1000,7 +1138,6 @@ exports[`renders list item with title and description 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -1141,7 +1278,6 @@ exports[`renders with a description with typeof number 1`] = `
           undefined,
         ]
       }
-      testID="list-item-content"
     >
       <Text
         numberOfLines={1}

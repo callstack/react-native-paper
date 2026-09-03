@@ -47,10 +47,10 @@ describe('Menu Item', () => {
       />
     );
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('menu-item-title').props.maxFontSizeMultiplier
-    ).toBe(labelMaxFontSizeMultiplier);
+    expect(screen.getByText('Cut')).toHaveProp(
+      'maxFontSizeMultiplier',
+      labelMaxFontSizeMultiplier
+    );
   });
 
   it('accepts aria-checked prop', async () => {

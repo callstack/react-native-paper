@@ -5,6 +5,7 @@ import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
+import { shadowLayers } from '../../theme/tokens/sys/elevation';
 import type { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
@@ -93,7 +94,7 @@ it('renders menu with content styles', async () => {
       </Portal.Host>
     );
 
-    expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    expect(screen.getByTestId('menu')).toHaveStyle({
       backgroundColor: theme.colors.elevation[`level${elevation}`],
     });
   })
@@ -130,7 +131,7 @@ it('uses the default anchorPosition of top', async () => {
     );
   }
 
-  const { rerender } = await render(makeMenu(false));
+  const { rerender, toJSON } = await render(makeMenu(false));
 
   // You must update instead of creating directly and using it because
   // componentDidUpdate isn't called by default in jest. Forcing the update
@@ -143,13 +144,12 @@ it('uses the default anchorPosition of top', async () => {
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
-    expect(menu).toHaveStyle({
-      position: 'absolute',
-      left: 100,
-      top: 100,
-    });
+    const json = JSON.stringify(toJSON());
+    expect(json).toContain('"left":100');
+    expect(json).toContain('"top":100');
   });
+
+  expect(toJSON()).toMatchSnapshot();
 
   measureSpy.mockRestore();
   dimensionsSpy.mockRestore();
@@ -187,7 +187,7 @@ it('respects anchorPosition bottom', async () => {
     );
   }
 
-  const { rerender } = await render(makeMenu(false));
+  const { rerender, toJSON } = await render(makeMenu(false));
 
   await act(async () => {
     await rerender(makeMenu(true));
@@ -196,13 +196,12 @@ it('respects anchorPosition bottom', async () => {
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
-    expect(menu).toHaveStyle({
-      position: 'absolute',
-      left: 100,
-      top: 132,
-    });
+    const json = JSON.stringify(toJSON());
+    expect(json).toContain('"left":100');
+    expect(json).toContain('"top":132');
   });
+
+  expect(toJSON()).toMatchSnapshot();
 
   measureSpy.mockRestore();
   dimensionsSpy.mockRestore();
@@ -210,7 +209,7 @@ it('respects anchorPosition bottom', async () => {
 
 it('animated value changes correctly', async () => {
   const value = new Animated.Value(1);
-  await render(
+  const { toJSON } = await render(
     <Portal.Host>
       <Menu
         visible
@@ -223,9 +222,7 @@ it('animated value changes correctly', async () => {
       </Menu>
     </Portal.Host>
   );
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -236,10 +233,15 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
+
+const menuContentShadow = {
+  shadowColor: getTheme().colors.shadow,
+  shadowOpacity: shadowLayers[1].shadowOpacity,
+  shadowOffset: { width: 0, height: shadowLayers[1].height[2] },
+  shadowRadius: shadowLayers[1].shadowRadius[2],
+};
 
 it('renders menu with mode "elevated"', async () => {
   await render(
@@ -256,14 +258,7 @@ it('renders menu with mode "elevated"', async () => {
     </Portal.Host>
   );
 
-  const menuSurface = screen.getByTestId('menu-surface');
-
-  // Get flattened styles
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  const styles = StyleSheet.flatten(menuSurface.props.style);
-
-  expect(styles).toHaveProperty('shadowColor');
-  expect(styles).toHaveProperty('shadowOpacity');
+  expect(screen.getByTestId('menu')).toHaveStyle(menuContentShadow);
 });
 
 it('renders menu with mode "flat"', async () => {
@@ -281,12 +276,5 @@ it('renders menu with mode "flat"', async () => {
     </Portal.Host>
   );
 
-  const menuSurface = screen.getByTestId('menu-surface');
-
-  // Get flattened styles
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  const styles = StyleSheet.flatten(menuSurface.props.style);
-
-  expect(styles).not.toHaveProperty('shadowColor');
-  expect(styles).not.toHaveProperty('shadowOpacity');
+  expect(screen.getByTestId('menu')).not.toHaveStyle(menuContentShadow);
 });
