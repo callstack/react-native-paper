@@ -117,7 +117,8 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
  *
  * ## Theming
  * Customize by overriding these `theme.colors` roles:
- * - `primary` / `onPrimary`: selected track + icon / selected handle
+ * - `primary` / `onPrimary`: selected track / selected handle
+ * - `onPrimaryContainer`: selected icon
  * - `primaryContainer`: selected handle on hover, press
  * - `surfaceContainerHighest`: unselected track + icon
  * - `outline`: unselected resting handle, unselected track outline

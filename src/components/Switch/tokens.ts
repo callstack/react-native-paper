@@ -29,7 +29,7 @@ const colors = {
   unselectedHoverHandleColor: 'onSurfaceVariant',
   unselectedPressedHandleColor: 'onSurfaceVariant',
 
-  selectedIconColor: 'primary',
+  selectedIconColor: 'onPrimaryContainer',
   unselectedIconColor: 'surfaceContainerHighest',
 
   selectedTrackColor: 'primary',
