@@ -175,14 +175,14 @@ describe('getSplitButtonColors', () => {
     expect(disabled.borderColor).toBe(theme.colors.outlineVariant);
   });
 
-  it('uses outline-variant content color for a disabled outlined split button', () => {
+  it('uses onSurface content color for a disabled outlined split button', () => {
     const theme = getTheme();
     const { disabled } = getSplitButtonColors({
       theme,
       mode: 'outlined',
     });
 
-    expect(disabled.contentColor).toBe(theme.colors.outlineVariant);
+    expect(disabled.contentColor).toBe(theme.colors.onSurface);
   });
 
   it('only grants elevation to an enabled elevated split button', () => {

@@ -1,3 +1,4 @@
+import { tokens } from '../../theme/tokens';
 import type { ColorRole, Elevation, TypescaleKey } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
@@ -105,6 +106,13 @@ export const splitButtonMinInteractiveSize = 48;
 
 export const splitButtonStateLayerOpacity = 0.1;
 
+// TODO: drop once TouchableRipple grows native focus ring support, and wire
+// SplitButton into that instead of this standalone `Animated.View` hack.
+const focusIndicator = tokens.md.sys.state.focusIndicator;
+export const splitButtonFocusRingThickness = focusIndicator.thickness;
+export const splitButtonFocusRingInset =
+  focusIndicator.outerOffset + focusIndicator.thickness;
+
 export type SplitButtonColorTokens = {
   containerColor?: ColorRole;
   containerOpacity: number;
@@ -176,7 +184,7 @@ export const splitButtonColorTokens: Record<
     },
     disabled: {
       containerOpacity: 1,
-      contentColor: 'outlineVariant',
+      contentColor: 'onSurface',
       contentOpacity: 0.38,
       borderColor: 'outlineVariant',
       elevation: 0,
