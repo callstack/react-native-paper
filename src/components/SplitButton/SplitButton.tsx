@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -21,6 +23,8 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import {
+  splitButtonFocusRingInset,
+  splitButtonFocusRingThickness,
   splitButtonMinInteractiveSize,
   splitButtonStateLayerOpacity,
   type SplitButtonSize,
@@ -34,9 +38,11 @@ import {
   getSplitButtonTrailingShape,
   type SplitButtonMode,
 } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import ActivityIndicator from '../ActivityIndicator';
 import { getButtonTouchableRippleStyle } from '../Button/utils';
 import Icon, { type IconSource } from '../Icon';
@@ -266,6 +272,15 @@ const SplitButton = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  // Used below to work around two unrelated web-only corner-radius bugs by
+  // substituting an explicit, direction-aware Left/Right pair for a logical
+  // Start/End one - see the comments at each of their use sites. Native is
+  // unaffected by either and keeps the original logical properties, since
+  // mixing physical names into it breaks native's own border radius
+  // resolution.
+  const isRTL = direction === 'rtl';
+  const isWeb = Platform.OS === 'web';
   const sizeStyle = React.useMemo(
     () => getSplitButtonSizeStyle({ size, theme }),
     [size, theme]
@@ -275,6 +290,32 @@ const SplitButton = ({
   const trailingInnerRadiusProgress = useSharedValue(
     isTrailingExpanded ? 1 : 0
   );
+  // Standalone `Animated.View` rings, driven by keyboard focus directly,
+  // until `TouchableRipple` grows native focus ring support to move onto.
+  const leadingFocusedSV = useSharedValue(false);
+  const trailingFocusedSV = useSharedValue(false);
+  const onLeadingFocus = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (isKeyboardFocusEvent(e)) {
+        leadingFocusedSV.value = true;
+      }
+    },
+    [leadingFocusedSV]
+  );
+  const onLeadingBlur = React.useCallback(() => {
+    leadingFocusedSV.value = false;
+  }, [leadingFocusedSV]);
+  const onTrailingFocus = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (isKeyboardFocusEvent(e)) {
+        trailingFocusedSV.value = true;
+      }
+    },
+    [trailingFocusedSV]
+  );
+  const onTrailingBlur = React.useCallback(() => {
+    trailingFocusedSV.value = false;
+  }, [trailingFocusedSV]);
   // Resolved for both states up front, so the container crossfade below
   // always has both endpoints on hand to animate between.
   const { enabled: enabledColors, disabled: disabledColors } = React.useMemo(
@@ -305,6 +346,27 @@ const SplitButton = ({
       }),
     [sizeStyle.containerRadius, sizeStyle.innerRadius]
   );
+  // `Surface` has a web-only bug: passing it a logical `Start`/`End` corner
+  // prop (its other 11 corner-prop names all resolving to `undefined`)
+  // silently drops the corner's bottom half from the DOM. Passing the
+  // physical `Left`/`Right` name instead avoids it, so `Surface` gets these
+  // (direction-aware) instead of spreading `leadingShape` directly - native
+  // is unaffected and keeps the original logical shape.
+  const leadingSurfaceCornerProps = !isWeb
+    ? leadingShape
+    : isRTL
+      ? {
+          borderTopRightRadius: sizeStyle.containerRadius,
+          borderBottomRightRadius: sizeStyle.containerRadius,
+          borderTopLeftRadius: sizeStyle.innerRadius,
+          borderBottomLeftRadius: sizeStyle.innerRadius,
+        }
+      : {
+          borderTopLeftRadius: sizeStyle.containerRadius,
+          borderBottomLeftRadius: sizeStyle.containerRadius,
+          borderTopRightRadius: sizeStyle.innerRadius,
+          borderBottomRightRadius: sizeStyle.innerRadius,
+        };
   const trailingShape = React.useMemo(
     () =>
       getSplitButtonTrailingShape({
@@ -372,10 +434,56 @@ const SplitButton = ({
       trailingInnerRadiusProgress.value *
         (trailingExpandedRadius - trailingRestingRadius)
   );
-  const trailingAnimatedShapeStyle = useAnimatedStyle(() => ({
-    borderTopStartRadius: trailingStartRadius.value,
-    borderBottomStartRadius: trailingStartRadius.value,
-  }));
+  // Same `Surface` web bug as `leadingSurfaceCornerProps` above - both the
+  // segment's static (End/outer) and animated (Start/inner) corners need
+  // the physical name on web to reach `Surface` correctly.
+  const trailingSurfaceEndCornerProps = !isWeb
+    ? trailingShape
+    : isRTL
+      ? {
+          borderTopLeftRadius: sizeStyle.containerRadius,
+          borderBottomLeftRadius: sizeStyle.containerRadius,
+        }
+      : {
+          borderTopRightRadius: sizeStyle.containerRadius,
+          borderBottomRightRadius: sizeStyle.containerRadius,
+        };
+  const trailingStartCornerProps = !isWeb
+    ? {
+        borderTopStartRadius: trailingStartRadius,
+        borderBottomStartRadius: trailingStartRadius,
+      }
+    : isRTL
+      ? {
+          borderTopRightRadius: trailingStartRadius,
+          borderBottomRightRadius: trailingStartRadius,
+        }
+      : {
+          borderTopLeftRadius: trailingStartRadius,
+          borderBottomLeftRadius: trailingStartRadius,
+        };
+  // Separate (worklet-freeze, not the `Surface` bug above) reason for the
+  // same physical-on-web treatment: this drives the inner clip `Animated.View`
+  // below directly, not `Surface`, but Reanimated's web engine doesn't
+  // resolve a worklet-driven logical corner property at all past its first
+  // render.
+  const trailingAnimatedShapeStyle = useAnimatedStyle(() => {
+    if (!isWeb) {
+      return {
+        borderTopStartRadius: trailingStartRadius.value,
+        borderBottomStartRadius: trailingStartRadius.value,
+      };
+    }
+    return isRTL
+      ? {
+          borderTopRightRadius: trailingStartRadius.value,
+          borderBottomRightRadius: trailingStartRadius.value,
+        }
+      : {
+          borderTopLeftRadius: trailingStartRadius.value,
+          borderBottomLeftRadius: trailingStartRadius.value,
+        };
+  });
   const trailingIconAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${trailingIconRotation.value * 180}deg` }],
   }));
@@ -389,6 +497,51 @@ const SplitButton = ({
       trailingInnerRadiusProgress.value *
       splitButtonStateLayerOpacity,
   }));
+  // Corners grow outward by the same inset as the ring itself, so it traces
+  // each segment's shape rather than sitting flush with its edge.
+  const leadingFocusRingShape = React.useMemo(
+    () =>
+      getSplitButtonLeadingShape({
+        containerRadius: sizeStyle.containerRadius + splitButtonFocusRingInset,
+        innerRadius: sizeStyle.innerRadius + splitButtonFocusRingInset,
+      }),
+    [sizeStyle.containerRadius, sizeStyle.innerRadius]
+  );
+  const trailingFocusRingShape = React.useMemo(
+    () =>
+      getSplitButtonTrailingShape({
+        containerRadius: sizeStyle.containerRadius + splitButtonFocusRingInset,
+        // The start corners are overridden by `trailingFocusRingAnimatedStyle`
+        // below, so this value is never actually rendered.
+        innerRadius: sizeStyle.innerRadius + splitButtonFocusRingInset,
+      }),
+    [sizeStyle.containerRadius, sizeStyle.innerRadius]
+  );
+  const leadingFocusRingAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: leadingFocusedSV.value ? 1 : 0,
+  }));
+  const trailingFocusRingAnimatedStyle = useAnimatedStyle(() => {
+    const cornerRadius = trailingStartRadius.value + splitButtonFocusRingInset;
+    if (!isWeb) {
+      return {
+        opacity: trailingFocusedSV.value ? 1 : 0,
+        borderTopStartRadius: cornerRadius,
+        borderBottomStartRadius: cornerRadius,
+      };
+    }
+    return {
+      opacity: trailingFocusedSV.value ? 1 : 0,
+      ...(isRTL
+        ? {
+            borderTopRightRadius: cornerRadius,
+            borderBottomRightRadius: cornerRadius,
+          }
+        : {
+            borderTopLeftRadius: cornerRadius,
+            borderBottomLeftRadius: cornerRadius,
+          }),
+    };
+  });
   const leadingHitSlop = React.useMemo(
     () => getSplitButtonHitSlop({ size, hitSlop }),
     [size, hitSlop]
@@ -455,7 +608,7 @@ const SplitButton = ({
     >
       <Surface
         testID={getTestID('leading-container')}
-        {...leadingShape}
+        {...leadingSurfaceCornerProps}
         elevation={colors.elevation}
         transitionDuration={disabledTimingConfig.duration}
         backgroundColor="transparent"
@@ -485,6 +638,8 @@ const SplitButton = ({
           onLongPress={onLongPress}
           onPressIn={leadingHasTouchHandler ? onPressIn : undefined}
           onPressOut={leadingHasTouchHandler ? onPressOut : undefined}
+          onFocus={onLeadingFocus}
+          onBlur={onLeadingBlur}
           delayLongPress={delayLongPress}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
@@ -495,6 +650,7 @@ const SplitButton = ({
           style={[
             styles.ripple,
             getButtonTouchableRippleStyle(leadingShape, colors.borderWidth),
+            Platform.OS === 'web' ? webNoOutline : null,
           ]}
           testID={getTestID('leading')}
           theme={theme}
@@ -544,13 +700,21 @@ const SplitButton = ({
             </Text>
           </View>
         </TouchableRipple>
+        <Animated.View
+          testID={getTestID('leading-focus-ring')}
+          style={[
+            styles.focusRing,
+            leadingFocusRingShape,
+            { borderColor: theme.colors.secondary },
+            leadingFocusRingAnimatedStyle,
+          ]}
+        />
       </Surface>
 
       <Surface
         testID={getTestID('trailing-container')}
-        {...trailingShape}
-        borderTopStartRadius={trailingStartRadius}
-        borderBottomStartRadius={trailingStartRadius}
+        {...trailingSurfaceEndCornerProps}
+        {...trailingStartCornerProps}
         elevation={colors.elevation}
         transitionDuration={disabledTimingConfig.duration}
         backgroundColor="transparent"
@@ -583,9 +747,9 @@ const SplitButton = ({
           />
           <Animated.View
             testID={getTestID('trailing-state-layer')}
-            pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
+              styles.noPointerEvents,
               { backgroundColor: contentColor },
               trailingStateLayerAnimatedStyle,
             ]}
@@ -599,6 +763,8 @@ const SplitButton = ({
             onPressOut={
               trailingHasTouchHandler ? onTrailingPressOut : undefined
             }
+            onFocus={onTrailingFocus}
+            onBlur={onTrailingBlur}
             delayLongPress={trailingDelayLongPress}
             accessibilityLabel={trailingAccessibilityLabel}
             accessibilityRole="button"
@@ -606,7 +772,7 @@ const SplitButton = ({
             background={background}
             hitSlop={resolvedTrailingHitSlop}
             rippleColor={rippleColor}
-            style={styles.ripple}
+            style={[styles.ripple, Platform.OS === 'web' ? webNoOutline : null]}
             testID={getTestID('trailing')}
             theme={theme}
           >
@@ -631,6 +797,17 @@ const SplitButton = ({
             </View>
           </TouchableRipple>
         </Animated.View>
+        {/* Sibling of `trailingClip` (not a child) so the ring isn't clipped
+            to the segment's shape - it needs to extend past it. */}
+        <Animated.View
+          testID={getTestID('trailing-focus-ring')}
+          style={[
+            styles.focusRing,
+            trailingFocusRingShape,
+            { borderColor: theme.colors.secondary },
+            trailingFocusRingAnimatedStyle,
+          ]}
+        />
       </Surface>
     </View>
   );
@@ -654,9 +831,9 @@ const ButtonBackground = ({
   return (
     <Animated.View
       testID={testID}
-      pointerEvents="none"
       style={[
         StyleSheet.absoluteFill,
+        styles.noPointerEvents,
         borderRadiusStyle,
         { backgroundColor },
         animatedStyle,
@@ -675,6 +852,10 @@ const styles = StyleSheet.create({
     minWidth: splitButtonMinInteractiveSize,
     flexShrink: 1,
     borderStyle: 'solid',
+    // Its focus ring overflows rightward into the (narrow) gap toward the
+    // trailing segment; without this, the trailing segment - painted after
+    // it in document order - covers that overflow.
+    zIndex: 1,
   },
   trailing: {
     minWidth: splitButtonMinInteractiveSize,
@@ -701,6 +882,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  focusRing: {
+    position: 'absolute',
+    top: -splitButtonFocusRingInset,
+    left: -splitButtonFocusRingInset,
+    right: -splitButtonFocusRingInset,
+    bottom: -splitButtonFocusRingInset,
+    borderWidth: splitButtonFocusRingThickness,
+    pointerEvents: 'none',
+  },
+  noPointerEvents: {
+    pointerEvents: 'none',
+  },
 });
+
+// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+// Suppresses the browser's own focus outline in favor of the custom ring
+// above.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default SplitButton;

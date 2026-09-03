@@ -41,7 +41,7 @@ const SplitButtonExample = () => {
             }
           >
             <Menu.Item
-              leadingIcon="schedule"
+              leadingIcon="send-clock"
               title="Schedule send"
               onPress={() => setMenuVisible(false)}
             />
