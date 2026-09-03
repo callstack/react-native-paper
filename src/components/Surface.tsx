@@ -1,204 +1,147 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
-import type {
-  ColorValue,
-  ShadowStyleIOS,
-  StyleProp,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
+
+import Animated, {
+  cubicBezier,
+  isSharedValue,
+  type AnimatedStyle,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
-import {
-  androidElevationLevels,
-  elevationInputRange,
-  shadow,
-  shadowLayers,
-} from '../theme/tokens/sys/elevation';
-import type { Elevation, Theme, ThemeProp } from '../types';
-import { isAnimatedValue } from '../utils/animations';
-import { splitStyles } from '../utils/splitStyles';
+import { androidElevationLevels, shadow } from '../theme/tokens/sys/elevation';
+import type { Elevation, ThemeProp } from '../types';
 
-type SurfaceElevation = Elevation | Animated.Value;
+type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
+  AnimatedStyle<Required<Pick<ViewStyle, Key>>>,
+  Record<Key, unknown>
+>[Key];
 
-export type Props = Omit<ViewProps, 'style'> & {
+type BorderRadius = AnimatedStyleProp<'borderRadius'>;
+
+type SurfaceVisualProps = {
   /**
-   * Content of the `Surface`.
+   * Background color of the Surface. Overrides the color derived from
+   * `elevation`.
    */
-  children: React.ReactNode;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  backgroundColor?: ColorValue;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Changes shadows and background on iOS and Android.
-   * Used to create UI hierarchy between components.
-   *
-   * Note: If `mode` is set to `flat`, Surface doesn't have a shadow.
-   *
-   * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
-   * It's no longer supported with theme version 3 and you should use `elevation` property instead.
+   * Radius of every corner of the Surface.
    */
-  elevation?: SurfaceElevation;
+  borderRadius?: BorderRadius;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Mode of the Surface.
-   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   * Radius of the bottom-end corner of the Surface.
    */
-  mode?: 'flat' | 'elevated';
+  borderBottomEndRadius?: BorderRadius;
   /**
-   * @optional
+   * Radius of the bottom-left corner of the Surface.
    */
-  theme?: ThemeProp;
+  borderBottomLeftRadius?: BorderRadius;
   /**
-   * TestID used for testing purposes
+   * Radius of the bottom-right corner of the Surface.
    */
-  testID?: string;
-  ref?: React.Ref<View>;
+  borderBottomRightRadius?: BorderRadius;
   /**
-   * @internal
+   * Radius of the bottom-start corner of the Surface.
    */
-  container?: boolean;
+  borderBottomStartRadius?: BorderRadius;
+  /**
+   * Radius of the end-end corner of the Surface.
+   */
+  borderEndEndRadius?: BorderRadius;
+  /**
+   * Radius of the end-start corner of the Surface.
+   */
+  borderEndStartRadius?: BorderRadius;
+  /**
+   * Radius of the start-end corner of the Surface.
+   */
+  borderStartEndRadius?: BorderRadius;
+  /**
+   * Radius of the start-start corner of the Surface.
+   */
+  borderStartStartRadius?: BorderRadius;
+  /**
+   * Radius of the top-end corner of the Surface.
+   */
+  borderTopEndRadius?: BorderRadius;
+  /**
+   * Radius of the top-left corner of the Surface.
+   */
+  borderTopLeftRadius?: BorderRadius;
+  /**
+   * Radius of the top-right corner of the Surface.
+   */
+  borderTopRightRadius?: BorderRadius;
+  /**
+   * Radius of the top-start corner of the Surface.
+   */
+  borderTopStartRadius?: BorderRadius;
+  /**
+   * Corner curve of the Surface on iOS.
+   */
+  borderCurve?: ViewStyle['borderCurve'];
 };
 
-const outerLayerStyleProperties: (keyof ViewStyle)[] = [
-  'position',
-  'alignSelf',
-  'top',
-  'right',
-  'bottom',
-  'left',
-  'start',
-  'end',
-  'flex',
-  'flexShrink',
-  'flexGrow',
-  'width',
-  'height',
-  'transform',
-  'opacity',
-];
+export type SurfaceStyle = AnimatedStyle<
+  Omit<ViewStyle, keyof SurfaceVisualProps | 'elevation'>
+>;
 
-function getStyleForShadowLayer(
-  elevation: SurfaceElevation,
-  layer: 0 | 1,
-  shadowColor: ColorValue
-): Animated.WithAnimatedValue<ShadowStyleIOS> {
-  if (isAnimatedValue(elevation)) {
-    return {
-      shadowColor,
-      shadowOpacity: elevation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, shadowLayers[layer].shadowOpacity],
-        extrapolate: 'clamp',
-      }),
-      shadowOffset: {
-        width: 0,
-        height: elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: shadowLayers[layer].height,
-        }),
-      },
-      shadowRadius: elevation.interpolate({
-        inputRange: elevationInputRange,
-        outputRange: shadowLayers[layer].shadowRadius,
-      }),
-    };
-  }
-
-  return {
-    shadowColor,
-    shadowOpacity: elevation ? shadowLayers[layer].shadowOpacity : 0,
-    shadowOffset: {
-      width: 0,
-      height: shadowLayers[layer].height[elevation],
-    },
-    shadowRadius: shadowLayers[layer].shadowRadius[elevation],
+export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
+  SurfaceVisualProps & {
+    /**
+     * Duration of the background, elevation, and shadow transitions in
+     * milliseconds.
+     */
+    transitionDuration?: number;
+    /**
+     * Style of the Surface.
+     *
+     * This doesn't support all View style properties:
+     * - Background color and border radius should be specified via props instead.
+     * - `overflow: 'hidden'` is not supported with `elevation` as it can clip the shadow.
+     *    To achieve the same effect, wrap the content in a child View with the overflow style.
+     */
+    style?: StyleProp<SurfaceStyle>;
+    /**
+     * @supported Available in v5.x with theme version 3
+     * Changes shadows and background on iOS and Android.
+     * Used to create UI hierarchy between components.
+     *
+     * Note: If `mode` is set to `flat`, Surface doesn't have a shadow.
+     *
+     * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
+     * It's no longer supported with theme version 3 and you should use `elevation` property instead.
+     */
+    elevation?: Elevation;
+    /**
+     * @supported Available in v5.x with theme version 3
+     * Mode of the Surface.
+     * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
+     * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+     */
+    mode?: 'flat' | 'elevated';
+    /**
+     * @optional
+     */
+    theme?: ThemeProp;
+    /**
+     * Content of the `Surface`.
+     */
+    children: React.ReactNode;
+    /**
+     * TestID used for testing purposes
+     */
+    testID?: string;
+    ref?: React.Ref<View>;
   };
-}
-
-type SurfaceIOSProps = Omit<Props, 'elevation'> & {
-  elevation: SurfaceElevation;
-  backgroundColor?:
-    | ColorValue
-    | Animated.AnimatedInterpolation<string | number>;
-  shadowColor: ColorValue;
-};
-
-const SurfaceIOS = ({
-  elevation,
-  style,
-  backgroundColor,
-  shadowColor,
-  testID,
-  children,
-  mode = 'elevated',
-  container,
-  ref,
-  ...props
-}: SurfaceIOSProps) => {
-  const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
-    const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-    const [filteredStyles, outerLayerStyles, borderRadiusStyles] = splitStyles(
-      flattenedStyles,
-      (style) =>
-        outerLayerStyleProperties.includes(style) || style.startsWith('margin'),
-      (style) => style.startsWith('border') && style.endsWith('Radius')
-    );
-
-    if (
-      process.env.NODE_ENV !== 'production' &&
-      filteredStyles.overflow === 'hidden' &&
-      elevation !== 0
-    ) {
-      console.warn(
-        'When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.'
-      );
-    }
-
-    const bgColor = flattenedStyles.backgroundColor || backgroundColor;
-
-    const isElevated = mode === 'elevated';
-
-    const outerLayerViewStyles = {
-      ...(isElevated && getStyleForShadowLayer(elevation, 0, shadowColor)),
-      ...outerLayerStyles,
-      ...borderRadiusStyles,
-      backgroundColor: bgColor,
-    };
-
-    const innerLayerViewStyles = {
-      ...(isElevated && getStyleForShadowLayer(elevation, 1, shadowColor)),
-      ...filteredStyles,
-      ...borderRadiusStyles,
-      flex:
-        flattenedStyles.height || (!container && flattenedStyles.flex)
-          ? 1
-          : undefined,
-      backgroundColor: bgColor,
-    };
-
-    return [outerLayerViewStyles, innerLayerViewStyles];
-  }, [style, elevation, backgroundColor, shadowColor, mode, container]);
-
-  return (
-    <Animated.View
-      ref={ref}
-      style={outerLayerViewStyles}
-      testID={`${testID}-outer-layer`}
-    >
-      <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
-        {children}
-      </Animated.View>
-    </Animated.View>
-  );
-};
 
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
- * On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
- * Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
+ *
+ * On Android, Surface uses the native `elevation` style,
+ * and falls back to shadows that approximate the elevation on other platforms.
  *
  * ## Usage
  * ```js
@@ -207,7 +150,7 @@ const SurfaceIOS = ({
  * import { StyleSheet } from 'react-native';
  *
  * const MyComponent = () => (
- *   <Surface style={styles.surface} elevation={4}>
+ *   <Surface style={styles.surface} elevation={4} borderRadius={8}>
  *      <Text>Surface</Text>
  *   </Surface>
  * );
@@ -216,9 +159,9 @@ const SurfaceIOS = ({
  *
  * const styles = StyleSheet.create({
  *   surface: {
- *     padding: 8,
  *     height: 80,
  *     width: 80,
+ *     padding: 8,
  *     alignItems: 'center',
  *     justifyContent: 'center',
  *   },
@@ -230,44 +173,92 @@ const Surface = ({
   children,
   theme: overridenTheme,
   style,
-  testID = 'surface',
+  backgroundColor: customBackgroundColor,
+  borderRadius,
+  borderBottomEndRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderBottomStartRadius,
+  borderEndEndRadius,
+  borderEndStartRadius,
+  borderStartEndRadius,
+  borderStartStartRadius,
+  borderTopEndRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderTopStartRadius,
+  borderCurve = 'continuous',
+  testID,
   mode = 'elevated',
+  transitionDuration: customTransitionDuration,
   ref,
-  ...props
+  ...rest
 }: Props) => {
   const theme = useInternalTheme(overridenTheme);
 
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
-  const backgroundColor = (() => {
-    if (isAnimatedValue(elevation)) {
-      return elevation.interpolate({
-        inputRange: elevationInputRange,
-        outputRange: elevationInputRange.map((elevation) => {
-          return colors.elevation?.[`level${elevation}`];
-        }),
-      });
-    }
+  const backgroundColor =
+    customBackgroundColor ?? colors.elevation?.[`level${elevation}`];
 
-    return colors.elevation?.[`level${elevation}`];
-  })();
+  const backgroundStyle = { backgroundColor };
+
+  const shapeProps = {
+    borderRadius,
+    borderBottomEndRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderBottomStartRadius,
+    borderEndEndRadius,
+    borderEndStartRadius,
+    borderStartEndRadius,
+    borderStartStartRadius,
+    borderTopEndRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderTopStartRadius,
+    borderCurve,
+  };
+
+  // Reanimated styles can't be shared between different views
+  // So we need to create two separate styles for the surface and shadow layers
+  const visualStyle = useSurfaceVisualStyle(shapeProps);
+  const shadowVisualStyle = useSurfaceVisualStyle(shapeProps);
 
   const isElevated = mode === 'elevated';
 
+  const transitionDuration =
+    customTransitionDuration ??
+    theme.motion.duration.short3 * theme.animation.scale;
+  const transitionDurationStyle: AnimatedStyle<ViewStyle> = {
+    transitionDuration,
+  };
+  const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
+  const transitionProperty =
+    // FIXME: Reanimated can't animate PlatformColor and DynamicColorIOS
+    typeof backgroundColor === 'string' ? ['backgroundColor' as const] : [];
+
   if (Platform.OS === 'web') {
-    const { pointerEvents = 'auto' } = props;
+    const [elevationShadow] = shadow(elevation, theme.colors.shadow);
+
+    const transitionStyle: AnimatedStyle<ViewStyle> = {
+      transitionTimingFunction,
+      transitionProperty: [...transitionProperty, 'boxShadow'],
+    };
+
     return (
       <Animated.View
-        {...props}
-        pointerEvents={pointerEvents}
+        {...rest}
         ref={ref}
         testID={testID}
         style={[
-          { backgroundColor },
-          elevation && isElevated
-            ? shadow(elevation, theme.colors.shadow)
-            : null,
+          transitionStyle,
+          styles.container,
           style,
+          transitionDurationStyle,
+          backgroundStyle,
+          visualStyle,
+          isElevated ? elevationShadow : null,
         ]}
       >
         {children}
@@ -276,39 +267,25 @@ const Surface = ({
   }
 
   if (Platform.OS === 'android') {
-    const getElevationAndroid = () => {
-      if (isAnimatedValue(elevation)) {
-        return elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: androidElevationLevels,
-        });
-      }
+    const elevationAndroid = androidElevationLevels[elevation];
 
-      return androidElevationLevels[elevation];
+    const transitionStyle: AnimatedStyle<ViewStyle> = {
+      transitionTimingFunction,
+      transitionProperty: [...transitionProperty, 'elevation'],
     };
-
-    const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
-      style
-    ) || {}) as ViewStyle;
-
-    const outerLayerStyles = { margin, padding, transform, borderRadius };
-    const sharedStyle = [{ backgroundColor }, style];
 
     return (
       <Animated.View
-        {...props}
+        {...rest}
         testID={testID}
         ref={ref}
         style={[
-          {
-            backgroundColor,
-            transform,
-          },
-          outerLayerStyles,
-          sharedStyle,
-          isElevated && {
-            elevation: getElevationAndroid(),
-          },
+          transitionStyle,
+          style,
+          transitionDurationStyle,
+          backgroundStyle,
+          visualStyle,
+          isElevated && { elevation: elevationAndroid },
         ]}
       >
         {children}
@@ -316,20 +293,97 @@ const Surface = ({
     );
   }
 
+  const [spotShadow, ambientShadow] = shadow(elevation, theme.colors.shadow);
+
+  const transitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionTimingFunction,
+    transitionProperty: [
+      ...transitionProperty,
+      'shadowOpacity',
+      'shadowOffset',
+      'shadowRadius',
+    ],
+  };
+
   return (
-    <SurfaceIOS
-      {...props}
+    <Animated.View
+      {...rest}
       ref={ref}
-      elevation={elevation}
-      backgroundColor={backgroundColor}
-      shadowColor={theme.colors.shadow}
-      style={style}
+      style={[
+        transitionStyle,
+        style,
+        transitionDurationStyle,
+        backgroundStyle,
+        visualStyle,
+        isElevated && spotShadow,
+      ]}
       testID={testID}
-      mode={mode}
     >
+      {isElevated ? (
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFill,
+            styles.shadow,
+            transitionStyle,
+            transitionDurationStyle,
+            backgroundStyle,
+            shadowVisualStyle,
+            ambientShadow,
+          ]}
+        />
+      ) : null}
       {children}
-    </SurfaceIOS>
+    </Animated.View>
   );
 };
+
+const useSurfaceVisualStyle = ({
+  borderRadius,
+  borderBottomEndRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderBottomStartRadius,
+  borderEndEndRadius,
+  borderEndStartRadius,
+  borderStartEndRadius,
+  borderStartStartRadius,
+  borderTopEndRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderTopStartRadius,
+  borderCurve,
+}: Omit<SurfaceVisualProps, 'backgroundColor'>) =>
+  useAnimatedStyle<ViewStyle>(() =>
+    Object.fromEntries(
+      Object.entries({
+        borderRadius,
+        borderBottomEndRadius,
+        borderBottomLeftRadius,
+        borderBottomRightRadius,
+        borderBottomStartRadius,
+        borderEndEndRadius,
+        borderEndStartRadius,
+        borderStartEndRadius,
+        borderStartStartRadius,
+        borderTopEndRadius,
+        borderTopLeftRadius,
+        borderTopRightRadius,
+        borderTopStartRadius,
+        borderCurve,
+      }).map(([property, value]) => [
+        property,
+        isSharedValue(value) ? value.value : value,
+      ])
+    )
+  );
+
+const styles = StyleSheet.create({
+  container: {
+    pointerEvents: 'auto',
+  },
+  shadow: {
+    pointerEvents: 'none',
+  },
+});
 
 export default Surface;

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { white } from '../../theme/colors';
-import type { InternalTheme, Theme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -15,19 +15,27 @@ export type AppbarChildProps = {
 
 const borderStyleProperties = [
   'borderRadius',
+  'borderBottomEndRadius',
+  'borderBottomStartRadius',
+  'borderEndEndRadius',
+  'borderEndStartRadius',
+  'borderStartEndRadius',
+  'borderStartStartRadius',
+  'borderTopEndRadius',
+  'borderTopStartRadius',
   'borderTopLeftRadius',
   'borderTopRightRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
-];
+  'borderCurve',
+] satisfies readonly (keyof ViewStyle)[];
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
-  _elevation: number,
-  customBackground?: ColorValue,
-  elevated?: boolean
+  elevated: boolean,
+  customBackground?: ColorValue
 ) => {
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   if (customBackground) {
     return customBackground;
   }
@@ -54,18 +62,14 @@ export const getAppbarColor = ({
   return undefined;
 };
 
-export const getAppbarBorders = (
-  style:
-    | Animated.Value
-    | Animated.AnimatedInterpolation<string | number>
-    | Animated.WithAnimatedObject<ViewStyle>
-) => {
-  const borders: Record<string, number> = {};
+export const getAppbarBorders = (style: ViewStyle) => {
+  let borders: ViewStyle = {};
 
   for (const property of borderStyleProperties) {
-    const value = style[property as keyof typeof style];
-    if (value) {
-      borders[property] = value;
+    const value = style[property];
+
+    if (typeof value === 'number' || typeof value === 'string') {
+      borders = { ...borders, [property]: value };
     }
   }
 
@@ -121,7 +125,7 @@ export const renderAppbarContent = ({
   mode = 'small',
   theme,
 }: RenderAppbarContentProps) => {
-  return React.Children.toArray(children as React.ReactNode | React.ReactNode[])
+  return React.Children.toArray(children)
     .filter((child) => child != null && typeof child !== 'boolean')
     .filter((child) =>
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter

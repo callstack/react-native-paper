@@ -1,8 +1,17 @@
 import * as React from 'react';
-import { Animated, Easing, StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import {
+  Easing,
+  interpolate,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
@@ -10,12 +19,13 @@ import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
+import type { $RemoveChildren, Elevation, ThemeProp } from '../types';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -58,7 +68,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * @supported Available in v5.x with theme version 3
    * Changes Snackbar shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: Elevation;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
@@ -71,7 +81,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style for the content of the snackbar
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -152,85 +162,85 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
   const { direction } = useLocale();
+
   const { bottom, right, left } = useSafeAreaInsets();
 
-  const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(0.0)
+  const opacity = useSharedValue(0);
+
+  const hideTimeout = React.useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined
   );
-  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+  const isMounted = React.useRef(true);
 
   const [hidden, setHidden] = React.useState(!visible);
 
   const { scale } = theme.animation;
 
-  const animateShow = useLatestCallback(() => {
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 200 * scale,
-      easing: Easing.out(Easing.ease),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        const isInfinity =
-          duration === Number.POSITIVE_INFINITY ||
-          duration === Number.NEGATIVE_INFINITY;
-
-        if (!isInfinity) {
-          hideTimeout.current = setTimeout(
-            onDismiss,
-            duration
-          ) as unknown as NodeJS.Timeout;
-        }
-      }
-    });
-  });
-
-  const handleOnVisible = useLatestCallback(() => {
-    // show
+  if (visible && hidden) {
     setHidden(false);
+  }
+
+  const handleShowAnimationFinished = useLatestCallback((finished: boolean) => {
+    if (!finished || !visible || !isMounted.current) {
+      return;
+    }
+
+    const isInfinity =
+      duration === Number.POSITIVE_INFINITY ||
+      duration === Number.NEGATIVE_INFINITY;
+
+    if (!isInfinity) {
+      hideTimeout.current = setTimeout(onDismiss, duration);
+    }
   });
 
-  const handleOnHidden = useLatestCallback(() => {
-    // hide
+  React.useEffect(() => {
     if (hideTimeout.current) {
       clearTimeout(hideTimeout.current);
+      hideTimeout.current = undefined;
     }
 
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 100 * scale,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        setHidden(true);
+    opacity.value = withTiming(
+      visible ? 1 : 0,
+      {
+        duration: (visible ? 200 : 100) * scale,
+        easing: visible ? Easing.out(Easing.ease) : Easing.inOut(Easing.ease),
+        reduceMotion: ReduceMotion.Never,
+      },
+      (finished) => {
+        if (visible) {
+          scheduleOnRN(handleShowAnimationFinished, finished ?? false);
+        } else if (finished) {
+          scheduleOnRN(setHidden, true);
+        }
       }
-    });
-  });
+    );
+  }, [handleShowAnimationFinished, opacity, scale, visible]);
 
   React.useEffect(() => {
-    if (!hidden) {
-      animateShow();
-    }
-  }, [animateShow, hidden]);
+    isMounted.current = true;
 
-  React.useEffect(() => {
     return () => {
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      isMounted.current = false;
+
+      if (hideTimeout.current) {
+        clearTimeout(hideTimeout.current);
+      }
     };
   }, []);
 
-  React.useLayoutEffect(() => {
-    if (visible) {
-      handleOnVisible();
-    } else {
-      handleOnHidden();
-    }
-  }, [visible, handleOnVisible, handleOnHidden]);
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [
+      {
+        scale: visible ? interpolate(opacity.value, [0, 1], [0.9, 1]) : 1,
+      },
+    ],
+  }));
 
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   if (hidden) {
     return null;
@@ -256,26 +266,21 @@ const Snackbar = ({
     paddingHorizontal: Math.max(left, right),
   };
 
-  const renderChildrenWithWrapper = () => {
-    if (typeof children === 'string') {
-      return (
-        <Text
-          variant="bodyMedium"
-          style={[styles.content, { color: textColor }]}
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-        >
-          {children}
-        </Text>
-      );
-    }
-
-    return (
+  const content =
+    typeof children === 'string' ? (
+      <Text
+        variant="bodyMedium"
+        style={[styles.content, { color: textColor }]}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </Text>
+    ) : (
       <View style={[styles.content, contentStyle]}>
         {/* View is added to allow multiple lines support for Text component as children */}
         <View>{children}</View>
       </View>
     );
-  };
 
   return (
     <View
@@ -283,34 +288,16 @@ const Snackbar = ({
       style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
     >
       <Surface
-        pointerEvents="box-none"
         aria-live="polite"
         theme={theme}
-        style={[
-          styles.container,
-          {
-            backgroundColor,
-            borderRadius: (theme as Theme).shapes.corner.extraSmall,
-            opacity: opacity,
-            transform: [
-              {
-                scale: visible
-                  ? opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
-              },
-            ],
-          },
-          style,
-        ]}
+        backgroundColor={backgroundColor}
+        borderRadius={theme.shapes.corner.extraSmall}
+        style={[styles.container, animatedStyle, style]}
         testID={testID}
-        container
         elevation={elevation}
         {...rest}
       >
-        {renderChildrenWithWrapper()}
+        {content}
         {(action || isIconButton) && (
           <View style={[styles.actionsContainer, { marginLeft }]}>
             {action ? (
@@ -386,8 +373,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 8,
-    borderRadius: 4,
     minHeight: 48,
+    pointerEvents: 'box-none',
   },
   content: {
     marginHorizontal: 16,

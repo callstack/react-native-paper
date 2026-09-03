@@ -340,6 +340,50 @@ describe('configureFonts', () => {
     });
   });
 
+  it('applies flat properties to every variant when the config also has per-variant entries', () => {
+    mockPlatform('ios');
+    const { configureFonts, typescale } = loadFonts();
+
+    const fonts = configureFonts({
+      config: {
+        fontFamily: 'NotoSans',
+        bodyLarge: {
+          fontSize: 18,
+        },
+      },
+    });
+
+    expect(fonts).toEqual({
+      ...Object.fromEntries(
+        Object.entries(typescale).map(([variantName, variantProperties]) => [
+          variantName,
+          { ...variantProperties, fontFamily: 'NotoSans' },
+        ])
+      ),
+      bodyLarge: {
+        ...typescale.bodyLarge,
+        fontFamily: 'NotoSans',
+        fontSize: 18,
+      },
+    });
+  });
+
+  it('does not add flat properties of a mixed config as typescale variants', () => {
+    mockPlatform('ios');
+    const { configureFonts } = loadFonts();
+
+    const fonts = configureFonts({
+      config: {
+        fontFamily: 'NotoSans',
+        bodyLarge: {
+          fontSize: 18,
+        },
+      },
+    });
+
+    expect(fonts.fontFamily).toBeUndefined();
+  });
+
   it('should be deterministic', () => {
     mockPlatform('ios');
     const { configureFonts } = loadFonts();

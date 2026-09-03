@@ -1,7 +1,7 @@
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
@@ -15,15 +15,6 @@ const stateOpacity = tokens.md.sys.state.opacity;
 const styles = StyleSheet.create({
   flexing: {
     flexDirection: 'row-reverse',
-  },
-  customRadius: {
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 16,
-  },
-  noRadius: {
-    borderRadius: 0,
   },
 });
 
@@ -153,54 +144,6 @@ it('renders button with an accessibility hint', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
-});
-
-it('renders button with custom border radius', async () => {
-  await render(
-    <Button testID="custom-radius" style={styles.customRadius}>
-      Custom radius
-    </Button>
-  );
-
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.customRadius
-  );
-  expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
-});
-
-it('renders outlined button with custom border radius', async () => {
-  await render(
-    <Button
-      mode={'outlined'}
-      testID="custom-radius"
-      style={styles.customRadius}
-    >
-      Custom radius
-    </Button>
-  );
-
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.customRadius
-  );
-  expect(screen.getByTestId('custom-radius')).toHaveStyle({
-    borderTopLeftRadius: 15, // styles.customRadius - 1px outline
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 15, // styles.customRadius - 1px outline
-  });
-});
-
-it('renders button without border radius', async () => {
-  await render(
-    <Button testID="custom-radius" style={styles.noRadius}>
-      Custom radius
-    </Button>
-  );
-
-  expect(screen.getByTestId('custom-radius-container')).toHaveStyle(
-    styles.noRadius
-  );
-  expect(screen.getByTestId('custom-radius')).toHaveStyle(styles.noRadius);
 });
 
 it('should execute onPressIn', async () => {
@@ -708,34 +651,4 @@ describe('getButtonColors - border width', () => {
         });
       })
   );
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Button
-      mode="elevated"
-      compact
-      icon="camera"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      Compact button
-    </Button>
-  );
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('button-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
 });

@@ -29,6 +29,7 @@ export const isPlatformColorSentinel = (v: unknown): boolean =>
   typeof v === 'object' &&
   ('resource_paths' in v || 'semantic' in v || 'dynamic' in v);
 
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
     !base ||
@@ -44,7 +45,7 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     return (overrides ?? base) as T;
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
-  for (const key of Object.keys(overrides as Record<string, unknown>)) {
+  for (const key of Object.keys(overrides)) {
     out[key] = safeMerge(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
@@ -52,6 +53,7 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   }
   return out as T;
 };
+/* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
 
 /** Memoize `themeOverrides` at the call site; inline object literals defeat the memo. */
 export const useInternalTheme = (
@@ -74,6 +76,7 @@ export const defaultThemes = {
 };
 
 export const getTheme = <Scheme extends boolean = false>(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   isDark: Scheme = false as Scheme
 ): (typeof defaultThemes)[Scheme extends true ? 'dark' : 'light'] => {
   const scheme = isDark ? 'dark' : 'light';

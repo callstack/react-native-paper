@@ -1,22 +1,18 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+import type { ColorValue, StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
-import {
-  getAppbarBackgroundColor,
-  modeAppbarHeight,
-  getAppbarBorders,
-} from './utils';
+import type { AppbarStyle } from './Appbar';
+import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { shadow } from '../../theme/tokens/sys/elevation';
 import type { ThemeProp } from '../../types';
 
 export type Props = Omit<
   React.ComponentProps<typeof Appbar>,
-  'safeAreaInsets'
+  'safeAreaInsets' | 'style'
 > & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
@@ -52,7 +48,7 @@ export type Props = Omit<
    * @optional
    */
   theme?: ThemeProp;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AppbarStyle>;
 };
 
 /**
@@ -100,62 +96,52 @@ const AppbarHeader = ({
   const flattenedStyle = StyleSheet.flatten(style);
   const {
     height = modeAppbarHeight[mode],
-    elevation = elevated ? 2 : 0,
     backgroundColor: customBackground,
     zIndex = elevated ? 1 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
-    height?: number;
-    elevation?: number;
+    height?: AppbarStyle['height'];
     backgroundColor?: ColorValue;
     zIndex?: number;
   };
 
-  const borderRadius = getAppbarBorders(restStyle);
-
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevation,
-    customBackground,
-    elevated
+    elevated,
+    customBackground
   );
 
   const { top, left, right } = useSafeAreaInsets();
+  const topInset = statusBarHeight ?? top;
+  const horizontalInset = Math.max(left, right);
+  const headerHeight = typeof height === 'number' ? height + topInset : height;
 
   return (
-    <View
-      testID={`${testID}-root-layer`}
+    <Appbar
+      testID={testID}
       style={[
         {
+          height: headerHeight,
           backgroundColor,
           zIndex,
-          elevation,
-          paddingTop: statusBarHeight ?? top,
-          paddingHorizontal: Math.max(left, right),
         },
-        borderRadius,
-        shadow(elevation, theme.colors.shadow) as ViewStyle,
+        restStyle,
       ]}
-    >
-      <Appbar
-        testID={testID}
-        style={[{ height, backgroundColor }, styles.appbar, restStyle]}
-        dark={dark}
-        {...rest}
-        mode={mode}
-        theme={theme}
-      />
-    </View>
+      safeAreaInsets={{
+        top: topInset,
+        left: horizontalInset,
+        right: horizontalInset,
+      }}
+      dark={dark}
+      elevated={elevated}
+      {...rest}
+      mode={mode}
+      theme={theme}
+    />
   );
 };
 
 AppbarHeader.displayName = 'Appbar.Header';
-
-const styles = StyleSheet.create({
-  appbar: {
-    elevation: 0,
-  },
-});
 
 export default AppbarHeader;
 

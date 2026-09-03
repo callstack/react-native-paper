@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate RadioButtonAndroid to Reanimated.
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
@@ -102,7 +103,7 @@ const RadioButtonAndroid = ({
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,
