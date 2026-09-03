@@ -23,10 +23,12 @@ const sizes = {
 const colors = {
   selectedHandleColor: 'onPrimary',
   selectedHoverHandleColor: 'primaryContainer',
+  selectedFocusHandleColor: 'primaryContainer',
   selectedPressedHandleColor: 'primaryContainer',
 
   unselectedHandleColor: 'outline',
   unselectedHoverHandleColor: 'onSurfaceVariant',
+  unselectedFocusHandleColor: 'onSurfaceVariant',
   unselectedPressedHandleColor: 'onSurfaceVariant',
 
   selectedIconColor: 'onPrimaryContainer',
