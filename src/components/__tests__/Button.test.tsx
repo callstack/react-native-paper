@@ -21,6 +21,7 @@ import {
   getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
+  getButtonTransitionDuration,
 } from '../Button/utils';
 import type { ButtonLabelVariant, ButtonSize } from '../Button/utils';
 
@@ -859,6 +860,59 @@ describe('getButtonPressedRadius', () => {
       expect(getButtonPressedRadius({ size, theme: getTheme() })).toBe(pressed);
     }
   );
+});
+
+describe('getButtonTransitionDuration', () => {
+  const theme = getTheme();
+  const opaque = theme.colors.primary;
+  const scaled = (key: 'short3' | 'short4') =>
+    theme.motion.duration[key] * theme.animation.scale;
+
+  it('cross-fades between two opaque containers', () => {
+    expect(
+      getButtonTransitionDuration({
+        theme,
+        pressed: false,
+        containerColor: opaque,
+        previousContainerColor: theme.colors.secondaryContainer,
+      })
+    ).toBe(scaled('short3'));
+  });
+
+  it('uses the longer duration while pressed', () => {
+    expect(
+      getButtonTransitionDuration({
+        theme,
+        pressed: true,
+        containerColor: opaque,
+        previousContainerColor: opaque,
+      })
+    ).toBe(scaled('short4'));
+  });
+
+  // Fading to or from `transparent` interpolates through gray, which is what
+  // made a mode switch leave `outlined` looking like a filled gray button.
+  it('snaps when the container becomes transparent', () => {
+    expect(
+      getButtonTransitionDuration({
+        theme,
+        pressed: false,
+        containerColor: 'transparent',
+        previousContainerColor: opaque,
+      })
+    ).toBe(0);
+  });
+
+  it('snaps when the container was transparent', () => {
+    expect(
+      getButtonTransitionDuration({
+        theme,
+        pressed: false,
+        containerColor: opaque,
+        previousContainerColor: 'transparent',
+      })
+    ).toBe(0);
+  });
 });
 
 describe('shape prop', () => {

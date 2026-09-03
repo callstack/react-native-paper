@@ -100,6 +100,40 @@ export const getButtonShapeRadius = ({
   return resolveCornerRadius(theme, token);
 };
 
+/**
+ * Duration of `Surface`'s background and elevation transition.
+ *
+ * `Surface` cross-fades its background, and Reanimated interpolates colors in
+ * RGB, so a fade to or from `transparent` passes through gray. `outlined` and
+ * `text` are the modes that show it: their container is transparent, so the
+ * clip inside doesn't paint over the fade. `mode` is a static prop rather than
+ * a state, so there is nothing worth cross-fading — snap instead. A toggle's
+ * color change still animates, both of its containers being opaque, and so does
+ * the elevation of an `elevated` button, whose container is never transparent.
+ */
+export const getButtonTransitionDuration = ({
+  theme,
+  pressed,
+  containerColor,
+  previousContainerColor,
+}: {
+  theme: InternalTheme;
+  pressed: boolean;
+  containerColor: ColorValue;
+  previousContainerColor: ColorValue;
+}): number => {
+  if (
+    containerColor === 'transparent' ||
+    previousContainerColor === 'transparent'
+  ) {
+    return 0;
+  }
+
+  return (
+    theme.motion.duration[pressed ? 'short4' : 'short3'] * theme.animation.scale
+  );
+};
+
 /** Corner the container morphs to while pressed. */
 export const getButtonPressedRadius = ({
   size,

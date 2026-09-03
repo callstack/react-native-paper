@@ -24,6 +24,7 @@ import {
   getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
+  getButtonTransitionDuration,
   getEffectiveButtonShape,
 } from './utils';
 import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
@@ -291,9 +292,6 @@ const Button = ({
       ? activeElevation
       : initialElevation
     : 0;
-  const elevationTransitionDuration =
-    theme.motion.duration[pressed ? 'short4' : 'short3'] *
-    theme.animation.scale;
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
@@ -420,6 +418,20 @@ const Button = ({
   const containerColor =
     backgroundOpacity < 1 ? 'transparent' : backgroundColor;
 
+  // Snap rather than cross-fade when a transparent container is involved — see
+  // `getButtonTransitionDuration`.
+  const previousContainerColorRef = React.useRef(containerColor);
+  React.useEffect(() => {
+    previousContainerColorRef.current = containerColor;
+  }, [containerColor]);
+
+  const surfaceTransitionDuration = getButtonTransitionDuration({
+    theme,
+    pressed,
+    containerColor,
+    previousContainerColor: previousContainerColorRef.current,
+  });
+
   // The clip carries the same animated radius as the `Surface`, so the ripple
   // and the disabled overlay follow the morph.
   //
@@ -497,7 +509,7 @@ const Button = ({
       backgroundColor={containerColor}
       borderRadius={animatedRadius}
       elevation={elevation}
-      transitionDuration={elevationTransitionDuration}
+      transitionDuration={surfaceTransitionDuration}
       style={[styles.button, style]}
     >
       <Reanimated.View
