@@ -1,10 +1,7 @@
-import { Animated } from 'react-native';
-
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 
@@ -54,37 +51,4 @@ describe('getToggleButtonColor', () => {
       getTheme().colors.surfaceContainer
     );
   });
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <ToggleButton
-      disabled
-      status="unchecked"
-      icon="heart"
-      testID="toggle-button"
-      style={[{ transform: [{ scale: value }] }]}
-    />
-  );
-  expect(screen.getByTestId('toggle-button-container-outer-layer')).toHaveStyle(
-    {
-      transform: [{ scale: 1 }],
-    }
-  );
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('toggle-button-container-outer-layer')).toHaveStyle(
-    {
-      transform: [{ scale: 1.5 }],
-    }
-  );
 });

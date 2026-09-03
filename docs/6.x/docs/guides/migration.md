@@ -2,7 +2,81 @@
 title: Migration from Paper 5.x to 6.x
 ---
 
-TBC
+## General changes
+
+### Animations
+
+React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install `react-native-reanimated` 4.3.0 or later and `react-native-worklets` 0.8.1 or later, then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
+
+The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
+
+- `Appbar.Action` and `Appbar.BackAction`: `style`
+- `Badge`: `style`
+- `Banner`: `style`
+- `Button`: `style`
+- `Card`: `style`
+- `Chip`: `style`
+- `Dialog`: `style`
+- `Drawer.CollapsedItem`: `style`
+- `FAB` and `FAB.Extended`: `style`
+- `IconButton`: `style`
+- `Menu`: `contentStyle`
+- `Modal`: `contentContainerStyle`
+- `Searchbar`: `style`
+- `Snackbar`: `style`
+- `Surface`: `style`
+- `ToggleButton`: `style`
+
+So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate these components instead of the React Native `Animated` API.
+
+```tsx
+import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+
+const MyComponent = () => {
+  const opacity = useSharedValue(1);
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+
+  return <Card style={animatedStyle}>Button</Card>;
+};
+```
+
+### Elevation
+
+The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
+
+- `Banner`
+- `Card`
+- `Searchbar`
+- `Snackbar`
+- `Surface`
+
+You can use an elevation level from `0` to `5` instead. Changes to the elevation level are animated automatically.
+
+### Styles
+
+The following component style props no longer support overriding their background color or border radius:
+
+- `Banner`
+- `Button`
+- `Card`
+- `Chip`
+- `Dialog`
+- `Menu`: `contentStyle`
+- `Searchbar`
+- `Snackbar`
+
+You can use the component's color prop where available, or override the corresponding theme colors.
+
+### Test IDs
+
+Some hardcoded and generated test IDs have been removed for the following components:
+
+- `Appbar.Header`: `${testID}-root-layer`
+- `Surface`: `surface` and `${testID}-outer-layer`
+
+You can specify a `testID` explicitly and use that value to query the component.
 
 ## Components
 
@@ -63,6 +137,85 @@ Dividers are decorative, so screen readers skip them and they stay out of the fo
 - <Divider />
 + <Divider accessible aria-hidden={false} role="separator" />
 ```
+
+### Appbar
+
+The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+
+The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+
+### Surface
+
+- The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.
+- The `style` prop no longer configures elevation, background color, or border radius. Use these props instead:
+  - `elevation`
+  - `backgroundColor`
+  - `borderRadius`
+  - `borderBottomEndRadius`
+  - `borderBottomLeftRadius`
+  - `borderBottomRightRadius`
+  - `borderBottomStartRadius`
+  - `borderEndEndRadius`
+  - `borderEndStartRadius`
+  - `borderStartEndRadius`
+  - `borderStartStartRadius`
+  - `borderTopEndRadius`
+  - `borderTopLeftRadius`
+  - `borderTopRightRadius`
+  - `borderTopStartRadius`
+  - `borderCurve`
+- The `pointerEvents` prop is no longer supported as it's deprecated in React Native Web. You can specify `pointerEvents` in the `style` prop instead.
+- The `overflow: 'hidden'` style is no longer supported in `style` as it can clip shadows. You can nest a `View` inside the `Surface` and apply `overflow: 'hidden'` to that instead.
+- The default `testID` for `Surface` was removed. You can specify a `testID` explicitly if you need it.
+
+e.g.:
+
+```diff
+<Surface
+- style={{
+-   backgroundColor: 'red',
+-   borderRadius: 8,
+-   overflow: 'hidden',
+- }}
++ backgroundColor="red"
++ borderRadius={8}
+>
++ <View style={{ overflow: 'hidden' }}>
+    <Text>Content</Text>
++ </View>
+</Surface>
+```
+
+### Modal
+
+- The `contentContainerStyle` prop no longer configures the background color or any border radius property. We have added new props for these:
+  - `contentBackgroundColor`
+  - `contentBorderRadius`
+- We have added the `contentElevation` prop to configure the elevation of the modal content.
+
+e.g.:
+
+```diff
+<Modal
+  visible={visible}
+- contentContainerStyle={{
+-   backgroundColor: 'white',
+-   borderRadius: 8,
+-   padding: 20,
+- }}
++ contentBackgroundColor="white"
++ contentBorderRadius={8}
++ contentElevation={2}
++ contentContainerStyle={{ padding: 20 }}
+>
+  <Text>Content</Text>
+</Modal>
+```
+
+### Dialog
+
+- The default elevation changed from level `1` to level `3`.
+- The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
 ### TextInput
 

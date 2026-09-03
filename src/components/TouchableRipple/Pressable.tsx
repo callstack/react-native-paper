@@ -1,6 +1,5 @@
 import type * as React from 'react';
 import type {
-  Animated,
   PressableProps as PressableNativeProps,
   StyleProp,
   View,
@@ -27,12 +26,7 @@ export type PressableProps = Omit<
     | undefined;
   style?:
     | StyleProp<ViewStyle>
-    | Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-    | ((
-        state: PressableStateCallbackType
-      ) =>
-        | StyleProp<ViewStyle>
-        | Animated.WithAnimatedValue<StyleProp<ViewStyle>>)
+    | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
 };
 

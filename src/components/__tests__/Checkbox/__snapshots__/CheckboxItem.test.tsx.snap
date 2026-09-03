@@ -135,6 +135,7 @@ exports[`can render leading checkbox control 1`] = `
           }
         >
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -149,14 +150,13 @@ exports[`can render leading checkbox control 1`] = `
                 },
                 {
                   "borderColor": "rgba(73, 69, 79, 1)",
-                },
-                {
                   "opacity": 1,
                 },
               ]
             }
           />
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -170,14 +170,13 @@ exports[`can render leading checkbox control 1`] = `
                 },
                 {
                   "backgroundColor": "rgba(103, 80, 164, 1)",
-                },
-                {
                   "opacity": 0,
                 },
               ]
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -225,7 +224,7 @@ exports[`can render leading checkbox control 1`] = `
                       "width": 11,
                     },
                     {
-                      "borderColor": "transparent",
+                      "borderColor": "rgba(255, 255, 255, 1)",
                     },
                     null,
                   ]
@@ -451,6 +450,7 @@ exports[`renders unchecked 1`] = `
           }
         >
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -465,14 +465,13 @@ exports[`renders unchecked 1`] = `
                 },
                 {
                   "borderColor": "rgba(73, 69, 79, 1)",
-                },
-                {
                   "opacity": 1,
                 },
               ]
             }
           />
           <View
+            collapsable={false}
             pointerEvents="none"
             style={
               [
@@ -486,14 +485,13 @@ exports[`renders unchecked 1`] = `
                 },
                 {
                   "backgroundColor": "rgba(103, 80, 164, 1)",
-                },
-                {
                   "opacity": 0,
                 },
               ]
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -541,7 +539,7 @@ exports[`renders unchecked 1`] = `
                       "width": 11,
                     },
                     {
-                      "borderColor": "transparent",
+                      "borderColor": "rgba(255, 255, 255, 1)",
                     },
                     null,
                   ]
