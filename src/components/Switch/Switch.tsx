@@ -119,10 +119,10 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
  * Customize by overriding these `theme.colors` roles:
  * - `primary` / `onPrimary`: selected track / selected handle
  * - `onPrimaryContainer`: selected icon
- * - `primaryContainer`: selected handle on hover, press
+ * - `primaryContainer`: selected handle on hover, focus, press
  * - `surfaceContainerHighest`: unselected track + icon
  * - `outline`: unselected resting handle, unselected track outline
- * - `onSurfaceVariant`: unselected handle on hover, press
+ * - `onSurfaceVariant`: unselected handle on hover, focus, press
  * - `onSurface`: disabled track, handle, and icon fills
  * - `surface`: disabled selected handle
  * - `secondary`: focus indicator
@@ -252,12 +252,7 @@ const Switch = ({
     (current, prev) => {
       if (current === prev) return;
       const wasPressed = prev === 'pressed';
-      const target =
-        current === 'pressed'
-          ? stateOpacity.pressed
-          : current === 'hovered'
-            ? stateOpacity.hovered
-            : 0;
+      const target = current ? stateOpacity[current] : 0;
       if (wasPressed && current !== 'pressed') {
         // On release: rise to peak, then fall to the next state.
         stateLayerAlpha.value = withSequence(
@@ -284,6 +279,11 @@ const Switch = ({
       return isCheckedNow
         ? colors.checkedPressedHandleColor
         : colors.uncheckedPressedHandleColor;
+    }
+    if (focusedSV.value === 1) {
+      return isCheckedNow
+        ? colors.checkedFocusHandleColor
+        : colors.uncheckedFocusHandleColor;
     }
     if (hoveredSV.value === 1) {
       return isCheckedNow
@@ -394,6 +394,7 @@ const Switch = ({
       </Pressable>
 
       <Animated.View
+        testID={testID ? `${testID}-state-layer` : undefined}
         style={[
           styles.stateLayer,
           anchorStyle,
@@ -414,6 +415,7 @@ const Switch = ({
           />
         ) : null}
         <Animated.View
+          testID={testID ? `${testID}-handle` : undefined}
           style={[
             styles.handleFill,
             { opacity: handleOpacity },
@@ -449,6 +451,7 @@ const Switch = ({
       ) : null}
 
       <Animated.View
+        testID={testID ? `${testID}-focus-ring` : undefined}
         style={[
           styles.focusRing,
           {
