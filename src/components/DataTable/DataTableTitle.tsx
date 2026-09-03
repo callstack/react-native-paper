@@ -182,6 +182,10 @@ const DataTableTitle = ({
 
   const columnLabel = getElementLabel({ 'aria-label': ariaLabel, children });
 
+  const describable = !React.Children.toArray(children).some(
+    React.isValidElement
+  );
+
   const previousSortDirection = React.useRef(sortDirection);
 
   React.useEffect(() => {
@@ -239,7 +243,8 @@ const DataTableTitle = ({
     // Native has no column-header semantics, so a title that is not already a
     // pressable has to opt in, or its text is absorbed by whichever ancestor
     // happens to be focusable and the columns read as one run-on stop.
-    accessible: Platform.OS === 'web' ? undefined : true,
+    accessible:
+      Platform.OS === 'web' || !(onPress || describable) ? undefined : true,
     ...webAriaProps({
       'aria-colindex': resolved.index == null ? undefined : resolved.index + 1,
       // `none` is what advertises a column as sortable but currently unsorted.

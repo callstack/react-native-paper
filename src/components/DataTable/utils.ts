@@ -4,11 +4,20 @@ import * as React from 'react';
 export const isDataTableElement = <P>(
   child: React.ReactNode,
   displayName: string
-): child is React.ReactElement<P> =>
-  React.isValidElement(child) &&
-  typeof child.type !== 'string' &&
-  'displayName' in child.type &&
-  child.type.displayName === displayName;
+): child is React.ReactElement<P> => {
+  if (!React.isValidElement(child)) {
+    return false;
+  }
+
+  const type: unknown = child.type;
+
+  return (
+    (typeof type === 'function' ||
+      (typeof type === 'object' && type !== null)) &&
+    'displayName' in type &&
+    (type as { displayName?: unknown }).displayName === displayName
+  );
+};
 
 /** The text of a node, when it has one. */
 export const getNodeText = (node: React.ReactNode): string | undefined => {

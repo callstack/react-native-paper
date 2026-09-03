@@ -1,4 +1,10 @@
-import { Platform, StyleSheet, useWindowDimensions } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text as RNText,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import * as Reanimated from 'react-native-reanimated';
@@ -232,6 +238,92 @@ describe('DataTable.Row', () => {
     );
 
     expect(screen.getByRole('row', { name: /row 5 of 6/ })).toBeOnTheScreen();
+  });
+
+  it('does not take an empty state beside the rows for a row', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <DataTable testID="table">
+        <DataTable.Header>
+          <DataTable.Title>Dessert</DataTable.Title>
+        </DataTable.Header>
+        <RNText>Only one dessert left</RNText>
+        <DataTable.Row testID="row">
+          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    // The text is neither counted nor allowed to push the row down a place.
+    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
+    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
+  });
+
+  it('numbers rows grouped in a wrapper one by one', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <DataTable testID="table">
+        <DataTable.Header>
+          <DataTable.Title>Dessert</DataTable.Title>
+        </DataTable.Header>
+        <View>
+          <DataTable.Row testID="first">
+            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row testID="second">
+            <DataTable.Cell>Eclair</DataTable.Cell>
+          </DataTable.Row>
+        </View>
+      </DataTable>
+    );
+
+    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
+    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
+    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 3);
+  });
+
+  it('numbers rows given in a fragment', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <DataTable testID="table">
+        <DataTable.Header>
+          <DataTable.Title>Dessert</DataTable.Title>
+        </DataTable.Header>
+        <>
+          <DataTable.Row testID="first">
+            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row testID="second">
+            <DataTable.Cell>Eclair</DataTable.Cell>
+          </DataTable.Row>
+        </>
+      </DataTable>
+    );
+
+    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
+    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
+  });
+
+  it('renders a fragment inside a row or a header', async () => {
+    await render(
+      <DataTable>
+        <DataTable.Header>
+          <>
+            <DataTable.Title>Dessert</DataTable.Title>
+          </>
+        </DataTable.Header>
+        <DataTable.Row testID="row">
+          <>
+            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          </>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(screen.getByTestId('row')).toBeOnTheScreen();
   });
 });
 
@@ -501,6 +593,20 @@ describe('DataTable.Title', () => {
     // Otherwise the header's text is absorbed by whatever ancestor happens to
     // be focusable, and the columns are read as one run-on stop.
     expect(screen.getByTestId('plain')).toHaveProp('accessible', true);
+  });
+
+  it('lets a control inside a column header keep its own stop', async () => {
+    await render(
+      <DataTable.Header>
+        <DataTable.Title testID="title">
+          <Checkbox status="checked" testID="select-all" />
+        </DataTable.Title>
+      </DataTable.Header>
+    );
+
+    // Made one accessibility element, the header would swallow the checkbox.
+    expect(screen.getByTestId('title')).not.toHaveProp('accessible', true);
+    expect(screen.getByTestId('select-all')).toBeOnTheScreen();
   });
 
   it('announces a sortable column and its sort state', async () => {

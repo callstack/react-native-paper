@@ -175,7 +175,7 @@ const DataTable = ({
   ...rest
 }: Props) => {
   if (
-    __DEV__ &&
+    process.env.NODE_ENV !== 'production' &&
     layout === 'fixed' &&
     columns?.some((column) => column.width == null && column.minWidth == null)
   ) {
@@ -193,31 +193,49 @@ const DataTable = ({
       let hasHeader = false;
       let rendered = 0;
 
-      const rows = React.Children.map(children, (child) => {
-        if (!React.isValidElement(child)) {
-          return child;
-        }
+      const number = (child: React.ReactNode) => (
+        <RowIndexContext.Provider value={firstRowIndex + rendered++}>
+          {child}
+        </RowIndexContext.Provider>
+      );
 
-        if (
-          isDataTableElement<DataTableHeaderProps>(child, 'DataTable.Header')
-        ) {
-          hasHeader = true;
-          columnLabels = readColumnLabels(child.props.children);
-          return child;
-        }
+      const walk = (nodes: React.ReactNode): React.ReactNode =>
+        React.Children.map(nodes, (child) => {
+          if (!React.isValidElement<{ children?: React.ReactNode }>(child)) {
+            return child;
+          }
 
-        if (isDataTableElement(child, 'DataTable.Pagination')) {
-          return child;
-        }
+          // Read before the guards below narrow `child` to `never`.
+          const { children: nested } = child.props;
 
-        // Anything else is taken for a row. Virtualized rows have no children
-        // here to number, so those pass `index` themselves.
-        return (
-          <RowIndexContext.Provider value={firstRowIndex + rendered++}>
-            {child}
-          </RowIndexContext.Provider>
-        );
-      });
+          if (
+            isDataTableElement<DataTableHeaderProps>(child, 'DataTable.Header')
+          ) {
+            hasHeader = true;
+            columnLabels = readColumnLabels(nested);
+            return child;
+          }
+
+          if (isDataTableElement(child, 'DataTable.Pagination')) {
+            return child;
+          }
+
+          if (isDataTableElement(child, 'DataTable.Row')) {
+            return number(child);
+          }
+
+          // Anything the table can see into is descended into, not counted:
+          // a wrapper must not make its rows one row, nor an empty state a row.
+          if (nested !== undefined) {
+            return React.cloneElement(child, undefined, walk(nested));
+          }
+
+          // What is left renders its row out of sight, so it counts as one. A
+          // row the table never sees - a virtualized one - passes `index`.
+          return number(child);
+        });
+
+      const rows = walk(children);
 
       return { rows, columnLabels, hasHeader, renderedRowCount: rendered };
     }, [children, firstRowIndex]);
