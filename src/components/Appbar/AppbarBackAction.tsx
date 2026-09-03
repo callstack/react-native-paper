@@ -1,12 +1,13 @@
 import * as React from 'react';
 import type {
-  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
   View,
   ViewStyle,
 } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
@@ -36,7 +37,7 @@ export type Props = $Omit<
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
 };
 

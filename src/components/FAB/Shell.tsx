@@ -8,9 +8,10 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Reanimated, {
+import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
@@ -24,12 +25,14 @@ import {
 } from './tokens';
 import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
-import { useVisibility } from './useVisibility';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ShapeToken } from '../../theme/utils/shape';
 import type { Elevation, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
+import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type ShellProps = {
@@ -159,7 +162,7 @@ export type ShellProps = {
    * Outer-positioning style. Visual treatment (size, shape, color) comes from
    * `variant` and `size`.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * TestID used for testing purposes.
    */
@@ -174,7 +177,7 @@ export type ShellProps = {
 /**
  * Internal shell used by every FAB-flavored component (regular, Extended,
  * morphing menu trigger). Owns the outer container, ripple, clip, and the
- * visibility animation (scale + alpha + shadow). Consumers that need to
+ * visibility animation (scale + alpha). Consumers that need to
  * animate the outer's width/height/borderRadius pass shared values; the
  * static size-driven defaults are used otherwise.
  *
@@ -225,11 +228,30 @@ const Shell = ({
     [theme, variant, containerColor, contentColor]
   );
 
-  const { scale, alpha, shadowStyle } = useVisibility({
-    visible,
-    theme,
-    elevation,
-  });
+  const reduceMotion = useReduceMotion();
+
+  const scale = useSharedValue(visible ? 1 : 0);
+  const alpha = useSharedValue(visible ? 1 : 0);
+
+  React.useEffect(() => {
+    const target = visible ? 1 : 0;
+
+    if (reduceMotion) {
+      scale.value = target;
+      alpha.value = target;
+      return;
+    }
+
+    scale.value = withSpring(
+      target,
+      toRawSpring(theme.motion.spring.fast.spatial)
+    );
+
+    alpha.value = withSpring(
+      target,
+      toRawSpring(theme.motion.spring.fast.effects)
+    );
+  }, [visible, theme, reduceMotion, scale, alpha]);
 
   // Fallback shared values track the static size-driven dimensions. Consumers
   // that don't supply their own animated shared values get these. Keeping
@@ -238,6 +260,7 @@ const Shell = ({
   const fallbackWidth = useSharedValue(dimensions.width);
   const fallbackHeight = useSharedValue(dimensions.height);
   const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
+
   React.useEffect(() => {
     fallbackWidth.value = dimensions.width;
     fallbackHeight.value = dimensions.height;
@@ -262,10 +285,8 @@ const Shell = ({
       opacity: alpha.value,
       width: width.value,
       height: height.value,
-      borderRadius: borderRadius.value,
-      backgroundColor: containerBg,
     }),
-    [width, height, borderRadius, containerBg]
+    [width, height]
   );
 
   const clipStyle = useAnimatedStyle(
@@ -277,6 +298,7 @@ const Shell = ({
   );
 
   const { focusedSV, onFocus, onBlur } = useFocusRing();
+
   const focusRingStyle = useAnimatedStyle(
     () => ({
       opacity: focusedSV.value ? 1 : 0,
@@ -286,18 +308,21 @@ const Shell = ({
   );
 
   return (
-    <Reanimated.View
+    <Surface
       ref={ref}
+      backgroundColor={containerBg}
+      borderRadius={borderRadius}
       style={[
         style,
         styles.container,
         outerStyle,
-        shadowStyle,
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
+      elevation={elevation}
       testID={`${testID}-container`}
+      theme={theme}
     >
-      <Reanimated.View style={[styles.clip, clipStyle]}>
+      <Animated.View style={[styles.clip, clipStyle]}>
         {overlay}
         <TouchableRipple
           borderless
@@ -336,15 +361,15 @@ const Shell = ({
             />
           )}
         </TouchableRipple>
-      </Reanimated.View>
-      <Reanimated.View
+      </Animated.View>
+      <Animated.View
         style={[
           styles.focusRing,
           { borderColor: theme.colors.secondary },
           focusRingStyle,
         ]}
       />
-    </Reanimated.View>
+    </Surface>
   );
 };
 

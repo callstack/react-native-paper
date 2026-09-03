@@ -104,17 +104,24 @@ const CardExample = () => {
           />
           <Card.Title title="Custom Button styles" />
           <Card.Actions>
-            <Button style={styles.button} onPress={() => {}}>
+            <Button
+              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              onPress={() => {}}
+            >
               Share
             </Button>
-            <Button style={styles.button} onPress={() => {}}>
+            <Button
+              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              onPress={() => {}}
+            >
               Explore
             </Button>
           </Card.Actions>
         </Card>
         <Card
-          style={[styles.card, styles.customCardRadius]}
+          style={styles.card}
           mode={selectedMode}
+          theme={{ shapes: { corner: { medium: 24 } } }}
         >
           <Card.Title
             title="Custom border radius"
@@ -221,13 +228,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 12,
     paddingHorizontal: 8,
-  },
-  button: {
-    borderRadius: 12,
-  },
-  customCardRadius: {
-    borderTopLeftRadius: 24,
-    borderBottomRightRadius: 24,
   },
   customCoverRadius: {
     borderTopLeftRadius: 0,

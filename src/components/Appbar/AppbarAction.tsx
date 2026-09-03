@@ -1,11 +1,7 @@
 import * as React from 'react';
-import type {
-  Animated,
-  ColorValue,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -43,7 +39,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
    * @optional
