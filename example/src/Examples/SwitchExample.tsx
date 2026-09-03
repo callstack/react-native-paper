@@ -88,6 +88,10 @@ const SwitchExample = () => {
         />
       </Row>
 
+      <Row label="Read-only">
+        <Switch value={defaultOn} readOnly />
+      </Row>
+
       <View
         style={[
           styles.separator,

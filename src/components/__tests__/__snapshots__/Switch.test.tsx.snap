@@ -34,8 +34,9 @@ exports[`Switch render renders disabled off 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -249,8 +250,9 @@ exports[`Switch render renders disabled on 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -444,6 +446,7 @@ exports[`Switch render renders off 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -642,6 +645,7 @@ exports[`Switch render renders on 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -820,6 +824,7 @@ exports[`Switch render renders with checked icon 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1069,6 +1074,7 @@ exports[`Switch render renders with per-state icons 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
