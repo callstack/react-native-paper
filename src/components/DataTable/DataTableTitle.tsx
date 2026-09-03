@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, PixelRatio, Pressable, StyleSheet } from 'react-native';
+import { PixelRatio, Pressable, StyleSheet } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -8,8 +8,17 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
@@ -89,30 +98,30 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+
   const { direction } = useLocale();
-  const { current: spinAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
-  );
+
+  const spin = useSharedValue(sortDirection === 'ascending' ? 0 : 180);
 
   React.useEffect(() => {
-    Animated.timing(spinAnim, {
-      toValue: sortDirection === 'ascending' ? 0 : 1,
+    spin.value = withTiming(sortDirection === 'ascending' ? 0 : 180, {
       duration: 150,
-      useNativeDriver: true,
-    }).start();
-  }, [sortDirection, spinAnim]);
+      easing: Easing.inOut(Easing.ease),
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [reduceMotion, sortDirection, spin]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${spin.value}deg` }],
+  }));
 
   const textColor = theme.colors.onSurface;
 
   const alphaTextColor = theme.colors.onSurfaceVariant;
 
-  const spin = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '180deg'],
-  });
-
   const icon = sortDirection ? (
-    <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
+    <Animated.View style={[styles.icon, animatedStyle]}>
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
