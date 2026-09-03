@@ -986,7 +986,7 @@ exports[`Switch render renders with checked icon 1`] = `
         style={
           [
             {
-              "color": "rgba(103, 80, 164, 1)",
+              "color": "rgba(33, 0, 93, 1)",
               "fontSize": 16,
             },
             [
@@ -1235,7 +1235,7 @@ exports[`Switch render renders with per-state icons 1`] = `
         style={
           [
             {
-              "color": "rgba(103, 80, 164, 1)",
+              "color": "rgba(33, 0, 93, 1)",
               "fontSize": 16,
             },
             [
