@@ -11,18 +11,19 @@ import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
+export type Props = Omit<TouchableRippleProps, 'children' | 'style'> & {
   /**
    * Icon to display.
    */

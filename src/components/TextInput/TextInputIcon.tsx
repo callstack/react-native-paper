@@ -6,7 +6,6 @@ import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
 import IconButton from '../IconButton/IconButton';
 
 export type TextInputAccessoryProps = {
@@ -17,7 +16,7 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  $Omit<React.ComponentProps<typeof IconButton>, keyof TextInputAccessoryProps>;
+  Omit<React.ComponentProps<typeof IconButton>, keyof TextInputAccessoryProps>;
 
 /**
  * A component to render a leading / trailing icon in the TextInput

@@ -9,11 +9,10 @@ import type {
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
-import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
 
-export type Props = $Omit<
+export type Props = Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
   'icon'
 > & {
