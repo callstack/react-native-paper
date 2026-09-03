@@ -55,8 +55,7 @@ const ast = parse(source, {
 });
 
 const index = packageJson.main;
-// The result ends up in an import specifier, which always uses forward slashes,
-// so normalise the platform separator that `relative` returns on Windows.
+
 const relative = (value: string) =>
   relativePath(root, resolve(root, dirname(index), value))
     .split(sep)
