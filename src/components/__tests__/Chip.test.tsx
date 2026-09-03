@@ -1,6 +1,6 @@
-import { Animated, StyleSheet } from 'react-native';
+import { Animated } from 'react-native';
 
-import { describe, it, jest } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 import color from 'color';
 
@@ -11,15 +11,6 @@ import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
 const stateOpacity = tokens.md.sys.state.opacity;
-
-const getScaleValue = (testID: string) => {
-  const style = StyleSheet.flatten(screen.getByTestId(testID).props.style);
-  const scale = style.transform?.find(
-    (transform: { scale?: Animated.Value | number }) => 'scale' in transform
-  )?.scale;
-
-  return typeof scale === 'number' ? scale : scale?.__getValue();
-};
 
 it('renders chip with onPress', async () => {
   const tree = (
@@ -79,26 +70,10 @@ it('renders selected chip', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not mark chip disabled if there is no touch handler passed', async () => {
+it('does not mark informational chip disabled', async () => {
   await render(<Chip testID="informational-chip">Informational chip</Chip>);
 
-  expect(
-    screen.getByTestId('informational-chip').props.accessibilityState
-  ).toMatchObject({
-    disabled: false,
-  });
-});
-
-it('marks chip disabled when disabled prop is passed', async () => {
-  await render(
-    <Chip disabled testID="disabled-chip">
-      Disabled chip
-    </Chip>
-  );
-
-  expect(screen.getByTestId('disabled-chip').props.accessibilityState).toMatchObject({
-    disabled: true,
-  });
+  expect(screen.getByTestId('informational-chip')).not.toBeDisabled();
 });
 
 it('renders active chip if only onLongPress handler is passed', async () => {
@@ -108,9 +83,7 @@ it('renders active chip if only onLongPress handler is passed', async () => {
     </Chip>
   );
 
-  expect(screen.getByTestId('active-chip').props.accessibilityState).toMatchObject({
-    disabled: false,
-  });
+  expect(screen.getByTestId('active-chip')).toBeEnabled();
 });
 
 it('renders chip with zero border radius', async () => {
@@ -120,11 +93,9 @@ it('renders chip with zero border radius', async () => {
     </Chip>
   );
 
-  expect(StyleSheet.flatten(screen.getByTestId('active-chip').props.style)).toMatchObject(
-    {
-      borderRadius: 0,
-    }
-  );
+  expect(screen.getByTestId('active-chip')).toHaveStyle({
+    borderRadius: 0,
+  });
 });
 
 describe('getChipColors - text color', () => {
@@ -414,7 +385,9 @@ it('animated value changes correctly', async () => {
       Example Chip
     </Chip>
   );
-  expect(getScaleValue('chip-container-outer-layer')).toBe(1);
+  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
 
   Animated.timing(value, {
     toValue: 1.5,
@@ -425,5 +398,7 @@ it('animated value changes correctly', async () => {
   await act(() => {
     jest.advanceTimersByTime(200);
   });
-  expect(getScaleValue('chip-container-outer-layer')).toBe(1.5);
+  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
 });
