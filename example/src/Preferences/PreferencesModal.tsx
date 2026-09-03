@@ -19,18 +19,17 @@ import {
 import { Modal } from 'react-native-paper';
 
 import { usePreferences } from './usePreferences';
-import { dynamicThemeSupported, isWeb } from '../../utils';
+import { dynamicThemeSupported } from '../../utils';
 
 export default function PreferencesModal() {
   const [showRTLDialog, setShowRTLDialog] = useState(false);
   const theme = useTheme();
   const { height: windowHeight } = useWindowDimensions();
 
-  const isIOS = Platform.OS === 'ios';
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
-  const rtlToggleUnavailable = !isWeb && expoGoExecution;
-  const rippleEffectLabel = `${isIOS ? 'Highlight' : 'Ripple'} effect`;
+  const rtlToggleUnavailable = Platform.OS !== 'web' && expoGoExecution;
+  const rippleEffectLabel = `${Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect`;
 
   const {
     toggleShouldUseDynamicTheme,
@@ -68,10 +67,9 @@ export default function PreferencesModal() {
           visible={preferencesVisible}
           onDismiss={togglePreferences}
           overlayAccessibilityLabel="Close preferences"
-          contentContainerStyle={[
-            styles.modalContent,
-            { backgroundColor: theme.colors.elevation.level2 },
-          ]}
+          contentBorderRadius={28}
+          contentBackgroundColor={theme.colors.elevation.level2}
+          contentContainerStyle={styles.modalContent}
         >
           <ScrollView
             style={[styles.scrollView, { maxHeight: windowHeight * 0.7 }]}
@@ -173,7 +171,6 @@ export default function PreferencesModal() {
 const styles = StyleSheet.create({
   modalContent: {
     marginHorizontal: 24,
-    borderRadius: 28,
   },
   scrollView: {
     flexGrow: 0,

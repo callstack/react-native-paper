@@ -77,10 +77,9 @@ const HelpCenterSample = () => {
         <Modal
           visible={contactVisible}
           onDismiss={() => setContactVisible(false)}
-          contentContainerStyle={[
-            styles.modal,
-            { backgroundColor: colors.surface },
-          ]}
+          contentBorderRadius={28}
+          contentBackgroundColor={colors.surface}
+          contentContainerStyle={styles.modal}
         >
           <Text variant="titleMedium">Contact support</Text>
           <Text variant="bodyMedium">
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
   modal: {
     margin: 24,
     padding: 24,
-    borderRadius: 28,
     gap: 8,
   },
 });

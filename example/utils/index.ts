@@ -60,8 +60,6 @@ export function inputReducer<T extends keyof State>(
   }
 }
 
-export const isWeb = Platform.OS === 'web';
-
 export const animatedFABExampleData = [
   {
     id: '1',

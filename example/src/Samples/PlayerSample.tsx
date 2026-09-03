@@ -32,7 +32,7 @@ const PlayerSample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      <Surface style={styles.cover}>
+      <Surface borderRadius={16} style={styles.cover}>
         <Icon source="music-note" size={72} />
       </Surface>
 
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     height: 200,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
   },
 });
 
