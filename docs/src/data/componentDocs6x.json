@@ -11369,35 +11369,6 @@
             },
             "description": "Whether the switch is on."
           },
-          "onValueChange": {
-            "required": false,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(value: boolean) => void",
-              "signature": {
-                "arguments": [
-                  {
-                    "name": "value",
-                    "type": {
-                      "name": "boolean"
-                    }
-                  }
-                ],
-                "return": {
-                  "name": "void"
-                }
-              }
-            },
-            "description": "Called with the new value when the user toggles the switch."
-          },
-          "disabled": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": "Disables interaction and renders the disabled visual state."
-          },
           "checkedIcon": {
             "required": false,
             "tsType": {
@@ -11445,6 +11416,42 @@
               "name": "string"
             },
             "description": "Accessibility label for the switch. This is read by the screen reader when the user focuses the switch."
+          },
+          "onValueChange": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: boolean) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "name": "value",
+                    "type": {
+                      "name": "boolean"
+                    }
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "Called with the new value when the user toggles the switch. Required\nunless the switch is `readOnly` or `disabled`."
+          },
+          "readOnly": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Reports state the user cannot change here. The switch keeps its enabled\nappearance and is still announced by a screen reader, but it is neither\nfocusable nor pressable."
+          },
+          "disabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Disables interaction and renders the disabled visual state."
           }
         }
       },
