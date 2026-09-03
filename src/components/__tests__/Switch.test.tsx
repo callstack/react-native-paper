@@ -50,6 +50,12 @@ describe('Switch accessibility', () => {
 
     expect(screen.getByRole('switch')).toBeOnTheScreen();
   });
+
+  it('exposes a touch target meeting the 48dp minimum', async () => {
+    await render(<Switch value={false} onValueChange={jest.fn()} />);
+
+    expect(screen.getByRole('switch')).toHaveStyle({ width: 52, height: 48 });
+  });
 });
 
 describe('Switch focus state', () => {
