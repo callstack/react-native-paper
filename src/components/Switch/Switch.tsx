@@ -68,6 +68,7 @@ const {
   trackHeight: TRACK_HEIGHT,
   trackOutlineWidth: TRACK_OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
+  touchTargetSize: TOUCH_TARGET_SIZE,
   selectedHandleSize: SELECTED_HANDLE,
   unselectedHandleSize: UNSELECTED_HANDLE,
   iconHandleSize: ICON_HANDLE,
@@ -86,7 +87,10 @@ const stateOpacity = stateTokens.opacity;
 const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
   stateTokens.focusIndicator;
 const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
-const OVERLAY_TOP = (STATE_LAYER_SIZE - TRACK_HEIGHT) / 2;
+// Every painted layer is smaller than the touch target and absolutely
+// positioned, so each one is centred against it.
+const centreY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
+const TRACK_TOP = centreY(TRACK_HEIGHT);
 
 // Hold-then-grow: a brief delay before snapping to PRESSED_HANDLE so a quick
 // tap doesn't flash the press-grow visual.
@@ -298,7 +302,7 @@ const Switch = ({
   const handleAnimatedStyle = useAnimatedStyle(() => ({
     width: handleSize.value,
     height: handleSize.value,
-    top: (STATE_LAYER_SIZE - handleSize.value) / 2,
+    top: (TOUCH_TARGET_SIZE - handleSize.value) / 2,
     transform: [
       { translateX: xSign * (handleCenter.value - handleSize.value / 2) },
     ],
@@ -457,10 +461,10 @@ const Switch = ({
           {
             borderColor: colors.focusIndicatorColor,
             borderWidth: FOCUS_THICKNESS,
-            top: OVERLAY_TOP + FOCUS_RING_INSET,
+            top: TRACK_TOP + FOCUS_RING_INSET,
             left: FOCUS_RING_INSET,
             right: FOCUS_RING_INSET,
-            bottom: OVERLAY_TOP + FOCUS_RING_INSET,
+            bottom: TRACK_TOP + FOCUS_RING_INSET,
             borderRadius: cornerFull,
           },
           focusRingAnimatedStyle,
@@ -473,14 +477,14 @@ const Switch = ({
 const styles = StyleSheet.create({
   wrapper: {
     width: TRACK_WIDTH,
-    height: STATE_LAYER_SIZE,
+    height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'visible',
   },
   touchable: {
     width: TRACK_WIDTH,
-    height: STATE_LAYER_SIZE,
+    height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -502,7 +506,7 @@ const styles = StyleSheet.create({
   },
   stateLayer: {
     position: 'absolute',
-    top: 0,
+    top: centreY(STATE_LAYER_SIZE),
     width: STATE_LAYER_SIZE,
     height: STATE_LAYER_SIZE,
     borderRadius: cornerFull,
@@ -524,7 +528,7 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     position: 'absolute',
-    top: (STATE_LAYER_SIZE - SELECTED_ICON) / 2,
+    top: centreY(SELECTED_ICON),
     width: SELECTED_ICON,
     height: SELECTED_ICON,
     pointerEvents: 'none',
