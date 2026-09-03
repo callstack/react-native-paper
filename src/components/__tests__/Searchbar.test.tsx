@@ -1,7 +1,5 @@
-import { Animated } from 'react-native';
-
 import { expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
@@ -70,33 +68,6 @@ it('renders clear icon wrapper, which is never target of touch events, if search
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
   ).toBe('none');
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Searchbar
-      testID="search-bar"
-      value=""
-      style={[{ transform: [{ scale: value }] }]}
-    />
-  );
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('search-bar-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
 });
 
 it('defines onClearIconPress action and checks if it is called when close button is pressed', async () => {

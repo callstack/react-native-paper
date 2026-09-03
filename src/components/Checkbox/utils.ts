@@ -62,13 +62,9 @@ const getOutlineColor = ({
 
 const getIconColor = ({
   theme,
-  selected,
   disabled,
   error,
 }: SelectionState): ColorValue => {
-  if (!selected) {
-    return 'transparent';
-  }
   if (disabled) {
     return theme.colors[CheckboxTokens.disabledIconColor];
   }

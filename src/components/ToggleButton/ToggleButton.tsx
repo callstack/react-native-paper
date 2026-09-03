@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { ToggleButtonRowContext } from './ToggleButtonRowContext';
@@ -43,7 +45,7 @@ export type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked';
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * @optional
    */
