@@ -1,6 +1,9 @@
+import * as React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import type { StyleProp, ImageSourcePropType, ImageStyle } from 'react-native';
 
+import { ListTokens } from './tokens';
+import { ListRowContext } from './utils';
 import type { ThemeProp } from '../../types';
 
 export type Props = {
@@ -37,9 +40,17 @@ const ListImage = ({
   variant = 'image',
   theme: _theme,
 }: Props) => {
+  const { verticalPadding } = React.useContext(ListRowContext);
+
   const getStyles = () => {
     if (variant === 'video') {
-      return [style, styles.video];
+      return [
+        style,
+        styles.video,
+        {
+          marginVertical: ListTokens.threeLineVerticalPadding - verticalPadding,
+        },
+      ];
     }
 
     return [style, styles.image];
