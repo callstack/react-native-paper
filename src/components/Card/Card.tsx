@@ -8,6 +8,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  cubicBezier,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -20,6 +21,7 @@ import CardTitle from './CardTitle';
 import type { Props as CardTitleProps } from './CardTitle';
 import { resolveCardVisuals } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens as systemTokens } from '../../theme/tokens';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -216,6 +218,11 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
      */
     disabled?: boolean;
     /**
+     * Whether to show the Card's controlled Material dragged presentation.
+     * Gesture recognition and drag lifecycle remain the consumer's responsibility.
+     */
+    dragged?: boolean;
+    /**
      * Style of card's inner content.
      */
     contentStyle?: StyleProp<ViewStyle>;
@@ -308,6 +315,7 @@ const Card = ({
   testID = 'card',
   accessible,
   disabled,
+  dragged = false,
   accessibilityActions,
   role,
   accessibilityRole,
@@ -370,6 +378,7 @@ const Card = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
 
   const isDisabled = Boolean(
     disabled || ariaDisabled || accessibilityState?.disabled
@@ -380,6 +389,7 @@ const Card = ({
     variant: cardVariant,
     elevation: customElevation,
     disabled: isDisabled,
+    dragged,
   });
 
   const enabledVisuals = resolveCardVisuals({
@@ -405,11 +415,30 @@ const Card = ({
     elevation: customElevation,
     pressed: true,
   });
-
+  const draggedVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    dragged: true,
+  });
+  const disabledVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    disabled: true,
+  });
+  const disabledState = useSharedValue(isDisabled);
+  const draggedState = useSharedValue(dragged);
   const hovered = useSharedValue(false);
   const focused = useSharedValue(false);
   const pressed = useSharedValue(false);
   const currentInteractiveVisuals = useDerivedValue(() => {
+    if (disabledState.value) {
+      return disabledVisuals;
+    }
+    if (draggedState.value) {
+      return draggedVisuals;
+    }
     if (pressed.value) {
       return pressedVisuals;
     }
@@ -420,20 +449,74 @@ const Card = ({
       return hoveredVisuals;
     }
     return enabledVisuals;
-  });
+  }, [
+    disabledState,
+    disabledVisuals,
+    draggedState,
+    draggedVisuals,
+    enabledVisuals,
+    focusedVisuals,
+    hoveredVisuals,
+    pressedVisuals,
+  ]);
   const interactiveElevation = useDerivedValue<Elevation>(() => {
     return currentInteractiveVisuals.value.elevation;
   });
-  const stateLayerAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: currentInteractiveVisuals.value.stateLayerOpacity,
-  }));
-  const outlineAnimatedStyle = useAnimatedStyle(() => ({
-    borderColor: currentInteractiveVisuals.value.outlineColor,
-    opacity: currentInteractiveVisuals.value.outlineOpacity,
-  }));
-  const focusIndicatorAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: focused.value ? 1 : 0,
-  }));
+  const transitionDuration = reduceMotion
+    ? 0
+    : theme.motion.duration.short3 * theme.animation.scale;
+  const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
+  const stateLayerAnimatedStyle = useAnimatedStyle(
+    () => ({
+      opacity: currentInteractiveVisuals.value.stateLayerOpacity,
+      transitionDuration,
+      transitionProperty: ['opacity'],
+      transitionTimingFunction,
+    }),
+    [currentInteractiveVisuals, transitionDuration, transitionTimingFunction]
+  );
+  const outlineAnimatedStyle = useAnimatedStyle(() => {
+    const outlineColor = currentInteractiveVisuals.value.outlineColor;
+
+    return {
+      borderColor: outlineColor,
+      opacity: currentInteractiveVisuals.value.outlineOpacity,
+      transitionDuration,
+      transitionProperty:
+        typeof outlineColor === 'string'
+          ? ['borderColor', 'opacity']
+          : ['opacity'],
+      transitionTimingFunction,
+    };
+  }, [currentInteractiveVisuals, transitionDuration, transitionTimingFunction]);
+  const focusIndicatorAnimatedStyle = useAnimatedStyle(
+    () => ({
+      opacity: disabledState.value ? 0 : focused.value ? 1 : 0,
+      transitionDuration,
+      transitionProperty: ['opacity'],
+      transitionTimingFunction,
+    }),
+    [disabledState, transitionDuration, transitionTimingFunction]
+  );
+
+  React.useEffect(() => {
+    disabledState.value = isDisabled;
+    draggedState.value = dragged;
+
+    if (isDisabled) {
+      hovered.value = false;
+      focused.value = false;
+      pressed.value = false;
+    }
+  }, [
+    disabledState,
+    dragged,
+    draggedState,
+    focused,
+    hovered,
+    isDisabled,
+    pressed,
+  ]);
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -441,7 +524,6 @@ const Card = ({
     onPressIn,
     onPressOut,
   });
-  const isInteractive = hasPassedTouchHandler && !isDisabled;
   const hasWarnedAboutActions = React.useRef(false);
   const hasActions =
     actions !== null && actions !== undefined && actions !== false;
@@ -622,7 +704,8 @@ const Card = ({
       backgroundColor="transparent"
       style={style}
       theme={theme}
-      elevation={isInteractive ? interactiveElevation : visuals.elevation}
+      elevation={interactiveElevation}
+      transitionDuration={transitionDuration}
       testID={`${testID}-container`}
       {...(!hasPassedTouchHandler && neutralAccessibilityProps)}
       onFocus={!hasPassedTouchHandler ? onFocus : undefined}
@@ -663,9 +746,7 @@ const Card = ({
             {
               backgroundColor: visuals.stateLayerColor,
             },
-            isInteractive
-              ? stateLayerAnimatedStyle
-              : { opacity: visuals.stateLayerOpacity },
+            stateLayerAnimatedStyle,
           ]}
         />
         {hasPassedTouchHandler ? (
@@ -708,12 +789,7 @@ const Card = ({
               StyleSheet.absoluteFill,
               shapeStyle,
               { borderWidth: visuals.outlineWidth },
-              isInteractive
-                ? outlineAnimatedStyle
-                : {
-                    borderColor: visuals.outlineColor,
-                    opacity: visuals.outlineOpacity,
-                  },
+              outlineAnimatedStyle,
             ]}
           />
         ) : null}
@@ -733,7 +809,7 @@ const Card = ({
               borderWidth: systemTokens.md.sys.state.focusIndicator.thickness,
             },
             focusIndicatorShapeStyle,
-            isInteractive ? focusIndicatorAnimatedStyle : styles.hidden,
+            focusIndicatorAnimatedStyle,
           ]}
         />
       ) : null}
@@ -764,9 +840,6 @@ const styles = StyleSheet.create({
   focusIndicator: {
     position: 'absolute',
     pointerEvents: 'none',
-  },
-  hidden: {
-    opacity: 0,
   },
 });
 
