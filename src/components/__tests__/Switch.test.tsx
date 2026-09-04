@@ -282,6 +282,19 @@ describe('Switch interaction', () => {
     expect(onValueChange).toHaveBeenCalledWith(false);
   });
 
+  it('does not toggle a read-only switch that still has a handler', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    // The props type permits this pairing, so read-only has to win at runtime.
+    await render(
+      <Switch value={false} readOnly onValueChange={onValueChange} />
+    );
+
+    await user.press(screen.getByRole('switch'));
+
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+
   it('does not fire onValueChange when disabled', async () => {
     const user = userEvent.setup();
     const onValueChange = jest.fn();
