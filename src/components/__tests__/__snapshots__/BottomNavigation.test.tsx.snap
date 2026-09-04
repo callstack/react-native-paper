@@ -11,7 +11,6 @@ exports[`allows customizing Route's type via generics 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -83,7 +82,6 @@ exports[`allows customizing Route's type via generics 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -94,7 +92,6 @@ exports[`allows customizing Route's type via generics 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -110,7 +107,6 @@ exports[`allows customizing Route's type via generics 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -666,7 +662,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -738,7 +733,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -749,7 +743,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -765,7 +758,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -1401,7 +1393,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -1473,7 +1464,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -1484,7 +1474,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -1500,7 +1489,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -2136,7 +2124,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -2346,7 +2333,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -2357,7 +2343,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -2373,7 +2358,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -4009,7 +3993,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -4081,7 +4064,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -4092,7 +4074,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -4108,7 +4089,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -5489,7 +5469,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -5561,7 +5540,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -5572,7 +5550,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -5588,7 +5565,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -6209,7 +6185,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -6281,7 +6256,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -6292,7 +6266,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -6308,7 +6281,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -7229,7 +7201,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -7301,7 +7272,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -7312,7 +7282,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -7328,7 +7297,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -8324,7 +8292,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -8396,7 +8363,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -8407,7 +8373,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -8423,7 +8388,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -9266,7 +9230,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -9338,7 +9301,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -9349,7 +9311,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -9365,7 +9326,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={
@@ -10361,7 +10321,6 @@ exports[`renders shifting bottom navigation 1`] = `
       undefined,
     ]
   }
-  testID="bottom-navigation"
 >
   <View
     style={
@@ -10433,7 +10392,6 @@ exports[`renders shifting bottom navigation 1`] = `
         "right": 0,
       }
     }
-    testID="bottom-navigation-bar"
   >
     <View
       collapsable={false}
@@ -10444,7 +10402,6 @@ exports[`renders shifting bottom navigation 1`] = `
           "overflow": "hidden",
         }
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -10460,7 +10417,6 @@ exports[`renders shifting bottom navigation 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={

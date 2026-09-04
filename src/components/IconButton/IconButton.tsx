@@ -125,7 +125,7 @@ const IconButton = ({
   mode,
   style,
   theme: themeOverrides,
-  testID = 'icon-button',
+  testID,
   loading = false,
   contentStyle,
   ref,
@@ -161,7 +161,7 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -203,7 +203,12 @@ const IconButton = ({
           {loading ? (
             <ActivityIndicator size={size} color={iconColor} />
           ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
+            <IconComponent
+              color={iconColor}
+              source={icon}
+              size={size}
+              testID={testID ? `${testID}-icon` : undefined}
+            />
           )}
         </View>
       </TouchableRipple>

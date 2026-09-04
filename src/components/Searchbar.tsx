@@ -99,7 +99,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
   right?: (props: {
     color: ColorValue;
     style: Style;
-    testID: string;
+    testID?: string;
   }) => React.ReactNode;
   /**
    * @supported Available in v5.x with theme version 3
@@ -183,7 +183,7 @@ const Searchbar = ({
   theme: themeOverrides,
   value,
   loading = false,
-  testID = 'search-bar',
+  testID,
   ref,
   ...rest
 }: Props) => {
@@ -235,7 +235,7 @@ const Searchbar = ({
       backgroundColor={theme.colors.surfaceContainerHigh}
       borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
       style={[styles.container, style]}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
       elevation={elevation}
       theme={theme}
     >
@@ -257,7 +257,7 @@ const Searchbar = ({
         }
         theme={theme}
         aria-label={searchAccessibilityLabel}
-        testID={`${testID}-icon`}
+        testID={testID ? `${testID}-icon` : undefined}
       />
       <TextInput
         style={[
@@ -295,7 +295,7 @@ const Searchbar = ({
         // when clearing the value.
         <View
           pointerEvents={value ? 'auto' : 'none'}
-          testID={`${testID}-icon-wrapper`}
+          testID={testID ? `${testID}-icon-wrapper` : undefined}
           style={[
             !value && styles.v3ClearIcon,
             right !== undefined && styles.v3ClearIconHidden,
@@ -317,7 +317,7 @@ const Searchbar = ({
                 />
               ))
             }
-            testID={`${testID}-clear-icon`}
+            testID={testID ? `${testID}-clear-icon` : undefined}
             role="button"
             theme={theme}
           />
@@ -331,7 +331,7 @@ const Searchbar = ({
           iconColor={traileringIconColor || colors.onSurfaceVariant}
           icon={traileringIcon}
           aria-label={traileringIconAccessibilityLabel}
-          testID={`${testID}-trailering-icon`}
+          testID={testID ? `${testID}-trailering-icon` : undefined}
         />
       ) : null}
       {isBarMode &&
@@ -345,7 +345,7 @@ const Searchbar = ({
               backgroundColor: colors.outline,
             },
           ]}
-          testID={`${testID}-divider`}
+          testID={testID ? `${testID}-divider` : undefined}
         />
       )}
     </Surface>

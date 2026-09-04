@@ -111,7 +111,7 @@ const CellContent = ({
       style={textStyle}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-      testID={`${testID}-text-container`}
+      testID={testID ? `${testID}-text-container` : undefined}
     >
       {children}
     </Text>

@@ -7,6 +7,7 @@ describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', async () => {
     await render(
       <DrawerCollapsedItem
+        testID="drawer-collapsed-item"
         label="starred"
         focusedIcon="star"
         unfocusedIcon="star-outline"
@@ -20,7 +21,11 @@ describe('DrawerCollapsedItem', () => {
 
   it('should have rounded outline if label is not specified', async () => {
     await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      <DrawerCollapsedItem
+        testID="drawer-collapsed-item"
+        focusedIcon="star"
+        unfocusedIcon="star-outline"
+      />
     );
 
     expect(screen.getByTestId('drawer-collapsed-item-outline')).toHaveStyle({
@@ -30,7 +35,11 @@ describe('DrawerCollapsedItem', () => {
 
   it('should display unfocused icon in inactive state, if unfocused icon is specified', async () => {
     await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      <DrawerCollapsedItem
+        testID="drawer-collapsed-item"
+        focusedIcon="star"
+        unfocusedIcon="star-outline"
+      />
     );
 
     expect(
@@ -41,7 +50,9 @@ describe('DrawerCollapsedItem', () => {
   });
 
   it('should display focused icon in inactive state, if unfocused icon is not specified', async () => {
-    await render(<DrawerCollapsedItem focusedIcon="star" />);
+    await render(
+      <DrawerCollapsedItem testID="drawer-collapsed-item" focusedIcon="star" />
+    );
 
     expect(
       // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
@@ -53,6 +64,7 @@ describe('DrawerCollapsedItem', () => {
   it('should display focused icon in active state', async () => {
     await render(
       <DrawerCollapsedItem
+        testID="drawer-collapsed-item"
         active
         focusedIcon="star"
         unfocusedIcon="star-outline"

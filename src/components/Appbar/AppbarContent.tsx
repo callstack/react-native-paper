@@ -95,7 +95,7 @@ const AppbarContent = ({
   titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
-  testID = 'appbar-content',
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -135,7 +135,7 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           role={onPress ? 'none' : 'heading'}
-          testID={`${testID}-title-text`}
+          testID={testID ? `${testID}-title-text` : undefined}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
           {title}

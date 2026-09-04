@@ -135,7 +135,7 @@ function Modal({
   contentElevation,
   style,
   theme: themeOverrides,
-  testID = 'modal',
+  testID,
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
 
@@ -235,7 +235,7 @@ function Modal({
         onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
-        testID={`${testID}-backdrop`}
+        testID={testID ? `${testID}-backdrop` : undefined}
       />
       <View
         style={[
@@ -244,10 +244,10 @@ function Modal({
           style,
         ]}
         pointerEvents="box-none"
-        testID={`${testID}-wrapper`}
+        testID={testID ? `${testID}-wrapper` : undefined}
       >
         <Surface
-          testID={`${testID}-surface`}
+          testID={testID ? `${testID}-surface` : undefined}
           theme={theme}
           backgroundColor={contentBackgroundColor}
           borderRadius={contentBorderRadius}

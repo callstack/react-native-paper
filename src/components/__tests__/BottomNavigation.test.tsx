@@ -158,6 +158,7 @@ it('calls onIndexChange', async () => {
   const onIndexChange = jest.fn();
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting
       navigationState={createState(0, 5)}
       onIndexChange={onIndexChange}
@@ -181,6 +182,7 @@ it('calls onTabPress', async () => {
 
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting
       onTabPress={onTabPress}
       onIndexChange={onIndexChange}
@@ -211,6 +213,7 @@ it('calls onTabLongPress', async () => {
 
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting
       onIndexChange={onIndexChange}
       onTabLongPress={onTabLongPress}
@@ -427,13 +430,13 @@ it('should have labelMaxFontSizeMultiplier passed to label', async () => {
 it('renders custom background color passed to barStyle property', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting={false}
       labeled={true}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       barStyle={styles.backgroundColor}
-      testID={'bottom-navigation'}
     />
   );
 
@@ -498,11 +501,11 @@ it('uses the rendered bar height when hiding it for the keyboard', async () => {
 it('renders a single tab', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting={false}
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
-      testID={'bottom-navigation'}
     />
   );
 
@@ -527,12 +530,12 @@ it('renders bottom navigation with getLazy', async () => {
 it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testID="bottom-navigation"
       compact
     />
   );
@@ -547,12 +550,12 @@ it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
 it('does not apply maxTabBarWidth styling if compact prop is falsy', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testID="bottom-navigation"
       compact={false}
     />
   );
@@ -567,11 +570,11 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', async () =>
 it('renders bar content when shifting is enabled', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
       shifting
     />
   );
@@ -582,11 +585,11 @@ it('renders bar content when shifting is enabled', async () => {
 it('does not render legacy ripple overlay when shifting is disabled', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
       shifting={false}
     />
   );
