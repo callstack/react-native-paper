@@ -38,6 +38,7 @@ export type Props = PressableProps & {
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
+  hoverColor?: ColorValue;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
@@ -49,6 +50,7 @@ const TouchableRipple = ({
   disabled: disabledProp,
   rippleColor,
   underlayColor,
+  hoverColor: _hoverColor,
   children,
   theme: themeOverrides,
   focusRing = 'outward',
