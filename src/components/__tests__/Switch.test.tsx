@@ -242,26 +242,33 @@ describe('Switch operability', () => {
 });
 
 describe('Switch press feedback', () => {
-  it('grows the handle to the pressed size and back on release', async () => {
+  // MD3 resting (selected) and pressed handle sizes.
+  const RESTING = 24;
+  const PRESSED = 28;
+  const handleWidth = () => Number(animatedStyle('switch-handle').width);
+
+  it('starts growing the handle immediately on press', async () => {
+    await render(<Switch value onValueChange={jest.fn()} testID="switch" />);
+    expect(handleWidth()).toBe(RESTING);
+
+    await fireEvent(screen.getByTestId('switch'), 'pressIn');
+    // Two frames in -- well inside the 100ms delay the old implementation
+    // waited out before snapping, so a reintroduced delay still reads RESTING.
+    jest.advanceTimersByTime(32);
+
+    expect(handleWidth()).toBeGreaterThan(RESTING);
+  });
+
+  it('settles at the pressed size and returns on release', async () => {
     await render(<Switch value onValueChange={jest.fn()} testID="switch" />);
 
     await fireEvent(screen.getByTestId('switch'), 'pressIn');
     await jest.runAllTimersAsync();
-
-    // MD3 grows the handle to 28dp while pressed, from a 24dp selected resting
-    // size. This has to be immediate -- a delay swallows short taps.
-    expect(animatedStyle('switch-handle')).toMatchObject({
-      width: 28,
-      height: 28,
-    });
+    expect(handleWidth()).toBe(PRESSED);
 
     await fireEvent(screen.getByTestId('switch'), 'pressOut');
     await jest.runAllTimersAsync();
-
-    expect(animatedStyle('switch-handle')).toMatchObject({
-      width: 24,
-      height: 24,
-    });
+    expect(handleWidth()).toBe(RESTING);
   });
 });
 
