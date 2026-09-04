@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
   },
   flexibleContainer: {
     flex: 0,
+    flexBasis: 'auto',
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 12,

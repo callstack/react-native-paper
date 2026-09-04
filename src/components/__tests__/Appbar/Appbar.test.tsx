@@ -186,6 +186,24 @@ describe('Appbar content', () => {
       marginStart: 4,
     });
   });
+
+  it.each(['medium-flexible', 'large-flexible'] as const)(
+    'preserves intrinsic content sizing for the %s variant',
+    async (variant) => {
+      await render(
+        <Appbar
+          variant={variant}
+          headline="Inbox"
+          subtitle="3 unread"
+          testID={testIDPrefix}
+        />
+      );
+
+      expect(screen.getByTestId('appbar-content')).toHaveStyle({
+        flexBasis: 'auto',
+      });
+    }
+  );
 });
 
 describe('Appbar surface', () => {
