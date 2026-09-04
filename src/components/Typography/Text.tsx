@@ -7,7 +7,7 @@ import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**

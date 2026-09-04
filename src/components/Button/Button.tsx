@@ -14,7 +14,7 @@ import type {
 import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
 import type { ButtonMode } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';

@@ -18,7 +18,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';

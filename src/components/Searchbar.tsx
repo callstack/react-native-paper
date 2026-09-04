@@ -18,7 +18,7 @@ import type { SurfaceStyle } from './Surface';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import { cornerNone } from '../theme/tokens/sys/shape';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 interface Style {
   marginRight: number;

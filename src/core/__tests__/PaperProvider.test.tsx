@@ -12,7 +12,7 @@ import { act, render, screen } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
 

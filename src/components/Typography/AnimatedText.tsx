@@ -7,7 +7,7 @@ import Animated from 'react-native-reanimated';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 type AnimatedTextProps = React.ComponentProps<typeof Animated.Text>;
 

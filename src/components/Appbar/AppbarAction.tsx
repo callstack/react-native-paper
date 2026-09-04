@@ -4,11 +4,12 @@ import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
+import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
-export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
+export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    *  Custom color for action icon.
    */

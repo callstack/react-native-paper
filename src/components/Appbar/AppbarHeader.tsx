@@ -5,15 +5,12 @@ import type { ColorValue, StyleProp } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
-import type { AppbarStyle } from './Appbar';
+import type { AppbarStyle, Props as AppbarProps } from './Appbar';
 import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
-export type Props = Omit<
-  React.ComponentProps<typeof Appbar>,
-  'safeAreaInsets' | 'style'
-> & {
+export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */

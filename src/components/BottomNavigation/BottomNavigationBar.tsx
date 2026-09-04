@@ -16,7 +16,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';

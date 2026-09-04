@@ -1,12 +1,12 @@
-import React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
 import IconButton from '../IconButton/IconButton';
+import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
 export type TextInputAccessoryProps = {
   style: StyleProp<ViewStyle>;
@@ -16,10 +16,7 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  $Omit<
-    React.ComponentProps<typeof IconButton>,
-    keyof TextInputAccessoryProps | 'size'
-  > & {
+  Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size'> & {
     /**
      * Size of the icon.
      */
@@ -76,6 +73,8 @@ const TextInputIcon = ({
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
 
+  const iconSize = size ?? ACCESSORY_SIZE;
+
   const color = getIconColor({
     theme,
     iconColor,
@@ -91,7 +90,7 @@ const TextInputIcon = ({
         {...rest}
         icon={icon}
         iconColor={color}
-        iconSize={size}
+        iconSize={iconSize}
         style={[styles.icon, style]}
         onPress={onPressHandler}
       />

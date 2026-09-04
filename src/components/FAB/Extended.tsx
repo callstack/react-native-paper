@@ -24,7 +24,7 @@ import { getDimensions } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import AnimatedText from '../Typography/AnimatedText';
 

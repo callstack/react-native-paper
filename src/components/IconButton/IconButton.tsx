@@ -20,16 +20,17 @@ import { getDimensions, getHitSlop, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type Props = Omit<
-  $RemoveChildren<typeof TouchableRipple>,
-  'style' | 'onPress'
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children' | 'style' | 'onPress'
 > & {
   /**
    * Icon to display.

@@ -3,9 +3,9 @@ import type { ColorValue } from 'react-native';
 import { IconButtonTokens } from './tokens';
 import type { ColorSet, Mode, Shape, Size, Width } from './tokens';
 import { tokens } from '../../theme/tokens';
+import type { InternalTheme } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ShapeToken } from '../../theme/utils/shape';
-import type { InternalTheme } from '../../types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
