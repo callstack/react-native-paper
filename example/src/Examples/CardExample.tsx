@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
@@ -11,8 +11,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import { isWeb } from '../../utils';
-import { PreferencesContext } from '../PreferencesContext';
+import { usePreferences } from '../Preferences/usePreferences';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
@@ -21,7 +20,7 @@ const CardExample = () => {
   const { colors } = useTheme();
   const [selectedMode, setSelectedMode] = React.useState<Mode>('elevated');
   const [isSelected, setIsSelected] = React.useState(false);
-  const preferences = React.useContext(PreferencesContext);
+  const { toggleTheme } = usePreferences();
 
   const modes: Mode[] = ['elevated', 'outlined', 'contained'];
 
@@ -151,7 +150,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            isWeb
+            Platform.OS === 'web'
               ? alert('The Chameleon is Pressed')
               : Alert.alert('The Chameleon is Pressed');
           }}
@@ -168,7 +167,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onLongPress={() => {
-            isWeb
+            Platform.OS === 'web'
               ? alert('The City is Long Pressed')
               : Alert.alert('The City is Long Pressed');
           }}
@@ -186,13 +185,7 @@ const CardExample = () => {
             </Text>
           </Card.Content>
         </Card>
-        <Card
-          style={styles.card}
-          onPress={() => {
-            preferences?.toggleTheme();
-          }}
-          mode={selectedMode}
-        >
+        <Card style={styles.card} onPress={toggleTheme} mode={selectedMode}>
           <Card.Title
             title="Pressable Theme Change"
             left={(props) => <Avatar.Icon {...props} icon="format-paint" />}

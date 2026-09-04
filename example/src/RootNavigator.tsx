@@ -1,6 +1,5 @@
 import { Platform, StyleSheet, View } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   createNativeStackScreen,
@@ -10,57 +9,78 @@ import { Appbar } from 'react-native-paper';
 
 import ExampleList, { examples } from './ExampleList';
 import { colorThemes } from '../utils';
+import PreferencesModal from './Preferences/PreferencesModal';
+import SamplesList, { samples } from './SamplesList';
+import { objectEntries, objectFromEntries } from '../utils/typedObject';
+import { usePreferences } from './Preferences/usePreferences';
 
 const { TeamDetails, ...examplesWithoutParams } = examples;
 
-type ExampleRouteName = keyof typeof examplesWithoutParams;
-
-const fromEntries = <Key extends PropertyKey, Value>(
-  entries: Array<[Key, Value]>
-) =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  Object.fromEntries(entries) as Record<Key, Value>;
-
 function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
-  const drawerNavigation = useNavigation('Home');
+  const { togglePreferences } = usePreferences();
 
   return (
-    <Appbar.Header elevated>
-      {back ? (
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-      ) : (
+    <Appbar.Header>
+      {back && <Appbar.BackAction onPress={() => navigation.goBack()} />}
+      {!back && (
         <Appbar.Action
-          icon="menu"
           isLeading
-          onPress={() => drawerNavigation.openDrawer()}
+          icon="folder-search"
+          aria-label="search examples"
+          onPress={() => navigation.navigate('ExampleList')}
         />
       )}
       <Appbar.Content title={options.title || route.name} />
+      <Appbar.Action
+        icon="cog"
+        aria-label="preferences"
+        onPress={togglePreferences}
+      />
     </Appbar.Header>
   );
 }
 
 const Root = createNativeStackNavigator({
-  layout: ({ children }) => <View style={styles.stackWrapper}>{children}</View>,
+  initialRouteName: 'SamplesList',
+  layout: ({ children }) => (
+    <>
+      <View style={styles.stackWrapper}>{children}</View>
+      <PreferencesModal />
+    </>
+  ),
   screenOptions: {
     header: (props) => <Header {...props} />,
   },
   screens: {
+    SamplesList: createNativeStackScreen({
+      screen: SamplesList,
+      options: {
+        title: 'Samples',
+      },
+      linking: '',
+    }),
+    ...objectFromEntries(
+      objectEntries(samples).map(([id, sample]) => [
+        id,
+        createNativeStackScreen({
+          screen: sample.screen,
+          options: {
+            title: sample.title,
+            headerShown: sample.headerShown ?? true,
+          },
+        }),
+      ])
+    ),
     ExampleList: createNativeStackScreen({
       screen: ExampleList,
       options: {
         title: 'Examples',
+        headerShown: false,
       },
-      linking: '',
+      linking: 'examples',
     }),
-    /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-    ...fromEntries(
-      (
-        Object.entries(examplesWithoutParams) as [
-          ExampleRouteName,
-          (typeof examplesWithoutParams)[ExampleRouteName],
-        ][]
-      ).map(([id, screen]) => [
+    ...objectFromEntries(
+      objectEntries(examplesWithoutParams).map(([id, screen]) => [
         id,
         createNativeStackScreen({
           screen: screen,
@@ -71,7 +91,6 @@ const Root = createNativeStackNavigator({
         }),
       ])
     ),
-    /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
     TeamDetails: createNativeStackScreen({
       screen: TeamDetails,
       options: {

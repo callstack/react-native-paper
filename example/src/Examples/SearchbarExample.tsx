@@ -11,10 +11,12 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+import { usePreferences } from '../Preferences/usePreferences';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SearchExample = () => {
   const navigation = useNavigation('Searchbar');
+  const { togglePreferences } = usePreferences();
 
   const [isVisible, setIsVisible] = React.useState(false);
   const [searchQueries, setSearchQuery] = React.useState({
@@ -27,7 +29,7 @@ const SearchExample = () => {
     searchWithoutBottomLine: '',
     loadingViewMode: '',
     clickableBack: '',
-    clickableDrawer: '',
+    clickablePreferences: '',
     clickableLoading: '',
   });
 
@@ -185,15 +187,15 @@ const SearchExample = () => {
             onChangeText={(query) =>
               setSearchQuery({
                 ...searchQueries,
-                clickableDrawer: query,
+                clickablePreferences: query,
               })
             }
-            value={searchQueries.clickableDrawer}
+            value={searchQueries.clickablePreferences}
             onIconPress={() => {
               Keyboard.dismiss();
-              navigation.openDrawer();
+              togglePreferences();
             }}
-            icon="menu"
+            icon="cog"
             style={styles.searchbar}
           />
           <Searchbar
