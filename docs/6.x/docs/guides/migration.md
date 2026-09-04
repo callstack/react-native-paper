@@ -298,11 +298,13 @@ mutually exclusive options, use `SegmentedButtons`.
     icon="format-bold"
     selected={value === 'bold'}
     onPress={() => setValue('bold')}
+    aria-selected={value === 'bold'}
   />
   <IconButton
     icon="format-italic"
     selected={value === 'italic'}
     onPress={() => setValue('italic')}
+    aria-selected={value === 'italic'}
   />
 </>
 ```
