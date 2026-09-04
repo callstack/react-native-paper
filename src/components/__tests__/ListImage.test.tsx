@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     width: 114,
     height: 64,
     marginLeft: 0,
+    marginVertical: 4,
   },
   container: {
     width: 30,
