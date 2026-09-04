@@ -78,6 +78,13 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * the underlying `TouchableRipple`.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Accessibility label for the checkbox, read by a screen reader in place of
+   * a visible label. A standalone `Checkbox` has no label of its own, so it
+   * needs one here. `Checkbox.Item` names the whole row instead and does not
+   * require it.
+   */
+  'aria-label'?: string;
 };
 
 // Spec dimensions (https://m3.material.io/components/checkbox/specs).
@@ -124,6 +131,12 @@ const RIPPLE_START_SCALE = 0.6;
  *
  * export default MyComponent;
  * ```
+ *
+ * ## Accessibility
+ * A standalone `Checkbox` renders no visible label, so give it an `aria-label`
+ * to name it for assistive tech. Use `Checkbox.Item` when you want a labelled
+ * row: it owns the accessible name and keeps the inner checkbox out of the
+ * accessibility tree so the state is announced once.
  */
 const Checkbox = ({
   status,
@@ -390,6 +403,23 @@ const Checkbox = ({
     rippleAlpha.value = 0;
     rippleScale.value = RIPPLE_START_SCALE;
   }, [isInteractive, pressedSV, rippleHoldSV, rippleAlpha, rippleScale]);
+
+  // `Checkbox.Item` names the row and passes `accessible={false}` here.
+  const isInAccessibilityTree = rest.accessible !== false;
+  const hasAccessibleName = Boolean(
+    rest['aria-label'] ??
+    rest.accessibilityLabel ??
+    rest['aria-labelledby'] ??
+    rest.accessibilityLabelledBy
+  );
+
+  React.useEffect(() => {
+    if (!isInAccessibilityTree || hasAccessibleName) return;
+
+    console.warn(
+      'Checkbox: pass `aria-label` to name the checkbox for assistive tech, or use `Checkbox.Item` for a labelled row.'
+    );
+  }, [isInAccessibilityTree, hasAccessibleName]);
 
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';

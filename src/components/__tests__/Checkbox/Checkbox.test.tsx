@@ -506,6 +506,37 @@ describe('Checkbox focus ring', () => {
   });
 });
 
+describe('Checkbox accessible name', () => {
+  it('warns when a standalone checkbox has no accessible name', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox status="checked" onPress={() => {}} />);
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('aria-label')
+    );
+  });
+
+  it('is named by aria-label', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <Checkbox status="checked" onPress={() => {}} aria-label="Notify me" />
+    );
+
+    expect(screen.getByLabelText('Notify me')).toBeOnTheScreen();
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it('does not warn for the checkbox inside a labelled Checkbox.Item', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox.Item label="Notify me" status="checked" />);
+
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+});
+
 it('renders the focus ring outside the pressable so clipping cannot crop it', async () => {
   await render(
     <Checkbox
