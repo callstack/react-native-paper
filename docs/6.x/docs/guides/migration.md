@@ -279,3 +279,54 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Switch
+
+#### Explicit operability
+
+A `Switch` now has to declare how it can be operated. Previously a switch with no `onValueChange` still rendered as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable.
+
+Pass `onValueChange` to make it interactive, or mark it `readOnly` or `disabled` to render it as a state indicator. A read-only switch keeps its enabled appearance and is still announced with its on/off state, but it is neither focusable nor pressable — it is not reported as disabled.
+
+```tsx
+// Before (v5) — an enabled switch that does nothing
+<Switch value={isDarkTheme} />
+
+// After (v6) — say which it is
+<Switch value={isDarkTheme} onValueChange={setIsDarkTheme} />
+<Switch value={isDarkTheme} readOnly />
+<Switch value={isDarkTheme} disabled />
+```
+
+This most often shows up where the switch sits inside a row that owns the press:
+
+```tsx
+// After (v6)
+<TouchableRipple onPress={toggleTheme}>
+  <View style={styles.row}>
+    <Text>Dark Theme</Text>
+    <View pointerEvents="none">
+      <Switch value={isDarkTheme} readOnly />
+    </View>
+  </View>
+</TouchableRipple>
+```
+
+#### Selected icon color
+
+The icon inside a selected switch now uses `onPrimaryContainer` instead of `primary`, matching the Material Design 3 spec and improving its contrast against the handle. If you theme `Switch` with a partial `theme.colors` override, add `onPrimaryContainer` alongside the roles you already override — omitted roles fall back to the app theme, which would leave the icon in the default palette.
+
+```diff
+ const switchTheme = {
+   colors: {
+     primary: theme.colors.tertiary,
+     onPrimary: theme.colors.onTertiary,
+     primaryContainer: theme.colors.tertiaryContainer,
++    onPrimaryContainer: theme.colors.onTertiaryContainer,
+   },
+ };
+```
+
+#### Touch target height
+
+`Switch` now reserves the 48dp minimum touch target Material Design requires, so it occupies 48dp of height instead of 40dp. Nothing painted changed size — the track is still 52×32 — but rows containing a switch may become slightly taller.
