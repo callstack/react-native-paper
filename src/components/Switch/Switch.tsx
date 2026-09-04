@@ -210,6 +210,17 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
     isDisabledSV.value = isDisabled ? 1 : 0;
   }, [checked, hasIcon, isDisabled, checkedSV, hasIconSV, isDisabledSV]);
 
+  // A switch that stops being interactive loses its handlers, so one that was
+  // hovered, pressed, or focused at that moment would never get the matching
+  // hover-out, press-out, or blur and would keep painting that state.
+  React.useEffect(() => {
+    if (isInteractive) return;
+
+    pressedSV.value = 0;
+    hoveredSV.value = 0;
+    focusedSV.value = 0;
+  }, [isInteractive, pressedSV, hoveredSV, focusedSV]);
+
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
 
   const reanimatedReduceMotion = reduceMotion
