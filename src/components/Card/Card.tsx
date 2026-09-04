@@ -12,8 +12,9 @@ import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import type { Props as CardTitleProps } from './CardTitle';
+import { resolveCardVisuals } from './tokens';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../theme/types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
@@ -64,71 +65,169 @@ type CustomHeaderProps = {
   trailing?: never;
 };
 
-type CardBaseProps = Omit<ViewProps, 'children' | 'style'> & {
+type CardShapeProps = {
   /**
-   * Media rendered at the start of the Card.
+   * Radius of every Card corner.
    */
-  media?: React.ReactNode;
+  borderRadius?: ViewStyle['borderRadius'];
   /**
-   * Main Card content.
+   * Radius of the Card's bottom-end corner.
    */
-  content?: React.ReactNode;
+  borderBottomEndRadius?: ViewStyle['borderBottomEndRadius'];
   /**
-   * Actions rendered at the end of the Card.
+   * Radius of the Card's bottom-left corner.
    */
-  actions?: React.ReactNode;
+  borderBottomLeftRadius?: ViewStyle['borderBottomLeftRadius'];
   /**
-   * Function to execute on long press.
+   * Radius of the Card's bottom-right corner.
    */
-  onLongPress?: () => void;
+  borderBottomRightRadius?: ViewStyle['borderBottomRightRadius'];
   /**
-   * Function to execute on press.
+   * Radius of the Card's bottom-start corner.
    */
-  onPress?: (e: GestureResponderEvent) => void;
+  borderBottomStartRadius?: ViewStyle['borderBottomStartRadius'];
   /**
-   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   * Radius of the Card's end-end corner.
    */
-  onPressIn?: (e: GestureResponderEvent) => void;
+  borderEndEndRadius?: ViewStyle['borderEndEndRadius'];
   /**
-   * Function to execute as soon as the touch is released even before onPress.
+   * Radius of the Card's end-start corner.
    */
-  onPressOut?: (e: GestureResponderEvent) => void;
+  borderEndStartRadius?: ViewStyle['borderEndStartRadius'];
   /**
-   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   * Radius of the Card's start-end corner.
    */
-  delayLongPress?: number;
+  borderStartEndRadius?: ViewStyle['borderStartEndRadius'];
   /**
-   * If true, disable all interactions for this component.
+   * Radius of the Card's start-start corner.
    */
-  disabled?: boolean;
+  borderStartStartRadius?: ViewStyle['borderStartStartRadius'];
   /**
-   * Style of card's inner content.
+   * Radius of the Card's top-end corner.
    */
-  contentStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<SurfaceStyle>;
+  borderTopEndRadius?: ViewStyle['borderTopEndRadius'];
   /**
-   * @optional
+   * Radius of the Card's top-left corner.
    */
-  theme?: ThemeProp;
+  borderTopLeftRadius?: ViewStyle['borderTopLeftRadius'];
   /**
-   * Pass down testID from card props to touchable
+   * Radius of the Card's top-right corner.
    */
-  testID?: string;
+  borderTopRightRadius?: ViewStyle['borderTopRightRadius'];
   /**
-   * Pass down accessible from card props to touchable
+   * Radius of the Card's top-start corner.
    */
-  accessible?: boolean;
+  borderTopStartRadius?: ViewStyle['borderTopStartRadius'];
   /**
-   * Reference to the card container.
+   * Corner curve used by the Card on iOS.
    */
-  ref?: React.Ref<View>;
+  borderCurve?: ViewStyle['borderCurve'];
 };
 
+type FilledCardProps = {
+  /**
+   * Filled Card variant (default).
+   */
+  variant?: 'filled';
+  /**
+   * Filled Cards do not support custom elevation.
+   */
+  elevation?: never;
+};
+
+type ElevatedCardProps = {
+  /**
+   * Elevated Card variant.
+   */
+  variant: 'elevated';
+  /**
+   * Resting shadow elevation for an elevated Card.
+   */
+  elevation?: Elevation;
+};
+
+type OutlinedCardProps = {
+  /**
+   * Outlined Card variant.
+   */
+  variant: 'outlined';
+  /**
+   * Outlined Cards do not support custom elevation.
+   */
+  elevation?: never;
+};
+
+type CardVariantProps = FilledCardProps | ElevatedCardProps | OutlinedCardProps;
+
+type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
+  CardShapeProps & {
+    /**
+     * Media rendered at the start of the Card.
+     */
+    media?: React.ReactNode;
+    /**
+     * Main Card content.
+     */
+    content?: React.ReactNode;
+    /**
+     * Actions rendered at the end of the Card.
+     */
+    actions?: React.ReactNode;
+    /**
+     * Function to execute on long press.
+     */
+    onLongPress?: () => void;
+    /**
+     * Function to execute on press.
+     */
+    onPress?: (e: GestureResponderEvent) => void;
+    /**
+     * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+     */
+    onPressIn?: (e: GestureResponderEvent) => void;
+    /**
+     * Function to execute as soon as the touch is released even before onPress.
+     */
+    onPressOut?: (e: GestureResponderEvent) => void;
+    /**
+     * The number of milliseconds a user must touch the element before executing `onLongPress`.
+     */
+    delayLongPress?: number;
+    /**
+     * If true, disable all interactions for this component.
+     */
+    disabled?: boolean;
+    /**
+     * Style of card's inner content.
+     */
+    contentStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<SurfaceStyle>;
+    /**
+     * @optional
+     */
+    theme?: ThemeProp;
+    /**
+     * Pass down testID from card props to touchable
+     */
+    testID?: string;
+    /**
+     * Pass down accessible from card props to touchable
+     */
+    accessible?: boolean;
+    /**
+     * Reference to the card container.
+     */
+    ref?: React.Ref<View>;
+  };
+
 export type Props = CardBaseProps &
-  (ConvenienceHeaderProps | CustomHeaderProps);
+  (ConvenienceHeaderProps | CustomHeaderProps) &
+  CardVariantProps;
 
 /**
- * A filled Card groups related media, header content, body content, and actions.
+ * A Card groups related media, header content, body content, and actions.
+ * Use the `filled` (default), `elevated`, or `outlined` variant to select its
+ * Material 3 emphasis.
  *
  * ## Usage
  * ```js
@@ -139,6 +238,7 @@ export type Props = CardBaseProps &
  *
  * const MyComponent = () => (
  *   <Card
+ *     variant="elevated"
  *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
  *     title="Card Title"
  *     subtitle="Card Subtitle"
@@ -159,6 +259,8 @@ export type Props = CardBaseProps &
  */
 
 const Card = ({
+  variant: cardVariant = 'filled',
+  elevation: customElevation,
   delayLongPress,
   onPress,
   onLongPress,
@@ -178,10 +280,31 @@ const Card = ({
   testID = 'card',
   accessible,
   disabled,
+  borderRadius,
+  borderBottomEndRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderBottomStartRadius,
+  borderEndEndRadius,
+  borderEndStartRadius,
+  borderStartEndRadius,
+  borderStartStartRadius,
+  borderTopEndRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderTopStartRadius,
+  borderCurve = 'continuous',
   ref,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
+  const visuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    disabled,
+  });
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -190,12 +313,27 @@ const Card = ({
     onPressOut,
   });
 
-  const borderRadius = theme.shapes.corner.medium;
+  const shapeStyle = {
+    borderRadius: borderRadius ?? visuals.shape,
+    borderBottomEndRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderBottomStartRadius,
+    borderEndEndRadius,
+    borderEndStartRadius,
+    borderStartEndRadius,
+    borderStartStartRadius,
+    borderTopEndRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderTopStartRadius,
+    borderCurve,
+  };
   const hasConvenienceHeader =
     title != null || subtitle != null || leading != null || trailing != null;
 
   const content = (
-    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
+    <View style={[styles.content, contentStyle]} testID={testID}>
       {media}
       {header ??
         (hasConvenienceHeader ? (
@@ -214,30 +352,80 @@ const Card = ({
   return (
     <Surface
       ref={ref}
-      borderRadius={borderRadius}
-      backgroundColor={theme.colors.surfaceVariant}
+      {...shapeStyle}
+      backgroundColor="transparent"
       style={style}
       theme={theme}
-      elevation={0}
+      elevation={visuals.elevation}
       testID={`${testID}-container`}
       {...rest}
     >
-      {hasPassedTouchHandler ? (
-        <Pressable
-          accessible={accessible}
-          unstable_pressDelay={0}
-          disabled={disabled}
-          delayLongPress={delayLongPress}
-          onLongPress={onLongPress}
-          onPress={onPress}
-          onPressIn={onPressIn}
-          onPressOut={onPressOut}
-        >
-          {content}
-        </Pressable>
-      ) : (
-        content
-      )}
+      <View
+        testID={`${testID}-visual`}
+        style={[
+          styles.visual,
+          shapeStyle,
+          visuals.containerOpacity === 1 && {
+            backgroundColor: visuals.containerColor,
+          },
+        ]}
+      >
+        <View
+          pointerEvents="none"
+          testID={`${testID}-background`}
+          style={[
+            StyleSheet.absoluteFill,
+            shapeStyle,
+            {
+              backgroundColor: visuals.containerColor,
+              opacity: visuals.containerOpacity,
+            },
+          ]}
+        />
+        <View
+          pointerEvents="none"
+          testID={`${testID}-state-layer`}
+          style={[
+            StyleSheet.absoluteFill,
+            shapeStyle,
+            {
+              backgroundColor: visuals.stateLayerColor,
+              opacity: visuals.stateLayerOpacity,
+            },
+          ]}
+        />
+        {hasPassedTouchHandler ? (
+          <Pressable
+            accessible={accessible}
+            unstable_pressDelay={0}
+            disabled={disabled}
+            delayLongPress={delayLongPress}
+            onLongPress={onLongPress}
+            onPress={onPress}
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
+          >
+            {content}
+          </Pressable>
+        ) : (
+          content
+        )}
+        {visuals.outlineWidth > 0 ? (
+          <View
+            pointerEvents="none"
+            testID={`${testID}-outline`}
+            style={[
+              StyleSheet.absoluteFill,
+              shapeStyle,
+              {
+                borderColor: visuals.outlineColor,
+                borderWidth: visuals.outlineWidth,
+                opacity: visuals.outlineOpacity,
+              },
+            ]}
+          />
+        ) : null}
+      </View>
     </Surface>
   );
 };
@@ -254,8 +442,13 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
-  innerContainer: {
+  visual: {
     flexShrink: 1,
+    overflow: 'hidden',
+  },
+  content: {
+    flexShrink: 1,
+    position: 'relative',
   },
 });
 
