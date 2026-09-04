@@ -16,6 +16,7 @@ exports[`renders connected button group 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       [
         {
@@ -140,6 +141,7 @@ exports[`renders connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -264,6 +266,7 @@ exports[`renders connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -406,6 +409,7 @@ exports[`renders disabled connected button group 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       [
         {
@@ -548,6 +552,7 @@ exports[`renders disabled connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -690,6 +695,7 @@ exports[`renders disabled connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -850,6 +856,7 @@ exports[`renders large connected button group 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       [
         {
@@ -974,6 +981,7 @@ exports[`renders large connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1098,6 +1106,7 @@ exports[`renders large connected button group 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1239,6 +1248,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1321,6 +1331,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             [
               null,
@@ -1368,6 +1379,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1450,6 +1462,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             [
               null,

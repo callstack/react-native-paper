@@ -7,11 +7,19 @@ import { themeColors } from './src/data/themeColors.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export type Pages = Record<string, string | Record<string, string>>;
+export type Page =
+  | string
+  | {
+      source: string;
+      component?: string;
+      props?: string;
+      title?: string;
+    };
+
+export type Pages = Record<string, Page | Record<string, Page>>;
 
 type ComponentDocsConfig = {
-  docsRootDir: string;
-  libsRootDir: string;
+  sourceRootDir: string;
   pages: Pages;
   customFields: {
     moreExamples: Record<string, Record<string, string>>;
@@ -87,7 +95,11 @@ const pages = {
   FAB: {
     FAB: 'FAB/FAB',
     FABExtended: 'FAB/Extended',
-    FABMenu: 'FAB/Menu',
+    FABMenu: {
+      source: 'FAB/Menu',
+      props: 'MenuProps',
+      title: 'FAB.Menu',
+    },
   },
   IconButton: {
     IconButton: 'IconButton/IconButton',
@@ -107,7 +119,10 @@ const pages = {
   },
   Modal: 'Modal',
   Portal: {
-    Portal: 'Portal/Portal',
+    Portal: {
+      source: 'Portal/Portal',
+      component: 'Portal',
+    },
     PortalHost: 'Portal/PortalHost',
   },
   ProgressBar: 'ProgressBar',
@@ -128,8 +143,14 @@ const pages = {
     Switch: 'Switch/Switch',
   },
   TextInput: {
-    TextInput: 'TextInput/TextInput',
-    TextInputIcon: 'TextInput/TextInputIcon',
+    TextInput: {
+      source: 'TextInput/TextInput',
+      props: 'TextInputProps',
+    },
+    TextInputIcon: {
+      source: 'TextInput/TextInputIcon',
+      props: 'TextInputAccessoryProps',
+    },
   },
   ToggleButton: {
     ToggleButton: 'ToggleButton/ToggleButton',
@@ -143,13 +164,15 @@ const pages = {
     TouchableRipple: 'TouchableRipple/TouchableRipple',
   },
   Text: {
-    Text: 'Typography/Text',
+    Text: {
+      source: 'Typography/Text',
+      component: 'Text',
+    },
   },
 };
 
 const componentDocsConfig: ComponentDocsConfig = {
-  docsRootDir: path.join(__dirname, '6.x', 'docs', 'components'),
-  libsRootDir: path.join(__dirname, '..', 'src', 'components'),
+  sourceRootDir: path.join(__dirname, '..', 'src', 'components'),
   pages,
   customFields: {
     moreExamples: {
