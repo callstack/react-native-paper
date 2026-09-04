@@ -132,12 +132,6 @@ exports[`renders button with an accessibility hint 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -360,12 +354,6 @@ exports[`renders button with an accessibility label 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -587,12 +575,6 @@ exports[`renders button with button color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -814,12 +796,6 @@ exports[`renders button with color 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1041,12 +1017,6 @@ exports[`renders button with custom testID 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1268,12 +1238,6 @@ exports[`renders button with icon 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1528,12 +1492,6 @@ exports[`renders button with icon in reverse order 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1808,12 +1766,6 @@ exports[`renders disabled button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2035,12 +1987,6 @@ exports[`renders filled button by default 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2262,12 +2208,6 @@ exports[`renders filled button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2489,12 +2429,6 @@ exports[`renders loading button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2907,12 +2841,6 @@ exports[`renders outlined button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -3134,12 +3062,6 @@ exports[`renders text button with mode 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

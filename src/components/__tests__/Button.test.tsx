@@ -770,59 +770,6 @@ describe('size prop', () => {
   );
 });
 
-describe('accessible touch target', () => {
-  it('expands extra-small buttons to the 48dp minimum target', async () => {
-    await render(
-      <Button size="extra-small" testID="button">
-        X
-      </Button>
-    );
-    // (48 - 32) / 2 = 8
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('button').props.hitSlop).toMatchObject({
-      top: 8,
-      bottom: 8,
-    });
-  });
-
-  it('expands small buttons to the 48dp minimum target', async () => {
-    await render(
-      <Button size="small" testID="button">
-        X
-      </Button>
-    );
-    // (48 - 40) / 2 = 4
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('button').props.hitSlop).toMatchObject({
-      top: 4,
-      bottom: 4,
-    });
-  });
-
-  it('does not add hitSlop for buttons already at least 48dp tall', async () => {
-    await render(
-      <Button size="medium" testID="button">
-        X
-      </Button>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('button').props.hitSlop).toBeUndefined();
-  });
-
-  it('keeps a user-supplied hitSlop axis while filling the rest', async () => {
-    await render(
-      <Button size="extra-small" testID="button" hitSlop={{ top: 20 }}>
-        X
-      </Button>
-    );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('button').props.hitSlop).toMatchObject({
-      top: 20,
-      bottom: 8,
-    });
-  });
-});
-
 const shapeRadii: [size: ButtonSize, round: number, square: number][] = [
   ['extra-small', 9999, 12],
   ['small', 9999, 12],

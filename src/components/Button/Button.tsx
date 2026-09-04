@@ -47,9 +47,6 @@ import Text from '../Typography/Text';
 // level 2 while pressed.
 const initialElevation = 1;
 const activeElevation = 2;
-// Minimum accessible touch target (dp). Extra-small/small buttons are shorter
-// than this and get expanded via hitSlop.
-const MIN_TOUCH_TARGET = 48;
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -464,31 +461,6 @@ const Button = ({
     [labelStyle]
   );
 
-  // Extra-small/small buttons are shorter than the 48dp minimum accessible
-  // touch target, so expand the press area with hitSlop without changing the
-  // visual size. A user-supplied `hitSlop` wins on the axes it sets.
-  const hitSlopWithMinTarget = React.useMemo(() => {
-    const verticalSlop = Math.max(
-      0,
-      (MIN_TOUCH_TARGET - sizeStyle.minHeight) / 2
-    );
-    if (verticalSlop === 0) {
-      return hitSlop;
-    }
-    if (hitSlop == null) {
-      return { top: verticalSlop, bottom: verticalSlop };
-    }
-    // A numeric hitSlop is an explicit uniform override — respect it as-is.
-    if (typeof hitSlop === 'number') {
-      return hitSlop;
-    }
-    return {
-      ...hitSlop,
-      top: hitSlop.top ?? verticalSlop,
-      bottom: hitSlop.bottom ?? verticalSlop,
-    };
-  }, [hitSlop, sizeStyle]);
-
   const contentBoxStyle = React.useMemo(
     () => ({
       minHeight: sizeStyle.minHeight - borderWidth * 2,
@@ -546,7 +518,7 @@ const Button = ({
           aria-disabled={disabled}
           aria-selected={toggleSelected}
           accessible={accessible}
-          hitSlop={hitSlopWithMinTarget}
+          hitSlop={hitSlop}
           disabled={disabled}
           testID={testID}
           theme={theme}

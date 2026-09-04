@@ -612,12 +612,6 @@ exports[`renders snackbar with action button 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 4,
-                "top": 4,
-              }
-            }
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

@@ -1654,12 +1654,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             accessible={true}
             collapsable={false}
             focusable={true}
-            hitSlop={
-              {
-                "bottom": 4,
-                "top": 4,
-              }
-            }
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

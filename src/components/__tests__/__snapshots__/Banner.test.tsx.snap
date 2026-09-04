@@ -310,12 +310,6 @@ exports[`render visible banner, with custom theme 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
-              hitSlop={
-                {
-                  "bottom": 4,
-                  "top": 4,
-                }
-              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -938,12 +932,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
-              hitSlop={
-                {
-                  "bottom": 4,
-                  "top": 4,
-                }
-              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -1348,12 +1336,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
-              hitSlop={
-                {
-                  "bottom": 4,
-                  "top": 4,
-                }
-              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -1574,12 +1556,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
-              hitSlop={
-                {
-                  "bottom": 4,
-                  "top": 4,
-                }
-              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
