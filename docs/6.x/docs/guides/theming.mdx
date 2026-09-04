@@ -65,6 +65,7 @@ You can change the theme prop dynamically and all the components will automatica
 A theme usually contains the following properties:
 
 - `dark` (`boolean`): whether this is a dark theme or light theme.
+- `contrast` (`'standard' | 'medium' | 'high'`): the active MD3 contrast level (see [Contrast levels](#contrast-levels)).
 - `version`: Material You (MD3); kept for compatibility and normalized to `3` by `PaperProvider`
 - `mode` (`'adaptive' | 'exact'`): color mode for dark theme (See [Dark Theme](#dark-theme)).
 - `roundness` (`number`): roundness of common elements, such as buttons.
@@ -242,6 +243,62 @@ export default function Main() {
     </PaperProvider>
   );
 }
+```
+
+## Contrast levels
+
+Material Design 3 defines three contrast levels - `standard`, `medium` and `high`. The higher levels increase the contrast between foreground and background roles, which helps users with low vision and improves readability in bright environments.
+
+Set the level with the `contrast` prop on `PaperProvider`. It defaults to `standard`, so existing apps are unaffected.
+
+```js
+import * as React from 'react';
+import { PaperProvider } from 'react-native-paper';
+
+export default function Main() {
+  return (
+    <PaperProvider contrast="high">
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+Use the `contrast` prop rather than passing a pre-built theme: `PaperProvider` only follows the system light/dark setting while no `theme` prop is given, so selecting contrast through `theme` would also opt you out of automatic dark mode.
+
+The `medium` and `high` schemes meet the WCAG contrast ratios of 4.5:1 and 7:1 respectively for every foreground/background role pair.
+
+The active level is readable from the theme:
+
+```js
+const { contrast } = useTheme();
+```
+
+To build a theme object directly, for example to hand to `adaptNavigationTheme`, use `createTheme` or `getTheme`:
+
+```js
+import { createTheme, getTheme } from 'react-native-paper';
+
+const highContrastDark = createTheme({ dark: true, contrast: 'high' });
+const sameThing = getTheme(true, 'high');
+```
+
+### Contrast and dynamic colors
+
+Android does not expose a contrast-adjusted version of its system palette. Applying the standard-contrast system colors at a raised contrast level would quietly undercut the level you asked for, so at `medium` and `high` the dynamic palette is skipped in favour of the contrast-correct scheme.
+
+`getDynamicTheme` applies this rule for you, and `isDynamicColorSupportedAtContrast` reports whether dynamic colors will actually be used:
+
+```js
+import {
+  getDynamicTheme,
+  isDynamicColorSupportedAtContrast,
+} from 'react-native-paper';
+
+// Falls back to the high-contrast scheme, dynamic colors included only at 'standard'.
+const theme = getDynamicTheme(isDarkMode, 'high');
+
+isDynamicColorSupportedAtContrast('high'); // false
 ```
 
 ## Adapting React Navigation theme

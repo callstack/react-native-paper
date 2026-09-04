@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { Theme } from 'react-native-paper';
+import type { ContrastLevel, Theme } from 'react-native-paper';
 
 export const PreferencesContext = React.createContext<{
   toggleTheme: () => void;
@@ -9,7 +9,9 @@ export const PreferencesContext = React.createContext<{
   toggleCustomFont: () => void;
   toggleRippleEffect: () => void;
   toggleShouldUseDynamicTheme?: () => void;
+  setContrast: (contrast: ContrastLevel) => void;
   theme: Theme;
+  contrast: ContrastLevel;
   rtl: boolean;
   collapsed: boolean;
   customFontLoaded: boolean;

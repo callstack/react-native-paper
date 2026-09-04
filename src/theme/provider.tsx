@@ -5,7 +5,8 @@ import { createTheming } from '@callstack/react-theme-provider';
 import type { $DeepPartial } from '@callstack/react-theme-provider';
 
 import { DarkTheme, LightTheme } from './schemes';
-import type { Theme, NavigationTheme } from './types';
+import { createTheme } from './schemes/createTheme';
+import type { ContrastLevel, Theme, NavigationTheme } from './types';
 
 const {
   ThemeProvider,
@@ -75,14 +76,25 @@ export const defaultThemes = {
   dark: DarkTheme,
 };
 
-export const getTheme = <Scheme extends boolean = false>(
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  isDark: Scheme = false as Scheme
-): (typeof defaultThemes)[Scheme extends true ? 'dark' : 'light'] => {
-  const scheme = isDark ? 'dark' : 'light';
-
-  return defaultThemes[scheme];
+/** Every light or dark and contrast pair, built once so that switching
+ *  contrast at runtime does not rebuild a scheme. */
+const contrastThemes: Record<'light' | 'dark', Record<ContrastLevel, Theme>> = {
+  light: {
+    standard: LightTheme,
+    medium: createTheme({ dark: false, contrast: 'medium' }),
+    high: createTheme({ dark: false, contrast: 'high' }),
+  },
+  dark: {
+    standard: DarkTheme,
+    medium: createTheme({ dark: true, contrast: 'medium' }),
+    high: createTheme({ dark: true, contrast: 'high' }),
+  },
 };
+
+export const getTheme = (
+  isDark: boolean = false,
+  contrast: ContrastLevel = 'standard'
+): Theme => contrastThemes[isDark ? 'dark' : 'light'][contrast];
 
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
