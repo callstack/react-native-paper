@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   StyleProp,
   ViewProps,
   ViewStyle,
 } from 'react-native';
+
+import Animated, {
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import CardActions from './CardActions';
 import CardContent from './CardContent';
@@ -14,8 +20,10 @@ import CardTitle from './CardTitle';
 import type { Props as CardTitleProps } from './CardTitle';
 import { resolveCardVisuals } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { tokens as systemTokens } from '../../theme/tokens';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -374,12 +382,66 @@ const Card = ({
     disabled: isDisabled,
   });
 
+  const enabledVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+  });
+  const hoveredVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    hovered: true,
+  });
+  const focusedVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    focused: true,
+  });
+  const pressedVisuals = resolveCardVisuals({
+    theme,
+    variant: cardVariant,
+    elevation: customElevation,
+    pressed: true,
+  });
+
+  const hovered = useSharedValue(false);
+  const focused = useSharedValue(false);
+  const pressed = useSharedValue(false);
+  const currentInteractiveVisuals = useDerivedValue(() => {
+    if (pressed.value) {
+      return pressedVisuals;
+    }
+    if (focused.value) {
+      return focusedVisuals;
+    }
+    if (hovered.value) {
+      return hoveredVisuals;
+    }
+    return enabledVisuals;
+  });
+  const interactiveElevation = useDerivedValue<Elevation>(() => {
+    return currentInteractiveVisuals.value.elevation;
+  });
+  const stateLayerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: currentInteractiveVisuals.value.stateLayerOpacity,
+  }));
+  const outlineAnimatedStyle = useAnimatedStyle(() => ({
+    borderColor: currentInteractiveVisuals.value.outlineColor,
+    opacity: currentInteractiveVisuals.value.outlineOpacity,
+  }));
+  const focusIndicatorAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: focused.value ? 1 : 0,
+  }));
+
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
     onPressIn,
     onPressOut,
   });
+  const isInteractive = hasPassedTouchHandler && !isDisabled;
   const hasWarnedAboutActions = React.useRef(false);
   const hasActions =
     actions !== null && actions !== undefined && actions !== false;
@@ -398,22 +460,35 @@ const Card = ({
     }
   }, [hasActions, hasPassedTouchHandler]);
 
-  const shapeStyle = {
-    borderRadius: borderRadius ?? visuals.shape,
-    borderBottomEndRadius,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderBottomStartRadius,
-    borderEndEndRadius,
-    borderEndStartRadius,
-    borderStartEndRadius,
-    borderStartStartRadius,
-    borderTopEndRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderTopStartRadius,
-    borderCurve,
-  };
+  const shapeStyle = Object.fromEntries(
+    Object.entries({
+      borderRadius: borderRadius ?? visuals.shape,
+      borderBottomEndRadius,
+      borderBottomLeftRadius,
+      borderBottomRightRadius,
+      borderBottomStartRadius,
+      borderEndEndRadius,
+      borderEndStartRadius,
+      borderStartEndRadius,
+      borderStartStartRadius,
+      borderTopEndRadius,
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderTopStartRadius,
+      borderCurve,
+    }).filter(([, value]) => value !== undefined)
+  );
+  const focusIndicatorInset =
+    systemTokens.md.sys.state.focusIndicator.outerOffset +
+    systemTokens.md.sys.state.focusIndicator.thickness;
+  const focusIndicatorShapeStyle = Object.fromEntries(
+    Object.entries(shapeStyle).map(([property, value]) => [
+      property,
+      property !== 'borderCurve' && typeof value === 'number'
+        ? value + focusIndicatorInset
+        : value,
+    ])
+  );
   const hasConvenienceHeader =
     title != null || subtitle != null || leading != null || trailing != null;
 
@@ -492,6 +567,53 @@ const Card = ({
     ...accessibilityProps,
     'aria-disabled': isDisabled || ariaDisabled,
   };
+  const handlePressIn = React.useCallback(
+    (event: GestureResponderEvent) => {
+      pressed.value = true;
+      onPressIn?.(event);
+    },
+    [onPressIn, pressed]
+  );
+  const handlePressOut = React.useCallback(
+    (event: GestureResponderEvent) => {
+      pressed.value = false;
+      onPressOut?.(event);
+    },
+    [onPressOut, pressed]
+  );
+  const handleFocus: NonNullable<TouchableRippleProps['onFocus']> =
+    React.useCallback(
+      (event) => {
+        focused.value = isKeyboardFocusEvent(event);
+        onFocus?.(event);
+      },
+      [focused, onFocus]
+    );
+  const handleBlur: NonNullable<TouchableRippleProps['onBlur']> =
+    React.useCallback(
+      (event) => {
+        focused.value = false;
+        pressed.value = false;
+        onBlur?.(event);
+      },
+      [focused, onBlur, pressed]
+    );
+  const handleHoverIn: NonNullable<TouchableRippleProps['onHoverIn']> =
+    React.useCallback(
+      (event) => {
+        hovered.value = true;
+        onHoverIn?.(event);
+      },
+      [hovered, onHoverIn]
+    );
+  const handleHoverOut: NonNullable<TouchableRippleProps['onHoverOut']> =
+    React.useCallback(
+      (event) => {
+        hovered.value = false;
+        onHoverOut?.(event);
+      },
+      [hovered, onHoverOut]
+    );
 
   return (
     <Surface
@@ -500,7 +622,7 @@ const Card = ({
       backgroundColor="transparent"
       style={style}
       theme={theme}
-      elevation={visuals.elevation}
+      elevation={isInteractive ? interactiveElevation : visuals.elevation}
       testID={`${testID}-container`}
       {...(!hasPassedTouchHandler && neutralAccessibilityProps)}
       onFocus={!hasPassedTouchHandler ? onFocus : undefined}
@@ -532,7 +654,7 @@ const Card = ({
             },
           ]}
         />
-        <View
+        <Animated.View
           pointerEvents="none"
           testID={`${testID}-state-layer`}
           style={[
@@ -540,8 +662,10 @@ const Card = ({
             shapeStyle,
             {
               backgroundColor: visuals.stateLayerColor,
-              opacity: visuals.stateLayerOpacity,
             },
+            isInteractive
+              ? stateLayerAnimatedStyle
+              : { opacity: visuals.stateLayerOpacity },
           ]}
         />
         {hasPassedTouchHandler ? (
@@ -550,7 +674,11 @@ const Card = ({
             ref={touchableRef}
             testID={testID}
             borderless={false}
-            style={shapeStyle}
+            hoverColor="transparent"
+            style={[
+              shapeStyle,
+              Platform.OS === 'web' ? webNoOutline : undefined,
+            ]}
             theme={theme}
             focusable={isDisabled ? false : focusable}
             tabIndex={isDisabled ? -1 : tabIndex}
@@ -560,12 +688,12 @@ const Card = ({
             delayLongPress={delayLongPress}
             onLongPress={isDisabled ? undefined : onLongPress}
             onPress={isDisabled ? undefined : onPress}
-            onPressIn={isDisabled ? undefined : onPressIn}
-            onPressOut={isDisabled ? undefined : onPressOut}
-            onFocus={isDisabled ? undefined : onFocus}
-            onBlur={isDisabled ? undefined : onBlur}
-            onHoverIn={isDisabled ? undefined : onHoverIn}
-            onHoverOut={isDisabled ? undefined : onHoverOut}
+            onPressIn={isDisabled ? undefined : handlePressIn}
+            onPressOut={isDisabled ? undefined : handlePressOut}
+            onFocus={isDisabled ? undefined : handleFocus}
+            onBlur={isDisabled ? undefined : handleBlur}
+            onHoverIn={isDisabled ? undefined : handleHoverIn}
+            onHoverOut={isDisabled ? undefined : handleHoverOut}
           >
             {content}
           </TouchableRipple>
@@ -573,21 +701,42 @@ const Card = ({
           content
         )}
         {visuals.outlineWidth > 0 ? (
-          <View
+          <Animated.View
             pointerEvents="none"
             testID={`${testID}-outline`}
             style={[
               StyleSheet.absoluteFill,
               shapeStyle,
-              {
-                borderColor: visuals.outlineColor,
-                borderWidth: visuals.outlineWidth,
-                opacity: visuals.outlineOpacity,
-              },
+              { borderWidth: visuals.outlineWidth },
+              isInteractive
+                ? outlineAnimatedStyle
+                : {
+                    borderColor: visuals.outlineColor,
+                    opacity: visuals.outlineOpacity,
+                  },
             ]}
           />
         ) : null}
       </View>
+      {hasPassedTouchHandler ? (
+        <Animated.View
+          pointerEvents="none"
+          testID={`${testID}-focus-indicator`}
+          style={[
+            styles.focusIndicator,
+            {
+              top: -focusIndicatorInset,
+              right: -focusIndicatorInset,
+              bottom: -focusIndicatorInset,
+              left: -focusIndicatorInset,
+              borderColor: theme.colors.secondary,
+              borderWidth: systemTokens.md.sys.state.focusIndicator.thickness,
+            },
+            focusIndicatorShapeStyle,
+            isInteractive ? focusIndicatorAnimatedStyle : styles.hidden,
+          ]}
+        />
+      ) : null}
     </Surface>
   );
 };
@@ -612,6 +761,18 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     position: 'relative',
   },
+  focusIndicator: {
+    position: 'absolute',
+    pointerEvents: 'none',
+  },
+  hidden: {
+    opacity: 0,
+  },
 });
+
+// React Native Web otherwise draws its browser-default outline in addition to
+// the Material focus indicator.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default Card;
