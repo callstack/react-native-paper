@@ -78,6 +78,14 @@ exports[`can render leading checkbox control 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -393,6 +401,14 @@ exports[`renders unchecked 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
