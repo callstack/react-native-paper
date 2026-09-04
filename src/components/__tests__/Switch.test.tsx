@@ -173,6 +173,7 @@ describe('Switch operability', () => {
     const control = screen.getByRole('switch');
 
     expect(control).toHaveProp('focusable', false);
+    expect(control).toHaveProp('aria-readonly', true);
     expect(control).toBeChecked();
     expect(control).toBeEnabled();
   });
