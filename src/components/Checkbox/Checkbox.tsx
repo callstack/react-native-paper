@@ -9,7 +9,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
+import Animated, { type CSSStyle } from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
 import { getSelectionVisualState } from './utils';
@@ -17,6 +17,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
+import { getTransition } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -144,44 +145,38 @@ const Checkbox = ({
     customUncheckedColor: uncheckedColor,
   });
 
-  const fillTransitionTimingFunction = cubicBezier(
-    ...theme.motion.easing.standard
+  const fillTransition = getTransition(
+    theme,
+    ['opacity'],
+    'short2',
+    'standard',
+    reduceMotion
   );
 
-  const fillTransitionDuration = reduceMotion
-    ? 0
-    : theme.motion.duration.short2;
-
-  const checkTransitionDuration = reduceMotion
-    ? 0
-    : theme.motion.duration.short3;
-
-  const checkTransitionTimingFunction = cubicBezier(
-    ...theme.motion.easing.standard
+  const checkTransition = getTransition(
+    theme,
+    ['width', 'opacity'],
+    'short3',
+    'standard',
+    reduceMotion
   );
 
   const outlineStyle: CSSStyle<ViewStyle> = {
     borderColor: visual.outlineColor,
     opacity: selected ? 0 : 1,
-    transitionDuration: fillTransitionDuration,
-    transitionProperty: ['opacity'],
-    transitionTimingFunction: fillTransitionTimingFunction,
+    ...fillTransition,
   };
 
   const fillStyle: CSSStyle<ViewStyle> = {
     backgroundColor: visual.containerColor,
     opacity: selected ? 1 : 0,
-    transitionDuration: fillTransitionDuration,
-    transitionProperty: ['opacity'],
-    transitionTimingFunction: fillTransitionTimingFunction,
+    ...fillTransition,
   };
 
   const maskStyle: CSSStyle<ViewStyle> = {
     width: selected ? CONTAINER_SIZE : 0,
     opacity: selected ? 1 : 0,
-    transitionDuration: checkTransitionDuration,
-    transitionProperty: ['width', 'opacity'],
-    transitionTimingFunction: checkTransitionTimingFunction,
+    ...checkTransition,
   };
 
   // Remember the last drawn glyph so the reveal-mask can finish collapsing

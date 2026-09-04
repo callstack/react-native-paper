@@ -22,18 +22,13 @@ import {
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-
-const CHECK_SPRING_CONFIG = {
-  stiffness: 230.2,
-  damping: 22,
-  mass: 1,
-};
 
 export type Props = {
   /**
@@ -139,16 +134,21 @@ const SegmentedButtonItem = ({
 
   const checkScale = useSharedValue(0);
 
+  const checkSpringConfig = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.slow.spatial),
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    }),
+    [theme.motion.spring.slow.spatial, reduceMotion]
+  );
+
   React.useEffect(() => {
     if (!showSelectedCheck) {
       return;
     }
 
-    checkScale.value = withSpring(checked ? 1 : 0, {
-      ...CHECK_SPRING_CONFIG,
-      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
-    });
-  }, [checked, checkScale, reduceMotion, showSelectedCheck]);
+    checkScale.value = withSpring(checked ? 1 : 0, checkSpringConfig);
+  }, [checked, checkScale, checkSpringConfig, showSelectedCheck]);
 
   const checkAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: checkScale.value }],
