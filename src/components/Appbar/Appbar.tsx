@@ -173,9 +173,8 @@ const Appbar = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const detectedInsets = useSafeAreaInsets();
-  const { customBackground, restStyle, borderRadius } = React.useMemo(() => {
+  const { customBackground, restStyle, shapeProps } = React.useMemo(() => {
     const flattenedStyle = StyleSheet.flatten(style);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
     const resolvedStyle = (flattenedStyle || {}) as Exclude<
       typeof flattenedStyle,
       number
@@ -187,7 +186,7 @@ const Appbar = ({
     return {
       customBackground: backgroundColor,
       restStyle: remainingStyle,
-      borderRadius: getAppbarBorders(remainingStyle),
+      shapeProps: getAppbarBorders(remainingStyle),
     };
   }, [style]);
   const backgroundColor =
@@ -206,15 +205,11 @@ const Appbar = ({
   );
   const sideStyle = React.useMemo(() => ({ width: sideWidth }), [sideWidth]);
   const surfaceStyle = React.useMemo(
-    () => [
-      {
-        backgroundColor,
-        paddingTop: topInset,
-        paddingHorizontal: horizontalInset,
-      },
-      borderRadius,
-    ],
-    [backgroundColor, borderRadius, horizontalInset, topInset]
+    () => ({
+      paddingTop: topInset,
+      paddingHorizontal: horizontalInset,
+    }),
+    [horizontalInset, topInset]
   );
   const appbarStyle = React.useMemo(
     () => [styles.appbar, { backgroundColor, minHeight }, restStyle],
@@ -227,13 +222,19 @@ const Appbar = ({
   const searchBackgroundColor = isScrolled
     ? theme.colors.surfaceContainerHighest
     : theme.colors.surfaceContainer;
+  const searchTheme = React.useMemo(
+    () => ({
+      ...theme,
+      colors: {
+        ...theme.colors,
+        surfaceContainerHigh: searchBackgroundColor,
+      },
+    }),
+    [searchBackgroundColor, theme]
+  );
   const resolvedSearchStyle = React.useMemo(
-    () => [
-      styles.searchBar,
-      { backgroundColor: searchBackgroundColor },
-      searchBar?.style,
-    ],
-    [searchBackgroundColor, searchBar?.style]
+    () => [styles.searchBar, searchBar?.style],
+    [searchBar?.style]
   );
   const {
     accessibilityLabel: _accessibilityLabel,
@@ -286,7 +287,7 @@ const Appbar = ({
               elevation={0}
               testID={searchTestID}
               style={resolvedSearchStyle}
-              theme={theme}
+              theme={searchTheme}
             />
           </View>
         </View>
@@ -388,10 +389,11 @@ const Appbar = ({
 
   return (
     <Surface
+      {...shapeProps}
+      backgroundColor={backgroundColor}
       ref={ref}
       testID={`${testID}-root-layer`}
       elevation={0}
-      container
       theme={theme}
       style={surfaceStyle}
     >

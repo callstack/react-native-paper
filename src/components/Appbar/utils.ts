@@ -1,4 +1,4 @@
-import type { Animated, ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import type { AppbarTrailingAction, AppbarVariant } from './types';
 
@@ -9,25 +9,29 @@ export const APPBAR_SEARCH_MAX_WIDTH = 720;
 
 const borderStyleProperties: readonly (keyof ViewStyle)[] = [
   'borderRadius',
+  'borderBottomEndRadius',
+  'borderBottomStartRadius',
+  'borderEndEndRadius',
+  'borderEndStartRadius',
+  'borderStartEndRadius',
+  'borderStartStartRadius',
+  'borderTopEndRadius',
+  'borderTopStartRadius',
   'borderTopLeftRadius',
   'borderTopRightRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
-];
+  'borderCurve',
+] satisfies readonly (keyof ViewStyle)[];
 
-export const getAppbarBorders = (
-  style:
-    | Animated.Value
-    | Animated.AnimatedInterpolation<string | number>
-    | Animated.WithAnimatedObject<ViewStyle>
-) => {
-  const borders: Record<string, number> = {};
+export const getAppbarBorders = (style: ViewStyle) => {
+  let borders: ViewStyle = {};
 
   for (const property of borderStyleProperties) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    const value = style[property as keyof typeof style];
-    if (value) {
-      borders[property] = value;
+    const value = style[property];
+
+    if (typeof value === 'number' || typeof value === 'string') {
+      borders = { ...borders, [property]: value };
     }
   }
 

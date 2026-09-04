@@ -1,6 +1,39 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getAppbarHeight, getTrailingActionsWidth } from '../../Appbar/utils';
+import {
+  getAppbarBorders,
+  getAppbarHeight,
+  getTrailingActionsWidth,
+} from '../../Appbar/utils';
+
+describe('getAppbarBorders', () => {
+  const borderStyles = {
+    borderRadius: 1,
+    borderBottomEndRadius: 2,
+    borderBottomStartRadius: 3,
+    borderEndEndRadius: 4,
+    borderEndStartRadius: 5,
+    borderStartEndRadius: 6,
+    borderStartStartRadius: 7,
+    borderTopEndRadius: 8,
+    borderTopStartRadius: 9,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 11,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 13,
+    borderCurve: 'continuous' as const,
+  };
+
+  it('returns every border style and excludes unrelated styles', () => {
+    expect(getAppbarBorders({ ...borderStyles, height: 60, top: 13 })).toEqual(
+      borderStyles
+    );
+  });
+
+  it('returns an empty object when no border styles are passed', () => {
+    expect(getAppbarBorders({ height: 60, top: 13 })).toEqual({});
+  });
+});
 
 describe('getAppbarHeight', () => {
   it.each([

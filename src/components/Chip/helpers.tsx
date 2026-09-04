@@ -24,7 +24,7 @@ const getBorderColor = ({
   isOutlined,
   disabled,
   selectedColor,
-}: BaseProps & { backgroundColor: ColorValue; selectedColor?: ColorValue }) => {
+}: BaseProps & { selectedColor?: ColorValue }) => {
   const isSelectedColor = selectedColor !== undefined;
   const { colors } = md3(theme);
 
@@ -85,19 +85,8 @@ const getDefaultBackgroundColor = ({
   return colors.secondaryContainer;
 };
 
-const getBackgroundColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  customBackgroundColor,
-}: BaseProps & {
-  customBackgroundColor?: ColorValue;
-}) => {
+const getBackgroundColor = ({ theme, isOutlined, disabled }: BaseProps) => {
   const { colors } = md3(theme);
-  if (typeof customBackgroundColor === 'string') {
-    return customBackgroundColor;
-  }
-
   if (disabled) {
     if (isOutlined) {
       return 'transparent';
@@ -106,22 +95,6 @@ const getBackgroundColor = ({
   }
 
   return getDefaultBackgroundColor({ theme, isOutlined });
-};
-
-const getSelectedBackgroundColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  customBackgroundColor,
-}: BaseProps & {
-  customBackgroundColor?: ColorValue;
-}) => {
-  return getBackgroundColor({
-    theme,
-    disabled,
-    isOutlined,
-    customBackgroundColor,
-  });
 };
 
 const getIconColor = ({
@@ -153,10 +126,8 @@ export const getChipColors = ({
   isOutlined,
   theme,
   selectedColor,
-  customBackgroundColor,
   disabled,
 }: BaseProps & {
-  customBackgroundColor?: ColorValue;
   disabled?: boolean;
   selectedColor?: ColorValue;
 }) => {
@@ -164,12 +135,6 @@ export const getChipColors = ({
 
   const backgroundColor = getBackgroundColor({
     ...baseChipColorProps,
-    customBackgroundColor,
-  });
-
-  const selectedBackgroundColor = getSelectedBackgroundColor({
-    ...baseChipColorProps,
-    customBackgroundColor,
   });
 
   const contentOpacity = disabled
@@ -180,7 +145,6 @@ export const getChipColors = ({
     borderColor: getBorderColor({
       ...baseChipColorProps,
       selectedColor,
-      backgroundColor,
     }),
     textColor: getTextColor({
       ...baseChipColorProps,
@@ -192,6 +156,6 @@ export const getChipColors = ({
     }),
     contentOpacity,
     backgroundColor,
-    selectedBackgroundColor,
+    selectedBackgroundColor: backgroundColor,
   };
 };

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type {
-  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
@@ -25,6 +24,8 @@ export type AppbarVariant =
 export type AppbarHeadlineVariant = Exclude<AppbarVariant, 'search'>;
 
 export type AppbarHeadlineAlignment = 'leading' | 'center';
+
+export type AppbarStyle = Omit<ViewStyle, 'elevation'>;
 
 export type AppbarTextProps = {
   /** Style applied to the text. */
@@ -169,7 +170,7 @@ type AppbarBaseProps = Omit<
     right?: number;
   };
   /** Style applied to the app bar container. */
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AppbarStyle>;
   /** Reference for the app bar container. */
   ref?: React.Ref<View>;
   /** Theme override for the app bar. */

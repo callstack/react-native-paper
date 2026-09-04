@@ -120,12 +120,12 @@ describe('Appbar content', () => {
     expect(screen.getByTestId('appbar-content-subtitle-text')).toHaveStyle({
       textAlign: 'center',
     });
-    expect(
-      screen.getByTestId('leading-action-container-outer-layer').parent
-    ).toHaveStyle({ width: 96 });
-    expect(
-      screen.getByTestId('trailing-action-container-outer-layer').parent
-    ).toHaveStyle({ width: 96 });
+    expect(screen.getByTestId('leading-action-container').parent).toHaveStyle({
+      width: 96,
+    });
+    expect(screen.getByTestId('trailing-action-container').parent).toHaveStyle({
+      width: 96,
+    });
 
     await rerender(
       <Appbar
@@ -153,12 +153,12 @@ describe('Appbar content', () => {
       />
     );
 
-    expect(
-      screen.getByTestId('leading-action-container-outer-layer').parent
-    ).toHaveStyle({ width: 96 });
-    expect(
-      screen.getByTestId('trailing-action-container-outer-layer').parent
-    ).toHaveStyle({ width: 96 });
+    expect(screen.getByTestId('leading-action-container').parent).toHaveStyle({
+      width: 96,
+    });
+    expect(screen.getByTestId('trailing-action-container').parent).toHaveStyle({
+      width: 96,
+    });
     expect(
       screen.getByTestId('brand-mark', { includeHiddenElements: true })
     ).toBeOnTheScreen();
@@ -338,9 +338,9 @@ describe('Appbar actions', () => {
       expect(screen.getByTestId('expressive-action-container')).toHaveStyle({
         backgroundColor: color,
       });
-      expect(
-        screen.getByTestId('expressive-action-container-outer-layer')
-      ).toHaveStyle({ width: 56 });
+      expect(screen.getByTestId('expressive-action-container')).toHaveStyle({
+        width: 56,
+      });
     }
   );
 
@@ -527,9 +527,9 @@ describe('Appbar search', () => {
     expect(onChangeText).toHaveBeenLastCalledWith('draft');
     expect(searchbox).toHaveProp('value', 'draft');
 
-    expect(
-      screen.getByTestId('message-search-container-outer-layer')
-    ).toHaveStyle({ width: '100%' });
+    expect(screen.getByTestId('message-search-container')).toHaveStyle({
+      width: '100%',
+    });
     expect(screen.getByTestId('appbar-search-width-limiter')).toHaveStyle({
       width: '100%',
       maxWidth: 720,
