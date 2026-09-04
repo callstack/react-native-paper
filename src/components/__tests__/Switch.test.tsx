@@ -178,6 +178,29 @@ describe('Switch operability', () => {
     expect(control).toBeEnabled();
   });
 
+  it('announces a switch with no way to be operated as read-only', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // @ts-expect-error -- the fallback exists for untyped callers.
+    await render(<Switch value />);
+
+    const control = screen.getByRole('switch');
+
+    expect(control).toHaveProp('aria-readonly', true);
+    expect(control).toBeEnabled();
+
+    jest.restoreAllMocks();
+  });
+
+  it('does not announce a disabled switch as read-only', async () => {
+    await render(<Switch value disabled />);
+
+    const control = screen.getByRole('switch');
+
+    expect(control).toHaveProp('aria-readonly', false);
+    expect(control).toBeDisabled();
+  });
+
   it('keeps an interactive switch focusable', async () => {
     await render(<Switch value onValueChange={jest.fn()} />);
 

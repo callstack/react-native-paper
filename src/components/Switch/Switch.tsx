@@ -191,6 +191,10 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
   }
 
   const isInteractive = !isDisabled && !isReadOnly && !isMissingOperability;
+  // Non-operable but not disabled: an explicit `readOnly`, or the fallback for
+  // a missing handler. Both render as state indicators, so both are announced
+  // that way; `aria-disabled` carries the disabled case on its own.
+  const isAnnouncedReadOnly = !isDisabled && !isInteractive;
   const iconSource = checked ? checkedIcon : uncheckedIcon;
   const hasIcon = iconSource !== undefined;
 
@@ -430,7 +434,7 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
       <Pressable
         disabled={disabled}
         focusable={isInteractive}
-        aria-readonly={isReadOnly}
+        aria-readonly={isAnnouncedReadOnly}
         {...interactionProps}
         android_ripple={{ color: 'transparent' }}
         role="switch"
