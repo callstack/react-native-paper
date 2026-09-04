@@ -1,7 +1,7 @@
 import type * as React from 'react';
 import { Platform } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import * as Reanimated from 'react-native-reanimated';
 
 import { defaultThemes } from '../../core/theming';
@@ -11,6 +11,10 @@ import Switch from '../Switch/Switch';
 
 const animatedStyle = (testID: string) =>
   Reanimated.getAnimatedStyle(screen.getByTestId(testID));
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe('Switch render', () => {
   it('renders on', async () => {
@@ -128,8 +132,6 @@ describe('Switch focus state', () => {
     await jest.runAllTimersAsync();
 
     expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
-
-    jest.restoreAllMocks();
   });
 
   it('shows the indicator for keyboard focus on web', async () => {
@@ -144,8 +146,6 @@ describe('Switch focus state', () => {
     await jest.runAllTimersAsync();
 
     expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
-
-    jest.restoreAllMocks();
   });
 
   it('clears the focus state when the switch stops being interactive', async () => {
@@ -185,8 +185,6 @@ describe('Switch operability', () => {
     expect(console.warn).toHaveBeenCalledWith(
       expect.stringContaining('onValueChange')
     );
-
-    jest.restoreAllMocks();
   });
 
   it('is not focusable when it has no way to be operated', async () => {
@@ -196,8 +194,6 @@ describe('Switch operability', () => {
     await render(<Switch value />);
 
     expect(screen.getByRole('switch')).toHaveProp('focusable', false);
-
-    jest.restoreAllMocks();
   });
 
   it('announces a read-only switch without making it focusable', async () => {
@@ -221,8 +217,6 @@ describe('Switch operability', () => {
 
     expect(control).toHaveProp('aria-readonly', true);
     expect(control).toBeEnabled();
-
-    jest.restoreAllMocks();
   });
 
   it('does not announce a disabled switch as read-only', async () => {
