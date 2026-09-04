@@ -198,9 +198,7 @@ it('applies the unfocused container margin in "contained" mode', async () => {
     marginLeft: 24,
     marginRight: 24,
   });
-  expect(
-    screen.getByTestId('search-bar-container-outer-layer')
-  ).not.toHaveStyle({
+  expect(screen.getByTestId('search-bar-container')).not.toHaveStyle({
     marginLeft: 24,
     marginRight: 24,
   });
@@ -266,9 +264,11 @@ it('keeps layout styles on the outermost element', async () => {
 
   expect(wrapper).toBe(screen.root);
   expect(wrapper).toHaveStyle({ flex: 1, position: 'absolute', top: 0 });
-  expect(
-    screen.getByTestId('search-bar-container-outer-layer')
-  ).not.toHaveStyle({ flex: 1, position: 'absolute', top: 0 });
+  expect(screen.getByTestId('search-bar-container')).not.toHaveStyle({
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+  });
 });
 
 it('forwards onFocus and onBlur to the input', async () => {

@@ -1,0 +1,108 @@
+<html lang="en" data-reactroot=""><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="description" content=""/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Getting Started"/><meta name="twitter:description" content=""/><meta property="og:type" content="website"/><meta property="og:title" content="Getting Started"/><meta property="og:description" content=""/><title>Getting Started</title><link type="text/css" rel="stylesheet" href="app.css"/></head><body><div id='root'><div class="_wrapper__1nbmuhq" data-reactroot=""><aside class="_sidebar__1gt5k1p"><input type="checkbox" class="_menuButton__1gt5k1p" id="slide-sidebar" role="button"/><label class="_menuIcon__1gt5k1p" for="slide-sidebar">☰</label><div class="_menu__1gt5k1p"><input type="search" value="" placeholder="Filter…" class="_searchbar__1gt5k1p"/><nav class="_navigation__1gt5k1p"><a class="_link__1gt5k1p" href="index.html">Home</a><a class="_link__1gt5k1p" href="showcase.html">Showcase</a><a class="_link__1gt5k1p _active__1gt5k1p" href="getting-started.html">Getting Started</a><a class="_link__1gt5k1p" href="theming.html">Theming</a><a class="_link__1gt5k1p" href="icons.html">Icons</a><a class="_link__1gt5k1p" href="contributing.html">Contributing</a><hr class="_separator__1gt5k1p"/><a class="_link__1gt5k1p" href="bottom-navigation.html">BottomNavigation</a><a class="_link__1gt5k1p" href="button.html">Button</a><a class="_link__1gt5k1p" href="caption.html">Caption</a><a class="_link__1gt5k1p" href="card.html">Card</a><a class="_link__1gt5k1p" href="card-actions.html">CardActions</a><a class="_link__1gt5k1p" href="card-content.html">CardContent</a><a class="_link__1gt5k1p" href="card-cover.html">CardCover</a><a class="_link__1gt5k1p" href="checkbox.html">Checkbox</a><a class="_link__1gt5k1p" href="chip.html">Chip</a><a class="_link__1gt5k1p" href="dialog.html">Dialog</a><a class="_link__1gt5k1p" href="dialog-actions.html">DialogActions</a><a class="_link__1gt5k1p" href="dialog-content.html">DialogContent</a><a class="_link__1gt5k1p" href="dialog-scroll-area.html">DialogScrollArea</a><a class="_link__1gt5k1p" href="dialog-title.html">DialogTitle</a><a class="_link__1gt5k1p" href="divider.html">Divider</a><a class="_link__1gt5k1p" href="drawer-item.html">DrawerItem</a><a class="_link__1gt5k1p" href="drawer-section.html">DrawerSection</a><a class="_link__1gt5k1p" href="fab.html">FAB</a><a class="_link__1gt5k1p" href="fabgroup.html">FABGroup</a><a class="_link__1gt5k1p" href="headline.html">Headline</a><a class="_link__1gt5k1p" href="helper-text.html">HelperText</a><a class="_link__1gt5k1p" href="list-accordion.html">ListAccordion</a><a class="_link__1gt5k1p" href="list-item.html">ListItem</a><a class="_link__1gt5k1p" href="list-section.html">ListSection</a><a class="_link__1gt5k1p" href="modal.html">Modal</a><a class="_link__1gt5k1p" href="paper.html">Paper</a><a class="_link__1gt5k1p" href="paragraph.html">Paragraph</a><a class="_link__1gt5k1p" href="progress-bar.html">ProgressBar</a><a class="_link__1gt5k1p" href="radio-button.html">RadioButton</a><a class="_link__1gt5k1p" href="radio-button-group.html">RadioButtonGroup</a><a class="_link__1gt5k1p" href="searchbar.html">Searchbar</a><a class="_link__1gt5k1p" href="snackbar.html">Snackbar</a><a class="_link__1gt5k1p" href="subheading.html">Subheading</a><a class="_link__1gt5k1p" href="switch.html">Switch</a><a class="_link__1gt5k1p" href="text.html">Text</a><a class="_link__1gt5k1p" href="text-input.html">TextInput</a><a class="_link__1gt5k1p" href="title.html">Title</a><a class="_link__1gt5k1p" href="toolbar.html">Toolbar</a><a class="_link__1gt5k1p" href="toolbar-action.html">ToolbarAction</a><a class="_link__1gt5k1p" href="toolbar-back-action.html">ToolbarBackAction</a><a class="_link__1gt5k1p" href="toolbar-content.html">ToolbarContent</a><a class="_link__1gt5k1p" href="touchable-ripple.html">TouchableRipple</a></nav></div></aside><div class="_container__z02bld"><main class="_content__z02bld"><div class="_markdown__1e8xr4b"><div><span><h2>Installation</h2>
+<p>Open a Terminal in your project's folder and run,</p>
+<pre><code class="language-sh">yarn add react-native-paper
+</code></pre>
+<p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
+<pre><code class="language-sh">yarn add react-native-vector-icons
+react-native link react-native-vector-icons
+</code></pre>
+<p>If you don't want to install vector icons, you can use <a href="https://github.com/satya164/babel-plugin-optional-require">babel-plugin-optional-require</a> to opt-out.</p>
+<p>If you use CRNA or Expo, you don't need to install vector icons. But you will need to make sure that your <code>.babelrc</code> includes <code>babel-preset-expo</code>:</p>
+<pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-expo"</span><span class="token punctuation" >]</span>
+<span class="token punctuation brackets-braces" >}</span>
+</code></pre>
+<p>To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add <code>react-native-paper/babel</code> to the <code>plugins</code> section in your <code>.babelrc</code> for production environment. It should look like this:</p>
+<pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-react-native"</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+  <span class="token property" >"env"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+    <span class="token property" >"production"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+      <span class="token property" >"plugins"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"react-native-paper/babel"</span><span class="token punctuation" >]</span>
+    <span class="token punctuation brackets-braces" >}</span>
+  <span class="token punctuation brackets-braces" >}</span>
+<span class="token punctuation brackets-braces" >}</span>
+</code></pre>
+<p>If you created your project using CRNA or Expo, it'll look something like this:</p>
+<pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-expo"</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+  <span class="token property" >"env"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+    <span class="token property" >"development"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+      <span class="token property" >"plugins"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"transform-react-jsx-source"</span><span class="token punctuation" >]</span>
+    <span class="token punctuation brackets-braces" >}</span><span class="token punctuation" >,</span>
+    <span class="token property" >"production"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+      <span class="token property" >"plugins"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"react-native-paper/babel"</span><span class="token punctuation" >]</span>
+    <span class="token punctuation brackets-braces" >}</span>
+  <span class="token punctuation brackets-braces" >}</span>
+<span class="token punctuation brackets-braces" >}</span>
+</code></pre>
+<p><strong>Note:</strong> The plugin only works if you are importing the library using ES2015 import statements and not with <code>require</code>.</p>
+<p>If you're using Flow for typechecking your code, you need to add the following under the <code>[options]</code> section in your <code>.flowconfig</code>:</p>
+<pre><code class="language-ini"><span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.js</span>
+<span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.android.js</span>
+<span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.ios.js</span>
+</code></pre>
+<h2>Usage</h2>
+<p>Wrap your root component in <code>Provider</code> from <code>react-native-paper</code>. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to <code>AppRegistry.registerComponent</code>. This will usually be in the <code>index.js</code> file. If you have a CRNA or Expo project, you can do this inside the exported component in the <code>App.js</code> file.</p>
+<p>Example:</p>
+<pre><code class="language-js"><span class="token keyword keyword-import" >import</span> <span class="token operator" >*</span> <span class="token keyword keyword-as" >as</span> React <span class="token keyword keyword-from" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> <span class="token punctuation brackets-braces" >{</span> AppRegistry <span class="token punctuation brackets-braces" >}</span> <span class="token keyword keyword-from" >from</span> <span class="token string" >'react-native'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> <span class="token punctuation brackets-braces" >{</span> Provider <span class="token keyword keyword-as" >as</span> PaperProvider <span class="token punctuation brackets-braces" >}</span> <span class="token keyword keyword-from" >from</span> <span class="token string" >'react-native-paper'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> App <span class="token keyword keyword-from" >from</span> <span class="token string" >'./src/App'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword keyword-export" >export</span> <span class="token keyword keyword-default" >default</span> <span class="token keyword keyword-function" >function</span> <span class="token function" >Main</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token punctuation brackets-braces" >{</span>
+  <span class="token keyword keyword-return" >return</span> <span class="token punctuation brackets-parentheses" >(</span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>PaperProvider</span><span class="token punctuation" >&gt;</span></span>
+      <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>App</span> <span class="token punctuation" >/&gt;</span></span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>PaperProvider</span><span class="token punctuation" >&gt;</span></span>
+  <span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation brackets-braces" >}</span>
+
+AppRegistry<span class="token punctuation" >.</span><span class="token function" >registerComponent</span><span class="token punctuation brackets-parentheses" >(</span><span class="token string" >'main'</span><span class="token punctuation" >,</span> <span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token operator" >=</span><span class="token operator" >&gt;</span> Main<span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation" >;</span>
+</code></pre>
+<p>The <code>PaperProvider</code> component provides the theme to all the components in the framework. It also acts as a portal to components which need to be rendered at the top level.</p>
+<p>If you have another provider (such as <code>Redux</code>), wrap it outside <code>PaperProvider</code> so that the context is available to components rendered inside a <code>Modal</code> from the library:</p>
+<pre><code class="language-js"><span class="token keyword keyword-import" >import</span> <span class="token operator" >*</span> <span class="token keyword keyword-as" >as</span> React <span class="token keyword keyword-from" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> <span class="token punctuation brackets-braces" >{</span> Provider <span class="token keyword keyword-as" >as</span> PaperProvider <span class="token punctuation brackets-braces" >}</span> <span class="token keyword keyword-from" >from</span> <span class="token string" >'react-native-paper'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> <span class="token punctuation brackets-braces" >{</span> Provider <span class="token keyword keyword-as" >as</span> StoreProvider <span class="token punctuation brackets-braces" >}</span> <span class="token keyword keyword-from" >from</span> <span class="token string" >'react-redux'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> App <span class="token keyword keyword-from" >from</span> <span class="token string" >'./src/App'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> store <span class="token keyword keyword-from" >from</span> <span class="token string" >'./store'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword keyword-export" >export</span> <span class="token keyword keyword-default" >default</span> <span class="token keyword keyword-function" >function</span> <span class="token function" >Main</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token punctuation brackets-braces" >{</span>
+  <span class="token keyword keyword-return" >return</span> <span class="token punctuation brackets-parentheses" >(</span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>StoreProvider</span> <span class="token attr-name" >store</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span>store<span class="token punctuation brackets-braces" >}</span></span><span class="token punctuation" >&gt;</span></span>
+      <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>PaperProvider</span><span class="token punctuation" >&gt;</span></span>
+        <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>App</span> <span class="token punctuation" >/&gt;</span></span>
+      <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>PaperProvider</span><span class="token punctuation" >&gt;</span></span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>StoreProvider</span><span class="token punctuation" >&gt;</span></span>
+  <span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation brackets-braces" >}</span>
+</code></pre>
+<h2>Customization</h2>
+<p>You can provide a custom theme to customize the colors, fonts etc. with the <code>Provider</code> component. Check the <a href="https://github.com/callstack/react-native-paper/blob/master/src/styles/DefaultTheme.js">default theme</a> to see what customization options are supported.</p>
+<p>Example:</p>
+<pre><code class="language-js"><span class="token keyword keyword-import" >import</span> <span class="token operator" >*</span> <span class="token keyword keyword-as" >as</span> React <span class="token keyword keyword-from" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> <span class="token punctuation brackets-braces" >{</span> DefaultTheme<span class="token punctuation" >,</span> Provider <span class="token keyword keyword-as" >as</span> PaperProvider <span class="token punctuation brackets-braces" >}</span> <span class="token keyword keyword-from" >from</span> <span class="token string" >'react-native-paper'</span><span class="token punctuation" >;</span>
+<span class="token keyword keyword-import" >import</span> App <span class="token keyword keyword-from" >from</span> <span class="token string" >'./src/App'</span><span class="token punctuation" >;</span>
+
+<span class="token keyword keyword-const" >const</span> theme <span class="token operator" >=</span> <span class="token punctuation brackets-braces" >{</span>
+  <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>DefaultTheme<span class="token punctuation" >,</span>
+  colors<span class="token punctuation" >:</span> <span class="token punctuation brackets-braces" >{</span>
+    <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>DefaultTheme<span class="token punctuation" >.</span>colors<span class="token punctuation" >,</span>
+    primary<span class="token punctuation" >:</span> <span class="token string" >'tomato'</span><span class="token punctuation" >,</span>
+    accent<span class="token punctuation" >:</span> <span class="token string" >'yellow'</span><span class="token punctuation" >,</span>
+  <span class="token punctuation brackets-braces" >}</span><span class="token punctuation" >,</span>
+<span class="token punctuation brackets-braces" >}</span><span class="token punctuation" >;</span>
+
+<span class="token keyword keyword-export" >export</span> <span class="token keyword keyword-default" >default</span> <span class="token keyword keyword-function" >function</span> <span class="token function" >Main</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token punctuation brackets-braces" >{</span>
+  <span class="token keyword keyword-return" >return</span> <span class="token punctuation brackets-parentheses" >(</span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>PaperProvider</span> <span class="token attr-name" >theme</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span>theme<span class="token punctuation brackets-braces" >}</span></span><span class="token punctuation" >&gt;</span></span>
+      <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>App</span> <span class="token punctuation" >/&gt;</span></span>
+    <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>PaperProvider</span><span class="token punctuation" >&gt;</span></span>
+  <span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation brackets-braces" >}</span>
+</code></pre>
+</span></div></div></main></div></div></div>
+    <script>
+      window.__INITIAL_PATH__ = 'getting-started';
+    </script>
+  <script src="app.bundle.js"></script></body></html>

@@ -10,7 +10,7 @@ import type {
 
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -21,7 +21,7 @@ type TitleString = {
 
 type TitleElement = { title: React.ReactNode; titleStyle?: never };
 
-export type Props = $RemoveChildren<typeof View> & {
+export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   // For `title` and `titleStyle` props their types are duplicated due to the generation of documentation.
   // Appropriate type for them are either `TitleString` or `TitleElement`, depends on `title` type.
   /**

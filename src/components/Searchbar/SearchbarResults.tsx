@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { Animated, StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp } from 'react-native';
 
 import { SearchbarTokens } from './tokens';
 import { getSearchbarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
-import type { ThemeProp } from '../../types';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 
 export type Props = {
   /**
@@ -17,8 +18,8 @@ export type Props = {
   /**
    * Changes the container's shadow and background.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
-  style?: StyleProp<ViewStyle>;
+  elevation?: Elevation;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
    */
@@ -72,13 +73,10 @@ const SearchbarResults = ({
 
   return (
     <Surface
-      container
+      backgroundColor={resultsContainerColor}
+      borderRadius={borderRadius}
       elevation={elevation}
-      style={[
-        styles.container,
-        { backgroundColor: resultsContainerColor, borderRadius },
-        style,
-      ]}
+      style={[styles.container, style]}
       theme={theme}
       testID={testID}
     >

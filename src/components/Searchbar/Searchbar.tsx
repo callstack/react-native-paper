@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import type {
-  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
@@ -16,7 +15,6 @@ import Reanimated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { SearchbarTokens } from './tokens';
 import { getSearchbarColors, getSearchbarInputFont } from './utils';
@@ -24,8 +22,8 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
-import type { ThemeProp } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Divider from '../Divider';
@@ -85,7 +83,7 @@ const HORIZONTAL_MARGIN_KEYS = [
   'marginInlineEnd',
 ] as const;
 
-export type Props = TextInputProps & {
+export type Props = Omit<TextInputProps, 'style'> & {
   /**
    * Hint text shown when the input is empty.
    */
@@ -172,12 +170,12 @@ export type Props = TextInputProps & {
   /**
    * Changes Searchbar shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: Elevation;
   /**
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<AnimatedStyle<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */
@@ -371,15 +369,15 @@ const Searchbar = ({
         testID={`${testID}-focus-wrapper`}
       >
         <Surface
+          backgroundColor={containerColor}
+          borderRadius={borderRadius}
           style={[
             styles.container,
             shouldFillWrapper && styles.fillWrapper,
-            { backgroundColor: containerColor, borderRadius },
             surfaceStyle,
           ]}
           testID={`${testID}-container`}
           elevation={elevation}
-          container
           theme={theme}
         >
           <IconButton

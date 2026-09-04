@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import type { ColorValue, TextStyle } from 'react-native';
 
 import { SearchbarTokens } from './tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export type SearchbarColors = {
   containerColor: ColorValue;
