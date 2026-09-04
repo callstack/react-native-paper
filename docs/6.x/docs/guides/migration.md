@@ -279,3 +279,9 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Checkbox
+
+#### Interaction state colors
+
+Hover and focus are now painted as a Material Design 3 state layer, so the tint follows the spec: a flat 40dp layer with `primary` when selected and `onSurface` when not, and `error` throughout an error checkbox. `color` and `uncheckedColor` replace the role they already override on the box, so a custom checkbox no longer picks up a `primary` halo.

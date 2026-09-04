@@ -3,6 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  MouseEvent,
   NativeSyntheticEvent,
   StyleProp,
   TargetedEvent,
@@ -12,12 +13,14 @@ import type {
 import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
-import { getSelectionVisualState } from './utils';
+import { getSelectionVisualState, getStateLayer } from './utils';
+import type { CheckboxInteraction } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -35,11 +38,13 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Custom color for unchecked checkbox.
+   * Custom color for unchecked checkbox. Replaces `onSurface` in the state
+   * layer as well as the outline.
    */
   uncheckedColor?: ColorValue;
   /**
-   * Custom color for checkbox.
+   * Custom color for checkbox. Replaces `primary` in the state layer as well
+   * as the container.
    */
   color?: ColorValue;
   /**
@@ -125,20 +130,49 @@ const Checkbox = ({
   // anchor manually for RTL. Native handles it via `I18nManager`.
   const flipMaskForWebRTL = Platform.OS === 'web' && direction === 'rtl';
   const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
 
   const selected = status === 'checked' || status === 'indeterminate';
 
-  // Visual state (colors + opacity) for the static layers. `hovered` /
-  // `pressed` aren't tracked here — `TouchableRipple` owns the press ripple
-  // and hover overlay.
-  const visual = getSelectionVisualState({
+  // Shared by the box and the state layer, so a custom color reaches both.
+  const selectionColors = {
     theme,
     selected,
-    disabled,
     error,
     customColor: color,
     customUncheckedColor: uncheckedColor,
-  });
+  };
+
+  const visual = getSelectionVisualState({ ...selectionColors, disabled });
+
+  // `TouchableRipple` disables itself when nothing can handle a press, so
+  // attaching press handlers unconditionally would make a handler-less
+  // checkbox enabled and focusable while doing nothing.
+  const isInteractive =
+    !disabled &&
+    hasTouchHandler({
+      onPress,
+      onLongPress: rest.onLongPress,
+      onPressIn: rest.onPressIn,
+      onPressOut: rest.onPressOut,
+    });
+
+  const interaction: CheckboxInteraction | null = !isInteractive
+    ? null
+    : focused
+      ? 'focused'
+      : hovered
+        ? 'hovered'
+        : null;
+
+  // Fade by opacity alone: under a dynamic theme the role is a `PlatformColor`,
+  // which Reanimated cannot interpolate, so the color stays put while idle
+  // instead of dropping to transparent.
+  const stateLayer = getStateLayer({ ...selectionColors, interaction });
+  const stateLayerColor = getStateLayer({
+    ...selectionColors,
+    interaction: interaction ?? 'hovered',
+  }).color;
 
   const fillTransitionTimingFunction = cubicBezier(
     ...theme.motion.easing.standard
@@ -167,6 +201,14 @@ const Checkbox = ({
   const fillStyle: CSSStyle<ViewStyle> = {
     backgroundColor: visual.containerColor,
     opacity: selected ? 1 : 0,
+    transitionDuration: fillTransitionDuration,
+    transitionProperty: ['opacity'],
+    transitionTimingFunction: fillTransitionTimingFunction,
+  };
+
+  const stateLayerStyle: CSSStyle<ViewStyle> = {
+    backgroundColor: stateLayerColor,
+    opacity: stateLayer.opacity,
     transitionDuration: fillTransitionDuration,
     transitionProperty: ['opacity'],
     transitionTimingFunction: fillTransitionTimingFunction,
@@ -211,6 +253,33 @@ const Checkbox = ({
     setFocused(false);
   }, []);
 
+  const interactionHandlers = isInteractive
+    ? {
+        onHoverIn: (e: MouseEvent) => {
+          setHovered(true);
+          rest.onHoverIn?.(e);
+        },
+        onHoverOut: (e: MouseEvent) => {
+          setHovered(false);
+          rest.onHoverOut?.(e);
+        },
+        onPressIn: (e: GestureResponderEvent) => {
+          rest.onPressIn?.(e);
+        },
+        onPressOut: (e: GestureResponderEvent) => {
+          rest.onPressOut?.(e);
+        },
+      }
+    : null;
+
+  // Losing the handlers means the matching hover-out never arrives, so the
+  // state would otherwise linger.
+  React.useEffect(() => {
+    if (isInteractive) return;
+
+    setHovered(false);
+  }, [isInteractive]);
+
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';
 
@@ -236,6 +305,7 @@ const Checkbox = ({
       onPress={onPress}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      {...interactionHandlers}
       disabled={disabled}
       {...accessibilityProps}
       testID={testID}
@@ -246,6 +316,11 @@ const Checkbox = ({
       ]}
     >
       <View pointerEvents="none" style={styles.tapTargetInner}>
+        <Animated.View
+          pointerEvents="none"
+          testID={testID ? `${testID}-state-layer` : undefined}
+          style={[styles.stateLayer, stateLayerStyle]}
+        />
         {focused && !disabled ? (
           <View
             pointerEvents="none"
@@ -314,6 +389,12 @@ const styles = StyleSheet.create({
     height: STATE_LAYER_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  stateLayer: {
+    position: 'absolute',
+    width: STATE_LAYER_SIZE,
+    height: STATE_LAYER_SIZE,
+    borderRadius: STATE_LAYER_SIZE / 2,
   },
   focusRing: {
     position: 'absolute',

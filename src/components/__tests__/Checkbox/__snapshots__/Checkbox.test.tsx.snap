@@ -66,6 +66,25 @@ exports[`renders Checkbox with custom testID 1`] = `
     }
   >
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 0,
+          },
+        ]
+      }
+      testID="custom:testID-state-layer"
+    />
+    <View
       style={
         [
           {
@@ -249,6 +268,24 @@ exports[`renders checked Checkbox with color 1`] = `
       }
     }
   >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "red",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
     <View
       style={
         [
@@ -434,6 +471,24 @@ exports[`renders checked Checkbox with onPress 1`] = `
     }
   >
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
+    <View
       style={
         [
           {
@@ -618,6 +673,24 @@ exports[`renders indeterminate Checkbox 1`] = `
     }
   >
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
+    <View
       style={
         [
           {
@@ -789,6 +862,24 @@ exports[`renders indeterminate Checkbox with color 1`] = `
     }
   >
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "red",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
+    <View
       style={
         [
           {
@@ -959,6 +1050,24 @@ exports[`renders unchecked Checkbox with color 1`] = `
       }
     }
   >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "red",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
     <View
       style={
         [
@@ -1143,6 +1252,24 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       }
     }
   >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0,
+          },
+        ]
+      }
+    />
     <View
       style={
         [
