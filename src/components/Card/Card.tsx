@@ -1,64 +1,82 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
-  ColorValue,
   GestureResponderEvent,
   StyleProp,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
-
 import CardActions from './CardActions';
 import CardContent from './CardContent';
-import { CardContext } from './CardContext';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
+import type { Props as CardTitleProps } from './CardTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../theme/types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
-type OutlinedCardProps = {
-  mode: 'outlined';
-  elevation?: never;
+type ConvenienceHeaderProps = {
+  /**
+   * Header title.
+   */
+  title?: React.ReactNode;
+  /**
+   * Header subtitle.
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * Render slot displayed before the title and subtitle.
+   */
+  leading?: CardTitleProps['left'];
+  /**
+   * Render slot displayed after the title and subtitle.
+   */
+  trailing?: CardTitleProps['right'];
+  /**
+   * A fully custom header cannot be combined with convenience header props.
+   */
+  header?: never;
 };
 
-type ElevatedCardProps = {
-  mode?: 'elevated';
-  elevation?: Elevation;
+type CustomHeaderProps = {
+  /**
+   * Fully custom header content.
+   */
+  header: React.ReactNode;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  title?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  subtitle?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  leading?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  trailing?: never;
 };
 
-type ContainedCardProps = {
-  mode?: 'contained';
-  elevation?: never;
-};
-
-type Mode = 'elevated' | 'outlined' | 'contained';
-type Direction = 'vertical' | 'horizontal';
-
-export type Props = Omit<ViewProps, 'style'> & {
+type CardBaseProps = Omit<ViewProps, 'children' | 'style'> & {
   /**
-   * Mode of the Card.
-   * - `elevated` - Card with elevation.
-   * - `contained` - Card without outline and elevation @supported Available in v5.x with theme version 3
-   * - `outlined` - Card with an outline.
+   * Media rendered at the start of the Card.
    */
-  mode?: Mode;
+  media?: React.ReactNode;
   /**
-   * Direction of the Card's content.
-   * - `vertical`
-   * - `horizontal`
+   * Main Card content.
    */
-  direction?: Direction;
+  content?: React.ReactNode;
   /**
-   * Content of the `Card`.
+   * Actions rendered at the end of the Card.
    */
-  children: React.ReactNode;
+  actions?: React.ReactNode;
   /**
    * Function to execute on long press.
    */
@@ -84,15 +102,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   disabled?: boolean;
   /**
-   * Changes Card shadow and background on iOS and Android.
-   */
-  elevation?: Elevation;
-  /**
-   * Color of the outline in `outlined` mode.
-   */
-  borderColor?: ColorValue;
-  /**
-   * Style of card's content.
+   * Style of card's inner content.
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<SurfaceStyle>;
@@ -111,67 +121,67 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the card container.
    */
-  ref?: React.Ref<React.ComponentRef<typeof View>>;
+  ref?: React.Ref<View>;
 };
 
-const DEFAULT_CARD_GAP = 16;
-const DEFAULT_CARD_PADDING = 16;
+export type Props = CardBaseProps &
+  (ConvenienceHeaderProps | CustomHeaderProps);
 
 /**
- * A card is a sheet of material that serves as an entry point to more detailed information.
+ * A filled Card groups related media, header content, body content, and actions.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Avatar, Button, Card, Text } from 'react-native-paper';
  *
- * const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+ * const Leading = props => <Avatar.Icon {...props} icon="folder" />
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
- *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
- *     <Card.Content>
+ *   <Card
+ *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+ *     title="Card Title"
+ *     subtitle="Card Subtitle"
+ *     leading={Leading}
+ *     content={<Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
- *     </Card.Content>
- *     <Card.Actions>
- *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="filled">Ok</Button>
- *     </Card.Actions>
- *   </Card>
+ *     </Card.Content>}
+ *     actions={<Card.Actions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     </Card.Actions>}
+ *   />
  * );
  *
  * export default MyComponent;
  * ```
  */
+
 const Card = ({
-  elevation: cardElevation = 1,
   delayLongPress,
   onPress,
   onLongPress,
   onPressOut,
   onPressIn,
-  mode: cardMode = 'elevated',
-  direction: cardDirection = 'vertical',
-  children,
+  media,
+  header,
+  title,
+  subtitle,
+  leading,
+  trailing,
+  content: cardContent,
+  actions,
   style,
   contentStyle,
-  borderColor: customBorderColor,
   theme: themeOverrides,
   testID = 'card',
   accessible,
   disabled,
   ref,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const isMode = React.useCallback(
-    (modeToCompare: Mode) => {
-      return cardMode === modeToCompare;
-    },
-    [cardMode]
-  );
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -180,97 +190,38 @@ const Card = ({
     onPressOut,
   });
 
-  // The ring goes on the Surface, the card's visible box (`scope: 'within'`),
-  // not on the `Pressable` that takes focus: the caller's `style` sizes and
-  // pads the Surface, so a ring on the content-sized `Pressable` would stop
-  // short of a taller card's edge or sit inside its padding.
-  //
-  // Off without a touch handler too: the `Pressable` unmounts then, and a
-  // focused one sends no blur, so the ring would come back with the handler.
-  const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !hasPassedTouchHandler,
-    theme.colors.secondary,
-    'outward',
-    'within'
-  );
-
-  const [pressed, setPressed] = React.useState(false);
-  const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
-
-  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    onPressIn?.(e);
-
-    if (isMode('elevated')) {
-      setPressed(true);
-    }
-  });
-
-  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    onPressOut?.(e);
-
-    if (isMode('elevated')) {
-      setPressed(false);
-    }
-  });
-
-  const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
-    theme,
-    mode: cardMode,
-  });
-
-  const borderColor = customBorderColor ?? themedBorderColor;
-
   const borderRadius = theme.shapes.corner.medium;
-
-  const cardContext = React.useMemo(
-    () => ({ padding: DEFAULT_CARD_PADDING, direction: cardDirection }),
-    [cardDirection]
-  );
+  const hasConvenienceHeader =
+    title != null || subtitle != null || leading != null || trailing != null;
 
   const content = (
-    <CardContext.Provider value={cardContext}>
-      <View
-        style={[
-          styles.content,
-          { borderRadius },
-          cardDirection === 'horizontal' ? styles.horizontal : styles.vertical,
-          contentStyle,
-          {
-            padding: DEFAULT_CARD_PADDING,
-            gap: DEFAULT_CARD_GAP,
-          },
-        ]}
-      >
-        {children}
-      </View>
-    </CardContext.Provider>
+    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
+      {media}
+      {header ??
+        (hasConvenienceHeader ? (
+          <CardTitle
+            title={title}
+            subtitle={subtitle}
+            left={leading}
+            right={trailing}
+          />
+        ) : null)}
+      {cardContent}
+      {actions}
+    </View>
   );
 
   return (
     <Surface
       ref={ref}
       borderRadius={borderRadius}
-      backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={[style, ...focusRing.style]}
+      backgroundColor={theme.colors.surfaceVariant}
+      style={style}
       theme={theme}
-      elevation={elevation}
-      testID={hasPassedTouchHandler ? undefined : testID}
+      elevation={0}
+      testID={`${testID}-container`}
       {...rest}
-      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
     >
-      {isMode('outlined') && (
-        <View
-          pointerEvents="none"
-          style={[
-            {
-              borderColor,
-            },
-            styles.outline,
-            { borderRadius },
-          ]}
-        />
-      )}
-
       {hasPassedTouchHandler ? (
         <Pressable
           accessible={accessible}
@@ -279,15 +230,8 @@ const Card = ({
           delayLongPress={delayLongPress}
           onLongPress={onLongPress}
           onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-          testID={testID}
-          // Like Switch: a ripple drawable owns the focused state, so Android does
-          // not add its grey default focus highlight on top of the ring.
-          android_ripple={{ color: 'transparent' }}
-          onFocus={focusTarget.onFocus}
-          onBlur={focusTarget.onBlur}
-          style={[{ borderRadius }, ...focusTarget.style]}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
         >
           {content}
         </Pressable>
@@ -310,22 +254,8 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
-  content: {
+  innerContainer: {
     flexShrink: 1,
-    overflow: 'hidden',
-  },
-  horizontal: {
-    flexDirection: 'row',
-  },
-  vertical: {
-    flexDirection: 'column',
-  },
-  outline: {
-    borderWidth: 1,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    zIndex: 2,
   },
 });
 

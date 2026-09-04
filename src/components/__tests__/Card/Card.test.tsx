@@ -1,4 +1,5 @@
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
@@ -7,7 +8,7 @@ import { render, screen } from '../../../test-utils';
 import { LightTheme } from '../../../theme/schemes';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
-import { getCardColors } from '../../Card/utils';
+import { getCardCoverStyle } from '../../Card/utils';
 
 const styles = StyleSheet.create({
   customCoverRadius: {
@@ -29,90 +30,114 @@ afterEach(() => {
 });
 
 describe('Card', () => {
-  it('renders an outlined card', async () => {
-    const tree = (await render(<Card mode="outlined">{null}</Card>)).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('renders an outlined card with a custom outline color', async () => {
-    const { toJSON } = await render(
-      <Card
-        mode="outlined"
-        accessibilityLabel="card"
-        theme={{ colors: { outline: 'purple' } }}
-      >
-        {null}
-      </Card>
-    );
-
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('renders the outline with the color passed to borderColor prop', async () => {
-    const { toJSON } = await render(
-      <Card mode="outlined" borderColor="red">
-        {null}
-      </Card>
-    );
-
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('renders with a custom theme background color', async () => {
-    jest.replaceProperty(Platform, 'OS', 'web');
+  it('renders populated slots in deterministic order without rewriting nodes', async () => {
+    const CustomContent = React.memo(() => (
+      <View testID="content-custom-wrapper">
+        <Text>Custom content</Text>
+      </View>
+    ));
 
     await render(
       <Card
-        mode="outlined"
-        accessibilityLabel="card"
-        theme={{ colors: { surface: '#0000FF' } }}
-      >
-        {null}
-      </Card>
+        media={<View testID="region-media" />}
+        header={<View testID="region-header" />}
+        content={[
+          <View key="first" testID="region-content-array" />,
+          null,
+          <CustomContent key="second" />,
+        ]}
+        actions={
+          <>
+            {null}
+            <View testID="region-actions" />
+          </>
+        }
+      />
     );
 
-    expect(screen.getByLabelText('card')).toHaveStyle({
-      backgroundColor: '#0000FF',
+    expect(screen.getAllByTestId(/^(region-|content-custom-wrapper)/)).toEqual([
+      screen.getByTestId('region-media'),
+      screen.getByTestId('region-header'),
+      screen.getByTestId('region-content-array'),
+      screen.getByTestId('content-custom-wrapper'),
+      screen.getByTestId('region-actions'),
+    ]);
+  });
+
+  it('renders omitted slots as a neutral filled grouping container', async () => {
+    await render(<Card />);
+
+    expect(screen.getByTestId('card-container')).toHaveStyle({
+      backgroundColor: getTheme().colors.surfaceVariant,
     });
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+  });
+
+  it('renders the convenience header inputs', async () => {
+    await render(
+      <Card
+        title="Card title"
+        subtitle="Card subtitle"
+        leading={({ size }) => <Text>Leading {size}</Text>}
+        trailing={({ size }) => <Text>Trailing {size}</Text>}
+      />
+    );
+
+    expect(screen.getByText('Card title')).toBeOnTheScreen();
+    expect(screen.getByText('Card subtitle')).toBeOnTheScreen();
+    expect(screen.getByText('Leading 40')).toBeOnTheScreen();
+    expect(screen.getByText('Trailing 24')).toBeOnTheScreen();
   });
 
   it('renders with a content style', async () => {
     await render(
-      <Card contentStyle={styles.contentStyle}>
-        <Text>Content</Text>
-      </Card>
+      <Card content={<Text>Content</Text>} contentStyle={styles.contentStyle} />
     );
 
     expect(screen.getByText('Content').parent).toHaveStyle(styles.contentStyle);
   });
 
-  it('clips inner content to the card shape', async () => {
-    await render(
-      <Card>
-        <Text>Content</Text>
-      </Card>
-    );
-
-    expect(screen.getByText('Content').parent).toHaveStyle({
-      borderRadius: LightTheme.shapes.corner.medium,
-      overflow: 'hidden',
-    });
-  });
-
-  it('does not render a disabled accessibility state', async () => {
-    await render(<Card testID="card">{null}</Card>);
-
-    expect(screen.getByTestId('card')).toBeEnabled();
-  });
   it('does render a disabled accessibility state', async () => {
-    await render(
-      <Card testID="card" onPress={() => {}} disabled>
-        {null}
-      </Card>
-    );
+    await render(<Card onPress={() => {}} disabled />);
 
     expect(screen.getByTestId('card')).toBeDisabled();
+  });
+});
+
+describe('Card types', () => {
+  it('rejects the removed API and mixed header forms', () => {
+    const typeCases = (
+      <>
+        <Card />
+        <Card
+          title="Title"
+          subtitle="Subtitle"
+          leading={({ size }) => <View accessibilityLabel={`${size}`} />}
+          trailing={({ size }) => <View accessibilityLabel={`${size}`} />}
+        />
+        <Card header={<View />} />
+        <Card
+          content={<Text>Content</Text>}
+          actions={[<View key="action" />]}
+        />
+
+        {/* @ts-expect-error: Arbitrary children composition was removed. */}
+        <Card>
+          <View />
+        </Card>
+
+        {/* @ts-expect-error: The old mode prop was removed. */}
+        <Card mode="contained" />
+
+        {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
+        <Card header={<View />} title="Title" />
+
+        {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
+        <Card header={<View />} leading={() => <View />} />
+      </>
+    );
+
+    expect(typeCases).toBeDefined();
   });
 });
 
@@ -134,13 +159,11 @@ describe('CardCover', () => {
 
   it('renders with custom border radius', async () => {
     await render(
-      <Card>
-        <Card.Cover
-          source={{ uri: 'https://picsum.photos/700' }}
-          testID="card-cover"
-          style={styles.customCoverRadius}
-        />
-      </Card>
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="card-cover"
+        style={styles.customCoverRadius}
+      />
     );
 
     // The border radius is applied to the container which clips the image
@@ -166,19 +189,17 @@ describe('CardContent', () => {
 
   it('uses fixed padding regardless of neighboring card elements', async () => {
     await render(
-      <Card>
+      <>
         <Card.Title title="Title" />
-        <>
-          <View>
-            <Card.Content testID="card-content">
-              <Text>Content</Text>
-            </Card.Content>
-          </View>
-        </>
+        <View>
+          <Card.Content testID="card-content">
+            <Text>Content</Text>
+          </Card.Content>
+        </View>
         <Card.Actions>
           <Button>Action</Button>
         </Card.Actions>
-      </Card>
+      </>
     );
 
     expect(screen.getByTestId('card-content')).toHaveStyle({
@@ -281,60 +302,15 @@ describe('CardActions', () => {
   });
 });
 
-describe('getCardColors - background color', () => {
-  it('should return correct theme color, for theme version 3, contained mode', () => {
+describe('getCardCoverStyle - border radius', () => {
+  it('should return custom border radius', () => {
     expect(
-      getCardColors({
+      getCardCoverStyle({
         theme: LightTheme,
-        mode: 'contained',
+        borderRadiusStyles: styles.customCoverRadius,
       })
-    ).toMatchObject({
-      backgroundColor: LightTheme.colors.surfaceVariant,
-    });
+    ).toMatchObject(styles.customCoverRadius);
   });
-
-  it('should return correct theme color, for theme version 3, outlined mode', () => {
-    expect(
-      getCardColors({
-        theme: LightTheme,
-        mode: 'outlined',
-      })
-    ).toMatchObject({ backgroundColor: LightTheme.colors.surface });
-  });
-
-  it('should return undefined, for theme version 3, elevated mode', () => {
-    expect(
-      getCardColors({
-        theme: LightTheme,
-        mode: 'elevated',
-      })
-    ).toMatchObject({ backgroundColor: undefined });
-  });
-});
-
-describe('getCardColors - border color', () => {
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getCardColors({
-        theme: LightTheme,
-        // @ts-expect-error: Verify the runtime fallback when mode is omitted.
-        mode: undefined,
-      })
-    ).toMatchObject({ borderColor: LightTheme.colors.outline });
-  });
-});
-
-describe('CardContent', () => {
-  it('uses the Card padding when it follows a cover and a title', async () => {
-    await render(
-      <Card>
-        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-        <Card.Title title="Card Title" />
-        <Card.Content testID="card-content">
-          <Text>Card content</Text>
-        </Card.Content>
-      </Card>
-    );
 
     expect(screen.getByTestId('card-content').parent).toHaveStyle({
       padding: 16,

@@ -22,12 +22,12 @@ export type Props = ViewProps & {
  * import { Card, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Actions>
- *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="filled">Ok</Button>
- *     </Card.Actions>
- *   </Card>
+ *   <Card
+ *     actions={<Card.Actions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     </Card.Actions>}
+ *   />
  * );
  *
  * export default MyComponent;

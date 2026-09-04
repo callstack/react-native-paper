@@ -1,54 +1,31 @@
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import type { InternalTheme } from '../../theme/types';
 
-type CardMode = 'elevated' | 'outlined' | 'contained';
+type BorderRadiusStyles = Pick<
+  ViewStyle,
+  Extract<keyof ViewStyle, `border${string}Radius`>
+>;
 
-export type CardActionChildProps = {
-  mode?: string;
-  style?: StyleProp<ViewStyle>;
-};
-
-const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.outline;
-};
-
-const getBackgroundColor = ({
+export const getCardCoverStyle = ({
   theme,
-  isMode,
+  index: _index,
+  total: _total,
+  borderRadiusStyles,
 }: {
   theme: InternalTheme;
-  isMode: (mode: CardMode) => boolean;
+  borderRadiusStyles: BorderRadiusStyles;
+  index?: number;
+  total?: number;
 }) => {
-  const { colors } = theme;
-  if (isMode('contained')) {
-    return colors.surfaceVariant;
+  if (Object.keys(borderRadiusStyles).length > 0) {
+    return {
+      borderRadius: theme.shapes.corner.medium,
+      ...borderRadiusStyles,
+    };
   }
-  if (isMode('outlined')) {
-    return colors.surface;
-  }
-  return undefined;
-};
-
-export const getCardColors = ({
-  theme,
-  mode,
-}: {
-  theme: InternalTheme;
-  mode: CardMode;
-}): {
-  backgroundColor: ColorValue | undefined;
-  borderColor: ColorValue;
-} => {
-  const isMode = (modeToCompare: CardMode) => {
-    return mode === modeToCompare;
-  };
 
   return {
-    backgroundColor: getBackgroundColor({
-      theme,
-      isMode,
-    }),
-    borderColor: getBorderColor({ theme }),
+    borderRadius: theme.shapes.corner.medium,
   };
 };
