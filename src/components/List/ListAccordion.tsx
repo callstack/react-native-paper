@@ -12,11 +12,25 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import type {
+  EntryAnimationsValues,
+  ExitAnimationsValues,
+} from 'react-native-reanimated';
+
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import { ListTokens } from './tokens';
 import type { ListChildProps, Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
+import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -46,6 +60,10 @@ export type Props = {
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
    */
   expanded?: boolean;
+  /**
+   * Whether to highlight the accordion as selected.
+   */
+  selected?: boolean;
   /**
    * Function to execute on press.
    */
@@ -190,6 +208,7 @@ const ListAccordion = ({
   onLongPress,
   delayLongPress,
   expanded: expandedProp,
+  selected,
   'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
@@ -201,13 +220,14 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-  const [alignToTop, setAlignToTop] = React.useState(false);
+  const [isDescriptionMultiline, setIsDescriptionMultiline] =
+    React.useState(false);
 
   const onDescriptionTextLayout = (
     event: NativeSyntheticEvent<TextLayoutEventData>
   ) => {
     const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
+    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
   };
 
   const handlePressAction = (e: GestureResponderEvent) => {
@@ -232,100 +252,186 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor } = getAccordionColors({
-    theme,
-    isExpanded,
-  });
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const timingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.medium2,
+      easing: Easing.bezier(...theme.motion.easing.emphasized),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.medium2,
+      theme.motion.easing.emphasized,
+      reanimatedReduceMotion,
+    ]
+  );
+
+  const chevronProgress = useSharedValue(isExpanded ? 1 : 0);
+
+  React.useEffect(() => {
+    chevronProgress.value = withTiming(isExpanded ? 1 : 0, timingConfig);
+  }, [isExpanded, chevronProgress, timingConfig]);
+
+  const chevronStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${chevronProgress.value * 180}deg` }],
+  }));
+
+  const expandAnimation = React.useCallback(
+    (values: EntryAnimationsValues) => {
+      'worklet';
+      return {
+        initialValues: { height: 0, opacity: 0 },
+        animations: {
+          height: withTiming(values.targetHeight, timingConfig),
+          opacity: withTiming(1, timingConfig),
+        },
+      };
+    },
+    [timingConfig]
+  );
+
+  const collapseAnimation = React.useCallback(
+    (values: ExitAnimationsValues) => {
+      'worklet';
+      return {
+        initialValues: { height: values.currentHeight, opacity: 1 },
+        animations: {
+          height: withTiming(0, timingConfig),
+          opacity: withTiming(0, timingConfig),
+        },
+      };
+    },
+    [timingConfig]
+  );
+
+  const {
+    descriptionColor,
+    titleTextColor,
+    leadingIconColor,
+    trailingIconColor,
+  } = getAccordionColors({ theme, selected });
 
   const handlePress =
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const rowContext = React.useMemo(
+    () => ({
+      verticalPadding: isDescriptionMultiline
+        ? ListTokens.threeLineVerticalPadding
+        : ListTokens.verticalPadding,
+    }),
+    [isDescriptionMultiline]
+  );
+
   return (
     <View>
-      <View style={{ backgroundColor: theme?.colors?.background }}>
-        <TouchableRipple
-          style={[styles.container, style]}
-          onPress={handlePress}
-          onLongPress={onLongPress}
-          delayLongPress={delayLongPress}
-          role="button"
-          aria-expanded={isExpanded}
-          aria-label={ariaLabel}
-          testID={testID}
-          theme={theme}
-          background={background}
-          borderless
-          hitSlop={hitSlop}
-        >
-          <View
-            style={[styles.row, containerStyle]}
-            pointerEvents={pointerEvents}
+      <View
+        style={{
+          backgroundColor: selected
+            ? theme.colors[ListTokens.selectedContainerColor]
+            : theme.colors[ListTokens.containerColor],
+        }}
+      >
+        <ListRowContext.Provider value={rowContext}>
+          <TouchableRipple
+            style={[
+              styles.container,
+              description ? styles.containerTwoLine : styles.containerOneLine,
+              isDescriptionMultiline && styles.containerThreeLine,
+              style,
+            ]}
+            onPress={handlePress}
+            onLongPress={onLongPress}
+            delayLongPress={delayLongPress}
+            role="button"
+            aria-expanded={isExpanded}
+            aria-selected={selected}
+            aria-label={ariaLabel}
+            testID={testID}
+            theme={theme}
+            background={background}
+            borderless
+            hitSlop={hitSlop}
           >
-            {left
-              ? left({
-                  color: isExpanded ? theme.colors?.primary : descriptionColor,
-                  style: getLeftStyles(alignToTop, description),
-                })
-              : null}
-            <View style={[styles.contentItem, styles.content, contentStyle]}>
-              <Text
-                selectable={false}
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  styles.title,
-                  {
-                    color: titleTextColor,
-                  },
-                  titleStyle,
-                ]}
-                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              >
-                {title}
-              </Text>
-              {description ? (
-                <Text
-                  selectable={false}
-                  numberOfLines={descriptionNumberOfLines}
-                  style={[
-                    styles.description,
-                    {
-                      color: descriptionColor,
-                    },
-                    descriptionStyle,
-                  ]}
-                  onTextLayout={onDescriptionTextLayout}
-                  maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
-                >
-                  {description}
-                </Text>
-              ) : null}
-            </View>
             <View
-              style={[
-                styles.trailingItem,
-                description ? styles.multiline : undefined,
-              ]}
+              style={[styles.row, containerStyle]}
+              pointerEvents={pointerEvents}
             >
-              {right ? (
-                right({
-                  isExpanded: isExpanded,
-                })
-              ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={descriptionColor}
-                  size={24}
-                  direction={direction}
-                />
-              )}
+              {left
+                ? left({
+                    color: leadingIconColor,
+                    style: getLeftStyles(isDescriptionMultiline, description),
+                  })
+                : null}
+              <View style={[styles.contentItem, styles.content, contentStyle]}>
+                <Text
+                  variant="bodyLarge"
+                  theme={theme}
+                  selectable={false}
+                  numberOfLines={titleNumberOfLines}
+                  style={[
+                    {
+                      color: titleTextColor,
+                    },
+                    titleStyle,
+                  ]}
+                  maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+                >
+                  {title}
+                </Text>
+                {description ? (
+                  <Text
+                    variant="bodyMedium"
+                    theme={theme}
+                    selectable={false}
+                    numberOfLines={descriptionNumberOfLines}
+                    style={[
+                      {
+                        color: descriptionColor,
+                      },
+                      descriptionStyle,
+                    ]}
+                    onTextLayout={onDescriptionTextLayout}
+                    maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
+                  >
+                    {description}
+                  </Text>
+                ) : null}
+              </View>
+              <View style={styles.trailingItem}>
+                {right ? (
+                  right({
+                    isExpanded: isExpanded,
+                  })
+                ) : (
+                  <Animated.View style={chevronStyle}>
+                    <MaterialCommunityIcon
+                      name="chevron-down"
+                      color={trailingIconColor}
+                      size={24}
+                      direction={direction}
+                    />
+                  </Animated.View>
+                )}
+              </View>
             </View>
-          </View>
-        </TouchableRipple>
+          </TouchableRipple>
+        </ListRowContext.Provider>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
+      {isExpanded ? (
+        <Animated.View
+          entering={expandAnimation}
+          exiting={collapseAnimation}
+          style={styles.expandedContent}
+        >
+          {React.Children.map(children, (child) => {
             if (
               left &&
               React.isValidElement<ListChildProps>(child) &&
@@ -339,8 +445,9 @@ const ListAccordion = ({
             }
 
             return child;
-          })
-        : null}
+          })}
+        </Animated.View>
+      ) : null}
     </View>
   );
 };
@@ -349,33 +456,34 @@ ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingRight: 24,
+    paddingVertical: ListTokens.verticalPadding,
+    paddingRight: ListTokens.trailingSpace,
+    justifyContent: 'center',
+  },
+  containerOneLine: {
+    minHeight: ListTokens.oneLineContainerHeight,
+  },
+  containerTwoLine: {
+    minHeight: ListTokens.twoLineContainerHeight,
+  },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
   },
   row: {
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  multiline: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   contentItem: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   trailingItem: {
-    marginVertical: 6,
-    paddingLeft: 8,
+    alignSelf: 'center',
+    paddingLeft: ListTokens.leadingSpace,
   },
   child: {
     paddingLeft: 40,
+  },
+  expandedContent: {
+    overflow: 'hidden',
   },
   content: {
     flex: 1,
