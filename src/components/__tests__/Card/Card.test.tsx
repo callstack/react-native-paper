@@ -4,12 +4,16 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
-import { getTheme } from '../../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
+import { ReduceMotionContext } from '../../../theme/accessibility/ReduceMotionContext';
+import { DarkTheme, LightTheme } from '../../../theme/schemes';
+import { tokens as systemTokens } from '../../../theme/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
+import type { Props as CardProps } from '../../Card/Card';
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -26,6 +30,28 @@ const expectAnimatedStyle = (
 ) => {
   expect(getAnimatedStyle(screen.getByTestId(testID))).toEqual(
     expect.objectContaining(expectedStyle)
+  );
+};
+
+const getVariantCard = (
+  variant: 'filled' | 'elevated' | 'outlined',
+  props: Pick<CardProps, 'disabled' | 'dragged' | 'onPress' | 'theme'> = {}
+) => {
+  if (variant === 'elevated') {
+    return <Card {...props} variant="elevated" />;
+  }
+  if (variant === 'outlined') {
+    return <Card {...props} variant="outlined" />;
+  }
+  return <Card {...props} variant="filled" />;
+};
+
+const expectOutlineStyle = (expectedStyle?: Record<string, unknown>) => {
+  const outline = screen.queryByTestId('card-outline');
+
+  expect(Boolean(outline)).toBe(Boolean(expectedStyle));
+  expect(outline ? getAnimatedStyle(outline) : {}).toEqual(
+    expect.objectContaining(expectedStyle ?? {})
   );
 };
 
@@ -48,7 +74,7 @@ describe('Card', () => {
     'renders the enabled $variant appearance in light and dark themes',
     async ({ variant, colorRole }) => {
       for (const isDark of [false, true] as const) {
-        const theme = getTheme(isDark);
+        const theme = isDark ? DarkTheme : LightTheme;
         const card =
           variant === 'elevated' ? (
             <Card variant="elevated" theme={theme} />
@@ -70,7 +96,7 @@ describe('Card', () => {
 
   it('renders the enabled outlined role in light and dark themes', async () => {
     for (const isDark of [false, true] as const) {
-      const theme = getTheme(isDark);
+      const theme = isDark ? DarkTheme : LightTheme;
       const { unmount } = await render(
         <Card variant="outlined" theme={theme} />
       );
@@ -198,7 +224,7 @@ describe('Card', () => {
     );
 
     const expectedShape = {
-      borderRadius: getTheme().shapes.corner.medium,
+      borderRadius: LightTheme.shapes.corner.medium,
       borderTopLeftRadius: 4,
       borderTopRightRadius: 8,
       borderBottomRightRadius: 16,
@@ -251,7 +277,7 @@ describe('Card', () => {
     await render(<Card />);
 
     expect(screen.getByTestId('card-visual')).toHaveStyle({
-      backgroundColor: getTheme().colors.surfaceContainerHighest,
+      backgroundColor: LightTheme.colors.surfaceContainerHighest,
     });
     expect(screen.getByTestId('card')).not.toHaveProp('focusable');
     expect(screen.getByTestId('card-container')).not.toHaveProp('focusable');
@@ -427,7 +453,7 @@ describe('Card', () => {
       right: -5,
       bottom: -5,
       left: -5,
-      borderColor: getTheme().colors.secondary,
+      borderColor: LightTheme.colors.secondary,
       borderWidth: 3,
       borderTopLeftRadius: 9,
       borderTopRightRadius: 13,
@@ -515,10 +541,237 @@ describe('Card', () => {
     }
   );
 
+  it.each([
+    {
+      variant: 'filled' as const,
+      containerRole: 'surfaceContainerHighest' as const,
+      draggedElevation: 3,
+      outlineRole: undefined,
+    },
+    {
+      variant: 'elevated' as const,
+      containerRole: 'surfaceContainerLow' as const,
+      draggedElevation: 4,
+      outlineRole: undefined,
+    },
+    {
+      variant: 'outlined' as const,
+      containerRole: 'surface' as const,
+      draggedElevation: 3,
+      outlineRole: 'outlineVariant' as const,
+    },
+  ])(
+    'renders the consumer-controlled $variant dragged presentation',
+    async ({ variant, containerRole, draggedElevation, outlineRole }) => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+      const theme = LightTheme;
+      const card = getVariantCard(variant, { dragged: true, theme });
+
+      await render(card);
+
+      expect(screen.getByTestId('card-background')).toHaveStyle({
+        backgroundColor: theme.colors[containerRole],
+        opacity: 1,
+      });
+      expect(screen.getByTestId('card-state-layer')).toHaveStyle({
+        backgroundColor: theme.colors.onSurface,
+        opacity: systemTokens.md.sys.state.opacity.dragged,
+      });
+      expect(screen.getByTestId('card-container')).toHaveStyle({
+        elevation: draggedElevation === 3 ? 6 : 8,
+      });
+
+      const expectedOutlineStyle = outlineRole
+        ? {
+            borderColor: theme.colors[outlineRole],
+            borderWidth: 1,
+            opacity: 1,
+          }
+        : undefined;
+      expectOutlineStyle(expectedOutlineStyle);
+    }
+  );
+
+  it.each([
+    {
+      variant: 'filled' as const,
+      containerRole: 'surfaceVariant' as const,
+      containerOpacity: systemTokens.md.sys.state.opacity.disabled,
+      elevation: 0,
+      outlineRole: undefined,
+      outlineOpacity: undefined,
+    },
+    {
+      variant: 'elevated' as const,
+      containerRole: 'surface' as const,
+      containerOpacity: systemTokens.md.sys.state.opacity.disabled,
+      elevation: 1,
+      outlineRole: undefined,
+      outlineOpacity: undefined,
+    },
+    {
+      variant: 'outlined' as const,
+      containerRole: 'surface' as const,
+      containerOpacity: 1,
+      elevation: 0,
+      outlineRole: 'outline' as const,
+      outlineOpacity: 0.12,
+    },
+  ])(
+    'renders the Material disabled treatment for $variant Cards',
+    async ({
+      variant,
+      containerRole,
+      containerOpacity,
+      elevation,
+      outlineRole,
+      outlineOpacity,
+    }) => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+      const theme = LightTheme;
+      const card = getVariantCard(variant, {
+        disabled: true,
+        onPress: () => {},
+        theme,
+      });
+
+      await render(card);
+
+      expect(screen.getByTestId('card-background')).toHaveStyle({
+        backgroundColor: theme.colors[containerRole],
+        opacity: containerOpacity,
+      });
+      expect(screen.getByTestId('card-state-layer')).toHaveStyle({
+        opacity: 0,
+      });
+      expect(screen.getByTestId('card-container')).toHaveStyle({ elevation });
+      expect(screen.getByTestId('card-focus-indicator')).toHaveStyle({
+        opacity: 0,
+      });
+
+      const expectedOutlineStyle = outlineRole
+        ? {
+            borderColor: theme.colors[outlineRole],
+            borderWidth: 1,
+            opacity: outlineOpacity,
+          }
+        : undefined;
+      expectOutlineStyle(expectedOutlineStyle);
+    }
+  );
+
+  it('resolves disabled and dragged before pressed, focused, and hovered visuals', async () => {
+    expect.hasAssertions();
+    jest.replaceProperty(Platform, 'OS', 'android');
+    const theme = LightTheme;
+    const { rerender } = await render(
+      <Card variant="outlined" dragged onPress={() => {}} theme={theme} />
+    );
+    const target = screen.getByTestId('card');
+
+    await fireEvent(target, 'hoverIn');
+    await fireEvent(target, 'focus');
+    await fireEvent(target, 'pressIn');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', {
+      opacity: systemTokens.md.sys.state.opacity.dragged,
+    });
+    expectAnimatedStyle('card-container', { elevation: 6 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outlineVariant,
+      opacity: 1,
+    });
+    expectAnimatedStyle('card-focus-indicator', { opacity: 1 });
+
+    await rerender(
+      <Card
+        variant="outlined"
+        dragged
+        disabled
+        onPress={() => {}}
+        theme={theme}
+      />
+    );
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', { opacity: 0 });
+    expectAnimatedStyle('card-container', { elevation: 0 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outline,
+      opacity: 0.12,
+    });
+    expectAnimatedStyle('card-focus-indicator', { opacity: 0 });
+  });
+
+  it('updates the controlled dragged presentation in both directions', async () => {
+    expect.hasAssertions();
+    jest.replaceProperty(Platform, 'OS', 'android');
+    const theme = LightTheme;
+    const props = {
+      variant: 'outlined' as const,
+      onPress: () => {},
+      theme,
+    };
+    const { rerender } = await render(<Card {...props} />);
+
+    await rerender(<Card {...props} dragged />);
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', {
+      opacity: systemTokens.md.sys.state.opacity.dragged,
+    });
+    expectAnimatedStyle('card-container', { elevation: 6 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outlineVariant,
+      opacity: 1,
+    });
+
+    await rerender(<Card {...props} dragged={false} />);
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', { opacity: 0 });
+    expectAnimatedStyle('card-container', { elevation: 0 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outlineVariant,
+      opacity: 1,
+    });
+  });
+
+  it.each(['filled', 'elevated', 'outlined'] as const)(
+    'renders keyboard focus feedback for the %s variant',
+    async (variant) => {
+      expect.hasAssertions();
+      jest.replaceProperty(Platform, 'OS', 'web');
+      const card = getVariantCard(variant, { onPress: () => {} });
+      await render(card);
+
+      await fireEvent(screen.getByTestId('card'), 'focus', {
+        currentTarget: { matches: () => true },
+      });
+      await act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      expectAnimatedStyle('card-state-layer', {
+        opacity: systemTokens.md.sys.state.opacity.focused,
+      });
+      expectAnimatedStyle('card-focus-indicator', { opacity: 1 });
+    }
+  );
+
   it('shows focus feedback only for keyboard-visible focus and clears it on blur', async () => {
     expect.hasAssertions();
     jest.replaceProperty(Platform, 'OS', 'web');
-    const theme = getTheme();
+    const theme = LightTheme;
     await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
     const target = screen.getByTestId('card');
     const pointerTarget = { matches: () => false };
@@ -555,7 +808,7 @@ describe('Card', () => {
 
   it('uses pressed, focused, then hovered precedence and settles at the latest state', async () => {
     expect.hasAssertions();
-    const theme = getTheme();
+    const theme = LightTheme;
     await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
     const target = screen.getByTestId('card');
 
@@ -589,6 +842,91 @@ describe('Card', () => {
     });
 
     expectAnimatedStyle('card-state-layer', { opacity: 0 });
+  });
+
+  it('uses scaled theme motion duration and easing for visual transitions', async () => {
+    expect.hasAssertions();
+    const easing = [0.1, 0.2, 0.3, 0.4] as const;
+    const theme = {
+      animation: { scale: 0.5 },
+      motion: {
+        duration: { short3: 320 },
+        easing: { standard: easing },
+      },
+    };
+    const { rerender } = await render(
+      <Card onPress={() => {}} theme={theme} />
+    );
+
+    expectAnimatedStyle('card-state-layer', {
+      transitionDuration: 160,
+      transitionProperty: ['opacity'],
+      transitionTimingFunction: Reanimated.cubicBezier(...easing),
+    });
+    expectAnimatedStyle('card-container', { transitionDuration: 160 });
+
+    await rerender(<Card disabled onPress={() => {}} theme={theme} />);
+
+    expectAnimatedStyle('card-state-layer', { transitionDuration: 160 });
+    expectAnimatedStyle('card-container', { transitionDuration: 160 });
+  });
+
+  it('settles transitions immediately when reduced motion is enabled', async () => {
+    expect.hasAssertions();
+    await render(
+      <ReduceMotionContext.Provider value>
+        <Card variant="outlined" onPress={() => {}} />
+      </ReduceMotionContext.Provider>
+    );
+
+    await fireEvent(screen.getByTestId('card'), 'pressIn');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', {
+      opacity: systemTokens.md.sys.state.opacity.pressed,
+      transitionDuration: 0,
+    });
+    expectAnimatedStyle('card-container', { transitionDuration: 0 });
+    expectAnimatedStyle('card-outline', { transitionDuration: 0 });
+    expectAnimatedStyle('card-focus-indicator', { transitionDuration: 0 });
+  });
+
+  it('settles rapid changes at the latest complete visual state', async () => {
+    expect.hasAssertions();
+    jest.replaceProperty(Platform, 'OS', 'android');
+    const theme = LightTheme;
+    const props = {
+      variant: 'outlined' as const,
+      onPress: () => {},
+      theme,
+    };
+    const { rerender } = await render(<Card {...props} />);
+    const target = screen.getByTestId('card');
+
+    await fireEvent(target, 'hoverIn');
+    await fireEvent(target, 'focus');
+    await fireEvent(target, 'pressIn');
+    await rerender(<Card {...props} dragged />);
+    await rerender(<Card {...props} />);
+    await fireEvent(target, 'pressOut');
+    await fireEvent(target, 'blur');
+    await fireEvent(target, 'hoverOut');
+    await fireEvent(target, 'hoverIn');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', {
+      opacity: systemTokens.md.sys.state.opacity.hovered,
+    });
+    expectAnimatedStyle('card-container', { elevation: 1 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outlineVariant,
+      opacity: 1,
+    });
+    expectAnimatedStyle('card-focus-indicator', { opacity: 0 });
   });
 
   it('does not rerender stable memoized slot content for transient feedback', async () => {
@@ -941,7 +1279,7 @@ describe('CardCover', () => {
       borderBottomLeftRadius: 20,
     });
     expect(screen.getByTestId('edge-cover')).not.toHaveStyle({
-      borderRadius: getTheme().shapes.corner.medium,
+      borderRadius: LightTheme.shapes.corner.medium,
     });
   });
 });
