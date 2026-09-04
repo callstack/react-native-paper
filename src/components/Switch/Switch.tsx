@@ -88,11 +88,11 @@ export type OperableProps = SwitchBaseProps &
   (
     | {
         onValueChange: (value: boolean) => void;
-        readOnly?: false;
+        readOnly?: boolean;
         disabled?: boolean;
       }
     | { onValueChange?: never; readOnly: true; disabled?: boolean }
-    | { onValueChange?: never; readOnly?: false; disabled: true }
+    | { onValueChange?: never; readOnly?: boolean; disabled: true }
   );
 
 const {
