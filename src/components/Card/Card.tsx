@@ -141,7 +141,7 @@ const Card = ({
   style,
   contentStyle,
   theme: themeOverrides,
-  testID,
+  testID = 'card',
   accessible,
   disabled,
   ref,
@@ -182,15 +182,6 @@ const Card = ({
     }
   });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type
-      ? typeof child.type !== 'string' && 'displayName' in child.type
-        ? child.type.displayName
-        : null
-      : null
-  );
-
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
@@ -204,16 +195,8 @@ const Card = ({
   const borderRadius = theme.shapes.corner.medium;
 
   const content = (
-    <View style={[styles.innerContainer, contentStyle]}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-            })
-          : child
-      )}
+    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
+      {children}
     </View>
   );
 

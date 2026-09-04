@@ -1,4 +1,5 @@
-import { Platform, StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
@@ -18,6 +19,9 @@ const styles = StyleSheet.create({
   },
   contentStyle: {
     flexDirection: 'column-reverse',
+  },
+  customAction: {
+    marginRight: 12,
   },
 });
 
@@ -122,20 +126,134 @@ describe('CardCover', () => {
   });
 });
 
-describe('CardActions', () => {
-  it('renders button with passed mode', async () => {
+describe('CardContent', () => {
+  it('uses fixed padding when rendered standalone', async () => {
+    await render(
+      <Card.Content testID="card-content">
+        <Text>Content</Text>
+      </Card.Content>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    });
+  });
+
+  it('uses fixed padding regardless of neighboring card elements', async () => {
     await render(
       <Card>
-        <Card.Actions testID="card-actions">
-          <Button mode="contained">Agree</Button>
+        <Card.Title title="Title" />
+        <>
+          <View>
+            <Card.Content testID="card-content">
+              <Text>Content</Text>
+            </Card.Content>
+          </View>
+        </>
+        <Card.Actions>
+          <Button>Action</Button>
         </Card.Actions>
       </Card>
     );
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('card-actions').props.children[0].props.mode
-    ).toBe('contained');
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    });
+  });
+
+  it('lets consumer styles override the default padding', async () => {
+    await render(
+      <Card.Content
+        testID="card-content"
+        style={{ paddingHorizontal: 24, paddingVertical: 12 }}
+      >
+        <Text>Content</Text>
+      </Card.Content>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 24,
+      paddingVertical: 12,
+    });
+  });
+});
+
+describe('CardActions', () => {
+  it('lays out heterogeneous nodes with container-owned spacing', async () => {
+    await render(
+      <Card.Actions testID="card-actions">
+        <Button>Agree</Button>
+        <View testID="custom-action" />
+        <Text>Details</Text>
+      </Card.Actions>
+    );
+
+    expect(screen.getByTestId('card-actions')).toHaveStyle({
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: 8,
+      gap: 8,
+    });
+    expect(screen.getByTestId('custom-action')).toBeOnTheScreen();
+    expect(screen.getByText('Details')).toBeOnTheScreen();
+  });
+
+  it('lets consumer styles override the default layout', async () => {
+    await render(
+      <Card.Actions
+        testID="card-actions"
+        style={{ justifyContent: 'flex-start', padding: 4, gap: 12 }}
+      >
+        <Text>Action</Text>
+      </Card.Actions>
+    );
+
+    expect(screen.getByTestId('card-actions')).toHaveStyle({
+      justifyContent: 'flex-start',
+      padding: 4,
+      gap: 12,
+    });
+  });
+
+  it('preserves consumer-configured child props', async () => {
+    const Action = ({
+      compact,
+      mode,
+      style,
+    }: {
+      compact?: boolean;
+      mode?: string;
+      style?: StyleProp<ViewStyle>;
+    }) => (
+      <View
+        accessibilityLabel={`${mode ?? 'unset'}:${compact ?? 'unset'}`}
+        style={style}
+      />
+    );
+
+    await render(
+      <Card.Actions testID="card-actions">
+        <Action style={styles.customAction} />
+        <Action mode="contained" compact style={styles.customAction} />
+        <View testID="custom-action" style={styles.customAction} />
+      </Card.Actions>
+    );
+
+    expect(screen.getByLabelText('unset:unset')).toHaveStyle(
+      styles.customAction
+    );
+    expect(screen.getByLabelText('contained:true')).toHaveStyle(
+      styles.customAction
+    );
+    expect(screen.getByLabelText('unset:unset')).not.toHaveStyle({
+      marginLeft: 8,
+    });
+    expect(screen.getByTestId('custom-action')).not.toHaveStyle({
+      marginLeft: 8,
+    });
   });
 });
 
