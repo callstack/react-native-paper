@@ -124,7 +124,8 @@ export type { Props as RadioButtonAndroidProps } from './components/RadioButton/
 export type { Props as RadioButtonGroupProps } from './components/RadioButton/RadioButtonGroup';
 export type { Props as RadioButtonIOSProps } from './components/RadioButton/RadioButtonIOS';
 export type { Props as RadioButtonItemProps } from './components/RadioButton/RadioButtonItem';
-export type { Props as SearchbarProps } from './components/Searchbar';
+export type { Props as SearchbarProps } from './components/Searchbar/Searchbar';
+export type { Props as SearchbarResultsProps } from './components/Searchbar/SearchbarResults';
 export type { Props as SnackbarProps } from './components/Snackbar';
 export type { Props as SurfaceProps } from './components/Surface';
 export type { Props as SwitchProps } from './components/Switch/Switch';

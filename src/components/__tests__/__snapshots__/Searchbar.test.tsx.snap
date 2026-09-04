@@ -3,383 +3,292 @@
 exports[`activity indicator snapshot test 1`] = `
 <View
   collapsable={false}
-  style={
-    [
-      {},
-      {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-      undefined,
-      {},
-      {
-        "backgroundColor": "rgba(236, 230, 240, 1)",
-      },
-      {
-        "borderBottomEndRadius": undefined,
-        "borderBottomLeftRadius": undefined,
-        "borderBottomRightRadius": undefined,
-        "borderBottomStartRadius": undefined,
-        "borderCurve": "continuous",
-        "borderEndEndRadius": undefined,
-        "borderEndStartRadius": undefined,
-        "borderRadius": 28,
-        "borderStartEndRadius": undefined,
-        "borderStartStartRadius": undefined,
-        "borderTopEndRadius": undefined,
-        "borderTopLeftRadius": undefined,
-        "borderTopRightRadius": undefined,
-        "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
-    ]
-  }
-  testID="search-bar-container"
+  style={[]}
+  testID="search-bar-wrapper"
 >
   <View
     collapsable={false}
     style={
       [
         {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(236, 230, 240, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": 28,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "marginLeft": 24,
+          "marginRight": 24,
         },
       ]
     }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "margin": 6,
-          "overflow": "hidden",
-        },
-        {
-          "backgroundColor": undefined,
-          "height": 40,
-          "width": 40,
-        },
-        {
-          "borderColor": "rgba(202, 196, 208, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar-icon-container"
+    testID="search-bar-focus-wrapper"
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      centered={true}
       collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
+          {},
           {
-            "overflow": "hidden",
+            "alignItems": "center",
+            "flexDirection": "row",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
+          false,
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(236, 230, 240, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 28,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
             },
-            undefined,
-          ],
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          },
         ]
       }
-      testID="search-bar-icon"
+      testID="search-bar-container"
     >
       <View
+        collapsable={false}
         style={
-          {
-            "opacity": 1,
-          }
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "pointerEvents": "none",
+            },
+            {},
+            {},
+            {
+              "backgroundColor": "rgba(236, 230, 240, 1)",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
+      />
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": undefined,
+              "height": 40,
+              "width": 40,
+            },
+            {
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="search-bar-icon-container"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
+          accessibilityLabel="search"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "overflow": "hidden",
               },
               [
                 {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
                 },
-                {
-                  "backgroundColor": "transparent",
-                },
+                undefined,
               ],
             ]
           }
-        >
-          magnify
-        </Text>
-      </View>
-    </View>
-  </View>
-  <TextInput
-    keyboardAppearance="light"
-    placeholder=""
-    placeholderTextColor="rgba(29, 27, 32, 1)"
-    returnKeyType="search"
-    role="searchbox"
-    selectionColor="rgba(103, 80, 164, 1)"
-    style={
-      [
-        {
-          "alignSelf": "stretch",
-          "flex": 1,
-          "fontSize": 18,
-          "minWidth": 0,
-          "paddingLeft": 8,
-        },
-        {
-          "color": "rgba(73, 69, 79, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "400",
-          "letterSpacing": 0.5,
-          "lineHeight": 0,
-          "textAlign": "left",
-        },
-        {
-          "minHeight": 56,
-          "paddingLeft": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar"
-    underlineColorAndroid="transparent"
-    value=""
-  />
-  <View
-    accessible={true}
-    aria-busy={true}
-    role="progressbar"
-    style={
-      [
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-        },
-        {
-          "marginHorizontal": 16,
-        },
-      ]
-    }
-    testID="activity-indicator"
-  >
-    <View
-      collapsable={false}
-      style={
-        {
-          "height": 24,
-          "opacity": 1,
-          "width": 24,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
-          {
-            "alignItems": "center",
-            "bottom": 0,
-            "justifyContent": "center",
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      >
-        <View
-          collapsable={false}
-          style={
-            {
-              "height": 24,
-              "transform": [
-                {
-                  "rotate": "45deg",
-                },
-              ],
-              "width": 24,
-            }
-          }
+          testID="search-bar-icon"
         >
           <View
-            collapsable={false}
             style={
               {
-                "height": 12,
-                "overflow": "hidden",
-                "width": 24,
+                "opacity": 1,
               }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                {
-                  "height": 24,
-                  "transform": [
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
                     {
-                      "translateY": 0,
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
                     {
-                      "rotate": "-165deg",
+                      "backgroundColor": "transparent",
                     },
                   ],
-                  "width": 24,
-                }
+                ]
               }
             >
-              <View
-                collapsable={false}
-                style={
-                  {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "width": 24,
-                  }
-                }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    {
-                      "borderColor": "rgba(103, 80, 164, 1)",
-                      "borderRadius": 12,
-                      "borderWidth": 2.4,
-                      "height": 24,
-                      "width": 24,
-                    }
-                  }
-                />
-              </View>
-            </View>
+              magnify
+            </Text>
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
+      <TextInput
+        keyboardAppearance="light"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        placeholderTextColor="rgba(73, 69, 79, 1)"
+        returnKeyType="search"
+        role="searchbox"
+        selectionColor="rgba(103, 80, 164, 1)"
         style={
-          {
-            "alignItems": "center",
-            "bottom": 0,
-            "justifyContent": "center",
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
+          [
+            {
+              "alignSelf": "stretch",
+              "flex": 1,
+              "minWidth": 0,
+              "paddingLeft": 8,
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.5,
+              "lineHeight": 0,
+              "textAlign": "left",
+            },
+            {
+              "minHeight": 56,
+              "paddingLeft": 0,
+            },
+            undefined,
+          ]
         }
+        testID="search-bar"
+        underlineColorAndroid="transparent"
+        value=""
+      />
+      <View
+        accessible={true}
+        aria-busy={true}
+        role="progressbar"
+        style={
+          [
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            {
+              "marginHorizontal": 16,
+            },
+          ]
+        }
+        testID="activity-indicator"
       >
         <View
           collapsable={false}
           style={
             {
               "height": 24,
-              "transform": [
-                {
-                  "rotate": "45deg",
-                },
-              ],
+              "opacity": 1,
               "width": 24,
             }
           }
@@ -388,10 +297,13 @@ exports[`activity indicator snapshot test 1`] = `
             collapsable={false}
             style={
               {
-                "height": 12,
-                "overflow": "hidden",
-                "top": 12,
-                "width": 24,
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               }
             }
           >
@@ -402,10 +314,7 @@ exports[`activity indicator snapshot test 1`] = `
                   "height": 24,
                   "transform": [
                     {
-                      "translateY": -12,
-                    },
-                    {
-                      "rotate": "345deg",
+                      "rotate": "45deg",
                     },
                   ],
                   "width": 24,
@@ -426,14 +335,126 @@ exports[`activity indicator snapshot test 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "borderColor": "rgba(103, 80, 164, 1)",
-                      "borderRadius": 12,
-                      "borderWidth": 2.4,
                       "height": 24,
+                      "transform": [
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "rotate": "-165deg",
+                        },
+                      ],
                       "width": 24,
                     }
                   }
-                />
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 12,
+                        "overflow": "hidden",
+                        "width": 24,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "borderColor": "rgba(103, 80, 164, 1)",
+                          "borderRadius": 12,
+                          "borderWidth": 2.4,
+                          "height": 24,
+                          "width": 24,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "transform": [
+                    {
+                      "rotate": "45deg",
+                    },
+                  ],
+                  "width": 24,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "height": 12,
+                    "overflow": "hidden",
+                    "top": 12,
+                    "width": 24,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "height": 24,
+                      "transform": [
+                        {
+                          "translateY": -12,
+                        },
+                        {
+                          "rotate": "345deg",
+                        },
+                      ],
+                      "width": 24,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 12,
+                        "overflow": "hidden",
+                        "width": 24,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "borderColor": "rgba(103, 80, 164, 1)",
+                          "borderRadius": 12,
+                          "borderWidth": 2.4,
+                          "height": 24,
+                          "width": 24,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
               </View>
             </View>
           </View>
@@ -447,381 +468,402 @@ exports[`activity indicator snapshot test 1`] = `
 exports[`renders with placeholder 1`] = `
 <View
   collapsable={false}
-  style={
-    [
-      {},
-      {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-      undefined,
-      {},
-      {
-        "backgroundColor": "rgba(236, 230, 240, 1)",
-      },
-      {
-        "borderBottomEndRadius": undefined,
-        "borderBottomLeftRadius": undefined,
-        "borderBottomRightRadius": undefined,
-        "borderBottomStartRadius": undefined,
-        "borderCurve": "continuous",
-        "borderEndEndRadius": undefined,
-        "borderEndStartRadius": undefined,
-        "borderRadius": 28,
-        "borderStartEndRadius": undefined,
-        "borderStartStartRadius": undefined,
-        "borderTopEndRadius": undefined,
-        "borderTopLeftRadius": undefined,
-        "borderTopRightRadius": undefined,
-        "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
-    ]
-  }
-  testID="search-bar-container"
+  style={[]}
+  testID="search-bar-wrapper"
 >
   <View
     collapsable={false}
     style={
       [
         {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(236, 230, 240, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": 28,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "marginLeft": 24,
+          "marginRight": 24,
         },
       ]
     }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "margin": 6,
-          "overflow": "hidden",
-        },
-        {
-          "backgroundColor": undefined,
-          "height": 40,
-          "width": 40,
-        },
-        {
-          "borderColor": "rgba(202, 196, 208, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar-icon-container"
+    testID="search-bar-focus-wrapper"
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      centered={true}
       collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
+          {},
           {
-            "overflow": "hidden",
+            "alignItems": "center",
+            "flexDirection": "row",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
+          false,
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(236, 230, 240, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 28,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
             },
-            undefined,
-          ],
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          },
         ]
       }
-      testID="search-bar-icon"
+      testID="search-bar-container"
     >
       <View
+        collapsable={false}
         style={
-          {
-            "opacity": 1,
-          }
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "pointerEvents": "none",
+            },
+            {},
+            {},
+            {
+              "backgroundColor": "rgba(236, 230, 240, 1)",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
+      />
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": undefined,
+              "height": 40,
+              "width": 40,
+            },
+            {
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="search-bar-icon-container"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
+          accessibilityLabel="search"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "overflow": "hidden",
               },
               [
                 {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
                 },
-                {
-                  "backgroundColor": "transparent",
-                },
+                undefined,
               ],
             ]
           }
+          testID="search-bar-icon"
         >
-          magnify
-        </Text>
+          <View
+            style={
+              {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              magnify
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
-  </View>
-  <TextInput
-    keyboardAppearance="light"
-    placeholder="Search"
-    placeholderTextColor="rgba(29, 27, 32, 1)"
-    returnKeyType="search"
-    role="searchbox"
-    selectionColor="rgba(103, 80, 164, 1)"
-    style={
-      [
-        {
-          "alignSelf": "stretch",
-          "flex": 1,
-          "fontSize": 18,
-          "minWidth": 0,
-          "paddingLeft": 8,
-        },
-        {
-          "color": "rgba(73, 69, 79, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "400",
-          "letterSpacing": 0.5,
-          "lineHeight": 0,
-          "textAlign": "left",
-        },
-        {
-          "minHeight": 56,
-          "paddingLeft": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar"
-    underlineColorAndroid="transparent"
-    value=""
-  />
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "marginLeft": 16,
-          "position": "absolute",
-          "right": 0,
-        },
-        false,
-      ]
-    }
-    testID="search-bar-icon-wrapper"
-  >
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "margin": 6,
-            "overflow": "hidden",
-          },
-          {
-            "backgroundColor": undefined,
-            "height": 40,
-            "width": 40,
-          },
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
-            "borderRadius": 20,
-            "borderWidth": 0,
-          },
-          undefined,
-        ]
-      }
-      testID="search-bar-clear-icon-container"
-    >
-      <View
-        accessibilityLabel="clear"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
+      <TextInput
+        keyboardAppearance="light"
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        placeholder="Search"
+        placeholderTextColor="rgba(73, 69, 79, 1)"
+        returnKeyType="search"
+        role="searchbox"
+        selectionColor="rgba(103, 80, 164, 1)"
         style={
           [
             {
-              "overflow": "hidden",
+              "alignSelf": "stretch",
+              "flex": 1,
+              "minWidth": 0,
+              "paddingLeft": 8,
             },
-            [
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
-              undefined,
-            ],
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.5,
+              "lineHeight": 0,
+              "textAlign": "left",
+            },
+            {
+              "minHeight": 56,
+              "paddingLeft": 0,
+            },
+            undefined,
           ]
         }
-        testID="search-bar-clear-icon"
+        testID="search-bar"
+        underlineColorAndroid="transparent"
+        value=""
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "marginLeft": 16,
+              "position": "absolute",
+              "right": 0,
+            },
+            false,
+          ]
+        }
+        testID="search-bar-icon-wrapper"
       >
         <View
+          collapsable={false}
           style={
-            {
-              "opacity": 1,
-            }
+            [
+              {
+                "margin": 6,
+                "overflow": "hidden",
+              },
+              {
+                "backgroundColor": undefined,
+                "height": 40,
+                "width": 40,
+              },
+              {
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+              },
+              undefined,
+            ]
           }
+          testID="search-bar-clear-icon-container"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            accessibilityLabel="clear"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            centered={true}
+            collapsable={false}
+            focusable={true}
+            hitSlop={
+              {
+                "bottom": 6,
+                "left": 6,
+                "right": 6,
+                "top": 6,
+              }
+            }
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
-                  "color": "rgba(255, 255, 255, 0)",
-                  "fontSize": 24,
+                  "overflow": "hidden",
                 },
                 [
                   {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
                   },
-                  {
-                    "backgroundColor": "transparent",
-                  },
+                  undefined,
                 ],
               ]
             }
+            testID="search-bar-clear-icon"
           >
-            close
-          </Text>
+            <View
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(255, 255, 255, 0)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                close
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -832,377 +874,398 @@ exports[`renders with placeholder 1`] = `
 exports[`renders with text 1`] = `
 <View
   collapsable={false}
-  style={
-    [
-      {},
-      {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-      undefined,
-      {},
-      {
-        "backgroundColor": "rgba(236, 230, 240, 1)",
-      },
-      {
-        "borderBottomEndRadius": undefined,
-        "borderBottomLeftRadius": undefined,
-        "borderBottomRightRadius": undefined,
-        "borderBottomStartRadius": undefined,
-        "borderCurve": "continuous",
-        "borderEndEndRadius": undefined,
-        "borderEndStartRadius": undefined,
-        "borderRadius": 28,
-        "borderStartEndRadius": undefined,
-        "borderStartStartRadius": undefined,
-        "borderTopEndRadius": undefined,
-        "borderTopLeftRadius": undefined,
-        "borderTopRightRadius": undefined,
-        "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
-    ]
-  }
-  testID="search-bar-container"
+  style={[]}
+  testID="search-bar-wrapper"
 >
   <View
     collapsable={false}
     style={
       [
         {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(236, 230, 240, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": 28,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "marginLeft": 24,
+          "marginRight": 24,
         },
       ]
     }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "margin": 6,
-          "overflow": "hidden",
-        },
-        {
-          "backgroundColor": undefined,
-          "height": 40,
-          "width": 40,
-        },
-        {
-          "borderColor": "rgba(202, 196, 208, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar-icon-container"
+    testID="search-bar-focus-wrapper"
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      centered={true}
       collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
+          {},
           {
-            "overflow": "hidden",
+            "alignItems": "center",
+            "flexDirection": "row",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
+          false,
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(236, 230, 240, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 28,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
             },
-            undefined,
-          ],
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          },
         ]
       }
-      testID="search-bar-icon"
+      testID="search-bar-container"
     >
       <View
+        collapsable={false}
         style={
-          {
-            "opacity": 1,
-          }
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "pointerEvents": "none",
+            },
+            {},
+            {},
+            {
+              "backgroundColor": "rgba(236, 230, 240, 1)",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            },
+          ]
         }
+      />
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": undefined,
+              "height": 40,
+              "width": 40,
+            },
+            {
+              "borderColor": "rgba(202, 196, 208, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="search-bar-icon-container"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
+          accessibilityLabel="search"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "overflow": "hidden",
               },
               [
                 {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
                 },
-                {
-                  "backgroundColor": "transparent",
-                },
+                undefined,
               ],
             ]
           }
+          testID="search-bar-icon"
         >
-          magnify
-        </Text>
+          <View
+            style={
+              {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              magnify
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
-  </View>
-  <TextInput
-    keyboardAppearance="light"
-    placeholder="Search"
-    placeholderTextColor="rgba(29, 27, 32, 1)"
-    returnKeyType="search"
-    role="searchbox"
-    selectionColor="rgba(103, 80, 164, 1)"
-    style={
-      [
-        {
-          "alignSelf": "stretch",
-          "flex": 1,
-          "fontSize": 18,
-          "minWidth": 0,
-          "paddingLeft": 8,
-        },
-        {
-          "color": "rgba(73, 69, 79, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "400",
-          "letterSpacing": 0.5,
-          "lineHeight": 0,
-          "textAlign": "left",
-        },
-        {
-          "minHeight": 56,
-          "paddingLeft": 0,
-        },
-        undefined,
-      ]
-    }
-    testID="search-bar"
-    underlineColorAndroid="transparent"
-    value="query"
-  />
-  <View
-    pointerEvents="auto"
-    style={
-      [
-        false,
-        false,
-      ]
-    }
-    testID="search-bar-icon-wrapper"
-  >
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "margin": 6,
-            "overflow": "hidden",
-          },
-          {
-            "backgroundColor": undefined,
-            "height": 40,
-            "width": 40,
-          },
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
-            "borderRadius": 20,
-            "borderWidth": 0,
-          },
-          undefined,
-        ]
-      }
-      testID="search-bar-clear-icon-container"
-    >
-      <View
-        accessibilityLabel="clear"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
+      <TextInput
+        keyboardAppearance="light"
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        placeholder="Search"
+        placeholderTextColor="rgba(73, 69, 79, 1)"
+        returnKeyType="search"
+        role="searchbox"
+        selectionColor="rgba(103, 80, 164, 1)"
         style={
           [
             {
-              "overflow": "hidden",
+              "alignSelf": "stretch",
+              "flex": 1,
+              "minWidth": 0,
+              "paddingLeft": 8,
             },
-            [
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
-              undefined,
-            ],
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.5,
+              "lineHeight": 0,
+              "textAlign": "left",
+            },
+            {
+              "minHeight": 56,
+              "paddingLeft": 0,
+            },
+            undefined,
           ]
         }
-        testID="search-bar-clear-icon"
+        testID="search-bar"
+        underlineColorAndroid="transparent"
+        value="query"
+      />
+      <View
+        pointerEvents="auto"
+        style={
+          [
+            false,
+            false,
+          ]
+        }
+        testID="search-bar-icon-wrapper"
       >
         <View
+          collapsable={false}
           style={
-            {
-              "opacity": 1,
-            }
+            [
+              {
+                "margin": 6,
+                "overflow": "hidden",
+              },
+              {
+                "backgroundColor": undefined,
+                "height": 40,
+                "width": 40,
+              },
+              {
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderRadius": 20,
+                "borderWidth": 0,
+              },
+              undefined,
+            ]
           }
+          testID="search-bar-clear-icon-container"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            accessibilityLabel="clear"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            centered={true}
+            collapsable={false}
+            focusable={true}
+            hitSlop={
+              {
+                "bottom": 6,
+                "left": 6,
+                "right": 6,
+                "top": 6,
+              }
+            }
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "overflow": "hidden",
                 },
                 [
                   {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
                   },
-                  {
-                    "backgroundColor": "transparent",
-                  },
+                  undefined,
                 ],
               ]
             }
+            testID="search-bar-clear-icon"
           >
-            close
-          </Text>
+            <View
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                close
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
