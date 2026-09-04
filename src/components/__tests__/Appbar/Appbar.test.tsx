@@ -1,6 +1,10 @@
-import { describe, expect, it } from '@jest/globals';
+import { Platform, Text as RNText } from 'react-native';
+
+import { afterEach, describe, expect, it } from '@jest/globals';
+import { render as rtlRender } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import PaperProvider from '../../../core/PaperProvider';
 import { getTheme } from '../../../core/theming';
 import { render, screen } from '../../../test-utils';
 import { tokens } from '../../../theme/tokens';
@@ -11,6 +15,7 @@ import {
   modeTextVariant,
   renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
+import type { IconProps } from '../../MaterialCommunityIcon';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Text from '../../Typography/Text';
@@ -325,5 +330,72 @@ describe('getAppbarBorders', () => {
 
   it('returns an empty object when no border styles are passed', () => {
     expect(getAppbarBorders({ height: 60, top: 13 })).toEqual({});
+  });
+});
+
+describe('Appbar.BackAction icon', () => {
+  const originalPlatform = Platform.OS;
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+  });
+
+  const CustomIcon = ({ name, size, direction, testID }: IconProps) => (
+    <RNText
+      testID={testID}
+      style={{
+        fontSize: size,
+        transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+      }}
+    >
+      {`custom-${name}`}
+    </RNText>
+  );
+
+  const renderBackAction = (direction?: 'ltr' | 'rtl') =>
+    rtlRender(
+      <PaperProvider settings={{ icon: CustomIcon }} direction={direction}>
+        <Appbar.BackAction onPress={() => {}} testID="back-action" />
+      </PaperProvider>
+    );
+
+  it('renders the icon provided through PaperProvider settings', async () => {
+    Platform.OS = 'android';
+
+    await renderBackAction();
+
+    expect(
+      screen.getByText('custom-arrow-left', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
+  it('renders the icon provided through PaperProvider settings on iOS', async () => {
+    Platform.OS = 'ios';
+
+    await renderBackAction();
+
+    expect(
+      screen.getByText('custom-arrow-left', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
+  it('keeps the icon mirrored in RTL', async () => {
+    Platform.OS = 'android';
+
+    await renderBackAction('rtl');
+
+    expect(
+      screen.getByText('custom-arrow-left', { includeHiddenElements: true })
+    ).toHaveStyle({ transform: [{ scaleX: -1 }] });
+  });
+
+  it('keeps the icon unmirrored in LTR', async () => {
+    Platform.OS = 'android';
+
+    await renderBackAction('ltr');
+
+    expect(
+      screen.getByText('custom-arrow-left', { includeHiddenElements: true })
+    ).toHaveStyle({ transform: [{ scaleX: 1 }] });
   });
 });
