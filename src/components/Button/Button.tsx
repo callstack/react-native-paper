@@ -11,9 +11,27 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
-import type { ButtonMode } from './utils';
+import Reanimated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
+import {
+  getButtonColors,
+  getButtonPressedRadius,
+  getButtonRippleColor,
+  getButtonShapeRadius,
+  getButtonSizeStyle,
+  getButtonTransitionDuration,
+  getEffectiveButtonShape,
+} from './utils';
+import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
+import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
@@ -25,26 +43,65 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
+// Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
+// level 2 while pressed.
+const initialElevation = 1;
+const activeElevation = 2;
+
 export type Props = Omit<ViewProps, 'style'> & {
   /**
-   * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
-   * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
+   * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis. Defaults to `filled`.
+   * - `filled` - button with a background color, used for the most important action, has the most visual impact and high emphasis. (default)
+   * - `tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.
+   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
-   * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
-   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3
-   * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3
+   * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
    */
-  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+  mode?: 'text' | 'outlined' | 'filled' | 'elevated' | 'tonal';
   /**
-   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:
-   *  * `contained` mode for theme version 2
-   *  * `contained`, `contained-tonal` and `elevated` modes for theme version 3.
+   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for the `filled`, `tonal` and `elevated` modes.
    */
   dark?: boolean;
   /**
-   * Use a compact look, useful for `text` buttons in a row.
+   * Size of the button (Material Design 3 expressive). Defaults to `small`.
+   *
+   * The size controls the minimum height, horizontal padding, icon size, the
+   * gap between icon and label, and the label typescale.
    */
-  compact?: boolean;
+  size?: ButtonSize;
+  /**
+   * Shape variant of the button (Material Design 3 expressive). Defaults to
+   * `round`. `'round'` uses the full-pill corner radius; `'square'` uses a
+   * smaller per-size corner radius.
+   */
+  shape?: ButtonShape;
+  /**
+   * Whether the container animates its corner radius. Defaults to `true`.
+   *
+   * When `true` the corner springs to the pressed shape while the button is
+   * pressed, and animates between the two shapes as `selected` changes. When
+   * `false` the shape still changes, it just snaps instead of animating, and
+   * there is no press morph at all.
+   *
+   * The press morph is skipped when the OS reduce-motion setting is on.
+   */
+  animateShape?: boolean;
+  /**
+   * Turns the button into a Material Design 3 expressive toggle and sets its
+   * state. Leave it **undefined** for a plain button — a toggle that is merely
+   * unselected is a different state, and MD3 gives the two different colours.
+   *
+   * When defined:
+   *
+   * - The button takes its container and label colours from the toggle set for
+   *   its `mode`, which differ between `false` and `true`.
+   * - When `true` the `shape` is flipped: `'round'` renders square and vice
+   *   versa, and an `outlined` button drops its outline.
+   * - `aria-selected` is set so screen readers announce the toggle state.
+   *
+   * Ignored on `mode="text"`, which MD3 gives no toggle.
+   */
+  selected?: boolean;
   /**
    * Custom button's background color.
    */
@@ -62,6 +119,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   icon?: IconSource;
   /**
+   * Position of the `icon` relative to the label. Defaults to `'leading'`.
+   */
+  iconPosition?: 'leading' | 'trailing';
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -70,14 +131,15 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   children: React.ReactNode;
   /**
-   * Make the label text uppercased. Note that this won't work if you pass React elements as children.
-   */
-  uppercase?: boolean;
-  /**
    * Type of background drawabale to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
+  /**
+   * Color of the ripple effect / state layer. Defaults to the label color at
+   * the pressed-state opacity.
+   */
+  rippleColor?: ColorValue;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -112,7 +174,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width or to set a custom padding.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -152,7 +214,7 @@ export type Props = Omit<ViewProps, 'style'> & {
  * import { Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+ *   <Button icon="camera" mode="filled" onPress={() => console.log('Pressed')}>
  *     Press me
  *   </Button>
  * );
@@ -162,13 +224,17 @@ export type Props = Omit<ViewProps, 'style'> & {
  */
 const Button = ({
   disabled,
-  compact,
-  mode = 'text',
+  mode = 'filled',
+  size = 'small',
+  shape = 'round',
+  animateShape: animateShapeProp = true,
+  selected,
   dark,
   loading,
   icon,
+  iconPosition,
   buttonColor: customButtonColor,
-  textColor: customTextColor,
+  textColor: customLabelColor,
   children,
   'aria-label': ariaLabel,
   accessibilityHint,
@@ -181,27 +247,26 @@ const Button = ({
   delayLongPress,
   style,
   theme: themeOverrides,
-  uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
   testID = 'button',
   accessible,
   background,
+  rippleColor: customRippleColor,
   maxFontSizeMultiplier,
   touchableRef,
   ref,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
 
-  const isMode = React.useCallback(
-    (modeToCompare: ButtonMode) => {
-      return mode === modeToCompare;
-    },
-    [mode]
-  );
-
-  const uppercase = uppercaseProp ?? false;
+  const requestedTrailingIcon = iconPosition === 'trailing';
+  const shouldFlipForRTL = direction !== getDefaultDirection();
+  const isTrailingIcon = shouldFlipForRTL
+    ? !requestedTrailingIcon
+    : requestedTrailingIcon;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -210,184 +275,301 @@ const Button = ({
     onLongPress,
   });
 
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
   const isElevationEntitled = !disabled && isMode('elevated');
-  const initialElevation = 1;
-  const activeElevation = 2;
 
+  // Level 1 at rest, level 2 while pressed. `Surface` animates the change, so
+  // a `disabled` / `mode` change moves the shadow on the next render too.
   const [pressed, setPressed] = React.useState(false);
-
   const elevation = isElevationEntitled
     ? pressed
       ? activeElevation
       : initialElevation
     : 0;
 
-  const handlePressIn = (e: GestureResponderEvent) => {
-    onPressIn?.(e);
+  // MD3 defines no text toggle, so `selected` is inert on `mode="text"`: no
+  // toggle colors, no shape flip, and no `aria-selected`. Every other use of
+  // the toggle state goes through this value.
+  const toggleSelected = isMode('text') ? undefined : selected;
 
-    if (isElevationEntitled) {
-      setPressed(true);
+  // When the button is `selected`, flip the requested shape so the
+  // unselected/selected pair contrasts visually (round ↔ square).
+  const effectiveShape = getEffectiveButtonShape(shape, toggleSelected);
+  const sizeStyle = React.useMemo(() => getButtonSizeStyle(size), [size]);
+
+  // Shape morph: animate the corner on press (→ the pressed shape token) and on
+  // the `selected`/shape toggle.
+  const animateShape = animateShapeProp;
+  // A press morph under reduce-motion would pop instantly rather than animate,
+  // so skip it; a `selected` change still snaps to the new shape.
+  const morphOnPress = animateShape && !reduceMotion;
+  // `round` resolves to the `cornerFull` sentinel, so use the real pill radius
+  // (half the container height) instead: it keeps the spring bounded and lets
+  // the ripple clip match the container exactly.
+  const restingRadius =
+    effectiveShape === 'round'
+      ? sizeStyle.minHeight / 2
+      : getButtonShapeRadius({ size, shape, theme, selected: toggleSelected });
+  const pressedRadius = getButtonPressedRadius({ size, theme });
+  const animatedRadius = useSharedValue(restingRadius);
+  const restingRadiusRef = React.useRef(restingRadius);
+  const isRadiusMountedRef = React.useRef(false);
+
+  // The morph stays imperative: a press can interrupt it mid-flight, which a
+  // duration-based transition can't express.
+  const radiusSpringConfig = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [theme.motion.spring.fast.spatial, reanimatedReduceMotion]
+  );
+
+  const springRadiusTo = React.useCallback(
+    (toValue: number) => {
+      animatedRadius.value = withSpring(toValue, radiusSpringConfig);
+    },
+    [animatedRadius, radiusSpringConfig]
+  );
+
+  const handlePressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressIn?.(e);
+      if (morphOnPress) {
+        springRadiusTo(pressedRadius);
+      }
+      if (isElevationEntitled) {
+        setPressed(true);
+      }
+    },
+    [
+      onPressIn,
+      morphOnPress,
+      springRadiusTo,
+      pressedRadius,
+      isElevationEntitled,
+    ]
+  );
+
+  const handlePressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressOut?.(e);
+      if (morphOnPress) {
+        springRadiusTo(restingRadiusRef.current);
+      }
+      if (isElevationEntitled) {
+        setPressed(false);
+      }
+    },
+    [onPressOut, morphOnPress, springRadiusTo, isElevationEntitled]
+  );
+
+  // Snap on mount; animate when a toggle/shape change moves the resting radius.
+  React.useEffect(() => {
+    restingRadiusRef.current = restingRadius;
+    if (!isRadiusMountedRef.current) {
+      isRadiusMountedRef.current = true;
+      return;
     }
-  };
-
-  const handlePressOut = (e: GestureResponderEvent) => {
-    onPressOut?.(e);
-
-    if (isElevationEntitled) {
-      setPressed(false);
+    if (animateShape) {
+      springRadiusTo(restingRadius);
+    } else {
+      animatedRadius.value = restingRadius;
     }
-  };
-
-  const elevationTransitionDuration =
-    theme.motion.duration[pressed ? 'short4' : 'short3'] *
-    theme.animation.scale;
-
-  const borderRadius = theme.shapes.corner.largeIncreased;
-  const iconSize = 18;
+  }, [restingRadius, animateShape, animatedRadius, springRadiusTo]);
 
   const {
     backgroundColor,
     borderColor,
-    textColor,
-    textOpacity,
+    labelColor,
+    labelOpacity,
     borderWidth,
     backgroundOpacity,
-  } = getButtonColors({
-    customButtonColor,
-    customTextColor,
+  } = React.useMemo(
+    () =>
+      getButtonColors({
+        customButtonColor,
+        customLabelColor,
+        theme,
+        mode,
+        size,
+        disabled,
+        dark,
+        selected: toggleSelected,
+      }),
+    [
+      customButtonColor,
+      customLabelColor,
+      theme,
+      mode,
+      size,
+      disabled,
+      dark,
+      toggleSelected,
+    ]
+  );
+
+  const rippleColor = React.useMemo(
+    () => getButtonRippleColor({ labelColor, customRippleColor }),
+    [labelColor, customRippleColor]
+  );
+
+  const containerColor =
+    backgroundOpacity < 1 ? 'transparent' : backgroundColor;
+
+  // Snap rather than cross-fade when a transparent container is involved — see
+  // `getButtonTransitionDuration`.
+  const previousContainerColorRef = React.useRef(containerColor);
+  React.useEffect(() => {
+    previousContainerColorRef.current = containerColor;
+  }, [containerColor]);
+
+  const surfaceTransitionDuration = getButtonTransitionDuration({
     theme,
-    mode,
-    disabled,
-    dark,
+    pressed,
+    containerColor,
+    previousContainerColor: previousContainerColorRef.current,
   });
 
-  const touchableStyle = { borderRadius };
+  // The clip carries the same animated radius as the `Surface`, so the ripple
+  // and the disabled overlay follow the morph.
+  //
+  // TODO: revisit the focus ring's placement once #5084 lands.
+  // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
+  // focus indicators to every `TouchableRipple` consumer, so Button gets one
+  // with no code here. Deliberately not implemented locally: a second ring here
+  // would double up with it. The catch is placement — that PR defaults to
+  // `focusRing="outward"` and warns an outward ring is trimmed by "any clipping
+  // ancestor sized to its content", which is exactly this view. Button will
+  // likely need `focusRing="inward"`, or the ring on the outer view.
+  const clipStyle = useAnimatedStyle(
+    () => ({ borderRadius: animatedRadius.value }),
+    [animatedRadius]
+  );
 
-  const { color: customLabelColor, fontSize: customLabelSize } =
-    StyleSheet.flatten(labelStyle) || {};
+  const outlineStyle = React.useMemo(
+    () => ({ backgroundColor: containerColor, borderColor, borderWidth }),
+    [containerColor, borderColor, borderWidth]
+  );
 
-  const font = theme.fonts.labelLarge;
+  const { color: labelStyleColor } = React.useMemo(
+    () => StyleSheet.flatten(labelStyle) || {},
+    [labelStyle]
+  );
 
-  const textStyle = {
-    color: textColor,
-    ...font,
-  };
+  const contentBoxStyle = React.useMemo(
+    () => ({
+      minHeight: sizeStyle.minHeight - borderWidth * 2,
+      paddingStart: sizeStyle.paddingStart - borderWidth,
+      paddingEnd: sizeStyle.paddingEnd - borderWidth,
+      gap: sizeStyle.iconGap,
+    }),
+    [sizeStyle, borderWidth]
+  );
 
-  const iconStyle =
-    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
-      ? [
-          styles.iconReverse,
-          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
-        ]
-      : [
-          styles.icon,
-          styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
-        ];
+  const labelTypeStyle = React.useMemo(
+    () => ({
+      color: labelColor,
+      ...theme.fonts[sizeStyle.labelVariant],
+    }),
+    [labelColor, theme, sizeStyle]
+  );
 
   return (
     <Surface
       {...rest}
       ref={ref}
-      testID={`${testID}-container`}
-      backgroundColor={backgroundOpacity < 1 ? 'transparent' : backgroundColor}
-      {...touchableStyle}
-      style={[
-        styles.button,
-        compact && styles.compact,
-        {
-          borderColor,
-          borderWidth,
-        },
-        style,
-      ]}
+      testID={`${testID}-container-outer-layer`}
+      backgroundColor={containerColor}
+      borderRadius={animatedRadius}
       elevation={elevation}
-      transitionDuration={elevationTransitionDuration}
+      transitionDuration={surfaceTransitionDuration}
+      style={[styles.button, style]}
     >
-      {backgroundOpacity < 1 && (
-        <View
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            {
-              backgroundColor,
-              opacity: backgroundOpacity,
-              borderRadius: touchableStyle.borderRadius,
-            },
-          ]}
-        />
-      )}
-      <TouchableRipple
-        borderless
-        background={background}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
-        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
-        delayLongPress={delayLongPress}
-        aria-label={ariaLabel}
-        accessibilityHint={accessibilityHint}
-        role={role}
-        aria-disabled={disabled}
-        accessible={accessible}
-        hitSlop={hitSlop}
-        disabled={disabled}
-        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
-        testID={testID}
-        theme={theme}
-        ref={touchableRef}
+      <Reanimated.View
+        testID={`${testID}-container`}
+        style={[styles.clip, outlineStyle, clipStyle]}
       >
-        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
-          {icon && loading !== true ? (
-            <View style={iconStyle} testID={`${testID}-icon-container`}>
-              <Icon
-                source={icon}
-                size={customLabelSize ?? iconSize}
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
+        <TouchableRipple
+          borderless
+          background={background}
+          rippleColor={rippleColor}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+          onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+          delayLongPress={delayLongPress}
+          aria-label={ariaLabel}
+          accessibilityHint={accessibilityHint}
+          role={role}
+          aria-disabled={disabled}
+          aria-selected={toggleSelected}
+          accessible={accessible}
+          hitSlop={hitSlop}
+          disabled={disabled}
+          testID={testID}
+          theme={theme}
+          ref={touchableRef}
+        >
+          <View
+            testID={`${testID}-content`}
+            style={[
+              styles.content,
+              isTrailingIcon && styles.contentReverse,
+              contentBoxStyle,
+              { opacity: labelOpacity },
+              contentStyle,
+            ]}
+          >
+            {icon && loading !== true ? (
+              <View testID={`${testID}-icon-container`}>
+                <Icon
+                  source={icon}
+                  size={sizeStyle.iconSize}
+                  color={
+                    typeof labelStyleColor === 'string'
+                      ? labelStyleColor
+                      : labelColor
+                  }
+                />
+              </View>
+            ) : null}
+            {loading ? (
+              <ActivityIndicator
+                size={sizeStyle.iconSize}
                 color={
-                  typeof customLabelColor === 'string'
-                    ? customLabelColor
-                    : textColor
+                  typeof labelStyleColor === 'string'
+                    ? labelStyleColor
+                    : labelColor
                 }
               />
-            </View>
-          ) : null}
-          {loading ? (
-            <ActivityIndicator
-              size={customLabelSize ?? iconSize}
-              color={
-                typeof customLabelColor === 'string'
-                  ? customLabelColor
-                  : textColor
-              }
-              style={iconStyle}
-            />
-          ) : null}
-          <Text
-            variant="labelLarge"
-            selectable={false}
-            numberOfLines={1}
-            testID={`${testID}-text`}
-            style={[
-              styles.label,
-              isMode('text')
-                ? icon || loading
-                  ? styles.md3LabelTextAddons
-                  : styles.md3LabelText
-                : styles.md3Label,
-              compact && styles.compactLabel,
-              uppercase && styles.uppercaseLabel,
-              textStyle,
-              labelStyle,
-            ]}
-            maxFontSizeMultiplier={maxFontSizeMultiplier}
-          >
-            {children}
-          </Text>
-        </View>
-      </TouchableRipple>
+            ) : null}
+            <Text
+              variant={sizeStyle.labelVariant}
+              selectable={false}
+              numberOfLines={1}
+              testID={`${testID}-text`}
+              style={[styles.label, labelTypeStyle, labelStyle]}
+              maxFontSizeMultiplier={maxFontSizeMultiplier}
+            >
+              {children}
+            </Text>
+          </View>
+        </TouchableRipple>
+      </Reanimated.View>
     </Surface>
   );
 };
@@ -395,78 +577,21 @@ const Button = ({
 const styles = StyleSheet.create({
   button: {
     minWidth: 64,
-    borderStyle: 'solid',
   },
-  compact: {
-    minWidth: 'auto',
+  clip: {
+    borderStyle: 'solid',
+    overflow: 'hidden',
   },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    marginLeft: 12,
-    marginRight: -4,
+  contentReverse: {
+    flexDirection: 'row-reverse',
   },
-  iconReverse: {
-    marginRight: 12,
-    marginLeft: -4,
-  },
-  /* eslint-disable react-native/no-unused-styles */
-  md3Icon: {
-    marginLeft: 16,
-    marginRight: -16,
-  },
-  md3IconCompact: {
-    marginLeft: 8,
-    marginRight: 0,
-  },
-  md3IconReverse: {
-    marginLeft: -16,
-    marginRight: 16,
-  },
-  md3IconReverseCompact: {
-    marginLeft: 0,
-    marginRight: 8,
-  },
-  md3IconTextMode: {
-    marginLeft: 12,
-    marginRight: -8,
-  },
-  md3IconTextModeCompact: {
-    marginLeft: 6,
-    marginRight: 0,
-  },
-  md3IconReverseTextMode: {
-    marginLeft: -8,
-    marginRight: 12,
-  },
-  md3IconReverseTextModeCompact: {
-    marginLeft: 0,
-    marginRight: 6,
-  },
-  /* eslint-enable react-native/no-unused-styles */
   label: {
     textAlign: 'center',
-    marginVertical: 9,
-    marginHorizontal: 16,
-  },
-  compactLabel: {
-    marginHorizontal: 8,
-  },
-  uppercaseLabel: {
-    textTransform: 'uppercase',
-  },
-  md3Label: {
-    marginVertical: 10,
-    marginHorizontal: 24,
-  },
-  md3LabelText: {
-    marginHorizontal: 12,
-  },
-  md3LabelTextAddons: {
-    marginHorizontal: 16,
   },
 });
 

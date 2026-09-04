@@ -255,7 +255,6 @@ const Banner = ({
             {actions.map(({ label, ...others }, i) => (
               <Button
                 key={i}
-                compact
                 mode="text"
                 style={styles.button}
                 textColor={colors.primary}

@@ -1,23 +1,178 @@
-import type { ColorValue, ViewStyle } from 'react-native';
+import type { ColorValue } from 'react-native';
 
+import color from 'color';
+
+import { Tokens } from './tokens';
+import type { ButtonToggleMode } from './tokens';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
-import { splitStyles } from '../../utils/splitStyles';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-export type ButtonMode =
-  | 'text'
-  | 'outlined'
-  | 'contained'
-  | 'elevated'
-  | 'contained-tonal';
+export type ButtonMode = 'text' | 'outlined' | 'filled' | 'elevated' | 'tonal';
+
+export type ButtonIconPosition = 'leading' | 'trailing';
+
+export type ButtonSize =
+  | 'extra-small'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'extra-large';
+
+export type ButtonLabelVariant =
+  | 'labelLarge'
+  | 'titleMedium'
+  | 'headlineSmall'
+  | 'headlineLarge';
+
+export type ButtonSizeStyle = {
+  minHeight: number;
+  paddingStart: number;
+  paddingEnd: number;
+  iconSize: number;
+  iconGap: number;
+  outlineWidth: number;
+  labelVariant: ButtonLabelVariant;
+};
+
+/**
+ * Per-size metrics for the Material Design 3 (expressive) button sizes, read
+ * from the component tokens.
+ */
+export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
+  const t = Tokens.sizes[size];
+  return {
+    minHeight: t.containerHeight,
+    paddingStart: t.leadingSpace,
+    paddingEnd: t.trailingSpace,
+    iconSize: t.iconSize,
+    iconGap: t.iconLabelSpace,
+    outlineWidth: t.outlinedOutlineWidth,
+    labelVariant: t.labelVariant,
+  };
+};
+
+export type ButtonShape = 'round' | 'square';
+
+/**
+ * A selected toggle contrasts with its unselected state by flipping the shape,
+ * so a selected `round` button renders square and vice versa.
+ */
+export const getEffectiveButtonShape = (
+  shape: ButtonShape,
+  selected?: boolean
+): ButtonShape => {
+  if (!selected) {
+    return shape;
+  }
+  return shape === 'round' ? 'square' : 'round';
+};
+
+/**
+ * Corner radius for the requested shape, read from the component tokens and
+ * resolved against the theme shape tokens. `round` is the full-pill radius;
+ * `square` uses a per-size smaller corner. A selected button resolves against
+ * the `selectedContainerShape*` token pair, after the shape flip above.
+ */
+export const getButtonShapeRadius = ({
+  size,
+  shape,
+  theme,
+  selected,
+}: {
+  size: ButtonSize;
+  shape: ButtonShape;
+  theme: InternalTheme;
+  selected?: boolean;
+}): number => {
+  const t = Tokens.sizes[size];
+  const token =
+    getEffectiveButtonShape(shape, selected) === 'round'
+      ? selected
+        ? t.selectedContainerShapeRound
+        : t.containerShapeRound
+      : selected
+        ? t.selectedContainerShapeSquare
+        : t.containerShapeSquare;
+  return resolveCornerRadius(theme, token);
+};
+
+/**
+ * Duration of `Surface`'s background and elevation transition.
+ *
+ * `Surface` cross-fades its background, and Reanimated interpolates colors in
+ * RGB, so a fade to or from `transparent` passes through gray. `outlined` and
+ * `text` are the modes that show it: their container is transparent, so the
+ * clip inside doesn't paint over the fade. `mode` is a static prop rather than
+ * a state, so there is nothing worth cross-fading — snap instead. A toggle's
+ * color change still animates, both of its containers being opaque, and so does
+ * the elevation of an `elevated` button, whose container is never transparent.
+ */
+export const getButtonTransitionDuration = ({
+  theme,
+  pressed,
+  containerColor,
+  previousContainerColor,
+}: {
+  theme: InternalTheme;
+  pressed: boolean;
+  containerColor: ColorValue;
+  previousContainerColor: ColorValue;
+}): number => {
+  if (
+    containerColor === 'transparent' ||
+    previousContainerColor === 'transparent'
+  ) {
+    return 0;
+  }
+
+  return (
+    theme.motion.duration[pressed ? 'short4' : 'short3'] * theme.animation.scale
+  );
+};
+
+/** Corner the container morphs to while pressed. */
+export const getButtonPressedRadius = ({
+  size,
+  theme,
+}: {
+  size: ButtonSize;
+  theme: InternalTheme;
+}): number =>
+  resolveCornerRadius(theme, Tokens.sizes[size].pressedContainerShape);
 
 type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
   theme: InternalTheme;
   disabled?: boolean;
+  selected?: boolean;
+};
+
+type ToggleColors = (typeof Tokens.toggle)[ButtonToggleMode][
+  | 'selected'
+  | 'unselected'];
+
+const isToggleMode = (mode: ButtonMode): mode is ButtonToggleMode =>
+  mode !== 'text';
+
+/**
+ * The toggle colour pair for a mode, or `undefined` when the button is not a
+ * toggle (`selected` omitted) or the mode has no toggle at all (`text`).
+ */
+const getToggleColors = ({
+  mode,
+  selected,
+}: {
+  mode: ButtonMode;
+  selected?: boolean;
+}) => {
+  if (!isToggleMode(mode) || selected === undefined) {
+    return undefined;
+  }
+  return Tokens.toggle[mode][selected ? 'selected' : 'unselected'];
 };
 
 const isDark = ({
@@ -43,8 +198,10 @@ const getButtonBackgroundColor = ({
   theme,
   disabled,
   customButtonColor,
-}: BaseProps & {
+  toggleColors,
+}: Omit<BaseProps, 'selected'> & {
   customButtonColor?: ColorValue;
+  toggleColors?: ToggleColors;
 }) => {
   const { colors } = theme;
   if (customButtonColor && !disabled) {
@@ -58,68 +215,86 @@ const getButtonBackgroundColor = ({
     return colors.onSurface;
   }
 
+  if (toggleColors) {
+    const { container } = toggleColors;
+    return container === 'transparent' ? 'transparent' : colors[container];
+  }
+
   if (isMode('elevated')) {
     return colors.surfaceContainerLow;
   }
 
-  if (isMode('contained')) {
+  if (isMode('filled')) {
     return colors.primary;
   }
 
-  if (isMode('contained-tonal')) {
+  if (isMode('tonal')) {
     return colors.secondaryContainer;
   }
 
   return 'transparent';
 };
 
-const getButtonTextColor = ({
+const getButtonLabelColor = ({
   isMode,
   theme,
   disabled,
-  customTextColor,
+  customLabelColor,
   backgroundColor,
   dark,
-}: BaseProps & {
-  customTextColor?: ColorValue;
+  toggleColors,
+}: Omit<BaseProps, 'selected'> & {
+  customLabelColor?: ColorValue;
   backgroundColor: ColorValue;
   dark?: boolean;
+  toggleColors?: ToggleColors;
 }) => {
   const { colors } = theme;
-  if (customTextColor && !disabled) {
-    return customTextColor;
+  if (customLabelColor && !disabled) {
+    return customLabelColor;
   }
 
   if (disabled) {
     return theme.colors.onSurface;
   }
 
+  if (toggleColors) {
+    return colors[toggleColors.label];
+  }
+
   if (typeof dark === 'boolean') {
-    if (
-      isMode('contained') ||
-      isMode('contained-tonal') ||
-      isMode('elevated')
-    ) {
+    if (isMode('filled') || isMode('tonal') || isMode('elevated')) {
       return isDark({ dark, backgroundColor }) ? white : black;
     }
   }
 
-  if (isMode('outlined') || isMode('text') || isMode('elevated')) {
+  // Outlined uses the neutral on-surface-variant label per MD3 spec; text and
+  // elevated keep the primary accent.
+  if (isMode('outlined')) {
+    return colors.onSurfaceVariant;
+  }
+
+  if (isMode('text') || isMode('elevated')) {
     return colors.primary;
   }
 
-  if (isMode('contained')) {
+  if (isMode('filled')) {
     return colors.onPrimary;
   }
 
-  if (isMode('contained-tonal')) {
+  if (isMode('tonal')) {
     return colors.onSecondaryContainer;
   }
 
   return colors.primary;
 };
 
-const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
+const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
+  // A selected outlined toggle drops its outline (the filled inverse-surface
+  // background takes over as the visual affordance).
+  if (selected && isMode('outlined')) {
+    return 'transparent';
+  }
   if (isMode('outlined')) {
     return theme.colors.outlineVariant;
   }
@@ -127,9 +302,16 @@ const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
   return 'transparent';
 };
 
-const getButtonBorderWidth = ({ isMode }: Omit<BaseProps, 'disabled'>) => {
+const getButtonBorderWidth = ({
+  isMode,
+  selected,
+  size,
+}: Omit<BaseProps, 'disabled' | 'theme'> & { size: ButtonSize }) => {
+  if (selected && isMode('outlined')) {
+    return 0;
+  }
   if (isMode('outlined')) {
-    return 1;
+    return Tokens.sizes[size].outlinedOutlineWidth;
   }
 
   return 0;
@@ -138,43 +320,53 @@ const getButtonBorderWidth = ({ isMode }: Omit<BaseProps, 'disabled'>) => {
 export const getButtonColors = ({
   theme,
   mode,
+  size = 'small',
   customButtonColor,
-  customTextColor,
+  customLabelColor,
   disabled,
   dark,
+  selected,
 }: {
   theme: InternalTheme;
   mode: ButtonMode;
+  size?: ButtonSize;
   customButtonColor?: ColorValue;
-  customTextColor?: ColorValue;
+  customLabelColor?: ColorValue;
   disabled?: boolean;
   dark?: boolean;
+  selected?: boolean;
 }) => {
   const isMode = (modeToCompare: ButtonMode) => {
     return mode === modeToCompare;
   };
+
+  const toggleColors = disabled
+    ? undefined
+    : getToggleColors({ mode, selected });
 
   const backgroundColor = getButtonBackgroundColor({
     isMode,
     theme,
     disabled,
     customButtonColor,
+    toggleColors,
   });
 
-  const textColor = getButtonTextColor({
+  const labelColor = getButtonLabelColor({
     isMode,
     theme,
     disabled,
-    customTextColor,
+    customLabelColor,
     backgroundColor,
     dark,
+    toggleColors,
   });
 
-  const borderColor = getButtonBorderColor({ isMode, theme });
+  const borderColor = getButtonBorderColor({ isMode, theme, selected });
 
-  const borderWidth = getButtonBorderWidth({ isMode, theme });
+  const borderWidth = getButtonBorderWidth({ isMode, selected, size });
 
-  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+  const labelOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 
   const backgroundOpacity =
     disabled && !isMode('outlined') && !isMode('text')
@@ -184,50 +376,36 @@ export const getButtonColors = ({
   return {
     backgroundColor,
     borderColor,
-    textColor,
-    textOpacity,
+    labelColor,
+    labelOpacity,
     borderWidth,
     backgroundOpacity,
   };
 };
 
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
-    ViewStyle,
-    | 'borderBottomEndRadius'
-    | 'borderBottomLeftRadius'
-    | 'borderBottomRightRadius'
-    | 'borderBottomStartRadius'
-    | 'borderTopEndRadius'
-    | 'borderTopLeftRadius'
-    | 'borderTopRightRadius'
-    | 'borderTopStartRadius'
-    | 'borderRadius'
-  >
->;
-export const getButtonTouchableRippleStyle = (
-  style?: ViewStyle,
-  borderWidth: number = 0
-): ViewStyleBorderRadiusStyles => {
-  if (!style) return {};
-  const touchableRippleStyle: ViewStyleBorderRadiusStyles = {};
+/**
+ * Returns the color used for the button's ripple / state layer. Defaults to
+ * the label color at the pressed-state opacity (per Material Design 3), unless
+ * a custom ripple color is provided.
+ *
+ * When the label color is not a plain string (e.g. an Android Material You
+ * `PlatformColor`), `undefined` is returned so `TouchableRipple` falls back to
+ * its own default state-layer color.
+ */
+export const getButtonRippleColor = ({
+  labelColor,
+  customRippleColor,
+}: {
+  labelColor: ColorValue;
+  customRippleColor?: ColorValue;
+}): ColorValue | undefined => {
+  if (customRippleColor) {
+    return customRippleColor;
+  }
 
-  const [, borderRadiusStyles] = splitStyles(
-    style,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
-  );
+  if (typeof labelColor !== 'string') {
+    return undefined;
+  }
 
-  const borderRadiusKeys =
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>;
-
-  borderRadiusKeys.forEach((key) => {
-    const value = style[key];
-    if (typeof value === 'number') {
-      // Only subtract borderWidth if value is greater than 0
-      const radius = value > 0 ? value - borderWidth : 0;
-      touchableRippleStyle[key] = radius;
-    }
-  });
-  return touchableRippleStyle;
+  return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
 };

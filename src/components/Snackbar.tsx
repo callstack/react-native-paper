@@ -308,7 +308,6 @@ const Snackbar = ({
                 }}
                 style={[styles.button, actionStyle]}
                 textColor={buttonTextColor}
-                compact={false}
                 mode="text"
                 theme={theme}
                 {...actionProps}

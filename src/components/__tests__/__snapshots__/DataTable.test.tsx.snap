@@ -1527,13 +1527,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           [
             {},
             {
-              "borderStyle": "solid",
               "minWidth": 64,
-            },
-            undefined,
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderWidth": 1,
             },
             {
               "marginRight": 16,
@@ -1570,7 +1564,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
           ]
         }
-        testID="button-container"
+        testID="button-container-outer-layer"
       >
         <View
           collapsable={false}
@@ -1620,160 +1614,166 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           }
         />
         <View
-          accessibilityState={
-            {
-              "busy": undefined,
-              "checked": undefined,
-              "disabled": false,
-              "expanded": undefined,
-              "selected": undefined,
-            }
-          }
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
-          accessible={true}
           collapsable={false}
-          focusable={true}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          role="button"
           style={
             [
               {
+                "borderStyle": "solid",
                 "overflow": "hidden",
               },
               {
-                "borderRadius": 19,
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(202, 196, 208, 1)",
+                "borderWidth": 1,
+              },
+              {
+                "borderRadius": 20,
               },
             ]
           }
-          testID="button"
+          testID="button-container"
         >
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+                  "overflow": "hidden",
                 },
-                {
-                  "opacity": 1,
-                },
-                {
-                  "flexDirection": "row-reverse",
-                },
+                undefined,
               ]
             }
+            testID="button"
           >
             <View
               style={
                 [
                   {
-                    "marginLeft": -4,
-                    "marginRight": 12,
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   },
                   {
-                    "marginLeft": -16,
-                    "marginRight": 16,
+                    "flexDirection": "row-reverse",
                   },
-                  false,
+                  {
+                    "gap": 8,
+                    "minHeight": 38,
+                    "paddingEnd": 15,
+                    "paddingStart": 15,
+                  },
+                  {
+                    "opacity": 1,
+                  },
+                  undefined,
                 ]
               }
-              testID="button-icon-container"
+              testID="button-content"
             >
+              <View
+                testID="button-icon-container"
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 20,
+                      },
+                      [
+                        {
+                          "lineHeight": 20,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  menu-down
+                </Text>
+              </View>
               <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
+                numberOfLines={1}
                 selectable={false}
                 style={
                   [
                     {
-                      "color": "rgba(103, 80, 164, 1)",
-                      "fontSize": 18,
+                      "textAlign": "left",
                     },
-                    [
-                      {
-                        "lineHeight": 18,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
-                }
-              >
-                menu-down
-              </Text>
-            </View>
-            <Text
-              numberOfLines={1}
-              selectable={false}
-              style={
-                [
-                  {
-                    "textAlign": "left",
-                  },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                    "writingDirection": "ltr",
-                  },
-                  [
                     {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
+                      "color": "rgba(29, 27, 32, 1)",
+                      "writingDirection": "ltr",
                     },
                     [
                       {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      {
-                        "marginHorizontal": 24,
-                        "marginVertical": 10,
-                      },
-                      undefined,
-                      false,
-                      {
-                        "color": "rgba(103, 80, 164, 1)",
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
                         "letterSpacing": 0.1,
                         "lineHeight": 20,
                       },
-                      undefined,
+                      [
+                        {
+                          "textAlign": "center",
+                        },
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
                     ],
-                  ],
-                ]
-              }
-              testID="button-text"
-            >
-              2
-            </Text>
+                  ]
+                }
+                testID="button-text"
+              >
+                2
+              </Text>
+            </View>
           </View>
         </View>
       </View>

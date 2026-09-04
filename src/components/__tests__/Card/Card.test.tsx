@@ -139,7 +139,7 @@ describe('CardActions', () => {
     await render(
       <Card>
         <Card.Actions testID="card-actions">
-          <Button mode="contained">Agree</Button>
+          <Button mode="filled">Agree</Button>
         </Card.Actions>
       </Card>
     );
@@ -147,7 +147,7 @@ describe('CardActions', () => {
     expect(
       // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
       screen.getByTestId('card-actions').props.children[0].props.mode
-    ).toBe('contained');
+    ).toBe('filled');
   });
 });
 
