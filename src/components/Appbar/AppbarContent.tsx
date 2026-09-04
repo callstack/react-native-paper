@@ -10,7 +10,7 @@ import type {
 
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 

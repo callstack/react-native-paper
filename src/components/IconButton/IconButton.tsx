@@ -11,7 +11,7 @@ import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';

@@ -4,7 +4,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { Palette } from '../../theme/tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
 

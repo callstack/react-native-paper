@@ -12,7 +12,7 @@ import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Shell from './Shell';
 import type { Size, Variant } from './tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 
 export type Props = {

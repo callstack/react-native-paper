@@ -24,7 +24,7 @@ import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**

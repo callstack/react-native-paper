@@ -12,7 +12,7 @@ import {
 } from './utils';
 import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Surface from '../Surface';
 
 const APPBAR_HORIZONTAL_PADDING = 4;

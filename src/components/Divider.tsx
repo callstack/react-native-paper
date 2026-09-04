@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   /**

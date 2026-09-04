@@ -16,7 +16,7 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';

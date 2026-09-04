@@ -11,7 +11,7 @@ import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';

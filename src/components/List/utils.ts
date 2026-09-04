@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import type { StyleProp, TextProps, ViewStyle } from 'react-native';
 
-import type { InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 type Description =
   | React.ReactNode

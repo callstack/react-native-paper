@@ -8,7 +8,7 @@ import { Appbar } from './Appbar';
 import type { AppbarStyle, Props as AppbarProps } from './Appbar';
 import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
   /**

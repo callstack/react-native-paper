@@ -17,7 +17,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';

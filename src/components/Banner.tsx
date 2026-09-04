@@ -26,7 +26,7 @@ import Surface from './Surface';
 import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 const DEFAULT_MAX_WIDTH = 960;
 

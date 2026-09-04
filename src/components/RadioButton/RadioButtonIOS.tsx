@@ -7,7 +7,7 @@ import type { RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';

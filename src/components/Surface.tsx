@@ -11,7 +11,7 @@ import Animated, {
 
 import { useInternalTheme } from '../core/theming';
 import { androidElevationLevels, shadow } from '../theme/tokens/sys/elevation';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
   AnimatedStyle<Required<Pick<ViewStyle, Key>>>,
