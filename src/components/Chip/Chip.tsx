@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,30 +7,47 @@ import type {
   StyleProp,
   TextStyle,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
-import { getChipColors } from './helpers';
-import type { ChipAvatarProps } from './helpers';
+import { ChipTokens } from './tokens';
+import { getChipColors } from './utils';
+import type { ChipAvatarProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
 import type { EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
+// The trailing icon's ripple is a square that stretches flush to the chip's
+// top/bottom edges, so it's sized to match the chip's height rather than a
+// fixed value of its own.
+const TRAILING_ICON_AREA_SIZE = ChipTokens.containerHeight;
+
+// The icon glyph is centered inside that (larger) ripple square, so its own
+// edge sits this far in from the ripple square's edge.
+const TRAILING_ICON_INSET = (TRAILING_ICON_AREA_SIZE - ChipTokens.iconSize) / 2;
+
+// Suppresses the browser's native focus outline so only our own focus
+// indicator ring is visible. Not in StyleSheet because `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
 export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the chip.
-   * - `flat` - flat chip without outline.
-   * - `outlined` - chip with an outline.
+   * - `flat` - chip with a filled container.
+   * - `outlined` - chip with an outline when unselected.
    */
   mode?: 'flat' | 'outlined';
   /**
@@ -38,15 +55,29 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   children: React.ReactNode;
   /**
-   * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
+   * Leading icon to display for the `Chip`. Takes precedence over `avatar` when both are specified.
    */
   icon?: IconSource;
   /**
-   * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
+   * Leading avatar to display for the `Chip`. Ignored when `icon` is also specified.
    */
   avatar?: React.ReactNode;
   /**
-   * Icon to display as the close button for the `Chip`. The icon appears only when the onClose prop is specified.
+   * Trailing icon to display for the `Chip`, independent of the close button (e.g. a dropdown or info icon).
+   * Takes precedence over `onClose`'s close icon when both are specified.
+   */
+  trailingIcon?: IconSource;
+  /**
+   * Function to execute when the trailing icon is pressed. Only called when `trailingIcon` is specified.
+   */
+  onTrailingIconPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the trailing icon. This is read by the screen reader when the user taps the trailing icon.
+   */
+  trailingIconAccessibilityLabel?: string;
+  /**
+   * Icon to display as the close button for the `Chip`, rendered in the trailing icon slot. The icon appears only
+   * when `onClose` is specified and `trailingIcon` is not.
    */
   closeIcon?: IconSource;
   /**
@@ -54,16 +85,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   selected?: boolean;
   /**
-   * Whether to style the chip color as selected.
-   * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`.
-   *       If you want specify custom color for the `icon`, render your own `Icon` component.
+   * Custom color to use for the label, leading icon, trailing icon, and outlined border,
+   * overriding the default selected/unselected theme colors.
    */
   selectedColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
-   * Whether to display overlay on selected chip
-   */
-  showSelectedOverlay?: boolean;
   /**
    * Whether to display default check icon on selected chip.
    * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
@@ -74,7 +99,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -84,6 +109,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   'aria-label'?: string;
   /**
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
+   * Ignored when `trailingIcon` is also specified — use `trailingIconAccessibilityLabel` instead.
    */
   closeIconAccessibilityLabel?: string;
   /**
@@ -93,7 +119,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
@@ -103,7 +129,8 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   onPressOut?: (e: GestureResponderEvent) => void;
   /**
-   * Function to execute on close button press. The close button appears only when this prop is specified.
+   * Function to execute on close button press, indicating the chip should be removed. The close button appears
+   * only when this prop is specified and `trailingIcon` is not.
    */
   onClose?: () => void;
   /**
@@ -111,20 +138,14 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   delayLongPress?: number;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Sets smaller horizontal paddings `12dp` around label, when there is only label.
-   */
-  compact?: boolean;
-  /**
-   * @supported Available in v5.x with theme version 3
-   * Whether chip should have the elevation.
+   * Whether the chip should have elevation.
    */
   elevated?: boolean;
   /**
-   * Style of chip's text
+   * Style of chip's text.
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<SurfaceStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -138,7 +159,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   testID?: string;
   /**
-   * Ellipsize Mode for the children text
+   * Ellipsize Mode for the label text.
    */
   ellipsizeMode?: EllipsizeProp;
   /**
@@ -153,7 +174,7 @@ export type Props = Omit<ViewProps, 'style'> & {
 
 /**
  * Chips are compact elements that can represent inputs, attributes, or actions.
- * They can have an icon or avatar on the left, and a close button icon on the right.
+ * They can have a leading icon or avatar, and a trailing icon (a close button or a custom action) on the right.
  * They are typically used to:
  * <ul>
  *  <li>Present multiple options </li>
@@ -175,7 +196,7 @@ export type Props = Omit<ViewProps, 'style'> & {
  * ```
  */
 const Chip = ({
-  mode = 'flat',
+  mode = 'outlined',
   children,
   icon,
   avatar,
@@ -192,6 +213,9 @@ const Chip = ({
   delayLongPress,
   onClose,
   closeIcon,
+  trailingIcon,
+  onTrailingIconPress,
+  trailingIconAccessibilityLabel = 'Trailing icon',
   textStyle,
   style,
   theme: themeOverrides,
@@ -199,16 +223,13 @@ const Chip = ({
   selectedColor,
   showSelectedCheck = true,
   ellipsizeMode,
-  compact,
   elevated = false,
   maxFontSizeMultiplier,
   hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
-  const [pressed, setPressed] = React.useState(false);
-  const elevation = elevated ? (pressed ? 2 : 1) : 0;
+  const isOutlined = mode === 'outlined';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -216,69 +237,106 @@ const Chip = ({
     onPressIn,
     onPressOut,
   });
+  const isTouchableDisabled = disabled || !hasPassedTouchHandler;
 
-  const isOutlined = mode === 'outlined';
+  const [hovered, setHovered] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
+  const focusedSV = useSharedValue(0);
+  const focusRingStyle = useAnimatedStyle(
+    () => ({ opacity: focusedSV.value }),
+    []
+  );
 
-  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    onPressIn?.(e);
-    setPressed(true);
-  });
+  const trailingIconFocusedSV = useSharedValue(0);
+  const trailingIconFocusRingStyle = useAnimatedStyle(
+    () => ({ opacity: trailingIconFocusedSV.value }),
+    []
+  );
 
-  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    onPressOut?.(e);
-    setPressed(false);
-  });
-
-  const elevationTransitionDuration =
-    theme.motion.duration[pressed ? 'short4' : 'short3'] *
-    theme.animation.scale;
-
-  const opacity = 0.38;
   const defaultBorderRadius = theme.shapes.corner.small;
-  const iconSize = 18;
-
-  const borderRadius = defaultBorderRadius;
+  const {
+    backgroundColor: customBackgroundColor,
+    borderRadius = defaultBorderRadius,
+  } = StyleSheet.flatten(style) || {};
+  const focusRingBorderRadius =
+    typeof borderRadius === 'number'
+      ? borderRadius + ChipTokens.focusIndicatorOffset
+      : borderRadius;
 
   const {
     borderColor,
     textColor,
     iconColor,
+    trailingIconColor,
     contentOpacity,
     selectedBackgroundColor,
     backgroundColor,
+    rippleColor,
+    avatarOverlayColor,
   } = getChipColors({
     isOutlined,
+    selected,
+    elevated,
+    focused,
     theme,
     selectedColor,
+    customBackgroundColor,
     disabled,
   });
 
-  const multiplier = compact ? 1.5 : 2;
+  const hasAvatar = !!avatar && !icon;
+  const showSelectedIcon = selected && showSelectedCheck && !icon;
+  const showLeadingIcon = !!icon || showSelectedIcon;
+  const hasLeading = hasAvatar || showLeadingIcon;
+  const hasTrailingIcon = !!trailingIcon;
+  const hasClose = !hasTrailingIcon && !!onClose;
+  const showTrailingIcon = hasTrailingIcon || hasClose;
 
-  const labelSpacings = {
-    marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft:
-      avatar || icon || (selected && showSelectedCheck)
-        ? 4 * multiplier
-        : 8 * multiplier,
+  const leftPadding = hasAvatar
+    ? ChipTokens.avatarLeadingPadding
+    : hasLeading
+      ? ChipTokens.iconLeadingPadding
+      : ChipTokens.leadingPadding;
+  const rightPadding = showTrailingIcon
+    ? ChipTokens.trailingIconPadding + ChipTokens.iconSize + TRAILING_ICON_INSET
+    : ChipTokens.trailingPadding;
+  const touchTargetInset =
+    (ChipTokens.minimumTouchTarget - ChipTokens.containerHeight) / 2;
+  const touchTargetHitSlop = {
+    top: touchTargetInset,
+    bottom: touchTargetInset,
   };
-
-  const contentSpacings = {
-    paddingRight: onClose ? 34 : 0,
+  const trailingIconTouchTargetInset =
+    (ChipTokens.minimumTouchTarget - TRAILING_ICON_AREA_SIZE) / 2;
+  const trailingIconHitSlop = {
+    top: trailingIconTouchTargetInset,
+    bottom: trailingIconTouchTargetInset,
+    left: trailingIconTouchTargetInset,
+    right: trailingIconTouchTargetInset,
   };
-
-  const labelTextStyle = {
-    color: textColor,
-    ...theme.fonts.labelLarge,
-  };
+  const trailingIconAndroidRipple =
+    Platform.OS === 'android'
+      ? {
+          color: rippleColor,
+          borderless: true,
+          radius: TRAILING_ICON_AREA_SIZE / 2,
+        }
+      : undefined;
 
   return (
     <Surface
       backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
       borderRadius={borderRadius}
-      style={[styles.container, styles.md3Container, { borderColor }, style]}
-      elevation={elevation}
-      transitionDuration={elevationTransitionDuration}
+      style={[styles.container, { borderColor }, style]}
+      elevation={
+        disabled
+          ? 0
+          : elevated
+            ? hovered
+              ? ChipTokens.elevatedHoverElevation
+              : ChipTokens.elevatedElevation
+            : ChipTokens.flatElevation
+      }
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
@@ -286,91 +344,86 @@ const Chip = ({
       <TouchableRipple
         borderless
         background={background}
-        style={[{ borderRadius }, styles.touchable]}
+        rippleColor={rippleColor}
+        style={[
+          styles.touchable,
+          { borderRadius },
+          Platform.OS === 'web' ? webNoOutline : undefined,
+        ]}
         onPress={onPress}
         onLongPress={onLongPress}
-        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
-        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        onFocus={(e) => {
+          if (!isKeyboardFocusEvent(e)) return;
+          focusedSV.value = 1;
+          setFocused(true);
+        }}
+        onBlur={() => {
+          focusedSV.value = 0;
+          setFocused(false);
+        }}
         delayLongPress={delayLongPress}
-        disabled={disabled}
+        disabled={isTouchableDisabled}
         aria-label={ariaLabel}
         role={role}
         aria-selected={selected}
-        aria-disabled={disabled}
+        aria-disabled={isTouchableDisabled}
         testID={testID}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop ?? touchTargetHitSlop}
       >
         <View
           style={[
             styles.content,
-            styles.md3Content,
-            { opacity: contentOpacity },
-            contentSpacings,
+            {
+              opacity: contentOpacity,
+              paddingLeft: leftPadding,
+              paddingRight: rightPadding,
+            },
           ]}
         >
-          {avatar && !icon ? (
-            <View
-              style={[
-                styles.avatarWrapper,
-                styles.md3AvatarWrapper,
-                disabled && { opacity },
-              ]}
-            >
+          {hasAvatar ? (
+            <View style={[styles.avatarWrapper, disabled && styles.disabled]}>
               {React.isValidElement<ChipAvatarProps>(avatar)
                 ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
                   })
                 : avatar}
+              {showSelectedIcon ? (
+                <View
+                  style={[
+                    styles.avatarSelectedOverlay,
+                    { backgroundColor: avatarOverlayColor },
+                  ]}
+                >
+                  <Icon
+                    source="check"
+                    color={theme.colors.surface}
+                    size={ChipTokens.iconSize}
+                    theme={theme}
+                  />
+                </View>
+              ) : null}
             </View>
           ) : null}
-          {icon || (selected && showSelectedCheck) ? (
-            <View
-              style={[
-                styles.icon,
-                styles.md3Icon,
-                avatar
-                  ? [
-                      styles.avatar,
-                      styles.avatarSelected,
-                      selected && styles.md3SelectedIcon,
-                    ]
-                  : null,
-              ]}
-            >
-              {icon ? (
-                <Icon
-                  source={icon}
-                  color={
-                    avatar
-                      ? white
-                      : !disabled
-                        ? theme.colors.primary
-                        : iconColor
-                  }
-                  size={18}
-                  theme={theme}
-                />
-              ) : (
-                <MaterialCommunityIcon
-                  name="check"
-                  color={avatar ? white : iconColor}
-                  size={18}
-                  direction="ltr"
-                />
-              )}
+          {showLeadingIcon && !hasAvatar ? (
+            <View style={styles.leadingIcon}>
+              <Icon
+                source={icon ?? 'check'}
+                color={iconColor}
+                size={ChipTokens.iconSize}
+                theme={theme}
+              />
             </View>
           ) : null}
           <Text
-            variant="labelLarge"
+            variant={ChipTokens.labelTypescale}
             selectable={false}
             numberOfLines={1}
-            style={[
-              styles.md3LabelText,
-              labelTextStyle,
-              labelSpacings,
-              textStyle,
-            ]}
+            style={[styles.labelText, { color: textColor }, textStyle]}
             ellipsizeMode={ellipsizeMode}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
@@ -378,101 +431,151 @@ const Chip = ({
           </Text>
         </View>
       </TouchableRipple>
-      {onClose ? (
-        <View style={styles.closeButtonStyle}>
-          <Pressable
-            onPress={onClose}
-            disabled={disabled}
-            role="button"
-            aria-label={closeIconAccessibilityLabel}
-          >
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
-              {closeIcon ? (
-                <Icon source={closeIcon} color={iconColor} size={iconSize} />
-              ) : (
-                <MaterialCommunityIcon
-                  name="close"
-                  size={iconSize}
-                  color={iconColor}
-                  direction="ltr"
-                />
-              )}
-            </View>
-          </Pressable>
-        </View>
+      {showTrailingIcon ? (
+        <TouchableRipple
+          borderless
+          centered
+          onPress={hasTrailingIcon ? onTrailingIconPress : onClose}
+          disabled={disabled}
+          role="button"
+          aria-label={
+            hasTrailingIcon
+              ? trailingIconAccessibilityLabel
+              : closeIconAccessibilityLabel
+          }
+          aria-disabled={disabled}
+          testID={
+            hasTrailingIcon ? `${testID}-trailing-icon` : `${testID}-close`
+          }
+          hitSlop={trailingIconHitSlop}
+          background={trailingIconAndroidRipple}
+          rippleColor={rippleColor}
+          onFocus={(e) => {
+            if (!isKeyboardFocusEvent(e)) return;
+            trailingIconFocusedSV.value = 1;
+          }}
+          onBlur={() => {
+            trailingIconFocusedSV.value = 0;
+          }}
+          style={[
+            styles.closeButton,
+            Platform.OS === 'web' ? webNoOutline : undefined,
+            disabled ? { opacity: contentOpacity } : null,
+          ]}
+          theme={theme}
+        >
+          <Icon
+            source={hasTrailingIcon ? trailingIcon : (closeIcon ?? 'close')}
+            color={trailingIconColor}
+            size={ChipTokens.iconSize}
+            theme={theme}
+          />
+        </TouchableRipple>
       ) : null}
+      {showTrailingIcon ? (
+        <Animated.View
+          style={[
+            styles.trailingIconFocusRing,
+            { borderColor: theme.colors[ChipTokens.focusIndicatorColor] },
+            trailingIconFocusRingStyle,
+          ]}
+        />
+      ) : null}
+      <Animated.View
+        style={[
+          styles.focusRing,
+          {
+            borderRadius: focusRingBorderRadius,
+            borderColor: theme.colors[ChipTokens.focusIndicatorColor],
+          },
+          focusRingStyle,
+        ]}
+      />
     </Surface>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: StyleSheet.hairlineWidth,
+    minHeight: ChipTokens.containerHeight,
+    borderWidth: ChipTokens.outlineWidth,
     borderStyle: 'solid',
-    flexDirection: Platform.select({ default: 'column', web: 'row' }),
-  },
-  md3Container: {
-    borderWidth: 1,
-  },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 4,
-    position: 'relative',
-  },
-  md3Content: {
-    paddingLeft: 0,
-  },
-  icon: {
-    padding: 4,
-    alignSelf: 'center',
-  },
-  md3Icon: {
-    paddingLeft: 8,
-    paddingRight: 0,
-  },
-  closeIcon: {
-    marginRight: 4,
-  },
-  md3CloseIcon: {
-    marginRight: 8,
-    padding: 0,
-  },
-  md3LabelText: {
-    textAlignVertical: 'center',
-    marginVertical: 6,
-  },
-  avatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-  },
-  avatarWrapper: {
-    marginRight: 4,
-  },
-  md3AvatarWrapper: {
-    marginLeft: 4,
-    marginRight: 0,
-  },
-  md3SelectedIcon: {
-    paddingLeft: 4,
-  },
-  // eslint-disable-next-line react-native/no-color-literals
-  avatarSelected: {
-    position: 'absolute',
-    top: 4,
-    left: 4,
-    backgroundColor: 'rgba(0, 0, 0, .29)',
-  },
-  closeButtonStyle: {
-    position: 'absolute',
-    right: 0,
-    height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: 'flex-start',
   },
   touchable: {
-    width: '100%',
+    minHeight: ChipTokens.containerHeight,
+    flexShrink: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+  },
+  focusRing: {
+    position: 'absolute',
+    top: -ChipTokens.focusIndicatorOffset,
+    left: -ChipTokens.focusIndicatorOffset,
+    right: -ChipTokens.focusIndicatorOffset,
+    bottom: -ChipTokens.focusIndicatorOffset,
+    borderWidth: ChipTokens.focusIndicatorThickness,
+    pointerEvents: 'none',
+  },
+  content: {
+    flexShrink: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  avatarWrapper: {
+    width: ChipTokens.avatarSize,
+    height: ChipTokens.avatarSize,
+    borderRadius: ChipTokens.avatarSize / 2,
+    marginRight: ChipTokens.leadingLabelGap,
+    overflow: 'hidden',
+  },
+  avatar: {
+    width: ChipTokens.avatarSize,
+    height: ChipTokens.avatarSize,
+    borderRadius: ChipTokens.avatarSize / 2,
+  },
+  avatarSelectedOverlay: {
+    ...StyleSheet.absoluteFill,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  leadingIcon: {
+    width: ChipTokens.iconSize,
+    height: ChipTokens.iconSize,
+    marginRight: ChipTokens.leadingLabelGap,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelText: {
+    textAlignVertical: 'center',
+    includeFontPadding: false,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: TRAILING_ICON_AREA_SIZE,
+    borderRadius: TRAILING_ICON_AREA_SIZE / 2,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  trailingIconFocusRing: {
+    position: 'absolute',
+    top: -ChipTokens.focusIndicatorOffset,
+    bottom: -ChipTokens.focusIndicatorOffset,
+    right: -ChipTokens.focusIndicatorOffset,
+    width: TRAILING_ICON_AREA_SIZE + ChipTokens.focusIndicatorOffset * 2,
+    borderRadius: TRAILING_ICON_AREA_SIZE / 2 + ChipTokens.focusIndicatorOffset,
+    borderWidth: ChipTokens.focusIndicatorThickness,
+    pointerEvents: 'none',
+  },
+  disabled: {
+    opacity: ChipTokens.disabledContentOpacity,
   },
 });
 

@@ -123,20 +123,19 @@ exports[`renders list item with custom description 1`] = `
               [
                 {},
                 {
+                  "alignSelf": "flex-start",
                   "borderStyle": "solid",
-                  "borderWidth": 0.5,
-                  "flexDirection": "column",
-                },
-                {
                   "borderWidth": 1,
+                  "justifyContent": "center",
+                  "minHeight": 32,
                 },
                 {
-                  "borderColor": "transparent",
+                  "borderColor": "rgba(202, 196, 208, 1)",
                 },
                 undefined,
                 {},
                 {
-                  "backgroundColor": "rgba(232, 222, 248, 1)",
+                  "backgroundColor": "rgba(254, 247, 255, 1)",
                 },
                 {
                   "borderBottomEndRadius": undefined,
@@ -184,7 +183,7 @@ exports[`renders list item with custom description 1`] = `
                   {},
                   {},
                   {
-                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "backgroundColor": "rgba(254, 247, 255, 1)",
                   },
                   {
                     "borderBottomEndRadius": undefined,
@@ -235,6 +234,12 @@ exports[`renders list item with custom description 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
+              hitSlop={
+                {
+                  "bottom": 8,
+                  "top": 8,
+                }
+              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -252,11 +257,15 @@ exports[`renders list item with custom description 1`] = `
                   },
                   [
                     {
-                      "borderRadius": 8,
+                      "alignSelf": "stretch",
+                      "flexShrink": 1,
+                      "justifyContent": "center",
+                      "minHeight": 32,
                     },
                     {
-                      "width": "100%",
+                      "borderRadius": 8,
                     },
+                    undefined,
                   ],
                 ]
               }
@@ -268,34 +277,27 @@ exports[`renders list item with custom description 1`] = `
                     {
                       "alignItems": "center",
                       "flexDirection": "row",
-                      "paddingLeft": 4,
+                      "flexShrink": 1,
+                      "overflow": "hidden",
                       "position": "relative",
                     },
                     {
-                      "paddingLeft": 0,
-                    },
-                    {
                       "opacity": 1,
-                    },
-                    {
-                      "paddingRight": 0,
+                      "paddingLeft": 8,
+                      "paddingRight": 16,
                     },
                   ]
                 }
               >
                 <View
                   style={
-                    [
-                      {
-                        "alignSelf": "center",
-                        "padding": 4,
-                      },
-                      {
-                        "paddingLeft": 8,
-                        "paddingRight": 0,
-                      },
-                      null,
-                    ]
+                    {
+                      "alignItems": "center",
+                      "height": 18,
+                      "justifyContent": "center",
+                      "marginRight": 8,
+                      "width": 18,
+                    }
                   }
                 >
                   <Text
@@ -350,20 +352,11 @@ exports[`renders list item with custom description 1`] = `
                         },
                         [
                           {
-                            "marginVertical": 6,
+                            "includeFontPadding": false,
                             "textAlignVertical": "center",
                           },
                           {
-                            "color": "rgba(29, 25, 43, 1)",
-                            "fontFamily": "System",
-                            "fontSize": 14,
-                            "fontWeight": "500",
-                            "letterSpacing": 0.1,
-                            "lineHeight": 20,
-                          },
-                          {
-                            "marginLeft": 8,
-                            "marginRight": 16,
+                            "color": "rgba(73, 69, 79, 1)",
                           },
                           undefined,
                         ],
@@ -375,6 +368,29 @@ exports[`renders list item with custom description 1`] = `
                 </Text>
               </View>
             </View>
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "borderWidth": 3,
+                    "bottom": -2,
+                    "left": -2,
+                    "pointerEvents": "none",
+                    "position": "absolute",
+                    "right": -2,
+                    "top": -2,
+                  },
+                  {
+                    "borderColor": "rgba(98, 91, 113, 1)",
+                    "borderRadius": 10,
+                  },
+                  {
+                    "opacity": 0,
+                  },
+                ]
+              }
+            />
           </View>
         </View>
       </View>
