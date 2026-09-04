@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import { Platform } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import * as Reanimated from 'react-native-reanimated';
@@ -7,6 +8,9 @@ import { defaultThemes } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import Switch from '../Switch/Switch';
+
+const animatedStyle = (testID: string) =>
+  Reanimated.getAnimatedStyle(screen.getByTestId(testID));
 
 describe('Switch render', () => {
   it('renders on', async () => {
@@ -83,9 +87,6 @@ describe('Switch focus state', () => {
     await jest.runAllTimersAsync();
   };
 
-  const animatedStyle = (testID: string) =>
-    Reanimated.getAnimatedStyle(screen.getByTestId(testID));
-
   it('shows the focus indicator on keyboard focus', async () => {
     await renderAndFocus(
       <Switch value={false} onValueChange={jest.fn()} testID="switch" />
@@ -113,6 +114,38 @@ describe('Switch focus state', () => {
     expect(animatedStyle('switch-state-layer')).toMatchObject({
       opacity: tokens.md.sys.state.opacity.focused,
     });
+  });
+
+  it('leaves the indicator hidden for pointer focus on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
+    );
+    await fireEvent(screen.getByTestId('switch'), 'focus', {
+      currentTarget: { matches: () => false },
+    });
+    await jest.runAllTimersAsync();
+
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
+
+    jest.restoreAllMocks();
+  });
+
+  it('shows the indicator for keyboard focus on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
+    );
+    await fireEvent(screen.getByTestId('switch'), 'focus', {
+      currentTarget: { matches: () => true },
+    });
+    await jest.runAllTimersAsync();
+
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
+
+    jest.restoreAllMocks();
   });
 
   it('clears the focus state when the switch stops being interactive', async () => {
