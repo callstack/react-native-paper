@@ -15,6 +15,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
+import type { Props as ButtonProps } from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
@@ -23,7 +24,7 @@ import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $RemoveChildren, Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../types';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -35,7 +36,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: $RemoveChildren<typeof Button> & {
+  action?: Omit<React.PropsWithoutRef<ButtonProps>, 'children'> & {
     label: string;
   };
   /**

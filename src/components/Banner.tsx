@@ -19,13 +19,14 @@ import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
 import Button from './Button/Button';
+import type { Props as ButtonProps } from './Button/Button';
 import Icon from './Icon';
 import type { IconSource } from './Icon';
 import Surface from './Surface';
 import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
-import type { $RemoveChildren, Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
@@ -56,7 +57,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   actions?: Array<
     {
       label: string;
-    } & $RemoveChildren<typeof Button>
+    } & Omit<React.PropsWithoutRef<ButtonProps>, 'children'>
   >;
   /**
    * Style of banner's inner content.

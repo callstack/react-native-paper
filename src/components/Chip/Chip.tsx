@@ -5,6 +5,7 @@ import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TextProps,
   TextStyle,
   ViewProps,
 } from 'react-native';
@@ -15,7 +16,7 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { EllipsizeProp, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -140,7 +141,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Ellipsize Mode for the children text
    */
-  ellipsizeMode?: EllipsizeProp;
+  ellipsizeMode?: TextProps['ellipsizeMode'];
   /**
    * Specifies the largest possible scale a text font can reach.
    */
