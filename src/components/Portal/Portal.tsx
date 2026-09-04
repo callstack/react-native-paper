@@ -2,14 +2,13 @@ import * as React from 'react';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';
-import type { PortalMethods } from './PortalHost';
 import { LocaleContext, LocaleProvider } from '../../core/locale';
 import {
   Consumer as SettingsConsumer,
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export type Props = {
   /**
@@ -56,8 +55,9 @@ class Portal extends React.Component<Props> {
             {(settings) => (
               <PortalContext.Consumer>
                 {(manager) => (
-                  <PortalConsumer manager={manager as PortalMethods}>
+                  <PortalConsumer manager={manager}>
                     <SettingsProvider value={settings}>
+                      {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
                       <LocaleProvider direction={locale!.direction}>
                         <ThemeProvider theme={theme}>{children}</ThemeProvider>
                       </LocaleProvider>

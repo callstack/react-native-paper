@@ -11,7 +11,7 @@ import type {
 import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type AvatarImageSource =
   | ImageSourcePropType

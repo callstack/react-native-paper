@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  PixelRatio,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
+import { PixelRatio, Pressable, StyleSheet } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -14,9 +8,18 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../../theme/types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -95,34 +98,33 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+
   const { direction } = useLocale();
-  const { current: spinAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
-  );
+
+  const spin = useSharedValue(sortDirection === 'ascending' ? 0 : 180);
 
   const { duration, easing } = theme.motion;
   const { scale } = theme.animation;
 
   React.useEffect(() => {
-    Animated.timing(spinAnim, {
-      toValue: sortDirection === 'ascending' ? 0 : 1,
+    spin.value = withTiming(sortDirection === 'ascending' ? 0 : 180, {
       duration: duration.short3 * scale,
       easing: Easing.bezier(...easing.standard),
-      useNativeDriver: true,
-    }).start();
-  }, [sortDirection, spinAnim, duration, easing, scale]);
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [duration, easing, reduceMotion, scale, sortDirection, spin]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${spin.value}deg` }],
+  }));
 
   const textColor = theme.colors.onSurface;
 
   const alphaTextColor = theme.colors.onSurfaceVariant;
 
-  const spin = spinAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '180deg'],
-  });
-
   const icon = sortDirection ? (
-    <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
+    <Animated.View style={[styles.icon, animatedStyle]}>
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}

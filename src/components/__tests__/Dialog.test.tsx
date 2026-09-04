@@ -17,6 +17,7 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Dialog', () => {

@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
 import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
@@ -15,7 +16,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -23,7 +24,6 @@ import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -327,7 +327,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -433,9 +433,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
-    {}) as {
-    elevation?: number;
+  const {
+    backgroundColor: customBackground,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  } = (StyleSheet.flatten(style) || {}) as {
     backgroundColor?: ColorValue;
   };
 
@@ -460,9 +461,14 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     bottom: safeAreaInsets?.bottom ?? bottom,
   };
 
+  const pointerEvents = layout.measured
+    ? keyboardHidesNavigationBar && keyboardVisible
+      ? 'none'
+      : 'auto'
+    : 'none';
+
   return (
-    <Surface
-      elevation={0}
+    <Animated.View
       testID={testID}
       style={[
         styles.bar,
@@ -483,16 +489,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             }
           : null,
         style,
+        { pointerEvents },
       ]}
-      pointerEvents={
-        layout.measured
-          ? keyboardHidesNavigationBar && keyboardVisible
-            ? 'none'
-            : 'auto'
-          : 'none'
-      }
       onLayout={onLayout}
-      container
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}
@@ -530,12 +529,14 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             // This trick gives the illusion that we are animating between active and inactive colors.
             // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
             const activeOpacity = active;
+
             const inactiveOpacity = active.interpolate({
               inputRange: [0, 1],
               outputRange: [1, 0],
             });
 
             const v3ActiveOpacity = focused ? 1 : 0;
+
             const v3InactiveOpacity = shifting
               ? inactiveOpacity
               : focused
@@ -576,7 +577,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = (theme as Theme).fonts.labelMedium;
+            const font = theme.fonts.labelMedium;
 
             return renderTouchable({
               key: route.key,
@@ -644,6 +645,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         })
                       ) : (
                         <Icon
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                           source={route.focusedIcon as IconSource}
                           color={activeTintColor}
                           size={24}
@@ -672,7 +674,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           source={
                             route.unfocusedIcon !== undefined
                               ? route.unfocusedIcon
-                              : (route.focusedIcon as IconSource)
+                              : // focusedIcon is required when renderIcon is omitted.
+                                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                                (route.focusedIcon as IconSource)
                           }
                           color={inactiveTintColor}
                           size={24}
@@ -764,7 +768,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           })}
         </View>
       </Animated.View>
-    </Surface>
+    </Animated.View>
   );
 };
 

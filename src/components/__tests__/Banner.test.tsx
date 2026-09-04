@@ -1,4 +1,4 @@
-import { Animated, Image } from 'react-native';
+import { Image } from 'react-native';
 
 import {
   afterAll,
@@ -11,7 +11,7 @@ import {
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', async () => {
@@ -146,30 +146,32 @@ describe('animations', () => {
   });
 
   it('uses zero-duration animations when animation scale is disabled', async () => {
-    const timingSpy = jest.spyOn(Animated, 'timing');
     const view = await render(
-      <Banner visible={false} theme={{ animation: { scale: 0 } }}>
+      <Banner
+        visible={false}
+        onShowAnimationFinished={showCallback}
+        theme={{ animation: { scale: 0 } }}
+      >
         Text
       </Banner>
-    );
-
-    expect(timingSpy).toHaveBeenLastCalledWith(
-      expect.anything(),
-      expect.objectContaining({ duration: 0 })
     );
 
     await view.rerender(
-      <Banner visible theme={{ animation: { scale: 0 } }}>
+      <Banner
+        visible
+        onShowAnimationFinished={showCallback}
+        theme={{ animation: { scale: 0 } }}
+      >
         Text
       </Banner>
     );
+    // A disabled animation scale settles within a frame instead of taking the
+    // full `motion.duration.medium1`.
+    await act(() => {
+      jest.advanceTimersByTime(16);
+    });
 
-    expect(timingSpy).toHaveBeenLastCalledWith(
-      expect.anything(),
-      expect.objectContaining({ duration: 0 })
-    );
-
-    timingSpy.mockRestore();
+    expect(showCallback).toHaveBeenCalled();
   });
 
   describe('when component is rendered hidden', () => {
@@ -381,36 +383,6 @@ describe('animations', () => {
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  it('animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Banner
-        visible
-        testID="banner"
-        style={[{ transform: [{ scale: value }] }]}
-      >
-        Banner
-      </Banner>
-    );
-    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(screen.getByTestId('banner-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
     });
   });
 });

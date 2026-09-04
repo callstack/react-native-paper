@@ -11,7 +11,7 @@ import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
@@ -71,8 +71,6 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -81,8 +79,8 @@ const Tooltip = ({
     tooltip: {},
     measured: false,
   });
-  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
+  const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const childrenWrapperRef = React.useRef<View>(null);
   const touched = React.useRef(false);
@@ -120,17 +118,17 @@ const Tooltip = ({
       hideTooltipTimer.current = [];
     }
 
-    if (isWeb) {
-      let id = setTimeout(() => {
+    if (Platform.OS === 'web') {
+      const id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
-      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+      }, enterTouchDelay);
       showTooltipTimer.current.push(id);
     } else {
       touched.current = true;
       setVisible(true);
     }
-  }, [isWeb, enterTouchDelay]);
+  }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
@@ -139,10 +137,10 @@ const Tooltip = ({
       showTooltipTimer.current = [];
     }
 
-    let id = setTimeout(() => {
+    const id = setTimeout(() => {
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+    }, leaveTouchDelay);
     hideTooltipTimer.current.push(id);
   }, [leaveTouchDelay]);
 
@@ -151,7 +149,9 @@ const Tooltip = ({
       return null;
     }
     if (!isValidChild) return null;
-    const props = children.props as TooltipChildProps;
+    const props =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      children.props as TooltipChildProps;
     if (props.disabled) return null;
     return props.onPress?.();
   }, [children.props, isValidChild]);
@@ -159,6 +159,7 @@ const Tooltip = ({
   const handleHoverIn = React.useCallback(() => {
     handleTouchStart();
     if (isValidChild) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       (children.props as TooltipChildProps).onHoverIn?.();
     }
   }, [children.props, handleTouchStart, isValidChild]);
@@ -166,6 +167,7 @@ const Tooltip = ({
   const handleHoverOut = React.useCallback(() => {
     handleTouchEnd();
     if (isValidChild) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       (children.props as TooltipChildProps).onHoverOut?.();
     }
   }, [children.props, handleTouchEnd, isValidChild]);
@@ -205,7 +207,9 @@ const Tooltip = ({
               {
                 backgroundColor: theme.colors.onSurface,
                 ...getTooltipPosition(
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                   measurement as Measurement,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
                   children as React.ReactElement<TooltipChildProps>
                 ),
                 borderRadius: theme.shapes.corner.extraSmall,
@@ -230,11 +234,11 @@ const Tooltip = ({
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
+        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
+          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
         })}
       </Pressable>
     </>
@@ -257,6 +261,7 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
     ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,

@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   StyleProp,
   TextInputProps,
   TextStyle,
-  ViewStyle,
 } from 'react-native';
 
 import ActivityIndicator from './ActivityIndicator';
@@ -15,16 +14,17 @@ import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import type { SurfaceStyle } from './Surface';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import { cornerNone } from '../theme/tokens/sys/shape';
-import type { Theme, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 interface Style {
   marginRight: number;
 }
 
-export type Props = TextInputProps & {
+export type Props = Omit<TextInputProps, 'style'> & {
   /**
    * Hint text shown when the input is empty.
    */
@@ -111,12 +111,12 @@ export type Props = TextInputProps & {
    * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: Elevation;
   /**
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */
@@ -188,8 +188,10 @@ const Searchbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
   const { direction } = useLocale();
-  const { colors, fonts } = theme as Theme;
+  const { colors, fonts } = theme;
+
   const root = React.useRef<TextInput>(null);
 
   React.useImperativeHandle(ref, () => ({
@@ -230,18 +232,11 @@ const Searchbar = ({
 
   return (
     <Surface
-      style={[
-        { borderRadius: theme.shapes.corner.extraSmall },
-        {
-          backgroundColor: theme.colors.surfaceContainerHigh,
-          borderRadius: isBarMode ? theme.shapes.corner.extraLarge : cornerNone,
-        },
-        styles.container,
-        style,
-      ]}
+      backgroundColor={theme.colors.surfaceContainerHigh}
+      borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
+      style={[styles.container, style]}
       testID={`${testID}-container`}
       elevation={elevation}
-      container
       theme={theme}
     >
       <IconButton

@@ -1,6 +1,6 @@
-import { Animated } from 'react-native';
-
 import { describe, expect, it, jest } from '@jest/globals';
+import { act } from '@testing-library/react-native';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
@@ -22,10 +22,29 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
-  it('uses zero-duration sort animation when animation scale is disabled', async () => {
-    const timingSpy = jest.spyOn(Animated, 'timing');
+  const sortIcon = () => {
+    const node = screen.getByText('arrow-up', {
+      includeHiddenElements: true,
+    }).parent;
 
-    await render(
+    if (!node) {
+      throw new Error('Sort icon not found');
+    }
+
+    return node;
+  };
+
+  it('uses zero-duration sort animation when animation scale is disabled', async () => {
+    const view = await render(
+      <DataTable.Title
+        sortDirection="ascending"
+        theme={{ animation: { scale: 0 } }}
+      >
+        Dessert
+      </DataTable.Title>
+    );
+
+    await view.rerender(
       <DataTable.Title
         sortDirection="descending"
         theme={{ animation: { scale: 0 } }}
@@ -33,13 +52,14 @@ describe('DataTable.Title', () => {
         Dessert
       </DataTable.Title>
     );
+    await act(() => {
+      jest.advanceTimersByTime(16);
+    });
 
-    expect(timingSpy).toHaveBeenLastCalledWith(
-      expect.anything(),
-      expect.objectContaining({ duration: 0 })
-    );
-
-    timingSpy.mockRestore();
+    // A disabled animation scale lands on the final rotation within a frame.
+    expect(getAnimatedStyle(sortIcon())).toMatchObject({
+      transform: [{ rotate: '180deg' }],
+    });
   });
 
   it('renders data table title with sort icon', async () => {
