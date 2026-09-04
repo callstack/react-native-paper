@@ -9,6 +9,7 @@ import type {
 
 import Animated, {
   cubicBezier,
+  type AnimatedStyle,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -466,14 +467,24 @@ const Card = ({
     ? 0
     : theme.motion.duration.short3 * theme.animation.scale;
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
+  // Parametrized timing functions are class instances and cannot cross the
+  // worklet boundary, so keep them in regular styles.
+  const stateLayerTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionTimingFunction,
+  };
+  const outlineTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionTimingFunction,
+  };
+  const focusIndicatorTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionTimingFunction,
+  };
   const stateLayerAnimatedStyle = useAnimatedStyle(
     () => ({
       opacity: currentInteractiveVisuals.value.stateLayerOpacity,
       transitionDuration,
       transitionProperty: ['opacity'],
-      transitionTimingFunction,
     }),
-    [currentInteractiveVisuals, transitionDuration, transitionTimingFunction]
+    [currentInteractiveVisuals, transitionDuration]
   );
   const outlineAnimatedStyle = useAnimatedStyle(() => {
     const outlineColor = currentInteractiveVisuals.value.outlineColor;
@@ -486,17 +497,15 @@ const Card = ({
         typeof outlineColor === 'string'
           ? ['borderColor', 'opacity']
           : ['opacity'],
-      transitionTimingFunction,
     };
-  }, [currentInteractiveVisuals, transitionDuration, transitionTimingFunction]);
+  }, [currentInteractiveVisuals, transitionDuration]);
   const focusIndicatorAnimatedStyle = useAnimatedStyle(
     () => ({
       opacity: disabledState.value ? 0 : focused.value ? 1 : 0,
       transitionDuration,
       transitionProperty: ['opacity'],
-      transitionTimingFunction,
     }),
-    [disabledState, transitionDuration, transitionTimingFunction]
+    [disabledState, transitionDuration]
   );
 
   React.useEffect(() => {
@@ -746,6 +755,7 @@ const Card = ({
             {
               backgroundColor: visuals.stateLayerColor,
             },
+            stateLayerTransitionStyle,
             stateLayerAnimatedStyle,
           ]}
         />
@@ -789,6 +799,7 @@ const Card = ({
               StyleSheet.absoluteFill,
               shapeStyle,
               { borderWidth: visuals.outlineWidth },
+              outlineTransitionStyle,
               outlineAnimatedStyle,
             ]}
           />
@@ -809,6 +820,7 @@ const Card = ({
               borderWidth: systemTokens.md.sys.state.focusIndicator.thickness,
             },
             focusIndicatorShapeStyle,
+            focusIndicatorTransitionStyle,
             focusIndicatorAnimatedStyle,
           ]}
         />
