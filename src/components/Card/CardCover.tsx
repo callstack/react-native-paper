@@ -1,14 +1,16 @@
-import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import type { ImageProps, StyleProp, ViewStyle } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
+import type { ImageProps, ImageStyle, StyleProp } from 'react-native';
 
-import { CardContext } from './CardContext';
-import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = Omit<ImageProps, 'style'> & {
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the cover image. The default size is full width by 195. Consumer
+   * styles are applied after these defaults. Supplying an `aspectRatio`
+   * removes the default height so the cover can resize responsively.
+   */
+  style?: StyleProp<ImageStyle>;
   /**
    * @optional
    */
@@ -18,6 +20,12 @@ export type Props = Omit<ImageProps, 'style'> & {
 /**
  * A component to show a cover image inside a Card.
  *
+ * Card owns clipping when the cover is used in its `media` slot, so the image
+ * follows the Card's default or custom shape without adding another radius.
+ * Hide decorative covers from screen readers with `accessible={false}` and
+ * `aria-hidden`. For informative covers, provide `accessible`,
+ * `accessibilityRole="image"`, and a useful `accessibilityLabel`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -25,7 +33,15 @@ export type Props = Omit<ImageProps, 'style'> & {
  *
  * const MyComponent = () => (
  *   <Card
- *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+ *     media={
+ *       <Card.Cover
+ *         source={{ uri: 'https://picsum.photos/700' }}
+ *         style={{ aspectRatio: 16 / 9 }}
+ *         accessible
+ *         accessibilityRole="image"
+ *         accessibilityLabel="Mountain landscape"
+ *       />
+ *     }
  *   />
  * );
  *
@@ -34,53 +50,30 @@ export type Props = Omit<ImageProps, 'style'> & {
  *
  * @extends Image props https://reactnative.dev/docs/image#props
  */
-const CardCover = ({ style, theme: themeOverrides, ...rest }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const cardContext = React.useContext(CardContext);
-
-  const coverStyle = { borderRadius: theme.shapes.corner.medium };
-
-  const cardMarginStyle = cardContext
-    ? cardContext.direction === 'horizontal'
-      ? {
-          marginTop: -cardContext.padding,
-          marginLeft: -cardContext.padding,
-          marginBottom: -cardContext.padding,
-        }
-      : {
-          marginTop: -cardContext.padding,
-          marginLeft: -cardContext.padding,
-          marginRight: -cardContext.padding,
-        }
-    : null;
+const CardCover = ({ style, theme: _theme, ...rest }: Props) => {
+  const usesAspectRatio = StyleSheet.flatten(style)?.aspectRatio !== undefined;
 
   // The container clips the image with `overflow: 'hidden'`,
   // so any border radius passed in `style` is applied to the image as well
   return (
-    <View style={[styles.container, cardMarginStyle, coverStyle, style]}>
-      <Image
-        resizeMode="cover"
-        accessibilityIgnoresInvertColors
-        {...rest}
-        style={styles.image}
-      />
-    </View>
+    <Image
+      {...rest}
+      style={[styles.image, !usesAspectRatio && styles.defaultHeight, style]}
+      accessibilityIgnoresInvertColors
+    />
   );
 };
 
 CardCover.displayName = 'Card.Cover';
 
 const styles = StyleSheet.create({
-  container: {
-    height: 194,
-    backgroundColor: grey200,
-    overflow: 'hidden',
-  },
   image: {
-    flex: 1,
-    height: 'auto',
-    width: 'auto',
+    width: '100%',
+    backgroundColor: grey200,
     justifyContent: 'flex-end',
+  },
+  defaultHeight: {
+    height: 195,
   },
 });
 
