@@ -72,6 +72,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
             {

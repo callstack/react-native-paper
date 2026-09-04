@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
@@ -12,7 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';

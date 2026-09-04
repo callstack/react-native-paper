@@ -64,6 +64,9 @@ android/keystores/debug.keystore
 #
 dist/
 web-build/
+docs/5.x/component-docs.json
+docs/5.x/docs/components/
+docs/6.x/docs/components/
 
 # Release
 #

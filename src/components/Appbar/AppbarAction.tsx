@@ -1,18 +1,15 @@
 import * as React from 'react';
-import type {
-  Animated,
-  ColorValue,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
+import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
-export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
+export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    *  Custom color for action icon.
    */
@@ -43,7 +40,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
    * @optional

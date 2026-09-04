@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,21 +7,26 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, { type AnimatedStyle } from 'react-native-reanimated';
+
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children' | 'style'
+> & {
   /**
    * Icon to display.
    */
@@ -69,7 +74,7 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
    * TestID used for testing purposes
@@ -147,34 +152,26 @@ const IconButton = ({
 
   const buttonSize = size + 2 * PADDING;
 
-  const {
-    borderWidth = mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius = buttonSize / 2,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
   const borderStyles = {
-    borderWidth,
-    borderRadius,
+    borderWidth: mode === 'outlined' && !selected ? 1 : 0,
+    borderRadius: buttonSize / 2,
     borderColor,
   };
 
   return (
-    <Surface
+    <Animated.View
       ref={ref}
       testID={`${testID}-container`}
       style={[
+        styles.container,
         {
           backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,
           width: buttonSize,
           height: buttonSize,
         },
-        styles.container,
         borderStyles,
         style,
       ]}
-      container
-      elevation={0}
     >
       {backgroundOpacity < 1 && (
         <View
@@ -210,15 +207,14 @@ const IconButton = ({
           )}
         </View>
       </TouchableRipple>
-    </Surface>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
     margin: 6,
-    elevation: 0,
+    overflow: 'hidden',
   },
   touchable: {
     flexGrow: 1,

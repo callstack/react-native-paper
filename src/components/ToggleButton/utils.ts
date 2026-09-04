@@ -1,4 +1,4 @@
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export const getToggleButtonColor = ({
   theme,

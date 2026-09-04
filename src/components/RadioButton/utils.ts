@@ -2,7 +2,7 @@ import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import { RadioButtonTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 

@@ -212,6 +212,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
     }
   >
     <View
+      collapsable={false}
       style={
         [
           {
