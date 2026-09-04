@@ -174,7 +174,7 @@ const CheckboxItem = ({
         {isLeading && checkbox}
         <Text
           variant={labelVariant}
-          testID={`${testID}-text`}
+          testID={testID ? `${testID}-text` : undefined}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
           style={[styles.label, computedStyle, labelStyle]}
         >

@@ -269,7 +269,6 @@ exports[`can render leading checkbox control 1`] = `
           ],
         ]
       }
-      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -367,7 +366,6 @@ exports[`renders unchecked 1`] = `
           ],
         ]
       }
-      testID="undefined-text"
     >
       Unchecked Button
     </Text>
