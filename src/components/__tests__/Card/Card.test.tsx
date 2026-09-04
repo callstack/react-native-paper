@@ -3,6 +3,8 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import { act } from '@testing-library/react-native';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { getTheme } from '../../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
@@ -17,6 +19,15 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 });
+
+const expectAnimatedStyle = (
+  testID: string,
+  expectedStyle: Record<string, unknown>
+) => {
+  expect(getAnimatedStyle(screen.getByTestId(testID))).toEqual(
+    expect.objectContaining(expectedStyle)
+  );
+};
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -385,7 +396,7 @@ describe('Card', () => {
     expect(onMagicTap).toHaveBeenCalledTimes(1);
   });
 
-  it('targets documented shell, visual, and shaped interaction nodes', async () => {
+  it('keeps the ripple, visual layers, and focus indicator on the Card shape', async () => {
     const shellRef = React.createRef<React.ElementRef<typeof View>>();
     const touchableRef = React.createRef<React.ElementRef<typeof View>>();
     const shape = {
@@ -410,10 +421,196 @@ describe('Card', () => {
 
     expect(interaction).toHaveStyle(shape);
     expect(visual).toHaveStyle({ overflow: 'hidden', ...shape });
+    expect(interaction.parent).toBe(visual);
+    expect(screen.getByTestId('product-card-focus-indicator')).toHaveStyle({
+      top: -5,
+      right: -5,
+      bottom: -5,
+      left: -5,
+      borderColor: getTheme().colors.secondary,
+      borderWidth: 3,
+      borderTopLeftRadius: 9,
+      borderTopRightRadius: 13,
+      borderBottomRightRadius: 21,
+      borderBottomLeftRadius: 25,
+    });
     expect(shell).toBeOnTheScreen();
     expect(shellRef.current).not.toBeNull();
     expect(touchableRef.current).not.toBeNull();
     expect(touchableRef.current).not.toBe(shellRef.current);
+  });
+
+  it.each([
+    { variant: 'filled' as const, hoveredElevation: 1 },
+    { variant: 'elevated' as const, hoveredElevation: 2 },
+    { variant: 'outlined' as const, hoveredElevation: 1 },
+  ])(
+    'shows and clears the $variant hover feedback',
+    async ({ variant, hoveredElevation }) => {
+      expect.hasAssertions();
+      jest.replaceProperty(Platform, 'OS', 'android');
+      const card =
+        variant === 'elevated' ? (
+          <Card variant="elevated" onPress={() => {}} />
+        ) : variant === 'outlined' ? (
+          <Card variant="outlined" onPress={() => {}} />
+        ) : (
+          <Card variant="filled" onPress={() => {}} />
+        );
+      await render(card);
+
+      const target = screen.getByTestId('card');
+
+      await fireEvent(target, 'hoverIn');
+      await act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      expectAnimatedStyle('card-state-layer', { opacity: 0.08 });
+      expectAnimatedStyle('card-container', {
+        elevation: hoveredElevation === 1 ? 1 : 3,
+      });
+
+      await fireEvent(target, 'hoverOut');
+
+      expectAnimatedStyle('card-state-layer', { opacity: 0 });
+    }
+  );
+
+  it.each([
+    { variant: 'filled' as const, pressedElevation: 0 },
+    { variant: 'elevated' as const, pressedElevation: 1 },
+    { variant: 'outlined' as const, pressedElevation: 0 },
+  ])(
+    'shows and clears the $variant pressed feedback',
+    async ({ variant, pressedElevation }) => {
+      expect.hasAssertions();
+      jest.replaceProperty(Platform, 'OS', 'android');
+      const card =
+        variant === 'elevated' ? (
+          <Card variant="elevated" onPress={() => {}} />
+        ) : variant === 'outlined' ? (
+          <Card variant="outlined" onPress={() => {}} />
+        ) : (
+          <Card variant="filled" onPress={() => {}} />
+        );
+      await render(card);
+
+      const target = screen.getByTestId('card');
+
+      await fireEvent(target, 'pressIn');
+      await act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      expectAnimatedStyle('card-state-layer', { opacity: 0.1 });
+      expectAnimatedStyle('card-container', { elevation: pressedElevation });
+
+      await fireEvent(target, 'pressOut');
+      await act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      expectAnimatedStyle('card-state-layer', { opacity: 0 });
+    }
+  );
+
+  it('shows focus feedback only for keyboard-visible focus and clears it on blur', async () => {
+    expect.hasAssertions();
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const theme = getTheme();
+    await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
+    const target = screen.getByTestId('card');
+    const pointerTarget = { matches: () => false };
+    const keyboardTarget = { matches: () => true };
+
+    await fireEvent(target, 'focus', { currentTarget: pointerTarget });
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-focus-indicator', { opacity: 0 });
+    expectAnimatedStyle('card-state-layer', { opacity: 0 });
+
+    await fireEvent(target, 'focus', { currentTarget: keyboardTarget });
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-focus-indicator', { opacity: 1 });
+    expectAnimatedStyle('card-state-layer', { opacity: 0.1 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.onSurface,
+      opacity: 1,
+    });
+
+    await fireEvent(target, 'blur');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-focus-indicator', { opacity: 0 });
+    expectAnimatedStyle('card-state-layer', { opacity: 0 });
+  });
+
+  it('uses pressed, focused, then hovered precedence and settles at the latest state', async () => {
+    expect.hasAssertions();
+    const theme = getTheme();
+    await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
+    const target = screen.getByTestId('card');
+
+    await fireEvent(target, 'hoverIn');
+    await fireEvent(target, 'focus');
+    await fireEvent(target, 'pressIn');
+    await fireEvent(target, 'pressOut');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.onSurface,
+      opacity: 1,
+    });
+
+    await fireEvent(target, 'blur');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', { opacity: 0.08 });
+    expectAnimatedStyle('card-outline', {
+      borderColor: theme.colors.outlineVariant,
+      opacity: 1,
+    });
+
+    await fireEvent(target, 'hoverOut');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expectAnimatedStyle('card-state-layer', { opacity: 0 });
+  });
+
+  it('does not rerender stable memoized slot content for transient feedback', async () => {
+    const renderCount = jest.fn();
+    const StableContent = React.memo(() => {
+      renderCount();
+      return <Text>Stable content</Text>;
+    });
+    await render(<Card onPress={() => {}} content={<StableContent />} />);
+    const target = screen.getByTestId('card');
+
+    await fireEvent(target, 'hoverIn');
+    await fireEvent(target, 'focus');
+    await fireEvent(target, 'pressIn');
+    await fireEvent(target, 'pressOut');
+    await fireEvent(target, 'blur');
+    await fireEvent(target, 'hoverOut');
+    await act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expect(renderCount).toHaveBeenCalledTimes(1);
   });
 
   it('warns once when whole-Card interaction is combined with populated actions', async () => {
