@@ -146,5 +146,6 @@ export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
+export type { TooltipMode, TooltipAction } from './components/Tooltip/Tooltip';
 
 export { type TypescaleKey, type Theme, type Elevation } from './types';

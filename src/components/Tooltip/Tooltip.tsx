@@ -16,6 +16,20 @@ import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
+export type TooltipMode = 'plain' | 'rich';
+
+export type TooltipAction = {
+  /**
+   * Label shown on the action button.
+   */
+  label: string;
+  /**
+   * Called when the action button is pressed. The tooltip is dismissed
+   * immediately afterwards.
+   */
+  onPress?: () => void;
+};
+
 export type Props = {
   /**
    * Tooltip reference element. Needs to be able to hold a ref.
@@ -30,9 +44,36 @@ export type Props = {
    */
   leaveTouchDelay?: number;
   /**
-   * Tooltip title
+   * Tooltip title. In a `rich` tooltip this is the supporting/descriptive text.
    */
   title: string;
+  /**
+   * Tooltip variant. `plain` shows a single-line text label (the default
+   * behaviour). `rich` renders a larger container that can hold an optional
+   * heading and up to two action buttons.
+   *
+   * @default 'plain'
+   */
+  mode?: TooltipMode;
+  /**
+   * Optional heading shown above the supporting text in a `rich` tooltip.
+   * Ignored in `plain` mode.
+   */
+  subhead?: string;
+  /**
+   * Primary action button for a `rich` tooltip. Ignored in `plain` mode.
+   */
+  action?: TooltipAction;
+  /**
+   * Optional secondary action button for a `rich` tooltip, rendered after the
+   * primary action. Ignored in `plain` mode.
+   */
+  secondaryAction?: TooltipAction;
+  /**
+   * Called when a `rich` tooltip is dismissed, either by pressing an action or
+   * by tapping outside of it. Ignored in `plain` mode.
+   */
+  onDismiss?: () => void;
   /**
    * Specifies the largest possible scale a title font can reach.
    */
@@ -67,11 +108,17 @@ const Tooltip = ({
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
   title,
+  mode = 'plain',
+  subhead,
+  action,
+  secondaryAction,
+  onDismiss,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
+  const isRich = mode === 'rich';
 
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
@@ -133,6 +180,12 @@ const Tooltip = ({
   }, [isWeb, enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
+    if (isRich) {
+      // Rich tooltips are persistent: they stay open so the user can read the
+      // heading and interact with the action buttons, and are dismissed by
+      // pressing an action rather than on touch end.
+      return;
+    }
     touched.current = false;
     if (showTooltipTimer.current.length) {
       showTooltipTimer.current.forEach((t) => clearTimeout(t));
@@ -144,7 +197,7 @@ const Tooltip = ({
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay);
     hideTooltipTimer.current.push(id);
-  }, [leaveTouchDelay]);
+  }, [isRich, leaveTouchDelay]);
 
   const handlePress = React.useCallback(() => {
     if (touched.current) {
@@ -186,6 +239,16 @@ const Tooltip = ({
     );
   };
 
+  const dismiss = React.useCallback(() => {
+    setVisible(false);
+    setMeasurement({ children: {}, tooltip: {}, measured: false });
+    onDismiss?.();
+  }, [onDismiss]);
+
+  const richActions = (
+    isRich ? [action, secondaryAction].filter(Boolean) : []
+  ) as TooltipAction[];
+
   const mobilePressProps = {
     onPress: handlePress,
     onLongPress: () => handleTouchStart(),
@@ -202,10 +265,20 @@ const Tooltip = ({
     <>
       {visible && (
         <Portal>
+          {isRich ? (
+            <Pressable
+              testID="tooltip-scrim"
+              onPress={dismiss}
+              accessibilityRole="button"
+              accessibilityLabel="Dismiss tooltip"
+              style={StyleSheet.absoluteFill}
+            />
+          ) : null}
           <View
             onLayout={handleOnLayout}
             style={[
               styles.tooltip,
+              ...(isRich ? [styles.richTooltip] : []),
               {
                 backgroundColor: theme.colors.onSurface,
                 ...getTooltipPosition(
@@ -220,16 +293,57 @@ const Tooltip = ({
             ]}
             testID="tooltip-container"
           >
+            {isRich && subhead ? (
+              <Text
+                testID="tooltip-subhead"
+                selectable={false}
+                variant="titleSmall"
+                style={[styles.richSubhead, { color: theme.colors.surface }]}
+                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+              >
+                {subhead}
+              </Text>
+            ) : null}
             <Text
+              testID={isRich ? 'tooltip-title' : undefined}
               aria-live="polite"
-              numberOfLines={1}
+              numberOfLines={isRich ? undefined : 1}
               selectable={false}
-              variant="labelLarge"
+              variant={isRich ? 'bodyMedium' : 'labelLarge'}
               style={{ color: theme.colors.surface }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>
+            {isRich && richActions.length > 0 ? (
+              <View testID="tooltip-actions" style={styles.richActions}>
+                {richActions.map((richAction, index) => (
+                  <Pressable
+                    key={richAction.label}
+                    testID={
+                      index === 0
+                        ? 'tooltip-action'
+                        : 'tooltip-secondary-action'
+                    }
+                    onPress={() => {
+                      richAction.onPress?.();
+                      dismiss();
+                    }}
+                    accessibilityRole="button"
+                    accessibilityLabel={richAction.label}
+                    style={styles.richActionButton}
+                  >
+                    <Text
+                      selectable={false}
+                      variant="labelLarge"
+                      style={{ color: theme.colors.primary }}
+                    >
+                      {richAction.label}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            ) : null}
           </View>
         </Portal>
       )}
@@ -257,6 +371,30 @@ const styles = StyleSheet.create({
     height: 32,
     maxHeight: 32,
   },
+  richTooltip: {
+    height: undefined,
+    maxHeight: undefined,
+    minHeight: 56,
+    maxWidth: 320,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  } as ViewStyle,
+  richSubhead: {
+    marginBottom: 4,
+  } as ViewStyle,
+  richActions: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    marginTop: 12,
+  } as ViewStyle,
+  richActionButton: {
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    marginRight: 8,
+  } as ViewStyle,
   visible: {
     opacity: 1,
   },
