@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
@@ -30,6 +30,185 @@ afterEach(() => {
 });
 
 describe('Card', () => {
+  it.each([
+    {
+      variant: 'filled' as const,
+      colorRole: 'surfaceContainerHighest' as const,
+    },
+    {
+      variant: 'elevated' as const,
+      colorRole: 'surfaceContainerLow' as const,
+    },
+    { variant: 'outlined' as const, colorRole: 'surface' as const },
+  ])(
+    'renders the enabled $variant appearance in light and dark themes',
+    async ({ variant, colorRole }) => {
+      for (const isDark of [false, true] as const) {
+        const theme = getTheme(isDark);
+        const card =
+          variant === 'elevated' ? (
+            <Card variant="elevated" theme={theme} />
+          ) : variant === 'outlined' ? (
+            <Card variant="outlined" theme={theme} />
+          ) : (
+            <Card variant="filled" theme={theme} />
+          );
+        const { unmount } = await render(card);
+
+        expect(screen.getByTestId('card-visual')).toHaveStyle({
+          backgroundColor: theme.colors[colorRole],
+        });
+
+        await unmount();
+      }
+    }
+  );
+
+  it('renders the enabled outlined role in light and dark themes', async () => {
+    for (const isDark of [false, true] as const) {
+      const theme = getTheme(isDark);
+      const { unmount } = await render(
+        <Card variant="outlined" theme={theme} />
+      );
+
+      expect(screen.getByTestId('card-outline')).toHaveStyle({
+        borderColor: theme.colors.outlineVariant,
+        borderWidth: 1,
+        opacity: 1,
+      });
+
+      await unmount();
+    }
+  });
+
+  it.each(['filled', 'elevated'] as const)(
+    'does not render an outline for the %s variant',
+    async (variant) => {
+      const card =
+        variant === 'elevated' ? (
+          <Card variant="elevated" />
+        ) : (
+          <Card variant="filled" />
+        );
+
+      await render(card);
+
+      expect(screen.queryByTestId('card-outline')).not.toBeOnTheScreen();
+    }
+  );
+
+  it('uses filled as the default and resolves deeply merged custom colors', async () => {
+    await render(
+      <Card
+        theme={{
+          colors: {
+            surfaceContainerHighest: '#111111',
+            onSurface: '#222222',
+          },
+        }}
+      />
+    );
+
+    expect(screen.getByTestId('card-visual')).toHaveStyle({
+      backgroundColor: '#111111',
+    });
+    expect(screen.getByTestId('card-state-layer')).toHaveStyle({
+      backgroundColor: '#222222',
+      opacity: 0,
+    });
+  });
+
+  it('uses custom theme roles for elevated and outlined variants', async () => {
+    const { unmount } = await render(
+      <Card
+        variant="elevated"
+        theme={{ colors: { surfaceContainerLow: '#123456' } }}
+      />
+    );
+
+    expect(screen.getByTestId('card-visual')).toHaveStyle({
+      backgroundColor: '#123456',
+    });
+    await unmount();
+
+    await render(
+      <Card
+        variant="outlined"
+        theme={{
+          colors: { surface: '#abcdef', outlineVariant: '#654321' },
+        }}
+      />
+    );
+
+    expect(screen.getByTestId('card-visual')).toHaveStyle({
+      backgroundColor: '#abcdef',
+    });
+    expect(screen.getByTestId('card-outline')).toHaveStyle({
+      borderColor: '#654321',
+    });
+  });
+
+  it('lets only elevated Cards customize their resting elevation', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
+    await render(<Card variant="elevated" elevation={5} />);
+
+    expect(screen.getByTestId('card-container')).toHaveStyle({ elevation: 12 });
+  });
+
+  it.each([
+    { variant: 'filled' as const, elevation: 0 },
+    { variant: 'elevated' as const, elevation: 1 },
+    { variant: 'outlined' as const, elevation: 0 },
+  ])(
+    'renders the enabled $variant elevation',
+    async ({ variant, elevation }) => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+      const card =
+        variant === 'elevated' ? (
+          <Card variant="elevated" />
+        ) : variant === 'outlined' ? (
+          <Card variant="outlined" />
+        ) : (
+          <Card variant="filled" />
+        );
+
+      await render(card);
+
+      expect(screen.getByTestId('card-container')).toHaveStyle({ elevation });
+      expect(screen.getByTestId('card-container')).toHaveStyle({
+        backgroundColor: 'transparent',
+      });
+    }
+  );
+
+  it('applies the medium shape and asymmetric overrides across the shell', async () => {
+    await render(
+      <Card
+        variant="outlined"
+        borderTopLeftRadius={4}
+        borderTopRightRadius={8}
+        borderBottomRightRadius={16}
+        borderBottomLeftRadius={20}
+      />
+    );
+
+    const expectedShape = {
+      borderRadius: getTheme().shapes.corner.medium,
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 16,
+      borderBottomLeftRadius: 20,
+      borderCurve: 'continuous',
+    };
+
+    expect(screen.getByTestId('card-container')).toHaveStyle(expectedShape);
+    expect(screen.getByTestId('card-visual')).toHaveStyle(expectedShape);
+    expect(screen.getByTestId('card-background')).toHaveStyle(expectedShape);
+    expect(screen.getByTestId('card-state-layer')).toHaveStyle(expectedShape);
+    expect(screen.getByTestId('card-outline')).toHaveStyle(expectedShape);
+  });
+
   it('renders populated slots in deterministic order without rewriting nodes', async () => {
     const CustomContent = React.memo(() => (
       <View testID="content-custom-wrapper">
@@ -67,8 +246,8 @@ describe('Card', () => {
   it('renders omitted slots as a neutral filled grouping container', async () => {
     await render(<Card />);
 
-    expect(screen.getByTestId('card-container')).toHaveStyle({
-      backgroundColor: getTheme().colors.surfaceVariant,
+    expect(screen.getByTestId('card-visual')).toHaveStyle({
+      backgroundColor: getTheme().colors.surfaceContainerHighest,
     });
     expect(screen.queryByRole('button')).not.toBeOnTheScreen();
   });
@@ -120,6 +299,10 @@ describe('Card types', () => {
           content={<Text>Content</Text>}
           actions={[<View key="action" />]}
         />
+        <Card variant="filled" />
+        <Card variant="outlined" />
+        <Card variant="elevated" />
+        <Card variant="elevated" elevation={5} />
 
         {/* @ts-expect-error: Arbitrary children composition was removed. */}
         <Card>
@@ -128,6 +311,18 @@ describe('Card types', () => {
 
         {/* @ts-expect-error: The old mode prop was removed. */}
         <Card mode="contained" />
+
+        {/* @ts-expect-error: Contained is not a Card variant. */}
+        <Card variant="contained" />
+
+        {/* @ts-expect-error: The default filled Card cannot be elevated. */}
+        <Card elevation={1} />
+
+        {/* @ts-expect-error: Filled Cards cannot be elevated. */}
+        <Card variant="filled" elevation={1} />
+
+        {/* @ts-expect-error: Outlined Cards cannot be elevated. */}
+        <Card variant="outlined" elevation={1} />
 
         {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
         <Card header={<View />} title="Title" />
