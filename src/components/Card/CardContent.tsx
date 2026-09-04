@@ -19,12 +19,12 @@ export type Props = ViewProps & {
  * import { Card, Text } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Content>
+ *   <Card
+ *     content={<Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
- *     </Card.Content>
- *   </Card>
+ *     </Card.Content>}
+ *   />
  * );
  *
  * export default MyComponent;

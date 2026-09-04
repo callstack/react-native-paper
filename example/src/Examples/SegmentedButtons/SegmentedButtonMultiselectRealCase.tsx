@@ -59,16 +59,21 @@ const SegmentedButtonMultiselectRealCase = () => {
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => {
           return (
-            <Card mode="contained" direction="horizontal" style={styles.card}>
-              <Card.Cover style={styles.cover} source={item.cover} />
-              <Card.Title
-                title={item.name}
-                subtitle={'$'.repeat(item.price)}
-                titleVariant="titleMedium"
-                style={styles.title}
-                right={() => <IconButton icon={'bookmark-outline'} />}
-              />
-            </Card>
+            <Card
+              style={styles.card}
+              content={
+                <Card.Content style={styles.content}>
+                  <Card.Cover style={styles.cover} source={item.cover} />
+                  <Card.Title
+                    title={item.name}
+                    subtitle={'$'.repeat(item.price)}
+                    titleVariant="titleMedium"
+                    style={styles.title}
+                    right={() => <IconButton icon={'bookmark-outline'} />}
+                  />
+                </Card.Content>
+              }
+            />
           );
         }}
       />
@@ -87,6 +92,12 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 16,
     marginTop: 16,
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
   cover: {
     width: 72,
