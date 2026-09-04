@@ -1,4 +1,5 @@
-import type { ColorValue } from 'react-native';
+import type { OpaqueColorValue } from 'react-native';
+import { PlatformColor } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
@@ -7,15 +8,17 @@ import { red50, red500 } from '../../theme/colors';
 import type { InternalTheme } from '../../types';
 import { resolveAvatarColors, getAvatarImageSourceKey } from '../Avatar/utils';
 
+// `PlatformColor()` only accepts literal arguments, so the resolved value is
+// passed in rather than the resource name.
 const withPlatformColor = (
   theme: InternalTheme,
   role: 'primary' | 'primaryContainer' | 'error',
-  resource: string
+  platformColor: OpaqueColorValue
 ): InternalTheme => ({
   ...theme,
   colors: {
     ...theme.colors,
-    [role]: { resource_paths: [resource] } as unknown as ColorValue,
+    [role]: platformColor,
   },
 });
 
@@ -33,7 +36,7 @@ describe('resolveAvatarColors', () => {
     const theme = withPlatformColor(
       getTheme(),
       'primaryContainer',
-      '@android:color/system_primary_container_light'
+      PlatformColor('@android:color/system_primary_container_light')
     );
     expect(resolveAvatarColors({ theme })).toEqual({
       background: theme.colors.primaryContainer,
@@ -45,7 +48,7 @@ describe('resolveAvatarColors', () => {
     const theme = withPlatformColor(
       getTheme(),
       'error',
-      '@android:color/system_error_light'
+      PlatformColor('@android:color/system_error_light')
     );
     expect(
       resolveAvatarColors({ theme, backgroundColor: theme.colors.error })
@@ -73,9 +76,7 @@ describe('resolveAvatarColors', () => {
 
   it('falls back to onSurface for an unknown PlatformColor', () => {
     const theme = getTheme();
-    const platformColor = {
-      resource_paths: ['@android:color/holo_blue_bright'],
-    } as unknown as ColorValue;
+    const platformColor = PlatformColor('@android:color/holo_blue_bright');
 
     expect(
       resolveAvatarColors({ theme, backgroundColor: platformColor })
