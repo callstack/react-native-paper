@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 export type Props = ViewProps & {
@@ -31,9 +31,16 @@ export type Props = ViewProps & {
  * ```
  */
 const CardContent = ({ style, ...rest }: Props) => (
-  <View {...rest} style={style} />
+  <View {...rest} style={[styles.container, style]} />
 );
 
 CardContent.displayName = 'Card.Content';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+});
 
 export default CardContent;

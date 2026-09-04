@@ -1,5 +1,5 @@
-import type { ComponentProps } from 'react';
-import { Platform, StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
   },
   contentStyle: {
     flexDirection: 'column-reverse',
+  },
+  customAction: {
+    marginRight: 12,
   },
 });
 
@@ -147,68 +150,133 @@ describe('CardCover', () => {
   });
 });
 
+describe('CardContent', () => {
+  it('uses fixed padding when rendered standalone', async () => {
+    await render(
+      <Card.Content testID="card-content">
+        <Text>Content</Text>
+      </Card.Content>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    });
+  });
+
+  it('uses fixed padding regardless of neighboring card elements', async () => {
+    await render(
+      <Card>
+        <Card.Title title="Title" />
+        <>
+          <View>
+            <Card.Content testID="card-content">
+              <Text>Content</Text>
+            </Card.Content>
+          </View>
+        </>
+        <Card.Actions>
+          <Button>Action</Button>
+        </Card.Actions>
+      </Card>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    });
+  });
+
+  it('lets consumer styles override the default padding', async () => {
+    await render(
+      <Card.Content
+        testID="card-content"
+        style={{ paddingHorizontal: 24, paddingVertical: 12 }}
+      >
+        <Text>Content</Text>
+      </Card.Content>
+    );
+
+    expect(screen.getByTestId('card-content')).toHaveStyle({
+      paddingHorizontal: 24,
+      paddingVertical: 12,
+    });
+  });
+});
+
 describe('CardActions', () => {
-  it('renders button with passed mode', async () => {
-    const buttonProps = jest.fn();
-    const ProbeButton = (props: ComponentProps<typeof Button>) => {
-      buttonProps(props);
-
-      return <Button {...props} />;
-    };
-
+  it('lays out heterogeneous nodes with container-owned spacing', async () => {
     await render(
-      <Card>
-        <Card.Actions>
-          <ProbeButton mode="filled">Agree</ProbeButton>
-        </Card.Actions>
-      </Card>
-    );
-
-    expect(buttonProps).toHaveBeenCalledWith(
-      expect.objectContaining({ mode: 'filled' })
-    );
-  });
-
-  it('does not inject default button props', async () => {
-    const buttonProps = jest.fn();
-    const ProbeButton = (props: ComponentProps<typeof Button>) => {
-      buttonProps(props);
-
-      return <Button {...props} />;
-    };
-
-    await render(
-      <Card>
-        <Card.Actions>
-          <ProbeButton>Cancel</ProbeButton>
-          <ProbeButton>Agree</ProbeButton>
-        </Card.Actions>
-      </Card>
-    );
-
-    const [cancelButtonProps] = buttonProps.mock.calls[0];
-    const [agreeButtonProps] = buttonProps.mock.calls[1];
-
-    expect(cancelButtonProps).not.toHaveProperty('mode');
-    expect(cancelButtonProps).not.toHaveProperty('compact');
-    expect(agreeButtonProps).not.toHaveProperty('mode');
-    expect(agreeButtonProps).not.toHaveProperty('compact');
-  });
-
-  it('renders actions in a styled row', async () => {
-    await render(
-      <Card>
-        <Card.Actions testID="card-actions">
-          <Button>Cancel</Button>
-          <Button>Agree</Button>
-        </Card.Actions>
-      </Card>
+      <Card.Actions testID="card-actions">
+        <Button>Agree</Button>
+        <View testID="custom-action" />
+        <Text>Details</Text>
+      </Card.Actions>
     );
 
     expect(screen.getByTestId('card-actions')).toHaveStyle({
       flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'flex-end',
-      columnGap: 8,
+      padding: 8,
+      gap: 8,
+    });
+    expect(screen.getByTestId('custom-action')).toBeOnTheScreen();
+    expect(screen.getByText('Details')).toBeOnTheScreen();
+  });
+
+  it('lets consumer styles override the default layout', async () => {
+    await render(
+      <Card.Actions
+        testID="card-actions"
+        style={{ justifyContent: 'flex-start', padding: 4, gap: 12 }}
+      >
+        <Text>Action</Text>
+      </Card.Actions>
+    );
+
+    expect(screen.getByTestId('card-actions')).toHaveStyle({
+      justifyContent: 'flex-start',
+      padding: 4,
+      gap: 12,
+    });
+  });
+
+  it('preserves consumer-configured child props', async () => {
+    const Action = ({
+      compact,
+      mode,
+      style,
+    }: {
+      compact?: boolean;
+      mode?: string;
+      style?: StyleProp<ViewStyle>;
+    }) => (
+      <View
+        accessibilityLabel={`${mode ?? 'unset'}:${compact ?? 'unset'}`}
+        style={style}
+      />
+    );
+
+    await render(
+      <Card.Actions testID="card-actions">
+        <Action style={styles.customAction} />
+        <Action mode="contained" compact style={styles.customAction} />
+        <View testID="custom-action" style={styles.customAction} />
+      </Card.Actions>
+    );
+
+    expect(screen.getByLabelText('unset:unset')).toHaveStyle(
+      styles.customAction
+    );
+    expect(screen.getByLabelText('contained:true')).toHaveStyle(
+      styles.customAction
+    );
+    expect(screen.getByLabelText('unset:unset')).not.toHaveStyle({
+      marginLeft: 8,
+    });
+    expect(screen.getByTestId('custom-action')).not.toHaveStyle({
+      marginLeft: 8,
     });
   });
 });

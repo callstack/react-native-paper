@@ -159,7 +159,7 @@ const Card = ({
   contentStyle,
   borderColor: customBorderColor,
   theme: themeOverrides,
-  testID,
+  testID = 'card',
   accessible,
   disabled,
   ref,
