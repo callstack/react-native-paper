@@ -80,7 +80,6 @@ const ProgressBar = ({
   testID = 'progress-bar',
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
@@ -132,7 +131,7 @@ const ProgressBar = ({
           duration: INDETERMINATE_DURATION,
           toValue: 1,
           // Animated.loop does not work if useNativeDriver is true on web
-          useNativeDriver: !isWeb,
+          useNativeDriver: Platform.OS !== 'web',
           isInteraction: false,
         });
       }
@@ -149,7 +148,7 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-  }, [fade, scale, indeterminate, timer, progress, isWeb]);
+  }, [fade, scale, indeterminate, timer, progress]);
 
   const stopAnimation = React.useCallback(() => {
     // Stop indeterminate animation
@@ -201,7 +200,7 @@ const ProgressBar = ({
       aria-valuemin={indeterminate ? undefined : 0}
       aria-valuemax={indeterminate ? undefined : 100}
       aria-valuenow={indeterminate ? undefined : Math.round(progress * 100)}
-      style={isWeb && styles.webContainer}
+      style={Platform.OS === 'web' && styles.webContainer}
       testID={testID}
     >
       <Animated.View
