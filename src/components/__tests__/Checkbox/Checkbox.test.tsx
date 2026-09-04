@@ -1,13 +1,19 @@
-import { PlatformColor } from 'react-native';
+import { Platform, PlatformColor } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
+import { Provider as SettingsProvider } from '../../../core/settings';
 import { defaultThemes } from '../../../core/theming';
 import { fireEvent, render, screen } from '../../../test-utils';
+import { ReduceMotionContext } from '../../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../../theme/tokens';
 import Checkbox from '../../Checkbox';
 import type { Props as CheckboxProps } from '../../Checkbox/Checkbox';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders checked Checkbox with onPress', async () => {
   const tree = (
@@ -182,6 +188,234 @@ describe('Checkbox state layer', () => {
       backgroundColor: onSurface,
       opacity: hovered,
     });
+  });
+});
+
+describe('Checkbox press ripple', () => {
+  const { colors, motion } = defaultThemes.light;
+  const { hovered, pressed } = tokens.md.sys.state.opacity;
+  const GROW = motion.duration.short4;
+  const FADE_OUT = motion.duration.short3;
+  // Mirrors `RIPPLE_START_SCALE` in Checkbox.tsx.
+  const RIPPLE_START_SCALE = 0.6;
+  const platforms = ['ios', 'android', 'web'] as const;
+
+  const ripple = () => getAnimatedStyle(screen.getByTestId('checkbox-ripple'));
+
+  const renderCheckbox = (props: Partial<CheckboxProps> = {}) =>
+    render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        testID="checkbox"
+        {...props}
+      />
+    );
+
+  const pressIn = () => fireEvent(screen.getByRole('checkbox'), 'pressIn');
+  const pressOut = () => fireEvent(screen.getByRole('checkbox'), 'pressOut');
+
+  // The ripple has no `Platform` branch; these two guard against one
+  // creeping back in (the old implementation split on it).
+  it.each(platforms)('grows to fill the state layer on %s', async (os) => {
+    jest.replaceProperty(Platform, 'OS', os);
+    await renderCheckbox();
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({
+      backgroundColor: colors.primary,
+      opacity: pressed,
+      transform: [{ scale: 1 }],
+    });
+  });
+
+  it.each(platforms)('inverts to onSurface when selected on %s', async (os) => {
+    jest.replaceProperty(Platform, 'OS', os);
+    await renderCheckbox({ status: 'checked' });
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({
+      backgroundColor: colors.onSurface,
+      opacity: pressed,
+      transform: [{ scale: 1 }],
+    });
+  });
+
+  it('resets the scale on a second press', async () => {
+    await renderCheckbox();
+
+    await pressIn();
+    await pressOut();
+    await jest.runAllTimersAsync();
+
+    await pressIn();
+    jest.advanceTimersByTime(0);
+    expect(ripple().transform).toEqual([{ scale: RIPPLE_START_SCALE }]);
+
+    jest.advanceTimersByTime(GROW);
+    expect(ripple().transform).toEqual([{ scale: 1 }]);
+  });
+
+  it('stays on error while pressed', async () => {
+    await renderCheckbox({ status: 'checked', error: true });
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({ backgroundColor: colors.error });
+  });
+
+  it('inverts a selected checkbox into its custom unchecked color', async () => {
+    await renderCheckbox({ status: 'checked', uncheckedColor: 'teal' });
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({ backgroundColor: 'teal' });
+  });
+
+  it('inverts an unselected checkbox into its custom color', async () => {
+    await renderCheckbox({ color: 'teal' });
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({ backgroundColor: 'teal' });
+  });
+
+  it('stays up for a minimum press when the finger lifts immediately', async () => {
+    await renderCheckbox();
+
+    await pressIn();
+    await pressOut();
+
+    jest.advanceTimersByTime(100);
+    expect(ripple()).toMatchObject({ opacity: pressed });
+
+    jest.advanceTimersByTime(GROW + FADE_OUT);
+    expect(ripple()).toMatchObject({ opacity: 0 });
+  });
+
+  it('takes the fade-out duration to reach zero', async () => {
+    await renderCheckbox();
+
+    await pressIn();
+    await pressOut();
+    jest.advanceTimersByTime(GROW + FADE_OUT / 2);
+
+    const { opacity } = ripple();
+    expect(opacity).toBeGreaterThan(0);
+    expect(opacity).toBeLessThan(pressed);
+
+    jest.advanceTimersByTime(FADE_OUT / 2);
+    expect(ripple()).toMatchObject({ opacity: 0 });
+  });
+
+  it('is not left behind by a rapid double tap', async () => {
+    await renderCheckbox();
+
+    await pressIn();
+    await pressOut();
+    jest.advanceTimersByTime(30);
+    await pressIn();
+    await pressOut();
+
+    // The first press's hold (armed at t=0) would have expired here if the
+    // second press (t=30) hadn't re-armed it -- the ripple must still be up.
+    jest.advanceTimersByTime(GROW - 30 + 1);
+    expect(ripple()).toMatchObject({ opacity: pressed });
+
+    await jest.runAllTimersAsync();
+    expect(ripple()).toMatchObject({ opacity: 0 });
+  });
+
+  it('keeps the minimum-press hold under reduce motion', async () => {
+    await render(
+      <ReduceMotionContext.Provider value={true}>
+        <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+      </ReduceMotionContext.Provider>
+    );
+
+    await pressIn();
+    jest.advanceTimersByTime(0);
+    expect(ripple()).toMatchObject({
+      opacity: pressed,
+      transform: [{ scale: 1 }],
+    });
+
+    await pressOut();
+    jest.advanceTimersByTime(GROW - 1);
+    expect(ripple()).toMatchObject({ opacity: pressed });
+
+    // Hold expires; the fade duration is 0 under reduce motion so it lands on
+    // 0 within this same tick.
+    jest.advanceTimersByTime(1);
+    expect(ripple()).toMatchObject({ opacity: 0 });
+  });
+
+  it('leaves the flat state layer on hover while it paints the press', async () => {
+    await renderCheckbox();
+
+    await fireEvent(screen.getByRole('checkbox'), 'hoverIn');
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(screen.getByTestId('checkbox-state-layer')).toHaveStyle({
+      backgroundColor: colors.onSurface,
+      opacity: hovered,
+    });
+    expect(ripple()).toMatchObject({
+      backgroundColor: colors.primary,
+      opacity: pressed,
+    });
+  });
+
+  it('tints with a PlatformColor role as-is', async () => {
+    const primary = PlatformColor('?attr/colorPrimary');
+    await renderCheckbox({ theme: { colors: { primary } } });
+
+    await pressIn();
+    jest.advanceTimersByTime(GROW);
+
+    expect(ripple()).toMatchObject({ backgroundColor: primary });
+  });
+
+  it('hands the press back to the platform when a rippleColor is given', async () => {
+    await renderCheckbox({ rippleColor: 'teal' });
+
+    expect(screen.queryByTestId('checkbox-ripple')).toBeNull();
+  });
+
+  it('hands the press back to the platform when an underlayColor is given', async () => {
+    await renderCheckbox({ underlayColor: 'teal' });
+
+    expect(screen.queryByTestId('checkbox-ripple')).toBeNull();
+  });
+
+  it('paints nothing when the ripple effect is turned off', async () => {
+    await render(
+      <SettingsProvider value={{ rippleEffectEnabled: false }}>
+        <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+      </SettingsProvider>
+    );
+
+    expect(screen.queryByTestId('checkbox-ripple')).toBeNull();
+  });
+
+  it('is not rendered on a disabled checkbox', async () => {
+    await renderCheckbox({ disabled: true });
+
+    expect(screen.queryByTestId('checkbox-ripple')).toBeNull();
+  });
+
+  it('is not rendered without a press handler', async () => {
+    await render(<Checkbox status="unchecked" testID="checkbox" />);
+
+    expect(screen.queryByTestId('checkbox-ripple')).toBeNull();
   });
 });
 

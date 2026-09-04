@@ -10,12 +10,23 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
+import Animated, {
+  cubicBezier,
+  Easing,
+  ReduceMotion,
+  useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+  type CSSStyle,
+} from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
 import { getSelectionVisualState, getStateLayer } from './utils';
 import type { CheckboxInteraction } from './utils';
 import { useLocale } from '../../core/locale';
+import { SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
@@ -85,6 +96,10 @@ const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
 const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
 const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
 
+// Compose's `RippleAnimation` starts the ripple at 30% of the target layer's
+// size, i.e. 0.6 of the radius.
+const RIPPLE_START_SCALE = 0.6;
+
 /**
  * Checkboxes allow the selection of multiple options from a set.
  *
@@ -124,6 +139,7 @@ const Checkbox = ({
   const theme = useInternalTheme(themeOverrides);
 
   const reduceMotion = useReduceMotion();
+  const { rippleEffectEnabled } = React.useContext(SettingsContext);
 
   const { direction } = useLocale();
   // Web (react-native-web) doesn't auto-mirror layout, so flip the mask
@@ -173,6 +189,27 @@ const Checkbox = ({
     ...selectionColors,
     interaction: interaction ?? 'hovered',
   }).color;
+  const pressRipple = getStateLayer({
+    ...selectionColors,
+    interaction: 'pressed',
+  });
+
+  // The platform press paints the wrong thing: it tints with a neutral role,
+  // and on web its hover overlay doubles up with the layer. Android also
+  // refuses a `PlatformColor`, which is what the dynamic theme resolves the
+  // roles to. An explicit `rippleColor` or `underlayColor` asks for that
+  // platform press instead, so leave it alone.
+  const platformOwnsPress =
+    rest.rippleColor != null || rest.underlayColor != null;
+
+  const platformPressOverride = platformOwnsPress
+    ? null
+    : ({ rippleColor: 'transparent' } as const);
+
+  // A disabled ripple effect asks for no press at all, on top of the platform
+  // press being spoken for above -- either way, nothing left for us to paint.
+  const ownsPress =
+    isInteractive && !platformOwnsPress && Boolean(rippleEffectEnabled);
 
   const fillTransitionTimingFunction = cubicBezier(
     ...theme.motion.easing.standard
@@ -222,6 +259,72 @@ const Checkbox = ({
     transitionTimingFunction: checkTransitionTimingFunction,
   };
 
+  const rippleAlpha = useSharedValue(0);
+  const rippleScale = useSharedValue(RIPPLE_START_SCALE);
+  const pressedSV = useSharedValue(0);
+  // Held for the length of the grow so a tap that releases mid-grow still
+  // shows the ripple instead of flashing sub-frame.
+  const rippleHoldSV = useSharedValue(0);
+
+  // Reanimated defaults an unset `reduceMotion` to the OS setting, which
+  // would fight `<PaperProvider reduceMotion="off">`. Mirror the provider's
+  // already-resolved preference explicitly instead, as `Switch` does.
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  // Durations follow Compose's `RippleAnimation` (fade in 75ms, grow 225ms,
+  // fade out 150ms) and material-web's `MINIMUM_PRESS_MS` (225), snapped to
+  // the motion tokens.
+  const rippleGrowDuration = reduceMotion ? 0 : theme.motion.duration.short4;
+  const rippleAlphaInDuration = reduceMotion ? 0 : theme.motion.duration.short2;
+  const rippleFadeOutDuration = reduceMotion ? 0 : theme.motion.duration.short3;
+  const rippleHoldDuration = theme.motion.duration.short4;
+
+  const startPressRipple = () => {
+    if (!ownsPress) return;
+
+    pressedSV.value = 1;
+    rippleScale.value = RIPPLE_START_SCALE;
+    rippleScale.value = withTiming(1, {
+      duration: rippleGrowDuration,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    });
+    rippleAlpha.value = withTiming(pressRipple.opacity, {
+      duration: rippleAlphaInDuration,
+      reduceMotion: reanimatedReduceMotion,
+    });
+    rippleHoldSV.value = 1;
+    rippleHoldSV.value = withDelay(
+      rippleHoldDuration,
+      withTiming(0, { duration: 0 }),
+      // The hold gates visibility rather than movement, so it outlives both
+      // our own reduced-motion durations and the device setting.
+      ReduceMotion.Never
+    );
+  };
+
+  useAnimatedReaction(
+    () => ({ pressed: pressedSV.value, holding: rippleHoldSV.value }),
+    ({ pressed, holding }) => {
+      // Also runs on registration, with everything already at rest -- there's
+      // nothing to fade then.
+      if (pressed === 1 || holding === 1 || rippleAlpha.value === 0) return;
+
+      rippleAlpha.value = withTiming(0, {
+        duration: rippleFadeOutDuration,
+        reduceMotion: reanimatedReduceMotion,
+      });
+    },
+    [rippleFadeOutDuration, reanimatedReduceMotion]
+  );
+
+  const rippleStyle = useAnimatedStyle(() => ({
+    opacity: rippleAlpha.value,
+    transform: [{ scale: rippleScale.value }],
+  }));
+
   // Remember the last drawn glyph so the reveal-mask can finish collapsing
   // when `selected` flips back to false. Computed via the "derive state
   // during render" pattern (https://react.dev/reference/react/useState#storing-information-from-previous-renders)
@@ -264,21 +367,27 @@ const Checkbox = ({
           rest.onHoverOut?.(e);
         },
         onPressIn: (e: GestureResponderEvent) => {
+          startPressRipple();
           rest.onPressIn?.(e);
         },
         onPressOut: (e: GestureResponderEvent) => {
+          pressedSV.value = 0;
           rest.onPressOut?.(e);
         },
       }
     : null;
 
-  // Losing the handlers means the matching hover-out never arrives, so the
-  // state would otherwise linger.
+  // Losing the handlers means the matching hover-out or press-out never
+  // arrives, so the state would otherwise linger.
   React.useEffect(() => {
     if (isInteractive) return;
 
     setHovered(false);
-  }, [isInteractive]);
+    pressedSV.value = 0;
+    rippleHoldSV.value = 0;
+    rippleAlpha.value = 0;
+    rippleScale.value = RIPPLE_START_SCALE;
+  }, [isInteractive, pressedSV, rippleHoldSV, rippleAlpha, rippleScale]);
 
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';
@@ -300,12 +409,15 @@ const Checkbox = ({
   return (
     <TouchableRipple
       {...rest}
-      borderless
       centered
       onPress={onPress}
       onFocus={handleFocus}
       onBlur={handleBlur}
       {...interactionHandlers}
+      // Keeps the platform press circular for a caller that hands it back
+      // with `rippleColor` or `underlayColor`.
+      borderless
+      {...platformPressOverride}
       disabled={disabled}
       {...accessibilityProps}
       testID={testID}
@@ -321,6 +433,17 @@ const Checkbox = ({
           testID={testID ? `${testID}-state-layer` : undefined}
           style={[styles.stateLayer, stateLayerStyle]}
         />
+        {ownsPress ? (
+          <Animated.View
+            pointerEvents="none"
+            testID={testID ? `${testID}-ripple` : undefined}
+            style={[
+              styles.stateLayer,
+              { backgroundColor: pressRipple.color },
+              rippleStyle,
+            ]}
+          />
+        ) : null}
         {focused && !disabled ? (
           <View
             pointerEvents="none"
