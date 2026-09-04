@@ -168,7 +168,7 @@ describe('Switch focus state', () => {
       <Switch value onValueChange={jest.fn()} testID="switch" />
     );
 
-    expect(animatedStyle('switch-handle')).toMatchObject({
+    expect(animatedStyle('switch-handle-fill')).toMatchObject({
       backgroundColor: defaultThemes.light.colors.primaryContainer,
     });
   });
@@ -238,6 +238,30 @@ describe('Switch operability', () => {
     await render(<Switch value onValueChange={jest.fn()} />);
 
     expect(screen.getByRole('switch')).toHaveProp('focusable', true);
+  });
+});
+
+describe('Switch press feedback', () => {
+  it('grows the handle to the pressed size and back on release', async () => {
+    await render(<Switch value onValueChange={jest.fn()} testID="switch" />);
+
+    await fireEvent(screen.getByTestId('switch'), 'pressIn');
+    await jest.runAllTimersAsync();
+
+    // MD3 grows the handle to 28dp while pressed, from a 24dp selected resting
+    // size. This has to be immediate -- a delay swallows short taps.
+    expect(animatedStyle('switch-handle')).toMatchObject({
+      width: 28,
+      height: 28,
+    });
+
+    await fireEvent(screen.getByTestId('switch'), 'pressOut');
+    await jest.runAllTimersAsync();
+
+    expect(animatedStyle('switch-handle')).toMatchObject({
+      width: 24,
+      height: 24,
+    });
   });
 });
 
