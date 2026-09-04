@@ -8,15 +8,8 @@ import { render, screen } from '../../../test-utils';
 import { LightTheme } from '../../../theme/schemes';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
-import { getCardCoverStyle } from '../../Card/utils';
 
 const styles = StyleSheet.create({
-  customCoverRadius: {
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 8,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 2,
-  },
   contentStyle: {
     flexDirection: 'column-reverse',
   },
@@ -329,6 +322,9 @@ describe('Card types', () => {
 
         {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
         <Card header={<View />} leading={() => <View />} />
+
+        {/* @ts-expect-error: Cover placement metadata is not public. */}
+        <Card.Cover source={{ uri: 'cover' }} index={0} total={1} />
       </>
     );
 
@@ -337,18 +333,117 @@ describe('Card types', () => {
 });
 
 describe('CardCover', () => {
-  it('renders with custom border radius', async () => {
+  it('uses the documented full-width default size', async () => {
     await render(
       <Card.Cover
         source={{ uri: 'https://picsum.photos/700' }}
         testID="card-cover"
-        style={styles.customCoverRadius}
       />
     );
 
-    expect(screen.getByTestId('card-cover')).toHaveStyle(
-      styles.customCoverRadius
+    expect(screen.getByTestId('card-cover')).toHaveStyle({
+      width: '100%',
+      height: 195,
+    });
+  });
+
+  it('uses an aspect ratio instead of the default height', async () => {
+    await render(
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="responsive-cover"
+        style={{ aspectRatio: 16 / 9 }}
+      />
     );
+
+    const cover = screen.getByTestId('responsive-cover');
+
+    expect(cover).toHaveStyle({ width: '100%', aspectRatio: 16 / 9 });
+    expect(cover).not.toHaveStyle({ height: 195 });
+  });
+
+  it('exposes supplied semantics for an informative image', async () => {
+    await render(
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="informative-cover"
+        accessible
+        accessibilityRole="image"
+        accessibilityLabel="Snow-covered mountains"
+      />
+    );
+
+    expect(screen.getByRole('image')).toBe(
+      screen.getByLabelText('Snow-covered mountains')
+    );
+  });
+
+  it('preserves explicit decorative image semantics', async () => {
+    await render(
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="decorative-cover"
+        accessible={false}
+        aria-hidden
+      />
+    );
+
+    const cover = screen.getByTestId('decorative-cover', {
+      includeHiddenElements: true,
+    });
+
+    expect(cover).toHaveProp('accessible', false);
+    expect(cover).toHaveProp('aria-hidden', true);
+    expect(screen.queryByRole('image')).not.toBeOnTheScreen();
+  });
+
+  it('applies consumer image styles after the defaults', async () => {
+    await render(
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="styled-cover"
+        style={[
+          { width: 320, height: 180, opacity: 0.8 },
+          { height: 200, borderRadius: 6 },
+        ]}
+      />
+    );
+
+    expect(screen.getByTestId('styled-cover')).toHaveStyle({
+      width: 320,
+      height: 200,
+      opacity: 0.8,
+      borderRadius: 6,
+    });
+  });
+
+  it('uses the Card clipping shape for edge media without double rounding', async () => {
+    await render(
+      <Card
+        testID="shaped-card"
+        borderTopLeftRadius={4}
+        borderTopRightRadius={8}
+        borderBottomRightRadius={16}
+        borderBottomLeftRadius={20}
+        media={
+          <Card.Cover
+            source={{ uri: 'https://picsum.photos/700' }}
+            testID="edge-cover"
+          />
+        }
+      />
+    );
+
+    expect(screen.getByTestId('shaped-card-visual')).toHaveStyle({
+      overflow: 'hidden',
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 16,
+      borderBottomLeftRadius: 20,
+    });
+    expect(screen.getByTestId('edge-cover')).not.toHaveStyle({
+      borderRadius: getTheme().shapes.corner.medium,
+    });
   });
 });
 
@@ -478,25 +573,5 @@ describe('CardActions', () => {
     expect(screen.getByTestId('custom-action')).not.toHaveStyle({
       marginLeft: 8,
     });
-  });
-});
-
-describe('getCardCoverStyle - border radius', () => {
-  it('should return custom border radius', () => {
-    expect(
-      getCardCoverStyle({
-        theme: LightTheme,
-        borderRadiusStyles: styles.customCoverRadius,
-      })
-    ).toMatchObject(styles.customCoverRadius);
-  });
-
-  it('should return correct border radius based on roundness, for theme version 3', () => {
-    expect(
-      getCardCoverStyle({
-        theme: LightTheme,
-        borderRadiusStyles: {},
-      })
-    ).toMatchObject({ borderRadius: LightTheme.shapes.corner.medium });
   });
 });
