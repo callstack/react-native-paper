@@ -25,7 +25,6 @@ The following props now accept animated styles returned from `useAnimatedStyle`.
 - `Searchbar`: `style`
 - `Snackbar`: `style`
 - `Surface`: `style`
-- `ToggleButton`: `style`
 
 So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate these components instead of the React Native `Animated` API.
 
@@ -278,4 +277,32 @@ const theme = {
   theme={theme}
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
+```
+
+### ToggleButton
+
+`ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
+icon-only toggle, use `IconButton` with the `selected` prop. For a set of
+mutually exclusive options, use `SegmentedButtons`.
+
+```tsx
+// Before (v5)
+<ToggleButton.Group value={value} onValueChange={setValue}>
+  <ToggleButton icon="format-bold" value="bold" />
+  <ToggleButton icon="format-italic" value="italic" />
+</ToggleButton.Group>
+
+// After (v6)
+<>
+  <IconButton
+    icon="format-bold"
+    selected={value === 'bold'}
+    onPress={() => setValue('bold')}
+  />
+  <IconButton
+    icon="format-italic"
+    selected={value === 'italic'}
+    onPress={() => setValue('italic')}
+  />
+</>
 ```
