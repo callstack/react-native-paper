@@ -124,7 +124,7 @@ const ToggleButton = ({
                 context.onValueChange(!checked ? value : null);
               }
             }}
-            size={size}
+            iconSize={size}
             aria-label={ariaLabel}
             aria-disabled={disabled}
             aria-selected={checked}

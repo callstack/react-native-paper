@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -17,7 +16,15 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  $Omit<React.ComponentProps<typeof IconButton>, keyof TextInputAccessoryProps>;
+  $Omit<
+    React.ComponentProps<typeof IconButton>,
+    keyof TextInputAccessoryProps | 'size'
+  > & {
+    /**
+     * Size of the icon.
+     */
+    size?: number;
+  };
 
 /**
  * A component to render a leading / trailing icon in the TextInput
@@ -69,8 +76,6 @@ const TextInputIcon = ({
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
 
-  const iconSize = size ?? ACCESSORY_SIZE;
-
   const color = getIconColor({
     theme,
     iconColor,
@@ -86,7 +91,7 @@ const TextInputIcon = ({
         {...rest}
         icon={icon}
         iconColor={color}
-        size={iconSize}
+        iconSize={size}
         style={[styles.icon, style]}
         onPress={onPressHandler}
       />

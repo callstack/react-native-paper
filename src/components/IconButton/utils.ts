@@ -1,149 +1,200 @@
 import type { ColorValue } from 'react-native';
 
+import { IconButtonTokens } from './tokens';
+import type { ColorSet, Mode, Shape, Size, Width } from './tokens';
 import { tokens } from '../../theme/tokens';
+import { resolveCornerRadius } from '../../theme/utils/shape';
+import type { ShapeToken } from '../../theme/utils/shape';
 import type { InternalTheme } from '../../types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
-
-type BaseProps = {
-  theme: InternalTheme;
-  isMode: (mode: IconButtonMode) => boolean;
-  disabled?: boolean;
-  selected?: boolean;
+export type IconButtonColors = {
+  iconColor: ColorValue;
+  iconOpacity: number;
+  backgroundColor: ColorValue | undefined;
+  backgroundOpacity: number;
+  borderColor: ColorValue;
+  borderWidth: number;
 };
 
-const getBackgroundColor = ({
-  theme,
-  isMode,
-  disabled,
-  selected,
-  customContainerColor,
-}: BaseProps & { customContainerColor?: ColorValue }) => {
-  if (disabled) {
-    if (isMode('contained') || isMode('contained-tonal')) {
-      return theme.colors.onSurface;
-    }
-  }
-
-  if (typeof customContainerColor !== 'undefined') {
-    return customContainerColor;
-  }
-
-  if (isMode('contained')) {
-    if (selected) {
-      return theme.colors.primary;
-    }
-    return theme.colors.surfaceVariant;
-  }
-
-  if (isMode('contained-tonal')) {
-    if (selected) {
-      return theme.colors.secondaryContainer;
-    }
-    return theme.colors.surfaceVariant;
-  }
-
-  if (isMode('outlined')) {
-    if (selected) {
-      return theme.colors.inverseSurface;
-    }
-  }
-
-  return undefined;
+export type IconButtonDimensions = {
+  width: number;
+  height: number;
+  iconSize: number;
+  outlineWidth: number;
+  restingRadius: number;
+  pressedRadius: number;
 };
 
-const getIconColor = ({
-  theme,
-  isMode,
-  disabled,
-  selected,
-  customIconColor,
-}: BaseProps & { customIconColor?: ColorValue }) => {
-  if (disabled) {
-    return theme.colors.onSurface;
+const colorSetFor = (mode: Mode, selected: boolean | undefined): ColorSet => {
+  if (selected === true) {
+    return IconButtonTokens.modes[mode].selected;
   }
-
-  if (typeof customIconColor !== 'undefined') {
-    return customIconColor;
+  if (selected === false) {
+    return IconButtonTokens.modes[mode].unselected;
   }
-
-  if (isMode('contained')) {
-    if (selected) {
-      return theme.colors.onPrimary;
-    }
-    return theme.colors.primary;
-  }
-
-  if (isMode('contained-tonal')) {
-    if (selected) {
-      return theme.colors.onSecondaryContainer;
-    }
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (isMode('outlined')) {
-    if (selected) {
-      return theme.colors.inverseOnSurface;
-    }
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (selected) {
-    return theme.colors.primary;
-  }
-  return theme.colors.onSurfaceVariant;
+  return IconButtonTokens.modes[mode].default;
 };
 
+const hasDisabledContainer = (
+  mode: Mode,
+  selected: boolean | undefined
+): boolean => {
+  if (mode === 'filled' || mode === 'tonal') {
+    return true;
+  }
+  return mode === 'outlined' && selected === true;
+};
+
+/**
+ * Resolve container, icon, and outline colors for an icon button.
+ *
+ * `selected` is a tri-state: `undefined` is the default (non-toggle)
+ * appearance; `true`/`false` are the toggle-ON / toggle-OFF color sets.
+ */
 export const getIconButtonColor = ({
   theme,
   disabled,
-  mode,
+  mode = 'standard',
   selected,
   customIconColor,
   customContainerColor,
+  outlineWidth = 0,
 }: {
   theme: InternalTheme;
   disabled?: boolean;
+  mode?: Mode;
   selected?: boolean;
-  mode?: IconButtonMode;
   customIconColor?: ColorValue;
   customContainerColor?: ColorValue;
-}) => {
-  const isMode = (modeToCompare: IconButtonMode) => {
-    return mode === modeToCompare;
-  };
-
-  const baseIconColorProps = {
-    theme,
-    isMode,
-    disabled,
-    selected,
-  };
-
-  const iconColor = getIconColor({
-    ...baseIconColorProps,
-    customIconColor,
-  });
-
+  outlineWidth?: number;
+}): IconButtonColors => {
   const iconOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+  const usesDisabledContainer =
+    Boolean(disabled) && hasDisabledContainer(mode, selected);
 
-  const backgroundColor = getBackgroundColor({
-    ...baseIconColorProps,
-    customContainerColor,
-  });
+  if (usesDisabledContainer) {
+    return {
+      iconColor:
+        customIconColor ?? theme.colors[IconButtonTokens.disabled.icon],
+      iconOpacity,
+      backgroundColor: theme.colors[IconButtonTokens.disabled.container],
+      backgroundOpacity: IconButtonTokens.disabled.containerOpacity,
+      borderColor: theme.colors[IconButtonTokens.disabled.outline],
+      borderWidth: 0,
+    };
+  }
 
-  const backgroundOpacity =
-    disabled && (isMode('contained') || isMode('contained-tonal'))
-      ? stateOpacity.disabled
-      : stateOpacity.enabled;
+  if (disabled) {
+    const set = colorSetFor(mode, selected);
+    return {
+      iconColor:
+        customIconColor ?? theme.colors[IconButtonTokens.disabled.icon],
+      iconOpacity,
+      backgroundColor: customContainerColor,
+      backgroundOpacity: stateOpacity.enabled,
+      borderColor:
+        theme.colors[set.outline ?? IconButtonTokens.disabled.outline],
+      borderWidth: set.outline ? outlineWidth : 0,
+    };
+  }
+
+  const set = colorSetFor(mode, selected);
+  const backgroundColor =
+    customContainerColor ??
+    (set.container ? theme.colors[set.container] : undefined);
 
   return {
-    iconColor,
+    iconColor: customIconColor ?? theme.colors[set.icon],
     iconOpacity,
     backgroundColor,
-    borderColor: theme.colors.outlineVariant,
-    backgroundOpacity,
+    backgroundOpacity: stateOpacity.enabled,
+    borderColor: theme.colors[set.outline ?? 'outlineVariant'],
+    borderWidth: set.outline ? outlineWidth : 0,
   };
+};
+
+/**
+ * Resting container shape. Toggle-ON inverts round↔square; pressed uses
+ * the shared pressed shape (same for round and square).
+ */
+export const resolveShapeToken = ({
+  size = 'small',
+  shape = 'round',
+  selected,
+  pressed = false,
+}: {
+  size?: Size;
+  shape?: Shape;
+  selected?: boolean;
+  pressed?: boolean;
+}): ShapeToken => {
+  const spec = IconButtonTokens.sizes[size];
+  if (pressed) {
+    return spec.pressedShape;
+  }
+  const inverted = selected === true;
+  if (shape === 'round') {
+    return inverted ? spec.squareShape : 'full';
+  }
+  return inverted ? 'full' : spec.squareShape;
+};
+
+export const getDimensions = ({
+  theme,
+  size = 'small',
+  width = 'default',
+  shape = 'round',
+  selected,
+  iconSize,
+}: {
+  theme: InternalTheme;
+  size?: Size;
+  width?: Width;
+  shape?: Shape;
+  selected?: boolean;
+  iconSize?: number;
+}): IconButtonDimensions => {
+  const spec = IconButtonTokens.sizes[size];
+  const padding = spec.widths[width];
+  const resolvedIcon = iconSize ?? spec.icon;
+  const height = spec.containerHeight;
+  const containerWidth = resolvedIcon + padding.leading + padding.trailing;
+
+  const restingToken = resolveShapeToken({
+    size,
+    shape,
+    selected,
+    pressed: false,
+  });
+  const pressedToken = resolveShapeToken({
+    size,
+    shape,
+    selected,
+    pressed: true,
+  });
+
+  const roundRadius = height / 2;
+  const resolveRadius = (token: ShapeToken) =>
+    token === 'full' ? roundRadius : resolveCornerRadius(theme, token);
+
+  return {
+    width: containerWidth,
+    height,
+    iconSize: resolvedIcon,
+    outlineWidth: spec.outlineWidth,
+    restingRadius: resolveRadius(restingToken),
+    pressedRadius: resolveRadius(pressedToken),
+  };
+};
+
+export const getHitSlop = (width: number, height: number) => {
+  const min = IconButtonTokens.minTouchTarget;
+  const extraX = Math.max(0, (min - width) / 2);
+  const extraY = Math.max(0, (min - height) / 2);
+  if (extraX === 0 && extraY === 0) {
+    return undefined;
+  }
+  return { top: extraY, bottom: extraY, left: extraX, right: extraX };
 };
