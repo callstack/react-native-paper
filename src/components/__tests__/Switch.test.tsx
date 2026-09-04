@@ -115,6 +115,21 @@ describe('Switch focus state', () => {
     });
   });
 
+  it('clears the focus state when the switch stops being interactive', async () => {
+    const view = await render(
+      <Switch value onValueChange={jest.fn()} testID="switch" />
+    );
+
+    await fireEvent(screen.getByTestId('switch'), 'focus');
+    await jest.runAllTimersAsync();
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
+
+    await view.rerender(<Switch value disabled testID="switch" />);
+    await jest.runAllTimersAsync();
+
+    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
+  });
+
   it('paints the focus handle color when selected and focused', async () => {
     await renderAndFocus(
       <Switch value onValueChange={jest.fn()} testID="switch" />
