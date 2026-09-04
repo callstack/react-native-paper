@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, ScrollView, StyleSheet } from 'react-native';
 
 import {
   Avatar,
   Button,
   Card,
-  Chip,
   IconButton,
   Text,
   useTheme,
@@ -14,139 +13,143 @@ import {
 import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Mode = 'elevated' | 'outlined' | 'contained';
-
 const CardExample = () => {
   const { colors } = useTheme();
-  const [selectedMode, setSelectedMode] = React.useState<Mode>('elevated');
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
-  const modes: Mode[] = ['elevated', 'outlined', 'contained'];
-
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      <View style={styles.preference}>
-        {modes.map((mode) => (
-          <Chip
-            key={mode}
-            selected={selectedMode === mode}
-            mode="outlined"
-            onPress={() => setSelectedMode(mode)}
-            style={styles.chip}
-          >
-            {mode}
-          </Chip>
-        ))}
-      </View>
       <ScrollView
         style={[styles.container, { backgroundColor: colors?.background }]}
         contentContainerStyle={styles.content}
       >
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/wrecked-ship.jpg')}
-          />
-          <Card.Title title="Abandoned Ship" />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              The Abandoned Ship is a wrecked ship located on Route 108 in
-              Hoenn, originally being a ship named the S.S. Cactus. The second
-              part of the ship can only be accessed by using Dive and contains
-              the Scanner.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/bridge.jpg')} />
-          <Card.Title
-            title="Title variant"
-            subtitle="Subtitle variant"
-            titleVariant="headlineMedium"
-            subtitleVariant="bodyLarge"
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a card using title and subtitle with specified variants.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/forest.jpg')} />
-          <Card.Actions>
-            <Button onPress={() => {}}>Share</Button>
-            <Button onPress={() => {}}>Explore</Button>
-          </Card.Actions>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Title
-            title="Berries that are trimmed at the end"
-            subtitle="Omega Ruby"
-            left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
-            right={(props: any) => (
-              <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
-            )}
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              Dotted around the Hoenn region, you will find loamy soil, many of
-              which are housing berries. Once you have picked the berries, then
-              you have the ability to use that loamy soil to grow your own
-              berries. These can be any berry and will require attention to get
-              the best crop.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/restaurant-1.jpg')}
-          />
-          <Card.Title title="Custom Button styles" />
-          <Card.Actions>
-            <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
-              onPress={() => {}}
-            >
-              Share
-            </Button>
-            <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
-              onPress={() => {}}
-            >
-              Explore
-            </Button>
-          </Card.Actions>
-        </Card>
         <Card
           style={styles.card}
-          mode={selectedMode}
+          media={
+            <Card.Cover
+              source={require('../../assets/images/wrecked-ship.jpg')}
+            />
+          }
+          title="Abandoned Ship"
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                The Abandoned Ship is a wrecked ship located on Route 108 in
+                Hoenn, originally being a ship named the S.S. Cactus. The second
+                part of the ship can only be accessed by using Dive and contains
+                the Scanner.
+              </Text>
+            </Card.Content>
+          }
+        />
+        <Card
+          style={styles.card}
+          media={
+            <Card.Cover source={require('../../assets/images/bridge.jpg')} />
+          }
+          header={
+            <Card.Title
+              title="Title variant"
+              subtitle="Subtitle variant"
+              titleVariant="headlineMedium"
+              subtitleVariant="bodyLarge"
+            />
+          }
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                This is a card using title and subtitle with specified variants.
+              </Text>
+            </Card.Content>
+          }
+        />
+        <Card
+          style={styles.card}
+          media={
+            <Card.Cover source={require('../../assets/images/forest.jpg')} />
+          }
+          actions={
+            <Card.Actions>
+              <Button onPress={() => {}}>Share</Button>
+              <Button onPress={() => {}}>Explore</Button>
+            </Card.Actions>
+          }
+        />
+        <Card
+          style={styles.card}
+          title="Berries that are trimmed at the end"
+          subtitle="Omega Ruby"
+          leading={(props) => <Avatar.Icon {...props} icon="folder" />}
+          trailing={(props) => (
+            <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
+          )}
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                Dotted around the Hoenn region, you will find loamy soil, many
+                of which are housing berries. Once you have picked the berries,
+                then you have the ability to use that loamy soil to grow your
+                own berries. These can be any berry and will require attention
+                to get the best crop.
+              </Text>
+            </Card.Content>
+          }
+        />
+        <Card
+          style={styles.card}
+          media={
+            <Card.Cover
+              source={require('../../assets/images/restaurant-1.jpg')}
+            />
+          }
+          title="Custom Button styles"
+          actions={
+            <Card.Actions>
+              <Button
+                theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+                onPress={() => {}}
+              >
+                Share
+              </Button>
+              <Button
+                theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+                onPress={() => {}}
+              >
+                Explore
+              </Button>
+            </Card.Actions>
+          }
+        />
+        <Card
+          style={styles.card}
           theme={{ shapes: { corner: { medium: 24 } } }}
-        >
-          <Card.Title
-            title="Custom border radius"
-            subtitle="... for card and cover"
-          />
-          <Card.Cover
-            source={require('../../assets/images/artist-2.jpg')}
-            style={styles.customCoverRadius}
-          />
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/strawberries.jpg')}
-          />
-          <Card.Title
-            title="Just Strawberries"
-            subtitle="... and only Strawberries"
-            right={(props: any) => (
-              <IconButton
-                {...props}
-                icon={isSelected ? 'heart' : 'heart-outline'}
-                onPress={() => setIsSelected(!isSelected)}
-              />
-            )}
-          />
-        </Card>
+          media={
+            <Card.Cover
+              source={require('../../assets/images/artist-2.jpg')}
+              style={styles.customCoverRadius}
+            />
+          }
+          title="Custom border radius"
+          subtitle="... for card and cover"
+        />
+        <Card
+          style={styles.card}
+          media={
+            <Card.Cover
+              source={require('../../assets/images/strawberries.jpg')}
+            />
+          }
+          title="Just Strawberries"
+          subtitle="... and only Strawberries"
+          trailing={(props) => (
+            <IconButton
+              {...props}
+              icon={isSelected ? 'heart' : 'heart-outline'}
+              onPress={() => setIsSelected(!isSelected)}
+            />
+          )}
+        />
         <Card
           style={styles.card}
           onPress={() => {
@@ -154,16 +157,18 @@ const CardExample = () => {
               ? alert('The Chameleon is Pressed')
               : Alert.alert('The Chameleon is Pressed');
           }}
-          mode={selectedMode}
-        >
-          <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
-          <Card.Title title="Pressable Chameleon" />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a pressable chameleon. If you press me, I will alert.
-            </Text>
-          </Card.Content>
-        </Card>
+          media={
+            <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
+          }
+          title="Pressable Chameleon"
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                This is a pressable chameleon. If you press me, I will alert.
+              </Text>
+            </Card.Content>
+          }
+        />
         <Card
           style={styles.card}
           onLongPress={() => {
@@ -171,37 +176,36 @@ const CardExample = () => {
               ? alert('The City is Long Pressed')
               : Alert.alert('The City is Long Pressed');
           }}
-          mode={selectedMode}
-        >
-          <Card.Cover source={require('../../assets/images/city.jpg')} />
-          <Card.Title
-            title="Long Pressable City"
-            left={(props) => <Avatar.Icon {...props} icon="city" />}
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a long press only city. If you long press me, I will
-              alert.
-            </Text>
-          </Card.Content>
-        </Card>
+          media={
+            <Card.Cover source={require('../../assets/images/city.jpg')} />
+          }
+          title="Long Pressable City"
+          leading={(props) => <Avatar.Icon {...props} icon="city" />}
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                This is a long press only city. If you long press me, I will
+                alert.
+              </Text>
+            </Card.Content>
+          }
+        />
         <Card
           style={styles.card}
           onPress={() => {
             preferences?.toggleTheme();
           }}
-          mode={selectedMode}
-        >
-          <Card.Title
-            title="Pressable Theme Change"
-            left={(props) => <Avatar.Icon {...props} icon="format-paint" />}
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is pressable card. If you press me, I will switch the theme.
-            </Text>
-          </Card.Content>
-        </Card>
+          title="Pressable Theme Change"
+          leading={(props) => <Avatar.Icon {...props} icon="format-paint" />}
+          content={
+            <Card.Content>
+              <Text variant="bodyMedium">
+                This is pressable card. If you press me, I will switch the
+                theme.
+              </Text>
+            </Card.Content>
+          }
+        />
       </ScrollView>
     </ScreenWrapper>
   );
@@ -218,15 +222,6 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 4,
-  },
-  chip: {
-    margin: 4,
-  },
-  preference: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
   },
   customCoverRadius: {
     borderTopLeftRadius: 0,

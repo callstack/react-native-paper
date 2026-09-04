@@ -2,8 +2,6 @@ import type { ViewStyle } from 'react-native';
 
 import type { InternalTheme } from '../../theme/types';
 
-type CardMode = 'elevated' | 'outlined' | 'contained';
-
 type BorderRadiusStyles = Pick<
   ViewStyle,
   Extract<keyof ViewStyle, `border${string}Radius`>
@@ -29,46 +27,5 @@ export const getCardCoverStyle = ({
 
   return {
     borderRadius: theme.shapes.corner.medium,
-  };
-};
-
-const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.outline;
-};
-
-const getBackgroundColor = ({
-  theme,
-  isMode,
-}: {
-  theme: InternalTheme;
-  isMode: (mode: CardMode) => boolean;
-}) => {
-  const { colors } = theme;
-  if (isMode('contained')) {
-    return colors.surfaceVariant;
-  }
-  if (isMode('outlined')) {
-    return colors.surface;
-  }
-  return undefined;
-};
-
-export const getCardColors = ({
-  theme,
-  mode,
-}: {
-  theme: InternalTheme;
-  mode: CardMode;
-}) => {
-  const isMode = (modeToCompare: CardMode) => {
-    return mode === modeToCompare;
-  };
-
-  return {
-    backgroundColor: getBackgroundColor({
-      theme,
-      isMode,
-    }),
-    borderColor: getBorderColor({ theme }),
   };
 };

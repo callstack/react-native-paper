@@ -32,9 +32,9 @@ export type Props = ImageProps & {
  * import { Card } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
- *   </Card>
+ *   <Card
+ *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+ *   />
  * );
  *
  * export default MyComponent;

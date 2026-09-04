@@ -7,48 +7,76 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
-
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
+import type { Props as CardTitleProps } from './CardTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../theme/types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
-type OutlinedCardProps = {
-  mode: 'outlined';
-  elevation?: never;
-};
-
-type ElevatedCardProps = {
-  mode?: 'elevated';
-  elevation?: Elevation;
-};
-
-type ContainedCardProps = {
-  mode?: 'contained';
-  elevation?: never;
-};
-
-type Mode = 'elevated' | 'outlined' | 'contained';
-
-export type Props = Omit<ViewProps, 'style'> & {
+type ConvenienceHeaderProps = {
   /**
-   * Mode of the Card.
-   * - `elevated` - Card with elevation.
-   * - `contained` - Card without outline and elevation @supported Available in v5.x with theme version 3
-   * - `outlined` - Card with an outline.
+   * Header title.
    */
-  mode?: Mode;
+  title?: React.ReactNode;
   /**
-   * Content of the `Card`.
+   * Header subtitle.
    */
-  children: React.ReactNode;
+  subtitle?: React.ReactNode;
+  /**
+   * Render slot displayed before the title and subtitle.
+   */
+  leading?: CardTitleProps['left'];
+  /**
+   * Render slot displayed after the title and subtitle.
+   */
+  trailing?: CardTitleProps['right'];
+  /**
+   * A fully custom header cannot be combined with convenience header props.
+   */
+  header?: never;
+};
+
+type CustomHeaderProps = {
+  /**
+   * Fully custom header content.
+   */
+  header: React.ReactNode;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  title?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  subtitle?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  leading?: never;
+  /**
+   * Unavailable when a custom header is supplied.
+   */
+  trailing?: never;
+};
+
+type CardBaseProps = Omit<ViewProps, 'children' | 'style'> & {
+  /**
+   * Media rendered at the start of the Card.
+   */
+  media?: React.ReactNode;
+  /**
+   * Main Card content.
+   */
+  content?: React.ReactNode;
+  /**
+   * Actions rendered at the end of the Card.
+   */
+  actions?: React.ReactNode;
   /**
    * Function to execute on long press.
    */
@@ -74,10 +102,6 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   disabled?: boolean;
   /**
-   * Changes Card shadow and background on iOS and Android.
-   */
-  elevation?: Elevation;
-  /**
    * Style of card's inner content.
    */
   contentStyle?: StyleProp<ViewStyle>;
@@ -100,29 +124,34 @@ export type Props = Omit<ViewProps, 'style'> & {
   ref?: React.Ref<View>;
 };
 
+export type Props = CardBaseProps &
+  (ConvenienceHeaderProps | CustomHeaderProps);
+
 /**
- * A card is a sheet of material that serves as an entry point to more detailed information.
+ * A filled Card groups related media, header content, body content, and actions.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Avatar, Button, Card, Text } from 'react-native-paper';
  *
- * const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+ * const Leading = props => <Avatar.Icon {...props} icon="folder" />
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
- *     <Card.Content>
+ *   <Card
+ *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+ *     title="Card Title"
+ *     subtitle="Card Subtitle"
+ *     leading={Leading}
+ *     content={<Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
- *     </Card.Content>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
- *     <Card.Actions>
+ *     </Card.Content>}
+ *     actions={<Card.Actions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     </Card.Actions>
- *   </Card>
+ *     </Card.Actions>}
+ *   />
  * );
  *
  * export default MyComponent;
@@ -130,14 +159,19 @@ export type Props = Omit<ViewProps, 'style'> & {
  */
 
 const Card = ({
-  elevation: cardElevation = 1,
   delayLongPress,
   onPress,
   onLongPress,
   onPressOut,
   onPressIn,
-  mode: cardMode = 'elevated',
-  children,
+  media,
+  header,
+  title,
+  subtitle,
+  leading,
+  trailing,
+  content: cardContent,
+  actions,
   style,
   contentStyle,
   theme: themeOverrides,
@@ -146,15 +180,8 @@ const Card = ({
   disabled,
   ref,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
-  const isMode = React.useCallback(
-    (modeToCompare: Mode) => {
-      return cardMode === modeToCompare;
-    },
-    [cardMode]
-  );
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -163,40 +190,24 @@ const Card = ({
     onPressOut,
   });
 
-  const [pressed, setPressed] = React.useState(false);
-  const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
-
-  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    onPressIn?.(e);
-
-    if (isMode('elevated')) {
-      setPressed(true);
-    }
-  });
-
-  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    onPressOut?.(e);
-
-    if (isMode('elevated')) {
-      setPressed(false);
-    }
-  });
-
-  const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
-    theme,
-    mode: cardMode,
-  });
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-  const { borderColor = themedBorderColor } = flattenedStyles;
-
   const borderRadius = theme.shapes.corner.medium;
+  const hasConvenienceHeader =
+    title != null || subtitle != null || leading != null || trailing != null;
 
   const content = (
     <View style={[styles.innerContainer, contentStyle]} testID={testID}>
-      {children}
+      {media}
+      {header ??
+        (hasConvenienceHeader ? (
+          <CardTitle
+            title={title}
+            subtitle={subtitle}
+            left={leading}
+            right={trailing}
+          />
+        ) : null)}
+      {cardContent}
+      {actions}
     </View>
   );
 
@@ -204,26 +215,13 @@ const Card = ({
     <Surface
       ref={ref}
       borderRadius={borderRadius}
-      backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={[{ borderColor }, style]}
+      backgroundColor={theme.colors.surfaceVariant}
+      style={style}
       theme={theme}
-      elevation={elevation}
-      testID={hasPassedTouchHandler ? undefined : testID}
+      elevation={0}
+      testID={`${testID}-container`}
       {...rest}
     >
-      {isMode('outlined') && (
-        <View
-          pointerEvents="none"
-          style={[
-            {
-              borderColor,
-            },
-            styles.outline,
-            { borderRadius },
-          ]}
-        />
-      )}
-
       {hasPassedTouchHandler ? (
         <Pressable
           accessible={accessible}
@@ -232,9 +230,8 @@ const Card = ({
           delayLongPress={delayLongPress}
           onLongPress={onLongPress}
           onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-          testID={testID}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
         >
           {content}
         </Pressable>
@@ -259,13 +256,6 @@ Card.Title = CardTitle;
 const styles = StyleSheet.create({
   innerContainer: {
     flexShrink: 1,
-  },
-  outline: {
-    borderWidth: 1,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    zIndex: 2,
   },
 });
 
