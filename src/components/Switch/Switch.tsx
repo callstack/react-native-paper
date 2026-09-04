@@ -469,7 +469,10 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
         ]}
       />
 
-      <Animated.View style={[styles.handle, anchorStyle, handleAnimatedStyle]}>
+      <Animated.View
+        testID={testID ? `${testID}-handle` : undefined}
+        style={[styles.handle, anchorStyle, handleAnimatedStyle]}
+      >
         {/* Disabled-only: opaque `surface` backdrop. The tinted fill above
             composites over it, reproducing the native math avoiding the PlatformColor alpha limitation. */}
         {isDisabled ? (
@@ -481,7 +484,7 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
           />
         ) : null}
         <Animated.View
-          testID={testID ? `${testID}-handle` : undefined}
+          testID={testID ? `${testID}-handle-fill` : undefined}
           style={[
             styles.handleFill,
             { opacity: handleOpacity },
