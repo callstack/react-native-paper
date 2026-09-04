@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   StyleProp,
@@ -18,6 +18,8 @@ import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 type ConvenienceHeaderProps = {
   /**
@@ -190,6 +192,14 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
      */
     onPressOut?: (e: GestureResponderEvent) => void;
     /**
+     * Function called when the pointer starts hovering over an actionable Card.
+     */
+    onHoverIn?: TouchableRippleProps['onHoverIn'];
+    /**
+     * Function called when the pointer stops hovering over an actionable Card.
+     */
+    onHoverOut?: TouchableRippleProps['onHoverOut'];
+    /**
      * The number of milliseconds a user must touch the element before executing `onLongPress`.
      */
     delayLongPress?: number;
@@ -207,15 +217,21 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
      */
     theme?: ThemeProp;
     /**
-     * Pass down testID from card props to touchable
+     * Test ID for the interaction node when the Card is actionable, or the
+     * content node when it is neutral. The shell and clipped visual region use
+     * `${testID}-container` and `${testID}-visual` respectively.
      */
     testID?: string;
     /**
-     * Pass down accessible from card props to touchable
+     * Whether the Card's semantic target is an accessibility element.
      */
     accessible?: boolean;
     /**
-     * Reference to the card container.
+     * Reference to the actionable Card interaction node.
+     */
+    touchableRef?: React.Ref<View>;
+    /**
+     * Reference to the outer Card shell.
      */
     ref?: React.Ref<View>;
   };
@@ -228,6 +244,10 @@ export type Props = CardBaseProps &
  * A Card groups related media, header content, body content, and actions.
  * Use the `filled` (default), `elevated`, or `outlined` variant to select its
  * Material 3 emphasis.
+ *
+ * A Card with an interaction handler represents one action. It receives button
+ * semantics by default and must not contain independent controls in `actions`.
+ * Use a neutral Card when its actions provide their own interaction targets.
  *
  * ## Usage
  * ```js
@@ -280,6 +300,50 @@ const Card = ({
   testID = 'card',
   accessible,
   disabled,
+  accessibilityActions,
+  role,
+  accessibilityRole,
+  'aria-label': ariaLabel,
+  accessibilityLabel,
+  accessibilityHint,
+  accessibilityState,
+  accessibilityValue,
+  'aria-busy': ariaBusy,
+  'aria-checked': ariaChecked,
+  'aria-disabled': ariaDisabled,
+  'aria-expanded': ariaExpanded,
+  'aria-hidden': ariaHidden,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-live': ariaLive,
+  'aria-modal': ariaModal,
+  'aria-selected': ariaSelected,
+  'aria-valuemax': ariaValueMax,
+  'aria-valuemin': ariaValueMin,
+  'aria-valuenow': ariaValueNow,
+  'aria-valuetext': ariaValueText,
+  accessibilityLabelledBy,
+  accessibilityLiveRegion,
+  accessibilityElementsHidden,
+  accessibilityViewIsModal,
+  accessibilityIgnoresInvertColors,
+  accessibilityLanguage,
+  accessibilityShowsLargeContentViewer,
+  accessibilityLargeContentTitle,
+  accessibilityRespondsToUserInteraction,
+  importantForAccessibility,
+  screenReaderFocusable,
+  onAccessibilityAction,
+  onAccessibilityEscape,
+  onAccessibilityTap,
+  onMagicTap,
+  focusable,
+  tabIndex,
+  hitSlop,
+  onFocus,
+  onBlur,
+  onHoverIn,
+  onHoverOut,
+  touchableRef,
   borderRadius,
   borderBottomEndRadius,
   borderBottomLeftRadius,
@@ -299,11 +363,15 @@ const Card = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
+  const isDisabled = Boolean(
+    disabled || ariaDisabled || accessibilityState?.disabled
+  );
+
   const visuals = resolveCardVisuals({
     theme,
     variant: cardVariant,
     elevation: customElevation,
-    disabled,
+    disabled: isDisabled,
   });
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -312,6 +380,23 @@ const Card = ({
     onPressIn,
     onPressOut,
   });
+  const hasWarnedAboutActions = React.useRef(false);
+  const hasActions =
+    actions !== null && actions !== undefined && actions !== false;
+
+  React.useEffect(() => {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      hasPassedTouchHandler &&
+      hasActions &&
+      !hasWarnedAboutActions.current
+    ) {
+      console.warn(
+        'An actionable Card cannot contain actions. Remove the Card interaction handlers or move the independent actions outside the Card.'
+      );
+      hasWarnedAboutActions.current = true;
+    }
+  }, [hasActions, hasPassedTouchHandler]);
 
   const shapeStyle = {
     borderRadius: borderRadius ?? visuals.shape,
@@ -333,7 +418,10 @@ const Card = ({
     title != null || subtitle != null || leading != null || trailing != null;
 
   const content = (
-    <View style={[styles.content, contentStyle]} testID={testID}>
+    <View
+      style={[styles.content, contentStyle]}
+      testID={hasPassedTouchHandler ? undefined : testID}
+    >
       {media}
       {header ??
         (hasConvenienceHeader ? (
@@ -349,6 +437,62 @@ const Card = ({
     </View>
   );
 
+  const actionableRole =
+    role ?? (accessibilityRole === undefined ? 'button' : undefined);
+  const accessibilityProps = {
+    accessible,
+    accessibilityActions,
+    role,
+    accessibilityRole,
+    'aria-label': ariaLabel,
+    accessibilityLabel,
+    accessibilityHint,
+    accessibilityState,
+    accessibilityValue,
+    'aria-busy': ariaBusy,
+    'aria-checked': ariaChecked,
+    'aria-disabled': ariaDisabled,
+    'aria-expanded': ariaExpanded,
+    'aria-hidden': ariaHidden,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-live': ariaLive,
+    'aria-modal': ariaModal,
+    'aria-selected': ariaSelected,
+    'aria-valuemax': ariaValueMax,
+    'aria-valuemin': ariaValueMin,
+    'aria-valuenow': ariaValueNow,
+    'aria-valuetext': ariaValueText,
+    accessibilityLabelledBy,
+    accessibilityLiveRegion,
+    accessibilityElementsHidden,
+    accessibilityViewIsModal,
+    accessibilityIgnoresInvertColors,
+    accessibilityLanguage,
+    accessibilityShowsLargeContentViewer,
+    accessibilityLargeContentTitle,
+    accessibilityRespondsToUserInteraction,
+    importantForAccessibility,
+    screenReaderFocusable,
+    onAccessibilityAction,
+    onAccessibilityEscape,
+    onAccessibilityTap,
+    onMagicTap,
+  };
+  const actionableAccessibilityProps = {
+    ...accessibilityProps,
+    role: actionableRole,
+    'aria-disabled': isDisabled,
+    accessibilityActions: isDisabled ? undefined : accessibilityActions,
+    onAccessibilityAction: isDisabled ? undefined : onAccessibilityAction,
+    onAccessibilityEscape: isDisabled ? undefined : onAccessibilityEscape,
+    onAccessibilityTap: isDisabled ? undefined : onAccessibilityTap,
+    onMagicTap: isDisabled ? undefined : onMagicTap,
+  };
+  const neutralAccessibilityProps = {
+    ...accessibilityProps,
+    'aria-disabled': isDisabled || ariaDisabled,
+  };
+
   return (
     <Surface
       ref={ref}
@@ -358,6 +502,12 @@ const Card = ({
       theme={theme}
       elevation={visuals.elevation}
       testID={`${testID}-container`}
+      {...(!hasPassedTouchHandler && neutralAccessibilityProps)}
+      onFocus={!hasPassedTouchHandler ? onFocus : undefined}
+      onBlur={!hasPassedTouchHandler ? onBlur : undefined}
+      focusable={!hasPassedTouchHandler ? focusable : undefined}
+      tabIndex={!hasPassedTouchHandler ? tabIndex : undefined}
+      hitSlop={!hasPassedTouchHandler ? hitSlop : undefined}
       {...rest}
     >
       <View
@@ -395,18 +545,30 @@ const Card = ({
           ]}
         />
         {hasPassedTouchHandler ? (
-          <Pressable
-            accessible={accessible}
+          <TouchableRipple
+            {...actionableAccessibilityProps}
+            ref={touchableRef}
+            testID={testID}
+            borderless={false}
+            style={shapeStyle}
+            theme={theme}
+            focusable={isDisabled ? false : focusable}
+            tabIndex={isDisabled ? -1 : tabIndex}
+            hitSlop={hitSlop}
             unstable_pressDelay={0}
-            disabled={disabled}
+            disabled={isDisabled}
             delayLongPress={delayLongPress}
-            onLongPress={onLongPress}
-            onPress={onPress}
-            onPressIn={onPressIn}
-            onPressOut={onPressOut}
+            onLongPress={isDisabled ? undefined : onLongPress}
+            onPress={isDisabled ? undefined : onPress}
+            onPressIn={isDisabled ? undefined : onPressIn}
+            onPressOut={isDisabled ? undefined : onPressOut}
+            onFocus={isDisabled ? undefined : onFocus}
+            onBlur={isDisabled ? undefined : onBlur}
+            onHoverIn={isDisabled ? undefined : onHoverIn}
+            onHoverOut={isDisabled ? undefined : onHoverOut}
           >
             {content}
-          </Pressable>
+          </TouchableRipple>
         ) : (
           content
         )}
