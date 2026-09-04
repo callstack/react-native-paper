@@ -3,13 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { describe, expect, it } from '@jest/globals';
 
 import { getTheme } from '../../core/theming';
-import { render } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
-import { getAccordionColors } from '../List/utils';
 
 const styles = StyleSheet.create({
   coloring: {
@@ -120,39 +119,117 @@ describe('ListAccordion', () => {
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );
   });
-});
 
-describe('getAccordionColors - description color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      descriptionColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-});
+  it('keeps the title on onSurface when collapsed', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
 
-describe('getAccordionColors - title text color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      titleTextColor: getTheme().colors.onSurface,
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onSurface,
     });
   });
 
-  it('should return primary color if it is expanded', () => {
+  it('keeps the title on onSurface when expanded', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" expanded>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onSurface,
+    });
+  });
+
+  it('hits the container heights without measuring the description', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" testID="list-accordion">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      minHeight: 56,
+      paddingVertical: 8,
+    });
+  });
+
+  it('keeps the two line container height once a description is present', async () => {
+    await render(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        testID="list-accordion"
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      minHeight: 72,
+      paddingVertical: 8,
+    });
+
+    await fireEvent(
+      screen.getByText('Describes the expandable list item'),
+      'textLayout',
+      { nativeEvent: { lines: [{}, {}] } }
+    );
+
+    expect(screen.getByTestId('list-accordion')).toHaveStyle({
+      minHeight: 72,
+      paddingVertical: 12,
+    });
+  });
+
+  it('uses the expand token for the chevron', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
     expect(
-      getAccordionColors({
-        theme: getTheme(),
-        isExpanded: true,
-      })
-    ).toMatchObject({
-      titleTextColor: getTheme().colors?.primary,
+      screen.getByText('chevron-down', { includeHiddenElements: true })
+    ).toHaveStyle({
+      color: getTheme().colors.onSurface,
+    });
+  });
+
+  it('applies the theme override to title and description typography', async () => {
+    await render(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        theme={{
+          fonts: { bodyLarge: { fontSize: 99 }, bodyMedium: { fontSize: 77 } },
+        }}
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({ fontSize: 99 });
+    expect(screen.getByText('Describes the expandable list item')).toHaveStyle({
+      fontSize: 77,
+    });
+  });
+
+  it('renders a selected accordion on the primary container', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" description="Supporting" selected>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(screen.getByText('Accordion item 1')).toHaveStyle({
+      color: getTheme().colors.onPrimaryContainer,
+    });
+    expect(screen.getByText('Supporting')).toHaveStyle({
+      color: getTheme().colors.onPrimaryContainer,
     });
   });
 });

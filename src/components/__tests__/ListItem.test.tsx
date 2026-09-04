@@ -5,11 +5,13 @@ import { Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { getTheme } from '../../core/theming';
+import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
+import ListImage from '../List/ListImage';
 import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
@@ -21,6 +23,14 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingLeft: 0,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+  },
+  image: {
+    width: 56,
+    height: 56,
   },
 });
 
@@ -174,4 +184,247 @@ it('renders list item with custom content style', async () => {
   );
 
   expect(screen.getByTestId('list-item-content')).toHaveStyle(styles.content);
+});
+
+it('hits the one line container height without measuring the description', async () => {
+  await render(<ListItem title="First Item" testID={testID} />);
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+});
+
+it('hits the two and three line container heights without measuring', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 8,
+  });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 12,
+  });
+});
+
+it('leaves a 40dp leading element on the one line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      left={(props) => (
+        <View testID="left-accessory" style={[props.style, styles.avatar]} />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 40 });
+});
+
+it('leaves a 56dp leading image on the two line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => (
+        <View testID="left-accessory" style={[props.style, styles.image]} />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 56 });
+});
+
+it('pads a 64dp leading video to the three line container height', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      left={(props) => (
+        <ListImage
+          variant="video"
+          style={props.style}
+          source={{ uri: 'https://www.someurl.com/apple' }}
+        />
+      )}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('list-image')).toHaveStyle({
+    height: 64,
+    marginVertical: 4,
+  });
+});
+
+it('keeps a 64dp leading video on the same height once the description wraps', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => (
+        <ListImage
+          variant="video"
+          style={props.style}
+          source={{ uri: 'https://www.someurl.com/apple' }}
+        />
+      )}
+      testID={testID}
+    />
+  );
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 12 });
+  expect(screen.getByTestId('list-image')).toHaveStyle({
+    height: 64,
+    marginVertical: 0,
+  });
+});
+
+it('colors a leading List.Icon from the list item context', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<ListIcon icon="folder" />}
+      testID={testID}
+    />
+  );
+
+  expect(
+    screen.getByText('folder', { includeHiddenElements: true })
+  ).toHaveStyle({ color: getTheme().colors.onSurfaceVariant });
+});
+
+it('renders the trailing slot', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      trailing={<Text>Trailing</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Trailing')).toBeOnTheScreen();
+});
+
+it('prefers the typed slots over the left and right render props', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<Text>Leading slot</Text>}
+      trailing={<Text>Trailing slot</Text>}
+      left={() => <Text>Left render prop</Text>}
+      right={() => <Text>Right render prop</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Leading slot')).toBeOnTheScreen();
+  expect(screen.getByText('Trailing slot')).toBeOnTheScreen();
+  expect(screen.queryByText('Left render prop')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Right render prop')).not.toBeOnTheScreen();
+});
+
+it('top aligns the accessories once the description wraps', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => <View testID="left-accessory" style={props.style} />}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'center',
+  });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'flex-start',
+  });
+});
+
+it('applies the theme override to title and description typography', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+      theme={{
+        fonts: { bodyLarge: { fontSize: 99 }, bodyMedium: { fontSize: 77 } },
+      }}
+    />
+  );
+
+  expect(screen.getByText('First Item')).toHaveStyle({ fontSize: 99 });
+  expect(screen.getByText('Item description')).toHaveStyle({ fontSize: 77 });
+});
+
+it('renders an unselected list item on surface colors', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('First Item')).toHaveStyle({
+    color: getTheme().colors.onSurface,
+  });
+  expect(screen.getByText('Item description')).toHaveStyle({
+    color: getTheme().colors.onSurfaceVariant,
+  });
+});
+
+it('renders a selected list item on the primary container', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      selected
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    backgroundColor: getTheme().colors.primaryContainer,
+  });
+  expect(screen.getByText('First Item')).toHaveStyle({
+    color: getTheme().colors.onPrimaryContainer,
+  });
+  expect(screen.getByText('Item description')).toHaveStyle({
+    color: getTheme().colors.onPrimaryContainer,
+  });
 });
