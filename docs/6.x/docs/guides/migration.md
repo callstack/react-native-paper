@@ -312,6 +312,21 @@ This most often shows up where the switch sits inside a row that owns the press:
 </TouchableRipple>
 ```
 
+#### Selected icon color
+
+The icon inside a selected switch now uses `onPrimaryContainer` instead of `primary`, matching the Material Design 3 spec and improving its contrast against the handle. If you theme `Switch` with a partial `theme.colors` override, add `onPrimaryContainer` alongside the roles you already override — omitted roles fall back to the app theme, which would leave the icon in the default palette.
+
+```diff
+ const switchTheme = {
+   colors: {
+     primary: theme.colors.tertiary,
+     onPrimary: theme.colors.onTertiary,
+     primaryContainer: theme.colors.tertiaryContainer,
++    onPrimaryContainer: theme.colors.onTertiaryContainer,
+   },
+ };
+```
+
 #### Touch target height
 
 `Switch` now reserves the 48dp minimum touch target Material Design requires, so it occupies 48dp of height instead of 40dp. Nothing painted changed size — the track is still 52×32 — but rows containing a switch may become slightly taller.
