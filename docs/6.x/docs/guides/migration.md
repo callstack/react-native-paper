@@ -80,6 +80,64 @@ You can specify a `testID` explicitly and use that value to query the component.
 
 ## Components
 
+### Divider
+
+| v5 | v6 |
+| --- | --- |
+| `leftInset` | `startInset` |
+| `bold` | removed, dividers are 1dp thick by default |
+| - | `orientation="vertical"` |
+
+#### Thickness
+
+Dividers are 1dp thick now, which is what the Material Design 3 spec asks for. In v5 the default was `StyleSheet.hairlineWidth`, thinner than 1dp on most screens, and `bold` was the only way to get a full 1dp line. The `bold` prop is gone.
+
+```diff
+- <Divider bold />
++ <Divider />
+```
+
+If you want the hairline back, set it in `style`:
+
+```diff
+- <Divider />
++ <Divider style={{ height: StyleSheet.hairlineWidth }} />
+```
+
+#### Inset
+
+`leftInset` set `marginLeft`, so in RTL the inset stayed on the left instead of moving to the leading edge. Use `startInset` instead. It insets the leading edge and follows the writing direction.
+
+```diff
+- <Divider leftInset />
++ <Divider startInset />
+```
+
+`horizontalInset` works the same as before.
+
+#### Orientation
+
+Dividers can be vertical now. A vertical divider is 1dp wide and stretches to the height of its parent, so the parent has to lay its children out in a row.
+
+```tsx
+<View style={{ flexDirection: 'row' }}>
+  <Text>Lemon</Text>
+  <Divider orientation="vertical" />
+  <Text>Mango</Text>
+</View>
+```
+
+Insets follow the orientation. On a vertical divider, `startInset` insets the top edge, and `horizontalInset` insets the top and bottom edges.
+
+#### Accessibility
+
+Dividers are decorative, so screen readers skip them and they stay out of the focus order. If a divider means something on its own, opt back in:
+
+```diff
+- <Divider />
++ <Divider accessible aria-hidden={false} role="separator" />
+```
+
 ### Appbar
 
 The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
