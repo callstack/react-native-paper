@@ -8,26 +8,66 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import {
+  DEFAULT_SIZE,
+  getAvatarImageSourceKey,
+  resolveAvatarColors,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../types';
 
-const defaultSize = 64;
+export type AvatarImageSourceProps = {
+  size: number;
+  style: { width: number; height: number; borderRadius: number };
+  onError?: ImageProps['onError'];
+  /**
+   * Present when the host received a description through `alt`, `aria-label`
+   * or `accessibilityLabel`. Pass it to your image so it is announced by
+   * assistive technology.
+   */
+  alt?: string;
+  /**
+   * Mirrors `alt`. `react-native-web` fills the rendered `<img alt>` from
+   * `aria-label` only, so pass both to your image.
+   */
+  'aria-label'?: string;
+  /**
+   * `false` when the host received no description, marking the image as
+   * decorative.
+   */
+  accessible?: boolean;
+};
 
 export type AvatarImageSource =
   | ImageSourcePropType
-  | ((props: { size: number }) => React.ReactNode);
+  | ((props: AvatarImageSourceProps) => React.ReactNode);
 
 export type Props = ViewProps & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
-   * Or a function that returns an `Image`.
+   * or a function that returns an image component.
+   * Function sources receive `{ size, style, onError, alt, 'aria-label',
+   * accessible }` matching the host avatar. Apply `style` so the image fills
+   * the circle, forward the accessibility props for assistive technology, and
+   * call `onError` to trigger `fallback`.
    */
   source: AvatarImageSource;
   /**
    * Size of the avatar.
    */
   size?: number;
+  /**
+   * Text describing the image for assistive technology. `aria-label` and
+   * `accessibilityLabel` are treated the same way.
+   */
+  alt?: string;
+  /**
+   * Content shown when the image fails to load.
+   * Receives host `size` so custom content can match the avatar.
+   */
+  fallback?: (props: { size: number }) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
   /**
    * Invoked on load error.
@@ -68,14 +108,45 @@ export type Props = ViewProps & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+ *   <Avatar.Image size={24} source={require('../assets/avatar.png')} alt="Jane Doe" />
  * );
  * export default MyComponent
  * ```
+ *
+ * Pass `alt` to describe the image to assistive technology — `aria-label` and
+ * `accessibilityLabel` work the same way. Avatars without a description are
+ * treated as decorative and skipped by screen readers.
+ *
+ * Show another avatar when the image fails to load:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   source={{ uri: user.avatarUrl }}
+ *   alt="Jane Doe"
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
+ * ```
+ *
+ * Custom image components should apply the host `style`, `onError` and the
+ * accessibility props:
+ * ```js
+ * <Avatar.Image
+ *   size={64}
+ *   alt="Jane Doe"
+ *   source={({ size, style, onError, ...a11y }) => (
+ *     <CustomImage source={{ uri }} style={style} onError={onError} {...a11y} />
+ *   )}
+ *   fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+ * />
+ * ```
  */
 const AvatarImage = ({
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   source,
+  fallback,
+  alt,
+  'aria-label': ariaLabel,
+  accessibilityLabel,
   style,
   onError,
   onLayout,
@@ -87,8 +158,42 @@ const AvatarImage = ({
   testID,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
-  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
+  const theme = useInternalTheme(themeOverrides);
+  const { backgroundColor } = StyleSheet.flatten(style) || {};
+  const { background } = resolveAvatarColors({ theme, backgroundColor });
+  const imageStyle = {
+    width: size,
+    height: size,
+    borderRadius: cornerFull,
+  };
+  const description = alt ?? ariaLabel ?? accessibilityLabel;
+  const imageA11y =
+    description === undefined
+      ? { accessible: false as const }
+      : { alt: description, 'aria-label': description };
+  const sourceKey = getAvatarImageSourceKey(source);
+  const previousSourceKey = React.useRef(sourceKey);
+  const [hasError, setHasError] = React.useState(false);
+
+  if (!Object.is(previousSourceKey.current, sourceKey)) {
+    previousSourceKey.current = sourceKey;
+    if (hasError) {
+      setHasError(false);
+    }
+  }
+
+  const handleError: ImageProps['onError'] = (event) => {
+    setHasError(true);
+    onError?.(event);
+  };
+
+  const showImage = !(hasError && fallback !== undefined);
+
+  const hostA11y = showImage
+    ? { accessible: false, importantForAccessibility: 'no' as const }
+    : description !== undefined
+      ? { accessible: true, 'aria-label': description }
+      : {};
 
   return (
     <View
@@ -96,32 +201,49 @@ const AvatarImage = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: background,
         },
+        styles.container,
         style,
       ]}
+      {...hostA11y}
       {...rest}
     >
-      {typeof source === 'function' && source({ size })}
-      {typeof source !== 'function' && (
+      {showImage && typeof source === 'function'
+        ? source({
+            size,
+            style: imageStyle,
+            onError: handleError,
+            ...imageA11y,
+          })
+        : null}
+      {showImage && typeof source !== 'function' ? (
         <Image
           testID={testID}
           source={source}
-          style={{ width: size, height: size, borderRadius: size / 2 }}
-          onError={onError}
+          style={imageStyle}
+          onError={handleError}
           onLayout={onLayout}
           onLoad={onLoad}
           onLoadEnd={onLoadEnd}
           onLoadStart={onLoadStart}
           onProgress={onProgress}
           accessibilityIgnoresInvertColors
+          {...imageA11y}
         />
-      )}
+      ) : null}
+      {!showImage ? fallback({ size }) : null}
     </View>
   );
 };
 
 AvatarImage.displayName = 'Avatar.Image';
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+});
 
 export default AvatarImage;
