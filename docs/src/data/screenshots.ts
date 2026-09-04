@@ -81,10 +81,10 @@ export const screenshots = {
   'FAB.Group': 'screenshots/fab-group.gif',
   Icon: 'screenshots/icon.png',
   IconButton: {
-    default: 'screenshots/icon-button-1.png',
+    standard: 'screenshots/icon-button-1.png',
+    filled: 'screenshots/icon-button-2.png',
+    tonal: 'screenshots/icon-button-3.png',
     outlined: 'screenshots/icon-button-4.png',
-    contained: 'screenshots/icon-button-2.png',
-    'contained-tonal': 'screenshots/icon-button-3.png',
   },
   'List.Accordion': {
     'with left icon': 'screenshots/list-accordion-1.png',

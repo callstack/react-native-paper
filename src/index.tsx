@@ -106,6 +106,12 @@ export type {
   Size as FABSize,
 } from './components/FAB/tokens';
 export type { Props as IconButtonProps } from './components/IconButton/IconButton';
+export type {
+  Mode as IconButtonMode,
+  Size as IconButtonSize,
+  Width as IconButtonWidth,
+  Shape as IconButtonShape,
+} from './components/IconButton/tokens';
 export type { Props as ListAccordionProps } from './components/List/ListAccordion';
 export type { Props as ListAccordionGroupProps } from './components/List/ListAccordionGroup';
 export type { Props as ListIconProps } from './components/List/ListIcon';
