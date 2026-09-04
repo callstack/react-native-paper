@@ -10,7 +10,6 @@ React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-r
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
-- `Appbar.Action` and `Appbar.BackAction`: `style`
 - `Badge`: `style`
 - `Banner`: `style`
 - `Button`: `style`
@@ -71,10 +70,7 @@ You can use the component's color prop where available, or override the correspo
 
 ### Test IDs
 
-Some hardcoded and generated test IDs have been removed for the following components:
-
-- `Appbar.Header`: `${testID}-root-layer`
-- `Surface`: `surface` and `${testID}-outer-layer`
+The `Surface` test IDs `surface` and `${testID}-outer-layer` have been removed.
 
 You can specify a `testID` explicitly and use that value to query the component.
 
@@ -82,9 +78,54 @@ You can specify a `testID` explicitly and use that value to query the component.
 
 ### Appbar
 
-The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+The Paper 6.x `Appbar` is a major refactor that drops the previous compound component API.
 
-The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+The top-level `style` prop no longer accepts `Animated.Value` or `Animated.AnimatedInterpolation`; it only accepts static styles. The `elevated` prop and `style.elevation` are also removed. Use `isScrolled` to apply the scrolled container treatment.
+
+#### Migrating from the compound API
+
+`Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and `Appbar.BackAction` have been removed. Render one `Appbar` and provide its headline, leading button, and trailing actions as props. The former `mode="medium"` and `mode="large"` values are now `variant="medium-flexible"` and `variant="large-flexible"`; centered content uses `headlineAlignment="center"`.
+
+```tsx
+// Before (v5)
+
+const MyComponent = () => (
+  <Appbar.Header>
+    <Appbar.BackAction onPress={() => {}} />
+    <Appbar.Content title="Inbox" />
+    <Appbar.Action icon="search" onPress={() => {}} />
+    <Appbar.Action icon="dots-vertical" onPress={() => {}} />
+  </Appbar.Header>
+);
+
+// After (v6)
+
+const MyComponent = () => (
+  <Appbar
+    variant="small"
+    headline="Inbox"
+    leadingButton={{ type: 'back', onPress: () => {} }}
+    trailingActions={[
+      {
+        key: 'search',
+        icon: 'magnify',
+        'aria-label': 'Search',
+        onPress: () => {},
+      },
+      {
+        key: 'more',
+        icon: 'dots-vertical',
+        'aria-label': 'More options',
+        onPress: () => {},
+      },
+    ]}
+  />
+);
+```
+
+#### Bottom toolbar support
+
+Material Design 3 drops the bottom bar support contained previously in the `Appbar` scope and moves it to `Toolbars`, hence you can't use the component to construct a bottom bar anymore - for these cases please use the `Toolbar` component.
 
 ### Surface
 

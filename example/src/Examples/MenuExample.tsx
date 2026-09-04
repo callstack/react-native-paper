@@ -50,24 +50,37 @@ const MenuExample = () => {
 
   return (
     <View style={styles.screen}>
-      <Appbar.Header elevated>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Menu" />
-        <Menu
-          visible={_getVisible('menu1')}
-          onDismiss={_toggleMenu('menu1')}
-          anchor={
-            <Appbar.Action icon={MORE_ICON} onPress={_toggleMenu('menu1')} />
-          }
-        >
-          <Menu.Item onPress={() => {}} title="Undo" />
-          <Menu.Item onPress={() => {}} title="Redo" />
-          <Divider style={styles.md3Divider} />
-          <Menu.Item onPress={() => {}} title="Cut" disabled />
-          <Menu.Item onPress={() => {}} title="Copy" disabled />
-          <Menu.Item onPress={() => {}} title="Paste" />
-        </Menu>
-      </Appbar.Header>
+      <Appbar
+        variant="small"
+        headline="Menu"
+        isScrolled
+        leadingButton={{
+          type: 'back',
+          onPress: () => navigation.goBack(),
+        }}
+        trailingActions={[
+          {
+            key: 'more',
+            icon: MORE_ICON,
+            'aria-label': 'More options',
+            onPress: _toggleMenu('menu1'),
+            decorate: (button) => (
+              <Menu
+                visible={_getVisible('menu1')}
+                onDismiss={_toggleMenu('menu1')}
+                anchor={button}
+              >
+                <Menu.Item onPress={() => {}} title="Undo" />
+                <Menu.Item onPress={() => {}} title="Redo" />
+                <Divider style={styles.md3Divider} />
+                <Menu.Item onPress={() => {}} title="Cut" disabled />
+                <Menu.Item onPress={() => {}} title="Copy" disabled />
+                <Menu.Item onPress={() => {}} title="Paste" />
+              </Menu>
+            ),
+          },
+        ]}
+      />
       <ScreenWrapper
         contentContainerStyle={styles.contentContainer}
         style={styles.container}

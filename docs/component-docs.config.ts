@@ -13,6 +13,7 @@ export type Page =
       source: string;
       component?: string;
       props?: string;
+      propsSource?: string;
       title?: string;
     };
 
@@ -33,11 +34,9 @@ type ComponentDocsConfig = {
 const pages = {
   ActivityIndicator: 'ActivityIndicator',
   Appbar: {
-    Appbar: 'Appbar/Appbar',
-    AppbarAction: 'Appbar/AppbarAction',
-    AppbarBackAction: 'Appbar/AppbarBackAction',
-    AppbarContent: 'Appbar/AppbarContent',
-    AppbarHeader: 'Appbar/AppbarHeader',
+    source: 'Appbar/Appbar',
+    component: 'Appbar',
+    propsSource: 'Appbar/types',
   },
   Avatar: {
     AvatarIcon: 'Avatar/AvatarIcon',

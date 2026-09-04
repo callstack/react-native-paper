@@ -2,6 +2,7 @@ export type ComponentPageConfig = {
   source: string;
   component?: string;
   props?: string;
+  propsSource?: string;
   title?: string;
 };
 

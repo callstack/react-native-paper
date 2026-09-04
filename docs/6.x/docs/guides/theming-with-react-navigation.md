@@ -249,24 +249,25 @@ Now that the Context is available at every component, all we need to do is impor
 
 ```js
 import React from 'react';
-import { useTheme, Appbar, TouchableRipple, Switch } from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import { PreferencesContext } from './PreferencesContext';
 
 const Header = ({ scene }) => {
-  const theme = useTheme();
   const { toggleTheme, isThemeDark } = React.useContext(PreferencesContext);
 
   return (
-    <Appbar.Header
-      theme={{
-        colors: {
-          primary: theme?.colors.surface,
+    <Appbar
+      variant="small"
+      headline={scene.route?.name}
+      trailingActions={[
+        {
+          key: 'theme',
+          icon: isThemeDark ? 'weather-sunny' : 'weather-night',
+          'aria-label': 'Toggle color theme',
+          onPress: toggleTheme,
         },
-      }}
-    >
-      <Appbar.Content title={scene.route?.name} />
-      <Switch color={'red'} value={isThemeDark} onValueChange={toggleTheme} />
-    </Appbar.Header>
+      ]}
+    />
   );
 };
 ```

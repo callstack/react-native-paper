@@ -1,192 +1,216 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+
 import type {
-  GestureResponderEvent,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-  ViewProps,
-} from 'react-native';
-
-import { modeTextVariant } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+  AppbarHeadlineAlignment,
+  AppbarHeadlineVariant,
+  Props as AppbarProps,
+} from './types';
+import { APPBAR_HEADLINE_IMAGE_HEIGHT } from './utils';
+import type { Theme, TypescaleKey } from '../../types';
 import Text from '../Typography/Text';
-import type { TextRef } from '../Typography/Text';
 
-type TitleString = {
-  title: string;
-  titleStyle?: StyleProp<TextStyle>;
+type Props = Pick<
+  AppbarProps,
+  | 'contentStyle'
+  | 'headline'
+  | 'headlineImage'
+  | 'headlinePressableProps'
+  | 'headlineProps'
+  | 'onHeadlinePress'
+  | 'subtitle'
+  | 'subtitleProps'
+> & {
+  alignment: AppbarHeadlineAlignment;
+  theme: Theme;
+  variant: AppbarHeadlineVariant;
+  style?: StyleProp<ViewStyle>;
+  testID: string;
 };
 
-type TitleElement = { title: React.ReactNode; titleStyle?: never };
+const headlineVariants: Record<AppbarHeadlineVariant, TypescaleKey> = {
+  small: 'titleLarge',
+  'medium-flexible': 'headlineMedium',
+  'large-flexible': 'displaySmall',
+};
 
-export type Props = $RemoveChildren<typeof View> & {
-  // For `title` and `titleStyle` props their types are duplicated due to the generation of documentation.
-  // Appropriate type for them are either `TitleString` or `TitleElement`, depends on `title` type.
-  /**
-   * Text or component for the title.
-   */
-  title: React.ReactNode;
-  /**
-   * Style for the title, if `title` is a string.
-   */
-  titleStyle?: StyleProp<TextStyle>;
-  /**
-   * Reference for the title.
-   */
-  titleRef?: React.RefObject<TextRef>;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * If true, disable all interactions for this component.
-   */
-  disabled?: boolean;
-  /**
-   * Custom color for the text.
-   */
-  color?: string;
-  /**
-   * Specifies the largest possible scale a title font can reach.
-   */
-  titleMaxFontSizeMultiplier?: number;
-  /**
-   * @internal
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
-  style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-  /**
-   * testID to be used on tests.
-   */
-  testID?: string;
-} & (TitleString | TitleElement);
+const subtitleVariants: Record<AppbarHeadlineVariant, TypescaleKey> = {
+  small: 'labelMedium',
+  'medium-flexible': 'labelLarge',
+  'large-flexible': 'titleMedium',
+};
 
-/**
- * A component used to display a title in an appbar.
- *
- * ## Usage
- * ```js
- * import * as React from 'react';
- * import { Appbar } from 'react-native-paper';
- *
- * const MyComponent = () => (
- *   <Appbar.Header>
- *      <Appbar.Content title="Title" />
- *   </Appbar.Header>
- * );
- *
- * export default MyComponent;
- * ```
- */
+const subtitleSpacing: Record<AppbarHeadlineVariant, number> = {
+  small: 0,
+  'medium-flexible': 4,
+  'large-flexible': 8,
+};
+
 const AppbarContent = ({
-  color: titleColor,
-  onPress,
-  disabled,
+  alignment,
+  contentStyle,
+  headline,
+  headlineImage,
+  headlinePressableProps,
+  headlineProps,
+  onHeadlinePress,
+  subtitle,
+  subtitleProps,
+  testID,
+  theme,
+  variant,
   style,
-  titleRef,
-  titleStyle,
-  title,
-  titleMaxFontSizeMultiplier,
-  mode = 'small',
-  theme: themeOverrides,
-  testID = 'appbar-content',
-  ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme;
+  const headlineVariant = headlineVariants[variant];
+  const subtitleVariant = subtitleVariants[variant];
+  const centered = alignment === 'center';
+  const hasHeadlineImage = variant === 'small' && Boolean(headlineImage);
+  const headlineStyle = React.useMemo(
+    () => [
+      styles.text,
+      centered && styles.centeredText,
+      { color: theme.colors.onSurface },
+      headlineProps?.style,
+    ],
+    [centered, headlineProps?.style, theme.colors.onSurface]
+  );
+  const subtitleStyle = React.useMemo(
+    () => [
+      styles.text,
+      centered && styles.centeredText,
+      { marginTop: subtitleSpacing[variant] },
+      { color: theme.colors.onSurfaceVariant },
+      subtitleProps?.style,
+    ],
+    [centered, subtitleProps?.style, theme.colors.onSurfaceVariant, variant]
+  );
+  const wrapperStyle = React.useMemo(
+    () => [
+      styles.container,
+      variant !== 'small' && styles.flexibleContainer,
+      centered && styles.centeredContainer,
+      style,
+      contentStyle,
+    ],
+    [centered, contentStyle, style, variant]
+  );
 
-  const titleTextColor = titleColor ? titleColor : colors.onSurface;
-
-  const modeContainerStyles = {
-    small: styles.v3DefaultContainer,
-    medium: styles.v3MediumContainer,
-    large: styles.v3LargeContainer,
-    'center-aligned': styles.v3DefaultContainer,
-  };
-
-  const variant = modeTextVariant[mode];
-
-  const contentWrapperProps = {
-    pointerEvents: 'box-none',
-    style: [styles.container, modeContainerStyles[mode], style],
-    testID,
-    ...rest,
-  } satisfies ViewProps;
-
-  const content = (
+  const content = hasHeadlineImage ? (
+    <View
+      testID={`${testID}-headline-image`}
+      aria-hidden
+      style={styles.headlineImage}
+    >
+      {headlineImage}
+    </View>
+  ) : (
     <>
-      {typeof title === 'string' ? (
+      <Text
+        ref={headlineProps?.ref}
+        theme={theme}
+        variant={headlineVariant}
+        numberOfLines={variant === 'small' ? 1 : 2}
+        role="heading"
+        accessible
+        maxFontSizeMultiplier={headlineProps?.maxFontSizeMultiplier}
+        testID={`${testID}-headline-text`}
+        style={headlineStyle}
+      >
+        {headline}
+      </Text>
+      {subtitle ? (
         <Text
-          variant={variant}
-          ref={titleRef}
-          style={[
-            {
-              color: titleTextColor,
-              ...fonts[variant],
-            },
-            titleStyle,
-          ]}
+          variant={subtitleVariant}
+          theme={theme}
           numberOfLines={1}
-          accessible
-          role={onPress ? 'none' : 'heading'}
-          testID={`${testID}-title-text`}
-          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          maxFontSizeMultiplier={subtitleProps?.maxFontSizeMultiplier}
+          testID={`${testID}-subtitle-text`}
+          style={subtitleStyle}
         >
-          {title}
+          {subtitle}
         </Text>
-      ) : (
-        title
-      )}
+      ) : null}
     </>
   );
 
-  if (onPress) {
+  const wrapperProps = {
+    testID,
+    style: wrapperStyle,
+  };
+
+  if (onHeadlinePress) {
+    const {
+      'aria-label': ariaLabel,
+      accessibilityLabel,
+      disabled,
+      ...restHeadlinePressableProps
+    } = headlinePressableProps ?? {};
+
     return (
       <Pressable
+        {...wrapperProps}
+        {...restHeadlinePressableProps}
         role="button"
-        aria-disabled={disabled}
-        onPress={onPress}
+        aria-label={
+          ariaLabel ??
+          accessibilityLabel ??
+          (hasHeadlineImage ? headline : undefined)
+        }
+        aria-disabled={
+          restHeadlinePressableProps['aria-disabled'] ??
+          restHeadlinePressableProps.accessibilityState?.disabled ??
+          disabled
+        }
         disabled={disabled}
-        {...contentWrapperProps}
+        onPress={onHeadlinePress}
       >
         {content}
       </Pressable>
     );
   }
 
-  return <View {...contentWrapperProps}>{content}</View>;
+  return (
+    <View
+      {...wrapperProps}
+      accessible={hasHeadlineImage || undefined}
+      accessibilityLabel={hasHeadlineImage ? headline : undefined}
+      role={hasHeadlineImage ? 'heading' : undefined}
+    >
+      {content}
+    </View>
+  );
 };
-
-AppbarContent.displayName = 'Appbar.Content';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
+    justifyContent: 'center',
+    minWidth: 0,
   },
-  v3DefaultContainer: {
-    paddingHorizontal: 0,
+  flexibleContainer: {
+    flex: 0,
+    flexBasis: 'auto',
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 12,
   },
-  v3MediumContainer: {
-    paddingHorizontal: 0,
-    justifyContent: 'flex-end',
-    paddingBottom: 24,
+  centeredContainer: {
+    alignItems: 'center',
   },
-  v3LargeContainer: {
-    paddingHorizontal: 0,
-    paddingTop: 36,
-    justifyContent: 'flex-end',
-    paddingBottom: 28,
+  text: {
+    alignSelf: 'stretch',
+  },
+  centeredText: {
+    textAlign: 'center',
+  },
+  headlineImage: {
+    height: APPBAR_HEADLINE_IMAGE_HEIGHT,
+    maxWidth: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
 
-export default AppbarContent;
-
-// @component-docs ignore-next-line
-export { AppbarContent };
+export default React.memo(AppbarContent);

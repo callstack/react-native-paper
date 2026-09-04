@@ -1,341 +1,475 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { ColorValue, ViewProps } from 'react-native';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import AppbarButton from './AppbarButton';
 import AppbarContent from './AppbarContent';
+import type { Props } from './types';
 import {
-  getAppbarBackgroundColor,
+  APPBAR_HEADLINE_IMAGE_HEIGHT,
+  APPBAR_ICON_BUTTON_SIZE,
+  APPBAR_SEARCH_MAX_WIDTH,
   getAppbarBorders,
-  modeAppbarHeight,
-  renderAppbarContent,
-  filterAppbarActions,
+  getAppbarHeight,
+  getTrailingActionsWidth,
 } from './utils';
-import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import Searchbar from '../Searchbar';
 import Surface from '../Surface';
 
-const APPBAR_HORIZONTAL_PADDING = 4;
-
-export type AppbarStyle = Omit<ViewStyle, 'elevation'>;
-
-export type Props = Omit<Partial<ViewProps>, 'style'> & {
-  /**
-   * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
-   */
-  dark?: boolean;
-  /**
-   * Content of the `Appbar`.
-   */
-  children: React.ReactNode;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Mode of the Appbar.
-   * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
-   * - `center-aligned` - Appbar with default height and center-aligned title.
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
-  /**
-   * @supported Available in v5.x with theme version 3
-   * Whether Appbar background should have the elevation along with primary color pigment.
-   */
-  elevated?: boolean;
-  /**
-   * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
-   */
-  safeAreaInsets?: {
-    bottom?: number;
-    top?: number;
-    left?: number;
-    right?: number;
-  };
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-  style?: StyleProp<AppbarStyle>;
-};
+const EMPTY_TRAILING_ACTIONS = [] as const;
 
 /**
- * A component to display action items in a bar. It can be placed at the top or bottom.
- * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
- * The bottom bar usually provides access to a drawer and up to four actions.
- *
- * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
+ * A Material Design app bar for displaying a page headline, navigation, and
+ * contextual actions. Appbar supports small, medium flexible, large flexible,
+ * and search variants. Its surface color automatically changes when content
+ * has scrolled, and it accounts for safe-area insets.
  *
  * ## Usage
- * ### Top bar
+ *
+ * ### Small app bar
  * ```js
  * import * as React from 'react';
  * import { Appbar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
- *     <Appbar.BackAction onPress={() => {}} />
- *     <Appbar.Content title="Title" />
- *     <Appbar.Action icon="calendar" onPress={() => {}} />
- *     <Appbar.Action icon="magnify" onPress={() => {}} />
- *   </Appbar.Header>
+ *   <Appbar
+ *     variant="small"
+ *     headline="Inbox"
+ *     leadingButton={{ type: 'back', onPress: () => {} }}
+ *     trailingActions={[
+ *       {
+ *         key: 'search',
+ *         icon: 'magnify',
+ *         'aria-label': 'Search',
+ *         onPress: () => {},
+ *       },
+ *       {
+ *         key: 'more',
+ *         icon: 'dots-vertical',
+ *         'aria-label': 'More options',
+ *         onPress: () => {},
+ *       },
+ *     ]}
+ *   />
  * );
  *
  * export default MyComponent;
  * ```
  *
- * ### Bottom bar
+ * ### Decorated action
  * ```js
- * import * as React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Appbar, FAB, useTheme } from 'react-native-paper';
- * import { useSafeAreaInsets } from 'react-native-safe-area-context';
+ * import { Appbar, Tooltip } from 'react-native-paper';
  *
- * const BOTTOM_APPBAR_HEIGHT = 80;
- * const MEDIUM_FAB_HEIGHT = 56;
- *
- * const MyComponent = () => {
- *   const { bottom } = useSafeAreaInsets();
- *   const theme = useTheme();
- *
- *   return (
- *     <Appbar
- *       style={[
- *         styles.bottom,
- *         {
- *           height: BOTTOM_APPBAR_HEIGHT + bottom,
- *           backgroundColor: theme.colors.surfaceContainer,
- *         },
- *       ]}
- *       safeAreaInsets={{ bottom }}
- *     >
- *       <Appbar.Action icon="archive" onPress={() => {}} />
- *       <Appbar.Action icon="email" onPress={() => {}} />
- *       <Appbar.Action icon="label" onPress={() => {}} />
- *       <Appbar.Action icon="delete" onPress={() => {}} />
- *       <FAB
- *         mode="flat"
- *         size="medium"
- *         icon="plus"
- *         onPress={() => {}}
- *         style={[
- *           styles.fab,
- *           { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
- *         ]}
- *       />
- *     </Appbar>
- *   );
- * };
- *
- * const styles = StyleSheet.create({
- *   bottom: {
- *     backgroundColor: 'aquamarine',
- *     position: 'absolute',
- *     left: 0,
- *     right: 0,
- *     bottom: 0,
- *   },
- *   fab: {
- *     position: 'absolute',
- *     right: 16,
- *   },
- * });
- *
- * export default MyComponent;
+ * <Appbar
+ *   variant="small"
+ *   headline="Files"
+ *   trailingActions={[
+ *     {
+ *       key: 'print',
+ *       icon: 'printer',
+ *       'aria-label': 'Print',
+ *       onPress: () => {},
+ *       decorate: (button) => (
+ *         <Tooltip title="Print shortcut">{button}</Tooltip>
+ *       ),
+ *     },
+ *   ]}
+ * />
  * ```
+ *
+ * ### Flexible app bar
+ * ```js
+ * <Appbar
+ *   variant="large-flexible"
+ *   headline="Photos"
+ *   subtitle="Summer holiday"
+ *   headlineAlignment="center"
+ *   isScrolled={isScrolled}
+ * />
+ * ```
+ *
+ * ### Search app bar
+ * ```js
+ * <Appbar
+ *   variant="search"
+ *   leadingButton={{ type: 'back', onPress: () => {} }}
+ *   searchBar={{
+ *     placeholder: 'Search messages',
+ *     value: query,
+ *     onChangeText: setQuery,
+ *   }}
+ * />
+ * ```
+ *
+ * ## Variants
+ *
+ * | `variant` | Purpose |
+ * | --- | --- |
+ * | `small` | A compact 64dp app bar with a one-line headline. |
+ * | `medium-flexible` | A flexible app bar with a two-line headline and optional subtitle or image. |
+ * | `large-flexible` | A prominent flexible app bar with a two-line headline and optional subtitle or image. |
+ * | `search` | An app bar containing a centered Paper `Searchbar`. |
+ *
+ * ## Main props
+ *
+ * | Prop | Description |
+ * | --- | --- |
+ * | `headline` | Required accessible headline for every non-search variant. |
+ * | `subtitle` | Optional supporting text for written headlines. |
+ * | `headlineAlignment` | Aligns headline content to `leading` (default) or `center`. |
+ * | `headlineImage` | Replaces the visible small headline, or appears above a flexible headline. Images should fit within 32dp height. |
+ * | `onHeadlinePress` | Makes the headline area interactive; use `headlinePressableProps` for its accessibility state. |
+ * | `leadingButton` | A back button (`{ type: 'back' }`) or standard icon-button configuration. Use `decorate` to wrap it with components such as `Tooltip` or `Menu`. |
+ * | `trailingActions` | Standard icon-button configurations, or exactly one `filled`/`tonal` action with optional `wide` width. Every action requires a stable `key` and `aria-label`, and can use `decorate` to wrap its resolved button. |
+ * | `searchBar` | Required for the `search` variant. Accepts Paper `Searchbar` props except `mode`, `elevation`, `showDivider`, and `theme`. |
+ * | `isScrolled` | Uses `surfaceContainer` instead of `surface` when content has scrolled. |
+ * | `safeAreaInsets` | Overrides detected top, left, or right safe-area insets. |
+ * | `statusBarHeight` | Overrides only the automatic top inset. |
+ * | `contentStyle` | Styles the headline and subtitle area. |
+ * | `style` | Styles the app bar and can override its background color. |
+ *
+ * ## Migrating from the compound API
+ *
+ * `Appbar.Header`, `Appbar.Content`, `Appbar.Action`, and
+ * `Appbar.BackAction` have been removed. Render one `Appbar` and provide its
+ * headline, leading button, and trailing actions as props. The former
+ * `mode="medium"` and `mode="large"` values are now
+ * `variant="medium-flexible"` and `variant="large-flexible"`; centered
+ * content uses `headlineAlignment="center"`.
+ *
+ * ## Bottom toolbar support
+ *
+ * Material Design 3 drops the bottom bar support contained previously in the Appbar scope
+ * and moves it to Toolbars, hence you can't use the component to construct a bottom bar
+ * anymore - for these cases please use the Toolbar component.
+ *
+ * @extends View props https://reactnative.dev/docs/view#props
  */
 const Appbar = ({
-  children,
-  dark,
-  style,
-  mode = 'small',
-  elevated = false,
+  contentStyle,
+  headline,
+  headlineAlignment = 'leading',
+  headlineImage,
+  headlinePressableProps,
+  headlineProps,
+  isScrolled = false,
+  leadingButton,
+  onHeadlinePress,
   safeAreaInsets,
+  searchBar,
+  statusBarHeight,
+  style,
+  subtitle,
+  subtitleProps,
+  testID,
   theme: themeOverrides,
+  trailingActions = EMPTY_TRAILING_ACTIONS,
+  variant,
+  ref,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const flattenedStyle = StyleSheet.flatten(style);
-  const { backgroundColor: customBackground, ...restStyle } = (flattenedStyle ||
-    {}) as Exclude<typeof flattenedStyle, number> & {
-    backgroundColor?: ColorValue;
-  };
+  const detectedInsets = useSafeAreaInsets();
+  const { customBackground, restStyle, shapeProps } = React.useMemo(() => {
+    const flattenedStyle = StyleSheet.flatten(style);
+    const resolvedStyle = (flattenedStyle || {}) as Exclude<
+      typeof flattenedStyle,
+      number
+    > & {
+      backgroundColor?: ColorValue;
+    };
+    const { backgroundColor, ...remainingStyle } = resolvedStyle;
 
-  const backgroundColor = getAppbarBackgroundColor(
-    theme,
-    elevated,
-    customBackground
+    return {
+      customBackground: backgroundColor,
+      restStyle: remainingStyle,
+      shapeProps: getAppbarBorders(remainingStyle),
+    };
+  }, [style]);
+  const backgroundColor =
+    customBackground ??
+    (isScrolled ? theme.colors.surfaceContainer : theme.colors.surface);
+  const hasSubtitle = typeof subtitle === 'string' && subtitle.length > 0;
+  const minHeight = getAppbarHeight(variant, hasSubtitle);
+  const topInset = statusBarHeight ?? safeAreaInsets?.top ?? detectedInsets.top;
+  const leftInset = safeAreaInsets?.left ?? detectedInsets.left;
+  const rightInset = safeAreaInsets?.right ?? detectedInsets.right;
+  const horizontalInset = Math.max(leftInset, rightInset);
+  const centered = headlineAlignment === 'center';
+  const sideWidth = Math.max(
+    leadingButton ? APPBAR_ICON_BUTTON_SIZE : 0,
+    getTrailingActionsWidth(trailingActions)
   );
+  const sideStyle = React.useMemo(() => ({ width: sideWidth }), [sideWidth]);
+  const surfaceStyle = React.useMemo(
+    () => ({
+      paddingTop: topInset,
+      paddingHorizontal: horizontalInset,
+    }),
+    [horizontalInset, topInset]
+  );
+  const appbarStyle = React.useMemo(
+    () => [styles.appbar, { backgroundColor, minHeight }, restStyle],
+    [backgroundColor, minHeight, restStyle]
+  );
+  const resolvedSearchInputStyle = React.useMemo(
+    () => [{ color: theme.colors.onSurface }, searchBar?.inputStyle],
+    [searchBar?.inputStyle, theme.colors.onSurface]
+  );
+  const searchBackgroundColor = isScrolled
+    ? theme.colors.surfaceContainerHighest
+    : theme.colors.surfaceContainer;
+  const searchTheme = React.useMemo(
+    () => ({
+      ...theme,
+      colors: {
+        ...theme.colors,
+        surfaceContainerHigh: searchBackgroundColor,
+      },
+    }),
+    [searchBackgroundColor, theme]
+  );
+  const resolvedSearchStyle = React.useMemo(
+    () => [styles.searchBar, searchBar?.style],
+    [searchBar?.style]
+  );
+  const {
+    accessibilityLabel: _accessibilityLabel,
+    accessibilityRole: _accessibilityRole,
+    accessible: _accessible,
+    'aria-label': _ariaLabel,
+    role: _role,
+    ...viewProps
+  } = rest as ViewProps;
 
-  const borderStyles = getAppbarBorders(restStyle);
+  const renderLeadingButton = () =>
+    leadingButton ? (
+      <AppbarButton button={leadingButton} leading theme={theme} />
+    ) : null;
 
-  const isMode = (modeToCompare: AppbarModes) => {
-    return mode === modeToCompare;
+  const renderTrailingActions = () =>
+    trailingActions.map((action) => (
+      <AppbarButton key={action.key} button={action} theme={theme} />
+    ));
+
+  const renderSearchAppbar = () => {
+    if (!searchBar) {
+      return null;
+    }
+
+    const {
+      inputStyle: _searchInputStyle,
+      style: _searchStyle,
+      testID: searchTestID = `${testID}-search`,
+      ...searchProps
+    } = searchBar;
+
+    return (
+      <View style={styles.searchRow}>
+        {renderLeadingButton()}
+        <View testID={`${testID}-search-slot`} style={styles.searchSlot}>
+          <View
+            testID={`${testID}-search-width-limiter`}
+            style={styles.searchWidthLimiter}
+          >
+            <Searchbar
+              {...searchProps}
+              aria-label={searchProps['aria-label'] ?? searchProps.placeholder}
+              inputStyle={resolvedSearchInputStyle}
+              placeholderTextColor={
+                searchProps.placeholderTextColor ??
+                theme.colors.onSurfaceVariant
+              }
+              mode="bar"
+              elevation={0}
+              testID={searchTestID}
+              style={resolvedSearchStyle}
+              theme={searchTheme}
+            />
+          </View>
+        </View>
+        <View style={styles.trailingActions}>{renderTrailingActions()}</View>
+      </View>
+    );
   };
 
-  const isDark = typeof dark === 'boolean' ? dark : false;
-
-  const isCenterAlignedMode = isMode('center-aligned');
-
-  let shouldCenterContent = false;
-  let shouldAddLeftSpacing = false;
-  let shouldAddRightSpacing = false;
-  if (isCenterAlignedMode) {
-    let hasAppbarContent = false;
-    let leftItemsCount = 0;
-    let rightItemsCount = 0;
-
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement<AppbarChildProps>(child)) {
-        const isLeading = child.props.isLeading === true;
-
-        if (child.type === AppbarContent) {
-          hasAppbarContent = true;
-        } else if (isLeading || !hasAppbarContent) {
-          leftItemsCount++;
-        } else {
-          rightItemsCount++;
+  const contentProps =
+    variant !== 'search'
+      ? {
+          alignment: headlineAlignment,
+          contentStyle,
+          headline,
+          headlineImage,
+          headlinePressableProps,
+          headlineProps,
+          onHeadlinePress,
+          subtitle,
+          subtitleProps,
+          testID: `${testID}-content`,
+          theme,
+          variant,
         }
-      }
-    });
+      : null;
 
-    shouldCenterContent =
-      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 3;
-    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
-    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
-  }
+  const renderFlexibleHeadlineImage = () =>
+    headlineImage ? (
+      <View
+        testID={`${testID}-content-headline-image`}
+        aria-hidden
+        importantForAccessibility="no-hide-descendants"
+        style={styles.flexibleHeadlineImage}
+      >
+        {headlineImage}
+      </View>
+    ) : null;
 
-  const spacingStyle = styles.v3Spacing;
+  const renderSmallAppbar = () => {
+    if (!contentProps) {
+      return null;
+    }
 
-  const insets = {
-    paddingBottom: safeAreaInsets?.bottom,
-    paddingTop: safeAreaInsets?.top,
-    paddingLeft: (safeAreaInsets?.left ?? 0) + APPBAR_HORIZONTAL_PADDING,
-    paddingRight: (safeAreaInsets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING,
+    if (centered || headlineImage) {
+      return (
+        <View style={styles.smallRow}>
+          <View style={[styles.side, sideStyle]}>{renderLeadingButton()}</View>
+          <AppbarContent {...contentProps} />
+          <View style={[styles.side, styles.trailingActions, sideStyle]}>
+            {renderTrailingActions()}
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.smallRow}>
+        {renderLeadingButton()}
+        <AppbarContent
+          {...contentProps}
+          style={
+            leadingButton ? styles.headlineWithLeading : styles.headlineLeading
+          }
+        />
+        <View style={styles.trailingActions}>{renderTrailingActions()}</View>
+      </View>
+    );
+  };
+
+  const renderFlexibleAppbar = () => {
+    if (!contentProps) {
+      return null;
+    }
+
+    return (
+      <View style={styles.flexibleContainer}>
+        {headlineImage ? (
+          <View style={styles.controlsRow}>
+            <View style={[styles.side, sideStyle]}>
+              {renderLeadingButton()}
+            </View>
+            {renderFlexibleHeadlineImage()}
+            <View style={[styles.side, styles.trailingActions, sideStyle]}>
+              {renderTrailingActions()}
+            </View>
+          </View>
+        ) : (
+          <View style={styles.controlsRow}>
+            {renderLeadingButton()}
+            <View style={styles.trailingActions}>
+              {renderTrailingActions()}
+            </View>
+          </View>
+        )}
+        <AppbarContent {...contentProps} headlineImage={undefined} />
+      </View>
+    );
   };
 
   return (
     <Surface
-      {...borderStyles}
+      {...shapeProps}
       backgroundColor={backgroundColor}
-      style={[
-        {
-          height: modeAppbarHeight[mode],
-        },
-        styles.appbar,
-        insets,
-        restStyle,
-      ]}
-      elevation={elevated ? 2 : 0}
-      {...rest}
+      ref={ref}
+      testID={`${testID}-root-layer`}
+      elevation={0}
       theme={theme}
+      style={surfaceStyle}
     >
-      {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(isMode('small') || isMode('center-aligned')) && (
-        <>
-          {/* Render only the back action at first place  */}
-          {renderAppbarContent({
-            children,
-            isDark,
-            theme,
-            renderOnly: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-          {/* Render the rest of the content except the back action */}
-          {renderAppbarContent({
-            // Filter appbar actions - first leading icons, then trailing icons
-            children: [
-              ...filterAppbarActions(children, true),
-              ...filterAppbarActions(children),
-            ],
-            isDark,
-            theme,
-            renderExcept: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-        </>
-      )}
-      {(isMode('medium') || isMode('large')) && (
-        <View
-          style={[
-            styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
-          ]}
-        >
-          {/* Appbar top row with controls */}
-          <View style={styles.controlsRow}>
-            {/* Left side of row container, can contain AppbarBackAction or AppbarAction if it's leading icon  */}
-            {renderAppbarContent({
-              children,
-              isDark,
-              renderOnly: ['Appbar.BackAction'],
-              mode,
-            })}
-            {renderAppbarContent({
-              children: filterAppbarActions(children, true),
-              isDark,
-              renderOnly: ['Appbar.Action'],
-              mode,
-            })}
-            {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
-            <View style={styles.rightActionControls}>
-              {renderAppbarContent({
-                children: filterAppbarActions(children),
-                isDark,
-                renderExcept: [
-                  'Appbar',
-                  'Appbar.BackAction',
-                  'Appbar.Content',
-                  'Appbar.Header',
-                ],
-                mode,
-              })}
-            </View>
-          </View>
-          {renderAppbarContent({
-            children,
-            isDark,
-            renderOnly: ['Appbar.Content'],
-            mode,
-          })}
-        </View>
-      )}
-      {shouldAddRightSpacing ? <View style={spacingStyle} /> : null}
+      <View {...viewProps} testID={testID} style={appbarStyle}>
+        {variant === 'search'
+          ? renderSearchAppbar()
+          : variant === 'small'
+            ? renderSmallAppbar()
+            : renderFlexibleAppbar()}
+      </View>
     </Surface>
   );
 };
 
 const styles = StyleSheet.create({
   appbar: {
+    paddingHorizontal: 4,
+  },
+  smallRow: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  v3Spacing: {
-    width: 52,
+  searchRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchSlot: {
+    flex: 1,
+    marginHorizontal: 8,
+    alignItems: 'center',
+  },
+  searchBar: {
+    width: '100%',
+  },
+  searchWidthLimiter: {
+    width: '100%',
+    maxWidth: APPBAR_SEARCH_MAX_WIDTH,
+  },
+  flexibleContainer: {
+    flex: 1,
   },
   controlsRow: {
-    flex: 1,
+    minHeight: 56,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
-  rightActionControls: {
+  trailingActions: {
     flexDirection: 'row',
-    flex: 1,
     justifyContent: 'flex-end',
   },
-  columnContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    paddingTop: 8,
+  side: {
+    flexDirection: 'row',
   },
-  centerAlignedContainer: {
-    paddingTop: 0,
+  headlineLeading: {
+    marginStart: 12,
+  },
+  headlineWithLeading: {
+    marginStart: 4,
+  },
+  flexibleHeadlineImage: {
+    flex: 1,
+    height: APPBAR_HEADLINE_IMAGE_HEIGHT,
+    maxWidth: '100%',
+    marginTop: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
 
-export default Appbar;
+const MemoizedAppbar = React.memo(Appbar);
+
+export default MemoizedAppbar;
 
 // @component-docs ignore-next-line
-export { Appbar };
+export { MemoizedAppbar as Appbar };

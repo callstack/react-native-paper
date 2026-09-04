@@ -44,21 +44,44 @@ const TooltipExample = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
-        <Appbar.Header elevated>
-          <Tooltip title="Go back">
-            <Appbar.BackAction onPress={() => navigation.goBack()} />
-          </Tooltip>
-          <Appbar.Content title="Tooltips" />
-          <Tooltip title="Print ⌘ + P">
-            <Appbar.Action icon="printer" onPress={() => {}} />
-          </Tooltip>
-          <Tooltip title="Search">
-            <Appbar.Action icon="magnify" onPress={() => {}} />
-          </Tooltip>
-          <Tooltip title="More options">
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
-          </Tooltip>
-        </Appbar.Header>
+        <Appbar
+          variant="small"
+          headline="Tooltips"
+          isScrolled
+          leadingButton={{
+            type: 'back',
+            'aria-label': 'Go back',
+            onPress: () => navigation.goBack(),
+            decorate: (button) => <Tooltip title="Go back">{button}</Tooltip>,
+          }}
+          trailingActions={[
+            {
+              key: 'print',
+              icon: 'printer',
+              'aria-label': 'Print',
+              onPress: () => {},
+              decorate: (button) => (
+                <Tooltip title="Print ⌘ + P">{button}</Tooltip>
+              ),
+            },
+            {
+              key: 'search',
+              icon: 'magnify',
+              'aria-label': 'Search',
+              onPress: () => {},
+              decorate: (button) => <Tooltip title="Search">{button}</Tooltip>,
+            },
+            {
+              key: 'more',
+              icon: MORE_ICON,
+              'aria-label': 'More options',
+              onPress: () => {},
+              decorate: (button) => (
+                <Tooltip title="More options">{button}</Tooltip>
+              ),
+            },
+          ]}
+        />
       ),
     });
   });

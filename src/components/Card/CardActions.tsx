@@ -15,6 +15,10 @@ export type Props = ViewProps & {
   theme?: ThemeProp;
 };
 
+const defaultContainerStyle: ViewStyle = {
+  justifyContent: 'flex-end',
+};
+
 /**
  * A component to show a list of actions inside a Card.
  *
@@ -38,11 +42,7 @@ export type Props = ViewProps & {
 const CardActions = ({ theme, style, children, ...rest }: Props) => {
   useInternalTheme(theme);
 
-  const containerStyle = [
-    styles.container,
-    { justifyContent: 'flex-end' } satisfies ViewStyle,
-    style,
-  ];
+  const containerStyle = [styles.container, defaultContainerStyle, style];
 
   return (
     <View {...rest} style={containerStyle}>

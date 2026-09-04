@@ -448,24 +448,47 @@ export const createComponentParser = (tsconfigPath: string) => {
   );
   const checker = program.getTypeChecker();
 
-  return (sourceRootDir: string, page: ComponentPageConfig): ComponentDoc => {
-    const sourcePath = path.join(sourceRootDir, `${page.source}.tsx`);
-    const sourceFile = program.getSourceFile(sourcePath);
+  const getSourceFile = (
+    sourceRootDir: string,
+    source: string,
+    extensions: readonly string[]
+  ) => {
+    const sourceBasePath = path.join(sourceRootDir, source);
 
-    if (!sourceFile || !fs.existsSync(sourcePath)) {
-      return fail(
-        sourcePath,
-        'source file was not found in the TypeScript program'
-      );
+    for (const extension of extensions) {
+      const sourcePath = `${sourceBasePath}${extension}`;
+      const sourceFile = program.getSourceFile(sourcePath);
+
+      if (sourceFile && fs.existsSync(sourcePath)) {
+        return { sourceFile, sourcePath };
+      }
     }
+
+    return fail(
+      sourceBasePath,
+      'source file was not found in the TypeScript program'
+    );
+  };
+
+  return (sourceRootDir: string, page: ComponentPageConfig): ComponentDoc => {
+    const { sourceFile, sourcePath } = getSourceFile(
+      sourceRootDir,
+      page.source,
+      ['.tsx']
+    );
+    const propsSource = page.propsSource
+      ? getSourceFile(sourceRootDir, page.propsSource, ['.ts', '.tsx'])
+      : { sourceFile, sourcePath };
 
     const componentName = page.component ?? getDefaultExportName(sourceFile);
     const component = findComponentDeclaration(sourceFile, componentName);
     const propsType = findPropsType(
-      sourceFile,
+      propsSource.sourceFile,
       page.props ?? DEFAULT_PROPS_TYPE
     );
-    validatePropsType(sourceFile, propsType);
+    if (!page.propsSource) {
+      validatePropsType(sourceFile, propsType);
+    }
     const defaults = getParameterDefaults(
       checker,
       sourceFile,
@@ -474,7 +497,7 @@ export const createComponentParser = (tsconfigPath: string) => {
     const props = getProps(
       checker,
       sourceRootDir,
-      sourceFile,
+      propsSource.sourceFile,
       propsType,
       defaults
     );
