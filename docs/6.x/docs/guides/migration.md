@@ -285,3 +285,7 @@ const theme = {
 #### Interaction state colors
 
 Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover and focus fill a flat 40dp layer with `primary` when selected and `onSurface` when not, a press ripples inside that same 40dp layer in the inverted color, and an error checkbox stays on `error` throughout. `color` and `uncheckedColor` replace the role they already override on the box, so a custom checkbox no longer picks up a `primary` halo. The platform ripple is turned off to make room for it; passing an explicit `rippleColor` or `underlayColor` turns it back on in that color and disables the built-in press instead. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+
+#### Touch target height
+
+`Checkbox` now reserves the 48dp minimum touch target, so it occupies 48dp instead of 40dp. Nothing painted changed size, but rows containing a checkbox may become slightly taller.

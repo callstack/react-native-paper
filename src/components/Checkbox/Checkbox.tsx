@@ -86,6 +86,7 @@ const {
   containerRadius: CONTAINER_RADIUS,
   outlineWidth: OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
+  touchTargetSize: TOUCH_TARGET_SIZE,
 } = CheckboxTokens;
 
 const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
@@ -194,11 +195,12 @@ const Checkbox = ({
     interaction: 'pressed',
   });
 
-  // The platform press paints the wrong thing: it tints with a neutral role,
-  // and on web its hover overlay doubles up with the layer. Android also
-  // refuses a `PlatformColor`, which is what the dynamic theme resolves the
-  // roles to. An explicit `rippleColor` or `underlayColor` asks for that
-  // platform press instead, so leave it alone.
+  // The platform press paints the wrong thing: it covers the whole 48dp target
+  // instead of the 40dp state layer, tints with a neutral role, and on web its
+  // hover overlay doubles up with the layer. Android also refuses a
+  // `PlatformColor`, which is what the dynamic theme resolves the roles to.
+  // An explicit `rippleColor` or `underlayColor` asks for that platform press
+  // instead, so leave it alone.
   const platformOwnsPress =
     rest.rippleColor != null || rest.underlayColor != null;
 
@@ -501,9 +503,9 @@ const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
   tapTarget: {
-    width: STATE_LAYER_SIZE,
-    height: STATE_LAYER_SIZE,
-    borderRadius: STATE_LAYER_SIZE / 2,
+    width: TOUCH_TARGET_SIZE,
+    height: TOUCH_TARGET_SIZE,
+    borderRadius: TOUCH_TARGET_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },

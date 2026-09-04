@@ -436,3 +436,19 @@ describe('Checkbox without a press handler', () => {
     });
   });
 });
+describe('Checkbox touch target', () => {
+  it('meets the 48dp minimum without resizing the state layer', async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+    );
+
+    expect(screen.getByRole('checkbox')).toHaveStyle({
+      width: 48,
+      height: 48,
+    });
+    expect(screen.getByTestId('checkbox-state-layer')).toHaveStyle({
+      width: 40,
+      height: 40,
+    });
+  });
+});
