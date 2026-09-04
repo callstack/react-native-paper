@@ -4,7 +4,7 @@ import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { defaultThemes, ThemeProvider } from './theming';
+import { defaultThemes, safeMerge, ThemeProvider } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -36,11 +36,14 @@ const PaperProvider = (props: Props) => {
       ? 0
       : (props.theme?.animation?.scale ?? 1);
 
+    // Deep merge so a partial theme extends the defaults instead of replacing
+    // them. `safeMerge` is the same helper `useInternalTheme` uses for the
+    // per-component `theme` prop, which keeps both levels consistent.
+    const merged = safeMerge(base, props.theme);
+
     return {
-      ...base,
-      ...props.theme,
-      colors: { ...base.colors, ...props.theme?.colors },
-      animation: { ...props.theme?.animation, scale },
+      ...merged,
+      animation: { ...merged.animation, scale },
     };
   }, [colorScheme, props.theme, resolvedReduceMotion]);
 
