@@ -1,12 +1,38 @@
-import { Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
+import {
+  getAnimatedStyle,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
+
+const AnimatedSearchbar = () => {
+  const opacity = useSharedValue(0);
+  const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
+
+  return (
+    <>
+      <Pressable
+        testID="animate-search-bar"
+        onPress={() => {
+          opacity.value = 1;
+        }}
+      />
+      <Searchbar
+        testID="search-bar"
+        value={''}
+        style={[{ padding: 8 }, animatedStyle]}
+      />
+    </>
+  );
+};
 
 it('renders with placeholder', async () => {
   const tree = (
@@ -269,6 +295,23 @@ it('keeps layout styles on the outermost element', async () => {
     position: 'absolute',
     top: 0,
   });
+});
+
+it('applies Reanimated styles from the style prop to the outer wrapper', async () => {
+  await render(<AnimatedSearchbar />);
+
+  const wrapper = screen.getByTestId('search-bar-wrapper');
+
+  expect(getAnimatedStyle(wrapper)).toMatchObject({ opacity: 0 });
+  // Static entries are still split off and land on the Surface.
+  expect(screen.getByTestId('search-bar-container')).toHaveStyle({
+    padding: 8,
+  });
+
+  await userEvent.press(screen.getByTestId('animate-search-bar'));
+  await jest.runAllTimersAsync();
+
+  expect(getAnimatedStyle(wrapper)).toMatchObject({ opacity: 1 });
 });
 
 it('forwards onFocus and onBlur to the input', async () => {

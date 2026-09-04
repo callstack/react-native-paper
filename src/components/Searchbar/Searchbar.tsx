@@ -10,11 +10,13 @@ import type {
 } from 'react-native';
 
 import Reanimated, {
+  isSharedValue,
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { SearchbarTokens } from './tokens';
 import { getSearchbarColors, getSearchbarInputFont } from './utils';
@@ -31,6 +33,7 @@ import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 
 interface Style {
   marginRight: number;
@@ -82,6 +85,54 @@ const HORIZONTAL_MARGIN_KEYS = [
   'marginInlineStart',
   'marginInlineEnd',
 ] as const;
+
+/**
+ * Whether a style entry hides its values from the JS thread, i.e. whether it is
+ * a Reanimated animated style: either the opaque handle returned by
+ * `useAnimatedStyle`, or a plain object holding shared values. Such an entry
+ * cannot be read during render and `StyleSheet.flatten` would silently drop it,
+ * so it has to be forwarded to a Reanimated view untouched.
+ */
+function isAnimatedStyle(style: object) {
+  return 'viewDescriptors' in style || Object.values(style).some(isSharedValue);
+}
+
+type StyleEntry = StyleProp<SurfaceStyle> | readonly StyleProp<SurfaceStyle>[];
+
+/**
+ * Split the `style` prop into the part that can be inspected during render and
+ * the animated entries that can't, keeping the latter intact.
+ */
+function splitAnimatedStyles(
+  style: StyleProp<SurfaceStyle>
+): [ViewStyle, StyleProp<AnimatedStyle<ViewStyle>>[]] {
+  const staticStyles: ViewStyle[] = [];
+  const animatedStyles: StyleProp<AnimatedStyle<ViewStyle>>[] = [];
+
+  const collect = (entry: StyleEntry) => {
+    if (!entry) {
+      return;
+    }
+
+    if (Array.isArray(entry)) {
+      entry.forEach(collect);
+      return;
+    }
+
+    if (typeof entry === 'object' && isAnimatedStyle(entry)) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      animatedStyles.push(entry as StyleProp<AnimatedStyle<ViewStyle>>);
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    staticStyles.push(entry as ViewStyle);
+  };
+
+  collect(style);
+
+  return [StyleSheet.flatten(staticStyles), animatedStyles];
+}
 
 export type Props = Omit<TextInputProps, 'style'> & {
   /**
@@ -175,7 +226,18 @@ export type Props = Omit<TextInputProps, 'style'> & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Style of the Searchbar.
+   *
+   * Layout and margin properties are applied to the outer wrapper, the rest to
+   * the `Surface` that draws the bar. Background color and border radius should
+   * be set through the `theme` instead.
+   *
+   * Reanimated styles are supported and are applied to the outer wrapper. Their
+   * values can't be read during render, so an animated horizontal margin does
+   * not replace the built-in focus margin the way a static one does.
+   */
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */
@@ -343,27 +405,29 @@ const Searchbar = ({
     marginRight: focusMargin.value,
   }));
 
+  const [staticStyle, animatedStyles] = splitAnimatedStyles(style);
+
   // A consumer-provided horizontal margin wins over the built-in one and
   // disables the focus transition.
-  const flatStyle = StyleSheet.flatten<ViewStyle>(style);
   const hasCustomHorizontalMargin = HORIZONTAL_MARGIN_KEYS.some(
-    (key) => flatStyle?.[key] !== undefined
+    (key) => staticStyle[key] !== undefined
   );
   const applyFocusMargin = isContained && !hasCustomHorizontalMargin;
   const [surfaceStyle, wrapperStyle] = splitStyles(
-    flatStyle || {},
+    staticStyle,
     (key) => OUTER_LAYOUT_STYLE_KEYS.includes(key) || key.startsWith('margin')
   );
   const shouldFillWrapper = VERTICAL_FILL_STYLE_KEYS.some(
-    (key) => flatStyle?.[key] !== undefined
+    (key) => staticStyle[key] !== undefined
   );
   const hasWrapperStyle = Object.keys(wrapperStyle).length > 0;
+  const outerStyle =
+    hasWrapperStyle || animatedStyles.length > 0
+      ? [wrapperStyle, ...animatedStyles]
+      : null;
 
   return (
-    <Reanimated.View
-      style={hasWrapperStyle ? wrapperStyle : null}
-      testID={`${testID}-wrapper`}
-    >
+    <Reanimated.View style={outerStyle} testID={`${testID}-wrapper`}>
       <Reanimated.View
         style={applyFocusMargin ? containedMarginStyle : null}
         testID={`${testID}-focus-wrapper`}
