@@ -4,8 +4,8 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
-import { render, screen } from '../../../test-utils';
-import { LightTheme } from '../../../theme/schemes';
+import { getTheme } from '../../../core/theming';
+import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 
@@ -242,7 +242,236 @@ describe('Card', () => {
     expect(screen.getByTestId('card-visual')).toHaveStyle({
       backgroundColor: getTheme().colors.surfaceContainerHighest,
     });
+    expect(screen.getByTestId('card')).not.toHaveProp('focusable');
+    expect(screen.getByTestId('card-container')).not.toHaveProp('focusable');
     expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+  });
+
+  it('preserves explicit semantics on a neutral Card shell', async () => {
+    await render(
+      <Card
+        testID="product-card"
+        role="summary"
+        accessible
+        accessibilityLabel="Product summary"
+        accessibilityHint="Contains product information"
+        focusable={false}
+      />
+    );
+
+    const shell = screen.getByRole('summary', { name: 'Product summary' });
+
+    expect(shell).toBe(screen.getByTestId('product-card-container'));
+    expect(shell).toHaveProp(
+      'accessibilityHint',
+      'Contains product information'
+    );
+    expect(shell).toHaveProp('focusable', false);
+    expect(screen.getByTestId('product-card')).not.toHaveProp('role');
+  });
+
+  it('creates one target for whole-Card interaction callbacks', async () => {
+    const onPress = jest.fn();
+    const onLongPress = jest.fn();
+    const onPressIn = jest.fn();
+    const onPressOut = jest.fn();
+    const onFocus = jest.fn();
+    const onBlur = jest.fn();
+    const onHoverIn = jest.fn();
+    const onHoverOut = jest.fn();
+    const hitSlop = { top: 4, right: 8, bottom: 12, left: 16 };
+    await render(
+      <Card
+        onPress={onPress}
+        onLongPress={onLongPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onHoverIn={onHoverIn}
+        onHoverOut={onHoverOut}
+        delayLongPress={750}
+        hitSlop={hitSlop}
+      />
+    );
+
+    const [target] = screen.getAllByRole('button');
+    const events = {
+      press: { nativeEvent: { target: 'press' } },
+      longPress: { nativeEvent: { target: 'long-press' } },
+      pressIn: { nativeEvent: { target: 'press-in' } },
+      pressOut: { nativeEvent: { target: 'press-out' } },
+      focus: { nativeEvent: { target: 'focus' } },
+      blur: { nativeEvent: { target: 'blur' } },
+      hoverIn: { nativeEvent: { target: 'hover-in' } },
+      hoverOut: { nativeEvent: { target: 'hover-out' } },
+    };
+
+    expect(screen.getAllByRole('button')).toHaveLength(1);
+    expect(target).toBe(screen.getByTestId('card'));
+    expect(target).toHaveProp('hitSlop', hitSlop);
+    expect(target).toHaveProp('focusable', true);
+
+    await fireEvent(target, 'press', events.press);
+    await fireEvent(target, 'longPress', events.longPress);
+    await fireEvent(target, 'pressIn', events.pressIn);
+    await fireEvent(target, 'pressOut', events.pressOut);
+    await fireEvent(target, 'focus', events.focus);
+    await fireEvent(target, 'blur', events.blur);
+    await fireEvent(target, 'hoverIn', events.hoverIn);
+    await fireEvent(target, 'hoverOut', events.hoverOut);
+
+    expect(onPress).toHaveBeenCalledWith(events.press);
+    expect(onLongPress).toHaveBeenCalledWith(events.longPress);
+    expect(onPressIn).toHaveBeenCalledWith(events.pressIn);
+    expect(onPressOut).toHaveBeenCalledWith(events.pressOut);
+    expect(onFocus).toHaveBeenCalledWith(events.focus);
+    expect(onBlur).toHaveBeenCalledWith(events.blur);
+    expect(onHoverIn).toHaveBeenCalledWith(events.hoverIn);
+    expect(onHoverOut).toHaveBeenCalledWith(events.hoverOut);
+  });
+
+  it('routes whole-Card accessibility semantics and callbacks to its target', async () => {
+    const onAccessibilityAction = jest.fn();
+    const onAccessibilityEscape = jest.fn();
+    const onAccessibilityTap = jest.fn();
+    const onMagicTap = jest.fn();
+    const accessibilityActionEvent = {
+      nativeEvent: { actionName: 'activate' },
+    };
+    await render(
+      <Card
+        testID="product-card"
+        onPress={() => {}}
+        role="link"
+        accessibilityLabel="Open product"
+        accessibilityHint="Shows product details"
+        accessibilityState={{ selected: true }}
+        accessibilityValue={{ text: 'In stock' }}
+        accessibilityActions={[{ name: 'activate', label: 'Open product' }]}
+        onAccessibilityAction={onAccessibilityAction}
+        onAccessibilityEscape={onAccessibilityEscape}
+        onAccessibilityTap={onAccessibilityTap}
+        onMagicTap={onMagicTap}
+      />
+    );
+
+    const target = screen.getByRole('link', { name: 'Open product' });
+    const shell = screen.getByTestId('product-card-container');
+
+    expect(target).toBe(screen.getByTestId('product-card'));
+    expect(target).toHaveProp('accessibilityHint', 'Shows product details');
+    expect(target).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: true })
+    );
+    expect(target).toHaveAccessibilityValue({ text: 'In stock' });
+    expect(target).toHaveProp('accessibilityActions', [
+      { name: 'activate', label: 'Open product' },
+    ]);
+    expect(shell).not.toHaveProp('accessibilityLabel');
+    expect(shell).not.toHaveProp('accessibilityActions');
+
+    await fireEvent(target, 'accessibilityAction', accessibilityActionEvent);
+    await fireEvent(target, 'accessibilityEscape');
+    await fireEvent(target, 'accessibilityTap');
+    await fireEvent(target, 'magicTap');
+
+    expect(onAccessibilityAction).toHaveBeenCalledWith(
+      accessibilityActionEvent
+    );
+    expect(onAccessibilityEscape).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityTap).toHaveBeenCalledTimes(1);
+    expect(onMagicTap).toHaveBeenCalledTimes(1);
+  });
+
+  it('targets documented shell, visual, and shaped interaction nodes', async () => {
+    const shellRef = React.createRef<React.ElementRef<typeof View>>();
+    const touchableRef = React.createRef<React.ElementRef<typeof View>>();
+    const shape = {
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 16,
+      borderBottomLeftRadius: 20,
+    };
+    await render(
+      <Card
+        {...shape}
+        ref={shellRef}
+        touchableRef={touchableRef}
+        testID="product-card"
+        onPress={() => {}}
+      />
+    );
+
+    const interaction = screen.getByTestId('product-card');
+    const shell = screen.getByTestId('product-card-container');
+    const visual = screen.getByTestId('product-card-visual');
+
+    expect(interaction).toHaveStyle(shape);
+    expect(visual).toHaveStyle({ overflow: 'hidden', ...shape });
+    expect(shell).toBeOnTheScreen();
+    expect(shellRef.current).not.toBeNull();
+    expect(touchableRef.current).not.toBeNull();
+    expect(touchableRef.current).not.toBe(shellRef.current);
+  });
+
+  it('warns once when whole-Card interaction is combined with populated actions', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { rerender } = await render(
+      <Card onPress={() => {}} actions={null} />
+    );
+
+    expect(warn).not.toHaveBeenCalled();
+
+    await rerender(
+      <Card
+        onPress={() => {}}
+        actions={
+          <Card.Actions>
+            <Button onPress={() => {}}>Open</Button>
+          </Card.Actions>
+        }
+      />
+    );
+    await rerender(
+      <Card
+        onPress={() => {}}
+        actions={
+          <Card.Actions>
+            <Button onPress={() => {}}>Open</Button>
+          </Card.Actions>
+        }
+      />
+    );
+
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith(
+      'An actionable Card cannot contain actions. Remove the Card interaction handlers or move the independent actions outside the Card.'
+    );
+  });
+
+  it('does not warn about Card actions in production', async () => {
+    const environment = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'production';
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    try {
+      await render(
+        <Card
+          onPress={() => {}}
+          actions={
+            <Card.Actions>
+              <Button onPress={() => {}}>Open</Button>
+            </Card.Actions>
+          }
+        />
+      );
+
+      expect(warn).not.toHaveBeenCalled();
+    } finally {
+      process.env.NODE_ENV = environment;
+    }
   });
 
   it('renders the convenience header inputs', async () => {
@@ -269,10 +498,83 @@ describe('Card', () => {
     expect(screen.getByText('Content').parent).toHaveStyle(styles.contentStyle);
   });
 
-  it('does render a disabled accessibility state', async () => {
-    await render(<Card onPress={() => {}} disabled />);
+  it('exposes disabled semantics and suppresses every activation callback', async () => {
+    const onAccessibilityAction = jest.fn();
+    const callbacks = {
+      onPress: jest.fn(),
+      onLongPress: jest.fn(),
+      onPressIn: jest.fn(),
+      onPressOut: jest.fn(),
+      onFocus: jest.fn(),
+      onBlur: jest.fn(),
+      onHoverIn: jest.fn(),
+      onHoverOut: jest.fn(),
+      onAccessibilityEscape: jest.fn(),
+      onAccessibilityTap: jest.fn(),
+      onMagicTap: jest.fn(),
+    };
+    await render(
+      <Card
+        {...callbacks}
+        disabled
+        accessibilityActions={[{ name: 'activate' }]}
+        onAccessibilityAction={onAccessibilityAction}
+        focusable
+        tabIndex={0}
+      />
+    );
 
-    expect(screen.getByTestId('card')).toBeDisabled();
+    const target = screen.getByTestId('card');
+
+    expect(target).toBeDisabled();
+    expect(target).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ disabled: true })
+    );
+    expect(target).not.toHaveProp('accessibilityActions');
+    expect(target).toHaveProp('focusable', false);
+    expect(target).toHaveProp('tabIndex', -1);
+
+    await userEvent.press(target);
+    await userEvent.longPress(target);
+    await fireEvent(target, 'focus');
+    await fireEvent(target, 'blur');
+    await fireEvent(target, 'hoverIn');
+    await fireEvent(target, 'hoverOut');
+    await fireEvent(target, 'accessibilityAction', {
+      nativeEvent: { actionName: 'activate' },
+    });
+    await fireEvent(target, 'accessibilityEscape');
+    await fireEvent(target, 'accessibilityTap');
+    await fireEvent(target, 'magicTap');
+
+    Object.values(callbacks).forEach((callback) => {
+      expect(callback).not.toHaveBeenCalled();
+    });
+    expect(onAccessibilityAction).not.toHaveBeenCalled();
+  });
+
+  it('exposes disabled state on an explicitly semantic neutral Card', async () => {
+    await render(<Card disabled accessible role="summary" />);
+
+    expect(screen.getByRole('summary')).toBeDisabled();
+  });
+
+  it.each([
+    { name: 'aria-disabled', props: { 'aria-disabled': true } },
+    {
+      name: 'accessibilityState.disabled',
+      props: { accessibilityState: { disabled: true } },
+    },
+  ] as const)('honors $name as a disabled Card state', async ({ props }) => {
+    const onPress = jest.fn();
+    await render(<Card {...props} onPress={onPress} />);
+
+    const target = screen.getByTestId('card');
+
+    expect(target).toBeDisabled();
+    await userEvent.press(target);
+    expect(onPress).not.toHaveBeenCalled();
   });
 });
 
