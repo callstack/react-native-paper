@@ -33,6 +33,7 @@ const SwitchExample = () => {
         primary: theme.colors.tertiary,
         onPrimary: theme.colors.onTertiary,
         primaryContainer: theme.colors.tertiaryContainer,
+        onPrimaryContainer: theme.colors.onTertiaryContainer,
         secondary: theme.colors.tertiary,
       },
     }),
