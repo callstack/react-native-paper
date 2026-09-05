@@ -133,10 +133,8 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
       (_x, _y, width, height, pageX, pageY) => {
         // On web, measure() returns viewport-relative coords but the Portal
         // container is positioned at the document origin — add scroll offset.
-        const scrollX =
-          Platform.OS === 'web' ? ((window as Window).scrollX ?? 0) : 0;
-        const scrollY =
-          Platform.OS === 'web' ? ((window as Window).scrollY ?? 0) : 0;
+        const scrollX = Platform.OS === 'web' ? (window.scrollX ?? 0) : 0;
+        const scrollY = Platform.OS === 'web' ? (window.scrollY ?? 0) : 0;
         childrenMeasurement.current = {
           pageX: pageX + scrollX,
           pageY: pageY + scrollY,
