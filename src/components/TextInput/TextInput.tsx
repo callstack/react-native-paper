@@ -23,7 +23,7 @@ import { useTextInput } from './hooks';
 import { styles } from './styles';
 import TextInputErrorIcon from './TextInputErrorIcon';
 import type { TextInputAccessoryProps } from './TextInputIcon';
-import type { InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -292,25 +292,22 @@ const defaultRenderer = (props: TextInputRenderProps) => (
  *
  * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
-function TextInput(props: TextInputProps) {
-  /* eslint-disable @typescript-eslint/no-unused-vars -- peel TextInput-only props before NativeTextInput spread */
-  const {
-    ref,
-    error,
-    label,
-    supportingText,
-    variant,
-    theme,
-    prefix,
-    suffix,
-    counter,
-    disabled,
-    startAccessory,
-    endAccessory,
-    render = defaultRenderer,
-    ...textInputProps
-  } = props;
-
+function TextInput({
+  ref,
+  error,
+  label,
+  supportingText,
+  variant,
+  theme,
+  prefix,
+  suffix,
+  counter,
+  disabled,
+  startAccessory,
+  endAccessory,
+  render = defaultRenderer,
+  ...rest
+}: TextInputProps) {
   const {
     input,
     isDisabled,
@@ -346,7 +343,21 @@ function TextInput(props: TextInputProps) {
     onChangeText,
     onFocus,
     onBlur,
-  } = useTextInput(props);
+  } = useTextInput({
+    ref,
+    error,
+    label,
+    supportingText,
+    variant,
+    theme,
+    prefix,
+    suffix,
+    counter,
+    disabled,
+    startAccessory,
+    endAccessory,
+    ...rest,
+  });
 
   return (
     <Pressable onPress={focusInput} accessible={false} role="none">
@@ -383,7 +394,7 @@ function TextInput(props: TextInputProps) {
               style: leadingAccessoryStyles,
               error: hasError,
               disabled: isDisabled,
-              multiline: !!textInputProps.multiline,
+              multiline: !!rest.multiline,
             })
           : null}
 
@@ -396,7 +407,7 @@ function TextInput(props: TextInputProps) {
             cursorColor,
             placeholderTextColor,
             ...accessibilityProps.input,
-            ...textInputProps,
+            ...rest,
             editable: isEditable,
             placeholder,
             style: inputStyles,
@@ -413,7 +424,7 @@ function TextInput(props: TextInputProps) {
             style: trailingAccessoryStyles,
             error: hasError,
             disabled: isDisabled,
-            multiline: !!textInputProps.multiline,
+            multiline: !!rest.multiline,
           })
         ) : hasError ? (
           <TextInputErrorIcon style={trailingAccessoryStyles} theme={theme} />

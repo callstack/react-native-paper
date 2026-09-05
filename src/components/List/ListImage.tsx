@@ -1,7 +1,7 @@
 import { StyleSheet, Image } from 'react-native';
 import type { StyleProp, ImageSourcePropType, ImageStyle } from 'react-native';
 
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
   source: ImageSourcePropType;

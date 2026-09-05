@@ -60,7 +60,7 @@ Each accent and error colors has a group of related tones. The tones are mapped 
 Dynamic colors are not supported yet
 :::
 
-![color-palette](/react-native-paper/migration/color-palette.png)
+![color-palette](../../../public/migration/color-palette.png)
 
 Colors theme structure should follow the default palette and contain the following properties:
 
@@ -290,7 +290,7 @@ Two additional props that control the scene animation were introduced that contr
 - `sceneAnimationType: "opacity" | "shifting" | undefined` - defines the animation type for the scene. `shifting` enables a new animation where navigating to a scene will shift it horizontally into view. Both `opacity` and `undefined` have the same effect, fading the scene into view.
 - `sceneAnimationEasing` allows specifying a custom easing function for the scene animation.
 
-![shiftingAnimation](/react-native-paper/screenshots/bottom-navigation-shifting.gif)
+![shiftingAnimation](../../../public/screenshots/bottom-navigation-shifting.gif)
 
 On a final note, please be aware that `BottomNavigation` with theme version 3 doesn't have a shadow.
 
@@ -575,7 +575,7 @@ At the same time, by analogy to the second new prop, the `icon` prop was renamed
 `SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot
 of customization options.
 
-![segmentedButtons](/react-native-paper/screenshots/segmentedbuttons.gif)
+![segmentedButtons](../../../public/screenshots/segmentedbuttons.gif)
 
 ```js
 const MyComponent = () => {
@@ -640,7 +640,7 @@ The property `name` was renamed to `icon`, since the scope and type of that prop
 
 Component displayed upon tapping and holding a screen element or component used to present an informative text label identifying an element, such as a description of its function.
 
-![tooltip](/react-native-paper/screenshots/tooltips.gif)
+![tooltip](../../../public/screenshots/tooltips.gif)
 
 ```js
 <Tooltip title="Selected Camera">

@@ -29,7 +29,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
-import type { StateOpacityKey, ThemeProp } from '../../types';
+import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
 

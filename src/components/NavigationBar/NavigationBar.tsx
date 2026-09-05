@@ -40,8 +40,8 @@ import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
+import type { Theme, ThemeProp } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
-import type { Theme, ThemeProp } from '../../types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { splitStyles } from '../../utils/splitStyles';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -49,7 +49,6 @@ import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -745,7 +744,7 @@ const NavigationBar = <Route extends BaseRoute>({
       onLayout={onLayout}
       testID={`${testID}-container`}
     >
-      <Surface elevation={0} testID={testID} style={surfaceStyle} container>
+      <View testID={testID} style={surfaceStyle}>
         <View
           style={[styles.barContent, { backgroundColor }]}
           testID={`${testID}-content`}
@@ -798,7 +797,7 @@ const NavigationBar = <Route extends BaseRoute>({
             })}
           </View>
         </View>
-      </Surface>
+      </View>
     </Animated.View>
   );
 };
