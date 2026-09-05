@@ -1,59 +1,23 @@
-import {
-  beforeAll,
-  describe,
-  expect,
-  it,
-  jest as mockJest,
-} from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 
 describe('RadioButton', () => {
-  describe('on default platform', () => {
-    beforeAll(() => {
-      mockJest.mock('react-native', () => {
-        const RN =
-          mockJest.requireActual<typeof import('react-native')>('react-native');
+  it('renders properly', async () => {
+    const tree = (await render(<RadioButton value="first" />)).toJSON();
 
-        return {
-          ...RN,
-          Platform: {
-            ...RN.Platform,
-            select: (objs: { default: object }) => objs.default,
-          },
-        };
-      });
-    });
-
-    it('renders properly', async () => {
-      const tree = (await render(<RadioButton value="first" />)).toJSON();
-
-      expect(tree).toMatchSnapshot();
-    });
+    expect(tree).toMatchSnapshot();
   });
 
-  describe('on ios platform', () => {
-    beforeAll(() => {
-      mockJest.mock('react-native', () => {
-        const RN =
-          mockJest.requireActual<typeof import('react-native')>('react-native');
+  it('uses the MD3 40dp state layer', async () => {
+    await render(<RadioButton value="first" />);
 
-        return {
-          ...RN,
-          Platform: {
-            ...RN.Platform,
-            select: (objs: { ios: object }) => objs.ios,
-          },
-        };
-      });
-    });
-
-    it('renders properly', async () => {
-      const tree = (await render(<RadioButton value="first" />)).toJSON();
-
-      expect(tree).toMatchSnapshot();
+    expect(screen.getByRole('radio')).toHaveStyle({
+      width: 40,
+      height: 40,
+      borderRadius: 20,
     });
   });
 
