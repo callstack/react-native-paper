@@ -29,6 +29,7 @@ exports[`renders disabled toggle button 1`] = `
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
       },
+      false,
       undefined,
     ]
   }
@@ -159,6 +160,7 @@ exports[`renders toggle button 1`] = `
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
       },
+      false,
       undefined,
     ]
   }
@@ -289,6 +291,7 @@ exports[`renders unchecked toggle button 1`] = `
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
       },
+      false,
       undefined,
     ]
   }

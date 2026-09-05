@@ -5,6 +5,7 @@ import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
+import { ToggleButtonRowContext } from './ToggleButtonRowContext';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -101,6 +102,8 @@ const ToggleButton = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const borderRadius = theme.shapes.corner.extraSmall;
+  const rowContext = React.useContext(ToggleButtonRowContext);
+  const isSegmentedRow = !!rowContext?.segmented;
 
   return (
     <ToggleButtonGroupContext.Consumer>
@@ -136,6 +139,7 @@ const ToggleButton = ({
                 borderRadius,
                 borderColor,
               },
+              isSegmentedRow && styles.segmentedContent,
               style,
             ]}
             ref={ref}
@@ -153,6 +157,10 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     margin: 0,
+  },
+  segmentedContent: {
+    borderRadius: 0,
+    marginLeft: StyleSheet.hairlineWidth,
   },
 });
 

@@ -11,6 +11,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -166,6 +167,8 @@ const ListItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { leftIndent } = React.useContext(ListAccordionContext);
+  const shouldIndent = leftIndent && !left && !right;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
@@ -233,7 +236,11 @@ const ListItem = ({
     <TouchableRipple
       {...rest}
       ref={ref}
-      style={[styles.container, style]}
+      style={
+        shouldIndent
+          ? [styles.container, styles.indent, style]
+          : [styles.container, style]
+      }
       onPress={onPress}
       theme={theme}
       testID={testID}
@@ -272,6 +279,9 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 8,
     paddingRight: 24,
+  },
+  indent: {
+    paddingLeft: 40,
   },
   row: {
     width: '100%',
