@@ -1,12 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Pressable, View } from 'react-native';
-import type {
-  Animated as RNAnimated,
-  ColorValue,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import type { ColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import Animated, {
   Easing,
@@ -223,7 +217,7 @@ export type Props<Route extends BaseRoute> = {
    * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
-  style?: RNAnimated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<ViewStyle>;
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -692,8 +686,7 @@ const NavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyle = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const flattenedStyle = StyleSheet.flatten(style) || {};
   const [surfaceStyle, rootLayoutStyle] = splitStyles(
     flattenedStyle,
     (property) =>
