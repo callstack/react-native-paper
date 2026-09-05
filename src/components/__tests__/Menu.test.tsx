@@ -1,21 +1,14 @@
-import { Animated, Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
-import type { Elevation } from '../../types';
+import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
-
-const styles = StyleSheet.create({
-  contentStyle: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-});
 
 it('renders visible menu', async () => {
   const tree = (
@@ -55,29 +48,12 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders menu with content styles', async () => {
-  const tree = (
-    await render(
-      <Portal.Host>
-        <Menu
-          visible
-          onDismiss={jest.fn()}
-          anchor={<Button mode="outlined">Open menu</Button>}
-          contentStyle={styles.contentStyle}
-        >
-          <Menu.Item onPress={jest.fn()} title="Undo" />
-          <Menu.Item onPress={jest.fn()} title="Redo" />
-        </Menu>
-      </Portal.Host>
-    )
-  ).toJSON();
+const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
-  expect(tree).toMatchSnapshot();
-});
-
-([0, 1, 2, 3, 4, 5] as Elevation[]).forEach((elevation) =>
+elevations.forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
     const theme = getTheme();
+    const testID = 'menu-with-elevation';
 
     await render(
       <Portal.Host>
@@ -86,6 +62,8 @@ it('renders menu with content styles', async () => {
           onDismiss={jest.fn()}
           anchor={<Button mode="outlined">Open menu</Button>}
           elevation={elevation}
+          mode="flat"
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -93,13 +71,14 @@ it('renders menu with content styles', async () => {
       </Portal.Host>
     );
 
-    expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    expect(screen.getByTestId(`${testID}-surface`)).toHaveStyle({
       backgroundColor: theme.colors.elevation[`level${elevation}`],
     });
   })
 );
 
 it('uses the default anchorPosition of top', async () => {
+  const testID = 'top-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
     width: 400,
     height: 800,
@@ -121,7 +100,7 @@ it('uses the default anchorPosition of top', async () => {
               Open menu
             </Button>
           }
-          contentStyle={styles.contentStyle}
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -143,7 +122,7 @@ it('uses the default anchorPosition of top', async () => {
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
+    const menu = screen.getByTestId(`${testID}-view`);
     expect(menu).toHaveStyle({
       position: 'absolute',
       left: 100,
@@ -156,6 +135,7 @@ it('uses the default anchorPosition of top', async () => {
 });
 
 it('respects anchorPosition bottom', async () => {
+  const testID = 'bottom-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
     width: 400,
     height: 800,
@@ -178,7 +158,7 @@ it('respects anchorPosition bottom', async () => {
             </Button>
           }
           anchorPosition="bottom"
-          contentStyle={styles.contentStyle}
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -196,7 +176,7 @@ it('respects anchorPosition bottom', async () => {
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
+    const menu = screen.getByTestId(`${testID}-view`);
     expect(menu).toHaveStyle({
       position: 'absolute',
       left: 100,
@@ -208,40 +188,9 @@ it('respects anchorPosition bottom', async () => {
   dimensionsSpy.mockRestore();
 });
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-        testID="menu"
-        contentStyle={[{ transform: [{ scale: value }] }]}
-      >
-        <Menu.Item onPress={jest.fn()} title="Test" />
-      </Menu>
-    </Portal.Host>
-  );
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
-});
-
 it('renders menu with mode "elevated"', async () => {
+  const testID = 'elevated-menu';
+
   await render(
     <Portal.Host>
       <Menu
@@ -249,6 +198,7 @@ it('renders menu with mode "elevated"', async () => {
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
         mode="elevated"
+        testID={testID}
       >
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -256,7 +206,7 @@ it('renders menu with mode "elevated"', async () => {
     </Portal.Host>
   );
 
-  const menuSurface = screen.getByTestId('menu-surface');
+  const menuSurface = screen.getByTestId(`${testID}-surface`);
 
   // Get flattened styles
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
@@ -267,6 +217,8 @@ it('renders menu with mode "elevated"', async () => {
 });
 
 it('renders menu with mode "flat"', async () => {
+  const testID = 'flat-menu';
+
   await render(
     <Portal.Host>
       <Menu
@@ -274,6 +226,7 @@ it('renders menu with mode "flat"', async () => {
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
         mode="flat"
+        testID={testID}
       >
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -281,7 +234,7 @@ it('renders menu with mode "flat"', async () => {
     </Portal.Host>
   );
 
-  const menuSurface = screen.getByTestId('menu-surface');
+  const menuSurface = screen.getByTestId(`${testID}-surface`);
 
   // Get flattened styles
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.

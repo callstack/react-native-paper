@@ -2,15 +2,15 @@
 
 exports[`renders FAB large size 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 28,
         "height": 96,
         "opacity": 1,
         "transform": [
@@ -21,22 +21,90 @@ exports[`renders FAB large size 1`] = `
         "width": 96,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 28,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 28,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -148,6 +216,7 @@ exports[`renders FAB large size 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -174,15 +243,15 @@ exports[`renders FAB large size 1`] = `
 
 exports[`renders FAB medium size 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 20,
         "height": 80,
         "opacity": 1,
         "transform": [
@@ -193,22 +262,90 @@ exports[`renders FAB medium size 1`] = `
         "width": 80,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 20,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 20,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -320,6 +457,7 @@ exports[`renders FAB medium size 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -346,41 +484,109 @@ exports[`renders FAB medium size 1`] = `
 
 exports[`renders FAB transitioning to not visible 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 16,
         "height": 56,
-        "opacity": 0,
+        "opacity": 1,
         "transform": [
           {
-            "scale": 0,
+            "scale": 1,
           },
         ],
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 4,
+        "pointerEvents": "none",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "none",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -492,6 +698,7 @@ exports[`renders FAB transitioning to not visible 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -518,41 +725,109 @@ exports[`renders FAB transitioning to not visible 1`] = `
 
 exports[`renders FAB transitioning to visible 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 16,
         "height": 56,
-        "opacity": 1,
+        "opacity": 0,
         "transform": [
           {
-            "scale": 1,
+            "scale": 0,
           },
         ],
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -664,6 +939,7 @@ exports[`renders FAB transitioning to visible 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -690,15 +966,15 @@ exports[`renders FAB transitioning to visible 1`] = `
 
 exports[`renders FAB with aria-label 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -709,22 +985,90 @@ exports[`renders FAB with aria-label 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -837,6 +1181,7 @@ exports[`renders FAB with aria-label 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -863,15 +1208,15 @@ exports[`renders FAB with aria-label 1`] = `
 
 exports[`renders FAB with containerColor and contentColor overrides 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "#ff5722",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -882,22 +1227,90 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "#ff5722",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "#ff5722",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1009,6 +1422,7 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1035,15 +1449,15 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
 
 exports[`renders FAB with containerColor override 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "#ff5722",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1054,22 +1468,90 @@ exports[`renders FAB with containerColor override 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "#ff5722",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "#ff5722",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1181,6 +1663,7 @@ exports[`renders FAB with containerColor override 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1207,15 +1690,15 @@ exports[`renders FAB with containerColor override 1`] = `
 
 exports[`renders FAB with default props 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(234, 221, 255, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1226,22 +1709,90 @@ exports[`renders FAB with default props 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1353,6 +1904,7 @@ exports[`renders FAB with default props 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1379,15 +1931,15 @@ exports[`renders FAB with default props 1`] = `
 
 exports[`renders FAB with primary variant 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1398,22 +1950,90 @@ exports[`renders FAB with primary variant 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1525,6 +2145,7 @@ exports[`renders FAB with primary variant 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1551,15 +2172,15 @@ exports[`renders FAB with primary variant 1`] = `
 
 exports[`renders FAB with secondary variant 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(98, 91, 113, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1570,22 +2191,90 @@ exports[`renders FAB with secondary variant 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(98, 91, 113, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(98, 91, 113, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1697,6 +2386,7 @@ exports[`renders FAB with secondary variant 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1723,15 +2413,15 @@ exports[`renders FAB with secondary variant 1`] = `
 
 exports[`renders FAB with tertiary variant 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(125, 82, 96, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1742,22 +2432,90 @@ exports[`renders FAB with tertiary variant 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(125, 82, 96, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(125, 82, 96, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -1869,6 +2627,7 @@ exports[`renders FAB with tertiary variant 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1895,15 +2654,15 @@ exports[`renders FAB with tertiary variant 1`] = `
 
 exports[`renders FAB with tonalSecondary variant 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -1914,22 +2673,90 @@ exports[`renders FAB with tonalSecondary variant 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(232, 222, 248, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -2041,6 +2868,7 @@ exports[`renders FAB with tonalSecondary variant 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -2067,15 +2895,15 @@ exports[`renders FAB with tonalSecondary variant 1`] = `
 
 exports[`renders FAB with tonalTertiary variant 1`] = `
 <View
+  collapsable={false}
   style={
     [
+      {},
       undefined,
       {
         "transformOrigin": "center",
       },
       {
-        "backgroundColor": "rgba(255, 216, 228, 1)",
-        "borderRadius": 16,
         "height": 56,
         "opacity": 1,
         "transform": [
@@ -2086,22 +2914,90 @@ exports[`renders FAB with tonalTertiary variant 1`] = `
         "width": 56,
       },
       {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 4,
-          "width": 0,
-        },
-        "shadowOpacity": 0.3,
-        "shadowRadius": 4,
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(255, 216, 228, 1)",
       },
       {
-        "pointerEvents": "auto",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
       },
     ]
   }
   testID="floating-action-button-container"
 >
   <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(255, 216, 228, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
     style={
       [
         {
@@ -2213,6 +3109,7 @@ exports[`renders FAB with tonalTertiary variant 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {

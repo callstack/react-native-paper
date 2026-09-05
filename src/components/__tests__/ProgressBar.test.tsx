@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: remove after ProgressBar migrates to Reanimated.
 import { Animated, Platform, StyleSheet } from 'react-native';
 
 import { afterEach, expect, it } from '@jest/globals';

@@ -1,4 +1,4 @@
-import { Animated, BackHandler as RNBackHandler, Text } from 'react-native';
+import { BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
@@ -19,6 +19,7 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Modal', () => {
@@ -31,9 +32,11 @@ describe('Modal', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
     (
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
+    /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
   });
 
   describe('by default', () => {
@@ -108,7 +111,7 @@ describe('Modal', () => {
 
         expect(onDismiss).toHaveBeenCalled();
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -120,7 +123,7 @@ describe('Modal', () => {
           opacity: scrimAlpha,
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -135,7 +138,7 @@ describe('Modal', () => {
         </Modal>
       );
 
-      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface')).toHaveStyle({
         opacity: 1,
       });
 
@@ -147,7 +150,7 @@ describe('Modal', () => {
         </Modal>
       );
 
-      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface')).toHaveStyle({
         opacity: 1,
       });
 
@@ -155,7 +158,7 @@ describe('Modal', () => {
         opacity: scrimAlpha,
       });
 
-      expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+      expect(screen.getByTestId('modal-surface')).toHaveStyle({
         opacity: 1,
       });
 
@@ -163,9 +166,7 @@ describe('Modal', () => {
         jest.runAllTimers();
       });
 
-      expect(
-        screen.queryByTestId('modal-surface-outer-layer')
-      ).not.toBeOnTheScreen();
+      expect(screen.queryByTestId('modal-surface')).not.toBeOnTheScreen();
 
       expect(screen.queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
     });
@@ -179,7 +180,7 @@ describe('Modal', () => {
           </Modal>
         );
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -187,7 +188,7 @@ describe('Modal', () => {
           BackHandler.mockPressBack();
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -199,7 +200,7 @@ describe('Modal', () => {
           opacity: scrimAlpha,
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -222,13 +223,13 @@ describe('Modal', () => {
           </Modal>
         );
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
         await userEvent.press(screen.getByTestId('modal-backdrop'));
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -240,7 +241,7 @@ describe('Modal', () => {
           opacity: scrimAlpha,
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
       });
@@ -285,7 +286,7 @@ describe('Modal', () => {
           </Modal>
         );
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -293,7 +294,7 @@ describe('Modal', () => {
           BackHandler.mockPressBack();
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -305,7 +306,7 @@ describe('Modal', () => {
           opacity: scrimAlpha,
         });
 
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
       });
@@ -361,7 +362,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: 0,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 0,
         });
 
@@ -372,7 +373,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
       });
@@ -389,7 +390,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -402,7 +403,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -449,7 +450,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -462,7 +463,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -487,7 +488,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -500,7 +501,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
 
@@ -523,7 +524,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: scrimAlpha,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 1,
         });
       });
@@ -548,7 +549,7 @@ describe('Modal', () => {
         expect(screen.getByTestId('modal-backdrop')).toHaveStyle({
           opacity: 0,
         });
-        expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        expect(screen.getByTestId('modal-surface')).toHaveStyle({
           opacity: 0,
         });
 
@@ -572,36 +573,6 @@ describe('Modal', () => {
 
         expect(screen.queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
       });
-    });
-  });
-
-  it('animated value changes correctly', async () => {
-    const value = new Animated.Value(1);
-    await render(
-      <Modal
-        visible={true}
-        testID="modal"
-        contentContainerStyle={[{ transform: [{ scale: value }] }]}
-      >
-        {null}
-      </Modal>
-    );
-    expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
-
-    Animated.timing(value, {
-      toValue: 1.5,
-      useNativeDriver: false,
-      duration: 200,
-    }).start();
-
-    await act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(screen.getByTestId('modal-surface-outer-layer')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
     });
   });
 });

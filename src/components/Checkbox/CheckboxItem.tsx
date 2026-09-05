@@ -9,8 +9,8 @@ import type {
 
 import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
-import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -147,10 +147,10 @@ const CheckboxItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
+  const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <TouchableRipple

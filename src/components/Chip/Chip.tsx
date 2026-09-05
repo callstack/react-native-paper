@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TextProps,
   TextStyle,
-  ViewStyle,
+  ViewProps,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -15,17 +16,18 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -123,7 +125,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style of chip's text
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -139,11 +141,15 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Ellipsize Mode for the children text
    */
-  ellipsizeMode?: EllipsizeProp;
+  ellipsizeMode?: TextProps['ellipsizeMode'];
   /**
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
+  /**
+   * Reference to the chip container.
+   */
+  ref?: React.Ref<View>;
 };
 
 /**
@@ -178,7 +184,7 @@ const Chip = ({
   disabled = false,
   background,
   'aria-label': ariaLabel,
-  role = 'button',
+  role,
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
@@ -201,11 +207,9 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const isWeb = Platform.OS === 'web';
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(elevated ? 1 : 0)
-  );
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -213,38 +217,28 @@ const Chip = ({
     onPressIn,
     onPressOut,
   });
+
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressIn?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 2 : 0,
-      duration: 200 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(true);
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressOut?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 1 : 0,
-      duration: 150 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(false);
   });
+
+  const elevationTransitionDuration =
+    theme.motion.duration[pressed ? 'short4' : 'short3'] *
+    theme.animation.scale;
 
   const opacity = 0.38;
   const defaultBorderRadius = theme.shapes.corner.small;
   const iconSize = 18;
 
-  const {
-    backgroundColor: customBackgroundColor,
-    borderRadius = defaultBorderRadius,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const borderRadius = defaultBorderRadius;
 
   const {
     borderColor,
@@ -257,12 +251,11 @@ const Chip = ({
     isOutlined,
     theme,
     selectedColor,
-    customBackgroundColor,
     disabled,
   });
 
-  const elevationStyle = elevation;
   const multiplier = compact ? 1.5 : 2;
+
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
     marginLeft:
@@ -270,13 +263,16 @@ const Chip = ({
         ? 4 * multiplier
         : 8 * multiplier,
   };
+
   const contentSpacings = {
     paddingRight: onClose ? 34 : 0,
   };
+
   const labelTextStyle = {
     color: textColor,
-    ...(theme as Theme).fonts.labelLarge,
+    ...theme.fonts.labelLarge,
   };
+
   const chipContent = (
     <View
       style={[
@@ -319,11 +315,7 @@ const Chip = ({
             <Icon
               source={icon}
               color={
-                avatar
-                  ? white
-                  : !disabled
-                    ? (theme as Theme).colors.primary
-                    : iconColor
+                avatar ? white : !disabled ? theme.colors.primary : iconColor
               }
               size={18}
               theme={theme}
@@ -342,12 +334,7 @@ const Chip = ({
         variant="labelLarge"
         selectable={false}
         numberOfLines={1}
-        style={[
-          styles.md3LabelText,
-          labelTextStyle,
-          labelSpacings,
-          textStyle,
-        ]}
+        style={[styles.md3LabelText, labelTextStyle, labelSpacings, textStyle]}
         ellipsizeMode={ellipsizeMode}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
@@ -355,30 +342,24 @@ const Chip = ({
       </Text>
     </View>
   );
+
   const accessibilityProps = {
     'aria-label': ariaLabel,
-    role,
+    role: role ?? (hasPassedTouchHandler ? 'button' : undefined),
     'aria-selected': selected,
     'aria-disabled': disabled,
   } as const;
 
   return (
     <Surface
-      style={[
-        styles.container,
-        styles.md3Container,
-        {
-          backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
-          borderColor,
-          borderRadius,
-        },
-        style,
-      ]}
-      elevation={elevationStyle}
+      backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
+      borderRadius={borderRadius}
+      style={[styles.container, styles.md3Container, { borderColor }, style]}
+      elevation={elevation}
+      transitionDuration={elevationTransitionDuration}
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
-      container
     >
       {hasPassedTouchHandler ? (
         <TouchableRipple
@@ -400,6 +381,7 @@ const Chip = ({
         </TouchableRipple>
       ) : (
         <View
+          accessible
           style={[{ borderRadius }, styles.touchable]}
           {...accessibilityProps}
           testID={testID}

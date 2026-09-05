@@ -15,7 +15,7 @@ import {
   MIN_WIDTH,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -177,7 +177,7 @@ const MenuItem = ({
 
   const titleTextStyle = {
     color: titleColor,
-    ...(theme as Theme).fonts.bodyLarge,
+    ...theme.fonts.bodyLarge,
   };
 
   return (

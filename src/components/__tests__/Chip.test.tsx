@@ -1,7 +1,4 @@
-import { Animated } from 'react-native';
-
-import { describe, expect, it, jest } from '@jest/globals';
-import { act } from '@testing-library/react-native';
+import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -196,56 +193,7 @@ describe('getChipColors - icon color', () => {
   });
 });
 
-describe('getChipColor - selected background color', () => {
-  it('should return custom color, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        customBackgroundColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: 'purple',
-    });
-  });
-
-  it('should return custom color, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: 'purple',
-    });
-  });
-
-  it('should return theme color, for theme version 3, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: getTheme().colors.secondaryContainer,
-    });
-  });
-});
-
 describe('getChipColor - background color', () => {
-  it('should return custom color', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      backgroundColor: 'purple',
-    });
-  });
-
   it('should return theme color, for theme version 3, outlined mode', () => {
     expect(
       getChipColors({
@@ -317,18 +265,6 @@ describe('getChipColor - border color', () => {
     });
   });
 
-  it('should return custom color, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      borderColor: 'transparent',
-    });
-  });
-
   it('should return theme color, light mode, outlined mode', () => {
     expect(
       getChipColors({
@@ -371,34 +307,5 @@ describe('getChipColor - border color', () => {
     ).toMatchObject({
       borderColor: 'transparent',
     });
-  });
-});
-
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Chip
-      onPress={() => {}}
-      testID="chip"
-      style={[{ transform: [{ scale: value }] }]}
-    >
-      Example Chip
-    </Chip>
-  );
-  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('chip-container-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
   });
 });

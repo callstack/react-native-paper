@@ -12,7 +12,7 @@ import { act, render, screen } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
 
@@ -117,8 +117,8 @@ const createProvider = (theme?: ThemeProp) => {
   );
 };
 
-const ExtendedLightTheme = { ...LightTheme } as ThemeProp;
-const ExtendedDarkTheme = { ...DarkTheme } as ThemeProp;
+const ExtendedLightTheme: ThemeProp = { ...LightTheme };
+const ExtendedDarkTheme: ThemeProp = { ...DarkTheme };
 
 const defaultPlatform = Platform.OS;
 
@@ -316,13 +316,13 @@ describe('PaperProvider', () => {
 
   it('uses provided custom theme', async () => {
     mockAppearance();
-    const customTheme = {
+    const customTheme: ThemeProp = {
       ...ExtendedLightTheme,
       colors: {
         ...ExtendedLightTheme.colors,
         primary: 'tomato',
       },
-    } as ThemeProp;
+    };
     await render(createProvider(customTheme));
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
