@@ -1,13 +1,15 @@
 import { expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
-import type { MenuItemProps } from '../FAB/Menu';
 
 const makeItems = (
-  onItemPress = jest.fn<(event?: unknown) => void>()
-): [MenuItemProps, MenuItemProps] => [
+  onItemPress = jest.fn()
+): [
+  { label: string; onPress: jest.Mock; testID: string },
+  { label: string; onPress: jest.Mock; testID: string },
+] => [
   { label: 'Send email', onPress: onItemPress, testID: 'item-0' },
   { label: 'Set reminder', onPress: onItemPress, testID: 'item-1' },
 ];
@@ -124,6 +126,7 @@ it('renders FAB.Menu not expanded when trigger is not visible', async () => {
 });
 
 it('calls item onPress when menu item is pressed', async () => {
+  const user = userEvent.setup();
   const onItemPress = jest.fn();
   await render(
     <FAB.Menu
@@ -133,7 +136,7 @@ it('calls item onPress when menu item is pressed', async () => {
       items={makeItems(onItemPress)}
     />
   );
-  await userEvent.press(screen.getByTestId('item-0'));
+  await user.press(screen.getByTestId('item-0'));
   expect(onItemPress).toHaveBeenCalledTimes(1);
 });
 
@@ -152,6 +155,7 @@ it('forwards event object to item onPress', async () => {
 });
 
 it('calls onDismiss when menu item is pressed', async () => {
+  const user = userEvent.setup();
   const onDismiss = jest.fn();
   await render(
     <FAB.Menu
@@ -161,11 +165,12 @@ it('calls onDismiss when menu item is pressed', async () => {
       items={makeItems()}
     />
   );
-  await userEvent.press(screen.getByTestId('item-0'));
+  await user.press(screen.getByTestId('item-0'));
   expect(onDismiss).toHaveBeenCalledTimes(1);
 });
 
 it('calls trigger onPress when menu is closed', async () => {
+  const user = userEvent.setup();
   const onTriggerPress = jest.fn();
   await render(
     <FAB.Menu
@@ -176,11 +181,12 @@ it('calls trigger onPress when menu is closed', async () => {
     />
   );
   // Shell's TouchableRipple uses the default testID 'fab-shell'
-  await userEvent.press(screen.getByTestId('fab-shell'));
+  await user.press(screen.getByTestId('fab-shell'));
   expect(onTriggerPress).toHaveBeenCalledTimes(1);
 });
 
 it('calls onDismiss when trigger is pressed while menu is open', async () => {
+  const user = userEvent.setup();
   const onDismiss = jest.fn();
   await render(
     <FAB.Menu
@@ -190,6 +196,6 @@ it('calls onDismiss when trigger is pressed while menu is open', async () => {
       items={makeItems()}
     />
   );
-  await userEvent.press(screen.getByTestId('fab-shell'));
+  await user.press(screen.getByTestId('fab-shell'));
   expect(onDismiss).toHaveBeenCalledTimes(1);
 });

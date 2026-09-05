@@ -68,6 +68,7 @@
     "@release-it/conventional-changelog": "^1.1.0",
     "@testing-library/react-native": "^14.0.0",
     "@types/color": "^3.0.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.7",
     "all-contributors-cli": "^6.24.0",

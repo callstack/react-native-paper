@@ -16,12 +16,13 @@ import Content from './Content';
 import Shell from './Shell';
 import {
   MenuTokens,
+  type Size,
   Tokens,
+  type Variant,
   FOCUS_RING_INSET,
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from './tokens';
-import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
@@ -67,9 +68,6 @@ export type MenuTriggerProps = {
   contentColor?: ColorValue;
   visible?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label for the trigger FAB.
-   */
   'aria-label'?: string;
   testID?: string;
 };
@@ -222,9 +220,6 @@ type ItemProps = {
   variant: Variant;
   theme: InternalTheme;
   onPress: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label. Falls back to `label`.
-   */
   'aria-label'?: string;
   testID?: string;
 };
@@ -315,9 +310,6 @@ type MorphingTriggerProps = {
   visible: boolean;
   alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Accessibility label for the trigger button.
-   */
   'aria-label'?: string;
   theme: InternalTheme;
   testID?: string;
