@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { extendedExamples } from './src/data/extendedExamples.ts';
+import { liveExamples, type LiveExample } from './src/data/liveExamples.ts';
 import { screenshots } from './src/data/screenshots.ts';
 import { themeColors } from './src/data/themeColors.ts';
 
@@ -27,6 +28,7 @@ type ComponentDocsConfig = {
     themeColors: Record<string, unknown>;
     screenshots: Record<string, unknown>;
     extendedExamples: Record<string, unknown>;
+    liveExamples: Record<string, LiveExample>;
   };
 };
 
@@ -186,6 +188,7 @@ const componentDocsConfig: ComponentDocsConfig = {
     themeColors,
     screenshots,
     extendedExamples,
+    liveExamples,
   },
 };
 

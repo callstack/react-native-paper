@@ -1286,3 +1286,19 @@ html:not(.dark) .paper-version-selector-menu {
     padding: 18px;
   }
 }
+
+.paper-interactive-example {
+  margin: 16px 0 24px;
+  padding: 24px;
+  border: 1px solid var(--rp-c-divider, rgba(148, 163, 184, 0.24));
+  border-radius: 16px;
+  background: var(--rp-c-bg-soft, rgba(148, 163, 184, 0.06));
+  overflow-x: auto;
+}
+
+.paper-interactive-example__title {
+  margin-bottom: 16px;
+  color: var(--rp-c-text-2);
+  font-size: 13px;
+  font-weight: 600;
+}
