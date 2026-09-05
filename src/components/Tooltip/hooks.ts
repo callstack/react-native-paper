@@ -7,7 +7,7 @@ import { cubicBezier } from 'react-native-reanimated';
 import { Tokens } from './tokens';
 import type { Measurement } from './utils';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 // Ensures only one tooltip is visible at a time. When a tooltip calls
 // takeSingletonSlot it immediately hides the previous one.

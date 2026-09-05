@@ -151,4 +151,4 @@ export type {
   TooltipRichTriggerProps,
 } from './components/Tooltip/RichTooltip';
 
-export { type TypescaleKey, type Theme, type Elevation } from './types';
+export { type TypescaleKey, type Theme, type Elevation } from './theme/types';

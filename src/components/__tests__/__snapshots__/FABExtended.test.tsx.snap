@@ -3,15 +3,15 @@
 exports[`renders extended FAB collapsed 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
           "height": 56,
           "opacity": 1,
           "transform": [
@@ -22,6 +22,29 @@ exports[`renders extended FAB collapsed 1`] = `
           "width": 56,
         },
         {
+          "pointerEvents": "auto",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
@@ -30,14 +53,59 @@ exports[`renders extended FAB collapsed 1`] = `
           "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
         },
-        {
-          "pointerEvents": "auto",
-        },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 16,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -143,6 +211,7 @@ exports[`renders extended FAB collapsed 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -163,16 +232,25 @@ exports[`renders extended FAB collapsed 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -183,6 +261,7 @@ exports[`renders extended FAB collapsed 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -207,30 +286,41 @@ exports[`renders extended FAB collapsed 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -242,15 +332,15 @@ exports[`renders extended FAB collapsed 1`] = `
 exports[`renders extended FAB expanded 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
           "height": 56,
           "opacity": 1,
           "transform": [
@@ -261,6 +351,29 @@ exports[`renders extended FAB expanded 1`] = `
           "width": 56,
         },
         {
+          "pointerEvents": "auto",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
@@ -269,14 +382,59 @@ exports[`renders extended FAB expanded 1`] = `
           "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
         },
-        {
-          "pointerEvents": "auto",
-        },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 16,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -382,6 +540,7 @@ exports[`renders extended FAB expanded 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -402,16 +561,25 @@ exports[`renders extended FAB expanded 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -422,6 +590,7 @@ exports[`renders extended FAB expanded 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -446,30 +615,41 @@ exports[`renders extended FAB expanded 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -481,15 +661,15 @@ exports[`renders extended FAB expanded 1`] = `
 exports[`renders extended FAB large size 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 28,
           "height": 96,
           "opacity": 1,
           "transform": [
@@ -500,6 +680,29 @@ exports[`renders extended FAB large size 1`] = `
           "width": 96,
         },
         {
+          "pointerEvents": "auto",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 28,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
@@ -508,14 +711,59 @@ exports[`renders extended FAB large size 1`] = `
           "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
         },
-        {
-          "pointerEvents": "auto",
-        },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 28,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -621,6 +869,7 @@ exports[`renders extended FAB large size 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -641,16 +890,25 @@ exports[`renders extended FAB large size 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 24,
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                  "lineHeight": 32,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 24,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 32,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -661,6 +919,7 @@ exports[`renders extended FAB large size 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -685,30 +944,41 @@ exports[`renders extended FAB large size 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 24,
-          "fontWeight": "400",
-          "letterSpacing": 0,
-          "lineHeight": 32,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 24,
+            "fontWeight": "400",
+            "letterSpacing": 0,
+            "lineHeight": 32,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -720,15 +990,15 @@ exports[`renders extended FAB large size 1`] = `
 exports[`renders extended FAB medium size 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 20,
           "height": 80,
           "opacity": 1,
           "transform": [
@@ -739,6 +1009,29 @@ exports[`renders extended FAB medium size 1`] = `
           "width": 80,
         },
         {
+          "pointerEvents": "auto",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 20,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
@@ -747,14 +1040,59 @@ exports[`renders extended FAB medium size 1`] = `
           "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
         },
-        {
-          "pointerEvents": "auto",
-        },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 20,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -860,6 +1198,7 @@ exports[`renders extended FAB medium size 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -880,16 +1219,25 @@ exports[`renders extended FAB medium size 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 22,
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                  "lineHeight": 28,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 22,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 28,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -900,6 +1248,7 @@ exports[`renders extended FAB medium size 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -924,30 +1273,41 @@ exports[`renders extended FAB medium size 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 22,
-          "fontWeight": "400",
-          "letterSpacing": 0,
-          "lineHeight": 28,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 22,
+            "fontWeight": "400",
+            "letterSpacing": 0,
+            "lineHeight": 28,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -959,15 +1319,15 @@ exports[`renders extended FAB medium size 1`] = `
 exports[`renders extended FAB not visible 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
           "height": 56,
           "opacity": 0,
           "transform": [
@@ -978,22 +1338,90 @@ exports[`renders extended FAB not visible 1`] = `
           "width": 56,
         },
         {
+          "pointerEvents": "none",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
             "width": 0,
           },
-          "shadowOpacity": 0,
+          "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
-        },
-        {
-          "pointerEvents": "none",
         },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 16,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -1099,6 +1527,7 @@ exports[`renders extended FAB not visible 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -1119,16 +1548,25 @@ exports[`renders extended FAB not visible 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -1139,6 +1577,7 @@ exports[`renders extended FAB not visible 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -1163,30 +1602,41 @@ exports[`renders extended FAB not visible 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message
@@ -1198,15 +1648,15 @@ exports[`renders extended FAB not visible 1`] = `
 exports[`renders extended FAB transitioning to collapsed 1`] = `
 <>
   <View
+    collapsable={false}
     style={
       [
+        {},
         undefined,
         {
           "transformOrigin": "center",
         },
         {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
           "height": 56,
           "opacity": 1,
           "transform": [
@@ -1217,6 +1667,29 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
           "width": 56,
         },
         {
+          "pointerEvents": "auto",
+        },
+        {},
+        {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
           "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 3.33,
@@ -1225,14 +1698,59 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
           "shadowOpacity": 0.19,
           "shadowRadius": 4.75,
         },
-        {
-          "pointerEvents": "auto",
-        },
       ]
     }
     testID="extended-floating-action-button-container"
   >
     <View
+      collapsable={false}
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "pointerEvents": "none",
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(234, 221, 255, 1)",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": 16,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0.039,
+            "shadowRadius": 1.5,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
       style={
         [
           {
@@ -1338,13 +1856,14 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
             plus
           </Text>
           <View
+            collapsable={false}
             style={
               [
                 {
                   "marginStart": 8,
                 },
                 {
-                  "opacity": 0,
+                  "opacity": 1,
                 },
                 {
                   "pointerEvents": "none",
@@ -1358,16 +1877,25 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                {
-                  "color": "rgba(33, 0, 93, 1)",
-                  "fontFamily": "System",
-                  "fontSize": 16,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.15,
-                  "lineHeight": 24,
-                  "textAlign": "left",
-                  "writingDirection": "ltr",
-                }
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  {
+                    "color": "rgba(33, 0, 93, 1)",
+                  },
+                ]
               }
               testID="extended-floating-action-button-text"
             >
@@ -1378,6 +1906,7 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         [
           {
@@ -1402,30 +1931,41 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
   </View>
   <View
     aria-hidden={true}
+    collapsable={false}
+    forwardedRef={[Function]}
     importantForAccessibility="no-hide-descendants"
     style={
-      {
-        "alignSelf": "flex-start",
-        "opacity": 0,
-        "pointerEvents": "none",
-        "position": "absolute",
-      }
+      [
+        {
+          "alignSelf": "flex-start",
+          "opacity": 0,
+          "pointerEvents": "none",
+          "position": "absolute",
+        },
+      ]
     }
   >
     <Text
       collapsable={false}
       numberOfLines={1}
       style={
-        {
-          "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontSize": 16,
-          "fontWeight": "500",
-          "letterSpacing": 0.15,
-          "lineHeight": 24,
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        }
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "textAlign": "left",
+          },
+          {
+            "color": "rgba(29, 27, 32, 1)",
+            "writingDirection": "ltr",
+          },
+          undefined,
+        ]
       }
     >
       New message

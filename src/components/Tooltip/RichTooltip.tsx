@@ -21,7 +21,7 @@ import {
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
@@ -325,14 +325,9 @@ const RichTooltip = ({
             <Pressable {...tooltipHoverProps}>
               <AnimatedSurface
                 elevation={Tokens.rich.elevation}
-                style={[
-                  styles.surface,
-                  {
-                    backgroundColor: theme.colors[Tokens.rich.container],
-                    borderRadius: theme.shapes.corner[Tokens.rich.shape],
-                  },
-                  fadeStyle,
-                ]}
+                backgroundColor={theme.colors[Tokens.rich.container]}
+                borderRadius={theme.shapes.corner[Tokens.rich.shape]}
+                style={[styles.surface, fadeStyle]}
               >
                 {title ? (
                   <Text

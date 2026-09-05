@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
-import Reanimated from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import type { TypescaleKey } from '../../theme/types';
@@ -72,7 +72,7 @@ const Content = ({
           <Icon source={icon} size={iconSize} color={contentColor} />
         ) : null}
         {hasLabel ? (
-          <Reanimated.View
+          <Animated.View
             style={[
               icon ? { marginStart: iconLabelGap } : null,
               labelAnimatedStyle,
@@ -90,7 +90,7 @@ const Content = ({
             >
               {label}
             </AnimatedText>
-          </Reanimated.View>
+          </Animated.View>
         ) : null}
       </View>
     </>

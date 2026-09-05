@@ -9,7 +9,6 @@
 # Generated files
 .cache-loader
 /public/llms.txt
-/public/react-native-paper
 
 # Misc
 .DS_Store
@@ -21,9 +20,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# component-docs-plugin
-docs/components
 
 # legacy
 dist/

@@ -4,8 +4,6 @@ import { Dialog, Palette, Portal } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
-const isIOS = Platform.OS === 'ios';
-
 const DialogWithLoadingIndicator = ({
   visible,
   close,
@@ -21,7 +19,7 @@ const DialogWithLoadingIndicator = ({
           <View style={styles.flexing}>
             <ActivityIndicator
               color={Palette.tertiary30}
-              size={isIOS ? 'large' : 48}
+              size={Platform.OS === 'ios' ? 'large' : 48}
               style={styles.marginRight}
             />
             <TextComponent>Loading.....</TextComponent>

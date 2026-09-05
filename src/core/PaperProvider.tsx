@@ -13,7 +13,7 @@ import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 export type Props = {
   children: React.ReactNode;

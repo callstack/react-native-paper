@@ -8,7 +8,7 @@ import { takeSingletonSlot, useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';

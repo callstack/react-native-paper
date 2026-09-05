@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -8,18 +8,32 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+const CHECK_SPRING_CONFIG = {
+  stiffness: 230.2,
+  damping: 22,
+  mass: 1,
+};
 
 export type Props = {
   /**
@@ -121,25 +135,28 @@ const SegmentedButtonItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
 
-  const checkScale = React.useRef(new Animated.Value(0)).current;
+  const checkScale = useSharedValue(0);
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
       return;
     }
-    if (checked) {
-      Animated.spring(checkScale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.spring(checkScale, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [checked, checkScale, showSelectedCheck]);
+
+    checkScale.value = withSpring(checked ? 1 : 0, {
+      ...CHECK_SPRING_CONFIG,
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [checked, checkScale, reduceMotion, showSelectedCheck]);
+
+  const checkAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: checkScale.value }],
+  }));
+
+  const iconAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: label ? 1 - checkScale.value : 1 }],
+  }));
 
   const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
@@ -151,26 +168,19 @@ const SegmentedButtonItem = ({
     });
 
   const borderRadius = theme.shapes.corner.largeIncreased;
+
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
   });
+
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
   const iconSize = 18;
+
   const iconStyle = {
     marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
-    ...(label && {
-      transform: [
-        {
-          scale: checkScale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
-        },
-      ],
-    }),
   };
 
   const buttonStyle: ViewStyle = {
@@ -180,11 +190,14 @@ const SegmentedButtonItem = ({
     borderRadius,
     ...segmentBorderRadius,
   };
+
   const paddingVertical = getSegmentedButtonDensityPadding({ density });
+
   const rippleStyle: ViewStyle = {
     borderRadius,
     ...segmentBorderRadius,
   };
+
   const labelTextStyle: TextStyle = {
     ...theme.fonts.labelLarge,
     color: textColor,
@@ -212,13 +225,16 @@ const SegmentedButtonItem = ({
           {showCheckedIcon ? (
             <Animated.View
               testID={`${testID}-check-icon`}
-              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
+              style={[iconStyle, checkAnimatedStyle]}
             >
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
+            <Animated.View
+              testID={`${testID}-icon`}
+              style={[iconStyle, iconAnimatedStyle]}
+            >
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}

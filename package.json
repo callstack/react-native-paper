@@ -112,6 +112,9 @@
       "<rootDir>/jest/jestSetupAfterEnv.js",
       "@testing-library/react-native"
     ],
+    "snapshotSerializers": [
+      "<rootDir>/jest/reanimatedSnapshotSerializer.js"
+    ],
     "cacheDirectory": "./cache/jest",
     "testPathIgnorePatterns": [
       "\\.d\\.ts$"

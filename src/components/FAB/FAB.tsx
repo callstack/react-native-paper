@@ -8,9 +8,11 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import type { AnimatedStyle } from 'react-native-reanimated';
+
 import Shell from './Shell';
 import type { Size, Variant } from './tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 
 export type Props = {
@@ -93,7 +95,7 @@ export type Props = {
    * Style for positioning the FAB. The visual treatment (size, shape, color)
    * is driven by `variant` and `size`.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * TestID used for testing purposes.
    */
