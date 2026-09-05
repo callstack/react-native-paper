@@ -4,6 +4,7 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
+import { canContainNestedText, NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -87,10 +88,13 @@ const Text = ({
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
+  const isNested = React.useContext(NestedTextContext);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
+
+  let element: React.ReactElement;
 
   if (variant) {
     let font = theme.fonts[variant];
@@ -129,10 +133,14 @@ const Text = ({
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
       //              </Chip>
-      // Solution:  To address the following scenario, the code below overrides the
-      //            parent's style with children's style:
+      // Solution:  To address the following scenario, the code below lets the
+      //            children's style win over the parent's, while keeping the
+      //            parent's `variant` as the base. Dropping the base instead
+      //            would leave a parent wrapping an unstyled `Text` with no
+      //            typography at all, since there is no child style to take over
+      //            from it.
       if (!props.variant) {
-        textStyle = [style, props.style];
+        textStyle = [font, style, props.style];
       }
     }
 
@@ -144,7 +152,7 @@ const Text = ({
       );
     }
 
-    return (
+    element = (
       <NativeText
         ref={root}
         style={[
@@ -155,13 +163,17 @@ const Text = ({
         {...rest}
       />
     );
+  } else if (isNested) {
+    // Declare only what this `Text` was asked for. Everything else, including
+    // the font and the color, inherits from the enclosing `Text`.
+    element = <NativeText {...rest} ref={root} style={style} />;
   } else {
     const font = theme.fonts.default;
     const textStyle = {
       ...font,
       color: theme.colors?.onSurface,
     };
-    return (
+    element = (
       <NativeText
         {...rest}
         ref={root}
@@ -169,6 +181,16 @@ const Text = ({
       />
     );
   }
+
+  if (!canContainNestedText(rest.children)) {
+    return element;
+  }
+
+  return (
+    <NestedTextContext.Provider value={true}>
+      {element}
+    </NestedTextContext.Provider>
+  );
 };
 
 const styles = StyleSheet.create({
