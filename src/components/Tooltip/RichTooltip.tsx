@@ -385,7 +385,8 @@ const styles = StyleSheet.create({
   },
   surface: {
     paddingHorizontal: Tokens.rich.paddingHorizontal,
-    paddingVertical: Tokens.rich.paddingVertical,
+    paddingTop: Tokens.rich.paddingTop,
+    paddingBottom: Tokens.rich.paddingBottom,
     rowGap: Tokens.rich.gap,
   },
   actions: {
