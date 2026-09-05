@@ -86,6 +86,40 @@ The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Va
 
 The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
 
+### BottomNavigation
+
+`BottomNavigation` has been removed. Paper no longer ships a component that owns your tab scenes; the Material 3 navigation bar is now `NavigationBar`, a standalone bar you render next to your own navigator (React Navigation, or your own state).
+
+| v5                                                                    | v6                                                                    |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `BottomNavigation`, `BottomNavigation.Bar`                            | `NavigationBar`                                                       |
+| `BottomNavigationProps`, `BottomNavigationRoute`                      | `NavigationBarProps`, `NavigationBarRoute`                            |
+| `BottomNavigation.SceneMap`, `renderScene`, `onIndexChange`           | render the active scene yourself, alongside the bar                   |
+| `getLazy`, `route.lazy`                                               | removed — the bar no longer owns the scenes                           |
+| `sceneAnimationEnabled`, `sceneAnimationType`, `sceneAnimationEasing`  | removed with the scene container                                      |
+| `shifting`                                                            | removed (it was already a no-op)                                      |
+| `barStyle`                                                            | `style`                                                               |
+| n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout       |
+
+```diff
+- <BottomNavigation
+-   navigationState={{ index, routes }}
+-   onIndexChange={setIndex}
+-   renderScene={BottomNavigation.SceneMap({ home: HomeScreen, settings: SettingsScreen })}
+-   barStyle={{ backgroundColor: theme.colors.surfaceContainer }}
+- />
++ <>
++   {renderScene({ route: routes[index] })}
++   <NavigationBar
++     navigationState={{ index, routes }}
++     onTabPress={({ route }) => setIndex(routes.findIndex((r) => r.key === route.key))}
++     style={{ backgroundColor: theme.colors.surfaceContainer }}
++   />
++ </>
+```
+
+`NavigationBar` also does not set a default `testID`. If your tests looked up `bottom-navigation-bar` (or its `-container` / `-content` / `-content-wrapper` children), pass a `testID` explicitly.
+
 ### Surface
 
 - The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.

@@ -55,7 +55,6 @@ export type BaseRoute = {
   badge?: string | number | boolean;
   'aria-label'?: string;
   testID?: string;
-  lazy?: boolean;
 };
 
 type NavigationState<Route extends BaseRoute> = {
