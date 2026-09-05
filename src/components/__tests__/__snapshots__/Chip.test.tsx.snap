@@ -99,49 +99,17 @@ exports[`renders chip with close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 8,
         },
-        [
-          {
-            "borderRadius": 8,
-          },
-          {
-            "width": "100%",
-          },
-        ],
+        {
+          "width": "100%",
+        },
       ]
     }
     testID="chip"
@@ -454,49 +422,17 @@ exports[`renders chip with custom close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 8,
         },
-        [
-          {
-            "borderRadius": 8,
-          },
-          {
-            "width": "100%",
-          },
-        ],
+        {
+          "width": "100%",
+        },
       ]
     }
     testID="chip"
@@ -809,49 +745,17 @@ exports[`renders chip with icon 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 8,
         },
-        [
-          {
-            "borderRadius": 8,
-          },
-          {
-            "width": "100%",
-          },
-        ],
+        {
+          "width": "100%",
+        },
       ]
     }
     testID="chip"
@@ -1288,49 +1192,17 @@ exports[`renders outlined disabled chip 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={true}
+    aria-selected={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 8,
         },
-        [
-          {
-            "borderRadius": 8,
-          },
-          {
-            "width": "100%",
-          },
-        ],
+        {
+          "width": "100%",
+        },
       ]
     }
     testID="chip"
@@ -1505,49 +1377,17 @@ exports[`renders selected chip 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": true,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={true}
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 8,
         },
-        [
-          {
-            "borderRadius": 8,
-          },
-          {
-            "width": "100%",
-          },
-        ],
+        {
+          "width": "100%",
+        },
       ]
     }
     testID="chip"
