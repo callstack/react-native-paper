@@ -607,7 +607,7 @@ const NavigationBar = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation-bar',
+  testID,
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
@@ -735,12 +735,12 @@ const NavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
     >
       <View testID={testID} style={surfaceStyle}>
         <View
           style={[styles.barContent, { backgroundColor }]}
-          testID={`${testID}-content`}
+          testID={testID ? `${testID}-content` : undefined}
         >
           <View
             style={[
@@ -757,7 +757,7 @@ const NavigationBar = <Route extends BaseRoute>({
               },
             ]}
             role={'tablist'}
-            testID={`${testID}-content-wrapper`}
+            testID={testID ? `${testID}-content-wrapper` : undefined}
           >
             {routes.map((route, index) => {
               const focused = navigationState.index === index;

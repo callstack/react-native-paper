@@ -17,11 +17,9 @@ exports[`renders the horizontal (flexible) variant 1`] = `
       null,
     ]
   }
-  testID="bottom-navigation-bar-container"
 >
   <View
     style={{}}
-    testID="bottom-navigation-bar"
   >
     <View
       style={
@@ -35,7 +33,6 @@ exports[`renders the horizontal (flexible) variant 1`] = `
           },
         ]
       }
-      testID="bottom-navigation-bar-content"
     >
       <View
         role="tablist"
@@ -54,7 +51,6 @@ exports[`renders the horizontal (flexible) variant 1`] = `
             false,
           ]
         }
-        testID="bottom-navigation-bar-content-wrapper"
       >
         <View
           accessibilityState={

@@ -59,12 +59,14 @@ it('exposes navigation semantics through aria props', async () => {
         ],
       }}
       onTabPress={jest.fn()}
+      testID="navigation-bar"
     />
   );
 
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).toHaveProp('role', 'tablist');
+  expect(screen.getByTestId('navigation-bar-content-wrapper')).toHaveProp(
+    'role',
+    'tablist'
+  );
   expect(
     screen.getByRole(Platform.OS === 'ios' ? 'button' : 'tab', {
       name: 'Alpha destination',
@@ -93,6 +95,7 @@ it('uses content-sized tabs and the expanded indicator in the horizontal variant
       onTabPress={jest.fn()}
       variant="horizontal"
       getTestID={({ route }) => route.key}
+      testID="navigation-bar"
     />
   );
 
@@ -101,9 +104,7 @@ it('uses content-sized tabs and the expanded indicator in the horizontal variant
     flexShrink: 1,
     maxWidth: 168,
   });
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).toHaveStyle({
+  expect(screen.getByTestId('navigation-bar-content-wrapper')).toHaveStyle({
     justifyContent: 'center',
   });
   expect(screen.getByTestId('key-0-horizontal-item')).toHaveStyle({
