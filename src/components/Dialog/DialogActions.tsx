@@ -48,18 +48,24 @@ export type Props = ViewProps & {
  */
 const DialogActions = (props: Props) => {
   useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+
+  const actions = React.Children.toArray(props.children).flatMap((child) =>
+    React.isValidElement<{ children?: React.ReactNode }>(child) &&
+    child.type === React.Fragment
+      ? React.Children.toArray(child.props.children)
+      : child
+  );
 
   return (
     <View {...props} style={[styles.v3Container, props.style]}>
-      {React.Children.map(props.children, (child, i) =>
+      {actions.map((child, i) =>
         React.isValidElement<DialogActionChildProps>(child)
           ? React.cloneElement(child, {
               compact: true,
               uppercase: false,
               style: [
                 {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
+                  marginRight: i + 1 === actions.length ? 0 : 8,
                 },
                 child.props.style,
               ],
