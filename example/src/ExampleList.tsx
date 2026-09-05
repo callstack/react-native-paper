@@ -10,7 +10,6 @@ import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
 import BottomNavigationBarExample from './Examples/BottomNavigationBarExample';
-import BottomNavigationExample from './Examples/BottomNavigationExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
@@ -27,6 +26,7 @@ import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
+import NavigationBarExample from './Examples/NavigationBarExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -55,7 +55,6 @@ export const mainExamples = {
   Badge: BadgeExample,
   Banner: BannerExample,
   BottomNavigationBarExample,
-  BottomNavigation: BottomNavigationExample,
   Button: ButtonExample,
   Card: CardExample,
   Checkbox: CheckboxExample,
@@ -72,6 +71,7 @@ export const mainExamples = {
   ListSection: ListSectionExample,
   ListItem: ListItemExample,
   Menu: MenuExample,
+  NavigationBar: NavigationBarExample,
   Progressbar: ProgressBarExample,
   Radio: RadioButtonExample,
   RadioGroup: RadioButtonGroupExample,

@@ -24,7 +24,6 @@ export { Avatar, List, Drawer };
 export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';
-export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
@@ -37,6 +36,7 @@ export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
+export { default as NavigationBar } from './components/NavigationBar';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
@@ -65,10 +65,6 @@ export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage'
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';
 export type { Props as BadgeProps } from './components/Badge';
 export type { Props as BannerProps } from './components/Banner';
-export type {
-  Props as BottomNavigationProps,
-  BaseRoute as BottomNavigationRoute,
-} from './components/BottomNavigation/BottomNavigation';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
 export type { Props as CardActionsProps } from './components/Card/CardActions';
@@ -115,6 +111,10 @@ export type { Props as ListSubheaderProps } from './components/List/ListSubheade
 export type { Props as MenuProps } from './components/Menu/Menu';
 export type { Props as MenuItemProps } from './components/Menu/MenuItem';
 export type { Props as ModalProps } from './components/Modal';
+export type {
+  Props as NavigationBarProps,
+  BaseRoute as NavigationBarRoute,
+} from './components/NavigationBar';
 export type { Props as PortalProps } from './components/Portal/Portal';
 export type { Props as PortalHostProps } from './components/Portal/PortalHost';
 export type { Props as ProgressBarProps } from './components/ProgressBar';
