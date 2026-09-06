@@ -10,7 +10,7 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
 import type { DialogChildProps } from './utils';

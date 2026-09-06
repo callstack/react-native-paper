@@ -153,4 +153,4 @@ export {
   type Theme,
   type Elevation,
   type ContrastLevel,
-} from './types';
+} from './theme/types';

@@ -2,11 +2,10 @@ import type { ColorValue } from 'react-native';
 
 import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import type { TypescaleKey } from '../../theme/types';
+import type { InternalTheme, TypescaleKey } from '../../theme/types';
 import { contentColorFor } from '../../theme/utils/color';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import type { ShapeToken } from '../../theme/utils/shape';
-import type { InternalTheme } from '../../types';
 
 export type ResolvedColors = {
   container: ColorValue;

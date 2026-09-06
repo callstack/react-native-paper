@@ -14,7 +14,7 @@ import Animated, {
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 type Props = {
   /**

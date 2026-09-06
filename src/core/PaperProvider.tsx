@@ -13,7 +13,7 @@ import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
-import type { ContrastLevel, ThemeProp } from '../types';
+import type { ContrastLevel, ThemeProp } from '../theme/types';
 
 export type Props = {
   children: React.ReactNode;
@@ -21,6 +21,12 @@ export type Props = {
   settings?: Settings;
   direction?: Direction;
   reduceMotion?: ReduceMotionPreference;
+  /**
+   * MD3 contrast level. `medium` and `high` raise color contrast to make the
+   * app easier to read. Unlike `theme`, setting this keeps automatic system
+   * dark mode working.
+   * @default 'standard'
+   */
   contrast?: ContrastLevel;
 };
 

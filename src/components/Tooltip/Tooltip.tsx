@@ -11,7 +11,7 @@ import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
@@ -71,8 +71,6 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -120,7 +118,7 @@ const Tooltip = ({
       hideTooltipTimer.current = [];
     }
 
-    if (isWeb) {
+    if (Platform.OS === 'web') {
       const id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
@@ -130,7 +128,7 @@ const Tooltip = ({
       touched.current = true;
       setVisible(true);
     }
-  }, [isWeb, enterTouchDelay]);
+  }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
@@ -236,11 +234,11 @@ const Tooltip = ({
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
+        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
+          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
         })}
       </Pressable>
     </>

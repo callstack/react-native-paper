@@ -13,7 +13,7 @@ import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 

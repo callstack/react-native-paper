@@ -8,7 +8,7 @@ import {
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export type Props = {
   /**

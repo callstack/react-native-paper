@@ -7,7 +7,7 @@ import type { AnimatedStyle } from 'react-native-reanimated';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 

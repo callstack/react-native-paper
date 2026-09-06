@@ -15,7 +15,7 @@ import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
