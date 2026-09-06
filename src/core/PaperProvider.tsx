@@ -38,7 +38,9 @@ const PaperProvider = (props: Props) => {
 
   const theme = React.useMemo(() => {
     const isDark = props.theme?.dark ?? colorScheme === 'dark';
+    // The prop wins over a level set on a custom theme object
     const level = contrast ?? props.theme?.contrast ?? 'standard';
+    // `level` is the scheme we picked, `theme.colors` still override it
     const base = getTheme(isDark, level);
     const scale = resolvedReduceMotion
       ? 0

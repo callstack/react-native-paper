@@ -113,6 +113,45 @@ describe('contrast levels', () => {
     );
   });
 
+  it('keeps the fixed roles the same at every contrast level', () => {
+    // MD3 defines the *Fixed roles as stable across contrast levels.
+    let checked = 0;
+
+    MODES.forEach((mode) => {
+      const isDark = mode === 'dark';
+      const standard = createTheme({ dark: isDark }).colors;
+
+      NON_STANDARD.forEach((contrast) => {
+        const raised = createTheme({ dark: isDark, contrast }).colors;
+
+        const fixedOf = (colors: ThemeColors) =>
+          Object.entries(colors).filter(([role]) => role.includes('Fixed'));
+
+        const before = fixedOf(standard);
+        checked += before.length;
+
+        expect(fixedOf(raised)).toStrictEqual(before);
+      });
+    });
+
+    expect(checked).toBeGreaterThan(0);
+  });
+
+  it('keeps a container distinct from its base role', () => {
+    // A container collapsing onto its base role means the scheme has clipped.
+    NON_STANDARD.forEach((contrast) => {
+      MODES.forEach((mode) => {
+        const { colors } = createTheme({ dark: mode === 'dark', contrast });
+
+        expect(colors.primaryContainer).not.toBe(colors.primary);
+        expect(colors.secondaryContainer).not.toBe(colors.secondary);
+        expect(colors.tertiaryContainer).not.toBe(colors.tertiary);
+        expect(colors.errorContainer).not.toBe(colors.error);
+        expect(colors.outlineVariant).not.toBe(colors.outline);
+      });
+    });
+  });
+
   it('keeps elevation level0 transparent', () => {
     NON_STANDARD.forEach((contrast) => {
       expect(createTheme({ contrast }).colors.elevation.level0).toBe(

@@ -1,6 +1,5 @@
 import color from 'color';
 
-import { contrastSchemes } from './contrastSchemes';
 import { state } from './state';
 import type { ContrastLevel, ElevationColors, ThemeColors } from '../../types';
 import { palette as defaultPalette } from '../ref/palette';
@@ -11,11 +10,14 @@ type PaletteKey = keyof Palette;
 /** Roles that map 1:1 to a palette key. Excludes the computed fields. */
 type MappedRoles = Omit<ThemeColors, 'stateLayerPressed' | 'elevation'>;
 
-/** Only `standard` uses the reference palette steps. The other levels need
- *  tones that are not in the palette, so they live in `./contrastSchemes`. */
+/** Role to palette step for each MD3 contrast level.
+ *
+ *  Raising contrast moves the accent and outline roles toward the extremes of
+ *  their tonal palette. Surfaces and the `*Fixed` roles do not change, since
+ *  MD3 keeps those stable across levels. */
 const roleToTone: Record<
   'light' | 'dark',
-  Record<'standard', Record<keyof MappedRoles, PaletteKey>>
+  Record<ContrastLevel, Record<keyof MappedRoles, PaletteKey>>
 > = {
   light: {
     standard: {
@@ -53,6 +55,106 @@ const roleToTone: Record<
       inverseSurface: 'neutral20',
       inverseOnSurface: 'neutral95',
       inversePrimary: 'primary80',
+      primaryFixed: 'primary90',
+      primaryFixedDim: 'primary80',
+      onPrimaryFixed: 'primary10',
+      onPrimaryFixedVariant: 'primary30',
+      secondaryFixed: 'secondary90',
+      secondaryFixedDim: 'secondary80',
+      onSecondaryFixed: 'secondary10',
+      onSecondaryFixedVariant: 'secondary30',
+      tertiaryFixed: 'tertiary90',
+      tertiaryFixedDim: 'tertiary80',
+      onTertiaryFixed: 'tertiary10',
+      onTertiaryFixedVariant: 'tertiary30',
+      shadow: 'neutral0',
+      scrim: 'neutral0',
+    },
+    medium: {
+      primary: 'primary30',
+      onPrimary: 'primary100',
+      primaryContainer: 'primary40',
+      onPrimaryContainer: 'primary100',
+      secondary: 'secondary30',
+      onSecondary: 'secondary100',
+      secondaryContainer: 'secondary40',
+      onSecondaryContainer: 'secondary100',
+      tertiary: 'tertiary30',
+      onTertiary: 'tertiary100',
+      tertiaryContainer: 'tertiary40',
+      onTertiaryContainer: 'tertiary100',
+      error: 'error30',
+      onError: 'error100',
+      errorContainer: 'error40',
+      onErrorContainer: 'error100',
+      surface: 'neutral98',
+      surfaceDim: 'neutral87',
+      surfaceBright: 'neutral98',
+      surfaceContainerLowest: 'neutral100',
+      surfaceContainerLow: 'neutral96',
+      surfaceContainer: 'neutral94',
+      surfaceContainerHigh: 'neutral92',
+      surfaceContainerHighest: 'neutral90',
+      surfaceVariant: 'neutralVariant90',
+      background: 'neutral98',
+      onSurface: 'neutral10',
+      onSurfaceVariant: 'neutralVariant30',
+      onBackground: 'neutral10',
+      outline: 'neutralVariant40',
+      outlineVariant: 'neutralVariant60',
+      inverseSurface: 'neutral20',
+      inverseOnSurface: 'neutral95',
+      inversePrimary: 'primary90',
+      primaryFixed: 'primary90',
+      primaryFixedDim: 'primary80',
+      onPrimaryFixed: 'primary10',
+      onPrimaryFixedVariant: 'primary30',
+      secondaryFixed: 'secondary90',
+      secondaryFixedDim: 'secondary80',
+      onSecondaryFixed: 'secondary10',
+      onSecondaryFixedVariant: 'secondary30',
+      tertiaryFixed: 'tertiary90',
+      tertiaryFixedDim: 'tertiary80',
+      onTertiaryFixed: 'tertiary10',
+      onTertiaryFixedVariant: 'tertiary30',
+      shadow: 'neutral0',
+      scrim: 'neutral0',
+    },
+    high: {
+      primary: 'primary20',
+      onPrimary: 'primary100',
+      primaryContainer: 'primary30',
+      onPrimaryContainer: 'primary100',
+      secondary: 'secondary20',
+      onSecondary: 'secondary100',
+      secondaryContainer: 'secondary30',
+      onSecondaryContainer: 'secondary100',
+      tertiary: 'tertiary20',
+      onTertiary: 'tertiary100',
+      tertiaryContainer: 'tertiary30',
+      onTertiaryContainer: 'tertiary100',
+      error: 'error20',
+      onError: 'error100',
+      errorContainer: 'error30',
+      onErrorContainer: 'error100',
+      surface: 'neutral98',
+      surfaceDim: 'neutral87',
+      surfaceBright: 'neutral98',
+      surfaceContainerLowest: 'neutral100',
+      surfaceContainerLow: 'neutral96',
+      surfaceContainer: 'neutral94',
+      surfaceContainerHigh: 'neutral92',
+      surfaceContainerHighest: 'neutral90',
+      surfaceVariant: 'neutralVariant90',
+      background: 'neutral98',
+      onSurface: 'neutral0',
+      onSurfaceVariant: 'neutralVariant20',
+      onBackground: 'neutral0',
+      outline: 'neutralVariant20',
+      outlineVariant: 'neutralVariant40',
+      inverseSurface: 'neutral20',
+      inverseOnSurface: 'neutral95',
+      inversePrimary: 'primary95',
       primaryFixed: 'primary90',
       primaryFixedDim: 'primary80',
       onPrimaryFixed: 'primary10',
@@ -120,33 +222,126 @@ const roleToTone: Record<
       shadow: 'neutral0',
       scrim: 'neutral0',
     },
+    medium: {
+      primary: 'primary90',
+      onPrimary: 'primary10',
+      primaryContainer: 'primary70',
+      onPrimaryContainer: 'primary0',
+      secondary: 'secondary90',
+      onSecondary: 'secondary10',
+      secondaryContainer: 'secondary70',
+      onSecondaryContainer: 'secondary0',
+      tertiary: 'tertiary90',
+      onTertiary: 'tertiary10',
+      tertiaryContainer: 'tertiary70',
+      onTertiaryContainer: 'tertiary0',
+      error: 'error90',
+      onError: 'error10',
+      errorContainer: 'error70',
+      onErrorContainer: 'error0',
+      surface: 'neutral6',
+      surfaceDim: 'neutral6',
+      surfaceBright: 'neutral24',
+      surfaceContainerLowest: 'neutral4',
+      surfaceContainerLow: 'neutral10',
+      surfaceContainer: 'neutral12',
+      surfaceContainerHigh: 'neutral17',
+      surfaceContainerHighest: 'neutral22',
+      surfaceVariant: 'neutralVariant30',
+      background: 'neutral6',
+      onSurface: 'neutral100',
+      onSurfaceVariant: 'neutralVariant90',
+      onBackground: 'neutral100',
+      outline: 'neutralVariant70',
+      outlineVariant: 'neutralVariant50',
+      inverseSurface: 'neutral90',
+      inverseOnSurface: 'neutral20',
+      inversePrimary: 'primary30',
+      primaryFixed: 'primary90',
+      primaryFixedDim: 'primary80',
+      onPrimaryFixed: 'primary10',
+      onPrimaryFixedVariant: 'primary30',
+      secondaryFixed: 'secondary90',
+      secondaryFixedDim: 'secondary80',
+      onSecondaryFixed: 'secondary10',
+      onSecondaryFixedVariant: 'secondary30',
+      tertiaryFixed: 'tertiary90',
+      tertiaryFixedDim: 'tertiary80',
+      onTertiaryFixed: 'tertiary10',
+      onTertiaryFixedVariant: 'tertiary30',
+      shadow: 'neutral0',
+      scrim: 'neutral0',
+    },
+    high: {
+      primary: 'primary95',
+      onPrimary: 'primary0',
+      primaryContainer: 'primary80',
+      onPrimaryContainer: 'primary0',
+      secondary: 'secondary95',
+      onSecondary: 'secondary0',
+      secondaryContainer: 'secondary80',
+      onSecondaryContainer: 'secondary0',
+      tertiary: 'tertiary95',
+      onTertiary: 'tertiary0',
+      tertiaryContainer: 'tertiary80',
+      onTertiaryContainer: 'tertiary0',
+      error: 'error95',
+      onError: 'error0',
+      errorContainer: 'error80',
+      onErrorContainer: 'error0',
+      surface: 'neutral6',
+      surfaceDim: 'neutral6',
+      surfaceBright: 'neutral24',
+      surfaceContainerLowest: 'neutral4',
+      surfaceContainerLow: 'neutral10',
+      surfaceContainer: 'neutral12',
+      surfaceContainerHigh: 'neutral17',
+      surfaceContainerHighest: 'neutral22',
+      surfaceVariant: 'neutralVariant30',
+      background: 'neutral6',
+      onSurface: 'neutral100',
+      onSurfaceVariant: 'neutralVariant95',
+      onBackground: 'neutral100',
+      outline: 'neutralVariant80',
+      outlineVariant: 'neutralVariant60',
+      inverseSurface: 'neutral90',
+      inverseOnSurface: 'neutral20',
+      inversePrimary: 'primary20',
+      primaryFixed: 'primary90',
+      primaryFixedDim: 'primary80',
+      onPrimaryFixed: 'primary10',
+      onPrimaryFixedVariant: 'primary30',
+      secondaryFixed: 'secondary90',
+      secondaryFixedDim: 'secondary80',
+      onSecondaryFixed: 'secondary10',
+      onSecondaryFixedVariant: 'secondary30',
+      tertiaryFixed: 'tertiary90',
+      tertiaryFixedDim: 'tertiary80',
+      onTertiaryFixed: 'tertiary10',
+      onTertiaryFixedVariant: 'tertiary30',
+      shadow: 'neutral0',
+      scrim: 'neutral0',
+    },
   },
 };
 
 const elevationToTone: Record<
   'light' | 'dark',
-  Record<
-    'standard',
-    Record<Exclude<keyof ElevationColors, 'level0'>, PaletteKey>
-  >
+  Record<Exclude<keyof ElevationColors, 'level0'>, PaletteKey>
 > = {
   light: {
-    standard: {
-      level1: 'neutral96',
-      level2: 'neutral94',
-      level3: 'neutral92',
-      level4: 'neutral92',
-      level5: 'neutral90',
-    },
+    level1: 'neutral96',
+    level2: 'neutral94',
+    level3: 'neutral92',
+    level4: 'neutral92',
+    level5: 'neutral90',
   },
   dark: {
-    standard: {
-      level1: 'neutral10',
-      level2: 'neutral12',
-      level3: 'neutral17',
-      level4: 'neutral17',
-      level5: 'neutral22',
-    },
+    level1: 'neutral10',
+    level2: 'neutral12',
+    level3: 'neutral17',
+    level4: 'neutral17',
+    level5: 'neutral22',
   },
 };
 
@@ -156,30 +351,14 @@ const elevationToTone: Record<
 const withPressedOpacity = (onSurface: string) =>
   color(onSurface).alpha(state.opacity.pressed).rgb().string();
 
-/**
- * Builds the color scheme for a mode and contrast level.
- *
- * `palette` is only used at `standard` contrast. The `medium` and `high`
- * schemes already hold color values, so a custom `palette` is ignored there.
- */
+/** Builds the color scheme for a mode and contrast level. */
 export function buildScheme(
   palette: Palette,
   opts: { mode: 'light' | 'dark'; contrast?: ContrastLevel }
 ): ThemeColors {
   const contrast = opts.contrast ?? 'standard';
-
-  if (contrast !== 'standard') {
-    const { roles, elevation } = contrastSchemes[opts.mode][contrast];
-
-    return {
-      ...roles,
-      stateLayerPressed: withPressedOpacity(roles.onSurface),
-      elevation: { level0: 'transparent', ...elevation },
-    };
-  }
-
   const tones = roleToTone[opts.mode][contrast];
-  const elevTones = elevationToTone[opts.mode][contrast];
+  const elevTones = elevationToTone[opts.mode];
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const mapped = Object.fromEntries(
