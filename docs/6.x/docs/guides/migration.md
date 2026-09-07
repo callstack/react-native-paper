@@ -31,6 +31,7 @@ So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate t
 
 ```tsx
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Card, Text } from 'react-native-paper';
 
 const MyComponent = () => {
   const opacity = useSharedValue(1);
@@ -38,7 +39,7 @@ const MyComponent = () => {
     opacity: opacity.value,
   }));
 
-  return <Card content="Animated Card" style={animatedStyle} />;
+  return <Card content={<Text>Animated Card</Text>} style={animatedStyle} />;
 };
 ```
 
@@ -168,7 +169,11 @@ Use `header` when the complete header is custom. It is mutually exclusive with `
 <Card
   variant="outlined"
   header={<TripHeader trip={trip} />}
-  content={<Card.Content>{trip.summary}</Card.Content>}
+  content={
+    <Card.Content>
+      <Text>{trip.summary}</Text>
+    </Card.Content>
+  }
 />
 ```
 
@@ -184,7 +189,11 @@ When buttons or other controls perform independent actions, keep the Card itself
 <Card
   variant="elevated"
   title="Draft itinerary"
-  content={<Card.Content>Review before saving.</Card.Content>}
+  content={
+    <Card.Content>
+      <Text>Review before saving.</Text>
+    </Card.Content>
+  }
   actions={
     <Card.Actions>
       <Button onPress={discard}>Discard</Button>

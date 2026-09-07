@@ -1124,12 +1124,20 @@ describe('Card types', () => {
           media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
           title="Weekend trip"
           subtitle="Actionable filled Card"
-          content={<Card.Content>View the itinerary.</Card.Content>}
+          content={
+            <Card.Content>
+              <Text>View the itinerary.</Text>
+            </Card.Content>
+          }
         />
         <Card
           variant="elevated"
           title="Draft itinerary"
-          content={<Card.Content>Review before saving.</Card.Content>}
+          content={
+            <Card.Content>
+              <Text>Review before saving.</Text>
+            </Card.Content>
+          }
           actions={
             <Card.Actions>
               <Button onPress={() => {}}>Discard</Button>
@@ -1143,7 +1151,9 @@ describe('Card types', () => {
           variant="outlined"
           header={<Card.Title title="Custom header" subtitle="Outlined Card" />}
           content={
-            <Card.Content>Supply any React node as the header.</Card.Content>
+            <Card.Content>
+              <Text>Supply any React node as the header.</Text>
+            </Card.Content>
           }
         />
         <Card
