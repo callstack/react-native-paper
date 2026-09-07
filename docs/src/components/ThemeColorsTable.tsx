@@ -24,9 +24,11 @@ const isDataObject = (value: DataObject[string]): value is DataObject =>
   typeof value === 'object';
 
 const FlatTable = ({
+  firstColumnLabel,
   themeColorsData,
   uniqueKeys,
 }: {
+  firstColumnLabel: string;
   themeColorsData: DataObject;
   uniqueKeys: string[];
 }): ReactNode => {
@@ -50,7 +52,7 @@ const FlatTable = ({
       <table>
         <thead>
           <tr>
-            <th>mode</th>
+            <th>{firstColumnLabel}</th>
             {getTableHeader(uniqueKeys)}
           </tr>
         </thead>
@@ -61,9 +63,11 @@ const FlatTable = ({
 };
 
 const TabbedTable = ({
+  firstColumnLabel,
   themeColorsData,
   uniqueKeys,
 }: {
+  firstColumnLabel: string;
   themeColorsData: DataObject;
   uniqueKeys: string[];
 }): ReactNode => {
@@ -88,7 +92,7 @@ const TabbedTable = ({
           <table>
             <thead>
               <tr>
-                <th>mode</th>
+                <th>{firstColumnLabel}</th>
                 {getTableHeader(uniqueKeys)}
               </tr>
             </thead>
@@ -120,12 +124,17 @@ const ThemeColorsTable = ({
   const uniqueKeys = getUniqueNestedKeys(themeColorsData);
   const nestingLevel = getMaxNestedLevel(themeColorsData);
   const isFlatTable = nestingLevel === 1;
+  const firstColumnLabel = componentName === 'Card' ? 'variant' : 'mode';
 
   const Table = isFlatTable ? FlatTable : TabbedTable;
 
   return (
     <>
-      <Table themeColorsData={themeColorsData} uniqueKeys={uniqueKeys} />
+      <Table
+        firstColumnLabel={firstColumnLabel}
+        themeColorsData={themeColorsData}
+        uniqueKeys={uniqueKeys}
+      />
       <Admonition type="tip">
         <p>
           If a dedicated prop for a specific color is not available or the{' '}
