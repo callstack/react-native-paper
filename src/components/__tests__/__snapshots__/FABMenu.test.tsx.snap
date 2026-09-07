@@ -1081,6 +1081,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       }
     >
       <View
+        aria-hidden={true}
         collapsable={false}
         style={
           [

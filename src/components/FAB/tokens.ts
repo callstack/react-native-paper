@@ -9,9 +9,11 @@ export type Variant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
-  | 'tonalPrimary'
-  | 'tonalSecondary'
-  | 'tonalTertiary';
+  | 'primaryContainer'
+  | 'secondaryContainer'
+  | 'tertiaryContainer'
+  | 'surface'
+  | 'branded';
 
 export type Size = 'default' | 'medium' | 'large';
 
@@ -65,18 +67,20 @@ const stateElevation = {
 } as const satisfies Record<string, Elevation>;
 
 const variants = {
+  surface: { container: 'surfaceContainerHigh', content: 'primary' },
+  branded: { container: 'surfaceContainerHigh', content: 'onSurface' },
   primary: { container: 'primary', content: 'onPrimary' },
   secondary: { container: 'secondary', content: 'onSecondary' },
   tertiary: { container: 'tertiary', content: 'onTertiary' },
-  tonalPrimary: {
+  primaryContainer: {
     container: 'primaryContainer',
     content: 'onPrimaryContainer',
   },
-  tonalSecondary: {
+  secondaryContainer: {
     container: 'secondaryContainer',
     content: 'onSecondaryContainer',
   },
-  tonalTertiary: {
+  tertiaryContainer: {
     container: 'tertiaryContainer',
     content: 'onTertiaryContainer',
   },

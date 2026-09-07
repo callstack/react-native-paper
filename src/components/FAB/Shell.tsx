@@ -43,7 +43,7 @@ export type ShellProps = {
    */
   label?: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -200,7 +200,7 @@ export type ShellProps = {
 const Shell = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   containerColor,
   contentColor,
@@ -208,7 +208,7 @@ const Shell = ({
   iconSize,
   leading,
   trailing,
-  elevation = Tokens.stateElevation.enabled,
+  elevation,
   visible = true,
   onPress,
   onLongPress,
@@ -235,6 +235,25 @@ const Shell = ({
   ref,
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
+  const touchableRef = React.useRef<View>(null);
+
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
+
+  // Explicit elevations (including flat menu items) keep their own treatment.
+  const resolvedElevation =
+    elevation ??
+    (Platform.OS === 'web' && visible && hasHandler
+      ? pressed
+        ? Tokens.stateElevation.pressed
+        : focused
+          ? Tokens.stateElevation.focus
+          : hovered
+            ? Tokens.stateElevation.hover
+            : Tokens.stateElevation.enabled
+      : Tokens.stateElevation.enabled);
 
   const dimensions = React.useMemo(
     () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
@@ -315,23 +334,32 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
-  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
-
   // `scope: 'within'`: the ring is drawn on the clip view below, not the
   // inner `TouchableRipple` that actually receives focus. On web the shared
   // stylesheet hides the browser's own outline there, so only the clip view's
   // ring shows, or only the outline in a browser without `:has()`.
   //
-  // Off when `disabled` or without a touch handler: the inner TouchableRipple
-  // is then a plain View, and a focused one unmounts without a blur reaching
-  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
-  // an app turns it off.
+  // Off when `disabled`, without a touch handler or while hidden: the inner
+  // TouchableRipple then can't be pressed, and a focused one unmounts without
+  // a blur reaching the hook. The public FAB has no `disabled`, so dropping
+  // the handlers is how an app turns it off.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !hasHandler,
+    disabled || !hasHandler || !visible,
     theme.colors.secondary,
     'outward',
     'within'
   );
+
+  React.useEffect(() => {
+    if (!visible || !hasHandler) {
+      if (Platform.OS === 'web') {
+        touchableRef.current?.blur();
+      }
+      setHovered(false);
+      setPressed(false);
+      setFocused(false);
+    }
+  }, [visible, hasHandler]);
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled
@@ -348,6 +376,7 @@ const Shell = ({
   return (
     <Surface
       ref={ref}
+      aria-hidden={visible ? undefined : true}
       backgroundColor={containerBg}
       borderRadius={borderRadius}
       style={[
@@ -356,7 +385,7 @@ const Shell = ({
         outerStyle,
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
-      elevation={elevation}
+      elevation={resolvedElevation}
       theme={theme}
     >
       <Animated.View
@@ -365,16 +394,29 @@ const Shell = ({
       >
         {overlay}
         <TouchableRipple
+          ref={Platform.OS === 'web' ? touchableRef : undefined}
           borderless
           background={background}
           focusRing="none"
-          onPress={onPress}
-          onLongPress={onLongPress}
-          onPressOut={onPressOut}
+          onPress={visible ? onPress : undefined}
+          onLongPress={visible ? onLongPress : undefined}
           delayLongPress={delayLongPress}
-          disabled={disabled}
-          onFocus={focusTarget.onFocus}
-          onBlur={focusTarget.onBlur}
+          disabled={disabled || !hasHandler || !visible}
+          onHoverIn={() => setHovered(true)}
+          onHoverOut={() => setHovered(false)}
+          onPressIn={() => setPressed(true)}
+          onPressOut={(event) => {
+            setPressed(false);
+            onPressOut?.(event);
+          }}
+          onFocus={(event) => {
+            setFocused(true);
+            focusTarget.onFocus?.(event);
+          }}
+          onBlur={() => {
+            setFocused(false);
+            focusTarget.onBlur?.();
+          }}
           aria-label={ariaLabel}
           role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
