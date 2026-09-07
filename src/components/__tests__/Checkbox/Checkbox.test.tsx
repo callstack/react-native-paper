@@ -531,4 +531,94 @@ describe('Checkbox touch target', () => {
       height: 40,
     });
   });
+
+  it('takes the custom style on the outer container, not the pressable', async () => {
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        testID="checkbox"
+        style={{ marginTop: 12 }}
+      />
+    );
+
+    // On the pressable the style would miss the focus ring beside it, and
+    // could shrink the tap target back below 48dp.
+    expect(screen.root).toHaveStyle({ marginTop: 12 });
+    expect(screen.getByRole('checkbox')).not.toHaveStyle({ marginTop: 12 });
+  });
+});
+describe('Checkbox focus ring', () => {
+  const renderFocused = async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'focus');
+  };
+
+  it('is not rendered until the checkbox is focused', async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+    );
+
+    expect(screen.queryByTestId('checkbox-focus-ring')).toBeNull();
+  });
+
+  it('stays hidden for pointer focus on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'focus', {
+      currentTarget: { matches: () => false },
+    });
+
+    expect(screen.queryByTestId('checkbox-focus-ring')).toBeNull();
+  });
+
+  it('is shown for keyboard focus on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} testID="checkbox" />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'focus', {
+      currentTarget: { matches: () => true },
+    });
+
+    expect(screen.getByTestId('checkbox-focus-ring')).toBeOnTheScreen();
+  });
+
+  it('clears the 40dp state layer by the 2dp outer offset', async () => {
+    await renderFocused();
+
+    // 40dp state layer + 2dp offset + 3dp border on each side.
+    expect(screen.getByTestId('checkbox-focus-ring')).toHaveStyle({
+      width: 50,
+      height: 50,
+      borderWidth: 3,
+    });
+  });
+});
+
+it('renders the focus ring outside the pressable so clipping cannot crop it', async () => {
+  await render(
+    <Checkbox
+      status="checked"
+      onPress={() => {}}
+      aria-label="Notify me"
+      testID="checkbox"
+    />
+  );
+  await fireEvent(screen.getByRole('checkbox'), 'focus');
+
+  // Android P+ forces `overflow: hidden` on the pressable for the foreground
+  // ripple, so a ring nested inside it would be cropped.
+  const pressable = screen.getByRole('checkbox');
+  let node = screen.getByTestId('checkbox-focus-ring').parent;
+  while (node) {
+    expect(node).not.toBe(pressable);
+    node = node.parent;
+  }
 });

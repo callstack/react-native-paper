@@ -78,8 +78,8 @@ export type Props = Omit<
    */
   testID?: string;
   /**
-   * Custom style to override the default tap target. Passed through to
-   * the underlying `TouchableRipple`.
+   * Custom style for the checkbox's outer container. The 48dp tap target is
+   * fixed, so `width` and `height` here do not resize it.
    */
   style?: StyleProp<ViewStyle>;
 };
@@ -93,13 +93,13 @@ const {
   touchTargetSize: TOUCH_TARGET_SIZE,
 } = CheckboxTokens;
 
-const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
-// Focus indicator is a circular ring at the 40dp state-layer boundary.
-// We don't apply `focusIndicator.outerOffset` here because the surrounding
-// `TouchableRipple borderless` clips overflow to the tap-target shape,
-// so a ring drawn outside the 40dp circle would be cropped.
-const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
-const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
+const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
+  tokens.md.sys.state.focusIndicator;
+// The border is drawn inside the ring's own box, so the box spans the state
+// layer plus the offset and the border on each side.
+const FOCUS_RING_SIZE =
+  STATE_LAYER_SIZE + 2 * (FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
+const FOCUS_RING_RADIUS = FOCUS_RING_SIZE / 2;
 
 // Compose's `RippleAnimation` starts the ripple at 30% of the target layer's
 // size, i.e. 0.6 of the radius.
@@ -428,92 +428,101 @@ const Checkbox = ({
           'aria-live': 'polite' as const,
         };
 
+  const focusRing =
+    focused && !disabled ? (
+      <View
+        pointerEvents="none"
+        testID={testID ? `${testID}-focus-ring` : undefined}
+        style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
+      />
+    ) : null;
+
   return (
-    <TouchableRipple
-      {...rest}
-      centered
-      onPress={onPress}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      {...interactionHandlers}
-      // Keeps the platform press circular for a caller that hands it back
-      // with `rippleColor` or `underlayColor`.
-      borderless
-      {...platformPressOverride}
-      disabled={disabled}
-      {...accessibilityProps}
-      testID={testID}
-      style={[
-        styles.tapTarget,
-        Platform.OS === 'web' ? webNoOutline : undefined,
-        style,
-      ]}
-    >
-      <View pointerEvents="none" style={styles.tapTargetInner}>
-        <Animated.View
-          pointerEvents="none"
-          testID={testID ? `${testID}-state-layer` : undefined}
-          style={[styles.stateLayer, stateLayerStyle]}
-        />
-        {ownsPress ? (
+    // The ring is a sibling of the pressable, not a child: a foreground ripple
+    // forces `overflow: hidden` on it regardless of `borderless`.
+    <View style={[styles.root, style]}>
+      <TouchableRipple
+        {...rest}
+        centered
+        onPress={onPress}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...interactionHandlers}
+        // Keeps the platform press circular for a caller that hands it back
+        // with `rippleColor` or `underlayColor`.
+        borderless
+        {...platformPressOverride}
+        disabled={disabled}
+        {...accessibilityProps}
+        testID={testID}
+        style={[
+          styles.tapTarget,
+          Platform.OS === 'web' ? webNoOutline : undefined,
+        ]}
+      >
+        <View pointerEvents="none" style={styles.tapTargetInner}>
           <Animated.View
             pointerEvents="none"
-            testID={testID ? `${testID}-ripple` : undefined}
-            style={[
-              styles.stateLayer,
-              { backgroundColor: pressColor },
-              rippleStyle,
-            ]}
+            testID={testID ? `${testID}-state-layer` : undefined}
+            style={[styles.stateLayer, stateLayerStyle]}
           />
-        ) : null}
-        {focused && !disabled ? (
+          {ownsPress ? (
+            <Animated.View
+              pointerEvents="none"
+              testID={testID ? `${testID}-ripple` : undefined}
+              style={[
+                styles.stateLayer,
+                { backgroundColor: pressColor },
+                rippleStyle,
+              ]}
+            />
+          ) : null}
           <View
-            pointerEvents="none"
-            style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
-          />
-        ) : null}
-        <View style={[styles.container, { opacity: visual.containerOpacity }]}>
-          <Animated.View
-            pointerEvents="none"
-            style={[styles.outline, outlineStyle]}
-          />
-          <Animated.View
-            pointerEvents="none"
-            style={[styles.fill, fillStyle]}
-          />
-          <Animated.View
-            style={[
-              flipMaskForWebRTL
-                ? styles.checkmarkMaskWebRTL
-                : styles.checkmarkMask,
-              maskStyle,
-            ]}
+            style={[styles.container, { opacity: visual.containerOpacity }]}
           >
-            {showIndeterminate ? (
-              <View style={styles.checkmarkContent}>
-                <View
-                  style={[styles.dash, { backgroundColor: visual.iconColor }]}
-                />
-              </View>
-            ) : (
-              <View style={styles.checkmarkContent}>
-                <View
-                  style={[
-                    styles.checkmarkGlyph,
-                    { borderColor: visual.iconColor },
-                    // Native platforms auto-swap border sides in RTL, so
-                    // pre-swap them to preserve the checkmark orientation.
-                    direction === 'rtl' && Platform.OS !== 'web'
-                      ? styles.checkmarkGlyphRTL
-                      : null,
-                  ]}
-                />
-              </View>
-            )}
-          </Animated.View>
+            <Animated.View
+              pointerEvents="none"
+              style={[styles.outline, outlineStyle]}
+            />
+            <Animated.View
+              pointerEvents="none"
+              style={[styles.fill, fillStyle]}
+            />
+            <Animated.View
+              style={[
+                flipMaskForWebRTL
+                  ? styles.checkmarkMaskWebRTL
+                  : styles.checkmarkMask,
+                maskStyle,
+              ]}
+            >
+              {showIndeterminate ? (
+                <View style={styles.checkmarkContent}>
+                  <View
+                    style={[styles.dash, { backgroundColor: visual.iconColor }]}
+                  />
+                </View>
+              ) : (
+                <View style={styles.checkmarkContent}>
+                  <View
+                    style={[
+                      styles.checkmarkGlyph,
+                      { borderColor: visual.iconColor },
+                      // Native platforms auto-swap border sides in RTL, so
+                      // pre-swap them to preserve the checkmark orientation.
+                      direction === 'rtl' && Platform.OS !== 'web'
+                        ? styles.checkmarkGlyphRTL
+                        : null,
+                    ]}
+                  />
+                </View>
+              )}
+            </Animated.View>
+          </View>
         </View>
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+      {focusRing}
+    </View>
   );
 };
 
@@ -522,6 +531,10 @@ const Checkbox = ({
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
+  root: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   tapTarget: {
     width: TOUCH_TARGET_SIZE,
     height: TOUCH_TARGET_SIZE,

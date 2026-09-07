@@ -583,3 +583,7 @@ Interaction states are now painted as a Material Design 3 state layer on every p
 #### Touch target height
 
 `Checkbox` now reserves the 48dp minimum touch target, so it occupies 48dp instead of 40dp. Nothing painted changed size, but rows containing a checkbox may become slightly taller.
+
+#### Custom style target
+
+The `style` prop now applies to the checkbox's outer container rather than the pressable inside it, so layout styles such as `margin`, `position` and `transform` move the whole component, focus ring included. `width` and `height` no longer resize the 48dp tap target, and paint styles land on a different shape: a `backgroundColor` used to fill the circular pressable and now fills the square container around it.
