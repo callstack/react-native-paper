@@ -206,22 +206,8 @@ const getProps = (
           ? [item.type.getText(item.getSourceFile())]
           : []
       );
-      const hasUnionDeclarations = declarations.some((item) => {
-        let parent: ts.Node | undefined = item.parent;
-
-        while (parent && !ts.isTypeAliasDeclaration(parent)) {
-          if (ts.isUnionTypeNode(parent)) {
-            return true;
-          }
-
-          parent = parent.parent;
-        }
-
-        return false;
-      });
       const type =
-        (hasUnionDeclarations && new Set(declarationTypes).size > 1) ||
-        !declarations.includes(property)
+        new Set(declarationTypes).size > 1 || !declarations.includes(property)
           ? checker.typeToString(
               checker.getTypeOfSymbolAtLocation(symbol, property),
               property,

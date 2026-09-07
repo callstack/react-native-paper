@@ -1114,10 +1114,38 @@ describe('Card', () => {
 });
 
 describe('Card types', () => {
-  it('rejects the removed API and mixed header forms', () => {
+  it('accepts documented examples and rejects removed or mixed forms', () => {
     const typeCases = (
       <>
         <Card />
+        <Card
+          accessibilityLabel="Open trip details"
+          onPress={() => {}}
+          media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+          title="Weekend trip"
+          subtitle="Actionable filled Card"
+          content={<Card.Content>View the itinerary.</Card.Content>}
+        />
+        <Card
+          variant="elevated"
+          title="Draft itinerary"
+          content={<Card.Content>Review before saving.</Card.Content>}
+          actions={
+            <Card.Actions>
+              <Button onPress={() => {}}>Discard</Button>
+              <Button mode="contained" onPress={() => {}}>
+                Save
+              </Button>
+            </Card.Actions>
+          }
+        />
+        <Card
+          variant="outlined"
+          header={<Card.Title title="Custom header" subtitle="Outlined Card" />}
+          content={
+            <Card.Content>Supply any React node as the header.</Card.Content>
+          }
+        />
         <Card
           title="Title"
           subtitle="Subtitle"
