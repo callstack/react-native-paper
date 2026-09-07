@@ -307,6 +307,24 @@ The misspelled `traileringIcon` props have been renamed:
 />
 ```
 
+### FAB
+
+The color presets for `FAB` and `FAB.Extended` now match the MD3 color roles:
+`primary`, `primaryContainer` (default), `secondary`, `secondaryContainer`,
+`tertiary`, `tertiaryContainer`, `surface`, and `branded`.
+
+If you used an earlier 6.x build, replace `tonalPrimary`, `tonalSecondary`, and
+`tonalTertiary` with `primaryContainer`, `secondaryContainer`, and
+`tertiaryContainer`. The old names have been removed without aliases. This also
+applies to the FAB menu trigger's `variant`.
+
+Both `surface` and `branded` use `surfaceContainerHigh`. Surface FAB content uses
+`primary`; branded content defaults to `onSurface`. A custom icon source can
+render brand artwork in its own colors.
+
+On web, hovering a FAB raises its elevation from level 3 to level 4. Focused and
+pressed states use level 3. The large FAB icon remains **36dp**.
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.

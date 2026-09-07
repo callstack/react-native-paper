@@ -55,13 +55,15 @@ export type MenuItemProps = {
   testID?: string;
 };
 
+type MenuVariant = Exclude<Variant, 'surface' | 'branded'>;
+
 export type MenuTriggerProps = {
   /**
    * Icon displayed in the trigger FAB (and cross-faded to `closeIcon` when
    * the menu is open).
    */
   icon: IconSource;
-  variant?: Variant;
+  variant?: MenuVariant;
   size?: Size;
   containerColor?: ColorValue;
   contentColor?: ColorValue;
@@ -121,24 +123,30 @@ export type MenuProps = {
  * The close button is always the saturated role color; items are always the
  * tonal (container) role color.
  */
-const getCloseVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
+const getCloseVariant = (triggerVariant: MenuVariant): Variant => {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
     return 'secondary';
   }
   return 'tertiary';
 };
 
-const getItemsVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
-    return 'tonalPrimary';
+const getItemsVariant = (triggerVariant: MenuVariant): Variant => {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
+    return 'primaryContainer';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
-    return 'tonalSecondary';
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
+    return 'secondaryContainer';
   }
-  return 'tonalTertiary';
+  return 'tertiaryContainer';
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -302,7 +310,7 @@ const MenuItem = ({
 };
 
 type MorphingTriggerProps = {
-  triggerVariant: Variant;
+  triggerVariant: MenuVariant;
   closeVariant: Variant;
   triggerContainerColor?: ColorValue;
   triggerContentColor?: ColorValue;
@@ -447,6 +455,7 @@ const MorphingTrigger = ({
       ]}
     >
       <Shell
+        elevation={Tokens.stateElevation.enabled}
         size={size}
         variant={triggerVariant}
         containerColor={triggerContainerColor}
@@ -544,7 +553,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const triggerVariant: MenuVariant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;
