@@ -42,10 +42,10 @@ exports[`renders Checkbox with custom testID 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -246,10 +246,10 @@ exports[`renders checked Checkbox with color 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -448,10 +448,10 @@ exports[`renders checked Checkbox with onPress 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -675,10 +675,10 @@ exports[`renders indeterminate Checkbox 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -889,10 +889,10 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -1078,10 +1078,10 @@ exports[`renders unchecked Checkbox with color 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,
@@ -1280,10 +1280,10 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
         undefined,

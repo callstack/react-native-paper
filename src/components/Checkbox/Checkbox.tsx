@@ -90,6 +90,7 @@ const {
   containerRadius: CONTAINER_RADIUS,
   outlineWidth: OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
+  touchTargetSize: TOUCH_TARGET_SIZE,
 } = CheckboxTokens;
 
 const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
@@ -208,14 +209,15 @@ const Checkbox = ({
     pressRipple.color
   );
 
-  // The platform press paints the wrong thing: it tints with a neutral role,
-  // and on web its hover overlay doubles up with the layer. Android also
-  // refuses a `PlatformColor`, which is what the dynamic theme resolves the
-  // roles to. A caller can still ask for that platform press back, but only
-  // through a prop this platform honours: `rippleColor` everywhere,
-  // `background` for the Android ripple, `underlayColor` for the iOS
-  // highlight. Counting one the platform drops would cost the MD3 ripple and
-  // hand back the neutral default instead.
+  // The platform press paints the wrong thing: it covers the whole 48dp target
+  // instead of the 40dp state layer, tints with a neutral role, and on web its
+  // hover overlay doubles up with the layer. Android also refuses a
+  // `PlatformColor`, which is what the dynamic theme resolves the roles to.
+  // A caller can still ask for that platform press back, but only through a
+  // prop this platform honours: `rippleColor` everywhere, `background` for the
+  // Android ripple, `underlayColor` for the iOS highlight. Counting one the
+  // platform drops would cost the MD3 ripple and hand back the neutral default
+  // instead.
   const platformOwnsPress =
     rest.rippleColor != null ||
     (Platform.OS === 'android' && rest.background != null) ||
@@ -521,9 +523,9 @@ const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
   tapTarget: {
-    width: STATE_LAYER_SIZE,
-    height: STATE_LAYER_SIZE,
-    borderRadius: STATE_LAYER_SIZE / 2,
+    width: TOUCH_TARGET_SIZE,
+    height: TOUCH_TARGET_SIZE,
+    borderRadius: TOUCH_TARGET_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
