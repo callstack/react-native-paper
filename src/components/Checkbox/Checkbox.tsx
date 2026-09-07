@@ -78,10 +78,17 @@ export type Props = Omit<
    */
   testID?: string;
   /**
-   * Custom style for the checkbox's outer container. The 48dp tap target is
-   * fixed, so `width` and `height` here do not resize it.
+   * Custom style for the checkbox's outer container. `width` and `height` here
+   * do not resize the tap target; `tapTargetStyle` does.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Custom style for the pressable that carries the 48dp tap target. Sizing it
+   * keeps the 24dp corner radius, and shrinking it clips the 40dp state layer.
+   * Margin, padding and transform belong in `style`: here they shift the
+   * pressable out from under the focus ring.
+   */
+  tapTargetStyle?: StyleProp<ViewStyle>;
 };
 
 // Spec dimensions (https://m3.material.io/components/checkbox/specs).
@@ -139,6 +146,7 @@ const Checkbox = ({
   color,
   uncheckedColor,
   style,
+  tapTargetStyle,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -458,6 +466,7 @@ const Checkbox = ({
         style={[
           styles.tapTarget,
           Platform.OS === 'web' ? webNoOutline : undefined,
+          tapTargetStyle,
         ]}
       >
         <View pointerEvents="none" style={styles.tapTargetInner}>

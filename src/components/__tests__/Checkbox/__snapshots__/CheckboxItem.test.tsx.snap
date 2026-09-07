@@ -112,6 +112,7 @@ exports[`can render leading checkbox control 1`] = `
                 "width": 48,
               },
               undefined,
+              undefined,
             ],
           ]
         }
@@ -453,6 +454,7 @@ exports[`renders unchecked 1`] = `
                 "justifyContent": "center",
                 "width": 48,
               },
+              undefined,
               undefined,
             ],
           ]
