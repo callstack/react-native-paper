@@ -34,30 +34,32 @@ import type { Props as TouchableRippleProps } from '../TouchableRipple/Touchable
 
 type ConvenienceHeaderProps = {
   /**
-   * Header title.
+   * Title rendered in the Card's header region.
    */
   title?: React.ReactNode;
   /**
-   * Header subtitle.
+   * Subtitle rendered below `title` in the Card's header region.
    */
   subtitle?: React.ReactNode;
   /**
-   * Render slot displayed before the title and subtitle.
+   * Render slot displayed before `title` and `subtitle`.
    */
   leading?: CardTitleProps['left'];
   /**
-   * Render slot displayed after the title and subtitle.
+   * Render slot displayed after `title` and `subtitle`.
    */
   trailing?: CardTitleProps['right'];
   /**
-   * A fully custom header cannot be combined with convenience header props.
+   * Fully custom header region. This cannot be combined with `title`,
+   * `subtitle`, `leading`, or `trailing`.
    */
   header?: never;
 };
 
 type CustomHeaderProps = {
   /**
-   * Fully custom header content.
+   * Fully custom header region. This cannot be combined with `title`,
+   * `subtitle`, `leading`, or `trailing`.
    */
   header: React.ReactNode;
   /**
@@ -139,11 +141,12 @@ type CardShapeProps = {
 
 type FilledCardProps = {
   /**
-   * Filled Card variant (default).
+   * Material Card variant. `filled` is the default, `elevated` adds hierarchy
+   * with a shadow, and `outlined` adds a visible boundary.
    */
   variant?: 'filled';
   /**
-   * Filled Cards do not support custom elevation.
+   * Resting elevation. Available only when `variant="elevated"`.
    */
   elevation?: never;
 };
@@ -172,18 +175,22 @@ type OutlinedCardProps = {
 
 type CardVariantProps = FilledCardProps | ElevatedCardProps | OutlinedCardProps;
 
-type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
+export type Props = Omit<ViewProps, 'children' | 'style'> &
   CardShapeProps & {
     /**
-     * Media rendered at the start of the Card.
+     * Media rendered as the first Card region. Use `Card.Cover` for responsive
+     * edge-to-edge image media, or pass any React node, array, or fragment.
      */
     media?: React.ReactNode;
     /**
-     * Main Card content.
+     * Main content rendered after the header. Use `Card.Content` when the
+     * standard Card padding is desired.
      */
     content?: React.ReactNode;
     /**
-     * Actions rendered at the end of the Card.
+     * Actions rendered as the final Card region. Independent controls belong
+     * here only when the Card itself is neutral, without interaction handlers.
+     * `Card.Actions` provides the standard action-row layout.
      */
     actions?: React.ReactNode;
     /**
@@ -220,13 +227,18 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
     disabled?: boolean;
     /**
      * Whether to show the Card's controlled Material dragged presentation.
-     * Gesture recognition and drag lifecycle remain the consumer's responsibility.
+     * This controls visuals only; gesture recognition, drag lifecycle, list
+     * reordering, and drop behavior remain the consumer's responsibility.
      */
     dragged?: boolean;
     /**
-     * Style of card's inner content.
+     * Style of the inner region that contains all Card slots.
      */
     contentStyle?: StyleProp<ViewStyle>;
+    /**
+     * Layout style for the outer Card shell. Use the dedicated shape props and
+     * `variant` or `elevation` for Card visuals.
+     */
     style?: StyleProp<SurfaceStyle>;
     /**
      * @optional
@@ -239,7 +251,9 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
      */
     testID?: string;
     /**
-     * Whether the Card's semantic target is an accessibility element.
+     * Whether the Card's semantic target is an accessibility element. For an
+     * actionable Card this applies to its single interaction target; otherwise
+     * it applies to the neutral outer shell.
      */
     accessible?: boolean;
     /**
@@ -250,47 +264,87 @@ type CardBaseProps = Omit<ViewProps, 'children' | 'style'> &
      * Reference to the outer Card shell.
      */
     ref?: React.Ref<View>;
-  };
-
-export type Props = CardBaseProps &
-  (ConvenienceHeaderProps | CustomHeaderProps) &
+  } & (ConvenienceHeaderProps | CustomHeaderProps) &
   CardVariantProps;
 
 /**
- * A Card groups related media, header content, body content, and actions.
- * Use the `filled` (default), `elevated`, or `outlined` variant to select its
- * Material 3 emphasis.
+ * A Card groups related media, header content, body content, and actions. It
+ * renders populated regions in the fixed order `media`, header, `content`, and
+ * `actions`, regardless of prop order. Slots accept React nodes, including
+ * arrays and fragments, and Card does not clone or rewrite them.
  *
- * A Card with an interaction handler represents one action. It receives button
- * semantics by default and must not contain independent controls in `actions`.
- * Use a neutral Card when its actions provide their own interaction targets.
+ * The header region can be created directly with `title`, `subtitle`, `leading`,
+ * and `trailing`, or replaced completely with `header`; the two forms are
+ * mutually exclusive. `Card.Title`, `Card.Content`, `Card.Cover`, and
+ * `Card.Actions` remain optional layout helpers for their corresponding slots.
+ *
+ * Use `filled` (the default), `elevated`, or `outlined` for Material 3 emphasis.
+ * Only an elevated Card accepts `elevation`. Every variant uses the theme's
+ * medium shape by default; the dedicated corner props consistently shape the
+ * shadow shell, clipped visual region, outline, state layer, ripple, focus
+ * indicator, and edge media.
+ *
+ * Supplying `onPress`, `onLongPress`, `onPressIn`, or `onPressOut` makes the
+ * whole Card one actionable target. It receives button semantics by default,
+ * routes accessibility props and `touchableRef` to that target, and must not
+ * contain independent controls in `actions`. Keep the Card neutral when the
+ * controls in `actions` are the interaction targets. A neutral Card remains a
+ * grouping container unless accessibility semantics are supplied explicitly.
+ * Disabled Cards expose disabled semantics and suppress interaction callbacks.
+ *
+ * `ref` targets the outer shadow shell. On an actionable Card, `testID` targets
+ * the interaction node; on a neutral Card it targets the slot-content node.
+ * `${testID}-container` and `${testID}-visual` target the outer shell and the
+ * clipped visual region. `dragged` controls Material dragged visuals only; the
+ * consumer remains responsible for gesture recognition and drag lifecycle.
  *
  * ## Usage
- * ```js
+ *
+ * An actionable filled Card represents one action and contains no independent
+ * controls:
+ *
+ * ```tsx
  * import * as React from 'react';
  * import { Avatar, Button, Card, Text } from 'react-native-paper';
+ * import { View } from 'react-native';
  *
- * const Leading = props => <Avatar.Icon {...props} icon="folder" />
+ * const CardExamples = () => (
+ *   <View>
+ *   <Card
+ *     accessibilityLabel="Open trip details"
+ *     onPress={() => console.log('Open trip details')}
+ *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
+ *     title="Weekend trip"
+ *     subtitle="Actionable filled Card"
+ *     leading={(props) => <Avatar.Icon {...props} icon="folder" />}
+ *     content={<Card.Content>
+ *       <Text variant="bodyMedium">View the itinerary.</Text>
+ *     </Card.Content>}
+ *   />
  *
- * const MyComponent = () => (
  *   <Card
  *     variant="elevated"
- *     media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
- *     title="Card Title"
- *     subtitle="Card Subtitle"
- *     leading={Leading}
+ *     title="Draft itinerary"
  *     content={<Card.Content>
- *       <Text variant="titleLarge">Card title</Text>
- *       <Text variant="bodyMedium">Card content</Text>
+ *       <Text variant="bodyMedium">Review before saving.</Text>
  *     </Card.Content>}
  *     actions={<Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button onPress={() => console.log('Discard')}>Discard</Button>
+ *       <Button mode="contained" onPress={() => console.log('Save')}>Save</Button>
  *     </Card.Actions>}
  *   />
+ *
+ *   <Card
+ *     variant="outlined"
+ *     header={<Card.Title title="Custom header" subtitle="Outlined Card" />}
+ *     content={<Card.Content>
+ *       <Text variant="bodyMedium">Supply any React node as the header.</Text>
+ *     </Card.Content>}
+ *   />
+ *   </View>
  * );
  *
- * export default MyComponent;
+ * export default CardExamples;
  * ```
  */
 
