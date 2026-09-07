@@ -23,15 +23,17 @@ const getTableCell = (keys: string[], modes: DataObject): ReactNode[] => {
 const isDataObject = (value: DataObject[string]): value is DataObject =>
   typeof value === 'object';
 
+type TableProps = {
+  firstColumnLabel: string;
+  themeColorsData: DataObject;
+  uniqueKeys: string[];
+};
+
 const FlatTable = ({
   firstColumnLabel,
   themeColorsData,
   uniqueKeys,
-}: {
-  firstColumnLabel: string;
-  themeColorsData: DataObject;
-  uniqueKeys: string[];
-}): ReactNode => {
+}: TableProps): ReactNode => {
   const rows = Object.keys(themeColorsData).map((mode) => {
     const value = themeColorsData[mode];
 
@@ -66,11 +68,7 @@ const TabbedTable = ({
   firstColumnLabel,
   themeColorsData,
   uniqueKeys,
-}: {
-  firstColumnLabel: string;
-  themeColorsData: DataObject;
-  uniqueKeys: string[];
-}): ReactNode => {
+}: TableProps): ReactNode => {
   const tabTableContent = Object.entries(themeColorsData).map(
     ([key, modes]) => {
       if (!isDataObject(modes)) {
