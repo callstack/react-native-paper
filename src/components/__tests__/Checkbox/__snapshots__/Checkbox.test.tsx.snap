@@ -489,6 +489,31 @@ exports[`renders checked Checkbox with onPress 1`] = `
       }
     />
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
+          },
+        ]
+      }
+    />
+    <View
       style={
         [
           {
@@ -686,6 +711,31 @@ exports[`renders indeterminate Checkbox 1`] = `
           {
             "backgroundColor": "rgba(103, 80, 164, 1)",
             "opacity": 0,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
           },
         ]
       }
@@ -1266,6 +1316,31 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
             "opacity": 0,
+          },
+        ]
+      }
+    />
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
           },
         ]
       }
