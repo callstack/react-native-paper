@@ -158,7 +158,6 @@ exports[`renders extended FAB collapsed 1`] = `
             },
             [
               null,
-              null,
             ],
           ]
         }
@@ -482,7 +481,6 @@ exports[`renders extended FAB expanded 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -808,7 +806,6 @@ exports[`renders extended FAB large size 1`] = `
             },
             [
               null,
-              null,
             ],
           ]
         }
@@ -1132,7 +1129,6 @@ exports[`renders extended FAB medium size 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -1458,7 +1454,6 @@ exports[`renders extended FAB not visible 1`] = `
             },
             [
               null,
-              null,
             ],
           ]
         }
@@ -1782,7 +1777,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]

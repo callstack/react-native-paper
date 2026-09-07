@@ -1,4 +1,5 @@
 import { Platform, Text } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import {
   afterEach,
@@ -11,24 +12,16 @@ import {
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
-import { tokens } from '../../theme/tokens';
 // By extension: a bare import resolves to `.native` under the jest preset, so
 // the web implementation would never be exercised.
 import TouchableRipple from '../TouchableRipple/TouchableRipple.tsx';
 
-const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
-
-// react-native-web hands `onFocus` a real DOM node, and `isKeyboardFocusEvent`
-// asks it whether it matches `:focus-visible`.
-const keyboardFocus = { currentTarget: { matches: () => true } };
-const pointerFocus = { currentTarget: { matches: () => false } };
-
-const focus = async (data: unknown) => {
-  await act(async () => {
-    await fireEvent(screen.getByTestId('ripple'), 'focus', data);
-  });
-};
-
+// There is no DOM in this repo's Jest, so there is no real `:focus-visible` to
+// fire - the mechanism is now the browser's, not this library's. These prove
+// the wiring instead: the right `data-focus-ring[-within]` attribute and CSS
+// colour variable land on the rendered element for a given `focusRing` prop.
+// Real focus behaviour is a manual, browser-only check (see the PR
+// description).
 const renderRipple = (props = {}) =>
   render(
     <TouchableRipple testID="ripple" onPress={() => {}} {...props}>
@@ -45,46 +38,55 @@ describe('TouchableRipple focus ring (web implementation)', () => {
     Platform.OS = original;
   });
 
-  it('rings on keyboard focus, in the theme secondary colour', async () => {
+  it('emits data-focus-ring="outward" and the secondary colour by default', async () => {
     await renderRipple();
 
-    await focus(keyboardFocus);
-
-    // colour matters: a ring the same colour as its surface is invisible
-    expect(screen.getByTestId('ripple')).toHaveStyle({
-      outlineWidth: thickness,
-      outlineOffset: outerOffset,
-      outlineStyle: 'solid',
-      outlineColor: 'rgba(98, 91, 113, 1)',
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toEqual({
+      focusRing: 'outward',
     });
+    expect(screen.getByTestId('ripple')).toHaveStyle(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      {
+        ['--rnp-focus-ring-color']: 'rgba(98, 91, 113, 1)',
+      } as unknown as ViewStyle
+    );
   });
 
-  it('does not ring on a pointer focus', async () => {
-    await renderRipple();
-
-    await focus(pointerFocus);
-
-    expect(screen.getByTestId('ripple')).not.toHaveStyle({
-      outlineWidth: thickness,
-    });
-  });
-
-  it('draws inward when asked', async () => {
+  it('emits data-focus-ring="inward" when asked', async () => {
     await renderRipple({ focusRing: 'inward' });
 
-    await focus(keyboardFocus);
-
-    expect(screen.getByTestId('ripple')).toHaveStyle({
-      outlineOffset: -thickness,
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toEqual({
+      focusRing: 'inward',
     });
   });
 
-  it('forwards onFocus and onBlur to the caller', async () => {
+  it('emits no attribute when the ring is turned off', async () => {
+    await renderRipple({ focusRing: 'none' });
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toBeUndefined();
+  });
+
+  it('emits no attribute when disabled', async () => {
+    await renderRipple({ disabled: true });
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toBeUndefined();
+  });
+
+  // Not reference equality: RN's own `Pressable` wraps the handler it is
+  // given internally, on every platform, ring or no ring. What matters here
+  // is that this library stops doing its own extra wrapping around it.
+  it('still calls a caller onFocus and onBlur', async () => {
     const onFocus = jest.fn();
     const onBlur = jest.fn();
     await renderRipple({ onFocus, onBlur });
 
-    await focus(keyboardFocus);
+    await act(async () => {
+      await fireEvent(screen.getByTestId('ripple'), 'focus');
+    });
     await act(async () => {
       await fireEvent(screen.getByTestId('ripple'), 'blur');
     });

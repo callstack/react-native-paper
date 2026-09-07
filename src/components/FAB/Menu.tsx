@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
@@ -23,12 +23,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
-import {
-  getFocusRingStyle,
-  toStyleList,
-  useFocusRing,
-  webNoOutline,
-} from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -248,7 +243,17 @@ const MenuItem = ({
     MenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
 
-  const { focused, onFocus, onBlur } = useFocusRing();
+  // `scope: 'within'`: the ring belongs on the pill below, not the inner
+  // `TouchableRipple` that actually receives focus.
+  //
+  // `undefined` disabled: menu items have no `disabled` prop today. Wire the
+  // real value through here if that ever changes.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    undefined,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   return (
     <View style={styles.menuItemWrapper}>
@@ -256,21 +261,19 @@ const MenuItem = ({
         style={[
           styles.menuItem,
           { height, borderRadius, backgroundColor: colors.container },
-          ...toStyleList(getFocusRingStyle(focused, theme.colors.secondary)),
+          ...focusRing.style,
         ]}
+        {...focusRing.dataSetProps}
       >
         <TouchableRipple
           borderless
           focusRing="none"
           onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
           role="button"
           aria-label={ariaLabel ?? label}
-          style={[
-            { borderRadius },
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[{ borderRadius }, ...focusTarget.style]}
           testID={testID}
         >
           <Content

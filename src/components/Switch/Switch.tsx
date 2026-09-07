@@ -31,12 +31,7 @@ import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
-import {
-  getFocusRingStyle,
-  toStyleList,
-  useFocusRing,
-  webNoOutline,
-} from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon, { type IconSource } from '../Icon';
 
 export type Props = {
@@ -156,7 +151,6 @@ const Switch = ({
   const pressedSV = useSharedValue(0);
   const hoveredSV = useSharedValue(0);
   const focusedSV = useSharedValue(0);
-  const focusRing = useFocusRing(isDisabled);
 
   React.useEffect(() => {
     if (isDisabled) {
@@ -174,6 +168,16 @@ const Switch = ({
   }, [checked, hasIcon, isDisabled, checkedSV, hasIconSV, isDisabledSV]);
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
+
+  // `scope: 'within'`: the ring is drawn on the track below, not this
+  // Pressable - it also suppresses the browser's own outline here on web, so
+  // only the track's ring shows.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    isDisabled,
+    colors.focusIndicatorColor,
+    'outward',
+    'within'
+  );
 
   const reanimatedReduceMotion = reduceMotion
     ? ReduceMotion.Always
@@ -368,11 +372,14 @@ const Switch = ({
           hoveredSV.value = 0;
         }}
         onFocus={(e) => {
-          focusRing.onFocus(e);
+          // Not the ring - it's real CSS on web now. This drives the
+          // handle's own separate focused-visual animation, native and web
+          // alike, so it keeps its own keyboard-vs-pointer check.
+          focusTarget.onFocus?.(e);
           if (!isDisabled && isKeyboardFocusEvent(e)) focusedSV.value = 1;
         }}
         onBlur={() => {
-          focusRing.onBlur();
+          focusTarget.onBlur?.();
           focusedSV.value = 0;
         }}
         android_ripple={{ color: 'transparent' }}
@@ -381,19 +388,15 @@ const Switch = ({
         aria-checked={checked}
         aria-label={ariaLabel}
         testID={testID}
-        style={[
-          styles.touchable,
-          Platform.OS === 'web' ? webNoOutline : undefined,
-        ]}
+        style={[styles.touchable, ...focusTarget.style]}
       >
         <View
           style={[
             styles.track,
             { backgroundColor: paint.track, opacity: trackOpacityValue },
-            ...toStyleList(
-              getFocusRingStyle(focusRing.focused, colors.focusIndicatorColor)
-            ),
+            ...focusRing.style,
           ]}
+          {...focusRing.dataSetProps}
         >
           {showOutline ? (
             <View style={[styles.outline, { borderColor: paint.border }]} />

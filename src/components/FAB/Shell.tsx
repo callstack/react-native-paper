@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -25,12 +25,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
-import {
-  getFocusRingStyle,
-  toStyleList,
-  useFocusRing,
-  webNoOutline,
-} from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -297,7 +292,19 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
-  const { focused, onFocus, onBlur } = useFocusRing();
+  // `scope: 'within'`: the ring is drawn on the clip view below, not the
+  // inner `TouchableRipple` that actually receives focus - `target.style`
+  // suppresses the browser's own outline there on web, so only the clip
+  // view's ring shows.
+  //
+  // `undefined` disabled: FAB has no `disabled` prop today. Wire the real
+  // value through here if that ever changes.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    undefined,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   return (
     <Surface
@@ -314,11 +321,8 @@ const Shell = ({
       theme={theme}
     >
       <Animated.View
-        style={[
-          styles.clip,
-          clipStyle,
-          ...toStyleList(getFocusRingStyle(focused, theme.colors.secondary)),
-        ]}
+        style={[styles.clip, clipStyle, ...focusRing.style]}
+        {...focusRing.dataSetProps}
       >
         {overlay}
         <TouchableRipple
@@ -326,8 +330,8 @@ const Shell = ({
           background={background}
           focusRing="none"
           onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
           role="button"
           aria-checked={ariaChecked}
@@ -335,10 +339,7 @@ const Shell = ({
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
           testID={testID}
-          style={[
-            children ? styles.fill : null,
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[children ? styles.fill : null, ...focusTarget.style]}
         >
           {children ?? (
             <Content

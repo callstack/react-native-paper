@@ -1,11 +1,20 @@
-import { Platform, Pressable, Text } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
-import { getFocusRingStyle, useFocusRing } from '../useFocusRing';
+import type { FocusRingPlacement, FocusRingScope } from '../useFocusRing';
+import { buildFocusRingStylesheet, useFocusRing } from '../useFocusRing';
 
 const focus = async (data?: unknown) => {
   await act(async () => {
@@ -26,60 +35,68 @@ const Probe = ({
   disabled?: boolean;
   onRender?: () => void;
 }) => {
-  const { focused, onFocus, onBlur } = useFocusRing(disabled);
+  const { target, ring } = useFocusRing(disabled, 'rebeccapurple');
   onRender?.();
   return (
     <Pressable
       testID="probe"
       onPress={() => {}}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      style={getFocusRingStyle(focused, 'rebeccapurple')}
+      onFocus={target.onFocus}
+      onBlur={target.onBlur}
+      style={ring.style}
     >
       <Text>probe</Text>
     </Pressable>
   );
 };
 
-describe('getFocusRingStyle', () => {
-  it('returns nothing when not focused', () => {
-    expect(getFocusRingStyle(false, 'rebeccapurple')).toBeNull();
+describe('buildFocusRingStylesheet', () => {
+  const css = buildFocusRingStylesheet();
+
+  it('rings `self` via :focus-visible and `within` via :has(:focus-visible), for both placements', () => {
+    expect(css).toContain('[data-focus-ring="outward"]:focus-visible');
+    expect(css).toContain('[data-focus-ring="inward"]:focus-visible');
+    expect(css).toContain(
+      '[data-focus-ring-within="outward"]:has(:focus-visible)'
+    );
+    expect(css).toContain(
+      '[data-focus-ring-within="inward"]:has(:focus-visible)'
+    );
   });
 
   // Values must come from the design tokens, not be hardcoded here, or the
   // token is decorative. Derive the expectation from the token itself.
-  it('takes its thickness and offset from the focusIndicator tokens', () => {
+  it('takes its thickness and offsets from the focusIndicator tokens', () => {
     const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
 
-    expect(getFocusRingStyle(true, 'rebeccapurple')).toEqual({
-      outlineWidth: thickness,
-      outlineColor: 'rebeccapurple',
-      outlineStyle: 'solid',
-      outlineOffset: outerOffset,
-    });
-    expect(getFocusRingStyle(true, 'rebeccapurple', 'inward')).toEqual({
-      outlineWidth: thickness,
-      outlineColor: 'rebeccapurple',
-      outlineStyle: 'solid',
-      outlineOffset: -thickness,
-    });
+    expect(css).toContain(`outline: ${thickness}px solid`);
+    expect(css).toContain(`outline-offset: ${outerOffset}px;`);
+    expect(css).toContain(`outline-offset: ${-thickness}px;`);
   });
 });
 
-describe('useFocusRing', () => {
+describe('useFocusRing (native)', () => {
+  // Derived from the token, not hardcoded - see the note on the stylesheet
+  // test above.
+  const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
+
   it('applies the outline on focus and removes it on blur', async () => {
     await render(<Probe />);
-    expect(screen.getByTestId('probe')).not.toHaveStyle({ outlineWidth: 3 });
+    expect(screen.getByTestId('probe')).not.toHaveStyle({
+      outlineWidth: thickness,
+    });
 
     await focus();
     expect(screen.getByTestId('probe')).toHaveStyle({
-      outlineWidth: 3,
+      outlineWidth: thickness,
       outlineColor: 'rebeccapurple',
-      outlineOffset: 2,
+      outlineOffset: outerOffset,
     });
 
     await blur();
-    expect(screen.getByTestId('probe')).not.toHaveStyle({ outlineWidth: 3 });
+    expect(screen.getByTestId('probe')).not.toHaveStyle({
+      outlineWidth: thickness,
+    });
   });
 
   // `disabled` goes to the hook only, never to the Pressable: RNTL will not
@@ -89,21 +106,9 @@ describe('useFocusRing', () => {
 
     await focus();
 
-    expect(screen.getByTestId('probe')).not.toHaveStyle({ outlineWidth: 3 });
-  });
-
-  it('ignores a non-keyboard focus event on web, so a mouse click does not ring', async () => {
-    const original = Platform.OS;
-    Platform.OS = 'web';
-    try {
-      await render(<Probe />);
-
-      await focus({ currentTarget: { matches: () => false } });
-
-      expect(screen.getByTestId('probe')).not.toHaveStyle({ outlineWidth: 3 });
-    } finally {
-      Platform.OS = original;
-    }
+    expect(screen.getByTestId('probe')).not.toHaveStyle({
+      outlineWidth: thickness,
+    });
   });
 
   // The gate has to skip the state update, not just mask the result, or a
@@ -121,7 +126,9 @@ describe('useFocusRing', () => {
   it('does not restore the ring when a control is re-enabled', async () => {
     const { rerender } = await render(<Probe />);
     await focus();
-    expect(screen.getByTestId('probe')).toHaveStyle({ outlineWidth: 3 });
+    expect(screen.getByTestId('probe')).toHaveStyle({
+      outlineWidth: thickness,
+    });
 
     await act(async () => {
       await rerender(<Probe disabled />);
@@ -131,6 +138,89 @@ describe('useFocusRing', () => {
     });
 
     // no focus event happened in between, so nothing should be ringed
-    expect(screen.getByTestId('probe')).not.toHaveStyle({ outlineWidth: 3 });
+    expect(screen.getByTestId('probe')).not.toHaveStyle({
+      outlineWidth: thickness,
+    });
+  });
+});
+
+// There is no DOM in this repo's Jest, so these can only prove the wiring -
+// the right data attribute and CSS variable land on the right element. Real
+// `:focus-visible`/`:has()` behaviour is a manual, browser-only check (see
+// the PR description).
+describe('useFocusRing (web)', () => {
+  const original = Platform.OS;
+  beforeEach(() => {
+    Platform.OS = 'web';
+  });
+  afterEach(() => {
+    Platform.OS = original;
+  });
+
+  const WebProbe = ({
+    disabled,
+    placement,
+    scope,
+  }: {
+    disabled?: boolean;
+    placement?: FocusRingPlacement;
+    scope?: FocusRingScope;
+  }) => {
+    const { target, ring } = useFocusRing(
+      disabled,
+      'rebeccapurple',
+      placement,
+      scope
+    );
+    return (
+      <View testID="probe" style={ring.style} {...ring.dataSetProps}>
+        <View testID="target" style={target.style} />
+      </View>
+    );
+  };
+
+  it('emits data-focus-ring and the colour variable for scope "self"', async () => {
+    await render(<WebProbe placement="outward" />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('probe').props.dataSet).toEqual({
+      focusRing: 'outward',
+    });
+    expect(screen.getByTestId('probe')).toHaveStyle(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      { '--rnp-focus-ring-color': 'rebeccapurple' } as unknown as ViewStyle
+    );
+  });
+
+  it('emits data-focus-ring-within for scope "within", and suppresses the target element\'s own outline', async () => {
+    await render(<WebProbe placement="inward" scope="within" />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('probe').props.dataSet).toEqual({
+      focusRingWithin: 'inward',
+    });
+    expect(screen.getByTestId('target')).toHaveStyle(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      { outline: 'none' } as unknown as ViewStyle
+    );
+  });
+
+  it('does not suppress the target element\'s outline for scope "self"', async () => {
+    await render(<WebProbe placement="outward" />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('target').props.style).toEqual([]);
+  });
+
+  it('emits nothing when disabled or when the ring is turned off', async () => {
+    await render(<WebProbe placement="none" />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('probe').props.dataSet).toBeUndefined();
+
+    await render(<WebProbe placement="outward" disabled />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('probe').props.dataSet).toBeUndefined();
   });
 });

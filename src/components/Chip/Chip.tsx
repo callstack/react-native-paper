@@ -20,11 +20,7 @@ import { white } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import {
-  getFocusRingStyle,
-  toStyleList,
-  useFocusRing,
-} from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -244,7 +240,14 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const closeFocusRing = useFocusRing(disabled);
+  // The close affordance is a plain `Pressable`, not a `TouchableRipple`
+  // (see below), so it calls `useFocusRing` directly instead of going
+  // through `TouchableRipple`'s `focusRing` prop like the body does.
+  const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
+    disabled,
+    theme.colors.secondary,
+    'inward'
+  );
 
   const [pressed, setPressed] = React.useState(false);
   const elevation = elevated ? (pressed ? 2 : 1) : 0;
@@ -432,18 +435,13 @@ const Chip = ({
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
             hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
-            onFocus={closeFocusRing.onFocus}
-            onBlur={closeFocusRing.onBlur}
+            onFocus={closeFocusTarget.onFocus}
+            onBlur={closeFocusTarget.onBlur}
+            {...closeFocusRing.dataSetProps}
             style={[
               styles.closeButton,
               { borderRadius },
-              ...toStyleList(
-                getFocusRingStyle(
-                  closeFocusRing.focused,
-                  theme.colors.secondary,
-                  'inward'
-                )
-              ),
+              ...closeFocusRing.style,
             ]}
           >
             {/* react-native-web removed `hitSlop` in 0.13.0,
