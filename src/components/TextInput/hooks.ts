@@ -1,12 +1,17 @@
 import {
   useEffect,
   useImperativeHandle,
+  useId,
   useRef,
   useState,
   type ComponentRef,
   type RefObject,
 } from 'react';
-import { TextInput as NativeTextInput } from 'react-native';
+import {
+  AccessibilityInfo,
+  Platform,
+  TextInput as NativeTextInput,
+} from 'react-native';
 import type { BlurEvent, FocusEvent } from 'react-native';
 
 import {
@@ -108,10 +113,6 @@ const useTextInputAnimation = ({
     ),
   }));
 
-  const animatedContainerStyle = useAnimatedStyle(() => ({
-    opacity: floatSV.value,
-  }));
-
   const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
     transform: [{ scaleX: focusSV.value }],
   }));
@@ -119,7 +120,6 @@ const useTextInputAnimation = ({
   return {
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
-    animatedContainerStyle,
     animatedActiveOutlineStyle:
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
     runFocusAnimation,
@@ -254,6 +254,7 @@ const useTextInputLayout = ({
   theme,
   flags,
   isFocused,
+  isHovered,
   animation,
 }: {
   variant: TextInputVariant;
@@ -262,6 +263,7 @@ const useTextInputLayout = ({
   theme: InternalTheme;
   flags: TextInputFlags;
   isFocused: boolean;
+  isHovered: boolean;
   animation: TextInputAnimationState;
 }): TextInputLayoutState => {
   const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix } = flags;
@@ -284,6 +286,7 @@ const useTextInputLayout = ({
           input,
           theme,
           isFocused,
+          isHovered,
           isRTL,
           isDisabled,
           hasAccessory,
@@ -300,6 +303,7 @@ const useTextInputLayout = ({
           input,
           theme,
           isFocused,
+          isHovered,
           isRTL,
           isDisabled,
           hasAccessory,
@@ -324,6 +328,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
   const input = useRef<ComponentRef<typeof NativeTextInput>>(null);
+  const id = useId();
+  const [isHovered, setIsHovered] = useState(false);
   const init = useRef(false);
 
   const theme = useInternalTheme(themeOverride);
@@ -417,16 +423,27 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     theme,
     flags,
     isFocused,
+    isHovered,
     animation,
   });
 
   const accessibilityProps = getAccessibilityData({
+    id,
     hasError: flags.hasError,
     hasCounter: flags.hasCounter,
     isDisabled: flags.isDisabled,
     data: props,
     inputLength,
   });
+
+  // Native iOS does not implement live regions. Announce changed errors once,
+  // while Android and web use the rendered alert/live region.
+  const errorMessage = flags.hasError ? props.supportingText : undefined;
+  useEffect(() => {
+    if (Platform.OS === 'ios' && errorMessage) {
+      AccessibilityInfo.announceForAccessibility(errorMessage);
+    }
+  }, [errorMessage]);
 
   const counterText = `${inputLength}/${props.maxLength}`;
 
@@ -453,7 +470,6 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
-    animatedContainerStyle: animation.animatedContainerStyle,
     placeholder,
     counterText,
     accessibilityProps,
@@ -464,5 +480,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     onFocus,
     onBlur,
     focusInput,
+    onHoverIn: () => setIsHovered(true),
+    onHoverOut: () => setIsHovered(false),
   };
 };
