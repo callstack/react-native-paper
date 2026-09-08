@@ -187,6 +187,67 @@ describe('safeMerge', () => {
     expect(result.dynamic).toBe(true);
   });
 
+  it('keeps the base when the whole override matches the sentinel shape', () => {
+    // A custom root property is still a theme, not a color: the root
+    // `overrides` is the theme prop itself, so only nested values can be a
+    // native color.
+    const base = {
+      fonts: { titleLarge: { fontSize: 22 } },
+      colors: { primary: '#000' },
+      shapes: { small: 4 },
+    };
+    const dynamic = { light: '#fff', dark: '#000' };
+
+    const result = safeMerge<typeof base & { dynamic?: unknown }>(base, {
+      dynamic,
+    });
+
+    expect(result.fonts).toStrictEqual(base.fonts);
+    expect(result.colors).toStrictEqual(base.colors);
+    expect(result.shapes).toStrictEqual(base.shapes);
+    expect(result.dynamic).toBe(dynamic);
+
+    const semantic = ['label'];
+    const semanticResult = safeMerge<typeof base & { semantic?: unknown }>(
+      base,
+      { semantic }
+    );
+
+    expect(semanticResult.colors).toStrictEqual(base.colors);
+    expect(semanticResult.semantic).toBe(semantic);
+  });
+
+  it('treats a nested sentinel as a leaf even when it replaces a plain object', () => {
+    // The base is a mergeable object here, so nothing but the check on
+    // `overrides` stops the merge from recursing into the sentinel.
+    const sentinel = { semantic: ['label'] };
+    const base = {
+      colors: { elevation: { level0: 'transparent', level1: '#eee' } },
+    };
+    const overrides = { colors: { elevation: sentinel } };
+
+    const result = safeMerge<{ colors: { elevation: unknown } }>(
+      base,
+      overrides
+    );
+
+    expect(result.colors.elevation).toBe(sentinel);
+  });
+
+  it('treats a nested sentinel as a leaf when the base value is absent', () => {
+    const sentinel = PlatformColor('label');
+    const base = { colors: { primary: '#000' } };
+    const overrides = { colors: { accent: sentinel } };
+
+    const result = safeMerge<{ colors: Record<string, unknown> }>(
+      base,
+      overrides
+    );
+
+    expect(result.colors.accent).toBe(sentinel);
+    expect(result.colors.primary).toBe('#000');
+  });
+
   it('still treats a real DynamicColorIOS override as a leaf, not a merge target', () => {
     const baseColor = DynamicColorIOS({
       light: '#000',

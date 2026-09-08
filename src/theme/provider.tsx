@@ -46,9 +46,9 @@ const isDynamicColorIOSTuple = (v: unknown): boolean => {
 // Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
 // and treat sentinels as leaves. Three shapes, straight from React Native's
 // `PlatformColorValueTypes.{ios,android}.js`:
-//   `{ semantic: string[] }`                 — iOS PlatformColor
-//   `{ dynamic: { light, dark, ...} }`       — DynamicColorIOS
-//   `{ resource_paths: string[] }`           — Android PlatformColor
+//   `{ semantic: string[] }`                 -> iOS PlatformColor
+//   `{ dynamic: { light, dark, ...} }`       -> DynamicColorIOS
+//   `{ resource_paths: string[] }`           -> Android PlatformColor
 // The shape has to be validated, not just the key name: a theme may own a
 // custom property called `dynamic`, `semantic` or `resource_paths` (extending
 // the theme with arbitrary properties is documented), and treating such a
@@ -59,12 +59,11 @@ export const isPlatformColorSentinel = (v: unknown): boolean => {
   }
   // A native color value carries exactly one of the three keys and nothing
   // else, so anything with siblings is a regular object.
-  const keys = Object.keys(v);
-  if (keys.length !== 1) {
+  const entries = Object.entries(v);
+  if (entries.length !== 1) {
     return false;
   }
-  const [key] = keys;
-  const value = (v as Record<string, unknown>)[key];
+  const [[key, value]] = entries;
 
   switch (key) {
     case 'semantic':
@@ -77,6 +76,13 @@ export const isPlatformColorSentinel = (v: unknown): boolean => {
   }
 };
 
+// A native color replaces whatever it lands on, so it is a leaf wherever it
+// appears *inside* a theme. Only nested values get this check: the root
+// `overrides` is the theme itself, and a theme is free to own a custom property
+// shaped like a sentinel, which would otherwise drop every default.
+const mergeThemeValue = (base: unknown, overrides: unknown): unknown =>
+  isPlatformColorSentinel(overrides) ? overrides : safeMerge(base, overrides);
+
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
@@ -86,15 +92,14 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     typeof overrides !== 'object' ||
     Array.isArray(base) ||
     Array.isArray(overrides) ||
-    isPlatformColorSentinel(base) ||
-    isPlatformColorSentinel(overrides)
+    isPlatformColorSentinel(base)
   ) {
     // leaf: override wins, fall back to base
     return (overrides ?? base) as T;
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
   for (const key of Object.keys(overrides)) {
-    out[key] = safeMerge(
+    out[key] = mergeThemeValue(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
     );
