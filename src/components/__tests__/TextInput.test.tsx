@@ -162,7 +162,12 @@ it('renders filled TextInput with TextInput.Icon accessories when error is true'
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -184,7 +189,12 @@ it('renders outlined TextInput with TextInput.Icon accessories when error is tru
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -228,10 +238,20 @@ it('disables TextInput.Icon when the field is disabled', async () => {
       onChangeText={() => {}}
       disabled
       startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          aria-label="Search"
+          onPress={() => {}}
+        />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -255,6 +275,7 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onPress={() => {}}
           testID="clear"
         />
@@ -262,7 +283,7 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
     />
   );
 
-  const decorative = screen.getByTestId('decorative');
+  const decorative = screen.getByTestId('decorative', includeHiddenElements);
   expect(decorative).toHaveProp('role', 'none');
   expect(decorative).not.toBeDisabled();
 
@@ -288,7 +309,12 @@ it('dims a disabled TextInput with TextInput.Icon accessories exactly once', asy
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -309,7 +335,12 @@ it('uses the disabled color for every TextInput.Icon of a disabled field with an
         <TextInput.Icon {...props} icon="magnify" />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -336,6 +367,7 @@ it('uses the disabled color over iconColor for every TextInput.Icon of a disable
           {...props}
           icon="close"
           iconColor="#6750A4"
+          aria-label="Clear"
           onPress={() => {}}
         />
       )}
@@ -361,6 +393,7 @@ it('disables a TextInput.Icon that only has onLongPress when the field is disabl
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onLongPress={onLongPress}
           testID="long"
         />
@@ -386,10 +419,20 @@ it('does not disable TextInput.Icon when the field is read-only (editable false)
       onChangeText={() => {}}
       editable={false}
       startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          aria-label="Search"
+          onPress={() => {}}
+        />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -414,7 +457,7 @@ it('renders supporting text below the field', async () => {
   ).toBeOnTheScreen();
 });
 
-it('uses polite aria-live on error supporting text', async () => {
+it('uses an alert for error supporting text', async () => {
   await render(
     <TextInput
       label="Email"
@@ -426,7 +469,7 @@ it('uses polite aria-live on error supporting text', async () => {
     />
   );
 
-  expect(screen.getByText('Invalid')).toHaveProp('aria-live', 'polite');
+  expect(screen.getByText('Invalid')).toHaveProp('role', 'alert');
   expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
 });
 
@@ -446,7 +489,7 @@ it('marks the input invalid when error is true without supporting text', async (
   expect(input).not.toHaveProp('accessibilityHint');
 });
 
-it('hides helper supporting text from the accessibility tree and omits aria-live', async () => {
+it('exposes helper supporting text without including it in the field name', async () => {
   await render(
     <TextInput
       label="Email"
@@ -458,12 +501,12 @@ it('hides helper supporting text from the accessibility tree and omits aria-live
   );
 
   const supportingText = screen.getByText('Optional', includeHiddenElements);
-  expect(supportingText).toHaveProp('aria-hidden', true);
+  expect(supportingText).not.toHaveProp('aria-hidden', true);
   expect(supportingText).not.toHaveProp('aria-live');
-  expect(screen.getByLabelText('Email, Optional')).toBeOnTheScreen();
+  expect(screen.getByLabelText('Email')).toBeOnTheScreen();
 });
 
-it('includes supporting text in aria-label when label is omitted', async () => {
+it('keeps supporting text separate when label is omitted', async () => {
   await render(
     <TextInput
       value=""
@@ -473,7 +516,8 @@ it('includes supporting text in aria-label when label is omitted', async () => {
     />
   );
 
-  expect(screen.getByLabelText('Helper only')).toBeOnTheScreen();
+  expect(screen.getByTestId('tf-input')).not.toHaveProp('aria-label');
+  expect(screen.getByText('Helper only')).toBeOnTheScreen();
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {
@@ -1133,17 +1177,23 @@ it.each(['filled', 'outlined'] as const)(
   }
 );
 
-it('hides the input of an empty, unfocused TextInput while its label rests in place', async () => {
+it('keeps the input of an empty, unfocused TextInput visible with a blank placeholder while its label rests in place', async () => {
   await render(
     <TextInput
       label="Email"
       value=""
       onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
       testID="tf-input"
     />
   );
 
-  expect(screen.getByTestId('tf-input')).not.toBeVisible();
+  // Fading the input out would also remove it from the native accessibility
+  // tree, so the resting label covers a blank placeholder instead.
+  expect(screen.getByTestId('tf-input')).toBeVisible();
+  expect(
+    screen.queryByPlaceholderText('e.g. user@example.com')
+  ).not.toBeOnTheScreen();
 });
 
 it('does not expose the placeholder string again after the TextInput loses focus', async () => {
@@ -1518,6 +1568,7 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onPress={() => {}}
           hitSlop={undefined}
           testID="clear-icon"
