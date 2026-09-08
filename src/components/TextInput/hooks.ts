@@ -24,10 +24,10 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { getTransition } from '../../theme/tokens/sys/motion';
 import type { InternalTheme } from '../../theme/types';
 
-// The label float (top/translateX/fontSize/opacity) and the outlined active
-// border (scaleX) are both driven by a single boolean state transition
-// (focus/blur, or text appearing/disappearing) — not a continuous or
-// interruptible drag — so each ends up a plain discrete CSS transition
+// The label float (top/translateX/fontSize/opacity) and the filled variant's
+// active indicator (scaleX) are both driven by a single boolean state
+// transition (focus/blur, or text appearing/disappearing) — not a continuous
+// or interruptible drag — so each ends up a plain discrete CSS transition
 // between two fixed values per property, with no shared progress value
 // needed. That keeps this on the CSS tier per the motion decision rule.
 const useTextInputAnimation = ({
