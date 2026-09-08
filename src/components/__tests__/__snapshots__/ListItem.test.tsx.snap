@@ -165,7 +165,6 @@ exports[`renders list item with custom description 1`] = `
                 },
               ]
             }
-            testID="chip-container"
           >
             <View
               collapsable={false}
@@ -260,7 +259,6 @@ exports[`renders list item with custom description 1`] = `
                   ],
                 ]
               }
-              testID="chip"
             >
               <View
                 style={

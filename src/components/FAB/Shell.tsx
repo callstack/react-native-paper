@@ -212,7 +212,7 @@ const Shell = ({
   overlay,
   children,
   style,
-  testID = 'fab-shell',
+  testID,
   theme: themeOverrides,
   ref,
 }: ShellProps) => {
@@ -319,7 +319,7 @@ const Shell = ({
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       elevation={elevation}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
       theme={theme}
     >
       <Animated.View style={[styles.clip, clipStyle]}>

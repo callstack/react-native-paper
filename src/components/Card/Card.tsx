@@ -141,7 +141,7 @@ const Card = ({
   style,
   contentStyle,
   theme: themeOverrides,
-  testID = 'card',
+  testID,
   accessible,
   disabled,
   ref,
@@ -225,13 +225,13 @@ const Card = ({
       style={[{ borderColor }, style]}
       theme={theme}
       elevation={elevation}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
       {...rest}
     >
       {isMode('outlined') && (
         <View
           pointerEvents="none"
-          testID={`${testID}-outline`}
+          testID={testID ? `${testID}-outline` : undefined}
           style={[
             {
               borderColor,

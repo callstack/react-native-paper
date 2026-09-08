@@ -247,7 +247,7 @@ const ListItem = ({
           : null}
         <View
           style={[styles.item, styles.content, contentStyle]}
-          testID={`${testID}-content`}
+          testID={testID ? `${testID}-content` : undefined}
         >
           {renderTitle()}
 

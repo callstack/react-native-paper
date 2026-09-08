@@ -40,6 +40,7 @@ describe('Menu Item', () => {
 
     await render(
       <Menu.Item
+        testID="menu-item"
         titleMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         leadingIcon="content-cut"
         onPress={() => {}}

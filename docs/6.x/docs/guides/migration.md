@@ -71,12 +71,61 @@ You can use the component's color prop where available, or override the correspo
 
 ### Test IDs
 
-Some hardcoded and generated test IDs have been removed for the following components:
+Hardcoded default test IDs have been removed for the components listed below. Many of these components also derive test IDs for their internal parts by appending a suffix to the `testID` prop (e.g. `${testID}-container`). Since `testID` is no longer defaulted to a hardcoded value, none of these derived test IDs are set either unless you pass a `testID` explicitly — so all queries by the IDs below will stop matching:
 
-- `Appbar.Header`: `${testID}-root-layer`
-- `Surface`: `surface` and `${testID}-outer-layer`
+- `Appbar.Content`: `appbar-content`
+  - `appbar-content-title-text`
+- `Appbar.Header`: `appbar-header`
+  - `appbar-header-root-layer`
+- `BottomNavigation`: `bottom-navigation`
+  - `bottom-navigation-bar`
+- `BottomNavigation.Bar`: `bottom-navigation-bar`
+  - `bottom-navigation-bar-content`
+  - `bottom-navigation-bar-content-wrapper`
+- `Button`: `button`
+  - `button-container`
+  - `button-icon-container`
+  - `button-text`
+- `Card`: `card`
+  - `card-container`
+  - `card-outline`
+- `Chip`: `chip`
+  - `chip-container`
+- `Drawer.CollapsedItem`: `drawer-collapsed-item`
+  - `drawer-collapsed-item-outline`
+  - `drawer-collapsed-item-container`
+- `FAB`: `floating-action-button`
+  - `floating-action-button-container`
+  - `floating-action-button-text`
+- `FAB.Extended`: `extended-floating-action-button`
+  - `extended-floating-action-button-container`
+  - `extended-floating-action-button-text`
+- `FAB.Menu`: `floating-action-button-menu`
+- `IconButton`: `icon-button`
+  - `icon-button-container`
+  - `icon-button-icon` (and `icon-button-icon-previous` / `icon-button-icon-current` when `animated`)
+- `Menu`: `menu`
+  - `menu-view`
+  - `menu-surface`
+- `Menu.Item`: `menu-item`
+  - `menu-item-title`
+- `Modal`: `modal`
+  - `modal-backdrop`
+  - `modal-wrapper`
+  - `modal-surface`
+- `ProgressBar`: `progress-bar`
+  - `progress-bar-fill`
+- `Searchbar`: `search-bar`
+  - `search-bar-container`
+  - `search-bar-icon`
+  - `search-bar-icon-wrapper`
+  - `search-bar-clear-icon`
+  - `search-bar-trailering-icon`
+  - `search-bar-divider`
+- `Surface`: `surface`
+  - `surface-outer-layer`
 
-You can specify a `testID` explicitly and use that value to query the component.
+You can specify a `testID` explicitly to restore both the component's own test ID and all of its derived test IDs above, using the same suffixes.
 
 ## Components
 

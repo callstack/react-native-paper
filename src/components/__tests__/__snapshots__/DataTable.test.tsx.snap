@@ -65,7 +65,6 @@ exports[`DataTable.Cell renders data table cell 1`] = `
         undefined,
       ]
     }
-    testID="undefined-text-container"
   >
     Cupcake
   </Text>
@@ -139,7 +138,6 @@ exports[`DataTable.Cell renders right aligned data table cell 1`] = `
         undefined,
       ]
     }
-    testID="undefined-text-container"
   >
     356
   </Text>
@@ -396,7 +394,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -475,7 +472,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -558,7 +554,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -637,7 +632,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -778,7 +772,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -857,7 +850,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -940,7 +932,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -1019,7 +1010,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1102,7 +1092,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -1181,7 +1170,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1264,7 +1252,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -1343,7 +1330,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1484,7 +1470,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -1563,7 +1548,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1646,7 +1630,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -1725,7 +1708,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1906,7 +1888,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             },
           ]
         }
-        testID="button-container"
       >
         <View
           collapsable={false}
@@ -1996,7 +1977,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               },
             ]
           }
-          testID="button"
         >
           <View
             style={
@@ -2029,7 +2009,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   false,
                 ]
               }
-              testID="button-icon-container"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -2106,7 +2085,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   ],
                 ]
               }
-              testID="button-text"
             >
               2
             </Text>
@@ -2170,7 +2148,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -2249,7 +2226,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -2332,7 +2308,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -2411,7 +2386,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -2494,7 +2468,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -2573,7 +2546,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -2656,7 +2628,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           },
         ]
       }
-      testID="icon-button-container"
     >
       <View
         collapsable={false}
@@ -2735,7 +2706,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={

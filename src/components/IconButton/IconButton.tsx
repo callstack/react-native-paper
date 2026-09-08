@@ -173,7 +173,7 @@ const IconButton = ({
   mode = 'standard',
   style,
   theme: themeOverrides,
-  testID = 'icon-button',
+  testID,
   loading = false,
   contentStyle,
   ref,
@@ -300,7 +300,7 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={`${testID}-container`}
+      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -361,6 +361,7 @@ const IconButton = ({
                 color={iconColor}
                 source={icon}
                 size={dimensions.iconSize}
+                testID={testID ? `${testID}-icon` : undefined}
               />
             )}
           </View>

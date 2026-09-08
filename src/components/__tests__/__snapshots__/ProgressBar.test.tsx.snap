@@ -10,7 +10,6 @@ exports[`renders colored progress bar 1`] = `
   onLayout={[Function]}
   role="progressbar"
   style={false}
-  testID="progress-bar"
 >
   <View
     collapsable={false}
@@ -40,7 +39,6 @@ exports[`renders colored progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -56,7 +54,6 @@ exports[`renders hidden progress bar 1`] = `
   onLayout={[Function]}
   role="progressbar"
   style={false}
-  testID="progress-bar"
 >
   <View
     collapsable={false}
@@ -86,7 +83,6 @@ exports[`renders hidden progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -99,7 +95,6 @@ exports[`renders indeterminate progress bar 1`] = `
   onLayout={[Function]}
   role="progressbar"
   style={false}
-  testID="progress-bar"
 >
   <View
     collapsable={false}
@@ -129,7 +124,6 @@ exports[`renders indeterminate progress bar 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -145,7 +139,6 @@ exports[`renders progress bar with specific progress 1`] = `
   onLayout={[Function]}
   role="progressbar"
   style={false}
-  testID="progress-bar"
 >
   <View
     collapsable={false}
@@ -175,7 +168,6 @@ exports[`renders progress bar with specific progress 1`] = `
           "width": 100,
         }
       }
-      testID="progress-bar-fill"
     />
   </View>
 </View>

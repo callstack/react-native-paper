@@ -155,7 +155,9 @@ it('calling onPress on ListItem right component', async () => {
       title="First Item"
       description="Item description"
       testID={testID}
-      right={() => <IconButton icon="pencil" onPress={onPress} />}
+      right={() => (
+        <IconButton icon="pencil" onPress={onPress} testID="icon-button" />
+      )}
     />
   );
 

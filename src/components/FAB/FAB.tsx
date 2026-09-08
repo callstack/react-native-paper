@@ -131,7 +131,7 @@ const FAB = ({
   'aria-expanded': ariaExpanded,
   background,
   style,
-  testID = 'floating-action-button',
+  testID,
   theme,
   ref,
 }: Props) => (
