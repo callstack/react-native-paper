@@ -2,8 +2,8 @@ import { View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 
@@ -53,10 +53,10 @@ it('renders row buttons with segmented styling through context', async () => {
     </ToggleButton.Row>
   );
 
-  expect(screen.getByTestId('wrapped-toggle-container')).toHaveStyle({
+  expect(screen.getByTestId('wrapped-toggle').parent).toHaveStyle({
     borderRadius: 0,
   });
-  expect(screen.getByTestId('direct-toggle-container')).toHaveStyle({
+  expect(screen.getByTestId('direct-toggle').parent).toHaveStyle({
     borderRadius: 0,
   });
 });
@@ -90,30 +90,30 @@ it('applies the same selection color in a row as standalone (no row-specific ove
     </ToggleButton.Row>
   );
 
-  expect(screen.getByTestId('selected-container')).toHaveStyle({
-    backgroundColor: getTheme().colors.surfaceContainerHighest,
+  expect(screen.getByTestId('selected').parent).toHaveStyle({
+    backgroundColor: LightTheme.colors.surfaceContainerHighest,
   });
-  expect(screen.getByTestId('unselected-container')).toHaveStyle({
-    backgroundColor: getTheme().colors.surfaceContainer,
+  expect(screen.getByTestId('unselected').parent).toHaveStyle({
+    backgroundColor: LightTheme.colors.surfaceContainer,
   });
 });
 
 describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
-    expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
-      getTheme().colors.surfaceContainerHighest
+    expect(getToggleButtonColor({ theme: LightTheme, checked: true })).toBe(
+      LightTheme.colors.surfaceContainerHighest
     );
   });
 
   it('should return correct color when checked and theme version 3, dark theme', () => {
-    expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
-      getTheme(true).colors.surfaceContainerHighest
+    expect(getToggleButtonColor({ theme: DarkTheme, checked: true })).toBe(
+      DarkTheme.colors.surfaceContainerHighest
     );
   });
 
   it('should return correct color when not checked', () => {
-    expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
-      getTheme().colors.surfaceContainer
+    expect(getToggleButtonColor({ theme: LightTheme, checked: false })).toBe(
+      LightTheme.colors.surfaceContainer
     );
   });
 });

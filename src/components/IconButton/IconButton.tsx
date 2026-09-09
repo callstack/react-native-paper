@@ -161,7 +161,6 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -203,12 +202,7 @@ const IconButton = ({
           {loading ? (
             <ActivityIndicator size={size} color={iconColor} />
           ) : (
-            <IconComponent
-              color={iconColor}
-              source={icon}
-              size={size}
-              testID={testID ? `${testID}-icon` : undefined}
-            />
+            <IconComponent color={iconColor} source={icon} size={size} />
           )}
         </View>
       </TouchableRipple>

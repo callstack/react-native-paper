@@ -220,7 +220,6 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            testID={testID ? `${testID}-title` : undefined}
             style={[titleTextStyle, titleStyle]}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >

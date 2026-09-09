@@ -1,26 +1,38 @@
 import type { Typescale } from '../../types';
 import { typeface } from '../ref/typeface';
 
-const regularType = {
+const brandRegularType = {
   fontFamily: typeface.brandRegular,
   letterSpacing: 0,
   fontWeight: typeface.weightRegular,
 };
 
-const mediumType = {
+const brandMediumType = {
+  fontFamily: typeface.brandMedium,
+  letterSpacing: 0,
+  fontWeight: typeface.weightMedium,
+};
+
+const plainRegularType = {
+  fontFamily: typeface.plainRegular,
+  letterSpacing: 0,
+  fontWeight: typeface.weightRegular,
+};
+
+const plainMediumType = {
   fontFamily: typeface.plainMedium,
   letterSpacing: 0.15,
   fontWeight: typeface.weightMedium,
 };
 
-const emphasizedMediumType = {
+const plainMediumEmphasizedType = {
   fontFamily: typeface.plainMedium,
   letterSpacing: 0,
   fontWeight: typeface.weightMedium,
 };
 
-const emphasizedBoldType = {
-  fontFamily: typeface.plainMedium,
+const plainBoldType = {
+  fontFamily: typeface.plainRegular,
   letterSpacing: 0,
   fontWeight: typeface.weightBold,
 };
@@ -28,190 +40,184 @@ const emphasizedBoldType = {
 /** md.sys.typescale.* */
 export const typescale = {
   displayLarge: {
-    ...regularType,
+    ...brandRegularType,
     letterSpacing: -0.25,
     lineHeight: 64,
     fontSize: 57,
   },
   displayMedium: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 52,
     fontSize: 45,
   },
   displaySmall: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 44,
     fontSize: 36,
   },
 
   headlineLarge: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 40,
     fontSize: 32,
   },
   headlineMedium: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 36,
     fontSize: 28,
   },
   headlineSmall: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 32,
     fontSize: 24,
   },
 
   titleLarge: {
-    ...regularType,
+    ...brandRegularType,
     lineHeight: 28,
     fontSize: 22,
   },
   titleMedium: {
-    ...mediumType,
+    ...plainMediumType,
     lineHeight: 24,
     fontSize: 16,
   },
   titleSmall: {
-    ...mediumType,
+    ...plainMediumType,
     letterSpacing: 0.1,
     lineHeight: 20,
     fontSize: 14,
   },
 
   labelLarge: {
-    ...mediumType,
+    ...plainMediumType,
     letterSpacing: 0.1,
     lineHeight: 20,
     fontSize: 14,
   },
   labelMedium: {
-    ...mediumType,
+    ...plainMediumType,
     letterSpacing: 0.5,
     lineHeight: 16,
     fontSize: 12,
   },
   labelSmall: {
-    ...mediumType,
+    ...plainMediumType,
     letterSpacing: 0.5,
     lineHeight: 16,
     fontSize: 11,
   },
 
   bodyLarge: {
-    ...mediumType,
-    fontWeight: typeface.weightRegular,
-    fontFamily: typeface.brandRegular,
+    ...plainRegularType,
     letterSpacing: 0.5,
     lineHeight: 24,
     fontSize: 16,
   },
   bodyMedium: {
-    ...mediumType,
-    fontWeight: typeface.weightRegular,
-    fontFamily: typeface.brandRegular,
+    ...plainRegularType,
     letterSpacing: 0.25,
     lineHeight: 20,
     fontSize: 14,
   },
   bodySmall: {
-    ...mediumType,
-    fontWeight: typeface.weightRegular,
-    fontFamily: typeface.brandRegular,
+    ...plainRegularType,
     letterSpacing: 0.4,
     lineHeight: 16,
     fontSize: 12,
   },
 
   displayLargeEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     letterSpacing: -0.25,
     lineHeight: 64,
     fontSize: 57,
   },
   displayMediumEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 52,
     fontSize: 45,
   },
   displaySmallEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 44,
     fontSize: 36,
   },
 
   headlineLargeEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 40,
     fontSize: 32,
   },
   headlineMediumEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 36,
     fontSize: 28,
   },
   headlineSmallEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 32,
     fontSize: 24,
   },
 
   titleLargeEmphasized: {
-    ...emphasizedMediumType,
+    ...brandMediumType,
     lineHeight: 28,
     fontSize: 22,
   },
   titleMediumEmphasized: {
-    ...emphasizedBoldType,
+    ...plainBoldType,
     letterSpacing: 0.15,
     lineHeight: 24,
     fontSize: 16,
   },
   titleSmallEmphasized: {
-    ...emphasizedBoldType,
+    ...plainBoldType,
     letterSpacing: 0.1,
     lineHeight: 20,
     fontSize: 14,
   },
 
   labelLargeEmphasized: {
-    ...emphasizedBoldType,
+    ...plainBoldType,
     letterSpacing: 0.1,
     lineHeight: 20,
     fontSize: 14,
   },
   labelMediumEmphasized: {
-    ...emphasizedBoldType,
+    ...plainBoldType,
     letterSpacing: 0.5,
     lineHeight: 16,
     fontSize: 12,
   },
   labelSmallEmphasized: {
-    ...emphasizedBoldType,
+    ...plainBoldType,
     letterSpacing: 0.5,
     lineHeight: 16,
     fontSize: 11,
   },
 
   bodyLargeEmphasized: {
-    ...emphasizedMediumType,
+    ...plainMediumEmphasizedType,
     letterSpacing: 0.5,
     lineHeight: 24,
     fontSize: 16,
   },
   bodyMediumEmphasized: {
-    ...emphasizedMediumType,
+    ...plainMediumEmphasizedType,
     letterSpacing: 0.25,
     lineHeight: 20,
     fontSize: 14,
   },
   bodySmallEmphasized: {
-    ...emphasizedMediumType,
+    ...plainMediumEmphasizedType,
     letterSpacing: 0.4,
     lineHeight: 16,
     fontSize: 12,
   },
 
   default: {
-    ...regularType,
+    ...brandRegularType,
   },
 };
 

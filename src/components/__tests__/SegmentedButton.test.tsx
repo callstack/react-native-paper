@@ -1,7 +1,7 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import {
@@ -61,36 +61,34 @@ it('renders checked segmented button with selected check', async () => {
 });
 
 describe('getSegmentedButtonColors', () => {
-  const theme = getTheme();
-
   it.each([
     {
       disabled: false,
       checked: true,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSecondaryContainer,
+      expected: LightTheme.colors.onSecondaryContainer,
     },
     {
       disabled: false,
       checked: false,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSurface,
+      expected: LightTheme.colors.onSurface,
     },
     {
       disabled: true,
       checked: true,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSurface,
+      expected: LightTheme.colors.onSurface,
     },
     {
       disabled: true,
       checked: false,
       checkedColor: undefined,
       uncheckedColor: undefined,
-      expected: theme.colors.onSurface,
+      expected: LightTheme.colors.onSurface,
     },
     {
       disabled: false,
@@ -118,21 +116,21 @@ describe('getSegmentedButtonColors', () => {
       checked: false,
       checkedColor: 'a125f5',
       uncheckedColor: undefined,
-      expected: theme.colors.onSurface,
+      expected: LightTheme.colors.onSurface,
     },
     {
       disabled: false,
       checked: true,
       checkedColor: undefined,
       uncheckedColor: '000',
-      expected: theme.colors.onSecondaryContainer,
+      expected: LightTheme.colors.onSecondaryContainer,
     },
   ])(
     'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor',
     ({ disabled, checked, checkedColor, uncheckedColor, expected }) => {
       expect(
         getSegmentedButtonColors({
-          theme,
+          theme: LightTheme,
           disabled,
           checked,
           checkedColor,
@@ -145,17 +143,17 @@ describe('getSegmentedButtonColors', () => {
   it('should return correct background color when checked and theme version 3', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         checked: true,
       })
-    ).toMatchObject({ backgroundColor: getTheme().colors.secondaryContainer });
+    ).toMatchObject({ backgroundColor: LightTheme.colors.secondaryContainer });
   });
 
   it('should return correct background color when uncheked (V3 & V2)', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         checked: false,
       })
@@ -167,48 +165,48 @@ describe('getSegmentedButtonColors', () => {
   it('should return correct border color with theme version 3', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         checked: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: LightTheme.colors.outline,
     });
   });
 
   it('should return correct border color when disabled and theme version 3', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         checked: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: LightTheme.colors.outlineVariant,
     });
   });
 
   it('should return correct textColor with theme version 3', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         checked: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurface,
+      textColor: LightTheme.colors.onSurface,
     });
   });
 
   it('should return correct textColor when disabled and theme version 3', () => {
     expect(
       getSegmentedButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         checked: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurface,
+      textColor: LightTheme.colors.onSurface,
       textOpacity: stateOpacity.disabled,
     });
   });
@@ -219,7 +217,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
     [0, 1, 2].forEach((index) => {
       expect(
         getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
+          theme: LightTheme,
           buttons: [
             { disabled: false },
             { disabled: false },
@@ -235,7 +233,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
     [0, 1, 2].forEach((index) => {
       expect(
         getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
+          theme: LightTheme,
           buttons: [{ disabled: true }, { disabled: true }, { disabled: true }],
           index,
         })
@@ -246,7 +244,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
   it('Returns proper style object for one disabled button', () => {
     expect(
       getDisabledSegmentedButtonStyle({
-        theme: getTheme(),
+        theme: LightTheme,
         buttons: [{ disabled: false }, { disabled: true }, { disabled: true }],
         index: 0,
       })
@@ -257,7 +255,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
     [0, 2].forEach((index) => {
       expect(
         getDisabledSegmentedButtonStyle({
-          theme: getTheme(),
+          theme: LightTheme,
           buttons: [
             { disabled: false },
             { disabled: true },
@@ -273,134 +271,138 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
 
 describe('should render icon when', () => {
   it('icon prop is passed', async () => {
-    await render(
-      <SegmentedButtons
-        value={'walk'}
-        buttons={[
-          {
-            icon: 'walk',
-            value: 'walk',
-            testID: 'walking-button',
-          },
-          {
-            icon: 'car',
-            value: 'drive',
-            testID: 'driving-button',
-          },
-        ]}
-        onValueChange={() => {}}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons
+          value={'walk'}
+          buttons={[
+            {
+              icon: 'walk',
+              value: 'walk',
+              testID: 'walking-button',
+            },
+            {
+              icon: 'car',
+              value: 'drive',
+              testID: 'driving-button',
+            },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
-    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
   it('icon prop is passed along with label, no matter if button is checked', async () => {
-    await render(
-      <SegmentedButtons
-        value={'walk'}
-        buttons={[
-          {
-            icon: 'walk',
-            value: 'walk',
-            label: 'Walking',
-            testID: 'walking-button',
-          },
-          {
-            icon: 'car',
-            value: 'drive',
-            label: 'Driving',
-            testID: 'driving-button',
-          },
-        ]}
-        onValueChange={() => {}}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons
+          value={'walk'}
+          buttons={[
+            {
+              icon: 'walk',
+              value: 'walk',
+              label: 'Walking',
+              testID: 'walking-button',
+            },
+            {
+              icon: 'car',
+              value: 'drive',
+              label: 'Driving',
+              testID: 'driving-button',
+            },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
-    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
   it('icon prop is passed along with label, button is checked, showSelectedCheck is false', async () => {
-    await render(
-      <SegmentedButtons
-        value={'walk'}
-        buttons={[
-          {
-            icon: 'walk',
-            value: 'walk',
-            label: 'Walking',
-            testID: 'walking-button',
-            showSelectedCheck: false,
-          },
-          {
-            icon: 'car',
-            value: 'drive',
-            label: 'Driving',
-            testID: 'driving-button',
-            showSelectedCheck: false,
-          },
-        ]}
-        onValueChange={() => {}}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons
+          value={'walk'}
+          buttons={[
+            {
+              icon: 'walk',
+              value: 'walk',
+              label: 'Walking',
+              testID: 'walking-button',
+              showSelectedCheck: false,
+            },
+            {
+              icon: 'car',
+              value: 'drive',
+              label: 'Driving',
+              testID: 'driving-button',
+              showSelectedCheck: false,
+            },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('walking-button-icon')).toBeOnTheScreen();
-    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 });
 
 describe('should not render icon when', () => {
   it('icon prop is not passed', async () => {
-    await render(
-      <SegmentedButtons
-        value={'walk'}
-        buttons={[
-          {
-            value: 'walk',
-            testID: 'walking-button',
-          },
-          {
-            value: 'drive',
-            testID: 'driving-button',
-          },
-        ]}
-        onValueChange={() => {}}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons
+          value={'walk'}
+          buttons={[
+            {
+              value: 'walk',
+              testID: 'walking-button',
+            },
+            {
+              value: 'drive',
+              testID: 'driving-button',
+            },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.queryByTestId('walking-button-icon')).not.toBeOnTheScreen();
-    expect(screen.queryByTestId('driving-button-icon')).not.toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
   it('icon prop is passed along with label, button is checked, showSelectedCheck is true', async () => {
-    await render(
-      <SegmentedButtons
-        value={'walk'}
-        buttons={[
-          {
-            icon: 'walk',
-            label: 'Walking',
-            value: 'walk',
-            testID: 'walking-button',
-            showSelectedCheck: true,
-          },
-          {
-            icon: 'car',
-            label: 'Driving',
-            value: 'drive',
-            testID: 'driving-button',
-            showSelectedCheck: true,
-          },
-        ]}
-        onValueChange={() => {}}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons
+          value={'walk'}
+          buttons={[
+            {
+              icon: 'walk',
+              label: 'Walking',
+              value: 'walk',
+              testID: 'walking-button',
+              showSelectedCheck: true,
+            },
+            {
+              icon: 'car',
+              label: 'Driving',
+              value: 'drive',
+              testID: 'driving-button',
+              showSelectedCheck: true,
+            },
+          ]}
+          onValueChange={() => {}}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.queryByTestId('walking-button-icon')).not.toBeOnTheScreen();
-    expect(screen.getByTestId('walking-button-check-icon')).toBeOnTheScreen();
-    expect(screen.getByTestId('driving-button-icon')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 });
 
@@ -439,25 +441,26 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
   it('show selected check icon should be shown', async () => {
     const onValueChange = jest.fn();
 
-    await render(
-      <SegmentedButtons<string>
-        multiSelect
-        value={['walk', 'transit']}
-        buttons={[
-          {
-            value: 'walk',
-            label: 'Walking',
-            showSelectedCheck: true,
-            testID: 'walking-check-icon',
-          },
-          { value: 'transit', label: 'Transit' },
-          { value: 'drive', label: 'Driving' },
-        ]}
-        onValueChange={onValueChange}
-      />
-    );
+    const tree = (
+      await render(
+        <SegmentedButtons<string>
+          multiSelect
+          value={['walk', 'transit']}
+          buttons={[
+            {
+              value: 'walk',
+              label: 'Walking',
+              showSelectedCheck: true,
+            },
+            { value: 'transit', label: 'Transit' },
+            { value: 'drive', label: 'Driving' },
+          ]}
+          onValueChange={onValueChange}
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('walking-check-icon')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 });
 
@@ -484,10 +487,10 @@ describe('labelStyle is handled', () => {
       />
     );
 
-    expect(screen.getByTestId('walking-button-label')).toHaveStyle({
+    expect(screen.getByText('Walking')).toHaveStyle({
       fontSize: 10,
     });
-    expect(screen.getByTestId('driving-button-label')).toHaveStyle({
+    expect(screen.getByText('Driving')).toHaveStyle({
       fontSize: 12,
     });
   });
@@ -507,7 +510,7 @@ describe('labelStyle is handled', () => {
       />
     );
 
-    expect(screen.getByTestId('walking-button-label')).toHaveStyle({
+    expect(screen.getByText('Walking')).toHaveStyle({
       fontSize: 14,
     });
   });

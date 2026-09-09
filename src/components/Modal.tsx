@@ -37,6 +37,10 @@ export type Props = {
    */
   overlayAccessibilityLabel?: string;
   /**
+   * testID for the overlay that is displayed behind the modal content.
+   */
+  overlayTestID?: string;
+  /**
    * Determines Whether the modal is visible.
    */
   visible: boolean;
@@ -127,6 +131,7 @@ function Modal({
   dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
+  overlayTestID,
   onDismiss = () => {},
   children,
   contentContainerStyle,
@@ -235,7 +240,7 @@ function Modal({
         onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
-        testID={testID ? `${testID}-backdrop` : undefined}
+        testID={overlayTestID}
       />
       <View
         style={[
@@ -244,10 +249,8 @@ function Modal({
           style,
         ]}
         pointerEvents="box-none"
-        testID={testID ? `${testID}-wrapper` : undefined}
       >
         <Surface
-          testID={testID ? `${testID}-surface` : undefined}
           theme={theme}
           backgroundColor={contentBackgroundColor}
           borderRadius={contentBorderRadius}

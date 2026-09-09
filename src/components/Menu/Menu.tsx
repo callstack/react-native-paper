@@ -69,6 +69,10 @@ export type Props = {
    */
   overlayAccessibilityLabel?: string;
   /**
+   * testID for the overlay that is displayed behind the menu.
+   */
+  overlayTestID?: string;
+  /**
    * Content of the `Menu`.
    */
   children: React.ReactNode;
@@ -186,6 +190,7 @@ const Menu = ({
   visible,
   statusBarHeight,
   overlayAccessibilityLabel = 'Close menu',
+  overlayTestID,
   testID,
   anchor,
   onDismiss,
@@ -681,6 +686,7 @@ const Menu = ({
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
+            testID={overlayTestID}
           />
           <View
             ref={(ref) => {
@@ -691,7 +697,6 @@ const Menu = ({
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}
-            testID={testID ? `${testID}-view` : undefined}
           >
             <Animated.View
               pointerEvents={pointerEvents}
@@ -707,7 +712,7 @@ const Menu = ({
                   shadowMenuAnimationStyle,
                 ]}
                 elevation={elevation}
-                testID={testID ? `${testID}-surface` : undefined}
+                testID={testID}
                 theme={theme}
               >
                 <Animated.View

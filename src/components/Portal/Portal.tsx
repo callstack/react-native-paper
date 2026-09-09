@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';
-import { LocaleContext, LocaleProvider } from '../../core/locale';
+import { LocaleProvider, useLocale } from '../../core/locale';
 import {
-  Consumer as SettingsConsumer,
+  SettingsContext,
   Provider as SettingsProvider,
 } from '../../core/settings';
-import { ThemeProvider, withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../theme/types';
+import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
   /**
@@ -18,7 +18,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -41,36 +41,24 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-class Portal extends React.Component<Props> {
-  // @component ./PortalHost.tsx
-  static Host = PortalHost;
+const Portal = ({ children, theme: themeOverrides }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const settings = React.useContext(SettingsContext);
+  const manager = React.useContext(PortalContext);
 
-  render() {
-    const { children, theme } = this.props;
+  return (
+    <PortalConsumer manager={manager}>
+      <SettingsProvider value={settings}>
+        <LocaleProvider direction={direction}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </LocaleProvider>
+      </SettingsProvider>
+    </PortalConsumer>
+  );
+};
 
-    return (
-      <LocaleContext.Consumer>
-        {(locale) => (
-          <SettingsConsumer>
-            {(settings) => (
-              <PortalContext.Consumer>
-                {(manager) => (
-                  <PortalConsumer manager={manager}>
-                    <SettingsProvider value={settings}>
-                      {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-                      <LocaleProvider direction={locale!.direction}>
-                        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                      </LocaleProvider>
-                    </SettingsProvider>
-                  </PortalConsumer>
-                )}
-              </PortalContext.Consumer>
-            )}
-          </SettingsConsumer>
-        )}
-      </LocaleContext.Consumer>
-    );
-  }
-}
+// @component ./PortalHost.tsx
+Portal.Host = PortalHost;
 
-export default withInternalTheme(Portal);
+export default Portal;

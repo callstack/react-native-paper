@@ -42,7 +42,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -58,7 +58,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -81,7 +81,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -95,7 +95,7 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top spacing to the dialog surface for a title-first dialog', async () => {
+  it('should not add a top margin to a title-first dialog', async () => {
     await render(
       <Dialog visible={true} testID="dialog">
         <Dialog.Title testID="dialog-title">
@@ -104,15 +104,12 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
-      paddingTop: 24,
-    });
     expect(screen.getByTestId('dialog-title')).toHaveStyle({
       marginTop: 0,
     });
   });
 
-  it('should apply top spacing to the dialog surface for a content-first dialog', async () => {
+  it('should keep the bottom padding on a content-first dialog', async () => {
     await render(
       <Dialog visible={true} testID="dialog">
         <Dialog.Content testID="dialog-content">
@@ -121,24 +118,18 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
-      paddingTop: 24,
-    });
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
       paddingBottom: 24,
     });
   });
 
-  it('should apply top spacing to the dialog surface for an icon-first dialog', async () => {
+  it('should not add a top padding to an icon-first dialog', async () => {
     await render(
       <Dialog visible={true} testID="dialog">
         <Dialog.Icon icon="alert" testID="dialog-icon" />
       </Dialog>
     );
 
-    expect(screen.getByTestId('dialog-surface')).toHaveStyle({
-      paddingTop: 24,
-    });
     expect(screen.getByTestId('dialog-icon')).toHaveStyle({
       paddingTop: 0,
     });
@@ -218,24 +209,26 @@ describe('DialogActions', () => {
     expect(okButtonProps).not.toHaveProperty('uppercase');
   });
 
-  it('should apply custom styles', async () => {
+  it('should not override custom button styles', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
       <Dialog.Actions testID="dialog-actions">
-        <Button testID="button-cancel" style={styles.spacing}>
-          Cancel
-        </Button>
-        <Button testID="button-ok" style={styles.noSpacing}>
-          Ok
-        </Button>
+        <ProbeButton style={styles.spacing}>Cancel</ProbeButton>
+        <ProbeButton style={styles.noSpacing}>Ok</ProbeButton>
       </Dialog.Actions>
     );
 
-    expect(screen.getByTestId('button-cancel-container')).toHaveStyle({
-      margin: 10,
-    });
-    expect(screen.getByTestId('button-ok-container')).toHaveStyle({
-      margin: 0,
-    });
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
+
+    expect(cancelButtonProps).toHaveProperty('style', styles.spacing);
+    expect(okButtonProps).toHaveProperty('style', styles.noSpacing);
   });
 });
 

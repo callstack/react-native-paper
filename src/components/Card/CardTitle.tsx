@@ -94,6 +94,10 @@ export type Props = ViewProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const LEFT_SIZE = 40;
@@ -135,6 +139,7 @@ const CardTitle = ({
   rightStyle,
   style,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   useInternalTheme(themeOverrides);
 
@@ -142,7 +147,7 @@ const CardTitle = ({
   const marginBottom = subtitle ? 0 : 2;
 
   return (
-    <View style={[styles.container, { minHeight }, style]}>
+    <View style={[styles.container, { minHeight }, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({

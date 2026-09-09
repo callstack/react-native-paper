@@ -292,15 +292,10 @@ const DataTablePagination = ({
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
-          <View
-            aria-label="Options Select"
-            testID="options-select"
-            style={styles.optionsContainer}
-          >
+          <View aria-label="Options Select" style={styles.optionsContainer}>
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
-              testID="select-page-dropdown-label"
               aria-label={
                 selectPageDropdownAccessibilityLabel ||
                 'selectPageDropdownLabel'

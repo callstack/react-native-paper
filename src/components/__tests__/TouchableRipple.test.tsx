@@ -48,25 +48,23 @@ describe('TouchableRipple', () => {
     Platform.OS = 'ios';
 
     it('displays the underlay when pressed', async () => {
-      await render(
+      const { toJSON } = await render(
         <TouchableRipple testOnly_pressed>
           <Text>Press me!</Text>
         </TouchableRipple>
       );
 
-      const underlay = screen.getByTestId('touchable-ripple-underlay');
-      expect(underlay).toBeOnTheScreen();
+      expect(toJSON()).toMatchSnapshot();
     });
 
     it('renders custom underlay color', async () => {
-      await render(
+      const { toJSON } = await render(
         <TouchableRipple testOnly_pressed underlayColor="purple">
           <Text>Press me!</Text>
         </TouchableRipple>
       );
 
-      const underlay = screen.getByTestId('touchable-ripple-underlay');
-      expect(underlay).toHaveStyle({ backgroundColor: 'purple' });
+      expect(toJSON()).toMatchSnapshot();
     });
   });
 });

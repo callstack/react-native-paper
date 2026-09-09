@@ -2,9 +2,9 @@ import { StyleSheet, View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
@@ -154,10 +154,10 @@ describe('getAccordionColors - description color', () => {
   it('should return theme color, for theme version 3', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(),
+        theme: LightTheme,
       })
     ).toMatchObject({
-      descriptionColor: getTheme().colors.onSurfaceVariant,
+      descriptionColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 });
@@ -166,21 +166,21 @@ describe('getAccordionColors - title text color', () => {
   it('should return theme color, for theme version 3', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(),
+        theme: LightTheme,
       })
     ).toMatchObject({
-      titleTextColor: getTheme().colors.onSurface,
+      titleTextColor: LightTheme.colors.onSurface,
     });
   });
 
   it('should return primary color if it is expanded', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isExpanded: true,
       })
     ).toMatchObject({
-      titleTextColor: getTheme().colors?.primary,
+      titleTextColor: LightTheme.colors?.primary,
     });
   });
 });
