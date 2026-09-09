@@ -139,7 +139,6 @@ exports[`renders FAB.Menu closed 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -205,29 +204,6 @@ exports[`renders FAB.Menu closed 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -316,7 +292,6 @@ exports[`renders FAB.Menu closed 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -382,29 +357,6 @@ exports[`renders FAB.Menu closed 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -624,7 +576,6 @@ exports[`renders FAB.Menu closed 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -750,29 +701,6 @@ exports[`renders FAB.Menu closed 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 21,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -918,7 +846,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -984,29 +911,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -1095,7 +999,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1161,29 +1064,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -1403,7 +1283,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -1529,29 +1408,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 21,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -1697,7 +1553,6 @@ exports[`renders FAB.Menu open 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1763,29 +1618,6 @@ exports[`renders FAB.Menu open 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -1874,7 +1706,6 @@ exports[`renders FAB.Menu open 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1940,29 +1771,6 @@ exports[`renders FAB.Menu open 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -2182,7 +1990,6 @@ exports[`renders FAB.Menu open 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -2308,29 +2115,6 @@ exports[`renders FAB.Menu open 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 33,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -2476,7 +2260,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2542,29 +2325,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -2653,7 +2413,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2719,29 +2478,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -2830,7 +2566,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2896,29 +2631,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -3007,7 +2719,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3073,29 +2784,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -3184,7 +2872,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3250,29 +2937,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -3361,7 +3025,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3427,29 +3090,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -3669,7 +3309,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -3795,29 +3434,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 33,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -3964,7 +3580,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4030,29 +3645,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -4141,7 +3733,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4207,29 +3798,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -4449,7 +4017,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -4575,29 +4142,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 33,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -4743,7 +4287,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4838,29 +4381,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -4949,7 +4469,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -5044,29 +4563,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -5286,7 +4782,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -5412,29 +4907,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 33,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -5580,7 +5052,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -5646,29 +5117,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
@@ -5757,7 +5205,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -5823,29 +5270,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            collapsable={false}
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -6065,7 +5489,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
@@ -6191,29 +5614,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 33,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>

@@ -383,7 +383,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -391,8 +390,16 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -424,10 +431,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -450,6 +457,20 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -501,7 +522,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -509,8 +529,16 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -542,10 +570,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -568,6 +596,20 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -677,7 +719,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -685,8 +726,16 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -718,10 +767,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -744,6 +793,20 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -795,7 +858,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -803,8 +865,16 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -836,10 +906,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -862,6 +932,20 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -913,7 +997,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -921,8 +1004,16 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -954,10 +1045,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -980,6 +1071,20 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1031,7 +1136,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1039,8 +1143,16 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1072,10 +1184,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1098,6 +1210,20 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1207,7 +1333,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1215,8 +1340,16 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1248,10 +1381,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1274,6 +1407,20 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1325,7 +1472,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1333,8 +1479,16 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1366,10 +1520,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1392,6 +1546,20 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1801,7 +1969,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1809,8 +1976,16 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1842,10 +2017,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1868,6 +2043,20 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1919,7 +2108,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1927,8 +2115,16 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1960,10 +2156,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1986,6 +2182,20 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2037,7 +2247,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2045,8 +2254,16 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -2078,10 +2295,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2104,6 +2321,20 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2155,7 +2386,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2163,8 +2393,16 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -2196,10 +2434,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2222,6 +2460,20 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],

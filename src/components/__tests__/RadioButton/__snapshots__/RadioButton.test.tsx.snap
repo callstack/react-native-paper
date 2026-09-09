@@ -23,6 +23,14 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -39,8 +47,8 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
         "overflow": "hidden",
       },
       {
-        "borderRadius": 18,
-        "padding": 6,
+        "borderRadius": 20,
+        "padding": 8,
       },
     ]
   }
@@ -110,6 +118,14 @@ exports[`RadioButton on default platform renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -126,8 +142,8 @@ exports[`RadioButton on default platform renders properly 1`] = `
         "overflow": "hidden",
       },
       {
-        "borderRadius": 18,
-        "padding": 6,
+        "borderRadius": 20,
+        "padding": 8,
       },
     ]
   }
@@ -196,6 +212,14 @@ exports[`RadioButton on ios platform renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -212,8 +236,8 @@ exports[`RadioButton on ios platform renders properly 1`] = `
         "overflow": "hidden",
       },
       {
-        "borderRadius": 18,
-        "padding": 6,
+        "borderRadius": 20,
+        "padding": 8,
       },
     ]
   }
@@ -282,6 +306,14 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -298,8 +330,8 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
         "overflow": "hidden",
       },
       {
-        "borderRadius": 18,
-        "padding": 6,
+        "borderRadius": 20,
+        "padding": 8,
       },
     ]
   }

@@ -512,3 +512,45 @@ describe('labelStyle is handled', () => {
     });
   });
 });
+
+describe('hitSlop', () => {
+  it('expands up to the 48dp minimum when enabled', async () => {
+    await render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[{ icon: 'walk', value: 'walk', testID: 'walking-button' }]}
+        onValueChange={() => {}}
+      />
+    );
+
+    // (48 - (2 * 9dp default padding + 18dp icon)) / 2 top/bottom, none
+    // horizontally
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('walking-button').props.hitSlop).toEqual({
+      top: 6,
+      bottom: 6,
+      left: 0,
+      right: 0,
+    });
+  });
+
+  it('gives a disabled button no hitSlop of its own', async () => {
+    await render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            testID: 'walking-button',
+            disabled: true,
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('walking-button').props.hitSlop).toBeUndefined();
+  });
+});

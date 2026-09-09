@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
@@ -14,15 +14,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Content from './Content';
 import Shell from './Shell';
-import {
-  MenuTokens,
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { MenuTokens, Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -30,6 +23,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -249,10 +243,17 @@ const MenuItem = ({
     MenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
-  const focusRingStyle = useAnimatedStyle(() => ({
-    opacity: focusedSV.value ? 1 : 0,
-  }));
+  // `scope: 'within'`: the ring belongs on the pill below, not the inner
+  // `TouchableRipple` that actually receives focus.
+  //
+  // `undefined` disabled: menu items have no `disabled` prop today. Wire the
+  // real value through here if that ever changes.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    undefined,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   return (
     <View style={styles.menuItemWrapper}>
@@ -260,19 +261,19 @@ const MenuItem = ({
         style={[
           styles.menuItem,
           { height, borderRadius, backgroundColor: colors.container },
+          ...focusRing.style,
         ]}
+        {...focusRing.dataSetProps}
       >
         <TouchableRipple
           borderless
+          focusRing="none"
           onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
           role="button"
           aria-label={ariaLabel ?? label}
-          style={[
-            { borderRadius },
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[{ borderRadius }, ...focusTarget.style]}
           testID={testID}
         >
           <Content
@@ -288,16 +289,6 @@ const MenuItem = ({
           />
         </TouchableRipple>
       </View>
-      <Animated.View
-        style={[
-          styles.menuItemFocusRing,
-          {
-            borderColor: theme.colors.secondary,
-            borderRadius: borderRadius + FOCUS_RING_INSET,
-          },
-          focusRingStyle,
-        ]}
-      />
     </View>
   );
 };
@@ -686,15 +677,6 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     overflow: 'hidden',
-  },
-  menuItemFocusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
-    pointerEvents: 'none',
   },
   triggerSlot: {
     justifyContent: 'flex-start',

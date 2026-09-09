@@ -96,7 +96,6 @@ exports[`activity indicator snapshot test 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -104,8 +103,16 @@ exports[`activity indicator snapshot test 1`] = `
           "width": 40,
         },
         {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(202, 196, 208, 1)",
           "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
         },
         undefined,
@@ -137,10 +144,10 @@ exports[`activity indicator snapshot test 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -163,6 +170,20 @@ exports[`activity indicator snapshot test 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -536,7 +557,6 @@ exports[`renders with placeholder 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -544,8 +564,16 @@ exports[`renders with placeholder 1`] = `
           "width": 40,
         },
         {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(202, 196, 208, 1)",
           "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
         },
         undefined,
@@ -577,10 +605,10 @@ exports[`renders with placeholder 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -603,6 +631,20 @@ exports[`renders with placeholder 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -702,7 +744,6 @@ exports[`renders with placeholder 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -710,8 +751,16 @@ exports[`renders with placeholder 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -743,10 +792,10 @@ exports[`renders with placeholder 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -769,6 +818,20 @@ exports[`renders with placeholder 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -914,7 +977,6 @@ exports[`renders with text 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -922,8 +984,16 @@ exports[`renders with text 1`] = `
           "width": 40,
         },
         {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(202, 196, 208, 1)",
           "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
         },
         undefined,
@@ -955,10 +1025,10 @@ exports[`renders with text 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -981,6 +1051,20 @@ exports[`renders with text 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1076,7 +1160,6 @@ exports[`renders with text 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1084,8 +1167,16 @@ exports[`renders with text 1`] = `
             "width": 40,
           },
           {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
             "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "borderWidth": 0,
           },
           undefined,
@@ -1117,10 +1208,10 @@ exports[`renders with text 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1143,6 +1234,20 @@ exports[`renders with text 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderRadius": 20,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],

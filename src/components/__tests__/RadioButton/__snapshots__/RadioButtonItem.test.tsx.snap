@@ -77,6 +77,14 @@ exports[`can render leading radio button control 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -93,8 +101,8 @@ exports[`can render leading radio button control 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 18,
-            "padding": 6,
+            "borderRadius": 20,
+            "padding": 8,
           },
         ]
       }
@@ -291,6 +299,14 @@ exports[`can render the Android radio button on different platforms 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -307,7 +323,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 18,
+            "borderRadius": 20,
           },
         ]
       }
@@ -320,7 +336,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
             "borderRadius": 10,
             "borderWidth": 2,
             "height": 20,
-            "margin": 8,
+            "margin": 10,
             "width": 20,
           }
         }
@@ -443,6 +459,14 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -459,8 +483,8 @@ exports[`can render the iOS radio button on different platforms 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 18,
-            "padding": 6,
+            "borderRadius": 20,
+            "padding": 8,
           },
         ]
       }
@@ -621,6 +645,14 @@ exports[`renders unchecked 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -637,8 +669,8 @@ exports[`renders unchecked 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 18,
-            "padding": 6,
+            "borderRadius": 20,
+            "padding": 8,
           },
         ]
       }

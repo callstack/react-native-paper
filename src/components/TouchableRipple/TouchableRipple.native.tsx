@@ -6,6 +6,8 @@ import type {
   ViewStyle,
   GestureResponderEvent,
   ColorValue,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -16,15 +18,66 @@ import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
+
+/**
+ * The underlay fills the touchable absolutely and has no radius of its own, so
+ * it paints square corners over a rounded one. A clipping ancestor used to hide
+ * that, and those ancestors have to stop clipping to reach into the `hitSlop`.
+ */
+const getUnderlayShape = (style: StyleProp<ViewStyle>): ViewStyle => {
+  const flat = StyleSheet.flatten(style);
+
+  if (!flat) {
+    return {};
+  }
+
+  const {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  } = flat;
+
+  return {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  };
+};
 
 export type Props = PressableProps & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS today - see `useFocusRing`'s doc comment for why
+   * (`enableImperativeFocus`, off by default).
+   */
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -46,6 +99,10 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
@@ -62,6 +119,23 @@ const TouchableRipple = ({
   });
 
   const disabled = disabledProp || !hasPassedTouchHandler;
+
+  // Keyed off `disabledProp`, not `disabled`: the latter also folds in
+  // "no press handler passed", which is a non-interactivity signal, not a
+  // disabled one - the ring should only react to real disablement.
+  const { target, ring } = useFocusRing(
+    disabledProp,
+    theme.colors.secondary,
+    focusRing
+  );
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    target.onFocus?.(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    target.onBlur?.();
+  };
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -92,7 +166,10 @@ const TouchableRipple = ({
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        hitSlop={hitSlop}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={[useForeground && styles.overflowHidden, style, ...ring.style]}
         android_ripple={androidRipple}
       >
         {React.Children.only(children)}
@@ -105,7 +182,10 @@ const TouchableRipple = ({
       {...rest}
       ref={ref}
       disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      hitSlop={hitSlop}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      style={[borderless && styles.overflowHidden, style, ...ring.style]}
     >
       {({ pressed }) => (
         <>
@@ -114,6 +194,7 @@ const TouchableRipple = ({
               testID="touchable-ripple-underlay"
               style={[
                 styles.underlay,
+                getUnderlayShape(style),
                 { backgroundColor: calculatedUnderlayColor },
               ]}
             />

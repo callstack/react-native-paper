@@ -4,13 +4,25 @@ import type { GestureResponderEvent } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
+import { RadioButtonTokens } from './tokens';
 import { handlePress, isChecked } from './utils';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+
+const { stateLayerSize: STATE_LAYER_SIZE } = RadioButtonTokens;
+const CHECKMARK_SIZE = 24;
+
+// The state layer is fixed, so the slop to reach the 48dp minimum
+// interactive target is a constant rather than something to measure.
+const RADIO_BUTTON_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  width: STATE_LAYER_SIZE,
+  height: STATE_LAYER_SIZE,
+});
 
 export type Props = Omit<
   React.PropsWithoutRef<TouchableRippleProps>,
@@ -104,12 +116,15 @@ const RadioButtonIOS = ({
             style={styles.container}
             testID={testID}
             theme={theme}
+            hitSlop={
+              rest.hitSlop ?? (disabled ? undefined : RADIO_BUTTON_HIT_SLOP)
+            }
           >
             <View style={{ opacity }}>
               <MaterialCommunityIcon
                 allowFontScaling={false}
                 name="check"
-                size={24}
+                size={CHECKMARK_SIZE}
                 color={checkedColor}
                 direction="ltr"
               />
@@ -125,8 +140,9 @@ RadioButtonIOS.displayName = 'RadioButton.IOS';
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 18,
-    padding: 6,
+    borderRadius: STATE_LAYER_SIZE / 2,
+    // Centres the 24dp checkmark within the 40dp state layer.
+    padding: (STATE_LAYER_SIZE - CHECKMARK_SIZE) / 2,
   },
 });
 

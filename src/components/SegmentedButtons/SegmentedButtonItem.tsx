@@ -23,6 +23,7 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -193,6 +194,14 @@ const SegmentedButtonItem = ({
 
   const paddingVertical = getSegmentedButtonDensityPadding({ density });
 
+  // Height is `2 * paddingVertical + content`, and content is never shorter
+  // than the 18dp icon (the label's own line height is taller), so that is
+  // the safe floor to compute slop from without needing to measure.
+  const contentHeight = 2 * paddingVertical + iconSize;
+  const defaultHitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({ height: contentHeight });
+
   const rippleStyle: ViewStyle = {
     borderRadius,
     ...segmentBorderRadius,
@@ -207,6 +216,7 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
+        focusRing="inward"
         onPress={onPress}
         aria-label={ariaLabel}
         aria-disabled={disabled}
@@ -217,7 +227,7 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
         background={background}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop ?? defaultHitSlop}
       >
         <View
           style={[styles.content, { paddingVertical, opacity: textOpacity }]}

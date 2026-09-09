@@ -30,7 +30,9 @@ import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon, { type IconSource } from '../Icon';
 
 export type Props = {
@@ -83,10 +85,13 @@ const {
 
 const { state: stateTokens } = tokens.md.sys;
 const stateOpacity = stateTokens.opacity;
-const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
-  stateTokens.focusIndicator;
-const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
-const OVERLAY_TOP = (STATE_LAYER_SIZE - TRACK_HEIGHT) / 2;
+
+// The state layer is fixed size, so the slop to reach the 48dp minimum
+// interactive target is a constant rather than something to measure.
+const SWITCH_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  height: STATE_LAYER_SIZE,
+});
+const SWITCH_HIT_SLOP_INSET = SWITCH_HIT_SLOP?.top ?? 0;
 
 // Hold-then-grow: a brief delay before snapping to PRESSED_HANDLE so a quick
 // tap doesn't flash the press-grow visual.
@@ -154,6 +159,12 @@ const Switch = ({
   const pressedSV = useSharedValue(0);
   const hoveredSV = useSharedValue(0);
   const focusedSV = useSharedValue(0);
+
+  React.useEffect(() => {
+    if (isDisabled) {
+      focusedSV.value = 0;
+    }
+  }, [isDisabled, focusedSV]);
   const checkedSV = useSharedValue(checked ? 1 : 0);
   const hasIconSV = useSharedValue(hasIcon ? 1 : 0);
   const isDisabledSV = useSharedValue(isDisabled ? 1 : 0);
@@ -165,6 +176,16 @@ const Switch = ({
   }, [checked, hasIcon, isDisabled, checkedSV, hasIconSV, isDisabledSV]);
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
+
+  // `scope: 'within'`: the ring is drawn on the track below, not this
+  // Pressable - it also suppresses the browser's own outline here on web, so
+  // only the track's ring shows.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    isDisabled,
+    colors.focusIndicatorColor,
+    'outward',
+    'within'
+  );
 
   const reanimatedReduceMotion = reduceMotion
     ? ReduceMotion.Always
@@ -323,10 +344,6 @@ const Switch = ({
     ],
   }));
 
-  const focusRingAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: focusedSV.value,
-  }));
-
   const paint = resolveSwitchPaint(colors, isEnabled, checked);
   const stateLayerColor = checked
     ? colors.checkedStateLayerColor
@@ -363,10 +380,14 @@ const Switch = ({
           hoveredSV.value = 0;
         }}
         onFocus={(e) => {
-          if (!isKeyboardFocusEvent(e)) return;
-          focusedSV.value = 1;
+          // Not the ring - it's real CSS on web now. This drives the
+          // handle's own separate focused-visual animation, native and web
+          // alike, so it keeps its own keyboard-vs-pointer check.
+          focusTarget.onFocus?.(e);
+          if (!isDisabled && isKeyboardFocusEvent(e)) focusedSV.value = 1;
         }}
         onBlur={() => {
+          focusTarget.onBlur?.();
           focusedSV.value = 0;
         }}
         android_ripple={{ color: 'transparent' }}
@@ -375,16 +396,26 @@ const Switch = ({
         aria-checked={checked}
         aria-label={ariaLabel}
         testID={testID}
-        style={[
-          styles.touchable,
-          Platform.OS === 'web' ? webNoOutline : undefined,
-        ]}
+        hitSlop={isDisabled ? undefined : SWITCH_HIT_SLOP}
+        style={[styles.touchable, ...focusTarget.style]}
       >
+        {/* react-native-web removed `hitSlop` in 0.13.0 (same as
+            TouchableRipple), so web needs a real element the browser can
+            hit-test instead of a native responder inset. */}
+        {Platform.OS === 'web' && !isDisabled && (
+          <View
+            aria-hidden
+            style={styles.webTouchTarget}
+            testID={`${testID}-touch-target`}
+          />
+        )}
         <View
           style={[
             styles.track,
             { backgroundColor: paint.track, opacity: trackOpacityValue },
+            ...focusRing.style,
           ]}
+          {...focusRing.dataSetProps}
         >
           {showOutline ? (
             <View style={[styles.outline, { borderColor: paint.border }]} />
@@ -446,22 +477,6 @@ const Switch = ({
           </View>
         </Animated.View>
       ) : null}
-
-      <Animated.View
-        style={[
-          styles.focusRing,
-          {
-            borderColor: colors.focusIndicatorColor,
-            borderWidth: FOCUS_THICKNESS,
-            top: OVERLAY_TOP + FOCUS_RING_INSET,
-            left: FOCUS_RING_INSET,
-            right: FOCUS_RING_INSET,
-            bottom: OVERLAY_TOP + FOCUS_RING_INSET,
-            borderRadius: cornerFull,
-          },
-          focusRingAnimatedStyle,
-        ]}
-      />
     </View>
   );
 };
@@ -479,6 +494,14 @@ const styles = StyleSheet.create({
     height: STATE_LAYER_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+    ...(Platform.OS === 'web' && { position: 'relative' }),
+  },
+  webTouchTarget: {
+    position: 'absolute',
+    top: -SWITCH_HIT_SLOP_INSET,
+    bottom: -SWITCH_HIT_SLOP_INSET,
+    left: 0,
+    right: 0,
   },
   track: {
     width: TRACK_WIDTH,
@@ -525,10 +548,6 @@ const styles = StyleSheet.create({
     height: SELECTED_ICON,
     pointerEvents: 'none',
   },
-  focusRing: {
-    position: 'absolute',
-    pointerEvents: 'none',
-  },
   absoluteFill: {
     position: 'absolute',
     top: 0,
@@ -537,9 +556,5 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default Switch;

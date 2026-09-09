@@ -15,4 +15,11 @@ export const state = {
     thickness: 3,
     outerOffset: 2,
   },
+  /**
+   * Minimum size of an interactive target. Applied by expanding outside the
+   * component's bounds, so it is separate from the 40dp state layer that
+   * Checkbox and Switch render.
+   * @see https://m3.material.io/foundations/designing/structure
+   */
+  minInteractiveSize: 48,
 } as const;
