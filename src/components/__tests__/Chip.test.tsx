@@ -67,10 +67,10 @@ it('renders selected chip', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', async () => {
-  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
+it('does not mark informational chip disabled', async () => {
+  await render(<Chip testID="informational-chip">Informational chip</Chip>);
 
-  expect(screen.getByTestId('disabled-chip')).toBeDisabled();
+  expect(screen.getByTestId('informational-chip')).not.toBeDisabled();
 });
 
 it('renders active chip if only onLongPress handler is passed', async () => {
