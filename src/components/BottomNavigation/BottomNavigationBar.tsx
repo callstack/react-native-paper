@@ -5,6 +5,7 @@ import type {
   ColorValue,
   EasingFunction,
   StyleProp,
+  TextStyle,
   ViewStyle,
 } from 'react-native';
 
@@ -714,6 +715,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                               {
                                 color: activeLabelColor,
                                 ...font,
+                                fontWeight: '700' as TextStyle['fontWeight'],
                               },
                             ]}
                           >
