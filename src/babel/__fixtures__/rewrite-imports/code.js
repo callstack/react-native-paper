@@ -12,3 +12,5 @@ import {
   withTheme,
   LightTheme,
 } from 'react-native-paper';
+
+export { TextInput } from 'react-native-paper';
