@@ -66,17 +66,18 @@ const ToggleButtonRow = ({
   return (
     <ToggleButtonGroup value={value} onValueChange={onValueChange}>
       <ToggleButtonRowContext.Provider value={SEGMENTED_ROW_CONTEXT}>
-        <View
-          style={[
-            styles.row,
-            {
-              backgroundColor: outlineColor,
-              borderRadius,
-            },
-            style,
-          ]}
-        >
-          {children}
+        <View style={style}>
+          <View
+            style={[
+              styles.track,
+              {
+                backgroundColor: outlineColor,
+                borderRadius,
+              },
+            ]}
+          >
+            {children}
+          </View>
         </View>
       </ToggleButtonRowContext.Provider>
     </ToggleButtonGroup>
@@ -86,12 +87,12 @@ const ToggleButtonRow = ({
 ToggleButtonRow.displayName = 'ToggleButton.Row';
 
 const styles = StyleSheet.create({
-  row: {
+  track: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
     overflow: 'hidden',
     padding: StyleSheet.hairlineWidth,
-    paddingLeft: 0,
+    gap: StyleSheet.hairlineWidth,
   },
 });
 

@@ -209,6 +209,7 @@ describe('CardActions', () => {
     expect(screen.getByTestId('card-actions')).toHaveStyle({
       flexDirection: 'row',
       justifyContent: 'flex-end',
+      columnGap: 8,
     });
   });
 });
@@ -277,7 +278,7 @@ describe('getCardCoverStyle - border radius', () => {
 });
 
 describe('CardContent', () => {
-  it('renders uniform vertical padding regardless of neighboring sections', async () => {
+  it('keeps its padding when it follows a cover and a title', async () => {
     await render(
       <Card>
         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
@@ -288,9 +289,6 @@ describe('CardContent', () => {
       </Card>
     );
 
-    expect(screen.getByTestId('card-content')).toHaveStyle({
-      paddingTop: 16,
-      paddingBottom: 16,
-    });
+    expect(screen.getByTestId('card-content')).toHaveStyle({ padding: 16 });
   });
 });

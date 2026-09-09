@@ -190,12 +190,7 @@ describe('DialogActions', () => {
     expect(dialogActionsContainer).toHaveStyle({
       paddingBottom: 24,
       paddingHorizontal: 24,
-    });
-    expect(screen.getByTestId('button-cancel-container')).not.toHaveStyle({
-      marginRight: 8,
-    });
-    expect(screen.getByTestId('button-ok-container')).not.toHaveStyle({
-      marginRight: 0,
+      columnGap: 8,
     });
   });
 

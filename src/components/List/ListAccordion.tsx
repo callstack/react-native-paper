@@ -242,6 +242,10 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const hasLeft = left != null;
+  const accordionContext = React.useMemo(() => ({ hasLeft }), [hasLeft]);
+
   return (
     <View>
       <View style={{ backgroundColor: theme?.colors?.background }}>
@@ -326,7 +330,7 @@ const ListAccordion = ({
       </View>
 
       {isExpanded ? (
-        <ListAccordionContext.Provider value={{ leftIndent: !!left }}>
+        <ListAccordionContext.Provider value={accordionContext}>
           {children}
         </ListAccordionContext.Provider>
       ) : null}

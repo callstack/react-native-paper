@@ -16,8 +16,6 @@ export type Props = ViewProps & {
 
 /**
  * A component to show a list of actions inside a Card.
- * Actions are rendered directly, so set button `mode`, `compact`, and custom
- * spacing props explicitly on each action when needed.
  *
  * ## Usage
  * ```js
@@ -44,20 +42,10 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
     { justifyContent: 'flex-end' } satisfies ViewStyle,
     style,
   ];
-  const items = React.Children.toArray(children);
 
   return (
     <View {...rest} style={containerStyle}>
-      {items.map((child, index) => (
-        <React.Fragment
-          key={
-            React.isValidElement(child) && child.key != null ? child.key : index
-          }
-        >
-          {index > 0 && <View style={styles.spacer} />}
-          {child}
-        </React.Fragment>
-      ))}
+      {children}
     </View>
   );
 };
@@ -68,10 +56,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    columnGap: 8,
     padding: 8,
-  },
-  spacer: {
-    width: 8,
   },
 });
 

@@ -61,6 +61,23 @@ it('renders row buttons with segmented styling through context', async () => {
   });
 });
 
+it('keeps custom row spacing outside the segmented track', async () => {
+  const tree = (
+    await render(
+      <ToggleButton.Row
+        value="left"
+        onValueChange={() => {}}
+        style={{ paddingHorizontal: 16 }}
+      >
+        <ToggleButton icon="format-align-left" value="left" />
+        <ToggleButton icon="format-align-right" value="right" />
+      </ToggleButton.Row>
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('applies the same selection color in a row as standalone (no row-specific override)', async () => {
   await render(
     <ToggleButton.Row value="left" onValueChange={() => {}}>

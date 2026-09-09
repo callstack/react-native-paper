@@ -12,8 +12,6 @@ export type Props = ViewProps & {
 
 /**
  * A component to show content inside a Card.
- * Content uses uniform vertical padding and does not depend on neighboring
- * card sections.
  *
  * ## Usage
  * ```js
@@ -40,9 +38,7 @@ CardContent.displayName = 'Card.Content';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 16,
+    padding: 16,
   },
 });
 

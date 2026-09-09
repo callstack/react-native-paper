@@ -102,8 +102,6 @@ export type Props = Omit<ViewProps, 'style'> & {
 
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
- * Card clips its inner content to the card shape and renders children directly;
- * section spacing is owned by the section components themselves.
  *
  * ## Usage
  * ```js

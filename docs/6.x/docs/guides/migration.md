@@ -333,7 +333,7 @@ const theme = {
 
 #### `Card.Actions`
 
-`Card.Actions` no longer assigns `mode` to its buttons, previously `outlined` for the first one and `contained` for the rest, and no longer injects `compact`. Set both on the buttons.
+`Card.Actions` no longer styles its buttons for you. It used to force `mode="outlined"` on the first button, `mode="contained"` on the rest, and `compact` on all of them. Set what you need on each button.
 
 ```tsx
 // Before (v5)
@@ -351,13 +351,13 @@ const theme = {
 
 #### `Card.Content`
 
-`Card.Content` uses the same vertical padding everywhere. Before it changed depending on the sections next to it.
+`Card.Content` now has 16dp of padding on every side. It used to drop its top or bottom padding when it sat next to a `Card.Cover` or `Card.Title`, so cards that mix those sections grow a little taller. Pass `style` if you want the tighter spacing back.
 
 ### Dialog
 
 #### `Dialog.Actions`
 
-`Dialog.Actions` no longer injects `compact` and `uppercase` into the action buttons. Set them yourself if you want the old look.
+`Dialog.Actions` no longer forces `compact` and `uppercase` on its buttons. Set them on the buttons if you want the old look.
 
 ```tsx
 // Before (v5)
@@ -377,7 +377,7 @@ const theme = {
 
 #### `List.Accordion`
 
-When `List.Accordion` has a `left` element, it used to indent every child that rendered no `left` or `right` of its own, whatever the child was. The indent now comes from context and only `List.Item` reads it, so a custom child keeps its own padding. Indent it yourself if you need the old alignment.
+An accordion with a `left` element now indents only its `List.Item` children. Anything else you put inside keeps its own padding, so indent it yourself to line it up with the items.
 
 ```tsx
 // Before (v5)
@@ -401,26 +401,6 @@ When `List.Accordion` has a `left` element, it used to indent every child that r
 
 #### `ToggleButton.Row`
 
-`ToggleButton.Row` no longer clones its children to give them a position in the row. The segmented look comes from context, so a `ToggleButton` wrapped in a component of your own now picks it up, while a child that is not a `ToggleButton` gets no treatment at all.
+`ToggleButton.Row` no longer reaches into its children to style them, so a `ToggleButton` you wrap in a component of your own now picks up the segmented look.
 
-The dividers moved to the row with it. Buttons used to draw their own borders, the row now paints an `outline` background and the hairline gaps between buttons show through. A border set on a single `ToggleButton` no longer builds the segmented outline.
-
-The row also sits on `alignSelf: 'flex-start'`, so it wraps its buttons instead of stretching to the parent. Set it back if you relied on the full width.
-
-```tsx
-// Before (v5)
-<ToggleButton.Row value={value} onValueChange={setValue}>
-  <ToggleButton icon="format-align-left" value="left" />
-  <ToggleButton icon="format-align-right" value="right" />
-</ToggleButton.Row>
-
-// After (v6)
-<ToggleButton.Row
-  value={value}
-  onValueChange={setValue}
-  style={{ alignSelf: 'stretch' }}
->
-  <ToggleButton icon="format-align-left" value="left" />
-  <ToggleButton icon="format-align-right" value="right" />
-</ToggleButton.Row>
-```
+The row draws the dividers between buttons itself. A `borderWidth` or `borderColor` set on an individual `ToggleButton` no longer builds the segmented outline.

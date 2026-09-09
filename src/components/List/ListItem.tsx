@@ -167,8 +167,8 @@ const ListItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { leftIndent } = React.useContext(ListAccordionContext);
-  const shouldIndent = leftIndent && !left && !right;
+  const { hasLeft } = React.useContext(ListAccordionContext);
+  const shouldIndent = hasLeft && !left && !right;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (

@@ -51,8 +51,6 @@ const DIALOG_ELEVATION: Elevation = 3;
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
- * Dialog owns the top content inset, so first-slot components render without
- * adding their own top offset.
  *
  * ## Usage
  * ```js

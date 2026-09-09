@@ -19,8 +19,6 @@ export type Props = ViewProps & {
 
 /**
  * A component to show a list of actions in a Dialog.
- * Actions are rendered directly, so configure each action button's props
- * explicitly when you need non-default behavior.
  *
  * ## Usage
  * ```js
@@ -55,20 +53,9 @@ const DialogActions = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
-  const items = React.Children.toArray(children);
-
   return (
     <View {...rest} style={[styles.v3Container, style]}>
-      {items.map((child, index) => (
-        <React.Fragment
-          key={
-            React.isValidElement(child) && child.key != null ? child.key : index
-          }
-        >
-          {index > 0 && <View style={styles.spacer} />}
-          {child}
-        </React.Fragment>
-      ))}
+      {children}
     </View>
   );
 };
@@ -81,11 +68,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
+    columnGap: 8,
     paddingBottom: 24,
     paddingHorizontal: 24,
-  },
-  spacer: {
-    width: 8,
   },
 });
 

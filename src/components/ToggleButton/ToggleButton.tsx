@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
   },
   segmentedContent: {
     borderRadius: 0,
-    marginLeft: StyleSheet.hairlineWidth,
   },
 });
 
