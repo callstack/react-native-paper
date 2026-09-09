@@ -418,6 +418,7 @@ import {
   MD3LightTheme,
   PaperProvider,
 } from 'react-native-paper';
+import { Platform } from 'react-native';
 import App from './App';
 
 const fontConfig = {
