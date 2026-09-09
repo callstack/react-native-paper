@@ -74,9 +74,10 @@ exports[`can render leading radio button control 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
+      aria-hidden={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -288,9 +289,10 @@ exports[`can render the Android radio button on different platforms 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
+      aria-hidden={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -440,9 +442,10 @@ exports[`can render the iOS radio button on different platforms 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
+      aria-hidden={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -618,9 +621,10 @@ exports[`renders unchecked 1`] = `
           "text": undefined,
         }
       }
-      accessible={true}
+      accessible={false}
+      aria-hidden={true}
       collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
