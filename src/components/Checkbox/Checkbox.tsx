@@ -19,6 +19,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { getMinTouchTargetHitSlop } from '../../utils/touchTarget';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -75,6 +76,10 @@ const {
   outlineWidth: OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
 } = CheckboxTokens;
+
+// The state layer is 40dp per spec, which is below the 48dp minimum touch
+// target. Expand the pressable area without changing the visual bounds.
+const HIT_SLOP = getMinTouchTargetHitSlop(STATE_LAYER_SIZE);
 
 const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
 // Focus indicator is a circular ring at the 40dp state-layer boundary.
@@ -234,6 +239,7 @@ const Checkbox = ({
 
   return (
     <TouchableRipple
+      hitSlop={HIT_SLOP}
       {...rest}
       borderless
       centered
