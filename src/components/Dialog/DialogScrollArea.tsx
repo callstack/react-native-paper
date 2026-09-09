@@ -34,13 +34,7 @@ export type Props = ViewProps & {
  *
  *   return (
  *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.ScrollArea>
- *           <ScrollView contentContainerStyle={{paddingHorizontal: 24}}>
- *             <Text>This is a scrollable area</Text>
- *           </ScrollView>
- *         </Dialog.ScrollArea>
- *       </Dialog>
+ *       <Dialog visible={visible} onDismiss={hideDialog} scrollable content="This is a scrollable area" />
  *     </Portal>
  *   );
  * };
@@ -52,7 +46,7 @@ const DialogScrollArea = (props: Props) => {
   const theme = useInternalTheme(props.theme);
   const { colors } = theme;
   const borderStyles = {
-    borderColor: colors.surfaceVariant,
+    borderColor: colors.outlineVariant,
     borderTopWidth: 1,
     borderBottomWidth: 1,
   };

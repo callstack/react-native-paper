@@ -32,7 +32,6 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { StyleSheet } from 'react-native';
  * import { Dialog, Portal, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
@@ -42,22 +41,10 @@ export type Props = {
  *
  *   return (
  *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Icon icon="alert" />
- *         <Dialog.Title style={styles.title}>This is a title</Dialog.Title>
- *         <Dialog.Content>
- *           <Text variant="bodyMedium">This is simple dialog</Text>
- *         </Dialog.Content>
- *       </Dialog>
+ *       <Dialog visible={visible} onDismiss={hideDialog} icon="alert" content="This is simple dialog" />
  *     </Portal>
  *   );
  * };
- *
- * const styles = StyleSheet.create({
- *   title: {
- *     textAlign: 'center',
- *   },
- * })
  *
  * export default MyComponent;
  * ```
@@ -71,7 +58,7 @@ const DialogIcon = ({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
 
-  //@ts-ignore
+  // @ts-ignore
   const iconColor = color || colors.secondary;
 
   return (

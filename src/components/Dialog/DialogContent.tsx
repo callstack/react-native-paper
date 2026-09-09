@@ -25,11 +25,7 @@ export type Props = ViewProps & {
  *
  *   return (
  *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Content>
- *           <Text variant="bodyMedium">This is simple dialog</Text>
- *         </Dialog.Content>
- *       </Dialog>
+ *       <Dialog visible={visible} onDismiss={hideDialog} content="This is simple dialog" />
  *     </Portal>
  *   );
  * };
