@@ -1,0 +1,4341 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 0,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar_launch_animation_container",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 1,
+        "parentIndex": 0,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar_container",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 1,
+        "parentIndex": 0,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "androidx.compose.ui.platform.ComposeView",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 2,
+        "parentIndex": 2,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.view.View",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 3,
+        "parentIndex": 3,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "androidx.compose.ui.viewinterop.ViewFactoryHolder",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 4,
+        "parentIndex": 4,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 5,
+        "parentIndex": 5,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/status_bar_contents",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1220,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 6,
+        "parentIndex": 6,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar_start_side_container",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 48,
+          "y": 0,
+          "width": 525,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 7,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar_start_side_content",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 48,
+          "y": 0,
+          "width": 196,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 8,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/status_bar_start_side_except_heads_up",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 48,
+          "y": 0,
+          "width": 196,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 9,
+        "parentIndex": 9,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "type": "android.widget.TextView",
+        "label": "3:24",
+        "value": "3:24",
+        "identifier": "com.android.systemui:id/clock",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 48,
+          "y": 45,
+          "width": 130,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 10,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/start_side_notif_and_chip_container",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 66,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 10,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/notification_icon_area",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 66,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 12,
+        "ref": "e14"
+      },
+      {
+        "index": 14,
+        "type": "android.view.ViewGroup",
+        "identifier": "com.android.systemui:id/notificationIcons",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 66,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 13,
+        "ref": "e15"
+      },
+      {
+        "index": 15,
+        "type": "android.widget.ImageView",
+        "label": "Security & privacy notification: ",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 66,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 14,
+        "ref": "e16"
+      },
+      {
+        "index": 16,
+        "type": "androidx.compose.ui.platform.ComposeView",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 0,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 10,
+        "parentIndex": 10,
+        "ref": "e17"
+      },
+      {
+        "index": 17,
+        "type": "android.view.View",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 178,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 11,
+        "parentIndex": 16,
+        "ref": "e18"
+      },
+      {
+        "index": 18,
+        "type": "android.view.View",
+        "identifier": "com.android.systemui:id/cutout_space_view",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 573,
+          "y": 0,
+          "width": 109,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 7,
+        "ref": "e19"
+      },
+      {
+        "index": 19,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/status_bar_end_side_container",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 682,
+          "y": 0,
+          "width": 526,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 7,
+        "ref": "e20"
+      },
+      {
+        "index": 20,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/status_bar_end_side_content",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 963,
+          "y": 0,
+          "width": 245,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 19,
+        "ref": "e21"
+      },
+      {
+        "index": 21,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/system_icons",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 963,
+          "y": 45,
+          "width": 245,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 9,
+        "parentIndex": 20,
+        "ref": "e22"
+      },
+      {
+        "index": 22,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/statusIcons",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 972,
+          "y": 45,
+          "width": 144,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 21,
+        "ref": "e23"
+      },
+      {
+        "index": 23,
+        "type": "android.widget.FrameLayout",
+        "label": "T-Mobile, one bar.",
+        "identifier": "com.android.systemui:id/mobile_combo",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 972,
+          "y": 45,
+          "width": 69,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 22,
+        "ref": "e24"
+      },
+      {
+        "index": 24,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/mobile_group",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 981,
+          "y": 45,
+          "width": 51,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 23,
+        "ref": "e25"
+      },
+      {
+        "index": 25,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 981,
+          "y": 60,
+          "width": 51,
+          "height": 36
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 24,
+        "ref": "e26"
+      },
+      {
+        "index": 26,
+        "type": "android.widget.ImageView",
+        "identifier": "com.android.systemui:id/mobile_signal",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 981,
+          "y": 60,
+          "width": 51,
+          "height": 36
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 25,
+        "ref": "e27"
+      },
+      {
+        "index": 27,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 972,
+          "y": 78,
+          "width": 0,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 11,
+        "parentIndex": 22,
+        "ref": "e28"
+      },
+      {
+        "index": 28,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 972,
+          "y": 78,
+          "width": 0,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 11,
+        "parentIndex": 22,
+        "ref": "e29"
+      },
+      {
+        "index": 29,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/wifi_combo",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1041,
+          "y": 45,
+          "width": 66,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 22,
+        "ref": "e30"
+      },
+      {
+        "index": 30,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.android.systemui:id/wifi_group",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1050,
+          "y": 45,
+          "width": 48,
+          "height": 66
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 29,
+        "ref": "e31"
+      },
+      {
+        "index": 31,
+        "type": "android.widget.FrameLayout",
+        "identifier": "com.android.systemui:id/wifi_combo",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1050,
+          "y": 60,
+          "width": 48,
+          "height": 36
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 30,
+        "ref": "e32"
+      },
+      {
+        "index": 32,
+        "type": "android.widget.ImageView",
+        "label": "Wifi signal full.",
+        "identifier": "com.android.systemui:id/wifi_signal",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1050,
+          "y": 60,
+          "width": 48,
+          "height": 36
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 31,
+        "ref": "e33"
+      },
+      {
+        "index": 33,
+        "type": "androidx.compose.ui.platform.ComposeView",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1116,
+          "y": 58,
+          "width": 80,
+          "height": 39
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 21,
+        "ref": "e34"
+      },
+      {
+        "index": 34,
+        "type": "android.view.View",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1116,
+          "y": 58,
+          "width": 80,
+          "height": 39
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 33,
+        "ref": "e35"
+      },
+      {
+        "index": 35,
+        "type": "android.view.View",
+        "identifier": "com.android.systemui:id/battery",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1116,
+          "y": 58,
+          "width": 80,
+          "height": 39
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 34,
+        "ref": "e36"
+      },
+      {
+        "index": 36,
+        "type": "android.view.View",
+        "label": "Battery 100 percent.",
+        "bundleId": "com.android.systemui",
+        "rect": {
+          "x": 1116,
+          "y": 58,
+          "width": 72,
+          "height": 39
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 35,
+        "ref": "e37"
+      },
+      {
+        "index": 37,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 0,
+        "ref": "e38"
+      },
+      {
+        "index": 38,
+        "type": "android.widget.LinearLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 1,
+        "parentIndex": 37,
+        "ref": "e39"
+      },
+      {
+        "index": 39,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 2,
+        "parentIndex": 38,
+        "ref": "e40"
+      },
+      {
+        "index": 40,
+        "type": "android.widget.LinearLayout",
+        "identifier": "com.callstack.reactnativepaperexample:id/action_bar_root",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 3,
+        "parentIndex": 39,
+        "ref": "e41"
+      },
+      {
+        "index": 41,
+        "type": "android.widget.FrameLayout",
+        "identifier": "android:id/content",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 4,
+        "parentIndex": 40,
+        "ref": "e42"
+      },
+      {
+        "index": 42,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 5,
+        "parentIndex": 41,
+        "ref": "e43"
+      },
+      {
+        "index": 43,
+        "type": "android.widget.LinearLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 6,
+        "parentIndex": 42,
+        "ref": "e44"
+      },
+      {
+        "index": 44,
+        "type": "androidx.compose.ui.platform.ComposeView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 43,
+        "ref": "e45"
+      },
+      {
+        "index": 45,
+        "type": "android.view.View",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 44,
+        "ref": "e46"
+      },
+      {
+        "index": 46,
+        "type": "android.view.View",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 156,
+          "width": 252,
+          "height": 252
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 9,
+        "parentIndex": 45,
+        "ref": "e47"
+      },
+      {
+        "index": 47,
+        "type": "android.view.View",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1076,
+          "y": 204,
+          "width": 156,
+          "height": 156
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 46,
+        "ref": "e48"
+      },
+      {
+        "index": 48,
+        "type": "android.view.View",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1082,
+          "y": 210,
+          "width": 144,
+          "height": 144
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 47,
+        "ref": "e49"
+      },
+      {
+        "index": 49,
+        "type": "android.widget.ImageView",
+        "label": "Tools",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1115,
+          "y": 243,
+          "width": 78,
+          "height": 78
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 48,
+        "ref": "e50"
+      },
+      {
+        "index": 50,
+        "type": "android.widget.FrameLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 6,
+        "parentIndex": 42,
+        "ref": "e51"
+      },
+      {
+        "index": 51,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 50,
+        "ref": "e52"
+      },
+      {
+        "index": 52,
+        "type": "android.view.View",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 51,
+        "ref": "e53"
+      },
+      {
+        "index": 53,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 7,
+        "parentIndex": 50,
+        "ref": "e54"
+      },
+      {
+        "index": 54,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 53,
+        "ref": "e55"
+      },
+      {
+        "index": 55,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 8,
+        "parentIndex": 53,
+        "ref": "e56"
+      },
+      {
+        "index": 56,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 9,
+        "parentIndex": 55,
+        "ref": "e57"
+      },
+      {
+        "index": 57,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 10,
+        "parentIndex": 56,
+        "ref": "e58"
+      },
+      {
+        "index": 58,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 11,
+        "parentIndex": 57,
+        "ref": "e59"
+      },
+      {
+        "index": 59,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 12,
+        "parentIndex": 58,
+        "ref": "e60"
+      },
+      {
+        "index": 60,
+        "type": "android.widget.Button",
+        "label": "Close drawer",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 59,
+        "ref": "e61"
+      },
+      {
+        "index": 61,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 12,
+        "parentIndex": 58,
+        "ref": "e62"
+      },
+      {
+        "index": 62,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 61,
+        "ref": "e63"
+      },
+      {
+        "index": 63,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 62,
+        "ref": "e64"
+      },
+      {
+        "index": 64,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 15,
+        "parentIndex": 63,
+        "ref": "e65"
+      },
+      {
+        "index": 65,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 16,
+        "parentIndex": 64,
+        "ref": "e66"
+      },
+      {
+        "index": 66,
+        "type": "android.widget.LinearLayout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 65,
+        "ref": "e67"
+      },
+      {
+        "index": 67,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 17,
+        "parentIndex": 65,
+        "ref": "e68"
+      },
+      {
+        "index": 68,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 18,
+        "parentIndex": 67,
+        "ref": "e69"
+      },
+      {
+        "index": 69,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 19,
+        "parentIndex": 68,
+        "ref": "e70"
+      },
+      {
+        "index": 70,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 348
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 69,
+        "ref": "e71"
+      },
+      {
+        "index": 71,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 348
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 70,
+        "ref": "e72"
+      },
+      {
+        "index": 72,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 30,
+          "y": 192,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 71,
+        "ref": "e73"
+      },
+      {
+        "index": 73,
+        "type": "android.widget.Button",
+        "label": "Back",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 30,
+          "y": 192,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 23,
+        "parentIndex": 72,
+        "ref": "e74"
+      },
+      {
+        "index": 74,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 54,
+          "y": 216,
+          "width": 72,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 73,
+        "ref": "e75"
+      },
+      {
+        "index": 75,
+        "type": "android.widget.TextView",
+        "label": "󰁍",
+        "value": "󰁍",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 54,
+          "y": 216,
+          "width": 72,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 74,
+        "ref": "e76"
+      },
+      {
+        "index": 76,
+        "type": "android.view.View",
+        "label": "Surface",
+        "value": "Surface",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 204,
+          "y": 210,
+          "width": 1064,
+          "height": 84
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 22,
+        "parentIndex": 71,
+        "ref": "e77"
+      },
+      {
+        "index": 77,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 348,
+          "width": 1280,
+          "height": 2508
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 20,
+        "parentIndex": 69,
+        "hiddenContentBelow": true,
+        "ref": "e78"
+      },
+      {
+        "index": 78,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 348,
+          "width": 1280,
+          "height": 2508
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 77,
+        "ref": "e79"
+      },
+      {
+        "index": 79,
+        "type": "android.view.ViewGroup",
+        "identifier": "surface-example-elevated",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 372,
+          "width": 1280,
+          "height": 642
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e80"
+      },
+      {
+        "index": 80,
+        "type": "android.widget.TextView",
+        "label": "Elevated surface",
+        "value": "Elevated surface",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 372,
+          "width": 1280,
+          "height": 138
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e81"
+      },
+      {
+        "index": 81,
+        "type": "android.widget.HorizontalScrollView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 510,
+          "width": 1280,
+          "height": 504
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e82"
+      },
+      {
+        "index": 82,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 510,
+          "width": 1280,
+          "height": 504
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 23,
+        "parentIndex": 81,
+        "ref": "e83"
+      },
+      {
+        "index": 83,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 48,
+          "y": 582,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e84"
+      },
+      {
+        "index": 84,
+        "type": "android.widget.TextView",
+        "label": "Elevation 0",
+        "value": "Elevation 0",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 134,
+          "y": 738,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 83,
+        "ref": "e85"
+      },
+      {
+        "index": 85,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 480,
+          "y": 582,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e86"
+      },
+      {
+        "index": 86,
+        "type": "android.widget.TextView",
+        "label": "Elevation 1",
+        "value": "Elevation 1",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 566,
+          "y": 738,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 85,
+        "ref": "e87"
+      },
+      {
+        "index": 87,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 912,
+          "y": 582,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e88"
+      },
+      {
+        "index": 88,
+        "type": "android.widget.TextView",
+        "label": "Elevation 2",
+        "value": "Elevation 2",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 998,
+          "y": 738,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 87,
+        "ref": "e89"
+      },
+      {
+        "index": 89,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1344,
+          "y": 582,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e90"
+      },
+      {
+        "index": 90,
+        "type": "android.widget.TextView",
+        "label": "Elevation 3",
+        "value": "Elevation 3",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1430,
+          "y": 738,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 89,
+        "ref": "e91"
+      },
+      {
+        "index": 91,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1776,
+          "y": 582,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e92"
+      },
+      {
+        "index": 92,
+        "type": "android.widget.TextView",
+        "label": "Elevation 4",
+        "value": "Elevation 4",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1862,
+          "y": 738,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 91,
+        "ref": "e93"
+      },
+      {
+        "index": 93,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 2208,
+          "y": 582,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 82,
+        "ref": "e94"
+      },
+      {
+        "index": 94,
+        "type": "android.widget.TextView",
+        "label": "Elevation 5",
+        "value": "Elevation 5",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 2294,
+          "y": 738,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 93,
+        "ref": "e95"
+      },
+      {
+        "index": 95,
+        "type": "android.view.ViewGroup",
+        "identifier": "surface-example-flat",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1062,
+          "width": 1280,
+          "height": 642
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e96"
+      },
+      {
+        "index": 96,
+        "type": "android.widget.TextView",
+        "label": "Flat surface",
+        "value": "Flat surface",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1062,
+          "width": 1280,
+          "height": 138
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e97"
+      },
+      {
+        "index": 97,
+        "type": "android.widget.HorizontalScrollView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1200,
+          "width": 1280,
+          "height": 504
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e98"
+      },
+      {
+        "index": 98,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1200,
+          "width": 1280,
+          "height": 504
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 23,
+        "parentIndex": 97,
+        "ref": "e99"
+      },
+      {
+        "index": 99,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 48,
+          "y": 1272,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e100"
+      },
+      {
+        "index": 100,
+        "type": "android.widget.TextView",
+        "label": "Elevation 0",
+        "value": "Elevation 0",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 134,
+          "y": 1428,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 99,
+        "ref": "e101"
+      },
+      {
+        "index": 101,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 480,
+          "y": 1272,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e102"
+      },
+      {
+        "index": 102,
+        "type": "android.widget.TextView",
+        "label": "Elevation 1",
+        "value": "Elevation 1",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 566,
+          "y": 1428,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 101,
+        "ref": "e103"
+      },
+      {
+        "index": 103,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 912,
+          "y": 1272,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e104"
+      },
+      {
+        "index": 104,
+        "type": "android.widget.TextView",
+        "label": "Elevation 2",
+        "value": "Elevation 2",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 998,
+          "y": 1428,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 25,
+        "parentIndex": 103,
+        "ref": "e105"
+      },
+      {
+        "index": 105,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1344,
+          "y": 1272,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e106"
+      },
+      {
+        "index": 106,
+        "type": "android.widget.TextView",
+        "label": "Elevation 3",
+        "value": "Elevation 3",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1430,
+          "y": 1428,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 105,
+        "ref": "e107"
+      },
+      {
+        "index": 107,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1776,
+          "y": 1272,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e108"
+      },
+      {
+        "index": 108,
+        "type": "android.widget.TextView",
+        "label": "Elevation 4",
+        "value": "Elevation 4",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 1862,
+          "y": 1428,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 107,
+        "ref": "e109"
+      },
+      {
+        "index": 109,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 2208,
+          "y": 1272,
+          "width": 0,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 24,
+        "parentIndex": 98,
+        "ref": "e110"
+      },
+      {
+        "index": 110,
+        "type": "android.widget.TextView",
+        "label": "Elevation 5",
+        "value": "Elevation 5",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 2294,
+          "y": 1428,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 25,
+        "parentIndex": 109,
+        "ref": "e111"
+      },
+      {
+        "index": 111,
+        "type": "android.widget.TextView",
+        "label": "Animated elevation",
+        "value": "Animated elevation",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1752,
+          "width": 1280,
+          "height": 138
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e112"
+      },
+      {
+        "index": 112,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 48,
+          "y": 1962,
+          "width": 360,
+          "height": 360
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e113"
+      },
+      {
+        "index": 113,
+        "type": "android.widget.TextView",
+        "label": "Elevation 3",
+        "value": "Elevation 3",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 134,
+          "y": 2118,
+          "width": 188,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 23,
+        "parentIndex": 112,
+        "ref": "e114"
+      },
+      {
+        "index": 114,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 66,
+          "y": 2412,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e115"
+      },
+      {
+        "index": 115,
+        "type": "android.widget.Button",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 66,
+          "y": 2412,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 23,
+        "parentIndex": 114,
+        "ref": "e116"
+      },
+      {
+        "index": 116,
+        "type": "android.widget.TextView",
+        "label": "󰍴",
+        "value": "󰍴",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 90,
+          "y": 2436,
+          "width": 72,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 115,
+        "ref": "e117"
+      },
+      {
+        "index": 117,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 270,
+          "y": 2412,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e118"
+      },
+      {
+        "index": 118,
+        "type": "android.widget.Button",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 270,
+          "y": 2412,
+          "width": 120,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 23,
+        "parentIndex": 117,
+        "ref": "e119"
+      },
+      {
+        "index": 119,
+        "type": "android.widget.TextView",
+        "label": "󰐕",
+        "value": "󰐕",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 294,
+          "y": 2436,
+          "width": 72,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 24,
+        "parentIndex": 118,
+        "ref": "e120"
+      },
+      {
+        "index": 120,
+        "type": "android.widget.TextView",
+        "label": "Layout",
+        "value": "Layout",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2670,
+          "width": 1280,
+          "height": 138
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": true,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e121"
+      },
+      {
+        "index": 121,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 72,
+          "y": 2880,
+          "width": 1136,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e122"
+      },
+      {
+        "index": 122,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 2913,
+          "width": 514,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e123"
+      },
+      {
+        "index": 123,
+        "type": "android.widget.TextView",
+        "label": "Left",
+        "value": "Left",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 2913,
+          "width": 514,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 23,
+        "parentIndex": 122,
+        "ref": "e124"
+      },
+      {
+        "index": 124,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 661,
+          "y": 2913,
+          "width": 514,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e125"
+      },
+      {
+        "index": 125,
+        "type": "android.widget.TextView",
+        "label": "Right",
+        "value": "Right",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 661,
+          "y": 2913,
+          "width": 514,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 23,
+        "parentIndex": 124,
+        "ref": "e126"
+      },
+      {
+        "index": 126,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 72,
+          "y": 3063,
+          "width": 1136,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e127"
+      },
+      {
+        "index": 127,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 3096,
+          "width": 1070,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e128"
+      },
+      {
+        "index": 128,
+        "type": "android.widget.TextView",
+        "label": "Top",
+        "value": "Top",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 3339,
+          "width": 1070,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 23,
+        "parentIndex": 127,
+        "ref": "e129"
+      },
+      {
+        "index": 129,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 3686,
+          "width": 1070,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 22,
+        "parentIndex": 78,
+        "ref": "e130"
+      },
+      {
+        "index": 130,
+        "type": "android.widget.TextView",
+        "label": "Bottom",
+        "value": "Bottom",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 105,
+          "y": 3929,
+          "width": 1070,
+          "height": 0
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 23,
+        "parentIndex": 129,
+        "ref": "e131"
+      },
+      {
+        "index": 131,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 18,
+        "parentIndex": 67,
+        "ref": "e132"
+      },
+      {
+        "index": 132,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 11,
+        "parentIndex": 57,
+        "ref": "e133"
+      },
+      {
+        "index": 133,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 2856
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 12,
+        "parentIndex": 132,
+        "ref": "e134"
+      },
+      {
+        "index": 134,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 2706
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 13,
+        "parentIndex": 133,
+        "ref": "e135"
+      },
+      {
+        "index": 135,
+        "type": "android.widget.TextView",
+        "label": "Example items",
+        "value": "Example items",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 246,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e136"
+      },
+      {
+        "index": 136,
+        "type": "android.widget.Button",
+        "label": "Inbox, 44",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 360,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e137"
+      },
+      {
+        "index": 137,
+        "type": "android.widget.TextView",
+        "label": "󰚇",
+        "value": "󰚇",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 408,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 136,
+        "ref": "e138"
+      },
+      {
+        "index": 138,
+        "type": "android.widget.TextView",
+        "label": "Inbox",
+        "value": "Inbox",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 414,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 136,
+        "ref": "e139"
+      },
+      {
+        "index": 139,
+        "type": "android.widget.TextView",
+        "label": "44",
+        "value": "44",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 414,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 136,
+        "ref": "e140"
+      },
+      {
+        "index": 140,
+        "type": "android.widget.Button",
+        "label": "Starred",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 528,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e141"
+      },
+      {
+        "index": 141,
+        "type": "android.widget.TextView",
+        "label": "󰓎",
+        "value": "󰓎",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 576,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 140,
+        "ref": "e142"
+      },
+      {
+        "index": 142,
+        "type": "android.widget.TextView",
+        "label": "Starred",
+        "value": "Starred",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 582,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 140,
+        "ref": "e143"
+      },
+      {
+        "index": 143,
+        "type": "android.widget.TextView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 603,
+          "width": 0,
+          "height": 18
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 140,
+        "ref": "e144"
+      },
+      {
+        "index": 144,
+        "type": "android.widget.Button",
+        "label": "Sent mail",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 696,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e145"
+      },
+      {
+        "index": 145,
+        "type": "android.widget.TextView",
+        "label": "󰒊",
+        "value": "󰒊",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 744,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 144,
+        "ref": "e146"
+      },
+      {
+        "index": 146,
+        "type": "android.widget.TextView",
+        "label": "Sent mail",
+        "value": "Sent mail",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 750,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 144,
+        "ref": "e147"
+      },
+      {
+        "index": 147,
+        "type": "android.widget.Button",
+        "label": "Colored label",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 864,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e148"
+      },
+      {
+        "index": 148,
+        "type": "android.widget.TextView",
+        "label": "󰏘",
+        "value": "󰏘",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 912,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 147,
+        "ref": "e149"
+      },
+      {
+        "index": 149,
+        "type": "android.widget.TextView",
+        "label": "Colored label",
+        "value": "Colored label",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 918,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 147,
+        "ref": "e150"
+      },
+      {
+        "index": 150,
+        "type": "android.widget.Button",
+        "label": "A very long title that will be truncated",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1032,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e151"
+      },
+      {
+        "index": 151,
+        "type": "android.widget.TextView",
+        "label": "󰆴",
+        "value": "󰆴",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1080,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 150,
+        "ref": "e152"
+      },
+      {
+        "index": 152,
+        "type": "android.widget.TextView",
+        "label": "A very long title that will be truncated",
+        "value": "A very long title that will be truncated",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1086,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 150,
+        "ref": "e153"
+      },
+      {
+        "index": 153,
+        "type": "android.widget.TextView",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1107,
+          "width": 0,
+          "height": 18
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 150,
+        "ref": "e154"
+      },
+      {
+        "index": 154,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1212,
+          "width": 0,
+          "height": 3
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e155"
+      },
+      {
+        "index": 155,
+        "type": "android.widget.TextView",
+        "label": "Preferences",
+        "value": "Preferences",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1281,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e156"
+      },
+      {
+        "index": 156,
+        "type": "android.view.ViewGroup",
+        "label": "Use Dynamic Theme",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1395,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e157"
+      },
+      {
+        "index": 157,
+        "type": "android.widget.TextView",
+        "label": "Use Dynamic Theme",
+        "value": "Use Dynamic Theme",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1449,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 156,
+        "ref": "e158"
+      },
+      {
+        "index": 158,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1419,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 156,
+        "ref": "e159"
+      },
+      {
+        "index": 159,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1419,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 158,
+        "ref": "e160"
+      },
+      {
+        "index": 160,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1419,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 158,
+        "ref": "e161"
+      },
+      {
+        "index": 161,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1431,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 160,
+        "ref": "e162"
+      },
+      {
+        "index": 162,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1419,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 158,
+        "ref": "e163"
+      },
+      {
+        "index": 163,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1443,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 158,
+        "ref": "e164"
+      },
+      {
+        "index": 164,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1443,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 163,
+        "ref": "e165"
+      },
+      {
+        "index": 165,
+        "type": "android.view.ViewGroup",
+        "label": "Dark Theme",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1563,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e166"
+      },
+      {
+        "index": 166,
+        "type": "android.widget.TextView",
+        "label": "Dark Theme",
+        "value": "Dark Theme",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1617,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 165,
+        "ref": "e167"
+      },
+      {
+        "index": 167,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1587,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 165,
+        "ref": "e168"
+      },
+      {
+        "index": 168,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1587,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 167,
+        "ref": "e169"
+      },
+      {
+        "index": 169,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1587,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 167,
+        "ref": "e170"
+      },
+      {
+        "index": 170,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1599,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 169,
+        "ref": "e171"
+      },
+      {
+        "index": 171,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1599,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 169,
+        "ref": "e172"
+      },
+      {
+        "index": 172,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1587,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 167,
+        "ref": "e173"
+      },
+      {
+        "index": 173,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1623,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 167,
+        "ref": "e174"
+      },
+      {
+        "index": 174,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1623,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 173,
+        "ref": "e175"
+      },
+      {
+        "index": 175,
+        "type": "android.view.ViewGroup",
+        "label": "RTL",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1731,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e176"
+      },
+      {
+        "index": 176,
+        "type": "android.widget.TextView",
+        "label": "RTL",
+        "value": "RTL",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1785,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 175,
+        "ref": "e177"
+      },
+      {
+        "index": 177,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1755,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 175,
+        "ref": "e178"
+      },
+      {
+        "index": 178,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1755,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 177,
+        "ref": "e179"
+      },
+      {
+        "index": 179,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1755,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 177,
+        "ref": "e180"
+      },
+      {
+        "index": 180,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1767,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 179,
+        "ref": "e181"
+      },
+      {
+        "index": 181,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1767,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 179,
+        "ref": "e182"
+      },
+      {
+        "index": 182,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1755,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 177,
+        "ref": "e183"
+      },
+      {
+        "index": 183,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1791,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 177,
+        "ref": "e184"
+      },
+      {
+        "index": 184,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1791,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 183,
+        "ref": "e185"
+      },
+      {
+        "index": 185,
+        "type": "android.view.ViewGroup",
+        "label": "Collapsed drawer *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1899,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e186"
+      },
+      {
+        "index": 186,
+        "type": "android.widget.TextView",
+        "label": "Collapsed drawer *",
+        "value": "Collapsed drawer *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1953,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 185,
+        "ref": "e187"
+      },
+      {
+        "index": 187,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1923,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 185,
+        "ref": "e188"
+      },
+      {
+        "index": 188,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1923,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 187,
+        "ref": "e189"
+      },
+      {
+        "index": 189,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1923,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 187,
+        "ref": "e190"
+      },
+      {
+        "index": 190,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1935,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 189,
+        "ref": "e191"
+      },
+      {
+        "index": 191,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1935,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 189,
+        "ref": "e192"
+      },
+      {
+        "index": 192,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1923,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 187,
+        "ref": "e193"
+      },
+      {
+        "index": 193,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1959,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 187,
+        "ref": "e194"
+      },
+      {
+        "index": 194,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 1959,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 193,
+        "ref": "e195"
+      },
+      {
+        "index": 195,
+        "type": "android.view.ViewGroup",
+        "label": "Custom font *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2067,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e196"
+      },
+      {
+        "index": 196,
+        "type": "android.widget.TextView",
+        "label": "Custom font *",
+        "value": "Custom font *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2121,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 195,
+        "ref": "e197"
+      },
+      {
+        "index": 197,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2091,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 195,
+        "ref": "e198"
+      },
+      {
+        "index": 198,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2091,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 197,
+        "ref": "e199"
+      },
+      {
+        "index": 199,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2091,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 197,
+        "ref": "e200"
+      },
+      {
+        "index": 200,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2103,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 199,
+        "ref": "e201"
+      },
+      {
+        "index": 201,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2103,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 199,
+        "ref": "e202"
+      },
+      {
+        "index": 202,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2091,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 197,
+        "ref": "e203"
+      },
+      {
+        "index": 203,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2127,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 197,
+        "ref": "e204"
+      },
+      {
+        "index": 204,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2127,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 203,
+        "ref": "e205"
+      },
+      {
+        "index": 205,
+        "type": "android.view.ViewGroup",
+        "label": "Ripple effect *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2235,
+          "width": 0,
+          "height": 168
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e206"
+      },
+      {
+        "index": 206,
+        "type": "android.widget.TextView",
+        "label": "Ripple effect *",
+        "value": "Ripple effect *",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2289,
+          "width": 0,
+          "height": 60
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 205,
+        "ref": "e207"
+      },
+      {
+        "index": 207,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2259,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 15,
+        "parentIndex": 205,
+        "ref": "e208"
+      },
+      {
+        "index": 208,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2259,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 207,
+        "ref": "e209"
+      },
+      {
+        "index": 209,
+        "type": "android.widget.Switch",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2259,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 207,
+        "ref": "e210"
+      },
+      {
+        "index": 210,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2271,
+          "width": 0,
+          "height": 96
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 209,
+        "ref": "e211"
+      },
+      {
+        "index": 211,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2259,
+          "width": 0,
+          "height": 120
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 207,
+        "ref": "e212"
+      },
+      {
+        "index": 212,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2283,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 16,
+        "parentIndex": 207,
+        "ref": "e213"
+      },
+      {
+        "index": 213,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2283,
+          "width": 0,
+          "height": 72
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 17,
+        "parentIndex": 212,
+        "ref": "e214"
+      },
+      {
+        "index": 214,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2415,
+          "width": 0,
+          "height": 3
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e215"
+      },
+      {
+        "index": 215,
+        "type": "android.widget.TextView",
+        "label": "* - optional example toggles",
+        "value": "* - optional example toggles",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2448,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e216"
+      },
+      {
+        "index": 216,
+        "type": "android.widget.TextView",
+        "label": "React Native Paper Version 6.0.0-alpha.0",
+        "value": "React Native Paper Version 6.0.0-alpha.0",
+        "bundleId": "com.callstack.reactnativepaperexample",
+        "rect": {
+          "x": 0,
+          "y": 2532,
+          "width": 0,
+          "height": 48
+        },
+        "enabled": true,
+        "editable": false,
+        "password": false,
+        "hintShowing": false,
+        "visibleToUser": false,
+        "depth": 14,
+        "parentIndex": 134,
+        "ref": "e217"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.callstack.reactnativepaperexample",
+    "appBundleId": "com.callstack.reactnativepaperexample",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 217,
+      "totalNodeCount": 217,
+      "reasons": []
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.21.0",
+      "helperApiVersion": "2",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 2000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 217,
+      "helperTruncated": false,
+      "elapsedMs": 97
+    },
+    "snapshotQuality": {
+      "state": "healthy",
+      "backend": "android-helper"
+    },
+    "snapshotDiagnostics": {
+      "stats": {
+        "count": 104,
+        "p50Ms": 52,
+        "p95Ms": 206,
+        "maxMs": 609,
+        "slowThresholdMs": 1500,
+        "platform": "android",
+        "backends": {
+          "android": 104
+        }
+      }
+    },
+    "refsGeneration": 835372
+  }
+}

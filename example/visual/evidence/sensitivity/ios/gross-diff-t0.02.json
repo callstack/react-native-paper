@@ -1,0 +1,90 @@
+{
+  "success": true,
+  "data": {
+    "diffPath": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/diff-images/ios-gross-t0.02.png",
+    "regions": [
+      {
+        "index": 1,
+        "rect": {
+          "x": 443,
+          "y": 223,
+          "width": 763,
+          "height": 404
+        },
+        "normalizedRect": {
+          "x": 36.73,
+          "y": 34.74,
+          "width": 63.27,
+          "height": 62.93
+        },
+        "differentPixels": 70986,
+        "shareOfDiffPercentage": 61.04,
+        "densityPercentage": 23.03,
+        "shape": "large-area",
+        "size": "large",
+        "location": "middle-right",
+        "averageBaselineColorHex": "#fcf5fd",
+        "averageCurrentColorHex": "#eee7ef",
+        "baselineLuminance": 247,
+        "currentLuminance": 233,
+        "dominantChange": "darker"
+      },
+      {
+        "index": 2,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1206,
+          "height": 33
+        },
+        "normalizedRect": {
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 5.14
+        },
+        "differentPixels": 36741,
+        "shareOfDiffPercentage": 31.59,
+        "densityPercentage": 92.32,
+        "shape": "horizontal-band",
+        "size": "large",
+        "location": "top-center",
+        "averageBaselineColorHex": "#fef7ff",
+        "averageCurrentColorHex": "#f2ebf3",
+        "baselineLuminance": 249,
+        "currentLuminance": 237,
+        "dominantChange": "darker"
+      },
+      {
+        "index": 3,
+        "rect": {
+          "x": 463,
+          "y": 190,
+          "width": 743,
+          "height": 33
+        },
+        "normalizedRect": {
+          "x": 38.39,
+          "y": 29.6,
+          "width": 61.61,
+          "height": 5.14
+        },
+        "differentPixels": 8565,
+        "shareOfDiffPercentage": 7.37,
+        "densityPercentage": 34.93,
+        "shape": "horizontal-band",
+        "size": "medium",
+        "location": "top-right",
+        "averageBaselineColorHex": "#fdf6fe",
+        "averageCurrentColorHex": "#f5eef6",
+        "baselineLuminance": 248,
+        "currentLuminance": 240,
+        "dominantChange": "mixed"
+      }
+    ],
+    "totalPixels": 774252,
+    "differentPixels": 116292,
+    "mismatchPercentage": 15.02,
+    "match": false
+  }
+}

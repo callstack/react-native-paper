@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "diffPath": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/artifacts/diff-gross.png",
+    "regions": [
+      {
+        "index": 1,
+        "rect": {
+          "x": 502,
+          "y": 573,
+          "width": 316,
+          "height": 17
+        },
+        "normalizedRect": {
+          "x": 41.63,
+          "y": 89.25,
+          "width": 26.2,
+          "height": 2.65
+        },
+        "differentPixels": 4277,
+        "shareOfDiffPercentage": 100,
+        "densityPercentage": 79.62,
+        "shape": "horizontal-band",
+        "size": "small",
+        "location": "bottom-center",
+        "averageBaselineColorHex": "#fdf6fe",
+        "averageCurrentColorHex": "#dfd9e0",
+        "baselineLuminance": 248,
+        "currentLuminance": 219,
+        "dominantChange": "darker"
+      }
+    ],
+    "totalPixels": 774252,
+    "differentPixels": 4277,
+    "mismatchPercentage": 0.55,
+    "match": false
+  }
+}

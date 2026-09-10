@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "data": {
+    "totalPixels": 821760,
+    "differentPixels": 0,
+    "mismatchPercentage": 0,
+    "match": true
+  }
+}

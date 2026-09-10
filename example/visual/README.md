@@ -1,24 +1,34 @@
 # Visual regression PoC — agent-device on the example app
 
-**Status: PoC complete (Thu 2026-09-10) — iOS, Android, and a reproducible script. Pending maintainer review; nothing committed yet.**
+**Status: PoC complete (Thu 2026-09-10) — iOS, Android, and a reproducible script. Under review in #5115.**
 
 Question this PoC answers: does [agent-device](https://github.com/callstack/agent-device) capture the existing example screens deterministically enough to diff `Surface` against a baseline, and does that diff catch a realistic regression rather than only a gross one?
 
-Everything below is reproducible from the JSON artifacts in `artifacts/` (gitignored, kept locally) and the pinned environment in `env.json`.
+Every number below is backed by committed evidence in `evidence/`. The original measurements were taken before the test ids were renamed, so JSON under `evidence/ios/`, `evidence/android/` and `evidence/a11y/` refers to `surface-elevated` / `surface-flat`; the current ids are `surface-example-*`, and renaming an id does not change a pixel. Committed evidence covers the raw `diff screenshot` JSON each table is computed from, the diff images from the deliberate breaks, and `evidence/issues.md` — plus the pinned environment in `env.json`. Local run output goes to `artifacts/` (gitignored).
 
 ## Setup
 
 - Branch `poc/agent-device-visual` @ `cbcd52f7e`, React Native 0.85.3, Expo 56, Debug dev-client.
 - iPhone 17 Pro simulator, iOS 26.5, 3x. Built with `yarn example ios --device "iPhone 17 Pro"` (63 s incremental).
 - agent-device 0.21.0 via `npx`, driven from the CLI. No Storybook, no extra screens.
-- Example-app change: `testID` + `accessible` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx`, so `screenshot --crop-on 'id="surface-elevated"'` crops to exactly that section (402x214 logical, 1206x642 px at `--pixel-density 3`).
+- Example-app change: a `testID` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx` (`surface-example-elevated` / `surface-example-flat`, named so they cannot be mistaken for the library defaults removed in #5088 and #5099), so `screenshot --crop-on 'id="surface-example-elevated"'` crops to exactly that section (402x214 logical, 1206x642 px at `--pixel-density 3`).
 - No animation freezing, no status-bar normalisation, no release build were needed. The crop excludes the status bar, dev-client bubble and LogBox.
+
+### The only test hook: a `testID`, and why not `accessible`
+
+An earlier revision also set `accessible` on the two `List.Section`s, on the assumption that Android needed it to expose the node. Review flagged that as an accessibility regression, and testing confirmed it — see `evidence/a11y/`:
+
+- **With `accessible`, iOS collapses the section into one accessibility element.** The XCUITest tree (the same tree VoiceOver walks) shows `surface-example-elevated` as a childless leaf with the label `"Elevated surface, Elevation 0, Elevation 1, …, Elevation 5, Vertical scroll bar, 3 pages"` — 2 Elevation-labelled nodes in the whole screen instead of 26 (`01-ios-snapshot-with-accessible.json` vs `03-testid-only-ios-snapshot.json`). Android does not collapse children either way (217 nodes, identical structure).
+- **`testID` alone is enough on both platforms.** `--crop-on 'id="…"'` resolves to the identical rect with or without `accessible` (iOS 0,134,402×214; Android 0,372,1280×642). React Native did not flatten the View on Android, so `collapsable={false}` is not needed either.
+- **A label or text selector cannot replace the id.** `label="Elevated surface"` is ambiguous on iOS (`CROP_TARGET_AMBIGUOUS`, nested StaticText) and on Android resolves to the 138 px subheader rather than the section.
+
+`testID` has no effect on the accessibility tree on either platform, so the example app's behaviour is unchanged by the hook.
 
 ## iOS results
 
 ### Stability
 
-Four captures of `surface-elevated` diffed against the baseline, 774,252 pixels each:
+Four captures of `surface-example-elevated` diffed against the baseline, 774,252 pixels each:
 
 | capture                                           | changed px @ threshold 0.1 | changed px @ 0.02 | regions |
 | ------------------------------------------------- | -------------------------- | ----------------- | ------- |
@@ -44,6 +54,8 @@ Two deliberate one-line changes to `src/components/Surface.tsx` (iOS branch), ap
 
 Human visibility of the realistic break: borderline — noticeable only when flipping between the two images. This is the class of regression a reviewer misses and a pixel diff catches.
 
+The table above is the original single capture per break. Review asked for the realistic break to be repeated; the three independent re-captures per platform are in "Re-measured after review" below and are bit-identical to these numbers.
+
 Two caveats, both from independent review of the artifacts:
 
 - **Threshold choice was post-hoc on iOS.** 0.02 was chosen after the default missed the break, then re-verified against the same four noise captures. For Android the thresholds are pre-registered as a sweep (0.1 / 0.05 / 0.02 / 0.01) over every noise capture and every break, and the whole curve is reported.
@@ -51,7 +63,7 @@ Two caveats, both from independent review of the artifacts:
 
 ## agent-device issues found (to file)
 
-See `artifacts/issues.md` for commands and evidence.
+See `evidence/issues.md` for commands and evidence.
 
 1. `find <selector>` taps the match instead of only locating it.
 2. `scroll bottom` hits a safety limit and leaves the Expo dev menu open.
@@ -61,17 +73,19 @@ See `artifacts/issues.md` for commands and evidence.
 
 Also noted: docs say `wait --stable`, the CLI takes `wait stable [quietMs] [timeoutMs]`.
 
-Issues 6–12 (session binding per cwd, non-portable `find` selectors, stale-ref errors, Android relaunch landing in the launcher, `logs` on an inactive log, `--pixel-density` iOS-only, Node client not resolvable from the `npx` cache) are in `artifacts/issues.md` with commands and evidence.
+Issues 6–12 (session binding per cwd, non-portable `find` selectors, stale-ref errors, Android relaunch landing in the launcher, `logs` on an inactive log, `--pixel-density` iOS-only, Node client not resolvable from the `npx` cache) are in `evidence/issues.md` with commands and evidence.
+
+Issues 13–18 came out of the review round: `snapshot` returns an empty `nodes` array when the tree is unchanged unless `--force-full` is passed; a relaunch restores the previous route (the example app persists navigation state, so this is app behaviour the runner has to handle, logged for context); the dev menu appears after app-ready, not at open; Fast Refresh not reaching Android after a relaunch; an occasional non-zero CLI exit with empty stdout and stderr; and `diff screenshot --out` writing no image when the result is a match.
 
 ## Android
 
 Emulator `Pixel_10_Pro`, API 37 (Android 17), arm64 `google_apis_playstore_ps16k`, 480 dpi, 1280x2856, emulator 36.6.11, `hw.gpu.mode=auto`. Wall-clock: emulator boot 8 s, `yarn example android` (incremental, build + install + launch) 119 s, `open` 668 ms, `open --relaunch` 1,688 ms, one cropped capture ≈ 2 s.
 
-`--pixel-density` is rejected on Android (`UNSUPPORTED_OPERATION`, iOS-family only); Android screenshots already come back in native device pixels, so the `surface-elevated` crop is 1280x642 = 821,760 px. `--crop-on 'id="surface-elevated"'` and `'id="surface-flat"'` each resolve to exactly one node (`testID` + `accessible` exposes `resource-id`), so no fallback selector was needed.
+`--pixel-density` is rejected on Android (`UNSUPPORTED_OPERATION`, iOS-family only); Android screenshots already come back in native device pixels, so the `surface-example-elevated` crop is 1280x642 = 821,760 px. `--crop-on 'id="surface-example-elevated"'` and `'id="surface-example-flat"'` each resolve to exactly one node (`testID` + `accessible` exposes `resource-id`), so no fallback selector was needed.
 
 ### Stability
 
-Four captures of `surface-elevated` diffed against the baseline, 821,760 pixels each, at every pre-registered threshold:
+Four captures of `surface-example-elevated` diffed against the baseline, 821,760 pixels each, at every pre-registered threshold:
 
 | capture                                          | changed px @ 0.1 | @ 0.05 | @ 0.02 | @ 0.01 | regions |
 | ------------------------------------------------ | ---------------- | ------ | ------ | ------ | ------- |
@@ -97,7 +111,24 @@ The realistic break repeats the iOS finding exactly: at the default threshold th
 
 These numbers are for one emulator on one host with `hw.gpu.mode=auto`, i.e. host-GPU rendering. **swiftshader was not measured**, so nothing here says whether Android baselines survive on `ubuntu-latest`, which renders with swiftshader — CI parity is an open item, not a claim. Nor was a cold emulator boot from a wiped snapshot, an AVD at another density, a system-image update, or a Release build. Emulator relaunch is more expensive than on iOS in commands, not seconds: `open --relaunch` starts the Expo dev launcher, so reconnecting to Metro and waiting for the bundle takes three extra steps (see issues 9 and 10), and `wait stable` returns "settled" on the still-empty tree while the bundle loads — a suite must wait for real content, not for stability.
 
-Six more agent-device findings came out of the Android run (session/device binding, non-portable `find` selectors, ref invalidation, dev-launcher relaunch, silent `logs`, and `--pixel-density` being iOS-only). They are issues 6-11 in `artifacts/issues.md`, with commands and artifact references.
+Six more agent-device findings came out of the Android run (session/device binding, non-portable `find` selectors, ref invalidation, dev-launcher relaunch, silent `logs`, and `--pixel-density` being iOS-only). They are issues 6-11 in `evidence/issues.md`, with commands and artifact references.
+
+## Re-measured after review
+
+Review asked that the headline sensitivity claim rest on more than one capture, and that the threshold be fixed before measuring rather than after. Both were done on 2026-09-10 with the renamed test ids and `testID` only (no `accessible`). Each row is an independent capture — `wait stable`, 2 s sleep, screenshot, then two diffs against the committed baseline at the two pre-declared thresholds. Raw JSON is in `evidence/sensitivity/<platform>/`, diff images in `evidence/diff-images/<platform>-realistic-<n>-t0.02.png`.
+
+| platform | capture     | changed px @ 0.1 | changed px @ 0.02 | regions @ 0.02 |
+| -------- | ----------- | ---------------- | ----------------- | -------------- |
+| iOS      | realistic-1 | 0                | 10,179 (1.31 %)   | 3              |
+| iOS      | realistic-2 | 0                | 10,179 (1.31 %)   | 3              |
+| iOS      | realistic-3 | 0                | 10,179 (1.31 %)   | 3              |
+| Android  | realistic-1 | 0                | 9,336 (1.14 %)    | 1              |
+| Android  | realistic-2 | 0                | 9,336 (1.14 %)    | 1              |
+| Android  | realistic-3 | 0                | 9,336 (1.14 %)    | 1              |
+
+**Bit-identical across all three captures on both platforms**, and identical to the original single-capture numbers. There is no capture noise to average over: on these targets the changed-pixel count is a deterministic function of the code. The gross break was re-captured once per platform with the same result as before (iOS 4,277 / 116,292 px; Android 65,051 / 208,505 px at 0.1 / 0.02). After reverting, every capture diffed to 0 at both thresholds.
+
+One operational finding from this pass matters for any runner built on this: **Fast Refresh stopped reaching the Android app after a relaunch.** Metro was serving the changed bundle (verified by fetching it), `adb reverse` was in place, and yet captures stayed at 0 changed pixels until a dev-menu Reload — after which the break appeared at exactly the expected magnitude. A runner that captures without forcing a fresh bundle can compare stale pixels and report PASS. `run.mjs` therefore always relaunches the app before capturing (issue 16).
 
 ## Not done / out of scope
 
@@ -121,39 +152,60 @@ node example/visual/run.mjs --platform ios
 node example/visual/run.mjs --platform android
 ```
 
-Flags: `--update` (overwrite the baselines with the current captures instead of
-diffing), `--threshold <0-1>` (default `0.02`, the PoC finding — the CLI default of
-`0.1` misses soft-shadow regressions), `--story surface-elevated,surface-flat`.
+Flags: `--update` (write the current captures as baselines — creates a missing
+baseline, overwrites an existing one), `--threshold <0-1>` (default `0.02`, the PoC
+finding — the CLI default of `0.1` misses soft-shadow regressions),
+`--story surface-example-elevated,surface-example-flat`, `--out <dir>` (where captures,
+diff images, per-command JSON and `summary.json` go; default
+`example/visual/artifacts/run/<platform>`, gitignored), `--force` (downgrade the two
+guardrails below to warnings).
 
 Prerequisites are documented, not automated: the app must already be built and
 installed on the device pinned in `env.json`, and Metro must be running. The
-script opens the app, dismisses the Expo dev menu if it is showing, navigates to
-the Surface example (skipped if it is already on screen), waits for the UI to go
-quiet, then captures and diffs each story.
+script always relaunches the app (`open --relaunch` on iOS, `am force-stop` +
+`open` on Android) so the JS bundle is fetched fresh from Metro — never trusting
+whatever is already on screen, after Fast Refresh was seen to silently stop
+reaching the Android app. It waits for the app to be ready (not just for the tree
+to be stable), dismisses the Expo dev menu (iOS) or dev launcher (Android) if
+they appear, and then — because the example app persists navigation state and
+restores the last route — either finds the Surface screen already showing or
+presses Back to the example list root and presses the Surface row (matched by
+position and width, not by label alone, so the header title is never mistaken
+for it). Every loop is bounded and fails with a message rather than scrolling
+forever. It then waits for the UI to go quiet and captures and diffs each story.
 
 Each story prints one line:
 
 ```
-ios surface-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
+ios surface-example-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
 ```
 
 PASS means agent-device reported `match: true` at that threshold — no pixel
 differed by more than the threshold's colour distance. FAIL means it did not;
 `changed` is the pixel count and `regions` the number of clustered diff areas.
-The process exits 1 if any story fails, so it can gate a script or a CI step.
-Captures, diff images, per-command JSON and `summary.json` land in
-`example/visual/artifacts/run/<platform>/`.
+Exit codes: `1` if any story fails; `2` if the connected device does not match
+`env.json`; `3` if a capture's dimensions do not match the crop pinned in
+`env.json`. A regression is the only thing that exits 1.
 
-On start-up the script compares the connected device with `env.json` — UDID, iOS
-runtime and boot state via `xcrun simctl list -j devices`; API level and density
-via `adb getprop` and `adb shell wm density` — and prints a `WARNING:` line per
-mismatch. It does not refuse to run: baselines are only valid for the pinned
-configuration, so a warning is the signal that a diff result is not comparable
-with the numbers in this file.
+Two guardrails, both hard failures unless `--force`:
 
-Verified end to end on 2026-09-10: PASS with `changed=0` on both stories on both
-platforms; with the realistic iOS break reapplied by Fast Refresh
-(`shadow(elevation === 1 ? 2 : elevation, …)`) the script reported
-`ios surface-elevated changed=10179 (1.31%) regions=3 threshold=0.02 → FAIL` and
-exited 1 — the same pixel count as the hand-run loop — then PASS again after
-`git checkout -- src/components/Surface.tsx`.
+- **Device pin.** Before any capture the script compares the connected device with
+  `env.json` — UDID, iOS runtime and boot state via `xcrun simctl list -j devices`;
+  API level and density via `adb getprop` and `adb shell wm density`. Any mismatch,
+  or an inability to identify the device at all, exits 2 with an expected/observed
+  list. This applies to `--update` too, so committed baselines cannot be
+  overwritten from the wrong simulator by accident.
+- **Crop size.** After every capture the reported width, height and (on iOS)
+  pixel density are compared with the crop pinned in `env.json`. A mismatch exits
+  3; a wrong-sized capture can never read as PASS. `env.json` is never rewritten
+  by the script.
+
+Verified end to end on 2026-09-10 after review; `summary.json` and the diff images are in
+`evidence/runs/<platform>/fix-*/`. From the Surface screen: PASS with `changed=0`
+on both stories, both platforms (iOS 12.7 s, Android 24.9 s). Started from another
+example screen: relaunch → overlay dismissed → Back ×2 → Surface row pressed → PASS
+(iOS 35.6 s, Android 33.6 s). With the realistic break applied and no manual
+reload: `ios surface-example-elevated changed=10179 (1.31%) regions=3 → FAIL`, exit 1;
+`android surface-example-elevated changed=9336 (1.14%) regions=1 → FAIL`, exit 1 —
+the same counts as every hand-run capture. After `git checkout -- src/components/Surface.tsx`:
+PASS again on both.

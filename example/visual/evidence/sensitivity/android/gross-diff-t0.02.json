@@ -1,0 +1,116 @@
+{
+  "success": true,
+  "data": {
+    "diffPath": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/diff-images/android-gross-t0.02.png",
+    "regions": [
+      {
+        "index": 1,
+        "rect": {
+          "x": 8,
+          "y": 196,
+          "width": 438,
+          "height": 423
+        },
+        "normalizedRect": {
+          "x": 0.63,
+          "y": 30.53,
+          "width": 34.22,
+          "height": 65.89
+        },
+        "differentPixels": 115861,
+        "shareOfDiffPercentage": 55.57,
+        "densityPercentage": 62.53,
+        "shape": "compact",
+        "size": "large",
+        "location": "middle-left",
+        "averageBaselineColorHex": "#faf8fe",
+        "averageCurrentColorHex": "#dfdde2",
+        "baselineLuminance": 249,
+        "currentLuminance": 222,
+        "dominantChange": "darker"
+      },
+      {
+        "index": 2,
+        "rect": {
+          "x": 447,
+          "y": 196,
+          "width": 442,
+          "height": 423
+        },
+        "normalizedRect": {
+          "x": 34.92,
+          "y": 30.53,
+          "width": 34.53,
+          "height": 65.89
+        },
+        "differentPixels": 48994,
+        "shareOfDiffPercentage": 23.5,
+        "densityPercentage": 26.2,
+        "shape": "compact",
+        "size": "large",
+        "location": "center",
+        "averageBaselineColorHex": "#f9f7fd",
+        "averageCurrentColorHex": "#edebf1",
+        "baselineLuminance": 248,
+        "currentLuminance": 236,
+        "dominantChange": "darker"
+      },
+      {
+        "index": 3,
+        "rect": {
+          "x": 890,
+          "y": 196,
+          "width": 390,
+          "height": 423
+        },
+        "normalizedRect": {
+          "x": 69.53,
+          "y": 30.53,
+          "width": 30.47,
+          "height": 65.89
+        },
+        "differentPixels": 30792,
+        "shareOfDiffPercentage": 14.77,
+        "densityPercentage": 18.67,
+        "shape": "compact",
+        "size": "large",
+        "location": "middle-right",
+        "averageBaselineColorHex": "#f6f4fa",
+        "averageCurrentColorHex": "#eceaef",
+        "baselineLuminance": 245,
+        "currentLuminance": 235,
+        "dominantChange": "mixed"
+      },
+      {
+        "index": 4,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 11
+        },
+        "normalizedRect": {
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 1.71
+        },
+        "differentPixels": 12858,
+        "shareOfDiffPercentage": 6.17,
+        "densityPercentage": 91.32,
+        "shape": "horizontal-band",
+        "size": "medium",
+        "location": "top-center",
+        "averageBaselineColorHex": "#faf8fe",
+        "averageCurrentColorHex": "#f3f1f7",
+        "baselineLuminance": 249,
+        "currentLuminance": 242,
+        "dominantChange": "mixed"
+      }
+    ],
+    "totalPixels": 821760,
+    "differentPixels": 208505,
+    "mismatchPercentage": 25.37,
+    "match": false
+  }
+}

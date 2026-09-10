@@ -2,8 +2,9 @@
 /**
  * Visual regression loop for the Surface example (PoC).
  *
- *   node example/visual/run.mjs --platform ios|android [--update]
- *                               [--threshold 0.02] [--story surface-elevated,surface-flat]
+ *   node example/visual/run.mjs --platform ios|android [--update] [--force]
+ *                               [--threshold 0.02] [--story surface-example-elevated,surface-example-flat]
+ *                               [--out <dir>]
  *
  * Drives agent-device 0.21.0 through `npx` and parses `--json` stdout. The
  * package does export `createAgentDeviceClient`, but it is not a dependency of
@@ -14,6 +15,15 @@
  * and installed on a device matching example/visual/env.json, Metro is running,
  * and the baselines in example/visual/__baselines__/<platform>/ were captured
  * on that same device.
+ *
+ * Every run relaunches the app: the example app persists its navigation state
+ * (PERSISTENCE_KEY in example/src/index.tsx), and only a relaunch makes the app
+ * fetch a fresh JS bundle from Metro — Fast Refresh alone was observed not to
+ * reach the Android app, which made captures silently stale.
+ *
+ * Exit codes: 0 pass, 1 a story FAILed the diff, 2 setup/environment error,
+ * 3 a capture came back with the wrong dimensions. `summary.json` is written in
+ * the output directory in every one of those cases.
  */
 
 import { spawnSync } from 'node:child_process';
@@ -26,9 +36,45 @@ const BASELINE_DIR = path.join(VISUAL_DIR, '__baselines__');
 const ENV_FILE = path.join(VISUAL_DIR, 'env.json');
 const AGENT_DEVICE = 'agent-device@0.21.0';
 const BUNDLE_ID = 'com.callstack.reactnativepaperexample';
-const DEFAULT_STORIES = ['surface-elevated', 'surface-flat'];
+const DEFAULT_STORIES = ['surface-example-elevated', 'surface-example-flat'];
 const DEFAULT_THRESHOLD = 0.02; // PoC finding: the CLI default of 0.1 misses soft-shadow regressions.
+const SCROLL_STEP = 6; // rows per `scroll down` in the example list
+const MAX_SCROLL_STEPS = 6; // bound the search so a wrong screen fails instead of looping
+const MAX_BACK_STEPS = 8; // deepest example nesting is 2; 8 leaves room and still terminates
+const MAX_OVERLAY_STEPS = 5; // dev menu + dev launcher, each possibly twice
+
+// App-ready polling. Right after `open` the tree is just the splash screen
+// (iOS: 3 nodes — Application, SplashScreenLogo, "Downloading 100%…"), and
+// after leaving the Android dev launcher it is an 11-node "Connecting to the
+// development server…" screen, so any check that snapshots immediately reads
+// the wrong screen. Node count alone is not enough: the loading screens are
+// matched by label too.
+const READY_TIMEOUT_MS = 30000;
+const READY_POLL_MS = 1000;
+const READY_MIN_NODES = 10;
+const NOT_READY_LABEL =
+  /^(Downloading|Connecting to|Loading|Building JavaScript bundle)/i;
+const NOT_READY_IDENTIFIER = /SplashScreen/i;
+
+// Overlay detection. The dev-menu labels are generic, so they only count when
+// a dev-menu-only marker is on screen too; the dev launcher is Expo's
+// "DEVELOPMENT SERVERS / RECENTLY OPENED" screen, which no dev-menu label hits.
 const DEV_MENU_LABELS = ['Close', 'Continue'];
+const DEV_MENU_MARKERS = [
+  'Reload',
+  'Go home',
+  'Fast refresh',
+  'Fast Refresh',
+  'TOOLS',
+  'Toggle element inspector',
+  'Open DevTools',
+];
+const DEV_LAUNCHER_MARKERS = ['DEVELOPMENT SERVERS', 'RECENTLY OPENED'];
+const METRO_PORT = '8081';
+
+const LIST_ROOT_TITLE = 'Examples'; // Appbar title of the example-list root
+const SURFACE_ROW_LABEL = 'Surface';
+const BACK_LABEL = 'Back';
 
 // agent-device sessions are keyed by cwd. Point this at the directory whose
 // session is already bound to the intended device to reuse that binding;
@@ -38,9 +84,20 @@ const SESSION_CWD = process.env.AGENT_DEVICE_SESSION_CWD || VISUAL_DIR;
 let commandSeq = 0;
 let cmdDir = VISUAL_DIR;
 
-function fail(message) {
-  console.error(`error: ${message}`);
-  process.exit(2);
+/**
+ * A failure with an exit code attached. Thrown rather than exiting on the spot
+ * so that main() can still write summary.json before the process ends.
+ */
+class RunFailure extends Error {
+  constructor(message, exitCode) {
+    super(message);
+    this.name = 'RunFailure';
+    this.exitCode = exitCode;
+  }
+}
+
+function fail(message, code = 2) {
+  throw new RunFailure(message, code);
 }
 
 function warn(message) {
@@ -54,8 +111,10 @@ function sleepSync(ms) {
 function parseArgs(argv) {
   const out = {
     update: false,
+    force: false,
     threshold: DEFAULT_THRESHOLD,
     stories: DEFAULT_STORIES,
+    outDir: null,
   };
 
   for (let i = 0; i < argv.length; i++) {
@@ -73,8 +132,14 @@ function parseArgs(argv) {
       case '--update':
         out.update = true;
         break;
+      case '--force':
+        out.force = true;
+        break;
       case '--threshold':
         out.threshold = Number(next());
+        break;
+      case '--out':
+        out.outDir = path.resolve(next());
         break;
       case '--story':
       case '--stories':
@@ -86,7 +151,8 @@ function parseArgs(argv) {
       case '--help':
       case '-h':
         console.log(
-          'usage: node example/visual/run.mjs --platform ios|android [--update] [--threshold <0-1>] [--story a,b]'
+          'usage: node example/visual/run.mjs --platform ios|android [--update] [--force]\n' +
+            '                                  [--threshold <0-1>] [--story|--stories a,b] [--out <dir>]'
         );
         process.exit(0);
         break;
@@ -104,6 +170,9 @@ function parseArgs(argv) {
     out.threshold > 1
   ) {
     fail('--threshold must be a number between 0 and 1');
+  }
+  if (out.outDir == null) {
+    out.outDir = path.join(VISUAL_DIR, 'artifacts', 'run', out.platform);
   }
 
   return out;
@@ -171,6 +240,16 @@ function ad(label, args, { allowFail = false } = {}) {
   };
 }
 
+/**
+ * Snapshot helper. `--force-full` on every call: without it agent-device
+ * returns an empty `nodes` array whenever the tree is unchanged, which reads
+ * as "the element is gone" (PoC issue 13).
+ */
+function snapshot(label, globals, extra = []) {
+  const snap = ad(label, ['snapshot', ...extra, '--force-full', ...globals]);
+  return snap.data?.nodes || [];
+}
+
 function sh(command, args) {
   const proc = spawnSync(command, args, {
     encoding: 'utf8',
@@ -193,24 +272,40 @@ function adbPath() {
   return fs.existsSync(candidate) ? candidate : 'adb';
 }
 
-/** Compares the connected device with env.json and warns (never refuses). */
+/**
+ * Compares the connected device with env.json. Returns the observed values and
+ * the list of mismatches; the caller decides what to do with them. A device
+ * that cannot be inspected counts as a mismatch: baselines are only meaningful
+ * on a device we could actually identify.
+ */
 function checkEnvironment(platform, env) {
   const observed = {};
+  const mismatches = [];
+  const mismatch = (what, expected, actual) =>
+    mismatches.push(`${what}: expected ${expected}, observed ${actual}`);
 
   if (platform === 'ios') {
     const expectedUdid = env.udid;
     const res = sh('xcrun', ['simctl', 'list', '-j', 'devices']);
     if (res.status !== 0) {
-      warn(`could not run xcrun simctl list: ${res.stderr.trim()}`);
-      return observed;
+      mismatch(
+        'device inspection',
+        `xcrun simctl list to succeed for udid ${expectedUdid}`,
+        `exit ${res.status} ${res.stderr.trim()}`
+      );
+      return { observed, mismatches };
     }
 
     let devices;
     try {
       devices = JSON.parse(res.stdout).devices || {};
     } catch {
-      warn('could not parse xcrun simctl list output');
-      return observed;
+      mismatch(
+        'device inspection',
+        'parseable xcrun simctl list output',
+        'unparseable JSON'
+      );
+      return { observed, mismatches };
     }
 
     let match = null;
@@ -221,8 +316,12 @@ function checkEnvironment(platform, env) {
     }
 
     if (!match) {
-      warn(`env.json udid ${expectedUdid} is not in xcrun simctl list`);
-      return observed;
+      mismatch(
+        'udid',
+        expectedUdid,
+        'not present in xcrun simctl list (no such simulator)'
+      );
+      return { observed, mismatches };
     }
 
     observed.udid = match.device.udid;
@@ -231,37 +330,33 @@ function checkEnvironment(platform, env) {
     observed.state = match.device.state;
 
     if (env.runtime && match.runtime !== env.runtime) {
-      warn(
-        `runtime mismatch: env.json ${env.runtime}, device ${match.runtime}`
-      );
+      mismatch('runtime', env.runtime, match.runtime);
     }
     if (
       env.iosVersion &&
       !match.runtime.endsWith(env.iosVersion.replace(/\./g, '-'))
     ) {
-      warn(
-        `iOS version mismatch: env.json ${env.iosVersion}, device runtime ${match.runtime}`
-      );
+      mismatch('iOS version', env.iosVersion, `runtime ${match.runtime}`);
     }
     if (env.device && match.device.name !== env.device) {
-      warn(
-        `device name mismatch: env.json ${env.device}, device ${match.device.name}`
-      );
+      mismatch('device name', env.device, match.device.name);
     }
     if (match.device.state !== 'Booted') {
-      warn(`device ${expectedUdid} is ${match.device.state}, not Booted`);
+      mismatch('device state', 'Booted', match.device.state);
     }
-    return observed;
+    return { observed, mismatches };
   }
 
   const adb = adbPath();
   const prop = (name) => sh(adb, ['shell', 'getprop', name]).stdout.trim();
   const sdkLevel = prop('ro.build.version.sdk');
   if (!sdkLevel) {
-    warn(
-      `could not read Android properties via ${adb} (is an emulator connected?)`
+    mismatch(
+      'device inspection',
+      `Android properties readable via ${adb}`,
+      'no response (is an emulator connected?)'
     );
-    return observed;
+    return { observed, mismatches };
   }
 
   observed.apiLevel = Number(sdkLevel);
@@ -271,110 +366,424 @@ function checkEnvironment(platform, env) {
   observed.density = densityMatch ? Number(densityMatch[1]) : null;
 
   if (env.apiLevel != null && observed.apiLevel !== env.apiLevel) {
-    warn(
-      `Android API mismatch: env.json ${env.apiLevel}, device ${observed.apiLevel}`
-    );
+    mismatch('Android API level', env.apiLevel, observed.apiLevel);
   }
-  if (
-    env.density != null &&
-    observed.density != null &&
-    observed.density !== env.density
-  ) {
-    warn(
-      `Android density mismatch: env.json ${env.density}, device ${observed.density}`
-    );
+  if (env.density != null && observed.density !== env.density) {
+    mismatch('Android density', env.density, observed.density ?? 'unreadable');
   }
-  return observed;
+  return { observed, mismatches };
 }
 
-function resolveBaseline(platform, story) {
-  const dir = path.join(BASELINE_DIR, platform);
-  if (!fs.existsSync(dir)) fail(`no baseline directory ${dir}`);
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.png'));
+/**
+ * Throws unless the device matches env.json. `--force` downgrades the
+ * mismatches to warnings so a deliberate re-baseline on another device is
+ * still possible, but never by accident.
+ */
+function enforceEnvironment(platform, env, force) {
+  const { observed, mismatches } = checkEnvironment(platform, env);
+  if (mismatches.length === 0) return observed;
 
-  const exact = files.find((f) => f === `${story}.png`);
-  if (exact) return path.join(dir, exact);
-
-  // Baseline names differ per platform (ios: surface-elevated.png,
-  // android: android-base-elevated.png), so match on the story's last segment.
-  const suffix = story.split('-').pop();
-  const bySuffix = files.filter((f) => f.endsWith(`-${suffix}.png`));
-  if (bySuffix.length === 1) return path.join(dir, bySuffix[0]);
-  if (bySuffix.length > 1) {
-    fail(`ambiguous baseline for ${story} in ${dir}: ${bySuffix.join(', ')}`);
+  const detail = mismatches.map((m) => `  - ${m}`).join('\n');
+  if (force) {
+    warn(`device does not match ${ENV_FILE} (--force):\n${detail}`);
+    return observed;
   }
   fail(
-    `no baseline for ${story} in ${dir} (found: ${files.join(', ') || 'none'})`
+    `device does not match ${ENV_FILE}:\n${detail}\n` +
+      'refusing to run: baselines are only comparable on the device they were captured on. ' +
+      'Boot/point at the right device, or pass --force to continue anyway.'
+  );
+  return observed; // unreachable; keeps the return type honest
+}
+
+/** Canonical baseline path: __baselines__/<platform>/<story>.png */
+function baselinePath(platform, story) {
+  return path.join(BASELINE_DIR, platform, `${story}.png`);
+}
+
+/** Normal mode: a missing baseline is a hard error naming the exact path. */
+function requireBaseline(platform, story) {
+  const baseline = baselinePath(platform, story);
+  if (!fs.existsSync(baseline)) {
+    fail(
+      `no baseline for ${story}: expected ${baseline} — ` +
+        'run with --update to create it'
+    );
+  }
+  return baseline;
+}
+
+/** `--update` mode: write the capture to the baseline, creating it if new. */
+function writeBaseline(platform, story, current) {
+  const baseline = baselinePath(platform, story);
+  const created = !fs.existsSync(baseline);
+  fs.mkdirSync(path.dirname(baseline), { recursive: true });
+  fs.copyFileSync(current, baseline);
+  console.log(
+    `${platform} ${story} baseline ${created ? 'created' : 'updated'} → ${path.relative(VISUAL_DIR, baseline)}`
+  );
+  return { baseline, created };
+}
+
+/**
+ * Fails unless the capture has the dimensions env.json pins for this platform.
+ * A wrong-sized capture would otherwise diff clean and read as PASS — and so
+ * would a capture whose size agent-device did not report at all, which is why a
+ * missing value is a failure rather than a warning.
+ */
+function checkCaptureSize(platform, env, story, shotData, force) {
+  const expected = env.baselines || {};
+  const problems = [];
+
+  const compare = (what, want, got) => {
+    if (want == null) {
+      // Nothing pinned in env.json: nothing to verify against.
+      warn(`${story}: env.json pins no ${what}, capture reports ${got}`);
+      return;
+    }
+    if (got == null) {
+      problems.push(
+        `${what}: expected ${want}, agent-device reported no ${what}`
+      );
+      return;
+    }
+    if (Number(got) !== Number(want)) {
+      problems.push(`${what}: expected ${want}, actual ${got}`);
+    }
+  };
+
+  compare('width', expected.cropWidth, shotData?.width);
+  compare('height', expected.cropHeight, shotData?.height);
+  // pixelDensity is reported (and pinnable) on iOS only. Android screenshots
+  // are native device pixels and env.json pins no density there, so the check
+  // is skipped rather than warned about.
+  if (env.pixelDensity != null) {
+    compare('pixelDensity', env.pixelDensity, shotData?.pixelDensity);
+  }
+
+  if (problems.length === 0) return;
+
+  const detail = problems.map((p) => `  - ${p}`).join('\n');
+  if (force) {
+    warn(
+      `${story}: capture dimensions do not match env.json (--force):\n${detail}`
+    );
+    return;
+  }
+  fail(
+    `${story}: capture dimensions do not match ${ENV_FILE}:\n${detail}\n` +
+      'a wrong-sized capture cannot be compared with the baseline. ' +
+      'Check --crop-on/--pixel-density and the device, or pass --force to continue anyway.',
+    3
   );
 }
 
-function dismissDevMenu(globals) {
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const snap = ad('snapshot-devmenu', ['snapshot', ...globals]);
-    const nodes = snap.data?.nodes || [];
-    const hit = nodes.find((n) =>
-      DEV_MENU_LABELS.includes((n.label || '').trim())
-    );
-    if (!hit) return attempt > 0;
-    console.log(`  dev menu: pressing "${hit.label}" (@${hit.ref})`);
-    ad('press-devmenu', ['press', `@${hit.ref}`, ...globals]);
-    sleepSync(1000);
-  }
-  warn('dev-menu labels still present after 3 dismissal attempts');
-  return true;
+const labelOf = (node) => (node.label || '').trim();
+const hasLabel = (nodes, label) => nodes.some((n) => labelOf(n) === label);
+
+/**
+ * Nodes that belong to the app. On Android a snapshot also carries the system
+ * UI status bar (~10 nodes), which is present even while the app is still
+ * starting, so it must not count towards readiness.
+ */
+function appNodes(nodes) {
+  return nodes.filter((n) => !n.bundleId || n.bundleId === BUNDLE_ID);
 }
 
-function onSurfaceScreen(globals, stories) {
-  const snap = ad('snapshot-raw', ['snapshot', '--raw', ...globals]);
-  const nodes = snap.data?.nodes || [];
-  return stories.every((story) => nodes.some((n) => n.identifier === story));
+function looksReady(nodes) {
+  const own = appNodes(nodes);
+  if (own.length <= READY_MIN_NODES) return false;
+  return !own.some(
+    (n) =>
+      NOT_READY_LABEL.test(labelOf(n)) ||
+      NOT_READY_IDENTIFIER.test(n.identifier || '')
+  );
 }
 
-function navigateToSurface(globals, stories) {
-  if (onSurfaceScreen(globals, stories)) {
-    console.log('  already on the Surface screen');
-    return;
+/**
+ * Polls the accessibility tree until the app has rendered something real:
+ * more than READY_MIN_NODES app nodes and no splash/"Downloading" node. Bounded
+ * so a stuck launch fails instead of hanging.
+ */
+function waitForAppReady(globals, timeoutMs = READY_TIMEOUT_MS) {
+  const deadline = Date.now() + timeoutMs;
+  let nodes = snapshot('snapshot-ready', globals);
+  while (!looksReady(nodes) && Date.now() < deadline) {
+    sleepSync(READY_POLL_MS);
+    nodes = snapshot('snapshot-ready', globals);
+  }
+  if (!looksReady(nodes)) {
+    fail(
+      `the app did not become ready within ${timeoutMs}ms — the last snapshot ` +
+        `had ${appNodes(nodes).length} app nodes ` +
+        `(${appNodes(nodes)
+          .slice(0, 3)
+          .map((n) => labelOf(n) || n.identifier || n.type)
+          .join(' / ')})`
+    );
+  }
+  console.log(`  app ready (${appNodes(nodes).length} app nodes)`);
+  return nodes;
+}
+
+/** The RN dev menu: a Close/Continue control with a dev-menu-only marker next to it. */
+function findDevMenuNode(nodes) {
+  const marker = nodes.some((n) => DEV_MENU_MARKERS.includes(labelOf(n)));
+  if (!marker) return null;
+  return nodes.find((n) => DEV_MENU_LABELS.includes(labelOf(n))) || null;
+}
+
+/**
+ * The Expo dev launcher ("DEVELOPMENT SERVERS" / "RECENTLY OPENED"). It is left
+ * behind by an Android relaunch and none of the dev-menu labels match it. The
+ * way out is the recently-opened row that carries the Metro URL; if that row is
+ * missing, any labelled row under the "RECENTLY OPENED" header.
+ */
+function findDevLauncherNode(nodes) {
+  const header = nodes.find((n) => labelOf(n) === 'RECENTLY OPENED');
+  if (!nodes.some((n) => DEV_LAUNCHER_MARKERS.includes(labelOf(n)))) {
+    return null;
   }
 
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    ad('scroll-1', ['scroll', 'down', '6', '--settle', ...globals]);
-    ad('scroll-2', ['scroll', 'down', '6', '--settle', ...globals]);
+  const metroRow = nodes.find(
+    (n) => labelOf(n).startsWith('http://') && labelOf(n).includes(METRO_PORT)
+  );
+  if (metroRow) return metroRow;
 
-    // `find 'label="Surface"'` is AMBIGUOUS_MATCH on Android (and taps as a
-    // side effect on iOS), so press by ref off a fresh snapshot instead.
-    const snap = ad('snapshot-list', ['snapshot', ...globals]);
-    const candidates = (snap.data?.nodes || []).filter(
-      (n) => (n.label || '').trim() === 'Surface'
-    );
-    if (candidates.length === 0) {
-      if (attempt === 2)
-        fail('could not find the "Surface" row in the example list');
+  if (!header) return null;
+  const headerBottom = (header.rect?.y ?? 0) + (header.rect?.height ?? 0);
+  return (
+    nodes.find(
+      (n) =>
+        labelOf(n) &&
+        !DEV_LAUNCHER_MARKERS.includes(labelOf(n)) &&
+        (n.rect?.y ?? -1) >= headerBottom
+    ) || null
+  );
+}
+
+/**
+ * Clears the two dev overlays a relaunch can land in, handling them distinctly
+ * and re-checking after every press. Returns the settled tree.
+ */
+function dismissOverlays(globals) {
+  let nodes = waitForAppReady(globals);
+
+  for (let step = 0; step < MAX_OVERLAY_STEPS; step++) {
+    const devMenu = findDevMenuNode(nodes);
+    if (devMenu) {
+      console.log(
+        `  dev menu: pressing "${labelOf(devMenu)}" (@${devMenu.ref})`
+      );
+      ad('press-devmenu', ['press', `@${devMenu.ref}`, '--settle', ...globals]);
+      nodes = waitForAppReady(globals);
       continue;
     }
 
-    // Prefer the largest match: the row container on Android, the label on iOS.
-    const area = (n) => (n.rect?.width || 0) * (n.rect?.height || 0);
-    const target = candidates.sort((a, b) => area(b) - area(a))[0];
-    console.log(`  pressing "Surface" row (@${target.ref})`);
-    ad('press-surface', ['press', `@${target.ref}`, '--settle', ...globals]);
+    const launcher = findDevLauncherNode(nodes);
+    if (launcher) {
+      console.log(
+        `  dev launcher: pressing "${labelOf(launcher)}" (@${launcher.ref})`
+      );
+      ad('press-launcher', [
+        'press',
+        `@${launcher.ref}`,
+        '--settle',
+        ...globals,
+      ]);
+      nodes = waitForAppReady(globals);
+      continue;
+    }
 
-    if (onSurfaceScreen(globals, stories)) return;
-    if (attempt === 2)
-      fail('pressed the "Surface" row but the example screen did not appear');
+    return nodes;
   }
+
+  fail(
+    `a dev overlay was still on screen after ${MAX_OVERLAY_STEPS} dismissal ` +
+      'attempts (dev menu and/or Expo dev launcher)'
+  );
+  return nodes; // unreachable
 }
 
-function main() {
-  const opts = parseArgs(process.argv.slice(2));
+function onSurfaceScreen(globals, stories) {
+  const nodes = snapshot('snapshot-raw', globals, ['--raw']);
+  return stories.every((story) => nodes.some((n) => n.identifier === story));
+}
+
+/**
+ * The example-list root is the only screen whose Appbar title is "Examples";
+ * every example screen shows a "Back" action where the root shows the drawer
+ * button. Either signal on its own identifies the root.
+ */
+function atListRoot(nodes) {
+  return hasLabel(nodes, LIST_ROOT_TITLE) || !hasLabel(nodes, BACK_LABEL);
+}
+
+/**
+ * Pops the navigation stack until the example list root is on screen. Uses the
+ * Appbar "Back" element when there is one (present on both platforms), and
+ * falls back to platform back navigation for a screen with no header.
+ */
+function goBackToListRoot(platform, globals, nodes) {
+  let current = nodes;
+
+  for (let step = 0; step < MAX_BACK_STEPS; step++) {
+    if (atListRoot(current)) return current;
+
+    const back = current.find((n) => labelOf(n) === BACK_LABEL);
+    if (back) {
+      console.log(`  pressing "Back" (@${back.ref})`);
+      ad('press-back', ['press', `@${back.ref}`, '--settle', ...globals]);
+    } else if (platform === 'android') {
+      console.log('  no "Back" element — sending Android KEYCODE_BACK');
+      const res = sh(adbPath(), ['shell', 'input', 'keyevent', '4']);
+      if (res.status !== 0) {
+        fail(`adb input keyevent 4 failed: ${res.stderr.trim()}`);
+      }
+    } else {
+      console.log('  no "Back" element — using system back');
+      ad('back', ['back', '--system', '--settle', ...globals]);
+    }
+
+    current = waitForAppReady(globals);
+  }
+
+  fail(
+    `still not on the example list root after ${MAX_BACK_STEPS} back steps — ` +
+      `expected the "${LIST_ROOT_TITLE}" title`
+  );
+  return current; // unreachable
+}
+
+/**
+ * Picks the "Surface" LIST ROW out of a snapshot of the example list.
+ *
+ * Several nodes can carry that label, and pressing the wrong one is a no-op
+ * that reads as a navigation failure: the Appbar title of the Surface screen
+ * itself, and on Android both the row container and its inset text child. The
+ * row is the candidate that
+ *   - sits below the Appbar — rect.y at or past the bottom of the
+ *     "Examples" title node (iOS 108pt, Android 294px), which is what excludes
+ *     any header/title node, and
+ *   - spans the list — width at least 90% of the screen, which excludes the
+ *     Android Appbar title (1100 of 1280px) a second way, and then the widest
+ *     of what is left, i.e. the row container (iOS 402 of 402pt, Android 1280
+ *     of 1280px) rather than its inset text child (Android 1160px).
+ *
+ * With no "Examples" title in the tree this is not the list root, so there is
+ * no row to press and the function reports nothing rather than guessing.
+ */
+function findSurfaceRow(nodes) {
+  const titles = nodes.filter((n) => labelOf(n) === LIST_ROOT_TITLE);
+  if (titles.length === 0) return null;
+  const headerBottom = Math.max(
+    ...titles.map((n) => (n.rect?.y ?? 0) + (n.rect?.height ?? 0))
+  );
+  const screenWidth = Math.max(0, ...nodes.map((n) => n.rect?.width ?? 0));
+
+  const candidates = nodes.filter(
+    (n) =>
+      labelOf(n) === SURFACE_ROW_LABEL &&
+      (n.rect?.y ?? -1) >= headerBottom &&
+      (n.rect?.width ?? 0) >= 0.9 * screenWidth
+  );
+  if (candidates.length === 0) return null;
+
+  return candidates.sort(
+    (a, b) => (b.rect?.width || 0) - (a.rect?.width || 0)
+  )[0];
+}
+
+/**
+ * Scrolls down the example list until the "Surface" row shows up, then opens
+ * it. The caller must have put the app on the list root first, since scrolling
+ * only ever goes down.
+ */
+function navigateToSurface(globals, stories) {
+  for (let step = 0; step <= MAX_SCROLL_STEPS; step++) {
+    const nodes = snapshot('snapshot-list', globals);
+    const target = findSurfaceRow(nodes);
+
+    if (target) {
+      // Press by ref off a fresh snapshot: `find 'label="Surface"'` is
+      // AMBIGUOUS_MATCH on Android and taps as a side effect on iOS.
+      console.log(
+        `  pressing the "Surface" row (@${target.ref}, ${target.type}, ` +
+          `y=${Math.round(target.rect?.y ?? -1)}, w=${Math.round(target.rect?.width ?? -1)})`
+      );
+      ad('press-surface', ['press', `@${target.ref}`, '--settle', ...globals]);
+
+      if (onSurfaceScreen(globals, stories)) return;
+      fail(
+        `pressed the "Surface" row but the example screen did not appear ` +
+          `(expected ids: ${stories.join(', ')})`
+      );
+    }
+
+    if (step < MAX_SCROLL_STEPS) {
+      ad('scroll', [
+        'scroll',
+        'down',
+        String(SCROLL_STEP),
+        '--settle',
+        ...globals,
+      ]);
+    }
+  }
+
+  fail(
+    `could not find the "Surface" row after ${MAX_SCROLL_STEPS} scrolls of ` +
+      `${SCROLL_STEP} rows — is the example list on screen?`
+  );
+}
+
+/**
+ * Relaunches the app and leaves it on the Surface example screen.
+ *
+ * The relaunch is unconditional. The app persists its navigation state
+ * (PERSISTENCE_KEY in example/src/index.tsx), so "already on the Surface
+ * screen" says nothing about which screen a plain `open` will land on, and —
+ * more importantly — only a relaunch makes the app fetch the current JS bundle
+ * from Metro. Skipping it on the strength of the screen that happens to be up
+ * captured a stale bundle on Android.
+ */
+function openOnSurfaceScreen(platform, globals, stories) {
+  console.log('  relaunching the app (fresh bundle from Metro)');
+  if (platform === 'ios') {
+    ad('open-relaunch', ['open', BUNDLE_ID, '--relaunch', ...globals]);
+  } else {
+    const stop = sh(adbPath(), ['shell', 'am', 'force-stop', BUNDLE_ID]);
+    if (stop.status !== 0) {
+      fail(`adb force-stop ${BUNDLE_ID} failed: ${stop.stderr.trim()}`);
+    }
+    ad('open-after-force-stop', ['open', BUNDLE_ID, ...globals]);
+  }
+
+  const nodes = dismissOverlays(globals);
+
+  if (onSurfaceScreen(globals, stories)) {
+    console.log('  restored onto the Surface screen');
+    return;
+  }
+
+  console.log('  not on the Surface screen — going back to the example list');
+  const rootNodes = goBackToListRoot(platform, globals, nodes);
+  console.log(`  at the example list root (${rootNodes.length} nodes)`);
+  navigateToSurface(globals, stories);
+}
+
+/**
+ * The whole device pass. Mutates `state` as it goes so main() can write a
+ * summary whether this returns or throws. Returns the exit code (0 or 1).
+ */
+function runPass(state) {
+  const opts = state.opts;
   const { platform } = opts;
 
   if (!fs.existsSync(ENV_FILE)) fail(`missing ${ENV_FILE}`);
   const envFile = JSON.parse(fs.readFileSync(ENV_FILE, 'utf8'));
   const env = platform === 'ios' ? envFile : { ...envFile.android };
-
-  const outDir = path.join(VISUAL_DIR, 'artifacts', 'run', platform);
-  cmdDir = path.join(outDir, 'cmds');
-  fs.mkdirSync(cmdDir, { recursive: true });
+  state.env = env;
 
   const globals =
     platform === 'ios'
@@ -386,23 +795,16 @@ function main() {
           env.agentDeviceSession || 'android',
         ];
 
-  console.log(
-    `# ${platform} — threshold ${opts.threshold}${opts.update ? ' (update)' : ''}`
-  );
-  const observed = checkEnvironment(platform, env);
+  state.observedEnv = enforceEnvironment(platform, env, opts.force);
 
-  const startedAt = Date.now();
-  ad('open', ['open', BUNDLE_ID, ...globals]);
-  dismissDevMenu(globals);
-  navigateToSurface(globals, opts.stories);
+  openOnSurfaceScreen(platform, globals, opts.stories);
   ad('wait-stable', ['wait', 'stable', '500', '10000', ...globals]);
   sleepSync(2000); // covers the customFontLoaded theme swap, which has no node change
 
-  const results = [];
   let failed = false;
 
   for (const story of opts.stories) {
-    const current = path.join(outDir, `${story}.png`);
+    const current = path.join(opts.outDir, `${story}.png`);
     const shotArgs = [
       'screenshot',
       current,
@@ -414,17 +816,14 @@ function main() {
     if (platform === 'ios')
       shotArgs.push('--pixel-density', String(env.pixelDensity || 3));
     const shot = ad(`screenshot-${story}`, shotArgs);
-
-    const baseline = resolveBaseline(platform, story);
+    checkCaptureSize(platform, env, story, shot.data, opts.force);
 
     if (opts.update) {
-      fs.copyFileSync(current, baseline);
-      console.log(
-        `${platform} ${story} baseline updated → ${path.relative(VISUAL_DIR, baseline)}`
-      );
-      results.push({
+      const { baseline, created } = writeBaseline(platform, story, current);
+      state.results.push({
         story,
-        updated: true,
+        updated: !created,
+        created,
         baseline,
         current,
         width: shot.data?.width ?? null,
@@ -433,7 +832,9 @@ function main() {
       continue;
     }
 
-    const diffOut = path.join(outDir, `${story}-diff.png`);
+    const baseline = requireBaseline(platform, story);
+
+    const diffOut = path.join(opts.outDir, `${story}-diff.png`);
     const diff = ad(`diff-${story}`, [
       'diff',
       'screenshot',
@@ -457,7 +858,7 @@ function main() {
       `${platform} ${story} changed=${changed} (${pct}%) regions=${regions} threshold=${opts.threshold} → ${pass ? 'PASS' : 'FAIL'}`
     );
 
-    results.push({
+    state.results.push({
       story,
       baseline,
       current,
@@ -471,26 +872,108 @@ function main() {
     });
   }
 
-  const summary = {
-    platform,
-    threshold: opts.threshold,
-    update: opts.update,
-    stories: opts.stories,
-    agentDeviceVersion: AGENT_DEVICE,
-    sessionCwd: SESSION_CWD,
-    expectedEnv: env,
-    observedEnv: observed,
-    startedAt: new Date(startedAt).toISOString(),
-    wallClockMs: Date.now() - startedAt,
-    results,
-    pass: !failed,
-  };
-  fs.writeFileSync(
-    path.join(outDir, 'summary.json'),
-    JSON.stringify(summary, null, 2)
-  );
-
-  process.exit(failed ? 1 : 0);
+  return failed ? 1 : 0;
 }
 
-main();
+function writeSummary(state, exitCode, error) {
+  const { opts } = state;
+  const summary = {
+    platform: opts.platform,
+    threshold: opts.threshold,
+    update: opts.update,
+    force: opts.force,
+    stories: opts.stories,
+    outDir: opts.outDir,
+    agentDeviceVersion: AGENT_DEVICE,
+    sessionCwd: SESSION_CWD,
+    expectedEnv: state.env,
+    observedEnv: state.observedEnv,
+    startedAt: new Date(state.startedAt).toISOString(),
+    wallClockMs: Date.now() - state.startedAt,
+    results: state.results,
+    status: exitCode === 0 ? 'pass' : exitCode === 1 ? 'fail' : 'error',
+    exitCode,
+    error,
+    pass: exitCode === 0,
+  };
+  const file = path.join(opts.outDir, 'summary.json');
+  fs.writeFileSync(file, JSON.stringify(summary, null, 2));
+  return file;
+}
+
+function main() {
+  // Argument errors are the one class of failure that cannot be summarised:
+  // there is no output directory to write into yet.
+  const opts = parseArgs(process.argv.slice(2));
+
+  const state = {
+    opts,
+    env: null,
+    observedEnv: {},
+    results: [],
+    startedAt: Date.now(),
+  };
+
+  cmdDir = path.join(opts.outDir, 'cmds');
+  fs.mkdirSync(cmdDir, { recursive: true });
+
+  console.log(
+    `# ${opts.platform} — threshold ${opts.threshold}${opts.update ? ' (update)' : ''}${opts.force ? ' (force)' : ''}`
+  );
+  console.log(`# output: ${opts.outDir}`);
+
+  let exitCode = 0;
+  let error = null;
+  try {
+    exitCode = runPass(state);
+  } catch (thrown) {
+    if (thrown instanceof RunFailure) {
+      console.error(`error: ${thrown.message}`);
+      exitCode = thrown.exitCode;
+      error = { message: thrown.message, exitCode: thrown.exitCode };
+    } else {
+      console.error(thrown?.stack || String(thrown));
+      exitCode = 2;
+      error = {
+        message: thrown?.message || String(thrown),
+        stack: thrown?.stack,
+        exitCode: 2,
+      };
+    }
+  }
+
+  const summaryFile = writeSummary(state, exitCode, error);
+  console.log(`# summary: ${summaryFile} (exit ${exitCode})`);
+  process.exit(exitCode);
+}
+
+if (import.meta.main) {
+  try {
+    main();
+  } catch (thrown) {
+    // Only argument errors can reach here: runPass failures are caught (and
+    // summarised) inside main().
+    if (!(thrown instanceof RunFailure)) throw thrown;
+    console.error(`error: ${thrown.message}`);
+    process.exit(thrown.exitCode);
+  }
+}
+
+// Exported so the argument/path/environment logic can be exercised from a
+// throwaway script without a device; the script itself only runs when
+// executed directly.
+export {
+  RunFailure,
+  parseArgs,
+  baselinePath,
+  requireBaseline,
+  writeBaseline,
+  checkEnvironment,
+  enforceEnvironment,
+  checkCaptureSize,
+  findSurfaceRow,
+  findDevMenuNode,
+  findDevLauncherNode,
+  atListRoot,
+  looksReady,
+};

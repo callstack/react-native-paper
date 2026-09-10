@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "data": {
+    "diffPath": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/diff-images/android-gross-t0.1.png",
+    "regions": [
+      {
+        "index": 1,
+        "rect": {
+          "x": 42,
+          "y": 225,
+          "width": 359,
+          "height": 356
+        },
+        "normalizedRect": {
+          "x": 3.28,
+          "y": 35.05,
+          "width": 28.05,
+          "height": 55.45
+        },
+        "differentPixels": 62597,
+        "shareOfDiffPercentage": 96.23,
+        "densityPercentage": 48.98,
+        "shape": "compact",
+        "size": "large",
+        "location": "middle-left",
+        "averageBaselineColorHex": "#faf8fe",
+        "averageCurrentColorHex": "#d3d1d7",
+        "baselineLuminance": 249,
+        "currentLuminance": 210,
+        "dominantChange": "darker"
+      },
+      {
+        "index": 2,
+        "rect": {
+          "x": 500,
+          "y": 573,
+          "width": 321,
+          "height": 8
+        },
+        "normalizedRect": {
+          "x": 39.06,
+          "y": 89.25,
+          "width": 25.08,
+          "height": 1.25
+        },
+        "differentPixels": 2454,
+        "shareOfDiffPercentage": 3.77,
+        "densityPercentage": 95.56,
+        "shape": "horizontal-band",
+        "size": "small",
+        "location": "bottom-center",
+        "averageBaselineColorHex": "#f9f7fd",
+        "averageCurrentColorHex": "#dcdbe0",
+        "baselineLuminance": 248,
+        "currentLuminance": 220,
+        "dominantChange": "darker"
+      }
+    ],
+    "totalPixels": 821760,
+    "differentPixels": 65051,
+    "mismatchPercentage": 7.92,
+    "match": false
+  }
+}

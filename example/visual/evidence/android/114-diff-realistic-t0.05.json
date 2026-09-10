@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "diffPath": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/artifacts/diff-realistic-t0.05.png",
+    "regions": [
+      {
+        "index": 1,
+        "rect": {
+          "x": 481,
+          "y": 560,
+          "width": 360,
+          "height": 17
+        },
+        "normalizedRect": {
+          "x": 37.58,
+          "y": 87.23,
+          "width": 28.13,
+          "height": 2.65
+        },
+        "differentPixels": 1830,
+        "shareOfDiffPercentage": 100,
+        "densityPercentage": 29.9,
+        "shape": "horizontal-band",
+        "size": "small",
+        "location": "bottom-center",
+        "averageBaselineColorHex": "#f5f3f9",
+        "averageCurrentColorHex": "#e6e4ea",
+        "baselineLuminance": 244,
+        "currentLuminance": 229,
+        "dominantChange": "darker"
+      }
+    ],
+    "totalPixels": 821760,
+    "differentPixels": 1830,
+    "mismatchPercentage": 0.22,
+    "match": false
+  }
+}

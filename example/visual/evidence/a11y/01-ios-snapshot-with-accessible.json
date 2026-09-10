@@ -1,0 +1,1896 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "Application",
+        "role": "UIApplication",
+        "label": "React Native Paper Example",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 0,
+        "pid": 37870,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "parentIndex": 0,
+        "type": "Window",
+        "role": "UIWindow",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 1,
+        "pid": 37870,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "parentIndex": 1,
+        "type": "Other",
+        "role": "UITransitionView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 2,
+        "pid": 37870,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "parentIndex": 2,
+        "type": "Other",
+        "role": "UIDropShadowView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 3,
+        "pid": 37870,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "parentIndex": 3,
+        "type": "Other",
+        "role": "_TtC13EXDevLauncherP33_867A144D7C8F5D750D0BFA9E58EDAFE322DevLauncherWrapperView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 4,
+        "pid": 37870,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "parentIndex": 4,
+        "type": "Other",
+        "role": "RCTSurfaceHostingProxyRootView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 5,
+        "pid": 37870,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "parentIndex": 5,
+        "type": "Other",
+        "role": "RCTSurfaceView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 6,
+        "pid": 37870,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "parentIndex": 6,
+        "type": "Other",
+        "role": "RCTRootComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 7,
+        "pid": 37870,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "parentIndex": 7,
+        "type": "Other",
+        "role": "RNCSafeAreaProviderComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 8,
+        "pid": 37870,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "parentIndex": 8,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 9,
+        "pid": 37870,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "parentIndex": 9,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 10,
+        "pid": 37870,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "parentIndex": 10,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": -346,
+          "y": 0,
+          "width": 346,
+          "height": 874
+        },
+        "depth": 11,
+        "pid": 37870,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "parentIndex": 11,
+        "type": "Other",
+        "role": "RCTScrollViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": -346,
+          "y": 0,
+          "width": 346,
+          "height": 874
+        },
+        "depth": 12,
+        "pid": 37870,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "parentIndex": 12,
+        "type": "ScrollView",
+        "role": "RCTEnhancedScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": -346,
+          "y": 0,
+          "width": 346,
+          "height": 874
+        },
+        "depth": 13,
+        "pid": 37870,
+        "ref": "e14"
+      },
+      {
+        "index": 14,
+        "parentIndex": 13,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": -346,
+          "y": 0,
+          "width": 346,
+          "height": 770
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e15"
+      },
+      {
+        "index": 15,
+        "parentIndex": 14,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": -346,
+          "y": 0,
+          "width": 346,
+          "height": 770
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e16"
+      },
+      {
+        "index": 16,
+        "parentIndex": 15,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Example items",
+        "rect": {
+          "x": -306,
+          "y": 30,
+          "width": 294,
+          "height": 20
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e17"
+      },
+      {
+        "index": 17,
+        "parentIndex": 16,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Example items",
+        "rect": {
+          "x": -306,
+          "y": 30,
+          "width": 294,
+          "height": 20
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e18"
+      },
+      {
+        "index": 18,
+        "parentIndex": 15,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Inbox, 44",
+        "rect": {
+          "x": -322,
+          "y": 68,
+          "width": 298,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e19"
+      },
+      {
+        "index": 19,
+        "parentIndex": 15,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Starred",
+        "rect": {
+          "x": -322,
+          "y": 124,
+          "width": 298,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e20"
+      },
+      {
+        "index": 20,
+        "parentIndex": 15,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Sent mail",
+        "rect": {
+          "x": -322,
+          "y": 180,
+          "width": 298,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e21"
+      },
+      {
+        "index": 21,
+        "parentIndex": 15,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Colored label",
+        "rect": {
+          "x": -322,
+          "y": 236,
+          "width": 298,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e22"
+      },
+      {
+        "index": 22,
+        "parentIndex": 15,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "A very long title that will be truncated",
+        "rect": {
+          "x": -322,
+          "y": 292,
+          "width": 298,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e23"
+      },
+      {
+        "index": 23,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": -318,
+          "y": 352,
+          "width": 290,
+          "height": 1
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e24"
+      },
+      {
+        "index": 24,
+        "parentIndex": 15,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Preferences",
+        "rect": {
+          "x": -306,
+          "y": 375,
+          "width": 294,
+          "height": 20
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e25"
+      },
+      {
+        "index": 25,
+        "parentIndex": 24,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Preferences",
+        "rect": {
+          "x": -306,
+          "y": 375,
+          "width": 294,
+          "height": 20
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e26"
+      },
+      {
+        "index": 26,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Dark Theme",
+        "rect": {
+          "x": -334,
+          "y": 413,
+          "width": 322,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e27"
+      },
+      {
+        "index": 27,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "RTL",
+        "rect": {
+          "x": -334,
+          "y": 469,
+          "width": 322,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e28"
+      },
+      {
+        "index": 28,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Collapsed drawer *",
+        "rect": {
+          "x": -334,
+          "y": 525,
+          "width": 322,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e29"
+      },
+      {
+        "index": 29,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Custom font *",
+        "rect": {
+          "x": -334,
+          "y": 581,
+          "width": 322,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e30"
+      },
+      {
+        "index": 30,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Highlight effect *",
+        "rect": {
+          "x": -334,
+          "y": 637,
+          "width": 322,
+          "height": 56
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e31"
+      },
+      {
+        "index": 31,
+        "parentIndex": 15,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": -318,
+          "y": 697,
+          "width": 290,
+          "height": 1
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e32"
+      },
+      {
+        "index": 32,
+        "parentIndex": 15,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "* - optional example toggles",
+        "rect": {
+          "x": -310,
+          "y": 708,
+          "width": 274,
+          "height": 16
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e33"
+      },
+      {
+        "index": 33,
+        "parentIndex": 32,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "* - optional example toggles",
+        "rect": {
+          "x": -310,
+          "y": 708,
+          "width": 274,
+          "height": 16
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e34"
+      },
+      {
+        "index": 34,
+        "parentIndex": 15,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "React Native Paper Version 6.0.0-alpha.0",
+        "rect": {
+          "x": -310,
+          "y": 736,
+          "width": 274,
+          "height": 16
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e35"
+      },
+      {
+        "index": 35,
+        "parentIndex": 34,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "React Native Paper Version 6.0.0-alpha.0",
+        "rect": {
+          "x": -310,
+          "y": 736,
+          "width": 274,
+          "height": 16
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e36"
+      },
+      {
+        "index": 36,
+        "parentIndex": 13,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": -33,
+          "y": 62,
+          "width": 30,
+          "height": 778
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e37"
+      },
+      {
+        "index": 37,
+        "parentIndex": 36,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": -6,
+          "y": 169,
+          "width": 3,
+          "height": 668
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e38"
+      },
+      {
+        "index": 38,
+        "parentIndex": 13,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": -346,
+          "y": 807,
+          "width": 346,
+          "height": 30
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e39"
+      },
+      {
+        "index": 39,
+        "parentIndex": 38,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": -343,
+          "y": 834,
+          "width": 340,
+          "height": 3
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e40"
+      },
+      {
+        "index": 40,
+        "parentIndex": 13,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": -33,
+          "y": 62,
+          "width": 30,
+          "height": 778
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e41"
+      },
+      {
+        "index": 41,
+        "parentIndex": 40,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": -6,
+          "y": 169,
+          "width": 3,
+          "height": 668
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e42"
+      },
+      {
+        "index": 42,
+        "parentIndex": 13,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": -346,
+          "y": 807,
+          "width": 346,
+          "height": 30
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e43"
+      },
+      {
+        "index": 43,
+        "parentIndex": 42,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": -343,
+          "y": 834,
+          "width": 340,
+          "height": 3
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e44"
+      },
+      {
+        "index": 44,
+        "parentIndex": 10,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 11,
+        "pid": 37870,
+        "ref": "e45"
+      },
+      {
+        "index": 45,
+        "parentIndex": 44,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 12,
+        "pid": 37870,
+        "ref": "e46"
+      },
+      {
+        "index": 46,
+        "parentIndex": 45,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 13,
+        "pid": 37870,
+        "ref": "e47"
+      },
+      {
+        "index": 47,
+        "parentIndex": 46,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 14,
+        "pid": 37870,
+        "ref": "e48"
+      },
+      {
+        "index": 48,
+        "parentIndex": 47,
+        "type": "Other",
+        "role": "RNSScreenStackView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 15,
+        "pid": 37870,
+        "ref": "e49"
+      },
+      {
+        "index": 49,
+        "parentIndex": 48,
+        "type": "Other",
+        "role": "UILayoutContainerView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 16,
+        "pid": 37870,
+        "ref": "e50"
+      },
+      {
+        "index": 50,
+        "parentIndex": 49,
+        "type": "Other",
+        "role": "UINavigationTransitionView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e51"
+      },
+      {
+        "index": 51,
+        "parentIndex": 50,
+        "type": "Other",
+        "role": "UIViewControllerWrapperView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 18,
+        "pid": 37870,
+        "ref": "e52"
+      },
+      {
+        "index": 52,
+        "parentIndex": 51,
+        "type": "Other",
+        "role": "RNSScreenView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 19,
+        "pid": 37870,
+        "ref": "e53"
+      },
+      {
+        "index": 53,
+        "parentIndex": 52,
+        "type": "Other",
+        "role": "RNSScreenContentWrapper",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 20,
+        "pid": 37870,
+        "ref": "e54"
+      },
+      {
+        "index": 54,
+        "parentIndex": 53,
+        "type": "Other",
+        "role": "RNSSafeAreaViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 21,
+        "pid": 37870,
+        "ref": "e55"
+      },
+      {
+        "index": 55,
+        "parentIndex": 54,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 22,
+        "pid": 37870,
+        "ref": "e56"
+      },
+      {
+        "index": 56,
+        "parentIndex": 55,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 126
+        },
+        "depth": 23,
+        "pid": 37870,
+        "ref": "e57"
+      },
+      {
+        "index": 57,
+        "parentIndex": 56,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 126
+        },
+        "depth": 24,
+        "pid": 37870,
+        "ref": "e58"
+      },
+      {
+        "index": 58,
+        "parentIndex": 57,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 126
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e59"
+      },
+      {
+        "index": 59,
+        "parentIndex": 57,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 10,
+          "y": 74,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e60"
+      },
+      {
+        "index": 60,
+        "parentIndex": 59,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Back",
+        "rect": {
+          "x": 10,
+          "y": 74,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 26,
+        "pid": 37870,
+        "ref": "e61"
+      },
+      {
+        "index": 61,
+        "parentIndex": 57,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Surface",
+        "rect": {
+          "x": 164,
+          "y": 80,
+          "width": 74,
+          "height": 28
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e62"
+      },
+      {
+        "index": 62,
+        "parentIndex": 61,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Surface",
+        "rect": {
+          "x": 164,
+          "y": 80,
+          "width": 74,
+          "height": 28
+        },
+        "depth": 26,
+        "pid": 37870,
+        "ref": "e63"
+      },
+      {
+        "index": 63,
+        "parentIndex": 55,
+        "type": "Other",
+        "role": "RCTScrollViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 126,
+          "width": 402,
+          "height": 748
+        },
+        "depth": 23,
+        "pid": 37870,
+        "ref": "e64"
+      },
+      {
+        "index": 64,
+        "parentIndex": 63,
+        "type": "ScrollView",
+        "role": "RCTEnhancedScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 0,
+          "y": 126,
+          "width": 402,
+          "height": 748
+        },
+        "depth": 24,
+        "pid": 37870,
+        "ref": "e65"
+      },
+      {
+        "index": 65,
+        "parentIndex": 64,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 126,
+          "width": 402,
+          "height": 1435
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e66"
+      },
+      {
+        "index": 66,
+        "parentIndex": 65,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 126,
+          "width": 402,
+          "height": 1435
+        },
+        "depth": 26,
+        "pid": 37870,
+        "ref": "e67"
+      },
+      {
+        "index": 67,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Elevated surface, Elevation 0, Elevation 1, Elevation 2, Elevation 3, Elevation 4, Elevation 5, Vertical scroll bar, 3 pages",
+        "identifier": "surface-elevated",
+        "rect": {
+          "x": 0,
+          "y": 134,
+          "width": 402,
+          "height": 214
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e68"
+      },
+      {
+        "index": 68,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Flat surface, Elevation 0, Elevation 1, Elevation 2, Elevation 3, Elevation 4, Elevation 5, Vertical scroll bar, 3 pages",
+        "identifier": "surface-flat",
+        "rect": {
+          "x": 0,
+          "y": 364,
+          "width": 402,
+          "height": 214
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e69"
+      },
+      {
+        "index": 69,
+        "parentIndex": 66,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Animated elevation",
+        "rect": {
+          "x": 0,
+          "y": 594,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e70"
+      },
+      {
+        "index": 70,
+        "parentIndex": 69,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Animated elevation",
+        "rect": {
+          "x": 0,
+          "y": 594,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e71"
+      },
+      {
+        "index": 71,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 16,
+          "y": 664,
+          "width": 120,
+          "height": 120
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e72"
+      },
+      {
+        "index": 72,
+        "parentIndex": 71,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 16,
+          "y": 664,
+          "width": 120,
+          "height": 120
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e73"
+      },
+      {
+        "index": 73,
+        "parentIndex": 71,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 3",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 716,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e74"
+      },
+      {
+        "index": 74,
+        "parentIndex": 73,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 3",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 716,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 29,
+        "pid": 37870,
+        "ref": "e75"
+      },
+      {
+        "index": 75,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 22,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e76"
+      },
+      {
+        "index": 76,
+        "parentIndex": 75,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 22,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e77"
+      },
+      {
+        "index": 77,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 90,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e78"
+      },
+      {
+        "index": 78,
+        "parentIndex": 77,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 90,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e79"
+      },
+      {
+        "index": 79,
+        "parentIndex": 66,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Layout",
+        "rect": {
+          "x": 0,
+          "y": 900,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e80"
+      },
+      {
+        "index": 80,
+        "parentIndex": 79,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Layout",
+        "rect": {
+          "x": 0,
+          "y": 900,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e81"
+      },
+      {
+        "index": 81,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 24,
+          "y": 970,
+          "width": 354,
+          "height": 39
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e82"
+      },
+      {
+        "index": 82,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 981,
+          "width": 159.3333282470703,
+          "height": 17
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e83"
+      },
+      {
+        "index": 83,
+        "parentIndex": 82,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 981,
+          "width": 159.3333282470703,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e84"
+      },
+      {
+        "index": 84,
+        "parentIndex": 82,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Left",
+        "rect": {
+          "x": 35,
+          "y": 981,
+          "width": 159.6666717529297,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e85"
+      },
+      {
+        "index": 85,
+        "parentIndex": 84,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Left",
+        "rect": {
+          "x": 35,
+          "y": 981,
+          "width": 159.6666717529297,
+          "height": 17
+        },
+        "depth": 29,
+        "pid": 37870,
+        "ref": "e86"
+      },
+      {
+        "index": 86,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 207.6666717529297,
+          "y": 981,
+          "width": 159.3333282470703,
+          "height": 17
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e87"
+      },
+      {
+        "index": 87,
+        "parentIndex": 86,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 207.6666717529297,
+          "y": 981,
+          "width": 159.3333282470703,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e88"
+      },
+      {
+        "index": 88,
+        "parentIndex": 86,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Right",
+        "rect": {
+          "x": 207.6666717529297,
+          "y": 981,
+          "width": 159.6666717529297,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e89"
+      },
+      {
+        "index": 89,
+        "parentIndex": 88,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Right",
+        "rect": {
+          "x": 207.6666717529297,
+          "y": 981,
+          "width": 159.6666717529297,
+          "height": 17
+        },
+        "depth": 29,
+        "pid": 37870,
+        "ref": "e90"
+      },
+      {
+        "index": 90,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 24,
+          "y": 1029,
+          "width": 354,
+          "height": 400
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e91"
+      },
+      {
+        "index": 91,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 1040,
+          "width": 332,
+          "height": 181.3333740234375
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e92"
+      },
+      {
+        "index": 92,
+        "parentIndex": 91,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 1040,
+          "width": 332,
+          "height": 181.3333740234375
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e93"
+      },
+      {
+        "index": 93,
+        "parentIndex": 91,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Top",
+        "rect": {
+          "x": 35,
+          "y": 1122,
+          "width": 332,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e94"
+      },
+      {
+        "index": 94,
+        "parentIndex": 93,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Top",
+        "rect": {
+          "x": 35,
+          "y": 1122,
+          "width": 332,
+          "height": 17
+        },
+        "depth": 29,
+        "pid": 37870,
+        "ref": "e95"
+      },
+      {
+        "index": 95,
+        "parentIndex": 66,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 1236.6666717529297,
+          "width": 332,
+          "height": 181.3333740234375
+        },
+        "depth": 27,
+        "pid": 37870,
+        "ref": "e96"
+      },
+      {
+        "index": 96,
+        "parentIndex": 95,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 35,
+          "y": 1236.6666717529297,
+          "width": 332,
+          "height": 181.3333740234375
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e97"
+      },
+      {
+        "index": 97,
+        "parentIndex": 95,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Bottom",
+        "rect": {
+          "x": 35,
+          "y": 1318.6666717529297,
+          "width": 332,
+          "height": 17
+        },
+        "depth": 28,
+        "pid": 37870,
+        "ref": "e98"
+      },
+      {
+        "index": 98,
+        "parentIndex": 97,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Bottom",
+        "rect": {
+          "x": 35,
+          "y": 1318.6666717529297,
+          "width": 332,
+          "height": 17
+        },
+        "depth": 29,
+        "pid": 37870,
+        "ref": "e99"
+      },
+      {
+        "index": 99,
+        "parentIndex": 64,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": 62,
+          "y": 841,
+          "width": 278,
+          "height": 30
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e100"
+      },
+      {
+        "index": 100,
+        "parentIndex": 99,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": 65,
+          "y": 868,
+          "width": 272,
+          "height": 3
+        },
+        "depth": 26,
+        "pid": 37870,
+        "ref": "e101"
+      },
+      {
+        "index": 101,
+        "parentIndex": 64,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": 62,
+          "y": 841,
+          "width": 278,
+          "height": 30
+        },
+        "depth": 25,
+        "pid": 37870,
+        "ref": "e102"
+      },
+      {
+        "index": 102,
+        "parentIndex": 101,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": 65,
+          "y": 868,
+          "width": 272,
+          "height": 3
+        },
+        "depth": 26,
+        "pid": 37870,
+        "ref": "e103"
+      },
+      {
+        "index": 103,
+        "parentIndex": 49,
+        "type": "Other",
+        "role": "_UIFloatingBarContainerView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 17,
+        "pid": 37870,
+        "ref": "e104"
+      },
+      {
+        "index": 104,
+        "parentIndex": 103,
+        "type": "Other",
+        "role": "_TtGC5UIKitP10$186ecd81022FloatingBarHostingViewVS_20FloatingBarContainer_",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 18,
+        "pid": 37870,
+        "ref": "e105"
+      },
+      {
+        "index": 105,
+        "parentIndex": 8,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 9,
+        "pid": 37870,
+        "ref": "e106"
+      },
+      {
+        "index": 106,
+        "parentIndex": 7,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 8,
+        "pid": 37870,
+        "ref": "e107"
+      },
+      {
+        "index": 107,
+        "parentIndex": 106,
+        "type": "Other",
+        "role": "RCTDebuggingOverlayComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 9,
+        "pid": 37870,
+        "ref": "e108"
+      },
+      {
+        "index": 108,
+        "parentIndex": 107,
+        "type": "Other",
+        "role": "RCTDebuggingOverlay",
+        "subrole": "UIView",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 10,
+        "pid": 37870,
+        "ref": "e109"
+      },
+      {
+        "index": 109,
+        "parentIndex": 0,
+        "type": "Window",
+        "role": "UIWindow",
+        "rect": {
+          "x": 0,
+          "y": -92.33333333333333,
+          "width": 402,
+          "height": 92.33333333333333
+        },
+        "depth": 1,
+        "pid": 37870,
+        "ref": "e110"
+      },
+      {
+        "index": 110,
+        "parentIndex": 109,
+        "type": "Other",
+        "role": "UITransitionView",
+        "rect": {
+          "x": 0,
+          "y": -92.33333333333333,
+          "width": 402,
+          "height": 92.33333333333333
+        },
+        "depth": 2,
+        "pid": 37870,
+        "ref": "e111"
+      },
+      {
+        "index": 111,
+        "parentIndex": 110,
+        "type": "Other",
+        "role": "UIDropShadowView",
+        "rect": {
+          "x": 0,
+          "y": -92.33333333333333,
+          "width": 402,
+          "height": 92.33333333333333
+        },
+        "depth": 3,
+        "pid": 37870,
+        "ref": "e112"
+      },
+      {
+        "index": 112,
+        "parentIndex": 111,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": 0,
+          "y": -92.33333333333333,
+          "width": 402,
+          "height": 92.33333333333333
+        },
+        "depth": 4,
+        "pid": 37870,
+        "ref": "e113"
+      },
+      {
+        "index": 113,
+        "parentIndex": 112,
+        "type": "Other",
+        "role": "UIView",
+        "rect": {
+          "x": 0,
+          "y": -92.33333333333333,
+          "width": 402,
+          "height": 92.33333333333333
+        },
+        "depth": 5,
+        "pid": 37870,
+        "ref": "e114"
+      },
+      {
+        "index": 114,
+        "parentIndex": 113,
+        "type": "StaticText",
+        "role": "UILabel",
+        "label": "Refreshing...",
+        "rect": {
+          "x": 10,
+          "y": -22.33333333333333,
+          "width": 382,
+          "height": 14.333333333333329
+        },
+        "depth": 6,
+        "pid": 37870,
+        "ref": "e115"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.callstack.reactnativepaperexample",
+    "appBundleId": "com.callstack.reactnativepaperexample",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 115,
+      "totalNodeCount": 115,
+      "reasons": []
+    },
+    "warnings": [
+      "iOS snapshot acquisition does not provide hittability evidence; regular snapshots omit unverified hittability while raw snapshots preserve supplied facts."
+    ],
+    "snapshotDiagnostics": {
+      "stats": {
+        "count": 121,
+        "p50Ms": 68,
+        "p95Ms": 122,
+        "maxMs": 677,
+        "slowThresholdMs": 1500,
+        "platform": "ios",
+        "backends": {
+          "xctest": 121
+        }
+      }
+    },
+    "refsGeneration": 835195
+  }
+}
