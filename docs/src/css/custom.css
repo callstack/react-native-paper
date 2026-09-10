@@ -1302,3 +1302,8 @@ html:not(.dark) .paper-version-selector-menu {
   font-size: 13px;
   font-weight: 600;
 }
+
+.paper-interactive-example__label {
+  color: var(--rp-c-text-2);
+  font-size: 12px;
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { DarkTheme, LightTheme, Provider, Text } from 'react-native-paper';
+import { DarkTheme, LightTheme, Provider } from 'react-native-paper';
 
 import { useColorMode } from './theme-common';
 
@@ -21,7 +21,7 @@ export const Labelled = ({
 }: React.PropsWithChildren<{ label: string }>) => (
   <View style={styles.item}>
     {children}
-    <Text style={styles.itemLabel}>{label}</Text>
+    <span className="paper-interactive-example__label">{label}</span>
   </View>
 );
 
@@ -69,10 +69,6 @@ const styles = StyleSheet.create({
   item: {
     alignItems: 'center',
     gap: 8,
-  },
-  itemLabel: {
-    fontSize: 12,
-    opacity: 0.7,
   },
 });
 
