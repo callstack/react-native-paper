@@ -3,7 +3,6 @@ import type { ColorValue, ViewStyle } from 'react-native';
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
-import { splitStyles } from '../../utils/splitStyles';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -191,35 +190,28 @@ export const getButtonColors = ({
   };
 };
 
+const borderRadiusKeys = [
+  'borderBottomEndRadius',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomStartRadius',
+  'borderTopEndRadius',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopStartRadius',
+  'borderRadius',
+] as const;
+
 type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
-    ViewStyle,
-    | 'borderBottomEndRadius'
-    | 'borderBottomLeftRadius'
-    | 'borderBottomRightRadius'
-    | 'borderBottomStartRadius'
-    | 'borderTopEndRadius'
-    | 'borderTopLeftRadius'
-    | 'borderTopRightRadius'
-    | 'borderTopStartRadius'
-    | 'borderRadius'
-  >
+  Pick<ViewStyle, (typeof borderRadiusKeys)[number]>
 >;
+
 export const getButtonTouchableRippleStyle = (
   style?: ViewStyle,
   borderWidth: number = 0
 ): ViewStyleBorderRadiusStyles => {
   if (!style) return {};
   const touchableRippleStyle: ViewStyleBorderRadiusStyles = {};
-
-  const [, borderRadiusStyles] = splitStyles(
-    style,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
-  );
-
-  const borderRadiusKeys =
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>;
 
   borderRadiusKeys.forEach((key) => {
     const value = style[key];

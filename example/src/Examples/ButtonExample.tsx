@@ -32,7 +32,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={styles.flexReverse}
+            iconPosition="trailing"
           >
             Icon right
           </Button>
@@ -84,7 +84,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={styles.flexReverse}
+            iconPosition="trailing"
           >
             Icon right
           </Button>
@@ -132,7 +132,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={styles.flexReverse}
+            iconPosition="trailing"
           >
             Icon right
           </Button>
@@ -180,7 +180,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={styles.flexReverse}
+            iconPosition="trailing"
           >
             Icon right
           </Button>
@@ -228,7 +228,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={styles.flexReverse}
+            iconPosition="trailing"
           >
             Icon right
           </Button>
@@ -365,9 +365,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
-  },
-  flexReverse: {
-    flexDirection: 'row-reverse',
   },
   md3FontStyles: {
     lineHeight: 32,

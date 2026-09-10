@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps } from 'react-native';
 
 import AppbarContent from './AppbarContent';
 import {
   getAppbarBackgroundColor,
-  getAppbarBorders,
   modeAppbarHeight,
   renderAppbarContent,
   filterAppbarActions,
@@ -14,50 +13,61 @@ import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Surface from '../Surface';
+import type { SurfaceStyle, SurfaceVisualProps } from '../Surface';
 
 const APPBAR_HORIZONTAL_PADDING = 4;
 
-export type AppbarStyle = Omit<ViewStyle, 'elevation'>;
+export type AppbarStyle = SurfaceStyle;
 
-export type Props = Omit<Partial<ViewProps>, 'style'> & {
-  /**
-   * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
-   */
-  dark?: boolean;
-  /**
-   * Content of the `Appbar`.
-   */
-  children: React.ReactNode;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Mode of the Appbar.
-   * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
-   * - `center-aligned` - Appbar with default height and center-aligned title.
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
-  /**
-   * @supported Available in v5.x with theme version 3
-   * Whether Appbar background should have the elevation along with primary color pigment.
-   */
-  elevated?: boolean;
-  /**
-   * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
-   */
-  safeAreaInsets?: {
-    bottom?: number;
-    top?: number;
-    left?: number;
-    right?: number;
+export type Props = Omit<Partial<ViewProps>, 'style'> &
+  Omit<SurfaceVisualProps, 'backgroundColor'> & {
+    /**
+     * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
+     */
+    dark?: boolean;
+    /**
+     * Background color of the Appbar. Overrides the color derived from the `elevated` prop.
+     */
+    backgroundColor?: ColorValue;
+    /**
+     * Content of the `Appbar`.
+     */
+    children: React.ReactNode;
+    /**
+     * @supported Available in v5.x with theme version 3
+     *
+     * Mode of the Appbar.
+     * - `small` - Appbar with default height (64).
+     * - `medium` - Appbar with medium height (112).
+     * - `large` - Appbar with large height (152).
+     * - `center-aligned` - Appbar with default height and center-aligned title.
+     */
+    mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+    /**
+     * @supported Available in v5.x with theme version 3
+     * Whether Appbar background should have the elevation along with primary color pigment.
+     */
+    elevated?: boolean;
+    /**
+     * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
+     */
+    safeAreaInsets?: {
+      bottom?: number;
+      top?: number;
+      left?: number;
+      right?: number;
+    };
+    /**
+     * @optional
+     */
+    theme?: ThemeProp;
+    /**
+     * Style of the Appbar.
+     *
+     * Background color and border radius should be specified via props instead.
+     */
+    style?: StyleProp<AppbarStyle>;
   };
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-  style?: StyleProp<AppbarStyle>;
-};
 
 /**
  * A component to display action items in a bar. It can be placed at the top or bottom.
@@ -153,22 +163,16 @@ const Appbar = ({
   elevated = false,
   safeAreaInsets,
   theme: themeOverrides,
+  backgroundColor: customBackground,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const flattenedStyle = StyleSheet.flatten(style);
-  const { backgroundColor: customBackground, ...restStyle } = (flattenedStyle ||
-    {}) as Exclude<typeof flattenedStyle, number> & {
-    backgroundColor?: ColorValue;
-  };
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
     elevated,
     customBackground
   );
-
-  const borderStyles = getAppbarBorders(restStyle);
 
   const isMode = (modeToCompare: AppbarModes) => {
     return mode === modeToCompare;
@@ -215,18 +219,16 @@ const Appbar = ({
     paddingRight: (safeAreaInsets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING,
   };
 
+  // The safe area insets are applied as padding, so they need to be included in the height
+  const height =
+    modeAppbarHeight[mode] +
+    (safeAreaInsets?.top ?? 0) +
+    (safeAreaInsets?.bottom ?? 0);
+
   return (
     <Surface
-      {...borderStyles}
       backgroundColor={backgroundColor}
-      style={[
-        {
-          height: modeAppbarHeight[mode],
-        },
-        styles.appbar,
-        insets,
-        restStyle,
-      ]}
+      style={[{ height }, styles.appbar, insets, style]}
       elevation={elevated ? 2 : 0}
       {...rest}
       theme={theme}

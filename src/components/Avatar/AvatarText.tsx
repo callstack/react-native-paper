@@ -1,5 +1,11 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import type {
+  ColorValue,
+  StyleProp,
+  TextStyle,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
@@ -23,9 +29,15 @@ export type Props = ViewProps & {
    */
   color?: string;
   /**
-   * Style for text container
+   * Background color of the avatar.
    */
-  style?: StyleProp<ViewStyle>;
+  backgroundColor?: ColorValue;
+  /**
+   * Style for text container
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * Style for the title.
    */
@@ -59,13 +71,13 @@ const AvatarText = ({
   style,
   labelStyle,
   color: customColor,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
+  const backgroundColor = customBackgroundColor ?? theme.colors.primary;
   const textColor =
     customColor ??
     getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
@@ -81,7 +93,7 @@ const AvatarText = ({
           backgroundColor,
         },
         styles.container,
-        restStyle,
+        style,
       ]}
       {...rest}
     >

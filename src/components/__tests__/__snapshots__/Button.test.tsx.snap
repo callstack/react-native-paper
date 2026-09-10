@@ -3963,15 +3963,13 @@ exports[`renders button with icon in reverse order 1`] = `
         [
           {
             "alignItems": "center",
-            "flexDirection": "row",
+            "flexDirection": "row-reverse",
             "justifyContent": "center",
           },
           {
             "opacity": 1,
           },
-          {
-            "flexDirection": "row-reverse",
-          },
+          undefined,
         ]
       }
     >

@@ -119,6 +119,16 @@ export default defineConfig(
         },
       ],
 
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'StyleSheet',
+          property: 'flatten',
+          message:
+            'Do not flatten styles. Animated styles from `useAnimatedStyle` cannot be flattened. Accept the values you need as props instead.',
+        },
+      ],
+
       '@react-native/platform-colors': 'error',
 
       'promise/no-callback-in-promise': 'error',
@@ -173,6 +183,8 @@ export default defineConfig(
     },
     rules: {
       ...testingLibraryReact.rules,
+
+      'no-restricted-properties': 'off',
 
       'no-restricted-syntax': [
         'error',

@@ -20,7 +20,7 @@ type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
 
 type BorderRadius = AnimatedStyleProp<'borderRadius'>;
 
-type SurfaceVisualProps = {
+export type SurfaceVisualProps = {
   /**
    * Background color of the Surface. Overrides the color derived from
    * `elevation`.

@@ -7,7 +7,6 @@ import { tokens } from '../../../theme/tokens';
 import Appbar from '../../Appbar';
 import {
   getAppbarBackgroundColor,
-  getAppbarBorders,
   modeTextVariant,
   renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
@@ -45,6 +44,31 @@ describe('Appbar', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('renders custom background color passed to backgroundColor prop', async () => {
+    await render(
+      <Appbar backgroundColor="#FF0000" testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      backgroundColor: '#FF0000',
+    });
+  });
+
+  it('renders border radius passed to props', async () => {
+    await render(
+      <Appbar borderRadius={8} borderBottomLeftRadius={4} testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      borderRadius: 8,
+      borderBottomLeftRadius: 4,
+    });
   });
 });
 
@@ -149,6 +173,20 @@ describe('renderAppbarContent', () => {
     expect(renderResult()[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(v3Spacing)])
     );
+  });
+
+  it('renders custom background color passed to Appbar.Header', async () => {
+    await render(
+      <SafeAreaProvider>
+        <Appbar.Header backgroundColor="#FF0000" testID="appbar-header">
+          <Appbar.Content title="Title" />
+        </Appbar.Header>
+      </SafeAreaProvider>
+    );
+
+    expect(screen.getByTestId('appbar-header')).toHaveStyle({
+      backgroundColor: '#FF0000',
+    });
   });
 
   it('Is recognized as a heading when no onPress callback has been passed', async () => {
@@ -278,34 +316,5 @@ describe('getAppbarColors', () => {
     expect(getAppbarBackgroundColor(DarkTheme, elevated)).toBe(
       tokens.md.ref.palette.neutral12
     );
-  });
-});
-
-describe('getAppbarBorders', () => {
-  const borderStyles = {
-    borderRadius: 1,
-    borderBottomEndRadius: 2,
-    borderBottomStartRadius: 3,
-    borderEndEndRadius: 4,
-    borderEndStartRadius: 5,
-    borderStartEndRadius: 6,
-    borderStartStartRadius: 7,
-    borderTopEndRadius: 8,
-    borderTopStartRadius: 9,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 11,
-    borderBottomRightRadius: 12,
-    borderBottomLeftRadius: 13,
-    borderCurve: 'continuous' as const,
-  };
-
-  it('returns every border style and excludes unrelated styles', () => {
-    expect(getAppbarBorders({ ...borderStyles, height: 60, top: 13 })).toEqual(
-      borderStyles
-    );
-  });
-
-  it('returns an empty object when no border styles are passed', () => {
-    expect(getAppbarBorders({ height: 60, top: 13 })).toEqual({});
   });
 });
