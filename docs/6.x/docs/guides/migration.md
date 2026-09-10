@@ -71,12 +71,41 @@ You can use the component's color prop where available, or override the correspo
 
 ### Test IDs
 
-Some hardcoded and generated test IDs have been removed for the following components:
+Hardcoded default test IDs have been removed for the components listed below:
 
-- `Appbar.Header`: `${testID}-root-layer`
-- `Surface`: `surface` and `${testID}-outer-layer`
+- `Appbar.Content`: `appbar-content`
+- `Appbar.Header`: `appbar-header`
+- `BottomNavigation`: `bottom-navigation`
+- `BottomNavigation.Bar`: `bottom-navigation-bar`
+- `Button`: `button`
+- `Card`: `card`
+- `Chip`: `chip`
+- `Drawer.CollapsedItem`: `drawer-collapsed-item`
+- `FAB`: `floating-action-button`
+- `FAB.Extended`: `extended-floating-action-button`
+- `FAB.Menu`: `floating-action-button-menu`
+- `IconButton`: `icon-button`
+- `Menu`: `menu`
+- `Menu.Item`: `menu-item`
+- `Modal`: `modal`
+- `ProgressBar`: `progress-bar`
+- `Searchbar`: `search-bar`
+- `Surface`: `surface`
 
-You can specify a `testID` explicitly and use that value to query the component.
+You can specify a `testID` explicitly to restore each component's own test ID.
+
+These components used to also derive test IDs for internal, implementation-only elements by appending a suffix to the `testID` prop (e.g. `${testID}-container`, `${testID}-icon`, `${testID}-outline`). They have been removed entirely.
+
+If you were relying on internal test IDs, update your tests not to rely on internal implementation details and only interact with elements or assert content your users can reach, e.g.: query by role, label, text etc., or `testID` props accepted by the component.
+
+Some components now accept explicit `testID` props for their interactable elements:
+
+- `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
+- `Chip`: `closeIconTestID` for the close icon button.
+- `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
+- `Menu`: `overlayTestID` for the overlay displayed behind the menu.
+- `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
+- `Snackbar`: `iconTestID` for the icon button.
 
 ## Components
 

@@ -1,7 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../theme/schemes';
-import { adaptNavigationTheme, getTheme } from '../theming';
+import { createTheme } from '../../theme/schemes/createTheme';
+import { adaptNavigationTheme } from '../theming';
 
 const NavigationLightTheme = {
   dark: false,
@@ -275,8 +276,8 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('adapts the colors of a raised-contrast material theme', () => {
-    const materialLight = getTheme(false, 'high');
-    const materialDark = getTheme(true, 'high');
+    const materialLight = createTheme({ dark: false, contrast: 'high' });
+    const materialDark = createTheme({ dark: true, contrast: 'high' });
 
     const { LightTheme: navLight, DarkTheme: navDark } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,

@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { getTheme } from '../../../core/theming';
 import { render, screen } from '../../../test-utils';
+import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
 import Appbar from '../../Appbar';
 import {
@@ -190,57 +190,39 @@ describe('renderAppbarContent', () => {
 
 describe('AppbarAction', () => {
   it('should be rendered with default theme color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(
-      getTheme().colors.onSurfaceVariant
-    );
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should be rendered with specific theme color if is leading', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" testID="appbar-action" isLeading />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should be rendered with custom color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarActionIcon = screen.getByTestId('cross-fade-icon-current').props
-      .children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarActionIcon.props.color).toBe('purple');
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('should render AppbarBackAction with custom color', async () => {
-    await render(
+    const { toJSON } = await render(
       <Appbar>
         <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const appbarBackActionIcon = screen.getByTestId('cross-fade-icon-current')
-      .props.children;
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(appbarBackActionIcon.props.color).toBe('purple');
+    expect(toJSON()).toMatchSnapshot();
   });
 });
 
@@ -249,12 +231,12 @@ describe('AppbarContent', () => {
     it(`should render text component with appropriate variant for ${mode} mode`, async () => {
       await render(
         <Appbar mode={mode}>
-          <Appbar.Content title="Title" />
+          <Appbar.Content testID="appbar-content" title="Title" />
         </Appbar>
       );
 
-      expect(screen.getByTestId('appbar-content-title-text')).toHaveStyle(
-        getTheme().fonts[modeTextVariant[mode]]
+      expect(screen.getByText('Title')).toHaveStyle(
+        LightTheme.fonts[modeTextVariant[mode]]
       );
     })
   );
@@ -282,18 +264,18 @@ describe('getAppbarColors', () => {
 
   it('should return custom color no matter what is the theme version', () => {
     expect(
-      getAppbarBackgroundColor(getTheme(), elevated, customBackground)
+      getAppbarBackgroundColor(LightTheme, elevated, customBackground)
     ).toBe(customBackground);
   });
 
   it('returns the light surface container color for an elevated appbar', () => {
-    expect(getAppbarBackgroundColor(getTheme(), elevated)).toBe(
+    expect(getAppbarBackgroundColor(LightTheme, elevated)).toBe(
       tokens.md.ref.palette.neutral94
     );
   });
 
   it('returns the dark surface container color for an elevated appbar', () => {
-    expect(getAppbarBackgroundColor(getTheme(true), elevated)).toBe(
+    expect(getAppbarBackgroundColor(DarkTheme, elevated)).toBe(
       tokens.md.ref.palette.neutral12
     );
   });

@@ -30,13 +30,13 @@ it('activity indicator snapshot test', async () => {
 it('renders with ActivityIndicator', async () => {
   await render(<Searchbar loading={true} value="" />);
 
-  expect(screen.getByTestId('activity-indicator')).toBeOnTheScreen();
+  expect(screen.getByRole('progressbar')).toBeOnTheScreen();
 });
 
 it('renders without ActivityIndicator', async () => {
   await render(<Searchbar loading={false} value="" />);
 
-  expect(screen.queryByTestId('activity-indicator')).not.toBeOnTheScreen();
+  expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
 });
 
 it('renders clear icon with custom color', async () => {
@@ -44,30 +44,25 @@ it('renders clear icon with custom color', async () => {
     <Searchbar testID="search-bar" value="value" iconColor="purple" />
   );
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  const iconComponent = screen.getByTestId('search-bar-icon-wrapper').props
-    .children;
-
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(iconComponent.props.iconColor).toBe('purple');
+  expect(
+    screen.getByText('close', { includeHiddenElements: true })
+  ).toHaveStyle({ color: 'purple' });
 });
 
-it('renders clear icon wrapper, which can be the target of touch events, if search has value', async () => {
-  await render(<Searchbar testID="search-bar" value="value" />);
+it('does not respond to touch on the clear icon when search has no value', async () => {
+  const onClearIconPressMock = jest.fn();
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value=""
+      onClearIconPress={onClearIconPressMock}
+    />
+  );
 
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
-  ).toBe('auto');
-});
-
-it('renders clear icon wrapper, which is never target of touch events, if search has no value', async () => {
-  await render(<Searchbar testID="search-bar" value="" />);
-
-  expect(
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
-  ).toBe('none');
+  await userEvent.press(
+    screen.getByLabelText('clear', { includeHiddenElements: true })
+  );
+  expect(onClearIconPressMock).not.toHaveBeenCalled();
 });
 
 it('defines onClearIconPress action and checks if it is called when close button is pressed', async () => {
@@ -79,20 +74,12 @@ it('defines onClearIconPress action and checks if it is called when close button
       onClearIconPress={onClearIconPressMock}
     />
   );
-  await userEvent.press(screen.getByTestId('search-bar-clear-icon'));
+  await userEvent.press(screen.getByLabelText('clear'));
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon wrapper, with appropriate style for v3', async () => {
-  const { rerender } = await render(<Searchbar testID="search-bar" value="" />);
-
-  expect(screen.getByTestId('search-bar-icon-wrapper')).toHaveStyle({
-    position: 'absolute',
-    right: 0,
-    marginLeft: 16,
-  });
-
-  await rerender(
+it('hides the clear icon when a custom right element is rendered', async () => {
+  await render(
     <Searchbar
       testID="search-bar"
       value=""
@@ -100,11 +87,7 @@ it('renders clear icon wrapper, with appropriate style for v3', async () => {
     />
   );
 
-  expect(
-    screen.getByTestId('search-bar-icon-wrapper', {
-      includeHiddenElements: true,
-    })
-  ).toHaveStyle({ display: 'none' });
+  expect(screen.queryByLabelText('clear')).not.toBeOnTheScreen();
 });
 
 it('renders trailering icon when mode is set to "bar"', async () => {
@@ -113,11 +96,12 @@ it('renders trailering icon when mode is set to "bar"', async () => {
       testID="search-bar"
       value={''}
       traileringIcon={'microphone'}
+      traileringIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );
 
-  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
+  expect(screen.getByLabelText('microphone')).toBeOnTheScreen();
 });
 
 it('renders trailering icon with press functionality', async () => {
@@ -128,12 +112,13 @@ it('renders trailering icon with press functionality', async () => {
       testID="search-bar"
       value={''}
       traileringIcon={'microphone'}
+      traileringIconAccessibilityLabel="microphone"
       onTraileringIconPress={onTraileringIconPressMock}
       mode="bar"
     />
   );
 
-  await userEvent.press(screen.getByTestId('search-bar-trailering-icon'));
+  await userEvent.press(screen.getByLabelText('microphone'));
   expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
 });
 
@@ -143,31 +128,29 @@ it('renders clear icon instead of trailering icon', async () => {
       testID="search-bar"
       value={''}
       traileringIcon={'microphone'}
+      traileringIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );
 
-  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
+  expect(screen.getByLabelText('microphone')).toBeOnTheScreen();
 
   await rerender(
     <Searchbar
       testID="search-bar"
       value={'test'}
       traileringIcon={'microphone'}
+      traileringIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );
 
-  expect(
-    screen.queryByTestId('search-bar-trailering-icon')
-  ).not.toBeOnTheScreen();
-  expect(screen.getByTestId('search-bar-icon-wrapper')).toBeOnTheScreen();
+  expect(screen.queryByLabelText('microphone')).not.toBeOnTheScreen();
+  expect(screen.getByLabelText('clear')).toBeOnTheScreen();
 });
 
 it('renders searchbar in "view" mode', async () => {
-  await render(<Searchbar testID="search-bar" value={''} mode="view" />);
+  const tree = (await render(<Searchbar value={''} mode="view" />)).toJSON();
 
-  expect(screen.getByTestId('search-bar-container')).toHaveStyle({
-    borderRadius: 0,
-  });
+  expect(tree).toMatchSnapshot();
 });

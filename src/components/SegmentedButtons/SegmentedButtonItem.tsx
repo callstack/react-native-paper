@@ -223,18 +223,12 @@ const SegmentedButtonItem = ({
           style={[styles.content, { paddingVertical, opacity: textOpacity }]}
         >
           {showCheckedIcon ? (
-            <Animated.View
-              testID={`${testID}-check-icon`}
-              style={[iconStyle, checkAnimatedStyle]}
-            >
+            <Animated.View style={[iconStyle, checkAnimatedStyle]}>
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
-            <Animated.View
-              testID={`${testID}-icon`}
-              style={[iconStyle, iconAnimatedStyle]}
-            >
+            <Animated.View style={[iconStyle, iconAnimatedStyle]}>
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
@@ -244,7 +238,6 @@ const SegmentedButtonItem = ({
             selectable={false}
             numberOfLines={1}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
           >
             {label}
           </Text>

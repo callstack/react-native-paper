@@ -44,7 +44,7 @@ const CrossFadeIcon = ({
   size,
   source,
   theme: themeOverrides,
-  testID = 'cross-fade-icon',
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -98,6 +98,7 @@ const CrossFadeIcon = ({
 
   return (
     <View
+      testID={testID}
       style={[
         styles.content,
         {
@@ -107,17 +108,11 @@ const CrossFadeIcon = ({
       ]}
     >
       {hasPreviousIcon ? (
-        <Animated.View
-          style={[styles.icon, previousIconStyle]}
-          testID={`${testID}-previous`}
-        >
+        <Animated.View style={[styles.icon, previousIconStyle]}>
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
       ) : null}
-      <Animated.View
-        style={[styles.icon, currentIconStyle]}
-        testID={`${testID}-current`}
-      >
+      <Animated.View style={[styles.icon, currentIconStyle]}>
         <Icon source={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>
     </View>

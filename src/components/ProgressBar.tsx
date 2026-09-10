@@ -77,7 +77,7 @@ const ProgressBar = ({
   animatedValue,
   style,
   fillStyle,
-  testID = 'progress-bar',
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -212,7 +212,6 @@ const ProgressBar = ({
       >
         {width ? (
           <Animated.View
-            testID={`${testID}-fill`}
             style={[
               styles.progressBar,
               {

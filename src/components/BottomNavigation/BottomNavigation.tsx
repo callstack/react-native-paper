@@ -252,6 +252,10 @@ export type Props<Route extends BaseRoute> = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * testID for the underlying `BottomNavigation.Bar`.
+   */
+  barTestID?: string;
 };
 
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
@@ -335,7 +339,8 @@ const BottomNavigation = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation',
+  testID,
+  barTestID,
   theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props<Route>) => {
@@ -579,7 +584,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}
-        testID={`${testID}-bar`}
+        testID={barTestID}
         theme={theme}
       />
     </View>

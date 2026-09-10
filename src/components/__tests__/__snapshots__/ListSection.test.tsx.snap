@@ -571,7 +571,6 @@ exports[`renders list section with custom title style 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -724,7 +723,6 @@ exports[`renders list section with custom title style 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1332,7 +1330,6 @@ exports[`renders list section with subheader 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1485,7 +1482,6 @@ exports[`renders list section with subheader 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -2053,7 +2049,6 @@ exports[`renders list section without subheader 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -2206,7 +2201,6 @@ exports[`renders list section without subheader 1`] = `
             undefined,
           ]
         }
-        testID="list-item-content"
       >
         <Text
           numberOfLines={1}

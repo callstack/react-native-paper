@@ -212,7 +212,7 @@ const Shell = ({
   overlay,
   children,
   style,
-  testID = 'fab-shell',
+  testID,
   theme: themeOverrides,
   ref,
 }: ShellProps) => {
@@ -319,7 +319,6 @@ const Shell = ({
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       elevation={elevation}
-      testID={`${testID}-container`}
       theme={theme}
     >
       <Animated.View style={[styles.clip, clipStyle]}>
@@ -357,7 +356,6 @@ const Shell = ({
               labelAnimatedStyle={labelAnimatedStyle}
               labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
               labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-              testID={testID}
             />
           )}
         </TouchableRipple>

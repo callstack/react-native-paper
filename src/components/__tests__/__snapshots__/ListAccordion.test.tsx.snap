@@ -226,7 +226,6 @@ exports[`renders expanded accordion 1`] = `
             undefined,
           ]
         }
-        testID="undefined-content"
       >
         <Text
           numberOfLines={1}

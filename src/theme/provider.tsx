@@ -1,12 +1,11 @@
 import * as React from 'react';
-import type { ComponentType } from 'react';
 
 import { createTheming } from '@callstack/react-theme-provider';
 import type { $DeepPartial } from '@callstack/react-theme-provider';
+import isEqual from 'fast-deep-equal';
 
 import { DarkTheme, LightTheme } from './schemes';
-import { createTheme } from './schemes/createTheme';
-import type { ContrastLevel, Theme, NavigationTheme } from './types';
+import type { Theme, NavigationTheme } from './types';
 
 const {
   ThemeProvider,
@@ -56,45 +55,21 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
 };
 /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
 
-/** Memoize `themeOverrides` at the call site; inline object literals defeat the memo. */
 export const useInternalTheme = (
   themeOverrides: $DeepPartial<Theme> | undefined
 ): Theme => {
   const theme = useThemeBase<Theme>();
+  const [overrides, setOverrides] = React.useState(themeOverrides);
+
+  if (!isEqual(overrides, themeOverrides)) {
+    setOverrides(themeOverrides);
+  }
+
   return React.useMemo(
-    () => (themeOverrides ? safeMerge(theme, themeOverrides) : theme),
-    [theme, themeOverrides]
+    () => (overrides ? safeMerge(theme, overrides) : theme),
+    [theme, overrides]
   );
 };
-
-export const withInternalTheme = <Props extends { theme: Theme }, C>(
-  WrappedComponent: ComponentType<Props & { theme: Theme }> & C
-) => withTheme<Props, C>(WrappedComponent);
-
-export const defaultThemes = {
-  light: LightTheme,
-  dark: DarkTheme,
-};
-
-/** Every light or dark and contrast pair, built once so that switching
- *  contrast at runtime does not rebuild a scheme. */
-const contrastThemes: Record<'light' | 'dark', Record<ContrastLevel, Theme>> = {
-  light: {
-    standard: LightTheme,
-    medium: createTheme({ dark: false, contrast: 'medium' }),
-    high: createTheme({ dark: false, contrast: 'high' }),
-  },
-  dark: {
-    standard: DarkTheme,
-    medium: createTheme({ dark: true, contrast: 'medium' }),
-    high: createTheme({ dark: true, contrast: 'high' }),
-  },
-};
-
-export const getTheme = (
-  isDark: boolean = false,
-  contrast: ContrastLevel = 'standard'
-): Theme => contrastThemes[isDark ? 'dark' : 'light'][contrast];
 
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;

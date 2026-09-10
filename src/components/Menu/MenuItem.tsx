@@ -148,7 +148,7 @@ const MenuItem = ({
   containerStyle,
   contentStyle,
   titleStyle,
-  testID = 'menu-item',
+  testID,
   'aria-label': ariaLabel,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -220,7 +220,6 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            testID={`${testID}-title`}
             style={[titleTextStyle, titleStyle]}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >

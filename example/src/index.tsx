@@ -15,7 +15,7 @@ import * as Updates from 'expo-updates';
 import {
   PaperProvider,
   getDynamicTheme,
-  getTheme,
+  createTheme,
   type ContrastLevel,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -101,7 +101,7 @@ export default function PaperExample() {
   const theme =
     dynamicThemeSupported && shouldUseDynamicTheme
       ? getDynamicTheme(isDarkMode, contrast)
-      : getTheme(isDarkMode, contrast);
+      : createTheme({ dark: isDarkMode, contrast });
 
   const direction = rtl ? 'rtl' : 'ltr';
 

@@ -12,9 +12,10 @@ import { act, render, screen } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
+import { createTheme } from '../../theme/schemes/createTheme';
 import type { ThemeProp } from '../../theme/types';
 import PaperProvider from '../PaperProvider';
-import { getTheme, useTheme } from '../theming';
+import { useTheme } from '../theming';
 
 declare module 'react-native' {
   interface AccessibilityInfoStatic {
@@ -341,7 +342,7 @@ describe('PaperProvider', () => {
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     const theme = screen.getByTestId('provider-child-view').props.theme;
 
-    expect(theme).toStrictEqual(getTheme(false, 'high'));
+    expect(theme).toStrictEqual(createTheme({ dark: false, contrast: 'high' }));
     expect(theme.contrast).toBe('high');
     expect(theme.colors.primary).not.toBe(LightTheme.colors.primary);
   });
@@ -357,14 +358,14 @@ describe('PaperProvider', () => {
     expect(
       // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
       screen.getByTestId('provider-child-view').props.theme
-    ).toStrictEqual(getTheme(false, 'medium'));
+    ).toStrictEqual(createTheme({ dark: false, contrast: 'medium' }));
 
     await act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
 
     expect(
       // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
       screen.getByTestId('provider-child-view').props.theme
-    ).toStrictEqual(getTheme(true, 'medium'));
+    ).toStrictEqual(createTheme({ dark: true, contrast: 'medium' }));
   });
 
   it('defaults to standard contrast', async () => {

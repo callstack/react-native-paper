@@ -5,7 +5,6 @@ export {
   withTheme,
   ThemeProvider,
   adaptNavigationTheme,
-  getTheme,
 } from './core/theming';
 
 export { useLocale, LocaleProvider } from './core/locale';

@@ -111,7 +111,7 @@ const DrawerCollapsedItem = ({
   disabled,
   'aria-label': ariaLabel,
   badge = false,
-  testID = 'drawer-collapsed-item',
+  testID,
   labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
@@ -195,13 +195,9 @@ const DrawerCollapsedItem = ({
               style,
               animatedOutlineStyle,
             ]}
-            testID={`${testID}-outline`}
           />
 
-          <View
-            style={[styles.icon, { top: iconPadding }]}
-            testID={`${testID}-container`}
-          >
+          <View style={[styles.icon, { top: iconPadding }]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
