@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import type { ContrastLevel, Theme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper';
+
+type ContrastLevel = 'standard' | 'medium' | 'high';
 
 export const PreferencesContext = React.createContext<{
   toggleTheme: () => void;

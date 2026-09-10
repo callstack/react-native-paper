@@ -1,10 +1,19 @@
-export { LightTheme } from './LightTheme';
-export { DarkTheme } from './DarkTheme';
-export { createTheme, type CreateThemeOptions } from './createTheme';
+export {
+  LightTheme,
+  MediumContrastLightTheme,
+  HighContrastLightTheme,
+} from './LightTheme';
+export {
+  DarkTheme,
+  MediumContrastDarkTheme,
+  HighContrastDarkTheme,
+} from './DarkTheme';
 export {
   DynamicLightTheme,
   DynamicDarkTheme,
-  getDynamicTheme,
+  MediumContrastDynamicLightTheme,
+  HighContrastDynamicLightTheme,
+  MediumContrastDynamicDarkTheme,
+  HighContrastDynamicDarkTheme,
   isDynamicColorSupported,
-  isDynamicColorSupportedAtContrast,
 } from './DynamicTheme';

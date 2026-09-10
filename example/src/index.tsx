@@ -13,10 +13,19 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
+  DarkTheme,
+  DynamicDarkTheme,
+  DynamicLightTheme,
+  HighContrastDarkTheme,
+  HighContrastDynamicDarkTheme,
+  HighContrastDynamicLightTheme,
+  HighContrastLightTheme,
+  LightTheme,
+  MediumContrastDarkTheme,
+  MediumContrastDynamicDarkTheme,
+  MediumContrastDynamicLightTheme,
+  MediumContrastLightTheme,
   PaperProvider,
-  getDynamicTheme,
-  createTheme,
-  type ContrastLevel,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -29,6 +38,34 @@ import {
   createConfiguredFontNavigationTheme,
   createConfiguredFontTheme,
 } from '../utils/themes';
+
+type ContrastLevel = 'standard' | 'medium' | 'high';
+
+const THEMES = {
+  light: {
+    standard: LightTheme,
+    medium: MediumContrastLightTheme,
+    high: HighContrastLightTheme,
+  },
+  dark: {
+    standard: DarkTheme,
+    medium: MediumContrastDarkTheme,
+    high: HighContrastDarkTheme,
+  },
+};
+
+const DYNAMIC_THEMES = {
+  light: {
+    standard: DynamicLightTheme,
+    medium: MediumContrastDynamicLightTheme,
+    high: HighContrastDynamicLightTheme,
+  },
+  dark: {
+    standard: DynamicDarkTheme,
+    medium: MediumContrastDynamicDarkTheme,
+    high: HighContrastDynamicDarkTheme,
+  },
+};
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -98,10 +135,9 @@ export default function PaperExample() {
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
   const [contrast, setContrast] = React.useState<ContrastLevel>('standard');
 
-  const theme =
-    dynamicThemeSupported && shouldUseDynamicTheme
-      ? getDynamicTheme(isDarkMode, contrast)
-      : createTheme({ dark: isDarkMode, contrast });
+  const themes =
+    dynamicThemeSupported && shouldUseDynamicTheme ? DYNAMIC_THEMES : THEMES;
+  const theme = themes[isDarkMode ? 'dark' : 'light'][contrast];
 
   const direction = rtl ? 'rtl' : 'ltr';
 

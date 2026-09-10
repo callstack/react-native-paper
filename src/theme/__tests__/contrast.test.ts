@@ -1,15 +1,33 @@
 import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
-import { createTheme } from '../schemes/createTheme';
-import { DarkTheme } from '../schemes/DarkTheme';
-import { LightTheme } from '../schemes/LightTheme';
+import {
+  DarkTheme,
+  HighContrastDarkTheme,
+  HighContrastLightTheme,
+  LightTheme,
+  MediumContrastDarkTheme,
+  MediumContrastLightTheme,
+} from '../schemes';
 import { palette } from '../tokens/ref/palette';
 import { buildScheme } from '../tokens/sys/color';
 import type { ContrastLevel, ThemeColors } from '../types';
 
 const MODES = ['light', 'dark'] as const;
 const NON_STANDARD = ['medium', 'high'] as const satisfies ContrastLevel[];
+
+const THEMES = {
+  light: {
+    standard: LightTheme,
+    medium: MediumContrastLightTheme,
+    high: HighContrastLightTheme,
+  },
+  dark: {
+    standard: DarkTheme,
+    medium: MediumContrastDarkTheme,
+    high: HighContrastDarkTheme,
+  },
+} as const;
 
 /**
  * Text and background role pairs that MD3 requires to be readable.
@@ -33,6 +51,15 @@ const CONTRAST_PAIRS: [keyof ThemeColors, keyof ThemeColors][] = [
   ['onPrimaryFixed', 'primaryFixed'],
   ['onSecondaryFixed', 'secondaryFixed'],
   ['onTertiaryFixed', 'tertiaryFixed'],
+  ['onPrimaryFixed', 'primaryFixedDim'],
+  ['onSecondaryFixed', 'secondaryFixedDim'],
+  ['onTertiaryFixed', 'tertiaryFixedDim'],
+  ['onPrimaryFixedVariant', 'primaryFixedDim'],
+  ['onSecondaryFixedVariant', 'secondaryFixedDim'],
+  ['onTertiaryFixedVariant', 'tertiaryFixedDim'],
+  ['onPrimaryFixedVariant', 'primaryFixed'],
+  ['onSecondaryFixedVariant', 'secondaryFixed'],
+  ['onTertiaryFixedVariant', 'tertiaryFixed'],
 ];
 
 /** WCAG 2.x minimum ratio per MD3 contrast level. */
@@ -74,7 +101,7 @@ describe('contrast levels', () => {
     });
 
     it.each(NON_STANDARD)('meets WCAG contrast targets at %s', (contrast) => {
-      const { colors } = createTheme({ dark: mode === 'dark', contrast });
+      const { colors } = THEMES[mode][contrast];
       const target = WCAG_TARGET[contrast];
 
       const failures = CONTRAST_PAIRS.filter(
@@ -91,9 +118,8 @@ describe('contrast levels', () => {
     it.each(NON_STANDARD)(
       'raises contrast above standard at %s',
       (contrast) => {
-        const isDark = mode === 'dark';
-        const standard = createTheme({ dark: isDark }).colors;
-        const raised = createTheme({ dark: isDark, contrast }).colors;
+        const standard = THEMES[mode].standard.colors;
+        const raised = THEMES[mode][contrast].colors;
 
         expect(ratio(raised.onPrimary, raised.primary)).toBeGreaterThan(
           ratio(standard.onPrimary, standard.primary)
@@ -103,7 +129,7 @@ describe('contrast levels', () => {
   });
 
   it('derives the pressed state layer from the scheme onSurface', () => {
-    const { colors } = createTheme({ contrast: 'high' });
+    const { colors } = HighContrastLightTheme;
 
     expect(colors.stateLayerPressed).toBe(
       asColor(colors.onSurface).alpha(0.1).rgb().string()
@@ -113,35 +139,51 @@ describe('contrast levels', () => {
     );
   });
 
-  it('keeps the fixed roles the same at every contrast level', () => {
-    // MD3 defines the *Fixed roles as stable across contrast levels.
+  it('keeps the fixed surfaces the same at every contrast level', () => {
+    // The fixed surfaces stay put so they can be shared across light and dark.
+    // Their `on*FixedVariant` foregrounds still darken to hold the ratio.
     let checked = 0;
 
     MODES.forEach((mode) => {
-      const isDark = mode === 'dark';
-      const standard = createTheme({ dark: isDark }).colors;
+      const standard = THEMES[mode].standard.colors;
 
       NON_STANDARD.forEach((contrast) => {
-        const raised = createTheme({ dark: isDark, contrast }).colors;
+        const raised = THEMES[mode][contrast].colors;
 
-        const fixedOf = (colors: ThemeColors) =>
-          Object.entries(colors).filter(([role]) => role.includes('Fixed'));
+        const surfacesOf = (colors: ThemeColors) =>
+          Object.entries(colors).filter(
+            ([role]) => role.includes('Fixed') && !role.startsWith('on')
+          );
 
-        const before = fixedOf(standard);
+        const before = surfacesOf(standard);
         checked += before.length;
 
-        expect(fixedOf(raised)).toStrictEqual(before);
+        expect(surfacesOf(raised)).toStrictEqual(before);
       });
     });
 
     expect(checked).toBeGreaterThan(0);
   });
 
+  it('keeps the fixed foregrounds readable as contrast rises', () => {
+    MODES.forEach((mode) => {
+      const standard = THEMES[mode].standard.colors;
+      const high = THEMES[mode].high.colors;
+
+      // The variant foreground darkens so it clears 7:1 on the dim surface.
+      expect(
+        ratio(high.onPrimaryFixedVariant, high.primaryFixedDim)
+      ).toBeGreaterThan(
+        ratio(standard.onPrimaryFixedVariant, standard.primaryFixedDim)
+      );
+    });
+  });
+
   it('keeps a container distinct from its base role', () => {
     // A container collapsing onto its base role means the scheme has clipped.
     NON_STANDARD.forEach((contrast) => {
       MODES.forEach((mode) => {
-        const { colors } = createTheme({ dark: mode === 'dark', contrast });
+        const { colors } = THEMES[mode][contrast];
 
         expect(colors.primaryContainer).not.toBe(colors.primary);
         expect(colors.secondaryContainer).not.toBe(colors.secondary);
@@ -154,18 +196,18 @@ describe('contrast levels', () => {
 
   it('keeps elevation level0 transparent', () => {
     NON_STANDARD.forEach((contrast) => {
-      expect(createTheme({ contrast }).colors.elevation.level0).toBe(
+      expect(THEMES.light[contrast].colors.elevation.level0).toBe(
         'transparent'
       );
     });
   });
 
-  it('defaults to standard, leaving the built-in themes unchanged', () => {
-    expect(createTheme({ dark: false }).colors).toStrictEqual(
-      LightTheme.colors
+  it('leaves the built-in themes at standard contrast', () => {
+    expect(LightTheme.colors).toStrictEqual(
+      buildScheme(palette, { mode: 'light' })
     );
-    expect(createTheme({ dark: true }).colors).toStrictEqual(DarkTheme.colors);
-    expect(LightTheme.contrast).toBe('standard');
-    expect(DarkTheme.contrast).toBe('standard');
+    expect(DarkTheme.colors).toStrictEqual(
+      buildScheme(palette, { mode: 'dark' })
+    );
   });
 });
