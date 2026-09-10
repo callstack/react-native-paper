@@ -24,6 +24,25 @@ describe('Switch render', () => {
     ).toMatchSnapshot();
   });
 
+  it('expands hitSlop up to the 48dp minimum when enabled', async () => {
+    await render(<Switch testID="switch" value />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('switch').props.hitSlop).toEqual({
+      top: 4,
+      bottom: 4,
+      left: 0,
+      right: 0,
+    });
+  });
+
+  it('gives a disabled switch no hitSlop of its own', async () => {
+    await render(<Switch testID="switch" disabled value />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('switch').props.hitSlop).toBeUndefined();
+  });
+
   it('renders with checked icon', async () => {
     expect(
       (await render(<Switch value checkedIcon="check" />)).toJSON()

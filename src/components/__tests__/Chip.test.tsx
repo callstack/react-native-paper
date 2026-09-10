@@ -95,6 +95,33 @@ it('renders chip with zero border radius', async () => {
   });
 });
 
+it('expands hitSlop up to the 48dp minimum when enabled', async () => {
+  await render(
+    <Chip testID="active-chip" onPress={() => {}}>
+      Active chip
+    </Chip>
+  );
+
+  // eslint-disable-next-line no-restricted-syntax
+  expect(screen.getByTestId('active-chip').props.hitSlop).toEqual({
+    top: 8,
+    bottom: 8,
+    left: 0,
+    right: 0,
+  });
+});
+
+it('gives a disabled Chip no hitSlop of its own', async () => {
+  await render(
+    <Chip testID="disabled-chip" disabled onPress={() => {}}>
+      Disabled chip
+    </Chip>
+  );
+
+  // eslint-disable-next-line no-restricted-syntax
+  expect(screen.getByTestId('disabled-chip').props.hitSlop).toBeUndefined();
+});
+
 describe('getChipColors - text color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(
@@ -307,5 +334,43 @@ describe('getChipColor - border color', () => {
     ).toMatchObject({
       borderColor: 'transparent',
     });
+  });
+});
+
+describe('close affordance', () => {
+  // The chip already reserved room on its right, but only the icon was tappable,
+  // so the body owned the rest of that column. MD3 has the primary action stop
+  // where the trailing one starts.
+  it('fills the column the chip reserves for it', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByLabelText('Close')).toHaveStyle({
+      width: '100%',
+      height: '100%',
+    });
+  });
+
+  it('keeps the close glyph pinned right so it does not drift', async () => {
+    await render(
+      <Chip testID="chip" onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    // `styles.icon` sets alignSelf center, which would otherwise win and move
+    // the glyph 4dp left
+    expect(screen.getByTestId('chip-close-icon')).toHaveStyle({
+      alignSelf: 'flex-end',
+    });
+  });
+
+  it('is not rendered without onClose', async () => {
+    await render(<Chip onPress={() => {}}>Example</Chip>);
+
+    expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
   });
 });

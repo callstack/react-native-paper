@@ -7,7 +7,6 @@ exports[`renders disabled toggle button 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -15,8 +14,16 @@ exports[`renders disabled toggle button 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       {
@@ -27,7 +34,6 @@ exports[`renders disabled toggle button 1`] = `
       {
         "backgroundColor": "rgba(230, 224, 233, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
-        "borderRadius": 4,
       },
       undefined,
     ]
@@ -55,14 +61,6 @@ exports[`renders disabled toggle button 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -81,6 +79,24 @@ exports[`renders disabled toggle button 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 4,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -135,7 +151,6 @@ exports[`renders toggle button 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -143,8 +158,16 @@ exports[`renders toggle button 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       {
@@ -155,7 +178,6 @@ exports[`renders toggle button 1`] = `
       {
         "backgroundColor": "rgba(230, 224, 233, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
-        "borderRadius": 4,
       },
       undefined,
     ]
@@ -185,10 +207,10 @@ exports[`renders toggle button 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 4,
+        "left": 4,
+        "right": 4,
+        "top": 4,
       }
     }
     onBlur={[Function]}
@@ -209,6 +231,24 @@ exports[`renders toggle button 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 4,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -263,7 +303,6 @@ exports[`renders unchecked toggle button 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -271,8 +310,16 @@ exports[`renders unchecked toggle button 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       {
@@ -283,7 +330,6 @@ exports[`renders unchecked toggle button 1`] = `
       {
         "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
-        "borderRadius": 4,
       },
       undefined,
     ]
@@ -311,14 +357,6 @@ exports[`renders unchecked toggle button 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -337,6 +375,24 @@ exports[`renders unchecked toggle button 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 4,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],

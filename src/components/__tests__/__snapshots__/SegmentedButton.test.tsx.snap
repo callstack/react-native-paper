@@ -56,6 +56,14 @@ exports[`renders segmented button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -182,6 +190,14 @@ exports[`renders segmented button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -322,6 +338,14 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -496,6 +520,14 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -622,6 +654,14 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -764,6 +804,14 @@ exports[`should not render icon when icon prop is not passed 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -891,6 +939,14 @@ exports[`should not render icon when icon prop is not passed 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1032,6 +1088,14 @@ exports[`should not render icon when icon prop is passed along with label, butto
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1208,6 +1272,14 @@ exports[`should not render icon when icon prop is passed along with label, butto
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1398,6 +1470,14 @@ exports[`should render icon when icon prop is passed 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1572,6 +1652,14 @@ exports[`should render icon when icon prop is passed 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1760,6 +1848,14 @@ exports[`should render icon when icon prop is passed along with label, button is
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -1936,6 +2032,14 @@ exports[`should render icon when icon prop is passed along with label, button is
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2126,6 +2230,14 @@ exports[`should render icon when icon prop is passed along with label, no matter
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -2302,6 +2414,14 @@ exports[`should render icon when icon prop is passed along with label, no matter
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 6,
+          "left": 0,
+          "right": 0,
+          "top": 6,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

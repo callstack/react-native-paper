@@ -188,6 +188,38 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+### Chip
+
+The close button (`onClose`) now fills the entire trailing 34dp column reserved for it, matching Material Design 3's touch target guidance, instead of only its 24x18 icon. Taps near the top or bottom of that column, which used to fall through to the chip's own `onPress`, now activate `onClose` instead.
+
+### TouchableRipple
+
+- `borderless` no longer clips the touchable's own content on web; it only clips the ripple itself, in its own container. A child that needs a clipped or rounded shape should carry that shape itself.
+- Corner radius and border width set through `style` no longer shape the highlight underlay (native) or the ripple's self-clipping container (web). Pass them as dedicated props instead:
+  - `borderRadius`
+  - `borderTopLeftRadius`
+  - `borderTopRightRadius`
+  - `borderBottomLeftRadius`
+  - `borderBottomRightRadius`
+  - `borderTopStartRadius`
+  - `borderTopEndRadius`
+  - `borderBottomStartRadius`
+  - `borderBottomEndRadius`
+  - `borderWidth` (web only)
+
+e.g.:
+
+```diff
+<TouchableRipple
+  borderless
+- style={{ borderRadius: 8 }}
++ borderRadius={8}
+  onPress={() => {}}
+>
+  <Text>Content</Text>
+</TouchableRipple>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.

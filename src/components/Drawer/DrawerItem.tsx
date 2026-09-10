@@ -129,6 +129,7 @@ const DrawerItem = ({
           { backgroundColor, borderRadius },
           style,
         ]}
+        borderRadius={borderRadius}
         role="button"
         aria-selected={active}
         aria-label={ariaLabel}

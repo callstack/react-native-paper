@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -12,6 +12,7 @@ import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -67,13 +68,35 @@ export type Props = Omit<
   'aria-label'?: string;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width or to set a custom padding`.
+   * Use this prop to set a custom padding. For a custom height and width,
+   * use the `width` and `height` props instead.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Width of the button's inner content. Defaults to the button's size.
+   */
+  width?: number;
+  /**
+   * Height of the button's inner content. Defaults to the button's size.
+   */
+  height?: number;
+  /**
+   * Radius of every corner of the button. Defaults to a circle (half of the
+   * button's size).
+   */
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  borderTopStartRadius?: number;
+  borderTopEndRadius?: number;
+  borderBottomStartRadius?: number;
+  borderBottomEndRadius?: number;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
@@ -128,6 +151,17 @@ const IconButton = ({
   testID,
   loading = false,
   contentStyle,
+  width,
+  height,
+  borderRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderTopStartRadius,
+  borderTopEndRadius,
+  borderBottomStartRadius,
+  borderBottomEndRadius,
   ref,
   ...rest
 }: Props) => {
@@ -151,12 +185,35 @@ const IconButton = ({
   });
 
   const buttonSize = size + 2 * PADDING;
+  const borderWidth = mode === 'outlined' && !selected ? 1 : 0;
+
+  const shapeStyles = {
+    borderRadius: borderRadius ?? buttonSize / 2,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  };
 
   const borderStyles = {
-    borderWidth: mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius: buttonSize / 2,
+    borderWidth,
     borderColor,
+    ...shapeStyles,
   };
+
+  const touchableWidth = width ?? buttonSize - 2 * borderWidth;
+  const touchableHeight = height ?? buttonSize - 2 * borderWidth;
+
+  const hitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({
+        width: touchableWidth,
+        height: touchableHeight,
+      });
 
   return (
     <Animated.View
@@ -178,6 +235,7 @@ const IconButton = ({
           style={[
             StyleSheet.absoluteFill,
             { backgroundColor, opacity: backgroundOpacity },
+            shapeStyles,
           ]}
         />
       )}
@@ -186,16 +244,22 @@ const IconButton = ({
         centered
         onPress={onPress}
         aria-label={ariaLabel}
-        style={[styles.touchable, contentStyle]}
+        style={[
+          styles.touchable,
+          shapeStyles,
+          // The Surface used to clip the ripple, so the touchable does it now.
+          // Native only: its own overflow does not clip its hitSlop, but on web
+          // it would clip the touch target, where the container already clips.
+          Platform.OS !== 'web' && styles.clipToShape,
+          { width, height },
+          contentStyle,
+        ]}
+        {...shapeStyles}
         role="button"
         aria-disabled={disabled}
         disabled={disabled}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
-        }
         testID={testID}
+        hitSlop={hitSlop}
         {...rest}
       >
         <View style={{ opacity: iconOpacity }}>
@@ -212,13 +276,18 @@ const IconButton = ({
 
 const styles = StyleSheet.create({
   container: {
+    // No `overflow: 'hidden'`. An ancestor that clips also clips the touch
+    // target, which is why the hitSlop this component used to pass never
+    // applied. The overlay and the touchable clip themselves instead.
     margin: 6,
-    overflow: 'hidden',
   },
   touchable: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  clipToShape: {
+    overflow: 'hidden',
   },
 });
 

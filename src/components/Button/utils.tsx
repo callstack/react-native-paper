@@ -4,6 +4,7 @@ import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 import { splitStyles } from '../../utils/splitStyles';
+import type { BorderRadiusStyle } from '../TouchableRipple/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -191,20 +192,7 @@ export const getButtonColors = ({
   };
 };
 
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
-    ViewStyle,
-    | 'borderBottomEndRadius'
-    | 'borderBottomLeftRadius'
-    | 'borderBottomRightRadius'
-    | 'borderBottomStartRadius'
-    | 'borderTopEndRadius'
-    | 'borderTopLeftRadius'
-    | 'borderTopRightRadius'
-    | 'borderTopStartRadius'
-    | 'borderRadius'
-  >
->;
+type ViewStyleBorderRadiusStyles = Partial<BorderRadiusStyle>;
 export const getButtonTouchableRippleStyle = (
   style?: ViewStyle,
   borderWidth: number = 0
