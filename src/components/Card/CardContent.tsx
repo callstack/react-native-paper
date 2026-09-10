@@ -43,8 +43,8 @@ export type Props = ViewProps & {
  * ```
  */
 const CardContent = ({ index, total, siblings, style, ...rest }: Props) => {
-  const cover = 'withInternalTheme(CardCover)';
-  const title = 'withInternalTheme(CardTitle)';
+  const cover = 'Card.Cover';
+  const title = 'Card.Title';
 
   let contentStyle, prev, next;
 

@@ -38,7 +38,7 @@ import {
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const useTextInputAnimation = ({
   variant,

@@ -10,7 +10,7 @@ import type {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -64,6 +64,10 @@ export type Props = ViewProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -98,6 +102,7 @@ const DrawerItem = ({
   right,
   labelMaxFontSizeMultiplier,
   hitSlop,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -129,6 +134,7 @@ const DrawerItem = ({
         aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
+        testID={testID}
       >
         <View style={[styles.wrapper, styles.v3Wrapper]}>
           <View style={styles.content}>

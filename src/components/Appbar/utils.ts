@@ -3,7 +3,7 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 import { white } from '../../theme/colors';
-import type { InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 

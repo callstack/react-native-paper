@@ -5,6 +5,7 @@ import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TextProps,
   TextStyle,
   ViewProps,
 } from 'react-native';
@@ -15,7 +16,7 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { EllipsizeProp, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -87,6 +88,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   closeIconAccessibilityLabel?: string;
   /**
+   * testID for the close icon button.
+   */
+  closeIconTestID?: string;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -140,7 +145,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Ellipsize Mode for the children text
    */
-  ellipsizeMode?: EllipsizeProp;
+  ellipsizeMode?: TextProps['ellipsizeMode'];
   /**
    * Specifies the largest possible scale a text font can reach.
    */
@@ -185,6 +190,7 @@ const Chip = ({
   'aria-label': ariaLabel,
   role = 'button',
   closeIconAccessibilityLabel = 'Close',
+  closeIconTestID,
   onPress,
   onLongPress,
   onPressOut,
@@ -195,7 +201,7 @@ const Chip = ({
   textStyle,
   style,
   theme: themeOverrides,
-  testID = 'chip',
+  testID,
   selectedColor,
   showSelectedCheck = true,
   ellipsizeMode,
@@ -280,7 +286,6 @@ const Chip = ({
       elevation={elevation}
       transitionDuration={elevationTransitionDuration}
       {...rest}
-      testID={`${testID}-container`}
       theme={theme}
     >
       <TouchableRipple
@@ -385,6 +390,7 @@ const Chip = ({
             disabled={disabled}
             role="button"
             aria-label={closeIconAccessibilityLabel}
+            testID={closeIconTestID}
           >
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
               {closeIcon ? (

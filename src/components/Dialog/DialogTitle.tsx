@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof Text> & {
