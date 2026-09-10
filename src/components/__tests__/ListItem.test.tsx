@@ -166,7 +166,7 @@ it('calling onPress on ListItem right component', async () => {
 });
 
 it('renders list item with custom content style', async () => {
-  await render(
+  const { toJSON } = await render(
     <ListItem
       title="First Item"
       description="Item description"
@@ -175,5 +175,5 @@ it('renders list item with custom content style', async () => {
     />
   );
 
-  expect(screen.getByTestId('list-item-content')).toHaveStyle(styles.content);
+  expect(toJSON()).toMatchSnapshot();
 });

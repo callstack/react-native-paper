@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
@@ -100,11 +100,11 @@ describe('getChipColors - text color', () => {
     expect(
       getChipColors({
         disabled: true,
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurface,
+      textColor: LightTheme.colors.onSurface,
       contentOpacity: stateOpacity.disabled,
     });
   });
@@ -112,29 +112,29 @@ describe('getChipColors - text color', () => {
   it('should return correct theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSecondaryContainer,
+      textColor: LightTheme.colors.onSecondaryContainer,
     });
   });
 
   it('should return correct theme color, for theme version 3, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: true,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurfaceVariant,
+      textColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 
   it('should return custom color, for theme version 3', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         selectedColor: 'purple',
         isOutlined: false,
       })
@@ -149,11 +149,11 @@ describe('getChipColors - icon color', () => {
     expect(
       getChipColors({
         disabled: true,
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurface,
+      iconColor: LightTheme.colors.onSurface,
       contentOpacity: stateOpacity.disabled,
     });
   });
@@ -161,29 +161,29 @@ describe('getChipColors - icon color', () => {
   it('should return correct theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSecondaryContainer,
+      iconColor: LightTheme.colors.onSecondaryContainer,
     });
   });
 
   it('should return correct theme color, for theme version 3, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: true,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceVariant,
+      iconColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 
   it('should return custom color, for theme version 3', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         selectedColor: 'purple',
         isOutlined: false,
       })
@@ -197,22 +197,22 @@ describe('getChipColor - background color', () => {
   it('should return theme color, for theme version 3, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: true,
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.surface,
+      backgroundColor: LightTheme.colors.surface,
     });
   });
 
   it('should return theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
+      backgroundColor: LightTheme.colors.secondaryContainer,
     });
   });
 });
@@ -221,7 +221,7 @@ describe('getChipColor - border color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         isOutlined: false,
       })
@@ -233,7 +233,7 @@ describe('getChipColor - border color', () => {
   it('should return custom color, for theme version 3', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         selectedColor: 'purple',
         isOutlined: false,
       })
@@ -245,7 +245,7 @@ describe('getChipColor - border color', () => {
   it('should return theme color, for theme version 3', () => {
     expect(
       getChipColors({
-        theme: getTheme(),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
@@ -256,7 +256,7 @@ describe('getChipColor - border color', () => {
   it('should return custom color, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(false),
+        theme: LightTheme,
         selectedColor: 'purple',
         isOutlined: true,
       })
@@ -268,29 +268,29 @@ describe('getChipColor - border color', () => {
   it('should return theme color, light mode, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(false),
+        theme: LightTheme,
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(false).colors.outlineVariant,
+      borderColor: LightTheme.colors.outlineVariant,
     });
   });
 
   it('should return theme color, dark mode, outlined mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: DarkTheme.colors.outlineVariant,
     });
   });
 
   it('should return theme background color, light mode, flat mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(false),
+        theme: LightTheme,
         isOutlined: false,
       })
     ).toMatchObject({
@@ -301,7 +301,7 @@ describe('getChipColor - border color', () => {
   it('should return theme background color, dark mode, flat mode', () => {
     expect(
       getChipColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         isOutlined: false,
       })
     ).toMatchObject({

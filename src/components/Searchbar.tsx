@@ -64,6 +64,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   searchAccessibilityLabel?: string;
   /**
+   * testID for the left icon button (see `onIconPress`).
+   */
+  searchTestID?: string;
+  /**
    * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
    * In v5.x with theme version 3, `clearIcon` is visible only if `right` prop is not defined.
    */
@@ -72,6 +76,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   clearAccessibilityLabel?: string;
+  /**
+   * testID for the clear button.
+   */
+  clearTestID?: string;
   /**
    * @supported Available in v5.x with theme version 3
    * Icon name for the right trailering icon button.
@@ -91,6 +99,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
    */
   traileringIconAccessibilityLabel?: string;
+  /**
+   * testID for the right trailering icon button.
+   */
+  trailingTestID?: string;
   /**
    * @supported Available in v5.x with theme version 3
    * Callback which returns a React element to display on the right side.
@@ -166,12 +178,15 @@ const Searchbar = ({
   iconColor: customIconColor,
   onIconPress,
   searchAccessibilityLabel = 'search',
+  searchTestID,
   clearIcon,
   clearAccessibilityLabel = 'clear',
+  clearTestID,
   onClearIconPress,
   traileringIcon,
   traileringIconColor,
   traileringIconAccessibilityLabel,
+  trailingTestID,
   onTraileringIconPress,
   right,
   mode = 'bar',
@@ -235,7 +250,6 @@ const Searchbar = ({
       backgroundColor={theme.colors.surfaceContainerHigh}
       borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
       style={[styles.container, style]}
-      testID={testID ? `${testID}-container` : undefined}
       elevation={elevation}
       theme={theme}
     >
@@ -257,7 +271,7 @@ const Searchbar = ({
         }
         theme={theme}
         aria-label={searchAccessibilityLabel}
-        testID={testID ? `${testID}-icon` : undefined}
+        testID={searchTestID}
       />
       <TextInput
         style={[
@@ -284,10 +298,7 @@ const Searchbar = ({
         {...rest}
       />
       {loading ? (
-        <ActivityIndicator
-          testID="activity-indicator"
-          style={styles.v3Loader}
-        />
+        <ActivityIndicator style={styles.v3Loader} />
       ) : (
         // Clear icon should be always rendered within Searchbar – it's transparent,
         // without touch events, when there is no value. It's done to avoid issues
@@ -295,7 +306,6 @@ const Searchbar = ({
         // when clearing the value.
         <View
           pointerEvents={value ? 'auto' : 'none'}
-          testID={testID ? `${testID}-icon-wrapper` : undefined}
           style={[
             !value && styles.v3ClearIcon,
             right !== undefined && styles.v3ClearIconHidden,
@@ -317,9 +327,9 @@ const Searchbar = ({
                 />
               ))
             }
-            testID={testID ? `${testID}-clear-icon` : undefined}
             role="button"
             theme={theme}
+            testID={clearTestID}
           />
         </View>
       )}
@@ -331,7 +341,7 @@ const Searchbar = ({
           iconColor={traileringIconColor || colors.onSurfaceVariant}
           icon={traileringIcon}
           aria-label={traileringIconAccessibilityLabel}
-          testID={testID ? `${testID}-trailering-icon` : undefined}
+          testID={trailingTestID}
         />
       ) : null}
       {isBarMode &&
@@ -345,7 +355,6 @@ const Searchbar = ({
               backgroundColor: colors.outline,
             },
           ]}
-          testID={testID ? `${testID}-divider` : undefined}
         />
       )}
     </Surface>

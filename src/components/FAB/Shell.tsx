@@ -319,7 +319,6 @@ const Shell = ({
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       elevation={elevation}
-      testID={testID ? `${testID}-container` : undefined}
       theme={theme}
     >
       <Animated.View style={[styles.clip, clipStyle]}>
@@ -357,7 +356,6 @@ const Shell = ({
               labelAnimatedStyle={labelAnimatedStyle}
               labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
               labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-              testID={testID}
             />
           )}
         </TouchableRipple>

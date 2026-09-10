@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen, userEvent } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
 import {
@@ -14,7 +14,7 @@ import {
 } from '../IconButton/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
-const theme = getTheme();
+const theme = LightTheme;
 
 const styles = StyleSheet.create({
   square: {
@@ -87,43 +87,43 @@ it('renders icon change animated', async () => {
 });
 
 it('renders icon button with custom border radius', async () => {
-  await render(
-    <IconButton
-      icon="camera"
-      testID="icon-button"
-      onPress={() => {}}
-      style={styles.square}
-    />
-  );
+  const tree = (
+    await render(
+      <IconButton
+        icon="camera"
+        testID="icon-button"
+        onPress={() => {}}
+        style={styles.square}
+      />
+    )
+  ).toJSON();
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
-    borderRadius: 0,
-  });
+  expect(tree).toMatchSnapshot();
 });
 
 it('renders icon button with small border radius', async () => {
-  await render(
-    <IconButton
-      icon="camera"
-      testID="icon-button"
-      onPress={() => {}}
-      style={styles.slightlyRounded}
-    />
-  );
+  const tree = (
+    await render(
+      <IconButton
+        icon="camera"
+        testID="icon-button"
+        onPress={() => {}}
+        style={styles.slightlyRounded}
+      />
+    )
+  ).toJSON();
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
-    borderRadius: 4,
-  });
+  expect(tree).toMatchSnapshot();
 });
 
 it('applies a static transform from style', async () => {
-  await render(
-    <IconButton icon="camera" testID="icon-button" style={styles.scaled} />
-  );
+  const tree = (
+    await render(
+      <IconButton icon="camera" testID="icon-button" style={styles.scaled} />
+    )
+  ).toJSON();
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
+  expect(tree).toMatchSnapshot();
 });
 
 it('calls onPress', async () => {

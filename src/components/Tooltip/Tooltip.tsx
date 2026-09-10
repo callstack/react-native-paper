@@ -216,7 +216,6 @@ const Tooltip = ({
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}
-            testID="tooltip-container"
           >
             <Text
               aria-live="polite"

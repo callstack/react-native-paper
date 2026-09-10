@@ -54,6 +54,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   iconAccessibilityLabel?: string;
   /**
+   * testID for the icon button.
+   */
+  iconTestID?: string;
+  /**
    * The duration for which the Snackbar is shown.
    */
   duration?: number;
@@ -150,6 +154,7 @@ const Snackbar = ({
   icon,
   onIconPress,
   iconAccessibilityLabel = 'Close icon',
+  iconTestID,
   duration = DURATION_MEDIUM,
   onDismiss,
   children,
@@ -339,7 +344,7 @@ const Snackbar = ({
                 }
                 aria-label={iconAccessibilityLabel}
                 style={styles.icon}
-                testID={testID ? `${testID}-icon` : undefined}
+                testID={iconTestID}
               />
             ) : null}
           </View>

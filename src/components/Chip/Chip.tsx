@@ -88,6 +88,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   closeIconAccessibilityLabel?: string;
   /**
+   * testID for the close icon button.
+   */
+  closeIconTestID?: string;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -186,6 +190,7 @@ const Chip = ({
   'aria-label': ariaLabel,
   role = 'button',
   closeIconAccessibilityLabel = 'Close',
+  closeIconTestID,
   onPress,
   onLongPress,
   onPressOut,
@@ -281,7 +286,6 @@ const Chip = ({
       elevation={elevation}
       transitionDuration={elevationTransitionDuration}
       {...rest}
-      testID={testID ? `${testID}-container` : undefined}
       theme={theme}
     >
       <TouchableRipple
@@ -386,6 +390,7 @@ const Chip = ({
             disabled={disabled}
             role="button"
             aria-label={closeIconAccessibilityLabel}
+            testID={closeIconTestID}
           >
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
               {closeIcon ? (

@@ -41,7 +41,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -57,7 +57,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -80,7 +80,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();

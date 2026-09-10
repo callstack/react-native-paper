@@ -98,6 +98,7 @@ const CrossFadeIcon = ({
 
   return (
     <View
+      testID={testID}
       style={[
         styles.content,
         {
@@ -107,17 +108,11 @@ const CrossFadeIcon = ({
       ]}
     >
       {hasPreviousIcon ? (
-        <Animated.View
-          style={[styles.icon, previousIconStyle]}
-          testID={testID ? `${testID}-previous` : undefined}
-        >
+        <Animated.View style={[styles.icon, previousIconStyle]}>
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
       ) : null}
-      <Animated.View
-        style={[styles.icon, currentIconStyle]}
-        testID={testID ? `${testID}-current` : undefined}
-      >
+      <Animated.View style={[styles.icon, currentIconStyle]}>
         <Icon source={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>
     </View>

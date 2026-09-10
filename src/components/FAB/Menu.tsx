@@ -284,7 +284,6 @@ const MenuItem = ({
             leading={leading}
             trailing={trailing}
             iconLabelGap={iconLabelGap}
-            testID={testID}
           />
         </TouchableRipple>
       </View>

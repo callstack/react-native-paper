@@ -493,10 +493,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       ]}
       onLayout={onLayout}
     >
-      <Animated.View
-        style={[styles.barContent, { backgroundColor }]}
-        testID={testID ? `${testID}-content` : undefined}
-      >
+      <Animated.View style={[styles.barContent, { backgroundColor }]}>
         <View
           style={[
             styles.items,
@@ -509,7 +506,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             },
           ]}
           role={'tablist'}
-          testID={testID ? `${testID}-content-wrapper` : undefined}
         >
           {routes.map((route, index) => {
             const focused = navigationState.index === index;

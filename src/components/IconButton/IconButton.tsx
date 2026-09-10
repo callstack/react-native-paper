@@ -300,7 +300,6 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -361,7 +360,6 @@ const IconButton = ({
                 color={iconColor}
                 source={icon}
                 size={dimensions.iconSize}
-                testID={testID ? `${testID}-icon` : undefined}
               />
             )}
           </View>

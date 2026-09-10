@@ -4,7 +4,7 @@ import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { defaultThemes, ThemeProvider } from './theming';
+import { ThemeProvider } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -13,6 +13,7 @@ import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
+import { DarkTheme, LightTheme } from '../theme/schemes';
 import type { ThemeProp } from '../theme/types';
 
 export type Props = {
@@ -31,7 +32,7 @@ const PaperProvider = (props: Props) => {
 
   const theme = React.useMemo(() => {
     const isDark = props.theme?.dark ?? colorScheme === 'dark';
-    const base = defaultThemes[isDark ? 'dark' : 'light'];
+    const base = isDark ? DarkTheme : LightTheme;
     const scale = resolvedReduceMotion
       ? 0
       : (props.theme?.animation?.scale ?? 1);

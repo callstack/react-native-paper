@@ -135,7 +135,6 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           role={onPress ? 'none' : 'heading'}
-          testID={testID ? `${testID}-title-text` : undefined}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
           {title}
