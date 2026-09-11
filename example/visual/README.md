@@ -58,7 +58,7 @@ Three independent captures per platform (`wait stable`, 2 s, screenshot, diff), 
 | iOS      | realistic-1 / 2 / 3 | 0     | 10,179 (1.31 %) |
 | Android  | realistic-1 / 2 / 3 | 0     | 9,336 (1.14 %)  |
 
-Bit-identical every time, and identical to the first single captures. On these targets the changed-pixel count is a deterministic function of the code. The diff image is a ring on the Elevation 1 card and nothing else (`evidence/diff-images/<platform>-realistic-*-t0.02.png`). Human visibility: borderline — noticeable only when flipping between the two images.
+Bit-identical every time, and identical to the first single captures. On these targets the changed-pixel count is a deterministic function of the code. The diff image is a ring on the Elevation 1 card and nothing else (`evidence/diff-images/<platform>-realistic-1-t0.02.png`). Human visibility: borderline — noticeable only when flipping between the two images.
 
 ## Caveats
 
@@ -112,12 +112,11 @@ Nineteen, with commands and evidence, in `evidence/issues.md`. The ones that mat
 
 ## Evidence
 
-Every number above resolves to a file:
+Every number above resolves to a row or a file:
 
-- `evidence/ios/`, `evidence/android/` — the `diff screenshot --json` output behind the first-run tables.
-- `evidence/sensitivity/<platform>/` — the three repeated realistic breaks, plus the gross break and the reverts, at each threshold.
-- `evidence/diff-images/` — the diff images, platform-prefixed. None exist for 0.1 diffs because `diff screenshot --out` writes nothing on a match (issue 18).
+- `evidence/results.csv` — one row per `diff screenshot` run (72 rows): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON files are on the runner branch.
+- `evidence/diff-images/` — one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, plus the dev-client Tools-button false FAIL. No 0.1 images exist because `diff screenshot --out` writes nothing on a match (issue 18).
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json` — the nodes that matter from the accessibility trees; full trees on the runner branch.
 - `env.json` — the pinned devices, versions and thresholds.
 
-The first-run JSON predates the test-id rename and says `surface-elevated` / `surface-flat`; renaming an id changes no pixel.
+The first-run rows predate the test-id rename and their source files say `surface-elevated` / `surface-flat`; renaming an id changes no pixel.

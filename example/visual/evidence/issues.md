@@ -110,10 +110,10 @@ npx agent-device@0.21.0 diff screenshot \
   <capture of the broken build> --out <diff.png> --threshold 0.1 --json
 ```
 
-Committed evidence: `evidence/ios/66-diff-t0.1.json` (0 changed pixels, `match: true`) and
-`evidence/ios/66-diff-t0.02.json` (10,179 changed pixels) are the two diffs of the same
-capture; the three repeats are `evidence/sensitivity/ios/realistic-{1,2,3}-diff-t0.1.json`
-and `-t0.02.json`; the diff image at 0.02 is `evidence/diff-images/ios-realistic-t0.02.png`.
+Committed evidence: `evidence/results.csv` rows `ios / realistic / 0.1` (0 changed pixels,
+`match: true`) and `ios / realistic / 0.02` (10,179 changed pixels) are the two diffs of the
+same capture; the three repeats are the `ios / realistic-{1,2,3}` rows at both thresholds;
+the diff image at 0.02 is `evidence/diff-images/ios-realistic-1-t0.02.png`.
 There is no 0.1 image because `diff screenshot --out` writes nothing on a match (issue 18).
 The raw capture PNG was not committed.
 
@@ -130,13 +130,13 @@ The raw capture PNG was not committed.
 ```
 
 The same pair at `--threshold 0.02` reports 10179 different pixels (1.31%) in a
-single 378x378 region exactly around the affected surface — artifacts
-`66-diff-t0.1.json`, `66-diff-t0.02.json`, `diff-realistic-t0.02.png`.
+single 378x378 region exactly around the affected surface (`results.csv`,
+`ios / realistic`; image `ios-realistic-1-t0.02.png`).
 
 The gross break (every elevated surface forced to the level 5 shadow) is also
 badly under-reported at the default threshold: 4277 px / 0.55% in one 316x17 band
-(`59-diff.json`, `diff-gross.png`) versus 116292 px / 15.02% in 3 regions at 0.02
-(`60-diff.json`, `diff-gross-t002.png`). At the default threshold, a change that is
+versus 116292 px / 15.02% in 3 regions at 0.02 (`results.csv`, `ios / gross`;
+image `ios-gross-t0.02.png`). At the default threshold, a change that is
 plainly visible to the eye across the whole screen registers as a thin sliver.
 
 Suggestion: either lower the default, or document that the default threshold is
@@ -215,7 +215,7 @@ nothing is lost — but the iOS default of 1x logical points remains an easy tra
 ## Threshold data point for issue 4 (Android)
 
 Android repeats the iOS finding for the realistic break: 0 changed pixels and
-`match: true` at the default 0.1, 9,336 px at 0.02 (`114-diff-realistic-*.json`).
+`match: true` at the default 0.1, 9,336 px at 0.02 (`results.csv`, `android / realistic`).
 Unlike iOS, the gross break is caught at the default (65,051 px / 7.92 %).
 
 ## 12. The typed Node client is exported but unreachable without a dependency
@@ -324,11 +324,9 @@ than a clear error.
 `--out` is silently ignored on a `match: true` diff, and the response omits
 `diffPath` as well. That is defensible (there is nothing to draw), but it means
 "the diff image exists" cannot be used as evidence that a diff ran, and a
-per-threshold sweep produces a gappy set of files: this pass has
-`evidence/diff-images/<platform>-realistic-<n>-t0.02.png` for all six failing
-diffs but no `-t0.1.png` counterparts, because at 0.1 the realistic break
-matches. The `-diff-t0.1.json` files under `evidence/sensitivity/<platform>/`
-are the record for those.
+per-threshold sweep produces a gappy set of files: the realistic break has a
+diff image at 0.02 but none at 0.1, because at 0.1 it matches. The 0.1 rows in
+`evidence/results.csv` are the record for those.
 
 ## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
 
