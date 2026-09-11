@@ -55,11 +55,21 @@ export { default as Text, customText } from './components/Typography/Text';
 
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
-export type { Props as AppbarProps } from './components/Appbar/Appbar';
-export type { Props as AppbarActionProps } from './components/Appbar/AppbarAction';
-export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';
-export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
-export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
+export type {
+  Props as AppbarProps,
+  AppbarActionDecorator,
+  AppbarFilledTrailingAction,
+  AppbarHeadlineAlignment,
+  AppbarHeadlinePressableProps,
+  AppbarHeadlineTextProps,
+  AppbarLeadingButton,
+  AppbarSearchbarProps,
+  AppbarStandardTrailingAction,
+  AppbarTextProps,
+  AppbarTrailingAction,
+  AppbarTrailingActions,
+  AppbarVariant,
+} from './components/Appbar';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';
 export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage';
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';

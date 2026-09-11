@@ -1,5 +1,10 @@
 {
   "next": {
+    "/docs/components/Appbar/Appbar": "/6.x/docs/components/Appbar",
+    "/docs/components/Appbar/AppbarAction": "/6.x/docs/components/Appbar",
+    "/docs/components/Appbar/AppbarBackAction": "/6.x/docs/components/Appbar",
+    "/docs/components/Appbar/AppbarContent": "/6.x/docs/components/Appbar",
+    "/docs/components/Appbar/AppbarHeader": "/6.x/docs/components/Appbar",
     "/docs/components/Checkbox/CheckboxAndroid": "/6.x/docs/components/Checkbox/Checkbox",
     "/docs/components/Checkbox/CheckboxIOS": "/6.x/docs/components/Checkbox/Checkbox",
     "/docs/components/FAB/AnimatedFAB": "/6.x/docs/components/FAB/FAB",
@@ -9,6 +14,7 @@
     "/docs/guides/migration-guide-to-5.0": "/6.x/docs/guides/migration"
   },
   "stable": {
+    "/6.x/docs/components/Appbar": "/docs/components/Appbar/Appbar",
     "/6.x/docs/components/FAB/FABExtended": "/docs/components/FAB/FAB",
     "/6.x/docs/components/FAB/FABMenu": "/docs/components/FAB/FAB",
     "/6.x/docs/guides/migration": "/docs/guides/migration-guide-to-5.0",

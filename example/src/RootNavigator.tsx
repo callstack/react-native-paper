@@ -25,18 +25,20 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   const drawerNavigation = useNavigation('Home');
 
   return (
-    <Appbar.Header elevated>
-      {back ? (
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-      ) : (
-        <Appbar.Action
-          icon="menu"
-          isLeading
-          onPress={() => drawerNavigation.openDrawer()}
-        />
-      )}
-      <Appbar.Content title={options.title || route.name} />
-    </Appbar.Header>
+    <Appbar
+      variant="small"
+      headline={options.title || route.name}
+      isScrolled
+      leadingButton={
+        back
+          ? { type: 'back', onPress: () => navigation.goBack() }
+          : {
+              icon: 'menu',
+              'aria-label': 'Open navigation menu',
+              onPress: () => drawerNavigation.openDrawer(),
+            }
+      }
+    />
   );
 }
 
