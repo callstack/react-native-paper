@@ -343,7 +343,13 @@ describe('PaperProvider', () => {
 
     it('keeps the base typescale when only part of theme.fonts is provided', async () => {
       mockAppearance();
-      await render(createProvider({ fonts: legacyFonts } as ThemeProp));
+      await render(
+        createProvider(
+          // @ts-expect-error - a v2 `fonts` object is not a valid `ThemeProp`,
+          // which is exactly why untyped callers keep hitting this.
+          { fonts: legacyFonts }
+        )
+      );
 
       const theme =
         // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
@@ -362,7 +368,10 @@ describe('PaperProvider', () => {
       // "Variant titleLarge was not provided properly. Valid variants are
       // regular, medium, light, thin." because the provider dropped the typescale.
       await render(
-        <PaperProvider theme={{ fonts: legacyFonts } as ThemeProp}>
+        <PaperProvider
+          // @ts-expect-error - see above: deliberately a v2 `fonts` object.
+          theme={{ fonts: legacyFonts }}
+        >
           <Text variant="titleLarge">Merged typescale</Text>
         </PaperProvider>
       );
@@ -405,9 +414,11 @@ describe('PaperProvider', () => {
       // make the whole theme look like a leaf value.
       await render(
         createProvider({
+          // @ts-expect-error - `dynamic` is not a declared theme property, but
+          // themes are documented as extensible so untyped callers do add it.
           dynamic: true,
           colors: { primary: 'tomato' },
-        } as ThemeProp)
+        })
       );
 
       const theme =
@@ -424,7 +435,10 @@ describe('PaperProvider', () => {
     it('renders <Text variant> when the theme owns a custom `dynamic` property', async () => {
       mockAppearance();
       await render(
-        <PaperProvider theme={{ dynamic: true } as ThemeProp}>
+        <PaperProvider
+          // @ts-expect-error - see above: a custom `dynamic` theme property.
+          theme={{ dynamic: true }}
+        >
           <Text variant="titleLarge">Custom dynamic property</Text>
         </PaperProvider>
       );
@@ -442,7 +456,7 @@ describe('PaperProvider', () => {
           { ...style, fontFamily: 'Overridden' },
         ])
       );
-      await render(createProvider({ fonts: completeFonts } as ThemeProp));
+      await render(createProvider({ fonts: completeFonts }));
 
       const theme =
         // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
