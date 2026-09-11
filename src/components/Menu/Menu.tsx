@@ -19,6 +19,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  cancelAnimation,
   Easing,
   ReduceMotion,
   useAnimatedStyle,
@@ -230,6 +231,10 @@ const Menu = ({
   const anchorRef = React.useRef<View | null>(null);
   const menuRef = React.useRef<View | null>(null);
   const isShownRef = React.useRef(false);
+  // Mirrors the `rendered` state so animation callbacks (which may fire late
+  // or never on React Native >= 0.80, see #4763) can tell whether the reset
+  // already happened in `hide()`.
+  const renderedRef = React.useRef(rendered);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
@@ -327,15 +332,14 @@ const Menu = ({
     focusFirstDOMNode(menuRef.current);
   });
 
-  const handleHideAnimationFinished = useLatestCallback((finished: boolean) => {
-    if (!finished || prevVisible.current) {
-      return;
+  const handleHideAnimationFinished = useLatestCallback(() => {
+    // The completion callback never fires on React Native >= 0.80 (see
+    // #4763), so `hide()` already reset the portal and focus synchronously.
+    // Only run the layout cleanup if the menu was not reopened before the
+    // animation finished (reopening resets `renderedRef` via the state path).
+    if (!renderedRef.current) {
+      setMenuLayout({ width: 0, height: 0 });
     }
-
-    setMenuLayout({ width: 0, height: 0 });
-    setRendered(false);
-    isShownRef.current = false;
-    focusFirstDOMNode(anchorRef.current);
   });
 
   const show = React.useCallback(async () => {
@@ -421,6 +425,22 @@ const Menu = ({
     removeListeners();
     isShownRef.current = false;
 
+    // Cancel any in-flight show animation so its `finished` callback cannot
+    // mark the menu as shown after it was hidden.
+    cancelAnimation(opacity);
+    cancelAnimation(scaleX);
+    cancelAnimation(scaleY);
+
+    // Reset synchronously instead of waiting for the hide animation's
+    // completion callback, which is never delivered on React Native >= 0.80
+    // (see #4763). Without this the portal stays mounted and the anchor
+    // never regains focus. `menuLayout` is deliberately left alone here:
+    // the scale transform reads it while the fade-out runs, and `show()`
+    // overwrites it with fresh measurements on the next open.
+    renderedRef.current = false;
+    setRendered(false);
+    focusFirstDOMNode(anchorRef.current);
+
     const { animation } = theme;
 
     opacity.value = withTiming(
@@ -430,9 +450,16 @@ const Menu = ({
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       },
-      (finished) => scheduleOnRN(handleHideAnimationFinished, finished ?? false)
+      () => scheduleOnRN(handleHideAnimationFinished)
     );
-  }, [handleHideAnimationFinished, opacity, removeListeners, theme]);
+  }, [
+    handleHideAnimationFinished,
+    opacity,
+    removeListeners,
+    scaleX,
+    scaleY,
+    theme,
+  ]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {
@@ -471,6 +498,7 @@ const Menu = ({
 
   if (visible && !rendered) {
     // Mount the Portal before attempting to show.
+    renderedRef.current = true;
     setRendered(true);
   }
 
