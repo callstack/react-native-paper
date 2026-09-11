@@ -86,45 +86,53 @@ const BottomNavigationExample = () => {
 
   return (
     <View style={styles.screen}>
-      <Appbar.Header elevated>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Bottom Navigation" />
-        <Menu
-          visible={menuVisible}
-          onDismiss={() => setMenuVisible(false)}
-          anchor={
-            <Appbar.Action
-              icon={MORE_ICON}
-              onPress={() => setMenuVisible(true)}
-            />
-          }
-        >
-          <Menu.Item
-            trailingIcon={sceneAnimation === undefined ? 'check' : undefined}
-            onPress={() => {
-              setSceneAnimation(undefined);
-              setMenuVisible(false);
-            }}
-            title="Scene animation: none"
-          />
-          <Menu.Item
-            trailingIcon={sceneAnimation === 'shifting' ? 'check' : undefined}
-            onPress={() => {
-              setSceneAnimation('shifting');
-              setMenuVisible(false);
-            }}
-            title="Scene animation: shifting"
-          />
-          <Menu.Item
-            trailingIcon={sceneAnimation === 'opacity' ? 'check' : undefined}
-            onPress={() => {
-              setSceneAnimation('opacity');
-              setMenuVisible(false);
-            }}
-            title="Scene animation: opacity"
-          />
-        </Menu>
-      </Appbar.Header>
+      <Appbar
+        variant="small"
+        headline="Bottom Navigation"
+        isScrolled
+        leadingButton={{
+          type: 'back',
+          onPress: () => navigation.goBack(),
+        }}
+        trailingActions={[
+          {
+            key: 'more',
+            icon: MORE_ICON,
+            'aria-label': 'More options',
+            onPress: () => setMenuVisible(true),
+          },
+        ]}
+      />
+      <Menu
+        visible={menuVisible}
+        onDismiss={() => setMenuVisible(false)}
+        anchor={{ x: Dimensions.get('window').width - 24, y: 56 }}
+      >
+        <Menu.Item
+          trailingIcon={sceneAnimation === undefined ? 'check' : undefined}
+          onPress={() => {
+            setSceneAnimation(undefined);
+            setMenuVisible(false);
+          }}
+          title="Scene animation: none"
+        />
+        <Menu.Item
+          trailingIcon={sceneAnimation === 'shifting' ? 'check' : undefined}
+          onPress={() => {
+            setSceneAnimation('shifting');
+            setMenuVisible(false);
+          }}
+          title="Scene animation: shifting"
+        />
+        <Menu.Item
+          trailingIcon={sceneAnimation === 'opacity' ? 'check' : undefined}
+          onPress={() => {
+            setSceneAnimation('opacity');
+            setMenuVisible(false);
+          }}
+          title="Scene animation: opacity"
+        />
+      </Menu>
       <BottomNavigation
         safeAreaInsets={{ bottom: insets.bottom }}
         navigationState={{ index, routes }}

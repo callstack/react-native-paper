@@ -207,10 +207,15 @@ const ThemeBasedOnSourceColor = () => {
   return (
     <PaperProvider theme={theme[colorScheme]}>
       <View style={styles.screen}>
-        <Appbar.Header elevated>
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
-          <Appbar.Content title={headerTitle} />
-        </Appbar.Header>
+        <Appbar
+          variant="small"
+          headline={headerTitle ?? 'Team details'}
+          isScrolled
+          leadingButton={{
+            type: 'back',
+            onPress: () => navigation.goBack(),
+          }}
+        />
         <BottomNavigation
           safeAreaInsets={{ bottom: insets.bottom }}
           navigationState={{ index, routes }}
