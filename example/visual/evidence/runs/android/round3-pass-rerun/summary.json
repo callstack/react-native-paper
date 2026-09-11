@@ -1,0 +1,103 @@
+{
+  "platform": "android",
+  "threshold": 0.02,
+  "update": false,
+  "force": false,
+  "stories": [
+    "surface-example-elevated",
+    "surface-example-flat"
+  ],
+  "outDir": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun",
+  "agentDeviceVersion": "agent-device@0.21.0",
+  "sessionCwd": "/private/tmp/claude-501/-Users-juliankobrynski-Projects-react-native-paper/fcf78f94-c11f-487d-99d7-651c4585650a/scratchpad",
+  "expectedEnv": {
+    "avd": "Pixel_10_Pro",
+    "device": "Pixel 10 Pro",
+    "serial": "emulator-5554",
+    "apiLevel": 37,
+    "androidRelease": "17",
+    "systemImage": "system-images/android-37.0/google_apis_playstore_ps16k/arm64-v8a/",
+    "density": 480,
+    "screenPx": "1280x2856",
+    "emulatorVersion": "36.6.11.0 (build_id 15507667)",
+    "gpuMode": "auto (hw.gpu.enabled=yes, hw.gpu.mode=auto; swiftshader NOT measured)",
+    "agentDeviceVersion": "0.21.0",
+    "agentDeviceSession": "android",
+    "reactNativeVersion": "0.85.3",
+    "metroHost": "http://192.168.1.151:8081",
+    "date": "2026-09-10T09:45:00Z",
+    "baselines": {
+      "surface-example-elevated": "__baselines__/android/surface-example-elevated.png",
+      "surface-example-flat": "__baselines__/android/surface-example-flat.png",
+      "pixelDensityFlag": "unsupported on Android (screenshots are native device pixels)"
+    },
+    "diffThresholds": {
+      "cliDefault": 0.1,
+      "usedForShadowRegressions": 0.02
+    }
+  },
+  "observedEnv": {
+    "apiLevel": 37,
+    "androidRelease": "17",
+    "density": 480
+  },
+  "startedAt": "2026-09-11T10:15:16.869Z",
+  "wallClockMs": 14803,
+  "results": [
+    {
+      "story": "surface-example-elevated",
+      "baseline": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/__baselines__/android/surface-example-elevated.png",
+      "current": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-elevated.png",
+      "diff": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-elevated-diff.png",
+      "totalPixels": 821760,
+      "changedPixels": 2822,
+      "mismatchPercentage": 0.34,
+      "regions": [
+        {
+          "index": 1,
+          "rect": {
+            "x": 1080,
+            "y": 2,
+            "width": 152,
+            "height": 74
+          },
+          "normalizedRect": {
+            "x": 84.38,
+            "y": 0.31,
+            "width": 11.88,
+            "height": 11.53
+          },
+          "differentPixels": 2822,
+          "shareOfDiffPercentage": 100,
+          "densityPercentage": 25.09,
+          "shape": "compact",
+          "size": "medium",
+          "location": "top-right",
+          "averageBaselineColorHex": "#faf8fe",
+          "averageCurrentColorHex": "#d5d3d8",
+          "baselineLuminance": 249,
+          "currentLuminance": 212,
+          "dominantChange": "darker"
+        }
+      ],
+      "threshold": 0.02,
+      "pass": false
+    },
+    {
+      "story": "surface-example-flat",
+      "baseline": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/__baselines__/android/surface-example-flat.png",
+      "current": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-flat.png",
+      "diff": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-flat-diff.png",
+      "totalPixels": 821760,
+      "changedPixels": 0,
+      "mismatchPercentage": 0,
+      "regions": [],
+      "threshold": 0.02,
+      "pass": true
+    }
+  ],
+  "status": "fail",
+  "exitCode": 1,
+  "error": null,
+  "pass": false
+}

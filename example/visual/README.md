@@ -75,7 +75,7 @@ Also noted: docs say `wait --stable`, the CLI takes `wait stable [quietMs] [time
 
 Issues 6–12 (session binding per cwd, non-portable `find` selectors, stale-ref errors, Android relaunch landing in the launcher, `logs` on an inactive log, `--pixel-density` iOS-only, Node client not resolvable from the `npx` cache) are in `evidence/issues.md` with commands and evidence.
 
-Issues 13–18 came out of the review round: `snapshot` returns an empty `nodes` array when the tree is unchanged unless `--force-full` is passed; a relaunch restores the previous route (the example app persists navigation state, so this is app behaviour the runner has to handle, logged for context); the dev menu appears after app-ready, not at open; Fast Refresh not reaching Android after a relaunch; an occasional non-zero CLI exit with empty stdout and stderr; and `diff screenshot --out` writing no image when the result is a match.
+Issues 13–18 came out of the review round: `snapshot` returns an empty `nodes` array when the tree is unchanged unless `--force-full` is passed; a relaunch restores the previous route (the example app persists navigation state, so this is app behaviour the runner has to handle, logged for context); the dev menu appears after app-ready, not at open; Fast Refresh not reaching Android after a relaunch; an occasional non-zero CLI exit with empty stdout and stderr; and `diff screenshot --out` writing no image when the result is a match. Issue 19, from round 3, is the dev-client's floating Tools button landing inside the crop and producing a deterministic false FAIL — see the verification notes below.
 
 ## Android
 
@@ -136,12 +136,12 @@ Web (`--crop-on` is refused off iOS/Android, so it is a different loop), deep li
 
 Before 0.02 is trusted as a default threshold rather than a Surface-specific one, the same protocol should be run on: other shadow-bearing components (Card, Chip, FAB), a text-heavy crop (glyph antialiasing may raise the noise floor), dark theme (different contrast profile), and an emulator on swiftshader, which is what `ubuntu-latest` CI renders with. None of these were measured.
 
-Also unmeasured: cold simulator/emulator boot, a different day or host machine, an iOS runtime or emulator image update. Baselines are valid for the `env.json` configuration only.
+Also unmeasured: cold simulator/emulator boot, a different day or host machine, an iOS runtime or emulator image update. Baselines are valid for the `env.json` configuration only. Dev-client chrome (dev menu, dev launcher, floating Tools button) is handled by the runner case by case; a release build would remove the whole class.
 
 ## Running it
 
 `example/visual/run.mjs` is the hand-run CLI loop above as one Node script (plain
-ESM, Node 24, no build step, no new dependencies). It spawns
+ESM, Node 20 or newer, no build step, no new dependencies). It spawns
 `npx agent-device@0.21.0 … --json` and parses stdout. The published package does
 export `createAgentDeviceClient`, but `agent-device` is not a dependency of this
 repo and is not resolvable from `example/`, so using the typed client would mean
@@ -156,11 +156,15 @@ Requires Node 20 or newer, matching `example/package.json`. The entry point is
 guarded by comparing `process.argv[1]` with the module URL rather than
 `import.meta.main`, which only exists from Node 24.2 — on Node 20 the earlier
 version printed nothing and exited 0, the worst failure a tool whose contract is
-its exit code can have. The pure helpers have a `node:test` file:
+its exit code can have. The pure helpers have a `node:test` file, run with:
 
 ```bash
-node --test example/visual/run.test.mjs
+yarn example test:visual
 ```
+
+It needs no device, adb or xcrun. It is **not** run by Jest (which ignores `.mjs`),
+by the pre-commit hook, or by CI — it is a manual check for whoever edits
+`run.mjs`, nothing more.
 
 `evidence/summary.md` is generated from the committed JSON by
 `node example/visual/evidence/summarize.mjs`.
@@ -209,13 +213,15 @@ Two guardrails:
   list. This applies to `--update` too, so committed baselines cannot be
   overwritten from the wrong simulator by accident. `--force` downgrades this
   check to a warning; that is the only thing `--force` does.
-- **Crop size.** In diff mode, after every capture the reported width, height and
-  (on iOS) pixel density are compared with the crop pinned in `env.json`. A
-  mismatch exits 3 with no override — a wrong-sized capture can never read as
-  PASS, and a size mismatch on the right device means something a flag should
-  not paper over. In `--update` mode the check is skipped (a new story has no
-  pinned size yet) and the captured dimensions are printed on the `baseline
-created` line instead. `env.json` is never rewritten by the script.
+- **Crop size.** In diff mode, after every capture the reported width and height
+  are compared with the dimensions of the baseline PNG itself (read from its
+  header), and on iOS the pixel density with the one pinned in `env.json`. The
+  expected size therefore comes per story from the file the diff actually uses
+  and cannot drift from it, and a story that has just been `--update`d passes on
+  the next run. A mismatch exits 3 with no override — a wrong-sized capture can
+  never read as PASS. In `--update` mode the check is skipped and the captured
+  dimensions are printed on the `baseline created` line instead. `env.json` is
+  never rewritten by the script.
 
 Verified end to end on 2026-09-10 after review; `summary.json` and the diff images are in
 `evidence/runs/<platform>/fix-*/`. From the Surface screen: PASS with `changed=0`
@@ -234,3 +240,22 @@ realistic break FAILs with `changed=10179 (1.31%)`, exit 1, and the revert PASSe
 One thing that surfaced: `npx -p` leaks `npm_config_package` into the child, which
 made the script's own nested `npx agent-device` install node instead — the script
 now strips `npm_config_*` from the environment it spawns with.
+
+Round-3 verification (2026-09-11), `evidence/runs/ios/round3-*/`: both guardrails
+triggered for real. With `env.json` pointing at a UDID that is not attached, the
+run refused before touching any device — `udid: expected 0000…, observed not
+present in xcrun simctl list` — exit 2. With `pixelDensity` pinned to 2 against
+the 3x baselines, the capture came back 804x428 and the run stopped with
+`width: expected 1206, actual 804 / height: expected 642, actual 428` — exit 3.
+Both `summary.json` files record the error and exit code.
+
+The same day's Android confirmation run then failed for real — `changed=2822`, one
+152x74 region at the top-right of the crop — with `src/` clean and the baseline
+byte-identical to `HEAD`. The diff image shows the Expo dev-client's floating
+**Tools** button, which had been switched on by some earlier dev-menu interaction
+and sat inside the section. Turning it off through the dev menu ("Tools button")
+made the next run pass with `changed=0`; the script now detects that node and
+disables it, or stops with exit 2 rather than reporting it as a regression
+(issue 19, with the snapshots and both failing summaries in `evidence/`). It is
+the first false FAIL of the PoC, and the clearest argument yet for capturing
+from a release build rather than a dev-client once this goes beyond a PoC.

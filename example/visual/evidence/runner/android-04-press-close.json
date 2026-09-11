@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": {
+    "x": 1154,
+    "y": 1280,
+    "message": "Tapped label=\"Close\" (1154, 1280)",
+    "referenceWidth": 1280,
+    "referenceHeight": 2856,
+    "targetKind": "selector",
+    "selector": "label=\"Close\"",
+    "selectorChain": [
+      "role=\"view\" label=\"Close\"",
+      "label=\"Close\""
+    ],
+    "refLabel": "Close",
+    "resolution": {
+      "source": "runtime",
+      "phase": "pre-action",
+      "kind": "unique"
+    }
+  }
+}

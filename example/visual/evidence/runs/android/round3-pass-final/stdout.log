@@ -1,0 +1,10 @@
+# android — threshold 0.02
+# output: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-final
+  relaunching the app (fresh bundle from Metro)
+  app ready (55 app nodes)
+  dev launcher: pressing "http://192.168.1.151:8081" (@e53)
+  app ready (50 app nodes)
+  restored onto the Surface screen
+android surface-example-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
+android surface-example-flat changed=0 (0%) regions=0 threshold=0.02 → PASS
+# summary: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-final/summary.json (exit 0)

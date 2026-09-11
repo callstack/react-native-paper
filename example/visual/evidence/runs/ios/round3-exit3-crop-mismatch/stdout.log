@@ -1,0 +1,12 @@
+# ios — threshold 0.02
+# output: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round3-exit3-crop-mismatch
+  relaunching the app (fresh bundle from Metro)
+  app ready (77 app nodes)
+  dev menu: pressing "Close" (@e40)
+  app ready (37 app nodes)
+  restored onto the Surface screen
+error: surface-example-elevated: capture dimensions do not match the baseline __baselines__/ios/surface-example-elevated.png:
+  - width: expected 1206, actual 804
+  - height: expected 642, actual 428
+a wrong-sized capture cannot be compared with the baseline. Check --crop-on/--pixel-density and the device; if the new size is the intended one, re-record the baselines with --update. (--force does not override this.)
+# summary: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round3-exit3-crop-mismatch/summary.json (exit 3)

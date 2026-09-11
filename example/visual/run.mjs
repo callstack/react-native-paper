@@ -23,8 +23,8 @@
  *
  * Exit codes: 0 pass, 1 a story FAILed the diff, 2 setup/environment error,
  * 3 a capture came back with the wrong dimensions. `summary.json` is written in
- * the output directory in every one of those cases, including argument errors
- * (those land in artifacts/run/unknown/ when the platform is missing/invalid).
+ * the output directory in every one of those cases, except an argument error,
+ * which prints the problem and exits 2 before there are any options to summarise.
  *
  * Unit tests: node --test example/visual/run.test.mjs
  */
@@ -74,6 +74,18 @@ const DEV_MENU_MARKERS = [
 ];
 const DEV_LAUNCHER_MARKERS = ['DEVELOPMENT SERVERS', 'RECENTLY OPENED'];
 const METRO_PORT = '8081';
+
+// The Expo dev client's floating "Tools" button: a small image control labelled
+// exactly "Tools", drawn on top of the app. On Android at 480 dpi it sits in the
+// top-right corner of the surface-example-elevated crop, where it diffs as a
+// deterministic ~2,800-pixel "regression" with the library untouched. The dev
+// menu has a "TOOLS" section of its own, so a tree showing the dev menu is
+// excluded outright; its rows are text nodes, which is what the type check
+// rules out (android.widget.TextView on Android, StaticText on iOS).
+const FLOATING_TOOLS_LABEL = 'Tools';
+const TOOLS_TOGGLE_LABEL = 'Tools button'; // the dev menu row that toggles it
+const DEV_MENU_CLOSE_LABEL = 'Close';
+const ANDROID_KEYCODE_MENU = '82'; // opens the RN dev menu via adb
 
 const LIST_ROOT_TITLE = 'Examples'; // Appbar title of the example-list root
 const SURFACE_ROW_LABEL = 'Surface';
@@ -188,26 +200,6 @@ function parseArgs(argv) {
 }
 
 /**
- * Where to write summary.json when parseArgs itself failed. Takes `--out` if it
- * was given, else the platform directory if `--platform` was given and valid,
- * else an `unknown` directory — so an argument error is still summarised.
- */
-function fallbackOutDir(argv) {
-  const valueOf = (flag) => {
-    const i = argv.lastIndexOf(flag);
-    return i === -1 ? null : (argv[i + 1] ?? null);
-  };
-
-  const out = valueOf('--out');
-  if (out) return path.resolve(out);
-
-  const platform = valueOf('--platform');
-  const dir =
-    platform === 'ios' || platform === 'android' ? platform : 'unknown';
-  return path.join(VISUAL_DIR, 'artifacts', 'run', dir);
-}
-
-/**
  * Environment for the nested `npx agent-device` call. When this script itself
  * runs under `npx -p node@20 node run.mjs`, npx exports `npm_config_package`
  * (and friends) into the child; the nested npx then reads that, installs
@@ -318,93 +310,127 @@ function adbPath() {
 }
 
 /**
- * Compares the connected device with env.json. Returns the observed values and
- * the list of mismatches; the caller decides what to do with them. A device
- * that cannot be inspected counts as a mismatch: baselines are only meaningful
- * on a device we could actually identify.
+ * Reads the simulator matching `expectedUdid` out of `xcrun simctl list`.
+ * Returns `{ observed }` on success, or `{ error }` describing why the device
+ * could not be inspected.
  */
-function checkEnvironment(platform, env) {
-  const observed = {};
-  const mismatches = [];
-  const mismatch = (what, expected, actual) =>
-    mismatches.push(`${what}: expected ${expected}, observed ${actual}`);
-
-  if (platform === 'ios') {
-    const expectedUdid = env.udid;
-    const res = sh('xcrun', ['simctl', 'list', '-j', 'devices']);
-    if (res.status !== 0) {
-      mismatch(
-        'device inspection',
-        `xcrun simctl list to succeed for udid ${expectedUdid}`,
-        `exit ${res.status} ${res.stderr.trim()}`
-      );
-      return { observed, mismatches };
-    }
-
-    let devices;
-    try {
-      devices = JSON.parse(res.stdout).devices || {};
-    } catch {
-      mismatch(
-        'device inspection',
-        'parseable xcrun simctl list output',
-        'unparseable JSON'
-      );
-      return { observed, mismatches };
-    }
-
-    let match = null;
-    for (const [runtime, list] of Object.entries(devices)) {
-      for (const device of list) {
-        if (device.udid === expectedUdid) match = { runtime, device };
-      }
-    }
-
-    if (!match) {
-      mismatch(
-        'udid',
-        expectedUdid,
-        'not present in xcrun simctl list (no such simulator)'
-      );
-      return { observed, mismatches };
-    }
-
-    observed.udid = match.device.udid;
-    observed.name = match.device.name;
-    observed.runtime = match.runtime;
-    observed.state = match.device.state;
-
-    // The runtime identifier carries the iOS version (…SimRuntime.iOS-26-5), so
-    // comparing it also covers env.iosVersion.
-    if (env.runtime && match.runtime !== env.runtime) {
-      mismatch('runtime', env.runtime, match.runtime);
-    }
-    if (env.device && match.device.name !== env.device) {
-      mismatch('device name', env.device, match.device.name);
-    }
-    if (match.device.state !== 'Booted') {
-      mismatch('device state', 'Booted', match.device.state);
-    }
-    return { observed, mismatches };
+function observeIos(expectedUdid) {
+  const res = sh('xcrun', ['simctl', 'list', '-j', 'devices']);
+  if (res.status !== 0) {
+    return {
+      error: {
+        what: 'device inspection',
+        expected: `xcrun simctl list to succeed for udid ${expectedUdid}`,
+        actual: `exit ${res.status} ${res.stderr.trim()}`,
+      },
+    };
   }
 
+  let devices;
+  try {
+    devices = JSON.parse(res.stdout).devices || {};
+  } catch {
+    return {
+      error: {
+        what: 'device inspection',
+        expected: 'parseable xcrun simctl list output',
+        actual: 'unparseable JSON',
+      },
+    };
+  }
+
+  let match = null;
+  for (const [runtime, list] of Object.entries(devices)) {
+    for (const device of list) {
+      if (device.udid === expectedUdid) match = { runtime, device };
+    }
+  }
+
+  if (!match) {
+    return {
+      error: {
+        what: 'udid',
+        expected: expectedUdid,
+        actual: 'not present in xcrun simctl list (no such simulator)',
+      },
+    };
+  }
+
+  return {
+    observed: {
+      udid: match.device.udid,
+      name: match.device.name,
+      runtime: match.runtime,
+      state: match.device.state,
+    },
+  };
+}
+
+/** Reads API level, release and density off the connected device via adb. */
+function observeAndroid() {
   const adb = adbPath();
   const prop = (name) => sh(adb, ['shell', 'getprop', name]).stdout.trim();
   const sdkLevel = prop('ro.build.version.sdk');
   if (!sdkLevel) {
-    mismatch(
-      'device inspection',
-      `Android properties readable via ${adb}`,
-      'no response (is an emulator connected?)'
-    );
-    return { observed, mismatches };
+    return {
+      error: {
+        what: 'device inspection',
+        expected: `Android properties readable via ${adb}`,
+        actual: 'no response (is an emulator connected?)',
+      },
+    };
   }
 
-  observed.apiLevel = Number(sdkLevel);
-  observed.androidRelease = prop('ro.build.version.release');
   const densityOut = sh(adb, ['shell', 'wm', 'density']).stdout;
   const densityMatch = densityOut.match(/(\d+)\s*$/m);
-  observed.density = densityMatch ? Number(densityMatch[1]) : null;
+
+  return {
+    observed: {
+      apiLevel: Number(sdkLevel),
+      androidRelease: prop('ro.build.version.release'),
+      density: densityMatch ? Number(densityMatch[1]) : null,
+    },
+  };
+}
+
+const DEFAULT_OBSERVERS = { observeIos, observeAndroid };
+
+/**
+ * Compares the connected device with env.json. Returns the observed values and
+ * the list of mismatches; the caller decides what to do with them. A device
+ * that cannot be inspected counts as a mismatch: baselines are only meaningful
+ * on a device we could actually identify. The observers are injected so the
+ * comparison can be tested without xcrun/adb.
+ */
+function checkEnvironment(platform, env, observers = DEFAULT_OBSERVERS) {
+  const mismatches = [];
+  const mismatch = (what, expected, actual) =>
+    mismatches.push(`${what}: expected ${expected}, observed ${actual}`);
+
+  const read =
+    platform === 'ios'
+      ? observers.observeIos(env.udid)
+      : observers.observeAndroid();
+  if (read.error) {
+    mismatch(read.error.what, read.error.expected, read.error.actual);
+    return { observed: {}, mismatches };
+  }
+  const observed = read.observed;
+
+  if (platform === 'ios') {
+    // The runtime identifier carries the iOS version (…SimRuntime.iOS-26-5), so
+    // comparing it also covers env.iosVersion.
+    if (env.runtime && observed.runtime !== env.runtime) {
+      mismatch('runtime', env.runtime, observed.runtime);
+    }
+    if (env.device && observed.name !== env.device) {
+      mismatch('device name', env.device, observed.name);
+    }
+    if (observed.state !== 'Booted') {
+      mismatch('device state', 'Booted', observed.state);
+    }
+    return { observed, mismatches };
+  }
 
   if (env.apiLevel != null && observed.apiLevel !== env.apiLevel) {
     mismatch('Android API level', env.apiLevel, observed.apiLevel);
@@ -421,8 +447,13 @@ function checkEnvironment(platform, env) {
  * still possible, but never by accident. This is the only check `--force`
  * covers.
  */
-function enforceEnvironment(platform, env, force) {
-  const { observed, mismatches } = checkEnvironment(platform, env);
+function enforceEnvironment(
+  platform,
+  env,
+  force,
+  observers = DEFAULT_OBSERVERS
+) {
+  const { observed, mismatches } = checkEnvironment(platform, env, observers);
   if (mismatches.length === 0) return observed;
 
   const detail = mismatches.map((m) => `  - ${m}`).join('\n');
@@ -474,27 +505,60 @@ function writeBaseline(platform, story, current, shotData) {
 }
 
 /**
- * Fails unless the capture has the dimensions env.json pins for this platform.
- * A wrong-sized capture would otherwise diff clean and read as PASS — and so
- * would a capture whose size agent-device did not report at all, which is why a
- * missing value is a failure rather than a warning.
+ * Width and height out of a PNG's IHDR: the signature is 8 bytes, the IHDR
+ * length+type another 8, so the two big-endian uint32s live at bytes 16–24. No
+ * decoding and no dependency — the header is all this needs.
+ */
+function readPngSize(file) {
+  const header = Buffer.alloc(24);
+  let read = 0;
+  let fd;
+  try {
+    fd = fs.openSync(file, 'r');
+    read = fs.readSync(fd, header, 0, 24, 0);
+  } catch {
+    return null;
+  } finally {
+    if (fd != null) fs.closeSync(fd);
+  }
+  if (read < 24 || header.toString('ascii', 12, 16) !== 'IHDR') return null;
+  return { width: header.readUInt32BE(16), height: header.readUInt32BE(20) };
+}
+
+/**
+ * Fails unless the capture has the same dimensions as the committed baseline it
+ * is about to be compared with. A wrong-sized capture would otherwise diff
+ * clean and read as PASS — and so would a capture whose size agent-device did
+ * not report at all, which is why a missing value is a failure rather than a
+ * warning.
+ *
+ * The expected size comes from the baseline PNG itself rather than from
+ * env.json: that makes it per story by construction, so a story that was just
+ * added and `--update`d passes, and it cannot drift from the file the diff
+ * actually uses.
  *
  * Skipped entirely in `--update` mode: the whole point of that mode is to
- * record what the device produces now, and a new story has no pinned size to
- * check against. In diff mode there is no override — a size mismatch on a
- * device that matches env.json means something is wrong that no flag should
- * paper over, so `--force` does not reach this check.
+ * record what the device produces now, and a new story has no baseline to check
+ * against. In diff mode there is no override — a size mismatch on a device that
+ * matches env.json means something is wrong that no flag should paper over, so
+ * `--force` does not reach this check.
  */
-function checkCaptureSize(env, story, shotData, { update = false } = {}) {
+function checkCaptureSize(
+  env,
+  story,
+  shotData,
+  { update = false, baselineFile = null } = {}
+) {
   if (update) return;
 
-  const expected = env.baselines || {};
+  const expected = baselineFile ? readPngSize(baselineFile) : null;
   const problems = [];
 
-  if (expected.cropWidth == null || expected.cropHeight == null) {
+  if (!expected) {
     fail(
-      `${story}: ${ENV_FILE} pins no crop dimensions, so the capture cannot be ` +
-        'size-checked — pin baselines.cropWidth/cropHeight, or re-record with --update',
+      `${story}: could not read the dimensions of the baseline PNG ` +
+        `(${baselineFile ?? 'none given'}), so the capture cannot be ` +
+        'size-checked — re-record the baseline with --update',
       3
     );
   }
@@ -511,8 +575,8 @@ function checkCaptureSize(env, story, shotData, { update = false } = {}) {
     }
   };
 
-  compare('width', expected.cropWidth, shotData?.width);
-  compare('height', expected.cropHeight, shotData?.height);
+  compare('width', expected.width, shotData?.width);
+  compare('height', expected.height, shotData?.height);
   // pixelDensity is reported (and pinnable) on iOS only. Android screenshots
   // are native device pixels and env.json pins no density there, so the check
   // is skipped rather than warned about.
@@ -524,7 +588,8 @@ function checkCaptureSize(env, story, shotData, { update = false } = {}) {
 
   const detail = problems.map((p) => `  - ${p}`).join('\n');
   fail(
-    `${story}: capture dimensions do not match ${ENV_FILE}:\n${detail}\n` +
+    `${story}: capture dimensions do not match the baseline ` +
+      `${path.relative(VISUAL_DIR, baselineFile)}:\n${detail}\n` +
       'a wrong-sized capture cannot be compared with the baseline. Check ' +
       '--crop-on/--pixel-density and the device; if the new size is the intended ' +
       'one, re-record the baselines with --update. (--force does not override this.)',
@@ -585,6 +650,91 @@ function findDevMenuNode(nodes) {
   const marker = nodes.some((n) => DEV_MENU_MARKERS.includes(labelOf(n)));
   if (!marker) return null;
   return nodes.find((n) => DEV_MENU_LABELS.includes(labelOf(n))) || null;
+}
+
+/** The floating dev-client "Tools" button, or null when it is not on screen. */
+function findFloatingToolsNode(nodes) {
+  if (nodes.some((n) => DEV_MENU_MARKERS.includes(labelOf(n)))) return null;
+  return (
+    nodes.find(
+      (n) => labelOf(n) === FLOATING_TOOLS_LABEL && !/text/i.test(n.type || '')
+    ) || null
+  );
+}
+
+function describeNode(node) {
+  const rect = node.rect || {};
+  const round = (value) => Math.round(value ?? -1);
+  return (
+    `${node.type || 'node'} label="${labelOf(node)}" at ` +
+    `{x:${round(rect.x)}, y:${round(rect.y)}, ` +
+    `w:${round(rect.width)}, h:${round(rect.height)}}`
+  );
+}
+
+/**
+ * Turns the floating dev-client "Tools" button off through the dev menu, once,
+ * and returns the settled tree. A dev overlay inside the crop must never be
+ * reported as a visual regression, so anything that leaves it on screen — a
+ * platform with no way to open the dev menu, or a toggle that did not take —
+ * is a setup error naming the node and the manual fix.
+ *
+ * Android opens the dev menu with KEYCODE_MENU. agent-device 0.21.0 has no
+ * dev-menu/shake command (checked in `help commands`), so on iOS there is
+ * nothing to drive and the run stops instead.
+ */
+function disableFloatingTools(platform, globals, nodes) {
+  const tools = findFloatingToolsNode(nodes);
+  if (!tools) return nodes;
+
+  const giveUp = (why) =>
+    fail(
+      `the dev-client floating Tools button is inside the capture area ` +
+        `(${describeNode(tools)}) and ${why}. Turn it off on the device: ` +
+        'dev menu → Tools button.'
+    );
+
+  if (platform !== 'android') giveUp('cannot be toggled automatically on iOS');
+
+  const menu = sh(adbPath(), [
+    'shell',
+    'input',
+    'keyevent',
+    ANDROID_KEYCODE_MENU,
+  ]);
+  if (menu.status !== 0) {
+    fail(
+      `adb input keyevent ${ANDROID_KEYCODE_MENU} failed: ${menu.stderr.trim()}`
+    );
+  }
+
+  let current = waitForAppReady(globals);
+  for (const label of [TOOLS_TOGGLE_LABEL, DEV_MENU_CLOSE_LABEL]) {
+    if (!current.some((n) => labelOf(n) === label)) {
+      giveUp(`the dev menu has no "${label}" entry`);
+    }
+    console.log(`  dev menu: pressing "${label}"`);
+    // By selector, not by ref: the dev menu's "Close" is a container whose
+    // tappable area belongs entirely to an unlabelled child, so pressing its
+    // own ref is rejected (covered_by_interactive_descendants). The selector
+    // lets agent-device resolve down to that child.
+    ad(`press-${label.replace(/\s+/g, '-').toLowerCase()}`, [
+      'press',
+      `label="${label}"`,
+      '--settle',
+      ...globals,
+    ]);
+    current = waitForAppReady(globals);
+  }
+
+  if (findFloatingToolsNode(current))
+    giveUp('is still on screen after one toggle');
+
+  console.log(
+    '  dev-client floating Tools button was inside the capture area — ' +
+      'disabled it via the dev menu'
+  );
+  return current;
 }
 
 /**
@@ -814,7 +964,11 @@ function openOnSurfaceScreen(platform, globals, stories) {
     ad('open-after-force-stop', ['open', BUNDLE_ID, ...globals]);
   }
 
-  const nodes = dismissOverlays(globals);
+  const nodes = disableFloatingTools(
+    platform,
+    globals,
+    dismissOverlays(globals)
+  );
 
   if (onSurfaceScreen(globals, stories)) {
     console.log('  restored onto the Surface screen');
@@ -871,9 +1025,9 @@ function runPass(state) {
     if (platform === 'ios')
       shotArgs.push('--pixel-density', String(env.pixelDensity || 3));
     const shot = ad(`screenshot-${story}`, shotArgs);
-    checkCaptureSize(env, story, shot.data, { update: opts.update });
 
     if (opts.update) {
+      checkCaptureSize(env, story, shot.data, { update: true });
       const { baseline, created } = writeBaseline(
         platform,
         story,
@@ -893,6 +1047,7 @@ function runPass(state) {
     }
 
     const baseline = requireBaseline(platform, story);
+    checkCaptureSize(env, story, shot.data, { baselineFile: baseline });
 
     const diffOut = path.join(opts.outDir, `${story}-diff.png`);
     const diff = ad(`diff-${story}`, [
@@ -962,40 +1117,18 @@ function writeSummary(state, exitCode, error) {
   return file;
 }
 
-/** Summarises an argument error, which happens before there are real options. */
-function writeArgErrorSummary(argv, failure) {
-  const platform = argv[argv.lastIndexOf('--platform') + 1];
-  const state = {
-    opts: {
-      platform: platform === 'ios' || platform === 'android' ? platform : null,
-      threshold: null,
-      update: argv.includes('--update'),
-      force: argv.includes('--force'),
-      stories: null,
-      outDir: fallbackOutDir(argv),
-    },
-    env: null,
-    observedEnv: {},
-    results: [],
-    startedAt: Date.now(),
-  };
-  return writeSummary(state, failure.exitCode, {
-    message: failure.message,
-    exitCode: failure.exitCode,
-  });
-}
-
 function main() {
   const argv = process.argv.slice(2);
 
+  // An argument error happens before there are options to summarise (not even
+  // an output directory), so it just prints and exits; every later failure
+  // goes through writeSummary below.
   let opts;
   try {
     opts = parseArgs(argv);
   } catch (thrown) {
     if (!(thrown instanceof RunFailure)) throw thrown;
     console.error(`error: ${thrown.message}`);
-    const summaryFile = writeArgErrorSummary(argv, thrown);
-    console.log(`# summary: ${summaryFile} (exit ${thrown.exitCode})`);
     process.exit(thrown.exitCode);
   }
 
@@ -1069,5 +1202,6 @@ export {
   checkCaptureSize,
   enforceEnvironment,
   atListRoot,
+  findFloatingToolsNode,
   findSurfaceRow,
 };

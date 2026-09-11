@@ -1,0 +1,26 @@
+{
+  "command": [
+    "npx",
+    "agent-device@0.21.0",
+    "screenshot",
+    "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-elevated.png",
+    "--crop-on",
+    "id=\"surface-example-elevated\"",
+    "--platform",
+    "android",
+    "--session",
+    "android",
+    "--json"
+  ],
+  "cwd": "/private/tmp/claude-501/-Users-juliankobrynski-Projects-react-native-paper/fcf78f94-c11f-487d-99d7-651c4585650a/scratchpad",
+  "exitCode": 0,
+  "elapsedMs": 1802,
+  "response": {
+    "success": true,
+    "data": {
+      "path": "/Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/android/round3-pass-rerun/surface-example-elevated.png",
+      "width": 1280,
+      "height": 642
+    }
+  }
+}

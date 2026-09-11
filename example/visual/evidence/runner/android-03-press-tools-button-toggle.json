@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "data": {
+    "x": 640,
+    "y": 2480,
+    "message": "Tapped label=\"Tools button\" (640, 2480)",
+    "referenceWidth": 1280,
+    "referenceHeight": 2856,
+    "targetKind": "selector",
+    "selector": "label=\"Tools button\"",
+    "selectorChain": [
+      "role=\"view\""
+    ],
+    "refLabel": "Toggle Dev Menu",
+    "resolution": {
+      "source": "runtime",
+      "phase": "pre-action",
+      "kind": "unique"
+    }
+  }
+}

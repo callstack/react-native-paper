@@ -21,8 +21,17 @@ npx agent-device@0.21.0 find 'label="Surface"' --udid 2464A356-C17C-4B0D-99DB-CD
 Output (note `"Tapped …"`):
 
 ```json
-{ "success": true, "data": { "ref": "@e13", "locator": "any", "query": "label=\"Surface\"",
-  "x": 201, "y": 501, "message": "Tapped @e13 (201, 501)" } }
+{
+  "success": true,
+  "data": {
+    "ref": "@e13",
+    "locator": "any",
+    "query": "label=\"Surface\"",
+    "x": 201,
+    "y": 501,
+    "message": "Tapped @e13 (201, 501)"
+  }
+}
 ```
 
 Artifact: `19-find-surface.json` (also `16-find.json`, `17-find.json`).
@@ -49,9 +58,14 @@ npx agent-device@0.21.0 scroll bottom --udid 2464A356-C17C-4B0D-99DB-CDFBDB98826
 Output:
 
 ```json
-{ "success": false, "error": { "code": "COMMAND_FAILED",
-  "message": "scroll bottom reached the safety limit before the snapshot showed the edge",
-  "hint": "The scoped scroll container still reports hidden content. Use a smaller manual scroll + snapshot loop to inspect the current state." } }
+{
+  "success": false,
+  "error": {
+    "code": "COMMAND_FAILED",
+    "message": "scroll bottom reached the safety limit before the snapshot showed the edge",
+    "hint": "The scoped scroll container still reports hidden content. Use a smaller manual scroll + snapshot loop to inspect the current state."
+  }
+}
 ```
 
 Artifact: `16-scroll.json`. Recovery: `press 'label="Close"'` (artifact `18-press-close.json`).
@@ -92,14 +106,27 @@ threshold:
 
 ```
 npx agent-device@0.21.0 diff screenshot \
-  --baseline example/visual/__baselines__/ios/surface-elevated.png \
-  example/visual/artifacts/realistic-elevated@3x.png \
-  --out example/visual/artifacts/diff-realistic-t0.1.png --threshold 0.1 --json
+  --baseline example/visual/__baselines__/ios/surface-example-elevated.png \
+  <capture of the broken build> --out <diff.png> --threshold 0.1 --json
 ```
 
+Committed evidence: `evidence/ios/66-diff-t0.1.json` (0 changed pixels, `match: true`) and
+`evidence/ios/66-diff-t0.02.json` (10,179 changed pixels) are the two diffs of the same
+capture; the three repeats are `evidence/sensitivity/ios/realistic-{1,2,3}-diff-t0.1.json`
+and `-t0.02.json`; the diff image at 0.02 is `evidence/diff-images/ios-realistic-t0.02.png`.
+There is no 0.1 image because `diff screenshot --out` writes nothing on a match (issue 18).
+The raw capture PNG was not committed.
+
 ```json
-{ "success": true, "data": { "totalPixels": 774252, "differentPixels": 0,
-  "mismatchPercentage": 0, "match": true } }
+{
+  "success": true,
+  "data": {
+    "totalPixels": 774252,
+    "differentPixels": 0,
+    "mismatchPercentage": 0,
+    "match": true
+  }
+}
 ```
 
 The same pair at `--threshold 0.02` reports 10179 different pixels (1.31%) in a
@@ -228,33 +255,41 @@ not. The example app persists its navigation state in AsyncStorage
 `open --relaunch` (iOS) or `am force-stop` + `open` (Android) the app comes back
 on whatever screen it was on. Reproduced on both platforms in this pass:
 
-- iOS, from the Button example: `evidence/runs/ios/pass-2-from-other-screen.log`
-  and `pass-2b-from-other-screen-no-devmenu.log` — the six `snapshot-list`
-  captures all show the *Button* screen (88 nodes, `Back` / `Button` /
-  `Text button (text)`), the scrolls are no-ops on that screen, and the run dies
-  with `could not find the "Surface" row after 6 scrolls`.
-- Android, from the Switch example:
-  `evidence/runs/android/pass-2-from-other-screen.log`.
+The runs that first showed the failure were hand-run against an earlier version
+of `run.mjs` and their logs were not kept. The committed evidence is the fixed
+script's own output when started from another example screen —
+`evidence/runs/ios/fix-pass-from-other-screen/summary.json` and
+`evidence/runs/android/fix-pass-from-other-screen/summary.json` — whose step log
+reads `relaunching the app … not on the Surface screen — going back to the example
+list … pressing "Back" … at the example list root`. If a relaunch reset the route,
+the "not on the Surface screen" branch could never be reached from a relaunch;
+it is, on both platforms.
 
 This is a `run.mjs` bug, not an agent-device bug: navigation has to be driven
 back to the list explicitly (press `Back` until no `Back` control is left, then
 scroll for the row), not implied by a relaunch. Related trap: because
 `navigateToSurface()` matches on `label === 'Surface'` and picks the largest
-match, on the restored *Surface* screen it presses the nav header title instead
-of a list row — visible in `evidence/runs/ios/guard.log`, which reports
-`pressing "Surface" row (@e3)` where `@e3` is the header
-`RCTParagraphComponentView "Surface"`.
+match, on the restored _Surface_ screen it pressed the nav header title
+(`RCTParagraphComponentView "Surface"`) instead of a list row. That log was not
+kept either; the trap is encoded as the test
+`findSurfaceRow picks the list row, not the Appbar title` in
+`example/visual/run.test.mjs`, and the fixed heuristic is visible in the same two
+`summary.json` files above: `pressing the "Surface" row (@e17, Other, y=618, w=402)`
+on iOS, `(@e72, android.view.ViewGroup, y=2747, w=1280)` on Android.
 
 ## 15. The dev-menu check runs before the app finishes loading
 
 `dismissDevMenu()` snapshots once, immediately after the relaunch. On iOS that
 snapshot came back with three nodes — `UIApplication`, `SplashScreenLogo`,
 `Downloading 100%…` — so it found none of the `Close` / `Continue` labels and
-returned "clean" (`evidence/runs/ios/pass-2-from-other-screen/cmds/004-snapshot-devmenu.json`).
-The Expo dev menu then appeared *after* the bundle finished downloading and was
-still on screen for the whole navigation loop (`007-snapshot-list.json` has
-`SwiftUI.AccessibilityNode "Close" id="xmark"` plus
-`Runtime version: exposdk:56.0.0`), swallowing every scroll. The check has to
+returned "clean". Reproduced for the record on 2026-09-11 in `evidence/runner/`:
+`ios-01-open-relaunch.json` (the relaunch), `ios-02-snapshot-immediately-after-relaunch.json`
+(3 nodes: `React Native Paper Example`, the splash image, `Downloading 100%…`),
+then `ios-03-snapshot-6s-later.json` (77 nodes, including the dev menu's
+`Close` with `identifier: "xmark"` and `Reload`) and `ios-04-press-close.json`
+dismissing it. The dev menu appears _after_ the bundle finishes downloading; a
+check that snapshots once at open time cannot see it, and it then swallows every
+subsequent scroll. The check has to
 wait for the app to be ready first, and be repeated inside the navigation loop
 rather than run once.
 
@@ -283,7 +318,7 @@ pixels and report PASS.
 ## 17. Minor: an agent-device command occasionally exits non-zero with no output
 
 Twice in this pass (`press '@e2'`, `press 'label="Close"'`, both on iOS) the CLI
-exited 1 with completely empty stdout *and* stderr. Re-running the identical
+exited 1 with completely empty stdout _and_ stderr. Re-running the identical
 command immediately afterwards succeeded. Nothing to act on beyond noting that a
 caller cannot distinguish this from a crash, and that `run.mjs`'s "parse the
 first `{`..`}` out of stdout" fallback turns it into a `null` response rather
@@ -299,3 +334,37 @@ per-threshold sweep produces a gappy set of files: this pass has
 diffs but no `-t0.1.png` counterparts, because at 0.1 the realistic break
 matches. The `-diff-t0.1.json` files under `evidence/sensitivity/<platform>/`
 are the record for those.
+
+## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
+
+Found 2026-09-11 while re-running the Android loop with `src/` clean after the
+round-2 changes. `run.mjs` reported a deterministic **FAIL** —
+`surface-example-elevated changed=2822 (0.34%) regions=1` — twice in a row
+(`evidence/runs/android/round3-pass/summary.json`, `…/round3-pass-rerun/summary.json`),
+against a baseline whose file is byte-identical to the one committed
+(`md5 8693c919…` in both the working tree and `HEAD`). The diff image
+(`evidence/runs/android/round3-pass/surface-example-elevated-diff.png`) shows the
+change: a 152x74 pill at the top-right of the crop reading **Tools** — the Expo
+dev-client's floating dev-tools button, `android.widget.ImageView` label `Tools`,
+rect `{x:1115, y:243, w:78, h:78}` in `evidence/runner/android-01-snapshot-tools-overlay.json`.
+
+It is a dev-client setting, toggled by the dev menu entry **"Tools button"**
+(`evidence/runner/android-02-snapshot-devmenu.json` lists `Close`, `Reload`,
+`TOOLS`, `Tools button`, `Toggle Dev Menu`, …). Pressing it
+(`android-03-press-tools-button-toggle.json`) and then `Close`
+(`android-04-press-close.json`) removed the node (`android-05-snapshot-after-toggle.json`,
+60 nodes, no `Tools`), and the next run passed with `changed=0` on both stories
+(`evidence/runs/android/round3-pass-after-tools-off/summary.json`). The setting
+survives a relaunch. It had been off in every earlier run today
+(`round2-pass`, 08:53 UTC, 0 px) and was on by 10:14 UTC; which earlier dev-menu
+interaction flipped it is not known.
+
+Two lessons. For agent-device: a screenshot of a dev build can contain dev-client
+chrome that is not part of the app, and `diff screenshot` cannot tell — worth a
+note in the docs, or a `screenshot` option that hides dev-client overlays. For
+`run.mjs`: a dev overlay inside the crop must never be reported as a visual
+regression; the script now looks for the floating node after dismissing the dev
+menu and launcher, turns it off through the dev menu when it can, and otherwise
+stops with exit 2 and a message naming the node and the manual fix. This is also
+the strongest argument so far for capturing from a release build rather than a
+dev-client once this moves past a PoC.

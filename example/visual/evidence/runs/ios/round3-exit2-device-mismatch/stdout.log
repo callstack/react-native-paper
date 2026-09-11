@@ -1,0 +1,6 @@
+# ios — threshold 0.02
+# output: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round3-exit2-device-mismatch
+error: device does not match /Users/juliankobrynski/Projects/react-native-paper/example/visual/env.json:
+  - udid: expected 00000000-0000-4000-8000-000000000000, observed not present in xcrun simctl list (no such simulator)
+refusing to run: baselines are only comparable on the device they were captured on. Boot/point at the right device, or pass --force to continue anyway.
+# summary: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round3-exit2-device-mismatch/summary.json (exit 2)

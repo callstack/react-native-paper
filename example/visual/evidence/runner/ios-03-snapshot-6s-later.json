@@ -1,0 +1,1344 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "Application",
+        "role": "UIApplication",
+        "label": "React Native Paper Example",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 0,
+        "pid": 58894,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "parentIndex": 0,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "label": "Back",
+        "rect": {
+          "x": 10,
+          "y": 74,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "parentIndex": 0,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Surface",
+        "rect": {
+          "x": 164,
+          "y": 80,
+          "width": 74,
+          "height": 28
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "parentIndex": 2,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Surface",
+        "rect": {
+          "x": 164,
+          "y": 80,
+          "width": 74,
+          "height": 28
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "parentIndex": 0,
+        "type": "ScrollView",
+        "role": "RCTEnhancedScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 0,
+          "y": 126,
+          "width": 402,
+          "height": 748
+        },
+        "depth": 1,
+        "pid": 58894,
+        "hiddenContentBelow": true,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "parentIndex": 4,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevated surface",
+        "rect": {
+          "x": 0,
+          "y": 134,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "parentIndex": 5,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevated surface",
+        "rect": {
+          "x": 0,
+          "y": 134,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "parentIndex": 4,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "identifier": "surface-example-elevated",
+        "rect": {
+          "x": 0,
+          "y": 134,
+          "width": 402,
+          "height": 214
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "parentIndex": 4,
+        "type": "ScrollView",
+        "role": "RCTEnhancedScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 0,
+          "y": 180,
+          "width": 402,
+          "height": 168
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "parentIndex": 8,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 0",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 256,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "parentIndex": 9,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 0",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 256,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "parentIndex": 8,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 1",
+        "rect": {
+          "x": 187.6666660308838,
+          "y": 256,
+          "width": 64.66665649414062,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "parentIndex": 11,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 1",
+        "rect": {
+          "x": 187.6666660308838,
+          "y": 256,
+          "width": 64.66665649414062,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "parentIndex": 8,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 2",
+        "rect": {
+          "x": 330.6666660308838,
+          "y": 256,
+          "width": 66.33334350585938,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e14"
+      },
+      {
+        "index": 14,
+        "parentIndex": 13,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 2",
+        "rect": {
+          "x": 330.6666660308838,
+          "y": 256,
+          "width": 66.33334350585938,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e15"
+      },
+      {
+        "index": 15,
+        "parentIndex": 8,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 369,
+          "y": 180,
+          "width": 30,
+          "height": 168
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e16"
+      },
+      {
+        "index": 16,
+        "parentIndex": 8,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 369,
+          "y": 180,
+          "width": 30,
+          "height": 168
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e17"
+      },
+      {
+        "index": 17,
+        "parentIndex": 4,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Flat surface",
+        "rect": {
+          "x": 0,
+          "y": 364,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e18"
+      },
+      {
+        "index": 18,
+        "parentIndex": 17,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Flat surface",
+        "rect": {
+          "x": 0,
+          "y": 364,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e19"
+      },
+      {
+        "index": 19,
+        "parentIndex": 4,
+        "type": "Other",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "identifier": "surface-example-flat",
+        "rect": {
+          "x": 0,
+          "y": 364,
+          "width": 402,
+          "height": 214
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e20"
+      },
+      {
+        "index": 20,
+        "parentIndex": 4,
+        "type": "ScrollView",
+        "role": "RCTEnhancedScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 0,
+          "y": 410,
+          "width": 402,
+          "height": 168
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e21"
+      },
+      {
+        "index": 21,
+        "parentIndex": 20,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 0",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 486,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e22"
+      },
+      {
+        "index": 22,
+        "parentIndex": 21,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 0",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 486,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e23"
+      },
+      {
+        "index": 23,
+        "parentIndex": 20,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 1",
+        "rect": {
+          "x": 187.6666660308838,
+          "y": 486,
+          "width": 64.66665649414062,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e24"
+      },
+      {
+        "index": 24,
+        "parentIndex": 23,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 1",
+        "rect": {
+          "x": 187.6666660308838,
+          "y": 486,
+          "width": 64.66665649414062,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e25"
+      },
+      {
+        "index": 25,
+        "parentIndex": 20,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 2",
+        "rect": {
+          "x": 330.6666660308838,
+          "y": 486,
+          "width": 66.33334350585938,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e26"
+      },
+      {
+        "index": 26,
+        "parentIndex": 25,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 2",
+        "rect": {
+          "x": 330.6666660308838,
+          "y": 486,
+          "width": 66.33334350585938,
+          "height": 16
+        },
+        "depth": 4,
+        "pid": 58894,
+        "ref": "e27"
+      },
+      {
+        "index": 27,
+        "parentIndex": 20,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 369,
+          "y": 410,
+          "width": 30,
+          "height": 168
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e28"
+      },
+      {
+        "index": 28,
+        "parentIndex": 20,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 369,
+          "y": 410,
+          "width": 30,
+          "height": 168
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e29"
+      },
+      {
+        "index": 29,
+        "parentIndex": 4,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Animated elevation",
+        "rect": {
+          "x": 0,
+          "y": 594,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e30"
+      },
+      {
+        "index": 30,
+        "parentIndex": 29,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Animated elevation",
+        "rect": {
+          "x": 0,
+          "y": 594,
+          "width": 402,
+          "height": 46
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e31"
+      },
+      {
+        "index": 31,
+        "parentIndex": 4,
+        "type": "StaticText",
+        "role": "RCTParagraphComponentView",
+        "subrole": "UIView",
+        "label": "Elevation 3",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 716,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e32"
+      },
+      {
+        "index": 32,
+        "parentIndex": 31,
+        "type": "StaticText",
+        "role": "RCTAccessibilityElement",
+        "subrole": "UIAccessibilityElement",
+        "label": "Elevation 3",
+        "rect": {
+          "x": 42.66666603088379,
+          "y": 716,
+          "width": 66.66667175292969,
+          "height": 16
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e33"
+      },
+      {
+        "index": 33,
+        "parentIndex": 4,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 22,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e34"
+      },
+      {
+        "index": 34,
+        "parentIndex": 4,
+        "type": "Button",
+        "role": "RCTViewComponentView",
+        "subrole": "UIView",
+        "rect": {
+          "x": 90,
+          "y": 814,
+          "width": 40,
+          "height": 40
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e35"
+      },
+      {
+        "index": 35,
+        "parentIndex": 4,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": 62,
+          "y": 841,
+          "width": 278,
+          "height": 30
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e36"
+      },
+      {
+        "index": 36,
+        "parentIndex": 4,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Horizontal scroll bar, 1 page",
+        "value": "0%",
+        "rect": {
+          "x": 62,
+          "y": 841,
+          "width": 278,
+          "height": 30
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e37"
+      },
+      {
+        "index": 37,
+        "parentIndex": 0,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "rect": {
+          "x": 71.37313432835822,
+          "y": 401.26368159203975,
+          "width": 218.60530679933663,
+          "height": 19.52404643449421
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e38",
+        "inheritsLabel": true
+      },
+      {
+        "index": 38,
+        "parentIndex": 0,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Runtime version: exposdk:56.0.0",
+        "rect": {
+          "x": 71.37313432835822,
+          "y": 422.7081260364842,
+          "width": 176.99668325041458,
+          "height": 13.762852404643468
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e39"
+      },
+      {
+        "index": 39,
+        "parentIndex": 0,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Close",
+        "identifier": "xmark",
+        "rect": {
+          "x": 344.06965174129357,
+          "y": 401.5837479270315,
+          "width": 34.56716417910445,
+          "height": 34.56716417910445
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e40"
+      },
+      {
+        "index": 40,
+        "parentIndex": 0,
+        "type": "ScrollView",
+        "role": "SwiftUI.HostingScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 8,
+          "y": 452.47429519071306,
+          "width": 386,
+          "height": 413.5257048092868
+        },
+        "depth": 1,
+        "pid": 58894,
+        "hiddenContentBelow": true,
+        "ref": "e41"
+      },
+      {
+        "index": 41,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Reload",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 467.83747927031504,
+          "width": 173.79601990049753,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e42"
+      },
+      {
+        "index": 42,
+        "parentIndex": 41,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Refresh",
+        "identifier": "arrow.clockwise",
+        "rect": {
+          "x": 43.207296849087896,
+          "y": 486.0812603648424,
+          "width": 14.082919044874195,
+          "height": 17.283582089552226
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e43"
+      },
+      {
+        "index": 43,
+        "parentIndex": 41,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Reload",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 484.96102819237143,
+          "width": 50.25041459369817,
+          "height": 19.52404643449421
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e44"
+      },
+      {
+        "index": 44,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Go home",
+        "rect": {
+          "x": 204.84079601990052,
+          "y": 467.83747927031504,
+          "width": 173.7960199004975,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e45"
+      },
+      {
+        "index": 45,
+        "parentIndex": 44,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Home",
+        "identifier": "house.fill",
+        "rect": {
+          "x": 222.12437810945275,
+          "y": 486.0812603648424,
+          "width": 19.203980099502502,
+          "height": 16.96351697551671
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e46"
+      },
+      {
+        "index": 46,
+        "parentIndex": 44,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Go home",
+        "rect": {
+          "x": 250.9303482587065,
+          "y": 484.96102819237143,
+          "width": 66.5737976782753,
+          "height": 19.52404643449421
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e47"
+      },
+      {
+        "index": 47,
+        "parentIndex": 40,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "TOOLS",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 552.334991708126,
+          "width": 38.72802653399668,
+          "height": 13.762852404643468
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e48"
+      },
+      {
+        "index": 48,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Source code explorer",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 573.7794361525705,
+          "width": 355.27363184079604,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e49"
+      },
+      {
+        "index": 49,
+        "parentIndex": 48,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Show Map",
+        "identifier": "map",
+        "rect": {
+          "x": 41.92703150912106,
+          "y": 592.6633499170812,
+          "width": 16.643450030046914,
+          "height": 16.003317970541616
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e50"
+      },
+      {
+        "index": 50,
+        "parentIndex": 48,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Source code explorer",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 590.9029850746268,
+          "width": 155.87230514096186,
+          "height": 19.524046434494153
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e51"
+      },
+      {
+        "index": 51,
+        "parentIndex": 48,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Forward",
+        "identifier": "chevron.right",
+        "rect": {
+          "x": 356.8723051409619,
+          "y": 595.5439469320065,
+          "width": 5.761194029850742,
+          "height": 9.922056995221055
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e52"
+      },
+      {
+        "index": 52,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Toggle performance monitor",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 627.8706467661691,
+          "width": 355.27363184079604,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e53"
+      },
+      {
+        "index": 53,
+        "parentIndex": 52,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Speed",
+        "identifier": "speedometer",
+        "rect": {
+          "x": 42.247097844112766,
+          "y": 646.7545605306799,
+          "width": 16.32338308457711,
+          "height": 16.32338308457713
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e54"
+      },
+      {
+        "index": 54,
+        "parentIndex": 52,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 644.9941956882255,
+          "width": 208.04311774461024,
+          "height": 19.524046434494153
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e55",
+        "inheritsLabel": true
+      },
+      {
+        "index": 55,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Toggle element inspector",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 681.9618573797678,
+          "width": 355.27363184079604,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e56"
+      },
+      {
+        "index": 56,
+        "parentIndex": 55,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Scan",
+        "identifier": "viewfinder",
+        "rect": {
+          "x": 42.56716417910448,
+          "y": 701.1658374792703,
+          "width": 15.683251025071783,
+          "height": 15.68325102507174
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e57"
+      },
+      {
+        "index": 57,
+        "parentIndex": 55,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 699.0854063018242,
+          "width": 185.318407960199,
+          "height": 19.524046434494267
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e58",
+        "inheritsLabel": true
+      },
+      {
+        "index": 58,
+        "parentIndex": 40,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Open DevTools",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 736.0530679933665,
+          "width": 355.27363184079604,
+          "height": 53.771144278606926
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e59"
+      },
+      {
+        "index": 59,
+        "parentIndex": 58,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "chevron.left.chevron.right",
+        "identifier": "chevron.left.chevron.right",
+        "rect": {
+          "x": 40.64676616915423,
+          "y": 755.8971807628524,
+          "width": 19.203980099502488,
+          "height": 14.082919044874302
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e60"
+      },
+      {
+        "index": 60,
+        "parentIndex": 58,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Open DevTools",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 753.1766169154228,
+          "width": 110.42288557213931,
+          "height": 19.524046434494267
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e61"
+      },
+      {
+        "index": 61,
+        "parentIndex": 40,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Running",
+        "identifier": "figure.run",
+        "rect": {
+          "x": 43.207296849087896,
+          "y": 810.3084577114428,
+          "width": 13.762853015121536,
+          "height": 17.603649035022045
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e62"
+      },
+      {
+        "index": 62,
+        "parentIndex": 40,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Fast refresh",
+        "rect": {
+          "x": 69.45273631840797,
+          "y": 809.1882255389717,
+          "width": 86.7379767827529,
+          "height": 19.524046434494267
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e63"
+      },
+      {
+        "index": 63,
+        "parentIndex": 40,
+        "type": "Switch",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "value": "1",
+        "rect": {
+          "x": 163.87229919433594,
+          "y": 805.5074462890625,
+          "width": 199.4013214111328,
+          "height": 26.88555908203125
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e64"
+      },
+      {
+        "index": 64,
+        "parentIndex": 63,
+        "type": "Switch",
+        "role": "UISwitch",
+        "value": "1",
+        "rect": {
+          "x": 304.7014925373134,
+          "y": 805.5074626865671,
+          "width": 60.49253731343282,
+          "height": 26.885572139303463
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e65"
+      },
+      {
+        "index": 65,
+        "parentIndex": 40,
+        "type": "Switch",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "value": "1",
+        "rect": {
+          "x": 168.03317260742188,
+          "y": 863.439453125,
+          "width": 195.24044799804688,
+          "height": 2.5605468749998863
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e66"
+      },
+      {
+        "index": 66,
+        "parentIndex": 65,
+        "type": "Switch",
+        "role": "UISwitch",
+        "value": "1",
+        "rect": {
+          "x": 304.7014925373134,
+          "y": 863.4394693200663,
+          "width": 60.49253731343282,
+          "height": 2.5605306799335494
+        },
+        "depth": 3,
+        "pid": 58894,
+        "ref": "e67"
+      },
+      {
+        "index": 67,
+        "parentIndex": 40,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 362.3134328358209,
+          "y": 452.47429519071306,
+          "width": 28.80597014925371,
+          "height": 359.0419539873368
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e68"
+      },
+      {
+        "index": 68,
+        "parentIndex": 40,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 3 pages",
+        "value": "0%",
+        "rect": {
+          "x": 362.3134328358209,
+          "y": 452.47429519071306,
+          "width": 28.80597014925371,
+          "height": 359.0419539873368
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e69"
+      },
+      {
+        "index": 69,
+        "parentIndex": 0,
+        "type": "ScrollView",
+        "role": "SwiftUI.HostingScrollView",
+        "subrole": "UIScrollView",
+        "rect": {
+          "x": 8,
+          "y": 452.47429519071306,
+          "width": 386,
+          "height": 413.5257048092868
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e70"
+      },
+      {
+        "index": 70,
+        "parentIndex": 69,
+        "type": "Image",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "dev-tools",
+        "rect": {
+          "x": 166.1127694859038,
+          "y": 487.0414593698175,
+          "width": 69.77446102819238,
+          "height": 76.81592039801001
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e71"
+      },
+      {
+        "index": 71,
+        "parentIndex": 69,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "This is the developer menu. It gives you access to useful tools in development builds.",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 598.424543946932,
+          "width": 349.19237147595356,
+          "height": 38.72802653399674
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e72"
+      },
+      {
+        "index": 72,
+        "parentIndex": 69,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "You can open it at any time by pressing the blue button with the gear icon, or with the ⌃ + d keyboard shortcut.",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 648.6749585406301,
+          "width": 336.38971807628525,
+          "height": 58.89220563847425
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e73"
+      },
+      {
+        "index": 73,
+        "parentIndex": 69,
+        "type": "StaticText",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "(Connect Hardware Keyboard must be enabled on your simulator to use this shortcut, you can toggle it with ⌘ + shift + K.)",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 711.407960199005,
+          "width": 330.9485903814262,
+          "height": 49.61028192371475
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e74"
+      },
+      {
+        "index": 74,
+        "parentIndex": 69,
+        "type": "Button",
+        "role": "SwiftUI.AccessibilityNode",
+        "subrole": "UIResponder",
+        "label": "Continue",
+        "rect": {
+          "x": 23.363184079601993,
+          "y": 776.3814262023217,
+          "width": 355.27363184079604,
+          "height": 44.169154228855746
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e75"
+      },
+      {
+        "index": 75,
+        "parentIndex": 69,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 2 pages",
+        "value": "0%",
+        "rect": {
+          "x": 362.3134328358209,
+          "y": 452.47429519071306,
+          "width": 28.80597014925371,
+          "height": 359.0419539873368
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e76"
+      },
+      {
+        "index": 76,
+        "parentIndex": 69,
+        "type": "Other",
+        "role": "_UIScrollViewScrollIndicator",
+        "label": "Vertical scroll bar, 2 pages",
+        "value": "0%",
+        "rect": {
+          "x": 362.3134328358209,
+          "y": 452.47429519071306,
+          "width": 28.80597014925371,
+          "height": 359.0419539873368
+        },
+        "depth": 2,
+        "pid": 58894,
+        "ref": "e77"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.callstack.reactnativepaperexample",
+    "appBundleId": "com.callstack.reactnativepaperexample",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 77,
+      "totalNodeCount": 77,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "warnings": [
+      "iOS snapshot acquisition does not provide hittability evidence; regular snapshots omit unverified hittability while raw snapshots preserve supplied facts."
+    ],
+    "snapshotDiagnostics": {
+      "stats": {
+        "count": 1046,
+        "p50Ms": 97,
+        "p95Ms": 131,
+        "maxMs": 677,
+        "slowThresholdMs": 1500,
+        "platform": "ios",
+        "backends": {
+          "xctest": 1046
+        }
+      }
+    },
+    "refsGeneration": 835863
+  }
+}

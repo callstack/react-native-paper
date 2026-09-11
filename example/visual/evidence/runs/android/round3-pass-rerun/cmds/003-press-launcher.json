@@ -1,0 +1,277 @@
+{
+  "command": [
+    "npx",
+    "agent-device@0.21.0",
+    "press",
+    "@e53",
+    "--settle",
+    "--platform",
+    "android",
+    "--session",
+    "android",
+    "--json"
+  ],
+  "cwd": "/private/tmp/claude-501/-Users-juliankobrynski-Projects-react-native-paper/fcf78f94-c11f-487d-99d7-651c4585650a/scratchpad",
+  "exitCode": 0,
+  "elapsedMs": 1475,
+  "response": {
+    "success": true,
+    "data": {
+      "x": 640,
+      "y": 2061,
+      "message": "Tapped @e53 (640, 2061)",
+      "referenceWidth": 1280,
+      "referenceHeight": 2856,
+      "targetKind": "ref",
+      "ref": "e53",
+      "refLabel": "Chevron",
+      "selectorChain": [
+        "role=\"view\""
+      ],
+      "settle": {
+        "settled": true,
+        "waitedMs": 982,
+        "captures": 4,
+        "quietMs": 500,
+        "timeoutMs": 10000,
+        "diff": {
+          "summary": {
+            "additions": 1,
+            "removals": 54,
+            "unchanged": 1
+          },
+          "lines": [
+            {
+              "kind": "removed",
+              "text": "@e11 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e12 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e13 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e14 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e15 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e16 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e17 [composeview]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e18 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e19 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e20 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e21 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e22 [image] \"App Icon\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e23 [text] \"React Native Paper Example\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e24 [text] \"Development Build\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e25 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e27 [group] \"User\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e28 [button]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e29 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e30 [scroll-area]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e31 [text] \"DEVELOPMENT SERVERS\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e32 [text] \"INFO\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e33 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e34 [text] \"Start a local development server with:\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e35 [text] \"npx expo start\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e36 [text] \"Then, select the local server when it appears here.\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e37 [text-field]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e38 [text] \"exp://\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e39 [group] [disabled]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e40 [text] \"Connect\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e41 [button]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e42 [text] \"Or\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e43 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e44 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e45 [text] \"Fetch development servers\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e46 [group] \"Download\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e47 [button]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e48 [text] \"RECENTLY OPENED\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e49 [text] \"RESET\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e50 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e51 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e52 [text] \"React Native Paper Example\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e53 [text] \"http://192.168.1.151:8081\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e54 [group] \"Chevron\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e55 [button]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e56 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e57 [group] [disabled]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e58 [group] \"Home\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e59 [text] \"Home\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e60 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e61 [group] \"Updates\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e62 [text] \"Updates\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e63 [group]"
+            },
+            {
+              "kind": "removed",
+              "text": "@e64 [group] \"Settings\""
+            },
+            {
+              "kind": "removed",
+              "text": "@e65 [text] \"Settings\""
+            },
+            {
+              "kind": "added",
+              "text": "@e2 [text] \"Connecting to the development server...\"",
+              "ref": "e2"
+            }
+          ]
+        },
+        "hint": "Settled on a nearly-empty tree — the app may still be loading. Wait for specific content (wait text ...) before interacting.",
+        "refsGeneration": 835750
+      },
+      "resolution": {
+        "source": "ref",
+        "phase": "pre-action",
+        "kind": "exact"
+      }
+    }
+  }
+}

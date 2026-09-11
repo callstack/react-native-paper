@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": {
+    "session": "default",
+    "sessionStateDir": "/Users/juliankobrynski/.agent-device/sessions/cwd_4a6658db6e09aaf6_default",
+    "runnerLogPath": "/Users/juliankobrynski/.agent-device/sessions/cwd_4a6658db6e09aaf6_default/runner.log",
+    "requestLogPath": "/Users/juliankobrynski/.agent-device/sessions/cwd_4a6658db6e09aaf6_default/requests/fe0f9676bf21a0bd.ndjson",
+    "eventLogPath": "/Users/juliankobrynski/.agent-device/sessions/cwd_4a6658db6e09aaf6_default/events.ndjson",
+    "appName": "com.callstack.reactnativepaperexample",
+    "appBundleId": "com.callstack.reactnativepaperexample",
+    "selection": {
+      "reason": "existing-session",
+      "source": "session",
+      "candidateCount": 1,
+      "bootOccurred": false
+    },
+    "startup": {
+      "durationMs": 1437,
+      "measuredAt": "2026-09-11T10:10:23.882Z",
+      "method": "open-command-roundtrip",
+      "appTarget": "com.callstack.reactnativepaperexample",
+      "appBundleId": "com.callstack.reactnativepaperexample"
+    },
+    "platform": "ios",
+    "target": "mobile",
+    "device": "iPhone 17 Pro",
+    "id": "2464A356-C17C-4B0D-99DB-CDFBDB98826C",
+    "device_udid": "2464A356-C17C-4B0D-99DB-CDFBDB98826C",
+    "ios_simulator_device_set": null,
+    "message": "Opened: com.callstack.reactnativepaperexample"
+  }
+}

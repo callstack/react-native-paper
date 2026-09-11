@@ -1,0 +1,80 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "Application",
+        "role": "UIApplication",
+        "label": "React Native Paper Example",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 402,
+          "height": 874
+        },
+        "depth": 0,
+        "pid": 58894,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "parentIndex": 0,
+        "type": "Image",
+        "role": "UIImageView",
+        "identifier": "SplashScreenLogo",
+        "rect": {
+          "x": 151,
+          "y": 387,
+          "width": 100,
+          "height": 100
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "parentIndex": 0,
+        "type": "StaticText",
+        "role": "UILabel",
+        "label": "Downloading 100%…",
+        "rect": {
+          "x": 10,
+          "y": 70,
+          "width": 382,
+          "height": 14.333333333333329
+        },
+        "depth": 1,
+        "pid": 58894,
+        "ref": "e3"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.callstack.reactnativepaperexample",
+    "appBundleId": "com.callstack.reactnativepaperexample",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 3,
+      "totalNodeCount": 3,
+      "reasons": []
+    },
+    "warnings": [
+      "iOS snapshot acquisition does not provide hittability evidence; regular snapshots omit unverified hittability while raw snapshots preserve supplied facts."
+    ],
+    "snapshotDiagnostics": {
+      "stats": {
+        "count": 1045,
+        "p50Ms": 97,
+        "p95Ms": 131,
+        "maxMs": 677,
+        "slowThresholdMs": 1500,
+        "platform": "ios",
+        "backends": {
+          "xctest": 1045
+        }
+      }
+    },
+    "refsGeneration": 835862
+  }
+}
