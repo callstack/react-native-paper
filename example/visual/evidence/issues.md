@@ -226,7 +226,7 @@ the plan's "one Node file on `createAgentDeviceClient()`" is supported in
 principle. In practice the package only exists in the `npx` cache
 (`~/.npm/_npx/<hash>/node_modules/agent-device`); `import('agent-device')` from
 `example/` fails with `ERR_MODULE_NOT_FOUND`. Reaching the typed API therefore
-means adding a devDependency, which the PoC forbade, so `example/visual/run.mjs`
+means adding a devDependency, which the PoC forbade, so the runner (on branch `poc/agent-device-visual-runner`)
 spawns the CLI with `--json` instead. Worth a documented "run the client without
 installing" story (or a `npx agent-device init`-style scaffold), since the CLI
 path costs an `npx` resolution per command and loses all the result types.
@@ -237,57 +237,52 @@ A plain `snapshot` only reports nodes that changed since the previous snapshot i
 the same session. When nothing changed it returns `data.nodes: []` with
 `success: true`, which is indistinguishable from "the screen is empty" or "the
 node is gone" for any caller that greps the result for an identifier. This cost
-real time in the review round: the a11y JSONs
-(`evidence/a11y/03-testid-only-ios-snapshot.json`,
-`03-testid-only-and-snapshot.json`) look like the `testID` never reached the
-tree, when in fact the ids were there the whole time — `--force-full` returns
-them. Anything that asks "is this node on screen?" must pass `--force-full`, and
-`run.mjs` does so in `onSurfaceScreen()` (via `--raw`) for exactly this reason.
+real time in the review round: a plain snapshot after the `testID` edit looked
+as if the id had never reached the tree, when it had been there the whole time —
+`--force-full` returned it (the resulting trees are excerpted in
+`evidence/a11y-excerpt.json`; full files on branch `poc/agent-device-visual-runner`). Anything that asks "is this node
+on screen?" must pass `--force-full`; the runner on that branch does so for
+exactly this reason.
 An empty diff-mode result would be much less of a trap if the payload said so —
 e.g. a `mode: "diff"` / `unchanged: true` field alongside the empty array.
 
 ## 14. `open --relaunch` restores the app's previous route
 
-`example/visual/run.mjs` assumed a relaunch puts the example list back at the
+The first scripted loop assumed a relaunch puts the example list back at the
 top, so it could scroll down a fixed number of rows to reach "Surface". It does
 not. The example app persists its navigation state in AsyncStorage
 (`PERSISTENCE_KEY = 'NAVIGATION_STATE'` in `example/src/index.tsx`), so after
 `open --relaunch` (iOS) or `am force-stop` + `open` (Android) the app comes back
 on whatever screen it was on. Reproduced on both platforms in this pass:
 
-The runs that first showed the failure were hand-run against an earlier version
-of `run.mjs` and their logs were not kept. The committed evidence is the fixed
-script's own output when started from another example screen —
-`evidence/runs/ios/fix-pass-from-other-screen/summary.json` and
-`evidence/runs/android/fix-pass-from-other-screen/summary.json` — whose step log
-reads `relaunching the app … not on the Surface screen — going back to the example
-list … pressing "Back" … at the example list root`. If a relaunch reset the route,
-the "not on the Surface screen" branch could never be reached from a relaunch;
-it is, on both platforms.
+The logs of the runs that first showed this were not kept. The fixed runner on
+branch `poc/agent-device-visual-runner` logs `relaunching the app … not on the Surface screen — going back to the
+example list … pressing "Back" … at the example list root` when started from
+another example screen, on both platforms — a branch that could not be reached if a
+relaunch reset the route. Its run summaries are committed on that branch under
+`example/visual/evidence/runs/`.
 
-This is a `run.mjs` bug, not an agent-device bug: navigation has to be driven
+This is a runner bug, not an agent-device bug: navigation has to be driven
 back to the list explicitly (press `Back` until no `Back` control is left, then
 scroll for the row), not implied by a relaunch. Related trap: because
 `navigateToSurface()` matches on `label === 'Surface'` and picks the largest
 match, on the restored _Surface_ screen it pressed the nav header title
 (`RCTParagraphComponentView "Surface"`) instead of a list row. That log was not
-kept either; the trap is encoded as the test
-`findSurfaceRow picks the list row, not the Appbar title` in
-`example/visual/run.test.mjs`, and the fixed heuristic is visible in the same two
-`summary.json` files above: `pressing the "Surface" row (@e17, Other, y=618, w=402)`
-on iOS, `(@e72, android.view.ViewGroup, y=2747, w=1280)` on Android.
+kept either; the trap is encoded as a unit test in the runner on branch `poc/agent-device-visual-runner`
+(`findSurfaceRow picks the list row, not the Appbar title`), whose fix picks the
+row by position and width.
 
 ## 15. The dev-menu check runs before the app finishes loading
 
 `dismissDevMenu()` snapshots once, immediately after the relaunch. On iOS that
 snapshot came back with three nodes — `UIApplication`, `SplashScreenLogo`,
 `Downloading 100%…` — so it found none of the `Close` / `Continue` labels and
-returned "clean". Reproduced for the record on 2026-09-11 in `evidence/runner/`:
-`ios-01-open-relaunch.json` (the relaunch), `ios-02-snapshot-immediately-after-relaunch.json`
-(3 nodes: `React Native Paper Example`, the splash image, `Downloading 100%…`),
-then `ios-03-snapshot-6s-later.json` (77 nodes, including the dev menu's
-`Close` with `identifier: "xmark"` and `Reload`) and `ios-04-press-close.json`
-dismissing it. The dev menu appears _after_ the bundle finishes downloading; a
+returned "clean". Reproduced for the record on 2026-09-11 —
+`evidence/devclient-excerpt.json`, `ios_after_open_relaunch`: immediately after
+`open --relaunch` the tree is 3 nodes (`React Native Paper Example`, the splash
+image, `Downloading 100%…`); six seconds later it is 77 nodes including the dev
+menu's `Close` (`identifier: "xmark"`). Full snapshots on branch `poc/agent-device-visual-runner` under
+`example/visual/evidence/runner/`. The dev menu appears _after_ the bundle finishes downloading; a
 check that snapshots once at open time cannot see it, and it then swallows every
 subsequent scroll. The check has to
 wait for the app to be ready first, and be repeated inside the navigation loop
@@ -296,7 +291,7 @@ rather than run once.
 On Android the same step fails differently and confirms issue 9: after
 `am force-stop` + `open`, the app is the Expo **dev launcher**
 (`DEVELOPMENT SERVERS` / `Fetch development servers` / `RECENTLY OPENED`), whose
-labels are not in `DEV_MENU_LABELS`. Recovery is to press the recently-opened
+labels differ from the dev menu's. Recovery is to press the recently-opened
 entry (`http://192.168.1.151:8081`), which reloads the bundle in ~20 s.
 
 ## 16. Fast Refresh did not reach the Android app; a manual Reload was required
@@ -320,7 +315,7 @@ pixels and report PASS.
 Twice in this pass (`press '@e2'`, `press 'label="Close"'`, both on iOS) the CLI
 exited 1 with completely empty stdout _and_ stderr. Re-running the identical
 command immediately afterwards succeeded. Nothing to act on beyond noting that a
-caller cannot distinguish this from a crash, and that `run.mjs`'s "parse the
+caller cannot distinguish this from a crash, and that a runner's "parse the
 first `{`..`}` out of stdout" fallback turns it into a `null` response rather
 than a clear error.
 
@@ -338,23 +333,20 @@ are the record for those.
 ## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
 
 Found 2026-09-11 while re-running the Android loop with `src/` clean after the
-round-2 changes. `run.mjs` reported a deterministic **FAIL** —
-`surface-example-elevated changed=2822 (0.34%) regions=1` — twice in a row
-(`evidence/runs/android/round3-pass/summary.json`, `…/round3-pass-rerun/summary.json`),
-against a baseline whose file is byte-identical to the one committed
-(`md5 8693c919…` in both the working tree and `HEAD`). The diff image
-(`evidence/runs/android/round3-pass/surface-example-elevated-diff.png`) shows the
-change: a 152x74 pill at the top-right of the crop reading **Tools** — the Expo
-dev-client's floating dev-tools button, `android.widget.ImageView` label `Tools`,
-rect `{x:1115, y:243, w:78, h:78}` in `evidence/runner/android-01-snapshot-tools-overlay.json`.
+round-2 changes. The scripted loop reported a deterministic **FAIL** —
+`surface-example-elevated changed=2822 (0.34%) regions=1` — twice in a row,
+against a baseline byte-identical to the committed one (`md5 8693c919…` in both
+the working tree and `HEAD`). The diff image
+(`evidence/diff-images/android-devclient-tools-button.png`) shows the change: a
+152x74 pill at the top-right of the crop reading **Tools** — the Expo dev-client's
+floating dev-tools button, `android.widget.ImageView` label `Tools`, rect
+`{x:1115, y:243, w:78, h:78}` (`evidence/devclient-excerpt.json`,
+`android_devclient_floating_tools_button`). Both failing run summaries are on branch `poc/agent-device-visual-runner`.
 
 It is a dev-client setting, toggled by the dev menu entry **"Tools button"**
-(`evidence/runner/android-02-snapshot-devmenu.json` lists `Close`, `Reload`,
-`TOOLS`, `Tools button`, `Toggle Dev Menu`, …). Pressing it
-(`android-03-press-tools-button-toggle.json`) and then `Close`
-(`android-04-press-close.json`) removed the node (`android-05-snapshot-after-toggle.json`,
-60 nodes, no `Tools`), and the next run passed with `changed=0` on both stories
-(`evidence/runs/android/round3-pass-after-tools-off/summary.json`). The setting
+(the dev menu lists `Close`, `Reload`, `TOOLS`, `Tools button`, `Toggle Dev Menu`, …).
+Pressing it and then `Close` removed the node (60 nodes, no `Tools`), and the next
+run passed with `changed=0` on both stories. The setting
 survives a relaunch. It had been off in every earlier run today
 (`round2-pass`, 08:53 UTC, 0 px) and was on by 10:14 UTC; which earlier dev-menu
 interaction flipped it is not known.
@@ -362,9 +354,9 @@ interaction flipped it is not known.
 Two lessons. For agent-device: a screenshot of a dev build can contain dev-client
 chrome that is not part of the app, and `diff screenshot` cannot tell — worth a
 note in the docs, or a `screenshot` option that hides dev-client overlays. For
-`run.mjs`: a dev overlay inside the crop must never be reported as a visual
-regression; the script now looks for the floating node after dismissing the dev
-menu and launcher, turns it off through the dev menu when it can, and otherwise
-stops with exit 2 and a message naming the node and the manual fix. This is also
+any runner: a dev overlay inside the crop must never be reported as a visual
+regression; the runner on branch `poc/agent-device-visual-runner` looks for the floating node after dismissing the
+dev menu and launcher, turns it off through the dev menu when it can, and
+otherwise stops with a message naming the node and the manual fix. This is also
 the strongest argument so far for capturing from a release build rather than a
 dev-client once this moves past a PoC.
