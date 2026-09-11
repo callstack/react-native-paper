@@ -257,18 +257,15 @@ const Appbar = ({
     const {
       inputStyle: _searchInputStyle,
       style: _searchStyle,
-      testID: searchTestID = `${testID}-search`,
+      testID: searchTestID,
       ...searchProps
     } = searchBar;
 
     return (
       <View style={styles.searchRow}>
         {renderLeadingButton()}
-        <View testID={`${testID}-search-slot`} style={styles.searchSlot}>
-          <View
-            testID={`${testID}-search-width-limiter`}
-            style={styles.searchWidthLimiter}
-          >
+        <View style={styles.searchSlot}>
+          <View style={styles.searchWidthLimiter}>
             <Searchbar
               {...searchProps}
               aria-label={searchProps['aria-label'] ?? searchProps.placeholder}
@@ -302,7 +299,6 @@ const Appbar = ({
           onHeadlinePress,
           subtitle,
           subtitleProps,
-          testID: `${testID}-content`,
           theme,
           variant,
         }
@@ -311,7 +307,6 @@ const Appbar = ({
   const renderFlexibleHeadlineImage = () =>
     headlineImage ? (
       <View
-        testID={`${testID}-content-headline-image`}
         aria-hidden
         importantForAccessibility="no-hide-descendants"
         style={styles.flexibleHeadlineImage}
@@ -384,7 +379,6 @@ const Appbar = ({
   return (
     <Surface
       ref={ref}
-      testID={`${testID}-root-layer`}
       elevation={0}
       backgroundColor={backgroundColor}
       theme={theme}

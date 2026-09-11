@@ -169,7 +169,7 @@ describe('Appbar content', () => {
       <Appbar variant="small" headline="Inbox" testID={testIDPrefix} />
     );
 
-    expect(screen.getByTestId('appbar-content')).toHaveStyle({
+    expect(screen.getByText('Inbox').parent).toHaveStyle({
       marginStart: 12,
     });
 
@@ -182,7 +182,7 @@ describe('Appbar content', () => {
       />
     );
 
-    expect(screen.getByTestId('appbar-content')).toHaveStyle({
+    expect(screen.getByText('Inbox').parent).toHaveStyle({
       marginStart: 4,
     });
   });
@@ -199,7 +199,7 @@ describe('Appbar content', () => {
         />
       );
 
-      expect(screen.getByTestId('appbar-content')).toHaveStyle({
+      expect(screen.getByText('Inbox').parent).toHaveStyle({
         flexBasis: 'auto',
       });
     }
@@ -213,7 +213,7 @@ describe('Appbar surface', () => {
       <Appbar variant="small" headline="Inbox" testID={testIDPrefix} />
     );
 
-    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+    expect(screen.getByTestId(testIDPrefix).parent).toHaveStyle({
       backgroundColor: LightTheme.colors.surface,
     });
 
@@ -226,7 +226,7 @@ describe('Appbar surface', () => {
       />
     );
 
-    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+    expect(screen.getByTestId(testIDPrefix).parent).toHaveStyle({
       backgroundColor: LightTheme.colors.surfaceContainer,
     });
 
@@ -240,7 +240,7 @@ describe('Appbar surface', () => {
       />
     );
 
-    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+    expect(screen.getByTestId(testIDPrefix).parent).toHaveStyle({
       backgroundColor: customBackground,
     });
   });
@@ -267,7 +267,7 @@ describe('Appbar surface', () => {
       </SafeAreaProvider>
     );
 
-    expect(screen.getByTestId('appbar-root-layer')).toHaveStyle({
+    expect(screen.getByTestId(testIDPrefix).parent).toHaveStyle({
       borderBottomLeftRadius: 16,
       borderBottomRightRadius: 16,
       paddingTop: 20,
@@ -468,7 +468,9 @@ describe('Appbar search', () => {
     expect(
       screen.getByRole('searchbox', { name: 'Search messages' })
     ).toBeOnTheScreen();
-    expect(screen.getByTestId('appbar-search').parent).toHaveStyle({
+    expect(
+      screen.getByRole('searchbox', { name: 'Search messages' }).parent
+    ).toHaveStyle({
       backgroundColor: LightTheme.colors.surfaceContainer,
     });
 
@@ -549,7 +551,7 @@ describe('Appbar search', () => {
     expect(screen.getByTestId('message-search').parent).toHaveStyle({
       width: '100%',
     });
-    expect(screen.getByTestId('appbar-search-width-limiter')).toHaveStyle({
+    expect(screen.getByTestId('message-search').parent?.parent).toHaveStyle({
       width: '100%',
       maxWidth: 720,
     });
@@ -750,10 +752,9 @@ describe('Appbar accessibility', () => {
         )
       );
 
-      const imageContainer = screen.getByTestId(
-        'appbar-content-headline-image',
-        { includeHiddenElements: true }
-      );
+      const imageContainer = screen.getByLabelText('Brand artwork', {
+        includeHiddenElements: true,
+      }).parent?.parent;
 
       expect(imageContainer).toHaveProp('aria-hidden', true);
       expect(

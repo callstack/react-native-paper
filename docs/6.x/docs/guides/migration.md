@@ -73,7 +73,6 @@ You can use the component's color prop where available, or override the correspo
 
 Hardcoded default test IDs have been removed for the components listed below:
 
-- `Appbar`: `${testID}-root-layer`
 - `BottomNavigation`: `bottom-navigation`
 - `BottomNavigation.Bar`: `bottom-navigation-bar`
 - `Button`: `button`
@@ -156,6 +155,10 @@ const MyComponent = () => (
 #### Bottom toolbar support
 
 Material Design 3 drops the bottom bar support contained previously in the `Appbar` scope and moves it to `Toolbars`, hence you can't use the component to construct a bottom bar anymore - for these cases please use the `Toolbar` component.
+
+#### Test IDs
+
+`Appbar` no longer derives internal, implementation-only test IDs (e.g. for its surface, content, or search layout wrappers) from the `testID` prop. Only the `testID` prop itself is set on the root element; the `Searchbar` rendered by the `search` variant accepts its own `testID` through `searchBar.testID`.
 
 ### Surface
 

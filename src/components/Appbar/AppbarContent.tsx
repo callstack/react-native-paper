@@ -26,7 +26,6 @@ type Props = Pick<
   theme: Theme;
   variant: AppbarHeadlineVariant;
   style?: StyleProp<ViewStyle>;
-  testID: string;
 };
 
 const headlineVariants: Record<AppbarHeadlineVariant, TypescaleKey> = {
@@ -57,7 +56,6 @@ const AppbarContent = ({
   onHeadlinePress,
   subtitle,
   subtitleProps,
-  testID,
   theme,
   variant,
   style,
@@ -97,11 +95,7 @@ const AppbarContent = ({
   );
 
   const content = hasHeadlineImage ? (
-    <View
-      testID={`${testID}-headline-image`}
-      aria-hidden
-      style={styles.headlineImage}
-    >
+    <View aria-hidden style={styles.headlineImage}>
       {headlineImage}
     </View>
   ) : (
@@ -132,11 +126,6 @@ const AppbarContent = ({
     </>
   );
 
-  const wrapperProps = {
-    testID,
-    style: wrapperStyle,
-  };
-
   if (onHeadlinePress) {
     const {
       'aria-label': ariaLabel,
@@ -147,7 +136,7 @@ const AppbarContent = ({
 
     return (
       <Pressable
-        {...wrapperProps}
+        style={wrapperStyle}
         {...restHeadlinePressableProps}
         role="button"
         aria-label={
@@ -170,7 +159,7 @@ const AppbarContent = ({
 
   return (
     <View
-      {...wrapperProps}
+      style={wrapperStyle}
       accessible={hasHeadlineImage || undefined}
       accessibilityLabel={hasHeadlineImage ? headline : undefined}
       role={hasHeadlineImage ? 'heading' : undefined}
