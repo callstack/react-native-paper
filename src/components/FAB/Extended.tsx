@@ -39,11 +39,6 @@ export type Props = {
   label: string;
   /**
    * Role-color preset. Defaults to `primaryContainer`.
-   * Choose `primary`, `primaryContainer`, `secondary`, `secondaryContainer`,
-   * `tertiary`, `tertiaryContainer`, `surface`, or `branded`.
-   * `surface` and `branded` use `surfaceContainerHigh`; `surface` uses primary
-   * content, while `branded` uses on-surface content. Pass a custom icon source
-   * to preserve brand artwork colors.
    */
   variant?: Variant;
   /**

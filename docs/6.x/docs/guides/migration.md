@@ -309,21 +309,30 @@ The misspelled `traileringIcon` props have been renamed:
 
 ### FAB
 
-The color presets for `FAB` and `FAB.Extended` now match the MD3 color roles:
-`primary`, `primaryContainer` (default), `secondary`, `secondaryContainer`,
-`tertiary`, `tertiaryContainer`, `surface`, and `branded`.
+To preserve the v5 FAB color treatment, update the `variant` prop:
 
-If you used an earlier 6.x build, replace `tonalPrimary`, `tonalSecondary`, and
-`tonalTertiary` with `primaryContainer`, `secondaryContainer`, and
-`tertiaryContainer`. The old names have been removed without aliases. This also
-applies to the FAB menu trigger's `variant`.
+| v5 | v6 |
+| --- | --- |
+| `primary` | `primaryContainer` |
+| `secondary` | `secondaryContainer` |
+| `tertiary` | `tertiaryContainer` |
 
-Both `surface` and `branded` use `surfaceContainerHigh`. Surface FAB content uses
-`primary`; branded content defaults to `onSurface`. A custom icon source can
-render brand artwork in its own colors.
+If you omit `variant`, no change is needed. Replace `variant="surface"` with
+one of the supported color variants, such as `primaryContainer`.
 
-On web, hovering a FAB raises its elevation from level 3 to level 4. Focused and
-pressed states use level 3. The large FAB icon remains **36dp**.
+For custom colors, replace `color` with `contentColor` and move
+`style.backgroundColor` to `containerColor`:
+
+```diff
+<FAB
+  icon="plus"
+- color="#ffffff"
+- style={{ backgroundColor: '#6750a4', position: 'absolute', bottom: 16, right: 16 }}
++ contentColor="#ffffff"
++ containerColor="#6750a4"
++ style={{ position: 'absolute', bottom: 16, right: 16 }}
+/>
+```
 
 ### TextInput
 

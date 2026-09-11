@@ -5,7 +5,7 @@ import { getDimensions, resolveColors } from '../FAB/utils';
 
 describe('resolveColors', () => {
   it.each([false, true])(
-    'resolves every MD3 color variant (dark=%s)',
+    'resolves every FAB color preset (dark=%s)',
     (dark) => {
       const theme = dark ? DarkTheme : LightTheme;
       const variants = {
@@ -15,7 +15,6 @@ describe('resolveColors', () => {
         secondaryContainer: ['secondaryContainer', 'onSecondaryContainer'],
         tertiary: ['tertiary', 'onTertiary'],
         tertiaryContainer: ['tertiaryContainer', 'onTertiaryContainer'],
-        surface: ['surfaceContainerHigh', 'primary'],
         branded: ['surfaceContainerHigh', 'onSurface'],
       } as const;
 
@@ -26,7 +25,6 @@ describe('resolveColors', () => {
         'secondaryContainer',
         'tertiary',
         'tertiaryContainer',
-        'surface',
         'branded',
       ] as const;
       for (const variant of variantNames) {
