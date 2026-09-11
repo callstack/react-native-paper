@@ -140,7 +140,7 @@ exports[`renders extended FAB collapsed 1`] = `
         }
         accessible={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -466,7 +466,7 @@ exports[`renders extended FAB expanded 1`] = `
         }
         accessible={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -792,7 +792,7 @@ exports[`renders extended FAB large size 1`] = `
         }
         accessible={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -1118,7 +1118,7 @@ exports[`renders extended FAB medium size 1`] = `
         }
         accessible={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -1443,9 +1443,9 @@ exports[`renders extended FAB not visible 1`] = `
             "text": undefined,
           }
         }
-        accessible={true}
+        accessible={false}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -1467,6 +1467,7 @@ exports[`renders extended FAB not visible 1`] = `
             ],
           ]
         }
+        tabIndex={-1}
       >
         <View
           style={
@@ -1771,7 +1772,7 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         }
         accessible={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}

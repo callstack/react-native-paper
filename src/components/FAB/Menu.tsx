@@ -55,7 +55,7 @@ export type MenuItemProps = {
   testID?: string;
 };
 
-type MenuVariant = Exclude<Variant, 'surface' | 'branded'>;
+type MenuVariant = Exclude<Variant, 'branded'>;
 
 export type MenuTriggerProps = {
   /**
@@ -455,7 +455,6 @@ const MorphingTrigger = ({
       ]}
     >
       <Shell
-        elevation={Tokens.stateElevation.enabled}
         size={size}
         variant={triggerVariant}
         containerColor={triggerContainerColor}

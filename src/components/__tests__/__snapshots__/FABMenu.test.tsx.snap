@@ -602,7 +602,7 @@ exports[`renders FAB.Menu closed 1`] = `
             }
             accessible={true}
             collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1378,9 +1378,9 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 "text": undefined,
               }
             }
-            accessible={true}
+            accessible={false}
             collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1404,6 +1404,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 ],
               ]
             }
+            tabIndex={-1}
           >
             <View
               style={
