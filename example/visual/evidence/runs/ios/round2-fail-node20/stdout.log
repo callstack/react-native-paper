@@ -1,0 +1,11 @@
+v20.20.2
+# ios — threshold 0.02
+# output: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round2-fail-node20
+  relaunching the app (fresh bundle from Metro)
+  app ready (77 app nodes)
+  dev menu: pressing "Close" (@e40)
+  app ready (37 app nodes)
+  restored onto the Surface screen
+ios surface-example-elevated changed=10179 (1.31%) regions=3 threshold=0.02 → FAIL
+ios surface-example-flat changed=0 (0%) regions=0 threshold=0.02 → PASS
+# summary: /Users/juliankobrynski/Projects/react-native-paper/example/visual/evidence/runs/ios/round2-fail-node20/summary.json (exit 1)

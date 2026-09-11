@@ -23,7 +23,10 @@
  *
  * Exit codes: 0 pass, 1 a story FAILed the diff, 2 setup/environment error,
  * 3 a capture came back with the wrong dimensions. `summary.json` is written in
- * the output directory in every one of those cases.
+ * the output directory in every one of those cases, including argument errors
+ * (those land in artifacts/run/unknown/ when the platform is missing/invalid).
+ *
+ * Unit tests: node --test example/visual/run.test.mjs
  */
 
 import { spawnSync } from 'node:child_process';
@@ -152,7 +155,13 @@ function parseArgs(argv) {
       case '-h':
         console.log(
           'usage: node example/visual/run.mjs --platform ios|android [--update] [--force]\n' +
-            '                                  [--threshold <0-1>] [--story|--stories a,b] [--out <dir>]'
+            '                                  [--threshold <0-1>] [--story|--stories a,b] [--out <dir>]\n' +
+            '\n' +
+            '  --update  write the captures to __baselines__/<platform>/ instead of diffing\n' +
+            '            them (the capture-size check is skipped; the captured dimensions\n' +
+            '            are printed instead)\n' +
+            '  --force   run even though the device does not match env.json. It covers the\n' +
+            '            device check only — a capture-size mismatch is never overridden.'
         );
         process.exit(0);
         break;
@@ -178,6 +187,41 @@ function parseArgs(argv) {
   return out;
 }
 
+/**
+ * Where to write summary.json when parseArgs itself failed. Takes `--out` if it
+ * was given, else the platform directory if `--platform` was given and valid,
+ * else an `unknown` directory — so an argument error is still summarised.
+ */
+function fallbackOutDir(argv) {
+  const valueOf = (flag) => {
+    const i = argv.lastIndexOf(flag);
+    return i === -1 ? null : (argv[i + 1] ?? null);
+  };
+
+  const out = valueOf('--out');
+  if (out) return path.resolve(out);
+
+  const platform = valueOf('--platform');
+  const dir =
+    platform === 'ios' || platform === 'android' ? platform : 'unknown';
+  return path.join(VISUAL_DIR, 'artifacts', 'run', dir);
+}
+
+/**
+ * Environment for the nested `npx agent-device` call. When this script itself
+ * runs under `npx -p node@20 node run.mjs`, npx exports `npm_config_package`
+ * (and friends) into the child; the nested npx then reads that, installs
+ * node@20 and treats `agent-device@0.21.0` as a command name inside it. Strip
+ * every npm_config_* variable so the nested npx resolves its own package.
+ */
+function spawnEnv() {
+  const env = {};
+  for (const [key, value] of Object.entries(process.env)) {
+    if (!key.startsWith('npm_config_')) env[key] = value;
+  }
+  return env;
+}
+
 /** Runs one agent-device command, records its JSON, returns the parsed payload. */
 function ad(label, args, { allowFail = false } = {}) {
   const argv = [AGENT_DEVICE, ...args, '--json'];
@@ -185,6 +229,7 @@ function ad(label, args, { allowFail = false } = {}) {
   const proc = spawnSync('npx', argv, {
     cwd: SESSION_CWD,
     encoding: 'utf8',
+    env: spawnEnv(),
     maxBuffer: 256 * 1024 * 1024,
   });
   const elapsedMs = Date.now() - startedAt;
@@ -329,14 +374,10 @@ function checkEnvironment(platform, env) {
     observed.runtime = match.runtime;
     observed.state = match.device.state;
 
+    // The runtime identifier carries the iOS version (…SimRuntime.iOS-26-5), so
+    // comparing it also covers env.iosVersion.
     if (env.runtime && match.runtime !== env.runtime) {
       mismatch('runtime', env.runtime, match.runtime);
-    }
-    if (
-      env.iosVersion &&
-      !match.runtime.endsWith(env.iosVersion.replace(/\./g, '-'))
-    ) {
-      mismatch('iOS version', env.iosVersion, `runtime ${match.runtime}`);
     }
     if (env.device && match.device.name !== env.device) {
       mismatch('device name', env.device, match.device.name);
@@ -377,7 +418,8 @@ function checkEnvironment(platform, env) {
 /**
  * Throws unless the device matches env.json. `--force` downgrades the
  * mismatches to warnings so a deliberate re-baseline on another device is
- * still possible, but never by accident.
+ * still possible, but never by accident. This is the only check `--force`
+ * covers.
  */
 function enforceEnvironment(platform, env, force) {
   const { observed, mismatches } = checkEnvironment(platform, env);
@@ -413,14 +455,20 @@ function requireBaseline(platform, story) {
   return baseline;
 }
 
-/** `--update` mode: write the capture to the baseline, creating it if new. */
-function writeBaseline(platform, story, current) {
+/**
+ * `--update` mode: write the capture to the baseline, creating it if new. The
+ * captured dimensions go in the log line because the size check is skipped in
+ * this mode (see checkCaptureSize) — this is the only place a human sees what
+ * the new baseline actually measures.
+ */
+function writeBaseline(platform, story, current, shotData) {
   const baseline = baselinePath(platform, story);
   const created = !fs.existsSync(baseline);
   fs.mkdirSync(path.dirname(baseline), { recursive: true });
   fs.copyFileSync(current, baseline);
+  const size = `${shotData?.width ?? '?'}x${shotData?.height ?? '?'}`;
   console.log(
-    `${platform} ${story} baseline ${created ? 'created' : 'updated'} → ${path.relative(VISUAL_DIR, baseline)}`
+    `${platform} ${story} baseline ${created ? 'created' : 'updated'} (${size}) → ${path.relative(VISUAL_DIR, baseline)}`
   );
   return { baseline, created };
 }
@@ -430,17 +478,28 @@ function writeBaseline(platform, story, current) {
  * A wrong-sized capture would otherwise diff clean and read as PASS — and so
  * would a capture whose size agent-device did not report at all, which is why a
  * missing value is a failure rather than a warning.
+ *
+ * Skipped entirely in `--update` mode: the whole point of that mode is to
+ * record what the device produces now, and a new story has no pinned size to
+ * check against. In diff mode there is no override — a size mismatch on a
+ * device that matches env.json means something is wrong that no flag should
+ * paper over, so `--force` does not reach this check.
  */
-function checkCaptureSize(platform, env, story, shotData, force) {
+function checkCaptureSize(env, story, shotData, { update = false } = {}) {
+  if (update) return;
+
   const expected = env.baselines || {};
   const problems = [];
 
+  if (expected.cropWidth == null || expected.cropHeight == null) {
+    fail(
+      `${story}: ${ENV_FILE} pins no crop dimensions, so the capture cannot be ` +
+        'size-checked — pin baselines.cropWidth/cropHeight, or re-record with --update',
+      3
+    );
+  }
+
   const compare = (what, want, got) => {
-    if (want == null) {
-      // Nothing pinned in env.json: nothing to verify against.
-      warn(`${story}: env.json pins no ${what}, capture reports ${got}`);
-      return;
-    }
     if (got == null) {
       problems.push(
         `${what}: expected ${want}, agent-device reported no ${what}`
@@ -464,16 +523,11 @@ function checkCaptureSize(platform, env, story, shotData, force) {
   if (problems.length === 0) return;
 
   const detail = problems.map((p) => `  - ${p}`).join('\n');
-  if (force) {
-    warn(
-      `${story}: capture dimensions do not match env.json (--force):\n${detail}`
-    );
-    return;
-  }
   fail(
     `${story}: capture dimensions do not match ${ENV_FILE}:\n${detail}\n` +
-      'a wrong-sized capture cannot be compared with the baseline. ' +
-      'Check --crop-on/--pixel-density and the device, or pass --force to continue anyway.',
+      'a wrong-sized capture cannot be compared with the baseline. Check ' +
+      '--crop-on/--pixel-density and the device; if the new size is the intended ' +
+      'one, re-record the baselines with --update. (--force does not override this.)',
     3
   );
 }
@@ -536,11 +590,11 @@ function findDevMenuNode(nodes) {
 /**
  * The Expo dev launcher ("DEVELOPMENT SERVERS" / "RECENTLY OPENED"). It is left
  * behind by an Android relaunch and none of the dev-menu labels match it. The
- * way out is the recently-opened row that carries the Metro URL; if that row is
- * missing, any labelled row under the "RECENTLY OPENED" header.
+ * way out is the recently-opened row carrying the Metro URL; if the launcher is
+ * up but that row is not there, the run fails rather than pressing whatever row
+ * happens to be nearby, which could open a different app.
  */
 function findDevLauncherNode(nodes) {
-  const header = nodes.find((n) => labelOf(n) === 'RECENTLY OPENED');
   if (!nodes.some((n) => DEV_LAUNCHER_MARKERS.includes(labelOf(n)))) {
     return null;
   }
@@ -550,16 +604,11 @@ function findDevLauncherNode(nodes) {
   );
   if (metroRow) return metroRow;
 
-  if (!header) return null;
-  const headerBottom = (header.rect?.y ?? 0) + (header.rect?.height ?? 0);
-  return (
-    nodes.find(
-      (n) =>
-        labelOf(n) &&
-        !DEV_LAUNCHER_MARKERS.includes(labelOf(n)) &&
-        (n.rect?.y ?? -1) >= headerBottom
-    ) || null
+  fail(
+    'the Expo dev launcher is on screen but has no recently-opened row for ' +
+      `http://…:${METRO_PORT} — start Metro and open the app from the launcher once`
   );
+  return null; // unreachable
 }
 
 /**
@@ -611,12 +660,13 @@ function onSurfaceScreen(globals, stories) {
 }
 
 /**
- * The example-list root is the only screen whose Appbar title is "Examples";
- * every example screen shows a "Back" action where the root shows the drawer
- * button. Either signal on its own identifies the root.
+ * The example-list root is the only screen whose Appbar title is "Examples",
+ * and it shows the drawer button where every example screen shows "Back". Both
+ * signals are required: "no Back element" on its own is also true of a screen
+ * with no header at all, which would make any such screen read as the list.
  */
 function atListRoot(nodes) {
-  return hasLabel(nodes, LIST_ROOT_TITLE) || !hasLabel(nodes, BACK_LABEL);
+  return hasLabel(nodes, LIST_ROOT_TITLE) && !hasLabel(nodes, BACK_LABEL);
 }
 
 /**
@@ -649,8 +699,13 @@ function goBackToListRoot(platform, globals, nodes) {
   }
 
   fail(
-    `still not on the example list root after ${MAX_BACK_STEPS} back steps — ` +
-      `expected the "${LIST_ROOT_TITLE}" title`
+    `could not reach the example list: after ${MAX_BACK_STEPS} back steps the ` +
+      `"${LIST_ROOT_TITLE}" title was still not on screen (last screen: ` +
+      `${current
+        .map((n) => labelOf(n))
+        .filter(Boolean)
+        .slice(0, 5)
+        .join(' / ')})`
   );
   return current; // unreachable
 }
@@ -816,10 +871,15 @@ function runPass(state) {
     if (platform === 'ios')
       shotArgs.push('--pixel-density', String(env.pixelDensity || 3));
     const shot = ad(`screenshot-${story}`, shotArgs);
-    checkCaptureSize(platform, env, story, shot.data, opts.force);
+    checkCaptureSize(env, story, shot.data, { update: opts.update });
 
     if (opts.update) {
-      const { baseline, created } = writeBaseline(platform, story, current);
+      const { baseline, created } = writeBaseline(
+        platform,
+        story,
+        current,
+        shot.data
+      );
       state.results.push({
         story,
         updated: !created,
@@ -897,14 +957,47 @@ function writeSummary(state, exitCode, error) {
     pass: exitCode === 0,
   };
   const file = path.join(opts.outDir, 'summary.json');
+  fs.mkdirSync(opts.outDir, { recursive: true });
   fs.writeFileSync(file, JSON.stringify(summary, null, 2));
   return file;
 }
 
+/** Summarises an argument error, which happens before there are real options. */
+function writeArgErrorSummary(argv, failure) {
+  const platform = argv[argv.lastIndexOf('--platform') + 1];
+  const state = {
+    opts: {
+      platform: platform === 'ios' || platform === 'android' ? platform : null,
+      threshold: null,
+      update: argv.includes('--update'),
+      force: argv.includes('--force'),
+      stories: null,
+      outDir: fallbackOutDir(argv),
+    },
+    env: null,
+    observedEnv: {},
+    results: [],
+    startedAt: Date.now(),
+  };
+  return writeSummary(state, failure.exitCode, {
+    message: failure.message,
+    exitCode: failure.exitCode,
+  });
+}
+
 function main() {
-  // Argument errors are the one class of failure that cannot be summarised:
-  // there is no output directory to write into yet.
-  const opts = parseArgs(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+
+  let opts;
+  try {
+    opts = parseArgs(argv);
+  } catch (thrown) {
+    if (!(thrown instanceof RunFailure)) throw thrown;
+    console.error(`error: ${thrown.message}`);
+    const summaryFile = writeArgErrorSummary(argv, thrown);
+    console.log(`# summary: ${summaryFile} (exit ${thrown.exitCode})`);
+    process.exit(thrown.exitCode);
+  }
 
   const state = {
     opts,
@@ -947,33 +1040,34 @@ function main() {
   process.exit(exitCode);
 }
 
-if (import.meta.main) {
-  try {
-    main();
-  } catch (thrown) {
-    // Only argument errors can reach here: runPass failures are caught (and
-    // summarised) inside main().
-    if (!(thrown instanceof RunFailure)) throw thrown;
-    console.error(`error: ${thrown.message}`);
-    process.exit(thrown.exitCode);
-  }
+/**
+ * True when this module is the process entry point. `import.meta.main` would
+ * say the same thing but only exists on Node >= 24.2, and this script has to
+ * run on the Node 20 floor in example/package.json. Both sides are realpath'd
+ * so a symlinked invocation still matches.
+ */
+function isMainModule(argvPath, moduleUrl) {
+  if (!argvPath) return false;
+  const real = (p) => {
+    try {
+      return fs.realpathSync(p);
+    } catch {
+      return path.resolve(p);
+    }
+  };
+  return real(argvPath) === real(fileURLToPath(moduleUrl));
 }
 
-// Exported so the argument/path/environment logic can be exercised from a
-// throwaway script without a device; the script itself only runs when
-// executed directly.
+if (isMainModule(process.argv[1], import.meta.url)) {
+  main();
+}
+
+// Exported for example/visual/run.test.mjs only.
 export {
   RunFailure,
-  parseArgs,
-  baselinePath,
-  requireBaseline,
-  writeBaseline,
-  checkEnvironment,
-  enforceEnvironment,
+  isMainModule,
   checkCaptureSize,
-  findSurfaceRow,
-  findDevMenuNode,
-  findDevLauncherNode,
+  enforceEnvironment,
   atListRoot,
-  looksReady,
+  findSurfaceRow,
 };

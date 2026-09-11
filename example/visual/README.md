@@ -8,7 +8,7 @@ Every number below is backed by committed evidence in `evidence/`. The original 
 
 ## Setup
 
-- Branch `poc/agent-device-visual` @ `cbcd52f7e`, React Native 0.85.3, Expo 56, Debug dev-client.
+- Branch `poc/agent-device-visual` (PR #5115), React Native 0.85.3, Expo 56, Debug dev-client.
 - iPhone 17 Pro simulator, iOS 26.5, 3x. Built with `yarn example ios --device "iPhone 17 Pro"` (63 s incremental).
 - agent-device 0.21.0 via `npx`, driven from the CLI. No Storybook, no extra screens.
 - Example-app change: a `testID` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx` (`surface-example-elevated` / `surface-example-flat`, named so they cannot be mistaken for the library defaults removed in #5088 and #5099), so `screenshot --crop-on 'id="surface-example-elevated"'` crops to exactly that section (402x214 logical, 1206x642 px at `--pixel-density 3`).
@@ -81,7 +81,7 @@ Issues 13–18 came out of the review round: `snapshot` returns an empty `nodes`
 
 Emulator `Pixel_10_Pro`, API 37 (Android 17), arm64 `google_apis_playstore_ps16k`, 480 dpi, 1280x2856, emulator 36.6.11, `hw.gpu.mode=auto`. Wall-clock: emulator boot 8 s, `yarn example android` (incremental, build + install + launch) 119 s, `open` 668 ms, `open --relaunch` 1,688 ms, one cropped capture ≈ 2 s.
 
-`--pixel-density` is rejected on Android (`UNSUPPORTED_OPERATION`, iOS-family only); Android screenshots already come back in native device pixels, so the `surface-example-elevated` crop is 1280x642 = 821,760 px. `--crop-on 'id="surface-example-elevated"'` and `'id="surface-example-flat"'` each resolve to exactly one node (`testID` + `accessible` exposes `resource-id`), so no fallback selector was needed.
+`--pixel-density` is rejected on Android (`UNSUPPORTED_OPERATION`, iOS-family only); Android screenshots already come back in native device pixels, so the `surface-example-elevated` crop is 1280x642 = 821,760 px. `--crop-on 'id="surface-example-elevated"'` and `'id="surface-example-flat"'` each resolve to exactly one node from the `testID` alone (see "The only test hook" above), so no fallback selector was needed.
 
 ### Stability
 
@@ -152,13 +152,26 @@ node example/visual/run.mjs --platform ios
 node example/visual/run.mjs --platform android
 ```
 
+Requires Node 20 or newer, matching `example/package.json`. The entry point is
+guarded by comparing `process.argv[1]` with the module URL rather than
+`import.meta.main`, which only exists from Node 24.2 — on Node 20 the earlier
+version printed nothing and exited 0, the worst failure a tool whose contract is
+its exit code can have. The pure helpers have a `node:test` file:
+
+```bash
+node --test example/visual/run.test.mjs
+```
+
+`evidence/summary.md` is generated from the committed JSON by
+`node example/visual/evidence/summarize.mjs`.
+
 Flags: `--update` (write the current captures as baselines — creates a missing
 baseline, overwrites an existing one), `--threshold <0-1>` (default `0.02`, the PoC
 finding — the CLI default of `0.1` misses soft-shadow regressions),
 `--story surface-example-elevated,surface-example-flat`, `--out <dir>` (where captures,
 diff images, per-command JSON and `summary.json` go; default
-`example/visual/artifacts/run/<platform>`, gitignored), `--force` (downgrade the two
-guardrails below to warnings).
+`example/visual/artifacts/run/<platform>`, gitignored), `--force` (downgrade the device
+check below to a warning — it does not touch the crop-size check).
 
 Prerequisites are documented, not automated: the app must already be built and
 installed on the device pinned in `env.json`, and Metro must be running. The
@@ -187,18 +200,22 @@ Exit codes: `1` if any story fails; `2` if the connected device does not match
 `env.json`; `3` if a capture's dimensions do not match the crop pinned in
 `env.json`. A regression is the only thing that exits 1.
 
-Two guardrails, both hard failures unless `--force`:
+Two guardrails:
 
 - **Device pin.** Before any capture the script compares the connected device with
   `env.json` — UDID, iOS runtime and boot state via `xcrun simctl list -j devices`;
   API level and density via `adb getprop` and `adb shell wm density`. Any mismatch,
   or an inability to identify the device at all, exits 2 with an expected/observed
   list. This applies to `--update` too, so committed baselines cannot be
-  overwritten from the wrong simulator by accident.
-- **Crop size.** After every capture the reported width, height and (on iOS)
-  pixel density are compared with the crop pinned in `env.json`. A mismatch exits
-  3; a wrong-sized capture can never read as PASS. `env.json` is never rewritten
-  by the script.
+  overwritten from the wrong simulator by accident. `--force` downgrades this
+  check to a warning; that is the only thing `--force` does.
+- **Crop size.** In diff mode, after every capture the reported width, height and
+  (on iOS) pixel density are compared with the crop pinned in `env.json`. A
+  mismatch exits 3 with no override — a wrong-sized capture can never read as
+  PASS, and a size mismatch on the right device means something a flag should
+  not paper over. In `--update` mode the check is skipped (a new story has no
+  pinned size yet) and the captured dimensions are printed on the `baseline
+created` line instead. `env.json` is never rewritten by the script.
 
 Verified end to end on 2026-09-10 after review; `summary.json` and the diff images are in
 `evidence/runs/<platform>/fix-*/`. From the Surface screen: PASS with `changed=0`
@@ -209,3 +226,11 @@ reload: `ios surface-example-elevated changed=10179 (1.31%) regions=3 → FAIL`,
 `android surface-example-elevated changed=9336 (1.14%) regions=1 → FAIL`, exit 1 —
 the same counts as every hand-run capture. After `git checkout -- src/components/Surface.tsx`:
 PASS again on both.
+
+Round-2 verification (2026-09-11), `evidence/runs/<platform>/round2-*/`: PASS on iOS
+(15 s) and Android (31 s) on Node 24.18; on Node 20.20.2 via `npx -y -p node@20 node
+example/visual/run.mjs --platform ios` the entry point fires and PASSes (19 s), the
+realistic break FAILs with `changed=10179 (1.31%)`, exit 1, and the revert PASSes.
+One thing that surfaced: `npx -p` leaks `npm_config_package` into the child, which
+made the script's own nested `npx agent-device` install node instead — the script
+now strips `npm_config_*` from the environment it spawns with.
