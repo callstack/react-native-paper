@@ -37,7 +37,6 @@ const variants: FabColor[] = [
   'primaryContainer',
   'secondaryContainer',
   'tertiaryContainer',
-  'surface',
   'branded',
   'custom',
 ];
@@ -141,9 +140,7 @@ const FABExample = () => {
         <ChipRow
           label="Color"
           options={
-            type === 'menu'
-              ? variants.filter((v) => v !== 'surface' && v !== 'branded')
-              : variants
+            type === 'menu' ? variants.filter((v) => v !== 'branded') : variants
           }
           value={variant}
           onChange={setVariant}
@@ -154,10 +151,7 @@ const FABExample = () => {
           options={types}
           value={type}
           onChange={(nextType) => {
-            if (
-              nextType === 'menu' &&
-              (variant === 'surface' || variant === 'branded')
-            ) {
+            if (nextType === 'menu' && variant === 'branded') {
               setVariant('primaryContainer');
             }
             setType(nextType);
@@ -234,10 +228,7 @@ const FABExample = () => {
           alignment={position}
           trigger={{
             icon: 'pencil',
-            variant:
-              activeVariant === 'surface' || activeVariant === 'branded'
-                ? undefined
-                : activeVariant,
+            variant: activeVariant === 'branded' ? undefined : activeVariant,
             containerColor: activeContainerColor,
             size,
             visible: showFab,

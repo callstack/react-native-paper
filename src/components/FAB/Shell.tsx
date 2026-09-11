@@ -24,7 +24,7 @@ import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { Elevation, ThemeProp } from '../../theme/types';
+import type { ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
@@ -74,11 +74,6 @@ export type ShellProps = {
    * Trailing-padding override.
    */
   trailing?: number;
-  /**
-   * Resting elevation level. Defaults to the FAB's enabled-state elevation.
-   * Pass `0` to disable the shadow entirely.
-   */
-  elevation?: Elevation;
   /**
    * When `false`, the shell animates out (scale + alpha) and stops accepting
    * touches.
@@ -208,7 +203,6 @@ const Shell = ({
   iconSize,
   leading,
   trailing,
-  elevation,
   visible = true,
   onPress,
   onLongPress,
@@ -237,23 +231,19 @@ const Shell = ({
   const theme = useInternalTheme(themeOverrides);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-  const [focused, setFocused] = React.useState(false);
   const touchableRef = React.useRef<View>(null);
+  const previousFocusedElement = React.useRef<HTMLElement | null>(null);
 
   const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
 
-  // Explicit elevations (including flat menu items) keep their own treatment.
   const resolvedElevation =
-    elevation ??
-    (Platform.OS === 'web' && visible && hasHandler
+    visible && hasHandler
       ? pressed
         ? Tokens.stateElevation.pressed
-        : focused
-          ? Tokens.stateElevation.focus
-          : hovered
-            ? Tokens.stateElevation.hover
-            : Tokens.stateElevation.enabled
-      : Tokens.stateElevation.enabled);
+        : hovered
+          ? Tokens.stateElevation.hover
+          : Tokens.stateElevation.enabled
+      : Tokens.stateElevation.enabled;
 
   const dimensions = React.useMemo(
     () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
@@ -351,15 +341,31 @@ const Shell = ({
   );
 
   React.useEffect(() => {
-    if (!visible || !hasHandler) {
-      if (Platform.OS === 'web') {
-        touchableRef.current?.blur();
+    if (!visible) {
+      if (Platform.OS === 'web' && typeof document !== 'undefined') {
+        const target: unknown = touchableRef.current;
+        if (
+          target instanceof HTMLElement &&
+          target === document.activeElement
+        ) {
+          if (previousFocusedElement.current?.isConnected) {
+            previousFocusedElement.current.focus({ preventScroll: true });
+          }
+          // The previous element may have been removed or become unfocusable.
+          if (target === document.activeElement) target.blur();
+        }
       }
       setHovered(false);
       setPressed(false);
-      setFocused(false);
     }
-  }, [visible, hasHandler]);
+  }, [visible]);
+
+  React.useEffect(() => {
+    if (!hasHandler) {
+      setHovered(false);
+      setPressed(false);
+    }
+  }, [hasHandler]);
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled
@@ -401,7 +407,10 @@ const Shell = ({
           onPress={visible ? onPress : undefined}
           onLongPress={visible ? onLongPress : undefined}
           delayLongPress={delayLongPress}
-          disabled={disabled || !hasHandler || !visible}
+          disabled={disabled || !hasHandler}
+          accessible={visible}
+          focusable={visible && hasHandler}
+          tabIndex={visible ? undefined : -1}
           onHoverIn={() => setHovered(true)}
           onHoverOut={() => setHovered(false)}
           onPressIn={() => setPressed(true)}
@@ -410,13 +419,17 @@ const Shell = ({
             onPressOut?.(event);
           }}
           onFocus={(event) => {
-            setFocused(true);
+            if (Platform.OS === 'web') {
+              const previous =
+                'relatedTarget' in event.nativeEvent
+                  ? event.nativeEvent.relatedTarget
+                  : null;
+              previousFocusedElement.current =
+                previous instanceof HTMLElement ? previous : null;
+            }
             focusTarget.onFocus?.(event);
           }}
-          onBlur={() => {
-            setFocused(false);
-            focusTarget.onBlur?.();
-          }}
+          onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
           role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
