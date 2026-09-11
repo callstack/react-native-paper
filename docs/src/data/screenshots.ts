@@ -29,9 +29,9 @@ export const screenshots = {
     'contained-tonal': 'screenshots/button-5.png',
   },
   Card: {
+    filled: 'screenshots/card-3.png',
     elevated: 'screenshots/card-1.png',
     outlined: 'screenshots/card-2.png',
-    contained: 'screenshots/card-3.png',
   },
   'Card.Actions': 'screenshots/card-actions.png',
   'Card.Content': 'screenshots/card-content-example.png',

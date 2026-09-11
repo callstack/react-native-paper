@@ -22,6 +22,7 @@ import {
 
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import type { Elevation } from '../../theme/types';
 import Surface from '../Surface';
 
 const SPOT_SHADOW_OPACITY = 0.19;
@@ -63,6 +64,24 @@ const AnimatedVisualSurface = () => {
         backgroundColor="red"
         borderRadius={borderRadius}
       >
+        {null}
+      </Surface>
+    </>
+  );
+};
+
+const SharedElevationSurface = () => {
+  const elevation = useSharedValue<Elevation>(0);
+
+  return (
+    <>
+      <Pressable
+        testID="raise-surface"
+        onPress={() => {
+          elevation.value = 2;
+        }}
+      />
+      <Surface testID="shared-elevation-surface" elevation={elevation}>
         {null}
       </Surface>
     </>
@@ -205,6 +224,24 @@ describe('Surface', () => {
 
       expect(screen.getByTestId('surface-container')).toHaveStyle({
         elevation: 12,
+      });
+    });
+
+    it('updates shared elevation without rerendering the Surface', async () => {
+      await render(<SharedElevationSurface />);
+      const surface = screen.getByTestId('shared-elevation-surface');
+
+      expect(getAnimatedStyle(surface)).toMatchObject({
+        backgroundColor: LightTheme.colors.elevation.level0,
+        elevation: 0,
+      });
+
+      await userEvent.press(screen.getByTestId('raise-surface'));
+      await jest.runAllTimersAsync();
+
+      expect(getAnimatedStyle(surface)).toMatchObject({
+        backgroundColor: LightTheme.colors.elevation.level2,
+        elevation: 3,
       });
     });
 

@@ -1,208 +1,301 @@
-import * as React from 'react';
-import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
   Button,
   Card,
-  Chip,
+  DarkTheme,
   IconButton,
+  LightTheme,
   Text,
+  ThemeProvider,
   useTheme,
 } from 'react-native-paper';
+import type { CardCoverProps, Theme } from 'react-native-paper';
 
-import { PreferencesContext } from '../PreferencesContext';
+import CardRenderCountExample from './CardRenderCountExample';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Mode = 'elevated' | 'outlined' | 'contained';
+const showMessage = (message: string) => {
+  if (Platform.OS === 'web') {
+    alert(message);
+  } else {
+    Alert.alert(message);
+  }
+};
 
-const CardExample = () => {
-  const { colors } = useTheme();
-  const [selectedMode, setSelectedMode] = React.useState<Mode>('elevated');
-  const [isSelected, setIsSelected] = React.useState(false);
-  const preferences = React.useContext(PreferencesContext);
+const CustomHeader = () => (
+  <View style={styles.customHeader}>
+    <Avatar.Icon icon="leaf" size={40} />
+    <View style={styles.customHeaderText}>
+      <Text variant="titleMedium">Custom header</Text>
+      <Text variant="bodySmall">Neutral container, independent actions</Text>
+    </View>
+  </View>
+);
 
-  const modes: Mode[] = ['elevated', 'outlined', 'contained'];
+const ResponsiveCover = ({
+  aspectRatio = 16 / 9,
+  ...props
+}: Omit<CardCoverProps, 'style'> & { aspectRatio?: number }) => (
+  <View style={[styles.mediaFrame, { aspectRatio }]}>
+    <Card.Cover {...props} style={styles.mediaFill} />
+  </View>
+);
+
+const ThemePreview = ({ name }: { name: string }) => {
+  const theme = useTheme();
 
   return (
-    <ScreenWrapper contentContainerStyle={styles.content}>
-      <View style={styles.preference}>
-        {modes.map((mode) => (
-          <Chip
-            key={mode}
-            selected={selectedMode === mode}
-            mode="outlined"
-            onPress={() => setSelectedMode(mode)}
-            style={styles.chip}
-          >
-            {mode}
-          </Chip>
-        ))}
+    <View
+      style={[
+        styles.themePreview,
+        {
+          backgroundColor: theme.colors.background,
+          borderColor: theme.colors.outlineVariant,
+        },
+      ]}
+    >
+      <Text variant="titleMedium">{name}</Text>
+      <Card
+        testID={`card-theme-${name.toLowerCase()}-filled`}
+        onPress={() => showMessage(`${name} filled Card pressed`)}
+        onLongPress={() => showMessage(`${name} filled Card long pressed`)}
+        title="Filled interaction"
+        subtitle="Tab, hover, press, or long press"
+        content={
+          <Card.Content>
+            <Text variant="bodySmall">
+              State layers and keyboard focus stay inside the shape.
+            </Text>
+          </Card.Content>
+        }
+      />
+      <Card
+        variant="elevated"
+        dragged
+        title="Elevated · dragged"
+        content={
+          <Card.Content>
+            <Text variant="bodySmall">Compare the raised surface.</Text>
+          </Card.Content>
+        }
+      />
+      <Card
+        variant="outlined"
+        borderTopLeftRadius={4}
+        borderTopRightRadius={28}
+        borderBottomRightRadius={4}
+        borderBottomLeftRadius={28}
+        media={
+          <ResponsiveCover
+            aspectRatio={2}
+            accessible={false}
+            aria-hidden
+            source={require('../../assets/images/forest.jpg')}
+          />
+        }
+        title="Outlined clipping"
+      />
+    </View>
+  );
+};
+
+const ThemedPreview = ({ name, theme }: { name: string; theme: Theme }) => (
+  <ThemeProvider theme={theme}>
+    <ThemePreview name={name} />
+  </ThemeProvider>
+);
+
+const CardExample = () => {
+  const theme = useTheme();
+
+  return (
+    <ScreenWrapper contentContainerStyle={styles.screen}>
+      <View style={styles.intro}>
+        <Text variant="headlineSmall">Expressive Card gallery</Text>
+        <Text variant="bodyMedium">
+          Filled is the default. Whole-Card actions are shown without nested
+          controls; neutral Cards own any independent actions.
+        </Text>
       </View>
-      <ScrollView
-        style={[styles.container, { backgroundColor: colors?.background }]}
-        contentContainerStyle={styles.content}
-      >
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/wrecked-ship.jpg')}
-          />
-          <Card.Title title="Abandoned Ship" />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              The Abandoned Ship is a wrecked ship located on Route 108 in
-              Hoenn, originally being a ship named the S.S. Cactus. The second
-              part of the ship can only be accessed by using Dive and contains
-              the Scanner.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/bridge.jpg')} />
-          <Card.Title
-            title="Title variant"
-            subtitle="Subtitle variant"
-            titleVariant="headlineMedium"
-            subtitleVariant="bodyLarge"
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a card using title and subtitle with specified variants.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/forest.jpg')} />
-          <Card.Actions>
-            <Button onPress={() => {}}>Share</Button>
-            <Button onPress={() => {}}>Explore</Button>
-          </Card.Actions>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Title
-            title="Berries that are trimmed at the end"
-            subtitle="Omega Ruby"
-            left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
-            right={(props: any) => (
-              <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
-            )}
-          />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              Dotted around the Hoenn region, you will find loamy soil, many of
-              which are housing berries. Once you have picked the berries, then
-              you have the ability to use that loamy soil to grow your own
-              berries. These can be any berry and will require attention to get
-              the best crop.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/restaurant-1.jpg')}
-          />
-          <Card.Title title="Custom Button styles" />
-          <Card.Actions>
-            <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
-              onPress={() => {}}
-            >
-              Share
-            </Button>
-            <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
-              onPress={() => {}}
-            >
-              Explore
-            </Button>
-          </Card.Actions>
-        </Card>
-        <Card
-          style={styles.card}
-          mode={selectedMode}
-          theme={{ shapes: { corner: { medium: 24 } } }}
-        >
-          <Card.Title
-            title="Custom border radius"
-            subtitle="... for card and cover"
-          />
-          <Card.Cover
-            source={require('../../assets/images/artist-2.jpg')}
-            style={styles.customCoverRadius}
-          />
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover
-            source={require('../../assets/images/strawberries.jpg')}
-          />
-          <Card.Title
-            title="Just Strawberries"
-            subtitle="... and only Strawberries"
-            right={(props: any) => (
-              <IconButton
-                {...props}
-                icon={isSelected ? 'heart' : 'heart-outline'}
-                onPress={() => setIsSelected(!isSelected)}
+
+      <View style={styles.section}>
+        <Text variant="titleLarge">Variants and composition</Text>
+        <View style={styles.gallery}>
+          <Card
+            style={styles.galleryCard}
+            testID="card-gallery-filled"
+            accessibilityLabel="Open the default filled Card example"
+            onPress={() => showMessage('Default filled Card pressed')}
+            onLongPress={() => showMessage('Default filled Card long pressed')}
+            media={
+              <ResponsiveCover
+                accessible={false}
+                aria-hidden
+                source={require('../../assets/images/wrecked-ship.jpg')}
               />
-            )}
+            }
+            title="Filled (default)"
+            subtitle="Actionable Card"
+            content={
+              <Card.Content>
+                <Text variant="bodyMedium">
+                  One coherent target with direct title and content slots.
+                </Text>
+              </Card.Content>
+            }
           />
-        </Card>
-        <Card
-          style={styles.card}
-          onPress={() => {
-            Platform.OS === 'web'
-              ? alert('The Chameleon is Pressed')
-              : Alert.alert('The Chameleon is Pressed');
-          }}
-          mode={selectedMode}
-        >
-          <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
-          <Card.Title title="Pressable Chameleon" />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a pressable chameleon. If you press me, I will alert.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card
-          style={styles.card}
-          onLongPress={() => {
-            Platform.OS === 'web'
-              ? alert('The City is Long Pressed')
-              : Alert.alert('The City is Long Pressed');
-          }}
-          mode={selectedMode}
-        >
-          <Card.Cover source={require('../../assets/images/city.jpg')} />
-          <Card.Title
-            title="Long Pressable City"
-            left={(props) => <Avatar.Icon {...props} icon="city" />}
+
+          <Card
+            style={styles.galleryCard}
+            variant="elevated"
+            header={<CustomHeader />}
+            content={
+              <Card.Content>
+                <Text variant="bodyMedium">
+                  Card.Actions preserves each control&apos;s own presentation.
+                </Text>
+              </Card.Content>
+            }
+            actions={
+              <Card.Actions>
+                <IconButton
+                  accessibilityLabel="Save custom header example"
+                  icon="bookmark-outline"
+                  onPress={() => showMessage('Saved')}
+                />
+                <Button
+                  mode="contained-tonal"
+                  onPress={() => showMessage('Opened')}
+                >
+                  Open
+                </Button>
+              </Card.Actions>
+            }
           />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is a long press only city. If you long press me, I will
-              alert.
-            </Text>
-          </Card.Content>
-        </Card>
-        <Card
-          style={styles.card}
-          onPress={() => {
-            preferences?.toggleTheme();
-          }}
-          mode={selectedMode}
-        >
-          <Card.Title
-            title="Pressable Theme Change"
-            left={(props) => <Avatar.Icon {...props} icon="format-paint" />}
+
+          <Card
+            style={styles.galleryCard}
+            variant="outlined"
+            media={
+              <ResponsiveCover
+                accessible
+                accessibilityRole="image"
+                accessibilityLabel="A bridge crossing a green valley"
+                source={require('../../assets/images/bridge.jpg')}
+              />
+            }
+            title="Outlined"
+            subtitle="Responsive informative media"
           />
-          <Card.Content>
-            <Text variant="bodyMedium">
-              This is pressable card. If you press me, I will switch the theme.
-            </Text>
-          </Card.Content>
-        </Card>
-      </ScrollView>
+        </View>
+      </View>
+
+      <View style={styles.section}>
+        <Text variant="titleLarge">States, shapes, and omitted slots</Text>
+        <View style={styles.gallery}>
+          <Card
+            style={styles.compactCard}
+            variant="outlined"
+            disabled
+            onPress={() => showMessage('Disabled Card pressed')}
+            title="Disabled action"
+            content={
+              <Card.Content>
+                <Text variant="bodySmall">Not focusable or pressable.</Text>
+              </Card.Content>
+            }
+          />
+          <Card
+            style={styles.compactCard}
+            variant="elevated"
+            dragged
+            title="Dragged presentation"
+            content={
+              <Card.Content>
+                <Text variant="bodySmall">Controlled visual state.</Text>
+              </Card.Content>
+            }
+          />
+          <Card
+            style={styles.compactCard}
+            borderTopLeftRadius={4}
+            borderTopRightRadius={32}
+            borderBottomRightRadius={8}
+            borderBottomLeftRadius={24}
+            media={
+              <ResponsiveCover
+                accessible={false}
+                aria-hidden
+                source={require('../../assets/images/strawberries.jpg')}
+              />
+            }
+            content={
+              <Card.Content>
+                <Text variant="bodyMedium">Asymmetric shape, no header.</Text>
+              </Card.Content>
+            }
+          />
+          <Card
+            style={styles.compactCard}
+            header={
+              <Card.Title
+                title="Header only"
+                subtitle="Media, content, and actions omitted"
+                titleVariant="headlineSmall"
+                subtitleVariant="bodyMedium"
+                left={(props) => <Avatar.Icon {...props} icon="folder" />}
+                right={(props) => (
+                  <IconButton
+                    {...props}
+                    accessibilityLabel="More header-only options"
+                    icon="dots-vertical"
+                    onPress={() => showMessage('More options')}
+                  />
+                )}
+              />
+            }
+          />
+        </View>
+      </View>
+
+      <View style={styles.section}>
+        <Text variant="titleLarge">Light and dark verification</Text>
+        <Text variant="bodyMedium">
+          Compare surfaces, outlines, elevation, clipping, and interaction
+          feedback without changing the application theme.
+        </Text>
+        <View style={styles.gallery}>
+          <ThemedPreview name="Light" theme={LightTheme} />
+          <ThemedPreview name="Dark" theme={DarkTheme} />
+        </View>
+      </View>
+
+      <View
+        style={[
+          styles.verification,
+          { borderColor: theme.colors.outlineVariant },
+        ]}
+      >
+        <Text variant="titleMedium">Platform verification</Text>
+        <Text variant="bodySmall">
+          Android · iOS · web: compare layout, both themes, surface roles,
+          outlines, clipping, and elevation.
+        </Text>
+        <Text variant="bodySmall">
+          Web: use Tab and hover on actionable Cards to inspect focus and state
+          layers.
+        </Text>
+        <Text variant="bodySmall">
+          Native: touch actionable Cards to inspect bounded ripple, clipping,
+          and elevation. Current platform: {Platform.OS}.
+        </Text>
+      </View>
+
+      <View style={styles.section}>
+        <CardRenderCountExample />
+      </View>
     </ScreenWrapper>
   );
 };
@@ -210,28 +303,61 @@ const CardExample = () => {
 CardExample.title = 'Card';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  screen: {
+    gap: 28,
+    padding: 16,
   },
-  content: {
-    padding: 4,
+  intro: {
+    gap: 8,
   },
-  card: {
-    margin: 4,
+  section: {
+    gap: 12,
   },
-  chip: {
-    margin: 4,
+  gallery: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 16,
   },
-  preference: {
+  galleryCard: {
+    minWidth: 260,
+    flexBasis: 300,
+    flexGrow: 1,
+  },
+  compactCard: {
+    minWidth: 220,
+    flexBasis: 250,
+    flexGrow: 1,
+  },
+  mediaFrame: {
+    overflow: 'hidden',
+    width: '100%',
+  },
+  mediaFill: {
+    height: '100%',
+  },
+  customHeader: {
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
-  customCoverRadius: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 24,
+  customHeaderText: {
+    flex: 1,
+  },
+  themePreview: {
+    borderWidth: 1,
+    flexBasis: 300,
+    flexGrow: 1,
+    gap: 12,
+    minWidth: 260,
+    padding: 16,
+  },
+  verification: {
+    borderLeftWidth: 4,
+    gap: 6,
+    paddingLeft: 12,
   },
 });
 

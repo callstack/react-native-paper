@@ -61,6 +61,11 @@ export type Props = PressableProps & {
    */
   underlayColor?: string;
   /**
+   * Color of the hover feedback on web. Set this to `transparent` when the
+   * caller renders its own state layer.
+   */
+  hoverColor?: ColorValue;
+  /**
    * Content of the `TouchableRipple`.
    */
   children:
@@ -109,6 +114,7 @@ const TouchableRipple = ({
   disabled: disabledProp,
   rippleColor,
   underlayColor: _underlayColor,
+  hoverColor: customHoverColor,
   children,
   theme: themeOverrides,
   ref,
@@ -122,9 +128,10 @@ const TouchableRipple = ({
   // Web-only style. PlatformColor doesn't exist on web, so the calculated
   // ripple color is effectively always a string here.
   const hoverColor =
-    typeof calculatedRippleColor === 'string'
+    customHoverColor ??
+    (typeof calculatedRippleColor === 'string'
       ? color(calculatedRippleColor).fade(0.5).rgb().string()
-      : calculatedRippleColor;
+      : calculatedRippleColor);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;

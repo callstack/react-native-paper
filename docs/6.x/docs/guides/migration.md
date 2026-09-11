@@ -31,6 +31,7 @@ So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate t
 
 ```tsx
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Card, Text } from 'react-native-paper';
 
 const MyComponent = () => {
   const opacity = useSharedValue(1);
@@ -38,7 +39,7 @@ const MyComponent = () => {
     opacity: opacity.value,
   }));
 
-  return <Card style={animatedStyle}>Button</Card>;
+  return <Card content={<Text>Animated Card</Text>} style={animatedStyle} />;
 };
 ```
 
@@ -47,7 +48,7 @@ const MyComponent = () => {
 The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
 
 - `Banner`
-- `Card`
+- `Card` (`variant="elevated"` only)
 - `Searchbar`
 - `Snackbar`
 - `Surface`
@@ -114,6 +115,97 @@ Some components now accept explicit `testID` props for their interactable elemen
 The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
 
 The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+
+### Card
+
+Paper 6 replaces the Card's `mode` and arbitrary-children interfaces with Material 3 variants and explicit slots. These interfaces were removed; they are not deprecated APIs. Migrate each Card directly to the new contract.
+
+#### Variants and default
+
+Replace `mode` with `variant`:
+
+| Paper 5 | Paper 6 |
+| --- | --- |
+| `mode="contained"` | `variant="filled"` |
+| `mode="elevated"` | `variant="elevated"` |
+| `mode="outlined"` | `variant="outlined"` |
+
+The default also changed. A Paper 5 Card without `mode` was elevated; a Paper 6 Card without `variant` is filled and has no resting shadow. Add `variant="elevated"` if you need to preserve the old default emphasis. The `elevation` prop is accepted only with `variant="elevated"`.
+
+#### Replace nested composition with slots
+
+Arbitrary Card children were removed. Paper 6 renders the explicit regions in the deterministic order `media`, header, `content`, and `actions`, regardless of the order in which props are written. Arrays, fragments, conditional values, and custom wrappers can be passed inside a slot without changing region placement.
+
+For the common header form, move `Card.Title` values to `title`, `subtitle`, `leading`, and `trailing`. Move the remaining regions to their corresponding slots:
+
+```tsx
+// Before (v5)
+<Card mode="contained" onPress={openDetails}>
+  <Card.Cover source={{ uri: coverUri }} />
+  <Card.Title title="Weekend trip" subtitle="2 days" />
+  <Card.Content>
+    <Text variant="bodyMedium">View the itinerary.</Text>
+  </Card.Content>
+</Card>
+
+// After (v6)
+<Card
+  accessibilityLabel="Open weekend trip details"
+  onPress={openDetails}
+  media={<Card.Cover source={{ uri: coverUri }} />}
+  title="Weekend trip"
+  subtitle="2 days"
+  content={
+    <Card.Content>
+      <Text variant="bodyMedium">View the itinerary.</Text>
+    </Card.Content>
+  }
+/>
+```
+
+Use `header` when the complete header is custom. It is mutually exclusive with `title`, `subtitle`, `leading`, and `trailing`:
+
+```tsx
+<Card
+  variant="outlined"
+  header={<TripHeader trip={trip} />}
+  content={
+    <Card.Content>
+      <Text>{trip.summary}</Text>
+    </Card.Content>
+  }
+/>
+```
+
+`Card.Content`, `Card.Cover`, `Card.Title`, and `Card.Actions` remain available as layout helpers inside the new slots. They are not arbitrary Card children.
+
+#### Choose one interaction model
+
+Give the Card an interaction handler when the whole Card represents one action. It becomes one accessibility target with button semantics by default, so do not place independent controls in its `actions` slot.
+
+When buttons or other controls perform independent actions, keep the Card itself neutral and put those controls in `actions`:
+
+```tsx
+<Card
+  variant="elevated"
+  title="Draft itinerary"
+  content={
+    <Card.Content>
+      <Text>Review before saving.</Text>
+    </Card.Content>
+  }
+  actions={
+    <Card.Actions>
+      <Button onPress={discard}>Discard</Button>
+      <Button mode="contained" onPress={save}>Save</Button>
+    </Card.Actions>
+  }
+/>
+```
+
+Paper 6 warns in development if whole-Card interaction handlers and a populated `actions` slot are combined. A neutral Card remains a grouping container unless you provide accessibility semantics explicitly. The `dragged` prop controls the Material dragged presentation only; drag gestures and lifecycle remain application responsibilities.
+
+Card refs and test IDs now target documented nodes: `ref` targets the outer shell, `touchableRef` targets the actionable interaction node, and `testID` targets the interaction node for actionable Cards or the slot-content node for neutral Cards. `${testID}-container` and `${testID}-visual` identify the outer shell and clipped visual region.
 
 ### Surface
 
