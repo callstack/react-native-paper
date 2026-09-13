@@ -19,15 +19,69 @@ export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
   return useThemeBase<T>(overrides);
 }
 
+const isStringArray = (v: unknown): boolean =>
+  Array.isArray(v) && v.every((item) => typeof item === 'string');
+
+const DYNAMIC_TUPLE_KEYS = [
+  'light',
+  'dark',
+  'highContrastLight',
+  'highContrastDark',
+];
+
+// `DynamicColorIOS` always emits both `light` and `dark` (either may be
+// nullish) and never any key outside the tuple above.
+const isDynamicColorIOSTuple = (v: unknown): boolean => {
+  if (!v || typeof v !== 'object' || Array.isArray(v)) {
+    return false;
+  }
+  const keys = Object.keys(v);
+  return (
+    keys.includes('light') &&
+    keys.includes('dark') &&
+    keys.every((key) => DYNAMIC_TUPLE_KEYS.includes(key))
+  );
+};
+
 // Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
-// and treat sentinels as leaves. Three shapes:
-//   `semantic`        — iOS PlatformColor
-//   `dynamic`         — DynamicColorIOS
-//   `resource_paths`  — Android PlatformColor
-export const isPlatformColorSentinel = (v: unknown): boolean =>
-  !!v &&
-  typeof v === 'object' &&
-  ('resource_paths' in v || 'semantic' in v || 'dynamic' in v);
+// and treat sentinels as leaves. Three shapes, straight from React Native's
+// `PlatformColorValueTypes.{ios,android}.js`:
+//   `{ semantic: string[] }`                 -> iOS PlatformColor
+//   `{ dynamic: { light, dark, ...} }`       -> DynamicColorIOS
+//   `{ resource_paths: string[] }`           -> Android PlatformColor
+// The shape has to be validated, not just the key name: a theme may own a
+// custom property called `dynamic`, `semantic` or `resource_paths` (extending
+// the theme with arbitrary properties is documented), and treating such a
+// theme as a leaf would drop every default it did not spell out.
+export const isPlatformColorSentinel = (v: unknown): boolean => {
+  if (!v || typeof v !== 'object' || Array.isArray(v)) {
+    return false;
+  }
+  // A native color value carries exactly one of the three keys and nothing
+  // else, so anything with siblings is a regular object.
+  const entries = Object.entries(v);
+  if (entries.length !== 1) {
+    return false;
+  }
+  const [[key, value]] = entries;
+
+  switch (key) {
+    case 'semantic':
+    case 'resource_paths':
+      return isStringArray(value);
+    case 'dynamic':
+      return isDynamicColorIOSTuple(value);
+    default:
+      return false;
+  }
+};
+
+// A native color replaces whatever it lands on, so it is a leaf wherever it
+// appears *inside* a theme. Only nested values get this check: the root
+// `overrides` is the theme itself, and a theme is free to own a custom property
+// shaped like a sentinel, which would otherwise drop every default.
+const mergeThemeValue = (base: unknown, overrides: unknown): unknown =>
+  isPlatformColorSentinel(overrides) ? overrides : safeMerge(base, overrides);
 
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
@@ -38,15 +92,14 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     typeof overrides !== 'object' ||
     Array.isArray(base) ||
     Array.isArray(overrides) ||
-    isPlatformColorSentinel(base) ||
-    isPlatformColorSentinel(overrides)
+    isPlatformColorSentinel(base)
   ) {
     // leaf: override wins, fall back to base
     return (overrides ?? base) as T;
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
   for (const key of Object.keys(overrides)) {
-    out[key] = safeMerge(
+    out[key] = mergeThemeValue(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
     );

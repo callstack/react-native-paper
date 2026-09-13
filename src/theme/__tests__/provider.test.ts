@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PlatformColor } from 'react-native';
+import { DynamicColorIOS, PlatformColor } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 import { renderHook } from '@testing-library/react-native';
@@ -12,6 +12,11 @@ import {
 } from '../provider';
 import { DarkTheme, LightTheme } from '../schemes';
 import type { ThemeProp } from '../types';
+
+// Android's `PlatformColor` cannot be exercised here (jest resolves the `.ios`
+// platform extension), so its value is spelled out. Shape taken verbatim from
+// react-native/Libraries/StyleSheet/PlatformColorValueTypes.android.js.
+const androidPlatformColor = { resource_paths: ['@android:color/black'] };
 
 describe('isPlatformColorSentinel', () => {
   it('detects iOS PlatformColor (semantic)', () => {
@@ -28,6 +33,62 @@ describe('isPlatformColorSentinel', () => {
     expect(
       isPlatformColorSentinel({ resource_paths: ['@android:color/black'] })
     ).toBe(true);
+  });
+
+  it('detects values produced by the real react-native APIs', () => {
+    // Guards against the shape validation below degenerating into
+    // "nothing is ever a sentinel", which would let deepmerge corrupt
+    // genuine platform colors again.
+    expect(isPlatformColorSentinel(PlatformColor('label'))).toBe(true);
+    expect(
+      isPlatformColorSentinel(DynamicColorIOS({ light: '#fff', dark: '#000' }))
+    ).toBe(true);
+    expect(
+      isPlatformColorSentinel(
+        DynamicColorIOS({
+          light: '#fff',
+          dark: '#000',
+          highContrastLight: '#eee',
+          highContrastDark: '#111',
+        })
+      )
+    ).toBe(true);
+    expect(isPlatformColorSentinel(androidPlatformColor)).toBe(true);
+  });
+
+  it('rejects custom theme properties that only reuse a sentinel key name', () => {
+    // Extending the theme with arbitrary properties is documented, so a theme
+    // is allowed to own a key called `dynamic`, `semantic` or `resource_paths`.
+    expect(isPlatformColorSentinel({ dynamic: true })).toBe(false);
+    expect(isPlatformColorSentinel({ dynamic: 'auto' })).toBe(false);
+    expect(isPlatformColorSentinel({ semantic: 'label' })).toBe(false);
+    expect(isPlatformColorSentinel({ semantic: [1, 2] })).toBe(false);
+    expect(isPlatformColorSentinel({ resource_paths: true })).toBe(false);
+  });
+
+  it('rejects objects that carry a sentinel key alongside other keys', () => {
+    // A whole theme is not a platform color, even when one of its properties
+    // happens to be shaped like `DynamicColorIOS`'s tuple.
+    expect(
+      isPlatformColorSentinel({
+        dynamic: { light: '#fff', dark: '#000' },
+        colors: { primary: 'tomato' },
+      })
+    ).toBe(false);
+    expect(isPlatformColorSentinel({ semantic: ['label'], fonts: {} })).toBe(
+      false
+    );
+  });
+
+  it('rejects `dynamic` values that are not a light/dark tuple', () => {
+    expect(isPlatformColorSentinel({ dynamic: {} })).toBe(false);
+    expect(isPlatformColorSentinel({ dynamic: { light: '#fff' } })).toBe(false);
+    expect(isPlatformColorSentinel({ dynamic: { dark: '#000' } })).toBe(false);
+    expect(
+      isPlatformColorSentinel({
+        dynamic: { light: '#fff', dark: '#000', scale: 1 },
+      })
+    ).toBe(false);
   });
 
   it('rejects plain objects, primitives, null, and arrays', () => {
@@ -107,6 +168,103 @@ describe('safeMerge', () => {
       overrides
     );
     expect(result.colors.primary).toBe(sentinelOverride);
+  });
+
+  it('keeps the base when overrides own a custom property named `dynamic`', () => {
+    const base = {
+      fonts: { titleLarge: { fontSize: 22 } },
+      colors: { primary: '#000' },
+    };
+    const overrides = { dynamic: true };
+
+    const result = safeMerge<typeof base & { dynamic?: boolean }>(
+      base,
+      overrides
+    );
+
+    expect(result.fonts).toStrictEqual(base.fonts);
+    expect(result.colors).toStrictEqual(base.colors);
+    expect(result.dynamic).toBe(true);
+  });
+
+  it('keeps the base when the whole override matches the sentinel shape', () => {
+    // A custom root property is still a theme, not a color: the root
+    // `overrides` is the theme prop itself, so only nested values can be a
+    // native color.
+    const base = {
+      fonts: { titleLarge: { fontSize: 22 } },
+      colors: { primary: '#000' },
+      shapes: { small: 4 },
+    };
+    const dynamic = { light: '#fff', dark: '#000' };
+
+    const result = safeMerge<typeof base & { dynamic?: unknown }>(base, {
+      dynamic,
+    });
+
+    expect(result.fonts).toStrictEqual(base.fonts);
+    expect(result.colors).toStrictEqual(base.colors);
+    expect(result.shapes).toStrictEqual(base.shapes);
+    expect(result.dynamic).toBe(dynamic);
+
+    const semantic = ['label'];
+    const semanticResult = safeMerge<typeof base & { semantic?: unknown }>(
+      base,
+      { semantic }
+    );
+
+    expect(semanticResult.colors).toStrictEqual(base.colors);
+    expect(semanticResult.semantic).toBe(semantic);
+  });
+
+  it('treats a nested sentinel as a leaf even when it replaces a plain object', () => {
+    // The base is a mergeable object here, so nothing but the check on
+    // `overrides` stops the merge from recursing into the sentinel.
+    const sentinel = { semantic: ['label'] };
+    const base = {
+      colors: { elevation: { level0: 'transparent', level1: '#eee' } },
+    };
+    const overrides = { colors: { elevation: sentinel } };
+
+    const result = safeMerge<{ colors: { elevation: unknown } }>(
+      base,
+      overrides
+    );
+
+    expect(result.colors.elevation).toBe(sentinel);
+  });
+
+  it('treats a nested sentinel as a leaf when the base value is absent', () => {
+    const sentinel = PlatformColor('label');
+    const base = { colors: { primary: '#000' } };
+    const overrides = { colors: { accent: sentinel } };
+
+    const result = safeMerge<{ colors: Record<string, unknown> }>(
+      base,
+      overrides
+    );
+
+    expect(result.colors.accent).toBe(sentinel);
+    expect(result.colors.primary).toBe('#000');
+  });
+
+  it('still treats a real DynamicColorIOS override as a leaf, not a merge target', () => {
+    const baseColor = DynamicColorIOS({
+      light: '#000',
+      dark: '#111',
+      highContrastLight: '#222',
+      highContrastDark: '#333',
+    });
+    const overrideColor = DynamicColorIOS({ light: '#fff', dark: '#eee' });
+    const base = { colors: { primary: baseColor } };
+    const overrides = { colors: { primary: overrideColor } };
+
+    const result = safeMerge<{ colors: { primary: any } }>(base, overrides);
+
+    // Identity: the override object is passed through untouched...
+    expect(result.colors.primary).toBe(overrideColor);
+    // ...and nothing was inherited from the base sentinel underneath it.
+    expect(result.colors.primary.dynamic.highContrastLight).toBeUndefined();
   });
 
   it('preserves sentinel siblings when merging a colors map', () => {
