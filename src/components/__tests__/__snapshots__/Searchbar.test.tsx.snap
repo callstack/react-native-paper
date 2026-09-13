@@ -161,7 +161,7 @@ exports[`activity indicator snapshot test 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,
@@ -1003,7 +1003,7 @@ exports[`renders with placeholder 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,
@@ -1169,7 +1169,7 @@ exports[`renders with placeholder 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               undefined,
@@ -1381,7 +1381,7 @@ exports[`renders with text 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             undefined,
@@ -1543,7 +1543,7 @@ exports[`renders with text 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               undefined,
