@@ -3,7 +3,7 @@ import { PlatformColor } from 'react-native';
 import { describe, expect, it } from '@jest/globals';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
+import { LightTheme } from '../../theme/schemes';
 import {
   getSplitButtonColors,
   getSplitButtonHitSlop,
@@ -16,9 +16,7 @@ import {
 
 describe('resolveSplitButtonContainerRadius', () => {
   it('resolves a "full" shape to exactly half the container height, not the corner-overlap sentinel', () => {
-    const theme = getTheme();
-
-    const radius = resolveSplitButtonContainerRadius(theme, 'full', 40);
+    const radius = resolveSplitButtonContainerRadius(LightTheme, 'full', 40);
 
     expect(radius).toBe(20);
     // Regression guard: 'full' used to resolve through the `cornerFull`
@@ -28,22 +26,18 @@ describe('resolveSplitButtonContainerRadius', () => {
   });
 
   it('resolves a non-"full" shape from the theme, ignoring container height', () => {
-    const theme = getTheme();
+    const radius = resolveSplitButtonContainerRadius(LightTheme, 'medium', 999);
 
-    const radius = resolveSplitButtonContainerRadius(theme, 'medium', 999);
-
-    expect(radius).toBe(theme.shapes.corner.medium);
+    expect(radius).toBe(LightTheme.shapes.corner.medium);
   });
 });
 
 describe('getSplitButtonSizeStyle', () => {
   it('resolves the container radius to exactly half the container height', () => {
-    const theme = getTheme();
-
     (
       ['extra-small', 'small', 'medium', 'large', 'extra-large'] as const
     ).forEach((size) => {
-      const sizeStyle = getSplitButtonSizeStyle({ size, theme });
+      const sizeStyle = getSplitButtonSizeStyle({ size, theme: LightTheme });
 
       expect(sizeStyle.containerRadius).toBe(sizeStyle.containerHeight / 2);
       expect(sizeStyle.containerRadius).toBeLessThan(9999);
@@ -51,63 +45,71 @@ describe('getSplitButtonSizeStyle', () => {
   });
 
   it('resolves the inner radius from the theme shape corner for the size', () => {
-    const theme = getTheme();
-    const sizeStyle = getSplitButtonSizeStyle({ size: 'small', theme });
+    const sizeStyle = getSplitButtonSizeStyle({
+      size: 'small',
+      theme: LightTheme,
+    });
 
-    expect(sizeStyle.innerRadius).toBe(theme.shapes.corner.extraSmall);
+    expect(sizeStyle.innerRadius).toBe(LightTheme.shapes.corner.extraSmall);
   });
 
   it('returns different inner radii for sizes with different corner shapes', () => {
-    const theme = getTheme();
-    const small = getSplitButtonSizeStyle({ size: 'small', theme });
-    const large = getSplitButtonSizeStyle({ size: 'large', theme });
+    const small = getSplitButtonSizeStyle({ size: 'small', theme: LightTheme });
+    const large = getSplitButtonSizeStyle({ size: 'large', theme: LightTheme });
 
-    expect(small.innerRadius).toBe(theme.shapes.corner.extraSmall);
-    expect(large.innerRadius).toBe(theme.shapes.corner.small);
+    expect(small.innerRadius).toBe(LightTheme.shapes.corner.extraSmall);
+    expect(large.innerRadius).toBe(LightTheme.shapes.corner.small);
   });
 });
 
 describe('getSplitButtonColors', () => {
   it('returns filled mode colors', () => {
-    const theme = getTheme();
-    const { enabled } = getSplitButtonColors({ theme, mode: 'filled' });
+    const { enabled } = getSplitButtonColors({
+      theme: LightTheme,
+      mode: 'filled',
+    });
 
-    expect(enabled.containerColor).toBe(theme.colors.primary);
-    expect(enabled.contentColor).toBe(theme.colors.onPrimary);
+    expect(enabled.containerColor).toBe(LightTheme.colors.primary);
+    expect(enabled.contentColor).toBe(LightTheme.colors.onPrimary);
     expect(enabled.borderColor).toBe('transparent');
     expect(enabled.borderWidth).toBe(0);
   });
 
   it('returns tonal mode colors', () => {
-    const theme = getTheme();
-    const { enabled } = getSplitButtonColors({ theme, mode: 'tonal' });
+    const { enabled } = getSplitButtonColors({
+      theme: LightTheme,
+      mode: 'tonal',
+    });
 
-    expect(enabled.containerColor).toBe(theme.colors.secondaryContainer);
-    expect(enabled.contentColor).toBe(theme.colors.onSecondaryContainer);
+    expect(enabled.containerColor).toBe(LightTheme.colors.secondaryContainer);
+    expect(enabled.contentColor).toBe(LightTheme.colors.onSecondaryContainer);
   });
 
   it('returns elevated mode colors', () => {
-    const theme = getTheme();
-    const { enabled } = getSplitButtonColors({ theme, mode: 'elevated' });
+    const { enabled } = getSplitButtonColors({
+      theme: LightTheme,
+      mode: 'elevated',
+    });
 
-    expect(enabled.containerColor).toBe(theme.colors.surfaceContainerLow);
-    expect(enabled.contentColor).toBe(theme.colors.primary);
+    expect(enabled.containerColor).toBe(LightTheme.colors.surfaceContainerLow);
+    expect(enabled.contentColor).toBe(LightTheme.colors.primary);
   });
 
   it('returns outlined mode colors with a visible border', () => {
-    const theme = getTheme();
-    const { enabled } = getSplitButtonColors({ theme, mode: 'outlined' });
+    const { enabled } = getSplitButtonColors({
+      theme: LightTheme,
+      mode: 'outlined',
+    });
 
     expect(enabled.containerColor).toBe('transparent');
-    expect(enabled.contentColor).toBe(theme.colors.onSurfaceVariant);
-    expect(enabled.borderColor).toBe(theme.colors.outlineVariant);
+    expect(enabled.contentColor).toBe(LightTheme.colors.onSurfaceVariant);
+    expect(enabled.borderColor).toBe(LightTheme.colors.outlineVariant);
     expect(enabled.borderWidth).toBe(1);
   });
 
   it('prefers custom container and text colors when not disabled', () => {
-    const theme = getTheme();
     const { enabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'filled',
       customButtonColor: '#123456',
       customTextColor: '#abcdef',
@@ -118,46 +120,41 @@ describe('getSplitButtonColors', () => {
   });
 
   it('ignores custom colors when disabled', () => {
-    const theme = getTheme();
     const { disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'filled',
       customButtonColor: '#123456',
       customTextColor: '#abcdef',
     });
 
-    expect(disabled.containerColor).toBe(theme.colors.onSurface);
-    expect(disabled.contentColor).toBe(theme.colors.onSurface);
+    expect(disabled.containerColor).toBe(LightTheme.colors.onSurface);
+    expect(disabled.contentColor).toBe(LightTheme.colors.onSurface);
   });
 
   it('fades a disabled filled container instead of using a flat disabled color', () => {
-    const theme = getTheme();
     const { disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'filled',
     });
 
-    expect(disabled.containerColor).toBe(theme.colors.onSurface);
+    expect(disabled.containerColor).toBe(LightTheme.colors.onSurface);
     expect(disabled.containerOpacity).toBeLessThan(1);
   });
 
   it('shares the same disabled onSurface treatment across filled, tonal, and elevated', () => {
-    const theme = getTheme();
-
     (['filled', 'tonal', 'elevated'] as const).forEach((mode) => {
-      const { disabled } = getSplitButtonColors({ theme, mode });
+      const { disabled } = getSplitButtonColors({ theme: LightTheme, mode });
 
-      expect(disabled.containerColor).toBe(theme.colors.onSurface);
-      expect(disabled.contentColor).toBe(theme.colors.onSurface);
+      expect(disabled.containerColor).toBe(LightTheme.colors.onSurface);
+      expect(disabled.contentColor).toBe(LightTheme.colors.onSurface);
       expect(disabled.containerOpacity).toBe(0.1);
       expect(disabled.contentOpacity).toBe(0.38);
     });
   });
 
   it('uses a transparent container for a disabled outlined split button', () => {
-    const theme = getTheme();
     const { disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'outlined',
     });
 
@@ -166,30 +163,29 @@ describe('getSplitButtonColors', () => {
   });
 
   it('keeps the outline color at full opacity for a disabled outlined split button', () => {
-    const theme = getTheme();
     const { disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'outlined',
     });
 
-    expect(disabled.borderColor).toBe(theme.colors.outlineVariant);
+    expect(disabled.borderColor).toBe(LightTheme.colors.outlineVariant);
   });
 
   it('uses onSurface content color for a disabled outlined split button', () => {
-    const theme = getTheme();
     const { disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'outlined',
     });
 
-    expect(disabled.contentColor).toBe(theme.colors.onSurface);
+    expect(disabled.contentColor).toBe(LightTheme.colors.onSurface);
   });
 
   it('only grants elevation to an enabled elevated split button', () => {
-    const theme = getTheme();
-
     (['elevated', 'filled', 'tonal', 'outlined'] as const).forEach((mode) => {
-      const { enabled, disabled } = getSplitButtonColors({ theme, mode });
+      const { enabled, disabled } = getSplitButtonColors({
+        theme: LightTheme,
+        mode,
+      });
 
       expect(enabled.elevation).toBe(mode === 'elevated' ? 1 : 0);
       expect(disabled.elevation).toBe(0);
@@ -197,9 +193,8 @@ describe('getSplitButtonColors', () => {
   });
 
   it('reduces content opacity when disabled', () => {
-    const theme = getTheme();
     const { enabled, disabled } = getSplitButtonColors({
-      theme,
+      theme: LightTheme,
       mode: 'filled',
     });
 

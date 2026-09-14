@@ -10,8 +10,8 @@ import {
   type SplitButtonSize,
 } from './tokens';
 import { tokens } from '../../theme/tokens';
+import type { Elevation, InternalTheme } from '../../theme/types';
 import { resolveCornerRadius, type ShapeToken } from '../../theme/utils/shape';
-import type { Elevation, InternalTheme } from '../../types';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const stateOpacity = tokens.md.sys.state.opacity;

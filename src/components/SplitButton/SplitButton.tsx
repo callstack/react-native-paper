@@ -40,7 +40,7 @@ import {
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import ActivityIndicator from '../ActivityIndicator';
@@ -52,7 +52,7 @@ import TouchableRipple, {
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<ViewProps, 'children' | 'style'> & {
+export type Props = Omit<ViewProps, 'children' | 'style'> & {
   /**
    * Mode of the split button.
    * - `filled` - high-emphasis split button for important or final actions.
@@ -207,6 +207,10 @@ export type Props = $Omit<ViewProps, 'children' | 'style'> & {
    * TestID used for testing purposes.
    */
   testID?: string;
+  /**
+   * TestID for the trailing button.
+   */
+  trailingTestID?: string;
 };
 
 /**
@@ -269,6 +273,7 @@ const SplitButton = ({
   trailingHitSlop,
   theme: themeOverrides,
   testID,
+  trailingTestID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -280,7 +285,6 @@ const SplitButton = ({
   // mixing physical names into it breaks native's own border radius
   // resolution.
   const isRTL = direction === 'rtl';
-  const isWeb = Platform.OS === 'web';
   const sizeStyle = React.useMemo(
     () => getSplitButtonSizeStyle({ size, theme }),
     [size, theme]
@@ -352,21 +356,22 @@ const SplitButton = ({
   // physical `Left`/`Right` name instead avoids it, so `Surface` gets these
   // (direction-aware) instead of spreading `leadingShape` directly - native
   // is unaffected and keeps the original logical shape.
-  const leadingSurfaceCornerProps = !isWeb
-    ? leadingShape
-    : isRTL
-      ? {
-          borderTopRightRadius: sizeStyle.containerRadius,
-          borderBottomRightRadius: sizeStyle.containerRadius,
-          borderTopLeftRadius: sizeStyle.innerRadius,
-          borderBottomLeftRadius: sizeStyle.innerRadius,
-        }
-      : {
-          borderTopLeftRadius: sizeStyle.containerRadius,
-          borderBottomLeftRadius: sizeStyle.containerRadius,
-          borderTopRightRadius: sizeStyle.innerRadius,
-          borderBottomRightRadius: sizeStyle.innerRadius,
-        };
+  const leadingSurfaceCornerProps =
+    Platform.OS !== 'web'
+      ? leadingShape
+      : isRTL
+        ? {
+            borderTopLeftRadius: sizeStyle.innerRadius,
+            borderBottomLeftRadius: sizeStyle.innerRadius,
+            borderTopRightRadius: sizeStyle.containerRadius,
+            borderBottomRightRadius: sizeStyle.containerRadius,
+          }
+        : {
+            borderTopLeftRadius: sizeStyle.containerRadius,
+            borderBottomLeftRadius: sizeStyle.containerRadius,
+            borderTopRightRadius: sizeStyle.innerRadius,
+            borderBottomRightRadius: sizeStyle.innerRadius,
+          };
   const trailingShape = React.useMemo(
     () =>
       getSplitButtonTrailingShape({
@@ -437,38 +442,40 @@ const SplitButton = ({
   // Same `Surface` web bug as `leadingSurfaceCornerProps` above - both the
   // segment's static (End/outer) and animated (Start/inner) corners need
   // the physical name on web to reach `Surface` correctly.
-  const trailingSurfaceEndCornerProps = !isWeb
-    ? trailingShape
-    : isRTL
+  const trailingSurfaceEndCornerProps =
+    Platform.OS !== 'web'
+      ? trailingShape
+      : isRTL
+        ? {
+            borderTopLeftRadius: sizeStyle.containerRadius,
+            borderBottomLeftRadius: sizeStyle.containerRadius,
+          }
+        : {
+            borderTopRightRadius: sizeStyle.containerRadius,
+            borderBottomRightRadius: sizeStyle.containerRadius,
+          };
+  const trailingStartCornerProps =
+    Platform.OS !== 'web'
       ? {
-          borderTopLeftRadius: sizeStyle.containerRadius,
-          borderBottomLeftRadius: sizeStyle.containerRadius,
+          borderTopStartRadius: trailingStartRadius,
+          borderBottomStartRadius: trailingStartRadius,
         }
-      : {
-          borderTopRightRadius: sizeStyle.containerRadius,
-          borderBottomRightRadius: sizeStyle.containerRadius,
-        };
-  const trailingStartCornerProps = !isWeb
-    ? {
-        borderTopStartRadius: trailingStartRadius,
-        borderBottomStartRadius: trailingStartRadius,
-      }
-    : isRTL
-      ? {
-          borderTopRightRadius: trailingStartRadius,
-          borderBottomRightRadius: trailingStartRadius,
-        }
-      : {
-          borderTopLeftRadius: trailingStartRadius,
-          borderBottomLeftRadius: trailingStartRadius,
-        };
+      : isRTL
+        ? {
+            borderTopRightRadius: trailingStartRadius,
+            borderBottomRightRadius: trailingStartRadius,
+          }
+        : {
+            borderTopLeftRadius: trailingStartRadius,
+            borderBottomLeftRadius: trailingStartRadius,
+          };
   // Separate (worklet-freeze, not the `Surface` bug above) reason for the
   // same physical-on-web treatment: this drives the inner clip `Animated.View`
   // below directly, not `Surface`, but Reanimated's web engine doesn't
   // resolve a worklet-driven logical corner property at all past its first
   // render.
   const trailingAnimatedShapeStyle = useAnimatedStyle(() => {
-    if (!isWeb) {
+    if (Platform.OS !== 'web') {
       return {
         borderTopStartRadius: trailingStartRadius.value,
         borderBottomStartRadius: trailingStartRadius.value,
@@ -522,7 +529,7 @@ const SplitButton = ({
   }));
   const trailingFocusRingAnimatedStyle = useAnimatedStyle(() => {
     const cornerRadius = trailingStartRadius.value + splitButtonFocusRingInset;
-    if (!isWeb) {
+    if (Platform.OS !== 'web') {
       return {
         opacity: trailingFocusedSV.value ? 1 : 0,
         borderTopStartRadius: cornerRadius,
@@ -590,13 +597,9 @@ const SplitButton = ({
     borderColor: colors.borderColor,
     borderWidth: colors.borderWidth,
   };
-  const getTestID = (suffix: string) =>
-    testID ? `${testID}-${suffix}` : undefined;
-
   return (
     <View
       {...rest}
-      testID={getTestID('container')}
       style={[
         styles.group,
         {
@@ -607,7 +610,6 @@ const SplitButton = ({
       ]}
     >
       <Surface
-        testID={getTestID('leading-container')}
         {...leadingSurfaceCornerProps}
         elevation={colors.elevation}
         transitionDuration={disabledTimingConfig.duration}
@@ -620,13 +622,11 @@ const SplitButton = ({
         ]}
       >
         <ButtonBackground
-          testID={getTestID('leading-background')}
           backgroundColor={enabledColors.containerColor}
           animatedStyle={enabledContainerAnimatedStyle}
           borderRadiusStyle={leadingShape}
         />
         <ButtonBackground
-          testID={getTestID('leading-disabled-background')}
           backgroundColor={disabledColors.containerColor}
           animatedStyle={dimContainerAnimatedStyle}
           borderRadiusStyle={leadingShape}
@@ -652,7 +652,7 @@ const SplitButton = ({
             getButtonTouchableRippleStyle(leadingShape, colors.borderWidth),
             Platform.OS === 'web' ? webNoOutline : null,
           ]}
-          testID={getTestID('leading')}
+          testID={testID}
           theme={theme}
         >
           <View
@@ -694,14 +694,12 @@ const SplitButton = ({
                 labelTextStyle,
                 labelStyle,
               ]}
-              testID={getTestID('label')}
             >
               {label}
             </Text>
           </View>
         </TouchableRipple>
         <Animated.View
-          testID={getTestID('leading-focus-ring')}
           style={[
             styles.focusRing,
             leadingFocusRingShape,
@@ -712,7 +710,6 @@ const SplitButton = ({
       </Surface>
 
       <Surface
-        testID={getTestID('trailing-container')}
         {...trailingSurfaceEndCornerProps}
         {...trailingStartCornerProps}
         elevation={colors.elevation}
@@ -734,19 +731,16 @@ const SplitButton = ({
           ]}
         >
           <ButtonBackground
-            testID={getTestID('trailing-background')}
             backgroundColor={enabledColors.containerColor}
             animatedStyle={enabledContainerAnimatedStyle}
             borderRadiusStyle={trailingShape}
           />
           <ButtonBackground
-            testID={getTestID('trailing-disabled-background')}
             backgroundColor={disabledColors.containerColor}
             animatedStyle={dimContainerAnimatedStyle}
             borderRadiusStyle={trailingShape}
           />
           <Animated.View
-            testID={getTestID('trailing-state-layer')}
             style={[
               StyleSheet.absoluteFill,
               styles.noPointerEvents,
@@ -773,7 +767,7 @@ const SplitButton = ({
             hitSlop={resolvedTrailingHitSlop}
             rippleColor={rippleColor}
             style={[styles.ripple, Platform.OS === 'web' ? webNoOutline : null]}
-            testID={getTestID('trailing')}
+            testID={trailingTestID}
             theme={theme}
           >
             <View
@@ -800,7 +794,6 @@ const SplitButton = ({
         {/* Sibling of `trailingClip` (not a child) so the ring isn't clipped
             to the segment's shape - it needs to extend past it. */}
         <Animated.View
-          testID={getTestID('trailing-focus-ring')}
           style={[
             styles.focusRing,
             trailingFocusRingShape,
@@ -818,19 +811,16 @@ const SplitButton = ({
 // `opacity` - never interpolating `backgroundColor` itself. See the comment
 // above `disabledProgress`.
 const ButtonBackground = ({
-  testID,
   backgroundColor,
   animatedStyle,
   borderRadiusStyle,
 }: {
-  testID?: string;
   backgroundColor: ColorValue;
   animatedStyle: AnimatedStyle<{ opacity: number }>;
   borderRadiusStyle: ViewStyle;
 }) => {
   return (
     <Animated.View
-      testID={testID}
       style={[
         StyleSheet.absoluteFill,
         styles.noPointerEvents,
