@@ -37,7 +37,7 @@
       }
     },
     "runtimeVersion": {
-      "policy": "sdkVersion"
+      "policy": "fingerprint"
     },
     "updates": {
       "url": "https://u.expo.dev/ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"

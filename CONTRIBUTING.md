@@ -109,6 +109,28 @@ yarn release
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
 
+### Publishing the example app
+
+Publishing a release also ships the example app, through the `Publish example app` workflow. It runs after the release already exists, so it cannot affect one: if it fails, the run page says so, and the release is still fine.
+
+What it ships depends on whether native code changed. `runtimeVersion` uses the fingerprint policy, so the workflow compares the project's fingerprint against the builds already out there:
+
+- **Nothing native changed**: publishes an update over the air with `eas update`. Installed apps pick it up on next launch, and nothing goes near a store.
+- **Native code changed**: builds and submits. Prereleases go to the Play internal track and TestFlight, stable releases to Play production. On iOS, `eas submit` uploads to App Store Connect and promoting the build to the App Store stays manual.
+
+Only the build path bumps the example app's version, and that bump comes back as a pull request. Merge it before the next release, or two releases start from the same version and ship under it.
+
+Prereleases and stable releases use separate channels (`preview` and `production`), so an update published for an alpha cannot reach people running the stable app.
+
+The workflow needs an `EXPO_TOKEN` secret, and the store credentials configured in EAS rather than here (`eas credentials` from `example/`: an App Store Connect API key, and a Google Play service account key). Build numbers are assigned remotely by EAS, so before the first run they need seeding above the values currently in `example/app.json`:
+
+```sh
+eas build:version:set --platform android
+eas build:version:set --platform ios
+```
+
+To rerun after a failure, use **Actions → Publish example app → Run workflow**. Check the stores first: a build may already have been submitted, and cancelling the workflow does not cancel one already running on EAS. If only one platform failed, pick it in the `platform` input so the other is not submitted twice. To withdraw a build that did ship, halt the rollout in the Play Console or reject it in App Store Connect.
+
 ## Reporting issues
 
 You can report issues on our [bug tracker](https://github.com/callstack/react-native-paper/issues). Please follow the issue template when opening an issue.
