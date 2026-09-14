@@ -10,7 +10,7 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
 import type { DialogChildProps } from './utils';
@@ -45,6 +45,10 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * testID for the overlay that is displayed behind the dialog.
+   */
+  overlayTestID?: string;
 };
 
 const DIALOG_ELEVATION: Elevation = 3;
@@ -98,6 +102,7 @@ const Dialog = ({
   style,
   theme: themeOverrides,
   testID,
+  overlayTestID,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -124,6 +129,7 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
+      overlayTestID={overlayTestID}
     >
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')

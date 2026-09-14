@@ -11,7 +11,7 @@ import Animated, {
 
 import { useInternalTheme } from '../core/theming';
 import { androidElevationLevels, shadow } from '../theme/tokens/sys/elevation';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 
 type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
   AnimatedStyle<Required<Pick<ViewStyle, Key>>>,
@@ -171,7 +171,7 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
 const Surface = ({
   elevation = 1,
   children,
-  theme: overridenTheme,
+  theme: overriddenTheme,
   style,
   backgroundColor: customBackgroundColor,
   borderRadius,
@@ -194,7 +194,7 @@ const Surface = ({
   ref,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(overridenTheme);
+  const theme = useInternalTheme(overriddenTheme);
 
   const { colors } = theme;
 

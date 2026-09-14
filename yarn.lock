@@ -18219,6 +18219,7 @@ __metadata:
     eslint: "npm:9.39.4"
     eslint-plugin-flowtype: "npm:^8.0.3"
     eslint-plugin-testing-library: "npm:^7.16.2"
+    fast-deep-equal: "npm:^3.1.3"
     jest: "npm:^29.6.3"
     jest-file-snapshot: "npm:^0.3.2"
     lefthook: "npm:^2.1.9"

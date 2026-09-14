@@ -3,9 +3,9 @@ import { PlatformColor } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { red50, red500 } from '../../theme/colors';
-import type { InternalTheme } from '../../types';
+import { LightTheme } from '../../theme/schemes';
+import type { InternalTheme } from '../../theme/types';
 import { resolveAvatarColors, getAvatarImageSourceKey } from '../Avatar/utils';
 
 // `PlatformColor()` only accepts literal arguments, so the resolved value is
@@ -24,7 +24,7 @@ const withPlatformColor = (
 
 describe('resolveAvatarColors', () => {
   it('uses the MD3 container pair for the default background', () => {
-    const theme = getTheme();
+    const theme = LightTheme;
     expect(typeof theme.colors.primaryContainer).toBe('string');
     expect(resolveAvatarColors({ theme })).toEqual({
       background: theme.colors.primaryContainer,
@@ -34,7 +34,7 @@ describe('resolveAvatarColors', () => {
 
   it('uses onPrimaryContainer for an opaque default container token', () => {
     const theme = withPlatformColor(
-      getTheme(),
+      LightTheme,
       'primaryContainer',
       PlatformColor('@android:color/system_primary_container_light')
     );
@@ -46,7 +46,7 @@ describe('resolveAvatarColors', () => {
 
   it('pairs a custom opaque theme-role background via contentColorFor', () => {
     const theme = withPlatformColor(
-      getTheme(),
+      LightTheme,
       'error',
       PlatformColor('@android:color/system_error_light')
     );
@@ -59,7 +59,7 @@ describe('resolveAvatarColors', () => {
   });
 
   it('uses the luminance heuristic for a dark hex background', () => {
-    const theme = getTheme();
+    const theme = LightTheme;
     expect(resolveAvatarColors({ theme, backgroundColor: red500 })).toEqual({
       background: red500,
       textColor: '#ffffff',
@@ -67,7 +67,7 @@ describe('resolveAvatarColors', () => {
   });
 
   it('uses the luminance heuristic for a light hex background', () => {
-    const theme = getTheme();
+    const theme = LightTheme;
     expect(resolveAvatarColors({ theme, backgroundColor: red50 })).toEqual({
       background: red50,
       textColor: 'rgba(0, 0, 0, .54)',
@@ -75,7 +75,7 @@ describe('resolveAvatarColors', () => {
   });
 
   it('falls back to onSurface for an unknown PlatformColor', () => {
-    const theme = getTheme();
+    const theme = LightTheme;
     const platformColor = PlatformColor('@android:color/holo_blue_bright');
 
     expect(
@@ -87,7 +87,7 @@ describe('resolveAvatarColors', () => {
   });
 
   it('lets an explicit color override derived content color', () => {
-    const theme = getTheme();
+    const theme = LightTheme;
     expect(
       resolveAvatarColors({
         theme,

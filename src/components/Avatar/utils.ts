@@ -1,8 +1,8 @@
 import type { ColorValue } from 'react-native';
 
 import { white } from '../../theme/colors';
+import type { InternalTheme } from '../../theme/types';
 import { contentColorFor } from '../../theme/utils/color';
-import type { InternalTheme } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 
 export const DEFAULT_SIZE = 64;

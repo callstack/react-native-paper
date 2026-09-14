@@ -32,7 +32,7 @@ import useLatestCallback from 'use-latest-callback';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -68,6 +68,10 @@ export type Props = {
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
   overlayAccessibilityLabel?: string;
+  /**
+   * testID for the overlay that is displayed behind the menu.
+   */
+  overlayTestID?: string;
   /**
    * Content of the `Menu`.
    */
@@ -186,7 +190,8 @@ const Menu = ({
   visible,
   statusBarHeight,
   overlayAccessibilityLabel = 'Close menu',
-  testID = 'menu',
+  overlayTestID,
+  testID,
   anchor,
   onDismiss,
   anchorPosition,
@@ -681,6 +686,7 @@ const Menu = ({
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
+            testID={overlayTestID}
           />
           <View
             ref={(ref) => {
@@ -691,7 +697,6 @@ const Menu = ({
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}
-            testID={`${testID}-view`}
           >
             <Animated.View
               pointerEvents={pointerEvents}
@@ -707,7 +712,7 @@ const Menu = ({
                   shadowMenuAnimationStyle,
                 ]}
                 elevation={elevation}
-                testID={`${testID}-surface`}
+                testID={testID}
                 theme={theme}
               >
                 <Animated.View

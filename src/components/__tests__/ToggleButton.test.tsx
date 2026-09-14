@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 
@@ -35,20 +35,20 @@ it('renders unchecked toggle button', async () => {
 
 describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
-    expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
-      getTheme().colors.surfaceContainerHighest
+    expect(getToggleButtonColor({ theme: LightTheme, checked: true })).toBe(
+      LightTheme.colors.surfaceContainerHighest
     );
   });
 
   it('should return correct color when checked and theme version 3, dark theme', () => {
-    expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
-      getTheme(true).colors.surfaceContainerHighest
+    expect(getToggleButtonColor({ theme: DarkTheme, checked: true })).toBe(
+      DarkTheme.colors.surfaceContainerHighest
     );
   });
 
   it('should return correct color when not checked', () => {
-    expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
-      getTheme().colors.surfaceContainer
+    expect(getToggleButtonColor({ theme: LightTheme, checked: false })).toBe(
+      LightTheme.colors.surfaceContainer
     );
   });
 });

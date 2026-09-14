@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 

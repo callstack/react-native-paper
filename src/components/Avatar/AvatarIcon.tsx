@@ -4,7 +4,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import { DEFAULT_SIZE, ICON_SIZE_RATIO, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 
