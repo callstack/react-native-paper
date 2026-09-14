@@ -6,7 +6,7 @@ Proof of concept, under review in #5115. iOS and Android against the existing ex
 
 Does [agent-device](https://github.com/callstack/agent-device) capture the existing example screens deterministically enough to diff `Surface` against a baseline, and does that diff catch a realistic regression rather than only a gross one?
 
-Yes on both platforms, with one catch. The noise floor is 0 pixels on iOS and Android, across warm captures and a process relaunch, at every threshold tried. A realistic Surface regression, elevation level 1 rendering the level-2 shadow, is caught at `--threshold 0.02`, on exactly the right card, and gives the same pixel count on three independent captures per platform. At agent-device's default threshold (0.1) that same regression is reported as a perfect match on both platforms. Any suite built on this must set the threshold explicitly and verify noise at that threshold. Filed as [callstack/agent-device#2579](https://github.com/callstack/agent-device/issues/2579).
+Yes on both platforms, with one catch. The noise floor is 0 pixels on iOS and Android, across warm captures and a process relaunch, at every threshold tried. A realistic Surface regression, elevation level 1 rendering the level-2 shadow, is caught at `--threshold 0.02`, on exactly the right card, and gives the same pixel count on three independent captures per platform. At agent-device's default threshold (0.1) that same regression is reported as a perfect match on both platforms. Any suite built on this must set the threshold explicitly and verify noise at that threshold.
 
 ## Setup
 
@@ -62,12 +62,12 @@ Same count every time, and the same as the first single captures. The diff image
 
 ## Web
 
-Tried once on 2026-09-14 against `expo export --platform web` of the example app, served locally, with agent-device's managed browser (`agent-device web setup`, agent-browser 0.27.1). `open` works and a full-page `screenshot` works (1280x577). `screenshot --crop-on 'id="surface-example-elevated"'` is refused: `UNSUPPORTED_OPERATION`, `CROP_TARGET_NOT_ACCEPTED`, `PENDING_PIXEL_IDENTITY_EVIDENCE`. Transcript in `evidence/web-excerpt.json`, the full-page capture in `evidence/diff-images/web-full-page-screenshot.png`. So web is not blocked, but it is a different loop, full-viewport diffs rather than per-section crops, and was not pursued for a Surface-only PoC. Filed as [callstack/agent-device#2583](https://github.com/callstack/agent-device/issues/2583).
+Tried once on 2026-09-14 against `expo export --platform web` of the example app, served locally, with agent-device's managed browser (`agent-device web setup`, agent-browser 0.27.1). `open` works and a full-page `screenshot` works (1280x577). `screenshot --crop-on 'id="surface-example-elevated"'` is refused: `UNSUPPORTED_OPERATION`, `CROP_TARGET_NOT_ACCEPTED`, `PENDING_PIXEL_IDENTITY_EVIDENCE`. Transcript in `evidence/web-excerpt.json`, the full-page capture in `evidence/diff-images/web-full-page-screenshot.png`. So web is not blocked, but it is a different loop, full-viewport diffs rather than per-section crops, and was not pursued for a Surface-only PoC.
 
 ## Caveats
 
 - The crop is not perfectly isolated. Under the gross break a full-width 33 px band at the top of the crop changed: the Appbar is itself a `Surface`, and the break changed every Surface. The realistic break showed no bleed. An Appbar-only change could register against this crop; that is inherent in screenshotting real screens rather than isolated components.
-- Dev-client chrome can land in the crop. The Expo dev-client's floating "Tools" button, switched on by a stray dev-menu press, sat inside the Android section and produced a deterministic 2,822 px false FAIL with `src/` clean (`evidence/diff-images/android-devclient-tools-button.png`, `evidence/devclient-excerpt.json`). Turning it off in the dev menu ("Tools button") restored 0. A release build would remove the whole class of dev menu, dev launcher and floating button. Filed as [callstack/agent-device#2582](https://github.com/callstack/agent-device/issues/2582).
+- Dev-client chrome can land in the crop. The Expo dev-client's floating "Tools" button, switched on by a stray dev-menu press, sat inside the Android section and produced a deterministic 2,822 px false FAIL with `src/` clean (`evidence/diff-images/android-devclient-tools-button.png`, `evidence/devclient-excerpt.json`). Turning it off in the dev menu ("Tools button") restored 0. A release build would remove the whole class of dev menu, dev launcher and floating button.
 - Not measured: swiftshader (what `ubuntu-latest` renders with), cold simulator/emulator boot, another host or day, runtime or image updates, other components, text-heavy crops, dark theme.
 
 ## Reproducing by hand
@@ -110,7 +110,7 @@ Each learned while scripting the loop above; documented in `evidence/issues.md`,
 
 ## agent-device issues
 
-Twenty findings with commands and evidence in `evidence/issues.md`. Five are filed on callstack/agent-device: the default diff threshold misses soft-shadow regressions ([#2579](https://github.com/callstack/agent-device/issues/2579)), sessions are bound to one device per cwd ([#2580](https://github.com/callstack/agent-device/issues/2580)), the typed Node client is exported but unreachable without a dependency ([#2581](https://github.com/callstack/agent-device/issues/2581)), dev-client chrome renders into screenshots and the diff cannot tell ([#2582](https://github.com/callstack/agent-device/issues/2582)), `--crop-on` is refused on web ([#2583](https://github.com/callstack/agent-device/issues/2583)). The rest are smaller and recorded for the maintainers to pick from.
+Twenty findings with commands and evidence in `evidence/issues.md`, none filed upstream yet. The four that matter most: the default diff threshold misses soft-shadow regressions (4), sessions are bound to one device per cwd (6), dev-client chrome renders into screenshots and the diff cannot tell (19), `--crop-on` is refused on web (20).
 
 ## Evidence
 

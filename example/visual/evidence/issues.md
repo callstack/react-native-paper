@@ -1,6 +1,6 @@
 # agent-device dogfooding issues
 
-Twenty findings from using agent-device 0.21.0 as a visual regression tool on the react-native-paper example app. Five are filed on callstack/agent-device (4, 6, 12, 19, 20); the rest are recorded here for the maintainers to pick from.
+Twenty findings from using agent-device 0.21.0 as a visual regression tool on the react-native-paper example app. They are recorded here; none is filed upstream.
 
 Tool: `agent-device` 0.21.0 (run as `npx agent-device@0.21.0`), Node v24.18.
 Device: iPhone 17 Pro, iOS 26.5, UDID `2464A356-C17C-4B0D-99DB-CDFBDB98826C`.
@@ -99,8 +99,6 @@ Recovery: `press 'label="Close"'`, artifact `48-press-close.json`.
 
 ## 4. Default `diff screenshot --threshold 0.1` misses real soft-shadow regressions
 
-**Filed upstream:** https://github.com/callstack/agent-device/issues/2579 (2026-09-14).
-
 New in Task B, and the most consequential finding for using this tool as a visual
 regression guard for Material elevation.
 
@@ -163,8 +161,6 @@ round-trip (`startup.durationMs` 1032). Artifacts `44-screenshot.json`,
 
 ## 6. A cwd whose session is bound to one platform cannot target another device
 
-**Filed upstream:** https://github.com/callstack/agent-device/issues/2580 (2026-09-14).
-
 `boot --platform android --device Pixel_10_Pro` from a cwd whose default session was
 bound to an iOS simulator fails with `INVALID_ARGS` ("already bound to apple device
 … but this request selected --platform=android"). Artifact `74-boot.json`. The hint is
@@ -225,8 +221,6 @@ Android repeats the iOS finding for the realistic break: 0 changed pixels and
 Unlike iOS, the gross break is caught at the default (65,051 px / 7.92 %).
 
 ## 12. The typed Node client is exported but unreachable without a dependency
-
-**Filed upstream:** https://github.com/callstack/agent-device/issues/2581 (2026-09-14).
 
 `agent-device@0.21.0`'s `package.json` does export the client
 (`exports["."] → dist/src/index.js`, which exports `createAgentDeviceClient`), so
@@ -338,8 +332,6 @@ diff image at 0.02 but none at 0.1, because at 0.1 it matches. The 0.1 rows in
 
 ## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
 
-**Filed upstream:** https://github.com/callstack/agent-device/issues/2582 (2026-09-14).
-
 Found 2026-09-11 while re-running the Android loop with `src/` clean after the
 round-2 changes. The scripted loop reported a deterministic **FAIL** -
 `surface-example-elevated changed=2822 (0.34%) regions=1`, twice in a row,
@@ -370,8 +362,6 @@ the strongest argument so far for capturing from a release build rather than a
 dev-client once this moves past a PoC.
 
 ## 20. web: `screenshot --crop-on` is refused
-
-**Filed upstream:** https://github.com/callstack/agent-device/issues/2583 (2026-09-14).
 
 Tried on 2026-09-14 against `expo export --platform web` of the example app served
 on 127.0.0.1:4322, through `agent-device web setup` (agent-browser 0.27.1, Node
