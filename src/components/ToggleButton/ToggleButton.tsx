@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
@@ -42,7 +44,7 @@ export type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked';
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * @optional
    */

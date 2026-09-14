@@ -36,7 +36,7 @@ import type { SortAccessibilityLabels } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import webAriaProps from '../../utils/webAriaProps';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
@@ -139,9 +139,9 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { direction } = useLocale();
   const reduceMotion = useReduceMotion();
 
+  const { direction } = useLocale();
   const resolved = useColumn({
     column,
     flex,

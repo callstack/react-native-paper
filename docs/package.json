@@ -4,12 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "yarn generate && rspress dev",
-    "start": "yarn dev",
-    "build": "yarn generate && rspress build",
+    "dev": "rspress dev",
+    "build": "rspress build",
     "preview": "rspress preview",
     "typecheck": "tsc --noEmit",
-    "generate": "node scripts/generate-rspress-content.ts && node scripts/generate-current-component-docs.ts"
+    "generate:5x": "node scripts/generate-5x-docs.ts origin/5.0"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.9",
@@ -49,6 +48,6 @@
     ]
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   }
 }

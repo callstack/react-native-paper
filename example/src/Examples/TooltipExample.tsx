@@ -15,7 +15,6 @@ import {
   Card,
 } from 'react-native-paper';
 
-import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
@@ -68,7 +67,7 @@ const TooltipExample = () => {
       <ScreenWrapper>
         <Banner visible>
           A tooltip is displayed upon
-          {!isWeb
+          {Platform.OS !== 'web'
             ? ' tapping and holding a screen element or component'
             : ' hovering over a screen element or component'}
           . Continuously display the tooltip as long as the user long-presses or

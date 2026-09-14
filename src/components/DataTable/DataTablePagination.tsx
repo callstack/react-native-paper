@@ -5,7 +5,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import { HORIZONTAL_PADDING } from './tokens';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -359,11 +359,10 @@ const DataTablePagination = ({
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
-          <View testID="options-select" style={styles.optionsContainer}>
+          <View style={styles.optionsContainer}>
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
-              testID="select-page-dropdown-label"
               accessible={textIsFocusUnit}
               aria-label={selectPageDropdownAccessibilityLabel}
             >

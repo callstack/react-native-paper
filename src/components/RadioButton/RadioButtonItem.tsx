@@ -14,8 +14,8 @@ import type { RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
-import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -34,7 +34,7 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;

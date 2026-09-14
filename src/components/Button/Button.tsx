@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,24 +7,25 @@ import type {
   Role,
   StyleProp,
   TextStyle,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
 import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
 import type { ButtonMode } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
@@ -73,7 +74,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -127,7 +128,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Style for the button text.
    */
@@ -189,7 +190,7 @@ const Button = ({
   uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
-  testID = 'button',
+  testID,
   accessible,
   background,
   maxFontSizeMultiplier,
@@ -198,15 +199,15 @@ const Button = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
     },
     [mode]
   );
-  const { animation } = theme;
+
   const uppercase = uppercaseProp ?? false;
-  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -219,52 +220,33 @@ const Button = ({
   const initialElevation = 1;
   const activeElevation = 2;
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isElevationEntitled ? initialElevation : 0)
-  );
+  const [pressed, setPressed] = React.useState(false);
 
-  React.useEffect(() => {
-    // Workaround not to call setValue on Animated.Value, because it breaks styles.
-    // https://github.com/callstack/react-native-paper/issues/4559
-    Animated.timing(elevation, {
-      toValue: isElevationEntitled ? initialElevation : 0,
-      duration: 0,
-      useNativeDriver: true,
-    });
-  }, [isElevationEntitled, elevation, initialElevation]);
+  const elevation = isElevationEntitled
+    ? pressed
+      ? activeElevation
+      : initialElevation
+    : 0;
 
   const handlePressIn = (e: GestureResponderEvent) => {
     onPressIn?.(e);
-    if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: activeElevation,
-        duration: 200 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
+
+    if (isElevationEntitled) {
+      setPressed(true);
     }
   };
 
   const handlePressOut = (e: GestureResponderEvent) => {
     onPressOut?.(e);
-    if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: initialElevation,
-        duration: 150 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
+
+    if (isElevationEntitled) {
+      setPressed(false);
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const [, borderRadiusStyles] = splitStyles(
-    flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
-  );
+  const elevationTransitionDuration =
+    theme.motion.duration[pressed ? 'short4' : 'short3'] *
+    theme.animation.scale;
 
   const borderRadius = theme.shapes.corner.largeIncreased;
   const iconSize = 18;
@@ -285,17 +267,7 @@ const Button = ({
     dark,
   });
 
-  const touchableStyle = {
-    ...borderRadiusStyles,
-    borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
-  };
-
-  const buttonStyle = {
-    backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
-    borderColor,
-    borderWidth,
-    ...touchableStyle,
-  };
+  const touchableStyle = { borderRadius };
 
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
@@ -326,10 +298,19 @@ const Button = ({
     <Surface
       {...rest}
       ref={ref}
-      testID={`${testID}-container`}
-      style={[styles.button, compact && styles.compact, buttonStyle, style]}
+      backgroundColor={backgroundOpacity < 1 ? 'transparent' : backgroundColor}
+      {...touchableStyle}
+      style={[
+        styles.button,
+        compact && styles.compact,
+        {
+          borderColor,
+          borderWidth,
+        },
+        style,
+      ]}
       elevation={elevation}
-      container
+      transitionDuration={elevationTransitionDuration}
     >
       {backgroundOpacity < 1 && (
         <View
@@ -367,7 +348,7 @@ const Button = ({
       >
         <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
-            <View style={iconStyle} testID={`${testID}-icon-container`}>
+            <View style={iconStyle}>
               <Icon
                 source={icon}
                 size={customLabelSize ?? iconSize}
@@ -394,7 +375,6 @@ const Button = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            testID={`${testID}-text`}
             style={[
               styles.label,
               isMode('text')

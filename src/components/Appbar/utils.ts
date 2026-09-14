@@ -1,9 +1,9 @@
 import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { white } from '../../theme/colors';
-import type { InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -15,17 +15,25 @@ export type AppbarChildProps = {
 
 const borderStyleProperties = [
   'borderRadius',
+  'borderBottomEndRadius',
+  'borderBottomStartRadius',
+  'borderEndEndRadius',
+  'borderEndStartRadius',
+  'borderStartEndRadius',
+  'borderStartStartRadius',
+  'borderTopEndRadius',
+  'borderTopStartRadius',
   'borderTopLeftRadius',
   'borderTopRightRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
+  'borderCurve',
 ] satisfies readonly (keyof ViewStyle)[];
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
-  _elevation: number,
-  customBackground?: ColorValue,
-  elevated?: boolean
+  elevated: boolean,
+  customBackground?: ColorValue
 ) => {
   const { colors } = theme;
   if (customBackground) {
@@ -54,19 +62,14 @@ export const getAppbarColor = ({
   return undefined;
 };
 
-export const getAppbarBorders = (
-  style:
-    | Animated.Value
-    | Animated.AnimatedInterpolation<string | number>
-    | Animated.WithAnimatedObject<ViewStyle>
-) => {
-  const borders: Record<string, number> = {};
+export const getAppbarBorders = (style: ViewStyle) => {
+  let borders: ViewStyle = {};
 
   for (const property of borderStyleProperties) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    const value = style[property as keyof typeof style];
-    if (value) {
-      borders[property] = value;
+    const value = style[property];
+
+    if (typeof value === 'number' || typeof value === 'string') {
+      borders = { ...borders, [property]: value };
     }
   }
 

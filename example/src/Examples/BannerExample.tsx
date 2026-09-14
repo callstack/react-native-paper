@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
-import type { LayoutChangeEvent } from 'react-native';
 
 import { Banner, FAB, Palette, useTheme } from 'react-native-paper';
 
@@ -14,13 +13,6 @@ const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
   const defaultTheme = useTheme();
-
-  const [height, setHeight] = React.useState(0);
-
-  const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
-    const { height: layoutHeight } = nativeEvent.layout;
-    setHeight(layoutHeight);
-  };
 
   const customTheme = {
     ...defaultTheme,
@@ -36,24 +28,8 @@ const BannerExample = () => {
   };
 
   return (
-    <>
-      <ScreenWrapper>
-        <View style={[styles.grid, { paddingTop: height }]}>
-          {PHOTOS.map((uri) => (
-            <View key={uri} style={styles.item}>
-              <Image
-                source={{ uri }}
-                resizeMode="cover"
-                style={styles.photo}
-                accessibilityIgnoresInvertColors
-              />
-            </View>
-          ))}
-        </View>
-      </ScreenWrapper>
-      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
+    <View style={styles.container}>
       <Banner
-        onLayout={handleLayout}
         actions={[
           {
             label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
@@ -73,18 +49,35 @@ const BannerExample = () => {
           console.log('Completed closing animation')
         }
         theme={useCustomTheme ? customTheme : defaultTheme}
-        style={styles.banner}
       >
         Two line text string with two actions. One to two lines is preferable on
         mobile.
       </Banner>
-    </>
+      <ScreenWrapper>
+        <View style={styles.grid}>
+          {PHOTOS.map((uri) => (
+            <View key={uri} style={styles.item}>
+              <Image
+                source={{ uri }}
+                resizeMode="cover"
+                style={styles.photo}
+                accessibilityIgnoresInvertColors
+              />
+            </View>
+          ))}
+        </View>
+      </ScreenWrapper>
+      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
+    </View>
   );
 };
 
 BannerExample.title = 'Banner';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   ...Platform.select({
     web: {
       grid: {
@@ -114,12 +107,6 @@ const styles = StyleSheet.create({
       },
     },
   }),
-  banner: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-  },
   photo: {
     flex: 1,
   },

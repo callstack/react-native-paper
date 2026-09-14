@@ -12,11 +12,26 @@ import * as Reanimated from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../../core/locale';
 import PaperProvider from '../../../core/PaperProvider';
-import { getTheme } from '../../../core/theming';
-import { render, screen } from '../../../test-utils';
+import { render, screen, within } from '../../../test-utils';
+import { LightTheme } from '../../../theme/schemes';
 import Checkbox from '../../Checkbox';
 import type { DataTableColumn } from '../../DataTable/columns';
 import DataTable from '../../DataTable/DataTable';
+
+// `withTiming` cannot be spied on in place - the module's exports are not
+// configurable - so wrap it here, the way FABExtended.test.tsx wraps `measure`.
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withTiming: jest.fn(ReanimatedModule.withTiming),
+  };
+});
 
 const columns: readonly DataTableColumn[] = [
   { key: 'name', flex: 2 },
@@ -47,6 +62,12 @@ const Table = ({
 // purpose, so layout assertions have to look past that.
 const hidden = { includeHiddenElements: true };
 
+// The text node inside a cell carries the clamping and the alignment. It has
+// no testID of its own - components no longer derive one from their parent -
+// so reach it through the cell.
+const cellText = (testID: string) =>
+  within(screen.getByTestId(testID, hidden)).getByText(/\S/);
+
 const mockFontScale = (fontScale: number) => {
   jest.mocked(useWindowDimensions).mockReturnValue({
     fontScale,
@@ -59,6 +80,7 @@ const mockFontScale = (fontScale: number) => {
 afterEach(() => {
   Platform.OS = 'ios';
   mockFontScale(1);
+  jest.mocked(Reanimated.withTiming).mockClear();
 });
 
 describe('DataTable', () => {
@@ -544,31 +566,30 @@ describe('DataTable.Cell', () => {
     expect(screen.getByTestId('first')).not.toHaveProp('aria-label');
   });
 
-  it('does not invent a testID when none was given', async () => {
-    await render(<DataTable.Cell>Frozen yogurt</DataTable.Cell>);
-
-    expect(screen.queryByTestId('undefined-text-container')).toBeNull();
-  });
-
-  it('renders text content inside a text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
-    );
+  it('wraps text content in a text of its own', async () => {
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
+      )
+    ).toJSON();
 
     expect(screen.getByText('Table cell')).toBeOnTheScreen();
-    expect(screen.getByTestId('table-cell-text-container')).toBeOnTheScreen();
+    // Whether the text is wrapped is structure, not behaviour, so the shape
+    // itself is the assertion.
+    expect(tree).toMatchSnapshot();
   });
 
   it('renders element content verbatim, without a text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">
-        <Checkbox status="checked" testID="table-cell-checkbox" />
-      </DataTable.Cell>
-    );
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">
+          <Checkbox status="checked" testID="table-cell-checkbox" />
+        </DataTable.Cell>
+      )
+    ).toJSON();
 
-    expect(
-      screen.queryByTestId('table-cell-text-container')
-    ).not.toBeOnTheScreen();
+    expect(screen.getByTestId('table-cell-checkbox')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
   it('lets essential data wrap as soon as text is enlarged at all', async () => {
@@ -580,9 +601,7 @@ describe('DataTable.Cell', () => {
       <DataTable.Cell testID="small-bump">Frozen yogurt</DataTable.Cell>
     );
 
-    expect(screen.getByTestId('small-bump-text-container')).not.toHaveProp(
-      'numberOfLines'
-    );
+    expect(cellText('small-bump')).not.toHaveProp('numberOfLines');
   });
 
   it('honours an explicit limit when text is enlarged', async () => {
@@ -596,10 +615,7 @@ describe('DataTable.Cell', () => {
       </DataTable.Cell>
     );
 
-    expect(screen.getByTestId('pinned-text-container')).toHaveProp(
-      'numberOfLines',
-      2
-    );
+    expect(cellText('pinned')).toHaveProp('numberOfLines', 2);
   });
 
   it('honours an explicit limit when text is shrunk', async () => {
@@ -611,10 +627,7 @@ describe('DataTable.Cell', () => {
       </DataTable.Cell>
     );
 
-    expect(screen.getByTestId('pinned-text-container')).toHaveProp(
-      'numberOfLines',
-      2
-    );
+    expect(cellText('pinned')).toHaveProp('numberOfLines', 2);
   });
 
   it('never clamps a limit of 0, whatever the scale', async () => {
@@ -626,9 +639,7 @@ describe('DataTable.Cell', () => {
       </DataTable.Cell>
     );
 
-    expect(screen.getByTestId('free-text-container')).not.toHaveProp(
-      'numberOfLines'
-    );
+    expect(cellText('free')).not.toHaveProp('numberOfLines');
   });
 
   it('clamps to one line by default and honours an explicit limit', async () => {
@@ -641,13 +652,8 @@ describe('DataTable.Cell', () => {
       </>
     );
 
-    expect(screen.getByTestId('clamped-text-container')).toHaveProp(
-      'numberOfLines',
-      1
-    );
-    expect(screen.getByTestId('wrapping-text-container')).not.toHaveProp(
-      'numberOfLines'
-    );
+    expect(cellText('clamped')).toHaveProp('numberOfLines', 1);
+    expect(cellText('wrapping')).not.toHaveProp('numberOfLines');
   });
 });
 
@@ -764,7 +770,7 @@ describe('DataTable.Title', () => {
   });
 
   it('does not rotate the sort indicator on first render', async () => {
-    const withTiming = jest.spyOn(Reanimated, 'withTiming');
+    const withTiming = jest.mocked(Reanimated.withTiming);
 
     await render(
       <DataTable.Title onPress={() => {}} sortDirection="descending">
@@ -774,12 +780,10 @@ describe('DataTable.Title', () => {
 
     // The indicator starts at the right angle rather than spinning into it.
     expect(withTiming).not.toHaveBeenCalled();
-
-    withTiming.mockRestore();
   });
 
   it('rotates the sort indicator when the direction changes', async () => {
-    const withTiming = jest.spyOn(Reanimated, 'withTiming');
+    const withTiming = jest.mocked(Reanimated.withTiming);
 
     const view = await render(
       <DataTable.Title onPress={() => {}} sortDirection="ascending">
@@ -796,16 +800,14 @@ describe('DataTable.Title', () => {
     expect(withTiming).toHaveBeenCalledWith(
       180,
       expect.objectContaining({
-        duration: getTheme().motion.duration.short3,
+        duration: LightTheme.motion.duration.short3,
         reduceMotion: Reanimated.ReduceMotion.Never,
       })
     );
-
-    withTiming.mockRestore();
   });
 
   it('tells Reanimated to suppress the rotation under reduced motion', async () => {
-    const withTiming = jest.spyOn(Reanimated, 'withTiming');
+    const withTiming = jest.mocked(Reanimated.withTiming);
 
     const view = await render(
       <PaperProvider reduceMotion="on">
@@ -829,8 +831,6 @@ describe('DataTable.Title', () => {
         reduceMotion: Reanimated.ReduceMotion.Always,
       })
     );
-
-    withTiming.mockRestore();
   });
 });
 
@@ -997,10 +997,10 @@ describe('DataTable metrics', () => {
 
     // The same role `Divider` uses, in both themes.
     expect(screen.getByTestId('header')).toHaveStyle({
-      borderBottomColor: getTheme().colors.outlineVariant,
+      borderBottomColor: LightTheme.colors.outlineVariant,
     });
     expect(screen.getByTestId('row')).toHaveStyle({
-      borderBottomColor: getTheme().colors.outlineVariant,
+      borderBottomColor: LightTheme.colors.outlineVariant,
     });
   });
 
@@ -1070,18 +1070,18 @@ describe('DataTable alignment', () => {
     expect(screen.getByTestId('start')).toHaveStyle({
       justifyContent: 'flex-start',
     });
-    expect(screen.getByTestId('start-text-container')).toHaveStyle({
+    expect(cellText('start')).toHaveStyle({
       textAlign: 'left',
     });
     expect(screen.getByTestId('numeric')).toHaveStyle({
       justifyContent: 'flex-end',
     });
-    expect(screen.getByTestId('numeric-text-container')).toHaveStyle({
+    expect(cellText('numeric')).toHaveStyle({
       textAlign: 'right',
       // Tabular figures keep digits lined up between rows.
       fontVariant: ['tabular-nums'],
     });
-    expect(screen.getByTestId('center-text-container')).toHaveStyle({
+    expect(cellText('center')).toHaveStyle({
       textAlign: 'center',
     });
   });
@@ -1096,10 +1096,10 @@ describe('DataTable alignment', () => {
       </LocaleProvider>
     );
 
-    expect(screen.getByTestId('start-text-container')).toHaveStyle({
+    expect(cellText('start')).toHaveStyle({
       textAlign: 'right',
     });
-    expect(screen.getByTestId('numeric-text-container')).toHaveStyle({
+    expect(cellText('numeric')).toHaveStyle({
       textAlign: 'left',
     });
     // `justifyContent` is logical, so it resolves against the direction on its
@@ -1133,7 +1133,7 @@ describe('DataTable alignment', () => {
     expect(screen.getByTestId('centered')).toHaveStyle({
       justifyContent: 'center',
     });
-    expect(screen.getByTestId('centered-text-container')).toHaveStyle({
+    expect(cellText('centered')).toHaveStyle({
       fontVariant: ['tabular-nums'],
     });
 
@@ -1141,7 +1141,7 @@ describe('DataTable alignment', () => {
     expect(screen.getByTestId('text')).toHaveStyle({
       justifyContent: 'flex-end',
     });
-    expect(screen.getByTestId('text-text-container')).not.toHaveStyle({
+    expect(cellText('text')).not.toHaveStyle({
       fontVariant: ['tabular-nums'],
     });
   });
@@ -1285,7 +1285,7 @@ describe('DataTable.Pagination', () => {
     // Same bug as the table container: an accessibility label on a view makes
     // it one screen-reader stop on Android, hiding the buttons inside it.
     expect(screen.getByTestId('pager')).not.toHaveProp('aria-label');
-    expect(screen.getByTestId('options-select')).not.toHaveProp('aria-label');
+    expect(screen.queryByLabelText('Options Select')).toBeNull();
   });
 
   it('names the pagination region on the web', async () => {
@@ -1322,10 +1322,7 @@ describe('DataTable.Pagination', () => {
 
     // Unclaimed text is merged into whatever ancestor is focusable, which on
     // native is the enclosing scroll view - the whole screen.
-    expect(screen.getByTestId('select-page-dropdown-label')).toHaveProp(
-      'accessible',
-      true
-    );
+    expect(screen.getByText('Rows per page')).toHaveProp('accessible', true);
     expect(screen.getByText('1-2 of 6')).toHaveProp('accessible', true);
   });
 
@@ -1403,7 +1400,9 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(screen.queryByTestId('options-select')).not.toBeOnTheScreen();
+    expect(
+      screen.queryByRole('button', { name: 'Rows per page, 2' })
+    ).toBeNull();
 
     await view.rerender(
       <DataTable.Pagination
@@ -1418,8 +1417,10 @@ describe('DataTable.Pagination', () => {
       />
     );
 
-    expect(screen.getByTestId('options-select')).toBeOnTheScreen();
-    expect(screen.getByTestId('select-page-dropdown-label')).toBeOnTheScreen();
+    expect(
+      screen.getByRole('button', { name: 'Rows per page, 2' })
+    ).toBeOnTheScreen();
+    expect(screen.getByText('Rows per page')).toBeOnTheScreen();
   });
 
   it('announces the selected page size and that it opens a menu', async () => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Surface, Text, Palette, List, IconButton } from 'react-native-paper';
 import type { Elevation } from 'react-native-paper';
@@ -12,19 +12,10 @@ const AnimatedSurface = () => {
   const [index, setIndex] = React.useState(3);
 
   const level = elevationLevels[index];
-  const elevation = React.useRef(new Animated.Value(level)).current;
-
-  React.useEffect(() => {
-    Animated.timing(elevation, {
-      toValue: level,
-      duration: 250,
-      useNativeDriver: false,
-    }).start();
-  }, [elevation, level]);
 
   return (
     <View style={styles.scroll}>
-      <Surface style={styles.surface} elevation={elevation}>
+      <Surface style={styles.surface} borderRadius={8} elevation={level}>
         <Text variant="bodySmall">{`Elevation ${level}`}</Text>
       </Surface>
       <View style={styles.actions}>
@@ -49,7 +40,13 @@ const SurfaceExample = () => {
   const elevationValues: Elevation[] = [0, 1, 2, 3, 4, 5];
 
   const renderSurface = (index: Elevation, mode: 'flat' | 'elevated') => (
-    <Surface key={index} style={styles.surface} mode={mode} elevation={index}>
+    <Surface
+      key={index}
+      style={styles.surface}
+      borderRadius={8}
+      mode={mode}
+      elevation={index}
+    >
       <Text variant="bodySmall">{`Elevation ${index}`}</Text>
     </Surface>
   );
@@ -93,10 +90,14 @@ const SurfaceExample = () => {
             </Surface>
           </View>
           <View style={styles.verticalSurfacesContainer}>
-            <Surface style={styles.verticalSurface}>
+            <Surface
+              style={[styles.verticalSurface, styles.verticalSurfaceContent]}
+            >
               <Text style={styles.centerText}>Top</Text>
             </Surface>
-            <Surface style={styles.verticalSurface}>
+            <Surface
+              style={[styles.verticalSurface, styles.verticalSurfaceContent]}
+            >
               <Text style={styles.centerText}>Bottom</Text>
             </Surface>
           </View>
@@ -121,7 +122,6 @@ const styles = StyleSheet.create({
   surface: {
     height: 120,
     width: 120,
-    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
   },
   verticalSurface: {
     height: '48%',
+  },
+  verticalSurfaceContent: {
     justifyContent: 'center',
   },
 

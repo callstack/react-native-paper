@@ -28,8 +28,8 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
-import type { InternalTheme, ThemeProp } from '../../types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -284,7 +284,6 @@ const MenuItem = ({
             leading={leading}
             trailing={trailing}
             iconLabelGap={iconLabelGap}
-            testID={testID}
           />
         </TouchableRipple>
       </View>
@@ -446,7 +445,6 @@ const MorphingTrigger = ({
         },
         visible ? styles.pointerEventsBoxNone : styles.pointerEventsNone,
       ]}
-      testID={testID}
     >
       <Shell
         size={size}
@@ -456,6 +454,7 @@ const MorphingTrigger = ({
         visible={visible}
         onPress={onPress}
         aria-label={ariaLabel}
+        testID={testID}
         widthShared={widthShared}
         heightShared={heightShared}
         borderRadiusShared={borderRadiusShared}
@@ -537,7 +536,7 @@ const Menu = ({
   alignment = 'end',
   closeIcon = 'close',
   items,
-  testID = 'floating-action-button-menu',
+  testID,
   theme: themeOverrides,
 }: MenuProps) => {
   const theme = useInternalTheme(themeOverrides);

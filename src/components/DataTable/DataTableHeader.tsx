@@ -6,7 +6,7 @@ import { withColumnIndices } from './DataTableColumnsContext';
 import { DataTableRowContext } from './DataTableContext';
 import { HORIZONTAL_PADDING } from './tokens';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import webAriaProps from '../../utils/webAriaProps';
 
 export type Props = ViewProps & {

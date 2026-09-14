@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+import type { StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -10,8 +10,9 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
+import type { SurfaceStyle } from '../Surface';
 import type { DialogChildProps } from './utils';
 
 export type Props = {
@@ -35,7 +36,7 @@ export type Props = {
    * Content of the `Dialog`.
    */
   children: React.ReactNode;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
    */
@@ -44,9 +45,13 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * testID for the overlay that is displayed behind the dialog.
+   */
+  overlayTestID?: string;
 };
 
-const DIALOG_ELEVATION: number = 24;
+const DIALOG_ELEVATION: Elevation = 3;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -97,8 +102,10 @@ const Dialog = ({
   style,
   theme: themeOverrides,
   testID,
+  overlayTestID,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
+
   const theme = useInternalTheme(themeOverrides);
   const borderRadius = theme.shapes.corner.extraLarge;
 
@@ -110,10 +117,11 @@ const Dialog = ({
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
       visible={visible}
+      contentBackgroundColor={backgroundColor}
+      contentBorderRadius={borderRadius}
+      contentElevation={DIALOG_ELEVATION}
       contentContainerStyle={[
         {
-          borderRadius,
-          backgroundColor,
           marginHorizontal: Math.max(left, right, 26),
         },
         styles.container,
@@ -121,6 +129,7 @@ const Dialog = ({
       ]}
       theme={theme}
       testID={testID}
+      overlayTestID={overlayTestID}
     >
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')
@@ -158,7 +167,6 @@ const styles = StyleSheet.create({
      * dialog (44 pixel from the top and bottom) it won't be dismissed.
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
-    elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
   },
 });

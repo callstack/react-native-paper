@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type {
-  Animated,
   ColorValue,
   GestureResponderEvent,
   StyleProp,
@@ -8,14 +7,13 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import type { $Omit } from './../../types';
+import type { AnimatedStyle } from 'react-native-reanimated';
+
 import AppbarAction from './AppbarAction';
+import type { Props as AppbarActionProps } from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
 
-export type Props = $Omit<
-  React.ComponentPropsWithoutRef<typeof AppbarAction>,
-  'icon'
-> & {
+export type Props = Omit<React.PropsWithoutRef<AppbarActionProps>, 'icon'> & {
   /**
    *  Custom color for back icon.
    */
@@ -36,7 +34,7 @@ export type Props = $Omit<
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
 };
 

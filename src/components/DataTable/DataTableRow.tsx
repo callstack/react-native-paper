@@ -27,12 +27,16 @@ import {
   isDataTableElement,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import webAriaProps from '../../utils/webAriaProps';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Content of the `DataTableRow`.
    */

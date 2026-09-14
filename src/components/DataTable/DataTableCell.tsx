@@ -12,13 +12,16 @@ import { useAlignStyles, useColumn } from './DataTableColumnsContext';
 import { DataTableContext, DataTableRowContext } from './DataTableContext';
 import useReflowedNumberOfLines from './useReflowedNumberOfLines';
 import { composeCellLabel, getElementLabel } from './utils';
-import type { $RemoveChildren } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import webAriaProps from '../../utils/webAriaProps';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> &
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> &
   ColumnLayoutProps & {
     /**
      * Content of the `DataTableCell`.
@@ -179,7 +182,6 @@ const DataTableCell = ({
   const content = (
     <CellContent
       textStyle={[alignStyles.text, textStyle]}
-      testID={testID}
       numberOfLines={lines}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
     >
@@ -227,8 +229,7 @@ const CellContent = ({
   textStyle,
   numberOfLines,
   maxFontSizeMultiplier,
-  testID,
-}: Pick<Props, 'children' | 'testID' | 'maxFontSizeMultiplier'> & {
+}: Pick<Props, 'children' | 'maxFontSizeMultiplier'> & {
   textStyle?: StyleProp<TextStyle>;
   numberOfLines?: number;
 }) => {
@@ -241,7 +242,6 @@ const CellContent = ({
       style={textStyle}
       numberOfLines={numberOfLines}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-      testID={testID == null ? undefined : `${testID}-text-container`}
     >
       {children}
     </Text>
