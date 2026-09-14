@@ -188,6 +188,28 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+### Searchbar
+
+The misspelled `traileringIcon` props have been renamed:
+
+- **`traileringIcon`** → **`trailingIcon`**
+- **`traileringIconColor`** → **`trailingIconColor`**
+- **`traileringIconAccessibilityLabel`** → **`trailingIconAccessibilityLabel`**
+- **`onTraileringIconPress`** → **`onTrailingIconPress`**
+
+```diff
+<Searchbar
+- traileringIcon="microphone"
+- traileringIconColor={colors.onSurfaceVariant}
+- traileringIconAccessibilityLabel="microphone button"
+- onTraileringIconPress={onMicrophonePress}
++ trailingIcon="microphone"
++ trailingIconColor={colors.onSurfaceVariant}
++ trailingIconAccessibilityLabel="microphone button"
++ onTrailingIconPress={onMicrophonePress}
+/>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
