@@ -37,6 +37,10 @@ export type Props = {
    */
   overlayAccessibilityLabel?: string;
   /**
+   * Accessible name for the modal.
+   */
+  'aria-label'?: string;
+  /**
    * testID for the overlay that is displayed behind the modal content.
    */
   overlayTestID?: string;
@@ -89,7 +93,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
+ * Give the modal an accessible name with `aria-label`.
  *
  * ## Usage
  * ```js
@@ -110,6 +114,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *         <Modal
  *           visible={visible}
  *           onDismiss={hideModal}
+ *           aria-label="Example modal"
  *           contentBackgroundColor="white"
  *           contentContainerStyle={containerStyle}
  *         >
@@ -131,6 +136,7 @@ function Modal({
   dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
+  'aria-label': ariaLabel,
   overlayTestID,
   onDismiss = () => {},
   children,
@@ -227,7 +233,6 @@ function Modal({
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
       aria-live="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={onDismissCallback}
@@ -251,6 +256,8 @@ function Modal({
         pointerEvents="box-none"
       >
         <Surface
+          role="dialog"
+          aria-label={ariaLabel}
           theme={theme}
           backgroundColor={contentBackgroundColor}
           borderRadius={contentBorderRadius}

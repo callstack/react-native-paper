@@ -554,3 +554,13 @@ describe('Modal', () => {
     });
   });
 });
+
+it('exposes the modal as a dialog with an accessible name', async () => {
+  await render(
+    <Modal visible onDismiss={() => {}} aria-label="Example modal">
+      <Text>Modal content</Text>
+    </Modal>
+  );
+
+  expect(screen.getByLabelText('Example modal')).toHaveProp('role', 'dialog');
+});
