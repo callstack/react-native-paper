@@ -128,16 +128,19 @@ const DataTableTitle = ({
   numberOfLines,
   maxFontSizeMultiplier,
   'aria-label': ariaLabel,
-  // Must not reach the plain view a static title renders as.
-  android_ripple,
-  android_disableSound,
-  delayLongPress,
-  pressRetentionOffset,
-  unstable_pressDelay,
-  testOnly_pressed,
   disabled,
   ...rest
 }: Props) => {
+  const {
+    android_ripple,
+    android_disableSound,
+    delayLongPress,
+    pressRetentionOffset,
+    unstable_pressDelay,
+    testOnly_pressed,
+    ...viewProps
+  } = rest;
+
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
 
@@ -286,7 +289,7 @@ const DataTableTitle = ({
 
   if (!onPress) {
     return (
-      <View {...structuralProps} {...rest} style={containerStyle}>
+      <View {...structuralProps} {...viewProps} style={containerStyle}>
         {content}
       </View>
     );
@@ -295,7 +298,7 @@ const DataTableTitle = ({
   return (
     <Pressable
       {...structuralProps}
-      {...rest}
+      {...viewProps}
       onPress={onPress}
       disabled={disabled}
       android_ripple={android_ripple}
