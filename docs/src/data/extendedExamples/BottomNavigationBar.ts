@@ -31,6 +31,7 @@ const MyTabs = createBottomTabNavigator({
     <BottomNavigation.Bar
       navigationState={state}
       safeAreaInsets={insets}
+      itemLayout="auto"
       onTabPress={({ route, preventDefault }) => {
         const event = navigation.emit({
           type: 'tabPress',
@@ -135,6 +136,7 @@ export default function App() {
             <BottomNavigation.Bar
               navigationState={state}
               safeAreaInsets={insets}
+              itemLayout="auto"
               onTabPress={({ route, preventDefault }) => {
                 const event = navigation.emit({
                   type: 'tabPress',

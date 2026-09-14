@@ -13,6 +13,7 @@ The following props now accept animated styles returned from `useAnimatedStyle`.
 - `Appbar.Action` and `Appbar.BackAction`: `style`
 - `Badge`: `style`
 - `Banner`: `style`
+- `BottomNavigation`: `barStyle`, and `BottomNavigation.Bar`: `style`
 - `Button`: `style`
 - `Card`: `style`
 - `Chip`: `style`
@@ -108,6 +109,31 @@ Some components now accept explicit `testID` props for their interactable elemen
 - `Snackbar`: `iconTestID` for the icon button.
 
 ## Components
+
+### BottomNavigation
+
+The bar follows the Material Design 3 Expressive navigation bar spec.
+
+- Height is 64dp (was 80dp when unlabeled, and the label used a 56dp height constant).
+- The active indicator is 56×32 with a full corner, and it now stays mounted so the pill can scale and fade with a spatial spring.
+- Active labels use the `secondary` color and `labelMediumEmphasized`. Horizontal items (medium windows) place the label on the indicator and use `onSecondaryContainer`.
+- Destinations use visible state layers. The previous `rippleColor: 'transparent'` treatment is gone.
+- `itemLayout` selects `vertical`, `horizontal`, or `auto` (switches at 600dp). The default is `auto`.
+- `shifting` no longer translates icons or requires two tabs. It only fades inactive labels in place.
+- Scene and bar animations use Reanimated. `barStyle` / `BottomNavigation.Bar` `style` accept Reanimated animated styles, not `Animated.Value`. `sceneAnimationEasing` is an `(value: number) => number` function.
+- Screens still lazy-mount on first visit. Route updates only remount a destination when its `key` changes; inactive screens keep their mounted state.
+
+```diff
+ <BottomNavigation
+   navigationState={{ index, routes }}
+   onIndexChange={setIndex}
+   renderScene={renderScene}
+-  sceneAnimationEasing={Easing.ease}
++  itemLayout="auto"
++  sceneAnimationEnabled
++  sceneAnimationType="opacity"
+ />
+```
 
 ### Appbar
 

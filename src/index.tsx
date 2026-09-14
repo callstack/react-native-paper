@@ -69,6 +69,10 @@ export type {
   Props as BottomNavigationProps,
   BaseRoute as BottomNavigationRoute,
 } from './components/BottomNavigation/BottomNavigation';
+export type {
+  BarProps as BottomNavigationBarProps,
+  ItemLayout as BottomNavigationItemLayout,
+} from './components/BottomNavigation/types';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
 export type { Props as CardActionsProps } from './components/Card/CardActions';

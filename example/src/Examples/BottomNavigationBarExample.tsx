@@ -36,6 +36,7 @@ const BottomNavigationBarExample = createBottomTabNavigator({
   tabBar: ({ navigation, state, descriptors }) => (
     <BottomNavigation.Bar
       navigationState={state}
+      itemLayout="auto"
       onTabPress={({ route, preventDefault }) => {
         const event = navigation.emit({
           type: 'tabPress',

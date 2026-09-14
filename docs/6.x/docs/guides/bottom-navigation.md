@@ -5,7 +5,7 @@ title: Using BottomNavigation with React Navigation
 Build a Material Design bottom tab bar by combining two pieces:
 
 - `@react-navigation/bottom-tabs` handles routing, state, and screen options.
-- `BottomNavigation.Bar` renders the Material 3 tab bar (ripple, badges, shifting/labeled modes).
+- `BottomNavigation.Bar` renders the Material 3 Expressive tab bar (active indicator, badges, optional shifting labels, and vertical or horizontal items).
 
 <img src="/react-native-paper/screenshots/material-bottom-tabs.gif" style={{ width: '420px', maxWidth: '100%', margin: '16px 0' }} />
 
@@ -36,6 +36,7 @@ function MyTabs() {
         <BottomNavigation.Bar
           navigationState={state}
           safeAreaInsets={insets}
+          itemLayout="auto"
           onTabPress={({ route, preventDefault }) => {
             const event = navigation.emit({
               type: 'tabPress',
