@@ -9,6 +9,7 @@ import {
   DialogWithIcon,
   DialogWithLoadingIndicator,
   DialogWithLongText,
+  DialogWithOverlay,
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
@@ -79,6 +80,13 @@ const DialogExample = () => {
           Dismissable back button
         </Button>
       )}
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog8')}
+        style={styles.button}
+      >
+        Inert background
+      </Button>
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -106,6 +114,10 @@ const DialogExample = () => {
       <DialogWithDismissableBackButton
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}
+      />
+      <DialogWithOverlay
+        visible={_getVisible('dialog8')}
+        close={_toggleDialog('dialog8')}
       />
     </ScreenWrapper>
   );

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 
 import PortalManager from './PortalManager';
 
@@ -8,13 +7,18 @@ export type Props = {
 };
 
 type Operation =
-  | { type: 'mount'; key: number; children: React.ReactNode }
-  | { type: 'update'; key: number; children: React.ReactNode }
+  | { type: 'mount'; key: number; children: React.ReactNode; overlay?: boolean }
+  | {
+      type: 'update';
+      key: number;
+      children: React.ReactNode;
+      overlay?: boolean;
+    }
   | { type: 'unmount'; key: number };
 
 export type PortalMethods = {
-  mount: (children: React.ReactNode) => number;
-  update: (key: number, children: React.ReactNode) => void;
+  mount: (children: React.ReactNode, overlay?: boolean) => number;
+  update: (key: number, children: React.ReactNode, overlay?: boolean) => void;
   unmount: (key: number) => void;
 };
 
@@ -57,10 +61,10 @@ export default class PortalHost extends React.Component<Props> {
       if (action) {
         switch (action.type) {
           case 'mount':
-            manager.mount(action.key, action.children);
+            manager.mount(action.key, action.children, action.overlay);
             break;
           case 'update':
-            manager.update(action.key, action.children);
+            manager.update(action.key, action.children, action.overlay);
             break;
           case 'unmount':
             manager.unmount(action.key);
@@ -74,23 +78,27 @@ export default class PortalHost extends React.Component<Props> {
     this.manager = manager;
   };
 
-  private mount = (children: React.ReactNode) => {
+  private mount = (children: React.ReactNode, overlay?: boolean) => {
     const key = this.nextKey++;
 
     if (this.manager) {
-      this.manager.mount(key, children);
+      this.manager.mount(key, children, overlay);
     } else {
-      this.queue.push({ type: 'mount', key, children });
+      this.queue.push({ type: 'mount', key, children, overlay });
     }
 
     return key;
   };
 
-  private update = (key: number, children: React.ReactNode) => {
+  private update = (
+    key: number,
+    children: React.ReactNode,
+    overlay?: boolean
+  ) => {
     if (this.manager) {
-      this.manager.update(key, children);
+      this.manager.update(key, children, overlay);
     } else {
-      const op: Operation = { type: 'mount', key, children };
+      const op: Operation = { type: 'mount', key, children, overlay };
       const index = this.queue.findIndex(
         (o) =>
           (o.type === 'mount' && o.key === key) ||
@@ -126,22 +134,11 @@ export default class PortalHost extends React.Component<Props> {
           unmount: this.unmount,
         }}
       >
-        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
-        <View
-          style={styles.container}
-          collapsable={false}
-          pointerEvents="box-none"
-        >
-          {this.props.children}
-        </View>
-        <PortalManager ref={this.setManager} />
+        <PortalManager
+          ref={this.setManager}
+          pageContent={this.props.children}
+        />
       </PortalContext.Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
