@@ -61,8 +61,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   animated?: boolean;
   /**
-   * Container color override. Defaults to `theme.colors.surface` when
-   * collapsed and `theme.colors.surfaceContainer` when expanded.
+   * Container color override. Defaults to `theme.colors.surface`.
    */
   containerColor?: ColorValue;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
@@ -151,8 +150,7 @@ const justifyContent = {
  *
  * ## Theming
  * Customize by overriding these `theme.colors` roles:
- * - `surface`: collapsed container
- * - `surfaceContainer`: expanded container
+ * - `surface`: rail container
  * - `secondaryContainer` / `onSecondaryContainer`: active indicator / active icon
  * - `secondary`: active label (collapsed), focus indicator
  * - `onSurfaceVariant`: inactive icon and label
@@ -182,9 +180,7 @@ const NavigationRail = ({
   const width = expanded ? targetWidth : rail.collapsedWidth;
   const floating = overlay && expanded;
   const endRadius = floating ? resolveCornerRadius(theme, rail.modalShape) : 0;
-  const backgroundColor =
-    containerColor ??
-    theme.colors[expanded ? colors.expandedContainer : colors.container];
+  const backgroundColor = containerColor ?? theme.colors[colors.container];
 
   const context = React.useMemo(
     () => ({ expanded, expandedWidth: targetWidth, animated }),
@@ -204,15 +200,7 @@ const NavigationRail = ({
         },
         getTransition(
           theme,
-          [
-            'width',
-            'borderTopEndRadius',
-            'borderBottomEndRadius',
-            // Reanimated can't interpolate PlatformColor / DynamicColorIOS.
-            ...(typeof backgroundColor === 'string'
-              ? (['backgroundColor'] as const)
-              : []),
-          ],
+          ['width', 'borderTopEndRadius', 'borderBottomEndRadius'],
           { instant: !animated || reduceMotion }
         ),
         style,

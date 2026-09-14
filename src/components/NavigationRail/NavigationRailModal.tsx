@@ -51,6 +51,10 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  * start edge and out again on dismiss. Wrap it in a `Portal` to render above
  * other components.
  *
+ * ## Theming
+ * The container uses `theme.colors.surfaceContainer`, the scrim
+ * `theme.colors.scrim`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -172,7 +176,7 @@ const NavigationRailModal = ({
       />
       <Surface
         elevation={rail.modalElevation}
-        backgroundColor={theme.colors[colors.expandedContainer]}
+        backgroundColor={theme.colors[colors.modalContainer]}
         borderTopEndRadius={endRadius}
         borderBottomEndRadius={endRadius}
         transitionDuration={animated ? motion.duration : 0}

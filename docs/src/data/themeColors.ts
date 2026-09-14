@@ -265,11 +265,8 @@ export const themeColors = {
     },
   },
   NavigationRail: {
-    collapsed: {
+    '-': {
       backgroundColor: 'theme.colors.surface',
-    },
-    expanded: {
-      backgroundColor: 'theme.colors.surfaceContainer',
     },
   },
   'NavigationRail.Item': {

@@ -48,7 +48,7 @@ const item = {
 
 const colors = {
   container: 'surface',
-  expandedContainer: 'surfaceContainer',
+  modalContainer: 'surfaceContainer',
   activeIcon: 'onSecondaryContainer',
   activeLabel: 'secondary',
   activeExpandedLabel: 'onSecondaryContainer',
