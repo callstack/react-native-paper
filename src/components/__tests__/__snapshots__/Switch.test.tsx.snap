@@ -6,7 +6,7 @@ exports[`Switch render renders disabled off 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -34,8 +34,9 @@ exports[`Switch render renders disabled off 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -50,7 +51,7 @@ exports[`Switch render renders disabled off 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -104,7 +105,7 @@ exports[`Switch render renders disabled off 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -139,7 +140,7 @@ exports[`Switch render renders disabled off 1`] = `
         },
         {
           "height": 16,
-          "top": 12,
+          "top": 16,
           "transform": [
             {
               "translateX": 8,
@@ -201,10 +202,10 @@ exports[`Switch render renders disabled off 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,
@@ -221,7 +222,7 @@ exports[`Switch render renders disabled on 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -249,8 +250,9 @@ exports[`Switch render renders disabled on 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -265,7 +267,7 @@ exports[`Switch render renders disabled on 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -299,7 +301,7 @@ exports[`Switch render renders disabled on 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -334,7 +336,7 @@ exports[`Switch render renders disabled on 1`] = `
         },
         {
           "height": 24,
-          "top": 8,
+          "top": 12,
           "transform": [
             {
               "translateX": 24,
@@ -396,10 +398,10 @@ exports[`Switch render renders disabled on 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,
@@ -416,7 +418,7 @@ exports[`Switch render renders off 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -444,6 +446,7 @@ exports[`Switch render renders off 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -460,7 +463,7 @@ exports[`Switch render renders off 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -514,7 +517,7 @@ exports[`Switch render renders off 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -549,7 +552,7 @@ exports[`Switch render renders off 1`] = `
         },
         {
           "height": 16,
-          "top": 12,
+          "top": 16,
           "transform": [
             {
               "translateX": 8,
@@ -594,10 +597,10 @@ exports[`Switch render renders off 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,
@@ -614,7 +617,7 @@ exports[`Switch render renders on 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -642,6 +645,7 @@ exports[`Switch render renders on 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -658,7 +662,7 @@ exports[`Switch render renders on 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -692,7 +696,7 @@ exports[`Switch render renders on 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -727,7 +731,7 @@ exports[`Switch render renders on 1`] = `
         },
         {
           "height": 24,
-          "top": 8,
+          "top": 12,
           "transform": [
             {
               "translateX": 24,
@@ -772,10 +776,10 @@ exports[`Switch render renders on 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,
@@ -792,7 +796,7 @@ exports[`Switch render renders with checked icon 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -820,6 +824,7 @@ exports[`Switch render renders with checked icon 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -836,7 +841,7 @@ exports[`Switch render renders with checked icon 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -870,7 +875,7 @@ exports[`Switch render renders with checked icon 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -905,7 +910,7 @@ exports[`Switch render renders with checked icon 1`] = `
         },
         {
           "height": 24,
-          "top": 8,
+          "top": 12,
           "transform": [
             {
               "translateX": 24,
@@ -946,7 +951,7 @@ exports[`Switch render renders with checked icon 1`] = `
           "height": 16,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 12,
+          "top": 16,
           "width": 16,
         },
         {
@@ -986,7 +991,7 @@ exports[`Switch render renders with checked icon 1`] = `
         style={
           [
             {
-              "color": "rgba(103, 80, 164, 1)",
+              "color": "rgba(33, 0, 93, 1)",
               "fontSize": 16,
             },
             [
@@ -1021,10 +1026,10 @@ exports[`Switch render renders with checked icon 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,
@@ -1041,7 +1046,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     [
       {
         "alignItems": "center",
-        "height": 40,
+        "height": 48,
         "justifyContent": "center",
         "overflow": "visible",
         "width": 52,
@@ -1069,6 +1074,7 @@ exports[`Switch render renders with per-state icons 1`] = `
       }
     }
     accessible={true}
+    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1085,7 +1091,7 @@ exports[`Switch render renders with per-state icons 1`] = `
       [
         {
           "alignItems": "center",
-          "height": 40,
+          "height": 48,
           "justifyContent": "center",
           "width": 52,
         },
@@ -1119,7 +1125,7 @@ exports[`Switch render renders with per-state icons 1`] = `
           "height": 40,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 0,
+          "top": 4,
           "width": 40,
         },
         {
@@ -1154,7 +1160,7 @@ exports[`Switch render renders with per-state icons 1`] = `
         },
         {
           "height": 24,
-          "top": 8,
+          "top": 12,
           "transform": [
             {
               "translateX": 24,
@@ -1195,7 +1201,7 @@ exports[`Switch render renders with per-state icons 1`] = `
           "height": 16,
           "pointerEvents": "none",
           "position": "absolute",
-          "top": 12,
+          "top": 16,
           "width": 16,
         },
         {
@@ -1235,7 +1241,7 @@ exports[`Switch render renders with per-state icons 1`] = `
         style={
           [
             {
-              "color": "rgba(103, 80, 164, 1)",
+              "color": "rgba(33, 0, 93, 1)",
               "fontSize": 16,
             },
             [
@@ -1270,10 +1276,10 @@ exports[`Switch render renders with per-state icons 1`] = `
           "borderColor": "rgba(98, 91, 113, 1)",
           "borderRadius": 9999,
           "borderWidth": 3,
-          "bottom": -1,
+          "bottom": 3,
           "left": -5,
           "right": -5,
-          "top": -1,
+          "top": 3,
         },
         {
           "opacity": 0,

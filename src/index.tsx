@@ -127,7 +127,7 @@ export type { Props as RadioButtonItemProps } from './components/RadioButton/Rad
 export type { Props as SearchbarProps } from './components/Searchbar';
 export type { Props as SnackbarProps } from './components/Snackbar';
 export type { Props as SurfaceProps } from './components/Surface';
-export type { Props as SwitchProps } from './components/Switch/Switch';
+export type { OperableProps as SwitchProps } from './components/Switch/Switch';
 export type {
   TextInputProps,
   TextInputRenderProps,

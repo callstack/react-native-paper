@@ -177,7 +177,7 @@ function DrawerItems() {
                 <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
-                    <Switch value={shouldUseDynamicTheme} />
+                    <Switch value={shouldUseDynamicTheme} readOnly />
                   </View>
                 </View>
               </TouchableRipple>
@@ -186,7 +186,7 @@ function DrawerItems() {
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
+                  <Switch value={isDarkTheme} readOnly />
                 </View>
               </View>
             </TouchableRipple>
@@ -195,7 +195,7 @@ function DrawerItems() {
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none">
-                  <Switch value={isRTL} />
+                  <Switch value={isRTL} readOnly />
                 </View>
               </View>
             </TouchableRipple>
@@ -204,7 +204,7 @@ function DrawerItems() {
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
                 <View pointerEvents="none">
-                  <Switch value={collapsed} />
+                  <Switch value={collapsed} readOnly />
                 </View>
               </View>
             </TouchableRipple>
@@ -213,7 +213,7 @@ function DrawerItems() {
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Custom font *</Text>
                 <View pointerEvents="none">
-                  <Switch value={customFontLoaded} />
+                  <Switch value={customFontLoaded} readOnly />
                 </View>
               </View>
             </TouchableRipple>
@@ -224,7 +224,7 @@ function DrawerItems() {
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
                 <View pointerEvents="none">
-                  <Switch value={rippleEffectEnabled} />
+                  <Switch value={rippleEffectEnabled} readOnly />
                 </View>
               </View>
             </TouchableRipple>
