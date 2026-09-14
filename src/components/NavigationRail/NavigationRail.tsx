@@ -6,7 +6,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
@@ -21,7 +21,7 @@ import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 
-export type Props = {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Navigation destinations, typically `NavigationRail.Item` elements.
    */
@@ -172,6 +172,7 @@ const NavigationRail = ({
   style,
   testID,
   theme: themeOverrides,
+  ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
@@ -217,6 +218,7 @@ const NavigationRail = ({
         style,
       ]}
       testID={testID}
+      {...rest}
     >
       {header ? <View style={styles.header}>{header}</View> : null}
       <ScrollView
