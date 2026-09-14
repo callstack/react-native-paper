@@ -132,7 +132,7 @@ const NavigationRailItem = ({
   'aria-label': ariaLabel = label,
   labelMaxFontSizeMultiplier,
   style,
-  testID = 'navigation-rail-item',
+  testID,
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -224,7 +224,6 @@ const NavigationRailItem = ({
       ellipsizeMode={row ? 'clip' : 'tail'}
       maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
       style={{ color: row ? colors.expandedLabel : colors.label }}
-      testID={`${testID}-label${row ? '-expanded' : ''}`}
     >
       {label}
     </Text>
@@ -278,7 +277,6 @@ const NavigationRailItem = ({
               },
               indicatorStyle,
             ]}
-            testID={`${testID}-indicator`}
           />
           <Animated.View
             style={[

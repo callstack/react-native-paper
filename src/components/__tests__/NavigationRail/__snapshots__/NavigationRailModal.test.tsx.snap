@@ -27,7 +27,7 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
         },
       ]
     }
-    testID="navigation-rail-modal"
+    testID="modal"
   >
     <View
       accessibilityLabel="Close navigation rail"
@@ -80,7 +80,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
           {},
         ]
       }
-      testID="navigation-rail-modal-backdrop"
     />
     <View
       collapsable={false}
@@ -135,7 +134,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
           },
         ]
       }
-      testID="navigation-rail-modal-surface"
     >
       <View
         collapsable={false}
@@ -204,7 +202,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
             undefined,
           ]
         }
-        testID="navigation-rail-modal-rail"
       >
         <RCTScrollView
           contentContainerStyle={
@@ -225,7 +222,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
               "flex": 1,
             }
           }
-          testID="navigation-rail-modal-rail-items"
         >
           <View>
             <View
@@ -286,7 +282,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item"
               >
                 <View
                   collapsable={false}
@@ -330,7 +325,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                         },
                       ]
                     }
-                    testID="navigation-rail-item-indicator"
                   />
                   <View
                     collapsable={false}
@@ -437,7 +431,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                           ],
                         ]
                       }
-                      testID="navigation-rail-item-label"
                     >
                       Inbox
                     </Text>
@@ -491,7 +484,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                           ],
                         ]
                       }
-                      testID="navigation-rail-item-label-expanded"
                     >
                       Inbox
                     </Text>
@@ -557,7 +549,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item"
               >
                 <View
                   collapsable={false}
@@ -601,7 +592,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                         },
                       ]
                     }
-                    testID="navigation-rail-item-indicator"
                   />
                   <View
                     collapsable={false}
@@ -708,7 +698,6 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                           ],
                         ]
                       }
-                      testID="navigation-rail-item-label"
                     >
                       Sent
                     </Text>
@@ -762,9 +751,506 @@ exports[`NavigationRail.Modal renders when visible 1`] = `
                           ],
                         ]
                       }
-                      testID="navigation-rail-item-label-expanded"
                     >
                       Sent
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </RCTScrollView>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`NavigationRail.Modal slides out before unmounting on dismiss 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    aria-live="polite"
+    aria-modal={true}
+    collapsable={false}
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+    testID="modal"
+  >
+    <View
+      accessibilityLabel="Close navigation rail"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      importantForAccessibility="no"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "opacity": 0,
+          },
+          {
+            "backgroundColor": "rgba(0, 0, 0, 1)",
+          },
+          {},
+        ]
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        [
+          {},
+          {
+            "bottom": 0,
+            "position": "absolute",
+            "start": 0,
+            "top": 0,
+          },
+          {
+            "width": 220,
+          },
+          {
+            "transform": [
+              {
+                "translateX": -220,
+              },
+            ],
+          },
+          {},
+          {},
+          {
+            "backgroundColor": "rgba(243, 237, 247, 1)",
+          },
+          {
+            "borderBottomEndRadius": 16,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderCurve": "continuous",
+            "borderEndEndRadius": undefined,
+            "borderEndStartRadius": undefined,
+            "borderRadius": undefined,
+            "borderStartEndRadius": undefined,
+            "borderStartStartRadius": undefined,
+            "borderTopEndRadius": 16,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "shadowColor": "rgba(0, 0, 0, 1)",
+            "shadowOffset": {
+              "height": 1.66,
+              "width": 0,
+            },
+            "shadowOpacity": 0.19,
+            "shadowRadius": 2.36,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "pointerEvents": "none",
+            },
+            {},
+            {},
+            {
+              "backgroundColor": "rgba(243, 237, 247, 1)",
+            },
+            {
+              "borderBottomEndRadius": 16,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": undefined,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": 16,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0.039,
+              "shadowRadius": 0.75,
+            },
+          ]
+        }
+      />
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "height": "100%",
+              "overflow": "hidden",
+              "paddingTop": 44,
+            },
+            false,
+            {
+              "backgroundColor": "transparent",
+              "borderBottomEndRadius": 0,
+              "borderTopEndRadius": 0,
+              "width": 220,
+            },
+            {},
+            undefined,
+          ]
+        }
+      >
+        <RCTScrollView
+          contentContainerStyle={
+            [
+              {
+                "flexGrow": 1,
+                "gap": 4,
+                "paddingHorizontal": 20,
+              },
+              {
+                "justifyContent": "flex-start",
+              },
+            ]
+          }
+          showsVerticalScrollIndicator={false}
+          style={
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <View>
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "height": 56,
+                    "paddingTop": 0,
+                  },
+                  {},
+                  undefined,
+                ]
+              }
+            >
+              <View
+                accessibilityLabel="Inbox"
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": false,
+                    "expanded": undefined,
+                    "selected": true,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                role="tab"
+                style={
+                  [
+                    {
+                      "overflow": "hidden",
+                    },
+                    [
+                      {
+                        "flex": 1,
+                      },
+                      null,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    [
+                      {
+                        "justifyContent": "center",
+                        "paddingStart": 16,
+                        "pointerEvents": "none",
+                      },
+                      {
+                        "height": 56,
+                        "opacity": 1,
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      [
+                        {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        },
+                        {
+                          "backgroundColor": "rgba(232, 222, 248, 1)",
+                          "borderRadius": 9999,
+                        },
+                        {
+                          "opacity": 1,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                      ]
+                    }
+                  />
+                  <View
+                    collapsable={false}
+                    style={
+                      [
+                        {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        },
+                        {
+                          "backgroundColor": "rgba(29, 25, 43, 1)",
+                          "borderRadius": 9999,
+                        },
+                        {
+                          "opacity": 0,
+                        },
+                      ]
+                    }
+                  />
+                  <View
+                    style={
+                      {
+                        "alignSelf": "flex-start",
+                      }
+                    }
+                  >
+                    <Text
+                      accessibilityElementsHidden={true}
+                      importantForAccessibility="no-hide-descendants"
+                      pointerEvents="none"
+                      selectable={false}
+                      style={
+                        [
+                          {
+                            "color": "rgba(29, 25, 43, 1)",
+                            "fontSize": 24,
+                          },
+                          [
+                            {
+                              "lineHeight": 24,
+                              "transform": [
+                                {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      inbox
+                    </Text>
+                  </View>
+                  <View
+                    aria-hidden={true}
+                    collapsable={false}
+                    style={
+                      [
+                        {
+                          "alignItems": "center",
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "start": 0,
+                          "top": "100%",
+                          "width": 56,
+                        },
+                        {
+                          "opacity": 0,
+                        },
+                        {},
+                      ]
+                    }
+                  >
+                    <Text
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        [
+                          {
+                            "textAlign": "left",
+                          },
+                          {
+                            "color": "rgba(29, 27, 32, 1)",
+                            "writingDirection": "ltr",
+                          },
+                          [
+                            {
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                            {
+                              "color": "rgba(98, 91, 113, 1)",
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      Inbox
+                    </Text>
+                  </View>
+                  <View
+                    aria-hidden={false}
+                    collapsable={false}
+                    style={
+                      [
+                        {
+                          "bottom": 0,
+                          "justifyContent": "center",
+                          "position": "absolute",
+                          "start": 48,
+                          "top": 0,
+                        },
+                        {
+                          "width": 116,
+                        },
+                        {
+                          "opacity": 1,
+                        },
+                        {},
+                      ]
+                    }
+                  >
+                    <Text
+                      ellipsizeMode="clip"
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        [
+                          {
+                            "textAlign": "left",
+                          },
+                          {
+                            "color": "rgba(29, 27, 32, 1)",
+                            "writingDirection": "ltr",
+                          },
+                          [
+                            {
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            {
+                              "color": "rgba(29, 25, 43, 1)",
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      Inbox
                     </Text>
                   </View>
                 </View>

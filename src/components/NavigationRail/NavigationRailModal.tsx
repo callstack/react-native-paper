@@ -86,7 +86,8 @@ const NavigationRailModal = ({
   expandedWidth = rail.expandedMinWidth,
   animated = true,
   style,
-  testID = 'navigation-rail-modal',
+  overlayTestID,
+  testID,
   theme: themeOverrides,
   ...rest
 }: Props) => {
@@ -167,7 +168,7 @@ const NavigationRailModal = ({
           { backgroundColor: theme.colors.scrim },
           getTransition(theme, ['opacity'], motion),
         ]}
-        testID={`${testID}-backdrop`}
+        testID={overlayTestID}
       />
       <Surface
         elevation={rail.modalElevation}
@@ -190,7 +191,6 @@ const NavigationRailModal = ({
           ),
         ]}
         theme={theme}
-        testID={`${testID}-surface`}
       >
         <NavigationRail
           {...rest}
@@ -200,7 +200,6 @@ const NavigationRailModal = ({
           containerColor="transparent"
           style={style}
           theme={theme}
-          testID={`${testID}-rail`}
         />
       </Surface>
     </Animated.View>

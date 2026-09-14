@@ -7,7 +7,11 @@ import Portal from '../../Portal/Portal';
 const renderModal = (visible: boolean, onDismiss = jest.fn()) =>
   render(
     <Portal.Host>
-      <NavigationRail.Modal visible={visible} onDismiss={onDismiss}>
+      <NavigationRail.Modal
+        visible={visible}
+        onDismiss={onDismiss}
+        testID="modal"
+      >
         <NavigationRail.Item icon="inbox" label="Inbox" active />
         <NavigationRail.Item icon="send" label="Sent" />
       </NavigationRail.Modal>
@@ -26,7 +30,7 @@ describe('NavigationRail.Modal', () => {
   it('renders nothing when hidden', async () => {
     await renderModal(false);
 
-    expect(screen.queryByTestId('navigation-rail-modal')).toBeNull();
+    expect(screen.queryByTestId('modal')).toBeNull();
   });
 
   it('slides out before unmounting on dismiss', async () => {
@@ -35,31 +39,27 @@ describe('NavigationRail.Modal', () => {
 
     await rerender(
       <Portal.Host>
-        <NavigationRail.Modal visible={false}>
+        <NavigationRail.Modal visible={false} testID="modal">
           <NavigationRail.Item icon="inbox" label="Inbox" active />
         </NavigationRail.Modal>
       </Portal.Host>
     );
 
-    expect(screen.getByTestId('navigation-rail-modal-surface')).toHaveStyle({
-      transform: [{ translateX: -220 }],
-    });
-    expect(screen.getByTestId('navigation-rail-modal-backdrop')).toHaveStyle({
-      opacity: 0,
-    });
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+    expect(screen.toJSON()).toMatchSnapshot();
 
     await act(() => {
       jest.advanceTimersByTime(200);
     });
 
-    expect(screen.queryByTestId('navigation-rail-modal')).toBeNull();
+    expect(screen.queryByTestId('modal')).toBeNull();
   });
 
   it('unmounts immediately on dismiss when not animated', async () => {
     jest.useFakeTimers();
     const { rerender } = await render(
       <Portal.Host>
-        <NavigationRail.Modal visible animated={false}>
+        <NavigationRail.Modal visible animated={false} testID="modal">
           <NavigationRail.Item icon="inbox" label="Inbox" active />
         </NavigationRail.Modal>
       </Portal.Host>
@@ -67,7 +67,7 @@ describe('NavigationRail.Modal', () => {
 
     await rerender(
       <Portal.Host>
-        <NavigationRail.Modal visible={false} animated={false}>
+        <NavigationRail.Modal visible={false} animated={false} testID="modal">
           <NavigationRail.Item icon="inbox" label="Inbox" active />
         </NavigationRail.Modal>
       </Portal.Host>
@@ -76,15 +76,12 @@ describe('NavigationRail.Modal', () => {
       jest.advanceTimersByTime(0);
     });
 
-    expect(screen.queryByTestId('navigation-rail-modal')).toBeNull();
+    expect(screen.queryByTestId('modal')).toBeNull();
   });
 
-  it('renders items in the expanded layout', async () => {
+  it('renders its destinations', async () => {
     await renderModal(true);
 
-    expect(screen.getByTestId('navigation-rail-modal-rail')).toHaveStyle({
-      width: 220,
-    });
     expect(screen.getAllByRole('tab')).toHaveLength(2);
   });
 
@@ -93,7 +90,7 @@ describe('NavigationRail.Modal', () => {
     const onDismiss = jest.fn();
     await renderModal(true, onDismiss);
 
-    await user.press(screen.getByTestId('navigation-rail-modal-backdrop'));
+    await user.press(screen.getByLabelText('Close navigation rail'));
 
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });

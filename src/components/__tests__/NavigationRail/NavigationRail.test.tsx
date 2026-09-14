@@ -49,102 +49,111 @@ describe('NavigationRail render', () => {
       ).toJSON()
     ).toMatchSnapshot();
   });
+
+  it('renders behind a scrim in overlay mode', async () => {
+    expect(
+      (
+        await render(
+          <NavigationRail overlay expanded>
+            {items}
+          </NavigationRail>
+        )
+      ).toJSON()
+    ).toMatchSnapshot();
+  });
+
+  it('renders the active icon for the active destination', async () => {
+    expect(
+      (
+        await render(
+          <NavigationRail>
+            <NavigationRail.Item
+              icon="inbox-outline"
+              activeIcon="inbox"
+              label="Inbox"
+              active
+            />
+            <NavigationRail.Item
+              icon="send-outline"
+              activeIcon="send"
+              label="Sent"
+            />
+          </NavigationRail>
+        )
+      ).toJSON()
+    ).toMatchSnapshot();
+  });
 });
 
 describe('NavigationRail layout', () => {
   it('uses collapsed width by default', async () => {
-    await render(<NavigationRail>{items}</NavigationRail>);
+    await render(<NavigationRail testID="rail">{items}</NavigationRail>);
 
-    expect(screen.getByTestId('navigation-rail')).toHaveStyle({
-      width: 96,
-    });
+    expect(screen.getByTestId('rail')).toHaveStyle({ width: 96 });
   });
 
-  it('keeps the collapsed footprint and fades the scrim in overlay mode', async () => {
+  it('fades the scrim in and dismisses on press in overlay mode', async () => {
     const onDismiss = jest.fn();
     const { rerender } = await render(
-      <NavigationRail overlay onDismiss={onDismiss}>
+      <NavigationRail testID="rail" overlay onDismiss={onDismiss}>
         {items}
       </NavigationRail>
     );
 
-    expect(screen.getByTestId('navigation-rail-scrim')).toHaveStyle({
+    expect(screen.getByLabelText('Close navigation rail')).toHaveStyle({
       opacity: 0,
     });
 
     await rerender(
-      <NavigationRail overlay expanded onDismiss={onDismiss}>
+      <NavigationRail testID="rail" overlay expanded onDismiss={onDismiss}>
         {items}
       </NavigationRail>
     );
 
-    expect(screen.getByTestId('navigation-rail')).toHaveStyle({ width: 220 });
-    expect(screen.getByTestId('navigation-rail').parent).toHaveStyle({
-      width: 96,
-    });
-    expect(screen.getByTestId('navigation-rail-scrim')).toHaveStyle({
+    expect(screen.getByTestId('rail')).toHaveStyle({ width: 220 });
+    expect(screen.getByLabelText('Close navigation rail')).toHaveStyle({
       opacity: 0.32,
     });
 
-    await userEvent.setup().press(screen.getByTestId('navigation-rail-scrim'));
+    await userEvent
+      .setup()
+      .press(screen.getByLabelText('Close navigation rail'));
 
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
   it('clamps the expanded width to the spec range', async () => {
     await render(
-      <NavigationRail expanded expandedWidth={500}>
+      <NavigationRail testID="rail" expanded expandedWidth={500}>
         {items}
       </NavigationRail>
     );
 
-    expect(screen.getByTestId('navigation-rail')).toHaveStyle({
-      width: 360,
-    });
+    expect(screen.getByTestId('rail')).toHaveStyle({ width: 360 });
   });
 });
 
 describe('NavigationRail.Item', () => {
-  it('shows the active icon only when active', async () => {
+  it('marks only the active destination as selected', async () => {
     await render(
       <NavigationRail>
-        <NavigationRail.Item
-          icon="inbox-outline"
-          activeIcon="inbox"
-          label="Inbox"
-          active
-          testID="active"
-        />
-        <NavigationRail.Item
-          icon="send-outline"
-          activeIcon="send"
-          label="Sent"
-          testID="inactive"
-        />
+        <NavigationRail.Item icon="inbox" label="Inbox" active />
+        <NavigationRail.Item icon="send" label="Sent" />
       </NavigationRail>
     );
 
-    expect(screen.getByTestId('active')).toBeSelected();
-    expect(screen.getByTestId('inactive')).not.toBeSelected();
-    expect(screen.getByTestId('active-indicator')).toHaveStyle({
-      opacity: 1,
-    });
-    expect(screen.getByTestId('inactive-indicator')).toHaveStyle({
-      opacity: 0,
-    });
+    expect(screen.getByRole('tab', { name: 'Inbox' })).toBeSelected();
+    expect(screen.getByRole('tab', { name: 'Sent' })).not.toBeSelected();
   });
 
-  it('shows the stacked label collapsed and the row label expanded', async () => {
+  it('exposes a single label in both layouts', async () => {
     const { rerender } = await render(
       <NavigationRail>
         <NavigationRail.Item icon="inbox" label="Inbox" />
       </NavigationRail>
     );
 
-    expect(screen.getByTestId('navigation-rail-item-label')).toBeOnTheScreen();
-    expect(
-      screen.queryByTestId('navigation-rail-item-label-expanded')
-    ).toBeNull();
+    expect(screen.getAllByText('Inbox')).toHaveLength(1);
 
     await rerender(
       <NavigationRail expanded>
@@ -152,10 +161,7 @@ describe('NavigationRail.Item', () => {
       </NavigationRail>
     );
 
-    expect(screen.queryByTestId('navigation-rail-item-label')).toBeNull();
-    expect(
-      screen.getByTestId('navigation-rail-item-label-expanded')
-    ).toBeOnTheScreen();
+    expect(screen.getAllByText('Inbox')).toHaveLength(1);
   });
 
   it('uses the label as accessibility label', async () => {

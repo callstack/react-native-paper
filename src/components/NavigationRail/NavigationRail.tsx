@@ -53,6 +53,10 @@ export type Props = {
    */
   onDismiss?: () => void;
   /**
+   * TestID for the scrim rendered behind the rail.
+   */
+  overlayTestID?: string;
+  /**
    * Whether expanding and collapsing is animated. Defaults to `true`.
    */
   animated?: boolean;
@@ -162,10 +166,11 @@ const NavigationRail = ({
   header,
   overlay = false,
   onDismiss,
+  overlayTestID,
   animated = true,
   containerColor,
   style,
-  testID = 'navigation-rail',
+  testID,
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -221,7 +226,6 @@ const NavigationRail = ({
           { justifyContent: justifyContent[alignment] },
         ]}
         showsVerticalScrollIndicator={false}
-        testID={`${testID}-items`}
       >
         <NavigationRailContext.Provider value={context}>
           {children}
@@ -247,7 +251,7 @@ const NavigationRail = ({
           { width: windowWidth, backgroundColor: theme.colors.scrim },
           getTransition(theme, ['opacity'], { instant: !animated }),
         ]}
-        testID={`${testID}-scrim`}
+        testID={overlayTestID}
       />
       {panel}
     </View>

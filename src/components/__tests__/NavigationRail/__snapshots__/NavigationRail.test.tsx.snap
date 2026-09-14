@@ -1,5 +1,1136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`NavigationRail render renders behind a scrim in overlay mode 1`] = `
+<View
+  style={
+    {
+      "height": "100%",
+      "width": 96,
+      "zIndex": 1,
+    }
+  }
+>
+  <View
+    accessibilityLabel="Close navigation rail"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    importantForAccessibility="no"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      [
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "start": 0,
+          "top": 0,
+        },
+        {
+          "opacity": 0.32,
+          "pointerEvents": "auto",
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 1)",
+          "width": 750,
+        },
+        {},
+      ]
+    }
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "overflow": "hidden",
+          "paddingTop": 44,
+        },
+        {
+          "bottom": 0,
+          "position": "absolute",
+          "start": 0,
+          "top": 0,
+        },
+        {
+          "backgroundColor": "rgba(243, 237, 247, 1)",
+          "borderBottomEndRadius": 16,
+          "borderTopEndRadius": 16,
+          "width": 220,
+        },
+        {},
+        undefined,
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        [
+          {
+            "flexGrow": 1,
+            "gap": 4,
+            "paddingHorizontal": 20,
+          },
+          {
+            "justifyContent": "flex-start",
+          },
+        ]
+      }
+      showsVerticalScrollIndicator={false}
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <View>
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "height": 56,
+                "paddingTop": 0,
+              },
+              {},
+              undefined,
+            ]
+          }
+        >
+          <View
+            accessibilityLabel="Inbox"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": true,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="tab"
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                [
+                  {
+                    "flex": 1,
+                  },
+                  null,
+                ],
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "justifyContent": "center",
+                    "paddingStart": 16,
+                    "pointerEvents": "none",
+                  },
+                  {
+                    "height": 56,
+                    "opacity": 1,
+                  },
+                  {},
+                ]
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 1,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                  ]
+                }
+              />
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(29, 25, 43, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  {
+                    "alignSelf": "flex-start",
+                  }
+                }
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(29, 25, 43, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  inbox
+                </Text>
+                <View
+                  aria-hidden={true}
+                  collapsable={false}
+                  style={
+                    [
+                      {
+                        "alignItems": "flex-end",
+                        "end": -8,
+                        "position": "absolute",
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    collapsable={false}
+                    numberOfLines={1}
+                    style={
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 1,
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 16,
+                          "minWidth": 16,
+                        },
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.5,
+                          "lineHeight": 16,
+                        },
+                        {
+                          "lineHeight": 16,
+                          "maxWidth": 36,
+                          "paddingHorizontal": 4,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    3
+                  </Text>
+                </View>
+              </View>
+              <View
+                aria-hidden={true}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "marginTop": 4,
+                      "position": "absolute",
+                      "start": 0,
+                      "top": "100%",
+                      "width": 56,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 12,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.5,
+                          "lineHeight": 16,
+                        },
+                        {
+                          "color": "rgba(98, 91, 113, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Inbox
+                </Text>
+              </View>
+              <View
+                aria-hidden={false}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "position": "absolute",
+                      "start": 48,
+                      "top": 0,
+                    },
+                    {
+                      "width": 116,
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "color": "rgba(29, 25, 43, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Inbox
+                </Text>
+              </View>
+              <View
+                aria-hidden={false}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "alignItems": "flex-end",
+                      "bottom": 0,
+                      "end": 16,
+                      "justifyContent": "center",
+                      "position": "absolute",
+                      "top": 0,
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  collapsable={false}
+                  numberOfLines={1}
+                  style={
+                    [
+                      {
+                        "alignSelf": "flex-end",
+                        "overflow": "hidden",
+                        "textAlign": "center",
+                        "textAlignVertical": "center",
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                      {
+                        "backgroundColor": "rgba(179, 38, 30, 1)",
+                        "borderRadius": 9999,
+                        "color": "rgba(255, 255, 255, 1)",
+                        "height": 16,
+                        "minWidth": 16,
+                      },
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 11,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.5,
+                        "lineHeight": 16,
+                      },
+                      {
+                        "lineHeight": 16,
+                        "maxWidth": 36,
+                        "paddingHorizontal": 4,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  3
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "height": 56,
+                "paddingTop": 0,
+              },
+              {},
+              undefined,
+            ]
+          }
+        >
+          <View
+            accessibilityLabel="Sent"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": false,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="tab"
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                [
+                  {
+                    "flex": 1,
+                  },
+                  null,
+                ],
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "justifyContent": "center",
+                    "paddingStart": 16,
+                    "pointerEvents": "none",
+                  },
+                  {
+                    "height": 56,
+                    "opacity": 1,
+                  },
+                  {},
+                ]
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                    },
+                  ]
+                }
+              />
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(29, 25, 43, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  {
+                    "alignSelf": "flex-start",
+                  }
+                }
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  send
+                </Text>
+                <View
+                  aria-hidden={true}
+                  collapsable={false}
+                  style={
+                    [
+                      {
+                        "alignItems": "flex-end",
+                        "end": -8,
+                        "position": "absolute",
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    collapsable={false}
+                    numberOfLines={1}
+                    style={
+                      [
+                        {
+                          "alignSelf": "flex-end",
+                          "overflow": "hidden",
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        },
+                        {
+                          "opacity": 1,
+                        },
+                        {
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 9999,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "height": 6,
+                          "minWidth": 6,
+                        },
+                        false,
+                        undefined,
+                      ]
+                    }
+                  />
+                </View>
+              </View>
+              <View
+                aria-hidden={true}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "marginTop": 4,
+                      "position": "absolute",
+                      "start": 0,
+                      "top": "100%",
+                      "width": 56,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 12,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.5,
+                          "lineHeight": 16,
+                        },
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Sent
+                </Text>
+              </View>
+              <View
+                aria-hidden={false}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "position": "absolute",
+                      "start": 48,
+                      "top": 0,
+                    },
+                    {
+                      "width": 116,
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Sent
+                </Text>
+              </View>
+              <View
+                aria-hidden={false}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "alignItems": "flex-end",
+                      "bottom": 0,
+                      "end": 16,
+                      "justifyContent": "center",
+                      "position": "absolute",
+                      "top": 0,
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  collapsable={false}
+                  numberOfLines={1}
+                  style={
+                    [
+                      {
+                        "alignSelf": "flex-end",
+                        "overflow": "hidden",
+                        "textAlign": "center",
+                        "textAlignVertical": "center",
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                      {
+                        "backgroundColor": "rgba(179, 38, 30, 1)",
+                        "borderRadius": 9999,
+                        "color": "rgba(255, 255, 255, 1)",
+                        "height": 6,
+                        "minWidth": 6,
+                      },
+                      false,
+                      undefined,
+                    ]
+                  }
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "height": 56,
+                "paddingTop": 0,
+              },
+              {},
+              undefined,
+            ]
+          }
+        >
+          <View
+            accessibilityLabel="Trash"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": true,
+                "expanded": undefined,
+                "selected": false,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="tab"
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                [
+                  {
+                    "flex": 1,
+                  },
+                  null,
+                ],
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "justifyContent": "center",
+                    "paddingStart": 16,
+                    "pointerEvents": "none",
+                  },
+                  {
+                    "height": 56,
+                    "opacity": 0.38,
+                  },
+                  {},
+                ]
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(232, 222, 248, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 0,
+                      "transform": [
+                        {
+                          "scaleX": 0.5,
+                        },
+                      ],
+                    },
+                  ]
+                }
+              />
+              <View
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    {
+                      "backgroundColor": "rgba(29, 25, 43, 1)",
+                      "borderRadius": 9999,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  {
+                    "alignSelf": "flex-start",
+                  }
+                }
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  delete
+                </Text>
+              </View>
+              <View
+                aria-hidden={true}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "marginTop": 4,
+                      "position": "absolute",
+                      "start": 0,
+                      "top": "100%",
+                      "width": 56,
+                    },
+                    {
+                      "opacity": 0,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 12,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.5,
+                          "lineHeight": 16,
+                        },
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Trash
+                </Text>
+              </View>
+              <View
+                aria-hidden={false}
+                collapsable={false}
+                style={
+                  [
+                    {
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "position": "absolute",
+                      "start": 48,
+                      "top": 0,
+                    },
+                    {
+                      "width": 116,
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    {},
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Trash
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
 exports[`NavigationRail render renders collapsed 1`] = `
 <View
   collapsable={false}
@@ -21,7 +1152,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
       undefined,
     ]
   }
-  testID="navigation-rail"
 >
   <RCTScrollView
     contentContainerStyle={
@@ -42,7 +1172,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
         "flex": 1,
       }
     }
-    testID="navigation-rail-items"
   >
     <View>
       <View
@@ -103,7 +1232,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -147,7 +1275,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -313,7 +1440,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Inbox
               </Text>
@@ -367,7 +1493,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Inbox
               </Text>
@@ -494,7 +1619,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -538,7 +1662,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -691,7 +1814,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Sent
               </Text>
@@ -745,7 +1867,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Sent
               </Text>
@@ -859,7 +1980,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -903,7 +2023,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -1010,7 +2129,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Trash
               </Text>
@@ -1064,7 +2182,6 @@ exports[`NavigationRail render renders collapsed 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Trash
               </Text>
@@ -1098,7 +2215,6 @@ exports[`NavigationRail render renders expanded 1`] = `
       undefined,
     ]
   }
-  testID="navigation-rail"
 >
   <RCTScrollView
     contentContainerStyle={
@@ -1119,7 +2235,6 @@ exports[`NavigationRail render renders expanded 1`] = `
         "flex": 1,
       }
     }
-    testID="navigation-rail-items"
   >
     <View>
       <View
@@ -1180,7 +2295,6 @@ exports[`NavigationRail render renders expanded 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -1224,7 +2338,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -1390,7 +2503,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Inbox
               </Text>
@@ -1444,7 +2556,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Inbox
               </Text>
@@ -1571,7 +2682,6 @@ exports[`NavigationRail render renders expanded 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -1615,7 +2725,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -1768,7 +2877,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Sent
               </Text>
@@ -1822,7 +2930,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Sent
               </Text>
@@ -1936,7 +3043,6 @@ exports[`NavigationRail render renders expanded 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -1980,7 +3086,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -2087,7 +3192,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Trash
               </Text>
@@ -2141,7 +3245,6 @@ exports[`NavigationRail render renders expanded 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Trash
               </Text>
@@ -2175,7 +3278,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
       undefined,
     ]
   }
-  testID="navigation-rail"
 >
   <View
     style={
@@ -2210,7 +3312,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
         "flex": 1,
       }
     }
-    testID="navigation-rail-items"
   >
     <View>
       <View
@@ -2271,7 +3372,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -2315,7 +3415,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -2481,7 +3580,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Inbox
               </Text>
@@ -2535,7 +3633,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Inbox
               </Text>
@@ -2662,7 +3759,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -2706,7 +3802,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -2859,7 +3954,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Sent
               </Text>
@@ -2913,7 +4007,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Sent
               </Text>
@@ -3027,7 +4120,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -3071,7 +4163,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -3178,7 +4269,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label"
               >
                 Trash
               </Text>
@@ -3232,7 +4322,6 @@ exports[`NavigationRail render renders header and alignment 1`] = `
                     ],
                   ]
                 }
-                testID="navigation-rail-item-label-expanded"
               >
                 Trash
               </Text>
@@ -3266,7 +4355,6 @@ exports[`NavigationRail render renders icon-only items 1`] = `
       undefined,
     ]
   }
-  testID="navigation-rail"
 >
   <RCTScrollView
     contentContainerStyle={
@@ -3287,7 +4375,6 @@ exports[`NavigationRail render renders icon-only items 1`] = `
         "flex": 1,
       }
     }
-    testID="navigation-rail-items"
   >
     <View>
       <View
@@ -3347,7 +4434,6 @@ exports[`NavigationRail render renders icon-only items 1`] = `
               ],
             ]
           }
-          testID="navigation-rail-item"
         >
           <View
             collapsable={false}
@@ -3391,7 +4477,6 @@ exports[`NavigationRail render renders icon-only items 1`] = `
                   },
                 ]
               }
-              testID="navigation-rail-item-indicator"
             />
             <View
               collapsable={false}
@@ -3449,6 +4534,588 @@ exports[`NavigationRail render renders icon-only items 1`] = `
                 }
               >
                 inbox
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`NavigationRail render renders the active icon for the active destination 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "height": "100%",
+        "overflow": "hidden",
+        "paddingTop": 44,
+      },
+      false,
+      {
+        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "borderBottomEndRadius": 0,
+        "borderTopEndRadius": 0,
+        "width": 96,
+      },
+      {},
+      undefined,
+    ]
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      [
+        {
+          "flexGrow": 1,
+          "gap": 4,
+          "paddingHorizontal": 20,
+        },
+        {
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
+    showsVerticalScrollIndicator={false}
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "height": 64,
+              "paddingTop": 6,
+            },
+            {},
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Inbox"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": true,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="tab"
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              [
+                {
+                  "flex": 1,
+                },
+                null,
+              ],
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "justifyContent": "center",
+                  "paddingStart": 16,
+                  "pointerEvents": "none",
+                },
+                {
+                  "height": 32,
+                  "opacity": 1,
+                },
+                {},
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "borderRadius": 9999,
+                  },
+                  {
+                    "opacity": 1,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                ]
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "backgroundColor": "rgba(29, 25, 43, 1)",
+                    "borderRadius": 9999,
+                  },
+                  {
+                    "opacity": 0,
+                  },
+                ]
+              }
+            />
+            <View
+              style={
+                {
+                  "alignSelf": "flex-start",
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(29, 25, 43, 1)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                inbox
+              </Text>
+            </View>
+            <View
+              aria-hidden={false}
+              collapsable={false}
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "marginTop": 4,
+                    "position": "absolute",
+                    "start": 0,
+                    "top": "100%",
+                    "width": 56,
+                  },
+                  {
+                    "opacity": 1,
+                  },
+                  {},
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 12,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.5,
+                        "lineHeight": 16,
+                      },
+                      {
+                        "color": "rgba(98, 91, 113, 1)",
+                      },
+                    ],
+                  ]
+                }
+              >
+                Inbox
+              </Text>
+            </View>
+            <View
+              aria-hidden={true}
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "justifyContent": "center",
+                    "position": "absolute",
+                    "start": 48,
+                    "top": 0,
+                  },
+                  {
+                    "width": 116,
+                  },
+                  {
+                    "opacity": 0,
+                  },
+                  {},
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      {
+                        "color": "rgba(29, 25, 43, 1)",
+                      },
+                    ],
+                  ]
+                }
+              >
+                Inbox
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "height": 64,
+              "paddingTop": 6,
+            },
+            {},
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Sent"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": false,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          role="tab"
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              [
+                {
+                  "flex": 1,
+                },
+                null,
+              ],
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "justifyContent": "center",
+                  "paddingStart": 16,
+                  "pointerEvents": "none",
+                },
+                {
+                  "height": 32,
+                  "opacity": 1,
+                },
+                {},
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "borderRadius": 9999,
+                  },
+                  {
+                    "opacity": 0,
+                    "transform": [
+                      {
+                        "scaleX": 0.5,
+                      },
+                    ],
+                  },
+                ]
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "backgroundColor": "rgba(29, 25, 43, 1)",
+                    "borderRadius": 9999,
+                  },
+                  {
+                    "opacity": 0,
+                  },
+                ]
+              }
+            />
+            <View
+              style={
+                {
+                  "alignSelf": "flex-start",
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                      "fontSize": 24,
+                    },
+                    [
+                      {
+                        "lineHeight": 24,
+                        "transform": [
+                          {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                  ]
+                }
+              >
+                send-outline
+              </Text>
+            </View>
+            <View
+              aria-hidden={false}
+              collapsable={false}
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "marginTop": 4,
+                    "position": "absolute",
+                    "start": 0,
+                    "top": "100%",
+                    "width": 56,
+                  },
+                  {
+                    "opacity": 1,
+                  },
+                  {},
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 12,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.5,
+                        "lineHeight": 16,
+                      },
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      },
+                    ],
+                  ]
+                }
+              >
+                Sent
+              </Text>
+            </View>
+            <View
+              aria-hidden={true}
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "justifyContent": "center",
+                    "position": "absolute",
+                    "start": 48,
+                    "top": 0,
+                  },
+                  {
+                    "width": 116,
+                  },
+                  {
+                    "opacity": 0,
+                  },
+                  {},
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                      },
+                    ],
+                  ]
+                }
+              >
+                Sent
               </Text>
             </View>
           </View>
