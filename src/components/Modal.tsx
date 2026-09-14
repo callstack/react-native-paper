@@ -182,7 +182,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable || dismissableBackButton) {
+      if (dismissableBackButton) {
         onDismissCallback();
       }
 

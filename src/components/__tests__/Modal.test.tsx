@@ -219,6 +219,37 @@ describe('Modal', () => {
         expect(toJSON()).toMatchSnapshot();
       });
 
+      it('should not invoke onDismiss on back press when only dismissableBackButton is false', async () => {
+        const onDismiss = jest.fn();
+
+        await render(
+          <Modal
+            testID="modal"
+            visible
+            onDismiss={onDismiss}
+            dismissableBackButton={false}
+          >
+            {null}
+          </Modal>
+        );
+
+        await act(() => {
+          BackHandler.mockPressBack();
+          jest.runAllTimers();
+        });
+
+        expect(onDismiss).not.toHaveBeenCalled();
+
+        // Pressing outside still dismisses it -- only the back button is opted out.
+        await userEvent.press(screen.getByLabelText('Close modal'));
+
+        await act(() => {
+          jest.runAllTimers();
+        });
+
+        expect(onDismiss).toHaveBeenCalledTimes(1);
+      });
+
       it('should not invoke onDismiss', async () => {
         const onDismiss = jest.fn();
         await render(

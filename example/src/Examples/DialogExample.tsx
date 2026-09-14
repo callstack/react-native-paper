@@ -10,6 +10,7 @@ import {
   DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
+  DialogWithUndismissableBackButton,
   UndismissableDialog,
 } from './Dialogs';
 import ScreenWrapper from '../ScreenWrapper';
@@ -79,6 +80,15 @@ const DialogExample = () => {
           Dismissable back button
         </Button>
       )}
+      {Platform.OS === 'android' && (
+        <Button
+          mode="outlined"
+          onPress={_toggleDialog('dialog8')}
+          style={styles.button}
+        >
+          Undismissable back button
+        </Button>
+      )}
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -106,6 +116,10 @@ const DialogExample = () => {
       <DialogWithDismissableBackButton
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}
+      />
+      <DialogWithUndismissableBackButton
+        visible={_getVisible('dialog8')}
+        close={_toggleDialog('dialog8')}
       />
     </ScreenWrapper>
   );
