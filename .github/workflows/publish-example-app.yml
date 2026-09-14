@@ -1,0 +1,194 @@
+name: Publish example app
+
+# Publishes the example app that demonstrates the library to the App Store and
+# Play Store. This runs *after* a library release already exists, and cannot
+# affect it: see the failure report in the `report-failure` job below.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish the example app for, e.g. v6.0.0
+        required: true
+      platform:
+        description: Platforms to build and submit. Pick one to retry after a partial failure, so the platform that already shipped is not submitted twice.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - ios
+          - android
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-example-app
+
+jobs:
+  publish:
+    name: Build and submit example app
+    runs-on: ubuntu-latest
+    # An EAS build for two platforms is slow, but not this slow. Without a
+    # timeout a stuck run holds the concurrency lock for six hours.
+    timeout-minutes: 120
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: main
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Resolve release tag and submit profile
+        id: release
+        env:
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          PLATFORM: ${{ inputs.platform }}
+        run: |
+          if [ -z "$TAG" ]; then
+            echo "::error::No release tag to publish the example app for."
+            exit 1
+          fi
+
+          # A semver version with a prerelease identifier (v6.0.0-alpha.1) goes
+          # to the test tracks, a stable one (v6.0.0) goes to production. This
+          # is derived from the tag rather than from the release's prerelease
+          # flag on purpose: .release-it.json currently pins every release to
+          # `preRelease: true` for the 6.0 alpha cycle, so that flag stays true
+          # for a stable release until somebody remembers to revert it.
+          if [ "${TAG#*-}" != "$TAG" ]; then
+            profile=preview
+          else
+            profile=production
+          fi
+
+          # A release always publishes both platforms. Only a manual retry can
+          # narrow it, to avoid resubmitting a platform that already shipped.
+          platform=${PLATFORM:-all}
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "profile=$profile" >> "$GITHUB_OUTPUT"
+          echo "platform=$platform" >> "$GITHUB_OUTPUT"
+          echo "Publishing $platform for $TAG using the $profile submit profile."
+
+      - name: Bump example app version
+        run: node scripts/bump-example-version.ts example/app.json
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e # v8.2.1
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      # Build numbers are assigned remotely by EAS (`appVersionSource: remote`),
+      # so a retry can never collide with an already submitted build.
+      - name: Build and submit to the app stores
+        id: submit
+        working-directory: ./example
+        env:
+          SUBMIT_PROFILE: ${{ steps.release.outputs.profile }}
+          PLATFORM: ${{ steps.release.outputs.platform }}
+        run: |
+          eas build \
+            --platform "$PLATFORM" \
+            --profile production \
+            --auto-submit-with-profile "$SUBMIT_PROFILE" \
+            --non-interactive
+
+      # Runs whenever the submit step ran at all, however it ended. `eas build`
+      # can ship one platform and fail the other, and cancelling the workflow
+      # does not cancel the build on EAS, so in every one of those cases a
+      # version may have reached a store and has to be recorded.
+      - name: Open example app version bump pull request
+        if: ${{ always() && (steps.submit.outcome == 'success' || steps.submit.outcome == 'failure' || steps.submit.outcome == 'cancelled') }}
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          add-paths: example/app.json
+          branch: chore/example-app-version-${{ steps.release.outputs.tag }}
+          commit-message: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
+          title: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
+          labels: example app
+          body: |
+            Records the example app version this run used for
+            ${{ steps.release.outputs.tag }}.
+
+            A build for that version may already have been submitted, so this only
+            keeps `example/app.json` in sync. iOS build numbers and Android version codes are not in here:
+            EAS assigns those remotely.
+
+      - name: Summarise
+        if: ${{ !cancelled() && steps.submit.outcome == 'success' }}
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+          PROFILE: ${{ steps.release.outputs.profile }}
+        run: |
+          {
+            echo "### Example app submitted for \`$TAG\`"
+            echo
+            echo "Submit profile: \`$PROFILE\`."
+            if [ "$PROFILE" = "production" ]; then
+              echo "- Android: Play Store **production** track."
+            else
+              echo "- Android: Play Store **internal** track."
+            fi
+            echo "- iOS: uploaded to App Store Connect, available in TestFlight."
+            echo
+            echo "Releasing an iOS build from TestFlight to the App Store is a"
+            echo "separate manual step in App Store Connect."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  report-failure:
+    name: Report example app deployment problem
+    needs: publish
+    # Not `failure()`: that misses a cancelled run, and cancellation is the case
+    # most likely to leave a build running on EAS with nobody told about it.
+    if: ${{ always() && needs.publish.result != 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      # Whoever published the release is already emailed that this run failed.
+      # What that email cannot tell them is that their release is fine, so say
+      # it here, where they land when they follow it.
+      - name: Say that the library release is unaffected
+        env:
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          echo "::error::The example app deployment for $TAG did not finish. The $TAG library release itself published successfully and is not affected."
+
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ## The \`$TAG\` library release is not affected
+
+          It is published on npm and on GitHub Releases exactly as expected, and
+          **nothing here changes that**. This workflow only ever runs *after* a
+          release already exists, so it cannot fail, revoke or roll back one.
+
+          - Users of the library need to do nothing. Installing \`react-native-paper\` is unaffected.
+          - Nothing has to be re-released to fix this.
+          - Only the demo app we ship to the App Store and Play Store did not update.
+
+          ## Before re-running
+
+          **Check the EAS dashboard and the stores first.** A build may already
+          have been submitted, and submitting the same version twice is the one
+          thing worth avoiding. Cancelling this workflow does not cancel a build
+          already running on EAS, so a cancelled run can still ship on its own.
+
+          Once you have confirmed what did and did not reach the stores, re-run
+          this workflow on its own, without cutting a new library release:
+
+          **Actions → Publish example app → Run workflow → tag \`$TAG\`**
+
+          If only one platform failed, pick it in the \`platform\` input so the
+          other one is not submitted a second time. Retry before merging the
+          version bump pull request this run opened, since merging it first
+          moves \`main\` on and the retry would ship under a different version.
+          EOF

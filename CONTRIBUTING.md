@@ -109,6 +109,8 @@ yarn release
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
 
+Publishing a release also publishes the example app to the app stores. That happens after the release, in a separate workflow that cannot affect it. See [publishing the example app](.github/PUBLISHING_EXAMPLE_APP.md).
+
 ## Reporting issues
 
 You can report issues on our [bug tracker](https://github.com/callstack/react-native-paper/issues). Please follow the issue template when opening an issue.
