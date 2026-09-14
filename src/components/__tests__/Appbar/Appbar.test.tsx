@@ -89,7 +89,7 @@ describe('renderAppbarContent', () => {
     expect(result).toHaveLength(3);
   });
 
-  it('should render only children types specifed in renderOnly', () => {
+  it('should render only children types specified in renderOnly', () => {
     const result = renderAppbarContent({
       children,
       isDark: false,
