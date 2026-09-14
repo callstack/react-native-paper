@@ -13,7 +13,7 @@ import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
-import type { Elevation, ThemeProp } from '../types';
+import type { Elevation, ThemeProp } from '../theme/types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 
@@ -36,6 +36,10 @@ export type Props = {
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
    */
   overlayAccessibilityLabel?: string;
+  /**
+   * testID for the overlay that is displayed behind the modal content.
+   */
+  overlayTestID?: string;
   /**
    * Determines Whether the modal is visible.
    */
@@ -127,6 +131,7 @@ function Modal({
   dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
+  overlayTestID,
   onDismiss = () => {},
   children,
   contentContainerStyle,
@@ -135,7 +140,7 @@ function Modal({
   contentElevation,
   style,
   theme: themeOverrides,
-  testID = 'modal',
+  testID,
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
 
@@ -235,7 +240,7 @@ function Modal({
         onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
-        testID={`${testID}-backdrop`}
+        testID={overlayTestID}
       />
       <View
         style={[
@@ -244,10 +249,8 @@ function Modal({
           style,
         ]}
         pointerEvents="box-none"
-        testID={`${testID}-wrapper`}
       >
         <Surface
-          testID={`${testID}-surface`}
           theme={theme}
           backgroundColor={contentBackgroundColor}
           borderRadius={contentBorderRadius}

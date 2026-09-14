@@ -4,7 +4,7 @@ import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 export type Props = ViewProps & {
   /**

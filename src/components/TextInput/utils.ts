@@ -35,7 +35,7 @@ import type {
   GetAccessibilityDataProps,
   GetAccessibilityDataReturn,
 } from './TextInput';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export const getTextInputAnimationLayout = ({
   variant,

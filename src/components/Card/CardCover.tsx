@@ -4,7 +4,7 @@ import type { ImageProps, StyleProp, ViewStyle } from 'react-native';
 import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { splitStyles } from '../../utils/splitStyles';
 
 export type Props = ImageProps & {

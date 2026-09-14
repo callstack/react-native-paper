@@ -18,7 +18,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -111,7 +111,7 @@ const DrawerCollapsedItem = ({
   disabled,
   'aria-label': ariaLabel,
   badge = false,
-  testID = 'drawer-collapsed-item',
+  testID,
   labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
@@ -195,13 +195,9 @@ const DrawerCollapsedItem = ({
               style,
               animatedOutlineStyle,
             ]}
-            testID={`${testID}-outline`}
           />
 
-          <View
-            style={[styles.icon, { top: iconPadding }]}
-            testID={`${testID}-container`}
-          >
+          <View style={[styles.icon, { top: iconPadding }]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
