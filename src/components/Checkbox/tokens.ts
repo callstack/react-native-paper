@@ -9,6 +9,8 @@ const sizes = {
   containerRadius: 2,
   outlineWidth: 2,
   stateLayerSize: 40,
+  /** Minimum interactive area; larger than the 40dp state layer. */
+  touchTargetSize: 48,
 } as const;
 
 const colors = {
@@ -21,8 +23,13 @@ const colors = {
   iconColor: 'onPrimary',
   disabledIconColor: 'surface',
   errorIconColor: 'onError',
-  selectedStateLayerColor: 'primary',
-  unselectedStateLayerColor: 'onSurface',
+  // Hover and focus tint by selection; pressing inverts it.
+  selectedHoverStateLayerColor: 'primary',
+  selectedFocusStateLayerColor: 'primary',
+  selectedPressedStateLayerColor: 'onSurface',
+  unselectedHoverStateLayerColor: 'onSurface',
+  unselectedFocusStateLayerColor: 'onSurface',
+  unselectedPressedStateLayerColor: 'primary',
   errorStateLayerColor: 'error',
 } as const satisfies Record<string, ColorRole>;
 

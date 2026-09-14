@@ -330,3 +330,17 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Checkbox
+
+#### Interaction state colors
+
+Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover and focus fill a flat 40dp layer with `primary` when selected and `onSurface` when not, a press ripples inside that same 40dp layer in the inverted color, and an error checkbox stays on `error` throughout. `color` and `uncheckedColor` replace the role they already override on the box, so a custom checkbox no longer picks up a `primary` halo. The platform ripple is turned off to make room for it; passing `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS turns it back on and disables the built-in press instead. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+
+#### Touch target height
+
+`Checkbox` now reserves the 48dp minimum touch target, so it occupies 48dp instead of 40dp. Nothing painted changed size, but rows containing a checkbox may become slightly taller.
+
+#### Custom style target
+
+The `style` prop now applies to the checkbox's outer container rather than the pressable inside it, so layout styles such as `margin`, `position` and `transform` move the whole component, focus ring included. `width` and `height` no longer resize the 48dp tap target, and paint styles land on a different shape: a `backgroundColor` used to fill the circular pressable and now fills the square container around it. Resizing the tap target now lives on the new `tapTargetStyle` prop, which reaches the pressable itself.
