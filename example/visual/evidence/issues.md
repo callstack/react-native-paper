@@ -1,5 +1,7 @@
 # agent-device dogfooding issues
 
+Twenty findings from using agent-device 0.21.0 as a visual regression tool on the react-native-paper example app. Five are filed on callstack/agent-device (4, 6, 12, 19, 20); the rest are recorded here for the maintainers to pick from.
+
 Tool: `agent-device` 0.21.0 (run as `npx agent-device@0.21.0`), Node v24.18.
 Device: iPhone 17 Pro, iOS 26.5, UDID `2464A356-C17C-4B0D-99DB-CDFBDB98826C`.
 Session state dir (for runner/request logs): `/Users/juliankobrynski/.agent-device/sessions/cwd_4a6658db6e09aaf6_default/`.
@@ -38,7 +40,7 @@ Artifact: `19-find-surface.json` (also `16-find.json`, `17-find.json`).
 
 Related: when the label is not on screen, `find` fails with a generic
 `find did not match any element` and no indication that the element may simply be
-below the fold — artifact `17-find.json`.
+below the fold, artifact `17-find.json`.
 
 ---
 
@@ -90,18 +92,20 @@ npx agent-device@0.21.0 open com.callstack.reactnativepaperexample --platform io
 
 `open` reports success (`startup.durationMs: 1032`), artifact `45-open-relaunch.json`.
 The following snapshot shows the dev menu nodes (`Runtime version: exposdk:56.0.0`,
-`Close`, `Reload`, `Go home`) — artifact `47-snapshot.json`.
-Recovery: `press 'label="Close"'` — artifact `48-press-close.json`.
+`Close`, `Reload`, `Go home`), artifact `47-snapshot.json`.
+Recovery: `press 'label="Close"'`, artifact `48-press-close.json`.
 
 ---
 
 ## 4. Default `diff screenshot --threshold 0.1` misses real soft-shadow regressions
 
+**Filed upstream:** https://github.com/callstack/agent-device/issues/2579 (2026-09-14).
+
 New in Task B, and the most consequential finding for using this tool as a visual
 regression guard for Material elevation.
 
-A realistic regression — Surface elevation level 1 rendering the level 2 spot and
-ambient shadow, one step off — is reported as a **perfect match** at the default
+A realistic regression, Surface elevation level 1 rendering the level 2 spot and
+ambient shadow, one step off, is reported as a **perfect match** at the default
 threshold:
 
 ```
@@ -159,6 +163,8 @@ round-trip (`startup.durationMs` 1032). Artifacts `44-screenshot.json`,
 
 ## 6. A cwd whose session is bound to one platform cannot target another device
 
+**Filed upstream:** https://github.com/callstack/agent-device/issues/2580 (2026-09-14).
+
 `boot --platform android --device Pixel_10_Pro` from a cwd whose default session was
 bound to an iOS simulator fails with `INVALID_ARGS` ("already bound to apple device
 … but this request selected --platform=android"). Artifact `74-boot.json`. The hint is
@@ -170,7 +176,7 @@ guide, or keying sessions by cwd+platform.
 ## 7. The same `find` selector is not portable across platforms
 
 `find 'label="Surface"'` resolves to exactly one node on iOS, but on Android it fails
-with `AMBIGUOUS_MATCH` — the accessibility tree exposes both the row `ViewGroup` and
+with `AMBIGUOUS_MATCH`, the accessibility tree exposes both the row `ViewGroup` and
 its child `TextView` with the same label (`83-find-surface.json`,
 candidates `@e21 [group] "Surface"`, `@e22 [text] "Surface"`). Any cross-platform
 script has to carry two selectors for one row. A role-defaulting rule (prefer the
@@ -179,7 +185,7 @@ tappable ancestor) or a documented `role=` qualifier for the common case would f
 ## 8. Refs from an earlier snapshot are rejected with a confusing message
 
 `press '@e21'`, with the ref taken from the immediately preceding `snapshot --json`,
-failed: "Ref @e21 needs a complete snapshot — the current frame only authorizes its
+failed: "Ref @e21 needs a complete snapshot, the current frame only authorizes its
 emitted refs" (`84-press-surface.json`). Re-snapshotting and using the new ref for the
 same element (`@e55`) worked (`86-press-surface.json`). The message does not say what
 invalidated the ref or that a fresh snapshot renumbers every element.
@@ -187,12 +193,12 @@ invalidated the ref or that a fresh snapshot renumbers every element.
 ## 9. Android relaunch lands in the Expo dev launcher, not the app
 
 Android version of issue 3. `open com.callstack.reactnativepaperexample --platform
-android` on an app whose process is alive shows the Expo **dev menu** overlay — two
+android` on an app whose process is alive shows the Expo **dev menu** overlay, two
 presses ("Continue", then "Close") were needed to reach the app (`77-`/`79-`/
 `81-snapshot.json`). After `open --relaunch` (pid 9944 → 10860, `95-open-relaunch.json`)
 the app starts on the Expo dev launcher screen and must be reconnected by pressing the
 "RECENTLY OPENED" entry (`97-press-recent.json`), then the JS bundle takes several
-seconds to load — `wait stable` returns immediately on the "nearly-empty tree" and only
+seconds to load, `wait stable` returns immediately on the "nearly-empty tree" and only
 `wait text` (or a retry) reveals the app is still on "Connecting to the development
 server…" (`98-wait.json`). A dev-client aware `open` (or a documented recipe) would
 remove three commands from every relaunch.
@@ -200,7 +206,7 @@ remove three commands from every relaunch.
 ## 10. `logs` reports success on an empty log unless `logs start` ran first
 
 `logs --json` returned `success: true` with `sizeBytes: 0`, `active: false`,
-`state: "inactive"` (`104-logs.json`) — no indication that nothing was being captured.
+`state: "inactive"` (`104-logs.json`), no indication that nothing was being captured.
 Confirming the Fast Refresh probe had to be done with `adb logcat -d | grep`
 (19 hits). `logs start` (`105-logs-start.json`) arms capture, but a success response
 for a log that is not running is misleading.
@@ -210,7 +216,7 @@ for a log that is not running is misleading.
 `screenshot --crop-on … --pixel-density 3` on Android → `UNSUPPORTED_OPERATION`,
 "currently supported only on iOS-family simulators" (`91-screenshot-pd3.json`).
 Android already returns native device pixels (1280x642 for the crop at 480 dpi), so
-nothing is lost — but the iOS default of 1x logical points remains an easy trap.
+nothing is lost, but the iOS default of 1x logical points remains an easy trap.
 
 ## Threshold data point for issue 4 (Android)
 
@@ -219,6 +225,8 @@ Android repeats the iOS finding for the realistic break: 0 changed pixels and
 Unlike iOS, the gross break is caught at the default (65,051 px / 7.92 %).
 
 ## 12. The typed Node client is exported but unreachable without a dependency
+
+**Filed upstream:** https://github.com/callstack/agent-device/issues/2581 (2026-09-14).
 
 `agent-device@0.21.0`'s `package.json` does export the client
 (`exports["."] → dist/src/index.js`, which exports `createAgentDeviceClient`), so
@@ -238,12 +246,12 @@ the same session. When nothing changed it returns `data.nodes: []` with
 `success: true`, which is indistinguishable from "the screen is empty" or "the
 node is gone" for any caller that greps the result for an identifier. This cost
 real time in the review round: a plain snapshot after the `testID` edit looked
-as if the id had never reached the tree, when it had been there the whole time —
+as if the id had never reached the tree, when it had been there the whole time -
 `--force-full` returned it (the resulting trees are excerpted in
 `evidence/a11y-excerpt.json`; full files on branch `poc/agent-device-visual-runner`). Anything that asks "is this node
 on screen?" must pass `--force-full`; the runner on that branch does so for
 exactly this reason.
-An empty diff-mode result would be much less of a trap if the payload said so —
+An empty diff-mode result would be much less of a trap if the payload said so -
 e.g. a `mode: "diff"` / `unchanged: true` field alongside the empty array.
 
 ## 14. `open --relaunch` restores the app's previous route
@@ -256,9 +264,9 @@ not. The example app persists its navigation state in AsyncStorage
 on whatever screen it was on. Reproduced on both platforms in this pass:
 
 The logs of the runs that first showed this were not kept. The fixed runner on
-branch `poc/agent-device-visual-runner` logs `relaunching the app … not on the Surface screen — going back to the
+branch `poc/agent-device-visual-runner` logs `relaunching the app … not on the Surface screen, going back to the
 example list … pressing "Back" … at the example list root` when started from
-another example screen, on both platforms — a branch that could not be reached if a
+another example screen, on both platforms, a branch that could not be reached if a
 relaunch reset the route. Its run summaries are committed on that branch under
 `example/visual/evidence/runs/`.
 
@@ -275,9 +283,9 @@ row by position and width.
 ## 15. The dev-menu check runs before the app finishes loading
 
 `dismissDevMenu()` snapshots once, immediately after the relaunch. On iOS that
-snapshot came back with three nodes — `UIApplication`, `SplashScreenLogo`,
-`Downloading 100%…` — so it found none of the `Close` / `Continue` labels and
-returned "clean". Reproduced for the record on 2026-09-11 —
+snapshot came back with three nodes, `UIApplication`, `SplashScreenLogo`,
+`Downloading 100%…`, so it found none of the `Close` / `Continue` labels and
+returned "clean". Reproduced for the record on 2026-09-11 -
 `evidence/devclient-excerpt.json`, `ios_after_open_relaunch`: immediately after
 `open --relaunch` the tree is 3 nodes (`React Native Paper Example`, the splash
 image, `Downloading 100%…`); six seconds later it is 77 nodes including the dev
@@ -298,8 +306,8 @@ entry (`http://192.168.1.151:8081`), which reloads the bundle in ~20 s.
 
 On iOS every edit to `src/components/Surface.tsx` was picked up within a few
 seconds (first realistic-break capture already differed: 10,179 px). On Android
-the same edits produced **zero** changed pixels — including the gross break,
-every elevation level forced to 5 — even though Metro was serving the new code
+the same edits produced **zero** changed pixels, including the gross break,
+every elevation level forced to 5, even though Metro was serving the new code
 (`curl .../.expo/.virtual-metro-entry.bundle?platform=android` contained the
 probe added alongside the break) and `adb reverse --list` showed
 `tcp:8081 tcp:8081`. `adb logcat` carried no React Native output at all, so it
@@ -307,7 +315,7 @@ is useless as a "did the edit land" probe here. Pressing **Reload** in the dev
 menu (`adb shell input keyevent 82`, then press the `Reload` node) made the
 break appear immediately at the expected magnitude (gross: 65,051 px at 0.1).
 Consequence for the loop: on Android, an edit must be followed by an explicit
-reload — a device-runner that relies on Fast Refresh will silently compare stale
+reload, a device-runner that relies on Fast Refresh will silently compare stale
 pixels and report PASS.
 
 ## 17. Minor: an agent-device command occasionally exits non-zero with no output
@@ -330,13 +338,15 @@ diff image at 0.02 but none at 0.1, because at 0.1 it matches. The 0.1 rows in
 
 ## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
 
+**Filed upstream:** https://github.com/callstack/agent-device/issues/2582 (2026-09-14).
+
 Found 2026-09-11 while re-running the Android loop with `src/` clean after the
-round-2 changes. The scripted loop reported a deterministic **FAIL** —
-`surface-example-elevated changed=2822 (0.34%) regions=1` — twice in a row,
+round-2 changes. The scripted loop reported a deterministic **FAIL** -
+`surface-example-elevated changed=2822 (0.34%) regions=1`, twice in a row,
 against a baseline byte-identical to the committed one (`md5 8693c919…` in both
 the working tree and `HEAD`). The diff image
 (`evidence/diff-images/android-devclient-tools-button.png`) shows the change: a
-152x74 pill at the top-right of the crop reading **Tools** — the Expo dev-client's
+152x74 pill at the top-right of the crop reading **Tools**, the Expo dev-client's
 floating dev-tools button, `android.widget.ImageView` label `Tools`, rect
 `{x:1115, y:243, w:78, h:78}` (`evidence/devclient-excerpt.json`,
 `android_devclient_floating_tools_button`). Both failing run summaries are on branch `poc/agent-device-visual-runner`.
@@ -350,7 +360,7 @@ survives a relaunch. It had been off in every earlier run today
 interaction flipped it is not known.
 
 Two lessons. For agent-device: a screenshot of a dev build can contain dev-client
-chrome that is not part of the app, and `diff screenshot` cannot tell — worth a
+chrome that is not part of the app, and `diff screenshot` cannot tell, worth a
 note in the docs, or a `screenshot` option that hides dev-client overlays. For
 any runner: a dev overlay inside the crop must never be reported as a visual
 regression; the runner on branch `poc/agent-device-visual-runner` looks for the floating node after dismissing the
@@ -358,3 +368,25 @@ dev menu and launcher, turns it off through the dev menu when it can, and
 otherwise stops with a message naming the node and the manual fix. This is also
 the strongest argument so far for capturing from a release build rather than a
 dev-client once this moves past a PoC.
+
+## 20. web: `screenshot --crop-on` is refused
+
+**Filed upstream:** https://github.com/callstack/agent-device/issues/2583 (2026-09-14).
+
+Tried on 2026-09-14 against `expo export --platform web` of the example app served
+on 127.0.0.1:4322, through `agent-device web setup` (agent-browser 0.27.1, Node
+24.18). `open` works and a full-page `screenshot` returns 1280x577
+(`evidence/diff-images/web-full-page-screenshot.png`). The crop that the iOS and
+Android loop is built on is refused:
+
+```
+npx agent-device@0.21.0 screenshot web-crop.png --crop-on 'id="surface-example-elevated"' --platform web --session web --json
+→ UNSUPPORTED_OPERATION: screenshot --crop-on is not accepted on web targets
+   details: { reason: "CROP_TARGET_NOT_ACCEPTED", rejectionReason: "PENDING_PIXEL_IDENTITY_EVIDENCE" }
+```
+
+Transcript: `evidence/web-excerpt.json`. The docs say crop-on is accepted on iOS
+simulators and Android emulators only, so this is expected behaviour, not a bug.
+Consequence for a web leg of the suite: full-viewport diffs, a different loop from
+the per-section one, and any motion on the page has to be frozen since it cannot
+be cropped out. Not pursued for a Surface-only PoC.
