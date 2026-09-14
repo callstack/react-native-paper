@@ -147,4 +147,9 @@ export type { Props as SegmentedButtonsProps } from './components/SegmentedButto
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
-export { type TypescaleKey, type Theme, type Elevation } from './theme/types';
+export {
+  type TypescaleKey,
+  type Theme,
+  type Elevation,
+  type SurfaceRole,
+} from './theme/types';

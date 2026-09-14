@@ -115,6 +115,14 @@ The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Va
 
 The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
 
+### Banner
+
+The banner background is now always `theme.colors.surfaceContainerLow` and no longer depends on the `elevation` prop, which only controls the shadow. At the default `elevation` of `1` the rendered color is unchanged.
+
+### Menu
+
+The menu background is now always `theme.colors.surfaceContainer`, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. At the default `elevation` of `2` the rendered color is unchanged.
+
 ### Surface
 
 - The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.
@@ -138,6 +146,7 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 - The `pointerEvents` prop is no longer supported as it's deprecated in React Native Web. You can specify `pointerEvents` in the `style` prop instead.
 - The `overflow: 'hidden'` style is no longer supported in `style` as it can clip shadows. You can nest a `View` inside the `Surface` and apply `overflow: 'hidden'` to that instead.
 - The default `testID` for `Surface` was removed. You can specify a `testID` explicitly if you need it.
+- A new `container` prop sets the background to a semantic surface-family color role from the theme (e.g. `container="surfaceContainerLow"`). When `container` is set, `elevation` only controls the shadow. Precedence: `backgroundColor` > `container` > the color derived from `elevation`.
 
 e.g.:
 
