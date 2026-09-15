@@ -5,6 +5,7 @@ import { render, screen } from '../../../test-utils';
 import configureFonts from '../../../theme/fonts';
 import { LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
+import AnimatedText from '../../Typography/AnimatedText';
 import Text, { customText } from '../../Typography/Text';
 
 const content = 'Something rendered as a child content';
@@ -114,6 +115,120 @@ it("nested text without variant, but with styles, should override parent's style
   );
 
   expect(screen.getByTestId('parent-text')).toHaveStyle(customStyle);
+});
+
+it("nested unstyled text should leave the parent's variant intact", async () => {
+  await render(
+    <Text testID="parent-text" variant="displayLarge">
+      <Text>Test</Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('parent-text')).toHaveStyle(
+    LightTheme.fonts.displayLarge
+  );
+});
+
+it("nested styled text should only override the parent's clashing properties", async () => {
+  await render(
+    <Text testID="parent-text" variant="displayLarge">
+      <Text style={{ fontSize: 50 }}>Test</Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('parent-text')).toHaveStyle({
+    // The child wins where the two overlap,
+    fontSize: 50,
+    // but the rest of the parent's variant survives.
+    letterSpacing: LightTheme.fonts.displayLarge.letterSpacing,
+    lineHeight: LightTheme.fonts.displayLarge.lineHeight,
+  });
+});
+
+it('nested text alongside other content inherits instead of resetting', async () => {
+  const parentColor = 'tomato';
+
+  await render(
+    <Text
+      testID="parent-text"
+      variant="displayLarge"
+      style={{ color: parentColor }}
+    >
+      Parent <Text testID="child-text">child</Text>
+    </Text>
+  );
+
+  const { fontFamily, fontWeight, letterSpacing } = LightTheme.fonts.default;
+
+  expect(screen.getByTestId('parent-text')).toHaveStyle({
+    color: parentColor,
+  });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontFamily });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontWeight });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({ letterSpacing });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({
+    color: LightTheme.colors.onSurface,
+  });
+});
+
+it('nested text keeps applying its own style while inheriting the rest', async () => {
+  await render(
+    <Text variant="displayLarge">
+      Parent{' '}
+      <Text testID="child-text" style={{ fontStyle: 'italic' }}>
+        child
+      </Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('child-text')).toHaveStyle({
+    fontStyle: 'italic',
+  });
+});
+
+it('text outside of another text still gets the default font', async () => {
+  await render(<Text testID="lone-text">{content}</Text>);
+  const { fontFamily, fontWeight } = LightTheme.fonts.default;
+
+  expect(screen.getByTestId('lone-text')).toHaveStyle({
+    fontFamily,
+    fontWeight,
+  });
+});
+
+it('text nested in animated text inherits instead of resetting', async () => {
+  await render(
+    <AnimatedText variant="displayLarge">
+      Parent <Text testID="child-text">child</Text>
+    </AnimatedText>
+  );
+  const { fontFamily, fontWeight } = LightTheme.fonts.default;
+
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontFamily });
+  expect(screen.getByTestId('child-text')).not.toHaveStyle({ fontWeight });
+});
+
+it('animated text nested in text inherits instead of resetting', async () => {
+  await render(
+    <Text variant="displayLarge">
+      Parent <AnimatedText testID="child-animated">child</AnimatedText>
+    </Text>
+  );
+  // `AnimatedText` falls back to `bodyMedium` rather than the default font.
+  const { fontFamily, fontSize } = LightTheme.fonts.bodyMedium;
+
+  expect(screen.getByTestId('child-animated')).not.toHaveStyle({ fontFamily });
+  expect(screen.getByTestId('child-animated')).not.toHaveStyle({ fontSize });
+});
+
+it('animated text outside of any text still gets its fallback font', async () => {
+  await render(<AnimatedText testID="lone-animated">{content}</AnimatedText>);
+  const { fontFamily, fontSize } = LightTheme.fonts.bodyMedium;
+
+  expect(screen.getByTestId('lone-animated')).toHaveStyle({
+    fontFamily,
+    fontSize,
+  });
 });
 
 it('throws when custom variant not provided', async () => {
