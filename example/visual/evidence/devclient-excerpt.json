@@ -1,0 +1,42 @@
+{
+  "about": "Excerpts captured 2026-09-11 with `snapshot --force-full --json`; full files on branch poc/agent-device-visual-runner under example/visual/evidence/runner/.",
+  "ios_after_open_relaunch": {
+    "immediately": {
+      "total_nodes": 3,
+      "labels": [
+        "React Native Paper Example",
+        null,
+        "Downloading 100%\u2026"
+      ]
+    },
+    "six_seconds_later": {
+      "total_nodes": 77,
+      "dev_menu_close_node": [
+        {
+          "type": "Button",
+          "role": "SwiftUI.AccessibilityNode",
+          "identifier": "xmark",
+          "label": "Close",
+          "rect": {
+            "x": 344.06965174129357,
+            "y": 401.5837479270315,
+            "width": 34.56716417910445,
+            "height": 34.56716417910445
+          }
+        }
+      ]
+    }
+  },
+  "android_devclient_floating_tools_button": [
+    {
+      "type": "android.widget.ImageView",
+      "label": "Tools",
+      "rect": {
+        "x": 1115,
+        "y": 243,
+        "width": 78,
+        "height": 78
+      }
+    }
+  ]
+}
