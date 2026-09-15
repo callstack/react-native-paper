@@ -1,34 +1,21 @@
-import React from 'react';
 import type { ReactNode } from 'react';
-// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
-import { Animated, Platform, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
-interface Props extends ViewProps {
-  visibility?: 0 | 1 | Animated.AnimatedInterpolation<number>;
+import Animated from 'react-native-reanimated';
+
+type Props = ViewProps & {
   index: number;
-}
+};
 
-class BottomNavigationRouteScreen extends React.Component<Props> {
-  render(): ReactNode {
-    const { style, index, children, visibility, ...rest } = this.props;
+const BottomNavigationRouteScreen = ({
+  style,
+  index,
+  children,
+  ...rest
+}: Props): ReactNode => (
+  <Animated.View testID={`RouteScreen: ${index}`} style={style} {...rest}>
+    {children}
+  </Animated.View>
+);
 
-    // On Web, the unfocused tab screens can still be clicked since they are transparent, but still there
-    // Hiding them with `display: none` makes sure that they won't receive clicks
-    // We only set it on Web since on native, react-native-pager-view's breaks due to layout changing
-    const display =
-      Platform.OS === 'web' ? (visibility === 0 ? 'none' : 'flex') : undefined;
-
-    return (
-      <View
-        testID={`RouteScreen: ${index}`}
-        style={[style, { display }]}
-        {...rest}
-      >
-        {children}
-      </View>
-    );
-  }
-}
-
-export default Animated.createAnimatedComponent(BottomNavigationRouteScreen);
+export default BottomNavigationRouteScreen;

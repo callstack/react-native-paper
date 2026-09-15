@@ -1,21 +1,20 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  Easing,
-  Image,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { Appbar, BottomNavigation, Menu } from 'react-native-paper';
-import type { BottomNavigationRoute } from 'react-native-paper';
+import type {
+  BottomNavigationItemLayout,
+  BottomNavigationRoute,
+} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
 type Route = { route: { key: string } };
+type SceneAnimation = React.ComponentProps<
+  typeof BottomNavigation
+>['sceneAnimationType'];
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
@@ -40,16 +39,24 @@ const PhotoGallery = ({ route }: Route) => {
   );
 };
 
+const renderScene = BottomNavigation.SceneMap({
+  album: PhotoGallery,
+  library: PhotoGallery,
+  favorites: PhotoGallery,
+  purchased: PhotoGallery,
+});
+
 const BottomNavigationExample = () => {
   const navigation = useNavigation('BottomNavigation');
 
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [menuVisible, setMenuVisible] = React.useState(false);
-  const [sceneAnimation, setSceneAnimation] =
-    React.useState<
-      React.ComponentProps<typeof BottomNavigation>['sceneAnimationType']
-    >();
+  const [sceneAnimation, setSceneAnimation] = React.useState<SceneAnimation>();
+  const [labeled, setLabeled] = React.useState(true);
+  const [shifting, setShifting] = React.useState(false);
+  const [itemLayout, setItemLayout] =
+    React.useState<BottomNavigationItemLayout>('auto');
 
   const [routes] = React.useState<BottomNavigationRoute[]>([
     {
@@ -75,6 +82,7 @@ const BottomNavigationExample = () => {
       title: 'Purchased',
       focusedIcon: 'shopping',
       unfocusedIcon: 'shopping-outline',
+      badge: 3,
     },
   ]);
 
@@ -123,6 +131,46 @@ const BottomNavigationExample = () => {
             }}
             title="Scene animation: opacity"
           />
+          <Menu.Item
+            trailingIcon={labeled ? 'check' : undefined}
+            onPress={() => {
+              setLabeled((value) => !value);
+              setMenuVisible(false);
+            }}
+            title={labeled ? 'Labels: on' : 'Labels: off'}
+          />
+          <Menu.Item
+            trailingIcon={shifting ? 'check' : undefined}
+            onPress={() => {
+              setShifting((value) => !value);
+              setMenuVisible(false);
+            }}
+            title={shifting ? 'Shifting labels: on' : 'Shifting labels: off'}
+          />
+          <Menu.Item
+            trailingIcon={itemLayout === 'auto' ? 'check' : undefined}
+            onPress={() => {
+              setItemLayout('auto');
+              setMenuVisible(false);
+            }}
+            title="Layout: auto"
+          />
+          <Menu.Item
+            trailingIcon={itemLayout === 'vertical' ? 'check' : undefined}
+            onPress={() => {
+              setItemLayout('vertical');
+              setMenuVisible(false);
+            }}
+            title="Layout: vertical"
+          />
+          <Menu.Item
+            trailingIcon={itemLayout === 'horizontal' ? 'check' : undefined}
+            onPress={() => {
+              setItemLayout('horizontal');
+              setMenuVisible(false);
+            }}
+            title="Layout: horizontal"
+          />
         </Menu>
       </Appbar.Header>
       <BottomNavigation
@@ -130,15 +178,12 @@ const BottomNavigationExample = () => {
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
         labelMaxFontSizeMultiplier={2}
-        renderScene={BottomNavigation.SceneMap({
-          album: PhotoGallery,
-          library: PhotoGallery,
-          favorites: PhotoGallery,
-          purchased: PhotoGallery,
-        })}
+        labeled={labeled}
+        shifting={shifting}
+        itemLayout={itemLayout}
+        renderScene={renderScene}
         sceneAnimationEnabled={sceneAnimation !== undefined}
         sceneAnimationType={sceneAnimation}
-        sceneAnimationEasing={Easing.ease}
         getLazy={({ route }) => route.key !== 'album'}
       />
     </View>

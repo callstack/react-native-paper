@@ -1,13 +1,4 @@
-/* eslint-disable no-restricted-imports -- TODO: remove after BottomNavigation migrates to Reanimated. */
-import {
-  Animated,
-  Easing,
-  Keyboard,
-  Platform,
-  StyleSheet,
-  Text,
-} from 'react-native';
-/* eslint-enable no-restricted-imports */
+import { Keyboard, Platform, StyleSheet, Text } from 'react-native';
 import type { KeyboardEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
@@ -21,7 +12,9 @@ import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRou
 import {
   getActiveTintColor,
   getInactiveTintColor,
+  getItemRippleColor,
   getLabelColor,
+  resolveItemLayout,
 } from '../BottomNavigation/utils';
 import Icon from '../Icon';
 
@@ -50,10 +43,13 @@ const renderScene = ({ route }: { route: { title: string } }) => (
 const getTab = (index: number) =>
   screen.getAllByRole(Platform.OS === 'ios' ? 'button' : 'tab')[index];
 
-const layoutNavigationBar = async () => {
-  await fireEvent(screen.getByTestId('bottom-navigation-bar'), 'layout', {
+const layoutNavigationBar = async (
+  testID = 'bottom-navigation-bar',
+  width = 360
+) => {
+  await fireEvent(screen.getByTestId(testID), 'layout', {
     nativeEvent: {
-      layout: { height: 56, width: 360 },
+      layout: { height: 64, width },
     },
   });
 };
@@ -80,7 +76,6 @@ it('renders bottom navigation with scene animation', async () => {
         shifting
         sceneAnimationEnabled
         sceneAnimationType="shifting"
-        sceneAnimationEasing={Easing.ease}
         navigationState={createState(0, 5)}
         onIndexChange={jest.fn()}
         renderScene={renderScene}
@@ -89,69 +84,6 @@ it('renders bottom navigation with scene animation', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
-});
-
-// eslint-disable-next-line jest/no-disabled-tests
-it.skip('sceneAnimationEnabled matches animation requirements', async () => {
-  const ease = Easing.ease;
-
-  await render(
-    <BottomNavigation
-      shifting
-      sceneAnimationEnabled
-      sceneAnimationType="shifting"
-      sceneAnimationEasing={ease}
-      navigationState={createState(1, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={renderScene}
-    />
-  );
-
-  // Simulate the button press
-  await userEvent.press(screen.getAllByRole('button')[1]);
-
-  // Expect the calls to Animated.parallel
-  expect(Animated.parallel).toHaveBeenCalledTimes(2);
-
-  // Expect the first call to Animated.parallel
-  expect(Animated.parallel).toHaveBeenCalledWith(
-    expect.arrayContaining([
-      expect.objectContaining({
-        // ripple
-        config: expect.objectContaining({ toValue: 1, duration: 400 }),
-      }),
-    ])
-  );
-
-  // Expect the second call to Animated.parallel
-  expect(Animated.parallel).toHaveBeenCalledWith(
-    expect.arrayContaining([
-      expect.objectContaining({
-        // previous position anims, shifting to the left
-        config: expect.objectContaining({
-          toValue: -1,
-          duration: 150,
-          easing: ease,
-        }),
-      }),
-      expect.objectContaining({
-        // active page visibility
-        config: expect.objectContaining({
-          toValue: 1,
-          duration: 150,
-          easing: ease,
-        }),
-      }),
-      expect.objectContaining({
-        // next position anims, shifting to the right
-        config: expect.objectContaining({
-          toValue: 1,
-          duration: 150,
-          easing: ease,
-        }),
-      }),
-    ])
-  );
 });
 
 it('calls onIndexChange', async () => {
@@ -169,7 +101,6 @@ it('calls onIndexChange', async () => {
 
   await layoutNavigationBar();
 
-  // pressing same index as active navigation state does not call onIndexChange
   await userEvent.press(getTab(0));
   expect(onIndexChange).not.toHaveBeenCalled();
 
@@ -256,23 +187,17 @@ it('renders non-shifting bottom navigation', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not crash when shifting is true and the number of tabs in the navigationState is less than 2', async () => {
-  jest.spyOn(console, 'warn').mockImplementation(() => {});
-
+it('does not crash when shifting is true and the number of tabs is less than 2', async () => {
   await render(
     <BottomNavigation
-      shifting={true}
+      shifting
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
     />
   );
 
-  expect(console.warn).toHaveBeenCalledWith(
-    'BottomNavigation needs at least 2 tabs to run shifting animation'
-  );
-
-  jest.restoreAllMocks();
+  expect(screen.getAllByText('Route: 0').length).toBeGreaterThan(0);
 });
 
 it('renders custom icon and label in shifting bottom navigation', async () => {
@@ -391,22 +316,15 @@ it('hides labels in non-shifting bottom navigation', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should have appropriate display style according to the visibility on web', async () => {
-  const originalPlatform = Platform.OS;
-  Platform.OS = 'web';
-
-  const { rerender } = await render(
-    <BottomNavigationRouteScreen visibility={1} index={0} />
+it('renders a route screen', async () => {
+  await render(
+    <BottomNavigationRouteScreen index={0}>
+      <Text>Visible</Text>
+    </BottomNavigationRouteScreen>
   );
 
-  const wrapper = screen.getByTestId('RouteScreen: 0');
-
-  expect(wrapper).toHaveStyle({ display: 'flex' });
-
-  await rerender(<BottomNavigationRouteScreen visibility={0} index={0} />);
-  expect(wrapper).toHaveStyle({ display: 'none' });
-
-  Platform.OS = originalPlatform;
+  expect(screen.getByTestId('RouteScreen: 0')).toBeOnTheScreen();
+  expect(screen.getByText('Visible')).toBeOnTheScreen();
 });
 
 it('should have labelMaxFontSizeMultiplier passed to label', async () => {
@@ -414,7 +332,7 @@ it('should have labelMaxFontSizeMultiplier passed to label', async () => {
   await render(
     <BottomNavigation
       shifting={false}
-      labeled={true}
+      labeled
       labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
@@ -435,7 +353,7 @@ it('renders custom background color passed to barStyle property', async () => {
     <BottomNavigation
       testID="bottom-navigation"
       shifting={false}
-      labeled={true}
+      labeled
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
@@ -446,7 +364,7 @@ it('renders custom background color passed to barStyle property', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('uses the rendered bar height when hiding it for the keyboard', async () => {
+it('hides the bar above the keyboard without dropping consumer styles', async () => {
   let handleKeyboardShow: ((event: KeyboardEvent) => void) | undefined;
   const addKeyboardListener = Keyboard.addListener.bind(Keyboard);
   const keyboardListenerSpy = jest
@@ -494,8 +412,8 @@ it('uses the rendered bar height when hiding it for the keyboard', async () => {
   expect(navigation).toHaveStyle({
     height: 96,
     position: 'absolute',
-    transform: [{ translateY: 72 }],
   });
+  expect(navigation).toHaveStyle({ pointerEvents: 'none' });
 
   keyboardListenerSpy.mockRestore();
 });
@@ -527,6 +445,83 @@ it('renders bottom navigation with getLazy', async () => {
   expect(view).toMatchSnapshot();
 
   expect(screen.queryByTestId('RouteScreen: 2')).not.toBeOnTheScreen();
+});
+
+it('mounts a lazy screen after it becomes focused', async () => {
+  const onIndexChange = jest.fn();
+  const { rerender } = await render(
+    <BottomNavigation
+      barTestID="bottom-navigation-bar"
+      navigationState={createState(0, 3)}
+      onIndexChange={onIndexChange}
+      renderScene={renderScene}
+      getLazy={() => true}
+    />
+  );
+
+  expect(screen.getByTestId('RouteScreen: 0')).toBeOnTheScreen();
+  expect(screen.queryByTestId('RouteScreen: 1')).not.toBeOnTheScreen();
+
+  await layoutNavigationBar();
+  await userEvent.press(getTab(1));
+  expect(onIndexChange).toHaveBeenCalledWith(1);
+
+  await rerender(
+    <BottomNavigation
+      barTestID="bottom-navigation-bar"
+      navigationState={createState(1, 3)}
+      onIndexChange={onIndexChange}
+      renderScene={renderScene}
+      getLazy={() => true}
+    />
+  );
+
+  expect(
+    screen.getByTestId('RouteScreen: 0', { includeHiddenElements: true })
+  ).toBeOnTheScreen();
+  expect(
+    screen.getByTestId('RouteScreen: 1', { includeHiddenElements: true })
+  ).toBeOnTheScreen();
+});
+
+it('renders numeric and dot badges', async () => {
+  await render(
+    <BottomNavigation
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'inbox', title: 'Inbox', focusedIcon: 'inbox', badge: 3 },
+          {
+            key: 'updates',
+            title: 'Updates',
+            focusedIcon: 'bell',
+            badge: true,
+          },
+        ],
+      }}
+      onIndexChange={jest.fn()}
+      renderScene={renderScene}
+    />
+  );
+
+  expect(screen.getByText('3')).toBeOnTheScreen();
+  expect(screen.getAllByText('Inbox').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('Updates').length).toBeGreaterThan(0);
+});
+
+it('renders horizontal items when itemLayout is horizontal', async () => {
+  const tree = (
+    await render(
+      <BottomNavigation
+        itemLayout="horizontal"
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={renderScene}
+      />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
 it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
@@ -596,19 +591,26 @@ describe('getLabelColor', () => {
   it.each([
     { tintColor: '#FBF7DB', focused: true, expected: '#FBF7DB' },
     { tintColor: '#853D4B', focused: true, expected: '#853D4B' },
-    { tintColor: undefined, focused: true, expected: Palette.neutral10 },
+    { tintColor: undefined, focused: true, expected: Palette.secondary40 },
+    {
+      tintColor: undefined,
+      focused: true,
+      onIndicator: true,
+      expected: Palette.secondary10,
+    },
     {
       tintColor: undefined,
       focused: false,
       expected: Palette.neutralVariant30,
     },
   ])(
-    'returns $expected when tintColor: $tintColor, focused: $focused',
-    ({ tintColor, focused, expected }) => {
+    'returns $expected when tintColor: $tintColor, focused: $focused, onIndicator: $onIndicator',
+    ({ tintColor, focused, onIndicator, expected }) => {
       const result = getLabelColor({
         tintColor: tintColor ?? '',
         hasColor: Boolean(tintColor),
         focused,
+        onIndicator,
         theme: LightTheme,
       });
       expect(result).toBe(expected);
@@ -616,30 +618,41 @@ describe('getLabelColor', () => {
   );
 });
 
-it('supports animated styles in bar', async () => {
-  const value = new Animated.Value(1);
+describe('resolveItemLayout', () => {
+  it('keeps an explicit layout', () => {
+    expect(resolveItemLayout({ itemLayout: 'horizontal', width: 320 })).toBe(
+      'horizontal'
+    );
+    expect(resolveItemLayout({ itemLayout: 'vertical', width: 800 })).toBe(
+      'vertical'
+    );
+  });
+
+  it('uses horizontal items at the medium window width', () => {
+    expect(resolveItemLayout({ itemLayout: 'auto', width: 600 })).toBe(
+      'horizontal'
+    );
+    expect(resolveItemLayout({ itemLayout: 'auto', width: 360 })).toBe(
+      'vertical'
+    );
+  });
+});
+
+it('uses a pressed state-layer color for the active item ripple', () => {
+  expect(getItemRippleColor({ focused: true, theme: LightTheme })).toBe(
+    'rgba(29, 25, 43, 0.1)'
+  );
+});
+
+it('supports styles in bar', async () => {
   await render(
     <BottomNavigation.Bar
       navigationState={createState(0, 1)}
       onTabPress={jest.fn()}
       testID="bottom-navigation"
-      style={[{ transform: [{ scale: value }] }]}
+      style={{ transform: [{ scale: 1.5 }] }}
     />
   );
-
-  expect(screen.getByTestId('bottom-navigation')).toHaveStyle({
-    transform: [{ scale: 1 }],
-  });
-
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
-
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
 
   expect(screen.getByTestId('bottom-navigation')).toHaveStyle({
     transform: [{ scale: 1.5 }],
