@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { CardActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
@@ -26,8 +25,8 @@ export type Props = ViewProps & {
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="contained">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -46,23 +45,7 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
 
   return (
     <View {...rest} style={containerStyle}>
-      {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement<CardActionChildProps>(child)) {
-          return child;
-        }
-
-        const compact = child.props.compact;
-        const mode =
-          child.props.mode ?? (index === 0 ? 'outlined' : 'contained');
-        const childStyle = [styles.button, child.props.style];
-
-        return React.cloneElement(child, {
-          ...child.props,
-          compact,
-          mode,
-          style: childStyle,
-        });
-      })}
+      {children}
     </View>
   );
 };
@@ -73,10 +56,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    columnGap: 8,
     padding: 8,
-  },
-  button: {
-    marginLeft: 8,
   },
 });
 

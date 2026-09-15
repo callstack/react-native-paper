@@ -187,6 +187,24 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+#### `Dialog.Actions`
+
+`Dialog.Actions` no longer forces `compact` and `uppercase` on its buttons. Set them on the buttons if you want the old look.
+
+```tsx
+// Before (v5)
+<Dialog.Actions>
+  <Button onPress={hide}>Done</Button>
+</Dialog.Actions>
+
+// After (v6)
+<Dialog.Actions>
+  <Button compact uppercase onPress={hide}>
+    Done
+  </Button>
+</Dialog.Actions>
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:
@@ -329,6 +347,54 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Card
+
+#### `Card.Actions`
+
+`Card.Actions` no longer styles its buttons for you. It used to force `mode="outlined"` on the first button, `mode="contained"` on the rest, and `compact` on all of them. Set what you need on each button.
+
+```tsx
+// Before (v5)
+<Card.Actions>
+  <Button>Cancel</Button>
+  <Button>Ok</Button>
+</Card.Actions>
+
+// After (v6)
+<Card.Actions>
+  <Button mode="outlined">Cancel</Button>
+  <Button mode="contained">Ok</Button>
+</Card.Actions>
+```
+
+#### `Card.Content`
+
+`Card.Content` now has 16dp of padding on every side. It used to drop its top or bottom padding when it sat next to a `Card.Cover` or `Card.Title`, so cards that mix those sections grow a little taller. Pass `style` if you want the tighter spacing back.
+
+### List
+
+#### `List.Accordion`
+
+An accordion with a `left` element now indents only its `List.Item` children. Anything else you put inside keeps its own padding, so indent it yourself to line it up with the items.
+
+```tsx
+// Before (v5)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+
+// After (v6)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View style={{ paddingLeft: 40 }}>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+```
+
+`theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
 
 ### ToggleButton
 

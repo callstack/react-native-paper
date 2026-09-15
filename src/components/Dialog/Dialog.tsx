@@ -13,7 +13,6 @@ import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
-import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -131,17 +130,7 @@ const Dialog = ({
       testID={testID}
       overlayTestID={overlayTestID}
     >
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
-            return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
-            });
-          }
-
-          return child;
-        })}
+      {children}
     </Modal>
   );
 };
@@ -168,6 +157,7 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     justifyContent: 'flex-start',
+    paddingTop: 24,
   },
 });
 

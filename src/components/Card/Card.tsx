@@ -119,8 +119,8 @@ export type Props = Omit<ViewProps, 'style'> & {
  *     </Card.Content>
  *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="contained">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -182,15 +182,6 @@ const Card = ({
     }
   });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type
-      ? typeof child.type !== 'string' && 'displayName' in child.type
-        ? child.type.displayName
-        : null
-      : null
-  );
-
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
@@ -204,16 +195,8 @@ const Card = ({
   const borderRadius = theme.shapes.corner.medium;
 
   const content = (
-    <View style={[styles.innerContainer, contentStyle]}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-            })
-          : child
-      )}
+    <View style={[styles.innerContainer, { borderRadius }, contentStyle]}>
+      {children}
     </View>
   );
 
@@ -276,6 +259,7 @@ Card.Title = CardTitle;
 const styles = StyleSheet.create({
   innerContainer: {
     flexShrink: 1,
+    overflow: 'hidden',
   },
   outline: {
     borderWidth: 1,
