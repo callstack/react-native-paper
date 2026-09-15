@@ -1,7 +1,10 @@
 import type { StyleProp, TextProps, TextStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import Animated, { type AnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  type AnimatedStyle,
+  type CSSStyle,
+} from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
 import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
@@ -66,7 +69,7 @@ const Badge = ({
   const badgeSize = isLarge ? LARGE_SIZE : SMALL_SIZE;
   const labelFont = theme.fonts.labelSmall;
 
-  const transitionStyle = {
+  const transitionStyle: CSSStyle<TextStyle> = {
     opacity: visible ? 1 : 0,
     ...getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
   };
