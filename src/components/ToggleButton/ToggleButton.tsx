@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type {
-  GestureResponderEvent,
-  Insets,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
@@ -59,25 +54,7 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
-  /**
-   * @optional
-   * Set by `ToggleButton.Row` to divide the touch targets of adjoining
-   * buttons; not meant to be passed directly.
-   */
-  hitSlop?: Insets;
-  /**
-   * @optional
-   * Set by `ToggleButton.Row` to square off the corners shared with a
-   * neighbouring button; not meant to be passed directly.
-   */
-  borderRadius?: number;
-  borderTopLeftRadius?: number;
-  borderTopRightRadius?: number;
-  borderBottomLeftRadius?: number;
-  borderBottomRightRadius?: number;
 };
-
-export const TOGGLE_BUTTON_SIZE = 42;
 
 /**
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
@@ -156,11 +133,11 @@ const ToggleButton = ({
               styles.content,
               {
                 backgroundColor,
+                borderRadius,
                 borderColor,
               },
               style,
             ]}
-            borderRadius={borderRadius}
             ref={ref}
             theme={theme}
             {...rest}
@@ -173,8 +150,8 @@ const ToggleButton = ({
 
 const styles = StyleSheet.create({
   content: {
-    width: TOGGLE_BUTTON_SIZE,
-    height: TOGGLE_BUTTON_SIZE,
+    width: 42,
+    height: 42,
     margin: 0,
   },
 });
