@@ -37,6 +37,7 @@ export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
+export { default as NavigationRail } from './components/NavigationRail';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
@@ -115,6 +116,9 @@ export type { Props as ListSubheaderProps } from './components/List/ListSubheade
 export type { Props as MenuProps } from './components/Menu/Menu';
 export type { Props as MenuItemProps } from './components/Menu/MenuItem';
 export type { Props as ModalProps } from './components/Modal';
+export type { Props as NavigationRailProps } from './components/NavigationRail/NavigationRail';
+export type { Props as NavigationRailItemProps } from './components/NavigationRail/NavigationRailItem';
+export type { Props as NavigationRailModalProps } from './components/NavigationRail/NavigationRailModal';
 export type { Props as PortalProps } from './components/Portal/Portal';
 export type { Props as PortalHostProps } from './components/Portal/PortalHost';
 export type { Props as ProgressBarProps } from './components/ProgressBar';

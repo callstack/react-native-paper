@@ -115,6 +115,25 @@ The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Va
 
 The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
 
+### Drawer
+
+`NavigationRail` is the Material Design 3 replacement for `Drawer.CollapsedItem` and the drawer-based side navigation. It supports a collapsed (96dp) and expanded (220–360dp) layout, a header slot for a menu button and `FAB`, and a modal variant.
+
+```diff
+- <View>
+-   <Drawer.CollapsedItem focusedIcon="inbox" unfocusedIcon="inbox-outline" label="Inbox" active />
+-   <Drawer.CollapsedItem focusedIcon="send" unfocusedIcon="send-outline" label="Sent" />
+- </View>
++ <NavigationRail expanded={expanded}>
++   <NavigationRail.Item icon="inbox-outline" activeIcon="inbox" label="Inbox" active />
++   <NavigationRail.Item icon="send-outline" activeIcon="send" label="Sent" />
++ </NavigationRail>
+```
+
+- **`focusedIcon` / `unfocusedIcon`** → **`activeIcon` / `icon`**
+- Expanded rows replace `Drawer.Item`; toggle them with the `expanded` prop instead of rendering a different component.
+- Use `NavigationRail.Modal` inside a `Portal` where a temporary drawer was used before.
+
 ### Surface
 
 - The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.
