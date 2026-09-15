@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { Role, StyleProp, ViewStyle } from 'react-native';
 
 import Animated, {
   cubicBezier,
@@ -33,9 +33,13 @@ export type Props = {
    */
   onDismiss?: () => void;
   /**
-   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   * Accessible name for the modal.
    */
-  overlayAccessibilityLabel?: string;
+  'aria-label'?: string;
+  /**
+   * Role exposed to assistive technology. Defaults to `dialog`.
+   */
+  role?: Role;
   /**
    * testID for the overlay that is displayed behind the modal content.
    */
@@ -89,7 +93,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
+ * Give the modal an accessible name with `aria-label`.
  *
  * ## Usage
  * ```js
@@ -110,6 +114,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *         <Modal
  *           visible={visible}
  *           onDismiss={hideModal}
+ *           aria-label="Example modal"
  *           contentBackgroundColor="white"
  *           contentContainerStyle={containerStyle}
  *         >
@@ -130,7 +135,8 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
-  overlayAccessibilityLabel = 'Close modal',
+  'aria-label': ariaLabel,
+  role = 'dialog',
   overlayTestID,
   onDismiss = () => {},
   children,
@@ -182,7 +188,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable || dismissableBackButton) {
+      if (dismissableBackButton) {
         onDismissCallback();
       }
 
@@ -227,18 +233,16 @@ function Modal({
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
       aria-live="polite"
       style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={onDismissCallback}
+      onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
       testID={testID}
     >
       <AnimatedPressable
-        aria-label={overlayAccessibilityLabel}
         role="button"
         disabled={!dismissable}
+        aria-hidden
         onPress={dismissable ? onDismissCallback : undefined}
-        importantForAccessibility="no"
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
         testID={overlayTestID}
       />
@@ -251,6 +255,9 @@ function Modal({
         pointerEvents="box-none"
       >
         <Surface
+          role={role}
+          aria-modal
+          aria-label={ariaLabel}
           theme={theme}
           backgroundColor={contentBackgroundColor}
           borderRadius={contentBorderRadius}
