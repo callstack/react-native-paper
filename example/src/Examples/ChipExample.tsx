@@ -173,19 +173,12 @@ const ChipExample = () => {
               icon="palette"
               onPress={() => {}}
               selectedColor={customColor}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
-                },
-              ]}
+              backgroundColor={color(customColor).alpha(0.2).rgb().string()}
+              style={styles.chip}
             >
               Custom color
             </Chip>
-            <Chip
-              onPress={() => {}}
-              style={[styles.chip, styles.customBorderRadius]}
-            >
+            <Chip onPress={() => {}} borderRadius={16} style={styles.chip}>
               Rounded
             </Chip>
             <Chip onPress={() => {}} style={styles.fullWidthChip}>
@@ -219,9 +212,6 @@ const styles = StyleSheet.create({
   fullWidthChip: {
     flex: 1,
     margin: 4,
-  },
-  customBorderRadius: {
-    borderRadius: 16,
   },
 });
 

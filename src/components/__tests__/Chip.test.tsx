@@ -231,7 +231,7 @@ it('overlays the close button on top of the chip so its ripple spans behind it',
 
 it('clips the ripple to custom chip border radius', async () => {
   await render(
-    <Chip onPress={() => {}} testID="rounded-chip" style={{ borderRadius: 16 }}>
+    <Chip onPress={() => {}} testID="rounded-chip" borderRadius={16}>
       Rounded chip
     </Chip>
   );

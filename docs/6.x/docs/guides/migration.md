@@ -130,6 +130,15 @@ Some components now accept explicit `testID` props for their interactable elemen
 #### New props
 
 - **`trailingIcon`** / **`onTrailingIconPress`** / **`trailingIconAccessibilityLabel`** add a trailing action (e.g. a dropdown) independent of the close button. `trailingIcon` takes precedence over `onClose`'s close icon when both are specified.
+- **`backgroundColor`** / **`borderRadius`** replace overriding the chip's background color or border radius through `style`. `style` no longer accepts `backgroundColor` or `borderRadius`.
+
+```tsx
+// Before (v5)
+<Chip onPress={() => {}} style={{ backgroundColor: 'purple', borderRadius: 16 }}>Example Chip</Chip>
+
+// After (v6)
+<Chip onPress={() => {}} backgroundColor="purple" borderRadius={16}>Example Chip</Chip>
+```
 
 ### Appbar
 

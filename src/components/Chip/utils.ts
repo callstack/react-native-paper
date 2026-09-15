@@ -1,7 +1,7 @@
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import { ChipTokens } from './tokens';
-import type { InternalTheme } from '../../theme/types';
+import type { ColorRole, InternalTheme } from '../../theme/types';
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;
@@ -80,14 +80,16 @@ const getBorderColor = ({
   return theme.colors[ChipTokens.outlineColor];
 };
 
-const getLabelColor = ({
-  theme,
-  selected,
-  disabled,
-  selectedColor,
-}: BaseProps & {
-  selectedColor?: ColorValue;
-}) => {
+const resolveColor = (
+  {
+    theme,
+    disabled,
+    selected,
+  }: Pick<BaseProps, 'theme' | 'disabled' | 'selected'>,
+  selectedColor: ColorValue | undefined,
+  selectedToken: ColorRole,
+  defaultToken: ColorRole
+): ColorValue => {
   if (disabled) {
     return theme.colors[ChipTokens.disabledColor];
   }
@@ -96,57 +98,7 @@ const getLabelColor = ({
     return selectedColor;
   }
 
-  if (selected) {
-    return theme.colors[ChipTokens.selectedLabelColor];
-  }
-
-  return theme.colors[ChipTokens.labelColor];
-};
-
-const getLeadingIconColor = ({
-  theme,
-  selected,
-  disabled,
-  selectedColor,
-}: BaseProps & {
-  selectedColor?: ColorValue;
-}) => {
-  if (disabled) {
-    return theme.colors[ChipTokens.disabledColor];
-  }
-
-  if (selectedColor !== undefined) {
-    return selectedColor;
-  }
-
-  if (selected) {
-    return theme.colors[ChipTokens.selectedIconColor];
-  }
-
-  return theme.colors[ChipTokens.leadingIconColor];
-};
-
-const getTrailingIconColor = ({
-  theme,
-  selected,
-  disabled,
-  selectedColor,
-}: BaseProps & {
-  selectedColor?: ColorValue;
-}) => {
-  if (disabled) {
-    return theme.colors[ChipTokens.disabledColor];
-  }
-
-  if (selectedColor !== undefined) {
-    return selectedColor;
-  }
-
-  if (selected) {
-    return theme.colors[ChipTokens.selectedTrailingIconColor];
-  }
-
-  return theme.colors[ChipTokens.trailingIconColor];
+  return theme.colors[selected ? selectedToken : defaultToken];
 };
 
 export const getChipColors = ({
@@ -179,18 +131,24 @@ export const getChipColors = ({
       ...baseChipColorProps,
       selectedColor,
     }),
-    textColor: getLabelColor({
-      ...baseChipColorProps,
+    textColor: resolveColor(
+      baseChipColorProps,
       selectedColor,
-    }),
-    iconColor: getLeadingIconColor({
-      ...baseChipColorProps,
+      ChipTokens.selectedLabelColor,
+      ChipTokens.labelColor
+    ),
+    iconColor: resolveColor(
+      baseChipColorProps,
       selectedColor,
-    }),
-    trailingIconColor: getTrailingIconColor({
-      ...baseChipColorProps,
+      ChipTokens.selectedIconColor,
+      ChipTokens.leadingIconColor
+    ),
+    trailingIconColor: resolveColor(
+      baseChipColorProps,
       selectedColor,
-    }),
+      ChipTokens.selectedTrailingIconColor,
+      ChipTokens.trailingIconColor
+    ),
     contentOpacity,
     backgroundColor: getContainerColor({
       ...baseChipColorProps,

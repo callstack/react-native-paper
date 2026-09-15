@@ -30,13 +30,13 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-// The trailing icon's ripple is a square that stretches flush to the chip's
-// top/bottom edges, so it's sized to match the chip's height rather than a
-// fixed value of its own.
+// The trailing icon's touch target is a square flush with the chip's
+// top/bottom edges (so its ripple/state layer stays circular per MD3),
+// sized to the chip height rather than a fixed value of its own.
 const TRAILING_ICON_AREA_SIZE = ChipTokens.containerHeight;
 
-// The icon glyph is centered inside that (larger) ripple square, so its own
-// edge sits this far in from the ripple square's edge.
+// The icon glyph is centered inside that (larger) touch target, so its own
+// edge sits this far in from the touch target's edge.
 const TRAILING_ICON_INSET = (TRAILING_ICON_AREA_SIZE - ChipTokens.iconSize) / 2;
 
 // Suppresses the browser's native focus outline so only our own focus
@@ -151,10 +151,22 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   elevated?: boolean;
   /**
+   * Custom background color for the chip, overriding the default background for its mode/selected state.
+   */
+  backgroundColor?: ColorValue;
+  /**
+   * Custom border radius for the chip.
+   */
+  borderRadius?: number;
+  /**
    * Style of chip's text.
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Style of the chip's container. Background color and border radius should be specified via
+   * the `backgroundColor`/`borderRadius` props instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor' | 'borderRadius'>>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -235,6 +247,8 @@ const Chip = ({
   showSelectedCheck = true,
   ellipsizeMode,
   elevated = false,
+  backgroundColor: customBackgroundColor,
+  borderRadius: borderRadiusProp,
   maxFontSizeMultiplier,
   hitSlop,
   ...rest
@@ -264,15 +278,8 @@ const Chip = ({
     []
   );
 
-  const defaultBorderRadius = theme.shapes.corner.small;
-  const {
-    backgroundColor: customBackgroundColor,
-    borderRadius = defaultBorderRadius,
-  } = StyleSheet.flatten(style) || {};
-  const focusRingBorderRadius =
-    typeof borderRadius === 'number'
-      ? borderRadius + ChipTokens.focusIndicatorOffset
-      : borderRadius;
+  const borderRadius = borderRadiusProp ?? theme.shapes.corner.small;
+  const focusRingBorderRadius = borderRadius + ChipTokens.focusIndicatorOffset;
 
   const {
     borderColor,
