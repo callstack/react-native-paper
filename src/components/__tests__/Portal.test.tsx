@@ -3,8 +3,10 @@ import { Text } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 
 import { LocaleProvider, useLocale } from '../../core/locale';
+import PaperProvider from '../../core/PaperProvider';
 import { useInternalTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import Dialog from '../Dialog/Dialog';
 import Modal from '../Modal';
 import Portal from '../Portal/Portal';
@@ -58,6 +60,22 @@ it('passes local theme overrides and locale to portal content and updates them',
 
   expect(screen.getByText('3 ltr')).toBeOnTheScreen();
   expect(screen.queryByText('2 rtl')).not.toBeOnTheScreen();
+});
+
+const PortalReduceMotionContent = () => (
+  <Text>{`reduce motion: ${useReduceMotion()}`}</Text>
+);
+
+it('passes the reduce motion preference to portal content', async () => {
+  await render(
+    <PaperProvider reduceMotion="on">
+      <Portal>
+        <PortalReduceMotionContent />
+      </Portal>
+    </PaperProvider>
+  );
+
+  expect(await screen.findByText('reduce motion: true')).toBeOnTheScreen();
 });
 
 it('renders portals in source order when mounted in the same commit', async () => {

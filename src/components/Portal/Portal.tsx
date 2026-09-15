@@ -8,6 +8,7 @@ import {
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
@@ -46,13 +47,16 @@ const Portal = ({ children, theme: themeOverrides }: Props) => {
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
   const manager = React.useContext(PortalContext);
+  const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
     <PortalConsumer manager={manager}>
       <SettingsProvider value={settings}>
-        <LocaleProvider direction={direction}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </LocaleProvider>
+        <ReduceMotionContext.Provider value={reduceMotion}>
+          <LocaleProvider direction={direction}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </LocaleProvider>
+        </ReduceMotionContext.Provider>
       </SettingsProvider>
     </PortalConsumer>
   );
