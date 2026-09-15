@@ -120,36 +120,76 @@ export function visibleSlotCount(strategy: CarouselStrategy): number {
 }
 
 export type SnapScrollProps = {
-  snapToInterval?: number;
-  disableIntervalMomentum?: boolean;
-  decelerationRate: 'fast' | 'normal';
+  decelerationRate: 'normal' | number;
 };
 
 /**
- * Translates a strategy's fling behaviour into scroll view props.
+ * Hands the settle to the platform or to us.
  *
- * The snap target is the focal keyline offset rather than the container edge.
- * On the unmasked axis that offset is a whole number of items, which is why a
- * plain interval is enough to express it.
+ * Where the carousel snaps, native deceleration is switched off entirely: the
+ * scroll view stops dead when the finger lifts and the decay-plus-spring in
+ * `resolveSettleOffset` takes over, so the settle runs on the M3 spring rather
+ * than on the platform's own curve. An uncontained carousel does not snap, so
+ * it keeps native momentum.
  */
 export function getSnapScrollProps(
   strategy: CarouselStrategy
 ): SnapScrollProps {
-  switch (strategy.snap) {
-    case 'single':
-      return {
-        snapToInterval: strategy.itemSize,
-        disableIntervalMomentum: true,
-        decelerationRate: 'fast',
-      };
-    case 'multi':
-      // Momentum decays across several items, then settles on the nearest
-      // focal keyline.
-      return {
-        snapToInterval: strategy.itemSize,
-        decelerationRate: 'normal',
-      };
-    default:
-      return { decelerationRate: 'normal' };
+  return { decelerationRate: strategy.snap === 'none' ? 'normal' : 0 };
+}
+
+/**
+ * How far a fling coasts, in seconds of its release velocity.
+ *
+ * This is the standard projection for a scroll view decelerating at 0.998 per
+ * millisecond: `v * rate / (1 - rate)`, which works out at roughly half a
+ * second of travel.
+ */
+const DECAY_PROJECTION = 0.5;
+
+/** A fling shorter than this fraction of an item is treated as a hold. */
+const SINGLE_ADVANCE_THRESHOLD = 0.15;
+
+/**
+ * Where a fling should come to rest.
+ *
+ * The three layouts settle differently, and the difference is entirely in this
+ * function — `single` advances by at most one item from wherever the drag
+ * started, `multi` lets the decay projection carry across as many items as the
+ * fling earned, and `none` does not settle at all.
+ *
+ * The target is always a focal keyline offset, never a container edge: on the
+ * unmasked axis those offsets are whole multiples of the item size.
+ *
+ * `velocity` is in points per second, positive towards the end of the list.
+ */
+export function resolveSettleOffset(
+  strategy: CarouselStrategy,
+  offset: number,
+  dragStartOffset: number,
+  velocity: number
+): number | null {
+  'worklet';
+  const { snap, itemSize, maxScroll } = strategy;
+  if (snap === 'none' || itemSize <= 0) {
+    return null;
   }
+
+  const projected = offset + velocity * DECAY_PROJECTION;
+
+  if (snap === 'multi') {
+    const index = Math.round(projected / itemSize);
+    return Math.min(Math.max(index * itemSize, 0), maxScroll);
+  }
+
+  const startIndex = Math.round(dragStartOffset / itemSize);
+  const travelled = (projected - dragStartOffset) / itemSize;
+  const step =
+    travelled > SINGLE_ADVANCE_THRESHOLD
+      ? 1
+      : travelled < -SINGLE_ADVANCE_THRESHOLD
+        ? -1
+        : 0;
+
+  return Math.min(Math.max((startIndex + step) * itemSize, 0), maxScroll);
 }

@@ -2,12 +2,14 @@ import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import {
+  Button,
   Carousel,
   CarouselItem,
   CarouselItemContent,
   Switch,
   Text,
   useTheme,
+  type CarouselHandle,
   type CarouselLayout,
 } from 'react-native-paper';
 
@@ -74,6 +76,7 @@ type PhotoCarouselProps = {
   outlined?: boolean;
   disabled?: boolean;
   onIndexChange?: (index: number) => void;
+  ref?: React.RefObject<CarouselHandle | null>;
 };
 
 const PhotoCarousel = ({
@@ -84,11 +87,13 @@ const PhotoCarousel = ({
   outlined,
   disabled,
   onIndexChange,
+  ref,
 }: PhotoCarouselProps) => {
   const theme = useTheme();
 
   return (
     <Carousel
+      ref={ref}
       data={photos}
       layout={layout}
       alignment={alignment}
@@ -130,6 +135,7 @@ const PhotoCarousel = ({
 };
 
 const CarouselExample = () => {
+  const carouselRef = React.useRef<CarouselHandle>(null);
   const [focused, setFocused] = React.useState(0);
   const [outlined, setOutlined] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
@@ -147,11 +153,30 @@ const CarouselExample = () => {
         title="Multi-browse"
         caption="One or two large items, then a medium and a small one. Momentum decays across several items before it settles."
       >
-        <PhotoCarousel layout="multi-browse" onIndexChange={setFocused} />
+        <PhotoCarousel
+          ref={carouselRef}
+          layout="multi-browse"
+          onIndexChange={setFocused}
+        />
       </Section>
       <Text variant="bodySmall" style={styles.caption}>
         Focused item: {photos[focused]?.title}
       </Text>
+      {/* Programmatic moves settle on the same spring a fling does. */}
+      <View style={styles.row}>
+        <Button
+          mode="outlined"
+          onPress={() => carouselRef.current?.scrollToIndex(focused - 1)}
+        >
+          Previous
+        </Button>
+        <Button
+          mode="outlined"
+          onPress={() => carouselRef.current?.scrollToIndex(focused + 1)}
+        >
+          Next
+        </Button>
+      </View>
 
       <Section
         title="Hero, start-aligned"

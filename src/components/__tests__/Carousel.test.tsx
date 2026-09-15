@@ -14,7 +14,11 @@ import type {
   CarouselLayout,
   CarouselRenderItemInfo,
 } from '../Carousel/types';
-import { getSnapScrollProps, resolveItemPlacement } from '../Carousel/utils';
+import {
+  getSnapScrollProps,
+  resolveItemPlacement,
+  resolveSettleOffset,
+} from '../Carousel/utils';
 
 const CONTAINER = 360;
 const HEIGHT = 200;
@@ -367,28 +371,93 @@ describe('Carousel', () => {
 });
 
 describe('getSnapScrollProps', () => {
-  it('advances one item per fling for hero and full-screen', () => {
-    for (const layout of ['hero', 'full-screen'] as const) {
-      const strategy = strategyFor(layout);
-      const props = getSnapScrollProps(strategy);
-      expect(props.snapToInterval).toBeCloseTo(strategy.itemSize, 5);
-      expect(props.disableIntervalMomentum).toBe(true);
-      expect(props.decelerationRate).toBe('fast');
+  it('switches native deceleration off wherever the carousel snaps', () => {
+    for (const layout of ['hero', 'full-screen', 'multi-browse'] as const) {
+      expect(getSnapScrollProps(strategyFor(layout)).decelerationRate).toBe(0);
     }
   });
 
-  it('lets momentum decay across items for multi-browse', () => {
-    const strategy = strategyFor('multi-browse');
-    const props = getSnapScrollProps(strategy);
-    expect(props.snapToInterval).toBeCloseTo(strategy.itemSize, 5);
-    expect(props.disableIntervalMomentum).toBeUndefined();
-    expect(props.decelerationRate).toBe('normal');
+  it('leaves native momentum alone for uncontained', () => {
+    expect(
+      getSnapScrollProps(strategyFor('uncontained')).decelerationRate
+    ).toBe('normal');
+  });
+});
+
+describe('resolveSettleOffset', () => {
+  const at = (strategy: CarouselStrategy, index: number) =>
+    index * strategy.itemSize;
+
+  it('does not settle an uncontained carousel at all', () => {
+    const strategy = strategyFor('uncontained');
+    expect(
+      resolveSettleOffset(strategy, at(strategy, 2) + 30, at(strategy, 2), 2000)
+    ).toBeNull();
   });
 
-  it('does not snap at all for uncontained', () => {
-    const props = getSnapScrollProps(strategyFor('uncontained'));
-    expect(props.snapToInterval).toBeUndefined();
-    expect(props.disableIntervalMomentum).toBeUndefined();
+  it('carries a multi-browse fling across several items', () => {
+    const strategy = strategyFor('multi-browse', { itemCount: 20 });
+    // Half a second of travel at four items per second is two items.
+    const target = resolveSettleOffset(strategy, 0, 0, strategy.itemSize * 4);
+    expect(target).toBeCloseTo(at(strategy, 2), 5);
+  });
+
+  it('advances multi-browse backwards on a reverse fling', () => {
+    const strategy = strategyFor('multi-browse', { itemCount: 20 });
+    const from = at(strategy, 6);
+    const target = resolveSettleOffset(
+      strategy,
+      from,
+      from,
+      -strategy.itemSize * 4
+    );
+    expect(target).toBeCloseTo(at(strategy, 4), 5);
+  });
+
+  it('advances hero by exactly one item however hard it is flung', () => {
+    const strategy = strategyFor('hero', { itemCount: 20 });
+    const from = at(strategy, 3);
+    for (const velocity of [strategy.itemSize, strategy.itemSize * 50]) {
+      expect(resolveSettleOffset(strategy, from, from, velocity)).toBeCloseTo(
+        at(strategy, 4),
+        5
+      );
+    }
+    expect(
+      resolveSettleOffset(strategy, from, from, -strategy.itemSize * 50)
+    ).toBeCloseTo(at(strategy, 2), 5);
+  });
+
+  it('returns a held hero item to where the drag started', () => {
+    const strategy = strategyFor('hero', { itemCount: 20 });
+    const from = at(strategy, 3);
+    const target = resolveSettleOffset(strategy, from + 4, from, 0);
+    expect(target).toBeCloseTo(from, 5);
+  });
+
+  it('settles on focal keyline offsets, never between them', () => {
+    const strategy = strategyFor('multi-browse', { itemCount: 20 });
+    for (let velocity = -4000; velocity <= 4000; velocity += 250) {
+      const target = resolveSettleOffset(
+        strategy,
+        at(strategy, 5),
+        at(strategy, 5),
+        velocity
+      );
+      if (target === null) {
+        throw new Error('a snapping carousel must settle somewhere');
+      }
+      const index = target / strategy.itemSize;
+      expect(Math.abs(index - Math.round(index))).toBeLessThan(1e-9);
+    }
+  });
+
+  it('never settles past either end of the list', () => {
+    const strategy = strategyFor('multi-browse', { itemCount: 8 });
+    expect(resolveSettleOffset(strategy, 0, 0, -50000)).toBe(0);
+    expect(resolveSettleOffset(strategy, strategy.maxScroll, 0, 50000)).toBe(
+      strategy.maxScroll
+    );
   });
 });
 

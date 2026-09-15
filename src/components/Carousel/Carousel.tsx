@@ -5,16 +5,21 @@ import {
   type LayoutChangeEvent,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
-  type ScrollView,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
 
 import Animated, {
+  cancelAnimation,
+  ReduceMotion,
   runOnJS,
+  runOnUI,
+  scrollTo,
   useAnimatedReaction,
+  useAnimatedRef,
   useAnimatedScrollHandler,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 
 import CarouselItemShell from './CarouselItemShell';
@@ -28,9 +33,12 @@ import type {
 import {
   getDefaultCarouselColors,
   getSnapScrollProps,
+  resolveSettleOffset,
   visibleSlotCount,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 
 /** Items kept mounted either side of the on-screen ones. */
@@ -185,8 +193,22 @@ const Carousel = <ItemT,>({
   'aria-label': ariaLabel,
 }: Props<ItemT>) => {
   const theme = useInternalTheme(themeOverrides);
-  const scrollRef = React.useRef<ScrollView>(null);
+  const reduceMotion = useReduceMotion();
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollX = useSharedValue(0);
+
+  // Settle state. `settle` is the spring's output, written into the scroll view
+  // on the UI thread while `settling` is set; a new touch clears both, which is
+  // what makes the settle interruptible.
+  const settle = useSharedValue(0);
+  const settling = useSharedValue(false);
+  const dragStart = useSharedValue(0);
+  // Velocity is tracked here rather than read from the drag-end event: the
+  // event's units and sign differ between platforms, whereas successive offsets
+  // do not.
+  const velocity = useSharedValue(0);
+  const lastOffset = useSharedValue(0);
+  const lastTimestamp = useSharedValue(0);
 
   const [containerWidth, setContainerWidth] = React.useState(0);
   const [windowStart, setWindowStart] = React.useState(initialIndex);
@@ -208,11 +230,105 @@ const Carousel = <ItemT,>({
 
   const colors = React.useMemo(() => getDefaultCarouselColors(theme), [theme]);
 
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    scrollX.value = event.contentOffset.x;
-  });
-
   const itemSize = strategy?.itemSize ?? 0;
+
+  const lastReportedIndex = React.useRef(initialIndex);
+  const reportIndex = React.useCallback(
+    (index: number) => {
+      if (!onIndexChange) return;
+      const clamped = Math.min(Math.max(index, 0), Math.max(itemCount - 1, 0));
+      if (clamped === lastReportedIndex.current) return;
+      lastReportedIndex.current = clamped;
+      onIndexChange(clamped);
+    },
+    [onIndexChange, itemCount]
+  );
+
+  // The settle is scroll-driven and interruptible, so it belongs in the
+  // imperative tier: a shared value sprung on the M3 spatial spring rather than
+  // the scroll view's own deceleration curve.
+  const springConfig = React.useMemo(
+    () => ({
+      ...toRawSpring(theme.motion.spring.default.spatial),
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    }),
+    [theme.motion.spring.default.spatial, reduceMotion]
+  );
+
+  const springTo = React.useCallback(
+    (target: number) => {
+      'worklet';
+      settling.value = true;
+      settle.value = scrollX.value;
+      settle.value = withSpring(target, springConfig, (finished) => {
+        if (finished) {
+          settling.value = false;
+          if (itemSize > 0) {
+            runOnJS(reportIndex)(Math.round(target / itemSize));
+          }
+        }
+      });
+    },
+    [springConfig, itemSize, reportIndex, settle, settling, scrollX]
+  );
+
+  // Drive the scroll view from the spring while it runs.
+  useAnimatedReaction(
+    () => (settling.value ? settle.value : null),
+    (offset) => {
+      if (offset !== null) {
+        scrollTo(scrollRef, offset, 0, false);
+      }
+    }
+  );
+
+  const scrollHandler = useAnimatedScrollHandler(
+    {
+      onScroll: (event) => {
+        const offset = event.contentOffset.x;
+        const now = performance.now();
+        const elapsed = now - lastTimestamp.value;
+        // Ignore stale gaps; a resumed scroll would otherwise read as a fling.
+        if (elapsed > 0 && elapsed < 100) {
+          const sample = ((offset - lastOffset.value) / elapsed) * 1000;
+          velocity.value = velocity.value * 0.7 + sample * 0.3;
+        }
+        lastOffset.value = offset;
+        lastTimestamp.value = now;
+        scrollX.value = offset;
+      },
+      onBeginDrag: (event) => {
+        // A new touch wins over an in-flight settle.
+        cancelAnimation(settle);
+        settling.value = false;
+        velocity.value = 0;
+        dragStart.value = event.contentOffset.x;
+      },
+      onEndDrag: (event) => {
+        if (!strategy) return;
+        const target = resolveSettleOffset(
+          strategy,
+          event.contentOffset.x,
+          dragStart.value,
+          velocity.value
+        );
+        if (target !== null) {
+          springTo(target);
+        }
+      },
+    },
+    [strategy, springTo]
+  );
+
+  // Only an uncontained carousel still decelerates natively; everywhere else
+  // the settle spring reports the index from its own completion.
+  const handleMomentumEnd = (
+    event: NativeSyntheticEvent<NativeScrollEvent>
+  ) => {
+    if (itemSize > 0) {
+      reportIndex(Math.round(event.nativeEvent.contentOffset.x / itemSize));
+    }
+  };
 
   useAnimatedReaction(
     () => (itemSize > 0 ? Math.floor(scrollX.value / itemSize) : 0),
@@ -228,12 +344,16 @@ const Carousel = <ItemT,>({
     (index: number, animated = true) => {
       if (!strategy) return;
       const clamped = Math.min(Math.max(index, 0), Math.max(itemCount - 1, 0));
-      scrollRef.current?.scrollTo({
-        x: Math.min(clamped * strategy.itemSize, strategy.maxScroll),
-        animated,
-      });
+      const target = Math.min(clamped * strategy.itemSize, strategy.maxScroll);
+      if (animated) {
+        // Programmatic moves settle on the same spring as a fling.
+        runOnUI(springTo)(target);
+      } else {
+        scrollRef.current?.scrollTo({ x: target, animated: false });
+        reportIndex(clamped);
+      }
     },
-    [strategy, itemCount]
+    [strategy, itemCount, springTo, scrollRef, reportIndex]
   );
 
   React.useImperativeHandle(ref, () => ({ scrollToIndex }), [scrollToIndex]);
@@ -245,24 +365,6 @@ const Carousel = <ItemT,>({
     appliedInitialIndex.current = true;
     scrollToIndex(initialIndex, false);
   }, [strategy, initialIndex, scrollToIndex]);
-
-  const lastReportedIndex = React.useRef(initialIndex);
-  const handleScrollSettled = (
-    event: NativeSyntheticEvent<NativeScrollEvent>
-  ) => {
-    if (!strategy || !onIndexChange) return;
-    const index = Math.min(
-      Math.max(
-        Math.round(event.nativeEvent.contentOffset.x / strategy.itemSize),
-        0
-      ),
-      Math.max(itemCount - 1, 0)
-    );
-    if (index !== lastReportedIndex.current) {
-      lastReportedIndex.current = index;
-      onIndexChange(index);
-    }
-  };
 
   const handleLayout = (event: LayoutChangeEvent) => {
     setContainerWidth(event.nativeEvent.layout.width);
@@ -295,9 +397,8 @@ const Carousel = <ItemT,>({
           showsHorizontalScrollIndicator={false}
           scrollEnabled={!disabled}
           onScroll={scrollHandler}
+          onMomentumScrollEnd={handleMomentumEnd}
           scrollEventThrottle={16}
-          onMomentumScrollEnd={handleScrollSettled}
-          onScrollEndDrag={handleScrollSettled}
           aria-label={ariaLabel}
           testID={testID ? `${testID}-scroll-view` : undefined}
           contentContainerStyle={[
