@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { DataTable, Card } from 'react-native-paper';
+import type { DataTableColumn } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -11,6 +12,14 @@ type ItemsState = Array<{
   calories: number;
   fat: number;
 }>;
+
+// Declared once, outside the component: every title and cell reads its width
+// and alignment from here, and the reference has to stay stable.
+const columns: readonly DataTableColumn[] = [
+  { key: 'name', flex: 2 },
+  { key: 'calories', numeric: true },
+  { key: 'fat', numeric: true },
+];
 
 const DataTableExample = () => {
   const [sortAscending, setSortAscending] = React.useState<boolean>(true);
@@ -74,26 +83,30 @@ const DataTableExample = () => {
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
-        <DataTable>
+        <DataTable
+          aria-label="Nutrition"
+          columns={columns}
+          rowCount={sortedItems.length}
+          firstRowIndex={from}
+        >
           <DataTable.Header>
             <DataTable.Title
               sortDirection={sortAscending ? 'ascending' : 'descending'}
               onPress={() => setSortAscending(!sortAscending)}
-              style={styles.first}
             >
               Dessert
             </DataTable.Title>
-            <DataTable.Title numberOfLines={2} numeric>
+            <DataTable.Title numberOfLines={2}>
               Calories per piece
             </DataTable.Title>
-            <DataTable.Title numeric>Fat (g)</DataTable.Title>
+            <DataTable.Title>Fat (g)</DataTable.Title>
           </DataTable.Header>
 
           {sortedItems.slice(from, to).map((item) => (
             <DataTable.Row key={item.key}>
-              <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+              <DataTable.Cell>{item.name}</DataTable.Cell>
+              <DataTable.Cell>{item.calories}</DataTable.Cell>
+              <DataTable.Cell>{item.fat}</DataTable.Cell>
             </DataTable.Row>
           ))}
 
@@ -119,9 +132,6 @@ DataTableExample.title = 'Data Table';
 const styles = StyleSheet.create({
   content: {
     padding: 8,
-  },
-  first: {
-    flex: 2,
   },
 });
 
