@@ -42,7 +42,7 @@ describe('Modal', () => {
   describe('by default', () => {
     it('should render passed children', async () => {
       await render(
-        <Modal visible={true} testID="modal">
+        <Modal visible={true} testID="modal" overlayTestID="backdrop">
           <Text>Children</Text>
         </Modal>
       );
@@ -52,12 +52,14 @@ describe('Modal', () => {
 
     it("should render a backdrop in default theme's color", async () => {
       await render(
-        <Modal visible={true} testID="modal">
+        <Modal visible={true} testID="modal" overlayTestID="backdrop">
           {null}
         </Modal>
       );
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
+      expect(
+        screen.getByTestId('backdrop', { includeHiddenElements: true })
+      ).toHaveStyle({
         backgroundColor: LightTheme.colors.scrim,
       });
     });
@@ -67,6 +69,7 @@ describe('Modal', () => {
         <Modal
           visible={true}
           testID="modal"
+          overlayTestID="backdrop"
           theme={{
             colors: {
               scrim: 'transparent',
@@ -77,14 +80,16 @@ describe('Modal', () => {
         </Modal>
       );
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
+      expect(
+        screen.getByTestId('backdrop', { includeHiddenElements: true })
+      ).toHaveStyle({
         backgroundColor: 'transparent',
       });
     });
 
     it('should receive appropriate top and bottom insets', async () => {
       const { toJSON } = await render(
-        <Modal visible={true} testID="modal">
+        <Modal visible={true} testID="modal" overlayTestID="backdrop">
           {null}
         </Modal>
       );
@@ -93,18 +98,38 @@ describe('Modal', () => {
     });
   });
   describe('when open', () => {
+    it('should hide the scrim from assistive technology', async () => {
+      await render(
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      );
+
+      expect(screen.queryByTestId('backdrop')).not.toBeOnTheScreen();
+      expect(
+        screen.getByTestId('backdrop', { includeHiddenElements: true })
+      ).toBeOnTheScreen();
+    });
+
     describe('if backdrop touched', () => {
       it('should invoke the onDismiss function immediately', async () => {
         const onDismiss = jest.fn();
         const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible
+            onDismiss={onDismiss}
+          >
             {null}
           </Modal>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        await userEvent.press(screen.getByLabelText('Close modal'));
+        await userEvent.press(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        );
 
         expect(onDismiss).toHaveBeenCalled();
 
@@ -114,7 +139,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
 
@@ -126,24 +153,38 @@ describe('Modal', () => {
 
     it('runs the closing animation if visible toggled', async () => {
       const { rerender, toJSON } = await render(
-        <Modal testID="modal" visible onDismiss={() => {}}>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={() => {}}
+        >
           {null}
         </Modal>
       );
 
       expect(toJSON()).toMatchSnapshot();
 
-      await userEvent.press(screen.getByLabelText('Close modal'));
+      await userEvent.press(
+        screen.getByTestId('backdrop', { includeHiddenElements: true })
+      );
 
       await rerender(
-        <Modal testID="modal" visible={false} onDismiss={() => {}}>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible={false}
+          onDismiss={() => {}}
+        >
           {null}
         </Modal>
       );
 
       expect(toJSON()).toMatchSnapshot();
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
+      expect(
+        screen.getByTestId('backdrop', { includeHiddenElements: true })
+      ).toHaveStyle({
         opacity: scrimAlpha,
       });
 
@@ -161,7 +202,12 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible
+            onDismiss={onDismiss}
+          >
             {null}
           </Modal>
         );
@@ -176,7 +222,12 @@ describe('Modal', () => {
       it('invokes onDismiss', async () => {
         const onDismiss = jest.fn();
         const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible
+            onDismiss={onDismiss}
+          >
             {null}
           </Modal>
         );
@@ -193,7 +244,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
 
@@ -210,6 +263,7 @@ describe('Modal', () => {
         const { toJSON } = await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={() => {}}
             dismissable={false}
@@ -220,7 +274,9 @@ describe('Modal', () => {
 
         expect(toJSON()).toMatchSnapshot();
 
-        await userEvent.press(screen.getByLabelText('Close modal'));
+        await userEvent.press(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        );
 
         expect(toJSON()).toMatchSnapshot();
 
@@ -228,7 +284,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
 
@@ -241,6 +299,7 @@ describe('Modal', () => {
         await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={onDismiss}
             dismissableBackButton={false}
@@ -257,7 +316,9 @@ describe('Modal', () => {
         expect(onDismiss).not.toHaveBeenCalled();
 
         // Pressing outside still dismisses it -- only the back button is opted out.
-        await userEvent.press(screen.getByLabelText('Close modal'));
+        await userEvent.press(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        );
 
         await act(() => {
           jest.runAllTimers();
@@ -271,6 +332,7 @@ describe('Modal', () => {
         await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={onDismiss}
             dismissable={false}
@@ -281,7 +343,9 @@ describe('Modal', () => {
 
         expect(onDismiss).not.toHaveBeenCalled();
 
-        await userEvent.press(screen.getByLabelText('Close modal'));
+        await userEvent.press(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        );
 
         expect(onDismiss).not.toHaveBeenCalled();
 
@@ -300,6 +364,7 @@ describe('Modal', () => {
         await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={onDismiss}
             dismissable={false}
@@ -311,7 +376,7 @@ describe('Modal', () => {
         await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
 
         expect(onDismiss).not.toHaveBeenCalled();
-        expect(screen.getByLabelText('Close modal')).toBeOnTheScreen();
+        expect(screen.getByTestId('modal')).toBeOnTheScreen();
       });
     });
 
@@ -320,6 +385,7 @@ describe('Modal', () => {
         const { toJSON } = await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={() => {}}
             dismissable={false}
@@ -340,7 +406,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
 
@@ -353,6 +421,7 @@ describe('Modal', () => {
         await render(
           <Modal
             testID="modal"
+            overlayTestID="backdrop"
             visible
             onDismiss={onDismiss}
             dismissable={false}
@@ -382,7 +451,7 @@ describe('Modal', () => {
     describe('from false to true (closed to open)', () => {
       it('should run fade-in animation on opening', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
+          <Modal testID="modal" overlayTestID="backdrop" visible={false}>
             {null}
           </Modal>
         );
@@ -390,12 +459,14 @@ describe('Modal', () => {
         expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible>
+          <Modal testID="modal" overlayTestID="backdrop" visible>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: 0,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -404,7 +475,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -414,23 +487,27 @@ describe('Modal', () => {
     describe('from true to false (open to closed)', () => {
       it('should run fade-out animation on closing', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
+          <Modal testID="modal" overlayTestID="backdrop" visible>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
+          <Modal testID="modal" overlayTestID="backdrop" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -446,7 +523,12 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         const { rerender } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible
+            onDismiss={onDismiss}
+          >
             {null}
           </Modal>
         );
@@ -454,7 +536,12 @@ describe('Modal', () => {
         expect(onDismiss).not.toHaveBeenCalled();
 
         await rerender(
-          <Modal testID="modal" visible={false} onDismiss={onDismiss}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible={false}
+            onDismiss={onDismiss}
+          >
             {null}
           </Modal>
         );
@@ -470,23 +557,37 @@ describe('Modal', () => {
 
       it('should close even if the dialog is not dismissible', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible dismissable={false}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible
+            dismissable={false}
+          >
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false} dismissable={false}>
+          <Modal
+            testID="modal"
+            overlayTestID="backdrop"
+            visible={false}
+            dismissable={false}
+          >
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -504,23 +605,27 @@ describe('Modal', () => {
     describe('while closing, back to true (visible)', () => {
       it('should keep the modal open', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
+          <Modal testID="modal" overlayTestID="backdrop" visible>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
+          <Modal testID="modal" overlayTestID="backdrop" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -532,7 +637,7 @@ describe('Modal', () => {
         });
 
         await rerender(
-          <Modal testID="modal" visible>
+          <Modal testID="modal" overlayTestID="backdrop" visible>
             {null}
           </Modal>
         );
@@ -541,7 +646,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: scrimAlpha,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -551,20 +658,24 @@ describe('Modal', () => {
     describe('while opening, back to false (hidden)', () => {
       it('should keep the modal closed', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
+          <Modal testID="modal" overlayTestID="backdrop" visible={false}>
             {null}
           </Modal>
         );
 
-        expect(screen.queryByLabelText('Close modal')).not.toBeOnTheScreen();
+        expect(
+          screen.queryByTestId('backdrop', { includeHiddenElements: true })
+        ).not.toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible>
+          <Modal testID="modal" overlayTestID="backdrop" visible>
             {null}
           </Modal>
         );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toHaveStyle({
           opacity: 0,
         });
         expect(toJSON()).toMatchSnapshot();
@@ -575,10 +686,12 @@ describe('Modal', () => {
           jest.advanceTimersToNextTimer(1000);
         });
 
-        expect(screen.getByLabelText('Close modal')).toBeOnTheScreen();
+        expect(
+          screen.getByTestId('backdrop', { includeHiddenElements: true })
+        ).toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
+          <Modal testID="modal" overlayTestID="backdrop" visible={false}>
             {null}
           </Modal>
         );
@@ -587,7 +700,9 @@ describe('Modal', () => {
           jest.runAllTimers();
         });
 
-        expect(screen.queryByLabelText('Close modal')).not.toBeOnTheScreen();
+        expect(
+          screen.queryByTestId('backdrop', { includeHiddenElements: true })
+        ).not.toBeOnTheScreen();
       });
     });
   });

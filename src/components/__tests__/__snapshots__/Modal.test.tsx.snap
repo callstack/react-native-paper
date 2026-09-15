@@ -20,7 +20,6 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -39,6 +38,7 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -63,6 +63,7 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -202,7 +203,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -220,7 +220,8 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -245,6 +246,7 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -384,7 +386,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -402,7 +403,8 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -427,6 +429,7 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -566,7 +569,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -584,7 +586,8 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -609,6 +612,7 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -748,7 +752,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -766,7 +769,8 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -791,6 +795,7 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -930,7 +935,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -948,7 +952,8 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -973,6 +978,7 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -1112,7 +1118,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -1130,7 +1135,8 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1155,6 +1161,7 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -1295,7 +1302,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -1314,6 +1320,7 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1338,6 +1345,7 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -1478,7 +1486,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -1497,6 +1504,7 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1521,6 +1529,7 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -1661,7 +1670,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -1680,6 +1688,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1704,6 +1713,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -1844,7 +1854,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -1863,6 +1872,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1887,6 +1897,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2027,7 +2038,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2046,6 +2056,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2070,6 +2081,7 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2210,7 +2222,6 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2229,6 +2240,7 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2253,6 +2265,7 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2393,7 +2406,6 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2412,6 +2424,7 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2436,6 +2449,7 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2576,7 +2590,6 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2595,6 +2608,7 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2619,6 +2633,7 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2759,7 +2774,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2778,6 +2792,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2802,6 +2817,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -2942,7 +2958,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -2961,6 +2976,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -2985,6 +3001,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -3125,7 +3142,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -3144,6 +3160,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -3168,6 +3185,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -3308,7 +3326,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -3327,6 +3344,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -3351,6 +3369,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -3491,7 +3510,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -3510,6 +3528,7 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -3534,6 +3553,7 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -3674,7 +3694,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -3693,6 +3712,7 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -3717,6 +3737,7 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -3856,7 +3877,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -3874,7 +3894,8 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -3899,6 +3920,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -4038,7 +4060,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -4056,7 +4077,8 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         "text": undefined,
       }
     }
-    accessible={false}
+    accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -4081,6 +4103,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -4221,7 +4244,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -4240,6 +4262,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -4264,6 +4287,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
@@ -4404,7 +4428,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
   testID="modal"
 >
   <View
-    accessibilityLabel="Close modal"
     accessibilityState={
       {
         "busy": undefined,
@@ -4423,6 +4446,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
       }
     }
     accessible={true}
+    aria-hidden={true}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -4447,6 +4471,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         {},
       ]
     }
+    testID="backdrop"
   />
   <View
     pointerEvents="box-none"
