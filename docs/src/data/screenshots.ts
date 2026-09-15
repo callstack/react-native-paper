@@ -71,12 +71,6 @@ export const screenshots = {
   'Drawer.CollapsedItem': 'screenshots/drawer-collapsed.png',
   'Drawer.Item': 'screenshots/drawer-item.png',
   'Drawer.Section': 'screenshots/drawer-section.png',
-  FAB: {
-    'all variants': 'screenshots/fab-1.png',
-    'all sizes': 'screenshots/fab-2.png',
-    'all modes': 'screenshots/fab-4.png',
-    'with label': 'screenshots/fab-3.png',
-  },
   AnimatedFAB: 'screenshots/animated-fab.gif',
   'FAB.Group': 'screenshots/fab-group.gif',
   Icon: 'screenshots/icon.png',
@@ -137,12 +131,6 @@ export const screenshots = {
   Surface: {
     elevated: 'screenshots/surface-elevated-full-width.png',
     flat: 'screenshots/surface-flat-full-width.png',
-  },
-  Switch: {
-    'Android (enabled)': 'screenshots/switch-enabled.android.png',
-    'Android (disabled)': 'screenshots/switch-disabled.android.png',
-    'iOS (enabled)': 'screenshots/switch-enabled.ios.png',
-    'iOS (disabled)': 'screenshots/switch-disabled.ios.png',
   },
   Text: 'screenshots/typography.png',
   TextInput: {
