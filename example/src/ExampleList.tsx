@@ -45,6 +45,7 @@ import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
+import ToolbarExample from './Examples/ToolbarExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
@@ -84,6 +85,7 @@ export const mainExamples = {
   Text: TextExample,
   TextInput: TextInputExample,
   ToggleButton: ToggleButtonExample,
+  Toolbar: ToolbarExample,
   TooltipExample,
   TouchableRipple: TouchableRippleExample,
   Theme: ThemeExample,
