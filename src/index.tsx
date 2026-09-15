@@ -47,7 +47,6 @@ export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
-export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 
@@ -138,9 +137,6 @@ export type {
   TextInputAccessoryProps,
   TextInputIconProps,
 } from './components/TextInput/TextInputIcon';
-export type { Props as ToggleButtonProps } from './components/ToggleButton/ToggleButton';
-export type { Props as ToggleButtonGroupProps } from './components/ToggleButton/ToggleButtonGroup';
-export type { Props as ToggleButtonRowProps } from './components/ToggleButton/ToggleButtonRow';
 export type { Props as TouchableRippleProps } from './components/TouchableRipple/TouchableRipple';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
