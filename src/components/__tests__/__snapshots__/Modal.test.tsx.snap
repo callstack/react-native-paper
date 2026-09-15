@@ -186,7 +186,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -368,7 +367,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -550,7 +548,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -732,7 +729,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -914,7 +910,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -1096,7 +1091,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -3826,7 +3820,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="auto"
   style={
     [
@@ -4008,7 +4001,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
 <View
   aria-live="polite"
   collapsable={false}
-  onAccessibilityEscape={[Function]}
   pointerEvents="none"
   style={
     [

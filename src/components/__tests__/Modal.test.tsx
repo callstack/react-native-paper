@@ -2,7 +2,7 @@ import { BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
@@ -156,6 +156,22 @@ describe('Modal', () => {
       expect(toJSON()).toBeNull();
     });
 
+    describe('if closed via the accessibility escape gesture', () => {
+      it('should invoke the onDismiss function', async () => {
+        const onDismiss = jest.fn();
+
+        await render(
+          <Modal testID="modal" visible onDismiss={onDismiss}>
+            {null}
+          </Modal>
+        );
+
+        await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
+
+        expect(onDismiss).toHaveBeenCalledTimes(1);
+      });
+    });
+
     describe('if closed via Android back button', () => {
       it('invokes onDismiss', async () => {
         const onDismiss = jest.fn();
@@ -274,6 +290,28 @@ describe('Modal', () => {
         });
 
         expect(onDismiss).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('if closed via the accessibility escape gesture', () => {
+      it('should keep the modal on screen', async () => {
+        const onDismiss = jest.fn();
+
+        await render(
+          <Modal
+            testID="modal"
+            visible
+            onDismiss={onDismiss}
+            dismissable={false}
+          >
+            {null}
+          </Modal>
+        );
+
+        await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
+
+        expect(onDismiss).not.toHaveBeenCalled();
+        expect(screen.getByLabelText('Close modal')).toBeOnTheScreen();
       });
     });
 

@@ -235,7 +235,7 @@ function Modal({
       pointerEvents={visible ? 'auto' : 'none'}
       aria-live="polite"
       style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={onDismissCallback}
+      onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
       testID={testID}
     >
       <AnimatedPressable
