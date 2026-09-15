@@ -81,6 +81,14 @@ export type Props<T extends string = string> = {
 } & ConditionalValue<T>;
 
 /**
+ * @deprecated Segmented buttons are deprecated in the Material Design 3 spec
+ * and replaced by the Connected Button Group. Use `ConnectedButtonGroup`
+ * instead — it takes the same `buttons`, `value` and `onValueChange` props for
+ * both the single- and multi-select models. The only prop without a direct
+ * equivalent is `density`: pick a `size` from the Material Design 3
+ * button-group scale instead, where the default `"small"` (40dp) is the
+ * closest match to a `"regular"` density segmented button.
+ *
  * Segmented buttons can be used to select options, switch views or sort elements.</br>
  *
  * ## Usage
