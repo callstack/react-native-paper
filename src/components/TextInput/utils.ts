@@ -168,37 +168,37 @@ export const getIconColor = ({
 };
 
 /**
- * Returns the raw outline color for a filled field. The disabled state's
- * alpha is intentionally NOT baked in here — it is applied via the `opacity`
- * style on the (childless) outline View so the value can be a `PlatformColor`
- * on Android, which the `color` library cannot parse at runtime.
+ * Resolve the filled indicator or outlined border color. Disabled opacity is
+ * applied by the outline View so native PlatformColor values stay intact.
  */
 export const getOutlineColor = ({
   theme,
   hasError,
   isFocused,
   isDisabled,
+  isHovered = false,
+  variant = 'outlined',
 }: {
   theme: InternalTheme;
   isFocused: boolean;
   hasError: boolean;
   isDisabled: boolean;
+  isHovered?: boolean;
+  variant?: TextInputVariant;
 }) => {
-  const {
-    colors: { error, onSurface, primary, outline },
-  } = theme;
+  const { colors } = theme;
 
+  if (isDisabled) return colors.onSurface;
   if (hasError) {
-    return error;
+    return variant === 'filled' && isHovered && !isFocused
+      ? colors.onErrorContainer
+      : colors.error;
   }
-  if (isDisabled) {
-    return onSurface;
+  if (isFocused) return colors.primary;
+  if (variant === 'filled') {
+    return isHovered ? colors.onSurface : colors.onSurfaceVariant;
   }
-  if (isFocused) {
-    return primary;
-  }
-
-  return outline;
+  return colors.outline;
 };
 
 /**
@@ -330,6 +330,8 @@ export const getFilledTextInputData = (
     hasError,
     isFocused: false,
     isDisabled,
+    variant: 'filled',
+    isHovered: api.isHovered,
   });
 
   const activeOutlineColor = getOutlineColor({
@@ -363,10 +365,7 @@ export const getFilledTextInputData = (
     animatedLabelWrapperStyle,
   ];
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    filledStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = filledStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -491,10 +490,7 @@ export const getOutlinedTextInputData = (
    * Variant-specific styles
    */
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    outlinedStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = outlinedStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -568,65 +564,74 @@ export const getOutlinedTextInputData = (
 
 export const getAccessibilityData = ({
   data,
+  id,
   hasError,
   hasCounter,
   isDisabled,
   inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
-  const { label, supportingText, ...props } = data;
-
-  const maxLength = props.maxLength;
-  const shouldEvaluateCounter = !!maxLength && hasCounter;
-  const isEmptyString = inputLength === 0;
-  const isCounterExceeded = shouldEvaluateCounter && inputLength > maxLength;
-  const isCounterReached = shouldEvaluateCounter && inputLength === maxLength;
-  const isInvalid = hasError || isCounterExceeded;
-  const isSupportingTextHidden = !!(supportingText && !hasError);
-
-  const chunks: string[] = [];
-
-  if (label) {
-    chunks.push(label);
-  }
-
-  if (isSupportingTextHidden) {
-    chunks.push(supportingText);
-  }
-
-  if (isEmptyString && props.placeholder && !hasError) {
-    chunks.push(props.placeholder);
-  }
-
-  const ariaLabel = chunks.length > 0 ? chunks.join(', ') : label;
-
-  let hint: string | undefined;
-
-  if (isCounterExceeded && !(hasError && supportingText)) {
-    hint = `Character limit exceeded ${inputLength} of ${maxLength}`;
-  }
-
-  const counterAccessibilityLabel = shouldEvaluateCounter
+  const { label, supportingText, maxLength, ...props } = data;
+  const isCounterExceeded =
+    hasCounter && maxLength != null && inputLength > maxLength;
+  const counterAccessibilityLabel = hasCounter
     ? isCounterExceeded
       ? `Character limit exceeded ${inputLength} of ${maxLength}`
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
+  const labelId = `${id}-label`;
+  const supportingTextId = `${id}-supporting-text`;
+  const counterId = `${id}-counter`;
+  const describedBy =
+    [
+      props['aria-describedby'],
+      supportingText ? supportingTextId : undefined,
+      hasCounter ? counterId : undefined,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
+  const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
+  const labelledBy =
+    props['aria-labelledby'] ??
+    (Platform.OS === 'web' &&
+    label &&
+    explicitLabel == null &&
+    !props.accessibilityLabelledBy
+      ? labelId
+      : undefined);
+
+  // React Native 0.85 does not implement described-by relationships on native.
+  // Expose the same description as a hint without changing the field's name.
+  const hint =
+    Platform.OS === 'web'
+      ? props.accessibilityHint
+      : [props.accessibilityHint, supportingText, counterAccessibilityLabel]
+          .filter(Boolean)
+          .join(', ') || undefined;
+
   return {
     input: {
-      'aria-label': ariaLabel,
-      'aria-valuemax': isCounterReached ? maxLength : undefined,
-      'aria-valuenow': isCounterReached ? inputLength : undefined,
-      'aria-disabled': isDisabled,
-      'aria-invalid': isInvalid,
+      'aria-label': explicitLabel ?? label,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
+      'aria-disabled': props['aria-disabled'] ?? isDisabled,
+      'aria-invalid': props['aria-invalid'] ?? (hasError || isCounterExceeded),
       accessibilityHint: hint,
     },
+    label: { nativeID: labelId },
     supportingText: {
-      'aria-hidden': isSupportingTextHidden,
-      'aria-live': hasError && supportingText ? 'polite' : undefined,
+      nativeID: supportingTextId,
+      role: hasError && supportingText ? 'alert' : undefined,
+      accessibilityLiveRegion:
+        Platform.OS === 'android' && hasError && supportingText
+          ? 'assertive'
+          : undefined,
     },
     counter: {
+      nativeID: counterId,
       'aria-label': counterAccessibilityLabel,
-      'aria-live': 'polite',
+      'aria-live': Platform.OS === 'web' ? 'polite' : undefined,
+      accessibilityLiveRegion: Platform.OS === 'android' ? 'polite' : undefined,
     },
   };
 };

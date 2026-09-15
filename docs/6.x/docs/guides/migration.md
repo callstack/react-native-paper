@@ -258,6 +258,20 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
+`TextInput.Icon` is decorative when no press handlers are provided. Decorative icons are
+hidden from assistive technology and do not create a keyboard focus stop.
+Icons with `onPress`, `onLongPress`, `onPressIn`, or `onPressOut` require an accessible name:
+
+```tsx
+<TextInput
+  label="Search"
+  startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
+  endAccessory={(props) => (
+    <TextInput.Icon {...props} icon="close" aria-label="Clear search" onPress={() => setValue('')} />
+  )}
+/>
+```
+
 #### Label and supporting text
 
 - **`label: React.Element | string`** → **`string`**
@@ -284,6 +298,26 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
   supportingText="Enter a valid email"
 />
 ```
+
+Supporting text and the character counter describe the field without becoming
+part of its accessible name. On web, their generated `nativeID` values are
+referenced by the input's `aria-describedby`. Additional IDs passed through
+`aria-describedby` are preserved. On Android and iOS, these descriptions are
+included in `accessibilityHint`, alongside any hint you provide, because React
+Native does not support native described-by relationships.
+
+Error supporting text uses `role="alert"`. Android uses an assertive live region;
+iOS announces changed error messages through `AccessibilityInfo`.
+Custom input renderers should forward the accessibility props they receive.
+Explicit `aria-invalid` values are preserved; when omitted, validity is derived
+from `error` and the character counter.
+Empty fields remain visible to native accessibility before focus and after
+clearing. The field content no longer fades with the floating label.
+
+The filled resting indicator now uses `onSurfaceVariant` and changes to
+`onSurface` on hover. An invalid filled field uses `error` at rest and
+`onErrorContainer` on hover. The focused indicator continues to use `primary` (or
+`error` for an invalid field). Outlined fields continue to use `outline` at rest.
 
 #### Removed props
 
