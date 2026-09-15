@@ -1,6 +1,8 @@
 import { Text, View } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import Carousel from '../Carousel/Carousel';
@@ -404,5 +406,19 @@ describe('CarouselTokens', () => {
 
   it('disables at the spec opacity', () => {
     expect(CarouselTokens.disabledContainerOpacity).toBe(0.38);
+  });
+
+  it('declares no token the component does not consume', () => {
+    const source = [
+      readFileSync(
+        join(__dirname, '../Carousel/CarouselItemShell.tsx'),
+        'utf8'
+      ),
+      readFileSync(join(__dirname, '../Carousel/utils.ts'), 'utf8'),
+    ].join('\n');
+
+    for (const name of Object.keys(CarouselTokens)) {
+      expect(source).toContain(name);
+    }
   });
 });

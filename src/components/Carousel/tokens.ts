@@ -15,31 +15,39 @@ const shape = {
   containerShape: 'extraLarge',
 } as const satisfies Record<string, ShapeToken>;
 
+/**
+ * Two groups from the spec table have no consumer on this side and are
+ * deliberately not mirrored here:
+ *
+ * - `label-text.*`. MDC draws an item's label itself; in Paper the item's
+ *   content — text included — is rendered by the caller, so there is nothing
+ *   for a label colour to paint. `Text` already resolves to `onSurface`, the
+ *   value the token carries, and the disabled state dims the content as a
+ *   whole through `disabledContainerOpacity` rather than per-run.
+ * - `dragged.*`. A drag on a carousel item scrolls the strip, and React Native
+ *   hands the responder to the scroll view, which ends the item's press. There
+ *   is no interaction left for a dragged state to describe.
+ */
 const colors = {
   containerColor: 'surfaceContainerHigh',
-  labelTextColor: 'onSurface',
   outlineColor: 'outlineVariant',
   focusIndicatorColor: 'secondary',
   hoverStateLayerColor: 'onSurface',
   focusStateLayerColor: 'onSurface',
   pressedStateLayerColor: 'onSurface',
-  draggedStateLayerColor: 'onSurface',
-  disabledContainerColor: 'onSurface',
-  disabledLabelTextColor: 'onSurface',
 } as const satisfies Record<string, ColorRole>;
 
+/** Hover is the only state that lifts an item off the surface. */
 const elevations = {
   containerElevation: 0,
   hoverContainerElevation: 1,
   focusContainerElevation: 0,
   pressedContainerElevation: 0,
-  draggedContainerElevation: 0,
 } as const satisfies Record<string, Elevation>;
 
 const dimensions = {
   outlineWidth: 1,
   disabledContainerOpacity: 0.38,
-  disabledLabelTextOpacity: 0.38,
 } as const;
 
 export const CarouselTokens = {

@@ -11,7 +11,6 @@ export type CarouselColors = {
   hoverStateLayerColor: ColorValue;
   focusStateLayerColor: ColorValue;
   pressedStateLayerColor: ColorValue;
-  draggedStateLayerColor: ColorValue;
 };
 
 export function getDefaultCarouselColors(theme: InternalTheme): CarouselColors {
@@ -24,7 +23,6 @@ export function getDefaultCarouselColors(theme: InternalTheme): CarouselColors {
     hoverStateLayerColor: c[t.hoverStateLayerColor],
     focusStateLayerColor: c[t.focusStateLayerColor],
     pressedStateLayerColor: c[t.pressedStateLayerColor],
-    draggedStateLayerColor: c[t.draggedStateLayerColor],
   };
 }
 

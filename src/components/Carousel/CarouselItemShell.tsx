@@ -144,6 +144,15 @@ function CarouselItemShell<ItemT>({
       ? colors.focusStateLayerColor
       : colors.hoverStateLayerColor;
   const focusRingOpacity = { opacity: focused && interactive ? 1 : 0 };
+  const elevation = !interactive
+    ? CarouselTokens.containerElevation
+    : pressed
+      ? CarouselTokens.pressedContainerElevation
+      : focused
+        ? CarouselTokens.focusContainerElevation
+        : hovered
+          ? CarouselTokens.hoverContainerElevation
+          : CarouselTokens.containerElevation;
 
   const mask = React.useMemo(
     () => ({ rect: maskRect, expansion, width: contentWidth, height }),
@@ -178,11 +187,7 @@ function CarouselItemShell<ItemT>({
       ]}
     >
       <Surface
-        elevation={
-          hovered && interactive
-            ? CarouselTokens.hoverContainerElevation
-            : CarouselTokens.containerElevation
-        }
+        elevation={elevation}
         backgroundColor={colors.containerColor}
         borderRadius={borderRadius}
         style={[styles.mask, { height }, maskStyle]}
