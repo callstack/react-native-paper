@@ -294,6 +294,7 @@ const DataTablePagination = ({
         onItemsPerPageChange && (
           <View aria-label="Options Select" style={styles.optionsContainer}>
             <Text
+              variant="bodySmall"
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
               aria-label={
@@ -312,6 +313,7 @@ const DataTablePagination = ({
           </View>
         )}
       <Text
+        variant="bodySmall"
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
         aria-label={accessibilityLabel || 'label'}
@@ -347,7 +349,6 @@ const styles = StyleSheet.create({
     marginVertical: 6,
   },
   label: {
-    fontSize: 12,
     marginRight: 16,
   },
   button: {

@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
+import { act } from '@testing-library/react-native';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
@@ -20,6 +22,46 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
+  const sortIcon = () => {
+    const node = screen.getByText('arrow-up', {
+      includeHiddenElements: true,
+    }).parent;
+
+    if (!node) {
+      throw new Error('Sort icon not found');
+    }
+
+    return node;
+  };
+
+  it('uses zero-duration sort animation when animation scale is disabled', async () => {
+    const view = await render(
+      <DataTable.Title
+        sortDirection="ascending"
+        theme={{ animation: { scale: 0 } }}
+      >
+        Dessert
+      </DataTable.Title>
+    );
+
+    await view.rerender(
+      <DataTable.Title
+        sortDirection="descending"
+        theme={{ animation: { scale: 0 } }}
+      >
+        Dessert
+      </DataTable.Title>
+    );
+    await act(() => {
+      jest.advanceTimersByTime(16);
+    });
+
+    // A disabled animation scale lands on the final rotation within a frame.
+    expect(getAnimatedStyle(sortIcon())).toMatchObject({
+      transform: [{ rotate: '180deg' }],
+    });
+  });
+
   it('renders data table title with sort icon', async () => {
     const tree = (
       await render(
