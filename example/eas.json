@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "production": {
+      "node": "24.13.0",
+      "autoIncrement": true,
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "track": "production"
+      },
+      "ios": {
+        "ascAppId": "1548934513"
+      }
+    },
+    "preview": {
+      "extends": "production",
+      "android": {
+        "track": "internal"
+      }
+    }
+  }
+}
