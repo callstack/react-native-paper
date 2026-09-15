@@ -1,5 +1,3 @@
-import { StyleSheet } from 'react-native';
-
 import { describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
@@ -11,12 +9,6 @@ import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
-
-const styles = StyleSheet.create({
-  flexing: {
-    flexDirection: 'row-reverse',
-  },
-});
 
 it('renders text button by default', async () => {
   const tree = (await render(<Button>Text Button</Button>)).toJSON();
@@ -59,7 +51,7 @@ it('renders button with icon', async () => {
 it('renders button with icon in reverse order', async () => {
   const tree = (
     await render(
-      <Button icon="chevron-right" contentStyle={styles.flexing}>
+      <Button icon="chevron-right" iconPosition="trailing">
         Right Icon
       </Button>
     )

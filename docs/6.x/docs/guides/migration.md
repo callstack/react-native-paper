@@ -10,6 +10,7 @@ React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-r
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
+- `Appbar` and `Appbar.Header`: `style`
 - `Appbar.Action` and `Appbar.BackAction`: `style`
 - `Badge`: `style`
 - `Banner`: `style`
@@ -58,6 +59,8 @@ You can use an elevation level from `0` to `5` instead. Changes to the elevation
 
 The following component style props no longer support overriding their background color or border radius:
 
+- `Appbar` and `Appbar.Header`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: background color
 - `Banner`
 - `Button`
 - `Card`
@@ -67,7 +70,12 @@ The following component style props no longer support overriding their backgroun
 - `Searchbar`
 - `Snackbar`
 
-You can use the component's color prop where available, or override the corresponding theme colors.
+You can use the component's color prop where available, or override the corresponding theme colors. See the component sections below for details.
+
+Components no longer read values from the `style` prop to derive other styles, since this is not possible with animated styles. The affected props have been replaced with dedicated props:
+
+- `Button`: `iconPosition` replaces `contentStyle={{ flexDirection: 'row-reverse' }}`
+- `Card`: the outline color is controlled by `theme.colors.outline` instead of `style.borderColor`
 
 ### Test IDs
 
@@ -111,9 +119,76 @@ Some components now accept explicit `testID` props for their interactable elemen
 
 ### Appbar
 
-The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+- The `style` props for `Appbar` and `Appbar.Header` no longer configure the background color or border radius. Use the `backgroundColor` prop and the border radius props (`borderRadius`, `borderTopLeftRadius`, `borderCurve` etc.) instead.
+- The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+- The default height of `Appbar` now includes the `safeAreaInsets`, so the content area keeps the height of the selected `mode`.
+- The `height` specified in `style` for `Appbar.Header` now includes the status bar height. Previously, the status bar height was added to it automatically.
 
-The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+e.g.:
+
+```diff
+<Appbar.Header
+- style={{ backgroundColor: 'red', borderBottomLeftRadius: 16 }}
++ backgroundColor="red"
++ borderBottomLeftRadius={16}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+### Avatar
+
+The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.
+
+e.g.:
+
+```diff
+<Avatar.Text
+  label="XD"
+- style={{ backgroundColor: 'red' }}
++ backgroundColor="red"
+/>
+```
+
+### Button
+
+- The `iconPosition` prop controls the placement of the icon. Use `iconPosition="trailing"` to display the icon after the label instead of `contentStyle={{ flexDirection: 'row-reverse' }}`.
+- The `color` and `fontSize` in `labelStyle` no longer apply to the icon and loading indicator. Use the `textColor` prop to customize the icon color along with the label color.
+
+e.g.:
+
+```diff
+<Button
+  icon="camera"
+- contentStyle={{ flexDirection: 'row-reverse' }}
+- labelStyle={{ color: 'red' }}
++ iconPosition="trailing"
++ textColor="red"
+>
+  Take photo
+</Button>
+```
+
+### Card
+
+- The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Override `theme.colors.outline` using the `theme` prop instead.
+- `Card.Cover` no longer applies the border radius from `style` to the image directly. The image is clipped by the container, so any border radius passed in `style` still applies.
+
+e.g.:
+
+```diff
+<Card
+  mode="outlined"
+- style={{ borderColor: 'red' }}
++ theme={{ colors: { outline: 'red' } }}
+>
+  <Card.Content>...</Card.Content>
+</Card>
+```
+
+### Tooltip
+
+`Tooltip` now passes a `ref` to the wrapped element to measure its position on the screen. When wrapping a custom component, make sure it forwards the `ref` to its root view. Otherwise the tooltip falls back to measuring its own wrapper.
 
 ### Surface
 

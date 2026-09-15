@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
@@ -23,7 +23,16 @@ export type Props = ViewProps & {
    * Custom color for the icon.
    */
   color?: string;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Background color of the avatar.
+   */
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the icon container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * @optional
    */
@@ -47,12 +56,12 @@ const Avatar = ({
   icon,
   size = defaultSize,
   style,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
+  const backgroundColor = customBackgroundColor ?? theme.colors.primary;
   const textColor =
     rest.color ??
     getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
@@ -67,7 +76,7 @@ const Avatar = ({
           backgroundColor,
         },
         styles.container,
-        restStyle,
+        style,
       ]}
       {...rest}
     >

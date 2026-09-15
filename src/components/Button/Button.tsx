@@ -62,6 +62,12 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   icon?: IconSource;
   /**
+   * Position of the icon relative to the label.
+   * - `leading` - icon is displayed before the label (default).
+   * - `trailing` - icon is displayed after the label.
+   */
+  iconPosition?: 'leading' | 'trailing';
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -112,7 +118,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width or to set a custom padding.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -167,6 +173,7 @@ const Button = ({
   dark,
   loading,
   icon,
+  iconPosition = 'leading',
   buttonColor: customButtonColor,
   textColor: customTextColor,
   children,
@@ -263,9 +270,6 @@ const Button = ({
 
   const touchableStyle = { borderRadius };
 
-  const { color: customLabelColor, fontSize: customLabelSize } =
-    StyleSheet.flatten(labelStyle) || {};
-
   const font = theme.fonts.labelLarge;
 
   const textStyle = {
@@ -273,20 +277,20 @@ const Button = ({
     ...font,
   };
 
-  const iconStyle =
-    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
-      ? [
-          styles.iconReverse,
-          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
-        ]
-      : [
-          styles.icon,
-          styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
-        ];
+  const isIconTrailing = iconPosition === 'trailing';
+
+  const iconStyle = isIconTrailing
+    ? [
+        styles.iconReverse,
+        styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+        isMode('text') &&
+          styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
+      ]
+    : [
+        styles.icon,
+        styles[`md3Icon${compact ? 'Compact' : ''}`],
+        isMode('text') && styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
+      ];
 
   return (
     <Surface
@@ -339,28 +343,22 @@ const Button = ({
         theme={theme}
         ref={touchableRef}
       >
-        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
+        <View
+          style={[
+            isIconTrailing ? styles.contentReverse : styles.content,
+            { opacity: textOpacity },
+            contentStyle,
+          ]}
+        >
           {icon && loading !== true ? (
             <View style={iconStyle}>
-              <Icon
-                source={icon}
-                size={customLabelSize ?? iconSize}
-                color={
-                  typeof customLabelColor === 'string'
-                    ? customLabelColor
-                    : textColor
-                }
-              />
+              <Icon source={icon} size={iconSize} color={textColor} />
             </View>
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={customLabelSize ?? iconSize}
-              color={
-                typeof customLabelColor === 'string'
-                  ? customLabelColor
-                  : textColor
-              }
+              size={iconSize}
+              color={textColor}
               style={iconStyle}
             />
           ) : null}
@@ -400,6 +398,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contentReverse: {
+    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
   },

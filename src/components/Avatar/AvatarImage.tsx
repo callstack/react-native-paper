@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, View } from 'react-native';
 import type {
+  ColorValue,
   ImageProps,
   ImageSourcePropType,
   StyleProp,
@@ -28,7 +29,16 @@ export type Props = ViewProps & {
    * Size of the avatar.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Background color of the avatar.
+   */
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the image container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * Invoked on load error.
    */
@@ -83,12 +93,13 @@ const AvatarImage = ({
   onLoadEnd,
   onLoadStart,
   onProgress,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   testID,
   ...rest
 }: Props) => {
   const { colors } = useInternalTheme(themeOverrides);
-  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
+  const backgroundColor = customBackgroundColor ?? colors.primary;
 
   return (
     <View

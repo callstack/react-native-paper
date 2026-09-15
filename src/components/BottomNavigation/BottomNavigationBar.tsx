@@ -433,15 +433,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const {
-    backgroundColor: customBackground,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as {
-    backgroundColor?: ColorValue;
-  };
-
-  const backgroundColor = customBackground || colors.surfaceContainer;
-
   const activeTintColor = getActiveTintColor({
     activeColor,
     theme,
@@ -472,6 +463,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       testID={testID}
       style={[
         styles.bar,
+        { backgroundColor: colors.surfaceContainer },
         keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
           ? {
               // When the keyboard is shown, slide down the navigation bar
@@ -493,7 +485,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       ]}
       onLayout={onLayout}
     >
-      <Animated.View style={[styles.barContent, { backgroundColor }]}>
+      <View style={styles.barContent}>
         <View
           style={[
             styles.items,
@@ -763,7 +755,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             });
           })}
         </View>
-      </Animated.View>
+      </View>
     </Animated.View>
   );
 };

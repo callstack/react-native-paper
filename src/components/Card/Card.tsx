@@ -191,15 +191,10 @@ const Card = ({
       : null
   );
 
-  const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
+  const { backgroundColor, borderColor } = getCardColors({
     theme,
     mode: cardMode,
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-  const { borderColor = themedBorderColor } = flattenedStyles;
 
   const borderRadius = theme.shapes.corner.medium;
 

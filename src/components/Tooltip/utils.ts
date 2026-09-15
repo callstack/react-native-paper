@@ -1,5 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
+import { Dimensions } from 'react-native';
+import type { LayoutRectangle, View } from 'react-native';
 
 type ChildrenMeasurement = {
   width: number;
@@ -17,7 +17,7 @@ export type Measurement = {
 };
 
 export type TooltipChildProps = {
-  style: StyleProp<ViewStyle>;
+  ref?: React.Ref<View>;
   disabled?: boolean;
   onPress?: () => void;
   onHoverIn?: () => void;
@@ -85,52 +85,15 @@ const getTooltipYPosition = (
   return childrenY + childrenHeight;
 };
 
-const getChildrenMeasures = (
-  style: StyleProp<ViewStyle>,
-  measures: ChildrenMeasurement
-): ChildrenMeasurement => {
-  const { position, top, bottom, left, right } = StyleSheet.flatten(style);
-
-  if (position === 'absolute') {
-    let pageX = 0;
-    let pageY = measures.pageY;
-    let height = 0;
-    let width = 0;
-    if (typeof left === 'number') {
-      pageX = left;
-      width = 0;
-    }
-    if (typeof right === 'number') {
-      pageX = measures.width - right;
-      width = 0;
-    }
-    if (typeof top === 'number') {
-      pageY = pageY + top;
-    }
-    if (typeof bottom === 'number') {
-      pageY = pageY - bottom;
-    }
-
-    return { pageX, pageY, width, height };
-  }
-
-  return measures;
-};
-
-export const getTooltipPosition = (
-  { children, tooltip, measured }: Measurement,
-  component: React.ReactElement<{
-    style: StyleProp<ViewStyle>;
-  }>
-): {} | { left: number; top: number } => {
+export const getTooltipPosition = ({
+  children,
+  tooltip,
+  measured,
+}: Measurement): {} | { left: number; top: number } => {
   if (!measured) return {};
-  let measures = children;
-  if (component.props.style) {
-    measures = getChildrenMeasures(component.props.style, children);
-  }
 
   return {
-    left: getTooltipXPosition(measures, tooltip),
-    top: getTooltipYPosition(measures, tooltip),
+    left: getTooltipXPosition(children, tooltip),
+    top: getTooltipYPosition(children, tooltip),
   };
 };
