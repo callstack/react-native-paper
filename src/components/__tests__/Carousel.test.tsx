@@ -280,15 +280,17 @@ describe('Carousel', () => {
     await fireEvent(screen.getByTestId('carousel'), 'layout', layout(width));
   };
 
-  it('renders nothing until it has been measured', async () => {
+  it('renders no items until it has been measured', async () => {
     await renderCarousel();
-    expect(screen.queryByTestId('carousel-scroll-view')).toBeNull();
+    // The scroll view is always present; the arrangement needs a width first.
+    expect(screen.getByTestId('carousel')).toBeTruthy();
+    expect(screen.queryByText('a')).toBeNull();
   });
 
   it('renders items once measured', async () => {
     await renderCarousel();
     await measure();
-    expect(screen.getByTestId('carousel-scroll-view')).toBeTruthy();
+    expect(screen.getByTestId('carousel')).toBeTruthy();
     expect(screen.getByText('a')).toBeTruthy();
   });
 
@@ -361,11 +363,9 @@ describe('Carousel', () => {
     const { itemSize } = strategyFor('multi-browse', {
       itemCount: data.length,
     });
-    await fireEvent(
-      screen.getByTestId('carousel-scroll-view'),
-      'momentumScrollEnd',
-      { nativeEvent: { contentOffset: { x: itemSize * 2, y: 0 } } }
-    );
+    await fireEvent(screen.getByTestId('carousel'), 'momentumScrollEnd', {
+      nativeEvent: { contentOffset: { x: itemSize * 2, y: 0 } },
+    });
     expect(onIndexChange).toHaveBeenCalledWith(2);
   });
 });

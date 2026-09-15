@@ -37,7 +37,6 @@ export type CarouselItemShellProps<ItemT> = {
   disabled: boolean;
   onPress?: (item: ItemT, index: number) => void;
   theme: InternalTheme;
-  testID?: string;
 };
 
 /**
@@ -63,7 +62,6 @@ function CarouselItemShell<ItemT>({
   disabled,
   onPress,
   theme: themeOverride,
-  testID,
 }: CarouselItemShellProps<ItemT>) {
   const theme = useInternalTheme(themeOverride);
   const [hovered, setHovered] = React.useState(false);
@@ -178,7 +176,6 @@ function CarouselItemShell<ItemT>({
 
   return (
     <Animated.View
-      testID={testID}
       style={[
         styles.box,
         // Descending: an item that is collapsing passes under the one before it.

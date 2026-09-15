@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   StyleSheet,
-  View,
   type LayoutChangeEvent,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
@@ -385,28 +384,26 @@ const Carousel = <ItemT,>({
   }, [strategy, windowStart, itemCount]);
 
   return (
-    <View
-      style={[styles.container, { height }, style]}
+    <Animated.ScrollView
+      ref={scrollRef}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      scrollEnabled={!disabled}
       onLayout={handleLayout}
+      onScroll={scrollHandler}
+      onMomentumScrollEnd={handleMomentumEnd}
+      scrollEventThrottle={16}
+      aria-label={ariaLabel}
       testID={testID}
+      style={[styles.container, { height }, style]}
+      contentContainerStyle={[
+        strategy ? { width: strategy.contentSize, height } : { height },
+        contentContainerStyle,
+      ]}
+      {...snapProps}
     >
       {strategy ? (
-        <Animated.ScrollView
-          ref={scrollRef}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          scrollEnabled={!disabled}
-          onScroll={scrollHandler}
-          onMomentumScrollEnd={handleMomentumEnd}
-          scrollEventThrottle={16}
-          aria-label={ariaLabel}
-          testID={testID ? `${testID}-scroll-view` : undefined}
-          contentContainerStyle={[
-            { width: strategy.contentSize, height },
-            contentContainerStyle,
-          ]}
-          {...snapProps}
-        >
+        <>
           {data.slice(visible.from, visible.to).map((item, offset) => {
             const index = visible.from + offset;
             return (
@@ -425,13 +422,12 @@ const Carousel = <ItemT,>({
                 disabled={disabled}
                 onPress={onItemPress}
                 theme={theme}
-                testID={testID ? `${testID}-item-${index}` : undefined}
               />
             );
           })}
-        </Animated.ScrollView>
+        </>
       ) : null}
-    </View>
+    </Animated.ScrollView>
   );
 };
 
