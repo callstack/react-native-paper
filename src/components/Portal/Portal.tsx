@@ -8,6 +8,7 @@ import {
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
@@ -15,6 +16,16 @@ export type Props = {
    * Content of the `Portal`.
    */
   children: React.ReactNode;
+  /**
+   * Whether this portal hides everything below it -- the app content and any
+   * portal mounted before it -- from screen readers and the focus order.
+   * Portals mounted after it stay reachable.
+   *
+   * Tie it to whether the overlay is open rather than to how long it stays
+   * painted: a layer gives the screen back the moment it starts closing, so
+   * what is underneath is reachable again while the overlay fades out.
+   */
+  overlay?: boolean;
   /**
    * @optional
    */
@@ -41,18 +52,21 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Portal = ({ children, theme: themeOverrides }: Props) => {
+const Portal = ({ children, overlay, theme: themeOverrides }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
   const manager = React.useContext(PortalContext);
+  const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
-    <PortalConsumer manager={manager}>
+    <PortalConsumer manager={manager} overlay={overlay}>
       <SettingsProvider value={settings}>
-        <LocaleProvider direction={direction}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </LocaleProvider>
+        <ReduceMotionContext.Provider value={reduceMotion}>
+          <LocaleProvider direction={direction}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </LocaleProvider>
+        </ReduceMotionContext.Provider>
       </SettingsProvider>
     </PortalConsumer>
   );
