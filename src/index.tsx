@@ -27,6 +27,11 @@ export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
+export {
+  default as Carousel,
+  CarouselItem,
+  CarouselItemContent,
+} from './components/Carousel';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Chip } from './components/Chip/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
@@ -75,6 +80,17 @@ export type { Props as CardActionsProps } from './components/Card/CardActions';
 export type { Props as CardContentProps } from './components/Card/CardContent';
 export type { Props as CardCoverProps } from './components/Card/CardCover';
 export type { Props as CardTitleProps } from './components/Card/CardTitle';
+export type {
+  CarouselAlignment,
+  CarouselHandle,
+  CarouselItemMask,
+  CarouselItemProps,
+  CarouselLayout,
+  CarouselMaskRect,
+  CarouselRenderItemInfo,
+  CarouselSnap,
+  Props as CarouselProps,
+} from './components/Carousel';
 export type { Props as CheckboxProps } from './components/Checkbox/Checkbox';
 export type { Props as CheckboxItemProps } from './components/Checkbox/CheckboxItem';
 export type { Props as ChipProps } from './components/Chip/Chip';
