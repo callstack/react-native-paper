@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { Role, StyleProp, ViewStyle } from 'react-native';
 
 import Animated, {
   cubicBezier,
@@ -40,6 +40,10 @@ export type Props = {
    * Accessible name for the modal.
    */
   'aria-label'?: string;
+  /**
+   * Role exposed to assistive technology. Defaults to `dialog`.
+   */
+  role?: Role;
   /**
    * testID for the overlay that is displayed behind the modal content.
    */
@@ -137,6 +141,7 @@ function Modal({
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
+  role = 'dialog',
   overlayTestID,
   onDismiss = () => {},
   children,
@@ -256,7 +261,7 @@ function Modal({
         pointerEvents="box-none"
       >
         <Surface
-          role="dialog"
+          role={role}
           aria-modal
           aria-label={ariaLabel}
           theme={theme}

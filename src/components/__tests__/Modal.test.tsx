@@ -593,6 +593,16 @@ describe('Modal', () => {
   });
 });
 
+it('exposes the modal with a caller-provided role', async () => {
+  await render(
+    <Modal visible onDismiss={() => {}} aria-label="Urgent" role="alertdialog">
+      <Text>Modal content</Text>
+    </Modal>
+  );
+
+  expect(screen.getByLabelText('Urgent')).toHaveProp('role', 'alertdialog');
+});
+
 it('exposes the modal as a dialog with an accessible name', async () => {
   await render(
     <Modal visible onDismiss={() => {}} aria-label="Example modal">
