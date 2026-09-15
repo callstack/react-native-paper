@@ -1,6 +1,6 @@
 # agent-device dogfooding issues
 
-Twenty findings from using agent-device 0.21.0 as a visual regression tool on the react-native-paper example app. They are recorded here; none is filed upstream.
+Nineteen findings from using agent-device 0.21.0 as a visual regression tool on the react-native-paper example app. They are recorded here; none is filed upstream.
 
 Tool: `agent-device` 0.21.0 (run as `npx agent-device@0.21.0`), Node v24.18.
 Device: iPhone 17 Pro, iOS 26.5, UDID `2464A356-C17C-4B0D-99DB-CDFBDB98826C`.
@@ -116,7 +116,7 @@ Committed evidence: `evidence/results.csv` rows `ios / realistic / 0.1` (0 chang
 `match: true`) and `ios / realistic / 0.02` (10,179 changed pixels) are the two diffs of the
 same capture; the three repeats are the `ios / realistic-{1,2,3}` rows at both thresholds;
 the diff image at 0.02 is `evidence/diff-images/ios-realistic-1-t0.02.png`.
-There is no 0.1 image because `diff screenshot --out` writes nothing on a match (issue 18).
+There is no 0.1 image because `diff screenshot --out` writes nothing on a match (issue 17).
 The raw capture PNG was not committed.
 
 ```json
@@ -220,20 +220,7 @@ Android repeats the iOS finding for the realistic break: 0 changed pixels and
 `match: true` at the default 0.1, 9,336 px at 0.02 (`results.csv`, `android / realistic`).
 Unlike iOS, the gross break is caught at the default (65,051 px / 7.92 %).
 
-## 12. The typed Node client is exported but unreachable without a dependency
-
-`agent-device@0.21.0`'s `package.json` does export the client
-(`exports["."] → dist/src/index.js`, which exports `createAgentDeviceClient`), so
-the plan's "one Node file on `createAgentDeviceClient()`" is supported in
-principle. In practice the package only exists in the `npx` cache
-(`~/.npm/_npx/<hash>/node_modules/agent-device`); `import('agent-device')` from
-`example/` fails with `ERR_MODULE_NOT_FOUND`. Reaching the typed API therefore
-means adding a devDependency, which the PoC forbade, so the runner (on branch `poc/agent-device-visual-runner`)
-spawns the CLI with `--json` instead. Worth a documented "run the client without
-installing" story (or a `npx agent-device init`-style scaffold), since the CLI
-path costs an `npx` resolution per command and loses all the result types.
-
-## 13. `snapshot` returns an empty `nodes` array when the tree is unchanged
+## 12. `snapshot` returns an empty `nodes` array when the tree is unchanged
 
 A plain `snapshot` only reports nodes that changed since the previous snapshot in
 the same session. When nothing changed it returns `data.nodes: []` with
@@ -248,7 +235,7 @@ exactly this reason.
 An empty diff-mode result would be much less of a trap if the payload said so -
 e.g. a `mode: "diff"` / `unchanged: true` field alongside the empty array.
 
-## 14. `open --relaunch` restores the app's previous route
+## 13. `open --relaunch` restores the app's previous route
 
 The first scripted loop assumed a relaunch puts the example list back at the
 top, so it could scroll down a fixed number of rows to reach "Surface". It does
@@ -274,7 +261,7 @@ kept either; the trap is encoded as a unit test in the runner on branch `poc/age
 (`findSurfaceRow picks the list row, not the Appbar title`), whose fix picks the
 row by position and width.
 
-## 15. The dev-menu check runs before the app finishes loading
+## 14. The dev-menu check runs before the app finishes loading
 
 `dismissDevMenu()` snapshots once, immediately after the relaunch. On iOS that
 snapshot came back with three nodes, `UIApplication`, `SplashScreenLogo`,
@@ -296,7 +283,7 @@ On Android the same step fails differently and confirms issue 9: after
 labels differ from the dev menu's. Recovery is to press the recently-opened
 entry (`http://192.168.1.151:8081`), which reloads the bundle in ~20 s.
 
-## 16. Fast Refresh did not reach the Android app; a manual Reload was required
+## 15. Fast Refresh did not reach the Android app; a manual Reload was required
 
 On iOS every edit to `src/components/Surface.tsx` was picked up within a few
 seconds (first realistic-break capture already differed: 10,179 px). On Android
@@ -312,7 +299,7 @@ Consequence for the loop: on Android, an edit must be followed by an explicit
 reload, a device-runner that relies on Fast Refresh will silently compare stale
 pixels and report PASS.
 
-## 17. Minor: an agent-device command occasionally exits non-zero with no output
+## 16. Minor: an agent-device command occasionally exits non-zero with no output
 
 Twice in this pass (`press '@e2'`, `press 'label="Close"'`, both on iOS) the CLI
 exited 1 with completely empty stdout _and_ stderr. Re-running the identical
@@ -321,7 +308,7 @@ caller cannot distinguish this from a crash, and that a runner's "parse the
 first `{`..`}` out of stdout" fallback turns it into a `null` response rather
 than a clear error.
 
-## 18. Minor: `diff screenshot --out` writes nothing when the images match
+## 17. Minor: `diff screenshot --out` writes nothing when the images match
 
 `--out` is silently ignored on a `match: true` diff, and the response omits
 `diffPath` as well. That is defensible (there is nothing to draw), but it means
@@ -330,7 +317,7 @@ per-threshold sweep produces a gappy set of files: the realistic break has a
 diff image at 0.02 but none at 0.1, because at 0.1 it matches. The 0.1 rows in
 `evidence/results.csv` are the record for those.
 
-## 19. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
+## 18. The dev-client's floating "Tools" button lands inside the crop and reads as a regression
 
 Found 2026-09-11 while re-running the Android loop with `src/` clean after the
 round-2 changes. The scripted loop reported a deterministic **FAIL** -
@@ -361,7 +348,7 @@ otherwise stops with a message naming the node and the manual fix. This is also
 the strongest argument so far for capturing from a release build rather than a
 dev-client once this moves past a PoC.
 
-## 20. web: `screenshot --crop-on` is refused
+## 19. web: `screenshot --crop-on` is refused
 
 Tried on 2026-09-14 against `expo export --platform web` of the example app served
 on 127.0.0.1:4322, through `agent-device web setup` (agent-browser 0.27.1, Node

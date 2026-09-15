@@ -110,12 +110,12 @@ Each learned while scripting the loop above; documented in `evidence/issues.md`,
 
 ## agent-device issues
 
-Twenty findings with commands and evidence in `evidence/issues.md`, none filed upstream yet. The four that matter most: the default diff threshold misses soft-shadow regressions (4), sessions are bound to one device per cwd (6), dev-client chrome renders into screenshots and the diff cannot tell (19), `--crop-on` is refused on web (20).
+Nineteen findings with commands and evidence in `evidence/issues.md`, none filed upstream. The four that matter most: the default diff threshold misses soft-shadow regressions (4), sessions are bound to one device per cwd (6), dev-client chrome renders into screenshots and the diff cannot tell (18), `--crop-on` is refused on web (19).
 
 ## Evidence
 
 - `evidence/results.csv`: one row per `diff screenshot` run (72 rows): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
-- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match (issue 18).
+- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match (issue 17).
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json`, `evidence/web-excerpt.json`: the nodes and responses that matter; full trees on the runner branch.
 - `env.json`: the pinned devices, versions and thresholds.
 
