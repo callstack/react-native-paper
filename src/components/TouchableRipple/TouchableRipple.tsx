@@ -119,12 +119,19 @@ const TouchableRipple = ({
     theme,
     rippleColor,
   });
+  const isWeb = Platform.OS === 'web';
   // Web-only style. PlatformColor doesn't exist on web, so the calculated
-  // ripple color is effectively always a string here.
-  const hoverColor =
-    typeof calculatedRippleColor === 'string'
+  // ripple color is effectively always a string here. The `color()` chain is
+  // pure, so it is memoized and skipped entirely on native platforms where
+  // `hoverColor` is never applied.
+  const hoverColor = React.useMemo(() => {
+    if (!isWeb) {
+      return calculatedRippleColor;
+    }
+    return typeof calculatedRippleColor === 'string'
       ? color(calculatedRippleColor).fade(0.5).rgb().string()
       : calculatedRippleColor;
+  }, [calculatedRippleColor, isWeb]);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
