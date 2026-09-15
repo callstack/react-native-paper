@@ -171,7 +171,7 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
 const Surface = ({
   elevation = 1,
   children,
-  theme: overridenTheme,
+  theme: overriddenTheme,
   style,
   backgroundColor: customBackgroundColor,
   borderRadius,
@@ -194,7 +194,7 @@ const Surface = ({
   ref,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(overridenTheme);
+  const theme = useInternalTheme(overriddenTheme);
 
   const { colors } = theme;
 
