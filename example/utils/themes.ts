@@ -3,44 +3,38 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import type { Theme as ReactNavigationTheme } from '@react-navigation/native';
-import {
-  adaptNavigationTheme,
-  DarkTheme,
-  LightTheme,
-  configureFonts,
-} from 'react-native-paper';
+import { adaptNavigationTheme, configureFonts } from 'react-native-paper';
 import type { Theme } from 'react-native-paper';
 
-const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
-  adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
-  });
+/**
+ * Merges the React Navigation theme into a Paper theme.
+ *
+ * The Paper theme is passed in, and also given to `adaptNavigationTheme`, so
+ * that the selected contrast level is kept.
+ */
+export const createCombinedTheme = (paperTheme: Theme, isDark: boolean) => {
+  const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
+    adaptNavigationTheme({
+      reactNavigationLight: NavigationDefaultTheme,
+      reactNavigationDark: NavigationDarkTheme,
+      materialLight: isDark ? undefined : paperTheme,
+      materialDark: isDark ? paperTheme : undefined,
+    });
 
-export const CombinedDefaultTheme = {
-  ...LightTheme,
-  ...NavLightTheme,
-  colors: {
-    ...LightTheme.colors,
-    ...NavLightTheme.colors,
-  },
-  fonts: {
-    ...LightTheme.fonts,
-    ...NavLightTheme.fonts,
-  },
-};
+  const navTheme = isDark ? NavDarkTheme : NavLightTheme;
 
-export const CombinedDarkTheme = {
-  ...DarkTheme,
-  ...NavDarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    ...NavDarkTheme.colors,
-  },
-  fonts: {
-    ...DarkTheme.fonts,
-    ...NavDarkTheme.fonts,
-  },
+  return {
+    ...paperTheme,
+    ...navTheme,
+    colors: {
+      ...paperTheme.colors,
+      ...navTheme.colors,
+    },
+    fonts: {
+      ...paperTheme.fonts,
+      ...navTheme.fonts,
+    },
+  };
 };
 
 export const createConfiguredFontTheme = (

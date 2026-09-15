@@ -11,6 +11,7 @@ import {
   Drawer,
   Palette,
   Portal,
+  SegmentedButtons,
   Switch,
   Text,
   TouchableRipple,
@@ -104,9 +105,11 @@ function DrawerItems() {
     toggleCollapsed,
     toggleCustomFont,
     toggleRippleEffect,
+    setContrast,
     customFontLoaded,
     rippleEffectEnabled,
     collapsed,
+    contrast,
     rtl: isRTL,
     theme: { dark: isDarkTheme },
     shouldUseDynamicTheme,
@@ -190,6 +193,20 @@ function DrawerItems() {
                 </View>
               </View>
             </TouchableRipple>
+
+            <View style={[styles.preference, styles.contrastPreference]}>
+              <Text variant="labelLarge">Contrast</Text>
+              <SegmentedButtons
+                value={contrast}
+                onValueChange={(value) => setContrast(value)}
+                density="small"
+                buttons={[
+                  { value: 'standard', label: 'Standard' },
+                  { value: 'medium', label: 'Medium' },
+                  { value: 'high', label: 'High' },
+                ]}
+              />
+            </View>
 
             <TouchableRipple onPress={_handleToggleRTL}>
               <View style={[styles.preference, styles.v3Preference]}>
@@ -275,6 +292,12 @@ const styles = StyleSheet.create({
   },
   v3Preference: {
     height: 56,
+    paddingHorizontal: 28,
+  },
+  contrastPreference: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    gap: 12,
     paddingHorizontal: 28,
   },
   badge: {
