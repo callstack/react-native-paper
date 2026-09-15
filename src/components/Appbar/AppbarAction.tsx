@@ -19,10 +19,6 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    */
   icon: IconSource;
   /**
-   * Optional icon size.
-   */
-  size?: number;
-  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -71,7 +67,6 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  * ```
  */
 const AppbarAction = ({
-  size = 24,
   color: iconColor,
   icon,
   disabled,
@@ -93,7 +88,6 @@ const AppbarAction = ({
 
   return (
     <IconButton
-      size={size}
       onPress={onPress}
       iconColor={actionIconColor}
       icon={icon}

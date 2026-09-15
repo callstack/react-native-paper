@@ -55,7 +55,7 @@ export type Props = {
  *
  * const MyComponent = () => (
  *   <Tooltip title="Selected Camera">
- *     <IconButton icon="camera" selected size={24} onPress={() => {}} />
+ *     <IconButton icon="camera" selected onPress={() => {}} />
  *   </Tooltip>
  * );
  *

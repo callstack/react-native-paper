@@ -84,7 +84,6 @@ const TooltipExample = () => {
               >
                 <IconButton
                   icon={transport.title.split(' ')[0].toLowerCase()}
-                  size={24}
                   onPress={() => {}}
                 />
               </Tooltip>

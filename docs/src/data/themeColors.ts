@@ -191,56 +191,72 @@ export const themeColors = {
     },
   },
   IconButton: {
+    default: {
+      standard: {
+        iconColor: 'theme.colors.onSurfaceVariant',
+      },
+      outlined: {
+        iconColor: 'theme.colors.onSurfaceVariant',
+        borderColor: 'theme.colors.outlineVariant',
+      },
+      filled: {
+        backgroundColor: 'theme.colors.primary',
+        iconColor: 'theme.colors.onPrimary',
+      },
+      tonal: {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        iconColor: 'theme.colors.onSecondaryContainer',
+      },
+    },
     selected: {
-      default: {
+      standard: {
         iconColor: 'theme.colors.primary',
       },
       outlined: {
         backgroundColor: 'theme.colors.inverseSurface',
         iconColor: 'theme.colors.inverseOnSurface',
       },
-      contained: {
+      filled: {
         backgroundColor: 'theme.colors.primary',
         iconColor: 'theme.colors.onPrimary',
       },
-      'contained-tonal': {
+      tonal: {
+        backgroundColor: 'theme.colors.secondary',
+        iconColor: 'theme.colors.onSecondary',
+      },
+    },
+    unselected: {
+      standard: {
+        iconColor: 'theme.colors.onSurfaceVariant',
+      },
+      outlined: {
+        iconColor: 'theme.colors.onSurfaceVariant',
+        borderColor: 'theme.colors.outlineVariant',
+      },
+      filled: {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        iconColor: 'theme.colors.onSurfaceVariant',
+      },
+      tonal: {
         backgroundColor: 'theme.colors.secondaryContainer',
         iconColor: 'theme.colors.onSecondaryContainer',
       },
     },
-    unselected: {
-      default: {
-        iconColor: 'theme.colors.onSurfaceVariant',
-      },
-      outlined: {
-        iconColor: 'theme.colors.onSurfaceVariant',
-        borderColor: 'theme.colors.outline',
-      },
-      contained: {
-        backgroundColor: 'theme.colors.surfaceVariant',
-        iconColor: 'theme.colors.primary',
-      },
-      'contained-tonal': {
-        backgroundColor: 'theme.colors.surfaceVariant',
-        iconColor: 'theme.colors.onSurfaceVariant',
-      },
-    },
     disabled: {
-      default: {
-        iconColor: 'theme.colors.onSurfaceDisabled',
+      standard: {
+        iconColor: 'theme.colors.onSurface',
       },
       outlined: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        iconColor: 'theme.colors.onSurfaceDisabled',
-        borderColor: 'theme.colors.surfaceDisabled',
+        iconColor: 'theme.colors.onSurface',
+        borderColor: 'theme.colors.outlineVariant',
       },
-      contained: {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        iconColor: 'theme.colors.onSurfaceDisabled',
+      filled: {
+        backgroundColor: 'theme.colors.onSurface',
+        iconColor: 'theme.colors.onSurface',
       },
-      'contained-tonal': {
-        backgroundColor: 'theme.colors.surfaceDisabled',
-        iconColor: 'theme.colors.onSurfaceDisabled',
+      tonal: {
+        backgroundColor: 'theme.colors.onSurface',
+        iconColor: 'theme.colors.onSurface',
       },
     },
   },

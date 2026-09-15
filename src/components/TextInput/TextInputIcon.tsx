@@ -16,7 +16,12 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  Omit<IconButtonProps, keyof TextInputAccessoryProps>;
+  Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size'> & {
+    /**
+     * Size of the icon.
+     */
+    size?: number;
+  };
 
 /**
  * A component to render a leading / trailing icon in the TextInput
@@ -85,7 +90,7 @@ const TextInputIcon = ({
         {...rest}
         icon={icon}
         iconColor={color}
-        size={iconSize}
+        iconSize={iconSize}
         style={[styles.icon, style]}
         onPress={onPressHandler}
       />

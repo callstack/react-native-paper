@@ -20,13 +20,13 @@ const AnimatedSurface = () => {
       </Surface>
       <View style={styles.actions}>
         <IconButton
-          mode="contained-tonal"
+          mode="tonal"
           icon="minus"
           disabled={index === 0}
           onPress={() => setIndex(index - 1)}
         />
         <IconButton
-          mode="contained-tonal"
+          mode="tonal"
           icon="plus"
           disabled={index === elevationLevels.length - 1}
           onPress={() => setIndex(index + 1)}
