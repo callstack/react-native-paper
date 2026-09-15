@@ -257,6 +257,7 @@ function Modal({
       >
         <Surface
           role="dialog"
+          aria-modal
           aria-label={ariaLabel}
           theme={theme}
           backgroundColor={contentBackgroundColor}
