@@ -243,9 +243,9 @@ function Modal({
         role="button"
         disabled={!dismissable}
         onPress={dismissable ? onDismissCallback : undefined}
-        importantForAccessibility="no"
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
         testID={overlayTestID}
+        accessible={dismissable}
       />
       <View
         style={[

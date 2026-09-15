@@ -41,7 +41,6 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -221,10 +220,9 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -404,10 +402,9 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -587,10 +584,9 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -770,10 +766,9 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -953,10 +948,9 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1136,10 +1130,9 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1322,7 +1315,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1505,7 +1497,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1688,7 +1679,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1871,7 +1861,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2054,7 +2043,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2237,7 +2225,6 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2420,7 +2407,6 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2603,7 +2589,6 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2786,7 +2771,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -2969,7 +2953,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -3152,7 +3135,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -3335,7 +3317,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -3518,7 +3499,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -3701,7 +3681,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -3881,10 +3860,9 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -4064,10 +4042,9 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         "text": undefined,
       }
     }
-    accessible={true}
+    accessible={false}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -4250,7 +4227,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -4433,7 +4409,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     accessible={true}
     collapsable={false}
     focusable={true}
-    importantForAccessibility="no"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
