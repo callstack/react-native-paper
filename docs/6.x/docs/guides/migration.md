@@ -206,6 +206,28 @@ e.g.:
 </Dialog.Actions>
 ```
 
+### Searchbar
+
+The misspelled `traileringIcon` props have been renamed:
+
+- **`traileringIcon`** → **`trailingIcon`**
+- **`traileringIconColor`** → **`trailingIconColor`**
+- **`traileringIconAccessibilityLabel`** → **`trailingIconAccessibilityLabel`**
+- **`onTraileringIconPress`** → **`onTrailingIconPress`**
+
+```diff
+<Searchbar
+- traileringIcon="microphone"
+- traileringIconColor={colors.onSurfaceVariant}
+- traileringIconAccessibilityLabel="microphone button"
+- onTraileringIconPress={onMicrophonePress}
++ trailingIcon="microphone"
++ trailingIconColor={colors.onSurfaceVariant}
++ trailingIconAccessibilityLabel="microphone button"
++ onTrailingIconPress={onMicrophonePress}
+/>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
