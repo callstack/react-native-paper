@@ -1,6 +1,14 @@
 import { BackHandler as RNBackHandler, Text } from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -17,6 +25,7 @@ jest.mock('react-native-safe-area-context', () => ({
 
 type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
+  exitApp: jest.Mock<() => void>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -37,6 +46,12 @@ describe('Modal', () => {
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
+  });
+
+  // `exitApp` is one module-level `jest.fn` shared by every test in the file,
+  // and nothing clears it globally.
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
   });
 
   it('renders passed children', async () => {
@@ -508,6 +523,22 @@ describe('Modal', () => {
     });
 
     expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('does not let the Android back button leave the screen behind a non-dismissible modal', async () => {
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible onDismiss={() => {}} dismissable={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(BackHandler.exitApp).not.toHaveBeenCalled();
   });
 
   it('runs the fade-in animation when visible changes from false to true', async () => {
