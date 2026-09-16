@@ -3,11 +3,7 @@
   "ios_after_open_relaunch": {
     "immediately": {
       "total_nodes": 3,
-      "labels": [
-        "React Native Paper Example",
-        null,
-        "Downloading 100%\u2026"
-      ]
+      "labels": ["React Native Paper Example", null, "Downloading 100%\u2026"]
     },
     "six_seconds_later": {
       "total_nodes": 77,

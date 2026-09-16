@@ -1,4 +1,4 @@
-platform,group,capture,threshold,totalPixels,differentPixels,mismatchPercent,regions,match,source
+platform,group,capture,threshold,totalPixels,differentPixels,mismatchPercent,regions,match,sourceOnRunnerBranch
 ios,first-run,a-vs-b (density 1),0.1,86028,0,0,0,True,evidence/ios/26-diff.json
 ios,first-run,flat a-vs-b (density 1),0.1,86028,0,0,0,True,evidence/ios/30-diff.json
 ios,first-run,warm-1,0.1,774252,0,0,0,True,evidence/ios/37-diff.json
@@ -6,7 +6,7 @@ ios,first-run,warm-2,0.1,774252,0,0,0,True,evidence/ios/40-diff.json
 ios,first-run,warm-3,0.1,774252,0,0,0,True,evidence/ios/43-diff.json
 ios,first-run,relaunch-1,0.1,774252,0,0,0,True,evidence/ios/53-diff.json
 ios,first-run,gross,0.1,774252,4277,0.55,1,False,evidence/ios/59-diff.json
-ios,first-run,gross,0.1,774252,116292,15.02,3,False,evidence/ios/60-diff.json
+ios,first-run,gross,0.02,774252,116292,15.02,3,False,evidence/ios/60-diff.json
 ios,first-run,revert-1,0.1,774252,0,0,0,True,evidence/ios/63-diff.json
 ios,first-run,realistic,0.02,774252,10179,1.31,3,False,evidence/ios/66-diff-t0.02.json
 ios,first-run,realistic,0.1,774252,0,0,0,True,evidence/ios/66-diff-t0.1.json
@@ -72,4 +72,4 @@ android,re-measured,reverted,0.1,821760,0,0,0,True,evidence/sensitivity/android/
 android,re-measured,sanity-before-break,0.02,821760,0,0,0,True,evidence/sensitivity/android/sanity-before-break-diff-t0.02.json
 android,re-measured,sanity-before-break,0.1,821760,0,0,0,True,evidence/sensitivity/android/sanity-before-break-diff-t0.1.json
 android,dev-client-chrome,tools-button-on,0.02,821760,2822,0.34,1,False,runner-branch:evidence/runs/android/round3-pass/summary.json
-ios,dev-client-chrome,tools-button-on,0.02,774252,3916,0.51,1,False,verify/ios/a11-diff.json (2026-09-16 re-verification, not committed)
+ios,dev-client-chrome,tools-button-on,0.02,774252,3916,0.51,1,False,"verify/ios/a11-diff.json (2026-09-16 re-verification, not committed)"

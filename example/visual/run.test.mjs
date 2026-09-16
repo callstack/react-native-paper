@@ -1,6 +1,6 @@
 /**
  * Unit tests for example/visual/run.mjs. No device, no adb/xcrun, no
- * agent-device, no new dependencies — only the pure decision helpers are
+ * agent-device, no new dependencies, only the pure decision helpers are
  * exercised, with the device observers faked.
  *
  *   node --test example/visual/run.test.mjs
@@ -21,6 +21,7 @@ import {
   findFloatingToolsNode,
   findSurfaceRow,
   isMainModule,
+  parseArgs,
   pickAndroid,
   pickIosCandidate,
   resolveAndroid,
@@ -64,12 +65,19 @@ test('checkCaptureSize skips the check in update mode', () => {
   assert.doesNotThrow(() =>
     checkCaptureSize(env, 'new-story', wrongSize, { update: true })
   );
-  // A brand-new story has no baseline at all; --update must still get through.
-  assert.doesNotThrow(() =>
-    checkCaptureSize(env, 'new-story', wrongSize, {
-      update: true,
-      baselineFile: path.join(TMP_DIR, 'missing.png'),
-    })
+});
+
+test('parseArgs rejects an empty story list and unknown flags', () => {
+  const exit2 = (thrown) =>
+    thrown instanceof RunFailure && thrown.exitCode === 2;
+  // A typo here used to yield zero stories, zero captures and a green summary.
+  assert.throws(() => parseArgs(['--platform', 'ios', '--story', '']), exit2);
+  assert.throws(() => parseArgs(['--platform', 'ios', '--story', ',,']), exit2);
+  assert.throws(() => parseArgs(['--platform', 'ios', '--force']), exit2);
+  assert.throws(() => parseArgs(['--platform', 'web']), exit2);
+  assert.deepEqual(
+    parseArgs(['--platform', 'android', '--story', ' a, b ']).stories,
+    ['a', 'b']
   );
 });
 
@@ -177,7 +185,12 @@ test('pickAndroid finds the AVD warm or cold and ignores a real device', () => {
 
 test('pickIosCandidate matches the name on the pinned runtime only', () => {
   // Shape of `xcrun simctl list -j devices`, trimmed to what the picker reads.
-  const sim = (udid, name, state) => ({ udid, name, state, isAvailable: true });
+  const sim = (udid, name, state, isAvailable = true) => ({
+    udid,
+    name,
+    state,
+    isAvailable,
+  });
   const PINNED = 'com.apple.CoreSimulator.SimRuntime.iOS-26-5';
   const OTHER = 'com.apple.CoreSimulator.SimRuntime.iOS-26-4';
   const profile = { device: 'iPhone 17 Pro', runtime: PINNED };

@@ -1,6 +1,6 @@
 # Visual regression PoC: agent-device on the example app
 
-Proof of concept, under review in #5115. iOS and Android against the existing example screens, `Surface` only, agent-device and its own diff. One script, `run.mjs`, drives both platforms. The raw per-command JSON and accessibility-tree dumps behind the evidence are on branch `poc/agent-device-visual-runner`; this PR keeps the summaries.
+Proof of concept. iOS and Android against the existing example screens, `Surface` only, agent-device and its own diff. One script, `run.mjs`, drives both platforms. The raw per-command JSON and accessibility-tree dumps behind the evidence are on branch `poc/agent-device-visual-runner`; this PR keeps the summaries.
 
 ## Result
 
@@ -30,7 +30,7 @@ Sensitivity, one-line changes to the iOS branch of `src/components/Surface.tsx`,
 
 | break                                                 | @ 0.1 (default)             | @ 0.02                                                                              |
 | ----------------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------- |
-| Gross: every elevated surface gets the level-5 shadow | 4,277 px (0.55 %), 1 region | 116,292 px (15 %), 3 regions                                                        |
+| Gross: every elevated surface gets the level-5 shadow | 4,277 px (0.55 %), 1 region | 116,292 px (15.02 %), 3 regions                                                     |
 | Realistic: level 1 renders the level-2 shadow         | **0 px, `match: true`**     | **10,179 px (1.31 %)**, 3 regions, the dominant one 378x378 on the Elevation 1 card |
 
 ## Android
@@ -110,7 +110,7 @@ It resolves and boots the device from the profile in `env.json`, relaunches the 
 ios surface-example-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
 ```
 
-Exit codes: 1 if any story fails the diff, 2 for a setup error (no simulator with that name on that runtime, no AVD with that name, an emulator whose API level or density is not the one the baselines were captured on, a failed boot, or an `open` that agent-device refused because another session claims the device), 3 if a capture's size does not match its baseline PNG. `--update` writes the captures as baselines, creating missing ones. `--out <dir>` sets where captures, diff images and `summary.json` go (default `example/visual/artifacts/run/<platform>`, gitignored). `summary.json` is written on every exit.
+Exit codes: 1 if any story fails the diff, 2 for a setup error (no simulator with that name on that runtime, no AVD with that name, an emulator whose API level or density is not the one the baselines were captured on, a failed boot, or an `open` that agent-device refused because another session claims the device), 3 if a capture's size does not match its baseline PNG. `--update` writes the captures as baselines, creating missing ones. `--out <dir>` sets where captures, diff images and `summary.json` go (default `example/visual/artifacts/run/<platform>`, gitignored). `--threshold <0-1>` overrides the 0.02 default and `--story a,b` limits the run to some stories; `--help` lists them all. `summary.json` is written on every exit except an argument error, which exits 2 before an output directory is known.
 
 Prerequisites are the same as for the hand-run loop: the app built and installed on a device matching the profile, an AVD named exactly `Pixel_10_Pro` on Android with `adb` and `emulator` reachable, and Metro running. After an Android boot the runner sets `adb reverse tcp:8081 tcp:8081` itself, since a cold emulator has no route to Metro. A simulator that has never booted runs Apple's first-boot migration, which can take longer than agent-device's 120 s boot cap; boot it once from Xcode before the first run.
 
@@ -120,17 +120,17 @@ The pure helpers have ten `node:test` cases, no device needed (boot and the `ope
 yarn example test:visual
 ```
 
-Left as follow-ups: creating the simulator or AVD when it is missing, per-profile baseline directories, `open --metro-port` in place of dismissing the dev launcher, and CI.
+Left as follow-ups: creating the simulator or AVD when it is missing, per-profile baseline directories, `open --metro-port` in place of dismissing the dev launcher, a release-build variant of the example app, and CI. Before anything runs this in CI, `npx agent-device@0.21.0` has to become a locked dependency: today the runner executes a package fetched from the network on every run with no lockfile entry.
 
-Not run by Jest, the pre-commit hook or CI. `results.csv` was produced from the raw `diff screenshot` JSON on the runner branch.
+Not run by Jest, the pre-commit hook or CI. `results.csv` was transcribed from the raw `diff screenshot` JSON; its last column is the path of that JSON on branch `poc/agent-device-visual-runner`, not in this PR, except one iOS dev-client row from an uncommitted 2026-09-16 re-verification.
 
 ## What a real runner has to handle
 
 Things `run.mjs` had to deal with. None is an agent-device bug:
 
-- Reload before every capture with `agent-device metro reload`, then `open --relaunch`. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS.
+- Relaunch before every capture (`open --relaunch` on iOS, `am force-stop` plus `open` on Android) so the app fetches the current bundle. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS. `agent-device metro reload` exists for the same purpose and works, but the runner relaunches anyway because the app persists its navigation state.
 - The example app persists navigation state. A relaunch lands on the last screen, so the runner has to press Back to the list root and pick the Surface row, not the header title.
-- Dev-client chrome: on Android a relaunch lands in the dev launcher; on iOS the first-run onboarding sheet dims the whole app and `wait stable` reports it as settled; on both, the floating Tools button can sit inside the crop. Dismiss all of it before capturing, or capture from a release build.
+- Dev-client chrome: on Android a relaunch lands in the dev launcher; on iOS the first-run onboarding sheet dims the whole app and `wait stable` reports it as settled; on both, the floating Tools button can sit inside the crop. Dismiss all of it before capturing, or capture from a release build. The runner keeps the dismissal code because the example app is only built as a dev client here; a release-build variant is a follow-up.
 - Set `--threshold` explicitly (0.02 for soft shadows) and verify noise at it; the default 0.1 is documented as a 44-unit RGB tolerance, far looser than a one-step shadow change.
 - Use `find … list` to locate without tapping, `--first` or a `role=` qualifier where Android exposes the same label on a row and its text child, and assert on node count after `snapshot --scope`, which returns success with empty nodes when nothing matches.
 - Pin the device profile, resolve the instance through `simctl` and `agent-device devices` and boot it, and refuse to compare or re-baseline on a different image; derive expected capture size from the baseline PNG, per story.
@@ -138,8 +138,8 @@ Things `run.mjs` had to deal with. None is an agent-device bug:
 
 ## Evidence
 
-- `evidence/results.csv`: one row per `diff screenshot` run (74 rows, including the two dev-client false FAILs): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
-- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match and deletes any stale file at that path.
+- `evidence/results.csv`: one row per `diff screenshot` run (74 rows, including the two dev-client false FAILs): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the path of the raw JSON it came from on the runner branch (one iOS dev-client row comes from an uncommitted re-verification).
+- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. There is no 0.1 image of the realistic break because it matches at 0.1 and `diff screenshot --out` writes nothing on a match, deleting any stale file at that path; the gross break did produce 0.1 images and they were not kept.
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json`, `evidence/web-excerpt.json`: the nodes and responses that matter; full trees on the runner branch.
 - `env.json`: the pinned device profiles, versions and thresholds.
 
