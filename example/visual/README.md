@@ -1,6 +1,6 @@
 # Visual regression PoC: agent-device on the example app
 
-Proof of concept, under review in #5115. iOS and Android against the existing example screens, `Surface` only, agent-device and its own diff. A runner script that grew out of review, and the full raw evidence, are on branch `poc/agent-device-visual-runner`, deliberately not in this PR.
+Proof of concept, under review in #5115. iOS and Android against the existing example screens, `Surface` only, agent-device and its own diff. One script, `run.mjs`, drives both platforms. The raw per-command JSON and accessibility-tree dumps behind the evidence are on branch `poc/agent-device-visual-runner`; this PR keeps the summaries.
 
 ## Result
 
@@ -94,11 +94,36 @@ $AD diff screenshot --baseline $BASELINE/surface-example-elevated.png current.pn
 
 Expect `differentPixels: 0`. To see a failure, change `shadow(elevation, …)` to `shadow(elevation === 1 ? 2 : elevation, …)` in `src/components/Surface.tsx` (iOS) or `androidElevationLevels[elevation]` to `androidElevationLevels[elevation === 1 ? 2 : elevation]` (Android), relaunch so the app fetches the bundle, capture, diff: about 10,179 px (iOS) or 9,336 px (Android) at 0.02, and `match: true` at 0.1. `git checkout -- src/components/Surface.tsx` afterwards.
 
-The same loop as one script for both platforms, with device pinning, overlay handling and exit codes, is `example/visual/run.mjs` on branch `poc/agent-device-visual-runner` (commit e9245dc97). It was removed from this PR only to keep the PoC small.
+## Running it
+
+`example/visual/run.mjs` is the loop above as one script for both platforms, plain ESM on Node 20 or newer, no new dependencies. It spawns `npx agent-device@0.21.0 … --json` and parses the output.
+
+```bash
+node example/visual/run.mjs --platform ios
+node example/visual/run.mjs --platform android
+```
+
+It relaunches the app so the bundle is fresh, waits for the app to be ready, dismisses the dev menu, dev launcher and floating Tools button if present, goes Back to the example list root and presses the Surface row if the app restored another screen, then captures and diffs each story and prints one line per story:
+
+```
+ios surface-example-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
+```
+
+Exit codes: 1 if any story fails the diff, 2 if the connected device does not match `env.json` (`--force` downgrades that to a warning), 3 if a capture's size does not match its baseline PNG. `--update` writes the captures as baselines, creating missing ones. `--out <dir>` sets where captures, diff images and `summary.json` go (default `example/visual/artifacts/run/<platform>`, gitignored). `summary.json` is written on every exit.
+
+Prerequisites are the same as for the hand-run loop: app built and installed on the pinned device, Metro running. Set `AGENT_DEVICE_SESSION_CWD` to the directory whose agent-device session is bound to the device, or let the script bind a fresh one.
+
+The pure helpers have seven `node:test` cases, no device needed:
+
+```bash
+yarn example test:visual
+```
+
+Not run by Jest, the pre-commit hook or CI. `evidence/summarize.mjs` regenerates a results table from a directory of `diff screenshot` JSON; `results.csv` in this PR was produced from the raw JSON on the runner branch.
 
 ## What a real runner has to handle
 
-Each learned while scripting the loop above; implemented on the runner branch. None of them is an agent-device bug:
+Each learned while scripting `run.mjs`, and handled there. None of them is an agent-device bug:
 
 - Reload before every capture with `agent-device metro reload`, then `open --relaunch`. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS.
 - The example app persists navigation state. A relaunch lands on the last screen, so the runner has to press Back to the list root and pick the Surface row, not the header title.
