@@ -11,7 +11,7 @@ On iOS and Android, yes, with one catch. The noise floor is 0 pixels on iOS and 
 ## Setup
 
 - Branch `poc/agent-device-visual`, React Native 0.85.3, Expo 56, Debug dev-client. agent-device 0.21.0 through its CLI via `npx`; its Node client was not used because it requires adding agent-device as a dependency, which this PoC avoided. If the approach is adopted, the runner should switch to the client. The docs and source were re-checked against 0.21.3. No Storybook, no extra screens.
-- iPhone 17 Pro simulator (iOS 26.5, 3x) and `Pixel_10_Pro` emulator (API 37, 480 dpi, `hw.gpu.mode=auto`). Pinned in `env.json`; baselines are valid for that configuration only.
+- iPhone 17 Pro simulator (iOS 26.5, 3x) and `Pixel_10_Pro` emulator (API 37, 480 dpi, `hw.gpu.mode=auto`). `env.json` pins that profile, not the instance: no UDID and no serial. The runner resolves the simulator by name plus runtime through `xcrun simctl`, and the emulator by AVD name through `agent-device devices`, and boots it if it is down. iOS therefore works on any Mac with an iPhone 17 Pro on the iOS 26.5 runtime; Android works wherever the AVD is named exactly `Pixel_10_Pro` (an AVD name is the only handle agent-device exposes for a stopped emulator) and `adb` and `emulator` are reachable, on `PATH` or through `ANDROID_HOME`, which the runner defaults to `~/Library/Android/sdk` when unset. Baselines stay valid for that configuration only.
 - The only app change: a `testID` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx` (`surface-example-elevated` / `surface-example-flat`, named so they cannot be mistaken for the library defaults removed in #5088 and #5099). `screenshot --crop-on 'id="…"'` then crops to exactly that section: 402x214 logical, 1206x642 px at `--pixel-density 3` on iOS; 1280x642 native px on Android.
 - No animation freezing, status-bar normalisation or release build was needed. The crop excludes the status bar and LogBox.
 
@@ -72,17 +72,18 @@ Tried once on 2026-09-14 against `expo export --platform web` of the example app
 
 ## Reproducing by hand
 
-Prerequisites: the example app built and installed on the device pinned in `env.json`, Metro running (`yarn example start`). agent-device sessions are keyed by cwd and bound to one device, so run from one directory and give the second platform its own `--session`. The loop is the same on both platforms; only these values differ:
+Prerequisites: the example app built and installed on a device matching the profile in `env.json`, Metro running (`yarn example start`). Each platform gets its own named session, `paper-visual-ios` and `paper-visual-android`, the same names the runner uses. An agent-device session is bound to one device, so if another session on the machine still claims the device, `open` is refused; close that session (`npx agent-device@0.21.0 close --session <name>`) and try again. Start by listing the devices to get the UDID or serial; the loop is the same on both platforms and only these values differ:
 
 | value                      | iOS                                                           | Android                                                                            |
 | -------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `TARGET`                   | `--platform ios --udid 2464A356-C17C-4B0D-99DB-CDFBDB98826C`  | `--platform android --session android`                                             |
+| `TARGET`                   | `--platform ios --session paper-visual-ios --udid <UDID>`     | `--platform android --session paper-visual-android --serial <serial>`              |
 | `DENSITY`                  | `--pixel-density 3`                                           | (none; Android returns native pixels)                                              |
 | overlay after `--relaunch` | dev menu, a few seconds after launch: `press 'label="Close"'` | dev launcher: `press 'label="http://<metro-host>:8081"'`, then wait for the bundle |
 | `BASELINE`                 | `example/visual/__baselines__/ios`                            | `example/visual/__baselines__/android`                                             |
 
 ```bash
 AD="npx agent-device@0.21.0"
+$AD devices --platform ios --json   # or --platform android; yields the UDID or serial
 $AD open com.callstack.reactnativepaperexample --relaunch $TARGET --json
 $AD wait stable 500 10000 $TARGET --json
 # dismiss the overlay for this platform (table above); the app restores its last screen,
@@ -99,25 +100,27 @@ Expect `differentPixels: 0`. To see a failure, change `shadow(elevation, …)` t
 `example/visual/run.mjs` runs the loop above on either platform: plain ESM on Node 20 or newer, no new dependencies, spawning `npx agent-device@0.21.0 … --json` and parsing the output.
 
 ```bash
-node example/visual/run.mjs --platform ios
-node example/visual/run.mjs --platform android
+yarn example visual --platform ios
+yarn example visual --platform android
 ```
 
-It relaunches the app so the bundle is fresh, waits for the app to be ready, dismisses the dev menu, dev launcher and floating Tools button if present, goes Back to the example list root and presses the Surface row if the app restored another screen, then captures and diffs each story and prints one line per story:
+It resolves and boots the device from the profile in `env.json`, relaunches the app so the bundle is fresh, waits for the app to be ready, dismisses the dev menu, dev launcher and floating Tools button if present, goes Back to the example list root and presses the Surface row if the app restored another screen, then captures and diffs each story and prints one line per story:
 
 ```
 ios surface-example-elevated changed=0 (0%) regions=0 threshold=0.02 → PASS
 ```
 
-Exit codes: 1 if any story fails the diff, 2 if the connected device does not match `env.json` (`--force` downgrades that to a warning), 3 if a capture's size does not match its baseline PNG. `--update` writes the captures as baselines, creating missing ones. `--out <dir>` sets where captures, diff images and `summary.json` go (default `example/visual/artifacts/run/<platform>`, gitignored). `summary.json` is written on every exit.
+Exit codes: 1 if any story fails the diff, 2 for a setup error (no simulator with that name on that runtime, no AVD with that name, an emulator whose API level or density is not the one the baselines were captured on, a failed boot, or an `open` that agent-device refused because another session claims the device), 3 if a capture's size does not match its baseline PNG. `--update` writes the captures as baselines, creating missing ones. `--out <dir>` sets where captures, diff images and `summary.json` go (default `example/visual/artifacts/run/<platform>`, gitignored). `summary.json` is written on every exit.
 
-Prerequisites are the same as for the hand-run loop: app built and installed on the pinned device, Metro running. Set `AGENT_DEVICE_SESSION_CWD` to the directory whose agent-device session is bound to the device, or let the script bind a fresh one.
+Prerequisites are the same as for the hand-run loop: the app built and installed on a device matching the profile, an AVD named exactly `Pixel_10_Pro` on Android with `adb` and `emulator` reachable, and Metro running. After an Android boot the runner sets `adb reverse tcp:8081 tcp:8081` itself, since a cold emulator has no route to Metro. A simulator that has never booted runs Apple's first-boot migration, which can take longer than agent-device's 120 s boot cap; boot it once from Xcode before the first run.
 
-The pure helpers have seven `node:test` cases, no device needed:
+The pure helpers have ten `node:test` cases, no device needed (boot and the `open` retry are not covered):
 
 ```bash
 yarn example test:visual
 ```
+
+Left as follow-ups: creating the simulator or AVD when it is missing, per-profile baseline directories, `open --metro-port` in place of dismissing the dev launcher, and CI.
 
 Not run by Jest, the pre-commit hook or CI. `results.csv` was produced from the raw `diff screenshot` JSON on the runner branch.
 
@@ -130,7 +133,7 @@ Things `run.mjs` had to deal with. None is an agent-device bug:
 - Dev-client chrome: on Android a relaunch lands in the dev launcher; on iOS the first-run onboarding sheet dims the whole app and `wait stable` reports it as settled; on both, the floating Tools button can sit inside the crop. Dismiss all of it before capturing, or capture from a release build.
 - Set `--threshold` explicitly (0.02 for soft shadows) and verify noise at it; the default 0.1 is documented as a 44-unit RGB tolerance, far looser than a one-step shadow change.
 - Use `find … list` to locate without tapping, `--first` or a `role=` qualifier where Android exposes the same label on a row and its text child, and assert on node count after `snapshot --scope`, which returns success with empty nodes when nothing matches.
-- Pin the device (UDID, runtime, density) and refuse to compare or re-baseline on anything else; derive expected capture size from the baseline PNG, per story.
+- Pin the device profile, resolve the instance through `simctl` and `agent-device devices` and boot it, and refuse to compare or re-baseline on a different image; derive expected capture size from the baseline PNG, per story.
 - A plain `.mjs` entry guarded by `import.meta.main` does nothing on Node 20/22; guard with an `argv[1]` comparison.
 
 ## Evidence
@@ -138,6 +141,6 @@ Things `run.mjs` had to deal with. None is an agent-device bug:
 - `evidence/results.csv`: one row per `diff screenshot` run (74 rows, including the two dev-client false FAILs): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
 - `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match and deletes any stale file at that path.
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json`, `evidence/web-excerpt.json`: the nodes and responses that matter; full trees on the runner branch.
-- `env.json`: the pinned devices, versions and thresholds.
+- `env.json`: the pinned device profiles, versions and thresholds.
 
 The first-run rows predate the test-id rename and their source files say `surface-elevated` / `surface-flat`; renaming an id changes no pixel.

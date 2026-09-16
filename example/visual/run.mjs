@@ -2,7 +2,7 @@
 /**
  * Visual regression loop for the Surface example (PoC).
  *
- *   node example/visual/run.mjs --platform ios|android [--update] [--force]
+ *   node example/visual/run.mjs --platform ios|android [--update]
  *                               [--threshold 0.02] [--story surface-example-elevated,surface-example-flat]
  *                               [--out <dir>]
  *
@@ -11,10 +11,14 @@
  * dependency, which this PoC avoided; a runner that adopts the tool should
  * switch to the client.
  *
+ * The device is resolved from the profile in example/visual/env.json (simulator
+ * name plus runtime on iOS, AVD name on Android) and booted if needed, so no
+ * UDID or serial is pinned anywhere.
+ *
  * Prerequisites (documented, not automated): the example app is already built
  * and installed on a device matching example/visual/env.json, Metro is running,
  * and the baselines in example/visual/__baselines__/<platform>/ were captured
- * on that same device.
+ * on that same device profile.
  *
  * Every run relaunches the app: the example app persists its navigation state
  * (PERSISTENCE_KEY in example/src/index.tsx), and only a relaunch makes the app
@@ -91,10 +95,9 @@ const LIST_ROOT_TITLE = 'Examples'; // Appbar title of the example-list root
 const SURFACE_ROW_LABEL = 'Surface';
 const BACK_LABEL = 'Back';
 
-// agent-device sessions are keyed by cwd. Point this at the directory whose
-// session is already bound to the intended device to reuse that binding;
-// otherwise a fresh session is created and bound by `open --udid`.
-const SESSION_CWD = process.env.AGENT_DEVICE_SESSION_CWD || VISUAL_DIR;
+// One fixed session name per platform, so a run is reproducible from any
+// directory and the README's hand-run commands address the same session.
+const sessionName = (platform) => `paper-visual-${platform}`;
 
 let commandSeq = 0;
 let cmdDir = VISUAL_DIR;
@@ -115,10 +118,6 @@ function fail(message, code = 2) {
   throw new RunFailure(message, code);
 }
 
-function warn(message) {
-  console.warn(`WARNING: ${message}`);
-}
-
 function sleepSync(ms) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
@@ -126,7 +125,6 @@ function sleepSync(ms) {
 function parseArgs(argv) {
   const out = {
     update: false,
-    force: false,
     threshold: DEFAULT_THRESHOLD,
     stories: DEFAULT_STORIES,
     outDir: null,
@@ -147,9 +145,6 @@ function parseArgs(argv) {
       case '--update':
         out.update = true;
         break;
-      case '--force':
-        out.force = true;
-        break;
       case '--threshold':
         out.threshold = Number(next());
         break;
@@ -166,14 +161,12 @@ function parseArgs(argv) {
       case '--help':
       case '-h':
         console.log(
-          'usage: node example/visual/run.mjs --platform ios|android [--update] [--force]\n' +
+          'usage: node example/visual/run.mjs --platform ios|android [--update]\n' +
             '                                  [--threshold <0-1>] [--story|--stories a,b] [--out <dir>]\n' +
             '\n' +
             '  --update  write the captures to __baselines__/<platform>/ instead of diffing\n' +
             '            them (the capture-size check is skipped; the captured dimensions\n' +
-            '            are printed instead)\n' +
-            '  --force   run even though the device does not match env.json. It covers the\n' +
-            '            device check only — a capture-size mismatch is never overridden.'
+            '            are printed instead)'
         );
         process.exit(0);
         break;
@@ -211,6 +204,14 @@ function spawnEnv() {
   for (const [key, value] of Object.entries(process.env)) {
     if (!key.startsWith('npm_config_')) env[key] = value;
   }
+  // A documented lookup path for the Android SDK: agent-device needs the
+  // `emulator` binary to list stopped AVDs at all, and looks for the SDK under
+  // ANDROID_SDK_ROOT, ANDROID_HOME and ~/Android/Sdk. The standard macOS
+  // install is at neither, so point it there when the user has set nothing.
+  const sdk = path.join(process.env.HOME || '', 'Library/Android/sdk');
+  if (!env.ANDROID_HOME && !env.ANDROID_SDK_ROOT && fs.existsSync(sdk)) {
+    env.ANDROID_HOME = sdk;
+  }
   return env;
 }
 
@@ -219,7 +220,7 @@ function ad(label, args, { allowFail = false } = {}) {
   const argv = [AGENT_DEVICE, ...args, '--json'];
   const startedAt = Date.now();
   const proc = spawnSync('npx', argv, {
-    cwd: SESSION_CWD,
+    cwd: VISUAL_DIR,
     encoding: 'utf8',
     env: spawnEnv(),
     maxBuffer: 256 * 1024 * 1024,
@@ -247,7 +248,7 @@ function ad(label, args, { allowFail = false } = {}) {
     JSON.stringify(
       {
         command: ['npx', ...argv],
-        cwd: SESSION_CWD,
+        cwd: VISUAL_DIR,
         exitCode: proc.status,
         elapsedMs,
         response: parsed,
@@ -309,164 +310,189 @@ function adbPath() {
   return fs.existsSync(candidate) ? candidate : 'adb';
 }
 
+/** adb addressed at the resolved device, so a second emulator cannot take the call. */
+const adb = (device, args) => sh(adbPath(), ['-s', device.id, ...args]);
+
 /**
- * Reads the simulator matching `expectedUdid` out of `xcrun simctl list`.
- * Returns `{ observed }` on success, or `{ error }` describing why the device
- * could not be inspected.
+ * Picks the simulator the baselines belong to out of a parsed
+ * `xcrun simctl list -j devices`: the pinned name on the pinned runtime, a
+ * booted one first so a second clone is not started for nothing. Pure, so it
+ * can be tested against a captured listing. `elsewhere` collects the runtimes
+ * that do carry that name, which is the useful half of a "not found" message.
  */
-function observeIos(expectedUdid) {
-  const res = sh('xcrun', ['simctl', 'list', '-j', 'devices']);
-  if (res.status !== 0) {
-    return {
-      error: {
-        what: 'device inspection',
-        expected: `xcrun simctl list to succeed for udid ${expectedUdid}`,
-        actual: `exit ${res.status} ${res.stderr.trim()}`,
-      },
-    };
-  }
+function pickIosCandidate(listing, env) {
+  const candidates = [];
+  const elsewhere = new Set();
 
-  let devices;
-  try {
-    devices = JSON.parse(res.stdout).devices || {};
-  } catch {
-    return {
-      error: {
-        what: 'device inspection',
-        expected: 'parseable xcrun simctl list output',
-        actual: 'unparseable JSON',
-      },
-    };
-  }
-
-  let match = null;
-  for (const [runtime, list] of Object.entries(devices)) {
+  for (const [runtime, list] of Object.entries(listing?.devices || {})) {
     for (const device of list) {
-      if (device.udid === expectedUdid) match = { runtime, device };
+      if (device.name !== env.device || device.isAvailable === false) continue;
+      if (runtime === env.runtime) {
+        candidates.push({
+          id: device.udid,
+          name: device.name,
+          runtime,
+          state: device.state,
+          booted: device.state === 'Booted',
+        });
+      } else {
+        elsewhere.add(runtime);
+      }
     }
   }
 
-  if (!match) {
-    return {
-      error: {
-        what: 'udid',
-        expected: expectedUdid,
-        actual: 'not present in xcrun simctl list (no such simulator)',
-      },
-    };
-  }
-
   return {
-    observed: {
-      udid: match.device.udid,
-      name: match.device.name,
-      runtime: match.runtime,
-      state: match.device.state,
-    },
+    device: candidates.find((c) => c.booted) || candidates[0] || null,
+    elsewhere: [...elsewhere],
   };
 }
 
-/** Reads API level, release and density off the connected device via adb. */
-function observeAndroid() {
-  const adb = adbPath();
-  const prop = (name) => sh(adb, ['shell', 'getprop', name]).stdout.trim();
+/** Resolves the iOS simulator from the profile. The runtime check is part of it. */
+function resolveIos(env) {
+  const res = sh('xcrun', ['simctl', 'list', '-j', 'devices']);
+  if (res.status !== 0) {
+    fail(`xcrun simctl list failed: exit ${res.status} ${res.stderr.trim()}`);
+  }
+
+  let listing;
+  try {
+    listing = JSON.parse(res.stdout);
+  } catch {
+    fail('xcrun simctl list did not return parseable JSON');
+  }
+
+  const { device, elsewhere } = pickIosCandidate(listing, env);
+  if (!device) {
+    fail(
+      `no simulator named ${env.device} on ${env.runtime}` +
+        (elsewhere.length
+          ? `; that name exists on ${elsewhere.join(', ')}`
+          : '') +
+        '; create one in Xcode (Devices and Simulators)'
+    );
+  }
+  return device;
+}
+
+/**
+ * Picks the emulator or stopped AVD matching the profile. agent-device reports
+ * a running emulator under its serial and the AVD name as `name`, and a stopped
+ * one under the AVD name twice, so both handles are accepted; a physical device
+ * with the same marketing name is not an AVD and is ignored. Pure, exported for
+ * the tests.
+ */
+function pickAndroid(devices, env) {
+  const candidates = (devices || []).filter(
+    (d) => d.kind === 'emulator' && (d.id === env.avd || d.name === env.device)
+  );
+  return candidates.find((d) => d.booted) || candidates[0] || null;
+}
+
+/** Resolves the Android emulator from the profile, booting the AVD if it is stopped. */
+function resolveAndroid(env, adFn = ad) {
+  const list = adFn('devices-android', ['devices', '--platform', 'android']);
+  const found = pickAndroid(list.data?.devices, env);
+  if (!found) {
+    fail(
+      `no AVD named ${env.avd} (agent-device lists stopped AVDs only when the ` +
+        'emulator binary is on PATH or ANDROID_HOME is set); create one in ' +
+        `Android Studio with ${env.systemImage}`
+    );
+  }
+  if (found.booted) return { id: found.id, name: found.name };
+
+  // No --session on boot: the session may still be bound to a serial from an
+  // earlier emulator, and a selector naming another identity is INVALID_ARGS.
+  const boot = adFn(
+    'boot-android',
+    ['boot', '--platform', 'android', '--device', found.id],
+    { allowFail: true }
+  );
+  if (!boot.ok) failAd(`boot ${found.id}`, boot);
+  return { id: boot.data?.id || found.id, name: found.name };
+}
+
+/** Reports an agent-device failure with its own message and hint, verbatim. */
+function failAd(what, res) {
+  fail(
+    `agent-device ${what} failed: ${res.error?.message || 'no message'}` +
+      (res.error?.hint ? `\nhint: ${res.error.hint}` : '')
+  );
+}
+
+/** Reads API level, release and density off the resolved device via adb. */
+function observeAndroid(serial) {
+  const adbBin = adbPath();
+  const prop = (name) =>
+    sh(adbBin, ['-s', serial, 'shell', 'getprop', name]).stdout.trim();
   const sdkLevel = prop('ro.build.version.sdk');
   if (!sdkLevel) {
     return {
       error: {
         what: 'device inspection',
-        expected: `Android properties readable via ${adb}`,
-        actual: 'no response (is an emulator connected?)',
+        expected: `Android properties readable via ${adbBin} -s ${serial}`,
+        actual: 'no response (is the emulator still up?)',
       },
     };
   }
 
-  const densityOut = sh(adb, ['shell', 'wm', 'density']).stdout;
-  const densityMatch = densityOut.match(/(\d+)\s*$/m);
+  // An override set with `wm density` is what the screen actually renders at,
+  // so it wins over the physical density of the image.
+  const densityOut = sh(adbBin, [
+    '-s',
+    serial,
+    'shell',
+    'wm',
+    'density',
+  ]).stdout;
+  const density =
+    densityOut.match(/Override density:\s*(\d+)/) ||
+    densityOut.match(/Physical density:\s*(\d+)/);
 
   return {
     observed: {
       apiLevel: Number(sdkLevel),
       androidRelease: prop('ro.build.version.release'),
-      density: densityMatch ? Number(densityMatch[1]) : null,
+      density: density ? Number(density[1]) : null,
     },
   };
 }
 
-const DEFAULT_OBSERVERS = { observeIos, observeAndroid };
+const DEFAULT_OBSERVERS = { observeAndroid };
 
 /**
- * Compares the connected device with env.json. Returns the observed values and
- * the list of mismatches; the caller decides what to do with them. A device
- * that cannot be inspected counts as a mismatch: baselines are only meaningful
- * on a device we could actually identify. The observers are injected so the
- * comparison can be tested without xcrun/adb.
- */
-function checkEnvironment(platform, env, observers = DEFAULT_OBSERVERS) {
-  const mismatches = [];
-  const mismatch = (what, expected, actual) =>
-    mismatches.push(`${what}: expected ${expected}, observed ${actual}`);
-
-  const read =
-    platform === 'ios'
-      ? observers.observeIos(env.udid)
-      : observers.observeAndroid();
-  if (read.error) {
-    mismatch(read.error.what, read.error.expected, read.error.actual);
-    return { observed: {}, mismatches };
-  }
-  const observed = read.observed;
-
-  if (platform === 'ios') {
-    // The runtime identifier carries the iOS version (…SimRuntime.iOS-26-5), so
-    // comparing it also covers env.iosVersion.
-    if (env.runtime && observed.runtime !== env.runtime) {
-      mismatch('runtime', env.runtime, observed.runtime);
-    }
-    if (env.device && observed.name !== env.device) {
-      mismatch('device name', env.device, observed.name);
-    }
-    if (observed.state !== 'Booted') {
-      mismatch('device state', 'Booted', observed.state);
-    }
-    return { observed, mismatches };
-  }
-
-  if (env.apiLevel != null && observed.apiLevel !== env.apiLevel) {
-    mismatch('Android API level', env.apiLevel, observed.apiLevel);
-  }
-  if (env.density != null && observed.density !== env.density) {
-    mismatch('Android density', env.density, observed.density ?? 'unreadable');
-  }
-  return { observed, mismatches };
-}
-
-/**
- * Throws unless the device matches env.json. `--force` downgrades the
- * mismatches to warnings so a deliberate re-baseline on another device is
- * still possible, but never by accident. This is the only check `--force`
- * covers.
+ * The one check left after resolution, and Android only: an AVD name says
+ * nothing about the system image behind it, so the API level and the density
+ * the baselines were captured on are still compared. iOS needs nothing here,
+ * because resolving the simulator already matched the name and the runtime.
+ * The observer is injected so this can be tested without adb.
  */
 function enforceEnvironment(
   platform,
   env,
-  force,
+  device,
   observers = DEFAULT_OBSERVERS
 ) {
-  const { observed, mismatches } = checkEnvironment(platform, env, observers);
-  if (mismatches.length === 0) return observed;
+  if (platform !== 'android') return {};
 
-  const detail = mismatches.map((m) => `  - ${m}`).join('\n');
-  if (force) {
-    warn(`device does not match ${ENV_FILE} (--force):\n${detail}`);
-    return observed;
+  const read = observers.observeAndroid(device.id);
+  if (read.error) {
+    fail(
+      `${read.error.what}: expected ${read.error.expected}, ` +
+        `observed ${read.error.actual}`
+    );
   }
-  fail(
-    `device does not match ${ENV_FILE}:\n${detail}\n` +
-      'refusing to run: baselines are only comparable on the device they were captured on. ' +
-      'Boot/point at the right device, or pass --force to continue anyway.'
-  );
-  return observed; // unreachable; keeps the return type honest
+  const observed = read.observed;
+
+  if (observed.apiLevel !== env.apiLevel || observed.density !== env.density) {
+    fail(
+      `AVD ${env.avd} reports API ${observed.apiLevel} / ` +
+        `${observed.density ?? 'unreadable'} dpi, baselines were captured on ` +
+        `API ${env.apiLevel} / ${env.density} dpi. To re-baseline on this ` +
+        'image, set apiLevel and density in env.json and run with --update'
+    );
+  }
+  return observed;
 }
 
 /** Canonical baseline path: __baselines__/<platform>/<story>.png */
@@ -539,9 +565,8 @@ function readPngSize(file) {
  *
  * Skipped entirely in `--update` mode: the whole point of that mode is to
  * record what the device produces now, and a new story has no baseline to check
- * against. In diff mode there is no override — a size mismatch on a device that
- * matches env.json means something is wrong that no flag should paper over, so
- * `--force` does not reach this check.
+ * against. In diff mode there is no override: a size mismatch on a device that
+ * matches env.json means something is wrong that no flag should paper over.
  */
 function checkCaptureSize(
   env,
@@ -592,7 +617,7 @@ function checkCaptureSize(
       `${path.relative(VISUAL_DIR, baselineFile)}:\n${detail}\n` +
       'a wrong-sized capture cannot be compared with the baseline. Check ' +
       '--crop-on/--pixel-density and the device; if the new size is the intended ' +
-      'one, re-record the baselines with --update. (--force does not override this.)',
+      'one, re-record the baselines with --update.',
     3
   );
 }
@@ -683,7 +708,7 @@ function describeNode(node) {
  * dev-menu/shake command (checked in `help commands`), so on iOS there is
  * nothing to drive and the run stops instead.
  */
-function disableFloatingTools(platform, globals, nodes) {
+function disableFloatingTools(platform, globals, device, nodes) {
   const tools = findFloatingToolsNode(nodes);
   if (!tools) return nodes;
 
@@ -696,7 +721,7 @@ function disableFloatingTools(platform, globals, nodes) {
 
   if (platform !== 'android') giveUp('cannot be toggled automatically on iOS');
 
-  const menu = sh(adbPath(), [
+  const menu = adb(device, [
     'shell',
     'input',
     'keyevent',
@@ -824,7 +849,7 @@ function atListRoot(nodes) {
  * Appbar "Back" element when there is one (present on both platforms), and
  * falls back to platform back navigation for a screen with no header.
  */
-function goBackToListRoot(platform, globals, nodes) {
+function goBackToListRoot(platform, globals, device, nodes) {
   let current = nodes;
 
   for (let step = 0; step < MAX_BACK_STEPS; step++) {
@@ -836,7 +861,7 @@ function goBackToListRoot(platform, globals, nodes) {
       ad('press-back', ['press', `@${back.ref}`, '--settle', ...globals]);
     } else if (platform === 'android') {
       console.log('  no "Back" element — sending Android KEYCODE_BACK');
-      const res = sh(adbPath(), ['shell', 'input', 'keyevent', '4']);
+      const res = adb(device, ['shell', 'input', 'keyevent', '4']);
       if (res.status !== 0) {
         fail(`adb input keyevent 4 failed: ${res.stderr.trim()}`);
       }
@@ -943,6 +968,29 @@ function navigateToSurface(globals, stories) {
 }
 
 /**
+ * Opens the app and binds the session to the resolved device in the same call.
+ * A session left over from an earlier run can still be bound to a device that
+ * is gone (a re-created emulator gets a new serial), and agent-device rejects
+ * the selector rather than rebinding, so that one case is recovered by closing
+ * the session and opening again. Everything else is a setup error carrying
+ * agent-device's own message and hint, a foreign claim on the device included.
+ */
+function openApp(label, extra, globals, bind) {
+  const args = ['open', BUNDLE_ID, ...extra, ...globals, ...bind];
+  const first = ad(label, args, { allowFail: true });
+  if (first.ok) return;
+
+  const code = first.error?.code;
+  if (code !== 'INVALID_ARGS' && code !== 'DEVICE_NOT_FOUND')
+    failAd(label, first);
+
+  console.log(`  ${code} from open, closing the session and retrying once`);
+  ad('close-session', ['close', ...globals], { allowFail: true });
+  const retry = ad(`${label}-retry`, args, { allowFail: true });
+  if (!retry.ok) failAd(`${label} (after close)`, retry);
+}
+
+/**
  * Relaunches the app and leaves it on the Surface example screen.
  *
  * The relaunch is unconditional. The app persists its navigation state
@@ -952,21 +1000,22 @@ function navigateToSurface(globals, stories) {
  * from Metro. Skipping it on the strength of the screen that happens to be up
  * captured a stale bundle on Android.
  */
-function openOnSurfaceScreen(platform, globals, stories) {
+function openOnSurfaceScreen(platform, globals, bind, device, stories) {
   console.log('  relaunching the app (fresh bundle from Metro)');
   if (platform === 'ios') {
-    ad('open-relaunch', ['open', BUNDLE_ID, '--relaunch', ...globals]);
+    openApp('open-relaunch', ['--relaunch'], globals, bind);
   } else {
-    const stop = sh(adbPath(), ['shell', 'am', 'force-stop', BUNDLE_ID]);
+    const stop = adb(device, ['shell', 'am', 'force-stop', BUNDLE_ID]);
     if (stop.status !== 0) {
       fail(`adb force-stop ${BUNDLE_ID} failed: ${stop.stderr.trim()}`);
     }
-    ad('open-after-force-stop', ['open', BUNDLE_ID, ...globals]);
+    openApp('open-after-force-stop', [], globals, bind);
   }
 
   const nodes = disableFloatingTools(
     platform,
     globals,
+    device,
     dismissOverlays(globals)
   );
 
@@ -976,7 +1025,7 @@ function openOnSurfaceScreen(platform, globals, stories) {
   }
 
   console.log('  not on the Surface screen — going back to the example list');
-  const rootNodes = goBackToListRoot(platform, globals, nodes);
+  const rootNodes = goBackToListRoot(platform, globals, device, nodes);
   console.log(`  at the example list root (${rootNodes.length} nodes)`);
   navigateToSurface(globals, stories);
 }
@@ -994,19 +1043,40 @@ function runPass(state) {
   const env = platform === 'ios' ? envFile : { ...envFile.android };
   state.env = env;
 
-  const globals =
-    platform === 'ios'
-      ? ['--platform', 'ios', '--udid', env.udid]
-      : [
-          '--platform',
-          'android',
-          '--session',
-          env.agentDeviceSession || 'android',
-        ];
+  // Resolve the instance from the profile, boot it if it is down, and only
+  // then bind a session to it: `boot` takes a selector and no session, because
+  // a session left bound to another identity would reject the selector.
+  const device = platform === 'ios' ? resolveIos(env) : resolveAndroid(env);
+  if (platform === 'ios' && !device.booted) {
+    const boot = ad(
+      'boot-ios',
+      ['boot', '--platform', 'ios', '--udid', device.id],
+      { allowFail: true }
+    );
+    if (!boot.ok) failAd(`boot ${device.id}`, boot);
+  }
+  state.device = { id: device.id, name: device.name };
+  console.log(`# ${platform} ${device.name} (${device.id})`);
+  if (platform === 'android') {
+    // A cold-booted emulator has no tunnel to Metro; the dev launcher's
+    // http://localhost:8081 row loads nothing without it.
+    const reverse = adb(device, ['reverse', 'tcp:8081', 'tcp:8081']);
+    if (reverse.status !== 0) {
+      console.log(`  adb reverse failed: ${reverse.stderr.trim()}`);
+    }
+  }
+  console.log(
+    `# threshold ${opts.threshold}${opts.update ? ' (update)' : ''}, output: ${opts.outDir}`
+  );
 
-  state.observedEnv = enforceEnvironment(platform, env, opts.force);
+  // `open` binds the session to the device; every later command addresses the
+  // session alone, so no selector can conflict with that binding mid-run.
+  const globals = ['--platform', platform, '--session', sessionName(platform)];
+  const bind = [platform === 'ios' ? '--udid' : '--serial', device.id];
 
-  openOnSurfaceScreen(platform, globals, opts.stories);
+  state.observedEnv = enforceEnvironment(platform, env, device);
+
+  openOnSurfaceScreen(platform, globals, bind, device, opts.stories);
   ad('wait-stable', ['wait', 'stable', '500', '10000', ...globals]);
   sleepSync(2000); // covers the customFontLoaded theme swap, which has no node change
 
@@ -1096,11 +1166,11 @@ function writeSummary(state, exitCode, error) {
     platform: opts.platform,
     threshold: opts.threshold,
     update: opts.update,
-    force: opts.force,
     stories: opts.stories,
     outDir: opts.outDir,
     agentDeviceVersion: AGENT_DEVICE,
-    sessionCwd: SESSION_CWD,
+    session: sessionName(opts.platform),
+    device: state.device,
     expectedEnv: state.env,
     observedEnv: state.observedEnv,
     startedAt: new Date(state.startedAt).toISOString(),
@@ -1135,6 +1205,7 @@ function main() {
   const state = {
     opts,
     env: null,
+    device: null,
     observedEnv: {},
     results: [],
     startedAt: Date.now(),
@@ -1142,11 +1213,6 @@ function main() {
 
   cmdDir = path.join(opts.outDir, 'cmds');
   fs.mkdirSync(cmdDir, { recursive: true });
-
-  console.log(
-    `# ${opts.platform} — threshold ${opts.threshold}${opts.update ? ' (update)' : ''}${opts.force ? ' (force)' : ''}`
-  );
-  console.log(`# output: ${opts.outDir}`);
 
   let exitCode = 0;
   let error = null;
@@ -1201,6 +1267,9 @@ export {
   isMainModule,
   checkCaptureSize,
   enforceEnvironment,
+  pickAndroid,
+  pickIosCandidate,
+  resolveAndroid,
   atListRoot,
   findFloatingToolsNode,
   findSurfaceRow,

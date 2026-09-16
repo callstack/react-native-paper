@@ -21,6 +21,9 @@ import {
   findFloatingToolsNode,
   findSurfaceRow,
   isMainModule,
+  pickAndroid,
+  pickIosCandidate,
+  resolveAndroid,
 } from './run.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -109,49 +112,123 @@ test('checkCaptureSize fails with exit code 3 in diff mode', () => {
   );
 });
 
-test('--force covers the device check but not the size check', () => {
-  // Fake observers: the check compares env.json with these, so the test needs
-  // neither adb nor xcrun on PATH.
+test('enforceEnvironment compares the image of the device it resolved', () => {
+  // Fake observer: the check compares env.json with this, so the test needs no
+  // adb on PATH. It also records the serial it was addressed with.
+  const seen = [];
   const observers = {
-    observeIos: () => ({
-      observed: { udid: 'fake', name: 'iPhone', runtime: 'r', state: 'Booted' },
-    }),
-    observeAndroid: () => ({
-      observed: { apiLevel: 37, androidRelease: '17', density: 480 },
-    }),
+    observeAndroid: (serial) => {
+      seen.push(serial);
+      return { observed: { apiLevel: 37, androidRelease: '17', density: 480 } };
+    },
   };
-  const mismatched = { apiLevel: -1, density: -1 };
+  const device = { id: 'emulator-5556', name: 'Pixel 10 Pro' };
+  const check = (apiLevel, density) =>
+    enforceEnvironment(
+      'android',
+      { avd: 'Pixel_10_Pro', apiLevel, density },
+      device,
+      observers
+    );
 
   assert.throws(
-    () => enforceEnvironment('android', mismatched, false, observers),
+    () => check(36, 420),
     (thrown) => {
       assert.ok(thrown instanceof RunFailure);
       assert.equal(thrown.exitCode, 2);
+      // Both the observed and the expected image are named.
+      assert.match(thrown.message, /API 37 \/ 480 dpi/);
+      assert.match(thrown.message, /API 36 \/ 420 dpi/);
       return true;
     }
   );
-  assert.doesNotThrow(() =>
-    enforceEnvironment('android', mismatched, true, observers)
+  assert.doesNotThrow(() => check(37, 480));
+  // adb was addressed at the resolved emulator, not at adb's default device.
+  assert.deepEqual(seen, ['emulator-5556', 'emulator-5556']);
+  // iOS is fully resolved by then, so there is nothing left to observe.
+  assert.deepEqual(enforceEnvironment('ios', {}, device, observers), {});
+  assert.equal(seen.length, 2);
+});
+
+// Shapes captured from `agent-device devices --platform android --json`: a
+// running emulator is listed under its serial, a stopped AVD under its name.
+const emu = (id, name, booted, kind = 'emulator') => ({
+  id,
+  name,
+  kind,
+  booted,
+});
+const COLD = emu('Pixel_10_Pro', 'Pixel_10_Pro', false);
+const WARM = emu('emulator-5554', 'Pixel 10 Pro', true);
+const PROFILE = { avd: 'Pixel_10_Pro', device: 'Pixel 10 Pro' };
+
+test('pickAndroid finds the AVD warm or cold and ignores a real device', () => {
+  assert.equal(pickAndroid([COLD], PROFILE)?.id, 'Pixel_10_Pro');
+  assert.equal(pickAndroid([WARM], PROFILE)?.id, 'emulator-5554');
+  // A booted emulator wins over the stopped AVD entry for the same profile.
+  assert.equal(pickAndroid([COLD, WARM], PROFILE)?.id, 'emulator-5554');
+  // A physical phone with the same marketing name is not the AVD.
+  assert.equal(
+    pickAndroid([emu('R5CT80', 'Pixel 10 Pro', true, 'device')], PROFILE),
+    null
   );
-  // A matching device needs no force at all.
-  assert.doesNotThrow(() =>
-    enforceEnvironment(
-      'android',
-      { apiLevel: 37, density: 480 },
-      false,
-      observers
-    )
+  assert.equal(pickAndroid([], PROFILE), null);
+});
+
+test('pickIosCandidate matches the name on the pinned runtime only', () => {
+  // Shape of `xcrun simctl list -j devices`, trimmed to what the picker reads.
+  const sim = (udid, name, state) => ({ udid, name, state, isAvailable: true });
+  const PINNED = 'com.apple.CoreSimulator.SimRuntime.iOS-26-5';
+  const OTHER = 'com.apple.CoreSimulator.SimRuntime.iOS-26-4';
+  const profile = { device: 'iPhone 17 Pro', runtime: PINNED };
+  const listing = (proState) => ({
+    devices: {
+      [PINNED]: [
+        sim('U-PRO', 'iPhone 17 Pro', proState),
+        sim('U-MAX', 'iPhone 17 Pro Max', 'Shutdown'),
+        sim('U-17', 'iPhone 17', 'Shutdown'),
+      ],
+      [OTHER]: [sim('U-OLD', 'iPhone 17 Pro', 'Booted')],
+    },
+  });
+
+  const picked = pickIosCandidate(listing('Booted'), profile);
+  assert.equal(picked.device.id, 'U-PRO');
+  assert.equal(picked.device.booted, true);
+  // The other runtime's simulator is not chosen even when it is the only
+  // Booted one, and neither is the Pro Max on the pinned runtime.
+  assert.equal(
+    pickIosCandidate(listing('Shutdown'), profile).device.id,
+    'U-PRO'
   );
 
-  // The size check takes no force: a stray `force` in the options changes nothing.
-  assert.throws(
-    () =>
-      checkCaptureSize(env, 'story', wrongSize, {
-        force: true,
-        baselineFile: writePngHeader(TMP_DIR, 'force.png', 1206, 642),
-      }),
-    RunFailure
+  // Nothing on the pinned runtime: report the runtimes that do have the name.
+  const missing = pickIosCandidate(
+    { devices: { [OTHER]: [sim('U-OLD', 'iPhone 17 Pro', 'Booted')] } },
+    profile
   );
+  assert.equal(missing.device, null);
+  assert.deepEqual(missing.elsewhere, [OTHER]);
+});
+
+test('resolveAndroid boots a stopped AVD by name and takes the serial back', () => {
+  const calls = [];
+  const fakeAd = (label, args) => {
+    calls.push(args);
+    return label === 'devices-android'
+      ? { ok: true, data: { devices: [COLD] } }
+      : { ok: true, data: { id: 'emulator-5554', booted: true } };
+  };
+
+  assert.equal(resolveAndroid(PROFILE, fakeAd).id, 'emulator-5554');
+  // A session on boot would collide with a binding left from an earlier run.
+  assert.deepEqual(calls[1], [
+    'boot',
+    '--platform',
+    'android',
+    '--device',
+    'Pixel_10_Pro',
+  ]);
 });
 
 test('atListRoot needs the "Examples" title and no Back element', () => {
