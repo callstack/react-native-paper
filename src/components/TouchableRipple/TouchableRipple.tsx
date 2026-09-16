@@ -15,7 +15,7 @@ import { getTouchableRippleColors } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 export type Props = PressableProps & {
@@ -24,7 +24,7 @@ export type Props = PressableProps & {
    */
   borderless?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: Object;
@@ -232,14 +232,16 @@ const TouchableRipple = ({
       onPressOut?.(e);
 
       if (rippleEffectEnabled) {
-        const containers = e.currentTarget.querySelectorAll(
-          '[data-paper-ripple]'
-        ) as HTMLElement[];
+        const containers: NodeListOf<HTMLElement> =
+          e.currentTarget.querySelectorAll('[data-paper-ripple]');
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             containers.forEach((container) => {
-              const ripple = container.firstChild as HTMLSpanElement;
+              const ripple = container.firstElementChild;
+              if (!(ripple instanceof HTMLSpanElement)) {
+                return;
+              }
 
               Object.assign(ripple.style, {
                 transitionDuration: '250ms',

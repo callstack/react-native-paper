@@ -193,18 +193,19 @@ describe('Tooltip', () => {
       describe('When it does not overflow', () => {
         it('centers the tooltip in the middle of the children component', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup();
 
           await userEvent.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
             top: 250, // pageY (200) + height (50)
           });
@@ -214,18 +215,19 @@ describe('Tooltip', () => {
       describe('When it overflows to left', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
           await userEvent.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 0, // Tooltip renders starting from children's x coord
             top: 250,
           });
@@ -235,18 +237,19 @@ describe('Tooltip', () => {
       describe('When it overflows to right', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
           await userEvent.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
             top: 250,
           });
@@ -256,18 +259,19 @@ describe('Tooltip', () => {
       describe('When it overflows to bottom', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageY: 600, height: 50 });
 
           await userEvent.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 210,
             top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
           });
@@ -388,19 +392,20 @@ describe('Tooltip', () => {
       describe('When it does not overflow', () => {
         it('centers the tooltip in the middle of the children component', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup();
 
           await fireEvent(getTrigger(getByText), 'hoverIn');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
             top: 250, // pageY (200) + height (50)
           });
@@ -410,19 +415,20 @@ describe('Tooltip', () => {
       describe('When it overflows to left', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
           await fireEvent(getTrigger(getByText), 'hoverIn');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 0, // Tooltip renders starting from children's x coord
             top: 250,
           });
@@ -432,19 +438,20 @@ describe('Tooltip', () => {
       describe('When it overflows to right', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
           await fireEvent(getTrigger(getByText), 'hoverIn');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
             top: 250,
           });
@@ -454,19 +461,20 @@ describe('Tooltip', () => {
       describe('When it overflows to bottom', () => {
         it('renders the tooltip with the right placement', async () => {
           const {
-            wrapper: { getByText, getByTestId, findByText },
+            wrapper: { getByText, findByText },
           } = await setup({}, { pageY: 600, height: 50 });
 
           await fireEvent(getTrigger(getByText), 'hoverIn');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
           });
 
-          expect(getByTestId('tooltip-container')).toHaveStyle({
+          expect(tooltip.parent).toHaveStyle({
             left: 210,
             top: 500, // pageY (600) - TOOLTIP_HEIGHT (100) // Tooltip is placed at the top of the component,
           });

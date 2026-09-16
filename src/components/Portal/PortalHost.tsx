@@ -18,6 +18,7 @@ export type PortalMethods = {
   unmount: (key: number) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 export const PortalContext = React.createContext<PortalMethods>(null as any);
 
 /**
@@ -50,7 +51,9 @@ export default class PortalHost extends React.Component<Props> {
     const queue = this.queue;
 
     while (queue.length && manager) {
-      const action = queue.pop();
+      // Replay in the order the operations were recorded, otherwise portals
+      // that mounted in the same commit end up stacked in reverse.
+      const action = queue.shift();
       if (action) {
         switch (action.type) {
           case 'mount':
@@ -95,7 +98,7 @@ export default class PortalHost extends React.Component<Props> {
       if (index > -1) {
         this.queue[index] = op;
       } else {
-        this.queue.push(op as Operation);
+        this.queue.push(op);
       }
     }
   };

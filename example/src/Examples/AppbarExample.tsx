@@ -140,6 +140,7 @@ const AppbarExample = () => {
           <RadioButton.Group
             value={appbarMode}
             onValueChange={(value: string) =>
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
               setAppbarMode(value as AppbarModes)
             }
           >

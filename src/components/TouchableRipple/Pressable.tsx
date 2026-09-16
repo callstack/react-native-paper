@@ -1,6 +1,5 @@
 import type * as React from 'react';
 import type {
-  Animated,
   PressableProps as PressableNativeProps,
   StyleProp,
   View,
@@ -27,15 +26,11 @@ export type PressableProps = Omit<
     | undefined;
   style?:
     | StyleProp<ViewStyle>
-    | Animated.WithAnimatedValue<StyleProp<ViewStyle>>
-    | ((
-        state: PressableStateCallbackType
-      ) =>
-        | StyleProp<ViewStyle>
-        | Animated.WithAnimatedValue<StyleProp<ViewStyle>>)
+    | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
 };
 
+// @ts-expect-error React Native Web adds focused and hovered callback state fields that React Native omits.
 export const Pressable: React.ForwardRefExoticComponent<
   PressableProps & React.RefAttributes<View>
-> = PressableNative as any;
+> = PressableNative;

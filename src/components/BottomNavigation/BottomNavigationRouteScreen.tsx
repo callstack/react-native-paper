@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
 import { Animated, Platform, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 

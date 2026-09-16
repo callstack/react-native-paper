@@ -1,7 +1,7 @@
 import type { ColorValue } from 'react-native';
 
 import { SwitchTokens } from './tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 export type SwitchColors = {
   // Enabled, base

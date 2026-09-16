@@ -17,6 +17,7 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Dialog', () => {
@@ -40,7 +41,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -56,7 +57,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -79,7 +80,7 @@ describe('Dialog', () => {
       </Dialog>
     );
 
-    await userEvent.press(screen.getByTestId('dialog-backdrop'));
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -149,11 +150,12 @@ describe('Dialog declarative API', () => {
 
   it('should accept a React node as content', async () => {
     await render(
-      <Dialog visible testID="dialog" title="Title">
-        <Dialog.Content>
-          <Text testID="custom-content">Custom node</Text>
-        </Dialog.Content>
-      </Dialog>
+      <Dialog
+        visible
+        testID="dialog"
+        title="Title"
+        content={<Text testID="custom-content">Custom node</Text>}
+      />
     );
 
     expect(screen.getByTestId('custom-content')).toBeOnTheScreen();

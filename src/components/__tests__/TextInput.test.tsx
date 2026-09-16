@@ -382,7 +382,10 @@ it('renders the input via render with merged props', async () => {
 
   expect(screen.getByTestId('custom-input')).toBeOnTheScreen();
   expect(renderInput).toHaveBeenCalled();
-  const merged = renderInput.mock.calls[0]?.[0] as TextInputRenderProps;
+  const merged = renderInput.mock.calls[0]?.[0];
+  if (!merged) {
+    throw new Error('Expected the custom input renderer to be called.');
+  }
   expect(merged['aria-label']).toBe('Pin');
   expect(merged.value).toBe('12');
 });

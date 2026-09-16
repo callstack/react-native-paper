@@ -29,7 +29,7 @@ it('returns styles for left item without description', () => {
   expect(style).toStrictEqual({ ...styles.leftItemV3, marginVertical: 0 });
 });
 
-it('returns styles for left item w/ desctiption', () => {
+it('returns styles for left item w/ description', () => {
   const style = getLeftStyles(true, description);
   expect(style).toStrictEqual({
     ...styles.leftItemV3,
@@ -46,7 +46,7 @@ it('returns styles for right item without description', () => {
   expect(style).toStrictEqual({ ...styles.rightItemV3, marginVertical: 0 });
 });
 
-it('returns styles for right item w/ desctiption', () => {
+it('returns styles for right item w/ description', () => {
   const style = getRightStyles(true, description);
   expect(style).toStrictEqual({
     ...styles.rightItemV3,

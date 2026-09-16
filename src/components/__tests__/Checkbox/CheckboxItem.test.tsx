@@ -59,14 +59,13 @@ it('disables the row when the prop disabled is true', async () => {
 });
 
 it('should have maxFontSizeMultiplier set to 1.5 by default', async () => {
-  await render(
-    <Checkbox.Item label="" testID="checkbox-item" status="unchecked" />
-  );
-  const checkboxItemText = screen.getByTestId('checkbox-item-text', {
-    includeHiddenElements: true,
-  });
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(checkboxItemText.props.maxFontSizeMultiplier).toBe(1.5);
+  const tree = (
+    await render(
+      <Checkbox.Item label="" testID="checkbox-item" status="unchecked" />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
 it('should execute onLongPress', async () => {

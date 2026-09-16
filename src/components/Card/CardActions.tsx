@@ -4,7 +4,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import type { CardActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = ViewProps & {
   /**
@@ -38,8 +38,11 @@ export type Props = ViewProps & {
 const CardActions = ({ theme, style, children, ...rest }: Props) => {
   useInternalTheme(theme);
 
-  const justifyContent = 'flex-end' as ViewStyle['justifyContent'];
-  const containerStyle = [styles.container, { justifyContent }, style];
+  const containerStyle = [
+    styles.container,
+    { justifyContent: 'flex-end' } satisfies ViewStyle,
+    style,
+  ];
 
   return (
     <View {...rest} style={containerStyle}>

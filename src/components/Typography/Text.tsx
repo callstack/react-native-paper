@@ -7,7 +7,7 @@ import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**
@@ -25,6 +25,9 @@ export type Props<T> = React.ComponentProps<typeof NativeText> & {
    *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   *
+   *  Each variant also has an `Emphasized` counterpart with a heavier font weight.
+   *  e.g. `displayLargeEmphasized`, `bodyMediumEmphasized` etc.
    */
   variant?: VariantProp<T>;
   children: React.ReactNode;
@@ -97,12 +100,13 @@ const Text = ({
     let textStyle = [font, style];
 
     if (
-      React.isValidElement(rest.children) &&
+      React.isValidElement<{
+        variant?: string;
+        style?: StyleProp<TextStyle>;
+      }>(rest.children) &&
       (rest.children.type === Component || rest.children.type === AnimatedText)
     ) {
-      const { props } = rest.children as {
-        props: { variant?: string; style?: StyleProp<TextStyle> };
-      };
+      const { props } = rest.children;
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
@@ -115,11 +119,15 @@ const Text = ({
       // Solution:  To address the following scenario, the code below overrides the `variant`
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
-        font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
+        font =
+          theme.fonts[
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+            props.variant as VariantProp<typeof props.variant>
+          ];
         textStyle = [style, font];
       }
 
-      // Case two:  Nested `Text` has specified `styles` which intefere
+      // Case two:  Nested `Text` has specified `styles` which interfere
       //            with font properties, from the parent's `variant`. For example:
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
@@ -176,6 +184,8 @@ type TextComponent<T> = (props: Props<T>) => ReactNode;
 
 const Component = Text as TextComponent<never>;
 
-export const customText = <T,>() => Component as unknown as TextComponent<T>;
+export const customText = <T,>() =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  Component as unknown as TextComponent<T>;
 
 export default Component;

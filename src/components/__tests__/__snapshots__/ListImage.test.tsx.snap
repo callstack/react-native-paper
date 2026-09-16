@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders ListImage with \`image\` variant 1`] = `
+<Image
+  accessibilityIgnoresInvertColors={true}
+  source={
+    {
+      "uri": "https://www.someurl.com/apple",
+    }
+  }
+  style={
+    [
+      undefined,
+      {
+        "height": 56,
+        "width": 56,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`renders ListImage with \`video\` variant 1`] = `
+<Image
+  accessibilityIgnoresInvertColors={true}
+  source={
+    {
+      "uri": "https://www.someurl.com/apple",
+    }
+  }
+  style={
+    [
+      undefined,
+      {
+        "height": 64,
+        "marginLeft": 0,
+        "width": 114,
+      },
+    ]
+  }
+/>
+`;
+
 exports[`renders ListImage with default variant & styles 1`] = `
 <Image
   accessibilityIgnoresInvertColors={true}
@@ -20,7 +61,6 @@ exports[`renders ListImage with default variant & styles 1`] = `
       },
     ]
   }
-  testID="list-image"
 />
 `;
 
@@ -41,6 +81,5 @@ exports[`renders ListImage with default variant 1`] = `
       },
     ]
   }
-  testID="list-image"
 />
 `;

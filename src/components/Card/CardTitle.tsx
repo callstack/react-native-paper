@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { TypescaleKey, ThemeProp } from '../../types';
+import type { TypescaleKey, ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 
 export type Props = ViewProps & {
@@ -102,6 +102,10 @@ export type Props = ViewProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const LEFT_SIZE = 40;
@@ -143,6 +147,7 @@ const CardTitle = ({
   rightStyle,
   style,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   useInternalTheme(themeOverrides);
 
@@ -150,7 +155,7 @@ const CardTitle = ({
   const marginBottom = subtitle ? 0 : 2;
 
   return (
-    <View style={[styles.container, { minHeight }, style]}>
+    <View style={[styles.container, { minHeight }, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({

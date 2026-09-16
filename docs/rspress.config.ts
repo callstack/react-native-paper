@@ -3,6 +3,9 @@ import { defineConfig } from '@rspress/core';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import componentDocsConfig from './component-docs.config.ts';
+import { pluginComponentDocs } from './plugins/component-docs/index.ts';
+
 const REPO_NAME = 'react-native-paper';
 const REPO_ORG = 'callstack';
 
@@ -60,6 +63,13 @@ export default withCallstackPreset(
       default: '5.x',
       versions: ['5.x', '6.x'],
     },
+    plugins: [
+      pluginComponentDocs({
+        ...componentDocsConfig,
+        tsconfigPath: path.resolve(__dirname, '..', 'tsconfig.source.json'),
+        version: '6.x',
+      }),
+    ],
     route: {
       cleanUrls: true,
       extensions: ['.md', '.mdx'],
@@ -72,7 +82,6 @@ export default withCallstackPreset(
         'test-results/**',
         'tests/**',
         'visual/**',
-        'component-docs-plugin/**',
         'README.md',
       ],
     },

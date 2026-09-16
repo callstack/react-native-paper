@@ -60,8 +60,6 @@ export function inputReducer<T extends keyof State>(
   }
 }
 
-export const isWeb = Platform.OS === 'web';
-
 export const animatedFABExampleData = [
   {
     id: '1',
@@ -1229,7 +1227,7 @@ export const colorThemes = {
       colors: { ...DarkTheme.colors, ...darkCyanColors.colors },
     },
   },
-} as { [key: string]: { light: Theme; dark: Theme } };
+} satisfies Record<string, { light: Theme; dark: Theme }>;
 
 export const songsData = [
   {
@@ -1421,4 +1419,6 @@ export const restaurantsData = [
 ];
 
 export const dynamicThemeSupported =
-  Platform.OS === 'android' && (Platform.Version as number) >= 31;
+  Platform.OS === 'android' &&
+  typeof Platform.Version === 'number' &&
+  Platform.Version >= 31;

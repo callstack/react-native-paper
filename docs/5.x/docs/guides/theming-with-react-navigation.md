@@ -328,7 +328,7 @@ const Header = ({ scene }) => {
 
 And now you can switch between light and dark theme!
 
-![paperGuide1](/react-native-paper/screenshots/themingWithReactNavigationDarkLightSwitch.gif)
+![paperGuide1](../../../public/screenshots/themingWithReactNavigationDarkLightSwitch.gif)
 
 Thanks to the linking of themes that we did earlier, switching themes can be controlled with only one piece of state.
 

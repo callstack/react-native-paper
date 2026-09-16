@@ -283,18 +283,22 @@ const ButtonExample = () => {
           <Button
             mode="outlined"
             onPress={() => {}}
-            style={styles.customRadius}
+            theme={{ shapes: { corner: { largeIncreased: 16 } } }}
           >
             Custom radius
           </Button>
-          <Button mode="contained" onPress={() => {}} style={styles.noRadius}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            theme={{ shapes: { corner: { largeIncreased: 0 } } }}
+          >
             Without radius
           </Button>
           <Button
             mode="contained-tonal"
             onPress={() => {}}
-            style={{ borderRadius: styles.customRadiusAndPadding.borderRadius }}
-            contentStyle={styles.customRadiusAndPadding}
+            theme={{ shapes: { corner: { largeIncreased: 4 } } }}
+            contentStyle={styles.customPadding}
           >
             Custom radius and padding
           </Button>
@@ -380,17 +384,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10,
   },
-  customRadius: {
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 16,
-  },
-  noRadius: {
-    borderRadius: 0,
-  },
-  customRadiusAndPadding: {
-    borderRadius: 4,
+  customPadding: {
     paddingHorizontal: 12,
     paddingVertical: 6,
   },

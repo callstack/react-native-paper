@@ -154,11 +154,9 @@ export function buildScheme(
   const tones = roleToTone[opts.mode][contrast];
   const elevTones = elevationToTone[opts.mode][contrast];
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const mapped = Object.fromEntries(
-    (Object.keys(tones) as Array<keyof typeof tones>).map((role) => [
-      role,
-      palette[tones[role]],
-    ])
+    Object.entries(tones).map(([role, tone]) => [role, palette[tone]])
   ) as MappedRoles;
 
   return {

@@ -13,8 +13,10 @@ const DialogWithCustomColors = ({
     <Portal>
       <Dialog
         onDismiss={close}
-        style={{
-          backgroundColor: Palette.primary10,
+        theme={{
+          colors: {
+            surfaceContainerHigh: Palette.primary10,
+          },
         }}
         visible={visible}
       >
