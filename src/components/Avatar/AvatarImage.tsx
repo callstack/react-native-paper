@@ -108,9 +108,9 @@ const AvatarImage = ({
           width: size,
           height: size,
           borderRadius: size / 2,
-          backgroundColor,
         },
         style,
+        { backgroundColor },
       ]}
       {...rest}
     >

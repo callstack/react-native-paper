@@ -58,6 +58,20 @@ describe('Appbar', () => {
     });
   });
 
+  it('includes safe area insets in the height', async () => {
+    await render(
+      <Appbar safeAreaInsets={{ top: 20, bottom: 30 }} testID="appbar">
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      height: 64 + 20 + 30,
+      paddingTop: 20,
+      paddingBottom: 30,
+    });
+  });
+
   it('renders border radius passed to props', async () => {
     await render(
       <Appbar borderRadius={8} borderBottomLeftRadius={4} testID="appbar">
@@ -173,6 +187,25 @@ describe('renderAppbarContent', () => {
     expect(renderResult()[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(v3Spacing)])
     );
+  });
+
+  it('includes the status bar height in the header height', async () => {
+    await render(
+      <SafeAreaProvider>
+        <Appbar.Header
+          mode="medium"
+          statusBarHeight={40}
+          testID="appbar-header"
+        >
+          <Appbar.Content title="Title" />
+        </Appbar.Header>
+      </SafeAreaProvider>
+    );
+
+    expect(screen.getByTestId('appbar-header')).toHaveStyle({
+      height: 112 + 40,
+      paddingTop: 40,
+    });
   });
 
   it('renders custom background color passed to Appbar.Header', async () => {

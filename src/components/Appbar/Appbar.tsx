@@ -111,13 +111,8 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
  *
  *   return (
  *     <Appbar
- *       style={[
- *         styles.bottom,
- *         {
- *           height: BOTTOM_APPBAR_HEIGHT + bottom,
- *           backgroundColor: theme.colors.surfaceContainer,
- *         },
- *       ]}
+ *       style={[styles.bottom, { height: BOTTOM_APPBAR_HEIGHT + bottom }]}
+ *       backgroundColor={theme.colors.surfaceContainer}
  *       safeAreaInsets={{ bottom }}
  *     >
  *       <Appbar.Action icon="archive" onPress={() => {}} />
@@ -140,7 +135,6 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
  *
  * const styles = StyleSheet.create({
  *   bottom: {
- *     backgroundColor: 'aquamarine',
  *     position: 'absolute',
  *     left: 0,
  *     right: 0,

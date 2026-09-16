@@ -5,7 +5,6 @@ exports[`renders avatar with icon 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -15,6 +14,9 @@ exports[`renders avatar with icon 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
     ]
   }
 >
@@ -55,7 +57,6 @@ exports[`renders avatar with icon and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -65,6 +66,9 @@ exports[`renders avatar with icon and custom background color 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "#f44336",
+      },
     ]
   }
 >
@@ -105,12 +109,14 @@ exports[`renders avatar with image 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
       undefined,
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
     ]
   }
 >
@@ -137,7 +143,6 @@ exports[`renders avatar with text 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -147,6 +152,9 @@ exports[`renders avatar with text 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
     ]
   }
 >
@@ -191,7 +199,6 @@ exports[`renders avatar with text and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -201,6 +208,9 @@ exports[`renders avatar with text and custom background color 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "#f44336",
+      },
     ]
   }
 >
@@ -245,7 +255,6 @@ exports[`renders avatar with text and custom colors 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -255,6 +264,9 @@ exports[`renders avatar with text and custom colors 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
     ]
   }
 >
@@ -299,7 +311,6 @@ exports[`renders avatar with text and custom size 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 48,
         "height": 96,
         "width": 96,
@@ -309,6 +320,9 @@ exports[`renders avatar with text and custom size 1`] = `
         "justifyContent": "center",
       },
       undefined,
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
     ]
   }
 >

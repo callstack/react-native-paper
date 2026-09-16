@@ -73,10 +73,10 @@ const Avatar = ({
           width: size,
           height: size,
           borderRadius: size / 2,
-          backgroundColor,
         },
         styles.container,
         style,
+        { backgroundColor },
       ]}
       {...rest}
     >

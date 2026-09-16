@@ -195,8 +195,12 @@ const Tooltip = ({
 
   const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     // Measure the wrapped element itself when possible, since the wrapper
-    // doesn't reflect its layout if the element is absolutely positioned
-    const target = childRef.current ?? childrenWrapperRef.current;
+    // doesn't reflect its layout if the element is absolutely positioned.
+    // Custom components may expose an instance without `measure`, fall back to the wrapper in that case
+    const target =
+      typeof childRef.current?.measure === 'function'
+        ? childRef.current
+        : childrenWrapperRef.current;
 
     target?.measure((_x, _y, width, height, pageX, pageY) => {
       setMeasurement({
