@@ -165,21 +165,12 @@ describe('ListAccordion', () => {
     );
   });
 
-  it('keeps the title on onSurface when collapsed', async () => {
+  it.each([
+    ['collapsed', false],
+    ['expanded', true],
+  ])('keeps the title on onSurface when %s', async (_label, expanded) => {
     await render(
-      <ListAccordion title="Accordion item 1">
-        <ListItem title="List item 1" />
-      </ListAccordion>
-    );
-
-    expect(screen.getByText('Accordion item 1')).toHaveStyle({
-      color: getTheme().colors.onSurface,
-    });
-  });
-
-  it('keeps the title on onSurface when expanded', async () => {
-    await render(
-      <ListAccordion title="Accordion item 1" expanded>
+      <ListAccordion title="Accordion item 1" expanded={expanded}>
         <ListItem title="List item 1" />
       </ListAccordion>
     );

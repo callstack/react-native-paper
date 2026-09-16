@@ -260,42 +260,49 @@ const ListItem = ({
     [isDescriptionMultiline]
   );
 
-  const accessoryContext = React.useMemo(
-    () => ({ color: descriptionColor }),
-    [descriptionColor]
+  const leadingColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.leadingIconColor];
+  const trailingColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.trailingIconColor];
+
+  const leadingContext = React.useMemo(
+    () => ({ color: leadingColor }),
+    [leadingColor]
+  );
+  const trailingContext = React.useMemo(
+    () => ({ color: trailingColor }),
+    [trailingColor]
   );
 
   const renderLeading = () => {
     const accessoryStyle = getLeftStyles(isDescriptionMultiline, description);
 
     if (leading) {
-      return <View style={accessoryStyle}>{leading}</View>;
+      return (
+        <ListItemContext.Provider value={leadingContext}>
+          <View style={accessoryStyle}>{leading}</View>
+        </ListItemContext.Provider>
+      );
     }
 
-    return left
-      ? left({
-          color: selected
-            ? theme.colors[ListTokens.selectedContentColor]
-            : theme.colors[ListTokens.leadingIconColor],
-          style: accessoryStyle,
-        })
-      : null;
+    return left ? left({ color: leadingColor, style: accessoryStyle }) : null;
   };
 
   const renderTrailing = () => {
     const accessoryStyle = getRightStyles(isDescriptionMultiline, description);
 
     if (trailing) {
-      return <View style={accessoryStyle}>{trailing}</View>;
+      return (
+        <ListItemContext.Provider value={trailingContext}>
+          <View style={accessoryStyle}>{trailing}</View>
+        </ListItemContext.Provider>
+      );
     }
 
     return right
-      ? right({
-          color: selected
-            ? theme.colors[ListTokens.selectedContentColor]
-            : theme.colors[ListTokens.trailingIconColor],
-          style: accessoryStyle,
-        })
+      ? right({ color: trailingColor, style: accessoryStyle })
       : null;
   };
 
@@ -316,22 +323,17 @@ const ListItem = ({
         theme={theme}
         testID={testID}
       >
-        <ListItemContext.Provider value={accessoryContext}>
-          <View style={[styles.row, containerStyle]}>
-            {renderLeading()}
-            <View
-              style={[styles.item, styles.content, contentStyle]}
-              testID={testID ? `${testID}-content` : undefined}
-            >
-              {renderTitle()}
+        <View style={[styles.row, containerStyle]}>
+          {renderLeading()}
+          <View style={[styles.item, styles.content, contentStyle]}>
+            {renderTitle()}
 
-              {description
-                ? renderDescription(descriptionColor, description)
-                : null}
-            </View>
-            {renderTrailing()}
+            {description
+              ? renderDescription(descriptionColor, description)
+              : null}
           </View>
-        </ListItemContext.Provider>
+          {renderTrailing()}
+        </View>
       </TouchableRipple>
     </ListRowContext.Provider>
   );

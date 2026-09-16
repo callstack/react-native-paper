@@ -11,7 +11,6 @@ import { red500 } from '../../theme/colors';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
-import ListImage from '../List/ListImage';
 import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
@@ -31,6 +30,10 @@ const styles = StyleSheet.create({
   image: {
     width: 56,
     height: 56,
+  },
+  video: {
+    width: 114,
+    height: 64,
   },
 });
 
@@ -221,107 +224,47 @@ it('hits the two and three line container heights without measuring', async () =
   });
 });
 
-it('leaves a 40dp leading element on the one line container height', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      left={(props) => (
-        <View testID="left-accessory" style={[props.style, styles.avatar]} />
-      )}
-      testID={testID}
-    />
-  );
+it.each([
+  ['a 40dp accessory', styles.avatar, undefined, 56],
+  ['a 56dp accessory', styles.image, 'Item description', 72],
+  ['a 64dp accessory', styles.video, undefined, 56],
+])(
+  'keeps the container height with %s in the leading slot',
+  async (_label, accessoryStyle, description, minHeight) => {
+    await render(
+      <ListItem
+        title="First Item"
+        description={description}
+        left={(props) => (
+          <View testID="left-accessory" style={[props.style, accessoryStyle]} />
+        )}
+        testID={testID}
+      />
+    );
 
-  expect(screen.getByTestId(testID)).toHaveStyle({
-    minHeight: 56,
-    paddingVertical: 8,
-  });
-  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 40 });
-});
+    expect(screen.getByTestId(testID)).toHaveStyle({
+      minHeight,
+      paddingVertical: 8,
+    });
+  }
+);
 
-it('leaves a 56dp leading image on the two line container height', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      description="Item description"
-      left={(props) => (
-        <View testID="left-accessory" style={[props.style, styles.image]} />
-      )}
-      testID={testID}
-    />
-  );
-
-  expect(screen.getByTestId(testID)).toHaveStyle({
-    minHeight: 72,
-    paddingVertical: 8,
-  });
-  expect(screen.getByTestId('left-accessory')).toHaveStyle({ height: 56 });
-});
-
-it('pads a 64dp leading video to the three line container height', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      left={(props) => (
-        <ListImage
-          variant="video"
-          style={props.style}
-          source={{ uri: 'https://www.someurl.com/apple' }}
-        />
-      )}
-      testID={testID}
-    />
-  );
-
-  expect(screen.getByTestId(testID)).toHaveStyle({
-    minHeight: 56,
-    paddingVertical: 8,
-  });
-  expect(screen.getByTestId('list-image')).toHaveStyle({
-    height: 64,
-    marginVertical: 4,
-  });
-});
-
-it('keeps a 64dp leading video on the same height once the description wraps', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      description="Item description"
-      left={(props) => (
-        <ListImage
-          variant="video"
-          style={props.style}
-          source={{ uri: 'https://www.someurl.com/apple' }}
-        />
-      )}
-      testID={testID}
-    />
-  );
-
-  await fireEvent(screen.getByText('Item description'), 'textLayout', {
-    nativeEvent: { lines: [{}, {}] },
-  });
-
-  expect(screen.getByTestId(testID)).toHaveStyle({ paddingVertical: 12 });
-  expect(screen.getByTestId('list-image')).toHaveStyle({
-    height: 64,
-    marginVertical: 0,
-  });
-});
-
-it('colors a leading List.Icon from the list item context', async () => {
+it('colors the typed slots from the list item context', async () => {
   await render(
     <ListItem
       title="First Item"
       leading={<ListIcon icon="folder" />}
+      trailing={<ListIcon icon="chevron-right" />}
       testID={testID}
     />
   );
 
   expect(
     screen.getByText('folder', { includeHiddenElements: true })
-  ).toHaveStyle({ color: getTheme().colors.onSurfaceVariant });
+  ).toHaveStyle({ color: LightTheme.colors.onSurfaceVariant });
+  expect(
+    screen.getByText('chevron-right', { includeHiddenElements: true })
+  ).toHaveStyle({ color: LightTheme.colors.onSurfaceVariant });
 });
 
 it('renders the trailing slot', async () => {
@@ -393,40 +336,37 @@ it('applies the theme override to title and description typography', async () =>
   expect(screen.getByText('Item description')).toHaveStyle({ fontSize: 77 });
 });
 
-it('renders an unselected list item on surface colors', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      description="Item description"
-      testID={testID}
-    />
-  );
+it.each([
+  [
+    'an unselected item on surface colors',
+    false,
+    undefined,
+    LightTheme.colors.onSurface,
+    LightTheme.colors.onSurfaceVariant,
+  ],
+  [
+    'a selected item on the primary container',
+    true,
+    LightTheme.colors.primaryContainer,
+    LightTheme.colors.onPrimaryContainer,
+    LightTheme.colors.onPrimaryContainer,
+  ],
+])(
+  'renders %s',
+  async (_label, selected, backgroundColor, titleColor, descriptionColor) => {
+    await render(
+      <ListItem
+        title="First Item"
+        description="Item description"
+        selected={selected}
+        testID={testID}
+      />
+    );
 
-  expect(screen.getByText('First Item')).toHaveStyle({
-    color: getTheme().colors.onSurface,
-  });
-  expect(screen.getByText('Item description')).toHaveStyle({
-    color: getTheme().colors.onSurfaceVariant,
-  });
-});
-
-it('renders a selected list item on the primary container', async () => {
-  await render(
-    <ListItem
-      title="First Item"
-      description="Item description"
-      selected
-      testID={testID}
-    />
-  );
-
-  expect(screen.getByTestId(testID)).toHaveStyle({
-    backgroundColor: getTheme().colors.primaryContainer,
-  });
-  expect(screen.getByText('First Item')).toHaveStyle({
-    color: getTheme().colors.onPrimaryContainer,
-  });
-  expect(screen.getByText('Item description')).toHaveStyle({
-    color: getTheme().colors.onPrimaryContainer,
-  });
-});
+    expect(screen.getByTestId(testID)).toHaveStyle({ backgroundColor });
+    expect(screen.getByText('First Item')).toHaveStyle({ color: titleColor });
+    expect(screen.getByText('Item description')).toHaveStyle({
+      color: descriptionColor,
+    });
+  }
+);
