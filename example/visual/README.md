@@ -10,7 +10,7 @@ On iOS and Android, yes, with one catch. The noise floor is 0 pixels on iOS and 
 
 ## Setup
 
-- Branch `poc/agent-device-visual`, React Native 0.85.3, Expo 56, Debug dev-client, agent-device 0.21.0 driven through its CLI via `npx`. Its Node client (`createAgentDeviceClient`) was not used: reaching it means adding agent-device as a dependency of this repo, which a PoC that wanted to try the tool without installing it did not do. A runner that adopts the tool should use the client. No Storybook, no extra screens.
+- Branch `poc/agent-device-visual`, React Native 0.85.3, Expo 56, Debug dev-client. agent-device 0.21.0 through its CLI via `npx`; its Node client was not used because it requires adding agent-device as a dependency, which this PoC avoided. If the approach is adopted, the runner should switch to the client. The docs and source were re-checked against 0.21.3. No Storybook, no extra screens.
 - iPhone 17 Pro simulator (iOS 26.5, 3x) and `Pixel_10_Pro` emulator (API 37, 480 dpi, `hw.gpu.mode=auto`). Pinned in `env.json`; baselines are valid for that configuration only.
 - The only app change: a `testID` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx` (`surface-example-elevated` / `surface-example-flat`, named so they cannot be mistaken for the library defaults removed in #5088 and #5099). `screenshot --crop-on 'id="…"'` then crops to exactly that section: 402x214 logical, 1206x642 px at `--pixel-density 3` on iOS; 1280x642 native px on Android.
 - No animation freezing, status-bar normalisation or release build was needed. The crop excludes the status bar and LogBox.
@@ -62,7 +62,7 @@ Same count every time, and the same as the first single captures. The diff image
 
 ## Web
 
-Tried once on 2026-09-14 against `expo export --platform web` of the example app, served locally, with agent-device's managed browser (`agent-device web setup`, agent-browser 0.27.1). `open` works and a full-page `screenshot` works (1280x577). `screenshot --crop-on 'id="surface-example-elevated"'` is refused: `UNSUPPORTED_OPERATION`, `CROP_TARGET_NOT_ACCEPTED`, `PENDING_PIXEL_IDENTITY_EVIDENCE`. Transcript in `evidence/web-excerpt.json`, the full-page capture in `evidence/diff-images/web-full-page-screenshot.png`. So web is not blocked, but it is a different loop, full-viewport diffs rather than per-section crops, and was not pursued for a Surface-only PoC.
+Tried once on 2026-09-14 against `expo export --platform web` of the example app, served locally, with agent-device's managed browser (`agent-device web setup`, agent-browser 0.27.1). `open` works and a full-page `screenshot` works (1280x577). `screenshot --crop-on 'id="surface-example-elevated"'` is refused: `UNSUPPORTED_OPERATION`, `CROP_TARGET_NOT_ACCEPTED`, `PENDING_PIXEL_IDENTITY_EVIDENCE`. Transcript in `evidence/web-excerpt.json`, the full-page capture in `evidence/diff-images/web-full-page-screenshot.png`. A web leg would therefore diff full viewports rather than per-section crops. Not pursued for a Surface-only PoC.
 
 ## Caveats
 
@@ -96,7 +96,7 @@ Expect `differentPixels: 0`. To see a failure, change `shadow(elevation, …)` t
 
 ## Running it
 
-`example/visual/run.mjs` is the loop above as one script for both platforms, plain ESM on Node 20 or newer, no new dependencies. It spawns `npx agent-device@0.21.0 … --json` and parses the output.
+`example/visual/run.mjs` runs the loop above on either platform: plain ESM on Node 20 or newer, no new dependencies, spawning `npx agent-device@0.21.0 … --json` and parsing the output.
 
 ```bash
 node example/visual/run.mjs --platform ios
@@ -119,11 +119,11 @@ The pure helpers have seven `node:test` cases, no device needed:
 yarn example test:visual
 ```
 
-Not run by Jest, the pre-commit hook or CI. `evidence/summarize.mjs` regenerates a results table from a directory of `diff screenshot` JSON; `results.csv` in this PR was produced from the raw JSON on the runner branch.
+Not run by Jest, the pre-commit hook or CI. `results.csv` was produced from the raw `diff screenshot` JSON on the runner branch.
 
 ## What a real runner has to handle
 
-Each learned while scripting `run.mjs`, and handled there. None of them is an agent-device bug:
+Things `run.mjs` had to deal with. None is an agent-device bug:
 
 - Reload before every capture with `agent-device metro reload`, then `open --relaunch`. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS.
 - The example app persists navigation state. A relaunch lands on the last screen, so the runner has to press Back to the list root and pick the Surface row, not the header title.

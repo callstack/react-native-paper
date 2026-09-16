@@ -6,10 +6,10 @@
  *                               [--threshold 0.02] [--story surface-example-elevated,surface-example-flat]
  *                               [--out <dir>]
  *
- * Drives agent-device 0.21.0 through `npx` and parses `--json` stdout. The
- * package does export `createAgentDeviceClient`, but it is not a dependency of
- * this repo and is not resolvable from `example/`, and the PoC rule is "no new
- * dependencies", so the CLI is spawned instead.
+ * Drives agent-device 0.21.0 through `npx` and parses `--json` stdout. Its
+ * Node client was not used because it requires adding agent-device as a
+ * dependency, which this PoC avoided; a runner that adopts the tool should
+ * switch to the client.
  *
  * Prerequisites (documented, not automated): the example app is already built
  * and installed on a device matching example/visual/env.json, Metro is running,
