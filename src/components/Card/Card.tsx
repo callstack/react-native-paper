@@ -11,6 +11,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import CardActions from './CardActions';
 import CardContent from './CardContent';
+import { CardContext } from './CardContext';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
@@ -36,6 +37,7 @@ type ContainedCardProps = {
 };
 
 type Mode = 'elevated' | 'outlined' | 'contained';
+type Direction = 'vertical' | 'horizontal';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -45,6 +47,12 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - `outlined` - Card with an outline.
    */
   mode?: Mode;
+  /**
+   * Direction of the Card's content.
+   * - `vertical`
+   * - `horizontal`
+   */
+  direction?: Direction;
   /**
    * Content of the `Card`.
    */
@@ -78,7 +86,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   elevation?: Elevation;
   /**
-   * Style of card's inner content.
+   * Style of card's content.
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<SurfaceStyle>;
@@ -100,6 +108,9 @@ export type Props = Omit<ViewProps, 'style'> & {
   ref?: React.Ref<View>;
 };
 
+const DEFAULT_CARD_GAP = 16;
+const DEFAULT_CARD_PADDING = 16;
+
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
@@ -112,15 +123,15 @@ export type Props = Omit<ViewProps, 'style'> & {
  *
  * const MyComponent = () => (
  *   <Card>
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
  *     <Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
  *     </Card.Content>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="contained">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -128,7 +139,6 @@ export type Props = Omit<ViewProps, 'style'> & {
  * export default MyComponent;
  * ```
  */
-
 const Card = ({
   elevation: cardElevation = 1,
   delayLongPress,
@@ -137,6 +147,7 @@ const Card = ({
   onPressOut,
   onPressIn,
   mode: cardMode = 'elevated',
+  direction: cardDirection = 'vertical',
   children,
   style,
   contentStyle,
@@ -182,15 +193,6 @@ const Card = ({
     }
   });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type
-      ? typeof child.type !== 'string' && 'displayName' in child.type
-        ? child.type.displayName
-        : null
-      : null
-  );
-
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
@@ -203,18 +205,28 @@ const Card = ({
 
   const borderRadius = theme.shapes.corner.medium;
 
+  const cardContext = React.useMemo(
+    () => ({ padding: DEFAULT_CARD_PADDING, direction: cardDirection }),
+    [cardDirection]
+  );
+
   const content = (
-    <View style={[styles.innerContainer, contentStyle]}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-            })
-          : child
-      )}
-    </View>
+    <CardContext.Provider value={cardContext}>
+      <View
+        style={[
+          styles.content,
+          { borderRadius },
+          cardDirection === 'horizontal' ? styles.horizontal : styles.vertical,
+          contentStyle,
+          {
+            padding: DEFAULT_CARD_PADDING,
+            gap: DEFAULT_CARD_GAP,
+          },
+        ]}
+      >
+        {children}
+      </View>
+    </CardContext.Provider>
   );
 
   return (
@@ -274,8 +286,15 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
-  innerContainer: {
+  content: {
     flexShrink: 1,
+    overflow: 'hidden',
+  },
+  horizontal: {
+    flexDirection: 'row',
+  },
+  vertical: {
+    flexDirection: 'column',
   },
   outline: {
     borderWidth: 1,

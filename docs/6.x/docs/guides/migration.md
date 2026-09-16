@@ -187,6 +187,24 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+#### `Dialog.Actions`
+
+`Dialog.Actions` no longer injects `compact` on its buttons. To keep the previous behavior, you need to add the `compact` prop to each button:
+
+```tsx
+// Before (v5)
+<Dialog.Actions>
+  <Button onPress={hide}>Done</Button>
+</Dialog.Actions>
+
+// After (v6)
+<Dialog.Actions>
+  <Button compact onPress={hide}>
+    Done
+  </Button>
+</Dialog.Actions>
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:
@@ -329,6 +347,124 @@ const theme = {
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
 ```
+
+### Card
+
+#### `Card` layout
+
+`Card` and its related components have been reworked. Instead of injecting padding to its children, the `Card` component now adds a padding (`16dp`) around its content as well as a gap (`16dp`) between its children.
+
+For the related components:
+
+- `Card.Cover` and `Card.Actions` now apply negative margins to extend into the Card's edges:
+  - `Card.Cover` applies top, left and right margins for vertical cards and left, top, and bottom margins for horizontal cards.
+  - `Card.Actions` applies bottom, left, and right margins for vertical cards and left, bottom, and right margins for horizontal cards.
+- `Card.Title` and `Card.Content` no longer apply padding around them.
+
+This means, in a typical card layout, the Card will automatically apply the necessary spacing between these sections:
+
+```tsx
+<Card>
+  <Card.Cover source={cover} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+```
+
+So your existing layouts with the following structure will continue to work as before:
+
+- `Card` without `Card.Cover` or `Card.Actions`.
+- `Card` with `Card.Cover` at the top and/or `Card.Actions` at the bottom.
+
+If you have `Card.Cover` or `Card.Actions` in positions other than the top and bottom respectively, you will need to adjust their margins. For example, for a `Card.Cover` in the middle of the Card, you would need to set its top and bottom margins to zero:
+
+```tsx
+<Card>
+  <Card.Title title="Card title" />
+  <Card.Cover source={cover} style={{ marginTop: 0, marginBottom: 0 }} />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+</Card>
+```
+
+We have also added a `direction` prop to the `Card` component, which lets you arrange its items horizontally instead of the default vertical layout. So if you have custom `flexDirection` styles on the Card, you should replace them with the `direction` prop.
+
+```tsx
+// Before (v5)
+<Card style={{ flexDirection: 'row' }}>
+  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+
+// After (v6)
+<Card direction="horizontal">
+  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+```
+
+#### `Card.Actions`
+
+`Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="contained"` on the rest:
+
+```tsx
+// Before (v5)
+<Card.Actions>
+  <Button>Cancel</Button>
+  <Button>Ok</Button>
+</Card.Actions>
+
+// After (v6)
+<Card.Actions>
+  <Button mode="outlined">Cancel</Button>
+  <Button mode="contained">Ok</Button>
+</Card.Actions>
+```
+
+### List
+
+#### `List.Accordion`
+
+An accordion with a `left` element now indents only its `List.Item` children. Anything else you put inside keeps its own padding, so indent it yourself to line it up with the items.
+
+```tsx
+// Before (v5)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+
+// After (v6)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View style={{ paddingLeft: 40 }}>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+```
+
+`theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
 
 ### ToggleButton
 

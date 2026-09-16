@@ -17,14 +17,10 @@ export type CardActionChildProps = {
 
 export const getCardCoverStyle = ({
   theme,
-  index: _index,
-  total: _total,
   borderRadiusStyles,
 }: {
   theme: InternalTheme;
   borderRadiusStyles: BorderRadiusStyles;
-  index?: number;
-  total?: number;
 }) => {
   if (Object.keys(borderRadiusStyles).length > 0) {
     return {

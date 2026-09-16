@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
   v3Text: {
-    marginTop: 16,
+    marginTop: 0,
     marginBottom: 16,
   },
 });

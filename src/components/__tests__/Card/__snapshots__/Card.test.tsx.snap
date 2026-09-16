@@ -114,8 +114,19 @@ exports[`Card renders an outlined card 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
@@ -237,8 +248,19 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
@@ -362,8 +384,19 @@ exports[`Card renders an outlined card with custom border color 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
