@@ -2,15 +2,15 @@
 
 Proof of concept, under review in #5115. iOS and Android against the existing example screens, `Surface` only, agent-device and its own diff. A runner script that grew out of review, and the full raw evidence, are on branch `poc/agent-device-visual-runner`, deliberately not in this PR.
 
-## The question, and the answer
+## Result
 
 Does [agent-device](https://github.com/callstack/agent-device) capture the existing example screens deterministically enough to diff `Surface` against a baseline, and does that diff catch a realistic regression rather than only a gross one?
 
-Yes on both platforms, with one catch. The noise floor is 0 pixels on iOS and Android, across warm captures and a process relaunch, at every threshold tried. A realistic Surface regression, elevation level 1 rendering the level-2 shadow, is caught at `--threshold 0.02`, on exactly the right card, and gives the same pixel count on three independent captures per platform. At agent-device's default threshold (0.1) that same regression is reported as a perfect match on both platforms. Any suite built on this must set the threshold explicitly and verify noise at that threshold.
+On iOS and Android, yes, with one catch. The noise floor is 0 pixels on iOS and Android, across warm captures and a process relaunch, at every threshold tried. A realistic Surface regression, elevation level 1 rendering the level-2 shadow, is caught at `--threshold 0.02`, on exactly the right card, and gives the same pixel count on three independent captures per platform. At agent-device's default threshold (0.1) that same regression is reported as a perfect match on both platforms. Any suite built on this must set the threshold explicitly and verify noise at that threshold.
 
 ## Setup
 
-- Branch `poc/agent-device-visual`, React Native 0.85.3, Expo 56, Debug dev-client, agent-device 0.21.0 via `npx`. No Storybook, no extra screens.
+- Branch `poc/agent-device-visual`, React Native 0.85.3, Expo 56, Debug dev-client, agent-device 0.21.0 driven through its CLI via `npx`. Its Node client (`createAgentDeviceClient`) was not used: reaching it means adding agent-device as a dependency of this repo, which a PoC that wanted to try the tool without installing it did not do. A runner that adopts the tool should use the client. No Storybook, no extra screens.
 - iPhone 17 Pro simulator (iOS 26.5, 3x) and `Pixel_10_Pro` emulator (API 37, 480 dpi, `hw.gpu.mode=auto`). Pinned in `env.json`; baselines are valid for that configuration only.
 - The only app change: a `testID` on the "Elevated surface" and "Flat surface" `List.Section`s in `SurfaceExample.tsx` (`surface-example-elevated` / `surface-example-flat`, named so they cannot be mistaken for the library defaults removed in #5088 and #5099). `screenshot --crop-on 'id="…"'` then crops to exactly that section: 402x214 logical, 1206x642 px at `--pixel-density 3` on iOS; 1280x642 native px on Android.
 - No animation freezing, status-bar normalisation or release build was needed. The crop excludes the status bar and LogBox.
@@ -28,10 +28,10 @@ Stability, four captures of `surface-example-elevated` against the baseline, 774
 
 Sensitivity, one-line changes to the iOS branch of `src/components/Surface.tsx`, reverted after each capture (revert re-diffed to 0):
 
-| break                                                 | @ 0.1 (default)             | @ 0.02                                                             |
-| ----------------------------------------------------- | --------------------------- | ------------------------------------------------------------------ |
-| Gross: every elevated surface gets the level-5 shadow | 4,277 px (0.55 %), 1 region | 116,292 px (15 %), 3 regions                                       |
-| Realistic: level 1 renders the level-2 shadow         | **0 px, `match: true`**     | **10,179 px (1.31 %)**, one 378x378 region on the Elevation 1 card |
+| break                                                 | @ 0.1 (default)             | @ 0.02                                                                              |
+| ----------------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------- |
+| Gross: every elevated surface gets the level-5 shadow | 4,277 px (0.55 %), 1 region | 116,292 px (15 %), 3 regions                                                        |
+| Realistic: level 1 renders the level-2 shadow         | **0 px, `match: true`**     | **10,179 px (1.31 %)**, 3 regions, the dominant one 378x378 on the Elevation 1 card |
 
 ## Android
 
@@ -110,7 +110,7 @@ Each learned while scripting the loop above; implemented on the runner branch. N
 
 ## Evidence
 
-- `evidence/results.csv`: one row per `diff screenshot` run (72 rows): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
+- `evidence/results.csv`: one row per `diff screenshot` run (74 rows, including the two dev-client false FAILs): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
 - `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match and deletes any stale file at that path.
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json`, `evidence/web-excerpt.json`: the nodes and responses that matter; full trees on the runner branch.
 - `env.json`: the pinned devices, versions and thresholds.

@@ -71,3 +71,5 @@ android,re-measured,reverted,0.02,821760,0,0,0,True,evidence/sensitivity/android
 android,re-measured,reverted,0.1,821760,0,0,0,True,evidence/sensitivity/android/reverted-diff-t0.1.json
 android,re-measured,sanity-before-break,0.02,821760,0,0,0,True,evidence/sensitivity/android/sanity-before-break-diff-t0.02.json
 android,re-measured,sanity-before-break,0.1,821760,0,0,0,True,evidence/sensitivity/android/sanity-before-break-diff-t0.1.json
+android,dev-client-chrome,tools-button-on,0.02,821760,2822,0.34,1,False,runner-branch:evidence/runs/android/round3-pass/summary.json
+ios,dev-client-chrome,tools-button-on,0.02,774252,3916,0.51,1,False,verify/ios/a11-diff.json (2026-09-16 re-verification, not committed)
