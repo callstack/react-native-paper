@@ -39,7 +39,7 @@ export type Props = ViewProps & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;

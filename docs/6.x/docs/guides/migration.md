@@ -25,7 +25,6 @@ The following props now accept animated styles returned from `useAnimatedStyle`.
 - `Searchbar`: `style`
 - `Snackbar`: `style`
 - `Surface`: `style`
-- `ToggleButton`: `style`
 
 So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate these components instead of the React Native `Animated` API.
 
@@ -188,6 +187,28 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+### Searchbar
+
+The misspelled `traileringIcon` props have been renamed:
+
+- **`traileringIcon`** → **`trailingIcon`**
+- **`traileringIconColor`** → **`trailingIconColor`**
+- **`traileringIconAccessibilityLabel`** → **`trailingIconAccessibilityLabel`**
+- **`onTraileringIconPress`** → **`onTrailingIconPress`**
+
+```diff
+<Searchbar
+- traileringIcon="microphone"
+- traileringIconColor={colors.onSurfaceVariant}
+- traileringIconAccessibilityLabel="microphone button"
+- onTraileringIconPress={onMicrophonePress}
++ trailingIcon="microphone"
++ trailingIconColor={colors.onSurfaceVariant}
++ trailingIconAccessibilityLabel="microphone button"
++ onTrailingIconPress={onMicrophonePress}
+/>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.
@@ -307,4 +328,32 @@ const theme = {
   theme={theme}
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
+```
+
+### ToggleButton
+
+`ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
+icon-only toggle, use `IconButton` with the `selected` prop. For a set of
+mutually exclusive options, use `SegmentedButtons`.
+
+```tsx
+// Before (v5)
+<ToggleButton.Group value={value} onValueChange={setValue}>
+  <ToggleButton icon="format-bold" value="bold" />
+  <ToggleButton icon="format-italic" value="italic" />
+</ToggleButton.Group>
+
+// After (v6)
+<>
+  <IconButton
+    icon="format-bold"
+    selected={value === 'bold'}
+    onPress={() => setValue('bold')}
+  />
+  <IconButton
+    icon="format-italic"
+    selected={value === 'italic'}
+    onPress={() => setValue('italic')}
+  />
+</>
 ```

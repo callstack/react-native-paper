@@ -57,7 +57,7 @@ Older Material Design 2 platform-split font configuration (`configureFonts` with
 In the latest version fonts in theme are structured based on the `variant` keys e.g. `displayLarge` or `bodyMedium` which are then used in `Text`'s component throughout the whole library.
 
 :::info
-The default `fontFamily` is different per particular platfrom:
+The default `fontFamily` is different per particular platform:
 
 ```js
 Platform.select({

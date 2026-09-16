@@ -150,7 +150,7 @@ describe('getSegmentedButtonColors', () => {
     ).toMatchObject({ backgroundColor: LightTheme.colors.secondaryContainer });
   });
 
-  it('should return correct background color when uncheked (V3 & V2)', () => {
+  it('should return correct background color when unchecked (V3 & V2)', () => {
     expect(
       getSegmentedButtonColors({
         theme: LightTheme,

@@ -3,7 +3,7 @@
 
 ### Motivation
 
-<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? -->
+<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? Keep it concise and don't describe implementation details. -->
 
 ### Related issue
 
@@ -15,4 +15,4 @@
 
 ### Test plan
 
-<!-- Describe the **steps to test this change**, so that a reviewer can verify it. -->
+<!-- Describe the **steps to test this change manually**, so that a reviewer can verify it. Don't repeat checks already covered in automated tests. -->

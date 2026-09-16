@@ -82,25 +82,25 @@ export type Props = Omit<TextInputProps, 'style'> & {
   clearTestID?: string;
   /**
    * @supported Available in v5.x with theme version 3
-   * Icon name for the right trailering icon button.
+   * Icon name for the right trailing icon button.
    * Works only when `mode` is set to "bar". It won't be displayed if `loading` is set to `true`.
    */
-  traileringIcon?: IconSource;
+  trailingIcon?: IconSource;
   /**
    * @supported Available in v5.x with theme version 3
-   * Custom color for the right trailering icon, default will be derived from theme
+   * Custom color for the right trailing icon, default will be derived from theme
    */
-  traileringIconColor?: ColorValue;
+  trailingIconColor?: ColorValue;
   /**
-   * Callback to execute on the right trailering icon button press.
+   * Callback to execute on the right trailing icon button press.
    */
-  onTraileringIconPress?: (e: GestureResponderEvent) => void;
+  onTrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
-   * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
+   * Accessibility label for the right trailing icon button. This is read by the screen reader when the user taps the button.
    */
-  traileringIconAccessibilityLabel?: string;
+  trailingIconAccessibilityLabel?: string;
   /**
-   * testID for the right trailering icon button.
+   * testID for the right trailing icon button.
    */
   trailingTestID?: string;
   /**
@@ -183,11 +183,11 @@ const Searchbar = ({
   clearAccessibilityLabel = 'clear',
   clearTestID,
   onClearIconPress,
-  traileringIcon,
-  traileringIconColor,
-  traileringIconAccessibilityLabel,
+  trailingIcon,
+  trailingIconColor,
+  trailingIconAccessibilityLabel,
   trailingTestID,
-  onTraileringIconPress,
+  onTrailingIconPress,
   right,
   mode = 'bar',
   showDivider = true,
@@ -242,8 +242,8 @@ const Searchbar = ({
 
   const isBarMode = mode === 'bar';
   const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
-  const shouldRenderTraileringIcon =
-    isBarMode && traileringIcon && !loading && (!value || right !== undefined);
+  const shouldRenderTrailingIcon =
+    isBarMode && trailingIcon && !loading && (!value || right !== undefined);
 
   return (
     <Surface
@@ -333,14 +333,14 @@ const Searchbar = ({
           />
         </View>
       )}
-      {shouldRenderTraileringIcon ? (
+      {shouldRenderTrailingIcon ? (
         <IconButton
           role="button"
           borderless
-          onPress={onTraileringIconPress}
-          iconColor={traileringIconColor || colors.onSurfaceVariant}
-          icon={traileringIcon}
-          aria-label={traileringIconAccessibilityLabel}
+          onPress={onTrailingIconPress}
+          iconColor={trailingIconColor || colors.onSurfaceVariant}
+          icon={trailingIcon}
+          aria-label={trailingIconAccessibilityLabel}
           testID={trailingTestID}
         />
       ) : null}

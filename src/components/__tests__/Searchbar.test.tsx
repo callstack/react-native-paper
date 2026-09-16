@@ -90,13 +90,13 @@ it('hides the clear icon when a custom right element is rendered', async () => {
   expect(screen.queryByLabelText('clear')).not.toBeOnTheScreen();
 });
 
-it('renders trailering icon when mode is set to "bar"', async () => {
+it('renders trailing icon when mode is set to "bar"', async () => {
   await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
-      traileringIconAccessibilityLabel="microphone"
+      trailingIcon={'microphone'}
+      trailingIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );
@@ -104,31 +104,31 @@ it('renders trailering icon when mode is set to "bar"', async () => {
   expect(screen.getByLabelText('microphone')).toBeOnTheScreen();
 });
 
-it('renders trailering icon with press functionality', async () => {
-  const onTraileringIconPressMock = jest.fn();
+it('renders trailing icon with press functionality', async () => {
+  const onTrailingIconPressMock = jest.fn();
 
   await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
-      traileringIconAccessibilityLabel="microphone"
-      onTraileringIconPress={onTraileringIconPressMock}
+      trailingIcon={'microphone'}
+      trailingIconAccessibilityLabel="microphone"
+      onTrailingIconPress={onTrailingIconPressMock}
       mode="bar"
     />
   );
 
   await userEvent.press(screen.getByLabelText('microphone'));
-  expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
+  expect(onTrailingIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon instead of trailering icon', async () => {
+it('renders clear icon instead of trailing icon', async () => {
   const { rerender } = await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
-      traileringIconAccessibilityLabel="microphone"
+      trailingIcon={'microphone'}
+      trailingIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );
@@ -139,8 +139,8 @@ it('renders clear icon instead of trailering icon', async () => {
     <Searchbar
       testID="search-bar"
       value={'test'}
-      traileringIcon={'microphone'}
-      traileringIconAccessibilityLabel="microphone"
+      trailingIcon={'microphone'}
+      trailingIconAccessibilityLabel="microphone"
       mode="bar"
     />
   );

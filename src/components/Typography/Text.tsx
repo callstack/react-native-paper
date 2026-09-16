@@ -127,7 +127,7 @@ const Text = ({
         textStyle = [style, font];
       }
 
-      // Case two:  Nested `Text` has specified `styles` which intefere
+      // Case two:  Nested `Text` has specified `styles` which interfere
       //            with font properties, from the parent's `variant`. For example:
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
