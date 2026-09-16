@@ -98,24 +98,23 @@ The same loop as one script for both platforms, with device pinning, overlay han
 
 ## What a real runner has to handle
 
-Each learned while scripting the loop above; documented in `evidence/issues.md`, implemented on the runner branch:
+Each learned while scripting the loop above and documented in `evidence/issues.md`; implemented on the runner branch. None of them is an agent-device bug:
 
-- Relaunch before every capture. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS.
+- Reload before every capture with `agent-device metro reload`, then `open --relaunch`. Fast Refresh silently stopped reaching the Android app; without a fresh bundle a stale screen reads as PASS.
 - The example app persists navigation state. A relaunch lands on the last screen, so the runner has to press Back to the list root and pick the Surface row, not the header title.
 - Dev-client chrome: the dev menu appears seconds after the app is ready, the Android relaunch lands in the dev launcher, and the floating Tools button can appear inside the crop.
-- `snapshot` returns an empty `nodes` array when nothing changed unless `--force-full` is passed.
-- Set `--threshold` explicitly (0.02 for soft shadows) and verify noise at it; the default hides real regressions.
+- Set `--threshold` explicitly (0.02 for soft shadows) and verify noise at it; the default 0.1 is documented as a 44-unit RGB tolerance, far looser than a one-step shadow change.
 - Pin the device (UDID, runtime, density) and refuse to compare or re-baseline on anything else; derive expected capture size from the baseline PNG, per story.
 - A plain `.mjs` entry guarded by `import.meta.main` does nothing on Node 20/22; guard with an `argv[1]` comparison.
 
-## agent-device issues
+## agent-device findings
 
-Nineteen findings with commands and evidence in `evidence/issues.md`, none filed upstream. The four that matter most: the default diff threshold misses soft-shadow regressions (4), sessions are bound to one device per cwd (6), dev-client chrome renders into screenshots and the diff cannot tell (18), `--crop-on` is refused on web (19).
+Nineteen observations were recorded during the PoC and every one was re-verified on 2026-09-15 against the 0.21.3 docs and source, the devices, and the upstream tracker (`evidence/issues.md`). None was an unreported agent-device bug. One was a real ergonomic gap, sessions keyed by cwd only [6], and has been fixed upstream. The threshold result [4] stands as our calibration of documented behaviour, with one small ask left: the diff JSON does not record the threshold it was run at. Everything else was documented behaviour, our own build or runner, React Native, or did not survive re-testing; the file says which.
 
 ## Evidence
 
 - `evidence/results.csv`: one row per `diff screenshot` run (72 rows): platform, capture, threshold, total and changed pixels, mismatch %, regions, match, and the name of the raw JSON it came from. The raw per-command JSON is on the runner branch.
-- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match (issue 17).
+- `evidence/diff-images/`: one diff image per platform for the realistic break (ring on the Elevation 1 card) and the gross break, both at 0.02, the dev-client Tools-button false FAIL, and the full-page web capture. No 0.1 images exist because `diff screenshot --out` writes nothing on a match and deletes any stale file at that path [17].
 - `evidence/a11y-excerpt.json`, `evidence/devclient-excerpt.json`, `evidence/web-excerpt.json`: the nodes and responses that matter; full trees on the runner branch.
 - `env.json`: the pinned devices, versions and thresholds.
 
