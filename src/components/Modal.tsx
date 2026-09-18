@@ -16,6 +16,7 @@ import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -53,6 +54,14 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the modal opens.
+   */
+  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  /**
+   * Element to focus when the modal closes.
+   */
+  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
   /**
    * Content of the `Modal`.
    */
@@ -137,6 +146,8 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   dismissAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -191,6 +202,27 @@ function Modal({
     onDismiss: onDismissCallback,
   });
 
+  const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+  const { focusInitialTarget } = useOverlayFocus({
+    visible: visibleInternal,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
+      return undefined;
+    }
+
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(focusInitialTarget, scale * DEFAULT_DURATION);
+
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, scale]);
+
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
   const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
@@ -244,6 +276,7 @@ function Modal({
           pointerEvents="box-none"
         >
           <Surface
+            ref={contentRef}
             role="dialog"
             aria-modal
             aria-label={ariaLabel}
