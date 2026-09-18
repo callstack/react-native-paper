@@ -1,4 +1,10 @@
-import { BackHandler as RNBackHandler, Text } from 'react-native';
+import * as React from 'react';
+import {
+  AccessibilityInfo,
+  BackHandler as RNBackHandler,
+  Text,
+  View,
+} from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import {
@@ -32,6 +38,24 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
+const sendAccessibilityEvent = jest.mocked(
+  AccessibilityInfo.sendAccessibilityEvent
+);
+
+// The modal queues its fade, and the fade finishing queues the focus move that
+// follows it. Drained in passes so that tests need not count the steps.
+const settle = async () => {
+  for (let pass = 0; pass < 5; pass += 1) {
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    if (jest.getTimerCount() === 0) {
+      return;
+    }
+  }
+};
+
 describe('Modal', () => {
   beforeAll(() => {
     jest.useFakeTimers();
@@ -53,6 +77,7 @@ describe('Modal', () => {
   // and nothing clears it globally.
   beforeEach(() => {
     BackHandler.exitApp.mockClear();
+    sendAccessibilityEvent.mockClear();
   });
 
   describe('by default', () => {
@@ -505,6 +530,86 @@ describe('Modal', () => {
 
         expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
       });
+    });
+  });
+
+  describe('when it opens', () => {
+    it('moves the screen reader into its content', async () => {
+      await render(
+        <Portal.Host>
+          <Modal testID="modal" visible>
+            <Text>Modal content</Text>
+          </Modal>
+        </Portal.Host>
+      );
+
+      await settle();
+
+      expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        expect.anything(),
+        'focus'
+      );
+    });
+
+    it('moves the screen reader to the element it was given instead', async () => {
+      const initialFocusRef = React.createRef<View>();
+
+      await render(
+        <Portal.Host>
+          <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+            <View testID="first-field" ref={initialFocusRef} />
+            <Text>Modal content</Text>
+          </Modal>
+        </Portal.Host>
+      );
+
+      await settle();
+
+      expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        initialFocusRef.current,
+        'focus'
+      );
+    });
+  });
+
+  describe('when it closes', () => {
+    it('sends the screen reader back to the control that opened it', async () => {
+      const restoreFocusRef = React.createRef<View>();
+
+      const { rerender } = await render(
+        <Portal.Host>
+          <View testID="trigger" ref={restoreFocusRef} />
+          <Modal testID="modal" visible restoreFocusRef={restoreFocusRef}>
+            <Text>Modal content</Text>
+          </Modal>
+        </Portal.Host>
+      );
+
+      await settle();
+
+      sendAccessibilityEvent.mockClear();
+
+      await rerender(
+        <Portal.Host>
+          <View testID="trigger" ref={restoreFocusRef} />
+          <Modal
+            testID="modal"
+            visible={false}
+            restoreFocusRef={restoreFocusRef}
+          >
+            <Text>Modal content</Text>
+          </Modal>
+        </Portal.Host>
+      );
+      await settle();
+
+      expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        restoreFocusRef.current,
+        'focus'
+      );
     });
   });
 

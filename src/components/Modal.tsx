@@ -16,6 +16,7 @@ import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -44,6 +45,19 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the modal opens.
+   */
+  initialFocusRef?: React.RefObject<View | null>;
+  /**
+   * Element to focus when the modal closes.
+   */
+  restoreFocusRef?: React.RefObject<View | null>;
+  // TODO_REMOVE: both the prop and its default belong to #5125.
+  /**
+   * Accessibility label of the modal's content.
+   */
+  'aria-label'?: string;
   /**
    * Content of the `Modal`.
    */
@@ -89,7 +103,6 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * It renders itself in a [`Portal`](./Portal), so it appears above the rest of the app.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
  *
  * ## Usage
  * ```js
@@ -128,6 +141,10 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
+  // TODO_REMOVE: both the prop and its default belong to #5125.
+  'aria-label': ariaLabel = 'Dialog',
   overlayAccessibilityLabel = 'Close modal',
   overlayTestID,
   onDismiss = () => {},
@@ -180,6 +197,27 @@ function Modal({
     onDismiss: onDismissCallback,
   });
 
+  const contentRef = React.useRef<View>(null);
+
+  const { focusInitialTarget } = useOverlayFocus({
+    visible: visibleInternal,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
+      return undefined;
+    }
+
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(focusInitialTarget, scale * DEFAULT_DURATION);
+
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, scale]);
+
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
   const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
@@ -211,7 +249,6 @@ function Modal({
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
         aria-modal
-        aria-live="polite"
         style={StyleSheet.absoluteFill}
         onAccessibilityEscape={onDismissCallback}
         testID={testID}
@@ -234,6 +271,14 @@ function Modal({
           pointerEvents="box-none"
         >
           <Surface
+            ref={contentRef}
+            /* TODO_REMOVE: #5125 owns the modal's role and name, and moves
+               `aria-modal` off the wrapper above onto this surface. Until it
+               lands, moving focus here announces nothing, which leaves this
+               impossible to verify with VoiceOver and TalkBack. */
+            role="dialog"
+            aria-modal
+            aria-label={ariaLabel}
             theme={theme}
             backgroundColor={contentBackgroundColor}
             borderRadius={contentBorderRadius}

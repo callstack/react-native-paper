@@ -26,7 +26,6 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -111,7 +110,10 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -235,7 +237,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -320,7 +321,10 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -444,7 +448,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -529,7 +532,10 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -653,7 +659,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -738,7 +743,10 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -862,7 +870,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -947,7 +954,10 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -1071,7 +1081,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -1156,7 +1165,10 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -1280,7 +1292,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -1365,7 +1376,10 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -1489,7 +1503,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -1574,7 +1587,10 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -1698,7 +1714,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -1783,7 +1798,10 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -1907,7 +1925,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -1992,7 +2009,10 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -2116,7 +2136,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -2201,7 +2220,10 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -2325,7 +2347,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -2410,7 +2431,10 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -2534,7 +2558,6 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -2619,7 +2642,10 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -2742,7 +2768,6 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -2827,7 +2852,10 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -2950,7 +2978,6 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -3035,7 +3062,10 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -3159,7 +3189,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -3244,7 +3273,10 @@ exports[`Modal when visible prop changes again during the open/close animation w
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -3367,7 +3399,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -3452,7 +3483,10 @@ exports[`Modal when visible prop changes again during the open/close animation w
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -3576,7 +3610,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -3661,7 +3694,10 @@ exports[`Modal when visible prop changes again during the open/close animation w
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -3785,7 +3821,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -3870,7 +3905,10 @@ exports[`Modal when visible prop changes again during the open/close animation w
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -3994,7 +4032,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -4079,7 +4116,10 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -4203,7 +4243,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -4288,7 +4327,10 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -4412,7 +4454,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -4497,7 +4538,10 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -4620,7 +4664,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -4705,7 +4748,10 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -4829,7 +4875,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -4914,7 +4959,10 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
@@ -5037,7 +5085,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     }
   >
     <View
-      aria-live="polite"
       aria-modal={true}
       collapsable={false}
       onAccessibilityEscape={[Function]}
@@ -5122,7 +5169,10 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
         }
       >
         <View
+          aria-label="Dialog"
+          aria-modal={true}
           collapsable={false}
+          role="dialog"
           style={
             [
               {},
