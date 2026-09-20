@@ -172,6 +172,15 @@ function Modal({
 
   const { scale } = theme.animation;
 
+  const contentRef = React.useRef<View>(null);
+
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
+
   React.useEffect(() => {
     const timeout = setTimeout(() => setAnimatedVisible(visible), 0);
 
@@ -191,19 +200,16 @@ function Modal({
     return () => clearTimeout(timeout);
   }, [scale, visible, visibleInternal]);
 
+  React.useEffect(() => {
+    if (!visibleInternal) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visibleInternal]);
+
   useOverlayDismiss({
     enabled: visible,
     dismissable: dismissableBackButton,
     onDismiss: onDismissCallback,
-  });
-
-  const contentRef = React.useRef<View>(null);
-
-  const { focusInitialTarget } = useOverlayFocus({
-    visible: visibleInternal,
-    containerRef: contentRef,
-    initialFocusRef,
-    restoreFocusRef,
   });
 
   React.useEffect(() => {

@@ -36,12 +36,18 @@ const Overlay = ({
   initialFocusRef,
   restoreFocusRef,
 }: OverlayProps) => {
-  const { focusInitialTarget } = useOverlayFocus({
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
     visible,
     containerRef: contentRef,
     initialFocusRef,
     restoreFocusRef,
   });
+
+  React.useEffect(() => {
+    if (!visible) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visible]);
 
   return (
     <View testID="content" ref={contentRef} onLayout={focusInitialTarget} />
@@ -55,7 +61,7 @@ const layOutContent = async () => {
 /** Focus is handed back a tick after the overlay closes. */
 const settle = async () => {
   await act(() => {
-    jest.advanceTimersByTime(1);
+    jest.runOnlyPendingTimers();
   });
 };
 
@@ -96,15 +102,52 @@ describe('useOverlayFocus', () => {
       );
     });
 
-    it('moves focus once however often the content lays out', async () => {
+    it('moves focus again when the overlay reopens', async () => {
       const contentRef = React.createRef<View>();
+      const restoreFocusRef = React.createRef<View>();
 
-      await render(<Overlay visible contentRef={contentRef} />);
+      const { rerender } = await render(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
       await layOutContent();
-      await layOutContent();
+
+      await rerender(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible={false}
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
+      await settle();
+      sendAccessibilityEvent.mockClear();
+
+      await rerender(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
       await layOutContent();
 
       expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        contentRef.current,
+        'focus'
+      );
     });
   });
 
@@ -190,6 +233,80 @@ describe('useOverlayFocus', () => {
       await settle();
 
       expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not restore focus from an interrupted close', async () => {
+      const contentRef = React.createRef<View>();
+      const restoreFocusRef = React.createRef<View>();
+
+      const { rerender } = await render(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
+      await layOutContent();
+      sendAccessibilityEvent.mockClear();
+
+      await rerender(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible={false}
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
+      await rerender(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
+      await layOutContent();
+      await settle();
+
+      expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        contentRef.current,
+        'focus'
+      );
+    });
+
+    it('moves focus back when an open overlay unmounts', async () => {
+      const contentRef = React.createRef<View>();
+      const restoreFocusRef = React.createRef<View>();
+
+      const { rerender } = await render(
+        <>
+          <View ref={restoreFocusRef} />
+          <Overlay
+            visible
+            contentRef={contentRef}
+            restoreFocusRef={restoreFocusRef}
+          />
+        </>
+      );
+      await layOutContent();
+      sendAccessibilityEvent.mockClear();
+
+      await rerender(<View ref={restoreFocusRef} />);
+      await settle();
+
+      expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+      expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+        restoreFocusRef.current,
+        'focus'
+      );
     });
 
     it('leaves focus alone when no element was given to restore it to', async () => {

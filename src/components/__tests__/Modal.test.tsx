@@ -603,6 +603,15 @@ describe('Modal', () => {
           </Modal>
         </Portal.Host>
       );
+      await act(() => {
+        jest.advanceTimersByTime(1);
+      });
+
+      // The screen behind the modal stays inert until the fade is over, so
+      // focus waits with it.
+      expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+      expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
       await settle();
 
       expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
@@ -610,6 +619,7 @@ describe('Modal', () => {
         restoreFocusRef.current,
         'focus'
       );
+      expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
     });
   });
 
