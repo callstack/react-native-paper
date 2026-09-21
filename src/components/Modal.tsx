@@ -9,13 +9,14 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
+import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -44,6 +45,18 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the modal opens.
+   */
+  initialFocusRef?: React.RefObject<View | null>;
+  /**
+   * Element to focus when the modal closes.
+   */
+  restoreFocusRef?: React.RefObject<View | null>;
+  /**
+   * Accessible name for the modal.
+   */
+  'aria-label'?: string;
   /**
    * Content of the `Modal`.
    */
@@ -88,13 +101,12 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
+ * It renders itself in a [`Portal`](./Portal), so it appears above the rest of the app.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+ * import { Modal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -106,16 +118,14 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *
  *   return (
  *     <PaperProvider>
- *       <Portal>
- *         <Modal
- *           visible={visible}
- *           onDismiss={hideModal}
- *           contentBackgroundColor="white"
- *           contentContainerStyle={containerStyle}
- *         >
- *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
- *         </Modal>
- *       </Portal>
+ *       <Modal
+ *         visible={visible}
+ *         onDismiss={hideModal}
+ *         contentBackgroundColor="white"
+ *         contentContainerStyle={containerStyle}
+ *       >
+ *         <Text>Example Modal.  Click outside this area to dismiss.</Text>
+ *       </Modal>
  *       <Button style={{ marginTop: 30 }} onPress={showModal}>
  *         Show
  *       </Button>
@@ -130,6 +140,9 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
+  'aria-label': ariaLabel,
   overlayAccessibilityLabel = 'Close modal',
   overlayTestID,
   onDismiss = () => {},
@@ -157,6 +170,15 @@ function Modal({
 
   const { scale } = theme.animation;
 
+  const contentRef = React.useRef<View>(null);
+
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
+
   React.useEffect(() => {
     const timeout = setTimeout(() => setAnimatedVisible(visible), 0);
 
@@ -177,26 +199,28 @@ function Modal({
   }, [scale, visible, visibleInternal]);
 
   React.useEffect(() => {
-    if (!visible) {
+    if (!visibleInternal) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visibleInternal]);
+
+  useOverlayDismiss({
+    enabled: visible,
+    dismissable: dismissableBackButton,
+    onDismiss: onDismissCallback,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
       return undefined;
     }
 
-    const onHardwareBackPress = () => {
-      if (dismissable || dismissableBackButton) {
-        onDismissCallback();
-      }
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(focusInitialTarget, scale * DEFAULT_DURATION);
 
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
-    );
-
-    return () => subscription.remove();
-  }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, scale]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
@@ -225,48 +249,53 @@ function Modal({
   }
 
   return (
-    <Animated.View
-      pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
-      aria-live="polite"
-      style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={onDismissCallback}
-      testID={testID}
-    >
-      <AnimatedPressable
-        aria-label={overlayAccessibilityLabel}
-        role="button"
-        disabled={!dismissable}
-        onPress={dismissable ? onDismissCallback : undefined}
-        importantForAccessibility="no"
-        style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
-        testID={overlayTestID}
-      />
-      <View
-        style={[
-          styles.wrapper,
-          { marginTop: top, marginBottom: bottom },
-          style,
-        ]}
-        pointerEvents="box-none"
+    <Portal modal={visible} theme={theme}>
+      <Animated.View
+        pointerEvents={visible ? 'auto' : 'none'}
+        aria-modal
+        style={StyleSheet.absoluteFill}
+        onAccessibilityEscape={onDismissCallback}
+        testID={testID}
       >
-        <Surface
-          theme={theme}
-          backgroundColor={contentBackgroundColor}
-          borderRadius={contentBorderRadius}
+        <AnimatedPressable
+          aria-label={overlayAccessibilityLabel}
+          role="button"
+          disabled={!dismissable}
+          onPress={dismissable ? onDismissCallback : undefined}
+          importantForAccessibility="no"
+          style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
+          testID={overlayTestID}
+        />
+        <View
           style={[
-            styles.content,
-            contentStyle,
-            contentTransitionStyle,
-            contentContainerStyle,
+            styles.wrapper,
+            { marginTop: top, marginBottom: bottom },
+            style,
           ]}
-          elevation={contentElevation}
-          transitionDuration={scale * DEFAULT_DURATION}
+          pointerEvents="box-none"
         >
-          {children}
-        </Surface>
-      </View>
-    </Animated.View>
+          <Surface
+            ref={contentRef}
+            role="dialog"
+            aria-modal
+            aria-label={ariaLabel}
+            theme={theme}
+            backgroundColor={contentBackgroundColor}
+            borderRadius={contentBorderRadius}
+            style={[
+              styles.content,
+              contentStyle,
+              contentTransitionStyle,
+              contentContainerStyle,
+            ]}
+            elevation={contentElevation}
+            transitionDuration={scale * DEFAULT_DURATION}
+          >
+            {children}
+          </Surface>
+        </View>
+      </Animated.View>
+    </Portal>
   );
 }
 

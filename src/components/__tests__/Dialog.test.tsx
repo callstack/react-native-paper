@@ -12,6 +12,7 @@ import { act, userEvent } from '@testing-library/react-native';
 import Dialog from '../../components/Dialog/Dialog';
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
+import Portal from '../Portal/Portal';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -23,9 +24,11 @@ const BackHandler = RNBackHandler as BackHandlerStatic;
 describe('Dialog', () => {
   it('should render passed children', async () => {
     await render(
-      <Dialog visible testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible testID="dialog">
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog')).toHaveTextContent(
@@ -36,9 +39,11 @@ describe('Dialog', () => {
   it('should call onDismiss when dismissable', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     await userEvent.press(screen.getByLabelText('Close modal'));
@@ -52,9 +57,16 @@ describe('Dialog', () => {
   it('should not call onDismiss when dismissable is false', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          testID="dialog"
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     await userEvent.press(screen.getByLabelText('Close modal'));
@@ -69,15 +81,17 @@ describe('Dialog', () => {
     Platform.OS = 'android';
     const onDismiss = jest.fn();
     await render(
-      <Dialog
-        visible
-        onDismiss={onDismiss}
-        dismissable={false}
-        dismissableBackButton
-        testID="dialog"
-      >
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          dismissableBackButton
+          testID="dialog"
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     await userEvent.press(screen.getByLabelText('Close modal'));
@@ -96,11 +110,13 @@ describe('Dialog', () => {
 
   it('should apply top margin to the first child if the dialog is V3', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
-          <Text>Test Dialog Content</Text>
-        </Dialog.Title>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible={true}>
+          <Dialog.Title testID="dialog-content">
+            <Text>Test Dialog Content</Text>
+          </Dialog.Title>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
@@ -112,10 +128,12 @@ describe('Dialog', () => {
 describe('DialogActions', () => {
   it('should render passed children', async () => {
     await render(
-      <Dialog.Actions>
-        <Button testID="button-cancel">Cancel</Button>
-        <Button testID="button-ok">Ok</Button>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog.Actions>
+          <Button testID="button-cancel">Cancel</Button>
+          <Button testID="button-ok">Ok</Button>
+        </Dialog.Actions>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('button-cancel')).toBeOnTheScreen();
@@ -124,10 +142,12 @@ describe('DialogActions', () => {
 
   it('should apply default styles', async () => {
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog.Actions testID="dialog-actions">
+          <Button>Cancel</Button>
+          <Button>Ok</Button>
+        </Dialog.Actions>
+      </Portal.Host>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
@@ -143,10 +163,12 @@ describe('DialogActions', () => {
 
   it('should apply custom styles', async () => {
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog.Actions testID="dialog-actions">
+          <Button style={styles.spacing}>Cancel</Button>
+          <Button style={styles.noSpacing}>Ok</Button>
+        </Dialog.Actions>
+      </Portal.Host>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');

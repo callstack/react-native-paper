@@ -104,22 +104,141 @@ it('renders portals in source order when mounted in the same commit', async () =
 it('stacks components mounted in the same commit in source order', async () => {
   await render(
     <Portal.Host>
-      <Portal>
-        <Modal visible onDismiss={() => {}}>
-          <Text testID="layer">modal</Text>
-        </Modal>
-      </Portal>
-      <Portal>
-        <Dialog visible onDismiss={() => {}}>
-          <Text testID="layer">dialog</Text>
-        </Dialog>
-      </Portal>
+      <Modal visible onDismiss={() => {}}>
+        <Text testID="layer">modal</Text>
+      </Modal>
+      <Dialog visible onDismiss={() => {}}>
+        <Text testID="layer">dialog</Text>
+      </Dialog>
     </Portal.Host>
   );
 
-  const layers = await screen.findAllByTestId('layer');
+  const layers = await screen.findAllByTestId('layer', {
+    includeHiddenElements: true,
+  });
 
   expect(layers).toHaveLength(2);
   expect(layers[0]).toHaveTextContent('modal');
   expect(layers[1]).toHaveTextContent('dialog');
+});
+
+it('hides the app content from assistive technology while a modal is open', async () => {
+  await render(
+    <Portal.Host>
+      <Text>page content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('modal content')).toBeVisible();
+
+  const pageContent = screen.getByText('page content', {
+    includeHiddenElements: true,
+  });
+
+  // Still mounted and painted - only hidden from assistive technology.
+  expect(pageContent).toBeOnTheScreen();
+  expect(pageContent).not.toBeVisible();
+});
+
+it('leaves the app content reachable for a portal that is not a modal', async () => {
+  await render(
+    <Portal.Host>
+      <Text>page content</Text>
+      <Portal>
+        <Text>portal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('portal content')).toBeVisible();
+  expect(screen.getByText('page content')).toBeVisible();
+});
+
+it('keeps a portal opened on top of a modal reachable', async () => {
+  await render(
+    <Portal.Host>
+      <Portal modal>
+        <Text>dialog content</Text>
+      </Portal>
+      <Portal>
+        <Text>menu content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('menu content')).toBeVisible();
+  expect(screen.getByText('dialog content')).toBeVisible();
+});
+
+it('hides a modal that another modal was opened on top of', async () => {
+  await render(
+    <Portal.Host>
+      <Portal modal>
+        <Text>lower dialog</Text>
+      </Portal>
+      <Portal modal>
+        <Text>upper dialog</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('upper dialog')).toBeVisible();
+  expect(
+    screen.getByText('lower dialog', { includeHiddenElements: true })
+  ).not.toBeVisible();
+});
+
+it('makes the app content reachable again once the modal closes', async () => {
+  const { rerender } = await render(
+    <Portal.Host>
+      <Text>page content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('modal content')).toBeVisible();
+  expect(
+    screen.getByText('page content', { includeHiddenElements: true })
+  ).not.toBeVisible();
+
+  await rerender(
+    <Portal.Host>
+      <Text>page content</Text>
+      <Portal modal={false}>
+        <Text>modal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('page content')).toBeVisible();
+});
+
+it('makes the app content reachable again once the modal unmounts', async () => {
+  const { rerender } = await render(
+    <Portal.Host>
+      <Text>page content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('modal content')).toBeVisible();
+  expect(
+    screen.getByText('page content', { includeHiddenElements: true })
+  ).not.toBeVisible();
+
+  await rerender(
+    <Portal.Host>
+      <Text>page content</Text>
+    </Portal.Host>
+  );
+
+  expect(screen.queryByText('modal content')).not.toBeOnTheScreen();
+  expect(screen.getByText('page content')).toBeVisible();
 });

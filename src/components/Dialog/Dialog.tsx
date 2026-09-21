@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import type { StyleProp } from 'react-native';
+import type { StyleProp, View } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -33,6 +33,14 @@ export type Props = {
    */
   visible: boolean;
   /**
+   * An accessibility element to focus when the dialog opens.
+   */
+  initialFocusRef?: React.RefObject<View | null>;
+  /**
+   * An accessibility element to focus when the dialog closes.
+   */
+  restoreFocusRef?: React.RefObject<View | null>;
+  /**
    * Content of the `Dialog`.
    */
   children: React.ReactNode;
@@ -55,13 +63,12 @@ const DIALOG_ELEVATION: Elevation = 3;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
- * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+ * import { Button, Dialog, PaperProvider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -74,17 +81,15 @@ const DIALOG_ELEVATION: Elevation = 3;
  *     <PaperProvider>
  *       <View>
  *         <Button onPress={showDialog}>Show Dialog</Button>
- *         <Portal>
- *           <Dialog visible={visible} onDismiss={hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Text variant="bodyMedium">This is simple dialog</Text>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
- *         </Portal>
+ *         <Dialog visible={visible} onDismiss={hideDialog}>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Text variant="bodyMedium">This is simple dialog</Text>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
+ *             <Button onPress={hideDialog}>Done</Button>
+ *           </Dialog.Actions>
+ *         </Dialog>
  *       </View>
  *     </PaperProvider>
  *   );
@@ -99,6 +104,8 @@ const Dialog = ({
   dismissableBackButton = dismissable,
   onDismiss,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   style,
   theme: themeOverrides,
   testID,
@@ -117,6 +124,8 @@ const Dialog = ({
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
       visible={visible}
+      initialFocusRef={initialFocusRef}
+      restoreFocusRef={restoreFocusRef}
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
       contentElevation={DIALOG_ELEVATION}

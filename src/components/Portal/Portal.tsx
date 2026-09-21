@@ -17,6 +17,12 @@ export type Props = {
    */
   children: React.ReactNode;
   /**
+   * Whether the portal hides items below it from screen readers and focus order.
+   *
+   * Ensure it's set to true only when the modal is open.
+   */
+  modal?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -42,7 +48,7 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Portal = ({ children, theme: themeOverrides }: Props) => {
+const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
@@ -50,7 +56,7 @@ const Portal = ({ children, theme: themeOverrides }: Props) => {
   const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
-    <PortalConsumer manager={manager}>
+    <PortalConsumer manager={manager} modal={modal}>
       <SettingsProvider value={settings}>
         <ReduceMotionContext.Provider value={reduceMotion}>
           <LocaleProvider direction={direction}>
