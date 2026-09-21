@@ -53,9 +53,8 @@ export type Props = {
    * Element to focus when the modal closes.
    */
   restoreFocusRef?: React.RefObject<View | null>;
-  // TODO_REMOVE: both the prop and its default belong to #5125.
   /**
-   * Accessibility label of the modal's content.
+   * Accessible name for the modal.
    */
   'aria-label'?: string;
   /**
@@ -143,8 +142,7 @@ function Modal({
   visible = false,
   initialFocusRef,
   restoreFocusRef,
-  // TODO_REMOVE: both the prop and its default belong to #5125.
-  'aria-label': ariaLabel = 'Dialog',
+  'aria-label': ariaLabel,
   overlayAccessibilityLabel = 'Close modal',
   overlayTestID,
   onDismiss = () => {},
@@ -278,10 +276,6 @@ function Modal({
         >
           <Surface
             ref={contentRef}
-            /* TODO_REMOVE: #5125 owns the modal's role and name, and moves
-               `aria-modal` off the wrapper above onto this surface. Until it
-               lands, moving focus here announces nothing, which leaves this
-               impossible to verify with VoiceOver and TalkBack. */
             role="dialog"
             aria-modal
             aria-label={ariaLabel}
