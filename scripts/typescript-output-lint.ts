@@ -14,7 +14,6 @@ const output = join(root, 'lib', 'typescript');
  * More info: https://github.com/callstack/react-native-paper/pull/3603
  */
 const unusedViewProps = [
-  'nativeID',
   'accessibilityActions',
   'accessibilityValue',
   'onAccessibilityAction',
