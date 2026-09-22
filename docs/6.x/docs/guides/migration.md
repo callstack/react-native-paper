@@ -403,6 +403,10 @@ referenced by the input's `aria-describedby`. Additional IDs passed through
 included in `accessibilityHint`, alongside any hint you provide, because React
 Native does not support native described-by relationships.
 
+When no label or explicit accessible name is supplied, the placeholder names the
+field, including after text is entered. A disabled field always exposes its
+disabled state, even when `aria-disabled={false}` is supplied.
+
 Error supporting text uses `role="alert"`. Android uses an assertive live region;
 iOS announces changed error messages through `AccessibilityInfo`.
 Custom input renderers should forward the accessibility props they receive.
@@ -411,10 +415,10 @@ from `error` and the character counter.
 Empty fields remain visible to native accessibility before focus and after
 clearing. The field content no longer fades with the floating label.
 
-The filled resting indicator now uses `onSurfaceVariant` and changes to
-`onSurface` on hover. An invalid filled field uses `error` at rest and
-`onErrorContainer` on hover. The focused indicator continues to use `primary` (or
-`error` for an invalid field). Outlined fields continue to use `outline` at rest.
+The filled resting indicator now uses `onSurfaceVariant`; outlined fields use
+`outline` at rest. Both change to `onSurface` on hover. Invalid fields use `error`
+at rest and `onErrorContainer` on hover. Focus takes precedence over hover and
+uses `primary` (or `error` for an invalid field).
 
 #### Removed props
 

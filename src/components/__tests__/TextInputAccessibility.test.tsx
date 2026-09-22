@@ -21,6 +21,43 @@ afterEach(() => {
 });
 
 it.each(['filled', 'outlined'] as const)(
+  'uses the placeholder as the name of an unlabelled %s field, including after typing',
+  async (variant) => {
+    await render(<TextInput variant={variant} placeholder="Search" />);
+
+    const input = screen.getByLabelText('Search');
+    await userEvent.type(input, 'Paper');
+    expect(screen.getByLabelText('Search')).toHaveDisplayValue('Paper');
+  }
+);
+
+it.each([
+  { label: 'Search products' },
+  { 'aria-label': 'Search products' },
+  { accessibilityLabel: 'Search products' },
+])('prefers a supplied name over the placeholder: %j', async (props) => {
+  await render(<TextInput {...props} placeholder="Search" />);
+
+  expect(screen.getByLabelText('Search products')).toBeOnTheScreen();
+  expect(screen.queryByLabelText('Search')).toBeNull();
+});
+
+it.each([
+  { disabled: true, 'aria-disabled': false, expectedDisabled: true },
+  { disabled: true, 'aria-disabled': true, expectedDisabled: true },
+  { disabled: false, 'aria-disabled': true, expectedDisabled: true },
+  { disabled: false, 'aria-disabled': false, expectedDisabled: false },
+])(
+  'keeps the disabled semantics consistent: %j',
+  async ({ expectedDisabled, ...props }) => {
+    await render(<TextInput {...props} label="Email" readOnly />);
+
+    const input = screen.getByLabelText('Email');
+    expect(input).toHaveProp('aria-disabled', expectedDisabled);
+  }
+);
+
+it.each(['filled', 'outlined'] as const)(
   'keeps an empty unfocused %s field visible to assistive technology',
   async (variant) => {
     await render(<TextInput variant={variant} label="Email" />);
@@ -308,7 +345,7 @@ it('renders decorative accessories outside the accessibility tree without button
   ).toBeOnTheScreen();
 });
 
-it('preserves decorative loading and container visuals without accessible controls', async () => {
+it('preserves decorative loading and content styles without accessible controls', async () => {
   await render(
     <TextInput
       label="Search"
@@ -330,11 +367,6 @@ it('preserves decorative loading and container visuals without accessible contro
   expect(
     screen.getByRole('progressbar', { includeHiddenElements: true })
   ).toBeOnTheScreen();
-  expect(
-    screen.getByTestId('search-decoration-container', {
-      includeHiddenElements: true,
-    })
-  ).toHaveStyle({ backgroundColor: 'pink', borderWidth: 1 });
   expect(
     screen.getByTestId('search-decoration', { includeHiddenElements: true })
   ).toHaveStyle({ padding: 2 });

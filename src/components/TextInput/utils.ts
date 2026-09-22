@@ -190,15 +190,11 @@ export const getOutlineColor = ({
 
   if (isDisabled) return colors.onSurface;
   if (hasError) {
-    return variant === 'filled' && isHovered && !isFocused
-      ? colors.onErrorContainer
-      : colors.error;
+    return isHovered && !isFocused ? colors.onErrorContainer : colors.error;
   }
   if (isFocused) return colors.primary;
-  if (variant === 'filled') {
-    return isHovered ? colors.onSurface : colors.onSurfaceVariant;
-  }
-  return colors.outline;
+  if (isHovered) return colors.onSurface;
+  return variant === 'filled' ? colors.onSurfaceVariant : colors.outline;
 };
 
 /**
@@ -478,6 +474,7 @@ export const getOutlinedTextInputData = (
     isDisabled,
     isFocused,
     hasError,
+    isHovered: api.isHovered,
   });
 
   /**
@@ -611,10 +608,10 @@ export const getAccessibilityData = ({
 
   return {
     input: {
-      'aria-label': explicitLabel ?? label,
+      'aria-label': explicitLabel ?? label ?? props.placeholder,
       'aria-labelledby': labelledBy,
       'aria-describedby': describedBy,
-      'aria-disabled': props['aria-disabled'] ?? isDisabled,
+      'aria-disabled': isDisabled || (props['aria-disabled'] ?? false),
       'aria-invalid': props['aria-invalid'] ?? (hasError || isCounterExceeded),
       accessibilityHint: hint,
     },
