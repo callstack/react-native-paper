@@ -4,9 +4,9 @@ import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { Provider as SettingsProvider } from '../../../core/settings';
-import { defaultThemes } from '../../../core/theming';
 import { fireEvent, render, screen } from '../../../test-utils';
 import { ReduceMotionContext } from '../../../theme/accessibility/ReduceMotionContext';
+import { LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
 import Checkbox from '../../Checkbox';
 import type { Props as CheckboxProps } from '../../Checkbox/Checkbox';
@@ -72,7 +72,7 @@ it('renders Checkbox with custom testID', async () => {
 });
 
 describe('Checkbox state layer', () => {
-  const { colors } = defaultThemes.light;
+  const { colors } = LightTheme;
   const { hovered, focused } = tokens.md.sys.state.opacity;
 
   const stateLayer = () => screen.getByTestId('checkbox-state-layer');
@@ -192,7 +192,7 @@ describe('Checkbox state layer', () => {
 });
 
 describe('Checkbox press ripple', () => {
-  const { colors, motion } = defaultThemes.light;
+  const { colors, motion } = LightTheme;
   const { hovered, pressed } = tokens.md.sys.state.opacity;
   const GROW = motion.duration.short4;
   const FADE_OUT = motion.duration.short3;
@@ -387,7 +387,7 @@ describe('Checkbox press ripple', () => {
   // Whether the platform press was suppressed or handed back only shows up on
   // `TouchableRipple`'s own press underlay, so assert there: the absence of our
   // ripple says nothing about what the platform paints in its place.
-  const underlay = () => screen.getByTestId('touchable-ripple-underlay');
+  const underlay = () => screen.getByRole('checkbox').children[0];
 
   it('suppresses the platform press by default', async () => {
     await renderCheckbox({ testOnly_pressed: true });
