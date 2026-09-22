@@ -1,16 +1,26 @@
 name: Expo EAS Updates
+
 on:
-  push:
+  pull_request_target:
+    types: [closed]
     branches:
       - main
+
+permissions:
+  contents: read
+
 jobs:
   publish:
-    if: ${{ (contains(github.event.pull_request.labels.*.name, 'example app')) }}
+    if: >-
+      ${{ github.event.pull_request.merged
+        && contains(github.event.pull_request.labels.*.name, 'example app') }}
     name: Install and publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: main
 
       - name: Setup
         uses: ./.github/actions/setup
