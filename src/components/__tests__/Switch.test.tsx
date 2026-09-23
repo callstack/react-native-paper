@@ -1,16 +1,26 @@
-import type * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet, type ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import * as Reanimated from 'react-native-reanimated';
+import { getAnimatedStyle } from 'react-native-reanimated';
+import type { JsonNode } from 'test-renderer';
 
-import { defaultThemes } from '../../core/theming';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
-import { tokens } from '../../theme/tokens';
 import Switch from '../Switch/Switch';
 
-const animatedStyle = (testID: string) =>
-  Reanimated.getAnimatedStyle(screen.getByTestId(testID));
+// Snapshot rendered output with current animation values instead of the
+// initial styles retained by the test renderer.
+const renderedStyles = (
+  tree: JsonNode | JsonNode[] | null = screen.toJSON()
+): ViewStyle[] => {
+  if (tree === null || typeof tree === 'string') return [];
+  if (Array.isArray(tree)) return tree.flatMap(renderedStyles);
+
+  const { props, children } = tree;
+  return [
+    { ...StyleSheet.flatten(props.style), ...getAnimatedStyle(tree) },
+    ...children.flatMap(renderedStyles),
+  ];
+};
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -19,7 +29,9 @@ afterEach(() => {
 describe('Switch render', () => {
   it('renders on', async () => {
     expect(
-      (await render(<Switch value onValueChange={jest.fn()} />)).toJSON()
+      (
+        await render(<Switch value onValueChange={jest.fn()} testID="switch" />)
+      ).toJSON()
     ).toMatchSnapshot();
   });
 
@@ -84,94 +96,67 @@ describe('Switch accessibility', () => {
 });
 
 describe('Switch focus state', () => {
-  const renderAndFocus = async (element: React.ReactElement) => {
-    await render(element);
+  it.each([false, true])(
+    'renders keyboard focus feedback when value is %s and clears it on blur',
+    async (value) => {
+      await render(<Switch value={value} onValueChange={jest.fn()} />);
+      const resting = renderedStyles();
 
-    await fireEvent(screen.getByTestId('switch'), 'focus');
-    await jest.runAllTimersAsync();
-  };
+      await fireEvent(screen.getByRole('switch'), 'focus');
+      await jest.runAllTimersAsync();
 
-  it('shows the focus indicator on keyboard focus', async () => {
-    await renderAndFocus(
-      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
-    );
+      expect(renderedStyles()).toMatchSnapshot('focused');
+      expect(renderedStyles()).not.toEqual(resting);
 
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
-  });
+      await fireEvent(screen.getByRole('switch'), 'blur');
+      await jest.runAllTimersAsync();
 
-  it('hides the focus indicator again on blur', async () => {
-    await renderAndFocus(
-      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
-    );
+      expect(renderedStyles()).toEqual(resting);
+    }
+  );
 
-    await fireEvent(screen.getByTestId('switch'), 'blur');
-    await jest.runAllTimersAsync();
-
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
-  });
-
-  it('raises the state layer to the focused opacity', async () => {
-    await renderAndFocus(
-      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
-    );
-
-    expect(animatedStyle('switch-state-layer')).toMatchObject({
-      opacity: tokens.md.sys.state.opacity.focused,
-    });
-  });
-
-  it('leaves the indicator hidden for pointer focus on web', async () => {
+  it('only shows focus feedback for keyboard focus on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Switch value onValueChange={jest.fn()} />);
+    const resting = renderedStyles();
 
-    await render(
-      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
-    );
-    await fireEvent(screen.getByTestId('switch'), 'focus', {
+    await fireEvent(screen.getByRole('switch'), 'focus', {
       currentTarget: { matches: () => false },
     });
     await jest.runAllTimersAsync();
+    expect(renderedStyles()).toEqual(resting);
 
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
-  });
-
-  it('shows the indicator for keyboard focus on web', async () => {
-    jest.replaceProperty(Platform, 'OS', 'web');
-
-    await render(
-      <Switch value={false} onValueChange={jest.fn()} testID="switch" />
-    );
-    await fireEvent(screen.getByTestId('switch'), 'focus', {
+    await fireEvent(screen.getByRole('switch'), 'focus', {
       currentTarget: { matches: () => true },
     });
     await jest.runAllTimersAsync();
-
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
+    expect(renderedStyles()).toMatchSnapshot('keyboard focus');
+    expect(renderedStyles()).not.toEqual(resting);
   });
 
-  it('clears the focus state when the switch stops being interactive', async () => {
-    const view = await render(
-      <Switch value onValueChange={jest.fn()} testID="switch" />
-    );
+  it.each(['disabled', 'readOnly'] as const)(
+    'clears interaction feedback when the switch becomes %s',
+    async (prop) => {
+      const onValueChange = jest.fn();
+      const view = await render(<Switch value onValueChange={onValueChange} />);
+      const resting = renderedStyles();
 
-    await fireEvent(screen.getByTestId('switch'), 'focus');
-    await jest.runAllTimersAsync();
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 1 });
+      await fireEvent(screen.getByRole('switch'), 'focus');
+      await fireEvent(screen.getByRole('switch'), 'hoverIn');
+      await fireEvent(screen.getByRole('switch'), 'pressIn');
+      await jest.runAllTimersAsync();
+      expect(renderedStyles()).not.toEqual(resting);
 
-    await view.rerender(<Switch value disabled testID="switch" />);
-    await jest.runAllTimersAsync();
+      await view.rerender(
+        <Switch value onValueChange={onValueChange} {...{ [prop]: true }} />
+      );
+      await jest.runAllTimersAsync();
+      await view.rerender(<Switch value onValueChange={onValueChange} />);
+      await jest.runAllTimersAsync();
 
-    expect(animatedStyle('switch-focus-ring')).toMatchObject({ opacity: 0 });
-  });
-
-  it('paints the focus handle color when selected and focused', async () => {
-    await renderAndFocus(
-      <Switch value onValueChange={jest.fn()} testID="switch" />
-    );
-
-    expect(animatedStyle('switch-handle-fill')).toMatchObject({
-      backgroundColor: defaultThemes.light.colors.primaryContainer,
-    });
-  });
+      expect(renderedStyles()).toEqual(resting);
+    }
+  );
 });
 
 describe('Switch operability', () => {
@@ -196,36 +181,96 @@ describe('Switch operability', () => {
     expect(screen.getByRole('switch')).toHaveProp('focusable', false);
   });
 
-  it('announces a read-only switch without making it focusable', async () => {
-    await render(<Switch value readOnly aria-label="Dark theme" />);
+  describe.each(['ios', 'android', 'web'] as const)('%s', (platform) => {
+    it.each([false, true])(
+      'exposes a read-only switch with value %s as non-operable',
+      async (value) => {
+        jest.replaceProperty(Platform, 'OS', platform);
+        const view = await render(
+          <Switch value={value} onValueChange={jest.fn()} />
+        );
+        const enabledAppearance = renderedStyles();
+        await view.rerender(
+          <Switch
+            value={value}
+            readOnly
+            disabled={false}
+            aria-label="Dark theme"
+          />
+        );
 
-    const control = screen.getByRole('switch');
+        const control = screen.getByRole('switch', {
+          name: 'Dark theme',
+          checked: value,
+          disabled: platform !== 'web',
+        });
+        expect(control).toHaveProp('focusable', false);
+        expect(control).toHaveProp('tabIndex', -1);
+        expect(renderedStyles()).toEqual(enabledAppearance);
+        expect(control).toBeOnTheScreen();
+      }
+    );
 
-    expect(control).toHaveProp('focusable', false);
-    expect(control).toHaveProp('aria-readonly', true);
-    expect(control).toBeChecked();
-    expect(control).toBeEnabled();
+    it('marks a missing-handler fallback as non-operable', async () => {
+      jest.replaceProperty(Platform, 'OS', platform);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      // @ts-expect-error -- the fallback exists for untyped callers.
+      await render(<Switch value disabled={false} />);
+      const control = screen.getByRole('switch', {
+        checked: true,
+        disabled: platform !== 'web',
+      });
+
+      expect(control).toHaveProp('tabIndex', -1);
+      expect(control).toBeOnTheScreen();
+    });
+
+    it('keeps disabled semantics when read-only is also set', async () => {
+      jest.replaceProperty(Platform, 'OS', platform);
+      await render(<Switch value disabled readOnly />);
+
+      expect(screen.getByRole('switch')).toBeDisabled();
+      expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly', true);
+    });
   });
 
-  it('announces a switch with no way to be operated as read-only', async () => {
+  it('exposes the read-only state on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Switch value readOnly />);
+
+    expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
+    expect(screen.getByRole('switch')).toBeEnabled();
+  });
+
+  it('exposes a missing-handler fallback as read-only on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     // @ts-expect-error -- the fallback exists for untyped callers.
     await render(<Switch value />);
 
-    const control = screen.getByRole('switch');
-
-    expect(control).toHaveProp('aria-readonly', true);
-    expect(control).toBeEnabled();
+    expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
   });
 
-  it('does not announce a disabled switch as read-only', async () => {
-    await render(<Switch value disabled />);
+  it('allows activation after read-only is turned off', async () => {
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    const view = await render(
+      <Switch value readOnly onValueChange={onValueChange} />
+    );
 
-    const control = screen.getByRole('switch');
+    await user.press(screen.getByRole('switch'));
+    expect(onValueChange).not.toHaveBeenCalled();
 
-    expect(control).toHaveProp('aria-readonly', false);
-    expect(control).toBeDisabled();
+    await view.rerender(
+      <Switch value readOnly={false} onValueChange={onValueChange} />
+    );
+
+    expect(screen.getByRole('switch')).toBeEnabled();
+    expect(screen.getByRole('switch')).toHaveProp('tabIndex', 0);
+    await user.press(screen.getByRole('switch'));
+    expect(onValueChange).toHaveBeenCalledWith(false);
   });
 
   it('keeps an interactive switch focusable', async () => {
@@ -236,34 +281,96 @@ describe('Switch operability', () => {
 });
 
 describe('Switch press feedback', () => {
-  // MD3 resting (selected) and pressed handle sizes.
-  const RESTING = 24;
-  const PRESSED = 28;
-  const handleWidth = () => Number(animatedStyle('switch-handle').width);
+  it.each([false, true])(
+    'grows immediately when value is %s and returns to rest on release',
+    async (value) => {
+      await render(<Switch value={value} onValueChange={jest.fn()} />);
+      const resting = renderedStyles();
 
-  it('starts growing the handle immediately on press', async () => {
-    await render(<Switch value onValueChange={jest.fn()} testID="switch" />);
-    expect(handleWidth()).toBe(RESTING);
+      await fireEvent(screen.getByRole('switch'), 'pressIn');
+      // Two frames, before the previous 100ms growth delay would elapse.
+      jest.advanceTimersByTime(32);
+      expect(renderedStyles()).toMatchSnapshot('early press');
 
-    await fireEvent(screen.getByTestId('switch'), 'pressIn');
-    // Two frames in -- well inside the 100ms delay the old implementation
-    // waited out before snapping, so a reintroduced delay still reads RESTING.
-    jest.advanceTimersByTime(32);
+      await jest.runAllTimersAsync();
+      expect(renderedStyles()).toMatchSnapshot('held press');
 
-    expect(handleWidth()).toBeGreaterThan(RESTING);
+      await fireEvent(screen.getByRole('switch'), 'pressOut');
+      await jest.runAllTimersAsync();
+      expect(renderedStyles()).toEqual(resting);
+    }
+  );
+});
+
+describe('Switch keyboard interaction on web', () => {
+  it.each([false, true])(
+    'toggles once on Space release when value is %s',
+    async (value) => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+      const onValueChange = jest.fn();
+      const preventDefault = jest.fn();
+      await render(<Switch value={value} onValueChange={onValueChange} />);
+      const control = screen.getByRole('switch');
+
+      await fireEvent(control, 'keyDown', {
+        nativeEvent: { key: ' ' },
+        preventDefault,
+      });
+      await fireEvent(control, 'keyDown', {
+        nativeEvent: { key: ' ', repeat: true },
+        preventDefault,
+      });
+      expect(onValueChange).not.toHaveBeenCalled();
+      expect(preventDefault).toHaveBeenCalledTimes(2);
+
+      await fireEvent(control, 'keyUp', {
+        nativeEvent: { key: ' ' },
+        preventDefault,
+      });
+      await fireEvent(control, 'keyUp', {
+        nativeEvent: { key: ' ' },
+        preventDefault,
+      });
+      expect(onValueChange).toHaveBeenCalledTimes(1);
+      expect(onValueChange).toHaveBeenCalledWith(!value);
+    }
+  );
+
+  it('cancels Space activation when focus leaves the switch', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = jest.fn();
+    const event = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
+    await render(<Switch value onValueChange={onValueChange} />);
+
+    await fireEvent(screen.getByRole('switch'), 'keyDown', event);
+    await fireEvent(screen.getByRole('switch'), 'blur');
+    await fireEvent(screen.getByRole('switch'), 'keyUp', event);
+
+    expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it('settles at the pressed size and returns on release', async () => {
-    await render(<Switch value onValueChange={jest.fn()} testID="switch" />);
+  it.each(['readOnly', 'disabled'] as const)(
+    'cancels Space activation when the switch becomes %s',
+    async (prop) => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+      const onValueChange = jest.fn();
+      const event = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
+      const view = await render(<Switch value onValueChange={onValueChange} />);
 
-    await fireEvent(screen.getByTestId('switch'), 'pressIn');
-    await jest.runAllTimersAsync();
-    expect(handleWidth()).toBe(PRESSED);
+      await fireEvent(screen.getByRole('switch'), 'keyDown', event);
+      await view.rerender(
+        <Switch value onValueChange={onValueChange} {...{ [prop]: true }} />
+      );
+      await fireEvent(screen.getByRole('switch'), 'keyUp', event);
+      await fireEvent(screen.getByRole('switch'), 'keyDown', event);
+      await fireEvent(screen.getByRole('switch'), 'keyUp', event);
+      expect(onValueChange).not.toHaveBeenCalled();
 
-    await fireEvent(screen.getByTestId('switch'), 'pressOut');
-    await jest.runAllTimersAsync();
-    expect(handleWidth()).toBe(RESTING);
-  });
+      await view.rerender(<Switch value onValueChange={onValueChange} />);
+      await fireEvent(screen.getByRole('switch'), 'keyUp', event);
+      expect(onValueChange).not.toHaveBeenCalled();
+    }
+  );
 });
 
 describe('Switch interaction', () => {

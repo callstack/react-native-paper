@@ -580,7 +580,7 @@ mutually exclusive options, use `SegmentedButtons`.
 
 A `Switch` now has to declare how it can be operated. Previously a switch with no `onValueChange` still rendered as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable.
 
-Pass `onValueChange` to make it interactive, or mark it `readOnly` or `disabled` to render it as a state indicator. A read-only switch keeps its enabled appearance and is still announced with its on/off state, but it is neither focusable nor pressable — it is not reported as disabled.
+Pass `onValueChange` to make it interactive, or mark it `readOnly` or `disabled` to render it as a state indicator. A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
 
 ```tsx
 // Before (v5) — an enabled switch that does nothing
