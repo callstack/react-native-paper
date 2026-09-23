@@ -64,8 +64,8 @@ export type Props = SwitchBaseProps & {
   onValueChange?: (value: boolean) => void;
   /**
    * Reports state the user cannot change here. The switch keeps its enabled
-   * appearance and is still announced by a screen reader, but it is neither
-   * focusable nor pressable.
+   * appearance but cannot be focused with a keyboard or pressed. Screen readers
+   * receive a read-only state on web and a disabled state on native platforms.
    */
   readOnly?: boolean;
   /**
@@ -191,9 +191,8 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
   }
 
   const isInteractive = !isDisabled && !isReadOnly && !isMissingOperability;
-  // Non-operable but not disabled: an explicit `readOnly`, or the fallback for
-  // a missing handler. Both render as state indicators, so both are announced
-  // that way; `aria-disabled` carries the disabled case on its own.
+  // Native accessibility has no read-only switch state. Disable the Pressable
+  // there to expose non-operability, while keeping colors tied to `disabled`.
   const isAnnouncedReadOnly = !isDisabled && !isInteractive;
   const iconSource = checked ? checkedIcon : uncheckedIcon;
   const hasIcon = iconSource !== undefined;
@@ -202,6 +201,7 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
     Platform.OS === 'web' && direction === 'rtl' ? { right: 0 } : { left: 0 };
 
   const pressedSV = useSharedValue(0);
+  const spacePressedRef = React.useRef(false);
   const hoveredSV = useSharedValue(0);
   const focusedSV = useSharedValue(0);
   const checkedSV = useSharedValue(checked ? 1 : 0);
@@ -221,6 +221,7 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
     if (isInteractive) return;
 
     pressedSV.value = 0;
+    spacePressedRef.current = false;
     hoveredSV.value = 0;
     focusedSV.value = 0;
   }, [isInteractive, pressedSV, hoveredSV, focusedSV]);
@@ -425,20 +426,46 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
         },
         onBlur: () => {
           focusedSV.value = 0;
+          pressedSV.value = 0;
+          spacePressedRef.current = false;
         },
+        // React Native Web only handles Space for button roles.
+        ...(Platform.OS === 'web'
+          ? {
+              onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
+                const { key, repeat } = event.nativeEvent;
+                if (key !== ' ' && key !== 'Spacebar') return;
+                event.preventDefault();
+                if (!repeat) {
+                  spacePressedRef.current = true;
+                  pressedSV.value = 1;
+                }
+              },
+              onKeyUp: (event: React.KeyboardEvent<HTMLElement>) => {
+                const { key } = event.nativeEvent;
+                if (key !== ' ' && key !== 'Spacebar') return;
+                event.preventDefault();
+                if (spacePressedRef.current) {
+                  spacePressedRef.current = false;
+                  pressedSV.value = 0;
+                  onValueChange?.(!checked);
+                }
+              },
+            }
+          : undefined),
       }
     : null;
 
   return (
     <View style={[styles.wrapper, style]}>
       <Pressable
-        disabled={disabled}
+        disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
         focusable={isInteractive}
-        aria-readonly={isAnnouncedReadOnly}
+        tabIndex={isInteractive ? 0 : -1}
+        aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
         {...interactionProps}
         android_ripple={{ color: 'transparent' }}
         role="switch"
-        aria-disabled={isDisabled}
         aria-checked={checked}
         aria-label={ariaLabel}
         testID={testID}
@@ -460,7 +487,6 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
       </Pressable>
 
       <Animated.View
-        testID={testID ? `${testID}-state-layer` : undefined}
         style={[
           styles.stateLayer,
           anchorStyle,
@@ -469,10 +495,7 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
         ]}
       />
 
-      <Animated.View
-        testID={testID ? `${testID}-handle` : undefined}
-        style={[styles.handle, anchorStyle, handleAnimatedStyle]}
-      >
+      <Animated.View style={[styles.handle, anchorStyle, handleAnimatedStyle]}>
         {/* Disabled-only: opaque `surface` backdrop. The tinted fill above
             composites over it, reproducing the native math avoiding the PlatformColor alpha limitation. */}
         {isDisabled ? (
@@ -484,7 +507,6 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
           />
         ) : null}
         <Animated.View
-          testID={testID ? `${testID}-handle-fill` : undefined}
           style={[
             styles.handleFill,
             { opacity: handleOpacity },
@@ -520,7 +542,6 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
       ) : null}
 
       <Animated.View
-        testID={testID ? `${testID}-focus-ring` : undefined}
         style={[
           styles.focusRing,
           {

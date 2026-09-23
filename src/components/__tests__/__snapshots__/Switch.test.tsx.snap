@@ -1,5 +1,592 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Switch focus state only shows focus feedback for keyboard focus on web: keyboard focus 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "outline": "none",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": 16,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 24,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 12,
+    "transform": [
+      {
+        "translateX": 24,
+      },
+    ],
+    "width": 24,
+  },
+  {
+    "backgroundColor": "rgba(234, 221, 255, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch focus state renders keyboard focus feedback when value is false and clears it on blur: focused 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(230, 224, 233, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "borderColor": "rgba(121, 116, 126, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 2,
+    "bottom": 0,
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "backgroundColor": "rgba(29, 27, 32, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": -4,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 16,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 16,
+    "transform": [
+      {
+        "translateX": 8,
+      },
+    ],
+    "width": 16,
+  },
+  {
+    "backgroundColor": "rgba(73, 69, 79, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch focus state renders keyboard focus feedback when value is true and clears it on blur: focused 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": 16,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 24,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 12,
+    "transform": [
+      {
+        "translateX": 24,
+      },
+    ],
+    "width": 24,
+  },
+  {
+    "backgroundColor": "rgba(234, 221, 255, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch press feedback grows immediately when value is false and returns to rest on release: early press 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(230, 224, 233, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "borderColor": "rgba(121, 116, 126, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 2,
+    "bottom": 0,
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "backgroundColor": "rgba(29, 27, 32, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.012550532338511944,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": -4,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 19.31374049870675,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 14.343129750646625,
+    "transform": [
+      {
+        "translateX": 6.343129750646625,
+      },
+    ],
+    "width": 19.31374049870675,
+  },
+  {
+    "backgroundColor": "rgba(73, 69, 79, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch press feedback grows immediately when value is false and returns to rest on release: held press 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(230, 224, 233, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "borderColor": "rgba(121, 116, 126, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 2,
+    "bottom": 0,
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "backgroundColor": "rgba(29, 27, 32, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": -4,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 28,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 10,
+    "transform": [
+      {
+        "translateX": 2,
+      },
+    ],
+    "width": 28,
+  },
+  {
+    "backgroundColor": "rgba(73, 69, 79, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch press feedback grows immediately when value is true and returns to rest on release: early press 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.012550532338511944,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": 16,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 25.104580166235582,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 11.447709916882209,
+    "transform": [
+      {
+        "translateX": 23.44770991688221,
+      },
+    ],
+    "width": 25.104580166235582,
+  },
+  {
+    "backgroundColor": "rgba(234, 221, 255, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
+exports[`Switch press feedback grows immediately when value is true and returns to rest on release: held press 1`] = `
+[
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "alignItems": "center",
+    "height": 48,
+    "justifyContent": "center",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 32,
+    "opacity": 1,
+    "overflow": "visible",
+    "width": 52,
+  },
+  {
+    "backgroundColor": "rgba(103, 80, 164, 1)",
+    "borderRadius": 9999,
+    "height": 40,
+    "left": 0,
+    "opacity": 0.1,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 4,
+    "transform": [
+      {
+        "translateX": 16,
+      },
+    ],
+    "width": 40,
+  },
+  {
+    "alignItems": "center",
+    "height": 28,
+    "justifyContent": "center",
+    "left": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "top": 10,
+    "transform": [
+      {
+        "translateX": 22,
+      },
+    ],
+    "width": 28,
+  },
+  {
+    "backgroundColor": "rgba(234, 221, 255, 1)",
+    "borderRadius": 9999,
+    "bottom": 0,
+    "left": 0,
+    "opacity": 1,
+    "position": "absolute",
+    "right": 0,
+    "top": 0,
+  },
+  {
+    "borderColor": "rgba(98, 91, 113, 1)",
+    "borderRadius": 9999,
+    "borderWidth": 3,
+    "bottom": 3,
+    "left": -5,
+    "opacity": 0,
+    "pointerEvents": "none",
+    "position": "absolute",
+    "right": -5,
+    "top": 3,
+  },
+]
+`;
+
 exports[`Switch render renders disabled off 1`] = `
 <View
   style={
@@ -34,7 +621,6 @@ exports[`Switch render renders disabled off 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={false}
     onBlur={[Function]}
@@ -58,6 +644,7 @@ exports[`Switch render renders disabled off 1`] = `
         undefined,
       ]
     }
+    tabIndex={-1}
   >
     <View
       style={
@@ -250,7 +837,6 @@ exports[`Switch render renders disabled on 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={false}
     onBlur={[Function]}
@@ -274,6 +860,7 @@ exports[`Switch render renders disabled on 1`] = `
         undefined,
       ]
     }
+    tabIndex={-1}
   >
     <View
       style={
@@ -446,7 +1033,6 @@ exports[`Switch render renders off 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -470,6 +1056,7 @@ exports[`Switch render renders off 1`] = `
         undefined,
       ]
     }
+    tabIndex={0}
   >
     <View
       style={
@@ -645,7 +1232,6 @@ exports[`Switch render renders on 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -669,6 +1255,8 @@ exports[`Switch render renders on 1`] = `
         undefined,
       ]
     }
+    tabIndex={0}
+    testID="switch"
   >
     <View
       style={
@@ -824,7 +1412,6 @@ exports[`Switch render renders with checked icon 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -848,6 +1435,7 @@ exports[`Switch render renders with checked icon 1`] = `
         undefined,
       ]
     }
+    tabIndex={0}
   >
     <View
       style={
@@ -1074,7 +1662,6 @@ exports[`Switch render renders with per-state icons 1`] = `
       }
     }
     accessible={true}
-    aria-readonly={false}
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -1098,6 +1685,7 @@ exports[`Switch render renders with per-state icons 1`] = `
         undefined,
       ]
     }
+    tabIndex={0}
   >
     <View
       style={
