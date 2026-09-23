@@ -246,8 +246,7 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
     theme?: ThemeProp;
     /**
      * Test ID for the interaction node when the Card is actionable, or the
-     * content node when it is neutral. The shell and clipped visual region use
-     * `${testID}-container` and `${testID}-visual` respectively.
+     * content node when it is neutral.
      */
     testID?: string;
     /**
@@ -294,9 +293,8 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
  *
  * `ref` targets the outer shadow shell. On an actionable Card, `testID` targets
  * the interaction node; on a neutral Card it targets the slot-content node.
- * `${testID}-container` and `${testID}-visual` target the outer shell and the
- * clipped visual region. `dragged` controls Material dragged visuals only; the
- * consumer remains responsible for gesture recognition and drag lifecycle.
+ * `dragged` controls Material dragged visuals only; the consumer remains
+ * responsible for gesture recognition and drag lifecycle.
  *
  * ## Usage
  *
@@ -769,7 +767,6 @@ const Card = ({
       theme={theme}
       elevation={interactiveElevation}
       transitionDuration={transitionDuration}
-      testID={`${testID}-container`}
       {...(!hasPassedTouchHandler && neutralAccessibilityProps)}
       onFocus={!hasPassedTouchHandler ? onFocus : undefined}
       onBlur={!hasPassedTouchHandler ? onBlur : undefined}
@@ -779,7 +776,6 @@ const Card = ({
       {...rest}
     >
       <View
-        testID={`${testID}-visual`}
         style={[
           styles.visual,
           shapeStyle,
@@ -790,7 +786,6 @@ const Card = ({
       >
         <View
           pointerEvents="none"
-          testID={`${testID}-background`}
           style={[
             StyleSheet.absoluteFill,
             shapeStyle,
@@ -802,7 +797,6 @@ const Card = ({
         />
         <Animated.View
           pointerEvents="none"
-          testID={`${testID}-state-layer`}
           style={[
             StyleSheet.absoluteFill,
             shapeStyle,
@@ -848,7 +842,6 @@ const Card = ({
         {visuals.outlineWidth > 0 ? (
           <Animated.View
             pointerEvents="none"
-            testID={`${testID}-outline`}
             style={[
               StyleSheet.absoluteFill,
               shapeStyle,
@@ -862,7 +855,6 @@ const Card = ({
       {hasPassedTouchHandler ? (
         <Animated.View
           pointerEvents="none"
-          testID={`${testID}-focus-indicator`}
           style={[
             styles.focusIndicator,
             {
