@@ -11,7 +11,6 @@ import {
 } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
-
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import PaperProvider from '../../core/PaperProvider';
