@@ -558,6 +558,24 @@ Use `header` when the complete header is custom. It is mutually exclusive with `
 
 `Card.Content`, `Card.Cover`, `Card.Title`, and `Card.Actions` remain available as layout helpers inside the new slots. They are not arbitrary Card children.
 
+#### `Card.Actions` no longer styles its buttons
+
+`Card.Actions` no longer assigns `mode="outlined"` to its first button, `mode="contained"` to the rest, or `compact` to any of them. It only lays its children out in a row; set each `Button`'s `mode` and `compact` explicitly to keep the old look:
+
+```tsx
+// Before (v5) — Card.Actions styled the buttons automatically
+<Card.Actions>
+  <Button onPress={discard}>Discard</Button>
+  <Button onPress={save}>Save</Button>
+</Card.Actions>
+
+// After (v6) — set mode and compact explicitly
+<Card.Actions>
+  <Button mode="outlined" compact onPress={discard}>Discard</Button>
+  <Button mode="contained" compact onPress={save}>Save</Button>
+</Card.Actions>
+```
+
 #### Choose one interaction model
 
 Give the Card an interaction handler when the whole Card represents one action. It becomes one accessibility target with button semantics by default, so do not place independent controls in its `actions` slot.
