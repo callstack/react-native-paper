@@ -3,7 +3,6 @@ import { Platform, View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
-
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';

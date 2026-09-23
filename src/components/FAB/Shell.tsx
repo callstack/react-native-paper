@@ -314,8 +314,12 @@ const Shell = ({
           target instanceof HTMLElement &&
           target === document.activeElement
         ) {
-          if (previousFocusedElement.current?.isConnected) {
-            previousFocusedElement.current.focus({ preventScroll: true });
+          const previous = previousFocusedElement.current;
+          if (
+            previous?.isConnected &&
+            !previous.closest('[aria-hidden="true"], [inert]')
+          ) {
+            previous.focus({ preventScroll: true });
           }
           // The previous element may have been removed or become unfocusable.
           if (target === document.activeElement) target.blur();
