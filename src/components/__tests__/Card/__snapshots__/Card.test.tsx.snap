@@ -2052,7 +2052,7 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
             "borderRadius": 12,
           },
           {
-            "backgroundColor": "rgba(231, 224, 236, 1)",
+            "backgroundColor": "rgba(29, 27, 32, 1)",
             "opacity": 0.38,
           },
         ]
@@ -11269,7 +11269,7 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
             "borderRadius": 12,
           },
           {
-            "backgroundColor": "rgba(231, 224, 236, 1)",
+            "backgroundColor": "rgba(29, 27, 32, 1)",
             "opacity": 0.38,
           },
         ]

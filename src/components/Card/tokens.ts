@@ -19,8 +19,8 @@ export type CardState = (typeof cardStates)[number];
 type ContainerColorRole =
   | 'surfaceContainerLow'
   | 'surfaceContainerHighest'
-  | 'surfaceVariant'
-  | 'surface';
+  | 'surface'
+  | 'onSurface';
 
 type OutlineColorRole = 'outlineVariant' | 'onSurface' | 'outline';
 
@@ -41,7 +41,7 @@ const { opacity } = systemTokens.md.sys.state;
 /**
  * Material 3 Card variant-by-state tokens.
  *
- * Rechecked 2026-09-07 against the Material 3 Card specification and the
+ * Rechecked 2026-09-23 against the Material 3 Card specification and the
  * current AndroidX generated Card tokens at commit
  * 8c85cbb3ccccbaf5ca40c45527e2028ced01e472:
  * https://m3.material.io/components/cards/specs
@@ -49,6 +49,10 @@ const { opacity } = systemTokens.md.sys.state;
  * - ElevatedCardTokens v0_210
  * - OutlinedCardTokens v0_192
  * https://android.googlesource.com/platform/frameworks/support/+/8c85cbb3ccccbaf5ca40c45527e2028ced01e472/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens
+ *
+ * `filled.disabled.containerColor` follows the live `md.comp.filled-card.disabled.container.color`
+ * token on m3.material.io (onSurface), which has diverged from the AndroidX
+ * v0_210 source above (still SurfaceVariant there) — the live spec wins.
  *
  * State opacities were rechecked against Material Components Android generated
  * token set 34.0.0 at commit 4d3710682140722f48a5965b68109b240e1fe79e.
@@ -102,7 +106,7 @@ const cardTokenMatrix = {
       stateLayerOpacity: opacity.dragged,
     },
     disabled: {
-      containerColor: 'surfaceVariant',
+      containerColor: 'onSurface',
       containerOpacity: opacity.disabled,
       outlineColor: 'outlineVariant',
       outlineOpacity: 0,

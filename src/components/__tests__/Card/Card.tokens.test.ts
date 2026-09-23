@@ -6,7 +6,7 @@ import {
   cardVariants,
   resolveCardVisuals,
 } from '../../Card/tokens';
-import type { CardState } from '../../Card/tokens';
+import type { CardState, CardVariant } from '../../Card/tokens';
 
 const stateFlags: Record<
   CardState,
@@ -26,8 +26,8 @@ type ExpectedVisualTokens = {
   containerRole:
     | 'surfaceContainerLow'
     | 'surfaceContainerHighest'
-    | 'surfaceVariant'
-    | 'surface';
+    | 'surface'
+    | 'onSurface';
   containerOpacity: number;
   outlineRole: 'outlineVariant' | 'onSurface' | 'outline';
   outlineOpacity: number;
@@ -125,7 +125,7 @@ const expectedVisuals: Record<
       stateLayerOpacity: 0.16,
     }),
     expectedVisual({
-      containerRole: 'surfaceVariant',
+      containerRole: 'onSurface',
       containerOpacity: 0.38,
       elevation: 0,
       stateLayerOpacity: 0,
@@ -229,6 +229,29 @@ describe('resolveCardVisuals', () => {
       resolveCardVisuals(common).state,
     ]).toEqual(cardStates.toReversed());
   });
+
+  const disabledContainerCases: [
+    CardVariant,
+    'surface' | 'onSurface',
+    number,
+  ][] = [
+    ['filled', 'onSurface', 0.38],
+    ['elevated', 'surface', 0.38],
+    ['outlined', 'surface', 1],
+  ];
+
+  it.each(disabledContainerCases)(
+    'resolves the MD3 disabled container color role for the %s variant',
+    (variant, containerRole, containerOpacity) => {
+      const theme = LightTheme;
+
+      const { containerColor, containerOpacity: resolvedOpacity } =
+        resolveCardVisuals({ theme, variant, disabled: true });
+
+      expect(containerColor).toBe(theme.colors[containerRole]);
+      expect(resolvedOpacity).toBe(containerOpacity);
+    }
+  );
 
   it('uses a custom resting elevation only for the enabled elevated state', () => {
     const theme = LightTheme;
