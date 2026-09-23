@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { getAnimatedStyle } from 'react-native-reanimated';
 
 import {
   act,
@@ -28,13 +27,13 @@ describe('CardRenderCountExample', () => {
 
     const firstCard = screen.getByTestId('card-benchmark-item-1');
 
+    // Hover, focus, and pressed feedback opacities are covered by
+    // Card.test.tsx; this benchmark only needs to exercise the feedback
+    // paths to prove the memoized content does not rerender because of them.
     await fireEvent(firstCard, 'hoverIn');
     await act(() => {
       jest.runOnlyPendingTimers();
     });
-    expect(
-      getAnimatedStyle(screen.getByTestId('card-benchmark-item-1-state-layer'))
-    ).toEqual(expect.objectContaining({ opacity: 0.08 }));
 
     await fireEvent(firstCard, 'focus', {
       currentTarget: { matches: () => true },
@@ -42,19 +41,11 @@ describe('CardRenderCountExample', () => {
     await act(() => {
       jest.runOnlyPendingTimers();
     });
-    expect(
-      getAnimatedStyle(
-        screen.getByTestId('card-benchmark-item-1-focus-indicator')
-      )
-    ).toEqual(expect.objectContaining({ opacity: 1 }));
 
     await fireEvent(firstCard, 'pressIn');
     await act(() => {
       jest.runOnlyPendingTimers();
     });
-    expect(
-      getAnimatedStyle(screen.getByTestId('card-benchmark-item-1-state-layer'))
-    ).toEqual(expect.objectContaining({ opacity: 0.1 }));
 
     await fireEvent(firstCard, 'pressOut');
     await fireEvent(firstCard, 'blur');
