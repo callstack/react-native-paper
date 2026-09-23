@@ -43,6 +43,9 @@ exports[`renders list item with custom content style 1`] = `
         },
         undefined,
       ],
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
     ]
   }
   testID="list-item"
