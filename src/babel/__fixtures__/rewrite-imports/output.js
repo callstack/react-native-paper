@@ -8,3 +8,4 @@ import { Palette } from "react-native-paper/lib/module/theme/tokens";
 import { NonExistent, NonExistentSecond as Stuff, LightTheme } from "react-native-paper/lib/module/index.js";
 import { ThemeProvider } from "react-native-paper/lib/module/core/theming";
 import { withTheme } from "react-native-paper/lib/module/core/theming";
+export { default as TextInput } from "react-native-paper/lib/module/components/TextInput";
