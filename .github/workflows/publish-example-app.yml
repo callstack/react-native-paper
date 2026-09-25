@@ -21,11 +21,6 @@ on:
           - all
           - ios
           - android
-      dry-run:
-        description: Only check credentials and report what would ship. Builds nothing and submits nothing.
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -57,7 +52,6 @@ jobs:
         env:
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
           PLATFORM: ${{ inputs.platform }}
-          DRY_RUN: ${{ inputs.dry-run }}
         run: |
           if [ -z "$TAG" ]; then
             echo "::error::No release tag to publish the example app for."
@@ -83,7 +77,6 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "profile=$profile" >> "$GITHUB_OUTPUT"
           echo "platform=$platform" >> "$GITHUB_OUTPUT"
-          echo "dry-run=${DRY_RUN:-false}" >> "$GITHUB_OUTPUT"
           echo "Publishing $platform for $TAG using the $profile submit profile."
 
       - name: Setup Expo
@@ -143,14 +136,14 @@ jobs:
 
       # Only a build carries a version to the stores, so only a build bumps one.
       - name: Bump example app version
-        if: ${{ steps.decide.outputs.build == 'true' && steps.release.outputs.dry-run != 'true' }}
+        if: steps.decide.outputs.build == 'true'
         run: node scripts/bump-example-version.ts example/app.json
 
       # Build numbers are assigned remotely by EAS (`appVersionSource: remote`),
       # so a retry can never collide with an already submitted build.
       - name: Build and submit to the app stores
         id: submit
-        if: ${{ steps.decide.outputs.build == 'true' && steps.release.outputs.dry-run != 'true' }}
+        if: steps.decide.outputs.build == 'true'
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
@@ -164,7 +157,7 @@ jobs:
 
       - name: Publish an update
         id: update
-        if: ${{ steps.decide.outputs.build == 'false' && steps.release.outputs.dry-run != 'true' }}
+        if: steps.decide.outputs.build == 'false'
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
@@ -199,27 +192,14 @@ jobs:
             EAS assigns those remotely.
 
       - name: Summarise
-        if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success' || steps.release.outputs.dry-run == 'true') }}
+        if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success') }}
         env:
           TAG: ${{ steps.release.outputs.tag }}
           PROFILE: ${{ steps.release.outputs.profile }}
           BUILT: ${{ steps.decide.outputs.build }}
-          DRY_RUN: ${{ steps.release.outputs.dry-run }}
         run: |
           {
-            if [ "$DRY_RUN" = "true" ]; then
-              echo "### Dry run for \`$TAG\`"
-              echo
-              echo "Expo authentication works, and nothing was built or submitted."
-              if [ "$BUILT" = "true" ]; then
-                echo "A real run would **build and submit**: no existing build"
-                echo "matches the current native fingerprint."
-              else
-                echo "A real run would **publish an update** on the \`$PROFILE\`"
-                echo "channel: the native side already matches a build that is out"
-                echo "there."
-              fi
-            elif [ "$BUILT" = "true" ]; then
+            if [ "$BUILT" = "true" ]; then
               echo "### Example app submitted for \`$TAG\`"
               echo
               echo "Native code changed, so this went to the stores."

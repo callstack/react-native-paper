@@ -111,25 +111,16 @@ NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can cre
 
 ### Publishing the example app
 
-Publishing a release also ships the example app, through the `Publish example app` workflow. It runs after the release already exists, so it cannot affect one: if it fails, the run page says so, and the release is still fine.
+Publishing a release also ships the example app, through the `Publish example app` workflow. If no native code changed it goes out as an over-the-air update; otherwise it builds and submits, prereleases to the Play internal track and TestFlight and stable releases to Play production.
 
-What it ships depends on whether native code changed. `runtimeVersion` uses the fingerprint policy, so the workflow compares the project's fingerprint against the builds already out there:
+Two things are worth knowing because nothing will tell you otherwise:
 
-- **Nothing native changed**: publishes an update over the air with `eas update`. Installed apps pick it up on next launch, and nothing goes near a store.
-- **Native code changed**: builds and submits. Prereleases go to the Play internal track and TestFlight, stable releases to Play production. On iOS, `eas submit` uploads to App Store Connect and promoting the build to the App Store stays manual.
+- **Nothing reaches the App Store on its own.** `eas submit` uploads to App Store Connect and the build waits in TestFlight until somebody promotes it there.
+- **Merge the version bump pull request before the next release.** The bump is worked out from `main`, so two releases either side of an unmerged one ship under the same version and the stores take both.
 
-Only the build path bumps the example app's version, and that bump comes back as a pull request. Merge it before the next release, or two releases start from the same version and ship under it.
+`EXPO_TOKEN` is the only secret this repository holds. The signing and store credentials live in EAS.
 
-Prereleases and stable releases use separate channels (`preview` and `production`), so an update published for an alpha cannot reach people running the stable app.
-
-The workflow needs an `EXPO_TOKEN` secret, and the store credentials configured in EAS rather than here (`eas credentials` from `example/`: an App Store Connect API key, and a Google Play service account key). Build numbers are assigned remotely by EAS, so before the first run they need seeding above the values currently in `example/app.json`:
-
-```sh
-eas build:version:set --platform android
-eas build:version:set --platform ios
-```
-
-To rerun after a failure, use **Actions → Publish example app → Run workflow**. Check the stores first: a build may already have been submitted, and cancelling the workflow does not cancel one already running on EAS. If only one platform failed, pick it in the `platform` input so the other is not submitted twice. To withdraw a build that did ship, halt the rollout in the Play Console or reject it in App Store Connect.
+Whether a release becomes an update or a build is decided by its fingerprint, which has to match the one EAS works out after installing pods. Anything `pod install` writes into a fingerprinted directory belongs in `example/.fingerprintignore`, as `expo-modules-jsi` already does. Generated output only, so a real native change is still noticed.
 
 ## Reporting issues
 
