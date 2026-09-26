@@ -111,6 +111,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   delayLongPress?: number;
   /**
+   * Delay in ms, from the start of the touch, before the press is engaged and ripple is triggered.
+   */
+  unstable_pressDelay?: number;
+  /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
@@ -179,6 +183,7 @@ const Button = ({
   onPressOut,
   onLongPress,
   delayLongPress,
+  unstable_pressDelay,
   style,
   theme: themeOverrides,
   uppercase: uppercaseProp,
@@ -327,6 +332,7 @@ const Button = ({
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
+        unstable_pressDelay={unstable_pressDelay}
         aria-label={ariaLabel}
         accessibilityHint={accessibilityHint}
         role={role}

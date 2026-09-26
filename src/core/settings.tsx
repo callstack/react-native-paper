@@ -12,6 +12,7 @@ export type Settings = {
     testID,
   }: IconProps) => React.ReactNode;
   rippleEffectEnabled?: boolean;
+  ripplePressDelay?: number;
 };
 
 export const SettingsContext = React.createContext<Settings>({

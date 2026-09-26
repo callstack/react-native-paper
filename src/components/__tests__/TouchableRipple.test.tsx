@@ -4,6 +4,7 @@ import type { GestureResponderEvent } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
+import { SettingsContext } from '../../core/settings';
 import { render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
@@ -42,6 +43,36 @@ describe('TouchableRipple', () => {
     await userEvent.press(screen.getByText('Button'));
 
     expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('triggers onPress when unstable_pressDelay is provided', async () => {
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+    await render(
+      <TouchableRipple unstable_pressDelay={100} onPress={onPress}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await userEvent.press(screen.getByText('Button'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('triggers onPress when ripplePressDelay is provided in SettingsContext', async () => {
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+    await render(
+      <SettingsContext.Provider
+        value={{ rippleEffectEnabled: true, ripplePressDelay: 80 }}
+      >
+        <TouchableRipple onPress={onPress}>
+          <Text>Button</Text>
+        </TouchableRipple>
+      </SettingsContext.Provider>
+    );
+
+    await userEvent.press(screen.getByText('Button'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 
   describe('on iOS', () => {
