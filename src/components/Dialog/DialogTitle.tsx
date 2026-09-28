@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
+import { DialogTitleIdContext } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -48,10 +49,12 @@ const DialogTitle = ({
   children,
   theme: themeOverrides,
   style,
+  nativeID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors, fonts } = theme;
+  const titleId = React.useContext(DialogTitleIdContext);
 
   const headerTextStyle = {
     color: colors.onSurface,
@@ -62,6 +65,7 @@ const DialogTitle = ({
     <Text
       variant="headlineSmall"
       role="heading"
+      nativeID={titleId ?? nativeID}
       style={[styles.text, styles.v3Text, headerTextStyle, style]}
       {...rest}
     >

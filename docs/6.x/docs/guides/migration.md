@@ -195,9 +195,35 @@ e.g.:
 </Modal>
 ```
 
+The modal content now has the `dialog` role, so it needs an accessible name. You can provide one with the new `aria-label` prop:
+
+```diff
+-<Modal visible={visible} onDismiss={hideModal}>
++<Modal visible={visible} onDismiss={hideModal} aria-label="Example modal">
+   <Text>Content</Text>
+ </Modal>
+```
+
+The overlay behind the content is now hidden from assistive technology. Instead, when the modal is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog.
+
+The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`, which is used for the button's accessibility label:
+
+```diff
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+- overlayAccessibilityLabel="Close"
++ dismissAccessibilityLabel="Close"
+>
+  <Text>Content</Text>
+</Modal>
+```
+
+Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
+
 ### Dialog
 
-`Dialog` now uses a `Modal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
+`Dialog` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
 
 ```diff
 -<Portal>
@@ -210,8 +236,36 @@ e.g.:
 +</Dialog>
 ```
 
+The dialog now has the `dialog` role. On web, the dialog's accessible name is set automatically by `Dialog.Title`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+
+```jsx
+<Dialog visible={visible} onDismiss={hideDialog} aria-label="Delete file">
+  <Dialog.Content>
+    <Text>Are you sure?</Text>
+  </Dialog.Content>
+</Dialog>
+```
+
+When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
+
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
+
+### Menu
+
+The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
+
+```diff
+<Menu
+  visible={visible}
+  onDismiss={closeMenu}
+  anchor={anchor}
+- overlayAccessibilityLabel="Close"
++ dismissAccessibilityLabel="Close"
+>
+  <Menu.Item title="Item" />
+</Menu>
+```
 
 ### Searchbar
 
