@@ -213,6 +213,35 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+### Tooltip
+
+The `Tooltip` trigger is now a render function. Spread the supplied props onto
+the trigger element so the tooltip can attach its interactions without cloning
+the element.
+
+```tsx
+// Before (v5)
+<Tooltip title="Print">
+  <Appbar.Action icon="printer" onPress={handlePrint} />
+</Tooltip>
+
+// After (v6)
+<Tooltip title="Print">
+  {(props) => (
+    <Appbar.Action {...props} icon="printer" onPress={handlePrint} />
+  )}
+</Tooltip>
+```
+
+`Tooltip.Rich` is new in Paper 6.x and follows the same render-function pattern
+for its trigger:
+
+```tsx
+<Tooltip.Rich content="Print the current document">
+  {(props) => <Appbar.Action {...props} icon="printer" onPress={handlePrint} />}
+</Tooltip.Rich>
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:
@@ -231,8 +260,8 @@ The misspelled `traileringIcon` props have been renamed:
 + trailingIcon="microphone"
 + trailingIconColor={colors.onSurfaceVariant}
 + trailingIconAccessibilityLabel="microphone button"
-+ onTrailingIconPress={onMicrophonePress}
-/>
+ + onTrailingIconPress={onMicrophonePress}
+ />
 ```
 
 ### TextInput

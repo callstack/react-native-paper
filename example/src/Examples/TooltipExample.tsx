@@ -6,6 +6,7 @@ import {
   Appbar,
   Avatar,
   Banner,
+  Button,
   Chip,
   FAB,
   IconButton,
@@ -44,17 +45,28 @@ const TooltipExample = () => {
       header: () => (
         <Appbar.Header elevated>
           <Tooltip title="Go back">
-            <Appbar.BackAction onPress={() => navigation.goBack()} />
+            {(props) => (
+              <Appbar.BackAction
+                {...props}
+                onPress={() => navigation.goBack()}
+              />
+            )}
           </Tooltip>
           <Appbar.Content title="Tooltips" />
           <Tooltip title="Print ⌘ + P">
-            <Appbar.Action icon="printer" onPress={() => {}} />
+            {(props) => (
+              <Appbar.Action {...props} icon="printer" onPress={() => {}} />
+            )}
           </Tooltip>
           <Tooltip title="Search">
-            <Appbar.Action icon="magnify" onPress={() => {}} />
+            {(props) => (
+              <Appbar.Action {...props} icon="magnify" onPress={() => {}} />
+            )}
           </Tooltip>
           <Tooltip title="More options">
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+            {(props) => (
+              <Appbar.Action {...props} icon={MORE_ICON} onPress={() => {}} />
+            )}
           </Tooltip>
         </Appbar.Header>
       ),
@@ -81,11 +93,14 @@ const TooltipExample = () => {
                 enterTouchDelay={transport.enterTouchDelay}
                 leaveTouchDelay={transport.leaveTouchDelay}
               >
-                <IconButton
-                  icon={transport.title.split(' ')[0].toLowerCase()}
-                  size={24}
-                  onPress={() => {}}
-                />
+                {(props) => (
+                  <IconButton
+                    {...props}
+                    icon={transport.title.split(' ')[0].toLowerCase()}
+                    size={24}
+                    onPress={() => {}}
+                  />
+                )}
               </Tooltip>
             ))}
           </View>
@@ -93,73 +108,112 @@ const TooltipExample = () => {
         <List.Section title="Icon toggles">
           <View style={styles.toggleRow}>
             <Tooltip title="Align left">
-              <IconButton
-                icon="format-align-left"
-                mode="contained-tonal"
-                selected={textAlign === 'left'}
-                onPress={() => setTextAlign('left')}
-              />
+              {(props) => (
+                <IconButton
+                  {...props}
+                  icon="format-align-left"
+                  mode="contained-tonal"
+                  selected={textAlign === 'left'}
+                  onPress={() => setTextAlign('left')}
+                />
+              )}
             </Tooltip>
             <Tooltip title="Align center">
-              <IconButton
-                icon="format-align-center"
-                mode="contained-tonal"
-                selected={textAlign === 'center'}
-                onPress={() => setTextAlign('center')}
-              />
+              {(props) => (
+                <IconButton
+                  {...props}
+                  icon="format-align-center"
+                  mode="contained-tonal"
+                  selected={textAlign === 'center'}
+                  onPress={() => setTextAlign('center')}
+                />
+              )}
             </Tooltip>
             <Tooltip title="Align right">
-              <IconButton
-                icon="format-align-right"
-                mode="contained-tonal"
-                selected={textAlign === 'right'}
-                disabled
-                onPress={() => setTextAlign('right')}
-              />
+              {(props) => (
+                <IconButton
+                  {...props}
+                  icon="format-align-right"
+                  mode="contained-tonal"
+                  selected={textAlign === 'right'}
+                  disabled
+                  onPress={() => setTextAlign('right')}
+                />
+              )}
             </Tooltip>
           </View>
         </List.Section>
         <List.Section title="Avatar">
           <View style={styles.avatarContainer}>
             <Tooltip title="Username">
-              <Avatar.Text label="U" />
+              {(props) => <Avatar.Text {...props} label="U" />}
             </Tooltip>
           </View>
         </List.Section>
         <List.Section title="Chip">
           <View style={styles.chipContainer}>
             <Tooltip title="Copied">
-              <Chip
-                mode="outlined"
-                avatar={
-                  <Image
-                    source={require('../../assets/images/avatar.png')}
-                    accessibilityIgnoresInvertColors
-                  />
-                }
-              >
-                John Doe
-              </Chip>
+              {(props) => (
+                <Chip
+                  {...props}
+                  mode="outlined"
+                  avatar={
+                    <Image
+                      source={require('../../assets/images/avatar.png')}
+                      accessibilityIgnoresInvertColors
+                    />
+                  }
+                >
+                  John Doe
+                </Chip>
+              )}
             </Tooltip>
           </View>
         </List.Section>
         <List.Section title="Card">
           <Tooltip title="Cafeteria, 1st floor">
-            <Card style={styles.cardContainer}>
-              <Card.Title
-                title="Lunch break"
-                subtitle="1:00-2:00 PM"
-                left={(props) => (
-                  <Avatar.Icon {...props} icon="food-fork-drink" />
-                )}
-              />
-            </Card>
+            {(props) => (
+              <Card {...props} style={styles.cardContainer}>
+                <Card.Title
+                  title="Lunch break"
+                  subtitle="1:00-2:00 PM"
+                  left={(leftProps) => (
+                    <Avatar.Icon {...leftProps} icon="food-fork-drink" />
+                  )}
+                />
+              </Card>
+            )}
           </Tooltip>
+        </List.Section>
+        <List.Section title="Rich tooltips">
+          <View style={styles.iconButtonContainer}>
+            <Tooltip.Rich
+              title="Add to library"
+              content="Save this item to read it later from any of your devices."
+              actions={({ dismiss }) => (
+                <>
+                  <Button compact onPress={dismiss}>
+                    Learn more
+                  </Button>
+                  <Button compact mode="contained" onPress={dismiss}>
+                    Add
+                  </Button>
+                </>
+              )}
+            >
+              {(props) => <IconButton {...props} icon="plus" size={24} />}
+            </Tooltip.Rich>
+            <Tooltip.Rich content="A rich tooltip with body text only — no title or actions.">
+              {(props) => (
+                <IconButton {...props} icon="information" size={24} />
+              )}
+            </Tooltip.Rich>
+          </View>
         </List.Section>
       </ScreenWrapper>
       <View style={styles.fabContainer}>
         <Tooltip title="Press Me">
-          <FAB icon="plus" onPress={() => {}} />
+          {(props) => <FAB {...props} icon="plus" onPress={() => {}} />}
         </Tooltip>
       </View>
     </>

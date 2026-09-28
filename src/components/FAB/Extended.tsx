@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -111,6 +112,9 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * @optional
+   */
   ref?: React.Ref<View>;
 };
 

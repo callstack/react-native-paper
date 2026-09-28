@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native';
 import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
 
 type ChildrenMeasurement = {
@@ -24,12 +24,14 @@ export type TooltipChildProps = {
   onHoverOut?: () => void;
 };
 
+const EDGE_MARGIN = 8;
+
 /**
  * Return true when the tooltip center x-coordinate relative to the wrapped element is negative.
  * The tooltip will be placed at the starting x-coordinate from the wrapped element.
  */
 const overflowLeft = (center: number): boolean => {
-  return center < 0;
+  return center < EDGE_MARGIN;
 };
 
 /**
@@ -39,7 +41,7 @@ const overflowLeft = (center: number): boolean => {
 const overflowRight = (center: number, tooltipWidth: number): boolean => {
   const { width: layoutWidth } = Dimensions.get('window');
 
-  return center + tooltipWidth > layoutWidth;
+  return center + tooltipWidth > layoutWidth - EDGE_MARGIN;
 };
 
 /**
@@ -67,10 +69,15 @@ const getTooltipXPosition = (
       ? childrenX + (childrenWidth - tooltipWidth) / 2
       : childrenX;
 
-  if (overflowLeft(center)) return childrenX;
+  if (overflowLeft(center)) return Math.max(EDGE_MARGIN, childrenX);
 
-  if (overflowRight(center, tooltipWidth))
-    return childrenX + childrenWidth - tooltipWidth;
+  if (overflowRight(center, tooltipWidth)) {
+    const { width: layoutWidth } = Dimensions.get('window');
+    return Math.min(
+      childrenX + childrenWidth - tooltipWidth,
+      layoutWidth - tooltipWidth - EDGE_MARGIN
+    );
+  }
 
   return center;
 };
@@ -119,18 +126,21 @@ const getChildrenMeasures = (
 
 export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
-  component: React.ReactElement<{
-    style: StyleProp<ViewStyle>;
-  }>
+  childStyle?: StyleProp<ViewStyle>
 ): {} | { left: number; top: number } => {
   if (!measured) return {};
   let measures = children;
-  if (component.props.style) {
-    measures = getChildrenMeasures(component.props.style, children);
+  if (childStyle) {
+    measures = getChildrenMeasures(childStyle, children);
   }
 
-  return {
-    left: getTooltipXPosition(measures, tooltip),
-    top: getTooltipYPosition(measures, tooltip),
-  };
+  const left = getTooltipXPosition(measures, tooltip);
+  const top = getTooltipYPosition(measures, tooltip);
+
+  return Platform.OS === 'web'
+    ? { left, top }
+    : {
+        left: PixelRatio.roundToNearestPixel(left),
+        top: PixelRatio.roundToNearestPixel(top),
+      };
 };
