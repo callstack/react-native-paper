@@ -8,6 +8,7 @@ import {
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
@@ -15,6 +16,12 @@ export type Props = {
    * Content of the `Portal`.
    */
   children: React.ReactNode;
+  /**
+   * Whether the portal hides items below it from screen readers and focus order.
+   *
+   * Ensure it's set to true only when the modal is open.
+   */
+  modal?: boolean;
   /**
    * @optional
    */
@@ -41,18 +48,21 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Portal = ({ children, theme: themeOverrides }: Props) => {
+const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
   const manager = React.useContext(PortalContext);
+  const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
-    <PortalConsumer manager={manager}>
+    <PortalConsumer manager={manager} modal={modal}>
       <SettingsProvider value={settings}>
-        <LocaleProvider direction={direction}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </LocaleProvider>
+        <ReduceMotionContext.Provider value={reduceMotion}>
+          <LocaleProvider direction={direction}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </LocaleProvider>
+        </ReduceMotionContext.Provider>
       </SettingsProvider>
     </PortalConsumer>
   );

@@ -8,6 +8,7 @@ import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
+import Portal from '../Portal/Portal';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -42,9 +43,11 @@ describe('Modal', () => {
   describe('by default', () => {
     it('should render passed children', async () => {
       await render(
-        <Modal visible={true} testID="modal">
-          <Text>Children</Text>
-        </Modal>
+        <Portal.Host>
+          <Modal visible={true} testID="modal">
+            <Text>Children</Text>
+          </Modal>
+        </Portal.Host>
       );
 
       expect(screen.getByTestId('modal')).toHaveTextContent('Children');
@@ -52,9 +55,11 @@ describe('Modal', () => {
 
     it("should render a backdrop in default theme's color", async () => {
       await render(
-        <Modal visible={true} testID="modal">
-          {null}
-        </Modal>
+        <Portal.Host>
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        </Portal.Host>
       );
 
       expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -64,17 +69,19 @@ describe('Modal', () => {
 
     it('should render a custom backdrop color if specified', async () => {
       await render(
-        <Modal
-          visible={true}
-          testID="modal"
-          theme={{
-            colors: {
-              scrim: 'transparent',
-            },
-          }}
-        >
-          {null}
-        </Modal>
+        <Portal.Host>
+          <Modal
+            visible={true}
+            testID="modal"
+            theme={{
+              colors: {
+                scrim: 'transparent',
+              },
+            }}
+          >
+            {null}
+          </Modal>
+        </Portal.Host>
       );
 
       expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -84,9 +91,11 @@ describe('Modal', () => {
 
     it('should receive appropriate top and bottom insets', async () => {
       const { toJSON } = await render(
-        <Modal visible={true} testID="modal">
-          {null}
-        </Modal>
+        <Portal.Host>
+          <Modal visible={true} testID="modal">
+            {null}
+          </Modal>
+        </Portal.Host>
       );
 
       expect(toJSON()).toMatchSnapshot();
@@ -97,9 +106,11 @@ describe('Modal', () => {
       it('should invoke the onDismiss function immediately', async () => {
         const onDismiss = jest.fn();
         const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible onDismiss={onDismiss}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
@@ -126,9 +137,11 @@ describe('Modal', () => {
 
     it('runs the closing animation if visible toggled', async () => {
       const { rerender, toJSON } = await render(
-        <Modal testID="modal" visible onDismiss={() => {}}>
-          {null}
-        </Modal>
+        <Portal.Host>
+          <Modal testID="modal" visible onDismiss={() => {}}>
+            {null}
+          </Modal>
+        </Portal.Host>
       );
 
       expect(toJSON()).toMatchSnapshot();
@@ -136,9 +149,11 @@ describe('Modal', () => {
       await userEvent.press(screen.getByLabelText('Close modal'));
 
       await rerender(
-        <Modal testID="modal" visible={false} onDismiss={() => {}}>
-          {null}
-        </Modal>
+        <Portal.Host>
+          <Modal testID="modal" visible={false} onDismiss={() => {}}>
+            {null}
+          </Modal>
+        </Portal.Host>
       );
 
       expect(toJSON()).toMatchSnapshot();
@@ -153,7 +168,7 @@ describe('Modal', () => {
         jest.runAllTimers();
       });
 
-      expect(toJSON()).toBeNull();
+      expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
     });
 
     describe('if closed via the accessibility escape gesture', () => {
@@ -161,9 +176,11 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible onDismiss={onDismiss}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
@@ -176,9 +193,11 @@ describe('Modal', () => {
       it('invokes onDismiss', async () => {
         const onDismiss = jest.fn();
         const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible onDismiss={onDismiss}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(toJSON()).toMatchSnapshot();
@@ -208,14 +227,16 @@ describe('Modal', () => {
     describe('if closed via touching backdrop', () => {
       it('will run the animation but not fade out', async () => {
         const { toJSON } = await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={() => {}}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={() => {}}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(toJSON()).toMatchSnapshot();
@@ -239,14 +260,16 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissableBackButton={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={onDismiss}
+              dismissableBackButton={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         await act(() => {
@@ -269,14 +292,16 @@ describe('Modal', () => {
       it('should not invoke onDismiss', async () => {
         const onDismiss = jest.fn();
         await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={onDismiss}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
@@ -298,14 +323,16 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={onDismiss}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
@@ -318,14 +345,16 @@ describe('Modal', () => {
     describe('if closed via Android back button', () => {
       it('will run the animation but not fade out', async () => {
         const { toJSON } = await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={() => {}}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={() => {}}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(toJSON()).toMatchSnapshot();
@@ -351,14 +380,16 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={onDismiss}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
@@ -382,17 +413,21 @@ describe('Modal', () => {
     describe('from false to true (closed to open)', () => {
       it('should run fade-in animation on opening', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -414,9 +449,11 @@ describe('Modal', () => {
     describe('from true to false (open to closed)', () => {
       it('should run fade-out animation on closing', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -425,9 +462,11 @@ describe('Modal', () => {
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -446,17 +485,21 @@ describe('Modal', () => {
         const onDismiss = jest.fn();
 
         const { rerender } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible onDismiss={onDismiss}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
 
         await rerender(
-          <Modal testID="modal" visible={false} onDismiss={onDismiss}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false} onDismiss={onDismiss}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(onDismiss).not.toHaveBeenCalled();
@@ -470,9 +513,11 @@ describe('Modal', () => {
 
       it('should close even if the dialog is not dismissible', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible dismissable={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible dismissable={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -481,9 +526,11 @@ describe('Modal', () => {
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false} dismissable={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false} dismissable={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -504,9 +551,11 @@ describe('Modal', () => {
     describe('while closing, back to true (visible)', () => {
       it('should keep the modal open', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -515,9 +564,11 @@ describe('Modal', () => {
         expect(toJSON()).toMatchSnapshot();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -532,9 +583,11 @@ describe('Modal', () => {
         });
 
         await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         await act(() => {
@@ -551,17 +604,21 @@ describe('Modal', () => {
     describe('while opening, back to false (hidden)', () => {
       it('should keep the modal closed', async () => {
         const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.queryByLabelText('Close modal')).not.toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         expect(screen.getByLabelText('Close modal')).toHaveStyle({
@@ -578,9 +635,11 @@ describe('Modal', () => {
         expect(screen.getByLabelText('Close modal')).toBeOnTheScreen();
 
         await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
+          <Portal.Host>
+            <Modal testID="modal" visible={false}>
+              {null}
+            </Modal>
+          </Portal.Host>
         );
 
         await act(() => {
@@ -595,9 +654,11 @@ describe('Modal', () => {
 
 it('exposes the modal as a dialog with an accessible name', async () => {
   await render(
-    <Modal visible onDismiss={() => {}} aria-label="Example modal">
-      <Text>Modal content</Text>
-    </Modal>
+    <Portal.Host>
+      <Modal visible onDismiss={() => {}} aria-label="Example modal">
+        <Text>Modal content</Text>
+      </Modal>
+    </Portal.Host>
   );
 
   expect(screen.getByLabelText('Example modal')).toHaveProp('role', 'dialog');
