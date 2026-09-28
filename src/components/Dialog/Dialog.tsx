@@ -13,6 +13,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
+import { DialogTitleIdContext } from './utils';
 import type { DialogChildProps } from './utils';
 
 export type Props = {
@@ -28,6 +29,14 @@ export type Props = {
    * Callback that is called when the user dismisses the dialog.
    */
   onDismiss?: () => void;
+  /**
+   * Accessibility label for dismissing the dialog if it's `dismissable`.
+   */
+  dismissAccessibilityLabel?: string;
+  /**
+   * Accessible name for the dialog. On web, defaults to the text of `Dialog.Title`.
+   */
+  'aria-label'?: string;
   /**
    * Determines Whether the dialog is visible.
    */
@@ -95,6 +104,8 @@ const Dialog = ({
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
+  dismissAccessibilityLabel,
+  'aria-label': ariaLabel,
   visible = false,
   style,
   theme: themeOverrides,
@@ -108,11 +119,16 @@ const Dialog = ({
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 
+  const titleId = React.useId();
+
   return (
     <Modal
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabel == null ? titleId : undefined}
       dismissable={dismissable}
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
+      dismissAccessibilityLabel={dismissAccessibilityLabel}
       visible={visible}
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
@@ -128,17 +144,19 @@ const Dialog = ({
       testID={testID}
       overlayTestID={overlayTestID}
     >
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
-            return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
-            });
-          }
+      <DialogTitleIdContext.Provider value={titleId}>
+        {React.Children.toArray(children)
+          .filter((child) => child != null && typeof child !== 'boolean')
+          .map((child, i) => {
+            if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
+              return React.cloneElement(child, {
+                style: [{ marginTop: 24 }, child.props.style],
+              });
+            }
 
-          return child;
-        })}
+            return child;
+          })}
+      </DialogTitleIdContext.Provider>
     </Modal>
   );
 };
