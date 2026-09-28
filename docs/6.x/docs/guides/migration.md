@@ -213,6 +213,19 @@ e.g.:
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
+### Avatar
+
+`Avatar.Icon` and `Avatar.Text` no longer derive their icon or text color from `style.backgroundColor`. Specify matching `color` explicitly when using custom background color.
+
+```diff
+<Avatar.Icon
+  icon="account"
+- style={{ backgroundColor: '#ffcc00' }}
++ style={{ backgroundColor: '#ffcc00' }}
++ color="#000000"
+/>
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:

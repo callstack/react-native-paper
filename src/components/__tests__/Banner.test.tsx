@@ -145,6 +145,33 @@ describe('animations', () => {
     hideCallback = undefined;
   });
 
+  it('uses zero-duration animations when animation scale is disabled', async () => {
+    const view = await render(
+      <Banner
+        visible={false}
+        onShowAnimationFinished={showCallback}
+        theme={{ animation: { scale: 0 } }}
+      >
+        Text
+      </Banner>
+    );
+
+    await view.rerender(
+      <Banner
+        visible
+        onShowAnimationFinished={showCallback}
+        theme={{ animation: { scale: 0 } }}
+      >
+        Text
+      </Banner>
+    );
+    await act(() => {
+      jest.advanceTimersByTime(16);
+    });
+
+    expect(showCallback).toHaveBeenCalled();
+  });
+
   describe('when component is rendered hidden', () => {
     // This behaviour is probably a bug. Needs triage before next version.
     it('will fire onHideAnimationFinished on mount', async () => {

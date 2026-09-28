@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, View } from 'react-native';
 import type {
   ImageProps,
   ImageSourcePropType,
@@ -8,10 +8,10 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-
-const defaultSize = 64;
 
 export type AvatarImageSource =
   | ImageSourcePropType
@@ -74,7 +74,7 @@ export type Props = ViewProps & {
  * ```
  */
 const AvatarImage = ({
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   source,
   style,
   onError,
@@ -87,8 +87,8 @@ const AvatarImage = ({
   testID,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
-  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
+  const theme = useInternalTheme(themeOverrides);
+  const { background } = resolveAvatarColors({ theme });
 
   return (
     <View
@@ -96,8 +96,8 @@ const AvatarImage = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: background,
         },
         style,
       ]}
@@ -108,7 +108,7 @@ const AvatarImage = ({
         <Image
           testID={testID}
           source={source}
-          style={{ width: size, height: size, borderRadius: size / 2 }}
+          style={{ width: size, height: size, borderRadius: cornerFull }}
           onError={onError}
           onLayout={onLayout}
           onLoad={onLoad}

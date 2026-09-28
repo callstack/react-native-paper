@@ -1,13 +1,11 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
-
-const defaultSize = 64;
 
 export type Props = ViewProps & {
   /**
@@ -55,7 +53,7 @@ export type Props = ViewProps & {
  */
 const AvatarText = ({
   label,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   labelStyle,
   color: customColor,
@@ -64,11 +62,10 @@ const AvatarText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    customColor ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { background, textColor } = resolveAvatarColors({
+    theme,
+    color: customColor,
+  });
   const { fontScale } = useWindowDimensions();
 
   return (
@@ -77,17 +74,18 @@ const AvatarText = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: background,
         },
         styles.container,
-        restStyle,
+        style ?? {},
       ]}
       {...rest}
     >
       <Text
         style={[
           styles.text,
+          theme.fonts.titleMedium,
           {
             color: textColor,
             fontSize: size / 2,
