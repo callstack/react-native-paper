@@ -2,88 +2,118 @@ import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
-import { getSelectionControlIOSColor } from '../../RadioButton/utils';
+import { getSelectionControlColor } from '../../RadioButton/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-describe('getSelectionControlIOSColor - checked color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
+describe('getSelectionControlColor', () => {
+  it('should return disabled color', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
         disabled: true,
+        checked: true,
       })
     ).toMatchObject({
-      checkedColor: LightTheme.colors.primary,
-      checkedColorOpacity: stateOpacity.disabled,
+      selectionControlColor: LightTheme.colors.onSurface,
+      selectionControlOpacity: stateOpacity.disabled,
     });
   });
 
   it('should return custom color, checked', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
+        checked: true,
         customColor: 'purple',
       })
     ).toMatchObject({
-      checkedColor: 'purple',
+      selectionControlColor: 'purple',
     });
   });
 
-  it('should return theme color, for theme version 3, checked', () => {
+  it('should return primary color, checked', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
+        checked: true,
       })
     ).toMatchObject({
-      checkedColor: LightTheme.colors.primary,
+      selectionControlColor: LightTheme.colors.primary,
     });
   });
 
-  it('should return error color when error is true', () => {
+  it('should return onSurfaceVariant color, unchecked', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
+        checked: false,
+      })
+    ).toMatchObject({
+      selectionControlColor: LightTheme.colors.onSurfaceVariant,
+    });
+  });
+
+  it('should return error color when error is true, checked', () => {
+    expect(
+      getSelectionControlColor({
+        theme: LightTheme,
+        checked: true,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: LightTheme.colors.error,
+      selectionControlColor: LightTheme.colors.error,
+    });
+  });
+
+  it('should return error color when error is true, unchecked', () => {
+    expect(
+      getSelectionControlColor({
+        theme: LightTheme,
+        checked: false,
+        error: true,
+      })
+    ).toMatchObject({
+      selectionControlColor: LightTheme.colors.error,
     });
   });
 
   it('should return error color, dark mode, when error is true', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: DarkTheme,
+        checked: true,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: DarkTheme.colors.error,
+      selectionControlColor: DarkTheme.colors.error,
     });
   });
 
   it('should return disabled color when both disabled and error are true (disabled wins)', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
+        checked: true,
         disabled: true,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: LightTheme.colors.primary,
-      checkedColorOpacity: stateOpacity.disabled,
+      selectionControlColor: LightTheme.colors.onSurface,
+      selectionControlOpacity: stateOpacity.disabled,
     });
   });
 
   it('should return custom color when both customColor and error are true (customColor wins)', () => {
     expect(
-      getSelectionControlIOSColor({
+      getSelectionControlColor({
         theme: LightTheme,
+        checked: true,
         customColor: 'purple',
         error: true,
       })
     ).toMatchObject({
-      checkedColor: 'purple',
+      selectionControlColor: 'purple',
     });
   });
 });

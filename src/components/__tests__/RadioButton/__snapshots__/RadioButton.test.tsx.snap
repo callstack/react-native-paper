@@ -2,7 +2,6 @@
 
 exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
   accessibilityState={
     {
       "busy": undefined,
@@ -23,6 +22,14 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -38,58 +45,43 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "padding": 6,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+      ],
     ]
   }
   testID="custom:testID"
 >
   <View
     style={
-      {
-        "opacity": 0,
-      }
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "justifyContent": "center",
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(73, 69, 79, 1)",
+          "opacity": 1,
+        },
+      ]
     }
-  >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      check
-    </Text>
-  </View>
+  />
 </View>
 `;
 
-exports[`RadioButton on default platform renders properly 1`] = `
+exports[`RadioButton renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
   accessibilityState={
     {
       "busy": undefined,
@@ -110,6 +102,14 @@ exports[`RadioButton on default platform renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -125,143 +125,42 @@ exports[`RadioButton on default platform renders properly 1`] = `
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "padding": 6,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+      ],
     ]
   }
 >
   <View
     style={
-      {
-        "opacity": 0,
-      }
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "justifyContent": "center",
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(73, 69, 79, 1)",
+          "opacity": 1,
+        },
+      ]
     }
-  >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      check
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`RadioButton on ios platform renders properly 1`] = `
-<View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  role="radio"
-  style={
-    [
-      {
-        "overflow": "hidden",
-      },
-      {
-        "borderRadius": 18,
-        "padding": 6,
-      },
-    ]
-  }
->
-  <View
-    style={
-      {
-        "opacity": 0,
-      }
-    }
-  >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
-      style={
-        [
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
-          },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
-        ]
-      }
-    >
-      check
-    </Text>
-  </View>
+  />
 </View>
 `;
 
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
   accessibilityState={
     {
       "busy": undefined,
@@ -282,6 +181,14 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessible={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -297,50 +204,59 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       {
         "overflow": "hidden",
       },
-      {
-        "borderRadius": 18,
-        "padding": 6,
-      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
+        undefined,
+      ],
     ]
   }
 >
   <View
     style={
-      {
-        "opacity": 1,
-      }
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "borderWidth": 2,
+          "height": 20,
+          "justifyContent": "center",
+          "width": 20,
+        },
+        {
+          "borderColor": "rgba(103, 80, 164, 1)",
+          "opacity": 1,
+        },
+      ]
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
+    <View
+      collapsable={false}
       style={
         [
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontSize": 24,
+            "borderRadius": 5,
+            "height": 10,
+            "width": 10,
           },
-          [
-            {
-              "lineHeight": 24,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            {
-              "backgroundColor": "transparent",
-            },
-          ],
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+          },
+          {
+            "transform": [
+              {
+                "scale": 1,
+              },
+            ],
+          },
         ]
       }
-    >
-      check
-    </Text>
+    />
   </View>
 </View>
 `;

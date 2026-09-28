@@ -1,12 +1,30 @@
-import { Platform } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
-import RadioButtonAndroid from './RadioButtonAndroid';
-import RadioButtonIOS from './RadioButtonIOS';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../theme/types';
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
-export type Props = {
+import { RadioButtonContext } from './RadioButtonGroup';
+import { RadioButtonTokens } from './tokens';
+import { getSelectionControlColor, handlePress, isChecked } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../../theme/types';
+import { getMinTouchTargetHitSlop } from '../../utils/touchTarget';
+import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Value of the radio button
    */
@@ -32,6 +50,12 @@ export type Props = {
    */
   color?: string;
   /**
+   * Whether the radio button is in an error state. When true, the ring
+   * (unchecked) and dot (selected) use `theme.colors.error`. `disabled`
+   * and explicit `color`/`uncheckedColor` overrides take precedence.
+   */
+  error?: boolean;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -40,6 +64,17 @@ export type Props = {
    */
   testID?: string;
 };
+
+const {
+  ringSize,
+  dotSize,
+  outlineWidth: OUTLINE_WIDTH,
+  stateLayerSize,
+} = RadioButtonTokens;
+
+// The state layer is 40dp per spec, which is below the 48dp minimum touch
+// target. Expand the pressable area without changing the visual bounds.
+const HIT_SLOP = getMinTouchTargetHitSlop(stateLayerSize);
 
 /**
  * Radio buttons allow the selection a single option from a set.
@@ -71,16 +106,169 @@ export type Props = {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-const RadioButton = ({ theme: themeOverrides, ...props }: Props) => {
+const RadioButton = ({
+  disabled,
+  onPress,
+  theme: themeOverrides,
+  value,
+  status,
+  testID,
+  error,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const context = React.useContext(RadioButtonContext);
 
-  const Button = Platform.select({
-    default: RadioButtonAndroid,
-    ios: RadioButtonIOS,
-  });
+  const checked =
+    isChecked({
+      contextValue: context?.value,
+      status,
+      value,
+    }) === 'checked';
 
-  return <Button {...props} theme={theme} />;
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  // Single selection animation path: the dot scales in (with a slight
+  // overshoot) when the radio becomes checked. The ring outline stays a
+  // constant width. Keyed on `checked` (not `status`) so radios driven by a
+  // `RadioButton.Group` animate too.
+  const dotScale = useSharedValue(1);
+  const isFirstRendering = React.useRef<boolean>(true);
+
+  const dotTimingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.short3,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.short3,
+      theme.motion.easing.standard,
+      reanimatedReduceMotion,
+    ]
+  );
+
+  React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
+    if (checked) {
+      // Jump to the overshoot value, then settle back to 1.
+      dotScale.value = 1.2;
+      dotScale.value = withTiming(1, dotTimingConfig);
+    }
+  }, [checked, dotScale, dotTimingConfig]);
+
+  const dotAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: dotScale.value }],
+  }));
+
+  const { selectionControlColor, selectionControlOpacity } =
+    getSelectionControlColor({
+      theme,
+      disabled,
+      checked,
+      error,
+      customColor: rest.color,
+      customUncheckedColor: rest.uncheckedColor,
+    });
+
+  // When `accessible={false}` is passed (typically by `RadioButton.Item`,
+  // which owns the a11y tree for the wrapped row), suppress our own role and
+  // state so the same logical control doesn't expose two `checked` states to
+  // assistive tech.
+  const accessibilityProps =
+    rest.accessible === false
+      ? {}
+      : {
+          role: 'radio' as const,
+          'aria-disabled': !!disabled,
+          'aria-checked': checked,
+        };
+
+  const { style: restStyle, ...restProps } = rest;
+  const combinedStyle =
+    typeof restStyle === 'function'
+      ? (state: PressableStateCallbackType) => [
+          styles.container,
+          restStyle(state),
+        ]
+      : [styles.container, restStyle];
+
+  return (
+    <TouchableRipple
+      hitSlop={HIT_SLOP}
+      {...restProps}
+      borderless
+      onPress={(event) => {
+        handlePress({
+          onPress,
+          onValueChange: context?.onValueChange,
+          value,
+          event,
+        });
+      }}
+      disabled={disabled}
+      {...accessibilityProps}
+      style={combinedStyle}
+      testID={testID}
+      theme={theme}
+    >
+      <View
+        style={[
+          styles.radio,
+          {
+            borderColor: selectionControlColor,
+            opacity: selectionControlOpacity,
+          },
+        ]}
+      >
+        {checked ? (
+          <Animated.View
+            style={[
+              styles.dot,
+              { backgroundColor: selectionControlColor },
+              dotAnimatedStyle,
+            ]}
+          />
+        ) : null}
+      </View>
+    </TouchableRipple>
+  );
 };
+
+RadioButton.displayName = 'RadioButton';
+
+const styles = StyleSheet.create({
+  container: {
+    width: stateLayerSize,
+    height: stateLayerSize,
+    borderRadius: stateLayerSize / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  radio: {
+    height: ringSize,
+    width: ringSize,
+    borderRadius: ringSize / 2,
+    borderWidth: OUTLINE_WIDTH,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dot: {
+    height: dotSize,
+    width: dotSize,
+    borderRadius: dotSize / 2,
+  },
+});
 
 export default RadioButton;
