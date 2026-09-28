@@ -88,8 +88,6 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * It renders itself in a [`Portal`](./Portal), so it appears above the rest of the app.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
  *
  * ## Usage
  * ```js
@@ -207,7 +205,7 @@ function Modal({
   }
 
   return (
-    <Portal modal={visible} theme={theme}>
+    <Portal modal={visibleInternal} theme={themeOverrides}>
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
         aria-modal

@@ -7,18 +7,27 @@ export type Props = {
 };
 
 type Operation =
-  | { type: 'mount'; key: number; children: React.ReactNode; modal?: boolean }
+  | {
+      type: 'mount';
+      key: number;
+      children: React.ReactNode;
+      modal: boolean | undefined;
+    }
   | {
       type: 'update';
       key: number;
       children: React.ReactNode;
-      modal?: boolean;
+      modal: boolean | undefined;
     }
   | { type: 'unmount'; key: number };
 
 export type PortalMethods = {
-  mount: (children: React.ReactNode, modal?: boolean) => number;
-  update: (key: number, children: React.ReactNode, modal?: boolean) => void;
+  mount: (children: React.ReactNode, modal: boolean | undefined) => number;
+  update: (
+    key: number,
+    children: React.ReactNode,
+    modal: boolean | undefined
+  ) => void;
   unmount: (key: number) => void;
 };
 
@@ -78,7 +87,7 @@ export default class PortalHost extends React.Component<Props> {
     this.manager = manager;
   };
 
-  private mount = (children: React.ReactNode, modal?: boolean) => {
+  private mount = (children: React.ReactNode, modal: boolean | undefined) => {
     const key = this.nextKey++;
 
     if (this.manager) {
@@ -93,16 +102,14 @@ export default class PortalHost extends React.Component<Props> {
   private update = (
     key: number,
     children: React.ReactNode,
-    modal?: boolean
+    modal: boolean | undefined
   ) => {
     if (this.manager) {
       this.manager.update(key, children, modal);
     } else {
       const op: Operation = { type: 'mount', key, children, modal };
       const index = this.queue.findIndex(
-        (o) =>
-          (o.type === 'mount' && o.key === key) ||
-          (o.type === 'update' && o.key === key)
+        (o) => (o.type === 'mount' || o.type === 'update') && o.key === key
       );
 
       if (index > -1) {
