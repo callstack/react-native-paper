@@ -9,6 +9,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
@@ -88,13 +89,11 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+ * import { Modal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -106,16 +105,14 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *
  *   return (
  *     <PaperProvider>
- *       <Portal>
- *         <Modal
- *           visible={visible}
- *           onDismiss={hideModal}
- *           contentBackgroundColor="white"
- *           contentContainerStyle={containerStyle}
- *         >
- *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
- *         </Modal>
- *       </Portal>
+ *       <Modal
+ *         visible={visible}
+ *         onDismiss={hideModal}
+ *         contentBackgroundColor="white"
+ *         contentContainerStyle={containerStyle}
+ *       >
+ *         <Text>Example Modal.  Click outside this area to dismiss.</Text>
+ *       </Modal>
  *       <Button style={{ marginTop: 30 }} onPress={showModal}>
  *         Show
  *       </Button>
@@ -225,48 +222,50 @@ function Modal({
   }
 
   return (
-    <Animated.View
-      pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
-      aria-live="polite"
-      style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={onDismissCallback}
-      testID={testID}
-    >
-      <AnimatedPressable
-        aria-label={overlayAccessibilityLabel}
-        role="button"
-        disabled={!dismissable}
-        onPress={dismissable ? onDismissCallback : undefined}
-        importantForAccessibility="no"
-        style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
-        testID={overlayTestID}
-      />
-      <View
-        style={[
-          styles.wrapper,
-          { marginTop: top, marginBottom: bottom },
-          style,
-        ]}
-        pointerEvents="box-none"
+    <Portal modal={visibleInternal} theme={themeOverrides}>
+      <Animated.View
+        pointerEvents={visible ? 'auto' : 'none'}
+        aria-modal
+        aria-live="polite"
+        style={StyleSheet.absoluteFill}
+        onAccessibilityEscape={onDismissCallback}
+        testID={testID}
       >
-        <Surface
-          theme={theme}
-          backgroundColor={contentBackgroundColor}
-          borderRadius={contentBorderRadius}
+        <AnimatedPressable
+          aria-label={overlayAccessibilityLabel}
+          role="button"
+          disabled={!dismissable}
+          onPress={dismissable ? onDismissCallback : undefined}
+          importantForAccessibility="no"
+          style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
+          testID={overlayTestID}
+        />
+        <View
           style={[
-            styles.content,
-            contentStyle,
-            contentTransitionStyle,
-            contentContainerStyle,
+            styles.wrapper,
+            { marginTop: top, marginBottom: bottom },
+            style,
           ]}
-          elevation={contentElevation}
-          transitionDuration={scale * DEFAULT_DURATION}
+          pointerEvents="box-none"
         >
-          {children}
-        </Surface>
-      </View>
-    </Animated.View>
+          <Surface
+            theme={theme}
+            backgroundColor={contentBackgroundColor}
+            borderRadius={contentBorderRadius}
+            style={[
+              styles.content,
+              contentStyle,
+              contentTransitionStyle,
+              contentContainerStyle,
+            ]}
+            elevation={contentElevation}
+            transitionDuration={scale * DEFAULT_DURATION}
+          >
+            {children}
+          </Surface>
+        </View>
+      </Animated.View>
+    </Portal>
   );
 }
 
