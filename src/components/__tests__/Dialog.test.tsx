@@ -128,12 +128,10 @@ describe('Dialog', () => {
 describe('DialogActions', () => {
   it('should render passed children', async () => {
     await render(
-      <Portal.Host>
-        <Dialog.Actions>
-          <Button testID="button-cancel">Cancel</Button>
-          <Button testID="button-ok">Ok</Button>
-        </Dialog.Actions>
-      </Portal.Host>
+      <Dialog.Actions>
+        <Button testID="button-cancel">Cancel</Button>
+        <Button testID="button-ok">Ok</Button>
+      </Dialog.Actions>
     );
 
     expect(screen.getByTestId('button-cancel')).toBeOnTheScreen();
@@ -142,12 +140,10 @@ describe('DialogActions', () => {
 
   it('should apply default styles', async () => {
     await render(
-      <Portal.Host>
-        <Dialog.Actions testID="dialog-actions">
-          <Button>Cancel</Button>
-          <Button>Ok</Button>
-        </Dialog.Actions>
-      </Portal.Host>
+      <Dialog.Actions testID="dialog-actions">
+        <Button>Cancel</Button>
+        <Button>Ok</Button>
+      </Dialog.Actions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
@@ -163,12 +159,10 @@ describe('DialogActions', () => {
 
   it('should apply custom styles', async () => {
     await render(
-      <Portal.Host>
-        <Dialog.Actions testID="dialog-actions">
-          <Button style={styles.spacing}>Cancel</Button>
-          <Button style={styles.noSpacing}>Ok</Button>
-        </Dialog.Actions>
-      </Portal.Host>
+      <Dialog.Actions testID="dialog-actions">
+        <Button style={styles.spacing}>Cancel</Button>
+        <Button style={styles.noSpacing}>Ok</Button>
+      </Dialog.Actions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');

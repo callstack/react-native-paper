@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import OverlayLayer from './OverlayLayer';
+import PortalLayer from './PortalLayer';
 
 type Props = {
   children: React.ReactNode;
@@ -11,30 +11,39 @@ type State = {
   portals: Array<{
     key: number;
     children: React.ReactNode;
-    modal?: boolean;
+    modal: boolean | undefined;
   }>;
 };
 
 /**
  * Portal host is the component which actually renders all Portals.
  */
-export default class PortalManager extends React.PureComponent<Props, State> {
+export default class PortalManager extends React.Component<Props, State> {
   state: State = {
     portals: [],
   };
 
-  mount = (key: number, children: React.ReactNode, modal?: boolean) => {
+  mount = (
+    key: number,
+    children: React.ReactNode,
+    modal: boolean | undefined
+  ) => {
     this.setState((state) => ({
       portals: [...state.portals, { key, children, modal }],
     }));
   };
 
-  update = (key: number, children: React.ReactNode, modal?: boolean) =>
+  update = (
+    key: number,
+    children: React.ReactNode,
+    modal: boolean | undefined
+  ) =>
     this.setState((state) => ({
       portals: state.portals.map((item) => {
         if (item.key === key) {
           return { ...item, children, modal };
         }
+
         return item;
       }),
     }));
@@ -51,7 +60,7 @@ export default class PortalManager extends React.PureComponent<Props, State> {
 
     return (
       <>
-        <OverlayLayer
+        <PortalLayer
           inert={topmostModalIndex >= 0}
           style={styles.container}
           collapsable={
@@ -60,9 +69,9 @@ export default class PortalManager extends React.PureComponent<Props, State> {
           pointerEvents="box-none"
         >
           {this.props.children}
-        </OverlayLayer>
+        </PortalLayer>
         {portals.map(({ key, children }, index) => (
-          <OverlayLayer
+          <PortalLayer
             key={key}
             inert={index < topmostModalIndex}
             collapsable={
@@ -72,7 +81,7 @@ export default class PortalManager extends React.PureComponent<Props, State> {
             style={StyleSheet.absoluteFill}
           >
             {children}
-          </OverlayLayer>
+          </PortalLayer>
         ))}
       </>
     );

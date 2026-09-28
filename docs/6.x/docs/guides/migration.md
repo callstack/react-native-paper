@@ -159,6 +159,19 @@ e.g.:
 
 ### Modal
 
+`Modal` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Modal`:
+
+```diff
+-<Portal>
+-  <Modal visible={visible} onDismiss={hideModal}>
+-    <Text>Content</Text>
+-  </Modal>
+-</Portal>
++<Modal visible={visible} onDismiss={hideModal}>
++  <Text>Content</Text>
++</Modal>
+```
+
 - The `contentContainerStyle` prop no longer configures the background color or any border radius property. We have added new props for these:
   - `contentBackgroundColor`
   - `contentBorderRadius`
@@ -184,6 +197,19 @@ e.g.:
 ```
 
 ### Dialog
+
+`Dialog` now uses a `Modal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
+
+```diff
+-<Portal>
+-  <Dialog visible={visible} onDismiss={hideDialog}>
+-    <Dialog.Title>Alert</Dialog.Title>
+-  </Dialog>
+-</Portal>
++<Dialog visible={visible} onDismiss={hideDialog}>
++  <Dialog.Title>Alert</Dialog.Title>
++</Dialog>
+```
 
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.

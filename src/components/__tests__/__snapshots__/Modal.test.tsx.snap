@@ -2720,6 +2720,7 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
 exports[`Modal when open runs the closing animation if visible toggled 2`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -2928,6 +2929,7 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
 exports[`Modal when open runs the closing animation if visible toggled 3`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -3345,6 +3347,7 @@ exports[`Modal when visible prop changes again during the open/close animation w
 exports[`Modal when visible prop changes again during the open/close animation while closing, back to true (visible) should keep the modal open 2`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -4598,6 +4601,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
 exports[`Modal when visible prop changes from true to false (open to closed) should close even if the dialog is not dismissible 2`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -5015,6 +5019,7 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
 exports[`Modal when visible prop changes from true to false (open to closed) should run fade-out animation on closing 2`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
