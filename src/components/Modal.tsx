@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import Animated, {
@@ -34,9 +34,18 @@ export type Props = {
    */
   onDismiss?: () => void;
   /**
-   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   * Accessibility label for dismissing the modal if it's `dismissable`.
    */
-  overlayAccessibilityLabel?: string;
+  dismissAccessibilityLabel?: string;
+  /**
+   * Accessible name for the modal.
+   */
+  'aria-label'?: string;
+  /**
+   * `nativeID` of the element which provides the accessible name for the modal,
+   * such as a title. Supported on web.
+   */
+  'aria-labelledby'?: string;
   /**
    * testID for the overlay that is displayed behind the modal content.
    */
@@ -89,6 +98,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
+ * Give the modal an accessible name with `aria-label`.
  *
  * ## Usage
  * ```js
@@ -108,6 +118,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  *       <Modal
  *         visible={visible}
  *         onDismiss={hideModal}
+ *         aria-label="Example modal"
  *         contentBackgroundColor="white"
  *         contentContainerStyle={containerStyle}
  *       >
@@ -127,7 +138,9 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
-  overlayAccessibilityLabel = 'Close modal',
+  dismissAccessibilityLabel = 'Close modal',
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   overlayTestID,
   onDismiss = () => {},
   children,
@@ -179,7 +192,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable || dismissableBackButton) {
+      if (dismissableBackButton) {
         onDismissCallback();
       }
 
@@ -193,7 +206,7 @@ function Modal({
     );
 
     return () => subscription.remove();
-  }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
+  }, [dismissableBackButton, onDismissCallback, visible]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
@@ -225,18 +238,17 @@ function Modal({
     <Portal modal={visibleInternal} theme={themeOverrides}>
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
-        aria-modal
         aria-live="polite"
         style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={onDismissCallback}
+        onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
         testID={testID}
       >
         <AnimatedPressable
-          aria-label={overlayAccessibilityLabel}
-          role="button"
+          aria-hidden
+          accessible={false}
+          tabIndex={-1}
           disabled={!dismissable}
           onPress={dismissable ? onDismissCallback : undefined}
-          importantForAccessibility="no"
           style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
           testID={overlayTestID}
         />
@@ -249,6 +261,15 @@ function Modal({
           pointerEvents="box-none"
         >
           <Surface
+            role="dialog"
+            aria-modal
+            aria-label={ariaLabel}
+            aria-labelledby={
+              // Only set `aria-labelledby` on web, it's ignored on iOS
+              // On Android, it results in the content being read on opening the dialog,
+              // and then again when the first focusable element receives focus.
+              Platform.OS === 'web' ? ariaLabelledBy : undefined
+            }
             theme={theme}
             backgroundColor={contentBackgroundColor}
             borderRadius={contentBorderRadius}
@@ -262,6 +283,17 @@ function Modal({
             transitionDuration={scale * DEFAULT_DURATION}
           >
             {children}
+            {dismissable ? (
+              // The backdrop is hidden for screen reader users,
+              // so we provide a visually hidden dismiss button.
+              <Pressable
+                role="button"
+                aria-label={dismissAccessibilityLabel}
+                tabIndex={-1}
+                onPress={onDismissCallback}
+                style={styles.dismiss}
+              />
+            ) : null}
           </Surface>
         </View>
       </Animated.View>
@@ -281,5 +313,10 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
+  },
+  dismiss: {
+    position: 'absolute',
+    width: 1,
+    height: 1,
   },
 });
