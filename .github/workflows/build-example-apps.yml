@@ -4,13 +4,23 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - docs/**
-      - '**/*.md'
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!**/__tests__/**'
+      - '!jest/**'
+      - '!.github/workflows/**'
+      - '.github/workflows/build-example-apps.yml'
   pull_request:
-    paths-ignore:
-      - docs/**
-      - '**/*.md'
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!**/__tests__/**'
+      - '!jest/**'
+      - '!.github/workflows/**'
+      - '.github/workflows/build-example-apps.yml'
   workflow_dispatch:
 
 permissions:
@@ -21,8 +31,8 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  android:
-    name: Android
+  build-android:
+    name: Build Android
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -44,16 +54,14 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: react-native-paper-example.apk
-          key: android-${{ steps.fingerprint.outputs.fingerprint }}
+          key: android-${{ steps.fingerprint.outputs.fingerprint }}-${{ hashFiles('.github/workflows/build-example-apps.yml') }}
 
-      # Repacking shells out to `apktool`, so this cannot be gated on the cache.
       - name: Setup JDK
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: temurin
           java-version: 17
 
-      # KSP in `expo-updates` runs out of the 512m metaspace that `expo prebuild` sets.
       - name: Build Android app
         if: steps.cache.outputs.cache-hit != 'true'
         working-directory: example
@@ -79,8 +87,8 @@ jobs:
           archive: false
           retention-days: 30
 
-  ios:
-    name: iOS
+  build-ios:
+    name: Build iOS
     runs-on: macos-latest
     timeout-minutes: 60
     steps:
@@ -102,7 +110,7 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: react-native-paper-example.app
-          key: ios-${{ steps.fingerprint.outputs.fingerprint }}
+          key: ios-${{ steps.fingerprint.outputs.fingerprint }}-${{ hashFiles('.github/workflows/build-example-apps.yml') }}
 
       - name: Build iOS app
         if: steps.cache.outputs.cache-hit != 'true'
@@ -120,7 +128,6 @@ jobs:
             ARCHS=arm64
           mv build/Build/Products/Release-iphonesimulator/ReactNativePaperExample.app ../../react-native-paper-example.app
 
-      # Repacking in place fails with ENOTEMPTY on an existing app directory.
       - name: Repack cached build
         if: steps.cache.outputs.cache-hit == 'true'
         working-directory: example
@@ -131,7 +138,6 @@ jobs:
             --source-app "$RUNNER_TEMP/cached.app" \
             --output ../react-native-paper-example.app
 
-      # `ditto` keeps the symlinks and executable bits a plain upload drops.
       - name: Archive app
         run: ditto -c -k --keepParent react-native-paper-example.app react-native-paper-example.app.zip
 
