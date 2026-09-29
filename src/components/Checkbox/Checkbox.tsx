@@ -3,21 +3,35 @@ import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  MouseEvent,
   NativeSyntheticEvent,
   StyleProp,
   TargetedEvent,
   ViewStyle,
 } from 'react-native';
 
-import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
+import Animated, {
+  cubicBezier,
+  Easing,
+  ReduceMotion,
+  useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+  type CSSStyle,
+} from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
-import { getSelectionVisualState } from './utils';
+import { getSelectionVisualState, getStateLayer } from './utils';
+import type { CheckboxInteraction } from './utils';
 import { useLocale } from '../../core/locale';
+import { SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -39,11 +53,13 @@ export type Props = Omit<
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Custom color for unchecked checkbox.
+   * Custom color for unchecked checkbox. Replaces `onSurface` in the state
+   * layer as well as the outline.
    */
   uncheckedColor?: ColorValue;
   /**
-   * Custom color for checkbox.
+   * Custom color for checkbox. Replaces `primary` in the state layer as well
+   * as the container.
    */
   color?: ColorValue;
   /**
@@ -62,10 +78,24 @@ export type Props = Omit<
    */
   testID?: string;
   /**
-   * Custom style to override the default tap target. Passed through to
-   * the underlying `TouchableRipple`.
+   * Custom style for the checkbox's outer container. `width` and `height` here
+   * do not resize the tap target; `tapTargetStyle` does.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Custom style for the pressable that carries the 48dp tap target. Sizing it
+   * keeps the 24dp corner radius, and shrinking it clips the 40dp state layer.
+   * Margin, padding and transform belong in `style`: here they shift the
+   * pressable out from under the focus ring.
+   */
+  tapTargetStyle?: StyleProp<ViewStyle>;
+  /**
+   * Accessibility label for the checkbox, read by a screen reader in place of
+   * a visible label. A standalone `Checkbox` has no label of its own, so it
+   * needs one here. `Checkbox.Item` names the whole row instead and does not
+   * require it.
+   */
+  'aria-label'?: string;
 };
 
 // Spec dimensions (https://m3.material.io/components/checkbox/specs).
@@ -74,15 +104,20 @@ const {
   containerRadius: CONTAINER_RADIUS,
   outlineWidth: OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
+  touchTargetSize: TOUCH_TARGET_SIZE,
 } = CheckboxTokens;
 
-const FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
-// Focus indicator is a circular ring at the 40dp state-layer boundary.
-// We don't apply `focusIndicator.outerOffset` here because the surrounding
-// `TouchableRipple borderless` clips overflow to the tap-target shape,
-// so a ring drawn outside the 40dp circle would be cropped.
-const FOCUS_RING_SIZE = STATE_LAYER_SIZE;
-const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
+const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
+  tokens.md.sys.state.focusIndicator;
+// The border is drawn inside the ring's own box, so the box spans the state
+// layer plus the offset and the border on each side.
+const FOCUS_RING_SIZE =
+  STATE_LAYER_SIZE + 2 * (FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
+const FOCUS_RING_RADIUS = FOCUS_RING_SIZE / 2;
+
+// Compose's `RippleAnimation` starts the ripple at 30% of the target layer's
+// size, i.e. 0.6 of the radius.
+const RIPPLE_START_SCALE = 0.6;
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
@@ -107,6 +142,12 @@ const FOCUS_RING_RADIUS = STATE_LAYER_SIZE / 2;
  *
  * export default MyComponent;
  * ```
+ *
+ * ## Accessibility
+ * A standalone `Checkbox` renders no visible label, so give it an `aria-label`
+ * to name it for assistive tech. Use `Checkbox.Item` when you want a labelled
+ * row: it owns the accessible name and keeps the inner checkbox out of the
+ * accessibility tree so the state is announced once.
  */
 const Checkbox = ({
   status,
@@ -118,31 +159,99 @@ const Checkbox = ({
   color,
   uncheckedColor,
   style,
+  tapTargetStyle,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
   const reduceMotion = useReduceMotion();
+  const { rippleEffectEnabled } = React.useContext(SettingsContext);
 
   const { direction } = useLocale();
   // Web (react-native-web) doesn't auto-mirror layout, so flip the mask
   // anchor manually for RTL. Native handles it via `I18nManager`.
   const flipMaskForWebRTL = Platform.OS === 'web' && direction === 'rtl';
   const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
 
   const selected = status === 'checked' || status === 'indeterminate';
 
-  // Visual state (colors + opacity) for the static layers. `hovered` /
-  // `pressed` aren't tracked here — `TouchableRipple` owns the press ripple
-  // and hover overlay.
-  const visual = getSelectionVisualState({
+  // Shared by the box and the state layer, so a custom color reaches both.
+  const selectionColors = {
     theme,
     selected,
-    disabled,
     error,
     customColor: color,
     customUncheckedColor: uncheckedColor,
+  };
+
+  const visual = getSelectionVisualState({ ...selectionColors, disabled });
+
+  // `TouchableRipple` disables itself when nothing can handle a press, so
+  // attaching press handlers unconditionally would make a handler-less
+  // checkbox enabled and focusable while doing nothing.
+  const isInteractive =
+    !disabled &&
+    hasTouchHandler({
+      onPress,
+      onLongPress: rest.onLongPress,
+      onPressIn: rest.onPressIn,
+      onPressOut: rest.onPressOut,
+    });
+
+  const interaction: CheckboxInteraction | null = !isInteractive
+    ? null
+    : focused
+      ? 'focused'
+      : hovered
+        ? 'hovered'
+        : null;
+
+  // Fade by opacity alone: under a dynamic theme the role is a `PlatformColor`,
+  // which Reanimated cannot interpolate, so the color stays put while idle
+  // instead of dropping to transparent.
+  const stateLayer = getStateLayer({ ...selectionColors, interaction });
+  const stateLayerColor = getStateLayer({
+    ...selectionColors,
+    interaction: interaction ?? 'hovered',
+  }).color;
+  const pressRipple = getStateLayer({
+    ...selectionColors,
+    interaction: 'pressed',
   });
+
+  // A controlled checkbox flips `status` from `onPress`, while the ripple is
+  // still held up. The inverted color previews the state being moved to, so
+  // recomputing it there would both flicker and start previewing the way back.
+  // Only the ripple is frozen: the flat layer above reports the current state,
+  // which the flip genuinely changed, so under a web hover it is expected to
+  // briefly converge on the hue the ripple is holding.
+  const [pressColor, setPressColor] = React.useState<ColorValue>(
+    pressRipple.color
+  );
+
+  // The platform press paints the wrong thing: it covers the whole 48dp target
+  // instead of the 40dp state layer, tints with a neutral role, and on web its
+  // hover overlay doubles up with the layer. Android also refuses a
+  // `PlatformColor`, which is what the dynamic theme resolves the roles to.
+  // A caller can still ask for that platform press back, but only through a
+  // prop this platform honours: `rippleColor` everywhere, `background` for the
+  // Android ripple, `underlayColor` for the iOS highlight. Counting one the
+  // platform drops would cost the MD3 ripple and hand back the neutral default
+  // instead.
+  const platformOwnsPress =
+    rest.rippleColor != null ||
+    (Platform.OS === 'android' && rest.background != null) ||
+    (Platform.OS === 'ios' && rest.underlayColor != null);
+
+  const platformPressOverride = platformOwnsPress
+    ? null
+    : ({ rippleColor: 'transparent' } as const);
+
+  // A disabled ripple effect asks for no press at all, on top of the platform
+  // press being spoken for above -- either way, nothing left for us to paint.
+  const ownsPress =
+    isInteractive && !platformOwnsPress && Boolean(rippleEffectEnabled);
 
   const fillTransitionTimingFunction = cubicBezier(
     ...theme.motion.easing.standard
@@ -176,6 +285,14 @@ const Checkbox = ({
     transitionTimingFunction: fillTransitionTimingFunction,
   };
 
+  const stateLayerStyle: CSSStyle<ViewStyle> = {
+    backgroundColor: stateLayerColor,
+    opacity: stateLayer.opacity,
+    transitionDuration: fillTransitionDuration,
+    transitionProperty: ['opacity'],
+    transitionTimingFunction: fillTransitionTimingFunction,
+  };
+
   const maskStyle: CSSStyle<ViewStyle> = {
     width: selected ? CONTAINER_SIZE : 0,
     opacity: selected ? 1 : 0,
@@ -183,6 +300,73 @@ const Checkbox = ({
     transitionProperty: ['width', 'opacity'],
     transitionTimingFunction: checkTransitionTimingFunction,
   };
+
+  const rippleAlpha = useSharedValue(0);
+  const rippleScale = useSharedValue(RIPPLE_START_SCALE);
+  const pressedSV = useSharedValue(0);
+  // Held for the length of the grow so a tap that releases mid-grow still
+  // shows the ripple instead of flashing sub-frame.
+  const rippleHoldSV = useSharedValue(0);
+
+  // Reanimated defaults an unset `reduceMotion` to the OS setting, which
+  // would fight `<PaperProvider reduceMotion="off">`. Mirror the provider's
+  // already-resolved preference explicitly instead, as `Switch` does.
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  // Durations follow Compose's `RippleAnimation` (fade in 75ms, grow 225ms,
+  // fade out 150ms) and material-web's `MINIMUM_PRESS_MS` (225), snapped to
+  // the motion tokens.
+  const rippleGrowDuration = reduceMotion ? 0 : theme.motion.duration.short4;
+  const rippleAlphaInDuration = reduceMotion ? 0 : theme.motion.duration.short2;
+  const rippleFadeOutDuration = reduceMotion ? 0 : theme.motion.duration.short3;
+  const rippleHoldDuration = theme.motion.duration.short4;
+
+  const startPressRipple = () => {
+    if (!ownsPress) return;
+
+    setPressColor(pressRipple.color);
+    pressedSV.value = 1;
+    rippleScale.value = RIPPLE_START_SCALE;
+    rippleScale.value = withTiming(1, {
+      duration: rippleGrowDuration,
+      easing: Easing.bezier(...theme.motion.easing.standard),
+      reduceMotion: reanimatedReduceMotion,
+    });
+    rippleAlpha.value = withTiming(pressRipple.opacity, {
+      duration: rippleAlphaInDuration,
+      reduceMotion: reanimatedReduceMotion,
+    });
+    rippleHoldSV.value = 1;
+    rippleHoldSV.value = withDelay(
+      rippleHoldDuration,
+      withTiming(0, { duration: 0 }),
+      // The hold gates visibility rather than movement, so it outlives both
+      // our own reduced-motion durations and the device setting.
+      ReduceMotion.Never
+    );
+  };
+
+  useAnimatedReaction(
+    () => ({ pressed: pressedSV.value, holding: rippleHoldSV.value }),
+    ({ pressed, holding }) => {
+      // Also runs on registration, with everything already at rest -- there's
+      // nothing to fade then.
+      if (pressed === 1 || holding === 1 || rippleAlpha.value === 0) return;
+
+      rippleAlpha.value = withTiming(0, {
+        duration: rippleFadeOutDuration,
+        reduceMotion: reanimatedReduceMotion,
+      });
+    },
+    [rippleFadeOutDuration, reanimatedReduceMotion]
+  );
+
+  const rippleStyle = useAnimatedStyle(() => ({
+    opacity: rippleAlpha.value,
+    transform: [{ scale: rippleScale.value }],
+  }));
 
   // Remember the last drawn glyph so the reveal-mask can finish collapsing
   // when `selected` flips back to false. Computed via the "derive state
@@ -215,6 +399,56 @@ const Checkbox = ({
     setFocused(false);
   }, []);
 
+  const interactionHandlers = isInteractive
+    ? {
+        onHoverIn: (e: MouseEvent) => {
+          setHovered(true);
+          rest.onHoverIn?.(e);
+        },
+        onHoverOut: (e: MouseEvent) => {
+          setHovered(false);
+          rest.onHoverOut?.(e);
+        },
+        onPressIn: (e: GestureResponderEvent) => {
+          startPressRipple();
+          rest.onPressIn?.(e);
+        },
+        onPressOut: (e: GestureResponderEvent) => {
+          pressedSV.value = 0;
+          rest.onPressOut?.(e);
+        },
+      }
+    : null;
+
+  // Losing the handlers means the matching hover-out or press-out never
+  // arrives, so the state would otherwise linger.
+  React.useEffect(() => {
+    if (isInteractive) return;
+
+    setHovered(false);
+    pressedSV.value = 0;
+    rippleHoldSV.value = 0;
+    rippleAlpha.value = 0;
+    rippleScale.value = RIPPLE_START_SCALE;
+  }, [isInteractive, pressedSV, rippleHoldSV, rippleAlpha, rippleScale]);
+
+  // `Checkbox.Item` names the row and passes `accessible={false}` here.
+  const isInAccessibilityTree = rest.accessible !== false;
+  const hasAccessibleName = Boolean(
+    rest['aria-label'] ??
+    rest.accessibilityLabel ??
+    rest['aria-labelledby'] ??
+    rest.accessibilityLabelledBy
+  );
+
+  React.useEffect(() => {
+    if (!isInAccessibilityTree || hasAccessibleName) return;
+
+    console.warn(
+      'Checkbox: pass `aria-label` to name the checkbox for assistive tech, or use `Checkbox.Item` for a labelled row.'
+    );
+  }, [isInAccessibilityTree, hasAccessibleName]);
+
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';
 
@@ -232,72 +466,102 @@ const Checkbox = ({
           'aria-live': 'polite' as const,
         };
 
+  const focusRing =
+    focused && !disabled ? (
+      <View
+        pointerEvents="none"
+        testID={testID ? `${testID}-focus-ring` : undefined}
+        style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
+      />
+    ) : null;
+
   return (
-    <TouchableRipple
-      {...rest}
-      borderless
-      centered
-      onPress={onPress}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      disabled={disabled}
-      {...accessibilityProps}
-      testID={testID}
-      style={[
-        styles.tapTarget,
-        Platform.OS === 'web' ? webNoOutline : undefined,
-        style,
-      ]}
-    >
-      <View pointerEvents="none" style={styles.tapTargetInner}>
-        {focused && !disabled ? (
+    // The ring is a sibling of the pressable, not a child: a foreground ripple
+    // forces `overflow: hidden` on it regardless of `borderless`.
+    <View style={[styles.root, style]}>
+      <TouchableRipple
+        {...rest}
+        centered
+        onPress={onPress}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        {...interactionHandlers}
+        // Keeps the platform press circular for a caller that hands it back
+        // with `rippleColor` or `underlayColor`.
+        borderless
+        {...platformPressOverride}
+        disabled={disabled}
+        {...accessibilityProps}
+        testID={testID}
+        style={[
+          styles.tapTarget,
+          Platform.OS === 'web' ? webNoOutline : undefined,
+          tapTargetStyle,
+        ]}
+      >
+        <View pointerEvents="none" style={styles.tapTargetInner}>
+          <Animated.View
+            pointerEvents="none"
+            testID={testID ? `${testID}-state-layer` : undefined}
+            style={[styles.stateLayer, stateLayerStyle]}
+          />
+          {ownsPress ? (
+            <Animated.View
+              pointerEvents="none"
+              testID={testID ? `${testID}-ripple` : undefined}
+              style={[
+                styles.stateLayer,
+                { backgroundColor: pressColor },
+                rippleStyle,
+              ]}
+            />
+          ) : null}
           <View
-            pointerEvents="none"
-            style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
-          />
-        ) : null}
-        <View style={[styles.container, { opacity: visual.containerOpacity }]}>
-          <Animated.View
-            pointerEvents="none"
-            style={[styles.outline, outlineStyle]}
-          />
-          <Animated.View
-            pointerEvents="none"
-            style={[styles.fill, fillStyle]}
-          />
-          <Animated.View
-            style={[
-              flipMaskForWebRTL
-                ? styles.checkmarkMaskWebRTL
-                : styles.checkmarkMask,
-              maskStyle,
-            ]}
+            style={[styles.container, { opacity: visual.containerOpacity }]}
           >
-            {showIndeterminate ? (
-              <View style={styles.checkmarkContent}>
-                <View
-                  style={[styles.dash, { backgroundColor: visual.iconColor }]}
-                />
-              </View>
-            ) : (
-              <View style={styles.checkmarkContent}>
-                <View
-                  style={[
-                    styles.checkmarkGlyph,
-                    { borderColor: visual.iconColor },
-                    // Native platforms auto-swap border sides in RTL, so
-                    // pre-swap them to preserve the checkmark orientation.
-                    direction === 'rtl' && Platform.OS !== 'web'
-                      ? styles.checkmarkGlyphRTL
-                      : null,
-                  ]}
-                />
-              </View>
-            )}
-          </Animated.View>
+            <Animated.View
+              pointerEvents="none"
+              style={[styles.outline, outlineStyle]}
+            />
+            <Animated.View
+              pointerEvents="none"
+              style={[styles.fill, fillStyle]}
+            />
+            <Animated.View
+              style={[
+                flipMaskForWebRTL
+                  ? styles.checkmarkMaskWebRTL
+                  : styles.checkmarkMask,
+                maskStyle,
+              ]}
+            >
+              {showIndeterminate ? (
+                <View style={styles.checkmarkContent}>
+                  <View
+                    style={[styles.dash, { backgroundColor: visual.iconColor }]}
+                  />
+                </View>
+              ) : (
+                <View style={styles.checkmarkContent}>
+                  <View
+                    style={[
+                      styles.checkmarkGlyph,
+                      { borderColor: visual.iconColor },
+                      // Native platforms auto-swap border sides in RTL, so
+                      // pre-swap them to preserve the checkmark orientation.
+                      direction === 'rtl' && Platform.OS !== 'web'
+                        ? styles.checkmarkGlyphRTL
+                        : null,
+                    ]}
+                  />
+                </View>
+              )}
+            </Animated.View>
+          </View>
         </View>
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+      {focusRing}
+    </View>
   );
 };
 
@@ -306,10 +570,14 @@ const Checkbox = ({
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
+  root: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   tapTarget: {
-    width: STATE_LAYER_SIZE,
-    height: STATE_LAYER_SIZE,
-    borderRadius: STATE_LAYER_SIZE / 2,
+    width: TOUCH_TARGET_SIZE,
+    height: TOUCH_TARGET_SIZE,
+    borderRadius: TOUCH_TARGET_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -318,6 +586,12 @@ const styles = StyleSheet.create({
     height: STATE_LAYER_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  stateLayer: {
+    position: 'absolute',
+    width: STATE_LAYER_SIZE,
+    height: STATE_LAYER_SIZE,
+    borderRadius: STATE_LAYER_SIZE / 2,
   },
   focusRing: {
     position: 'absolute',
