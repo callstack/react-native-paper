@@ -25,8 +25,31 @@ concurrency:
   group: publish-example-app
 
 jobs:
+  check:
+    name: Check release is on main
+    runs-on: ubuntu-latest
+    outputs:
+      on-main: ${{ steps.check.outputs.on-main }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          status=$(gh api "repos/$GH_REPO/compare/main...$TAG" --jq .status)
+
+          if [ "$status" = "identical" ] || [ "$status" = "behind" ]; then
+            echo "on-main=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "on-main=false" >> "$GITHUB_OUTPUT"
+            echo "$TAG is not on main ($status), nothing to deploy."
+          fi
+
   publish:
     name: Build and submit example app
+    needs: check
+    if: needs.check.outputs.on-main == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     permissions:
@@ -36,7 +59,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: main
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -81,6 +104,7 @@ jobs:
 
       - name: Decide between an update and a build
         id: decide
+        shell: bash
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
@@ -103,6 +127,13 @@ jobs:
               --limit 1 \
               --json \
               --non-interactive | jq 'length')
+
+            case "$existing" in
+              ''|*[!0-9]*)
+                echo "::error::Could not read builds for $platform."
+                exit 1
+                ;;
+            esac
 
             echo "$platform: fingerprint $hash, $existing matching build(s)"
             [ "$existing" -eq 0 ] && build=true
@@ -139,10 +170,12 @@ jobs:
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
+          PLATFORM: ${{ steps.release.outputs.platform }}
           TAG: ${{ steps.release.outputs.tag }}
         run: |
           eas update \
             --branch "$PROFILE" \
+            --platform "$PLATFORM" \
             --message "$TAG" \
             --non-interactive
 
@@ -175,7 +208,7 @@ jobs:
   report-failure:
     name: Report failure
     needs: publish
-    if: ${{ always() && needs.publish.result != 'success' }}
+    if: ${{ always() && needs.publish.result != 'success' && needs.publish.result != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
       - name: Report failure

@@ -109,7 +109,14 @@ yarn release
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
 
-We use EAS for auto-deployments of the example app. Releases with no native changes ship OTA. Releases with native code changes will be pushed to Stores automatically and job will create a PR with version bump, merge it to avoid two releases shipping under the same version. Android will also be auto-submitted for review, iOS still requires manual submission. Pre-releases are shipped to internal track and TestFlight only.
+Releases from main also deploy the example app via EAS. If there were no native code changes, it'll ship an OTA update.
+
+Otherwise, for stable releases:
+
+- The Android build is automatically submitted to Google Play for review
+- The iOS build is automatically uploaded to App Store Connect and needs to be manually submitted for review
+
+Pre-release builds are shipped to the internal track on Google Play for Android and TestFlight for iOS. They shouldn't be submitted to the App Store for review, or the stable build with the same version would be rejected.
 
 ## Reporting issues
 
