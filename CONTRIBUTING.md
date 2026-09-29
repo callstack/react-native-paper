@@ -109,18 +109,7 @@ yarn release
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
 
-### Publishing the example app
-
-Publishing a release also ships the example app, through the `Publish example app` workflow. If no native code changed it goes out as an over-the-air update; otherwise it builds and submits, prereleases to the Play internal track and TestFlight and stable releases to Play production.
-
-Two things are worth knowing because nothing will tell you otherwise:
-
-- **Nothing reaches the App Store on its own.** `eas submit` uploads to App Store Connect and the build waits in TestFlight until somebody promotes it there.
-- **Merge the version bump pull request before the next release.** The bump is worked out from `main`, so two releases either side of an unmerged one ship under the same version and the stores take both.
-
-`EXPO_TOKEN` is the only secret this repository holds. The signing and store credentials live in EAS.
-
-Whether a release becomes an update or a build is decided by its fingerprint, which has to match the one EAS works out after installing pods. Anything `pod install` writes into a fingerprinted directory belongs in `example/.fingerprintignore`, as `expo-modules-jsi` already does. Generated output only, so a real native change is still noticed.
+We use EAS for auto-deployments of the example app. Releases with no native changes ship OTA. Releases with native code changes will be pushed to Stores automatically and job will create a PR with version bump, merge it to avoid two releases shipping under the same version. Android will also be auto-submitted for review, iOS still requires manual submission. Pre-releases are shipped to internal track and TestFlight only.
 
 ## Reporting issues
 

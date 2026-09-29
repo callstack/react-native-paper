@@ -1,9 +1,5 @@
 name: Publish example app
 
-# Publishes the example app that demonstrates the library to the App Store and
-# Play Store. This runs *after* a library release already exists, and cannot
-# affect it: see the failure report in the `report-failure` job below.
-
 on:
   release:
     types: [published]
@@ -32,8 +28,6 @@ jobs:
   publish:
     name: Build and submit example app
     runs-on: ubuntu-latest
-    # An EAS build for two platforms is slow, but not this slow. Without a
-    # timeout a stuck run holds the concurrency lock for six hours.
     timeout-minutes: 120
     permissions:
       contents: write
@@ -58,20 +52,12 @@ jobs:
             exit 1
           fi
 
-          # A semver version with a prerelease identifier (v6.0.0-alpha.1) goes
-          # to the test tracks, a stable one (v6.0.0) goes to production. This
-          # is derived from the tag rather than from the release's prerelease
-          # flag on purpose: .release-it.json currently pins every release to
-          # `preRelease: true` for the 6.0 alpha cycle, so that flag stays true
-          # for a stable release until somebody remembers to revert it.
           if [ "${TAG#*-}" != "$TAG" ]; then
             profile=preview
           else
             profile=production
           fi
 
-          # A release always publishes both platforms. Only a manual retry can
-          # narrow it, to avoid resubmitting a platform that already shipped.
           platform=${PLATFORM:-all}
 
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
@@ -93,9 +79,6 @@ jobs:
             exit 1
           fi
 
-      # A release that changes no native code can ship over the air instead of
-      # going through a store. `runtimeVersion` is on the fingerprint policy, so
-      # a build and an update only match when their native side is identical.
       - name: Decide between an update and a build
         id: decide
         working-directory: ./example
@@ -112,8 +95,6 @@ jobs:
           for platform in $platforms; do
             hash=$(npx expo-updates fingerprint:generate --platform "$platform" | jq -r '.hash')
 
-            # A build already on the store with this exact native fingerprint can
-            # run the new JavaScript as it is.
             existing=$(eas build:list \
               --platform "$platform" \
               --channel "$PROFILE" \
@@ -134,13 +115,10 @@ jobs:
             echo "No native change, publishing an update instead."
           fi
 
-      # Only a build carries a version to the stores, so only a build bumps one.
       - name: Bump example app version
         if: steps.decide.outputs.build == 'true'
         run: node scripts/bump-example-version.ts example/app.json
 
-      # Build numbers are assigned remotely by EAS (`appVersionSource: remote`),
-      # so a retry can never collide with an already submitted build.
       - name: Build and submit to the app stores
         id: submit
         if: steps.decide.outputs.build == 'true'
@@ -168,10 +146,6 @@ jobs:
             --message "$TAG" \
             --non-interactive
 
-      # Runs whenever the submit step ran at all, however it ended. `eas build`
-      # can ship one platform and fail the other, and cancelling the workflow
-      # does not cancel the build on EAS, so in every one of those cases a
-      # version may have reached a store and has to be recorded.
       - name: Open example app version bump pull request
         if: ${{ always() && (steps.submit.outcome == 'success' || steps.submit.outcome == 'failure' || steps.submit.outcome == 'cancelled') }}
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
@@ -225,14 +199,9 @@ jobs:
   report-failure:
     name: Report example app deployment problem
     needs: publish
-    # Not `failure()`: that misses a cancelled run, and cancellation is the case
-    # most likely to leave a build running on EAS with nobody told about it.
     if: ${{ always() && needs.publish.result != 'success' }}
     runs-on: ubuntu-latest
     steps:
-      # Whoever published the release is already emailed that this run failed.
-      # What that email cannot tell them is that their release is fine, so say
-      # it here, where they land when they follow it.
       - name: Say that the library release is unaffected
         env:
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
@@ -240,7 +209,6 @@ jobs:
           echo "::error::The example app deployment for $TAG did not finish. The $TAG library release itself published successfully and is not affected."
 
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-          ## The \`$TAG\` library release is not affected
 
           It is published on npm and on GitHub Releases exactly as expected, and
           **nothing here changes that**. This workflow only ever runs *after* a
@@ -249,8 +217,6 @@ jobs:
           - Users of the library need to do nothing. Installing \`react-native-paper\` is unaffected.
           - Nothing has to be re-released to fix this.
           - Only the demo app we ship to the App Store and Play Store did not update.
-
-          ## Before re-running
 
           **Check the EAS dashboard and the stores first.** A build may already
           have been submitted, and submitting the same version twice is the one
