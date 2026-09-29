@@ -161,9 +161,12 @@ describe('Tooltip', () => {
 
     describe('pressOut', () => {
       it('hides the tooltip when the user stop pressing the component', async () => {
+        // A zero leaveTouchDelay is unobservable here: userEvent flushes
+        // zero-delay timers before resolving, so the tooltip would already be
+        // hidden by the time findByText runs.
         const {
           wrapper: { queryByText, getByText, findByText },
-        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
+        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 100 });
 
         await userEvent.longPress(getTrigger(getByText));
 
