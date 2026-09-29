@@ -115,6 +115,11 @@ const pages = {
     MenuItem: 'Menu/MenuItem',
   },
   Modal: 'Modal',
+  NavigationRail: {
+    NavigationRail: 'NavigationRail/NavigationRail',
+    NavigationRailItem: 'NavigationRail/NavigationRailItem',
+    NavigationRailModal: 'NavigationRail/NavigationRailModal',
+  },
   Portal: {
     Portal: {
       source: 'Portal/Portal',
