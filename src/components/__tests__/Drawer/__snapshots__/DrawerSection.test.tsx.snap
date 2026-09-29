@@ -13,19 +13,19 @@ exports[`DrawerSection renders properly 1`] = `
 >
   <View />
   <View
+    aria-hidden={true}
     style={
       [
         {
-          "backgroundColor": "rgba(202, 196, 208, 1)",
-          "height": 0.5,
-        },
-        undefined,
-        {
-          "marginLeft": 16,
-          "marginRight": 16,
-        },
-        {
           "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(202, 196, 208, 1)",
+        },
+        false,
+        {
+          "marginEnd": 16,
+          "marginStart": 16,
         },
         [
           {
