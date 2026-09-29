@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -46,6 +46,30 @@ it('renders disabled icon button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('lets a caller-supplied hitSlop win even while disabled', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" disabled hitSlop={2} />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('computes hitSlop from explicit width/height rather than the button size', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" width={20} height={20} />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('drops hitSlop when explicit width/height already meet the 48dp minimum', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" width={48} height={48} />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders icon change animated', async () => {
   const tree = (await render(<IconButton icon="camera" animated />)).toJSON();
 
@@ -78,6 +102,24 @@ it('renders icon button with small border radius', async () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('clips to a custom corner radius', async () => {
+  await render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      borderTopLeftRadius={0}
+    />
+  );
+
+  // The container stopped clipping so the touch target can escape it, so the
+  // touchable has to take the shape itself, corners included.
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
+    borderTopLeftRadius: 0,
+  });
 });
 
 describe('getIconButtonColor - icon color', () => {

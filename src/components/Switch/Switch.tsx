@@ -30,6 +30,7 @@ import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
 
@@ -87,6 +88,13 @@ const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
   stateTokens.focusIndicator;
 const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
 const OVERLAY_TOP = (STATE_LAYER_SIZE - TRACK_HEIGHT) / 2;
+
+// The state layer is fixed size, so the slop to reach the 48dp minimum
+// interactive target is a constant rather than something to measure.
+const SWITCH_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  height: STATE_LAYER_SIZE,
+});
+const SWITCH_HIT_SLOP_INSET = SWITCH_HIT_SLOP?.top ?? 0;
 
 // Hold-then-grow: a brief delay before snapping to PRESSED_HANDLE so a quick
 // tap doesn't flash the press-grow visual.
@@ -375,11 +383,22 @@ const Switch = ({
         aria-checked={checked}
         aria-label={ariaLabel}
         testID={testID}
+        hitSlop={isDisabled ? undefined : SWITCH_HIT_SLOP}
         style={[
           styles.touchable,
           Platform.OS === 'web' ? webNoOutline : undefined,
         ]}
       >
+        {/* react-native-web removed `hitSlop` in 0.13.0 (same as
+            TouchableRipple), so web needs a real element the browser can
+            hit-test instead of a native responder inset. */}
+        {Platform.OS === 'web' && !isDisabled && (
+          <View
+            aria-hidden
+            style={styles.webTouchTarget}
+            testID={`${testID}-touch-target`}
+          />
+        )}
         <View
           style={[
             styles.track,
@@ -479,6 +498,14 @@ const styles = StyleSheet.create({
     height: STATE_LAYER_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+    ...(Platform.OS === 'web' && { position: 'relative' }),
+  },
+  webTouchTarget: {
+    position: 'absolute',
+    top: -SWITCH_HIT_SLOP_INSET,
+    bottom: -SWITCH_HIT_SLOP_INSET,
+    left: 0,
+    right: 0,
   },
   track: {
     width: TRACK_WIDTH,

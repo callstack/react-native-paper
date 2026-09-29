@@ -58,3 +58,11 @@ it('renders Checkbox with custom testID', async () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders disabled Checkbox', async () => {
+  const tree = (
+    await render(<Checkbox status="unchecked" disabled />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

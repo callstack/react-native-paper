@@ -82,4 +82,12 @@ describe('RadioButton', () => {
       expect(tree).toMatchSnapshot();
     });
   });
+
+  it('renders disabled RadioButton', async () => {
+    const tree = (
+      await render(<RadioButton value="first" disabled />)
+    ).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
