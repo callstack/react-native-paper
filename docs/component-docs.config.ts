@@ -33,11 +33,11 @@ type ComponentDocsConfig = {
 const pages = {
   ActivityIndicator: 'ActivityIndicator',
   Appbar: {
-    Appbar: 'Appbar/Appbar',
-    AppbarAction: 'Appbar/AppbarAction',
-    AppbarBackAction: 'Appbar/AppbarBackAction',
-    AppbarContent: 'Appbar/AppbarContent',
-    AppbarHeader: 'Appbar/AppbarHeader',
+    source: 'Appbar/Appbar',
+    // The default export is the memoized `MemoizedAppbar`, but the JSDoc
+    // lives on the inner `Appbar` declaration — same pattern as `Portal`
+    // and `Typography/Text` below.
+    component: 'Appbar',
   },
   Avatar: {
     AvatarIcon: 'Avatar/AvatarIcon',

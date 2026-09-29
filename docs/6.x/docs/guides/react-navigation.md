@@ -136,11 +136,7 @@ Now we will implement `CustomNavigationBar` using `AppBar` component:
 import { Appbar } from 'react-native-paper';
 
 export default function CustomNavigationBar() {
-  return (
-    <Appbar.Header>
-      <Appbar.Content title="My awesome app" />
-    </Appbar.Header>
-  );
+  return <Appbar variant="small" headline="My awesome app" />;
 }
 ```
 
@@ -154,11 +150,7 @@ import { getHeaderTitle } from '@react-navigation/elements';
 export default function CustomNavigationBar({ route, options }) {
   const title = getHeaderTitle(options, route.name);
 
-  return (
-    <Appbar.Header>
-      <Appbar.Content title={title} />
-    </Appbar.Header>
-  );
+  return <Appbar variant="small" headline={title} />;
 }
 ```
 
@@ -179,10 +171,13 @@ export default function CustomNavigationBar({
   const title = getHeaderTitle(options, route.name);
 
   return (
-    <Appbar.Header>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
-    </Appbar.Header>
+    <Appbar
+      variant="small"
+      headline={title}
+      leadingButton={
+        back ? { type: 'back', onPress: navigation.goBack } : undefined
+      }
+    />
   );
 }
 ```
@@ -194,8 +189,8 @@ export default function CustomNavigationBar({
 Another interesting pattern that can be implemented with `react-native-paper` and `react-navigation` is a "menu" button. Thanks to the `Menu` component we can add a nice looking pop-up to our `Appbar`. To implement this feature we need to make a couple of changes in `CustomNavigationBar`:
 
 - Render a `Menu` component
-- Pass `Appbar.Action` to the anchor prop
-- Add a state to control `Menu` visibility
+- Add a trailing action to `Appbar`
+- Store the action coordinates and menu visibility in state
 
 :::note
 To have properly working `Menu` component, remember to wrap your root component with the `PaperProvider`:
@@ -236,21 +231,41 @@ export default function CustomNavigationBar({
   back,
 }) {
   const [visible, setVisible] = React.useState(false);
+  const [menuAnchor, setMenuAnchor] = React.useState({ x: 0, y: 0 });
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
   const title = getHeaderTitle(options, route.name);
 
   return (
-    <Appbar.Header>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={title} />
+    <>
+      <Appbar
+        variant="small"
+        headline={title}
+        leadingButton={
+          back ? { type: 'back', onPress: navigation.goBack } : undefined
+        }
+        trailingActions={
+          back
+            ? []
+            : [
+                {
+                  key: 'more',
+                  icon: 'dots-vertical',
+                  'aria-label': 'More options',
+                  onPress: (event) => {
+                    setMenuAnchor({
+                      x: event.nativeEvent.pageX,
+                      y: event.nativeEvent.pageY,
+                    });
+                    openMenu();
+                  },
+                },
+              ]
+        }
+      />
       {!back ? (
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={<Appbar.Action icon="dots-vertical" onPress={openMenu} />}
-        >
+        <Menu visible={visible} onDismiss={closeMenu} anchor={menuAnchor}>
           <Menu.Item
             onPress={() => {
               console.log('Option 1 was pressed');
@@ -272,7 +287,7 @@ export default function CustomNavigationBar({
           />
         </Menu>
       ) : null}
-    </Appbar.Header>
+    </>
   );
 }
 ```
