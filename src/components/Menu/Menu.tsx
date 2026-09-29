@@ -82,14 +82,14 @@ export type Props = {
   contentStyle?: StyleProp<SurfaceStyle>;
   style?: StyleProp<ViewStyle>;
   /**
-   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * Elevation level of the menu's content. Shadow styles are calculated based on this value. The menu background is `theme.colors.surfaceContainer` per the MD3 spec and is not affected by `elevation`. By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
   elevation?: Elevation;
   /**
    * Mode of the menu's content.
-   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   * - `elevated` - Surface with a shadow corresponding to set `elevation` value.
+   * - `flat` - Surface without a shadow.
    *
    * @supported Available in v5.x with theme version 3
    */
@@ -704,6 +704,7 @@ const Menu = ({
             >
               <Surface
                 mode={mode}
+                container="surfaceContainer"
                 borderRadius={theme.shapes.corner.extraSmall}
                 style={[
                   styles.shadowMenuContainer,
