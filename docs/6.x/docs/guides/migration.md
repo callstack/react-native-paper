@@ -289,6 +289,33 @@ The misspelled `traileringIcon` props have been renamed:
 />
 ```
 
+### FAB
+
+To preserve the v5 FAB color treatment, update the `variant` prop:
+
+| v5 | v6 |
+| --- | --- |
+| `primary` | `primaryContainer` |
+| `secondary` | `secondaryContainer` |
+| `tertiary` | `tertiaryContainer` |
+
+If you omit `variant`, no change is needed. Replace `variant="surface"` with
+one of the supported color variants, such as `primaryContainer`.
+
+For custom colors, replace `color` with `contentColor` and move
+`style.backgroundColor` to `containerColor`:
+
+```diff
+<FAB
+  icon="plus"
+- color="#ffffff"
+- style={{ backgroundColor: '#6750a4', position: 'absolute', bottom: 16, right: 16 }}
++ contentColor="#ffffff"
++ containerColor="#6750a4"
++ style={{ position: 'absolute', bottom: 16, right: 16 }}
+/>
+```
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.

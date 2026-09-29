@@ -1,10 +1,43 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { LightTheme } from '../../theme/schemes';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { getDimensions, resolveColors } from '../FAB/utils';
 
 describe('resolveColors', () => {
-  it('returns theme colors for default variant (tonalPrimary)', () => {
+  it.each([false, true])(
+    'resolves every FAB color preset (dark=%s)',
+    (dark) => {
+      const theme = dark ? DarkTheme : LightTheme;
+      const variants = {
+        primary: ['primary', 'onPrimary'],
+        primaryContainer: ['primaryContainer', 'onPrimaryContainer'],
+        secondary: ['secondary', 'onSecondary'],
+        secondaryContainer: ['secondaryContainer', 'onSecondaryContainer'],
+        tertiary: ['tertiary', 'onTertiary'],
+        tertiaryContainer: ['tertiaryContainer', 'onTertiaryContainer'],
+        branded: ['surfaceContainerHigh', 'onSurface'],
+      } as const;
+
+      const variantNames = [
+        'primary',
+        'primaryContainer',
+        'secondary',
+        'secondaryContainer',
+        'tertiary',
+        'tertiaryContainer',
+        'branded',
+      ] as const;
+      for (const variant of variantNames) {
+        const [container, content] = variants[variant];
+        expect(resolveColors({ theme, variant })).toEqual({
+          container: theme.colors[container],
+          content: theme.colors[content],
+        });
+      }
+    }
+  );
+
+  it('returns theme colors for default variant (primaryContainer)', () => {
     const colors = resolveColors({ theme: LightTheme });
     expect(colors).toEqual({
       container: LightTheme.colors.primaryContainer,
@@ -36,10 +69,10 @@ describe('resolveColors', () => {
     });
   });
 
-  it('returns theme colors for tonalSecondary variant', () => {
+  it('returns theme colors for secondaryContainer variant', () => {
     const colors = resolveColors({
       theme: LightTheme,
-      variant: 'tonalSecondary',
+      variant: 'secondaryContainer',
     });
     expect(colors).toEqual({
       container: LightTheme.colors.secondaryContainer,
@@ -47,10 +80,10 @@ describe('resolveColors', () => {
     });
   });
 
-  it('returns theme colors for tonalTertiary variant', () => {
+  it('returns theme colors for tertiaryContainer variant', () => {
     const colors = resolveColors({
       theme: LightTheme,
-      variant: 'tonalTertiary',
+      variant: 'tertiaryContainer',
     });
     expect(colors).toEqual({
       container: LightTheme.colors.tertiaryContainer,

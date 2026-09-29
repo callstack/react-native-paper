@@ -29,7 +29,7 @@ import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { Elevation, ThemeProp } from '../../theme/types';
+import type { ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -46,7 +46,7 @@ export type ShellProps = {
    */
   label?: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -77,11 +77,6 @@ export type ShellProps = {
    * Trailing-padding override.
    */
   trailing?: number;
-  /**
-   * Resting elevation level. Defaults to the FAB's enabled-state elevation.
-   * Pass `0` to disable the shadow entirely.
-   */
-  elevation?: Elevation;
   /**
    * When `false`, the shell animates out (scale + alpha) and stops accepting
    * touches.
@@ -186,7 +181,7 @@ export type ShellProps = {
 const Shell = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   containerColor,
   contentColor,
@@ -194,7 +189,6 @@ const Shell = ({
   iconSize,
   leading,
   trailing,
-  elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
   'aria-label': ariaLabel = label,
@@ -217,6 +211,19 @@ const Shell = ({
   ref,
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const touchableRef = React.useRef<View>(null);
+  const previousFocusedElement = React.useRef<HTMLElement | null>(null);
+
+  const resolvedElevation =
+    visible && onPress
+      ? pressed
+        ? Tokens.stateElevation.pressed
+        : hovered
+          ? Tokens.stateElevation.hover
+          : Tokens.stateElevation.enabled
+      : Tokens.stateElevation.enabled;
 
   const dimensions = React.useMemo(
     () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
@@ -299,6 +306,38 @@ const Shell = ({
 
   const { focusedSV, onFocus, onBlur } = useFocusRing();
 
+  React.useEffect(() => {
+    if (!visible) {
+      if (Platform.OS === 'web' && typeof document !== 'undefined') {
+        const target: unknown = touchableRef.current;
+        if (
+          target instanceof HTMLElement &&
+          target === document.activeElement
+        ) {
+          const previous = previousFocusedElement.current;
+          if (
+            previous?.isConnected &&
+            !previous.closest('[aria-hidden="true"], [inert]')
+          ) {
+            previous.focus({ preventScroll: true });
+          }
+          // The previous element may have been removed or become unfocusable.
+          if (target === document.activeElement) target.blur();
+        }
+      }
+      setHovered(false);
+      setPressed(false);
+      onBlur();
+    }
+  }, [visible, onBlur]);
+
+  React.useEffect(() => {
+    if (!onPress) {
+      setHovered(false);
+      setPressed(false);
+    }
+  }, [onPress]);
+
   const focusRingStyle = useAnimatedStyle(
     () => ({
       opacity: focusedSV.value ? 1 : 0,
@@ -310,6 +349,7 @@ const Shell = ({
   return (
     <Surface
       ref={ref}
+      aria-hidden={visible ? undefined : true}
       backgroundColor={containerBg}
       borderRadius={borderRadius}
       style={[
@@ -318,16 +358,35 @@ const Shell = ({
         outerStyle,
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
-      elevation={elevation}
+      elevation={resolvedElevation}
       theme={theme}
     >
       <Animated.View style={[styles.clip, clipStyle]}>
         {overlay}
         <TouchableRipple
+          ref={Platform.OS === 'web' ? touchableRef : undefined}
           borderless
           background={background}
-          onPress={onPress}
-          onFocus={onFocus}
+          onPress={visible ? onPress : undefined}
+          disabled={!onPress}
+          accessible={visible}
+          focusable={visible && !!onPress}
+          tabIndex={visible ? undefined : -1}
+          onHoverIn={() => setHovered(true)}
+          onHoverOut={() => setHovered(false)}
+          onPressIn={() => setPressed(true)}
+          onPressOut={() => setPressed(false)}
+          onFocus={(event) => {
+            if (Platform.OS === 'web') {
+              const previous =
+                'relatedTarget' in event.nativeEvent
+                  ? event.nativeEvent.relatedTarget
+                  : null;
+              previousFocusedElement.current =
+                previous instanceof HTMLElement ? previous : null;
+            }
+            onFocus();
+          }}
           onBlur={onBlur}
           aria-label={ariaLabel}
           role="button"
