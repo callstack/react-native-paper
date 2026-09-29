@@ -44,6 +44,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
+import ToolbarExample from './Examples/ToolbarExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
@@ -82,6 +83,7 @@ export const mainExamples = {
   Switch: SwitchExample,
   Text: TextExample,
   TextInput: TextInputExample,
+  Toolbar: ToolbarExample,
   TooltipExample,
   TouchableRipple: TouchableRippleExample,
   Theme: ThemeExample,
