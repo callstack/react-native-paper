@@ -90,15 +90,15 @@ export const themeColors = {
     },
   },
   Card: {
-    contained: {
-      backgroundColor: 'theme.colors.surfaceVariant',
+    filled: {
+      backgroundColor: 'theme.colors.surfaceContainerHighest',
     },
     elevated: {
-      backgroundColor: 'theme.colors.elevation.level1',
+      backgroundColor: 'theme.colors.surfaceContainerLow',
     },
     outlined: {
       backgroundColor: 'theme.colors.surface',
-      borderColor: 'theme.colors.outline',
+      borderColor: 'theme.colors.outlineVariant',
     },
   },
   Dialog: {

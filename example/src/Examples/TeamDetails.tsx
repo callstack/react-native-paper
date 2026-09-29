@@ -79,41 +79,61 @@ const News = () => {
           </Chip>
         </ScrollView>
         <View style={styles.cardContainer}>
-          <Card style={styles.card} mode="contained">
-            <Card.Cover source={require('../../assets/images/players.jpg')} />
-            <Card.Title
-              title="Winter transfer window"
-              titleVariant="headlineMedium"
-            />
-            <Card.Content>
-              <Text variant="bodyMedium">
-                Which soccer players are switching teams? From the Premier
-                League, La Liga and beyond, here is a list of players on the
-                move this summer.
-              </Text>
-            </Card.Content>
-            <Card.Actions>
-              <Button onPress={() => {}}>Share</Button>
-              <Button onPress={() => {}}>Read more</Button>
-            </Card.Actions>
-          </Card>
-          <Card style={styles.card} mode="contained">
-            <Card.Cover source={require('../../assets/images/players-2.jpg')} />
-            <Card.Title
-              title="John Doe's injury"
-              titleVariant="headlineMedium"
-            />
-            <Card.Content>
-              <Text variant="bodyMedium">
-                Medical tests show that Doe has injured the tendon in his left
-                hamstring, and in the next few days will...
-              </Text>
-            </Card.Content>
-            <Card.Actions>
-              <Button onPress={() => {}}>Share</Button>
-              <Button onPress={() => {}}>Read more</Button>
-            </Card.Actions>
-          </Card>
+          <Card
+            style={styles.card}
+            media={
+              <Card.Cover source={require('../../assets/images/players.jpg')} />
+            }
+            header={
+              <Card.Title
+                title="Winter transfer window"
+                titleVariant="headlineMedium"
+              />
+            }
+            content={
+              <Card.Content>
+                <Text variant="bodyMedium">
+                  Which soccer players are switching teams? From the Premier
+                  League, La Liga and beyond, here is a list of players on the
+                  move this summer.
+                </Text>
+              </Card.Content>
+            }
+            actions={
+              <Card.Actions>
+                <Button onPress={() => {}}>Share</Button>
+                <Button onPress={() => {}}>Read more</Button>
+              </Card.Actions>
+            }
+          />
+          <Card
+            style={styles.card}
+            media={
+              <Card.Cover
+                source={require('../../assets/images/players-2.jpg')}
+              />
+            }
+            header={
+              <Card.Title
+                title="John Doe's injury"
+                titleVariant="headlineMedium"
+              />
+            }
+            content={
+              <Card.Content>
+                <Text variant="bodyMedium">
+                  Medical tests show that Doe has injured the tendon in his left
+                  hamstring, and in the next few days will...
+                </Text>
+              </Card.Content>
+            }
+            actions={
+              <Card.Actions>
+                <Button onPress={() => {}}>Share</Button>
+                <Button onPress={() => {}}>Read more</Button>
+              </Card.Actions>
+            }
+          />
         </View>
       </ScreenWrapper>
       <FAB icon="magnify" onPress={() => {}} visible style={styles.fab} />

@@ -145,15 +145,14 @@ const TooltipExample = () => {
         </List.Section>
         <List.Section title="Card">
           <Tooltip title="Cafeteria, 1st floor">
-            <Card style={styles.cardContainer}>
-              <Card.Title
-                title="Lunch break"
-                subtitle="1:00-2:00 PM"
-                left={(props) => (
-                  <Avatar.Icon {...props} icon="food-fork-drink" />
-                )}
-              />
-            </Card>
+            <Card
+              style={styles.cardContainer}
+              title="Lunch break"
+              subtitle="1:00-2:00 PM"
+              leading={(props) => (
+                <Avatar.Icon {...props} icon="food-fork-drink" />
+              )}
+            />
           </Tooltip>
         </List.Section>
       </ScreenWrapper>

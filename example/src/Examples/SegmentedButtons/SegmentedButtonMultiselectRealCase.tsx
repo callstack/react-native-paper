@@ -59,18 +59,21 @@ const SegmentedButtonMultiselectRealCase = () => {
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => {
           return (
-            <Card mode="contained" style={styles.card}>
-              <Card.Content style={styles.content}>
-                <Card.Cover style={styles.cover} source={item.cover} />
-                <Card.Title
-                  title={item.name}
-                  subtitle={'$'.repeat(item.price)}
-                  titleVariant="titleMedium"
-                  style={styles.title}
-                  right={() => <IconButton icon={'bookmark-outline'} />}
-                />
-              </Card.Content>
-            </Card>
+            <Card
+              style={styles.card}
+              content={
+                <Card.Content style={styles.content}>
+                  <Card.Cover style={styles.cover} source={item.cover} />
+                  <Card.Title
+                    title={item.name}
+                    subtitle={'$'.repeat(item.price)}
+                    titleVariant="titleMedium"
+                    style={styles.title}
+                    right={() => <IconButton icon={'bookmark-outline'} />}
+                  />
+                </Card.Content>
+              }
+            />
           );
         }}
       />
