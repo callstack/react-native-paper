@@ -1,6 +1,6 @@
 export const staticCode = `import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Provider, BottomNavigation } from 'react-native-paper';
+import { Provider, NavigationBar } from 'react-native-paper';
 import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
 import {
   CommonActions,
@@ -25,22 +25,19 @@ function SettingsScreen() {
 
 const MyTabs = createBottomTabNavigator({
   screenOptions: {
-    animation: 'shift',
   },
   tabBar: ({ navigation, state, descriptors, insets }) => (
-    <BottomNavigation.Bar
+    <NavigationBar
       navigationState={state}
       safeAreaInsets={insets}
-      onTabPress={({ route, preventDefault }) => {
+      onTabPress={({ route }) => {
         const event = navigation.emit({
           type: 'tabPress',
           target: route.key,
           canPreventDefault: true,
         });
 
-        if (event.defaultPrevented) {
-          preventDefault();
-        } else {
+        if (!event.defaultPrevented) {
           navigation.dispatch({
             ...CommonActions.navigate(route.name, route.params),
             target: state.key,
@@ -102,7 +99,7 @@ export default function App() {
 export const dynamicCode = `import { Text, View } from 'react-native';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Provider, BottomNavigation } from 'react-native-paper';
+import { Provider, NavigationBar } from 'react-native-paper';
 import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
 
 function HomeScreen() {
@@ -129,28 +126,25 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
-            animation: 'shift',
           }}
           tabBar={({ navigation, state, descriptors, insets }) => (
-            <BottomNavigation.Bar
+            <NavigationBar
               navigationState={state}
               safeAreaInsets={insets}
-              onTabPress={({ route, preventDefault }) => {
+              onTabPress={({ route }) => {
                 const event = navigation.emit({
                   type: 'tabPress',
                   target: route.key,
                   canPreventDefault: true,
                 });
 
-                if (event.defaultPrevented) {
-                  preventDefault();
-                } else {
-                  navigation.dispatch({
-                    ...CommonActions.navigate(route.name, route.params),
-                    target: state.key,
-                  });
-                }
-              }}
+                if (!event.defaultPrevented) {
+                navigation.dispatch({
+                  ...CommonActions.navigate(route.name, route.params),
+                  target: state.key,
+                });
+              }
+            }}
               renderIcon={({ route, focused, color }) =>
                 descriptors[route.key].options.tabBarIcon?.({
                   focused,
