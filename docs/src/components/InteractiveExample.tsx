@@ -41,9 +41,18 @@ type InteractiveExampleProps = React.PropsWithChildren<{
  */
 const InteractiveExample = ({ title, children }: InteractiveExampleProps) => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
+  // The server always renders light colors, so remount to repaint in dark mode.
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
-    <Provider theme={isDarkTheme ? DarkTheme : LightTheme}>
+    <Provider
+      key={String(mounted)}
+      theme={isDarkTheme ? DarkTheme : LightTheme}
+    >
       <figure className="paper-interactive-example">
         {title ? (
           <figcaption className="paper-interactive-example__title">
