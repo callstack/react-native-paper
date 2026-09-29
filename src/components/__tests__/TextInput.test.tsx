@@ -20,6 +20,15 @@ import type { TestInstance } from 'test-renderer';
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
+import {
+  ACTIVE_LABEL_FONT_SIZE,
+  FILLED_ACTIVE_LABEL_TOP_POSITION,
+  FILLED_INACTIVE_LABEL_TOP_POSITION,
+  INACTIVE_LABEL_FONT_SIZE,
+  OUTLINED_ACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
+} from '../TextInput/constants';
 import type {
   TextInputRenderProps,
   TextInputHandles,
@@ -53,6 +62,24 @@ const getOuterTextInputPressable = (root: TestInstance | null) => {
   }
 
   return pressable;
+};
+
+/** The label's animated wrapper has no public testID — it's marked `aria-hidden`. */
+const getLabelWrapper = (root: TestInstance | null) => {
+  const [wrapper] =
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace non-accessible label wrapper lookup with a public behavior assertion.
+    root?.queryAll(
+      (instance) =>
+        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+        instance.props['aria-hidden'] === true,
+      { includeSelf: true }
+    ) ?? [];
+
+  if (!wrapper) {
+    throw new Error('Expected label wrapper');
+  }
+
+  return wrapper;
 };
 
 const getConstantsOriginal = I18nManager.getConstants.bind(I18nManager);
@@ -607,6 +634,90 @@ it('invokes onFocus and onBlur on the TextInput', async () => {
 
   expect(onFocus).toHaveBeenCalledTimes(1);
   expect(onBlur).toHaveBeenCalledTimes(1);
+});
+
+it('floats the label up and shrinks it on focus, and back down on blur when empty (filled)', async () => {
+  const { root } = await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+  const label = screen.getByText('Email', includeHiddenElements);
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
+
+  await fireEvent(input, 'focus');
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: ACTIVE_LABEL_FONT_SIZE });
+
+  await fireEvent(input, 'blur');
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
+});
+
+it('keeps the label floated after blur when the field already has a value (filled)', async () => {
+  const { root } = await render(
+    <TextInput
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+
+  await fireEvent(input, 'focus');
+  await fireEvent(input, 'blur');
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: ACTIVE_LABEL_FONT_SIZE,
+  });
+});
+
+it('floats the label up and slides it into the outline gap on focus (outlined)', async () => {
+  const { root } = await render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: OUTLINED_INACTIVE_LABEL_TOP_POSITION,
+    transform: [{ translateX: 0 }],
+  });
+
+  await fireEvent(input, 'focus');
+
+  expect(getLabelWrapper(root)).toHaveStyle({
+    top: OUTLINED_ACTIVE_LABEL_TOP_POSITION,
+    transform: [
+      { translateX: -OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY },
+    ],
+  });
 });
 
 it('focuses the TextInput when the outer Pressable is pressed', async () => {

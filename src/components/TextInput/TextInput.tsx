@@ -32,12 +32,6 @@ export type TextInputAnimationState = {
   animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
 };
 
-export type TextInputAnimationHandlers = {
-  runFocusAnimation: (hasText: boolean) => void;
-  runBlurAnimation: (hasText: boolean) => void;
-  syncFloatToValue: (hasText: boolean) => void;
-};
-
 export type TextInputFlags = {
   isRTL: boolean;
   isDisabled: boolean;

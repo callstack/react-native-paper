@@ -1,3 +1,8 @@
+import {
+  cubicBezier,
+  type CSSTransitionProperties,
+} from 'react-native-reanimated';
+
 import type {
   MotionConfig,
   MotionDuration,
@@ -109,5 +114,35 @@ export function toRawSpring({
     stiffness,
     damping: ratio * 2 * Math.sqrt(stiffness),
     mass: 1, // as per MD specs
+  };
+}
+
+/**
+ * Builds the three CSS-transition style props (duration, easing, property)
+ * from theme motion tokens, so components don't re-derive them by hand.
+ * Zeroes the duration when `reduceMotion` is set, per the CSS tier's
+ * reduce-motion contract (a Reanimated `ReduceMotion` option doesn't apply
+ * to CSS transitions).
+ *
+ * @example
+ * <Animated.View
+ *   style={[
+ *     { opacity: visible ? 1 : 0 },
+ *     getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
+ *   ]}
+ * />
+ */
+export function getTransition<S extends object = Record<string, unknown>>(
+  theme: { motion: MotionConfig },
+  property: NonNullable<CSSTransitionProperties<S>['transitionProperty']>,
+  durationToken: keyof MotionDuration,
+  easingToken: keyof MotionEasing,
+  reduceMotion: boolean
+): Required<Pick<CSSTransitionProperties<S>, 'transitionProperty'>> &
+  CSSTransitionProperties<S> {
+  return {
+    transitionProperty: property,
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration[durationToken],
+    transitionTimingFunction: cubicBezier(...theme.motion.easing[easingToken]),
   };
 }
