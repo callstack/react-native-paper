@@ -6,12 +6,13 @@ import {
 } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
+import Portal from '../Portal/Portal';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -20,12 +21,18 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe('Dialog', () => {
-  it('should render passed children', async () => {
+  it('renders passed children', async () => {
     await render(
-      <Dialog visible testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible testID="dialog">
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog')).toHaveTextContent(
@@ -33,84 +40,140 @@ describe('Dialog', () => {
     );
   });
 
-  it('should call onDismiss when dismissable', async () => {
+  it('invokes onDismiss when the visually hidden dismiss button is pressed', async () => {
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible onDismiss={onDismiss} dismissable>
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call onDismiss when dismissable is false', async () => {
+  it('does not invoke onDismiss for a non-dismissible dialog when the backdrop is pressed', async () => {
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          overlayTestID="backdrop"
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(0);
   });
 
-  it('should call onDismiss on Android back button when dismissable is false but dismissableBackButton is true', async () => {
-    Platform.OS = 'android';
+  it('invokes onDismiss on Android back button press when only dismissableBackButton is true', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog
-        visible
-        onDismiss={onDismiss}
-        dismissable={false}
-        dismissableBackButton
-        testID="dialog"
-      >
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          overlayTestID="backdrop"
+          dismissableBackButton
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(0);
 
     await act(() => {
       BackHandler.mockPressBack();
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', async () => {
+  it('applies top margin to the first child', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
-          <Text>Test Dialog Content</Text>
-        </Dialog.Title>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Title testID="dialog-content">
+            <Text>Test Dialog Content</Text>
+          </Dialog.Title>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
       marginTop: 24,
     });
   });
+
+  it('uses the title as the accessible name on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Title>Alert</Dialog.Title>
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Alert')).toHaveProp('role', 'dialog');
+  });
+
+  it('uses aria-label over the title as the accessible name', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog visible aria-label="Confirm deletion">
+          <Dialog.Title>Alert</Dialog.Title>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Confirm deletion')).toHaveProp(
+      'role',
+      'dialog'
+    );
+    expect(screen.queryByLabelText('Alert')).not.toBeOnTheScreen();
+  });
 });
 
 describe('DialogActions', () => {
-  it('should render passed children', async () => {
+  it('renders passed children', async () => {
     await render(
       <Dialog.Actions>
         <Button testID="button-cancel">Cancel</Button>
@@ -122,7 +185,7 @@ describe('DialogActions', () => {
     expect(screen.getByTestId('button-ok')).toBeOnTheScreen();
   });
 
-  it('should apply default styles', async () => {
+  it('applies default styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
         <Button>Cancel</Button>
@@ -141,7 +204,7 @@ describe('DialogActions', () => {
     expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
   });
 
-  it('should apply custom styles', async () => {
+  it('applies custom styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
         <Button style={styles.spacing}>Cancel</Button>

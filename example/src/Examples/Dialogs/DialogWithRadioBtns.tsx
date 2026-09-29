@@ -3,7 +3,6 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 
 import {
   Button,
-  Portal,
   Dialog,
   RadioButton,
   TouchableRipple,
@@ -22,73 +21,71 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
   const [checked, setChecked] = React.useState<CheckedState>('normal');
 
   return (
-    <Portal>
-      <Dialog onDismiss={close} visible={visible}>
-        <Dialog.Title>Choose an option</Dialog.Title>
-        <Dialog.ScrollArea style={styles.container}>
-          <ScrollView>
-            <View>
-              <TouchableRipple onPress={() => setChecked('normal')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="normal"
-                      status={checked === 'normal' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 1
-                  </TextComponent>
+    <Dialog onDismiss={close} visible={visible}>
+      <Dialog.Title>Choose an option</Dialog.Title>
+      <Dialog.ScrollArea style={styles.container}>
+        <ScrollView>
+          <View>
+            <TouchableRipple onPress={() => setChecked('normal')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="normal"
+                    status={checked === 'normal' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('second')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="second"
-                      status={checked === 'second' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 2
-                  </TextComponent>
+                <TextComponent isSubheading style={styles.text}>
+                  Option 1
+                </TextComponent>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('second')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="second"
+                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('third')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="third"
-                      status={checked === 'third' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 3
-                  </TextComponent>
+                <TextComponent isSubheading style={styles.text}>
+                  Option 2
+                </TextComponent>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('third')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="third"
+                    status={checked === 'third' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('fourth')}>
-                <View style={styles.row}>
-                  <View pointerEvents="none">
-                    <RadioButton
-                      value="fourth"
-                      status={checked === 'fourth' ? 'checked' : 'unchecked'}
-                    />
-                  </View>
-                  <TextComponent isSubheading style={styles.text}>
-                    Option 4
-                  </TextComponent>
+                <TextComponent isSubheading style={styles.text}>
+                  Option 3
+                </TextComponent>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => setChecked('fourth')}>
+              <View style={styles.row}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="fourth"
+                    status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                  />
                 </View>
-              </TouchableRipple>
-            </View>
-          </ScrollView>
-        </Dialog.ScrollArea>
-        <Dialog.Actions>
-          <Button onPress={close}>Cancel</Button>
-          <Button onPress={close}>Ok</Button>
-        </Dialog.Actions>
-      </Dialog>
-    </Portal>
+                <TextComponent isSubheading style={styles.text}>
+                  Option 4
+                </TextComponent>
+              </View>
+            </TouchableRipple>
+          </View>
+        </ScrollView>
+      </Dialog.ScrollArea>
+      <Dialog.Actions>
+        <Button onPress={close}>Cancel</Button>
+        <Button onPress={close}>Ok</Button>
+      </Dialog.Actions>
+    </Dialog>
   );
 };
 

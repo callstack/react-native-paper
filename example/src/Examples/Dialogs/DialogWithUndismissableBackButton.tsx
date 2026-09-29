@@ -2,17 +2,20 @@ import { Button, Dialog, Palette } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
-const UndismissableDialog = ({
+const DialogWithUndismissableBackButton = ({
   visible,
   close,
 }: {
   visible: boolean;
   close: () => void;
 }) => (
-  <Dialog onDismiss={close} visible={visible} dismissable={false}>
+  <Dialog onDismiss={close} visible={visible} dismissableBackButton={false}>
     <Dialog.Title>Alert</Dialog.Title>
     <Dialog.Content>
-      <TextComponent>This is an undismissable dialog!!</TextComponent>
+      <TextComponent>
+        This dialog can be dismissed by tapping outside, however the hardware
+        back button will not close it!
+      </TextComponent>
     </Dialog.Content>
     <Dialog.Actions>
       <Button textColor={Palette.tertiary50} disabled>
@@ -23,4 +26,4 @@ const UndismissableDialog = ({
   </Dialog>
 );
 
-export default UndismissableDialog;
+export default DialogWithUndismissableBackButton;
