@@ -54,7 +54,6 @@ exports[`Switch render renders disabled off 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -189,29 +188,6 @@ exports[`Switch render renders disabled off 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -269,7 +245,6 @@ exports[`Switch render renders disabled on 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -384,29 +359,6 @@ exports[`Switch render renders disabled on 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -446,6 +398,14 @@ exports[`Switch render renders off 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    hitSlop={
+      {
+        "bottom": 4,
+        "left": 0,
+        "right": 0,
+        "top": 4,
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -464,7 +424,6 @@ exports[`Switch render renders off 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -582,29 +541,6 @@ exports[`Switch render renders off 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -644,6 +580,14 @@ exports[`Switch render renders on 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    hitSlop={
+      {
+        "bottom": 4,
+        "left": 0,
+        "right": 0,
+        "top": 4,
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -662,7 +606,6 @@ exports[`Switch render renders on 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -760,29 +703,6 @@ exports[`Switch render renders on 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -822,6 +742,14 @@ exports[`Switch render renders with checked icon 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    hitSlop={
+      {
+        "bottom": 4,
+        "left": 0,
+        "right": 0,
+        "top": 4,
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -840,7 +768,6 @@ exports[`Switch render renders with checked icon 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -1009,29 +936,6 @@ exports[`Switch render renders with checked icon 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1071,6 +975,14 @@ exports[`Switch render renders with per-state icons 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    hitSlop={
+      {
+        "bottom": 4,
+        "left": 0,
+        "right": 0,
+        "top": 4,
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1089,7 +1001,6 @@ exports[`Switch render renders with per-state icons 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
       ]
     }
   >
@@ -1258,28 +1169,5 @@ exports[`Switch render renders with per-state icons 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": -1,
-          "left": -5,
-          "right": -5,
-          "top": -1,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;

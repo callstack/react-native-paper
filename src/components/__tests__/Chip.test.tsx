@@ -309,3 +309,36 @@ describe('getChipColor - border color', () => {
     });
   });
 });
+
+describe('close affordance', () => {
+  it('fills the column the chip reserves for it', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByLabelText('Close')).toHaveStyle({
+      width: '100%',
+      height: '100%',
+    });
+  });
+
+  it('keeps the close glyph pinned right so it does not drift', async () => {
+    await render(
+      <Chip testID="chip" onPress={() => {}} onClose={() => {}}>
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByTestId('chip-close-icon')).toHaveStyle({
+      alignSelf: 'flex-end',
+    });
+  });
+
+  it('is not rendered without onClose', async () => {
+    await render(<Chip onPress={() => {}}>Example</Chip>);
+
+    expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
+  });
+});

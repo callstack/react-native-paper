@@ -233,6 +233,7 @@ const ListItem = ({
     <TouchableRipple
       {...rest}
       ref={ref}
+      focusRing="inward"
       style={[styles.container, style]}
       onPress={onPress}
       theme={theme}

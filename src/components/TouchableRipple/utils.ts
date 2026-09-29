@@ -2,6 +2,18 @@ import type { ColorValue } from 'react-native';
 
 import type { InternalTheme } from '../../theme/types';
 
+export type BorderRadiusStyle = {
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  borderTopStartRadius?: number;
+  borderTopEndRadius?: number;
+  borderBottomStartRadius?: number;
+  borderBottomEndRadius?: number;
+};
+
 const getUnderlayColor = ({
   calculatedRippleColor,
   underlayColor,

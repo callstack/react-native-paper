@@ -43,6 +43,9 @@ exports[`renders list item with custom content style 1`] = `
         },
         undefined,
       ],
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
     ]
   }
   testID="list-item"
@@ -377,6 +380,14 @@ exports[`renders list item with custom description 1`] = `
               accessible={true}
               collapsable={false}
               focusable={true}
+              hitSlop={
+                {
+                  "bottom": 8,
+                  "left": 0,
+                  "right": 0,
+                  "top": 8,
+                }
+              }
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -413,6 +424,7 @@ exports[`renders list item with custom description 1`] = `
                       "position": "relative",
                     },
                     {
+                      "minHeight": 32,
                       "paddingLeft": 0,
                     },
                     {

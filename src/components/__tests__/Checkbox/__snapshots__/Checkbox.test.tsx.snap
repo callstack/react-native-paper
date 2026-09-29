@@ -24,6 +24,14 @@ exports[`renders Checkbox with custom testID 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -47,7 +55,6 @@ exports[`renders Checkbox with custom testID 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -209,6 +216,14 @@ exports[`renders checked Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -232,7 +247,6 @@ exports[`renders checked Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -393,6 +407,14 @@ exports[`renders checked Checkbox with onPress 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -416,7 +438,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -553,14 +574,14 @@ exports[`renders checked Checkbox with onPress 1`] = `
 </View>
 `;
 
-exports[`renders indeterminate Checkbox 1`] = `
+exports[`renders disabled Checkbox 1`] = `
 <View
   accessibilityLiveRegion="polite"
   accessibilityState={
     {
       "busy": undefined,
-      "checked": "mixed",
-      "disabled": false,
+      "checked": false,
+      "disabled": true,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -601,6 +622,196 @@ exports[`renders indeterminate Checkbox 1`] = `
           "width": 40,
         },
         undefined,
+      ],
+    ]
+  }
+>
+  <View
+    pointerEvents="none"
+    style={
+      {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 2,
+            "height": 18,
+            "justifyContent": "center",
+            "overflow": "hidden",
+            "width": 18,
+          },
+          {
+            "opacity": 0.38,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "borderWidth": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "borderColor": "rgba(29, 27, 32, 1)",
+              "opacity": 1,
+            },
+          ]
+        }
+      />
+      <View
+        collapsable={false}
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 2,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "backgroundColor": "rgba(29, 27, 32, 1)",
+              "opacity": 0,
+            },
+          ]
+        }
+      />
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "height": 18,
+              "left": 0,
+              "overflow": "hidden",
+              "position": "absolute",
+              "top": 0,
+            },
+            {
+              "opacity": 0,
+              "width": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "height": 18,
+              "justifyContent": "center",
+              "width": 18,
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "borderBottomWidth": 2,
+                  "borderLeftWidth": 2,
+                  "height": 6,
+                  "transform": [
+                    {
+                      "rotate": "-45deg",
+                    },
+                    {
+                      "translateY": -1,
+                    },
+                    {
+                      "translateX": 1,
+                    },
+                  ],
+                  "width": 11,
+                },
+                {
+                  "borderColor": "rgba(254, 247, 255, 1)",
+                },
+                null,
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders indeterminate Checkbox 1`] = `
+<View
+  accessibilityLiveRegion="polite"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": "mixed",
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  centered={true}
+  collapsable={false}
+  focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="checkbox"
+  style={
+    [
+      {
+        "overflow": "hidden",
+      },
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "height": 40,
+          "justifyContent": "center",
+          "width": 40,
+        },
         undefined,
       ],
     ]
@@ -748,6 +959,14 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -771,7 +990,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -919,6 +1137,14 @@ exports[`renders unchecked Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -942,7 +1168,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]
@@ -1103,6 +1328,14 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
+  hitSlop={
+    {
+      "bottom": 4,
+      "left": 4,
+      "right": 4,
+      "top": 4,
+    }
+  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -1126,7 +1359,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
           "justifyContent": "center",
           "width": 40,
         },
-        undefined,
         undefined,
       ],
     ]

@@ -78,6 +78,14 @@ exports[`can render leading checkbox control 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -100,7 +108,6 @@ exports[`can render leading checkbox control 1`] = `
               "justifyContent": "center",
               "width": 40,
             },
-            undefined,
             undefined,
           ],
         ]
@@ -391,6 +398,14 @@ exports[`renders unchecked 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -413,7 +428,6 @@ exports[`renders unchecked 1`] = `
               "justifyContent": "center",
               "width": 40,
             },
-            undefined,
             undefined,
           ],
         ]
@@ -666,6 +680,14 @@ exports[`should have maxFontSizeMultiplier set to 1.5 by default 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -688,7 +710,6 @@ exports[`should have maxFontSizeMultiplier set to 1.5 by default 1`] = `
               "justifyContent": "center",
               "width": 40,
             },
-            undefined,
             undefined,
           ],
         ]

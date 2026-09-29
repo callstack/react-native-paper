@@ -150,7 +150,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -158,8 +157,16 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -201,10 +208,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -228,6 +235,24 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -339,7 +364,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -347,8 +371,16 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -390,10 +422,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -417,6 +449,24 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -624,7 +674,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -632,8 +681,16 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -675,10 +732,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -702,6 +759,24 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -813,7 +888,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -821,8 +895,16 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -864,10 +946,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -891,6 +973,24 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -1276,7 +1376,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1284,8 +1383,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -1327,10 +1434,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -1354,6 +1461,24 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -1465,7 +1590,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1473,8 +1597,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -1516,10 +1648,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -1543,6 +1675,24 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -1730,7 +1880,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1738,8 +1887,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -1781,10 +1938,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -1808,6 +1965,24 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],
@@ -1919,7 +2094,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1927,8 +2101,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "width": 40,
             },
             {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
             },
             {
@@ -1970,10 +2152,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           multiline={false}
@@ -1997,6 +2179,24 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": undefined,
+                  "width": undefined,
                 },
                 undefined,
               ],

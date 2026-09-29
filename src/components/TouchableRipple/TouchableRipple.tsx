@@ -17,10 +17,17 @@ import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 
 export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
+   *
+   * On web the ripple is bounded by its own container regardless of this prop.
+   * The touchable never clips its content, since clipping would also clip the
+   * touch target, so children needing a rounded shape must carry the radius
+   * themselves.
    */
   borderless?: boolean;
   /**
@@ -36,6 +43,18 @@ export type Props = PressableProps & {
    * Whether to prevent interaction with the touchable.
    */
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS today - see `useFocusRing`'s doc comment for why
+   * (`enableImperativeFocus`, off by default).
+   */
+  focusRing?: FocusRingPlacement;
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
@@ -75,6 +94,26 @@ export type Props = PressableProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Radius of every corner of the touchable. Native-only: it shapes the
+   * highlight underlay there. On web the ripple container clips itself
+   * regardless, so this has no effect.
+   */
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  borderTopStartRadius?: number;
+  borderTopEndRadius?: number;
+  borderBottomStartRadius?: number;
+  borderBottomEndRadius?: number;
+  /**
+   * Width of the touchable's own border, if it draws one. Web-only: the touch
+   * target's absolute offsets start inside the border, not the visible outer
+   * edge, so this widens the target back out to it.
+   */
+  borderWidth?: number;
 };
 
 /**
@@ -105,12 +144,27 @@ export type Props = PressableProps & {
 const TouchableRipple = ({
   style,
   background: _background,
-  borderless = false,
+  // consumed so it does not reach the DOM; the ripple container clips regardless
+  borderless: _borderless = false,
   disabled: disabledProp,
   rippleColor,
   underlayColor: _underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  // consumed so they do not reach the DOM; native-only, the ripple container
+  // clips itself regardless of shape on web
+  borderRadius: _borderRadius,
+  borderTopLeftRadius: _borderTopLeftRadius,
+  borderTopRightRadius: _borderTopRightRadius,
+  borderBottomLeftRadius: _borderBottomLeftRadius,
+  borderBottomRightRadius: _borderBottomRightRadius,
+  borderTopStartRadius: _borderTopStartRadius,
+  borderTopEndRadius: _borderTopEndRadius,
+  borderBottomStartRadius: _borderBottomStartRadius,
+  borderBottomEndRadius: _borderBottomEndRadius,
+  borderWidth,
+  focusRing = 'outward',
   ref,
   ...rest
 }: Props) => {
@@ -178,7 +232,7 @@ const TouchableRipple = ({
           borderTopRightRadius: style.borderTopRightRadius,
           borderBottomRightRadius: style.borderBottomRightRadius,
           borderBottomLeftRadius: style.borderBottomLeftRadius,
-          overflow: centered ? 'visible' : 'hidden',
+          overflow: 'hidden',
         });
 
         // Create span to show the ripple effect
@@ -273,6 +327,20 @@ const TouchableRipple = ({
 
   const disabled = disabledProp || !hasPassedTouchHandler;
 
+  // No JS focus tracking here: the ring is real CSS, driven by the browser's
+  // own `:focus-visible`, keyed off the `data-focus-ring` attribute spread
+  // below. `onFocus`/`onBlur` reach the caller unmodified via `rest`, nothing
+  // to intercept.
+  //
+  // Keyed off `disabledProp`, not `disabled`: the latter also folds in
+  // "no press handler passed", which is a non-interactivity signal, not a
+  // disabled one - the ring should only react to real disablement.
+  const { ring } = useFocusRing(
+    disabledProp,
+    theme.colors.secondary,
+    focusRing
+  );
+
   return (
     <Pressable
       {...rest}
@@ -280,21 +348,52 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      {...ring.dataSetProps}
       style={(state) => [
         styles.touchable,
-        borderless && styles.borderless,
-        // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
-        // state.focused && { backgroundColor: ___ },
+        // RNW's own `state.focused` fires for mouse clicks too, which is
+        // exactly the distinction `:focus-visible` exists to make.
+        // https://github.com/necolas/react-native-web/issues/1849
         state.hovered && { backgroundColor: hoverColor },
         disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
+        ...ring.style,
       ]}
     >
-      {(state) =>
-        React.Children.only(
-          typeof children === 'function' ? children(state) : children
-        )
-      }
+      {(state) => {
+        const border = borderWidth ?? 0;
+        const inset = (value: number | undefined) => -((value ?? 0) + border);
+
+        const touchTargetStyle: ViewStyle | undefined =
+          hitSlop == null
+            ? undefined
+            : typeof hitSlop === 'number'
+              ? {
+                  position: 'absolute',
+                  top: inset(hitSlop),
+                  bottom: inset(hitSlop),
+                  left: inset(hitSlop),
+                  right: inset(hitSlop),
+                }
+              : {
+                  position: 'absolute',
+                  top: inset(hitSlop.top),
+                  bottom: inset(hitSlop.bottom),
+                  left: inset(hitSlop.left),
+                  right: inset(hitSlop.right),
+                };
+
+        return (
+          <>
+            {!disabled && touchTargetStyle && (
+              <View aria-hidden style={touchTargetStyle} />
+            )}
+            {React.Children.only(
+              typeof children === 'function' ? children(state) : children
+            )}
+          </>
+        );
+      }}
     </Pressable>
   );
 };
@@ -316,9 +415,6 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' && {
       cursor: 'auto',
     }),
-  },
-  borderless: {
-    overflow: 'hidden',
   },
 });
 
