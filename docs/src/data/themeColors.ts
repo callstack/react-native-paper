@@ -101,6 +101,16 @@ export const themeColors = {
       borderColor: 'theme.colors.outline',
     },
   },
+  Carousel: {
+    '-': {
+      backgroundColor: 'theme.colors.surfaceContainerHigh',
+      focusIndicatorColor: 'theme.colors.secondary',
+      stateLayerColor: 'theme.colors.onSurface',
+    },
+    outlined: {
+      borderColor: 'theme.colors.outlineVariant',
+    },
+  },
   Dialog: {
     '-': {
       backgroundColor: 'theme.colors.elevation.level3',
