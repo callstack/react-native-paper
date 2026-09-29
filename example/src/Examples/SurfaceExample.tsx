@@ -53,7 +53,7 @@ const SurfaceExample = () => {
 
   return (
     <ScreenWrapper>
-      <List.Section title="Elevated surface">
+      <List.Section title="Elevated surface" testID="surface-example-elevated">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -65,7 +65,7 @@ const SurfaceExample = () => {
         </ScrollView>
       </List.Section>
 
-      <List.Section title="Flat surface">
+      <List.Section title="Flat surface" testID="surface-example-flat">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
