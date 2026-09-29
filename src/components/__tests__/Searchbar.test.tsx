@@ -1,9 +1,38 @@
+import { Pressable, Text } from 'react-native';
+
 import { expect, it, jest } from '@jest/globals';
-import { userEvent } from '@testing-library/react-native';
+import { fireEvent, userEvent } from '@testing-library/react-native';
+import {
+  getAnimatedStyle,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
+
+const AnimatedSearchbar = () => {
+  const opacity = useSharedValue(0);
+  const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
+
+  return (
+    <>
+      <Pressable
+        testID="animate-search-bar"
+        onPress={() => {
+          opacity.value = 1;
+        }}
+      />
+      <Searchbar
+        testID="search-bar"
+        value={''}
+        style={[{ padding: 8 }, animatedStyle]}
+      />
+    </>
+  );
+};
 
 it('renders with placeholder', async () => {
   const tree = (
@@ -36,33 +65,54 @@ it('renders with ActivityIndicator', async () => {
 it('renders without ActivityIndicator', async () => {
   await render(<Searchbar loading={false} value="" />);
 
-  expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+  expect(screen.queryByTestId('activity-indicator')).not.toBeOnTheScreen();
 });
 
-it('renders clear icon with custom color', async () => {
+it('uses the trailing icon color for the clear icon', async () => {
   await render(
     <Searchbar testID="search-bar" value="value" iconColor="purple" />
   );
 
-  expect(
-    screen.getByText('close', { includeHiddenElements: true })
-  ).toHaveStyle({ color: 'purple' });
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  const iconComponent = screen.getByTestId('search-bar-icon-wrapper').props
+    .children;
+
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(iconComponent.props.iconColor).toBe(
+    LightTheme.colors.onSurfaceVariant
+  );
 });
 
-it('does not respond to touch on the clear icon when search has no value', async () => {
-  const onClearIconPressMock = jest.fn();
+it('renders clear icon wrapper, which can be the target of touch events, if search has value', async () => {
+  await render(<Searchbar testID="search-bar" value="value" />);
+
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
+  ).toBe('auto');
+});
+
+it('renders clear icon wrapper, which is never target of touch events, if search has no value', async () => {
+  await render(<Searchbar testID="search-bar" value="" />);
+
+  expect(
+    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+    screen.getByTestId('search-bar-icon-wrapper').props.pointerEvents
+  ).toBe('none');
+});
+
+it('applies transform styles to the outer wrapper', async () => {
   await render(
     <Searchbar
       testID="search-bar"
       value=""
-      onClearIconPress={onClearIconPressMock}
+      style={{ transform: [{ scale: 1.5 }] }}
     />
   );
 
-  await userEvent.press(
-    screen.getByLabelText('clear', { includeHiddenElements: true })
-  );
-  expect(onClearIconPressMock).not.toHaveBeenCalled();
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
 });
 
 it('defines onClearIconPress action and checks if it is called when close button is pressed', async () => {
@@ -74,12 +124,20 @@ it('defines onClearIconPress action and checks if it is called when close button
       onClearIconPress={onClearIconPressMock}
     />
   );
-  await userEvent.press(screen.getByLabelText('clear'));
+  await userEvent.press(screen.getByTestId('search-bar-clear-icon'));
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('hides the clear icon when a custom right element is rendered', async () => {
-  await render(
+it('renders clear icon wrapper, with appropriate style for v3', async () => {
+  const { rerender } = await render(<Searchbar testID="search-bar" value="" />);
+
+  expect(screen.getByTestId('search-bar-icon-wrapper')).toHaveStyle({
+    position: 'absolute',
+    right: 0,
+    marginLeft: 16,
+  });
+
+  await rerender(
     <Searchbar
       testID="search-bar"
       value=""
@@ -87,70 +145,203 @@ it('hides the clear icon when a custom right element is rendered', async () => {
     />
   );
 
-  expect(screen.queryByLabelText('clear')).not.toBeOnTheScreen();
+  expect(
+    screen.getByTestId('search-bar-icon-wrapper', {
+      includeHiddenElements: true,
+    })
+  ).toHaveStyle({ display: 'none' });
 });
 
-it('renders trailing icon when mode is set to "bar"', async () => {
+it('renders trailering icon when mode is set to "contained"', async () => {
   await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      trailingIcon={'microphone'}
-      trailingIconAccessibilityLabel="microphone"
-      mode="bar"
+      traileringIcon={'microphone'}
+      mode="contained"
     />
   );
 
-  expect(screen.getByLabelText('microphone')).toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
 });
 
-it('renders trailing icon with press functionality', async () => {
-  const onTrailingIconPressMock = jest.fn();
+it('renders trailering icon with press functionality', async () => {
+  const onTraileringIconPressMock = jest.fn();
 
   await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      trailingIcon={'microphone'}
-      trailingIconAccessibilityLabel="microphone"
-      onTrailingIconPress={onTrailingIconPressMock}
-      mode="bar"
+      traileringIcon={'microphone'}
+      onTraileringIconPress={onTraileringIconPressMock}
+      mode="contained"
     />
   );
 
-  await userEvent.press(screen.getByLabelText('microphone'));
-  expect(onTrailingIconPressMock).toHaveBeenCalledTimes(1);
+  await userEvent.press(screen.getByTestId('search-bar-trailering-icon'));
+  expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon instead of trailing icon', async () => {
+it('renders clear icon instead of trailering icon', async () => {
   const { rerender } = await render(
     <Searchbar
       testID="search-bar"
       value={''}
-      trailingIcon={'microphone'}
-      trailingIconAccessibilityLabel="microphone"
-      mode="bar"
+      traileringIcon={'microphone'}
+      mode="contained"
     />
   );
 
-  expect(screen.getByLabelText('microphone')).toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-trailering-icon')).toBeOnTheScreen();
 
   await rerender(
     <Searchbar
       testID="search-bar"
       value={'test'}
-      trailingIcon={'microphone'}
-      trailingIconAccessibilityLabel="microphone"
-      mode="bar"
+      traileringIcon={'microphone'}
+      mode="contained"
     />
   );
 
-  expect(screen.queryByLabelText('microphone')).not.toBeOnTheScreen();
-  expect(screen.getByLabelText('clear')).toBeOnTheScreen();
+  expect(
+    screen.queryByTestId('search-bar-trailering-icon')
+  ).not.toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-icon-wrapper')).toBeOnTheScreen();
 });
 
-it('renders searchbar in "view" mode', async () => {
-  const tree = (await render(<Searchbar value={''} mode="view" />)).toJSON();
+it('renders searchbar in "divided" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="divided" />);
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByTestId('search-bar-container')).toHaveStyle({
+    borderRadius: 0,
+  });
+});
+
+it('applies the unfocused container margin in "contained" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="contained" />);
+
+  expect(screen.getByTestId('search-bar-focus-wrapper')).toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+  expect(screen.getByTestId('search-bar-container')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+});
+
+it('does not apply the container margin in "divided" mode', async () => {
+  await render(<Searchbar testID="search-bar" value={''} mode="divided" />);
+
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+});
+
+it('lets a custom horizontal margin win over the built-in one', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      mode="contained"
+      style={{ marginHorizontal: 0 }}
+    />
+  );
+
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+    marginHorizontal: 0,
+  });
+});
+
+it('lets a custom logical horizontal margin win over the built-in one', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      mode="contained"
+      style={{ marginInline: 0 }}
+    />
+  );
+
+  expect(screen.getByTestId('search-bar-wrapper')).toHaveStyle({
+    marginInline: 0,
+  });
+  expect(screen.getByTestId('search-bar-focus-wrapper')).not.toHaveStyle({
+    marginLeft: 24,
+    marginRight: 24,
+  });
+});
+
+it('keeps layout styles on the outermost element', async () => {
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      style={{ flex: 1, position: 'absolute', top: 0 }}
+    />
+  );
+
+  const wrapper = screen.getByTestId('search-bar-wrapper');
+
+  expect(wrapper).toBe(screen.root);
+  expect(wrapper).toHaveStyle({ flex: 1, position: 'absolute', top: 0 });
+  expect(screen.getByTestId('search-bar-container')).not.toHaveStyle({
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+  });
+});
+
+it('applies Reanimated styles from the style prop to the outer wrapper', async () => {
+  await render(<AnimatedSearchbar />);
+
+  const wrapper = screen.getByTestId('search-bar-wrapper');
+
+  expect(getAnimatedStyle(wrapper)).toMatchObject({ opacity: 0 });
+  // Static entries are still split off and land on the Surface.
+  expect(screen.getByTestId('search-bar-container')).toHaveStyle({
+    padding: 8,
+  });
+
+  await userEvent.press(screen.getByTestId('animate-search-bar'));
+  await jest.runAllTimersAsync();
+
+  expect(getAnimatedStyle(wrapper)).toMatchObject({ opacity: 1 });
+});
+
+it('forwards onFocus and onBlur to the input', async () => {
+  const onFocus = jest.fn();
+  const onBlur = jest.fn();
+  await render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    />
+  );
+
+  await fireEvent(screen.getByTestId('search-bar'), 'focus');
+  await fireEvent(screen.getByTestId('search-bar'), 'blur');
+
+  expect(onFocus).toHaveBeenCalledTimes(1);
+  expect(onBlur).toHaveBeenCalledTimes(1);
+});
+
+it('renders a results container via Searchbar.Results', async () => {
+  await render(
+    <Searchbar.Results testID="search-bar-results">
+      <Text>Result</Text>
+    </Searchbar.Results>
+  );
+
+  expect(screen.getByTestId('search-bar-results')).toBeOnTheScreen();
+  expect(screen.getByTestId('search-bar-results')).toHaveStyle({
+    borderRadius: LightTheme.shapes.corner.medium,
+  });
 });

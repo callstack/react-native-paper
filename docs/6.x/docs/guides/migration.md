@@ -25,6 +25,7 @@ The following props now accept animated styles returned from `useAnimatedStyle`.
 - `Searchbar`: `style`
 - `Snackbar`: `style`
 - `Surface`: `style`
+- `ToggleButton`: `style`
 
 So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate these components instead of the React Native `Animated` API.
 
@@ -70,41 +71,12 @@ You can use the component's color prop where available, or override the correspo
 
 ### Test IDs
 
-Hardcoded default test IDs have been removed for the components listed below:
+Some hardcoded and generated test IDs have been removed for the following components:
 
-- `Appbar.Content`: `appbar-content`
-- `Appbar.Header`: `appbar-header`
-- `BottomNavigation`: `bottom-navigation`
-- `BottomNavigation.Bar`: `bottom-navigation-bar`
-- `Button`: `button`
-- `Card`: `card`
-- `Chip`: `chip`
-- `Drawer.CollapsedItem`: `drawer-collapsed-item`
-- `FAB`: `floating-action-button`
-- `FAB.Extended`: `extended-floating-action-button`
-- `FAB.Menu`: `floating-action-button-menu`
-- `IconButton`: `icon-button`
-- `Menu`: `menu`
-- `Menu.Item`: `menu-item`
-- `Modal`: `modal`
-- `ProgressBar`: `progress-bar`
-- `Searchbar`: `search-bar`
-- `Surface`: `surface`
+- `Appbar.Header`: `${testID}-root-layer`
+- `Surface`: `surface` and `${testID}-outer-layer`
 
-You can specify a `testID` explicitly to restore each component's own test ID.
-
-These components used to also derive test IDs for internal, implementation-only elements by appending a suffix to the `testID` prop (e.g. `${testID}-container`, `${testID}-icon`, `${testID}-outline`). They have been removed entirely.
-
-If you were relying on internal test IDs, update your tests not to rely on internal implementation details and only interact with elements or assert content your users can reach, e.g.: query by role, label, text etc., or `testID` props accepted by the component.
-
-Some components now accept explicit `testID` props for their interactable elements:
-
-- `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
-- `Chip`: `closeIconTestID` for the close icon button.
-- `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
-- `Menu`: `overlayTestID` for the overlay displayed behind the menu.
-- `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
-- `Snackbar`: `iconTestID` for the icon button.
+You can specify a `testID` explicitly and use that value to query the component.
 
 ## Components
 
@@ -269,25 +241,36 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 
 ### Searchbar
 
-The misspelled `traileringIcon` props have been renamed:
+The `Searchbar` modes use the latest Material 3 terminology in Paper 6.x:
 
-- **`traileringIcon`** → **`trailingIcon`**
-- **`traileringIconColor`** → **`trailingIconColor`**
-- **`traileringIconAccessibilityLabel`** → **`trailingIconAccessibilityLabel`**
-- **`onTraileringIconPress`** → **`onTrailingIconPress`**
+- **`mode="bar"`** → **`mode="contained"`**
+- **`mode="view"`** → **`mode="divided"`**
 
-```diff
+```tsx
+// Before (v5)
+<Searchbar mode="bar" value={query} onChangeText={setQuery} />
+<Searchbar mode="view" value={query} onChangeText={setQuery} />
+
+// After (v6)
+<Searchbar mode="contained" value={query} onChangeText={setQuery} />
+<Searchbar mode="divided" value={query} onChangeText={setQuery} />
+```
+
+The default `contained` mode adds 24dp horizontal margins and animates them to
+12dp while focused. To keep a full-width Searchbar, provide a horizontal margin;
+this replaces the built-in margin and disables the focus animation:
+
+```tsx
 <Searchbar
-- traileringIcon="microphone"
-- traileringIconColor={colors.onSurfaceVariant}
-- traileringIconAccessibilityLabel="microphone button"
-- onTraileringIconPress={onMicrophonePress}
-+ trailingIcon="microphone"
-+ trailingIconColor={colors.onSurfaceVariant}
-+ trailingIconAccessibilityLabel="microphone button"
-+ onTrailingIconPress={onMicrophonePress}
+  value={query}
+  onChangeText={setQuery}
+  style={{ marginHorizontal: 0 }}
 />
 ```
+
+Any horizontal margin, including `margin`, disables the built-in focus
+animation. Use `marginVertical` when you only need vertical spacing and want to
+keep the animated horizontal margins.
 
 ### TextInput
 
@@ -408,32 +391,4 @@ const theme = {
   theme={theme}
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
-```
-
-### ToggleButton
-
-`ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
-icon-only toggle, use `IconButton` with the `selected` prop. For a set of
-mutually exclusive options, use `SegmentedButtons`.
-
-```tsx
-// Before (v5)
-<ToggleButton.Group value={value} onValueChange={setValue}>
-  <ToggleButton icon="format-bold" value="bold" />
-  <ToggleButton icon="format-italic" value="italic" />
-</ToggleButton.Group>
-
-// After (v6)
-<>
-  <IconButton
-    icon="format-bold"
-    selected={value === 'bold'}
-    onPress={() => setValue('bold')}
-  />
-  <IconButton
-    icon="format-italic"
-    selected={value === 'italic'}
-    onPress={() => setValue('italic')}
-  />
-</>
 ```
