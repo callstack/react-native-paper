@@ -151,11 +151,6 @@ const pages = {
       props: 'TextInputAccessoryProps',
     },
   },
-  ToggleButton: {
-    ToggleButton: 'ToggleButton/ToggleButton',
-    ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
-    ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
-  },
   Tooltip: {
     Tooltip: 'Tooltip/Tooltip',
   },

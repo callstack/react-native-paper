@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
+import { DialogTitleIdContext } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -24,7 +25,7 @@ export type Props = React.ComponentPropsWithRef<typeof Text> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Dialog, Portal, Text } from 'react-native-paper';
+ * import { Dialog, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -32,14 +33,12 @@ export type Props = React.ComponentPropsWithRef<typeof Text> & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Title>This is a title</Dialog.Title>
- *         <Dialog.Content>
- *           <Text variant="bodyMedium">This is simple dialog</Text>
- *         </Dialog.Content>
- *       </Dialog>
- *     </Portal>
+ *     <Dialog visible={visible} onDismiss={hideDialog}>
+ *       <Dialog.Title>This is a title</Dialog.Title>
+ *       <Dialog.Content>
+ *         <Text variant="bodyMedium">This is simple dialog</Text>
+ *       </Dialog.Content>
+ *     </Dialog>
  *   );
  * };
  *
@@ -50,10 +49,12 @@ const DialogTitle = ({
   children,
   theme: themeOverrides,
   style,
+  nativeID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors, fonts } = theme;
+  const titleId = React.useContext(DialogTitleIdContext);
 
   const headerTextStyle = {
     color: colors.onSurface,
@@ -64,6 +65,7 @@ const DialogTitle = ({
     <Text
       variant="headlineSmall"
       role="heading"
+      nativeID={titleId ?? nativeID}
       style={[styles.text, styles.v3Text, headerTextStyle, style]}
       {...rest}
     >
