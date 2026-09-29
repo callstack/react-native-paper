@@ -9,7 +9,7 @@ on:
         description: Release tag to publish the example app for, e.g. v6.0.0
         required: true
       platform:
-        description: Platforms to build and submit. Pick one to retry after a partial failure, so the platform that already shipped is not submitted twice.
+        description: Platform to build. Defaults to all.
         required: false
         default: all
         type: choice
@@ -75,7 +75,7 @@ jobs:
         working-directory: ./example
         run: |
           if ! eas whoami; then
-            echo "::error::Could not authenticate with Expo. EXPO_TOKEN is missing, expired, or lacks access to the react-native-paper organisation."
+            echo "::error::Could not authenticate with Expo, check EXPO_TOKEN."
             exit 1
           fi
 
@@ -146,7 +146,7 @@ jobs:
             --message "$TAG" \
             --non-interactive
 
-      - name: Open example app version bump pull request
+      - name: Open version bump PR
         if: ${{ always() && (steps.submit.outcome == 'success' || steps.submit.outcome == 'failure' || steps.submit.outcome == 'cancelled') }}
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
@@ -157,13 +157,7 @@ jobs:
           commit-message: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
           title: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
           labels: example app
-          body: |
-            Records the example app version this run used for
-            ${{ steps.release.outputs.tag }}.
-
-            A build for that version may already have been submitted, so this only
-            keeps `example/app.json` in sync. iOS build numbers and Android version codes are not in here:
-            EAS assigns those remotely.
+          body: Version bump for ${{ steps.release.outputs.tag }}.
 
       - name: Summarise
         if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success') }}
@@ -172,64 +166,21 @@ jobs:
           PROFILE: ${{ steps.release.outputs.profile }}
           BUILT: ${{ steps.decide.outputs.build }}
         run: |
-          {
-            if [ "$BUILT" = "true" ]; then
-              echo "### Example app submitted for \`$TAG\`"
-              echo
-              echo "Native code changed, so this went to the stores."
-              if [ "$PROFILE" = "production" ]; then
-                echo "- Android: Play Store **production** track."
-              else
-                echo "- Android: Play Store **internal** track."
-              fi
-              echo "- iOS: uploaded to App Store Connect, available in TestFlight."
-              echo
-              echo "Releasing an iOS build from TestFlight to the App Store is a"
-              echo "separate manual step in App Store Connect."
-            else
-              echo "### Example app updated over the air for \`$TAG\`"
-              echo
-              echo "No native code changed, so this shipped as an update on the"
-              echo "\`$PROFILE\` channel rather than going through the stores."
-              echo "Installed apps pick it up on next launch. The store listing"
-              echo "and its version are unchanged."
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$BUILT" = "true" ]; then
+            echo "Built and submitted $TAG using the $PROFILE profile." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Published an OTA update for $TAG on the $PROFILE channel." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
   report-failure:
-    name: Report example app deployment problem
+    name: Report failure
     needs: publish
     if: ${{ always() && needs.publish.result != 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Say that the library release is unaffected
+      - name: Report failure
         env:
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
-          echo "::error::The example app deployment for $TAG did not finish. The $TAG library release itself published successfully and is not affected."
-
-          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-
-          It is published on npm and on GitHub Releases exactly as expected, and
-          **nothing here changes that**. This workflow only ever runs *after* a
-          release already exists, so it cannot fail, revoke or roll back one.
-
-          - Users of the library need to do nothing. Installing \`react-native-paper\` is unaffected.
-          - Nothing has to be re-released to fix this.
-          - Only the demo app we ship to the App Store and Play Store did not update.
-
-          **Check the EAS dashboard and the stores first.** A build may already
-          have been submitted, and submitting the same version twice is the one
-          thing worth avoiding. Cancelling this workflow does not cancel a build
-          already running on EAS, so a cancelled run can still ship on its own.
-
-          Once you have confirmed what did and did not reach the stores, re-run
-          this workflow on its own, without cutting a new library release:
-
-          **Actions → Publish example app → Run workflow → tag \`$TAG\`**
-
-          If only one platform failed, pick it in the \`platform\` input so the
-          other one is not submitted a second time. Retry before merging the
-          version bump pull request this run opened, since merging it first
-          moves \`main\` on and the retry would ship under a different version.
-          EOF
+          echo "::error::Example app deployment failed for $TAG. The release itself is fine, only the demo app did not update."
+          echo "Check EAS and the stores before re-running, a build may already have been submitted." >> "$GITHUB_STEP_SUMMARY"
