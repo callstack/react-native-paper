@@ -1,10 +1,12 @@
 import path from 'node:path';
 
 import type { ComponentDoc, ComponentProp } from './types.ts';
+import type { LiveExample } from '../../src/data/liveExamples.ts';
 
 type CustomFields = {
   extendedExamples: Record<string, unknown>;
   knownIssues: Record<string, Record<string, string>>;
+  liveExamples: Record<string, LiveExample>;
   moreExamples: Record<string, Record<string, string>>;
   screenshots: Record<string, unknown>;
   themeColors: Record<string, unknown>;
@@ -127,7 +129,10 @@ export const renderComponentPage = (
   const usage = summaryMatch
     ? doc.description.slice(summary.length)
     : doc.description;
-  const screenshot = customFields.screenshots[doc.title];
+  const liveExample = customFields.liveExamples[doc.title];
+  const screenshot = liveExample
+    ? undefined
+    : customFields.screenshots[doc.title];
   const extendedExample = customFields.extendedExamples[doc.title];
   const extendedExampleTitle =
     extendedExample && typeof extendedExample === 'object'
@@ -144,11 +149,12 @@ import PropTable from '@docs/components/PropTable.tsx';
 import ExtendsLink from '@docs/components/ExtendsLink.tsx';
 import ThemeColorsTable from '@docs/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@docs/components/ScreenshotTabs.tsx';
-import ExtendedExample from '@docs/components/ExtendedExample.tsx';
+import ExtendedExample from '@docs/components/ExtendedExample.tsx';${liveExample ? `\nimport { ${liveExample.exports.join(', ')} } from '${liveExample.module}';` : ''}
 
 ${summary}
 
 ${screenshot ? `<ScreenshotTabs screenshotData={${JSON.stringify(screenshot)}} />` : ''}
+${liveExample ? liveExample.exports.map((name) => `<${name} />`).join('\n') : ''}
 
 ${usage}
 
