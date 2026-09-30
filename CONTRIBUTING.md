@@ -109,6 +109,15 @@ yarn release
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
 
+Releases from main also deploy the example app via EAS. If there were no native code changes, it'll ship an OTA update.
+
+Otherwise, for stable releases:
+
+- The Android build is automatically submitted to Google Play for review
+- The iOS build is automatically uploaded to App Store Connect and needs to be manually submitted for review
+
+Pre-release builds are shipped to the internal track on Google Play for Android and TestFlight for iOS. They shouldn't be submitted to the App Store for review, or the stable build with the same version would be rejected.
+
 ## Reporting issues
 
 You can report issues on our [bug tracker](https://github.com/callstack/react-native-paper/issues). Please follow the issue template when opening an issue.
