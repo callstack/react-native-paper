@@ -9,6 +9,19 @@ const md3 = (theme: InternalTheme) => theme;
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
+// `color(selectedColor).alpha(0.29).rgb().string()` is pure, so the result is
+// cached per input color to avoid re-parsing on every Chip render (#4946).
+const selectedColorBorderCache = new Map<string, string>();
+
+const getSelectedColorBorder = (selectedColor: string): string => {
+  let border = selectedColorBorderCache.get(selectedColor);
+  if (border === undefined) {
+    border = color(selectedColor).alpha(0.29).rgb().string();
+    selectedColorBorderCache.set(selectedColor, border);
+  }
+  return border;
+};
+
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;
 };
@@ -39,7 +52,7 @@ const getBorderColor = ({
 
   if (isSelectedColor) {
     if (typeof selectedColor === 'string') {
-      return color(selectedColor).alpha(0.29).rgb().string();
+      return getSelectedColorBorder(selectedColor);
     }
     // PlatformColor / OpaqueColorValue: skip the alpha pass and render opaque.
     return selectedColor;
