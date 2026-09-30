@@ -52,9 +52,6 @@ jobs:
     if: needs.check.outputs.on-main == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -146,9 +143,23 @@ jobs:
             echo "No native change, publishing an update instead."
           fi
 
-      - name: Bump example app version
+      - name: Set example app version from the release tag
         if: steps.decide.outputs.build == 'true'
-        run: node scripts/bump-example-version.ts example/app.json
+        shell: bash
+        working-directory: ./example
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          version="${TAG#v}"
+          version="${version%%-*}"
+
+          if ! echo "$version" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Could not read a major.minor.patch version from $TAG."
+            exit 1
+          fi
+
+          jq --arg version "$version" '.expo.version = $version' app.json > app.json.tmp
+          mv app.json.tmp app.json
 
       - name: Build and submit to the app stores
         id: submit
@@ -178,19 +189,6 @@ jobs:
             --platform "$PLATFORM" \
             --message "$TAG" \
             --non-interactive
-
-      - name: Open version bump PR
-        if: ${{ always() && (steps.submit.outcome == 'success' || steps.submit.outcome == 'failure' || steps.submit.outcome == 'cancelled') }}
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          add-paths: example/app.json
-          branch: chore/example-app-version-${{ steps.release.outputs.tag }}
-          commit-message: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
-          title: 'chore: bump example app version for ${{ steps.release.outputs.tag }}'
-          labels: example app
-          body: Version bump for ${{ steps.release.outputs.tag }}.
 
       - name: Summarise
         if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success') }}
