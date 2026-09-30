@@ -94,6 +94,7 @@ const TouchableRipple = ({
         disabled={disabled}
         style={[useForeground && styles.overflowHidden, style]}
         android_ripple={androidRipple}
+        accessible={Platform.OS === 'ios' ? false : true}
       >
         {React.Children.only(children)}
       </Pressable>
@@ -106,6 +107,7 @@ const TouchableRipple = ({
       ref={ref}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}
+      accessible={Platform.OS === 'ios' ? false : true}
     >
       {({ pressed }) => (
         <>
@@ -115,6 +117,7 @@ const TouchableRipple = ({
                 styles.underlay,
                 { backgroundColor: calculatedUnderlayColor },
               ]}
+              accessible={Platform.OS ==='ios' ? false : true}
             />
           )}
           {React.Children.only(children)}
