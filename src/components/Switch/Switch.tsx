@@ -61,6 +61,7 @@ export type Props = {
    * Accessibility label for the switch. This is read by the screen reader when the user focuses the switch.
    */
   'aria-label'?: string;
+  ref?: React.RefObject<View | null> | ((instance: View | null) => void) | null;
 };
 
 const {
@@ -136,6 +137,7 @@ const Switch = ({
   testID,
   theme: themeOverrides,
   'aria-label': ariaLabel,
+  ref,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
@@ -346,7 +348,7 @@ const Switch = ({
   const iconSize = checked ? SELECTED_ICON : UNSELECTED_ICON;
 
   return (
-    <View style={[styles.wrapper, style]}>
+    <View ref={ref} style={[styles.wrapper, style]}>
       <Pressable
         disabled={disabled}
         onPress={() => onValueChange?.(!checked)}
