@@ -98,6 +98,19 @@ it('renders active button if only onLongPress handler is passed', async () => {
   expect(screen.getByTestId('active-button')).toBeEnabled();
 });
 
+it('renders button with unstable_pressDelay and triggers onPress', async () => {
+  const onPress = jest.fn();
+
+  await render(
+    <Button testID="delay-button" unstable_pressDelay={100} onPress={onPress}>
+      Delay Button
+    </Button>
+  );
+
+  await userEvent.press(screen.getByTestId('delay-button'));
+  expect(onPress).toHaveBeenCalledTimes(1);
+});
+
 it('renders button with color', async () => {
   const tree = (
     await render(<Button textColor={pink500}>Custom Button</Button>)
