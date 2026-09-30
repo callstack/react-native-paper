@@ -149,6 +149,7 @@ it('renders with a description with typeof number', async () => {
 it('calling onPress on ListItem right component', async () => {
   Platform.OS = 'web';
   const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+  const user = userEvent.setup();
 
   await render(
     <ListItem
@@ -161,7 +162,7 @@ it('calling onPress on ListItem right component', async () => {
     />
   );
 
-  await userEvent.press(screen.getByTestId('icon-button'));
+  await user.press(screen.getByTestId('icon-button'));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 

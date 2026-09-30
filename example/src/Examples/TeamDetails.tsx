@@ -57,12 +57,7 @@ const News = () => {
           style={styles.chipsContainer}
           contentContainerStyle={styles.chipsContent}
         >
-          <Chip
-            selected
-            onPress={() => {}}
-            style={styles.chip}
-            showSelectedOverlay
-          >
+          <Chip selected onPress={() => {}} style={styles.chip}>
             Latest
           </Chip>
           <Chip onPress={() => {}} style={styles.chip}>

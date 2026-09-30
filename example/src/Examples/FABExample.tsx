@@ -77,7 +77,6 @@ const ChipRow = <T extends string>({
         <Chip
           key={option}
           selected={option === value}
-          showSelectedOverlay
           onPress={() => onChange(option)}
         >
           {option}
