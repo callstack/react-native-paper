@@ -134,7 +134,9 @@ const pages = {
   SegmentedButtons: {
     SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
   },
-  Snackbar: 'Snackbar',
+  Snackbar: {
+    Snackbar: 'Snackbar/Snackbar',
+  },
   Surface: 'Surface',
   Switch: {
     Switch: 'Switch/Switch',
@@ -171,10 +173,6 @@ const componentDocsConfig: ComponentDocsConfig = {
       Portal: {
         'Comprehensive Portal example':
           'https://snack.expo.dev/@react-native-paper/more-examples---comprehensive-portal-example',
-      },
-      Snackbar: {
-        'Snackbar rendered regardless of the parent positioning':
-          'https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning',
       },
     },
     knownIssues: {},
