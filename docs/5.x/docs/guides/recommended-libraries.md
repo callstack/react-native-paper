@@ -40,3 +40,6 @@ Material Design themed [time picker](https://material.io/components/time-pickers
 
 [pchmn/expo-material3-theme](https://github.com/pchmn/expo-material3-theme)
 Retrieve Material 3 system colors from Android 12+ devices
+
+[rakadoank/material-color-react-native](https://github.com/RakaDoank/material-color-react-native)
+Bring Material color utilities including builder from a source image, and theming with Paper
