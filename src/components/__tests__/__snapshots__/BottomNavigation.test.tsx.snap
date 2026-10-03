@@ -76,6 +76,7 @@ exports[`allows customizing Route's type via generics 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -84,11 +85,9 @@ exports[`allows customizing Route's type via generics 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -866,6 +865,7 @@ exports[`applies maxTabBarWidth styling if compact prop is truthy 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -874,11 +874,9 @@ exports[`applies maxTabBarWidth styling if compact prop is truthy 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -2738,6 +2736,7 @@ exports[`does not apply maxTabBarWidth styling if compact prop is falsy 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -2746,11 +2745,9 @@ exports[`does not apply maxTabBarWidth styling if compact prop is falsy 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -4469,6 +4466,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -4477,11 +4475,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -5200,6 +5196,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -5208,11 +5205,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -6069,6 +6064,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -6077,11 +6073,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -7800,6 +7794,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -7808,11 +7803,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -9286,11 +9279,9 @@ exports[`renders custom background color passed to barStyle property 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(228, 105, 98, 1)",
           "overflow": "hidden",
         }
       }
@@ -10369,6 +10360,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -10377,11 +10369,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -11085,6 +11075,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -11093,11 +11084,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -12101,6 +12090,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -12109,11 +12099,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -13192,6 +13180,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -13200,11 +13189,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -14130,6 +14117,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -14138,11 +14126,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }
@@ -15221,6 +15207,7 @@ exports[`renders shifting bottom navigation 1`] = `
     onLayout={[Function]}
     style={
       {
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "bottom": 0,
         "left": 0,
         "pointerEvents": "none",
@@ -15229,11 +15216,9 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={false}
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "rgba(243, 237, 247, 1)",
           "overflow": "hidden",
         }
       }

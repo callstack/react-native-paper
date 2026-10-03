@@ -19,7 +19,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -496,7 +496,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -976,7 +976,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1234,7 +1234,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1492,7 +1492,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1750,7 +1750,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",

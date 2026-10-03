@@ -1949,15 +1949,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               [
                 {
                   "alignItems": "center",
-                  "flexDirection": "row",
+                  "flexDirection": "row-reverse",
                   "justifyContent": "center",
                 },
                 {
                   "opacity": 1,
                 },
-                {
-                  "flexDirection": "row-reverse",
-                },
+                undefined,
               ]
             }
           >

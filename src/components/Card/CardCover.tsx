@@ -5,7 +5,6 @@ import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
-import { splitStyles } from '../../utils/splitStyles';
 
 export type Props = ImageProps & {
   /**
@@ -51,26 +50,17 @@ const CardCover = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const flattenedStyles = StyleSheet.flatten<ViewStyle>(style) || {};
-  const [, borderRadiusStyles] = splitStyles(
-    flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
-  );
-
   const coverStyle = getCardCoverStyle({
     theme,
     index,
     total,
-    borderRadiusStyles,
   });
 
+  // The container clips the image with `overflow: 'hidden'`,
+  // so any border radius passed in `style` is applied to the image as well
   return (
     <View style={[styles.container, coverStyle, style]}>
-      <Image
-        {...rest}
-        style={[styles.image, coverStyle]}
-        accessibilityIgnoresInvertColors
-      />
+      <Image {...rest} style={styles.image} accessibilityIgnoresInvertColors />
     </View>
   );
 };

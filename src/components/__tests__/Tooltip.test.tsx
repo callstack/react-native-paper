@@ -159,6 +159,16 @@ describe('Tooltip', () => {
       });
     });
 
+    describe('ref', () => {
+      it('forwards the ref passed to the wrapped component', async () => {
+        const ref = React.createRef<View>();
+
+        await setup({ children: <DummyComponent ref={ref} /> });
+
+        expect(ref.current).not.toBeNull();
+      });
+    });
+
     describe('pressOut', () => {
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {

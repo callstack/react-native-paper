@@ -1,17 +1,9 @@
-import { StyleSheet } from 'react-native';
-
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import * as Avatar from '../Avatar/Avatar';
-
-const styles = StyleSheet.create({
-  bgColor: {
-    backgroundColor: red500,
-  },
-});
 
 it('renders avatar with text', async () => {
   const tree = (await render(<Avatar.Text label="XD" />)).toJSON();
@@ -27,7 +19,7 @@ it('renders avatar with text and custom size', async () => {
 
 it('renders avatar with text and custom background color', async () => {
   const tree = (
-    await render(<Avatar.Text style={styles.bgColor} label="XD" />)
+    await render(<Avatar.Text backgroundColor={red500} label="XD" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -49,7 +41,7 @@ it('renders avatar with icon', async () => {
 
 it('renders avatar with icon and custom background color', async () => {
   const tree = (
-    await render(<Avatar.Icon style={styles.bgColor} icon="information" />)
+    await render(<Avatar.Icon backgroundColor={red500} icon="information" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
