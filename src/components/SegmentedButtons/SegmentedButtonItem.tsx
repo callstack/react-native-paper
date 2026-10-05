@@ -136,10 +136,10 @@ const SegmentedButtonItem = ({
 
   const checkSpringConfig = React.useMemo(
     () => ({
-      ...toRawSpring(theme.motion.spring.slow.spatial),
+      ...toRawSpring(theme.motion.spring.fast.spatial),
       reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
     }),
-    [theme.motion.spring.slow.spatial, reduceMotion]
+    [theme.motion.spring.fast.spatial, reduceMotion]
   );
 
   React.useEffect(() => {

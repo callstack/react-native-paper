@@ -1,3 +1,5 @@
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+
 import {
   cubicBezier,
   type CSSTransitionProperties,
@@ -132,7 +134,9 @@ export function toRawSpring({
  *   ]}
  * />
  */
-export function getTransition<S extends object = Record<string, unknown>>(
+export function getTransition<
+  S extends object = ViewStyle & TextStyle & ImageStyle,
+>(
   theme: { motion: MotionConfig },
   property: NonNullable<CSSTransitionProperties<S>['transitionProperty']>,
   durationToken: keyof MotionDuration,

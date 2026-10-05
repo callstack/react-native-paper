@@ -71,7 +71,13 @@ const Badge = ({
 
   const transitionStyle: CSSStyle<TextStyle> = {
     opacity: visible ? 1 : 0,
-    ...getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
+    ...getTransition<TextStyle>(
+      theme,
+      'opacity',
+      'short3',
+      'standard',
+      reduceMotion
+    ),
   };
 
   return (

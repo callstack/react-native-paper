@@ -15,6 +15,7 @@ import {
   it,
   jest,
 } from '@jest/globals';
+import { getAnimatedStyle } from 'react-native-reanimated';
 import type { TestInstance } from 'test-renderer';
 
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
@@ -64,14 +65,24 @@ const getOuterTextInputPressable = (root: TestInstance | null) => {
   return pressable;
 };
 
-/** The label's animated wrapper has no public testID — it's marked `aria-hidden`. */
+/**
+ * The label's animated wrapper has no public testID — it's marked
+ * `aria-hidden`, like other non-accessible decorative elements (e.g. the
+ * error icon wrapper), so the lookup also requires the CSS-transition style
+ * that's unique to the animated label wrapper. Reanimated's CSS-transition
+ * props (`transitionProperty` et al.) are stripped from the plain `style`
+ * prop by the time it reaches a host component in tests, so `getAnimatedStyle`
+ * — the library's own jest helper (already used this way in Surface.test.tsx)
+ * — is needed to see them.
+ */
 const getLabelWrapper = (root: TestInstance | null) => {
   const [wrapper] =
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace non-accessible label wrapper lookup with a public behavior assertion.
     root?.queryAll(
       (instance) =>
         // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-        instance.props['aria-hidden'] === true,
+        instance.props['aria-hidden'] === true &&
+        'transitionProperty' in getAnimatedStyle(instance),
       { includeSelf: true }
     ) ?? [];
 

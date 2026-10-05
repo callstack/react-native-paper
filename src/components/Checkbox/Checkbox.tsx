@@ -145,7 +145,7 @@ const Checkbox = ({
     customUncheckedColor: uncheckedColor,
   });
 
-  const fillTransition = getTransition(
+  const fillTransition = getTransition<ViewStyle>(
     theme,
     ['opacity'],
     'short2',
@@ -153,7 +153,7 @@ const Checkbox = ({
     reduceMotion
   );
 
-  const checkTransition = getTransition(
+  const checkTransition = getTransition<ViewStyle>(
     theme,
     ['width', 'opacity'],
     'short3',
