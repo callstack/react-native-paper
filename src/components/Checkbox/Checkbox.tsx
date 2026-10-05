@@ -228,7 +228,7 @@ const Checkbox = ({
   // A disabled ripple effect asks for no press at all.
   const ownsPress = isInteractive && Boolean(rippleEffectEnabled);
 
-  const fillTransition = getTransition(
+  const fillTransition = getTransition<ViewStyle>(
     theme,
     ['opacity'],
     'short2',
@@ -236,7 +236,7 @@ const Checkbox = ({
     reduceMotion
   );
 
-  const checkTransition = getTransition(
+  const checkTransition = getTransition<ViewStyle>(
     theme,
     ['width', 'opacity'],
     'short3',
