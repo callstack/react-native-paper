@@ -446,14 +446,6 @@ exports[`Switch render renders off 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 4,
-        "left": 0,
-        "right": 0,
-        "top": 4,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -652,14 +644,6 @@ exports[`Switch render renders on 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 4,
-        "left": 0,
-        "right": 0,
-        "top": 4,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -838,14 +822,6 @@ exports[`Switch render renders with checked icon 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 4,
-        "left": 0,
-        "right": 0,
-        "top": 4,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1095,14 +1071,6 @@ exports[`Switch render renders with per-state icons 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 4,
-        "left": 0,
-        "right": 0,
-        "top": 4,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}

@@ -4,22 +4,11 @@ import { Animated, StyleSheet, View } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
-import { RadioButtonTokens } from './tokens';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
-
-const { stateLayerSize: STATE_LAYER_SIZE } = RadioButtonTokens;
-
-// The state layer is fixed, so the slop to reach the 48dp minimum
-// interactive target is a constant rather than something to measure.
-const RADIO_BUTTON_HIT_SLOP = getMinInteractiveSizeHitSlop({
-  width: STATE_LAYER_SIZE,
-  height: STATE_LAYER_SIZE,
-});
 
 export type Props = Omit<
   React.PropsWithoutRef<TouchableRippleProps>,
@@ -157,14 +146,6 @@ const RadioButtonAndroid = ({
             style={styles.container}
             testID={testID}
             theme={theme}
-            hitSlop={
-              rest.hitSlop !== undefined
-                ? rest.hitSlop
-                : disabled
-                  ? undefined
-                  : RADIO_BUTTON_HIT_SLOP
-            }
-            borderRadius={STATE_LAYER_SIZE / 2}
           >
             <Animated.View
               style={[
@@ -200,7 +181,7 @@ RadioButtonAndroid.displayName = 'RadioButton.Android';
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: STATE_LAYER_SIZE / 2,
+    borderRadius: 18,
   },
   radioContainer: {
     alignItems: 'center',
@@ -210,7 +191,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     borderRadius: 10,
-    margin: (STATE_LAYER_SIZE - 20) / 2,
+    margin: 8,
   },
   dot: {
     height: 10,

@@ -26,14 +26,6 @@ exports[`RadioButtonGroup renders properly 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 4,
-        "left": 4,
-        "right": 4,
-        "top": 4,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -50,8 +42,8 @@ exports[`RadioButtonGroup renders properly 1`] = `
           "overflow": "hidden",
         },
         {
-          "borderRadius": 20,
-          "padding": 8,
+          "borderRadius": 18,
+          "padding": 6,
         },
       ]
     }
