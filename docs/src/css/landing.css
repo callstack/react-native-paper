@@ -123,6 +123,22 @@
   letter-spacing: normal !important;
 }
 
+/* Section headings set no line-height in the source, so they use the font's
+   natural leading rather than the preset's 1.2. */
+.landing .landing-heading,
+.landing .landing-split__title,
+.landing .landing-subheading {
+  line-height: normal !important;
+}
+
+.landing .landing-subheading {
+  font-family: Roboto, sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: normal !important;
+  font-size: 30px;
+  margin: 0 0 1rem;
+}
+
 /* The preset also ships `body * { letter-spacing: -.02em; line-height: 1.5 }`
    with !important, which overrides every metric the original sets. Reset the
    tracking across the landing page, then restore the source's line-heights on
@@ -138,6 +154,10 @@
 
 .landing .landing-code__lede {
   line-height: 35px !important;
+}
+
+.landing .landing-concepts__lede {
+  line-height: normal !important;
 }
 
 .landing .landing-concepts__item-body {
@@ -240,9 +260,26 @@
 
 /* Hero */
 
-.landing-hero {
+/* Section padding per the original: Hero and Material You run flush
+   (`0 15px`) with a 700px min-height, and their artwork is positioned out of
+   flow so it does not drive section height. Numbers and Code drop their
+   bottom padding. */
+.landing .landing-hero,
+.landing .landing-materialyou {
+  position: relative;
   padding-top: 0;
   padding-bottom: 0;
+  min-height: 700px;
+}
+
+.landing .landing-numbers,
+.landing .landing-code {
+  padding-bottom: 0;
+}
+
+/* Discord's content block has its own floor in the source. */
+.landing .landing-discord {
+  min-height: 500px;
 }
 
 .landing-hero__container {
@@ -397,7 +434,7 @@
 }
 
 .landing-numbers__value {
-  margin: 30px 0 0;
+  margin: 30px 0 15px;
   font-family: 'Platform Web', Roboto, sans-serif;
   font-size: 72px;
   line-height: 1;
@@ -433,9 +470,17 @@
   font-size: 52px;
 }
 
+.landing-split__media {
+  display: none;
+}
+
 .landing-split__image {
-  width: 100%;
-  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: auto;
+  max-width: none;
+  height: 720px;
 }
 
 /* Code + editor */
@@ -569,8 +614,8 @@
 }
 
 .landing-testimonials__avatar {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -597,18 +642,37 @@
   text-align: center;
 }
 
-.landing-discord__icon,
+.landing-discord__icon {
+  width: 175px;
+  height: auto;
+}
+
 .landing-callstack__icon {
-  height: 56px;
-  margin-bottom: 24px;
+  width: 300px;
+  height: auto;
+}
+
+/* Discord's h2 sits above the subheading with tight spacing; Callstack's
+   heading clears its logo. */
+.landing-discord .landing-heading {
+  margin: 40px 0 16px;
+}
+
+.landing-callstack .landing-heading {
+  margin: 0 0 40px;
+}
+
+.landing-callstack .landing-subheading {
+  margin-top: 40px;
 }
 
 .landing-discord__body,
 .landing-callstack__body {
-  max-width: 680px;
-  margin: 0 auto 32px;
-  font-size: 18px;
-  line-height: 28px;
+  width: 450px;
+  max-width: 100%;
+  margin: 0 auto 40px;
+  font-weight: 300;
+  line-height: 24px;
 }
 
 .landing-callstack__body {
@@ -622,10 +686,6 @@
 
   .landing-numbers__list {
     flex-flow: row;
-  }
-
-  .landing-numbers__item:not(:last-of-type) {
-    margin-bottom: 0;
   }
 
   .landing-split {
@@ -644,7 +704,8 @@
 }
 
 @media (min-width: 900px) {
-  .landing-hero__mobiles {
+  .landing-hero__mobiles,
+  .landing-split__media {
     position: relative;
     display: flex;
     flex: 1;
@@ -700,8 +761,10 @@
 }
 
 .landing-lookfeel__badge {
-  height: 90px;
-  margin-top: 24px;
+  width: 225px;
+  height: 195px;
+  margin-top: 58px;
+  margin-bottom: 30px;
 }
 
 .landing-lookfeel__hint {
@@ -715,11 +778,17 @@
 }
 
 .landing-lookfeel__hint img {
-  width: 22px;
+  width: 14px;
+  height: 21px;
 }
 
 .landing-player {
   position: relative;
+  width: 100%;
+  max-width: 297px;
+  max-height: 630px;
+  height: auto;
+  margin-top: 45px;
   overflow: hidden;
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.2);
@@ -744,19 +813,30 @@
 }
 
 .landing-player__overlay img {
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
 }
 
 /* Code.js `tagline`: 30px/35px, capped at 500px and centred. */
-.landing-code__lede,
-.landing-concepts__lede {
+.landing-code__lede {
   max-width: 500px;
   margin: -40px auto 70px;
   color: var(--landing-near-black);
   font-size: 30px;
   line-height: 35px;
   text-align: center;
+}
+
+/* KeyConcepts.js: plain body copy at 460px, with a 1.5rem heading gap. */
+.landing-concepts__lede {
+  max-width: 460px;
+  margin: 0 auto 4rem;
+  font-size: 16px;
+  text-align: center;
+}
+
+.landing-concepts .landing-heading {
+  margin-bottom: 1.5rem;
 }
 
 .landing-section--dark .landing-concepts__lede {
@@ -781,4 +861,29 @@
   .landing-lookfeel__row--reverse .landing-lookfeel__col:first-child {
     order: 2;
   }
+}
+
+/* Header band — Header.js in the source. Height and flush padding match the
+   original's 80px bar; the logo and GitHub link come from the docs navbar. */
+.landing .landing-banner {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.landing-banner__text {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.landing-banner__text a {
+  color: inherit;
+  cursor: pointer;
+  font-family: 'Platform Web', Roboto, sans-serif;
+  text-decoration: underline;
 }

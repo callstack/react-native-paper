@@ -1,3 +1,4 @@
+import LandingBanner from './LandingBanner';
 import LandingCallstack from './LandingCallstack';
 import LandingCode from './LandingCode';
 import LandingConcepts from './LandingConcepts';
@@ -12,6 +13,7 @@ import LandingTestimonials from './LandingTestimonials';
 export default function Landing() {
   return (
     <main className="landing">
+      <LandingBanner />
       <LandingHero />
       <LandingNumbers />
       <LandingLookAndFeel />

@@ -8,9 +8,10 @@ export default function LandingDiscord() {
         className="landing-discord__icon"
         src={asset('images/icons/discord.svg')}
       />
-      <h2 className="landing-heading">
+      <h2 className="landing-heading">We are in Discord</h2>
+      <h3 className="landing-subheading">
         Join us in the <span>#react-native-paper</span> channel
-      </h2>
+      </h3>
       <p className="landing-body landing-discord__body">
         Community where people discuss and supports others in building
         react-native-paper apps.

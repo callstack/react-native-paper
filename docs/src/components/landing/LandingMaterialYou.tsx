@@ -19,11 +19,13 @@ export default function LandingMaterialYou() {
             so you can build your apps according to the latest trends.
           </p>
         </div>
-        <img
-          alt="Material You components"
-          className="landing-split__image"
-          src={asset('images/material-you.png')}
-        />
+        <div className="landing-split__media">
+          <img
+            alt="Material You components"
+            className="landing-split__image"
+            src={asset('images/material-you.png')}
+          />
+        </div>
       </div>
     </LandingSection>
   );
