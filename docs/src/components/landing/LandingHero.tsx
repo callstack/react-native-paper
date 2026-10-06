@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useVersion, withBase } from '@rspress/core/dist/runtime/index.js';
 
+import LandingButton from './LandingButton';
 import LandingSection, { asset } from './LandingSection';
 import { getNextRoute } from '../../utils/versionRoutes';
 
@@ -65,22 +66,23 @@ export default function LandingHero() {
   );
 
   return (
-    <LandingSection className="landing-hero" id="hero">
-      <div className="landing-hero__container">
-        <div className="landing-hero__copy">
-          <h1 className="landing-hero__title">
+    <LandingSection variant="wwffi0l" id="hero">
+      <div className="cztnm0o">
+        <div className="hrrzndk">
+          <h1 className="hmtzm5j">
             Making your React Native apps <span>look and feel native</span>
           </h1>
 
-          <div className="landing-hero__github">
-            <span className="landing-hero__github-button">
+          <div className="g1n6np2q">
+            <span className="gwvv8a1">
               <a
+                className="g1cwq15n"
                 aria-label="Star callstack/react-native-paper on GitHub"
                 href={REPO}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="landing-hero__star-icon">
+                <span className="s5mrc6w">
                   <svg
                     aria-hidden="true"
                     height="16"
@@ -97,8 +99,11 @@ export default function LandingHero() {
                 <span>Star</span>
               </a>
             </span>
-            <span className="landing-hero__github-count">
+            <span className="s152rxo6">
+              <b className="dqnumg8" />
+              <i className="lmbp5un" />
               <a
+                className="g1cwq15n"
                 aria-label={`${stars} stargazers on GitHub`}
                 href={`${REPO}/stargazers`}
                 rel="noopener noreferrer"
@@ -109,34 +114,32 @@ export default function LandingHero() {
             </span>
           </div>
 
-          <p className="landing-body">
+          <p className="bia8az9">
             React Native Paper is a high-quality, standard-compliant Material
             Design library that has you covered in all major use-cases.
           </p>
 
-          <div className="landing-hero__actions">
-            <a className="landing-button" href="#numbers">
+          <div className="r17y5eu1">
+            <LandingButton dark href="#numbers">
               Learn more
-            </a>
-            <a className="landing-button landing-button--light" href={docsHref}>
-              Docs
-            </a>
+            </LandingButton>
+            <LandingButton href={docsHref}>Docs</LandingButton>
           </div>
 
-          <div className="landing-hero__stores">
-            <p className="landing-body">Try out components in our demo apps:</p>
+          <div className="smvkndv">
+            <p className="bia8az9">Try out components in our demo apps:</p>
             <div>
               <a href="https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample">
                 <img
                   alt="google play store logo"
-                  className="landing-hero__store-logo"
+                  className="skghjfv"
                   src={asset('images/google-play.svg')}
                 />
               </a>
               <a href="https://apps.apple.com/app/react-native-paper/id1548934513">
                 <img
                   alt="appstore logo"
-                  className="landing-hero__store-logo"
+                  className="skghjfv"
                   src={asset('images/appstore.svg')}
                 />
               </a>
@@ -144,13 +147,13 @@ export default function LandingHero() {
           </div>
         </div>
 
-        <div className="landing-hero__mobiles">
+        <div className="mlu3qb8">
           <img
             alt="mobile mockup"
-            className="landing-hero__image"
+            className="hyn0pf"
             src={asset('images/hero-image.png')}
           />
-          <div className="landing-hero__image2" />
+          <div className="h1w9fa70" />
         </div>
       </div>
     </LandingSection>

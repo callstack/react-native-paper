@@ -5,11 +5,7 @@ import LandingSection, { asset } from './LandingSection';
 const PAPER_STATS_API =
   'https://paper-github-stats-h6ah15j9p.vercel.app/api/github-stats';
 
-type Stats = {
-  stars: number;
-  commits: number;
-  weeklyDownloads: number;
-};
+type Stats = { stars: number; commits: number; weeklyDownloads: number };
 
 /** Shown until the API responds, same values as the landing page source. */
 const fallbackData: Stats = {
@@ -73,19 +69,17 @@ export default function LandingNumbers() {
   ];
 
   return (
-    <LandingSection className="landing-numbers" dark id="numbers">
-      <h2 className="landing-heading">
+    <LandingSection variant="o16ish7f" dark id="numbers">
+      <h1 className="h15lhj08 hn5vo52">
         It&apos;s free, it&apos;s Open Source!
-      </h2>
+      </h1>
 
-      <ul className="landing-numbers__list">
+      <ul className="n5g0et3">
         {items.map((item) => (
-          <li className="landing-numbers__item" key={item.icon}>
+          <li className="n1himknf" key={item.icon}>
             <img alt="" src={asset(`images/icons/${item.icon}`)} />
-            <h3 className="landing-numbers__value">
-              {item.value.toLocaleString('en-US')}
-            </h3>
-            <h4 className="landing-numbers__label">{item.label}</h4>
+            <h3>{item.value.toLocaleString('en-US')}</h3>
+            <h4>{item.label}</h4>
           </li>
         ))}
       </ul>

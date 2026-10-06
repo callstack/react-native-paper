@@ -20,25 +20,29 @@ const concepts = [
 
 export default function LandingConcepts() {
   return (
-    <LandingSection className="landing-concepts" dark>
-      <h2 className="landing-heading">Key concepts</h2>
-      <p className="landing-body landing-concepts__lede">
-        react-native-paper focuses in important concepts that are hard to build
-        from scratch.
-      </p>
-
-      <div className="landing-concepts__grid">
-        {concepts.map((concept) => (
-          <article className="landing-concepts__item" key={concept.title}>
-            <img
-              alt=""
-              className="landing-concepts__icon"
-              src={asset(`images/icons/${concept.icon}`)}
-            />
-            <h3 className="landing-concepts__item-title">{concept.title}</h3>
-            <p className="landing-concepts__item-body">{concept.body}</p>
-          </article>
-        ))}
+    <LandingSection variant="s10i33tn" dark>
+      <div className="c1e6p7u3">
+        <div>
+          <h2>Key concepts</h2>
+          <p>
+            react-native-paper focuses in important concepts that are hard to
+            build from scratch.
+          </p>
+        </div>
+        <div className="r1an33qj">
+          {concepts.map((concept) => (
+            <div className="caka61c" key={concept.title}>
+              <div className="cg6sb30">
+                <img
+                  alt={concept.title}
+                  src={asset(`images/icons/${concept.icon}`)}
+                />
+                <h4>{concept.title}</h4>
+                <p>{concept.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </LandingSection>
   );

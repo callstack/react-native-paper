@@ -15,6 +15,7 @@ const testimonials = [
     role: 'Developer @ Expo / React Native',
     quote:
       'react-native-paper is 😎 ios + android + web, and exports typescript types.',
+    href: 'https://twitter.com/notbrent/status/1108492804978667520',
   },
   {
     avatar: 'osadnik.jpg',
@@ -26,47 +27,44 @@ const testimonials = [
   },
 ];
 
+/**
+ * The source renders these in a drag Slider across two bands: a heading
+ * section and a full-bleed track. This keeps the two bands and the card
+ * styling, but lays the cards out statically rather than as a carousel.
+ */
 export default function LandingTestimonials() {
   return (
-    <LandingSection className="landing-testimonials">
-      <h2 className="landing-heading">
-        They are already using <span>react-native-paper</span>
-      </h2>
+    <>
+      <LandingSection variant="s1k6gosz">
+        <div className="ce9bm9u">
+          <h1 className="h1j92dro hn5vo52">
+            They are already using
+            <br />
+            <span>react-native-paper</span>
+          </h1>
+        </div>
+      </LandingSection>
 
-      <div className="landing-testimonials__grid">
-        {testimonials.map((testimonial) => (
-          <figure className="landing-testimonials__item" key={testimonial.name}>
-            <blockquote className="landing-testimonials__quote">
-              {testimonial.quote}
-            </blockquote>
-            <figcaption className="landing-testimonials__author">
-              <img
-                alt=""
-                className="landing-testimonials__avatar"
-                src={asset(`images/${testimonial.avatar}`)}
-              />
-              <span>
-                <span className="landing-testimonials__name">
-                  {testimonial.href ? (
-                    <a
-                      href={testimonial.href}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {testimonial.name}
+      <LandingSection variant="o18vdt8l" innerClassName="i1olqn3s">
+        <div className="wibeo8m">
+          <div className="landing-testimonials">
+            {testimonials.map((t) => (
+              <figure className="landing-testimonials__item" key={t.name}>
+                <blockquote>{t.quote}</blockquote>
+                <figcaption>
+                  <img alt="" src={asset(`images/${t.avatar}`)} />
+                  <span>
+                    <a href={t.href} rel="noopener noreferrer" target="_blank">
+                      {t.name}
                     </a>
-                  ) : (
-                    testimonial.name
-                  )}
-                </span>
-                <span className="landing-testimonials__role">
-                  {testimonial.role}
-                </span>
-              </span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </LandingSection>
+                    <small>{t.role}</small>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </LandingSection>
+    </>
   );
 }

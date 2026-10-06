@@ -3,6 +3,7 @@ import LandingCallstack from './LandingCallstack';
 import LandingCode from './LandingCode';
 import LandingConcepts from './LandingConcepts';
 import LandingDiscord from './LandingDiscord';
+import LandingFooter from './LandingFooter';
 import LandingHero from './LandingHero';
 import LandingLookAndFeel from './LandingLookAndFeel';
 import LandingMaterialYou from './LandingMaterialYou';
@@ -23,6 +24,7 @@ export default function Landing() {
       <LandingTestimonials />
       <LandingDiscord />
       <LandingCallstack />
+      <LandingFooter />
     </main>
   );
 }

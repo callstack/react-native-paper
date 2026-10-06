@@ -5,6 +5,11 @@
     "label": "Guides"
   },
   {
+    "type": "dir-section-header",
+    "name": "components",
+    "label": "Components"
+  },
+  {
     "type": "file",
     "name": "showcase",
     "label": "Showcase"
