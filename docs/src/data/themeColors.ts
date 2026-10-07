@@ -8,29 +8,20 @@ export const themeColors = {
     default: {
       backgroundColor: 'theme.colors.surface',
     },
-    elevated: {
-      backgroundColor: 'theme.colors.elevation.level2',
+    scrolled: {
+      backgroundColor: 'theme.colors.surfaceContainer',
     },
-  },
-  'Appbar.Action': {
-    'leading icon': {
+    'leading action': {
       iconColor: 'theme.colors.onSurface',
     },
-    'not leading icon': {
+    'trailing action': {
       iconColor: 'theme.colors.onSurfaceVariant',
     },
-  },
-  'Appbar.Content': {
-    '-': {
+    headline: {
       textColor: 'theme.colors.onSurface',
     },
-  },
-  'Appbar.Header': {
-    default: {
-      backgroundColor: 'theme.colors.surface',
-    },
-    elevated: {
-      backgroundColor: 'theme.colors.elevation.level2',
+    subtitle: {
+      textColor: 'theme.colors.onSurfaceVariant',
     },
   },
   Banner: {

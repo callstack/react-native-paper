@@ -1,18 +1,14 @@
 export const screenshots = {
   ActivityIndicator: 'screenshots/activity-indicator.gif',
-  Appbar: 'screenshots/appbar.png',
-  'Appbar.Action': 'screenshots/appbar-action-android.png',
-  'Appbar.BackAction': 'screenshots/appbar-backaction-android.png',
-  'Appbar.Content': 'screenshots/appbar-content.png',
-  'Appbar.Header': {
-    small: 'screenshots/appbar-small.png',
-    medium: 'screenshots/appbar-medium.png',
-    large: 'screenshots/appbar-large.png',
-    'center-aligned': 'screenshots/appbar-center-aligned.png',
-  },
   'Avatar.Icon': 'screenshots/avatar-icon.png',
   'Avatar.Image': 'screenshots/avatar-image.png',
   'Avatar.Text': 'screenshots/avatar-text.png',
+  Appbar: {
+    search: 'screenshots/appbar-v6-search.png',
+    small: 'screenshots/appbar-v6-small.png',
+    'medium flexible': 'screenshots/appbar-v6-medium-flexible.png',
+    'large flexible': 'screenshots/appbar-v6-large-flexible.png',
+  },
   Badge: {
     'with text': 'screenshots/badge-1.png',
     'without text': 'screenshots/badge-2.png',
