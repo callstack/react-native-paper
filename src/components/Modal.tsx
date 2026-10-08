@@ -15,20 +15,20 @@ import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismisses it.
+   * Determines whether the user can dismiss the modal with the Android back button,
+   * the Escape key, or the screen reader's escape gesture.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismisses the dialog.
+   * Determines whether clicking outside the modal dismisses it.
+   * Applies only when the modal is `dismissable`.
    */
-  dismissableBackButton?: boolean;
+  dismissableOverlay?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
    */
@@ -136,7 +136,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
  */
 function Modal({
   dismissable = true,
-  dismissableBackButton = dismissable,
+  dismissableOverlay = true,
   visible = false,
   dismissAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
@@ -186,28 +186,6 @@ function Modal({
     return () => clearTimeout(timeout);
   }, [scale, visible, visibleInternal]);
 
-  React.useEffect(() => {
-    if (!visible) {
-      return undefined;
-    }
-
-    const onHardwareBackPress = () => {
-      if (dismissableBackButton) {
-        onDismissCallback();
-      }
-
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
-    );
-
-    return () => subscription.remove();
-  }, [dismissableBackButton, onDismissCallback, visible]);
-
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
   const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
@@ -234,21 +212,27 @@ function Modal({
     return null;
   }
 
+  const overlayDismisses = dismissable && dismissableOverlay;
+
   return (
-    <Portal modal={visibleInternal} theme={themeOverrides}>
+    <Portal
+      modal={visible}
+      onDismiss={onDismissCallback}
+      dismissable={dismissable}
+      theme={themeOverrides}
+    >
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
         aria-live="polite"
         style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
         testID={testID}
       >
         <AnimatedPressable
           aria-hidden
           accessible={false}
           tabIndex={-1}
-          disabled={!dismissable}
-          onPress={dismissable ? onDismissCallback : undefined}
+          disabled={!overlayDismisses}
+          onPress={overlayDismisses ? onDismissCallback : undefined}
           style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
           testID={overlayTestID}
         />

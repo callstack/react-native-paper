@@ -18,13 +18,15 @@ import type { DialogChildProps } from './utils';
 
 export type Props = {
   /**
-   * Determines whether clicking outside the dialog dismiss it.
+   * Determines whether the user can dismiss the dialog with the Android back button,
+   * the Escape key, or the screen reader's escape gesture.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismiss dialog.
+   * Determines whether clicking outside the dialog dismisses it.
+   * Applies only when the dialog is `dismissable`.
    */
-  dismissableBackButton?: boolean;
+  dismissableOverlay?: boolean;
   /**
    * Callback that is called when the user dismisses the dialog.
    */
@@ -102,7 +104,7 @@ const DIALOG_ELEVATION: Elevation = 3;
 const Dialog = ({
   children,
   dismissable = true,
-  dismissableBackButton = dismissable,
+  dismissableOverlay = true,
   onDismiss,
   dismissAccessibilityLabel,
   'aria-label': ariaLabel,
@@ -126,7 +128,7 @@ const Dialog = ({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabel == null ? titleId : undefined}
       dismissable={dismissable}
-      dismissableBackButton={dismissableBackButton}
+      dismissableOverlay={dismissableOverlay}
       onDismiss={onDismiss}
       dismissAccessibilityLabel={dismissAccessibilityLabel}
       visible={visible}

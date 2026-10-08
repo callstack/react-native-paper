@@ -17,11 +17,22 @@ export type Props = {
    */
   children: React.ReactNode;
   /**
-   * Whether the portal hides items below it from screen readers and focus order.
+   * Whether the portal hides items below it from screen readers and focus order,
+   * and listens for the Android back button, the Escape key on web
+   * and the screen reader's escape gesture.
    *
    * Ensure it's set to true only when the modal is open.
    */
   modal?: boolean;
+  /**
+   * Callback that is called when the user asks to close a `modal` portal.
+   * Only the topmost `modal` portal in a `Portal.Host` can be dismissed.
+   */
+  onDismiss?: () => void;
+  /**
+   * Whether the user can dismiss a `modal` portal.
+   */
+  dismissable?: boolean;
   /**
    * @optional
    */
@@ -33,6 +44,9 @@ export type Props = {
  * You can use it to render content which should appear above other elements, similar to `Modal`.
  * It requires a [`Portal.Host`](PortalHost) component to be rendered somewhere in the parent tree.
  * Note that if you're using the `Provider` component, this already includes a `Portal.Host`.
+ *
+ * A topmost `modal` portal can be closed with the Android back button, the Escape key on web
+ * and the screen reader's escape gesture through `onDismiss`.
  *
  * ## Usage
  * ```js
@@ -48,7 +62,13 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
+const Portal = ({
+  children,
+  modal,
+  onDismiss,
+  dismissable = true,
+  theme: themeOverrides,
+}: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
@@ -56,7 +76,12 @@ const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
   const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
-    <PortalConsumer manager={manager} modal={modal}>
+    <PortalConsumer
+      manager={manager}
+      modal={modal}
+      onDismiss={onDismiss}
+      dismissable={dismissable}
+    >
       <SettingsProvider value={settings}>
         <ReduceMotionContext.Provider value={reduceMotion}>
           <LocaleProvider direction={direction}>

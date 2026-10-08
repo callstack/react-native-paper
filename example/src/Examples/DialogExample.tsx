@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Button } from 'react-native-paper';
 
 import {
   DialogWithCustomColors,
-  DialogWithDismissableBackButton,
   DialogWithIcon,
   DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
-  DialogWithUndismissableBackButton,
+  DialogWithUndismissableOverlay,
   UndismissableDialog,
 } from './Dialogs';
 import ScreenWrapper from '../ScreenWrapper';
@@ -71,24 +70,13 @@ const DialogExample = () => {
       >
         With icon
       </Button>
-      {Platform.OS === 'android' && (
-        <Button
-          mode="outlined"
-          onPress={_toggleDialog('dialog7')}
-          style={styles.button}
-        >
-          Dismissable back button
-        </Button>
-      )}
-      {Platform.OS === 'android' && (
-        <Button
-          mode="outlined"
-          onPress={_toggleDialog('dialog8')}
-          style={styles.button}
-        >
-          Undismissable back button
-        </Button>
-      )}
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog7')}
+        style={styles.button}
+      >
+        Undismissable overlay
+      </Button>
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -113,13 +101,9 @@ const DialogExample = () => {
         visible={_getVisible('dialog6')}
         close={_toggleDialog('dialog6')}
       />
-      <DialogWithDismissableBackButton
+      <DialogWithUndismissableOverlay
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}
-      />
-      <DialogWithUndismissableBackButton
-        visible={_getVisible('dialog8')}
-        close={_toggleDialog('dialog8')}
       />
     </ScreenWrapper>
   );

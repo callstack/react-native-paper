@@ -1,18 +1,26 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import PortalDismiss from './PortalDismiss';
 import PortalLayer from './PortalLayer';
+
+export type PortalOptions = {
+  modal: boolean | undefined;
+  onDismiss: (() => void) | undefined;
+  dismissable: boolean;
+};
 
 type Props = {
   children: React.ReactNode;
 };
 
 type State = {
-  portals: Array<{
-    key: number;
-    children: React.ReactNode;
-    modal: boolean | undefined;
-  }>;
+  portals: Array<
+    PortalOptions & {
+      key: number;
+      children: React.ReactNode;
+    }
+  >;
 };
 
 /**
@@ -23,25 +31,17 @@ export default class PortalManager extends React.Component<Props, State> {
     portals: [],
   };
 
-  mount = (
-    key: number,
-    children: React.ReactNode,
-    modal: boolean | undefined
-  ) => {
+  mount = (key: number, children: React.ReactNode, options: PortalOptions) => {
     this.setState((state) => ({
-      portals: [...state.portals, { key, children, modal }],
+      portals: [...state.portals, { key, children, ...options }],
     }));
   };
 
-  update = (
-    key: number,
-    children: React.ReactNode,
-    modal: boolean | undefined
-  ) =>
+  update = (key: number, children: React.ReactNode, options: PortalOptions) =>
     this.setState((state) => ({
       portals: state.portals.map((item) => {
         if (item.key === key) {
-          return { ...item, children, modal };
+          return { ...item, children, ...options };
         }
 
         return item;
@@ -70,19 +70,33 @@ export default class PortalManager extends React.Component<Props, State> {
         >
           {this.props.children}
         </PortalLayer>
-        {portals.map(({ key, children }, index) => (
-          <PortalLayer
-            key={key}
-            inert={index < topmostModalIndex}
-            collapsable={
-              false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
-            }
-            pointerEvents="box-none"
-            style={StyleSheet.absoluteFill}
-          >
-            {children}
-          </PortalLayer>
-        ))}
+        {portals.map(
+          ({ key, children, modal, onDismiss, dismissable }, index) => (
+            <PortalLayer
+              key={key}
+              inert={index < topmostModalIndex}
+              onAccessibilityEscape={
+                index === topmostModalIndex && dismissable
+                  ? onDismiss
+                  : undefined
+              }
+              collapsable={
+                false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
+              }
+              pointerEvents="box-none"
+              style={StyleSheet.absoluteFill}
+            >
+              {modal ? (
+                <PortalDismiss
+                  enabled={index === topmostModalIndex}
+                  dismissable={dismissable}
+                  onDismiss={onDismiss}
+                />
+              ) : null}
+              {children}
+            </PortalLayer>
+          )
+        )}
       </>
     );
   }

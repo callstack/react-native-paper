@@ -1,7 +1,15 @@
 import { BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -18,6 +26,7 @@ jest.mock('react-native-safe-area-context', () => ({
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
+  exitApp: jest.Mock<() => void>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -38,6 +47,10 @@ describe('Modal', () => {
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('renders passed children', async () => {
@@ -305,7 +318,7 @@ describe('Modal', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('does not invoke onDismiss on Android back button press when dismissableBackButton is false', async () => {
+  it("doesn't invoke onDismiss when the overlay is pressed and dismissableOverlay is false", async () => {
     const onDismiss = jest.fn();
 
     await render(
@@ -315,27 +328,22 @@ describe('Modal', () => {
           overlayTestID="backdrop"
           visible
           onDismiss={onDismiss}
-          dismissableBackButton={false}
+          dismissableOverlay={false}
         >
           {null}
         </Modal>
       </Portal.Host>
     );
 
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
+
     await act(() => {
-      BackHandler.mockPressBack();
       jest.runAllTimers();
     });
 
     expect(onDismiss).not.toHaveBeenCalled();
-
-    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
-
-    await act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
   it('does not render the visually hidden dismiss button for a non-dismissible modal', async () => {
@@ -509,6 +517,22 @@ describe('Modal', () => {
     });
 
     expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it("doesn't pass the Android back button press on from a non-dismissible modal", async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible dismissable={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(BackHandler.exitApp).not.toHaveBeenCalled();
   });
 
   it('runs the fade-in animation when visible changes from false to true', async () => {

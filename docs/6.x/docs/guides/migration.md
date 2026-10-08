@@ -219,7 +219,23 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`,
 </Modal>
 ```
 
-Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
+`dismissable` controls the Android back button, the Escape key, the screen reader's escape gesture, and the dismiss button described above. An outside tap is controlled by the new `dismissableOverlay` prop, which applies only when the modal is `dismissable`. The `dismissableBackButton` prop was removed. Setting `dismissable={false}` blocks every way of dismissing the modal.
+
+To ignore an outside tap and still allow the back button, the Escape key, and the screen reader's escape gesture to close the modal, use `dismissableOverlay={false}`:
+
+```diff
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+- dismissable={false}
+- dismissableBackButton
++ dismissableOverlay={false}
+>
+  <Text>Content</Text>
+</Modal>
+```
+
+`Dialog` uses the same `dismissable` and `dismissableOverlay` props.
 
 ### Dialog
 
@@ -246,7 +262,7 @@ The dialog now has the `dialog` role. On web, the dialog's accessible name is se
 </Dialog>
 ```
 
-When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
+When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop. `dismissable` and `dismissableOverlay` behave the same way as on `Modal`, and `dismissableBackButton` was removed.
 
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.

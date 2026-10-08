@@ -212,7 +212,6 @@ exports[`Modal closes a non-dismissible modal when visible changes from true to 
 exports[`Modal closes a non-dismissible modal when visible changes from true to false 2`] = `
 <>
   <View
-    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -432,6 +431,7 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 1`] = 
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -446,7 +446,6 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 1`] = 
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -683,6 +682,7 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 2`] = 
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -697,7 +697,6 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 2`] = 
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -934,6 +933,7 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 1`] = `
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -948,7 +948,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 1`] = `
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -1185,6 +1184,7 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 2`] = `
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -1199,7 +1199,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 2`] = `
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -1436,6 +1435,7 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 3`] = `
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -1450,7 +1450,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 3`] = `
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -2941,6 +2940,7 @@ exports[`Modal keeps the modal closed when visible changes back to false while o
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -2955,7 +2955,6 @@ exports[`Modal keeps the modal closed when visible changes back to false while o
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -3192,6 +3191,7 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -3206,7 +3206,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -3432,7 +3431,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
 exports[`Modal keeps the modal open when visible changes back to true while closing 2`] = `
 <>
   <View
-    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -3457,7 +3455,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="none"
       style={
         [
@@ -3694,6 +3691,7 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -3708,7 +3706,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -3945,6 +3942,7 @@ exports[`Modal receives appropriate top and bottom insets 1`] = `
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -3959,7 +3957,6 @@ exports[`Modal receives appropriate top and bottom insets 1`] = `
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -4196,6 +4193,7 @@ exports[`Modal runs the closing animation when visible changes to false after di
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -4210,7 +4208,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -4436,7 +4433,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
 exports[`Modal runs the closing animation when visible changes to false after dismissing 2`] = `
 <>
   <View
-    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -4461,7 +4457,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="none"
       style={
         [
@@ -4687,7 +4682,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
 exports[`Modal runs the closing animation when visible changes to false after dismissing 3`] = `
 <>
   <View
-    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -4712,7 +4706,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="none"
       style={
         [
@@ -4949,6 +4942,7 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -4963,7 +4957,6 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -5200,6 +5193,7 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -5214,7 +5208,6 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -5451,6 +5444,7 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
   />
   <View
     collapsable={false}
+    onAccessibilityEscape={[Function]}
     pointerEvents="box-none"
     style={
       {
@@ -5465,7 +5459,6 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -5691,7 +5684,6 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
 exports[`Modal runs the fade-out animation when visible changes from true to false 2`] = `
 <>
   <View
-    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -5716,7 +5708,6 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
     <View
       aria-live="polite"
       collapsable={false}
-      onAccessibilityEscape={[Function]}
       pointerEvents="none"
       style={
         [

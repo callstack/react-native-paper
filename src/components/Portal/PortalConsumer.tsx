@@ -1,24 +1,24 @@
 import * as React from 'react';
 
 import type { PortalMethods } from './PortalHost';
+import type { PortalOptions } from './PortalManager';
 
-type Props = {
+type Props = PortalOptions & {
   manager: PortalMethods;
   children: React.ReactNode;
-  modal?: boolean;
 };
 
 export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {
     this.checkManager();
 
-    this.key = this.props.manager.mount(this.props.children, this.props.modal);
+    this.key = this.props.manager.mount(this.props.children, this.getOptions());
   }
 
   componentDidUpdate() {
     this.checkManager();
 
-    this.props.manager.update(this.key, this.props.children, this.props.modal);
+    this.props.manager.update(this.key, this.props.children, this.getOptions());
   }
 
   componentWillUnmount() {
@@ -28,6 +28,12 @@ export default class PortalConsumer extends React.Component<Props> {
   }
 
   private key: any;
+
+  private getOptions(): PortalOptions {
+    const { modal, onDismiss, dismissable } = this.props;
+
+    return { modal, onDismiss, dismissable };
+  }
 
   private checkManager() {
     if (!this.props.manager) {
