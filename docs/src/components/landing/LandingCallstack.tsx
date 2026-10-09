@@ -6,7 +6,10 @@ export default function LandingCallstack() {
     <LandingSection variant="s1xiom6p" id="contact">
       <div className="ct77mvk">
         <h2>Paper is created by</h2>
-        <img alt="Callstack logo" src={asset('images/icons/callstack.svg')} />
+        <img
+          alt="Callstack logo"
+          src={asset('images/icons/callstack-dark.svg')}
+        />
         <h3>React Native Core Contributors and official Facebook partners</h3>
         <p>
           Callstack cooperates with many clients from various industries,
