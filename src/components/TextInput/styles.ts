@@ -17,6 +17,9 @@ import { tokens } from '../../theme/tokens';
 const { bodyLarge, bodySmall } = tokens.md.sys.typescale;
 
 export const styles = StyleSheet.create({
+  root: {
+    flexShrink: 1,
+  },
   input: {
     paddingVertical: 0,
     paddingHorizontal: 0,
