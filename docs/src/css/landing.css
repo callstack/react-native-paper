@@ -7,28 +7,42 @@
  * provide: the webfonts, and the overrides needed because the docs preset
  * styles headings, `body *`, `pre`/`code` and font synthesis with !important.
  *
- * Roboto and Roboto Mono are Apache-2.0 and vendored. Platform Web, which the
- * original sets its headings in, is a Commercial Type retail face: the files
- * come from the source repo's src/fonts/PlatformWeb and carry "Not to be used
- * for anything other than web font use!". Callstack's licence with Commercial
- * Type needs to cover both the domain this is served from and redistribution
- * through this repo, which is public where the source repo is not.
- *
- * Only the Medium cut exists, declared at `normal` as the original does, so
- * the bold headings are the browser synthesising weight from it - hence the
- * `font-synthesis` reset further down.
+ * Roboto and Roboto Mono are Apache-2.0 and vendored. The original sets its
+ * headings in Platform Web, a Commercial Type retail face we cannot ship from
+ * a public repo, so they take Alliance No. 2 instead - Callstack's own face,
+ * which the rest of the docs site already uses.
  */
 
 @import './landing-vendor.css';
 
+/* @callstack/rspress-theme declares Alliance No. 2 from assets.callstack.com,
+   which serves the files without `Access-Control-Allow-Origin` - so the
+   cross-origin fetch is blocked and headings fall back to Arial. Re-declare it
+   here with the copies react-native-builder-bob uses, which do send CORS. The
+   woff2 stays first so it takes over if the CDN headers are ever fixed; a
+   failed src falls through to the next entry. */
 @font-face {
-  font-family: 'Platform Web';
+  font-family: 'Alliance No. 2';
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-display: swap;
   src:
-    url('../assets/landing/fonts/PlatformWeb-Medium.woff2') format('woff2'),
-    url('../assets/landing/fonts/PlatformWeb-Medium.woff') format('woff');
+    url('https://assets.callstack.com/alliance-no-2-regular.woff2')
+      format('woff2'),
+    url('https://cdn.prod.website-files.com/67e6b7885e182e1054b556db/67e6b8ee4fb44f39145cf744_AllianceNo2-Regular.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Alliance No. 2';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('https://assets.callstack.com/alliance-no-2-medium.woff2')
+      format('woff2'),
+    url('https://cdn.prod.website-files.com/67e6b7885e182e1054b556db/67e6b8eed3d2262c4baebd90_AllianceNo2-Medium.ttf')
+      format('truetype');
 }
 
 @font-face {
@@ -74,7 +88,7 @@
   src: url('../assets/landing/fonts/roboto-mono-400.woff2') format('woff2');
 }
 
-/* typography.css in the original: Roboto body, Platform Web for h1/h2. */
+/* typography.css in the original: Roboto body, Alliance for h1/h2. */
 /* The original's global resets, scoped so they cannot leak into the docs. */
 .landing,
 .landing *,
@@ -118,15 +132,11 @@
   line-height: 1 !important;
 }
 
-/* typography.css in the original: Platform Web for h1/h2, Roboto elsewhere.
-   The preset sets its own face on h1-h6 with !important, so these have to
-   outrank it. h3-h6 stay inside `:where()` so the one heading the original
-   does set in Platform Web, `.n1himknf h3`, still wins. */
-.landing h1:where(:not(.landing-editor__preview *)),
-.landing h2:where(:not(.landing-editor__preview *)) {
-  font-family: 'Platform Web', Roboto, sans-serif !important;
-}
-
+/* typography.css in the original: a display face for h1/h2, Roboto elsewhere.
+   The preset already puts Alliance on h1-h6 with !important, so this only
+   needs to keep h3-h6 on Roboto as the original has them. Held inside
+   `:where()` so `.n1himknf h3`, which the original sets in the display face,
+   still wins - it is handled below. */
 .landing :where(h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
   font-family: Roboto, sans-serif !important;
 }
@@ -194,8 +204,8 @@
 /* The preset resets heading margins (`blockquote, ..., h1, h2, ... { margin: 0 }`)
    and forces `line-height: 1.2`, both at element specificity. The original
    leaves headings at the UA defaults unless a vendored class says otherwise -
-   its `normal` leading is exactly 1.0 in Platform Web, so a 64px heading
-   occupies 64px. Re-assert both through `:where()`, which contributes no
+   so a 64px heading takes the display face's own leading. Re-assert both
+   through `:where()`, which contributes no
    specificity: these outrank the preset's element rules while still losing to
    any vendored class, so `.h15lhj08`'s margin and `.hmtzm5j`'s 120% survive. */
 :where(.landing) h1 {
@@ -226,6 +236,18 @@
   margin-block: 1em;
 }
 
+/* Alliance is wider than the Platform Web the original uses, so the hero
+   heading needs 460px to keep its three-line break where `.hrrzndk`'s content
+   box gives 425. Left at 425 it takes a fourth line, which swallows the 70px
+   the original leaves between the store badges and the next band. 460 is
+   exactly the column's 35px right padding, so nothing overflows, and only
+   where the hero is two-column. */
+@media (min-width: 992px) {
+  .landing .hmtzm5j {
+    margin-right: -35px;
+  }
+}
+
 /* Leading needs to outrank the preset's `h1..h6 { line-height: 1.2 }`, which
    is !important, so it cannot ride at `:where()` specificity. `.hmtzm5j` and
    `.h1knnu89` are the two headings the original gives an explicit 120%; they
@@ -243,8 +265,26 @@
   line-height: normal !important;
 }
 
-/* The one h3 the original sets in Platform Web, so it takes that face's own
-   leading rather than Roboto's. */
+/* The preset strips link underlines, where the original leaves them at the UA
+   default. These stat labels are the only ones it shows on: every other link
+   either carries a vendored rule (`.hfwrvff a`, `.d1cbpza3 a`, `.cf3elge a`,
+   `.g1cwq15n`) or wraps an inline-block button, which the decoration cannot
+   propagate into. */
+.landing .n1himknf h4 a {
+  text-decoration: underline;
+}
+
+/* The three places the original sets in the display face. Each carries a
+   vendored rule naming Platform Web with no fallback, so with that face gone
+   they would drop to the UA default serif - point them at Alliance instead. */
+.landing .hfwrvff a,
+.landing .cmn45yp h2,
+.landing .n1himknf h3 {
+  font-family: 'Alliance No. 2', Roboto, sans-serif !important;
+}
+
+/* The stat numbers are set large enough that the preset's line-height shows;
+   let them take the display face's own leading rather than Roboto's. */
 .landing .n1himknf h3 {
   line-height: normal !important;
 }
