@@ -1,12 +1,32 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { Surface, Text, Palette, List, IconButton } from 'react-native-paper';
-import type { Elevation } from 'react-native-paper';
+import {
+  Surface,
+  Text,
+  Palette,
+  List,
+  IconButton,
+  useTheme,
+} from 'react-native-paper';
+import type { Elevation, SurfaceRole } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
 const elevationLevels: Elevation[] = [0, 1, 2, 3, 4, 5];
+
+const containerRoles: SurfaceRole[] = [
+  'surface',
+  'surfaceDim',
+  'surfaceBright',
+  'surfaceVariant',
+  'surfaceContainerLowest',
+  'surfaceContainerLow',
+  'surfaceContainer',
+  'surfaceContainerHigh',
+  'surfaceContainerHighest',
+  'inverseSurface',
+];
 
 const AnimatedSurface = () => {
   const [index, setIndex] = React.useState(3);
@@ -37,7 +57,19 @@ const AnimatedSurface = () => {
 };
 
 const SurfaceExample = () => {
+  const theme = useTheme();
+
   const elevationValues: Elevation[] = [0, 1, 2, 3, 4, 5];
+
+  const onColorFor = (role: SurfaceRole) => {
+    if (role === 'inverseSurface') {
+      return theme.colors.inverseOnSurface;
+    }
+    if (role === 'surfaceVariant') {
+      return theme.colors.onSurfaceVariant;
+    }
+    return theme.colors.onSurface;
+  };
 
   const renderSurface = (index: Elevation, mode: 'flat' | 'elevated') => (
     <Surface
@@ -72,6 +104,31 @@ const SurfaceExample = () => {
           contentContainerStyle={styles.scroll}
         >
           {elevationValues.map((elevation) => renderSurface(elevation, 'flat'))}
+        </ScrollView>
+      </List.Section>
+
+      <List.Section title="Semantic container colors">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scroll}
+        >
+          {containerRoles.map((role) => (
+            <Surface
+              key={role}
+              style={styles.surface}
+              borderRadius={8}
+              mode="flat"
+              container={role}
+            >
+              <Text
+                variant="bodySmall"
+                style={[styles.centerText, { color: onColorFor(role) }]}
+              >
+                {role}
+              </Text>
+            </Surface>
+          ))}
         </ScrollView>
       </List.Section>
 

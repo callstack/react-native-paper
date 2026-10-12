@@ -11,7 +11,7 @@ import Animated, {
 
 import { useInternalTheme } from '../core/theming';
 import { androidElevationLevels, shadow } from '../theme/tokens/sys/elevation';
-import type { Elevation, ThemeProp } from '../theme/types';
+import type { Elevation, SurfaceRole, ThemeProp } from '../theme/types';
 
 type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
   AnimatedStyle<Required<Pick<ViewStyle, Key>>>,
@@ -22,8 +22,8 @@ type BorderRadius = AnimatedStyleProp<'borderRadius'>;
 
 type SurfaceVisualProps = {
   /**
-   * Background color of the Surface. Overrides the color derived from
-   * `elevation`.
+   * Background color of the Surface. Overrides both `container` and the
+   * color derived from `elevation`.
    */
   backgroundColor?: ColorValue;
   /**
@@ -105,11 +105,32 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      */
     style?: StyleProp<SurfaceStyle>;
     /**
+     * Semantic color role of the Surface background, resolved from the
+     * theme, e.g. `container="surfaceContainerLow"` renders with
+     * `theme.colors.surfaceContainerLow`.
+     *
+     * When `container` is set, `elevation` only controls the shadow (and
+     * z-order on Android) and no longer affects the background color.
+     *
+     * Precedence: `backgroundColor` > `container` >
+     * `theme.colors.elevation[levelN]` derived from `elevation`.
+     *
+     * Prefer `container` when the fill is an MD3 surface-family role (as
+     * component specs define it, e.g. menus use `surfaceContainer`). Use
+     * `backgroundColor` only for raw, non-semantic colors. Components with
+     * variant-driven fills outside the surface family should keep resolving
+     * their own tokens and pass the result via `backgroundColor`.
+     */
+    container?: SurfaceRole;
+    /**
      * @supported Available in v5.x with theme version 3
      * Changes shadows and background on iOS and Android.
      * Used to create UI hierarchy between components.
      *
      * Note: If `mode` is set to `flat`, Surface doesn't have a shadow.
+     *
+     * Note: If `backgroundColor` or `container` is set, `elevation` only
+     * affects the shadow.
      *
      * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
      * It's no longer supported with theme version 3 and you should use `elevation` property instead.
@@ -118,8 +139,8 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
     /**
      * @supported Available in v5.x with theme version 3
      * Mode of the Surface.
-     * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-     * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+     * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value (unless `backgroundColor` or `container` is set).
+     * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value (unless `backgroundColor` or `container` is set).
      */
     mode?: 'flat' | 'elevated';
     /**
@@ -150,9 +171,19 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
  * import { StyleSheet } from 'react-native';
  *
  * const MyComponent = () => (
- *   <Surface style={styles.surface} elevation={4} borderRadius={8}>
- *      <Text>Surface</Text>
- *   </Surface>
+ *   <>
+ *     <Surface style={styles.surface} elevation={4} borderRadius={8}>
+ *        <Text>Surface</Text>
+ *     </Surface>
+ *     <Surface
+ *       style={styles.surface}
+ *       container="surfaceContainerLow"
+ *       elevation={1}
+ *       borderRadius={8}
+ *     >
+ *        <Text>Semantic container color</Text>
+ *     </Surface>
+ *   </>
  * );
  *
  * export default MyComponent;
@@ -170,6 +201,7 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
  */
 const Surface = ({
   elevation = 1,
+  container,
   children,
   theme: overriddenTheme,
   style,
@@ -199,7 +231,9 @@ const Surface = ({
   const { colors } = theme;
 
   const backgroundColor =
-    customBackgroundColor ?? colors.elevation?.[`level${elevation}`];
+    customBackgroundColor ??
+    (container != null ? colors[container] : undefined) ??
+    colors.elevation?.[`level${elevation}`];
 
   const backgroundStyle = { backgroundColor };
 
