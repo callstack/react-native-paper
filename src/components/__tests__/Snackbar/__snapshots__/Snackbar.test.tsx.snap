@@ -1,0 +1,532 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar renders a message with an action and a close icon button 1`] = `
+<>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "left": 0,
+            "pointerEvents": "box-none",
+            "position": "absolute",
+            "right": 0,
+          },
+          {
+            "paddingBottom": 0,
+            "paddingHorizontal": 0,
+          },
+          {
+            "paddingBottom": 16,
+          },
+        ]
+      }
+    >
+      <View
+        aria-live="polite"
+        collapsable={false}
+        style={
+          [
+            {},
+            {
+              "flexDirection": "row",
+              "flexWrap": "wrap",
+              "justifyContent": "flex-end",
+              "margin": 8,
+              "maxWidth": 600,
+              "minHeight": 48,
+              "pointerEvents": "box-none",
+              "width": "100%",
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.9,
+                },
+              ],
+            },
+            {
+              "margin": 12,
+            },
+            {},
+            {
+              "backgroundColor": "rgba(50, 47, 53, 1)",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 4,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
+          ]
+        }
+        testID="snackbar"
+      >
+        <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "rgba(50, 47, 53, 1)",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 4,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "letterSpacing": 0.25,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexBasis": "60%",
+                    "flexGrow": 1,
+                    "marginEnd": 8,
+                    "marginStart": 16,
+                    "marginVertical": 14,
+                  },
+                  {
+                    "color": "rgba(245, 239, 247, 1)",
+                  },
+                  {
+                    "textAlign": "center",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          Snackbar content
+        </Text>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "flexDirection": "row",
+              "marginEnd": 8,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {},
+                {
+                  "borderStyle": "solid",
+                  "minWidth": 64,
+                },
+                undefined,
+                {
+                  "borderColor": "transparent",
+                  "borderWidth": 0,
+                },
+                undefined,
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": 20,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
+                },
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "pointerEvents": "none",
+                  },
+                  {},
+                  {},
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                  {
+                    "borderBottomEndRadius": undefined,
+                    "borderBottomLeftRadius": undefined,
+                    "borderBottomRightRadius": undefined,
+                    "borderBottomStartRadius": undefined,
+                    "borderCurve": "continuous",
+                    "borderEndEndRadius": undefined,
+                    "borderEndStartRadius": undefined,
+                    "borderRadius": 20,
+                    "borderStartEndRadius": undefined,
+                    "borderStartStartRadius": undefined,
+                    "borderTopEndRadius": undefined,
+                    "borderTopLeftRadius": undefined,
+                    "borderTopRightRadius": undefined,
+                    "borderTopStartRadius": undefined,
+                  },
+                  {
+                    "shadowColor": "rgba(0, 0, 0, 1)",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  },
+                ]
+              }
+            />
+            <View
+              accessibilityLabel="Undo"
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              role="button"
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  {
+                    "borderRadius": 20,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    {
+                      "opacity": 1,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          {
+                            "marginHorizontal": 12,
+                          },
+                          undefined,
+                          false,
+                          {
+                            "color": "rgba(208, 188, 255, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
+                          },
+                          undefined,
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Undo
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "margin": 6,
+                  "overflow": "hidden",
+                },
+                {
+                  "backgroundColor": undefined,
+                  "height": 40,
+                  "width": 40,
+                },
+                {
+                  "borderColor": "rgba(202, 196, 208, 1)",
+                  "borderRadius": 20,
+                  "borderWidth": 0,
+                },
+                {
+                  "margin": 0,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityLabel="Close icon"
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              centered={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                {
+                  "bottom": 6,
+                  "left": 6,
+                  "right": 6,
+                  "top": 6,
+                }
+              }
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              role="button"
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              <View
+                style={
+                  {
+                    "opacity": 1,
+                  }
+                }
+              >
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(245, 239, 247, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  close
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
