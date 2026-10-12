@@ -5,6 +5,11 @@
     "activeMatch": "^/docs/guides/"
   },
   {
+    "text": "Components",
+    "link": "/docs/components/ActivityIndicator",
+    "activeMatch": "^/docs/components/"
+  },
+  {
     "text": "Showcase",
     "link": "/docs/showcase",
     "activeMatch": "^/docs/showcase$"
