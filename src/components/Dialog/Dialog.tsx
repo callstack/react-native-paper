@@ -13,6 +13,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
+import { DialogTitleIdContext } from './utils';
 
 export type Props = {
   /**
@@ -27,6 +28,14 @@ export type Props = {
    * Callback that is called when the user dismisses the dialog.
    */
   onDismiss?: () => void;
+  /**
+   * Accessibility label for dismissing the dialog if it's `dismissable`.
+   */
+  dismissAccessibilityLabel?: string;
+  /**
+   * Accessible name for the dialog. On web, defaults to the text of `Dialog.Title`.
+   */
+  'aria-label'?: string;
   /**
    * Determines Whether the dialog is visible.
    */
@@ -54,13 +63,12 @@ const DIALOG_ELEVATION: Elevation = 3;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
- * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
+ * import { Button, Dialog, PaperProvider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -73,17 +81,15 @@ const DIALOG_ELEVATION: Elevation = 3;
  *     <PaperProvider>
  *       <View>
  *         <Button onPress={showDialog}>Show Dialog</Button>
- *         <Portal>
- *           <Dialog visible={visible} onDismiss={hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Text variant="bodyMedium">This is simple dialog</Text>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
- *         </Portal>
+ *         <Dialog visible={visible} onDismiss={hideDialog}>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Text variant="bodyMedium">This is simple dialog</Text>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
+ *             <Button onPress={hideDialog}>Done</Button>
+ *           </Dialog.Actions>
+ *         </Dialog>
  *       </View>
  *     </PaperProvider>
  *   );
@@ -97,6 +103,8 @@ const Dialog = ({
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
+  dismissAccessibilityLabel,
+  'aria-label': ariaLabel,
   visible = false,
   style,
   theme: themeOverrides,
@@ -110,11 +118,16 @@ const Dialog = ({
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 
+  const titleId = React.useId();
+
   return (
     <Modal
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabel == null ? titleId : undefined}
       dismissable={dismissable}
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
+      dismissAccessibilityLabel={dismissAccessibilityLabel}
       visible={visible}
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
@@ -130,7 +143,9 @@ const Dialog = ({
       testID={testID}
       overlayTestID={overlayTestID}
     >
-      {children}
+      <DialogTitleIdContext.Provider value={titleId}>
+        {children}
+      </DialogTitleIdContext.Provider>
     </Modal>
   );
 };
