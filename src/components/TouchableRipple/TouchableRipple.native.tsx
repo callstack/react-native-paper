@@ -35,6 +35,21 @@ export type Props = PressableProps & {
   style?: StyleProp<ViewStyle>;
   ref?: React.Ref<View>;
   theme?: ThemeProp;
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  borderTopStartRadius?: number;
+  borderTopEndRadius?: number;
+  borderBottomStartRadius?: number;
+  borderBottomEndRadius?: number;
+  /**
+   * Web-only: widens the touch target back out past the touchable's own
+   * border. Accepted here too so both platforms share one `Props` type; has
+   * no effect on native, where `hitSlop` isn't offset from inside the border.
+   */
+  borderWidth?: number;
 };
 
 const TouchableRipple = ({
@@ -46,9 +61,33 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  borderRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderTopStartRadius,
+  borderTopEndRadius,
+  borderBottomStartRadius,
+  borderBottomEndRadius,
+  // consumed so it does not reach the underlying Pressable; web-only, no
+  // native effect
+  borderWidth: _borderWidth,
   ref,
   ...rest
 }: Props) => {
+  const underlayShape: ViewStyle = {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderTopStartRadius,
+    borderTopEndRadius,
+    borderBottomStartRadius,
+    borderBottomEndRadius,
+  };
   const theme = useInternalTheme(themeOverrides);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
@@ -92,6 +131,7 @@ const TouchableRipple = ({
         {...rest}
         ref={ref}
         disabled={disabled}
+        hitSlop={hitSlop}
         style={[useForeground && styles.overflowHidden, style]}
         android_ripple={androidRipple}
       >
@@ -105,6 +145,7 @@ const TouchableRipple = ({
       {...rest}
       ref={ref}
       disabled={disabled}
+      hitSlop={hitSlop}
       style={[borderless && styles.overflowHidden, style]}
     >
       {({ pressed }) => (
@@ -113,6 +154,7 @@ const TouchableRipple = ({
             <View
               style={[
                 styles.underlay,
+                underlayShape,
                 { backgroundColor: calculatedUnderlayColor },
               ]}
             />
