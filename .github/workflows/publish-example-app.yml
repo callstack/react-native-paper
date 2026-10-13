@@ -1,0 +1,225 @@
+name: Publish example app
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish the example app for, e.g. v6.0.0
+        required: true
+      platform:
+        description: Platform to build. Defaults to all.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - ios
+          - android
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: publish-example-app
+
+jobs:
+  check:
+    name: Check release is on main
+    runs-on: ubuntu-latest
+    outputs:
+      on-main: ${{ steps.check.outputs.on-main }}
+      sha: ${{ steps.check.outputs.sha }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          status=$(gh api "repos/$GH_REPO/compare/main...$TAG" --jq .status)
+
+          if [ "$status" = "identical" ] || [ "$status" = "behind" ]; then
+            echo "on-main=true" >> "$GITHUB_OUTPUT"
+            echo "sha=$(gh api "repos/$GH_REPO/commits/$TAG" --jq .sha)" >> "$GITHUB_OUTPUT"
+          else
+            echo "on-main=false" >> "$GITHUB_OUTPUT"
+            echo "$TAG is not on main ($status), nothing to deploy." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  publish:
+    name: Build and submit example app
+    needs: check
+    if: needs.check.outputs.on-main == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ needs.check.outputs.sha }}
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Resolve release tag and submit profile
+        id: release
+        env:
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          PLATFORM: ${{ inputs.platform }}
+        run: |
+          if [ -z "$TAG" ]; then
+            echo "::error::No release tag to publish the example app for."
+            exit 1
+          fi
+
+          if [ "${TAG#*-}" != "$TAG" ]; then
+            profile=preview
+          else
+            profile=production
+          fi
+
+          platform=${PLATFORM:-all}
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "profile=$profile" >> "$GITHUB_OUTPUT"
+          echo "platform=$platform" >> "$GITHUB_OUTPUT"
+          echo "Publishing $platform for $TAG using the $profile submit profile."
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e # v8.2.1
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Check Expo authentication
+        working-directory: ./example
+        run: |
+          if ! eas whoami; then
+            echo "::error::Could not authenticate with Expo, check EXPO_TOKEN."
+            exit 1
+          fi
+
+      - name: Set example app version from the release tag
+        working-directory: ./example
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          version="${TAG#v}"
+          version="${version%%-*}"
+
+          if ! echo "$version" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Could not read a major.minor.patch version from $TAG."
+            exit 1
+          fi
+
+          jq --arg version "$version" '.expo.version = $version' app.json > app.json.tmp
+          mv app.json.tmp app.json
+
+      - name: Decide between an update and a build
+        id: decide
+        working-directory: ./example
+        env:
+          PROFILE: ${{ steps.release.outputs.profile }}
+          PLATFORM: ${{ steps.release.outputs.platform }}
+        run: |
+          platforms="$PLATFORM"
+          if [ "$PLATFORM" = "all" ]; then
+            platforms="ios android"
+          fi
+
+          if [ -z "$platforms" ]; then
+            echo "::error::No platforms to check."
+            exit 1
+          fi
+
+          build=false
+          for platform in $platforms; do
+            hash=$(npx expo-updates fingerprint:generate --platform "$platform" | jq -r '.hash')
+
+            existing=$(eas build:list \
+              --platform "$platform" \
+              --channel "$PROFILE" \
+              --fingerprint-hash "$hash" \
+              --status finished \
+              --limit 1 \
+              --json \
+              --non-interactive | jq 'if type == "array" then length else "notanarray" end')
+
+            case "$existing" in
+              ''|*[!0-9]*)
+                echo "::error::Could not read builds for $platform."
+                exit 1
+                ;;
+            esac
+
+            echo "$platform: fingerprint $hash, $existing matching build(s)"
+            [ "$existing" -eq 0 ] && build=true
+          done
+
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          if [ "$build" = true ]; then
+            echo "Native code changed, building and submitting."
+          else
+            echo "No native change, publishing an update instead."
+          fi
+
+      - name: Build and submit to the app stores
+        id: submit
+        if: steps.decide.outputs.build == 'true'
+        working-directory: ./example
+        env:
+          PROFILE: ${{ steps.release.outputs.profile }}
+          PLATFORM: ${{ steps.release.outputs.platform }}
+        run: |
+          eas build \
+            --platform "$PLATFORM" \
+            --profile "$PROFILE" \
+            --auto-submit-with-profile "$PROFILE" \
+            --non-interactive
+
+      - name: Publish an update
+        id: update
+        if: steps.decide.outputs.build == 'false'
+        working-directory: ./example
+        env:
+          PROFILE: ${{ steps.release.outputs.profile }}
+          PLATFORM: ${{ steps.release.outputs.platform }}
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          eas update \
+            --channel "$PROFILE" \
+            --platform "$PLATFORM" \
+            --message "$TAG" \
+            --non-interactive
+
+      - name: Summarise
+        if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success') }}
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+          PROFILE: ${{ steps.release.outputs.profile }}
+          BUILT: ${{ steps.decide.outputs.build }}
+        run: |
+          if [ "$BUILT" = "true" ]; then
+            echo "Built and submitted $TAG using the $PROFILE profile." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Published an OTA update for $TAG on the $PROFILE channel." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  report-failure:
+    name: Report failure
+    needs: [check, publish]
+    if: ${{ always() && (needs.check.result == 'failure' || (needs.publish.result != 'success' && needs.publish.result != 'skipped')) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report failure
+        env:
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          echo "::error::Example app deployment failed for $TAG. The release itself is fine, only the demo app did not update."
+          echo "Check EAS and the stores before re-running, a build may already have been submitted." >> "$GITHUB_STEP_SUMMARY"
