@@ -3,16 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
   TextProps,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
 import { ListAccordionContext } from './ListAccordionContext';
-import { getLeftStyles, getRightStyles } from './utils';
+import { ListTokens } from './tokens';
+import { useMultilineDescription } from './useMultilineDescription';
+import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -169,14 +169,11 @@ const ListItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
   const shouldIndent = hasLeft && !left && !right;
-  const [alignToTop, setAlignToTop] = React.useState(false);
-
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
-    const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
-  };
+  const {
+    isMultiline: isDescriptionMultiline,
+    contentRef,
+    descriptionProps,
+  } = useMultilineDescription(Boolean(description));
 
   const renderDescription = (
     descriptionColor: ColorValue,
@@ -187,19 +184,17 @@ const ListItem = ({
         selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
         color: descriptionColor,
-        fontSize: styles.description.fontSize,
+        fontSize: theme.fonts.bodyMedium.fontSize,
       })
     ) : (
       <Text
+        variant="bodyMedium"
+        theme={theme}
         selectable={false}
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
-        style={[
-          styles.description,
-          { color: descriptionColor },
-          descriptionStyle,
-        ]}
-        onTextLayout={onDescriptionTextLayout}
+        style={[{ color: descriptionColor }, descriptionStyle]}
+        {...descriptionProps}
         maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
@@ -208,21 +203,23 @@ const ListItem = ({
   };
 
   const renderTitle = () => {
-    const titleColor = theme.colors.onSurface;
+    const titleColor = theme.colors[ListTokens.headlineColor];
 
     return typeof title === 'function' ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
         color: titleColor,
-        fontSize: styles.title.fontSize,
+        fontSize: theme.fonts.bodyLarge.fontSize,
       })
     ) : (
       <Text
+        variant="bodyLarge"
+        theme={theme}
         selectable={false}
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
-        style={[styles.title, { color: titleColor }, titleStyle]}
+        style={[{ color: titleColor }, titleStyle]}
         maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
@@ -230,43 +227,59 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = theme.colors.onSurfaceVariant;
+  const descriptionColor = theme.colors[ListTokens.supportingTextColor];
+
+  const rowContext = React.useMemo(
+    () => ({
+      verticalPadding: isDescriptionMultiline
+        ? ListTokens.threeLineVerticalPadding
+        : ListTokens.verticalPadding,
+    }),
+    [isDescriptionMultiline]
+  );
 
   return (
-    <TouchableRipple
-      {...rest}
-      ref={ref}
-      style={
-        shouldIndent
-          ? [styles.container, styles.indent, style]
-          : [styles.container, style]
-      }
-      onPress={onPress}
-      theme={theme}
-      testID={testID}
-    >
-      <View style={[styles.row, containerStyle]}>
-        {left
-          ? left({
-              color: descriptionColor,
-              style: getLeftStyles(alignToTop, description),
-            })
-          : null}
-        <View style={[styles.item, styles.content, contentStyle]}>
-          {renderTitle()}
+    <ListRowContext.Provider value={rowContext}>
+      <TouchableRipple
+        {...rest}
+        ref={ref}
+        style={[
+          styles.container,
+          description ? styles.containerTwoLine : styles.containerOneLine,
+          isDescriptionMultiline && styles.containerThreeLine,
+          shouldIndent && styles.indent,
+          style,
+        ]}
+        onPress={onPress}
+        theme={theme}
+        testID={testID}
+      >
+        <View style={[styles.row, containerStyle]}>
+          {left
+            ? left({
+                color: theme.colors[ListTokens.leadingIconColor],
+                style: getLeftStyles(isDescriptionMultiline, description),
+              })
+            : null}
+          <View
+            ref={contentRef}
+            style={[styles.item, styles.content, contentStyle]}
+          >
+            {renderTitle()}
 
-          {description
-            ? renderDescription(descriptionColor, description)
+            {description
+              ? renderDescription(descriptionColor, description)
+              : null}
+          </View>
+          {right
+            ? right({
+                color: theme.colors[ListTokens.trailingIconColor],
+                style: getRightStyles(isDescriptionMultiline, description),
+              })
             : null}
         </View>
-        {right
-          ? right({
-              color: descriptionColor,
-              style: getRightStyles(alignToTop, description),
-            })
-          : null}
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+    </ListRowContext.Provider>
   );
 };
 
@@ -274,8 +287,18 @@ ListItem.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingRight: 24,
+    paddingVertical: ListTokens.verticalPadding,
+    paddingRight: ListTokens.trailingSpace,
+    justifyContent: 'center',
+  },
+  containerOneLine: {
+    minHeight: ListTokens.oneLineContainerHeight,
+  },
+  containerTwoLine: {
+    minHeight: ListTokens.twoLineContainerHeight,
+  },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
   },
   indent: {
     paddingLeft: 40,
@@ -283,16 +306,9 @@ const styles = StyleSheet.create({
   row: {
     width: '100%',
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   item: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   content: {
     flexShrink: 1,
