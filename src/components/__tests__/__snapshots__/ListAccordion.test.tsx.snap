@@ -229,6 +229,7 @@ exports[`renders expanded accordion 1`] = `
               "minHeight": 56,
             },
             false,
+            false,
             {
               "backgroundColor": undefined,
             },

@@ -93,6 +93,34 @@ it('renders list accordion with custom title and description styles', async () =
   expect(tree).toMatchSnapshot();
 });
 
+it('indents expanded accordion children without their own left/right when the accordion has a left icon', async () => {
+  await render(
+    <ListAccordion
+      left={(props) => <ListIcon {...props} icon="folder" />}
+      title="Accordion with indented children"
+      expanded
+    >
+      <ListItem title="Child item" testID="accordion-child" />
+    </ListAccordion>
+  );
+
+  expect(screen.getByTestId('accordion-child')).toHaveStyle({
+    paddingLeft: 40,
+  });
+});
+
+it('does not indent expanded accordion children when the accordion has no left icon', async () => {
+  await render(
+    <ListAccordion title="Accordion without left icon" expanded>
+      <ListItem title="Child item" testID="accordion-child" />
+    </ListAccordion>
+  );
+
+  expect(screen.getByTestId('accordion-child')).not.toHaveStyle({
+    paddingLeft: 40,
+  });
+});
+
 describe('ListAccordion', () => {
   it('should not throw an error when id={0}', async () => {
     const ListAccordionTest = () => (
