@@ -489,3 +489,17 @@ export const DynamicDarkTheme: Theme = {
   ...DarkTheme,
   colors: { ...DarkTheme.colors, ...darkDynamicColors },
 };
+
+/**
+ * Android exposes no contrast adjusted version of its system palette, so the
+ * raised levels fall back to the static schemes. Using the standard contrast
+ * system colors there would quietly lower the contrast the user asked for.
+ */
+export {
+  MediumContrastLightTheme as MediumContrastDynamicLightTheme,
+  HighContrastLightTheme as HighContrastDynamicLightTheme,
+} from './LightTheme';
+export {
+  MediumContrastDarkTheme as MediumContrastDynamicDarkTheme,
+  HighContrastDarkTheme as HighContrastDynamicDarkTheme,
+} from './DarkTheme';

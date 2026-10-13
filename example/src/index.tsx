@@ -13,11 +13,19 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
-  PaperProvider,
   DarkTheme,
-  LightTheme,
-  DynamicLightTheme,
   DynamicDarkTheme,
+  DynamicLightTheme,
+  HighContrastDarkTheme,
+  HighContrastDynamicDarkTheme,
+  HighContrastDynamicLightTheme,
+  HighContrastLightTheme,
+  LightTheme,
+  MediumContrastDarkTheme,
+  MediumContrastDynamicDarkTheme,
+  MediumContrastDynamicLightTheme,
+  MediumContrastLightTheme,
+  PaperProvider,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -26,11 +34,38 @@ import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
 import { dynamicThemeSupported } from '../utils';
 import {
-  CombinedDarkTheme,
-  CombinedDefaultTheme,
+  createCombinedTheme,
   createConfiguredFontNavigationTheme,
   createConfiguredFontTheme,
 } from '../utils/themes';
+
+type ContrastLevel = 'standard' | 'medium' | 'high';
+
+const THEMES = {
+  light: {
+    standard: LightTheme,
+    medium: MediumContrastLightTheme,
+    high: HighContrastLightTheme,
+  },
+  dark: {
+    standard: DarkTheme,
+    medium: MediumContrastDarkTheme,
+    high: HighContrastDarkTheme,
+  },
+};
+
+const DYNAMIC_THEMES = {
+  light: {
+    standard: DynamicLightTheme,
+    medium: MediumContrastDynamicLightTheme,
+    high: HighContrastDynamicLightTheme,
+  },
+  dark: {
+    standard: DynamicDarkTheme,
+    medium: MediumContrastDynamicDarkTheme,
+    high: HighContrastDynamicDarkTheme,
+  },
+};
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -98,15 +133,11 @@ export default function PaperExample() {
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
+  const [contrast, setContrast] = React.useState<ContrastLevel>('standard');
 
-  const theme =
-    dynamicThemeSupported && shouldUseDynamicTheme
-      ? isDarkMode
-        ? DynamicDarkTheme
-        : DynamicLightTheme
-      : isDarkMode
-        ? DarkTheme
-        : LightTheme;
+  const themes =
+    dynamicThemeSupported && shouldUseDynamicTheme ? DYNAMIC_THEMES : THEMES;
+  const theme = themes[isDarkMode ? 'dark' : 'light'][contrast];
 
   const direction = rtl ? 'rtl' : 'ltr';
 
@@ -121,6 +152,13 @@ export default function PaperExample() {
 
           if (typeof preferences.rtl === 'boolean') {
             setRtl(preferences.rtl);
+          }
+
+          if (
+            preferences.contrast === 'medium' ||
+            preferences.contrast === 'high'
+          ) {
+            setContrast(preferences.contrast);
           }
         }
       } catch (e) {
@@ -145,6 +183,7 @@ export default function PaperExample() {
           JSON.stringify({
             theme: isDarkMode ? 'dark' : 'light',
             rtl,
+            contrast,
           })
         );
       } catch (e) {
@@ -165,7 +204,7 @@ export default function PaperExample() {
     };
 
     void savePrefs();
-  }, [direction, isDarkMode, isReady, rtl]);
+  }, [contrast, direction, isDarkMode, isReady, rtl]);
 
   const preferences = React.useMemo(
     () => ({
@@ -176,9 +215,11 @@ export default function PaperExample() {
       toggleCollapsed: () => setCollapsed((oldValue) => !oldValue),
       toggleCustomFont: () => setCustomFont((oldValue) => !oldValue),
       toggleRippleEffect: () => setRippleEffectEnabled((oldValue) => !oldValue),
+      setContrast,
       customFontLoaded,
       rippleEffectEnabled,
       shouldUseDynamicTheme,
+      contrast,
       theme,
       collapsed,
       rtl,
@@ -187,6 +228,7 @@ export default function PaperExample() {
       rtl,
       theme,
       collapsed,
+      contrast,
       customFontLoaded,
       shouldUseDynamicTheme,
       rippleEffectEnabled,
@@ -197,7 +239,7 @@ export default function PaperExample() {
     return null;
   }
 
-  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
+  const combinedTheme = createCombinedTheme(theme, isDarkMode);
   const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
   const configuredFontNavigationTheme =
     createConfiguredFontNavigationTheme(combinedTheme);
