@@ -5,8 +5,8 @@ exports[`renders avatar with icon 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -26,7 +26,7 @@ exports[`renders avatar with icon 1`] = `
     style={
       [
         {
-          "color": "#ffffff",
+          "color": "rgba(33, 0, 93, 1)",
           "fontSize": 38.4,
         },
         [
@@ -56,7 +56,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
     [
       {
         "backgroundColor": "#f44336",
-        "borderRadius": 32,
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -102,13 +102,18 @@ exports[`renders avatar with icon and custom background color 1`] = `
 
 exports[`renders avatar with image 1`] = `
 <View
+  accessible={false}
+  importantForAccessibility="no"
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
+      },
+      {
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -116,6 +121,8 @@ exports[`renders avatar with image 1`] = `
 >
   <Image
     accessibilityIgnoresInvertColors={true}
+    accessible={false}
+    onError={[Function]}
     source={
       {
         "uri": "avatar.png",
@@ -123,7 +130,7 @@ exports[`renders avatar with image 1`] = `
     }
     style={
       {
-        "borderRadius": 32,
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       }
@@ -134,11 +141,13 @@ exports[`renders avatar with image 1`] = `
 
 exports[`renders avatar with text 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -151,6 +160,7 @@ exports[`renders avatar with text 1`] = `
   }
 >
   <Text
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -172,7 +182,14 @@ exports[`renders avatar with text 1`] = `
             "textAlignVertical": "center",
           },
           {
-            "color": "#ffffff",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "color": "rgba(33, 0, 93, 1)",
             "fontSize": 32,
             "lineHeight": 64,
           },
@@ -188,11 +205,13 @@ exports[`renders avatar with text 1`] = `
 
 exports[`renders avatar with text and custom background color 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
         "backgroundColor": "#f44336",
-        "borderRadius": 32,
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -205,6 +224,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   }
 >
   <Text
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -224,6 +244,13 @@ exports[`renders avatar with text and custom background color 1`] = `
           {
             "textAlign": "center",
             "textAlignVertical": "center",
+          },
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           {
             "color": "#ffffff",
@@ -242,11 +269,13 @@ exports[`renders avatar with text and custom background color 1`] = `
 
 exports[`renders avatar with text and custom colors 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -259,6 +288,7 @@ exports[`renders avatar with text and custom colors 1`] = `
   }
 >
   <Text
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -278,6 +308,13 @@ exports[`renders avatar with text and custom colors 1`] = `
           {
             "textAlign": "center",
             "textAlignVertical": "center",
+          },
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           {
             "color": "#FFFFFF",
@@ -296,11 +333,13 @@ exports[`renders avatar with text and custom colors 1`] = `
 
 exports[`renders avatar with text and custom size 1`] = `
 <View
+  accessible={true}
+  aria-label="XD"
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 48,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 96,
         "width": 96,
       },
@@ -313,6 +352,7 @@ exports[`renders avatar with text and custom size 1`] = `
   }
 >
   <Text
+    aria-hidden={true}
     numberOfLines={1}
     style={
       [
@@ -334,7 +374,14 @@ exports[`renders avatar with text and custom size 1`] = `
             "textAlignVertical": "center",
           },
           {
-            "color": "#ffffff",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
+          },
+          {
+            "color": "rgba(33, 0, 93, 1)",
             "fontSize": 48,
             "lineHeight": 96,
           },
