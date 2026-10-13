@@ -496,6 +496,7 @@ exports[`renders list section with custom title style 1`] = `
             "minHeight": 56,
           },
           false,
+          false,
           undefined,
         ],
       ]
@@ -652,6 +653,7 @@ exports[`renders list section with custom title style 1`] = `
           {
             "minHeight": 56,
           },
+          false,
           false,
           undefined,
         ],
@@ -1264,6 +1266,7 @@ exports[`renders list section with subheader 1`] = `
             "minHeight": 56,
           },
           false,
+          false,
           undefined,
         ],
       ]
@@ -1420,6 +1423,7 @@ exports[`renders list section with subheader 1`] = `
           {
             "minHeight": 56,
           },
+          false,
           false,
           undefined,
         ],
@@ -1992,6 +1996,7 @@ exports[`renders list section without subheader 1`] = `
             "minHeight": 56,
           },
           false,
+          false,
           undefined,
         ],
       ]
@@ -2148,6 +2153,7 @@ exports[`renders list section without subheader 1`] = `
           {
             "minHeight": 56,
           },
+          false,
           false,
           undefined,
         ],
