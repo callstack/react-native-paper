@@ -55,6 +55,7 @@ export const screenshots = {
     flat: 'screenshots/chip-1.png',
     outlined: 'screenshots/chip-2.png',
   },
+  ConnectedButtonGroup: 'screenshots/connected-button-group.png',
   DataTable: 'screenshots/data-table-full-width.png',
   'DataTable.Cell': 'screenshots/data-table-row-cell.png',
   'DataTable.Header': 'screenshots/data-table-header.png',
