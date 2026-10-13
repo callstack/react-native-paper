@@ -11,6 +11,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { ListTokens } from './tokens';
 import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
@@ -172,6 +173,8 @@ const ListItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { hasLeft } = React.useContext(ListAccordionContext);
+  const shouldIndent = hasLeft && !left && !right;
   const [isDescriptionMultiline, setIsDescriptionMultiline] =
     React.useState(false);
 
@@ -261,6 +264,7 @@ const ListItem = ({
           styles.container,
           description ? styles.containerTwoLine : styles.containerOneLine,
           isDescriptionMultiline && styles.containerThreeLine,
+          shouldIndent && styles.indent,
           { backgroundColor },
           style,
         ]}
@@ -315,6 +319,9 @@ const styles = StyleSheet.create({
   },
   containerThreeLine: {
     paddingVertical: ListTokens.threeLineVerticalPadding,
+  },
+  indent: {
+    paddingLeft: 40,
   },
   row: {
     width: '100%',
