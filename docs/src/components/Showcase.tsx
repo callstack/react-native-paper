@@ -172,6 +172,12 @@ const data: Data[] = [
     image: '/react-native-paper/showcase/moonmeet.png',
     github: 'https://github.com/MoonMeet/MoonMeet-CrossPlatform',
   },
+  {
+    color: '#456731',
+    name: 'Exetat Test : Items RDC',
+    image: '/react-native-paper/showcase/exetatest.png',
+    android: 'https://play.google.com/store/apps/details?id=com.exetatest',
+  },
 ];
 
 const getOpacity = (item?: string) => (item ? 1 : 0.4);
