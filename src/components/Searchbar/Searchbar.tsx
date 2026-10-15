@@ -179,6 +179,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   searchAccessibilityLabel?: string;
   /**
+   * testID for the left icon button (see `onIconPress`).
+   */
+  searchTestID?: string;
+  /**
    * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
    * In v5.x with theme version 3, `clearIcon` is visible only if `right` prop is not defined.
    */
@@ -188,22 +192,30 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   clearAccessibilityLabel?: string;
   /**
-   * Icon name for the right trailering icon button.
+   * testID for the clear button.
+   */
+  clearTestID?: string;
+  /**
+   * Icon name for the right trailing icon button.
    * Works only when `mode` is set to "contained". It won't be displayed if `loading` is set to `true`.
    */
-  traileringIcon?: IconSource;
+  trailingIcon?: IconSource;
   /**
-   * Custom color for the right trailering icon, default will be derived from theme
+   * Custom color for the right trailing icon, default will be derived from theme
    */
-  traileringIconColor?: ColorValue;
+  trailingIconColor?: ColorValue;
   /**
-   * Callback to execute on the right trailering icon button press.
+   * Callback to execute on the right trailing icon button press.
    */
-  onTraileringIconPress?: (e: GestureResponderEvent) => void;
+  onTrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
-   * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
+   * Accessibility label for the right trailing icon button. This is read by the screen reader when the user taps the button.
    */
-  traileringIconAccessibilityLabel?: string;
+  trailingIconAccessibilityLabel?: string;
+  /**
+   * testID for the right trailing icon button.
+   */
+  trailingTestID?: string;
   /**
    * Callback which returns a React element to display on the right side.
    * Works only when `mode` is set to "contained".
@@ -211,7 +223,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
   right?: (props: {
     color: ColorValue;
     style: Style;
-    testID: string;
+    testID?: string;
   }) => React.ReactNode;
   /**
    * Whether to show `Divider` at the bottom of the search.
@@ -287,13 +299,16 @@ const Searchbar = ({
   iconColor: customIconColor,
   onIconPress,
   searchAccessibilityLabel = 'search',
+  searchTestID,
   clearIcon,
   clearAccessibilityLabel = 'clear',
+  clearTestID,
   onClearIconPress,
-  traileringIcon,
-  traileringIconColor,
-  traileringIconAccessibilityLabel,
-  onTraileringIconPress,
+  trailingIcon,
+  trailingIconColor: customTrailingIconColor,
+  trailingIconAccessibilityLabel,
+  trailingTestID,
+  onTrailingIconPress,
   right,
   mode = 'contained',
   showDivider = true,
@@ -349,11 +364,8 @@ const Searchbar = ({
 
   const isContained = mode === 'contained';
   const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
-  const shouldRenderTraileringIcon =
-    isContained &&
-    traileringIcon &&
-    !loading &&
-    (!value || right !== undefined);
+  const shouldRenderTrailingIcon =
+    isContained && trailingIcon && !loading && (!value || right !== undefined);
 
   const borderRadius = resolveCornerRadius(
     theme,
@@ -427,13 +439,12 @@ const Searchbar = ({
       : null;
 
   return (
-    <Reanimated.View
-      style={outerStyle}
-      testID={testID ? `${testID}-wrapper` : undefined}
-    >
+    <Reanimated.View style={outerStyle}>
       <Reanimated.View
-        style={applyFocusMargin ? containedMarginStyle : null}
-        testID={testID ? `${testID}-focus-wrapper` : undefined}
+        style={[
+          shouldFillWrapper && styles.fillWrapper,
+          applyFocusMargin ? containedMarginStyle : null,
+        ]}
       >
         <Surface
           backgroundColor={containerColor}
@@ -443,7 +454,6 @@ const Searchbar = ({
             shouldFillWrapper && styles.fillWrapper,
             surfaceStyle,
           ]}
-          testID={testID ? `${testID}-container` : undefined}
           elevation={elevation}
           theme={theme}
         >
@@ -465,7 +475,7 @@ const Searchbar = ({
             }
             theme={theme}
             aria-label={searchAccessibilityLabel}
-            testID={testID ? `${testID}-icon` : undefined}
+            testID={searchTestID}
           />
           <TextInput
             style={[
@@ -502,7 +512,6 @@ const Searchbar = ({
             // when clearing the value.
             <View
               pointerEvents={value ? 'auto' : 'none'}
-              testID={testID ? `${testID}-icon-wrapper` : undefined}
               style={[
                 !value && styles.v3ClearIcon,
                 right !== undefined && styles.v3ClearIconHidden,
@@ -524,29 +533,29 @@ const Searchbar = ({
                     />
                   ))
                 }
-                testID={testID ? `${testID}-clear-icon` : undefined}
+                testID={clearTestID}
                 role="button"
                 theme={theme}
               />
             </View>
           )}
-          {shouldRenderTraileringIcon ? (
+          {shouldRenderTrailingIcon ? (
             <IconButton
               role="button"
               borderless
-              onPress={onTraileringIconPress}
-              iconColor={traileringIconColor || trailingIconColor}
-              icon={traileringIcon}
-              aria-label={traileringIconAccessibilityLabel}
+              onPress={onTrailingIconPress}
+              iconColor={customTrailingIconColor || trailingIconColor}
+              icon={trailingIcon}
+              aria-label={trailingIconAccessibilityLabel}
               theme={theme}
-              testID={testID ? `${testID}-trailering-icon` : undefined}
+              testID={trailingTestID}
             />
           ) : null}
           {isContained &&
             right?.({
               color: trailingIconColor,
               style: styles.rightStyle,
-              testID: testID ?? '',
+              testID,
             })}
           {!isContained && showDivider && (
             <Divider
@@ -557,7 +566,6 @@ const Searchbar = ({
                   backgroundColor: dividerColor,
                 },
               ]}
-              testID={testID ? `${testID}-divider` : undefined}
             />
           )}
         </Surface>

@@ -107,6 +107,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       collapsable={false}
       style={
         [
+          false,
           {
             "marginLeft": 24,
             "marginRight": 24,

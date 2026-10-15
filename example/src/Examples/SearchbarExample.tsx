@@ -19,8 +19,8 @@ const SearchExample = () => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [searchQueries, setSearchQuery] = React.useState({
     searchBarMode: '',
-    traileringIcon: '',
-    traileringIconWithRightItem: '',
+    trailingIcon: '',
+    trailingIconWithRightItem: '',
     rightItem: '',
     loadingBarMode: '',
     searchViewMode: '',
@@ -28,6 +28,7 @@ const SearchExample = () => {
     loadingViewMode: '',
     clickableBack: '',
     clickableDrawer: '',
+    clickableLoading: '',
     withResults: '',
   });
 
@@ -47,36 +48,36 @@ const SearchExample = () => {
             mode="contained"
           />
           <Searchbar
-            placeholder="Trailering icon"
+            placeholder="Trailing icon"
             onChangeText={(query) =>
-              setSearchQuery({ ...searchQueries, traileringIcon: query })
+              setSearchQuery({ ...searchQueries, trailingIcon: query })
             }
-            value={searchQueries.traileringIcon}
-            traileringIcon={'microphone'}
-            traileringIconColor={
+            value={searchQueries.trailingIcon}
+            trailingIcon={'microphone'}
+            trailingIconColor={
               isVisible ? Palette.error40 : colors.onSurfaceVariant
             }
-            traileringIconAccessibilityLabel={'microphone button'}
-            onTraileringIconPress={() => setIsVisible(true)}
+            trailingIconAccessibilityLabel={'microphone button'}
+            onTrailingIconPress={() => setIsVisible(true)}
             style={styles.searchbar}
             mode="contained"
           />
           <Searchbar
             mode="contained"
-            placeholder="Trailering icon with right item"
+            placeholder="Trailing icon with right item"
             onChangeText={(query) =>
               setSearchQuery({
                 ...searchQueries,
-                traileringIconWithRightItem: query,
+                trailingIconWithRightItem: query,
               })
             }
-            value={searchQueries.traileringIconWithRightItem}
-            traileringIcon={'microphone'}
-            traileringIconColor={
+            value={searchQueries.trailingIconWithRightItem}
+            trailingIcon={'microphone'}
+            trailingIconColor={
               isVisible ? Palette.error40 : colors.onSurfaceVariant
             }
-            traileringIconAccessibilityLabel={'microphone button'}
-            onTraileringIconPress={() => setIsVisible(true)}
+            trailingIconAccessibilityLabel={'microphone button'}
+            onTrailingIconPress={() => setIsVisible(true)}
             right={(props) => (
               <Avatar.Image
                 {...props}
@@ -117,7 +118,7 @@ const SearchExample = () => {
             style={styles.searchbar}
             mode="contained"
             loading
-            traileringIcon={'microphone'}
+            trailingIcon={'microphone'}
           />
         </List.Section>
         <List.Section title="Divided mode (deprecated)">
@@ -194,6 +195,18 @@ const SearchExample = () => {
               navigation.openDrawer();
             }}
             icon="menu"
+            style={styles.searchbar}
+          />
+          <Searchbar
+            placeholder="Search"
+            onChangeText={(query) =>
+              setSearchQuery({
+                ...searchQueries,
+                clickableLoading: query,
+              })
+            }
+            value={searchQueries.clickableLoading}
+            loading
             style={styles.searchbar}
           />
         </List.Section>
