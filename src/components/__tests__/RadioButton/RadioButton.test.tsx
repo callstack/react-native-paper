@@ -1,59 +1,35 @@
-import {
-  beforeAll,
-  describe,
-  expect,
-  it,
-  jest as mockJest,
-} from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 
 describe('RadioButton', () => {
-  describe('on default platform', () => {
-    beforeAll(() => {
-      mockJest.mock('react-native', () => {
-        const RN =
-          mockJest.requireActual<typeof import('react-native')>('react-native');
+  it('renders properly', async () => {
+    const tree = (await render(<RadioButton value="first" />)).toJSON();
 
-        return {
-          ...RN,
-          Platform: {
-            ...RN.Platform,
-            select: (objs: { default: object }) => objs.default,
-          },
-        };
-      });
-    });
+    expect(tree).toMatchSnapshot();
+  });
 
-    it('renders properly', async () => {
-      const tree = (await render(<RadioButton value="first" />)).toJSON();
+  it('provides a 48dp touch target in its layout', async () => {
+    await render(<RadioButton value="first" />);
 
-      expect(tree).toMatchSnapshot();
+    expect(screen.getByRole('radio')).toHaveStyle({
+      width: 48,
+      height: 48,
+      borderRadius: 24,
     });
   });
 
-  describe('on ios platform', () => {
-    beforeAll(() => {
-      mockJest.mock('react-native', () => {
-        const RN =
-          mockJest.requireActual<typeof import('react-native')>('react-native');
+  it('preserves consumer layout styles on the touch target', async () => {
+    await render(
+      <RadioButton value="first" style={{ margin: 8, width: 56, height: 56 }} />
+    );
 
-        return {
-          ...RN,
-          Platform: {
-            ...RN.Platform,
-            select: (objs: { ios: object }) => objs.ios,
-          },
-        };
-      });
-    });
-
-    it('renders properly', async () => {
-      const tree = (await render(<RadioButton value="first" />)).toJSON();
-
-      expect(tree).toMatchSnapshot();
+    expect(screen.getByRole('radio')).toHaveStyle({
+      margin: 8,
+      width: 56,
+      height: 56,
     });
   });
 
