@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ScrollView, Text as NativeText, View } from 'react-native';
 
+import Divider from '../Divider';
 import Text from '../Typography/Text';
 
 /** Whether a child is a particular `DataTable` sub-component. */
@@ -22,9 +23,12 @@ export const isDataTableElement = <P>(
   );
 };
 
-/** Whether an element is text, which is never a row and never holds one. */
-export const isTextElement = (child: React.ReactElement): boolean =>
-  child.type === NativeText || child.type === Text;
+/**
+ * Whether an element is text or a divider, which is never a row and never
+ * holds one.
+ */
+export const isNeverRow = (child: React.ReactElement): boolean =>
+  child.type === NativeText || child.type === Text || child.type === Divider;
 
 /**
  * Whether an element only groups the children it was given: the primitives

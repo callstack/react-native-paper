@@ -23,7 +23,7 @@ import {
   defaultFormatRowPosition,
   isDataTableElement,
   isGroupingContainer,
-  isTextElement,
+  isNeverRow,
   readColumnLabels,
 } from './utils';
 import type { FormatRowPosition } from './utils';
@@ -230,7 +230,7 @@ const DataTable = ({
             return number(child);
           }
 
-          if (isTextElement(child)) {
+          if (isNeverRow(child)) {
             return child;
           }
 
