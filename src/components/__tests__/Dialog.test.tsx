@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import {
   Text,
   StyleSheet,
@@ -6,12 +7,13 @@ import {
 } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
+import Portal from '../Portal/Portal';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -20,12 +22,18 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe('Dialog', () => {
-  it('should render passed children', async () => {
+  it('renders passed children', async () => {
     await render(
-      <Dialog visible testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible testID="dialog">
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog')).toHaveTextContent(
@@ -33,84 +41,191 @@ describe('Dialog', () => {
     );
   });
 
-  it('should call onDismiss when dismissable', async () => {
+  it('invokes onDismiss when the visually hidden dismiss button is pressed', async () => {
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible onDismiss={onDismiss} dismissable>
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call onDismiss when dismissable is false', async () => {
+  it('does not invoke onDismiss for a non-dismissible dialog when the backdrop is pressed', async () => {
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          overlayTestID="backdrop"
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(0);
   });
 
-  it('should call onDismiss on Android back button when dismissable is false but dismissableBackButton is true', async () => {
-    Platform.OS = 'android';
+  it('invokes onDismiss on Android back button press when only dismissableBackButton is true', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
     const onDismiss = jest.fn();
+
     await render(
-      <Dialog
-        visible
-        onDismiss={onDismiss}
-        dismissable={false}
-        dismissableBackButton
-        testID="dialog"
-      >
-        <Text>This is simple dialog</Text>
-      </Dialog>
+      <Portal.Host>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+          overlayTestID="backdrop"
+          dismissableBackButton
+        >
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
     );
 
-    await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
 
     await act(() => {
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(0);
 
     await act(() => {
       BackHandler.mockPressBack();
       jest.runAllTimers();
     });
+
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', async () => {
+  it('does not add a top margin to a title-first dialog', async () => {
     await render(
-      <Dialog visible={true}>
-        <Dialog.Title testID="dialog-content">
-          <Text>Test Dialog Content</Text>
-        </Dialog.Title>
-      </Dialog>
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Title testID="dialog-title">
+            <Text>Test Dialog Content</Text>
+          </Dialog.Title>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
+    });
+  });
+
+  it('should keep the bottom padding on a content-first dialog', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Content testID="dialog-content">
+            <Text>Test Dialog Content</Text>
+          </Dialog.Content>
+        </Dialog>
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
-      marginTop: 24,
+      paddingBottom: 24,
     });
+  });
+
+  it('should not add a top padding to an icon-first dialog', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Icon icon="alert" testID="dialog-icon" />
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      paddingTop: 0,
+    });
+  });
+
+  it('should preserve the icon-to-title spacing for an icon dialog', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Icon icon="alert" testID="dialog-icon" />
+          <Dialog.Title testID="dialog-title">
+            <Text>Test Dialog Content</Text>
+          </Dialog.Title>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-icon')).toHaveStyle({
+      marginBottom: 16,
+      paddingTop: 0,
+    });
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      marginTop: 0,
+    });
+  });
+
+  it('uses the title as the accessible name on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Dialog visible>
+          <Dialog.Title>Alert</Dialog.Title>
+          <Text>This is simple dialog</Text>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Alert')).toHaveProp('role', 'dialog');
+  });
+
+  it('uses aria-label over the title as the accessible name', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog visible aria-label="Confirm deletion">
+          <Dialog.Title>Alert</Dialog.Title>
+        </Dialog>
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Confirm deletion')).toHaveProp(
+      'role',
+      'dialog'
+    );
+    expect(screen.queryByLabelText('Alert')).not.toBeOnTheScreen();
   });
 });
 
 describe('DialogActions', () => {
-  it('should render passed children', async () => {
+  it('renders passed children', async () => {
     await render(
       <Dialog.Actions>
         <Button testID="button-cancel">Cancel</Button>
@@ -122,38 +237,67 @@ describe('DialogActions', () => {
     expect(screen.getByTestId('button-ok')).toBeOnTheScreen();
   });
 
-  it('should apply default styles', async () => {
+  it('applies default styles', async () => {
     await render(
       <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
+        <Button testID="button-cancel">Cancel</Button>
+        <Button testID="button-ok">Ok</Button>
       </Dialog.Actions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
       paddingBottom: 24,
       paddingHorizontal: 24,
+      columnGap: 8,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
   });
 
-  it('should apply custom styles', async () => {
+  it('does not inject button props into actions', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
+      <Dialog.Actions>
+        <ProbeButton>Cancel</ProbeButton>
+        <ProbeButton>Ok</ProbeButton>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
 
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(cancelButtonProps).not.toHaveProperty('uppercase');
+    expect(okButtonProps).not.toHaveProperty('compact');
+    expect(okButtonProps).not.toHaveProperty('uppercase');
+  });
+
+  it('should not override custom button styles', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
+    await render(
+      <Dialog.Actions testID="dialog-actions">
+        <ProbeButton style={styles.spacing}>Cancel</ProbeButton>
+        <ProbeButton style={styles.noSpacing}>Ok</ProbeButton>
+      </Dialog.Actions>
+    );
+
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
+
+    expect(cancelButtonProps).toHaveProperty('style', styles.spacing);
+    expect(okButtonProps).toHaveProperty('style', styles.noSpacing);
   });
 });
 
