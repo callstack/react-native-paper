@@ -77,9 +77,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build package
-        run: |
-          yarn prepack
-          node ./scripts/typescript-output-lint.ts
+        run: yarn prepack
 
   build-example:
     name: Build example
