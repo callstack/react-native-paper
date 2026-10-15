@@ -9,6 +9,7 @@ const sizes = {
   dotSize: 10,
   outlineWidth: 2,
   stateLayerSize: 40,
+  touchTargetSize: 48,
 } as const;
 
 const colors = {

@@ -22,14 +22,6 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -48,10 +40,10 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
       ],
@@ -60,23 +52,36 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   testID="custom:testID"
 >
   <View
+    pointerEvents="none"
     style={
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 10,
-          "borderWidth": 2,
-          "height": 20,
-          "justifyContent": "center",
-          "width": 20,
-        },
-        {
-          "borderColor": "rgba(73, 69, 79, 1)",
-          "opacity": 1,
-        },
-      ]
+      {
+        "alignItems": "center",
+        "borderRadius": 20,
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
     }
-  />
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "height": 20,
+            "justifyContent": "center",
+            "width": 20,
+          },
+          {
+            "borderColor": "rgba(73, 69, 79, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
 </View>
 `;
 
@@ -102,14 +107,6 @@ exports[`RadioButton renders properly 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -128,10 +125,10 @@ exports[`RadioButton renders properly 1`] = `
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
       ],
@@ -139,23 +136,36 @@ exports[`RadioButton renders properly 1`] = `
   }
 >
   <View
+    pointerEvents="none"
     style={
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 10,
-          "borderWidth": 2,
-          "height": 20,
-          "justifyContent": "center",
-          "width": 20,
-        },
-        {
-          "borderColor": "rgba(73, 69, 79, 1)",
-          "opacity": 1,
-        },
-      ]
+      {
+        "alignItems": "center",
+        "borderRadius": 20,
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
     }
-  />
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "height": 20,
+            "justifyContent": "center",
+            "width": 20,
+          },
+          {
+            "borderColor": "rgba(73, 69, 79, 1)",
+            "opacity": 1,
+          },
+        ]
+      }
+    />
+  </View>
 </View>
 `;
 
@@ -181,14 +191,6 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessible={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -207,10 +209,10 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       [
         {
           "alignItems": "center",
-          "borderRadius": 20,
-          "height": 40,
+          "borderRadius": 24,
+          "height": 48,
           "justifyContent": "center",
-          "width": 40,
+          "width": 48,
         },
         undefined,
       ],
@@ -218,45 +220,58 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   }
 >
   <View
+    pointerEvents="none"
     style={
-      [
-        {
-          "alignItems": "center",
-          "borderRadius": 10,
-          "borderWidth": 2,
-          "height": 20,
-          "justifyContent": "center",
-          "width": 20,
-        },
-        {
-          "borderColor": "rgba(103, 80, 164, 1)",
-          "opacity": 1,
-        },
-      ]
+      {
+        "alignItems": "center",
+        "borderRadius": 20,
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
     }
   >
     <View
-      collapsable={false}
       style={
         [
           {
-            "borderRadius": 5,
-            "height": 10,
-            "width": 10,
+            "alignItems": "center",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "height": 20,
+            "justifyContent": "center",
+            "width": 20,
           },
           {
-            "backgroundColor": "rgba(103, 80, 164, 1)",
-          },
-          {
-            "transform": [
-              {
-                "scale": 1,
-              },
-            ],
+            "borderColor": "rgba(103, 80, 164, 1)",
+            "opacity": 1,
           },
         ]
       }
-    />
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "borderRadius": 5,
+              "height": 10,
+              "width": 10,
+            },
+            {
+              "backgroundColor": "rgba(103, 80, 164, 1)",
+            },
+            {
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+    </View>
   </View>
 </View>
 `;

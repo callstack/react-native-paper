@@ -24,14 +24,6 @@ exports[`renders Checkbox with custom testID 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -217,14 +209,6 @@ exports[`renders checked Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -409,14 +393,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -601,14 +577,6 @@ exports[`renders indeterminate Checkbox 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -780,14 +748,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -959,14 +919,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -1151,14 +1103,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   centered={true}
   collapsable={false}
   focusable={true}
-  hitSlop={
-    {
-      "bottom": 4,
-      "left": 4,
-      "right": 4,
-      "top": 4,
-    }
-  }
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}

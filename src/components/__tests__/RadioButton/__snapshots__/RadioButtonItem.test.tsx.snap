@@ -77,14 +77,6 @@ exports[`can render leading radio button control 1`] = `
       accessible={false}
       collapsable={false}
       focusable={false}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -102,10 +94,10 @@ exports[`can render leading radio button control 1`] = `
           [
             {
               "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
+              "borderRadius": 24,
+              "height": 48,
               "justifyContent": "center",
-              "width": 40,
+              "width": 48,
             },
             undefined,
           ],
@@ -114,23 +106,36 @@ exports[`can render leading radio button control 1`] = `
       tabIndex={-1}
     >
       <View
+        pointerEvents="none"
         style={
-          [
-            {
-              "alignItems": "center",
-              "borderRadius": 10,
-              "borderWidth": 2,
-              "height": 20,
-              "justifyContent": "center",
-              "width": 20,
-            },
-            {
-              "borderColor": "rgba(73, 69, 79, 1)",
-              "opacity": 1,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          }
         }
-      />
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 10,
+                "borderWidth": 2,
+                "height": 20,
+                "justifyContent": "center",
+                "width": 20,
+              },
+              {
+                "borderColor": "rgba(73, 69, 79, 1)",
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+      </View>
     </View>
     <Text
       maxFontSizeMultiplier={1.5}
@@ -287,14 +292,6 @@ exports[`renders unchecked 1`] = `
       accessible={false}
       collapsable={false}
       focusable={false}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -312,10 +309,10 @@ exports[`renders unchecked 1`] = `
           [
             {
               "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
+              "borderRadius": 24,
+              "height": 48,
               "justifyContent": "center",
-              "width": 40,
+              "width": 48,
             },
             undefined,
           ],
@@ -324,23 +321,36 @@ exports[`renders unchecked 1`] = `
       tabIndex={-1}
     >
       <View
+        pointerEvents="none"
         style={
-          [
-            {
-              "alignItems": "center",
-              "borderRadius": 10,
-              "borderWidth": 2,
-              "height": 20,
-              "justifyContent": "center",
-              "width": 20,
-            },
-            {
-              "borderColor": "rgba(73, 69, 79, 1)",
-              "opacity": 1,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          }
         }
-      />
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 10,
+                "borderWidth": 2,
+                "height": 20,
+                "justifyContent": "center",
+                "width": 20,
+              },
+              {
+                "borderColor": "rgba(73, 69, 79, 1)",
+                "opacity": 1,
+              },
+            ]
+          }
+        />
+      </View>
     </View>
   </View>
 </View>

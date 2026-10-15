@@ -11,13 +11,25 @@ describe('RadioButton', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('uses the MD3 40dp state layer', async () => {
+  it('provides a 48dp touch target in its layout', async () => {
     await render(<RadioButton value="first" />);
 
     expect(screen.getByRole('radio')).toHaveStyle({
-      width: 40,
-      height: 40,
-      borderRadius: 20,
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+    });
+  });
+
+  it('preserves consumer layout styles on the touch target', async () => {
+    await render(
+      <RadioButton value="first" style={{ margin: 8, width: 56, height: 56 }} />
+    );
+
+    expect(screen.getByRole('radio')).toHaveStyle({
+      margin: 8,
+      width: 56,
+      height: 56,
     });
   });
 

@@ -16,7 +16,6 @@ import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
-import { getMinTouchTargetHitSlop } from '../../utils/touchTarget';
 import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -70,11 +69,8 @@ const {
   dotSize,
   outlineWidth: OUTLINE_WIDTH,
   stateLayerSize,
+  touchTargetSize,
 } = RadioButtonTokens;
-
-// The state layer is 40dp per spec, which is below the 48dp minimum touch
-// target. Expand the pressable area without changing the visual bounds.
-const HIT_SLOP = getMinTouchTargetHitSlop(stateLayerSize);
 
 /**
  * Radio buttons allow the selection a single option from a set.
@@ -206,7 +202,6 @@ const RadioButton = ({
 
   return (
     <TouchableRipple
-      hitSlop={HIT_SLOP}
       {...restProps}
       borderless
       onPress={(event) => {
@@ -223,24 +218,26 @@ const RadioButton = ({
       testID={testID}
       theme={theme}
     >
-      <View
-        style={[
-          styles.radio,
-          {
-            borderColor: selectionControlColor,
-            opacity: selectionControlOpacity,
-          },
-        ]}
-      >
-        {checked ? (
-          <Animated.View
-            style={[
-              styles.dot,
-              { backgroundColor: selectionControlColor },
-              dotAnimatedStyle,
-            ]}
-          />
-        ) : null}
+      <View pointerEvents="none" style={styles.stateLayer}>
+        <View
+          style={[
+            styles.radio,
+            {
+              borderColor: selectionControlColor,
+              opacity: selectionControlOpacity,
+            },
+          ]}
+        >
+          {checked ? (
+            <Animated.View
+              style={[
+                styles.dot,
+                { backgroundColor: selectionControlColor },
+                dotAnimatedStyle,
+              ]}
+            />
+          ) : null}
+        </View>
       </View>
     </TouchableRipple>
   );
@@ -250,6 +247,13 @@ RadioButton.displayName = 'RadioButton';
 
 const styles = StyleSheet.create({
   container: {
+    width: touchTargetSize,
+    height: touchTargetSize,
+    borderRadius: touchTargetSize / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stateLayer: {
     width: stateLayerSize,
     height: stateLayerSize,
     borderRadius: stateLayerSize / 2,
