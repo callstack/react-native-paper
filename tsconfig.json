@@ -28,7 +28,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["node"],
+    "types": ["jest", "node"],
     "verbatimModuleSyntax": true
   },
   "files": [],
