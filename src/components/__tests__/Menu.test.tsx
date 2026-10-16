@@ -18,6 +18,7 @@ import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
 describe('web focus', () => {
+  const PAST_ANIMATION_MS = 300;
   const focus = jest.fn();
   const originalPlatform = Platform.OS;
   const originalHTMLElement = Object.getOwnPropertyDescriptor(
@@ -90,7 +91,7 @@ describe('web focus', () => {
 
   it('does not move focus when mounted hidden', async () => {
     await render(makeMenu(false));
-    await act(() => jest.advanceTimersByTime(300));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
 
     expect(focus).not.toHaveBeenCalled();
   });
@@ -98,19 +99,19 @@ describe('web focus', () => {
   it('moves focus when opened and restores it when closed', async () => {
     const { rerender } = await render(makeMenu(false));
     await rerender(makeMenu(true));
-    await act(() => jest.advanceTimersByTime(300));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
 
     expect(focus).toHaveBeenCalledTimes(1);
 
     await rerender(makeMenu(false));
-    await act(() => jest.advanceTimersByTime(300));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
 
     expect(focus).toHaveBeenCalledTimes(2);
   });
 
   it('moves focus when mounted visible', async () => {
     await render(makeMenu(true));
-    await act(() => jest.advanceTimersByTime(300));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
 
     expect(focus).toHaveBeenCalledTimes(1);
   });
