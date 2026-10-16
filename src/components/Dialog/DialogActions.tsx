@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { DialogChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
@@ -24,7 +23,7 @@ export type Props = ViewProps & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Dialog, Portal } from 'react-native-paper';
+ * import { Button, Dialog } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -32,38 +31,29 @@ export type Props = ViewProps & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Actions>
- *           <Button onPress={() => console.log('Cancel')}>Cancel</Button>
- *           <Button onPress={() => console.log('Ok')}>Ok</Button>
- *         </Dialog.Actions>
- *       </Dialog>
- *     </Portal>
+ *     <Dialog visible={visible} onDismiss={hideDialog}>
+ *       <Dialog.Actions>
+ *         <Button onPress={() => console.log('Cancel')}>Cancel</Button>
+ *         <Button onPress={() => console.log('Ok')}>Ok</Button>
+ *       </Dialog.Actions>
+ *     </Dialog>
  *   );
  * };
  *
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => {
-  useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+const DialogActions = ({
+  theme: themeOverrides,
+  style,
+  children,
+  ...rest
+}: Props) => {
+  useInternalTheme(themeOverrides);
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
-      {React.Children.map(props.children, (child, i) =>
-        React.isValidElement<DialogChildProps>(child)
-          ? React.cloneElement(child, {
-              style: [
-                {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
-                },
-                child.props.style,
-              ],
-            })
-          : child
-      )}
+    <View {...rest} style={[styles.v3Container, style]}>
+      {children}
     </View>
   );
 };
@@ -76,6 +66,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
+    columnGap: 8,
     paddingBottom: 24,
     paddingHorizontal: 24,
   },
