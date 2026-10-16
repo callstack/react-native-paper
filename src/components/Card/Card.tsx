@@ -131,7 +131,7 @@ const DEFAULT_CARD_PADDING = 16;
  *     </Card.Content>
  *     <Card.Actions>
  *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="contained">Ok</Button>
+ *       <Button mode="filled">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );

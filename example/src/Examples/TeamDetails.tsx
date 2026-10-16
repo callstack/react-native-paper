@@ -96,7 +96,7 @@ const News = () => {
               <Button mode="outlined" onPress={() => {}}>
                 Share
               </Button>
-              <Button mode="contained" onPress={() => {}}>
+              <Button mode="filled" onPress={() => {}}>
                 Read more
               </Button>
             </Card.Actions>
@@ -117,7 +117,7 @@ const News = () => {
               <Button mode="outlined" onPress={() => {}}>
                 Share
               </Button>
-              <Button mode="contained" onPress={() => {}}>
+              <Button mode="filled" onPress={() => {}}>
                 Read more
               </Button>
             </Card.Actions>
