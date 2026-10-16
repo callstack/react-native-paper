@@ -1,6 +1,13 @@
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 
-import { expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
@@ -9,6 +16,106 @@ import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
+
+describe('web focus', () => {
+  const PAST_ANIMATION_MS = 300;
+  const focus = jest.fn();
+  const originalPlatform = Platform.OS;
+  const originalHTMLElement = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'HTMLElement'
+  );
+  const originalDocument = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'document'
+  );
+  const originalQuerySelector = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'querySelector'
+  );
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    Platform.OS = 'web';
+    focus.mockClear();
+    // Native View refs stand in for DOM elements in the native test renderer.
+    Object.defineProperty(globalThis, 'HTMLElement', {
+      configurable: true,
+      value: View,
+    });
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: {
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+      },
+    });
+    Object.defineProperty(View.prototype, 'querySelector', {
+      configurable: true,
+      value: () => ({ focus }),
+    });
+    const measureInWindow: View['measureInWindow'] = (fn) =>
+      fn(100, 100, 80, 32);
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: measureInWindow,
+    });
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+    for (const [target, key, descriptor] of [
+      [globalThis, 'HTMLElement', originalHTMLElement],
+      [globalThis, 'document', originalDocument],
+      [View.prototype, 'querySelector', originalQuerySelector],
+      [View.prototype, 'measureInWindow', originalMeasureInWindow],
+    ] as const) {
+      if (descriptor) {
+        Object.defineProperty(target, key, descriptor);
+      } else {
+        Reflect.deleteProperty(target, key);
+      }
+    }
+  });
+
+  const makeMenu = (visible: boolean) => (
+    <Portal.Host>
+      <Menu visible={visible} anchor={<Button>Open menu</Button>}>
+        <Menu.Item title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  it('does not move focus when mounted hidden', async () => {
+    await render(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+
+    expect(focus).not.toHaveBeenCalled();
+  });
+
+  it('moves focus when opened and restores it when closed', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+
+    expect(focus).toHaveBeenCalledTimes(1);
+
+    await rerender(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+
+    expect(focus).toHaveBeenCalledTimes(2);
+  });
+
+  it('moves focus when mounted visible', async () => {
+    await render(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+
+    expect(focus).toHaveBeenCalledTimes(1);
+  });
+});
 
 it('renders visible menu', async () => {
   const tree = (

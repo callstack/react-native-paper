@@ -226,7 +226,7 @@ const Menu = ({
   const scaleY = useSharedValue(0);
 
   const keyboardHeightRef = React.useRef(0);
-  const prevVisible = React.useRef<boolean | null>(null);
+  const prevVisible = React.useRef(visible);
   const anchorRef = React.useRef<View | null>(null);
   const menuRef = React.useRef<View | null>(null);
   const isShownRef = React.useRef(false);
