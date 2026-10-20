@@ -14,8 +14,8 @@ The core team works directly on GitHub and all work is public.
 
 1. Fork the repo and create your branch from `main` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
 2. Use the Node.js version specified in `.nvmrc`.
-3. Run `yarn` on the root level, to setup the development environment.
-4. Do the changes you want and test them out in the example app before sending a pull request.
+3. Run `yarn` at the root level to set up the development environment.
+4. Make the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
 
@@ -24,8 +24,8 @@ We follow the [conventional commits specification](https://www.conventionalcommi
 - `fix`: bug fixes, e.g. fix Button color on DarkTheme.
 - `feat`: new features, e.g. add Snackbar component.
 - `refactor`: code refactor, e.g. new folder structure for components.
-- `docs`: changes into documentation, e.g. add usage example for Button.
-- `test`: adding or updating tests, eg unit, snapshot testing.
+- `docs`: changes to documentation, e.g. add usage example for Button.
+- `test`: adding or updating tests, e.g. unit, snapshot testing.
 - `chore`: tooling changes, e.g. change the CI configuration.
 - `BREAKING CHANGE`: for changes that break existing usage, e.g. change API of a component.
 
