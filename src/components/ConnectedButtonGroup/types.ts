@@ -7,7 +7,7 @@ import type {
 } from 'react-native';
 
 import type { ConnectedButtonGroupSize } from './tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 

@@ -14,7 +14,7 @@ import {
 } from './tokens';
 import { getConnectedButtonPosition } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 

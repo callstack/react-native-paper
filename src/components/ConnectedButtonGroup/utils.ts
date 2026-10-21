@@ -9,8 +9,8 @@ import {
   type ConnectedButtonPosition,
 } from './types';
 import { tokens } from '../../theme/tokens';
+import type { InternalTheme } from '../../theme/types';
 import { resolveCornerRadius, type ShapeToken } from '../../theme/utils/shape';
-import type { InternalTheme } from '../../types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 

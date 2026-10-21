@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { describe, expect, it, jest } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen, userEvent } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
 import {
@@ -16,7 +16,7 @@ import {
   getConnectedButtonSizeStyle,
 } from '../ConnectedButtonGroup/utils';
 
-const theme = getTheme();
+const theme = LightTheme;
 
 type SingleSelectProps = Extract<
   React.ComponentProps<typeof ConnectedButtonGroup>,
