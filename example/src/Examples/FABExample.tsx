@@ -6,12 +6,13 @@ import {
   Chip,
   Divider,
   FAB,
+  type FABSize,
+  type FABVariant,
   List,
   Switch,
   Text,
   useTheme,
 } from 'react-native-paper';
-import type { FABSize, FABVariant } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type FabType = 'icon' | 'extended' | 'extendedTransforming' | 'menu';

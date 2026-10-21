@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 
-import { render, screen } from '../../test-utils';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 
 jest.mock('react-native-reanimated', () => {
@@ -112,16 +112,8 @@ it('renders extended FAB transitioning to collapsed', async () => {
 });
 
 it('uses label as default aria-label', async () => {
-  await render(
-    <FAB.Extended
-      icon="plus"
-      label="New message"
-      expanded
-      testID="extended-fab"
-    />
-  );
-
-  expect(screen.getByLabelText('New message')).toBeOnTheScreen();
+  await render(<FAB.Extended icon="plus" label="New message" expanded />);
+  expect(screen.getByRole('button', { name: 'New message' })).toBeTruthy();
 });
 
 it('respects explicit aria-label', async () => {
@@ -131,24 +123,18 @@ it('respects explicit aria-label', async () => {
       label="New message"
       expanded
       aria-label="Create new message"
-      testID="extended-fab"
     />
   );
-
-  expect(screen.getByLabelText('Create new message')).toBeOnTheScreen();
+  expect(
+    screen.getByRole('button', { name: 'Create new message' })
+  ).toBeTruthy();
 });
 
 it('calls onPress when pressed', async () => {
   const user = userEvent.setup();
   const onPress = jest.fn();
   await render(
-    <FAB.Extended
-      icon="plus"
-      label="New message"
-      expanded
-      onPress={onPress}
-      testID="extended-fab"
-    />
+    <FAB.Extended icon="plus" label="New message" expanded onPress={onPress} />
   );
   await user.press(screen.getByRole('button', { name: 'New message' }));
   expect(onPress).toHaveBeenCalledTimes(1);
@@ -157,13 +143,7 @@ it('calls onPress when pressed', async () => {
 it('forwards event object to onPress', async () => {
   const onPress = jest.fn();
   await render(
-    <FAB.Extended
-      icon="plus"
-      label="New message"
-      expanded
-      onPress={onPress}
-      testID="extended-fab"
-    />
+    <FAB.Extended icon="plus" label="New message" expanded onPress={onPress} />
   );
   await fireEvent(
     screen.getByRole('button', { name: 'New message' }),
