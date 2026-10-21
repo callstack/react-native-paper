@@ -1,0 +1,1183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RangeSlider render & accessibility renders disabled range slider 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 40,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": -12,
+            "top": 4,
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityActions={
+        [
+          {
+            "label": "increment",
+            "name": "increment",
+          },
+          {
+            "label": "decrement",
+            "name": "decrement",
+          },
+        ]
+      }
+      accessibilityRole="adjustable"
+      accessible={true}
+      aria-disabled={true}
+      aria-label="Minimum"
+      aria-valuemax={80}
+      aria-valuemin={0}
+      aria-valuenow={20}
+      aria-valuetext="20"
+      collapsable={false}
+      onAccessibilityAction={[Function]}
+      role="slider"
+      style={
+        [
+          {
+            "borderRadius": 2,
+            "elevation": 1,
+            "height": 44,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 4,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "left": 6,
+            "top": 2,
+          },
+          {
+            "transform": [
+              {
+                "scaleX": 1,
+              },
+            ],
+          },
+          undefined,
+          {
+            "opacity": 0.38,
+          },
+        ]
+      }
+    />
+    <View
+      onLayout={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": 44,
+            "justifyContent": "center",
+            "position": "absolute",
+            "top": -54,
+          },
+          {
+            "left": -16,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 22,
+              "flexDirection": "row",
+              "height": 44,
+              "justifyContent": "center",
+              "minWidth": 48,
+              "paddingHorizontal": 12,
+            },
+            {
+              "backgroundColor": "rgba(50, 47, 53, 1)",
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.8,
+                },
+              ],
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 0,
+                    "fontWeight": "500",
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(245, 239, 247, 1)",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          20
+        </Text>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 40,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": -12,
+            "top": 4,
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityActions={
+        [
+          {
+            "label": "increment",
+            "name": "increment",
+          },
+          {
+            "label": "decrement",
+            "name": "decrement",
+          },
+        ]
+      }
+      accessibilityRole="adjustable"
+      accessible={true}
+      aria-disabled={true}
+      aria-label="Maximum"
+      aria-valuemax={100}
+      aria-valuemin={20}
+      aria-valuenow={80}
+      aria-valuetext="80"
+      collapsable={false}
+      onAccessibilityAction={[Function]}
+      role="slider"
+      style={
+        [
+          {
+            "borderRadius": 2,
+            "elevation": 1,
+            "height": 44,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 4,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "left": 6,
+            "top": 2,
+          },
+          {
+            "transform": [
+              {
+                "scaleX": 1,
+              },
+            ],
+          },
+          undefined,
+          {
+            "opacity": 0.38,
+          },
+        ]
+      }
+    />
+    <View
+      onLayout={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": 44,
+            "justifyContent": "center",
+            "position": "absolute",
+            "top": -54,
+          },
+          {
+            "left": -16,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 22,
+              "flexDirection": "row",
+              "height": 44,
+              "justifyContent": "center",
+              "minWidth": 48,
+              "paddingHorizontal": 12,
+            },
+            {
+              "backgroundColor": "rgba(50, 47, 53, 1)",
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.8,
+                },
+              ],
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 0,
+                    "fontWeight": "500",
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(245, 239, 247, 1)",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          80
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`RangeSlider render & accessibility renders range slider 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 40,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": -12,
+            "top": 4,
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityActions={
+        [
+          {
+            "label": "increment",
+            "name": "increment",
+          },
+          {
+            "label": "decrement",
+            "name": "decrement",
+          },
+        ]
+      }
+      accessibilityRole="adjustable"
+      accessible={true}
+      aria-disabled={false}
+      aria-label="Minimum"
+      aria-valuemax={80}
+      aria-valuemin={0}
+      aria-valuenow={20}
+      aria-valuetext="20"
+      collapsable={false}
+      onAccessibilityAction={[Function]}
+      role="slider"
+      style={
+        [
+          {
+            "borderRadius": 2,
+            "elevation": 1,
+            "height": 44,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 4,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": 6,
+            "top": 2,
+          },
+          {
+            "transform": [
+              {
+                "scaleX": 1,
+              },
+            ],
+          },
+          undefined,
+          false,
+        ]
+      }
+    />
+    <View
+      onLayout={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": 44,
+            "justifyContent": "center",
+            "position": "absolute",
+            "top": -54,
+          },
+          {
+            "left": -16,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 22,
+              "flexDirection": "row",
+              "height": 44,
+              "justifyContent": "center",
+              "minWidth": 48,
+              "paddingHorizontal": 12,
+            },
+            {
+              "backgroundColor": "rgba(50, 47, 53, 1)",
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.8,
+                },
+              ],
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 0,
+                    "fontWeight": "500",
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(245, 239, 247, 1)",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          20
+        </Text>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        [
+          {
+            "borderRadius": 9999,
+            "height": 40,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 40,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": -12,
+            "top": 4,
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.6,
+              },
+            ],
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityActions={
+        [
+          {
+            "label": "increment",
+            "name": "increment",
+          },
+          {
+            "label": "decrement",
+            "name": "decrement",
+          },
+        ]
+      }
+      accessibilityRole="adjustable"
+      accessible={true}
+      aria-disabled={false}
+      aria-label="Maximum"
+      aria-valuemax={100}
+      aria-valuemin={20}
+      aria-valuenow={80}
+      aria-valuetext="80"
+      collapsable={false}
+      onAccessibilityAction={[Function]}
+      role="slider"
+      style={
+        [
+          {
+            "borderRadius": 2,
+            "elevation": 1,
+            "height": 44,
+            "pointerEvents": "none",
+            "position": "absolute",
+            "width": 4,
+          },
+          {
+            "backgroundColor": "rgba(103, 80, 164, 1)",
+            "left": 6,
+            "top": 2,
+          },
+          {
+            "transform": [
+              {
+                "scaleX": 1,
+              },
+            ],
+          },
+          undefined,
+          false,
+        ]
+      }
+    />
+    <View
+      onLayout={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "height": 44,
+            "justifyContent": "center",
+            "position": "absolute",
+            "top": -54,
+          },
+          {
+            "left": -16,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 22,
+              "flexDirection": "row",
+              "height": 44,
+              "justifyContent": "center",
+              "minWidth": 48,
+              "paddingHorizontal": 12,
+            },
+            {
+              "backgroundColor": "rgba(50, 47, 53, 1)",
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.8,
+                },
+              ],
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "flexShrink": 0,
+                    "fontWeight": "500",
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(245, 239, 247, 1)",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          80
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Slider render renders centered slider 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={false}
+  aria-label="Slider"
+  aria-valuemax={50}
+  aria-valuemin={-50}
+  aria-valuenow={10}
+  aria-valuetext="10"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Slider render renders disabled slider 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={true}
+  aria-label="Slider"
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={30}
+  aria-valuetext="30"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Slider render renders discrete slider with tick marks 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={false}
+  aria-label="Slider"
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={40}
+  aria-valuetext="40"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Slider render renders standard continuous slider 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={false}
+  aria-label="Slider"
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={50}
+  aria-valuetext="50"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Slider render renders with start and end icons 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={false}
+  aria-label="Slider"
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={60}
+  aria-valuetext="60"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "marginRight": 12,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      selectable={false}
+      style={
+        [
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 24,
+          },
+          [
+            {
+              "lineHeight": 24,
+              "transform": [
+                {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+          ],
+        ]
+      }
+    >
+      volume-low
+    </Text>
+  </View>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "marginLeft": 12,
+        },
+        false,
+      ]
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      selectable={false}
+      style={
+        [
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 24,
+          },
+          [
+            {
+              "lineHeight": 24,
+              "transform": [
+                {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+          ],
+        ]
+      }
+    >
+      volume-high
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Slider render renders with value indicator visible 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "label": "increment",
+        "name": "increment",
+      },
+      {
+        "label": "decrement",
+        "name": "decrement",
+      },
+    ]
+  }
+  accessibilityRole="adjustable"
+  accessible={true}
+  aria-disabled={false}
+  aria-label="Slider"
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={75}
+  aria-valuetext="75%"
+  onAccessibilityAction={[Function]}
+  role="slider"
+  style={
+    [
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "minHeight": 48,
+        "width": "100%",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "flex": 1,
+        "height": 48,
+        "justifyContent": "center",
+        "overflow": "visible",
+        "position": "relative",
+      }
+    }
+  />
+</View>
+`;
