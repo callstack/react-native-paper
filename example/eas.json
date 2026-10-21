@@ -4,7 +4,6 @@
   },
   "build": {
     "production": {
-      "node": "24.13.0",
       "autoIncrement": true,
       "android": {
         "buildType": "app-bundle"

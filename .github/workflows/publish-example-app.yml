@@ -26,21 +26,24 @@ defaults:
     shell: bash
 
 concurrency:
-  group: publish-example-app
+  # One queue per channel, so a pending preview run doesn't cancel a production one
+  group: publish-example-app-${{ contains(github.event.release.tag_name || inputs.tag, '-') && 'preview' || 'production' }}
 
 jobs:
   check:
     name: Check release is on main
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
     outputs:
       on-main: ${{ steps.check.outputs.on-main }}
       sha: ${{ steps.check.outputs.sha }}
+      tag: ${{ env.TAG }}
     steps:
       - id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
           status=$(gh api "repos/$GH_REPO/compare/main...$TAG" --jq .status)
 
@@ -67,17 +70,12 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Resolve release tag and submit profile
+      - name: Resolve submit profile
         id: release
         env:
-          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          TAG: ${{ needs.check.outputs.tag }}
           PLATFORM: ${{ inputs.platform }}
         run: |
-          if [ -z "$TAG" ]; then
-            echo "::error::No release tag to publish the example app for."
-            exit 1
-          fi
-
           if [ "${TAG#*-}" != "$TAG" ]; then
             profile=preview
           else
@@ -86,7 +84,6 @@ jobs:
 
           platform=${PLATFORM:-all}
 
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "profile=$profile" >> "$GITHUB_OUTPUT"
           echo "platform=$platform" >> "$GITHUB_OUTPUT"
           echo "Publishing $platform for $TAG using the $profile submit profile."
@@ -94,7 +91,7 @@ jobs:
       - name: Setup Expo
         uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e # v8.2.1
         with:
-          eas-version: latest
+          eas-version: 24.12.1
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Check Expo authentication
@@ -108,7 +105,7 @@ jobs:
       - name: Set example app version from the release tag
         working-directory: ./example
         env:
-          TAG: ${{ steps.release.outputs.tag }}
+          TAG: ${{ needs.check.outputs.tag }}
         run: |
           version="${TAG#v}"
           version="${version%%-*}"
@@ -133,12 +130,8 @@ jobs:
             platforms="ios android"
           fi
 
-          if [ -z "$platforms" ]; then
-            echo "::error::No platforms to check."
-            exit 1
-          fi
-
-          build=false
+          build=()
+          update=()
           for platform in $platforms; do
             hash=$(npx expo-updates fingerprint:generate --platform "$platform" | jq -r '.hash')
 
@@ -159,23 +152,33 @@ jobs:
             esac
 
             echo "$platform: fingerprint $hash, $existing matching build(s)"
-            [ "$existing" -eq 0 ] && build=true
+            if [ "$existing" -eq 0 ]; then
+              build+=("$platform")
+            else
+              update+=("$platform")
+            fi
           done
 
-          echo "build=$build" >> "$GITHUB_OUTPUT"
-          if [ "$build" = true ]; then
-            echo "Native code changed, building and submitting."
-          else
-            echo "No native change, publishing an update instead."
-          fi
+          # EAS takes a single platform or "all"
+          to_platform() {
+            case $# in
+              0) echo "" ;;
+              1) echo "$1" ;;
+              *) echo all ;;
+            esac
+          }
+
+          echo "build=$(to_platform "${build[@]}")" >> "$GITHUB_OUTPUT"
+          echo "update=$(to_platform "${update[@]}")" >> "$GITHUB_OUTPUT"
+          echo "Building: ${build[*]:-none}. Updating: ${update[*]:-none}."
 
       - name: Build and submit to the app stores
-        id: submit
-        if: steps.decide.outputs.build == 'true'
+        if: steps.decide.outputs.build != ''
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
-          PLATFORM: ${{ steps.release.outputs.platform }}
+          PLATFORM: ${{ steps.decide.outputs.build }}
+          TAG: ${{ needs.check.outputs.tag }}
         run: |
           eas build \
             --platform "$PLATFORM" \
@@ -183,14 +186,16 @@ jobs:
             --auto-submit-with-profile "$PROFILE" \
             --non-interactive
 
+          echo "Built and submitted $TAG for $PLATFORM using the $PROFILE profile." >> "$GITHUB_STEP_SUMMARY"
+
       - name: Publish an update
-        id: update
-        if: steps.decide.outputs.build == 'false'
+        # Don't let a failed build for one platform skip the other's update
+        if: ${{ !cancelled() && steps.decide.outputs.update != '' }}
         working-directory: ./example
         env:
           PROFILE: ${{ steps.release.outputs.profile }}
-          PLATFORM: ${{ steps.release.outputs.platform }}
-          TAG: ${{ steps.release.outputs.tag }}
+          PLATFORM: ${{ steps.decide.outputs.update }}
+          TAG: ${{ needs.check.outputs.tag }}
         run: |
           eas update \
             --channel "$PROFILE" \
@@ -198,28 +203,13 @@ jobs:
             --message "$TAG" \
             --non-interactive
 
-      - name: Summarise
-        if: ${{ !cancelled() && (steps.submit.outcome == 'success' || steps.update.outcome == 'success') }}
-        env:
-          TAG: ${{ steps.release.outputs.tag }}
-          PROFILE: ${{ steps.release.outputs.profile }}
-          BUILT: ${{ steps.decide.outputs.build }}
-        run: |
-          if [ "$BUILT" = "true" ]; then
-            echo "Built and submitted $TAG using the $PROFILE profile." >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Published an OTA update for $TAG on the $PROFILE channel." >> "$GITHUB_STEP_SUMMARY"
-          fi
+          echo "Published an OTA update for $TAG for $PLATFORM on the $PROFILE channel." >> "$GITHUB_STEP_SUMMARY"
 
-  report-failure:
-    name: Report failure
-    needs: [check, publish]
-    if: ${{ always() && (needs.check.result == 'failure' || (needs.publish.result != 'success' && needs.publish.result != 'skipped')) }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Report failure
+        if: failure() || cancelled()
         env:
-          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          TAG: ${{ needs.check.outputs.tag }}
         run: |
           echo "::error::Example app deployment failed for $TAG. The release itself is fine, only the demo app did not update."
           echo "Check EAS and the stores before re-running, a build may already have been submitted." >> "$GITHUB_STEP_SUMMARY"
+          echo "If the build finished but the store upload failed, resubmit that build with \`eas submit --id <build id>\`. Re-running this workflow will publish an OTA update instead." >> "$GITHUB_STEP_SUMMARY"
