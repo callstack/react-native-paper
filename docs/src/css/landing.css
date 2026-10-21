@@ -1,0 +1,590 @@
+/*
+ * Landing page ported from reactnativepaper.com
+ * (callstack-internal/paper-landing-page).
+ *
+ * The visual rules live in landing-vendor.css, lifted verbatim from the
+ * original's compiled stylesheet. This file holds only what that cannot
+ * provide: the webfonts, and the overrides needed because the docs preset
+ * styles headings, `body *`, `pre`/`code` and font synthesis with !important.
+ *
+ * Roboto and Roboto Mono are Apache-2.0 and vendored. The original sets its
+ * headings in Platform Web, a Commercial Type retail face we cannot ship from
+ * a public repo, so they take Alliance No. 2 instead - Callstack's own face,
+ * which the rest of the docs site already uses.
+ */
+
+@import './landing-vendor.css';
+
+/* @callstack/rspress-theme declares Alliance No. 2 from assets.callstack.com,
+   which serves the files without `Access-Control-Allow-Origin` - so the
+   cross-origin fetch is blocked and headings fall back to Arial. Re-declare it
+   here with the copies react-native-builder-bob uses, which do send CORS. The
+   woff2 stays first so it takes over if the CDN headers are ever fixed; a
+   failed src falls through to the next entry. */
+@font-face {
+  font-family: 'Alliance No. 2';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('https://assets.callstack.com/alliance-no-2-regular.woff2')
+      format('woff2'),
+    url('https://cdn.prod.website-files.com/67e6b7885e182e1054b556db/67e6b8ee4fb44f39145cf744_AllianceNo2-Regular.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Alliance No. 2';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('https://assets.callstack.com/alliance-no-2-medium.woff2')
+      format('woff2'),
+    url('https://cdn.prod.website-files.com/67e6b7885e182e1054b556db/67e6b8eed3d2262c4baebd90_AllianceNo2-Medium.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../assets/landing/fonts/roboto-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/landing/fonts/roboto-400.woff2') format('woff2');
+}
+
+/* Paper's typescale leans on Medium: labelLarge, titleMedium and the rest of
+   the demo ask for 500, and without this face CSS font matching drops them to
+   400, which is why the phone's body copy rendered light. */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/landing/fonts/roboto-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/landing/fonts/roboto-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/landing/fonts/roboto-mono-400.woff2') format('woff2');
+}
+
+/* typography.css in the original: Roboto body, Alliance for h1/h2. */
+/* The original's global resets, scoped so they cannot leak into the docs. */
+.landing,
+.landing *,
+.landing *::before,
+.landing *::after {
+  box-sizing: border-box;
+}
+
+.landing {
+  font-family: Roboto, sans-serif;
+  color: #000;
+  background: #fff;
+
+  /* The preset disables weight synthesis and opts into antialiasing; the
+     original runs with the browser defaults. */
+  font-synthesis: weight style small-caps;
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+}
+
+/* The live demo renders Paper's Appbar title as an `h1`, so every heading rule
+   below carries `:where(:not(.landing-editor__preview *))` to leave the phone's
+   contents to Paper. Wrapping the `:not()` in `:where()` keeps it specificity
+   free, so each rule still sits exactly where the cascade needs it. */
+
+/* Excluding the landing rules is only half of it: the preset's own `h1..h6`
+   rules reach in too, and Paper applies its typescale through RN Web classes,
+   which cannot outrank an !important. The demo's only heading is the Appbar
+   title, which Paper sets as titleLarge - 22/28 at 400 in the theme stack. */
+.landing .landing-editor__preview :is(h1, h2, h3, h4, h5, h6) {
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+}
+
+/* Paper draws its icons as glyphs in a Text with `lineHeight` equal to
+   `fontSize`, set inline - which `body *`'s !important 1.5 overrides, giving
+   the glyph a line box half a line too tall and dropping it below the text it
+   sits beside. `1` restores the relationship at every icon size. */
+.landing .landing-editor__preview [role='img'] {
+  line-height: 1 !important;
+}
+
+/* typography.css in the original: a display face for h1/h2, Roboto elsewhere.
+   The preset already puts Alliance on h1-h6 with !important, so this only
+   needs to keep h3-h6 on Roboto as the original has them. Held inside
+   `:where()` so `.n1himknf h3`, which the original sets in the display face,
+   still wins - it is handled below. */
+.landing :where(h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  font-family: Roboto, sans-serif !important;
+}
+
+/* Nested spans and links fall back to the preset's face and to `body *`'s
+   leading otherwise, which leaves a heading set in two fonts and stretches
+   its line box - the stat labels wrap a link and were running 18px to 14. */
+.landing :is(h1, h2, h3, h4, h5, h6):where(:not(.landing-editor__preview *)) * {
+  font-family: inherit;
+  line-height: inherit !important;
+}
+
+/* --- Overrides for the docs preset's !important declarations ---
+   The vendored rules carry !important on the typographic properties, so they
+   already outrank the preset. What remains is the elements the original
+   styles globally rather than by class. */
+
+.landing h1,
+.landing h2,
+.landing h1 * {
+  font-feature-settings: normal !important;
+  font-variant-numeric: normal !important;
+}
+/* The preset tightens every descendant of `body` to -.02em, which narrows the
+   body copy enough to drop a line from most paragraphs. The original runs at
+   the font's own tracking. `.landing *` is a single class - above the preset's
+   `body *`, below every vendored rule that sets its own tracking, such as
+   `.cf3elge h5` or `.c11ps6c6 .token`. */
+.landing,
+.landing * {
+  letter-spacing: normal !important;
+}
+
+/* Same story for weight: the preset puts every heading at 500, the original
+   leaves them at the UA's bold unless a vendored rule says otherwise. Keeping
+   the element names inside `:where()` holds this at one class of specificity,
+   so `.cjmn5uj h4`, `.ct77mvk h3` and the other 300/400 rules still win. */
+.landing :where(h1, h2, h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  font-weight: bold !important;
+}
+
+/* `.cn49emr` sets its own 24px leading, but the preset's `body *` overrides it
+   on the two rows inside, which then collapse to 12px * 1.5. */
+.landing .cn49emr * {
+  line-height: inherit !important;
+}
+
+/* Same for the GitHub star widget: both boxes are 32px in the original, held
+   there by the 16px leading its two halves declare. `body *` overrides that on
+   their contents (12px * 1.5 = 18), stretching the count box to 34. */
+.landing .gwvv8a1 *,
+.landing .s152rxo6 * {
+  line-height: inherit !important;
+}
+
+/* And the star itself is an inline svg sitting on the baseline; the preset's
+   svg reset makes it a block, which drops the descender space under it and
+   leaves the button 2px short of the count beside it. */
+.landing .s5mrc6w svg {
+  display: inline;
+  vertical-align: baseline;
+}
+
+
+/* The preset resets heading margins (`blockquote, ..., h1, h2, ... { margin: 0 }`)
+   and forces `line-height: 1.2`, both at element specificity. The original
+   leaves headings at the UA defaults unless a vendored class says otherwise -
+   so a 64px heading takes the display face's own leading. Re-assert both
+   through `:where()`, which contributes no
+   specificity: these outrank the preset's element rules while still losing to
+   any vendored class, so `.h15lhj08`'s margin and `.hmtzm5j`'s 120% survive. */
+:where(.landing) h1 {
+  margin-block: 0.67em;
+}
+
+:where(.landing) h2 {
+  margin-block: 0.83em;
+}
+
+:where(.landing) h3 {
+  margin-block: 1em;
+}
+
+:where(.landing) h4 {
+  margin-block: 1.33em;
+}
+
+:where(.landing) h5 {
+  margin-block: 1.67em;
+}
+
+:where(.landing) h6 {
+  margin-block: 2.33em;
+}
+
+:where(.landing) p {
+  margin-block: 1em;
+}
+
+/* Alliance is wider than the Platform Web the original uses, so the hero
+   heading needs 460px to keep its three-line break where `.hrrzndk`'s content
+   box gives 425. Left at 425 it takes a fourth line, which swallows the 70px
+   the original leaves between the store badges and the next band. 460 is
+   exactly the column's 35px right padding, so nothing overflows, and only
+   where the hero is two-column. */
+@media (min-width: 992px) {
+  .landing .hmtzm5j {
+    margin-right: -35px;
+  }
+}
+
+/* Leading needs to outrank the preset's `h1..h6 { line-height: 1.2 }`, which
+   is !important, so it cannot ride at `:where()` specificity. `.hmtzm5j` and
+   `.h1knnu89` are the two headings the original gives an explicit 120%; they
+   are excluded by name rather than by restating their value here. */
+.landing h1:not(.hmtzm5j):not(.h1knnu89):where(:not(.landing-editor__preview *)),
+.landing h2:where(:not(.landing-editor__preview *)) {
+  line-height: normal !important;
+}
+
+/* h3-h6 are Roboto in the original and take its natural leading; the preset
+   forces 1.2 (and `body *` 1.5 on the smaller ones). Holding this at one class
+   of specificity leaves vendored leading, such as `.cf3elge h5`'s 24px or
+   `.cjmn5uj h3`'s 35px, in charge where the original sets it. */
+.landing :where(h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  line-height: normal !important;
+}
+
+/* The preset strips link underlines, where the original leaves them at the UA
+   default. These stat labels are the only ones it shows on: every other link
+   either carries a vendored rule (`.hfwrvff a`, `.d1cbpza3 a`, `.cf3elge a`,
+   `.g1cwq15n`) or wraps an inline-block button, which the decoration cannot
+   propagate into. */
+.landing .n1himknf h4 a {
+  text-decoration: underline;
+}
+
+/* The three places the original sets in the display face. Each carries a
+   vendored rule naming Platform Web with no fallback, so with that face gone
+   they would drop to the UA default serif - point them at Alliance instead. */
+.landing .hfwrvff a,
+.landing .cmn45yp h2,
+.landing .n1himknf h3 {
+  font-family: 'Alliance No. 2', Roboto, sans-serif !important;
+}
+
+/* The stat numbers are set large enough that the preset's line-height shows;
+   let them take the display face's own leading rather than Roboto's. */
+.landing .n1himknf h3 {
+  line-height: normal !important;
+}
+
+/* Header.js sets these inline from its sticky state; this is the unscrolled
+   state. The original spaces three children apart, we only carry the copy. */
+.landing .hv0shhd {
+  --hv0shhd-0: transparent;
+  --hv0shhd-1: none;
+  --hv0shhd-2: #000000;
+}
+
+.landing .h12yetm2 {
+  justify-content: center;
+}
+
+/* rspress decorates the page wrapper with the docs footer artwork - a
+   background image plus an `::after` holding the Callstack mark - and reserves
+   181px of padding for it. That sits below the landing page's own footer,
+   where the original ends. Keyed to the wrapper that holds `.landing`, so
+   every other docs page keeps it. */
+/* The theme's own rule is `div#__rspress_root:not(:has(div[class^="rp-doc"]))`,
+   which outranks anything without the id, hence matching it here. */
+div#__rspress_root:has(> main.landing) {
+  padding-bottom: 0 !important;
+  background-image: none !important;
+}
+
+div#__rspress_root:has(> main.landing)::after {
+  content: none !important;
+}
+
+/* --- The two blocks the original builds in JS rather than CSS --- */
+
+/* Editor.js lays the live demo out with inline React Native Web styles, so
+   there are no linaria classes to lift. These reproduce those values. */
+.landing-editor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.landing-editor__col {
+  position: relative;
+  flex: 0 0 50%;
+  max-width: 460px;
+}
+
+.landing-editor__icon {
+  align-self: start;
+  width: 65px;
+  height: auto;
+}
+
+/* The source leaves the h1 at the UA default `margin: .67em 0`, which the
+   preset zeroes; its leading is handled by the global heading rule above. */
+.landing .landing-editor__heading {
+  margin-top: 30px;
+  margin-bottom: 0.67em;
+  text-align: left;
+}
+
+/* `line-height: 28` against the preset's `body *` rule, which would otherwise
+   reflow the copy from five lines to four. */
+.landing .landing-editor__lede {
+  max-width: 400px;
+  margin-bottom: 50px;
+  color: #414757;
+  font-size: 18px !important;
+  line-height: 28px !important;
+}
+
+/* Editor.js `liveEditorWrapper`: a fixed 400x400 scroll box. Without the cap
+   the panel runs to the full height of the snippet (1426px). */
+.landing-editor__codebox {
+  height: 400px;
+  max-width: 400px;
+  overflow: auto;
+  border-radius: 5px;
+  background: #202c32;
+}
+
+/* `styles.editor` - the pane is 380px inside the 400px box, offset by 20px. */
+.landing .landing-editor__codebox > pre {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 0 0 20px;
+  overflow: visible !important;
+}
+
+/* `cssStyles.numericLine` from Editor.js: prism emits one `.token-line` per
+   line, and the counter renders into the 20px gutter the offset above opens. */
+.landing .landing-code--numbered {
+  position: relative;
+  counter-reset: token-line;
+  /* react-simple-code-editor, which the source's LiveEditor renders through,
+     wraps long lines; prism's own `.prism-code` would let them overflow. */
+  white-space: pre-wrap !important;
+}
+
+/* The counter is absolute with only `left` set, so each number keeps its
+   line's static vertical position and lands 10px outside the pane - inside
+   the 400px box, in the gutter the 20px offset opens. */
+.landing .landing-code--numbered .token-line::before {
+  counter-increment: token-line;
+  content: counter(token-line);
+  position: absolute;
+  left: -10px;
+  overflow: visible;
+  color: rgb(84, 94, 104);
+}
+
+/* The preset's `body *` would set these lines to 24px against the source's
+   21px; the pane is a scroll box, so this only shows as misaligned numbers. */
+.landing .landing-code--numbered,
+.landing .landing-code--numbered * {
+  line-height: normal !important;
+}
+
+/* `ornamentStyles` - the gradient line and dot bridging the code box and the
+   phone. `<Ornament rotate={45} small />` resolves to rotate(0deg). */
+.landing-editor__ornament {
+  position: absolute;
+  top: 470px;
+  left: 425px;
+  display: block !important;
+  transform: rotate(0deg);
+}
+
+/* `previewWrapper`: offset so the phone starts 80px below the row top. */
+.landing-editor__phone {
+  position: relative;
+  flex: 0 0 auto;
+  width: 380px;
+  height: 793px;
+  bottom: -80px;
+}
+
+/* `mobileImg` carries zIndex 3: the frame paints over the screen, so the
+   bezel and notch mask the demo and only the PNG's transparent cutout shows.
+   ip13.png is 1570x2932 (0.536) against a 380x793 box (0.479), and the source
+   draws it through a React Native <Image>, whose default `cover` crops 22px a
+   side. Stretching it to 380 instead walks the cutout in to 48-331 and leaves
+   the demo 282px wide; with `cover` it lands at 32-348, as on the original. */
+.landing-editor__frame {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: 380px;
+  height: 793px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.landing-editor__screen {
+  position: absolute;
+  top: 37px;
+  left: 30px;
+  width: 320px;
+  height: 710px;
+  background: #fff;
+}
+
+.landing-editor__preview {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(33, 0, 93, 1);
+  border-radius: 50px;
+}
+
+/* Testimonials render through a drag Slider in the source; these cards stand
+   in for it while keeping the original's proportions. */
+.landing-testimonials {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+}
+
+.landing-testimonials__item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+}
+
+.landing-testimonials__item blockquote {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.landing-testimonials__item figcaption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.landing-testimonials__item figcaption img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.landing-testimonials__item figcaption a {
+  display: block;
+  color: inherit;
+  font-weight: 600;
+}
+
+.landing-testimonials__item figcaption small {
+  display: block;
+  color: #414757;
+  font-size: 14px;
+}
+
+/* LookAndFeel.js spaces its second row with an inline marginTop. */
+.landing-lookfeel__row--second {
+  margin-top: 60px;
+}
+
+/* Only the Paper snippet is syntax-coloured in the source (the standard-React
+   one uses grayTheme and stays monochrome). These mirror editorTheme's token
+   colours for the hand-marked spans. */
+.landing .tok-tag {
+  color: #f92f5f;
+}
+
+.landing .tok-attr {
+  color: #d7ad58;
+}
+
+.landing .tok-value {
+  color: rgb(100, 172, 144);
+}
+
+/* The preset forces `img { display: block }`; the original leaves these at the
+   browser default, which is what puts the store badges on one row. */
+.landing .skghjfv,
+.landing .bpqw886,
+.landing .hz1a1q4 img,
+.landing .d1cbpza3 img {
+  display: inline !important;
+}
+
+/* The footer logo sits on the text baseline in the original, so its line box
+   carries the descender space below it; the preset's `img` reset centres it
+   and `body *` gives the block a 24px strut, which together cost 4px. */
+.landing .d1cbpza3 {
+  line-height: normal !important;
+}
+
+/* The vendored `.d1cbpza3 p` carries `letter-spacing: 2`, which is unitless
+   and so invalid: the original drops it and the copy runs at normal tracking.
+   Our CSS pipeline normalises it to 2px instead, which costs the paragraph a
+   line. Overridden here rather than in the extract, so a regeneration of
+   landing-vendor.css cannot quietly bring it back. */
+.landing .d1cbpza3 p {
+  letter-spacing: normal !important;
+}
+
+.landing .d1cbpza3 img {
+  vertical-align: baseline;
+}
+
+/* `body * { line-height: 1.5 }` from the preset inflates the code panels; the
+   original renders the pane and its lines at Roboto Mono's natural leading.
+   The tokens are left out on purpose - the vendored `.c11ps6c6 .token` rule
+   puts them at 1.3, and the line box ends up the union of the two. */
+.landing .c11ps6c6,
+.landing .c11ps6c6 .token-line {
+  line-height: normal !important;
+}
+
+/* The preset's `code, kbd, samp, pre { font-family }` is !important, so it
+   outranks the font prism applies inline and swaps in Fira Code. */
+.landing .seb0k0g,
+.landing .landing-code--numbered {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+/* The same preset rule sets `font-weight: 500` on code, where the original
+   runs at 400. It only looked right while no Roboto Mono Medium was loaded to
+   fall back from. */
+.landing .seb0k0g,
+.landing .seb0k0g *,
+.landing .landing-code--numbered,
+.landing .landing-code--numbered * {
+  font-weight: 400 !important;
+}
+
+/* Code.js nests prism's own <pre> inside a .c11ps6c6 wrapper; the wrapper is
+   just the 460px frame, the inner pre carries the dark surface. */
+.landing .c11ps6c6 > pre {
+  margin: 0;
+  width: 100%;
+}

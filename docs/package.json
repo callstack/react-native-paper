@@ -20,6 +20,7 @@
     "camelcase": "^7.0.1",
     "color": "^4.2.3",
     "marked": "^4.1.1",
+    "prism-react-renderer": "^2.4.1",
     "react": "19.2.6",
     "react-color": "^2.19.3",
     "react-dom": "19.2.6",

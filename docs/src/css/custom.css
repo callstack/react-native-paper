@@ -1,3 +1,5 @@
+@import './landing.css';
+
 :root {
   --paper-nav-link-hover: var(--rp-c-bg-soft, rgba(148, 163, 184, 0.16));
   --paper-nav-link-active: var(--rp-c-bg-mute, rgba(148, 163, 184, 0.24));
