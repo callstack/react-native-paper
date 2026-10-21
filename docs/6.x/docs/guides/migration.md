@@ -253,7 +253,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### `Dialog.Actions`
 
-`Dialog.Actions` no longer injects `compact` on its buttons. To keep the previous behavior, you need to add the `compact` prop to each button:
+`Dialog.Actions` no longer injects `compact` on its buttons. To keep the previous behavior, you need to add `size="extra-small"` (which replaces `compact`) and `mode="text"` (since the default [`Button`](#button) mode is now `filled`) to each button:
 
 ```tsx
 // Before (v5)
@@ -263,7 +263,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 // After (v6)
 <Dialog.Actions>
-  <Button compact onPress={hide}>
+  <Button mode="text" size="extra-small" onPress={hide}>
     Done
   </Button>
 </Dialog.Actions>
@@ -428,6 +428,126 @@ const theme = {
 />
 ```
 
+### Button
+
+`Button` is modernized to Material Design 3 Expressive. The button modes were
+renamed, the default mode changed, and a size and shape scale were added.
+
+#### Mode
+
+- **`mode="contained"`** → **`mode="filled"`**
+- **`mode="contained-tonal"`** → **`mode="tonal"`**
+
+```tsx
+// Before (v5)
+<Button mode="contained">Save</Button>
+<Button mode="contained-tonal">Save</Button>
+
+// After (v6)
+<Button mode="filled">Save</Button>
+<Button mode="tonal">Save</Button>
+```
+
+#### Default mode
+
+The default is now **`filled`**, not `text`, matching the MD3 emphasis
+hierarchy. Pass `mode="text"` to keep the old look.
+
+```tsx
+// Before (v5) - rendered as a text button
+<Button>Cancel</Button>
+
+// After (v6) - same appearance
+<Button mode="text">Cancel</Button>
+```
+
+#### Size and shape
+
+New `size` and `shape` props. `size` defaults to `small`, which matches the
+only size 5.x had, so existing buttons keep their metrics.
+
+```tsx
+<Button size="extra-small">XS</Button>
+<Button size="large" shape="square">Large, square</Button>
+```
+
+The container now also morphs its corner while pressed. Pass
+`animateShape={false}` to opt out.
+
+#### Toggle
+
+`selected` turns a button into a toggle. Leave it **undefined** to make it
+a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
+
+```tsx
+<Button mode="filled" selected={isOn} onPress={toggle}>
+  Bold
+</Button>
+```
+
+#### Removed props
+
+- **`uppercase`** → `labelStyle={{ textTransform: 'uppercase' }}`.
+- **`compact`** → `size="extra-small"`.
+- **`contentStyle={{ flexDirection: 'row-reverse' }}`** → `iconPosition="trailing"`.
+- **`elevation`** → elevation follows `mode="elevated"`.
+
+```tsx
+// Before (v5)
+<Button uppercase compact contentStyle={{ flexDirection: 'row-reverse' }} icon="chevron-right">
+  Next
+</Button>
+
+// After (v6)
+<Button
+  size="extra-small"
+  iconPosition="trailing"
+  icon="chevron-right"
+  labelStyle={{ textTransform: 'uppercase' }}
+>
+  Next
+</Button>
+```
+
+#### Style
+
+`Button` renders on `Surface`, so its `style` follows the same rules:
+
+- **Border radius** is no longer set through `style`. Use `shape`, or override
+  the corner token that the size maps to. `round` is the full pill; `square`
+  reads `corner.medium` at `extra-small` and `small`; `corner.large` at
+  `medium`; and `corner.extraLarge` at `large` and `extra-large`.
+- **Background color** is no longer set through `style`. Use `buttonColor`.
+- **Animated styles** must come from Reanimated. A React Native
+  `Animated.Value` in `style` is not applied.
+
+```tsx
+// Before (v5)
+<Button style={{ borderRadius: 8, backgroundColor: 'red' }}>
+  Press me
+</Button>
+
+// After (v6)
+<Button
+  shape="square"
+  theme={{ shapes: { corner: { medium: 8 } } }}
+  buttonColor="red"
+>
+  Press me
+</Button>
+```
+
+#### Appearance changes
+
+These need no code change, but the rendering differs:
+
+- The `outlined` label and icon use **`onSurfaceVariant`** instead of
+  `primary`.
+- The default icon size is **20dp**, up from **18dp**.
+- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
+  `size`; set both if you need them to match.
+- The resting corner is the full pill radius instead of a fixed **20dp**.
+
 ### Card
 
 #### `Card` layout
@@ -451,7 +571,7 @@ This means, in a typical card layout, the Card will automatically apply the nece
     <Text>Card content</Text>
   </Card.Content>
   <Card.Actions>
-    <Button mode="contained">Action</Button>
+    <Button mode="filled">Action</Button>
     <Button mode="outlined">Another Action</Button>
   </Card.Actions>
 </Card>
@@ -498,7 +618,7 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
     <Text>Card content</Text>
   </Card.Content>
   <Card.Actions>
-    <Button mode="contained">Action</Button>
+    <Button mode="filled">Action</Button>
     <Button mode="outlined">Another Action</Button>
   </Card.Actions>
 </Card>
@@ -506,7 +626,7 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
 
 #### `Card.Actions`
 
-`Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="contained"` on the rest:
+`Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="filled"` (formerly `contained`) on the rest:
 
 ```tsx
 // Before (v5)
@@ -518,7 +638,7 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
 // After (v6)
 <Card.Actions>
   <Button mode="outlined">Cancel</Button>
-  <Button mode="contained">Ok</Button>
+  <Button mode="filled">Ok</Button>
 </Card.Actions>
 ```
 

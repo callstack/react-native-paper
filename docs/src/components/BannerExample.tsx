@@ -97,10 +97,10 @@ const BannerExample = () => {
           <Button loading onPress={() => {}}>
             Loading
           </Button>
-          <Button mode="contained-tonal" icon="camera" onPress={() => {}}>
+          <Button mode="tonal" icon="camera" onPress={() => {}}>
             Icon
           </Button>
-          <Button icon="camera" mode="contained" onPress={() => {}}>
+          <Button icon="camera" mode="filled" onPress={() => {}}>
             Press me
           </Button>
           <FAB icon="plus" size="default" onPress={() => {}} />
