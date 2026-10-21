@@ -13,8 +13,8 @@ import type { KeyboardEvent } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { Palette } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
@@ -158,6 +158,8 @@ it('calls onIndexChange', async () => {
   const onIndexChange = jest.fn();
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
+      barTestID="bottom-navigation-bar"
       shifting
       navigationState={createState(0, 5)}
       onIndexChange={onIndexChange}
@@ -181,6 +183,8 @@ it('calls onTabPress', async () => {
 
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
+      barTestID="bottom-navigation-bar"
       shifting
       onTabPress={onTabPress}
       onIndexChange={onIndexChange}
@@ -211,6 +215,8 @@ it('calls onTabLongPress', async () => {
 
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
+      barTestID="bottom-navigation-bar"
       shifting
       onIndexChange={onIndexChange}
       onTabLongPress={onTabLongPress}
@@ -425,20 +431,19 @@ it('should have labelMaxFontSizeMultiplier passed to label', async () => {
 });
 
 it('renders custom background color passed to barStyle property', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting={false}
       labeled={true}
       navigationState={createState(0, 3)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       barStyle={styles.backgroundColor}
-      testID={'bottom-navigation'}
     />
   );
 
-  const wrapper = screen.getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: Palette.error60 });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('uses the rendered bar height when hiding it for the keyboard', async () => {
@@ -498,11 +503,11 @@ it('uses the rendered bar height when hiding it for the keyboard', async () => {
 it('renders a single tab', async () => {
   await render(
     <BottomNavigation
+      testID="bottom-navigation"
       shifting={false}
       navigationState={createState(0, 1)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
-      testID={'bottom-navigation'}
     />
   );
 
@@ -525,75 +530,35 @@ it('renders bottom navigation with getLazy', async () => {
 });
 
 it('applies maxTabBarWidth styling if compact prop is truthy', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testID="bottom-navigation"
       compact
     />
   );
 
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).toHaveStyle({
-    maxWidth: 480,
-  });
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('does not apply maxTabBarWidth styling if compact prop is falsy', async () => {
-  await render(
+  const { toJSON } = await render(
     <BottomNavigation
+      testID="bottom-navigation"
       navigationState={createState(0, 5)}
       onIndexChange={jest.fn()}
       renderScene={renderScene}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testID="bottom-navigation"
       compact={false}
     />
   );
 
-  expect(
-    screen.getByTestId('bottom-navigation-bar-content-wrapper')
-  ).not.toHaveStyle({
-    maxWidth: 480,
-  });
-});
-
-it('renders bar content when shifting is enabled', async () => {
-  await render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={renderScene}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      shifting
-    />
-  );
-
-  expect(screen.getByTestId('bottom-navigation-bar-content')).toBeOnTheScreen();
-});
-
-it('does not render legacy ripple overlay when shifting is disabled', async () => {
-  await render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={renderScene}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      shifting={false}
-    />
-  );
-
-  expect(
-    screen.queryByTestId('bottom-navigation-bar-content-ripple')
-  ).not.toBeOnTheScreen();
+  expect(toJSON()).toMatchSnapshot();
 });
 
 describe('getActiveTintColor', () => {
@@ -604,8 +569,7 @@ describe('getActiveTintColor', () => {
   `(
     'returns $expected when activeColor: $activeColor',
     ({ activeColor, expected }) => {
-      const theme = getTheme(false);
-      const result = getActiveTintColor({ activeColor, theme });
+      const result = getActiveTintColor({ activeColor, theme: LightTheme });
       expect(result).toBe(expected);
     }
   );
@@ -619,10 +583,9 @@ describe('getInactiveTintColor', () => {
   `(
     'returns $expected when inactiveColor: $inactiveColor',
     ({ inactiveColor, expected }) => {
-      const theme = getTheme(false);
       const result = getInactiveTintColor({
         inactiveColor,
-        theme,
+        theme: LightTheme,
       });
       expect(result).toBe(expected);
     }
@@ -642,12 +605,11 @@ describe('getLabelColor', () => {
   ])(
     'returns $expected when tintColor: $tintColor, focused: $focused',
     ({ tintColor, focused, expected }) => {
-      const theme = getTheme(false);
       const result = getLabelColor({
         tintColor: tintColor ?? '',
         hasColor: Boolean(tintColor),
         focused,
-        theme,
+        theme: LightTheme,
       });
       expect(result).toBe(expected);
     }

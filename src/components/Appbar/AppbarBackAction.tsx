@@ -9,14 +9,11 @@ import type {
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
-import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
+import type { Props as AppbarActionProps } from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
 
-export type Props = $Omit<
-  React.ComponentPropsWithoutRef<typeof AppbarAction>,
-  'icon'
-> & {
+export type Props = Omit<React.PropsWithoutRef<AppbarActionProps>, 'icon'> & {
   /**
    *  Custom color for back icon.
    */

@@ -16,17 +16,17 @@ const getClassName = (value: string) =>
     : `tabScreenshot${value.includes('full-width') ? 'full-width' : ''}`;
 
 const ScreenshotTabs = ({ screenshotData }: ScreenshotTabsProps) => {
-  const renderScreenhot = (src: string): ReactNode => (
+  const renderScreenshot = (src: string): ReactNode => (
     <img src={withBase(src)} className={getClassName(src)} />
   );
 
   if (typeof screenshotData === 'string') {
-    return renderScreenhot(screenshotData);
+    return renderScreenshot(screenshotData);
   }
 
   const screenshots = Object.entries(screenshotData).map(([key, value]) => (
     <TabItem key={key} value={key} label={key} default>
-      {typeof value === 'string' ? renderScreenhot(value) : null}
+      {typeof value === 'string' ? renderScreenshot(value) : null}
     </TabItem>
   ));
 

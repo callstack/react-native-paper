@@ -1,4 +1,5 @@
-import { Platform } from 'react-native';
+import * as React from 'react';
+import { Platform, View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
@@ -43,20 +44,25 @@ it('expands to fit the measured label width', async () => {
     pageY: 0,
   });
 
+  const ref = React.createRef<View>();
   await render(
     <FAB.Extended
       icon="plus"
       label="New message"
       expanded
       style={{}}
-      testID="extended-fab"
+      ref={ref}
     />
   );
   await jest.runAllTimersAsync();
 
-  expect(
-    Reanimated.getAnimatedStyle(screen.getByTestId('extended-fab-container'))
-  ).toMatchObject({ width: 144 });
+  if (!ref.current) {
+    throw new Error('Expected FAB ref to be attached');
+  }
+
+  expect(Reanimated.getAnimatedStyle(ref.current)).toMatchObject({
+    width: 144,
+  });
 });
 
 it('renders extended FAB collapsed', async () => {

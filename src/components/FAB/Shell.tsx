@@ -29,8 +29,8 @@ import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
-import type { Elevation, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -212,7 +212,7 @@ const Shell = ({
   overlay,
   children,
   style,
-  testID = 'fab-shell',
+  testID,
   theme: themeOverrides,
   ref,
 }: ShellProps) => {
@@ -319,7 +319,6 @@ const Shell = ({
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       elevation={elevation}
-      testID={`${testID}-container`}
       theme={theme}
     >
       <Animated.View style={[styles.clip, clipStyle]}>
@@ -357,7 +356,6 @@ const Shell = ({
               labelAnimatedStyle={labelAnimatedStyle}
               labelNumberOfLines={labelAnimatedStyle ? 1 : undefined}
               labelEllipsisMode={labelAnimatedStyle ? 'clip' : undefined}
-              testID={testID}
             />
           )}
         </TouchableRipple>

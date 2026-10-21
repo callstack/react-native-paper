@@ -57,7 +57,7 @@ Older Material Design 2 platform-split font configuration (`configureFonts` with
 In the latest version fonts in theme are structured based on the `variant` keys e.g. `displayLarge` or `bodyMedium` which are then used in `Text`'s component throughout the whole library.
 
 :::info
-The default `fontFamily` is different per particular platfrom:
+The default `fontFamily` is different per particular platform:
 
 ```js
 Platform.select({
@@ -66,6 +66,13 @@ Platform.select({
   default: 'sans-serif', // and 'sans-serif-medium' for `fontWeight:"500"`
 }),
 ```
+
+Material Design 3 typescale uses two font families:
+
+- **Brand**: Display, Headline and Title Large
+- **Plain**: Title Medium/Small, Label and Body
+
+The default theme uses the platform default for both font families.
 
 :::
 
@@ -291,13 +298,28 @@ Platform.select({
   "fontFamily": "Font",
   "fontSize": 16,
   "fontWeight": "400",
-  "letterSpacing": 0.15,
+  "letterSpacing": 0.5,
   "lineHeight": 24,
 }
 ```
 
   </div>
 </div>
+
+- #### Emphasized
+
+Each variant also has an `Emphasized` counterpart with a heavier font weight: `displayLargeEmphasized`,
+`bodyMediumEmphasized` etc.
+
+```json
+"bodyMediumEmphasized": {
+  "fontFamily": "Font",
+  "fontSize": 14,
+  "fontWeight": "500",
+  "letterSpacing": 0.25,
+  "lineHeight": 20,
+}
+```
 
 :::info
 If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied:

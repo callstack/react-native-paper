@@ -184,7 +184,7 @@ export const themeColors = {
       'textColor/iconColor': 'theme.colors.onTertiaryContainer',
     },
     surface: {
-      backgroundColor: 'theme.colors.elevarion.level3',
+      backgroundColor: 'theme.colors.elevation.level3',
       'textColor/iconColor': 'theme.colors.primary',
     },
   },
@@ -206,7 +206,7 @@ export const themeColors = {
       'textColor/iconColor': 'theme.colors.onTertiaryContainer',
     },
     surface: {
-      backgroundColor: 'theme.colors.elevarion.level3',
+      backgroundColor: 'theme.colors.elevation.level3',
       'textColor/iconColor': 'theme.colors.primary',
     },
   },

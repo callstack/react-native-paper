@@ -12,7 +12,7 @@ import {
 } from './utils';
 import type { AppbarModes, AppbarChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Surface from '../Surface';
 
 const APPBAR_HORIZONTAL_PADDING = 4;
@@ -63,9 +63,6 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
  * A component to display action items in a bar. It can be placed at the top or bottom.
  * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
  * The bottom bar usually provides access to a drawer and up to four actions.
- *
- * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
  *
  * ## Usage
  * ### Top bar
