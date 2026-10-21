@@ -21,6 +21,10 @@ import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
+import {
+  resolveLabelColor as resolveToolbarLabelColor,
+  ToolbarColorContext,
+} from '../Toolbar/ToolbarColorContext';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -245,6 +249,20 @@ const Button = ({
   const borderRadius = theme.shapes.corner.largeIncreased;
   const iconSize = 18;
 
+  // A mode-less (`'text'`) `Button` inside a `Toolbar` picks up its ambient
+  // label color, unless it already has its own spec-defined coloring (a
+  // non-`'text'` `mode` or an explicit color prop).
+  const toolbarColors = React.useContext(ToolbarColorContext);
+  const hasOwnColoring =
+    mode !== 'text' || customTextColor != null || customButtonColor != null;
+  const resolvedCustomTextColor =
+    toolbarColors && !hasOwnColoring
+      ? resolveToolbarLabelColor({
+          theme: toolbarColors.theme,
+          colorScheme: toolbarColors.colorScheme,
+        })
+      : customTextColor;
+
   const {
     backgroundColor,
     borderColor,
@@ -254,7 +272,7 @@ const Button = ({
     backgroundOpacity,
   } = getButtonColors({
     customButtonColor,
-    customTextColor,
+    customTextColor: resolvedCustomTextColor,
     theme,
     mode,
     disabled,
