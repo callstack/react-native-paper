@@ -264,6 +264,28 @@ export const themeColors = {
       backgroundColor: 'theme.colors.backdrop',
     },
   },
+  NavigationRail: {
+    '-': {
+      backgroundColor: 'theme.colors.surface',
+    },
+  },
+  'NavigationRail.Item': {
+    active: {
+      indicatorColor: 'theme.colors.secondaryContainer',
+      iconColor: 'theme.colors.onSecondaryContainer',
+      'textColor (collapsed)': 'theme.colors.secondary',
+      'textColor (expanded)': 'theme.colors.onSecondaryContainer',
+    },
+    inactive: {
+      'iconColor/textColor': 'theme.colors.onSurfaceVariant',
+    },
+  },
+  'NavigationRail.Modal': {
+    '-': {
+      backgroundColor: 'theme.colors.surfaceContainer',
+      scrimColor: 'theme.colors.scrim',
+    },
+  },
   ProgressBar: {
     '-': {
       tintColor: 'theme.colors.primary',
