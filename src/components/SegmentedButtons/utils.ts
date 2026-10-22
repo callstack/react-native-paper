@@ -2,6 +2,7 @@ import type { ViewStyle } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
+import type { BorderRadiusStyle } from '../TouchableRipple/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -58,20 +59,35 @@ export const getDisabledSegmentedButtonStyle = ({
   return {};
 };
 
+export type SegmentBorderRadiusStyle = Pick<
+  BorderRadiusStyle,
+  | 'borderRadius'
+  | 'borderTopLeftRadius'
+  | 'borderTopRightRadius'
+  | 'borderBottomLeftRadius'
+  | 'borderBottomRightRadius'
+> & {
+  borderEndWidth?: number;
+};
+
 export const getSegmentedButtonBorderRadius = ({
   segment,
+  borderRadius,
 }: {
   theme: InternalTheme;
   segment?: 'first' | 'last';
-}): ViewStyle => {
+  borderRadius: number;
+}): SegmentBorderRadiusStyle => {
   if (segment === 'first') {
     return {
+      borderRadius,
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
       borderEndWidth: 0,
     };
   } else if (segment === 'last') {
     return {
+      borderRadius,
       borderTopLeftRadius: 0,
       borderBottomLeftRadius: 0,
     };

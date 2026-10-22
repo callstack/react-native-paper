@@ -21,6 +21,11 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
+   *
+   * On web the ripple is bounded by its own container regardless of this prop.
+   * The touchable never clips its content, since clipping would also clip the
+   * touch target, so children needing a rounded shape must carry the radius
+   * themselves.
    */
   borderless?: boolean;
   /**
@@ -75,6 +80,26 @@ export type Props = PressableProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Radius of every corner of the touchable. Native-only: it shapes the
+   * highlight underlay there. On web the ripple container clips itself
+   * regardless, so this has no effect.
+   */
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  borderTopStartRadius?: number;
+  borderTopEndRadius?: number;
+  borderBottomStartRadius?: number;
+  borderBottomEndRadius?: number;
+  /**
+   * Width of the touchable's own border, if it draws one. Web-only: the touch
+   * target's absolute offsets start inside the border, not the visible outer
+   * edge, so this widens the target back out to it.
+   */
+  borderWidth?: number;
 };
 
 /**
@@ -105,12 +130,26 @@ export type Props = PressableProps & {
 const TouchableRipple = ({
   style,
   background: _background,
-  borderless = false,
+  // consumed so it does not reach the DOM; the ripple container clips regardless
+  borderless: _borderless = false,
   disabled: disabledProp,
   rippleColor,
   underlayColor: _underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
+  // consumed so they do not reach the DOM; native-only, the ripple container
+  // clips itself regardless of shape on web
+  borderRadius: _borderRadius,
+  borderTopLeftRadius: _borderTopLeftRadius,
+  borderTopRightRadius: _borderTopRightRadius,
+  borderBottomLeftRadius: _borderBottomLeftRadius,
+  borderBottomRightRadius: _borderBottomRightRadius,
+  borderTopStartRadius: _borderTopStartRadius,
+  borderTopEndRadius: _borderTopEndRadius,
+  borderBottomStartRadius: _borderBottomStartRadius,
+  borderBottomEndRadius: _borderBottomEndRadius,
+  borderWidth,
   ref,
   ...rest
 }: Props) => {
@@ -178,7 +217,7 @@ const TouchableRipple = ({
           borderTopRightRadius: style.borderTopRightRadius,
           borderBottomRightRadius: style.borderBottomRightRadius,
           borderBottomLeftRadius: style.borderBottomLeftRadius,
-          overflow: centered ? 'visible' : 'hidden',
+          overflow: 'hidden',
         });
 
         // Create span to show the ripple effect
@@ -282,7 +321,6 @@ const TouchableRipple = ({
       disabled={disabled}
       style={(state) => [
         styles.touchable,
-        borderless && styles.borderless,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
         state.hovered && { backgroundColor: hoverColor },
@@ -290,11 +328,40 @@ const TouchableRipple = ({
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {(state) =>
-        React.Children.only(
-          typeof children === 'function' ? children(state) : children
-        )
-      }
+      {(state) => {
+        const border = borderWidth ?? 0;
+        const inset = (value: number | undefined) => -((value ?? 0) + border);
+
+        const touchTargetStyle: ViewStyle | undefined =
+          hitSlop == null
+            ? undefined
+            : typeof hitSlop === 'number'
+              ? {
+                  position: 'absolute',
+                  top: inset(hitSlop),
+                  bottom: inset(hitSlop),
+                  left: inset(hitSlop),
+                  right: inset(hitSlop),
+                }
+              : {
+                  position: 'absolute',
+                  top: inset(hitSlop.top),
+                  bottom: inset(hitSlop.bottom),
+                  left: inset(hitSlop.left),
+                  right: inset(hitSlop.right),
+                };
+
+        return (
+          <>
+            {!disabled && touchTargetStyle && (
+              <View aria-hidden style={touchTargetStyle} />
+            )}
+            {React.Children.only(
+              typeof children === 'function' ? children(state) : children
+            )}
+          </>
+        );
+      }}
     </Pressable>
   );
 };
@@ -316,9 +383,6 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' && {
       cursor: 'auto',
     }),
-  },
-  borderless: {
-    overflow: 'hidden',
   },
 });
 

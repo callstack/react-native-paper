@@ -221,6 +221,7 @@ export default defineConfig(
       'src/components/__tests__/Appbar/Appbar.test.tsx',
       'src/components/__tests__/Dialog.test.tsx',
       'src/components/__tests__/Searchbar.test.tsx',
+      'src/components/__tests__/TouchableRippleWeb.test.tsx',
     ],
     rules: {
       'testing-library/no-node-access': 'off',
