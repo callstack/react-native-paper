@@ -132,6 +132,80 @@ it('uses the default anchorPosition of top', async () => {
   dimensionsSpy.mockRestore();
 });
 
+it('reopens after being closed', async () => {
+  const testID = 'reopen-menu';
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+          <Menu.Item onPress={jest.fn()} title="Redo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  const { rerender } = await render(makeMenu(false));
+
+  // Open the menu.
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+  });
+
+  await waitFor(() => {
+    expect(screen.getByTestId(`${testID}-view`)).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 100,
+    });
+  });
+
+  // Close the menu.
+  await act(async () => {
+    await rerender(makeMenu(false));
+    await Promise.resolve();
+  });
+
+  // Reopen the menu. Without the fix, `setRendered(false)` was deferred to
+  // the hide animation callback (which never fires on RN >= 0.80, see #4763)
+  // so the portal stayed mounted and the menu appeared non-functional.
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+  });
+
+  await waitFor(() => {
+    expect(screen.getByTestId(`${testID}-view`)).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 100,
+    });
+  });
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+
 it('respects anchorPosition bottom', async () => {
   const testID = 'bottom-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
