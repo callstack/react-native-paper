@@ -289,6 +289,7 @@ const TouchableRipple = ({
         disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
+      accessible={Platform.OS === 'ios' ? false : true}
     >
       {(state) =>
         React.Children.only(

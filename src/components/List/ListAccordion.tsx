@@ -10,6 +10,7 @@ import type {
   TextStyle,
   ViewProps,
   ViewStyle,
+  Platform,
 } from 'react-native';
 
 import { ListAccordionContext } from './ListAccordionContext';
@@ -248,7 +249,7 @@ const ListAccordion = ({
 
   return (
     <View>
-      <View style={{ backgroundColor: theme?.colors?.background }}>
+      <View style={[{ backgroundColor: theme?.colors?.background }, containerStyle]}>
         <TouchableRipple
           style={[styles.container, style]}
           onPress={handlePress}
@@ -262,10 +263,12 @@ const ListAccordion = ({
           background={background}
           borderless
           hitSlop={hitSlop}
+          accessible={Platform.OS !== 'ios'}
         >
           <View
             style={[styles.row, containerStyle]}
             pointerEvents={pointerEvents}
+            accessible={Platform.OS=== 'ios'? false: true}
           >
             {left
               ? left({
@@ -273,7 +276,7 @@ const ListAccordion = ({
                   style: getLeftStyles(alignToTop, description),
                 })
               : null}
-            <View style={[styles.contentItem, styles.content, contentStyle]}>
+            <View style={[styles.contentItem, styles.content, contentStyle]} accessible={Platform.OS=== 'ios'? false: true}>
               <Text
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
@@ -311,6 +314,7 @@ const ListAccordion = ({
                 styles.trailingItem,
                 description ? styles.multiline : undefined,
               ]}
+               accessible={Platform.OS=== 'ios'? false: true}
             >
               {right ? (
                 right({
