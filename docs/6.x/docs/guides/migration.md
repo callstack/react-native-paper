@@ -253,7 +253,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### `Dialog.Actions`
 
-`Dialog.Actions` no longer injects `compact` on its buttons. To keep the previous behavior, you need to add `size="extra-small"` (which replaces `compact`) and `mode="text"` (since the default [`Button`](#button) mode is now `filled`) to each button:
+`Dialog.Actions` no longer injects `compact` on its buttons. To get close to the previous look, add `size="extra-small"` (which replaces `compact`) and `mode="text"` (since the default [`Button`](#button) mode is now `filled`) to each button. The buttons get shorter: `extra-small` is **32dp** tall, while `compact` buttons kept the **40dp** height:
 
 ```tsx
 // Before (v5)
@@ -489,9 +489,10 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 #### Removed props
 
 - **`uppercase`** → `labelStyle={{ textTransform: 'uppercase' }}`.
-- **`compact`** → `size="extra-small"`.
+- **`compact`** → `size="extra-small"`. This also changes the height:
+  `extra-small` is **32dp** tall, while `compact` only reduced the horizontal
+  margins and the min width and kept the **40dp** height.
 - **`contentStyle={{ flexDirection: 'row-reverse' }}`** → `iconPosition="trailing"`.
-- **`elevation`** → elevation follows `mode="elevated"`.
 
 ```tsx
 // Before (v5)
