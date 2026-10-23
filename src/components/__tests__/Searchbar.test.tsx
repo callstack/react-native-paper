@@ -13,6 +13,7 @@ import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
+import { SearchbarTokens } from '../Searchbar/tokens';
 
 it('renders with placeholder', async () => {
   const tree = (
@@ -59,6 +60,18 @@ it('uses the trailing color for the clear icon independently of the search icon'
   expect(
     screen.getByText('magnify', { includeHiddenElements: true })
   ).toHaveStyle({ color: 'purple' });
+});
+
+it('uses the MD3 color roles for the input and its placeholder', async () => {
+  const tree = (
+    await render(<Searchbar value="query" placeholder="Search" />)
+  ).toJSON();
+
+  // `placeholderTextColor` is an attribute, not styling: the snapshot locks it.
+  expect(screen.getByRole('searchbox')).toHaveStyle({
+    color: LightTheme.colors.onSurface,
+  });
+  expect(tree).toMatchSnapshot();
 });
 
 it('does not respond to touch on the clear icon when search has no value', async () => {
@@ -303,5 +316,30 @@ it('renders results below the Searchbar', async () => {
   expect(screen.getByText('Result')).toBeOnTheScreen();
   expect(screen.getByTestId('results')).toHaveStyle({
     borderRadius: LightTheme.shapes.corner.medium,
+    marginHorizontal: SearchbarTokens.marginFocused,
+  });
+});
+
+it('shrinks its horizontal margin while the input is focused', async () => {
+  await render(<Searchbar value="" />);
+
+  expect(screen.root).toHaveStyle({
+    marginHorizontal: SearchbarTokens.marginUnfocused,
+  });
+
+  await fireEvent(screen.getByRole('searchbox'), 'focus');
+
+  expect(screen.root).toHaveStyle({
+    marginHorizontal: SearchbarTokens.marginFocused,
+  });
+});
+
+it('keeps a custom horizontal margin instead of animating it', async () => {
+  await render(<Searchbar value="" style={{ marginHorizontal: 40 }} />);
+
+  await fireEvent(screen.getByRole('searchbox'), 'focus');
+
+  expect(screen.root).toHaveStyle({
+    marginHorizontal: 40,
   });
 });

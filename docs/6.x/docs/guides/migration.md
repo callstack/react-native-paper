@@ -303,8 +303,8 @@ The `Searchbar` modes use the latest Material 3 terminology in Paper 6.x:
 ```
 
 The default `contained` mode adds 24dp horizontal margins and animates them to
-12dp while focused. To keep a full-width Searchbar, provide a horizontal margin;
-this replaces the built-in margin and disables the focus animation:
+12dp while focused. To keep a full-width Searchbar, provide a margin for that
+axis; it replaces the built-in margin and disables the focus animation:
 
 ```tsx
 <Searchbar
@@ -314,9 +314,11 @@ this replaces the built-in margin and disables the focus animation:
 />
 ```
 
-Any horizontal margin, including `margin`, disables the built-in focus
-animation. Use `marginVertical` when you only need vertical spacing and want to
-keep the animated horizontal margins.
+Only a margin naming that axis - `marginHorizontal`, `marginStart`, `marginEnd`,
+`marginLeft` or `marginRight` - replaces the animated one. The `margin`
+shorthand is less specific, so the horizontal margins keep animating around it.
+Use `marginVertical` when you only need vertical spacing and want to keep the
+animated horizontal margins.
 
 The misspelled `traileringIcon` props have been renamed:
 
