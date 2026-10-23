@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent, ViewStyle } from 'react-native';
 
 import Animated, {
+  cubicBezier,
   ReduceMotion,
   useAnimatedStyle,
-  useDerivedValue,
   useSharedValue,
   withSpring,
+  type CSSStyle,
 } from 'react-native-reanimated';
 
 import type { ConnectedButtonProps as Props } from './types';
@@ -69,7 +70,7 @@ const ConnectedButton = ({
 
   const { outerRadius, innerRadius, pressedRadius } = sizeStyle;
   const restRadius = checked ? outerRadius : innerRadius;
-  const pressed = useSharedValue(false);
+  const [pressed, setPressed] = React.useState(false);
 
   // Selection-check behaviour matches `SegmentedButtonItem` for migration
   // parity: the check scales in and takes the place of the leading icon on a
@@ -92,52 +93,46 @@ const ConnectedButton = ({
     checkScale.value = withSpring(showCheck ? 1 : 0, springConfig);
   }, [showCheck, checkScale, springConfig]);
 
-  // Only the raw pressed flag is tracked here; the radius itself is derived
-  // from props in the worklet below, so no handler writes a radius directly.
+  // Only the pressed flag is tracked here; the radius is derived from it and
+  // the props below, so no handler writes a radius directly.
   const handlePressIn = React.useCallback(() => {
-    pressed.value = true;
-  }, [pressed]);
+    setPressed(true);
+  }, []);
   const handlePressOut = React.useCallback(() => {
-    pressed.value = false;
-  }, [pressed]);
+    setPressed(false);
+  }, []);
   // Clearing on press as well as press-out matters: re-pressing the already
   // selected button reports the same value, so the group never re-renders and
   // nothing else would restore the shape. A press-out swallowed by a gesture
   // race used to leave the button stuck at its pressed corner indefinitely.
   const handlePress = React.useCallback(
     (event: GestureResponderEvent) => {
-      pressed.value = false;
+      setPressed(false);
       onPress?.(event);
     },
-    [pressed, onPress]
+    [onPress]
   );
 
   const { start: animateStart, end: animateEnd } = morphingCorners[position];
 
-  // A single spring owns the morphing radius, derived from the current props
-  // rather than written by the press handlers and the selection separately —
-  // those used to fire competing springs on one shared value, so a tap ran
-  // three transitions (pressed, old rest, new rest) instead of one.
-  const cornerRadius = useDerivedValue(
-    () => withSpring(pressed.value ? pressedRadius : restRadius, springConfig),
-    [restRadius, pressedRadius, springConfig]
-  );
+  const morphRadius = pressed ? pressedRadius : restRadius;
+  const startRadius = animateStart ? morphRadius : outerRadius;
+  const endRadius = animateEnd ? morphRadius : outerRadius;
 
-  const animatedShapeStyle = useAnimatedStyle(() => {
-    // Read the plain number. A `withSpring` result is a stateful animation
-    // object and must never be handed to more than one style prop: four
-    // corners sharing one object step the same state machine four times a
-    // frame and desync.
-    const morph = cornerRadius.value;
-    const startRadius = animateStart ? morph : outerRadius;
-    const endRadius = animateEnd ? morph : outerRadius;
-    return {
-      borderTopStartRadius: startRadius,
-      borderBottomStartRadius: startRadius,
-      borderTopEndRadius: endRadius,
-      borderBottomEndRadius: endRadius,
-    };
-  }, [animateStart, animateEnd, outerRadius]);
+  const shapeStyle: CSSStyle<ViewStyle> = {
+    borderStartStartRadius: startRadius,
+    borderEndStartRadius: startRadius,
+    borderStartEndRadius: endRadius,
+    borderEndEndRadius: endRadius,
+    transitionProperty: [
+      'borderStartStartRadius',
+      'borderEndStartRadius',
+      'borderStartEndRadius',
+      'borderEndEndRadius',
+    ],
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
 
   const checkIconStyle = useAnimatedStyle(() => ({
     transform: [{ scale: checkScale.value }],
@@ -182,7 +177,7 @@ const ConnectedButton = ({
           minWidth: sizeStyle.minWidth,
           backgroundColor: containerBackground,
         },
-        animatedShapeStyle,
+        shapeStyle,
         style,
       ]}
     >

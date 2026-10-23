@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { describe, expect, it, jest } from '@jest/globals';
 
-import { render, screen, userEvent } from '../../test-utils';
+import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
@@ -259,18 +259,38 @@ it('morphs only the connected corners of each position', async () => {
 
   // first, unselected — leading corner pinned, trailing corner morphs
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderTopEndRadius: innerRadius,
+    borderStartStartRadius: outerRadius,
+    borderStartEndRadius: innerRadius,
   });
   // middle, selected — both sides morph, so both reach the pill
   expect(screen.getByTestId('train-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderTopEndRadius: outerRadius,
+    borderStartStartRadius: outerRadius,
+    borderStartEndRadius: outerRadius,
   });
   // last, unselected — leading corner morphs, trailing corner pinned
   expect(screen.getByTestId('drive-container')).toHaveStyle({
-    borderTopStartRadius: innerRadius,
-    borderTopEndRadius: outerRadius,
+    borderStartStartRadius: innerRadius,
+    borderStartEndRadius: outerRadius,
+  });
+});
+
+it('tightens the connected corners while a button is pressed', async () => {
+  const { innerRadius, outerRadius, pressedRadius } =
+    getConnectedButtonSizeStyle({ size: 'small', theme });
+
+  await renderGroup({ value: 'train' });
+
+  // first, unselected — only the trailing corner morphs
+  await fireEvent(screen.getByTestId('walk'), 'pressIn');
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    borderStartStartRadius: outerRadius,
+    borderStartEndRadius: pressedRadius,
+  });
+
+  await fireEvent(screen.getByTestId('walk'), 'pressOut');
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    borderStartStartRadius: outerRadius,
+    borderStartEndRadius: innerRadius,
   });
 });
 
@@ -285,8 +305,8 @@ it('leaves a lone button fully rounded on both sides', async () => {
   });
 
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderTopEndRadius: outerRadius,
+    borderStartStartRadius: outerRadius,
+    borderStartEndRadius: outerRadius,
   });
 });
 
