@@ -463,8 +463,9 @@ hierarchy. Pass `mode="text"` to keep the old look.
 
 #### Size and shape
 
-New `size` and `shape` props. `size` defaults to `small`, which matches the
-only size 5.x had, so existing buttons keep their metrics.
+New `size` and `shape` props. `size` defaults to `small`, which keeps the
+**40dp** height of the only size 5.x had. Its horizontal padding is different,
+see the appearance changes below.
 
 ```tsx
 <Button size="extra-small">XS</Button>
@@ -547,6 +548,10 @@ These need no code change, but the rendering differs:
 - `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
   `size`; set both if you need them to match.
 - The resting corner is the full pill radius instead of a fixed **20dp**.
+- At the default `small` size, the horizontal padding is **16dp** for every
+  mode. In 5.x, the label margins were **24dp** for `filled`, `tonal`,
+  `elevated` and `outlined`, and **12dp** for `text` (**16dp** with an icon).
+  Existing buttons change width.
 
 ### Card
 
