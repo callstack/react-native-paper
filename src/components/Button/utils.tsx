@@ -308,10 +308,15 @@ const getButtonLabelColor = ({
   return colors.primary;
 };
 
-const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
+const getButtonBorderColor = ({
+  isMode,
+  theme,
+  disabled,
+  selected,
+}: BaseProps) => {
   // A selected outlined toggle drops its outline (the filled inverse-surface
   // background takes over as the visual affordance).
-  if (selected && isMode('outlined')) {
+  if (selected && !disabled && isMode('outlined')) {
     return 'transparent';
   }
   if (isMode('outlined')) {
@@ -323,10 +328,11 @@ const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
 
 const getButtonBorderWidth = ({
   isMode,
+  disabled,
   selected,
   size,
-}: Omit<BaseProps, 'disabled' | 'theme'> & { size: ButtonSize }) => {
-  if (selected && isMode('outlined')) {
+}: Omit<BaseProps, 'theme'> & { size: ButtonSize }) => {
+  if (selected && !disabled && isMode('outlined')) {
     return 0;
   }
   if (isMode('outlined')) {
@@ -381,9 +387,19 @@ export const getButtonColors = ({
     toggleColors,
   });
 
-  const borderColor = getButtonBorderColor({ isMode, theme, selected });
+  const borderColor = getButtonBorderColor({
+    isMode,
+    theme,
+    disabled,
+    selected,
+  });
 
-  const borderWidth = getButtonBorderWidth({ isMode, selected, size });
+  const borderWidth = getButtonBorderWidth({
+    isMode,
+    disabled,
+    selected,
+    size,
+  });
 
   const labelOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 

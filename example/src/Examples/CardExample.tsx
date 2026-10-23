@@ -109,14 +109,16 @@ const CardExample = () => {
           <Card.Actions>
             <Button
               mode="outlined"
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Share
             </Button>
             <Button
               mode="filled"
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Explore
