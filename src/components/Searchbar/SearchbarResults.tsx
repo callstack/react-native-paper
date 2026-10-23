@@ -33,7 +33,9 @@ export type Props = {
 /**
  * A container for the search results / suggestions list shown below a
  * `Searchbar` (MD3 search anatomy element 6). It only provides the surface;
- * grouping results with gaps is left to the consumer.
+ * grouping results with gaps is left to the consumer. It carries the
+ * horizontal margin of a focused contained bar, so the two line up the way the
+ * MD3 docked search view does; pass a margin through `style` to change that.
  *
  * ## Usage
  * ```js
@@ -87,7 +89,8 @@ const SearchbarResults = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    // Margin rather than width: a width would add to it and overflow.
+    marginHorizontal: SearchbarTokens.marginFocused,
   },
 });
 
