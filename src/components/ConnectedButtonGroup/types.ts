@@ -26,15 +26,81 @@ export type ConnectedButtonPosition =
   (typeof connectedButtonPositions)[keyof typeof connectedButtonPositions];
 
 /**
- * Props of a single button rendered by the group. Everything a
- * `ConnectedButtonConfig` entry carries, plus the state the group derives for
- * it (`checked`, `position`, `size`, `multiSelect`).
- *
- * The overlap with `ConnectedButtonConfig` is deliberate: the docs generator
- * only expands the `buttons` API table when the config is an inline object
- * literal in `ConnectedButtonGroup.tsx`.
+ * Configuration for a single button rendered inside the group.
  */
-export type ConnectedButtonProps = {
+export type ConnectedButtonConfig<T extends string = string> = {
+  /**
+   * Value of the button (required).
+   */
+  value: T;
+  /**
+   * Icon to display for the button.
+   */
+  icon?: IconSource;
+  /**
+   * Label text of the button.
+   */
+  label?: string;
+  /**
+   * Whether the button is disabled.
+   */
+  disabled?: boolean;
+  /**
+   * Accessibility label for the button. Read by the screen reader when the
+   * user taps the button.
+   */
+  'aria-label'?: string;
+  /**
+   * Custom color for the selected label and icon.
+   */
+  checkedColor?: string;
+  /**
+   * Custom color for the unselected label and icon.
+   */
+  uncheckedColor?: string;
+  /**
+   * Show an optional check icon to indicate the selected state.
+   */
+  showSelectedCheck?: boolean;
+  /**
+   * Type of background drawable to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
+   * Sets additional distance outside of the button in which a press can be
+   * detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
+   * Callback that is called when the button is pressed, in addition to the
+   * group's `onValueChange`.
+   */
+  onPress?: (event: GestureResponderEvent) => void;
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
+   * Pass additional styles for the button container.
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the button label.
+   */
+  labelStyle?: StyleProp<TextStyle>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
+};
+
+/**
+ * Props of a single button rendered by the group: everything a
+ * `ConnectedButtonConfig` entry carries except `value`, plus the state the group
+ * derives for it.
+ */
+export type ConnectedButtonProps = Omit<ConnectedButtonConfig, 'value'> & {
   /**
    * Whether the button is currently selected.
    */
@@ -53,62 +119,6 @@ export type ConnectedButtonProps = {
    * Size of the button, matching the parent group.
    */
   size: ConnectedButtonGroupSize;
-  /**
-   * Icon to display before the label.
-   */
-  icon?: IconSource;
-  /**
-   * Label text of the button.
-   */
-  label?: string;
-  /**
-   * Whether the button is disabled.
-   */
-  disabled?: boolean;
-  /**
-   * Show an optional check icon to indicate the selected state. When the
-   * button also has a label, the check replaces the leading icon.
-   */
-  showSelectedCheck?: boolean;
-  /**
-   * Custom color for the selected label and icon.
-   */
-  checkedColor?: string;
-  /**
-   * Custom color for the unselected label and icon.
-   */
-  uncheckedColor?: string;
-  /**
-   * Type of background drawable to display the feedback (Android).
-   * https://reactnative.dev/docs/pressable#rippleconfig
-   */
-  background?: PressableAndroidRippleConfig;
-  /**
-   * Accessibility label. Read by the screen reader when the button is focused.
-   */
-  'aria-label'?: string;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: (event: GestureResponderEvent) => void;
-  /**
-   * Specifies the largest possible scale a label font can reach.
-   */
-  labelMaxFontSizeMultiplier?: number;
-  /**
-   * Sets additional distance outside of the button in which a press can be
-   * detected.
-   */
-  hitSlop?: TouchableRippleProps['hitSlop'];
-  style?: StyleProp<ViewStyle>;
-  /**
-   * Style for the button label.
-   */
-  labelStyle?: StyleProp<TextStyle>;
-  /**
-   * testID to be used on tests.
-   */
-  testID?: string;
   /**
    * @optional
    */
