@@ -172,18 +172,12 @@ const AvatarImage = ({
       ? { accessible: false as const }
       : { alt: description, 'aria-label': description };
   const sourceKey = getAvatarImageSourceKey(source);
-  const previousSourceKey = React.useRef(sourceKey);
-  const [hasError, setHasError] = React.useState(false);
-
-  if (!Object.is(previousSourceKey.current, sourceKey)) {
-    previousSourceKey.current = sourceKey;
-    if (hasError) {
-      setHasError(false);
-    }
-  }
+  const [failedSource, setFailedSource] = React.useState<{ key: unknown }>();
+  const hasError =
+    failedSource !== undefined && Object.is(failedSource.key, sourceKey);
 
   const handleError: ImageProps['onError'] = (event) => {
-    setHasError(true);
+    setFailedSource({ key: sourceKey });
     onError?.(event);
   };
 
