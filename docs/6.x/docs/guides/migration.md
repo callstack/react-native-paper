@@ -533,8 +533,12 @@ const styles = StyleSheet.create({ first: { flex: 2 } });
 const columns = [{ key: 'name', flex: 2 }, { key: 'calories', numeric: true }];
 
 <DataTable columns={columns}>
-  <DataTable.Title>Dessert</DataTable.Title>
-  <DataTable.Cell>{item.name}</DataTable.Cell>
+  <DataTable.Header>
+    <DataTable.Title>Dessert</DataTable.Title>
+  </DataTable.Header>
+  <DataTable.Row>
+    <DataTable.Cell>{item.name}</DataTable.Cell>
+  </DataTable.Row>
 </DataTable>
 ```
 
