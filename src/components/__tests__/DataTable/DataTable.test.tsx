@@ -1136,7 +1136,34 @@ describe('DataTable alignment', () => {
     });
   });
 
-  it('mirrors text alignment in right-to-left layouts', async () => {
+  it('keeps physical text alignment in right-to-left layouts on native', async () => {
+    await render(
+      <LocaleProvider direction="rtl">
+        <DataTable.Cell testID="start">Frozen yogurt</DataTable.Cell>
+        <DataTable.Cell testID="numeric" numeric>
+          159
+        </DataTable.Cell>
+      </LocaleProvider>
+    );
+
+    // iOS and Android mirror `left` and `right` in RTL layouts themselves, so
+    // mapping them here too would flip the alignment twice.
+    expect(cellText('start')).toHaveStyle({
+      textAlign: 'left',
+    });
+    expect(cellText('numeric')).toHaveStyle({
+      textAlign: 'right',
+    });
+    // `justifyContent` is logical, so it resolves against the direction on its
+    // own and must not be mirrored here too.
+    expect(screen.getByTestId('numeric')).toHaveStyle({
+      justifyContent: 'flex-end',
+    });
+  });
+
+  it('mirrors text alignment in right-to-left layouts on the web', async () => {
+    Platform.OS = 'web';
+
     await render(
       <LocaleProvider direction="rtl">
         <DataTable.Cell testID="start">Frozen yogurt</DataTable.Cell>
@@ -1151,11 +1178,6 @@ describe('DataTable alignment', () => {
     });
     expect(cellText('numeric')).toHaveStyle({
       textAlign: 'left',
-    });
-    // `justifyContent` is logical, so it resolves against the direction on its
-    // own and must not be mirrored here too.
-    expect(screen.getByTestId('numeric')).toHaveStyle({
-      justifyContent: 'flex-end',
     });
   });
 

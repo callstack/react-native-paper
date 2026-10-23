@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type {
@@ -143,8 +144,9 @@ export type AlignStyles = {
  * Container and text alignment for a column.
  *
  * `justifyContent` is logical and flips with the container's writing
- * direction; `textAlign` has to be mapped to a physical value because React
- * Native has no `textAlign: 'start' | 'end'`.
+ * direction; `textAlign` has to be a physical value because React Native has
+ * no `textAlign: 'start' | 'end'`. iOS and Android mirror `left` and `right`
+ * in RTL layouts on their own, so only the web needs the mapping.
  */
 export const useAlignStyles = (
   align: DataTableColumnAlign,
@@ -154,7 +156,8 @@ export const useAlignStyles = (
 
   return React.useMemo(() => {
     const isEnd = align === 'end';
-    const isRTL = direction === 'rtl';
+    // iOS and Android mirror left and right in RTL layouts. The web does not.
+    const mirror = Platform.OS === 'web' && direction === 'rtl';
 
     return {
       container: {
@@ -166,7 +169,7 @@ export const useAlignStyles = (
       },
       text: {
         textAlign:
-          align === 'center' ? 'center' : isEnd === isRTL ? 'left' : 'right',
+          align === 'center' ? 'center' : isEnd !== mirror ? 'right' : 'left',
         ...(numeric ? { fontVariant: ['tabular-nums' as const] } : null),
       },
     };
