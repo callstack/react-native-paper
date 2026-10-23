@@ -21,7 +21,8 @@ import type { Props as TouchableRippleProps } from '../TouchableRipple/Touchable
 type ConditionalValue<T extends string = string> =
   | {
       /**
-       * Array of the currently selected button values.
+       * Value of the currently selected button, or an array of the selected
+       * values when `multiSelect` is enabled.
        */
       value: T[];
       /**
@@ -35,7 +36,8 @@ type ConditionalValue<T extends string = string> =
     }
   | {
       /**
-       * Value of the currently selected button.
+       * Value of the currently selected button, or an array of the selected
+       * values when `multiSelect` is enabled.
        */
       value: T;
       /**
@@ -137,20 +139,8 @@ export type Props<T extends string = string> = {
    */
   buttons: ConnectedButtonConfig<T>[];
   /**
-   * Value of the currently selected button, or an array of the selected
-   * values when `multiSelect` is enabled.
-   */
-  value: T | T[];
-  /**
-   * Allow more than one button to be selected at a time.
-   */
-  multiSelect?: boolean;
-  /**
-   * Function to execute on selection change.
-   */
-  onValueChange: ((value: T) => void) | ((value: T[]) => void);
-  /**
-   * Size of the buttons, following the Material Design 3 button-group scale.
+   * Size of the buttons, following the Material Design 3 button-group scale:
+   * `'extra-small'`, `'small'`, `'medium'`, `'large'` or `'extra-large'`.
    */
   size?: ConnectedButtonGroupSize;
   style?: StyleProp<ViewStyle>;
@@ -219,7 +209,7 @@ const ConnectedButtonGroup = <T extends string = string>({
 
   return (
     <View
-      role={multiSelect ? undefined : 'radiogroup'}
+      role={multiSelect ? 'group' : 'radiogroup'}
       style={[styles.row, { columnGap: betweenSpace }, style]}
       testID={testID}
     >

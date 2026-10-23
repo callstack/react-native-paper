@@ -1235,6 +1235,7 @@ exports[`renders large connected button group 1`] = `
 
 exports[`renders multi-select connected button group with icons 1`] = `
 <View
+  role="group"
   style={
     [
       {
