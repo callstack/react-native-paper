@@ -41,7 +41,7 @@ type InteractiveExampleProps = React.PropsWithChildren<{
  */
 const InteractiveExample = ({ title, children }: InteractiveExampleProps) => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
-  // The server always renders light colors, so remount to repaint in dark mode.
+  // The server always renders light colors, so use them until hydration is done.
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -49,10 +49,7 @@ const InteractiveExample = ({ title, children }: InteractiveExampleProps) => {
   }, []);
 
   return (
-    <Provider
-      key={String(mounted)}
-      theme={isDarkTheme ? DarkTheme : LightTheme}
-    >
+    <Provider theme={mounted && isDarkTheme ? DarkTheme : LightTheme}>
       <figure className="paper-interactive-example">
         {title ? (
           <figcaption className="paper-interactive-example__title">
@@ -72,7 +69,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     gap: 24,
   },
   item: {

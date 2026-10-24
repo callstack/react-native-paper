@@ -5,17 +5,25 @@ import { Switch } from 'react-native-paper';
 import InteractiveExample, { ExampleRow, Labelled } from './InteractiveExample';
 
 export const SwitchStatesExample = () => {
-  const [on, setOn] = React.useState(true);
-  const [off, setOff] = React.useState(false);
+  const [first, setFirst] = React.useState(true);
+  const [second, setSecond] = React.useState(false);
 
   return (
     <InteractiveExample title="Enabled">
       <ExampleRow>
-        <Labelled label="selected">
-          <Switch value={on} onValueChange={setOn} aria-label="Selected" />
+        <Labelled label={first ? 'selected' : 'unselected'}>
+          <Switch
+            value={first}
+            onValueChange={setFirst}
+            aria-label="First switch"
+          />
         </Labelled>
-        <Labelled label="unselected">
-          <Switch value={off} onValueChange={setOff} aria-label="Unselected" />
+        <Labelled label={second ? 'selected' : 'unselected'}>
+          <Switch
+            value={second}
+            onValueChange={setSecond}
+            aria-label="Second switch"
+          />
         </Labelled>
       </ExampleRow>
     </InteractiveExample>
@@ -36,28 +44,28 @@ export const SwitchDisabledExample = () => (
 );
 
 export const SwitchIconsExample = () => {
-  const [on, setOn] = React.useState(true);
-  const [off, setOff] = React.useState(false);
+  const [first, setFirst] = React.useState(true);
+  const [second, setSecond] = React.useState(false);
 
   return (
     <InteractiveExample title="With icons in the handle">
       <ExampleRow>
-        <Labelled label="selected">
+        <Labelled label={first ? 'selected' : 'unselected'}>
           <Switch
-            value={on}
-            onValueChange={setOn}
+            value={first}
+            onValueChange={setFirst}
             checkedIcon="check"
             uncheckedIcon="close"
-            aria-label="Selected with icon"
+            aria-label="First switch with icons"
           />
         </Labelled>
-        <Labelled label="unselected">
+        <Labelled label={second ? 'selected' : 'unselected'}>
           <Switch
-            value={off}
-            onValueChange={setOff}
+            value={second}
+            onValueChange={setSecond}
             checkedIcon="check"
             uncheckedIcon="close"
-            aria-label="Unselected with icon"
+            aria-label="Second switch with icons"
           />
         </Labelled>
       </ExampleRow>
