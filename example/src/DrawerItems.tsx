@@ -25,7 +25,11 @@ const DrawerItemsData = [
     label: 'Inbox',
     icon: 'inbox',
     key: 0,
-    right: () => <Text variant="labelLarge">44</Text>,
+    right: ({ color }: { color: ColorValue }) => (
+      <Text variant="labelLarge" style={{ color }}>
+        44
+      </Text>
+    ),
   },
   {
     label: 'Starred',
@@ -193,19 +197,23 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            <View style={[styles.preference, styles.contrastPreference]}>
-              <Text variant="labelLarge">Contrast</Text>
-              <SegmentedButtons
-                value={contrast}
-                onValueChange={(value) => setContrast(value)}
-                density="small"
-                buttons={[
-                  { value: 'standard', label: 'Standard' },
-                  { value: 'medium', label: 'Medium' },
-                  { value: 'high', label: 'High' },
-                ]}
-              />
-            </View>
+            {dynamicThemeSupported && shouldUseDynamicTheme ? null : (
+              <View style={[styles.preference, styles.contrastPreference]}>
+                <Text variant="labelLarge" style={styles.contrastLabel}>
+                  Contrast
+                </Text>
+                <SegmentedButtons
+                  value={contrast}
+                  onValueChange={(value) => setContrast(value)}
+                  density="small"
+                  buttons={[
+                    { value: 'standard', label: 'Standard' },
+                    { value: 'medium', label: 'Medium' },
+                    { value: 'high', label: 'High' },
+                  ]}
+                />
+              </View>
+            )}
 
             <TouchableRipple onPress={_handleToggleRTL}>
               <View style={[styles.preference, styles.v3Preference]}>
@@ -295,7 +303,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
     gap: 12,
-    paddingHorizontal: 28,
+    paddingHorizontal: 16,
+  },
+  contrastLabel: {
+    paddingHorizontal: 12,
   },
   badge: {
     alignSelf: 'center',

@@ -17,13 +17,9 @@ import {
   DynamicDarkTheme,
   DynamicLightTheme,
   HighContrastDarkTheme,
-  HighContrastDynamicDarkTheme,
-  HighContrastDynamicLightTheme,
   HighContrastLightTheme,
   LightTheme,
   MediumContrastDarkTheme,
-  MediumContrastDynamicDarkTheme,
-  MediumContrastDynamicLightTheme,
   MediumContrastLightTheme,
   PaperProvider,
 } from 'react-native-paper';
@@ -51,19 +47,6 @@ const THEMES = {
     standard: DarkTheme,
     medium: MediumContrastDarkTheme,
     high: HighContrastDarkTheme,
-  },
-};
-
-const DYNAMIC_THEMES = {
-  light: {
-    standard: DynamicLightTheme,
-    medium: MediumContrastDynamicLightTheme,
-    high: HighContrastDynamicLightTheme,
-  },
-  dark: {
-    standard: DynamicDarkTheme,
-    medium: MediumContrastDynamicDarkTheme,
-    high: HighContrastDynamicDarkTheme,
   },
 };
 
@@ -135,9 +118,14 @@ export default function PaperExample() {
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
   const [contrast, setContrast] = React.useState<ContrastLevel>('standard');
 
-  const themes =
-    dynamicThemeSupported && shouldUseDynamicTheme ? DYNAMIC_THEMES : THEMES;
-  const theme = themes[isDarkMode ? 'dark' : 'light'][contrast];
+  // Dynamic colors follow the system contrast setting, so the contrast
+  // preference only applies to the static themes.
+  const theme =
+    dynamicThemeSupported && shouldUseDynamicTheme
+      ? isDarkMode
+        ? DynamicDarkTheme
+        : DynamicLightTheme
+      : THEMES[isDarkMode ? 'dark' : 'light'][contrast];
 
   const direction = rtl ? 'rtl' : 'ltr';
 

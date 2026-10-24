@@ -295,9 +295,9 @@ export default function Main() {
 
 ### Contrast and dynamic colors
 
-There are matching dynamic themes: `MediumContrastDynamicLightTheme`, `HighContrastDynamicLightTheme`, `MediumContrastDynamicDarkTheme` and `HighContrastDynamicDarkTheme`.
+On Android 14 (API 34) and newer, `DynamicLightTheme` and `DynamicDarkTheme` follow the contrast level the user picks in the system Color contrast setting. Your app can't ask the system for a different level.
 
-Android exposes no contrast adjusted version of its system palette, so these fall back to the static schemes. Using the standard contrast system colors at a raised level would quietly lower the contrast you asked for.
+If your app needs a fixed raised level, use the static contrast themes instead. They don't use the wallpaper colors.
 
 ## Adapting React Navigation theme
 

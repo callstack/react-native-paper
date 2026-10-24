@@ -11,9 +11,5 @@ export {
 export {
   DynamicLightTheme,
   DynamicDarkTheme,
-  MediumContrastDynamicLightTheme,
-  HighContrastDynamicLightTheme,
-  MediumContrastDynamicDarkTheme,
-  HighContrastDynamicDarkTheme,
   isDynamicColorSupported,
 } from './DynamicTheme';
