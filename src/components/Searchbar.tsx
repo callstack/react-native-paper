@@ -247,7 +247,7 @@ const Searchbar = ({
 
   return (
     <Surface
-      backgroundColor={theme.colors.surfaceContainerHigh}
+      container="surfaceContainerHigh"
       borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
       style={[styles.container, style]}
       elevation={elevation}

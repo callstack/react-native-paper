@@ -114,6 +114,14 @@ The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Va
 
 The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
 
+### Banner
+
+The banner background is now always `theme.colors.surfaceContainerLow` and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the banner now uses the system surface color.
+
+### Menu
+
+The menu background is now always `theme.colors.surfaceContainer`, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the menu now uses the system surface color.
+
 ### Surface
 
 - The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.
