@@ -107,19 +107,16 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
     /**
      * Semantic color role of the Surface background, resolved from the
      * theme, e.g. `container="surfaceContainerLow"` renders with
-     * `theme.colors.surfaceContainerLow`.
+     * `theme.colors.surfaceContainerLow`. Accepted roles: `surface`,
+     * `surfaceDim`, `surfaceBright`, `surfaceVariant`,
+     * `surfaceContainerLowest`, `surfaceContainerLow`, `surfaceContainer`,
+     * `surfaceContainerHigh`, `surfaceContainerHighest` and `inverseSurface`.
      *
      * When `container` is set, `elevation` only controls the shadow (and
      * z-order on Android) and no longer affects the background color.
      *
      * Precedence: `backgroundColor` > `container` >
      * `theme.colors.elevation[levelN]` derived from `elevation`.
-     *
-     * Prefer `container` when the fill is an MD3 surface-family role (as
-     * component specs define it, e.g. menus use `surfaceContainer`). Use
-     * `backgroundColor` only for raw, non-semantic colors. Components with
-     * variant-driven fills outside the surface family should keep resolving
-     * their own tokens and pass the result via `backgroundColor`.
      */
     container?: SurfaceRole;
     /**
@@ -232,8 +229,7 @@ const Surface = ({
 
   const backgroundColor =
     customBackgroundColor ??
-    (container != null ? colors[container] : undefined) ??
-    colors.elevation?.[`level${elevation}`];
+    (container ? colors[container] : colors.elevation?.[`level${elevation}`]);
 
   const backgroundStyle = { backgroundColor };
 

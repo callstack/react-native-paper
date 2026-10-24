@@ -116,11 +116,11 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 
 ### Banner
 
-The banner background is now always `theme.colors.surfaceContainerLow` and no longer depends on the `elevation` prop, which only controls the shadow. At the default `elevation` of `1` the rendered color is unchanged.
+The banner background is now always `theme.colors.surfaceContainerLow` and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the banner now uses the system surface color.
 
 ### Menu
 
-The menu background is now always `theme.colors.surfaceContainer`, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. At the default `elevation` of `2` the rendered color is unchanged.
+The menu background is now always `theme.colors.surfaceContainer`, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the menu now uses the system surface color.
 
 ### Surface
 
@@ -145,7 +145,6 @@ The menu background is now always `theme.colors.surfaceContainer`, following the
 - The `pointerEvents` prop is no longer supported as it's deprecated in React Native Web. You can specify `pointerEvents` in the `style` prop instead.
 - The `overflow: 'hidden'` style is no longer supported in `style` as it can clip shadows. You can nest a `View` inside the `Surface` and apply `overflow: 'hidden'` to that instead.
 - The default `testID` for `Surface` was removed. You can specify a `testID` explicitly if you need it.
-- A new `container` prop sets the background to a semantic surface-family color role from the theme (e.g. `container="surfaceContainerLow"`). When `container` is set, `elevation` only controls the shadow. Precedence: `backgroundColor` > `container` > the color derived from `elevation`.
 
 e.g.:
 

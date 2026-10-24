@@ -116,7 +116,11 @@ const SurfaceExample = () => {
           {containerRoles.map((role) => (
             <Surface
               key={role}
-              style={styles.surface}
+              style={[
+                styles.surface,
+                styles.roleSurface,
+                { borderColor: theme.colors.outlineVariant },
+              ]}
               borderRadius={8}
               mode="flat"
               container={role}
@@ -181,6 +185,10 @@ const styles = StyleSheet.create({
     width: 120,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  roleSurface: {
+    width: 180,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   actions: {
     flexDirection: 'row',
